@@ -2,8 +2,9 @@
 // jetty and out of the harbour, `tankadere_out` (0 → 1) the pilot boat — their places (steamer_x, _d, _facing; boat_x,
 // _d, _facing) follow along lib.steamerAt and lib.boatAt as the keys move, or at once when they are set so; the
 // steamer smokes while she is in the harbour (`steamer_smoke`). Both roll on the swell (`steamer_roll`, `boat_roll`).
-// `daze` tips the horizon (camera_roll). `pp_walk` sends Passepartout along his way in the opium, `pp_stumble` trips
-// him. The film is in beats (lib.film, the world's module beats; notes.md lists them).
+// `daze` tips the horizon (camera_roll: set with it when it is set at once; what moves `daze` moves camera_roll beside
+// it — the same seconds, the same ease, to 4 × it: lib.film's pipe). `pp_walk` sends Passepartout along his way in the
+// opium, `pp_stumble` trips him. The film is in beats (lib.film, the world's module beats; notes.md lists them).
 const L = scene.lib;
 const follow = (key, at, keys) => {
   const put = v => at(v).forEach((n, i) => scene.set(keys[i], n));
@@ -13,7 +14,9 @@ const follow = (key, at, keys) => {
 };
 follow('carnatic_present', L.steamerAt, ['steamer_x', 'steamer_d', 'steamer_facing']);
 follow('tankadere_out', L.boatAt, ['boat_x', 'boat_d', 'boat_facing']);
-follow('daze', v => [4 * L.clamp01(v)], ['camera_roll']);
+const tip = v => scene.get('daze') === v && scene.set('camera_roll', 4 * L.clamp01(v));
+scene.on('change', 'daze', tip);
+tip(scene.get('daze'));
 // (her smoke: while she is in the harbour at all)
 const smoking = () => {
   const on = (scene.get('carnatic_present') ?? 1) > 0 ? 1 : 0;

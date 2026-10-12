@@ -1,5 +1,5 @@
 // The fireplace's recess behind the opening in the partition: its sooted back, half a metre in (wider than the opening — the eye sees in
-// aslant), and the fire's glow on it — a layer the shader lets shine as much as the fire is now (hearth.glsl): the red
+// aslant), and the fire's glow on it — a layer the shader lets shine as much as the fire is now (hearth.wgsl): the red
 // over the back, the bed of embers low, its white heart.
 const H = e.lib.plan.hearth, svet = e.kit.svet;
 g.fillStyle = '#070505';

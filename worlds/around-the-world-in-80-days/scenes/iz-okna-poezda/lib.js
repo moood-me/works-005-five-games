@@ -188,7 +188,7 @@ function sofaArm(g, side = 1) {
   g.fill();
 }
 
-// The buffalo herd (the element herd, its shader herd.glsl): HERD.n animals in HERD.rows rows, the herd HERD.long metres
+// The buffalo herd (the element herd, its shader herd.wgsl): HERD.n animals in HERD.rows rows, the herd HERD.long metres
 // from its head to its tail, crossing the card's ±HERD.half; each a sprite of the atlas (one buffalo in HERD.frames
 // poses of its stride, side by side, HERD.cell metres apart, from HERD.at), its stride HERD.stride metres.
 const HERD = { half: 50, long: 260, rows: 6, slot: 7, frames: 12, cell: 4, at: 60, stride: [3.2, 3.8] };

@@ -1,6 +1,6 @@
 # cast — the people of «Вокруг света» as the engine's people
 
-A module for engine-2 scenes with people (elements with `person`: `{"cast": "cast", "who": …}` — moood's
+A module for scenes with people (elements with `person`: `{"cast": "cast", "who": …}` — moood's
 docs/agents/people.md). List it in a scene's `modules` with the others. The same people as the world v1's cast; a part's
 lengths are a man's metres times `F.fit.h` (a share of a man's 1.76 m), a flame's colour glows (tone 2).
 

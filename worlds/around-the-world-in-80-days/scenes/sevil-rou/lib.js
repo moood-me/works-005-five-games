@@ -284,7 +284,7 @@ function dormerCheeks(g, e, side) {
 }
 
 // The sky: London's fog by the hour — its colours (london(), and the Sunday morning's pale warmth over them) given to
-// its shader (sky.glsl) whenever the hour or the morning moves; nothing of it repainted.
+// its shader (sky.wgsl) whenever the hour or the morning moves; nothing of it repainted.
 function skyMotion(e) {
   const m = e.mem;
   const night = e.state.night ?? 1, sun = anim.clamp(e.state.sunday ?? 0, 0, 1);

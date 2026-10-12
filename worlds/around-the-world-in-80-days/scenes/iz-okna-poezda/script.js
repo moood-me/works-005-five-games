@@ -7,17 +7,21 @@ const num = (key, or = 0) => { const v = scene.get(key); return typeof v === 'nu
 // ── the train ──
 // It runs at `speed` × pace: camera_x moved on at that speed, half a second's way at a time, the next given before the
 // last ends (every quarter of a second, and every frame while `speed` itself moves) — so it never stops between, and
-// its speed is the state's. Its land is the same every period: past its stretch's end the train is cut back a period —
-// to the same view (the frame before and after the same) — the cut made ready ahead.
+// its speed is the state's. Its land is the same every period: at its stretch's end the train is cut back a period —
+// to the same view (the frame before and after the same). The cut is a shot said ahead, READY seconds before the end
+// as the train goes then, for the very place it will be made at: the train runs exactly to the end and is cut there.
 const AHEAD = 0.5, TICK = 0.25, READY = 3;
-let running = false, ready = null;
+let running = false, ready = null;   // ready: the lap's cut made ready — { end: the stretch's end it is for, shot }
 function run() {
   const v = num('speed') * P.pace, x = num('camera_x'), end = L.centre(L.landAt(x)) + P.period / 2;
+  // (the train cut to another land meanwhile: that lap will not be)
+  if (ready && ready.end !== end) { ready.shot.cancel(); ready = null; }
   if (x >= end) {
-    ready?.cancel();
+    // (the cut: run() again, from a period back — by the shot made for this place; from anywhere past it, plainly)
+    const lap = ready;
     ready = null;
-    // (the cut: run() again, from a period back)
-    scene.cut({ camera_x: x - P.period });
+    if (lap && x === end) lap.shot.cut();
+    else { lap?.shot.cancel(); scene.cut({ camera_x: x - P.period }); }
     return;
   }
   if (!(v > 0)) {
@@ -27,8 +31,11 @@ function run() {
     return;
   }
   running = true;
-  scene.move('camera_x', x + v * AHEAD, { over: AHEAD, ease: 'linear' });
-  if (!ready && x + v * READY >= end) ready = scene.prepare({ camera_x: x + v * READY - P.period }, READY);
+  // (never past the end: the lap's cut is made exactly there, the moment the train comes to it)
+  const to = Math.min(x + v * AHEAD, end);
+  const going = scene.move('camera_x', to, { over: (to - x) / v, ease: 'linear' });
+  if (to === end) going.then(how => { if (how === 'done') run(); });
+  if (!ready && x + v * READY >= end) ready = { end, shot: scene.shot({ camera_x: end - P.period }) };
 }
 scene.every(TICK, run);
 scene.on('change', 'speed', run);
