@@ -1,4 +1,4 @@
-# Гавань (`gavan`) — на движке 2
+# Гавань (`gavan`) — на движке 3
 
 Глава II (docs/vokrug-sveta/scenes.md): Гонконг и Иокогама — одна панорама вдоль набережной дальневосточного порта,
 город — ключ `port`. Люди — движка (каст мира `cast`), фильм — куски (`beats`: `lib.film(scene)`), цвета — `svet`.
@@ -27,7 +27,7 @@
 | дымка `mist` — 16 частей, клубы двигались по `e.t` | четыре элемента на своих глубинах (`mist_near` 50 м, `mist` 100, `mist_mid` 180, `mist_far` 320), по два слоя с `drift` в разные стороны; краска дневная — вечер и ночь делает свет сцены (не glows) |
 | `boats` — 11 частей, шли и качались по `e.t` | `boat_0` … `boat_10` — свой элемент каждая (слоям нужен свой элемент): слой `boat` качается и покачивается, идущие идут своим `animate` (коробка — на весь путь ±400 м; `lib.BOATS`) |
 | фонари — части рядов, качались по шуму, `lit` смешивал цвет | ряды — элементы (`lanterns` — ближний над террасой, `lanterns_back`, `lanterns_eaves`, `lanterns_stage`), каждый фонарь — слой с `wind` от крючка; свет — `e.light` в полную силу, `animate` даёт `e.glow('lamp', lanterns)`, средние — свет сцены `terrace_1` (`lanterns#t1`), `terrace_2` (`lanterns_back#t2`, было `lanterns#t2`) с `on: lanterns` |
-| `daze` раздувал и двоил ореолы в рисунке | вид света `daze` (`hazeGlow`, дымка, насыщенность — ореолы разбухают) + двойники: слой `ghost` у каждого ряда и лодки — свечения `ghost`, `animate` уводит его в сторону и даёт гореть на `lanterns × daze`; `camera_roll` = 4° × `daze` (script.js) |
+| `daze` раздувал и двоил ореолы в рисунке | вид света `daze` (`hazeGlow`, дымка, насыщенность — ореолы разбухают) + двойники: слой `ghost` у каждого ряда и лодки — свечения `ghost`, `animate` уводит его в сторону и даёт гореть на `lanterns × daze`; `camera_roll` = 4° × `daze` (поставленный сразу — script.js; движется — вместе с ним, `lib.film`) |
 | дым — память `beforeFrame`, клубы рисовались | частицы `smoke` (`at: steamer_funnel#funnel`, `amount: steamer_smoke`): клубы рождаются там, где труба сейчас — пароход уходит, след остаётся над гаванью |
 | паруса «Танкадеры» рисовались по `sail` | `tankadere_sails` (просвечивают, `translucent`): свёрнутые — слои, поставленные — слои, которые `animate` поднимает от гиков (`scaleY`), кливер так же; мачты — `tankadere_rig` |
 | сходни у борта по `carnatic_present > 0.97` в рисунке | слой `gangway`, его альфа |
@@ -63,8 +63,10 @@
 | `aouda_dress`, `with_aouda`, `with_fix` | как были | |
 
 Ведёт сцена (игре не трогать): `steamer_x/_d/_facing`, `boat_x/_d/_facing` (по `carnatic_present`, `tankadere_out`),
-`steamer_roll`, `boat_roll` (качка), `steamer_smoke` (дымит, пока `carnatic_present` > 0), `camera_roll` (по `daze`),
-`aouda_wear` (по `aouda_dress`).
+`steamer_roll`, `boat_roll` (качка), `steamer_smoke` (дымит, пока `carnatic_present` > 0), `aouda_wear` (по `aouda_dress`).
+`camera_roll` = 4 × `daze`: сцена ставит его сама, когда `daze` поставлен сразу; кто двигает `daze` во времени (`move`),
+двигает рядом и `camera_roll` — те же секунды, та же кривая, к 4 × значению (ключ камеры, поставленный сразу, — новый
+кадр: кадр за кадром его не ставят).
 
 ## Куски (`lib.film`; по концу сцена говорит `beat:<имя>`)
 

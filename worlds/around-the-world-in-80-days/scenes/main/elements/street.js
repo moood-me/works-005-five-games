@@ -1,6 +1,6 @@
 // The far side of Pall Mall, forty metres off: a long row of facades, dissolved in the fog — painted in the grey of a
 // London day (the look on `day` makes the night). The fog over them ("fog") and their windows lit here and there
-// ("windows") are layers its shader lets shine: the fog in the hour's colours, the windows as the gas is lit (street.glsl,
+// ("windows") are layers its shader lets shine: the fog in the hour's colours, the windows as the gas is lit (street.wgsl,
 // the hour by street.animate.js).
 const P = e.lib.plan;
 const base = -P.street;
@@ -21,7 +21,7 @@ for (const [x0, x1, h] of blocks) {
   g.fillStyle = svet.rgba(svet.mixc(fog, low, 0.35));
   g.fillRect(x0, base - h + 1.2, x1 - x0, 0.25);
 }
-// the fog over them, thickening toward the street: its share (the colour is the hour's — street.glsl, light of its own:
+// the fog over them, thickening toward the street: its share (the colour is the hour's — street.wgsl, light of its own:
 // the fog is lit by the city, not by the evening)
 e.layer('fog', {}, f => {
   const gr = f.createLinearGradient(0, base - 22, 0, base);

@@ -475,6 +475,7 @@ function film(scene) {
       from: () => DAZED(0, 0),
       run: async s => {
         s.move('daze', 0.6, { over: 4 });
+        s.move('camera_roll', 4 * 0.6, { over: 4 });
         await s.wait(0.2);
         s.set('pp_walk', 0.16);
         await s.wait(6);

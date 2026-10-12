@@ -1,6 +1,6 @@
 // The fog itself, drifting past the windows in slow banks — two sheets of them, each at its own pace — and lying thickest
 // low over the street. Painted once, as how thick it is (white): the fog is lit by the city, not by the evening — its
-// colour is the hour's, warmed by the gas, and its banks drift (mist.glsl, the hour by mist.animate.js). Each bank is
+// colour is the hour's, warmed by the gas, and its banks drift (mist.wgsl, the hour by mist.animate.js). Each bank is
 // painted again a box's width over where it runs past an edge: the shader wraps them round the box.
 const L = e.lib, svet = e.kit.svet, h = e.anim.hash;
 const [left, right] = [-56, 18], W = right - left;

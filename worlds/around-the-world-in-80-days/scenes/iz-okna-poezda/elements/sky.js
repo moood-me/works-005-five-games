@@ -1,4 +1,4 @@
-// The sky over the lands, painted once: its stars, the moon, the low sun — layers its shader (sky.glsl) lays over the
+// The sky over the lands, painted once: its stars, the moon, the low sun — layers its shader (sky.wgsl) lays over the
 // sky's colours, which its animate gives (lib.js skyMotion: the land's day sky darkened to a moonlit night, warmed low
 // by the dawn) — so nothing of it is painted again as the land, the night or the dawn turn. Its moon and its sun shine
 // (lights "moon", "sun" — from sky#moon, sky#sun) and make their glows (dimmed by its animate).
