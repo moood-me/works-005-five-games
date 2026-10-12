@@ -1,0 +1,1826 @@
+{
+  "engine": 2,
+  "title": "Джунгли",
+  "caption": "Индийский лес. Тропа от конца рельсов к реке.",
+  "horizon": 0.42,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      75,
+      80
+    ]
+  },
+  "modules": [
+    "svet",
+    "cast",
+    "beats"
+  ],
+  "light": {
+    "vignette": 0.4,
+    "grain": 0.08,
+    "ambient": 0.6,
+    "ambientColor": "#8aa0d8",
+    "saturation": 1.0,
+    "haze": 0.14,
+    "hazeColor": "#26334f",
+    "hazeGlow": 0.25,
+    "shafts": 0.25,
+    "wind": [
+      1,
+      0.3,
+      0.45
+    ],
+    "looks": {
+      "day": {
+        "ambient": 0.8,
+        "ambientColor": "#f4f8ec",
+        "saturation": 1,
+        "haze": 0.16,
+        "hazeColor": "#b8c8b6",
+        "shafts": 0.4,
+        "lights": {
+          "moon": 0
+        }
+      },
+      "dawn": {
+        "ambientColor": "#f0c0a0",
+        "tint": "#ff9a4a",
+        "tintStrength": 0.1,
+        "hazeColor": "#e4a676",
+        "haze": 0.18,
+        "shafts": 0.5
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#b8c8f0",
+      "strength": 0.9
+    },
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "color": "#fff0d0",
+      "strength": 1.6,
+      "on": "day"
+    },
+    {
+      "id": "pyre",
+      "of": "pyre#fire",
+      "on": "pyre_fire",
+      "reach": 16,
+      "flicker": 0.45,
+      "strength": 1.6
+    },
+    {
+      "id": "torch_pb1",
+      "at": "pb1#flame",
+      "color": "#ffa050",
+      "strength": 1.6,
+      "reach": 5,
+      "on": "torches",
+      "flicker": 0.3
+    },
+    {
+      "id": "torch_pb2",
+      "at": "pb2#flame",
+      "color": "#ffa050",
+      "strength": 1.6,
+      "reach": 5,
+      "on": "torches",
+      "flicker": 0.3
+    },
+    {
+      "id": "torch_pb3",
+      "at": "pb3#flame",
+      "color": "#ffa050",
+      "strength": 1.6,
+      "reach": 5,
+      "on": "torches",
+      "flicker": 0.3
+    },
+    {
+      "id": "torch_pb4",
+      "at": "pb4#flame",
+      "color": "#ffa050",
+      "strength": 1.6,
+      "reach": 5,
+      "on": "torches",
+      "flicker": 0.3
+    },
+    {
+      "id": "torch_pr1",
+      "at": "pr1#flame",
+      "color": "#ffa050",
+      "strength": 1.6,
+      "reach": 5,
+      "on": "torches",
+      "flicker": 0.3
+    },
+    {
+      "id": "torch_pr2",
+      "at": "pr2#flame",
+      "color": "#ffa050",
+      "strength": 1.6,
+      "reach": 5,
+      "on": "torches",
+      "flicker": 0.3
+    }
+  ],
+  "state": {
+    "day": 0.35,
+    "dawn": 0.5,
+    "station": "kholby",
+    "procession": 0,
+    "torches": 0,
+    "pyre_fire": 0,
+    "smoke": 0,
+    "beat": null,
+    "heads": 1,
+    "walk": 0,
+    "fireflies": 0,
+    "pb1_a": -80,
+    "pb1_d": 11.858,
+    "pb1_here": false,
+    "pb2_a": -80,
+    "pb2_d": 11.858,
+    "pb2_here": false,
+    "dr1_a": -80,
+    "dr1_d": 11.858,
+    "dr1_here": false,
+    "dr2_a": -80,
+    "dr2_d": 11.858,
+    "dr2_here": false,
+    "pr1_a": -80,
+    "pr1_d": 11.858,
+    "pr1_here": false,
+    "aouda_a": -80,
+    "aouda_d": 11.858,
+    "aouda_here": false,
+    "pr2_a": -80,
+    "pr2_d": 11.858,
+    "pr2_here": false,
+    "pb3_a": -80,
+    "pb3_d": 11.858,
+    "pb3_here": false,
+    "pb4_a": -80,
+    "pb4_d": 11.858,
+    "pb4_here": false,
+    "fogg_a": -14.6,
+    "fogg_d": 8.359,
+    "cromarty_a": -16,
+    "cromarty_d": 8.269,
+    "passepartout_a": -13,
+    "passepartout_d": 8.506,
+    "guide_a": -11.6,
+    "guide_d": 8.67,
+    "v1_a": -80,
+    "v1_d": 11.858,
+    "v1_here": false,
+    "v2_a": -80,
+    "v2_d": 11.858,
+    "v2_here": false,
+    "v3_a": -80,
+    "v3_d": 11.858,
+    "v3_here": false,
+    "v4_a": -80,
+    "v4_d": 11.858,
+    "v4_here": false,
+    "v5_a": -80,
+    "v5_d": 11.858,
+    "v5_here": false,
+    "v6_a": -80,
+    "v6_d": 11.858,
+    "v6_here": false,
+    "v7_a": -80,
+    "v7_d": 11.858,
+    "v7_here": false,
+    "v8_a": -80,
+    "v8_d": 11.858,
+    "v8_here": false
+  },
+  "states": {
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "время суток: 0 — ночь (луна, светлая), 1 — день"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "рассвет: шафрановый свет, низкое солнце над рекой"
+    },
+    "station": {
+      "values": [
+        "kholby",
+        "allahabad"
+      ],
+      "means": "вывеска станции у конца рельсов: Кхолби (вечер прибытия) или Аллахабад (утро после)"
+    },
+    "procession": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "куда идёт процессия по тропе слева направо: 0 — ещё не пришла, 0.476 — стоит перед зарослями, 1 — прошла; поставленное — колонна идёт туда своим шагом"
+    },
+    "torches": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "факелы процессии: 0 — не горят, 1 — горят ярко"
+    },
+    "pyre_fire": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "костёр на поляне: 0 — не зажжён, 1 — полное пламя; столько же его света"
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "дым костра: 0 — нет, 1 — густой (редеет к 0)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "кусок фильма (модуль beats): drums, procession, pyre, rise, walk; по концу сцена говорит beat:<имя>"
+    },
+    "heads": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "толпа у костра: 0 — ниц, 1 — на коленях, смотрят"
+    },
+    "walk": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«раджа» с вдовой на руках: докуда он несёт её от костра к деревьям (0 — на костре, 1 — у деревьев); поставленное — идёт туда своим шагом"
+    },
+    "fireflies": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "светлячки над тропой и ручьём (сцена ставит сама по day: ночью 1)"
+    }
+  },
+  "relief": "return lib.ground(across, distance);",
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Небо",
+      "sky": true,
+      "uniforms": {
+        "day": 0.85,
+        "dawn": 0,
+        "dark": 0,
+        "shine": 1,
+        "sunX": 0,
+        "sunY": 0
+      }
+    },
+    {
+      "id": "far",
+      "name": "Лес вдали",
+      "across": 0,
+      "distance": 150,
+      "height": 40,
+      "box": [
+        -320,
+        -50,
+        320,
+        4
+      ]
+    },
+    {
+      "id": "river",
+      "name": "Река",
+      "plane": true,
+      "across": 70,
+      "distance": 83.5,
+      "elevation": -0.35,
+      "width": 120,
+      "depth": 128,
+      "reflect": {
+        "strength": 0.6,
+        "fade": 0,
+        "blur": 0.02,
+        "rough": 0.3,
+        "ripple": 0.35
+      }
+    },
+    {
+      "id": "ground",
+      "name": "Земля",
+      "plane": true,
+      "across": 5,
+      "distance": 43.5,
+      "width": 280,
+      "depth": 85,
+      "drape": true,
+      "lit": true
+    },
+    {
+      "id": "stream",
+      "name": "Ручей",
+      "plane": true,
+      "across": 7.5,
+      "distance": 22,
+      "elevation": -0.45,
+      "width": 16,
+      "depth": 40,
+      "reflect": {
+        "strength": 0.5,
+        "fade": 0,
+        "blur": 0.03,
+        "ripple": 0.4
+      }
+    },
+    {
+      "id": "bridge",
+      "name": "Мостки",
+      "plane": true,
+      "across": 4.7,
+      "distance": 11,
+      "elevation": 0.06,
+      "width": 6.4,
+      "depth": 2,
+      "lit": true,
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.2
+      },
+      "walk": true
+    },
+    {
+      "id": "pagoda_site",
+      "name": "Пагода (место)",
+      "unseen": true,
+      "across": 56,
+      "distance": 22,
+      "facing": 215
+    },
+    {
+      "id": "plinth_front",
+      "name": "Цоколь пагоды",
+      "on": "pagoda_site",
+      "distance": -3.6,
+      "facing": 180,
+      "box": [
+        -4.2,
+        -0.85,
+        4.2,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "plinth_left",
+      "name": "Цоколь пагоды, слева",
+      "on": "pagoda_site",
+      "across": -4.2,
+      "facing": 270,
+      "box": [
+        -3.6,
+        -0.85,
+        3.6,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "plinth_right",
+      "name": "Цоколь пагоды, справа",
+      "on": "pagoda_site",
+      "across": 4.2,
+      "facing": 90,
+      "box": [
+        -3.6,
+        -0.85,
+        3.6,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "plinth_top",
+      "name": "Площадка пагоды",
+      "plane": true,
+      "on": "pagoda_site",
+      "elevation": 0.8,
+      "width": 8.4,
+      "depth": 7.2,
+      "lit": true,
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "pagoda",
+      "name": "Пагода",
+      "on": "pagoda_site",
+      "distance": -1,
+      "elevation": 0.8,
+      "facing": 180,
+      "box": [
+        -2,
+        -3.25,
+        2,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "cella_left",
+      "name": "Святилище, слева",
+      "on": "pagoda_site",
+      "across": -2,
+      "distance": 1,
+      "elevation": 0.8,
+      "facing": 270,
+      "box": [
+        -2,
+        -3.25,
+        2,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "cella_right",
+      "name": "Святилище, справа",
+      "on": "pagoda_site",
+      "across": 2,
+      "distance": 1,
+      "elevation": 0.8,
+      "facing": 90,
+      "box": [
+        -2,
+        -3.25,
+        2,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "porch",
+      "name": "Портик",
+      "on": "pagoda_site",
+      "distance": -2.9,
+      "elevation": 0.8,
+      "facing": 180,
+      "box": [
+        -2.2,
+        -3.05,
+        2.2,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "porch_left",
+      "name": "Портик, слева",
+      "on": "pagoda_site",
+      "across": -2.2,
+      "distance": -1.95,
+      "elevation": 0.8,
+      "facing": 270,
+      "box": [
+        -0.95,
+        -3.05,
+        0.95,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "porch_right",
+      "name": "Портик, справа",
+      "on": "pagoda_site",
+      "across": 2.2,
+      "distance": -1.95,
+      "elevation": 0.8,
+      "facing": 90,
+      "box": [
+        -0.95,
+        -3.05,
+        0.95,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "porch_roof",
+      "name": "Кровля портика",
+      "plane": true,
+      "on": "pagoda_site",
+      "distance": -1.95,
+      "elevation": 3.8,
+      "width": 4.4,
+      "depth": 1.9,
+      "shadow": {
+        "onto": [
+          "pagoda",
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "tower_front_lo",
+      "name": "Башня, низ",
+      "on": "pagoda_site",
+      "distance": -1.1,
+      "elevation": 4,
+      "facing": 180,
+      "tilt": 5.55,
+      "box": [
+        -2.1,
+        -3.65,
+        2.1,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "porch_roof",
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "tower_left_lo",
+      "name": "Башня, низ слева",
+      "on": "pagoda_site",
+      "across": -2.1,
+      "distance": 1,
+      "elevation": 4,
+      "facing": 270,
+      "tilt": 5.55,
+      "box": [
+        -2.1,
+        -3.65,
+        2.1,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "porch_roof",
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "tower_right_lo",
+      "name": "Башня, низ справа",
+      "on": "pagoda_site",
+      "across": 2.1,
+      "distance": 1,
+      "elevation": 4,
+      "facing": 90,
+      "tilt": 5.55,
+      "box": [
+        -2.1,
+        -3.65,
+        2.1,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "porch_roof",
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "tower_front_hi",
+      "name": "Башня, верх",
+      "on": "pagoda_site",
+      "distance": -0.75,
+      "elevation": 7.6,
+      "facing": 180,
+      "tilt": 20.56,
+      "box": [
+        -1.75,
+        -2.6,
+        1.75,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "porch_roof",
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "tower_left_hi",
+      "name": "Башня, верх слева",
+      "on": "pagoda_site",
+      "across": -1.75,
+      "distance": 1,
+      "elevation": 7.6,
+      "facing": 270,
+      "tilt": 20.56,
+      "box": [
+        -1.75,
+        -2.6,
+        1.75,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "porch_roof",
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "tower_right_hi",
+      "name": "Башня, верх справа",
+      "on": "pagoda_site",
+      "across": 1.75,
+      "distance": 1,
+      "elevation": 7.6,
+      "facing": 90,
+      "tilt": 20.56,
+      "box": [
+        -1.75,
+        -2.6,
+        1.75,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "porch_roof",
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "crown",
+      "name": "Навершие",
+      "on": "pagoda_site",
+      "distance": 1,
+      "elevation": 10,
+      "box": [
+        -1.2,
+        -2.55,
+        1.2,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "plinth_top",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "train",
+      "name": "Поезд",
+      "across": -52,
+      "distance": 20,
+      "height": 5,
+      "box": [
+        -13.5,
+        -5.2,
+        18.2,
+        0.2
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "train_front",
+      "name": "Паровоз спереди",
+      "on": "train",
+      "across": 17,
+      "distance": 1.3,
+      "facing": 90,
+      "box": [
+        -1.4,
+        -5.05,
+        1.4,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "hut_site",
+      "name": "Хижина (место)",
+      "unseen": true,
+      "across": -20,
+      "distance": 24,
+      "facing": 170
+    },
+    {
+      "id": "hut",
+      "name": "Хижина",
+      "on": "hut_site",
+      "distance": -1.7,
+      "facing": 180,
+      "box": [
+        -2.2,
+        -2.25,
+        2.2,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "hut_left",
+      "name": "Хижина, слева",
+      "on": "hut_site",
+      "across": -2.2,
+      "facing": 270,
+      "box": [
+        -1.7,
+        -3.85,
+        1.7,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "hut_right",
+      "name": "Хижина, справа",
+      "on": "hut_site",
+      "across": 2.2,
+      "facing": 90,
+      "box": [
+        -1.7,
+        -3.85,
+        1.7,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "hut_roof",
+      "name": "Крыша хижины",
+      "plane": true,
+      "on": "hut_site",
+      "distance": -1.075,
+      "elevation": 2.788,
+      "width": 5,
+      "depth": 2.952,
+      "tilt": 43.26,
+      "shadow": {
+        "onto": [
+          "hut",
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "shed_site",
+      "name": "Навес для слона (место)",
+      "unseen": true,
+      "across": -34,
+      "distance": 13
+    },
+    {
+      "id": "shed",
+      "name": "Навес для слона",
+      "on": "shed_site",
+      "distance": -2.2,
+      "facing": 180,
+      "box": [
+        -4.6,
+        -4.65,
+        4.6,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "shed_back",
+      "name": "Навес, задние столбы",
+      "on": "shed_site",
+      "distance": 2.2,
+      "facing": 180,
+      "box": [
+        -4.6,
+        -4.65,
+        4.6,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "shed_roof",
+      "name": "Кровля навеса",
+      "plane": true,
+      "on": "shed_site",
+      "distance": -1.3,
+      "elevation": 5.091,
+      "width": 9.6,
+      "depth": 2.962,
+      "tilt": 28.61,
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "shed_roof_back",
+      "name": "Кровля навеса, задний скат",
+      "plane": true,
+      "on": "shed_site",
+      "distance": 1.3,
+      "elevation": 5.091,
+      "width": 9.6,
+      "depth": 2.962,
+      "tilt": -28.61,
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "shed_left",
+      "name": "Навес, фронтон слева",
+      "on": "shed_site",
+      "across": -4.4,
+      "elevation": 4.382,
+      "facing": 270,
+      "box": [
+        -2.7,
+        -1.5,
+        2.7,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "shed_right",
+      "name": "Навес, фронтон справа",
+      "on": "shed_site",
+      "across": 4.4,
+      "elevation": 4.382,
+      "facing": 90,
+      "box": [
+        -2.7,
+        -1.5,
+        2.7,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "sign",
+      "name": "Вывеска станции",
+      "across": -44,
+      "distance": 13,
+      "height": 2.5,
+      "box": [
+        -1.4,
+        -3.2,
+        1.4,
+        0.1
+      ]
+    },
+    {
+      "id": "steam",
+      "name": "Пар паровоза",
+      "particles": {
+        "kind": "smoke",
+        "at": "train#chimney",
+        "color": "#e6e6e2",
+        "size": [
+          0.3,
+          2.4
+        ],
+        "rate": 3,
+        "life": [
+          3,
+          6
+        ],
+        "opacity": 0.45,
+        "shadow": 0
+      }
+    },
+    {
+      "id": "forest",
+      "name": "Лес у тропы",
+      "across": 0,
+      "distance": 12,
+      "height": 30,
+      "box": [
+        -1,
+        -1,
+        1,
+        0.2
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.6,
+        "strength": 0.45
+      }
+    },
+    {
+      "id": "canopy",
+      "name": "Кроны леса",
+      "across": 0,
+      "distance": 12,
+      "height": 30,
+      "box": [
+        -1,
+        -1,
+        1,
+        0.2
+      ],
+      "translucent": 0.35,
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.8,
+        "strength": 0.4
+      }
+    },
+    {
+      "id": "undergrowth",
+      "name": "Подлесок",
+      "across": 0,
+      "distance": 12,
+      "height": 3,
+      "box": [
+        -1,
+        -1,
+        1,
+        0.2
+      ],
+      "translucent": 0.3,
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.3,
+        "strength": 0.35
+      }
+    },
+    {
+      "id": "mist_river",
+      "name": "Туман над рекой",
+      "across": 55,
+      "distance": 26,
+      "height": 3,
+      "box": [
+        -60,
+        -5,
+        60,
+        0.3
+      ]
+    },
+    {
+      "id": "pyre",
+      "name": "Костёр",
+      "across": 40,
+      "distance": 14,
+      "height": 2,
+      "box": [
+        -2,
+        -1.8,
+        2,
+        0.2
+      ],
+      "uniforms": {
+        "fire": 0
+      },
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4
+      }
+    },
+    {
+      "id": "pyre_top",
+      "name": "Верх костра",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "across": 40,
+      "distance": 14,
+      "elevation": 1.44,
+      "width": 3.2,
+      "depth": 1
+    },
+    {
+      "id": "pyre_steps",
+      "name": "Уступы костра",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "across": 37.4,
+      "distance": 14,
+      "elevation": 0.72,
+      "width": 1,
+      "depth": 2.46,
+      "rotation": 270,
+      "tilt": 35.8
+    },
+    {
+      "id": "pyre_flames",
+      "name": "Пламя костра",
+      "across": 40,
+      "distance": 14.3,
+      "elevation": 1.38,
+      "glows": true,
+      "box": [
+        -2.8,
+        -4.0,
+        2.8,
+        0.5
+      ]
+    },
+    {
+      "id": "pyre_flames_near",
+      "name": "Пламя костра, ближнее",
+      "across": 40,
+      "distance": 13.62,
+      "elevation": 1.38,
+      "glows": true,
+      "box": [
+        -2.8,
+        -1.9,
+        2.8,
+        0.4
+      ]
+    },
+    {
+      "id": "pyre_embers",
+      "name": "Искры костра",
+      "particles": {
+        "kind": "embers",
+        "at": "pyre#flames",
+        "amount": "pyre_fire",
+        "source": [
+          2.6,
+          0.8,
+          1.6
+        ]
+      }
+    },
+    {
+      "id": "smoke",
+      "name": "Дым костра",
+      "particles": {
+        "kind": "smoke",
+        "at": "pyre#smoke",
+        "amount": "smoke",
+        "source": [
+          2.4,
+          0.8,
+          0.2
+        ],
+        "rate": 30,
+        "size": [
+          2.0,
+          10
+        ],
+        "life": [
+          14,
+          22
+        ],
+        "color": "#4a4642",
+        "shadow": 0.6,
+        "sheer": 0.4
+      }
+    },
+    {
+      "id": "procession",
+      "name": "Процессия",
+      "across": 0,
+      "distance": 10,
+      "height": 3,
+      "box": [
+        -90,
+        -4,
+        100,
+        0.2
+      ]
+    },
+    {
+      "id": "pb1",
+      "name": "Факельщик",
+      "person": {
+        "cast": "cast",
+        "who": "bearer"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "pb1_a",
+        "distance": "pb1_d"
+      }
+    },
+    {
+      "id": "pb2",
+      "name": "Факельщик",
+      "person": {
+        "cast": "cast",
+        "who": "bearer"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "pb2_a",
+        "distance": "pb2_d"
+      }
+    },
+    {
+      "id": "dr1",
+      "name": "Барабанщик",
+      "person": {
+        "cast": "cast",
+        "who": "drummer"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "dr1_a",
+        "distance": "dr1_d"
+      }
+    },
+    {
+      "id": "dr2",
+      "name": "Барабанщик",
+      "person": {
+        "cast": "cast",
+        "who": "drummer"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "dr2_a",
+        "distance": "dr2_d"
+      }
+    },
+    {
+      "id": "pr1",
+      "name": "Жрец",
+      "person": {
+        "cast": "cast",
+        "who": "priest"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "pr1_a",
+        "distance": "pr1_d"
+      }
+    },
+    {
+      "id": "aouda",
+      "name": "Ауда",
+      "person": {
+        "cast": "cast",
+        "who": "aouda"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "aouda_a",
+        "distance": "aouda_d"
+      }
+    },
+    {
+      "id": "pr2",
+      "name": "Жрец",
+      "person": {
+        "cast": "cast",
+        "who": "priest"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "pr2_a",
+        "distance": "pr2_d"
+      }
+    },
+    {
+      "id": "pb3",
+      "name": "Факельщик",
+      "person": {
+        "cast": "cast",
+        "who": "bearer"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "pb3_a",
+        "distance": "pb3_d"
+      }
+    },
+    {
+      "id": "pb4",
+      "name": "Факельщик",
+      "person": {
+        "cast": "cast",
+        "who": "bearer"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "pb4_a",
+        "distance": "pb4_d"
+      }
+    },
+    {
+      "id": "fogg",
+      "name": "Филеас Фогг",
+      "person": {
+        "cast": "cast",
+        "who": "fogg"
+      },
+      "across": -14.6,
+      "distance": 8.359,
+      "place": {
+        "across": "fogg_a",
+        "distance": "fogg_d"
+      }
+    },
+    {
+      "id": "cromarty",
+      "name": "Сэр Фрэнсис Кромарти",
+      "person": {
+        "cast": "cast",
+        "who": "cromarty"
+      },
+      "across": -16,
+      "distance": 8.269,
+      "place": {
+        "across": "cromarty_a",
+        "distance": "cromarty_d"
+      }
+    },
+    {
+      "id": "passepartout",
+      "name": "Паспарту",
+      "person": {
+        "cast": "cast",
+        "who": "passepartout"
+      },
+      "across": -13,
+      "distance": 8.506,
+      "place": {
+        "across": "passepartout_a",
+        "distance": "passepartout_d"
+      }
+    },
+    {
+      "id": "guide",
+      "name": "Проводник-парс",
+      "person": {
+        "cast": "cast",
+        "who": "guide"
+      },
+      "across": -11.6,
+      "distance": 8.67,
+      "place": {
+        "across": "guide_a",
+        "distance": "guide_d"
+      }
+    },
+    {
+      "id": "v1",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v1_a",
+        "distance": "v1_d"
+      }
+    },
+    {
+      "id": "v2",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v2_a",
+        "distance": "v2_d"
+      }
+    },
+    {
+      "id": "v3",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager_woman"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v3_a",
+        "distance": "v3_d"
+      }
+    },
+    {
+      "id": "v4",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v4_a",
+        "distance": "v4_d"
+      }
+    },
+    {
+      "id": "v5",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v5_a",
+        "distance": "v5_d"
+      }
+    },
+    {
+      "id": "v6",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager_woman"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v6_a",
+        "distance": "v6_d"
+      }
+    },
+    {
+      "id": "v7",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v7_a",
+        "distance": "v7_d"
+      }
+    },
+    {
+      "id": "v8",
+      "name": "Толпа у костра",
+      "person": {
+        "cast": "cast",
+        "who": "villager"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "v8_a",
+        "distance": "v8_d"
+      }
+    },
+    {
+      "id": "fire_pb1",
+      "name": "Факел",
+      "particles": {
+        "kind": "fire",
+        "at": "pb1#flame",
+        "amount": "torches",
+        "size": [
+          0.18,
+          0.05
+        ]
+      }
+    },
+    {
+      "id": "fire_pb2",
+      "name": "Факел",
+      "particles": {
+        "kind": "fire",
+        "at": "pb2#flame",
+        "amount": "torches",
+        "size": [
+          0.18,
+          0.05
+        ]
+      }
+    },
+    {
+      "id": "fire_pb3",
+      "name": "Факел",
+      "particles": {
+        "kind": "fire",
+        "at": "pb3#flame",
+        "amount": "torches",
+        "size": [
+          0.18,
+          0.05
+        ]
+      }
+    },
+    {
+      "id": "fire_pb4",
+      "name": "Факел",
+      "particles": {
+        "kind": "fire",
+        "at": "pb4#flame",
+        "amount": "torches",
+        "size": [
+          0.18,
+          0.05
+        ]
+      }
+    },
+    {
+      "id": "fire_pr1",
+      "name": "Факел",
+      "particles": {
+        "kind": "fire",
+        "at": "pr1#flame",
+        "amount": "torches",
+        "size": [
+          0.18,
+          0.05
+        ]
+      }
+    },
+    {
+      "id": "fire_pr2",
+      "name": "Факел",
+      "particles": {
+        "kind": "fire",
+        "at": "pr2#flame",
+        "amount": "torches",
+        "size": [
+          0.18,
+          0.05
+        ]
+      }
+    },
+    {
+      "id": "mist_stream",
+      "name": "Туман у ручья",
+      "across": 0,
+      "distance": 9,
+      "height": 2,
+      "box": [
+        -110,
+        -3,
+        110,
+        0.3
+      ]
+    },
+    {
+      "id": "fireflies",
+      "name": "Светлячки",
+      "particles": {
+        "kind": "fireflies",
+        "amount": "fireflies",
+        "at": [
+          0,
+          9,
+          1.2
+        ],
+        "source": [
+          120,
+          10,
+          2.5
+        ],
+        "rate": 40,
+        "life": [
+          4,
+          8
+        ],
+        "size": [
+          0.05,
+          0.05
+        ],
+        "glow": [
+          6,
+          6
+        ]
+      }
+    },
+    {
+      "id": "motes",
+      "name": "Пылинки в лучах",
+      "particles": {
+        "kind": "dust",
+        "at": [
+          0,
+          10,
+          3
+        ],
+        "source": [
+          150,
+          12,
+          6
+        ]
+      }
+    },
+    {
+      "id": "leaf_fall",
+      "name": "Падающие листья",
+      "particles": {
+        "kind": "leaves",
+        "at": [
+          0,
+          22,
+          16
+        ],
+        "source": [
+          160,
+          16,
+          8
+        ],
+        "rate": 1.5,
+        "size": [
+          0.12,
+          0.12
+        ],
+        "colors": [
+          "#5a6a3a",
+          "#7a7040",
+          "#4a5e34"
+        ]
+      }
+    },
+    {
+      "id": "near",
+      "name": "Стволы у тропы",
+      "across": 0,
+      "distance": 4,
+      "height": 32,
+      "box": [
+        -1,
+        -1,
+        1,
+        0.2
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.4,
+        "strength": 0.5
+      }
+    },
+    {
+      "id": "near_leaves",
+      "name": "Заросли",
+      "across": 0,
+      "distance": 4,
+      "height": 2,
+      "box": [
+        -1,
+        -1,
+        1,
+        0.2
+      ],
+      "translucent": 0.25,
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.3,
+        "strength": 0.35
+      }
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Indian forest at dawn: bansuri flute over a soft tanpura drone, birds far off, slow and luminous",
+        "weight": 1.1
+      },
+      {
+        "text": "Light orchestral adventure, strings and woodwinds in a walking rhythm, an elephant's steady stride through the jungle",
+        "weight": 0.9
+      },
+      {
+        "text": "Low frame drums and dhol far away at night, a procession coming closer through the trees, tense and hushed",
+        "weight": 0.5
+      },
+      {
+        "text": "Minimal ambient pads, humid air, distant water, modern indie game score",
+        "weight": 0.4
+      },
+      {
+        "text": "Sitar and tabla in a measured travelling tala, warm afternoon heat",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello and harp, a fire burning at dawn by a river, grave and tender",
+        "weight": 0
+      },
+      {
+        "text": "Pizzicato strings and clarinet, playful, a valet bargaining for an elephant",
+        "weight": 0
+      },
+      {
+        "text": "Shehnai over drones and conch shells, a temple at night, solemn ritual",
+        "weight": 0
+      },
+      {
+        "text": "Driving strings and timpani, a sudden rush out of the thicket, torches scattering",
+        "weight": 0
+      },
+      {
+        "text": "Glassy celesta and soft marimba, fireflies and moonlight in a jungle clearing",
+        "weight": 0
+      },
+      {
+        "text": "Orchestral swell of relief at morning, a train whistle in the distance, the line resumes",
+        "weight": 0
+      },
+      {
+        "text": "Santoor arpeggios, gentle and bright, a stream crossing a forest trail",
+        "weight": 0
+      },
+      {
+        "text": "Low brass and bowed bass, smoke and dread, a pyre lit at first light",
+        "weight": 0
+      },
+      {
+        "text": "Victorian travelling waltz for small orchestra, unhurried, English gentlemen in the tropics",
+        "weight": 0
+      },
+      {
+        "text": "Hand percussion and kalimba, light and quick, an elephant's ears flapping",
+        "weight": 0
+      },
+      {
+        "text": "Choir humming without words, a dead raja rising from the smoke, uncanny and slow",
+        "weight": 0
+      },
+      {
+        "text": "Wind through bamboo, sparse plucked strings, waiting hidden in the undergrowth",
+        "weight": 0
+      },
+      {
+        "text": "Bright full orchestra, escape through the forest at a run, comic and heroic",
+        "weight": 0
+      }
+    ],
+    "bpm": 84,
+    "density": 0.4,
+    "brightness": 0.5
+  }
+}

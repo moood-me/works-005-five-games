@@ -1,0 +1,804 @@
+{
+  "engine": 2,
+  "title": "Из окна поезда",
+  "caption": "Купе первого класса. За окном бежит мир.",
+  "horizon": 0.27,
+  "camera": {
+    "mode": "picture"
+  },
+  "modules": [
+    "svet",
+    "cast",
+    "beats"
+  ],
+  "light": {
+    "vignette": 0.45,
+    "grain": 0.08,
+    "haze": 0.15,
+    "hazeColor": "#c8d0d4",
+    "hazeGlow": 0.6,
+    "ambient": 1,
+    "ambientColor": "#ffffff",
+    "looks": {
+      "fog": {
+        "haze": 0.85,
+        "hazeColor": "#b4b8b6",
+        "saturation": 0.75
+      },
+      "dawn": {
+        "ambientColor": "#ffdcbc",
+        "tint": "#ff9a5a",
+        "tintStrength": 0.1,
+        "hazeColor": "#e8b890"
+      },
+      "night": {
+        "ambient": 0.7,
+        "ambientColor": "#7f96cc",
+        "saturation": 0.75,
+        "hazeColor": "#2a3448",
+        "inside": 0.75
+      }
+    },
+    "inside": 1
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#9fb4e0",
+      "strength": 0.5,
+      "on": "night"
+    },
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "color": "#ffc080",
+      "strength": 0.9,
+      "on": "dawn"
+    },
+    {
+      "id": "window_light",
+      "daylight": true,
+      "of": "glass",
+      "reach": 4.5
+    },
+    {
+      "id": "sconce_l",
+      "of": "window#sconce_l",
+      "on": "night",
+      "strength": 2.0,
+      "reach": 3.2
+    },
+    {
+      "id": "sconce_r",
+      "of": "window#sconce_r",
+      "on": "night",
+      "strength": 2.0,
+      "reach": 3.2
+    },
+    {
+      "id": "table_lamp",
+      "of": "lamp#bulb",
+      "on": "night",
+      "strength": 2.0,
+      "reach": 3.0
+    }
+  ],
+  "relief": "return lib.relief(across, distance);",
+  "state": {
+    "land": "europe",
+    "speed": 1,
+    "night": 1,
+    "dawn": 0,
+    "herd": 0,
+    "herd_x": 0,
+    "fog": 0,
+    "camera_x": 0,
+    "carriage_x": 0,
+    "beat": null,
+    "watch_close": 0,
+    "with_pp": 1,
+    "with_aouda": 1,
+    "with_fix": 1,
+    "fix_bruise": 0,
+    "fogg_a": -1.52,
+    "fogg_d": 2.12,
+    "fogg_turn": 0,
+    "fogg_do": {
+      "motion": "read_book",
+      "loop": true,
+      "from": 0
+    },
+    "fogg_look": null,
+    "fogg_reach": null,
+    "fogg_with": [
+      "book"
+    ],
+    "fogg_here": true,
+    "aouda_a": -0.98,
+    "aouda_d": 2.12,
+    "aouda_turn": 0,
+    "aouda_do": {
+      "motion": "sit_calm",
+      "loop": true,
+      "from": 0
+    },
+    "aouda_look": {
+      "on": "carriage",
+      "at": [
+        0,
+        40,
+        1.0
+      ]
+    },
+    "aouda_reach": null,
+    "aouda_with": null,
+    "aouda_here": true,
+    "passepartout_a": 0.98,
+    "passepartout_d": 2.12,
+    "passepartout_turn": 0,
+    "passepartout_do": {
+      "motion": "sleep_seated",
+      "loop": true,
+      "from": 0
+    },
+    "passepartout_look": null,
+    "passepartout_reach": null,
+    "passepartout_with": null,
+    "passepartout_here": true,
+    "fix_a": 1.52,
+    "fix_d": 2.12,
+    "fix_turn": 0,
+    "fix_do": {
+      "motion": "paper_seated",
+      "loop": true,
+      "from": 3.3
+    },
+    "fix_look": null,
+    "fix_reach": null,
+    "fix_with": [
+      "newspaper"
+    ],
+    "fix_here": true
+  },
+  "states": {
+    "land": {
+      "values": [
+        "europe",
+        "india",
+        "prairie",
+        "snow",
+        "england"
+      ],
+      "means": "земля за окном — у каждой свой участок пути (поезд переносится туда склейкой): europe — поля и деревни, india — Ганг, гхаты, пальмы, prairie — трава под снегом, snow — снежная равнина и горы, england — Лондон в тумане"
+    },
+    "speed": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "скорость поезда: 0 — стоит, земля замерла; 1 — 20 м/с"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "ночь: 0 — день, 1 — лунная ночь; с ночью горят лампы купе, окна деревень, газ Лондона"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "рассвет: низкое тёплое солнце у горизонта"
+    },
+    "herd": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "бизоны на prairie: сколько стада прошло мимо — 0 ещё нет, 1 прошло; переходят путь там, где стоит поезд"
+    },
+    "fog": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "туман (декабрь в Англии): ставится склейкой вместе с land (england → 1, другие → 0), игра может задать иначе"
+    },
+    "beat": {
+      "type": "string",
+      "means": "кусок фильма (модуль beats): имя куска — он играется с начала; в конце сцена говорит beat:<имя>. Куски: depart, gas, watch, ride, brake, ganges, buffalo, snow, special"
+    },
+    "with_pp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Паспарту в купе"
+    },
+    "with_aouda": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Ауда в купе"
+    },
+    "with_fix": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Фикс в купе"
+    },
+    "fix_bruise": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "синяк Фикса после «Генерала Гранта»"
+    },
+    "herd_x": {
+      "type": "number",
+      "means": "где бизоны переходят путь (метры вдоль пути); ставит скрипт — где стоял поезд, когда стадо пошло"
+    },
+    "carriage_x": {
+      "type": "number",
+      "smooth": true,
+      "means": "купе относительно камеры, метры вправо (камера — это поезд): план с камерой на 0.4 м правее середины купе — −0.4"
+    },
+    "watch_close": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "крупный план: часы Фогга на ладони (вставка поверх купе) — 0 нет, 1 открыт; ставит кусок special склейкой"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Небо",
+      "sky": true,
+      "uniforms": {
+        "tr": 0.44,
+        "tg": 0.58,
+        "tb": 0.72,
+        "lr": 0.83,
+        "lg": 0.87,
+        "lb": 0.88,
+        "w": 1.78,
+        "stars": 0,
+        "moon": 0,
+        "sun": 0,
+        "sun_dy": 0
+      }
+    },
+    {
+      "id": "ground",
+      "name": "Земля",
+      "plane": true,
+      "drape": true,
+      "across": 60000,
+      "distance": 2001.5,
+      "width": 150000,
+      "depth": 3997
+    },
+    {
+      "id": "far",
+      "name": "Дальние холмы и горы",
+      "across": 0,
+      "distance": 3000,
+      "height": 900,
+      "box": [
+        -13500,
+        -950,
+        133500,
+        25
+      ]
+    },
+    {
+      "id": "distant",
+      "name": "Деревни, лес, Лондон",
+      "across": 0,
+      "distance": 400,
+      "height": 80,
+      "box": [
+        -5300,
+        -80,
+        125300,
+        2
+      ],
+      "uniforms": {
+        "lit": 1
+      }
+    },
+    {
+      "id": "far_bank",
+      "name": "Дальний берег Ганга",
+      "across": 0,
+      "distance": 330,
+      "height": 40,
+      "box": [
+        25150,
+        -40,
+        34850,
+        1
+      ]
+    },
+    {
+      "id": "river",
+      "name": "Ганг",
+      "plane": true,
+      "across": 30000,
+      "distance": 171,
+      "elevation": -1.32,
+      "width": 9288,
+      "depth": 298,
+      "reflect": {
+        "strength": 0.6,
+        "fade": 0,
+        "blur": 0.01,
+        "rough": 0.3,
+        "ripple": 0.3
+      }
+    },
+    {
+      "id": "mid",
+      "name": "Деревья и изгороди",
+      "across": 0,
+      "distance": 120,
+      "height": 26,
+      "box": [
+        -4300,
+        -26,
+        124300,
+        1
+      ],
+      "uniforms": {
+        "lit": 1
+      }
+    },
+    {
+      "id": "herd",
+      "name": "Бизоны",
+      "across": 0,
+      "distance": 60,
+      "height": 3.5,
+      "box": [
+        -55,
+        -3.5,
+        55,
+        0.5
+      ],
+      "place": {
+        "across": "herd_x"
+      },
+      "uniforms": {
+        "gone": 0,
+        "crossing": 0
+      }
+    },
+    {
+      "id": "near",
+      "name": "Телеграфные столбы",
+      "across": 0,
+      "distance": 14,
+      "height": 6,
+      "box": [
+        -4100,
+        -12,
+        124100,
+        0.2
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "strength": 0.5,
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "train",
+      "name": "Поезд",
+      "unseen": true,
+      "across": 0,
+      "distance": 0,
+      "place": {
+        "across": "camera_x"
+      }
+    },
+    {
+      "id": "carriage",
+      "name": "Купе",
+      "unseen": true,
+      "on": "train",
+      "across": 0,
+      "distance": 0,
+      "place": {
+        "across": "carriage_x"
+      }
+    },
+    {
+      "id": "carpet",
+      "name": "Ковёр",
+      "plane": true,
+      "across": 0,
+      "distance": 1.45,
+      "elevation": 0,
+      "width": 10,
+      "depth": 2.4,
+      "lit": true,
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "glass",
+      "name": "Стекло",
+      "across": 0,
+      "distance": 2.6,
+      "height": 1.4,
+      "glass": {
+        "strength": 0.25,
+        "blur": 0.03
+      },
+      "behind": [
+        "window"
+      ],
+      "box": [
+        -1.05,
+        -2.25,
+        1.05,
+        -0.75
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "window",
+      "name": "Окно",
+      "across": 0,
+      "distance": 2.6,
+      "height": 2.8,
+      "box": [
+        -3.8,
+        -2.8,
+        3.8,
+        0
+      ],
+      "uniforms": {
+        "lit": 1
+      },
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "sill",
+      "name": "Подоконник",
+      "plane": true,
+      "across": 0,
+      "distance": 2.54,
+      "elevation": 0.8,
+      "width": 2.2,
+      "depth": 0.12,
+      "lit": true,
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "tabletop",
+      "name": "Столик",
+      "plane": true,
+      "across": 0,
+      "distance": 2.39,
+      "elevation": 0.72,
+      "width": 0.9,
+      "depth": 0.42,
+      "lit": true,
+      "shadow": {
+        "onto": [
+          "carpet",
+          "window"
+        ],
+        "soft": 0.2
+      },
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "lamp",
+      "name": "Лампа на столике",
+      "across": -0.3,
+      "distance": 2.42,
+      "elevation": 0.72,
+      "height": 0.4,
+      "box": [
+        -0.16,
+        -0.4,
+        0.16,
+        0.02
+      ],
+      "uniforms": {
+        "lit": 1
+      },
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "table",
+      "name": "Край столика",
+      "across": 0,
+      "distance": 2.18,
+      "height": 0.75,
+      "box": [
+        -0.5,
+        -0.75,
+        0.5,
+        0
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "fogg",
+      "name": "Филеас Фогг",
+      "person": {
+        "cast": "cast",
+        "who": "fogg",
+        "turn": 0,
+        "does": "sit_calm"
+      },
+      "across": -1.52,
+      "distance": 2.12,
+      "place": {
+        "across": "fogg_a",
+        "distance": "fogg_d"
+      },
+      "shadow": {
+        "onto": [
+          "carpet"
+        ],
+        "strength": 0.4,
+        "soft": 0.3
+      },
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "aouda",
+      "name": "Ауда",
+      "person": {
+        "cast": "cast",
+        "who": "aouda",
+        "turn": 0,
+        "does": "sit_calm"
+      },
+      "across": -0.98,
+      "distance": 2.12,
+      "place": {
+        "across": "aouda_a",
+        "distance": "aouda_d"
+      },
+      "shadow": {
+        "onto": [
+          "carpet"
+        ],
+        "strength": 0.4,
+        "soft": 0.3
+      },
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "passepartout",
+      "name": "Паспарту",
+      "person": {
+        "cast": "cast",
+        "who": "passepartout",
+        "turn": 0,
+        "does": "sit_calm"
+      },
+      "across": 0.98,
+      "distance": 2.12,
+      "place": {
+        "across": "passepartout_a",
+        "distance": "passepartout_d"
+      },
+      "shadow": {
+        "onto": [
+          "carpet"
+        ],
+        "strength": 0.4,
+        "soft": 0.3
+      },
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "fix",
+      "name": "Фикс",
+      "person": {
+        "cast": "cast",
+        "who": "fix",
+        "turn": 0,
+        "does": "sit_calm"
+      },
+      "across": 1.52,
+      "distance": 2.12,
+      "place": {
+        "across": "fix_a",
+        "distance": "fix_d"
+      },
+      "shadow": {
+        "onto": [
+          "carpet"
+        ],
+        "strength": 0.4,
+        "soft": 0.3
+      },
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "sofa_l",
+      "name": "Диван слева",
+      "across": -1.25,
+      "distance": 2.0,
+      "height": 0.8,
+      "box": [
+        -0.6,
+        -0.82,
+        0.6,
+        0
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "sofa_r",
+      "name": "Диван справа",
+      "across": 1.25,
+      "distance": 2.0,
+      "height": 0.8,
+      "box": [
+        -0.6,
+        -0.82,
+        0.6,
+        0
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "sofa_l_arm",
+      "name": "Подлокотник левого дивана",
+      "across": -0.7,
+      "distance": 2.0,
+      "facing": 90,
+      "height": 0.7,
+      "box": [
+        0,
+        -0.72,
+        0.56,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "sofa_r_arm",
+      "name": "Подлокотник правого дивана",
+      "across": 0.7,
+      "distance": 2.0,
+      "facing": 270,
+      "height": 0.7,
+      "box": [
+        -0.56,
+        -0.72,
+        0,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "watch_close",
+      "name": "Часы Фогга крупно",
+      "insert": "watch_close"
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Light orchestral travel music in the rhythm of steam train wheels, brisk pizzicato strings and woodwinds, 1870s optimism, forward motion",
+        "weight": 1.2
+      },
+      {
+        "text": "Steady clockwork ostinato on muted piano and marimba, like rails clicking under a carriage, calm and precise",
+        "weight": 1.0
+      },
+      {
+        "text": "Warm solo cello melody over a gentle rocking string pulse, night journey, a lamp-lit carriage",
+        "weight": 0.5
+      },
+      {
+        "text": "Minimalist repeating piano patterns in the manner of modern indie game scores, landscape passing by a window",
+        "weight": 0.4
+      },
+      {
+        "text": "Indian dawn: bansuri flute over a soft tanpura drone, slow and luminous, river light",
+        "weight": 0
+      },
+      {
+        "text": "American prairie: open fifths on strings and a lonely harmonica, wide empty space, low winter sun",
+        "weight": 0
+      },
+      {
+        "text": "Snowfield: glassy celesta and high sustained strings, white silence, slow",
+        "weight": 0
+      },
+      {
+        "text": "London December fog: muted brass chorale and soft timpani, gaslight, approaching the city",
+        "weight": 0
+      },
+      {
+        "text": "French musette accordion and light strings, cheerful, a valet humming by the window",
+        "weight": 0
+      },
+      {
+        "text": "Driving full orchestra, urgent strings in triplets, a special train racing against time",
+        "weight": 0
+      },
+      {
+        "text": "Slow solo piano, rubato, a train standing still in the night, waiting",
+        "weight": 0
+      },
+      {
+        "text": "Harp and clarinet duet, tender, a woman watching the river at sunrise",
+        "weight": 0
+      },
+      {
+        "text": "Low thunder of drums and double basses, a great herd of buffalo crossing, earthy and immense",
+        "weight": 0
+      },
+      {
+        "text": "Victorian chamber ensemble, string quartet travelling waltz, elegant and unhurried",
+        "weight": 0
+      },
+      {
+        "text": "Ambient pads and soft noise like wind past the glass, modern atmospheric game soundtrack",
+        "weight": 0
+      },
+      {
+        "text": "Brisk snare brushes and plucked bass imitating wheels on rail joints, playful and light",
+        "weight": 0
+      },
+      {
+        "text": "Glockenspiel and pizzicato counting the telegraph poles flicking by, bright and quick",
+        "weight": 0
+      },
+      {
+        "text": "Sitar and tabla in a measured travelling rhythm, warm afternoon heat, palms passing",
+        "weight": 0
+      },
+      {
+        "text": "Solo violin, folk-like, over a slow steam rhythm, villages at night with lit windows",
+        "weight": 0
+      },
+      {
+        "text": "Tense ticking clock and sustained strings rising, the last miles before London, time running out",
+        "weight": 0
+      }
+    ],
+    "bpm": 96,
+    "density": 0.4,
+    "brightness": 0.45
+  }
+}

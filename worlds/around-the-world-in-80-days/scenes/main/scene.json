@@ -1,3 +1,1100 @@
 {
-  "engine": 3
+  "engine": 2,
+  "title": "Реформ-клуб",
+  "caption": "Пэлл-Мэлл, вечер. Часы идут.",
+  "horizon": 0.55,
+  "camera": {
+    "mode": "picture"
+  },
+  "modules": [
+    "svet",
+    "cast",
+    "beats"
+  ],
+  "light": {
+    "vignette": 0.55,
+    "grain": 0.12,
+    "haze": 0.1,
+    "hazeColor": "#2c3038",
+    "hazeGlow": 0.6,
+    "ambient": 0.8,
+    "ambientColor": "#d6dade",
+    "looks": {
+      "day": {
+        "ambient": 0.8,
+        "ambientColor": "#aab4d8",
+        "saturation": 0.9
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "lamp_light",
+      "of": "lamp#bulb",
+      "strength": 2.0,
+      "reach": 8
+    },
+    {
+      "id": "fire_light",
+      "of": "fireplace#fire",
+      "on": "fire",
+      "reach": 12,
+      "flicker": 0.35,
+      "strength": 1.3
+    },
+    {
+      "id": "hall_light",
+      "of": "hall#light",
+      "on": "door",
+      "reach": 10
+    },
+    {
+      "id": "window1_light",
+      "across": -5.2,
+      "distance": 17.4,
+      "elevation": 3.5,
+      "color": "#a9b8cc",
+      "strength": 2.0,
+      "reach": 10
+    },
+    {
+      "id": "window2_light",
+      "across": -11.2,
+      "distance": 17.4,
+      "elevation": 3.5,
+      "color": "#a9b8cc",
+      "strength": 2.0,
+      "reach": 10
+    },
+    {
+      "id": "window3_light",
+      "across": -17.2,
+      "distance": 17.4,
+      "elevation": 3.5,
+      "color": "#a9b8cc",
+      "strength": 2.0,
+      "reach": 10
+    },
+    {
+      "id": "gas1",
+      "of": "lamps#lamp1",
+      "reach": 13,
+      "glow": 2.5,
+      "strength": 1.5
+    },
+    {
+      "id": "gas2",
+      "of": "lamps#lamp2",
+      "reach": 13,
+      "glow": 2.5,
+      "strength": 1.5
+    },
+    {
+      "id": "gas3",
+      "of": "lamps#lamp3",
+      "reach": 13,
+      "glow": 2.5,
+      "strength": 1.5
+    }
+  ],
+  "state": {
+    "minute": 1244,
+    "second": 0,
+    "fire": 0.75,
+    "door": 0,
+    "crowd_outside": 0,
+    "day": 1,
+    "leaf_l": 180,
+    "leaf_r": 180,
+    "beat": null,
+    "fogg_hat": 1,
+    "cards_down": 0,
+    "chair_back": 0,
+    "gentlemen": 5,
+    "fogg_present": 1,
+    "fogg_seated": 0,
+    "with_aouda": 0,
+    "with_pp": 0,
+    "aouda_here": false,
+    "passepartout_here": false,
+    "porter_here": false
+  },
+  "states": {
+    "minute": {
+      "range": [
+        0,
+        1439
+      ],
+      "means": "минуты от полуночи: часовая и минутная стрелки (20:44 — 1244)"
+    },
+    "second": {
+      "range": [
+        0,
+        60
+      ],
+      "smooth": true,
+      "means": "секунды; скрипт сцены ведёт их сам, плавно: маятник ходит по ним, секундная стрелка шагает на целых"
+    },
+    "fire": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "огонь в камине: 0 — угли, 1 — полное пламя; столько же его света в зале"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "двустворчатая дверь: 0 — закрыта (свет холла в щели), 1 — распахнута в зал; свет холла входит в зал"
+    },
+    "crowd_outside": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "толпа на Пэлл-Мэлл за окнами: 0 — никого, 1 — плотная толпа с фонарями"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "час за окнами и свет в зале: 0 — серый день, 0.5 — сумерки, газ зажигают, 1 — ночь"
+    },
+    "leaf_l": {
+      "range": [
+        180,
+        280
+      ],
+      "smooth": true,
+      "means": "поворот левой створки, градусы: 180 — закрыта, 280 — распахнута в зал; ведёт script.js по door, игре трогать не нужно"
+    },
+    "leaf_r": {
+      "range": [
+        80,
+        180
+      ],
+      "smooth": true,
+      "means": "поворот правой створки, градусы: 180 — закрыта, 80 — распахнута в зал; ведёт script.js по door, игре трогать не нужно"
+    },
+    "beat": {
+      "type": "string",
+      "means": "кусок фильма: countdown, whist, wager, leave, wait, door, no_door, friday, friday_in (null — ни один: вне игры сцена играет свой показ)"
+    },
+    "gentlemen": {
+      "range": [
+        0,
+        5
+      ],
+      "means": "сколько джентльменов в зале: Стюарт, Фланаган, Фаллентин, Салливан, Ральф — по порядку"
+    },
+    "fogg_present": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Фогг в зале"
+    },
+    "fogg_seated": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Фогг сидит в своём кресле у огня с газетой (пятница)"
+    },
+    "with_aouda": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Ауда входит за Фоггом (кусок door)"
+    },
+    "with_pp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Паспарту входит за Фоггом (кусок door)"
+    },
+    "fogg_hat": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "цилиндр Фогга на вешалке у двери; 0 — он у Фогга"
+    },
+    "cards_down": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "карты Фогга положены на сукно рубашкой вверх (пари)"
+    },
+    "chair_back": {
+      "range": [
+        0,
+        0.4
+      ],
+      "smooth": true,
+      "means": "на сколько метров отодвинут стул Фогга за столом (он встаёт)"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Туман над Пэлл-Мэлл",
+      "sky": true,
+      "uniforms": {
+        "high_r": 0.034,
+        "high_g": 0.058,
+        "high_b": 0.1,
+        "low_r": 0.21,
+        "low_g": 0.25,
+        "low_b": 0.3
+      }
+    },
+    {
+      "id": "pavement",
+      "name": "Мостовая Пэлл-Мэлл",
+      "plane": true,
+      "across": -10,
+      "distance": 30,
+      "elevation": -0.5,
+      "width": 60,
+      "depth": 24,
+      "lit": true
+    },
+    {
+      "id": "street",
+      "name": "Дома напротив",
+      "across": 0,
+      "distance": 40,
+      "height": 24,
+      "box": [
+        -52,
+        -24,
+        -4,
+        1
+      ],
+      "uniforms": {
+        "high_r": 0.034,
+        "high_g": 0.058,
+        "high_b": 0.1,
+        "low_r": 0.21,
+        "low_g": 0.25,
+        "low_b": 0.3,
+        "gas": 1
+      }
+    },
+    {
+      "id": "crowd",
+      "name": "Толпа на улице",
+      "across": 0,
+      "distance": 27,
+      "height": 3,
+      "box": [
+        -36,
+        -4.5,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "lamps",
+      "name": "Газовые фонари",
+      "across": 0,
+      "distance": 23,
+      "height": 5,
+      "box": [
+        -24.5,
+        -4.5,
+        -6.5,
+        0.1
+      ],
+      "elevation": -0.5
+    },
+    {
+      "id": "mist",
+      "name": "Туман",
+      "across": 0,
+      "distance": 20,
+      "height": 12,
+      "box": [
+        -56,
+        -16,
+        18,
+        3.5
+      ],
+      "glows": true,
+      "uniforms": {
+        "fog_r": 0.22,
+        "fog_g": 0.25,
+        "fog_b": 0.29
+      }
+    },
+    {
+      "id": "floor",
+      "name": "Пол",
+      "plane": true,
+      "across": 0,
+      "distance": 10,
+      "elevation": 0,
+      "width": 52,
+      "depth": 16,
+      "reflect": {
+        "strength": 0.5,
+        "fade": 5,
+        "blur": 0.05,
+        "rough": 0.15
+      },
+      "lit": true
+    },
+    {
+      "id": "hall",
+      "name": "Холл за дверью",
+      "across": 0,
+      "distance": 18.6,
+      "height": 5,
+      "glows": true,
+      "box": [
+        -1.8,
+        -5.2,
+        1.8,
+        0
+      ]
+    },
+    {
+      "id": "glazing",
+      "name": "Переплёты окон",
+      "across": 0,
+      "distance": 18.7,
+      "height": 10.4,
+      "box": [
+        -25.2,
+        -10.5,
+        -3.3,
+        -0.5
+      ]
+    },
+    {
+      "id": "jamb1",
+      "name": "Откос окна 1",
+      "across": -7.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill1",
+      "name": "Подоконник окна 1",
+      "plane": true,
+      "across": -5.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit1",
+      "name": "Верх проёма окна 1",
+      "plane": true,
+      "across": -5.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "jamb2",
+      "name": "Откос окна 2",
+      "across": -13.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill2",
+      "name": "Подоконник окна 2",
+      "plane": true,
+      "across": -11.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit2",
+      "name": "Верх проёма окна 2",
+      "plane": true,
+      "across": -11.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "jamb3",
+      "name": "Откос окна 3",
+      "across": -19.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill3",
+      "name": "Подоконник окна 3",
+      "plane": true,
+      "across": -17.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit3",
+      "name": "Верх проёма окна 3",
+      "plane": true,
+      "across": -17.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "jamb4",
+      "name": "Откос окна 4",
+      "across": -25.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill4",
+      "name": "Подоконник окна 4",
+      "plane": true,
+      "across": -23.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit4",
+      "name": "Верх проёма окна 4",
+      "plane": true,
+      "across": -23.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "wall",
+      "name": "Стена с окнами",
+      "across": 0,
+      "distance": 18,
+      "height": 18,
+      "box": [
+        -34.2,
+        -16.2,
+        18.2,
+        0.15
+      ]
+    },
+    {
+      "id": "door",
+      "name": "Дверь",
+      "across": -1.3,
+      "distance": 18,
+      "height": 5,
+      "box": [
+        0,
+        -4.9,
+        1.3,
+        0.1
+      ],
+      "facing": 180,
+      "place": {
+        "facing": "leaf_l"
+      },
+      "inFront": [
+        "wall"
+      ]
+    },
+    {
+      "id": "door_r",
+      "name": "Дверь, правая створка",
+      "across": 1.3,
+      "distance": 18,
+      "height": 5,
+      "box": [
+        -1.3,
+        -4.9,
+        0,
+        0.1
+      ],
+      "facing": 180,
+      "place": {
+        "facing": "leaf_r"
+      },
+      "inFront": [
+        "wall"
+      ]
+    },
+    {
+      "id": "hatstand",
+      "name": "Вешалка у двери",
+      "across": -2.6,
+      "distance": 17.0,
+      "height": 2.2,
+      "box": [
+        -0.3,
+        -2.25,
+        0.4,
+        0.02
+      ]
+    },
+    {
+      "id": "papers",
+      "name": "Газеты на подставке",
+      "across": -5.0,
+      "distance": 13,
+      "height": 1.7,
+      "box": [
+        -0.8,
+        -1.8,
+        0.8,
+        0
+      ]
+    },
+    {
+      "id": "armchair_far",
+      "name": "Кресло у окна",
+      "across": -8.4,
+      "distance": 12,
+      "height": 1.1,
+      "box": [
+        -0.9,
+        -1.2,
+        0.9,
+        0
+      ]
+    },
+    {
+      "id": "partition",
+      "name": "Стена с часами",
+      "across": 0,
+      "distance": 8,
+      "height": 12,
+      "box": [
+        0.8,
+        -12.1,
+        17.1,
+        0.05
+      ]
+    },
+    {
+      "id": "partition_end",
+      "name": "Торец стены с часами",
+      "across": 0.95,
+      "distance": 8,
+      "height": 12,
+      "facing": 270,
+      "box": [
+        -0.45,
+        -12,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "hearth",
+      "name": "Очаг камина",
+      "across": 4.2,
+      "distance": 8.55,
+      "height": 1.2,
+      "box": [
+        -1.0,
+        -1.2,
+        1.0,
+        0.02
+      ],
+      "uniforms": {
+        "fire": 0.75
+      },
+      "behind": [
+        "partition"
+      ]
+    },
+    {
+      "id": "hearth_floor",
+      "name": "Под очага",
+      "plane": true,
+      "across": 4.2,
+      "distance": 8.275,
+      "elevation": 0.005,
+      "width": 1.25,
+      "depth": 0.55,
+      "lit": true,
+      "behind": [
+        "partition"
+      ]
+    },
+    {
+      "id": "fireplace",
+      "name": "Камин",
+      "across": 4.2,
+      "distance": 8,
+      "height": 1.5,
+      "box": [
+        -1.2,
+        -1.4,
+        1.2,
+        0
+      ],
+      "inFront": [
+        "partition"
+      ]
+    },
+    {
+      "id": "flames",
+      "name": "Огонь в камине",
+      "across": 4.2,
+      "distance": 8.3,
+      "elevation": 0.03,
+      "particles": {
+        "kind": "fire",
+        "amount": "fire",
+        "source": [
+          0.75,
+          0.2,
+          0.02
+        ],
+        "size": [
+          0.2,
+          0.05
+        ],
+        "rate": 90,
+        "life": [
+          0.3,
+          0.7
+        ]
+      }
+    },
+    {
+      "id": "embers",
+      "name": "Искры в камине",
+      "across": 4.2,
+      "distance": 8.3,
+      "elevation": 0.05,
+      "particles": {
+        "kind": "embers",
+        "source": [
+          0.8,
+          0.2,
+          0.02
+        ],
+        "rate": 3
+      }
+    },
+    {
+      "id": "clock",
+      "name": "Часы",
+      "across": 2.35,
+      "distance": 8,
+      "height": 5.6,
+      "box": [
+        -0.7,
+        -5.2,
+        0.7,
+        0
+      ],
+      "inFront": [
+        "partition"
+      ],
+      "shadow": {
+        "onto": [
+          "partition"
+        ],
+        "strength": 0.5,
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "felt",
+      "name": "Зелёное сукно",
+      "plane": true,
+      "across": -1.6,
+      "distance": 7,
+      "elevation": 0.76,
+      "width": 1.1,
+      "depth": 1.1,
+      "lit": true,
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.6,
+        "soft": 0.25
+      }
+    },
+    {
+      "id": "table",
+      "name": "Ломберный стол",
+      "across": -1.6,
+      "distance": 6.55,
+      "height": 1,
+      "box": [
+        -1.3,
+        -1.1,
+        1.8,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.6,
+        "soft": 0.25
+      }
+    },
+    {
+      "id": "fogg_chair",
+      "name": "Стул Фогга",
+      "on": "table",
+      "across": 0,
+      "distance": 0,
+      "place": {
+        "distance": "chair_back"
+      },
+      "height": 1,
+      "box": [
+        -0.4,
+        -1.1,
+        0.4,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.6,
+        "soft": 0.25
+      }
+    },
+    {
+      "id": "lamp",
+      "name": "Лампа над столом",
+      "across": -1.6,
+      "distance": 7,
+      "elevation": 2.3,
+      "height": 0.3,
+      "box": [
+        -0.8,
+        -16,
+        0.8,
+        1.6
+      ],
+      "glows": true
+    },
+    {
+      "id": "dust",
+      "name": "Пыль в свете лампы",
+      "particles": {
+        "kind": "dust",
+        "at": [
+          -1.6,
+          7.0,
+          1.5
+        ],
+        "source": [
+          1.4,
+          1.4,
+          1.5
+        ],
+        "rate": 8
+      }
+    },
+    {
+      "id": "armchair",
+      "name": "Кресло у камина",
+      "across": 1.6,
+      "distance": 5.2,
+      "height": 1,
+      "box": [
+        -0.7,
+        -1.1,
+        0.9,
+        0
+      ],
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.55,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "fogg",
+      "name": "Филеас Фогг",
+      "person": {
+        "cast": "cast",
+        "who": "fogg",
+        "does": "cards",
+        "turn": 180
+      },
+      "across": -1.6,
+      "distance": 7.79,
+      "place": {
+        "across": "fogg_a",
+        "distance": "fogg_d"
+      }
+    },
+    {
+      "id": "flanagan",
+      "name": "Томас Фланаган",
+      "person": {
+        "cast": "cast",
+        "who": "flanagan",
+        "does": "cards",
+        "turn": 0
+      },
+      "across": -1.6,
+      "distance": 6.21,
+      "place": {
+        "across": "flanagan_a",
+        "distance": "flanagan_d"
+      }
+    },
+    {
+      "id": "fallentin",
+      "name": "Сэмюэл Фаллентин",
+      "person": {
+        "cast": "cast",
+        "who": "fallentin",
+        "does": "cards",
+        "turn": 90
+      },
+      "across": -2.39,
+      "distance": 7.0,
+      "place": {
+        "across": "fallentin_a",
+        "distance": "fallentin_d"
+      }
+    },
+    {
+      "id": "sullivan",
+      "name": "Джон Салливан",
+      "person": {
+        "cast": "cast",
+        "who": "sullivan",
+        "does": "cards",
+        "turn": 270
+      },
+      "across": -0.81,
+      "distance": 7.0,
+      "place": {
+        "across": "sullivan_a",
+        "distance": "sullivan_d"
+      }
+    },
+    {
+      "id": "stuart",
+      "name": "Эндрю Стюарт",
+      "person": {
+        "cast": "cast",
+        "who": "stuart",
+        "does": "paper_seated",
+        "turn": 180
+      },
+      "across": -0.15,
+      "distance": 8.5,
+      "place": {
+        "across": "stuart_a",
+        "distance": "stuart_d"
+      }
+    },
+    {
+      "id": "ralph",
+      "name": "Готье Ральф",
+      "person": {
+        "cast": "cast",
+        "who": "ralph",
+        "does": "hands_behind",
+        "turn": 250
+      },
+      "across": 3.3,
+      "distance": 6.9,
+      "place": {
+        "across": "ralph_a",
+        "distance": "ralph_d"
+      }
+    },
+    {
+      "id": "passepartout",
+      "name": "Паспарту",
+      "person": {
+        "cast": "cast",
+        "who": "passepartout",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": 0.4,
+      "distance": 19.5,
+      "place": {
+        "across": "passepartout_a",
+        "distance": "passepartout_d"
+      }
+    },
+    {
+      "id": "aouda",
+      "name": "Ауда",
+      "person": {
+        "cast": "cast",
+        "who": "aouda",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": -0.4,
+      "distance": 19.5,
+      "place": {
+        "across": "aouda_a",
+        "distance": "aouda_d"
+      }
+    },
+    {
+      "id": "porter",
+      "name": "Швейцар",
+      "person": {
+        "cast": "cast",
+        "who": "porter",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": 0.6,
+      "distance": 16.5,
+      "place": {
+        "across": "porter_a",
+        "distance": "porter_d"
+      }
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Sparse solo piano in a large quiet room, slow single notes falling like the tick of a clock, warm hall reverb, late evening, restrained and precise",
+        "weight": 1.2
+      },
+      {
+        "text": "Pizzicato strings ticking in strict tempo like clockwork, light chamber orchestra, curious, poised, understated anticipation",
+        "weight": 1.0
+      },
+      {
+        "text": "Soft sustained low strings and a distant fog-like drone, minimalist ambient, deep space and stillness",
+        "weight": 0.6
+      },
+      {
+        "text": "Celesta and harp in delicate interlocking arpeggios, music-box precision, quiet wonder",
+        "weight": 0.4
+      },
+      {
+        "text": "Minimalist repeating piano patterns in the manner of modern indie game scores, cool and luminous, slowly evolving",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long bowed notes, melancholic and dignified, gaslit London night",
+        "weight": 0
+      },
+      {
+        "text": "Light orchestral adventure theme, brisk strings and woodwinds in the rhythm of a steam train, 1870s optimism",
+        "weight": 0
+      },
+      {
+        "text": "Muted marimba and woodblock ticking against a metronome, playful clockwork, dry and close",
+        "weight": 0
+      },
+      {
+        "text": "String quartet playing a slow aristocratic waltz in a gentlemen's club, muted, far away behind closed doors",
+        "weight": 0
+      },
+      {
+        "text": "Cold ambient synth pads and soft noise like fog against glass, modern atmospheric game soundtrack",
+        "weight": 0
+      },
+      {
+        "text": "Distant brass chorale, solemn and warm, heard through fog across a city square",
+        "weight": 0
+      },
+      {
+        "text": "Harpsichord and bassoon in crisp baroque counterpoint, exact, a little ironic",
+        "weight": 0
+      },
+      {
+        "text": "Low timpani pulse like a slow heartbeat under thin high strings, tension of a countdown",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica and bowed vibraphone shimmering, ethereal, suspended time",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet melody over soft pizzicato bass, gentle wit, Victorian parlour",
+        "weight": 0
+      },
+      {
+        "text": "Warm crackling-fire mood: felt piano, soft upright bass, slow and intimate",
+        "weight": 0
+      },
+      {
+        "text": "Full orchestra swelling to a bright triumphant arrival, horns and strings, the door flung open",
+        "weight": 0
+      },
+      {
+        "text": "Solo music box slowing down, a mechanism winding to a stop, fragile",
+        "weight": 0
+      },
+      {
+        "text": "Accordion and strings, faint street music from outside, a waiting crowd in the fog",
+        "weight": 0
+      },
+      {
+        "text": "Ostinato strings in five, restless, train wheels and ticking clocks merging into one rhythm",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.3,
+    "brightness": 0.35
+  }
 }

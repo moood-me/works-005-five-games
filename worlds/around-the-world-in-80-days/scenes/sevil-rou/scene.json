@@ -1,0 +1,1594 @@
+{
+  "engine": 2,
+  "title": "Сэвил-Роу",
+  "caption": "Лондон, ночь, туман. Дом номер семь.",
+  "horizon": 0.7,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      18,
+      56
+    ]
+  },
+  "modules": [
+    "svet",
+    "cast",
+    "beats"
+  ],
+  "light": {
+    "vignette": 0.5,
+    "grain": 0.1,
+    "ambient": 0.85,
+    "ambientColor": "#d2d6d8",
+    "haze": 0.5,
+    "hazeColor": "#b4b9ba",
+    "hazeGlow": 0.3,
+    "inside": 0.45,
+    "bounce": 0.45,
+    "wind": [
+      1,
+      0.2,
+      0.2
+    ],
+    "looks": {
+      "night": {
+        "ambient": 0.42,
+        "ambientColor": "#5a6c9c",
+        "saturation": 0.8,
+        "hazeColor": "#2c3442",
+        "inside": 1
+      },
+      "fog": {
+        "haze": 0.85,
+        "hazeGlow": 1.4
+      },
+      "sunday": {
+        "ambient": 0.65,
+        "ambientColor": "#d8dce0",
+        "haze": 0.55,
+        "hazeColor": "#d6d2c8",
+        "tint": "#ffd9a0",
+        "tintStrength": 0.05,
+        "shafts": 0.35
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "hall",
+      "of": "win_hall#lamp",
+      "on": "win_hall",
+      "reach": 9,
+      "strength": 1.6
+    },
+    {
+      "id": "study",
+      "of": "win_study#lamp",
+      "on": "win_study",
+      "reach": 10,
+      "strength": 1.6
+    },
+    {
+      "id": "bedroom",
+      "of": "win_bedroom#lamp",
+      "on": "win_bedroom",
+      "reach": 8,
+      "strength": 1.6
+    },
+    {
+      "id": "dressing",
+      "of": "win_dressing#lamp",
+      "on": "win_dressing",
+      "reach": 8,
+      "strength": 1.6
+    },
+    {
+      "id": "gas",
+      "of": "attic#gas",
+      "on": "gas",
+      "reach": 6,
+      "flicker": 0.15,
+      "strength": 1.6
+    },
+    {
+      "id": "sun",
+      "from": [
+        125,
+        18
+      ],
+      "color": "#ffe2b4",
+      "strength": 0.65,
+      "on": "sunday"
+    },
+    {
+      "id": "lamp_door",
+      "of": "lamps#door",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_l1",
+      "of": "lamps#l1",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_l2",
+      "of": "lamps#l2",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_l3",
+      "of": "lamps#l3",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_l4",
+      "of": "lamps#l4",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_l5",
+      "of": "lamps#l5",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_l6",
+      "of": "lamps#l6",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_s1",
+      "of": "lamps#s1",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_s2",
+      "of": "lamps#s2",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_s3",
+      "of": "lamps#s3",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_s4",
+      "of": "lamps#s4",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_s5",
+      "of": "lamps#s5",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_s6",
+      "of": "lamps#s6",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_n1",
+      "of": "near_lamps#n1",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_n2",
+      "of": "near_lamps#n2",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "lamp_n3",
+      "of": "near_lamps#n3",
+      "reach": 10,
+      "glow": 0.9,
+      "strength": 1.5
+    },
+    {
+      "id": "club_hall",
+      "of": "club_rooms#hall",
+      "reach": 12
+    },
+    {
+      "id": "club_saloon",
+      "of": "club_rooms#saloon",
+      "reach": 10
+    },
+    {
+      "id": "cab_lamp",
+      "of": "cab#lamp",
+      "reach": 1.5,
+      "strength": 0.6
+    },
+    {
+      "id": "cab2_lamp",
+      "of": "cab2#lamp",
+      "reach": 1.5,
+      "strength": 0.6
+    }
+  ],
+  "state": {
+    "night": 1,
+    "fog": 1,
+    "sunday": 0,
+    "win_hall": 1,
+    "win_study": 1,
+    "win_bedroom": 0,
+    "win_dressing": 0,
+    "gas": 0,
+    "door": 0,
+    "door_leaf": 180,
+    "bag": 0,
+    "beat": null,
+    "runner": "pp",
+    "with_aouda": 0,
+    "with_pp": 1,
+    "fix_present": 0,
+    "traffic": 0.5,
+    "cab_across": 104,
+    "cab2_across": -96,
+    "walker1_here": false,
+    "walker2_here": false,
+    "walker3_here": false,
+    "walker1_a": -72,
+    "walker2_a": 78,
+    "walker3_a": -72,
+    "walker1_d": 16.2,
+    "walker2_d": 16.9,
+    "walker3_d": 16.5
+  },
+  "states": {
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "час: 0 — серый лондонский день, 0.5 — сумерки, газ зажигают, 1 — ночь"
+    },
+    "fog": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "туман: 0 — воздух чище, 1 — густой лондонский туман"
+    },
+    "sunday": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "воскресное утро: туман реже, бледное солнце за ним (с night 0)"
+    },
+    "win_hall": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет в холле (окно первого этажа): 0 — темно, 1 — горит газ"
+    },
+    "win_study": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет в кабинете (широкое окно над балконом)"
+    },
+    "win_bedroom": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет в спальне (третий этаж, слева)"
+    },
+    "win_dressing": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет в гардеробной (третий этаж, справа)"
+    },
+    "gas": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "газовый рожок в мансарде Паспарту: 0 — выключен, 1 — горит (весь путь)"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "дверь дома: 0 — закрыта, 1 — распахнута в холл"
+    },
+    "door_leaf": {
+      "range": [
+        180,
+        280
+      ],
+      "smooth": true,
+      "means": "поворот створки, градусы; ведёт script.js по door, игре трогать не нужно"
+    },
+    "bag": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "саквояж у двери: 0 — его нет, дальше — набит на столько, 1 — собран и застёгнут"
+    },
+    "beat": {
+      "type": "string",
+      "means": "кусок фильма (модуль beats): dusk, home, news, out, run_out, fix_paper, run_back, to_club, pp_returns; по концу сцена говорит beat:<имя>"
+    },
+    "runner": {
+      "means": "кто бежит (run_out, run_back): pp — Паспарту, fogg — Фогг"
+    },
+    "with_pp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Паспарту с Фоггом"
+    },
+    "with_aouda": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Ауда с Фоггом"
+    },
+    "fix_present": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Фикс под фонарём у двери"
+    },
+    "traffic": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "жизнь улицы: 0 — пусто; больше — чаще проезжают кэбы (в обе стороны) и проходят прохожие по дальнему тротуару"
+    },
+    "cab_across": {
+      "type": "number",
+      "smooth": true,
+      "means": "кэб на дальней полосе (едет вправо, к клубу): метры вдоль улицы; ведёт traffic, кусок to_club"
+    },
+    "cab2_across": {
+      "type": "number",
+      "smooth": true,
+      "means": "кэб на ближней полосе (едет влево): метры вдоль улицы; ведёт traffic"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Туман над крышами",
+      "sky": true,
+      "uniforms": {
+        "high_r": 0.03,
+        "high_g": 0.06,
+        "high_b": 0.1,
+        "low_r": 0.2,
+        "low_g": 0.25,
+        "low_b": 0.3,
+        "sun": 0,
+        "wide": 1.7778
+      }
+    },
+    {
+      "id": "side_far",
+      "name": "Конец переулка",
+      "across": 17.4,
+      "distance": 150,
+      "height": 30,
+      "box": [
+        -30,
+        -30,
+        30,
+        0.1
+      ],
+      "onLand": false
+    },
+    {
+      "id": "side_street",
+      "name": "Переулок",
+      "plane": true,
+      "across": 17.4,
+      "distance": 82.7,
+      "width": 10,
+      "depth": 134.6,
+      "reflect": {
+        "strength": 0.3,
+        "fade": 0,
+        "blur": 0.03,
+        "rough": 0.5
+      },
+      "lit": true
+    },
+    {
+      "id": "side_l",
+      "name": "Переулок, стена слева",
+      "across": 12.4,
+      "distance": 21,
+      "facing": 90,
+      "box": [
+        0,
+        -15,
+        129,
+        0.1
+      ],
+      "onLand": false
+    },
+    {
+      "id": "side_r",
+      "name": "Переулок, стена справа",
+      "across": 22.4,
+      "distance": 21,
+      "facing": 270,
+      "box": [
+        -129,
+        -15,
+        0,
+        0.1
+      ],
+      "onLand": false
+    },
+    {
+      "id": "club_rooms",
+      "name": "Залы клуба",
+      "across": 53.4,
+      "distance": 29.6,
+      "glows": true,
+      "box": [
+        -16,
+        -16,
+        16,
+        0
+      ],
+      "onLand": false,
+      "uniforms": {
+        "gas": 1
+      }
+    },
+    {
+      "id": "club",
+      "name": "Реформ-клуб",
+      "across": 53.4,
+      "distance": 29,
+      "facing": 180,
+      "box": [
+        -16,
+        -18,
+        32,
+        0.1
+      ],
+      "onLand": false
+    },
+    {
+      "id": "club_steps",
+      "name": "Ступени клуба",
+      "plane": true,
+      "across": 53.4,
+      "distance": 28.2,
+      "elevation": 0.62,
+      "width": 9,
+      "depth": 1.866,
+      "tilt": 30.96,
+      "lit": true
+    },
+    {
+      "id": "block_end",
+      "name": "Торец квартала",
+      "across": 37.4,
+      "distance": 21,
+      "facing": 90,
+      "box": [
+        0,
+        -15,
+        8,
+        0.1
+      ],
+      "onLand": false
+    },
+    {
+      "id": "terrace_rooms",
+      "name": "Комнаты соседей",
+      "across": -12,
+      "distance": 23.6,
+      "inside": true,
+      "box": [
+        -50.5,
+        -12,
+        50.5,
+        0
+      ],
+      "onLand": false
+    },
+    {
+      "id": "party_l",
+      "name": "Стена с соседом слева",
+      "across": -3.6,
+      "distance": 0,
+      "facing": 90,
+      "inside": true,
+      "box": [
+        -0.05,
+        -12,
+        2.65,
+        0.05
+      ],
+      "on": "house"
+    },
+    {
+      "id": "party_r",
+      "name": "Стена с соседом справа",
+      "across": 3.6,
+      "distance": 0,
+      "facing": 270,
+      "inside": true,
+      "box": [
+        -2.65,
+        -12,
+        0.05,
+        0.05
+      ],
+      "on": "house"
+    },
+    {
+      "id": "house",
+      "name": "Дом Фогга",
+      "unseen": true,
+      "across": -5,
+      "distance": 21,
+      "onLand": false
+    },
+    {
+      "id": "win_hall",
+      "name": "Окно холла",
+      "on": "house",
+      "distance": 2.6,
+      "facing": 180,
+      "inside": true,
+      "box": [
+        -4.6,
+        -4.3,
+        4.6,
+        -0.84
+      ]
+    },
+    {
+      "id": "win_study",
+      "name": "Окно кабинета",
+      "on": "house",
+      "distance": 2.6,
+      "facing": 180,
+      "inside": true,
+      "box": [
+        -4.6,
+        -7.9,
+        4.6,
+        -4.3
+      ]
+    },
+    {
+      "id": "win_bedroom",
+      "name": "Окно спальни",
+      "on": "house",
+      "distance": 2.6,
+      "facing": 180,
+      "inside": true,
+      "box": [
+        -4.6,
+        -11.3,
+        0,
+        -7.9
+      ]
+    },
+    {
+      "id": "win_dressing",
+      "name": "Окно гардеробной",
+      "on": "house",
+      "distance": 2.6,
+      "facing": 180,
+      "inside": true,
+      "box": [
+        0,
+        -11.3,
+        4.6,
+        -7.9
+      ]
+    },
+    {
+      "id": "partition",
+      "name": "Стена между спальней и гардеробной",
+      "on": "house",
+      "elevation": 7.9,
+      "facing": 90,
+      "inside": true,
+      "box": [
+        -0.05,
+        -3.45,
+        2.65,
+        0.05
+      ]
+    },
+    {
+      "id": "attic",
+      "name": "Окно мансарды",
+      "on": "house",
+      "distance": 2.1,
+      "facing": 180,
+      "inside": true,
+      "box": [
+        -2.4,
+        -13.6,
+        2.4,
+        -11.3
+      ]
+    },
+    {
+      "id": "hall_floor",
+      "name": "Пол холла",
+      "plane": true,
+      "on": "house",
+      "elevation": 0.84,
+      "distance": 1.3,
+      "width": 7.2,
+      "depth": 2.6,
+      "inside": true,
+      "lit": true
+    },
+    {
+      "id": "ceil_study",
+      "name": "Потолок кабинета",
+      "plane": true,
+      "on": "house",
+      "elevation": 7.9,
+      "distance": 1.3,
+      "width": 9.2,
+      "depth": 2.6,
+      "inside": true,
+      "lit": true
+    },
+    {
+      "id": "ceil_bed",
+      "name": "Потолок спальни",
+      "plane": true,
+      "on": "house",
+      "elevation": 11.3,
+      "distance": 1.3,
+      "width": 9.2,
+      "depth": 2.6,
+      "inside": true,
+      "lit": true
+    },
+    {
+      "id": "terrace_glass",
+      "name": "Стёкла соседей",
+      "across": -12,
+      "distance": 21.04,
+      "facing": 180,
+      "glass": {
+        "strength": 0.3,
+        "blur": 0.02
+      },
+      "box": [
+        -50.5,
+        -14,
+        50.5,
+        0
+      ],
+      "onLand": false
+    },
+    {
+      "id": "glass",
+      "name": "Стёкла дома Фогга",
+      "on": "house",
+      "distance": 0.04,
+      "facing": 180,
+      "glass": {
+        "strength": 0.3,
+        "blur": 0.02
+      },
+      "box": [
+        -3.6,
+        -14,
+        3.6,
+        0
+      ]
+    },
+    {
+      "id": "door",
+      "name": "Дверь",
+      "on": "house",
+      "across": -2.375,
+      "distance": 0.1,
+      "elevation": 0.84,
+      "facing": 180,
+      "place": {
+        "facing": "door_leaf"
+      },
+      "box": [
+        0,
+        -2.75,
+        1.15,
+        0.02
+      ]
+    },
+    {
+      "id": "facade",
+      "name": "Фасад дома Фогга",
+      "on": "house",
+      "facing": 180,
+      "box": [
+        -3.6,
+        -12,
+        3.6,
+        0.1
+      ],
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "railings"
+        ],
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "terrace",
+      "name": "Дома Сэвил-Роу",
+      "across": -12,
+      "distance": 21,
+      "facing": 180,
+      "box": [
+        -50.5,
+        -12,
+        50.5,
+        0.1
+      ],
+      "onLand": false
+    },
+    {
+      "id": "chimneys",
+      "name": "Трубы",
+      "across": -12,
+      "distance": 21.95,
+      "facing": 180,
+      "box": [
+        -50.5,
+        -16.2,
+        50.5,
+        -13.5
+      ],
+      "onLand": false
+    },
+    {
+      "id": "roof",
+      "name": "Мансарды",
+      "plane": true,
+      "across": -12,
+      "distance": 21.625,
+      "elevation": 12.8,
+      "width": 101,
+      "depth": 1.914,
+      "tilt": 70.14
+    },
+    {
+      "id": "dormers",
+      "name": "Слуховые окна",
+      "across": -12,
+      "distance": 21.35,
+      "elevation": 11.9,
+      "facing": 180,
+      "box": [
+        -50.5,
+        -1.7,
+        50.5,
+        0.05
+      ],
+      "onLand": false
+    },
+    {
+      "id": "dormer_tops",
+      "name": "Крыши слуховых окон",
+      "plane": true,
+      "across": -12,
+      "distance": 21.62,
+      "elevation": 13.5,
+      "width": 101,
+      "depth": 0.6
+    },
+    {
+      "id": "dormer_l",
+      "name": "Слуховое окно, бок слева",
+      "across": -5.8,
+      "distance": 21.35,
+      "elevation": 11.9,
+      "facing": 270,
+      "box": [
+        -0.6,
+        -1.7,
+        0.05,
+        0.05
+      ],
+      "onLand": false
+    },
+    {
+      "id": "dormer_r",
+      "name": "Слуховое окно, бок справа",
+      "across": -4.2,
+      "distance": 21.35,
+      "elevation": 11.9,
+      "facing": 90,
+      "box": [
+        -0.05,
+        -1.7,
+        0.6,
+        0.05
+      ],
+      "onLand": false
+    },
+    {
+      "id": "cornice",
+      "name": "Карниз",
+      "plane": true,
+      "across": -12,
+      "distance": 20.8,
+      "elevation": 11.3,
+      "width": 101,
+      "depth": 0.4,
+      "shadow": {
+        "onto": [
+          "facade",
+          "terrace"
+        ],
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "balcony",
+      "name": "Балкон",
+      "plane": true,
+      "on": "house",
+      "elevation": 4.3,
+      "distance": -0.3,
+      "width": 2.4,
+      "depth": 0.6,
+      "lit": true,
+      "shadow": {
+        "onto": [
+          "facade"
+        ],
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "balcony_rail",
+      "name": "Решётка балкона",
+      "on": "house",
+      "distance": -0.58,
+      "elevation": 4.3,
+      "facing": 180,
+      "box": [
+        -1.2,
+        -1.0,
+        1.2,
+        0.02
+      ],
+      "shadow": {
+        "onto": [
+          "facade"
+        ],
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "steps",
+      "name": "Ступени",
+      "plane": true,
+      "across": -12,
+      "distance": 20.4,
+      "elevation": 0.49,
+      "width": 101,
+      "depth": 1.389,
+      "tilt": 30.26,
+      "lit": true
+    },
+    {
+      "id": "cheeks_l",
+      "name": "Ступени, бок слева",
+      "across": -7.75,
+      "distance": 20.4,
+      "facing": 270,
+      "box": [
+        -0.65,
+        -1.15,
+        0.65,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "steps",
+          "pavement"
+        ],
+        "soft": 0.15
+      },
+      "onLand": false
+    },
+    {
+      "id": "cheeks_r",
+      "name": "Ступени, бок справа",
+      "across": -5.85,
+      "distance": 20.4,
+      "facing": 90,
+      "box": [
+        -0.65,
+        -1.15,
+        0.65,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "steps",
+          "pavement"
+        ],
+        "soft": 0.15
+      },
+      "onLand": false
+    },
+    {
+      "id": "bag",
+      "name": "Саквояж",
+      "on": "house",
+      "across": -1.32,
+      "distance": -0.25,
+      "elevation": 0.84,
+      "box": [
+        -0.35,
+        -0.5,
+        0.35,
+        0.02
+      ]
+    },
+    {
+      "id": "fogg",
+      "name": "Филеас Фогг",
+      "person": {
+        "cast": "cast",
+        "who": "fogg",
+        "turn": 270
+      },
+      "across": 4,
+      "distance": 18.2,
+      "place": {
+        "across": "fogg_a",
+        "distance": "fogg_d"
+      },
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "passepartout",
+      "name": "Паспарту",
+      "person": {
+        "cast": "cast",
+        "who": "passepartout",
+        "turn": 180
+      },
+      "across": -6.8,
+      "distance": 22.4,
+      "place": {
+        "across": "passepartout_a",
+        "distance": "passepartout_d"
+      },
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "fix",
+      "name": "Фикс",
+      "person": {
+        "cast": "cast",
+        "who": "fix",
+        "turn": 180
+      },
+      "across": -8.0,
+      "distance": 19.0,
+      "place": {
+        "across": "fix_a",
+        "distance": "fix_d"
+      },
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "walker1",
+      "name": "Прохожий в цилиндре",
+      "person": {
+        "cast": "cast",
+        "look": {
+          "kind": "shapes",
+          "style": "vokrug",
+          "who": "man",
+          "garment": "frockcoat",
+          "hair": "kempt",
+          "hat": "tophat",
+          "body": {
+            "height": 1.0,
+            "thick": 1.05
+          },
+          "colors": {
+            "skin": "#d4ac90",
+            "hair": "#4a3a2c",
+            "top": "#e2ddd2",
+            "garment": "#2a2b2f",
+            "bottom": "#2f2f33",
+            "shoes": "#151416",
+            "hat": "#18181b"
+          }
+        },
+        "turn": 90
+      },
+      "across": -72,
+      "distance": 16.2,
+      "place": {
+        "across": "walker1_a",
+        "distance": "walker1_d"
+      },
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "walker2",
+      "name": "Прохожая",
+      "person": {
+        "cast": "cast",
+        "look": {
+          "kind": "shapes",
+          "style": "vokrug",
+          "who": "woman",
+          "garment": "dress",
+          "hair": "bun",
+          "hat": "hat",
+          "body": {
+            "height": 0.93,
+            "thick": 0.9
+          },
+          "colors": {
+            "skin": "#dcb49a",
+            "hair": "#3a2a20",
+            "top": "#4a3f52",
+            "garment": "#4a3f52",
+            "shoes": "#1d1a1c"
+          }
+        },
+        "turn": 90
+      },
+      "across": 78,
+      "distance": 16.9,
+      "place": {
+        "across": "walker2_a",
+        "distance": "walker2_d"
+      },
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "walker3",
+      "name": "Прохожий в котелке",
+      "person": {
+        "cast": "cast",
+        "look": {
+          "kind": "shapes",
+          "style": "vokrug",
+          "who": "man",
+          "garment": "coat",
+          "hair": "short",
+          "hat": "bowler",
+          "body": {
+            "height": 0.97,
+            "thick": 1.0
+          },
+          "colors": {
+            "skin": "#d0a486",
+            "hair": "#2c241e",
+            "garment": "#4a4438",
+            "bottom": "#34302a",
+            "shoes": "#1a1816",
+            "hat": "#1c1b1a"
+          }
+        },
+        "turn": 90
+      },
+      "across": -72,
+      "distance": 16.5,
+      "place": {
+        "across": "walker3_a",
+        "distance": "walker3_d"
+      },
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "cab",
+      "name": "Кэб",
+      "across": 104,
+      "distance": 12.4,
+      "box": [
+        -3.2,
+        -3.5,
+        3.2,
+        0.1
+      ],
+      "place": {
+        "across": "cab_across"
+      },
+      "shadow": {
+        "onto": [
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "cab2",
+      "name": "Встречный кэб",
+      "across": -96,
+      "distance": 5.8,
+      "box": [
+        -3.2,
+        -3.5,
+        3.2,
+        0.1
+      ],
+      "place": {
+        "across": "cab2_across"
+      },
+      "shadow": {
+        "onto": [
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "railings",
+      "name": "Ограда",
+      "across": -12,
+      "distance": 19.8,
+      "facing": 180,
+      "box": [
+        -50.5,
+        -1.2,
+        50.5,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps"
+        ],
+        "soft": 0.15
+      },
+      "onLand": false
+    },
+    {
+      "id": "pavement",
+      "name": "Тротуар",
+      "plane": true,
+      "across": 5.0,
+      "distance": 22.2,
+      "elevation": 0.14,
+      "width": 210,
+      "depth": 13.6,
+      "reflect": {
+        "strength": 0.25,
+        "fade": 3,
+        "blur": 0.05,
+        "rough": 0.6
+      },
+      "lit": true
+    },
+    {
+      "id": "kerb",
+      "name": "Бордюр",
+      "across": 5.0,
+      "distance": 15.4,
+      "facing": 180,
+      "box": [
+        -105.0,
+        -0.14,
+        105.0,
+        0
+      ],
+      "onLand": false
+    },
+    {
+      "id": "road",
+      "name": "Мостовая",
+      "plane": true,
+      "across": 5.0,
+      "distance": 9,
+      "width": 210,
+      "depth": 12.8,
+      "reflect": {
+        "strength": 0.8,
+        "fade": 0,
+        "blur": 0.02,
+        "rough": 0.4
+      },
+      "lit": true
+    },
+    {
+      "id": "lamps",
+      "name": "Газовые фонари",
+      "across": 0,
+      "distance": 15.9,
+      "box": [
+        -5.6,
+        -9.6,
+        5.6,
+        0.1
+      ],
+      "flicker": 0.04,
+      "shadow": {
+        "onto": [
+          "pavement",
+          "facade",
+          "terrace"
+        ],
+        "soft": 0.2
+      },
+      "onLand": false
+    },
+    {
+      "id": "mist",
+      "name": "Туман",
+      "particles": {
+        "kind": "smoke",
+        "at": [
+          5,
+          18,
+          1.6
+        ],
+        "source": [
+          170,
+          24,
+          3
+        ],
+        "amount": "fog",
+        "rate": 4.5,
+        "life": [
+          30,
+          45
+        ],
+        "speed": [
+          0.05,
+          0.25
+        ],
+        "direction": [
+          1,
+          0,
+          0
+        ],
+        "spread": 180,
+        "gravity": 0,
+        "drag": 0.3,
+        "wind": 0.3,
+        "gust": 0.2,
+        "turbulence": 0.8,
+        "swirl": 6,
+        "size": [
+          6,
+          11
+        ],
+        "spin": 2,
+        "color": "#d0d4d8",
+        "opacity": 0.32,
+        "fade": [
+          0.3,
+          0.4
+        ],
+        "sheer": 0.8,
+        "soft": 3,
+        "shadow": 0
+      }
+    },
+    {
+      "id": "droplets",
+      "name": "Морось в свете фонарей",
+      "particles": {
+        "kind": "dust",
+        "at": [
+          5,
+          15,
+          3
+        ],
+        "source": [
+          170,
+          26,
+          6
+        ],
+        "amount": "fog",
+        "rate": 380,
+        "life": [
+          8,
+          14
+        ],
+        "size": [
+          0.008,
+          0.008
+        ],
+        "color": "#f2ead8",
+        "opacity": 0.5,
+        "wind": 0.3
+      }
+    },
+    {
+      "id": "smoke1",
+      "name": "Дым из трубы",
+      "particles": {
+        "kind": "smoke",
+        "at": "chimneys#s5",
+        "rate": 3,
+        "life": [
+          8,
+          12
+        ],
+        "size": [
+          0.3,
+          2.6
+        ],
+        "color": "#7c7e82",
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "smoke2",
+      "name": "Дым из трубы",
+      "particles": {
+        "kind": "smoke",
+        "at": "chimneys#s7",
+        "rate": 3,
+        "life": [
+          8,
+          12
+        ],
+        "size": [
+          0.3,
+          2.6
+        ],
+        "color": "#7c7e82",
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "smoke3",
+      "name": "Дым из трубы",
+      "particles": {
+        "kind": "smoke",
+        "at": "chimneys#s9",
+        "rate": 3,
+        "life": [
+          8,
+          12
+        ],
+        "size": [
+          0.3,
+          2.6
+        ],
+        "color": "#7c7e82",
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "smoke4",
+      "name": "Дым из трубы",
+      "particles": {
+        "kind": "smoke",
+        "at": "chimneys#s12",
+        "rate": 3,
+        "life": [
+          8,
+          12
+        ],
+        "size": [
+          0.3,
+          2.6
+        ],
+        "color": "#7c7e82",
+        "opacity": 0.3
+      }
+    },
+    {
+      "id": "pavement_near",
+      "name": "Тротуар у ног",
+      "plane": true,
+      "across": 5.0,
+      "distance": 0.8,
+      "elevation": 0.14,
+      "width": 210,
+      "depth": 3.6,
+      "lit": true
+    },
+    {
+      "id": "near_lamps",
+      "name": "Фонари у ног",
+      "across": 0,
+      "distance": 2.35,
+      "box": [
+        -5.6,
+        -9.6,
+        5.6,
+        0.1
+      ],
+      "flicker": 0.04,
+      "onLand": false
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Sparse felt piano in a foggy London street at night, single notes like a clock's tick, cold and exact, gaslight warmth underneath",
+        "weight": 1.2
+      },
+      {
+        "text": "Pizzicato strings ticking in strict tempo, light chamber orchestra, a household run to the minute",
+        "weight": 0.9
+      },
+      {
+        "text": "Soft low strings and a distant fog drone, minimalist ambient, empty wet street, modern indie game score",
+        "weight": 0.6
+      },
+      {
+        "text": "Muted celesta over a slow string pad, lit windows in the dark, restrained and tender",
+        "weight": 0.4
+      },
+      {
+        "text": "Brisk light orchestra, woodwinds and strings in a hurry, a valet packing a bag in ten minutes, comic and precise",
+        "weight": 0
+      },
+      {
+        "text": "Clockwork marimba and woodblock against a metronome, dry and close",
+        "weight": 0
+      },
+      {
+        "text": "Hansom cab through fog: trotting rhythm on low strings and harp, urgent but elegant",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long notes, a gas jet burning in an attic all the way round the world",
+        "weight": 0
+      },
+      {
+        "text": "Church bells far off in Sunday morning fog, soft brass chorale, pale light",
+        "weight": 0
+      },
+      {
+        "text": "Warm string quartet, slow, a proposal in a drawing room, two people by a window",
+        "weight": 0
+      },
+      {
+        "text": "Full orchestra rising, a door flung open, running out into the fog without a hat",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet and bassoon in a sly little march, a detective hesitating under a lamp with a newspaper",
+        "weight": 0
+      },
+      {
+        "text": "Music box slowing down, a light going out in a window, fragile",
+        "weight": 0
+      },
+      {
+        "text": "Accordion and strings, a French tune hummed on a London street on a Monday morning",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica shimmer and low timpani pulse, time running out, suspense",
+        "weight": 0
+      },
+      {
+        "text": "Victorian parlour waltz far behind closed shutters, muffled",
+        "weight": 0
+      },
+      {
+        "text": "Cold ambient synth pads and soft noise like fog against glass, distant hooves",
+        "weight": 0
+      },
+      {
+        "text": "Light orchestral adventure theme, 1870s optimism, the start of a journey",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.3,
+    "brightness": 0.35
+  }
+}
