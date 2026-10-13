@@ -21,7 +21,7 @@ e.kit.nebo.skyMotion(e, e.lib.SKY);
 ```
 node tools/nebo-sky.js <папка сцены> [id неба]
 ```
-— пишет шейдер мира `elements/sky.glsl` (из `tools/nebo-sky.glsl`) и `uniforms` элемента. Шейдер правится только в
+— пишет шейдер мира `elements/sky.wgsl` (из `tools/nebo-sky.wgsl`) и `uniforms` элемента. Шейдер правится только в
 `tools/`; после правки запустить снова.
 
 `SKY`:

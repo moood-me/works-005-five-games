@@ -22,7 +22,7 @@ const shipOf = s => (s.ship === 'anselm' ? 'anselm' : 'secret');
 const colours = s => K.SHIPS[shipOf(s)];
 
 // ── the sails ──
-// Each is painted once, fully set, white (korabli's cloth); the world's cloth shader (tools/korabl-cloth.glsl) sets it
+// Each is painted once, fully set, white (korabli's cloth); the world's cloth shader (tools/korabl-cloth.wgsl) sets it
 // as far as it is set, makes it scarlet, runs the wind over it and shakes it when it luffs. Heights are metres over the
 // main deck.
 // The square sails: each hangs from its yard (hoisted: `high`) to its foot, `w0` half as wide at the yard, `w1` at the

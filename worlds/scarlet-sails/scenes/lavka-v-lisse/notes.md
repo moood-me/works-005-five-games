@@ -17,7 +17,7 @@
 
 | Элемент | Что |
 | --- | --- |
-| `sky` | небо мира (nebo), солнце слева за стеной окна; шейдер `sky.glsl` пишет `node tools/nebo-sky.js lavka-v-lisse` |
+| `sky` | небо мира (nebo), солнце слева за стеной окна; шейдер `sky.wgsl` пишет `node tools/nebo-sky.js lavka-v-lisse` |
 | `street`, `row_left`, `row_far` | улица (плоскость чуть ниже пола) и низкие лавки напротив — в окне и в двери |
 | `floor`, `ceiling`, `wall_back`, `wall_left`, `wall_right`, `wall_front` | пол, потолок с балками, стены (`wall_back` с дверным проёмом, `wall_left` с окном) |
 | `window`, `opening`, `doorway` | рама окна (точка `window#window`); невидимые проёмы окна и двери — в них входит свет дня |

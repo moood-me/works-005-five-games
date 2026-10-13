@@ -64,6 +64,6 @@ function writeElement(folder, id, ext, text) {
   if (text == null) fs.rmSync(file, { force: true });
   else fs.writeFileSync(file, text.endsWith('\n') ? text : `${text}\n`);
 }
-const glsl = name => fs.readFileSync(path.join(__dirname, `${name}.glsl`), 'utf8');
+const wgsl = name => fs.readFileSync(path.join(__dirname, `${name}.wgsl`), 'utf8');
 
-module.exports = { anim, load, readScene, writeScene, writeElement, glsl };
+module.exports = { anim, load, readScene, writeScene, writeElement, wgsl };
