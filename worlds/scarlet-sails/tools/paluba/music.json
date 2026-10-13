@@ -1,0 +1,83 @@
+{
+ "prompts": [
+  {
+   "text": "Wide ambient strings over a slow sea swell, wind in the rigging, modern indie game score, hopeful",
+   "weight": 1.1
+  },
+  {
+   "text": "Four rising notes on solo violin, then the orchestra taking them up, scarlet sails filling at dawn",
+   "weight": 0
+  },
+  {
+   "text": "Creaking timber and rope textures turned into soft percussion, a ship working under sail",
+   "weight": 0.6
+  },
+  {
+   "text": "Low cello pulse like a hull rising and falling, steady, determined",
+   "weight": 0.5
+  },
+  {
+   "text": "Sea shanty melody slowed down on a lone concertina, night watch, lanterns",
+   "weight": 0
+  },
+  {
+   "text": "Gypsy violin, warm and free, a musician playing on deck at night",
+   "weight": 0
+  },
+  {
+   "text": "Storm: driving low strings and timpani, spray and wind, tense but not dark",
+   "weight": 0
+  },
+  {
+   "text": "Shimmering harp and celesta, sun on the water, calm sailing",
+   "weight": 0
+  },
+  {
+   "text": "Full romantic orchestra swelling, horns and strings, arrival, joy",
+   "weight": 0
+  },
+  {
+   "text": "Minimal piano and soft synth pad, a young man reading a letter in a quiet harbour",
+   "weight": 0
+  },
+  {
+   "text": "Fiddles tuning, a few bars tried and dropped, scissors and silk rustle, night in port",
+   "weight": 0
+  },
+  {
+   "text": "Brass band far away on a steamer's deck, faint and festive",
+   "weight": 0
+  },
+  {
+   "text": "Airy wordless choir on the wind, the open sea at dawn",
+   "weight": 0
+  },
+  {
+   "text": "Rhythmic bowed bass and handclaps, a crew hauling sails up together",
+   "weight": 0
+  },
+  {
+   "text": "Lonely flute over open fifths, the mast top, the horizon all round",
+   "weight": 0
+  },
+  {
+   "text": "Glassy pads and slow guitar harmonics, moonlit deck, two people at the rail",
+   "weight": 0
+  },
+  {
+   "text": "Accordion waltz at night, an old cask opened, wine for paradise",
+   "weight": 0
+  },
+  {
+   "text": "Steady marimba ostinato with strings, holding the course straight",
+   "weight": 0
+  },
+  {
+   "text": "Deep foghorn-like synth swells, grey calm port morning",
+   "weight": 0
+  }
+ ],
+ "bpm": 70,
+ "density": 0.3,
+ "brightness": 0.55
+}

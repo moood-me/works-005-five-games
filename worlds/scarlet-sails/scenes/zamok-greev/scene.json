@@ -1,0 +1,1774 @@
+{
+  "engine": 2,
+  "title": "Замок Греев",
+  "caption": "Всё здесь заведено навсегда.",
+  "horizon": 0.44,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      0.8,
+      0.8,
+      0.6,
+      2.5
+    ],
+    "look": 0.06
+  },
+  "light": {
+    "vignette": 0.38,
+    "grain": 0.1,
+    "haze": 0.14,
+    "hazeColor": "#cdd6de",
+    "hazeGlow": 0.35,
+    "shafts": 1,
+    "ambient": 0.8,
+    "ambientColor": "#f4f4f2",
+    "inside": 0.7,
+    "bounce": 0.5,
+    "looks": {
+      "day": {
+        "ambient": 0.8,
+        "ambientColor": "#f4f4f2",
+        "haze": 0.14,
+        "hazeColor": "#cdd6de"
+      },
+      "dawn": {
+        "ambient": 0.8,
+        "ambientColor": "#e6e8ee",
+        "haze": 0.2,
+        "hazeColor": "#d9dade",
+        "tint": "#f3dccb",
+        "tintStrength": 0.05
+      },
+      "dusk": {
+        "ambient": 0.7,
+        "ambientColor": "#d6cfe0",
+        "haze": 0.18,
+        "hazeColor": "#a7a4b2",
+        "tint": "#e9bba3",
+        "tintStrength": 0.07
+      },
+      "night": {
+        "ambient": 0.78,
+        "ambientColor": "#a9b9dc",
+        "haze": 0.15,
+        "hazeColor": "#1f2b3e",
+        "saturation": 0.85
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "through": [
+        "glass1",
+        "glass2"
+      ],
+      "soft": 0.12,
+      "color": "#ffeedd",
+      "strength": 2.2,
+      "on": "sun_light"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "through": [
+        "glass1",
+        "glass2"
+      ],
+      "soft": 0.15,
+      "color": "#b8c7e6",
+      "strength": 1.5,
+      "on": "moon_light"
+    },
+    {
+      "id": "window_light1",
+      "of": "glass1",
+      "daylight": 0.8
+    },
+    {
+      "id": "window_light2",
+      "of": "glass2",
+      "daylight": 0.8
+    },
+    {
+      "id": "fire_light",
+      "of": "fire",
+      "strength": 3,
+      "reach": 10,
+      "flicker": 0.3,
+      "on": "fire"
+    },
+    {
+      "id": "cross_light",
+      "of": "lamp_cross",
+      "strength": 1.2,
+      "reach": 3,
+      "on": "lamps"
+    },
+    {
+      "id": "ship_light",
+      "of": "lamp_ship",
+      "strength": 1.2,
+      "reach": 2.8,
+      "on": "lamps"
+    },
+    {
+      "id": "reading_light",
+      "of": "floor_lamp",
+      "strength": 1.2,
+      "reach": 4.5,
+      "on": "lamps"
+    },
+    {
+      "id": "mother_light",
+      "across": 5.9,
+      "distance": 5,
+      "elevation": 0.9,
+      "color": "#f4a85c",
+      "strength": 2.6,
+      "reach": 6.5,
+      "on": "door_light"
+    },
+    {
+      "id": "candle_left",
+      "of": "candles#left",
+      "strength": 1.4,
+      "reach": 6,
+      "flicker": 0.15,
+      "on": "candles"
+    },
+    {
+      "id": "candle_right",
+      "of": "candles#right",
+      "strength": 1.4,
+      "reach": 6,
+      "flicker": 0.15,
+      "on": "candles"
+    },
+    {
+      "id": "candle_hand",
+      "at": "lilian#flame",
+      "color": "#ffc983",
+      "strength": 2.4,
+      "reach": 6.5,
+      "glow": 0.25,
+      "flicker": 0.2,
+      "on": "lilian_candle"
+    }
+  ],
+  "modules": [
+    "nebo",
+    "cast",
+    "beats",
+    "closeups"
+  ],
+  "state": {
+    "beat": null,
+    "fade": 0,
+    "hour": 0.6,
+    "fire": 0,
+    "lamps": 0,
+    "candles": 0,
+    "ladder": 0,
+    "nail1": 0,
+    "nail2": 0,
+    "nail3": 0,
+    "painting_alive": 0,
+    "door": 0,
+    "door_light": 0,
+    "bundle": 0,
+    "note": 0,
+    "coat_on_chair": 0,
+    "lilian_candle": 0,
+    "letter": 0,
+    "canvas": 0,
+    "hands": 0,
+    "card": 0,
+    "grip1": 0,
+    "grip2": 0,
+    "grip3": 0,
+    "grip4": 0,
+    "dust": 1,
+    "pried": 0,
+    "home": 0.5,
+    "leave": "farewell",
+    "grey_pulls": 0,
+    "gr_a": 2.6,
+    "gr_d": 0.2,
+    "gr_e": 0,
+    "li_a": 4.92,
+    "li_d": 6,
+    "grey_here": false,
+    "lilian_here": false,
+    "day": 1,
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "sun_light": 1,
+    "moon_light": 0,
+    "ladder_across": -3.55,
+    "door_facing": 270
+  },
+  "states": {
+    "beat": {
+      "type": "string",
+      "means": "кусок фильма, который играть (модуль beats): boy, brush, mother_in, mother_close, ship_painting, cellar, night, farewell, let_go, note, note_goes, return, stays, spring, one_evening, window_end (и paint_over — только показ); null — ни один"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "время суток по кругу, как во всём мире: 0 полночь, 0.25 рассвет, 0.5 полдень, 0.75 закат; окна смотрят на запад-юго-запад — солнце входит в них после полудня и до заката"
+    },
+    "fire": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "камин: 0 погашен, 1 горит — пламя, угли, тёплый свет из топки на полу, кресле, стенах"
+    },
+    "lamps": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "лампы: над двумя картинами и торшер у кресла"
+    },
+    "candles": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свечи на столе: 0 не горят, 1 горят (ужин вдвоём)"
+    },
+    "ladder": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "лестница: 0 стоит в углу у окна, 1 приставлена к картине с распятием"
+    },
+    "nail1": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "гвоздь в левой руке на распятии: 0 виден, 1 закрашен"
+    },
+    "nail2": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "гвоздь в правой руке на распятии: 0 виден, 1 закрашен"
+    },
+    "nail3": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "гвоздь в ногах на распятии: 0 виден, 1 закрашен"
+    },
+    "painting_alive": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "картина с кораблём: 0 холст неподвижен, 1 волны на холсте идут, корабль поднимается на гребне"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "дверь в покои матери: 0 закрыта, 1 открыта к ней"
+    },
+    "door_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет у матери: 0 темно, 1 горит — полоска света под её дверью, а открыта дверь — свет из проёма на пол зала"
+    },
+    "bundle": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "узел Грея на столе: 0 нет, 1 лежит"
+    },
+    "note": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "записка на столе: 0 нет, 1 лежит"
+    },
+    "coat_on_chair": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "морской сюртук Грея на спинке кресла отца: 0 нет, 1 висит"
+    },
+    "lilian_candle": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свеча в руке матери горит (свет у её пламени)"
+    },
+    "letter": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "эпилог: у матери в руках письмо сына (1) или она одна со свечой (0) — читает кусок window_end"
+    },
+    "canvas": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "крупный план холста с распятием (вставка): 1 — открыт; на нём точки canvas#nail1…3"
+    },
+    "hands": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "крупный план рук (вставка, кадр hold): 1 — открыт, на ладони Грея кольцо, сверху пальцы матери; на нём точки hands#finger1…finger4"
+    },
+    "grip1": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "палец матери 1 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+    },
+    "grip2": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "палец матери 2 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+    },
+    "grip3": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "палец матери 3 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+    },
+    "grip4": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "палец матери 4 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+    },
+    "card": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "крупный план дна бочки (вставка, кадр cellar): 1 — открыт; на нём точка card#barrel"
+    },
+    "dust": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "пыль на дне бочки (кадр cellar): 1 лежит, 0 стёрта и надпись читается"
+    },
+    "pried": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "ставит игра перед let_go: 1 — игрок сам разжал её пальцы, 0 — она отпустила сама"
+    },
+    "home": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "ключ партии: насколько в доме тепло и жизненно после возвращения (огонь и лампы в return, spring, one_evening, window_end: 0.35 + 0.65·home); по умолчанию 0.5"
+    },
+    "leave": {
+      "type": "string",
+      "means": "ключ партии: как Грей ушёл — farewell (простился с матерью) или note (оставил записку); читает кусок return"
+    },
+    "grey_pulls": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "мальчик тянет лестницу: пока 1, лестница идёт за ним (ladder — по тому, где он); ставит кусок boy"
+    },
+    "gr_a": {
+      "type": "number",
+      "smooth": true,
+      "means": "где Грей поперёк, м"
+    },
+    "gr_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "где Грей вглубь, м"
+    },
+    "gr_e": {
+      "type": "number",
+      "smooth": true,
+      "means": "на какой высоте стоит Грей (ступенька лестницы), м"
+    },
+    "li_a": {
+      "type": "number",
+      "smooth": true,
+      "means": "где мать поперёк, м"
+    },
+    "li_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "где мать вглубь, м"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "служебный: вес дневного света — держит скрипт (nebo) по hour"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "служебный: вес рассвета — держит скрипт по hour"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "служебный: вес заката — держит скрипт по hour"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "служебный: вес ночи — держит скрипт по hour"
+    },
+    "sun_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "служебный: сколько светит солнце — держит скрипт по hour"
+    },
+    "moon_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "служебный: сколько светит луна — держит скрипт по hour"
+    },
+    "ladder_across": {
+      "type": "number",
+      "smooth": true,
+      "means": "служебный: где лестница поперёк, м — держит скрипт по ladder"
+    },
+    "door_facing": {
+      "type": "number",
+      "smooth": true,
+      "means": "служебный: поворот двери матери, градусы (270 закрыта) — держит скрипт по door"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Небо",
+      "sky": true,
+      "uniforms": {
+        "tr": 0.42,
+        "tg": 0.5,
+        "tb": 0.61,
+        "mr": 0.65,
+        "mg": 0.71,
+        "mb": 0.77,
+        "lr": 0.89,
+        "lg": 0.85,
+        "lb": 0.83,
+        "gr": 0.96,
+        "gg": 0.87,
+        "gb": 0.8,
+        "sr": 0.31,
+        "sg": 0.39,
+        "sb": 0.47,
+        "horizon": 0.5,
+        "x0": -0.4,
+        "span": 2.58,
+        "all_round": 0,
+        "day": 0.55,
+        "night": 0,
+        "storm": 0,
+        "sun_x": 0.89,
+        "sun_y": 0.2,
+        "sun_up": 0,
+        "sun_low": 0,
+        "moon_x": 0.89,
+        "moon_y": 0.3,
+        "moon_up": 0
+      }
+    },
+    {
+      "id": "sea",
+      "name": "Море за парком",
+      "plane": true,
+      "across": -2600,
+      "distance": 2000,
+      "elevation": -60,
+      "width": 5000,
+      "depth": 9000,
+      "reflect": {
+        "strength": 0.7,
+        "fade": 0,
+        "blur": 0.01,
+        "rough": 0.3
+      }
+    },
+    {
+      "id": "park",
+      "name": "Парк",
+      "plane": true,
+      "across": -44,
+      "distance": 20,
+      "elevation": -1.2,
+      "width": 80,
+      "depth": 120
+    },
+    {
+      "id": "trees",
+      "name": "Деревья парка",
+      "across": -30,
+      "distance": 20,
+      "elevation": -1.2,
+      "height": 12,
+      "box": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "shadow": {
+        "onto": [
+          "park"
+        ],
+        "strength": 0.4,
+        "soft": 1
+      }
+    },
+    {
+      "id": "floor",
+      "name": "Пол",
+      "plane": true,
+      "across": 0.25,
+      "distance": 3.75,
+      "width": 8.5,
+      "depth": 10.5,
+      "lit": true,
+      "inside": true,
+      "reflect": {
+        "strength": 0.28,
+        "fade": 2.5,
+        "blur": 0.07
+      }
+    },
+    {
+      "id": "ceiling",
+      "name": "Потолок",
+      "plane": true,
+      "across": 0.25,
+      "distance": 3.75,
+      "elevation": 6,
+      "width": 8.5,
+      "depth": 10.5,
+      "tilt": 180,
+      "inside": true
+    },
+    {
+      "id": "wall_left",
+      "name": "Стена с окнами",
+      "across": -4,
+      "distance": 3.75,
+      "facing": 90,
+      "height": 6,
+      "box": [
+        -5.3,
+        -6,
+        5.3,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "jamb1",
+      "name": "Откос ближнего окна, дальний",
+      "across": -4.22,
+      "distance": 3.4,
+      "facing": 180,
+      "elevation": 0.6,
+      "height": 4.4,
+      "box": [
+        -0.22,
+        -4.4,
+        0.22,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "jamb1n",
+      "name": "Откос ближнего окна, ближний",
+      "across": -4.22,
+      "distance": 2,
+      "facing": 0,
+      "elevation": 0.6,
+      "height": 4.4,
+      "box": [
+        -0.22,
+        -4.4,
+        0.22,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "jamb2",
+      "name": "Откос дальнего окна, дальний",
+      "across": -4.22,
+      "distance": 6.4,
+      "facing": 180,
+      "elevation": 0.6,
+      "height": 4.4,
+      "box": [
+        -0.22,
+        -4.4,
+        0.22,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "jamb2n",
+      "name": "Откос дальнего окна, ближний",
+      "across": -4.22,
+      "distance": 5,
+      "facing": 0,
+      "elevation": 0.6,
+      "height": 4.4,
+      "box": [
+        -0.22,
+        -4.4,
+        0.22,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "sills",
+      "name": "Подоконники",
+      "plane": true,
+      "across": -4.22,
+      "distance": 4.2,
+      "elevation": 0.6,
+      "width": 0.44,
+      "depth": 4.4,
+      "inside": true
+    },
+    {
+      "id": "soffits",
+      "name": "Своды окон",
+      "plane": true,
+      "across": -4.22,
+      "distance": 4.2,
+      "elevation": 5,
+      "width": 0.44,
+      "depth": 4.4,
+      "tilt": 180,
+      "inside": true
+    },
+    {
+      "id": "glass1",
+      "name": "Стекло ближнего окна",
+      "across": -4.43,
+      "distance": 2.7,
+      "facing": 90,
+      "elevation": 0.6,
+      "height": 4.4,
+      "box": [
+        -0.7,
+        -4.4,
+        0.7,
+        0
+      ],
+      "glass": {
+        "strength": 0.3,
+        "blur": 0.02
+      },
+      "inside": true,
+      "behind": [
+        "windows"
+      ]
+    },
+    {
+      "id": "glass2",
+      "name": "Стекло дальнего окна",
+      "across": -4.43,
+      "distance": 5.7,
+      "facing": 90,
+      "elevation": 0.6,
+      "height": 4.4,
+      "box": [
+        -0.7,
+        -4.4,
+        0.7,
+        0
+      ],
+      "glass": {
+        "strength": 0.3,
+        "blur": 0.02
+      },
+      "inside": true,
+      "behind": [
+        "windows"
+      ]
+    },
+    {
+      "id": "windows",
+      "name": "Окна",
+      "across": -4.42,
+      "distance": 3.75,
+      "facing": 90,
+      "elevation": 0.6,
+      "height": 4.4,
+      "box": [
+        -2,
+        -4.4,
+        3,
+        0
+      ],
+      "inside": true,
+      "shadow": {
+        "light": "sun",
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 1
+      }
+    },
+    {
+      "id": "wall_back",
+      "name": "Стена с камином",
+      "across": 0.25,
+      "distance": 9,
+      "facing": 180,
+      "height": 6,
+      "box": [
+        -4.3,
+        -6,
+        4.3,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_right",
+      "name": "Стена с дверью",
+      "across": 4.5,
+      "distance": 3.75,
+      "facing": 270,
+      "height": 6,
+      "box": [
+        -5.3,
+        -6,
+        5.3,
+        0
+      ],
+      "inside": true,
+      "shadow": {
+        "light": "mother_light",
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 1,
+        "soft": 0.05
+      }
+    },
+    {
+      "id": "wall_front",
+      "name": "Стена за спиной",
+      "across": 0.25,
+      "distance": -1.5,
+      "facing": 0,
+      "height": 6,
+      "box": [
+        -4.3,
+        -6,
+        4.3,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "hearth",
+      "name": "Камин",
+      "across": 0.25,
+      "distance": 8.97,
+      "facing": 180,
+      "height": 1.6,
+      "box": [
+        -1.35,
+        -1.62,
+        1.35,
+        0
+      ],
+      "inside": true,
+      "shadow": {
+        "light": "fire_light",
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 1,
+        "soft": 0.15
+      }
+    },
+    {
+      "id": "mantel",
+      "name": "Полка камина",
+      "plane": true,
+      "across": 0.25,
+      "distance": 8.85,
+      "elevation": 1.6,
+      "width": 2.8,
+      "depth": 0.26,
+      "inside": true
+    },
+    {
+      "id": "hearth_floor",
+      "name": "Плита у камина",
+      "plane": true,
+      "across": 0.25,
+      "distance": 8.6,
+      "elevation": 0.01,
+      "width": 2.9,
+      "depth": 0.8,
+      "lit": true,
+      "inside": true
+    },
+    {
+      "id": "firebox",
+      "name": "Топка",
+      "across": 0.25,
+      "distance": 9.5,
+      "facing": 180,
+      "height": 1.1,
+      "box": [
+        -0.8,
+        -1.15,
+        0.8,
+        0
+      ],
+      "inside": true,
+      "uniforms": {
+        "heat": 0
+      }
+    },
+    {
+      "id": "firebox_left",
+      "name": "Топка слева",
+      "across": -0.5,
+      "distance": 9.25,
+      "facing": 90,
+      "height": 1.1,
+      "box": [
+        -0.27,
+        -1.15,
+        0.27,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "firebox_right",
+      "name": "Топка справа",
+      "across": 1,
+      "distance": 9.25,
+      "facing": 270,
+      "height": 1.1,
+      "box": [
+        -0.27,
+        -1.15,
+        0.27,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "firebox_floor",
+      "name": "Под топки",
+      "plane": true,
+      "across": 0.25,
+      "distance": 9.25,
+      "elevation": 0.15,
+      "width": 1.5,
+      "depth": 0.5,
+      "lit": true,
+      "inside": true
+    },
+    {
+      "id": "firebox_top",
+      "name": "Свод топки",
+      "plane": true,
+      "across": 0.25,
+      "distance": 9.25,
+      "elevation": 1.1,
+      "width": 1.5,
+      "depth": 0.5,
+      "tilt": 180,
+      "inside": true
+    },
+    {
+      "id": "fire",
+      "name": "Огонь в камине",
+      "across": 0.25,
+      "distance": 9.3,
+      "elevation": 0.15,
+      "height": 0.8,
+      "box": [
+        -0.6,
+        -0.85,
+        0.6,
+        0.06
+      ],
+      "inside": true,
+      "uniforms": {
+        "heat": 0
+      }
+    },
+    {
+      "id": "flames",
+      "name": "Пламя",
+      "across": 0.25,
+      "distance": 9.3,
+      "elevation": 0.24,
+      "particles": {
+        "kind": "fire",
+        "source": [
+          0.5,
+          0.08,
+          0.04
+        ],
+        "amount": "fire"
+      }
+    },
+    {
+      "id": "fire_embers",
+      "name": "Искры",
+      "across": 0.25,
+      "distance": 9.3,
+      "elevation": 0.3,
+      "particles": {
+        "kind": "embers",
+        "source": [
+          0.6,
+          0.1,
+          0.05
+        ],
+        "amount": "fire"
+      }
+    },
+    {
+      "id": "crucifix",
+      "name": "Картина с распятием",
+      "across": -2.45,
+      "distance": 8.97,
+      "facing": 180,
+      "elevation": 2,
+      "height": 2.6,
+      "box": [
+        -0.96,
+        -2.66,
+        0.96,
+        0.06
+      ],
+      "inside": true
+    },
+    {
+      "id": "lamp_cross",
+      "name": "Лампа над распятием",
+      "across": -2.45,
+      "distance": 8.82,
+      "elevation": 4.68,
+      "height": 0.12,
+      "box": [
+        -0.36,
+        -0.14,
+        0.36,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "ship_painting",
+      "name": "Картина с кораблём",
+      "across": 2.95,
+      "distance": 8.97,
+      "facing": 180,
+      "elevation": 1.3,
+      "height": 1.5,
+      "box": [
+        -1.17,
+        -1.56,
+        1.17,
+        0.06
+      ],
+      "inside": true,
+      "uniforms": {
+        "alive": 0
+      }
+    },
+    {
+      "id": "lamp_ship",
+      "name": "Лампа над кораблём",
+      "across": 2.95,
+      "distance": 8.82,
+      "elevation": 2.94,
+      "height": 0.12,
+      "box": [
+        -0.4,
+        -0.14,
+        0.4,
+        0.03
+      ],
+      "inside": true
+    },
+    {
+      "id": "ladder",
+      "name": "Лестница",
+      "across": -3.55,
+      "distance": 8.48,
+      "facing": 180,
+      "tilt": 10,
+      "height": 3.1,
+      "box": [
+        -0.3,
+        -3.1,
+        0.3,
+        0.02
+      ],
+      "place": {
+        "across": "ladder_across"
+      },
+      "inside": true,
+      "shadow": {
+        "light": "cross_light",
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.8,
+        "soft": 0.12
+      }
+    },
+    {
+      "id": "armchair",
+      "name": "Кресло отца",
+      "unseen": true,
+      "across": 2.15,
+      "distance": 7.05,
+      "facing": 313
+    },
+    {
+      "id": "chair_back",
+      "name": "Кресло отца, спинка",
+      "on": "armchair",
+      "distance": 0.34,
+      "facing": 0,
+      "height": 1.15,
+      "box": [
+        -0.47,
+        -1.17,
+        0.47,
+        0.01
+      ],
+      "inside": true,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.8,
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "chair_side",
+      "name": "Кресло отца, правый бок",
+      "on": "armchair",
+      "across": 0.44,
+      "facing": 90,
+      "height": 1.15,
+      "box": [
+        -0.38,
+        -1.17,
+        0.38,
+        0.01
+      ],
+      "inside": true,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.8,
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "chair_side_l",
+      "name": "Кресло отца, левый бок",
+      "on": "armchair",
+      "across": -0.44,
+      "facing": 270,
+      "height": 1.15,
+      "box": [
+        -0.38,
+        -1.17,
+        0.38,
+        0.01
+      ],
+      "inside": true,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.8,
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "chair_seat",
+      "name": "Кресло отца, сиденье",
+      "plane": true,
+      "on": "armchair",
+      "elevation": 0.44,
+      "width": 0.84,
+      "depth": 0.64,
+      "inside": true
+    },
+    {
+      "id": "coat",
+      "name": "Сюртук на кресле",
+      "on": "armchair",
+      "distance": 0.36,
+      "facing": 0,
+      "height": 1.2,
+      "box": [
+        -0.5,
+        -1.5,
+        0.5,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "floor_lamp",
+      "name": "Торшер",
+      "across": 3.25,
+      "distance": 7.75,
+      "height": 1.62,
+      "box": [
+        -0.25,
+        -1.64,
+        0.25,
+        0.02
+      ],
+      "inside": true,
+      "uniforms": {
+        "lit": 0
+      },
+      "shadow": {
+        "light": "fire_light",
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.6,
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "table_top",
+      "name": "Стол",
+      "plane": true,
+      "across": -2.35,
+      "distance": 5,
+      "elevation": 0.76,
+      "width": 1.05,
+      "depth": 2.6,
+      "inside": true,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.85,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "table_edge",
+      "name": "Стол, край",
+      "across": -1.825,
+      "distance": 5,
+      "facing": 90,
+      "height": 0.76,
+      "box": [
+        -1.3,
+        -0.77,
+        1.3,
+        -0.69
+      ],
+      "inside": true
+    },
+    {
+      "id": "table_end",
+      "name": "Стол, торец",
+      "across": -2.35,
+      "distance": 3.7,
+      "facing": 180,
+      "height": 0.76,
+      "box": [
+        -0.525,
+        -0.77,
+        0.525,
+        -0.69
+      ],
+      "inside": true
+    },
+    {
+      "id": "table_leg",
+      "name": "Стол, ближняя опора",
+      "across": -2.35,
+      "distance": 3.95,
+      "facing": 180,
+      "height": 0.76,
+      "box": [
+        -0.48,
+        -0.77,
+        0.48,
+        0.01
+      ],
+      "inside": true,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.7,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "table_leg_far",
+      "name": "Стол, дальняя опора",
+      "across": -2.35,
+      "distance": 6.05,
+      "facing": 180,
+      "height": 0.76,
+      "box": [
+        -0.48,
+        -0.77,
+        0.48,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "note",
+      "name": "Записка",
+      "plane": true,
+      "across": -2.23,
+      "distance": 4.45,
+      "elevation": 0.763,
+      "width": 0.3,
+      "depth": 0.26,
+      "inside": true
+    },
+    {
+      "id": "table",
+      "name": "Узел и записка",
+      "across": -2.3,
+      "distance": 4.65,
+      "elevation": 0.76,
+      "height": 0.3,
+      "box": [
+        -0.4,
+        -0.32,
+        0.4,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "candlesticks",
+      "name": "Подсвечники",
+      "across": -2.35,
+      "distance": 5.35,
+      "elevation": 0.76,
+      "height": 0.5,
+      "box": [
+        -0.2,
+        -0.52,
+        0.2,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "candles",
+      "name": "Свечи",
+      "across": -2.35,
+      "distance": 5.35,
+      "elevation": 0.76,
+      "height": 0.5,
+      "box": [
+        -0.2,
+        -0.56,
+        0.2,
+        -0.4
+      ],
+      "inside": true,
+      "uniforms": {
+        "lit": 0
+      }
+    },
+    {
+      "id": "chair_near",
+      "name": "Стул у стола",
+      "across": -2.35,
+      "distance": 3.35,
+      "facing": 180,
+      "height": 1.05,
+      "box": [
+        -0.26,
+        -1.07,
+        0.26,
+        0.01
+      ],
+      "inside": true,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.7,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "chair_near_seat",
+      "name": "Стул у стола, сиденье",
+      "plane": true,
+      "across": -2.35,
+      "distance": 3.57,
+      "elevation": 0.45,
+      "width": 0.46,
+      "depth": 0.44,
+      "inside": true
+    },
+    {
+      "id": "chair_near_legs",
+      "name": "Стул у стола, передние ножки",
+      "across": -2.35,
+      "distance": 3.79,
+      "facing": 180,
+      "height": 0.47,
+      "box": [
+        -0.25,
+        -0.49,
+        0.25,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "chair_far",
+      "name": "Стул напротив",
+      "across": -2.35,
+      "distance": 6.65,
+      "facing": 180,
+      "height": 1.05,
+      "box": [
+        -0.26,
+        -1.07,
+        0.26,
+        0.01
+      ],
+      "inside": true,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 0.7,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "chair_far_seat",
+      "name": "Стул напротив, сиденье",
+      "plane": true,
+      "across": -2.35,
+      "distance": 6.43,
+      "elevation": 0.45,
+      "width": 0.46,
+      "depth": 0.44,
+      "inside": true
+    },
+    {
+      "id": "chair_far_legs",
+      "name": "Стул напротив, передние ножки",
+      "across": -2.35,
+      "distance": 6.21,
+      "facing": 180,
+      "height": 0.47,
+      "box": [
+        -0.25,
+        -0.49,
+        0.25,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "shelves",
+      "name": "Книги",
+      "across": 4.15,
+      "distance": 3.75,
+      "facing": 270,
+      "height": 6,
+      "box": [
+        -5.3,
+        -6.05,
+        5.3,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "shelves_side",
+      "name": "Книги у двери",
+      "across": 4.325,
+      "distance": 6.35,
+      "facing": 180,
+      "height": 3,
+      "box": [
+        -0.175,
+        -3,
+        0.175,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "shelves_lintel",
+      "name": "Книги над дверью, низ",
+      "plane": true,
+      "across": 4.325,
+      "distance": 5.7,
+      "elevation": 3,
+      "width": 0.35,
+      "depth": 1.3,
+      "tilt": 180,
+      "inside": true
+    },
+    {
+      "id": "mother_door",
+      "name": "Дверь матери",
+      "across": 4.5,
+      "distance": 6.3,
+      "facing": 270,
+      "height": 2.9,
+      "box": [
+        -0.02,
+        -2.9,
+        1.22,
+        -0.02
+      ],
+      "place": {
+        "facing": "door_facing"
+      },
+      "inside": true,
+      "shadow": {
+        "light": "mother_light",
+        "onto": [
+          "floor",
+          "wall_back"
+        ],
+        "strength": 1,
+        "soft": 0.05
+      }
+    },
+    {
+      "id": "mother_floor",
+      "name": "Пол у матери",
+      "plane": true,
+      "across": 6.25,
+      "distance": 5.7,
+      "width": 3.5,
+      "depth": 4.6,
+      "lit": true,
+      "inside": true
+    },
+    {
+      "id": "mother_ceiling",
+      "name": "Потолок у матери",
+      "plane": true,
+      "across": 6.25,
+      "distance": 5.7,
+      "elevation": 3.4,
+      "width": 3.5,
+      "depth": 4.6,
+      "tilt": 180,
+      "inside": true
+    },
+    {
+      "id": "mother_wall",
+      "name": "Стена у матери",
+      "across": 8,
+      "distance": 5.7,
+      "facing": 270,
+      "height": 3.4,
+      "box": [
+        -2.3,
+        -3.4,
+        2.3,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "mother_wall_far",
+      "name": "Стена у матери, дальняя",
+      "across": 6.25,
+      "distance": 8,
+      "facing": 180,
+      "height": 3.4,
+      "box": [
+        -1.75,
+        -3.4,
+        1.75,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "grey",
+      "name": "Грей",
+      "person": {
+        "cast": "cast",
+        "who": "grey_boy",
+        "turn": 0
+      },
+      "across": 2.6,
+      "distance": 0.2,
+      "place": {
+        "across": "gr_a",
+        "distance": "gr_d",
+        "elevation": "gr_e"
+      },
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ]
+      },
+      "inside": true
+    },
+    {
+      "id": "lilian",
+      "name": "Мать, Лилиан Грей",
+      "person": {
+        "cast": "cast",
+        "who": "lilian",
+        "turn": 270
+      },
+      "across": 4.92,
+      "distance": 6,
+      "place": {
+        "across": "li_a",
+        "distance": "li_d"
+      },
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_back"
+        ]
+      },
+      "inside": true
+    },
+    {
+      "id": "dust",
+      "name": "Пыль в лучах",
+      "across": -1.2,
+      "distance": 4.2,
+      "elevation": 2.6,
+      "inside": true,
+      "particles": {
+        "kind": "dust",
+        "source": [
+          5.5,
+          8,
+          4.8
+        ],
+        "rate": 260,
+        "life": [
+          10,
+          16
+        ]
+      }
+    },
+    {
+      "id": "canvas",
+      "name": "Холст крупно",
+      "insert": "canvas"
+    },
+    {
+      "id": "hands",
+      "name": "Руки крупно",
+      "insert": "hands"
+    },
+    {
+      "id": "card",
+      "name": "Бочка крупно",
+      "insert": "card"
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Slow solo cello in a large stone hall, long reverb, solemn and tender, modern indie game score",
+        "weight": 1.1
+      },
+      {
+        "text": "Sparse felt piano with long silences, a child alone in a big quiet house, afternoon light",
+        "weight": 0.9
+      },
+      {
+        "text": "Warm low strings drone under a distant music box, dark gold and dust in sunbeams",
+        "weight": 0.7
+      },
+      {
+        "text": "Four rising notes on a celesta, gentle and hopeful, a dream of the sea",
+        "weight": 0
+      },
+      {
+        "text": "Pipe organ very softly in another wing, sustained chords, everything settled forever",
+        "weight": 0
+      },
+      {
+        "text": "Harpsichord figure slowed down and blurred, old order, minimalist",
+        "weight": 0
+      },
+      {
+        "text": "Crackling fireplace texture with low clarinet, night, a mother waiting",
+        "weight": 0
+      },
+      {
+        "text": "Neo-classical string quartet, restrained, aristocratic and lonely",
+        "weight": 0
+      },
+      {
+        "text": "Distant sea swell as soft synth pads behind tall windows, longing",
+        "weight": 0
+      },
+      {
+        "text": "Solo violin rising slowly, a painted ship coming alive on the wave",
+        "weight": 0
+      },
+      {
+        "text": "Glassy bowed vibraphone, candlelight, suspended time",
+        "weight": 0
+      },
+      {
+        "text": "Low choir hum, very quiet, a gallery of portraits at dusk",
+        "weight": 0
+      },
+      {
+        "text": "Minimal piano ostinato in the style of Max Richter, a boy deciding his life",
+        "weight": 0
+      },
+      {
+        "text": "Soft horn chords like a far ship's call, heroic but gentle",
+        "weight": 0
+      },
+      {
+        "text": "Harp and flute, impressionistic waves on canvas, dreamlike",
+        "weight": 0
+      },
+      {
+        "text": "Night ambience with a slow oboe, dark blue and warm gold, a light under a door",
+        "weight": 0
+      },
+      {
+        "text": "Lullaby on a celesta and strings, a mother's ring, farewell",
+        "weight": 0
+      },
+      {
+        "text": "Full strings swelling slowly, return home, black mourning and warm hands",
+        "weight": 0
+      },
+      {
+        "text": "Ticking clock and low piano notes, an empty armchair by the fire",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.2,
+    "brightness": 0.35
+  }
+}

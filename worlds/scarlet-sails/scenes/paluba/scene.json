@@ -1,0 +1,2671 @@
+{
+ "engine": 2,
+ "title": "Палуба",
+ "caption": "Курс — прямо.",
+ "horizon": 0.56,
+ "camera": {
+  "mode": "roam",
+  "on": "ship",
+  "area": [
+   4.2,
+   1.4,
+   2.6,
+   11.5
+  ]
+ },
+ "light": {
+  "vignette": 0.3,
+  "grain": 0.1,
+  "ambient": 0.9,
+  "ambientColor": "#eef0f2",
+  "bounce": 0.5,
+  "haze": 0.03,
+  "hazeColor": "#cdd6de",
+  "hazeGlow": 0.45,
+  "shafts": 0.1,
+  "wind": [
+   0,
+   1,
+   0.6
+  ],
+  "looks": {
+   "dawn": {
+    "ambient": 0.75,
+    "ambientColor": "#ece6ea",
+    "haze": 0.04,
+    "hazeColor": "#e2ddd8",
+    "tint": "#f3dccb",
+    "tintStrength": 0.06,
+    "shafts": 0.3
+   },
+   "dusk": {
+    "ambient": 0.68,
+    "ambientColor": "#d6cfe0",
+    "haze": 0.05,
+    "hazeColor": "#aca7b5",
+    "tint": "#e9bba3",
+    "tintStrength": 0.07,
+    "shafts": 0.35
+   },
+   "night": {
+    "ambient": 0.7,
+    "ambientColor": "#a9bbe6",
+    "haze": 0.05,
+    "hazeColor": "#1d2839",
+    "saturation": 0.8,
+    "shafts": 0.2
+   },
+   "storm": {
+    "ambient": 0.92,
+    "ambientColor": "#b9c2cc",
+    "haze": 0.25,
+    "hazeColor": "#8e98a2",
+    "saturation": 0.7,
+    "wind": [
+     0,
+     1,
+     1.6
+    ],
+    "lights": {
+     "sun": 0.2
+    }
+   }
+  }
+ },
+ "lights": [
+  {
+   "id": "sun",
+   "from": "sky#sun",
+   "color": "#ffeedd",
+   "strength": 1,
+   "on": "sun_light",
+   "size": 0.5
+  },
+  {
+   "id": "moon",
+   "from": "sky#moon",
+   "color": "#c4d2f0",
+   "strength": 0.9,
+   "on": "moon_light",
+   "size": 0.5
+  },
+  {
+   "id": "lantern_port_light",
+   "of": "lantern_port#flame",
+   "reach": 9,
+   "strength": 2.2,
+   "flicker": 0.15,
+   "on": "lanterns"
+  },
+  {
+   "id": "lantern_starboard_light",
+   "of": "lantern_starboard#flame",
+   "reach": 9,
+   "strength": 2.2,
+   "flicker": 0.15,
+   "on": "lanterns"
+  },
+  {
+   "id": "lantern_main_light",
+   "of": "lantern_main#flame",
+   "reach": 11,
+   "strength": 2.2,
+   "flicker": 0.15,
+   "on": "lanterns"
+  },
+  {
+   "id": "quay_light_0",
+   "of": "quay_lamps#lamp0",
+   "reach": 10,
+   "on": "harbour_lit"
+  },
+  {
+   "id": "quay_light_1",
+   "of": "quay_lamps#lamp1",
+   "reach": 10,
+   "on": "harbour_lit"
+  },
+  {
+   "id": "quay_light_2",
+   "of": "quay_lamps#lamp2",
+   "reach": 10,
+   "on": "harbour_lit"
+  },
+  {
+   "id": "quay_light_3",
+   "of": "quay_lamps#lamp3",
+   "reach": 10,
+   "on": "harbour_lit"
+  }
+ ],
+ "modules": [
+  "nebo",
+  "korabli",
+  "cast",
+  "beats",
+  "closeups"
+ ],
+ "state": {
+  "beat": null,
+  "hour": 0.27,
+  "ship": "secret",
+  "storm": 0,
+  "roll": 0,
+  "sails": 0,
+  "sails_set": 1,
+  "luff": 0,
+  "helm": 0,
+  "heading": 0,
+  "shore": 0,
+  "port": 0,
+  "lanterns": 0,
+  "silk": 0,
+  "cask": 0,
+  "steamer": 0,
+  "skiff_down": 0,
+  "ropes": 0,
+  "climb": 0,
+  "hand_l": 1,
+  "hand_r": 1,
+  "slip": 0,
+  "leg": null,
+  "sun": 0.26,
+  "wine": 0,
+  "ring": "none",
+  "ring_kind": "own",
+  "day": 0,
+  "dawn": 1,
+  "dusk": 0,
+  "night": 0,
+  "sun_light": 0.4,
+  "moon_light": 0,
+  "harbour_lit": 0,
+  "heel": 0,
+  "ship_x": 0,
+  "ship_d": 0,
+  "ship_f": 180,
+  "ship_at": "0:0",
+  "steamer_x": 15000,
+  "steamer_d": 0,
+  "steamer_smoke": 0,
+  "steamer_at": 0,
+  "belly_l": 166,
+  "belly_r": 194,
+  "belly_tilt": -12,
+  "fore_tg_e": 20.4,
+  "main_tg_e": 22.5,
+  "lo_a": 19,
+  "lo_d": 0.45,
+  "lo_e": 3,
+  "longren_here": false,
+  "gr_a": -2.4,
+  "gr_d": 2.28,
+  "gr_e": 0,
+  "grey_here": true,
+  "as_a": 1.32,
+  "as_d": 5.1,
+  "as_e": 0,
+  "assol_here": false,
+  "go_a": -3.7,
+  "go_d": 13,
+  "go_e": -1.4,
+  "gop_here": false,
+  "pa_a": -4.4,
+  "pa_d": -0.6,
+  "pa_e": 0,
+  "panten_here": false,
+  "le_a": 0.2,
+  "le_d": 5.2,
+  "le_e": 0,
+  "letika_here": false,
+  "sa_a": -0.98,
+  "sa_d": 4.05,
+  "sa_e": 0,
+  "sailor_here": false,
+  "cr_a": -0.7,
+  "cr_d": 3.27,
+  "cr_e": 0,
+  "crew2_here": false,
+  "s3_a": -3.4,
+  "s3_d": 9.2,
+  "s3_e": -1.4,
+  "sailor3_here": false,
+  "s4_a": -1.4,
+  "s4_d": 9.2,
+  "s4_e": -1.4,
+  "sailor4_here": false,
+  "zi_a": -1.2,
+  "zi_d": 13.2,
+  "zi_e": -1.4,
+  "zimmer_here": false,
+  "m1_a": -3.4,
+  "m1_d": 26.5,
+  "m1_e": -1.4,
+  "musician1_here": false,
+  "m2_a": -1.4,
+  "m2_d": 26.5,
+  "m2_e": -1.4,
+  "musician2_here": false,
+  "grey_do": {
+   "motion": "helm",
+   "loop": true
+  },
+  "grey_reach": {
+   "r": "wheel#rim_r",
+   "l": "wheel#rim_l"
+  }
+ },
+ "states": {
+  "beat": {
+   "type": "string",
+   "means": "кусок фильма (модуль beats): anselm, shrouds, top, letter, gop_bye, secret, sew, rail, raise, helm, arrive, steamer, night_end; null — ничего не играет"
+  },
+  "hour": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "время суток по кругу, как во всём мире: 0 полночь, 0.25 рассвет, 0.5 полдень, 0.75 закат; корабль идёт на запад, к Каперне: рассвет за кормой, закат впереди"
+  },
+  "ship": {
+   "values": [
+    "secret",
+    "anselm"
+   ],
+   "means": "чья палуба: secret — белый галиот «Секрет» (три мачты, прямые паруса на фок- и грот-мачте, бизань подобрана), anselm — тёмная потёртая шхуна «Ансельм» (две мачты, косые латаные паруса, марсель на фок-мачте); меняется склейкой"
+  },
+  "storm": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "непогода: 0 тихо, 1 шторм — небо в тучах, свет серый, качка сильнее, на море барашки, ветер треплет паруса"
+  },
+  "roll": {
+   "range": [
+    -1,
+    1
+   ],
+   "smooth": true,
+   "means": "крен: −1 на левый борт, 0 ровно, 1 на правый (до 12°); качка идёт поверх"
+  },
+  "sails": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "паруса «Секрета»: 0 белые, 1 алые"
+  },
+  "sails_set": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "паруса: 0 убраны (свёрнуты на реях, верхние реи спущены), 1 подняты и полны; поднимаются один за другим — нижние, марсели, брамсели (у «Ансельма» — грот, фок, марсель); с ними корабль идёт: до 4 м/с"
+  },
+  "luff": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "паруса заполаскивают: 0 полны ветром, 1 обвисли и бьются (и ход падает)"
+  },
+  "helm": {
+   "range": [
+    -1,
+    1
+   ],
+   "smooth": true,
+   "means": "штурвал: −1 до упора влево, 1 вправо (три четверти оборота)"
+  },
+  "heading": {
+   "range": [
+    -1,
+    1
+   ],
+   "smooth": true,
+   "means": "куда смотрит нос: 0 — на запад, прямо на Каперну, −1 на 25° левее, 1 на 25° правее; корабль поворачивается и идёт туда, куда смотрит"
+  },
+  "shore": {
+   "range": [
+    -1,
+    1
+   ],
+   "smooth": true,
+   "means": "место корабля на пути к Каперне (ставит его туда; дальше он идёт сам своим ходом): 0 — в 6 км (холм на горизонте), 1 — в 600 м (дома, дом Лонгрена наверху, мыс с маяком); ниже 0 — дальше в открытом море (−1: 15 км, земли не видно)"
+  },
+  "port": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "порт Лисс: 1 — корабль стоит у причала (причал по правому борту, склады и город за ним), 0 — в море (где — shore)"
+  },
+  "lanterns": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "фонари: у трапа с юта по обоим бортам и на грот-мачте"
+  },
+  "silk": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "алый шёлк на шкафуте у фонарей: 0 нет, 1 груды и полотнища на всей палубе (растут по одной)"
+  },
+  "cask": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "бочка вина Греев с кружками посреди юта: 0 нет, 1 стоит"
+  },
+  "steamer": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "почтовый пароход: 0 — его нет; значение больше ставит его впереди справа от корабля (к 0 — в 420 м, 1 — в 70 м впереди и 24 м правее), дальше оба идут своим ходом: «Секрет» под парусами его обгоняет"
+  },
+  "skiff_down": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "шлюпка у правого борта: 0 — висит под поручнем, 1 — спущена на воду"
+  },
+  "ropes": {
+   "range": [
+    0,
+    1
+   ],
+   "means": "крупный план рук юнги на вантах (вставка, кадр ropes модуля closeups): 1 — открыт; на нём точки ropes#left, ropes#right"
+  },
+  "climb": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "вставка ropes: как высоко поднялся юнга — выбленки уходят вниз (0 — у палубы, 1 — у салинга); двигает игра"
+  },
+  "hand_l": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "вставка ropes: левая рука — 1 сжата на канате, 0 поднята и раскрыта; двигает игра"
+  },
+  "hand_r": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "вставка ropes: правая рука — 1 сжата на канате, 0 поднята и раскрыта; двигает игра"
+  },
+  "slip": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "вставка ropes: срыв — руки съезжают по канату (импульс: 1 и обратно к 0); двигает игра"
+  },
+  "leg": {
+   "range": [
+    0,
+    1
+   ],
+   "means": "ключ партии: этап пути к Каперне, на котором сцену открывают куском helm (ставит корабль как shore); нет (null) — helm идёт после raise, с того места, где корабль есть"
+  },
+  "sun": {
+   "range": [
+    0.26,
+    0.36
+   ],
+   "means": "ключ партии: час утра в кусках raise, helm, arrive (как hour)"
+  },
+  "wine": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "ключ партии: в куске night_end 1 — бочка Греев и два матроса у неё, 0 — бочки нет, четверо матросов сидят на люке и поют"
+  },
+  "ring": {
+   "values": [
+    "none",
+    "finger",
+    "cord"
+   ],
+   "means": "ключ партии: кольцо у Ассоль на палубе (куски steamer, night_end) — нет, на пальце (часть каста по ring_kind), на шнурке поверх платья (часть ring_cord); по умолчанию none"
+  },
+  "ring_kind": {
+   "values": [
+    "mother",
+    "own"
+   ],
+   "means": "ключ партии: какое кольцо — mother — материнское (часть ring), own — его старинное (часть ring_old); по умолчанию own"
+  },
+  "day": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "служебный: вес дневного света (nebo.follow по hour)"
+  },
+  "dawn": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "служебный: вес рассвета (nebo.follow по hour)"
+  },
+  "dusk": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "служебный: вес заката (nebo.follow по hour)"
+  },
+  "night": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "служебный: вес ночи (nebo.follow по hour)"
+  },
+  "sun_light": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "служебный: сколько светит солнце (nebo.follow по hour)"
+  },
+  "moon_light": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "служебный: сколько светит луна (nebo.follow по hour)"
+  },
+  "harbour_lit": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "служебный: насколько горят фонари причала Лисса; скрипт ставит по ночи"
+  },
+  "heel": {
+   "type": "number",
+   "means": "служебный: наклон корабля, градусы (+ на левый борт): крен roll и качка; скрипт ведёт его сам"
+  },
+  "ship_x": {
+   "type": "number",
+   "means": "служебный: где корабль в мире поперёк курса на Каперну, м (вправо, к северу); скрипт ведёт его своим ходом, shore и port ставят"
+  },
+  "ship_d": {
+   "type": "number",
+   "means": "служебный: где корабль в мире вдоль курса на запад, м: 0 — в 6 км от Каперны, Лисс на −30000; скрипт ведёт его своим ходом, shore и port ставят"
+  },
+  "ship_f": {
+   "type": "number",
+   "means": "служебный: поворот корабля, градусы (180 — носом на запад); скрипт ставит по heading"
+  },
+  "ship_at": {
+   "type": "string",
+   "means": "служебный: какие port и shore поставили корабль туда, где он есть («порт:берег»); скрипт ставит корабль заново, когда они называют другое место"
+  },
+  "steamer_at": {
+   "type": "number",
+   "means": "служебный: какое значение steamer поставило пароход туда, где он есть"
+  },
+  "steamer_x": {
+   "type": "number",
+   "means": "служебный: где пароход в мире поперёк, м; скрипт ставит по steamer и ведёт"
+  },
+  "steamer_d": {
+   "type": "number",
+   "means": "служебный: где пароход в мире вдоль курса, м; скрипт ставит по steamer и ведёт"
+  },
+  "steamer_smoke": {
+   "type": "number",
+   "means": "служебный: дымит ли пароход (1, пока он здесь)"
+  },
+  "belly_l": {
+   "type": "number",
+   "means": "служебный: поворот левых половин прямых парусов, градусы (180 — плоско): кромки к корме, когда ветер их наполняет; скрипт ставит по sails_set и luff"
+  },
+  "belly_r": {
+   "type": "number",
+   "means": "служебный: поворот правых половин прямых парусов, градусы; скрипт ставит по sails_set и luff"
+  },
+  "belly_tilt": {
+   "type": "number",
+   "means": "служебный: наклон прямых парусов, градусы (−: нижняя шкаторина вперёд под ветром); скрипт ставит по sails_set и luff"
+  },
+  "fore_tg_e": {
+   "type": "number",
+   "means": "служебный: где висит фор-брамсель — высота его рея, поднятого над нижней шкаториной, над ютом, м: идёт вверх с реем марселя; скрипт ставит по sails_set"
+  },
+  "main_tg_e": {
+   "type": "number",
+   "means": "служебный: где висит грот-брамсель, так же; скрипт ставит по sails_set"
+  },
+  "lo_a": {
+   "type": "number",
+   "means": "служебный: где Лонгрен — вдоль парохода, м от его середины (к корме); ставят куски"
+  },
+  "lo_d": {
+   "type": "number",
+   "means": "служебный: где Лонгрен — поперёк парохода, м от левого борта внутрь; ставят куски"
+  },
+  "lo_e": {
+   "type": "number",
+   "means": "служебный: высота палубы парохода под Лонгреном над водой, м"
+  },
+  "gr_a": {
+   "type": "number",
+   "means": "служебный: где Грей — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "gr_d": {
+   "type": "number",
+   "means": "служебный: где Грей — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "gr_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Грей — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "as_a": {
+   "type": "number",
+   "means": "служебный: где Ассоль — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "as_d": {
+   "type": "number",
+   "means": "служебный: где Ассоль — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "as_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Ассоль — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "go_a": {
+   "type": "number",
+   "means": "служебный: где Гоп — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "go_d": {
+   "type": "number",
+   "means": "служебный: где Гоп — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "go_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Гоп — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "pa_a": {
+   "type": "number",
+   "means": "служебный: где Пантен — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "pa_d": {
+   "type": "number",
+   "means": "служебный: где Пантен — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "pa_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Пантен — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "le_a": {
+   "type": "number",
+   "means": "служебный: где Летика — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "le_d": {
+   "type": "number",
+   "means": "служебный: где Летика — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "le_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Летика — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "sa_a": {
+   "type": "number",
+   "means": "служебный: где Матрос — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "sa_d": {
+   "type": "number",
+   "means": "служебный: где Матрос — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "sa_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Матрос — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "cr_a": {
+   "type": "number",
+   "means": "служебный: где Матрос — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "cr_d": {
+   "type": "number",
+   "means": "служебный: где Матрос — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "cr_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Матрос — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "s3_a": {
+   "type": "number",
+   "means": "служебный: где Матрос — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "s3_d": {
+   "type": "number",
+   "means": "служебный: где Матрос — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "s3_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Матрос — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "s4_a": {
+   "type": "number",
+   "means": "служебный: где Матрос — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "s4_d": {
+   "type": "number",
+   "means": "служебный: где Матрос — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "s4_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Матрос — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "zi_a": {
+   "type": "number",
+   "means": "служебный: где Циммер — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "zi_d": {
+   "type": "number",
+   "means": "служебный: где Циммер — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "zi_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Циммер — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "m1_a": {
+   "type": "number",
+   "means": "служебный: где Скрипач — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "m1_d": {
+   "type": "number",
+   "means": "служебный: где Скрипач — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "m1_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Скрипач — её высота над ютом (ют 0, шкафут -1.4)"
+  },
+  "m2_a": {
+   "type": "number",
+   "means": "служебный: где Виолончелист — поперёк корабля, м от места зрителя на юте (вправо, к правому борту; киль на -2.4); ставят куски"
+  },
+  "m2_d": {
+   "type": "number",
+   "means": "служебный: где Виолончелист — вдоль корабля, м от места зрителя (к носу: штурвал 2.6, край юта 6, грот-мачта 14); ставят куски"
+  },
+  "m2_e": {
+   "type": "number",
+   "means": "служебный: на какой палубе стоит Виолончелист — её высота над ютом (ют 0, шкафут -1.4)"
+  }
+ },
+ "music": {
+  "prompts": [
+   {
+    "text": "Wide ambient strings over a slow sea swell, wind in the rigging, modern indie game score, hopeful",
+    "weight": 1.1
+   },
+   {
+    "text": "Four rising notes on solo violin, then the orchestra taking them up, scarlet sails filling at dawn",
+    "weight": 0
+   },
+   {
+    "text": "Creaking timber and rope textures turned into soft percussion, a ship working under sail",
+    "weight": 0.6
+   },
+   {
+    "text": "Low cello pulse like a hull rising and falling, steady, determined",
+    "weight": 0.5
+   },
+   {
+    "text": "Sea shanty melody slowed down on a lone concertina, night watch, lanterns",
+    "weight": 0
+   },
+   {
+    "text": "Gypsy violin, warm and free, a musician playing on deck at night",
+    "weight": 0
+   },
+   {
+    "text": "Storm: driving low strings and timpani, spray and wind, tense but not dark",
+    "weight": 0
+   },
+   {
+    "text": "Shimmering harp and celesta, sun on the water, calm sailing",
+    "weight": 0
+   },
+   {
+    "text": "Full romantic orchestra swelling, horns and strings, arrival, joy",
+    "weight": 0
+   },
+   {
+    "text": "Minimal piano and soft synth pad, a young man reading a letter in a quiet harbour",
+    "weight": 0
+   },
+   {
+    "text": "Fiddles tuning, a few bars tried and dropped, scissors and silk rustle, night in port",
+    "weight": 0
+   },
+   {
+    "text": "Brass band far away on a steamer's deck, faint and festive",
+    "weight": 0
+   },
+   {
+    "text": "Airy wordless choir on the wind, the open sea at dawn",
+    "weight": 0
+   },
+   {
+    "text": "Rhythmic bowed bass and handclaps, a crew hauling sails up together",
+    "weight": 0
+   },
+   {
+    "text": "Lonely flute over open fifths, the mast top, the horizon all round",
+    "weight": 0
+   },
+   {
+    "text": "Glassy pads and slow guitar harmonics, moonlit deck, two people at the rail",
+    "weight": 0
+   },
+   {
+    "text": "Accordion waltz at night, an old cask opened, wine for paradise",
+    "weight": 0
+   },
+   {
+    "text": "Steady marimba ostinato with strings, holding the course straight",
+    "weight": 0
+   },
+   {
+    "text": "Deep foghorn-like synth swells, grey calm port morning",
+    "weight": 0
+   }
+  ],
+  "bpm": 70,
+  "density": 0.3,
+  "brightness": 0.55
+ },
+ "objects": [
+  {
+   "id": "sky",
+   "name": "Небо",
+   "sky": true,
+   "uniforms": {
+    "tr": 0.42,
+    "tg": 0.5,
+    "tb": 0.61,
+    "mr": 0.65,
+    "mg": 0.71,
+    "mb": 0.77,
+    "lr": 0.89,
+    "lg": 0.85,
+    "lb": 0.83,
+    "gr": 0.96,
+    "gg": 0.87,
+    "gb": 0.8,
+    "sr": 0.31,
+    "sg": 0.39,
+    "sb": 0.47,
+    "horizon": 0.5,
+    "x0": -0.4,
+    "span": 2.58,
+    "all_round": 0,
+    "day": 0.55,
+    "night": 0,
+    "storm": 0,
+    "sun_x": 0.89,
+    "sun_y": 0.2,
+    "sun_up": 0,
+    "sun_low": 0,
+    "moon_x": 0.89,
+    "moon_y": 0.3,
+    "moon_up": 0
+   }
+  },
+  {
+   "id": "sea",
+   "name": "Море",
+   "plane": true,
+   "across": 0,
+   "distance": -15000,
+   "elevation": -3.8,
+   "width": 40000,
+   "depth": 60000,
+   "reflect": {
+    "strength": 0.75,
+    "fade": 0,
+    "blur": 0.012,
+    "rough": 0.5,
+    "ripple": 0.4
+   },
+   "uniforms": {
+    "storm": 0
+   }
+  },
+  {
+   "id": "kaperna",
+   "name": "Каперна",
+   "across": 0,
+   "distance": 6000,
+   "elevation": -3.8,
+   "height": 60,
+   "box": [
+    -620,
+    -70,
+    520,
+    2
+   ]
+  },
+  {
+   "id": "steamer",
+   "name": "Почтовый пароход",
+   "across": 15000,
+   "distance": 0,
+   "elevation": -3.8,
+   "facing": 270,
+   "height": 22,
+   "box": [
+    -26,
+    -23,
+    26,
+    1
+   ],
+   "place": {
+    "across": "steamer_x",
+    "distance": "steamer_d"
+   }
+  },
+  {
+   "id": "steamer_deck",
+   "name": "Палуба парохода",
+   "plane": true,
+   "on": "steamer",
+   "across": 0,
+   "distance": 3,
+   "elevation": 3,
+   "width": 44,
+   "depth": 6,
+   "lit": true
+  },
+  {
+   "id": "smoke",
+   "name": "Дым парохода",
+   "particles": {
+    "kind": "smoke",
+    "rate": 3,
+    "life": [
+     26,
+     36
+    ],
+    "source": [
+     0.6,
+     0.6,
+     0
+    ],
+    "speed": [
+     1.4,
+     2.2
+    ],
+    "spread": 12,
+    "gravity": -0.1,
+    "drag": 0.35,
+    "wind": 1,
+    "gust": 0.5,
+    "turbulence": 2,
+    "swirl": 7,
+    "size": [
+     1.6,
+     18
+    ],
+    "color": "#9a9a96",
+    "opacity": 0.55,
+    "sheer": 0.3,
+    "fade": [
+     0.02,
+     0.55
+    ],
+    "soft": 3,
+    "at": "steamer#funnel",
+    "amount": "steamer_smoke"
+   }
+  },
+  {
+   "id": "harbour",
+   "name": "Причал Лисса",
+   "unseen": true,
+   "across": 3.35,
+   "distance": -29999
+  },
+  {
+   "id": "quay",
+   "name": "Причал",
+   "on": "harbour",
+   "distance": 9,
+   "elevation": -5,
+   "facing": 270,
+   "height": 4.6,
+   "box": [
+    -70,
+    -4.6,
+    70,
+    0
+   ]
+  },
+  {
+   "id": "quay_top",
+   "name": "Мостовая причала",
+   "plane": true,
+   "on": "harbour",
+   "across": 16,
+   "distance": 9,
+   "elevation": -1.2,
+   "width": 32,
+   "depth": 140,
+   "lit": true
+  },
+  {
+   "id": "lisse",
+   "name": "Склады Лисса",
+   "on": "harbour",
+   "across": 30,
+   "distance": 25,
+   "elevation": -1.2,
+   "facing": 270,
+   "height": 20,
+   "box": [
+    -100,
+    -20,
+    100,
+    0
+   ]
+  },
+  {
+   "id": "lisse_town",
+   "name": "Лисс",
+   "on": "harbour",
+   "across": 60,
+   "distance": 25,
+   "elevation": -1.2,
+   "facing": 270,
+   "height": 22,
+   "box": [
+    -100,
+    -22,
+    100,
+    0
+   ]
+  },
+  {
+   "id": "lisse_upper",
+   "name": "Лисс за гаванью",
+   "on": "harbour",
+   "across": -70,
+   "distance": 260,
+   "elevation": 2,
+   "facing": 180,
+   "height": 30,
+   "box": [
+    -100,
+    -31,
+    100,
+    0
+   ]
+  },
+  {
+   "id": "quay_lamps",
+   "name": "Фонари причала",
+   "on": "harbour",
+   "across": 1.2,
+   "distance": 9,
+   "elevation": -1.2,
+   "facing": 270,
+   "height": 3.6,
+   "box": [
+    -70,
+    -3.8,
+    70,
+    0.02
+   ],
+   "glows": true
+  },
+  {
+   "id": "lisse_windows",
+   "name": "Окна складов",
+   "on": "harbour",
+   "across": 29.9,
+   "distance": 25,
+   "elevation": -1.2,
+   "facing": 270,
+   "height": 20,
+   "box": [
+    -100,
+    -20,
+    100,
+    0
+   ],
+   "glows": true
+  },
+  {
+   "id": "lisse_town_windows",
+   "name": "Окна Лисса",
+   "on": "harbour",
+   "across": 59.9,
+   "distance": 25,
+   "elevation": -1.2,
+   "facing": 270,
+   "height": 22,
+   "box": [
+    -100,
+    -22,
+    100,
+    0
+   ],
+   "glows": true
+  },
+  {
+   "id": "lisse_upper_windows",
+   "name": "Окна Лисса за гаванью",
+   "on": "harbour",
+   "across": -70,
+   "distance": 259.9,
+   "elevation": 2,
+   "facing": 180,
+   "height": 30,
+   "box": [
+    -100,
+    -31,
+    100,
+    0
+   ],
+   "glows": true
+  },
+  {
+   "id": "course",
+   "name": "Корабль в море",
+   "unseen": true,
+   "across": 0,
+   "distance": 0,
+   "facing": 180,
+   "place": {
+    "across": "ship_x",
+    "distance": "ship_d",
+    "facing": "ship_f"
+   }
+  },
+  {
+   "id": "hull",
+   "name": "Киль",
+   "unseen": true,
+   "on": "course",
+   "across": -2.4,
+   "elevation": -2.5,
+   "facing": 90,
+   "place": {
+    "tilt": "heel"
+   }
+  },
+  {
+   "id": "ship",
+   "name": "Корабль",
+   "unseen": true,
+   "on": "hull",
+   "distance": -2.4,
+   "elevation": 2.5,
+   "facing": 270
+  },
+  {
+   "id": "poop_deck",
+   "name": "Ют",
+   "plane": true,
+   "on": "ship",
+   "across": -2.4,
+   "distance": 1.5,
+   "elevation": 0,
+   "width": 8.2,
+   "depth": 9,
+   "lit": true,
+   "reflect": {
+    "strength": 0.14,
+    "fade": 3,
+    "blur": 0.12
+   }
+  },
+  {
+   "id": "main_deck",
+   "name": "Шкафут",
+   "plane": true,
+   "on": "ship",
+   "across": -2.4,
+   "distance": 19,
+   "elevation": -1.4,
+   "width": 8.6,
+   "depth": 26,
+   "lit": true,
+   "reflect": {
+    "strength": 0.14,
+    "fade": 3,
+    "blur": 0.12
+   }
+  },
+  {
+   "id": "hatch_top",
+   "name": "Люк",
+   "plane": true,
+   "on": "ship",
+   "across": -2.4,
+   "distance": 10.5,
+   "elevation": -0.95,
+   "width": 2.6,
+   "depth": 3
+  },
+  {
+   "id": "hatch",
+   "name": "Комингс люка",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 9,
+   "elevation": -1.4,
+   "facing": 180,
+   "height": 0.45,
+   "box": [
+    -1.35,
+    -0.47,
+    1.35,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "bulwark_starboard",
+   "name": "Правый борт",
+   "on": "ship",
+   "across": 1.85,
+   "distance": 7.5,
+   "elevation": -1.4,
+   "facing": 270,
+   "height": 2.4,
+   "box": [
+    -10.6,
+    -2.5,
+    10.6,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "bulwark_port",
+   "name": "Левый борт",
+   "on": "ship",
+   "across": -6.65,
+   "distance": 7.5,
+   "elevation": -1.4,
+   "facing": 90,
+   "height": 2.4,
+   "box": [
+    -10.6,
+    -2.5,
+    10.6,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "bow_starboard",
+   "name": "Правый борт у носа",
+   "on": "ship",
+   "across": -0.10000000000000009,
+   "distance": 25,
+   "elevation": -1.4,
+   "facing": 255,
+   "height": 1.7,
+   "box": [
+    -7.4,
+    -1.8,
+    7.4,
+    0.01
+   ]
+  },
+  {
+   "id": "side_starboard",
+   "name": "Правый борт снаружи",
+   "on": "ship",
+   "across": 1.85,
+   "distance": 7.5,
+   "elevation": -3.8,
+   "facing": 270,
+   "height": 3.8,
+   "box": [
+    -10.6,
+    -3.85,
+    10.6,
+    0.01
+   ]
+  },
+  {
+   "id": "side_bow_starboard",
+   "name": "Правый борт у носа снаружи",
+   "on": "ship",
+   "across": -0.10000000000000009,
+   "distance": 25,
+   "elevation": -3.8,
+   "facing": 255,
+   "height": 2.4,
+   "box": [
+    -7.4,
+    -2.45,
+    7.4,
+    0.01
+   ]
+  },
+  {
+   "id": "skiff",
+   "name": "Шлюпка",
+   "on": "ship",
+   "across": 3.0000000000000004,
+   "distance": 8,
+   "elevation": -3.8,
+   "facing": 270,
+   "height": 3.7,
+   "box": [
+    -2.6,
+    -3.75,
+    2.6,
+    0.25
+   ]
+  },
+  {
+   "id": "bow_port",
+   "name": "Левый борт у носа",
+   "on": "ship",
+   "across": -4.699999999999999,
+   "distance": 25,
+   "elevation": -1.4,
+   "facing": 105,
+   "height": 1.7,
+   "box": [
+    -7.4,
+    -1.8,
+    7.4,
+    0.01
+   ]
+  },
+  {
+   "id": "taffrail",
+   "name": "Гакаборт",
+   "on": "ship",
+   "across": -2.4,
+   "distance": -3,
+   "elevation": 0,
+   "facing": 0,
+   "height": 1.05,
+   "box": [
+    -4.2,
+    -1.1,
+    4.2,
+    0.01
+   ]
+  },
+  {
+   "id": "break_rail",
+   "name": "Поручни юта",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 6,
+   "elevation": 0,
+   "facing": 180,
+   "height": 1.05,
+   "box": [
+    -4.2,
+    -1.1,
+    4.2,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.45,
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "wheel",
+   "name": "Штурвал",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 2.6,
+   "elevation": 0,
+   "facing": 180,
+   "height": 1.95,
+   "box": [
+    -0.85,
+    -2,
+    0.85,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.15
+   }
+  },
+  {
+   "id": "mizzen",
+   "name": "Бизань-мачта",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 5.2,
+   "elevation": 0,
+   "facing": 180,
+   "height": 19,
+   "box": [
+    -3.2,
+    -19.2,
+    3.2,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.45,
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "spanker",
+   "name": "Бизань",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 5.2,
+   "elevation": 0,
+   "facing": 110,
+   "height": 14.5,
+   "box": [
+    -6.3,
+    -14.8,
+    0.8,
+    -2.7
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.4,
+    "soft": 0.3
+   },
+   "translucent": 0.45,
+   "uniforms": {
+    "head": -14.3,
+    "foot": -3.2,
+    "rise": 0,
+    "seed": 9,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "spanker_gaff",
+   "name": "Гафель бизани",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 5.2,
+   "elevation": 0,
+   "facing": 110,
+   "height": 14.5,
+   "box": [
+    -6.3,
+    -14.6,
+    0.4,
+    -12.3
+   ],
+   "inFront": [
+    "spanker"
+   ]
+  },
+  {
+   "id": "mainmast",
+   "name": "Грот-мачта",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14,
+   "elevation": -1.4,
+   "facing": 180,
+   "height": 27,
+   "box": [
+    -8.4,
+    -27.3,
+    8.4,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.45,
+    "soft": 0.3
+   }
+  },
+  {
+   "id": "shrouds",
+   "name": "Ванты",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14.4,
+   "elevation": -1.4,
+   "facing": 180,
+   "height": 18,
+   "box": [
+    -4.5,
+    -18.2,
+    4.5,
+    0.01
+   ]
+  },
+  {
+   "id": "mainsail",
+   "name": "Грот шхуны",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14,
+   "elevation": -1.4,
+   "facing": 125,
+   "height": 20,
+   "box": [
+    -10.6,
+    -20,
+    0.8,
+    -2.4
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.4,
+    "soft": 0.3
+   },
+   "translucent": 0.45,
+   "uniforms": {
+    "head": -19,
+    "foot": -3.2,
+    "rise": 1,
+    "seed": 12,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "mainsail_spars",
+   "name": "Гик и гафель грота",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14,
+   "elevation": -1.4,
+   "facing": 125,
+   "height": 20,
+   "box": [
+    -10.6,
+    -20,
+    0.6,
+    -2.8
+   ],
+   "inFront": [
+    "mainsail"
+   ]
+  },
+  {
+   "id": "foremast",
+   "name": "Фок-мачта",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23,
+   "elevation": -1.4,
+   "facing": 180,
+   "height": 24,
+   "box": [
+    -7.8,
+    -24.3,
+    7.8,
+    0.01
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.45,
+    "soft": 0.3
+   }
+  },
+  {
+   "id": "foresail",
+   "name": "Фок шхуны",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23,
+   "elevation": -1.4,
+   "facing": 125,
+   "height": 15.2,
+   "box": [
+    -8.6,
+    -15.2,
+    0.8,
+    -1.4
+   ],
+   "translucent": 0.45,
+   "uniforms": {
+    "head": -14.2,
+    "foot": -2.2,
+    "rise": 1,
+    "seed": 13,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "foresail_spars",
+   "name": "Гик и гафель фока",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23,
+   "elevation": -1.4,
+   "facing": 125,
+   "height": 15.2,
+   "box": [
+    -8.6,
+    -15.2,
+    0.6,
+    -1.8
+   ],
+   "inFront": [
+    "foresail"
+   ]
+  },
+  {
+   "id": "fore_course_l",
+   "name": "Фок-нижний, левая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23.45,
+   "elevation": 9,
+   "facing": 180,
+   "height": 7.1,
+   "box": [
+    -8.1,
+    -0.5,
+    0.7,
+    7.1
+   ],
+   "place": {
+    "facing": "belly_l",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 6.5,
+    "rise": 0,
+    "seed": 1,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "fore_course_r",
+   "name": "Фок-нижний, правая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23.45,
+   "elevation": 9,
+   "facing": 180,
+   "height": 7.1,
+   "box": [
+    -0.7,
+    -0.5,
+    8.1,
+    7.1
+   ],
+   "place": {
+    "facing": "belly_r",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 6.5,
+    "rise": 0,
+    "seed": 1,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "fore_top_l",
+   "name": "Фок-марсель, левая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23.45,
+   "elevation": 15.6,
+   "facing": 180,
+   "height": 6.7,
+   "box": [
+    -7.300000000000001,
+    -0.5,
+    0.7,
+    6.7
+   ],
+   "place": {
+    "facing": "belly_l",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 6.1,
+    "rise": 1,
+    "seed": 2,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "fore_top_r",
+   "name": "Фок-марсель, правая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23.45,
+   "elevation": 15.6,
+   "facing": 180,
+   "height": 6.7,
+   "box": [
+    -0.7,
+    -0.5,
+    7.300000000000001,
+    6.7
+   ],
+   "place": {
+    "facing": "belly_r",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 6.1,
+    "rise": 1,
+    "seed": 2,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "fore_tg_l",
+   "name": "Фок-брамсель, левая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23.45,
+   "elevation": 20.4,
+   "facing": 180,
+   "height": 5,
+   "box": [
+    -6,
+    -0.5,
+    0.7,
+    5
+   ],
+   "place": {
+    "facing": "belly_l",
+    "tilt": "belly_tilt",
+    "elevation": "fore_tg_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 4.4,
+    "rise": 1,
+    "seed": 3,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "fore_tg_r",
+   "name": "Фок-брамсель, правая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 23.45,
+   "elevation": 20.4,
+   "facing": 180,
+   "height": 5,
+   "box": [
+    -0.7,
+    -0.5,
+    6,
+    5
+   ],
+   "place": {
+    "facing": "belly_r",
+    "tilt": "belly_tilt",
+    "elevation": "fore_tg_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 4.4,
+    "rise": 1,
+    "seed": 3,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "main_course_l",
+   "name": "Грот-нижний, левая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14.45,
+   "elevation": 10,
+   "facing": 180,
+   "height": 8.1,
+   "box": [
+    -8.7,
+    -0.5,
+    0.7,
+    8.1
+   ],
+   "place": {
+    "facing": "belly_l",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 7.5,
+    "rise": 0,
+    "seed": 4,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "main_course_r",
+   "name": "Грот-нижний, правая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14.45,
+   "elevation": 10,
+   "facing": 180,
+   "height": 8.1,
+   "box": [
+    -0.7,
+    -0.5,
+    8.7,
+    8.1
+   ],
+   "place": {
+    "facing": "belly_r",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 7.5,
+    "rise": 0,
+    "seed": 4,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "main_top_l",
+   "name": "Грот-марсель, левая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14.45,
+   "elevation": 17.2,
+   "facing": 180,
+   "height": 7.3,
+   "box": [
+    -7.9,
+    -0.5,
+    0.7,
+    7.3
+   ],
+   "place": {
+    "facing": "belly_l",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 6.7,
+    "rise": 1,
+    "seed": 5,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "main_top_r",
+   "name": "Грот-марсель, правая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14.45,
+   "elevation": 17.2,
+   "facing": 180,
+   "height": 7.3,
+   "box": [
+    -0.7,
+    -0.5,
+    7.9,
+    7.3
+   ],
+   "place": {
+    "facing": "belly_r",
+    "tilt": "belly_tilt"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 6.7,
+    "rise": 1,
+    "seed": 5,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "main_tg_l",
+   "name": "Грот-брамсель, левая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14.45,
+   "elevation": 22.5,
+   "facing": 180,
+   "height": 5.5,
+   "box": [
+    -6.5,
+    -0.5,
+    0.7,
+    5.5
+   ],
+   "place": {
+    "facing": "belly_l",
+    "tilt": "belly_tilt",
+    "elevation": "main_tg_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 4.9,
+    "rise": 1,
+    "seed": 6,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "main_tg_r",
+   "name": "Грот-брамсель, правая половина",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 14.45,
+   "elevation": 22.5,
+   "facing": 180,
+   "height": 5.5,
+   "box": [
+    -0.7,
+    -0.5,
+    6.5,
+    5.5
+   ],
+   "place": {
+    "facing": "belly_r",
+    "tilt": "belly_tilt",
+    "elevation": "main_tg_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.4,
+    "light": "sun"
+   },
+   "translucent": 0.55,
+   "uniforms": {
+    "head": 0,
+    "foot": 4.9,
+    "rise": 1,
+    "seed": 6,
+    "set": 1,
+    "scarlet": 0,
+    "luff": 0,
+    "wind": 1
+   }
+  },
+  {
+   "id": "lantern_port",
+   "name": "Фонарь слева",
+   "on": "ship",
+   "across": -6.35,
+   "distance": 6,
+   "elevation": 1.05,
+   "height": 0.36,
+   "box": [
+    -0.14,
+    -0.4,
+    0.14,
+    0.02
+   ],
+   "glows": true
+  },
+  {
+   "id": "lantern_starboard",
+   "name": "Фонарь справа",
+   "on": "ship",
+   "across": 1.5500000000000003,
+   "distance": 6,
+   "elevation": 1.05,
+   "height": 0.36,
+   "box": [
+    -0.14,
+    -0.4,
+    0.14,
+    0.02
+   ],
+   "glows": true
+  },
+  {
+   "id": "lantern_main",
+   "name": "Фонарь на грот-мачте",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 13.75,
+   "elevation": 1,
+   "height": 0.36,
+   "box": [
+    -0.14,
+    -0.4,
+    0.14,
+    0.02
+   ],
+   "glows": true
+  },
+  {
+   "id": "silk_run",
+   "name": "Шёлк, раскатанный по палубе",
+   "plane": true,
+   "on": "ship",
+   "across": -2.4,
+   "distance": 10.4,
+   "elevation": -1.385,
+   "width": 5,
+   "depth": 5.5,
+   "lit": true
+  },
+  {
+   "id": "silk",
+   "name": "Алый шёлк",
+   "on": "ship",
+   "across": -5,
+   "distance": 11.6,
+   "elevation": -1.4,
+   "height": 0.8,
+   "box": [
+    -0.9,
+    -1.7,
+    0.9,
+    0.05
+   ]
+  },
+  {
+   "id": "silk_1",
+   "name": "Алый шёлк, штуки 2",
+   "on": "ship",
+   "across": -0.2,
+   "distance": 13.4,
+   "elevation": -1.4,
+   "height": 0.8,
+   "box": [
+    -0.9,
+    -1.7,
+    0.9,
+    0.05
+   ]
+  },
+  {
+   "id": "silk_2",
+   "name": "Алый шёлк, штуки 3",
+   "on": "ship",
+   "across": -4.7,
+   "distance": 15.2,
+   "elevation": -1.4,
+   "height": 0.8,
+   "box": [
+    -0.9,
+    -1.7,
+    0.9,
+    0.05
+   ]
+  },
+  {
+   "id": "silk_3",
+   "name": "Алый шёлк, штуки 4",
+   "on": "ship",
+   "across": -1,
+   "distance": 16.4,
+   "elevation": -1.4,
+   "height": 0.8,
+   "box": [
+    -0.9,
+    -1.7,
+    0.9,
+    0.05
+   ]
+  },
+  {
+   "id": "silk_4",
+   "name": "Алый шёлк, штуки 5",
+   "on": "ship",
+   "across": -2.8,
+   "distance": 12.4,
+   "elevation": -1.4,
+   "height": 0.8,
+   "box": [
+    -0.9,
+    -1.7,
+    0.9,
+    0.05
+   ]
+  },
+  {
+   "id": "cask",
+   "name": "Бочка Греев",
+   "on": "ship",
+   "across": -0.09,
+   "distance": 3.94,
+   "elevation": 0,
+   "facing": 250,
+   "height": 0.9,
+   "box": [
+    -0.5,
+    -1.05,
+    0.5,
+    0.02
+   ],
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "strength": 0.5,
+    "soft": 0.15
+   }
+  },
+  {
+   "id": "grey",
+   "name": "Грей",
+   "on": "ship",
+   "across": -2.4,
+   "distance": 2.28,
+   "elevation": 0,
+   "person": {
+    "cast": "cast",
+    "who": "grey",
+    "turn": 0
+   },
+   "place": {
+    "across": "gr_a",
+    "distance": "gr_d",
+    "elevation": "gr_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "assol",
+   "name": "Ассоль",
+   "on": "ship",
+   "across": 1.32,
+   "distance": 5.1,
+   "elevation": 0,
+   "person": {
+    "cast": "cast",
+    "who": "assol",
+    "turn": 90
+   },
+   "place": {
+    "across": "as_a",
+    "distance": "as_d",
+    "elevation": "as_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "gop",
+   "name": "Гоп",
+   "on": "ship",
+   "across": -3.7,
+   "distance": 13,
+   "elevation": -1.4,
+   "person": {
+    "cast": "cast",
+    "who": "gop",
+    "turn": 200
+   },
+   "place": {
+    "across": "go_a",
+    "distance": "go_d",
+    "elevation": "go_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "panten",
+   "name": "Пантен",
+   "on": "ship",
+   "across": -4.4,
+   "distance": -0.6,
+   "elevation": 0,
+   "person": {
+    "cast": "cast",
+    "who": "panten",
+    "turn": 0
+   },
+   "place": {
+    "across": "pa_a",
+    "distance": "pa_d",
+    "elevation": "pa_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "letika",
+   "name": "Летика",
+   "on": "ship",
+   "across": 0.2,
+   "distance": 5.2,
+   "elevation": 0,
+   "person": {
+    "cast": "cast",
+    "who": "letika",
+    "turn": 20
+   },
+   "place": {
+    "across": "le_a",
+    "distance": "le_d",
+    "elevation": "le_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "sailor",
+   "name": "Матрос",
+   "on": "ship",
+   "across": -0.98,
+   "distance": 4.05,
+   "elevation": 0,
+   "person": {
+    "cast": "cast",
+    "who": "sailor",
+    "turn": 97
+   },
+   "place": {
+    "across": "sa_a",
+    "distance": "sa_d",
+    "elevation": "sa_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "crew2",
+   "name": "Матрос",
+   "on": "ship",
+   "across": -0.7,
+   "distance": 3.27,
+   "elevation": 0,
+   "person": {
+    "cast": "cast",
+    "who": "sailor",
+    "turn": 42
+   },
+   "place": {
+    "across": "cr_a",
+    "distance": "cr_d",
+    "elevation": "cr_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "sailor3",
+   "name": "Матрос",
+   "on": "ship",
+   "across": -3.4,
+   "distance": 9.2,
+   "elevation": -1.4,
+   "person": {
+    "cast": "cast",
+    "who": "sailor",
+    "turn": 180
+   },
+   "place": {
+    "across": "s3_a",
+    "distance": "s3_d",
+    "elevation": "s3_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "sailor4",
+   "name": "Матрос",
+   "on": "ship",
+   "across": -1.4,
+   "distance": 9.2,
+   "elevation": -1.4,
+   "person": {
+    "cast": "cast",
+    "who": "sailor",
+    "turn": 180
+   },
+   "place": {
+    "across": "s4_a",
+    "distance": "s4_d",
+    "elevation": "s4_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "zimmer",
+   "name": "Циммер",
+   "on": "ship",
+   "across": -1.2,
+   "distance": 13.2,
+   "elevation": -1.4,
+   "person": {
+    "cast": "cast",
+    "who": "zimmer",
+    "turn": 180
+   },
+   "place": {
+    "across": "zi_a",
+    "distance": "zi_d",
+    "elevation": "zi_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "musician1",
+   "name": "Скрипач",
+   "on": "ship",
+   "across": -3.4,
+   "distance": 26.5,
+   "elevation": -1.4,
+   "person": {
+    "cast": "cast",
+    "who": "musician",
+    "turn": 180
+   },
+   "place": {
+    "across": "m1_a",
+    "distance": "m1_d",
+    "elevation": "m1_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "musician2",
+   "name": "Виолончелист",
+   "on": "ship",
+   "across": -1.4,
+   "distance": 26.5,
+   "elevation": -1.4,
+   "person": {
+    "cast": "cast",
+    "who": "cellist",
+    "turn": 180
+   },
+   "place": {
+    "across": "m2_a",
+    "distance": "m2_d",
+    "elevation": "m2_e"
+   },
+   "shadow": {
+    "onto": [
+     "main_deck",
+     "poop_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "longren",
+   "name": "Лонгрен",
+   "on": "steamer",
+   "across": 19,
+   "distance": 0.45,
+   "elevation": 3,
+   "person": {
+    "cast": "cast",
+    "who": "longren",
+    "turn": 135
+   },
+   "place": {
+    "across": "lo_a",
+    "distance": "lo_d",
+    "elevation": "lo_e"
+   },
+   "shadow": {
+    "onto": [
+     "steamer_deck"
+    ],
+    "soft": 0.2
+   }
+  },
+  {
+   "id": "by_rail",
+   "name": "У правого борта",
+   "on": "ship",
+   "across": 1.32,
+   "distance": 4.45,
+   "elevation": 0,
+   "unseen": true,
+   "height": 1.76
+  },
+  {
+   "id": "by_mast",
+   "name": "У грот-мачты",
+   "on": "ship",
+   "across": -2.95,
+   "distance": 13.3,
+   "elevation": -1.4,
+   "unseen": true,
+   "height": 1.76
+  },
+  {
+   "id": "cam_rail",
+   "name": "Оператор за бортом у юта",
+   "on": "ship",
+   "across": 4.33,
+   "distance": 5.54,
+   "elevation": -0.45,
+   "unseen": true,
+   "facing": 180,
+   "height": 1.7
+  },
+  {
+   "id": "cam_boat",
+   "name": "Оператор на воде у правого борта",
+   "on": "ship",
+   "across": 10.25,
+   "distance": 4.62,
+   "elevation": -3.5,
+   "unseen": true,
+   "facing": 180,
+   "height": 1.7
+  },
+  {
+   "id": "cam_steamer",
+   "name": "Оператор на палубе парохода",
+   "on": "steamer",
+   "across": 16.05,
+   "distance": 0.97,
+   "elevation": 3,
+   "unseen": true,
+   "facing": 180,
+   "height": 1.7
+  },
+  {
+   "id": "ropes",
+   "name": "Руки на вантах",
+   "insert": "ropes"
+  }
+ ]
+}

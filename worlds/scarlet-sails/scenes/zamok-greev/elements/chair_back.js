@@ -1,0 +1,32 @@
+// The father's wing chair seen from behind (it faces the fire): its tall upholstered back in worn
+// cognac leather, the wings at the top, piping along the edges, short dark legs
+g.fillStyle = "#2c241e";
+g.fillRect(-0.4, -0.12, 0.05, 0.12);
+g.fillRect(0.35, -0.12, 0.05, 0.12);
+g.fillStyle = "#6e4a30";
+g.beginPath();
+g.moveTo(-0.42, -0.1);
+g.lineTo(-0.44, -0.95);
+g.quadraticCurveTo(-0.45, -1.13, -0.3, -1.15);
+g.lineTo(0.3, -1.15);
+g.quadraticCurveTo(0.45, -1.13, 0.44, -0.95);
+g.lineTo(0.42, -0.1);
+g.closePath();
+g.fill();
+const sheen = g.createLinearGradient(-0.44, 0, 0.44, 0);
+sheen.addColorStop(0, "rgba(255,226,190,0)");
+sheen.addColorStop(0.35, "rgba(255,226,190,0.12)");
+sheen.addColorStop(1, "rgba(30,18,10,0.25)");
+g.fillStyle = sheen;
+g.fill();
+g.strokeStyle = "rgba(40,24,14,0.6)";
+g.lineWidth = 0.01;
+g.beginPath();
+g.moveTo(-0.4, -0.12);
+g.lineTo(-0.42, -0.95);
+g.quadraticCurveTo(-0.43, -1.11, -0.3, -1.13);
+g.lineTo(0.3, -1.13);
+g.quadraticCurveTo(0.43, -1.11, 0.42, -0.95);
+g.lineTo(0.4, -0.12);
+g.stroke();
+e.at(0, -1.15, "armchair");
