@@ -1,0 +1,107 @@
+/* The game over the scene (ui.js), on linen, in ink: the toy yacht and the compass low in the corners, the strips of
+   linen, the hint and «Дальше», the title, the letter; the tools. Scarlet is the yacht's sails' alone. */
+#layer { --linen: #d8cfbd; --linen-dark: #b9ad96; --ink: #1c2a4a; --scarlet: #d2232a;
+  --hand: "Parusa Hand", "Segoe Script", cursive;
+  --below-header: 46px; } /* where the site's header ends */
+#layer .gauge, #layer .toasts, #layer .hint, #layer .title { pointer-events: none; }
+
+/* linen, its weave seen: whatever the game writes on */
+#layer .slip, #layer .hint, #layer .onward, #layer .sheet, #layer .face.back, #layer .tools > button, #layer .author-panel {
+  color: var(--ink);
+  background: repeating-linear-gradient(0deg, rgba(92, 78, 54, 0.14) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(255, 251, 240, 0.22) 0 1px, transparent 1px 3px), var(--linen); }
+
+/* the scales: the yacht (Сказка ↔ Люди) on the left, the compass (Море ↔ Дом) on the right */
+#layer .gauge { position: absolute; bottom: 64px; width: 72px; height: 72px; overflow: visible; opacity: 0; transition: opacity 2s ease;
+  filter: drop-shadow(0 0 2px rgba(216, 207, 189, 0.9)); }
+#layer .yacht { left: 14px; }
+#layer .compass { right: 14px; }
+#layer .gauge .ink { fill: var(--ink); }
+#layer .gauge .line { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+#layer .gauge .sail { stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; transition: fill 2s ease; }
+#layer .gauge .face { fill: var(--linen); fill-opacity: 0.9; stroke: var(--ink); stroke-width: 2; }
+/* (the needle swings a little past where it goes, and settles) */
+#layer .gauge .needle { transform-box: view-box; transform-origin: 36px 36px; transition: rotate 2s cubic-bezier(0.3, 1.5, 0.5, 1); }
+
+/* strips of linen under the tools */
+#layer .toasts { position: absolute; top: calc(var(--below-header) + 60px); right: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+#layer .slip { margin: 0; padding: 6px 16px 7px; max-width: min(320px, 46vw); font: clamp(18px, 4.8vh, 23px)/1.15 var(--hand);
+  box-shadow: 0 1px 3px rgba(28, 42, 74, 0.45); animation: slip-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+  transition: opacity 1.5s ease, translate 1.5s ease; }
+#layer .slip.gone { opacity: 0; translate: 0 -6px; }
+#layer .slip.rule { font-size: clamp(17px, 4.4vh, 21px); line-height: 1.2; }
+#layer .slip .arrow { font-family: Georgia, "Times New Roman", serif; font-size: 0.8em; }
+@keyframes slip-in { from { opacity: 0; translate: 0 -8px; } }
+
+/* the hint: one line low in the middle; «Дальше» under it */
+#layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 4px 16px 5px; max-width: 80vw; white-space: nowrap;
+  font: 22px/1.2 var(--hand); box-shadow: 0 1px 3px rgba(28, 42, 74, 0.45); opacity: 0; transition: opacity 1.2s ease; }
+#layer .hint.on { opacity: 0.95; }
+#layer .onward { position: absolute; z-index: 10; bottom: 14px; left: 50%; translate: -50% 0; min-width: 132px; height: 44px; padding: 0 22px;
+  border: 1px solid var(--ink); border-radius: 4px; font: 24px/1 var(--hand); cursor: pointer; box-shadow: 0 1px 3px rgba(28, 42, 74, 0.45); }
+
+/* the title in the middle of the frame */
+#layer .title { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 6vw; text-align: center; }
+#layer .title span { color: var(--linen); font: clamp(44px, 13vh, 132px)/1.1 var(--hand);
+  text-shadow: 0 0 14px rgba(28, 42, 74, 0.85), 0 0 2px rgba(28, 42, 74, 0.9); opacity: 0; filter: blur(4px);
+  transition: opacity 2.6s ease, filter 2.6s ease; }
+#layer .title.on span { opacity: 1; filter: none; }
+
+/* the letter: three panels folded over the middle one; open-top, open-bottom unfold them */
+#layer .letter-veil { position: absolute; inset: 0; display: grid; place-items: center; padding-top: 30px; background: rgba(28, 42, 74, 0.4); opacity: 0;
+  cursor: pointer; outline: none; perspective: 1600px; transition: opacity 1.2s ease; -webkit-tap-highlight-color: transparent; }
+#layer .letter-veil.on { opacity: 1; }
+#layer .letter { --h: min(calc(86vh - 30px), 640px, 128vw); position: relative; width: calc(var(--h) * 0.7); height: var(--h);
+  font-size: calc(var(--h) * 0.06); transform-style: preserve-3d; rotate: -2.5deg; translate: 0 -10px; scale: 0.92;
+  transition: rotate 1.6s ease, translate 1.6s ease, scale 1.6s ease; }
+#layer .letter-veil.on .letter { translate: 0 0; }
+#layer .letter.open-top { rotate: -0.8deg; scale: 1; }
+#layer .panel { position: absolute; left: 0; width: 100%; height: calc(100% / 3); transform-style: preserve-3d;
+  transition: transform 1.1s cubic-bezier(0.45, 0.05, 0.25, 1); }
+#layer .panel.top { top: 0; transform-origin: 50% 100%; transform: rotateX(-180deg) translateZ(-2px); }
+#layer .panel.mid { top: calc(100% / 3); }
+#layer .panel.bottom { top: calc(200% / 3); transform-origin: 50% 0; transform: rotateX(180deg) translateZ(-1px); }
+#layer .letter.open-top .panel.top, #layer .letter.open-bottom .panel.bottom { transform: rotateX(0deg) translateZ(0); }
+#layer .face { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+#layer .face.back { transform: rotateX(180deg); background-color: var(--linen-dark); box-shadow: inset 0 0 18px rgba(92, 78, 54, 0.35); }
+#layer .face.front { box-shadow: inset 0 0 14px rgba(92, 78, 54, 0.25); }
+/* (the folds) */
+#layer .face.front::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+#layer .panel.top .face.front::after { box-shadow: inset 0 -5px 6px -5px rgba(92, 78, 54, 0.5); }
+#layer .panel.mid .face.front::after { box-shadow: inset 0 5px 6px -5px rgba(92, 78, 54, 0.5), inset 0 -5px 6px -5px rgba(92, 78, 54, 0.5); }
+#layer .panel.bottom .face.front::after { box-shadow: inset 0 5px 6px -5px rgba(92, 78, 54, 0.5); }
+#layer .sheet { position: absolute; left: 0; top: 0; width: 100%; height: 300%; box-sizing: border-box; padding: 1.4em;
+  display: flex; flex-direction: column; justify-content: center; font-family: var(--hand); line-height: 1.3; }
+#layer .panel.mid .sheet { top: -100%; }
+#layer .panel.bottom .sheet { top: -200%; }
+#layer .sheet p { margin: 0 0 0.5em; }
+#layer .sheet .sign { margin: 1em 1em 0 0; text-align: right; }
+#layer .letter-hint { position: absolute; bottom: 1.5vh; left: 0; right: 0; margin: 0; text-align: center; color: var(--linen);
+  font: 22px/1 var(--hand); text-shadow: 0 0 6px rgba(28, 42, 74, 0.9); opacity: 0; transition: opacity 1.2s ease; pointer-events: none; }
+#layer .letter-hint.on { opacity: 0.9; }
+
+/* the corner's tools, under the site's header: ⏸ pause (everyone), ⏭ skip and ☰ the chapters and their steps (the
+   author) — above whatever a minigame spreads over the scene */
+#layer .tools { position: absolute; z-index: 10; top: calc(var(--below-header) + 8px); right: 14px; display: flex; gap: 6px; }
+#layer .tools > button { width: 44px; height: 44px; border: 0; border-radius: 4px; font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.6; }
+#layer .tools > button:hover, #layer .tools.paused > button:first-child { opacity: 1; }
+/* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
+   of its steps */
+#layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
+  background: rgba(28, 42, 74, 0.4); }
+#layer .author-map[hidden] { display: none; }
+#layer .author-panel { position: relative; box-sizing: border-box; width: min(1100px, 100%); max-height: calc(100vh - var(--below-header) - 24px); overflow: auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px 22px; padding: 22px 26px 26px; border-radius: 6px;
+  box-shadow: 0 12px 48px rgba(28, 42, 74, 0.6); font: 15px/1.35 Georgia, "Times New Roman", serif; }
+#layer .author-panel .close { position: absolute; top: 10px; right: 12px; width: 44px; height: 44px; border: 0; border-radius: 4px; background: none;
+  color: inherit; opacity: 0.6; cursor: pointer; font-size: 16px; }
+#layer .author-panel .close:hover { opacity: 1; background: rgba(28, 42, 74, 0.1); }
+#layer .author-panel .as { grid-column: 1 / -1; padding-right: 48px; font-style: italic; }
+#layer .author-panel .as select { font: inherit; color: inherit; background: none; border: 1px solid var(--ink); border-radius: 4px; padding: 4px 8px; }
+#layer .author-panel section { display: flex; flex-direction: column; gap: 2px; }
+#layer .author-panel h3 { margin: 0 0 6px; font: italic 15px/1.3 Georgia, "Times New Roman", serif; opacity: 0.7; }
+#layer .author-panel section button { border: 0; border-radius: 4px; padding: 6px 10px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+#layer .author-panel section button:hover { background: rgba(28, 42, 74, 0.1); }
+#layer .author-panel section button.here { background: var(--linen-dark); }
+#layer .author-panel .minigames { display: flex; flex-direction: column; }
+#layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 13px; font-style: italic; }
