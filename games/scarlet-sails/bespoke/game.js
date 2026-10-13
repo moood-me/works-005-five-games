@@ -1,4 +1,4 @@
-// Алые паруса — по повести Александра Грина. A bespoke game (moood/engines/bespoke) on the world «Алые паруса»:
+// Алые паруса — по повести Александра Грина. A bespoke game (moood/engines/bespoke) on the world «Алые паруса v3» (engine 3):
 // two lives played in turn — Assol's in Kaperna, Grey's in the castle and at sea — till his ship comes for her.
 // A prologue, five chapters, an epilogue — each a row of steps on the world's scenes. The choices, the two scales
 // (Сказка ↔ Люди, Море ↔ Дом) and what is remembered carry from chapter to chapter; how it ends follows from them
