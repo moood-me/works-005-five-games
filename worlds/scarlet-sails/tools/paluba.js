@@ -1,15 +1,15 @@
 // «Палуба» — the scene's generator: `node tools/paluba.js` (from the world's root) writes scenes/paluba/scene.json — the
 // whole spec, laid out here — and the files that repeat or are the world's: each square sail's two halves (their
-// painting and animate: a line of the scene's lib), every sail's shader — the world's cloth (tools/korabl-cloth.glsl,
-// its uniforms: korabli.clothUniforms) —, the sky's shader and uniforms (tools/nebo-sky.glsl, nebo.UNIFORMS).
+// painting and animate: a line of the scene's lib), every sail's shader — the world's cloth (tools/korabl-cloth.wgsl,
+// its uniforms: korabli.clothUniforms) —, the sky's shader and uniforms (tools/nebo-sky.wgsl, nebo.UNIFORMS).
 // Everything else of the scene is written by hand beside it (lib.js, script.js, showcase.js, elements/*, notes.md).
 // Run again whenever this, the cloth shader or the sky's shader changes.
 const fs = require('fs'), path = require('path');
-const { load, writeElement, glsl } = require('./lib');
+const { load, writeElement, wgsl } = require('./lib');
 const K = load('korabli'), N = load('nebo');
 const DIR = path.join(__dirname, '..', 'scenes', 'paluba'), SRC = path.join(__dirname, 'paluba');
 const read = f => fs.readFileSync(path.join(SRC, f), 'utf8');
-const cloth = (id, head, foot, rise, seed) => { writeElement('paluba', id, 'glsl', glsl('korabl-cloth')); return K.clothUniforms([0, head, 0, foot], rise, seed); };
+const cloth = (id, head, foot, rise, seed) => { writeElement('paluba', id, 'wgsl', wgsl('korabl-cloth')); return K.clothUniforms([0, head, 0, foot], rise, seed); };
 
 // ── her plan (as lib.js has it) ──
 const KEEL = -2.4, WAIST = -1.4, SEA = -3.8, KAPERNA = 6000, LISSE = -30000, STEAMER_DECK = 3;
@@ -239,7 +239,7 @@ const spec = {
   music: JSON.parse(read('music.json')),
   objects,
 };
-writeElement('paluba', 'sky', 'glsl', glsl('nebo-sky'));
+writeElement('paluba', 'sky', 'wgsl', wgsl('nebo-sky'));
 const file = path.join(DIR, 'scene.json');
 fs.writeFileSync(file, JSON.stringify(spec, null, 1) + '\n');
 console.log(`scenes/paluba/scene.json: ${objects.length} elements`);

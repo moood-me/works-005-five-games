@@ -1,4 +1,4 @@
-// The wood by the sea (engine 2): its land (the relief reads it), the stream, where everything stands — the trees,
+// The wood by the sea: its land (the relief reads it), the stream, where everything stands — the trees,
 // the stones, the glade's grass, the undergrowth, the mist's banks (each chosen once, the same every time) —, what
 // they are painted as, the sky's sun and moon, the bank Assol runs down after her yacht, and the film in beats
 // (film(scene): the world's module beats).

@@ -1,8 +1,8 @@
-// The world's ships (engine 2). "Secret" seen from outside is built in the scene of elements standing on an unseen
+// The world's ships. "Secret" seen from outside is built in the scene of elements standing on an unseen
 // anchor at her waterline (tools/korabl.js writes them — assembly() says which): her hull's plates, her decks (people
 // stand and walk on them, carried with her), a card along her keel (masts, bowsprit, stays, pennant, lamp), a card
 // across her at each mast (the mast and its yards) and her sails — each its own card, painted once, moved by the
-// world's cloth shader (tools/korabl-cloth.glsl): set and furled, white and scarlet, filled and luffing, the wind going
+// world's cloth shader (tools/korabl-cloth.wgsl): set and furled, white and scarlet, filled and luffing, the wind going
 // over the cloth. She rolls by her anchor's tilt. Everything is painted in daylight colours; the hour is the scene's
 // light, and the light comes through her sails (translucent). korabli.md says how a scene uses it.
 //   Her frame (the anchor's, as "on" places things): `across` forward along the keel (bow +), `distance` to port,
@@ -480,7 +480,7 @@ function assembly(id, { ship = "secret", brace = 35 } = {}) {
   const sailOf = (name, title, where, seed) => {
     const rect = clothRect(name);
     return { id: `${id}_${name}`, name: `«Секрет»: ${title}`, ...where, facing: 180, translucent: 0.55, box: [a(rect[0] - 0.5), a(rect[1] - 0.5), a(rect[2] + 0.5), a(rect[3] + 0.5)],
-      uniforms: clothUniforms(rect, SAILS[name].rise, seed), code: `${K}.sail(g, e, '${name}', '${ship}');`, animate: `${K}.sailMotion(e, '${name}');`, glsl: "cloth" };
+      uniforms: clothUniforms(rect, SAILS[name].rise, seed), code: `${K}.sail(g, e, '${name}', '${ship}');`, animate: `${K}.sailMotion(e, '${name}');`, wgsl: "cloth" };
   };
   const titles = { course: "нижний парус", top: "марсель", tg: "брамсель" };
   ["fore", "main"].forEach((which, k) => {

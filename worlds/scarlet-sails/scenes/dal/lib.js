@@ -15,8 +15,8 @@ var HORIZON = 0.22;
 var sunX = function (A) {
   return A * 0.62;
 };
-// the mist's edge: how far down the frame it has gone off the sea for `reveal` 0…1 (stage heights) — sea.glsl and
-// fleet.glsl take it from here (their uniform `front`); it ends past the frame's foot
+// the mist's edge: how far down the frame it has gone off the sea for `reveal` 0…1 (stage heights) — sea.wgsl and
+// fleet.wgsl take it from here (their uniform `front`); it ends past the frame's foot
 var FRONT = [0.02, 1.15];
 function front(reveal) {
   return FRONT[0] + (FRONT[1] - FRONT[0]) * smooth(clamp(reveal, 0, 1));

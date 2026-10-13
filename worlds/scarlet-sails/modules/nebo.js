@@ -1,6 +1,6 @@
-// The sky over Kaperna and the light of the hour, one for every scene of the world (engine 2): the hour's palette, the
+// The sky over Kaperna and the light of the hour, one for every scene of the world: the hour's palette, the
 // sun and the moon on their way, the weights of the scenes' looks, the colours of lamplight and of the scarlet — and
-// the sky itself: painted once (sky), moved by its animate (skyMotion) and its shader (tools/nebo-sky.glsl, written
+// the sky itself: painted once (sky), moved by its animate (skyMotion) and its shader (tools/nebo-sky.wgsl, written
 // into a scene by tools/nebo-sky.js). No painting reads the hour: `hour` moves, and what moves is the engine's.
 // nebo.md says how a scene uses it.
 
@@ -160,7 +160,7 @@ function glow(g, x, y, r, flat, colour, a) {
   g.restore();
 }
 
-// ── The sky ── one sky element: `sky(g, e, o)` its code, `skyMotion(e, o)` its animate, tools/nebo-sky.glsl its
+// ── The sky ── one sky element: `sky(g, e, o)` its code, `skyMotion(e, o)` its animate, tools/nebo-sky.wgsl its
 // shader. o (the scene's, made once — in its lib — not in the animate):
 //   horizon — where the horizon is on the stage, from the top (the scene's "horizon");
 //   round — true for a sky seen all round (cameras around, roam: x 0…2π, straight ahead at π); else the stage's

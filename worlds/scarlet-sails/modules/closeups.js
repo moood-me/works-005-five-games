@@ -1,4 +1,4 @@
-// The world's close-ups of hands and things (engine 2): five shots for the inserts of its scenes — `scrap` (the scarlet
+// The world's close-ups of hands and things: five shots for the inserts of its scenes — `scrap` (the scarlet
 // scrap on Longren's bench, a child's fingers), `hold` (the ring on the boy's palm, his mother's four fingers over his
 // hand), `cellar` (the bottom of the old cask, the boy's hand wiping the dust off its words), `ropes` (the ship's boy's
 // two hands on the tarred shrouds, the sky and the horizon behind), `boat` (Grey's hand out of the skiff, Assol's hand

@@ -7,7 +7,7 @@
 // The cloth shader alone, onto sails a scene builds itself (the deck's): each element's uniforms — its painting's
 // head and foot (y, its units), whether it rises from its foot (1) or drops from its head (0), a seed of its own —
 //   node tools/korabl.js <scene folder> cloth <element id>:<head>:<foot>:<rise>:<seed> …
-const { load, readScene, writeScene, writeElement, glsl } = require('./lib');
+const { load, readScene, writeScene, writeElement, wgsl } = require('./lib');
 
 const [folder, ...args] = process.argv.slice(2);
 if (!folder) throw new Error('usage: node tools/korabl.js <scene folder> [anchor id] [brace] | <scene folder> cloth <id>:<head>:<foot>:<rise>:<seed> …');
@@ -20,7 +20,7 @@ if (args[0] === 'cloth') {
     const el = spec.objects.find(o => o.id === id);
     if (!el) throw new Error(`no element "${id}" in scenes/${folder}/scene.json`);
     el.uniforms = K.clothUniforms([0, Number(head), 0, Number(foot)], Number(rise) > 0, Number(seed));
-    writeElement(folder, id, 'glsl', glsl('korabl-cloth'));
+    writeElement(folder, id, 'wgsl', wgsl('korabl-cloth'));
     console.log(`scenes/${folder}: ${id} — the world's cloth shader`);
   }
 } else {
@@ -31,11 +31,11 @@ if (args[0] === 'cloth') {
   if (!spec.objects.some(o => o.id === id)) spec.objects.push({ id, name: '«Секрет»', unseen: true, across: 0, distance: 200, facing: 0 });
   spec.objects = spec.objects.filter(o => !mine.has(o.id));
   const at = spec.objects.findIndex(o => o.id === id);
-  spec.objects.splice(at + 1, 0, ...parts.map(({ code, animate, glsl: shader, ...el }) => el));
+  spec.objects.splice(at + 1, 0, ...parts.map(({ code, animate, wgsl: shader, ...el }) => el));
   for (const p of parts) {
     writeElement(folder, p.id, 'js', p.code);
     writeElement(folder, p.id, 'animate.js', p.animate ?? null);
-    writeElement(folder, p.id, 'glsl', p.glsl ? glsl(`korabl-${p.glsl}`) : null);
+    writeElement(folder, p.id, 'wgsl', p.wgsl ? wgsl(`korabl-${p.wgsl}`) : null);
   }
   console.log(`scenes/${folder}: "Secret" on ${id} — ${parts.length} elements`);
 }
