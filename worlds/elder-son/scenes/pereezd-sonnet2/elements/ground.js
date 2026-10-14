@@ -1,7 +1,7 @@
-const A0 = 20, D0 = 120, L = e.lib;
+const A0 = 20, D0 = 170, L = e.lib;
 const X = a => a - A0, Y = d => D0 - d;          // мир → холст плоскости (y к зрителю)
 // снег
-g.fillStyle = '#e4eaf4'; g.fillRect(-110, -125, 220, 250);
+g.fillStyle = '#e4eaf4'; g.fillRect(-110, -175, 220, 350);
 // волны наста: низкий контраст, ближе гуще
 for (let i = 0; i < 260; i++) {
   const d = 3 + Math.pow(e.rnd(), 1.7) * 220, a = -70 + e.rnd() * 190, rx = 1.5 + e.rnd() * 7 * (1 + d / 60), ry = rx * (0.18 + e.rnd() * 0.15);

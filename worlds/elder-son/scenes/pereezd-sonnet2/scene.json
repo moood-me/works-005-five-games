@@ -90,8 +90,8 @@
     {
       "id": "head_l",
       "of": "freight#lamp",
-      "reach": 55,
-      "strength": 1.5,
+      "reach": 60,
+      "strength": 1.8,
       "on": "freight_lamp"
     }
   ],
@@ -132,9 +132,9 @@
       "name": "Снег",
       "plane": true,
       "across": 20,
-      "distance": 120,
+      "distance": 170,
       "width": 220,
-      "depth": 250
+      "depth": 350
     },
     {
       "id": "lamp",
@@ -184,10 +184,10 @@
       "distance": 17,
       "height": 3.6,
       "box": [
-        -3.6,
-        -4.8,
-        3.6,
-        0.2
+        -4.4,
+        -5,
+        4.4,
+        0.5
       ],
       "shadow": true
     },
@@ -198,10 +198,10 @@
       "distance": 16.95,
       "height": 1.2,
       "box": [
-        -3.6,
-        -4.8,
-        3.6,
-        0.2
+        -4.4,
+        -5,
+        4.4,
+        0.5
       ],
       "glows": true
     },

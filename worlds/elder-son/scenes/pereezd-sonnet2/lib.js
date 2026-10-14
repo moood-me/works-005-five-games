@@ -138,7 +138,7 @@ function loco(g, e) {
   // фара: корпус и огонь
   g.fillStyle = '#c9d4e6'; g.beginPath(); g.arc(x0 + 0.25, -2.7, 0.3, 0, 6.3); g.fill();
   g.fillStyle = '#fff3d2'; g.beginPath(); g.arc(x0 + 0.25, -2.7, 0.2, 0, 6.3); g.fill();
-  e.light(x0 + 0.1, -2.7, 1.2, '#fff0cc', 2.0, 'lamp');
+  e.light(x0 + 0.1, -2.7, 3.0, '#fff0cc', 3.0, 'lamp');
   e.at(x0 + 0.1, -2.7, 'light');
 }
 
