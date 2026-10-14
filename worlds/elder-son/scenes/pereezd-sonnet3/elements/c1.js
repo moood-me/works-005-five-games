@@ -1,1 +1,0 @@
-e.lib.car(g, 'tank', 11.2, e.rnd);

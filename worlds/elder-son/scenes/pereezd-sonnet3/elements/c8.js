@@ -1,1 +1,0 @@
-e.lib.car(g, 'hopper', 11.2, e.rnd);
