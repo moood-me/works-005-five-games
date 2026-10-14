@@ -1,7 +1,7 @@
 // The town across the road (copies): three narrow Sicilian houses, lime plaster, shutters, iron balconies; one
 // window lit (in the past only: in 1988 the street sleeps).
 const an = e.anim, past = e.state.era !== 'now';
-const cols = ['#d4c3a2', '#c9ae8c', '#d9cfb8'];
+const cols = ['#b8a688', '#ad9478', '#bdb19a'];
 for (let h = 0; h < 3; h++) {
   const x0 = -7 + h * 4.7, H = 7 + an.hash(h, 91) * 3;
   g.fillStyle = cols[h]; g.fillRect(x0, -H, 4.6, H);

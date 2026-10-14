@@ -16,7 +16,7 @@ const CAM = {
   found: cam(1.0, 41, 2, 0.2, 1),          // down the mole to Toto on his bollard by the lantern; Elena runs past
   foundEnd: { camera_x: 1.4, camera_z: 52.3 },
   alone: cam(1.6, 51.5, 6, 0.2, 2),        // Toto alone, his back, the sea and the moon's path
-  back: cam(-1.2, 4.4, -52, 0, -2),        // the bench at the warehouse at dusk: Alfredo and Toto side by side
+  back: cam(-1.8, 5.0, -56, 0, -3),        // the bench at the warehouse at dusk: Alfredo and Toto side by side
   carNow: cam(3.6, 40, -10, 0.1, 1),       // 1988: the car on the head, Elena by it; the daughter goes; he comes
   meet: cam(-8.0, 53.2, 90, 1.0, -1),      // from the water, side on: Elena and Salvatore in the car's light
 };
@@ -54,6 +54,12 @@ const audience = () => ({
 const OLD = (side, fwd) => L.byCar('old', 1, 0, side, fwd);         // round the banker's car where it stands
 const EL_TURN = OLD(-0.4, 2.8), EL_DOOR = OLD(-1.35, 0.2), BK_IN = OLD(-1.3, -0.7), BK_BACK = OLD(0, -2.9), BK_OUT = OLD(1.5, -0.6);
 const EL_NOW = [-1.4, 55.0], SAL_STOP = [-0.4, 47.8], SAL_MEET = [-0.9, 52.4], SAL_ASK = [-1.05, 53.55], EL_ASK = [-1.25, 54.4];
+// the reverse shot on Elena turning at the car: from the side of the mole, Toto behind the camera
+CAM.turn = (() => {
+  const dx = G.TOTO_PROJ[0] - EL_TURN[0], dz = G.TOTO_PROJ[1] - EL_TURN[1], d = Math.hypot(dx, dz);
+  const x = EL_TURN[0] + dx / d * 6.4 + dz / d * 0.9, z = EL_TURN[1] + dz / d * 6.4 - dx / d * 0.9;
+  return cam(+x.toFixed(2), +z.toFixed(2), +((brg([x, z], EL_TURN) + 2) % 360).toFixed(1), 0, 1);
+})();
 const RUN = {
   c1: [[-3.6, 13.6], [-4.5, 11.6], [-4.95, 10.6]], c2: [[-2.6, 13.8], [-4.3, 12.0], [-4.95, 10.9]],
   c3: [[-0.4, 13.6], [-3.9, 12.6], [-4.95, 10.3]], c4: [[0.6, 13.9], [-3.6, 13.0], [-4.95, 11.1]],
@@ -114,12 +120,13 @@ const B = {
   },
   headlights: {
     after: ['covered'],
-    open: () => ({ ...carKeys('old', 0, 0), headlights: 1, ...CAM.head }),
+    open: () => ({ ...carKeys('old', 0, 0), headlights: 1, banker_here: false, banker_a: BK_IN[0], banker_d: BK_IN[1], ...CAM.head }),
     from: () => ({ ...base('past', 0.9), screen_up: 1, rain: 1, cover: 1, boats_out: 1,
       ...cast({ toto: { at: G.TOTO_PROJ, turn: 120, look: 'elena' }, elena: { at: G.ELENA_BY, turn: 290, look: 'toto' } }),
-      ...carKeys('old', 0, 0), headlights: 1, ...CAM.head }),
+      banker_a: BK_IN[0], banker_d: BK_IN[1], ...carKeys('old', 0, 0), headlights: 1, ...CAM.head }),
     run: async s => {
       const toto = s.person('toto'), elena = s.person('elena'), banker = s.person('banker');
+      const turnShot = s.shot(CAM.turn);
       toto.look('car_front');
       s.move('car_arrive', 1, { over: 3.2, ease: 'out' });
       await s.wait(1.4);
@@ -127,15 +134,18 @@ const B = {
       const walk = elena.walk([[-0.6, 5.2], [1.2, 3.0], EL_TURN]);
       await s.wait(1.6);
       s.tell('headlights:father');
-      s.set('banker_a', BK_IN[0]); s.set('banker_d', BK_IN[1]); banker.here(true);
+      banker.here(true);
       const him = (async () => { await banker.walk([BK_BACK, BK_OUT]); await banker.turn(brg(BK_OUT, G.TOTO_PROJ)); })();
       await walk;
+      turnShot.cut();
       await elena.turn(brg(EL_TURN, G.TOTO_PROJ)); elena.look('toto'); toto.look('elena');
       s.tell('headlights:turn');
       await s.wait(3.2);
+      const backShot = s.shot(CAM.head);
       await elena.walk([EL_DOOR]); elena.here(false);
       await him;
       await banker.walk([BK_BACK, BK_IN]); banker.here(false);
+      backShot.cut();
       toto.look('car_back');
       s.move('car_go', 1, { over: goSeconds('old', 8), ease: 'in' });
       await s.wait(2.8);
