@@ -13,9 +13,9 @@ g.fillRect(-4, -17, 5, 8);
 g.fillRect(8, -13, 1.2, 8);
 g.fillRect(-16, -13, 1.2, 8);
 e.at(0, -9, 'lights');
-e.light(-14, -7, 14, '#ffd58a', 1.0, 'l1');
-e.light(0, -6, 14, '#ffd58a', 1.0, 'l2');
-e.light(14, -6, 14, '#ffe0a0', 1.0, 'l3');
+e.light(-14, -7, 45, '#ffd58a', 1.6, 'l1');
+e.light(0, -6, 45, '#ffd58a', 1.6, 'l2');
+e.light(14, -6, 45, '#ffe0a0', 1.6, 'l3');
 g.fillStyle = '#ffe3a0';
 for (const x of [-14, 0, 14]) {
   g.beginPath();

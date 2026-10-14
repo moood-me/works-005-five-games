@@ -59,19 +59,19 @@ const PIECES = {
     async run(s) {
       s.move('dawn', 1, { over: 9 });
       const w = s.person('watchman');
-      s.set('watchman_a', -3.0);
-      s.set('watchman_d', 8.8);
+      s.set('watchman_a', 4.4);
+      s.set('watchman_d', 8.7);
       s.set('watchman_turn', 180);
       s.set('watchman_here', true);
       w.with(['stick']);
-      await w.walk([[-1.9, 8.6], [-1.3, 6.7]]);
+      await w.walk([[2.6, 8.3], [1.4, 6.8]]);
       await w.turn(180);
       w.look('gurov#head');
       s.tell('watchman:looks');
       await s.wait(2.5);
       w.look(null);
       await w.turn(0);
-      await w.walk([[-1.9, 8.4], [-3.0, 8.8]]);
+      await w.walk([[2.6, 8.3], [4.4, 8.7]]);
       s.set('watchman_here', false);
       s.tell('watchman:gone');
     },
@@ -119,7 +119,7 @@ const PIECES = {
     },
     async run(s) {
       s.move('mist', 0.15, { over: 12 });
-      await s.move('camera_z', 1.6, { over: 12, ease: 'inOut' });
+      await s.move('camera_z', 0.9, { over: 12, ease: 'inOut' });
     },
   },
 };
