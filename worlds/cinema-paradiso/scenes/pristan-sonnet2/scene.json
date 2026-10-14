@@ -1,0 +1,720 @@
+{
+  "engine": 3,
+  "title": "Пристань (sonnet2)",
+  "caption": "Летом кино крутили на пристани",
+  "horizon": 0.43,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -2,
+      2,
+      -1,
+      1
+    ]
+  },
+  "light": {
+    "tint": "#3a4f86",
+    "tintStrength": 0.1,
+    "vignette": 0.45,
+    "grain": 0.22,
+    "haze": 0.1,
+    "hazeColor": "#1c2a4a",
+    "hazeGlow": 0.7,
+    "shafts": 0.35,
+    "brightness": 1.15,
+    "saturation": 0.9,
+    "ambient": 0.55,
+    "ambientColor": "#8aa0d8",
+    "bounce": 0.5,
+    "wind": [
+      1,
+      0,
+      0.4
+    ],
+    "looks": {
+      "rain": {
+        "haze": 0.32,
+        "hazeColor": "#222d48",
+        "brightness": 1,
+        "saturation": 0.7,
+        "ambient": 0.45,
+        "lights": {
+          "moon": 0.35
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": [
+        10,
+        36
+      ],
+      "color": "#9db6f0",
+      "strength": 0.9
+    },
+    {
+      "id": "fill",
+      "across": 0.5,
+      "distance": 3,
+      "elevation": 3.2,
+      "color": "#8197cf",
+      "strength": 0.7,
+      "reach": 20
+    }
+  ],
+  "state": {
+    "beat": "summer",
+    "beat_next": "",
+    "era": "past",
+    "rain": 0,
+    "screen_up": 1,
+    "screen_el": 0.8,
+    "screen_film": "romance",
+    "beam_on": 1,
+    "cover": 0,
+    "car": "none",
+    "headlights": 0,
+    "car_go": 0,
+    "car_a": 30,
+    "car_f": 180,
+    "camera_z": 0,
+    "toto_a": -1,
+    "toto_d": 5.2,
+    "toto_turn": 60,
+    "toto_here": true,
+    "elena_a": 0.95,
+    "elena_d": 5.5,
+    "elena_turn": 15,
+    "elena_here": true,
+    "c1_a": -0.8,
+    "c1_d": 8.2,
+    "c1_turn": 0,
+    "c2_a": 1.4,
+    "c2_d": 8.7,
+    "c2_turn": 0,
+    "c3_a": 2.7,
+    "c3_d": 8.1,
+    "c3_turn": 0,
+    "c4_a": 0.3,
+    "c4_d": 9.2,
+    "c4_turn": 0
+  },
+  "states": {
+    "beat": {
+      "values": [
+        "summer",
+        "covered",
+        "headlights",
+        "found",
+        "alone"
+      ],
+      "means": "какой кусок играется; игра ставит имя, кусок играется с начала"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "имя следующего куска для заготовки снимка (ставит игра на ветках)"
+    },
+    "era": {
+      "values": [
+        "past",
+        "now"
+      ],
+      "means": "past — тёплая ночь 1958 года; now — 1988 (в этой версии сцены не отличается)"
+    },
+    "rain": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "ливень: 0 — сухая ночь, 1 — сплошной дождь; гасит зрителей и лодки"
+    },
+    "screen_up": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — экран на шестах стоит (летом); 0 — убран"
+    },
+    "screen_el": {
+      "range": [
+        -40,
+        1
+      ],
+      "means": "высота ног экрана (скрипт: 0.8 стоит, -30 убран)"
+    },
+    "screen_film": {
+      "values": [
+        "romance"
+      ],
+      "means": "что идёт на экране"
+    },
+    "beam_on": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "луч проектора: 0 — погашен, 1 — светит; экран светит вместе с ним"
+    },
+    "cover": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "брезент на проекторе: 0 — открыт, 1 — укрыт"
+    },
+    "car": {
+      "values": [
+        "none",
+        "old"
+      ],
+      "means": "есть ли машина на причале"
+    },
+    "headlights": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "фары"
+    },
+    "car_go": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "0 — машина стоит у причала, 1 — уехала (ключ для игры; скрипт ведёт car_a)"
+    },
+    "car_a": {
+      "range": [
+        -5,
+        30
+      ],
+      "smooth": true,
+      "means": "место машины поперёк, метры (служебный)"
+    },
+    "car_f": {
+      "range": [
+        0,
+        360
+      ],
+      "smooth": true,
+      "means": "куда обращена машина, градусы (служебный)"
+    },
+    "toto_a": {
+      "type": "number",
+      "means": "Тото: поперёк, метры"
+    },
+    "toto_d": {
+      "type": "number",
+      "means": "Тото: вперёд, метры"
+    },
+    "elena_a": {
+      "type": "number",
+      "means": "Елена: поперёк, метры"
+    },
+    "elena_d": {
+      "type": "number",
+      "means": "Елена: вперёд, метры"
+    },
+    "c1_a": {
+      "type": "number"
+    },
+    "c1_d": {
+      "type": "number"
+    },
+    "c2_a": {
+      "type": "number"
+    },
+    "c2_d": {
+      "type": "number"
+    },
+    "c3_a": {
+      "type": "number"
+    },
+    "c3_d": {
+      "type": "number"
+    },
+    "c4_a": {
+      "type": "number"
+    },
+    "c4_d": {
+      "type": "number"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "небо",
+      "sky": true
+    },
+    {
+      "id": "sea",
+      "name": "море",
+      "plane": true,
+      "across": 0,
+      "distance": 70,
+      "elevation": -0.7,
+      "width": 260,
+      "depth": 140,
+      "reflect": {
+        "strength": 0.35,
+        "rough": 0.6,
+        "ripple": 0.5,
+        "fade": 12
+      }
+    },
+    {
+      "id": "ground",
+      "name": "набережная",
+      "plane": true,
+      "across": 0,
+      "distance": 3,
+      "elevation": 0.03,
+      "width": 40,
+      "depth": 6,
+      "walk": true
+    },
+    {
+      "id": "quay_r",
+      "name": "причал справа",
+      "plane": true,
+      "across": 9,
+      "distance": 7,
+      "elevation": 0.03,
+      "width": 10,
+      "depth": 8,
+      "walk": true
+    },
+    {
+      "id": "quay_l",
+      "name": "площадка у склада",
+      "plane": true,
+      "across": -8,
+      "distance": 9,
+      "elevation": 0.03,
+      "width": 10,
+      "depth": 14,
+      "walk": true
+    },
+    {
+      "id": "mole",
+      "name": "мол",
+      "plane": true,
+      "across": 1,
+      "distance": 28,
+      "elevation": 0.05,
+      "width": 6,
+      "depth": 44,
+      "walk": true
+    },
+    {
+      "id": "wall",
+      "name": "стена склада",
+      "across": -3.4,
+      "distance": 4,
+      "facing": 90,
+      "height": 4.6,
+      "box": [
+        0,
+        -4.8,
+        14.4,
+        0.2
+      ]
+    },
+    {
+      "id": "bench",
+      "name": "скамья",
+      "across": -2.9,
+      "distance": 8.5,
+      "facing": 90,
+      "height": 1,
+      "box": [
+        0,
+        -1.1,
+        2.5,
+        0.1
+      ]
+    },
+    {
+      "id": "bollard",
+      "name": "чугунная тумба",
+      "across": 3.7,
+      "distance": 14,
+      "height": 0.62,
+      "box": [
+        -0.4,
+        -0.7,
+        0.4,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": 3.7,
+          "distance": 8
+        },
+        {
+          "across": -1.6,
+          "distance": 12
+        },
+        {
+          "across": 3.7,
+          "distance": 17
+        },
+        {
+          "across": -1.6,
+          "distance": 25
+        },
+        {
+          "across": 3.7,
+          "distance": 33
+        },
+        {
+          "across": -1.6,
+          "distance": 40
+        },
+        {
+          "across": -1.3,
+          "distance": 3.6
+        },
+        {
+          "across": 3.3,
+          "distance": 4.4
+        }
+      ]
+    },
+    {
+      "id": "table",
+      "name": "стол с проектором",
+      "across": -0.2,
+      "distance": 5,
+      "height": 1.8,
+      "box": [
+        -1,
+        -2.3,
+        1,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "crate",
+      "name": "ящик",
+      "across": 1.4,
+      "distance": 5.8,
+      "height": 0.5,
+      "box": [
+        -0.5,
+        -0.6,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "id": "screen",
+      "name": "экран",
+      "across": 3.5,
+      "distance": 20,
+      "height": 5.2,
+      "box": [
+        -4,
+        -5.4,
+        4,
+        0.2
+      ],
+      "place": {
+        "elevation": "screen_el"
+      },
+      "elevation": 0.8
+    },
+    {
+      "id": "beam",
+      "name": "луч",
+      "across": 0.43,
+      "distance": 5,
+      "elevation": 1.2,
+      "facing": 101.6,
+      "glows": true,
+      "height": 4,
+      "box": [
+        -0.1,
+        -6,
+        15.5,
+        1
+      ]
+    },
+    {
+      "id": "chairs",
+      "name": "стулья зрителей",
+      "across": 0.5,
+      "distance": 9.5,
+      "height": 1.6,
+      "box": [
+        -5,
+        -1.9,
+        5,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": 0.5,
+          "distance": 9.5
+        },
+        {
+          "across": 1.5,
+          "distance": 12.6,
+          "seed": 3
+        }
+      ]
+    },
+    {
+      "id": "boat",
+      "name": "лодки со зрителями",
+      "across": -10,
+      "distance": 16,
+      "elevation": -0.55,
+      "height": 2.2,
+      "box": [
+        -2.4,
+        -2.2,
+        2.4,
+        0.6
+      ],
+      "copies": [
+        {
+          "across": -9,
+          "distance": 16
+        },
+        {
+          "across": 10,
+          "distance": 24,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "lantern",
+      "name": "фонарь на конце мола",
+      "across": 1,
+      "distance": 46,
+      "height": 3.8,
+      "box": [
+        -0.5,
+        -4.2,
+        0.5,
+        0.1
+      ],
+      "glows": true
+    },
+    {
+      "id": "tumba",
+      "name": "тумба у фонаря",
+      "across": 1,
+      "distance": 31,
+      "height": 0.7,
+      "box": [
+        -0.4,
+        -0.75,
+        0.4,
+        0.05
+      ]
+    },
+    {
+      "id": "car",
+      "name": "машина",
+      "across": 30,
+      "distance": 7,
+      "height": 1.6,
+      "facing": 180,
+      "box": [
+        -12,
+        -2.6,
+        2.4,
+        0.3
+      ],
+      "place": {
+        "across": "car_a",
+        "facing": "car_f"
+      }
+    },
+    {
+      "id": "toto",
+      "name": "Тото",
+      "person": {
+        "look": {
+          "kind": "shapes",
+          "style": "graphic",
+          "who": "youth",
+          "garment": "none",
+          "hair": "short",
+          "paint": "rim",
+          "colors": {
+            "top": "#ece6d4",
+            "bottom": "#2a2a33",
+            "hair": "#1a1410",
+            "shoes": "#2a2420"
+          }
+        },
+        "turn": 60
+      },
+      "across": -1,
+      "distance": 5.2,
+      "place": {
+        "across": "toto_a",
+        "distance": "toto_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "elena",
+      "name": "Елена",
+      "person": {
+        "look": {
+          "kind": "shapes",
+          "style": "graphic",
+          "who": "teen",
+          "garment": "dress",
+          "hair": "long",
+          "paint": "rim",
+          "colors": {
+            "garment": "#f3ead6",
+            "hair": "#241a16",
+            "shoes": "#3a2e2a"
+          }
+        },
+        "turn": 15
+      },
+      "across": 0.95,
+      "distance": 5.5,
+      "place": {
+        "across": "elena_a",
+        "distance": "elena_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c1",
+      "name": "зритель",
+      "person": {
+        "look": {
+          "kind": "shapes",
+          "style": "graphic",
+          "who": "man",
+          "garment": "jacket",
+          "hat": "cap",
+          "paint": "rim",
+          "colors": {
+            "top": "#4a5266",
+            "bottom": "#222633",
+            "hat": "#2c2b30"
+          }
+        },
+        "turn": 0
+      },
+      "across": -0.8,
+      "distance": 8.2,
+      "place": {
+        "across": "c1_a",
+        "distance": "c1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c2",
+      "name": "зрительница",
+      "person": {
+        "look": {
+          "kind": "shapes",
+          "style": "graphic",
+          "who": "woman",
+          "garment": "dress",
+          "paint": "rim",
+          "colors": {
+            "garment": "#6b4a4a",
+            "hair": "#2a1d1a"
+          }
+        },
+        "turn": 0
+      },
+      "across": 1.4,
+      "distance": 8.7,
+      "place": {
+        "across": "c2_a",
+        "distance": "c2_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c3",
+      "name": "зритель",
+      "person": {
+        "look": {
+          "kind": "shapes",
+          "style": "graphic",
+          "who": "old",
+          "garment": "coat",
+          "paint": "rim",
+          "colors": {
+            "garment": "#3a3e4c"
+          }
+        },
+        "turn": 0
+      },
+      "across": 2.7,
+      "distance": 8.1,
+      "place": {
+        "across": "c3_a",
+        "distance": "c3_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c4",
+      "name": "зритель",
+      "person": {
+        "look": {
+          "kind": "shapes",
+          "style": "graphic",
+          "who": "man",
+          "garment": "none",
+          "hat": "cap",
+          "paint": "rim",
+          "colors": {
+            "top": "#9a9484",
+            "bottom": "#2d2d3a",
+            "hat": "#4a3f33"
+          }
+        },
+        "turn": 0
+      },
+      "across": 0.3,
+      "distance": 9.2,
+      "place": {
+        "across": "c4_a",
+        "distance": "c4_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "rain_fall",
+      "name": "дождь",
+      "particles": {
+        "kind": "rain",
+        "amount": "rain",
+        "count": 14000,
+        "reach": 20,
+        "speed": 12,
+        "opacity": 0.75,
+        "color": "#b9c9e8",
+        "size": [
+          0.02,
+          0.02
+        ]
+      }
+    }
+  ]
+}
