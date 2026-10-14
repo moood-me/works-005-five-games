@@ -803,19 +803,18 @@ const SHOTS = {
   ropes: { paint: paintRopes, live: liveRopes, first: "rigging" },
   boat: { paint: paintBoat, live: liveBoat, first: "his" },
 };
-// where a shot stands on the stage (stage heights). `frame` — { at: its middle, scale: its height }: a shot seen small
-// through an iris in a corner; without it the shot is the whole frame
-function frameOf(e, frame) {
-  const k = frame ? frame.scale : 1, [ax, ay] = frame ? frame.at : [e.aspect / 2, 0.5];
-  return { k, ax, ay, to: (x, y) => [ax + x * k, ay + y * k] };
+// where a shot stands on the stage (stage heights): the whole frame, its middle at the frame's
+function frameOf(e) {
+  const ax = e.aspect / 2, ay = 0.5;
+  return { ax, ay, to: (x, y) => [ax + x, ay + y] };
 }
 
-// paint(g, e, shot, frame) — an insert's code. shot — its name: "scrap" | "hold" | "cellar" | "ropes" | "boat"; frame —
-// only for a shot seen small (frameOf). The painting reads no key of the scene but `ring`, `ring_kind` in "boat"
-function paint(g, e, shot, frame) {
+// paint(g, e, shot) — an insert's code. shot — its name: "scrap" | "hold" | "cellar" | "ropes" | "boat". The painting
+// reads no key of the scene but `ring`, `ring_kind` in "boat"
+function paint(g, e, shot) {
   const S = SHOTS[shot];
   if (!S) { e.warn(`closeups: no shot "${shot}"`); return; }
-  const { k, ax, ay, to } = frameOf(e, frame);
+  const { ax, ay, to } = frameOf(e);
   const C = {
     e,
     // a layer of the shot, painted in the shot's units: what it turns about, the box its paint fits in (none: the
@@ -823,7 +822,6 @@ function paint(g, e, shot, frame) {
     layer(name, pivot, box, fn, opts) {
       e.layer(name, { ...opts, pivot: to(...pivot), ...(box && { box: [...to(box[0], box[1]), ...to(box[2], box[3])] }) }, (g2) => {
         g2.translate(ax, ay);
-        g2.scale(k, k);
         fn(g2);
       });
     },
@@ -833,25 +831,24 @@ function paint(g, e, shot, frame) {
   };
   g.save();
   g.translate(ax, ay);
-  g.scale(k, k);
   S.paint(g, C);
   g.restore();
 }
 
-// live(e, shot, now, frame) — an insert's animate: nothing painted, the layers moved and the moving points marked. now:
+// live(e, shot, now) — an insert's animate: nothing painted, the layers moved and the moving points marked. now:
 // scrap { taken }, hold { grip: [four] }, cellar { dust }, ropes { climb, left, right, roll, slip }, boat { reach }
-function live(e, shot, now, frame) {
+function live(e, shot, now) {
   const S = SHOTS[shot];
   // (nothing of it to move while it is not painted — closed, or its layers not there yet)
   if (!S || !e.layer(S.first).scaleX) return;
-  const { k, to } = frameOf(e, frame);
+  const { to } = frameOf(e);
   S.live({
     e,
     // a layer moved (the shot's units), turned about its pivot (radians, clockwise), scaled about it, shown
     set(name, { x = 0, y = 0, rotate = 0, scale = 1, sx = scale, sy = scale, alpha = 1 }) {
       const h = e.layer(name);
-      h.x = x * k;
-      h.y = y * k;
+      h.x = x;
+      h.y = y;
       h.rotate = rotate;
       h.scaleX = sx;
       h.scaleY = sy;

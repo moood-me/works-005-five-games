@@ -213,7 +213,7 @@ docs/history/2026-10-11-alye-parusa-v2-les-u-morya.md (rpg).
     "wear": {"after": ["wake", "wake_hold"], "tells": ["wear:up"], "seconds": 6},
     "hide": {"after": ["wake", "wake_hold"], "tells": ["hide:hidden"], "seconds": 8}
   },
-  "points": ["assol", "egl", "letika", "assol#ring"],
+  "points": ["assol", "egl", "letika", "assol#ring", "toy#toy", "snag#snag", "snag2#snag", "grey#ring"],
   "offers": ["egl", "assol#ring"],
   "party": {"ring_kind": "own"},
   "snags": [0.4, 0.7]
