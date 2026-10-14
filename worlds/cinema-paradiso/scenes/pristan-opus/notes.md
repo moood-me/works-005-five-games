@@ -23,8 +23,8 @@ The car: an unseen anchor `car` moved by the script (`car_a`, `car_d`, `car_f` f
 Light: one moon (`sky#disc`), the lantern, the street lamp; warm only the cinema (`screen_light`, `proj_lamp` by
 `beam_on`) and the headlights. Looks: `dusk_k` (from `hour` < 0.84), `now_k` (from `era`), `rain`.
 The sky (`sky.js`, `sky.wgsl`) is painted per `hour`/`era`: the warm night, the dusk with its afterglow north-west
-over the sea, the cool lilac 1988; stars twinkle in the shader. Haze is 0 at night on purpose: with any haze the
-engine fogs the sky below a kinked line (the air's volume edge), which read as a grey or black wall.
+over the sea, the cool lilac 1988; stars twinkle in the shader. Haze is 0 at night (clear air);
+the rain's look brings it.
 
 Прожектора-конуса в движке нет; луч и фары — светящийся клин со светом на кончике (screen_light у экрана,
 car_pool там, где фары ложатся на дорогу).
