@@ -262,10 +262,10 @@
       "name": "море",
       "plane": true,
       "across": 0,
-      "distance": 1600,
+      "distance": 700,
       "elevation": -70,
-      "width": 6000,
-      "depth": 3000,
+      "width": 4000,
+      "depth": 1000,
       "reflect": {
         "strength": 0.55,
         "fade": 0,
