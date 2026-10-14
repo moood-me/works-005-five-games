@@ -1,4 +1,5 @@
-// Sounds of the game's own, made in the page (Web Audio): nothing to load. The page may be heard only after the
+// Sounds of the game's own, made in the page (Web Audio): nothing to load; they are as loud as the page's "sounds" slider
+// says (MooodVolume.output). The page may be heard only after the
 // player's first touch: game.js wakes it then; till then its time stands, and what was asked for begins at the touch.
 //   wake() — the page may be heard from now on (called on the first touch)
 //   pause(on) — all of it stands while the play is paused (bespoke.pause: ui.js ⏸) and goes on from there after — its
@@ -74,7 +75,8 @@ function audio() {
     limit.ratio.value = 4;
     master = ctx.createGain();
     master.gain.value = 0.85;
-    master.connect(limit).connect(ctx.destination);
+    // (the site's "sounds" slider: MooodVolume.output — the sounds go to the speakers through it)
+    master.connect(limit).connect(MooodVolume.output(ctx)).connect(ctx.destination);
     // the open air: a short bright tail
     room = ctx.createConvolver();
     const n = Math.floor(ctx.sampleRate * 1.8), ir = ctx.createBuffer(2, n, ctx.sampleRate);
