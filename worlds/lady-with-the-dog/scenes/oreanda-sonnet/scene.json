@@ -3,23 +3,32 @@
   "title": "Ореанда (sonnet)",
   "caption": "Перед рассветом",
   "horizon": 0.42,
-  "camera": { "mode": "picture" },
-  "modules": ["cast", "shpic"],
+  "camera": {
+    "mode": "picture"
+  },
+  "modules": [
+    "cast",
+    "shpic"
+  ],
   "light": {
     "tint": "#6a78b0",
-    "tintStrength": 0.14,
+    "tintStrength": 0.08,
     "vignette": 0.35,
     "grain": 0.22,
     "haze": 0.3,
     "hazeColor": "#8e93b8",
     "hazeGlow": 0.2,
     "shafts": 0.3,
-    "brightness": 1.0,
+    "brightness": 1.12,
     "saturation": 0.8,
-    "ambient": 0.62,
+    "ambient": 0.85,
     "ambientColor": "#8494c4",
     "bounce": 0.4,
-    "wind": [1, 0, 0.35],
+    "wind": [
+      1,
+      0,
+      0.35
+    ],
     "looks": {
       "dawn": {
         "tint": "#ffc4a0",
@@ -33,8 +42,25 @@
     }
   },
   "lights": [
-    { "id": "sun", "from": [8, 2], "color": "#ffcf9e", "strength": 1.3, "on": "dawn" },
-    { "id": "skyfill", "from": [190, 45], "color": "#9fb2e0", "strength": 0.55 }
+    {
+      "id": "sun",
+      "from": [
+        8,
+        2
+      ],
+      "color": "#ffcf9e",
+      "strength": 1.3,
+      "on": "dawn"
+    },
+    {
+      "id": "skyfill",
+      "from": [
+        190,
+        45
+      ],
+      "color": "#9fb2e0",
+      "strength": 0.55
+    }
   ],
   "state": {
     "beat": "",
@@ -70,96 +96,467 @@
     "leash": "anna#hand_r"
   },
   "states": {
-    "beat": { "type": "string", "means": "piece to play: bench, still, watchman, dew, bench_end; the game sets it, the scene plays it from its start" },
-    "last": { "type": "string", "means": "the piece that ended last (the scene's own: which splice a piece needs)" },
-    "hour": { "range": [0, 1], "means": "time of day, 0.18 before dawn; the scene follows dawn" },
-    "dawn": { "range": [0, 1], "smooth": true, "means": "0 blue hour before sunrise, 1 sun at the horizon, pale gold" },
-    "mist": { "range": [0, 1], "smooth": true, "means": "fog over the sea below, 1 thick" },
-    "lights": { "range": [0, 3], "smooth": true, "means": "how many lights of the steamer burn" },
-    "cicada": { "values": [0, 1], "means": "1 the point of the cicada in the cypress is on offer" },
-    "hand": { "values": [0, 1], "means": "1 his hand covers her hand on the bench (reach to anna#hand_r)" },
-    "fade": { "range": [0, 1], "smooth": true, "means": "the engine's fade from black, used at the start of bench" },
-    "steamer_d": { "range": [350, 700], "smooth": true, "means": "metres of the steamer from the cliff" },
-    "gurov_a": { "type": "number", "means": "metres across" },
-    "gurov_d": { "type": "number", "means": "metres ahead" },
-    "gurov_here": { "type": "boolean" },
-    "gurov_do": { "type": "string" },
-    "gurov_turn": { "type": "number" },
-    "anna_a": { "type": "number" },
-    "anna_d": { "type": "number" },
-    "anna_here": { "type": "boolean" },
-    "anna_do": { "type": "string" },
-    "anna_turn": { "type": "number" },
-    "watchman_a": { "type": "number" },
-    "watchman_d": { "type": "number" },
-    "watchman_here": { "type": "boolean" },
-    "watchman_turn": { "type": "number" },
-    "spitz_a": { "type": "number", "means": "place of the spitz, across" },
-    "spitz_d": { "type": "number", "means": "place of the spitz, ahead" },
-    "spitz_e": { "type": "number", "means": "height of the spitz over the ground" },
-    "spitz_view": { "values": ["back", "side"], "means": "drawing of the spitz: back — lies facing the sea, side — stands" },
-    "spitz_do": { "values": ["lie", "stand", "up"], "means": "what the spitz does" },
-    "spitz_here": { "values": [0, 1] },
-    "leash": { "values": ["anna#hand_r", "none"], "means": "where the red leash goes from the collar" }
+    "beat": {
+      "type": "string",
+      "means": "piece to play: bench, still, watchman, dew, bench_end; the game sets it, the scene plays it from its start"
+    },
+    "last": {
+      "type": "string",
+      "means": "the piece that ended last (the scene's own: which splice a piece needs)"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "time of day, 0.18 before dawn; the scene follows dawn"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "0 blue hour before sunrise, 1 sun at the horizon, pale gold"
+    },
+    "mist": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "fog over the sea below, 1 thick"
+    },
+    "lights": {
+      "range": [
+        0,
+        3
+      ],
+      "smooth": true,
+      "means": "how many lights of the steamer burn"
+    },
+    "cicada": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 the point of the cicada in the cypress is on offer"
+    },
+    "hand": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 his hand covers her hand on the bench (reach to anna#hand_r)"
+    },
+    "fade": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the engine's fade from black, used at the start of bench"
+    },
+    "steamer_d": {
+      "range": [
+        350,
+        700
+      ],
+      "smooth": true,
+      "means": "metres of the steamer from the cliff"
+    },
+    "gurov_a": {
+      "type": "number",
+      "means": "metres across"
+    },
+    "gurov_d": {
+      "type": "number",
+      "means": "metres ahead"
+    },
+    "gurov_here": {
+      "type": "boolean"
+    },
+    "gurov_do": {
+      "type": "string"
+    },
+    "gurov_turn": {
+      "type": "number"
+    },
+    "anna_a": {
+      "type": "number"
+    },
+    "anna_d": {
+      "type": "number"
+    },
+    "anna_here": {
+      "type": "boolean"
+    },
+    "anna_do": {
+      "type": "string"
+    },
+    "anna_turn": {
+      "type": "number"
+    },
+    "watchman_a": {
+      "type": "number"
+    },
+    "watchman_d": {
+      "type": "number"
+    },
+    "watchman_here": {
+      "type": "boolean"
+    },
+    "watchman_turn": {
+      "type": "number"
+    },
+    "spitz_a": {
+      "type": "number",
+      "means": "place of the spitz, across"
+    },
+    "spitz_d": {
+      "type": "number",
+      "means": "place of the spitz, ahead"
+    },
+    "spitz_e": {
+      "type": "number",
+      "means": "height of the spitz over the ground"
+    },
+    "spitz_view": {
+      "values": [
+        "back",
+        "side"
+      ],
+      "means": "drawing of the spitz: back — lies facing the sea, side — stands"
+    },
+    "spitz_do": {
+      "values": [
+        "lie",
+        "stand",
+        "up"
+      ],
+      "means": "what the spitz does"
+    },
+    "spitz_here": {
+      "values": [
+        0,
+        1
+      ]
+    },
+    "leash": {
+      "values": [
+        "anna#hand_r",
+        "none"
+      ],
+      "means": "where the red leash goes from the collar"
+    }
   },
   "script": "",
   "objects": [
-    { "id": "sky", "name": "небо", "sky": true },
     {
-      "id": "sea", "name": "море", "plane": true, "across": 0, "distance": 10000, "elevation": -70,
-      "width": 12000, "depth": 20000,
-      "reflect": { "strength": 0.55, "fade": 0, "rough": 0.6, "ripple": 0.35 }
+      "id": "sky",
+      "name": "небо",
+      "sky": true
     },
-    { "id": "mist_far", "name": "туман", "across": 0, "distance": 600, "elevation": -75, "height": 90, "box": [-800, -90, 800, 0] },
-    { "id": "mist_near", "name": "туман ближе", "across": 0, "distance": 350, "elevation": -72, "height": 50, "box": [-800, -50, 800, 0] },
-    { "id": "steamer", "name": "пароход", "across": 150, "distance": 520, "elevation": -70, "height": 22,
-      "box": [-30, -24, 30, 2], "place": { "distance": "steamer_d" } },
-    { "id": "ground", "name": "обрыв", "plane": true, "across": 0, "distance": 3.5, "elevation": 0, "width": 60, "depth": 12 },
-    { "id": "bush", "name": "кусты на краю", "across": 0, "distance": 9.3, "height": 0.9, "box": [-1, -1, 1, 0.05],
+    {
+      "id": "sea",
+      "name": "море",
+      "plane": true,
+      "across": 0,
+      "distance": 1600,
+      "elevation": -70,
+      "width": 6000,
+      "depth": 3000,
+      "reflect": {
+        "strength": 0.55,
+        "fade": 0,
+        "rough": 0.6,
+        "ripple": 0.35
+      }
+    },
+    {
+      "id": "mist_far",
+      "name": "туман",
+      "across": 0,
+      "distance": 600,
+      "elevation": -75,
+      "height": 90,
+      "box": [
+        -800,
+        -90,
+        800,
+        0
+      ]
+    },
+    {
+      "id": "mist_near",
+      "name": "туман ближе",
+      "across": 0,
+      "distance": 350,
+      "elevation": -72,
+      "height": 50,
+      "box": [
+        -800,
+        -50,
+        800,
+        0
+      ]
+    },
+    {
+      "id": "steamer",
+      "name": "пароход",
+      "across": 150,
+      "distance": 520,
+      "elevation": -70,
+      "height": 22,
+      "box": [
+        -30,
+        -24,
+        30,
+        2
+      ],
+      "place": {
+        "distance": "steamer_d"
+      }
+    },
+    {
+      "id": "ground",
+      "name": "обрыв",
+      "plane": true,
+      "across": 0,
+      "distance": 3.5,
+      "elevation": 0,
+      "width": 60,
+      "depth": 12
+    },
+    {
+      "id": "bush",
+      "name": "кусты на краю",
+      "across": 0,
+      "distance": 9.3,
+      "height": 0.9,
+      "box": [
+        -1.2,
+        -1.1,
+        1.2,
+        0.1
+      ],
       "copies": [
-        { "across": -1.3, "scale": 1.1 }, { "across": 1.2, "scale": 0.9 }, { "across": 3.0, "scale": 1.3 },
-        { "across": 5.2, "scale": 0.9 }, { "across": 7.7, "scale": 1.2 }, { "across": -6.0, "scale": 1.0 }
-      ] },
-    { "id": "wall", "name": "стена церкви", "across": -2.6, "distance": 5.5, "facing": 90, "height": 3.2, "box": [-2.5, -3.4, 2.5, 0.05] },
-    { "id": "facade", "name": "церковь", "across": -3.9, "distance": 8.0, "facing": 180, "height": 4.6, "box": [-1.4, -5.3, 1.4, 0.05] },
-    { "id": "bench", "name": "скамья", "across": -0.6, "distance": 4.4, "facing": 180, "height": 0.95, "box": [-1.1, -1.05, 1.1, 0.05] },
-    { "id": "seat", "name": "сиденье скамьи", "plane": true, "across": -0.6, "distance": 4.7, "elevation": 0.46,
-      "width": 2.0, "depth": 0.5 },
-    { "id": "cypress", "name": "кипарис", "across": 3.4, "distance": 6.2, "height": 7, "box": [-1.7, -7.6, 1.7, 0.1],
+        {
+          "across": -1.3,
+          "scale": 1.1,
+          "distance": 9.3
+        },
+        {
+          "across": 1.2,
+          "scale": 0.9,
+          "distance": 9.3
+        },
+        {
+          "across": 3.0,
+          "scale": 1.3,
+          "distance": 9.3
+        },
+        {
+          "across": 5.2,
+          "scale": 0.9,
+          "distance": 9.3
+        },
+        {
+          "across": 7.7,
+          "scale": 1.2,
+          "distance": 9.3
+        },
+        {
+          "across": -6.0,
+          "scale": 1.0,
+          "distance": 9.3
+        }
+      ]
+    },
+    {
+      "id": "wall",
+      "name": "стена церкви",
+      "across": -2.6,
+      "distance": 5.5,
+      "facing": 90,
+      "height": 3.2,
+      "box": [
+        -2.7,
+        -3.5,
+        3.2,
+        0.1
+      ]
+    },
+    {
+      "id": "facade",
+      "name": "церковь",
+      "across": -3.9,
+      "distance": 8.0,
+      "facing": 180,
+      "height": 4.6,
+      "box": [
+        -1.4,
+        -5.3,
+        1.4,
+        0.05
+      ]
+    },
+    {
+      "id": "bench",
+      "name": "скамья",
+      "across": -0.6,
+      "distance": 4.4,
+      "facing": 180,
+      "height": 0.95,
+      "box": [
+        -1.1,
+        -1.05,
+        1.1,
+        0.05
+      ]
+    },
+    {
+      "id": "seat",
+      "name": "сиденье скамьи",
+      "plane": true,
+      "across": -0.6,
+      "distance": 4.7,
+      "elevation": 0.46,
+      "width": 2.0,
+      "depth": 0.5
+    },
+    {
+      "id": "cypress",
+      "name": "кипарис",
+      "across": 3.4,
+      "distance": 6.2,
+      "height": 5,
+      "box": [
+        -1.3,
+        -5.6,
+        1.3,
+        0.1
+      ],
       "copies": [
-        { "across": 3.4, "distance": 6.2 }, { "across": 5.8, "distance": 7.6, "scale": 0.8, "flip": true },
-        { "across": -7.0, "distance": 8.0, "scale": 1.1 }
-      ] },
-    {
-      "id": "spitz", "name": "шпиц", "across": -0.6, "distance": 5.0, "height": 0.4, "box": [-0.7, -0.55, 0.5, 0.15],
-      "place": { "across": "spitz_a", "distance": "spitz_d", "elevation": "spitz_e" },
-      "uniforms": { "glow": 0.35 }
+        {
+          "across": 4.4,
+          "distance": 8.0
+        },
+        {
+          "across": 6.6,
+          "distance": 9.0,
+          "scale": 0.8,
+          "flip": true
+        },
+        {
+          "across": -6.5,
+          "distance": 9.0,
+          "scale": 1.0
+        }
+      ]
     },
     {
-      "id": "anna", "name": "Анна Сергеевна", "across": -0.95, "distance": 4.7,
-      "person": { "cast": "cast", "who": "anna_summer", "turn": 0, "does": "seated" },
-      "place": { "across": "anna_a", "distance": "anna_d" }, "shadow": true
+      "id": "spitz",
+      "name": "шпиц",
+      "across": -0.6,
+      "distance": 5.0,
+      "height": 0.4,
+      "box": [
+        -0.7,
+        -0.55,
+        0.5,
+        0.15
+      ],
+      "place": {
+        "across": "spitz_a",
+        "distance": "spitz_d",
+        "elevation": "spitz_e"
+      },
+      "uniforms": {
+        "glow": 0.35
+      }
     },
     {
-      "id": "gurov", "name": "Гуров", "across": -0.25, "distance": 4.7,
-      "person": { "cast": "cast", "who": "gurov_summer", "turn": 0, "does": "seated" },
-      "place": { "across": "gurov_a", "distance": "gurov_d" }, "shadow": true
+      "id": "anna",
+      "name": "Анна Сергеевна",
+      "across": -0.95,
+      "distance": 4.7,
+      "person": {
+        "cast": "cast",
+        "who": "anna_summer",
+        "turn": 0,
+        "does": "seated"
+      },
+      "place": {
+        "across": "anna_a",
+        "distance": "anna_d"
+      },
+      "shadow": true
     },
     {
-      "id": "watchman", "name": "сторож", "across": -3.0, "distance": 8.8,
-      "person": { "cast": "cast", "who": "watchman", "turn": 0 },
-      "place": { "across": "watchman_a", "distance": "watchman_d" }, "shadow": true
+      "id": "gurov",
+      "name": "Гуров",
+      "across": -0.25,
+      "distance": 4.7,
+      "person": {
+        "cast": "cast",
+        "who": "gurov_summer",
+        "turn": 0,
+        "does": "seated"
+      },
+      "place": {
+        "across": "gurov_a",
+        "distance": "gurov_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "watchman",
+      "name": "сторож",
+      "across": -3.0,
+      "distance": 8.8,
+      "person": {
+        "cast": "cast",
+        "who": "watchman",
+        "turn": 0
+      },
+      "place": {
+        "across": "watchman_a",
+        "distance": "watchman_d"
+      },
+      "shadow": true
     }
   ],
   "music": {
     "prompts": [
-      { "text": "very quiet ambient pad, cold blue pre-dawn air, slow breathing drone", "weight": 1.2 },
-      { "text": "distant sea surf heard from a cliff, soft low rumble with long wave swells", "weight": 1.0 },
-      { "text": "sparse single bowed cello note, far away, slow decay, tender and empty", "weight": 0.6 },
-      { "text": "glass harmonica shimmer, high and thin, a few notes in long silence", "weight": 0.4 },
-      { "text": "faint cicadas in a cypress at night, soft texture", "weight": 0.3 },
-      { "text": "warm string harmonics rising like light on the horizon", "weight": 0.3 },
-      { "text": "minimal ambient, no melody, spacious, eternal, calm sadness", "weight": 0.5 }
+      {
+        "text": "very quiet ambient pad, cold blue pre-dawn air, slow breathing drone",
+        "weight": 1.2
+      },
+      {
+        "text": "distant sea surf heard from a cliff, soft low rumble with long wave swells",
+        "weight": 1.0
+      },
+      {
+        "text": "sparse single bowed cello note, far away, slow decay, tender and empty",
+        "weight": 0.6
+      },
+      {
+        "text": "glass harmonica shimmer, high and thin, a few notes in long silence",
+        "weight": 0.4
+      },
+      {
+        "text": "faint cicadas in a cypress at night, soft texture",
+        "weight": 0.3
+      },
+      {
+        "text": "warm string harmonics rising like light on the horizon",
+        "weight": 0.3
+      },
+      {
+        "text": "minimal ambient, no melody, spacious, eternal, calm sadness",
+        "weight": 0.5
+      }
     ],
     "bpm": 60,
     "density": 0.1,
