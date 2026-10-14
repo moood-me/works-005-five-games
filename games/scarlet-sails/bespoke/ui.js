@@ -7,8 +7,6 @@
 //     the first time), 'mark' (remembered)
 //   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do); → a function that takes it
 //     away. One at a time: a new one takes the place of the one before
-//   view.onward(fn) — the button «Дальше» under the hint (the player's way out of a minigame); → a function that
-//     takes it away
 //   view.title(text, {signal}) — words in the middle of the frame, as a film's title; → once they have gone
 //   view.letter({text, sign}, {signal}) — a sheet of unbleached paper folded in three: pressed, it unfolds and can be
 //     read; pressed again, it folds and goes; → then. text: its lines ('\n')
@@ -75,11 +73,7 @@ export function ui(layer) {
       hinted = off;
       return off;
     },
-    onward(fn) {
-      const o = button('Дальше', '', fn, 'onward');
-      layer.append(o);
-      return () => o.remove();
-    },
+
     title(text, { signal } = {}) {
       const t = el('div', 'title', layer);
       el('span', '', t).textContent = text;

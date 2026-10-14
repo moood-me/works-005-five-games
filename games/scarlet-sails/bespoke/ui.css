@@ -6,7 +6,7 @@
 #layer .gauge, #layer .toasts, #layer .hint, #layer .title { pointer-events: none; }
 
 /* linen, its weave seen: whatever the game writes on */
-#layer .slip, #layer .hint, #layer .onward, #layer .sheet, #layer .face.back, #layer .tools > button, #layer .author-panel {
+#layer .slip, #layer .hint, #layer .sheet, #layer .face.back, #layer .tools > button, #layer .author-panel {
   color: var(--ink);
   background: repeating-linear-gradient(0deg, rgba(92, 78, 54, 0.14) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(90deg, rgba(255, 251, 240, 0.22) 0 1px, transparent 1px 3px), var(--linen); }
@@ -37,8 +37,6 @@
 #layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 4px 16px 5px; max-width: 80vw; white-space: nowrap;
   font: 22px/1.2 var(--hand); box-shadow: 0 1px 3px rgba(28, 42, 74, 0.45); opacity: 0; transition: opacity 1.2s ease; }
 #layer .hint.on { opacity: 0.95; }
-#layer .onward { position: absolute; z-index: 10; bottom: 14px; left: 50%; translate: -50% 0; min-width: 132px; height: 44px; padding: 0 22px;
-  border: 1px solid var(--ink); border-radius: 4px; font: 24px/1 var(--hand); cursor: pointer; box-shadow: 0 1px 3px rgba(28, 42, 74, 0.45); }
 
 /* the title in the middle of the frame */
 #layer .title { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 6vw; text-align: center; }
@@ -105,3 +103,8 @@
 #layer .author-panel section button.here { background: var(--linen-dark); }
 #layer .author-panel .minigames { display: flex; flex-direction: column; }
 #layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 13px; font-style: italic; }
+
+/* «Алый»: the scarlet scrap of the first chapter, the sample on the language's plate (its colours — the scrap's, as the
+   world's closeups paint it) */
+.scrap-sample { display: block; width: 46px; height: 30px; border-radius: 3px 9px 4px 7px; rotate: -4deg;
+  background: radial-gradient(ellipse at 30% 30%, #ec4a52, #d4283a 55%, #a8182c); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
