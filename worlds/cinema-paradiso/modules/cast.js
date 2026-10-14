@@ -21,7 +21,7 @@ return {
       cane: { name: 'трость', draw: F => {
         const V = MooodShapes.V, hand = F.P('RightHand');
         const tip = V.add(hand, [0, -0.88 * F.fit.h, 0.05]);
-        F.bar(hand, tip, 0.016 * F.k, 0.012 * F.k, F.colors.accent || F.colors.shoes, 6);
+        F.bar(hand, tip, 0.016 * F.k, 0.012 * F.k, [[0, F.colors.accent || F.colors.shoes]], 6, [1, 0, 0]);
       } }
     }
   }
