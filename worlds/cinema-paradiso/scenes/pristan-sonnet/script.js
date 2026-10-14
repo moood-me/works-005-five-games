@@ -28,7 +28,7 @@ function underEave(o) { for (const id in WALL) { stand(o, id, WALL[id][0], WALL[
 function crowdBack(o) { for (const id in CROWD) stand(o, id, CROWD[id][0], CROWD[id][1], 0); }
 function nightEnd(o) { o.camera_x = 1.3; o.camera_z = 19; stand(o, 'toto', BOLLARD[0], BOLLARD[1], 0); put(o, 'toto', { do: 'seated', on: BOLLARD }); }
 function meetBase(o) {
-  o.era = 'now'; o.car = 'new'; o.car_a = 3.6; o.car_z = 5.8; o.headlights = 1; o.camera_x = 0.8; o.camera_z = 1.5;
+  o.era = 'now'; o.car = 'new'; o.car_a = 3.6; o.car_z = 5.8; o.headlights = 1; o.camera_x = 0.8; o.camera_z = 0.2;
   stand(o, 'elena', 2.4, 7.6, 0); put(o, 'elena', { wear: 'elena_grown' });
   put(o, 'toto', { wear: 'salvatore' });
 }
@@ -133,7 +133,7 @@ const BEATS = {
   back: {
     after: [],
     from() {
-      const o = base(); o.hour = 0.78; o.camera_x = -0.6; o.camera_z = 7.0; o.camera_yaw = -62;
+      const o = base(); o.hour = 0.78; o.camera_x = 0; o.camera_z = 6.0; o.camera_yaw = -55;
       stand(o, 'alfredo', -4.15, 10.2, 0); put(o, 'alfredo', { do: 'seated', on: [-4.15, 10.2, 0.46] });
       stand(o, 'toto', -4.15, 9.0, 0); put(o, 'toto', { do: 'seated', on: [-4.15, 9.0, 0.46] });
       scene.cut(fin(o));
@@ -149,7 +149,7 @@ const BEATS = {
   rise_go: {
     after: ['back'],
     from() {
-      const o = base(); o.hour = 0.78; o.camera_x = -0.6; o.camera_z = 7.0; o.camera_yaw = -62;
+      const o = base(); o.hour = 0.78; o.camera_x = 0; o.camera_z = 6.0; o.camera_yaw = -55;
       stand(o, 'alfredo', -4.15, 10.2, 0); put(o, 'alfredo', { do: 'seated', on: [-4.15, 10.2, 0.46] });
       stand(o, 'toto', -4.15, 9.0, 0); put(o, 'toto', { do: 'seated', on: [-4.15, 9.0, 0.46] });
       scene.cut(fin(o));

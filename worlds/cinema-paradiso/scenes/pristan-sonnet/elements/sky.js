@@ -19,7 +19,7 @@ e.layer('night', { box }, g => {
   g.globalAlpha = 1;
 });
 e.layer('moon', { box }, g => {
-  const mx = W / 2 + 0.42, my = 0.22;
+  const mx = W / 2 + 0.62, my = 0.17;
   const gl = g.createRadialGradient(mx, my, 0.02, mx, my, 0.1);
   gl.addColorStop(0, 'rgba(190,210,255,0.4)'); gl.addColorStop(1, 'rgba(190,210,255,0)');
   g.fillStyle = gl; g.beginPath(); g.arc(mx, my, 0.1, 0, 6.2832); g.fill();
