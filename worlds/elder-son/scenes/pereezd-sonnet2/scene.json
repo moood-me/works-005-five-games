@@ -1,0 +1,912 @@
+{
+  "engine": 3,
+  "title": "Переезд (sonnet2)",
+  "caption": "Звонок. Шлагбаум опускается.",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "picture"
+  },
+  "light": {
+    "tint": "#3d5f95",
+    "tintStrength": 0.16,
+    "vignette": 0.5,
+    "grain": 0.22,
+    "haze": 0.05,
+    "hazeColor": "#2a3f66",
+    "hazeGlow": 0.7,
+    "shafts": 0,
+    "brightness": 1.05,
+    "saturation": 0.9,
+    "ambient": 0.62,
+    "ambientColor": "#6f8fc4",
+    "bounce": 0.5,
+    "wind": [
+      1,
+      0.2,
+      0.3
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.66,
+        "ambientColor": "#7596cc",
+        "tint": "#486d9f",
+        "tintStrength": 0.16,
+        "hazeColor": "#3d5780"
+      },
+      "night": {
+        "ambient": 0.46,
+        "ambientColor": "#4c6cae",
+        "tint": "#1f3a6e",
+        "tintStrength": 0.22,
+        "hazeColor": "#17284c",
+        "haze": 0.14,
+        "brightness": 1.08
+      },
+      "dawn": {
+        "ambient": 0.7,
+        "ambientColor": "#8aa4cc",
+        "tint": "#7d8fb0",
+        "tintStrength": 0.12,
+        "hazeColor": "#6f7fa0"
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": [
+        215,
+        46
+      ],
+      "color": "#9db8ea",
+      "strength": 0.5
+    },
+    {
+      "id": "lamp_l",
+      "of": "lamp#lamp",
+      "reach": 13,
+      "strength": 1.2
+    },
+    {
+      "id": "sig_1",
+      "of": "signal#l1",
+      "reach": 6,
+      "strength": 0.7,
+      "on": "sig_a"
+    },
+    {
+      "id": "sig_2",
+      "of": "signal#l2",
+      "reach": 6,
+      "strength": 0.7,
+      "on": "sig_b"
+    },
+    {
+      "id": "booth_l",
+      "of": "booth_w#window",
+      "reach": 10,
+      "strength": 1.1
+    },
+    {
+      "id": "head_l",
+      "of": "freight#lamp",
+      "reach": 30,
+      "strength": 0.7,
+      "on": "freight_lamp"
+    }
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Небо",
+      "sky": true
+    },
+    {
+      "id": "forest",
+      "name": "Лес",
+      "across": 70,
+      "distance": 236,
+      "height": 30,
+      "box": [
+        -240,
+        -34,
+        240,
+        2
+      ]
+    },
+    {
+      "id": "poselok",
+      "name": "Посёлок",
+      "across": -42,
+      "distance": 128,
+      "height": 12,
+      "box": [
+        -70,
+        -14,
+        70,
+        2
+      ]
+    },
+    {
+      "id": "ground",
+      "name": "Снег",
+      "plane": true,
+      "across": 20,
+      "distance": 170,
+      "width": 220,
+      "depth": 350
+    },
+    {
+      "id": "lamp",
+      "name": "Фонарь",
+      "across": -5.5,
+      "distance": 9.6,
+      "height": 5.4,
+      "box": [
+        -1.6,
+        -6,
+        1.6,
+        0.2
+      ],
+      "glows": false
+    },
+    {
+      "id": "signal",
+      "name": "Светофор переезда",
+      "across": 2,
+      "distance": 8.9,
+      "height": 3.9,
+      "box": [
+        -1.4,
+        -4.6,
+        1.4,
+        0.2
+      ]
+    },
+    {
+      "id": "barrier",
+      "name": "Шлагбаум",
+      "across": -3.9,
+      "distance": 8.4,
+      "height": 1.4,
+      "box": [
+        -0.9,
+        -7.4,
+        6.9,
+        0.3
+      ],
+      "facing": 180
+    },
+    {
+      "id": "booth",
+      "name": "Будка дежурной",
+      "across": 11.8,
+      "distance": 17,
+      "height": 3.6,
+      "box": [
+        -4.4,
+        -5,
+        4.4,
+        0.5
+      ],
+      "shadow": true
+    },
+    {
+      "id": "booth_w",
+      "name": "Окно будки",
+      "across": 11.8,
+      "distance": 16.95,
+      "height": 1.2,
+      "box": [
+        -4.4,
+        -5,
+        4.4,
+        0.5
+      ],
+      "glows": true
+    },
+    {
+      "id": "freight",
+      "name": "Товарный",
+      "across": 88,
+      "distance": 200,
+      "height": 4.4,
+      "box": [
+        -8.4,
+        -5.4,
+        8.4,
+        0.3
+      ],
+      "place": {
+        "across": "freight_a",
+        "distance": "freight_d",
+        "facing": "freight_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "far_glow",
+      "name": "Свет фары",
+      "across": 88,
+      "distance": 199,
+      "elevation": 3,
+      "height": 20,
+      "box": [
+        -14,
+        -14,
+        14,
+        14
+      ],
+      "glows": true,
+      "place": {
+        "across": "freight_a",
+        "distance": "freight_d"
+      },
+      "behind": [
+        "freight"
+      ]
+    },
+    {
+      "id": "fw1",
+      "name": "Вагон 1",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw1_a",
+        "distance": "fw1_d",
+        "facing": "fw1_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw2",
+      "name": "Вагон 2",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw2_a",
+        "distance": "fw2_d",
+        "facing": "fw2_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw3",
+      "name": "Вагон 3",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw3_a",
+        "distance": "fw3_d",
+        "facing": "fw3_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw4",
+      "name": "Вагон 4",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw4_a",
+        "distance": "fw4_d",
+        "facing": "fw4_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw5",
+      "name": "Вагон 5",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw5_a",
+        "distance": "fw5_d",
+        "facing": "fw5_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw6",
+      "name": "Вагон 6",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw6_a",
+        "distance": "fw6_d",
+        "facing": "fw6_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw7",
+      "name": "Вагон 7",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw7_a",
+        "distance": "fw7_d",
+        "facing": "fw7_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw8",
+      "name": "Вагон 8",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw8_a",
+        "distance": "fw8_d",
+        "facing": "fw8_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "fw9",
+      "name": "Вагон 9",
+      "across": 88,
+      "distance": 215,
+      "height": 4.1,
+      "box": [
+        -6.4,
+        -4.8,
+        6.4,
+        0.3
+      ],
+      "place": {
+        "across": "fw9_a",
+        "distance": "fw9_d",
+        "facing": "fw9_f"
+      },
+      "facing": 164,
+      "shadow": true
+    },
+    {
+      "id": "nina",
+      "name": "Нина",
+      "person": {
+        "turn": 0,
+        "look": {
+          "kind": "shapes",
+          "style": "shadow",
+          "face": "none",
+          "paint": "rim",
+          "line": false,
+          "who": "woman",
+          "garment": "coat",
+          "hair": "ponytail",
+          "hat": "none",
+          "scarf": true,
+          "body": {
+            "height": 0.95
+          },
+          "colors": {
+            "garment": "#5a4a58",
+            "top": "#5a4a58",
+            "bottom": "#2a2a35",
+            "shoes": "#14151a",
+            "hair": "#2f2019",
+            "accent": "#b4a18a",
+            "skin": "#c8b4a4"
+          }
+        }
+      },
+      "across": -6.2,
+      "distance": 4,
+      "place": {
+        "across": "nina_a",
+        "distance": "nina_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "busygin",
+      "name": "Бусыгин",
+      "person": {
+        "turn": 0,
+        "look": {
+          "kind": "shapes",
+          "style": "shadow",
+          "face": "none",
+          "paint": "rim",
+          "line": false,
+          "who": "man",
+          "garment": "coat",
+          "hair": "short",
+          "hat": "none",
+          "scarf": true,
+          "body": {
+            "height": 1.04
+          },
+          "colors": {
+            "garment": "#3a4352",
+            "top": "#3a4352",
+            "bottom": "#292f3a",
+            "shoes": "#14151a",
+            "hair": "#1b1b20",
+            "accent": "#e4e8ef",
+            "skin": "#c8b4a4"
+          }
+        }
+      },
+      "across": -7.4,
+      "distance": 3.6,
+      "place": {
+        "across": "busygin_a",
+        "distance": "busygin_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "snowfall",
+      "particles": {
+        "kind": "snow",
+        "amount": "snow",
+        "count": 1800,
+        "reach": 26
+      }
+    }
+  ],
+  "state": {
+    "hour": 0.78,
+    "beat": "",
+    "beat_next": "",
+    "pos": "start",
+    "night": 0.6,
+    "dusk": 0.4,
+    "dawn": 0,
+    "snow": 0.4,
+    "barrier": 0,
+    "bell": 0,
+    "sig_a": 0,
+    "sig_b": 0,
+    "freight": 0,
+    "freight_x": -140,
+    "freight_lamp": 0,
+    "freight_a": 88,
+    "freight_d": 205,
+    "freight_f": 101,
+    "nina_a": -6.2,
+    "nina_d": 4,
+    "nina_turn": 0,
+    "nina_look": null,
+    "nina_reach": null,
+    "busygin_a": -7.4,
+    "busygin_d": 3.6,
+    "busygin_turn": 0,
+    "busygin_look": null,
+    "busygin_reach": null,
+    "fw1_a": 88,
+    "fw1_d": 215,
+    "fw1_f": 101,
+    "fw2_a": 88,
+    "fw2_d": 215,
+    "fw2_f": 101,
+    "fw3_a": 88,
+    "fw3_d": 215,
+    "fw3_f": 101,
+    "fw4_a": 88,
+    "fw4_d": 215,
+    "fw4_f": 101,
+    "fw5_a": 88,
+    "fw5_d": 215,
+    "fw5_f": 101,
+    "fw6_a": 88,
+    "fw6_d": 215,
+    "fw6_f": 101,
+    "fw7_a": 88,
+    "fw7_d": 215,
+    "fw7_f": 101,
+    "fw8_a": 88,
+    "fw8_d": 215,
+    "fw8_f": 101,
+    "fw9_a": 88,
+    "fw9_d": 215,
+    "fw9_f": 101
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "вес образов света: 0.78 сумерки, 0.82 темнее; 0.9+ к рассвету"
+    },
+    "beat": {
+      "type": "string",
+      "means": "кусок, который играется с начала: wait · truth · roar · brother"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "какой кусок игра назовёт следующим"
+    },
+    "pos": {
+      "values": [
+        "start",
+        "waited",
+        "crossed"
+      ],
+      "means": "где стоит сцена: до ожидания, у шлагбаума (поза под выбор), за путями"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "образ света «ночь» (считается из hour)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "образ света «сумерки» (считается из hour)"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "образ света «рассвет» (считается из hour)"
+    },
+    "snow": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "сила снегопада"
+    },
+    "barrier": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "0 — шлагбаум поднят, 1 — опущен поперёк дороги"
+    },
+    "bell": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — звонок идёт, огни мигают"
+    },
+    "sig_a": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "левый красный огонь светофора (скрипт мигает им по bell)"
+    },
+    "sig_b": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "правый красный огонь светофора"
+    },
+    "freight": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "0 — нет; 0.04 — фара на дуге вдали, в 200 м; 0.1…0.9 идёт перед ними; 1 — ушёл влево"
+    },
+    "freight_x": {
+      "range": [
+        -200,
+        600
+      ],
+      "means": "где тепловоз по пути, метры от дальнего конца дуги (ставит скрипт)"
+    },
+    "freight_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "фара тепловоза"
+    },
+    "freight_a": {
+      "type": "number",
+      "means": "служебный: место тепловоза"
+    },
+    "freight_d": {
+      "type": "number",
+      "means": "служебный"
+    },
+    "freight_f": {
+      "type": "number",
+      "means": "служебный"
+    },
+    "nina_a": {
+      "type": "number",
+      "means": "Нина: across, м (идёт к нему)"
+    },
+    "nina_d": {
+      "type": "number",
+      "means": "Нина: distance, м"
+    },
+    "nina_turn": {
+      "range": [
+        0,
+        360
+      ],
+      "means": "Нина: куда стоя повёрнута"
+    },
+    "nina_look": {
+      "means": "Нина: куда смотрит (id, id#точка, [a,d,h] или null)"
+    },
+    "nina_reach": {
+      "means": "Нина: рука к чему тянется"
+    },
+    "busygin_a": {
+      "type": "number",
+      "means": "Бусыгин: across, м"
+    },
+    "busygin_d": {
+      "type": "number",
+      "means": "Бусыгин: distance, м"
+    },
+    "busygin_turn": {
+      "range": [
+        0,
+        360
+      ],
+      "means": "Бусыгин: куда стоя повёрнут"
+    },
+    "busygin_look": {
+      "means": "Бусыгин: куда смотрит"
+    },
+    "busygin_reach": {
+      "means": "Бусыгин: рука к чему тянется"
+    },
+    "fw1_a": {
+      "type": "number",
+      "means": "служебный: место вагона 1"
+    },
+    "fw1_d": {
+      "type": "number",
+      "means": "служебный: место вагона 1"
+    },
+    "fw1_f": {
+      "type": "number",
+      "means": "служебный: место вагона 1"
+    },
+    "fw2_a": {
+      "type": "number",
+      "means": "служебный: место вагона 2"
+    },
+    "fw2_d": {
+      "type": "number",
+      "means": "служебный: место вагона 2"
+    },
+    "fw2_f": {
+      "type": "number",
+      "means": "служебный: место вагона 2"
+    },
+    "fw3_a": {
+      "type": "number",
+      "means": "служебный: место вагона 3"
+    },
+    "fw3_d": {
+      "type": "number",
+      "means": "служебный: место вагона 3"
+    },
+    "fw3_f": {
+      "type": "number",
+      "means": "служебный: место вагона 3"
+    },
+    "fw4_a": {
+      "type": "number",
+      "means": "служебный: место вагона 4"
+    },
+    "fw4_d": {
+      "type": "number",
+      "means": "служебный: место вагона 4"
+    },
+    "fw4_f": {
+      "type": "number",
+      "means": "служебный: место вагона 4"
+    },
+    "fw5_a": {
+      "type": "number",
+      "means": "служебный: место вагона 5"
+    },
+    "fw5_d": {
+      "type": "number",
+      "means": "служебный: место вагона 5"
+    },
+    "fw5_f": {
+      "type": "number",
+      "means": "служебный: место вагона 5"
+    },
+    "fw6_a": {
+      "type": "number",
+      "means": "служебный: место вагона 6"
+    },
+    "fw6_d": {
+      "type": "number",
+      "means": "служебный: место вагона 6"
+    },
+    "fw6_f": {
+      "type": "number",
+      "means": "служебный: место вагона 6"
+    },
+    "fw7_a": {
+      "type": "number",
+      "means": "служебный: место вагона 7"
+    },
+    "fw7_d": {
+      "type": "number",
+      "means": "служебный: место вагона 7"
+    },
+    "fw7_f": {
+      "type": "number",
+      "means": "служебный: место вагона 7"
+    },
+    "fw8_a": {
+      "type": "number",
+      "means": "служебный: место вагона 8"
+    },
+    "fw8_d": {
+      "type": "number",
+      "means": "служебный: место вагона 8"
+    },
+    "fw8_f": {
+      "type": "number",
+      "means": "служебный: место вагона 8"
+    },
+    "fw9_a": {
+      "type": "number",
+      "means": "служебный: место вагона 9"
+    },
+    "fw9_d": {
+      "type": "number",
+      "means": "служебный: место вагона 9"
+    },
+    "fw9_f": {
+      "type": "number",
+      "means": "служебный: место вагона 9"
+    }
+  },
+  "modules": [],
+  "music": {
+    "prompts": [
+      {
+        "text": "very quiet cold ambient drone, low strings barely moving, night winter, distant",
+        "weight": 1
+      },
+      {
+        "text": "sparse felt piano single notes, long silences, melancholic, Russian provincial railway at night",
+        "weight": 0.6
+      },
+      {
+        "text": "wind over an empty snowy field, soft low textures, no melody",
+        "weight": 0.5
+      },
+      {
+        "text": "solo cello slow bowed note, fragile and warm underneath cold air",
+        "weight": 0.4
+      },
+      {
+        "text": "warm analog pad, hopeful tenderness, tiny",
+        "weight": 0.2
+      },
+      {
+        "text": "low sustained organ tone, distant, church-like quiet",
+        "weight": 0
+      },
+      {
+        "text": "muted vibraphone soft pulse, nocturnal",
+        "weight": 0
+      },
+      {
+        "text": "glass harmonica high shimmer, ice",
+        "weight": 0
+      },
+      {
+        "text": "slow heartbeat low drum, far away",
+        "weight": 0
+      },
+      {
+        "text": "accordion very soft held chord, old Soviet film",
+        "weight": 0
+      },
+      {
+        "text": "harp sparse, frost, slow arpeggio",
+        "weight": 0
+      },
+      {
+        "text": "string quartet pianissimo tremolo, tension, restrained",
+        "weight": 0
+      },
+      {
+        "text": "electronic sub bass hum, industrial distance, railway",
+        "weight": 0
+      },
+      {
+        "text": "guitar nylon single plucks, loneliness",
+        "weight": 0
+      },
+      {
+        "text": "breathy flute very low, hesitant",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.25
+  }
+}
