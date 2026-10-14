@@ -1,0 +1,531 @@
+{
+ "engine": 3,
+ "title": "Ореанда (sonnet2)",
+ "caption": "Внизу шумит море — так шумело до Ялты и будет шуметь, когда нас не будет",
+ "horizon": 0.34,
+ "camera": {
+  "mode": "picture"
+ },
+ "modules": [
+  "cast_sonnet2"
+ ],
+ "light": {
+  "tint": "#6d7fb8",
+  "tintStrength": 0.12,
+  "vignette": 0.5,
+  "grain": 0.25,
+  "haze": 0.05,
+  "hazeColor": "#8c9cc4",
+  "shafts": 0.3,
+  "ambient": 0.78,
+  "ambientColor": "#8a9bd0",
+  "bounce": 0.5,
+  "wind": [
+   1,
+   0,
+   0.3
+  ],
+  "looks": {
+   "dawn": {
+    "ambient": 0.9,
+    "ambientColor": "#ffe1cc",
+    "tint": "#ffb88c",
+    "tintStrength": 0.1,
+    "hazeColor": "#f0c8c0",
+    "saturation": 0.85
+   }
+  }
+ },
+ "lights": [
+  {
+   "id": "sun",
+   "from": [
+    12,
+    5
+   ],
+   "color": "#ffbf94",
+   "strength": 0.9,
+   "on": "dawn"
+  },
+  {
+   "id": "sky",
+   "from": [
+    0,
+    40
+   ],
+   "color": "#8fa6e0",
+   "strength": 0.35
+  }
+ ],
+ "state": {
+  "beat": "bench",
+  "hour": 0.18,
+  "dawn": 0,
+  "mist": 1,
+  "lights": 3,
+  "cicada": 0,
+  "hand": 0,
+  "gurov_a": 0.45,
+  "gurov_d": 3.7,
+  "anna_a": -0.4,
+  "anna_d": 3.7,
+  "gurov_on": [
+   0.45,
+   3.7,
+   0.46
+  ],
+  "anna_on": [
+   -0.4,
+   3.7,
+   0.46
+  ],
+  "gurov_do": {
+   "motion": "seated",
+   "loop": true
+  },
+  "anna_do": {
+   "motion": "seated",
+   "loop": true
+  },
+  "gurov_turn": 0,
+  "anna_turn": 0,
+  "gurov_here": true,
+  "anna_here": true,
+  "gurov_reach": null,
+  "gurov_look": null,
+  "anna_look": null,
+  "watchman_a": 6.5,
+  "watchman_d": 2.7,
+  "watchman_turn": 270,
+  "watchman_here": false,
+  "spitz_here": 1,
+  "spitz_do": "lie",
+  "spitz_a": -1.55,
+  "spitz_d": 4.1,
+  "camera_pitch": -11,
+  "camera_z": 0.9
+ },
+ "states": {
+  "beat": {
+   "values": [
+    "bench",
+    "still",
+    "watchman",
+    "dew",
+    "bench_end"
+   ],
+   "means": "какой кусок играется"
+  },
+  "hour": {
+   "range": [
+    0,
+    1
+   ],
+   "means": "час: 0.18 перед рассветом"
+  },
+  "dawn": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "рассвет: 0 синяя тьма, 1 розовый свет"
+  },
+  "mist": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "туман над морем"
+  },
+  "lights": {
+   "range": [
+    0,
+    3
+   ],
+   "smooth": true,
+   "means": "сколько огней парохода горит"
+  },
+  "cicada": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "цикада в кипарисе"
+  },
+  "hand": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "его рука на её руке"
+  },
+  "gurov_a": {
+   "type": "number"
+  },
+  "gurov_d": {
+   "type": "number"
+  },
+  "anna_a": {
+   "type": "number"
+  },
+  "anna_d": {
+   "type": "number"
+  },
+  "watchman_a": {
+   "type": "number",
+   "smooth": true
+  },
+  "watchman_d": {
+   "type": "number"
+  },
+  "spitz_here": {
+   "values": [
+    0,
+    1
+   ]
+  },
+  "spitz_do": {
+   "values": [
+    "lie",
+    "stand"
+   ]
+  },
+  "spitz_a": {
+   "type": "number"
+  },
+  "spitz_d": {
+   "type": "number"
+  },
+  "camera_z": {
+   "type": "number"
+  }
+ },
+ "objects": [
+  {
+   "id": "sky",
+   "name": "небо",
+   "sky": true,
+   "box": [
+    -0.3,
+    -0.35,
+    2.1,
+    0.8
+   ]
+  },
+  {
+   "id": "coast",
+   "name": "берег",
+   "across": 90,
+   "distance": 320,
+   "elevation": -14,
+   "height": 40,
+   "box": [
+    -160,
+    -40,
+    160,
+    0
+   ],
+   "color": "#5f6f98"
+  },
+  {
+   "id": "sea",
+   "name": "море",
+   "plane": true,
+   "across": 0,
+   "distance": 260,
+   "elevation": -14,
+   "width": 700,
+   "depth": 500,
+   "reflect": {
+    "strength": 0.45,
+    "rough": 0.6,
+    "ripple": 0.5,
+    "fade": 0
+   },
+   "color": "#3d4f7c"
+  },
+  {
+   "id": "mist_far",
+   "name": "туман",
+   "across": 0,
+   "distance": 70,
+   "elevation": -14,
+   "height": 16,
+   "box": [
+    -130,
+    -16,
+    130,
+    0
+   ]
+  },
+  {
+   "id": "steamer",
+   "name": "пароход",
+   "across": -26,
+   "distance": 135,
+   "elevation": -13.6,
+   "height": 14,
+   "box": [
+    -14,
+    -15,
+    14,
+    1
+   ]
+  },
+  {
+   "id": "ground",
+   "name": "земля",
+   "plane": true,
+   "drape": true,
+   "across": 0,
+   "distance": 2.8,
+   "width": 40,
+   "depth": 5.6,
+   "color": "#59634a"
+  },
+  {
+   "id": "church",
+   "name": "церковь",
+   "across": -3.4,
+   "distance": 5.2,
+   "facing": 150,
+   "height": 4.4,
+   "box": [
+    -3.4,
+    -5.6,
+    3.4,
+    0.2
+   ],
+   "color": "#e9e6df"
+  },
+  {
+   "id": "cypress",
+   "name": "кипарис",
+   "across": 3.0,
+   "distance": 5.0,
+   "height": 7,
+   "box": [
+    -1.3,
+    -7.4,
+    1.3,
+    0.2
+   ],
+   "color": "#2a3b2f"
+  },
+  {
+   "id": "cypress2",
+   "name": "кипарис",
+   "across": 5.6,
+   "distance": 6.0,
+   "height": 5,
+   "box": [
+    -1.3,
+    -7.4,
+    1.3,
+    0.2
+   ],
+   "color": "#2a3b2f"
+  },
+  {
+   "id": "bench",
+   "name": "скамья",
+   "across": 0,
+   "distance": 3.3,
+   "height": 1.0,
+   "box": [
+    -1.4,
+    -1.05,
+    1.4,
+    0.05
+   ],
+   "color": "#6a5c4a",
+   "shadow": true
+  },
+  {
+   "id": "grass",
+   "name": "трава",
+   "across": 0,
+   "distance": 5.0,
+   "height": 0.5,
+   "box": [
+    -0.6,
+    -0.6,
+    0.6,
+    0.1
+   ],
+   "copies": [
+    {
+     "across": -2.4,
+     "distance": 4.6
+    },
+    {
+     "across": -1.3,
+     "distance": 5.0
+    },
+    {
+     "across": 1.6,
+     "distance": 4.8,
+     "scale": 1.2
+    },
+    {
+     "across": 3.8,
+     "distance": 3.4
+    },
+    {
+     "across": -3.2,
+     "distance": 3.0,
+     "scale": 1.3
+    },
+    {
+     "across": 1.2,
+     "distance": 5.2
+    }
+   ]
+  },
+  {
+   "id": "spitz",
+   "name": "шпиц",
+   "across": -1.55,
+   "distance": 4.1,
+   "height": 0.4,
+   "box": [
+    -0.8,
+    -0.5,
+    0.9,
+    0.05
+   ],
+   "place": {
+    "across": "spitz_a",
+    "distance": "spitz_d"
+   }
+  },
+  {
+   "id": "anna",
+   "name": "Анна Сергеевна",
+   "shadow": true,
+   "across": -0.4,
+   "distance": 3.7,
+   "place": {
+    "across": "anna_a",
+    "distance": "anna_d"
+   },
+   "person": {
+    "cast": "cast_sonnet2",
+    "turn": 0,
+    "look": {
+     "kind": "shapes",
+     "style": "soft",
+     "who": "woman",
+     "garment": "dress",
+     "hat": "cap",
+     "hair": "bun",
+     "face": "none",
+     "paint": "rim",
+     "colors": {
+      "garment": "#ece8dc",
+      "hat": "#f2ead2",
+      "hair": "#d8c486",
+      "skin": "#e8cdb0",
+      "shoes": "#8a8a90"
+     }
+    }
+   }
+  },
+  {
+   "id": "gurov",
+   "name": "Гуров",
+   "shadow": true,
+   "across": 0.45,
+   "distance": 3.7,
+   "place": {
+    "across": "gurov_a",
+    "distance": "gurov_d"
+   },
+   "person": {
+    "cast": "cast_sonnet2",
+    "turn": 0,
+    "look": {
+     "kind": "shapes",
+     "style": "soft",
+     "who": "man",
+     "garment": "jacket",
+     "hat": "hat",
+     "hair": "short",
+     "face": "none",
+     "paint": "rim",
+     "body": {
+      "height": 1.04,
+      "shoulders": 1.1,
+      "thick": 1.1
+     },
+     "colors": {
+      "top": "#d9d3bf",
+      "garment": "#d9d3bf",
+      "bottom": "#cfc9b5",
+      "hat": "#e6d8a8",
+      "hair": "#8a8478",
+      "skin": "#e0bd9d",
+      "shoes": "#5c5348"
+     }
+    }
+   }
+  },
+  {
+   "id": "watchman",
+   "name": "сторож",
+   "shadow": true,
+   "across": 6.5,
+   "distance": 2.7,
+   "place": {
+    "across": "watchman_a",
+    "distance": "watchman_d"
+   },
+   "person": {
+    "cast": "cast_sonnet2",
+    "turn": 270,
+    "look": {
+     "kind": "shapes",
+     "style": "soft",
+     "who": "old",
+     "garment": "coat",
+     "hat": "cap",
+     "face": "none",
+     "paint": "rim",
+     "parts": [
+      "stick"
+     ],
+     "body": {
+      "height": 0.82
+     },
+     "colors": {
+      "garment": "#6c6a62",
+      "hat": "#4a4640",
+      "accent": "#5b4630"
+     }
+    }
+   }
+  }
+ ],
+ "music": {
+  "prompts": [
+   {
+    "text": "very soft sustained strings, cold dawn air, distant sea, no melody",
+    "weight": 1.2
+   },
+   {
+    "text": "slow low piano-less drone, quiet cello harmonics, wide silence",
+    "weight": 0.8
+   },
+   {
+    "text": "gentle sea waves far below a cliff, light wind in cypress",
+    "weight": 1
+   }
+  ],
+  "bpm": 56,
+  "density": 0.15,
+  "brightness": 0.3
+ },
+ "notes": "см. notes.md"
+}
