@@ -1,0 +1,10 @@
+g.fillStyle = '#6e5c58'; g.fillRect(-1.8, -2.6, 3.6, 2.6);
+g.fillStyle = 'rgba(30,22,26,0.4)';
+for (let y = -2.4; y < 0; y += 0.32) g.fillRect(-1.8, y, 3.6, 0.04);
+g.fillStyle = '#2d2b38';
+g.beginPath(); g.moveTo(-2.2, -2.6); g.lineTo(0, -3.9); g.lineTo(2.2, -2.6); g.closePath(); g.fill();
+g.fillStyle = '#e4eaf5';
+g.beginPath(); g.moveTo(-2.3, -2.55); g.lineTo(0, -4.0); g.lineTo(2.3, -2.55); g.lineTo(2.0, -2.5); g.lineTo(0, -3.75); g.lineTo(-2.0, -2.5); g.closePath(); g.fill();
+g.fillStyle = '#322e3a'; g.fillRect(0.9, -1.85, 0.7, 1.85);
+g.fillStyle = '#4a4552'; g.fillRect(1.15, -4.3, 0.34, 0.9);
+e.at(1.32, -4.35, 'chimney');

@@ -1,0 +1,1 @@
+g.fillStyle = '#cfd8e8'; g.fillRect(-1300, -650, 2600, 1300);
