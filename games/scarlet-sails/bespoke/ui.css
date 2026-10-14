@@ -1,5 +1,5 @@
 /* The game over the scene (ui.js), on linen, in ink: the toy yacht and the compass low in the corners, the strips of
-   linen, the hint and «Дальше», the title, the letter; the tools. Scarlet is the yacht's sails' alone. */
+   linen, the hint, the title, the letter; the tools. Scarlet is the yacht's sails' alone. */
 #layer { --linen: #d8cfbd; --linen-dark: #b9ad96; --ink: #1c2a4a; --scarlet: #d2232a;
   --hand: "Parusa Hand", "Segoe Script", cursive;
   --below-header: 46px; } /* where the site's header ends */

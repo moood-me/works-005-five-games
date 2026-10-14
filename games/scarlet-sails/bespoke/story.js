@@ -32,8 +32,9 @@
 //     make the g.told / g.when / g.arrived before g.beat
 //   g.play(minigame, opts) — a small game of the hands: a module of minigames/ — export default {title, about,
 //     skipped, run: async (g, b, opts, signal) → its result}, made of the language of mini-games (bespoke.minigame:
-//     moood/docs/agents/minigames.md). The signal aborts when the author skips it (⏭ — the game's or the language's)
-//     or the step is left: it stops; → `skipped` then. The player has no way out of it: each is passable
+//     moood/docs/agents/minigames.md). The signal aborts when the author skips it (the language's ⏭: the game's own is
+//     not shown meanwhile) or the step is left: it stops; → `skipped` then. The player has no way out of it: each is
+//     passable
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
 //     left when the signal aborts; the language's ⏭ skips the minigame
 //   g.hint(text, afterMs) — one line low on the screen, what to do; → a function that takes it away
@@ -260,10 +261,10 @@ export function context(b, view, hub, state, j = null) {
         if (j.plays.length <= j.target) return j.result?.(minigame) ?? minigame.skipped;
         await seen();
       }
-      // skipped — by its author (⏭), by the step left — it ends with its `skipped`
+      // skipped — by its author (the language's ⏭: g.minigame), by the step left — it ends with its `skipped`
       const stop = new AbortController();
       const end = () => stop.abort();
-      const off = view.onSkip(end);
+      const off = view.onSkip(null);
       left.signal.addEventListener('abort', end);
       playing = { signal: stop.signal, end };
       const skipped = new Promise(ok => stop.signal.addEventListener('abort', () => {
