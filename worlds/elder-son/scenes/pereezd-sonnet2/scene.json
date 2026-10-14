@@ -2,7 +2,7 @@
   "engine": 3,
   "title": "Переезд (sonnet2)",
   "caption": "Звонок. Шлагбаум опускается.",
-  "horizon": 0.43,
+  "horizon": 0.5,
   "camera": {
     "mode": "picture"
   },
