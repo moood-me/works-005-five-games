@@ -1,4 +1,4 @@
-// The cliff top seen from above: dry summer grass, worn paths, stones. A plane 44 × 30 m draped on the relief,
+// The cliff top seen from above: dry summer grass, worn paths, stones. A level plane 44 × 30 m,
 // its centre 15 m ahead: x = across, y = 15 − distance (toward the viewer). Painted only where the land is.
 const edge = e.lib.edge, rnd = e.rnd;
 const Y = d => 15 - d;
@@ -10,10 +10,10 @@ g.lineTo(22, 15);
 g.closePath();
 g.save();
 g.clip();
-g.fillStyle = '#a69e79';
+g.fillStyle = '#9d9a7f';
 g.fillRect(-22, -15, 44, 30);
 // patches of greyer and paler grass
-const tones = ['#9a9673', '#b5ab84', '#8d8f71', '#ada37c'];
+const tones = ['#918f78', '#aaa488', '#878b74', '#a39e84'];
 for (let i = 0; i < 420; i++) {
   const a = -22 + rnd() * 44, d = rnd() * 24, r = 0.3 + rnd() * 1.4;
   g.globalAlpha = 0.35 + 0.3 * rnd();
@@ -25,25 +25,25 @@ g.globalAlpha = 1;
 g.strokeStyle = '#c6ba9b'; g.lineCap = 'round'; g.lineJoin = 'round';
 g.lineWidth = 0.75;
 g.beginPath();
-g.moveTo(8.5, Y(19)); g.bezierCurveTo(6.5, Y(15), 3.5, Y(11.9), 1.5, Y(11.3));
-g.bezierCurveTo(-4, Y(10.7), -12, Y(11.1), -22, Y(10.6));
+g.moveTo(8.5, Y(19)); g.bezierCurveTo(6.2, Y(14.5), 3.6, Y(9.4), 1.5, Y(7.4));
+g.bezierCurveTo(-4, Y(7.0), -12, Y(7.2), -22, Y(6.9));
 g.stroke();
 g.lineWidth = 0.5;
-g.beginPath(); g.moveTo(0.1, Y(4.6)); g.bezierCurveTo(0.3, Y(7), 1.2, Y(9.5), 1.6, Y(11.2)); g.stroke();
+g.beginPath(); g.moveTo(0.1, Y(4.2)); g.bezierCurveTo(0.3, Y(5.5), 1.0, Y(6.6), 1.5, Y(7.4)); g.stroke();
 g.lineWidth = 0.9; g.globalAlpha = 0.6;
-g.beginPath(); g.moveTo(-1.6, Y(3.4)); g.bezierCurveTo(-0.6, Y(3.6), 0.6, Y(3.6), 1.6, Y(3.4)); g.stroke();   // trodden before the bench
+g.beginPath(); g.moveTo(-1.6, Y(3.0)); g.bezierCurveTo(-0.6, Y(3.2), 0.6, Y(3.2), 1.6, Y(3.0)); g.stroke();   // trodden before the bench
 g.globalAlpha = 1;
 // stones
 for (let i = 0; i < 90; i++) {
-  const a = -14 + rnd() * 26, d = 2 + rnd() * 13, r = 0.05 + rnd() ** 2 * 0.3;
+  const a = -14 + rnd() * 26, d = 2 + rnd() * 9, r = 0.05 + rnd() ** 2 * 0.3;
   g.fillStyle = i % 3 ? '#b7b0a1' : '#9a9488';
   g.beginPath(); g.ellipse(a, Y(d), r, r * 0.7, rnd() * 3, 0, Math.PI * 2); g.fill();
 }
 // blades of grass near the eye
 g.lineWidth = 0.018;
 for (let i = 0; i < 1600; i++) {
-  const a = -7 + rnd() * 14, d = 2.2 + rnd() ** 1.5 * 8, l = 0.07 + rnd() * 0.14, t = rnd() * Math.PI;
-  g.strokeStyle = i % 3 ? '#c2b68c' : '#7f7b60';
+  const a = -7 + rnd() * 14, d = 2.2 + rnd() ** 1.5 * 5.5, l = 0.07 + rnd() * 0.14, t = rnd() * Math.PI;
+  g.strokeStyle = i % 3 ? '#b8b092' : '#7a7a62';
   g.beginPath(); g.moveTo(a, Y(d)); g.lineTo(a + Math.cos(t) * l, Y(d) + Math.sin(t) * l * 0.6); g.stroke();
 }
 g.restore();

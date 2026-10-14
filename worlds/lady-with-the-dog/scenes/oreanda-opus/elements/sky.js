@@ -69,7 +69,7 @@ e.layer('dawn', {}, gd => {
   glow(gd, SUN, H, 0.75, 0.2, '#fff0d2', 0.85);
   glow(gd, SUN, H, 0.22, 0.05, '#fff8e6', 0.9);
   sea(gd, '#ecdcd2', '#c4bfd4', '#6d78a6', '#f2e6e0', '#8a90b8');
-  coast(gd, '#9389b0');
+  coast(gd, '#ada4c4');
 });
 
 // ── stars: only before dawn; the morning star low in the east

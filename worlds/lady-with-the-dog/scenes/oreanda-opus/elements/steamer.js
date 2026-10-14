@@ -17,7 +17,7 @@ g.strokeStyle = '#4a4a52'; g.lineWidth = 0.45;
 g.beginPath(); g.moveTo(-21, -6); g.lineTo(-21, -24); g.moveTo(19, -6); g.lineTo(19, -22);
 g.moveTo(-21, -24); g.lineTo(-31, -6); g.moveTo(-21, -24); g.lineTo(19, -22); g.lineTo(34, -7.4); g.stroke();
 // the lights: a masthead light, the deck's lamps, the stern's
-e.light(-21, -23.5, 34, '#ffd9a0', 1, 'l1');
-e.light(0, -9.8, 34, '#ffcf92', 1, 'l2');
-e.light(19, -21.5, 34, '#ffd9a0', 1, 'l3');
+e.light(-21, -23.5, 30, '#ffd9a0', 1.6, 'l1');
+e.light(0, -9.8, 30, '#ffcf92', 1.6, 'l2');
+e.light(19, -21.5, 30, '#ffd9a0', 1.6, 'l3');
 e.at(0, -14, 'lights');

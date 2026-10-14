@@ -61,7 +61,7 @@ const BEATS = {
       s.set('watchman_d', L.WATCH_FROM[1]);
       w.here(true);
       await w.walk([L.WATCH_STOP]);
-      await w.turn(197);
+      await w.turn(207);
       w.look('gurov');
       s.tell('watchman:looks');
       await s.wait(0.6);
@@ -103,7 +103,7 @@ const BEATS = {
     after: [], from: () => base({ dawn: 1, lights: 0, cicada: 0, anna_here: false, gurov_here: false, spitz_here: 0 }),
     run: async s => {
       s.move('mist', 0.15, { over: 12 });
-      await s.move('camera_z', 1.4, { over: 12, ease: 'inOut' });
+      await s.move('camera_z', 0.7, { over: 12, ease: 'inOut' });
     },
   },
 };

@@ -11,7 +11,7 @@ return {
       body: { height: 0.94 },
       colors: { top: '#efedf1', garment: '#efedf1', bottom: '#efedf1', hair: '#d9c08c', hat: '#c9c5d8', shoes: '#857c8a', skin: '#e6c6ad' } },
     watchman: { kind: 'shapes', style: 'dama', who: 'grandpa', garment: 'coat', hat: 'cap', face: 'none', scarf: false,
-      colors: { garment: '#5d5850', bottom: '#4a453f', hat: '#3f3a36', shoes: '#2f2a26', skin: '#b98f74', hair: '#c9c4bb' } },
+      colors: { garment: '#7c766b', bottom: '#4a453f', hat: '#3f3a36', shoes: '#2f2a26', skin: '#b98f74', hair: '#c9c4bb' } },
   },
   shapes: {
     styles: { dama: { from: 'soft', paint: 'toned', face: 'none' } },
