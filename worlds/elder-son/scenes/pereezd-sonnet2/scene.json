@@ -226,6 +226,28 @@
       "shadow": true
     },
     {
+      "id": "far_glow",
+      "name": "Свет фары",
+      "across": 88,
+      "distance": 199,
+      "elevation": 3,
+      "height": 20,
+      "box": [
+        -14,
+        -14,
+        14,
+        14
+      ],
+      "glows": true,
+      "place": {
+        "across": "freight_a",
+        "distance": "freight_d"
+      },
+      "behind": [
+        "freight"
+      ]
+    },
+    {
       "id": "fw1",
       "name": "Вагон 1",
       "across": 88,
