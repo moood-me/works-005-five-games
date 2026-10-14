@@ -11,7 +11,7 @@
     "tintStrength": 0.16,
     "vignette": 0.5,
     "grain": 0.22,
-    "haze": 0.1,
+    "haze": 0.05,
     "hazeColor": "#2a3f66",
     "hazeGlow": 0.7,
     "shafts": 0,
