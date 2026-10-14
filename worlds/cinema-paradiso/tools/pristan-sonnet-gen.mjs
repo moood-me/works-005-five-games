@@ -51,7 +51,7 @@ const objects = [
   { id: 'lantern', name: 'Фонарь', across: 4.0, distance: 25.8, facing: 180, box: [-0.4, -4.2, 0.4, 0.1] },
   { id: 'car', name: 'Машина', across: 3.6, distance: -8, facing: 180, box: [-1.1, -1.6, 1.1, 0.1], place: { across: 'car_a', distance: 'car_z' } },
   { id: 'wedge', name: 'Свет фар', plane: true, on: 'car', distance: 6.5, elevation: 0.75, width: 5, depth: 12.4, glows: true },
-  { id: 'rain_fall', name: 'Дождь', particles: { kind: 'rain', amount: 'rain', count: 7000, reach: 22, speed: 10, color: '#aebddc', opacity: 0.55, ground: 'splash' } },
+  { id: 'rain_fall', name: 'Дождь', particles: { kind: 'rain', amount: 'rain', count: 9000, reach: 22, speed: 10, color: '#d0dcf5', opacity: 0.9, ground: 'splash' } },
   P('toto', 'Тото', 'toto_teen', -0.9, 5.3, 270),
   P('elena', 'Елена', 'elena', 0.2, 5.5, 340),
   P('daughter', 'Дочь', 'daughter', 3.0, 8.0, 0),

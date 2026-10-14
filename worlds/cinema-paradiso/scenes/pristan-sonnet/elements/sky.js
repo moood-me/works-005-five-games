@@ -20,10 +20,10 @@ e.layer('night', { box }, g => {
 });
 e.layer('moon', { box }, g => {
   const mx = W / 2 + 0.42, my = 0.22;
-  const gl = g.createRadialGradient(mx, my, 0.02, mx, my, 0.22);
-  gl.addColorStop(0, 'rgba(190,210,255,0.55)'); gl.addColorStop(1, 'rgba(190,210,255,0)');
-  g.fillStyle = gl; g.beginPath(); g.arc(mx, my, 0.22, 0, 6.2832); g.fill();
+  const gl = g.createRadialGradient(mx, my, 0.02, mx, my, 0.1);
+  gl.addColorStop(0, 'rgba(190,210,255,0.4)'); gl.addColorStop(1, 'rgba(190,210,255,0)');
+  g.fillStyle = gl; g.beginPath(); g.arc(mx, my, 0.1, 0, 6.2832); g.fill();
   g.fillStyle = '#f6f2de'; g.beginPath(); g.arc(mx, my, 0.03, 0, 6.2832); g.fill();
-  e.light(mx, my, 0.25, '#a8bff5', 1.0, 'moon');
+  e.light(mx, my, 0.1, '#a8bff5', 0.6, 'moon');
   e.at(mx, my, 'disc');
 });

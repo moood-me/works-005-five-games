@@ -459,11 +459,11 @@
    "particles": {
     "kind": "rain",
     "amount": "rain",
-    "count": 7000,
+    "count": 9000,
     "reach": 22,
     "speed": 10,
-    "color": "#aebddc",
-    "opacity": 0.55,
+    "color": "#d0dcf5",
+    "opacity": 0.9,
     "ground": "splash"
    }
   },

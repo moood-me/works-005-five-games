@@ -9,8 +9,8 @@ for (const rx of [-0.1, 0.16]) {
   for (let k = 0; k < 3; k++) { const a = k * 2.094; g.beginPath(); g.moveTo(rx, -0.64); g.lineTo(rx + Math.cos(a) * 0.15, -0.64 + Math.sin(a) * 0.15); g.stroke(); }
 }
 e.layer('tarp', { box: [-0.7, -1.2, 0.8, 0.1], pivot: [0, 0] }, g => {
-  g.fillStyle = '#4e4d3d';
-  g.beginPath(); g.moveTo(-0.48, 0); g.bezierCurveTo(-0.5, -0.5, -0.4, -0.95, 0.02, -0.92); g.bezierCurveTo(0.4, -0.9, 0.5, -0.5, 0.56, 0); g.closePath(); g.fill();
+  g.fillStyle = '#6a6a50';
+  g.beginPath(); g.moveTo(-0.42, 0); g.lineTo(-0.4, -0.46); g.lineTo(-0.3, -0.6); g.lineTo(-0.22, -0.8); g.lineTo(0.2, -0.82); g.lineTo(0.3, -0.58); g.lineTo(0.42, -0.4); g.lineTo(0.5, 0); g.closePath(); g.fill();
   g.strokeStyle = '#34332a'; g.lineWidth = 0.025;
   for (let i = 0; i < 5; i++) { g.beginPath(); g.moveTo(-0.3 + i * 0.18, -0.85 + (i % 2) * 0.04); g.lineTo(-0.38 + i * 0.2, 0); g.stroke(); }
 });
