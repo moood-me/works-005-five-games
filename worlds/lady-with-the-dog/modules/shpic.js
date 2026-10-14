@@ -129,11 +129,11 @@ function live(e) {
   if (act === 'sniff') hr += 0.25 * dir + 0.03 * Math.sin(t * 13);
   e.layer('head').rotate = hr;
   // the leash: from the collar to the hand that holds it, or trailing on the ground behind
-  const L = e.layer('leash'), ref = s.leash;
-  const c = e.point(e.id + '#collar');
+  const L = e.layer('leash'), ref = s.leash, P = pose(act);
+  // the collar where paint() put the leash's pivot (the same pose numbers; its own painting's units)
+  const c = s.spitz_view === 'back' ? [0, P.body[1] - 0.045] : [(P.head[0] - 0.06) * dir, P.head[1] + 0.06];
   let p = null;
   if (typeof ref === 'string' && ref !== 'none' && ref !== 'chair') p = e.point(ref);
-  if (!c) { L.alpha = 0; return; }
   if (!p) p = [c[0] - dir * 1.1, 0];
   const dx = p[0] - c[0], dy = p[1] - c[1], len = Math.hypot(dx, dy);
   L.alpha = 1;
