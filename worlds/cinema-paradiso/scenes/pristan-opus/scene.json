@@ -19,8 +19,8 @@
     "tintStrength": 0.06,
     "vignette": 0.36,
     "grain": 0.14,
-    "haze": 0.04,
-    "hazeColor": "#1c2746",
+    "haze": 0,
+    "hazeColor": "#2e4a7c",
     "hazeGlow": 0.7,
     "shafts": 0,
     "bounce": 0.5,
@@ -37,8 +37,7 @@
         "ambientColor": "#b4a0ac",
         "tint": "#c88a66",
         "tintStrength": 0.1,
-        "hazeColor": "#6e5c70",
-        "haze": 0.05,
+        "hazeColor": "#b89a96",
         "lights": {
           "moon": 0.3
         }
@@ -52,8 +51,8 @@
       },
       "rain": {
         "ambient": 0.3,
-        "haze": 0.22,
-        "hazeColor": "#1b2334",
+        "haze": 0.2,
+        "hazeColor": "#26304a",
         "hazeGlow": 1.1,
         "wind": [
           1.6,
@@ -655,9 +654,9 @@
       "facing": 180,
       "height": 5.6,
       "box": [
-        -3.3,
-        -6,
-        3.3,
+        -4.4,
+        -6.1,
+        4.4,
         0.1
       ]
     },
@@ -1571,8 +1570,15 @@
       "particles": {
         "kind": "rain",
         "amount": "rain",
-        "count": 14000,
-        "reach": 26
+        "count": 30000,
+        "reach": 20,
+        "size": [
+          0.014,
+          0.014
+        ],
+        "color": "#d4deef",
+        "opacity": 0.75,
+        "streak": 0.06
       }
     },
     {

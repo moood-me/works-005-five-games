@@ -38,7 +38,7 @@ g.fillStyle = hz; g.fillRect(-0.3, H - 0.04, A + 0.6, 0.04);
 // the moon over the sea
 const mx = bearing(7), my = H - (dusk ? 0.33 : now ? 0.23 : 0.27), mr = 0.022;
 const halo = g.createRadialGradient(mx, my, mr, mx, my, mr * 5);
-halo.addColorStop(0, dusk ? 'rgba(230,230,240,0.20)' : 'rgba(200,214,255,0.30)'); halo.addColorStop(1, 'rgba(200,214,255,0)');
+halo.addColorStop(0, dusk ? 'rgba(230,230,240,0.14)' : 'rgba(200,214,255,0.2)'); halo.addColorStop(1, 'rgba(200,214,255,0)');
 g.fillStyle = halo; g.fillRect(mx - mr * 5, my - mr * 5, mr * 10, mr * 10);
 const md = g.createRadialGradient(mx - mr * 0.3, my - mr * 0.3, mr * 0.1, mx, my, mr);
 md.addColorStop(0, dusk ? '#f4efe4' : '#fffbef'); md.addColorStop(1, dusk ? '#d9d2c4' : '#e9e3d0');
@@ -46,7 +46,7 @@ g.fillStyle = md; g.beginPath(); g.arc(mx, my, mr, 0, Math.PI * 2); g.fill();
 g.fillStyle = 'rgba(150,150,140,0.25)';
 for (const [dx, dy, r] of [[-0.3, -0.2, 0.28], [0.25, 0.1, 0.22], [-0.05, 0.35, 0.18]]) { g.beginPath(); g.arc(mx + dx * mr, my + dy * mr, r * mr, 0, Math.PI * 2); g.fill(); }
 e.at(mx, my, 'disc');
-e.light(mx, my, 0.016, '#dfe6ff', dusk ? 0.3 : 0.55, 'halo');
+e.light(mx, my, 0.012, '#dfe6ff', dusk ? 0.25 : 0.4, 'halo');
 
 // far capes: the coast to the east, a long low headland to the west; a few lights in the eastern villages
 const ridge = (d0, d1, h, seed, color) => {

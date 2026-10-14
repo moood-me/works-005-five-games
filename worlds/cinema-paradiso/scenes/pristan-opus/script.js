@@ -157,7 +157,7 @@ const B = {
     run: async s => {
       const toto = s.person('toto'), elena = s.person('elena');
       elena.gait('run');
-      const run = elena.walk([[-0.3, 50], [1.5, 57.8], [1.75, 59.55]]);
+      const run = elena.walk([[-0.3, 50], [1.6, 57.8], [1.95, 59.6]]);
       s.move('camera_z', CAM.foundEnd.camera_z, { over: 6.5, ease: 'inOut' });
       s.move('camera_x', CAM.foundEnd.camera_x, { over: 6.5, ease: 'inOut' });
       await s.wait(3); s.tell('found:run');
