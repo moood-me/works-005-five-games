@@ -78,7 +78,7 @@ const BEATS = {
     from() {
       const o = base(); summerBase(o); underEave(o); o.rain = 1; o.beam_on = 0; o.cover = 1;
       put(o, 'elena', { do: 'stand', on: null }); put(o, 'toto', { reach: { r: 'projector', l: 'projector' } });
-      o.car = 'old'; o.car_z = 1.0; o.car_a = 3.6; o.headlights = 1;
+      put(o, 'banker', { a: 2.3, d: 8.2, turn: 235 }); o.car = 'old'; o.car_z = 1.0; o.car_a = 3.6; o.headlights = 1;
       scene.cut(fin(o));
     },
     async run(s) {
