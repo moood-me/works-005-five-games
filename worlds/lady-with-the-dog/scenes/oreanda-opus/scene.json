@@ -1,0 +1,118 @@
+{
+  "engine": 3,
+  "title": "Ореанда (opus)",
+  "horizon": 0.45,
+  "camera": { "mode": "picture" },
+  "modules": ["cast_opus", "shpic_opus"],
+  "light": {
+    "ambient": 0.62, "ambientColor": "#9ea4d4",
+    "haze": 0.035, "hazeColor": "#b9b1d6",
+    "vignette": 0.3, "grain": 0.2, "saturation": 0.9, "bounce": 0.55,
+    "wind": [1, 0.3, 0.35],
+    "looks": {
+      "dawn": { "ambient": 0.86, "ambientColor": "#ece0e2", "hazeColor": "#ecd8d2", "saturation": 0.96, "brightness": 1.06 }
+    }
+  },
+  "lights": [
+    { "id": "pre", "from": [-19, 7], "color": "#a9b2ea", "strength": 0.55 },
+    { "id": "sunrise", "from": [-19, 2], "color": "#ffcfae", "strength": 1.25, "on": "dawn" }
+  ],
+  "objects": [
+    { "id": "sky", "name": "небо и море", "sky": true },
+    { "id": "steamer", "name": "пароход", "across": -520, "distance": 1500, "elevation": -90, "place": { "across": "steamer_a", "distance": "steamer_d" },
+      "height": 26, "box": [-40, -31, 41, 1] },
+    { "id": "cliff", "name": "обрыв", "plane": true, "across": 0, "distance": 15, "elevation": 0, "width": 44, "depth": 30 },
+    { "id": "edge", "name": "край обрыва", "across": -7, "distance": 7.85, "height": 1.6, "box": [-17.8, -1.8, 10.2, 0.45] },
+    { "id": "church", "name": "церковь", "across": 9.5, "distance": 17.5, "height": 10.5, "box": [-4, -10.7, 4.2, 0.2], "shadow": true },
+    { "id": "cypresses", "name": "кипарисы у церкви", "height": 10, "box": [-1, -10.3, 1, 0.1],
+      "copies": [
+        { "across": 7.2, "distance": 15.6, "scale": 1.1 },
+        { "across": 12.2, "distance": 18.8, "scale": 0.9, "flip": true },
+        { "across": 13.6, "distance": 15.5, "scale": 1.2 },
+        { "across": 6.6, "distance": 18, "scale": 0.8, "flip": true },
+        { "across": 11, "distance": 21.5, "scale": 1 }
+      ] },
+    { "id": "cypress", "name": "кипарис", "across": 4.3, "distance": 8.6, "height": 11, "box": [-1, -11.3, 1, 0.1], "shadow": true },
+    { "id": "bushes", "name": "кусты", "height": 1, "box": [-1.2, -1.2, 1.2, 0.1],
+      "copies": [
+        { "across": 2.9, "distance": 10.2 }, { "across": 4.4, "distance": 13, "scale": 1.2 }, { "across": 5.6, "distance": 16, "scale": 0.9, "flip": true },
+        { "across": 7.8, "distance": 18.8, "scale": 1.1 }, { "across": 3.6, "distance": 11.4, "scale": 0.8, "flip": true },
+        { "across": 6.4, "distance": 18.2, "scale": 1.0 }, { "across": -9, "distance": 7.5, "scale": 1.1 }
+      ] },
+    { "id": "tufts", "name": "трава", "height": 0.8, "box": [-0.6, -0.8, 0.6, 0.05],
+      "copies": [
+        { "across": -2.5, "distance": 3.0 }, { "across": -1.9, "distance": 2.9, "scale": 0.8, "flip": true },
+        { "across": 2.6, "distance": 3.1, "scale": 1.1 }, { "across": 2.0, "distance": 2.85, "scale": 0.9, "flip": true },
+        { "across": -3.2, "distance": 4.2, "scale": 1.2 }, { "across": 3.4, "distance": 4.4 }
+      ] },
+    { "id": "bench_seat", "name": "скамья", "plane": true, "across": 0, "distance": 3.6, "elevation": 0.43, "width": 2.1, "depth": 0.42, "shadow": true },
+    { "id": "bench_legs", "name": "скамья", "across": 0, "distance": 3.38, "height": 0.5, "box": [-1.1, -0.5, 1.1, 0.05] },
+    { "id": "anna", "name": "Анна Сергеевна", "person": { "cast": "cast_opus", "who": "anna_summer", "turn": 0, "does": "seated" },
+      "across": -0.33, "distance": 3.6, "place": { "across": "anna_a", "distance": "anna_d" } },
+    { "id": "gurov", "name": "Гуров", "person": { "cast": "cast_opus", "who": "gurov_summer", "turn": 0, "does": "seated" },
+      "across": 0.34, "distance": 3.6, "place": { "across": "gurov_a", "distance": "gurov_d" } },
+    { "id": "watchman", "name": "сторож", "person": { "cast": "cast_opus", "who": "watchman", "turn": 270 },
+      "across": 5.6, "distance": 13.6, "place": { "across": "watchman_a", "distance": "watchman_d" } },
+    { "id": "spitz", "name": "шпиц", "across": -1.3, "distance": 3.95,
+      "place": { "across": "spitz_a", "distance": "spitz_d", "elevation": "spitz_e" },
+      "height": 0.45, "box": [-2.6, -2.2, 2.6, 0.3], "shadow": true }
+  ],
+  "state": {
+    "hour": 0.18, "dawn": 0, "mist": 1, "lights": 3, "cicada": 1, "hand": 0, "beat": "", "beat_end": "",
+    "steamer_a": -520, "steamer_d": 1500,
+    "anna_a": -0.33, "anna_d": 3.6, "gurov_a": 0.34, "gurov_d": 3.6, "watchman_a": 5.6, "watchman_d": 13.6,
+    "anna_on": [-0.33, 3.6, 0.43], "gurov_on": [0.34, 3.6, 0.43], "anna_reach": { "r": [-0.04, 3.54, 0.46] },
+    "watchman_here": false,
+    "spitz_a": -1.3, "spitz_d": 3.95, "spitz_e": 0, "spitz_view": "side", "spitz_do": "lie", "spitz_look": null,
+    "spitz_here": 1, "spitz_old": 0, "spitz_dir": 1, "leash": "anna#hand_l"
+  },
+  "states": {
+    "hour": { "range": [0.1, 0.3], "means": "час (0.18 — перед рассветом); сцена всегда в этом часе — свет ведёт dawn" },
+    "dawn": { "range": [0, 1], "smooth": true, "means": "рассвет: 0 — синий час перед рассветом, 1 — светло, заря над морем; пароход идёт к берегу вместе с ним" },
+    "mist": { "range": [0, 1], "smooth": true, "means": "туман на море под обрывом: 1 — лежит, 0 — ушёл" },
+    "lights": { "range": [0, 3], "smooth": true, "means": "сколько огней парохода горит (гаснут по одному: палуба, корма, мачта)" },
+    "cicada": { "values": [0, 1], "means": "1 — в кроне ближнего кипариса поёт цикада (точка cypress#cicada); 0 — замолчала" },
+    "hand": { "values": [0, 1], "means": "1 — его левая рука накрывает её правую на скамье" },
+    "beat": { "values": ["", "bench", "still", "watchman", "dew", "bench_end"], "means": "кусок фильма: поставленный играет с начала" },
+    "beat_end": { "type": "string", "means": "имя последнего доигравшего куска (ставит сцена)" },
+    "steamer_a": { "range": [-600, 0], "smooth": true, "means": "где пароход поперёк, м (ставит сцена по dawn)" },
+    "steamer_d": { "range": [600, 1600], "smooth": true, "means": "как далеко пароход, м (ставит сцена по dawn)" },
+    "anna_a": { "range": [-3, 3], "smooth": true, "means": "где стоит Анна поперёк, м" },
+    "anna_d": { "range": [2, 6], "smooth": true, "means": "как далеко стоит Анна, м" },
+    "gurov_a": { "range": [-3, 3], "smooth": true, "means": "где стоит Гуров поперёк, м" },
+    "gurov_d": { "range": [2, 6], "smooth": true, "means": "как далеко стоит Гуров, м" },
+    "watchman_a": { "range": [-12, 12], "smooth": true, "means": "где сторож поперёк, м" },
+    "watchman_d": { "range": [8, 22], "smooth": true, "means": "как далеко сторож, м" },
+    "spitz_a": { "range": [-3, 3], "smooth": true, "means": "где шпиц поперёк, м" },
+    "spitz_d": { "range": [2, 8], "smooth": true, "means": "как далеко шпиц, м" },
+    "spitz_e": { "range": [0, 1], "smooth": true, "means": "высота шпица над землёй, м" },
+    "spitz_view": { "values": ["side", "back"], "means": "вид шпица: сбоку или со спины" },
+    "spitz_do": { "values": ["stand", "sit", "lie", "trot", "run", "growl", "bark", "up", "sniff"], "means": "что делает шпиц" },
+    "spitz_look": { "type": "string", "means": "точка, на которую смотрит шпиц, или null" },
+    "spitz_here": { "values": [0, 1], "means": "шпиц в сцене" },
+    "spitz_old": { "values": [0, 1], "means": "старый шпиц: шерсть желтее, движется медленнее" },
+    "spitz_dir": { "values": [-1, 1], "means": "куда смотрит шпиц сбоку: 1 — вправо, −1 — влево" },
+    "leash": { "type": "string", "means": "к чьей руке идёт поводок ('anna#hand_l'…), 'none' — волочится" }
+  },
+  "music": {
+    "prompts": [
+      { "text": "very slow ambient drone of soft strings, distant and still, the hour before dawn by the sea", "weight": 1.2 },
+      { "text": "sparse solo cello, long held low notes, quiet melancholy, lots of silence between phrases", "weight": 1 },
+      { "text": "gentle sustained pads with slow swells like breathing waves, warm and pale, no rhythm", "weight": 0.9 },
+      { "text": "faint glass harmonica tones ringing out over open space, ethereal and lonely", "weight": 0.5 },
+      { "text": "soft clarinet in its low register, a few slow notes, tender and wistful, late 19th century chamber feeling", "weight": 0.4 },
+      { "text": "harp harmonics, one at a time, slow, like light on water", "weight": 0 },
+      { "text": "minimal string quartet, muted, slow chorale, quiet resignation", "weight": 0 },
+      { "text": "wordless ambient choir far away, barely audible, sacred and calm", "weight": 0 },
+      { "text": "low bowed double bass and soft timpani roll, deep and calm like the sea below a cliff", "weight": 0 },
+      { "text": "slow viola melody over a drone, Russian romance mood, restrained", "weight": 0 },
+      { "text": "shimmering high violins sul tasto, pianissimo, sunrise slowly coming", "weight": 0 },
+      { "text": "bowed vibraphone, soft overlapping tones, dreamy stillness", "weight": 0 },
+      { "text": "alto flute, breathy and slow, a lonely line at dawn", "weight": 0 },
+      { "text": "warm tape-saturated ambient texture, very slow, nostalgic and faded", "weight": 0 },
+      { "text": "slow cor anglais phrases over quiet strings, pastoral, distant", "weight": 0 },
+      { "text": "deep oceanic ambient, slow evolving textures, indifferent and eternal", "weight": 0 }
+    ],
+    "bpm": 60, "density": 0.15, "brightness": 0.35
+  }
+}
