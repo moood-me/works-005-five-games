@@ -8,7 +8,7 @@ for (let r = 0; r < 20; r++) {
     g.fillRect(x, y, 1.5, 1.6);
   }
 }
-g.strokeStyle = '#6b665b'; g.lineWidth = 0.05;
+g.strokeStyle = '#847e70'; g.lineWidth = 0.035;
 for (let r = 0; r <= 20; r++) { g.beginPath(); g.moveTo(-5, -15.5 + r * 1.6); g.lineTo(5, -15.5 + r * 1.6); g.stroke(); }
 for (let r = 0; r < 20; r++) { const off = (r % 2) * 0.75; for (let c = -1; c < 8; c++) { const x = -5 + off + c * 1.5; g.beginPath(); g.moveTo(x, -15.5 + r * 1.6); g.lineTo(x, -15.5 + (r + 1) * 1.6); g.stroke(); } }
 g.fillStyle = '#b9b3a2'; g.fillRect(-5, -15.5, 0.45, 31); g.fillRect(4.55, -15.5, 0.45, 31);

@@ -7,7 +7,7 @@ e.light(1.52, -1.55, 1.3, '#ffb25e', 0.6, 'lamp');
 e.layer('viewers', { box: [-2.2, -1.6, 2.4, 0.1] }, g => {
   g.fillStyle = '#1e2238';
   for (const x of [-0.9, -0.2, 0.55]) {
-    g.beginPath(); g.ellipse(x, -0.6, 0.2, 0.22, 0, Math.PI, 0); g.fill();
-    g.beginPath(); g.arc(x, -0.92, 0.1, 0, 6.28); g.fill();
+    g.beginPath(); g.ellipse(x, -0.5, 0.27, 0.3, 0, Math.PI, 0); g.fill();
+    g.beginPath(); g.arc(x, -0.88, 0.13, 0, 6.28); g.fill();
   }
 });

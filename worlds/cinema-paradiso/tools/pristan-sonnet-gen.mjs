@@ -36,13 +36,13 @@ const objects = [
   { id: 'sky', name: 'Небо', sky: true },
   { id: 'sea', name: 'Море', plane: true, across: 0, distance: 401, elevation: -1.2, width: 1600, depth: 800, reflect: { strength: 0.55, fade: 10, rough: 0.5, ripple: 0.5 } },
   { id: 'mole', name: 'Мол', plane: true, across: 0, distance: 11.5, elevation: 0, width: 10, depth: 31, walk: true },
-  { id: 'warehouse', name: 'Склад', across: -5, distance: 2.4, facing: 90, height: 5, box: [-0.2, -5.6, 10.2, 0.3] },
+  { id: 'warehouse', name: 'Склад', across: -5, distance: 2.4, facing: 90, height: 5, box: [-0.2, -5.6, 10.2, 0.8] },
   { id: 'bench', name: 'Скамья', across: -4.6, distance: 8.4, facing: 90, box: [-0.1, -1.1, 2.9, 0.1] },
   { id: 'table', name: 'Стол', across: -2.1, distance: 5.3, facing: 180, box: [-0.9, -1.0, 0.9, 0.1] },
   { id: 'projector', name: 'Проектор', across: -2.1, distance: 5.28, elevation: 0.9, facing: 180, box: [-0.8, -1.3, 0.9, 0.1] },
   { id: 'crate', name: 'Ящик', across: 0.2, distance: 5.5, facing: 180, box: [-0.4, -0.6, 0.4, 0.1], copies: [{ across: 0.2, distance: 5.5 }, { across: -4.1, distance: 3.7, scale: 1.3 }, { across: 4.0, distance: 9.5 }] },
   { id: 'bollard', name: 'Тумба', across: 4.7, distance: 3, facing: 180, box: [-0.4, -0.7, 0.4, 0.1], copies: [3, 9, 15, 21, 26].map(d => ({ across: 4.7, distance: d })).concat([{ across: -4.7, distance: 15 }, { across: -4.7, distance: 21 }, { across: -4.7, distance: 26 }, { across: 2.4, distance: 25.2, scale: 1.2 }]) },
-  { id: 'beam', name: 'Луч', across: -1.6, distance: 5.4, elevation: 1.12, facing: 97.6, glows: true, box: [-0.2, -3.4, 13.1, 0.4] },
+  { id: 'beam', name: 'Луч', across: -1.6, distance: 5.4, elevation: 1.12, facing: 82.4, glows: true, box: [-0.2, -3.4, 13.1, 0.4] },
   { id: 'screen', name: 'Экран', across: 0, distance: 18, elevation: 1.4, facing: 180, glows: true, box: [-2.4, -2.8, 2.4, 0.2] },
   { id: 'poles', name: 'Шесты', across: 0, distance: 18.1, facing: 180, box: [-3.5, -4.9, 3.5, 0.1] },
   { id: 'audience', name: 'Зрители', across: 0, distance: 10.5, facing: 180, box: [-2.6, -1.4, 2.6, 0.1],
@@ -65,11 +65,11 @@ for (const [id, [a, d, t, here]] of Object.entries(people)) {
   Object.assign(states, { [id + '_a']: { range: [-20, 20], means: id + ': где стоит поперёк' }, [id + '_d']: { range: [-20, 40], means: id + ': где стоит вдоль' } });
 }
 const spec = {
-  engine: 3, title: 'Пристань (sonnet)', caption: 'Летом кино крутили на пристани.', horizon: 0.42,
+  engine: 3, title: 'Пристань (sonnet)', caption: 'Летом кино крутили на пристани.', horizon: 0.5,
   camera: { mode: 'roam', area: [-8, 8, -8, 22] },
   modules: ['cast'],
   light: {
-    tint: '#10204a', tintStrength: 0.12, vignette: 0.5, grain: 0.35, haze: 0.1, hazeColor: '#1c3160', hazeGlow: 0.7, shafts: 0.4,
+    tint: '#10204a', tintStrength: 0.12, vignette: 0.5, grain: 0.35, haze: 0.16, hazeColor: '#2a4a86', hazeGlow: 0.7, shafts: 0.4,
     brightness: 1.2, saturation: 1.0, ambient: 0.42, ambientColor: '#7088c8', bounce: 0.5, wind: [1, 0, 0.5],
     looks: {
       dusk_k: { ambient: 0.62, ambientColor: '#a094bc', tint: '#ff9a60', tintStrength: 0.12, haze: 0.18, hazeColor: '#8a6a8a' },
@@ -79,7 +79,7 @@ const spec = {
   },
   lights: [
     { id: 'moon', from: 'sky#disc', color: '#9db4f0', strength: 0.9 },
-    { id: 'fill', across: 1.5, distance: -2, elevation: 4, color: '#a8b8e8', strength: 0.7, reach: 16 }
+    { id: 'fill', across: 1.5, distance: 1, elevation: 4, color: '#a8b8e8', strength: 0.7, reach: 16 }
   ],
   objects, state, states,
   music: { prompts: [

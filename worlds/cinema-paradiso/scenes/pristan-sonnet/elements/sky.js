@@ -10,8 +10,8 @@ e.layer('night', { box }, g => {
   gr.addColorStop(0, '#050a1f'); gr.addColorStop(0.25, '#0b1a45'); gr.addColorStop(0.4, '#26478a');
   gr.addColorStop(0.46, '#1a3366'); gr.addColorStop(1, '#08122e');
   g.fillStyle = gr; g.fillRect(0, -0.35, W, 1.6);
-  for (let i = 0; i < 260; i++) {
-    const x = e.rnd() * W, y = -0.3 + e.rnd() * 0.66, r = 0.0012 + e.rnd() * 0.0028;
+  for (let i = 0; i < 700; i++) {
+    const x = e.rnd() * W, y = -0.3 + e.rnd() * 0.74, r = 0.0012 + e.rnd() * 0.0028;
     g.globalAlpha = 0.35 + e.rnd() * 0.65;
     g.fillStyle = e.rnd() < 0.2 ? '#ffe9c0' : '#dfe8ff';
     g.beginPath(); g.arc(x, y, r, 0, 6.2832); g.fill();
@@ -19,7 +19,7 @@ e.layer('night', { box }, g => {
   g.globalAlpha = 1;
 });
 e.layer('moon', { box }, g => {
-  const mx = W / 2 - 0.55, my = 0.2;
+  const mx = W / 2 + 0.42, my = 0.22;
   const gl = g.createRadialGradient(mx, my, 0.02, mx, my, 0.22);
   gl.addColorStop(0, 'rgba(190,210,255,0.55)'); gl.addColorStop(1, 'rgba(190,210,255,0)');
   g.fillStyle = gl; g.beginPath(); g.arc(mx, my, 0.22, 0, 6.2832); g.fill();

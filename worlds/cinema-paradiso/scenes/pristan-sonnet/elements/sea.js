@@ -1,5 +1,5 @@
 const gr = g.createLinearGradient(0, -400, 0, 400);
-gr.addColorStop(0, '#4a74aa'); gr.addColorStop(0.35, '#2c5288'); gr.addColorStop(0.8, '#1b3a66'); gr.addColorStop(1, '#143056');
+gr.addColorStop(0, '#5a88c4'); gr.addColorStop(0.35, '#3a68a4'); gr.addColorStop(0.8, '#2a4f88'); gr.addColorStop(1, '#143056');
 g.fillStyle = gr; g.fillRect(-800, -400, 1600, 800);
 for (let i = 0; i < 320; i++) {
   const t = e.rnd(), y = 395 - t * t * 140, x = (e.rnd() - 0.5) * 120 * (0.3 + (1 - t));
