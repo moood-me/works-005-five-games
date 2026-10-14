@@ -451,7 +451,7 @@
       "plane": true,
       "across": 0,
       "distance": 700,
-      "elevation": 0.6,
+      "elevation": -3,
       "width": 3000,
       "depth": 1400,
       "reflect": {

@@ -77,3 +77,5 @@ e.layer('stars', {}, s => {
     s.beginPath(); s.arc(x, y, r, 0, Math.PI * 2); s.fill();
   }
 });
+// DIAGNOSTIC
+for (let k = -3; k <= 12; k++) { const y = k * 0.1; g.fillStyle = ['#ff0000','#00ff00','#ffff00','#00ffff'][(k+3)%4]; g.fillRect(-0.3, y - 0.004, A + 0.6, 0.008); g.font = '0.04px sans-serif'; for (let b = -60; b <= 60; b += 30) g.fillText('y' + y.toFixed(1) + ' b' + b, bearing(b), y - 0.01); }
