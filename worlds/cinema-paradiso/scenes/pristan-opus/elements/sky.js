@@ -11,7 +11,7 @@ const mid = now ? '#2c3050' : dusk ? '#53608f' : '#18295a';
 const low = now ? '#5e5a78' : dusk ? '#c49a95' : '#2e4a7c';
 const gr = g.createLinearGradient(0, -0.35, 0, H);
 gr.addColorStop(0, top); gr.addColorStop(0.62, mid); gr.addColorStop(1, low);
-g.fillStyle = gr; g.fillRect(-0.3, -0.35, A + 0.6, H + 0.002);
+g.fillStyle = gr; g.fillRect(-0.3, -0.35, A + 0.6, H + 0.352);
 g.fillStyle = now ? '#2a2c40' : '#1b2a48'; g.fillRect(-0.3, H, A + 0.6, 1.25 - H);
 
 // the afterglow (dusk) low in the north-west, and a faint warmth of the town's sky behind (south) at night
@@ -37,9 +37,9 @@ g.fillStyle = hz; g.fillRect(-0.3, H - 0.04, A + 0.6, 0.04);
 
 // the moon over the sea
 const mx = bearing(7), my = H - (dusk ? 0.33 : now ? 0.23 : 0.27), mr = 0.022;
-const halo = g.createRadialGradient(mx, my, mr, mx, my, mr * 5);
-halo.addColorStop(0, dusk ? 'rgba(230,230,240,0.14)' : 'rgba(200,214,255,0.2)'); halo.addColorStop(1, 'rgba(200,214,255,0)');
-g.fillStyle = halo; g.fillRect(mx - mr * 5, my - mr * 5, mr * 10, mr * 10);
+const halo = g.createRadialGradient(mx, my, mr, mx, my, mr * 4);
+halo.addColorStop(0, dusk ? 'rgba(230,230,240,0.1)' : 'rgba(200,214,255,0.13)'); halo.addColorStop(1, 'rgba(200,214,255,0)');
+g.fillStyle = halo; g.fillRect(mx - mr * 4, my - mr * 4, mr * 8, mr * 8);
 const md = g.createRadialGradient(mx - mr * 0.3, my - mr * 0.3, mr * 0.1, mx, my, mr);
 md.addColorStop(0, dusk ? '#f4efe4' : '#fffbef'); md.addColorStop(1, dusk ? '#d9d2c4' : '#e9e3d0');
 g.fillStyle = md; g.beginPath(); g.arc(mx, my, mr, 0, Math.PI * 2); g.fill();
