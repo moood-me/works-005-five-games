@@ -1,0 +1,1155 @@
+{
+  "engine": 3,
+  "title": "Переезд (opus)",
+  "caption": "Переезд за посёлком. Темнеет.",
+  "horizon": 0.45,
+  "camera": {
+    "mode": "picture"
+  },
+  "modules": [
+    "cast",
+    "poezd"
+  ],
+  "light": {
+    "tint": "#7d8cc0",
+    "tintStrength": 0.1,
+    "vignette": 0.45,
+    "grain": 0.22,
+    "haze": 0.1,
+    "hazeColor": "#56618a",
+    "hazeGlow": 0.7,
+    "shafts": 0,
+    "brightness": 1.08,
+    "saturation": 0.88,
+    "ambient": 0.66,
+    "ambientColor": "#a6b4d8",
+    "bounce": 0.5,
+    "wind": [
+      -1,
+      0.3,
+      0.35
+    ],
+    "looks": {
+      "night": {
+        "ambient": 0.44,
+        "ambientColor": "#7d90c8",
+        "hazeColor": "#2d3756",
+        "saturation": 0.78,
+        "tintStrength": 0.14,
+        "lights": {
+          "dusk_sky": 0.55
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "dusk_sky",
+      "from": [
+        -35,
+        7
+      ],
+      "color": "#b8c3e2",
+      "strength": 0.6
+    },
+    {
+      "id": "booth_lamp",
+      "of": "booth_window#pane",
+      "color": "#e8963a",
+      "strength": 2.4,
+      "reach": 12
+    },
+    {
+      "id": "red1",
+      "of": "signal#l1",
+      "color": "#ff3018",
+      "strength": 0.7,
+      "reach": 6
+    },
+    {
+      "id": "red2",
+      "of": "signal#l2",
+      "color": "#ff3018",
+      "strength": 0.7,
+      "reach": 6
+    },
+    {
+      "id": "headlight",
+      "of": "freight#light",
+      "color": "#fff0d0",
+      "strength": 3,
+      "reach": 60,
+      "glow": 2.5
+    }
+  ],
+  "state": {
+    "hour": 0.82,
+    "night": 0.5714285714285711,
+    "beat": null,
+    "beat_next": null,
+    "barrier": 1,
+    "bell": 1,
+    "freight": 0.04,
+    "freight_x": 251.5,
+    "snow": 0.4,
+    "nina_a": -1.85,
+    "nina_d": 5.1,
+    "busygin_a": -1.05,
+    "busygin_d": 4.85,
+    "nina_turn": 352,
+    "busygin_turn": 8,
+    "nina_look": "freight#light",
+    "busygin_look": "nina",
+    "freight_a": 81.18,
+    "freight_d": 208.19,
+    "freight_f": 110.34,
+    "car1_a": 86.75,
+    "car1_d": 223.19,
+    "car1_f": 110.41,
+    "car2_a": 91.33,
+    "car2_d": 235.47,
+    "car2_f": 110.49,
+    "car3_a": 96.36,
+    "car3_d": 248.9,
+    "car3_f": 110.59,
+    "car4_a": 101.87,
+    "car4_d": 263.5,
+    "car4_f": 110.73,
+    "car5_a": 107.27,
+    "car5_d": 277.71,
+    "car5_f": 110.94,
+    "car6_a": 112.59,
+    "car6_d": 291.52,
+    "car6_f": 111.08,
+    "car7_a": 117.97,
+    "car7_d": 305.68,
+    "car7_f": 110.61,
+    "car8_a": 123,
+    "car8_d": 319.07,
+    "car8_f": 110.74,
+    "car9_a": 128.17,
+    "car9_d": 332.45,
+    "car9_f": 111.59,
+    "car10_a": 133.94,
+    "car10_d": 346.51,
+    "car10_f": 113.24,
+    "car11_a": 139.64,
+    "car11_d": 359.24,
+    "car11_f": 115.17,
+    "car12_a": 145.43,
+    "car12_d": 371,
+    "car12_f": 117.09,
+    "car13_a": 152.12,
+    "car13_d": 383.69,
+    "car13_f": 118.34,
+    "car14_a": 159.6,
+    "car14_d": 397.32,
+    "car14_f": 119.09,
+    "car15_a": 167.23,
+    "car15_d": 410.88,
+    "car15_f": 119.53
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "время суток — вес образов света: 0.78 сумерки … 0.82 почти ночь (скрипт ставит night)"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "вес образа «ночь» — ставит скрипт по hour"
+    },
+    "beat": {
+      "values": [
+        null,
+        "wait",
+        "truth",
+        "roar",
+        "brother"
+      ],
+      "means": "кусок фильма: игра ставит имя — кусок играется с начала"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "какой кусок будет следующим (камера сцены неподвижна — склеек нет, ключ принимается)"
+    },
+    "barrier": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "шлагбаум: 0 поднят, 1 опущен поперёк дороги"
+    },
+    "bell": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — звонок: два красных огня мигают по очереди; 0 — темны"
+    },
+    "freight": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "товарный: 0 в лесу; 0.04 — фара на дуге вдали (≈ 200 м), стоит; 0.1…0.9 — идёт перед ними справа налево; 1 — ушёл влево"
+    },
+    "freight_x": {
+      "type": "number",
+      "means": "нос товарного, метры вдоль пути от леса — ставит скрипт по freight"
+    },
+    "snow": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "сила снегопада"
+    },
+    "nina_a": {
+      "type": "number",
+      "means": "где Нина: метры вправо"
+    },
+    "nina_d": {
+      "type": "number",
+      "means": "где Нина: метры вперёд"
+    },
+    "busygin_a": {
+      "type": "number",
+      "means": "где Бусыгин: метры вправо"
+    },
+    "busygin_d": {
+      "type": "number",
+      "means": "где Бусыгин: метры вперёд"
+    },
+    "freight_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "freight_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "freight_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car1_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car1_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car1_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car2_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car2_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car2_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car3_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car3_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car3_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car4_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car4_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car4_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car5_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car5_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car5_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car6_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car6_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car6_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car7_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car7_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car7_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car8_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car8_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car8_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car9_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car9_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car9_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car10_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car10_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car10_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car11_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car11_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car11_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car12_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car12_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car12_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car13_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car13_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car13_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car14_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car14_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car14_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car15_a": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car15_d": {
+      "type": "number",
+      "means": "ставит скрипт"
+    },
+    "car15_f": {
+      "type": "number",
+      "means": "ставит скрипт"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Небо",
+      "sky": true
+    },
+    {
+      "id": "ground",
+      "name": "Поле и пути",
+      "plane": true,
+      "across": 50,
+      "distance": 680,
+      "elevation": 0,
+      "width": 1900,
+      "depth": 1440
+    },
+    {
+      "id": "treeline",
+      "name": "Дальний лес",
+      "across": 0,
+      "distance": 1100,
+      "height": 18,
+      "box": [
+        -1100,
+        -20,
+        1100,
+        0.5
+      ]
+    },
+    {
+      "id": "forest",
+      "name": "Ельник",
+      "across": 190,
+      "distance": 392,
+      "height": 30,
+      "box": [
+        -112,
+        -30,
+        112,
+        0.6
+      ]
+    },
+    {
+      "id": "village",
+      "name": "Посёлок",
+      "across": -125,
+      "distance": 330,
+      "height": 15,
+      "box": [
+        -112,
+        -15,
+        112,
+        0.5
+      ]
+    },
+    {
+      "id": "poles",
+      "name": "Столбы",
+      "across": 157.17,
+      "distance": 407.3,
+      "height": 7.8,
+      "box": [
+        -1,
+        -7.8,
+        1,
+        0.15
+      ],
+      "copies": [
+        {
+          "across": 157.17,
+          "distance": 407.3,
+          "scale": 0.95,
+          "flip": true
+        },
+        {
+          "across": 134.4,
+          "distance": 364.52,
+          "scale": 0.92,
+          "flip": false
+        },
+        {
+          "across": 128.84,
+          "distance": 314.72,
+          "scale": 1.1,
+          "flip": true
+        },
+        {
+          "across": 111.76,
+          "distance": 269.84,
+          "scale": 1.07,
+          "flip": false
+        },
+        {
+          "across": 94.88,
+          "distance": 224.96,
+          "scale": 1.04,
+          "flip": true
+        },
+        {
+          "across": 78.26,
+          "distance": 179.98,
+          "scale": 1,
+          "flip": false
+        },
+        {
+          "across": 61.92,
+          "distance": 134.88,
+          "scale": 0.97,
+          "flip": true
+        },
+        {
+          "across": 45.82,
+          "distance": 89.71,
+          "scale": 0.94,
+          "flip": false
+        },
+        {
+          "across": 29.88,
+          "distance": 44.46,
+          "scale": 1.12,
+          "flip": true
+        },
+        {
+          "across": -6.47,
+          "distance": 17.1,
+          "scale": 1.09,
+          "flip": false
+        }
+      ]
+    },
+    {
+      "id": "booth",
+      "name": "Будка дежурной",
+      "unseen": true,
+      "across": 6.3,
+      "distance": 7.9,
+      "facing": 205
+    },
+    {
+      "id": "booth_front",
+      "name": "Будка дежурной",
+      "on": "booth",
+      "facing": 180,
+      "height": 4.3,
+      "box": [
+        -1.7,
+        -4.35,
+        1.7,
+        0.1
+      ],
+      "shadow": true
+    },
+    {
+      "id": "booth_window",
+      "name": "Окно будки",
+      "on": "booth",
+      "across": 0.45,
+      "distance": -0.04,
+      "elevation": 0.97,
+      "facing": 180,
+      "glows": true,
+      "height": 1,
+      "box": [
+        -0.42,
+        -1,
+        0.42,
+        0.02
+      ]
+    },
+    {
+      "id": "booth_side",
+      "name": "Будка дежурной",
+      "on": "booth",
+      "across": -1.35,
+      "distance": 1.15,
+      "facing": 270,
+      "height": 3.1,
+      "box": [
+        -1.5,
+        -3.3,
+        1.5,
+        0.1
+      ],
+      "shadow": true
+    },
+    {
+      "id": "chimney_smoke",
+      "name": "Дым из трубы",
+      "particles": {
+        "kind": "smoke",
+        "at": {
+          "on": "booth",
+          "at": [
+            0.73,
+            0.5,
+            4.25
+          ]
+        },
+        "rate": 3,
+        "size": [
+          0.25,
+          1.6
+        ],
+        "life": [
+          5,
+          8
+        ],
+        "opacity": 0.35
+      }
+    },
+    {
+      "id": "signal",
+      "name": "Светофор переезда",
+      "across": 2.55,
+      "distance": 8.9,
+      "height": 3.3,
+      "box": [
+        -0.75,
+        -3.3,
+        0.75,
+        0.1
+      ],
+      "shadow": true
+    },
+    {
+      "id": "barrier",
+      "name": "Шлагбаум",
+      "across": -3.25,
+      "distance": 7.75,
+      "facing": 197.5,
+      "height": 6.7,
+      "box": [
+        -1.6,
+        -6.7,
+        5.8,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "weeds",
+      "name": "Бурьян",
+      "across": -1.9,
+      "distance": 2.3,
+      "height": 0.8,
+      "box": [
+        -0.5,
+        -0.9,
+        0.5,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": -1.9,
+          "distance": 2.3
+        },
+        {
+          "across": 1.75,
+          "distance": 2.6,
+          "flip": true,
+          "scale": 1.2
+        },
+        {
+          "across": 2.7,
+          "distance": 3.6,
+          "scale": 0.9
+        },
+        {
+          "across": -3.4,
+          "distance": 4.3,
+          "scale": 1.1
+        },
+        {
+          "across": 3.9,
+          "distance": 5.2,
+          "flip": true
+        },
+        {
+          "across": -4.6,
+          "distance": 6.6,
+          "scale": 0.8
+        },
+        {
+          "across": 4.9,
+          "distance": 9.6,
+          "scale": 1.2
+        },
+        {
+          "across": -7.5,
+          "distance": 11.5,
+          "flip": true,
+          "scale": 1.3
+        }
+      ]
+    },
+    {
+      "id": "freight",
+      "name": "Товарный",
+      "across": 81.18,
+      "distance": 208.19,
+      "facing": 110.34,
+      "height": 4.9,
+      "box": [
+        -9.4,
+        -4.9,
+        9.4,
+        0.2
+      ],
+      "place": {
+        "across": "freight_a",
+        "distance": "freight_d",
+        "facing": "freight_f"
+      }
+    },
+    {
+      "id": "car1",
+      "name": "Вагон",
+      "across": 86.75,
+      "distance": 223.19,
+      "facing": 110.41,
+      "height": 4.9,
+      "box": [
+        -6.5,
+        -4.9,
+        6.5,
+        0.2
+      ],
+      "place": {
+        "across": "car1_a",
+        "distance": "car1_d",
+        "facing": "car1_f"
+      }
+    },
+    {
+      "id": "car2",
+      "name": "Вагон",
+      "across": 91.33,
+      "distance": 235.47,
+      "facing": 110.49,
+      "height": 4.9,
+      "box": [
+        -6.5,
+        -4.9,
+        6.5,
+        0.2
+      ],
+      "place": {
+        "across": "car2_a",
+        "distance": "car2_d",
+        "facing": "car2_f"
+      }
+    },
+    {
+      "id": "car3",
+      "name": "Вагон",
+      "across": 96.36,
+      "distance": 248.9,
+      "facing": 110.59,
+      "height": 4.9,
+      "box": [
+        -7.75,
+        -4.9,
+        7.75,
+        0.2
+      ],
+      "place": {
+        "across": "car3_a",
+        "distance": "car3_d",
+        "facing": "car3_f"
+      }
+    },
+    {
+      "id": "car4",
+      "name": "Вагон",
+      "across": 101.87,
+      "distance": 263.5,
+      "facing": 110.73,
+      "height": 4.9,
+      "box": [
+        -7.75,
+        -4.9,
+        7.75,
+        0.2
+      ],
+      "place": {
+        "across": "car4_a",
+        "distance": "car4_d",
+        "facing": "car4_f"
+      }
+    },
+    {
+      "id": "car5",
+      "name": "Вагон",
+      "across": 107.27,
+      "distance": 277.71,
+      "facing": 110.94,
+      "height": 4.9,
+      "box": [
+        -7.3500000000000005,
+        -4.9,
+        7.3500000000000005,
+        0.2
+      ],
+      "place": {
+        "across": "car5_a",
+        "distance": "car5_d",
+        "facing": "car5_f"
+      }
+    },
+    {
+      "id": "car6",
+      "name": "Вагон",
+      "across": 112.59,
+      "distance": 291.52,
+      "facing": 111.08,
+      "height": 4.9,
+      "box": [
+        -7.3500000000000005,
+        -4.9,
+        7.3500000000000005,
+        0.2
+      ],
+      "place": {
+        "across": "car6_a",
+        "distance": "car6_d",
+        "facing": "car6_f"
+      }
+    },
+    {
+      "id": "car7",
+      "name": "Вагон",
+      "across": 117.97,
+      "distance": 305.68,
+      "facing": 110.61,
+      "height": 4.9,
+      "box": [
+        -7.7,
+        -4.9,
+        7.7,
+        0.2
+      ],
+      "place": {
+        "across": "car7_a",
+        "distance": "car7_d",
+        "facing": "car7_f"
+      }
+    },
+    {
+      "id": "car8",
+      "name": "Вагон",
+      "across": 123,
+      "distance": 319.07,
+      "facing": 110.74,
+      "height": 4.9,
+      "box": [
+        -6.5,
+        -4.9,
+        6.5,
+        0.2
+      ],
+      "place": {
+        "across": "car8_a",
+        "distance": "car8_d",
+        "facing": "car8_f"
+      }
+    },
+    {
+      "id": "car9",
+      "name": "Вагон",
+      "across": 128.17,
+      "distance": 332.45,
+      "facing": 111.59,
+      "height": 4.9,
+      "box": [
+        -7.75,
+        -4.9,
+        7.75,
+        0.2
+      ],
+      "place": {
+        "across": "car9_a",
+        "distance": "car9_d",
+        "facing": "car9_f"
+      }
+    },
+    {
+      "id": "car10",
+      "name": "Вагон",
+      "across": 133.94,
+      "distance": 346.51,
+      "facing": 113.24,
+      "height": 4.9,
+      "box": [
+        -7.3500000000000005,
+        -4.9,
+        7.3500000000000005,
+        0.2
+      ],
+      "place": {
+        "across": "car10_a",
+        "distance": "car10_d",
+        "facing": "car10_f"
+      }
+    },
+    {
+      "id": "car11",
+      "name": "Вагон",
+      "across": 139.64,
+      "distance": 359.24,
+      "facing": 115.17,
+      "height": 4.9,
+      "box": [
+        -6.5,
+        -4.9,
+        6.5,
+        0.2
+      ],
+      "place": {
+        "across": "car11_a",
+        "distance": "car11_d",
+        "facing": "car11_f"
+      }
+    },
+    {
+      "id": "car12",
+      "name": "Вагон",
+      "across": 145.43,
+      "distance": 371,
+      "facing": 117.09,
+      "height": 4.9,
+      "box": [
+        -6.5,
+        -4.9,
+        6.5,
+        0.2
+      ],
+      "place": {
+        "across": "car12_a",
+        "distance": "car12_d",
+        "facing": "car12_f"
+      }
+    },
+    {
+      "id": "car13",
+      "name": "Вагон",
+      "across": 152.12,
+      "distance": 383.69,
+      "facing": 118.34,
+      "height": 4.9,
+      "box": [
+        -7.75,
+        -4.9,
+        7.75,
+        0.2
+      ],
+      "place": {
+        "across": "car13_a",
+        "distance": "car13_d",
+        "facing": "car13_f"
+      }
+    },
+    {
+      "id": "car14",
+      "name": "Вагон",
+      "across": 159.6,
+      "distance": 397.32,
+      "facing": 119.09,
+      "height": 4.9,
+      "box": [
+        -7.7,
+        -4.9,
+        7.7,
+        0.2
+      ],
+      "place": {
+        "across": "car14_a",
+        "distance": "car14_d",
+        "facing": "car14_f"
+      }
+    },
+    {
+      "id": "car15",
+      "name": "Вагон",
+      "across": 167.23,
+      "distance": 410.88,
+      "facing": 119.53,
+      "height": 4.9,
+      "box": [
+        -7.75,
+        -4.9,
+        7.75,
+        0.2
+      ],
+      "place": {
+        "across": "car15_a",
+        "distance": "car15_d",
+        "facing": "car15_f"
+      }
+    },
+    {
+      "id": "freight_nose",
+      "name": "Товарный",
+      "on": "freight",
+      "across": -9,
+      "distance": 0,
+      "facing": 270,
+      "height": 4.4,
+      "box": [
+        -1.75,
+        -4.4,
+        1.75,
+        0.1
+      ]
+    },
+    {
+      "id": "nina",
+      "name": "Нина",
+      "person": {
+        "cast": "cast",
+        "who": "nina",
+        "turn": 352
+      },
+      "across": -1.85,
+      "distance": 5.1,
+      "place": {
+        "across": "nina_a",
+        "distance": "nina_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "busygin",
+      "name": "Бусыгин",
+      "person": {
+        "cast": "cast",
+        "who": "busygin",
+        "turn": 8
+      },
+      "across": -1.05,
+      "distance": 4.85,
+      "place": {
+        "across": "busygin_a",
+        "distance": "busygin_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "snowfall",
+      "name": "Снег",
+      "particles": {
+        "kind": "snow",
+        "amount": "snow",
+        "count": 7000,
+        "reach": 40
+      }
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Very quiet low drone of wind over an empty snowfield at night, sparse, cold, distant",
+        "weight": 1.2
+      },
+      {
+        "text": "Soft sustained string pad in a minor key, almost still, tender and aching, winter night",
+        "weight": 0.8
+      },
+      {
+        "text": "Slow solo piano, few notes, lots of silence between them, Soviet film score, melancholic",
+        "weight": 0
+      },
+      {
+        "text": "Distant freight train rumble like a low bowed bass, ambient, slow swell",
+        "weight": 0
+      },
+      {
+        "text": "Glassy high harmonics like frost, shimmering, very slow, cold",
+        "weight": 0
+      },
+      {
+        "text": "Muted felt piano lullaby, warm and sad, 1970s Russian chamber music",
+        "weight": 0
+      },
+      {
+        "text": "Cello long notes, quiet, breathing, intimate, late evening",
+        "weight": 0
+      },
+      {
+        "text": "Ambient field recording mood, snow creaking, empty country railway crossing",
+        "weight": 0
+      },
+      {
+        "text": "Gentle accordion chords far away, provincial village, dusk, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Minimal ambient with soft bell-like tones, cold and still, night",
+        "weight": 0
+      },
+      {
+        "text": "Warm low organ hum like a lit window in the cold, very soft",
+        "weight": 0
+      },
+      {
+        "text": "Slow guitar arpeggios, sparse, lonely road at night, restrained",
+        "weight": 0
+      },
+      {
+        "text": "Dark cinematic tension pad, quiet, a decision about to be spoken",
+        "weight": 0
+      },
+      {
+        "text": "Celesta and strings, winter fairy tale but sad, very slow",
+        "weight": 0
+      },
+      {
+        "text": "Soft brushed snare and double bass, slow night jazz, distant, muffled by snow",
+        "weight": 0
+      },
+      {
+        "text": "Solemn choir hum without words, far away, cold air",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.25
+  }
+}
