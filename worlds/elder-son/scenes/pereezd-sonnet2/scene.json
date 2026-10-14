@@ -90,8 +90,8 @@
     {
       "id": "head_l",
       "of": "freight#lamp",
-      "reach": 60,
-      "strength": 1.8,
+      "reach": 30,
+      "strength": 0.7,
       "on": "freight_lamp"
     }
   ],
