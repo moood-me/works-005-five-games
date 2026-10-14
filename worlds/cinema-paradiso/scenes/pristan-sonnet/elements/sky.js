@@ -1,14 +1,14 @@
 const W = e.aspect, box = [0, -0.35, W, 1.25];
 e.layer('dusk', { box }, g => {
   const gr = g.createLinearGradient(0, -0.35, 0, 1.25);
-  gr.addColorStop(0, '#26356e'); gr.addColorStop(0.28, '#5a5a98'); gr.addColorStop(0.4, '#e89a78');
-  gr.addColorStop(0.46, '#7a5a82'); gr.addColorStop(1, '#1a1c40');
+  gr.addColorStop(0, '#26356e'); gr.addColorStop(0.3, '#5a5a98'); gr.addColorStop(0.46, '#e89a78');
+  gr.addColorStop(0.53, '#7a5a82'); gr.addColorStop(1, '#1a1c40');
   g.fillStyle = gr; g.fillRect(0, -0.35, W, 1.6);
 });
 e.layer('night', { box }, g => {
   const gr = g.createLinearGradient(0, -0.35, 0, 1.25);
-  gr.addColorStop(0, '#050a1f'); gr.addColorStop(0.25, '#0b1a45'); gr.addColorStop(0.4, '#26478a');
-  gr.addColorStop(0.46, '#1a3366'); gr.addColorStop(1, '#08122e');
+  gr.addColorStop(0, '#050a1f'); gr.addColorStop(0.28, '#0b1a45'); gr.addColorStop(0.46, '#26478a');
+  gr.addColorStop(0.53, '#1a3366'); gr.addColorStop(1, '#08122e');
   g.fillStyle = gr; g.fillRect(0, -0.35, W, 1.6);
   for (let i = 0; i < 700; i++) {
     const x = e.rnd() * W, y = -0.3 + e.rnd() * 0.74, r = 0.0012 + e.rnd() * 0.0028;
