@@ -1,0 +1,77 @@
+{
+  "engine": 3,
+  "title": "Переезд (sonnet)",
+  "caption": "Холод снаружи. Одно тёплое окно.",
+  "horizon": 0.46,
+  "camera": { "mode": "picture" },
+  "modules": ["cast_sonnet"],
+  "light": {
+    "tint": "#4a5a90", "tintStrength": 0.1, "vignette": 0.45, "grain": 0.1,
+    "haze": 0.1, "hazeColor": "#2a3558", "hazeGlow": 0.3, "shafts": 0.2,
+    "brightness": 1.1, "saturation": 0.85,
+    "ambient": 0.62, "ambientColor": "#8494c8", "bounce": 0.5,
+    "wind": [1, 0.2, 0.3],
+    "looks": {
+      "night": { "tint": "#223a78", "tintStrength": 0.16, "ambient": 0.42, "ambientColor": "#5a70b0", "saturation": 0.75, "haze": 0.16, "hazeColor": "#0e1630" }
+    }
+  },
+  "lights": [
+    { "id": "moon", "from": [215, 42], "color": "#a9bdf0", "strength": 1.0 },
+    { "id": "win", "of": "booth_window#win", "reach": 11, "strength": 1.0, "color": "#e8963a", "flicker": 0.05 },
+    { "id": "head", "of": "freight#head", "reach": 55, "strength": 1.8, "color": "#fff0d0" },
+    { "id": "sig_l", "of": "signal#l", "reach": 7, "strength": 1.5, "color": "#ff3b2a", "on": "bell" },
+    { "id": "sig_r", "of": "signal#r", "reach": 7, "strength": 1.5, "color": "#ff3b2a", "on": "bell" }
+  ],
+  "state": {
+    "hour": 0.82, "night": 0.6, "beat": null, "beat_next": null,
+    "barrier": 1, "bell": 1, "freight": 0.04, "freight_a": 78, "freight_d": 200,
+    "snow": 0.6, "electric": 0, "el_a": 170,
+    "busygin_a": -2.85, "busygin_d": 5.0, "busygin_turn": 0, "busygin_look": null, "busygin_reach": null,
+    "nina_a": -1.7, "nina_d": 5.25, "nina_turn": 0, "nina_look": null, "nina_reach": null
+  },
+  "states": {
+    "hour": { "range": [0, 1], "smooth": true, "means": "вес образов света: 0.78 сумерки, 0.82 темнее, 0.9 ночь" },
+    "night": { "range": [0, 1], "smooth": true, "means": "вес образа ночи; считает скрипт по hour" },
+    "beat": { "values": ["wait", "truth", "roar", "brother"], "means": "кусок, который игра просит играть с начала" },
+    "beat_next": { "type": "string", "means": "кусок, к которому игра склеит дальше" },
+    "barrier": { "range": [0, 1], "smooth": true, "means": "шлагбаум: 0 поднят, 1 опущен" },
+    "bell": { "values": [0, 1], "means": "звонок: 1 — красные огни мигают" },
+    "freight": { "range": [0, 1], "smooth": true, "means": "товарный: 0 нет; 0.04 фара вдали на дуге; 0.1…0.9 идёт перед ними справа налево; 1 ушёл" },
+    "freight_a": { "type": "number", "means": "метры: где нос товарного (считает скрипт по freight)" },
+    "freight_d": { "type": "number", "means": "метры: то же вглубь" },
+    "snow": { "range": [0, 1], "means": "сила снегопада" },
+    "electric": { "range": [0, 1], "smooth": true, "means": "электричка далеко за полем: 0 справа, 1 ушла влево" },
+    "el_a": { "type": "number", "means": "метры: где электричка" },
+    "busygin_a": { "type": "number", "means": "метры: Бусыгин поперёк" }, "busygin_d": { "type": "number", "means": "метры: Бусыгин вглубь" },
+    "busygin_turn": { "type": "number", "means": "градусы: 0 спиной к кадру, 90 вправо, 270 влево" },
+    "busygin_look": { "means": "куда смотрит Бусыгин" }, "busygin_reach": { "means": "к чему тянутся руки Бусыгина" },
+    "nina_a": { "type": "number", "means": "метры: Нина поперёк" }, "nina_d": { "type": "number", "means": "метры: Нина вглубь" },
+    "nina_turn": { "type": "number", "means": "градусы: 0 спиной к кадру, 90 вправо, 270 влево" },
+    "nina_look": { "means": "куда смотрит Нина" }, "nina_reach": { "means": "к чему тянутся руки Нины" }
+  },
+  "objects": [
+    { "id": "sky", "name": "Небо", "sky": true },
+    { "id": "land", "name": "Поле", "plane": true, "across": 20, "distance": 220, "width": 500, "depth": 480 },
+    { "id": "village", "name": "Посёлок", "across": -30, "distance": 150, "glows": true, "box": [-62, -18, 68, 1] },
+    { "id": "forest", "name": "Лес", "across": 100, "distance": 215, "glows": true, "box": [-80, -22, 80, 1] },
+    { "id": "electric_far", "name": "Электричка", "across": 0, "distance": 125, "glows": true, "box": [-1, -5, 70, 1], "place": { "across": "el_a" } },
+    { "id": "booth", "name": "Будка дежурной", "across": 6.4, "distance": 9.0, "box": [-2.6, -5.0, 2.6, 0.6] },
+    { "id": "booth_window", "name": "Окно будки", "across": 6.4, "distance": 8.8, "glows": true, "box": [-0.8, -2.4, 0.8, -0.8] },
+    { "id": "signal", "name": "Светофор переезда", "across": 1.3, "distance": 7.4, "box": [-1.2, -4.3, 1.2, 0.2] },
+    { "id": "barrier", "name": "Шлагбаум", "across": -5.0, "distance": 7.2, "box": [-0.6, -2.4, 6.4, 0.3] },
+    { "id": "freight", "name": "Товарный", "across": 78, "distance": 200, "facing": 155.7, "box": [-1, -5, 285, 0.8],
+      "place": { "across": "freight_a", "distance": "freight_d" } },
+    { "id": "busygin", "name": "Бусыгин", "person": { "cast": "cast_sonnet", "who": "busygin", "turn": 0 }, "across": -2.85, "distance": 5.0,
+      "place": { "across": "busygin_a", "distance": "busygin_d" }, "shadow": true },
+    { "id": "nina", "name": "Нина", "person": { "cast": "cast_sonnet", "who": "nina", "turn": 0 }, "across": -1.7, "distance": 5.25,
+      "place": { "across": "nina_a", "distance": "nina_d" }, "shadow": true },
+    { "id": "snowfall", "particles": { "kind": "snow", "amount": "snow" } }
+  ],
+  "music": {
+    "prompts": [
+      { "text": "very quiet cold night ambience, distant wind over snow, a far train hum", "weight": 0.6 },
+      { "text": "slow low strings, bare and tender, one held note", "weight": 0.4 }
+    ],
+    "bpm": 60, "density": 0.1, "brightness": 0.2
+  }
+}
