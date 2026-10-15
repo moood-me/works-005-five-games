@@ -271,7 +271,7 @@ function film(scene) {
   // the reverse on Elena turning at the car: from the side of the mole, Toto behind the camera, 4.2 m off her
   CAM.turn = (() => {
     const dx = G.TOTO_PROJ[0] - EL_TURN[0], dz = G.TOTO_PROJ[1] - EL_TURN[1], d = Math.hypot(dx, dz);
-    const at = [EL_TURN[0] + dx / d * 4.2 + dz / d * 0.8, EL_TURN[1] + dz / d * 4.2 - dx / d * 0.8];
+    const at = [EL_TURN[0] + dx / d * 3.0 + dz / d * 0.6, EL_TURN[1] + dz / d * 3.0 - dx / d * 0.6];
     return look(at, EL_TURN, -0.1, 1);
   })();
   const RUN = {
