@@ -215,7 +215,7 @@ function bench(g, C, lamp, tone = '#6b5038') {
 // rang (kiss_cut1…3); Alfredo's left hand holds the film, his right the scissors; the press for the splice; the boy's
 // small hand at the right edge, reaching for the cut pieces
 const SPLICE = (() => {
-  const h = 0.3, y = -0.03, k = h * 0.72, fw = k * 1.33, gap = h * 0.06, step = fw + gap, x0 = -2 * step;
+  const h = 0.27, y = -0.03, k = h * 0.72, fw = k * 1.33, gap = h * 0.06, step = fw + gap, x0 = -2 * step;
   const names = ['romance', 'romance', 'kiss_cut1', 'romance', 'kiss_cut2', 'romance', 'kiss_cut3', 'romance', 'romance'];
   const cuts = [0, 2, 4].map(i => x0 + i * step); // the cut line: at the kiss frame's left edge
   const top = y - h / 2, bot = y + h / 2;
