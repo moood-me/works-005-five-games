@@ -11,7 +11,7 @@
 //   view.letter({text, sign}, {signal}) — a sheet of unbleached paper folded in three: pressed, it unfolds and can be
 //     read; pressed again, it folds and goes; → then. text: its lines ('\n')
 //   view.onSkip(fn) → off — what the author's ⏭ does now (the latest one, until off()); null — none: the ⏭ not shown
-//     (a minigame: the language's own ⏭ skips it)
+//     (a step: skips the step; a minigame: skips the minigame)
 //   view.pausing(b) — ⏸ in the corner, for every player: the play paused (bespoke.pause, and the game's own sounds:
 //     sound.js pause) and going on again
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
@@ -132,7 +132,7 @@ export function ui(layer) {
         map.replaceChildren(panel);
         map.hidden = false;
       };
-      skipButton = button('⏭', 'пропустить шаг', () => skips.at(-1)?.fn?.());
+      skipButton = button('⏭', 'пропустить', () => skips.at(-1)?.fn?.());
       skipShown();
       tools.append(skipButton,
         button('☰', 'главы и шаги', () => (map.hidden ? open() : close())));

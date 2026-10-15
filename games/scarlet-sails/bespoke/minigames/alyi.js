@@ -48,6 +48,8 @@ export default {
       // (a wrong «Этот»: «не то», the roll shakes its head)
       if (chosen === 'yes' && roll !== RIGHT) mg.error('wrong', { at: mark });
       else if (chosen) mg.snap({ at: mark });
+      // (the wrong one's mark stays a moment: its shake is seen)
+      if (chosen === 'yes' && roll !== RIGHT) await until(g.wait(400));
       mark.remove();
       return chosen;
     };

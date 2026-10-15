@@ -35,6 +35,8 @@ export default {
     b.minigame.tricks.teach(mg, [run], { id: 'hold:anywhere' });
     let toy = 0, stuck = false, lost = 0, jumps = 0, wasHeld = false, snag = null, over = false;
     mg.on('end', () => { over = true; });
+    // the snag's ring goes with its hint
+    const drop = () => { snag.teach.remove(); snag.mark.remove(); snag = null; };
     // the scene stops her before a snag and says so: a ring on it, to be pressed (waiting set before the cause, and again
     // after each)
     (async () => {
@@ -43,15 +45,13 @@ export default {
         const next = SNAGS.find(s => at() < s.at + PAST);
         if (!next) continue;
         const mark = mg.mark({ at: next.ref }), press = mg.press({ on: mark });
-        snag = { mark, next };
-        b.minigame.tricks.teach(mg, [press], { id: 'press', still: [2, 6] });
+        snag = { mark, next, teach: b.minigame.tricks.teach(mg, [press], { id: 'press', still: [2, 6] }) };
         press.on('press', () => {
           jumps++;
           g.set('jump', 1);
           setTimeout(() => g.set('jump', 0), LEAP);
           mg.snap({ at: mark });
-          mark.remove();
-          snag = null;
+          drop();
         });
       }
     })();
@@ -71,7 +71,7 @@ export default {
         g.set('reeds', 0);
       }
       // (past the snag another way — let go and held again: its ring goes)
-      if (snag && here > snag.next.at + PAST) { snag.mark.remove(); snag = null; }
+      if (snag && here > snag.next.at + PAST) drop();
       const hold = run.state.held;
       if (wasHeld && !hold) g.set('run', here); // (a release always tells the scene where she is)
       else if (hold) send('run', Math.min(here + AHEAD, toy + WITH, 1));
