@@ -780,15 +780,15 @@
       "id": "hall_dark",
       "name": "Зал внизу",
       "across": 0,
-      "distance": 24,
-      "elevation": -4,
+      "distance": 23.6,
+      "elevation": -3,
       "facing": 180,
-      "height": 20,
+      "height": 8,
       "box": [
-        -30,
-        -14,
-        30,
-        8
+        -6,
+        -7,
+        6,
+        1
       ]
     },
     {
@@ -1290,19 +1290,19 @@
     },
     {
       "id": "beam",
-      "name": "Луч 1",
+      "name": "Луч",
       "on": "p1",
       "across": 0,
       "distance": 0.5,
       "elevation": 1.5,
-      "facing": 92.16925758972852,
+      "facing": 90,
       "glows": true,
-      "height": 3.4,
+      "height": 0.8,
       "box": [
         -0.1,
-        -0.8,
-        20.2,
-        3
+        -0.5,
+        4.8,
+        0.5
       ],
       "uniforms": {
         "on": 0
@@ -1418,26 +1418,6 @@
         0.2
       ],
       "inside": true
-    },
-    {
-      "id": "beam2",
-      "name": "Луч 2",
-      "on": "p2",
-      "across": 0,
-      "distance": 0.5,
-      "elevation": 1.5,
-      "facing": 87.83074241027148,
-      "glows": true,
-      "height": 3.4,
-      "box": [
-        -0.1,
-        -0.8,
-        20.2,
-        3
-      ],
-      "uniforms": {
-        "on": 0
-      }
     },
     {
       "id": "fire",

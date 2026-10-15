@@ -23,8 +23,11 @@ x across, left to right facing the ports; z from the opposite wall (0) to the po
   1.0 m up, `#motor` on the inner side's middle 1.1 m up, `#gate` near the front, `#lens`, `#side` the outer side), a
   lathe-form pedestal (`p1_ped`), the side card through the middle (`p1_side`: the reels — layers turning by
   `motor1`/`motor2`, none in 1988 —, their arms, the chimney, the lens barrel; its point `#reel`), the vents' glow
-  (`p1_vents`, light `p1_lamp` by `p1_on`), the motor's crank (`p1_crank`, turning while `crank`), the beam into the
-  hall (`beam`, `beam2`: kino.beam, the world's shader; on by `beam_on` × `active`). `turned` turns `p1` (−140° about
+  (`p1_vents`, light `p1_lamp` by `p1_on`), the motor's crank (`p1_crank`, turning while `crank`; its handle seen from
+  behind: `p1_knob`). The beams into the hall are behind the ports' wall from anywhere in the booth, so there are none
+  (cheaper: the view's pages): what shows a projector throwing its beam is its lamp house's glow, the look port's
+  picture and the hall's screen through the ports; only projector 1 has a short beam (`beam`: kino.beam, the world's
+  shader; on by `beam_on` × `active`), seen when it is turned out through the window on the square. `turned` turns `p1` (−140° about
   its middle: the lens to the window on the square) — everything on it goes with it.
 - Crate (`crate`, walk plane `crate_top`) behind projector 1 (x −0.75, z 2.2); in the fire it lies thrown by the window
   (`crate_a`, `crate_d`). A low box of film cans (`box`) — the boy's seat in `deal`, else in the corner by the bench.
@@ -107,6 +110,8 @@ Alfredo lying slides with no steps. `drag_at` — where he is now, set ten times
 a second without pulling.
 
 ## What is not as scenes.md says (and why)
+
+- No beams drawn into the hall (scenes.md: «Луч из port1 (или port2, по active) уходит в зал»): never seen from inside.
 
 - `story_booth`: Toto on the bench's edge, but Alfredo faces the window, not Toto (blind, telling into the air) — so
   both faces are to the camera from DOOR; his head turns toward Toto only partly.
