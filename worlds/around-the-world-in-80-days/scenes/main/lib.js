@@ -104,8 +104,8 @@ const ROUND = { sullivan: [0.7, 6.8], flanagan: [1.5, 6.15], stuart: [2.4, 5.9],
 const TO_CLOCK = id => toward(ROUND[id], [plan.clock, 8]);
 // where Fogg stops, coming in (in the gap by the end of the clock's wall, where they see him); Aouda, Passepartout behind;
 // where each waits in the hall, out of sight, till the door opens
-const IN = { fogg: [-0.25, 10.6], aouda: [0.45, 11.5], passepartout: [-0.95, 11.7] };
-const OUT = { fogg: HALL, aouda: [0.5, 19.9], passepartout: [-0.5, 20.0], porter: [0.3, 19.6] };
+const IN = { fogg: [-0.25, 10.6], aouda: [0.45, 11.5], passepartout: [-0.95, 11.7], fix: [0.3, 12.9] };
+const OUT = { fogg: HALL, aouda: [0.5, 19.9], passepartout: [-0.5, 20.0], porter: [0.3, 19.6], fix: [0.1, 20.2] };
 // Fogg's armchair by the fire (turned to it, its back to us): where he sits, facing the fire
 const ARMCHAIR = [1.68, 5.48], TO_FIRE = 45;
 // (Stuart's right hand holds the watch before his chest, where his eyes go)
@@ -148,6 +148,7 @@ const WHIST = {
   ...person('aouda', ...OUT.aouda, 180, { here: false }),
   ...person('passepartout', ...OUT.passepartout, 180, { here: false }),
   ...person('porter', ...OUT.porter, 180, { here: false }),
+  ...person('fix', ...OUT.fix, 180, { here: false }),
 };
 // the 21st of December, a little before a quarter to nine: the five in a half-circle before the clock, their backs to
 // us; Stuart in the middle, his watch open in his hand; Fogg away (in the hall, unseen, his hat on), the crowd outside
@@ -236,35 +237,52 @@ function film(scene) {
         await s.wait(1);
       },
     },
-    // ---- The wager. Fogg lays his cards and his hands on the baize; Stuart gets up. All eyes on Fogg; his face is even.
+    // ---- The wager. Fogg at his cards, close; all eyes on him, his face even — the beat stops here, alive (the player
+    // lays the cards: the game waits for a touch on fogg#hands, then plays wager_down).
     wager: {
       after: 'whist',
       from: AFTER_WHIST,
       run: async s => {
-        const fogg = s.person('fogg'), stuart = s.person('stuart');
+        const fogg = s.person('fogg');
         s.cut(FOGG_CLOSE);
-        const laid = fogg.go('lay_cards', { from: S.far, turn: 180 });
-        const watching = looks(s, [[0.3, 'fogg', 'stuart#head'], [0.3, 'fallentin', 'fogg#head'], [0.2, 'sullivan', 'fogg#head'],
+        await looks(s, [[0.3, 'fogg', 'stuart#head'], [0.3, 'fallentin', 'fogg#head'], [0.2, 'sullivan', 'fogg#head'],
           [0.2, 'flanagan', 'fogg#head'], [0.2, 'ralph', 'fogg#head']]);
+        await s.wait(0.8);
+        fogg.look(BAIZE);
+        await s.wait(0.6);
+        s.tell('wager:ready');
+        await s.wait(0.5);
+      },
+    },
+    // ---- He lays his cards and his hands on the baize; Stuart gets up. All eyes on Fogg.
+    wager_down: {
+      after: 'wager',
+      from: () => ({ ...AFTER_WHIST(), ...FOGG_CLOSE, fogg_look: BAIZE,
+        ...Object.fromEntries(['fallentin', 'sullivan', 'flanagan', 'ralph'].map(id => [`${id}_look`, 'fogg#head'])) }),
+      run: async s => {
+        const fogg = s.person('fogg'), stuart = s.person('stuart');
+        const laid = fogg.go('lay_cards', { from: S.far, turn: 180 });
         await s.wait(0.9);
         fogg.with(null);
         s.set('cards_down', 1);
-        s.tell('wager:cards-down');
-        await s.wait(0.6);
+        s.tell('wager_down:cards-down');
+        await s.wait(0.3);
+        fogg.look('stuart#head');
+        await s.wait(0.3);
         const up = stuart.go('rise_chair', { from: READER, turn: 200 });
         await s.wait(0.1);
         stuart.look('fogg#head');
         await s.wait(3.4);
         frame(s, { ...FOGG_CLOSE, camera_shot: 0.8 }, 3);
-        await s.all(laid, up, watching);
-        s.tell('wager:stuart-up');
+        await s.all(laid, up);
+        s.tell('wager_down:stuart-up');
         await s.wait(2);
       },
     },
     // ---- 19:25. He gets up, pushing back his chair, goes to the door without a step too many — his hat from the stand
     // on the way — and is gone; the door shuts behind him.
     leave: {
-      after: 'wager',
+      after: 'wager_down',
       from: () => ({ ...AFTER_WAGER(), ...WHIST_TABLE }),
       run: async s => {
         const fogg = s.person('fogg');
@@ -340,6 +358,13 @@ function film(scene) {
           if (q.get('with_aouda')) { q.person('aouda').here(true); come.push(walk(q, 'aouda', [IN.aouda], 200)); }
           await q.wait(0.6);
           if (q.get('with_pp')) { q.person('passepartout').here(true); come.push(walk(q, 'passepartout', [IN.passepartout], 160)); }
+          await q.wait(0.6);
+          // (Fix last, a step behind, by the door; his bruise if the game says so)
+          if (q.get('with_fix')) {
+            q.person('fix').wear(q.get('fix_bruise') ? scene.kit.cast.wears.fix_bruise : null);
+            q.person('fix').here(true);
+            come.push(walk(q, 'fix', [IN.fix], 175));
+          }
           await q.all(...come);
         });
         // the five turn round, one after another
@@ -434,6 +459,6 @@ function film(scene) {
 }
 // the showcase's order: the scene's own cut (the prologue's last seconds, the wager, the evening of the 21st and its two
 // endings), then Friday
-const ORDER = ['countdown', 'whist', 'wager', 'leave', 'wait', 'door', 'no_door', 'friday', 'friday_in'];
+const ORDER = ['countdown', 'whist', 'wager', 'wager_down', 'leave', 'wait', 'door', 'no_door', 'friday', 'friday_in'];
 
 return { plan, leaf, reveal, chair, CROWD, crowdGroup, film, ORDER, MEN, ARMCHAIR, TO_FIRE, loop };
