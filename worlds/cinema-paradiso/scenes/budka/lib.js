@@ -423,12 +423,13 @@ const FILM = {
   // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
   smoke_in: {
     from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
-      alfredo: { at: BEHIND(0), turn: PATH_TURN, do: 'fall_back', steps: false, mood: 'tired' },
+      alfredo: { at: BEHIND(0), turn: PATH_TURN, steps: false, mood: 'tired' },
       toto: { at: [AHEAD(0)[0] + UNIT[0] * 0.9, AHEAD(0)[1] + UNIT[1] * 0.9], turn: PATH_TURN, look: 'alfredo', mood: 'afraid' } }) }),
-    // (the engine plays a motion from its beginning, whatever \`from\` says: so the fall is seen again, through the
+    // (a motion done once is not played from a cut, nor from its middle: so the fall is seen again, through the
     // smoke, as the boy runs to him and drops to his knees at his shoulders)
     run: async s => {
       const boy = s.person('toto');
+      s.person('alfredo').do('fall_back');
       boy.gait('run');
       await walk(s, 'toto', [AHEAD(0)]); boy.gait(null);
       await boy.turn(PATH_TURN);
