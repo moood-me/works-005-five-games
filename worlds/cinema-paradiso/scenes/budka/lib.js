@@ -193,7 +193,7 @@ const base = (hour, more = {}) => ({
   era: 'past', hour, ...tone(hour, more.era), lamp: 1, door: 0, stair: 0, beam_on: 0, active: 1, motor1: 0, motor2: 0,
   crank: 0, jitter: 0, clock: 6, month: 'none', tin_open: 0, tin_at: 'bench', clips: 0, written: 0, turned: 0,
   fire: 0, smoke: 0, tail: 0, white: 0, cue: 0, rain_window: 0, box_a: P.BOX_FAR[0], box_d: P.BOX_FAR[1],
-  splice: 0, slate: 0, thread: 0, calendar: 0, strip: 0, pigeons: 0, hanging: 0, ...more,
+  splice: 0, slate: 0, thread: 0, calendar: 0, strip: 0, pigeons: 0, hanging: 0, crate_a: -0.75, crate_d: 2.03, ...more,
 });
 const show = active => ({ beam_on: 1, active, motor1: active === 1 ? 1 : 0, motor2: active === 2 ? 1 : 0 });
 // who is where: {id: {at: [x, z], turn, do, look, reach, wear (a look's name), with, on, mood, gait, steps}} — the rest not here
@@ -401,7 +401,7 @@ const FILM = {
   },
   // II.3 — the projector turned to the window; the boy goes down; fire in the gate; Alfredo falls
   jam: {
-    from: () => ({ ...base(0.92), ...show(1), turned: 1, door: 1, stair: 1, ...CAM.SQUARE, ...people({
+    from: () => ({ ...base(0.92), ...show(1), turned: 1, door: 1, stair: 1, crate_a: -1.55, crate_d: 2.45, ...CAM.SQUARE, ...people({
       alfredo: { at: P.ALF_PUSH, turn: 60, look: 'toto', mood: 'smile' },
       toto: { at: P.BOY_JAM, turn: 110, look: 'alfredo' } }) }),
     run: async s => {
@@ -422,7 +422,7 @@ const FILM = {
   },
   // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
   smoke_in: {
-    from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
+    from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, crate_a: -1.55, crate_d: 2.45, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
       alfredo: { at: BEHIND(0), turn: PATH_TURN, steps: false, mood: 'tired' },
       toto: { at: [AHEAD(0)[0] + UNIT[0] * 0.9, AHEAD(0)[1] + UNIT[1] * 0.9], turn: PATH_TURN, look: 'alfredo', mood: 'afraid' } }) }),
     // (a motion done once is not played from a cut, nor from its middle: so the fall is seen again, through the

@@ -170,6 +170,8 @@
     "cough": 0,
     "box_a": 1.7,
     "box_d": 2.95,
+    "crate_a": -0.75,
+    "crate_d": 2.03,
     "pigeons": 0,
     "hanging": 0,
     "jumps": 0,
@@ -504,6 +506,14 @@
     "box_d": {
       "type": "number",
       "means": "служебный: где коробка с плёнкой (вглубь)"
+    },
+    "crate_a": {
+      "type": "number",
+      "means": "служебный: где ящик мальчика (поперёк); в пожаре он отброшен к окну"
+    },
+    "crate_d": {
+      "type": "number",
+      "means": "служебный: где ящик (вглубь; его передняя стенка)"
     },
     "pigeons": {
       "type": "number",
@@ -1118,6 +1128,10 @@
       "name": "Ящик",
       "across": -0.75,
       "distance": 2.03,
+      "place": {
+        "across": "crate_a",
+        "distance": "crate_d"
+      },
       "facing": 180,
       "height": 0.4,
       "box": [
@@ -1133,8 +1147,9 @@
       "name": "Верх ящика",
       "plane": true,
       "unseen": true,
-      "across": -0.75,
-      "distance": 2.2,
+      "on": "crate",
+      "across": 0,
+      "distance": 0.17,
       "elevation": 0.4,
       "width": 0.5,
       "depth": 0.35,
