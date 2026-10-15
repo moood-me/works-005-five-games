@@ -46,7 +46,7 @@ const fresh = () => ({
 export default async function (b) {
   await Promise.all([b.css('fonts.css'), b.css('ui.css')]);
   // the language of mini-games in this game's hand: the plate's phrase written as the hints were
-  b.minigame.style({ font: '"Parusa Hand", "Segoe Script", cursive' });
+  b.minigame.style({ key: 'D_MAJOR_B_MINOR', font: '"Parusa Hand", "Segoe Script", cursive' }); // (ре — the world's scenes' music is in it too)
   const hub = listen(b);
   const view = ui(b.layer);
   view.pausing(b);
