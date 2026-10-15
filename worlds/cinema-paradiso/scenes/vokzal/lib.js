@@ -24,15 +24,26 @@ function carSide(g, len, seed, now) {
   g.save(); g.beginPath(); g.rect(0, top - 0.3, len, bot - top + 0.3);
   for (let x = 1.2; x < len - 2.2; x += 1.55) { if (Math.abs(x - door) < 1.3) continue; win.push(x); g.rect(x, -2.25, 1.05, 0.8); }
   g.clip('evenodd');
-  g.fillStyle = now ? '#4c5852' : '#64744e'; g.fillRect(0, top, len, bot - top);
-  g.fillStyle = now ? '#a7a08e' : '#c9b98e'; g.fillRect(0, -1.42, len, 0.12);
-  g.fillStyle = now ? '#414b45' : '#55643f'; for (let x = 0.4; x < len; x += 1.55) g.fillRect(x, top + 0.1, 0.03, bot - top - 0.2);
-  g.fillStyle = '#2a2a2c'; g.beginPath(); g.moveTo(0, top); g.quadraticCurveTo(len / 2, top - 0.42, len, top); g.lineTo(len, top + 0.06); g.lineTo(0, top + 0.06); g.fill();
+  const body = now ? '#4c5852' : '#64744e', dark = now ? '#3e4842' : '#4f5d3d', line = now ? '#a7a08e' : '#c9b98e';
+  g.fillStyle = body; g.fillRect(0, top, len, bot - top);
+  g.fillStyle = dark; g.fillRect(0, -1.3, len, 1.55);                                  // the lower panels, darker
+  g.fillStyle = line; g.fillRect(0, -1.42, len, 0.12);                                 // the cream band
+  g.fillStyle = now ? '#56625b' : '#72835a'; g.fillRect(0, -2.72, len, 0.08); g.fillRect(0, -1.32, len, 0.03);   // the beading
+  g.fillStyle = now ? '#353e39' : '#435034'; for (let x = 0.4; x < len; x += 1.55) { g.fillRect(x, top + 0.1, 0.035, 1.0); g.fillRect(x, -1.28, 0.035, 1.45); }
+  for (let x = 1.0; x < len - 0.5; x += 1.55) { g.fillStyle = 'rgba(20,24,18,0.5)'; g.fillRect(x, -1.0, 0.9, 0.025); g.fillRect(x, -0.3, 0.9, 0.025); }   // the panels' joints
+  g.fillStyle = '#2a2a2c'; g.beginPath(); g.moveTo(-0.05, top); g.quadraticCurveTo(len / 2, top - 0.42, len + 0.05, top); g.lineTo(len + 0.05, top + 0.08); g.lineTo(-0.05, top + 0.08); g.fill();   // the roof's edge
+  g.fillStyle = '#3c3c40'; g.beginPath(); g.moveTo(0.2, top - 0.08); g.quadraticCurveTo(len / 2, top - 0.44, len - 0.2, top - 0.08); g.lineTo(len - 0.2, top - 0.04); g.quadraticCurveTo(len / 2, top - 0.38, 0.2, top - 0.04); g.fill();   // its rain strip
+  for (let x = 1.6; x < len - 1; x += 2.6) { g.fillStyle = '#26262a'; g.beginPath(); g.ellipse(x, top - 0.3, 0.16, 0.09, 0, Math.PI, 0); g.fill(); }   // the vents
   g.restore();
   g.fillStyle = '#23262a'; g.fillRect(door, -2.35, 0.9, 2.45);                      // the door
   g.fillStyle = '#5a6458'; g.fillRect(door + 0.2, -2.15, 0.5, 0.55);
   g.fillStyle = '#1c1c1e'; g.fillRect(door + 0.1, 0.1, 0.7, 0.08); g.fillRect(door + 0.15, 0.35, 0.6, 0.08);   // the steps
-  for (const x of win) { g.strokeStyle = '#2e2e2a'; g.lineWidth = 0.05; g.strokeRect(x, -2.25, 1.05, 0.8); g.fillStyle = '#2e2e2a'; g.fillRect(x, -1.88, 1.05, 0.03); }
+  for (const x of win) {
+    g.strokeStyle = now ? '#7a7466' : '#b8a678'; g.lineWidth = 0.06; g.strokeRect(x - 0.03, -2.28, 1.11, 0.86);   // the brass-and-wood frame
+    g.fillStyle = '#2e2e2a'; g.fillRect(x, -1.88, 1.05, 0.03);
+    g.fillStyle = now ? '#7a7466' : '#b8a678'; g.fillRect(x + 0.1, -1.47, 0.85, 0.03);                             // the drop-light's strap
+  }
+  g.fillStyle = '#c9b98e'; for (const x of [door + 0.12, door + 0.78]) g.fillRect(x, -1.45, 0.03, 0.18);              // the door's handrails
   g.fillStyle = '#18181a'; g.fillRect(0, 0.5, len, 0.25);                              // the frame under
   for (const x of [1.6, 3.4, len - 3.4, len - 1.6]) { g.fillStyle = '#121214'; g.beginPath(); g.arc(x, 0.48, 0.42, 0, Math.PI * 2); g.fill(); g.fillStyle = '#3a3a3c'; g.beginPath(); g.arc(x, 0.48, 0.12, 0, Math.PI * 2); g.fill(); }
   g.save(); g.scale(0.01, 0.01); g.fillStyle = now ? '#c8c2b0' : '#d8c890'; g.font = '700 22px serif'; g.textAlign = 'center';
@@ -48,15 +59,20 @@ function carInside(g, len, now) {
 // the locomotive's south side from its back (x 0, the cab) to its front (len): the tender joined, the boiler, the
 // chimney, the dome, the driving wheels with their rods (a layer the animate turns), the buffer beam
 function locoSide(g, len) {
-  g.fillStyle = '#1d1d20';
-  g.fillRect(0, -3.4, 2.6, 3.4);                                                        // the cab
-  g.fillStyle = '#2a2a2e'; g.fillRect(-0.1, -3.55, 2.8, 0.18);
-  g.fillStyle = '#3a3e48'; g.fillRect(0.5, -2.9, 0.8, 0.7);                             // the cab's window
-  g.fillStyle = '#1a1a1d'; g.beginPath(); g.moveTo(2.6, -2.8); g.lineTo(len - 0.6, -2.8); g.quadraticCurveTo(len - 0.3, -2.75, len - 0.3, -2.3); g.lineTo(len - 0.3, -1.1); g.lineTo(2.6, -1.1); g.fill();
-  g.fillStyle = '#2c2c30'; for (let x = 3.4; x < len - 1; x += 1.4) g.fillRect(x, -2.8, 0.05, 1.7);           // the boiler's bands
-  g.fillStyle = '#1a1a1d'; g.fillRect(len - 1.5, -3.6, 0.55, 0.85);                     // the chimney
+  const green = '#25302a', black = '#18191b', red = '#8a2a20', brass = '#a9864a';
+  g.fillStyle = green; g.fillRect(0, -3.4, 2.6, 3.4);                                   // the cab
+  g.strokeStyle = red; g.lineWidth = 0.04; g.strokeRect(0.12, -3.25, 2.36, 2.95);     // its red lining
+  g.fillStyle = black; g.fillRect(-0.1, -3.55, 2.8, 0.18);                             // the cab roof
+  g.fillStyle = '#9aa2b4'; g.fillRect(0.5, -2.9, 0.8, 0.7);                            // the cab's window: the dawn sky in it
+  g.strokeStyle = brass; g.lineWidth = 0.05; g.strokeRect(0.5, -2.9, 0.8, 0.7);
+  g.fillStyle = brass; g.fillRect(1.55, -1.95, 0.7, 0.32);                             // the number plate
+  g.fillStyle = black; g.save(); g.scale(0.01, 0.01); g.font = '700 20px serif'; g.textAlign = 'center'; g.fillText('835', 190, -172); g.restore();
+  g.fillStyle = green; g.beginPath(); g.moveTo(2.6, -2.8); g.lineTo(len - 0.6, -2.8); g.quadraticCurveTo(len - 0.3, -2.75, len - 0.3, -2.3); g.lineTo(len - 0.3, -1.1); g.lineTo(2.6, -1.1); g.fill();   // the boiler and tanks
+  g.strokeStyle = red; g.lineWidth = 0.035; g.strokeRect(2.8, -2.65, len - 3.4, 1.4);
+  g.fillStyle = brass; for (let x = 3.4; x < len - 1; x += 1.4) g.fillRect(x, -2.8, 0.05, 1.7);          // the boiler's brass bands
+  g.fillStyle = black; g.fillRect(len - 1.5, -3.6, 0.55, 0.85);                        // the chimney
   g.fillRect(len - 1.62, -3.68, 0.79, 0.12);
-  g.beginPath(); g.ellipse(len - 4.6, -2.85, 0.5, 0.3, 0, Math.PI, 0); g.fill();       // the dome
+  g.fillStyle = brass; g.beginPath(); g.ellipse(len - 4.6, -2.85, 0.5, 0.3, 0, Math.PI, 0); g.fill();   // the dome
   g.fillStyle = '#8a1c18'; g.fillRect(len - 0.35, -0.95, 0.3, 0.45);                    // the buffer beam
   g.fillStyle = '#121214'; g.fillRect(2.4, -1.1, len - 2.6, 0.75);                      // the running board's shade
   g.fillStyle = '#c8b070'; g.fillRect(2.6, -1.12, len - 3, 0.03);
@@ -108,7 +124,7 @@ const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_on: null, camera_target: 
 const look = (at, to, h = 0, pitch = 0) => cam(at[0], at[1], +((brg(at, to) + 540) % 360 - 180).toFixed(1), h, pitch);
 // places (the train standing: train 0)
 const P = {
-  T_HUG: [1.2, 3.3], M_HUG: [0.72, 3.3], M_BACK: [-0.05, 3.7], A_WAIT: [2.9, 2.4], A_HUG: [1.68, 3.3],
+  T_HUG: [1.2, 3.3], M_HUG: [0.72, 3.3], M_BACK: [-0.05, 3.7], A_WAIT: [2.3, 2.9], A_HUG: [1.68, 3.3],
   DOOR: [G.DOOR1, 4.35], A_EDGE: [1.6, 3.95], A_OFF: [-6, 0.4], A_GONE: [-16, 0.2],
   SAL_OUT: [0.75, 3.95], SAL_STOP: [-0.2, 1.4],
 };
@@ -118,7 +134,7 @@ function film(scene) {
   const CH = scene.kit.cast.characters;
   const CAM = {
     platform: look([0.25, 0.6], [1.42, 3.3], -0.15, 2),   // the farewell, medium: Toto and Alfredo ≈ 1/2, the mother a step behind; the green carriage
-    window: cam(-3.2, 1.6, 30, 0.15, 8),                 // under Toto's window from the platform, looking up at him; tracks with the train
+    window: cam(-2.0, 1.2, 11, 0.0, 6),                  // from the platform: Toto's window; the camera pans after it as the train starts, Alfredo coming into the frame
     away: cam(-5.5, 0.4, 60, 0, 2),                      // along the platform east: the carriage goes, the mother waves
     back: { ...cam(1.7, G.WIN1 - 0.2, 150, 1.25, -2), camera_on: 'train' },   // leaning out of Toto's window, back at the platform
     arrive: cam(1.9, 4.35, 205, 0, 3),                   // 1988, from the carriage's step: Salvatore's back, the empty platform, the clock
@@ -149,7 +165,7 @@ function film(scene) {
     platform: {
       from: () => ({ ...base('past', 0.25), ...cast({
         toto: { at: P.T_HUG, turn: 270, look: 'maria', reach: { r: 'maria#back', l: 'maria#back' }, mood: 'thinking' },
-        maria: { at: P.M_HUG, turn: 90, look: 'toto', reach: { r: 'toto#nape', l: 'toto#nape' }, mood: 'sad' },
+        maria: { at: P.M_HUG, turn: 90, look: 'toto', reach: { r: 'toto#nape', l: 'toto#nape' }, mood: 'tired' },
         alfredo: { at: P.A_WAIT, turn: brg(P.A_WAIT, P.T_HUG), look: 'toto', mood: 'sad' }, ...C_FAR }), ...CAM.platform }),
       run: async s => {
         const toto = s.person('toto'), ma = s.person('maria'), alf = s.person('alfredo');
@@ -161,7 +177,7 @@ function film(scene) {
         await alf.walk([P.A_HUG]); alf.gait(null);
         await s.all(alf.turn(255), toto.turn(105));
         alf.look('toto'); toto.look('alfredo');
-        alf.reach({ l: 'toto#back' }); toto.reach({ r: 'alfredo#back', l: 'alfredo#back' });
+        alf.reach({ l: 'toto#back' }); toto.reach({ r: 'alfredo#shoulder_l', l: 'alfredo#shoulder_r' });
         await s.wait(3.5);
       },
     },
@@ -171,7 +187,7 @@ function film(scene) {
     boarding: {
       after: ['platform'],
       from: () => ({ ...base('past', 0.25), ...cast({
-        toto: { at: P.T_HUG, turn: 105, look: 'alfredo', reach: { r: 'alfredo#back', l: 'alfredo#back' }, mood: 'thinking' },
+        toto: { at: P.T_HUG, turn: 105, look: 'alfredo', reach: { r: 'alfredo#shoulder_l', l: 'alfredo#shoulder_r' }, mood: 'thinking' },
         maria: { at: P.M_BACK, turn: brg(P.M_BACK, P.T_HUG), look: 'toto', mood: 'sad' },
         alfredo: { at: P.A_HUG, turn: 255, look: 'toto', reach: { l: 'toto#back' }, mood: 'sad' }, ...C_FAR }), ...CAM.platform }),
       run: async s => {
@@ -187,7 +203,7 @@ function film(scene) {
         win.cut();
         // the train starts; the camera tracks along the platform with Toto's window and stops with it
         s.move('train', 0.08, { over: 4.5, ease: 'in' });
-        s.move('camera_x', CAM.window.camera_x + G.RUN * 0.08, { over: 4.5, ease: 'in' });
+        s.move('camera_yaw', 64, { over: 4.8, ease: 'inOut' });
         alf.look('car1#window'); ma.look('car1#window');
         await s.wait(1.2); s.tell('boarding:window');
         if (stays()) { await alf.walk([P.A_EDGE]); await alf.turn(20); }
@@ -222,7 +238,7 @@ function film(scene) {
         const ma = s.person('maria'), alf = s.person('alfredo');
         if (s.get('camera_on') !== 'train') s.cut({ ...CAM.back, toto_here: false });
         if (!stays()) { alf.gait('cane_walk'); alf.walk([P.A_GONE]); }
-        const go = s.move('train', 1, { over: 12, ease: 'in' });
+        const go = s.move('train', 0.42, { over: 12, ease: 'in' });
         await s.wait(0.5); ma.do('wave');
         if (stays()) { await s.wait(1.2); alf.do('wave'); }
         await s.wait(4.5); ma.do('wave');
@@ -237,11 +253,15 @@ function film(scene) {
       from: () => ({ ...base('now', 0.8), ...cast({ toto: { at: P.SAL_OUT, turn: 200, wear: CH.salvatore, with: ['suitcase'], mood: 'tired' } }), ...CAM.arrive }),
       run: async s => {
         const sal = s.person('toto');
+        s.move('camera_z', CAM.arrive.camera_z - 1.4, { over: 11, ease: 'inOut' });
+        s.move('camera_x', CAM.arrive.camera_x - 0.6, { over: 11, ease: 'inOut' });
         await s.wait(1.5);
         await sal.walk([[0.35, 2.6], P.SAL_STOP]);
         await s.wait(1.2); s.tell('arrival:stand');
         sal.look('clock#face');
-        await s.wait(6);
+        await s.wait(3.5);
+        sal.look([-3, -2, 1.2]);
+        await s.wait(2.5);
       },
     },
     // the insert: his hands open the old wallet, the one frame of a kiss against the station's lamp

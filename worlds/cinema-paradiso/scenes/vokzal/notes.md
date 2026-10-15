@@ -8,7 +8,8 @@ dawn, light sadness; the green carriage and the black engine; 1988 — the same 
 ## The place (metres; x east, z north; the start on the platform)
 
 All numbers in `lib.js` (`G`, `P`). The platform x −60…60, z −4…4.5 (stone flags, a white line at its edge); the
-station's front at z −4 (GIANCALDO, the clock over the middle door, benches), a lamp post at (4.2, 2.6). The track's bed
+station's front at z −4 (GIANCALDO, the clock over the middle door, benches) with its east end wall (`station_end`:
+along the platform it is a house, not a sheet), a lamp post at (4.2, 2.6). The track's bed
 0.9 m lower north of the edge (`relief.js`), the line at z 5.6; beyond it a field, olive trees (copies), low hills.
 
 The train: an unseen anchor `train` on the line, its `across` the scene's `train_x` (= 150 m × `train`). It faces west,
@@ -26,8 +27,8 @@ west-north-west).
 ## Shots (`lib.film` CAM)
 
 `platform` — medium, a little from the south-west: Toto and Alfredo ≈ 1/2 of the frame, their faces 3/4, the mother a
-step behind; the carriage behind them going off in depth. `window` — from the platform under Toto's window; it tracks
-along with the starting train (camera_x moved with `train`) and stops with it. `away` — along the platform east: the
+step behind; the carriage behind them going off in depth. `window` — from the platform: Toto at his window; as the train
+starts the camera pans after it (`camera_yaw` 11 → 64), and Alfredo — at the edge or going — comes into the same frame. `away` — along the platform east: the
 mother and Alfredo, the train going down the line. `back` — riding the train (`camera_on`: train), leaning out of Toto's
 window, back at the platform. `arrive` — 1988, from the carriage's step: Salvatore's back, the station's front and
 clock.
