@@ -401,7 +401,7 @@ function film(scene) {
         await run; elena.gait(null);
         await elena.turn(0); elena.look('toto');
         toto.reach({ r: 'elena#back', l: 'elena#back' }); elena.reach({ r: 'toto#nape', l: 'toto#nape' });
-        toto.look([3.4, 58.9, 1.45]); elena.look([3.05, 60.95, 1.6]); toto.mood('smile');
+        toto.look([0.6, 58.4, 1.4]); elena.look([3.05, 60.95, 1.6]); toto.mood('smile');
         await s.wait(1.2); s.tell('found:hug');
         await s.wait(7);
       },
