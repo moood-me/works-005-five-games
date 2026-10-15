@@ -129,8 +129,8 @@
       "id": "bench_light",
       "of": "wall_lamp#bulb",
       "color": "#e9e4d4",
-      "strength": 1.1,
-      "reach": 5.5
+      "strength": 1.25,
+      "reach": 9
     }
   ],
   "state": {
