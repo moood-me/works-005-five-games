@@ -218,7 +218,7 @@ const P = {
   SAL_ASK: [-1.52, 57.45],
   EL_BY: [-1.0, 59.5],                // she goes back to the car's front corner
   EL_DOOR: [1.25, 56.6],              // round the car's front to the driver's door (east side): hidden by the car
-  HUG_T: [2.2, 59.55], HUG_E: [2.2, 58.95],   // the hug at the lantern: he north (his back to the sea), she south of him
+  HUG_T: [2.2, 59.55], HUG_E: [2.2, 59.2],   // the hug at the lantern: he north (his back to the sea), she south of him
 };
 function film(scene) {
   const CH = scene.kit.cast.characters;
@@ -227,7 +227,7 @@ function film(scene) {
     close: look([-0.5, 6.2], [-2.6, 9.6], -0.1, 2),           // Toto at the projector, Elena on her crate, the screen beyond
     head: look([-4.6, 12.6], [2.2, 2.6], 0, 0),           // behind Toto toward the quay: the car comes in the rain
     found: cam(1.0, 41, 2, 0.2, 1),                       // down the mole to Toto on his bollard by the lantern
-    hug: look([5.3, 60.7], [2.2, 59.25], -0.1, 3),          // from the head's corner by the lantern: her face over his shoulder, lit
+    hug: look([5.3, 60.7], [2.2, 59.35], -0.15, 1),          // from the head's corner by the lantern: her face over his shoulder, lit
     alone: cam(1.6, 51.5, 6, 0.2, 2),                     // Toto alone, his back, the sea and the moon's path
     back: look([-3.0, 6.3], [-5.05, 7.6], -0.5, -1),  // the bench at dusk: Alfredo and Toto, faces 3/4, the mole and the sea behind
     carNow: look([0.4, 45.2], [-1.0, 58.4], 0.1, 1),      // 1988: the car on the head, Elena by it; the daughter goes; he comes

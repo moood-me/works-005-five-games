@@ -1359,8 +1359,8 @@
     {
       "id": "street_lamp",
       "name": "Уличный фонарь",
-      "across": 7.5,
-      "distance": -4.5,
+      "across": -2.6,
+      "distance": 3.2,
       "height": 4.6,
       "box": [
         -0.2,
