@@ -558,6 +558,444 @@ function flameMotion(e, T) {
   }
 }
 
+// ── Kiouni, the elephant: an element of the scene (people do not move as he does). He is built on his anchor `kiouni`
+// (its place — kiouni_x, kiouni_d, kiouni_facing, kiouni_el, kiouni_tilt — the scene's) as two flanks seen from the side
+// (`kiouni_l`, `kiouni_r`: one is near, whichever way he faces, and shows all of him; the far one only its two legs
+// between his near ones), the howdah's rails (`gauda_l`, `gauda_r`) on his back, the people sat in it on points of his
+// frame (KIOUNI_SEATS). His parts are layers of a flank, painted once; his legs, head, ears, trunk, tail move by its
+// animate (kiouniMove): the legs walk by the way he has come (his own step — never sliding), fold as he kneels; the trunk
+// takes its poses (`trunk`), the ears fan (`ears`, `balk`), the head lifts as he trumpets.
+// His own metres, as painted: his head toward +x, the ground at y 0, up negative.
+const KI = {
+  // the legs: where the hip is, the upper and lower bones; the near pair and the far pair a little apart
+  front: { x: 0.8, hip: -1.62, a: 0.84, b: 0.78 },
+  hind: { x: -1.0, hip: -1.66, a: 0.86, b: 0.8 },
+  farX: -0.17,
+  // the head turns about the neck; the trunk hangs from its face, five pieces (their lengths, their half-widths at the
+  // root of each); the ear turns about its top
+  neck: [0.98, -2.45], base: [2.02, -2.02], ear: [1.36, -2.8], tail: [-1.56, -2.32], eye: [1.68, -2.48],
+  trunk: [0.44, 0.42, 0.4, 0.36, 0.33], tw: [0.2, 0.165, 0.135, 0.11, 0.085, 0.065],
+  // his back, where the howdah's floor is (elevation on his anchor), and how far each flank stands from his middle
+  back: 2.86, side: 0.85,
+  // the walk: a stride (metres a step cycle) at a walk and at a run; how high a foot lifts
+  stride: 1.75, strideRun: 2.6, lift: 0.24,
+};
+// The trunk's poses: each piece's way from its root (radians: 0 hanging down, + toward the front, π straight up)
+const TRUNK = {
+  rest: [0.14, 0.06, -0.04, -0.22, -0.6],
+  up: [1.2, 1.95, 2.5, 2.9, 3.35],
+  sugar: [1.05, 1.95, 2.75, 3.3, 3.75],
+  lift: [0.75, 1.15, 1.85, 2.75, 3.6],
+  // folded as he kneels (his head near the ground)
+  low: [0.55, 0.95, 1.35, 1.65, 1.95],
+};
+// each piece's root and way at rest — how the layers are painted
+const TRUNK_REST = (() => {
+  const out = [];
+  let [x, y] = KI.base;
+  KI.trunk.forEach((len, i) => {
+    const a = TRUNK.rest[i];
+    out.push({ x, y, a, len });
+    x += Math.sin(a) * len;
+    y += Math.cos(a) * len;
+  });
+  return out;
+})();
+const SKIN = '#7a726d', SKIN_DK = '#665f5a', SKIN_LT = '#8c847d', PINK = '#c99c8e', NAIL = '#ddd4c0';
+const CLOTH = '#a42e27', GOLD = '#d4a94c', PAINT = ['#f0c23c', '#efe7d2', '#d8572c'];
+
+// A flank's layers (painted once): `dir` — +1 when it is the flank whose painting has his head to its right.
+function kiouniPaint(e, dir) {
+  const L = (name, pivot, box, paint) => e.layer(name, { pivot: [dir * pivot[0], pivot[1]],
+    box: dir > 0 ? box : [-box[2], box[1], -box[0], box[3]] }, g => { g.scale(dir, 1); paint(g); });
+  const fill = (g, c, pts, close = true) => {
+    g.fillStyle = c;
+    g.beginPath();
+    g.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) {
+      const p = pts[i];
+      if (p.length === 4) g.quadraticCurveTo(p[0], p[1], p[2], p[3]);
+      else if (p.length === 6) g.bezierCurveTo(p[0], p[1], p[2], p[3], p[4], p[5]);
+      else g.lineTo(p[0], p[1]);
+    }
+    if (close) g.closePath();
+    g.fill();
+  };
+  const wrinkles = (g, x0, x1, y0, y1, n, seed, color = 'rgba(52,44,40,0.35)') => {
+    g.strokeStyle = color;
+    g.lineWidth = 0.018;
+    g.lineCap = 'round';
+    for (let i = 0; i < n; i++) {
+      const y = y0 + ((y1 - y0) * (i + 0.5)) / n + 0.03 * (h(i, seed) - 0.5), xa = x0 + 0.05 * h(i, seed + 1), xb = x1 - 0.05 * h(i, seed + 2);
+      g.beginPath();
+      g.moveTo(xa, y);
+      g.quadraticCurveTo((xa + xb) / 2, y + 0.035, xb, y);
+      g.stroke();
+    }
+  };
+  // the tail: a rope of a tail, its tuft of dark hair
+  L('tail', KI.tail, [-1.9, -2.45, -1.3, -0.9], g => {
+    g.strokeStyle = SKIN_DK;
+    g.lineCap = 'round';
+    g.lineWidth = 0.075;
+    g.beginPath();
+    g.moveTo(-1.56, -2.32);
+    g.quadraticCurveTo(-1.74, -1.9, -1.66, -1.3);
+    g.stroke();
+    fill(g, '#2e2622', [[-1.71, -1.36], [-1.62, -1.36], [-1.56, -1.05], [-1.66, -0.98], [-1.76, -1.06]]);
+  });
+  // the body: the great round barrel of him, his back highest in the middle; the cloth over it under the howdah, red
+  // with a gold border and tassels; a girth strap
+  L('body', [0, 0], [-1.8, -3.0, 1.35, -0.9], g => {
+    fill(g, SKIN, [[-1.62, -1.55], [-1.72, -2.1, -1.55, -2.55], [-1.2, -2.86, -0.2, -2.92], [0.8, -2.9, 1.12, -2.62],
+      [1.28, -2.2, 1.18, -1.7], [1.08, -1.26, 0.6, -1.16], [-0.2, -1.02, -0.85, -1.16], [-1.42, -1.25, -1.62, -1.55]]);
+    // the light along his back, the shade under his belly
+    fill(g, SKIN_LT, [[-1.45, -2.52], [-1.1, -2.82, -0.2, -2.88], [0.7, -2.86, 0.98, -2.66], [0.3, -2.7, -0.4, -2.72], [-1.1, -2.66, -1.45, -2.52]]);
+    fill(g, SKIN_DK, [[-1.3, -1.28], [-0.4, -1.18, 0.5, -1.22], [0.8, -1.3], [0.4, -1.08, -0.2, -1.04], [-0.9, -1.1, -1.3, -1.28]]);
+    wrinkles(g, -1.55, -1.1, -2.2, -1.5, 4, 3);
+    // the cloth
+    fill(g, CLOTH, [[-0.78, -2.9], [0.98, -2.9], [1.0, -1.82], [0.1, -1.7, -0.8, -1.82]]);
+    g.strokeStyle = GOLD;
+    g.lineWidth = 0.06;
+    g.beginPath();
+    g.moveTo(-0.72, -2.86);
+    g.lineTo(-0.74, -1.88);
+    g.quadraticCurveTo(0.1, -1.76, 0.94, -1.88);
+    g.lineTo(0.92, -2.86);
+    g.stroke();
+    g.fillStyle = GOLD;
+    for (let i = 0; i < 9; i++) {
+      const x = -0.7 + (1.62 * i) / 8, y = -1.86 + 0.05 * Math.sin((i / 8) * Math.PI);
+      g.beginPath();
+      g.moveTo(x - 0.035, y);
+      g.lineTo(x + 0.035, y);
+      g.lineTo(x, y + 0.14);
+      g.closePath();
+      g.fill();
+    }
+    // a pattern of the cloth: gold lozenges in a row
+    for (let i = 0; i < 5; i++) {
+      const x = -0.45 + 0.29 * i, y = -2.28;
+      g.beginPath();
+      g.moveTo(x, y - 0.12);
+      g.lineTo(x + 0.08, y);
+      g.lineTo(x, y + 0.12);
+      g.lineTo(x - 0.08, y);
+      g.closePath();
+      g.fill();
+    }
+  });
+  // the legs: thick round columns, an upper and a lower piece each (the lower with the round foot and its pale nails),
+  // the near pair at their places, the far pair a little apart (darker: in his own shade)
+  for (const [k, P] of [['front', KI.front], ['hind', KI.hind]]) {
+    const x = P.x, knee = P.hip + P.a;
+    L(`${k}_up`, [x, P.hip], [x - 0.4, P.hip - 0.35, x + 0.4, knee + 0.2], g => {
+      fill(g, SKIN, [[x - 0.27, P.hip - 0.3], [x + 0.27, P.hip - 0.3], [x + 0.25, P.hip + 0.3, x + 0.21, knee + 0.1], [x - 0.21, knee + 0.1],
+        [x - 0.25, P.hip + 0.3, x - 0.27, P.hip - 0.3]]);
+      g.strokeStyle = 'rgba(52,44,40,0.4)';
+      g.lineWidth = 0.022;
+      g.beginPath();
+      g.moveTo(x + (k === 'front' ? 0.26 : -0.26), P.hip - 0.2);
+      g.quadraticCurveTo(x + (k === 'front' ? 0.26 : -0.26), P.hip + 0.3, x + (k === 'front' ? 0.2 : -0.2), knee);
+      g.stroke();
+    });
+    L(`${k}_lo`, [x, knee], [x - 0.36, knee - 0.15, x + 0.36, 0.06], g => {
+      fill(g, SKIN, [[x - 0.21, knee - 0.08], [x + 0.21, knee - 0.08], [x + 0.2, -0.3], [x + 0.25, -0.08, x + 0.24, 0], [x - 0.24, 0],
+        [x - 0.25, -0.08, x - 0.2, -0.3]]);
+      wrinkles(g, x - 0.19, x + 0.19, knee + 0.05, -0.35, 5, 7 + (k === 'front' ? 0 : 11));
+      g.fillStyle = NAIL;
+      for (const dx of [-0.13, 0, 0.13]) {
+        g.beginPath();
+        g.ellipse(x + dx + (k === 'front' ? 0.03 : 0), -0.035, 0.05, 0.035, 0, Math.PI, 0);
+        g.fill();
+      }
+    });
+  }
+  // the trunk: five pieces, each from its root at rest, tapering, ringed with soft folds, freckled pink near the face
+  TRUNK_REST.forEach((s, i) => {
+    const w0 = KI.tw[i], w1 = KI.tw[i + 1], ex = s.x + Math.sin(s.a) * s.len, ey = s.y + Math.cos(s.a) * s.len;
+    const pad = 0.25;
+    L(`t${i + 1}`, [s.x, s.y], [Math.min(s.x, ex) - pad, Math.min(s.y, ey) - pad, Math.max(s.x, ex) + pad, Math.max(s.y, ey) + pad], g => {
+      // its way's normal
+      const nx = Math.cos(s.a), ny = -Math.sin(s.a), over = 0.06;
+      const bx = s.x - Math.sin(s.a) * over, by = s.y - Math.cos(s.a) * over;
+      const tx = ex + Math.sin(s.a) * (i === 4 ? 0 : over), ty = ey + Math.cos(s.a) * (i === 4 ? 0 : over);
+      g.fillStyle = SKIN;
+      g.beginPath();
+      g.moveTo(bx + nx * w0, by + ny * w0);
+      g.lineTo(tx + nx * w1, ty + ny * w1);
+      if (i === 4) g.quadraticCurveTo(tx + Math.sin(s.a) * 0.09, ty + Math.cos(s.a) * 0.09, tx - nx * w1, ty - ny * w1);
+      else g.lineTo(tx - nx * w1, ty - ny * w1);
+      g.lineTo(bx - nx * w0, by - ny * w0);
+      g.closePath();
+      g.fill();
+      g.beginPath();
+      g.arc(s.x, s.y, w0, 0, Math.PI * 2);
+      g.fill();
+      // the folds across it
+      g.strokeStyle = 'rgba(52,44,40,0.32)';
+      g.lineWidth = 0.014;
+      for (let k = 1; k <= 4; k++) {
+        const u = k / 5, cx = s.x + (ex - s.x) * u, cy = s.y + (ey - s.y) * u, w = w0 + (w1 - w0) * u;
+        g.beginPath();
+        g.moveTo(cx + nx * w * 0.9, cy + ny * w * 0.9);
+        g.quadraticCurveTo(cx + Math.sin(s.a) * 0.025, cy + Math.cos(s.a) * 0.025, cx - nx * w * 0.9, cy - ny * w * 0.9);
+        g.stroke();
+      }
+      if (i < 2) {
+        g.fillStyle = 'rgba(201,156,142,0.7)';
+        for (let k = 0; k < 7; k++) {
+          const u = h(k, 40 + i), v = h(k, 50 + i) * 2 - 1;
+          g.beginPath();
+          g.arc(s.x + (ex - s.x) * u + nx * v * w0 * 0.7, s.y + (ey - s.y) * u + ny * v * w0 * 0.7, 0.022, 0, Math.PI * 2);
+          g.fill();
+        }
+      }
+      // the nostril's finger at the tip
+      if (i === 4) {
+        g.fillStyle = SKIN_DK;
+        g.beginPath();
+        g.arc(tx, ty, 0.035, 0, Math.PI * 2);
+        g.fill();
+      }
+    });
+  });
+  // the head: the high domed brow, the face down to the trunk, the jaw and the small smiling lip, a short tusk with a
+  // brass ring; the brow painted for a journey — a lotus of yellow and white, dots down the face; the kind eye, lashes
+  L('head', KI.neck, [0.8, -3.3, 2.5, -1.4], g => {
+    fill(g, SKIN, [[0.85, -2.8], [1.0, -3.02, 1.38, -3.1], [1.62, -3.14, 1.82, -3.0], [2.02, -2.86, 2.08, -2.46], [2.12, -2.2, 2.06, -1.98],
+      [1.96, -1.78, 1.72, -1.72], [1.42, -1.66, 1.1, -1.84], [0.86, -2.0], [0.82, -2.4]]);
+    fill(g, SKIN_LT, [[1.08, -2.98], [1.4, -3.08, 1.66, -3.06], [1.88, -2.96, 1.98, -2.7], [1.7, -2.9, 1.4, -2.94], [1.2, -2.96, 1.08, -2.98]]);
+    // the lip, a little smile
+    fill(g, PINK, [[1.62, -1.78], [1.8, -1.84, 1.92, -1.8], [1.82, -1.7, 1.66, -1.72]]);
+    g.strokeStyle = 'rgba(60,40,36,0.6)';
+    g.lineWidth = 0.02;
+    g.beginPath();
+    g.moveTo(1.58, -1.8);
+    g.quadraticCurveTo(1.72, -1.76, 1.9, -1.84);
+    g.stroke();
+    // the tusk
+    fill(g, '#efe6cf', [[1.9, -1.92], [2.08, -1.86, 2.3, -1.66], [2.33, -1.6, 2.26, -1.62], [2.06, -1.76, 1.88, -1.82]]);
+    g.strokeStyle = GOLD;
+    g.lineWidth = 0.04;
+    g.beginPath();
+    g.moveTo(2.1, -1.85);
+    g.lineTo(2.06, -1.74);
+    g.stroke();
+    // the painted brow: a lotus and dots
+    const [cx, cy] = [1.86, -2.62];
+    for (let k = 0; k < 5; k++) {
+      const a = -Math.PI / 2 + (k - 2) * 0.45;
+      g.fillStyle = k % 2 ? PAINT[1] : PAINT[0];
+      g.beginPath();
+      g.ellipse(cx + Math.cos(a) * 0.1, cy + Math.sin(a) * 0.1, 0.1, 0.035, a, 0, Math.PI * 2);
+      g.fill();
+    }
+    g.fillStyle = PAINT[2];
+    g.beginPath();
+    g.arc(cx, cy, 0.05, 0, Math.PI * 2);
+    g.fill();
+    for (let k = 0; k < 5; k++) {
+      g.fillStyle = PAINT[k % 2];
+      g.beginPath();
+      g.arc(1.98 + 0.02 * k, -2.42 + 0.09 * k, 0.026, 0, Math.PI * 2);
+      g.fill();
+    }
+    // the eye
+    const [ex, ey] = KI.eye;
+    g.fillStyle = '#efe4d2';
+    g.beginPath();
+    g.ellipse(ex, ey, 0.085, 0.055, -0.15, 0, Math.PI * 2);
+    g.fill();
+    g.fillStyle = '#6a4224';
+    g.beginPath();
+    g.arc(ex + 0.012, ey + 0.004, 0.048, 0, Math.PI * 2);
+    g.fill();
+    g.fillStyle = '#140e0a';
+    g.beginPath();
+    g.arc(ex + 0.016, ey + 0.004, 0.027, 0, Math.PI * 2);
+    g.fill();
+    g.fillStyle = '#ffffff';
+    g.beginPath();
+    g.arc(ex + 0.03, ey - 0.012, 0.012, 0, Math.PI * 2);
+    g.fill();
+    g.strokeStyle = '#2e2420';
+    g.lineWidth = 0.016;
+    g.beginPath();
+    g.ellipse(ex, ey, 0.09, 0.06, -0.15, Math.PI * 1.05, Math.PI * 1.95);
+    g.stroke();
+    for (let k = 0; k < 4; k++) {
+      const a = Math.PI * (1.15 + 0.18 * k), x0 = ex + Math.cos(a) * 0.09, y0 = ey + Math.sin(a) * 0.06;
+      g.beginPath();
+      g.moveTo(x0, y0);
+      g.lineTo(x0 + Math.cos(a) * 0.05, y0 + Math.sin(a) * 0.05 - 0.01);
+      g.stroke();
+    }
+    wrinkles(g, ex - 0.12, ex + 0.1, ey + 0.09, ey + 0.2, 2, 21);
+  });
+  // the eyelid, shut for a blink (its animate shows it a moment)
+  L('lid', KI.neck, [1.55, -2.6, 1.8, -2.36], g => {
+    const [ex, ey] = KI.eye;
+    g.fillStyle = SKIN;
+    g.beginPath();
+    g.ellipse(ex, ey, 0.095, 0.064, -0.15, 0, Math.PI * 2);
+    g.fill();
+    g.strokeStyle = '#2e2420';
+    g.lineWidth = 0.018;
+    g.beginPath();
+    g.moveTo(ex - 0.09, ey + 0.01);
+    g.quadraticCurveTo(ex, ey + 0.045, ex + 0.09, ey - 0.005);
+    g.stroke();
+  });
+  // the ear, like a map of India hanging behind the eye: a little lighter, its rim freckled pink
+  L('ear', KI.ear, [0.7, -3.0, 1.6, -1.55], g => {
+    const pts = [[1.4, -2.86], [1.12, -2.98, 0.9, -2.76], [0.76, -2.5, 0.84, -2.2], [0.92, -1.9, 1.12, -1.72], [1.22, -1.84, 1.26, -2.12],
+      [1.34, -2.4, 1.42, -2.56]];
+    fill(g, SKIN_LT, pts);
+    g.fillStyle = 'rgba(201,156,142,0.85)';
+    for (let k = 0; k < 16; k++) {
+      const u = h(k, 61), x = 0.86 + 0.08 * Math.sin(u * 6) + 0.06 * h(k, 62), y = -2.75 + 0.95 * u;
+      g.beginPath();
+      g.arc(x, y, 0.02 + 0.014 * h(k, 63), 0, Math.PI * 2);
+      g.fill();
+    }
+    g.strokeStyle = 'rgba(52,44,40,0.35)';
+    g.lineWidth = 0.02;
+    g.beginPath();
+    g.moveTo(1.36, -2.7);
+    g.quadraticCurveTo(1.08, -2.6, 1.08, -2.0);
+    g.stroke();
+  });
+}
+
+// Where his parts are now (his own metres) and the layers moved there: each frame, from the state and what he keeps
+// (e.mem: the way walked, the step's phase, the trunk's pose easing to its new one).
+const rot = ([x, y], [px, py], t) => { const c = Math.cos(t), s = Math.sin(t); return [px + (x - px) * c - (y - py) * s, py + (x - px) * s + (y - py) * c]; };
+function kiouniMove(e, dir, flank) {
+  const S = e.state, m = e.mem, A = anim, t = e.t;
+  // which flank is near: walking right (facing 0…180) the left one (its painting head-right)
+  const f = (((S.kiouni_facing ?? 90) % 360) + 360) % 360, right = f > 0 && f < 180;
+  const near = flank === 'l' ? right : !right, here = (S.kiouni_here ?? 1) > 0.5;
+  // the way he has come: a step cycle per stride; how much he is walking now (smoothed — he settles when he stops)
+  const x = S.kiouni_x ?? 0, d = S.kiouni_d ?? 0;
+  m.x ??= x; m.d ??= d; m.ph ??= 0; m.mv ??= 0;
+  const step = Math.hypot(x - m.x, d - m.d), dt = Math.min(0.1, e.dt || 0.016);
+  const v = step < 2 ? step / Math.max(dt, 1e-3) : 0;
+  m.x = x; m.d = d;
+  const run = A.clamp(Math.max(A.span(v, 1.6, 3.2), S.pace ?? 0), 0, 1), stride = KI.stride + (KI.strideRun - KI.stride) * run;
+  if (step < 2) m.ph = (m.ph + step / stride) % 1;
+  m.mv += (A.span(v, 0.05, 0.6) - m.mv) * Math.min(1, dt * 4);
+  const mv = m.mv, kneel = A.clamp(S.kneel ?? 0, 0, 1), balk = A.clamp(S.balk ?? 0, 0, 1), blow = A.clamp(S.kiouni_blow ?? 0, 0, 1);
+  const ph = m.ph;
+  // the body's bob and the head's nod in the step; the head up as he trumpets or balks, down as he kneels
+  const bob = mv * (0.025 + 0.025 * run) * Math.cos(ph * 4 * Math.PI);
+  const nod = mv * 0.035 * Math.sin(ph * 2 * Math.PI) + 0.012 * A.drift(t * 0.25, 3);
+  const head = nod - 0.16 * blow - 0.1 * balk + 0.1 * kneel;
+  // his anchor's place in his own metres: where the land is under his feet (as he kneels and tips, the ground comes up)
+  const el = S.kiouni_el ?? 0, tilt = ((S.kiouni_tilt ?? 0) * Math.PI) / 180;
+  const toBody = ([qx, qy]) => rot([qx, qy + el], [0, 0], tilt);
+  const set = (name, dx, dy, r, alpha = 1) => {
+    const Ly = e.layer(name);
+    Ly.x = dir * dx;
+    Ly.y = dy;
+    Ly.rotate = dir * r;
+    Ly.alpha = here ? alpha : 0;
+  };
+  const show = near ? 1 : 0;
+  set('body', 0, bob, 0, show);
+  set('tail', 0, bob, 0.22 * A.drift(t * 0.5, 7) + 0.12 * mv * Math.sin(ph * 2 * Math.PI), show);
+  // the legs: the near pair a quarter of a cycle apart, the far pair half a cycle after them
+  const lag = flank === 'l' ? 0 : 0.5, swing = (p, P) => {
+    p = (((p % 1) + 1) % 1);
+    const amp = 0.65 * stride * mv;
+    if (p < 0.65) return [amp / 2 - (amp * p) / 0.65, 0];
+    const u = (p - 0.65) / 0.35;
+    return [-amp / 2 + amp * A.ease.smooth(u), -KI.lift * mv * Math.sin(Math.PI * u) * (0.8 + 0.4 * run)];
+  };
+  const farDx = near ? 0 : KI.farX;
+  for (const [k, P, off] of [['hind', KI.hind, 0], ['front', KI.front, 0.25]]) {
+    const hip = [P.x + farDx, P.hip + bob], [gx, gy] = swing(ph + off + lag, P);
+    // the foot on the land: as he kneels, drawn back under him
+    const foot = toBody([P.x + farDx + gx - 0.55 * kneel, gy]);
+    const knee = A.joint(hip[0], hip[1], foot[0], foot[1], P.a, P.b, -1);
+    const up = Math.atan2(knee[0] - hip[0], knee[1] - hip[1]), lo = Math.atan2(foot[0] - knee[0], foot[1] - knee[1]);
+    set(`${k}_up`, farDx, bob, -up, near ? 1 : 0.9);
+    set(`${k}_lo`, knee[0] - P.x, knee[1] - (P.hip + P.a), -lo, near ? 1 : 0.9);
+  }
+  // the head about the neck, the lid with it (a blink now and then)
+  set('head', 0, bob, head, show);
+  m.blink ??= 3;
+  if (t > m.blink + 0.16) m.blink = t + 2.5 + 4 * A.hash(Math.floor(t), 9);
+  set('lid', 0, bob, head, show && t > m.blink ? 1 : 0);
+  const neck = [KI.neck[0], KI.neck[1] + bob], R = p => { const q = rot([p[0], p[1] + bob], neck, head); return q; };
+  // the ear: flapping now and then; fanned out (`ears`, balking, trumpeting)
+  const fan = Math.max(A.clamp(S.ears ?? 0, 0, 1), balk, blow, 0.35 * run * mv);
+  const flap = Math.pow(Math.max(0, Math.sin(t * 2.1 + 3 * A.drift(t * 0.13, 5))), 6);
+  const ep = R(KI.ear), earL = e.layer('ear');
+  earL.x = dir * (ep[0] - KI.ear[0]);
+  earL.y = ep[1] - KI.ear[1];
+  earL.rotate = dir * (head - 0.35 * fan);
+  earL.scaleX = (1 + 0.18 * fan) * (1 - 0.28 * flap * (1 - fan));
+  earL.alpha = here ? show : 0;
+  // the trunk: its pose eases to `trunk` (rest, up, sugar, lift) — up while he trumpets, folded as he kneels — and
+  // sways; its pieces one after another from the face
+  const want = blow > 0.05 ? 'up' : S.trunk ?? 'rest', goal = TRUNK[want] ?? TRUNK.rest;
+  m.tr ??= TRUNK.rest.slice();
+  for (let i = 0; i < 5; i++) {
+    const g = A.mix(goal[i], TRUNK.low[i], want === 'rest' ? kneel : 0) + (want === 'rest' ? 0.1 * (i + 1) * 0.4 * A.drift(t * 0.35 + i * 0.4, 11) + mv * 0.08 * Math.sin(ph * 2 * Math.PI - i * 0.5) : 0.03 * A.drift(t * 0.5 + i, 13));
+    m.tr[i] += (g - m.tr[i]) * Math.min(1, dt * (2.2 + 0.3 * i));
+  }
+  let [bx, by] = R(KI.base);
+  for (let i = 0; i < 5; i++) {
+    const s = TRUNK_REST[i], a = m.tr[i] - head;
+    set(`t${i + 1}`, bx - s.x, by - s.y, s.a - a, show);
+    if (i === 3 && near) e.at(dir * (bx + Math.sin(a) * s.len * 0.5), by + Math.cos(a) * s.len * 0.5 - 0.35, 'lift');
+    bx += Math.sin(a) * s.len;
+    by += Math.cos(a) * s.len;
+  }
+  if (near) {
+    e.at(dir * bx, by, 'tip');
+    const eye = R(KI.eye);
+    e.at(dir * eye[0], eye[1], 'eye');
+  }
+}
+
+// The howdah's rail, one side (the same seen from either: painted symmetric): a low box on his back, red and gold, its
+// carved posts and top rail, cushions within; its floor at his back.
+function gaudaPaint(g) {
+  const W = 0.86;
+  g.fillStyle = '#6a3a22';
+  g.fillRect(-W, -0.32, 2 * W, 0.34);
+  g.fillStyle = CLOTH;
+  g.fillRect(-W + 0.05, -0.27, 2 * W - 0.1, 0.22);
+  g.fillStyle = GOLD;
+  g.fillRect(-W, -0.34, 2 * W, 0.05);
+  g.fillRect(-W, -0.02, 2 * W, 0.04);
+  for (let i = 0; i < 6; i++) {
+    const x = -W + 0.15 + (2 * W - 0.3) * (i / 5);
+    g.beginPath();
+    g.arc(x, -0.16, 0.035, 0, Math.PI * 2);
+    g.fill();
+  }
+  // the rail: posts and a top rail
+  g.fillStyle = '#7a4a2a';
+  for (let i = 0; i < 7; i++) {
+    const x = -W + 0.04 + (2 * W - 0.08) * (i / 6);
+    g.fillRect(x - 0.025, -0.62, 0.05, 0.3);
+  }
+  g.fillStyle = GOLD;
+  g.fillRect(-W - 0.04, -0.66, 2 * W + 0.08, 0.05);
+  for (const x of [-W - 0.02, W + 0.02]) {
+    g.beginPath();
+    g.arc(x, -0.7, 0.05, 0, Math.PI * 2);
+    g.fill();
+  }
+}
+// The seats of the howdah and his neck (points of his frame: across, distance — toward his tail —, elevation), the way
+// those sat there face (their turn in his frame: 180 — his way; 270 / 90 — out to his left / right side)
+const KIOUNI_SEATS = { guide: [0, -1.25, 2.72], front: [0, -0.5, 3.08], mid: [0, 0.08, 3.08], back: [0, 0.62, 3.08] };
+const seat = name => ({ on: 'kiouni', at: KIOUNI_SEATS[name] });
+
 // ── The people and the film (the world's module beats; notes.md lists the beats and the keys) ──
 const toward = ([a, d], [a2, d2]) => ((Math.atan2(a2 - a, d2 - d) * 180) / Math.PI + 360) % 360;
 const loop = (motion, from = 0) => ({ motion, loop: true, from });
@@ -837,5 +1275,6 @@ return {
   plan, trail, columnHead, stream, bank, mixc, rgba, glow, ground, shoreline, ramp,
   TREES, PALMS, BAMBOO, LOW, SHORE, NEAR_TRUNKS, NEAR_LOW, LIANAS, plantLayer,
   trunk, crown, figWood, figCrown, bamboo, palm, frond, fern, broadleaf, liana, stone, towerFace, thatch, mistBank,
+  KI, TRUNK, kiouniPaint, kiouniMove, gaudaPaint, KIOUNI_SEATS, seat,
   COLUMN, CROWD_IDS, crowdDo, march, carry, inColumn, START, FILM, SHOWCASE, FLAMES, flamePaint, flameMotion,
 };
