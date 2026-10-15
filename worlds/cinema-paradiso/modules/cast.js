@@ -170,8 +170,8 @@ return {
     // Salvatore, 47: a dark coat, greying hair, a pale scarf
     salvatore: look('man', { garment: 'coat', scarf: true, hair: 'short',
       colors: { garment: '#2d2c33', bottom: '#26252b', top: '#3a3a42', hair: '#8f8a84', skin: '#c49a7a', accent: '#ddd6c8', shoes: '#1e1b1a' } }),
-    // Alfredo, about fifty: stocky, a cap, a waistcoat (its pocket: alfredo#pocket), a collarless shirt
-    alfredo: look('grandpa', { garment: 'waistcoat', hat: 'cap', scarf: false, hair: 'short', parts: ['pocket', 'moustache'],
+    // Alfredo, about fifty: stocky, a cap, a short work jacket (its pocket: alfredo#pocket — «карман жилета»), a collarless shirt
+    alfredo: look('grandpa', { garment: 'jacket', hat: 'cap', scarf: false, hair: 'short', parts: ['pocket', 'moustache'],
       body: { thick: 1.2, height: 0.98 },
       colors: { garment: '#4a3d30', top: '#d9cfb6', bottom: '#3d362e', hat: '#3a3530', hair: '#4a3f36', skin: '#c29775', shoes: '#2a221c' } }),
     // Alfredo blind, 55–65: greyer, round dark glasses, a jacket; the cane
@@ -218,10 +218,6 @@ return {
   shapes: {
     // the world's style: the engine's `graphic` with a face that reads (eyes, brows, nose, mouth: `<id>_mood`)
     styles: { paradizo: { from: 'graphic', face: 'simple' } },
-    garments: {
-      // a waistcoat: from the shoulders to the waist, the shirt's sleeves bare of it
-      waistcoat: { name: 'жилет', hang: [{ to: 0.32, from: 'shoulders', flare: 0.05, folds: false }] },
-    },
     hats: {
       // a headscarf over the hair, tied at the nape
       kerchief: { name: 'платок', draw: F => {
