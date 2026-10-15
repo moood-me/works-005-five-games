@@ -163,6 +163,34 @@
       "on": "elena_window"
     },
     {
+      "id": "lamp0",
+      "of": "lamppost:0#lamp",
+      "color": "#e2e0d6",
+      "strength": 1,
+      "reach": 8
+    },
+    {
+      "id": "lamp1",
+      "of": "lamppost:1#lamp",
+      "color": "#e2e0d6",
+      "strength": 1,
+      "reach": 8
+    },
+    {
+      "id": "lamp2",
+      "of": "lamppost:2#lamp",
+      "color": "#e8e2d2",
+      "strength": 1.2,
+      "reach": 9
+    },
+    {
+      "id": "lamp4",
+      "of": "lamppost:4#lamp",
+      "color": "#e2e0d6",
+      "strength": 1,
+      "reach": 8
+    },
+    {
       "id": "flash",
       "across": 4,
       "distance": 4,
