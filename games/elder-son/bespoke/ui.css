@@ -1,0 +1,78 @@
+/* The game over the scene (ui.js): frost and ink (game.md §9) — slips of frosted glass with rime at their edges, the
+   words in dark blue ink, in the hand. Warm (--lamp) is the lamp in the window-gauge alone. */
+#layer { --frost: #e3e9f0; --frost-dark: #b8c3cf; --ink: #1b2230; --lamp: #e8963a; --hand: "Syn Hand", "Neucha", "Comic Sans MS", sans-serif;
+  --rime: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.07 0.14' numOctaves='4' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 3 -1.1'/%3E%3C/filter%3E%3Crect width='220' height='120' filter='url(%23r)'/%3E%3C/svg%3E");
+  --below-header: 46px; } /* where the site's header ends */
+#layer .gauge, #layer .toasts, #layer .hint, #layer .title { pointer-events: none; }
+
+/* a slip of frosted glass: pale, a little see-through, rime thick at its edges and thin in the middle, ink letters */
+#layer .slip, #layer .hint { position: relative; box-sizing: border-box; color: var(--ink); font-family: var(--hand);
+  background: radial-gradient(ellipse at center, rgba(227, 233, 240, 0.92) 45%, rgba(184, 195, 207, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 3px;
+  box-shadow: 0 2px 12px rgba(10, 16, 28, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.6); }
+#layer .slip::after, #layer .hint::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: var(--rime); background-size: 220px 120px; opacity: 0.55;
+  -webkit-mask: radial-gradient(ellipse at center, transparent 40%, #000 100%); mask: radial-gradient(ellipse at center, transparent 40%, #000 100%); }
+#layer .slip .words, #layer .hint .words { position: relative; z-index: 1; }
+/* (the arrows of a scale in a system serif: the hand has none) */
+#layer .slip .arrows { position: relative; z-index: 1; font-family: Georgia, "Times New Roman", serif; font-weight: 700; }
+
+/* the window-gauge, low on the left */
+#layer .gauge { position: absolute; left: 14px; bottom: 64px; width: 80px; height: 80px; overflow: visible; opacity: 0; transition: opacity 2s ease;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.75)); }
+#layer .gauge .room { fill: #0b1018; }
+#layer .gauge .frame { fill: #5a4632; stroke: #2e2318; stroke-width: 0.8; }
+#layer .gauge .lamp, #layer .gauge .rime { transition: opacity 2s ease; }
+#layer .gauge .lamp circle, #layer .gauge .shade { transition: fill 2s ease, opacity 2s ease; }
+#layer .gauge .cord { stroke: #2a2a2a; stroke-width: 0.8; }
+#layer .gauge .rime { fill: #fff; }
+
+/* the slips under the tools */
+#layer .toasts { position: absolute; top: calc(var(--below-header) + 60px); right: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+#layer .slip { margin: 0; padding: 8px 18px 9px; max-width: min(340px, 46vw); font-size: clamp(18px, 4.6vh, 23px); line-height: 1.18;
+  text-align: center; animation: slip-in 0.7s ease both; transition: opacity 1.5s ease, translate 1.5s ease; }
+#layer .slip.gone { opacity: 0; translate: 0 -6px; }
+#layer .slip.rule { font-size: clamp(17px, 4.2vh, 21px); line-height: 1.22; }
+@keyframes slip-in { from { opacity: 0; } }
+
+/* the hint: one line low in the middle */
+#layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 6px 20px 7px; max-width: 80vw; white-space: nowrap;
+  font-size: 22px; line-height: 1.2; opacity: 0; transition: opacity 1.2s ease; }
+#layer .hint.on { opacity: 0.95; }
+
+/* the title: words in the middle of the frame, frost-white, a dark breath behind them */
+#layer .title { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 5vw; text-align: center;
+  background: radial-gradient(ellipse at center, rgba(8, 12, 20, 0.55) 0%, rgba(8, 12, 20, 0) 60%);
+  opacity: 0; filter: blur(3px); transition: opacity 2.6s ease, filter 2.6s ease; }
+#layer .title .words { font: clamp(44px, 12vh, 124px)/1.1 var(--hand); color: var(--frost); letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(8, 12, 20, 0.8), 0 0 2px rgba(8, 12, 20, 0.9); }
+#layer .title.on { opacity: 1; filter: none; }
+
+/* the corner's tools, under the site's header: ⏸ pause (everyone), ⏭ skip (a minigame: everyone; a step: the
+   author), ☰ the chapters and their steps (the author) — above whatever a minigame spreads over the scene */
+#layer .tools { position: absolute; z-index: 10; top: calc(var(--below-header) + 8px); right: 14px; display: flex; gap: 6px; }
+#layer .tools > button { width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 3px; color: var(--ink);
+  background: rgba(227, 233, 240, 0.88); font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.65;
+  box-shadow: 0 1px 6px rgba(10, 16, 28, 0.4); }
+#layer .tools > button:hover, #layer .tools.paused > button:first-child { opacity: 1; }
+#layer .tools > button[hidden] { display: none; }
+/* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
+   of its steps */
+#layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
+  background: rgba(8, 12, 20, 0.55); }
+#layer .author-map[hidden] { display: none; }
+#layer .author-panel { position: relative; box-sizing: border-box; width: min(1100px, 100%); max-height: calc(100vh - var(--below-header) - 24px); overflow: auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px 22px; padding: 22px 26px 26px; border-radius: 3px;
+  color: var(--ink); background: var(--frost); border: 1px solid #fff; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6); font: 17px/1.35 var(--hand); }
+#layer .author-panel .close { position: absolute; top: 10px; right: 12px; width: 44px; height: 44px; border: 0; border-radius: 3px; background: none;
+  color: inherit; opacity: 0.6; cursor: pointer; font-size: 16px; }
+#layer .author-panel .close:hover { opacity: 1; background: rgba(27, 34, 48, 0.08); }
+#layer .author-panel .as { grid-column: 1 / -1; padding-right: 48px; }
+#layer .author-panel .as select { font: inherit; color: inherit; background: #fff; border: 1px solid var(--frost-dark); border-radius: 3px; padding: 4px 8px; }
+#layer .author-panel section { display: flex; flex-direction: column; gap: 2px; }
+#layer .author-panel h3 { margin: 0 0 6px; font: 17px/1.3 var(--hand); opacity: 0.7; }
+#layer .author-panel section button { border: 0; border-radius: 3px; padding: 6px 10px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+#layer .author-panel section button:hover { background: rgba(27, 34, 48, 0.08); }
+#layer .author-panel section button.here { background: rgba(27, 34, 48, 0.16); }
+#layer .author-panel .minigames { display: flex; flex-direction: column; }
+#layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 15px; }
