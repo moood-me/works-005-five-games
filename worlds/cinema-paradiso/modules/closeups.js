@@ -164,6 +164,8 @@ const WHO = {
   grown: { skin: '#c49a7a', L: 0.34, sleeve: { colour: '#2d2c33', from: 0.24, cuff: '#e5dfd2' } },
 };
 const handOf = (who, more) => ({ ...HAND, ...WHO[who], ...more });
+// the hand placed so that finger i's tip is at `target` (0 the index, 1 the middle…)
+const aim = (o, i, target) => { const t = tipOf({ ...o, at: [0, 0] }, i); return { ...o, at: [target[0] - t[0], target[1] - t[1]] }; };
 
 // ── the frame of a shot: units → the stage ──
 function frameOf(e) { const ax = e.aspect / 2, ay = 0.5; return { ax, ay, to: (x, y) => [ax + x, ay + y] }; }
@@ -222,9 +224,9 @@ const SPLICE = (() => {
     light: { dir: [0.7, -0.7], colour: '#ffd9a0' },
     lamp: [0.75, -0.62],
     pile: [[0.86, 0.36], [0.98, 0.31], [0.9, 0.44]],
-    left: handOf('alfredo', { at: [-1.25, 0.32], angle: -0.38, curl: [0.35, 0.4, 0.45, 0.5], spread: 0.25, thumb: { angle: -1.1, curl: 0.3 }, fine: true }),
-    right: handOf('alfredo', { at: [0.0, 0.0], angle: -1.85, curl: [0.55, 0.6, 0.62, 0.66], spread: 0.15, thumb: { angle: -0.9, curl: 0.55 }, fine: true }),
-    boy: handOf('boy', { at: [1.42, 0.5], angle: Math.PI + 0.38, curl: [0.12, 0.1, 0.14, 0.2], spread: 0.6, side: -1, thumb: { angle: -0.6, curl: 0.1 }, fine: true }),
+    left: aim(handOf('alfredo', { angle: -0.42, curl: [0.18, 0.14, 0.2, 0.3], spread: 0.2, thumb: { angle: -0.5, curl: 0.2 }, fine: true }), 1, [-0.92, y + h / 2 - 0.03]),
+    right: handOf('alfredo', { angle: Math.PI / 2 + 0.18, curl: [0.62, 0.66, 0.7, 0.72], spread: 0.12, thumb: { angle: -0.5, curl: 0.5 }, fine: true }),
+    boy: aim(handOf('boy', { angle: Math.PI + 0.55, side: -1, curl: [0.14, 0.12, 0.16, 0.22], spread: 0.4, thumb: { angle: -0.6, curl: 0.15 }, fine: true }), 1, [1.0, 0.36]),
   };
 })();
 function scissors(g, open) {
@@ -287,18 +289,18 @@ function splice(g, e) {
       q.fillStyle = gr; q.fillRect(xc - 0.1, P.top - 0.03, 0.2, P.h + 0.03);
       q.fillStyle = '#2a2a2e'; q.fillRect(xc - 0.03, P.top - 0.09, 0.06, 0.06);
       q.fillStyle = '#6b4a2a'; oval(q, xc, P.top - 0.12, 0.05, 0.03, 0, '#5a3c22');
-      hand(q, { ...P.right, at: [xc + 0.02, P.top - 0.42], angle: Math.PI / 2 + 0.12, curl: [0.3, 0.32, 0.36, 0.4], spread: 0.3, thumb: { angle: -1.0, curl: 0.3 } }, P.light);
+      hand(q, aim({ ...P.right, angle: Math.PI / 2 + 0.1, curl: [0.35, 0.38, 0.4, 0.45], spread: 0.25 }, 1, [xc + 0.01, P.top - 0.1]), P.light);
     });
   });
   // the scissors in his right hand: painted at the first cut's top; moved to the cut going on
   const [sx, sy] = [P.cuts[0], P.top - 0.02];
   C.layer('scissors', [sx, sy], [sx - 0.5, sy - 0.75, sx + 0.25, sy + 0.25], s => {
     s.save(); s.translate(sx, sy); scissors(s, 0.5); s.restore();
-    hand(s, { ...P.right, at: [sx + 0.07, sy - 0.52], angle: Math.PI / 2 - 0.05 }, P.light);
+    hand(s, aim(P.right, 1, [sx + 0.01, sy - 0.07]), P.light);
   });
   C.layer('scissors_shut', [sx, sy], [sx - 0.5, sy - 0.75, sx + 0.25, sy + 0.25], s => {
     s.save(); s.translate(sx, sy); scissors(s, 0.04); s.restore();
-    hand(s, { ...P.right, at: [sx + 0.07, sy - 0.52], angle: Math.PI / 2 - 0.05, curl: [0.7, 0.72, 0.72, 0.74] }, P.light);
+    hand(s, aim({ ...P.right, curl: [0.72, 0.74, 0.76, 0.78] }, 1, [sx + 0.01, sy - 0.07]), P.light);
   });
   // his left hand holds the film down at the left; the boy's small hand comes in at the right
   C.layer('left', P.left.at, [-W, -0.2, -0.1, 0.6], l => hand(l, P.left, P.light));
@@ -352,8 +354,8 @@ const SLATE = {
   start: [-0.56, 0.0], end: [0.56, 0.0],
   light: { dir: [0.4, -0.9], colour: '#ffd9a0' },
 };
-SLATE.big = handOf('alfredo', { at: [0.0, 0.0], angle: -2.45, curl: [0.35, 0.55, 0.7, 0.75], spread: 0.2, thumb: { angle: -0.6, curl: 0.5 }, fine: true });
-SLATE.small = handOf('boy', { at: [0.0, 0.0], angle: -2.5, curl: [0.15, 0.2, 0.25, 0.3], spread: 0.35, thumb: { angle: -0.7, curl: 0.2 }, fine: true });
+SLATE.big = handOf('alfredo', { angle: -2.25, curl: [0.3, 0.55, 0.7, 0.75], spread: 0.15, thumb: { angle: -0.35, curl: 0.45 }, fine: true });
+SLATE.small = handOf('boy', { angle: -2.3, curl: [0.2, 0.25, 0.3, 0.35], spread: 0.3, thumb: { angle: -0.6, curl: 0.25 }, fine: true });
 const letterX = i => SLATE.x0 + (SLATE.x1 - SLATE.x0) * (i + 0.5) / 8;
 function slate(g, e) {
   const C = painter(g, e), P = SLATE, S = e.state, crooked = String(S.crooked ?? '00000000');
@@ -389,8 +391,9 @@ function slate(g, e) {
   C.layer('hands', [hx, hy], [hx - 0.25, hy - 0.1, hx + 0.9, hy + 0.9], h => {
     oval(h, hx, hy, 0.016, 0.01, 0.4, '#efeee6');
     line(h, hx, hy, hx + 0.03, hy + 0.04, 0.02, '#e8e6dc');
-    hand(h, { ...P.big, at: [hx + 0.36, hy + 0.48] }, P.light);
-    hand(h, { ...P.small, at: [hx + 0.3, hy + 0.36] }, P.light);
+    const big = aim(P.big, 0, [hx + 0.012, hy + 0.012]);
+    hand(h, big, P.light);
+    hand(h, aim(P.small, 1, handPoint(big, [0.78, 0.02])), P.light);
   });
   C.layer('lamp', [0.1, -0.75], null, l => pool(l, 0.1, -0.75, 0.6, '#fff0c8', 0.35), { blend: 'add', flicker: 0.04 });
   C.at(...P.start, 'start'); C.at(...P.end, 'end');
@@ -413,7 +416,7 @@ const THREAD = {
   gate: [0.0, 0.09], feed: [-0.85, -0.55], take: [0.78, 0.2],
   light: { dir: [-0.3, -0.95], colour: '#ffe4b0' },
 };
-THREAD.fingers = handOf('boy', { at: [0, 0], angle: -2.4, curl: [0.45, 0.55, 0.65, 0.7], spread: 0.2, thumb: { angle: -0.4, curl: 0.6 }, fine: true });
+THREAD.fingers = handOf('boy', { angle: -2.5, curl: [0.4, 0.55, 0.65, 0.7], spread: 0.15, thumb: { angle: -0.25, curl: 0.55 }, fine: true });
 function film(g, a, b, w = 0.03) {
   const len = Math.hypot(b[0] - a[0], b[1] - a[1]), ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
   g.save(); g.translate(a[0], a[1]); g.rotate(ang);
@@ -466,7 +469,7 @@ function thread(g, e) {
     for (let j = 0; j < 6; j++) C.layer(`seg${j}`, a, [Math.min(a[0], b[0]) - 0.05, Math.min(a[1], b[1]) - 0.05, Math.max(a[0], b[0]) + 0.05, Math.max(a[1], b[1]) + 0.05], s => film(s, lerp(a, b, j / 6), lerp(a, b, (j + 1) / 6)));
     C.layer('tip', a, [a[0] - 0.2, a[1] - 0.12, a[0] + 0.45, a[1] + 0.45], s => {
       film(s, [a[0] - 0.03, a[1]], [a[0] + 0.012, a[1]]);
-      hand(s, { ...P.fingers, at: [a[0] + 0.2, a[1] + 0.2] }, P.light);
+      hand(s, aim(P.fingers, 0, [a[0] + 0.012, a[1] + 0.008]), P.light);
     });
   } else C.layer('tip', [0, 0], [-0.1, -0.1, 0.1, 0.1], () => {});
   P.p.forEach((p, i) => C.at(p[0], p[1], `p${i}`));
@@ -562,7 +565,7 @@ function viewfinderMove(e) {
 // ── calendar ── the wall behind the booth's door: an old calendar of 1958 open on December, dusty; the months before
 // folded over its top (their edges show over it); a grown man's hand brings them down one by one
 const CAL = { x0: -0.3, x1: 0.3, top: -0.27, bot: 0.3, months: ['DICEMBRE', 'NOVEMBRE', 'OTTOBRE', 'SETTEMBRE', 'AGOSTO'], starts: [1, 6, 3, 1, 5], days: [31, 30, 31, 30, 31] };
-CAL.hand = handOf('grown', { at: [0, 0], angle: -1.75, curl: [0.35, 0.4, 0.45, 0.5], spread: 0.3, thumb: { angle: -0.5, curl: 0.5 }, fine: true });
+CAL.hand = handOf('grown', { angle: Math.PI + 0.2, side: -1, L: 0.27, curl: [0.4, 0.5, 0.55, 0.6], spread: 0.15, thumb: { angle: -0.3, curl: 0.45 }, fine: true });
 function sheet(g, m, pencil) {
   const P = CAL, w = P.x1 - P.x0;
   g.fillStyle = blend('#e9dfc4', '#b8a888', 0.15 * m); g.fillRect(P.x0, P.top, w, P.bot - P.top);
@@ -612,7 +615,7 @@ function calendar(g, e) {
   // the next sheet coming down over the top (unrolled by fold), the hand at its edge
   if (pages < 4) {
     C.layer('fold', [0, P.top], [P.x0 - 0.02, P.top - 0.01, P.x1 + 0.02, P.bot + 0.02], f => { sheet(f, pages + 1, pages + 1 === 4); f.fillStyle = 'rgba(0,0,0,0.12)'; f.fillRect(P.x0, P.bot - 0.02, P.x1 - P.x0, 0.02); });
-    C.layer('hand', [0, P.top - 0.03], [-0.4, P.top - 0.15, 0.6, P.top + 0.9], f => hand(f, { ...P.hand, at: [0.16, P.top + 0.32] }, { dir: [-0.9, -0.3], colour: '#c4cce0' }));
+    C.layer('hand', [0, P.top - 0.03], [-0.1, P.top - 0.25, W, P.top + 0.4], f => hand(f, aim(P.hand, 0, [P.x1 - 0.05, P.top - 0.012]), { dir: [-0.9, -0.3], colour: '#c4cce0' }));
   } else {
     C.layer('fold', [0, 0], [-0.1, -0.1, 0.1, 0.1], () => {});
     C.layer('hand', [0, 0], [-0.1, -0.1, 0.1, 0.1], () => {});
@@ -644,8 +647,8 @@ const STRIP = (() => {
   const names = ['kiss_cut1', 'kiss_cut2', 'kiss_cut3', 'kiss1', 'kiss2', 'kiss3', 'kiss4', 'kiss5', 'kiss6', 'kiss7', 'kiss8'];
   return { h, k, fw, step, names, y: -0.02, win: [-0.46, -0.34, 0.46, 0.27], travel: (names.length - 1) * step,
     light: { dir: [0, -1], colour: '#e6dcef' },
-    left: handOf('grown', { at: [-0.98, 0.42], angle: -0.9, curl: [0.35, 0.45, 0.6, 0.65], spread: 0.25, thumb: { angle: -1.2, curl: 0.2 }, fine: true }),
-    right: handOf('grown', { at: [0.98, 0.42], angle: Math.PI + 0.9, side: -1, curl: [0.35, 0.45, 0.6, 0.65], spread: 0.25, thumb: { angle: -1.2, curl: 0.2 }, fine: true }),
+    left: aim(handOf('grown', { angle: -1.2, curl: [0.5, 0.62, 0.7, 0.74], spread: 0.12, thumb: { angle: -0.15, curl: 0.4 }, fine: true }), 0, [-0.52, -0.02 + h / 2 - 0.02]),
+    right: aim(handOf('grown', { angle: -Math.PI + 1.2, side: -1, curl: [0.5, 0.62, 0.7, 0.74], spread: 0.12, thumb: { angle: -0.15, curl: 0.4 }, fine: true }), 0, [0.52, -0.02 + h / 2 - 0.02]),
   };
 })();
 function strip(g, e) {
@@ -714,8 +717,8 @@ function stripMove(e) {
 // right, one frame of film (kiss_cut2) rises against the station's lamp
 const WALLET = {
   lamp: [0.18, -0.34],
-  left: handOf('grown', { at: [-0.95, 0.5], angle: -0.55, curl: [0.3, 0.35, 0.4, 0.45], spread: 0.3, thumb: { angle: -1.0, curl: 0.3 }, fine: true }),
-  right: handOf('grown', { at: [0.75, 0.62], angle: Math.PI + 1.1, side: -1, curl: [0.2, 0.75, 0.8, 0.82], spread: 0.2, thumb: { angle: -0.6, curl: 0.4 }, fine: true }),
+  left: aim(handOf('grown', { angle: -0.35, curl: [0.45, 0.5, 0.55, 0.6], spread: 0.15, thumb: { angle: -1.0, curl: 0.2 }, fine: true }), 1, [-0.3, 0.3]),
+  right: aim(handOf('grown', { angle: -Math.PI + 1.25, side: -1, curl: [0.15, 0.7, 0.78, 0.82], spread: 0.1, thumb: { angle: -0.3, curl: 0.45 }, fine: true }), 0, [0.1, 0.03]),
   light: { dir: [0.3, -0.95], colour: '#f2e6c8' },
 };
 function wallet(g, e) {
