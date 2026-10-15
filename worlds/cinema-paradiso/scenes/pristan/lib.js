@@ -356,7 +356,7 @@ function film(scene) {
         s.move('car_arrive', 1, { over: 3.2, ease: 'out' });
         await s.wait(1.4);
         elena.look('car_front');
-        const walk = elena.walk([[-0.6, 5.2], [1.2, 3.0], EL_TURN]);
+        const walk = elena.walk([[-3.7, 7.7], [-0.6, 5.2], [1.2, 3.0], EL_TURN]);
         await s.wait(1.6);
         s.tell('headlights:father');
         banker.here(true);
