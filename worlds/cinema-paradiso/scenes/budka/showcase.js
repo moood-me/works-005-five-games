@@ -1,4 +1,7 @@
-// Outside the game: the beats one after another, as the game would set them (chapter I through «pocket», chapter
-// II's lesson and motor, chapter IV's night through «note»).
-const play = name => ({ name, run: async s => { s.set('beat', name); await s.until(() => s.get('beat_last') === name); } });
-return ['cutting', 'frames', 'pocket', 'lesson', 'motor', 'knock', 'note'].map(play);
+// Outside the game: the booth's beats in the order the game plays them (I: the cutting, the tin, the letters; II: the
+// lesson, the motor, the window, the fire, the floor in smoke; III: the soldier's story, the reels; IV: six o'clock,
+// the change, ten o'clock, Elena at the door and her note, the morning, the autumn; V: the ruin, the calendar, the strip)
+const F = scene.lib.film(scene);
+return scene.kit.beats.showcase(scene, F, ['cutting', 'splice_in', 'frames', 'pocket', 'deal', 'slate_in', 'slate_out', 'lesson',
+  'motor', 'window', 'jam', 'smoke_in', 'story_booth', 'reels', 'six', 'changeover', 'alfredo_comes', 'knock', 'note',
+  'note_close', 'morning', 'autumn', 'ruins', 'calendar', 'window_strip', 'strip_end']);
