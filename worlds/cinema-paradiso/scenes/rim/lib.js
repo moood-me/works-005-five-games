@@ -50,11 +50,16 @@ function panels(g, x0, x1, h, seed) {
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
   PORT: cam(0, -0.9, 0, 0.6, -6),               // in the booth behind the port: the room through it, he alone in row 4 from behind
-  FACE: cam(-0.81, 6.37, 147, -0.35, -3),          // in front of him to the left, ≈ 2.2 m: his face 3/4 in the screen's light, the port behind him
+  ROW: cam(-0.9, 2.5, 4, 0.05, -2),              // behind the last row: the screen big, he ahead to the right from behind
+  OVER: cam(0.9, 4.2, -20, -0.3, 2),             // behind his right shoulder: his head at the left, the screen
+  FACE: cam(-0.81, 6.37, 147, -0.35, -3),        // in front of him to the left, ≈ 1.6 m: his face 3/4 in the screen's light, the port behind him
 };
 G.CAM = CAM;
-// the camera's way round the row over 14 s: forward through the port, down the left side, round to his face
-const ROUND = [[0, -0.9, 0, 0.6], [0, 0.6, 0, 0.45], [-2.4, 2.8, 14, 0.05], [-3.0, 5.6, 70, -0.15], [-2.2, 7.2, 120, -0.3], [-0.81, 6.37, 147, -0.35]];
+const keysOf = c => [c.camera_x, c.camera_z, c.camera_yaw, c.camera_h];
+// the camera's way: in through the port to behind the last row (the reel seen, 7 s), then round the row by the left
+// side to his face (9 s)
+const IN = [keysOf(CAM.PORT), [0, 0.7, 1, 0.35], keysOf(CAM.ROW)];
+const ROUND = [keysOf(CAM.ROW), [-2.6, 4.4, 30, -0.1], [-2.9, 6.4, 90, -0.2], [-2.0, 7.3, 125, -0.3], keysOf(CAM.FACE)];
 // the film is a function of the scene: a beat's `from` reads the party's keys (note_in_hand: the note in his hand)
 function film(scene) {
 const sal = more => ({
@@ -67,21 +72,26 @@ const FILM = {
     from: () => ({ lights: 1, beam_on: 0, screen_film: 'none', reel: 0, ...sal({}), ...CAM.PORT }),
     run: async s => {
       await s.wait(1.5);
-      await s.move('lights', 0.15, { over: 4, ease: 'inOut' });
+      await s.move('lights', 0.3, { over: 4, ease: 'inOut' });
       s.tell('rome:sat');
       await s.wait(2.5);
     },
   },
   kisses: {
     after: ['rome'],
-    from: () => ({ lights: 0.1, beam_on: 0, screen_film: 'none', reel: 0, ...sal({}), ...CAM.PORT }),
+    from: () => ({ lights: 0.3, beam_on: 0, screen_film: 'none', reel: 0, ...sal({}), ...CAM.PORT }),
     run: async s => {
       const he = s.person('toto');
       s.move('beam_on', 1, { over: 0.4, ease: 'out' });
       s.set('reel', 0); s.set('screen_film', 'kisses');
       await s.wait(1); s.tell('kisses:start');
-      // the camera round the row, slowly, as the reel runs
-      s.path(['camera_x', 'camera_z', 'camera_yaw', 'camera_h'], ROUND.slice(1), { over: 14, ease: 'inOut' });
+      // the camera in through the port to the rows as the three cut in chapter I run, then round to his face
+      const K = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h'];
+      s.sequence(async c => {
+        await c.path(K, IN.slice(1), { over: 6, ease: 'inOut' });
+        await c.wait(1.5);
+        await c.path(K, ROUND.slice(1), { over: 9, ease: 'inOut' });
+      });
       await s.wait(0.5);
       if (has('lean_seated')) he.do('lean_seated');
       he.look('screen#screen');
@@ -95,13 +105,20 @@ const FILM = {
   },
   kisses_end: {
     after: ['kisses'],
-    from: () => ({ lights: 0.1, beam_on: 1, screen_film: 'kisses', reel: REEL.length - 1, ...sal({ toto_mood: 'smile' }), ...CAM.FACE }),
+    from: () => ({ lights: 0.3, beam_on: 1, screen_film: 'kisses', reel: REEL.length - 1, ...sal({ toto_mood: 'smile' }), ...CAM.FACE }),
     run: async s => {
       const he = s.person('toto');
+      // over his shoulder: the last kiss held, then the white; back to his face in the white light
+      const over = s.shot({ ...CAM.OVER });
+      await s.until(() => over.ready);
+      over.cut();
+      const face = s.shot({ ...CAM.FACE });
       await s.wait(5);
       s.set('screen_film', 'white');
+      await s.wait(0.8);
+      face.cut();
       he.do('seated', { loop: true }); // (lean_back_seated is hands behind the head: not this)
-      await s.wait(1); s.tell('kisses_end:white');
+      await s.wait(0.2); s.tell('kisses_end:white');
       await s.wait(3); he.mood('sad');
       await s.wait(4); he.mood('smile');
       await s.wait(5);

@@ -9,5 +9,5 @@ for (let i = 0; i < 4; i++) {
   const rate = slow ? 1 / 3 : 30;
   m.w[i] += Math.max(-rate * e.dt, Math.min(rate * e.dt, want - m.w[i]));
   if (e.cut < 0.05) m.w[i] = want;
-  e.layer('f_' + names[i]).alpha = m.w[i] * whole * (0.25 + 0.75 * on);
+  e.layer('f_' + names[i]).alpha = m.w[i] * whole * (0.25 + 0.75 * on) * (names[i] === 'white' ? 0.62 : 1);  // (the white film toned: not blown out)
 }

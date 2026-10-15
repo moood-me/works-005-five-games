@@ -34,7 +34,7 @@ function seatRow(g, ruin) {
   for (let i = 0; i < n; i++) {
     const x = x0 + i * w, r = hash(i, ruin ? 41 : 40);
     if (!ruin) {
-      g.fillStyle = '#5e2326';
+      g.fillStyle = '#74292d';
       g.beginPath(); g.moveTo(x - 0.24, -0.44); g.lineTo(x - 0.24, -0.88); g.quadraticCurveTo(x, -0.97, x + 0.24, -0.88); g.lineTo(x + 0.24, -0.44); g.closePath(); g.fill();
       g.fillStyle = '#3e2a1c'; g.fillRect(x - 0.245, -0.47, 0.49, 0.04);          // the wooden rail at its foot
       g.fillStyle = 'rgba(255,220,200,0.07)'; g.fillRect(x - 0.2, -0.86, 0.4, 0.05);
@@ -71,13 +71,17 @@ function audience(g, row, seed) {
 }
 function arms(g, row, seed) {
   const n = G.SEATS, w = G.SEAT_W, x0 = G.SEAT_X0;
-  g.strokeStyle = '#2b2828'; g.lineWidth = 0.07; g.lineCap = 'round';
+  g.lineCap = 'round';
   for (let i = 0; i < n; i++) {
     if ((row === 5 && i === G.PRIEST_I) || hash(i, seed) < 0.1 || hash(i, seed + 6) < 0.45) continue;
-    const x = x0 + i * w, both = hash(i, seed + 7) < 0.5, a = (hash(i, seed + 8) - 0.5) * 0.5;
-    g.beginPath(); g.moveTo(x + 0.17, -1.02); g.lineTo(x + 0.25 + a * 0.3, -1.58);
-    if (both) { g.moveTo(x - 0.17, -1.02); g.lineTo(x - 0.27 + a * 0.3, -1.55); }
-    g.stroke();
+    const x = x0 + i * w, both = hash(i, seed + 7) < 0.5, a = (hash(i, seed + 8) - 0.5) * 0.4;
+    const coat = ['#2c2a2e', '#3b3230', '#2e3338', '#45392f', '#33302c'][Math.floor(hash(i, seed + 4) * 5)];
+    const arm = (x1, y1, x2, y2) => {
+      g.strokeStyle = coat; g.lineWidth = 0.1; g.beginPath(); g.moveTo(x1, y1); g.lineTo(x2, y2); g.stroke();
+      g.fillStyle = '#3a2c24'; g.beginPath(); g.ellipse(x2, y2 - 0.04, 0.05, 0.06, 0, 0, Math.PI * 2); g.fill();
+    };
+    arm(x + 0.16, -1.0, x + 0.24 + a * 0.3, -1.42);
+    if (both) arm(x - 0.16, -1.0, x - 0.25 + a * 0.3, -1.4);
   }
 }
 
@@ -103,11 +107,11 @@ function plaster(g, x, y, w, h, base, seed, ruin) {
 // north, h — up from the eye (1.7 m), pitch — up.
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
-  BACK: cam(-2.6, 3.4, -2, 0.5, -3),           // behind the last rows: the heads, the beam over them, the screen; the priest left of the middle
-  CURTAIN: cam(-7.9, 5.6, 45, -0.35, 3),        // from the corridor behind the curtain: the curtain and the boy at its edge left, the priest right-front
+  BACK: cam(-3.0, 4.6, -2, 0.7, -7),           // behind the last rows: the heads, the beam over them, the screen; the priest left of the middle
+  CURTAIN: cam(-7.9, 5.6, 45, -0.25, -2),        // from the corridor behind the curtain: the curtain and the boy at its edge left, the priest right-front
   RUIN: cam(3.0, 16.4, 196, 0.6, 5),           // 1988, from the stage's foot back over the ruined rows to the lion
   LION: cam(-4.0, 15.0, 177, 0, 7),            // from the aisle at row 5 back: Salvatore right, the lion over the back wall
-  FACE: cam(-3.75, 8.4, 293, -0.15, 0),          // his face, 3/4 front, in the lion's light (medium, ≈ 2.5 m)
+  FACE: cam(-5.72, 7.0, 6, -0.15, 0),            // his face 3/4 from his right-front (≈ 2.2 m), the hall and the screen behind him
 };
 G.CAM = CAM;
 const SAL = [-5.6, 9.2];                      // where Salvatore stops in 1988, by the 5th row, facing the lion

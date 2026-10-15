@@ -8,7 +8,7 @@ g.save();
 g.beginPath(); g.rect(-6.6, -L - 0.05, 13.2, L + 0.1);
 if (ruin) { g.moveTo(hole[0][0], hole[0][1]); for (const p of hole.slice(1)) g.lineTo(p[0], p[1]); g.closePath(); }
 g.clip('evenodd');
-g.fillStyle = ruin ? '#77726a' : '#4e4032'; g.fillRect(-6.6, -L - 0.05, 13.2, L + 0.1);
+g.fillStyle = ruin ? '#77726a' : '#4e4032'; g.fillRect(-6.5, -L - 0.05, 13.0, L + 0.1);
 for (let y = -L + 0.6; y < -0.4; y += 2.4) for (let x = -5.6; x < 5.6; x += 2.4) {
   g.fillStyle = ruin ? '#6a665f' : '#43372b'; g.fillRect(x, y, 2.1, 2.1);
   g.fillStyle = ruin ? '#827d74' : '#56473a'; g.fillRect(x + 0.18, y + 0.18, 1.74, 1.74);
