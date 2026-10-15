@@ -111,9 +111,9 @@
     },
     {
       "id": "car_pool",
-      "of": "car_beam#pool",
+      "of": "car_beam#tip",
       "color": "#ffe9c4",
-      "strength": 1.6,
+      "strength": 1.4,
       "reach": 9,
       "on": "headlights"
     },
@@ -124,12 +124,18 @@
       "strength": 1,
       "reach": 5,
       "on": "headlights"
+    },
+    {
+      "id": "bench_light",
+      "of": "wall_lamp#bulb",
+      "color": "#e9e4d4",
+      "strength": 1.25,
+      "reach": 9
     }
   ],
   "state": {
     "beat": "",
     "beat_next": "",
-    "beat_last": "",
     "era": "past",
     "hour": 0.9,
     "dusk_k": 0,
@@ -220,20 +226,27 @@
     "camera_h": 0.5,
     "camera_pitch": 3,
     "camera_roll": 0,
-    "camera_look": 0
+    "camera_look": 0,
+    "letter_in_hand": 0,
+    "toto_mood": "neutral",
+    "elena_mood": "neutral",
+    "daughter_mood": "neutral",
+    "alfredo_mood": "neutral",
+    "banker_mood": "neutral",
+    "c1_mood": "neutral",
+    "c2_mood": "neutral",
+    "c3_mood": "neutral",
+    "c4_mood": "neutral",
+    "toto_with": null
   },
   "states": {
     "beat": {
       "type": "string",
-      "means": "кусок, который играет сцена (с начала): summer, covered, headlights, found, alone, back, rise_go, car, meet, ask, bye, parting; ставит игра"
+      "means": "кусок, который играет сцена (с начала): summer, covered, headlights, found, alone, back, rise_go, car, meet, ask, bye, parting; ставит игра (модуль beats)"
     },
     "beat_next": {
       "type": "string",
-      "means": "кусок, который игра поставит следующим (для снимка заранее); пусто — первый, у кого текущий в after"
-    },
-    "beat_last": {
-      "type": "string",
-      "means": "служебный: кусок, который последним доиграл до конца (пусто — кусок идёт); по нему кусок решает, склеивать ли"
+      "means": "кусок, снимок начала которого готовить заранее (ставит игра; модуль beats); пусто — следующий в таблице, если он склейкой"
     },
     "era": {
       "values": [
@@ -285,7 +298,7 @@
         "romance",
         "none"
       ],
-      "means": "что на экране"
+      "means": "что на летнем экране: кадр фильма (kino.frame) или пусто"
     },
     "beam_on": {
       "range": [
@@ -365,10 +378,20 @@
       "type": "number",
       "smooth": true,
       "means": "служебный: куда смотрит машина, градусы"
+    },
+    "letter_in_hand": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "ключ партии: 1 — её письмо в руках Тото в back (он держит его на коленях, пока Альфредо говорит «Уезжай»; в rise_go — в карман)"
     }
   },
   "modules": [
-    "cast"
+    "cast",
+    "kino",
+    "nebo",
+    "beats"
   ],
   "music": {
     "prompts": [
@@ -675,16 +698,19 @@
       ]
     },
     {
-      "id": "cane",
-      "name": "Трость",
-      "across": -4.5,
-      "distance": 7.3,
-      "height": 0.95,
+      "id": "wall_lamp",
+      "name": "Фонарь на стене",
+      "across": -5.48,
+      "distance": 7.6,
+      "elevation": 2.75,
+      "facing": 90,
+      "glows": true,
+      "height": 0.3,
       "box": [
-        -0.2,
-        -1,
-        0.1,
-        0.05
+        -0.05,
+        -0.05,
+        0.72,
+        0.3
       ]
     },
     {
@@ -728,9 +754,9 @@
       "height": 4.5,
       "box": [
         -0.2,
-        -4.6,
-        24.8,
-        0.5
+        -5.0,
+        26.2,
+        1.0
       ],
       "uniforms": {
         "on": 1
@@ -1333,8 +1359,8 @@
     {
       "id": "street_lamp",
       "name": "Уличный фонарь",
-      "across": 7.5,
-      "distance": -4.5,
+      "across": -2.6,
+      "distance": 3.2,
       "height": 4.6,
       "box": [
         -0.2,
@@ -1555,14 +1581,15 @@
       "glows": true,
       "height": 2,
       "box": [
-        -0.1,
-        -2.1,
-        16.2,
-        0.1
+        -0.2,
+        -2.0,
+        18.7,
+        2.6
       ],
       "uniforms": {
         "on": 0
-      }
+      },
+      "elevation": 0.62
     },
     {
       "id": "rain_fall",

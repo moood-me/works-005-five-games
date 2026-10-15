@@ -1,13 +1,14 @@
-
-// The south wall (facing north; its x runs to the world's left): a shelf of film cans, a poster of an old film, a
-// coat on a nail, the switchboard.
-const P = e.lib, G = P.G, H = G.CEIL;
-P.plaster(g, -2.05, -H - 0.05, 4.1, H + 0.05, '#76624c', 33);
-g.fillStyle = '#3e3024'; g.fillRect(-2.05, -0.12, 4.1, 0.12);
-P.cans(g, -1.6, -1.8, 1.5, 3);
-g.fillStyle = '#8a7a5c'; g.fillRect(0.4, -1.95, 0.55, 0.78);                    // the poster: a couple in silhouette
-g.fillStyle = '#3a2a22'; g.beginPath(); g.ellipse(0.6, -1.6, 0.06, 0.08, 0, 0, Math.PI * 2); g.ellipse(0.73, -1.62, 0.06, 0.08, 0, 0, Math.PI * 2); g.fill();
-g.fillRect(0.5, -1.52, 0.33, 0.3);
-g.save(); g.scale(0.01, 0.01); g.fillStyle = '#7a2a22'; g.font = '700 7px serif'; g.textAlign = 'center'; g.fillText('CATENE', 67.5, -182); g.restore();
-g.fillStyle = '#2e2a26'; g.fillRect(1.3, -1.7, 0.36, 0.5);                       // the switchboard
-g.fillStyle = '#b8b0a0'; for (let k = 0; k < 3; k++) g.fillRect(1.36 + k * 0.1, -1.6, 0.04, 0.1);
+// the wall opposite the ports (seen from the room; its +x is the room's left): plaster, a skirting, a coat hook
+const L = e.lib, ruin = e.state.era === 'ruin';
+L.plaster(g, -2.1, -2.7, 4.2, 2.75, ruin ? '#7c7266' : '#7d6a54', 43, ruin);
+g.fillStyle = '#3e3024'; g.fillRect(-2.1, -0.12, 4.2, 0.12);
+// (its +x is the room's left: a hook with Alfredo's old jacket and cap at x 0.6, a small framed photograph at x −0.3)
+if (!ruin) {
+  g.fillStyle = '#2a2420'; g.fillRect(-0.62, -1.78, 0.04, 0.05);
+  g.fillStyle = '#3e3a34'; g.beginPath(); g.moveTo(-0.6, -1.74); g.lineTo(-0.82, -1.62); g.lineTo(-0.86, -1.0); g.lineTo(-0.34, -1.0); g.lineTo(-0.38, -1.62); g.closePath(); g.fill();
+  g.fillStyle = '#2e2a26'; g.fillRect(-0.62, -1.42, 0.04, 0.42);
+  g.fillStyle = '#34302c'; g.beginPath(); g.ellipse(-0.6, -1.8, 0.11, 0.05, 0, Math.PI, 0); g.fill(); g.fillRect(-0.7, -1.81, 0.2, 0.02);
+}
+g.fillStyle = '#4a3a2a'; g.fillRect(0.18, -1.72, 0.26, 0.32);
+g.fillStyle = ruin ? '#8a8478' : '#c2b49a'; g.fillRect(0.21, -1.69, 0.2, 0.26);
+g.fillStyle = 'rgba(40,34,30,0.7)'; g.beginPath(); g.ellipse(0.31, -1.6, 0.04, 0.05, 0, 0, Math.PI * 2); g.fill(); g.fillRect(0.25, -1.55, 0.12, 0.12);
