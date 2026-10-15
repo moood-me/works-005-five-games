@@ -172,7 +172,7 @@ const P = {
   BOX_DEAL: [0.5, 1.8], BOX_FAR: [1.7, 2.95],
   ALF_BEHIND: [-1.1, 1.8], ALF_CRANK: [-0.05, 2.9], BOY_LEVER: [0.45, 2.25], ALF_LEVER: [0.12, 2.5],
   ALF_WINDOW: [-1.6, 1.45], ALF_PUSH: [-1.1, 2.45], BOY_JAM: [0.3, 1.6],
-  TOTO_BENCH: [1.62, 1.75], TOTO_REEL: [1.25, 1.95], TOTO_HUG: [1.42, 0.78], EL_HUG: [1.76, 0.62],
+  TOTO_BENCH: [1.62, 1.75], TOTO_REEL: [1.25, 1.95], TOTO_HUG: [1.45, 0.97], EL_HUG: [1.76, 0.64],
   TOTO_STAND: [0.4, 0.95], EL_CAL: [1.4, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.25, 0.55],
   TOTO_IN: [1.8, 0.6], SAL_P2: [1.25, 2.45], SAL_DOOR: [1.55, 0.7], SAL_WINDOW: [-1.72, 0.95],
 };
@@ -469,7 +469,7 @@ const FILM = {
       toto.do('stand'); toto.look('elena'); await toto.turn(150);
       await s.wait(1.6); el.mood('smile');
       await s.all(walk(s, 'toto', [P.TOTO_HUG]), walk(s, 'elena', [P.EL_HUG]));
-      await s.all(toto.turn(110), el.turn(290));
+      await s.all(toto.turn(135), el.turn(315));
       toto.reach({ r: 'elena#back', l: 'elena#nape' }); el.reach({ r: 'toto#nape', l: 'toto#back' }); el.mood('laugh');
       s.tell('reels:hug');
       await s.wait(3);
