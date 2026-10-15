@@ -227,7 +227,7 @@ function film(scene) {
     close: look([0.6, 4.4], [-2.7, 9.6], 0, 2),           // Toto at the projector, Elena on her crate, the screen beyond
     head: look([-4.6, 12.6], [2.2, 2.6], 0, 0),           // behind Toto toward the quay: the car comes in the rain
     found: cam(1.0, 41, 2, 0.2, 1),                       // down the mole to Toto on his bollard by the lantern
-    hug: look([4.6, 62.1], [2.2, 59.25], -0.1, 4),        // from the head's corner by the lantern: her face over his shoulder, lit
+    hug: look([5.3, 60.7], [2.2, 59.25], -0.1, 3),          // from the head's corner by the lantern: her face over his shoulder, lit
     alone: cam(1.6, 51.5, 6, 0.2, 2),                     // Toto alone, his back, the sea and the moon's path
     back: look([-3.0, 6.3], [-5.05, 7.6], -0.5, -1),  // the bench at dusk: Alfredo and Toto, faces 3/4, the mole and the sea behind
     carNow: look([0.4, 45.2], [-1.0, 58.4], 0.1, 1),      // 1988: the car on the head, Elena by it; the daughter goes; he comes
@@ -397,7 +397,7 @@ function film(scene) {
         await elena.turn(0); elena.look('toto');
         hug.cut();
         toto.reach({ r: 'elena#back', l: 'elena#back' }); elena.reach({ r: 'toto#nape', l: 'toto#nape' });
-        toto.look([P.HUG_E[0] + 0.3, P.HUG_E[1] - 1, 1.4]); elena.look([4.6, 62.1, 1.5]); toto.mood('smile');
+        toto.look([P.HUG_E[0] + 0.3, P.HUG_E[1] - 1, 1.4]); elena.look([5.3, 60.7, 1.5]); toto.mood('smile');
         await s.wait(1.2); s.tell('found:hug');
         await s.wait(7);
       },
