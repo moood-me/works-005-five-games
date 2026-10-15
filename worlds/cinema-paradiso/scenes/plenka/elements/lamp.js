@@ -29,6 +29,7 @@ e.layer('lens', {}, c => {
   gr.addColorStop(1, '#c47a34');
   c.fillStyle = gr;
   c.beginPath(); c.arc(L.x + 0.02, L.y + 0.01, R, 0, Math.PI * 2); c.fill();
-  e.at(L.x + 0.02, L.y + 0.01, 'lamp');
 });
 e.light(L.x + 0.02, L.y + 0.01, 0.02, '#ffd9a0', 0.8, 'lens');
+// the point the player touches: the glowing lens itself (marked by the painting, not inside a layer)
+e.at(L.x + 0.02, L.y + 0.01, 'lamp');
