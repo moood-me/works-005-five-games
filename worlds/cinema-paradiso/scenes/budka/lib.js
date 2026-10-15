@@ -169,7 +169,7 @@ const P = {
   ALF_BENCH: [1.2, 1.9], BOY_BENCH: [0.95, 2.4], ALF_P2: [0.35, 2.75], BOY_TIN: [1.35, 2.3],
   DOORWAY: [2.05, 0.55], IN_DOOR: [1.72, 0.6], LANDING: [2.6, 0.5], AWAY: [2.7, -0.2],
   BOX_DEAL: [0.5, 1.8], BOX_FAR: [1.45, 0.75],
-  ALF_BEHIND: [-1.1, 1.8], ALF_CRANK: [-0.05, 2.9], BOY_LEVER: [0.45, 2.25], ALF_LEVER: [1.0, 2.2],
+  ALF_BEHIND: [-1.1, 1.8], ALF_CRANK: [-0.05, 2.9], BOY_LEVER: [0.45, 2.25], ALF_LEVER: [0.12, 2.5],
   ALF_WINDOW: [-1.6, 1.45], ALF_PUSH: [-1.1, 2.45], BOY_JAM: [0.3, 1.6],
   TOTO_BENCH: [1.62, 1.75], TOTO_REEL: [1.25, 1.95], TOTO_HUG: [1.42, 0.78], EL_HUG: [1.76, 0.62],
   TOTO_STAND: [0.4, 0.95], EL_CAL: [1.4, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.25, 0.55],
@@ -374,7 +374,7 @@ const FILM = {
       } else await s.wait(1.2);
       await walk(s, 'toto', [[-0.3, 2.0], P.BOY_LEVER]); await boy.turn(120);
       boy.look('projector2#lever');
-      await walk(s, 'alfredo', [[0.25, 2.55], P.ALF_LEVER]); await alf.turn(300);
+      await walk(s, 'alfredo', [P.ALF_LEVER]); await alf.turn(95);
       boy.reach({ l: 'projector2#lever' }); alf.reach({ r: 'projector2#lever' }); alf.look('toto');
       s.tell('motor:lever');
       await s.wait(4);

@@ -13,8 +13,8 @@
     ]
   },
   "light": {
-    "ambient": 0.36,
-    "ambientColor": "#6c5c6a",
+    "ambient": 0.44,
+    "ambientColor": "#76666e",
     "tint": "#2a1e22",
     "tintStrength": 0.04,
     "vignette": 0.42,
@@ -24,12 +24,12 @@
     "hazeGlow": 1.1,
     "shafts": 0,
     "bounce": 0.55,
-    "brightness": 1.08,
+    "brightness": 1.16,
     "saturation": 0.95,
     "inside": 0.3,
     "looks": {
       "night_k": {
-        "ambient": 0.28,
+        "ambient": 0.34,
         "ambientColor": "#5a5068",
         "lights": {
           "window_light": 0.45
@@ -844,16 +844,16 @@
       "id": "look_port",
       "name": "Смотровое окошко",
       "across": 0,
-      "distance": 3.53,
+      "distance": 3.485,
       "elevation": 1.4,
       "facing": 180,
       "glows": true,
       "height": 0.3,
       "box": [
-        -0.25,
-        -0.33,
-        0.25,
-        0.03
+        -0.36,
+        -0.44,
+        0.36,
+        0.14
       ]
     },
     {
