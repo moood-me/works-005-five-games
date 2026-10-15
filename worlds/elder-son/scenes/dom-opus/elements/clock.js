@@ -1,0 +1,34 @@
+// The ходики clock: a painted wooden face, the weights on their chains; the pendulum swings (a layer, animate).
+g.fillStyle = '#5b4632';
+g.fillRect(-0.14, -0.9, 0.28, 0.32);
+g.fillStyle = '#efe9da';
+g.beginPath();
+g.arc(0, -0.74, 0.1, 0, Math.PI * 2);
+g.fill();
+g.strokeStyle = '#2a2420';
+g.lineWidth = 0.008;
+g.beginPath();
+g.moveTo(0, -0.74);
+g.lineTo(0.05, -0.79);
+g.moveTo(0, -0.74);
+g.lineTo(0, -0.68);
+g.moveTo(-0.08, -0.58);
+g.lineTo(-0.08, -0.1);
+g.moveTo(0.08, -0.58);
+g.lineTo(0.08, -0.3);
+g.stroke();
+g.fillStyle = '#2a2420';
+g.fillRect(-0.105, -0.12, 0.05, 0.12);
+g.fillRect(0.055, -0.32, 0.05, 0.12);
+e.layer('pendulum', { pivot: [0, -0.58] }, p => {
+  p.strokeStyle = '#3a2e24';
+  p.lineWidth = 0.006;
+  p.beginPath();
+  p.moveTo(0, -0.58);
+  p.lineTo(0, -0.3);
+  p.stroke();
+  p.fillStyle = '#b08a3a';
+  p.beginPath();
+  p.arc(0, -0.29, 0.03, 0, Math.PI * 2);
+  p.fill();
+});
