@@ -504,11 +504,10 @@ B('alfredo_down', {
   after: ['after_show'],
   from: () => ({ ...PAST_NIGHT(), ...cast({
     toto: { at: P.TOTO_PORCH, turn: 110, look: 'maria', mood: 'afraid', reach: { l: 'maria#hand_r' } },
-    maria: { at: P.MARIA_PORCH, turn: 203, look: 'toto', mood: 'angry', reach: { r: 'toto#hand_l' } } }), alfredo_here: false, ...CAM.CROWD }),
+    maria: { at: P.MARIA_PORCH, turn: 203, look: 'toto', mood: 'angry', reach: { r: 'toto#hand_l' } },
+    alfredo: { at: [-11.3, 12.1], turn: 90, mood: 'smile' } }), alfredo_here: false, ...CAM.CROWD }),
   run: async s => {
     const alf = s.person('alfredo'), toto = s.person('toto'), maria = s.person('maria');
-    s.set('alfredo_a', -11.3); s.set('alfredo_d', 12.1); s.set('alfredo_turn', 90); s.set('alfredo_wear', kit.cast.characters.alfredo);
-    s.set('alfredo_do', 'stand'); s.set('alfredo_mood', 'smile');
     alf.here(true);
     s.move('camera_x', CAM.PORCH.camera_x, { over: 5, ease: 'inOut' }); s.move('camera_z', CAM.PORCH.camera_z, { over: 5, ease: 'inOut' });
     s.move('camera_h', CAM.PORCH.camera_h, { over: 5, ease: 'inOut' }); s.move('camera_pitch', 0, { over: 5, ease: 'inOut' });
@@ -887,9 +886,9 @@ B('eve', {
 });
 B('midnight', {
   after: ['eve'],
-  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', chalk: 99, chair_on: 1, night_kind: 'cold', cold_k: 1, ...cast({ toto: TOTO_CHAIR() }), ...CAM.BALCONY }),
+  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', chalk: 99, chair_on: 1, night_kind: 'cold', cold_k: 1, ...cast({ toto: TOTO_CHAIR(), elena: { at: [11.55, 13.0], turn: 330, mood: 'laugh', look: 'toto' } }), elena_here: false, ...CAM.BALCONY }),
   run: async s => {
-    const bal = s.shot({ ...CAM.BALCONY, crowd_k: 0, c1_here: false, c2_here: false, c3_here: false, elena_here: false });
+    const bal = s.shot({ ...CAM.BALCONY, crowd_k: 0, c1_here: false, c2_here: false, c3_here: false, ...cast({ toto: TOTO_CHAIR(), elena: { at: [11.55, 13.0], turn: 330, mood: 'laugh', look: 'toto' } }), elena_here: false });
     await s.until(() => bal.ready);
     bal.cut();
     const toto = s.person('toto'), el = s.person('elena');
@@ -900,9 +899,8 @@ B('midnight', {
     s.move('elena_window', 1, { over: 1.4, ease: 'out' });
     await s.wait(2.4);
     s.tell('midnight:open');
-    s.set('elena_a', 11.55); s.set('elena_d', 13.0); s.set('elena_turn', 330); s.set('elena_wear', null); s.set('elena_mood', 'laugh'); s.set('elena_look', 'toto');
     el.here(true);
-    s.move('camera_x', 10.3, { over: 7, ease: 'inOut' }); s.move('camera_z', 18.6, { over: 7, ease: 'inOut' });
+    s.move('camera_x', 10.3, { over: 7, ease: 'inOut' }); s.move('camera_z', 18.6, { over: 7, ease: 'inOut' }); s.move('camera_pitch', 2, { over: 7, ease: 'inOut' });
     const walk = el.walk([[11.2, 14.7]]);
     await s.wait(1.2);
     s.set('toto_on', null);
@@ -1009,12 +1007,12 @@ const MOURNERS = u => {
 // the procession walks with the hearse: the script keeps the bearers, the mourners and (walking behind) Salvatore at
 // their places by the cart as `cart` moves (follow)
 B('funeral', {
-  from: () => ({ ...NOW(0.3), cart: 0.08, ...cartKeys(0.08), follow: 1, sal_rail: 0,
-    ...cast({ ...PROC(0.08), ...MOURNERS(0.08), toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired' }) }), ...CAM.FUNERAL }),
+  from: () => ({ ...NOW(0.3), cart: 0.2, ...cartKeys(0.2), follow: 1, sal_rail: 0,
+    ...cast({ ...PROC(0.2), ...MOURNERS(0.2), toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired' }) }), ...CAM.FUNERAL }),
   run: async s => {
     const sal = s.person('toto');
     sal.look('hearse');
-    await s.move('cart', 0.4, { over: (0.32 * CART_L) / 0.6, ease: 'linear' });
+    await s.move('cart', 0.4, { over: (0.2 * CART_L) / 0.6, ease: 'linear' });
     s.tell('funeral:passing');
     await s.wait(3.5);
   },
@@ -1134,12 +1132,12 @@ B('demolition', {
 B('dust', {
   after: ['demolition'],
   from: () => ({ ...NOW(0.32, 'charged'), collapse: 1, dust: 1, ...crowdAt(-5.0, 9.8, 90, 1), ...cast({ toto: SAL([0.4, 9.2], 270), anna: { at: [0.5, 8.4], turn: 270, mood: 'sad' },
-    ...Object.fromEntries(Object.entries(DEMO_CROWD).map(([id, at]) => [id, { at, turn: 270 }])) }), ...CAM.RUIN }),
+    madman: { at: [-9.5, 12.6], turn: 90, wear: 'madman_old', gait: 'arms_wide_run' },
+    ...Object.fromEntries(Object.entries(DEMO_CROWD).map(([id, at]) => [id, { at, turn: 270 }])) }), madman_here: false, ...CAM.RUIN }),
   run: async s => {
     s.move('dust', 0.25, { over: 12, ease: 'out' });
     const mad = s.person('madman');
-    s.set('madman_a', -9.5); s.set('madman_d', 12.6); s.set('madman_turn', 90); s.set('madman_wear', kit.cast.characters.madman_old);
-    s.set('madman_gait', 'arms_wide_run'); s.set('madman_look', null);
+    s.set('madman_a', -9.5); s.set('madman_d', 12.6); s.set('madman_wear', kit.cast.characters.madman_old); s.set('madman_gait', 'arms_wide_run');
     await s.wait(3.5);
     mad.here(true);
     await mad.walk([[-5.8, 12.4]]);
