@@ -53,7 +53,7 @@ const face = (name, o = {}) => ({ name, draw: F => {
   F.ball(on([0, y - x.open / 2, 0.95], 0.975), axes, [rh * w * 0.75, rh * x.open, rh * 0.03], dark, 10);
   F.tube([on([-w, y + x.corners, 0.93], 0.995), on([0, y, 0.94], 1.0), on([w, y + x.corners, 0.93], 0.995)], [[0, rh * 0.018], [2, rh * 0.018]], [[0, lips]], 6, hu);
   if (o.moustache) F.tube([on([-0.17, -0.27, 0.93], 1.0), on([0, -0.24, 0.99], 1.0), on([0.17, -0.27, 0.93], 1.0)], [[0, rh * 0.014], [1, rh * 0.03], [2, rh * 0.014]], [[0, F.colors.hair]], 6, hu);
-  if (o.chin) F.ball(on([0, -0.72, 0.72], 0.9), axes, [rh * 0.42, rh * 0.2, rh * 0.26], skin, 10, 3.2);
+  if (o.chin) F.ball(on([0, -0.8, 0.6], 0.88), axes, [rh * 0.36, rh * 0.13, rh * 0.2], skin, 10, 3.2);
 } });
 
 // ── what is drawn on them ──────────────────────────────────────────────
@@ -75,7 +75,7 @@ const inHand = (F, w, h, colour, name) => {
   F.ball(c, [x, y, n], [w * m, h * m, 0.002 * m], colour, 4, 8);
   if (name) F.point(name, c);
 };
-const hairCap = (F, scale) => { const h = F.head; F.cap(h.at, h.axes, h.egg.map(v => v * h.r * h.out * scale), [0, 0.62, -0.78], -0.12, F.colors.hair, h.sides, h.square); };
+const hairCap = (F, scale) => { const h = F.head; F.cap(h.at, h.axes, h.egg.map(v => v * h.r * h.out * scale), [0, 0.75, -0.66], -0.2, F.colors.hair, h.sides, h.square); };
 // a fur hat pulled low; with ear-flaps tied up and, for a cadet, a star at the front
 const furHat = (flaps, star) => F => {
   const { add, mul } = V(), { at, axes, r } = F.head, [hs, hu, hf] = axes;
@@ -286,7 +286,7 @@ return {
   shapes: {
     // the world's style: `shadow`'s slender trunk and fingered hands, a bigger head on a shorter neck, fuller limbs;
     // painted lit (colours under the scene's light, shade on the far side), no lines, the face `simple`
-    styles: { zima: { from: 'shadow', name: 'зима', head: 1.3, egg: [0.88, 1.1, 0.98], neck: 0.85, legs: 1.05, limb: 1.0, feet: 'bean', paint: 'toned', line: 0, face: 'simple' } },
+    styles: { zima: { from: 'shadow', name: 'зима', head: 1.3, egg: [0.88, 1.1, 0.98], neck: 0.6, legs: 1.05, limb: 1.0, feet: 'bean', paint: 'toned', line: 0, face: 'simple' } },
     characters: {
       busygin: { from: 'man', name: 'Бусыгин', body: { height: 1.04, shoulders: 1.08, thick: 1.0 },
         garment: 'long_coat', hair: 'short', hat: 'none', scarf: true, face: 'f_plain', colors: C_BUS },
