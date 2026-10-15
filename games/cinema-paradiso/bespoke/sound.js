@@ -25,30 +25,30 @@
 //   theme() — the theme of «Парадизо»: our own melody (not the film's music) on strings over chords, round and round
 //   camera8() — the 8 mm camera running: eighteen thin clicks a second, quieter than the projector
 
-// THEME — the melody of «Парадизо»: sixteen bars in 3/4, F major, ♩ = 77. Each bar: its notes [pitch, beats] (the
-// strings' melody) and the chord held under it (lowest first). The motif is its first five notes (A B♭ C F E: a rise
-// to the F, and the sigh down to E).
+// THEME — the melody of «Парадизо»: sixteen bars in 3/4, E major (the world's key: E_MAJOR_D_FLAT_MINOR), ♩ = 77. Each bar: its notes [pitch, beats] (the
+// strings' melody) and the chord held under it (lowest first). The motif is its first five notes (G♯ A B E D♯: a rise
+// to the E, and the sigh down to D♯).
 export const THEME = [
-  { notes: [['A4', 1.5], ['Bb4', 0.5], ['C5', 1]], chord: ['F2', 'C3', 'A3', 'C4'] },
-  { notes: [['F5', 2], ['E5', 1]], chord: ['D2', 'A2', 'F3', 'A3'] },
-  { notes: [['D5', 1], ['C5', 1], ['Bb4', 1]], chord: ['Bb1', 'F2', 'D3', 'F3'] },
-  { notes: [['C5', 3]], chord: ['C2', 'G2', 'E3', 'G3'] },
-  { notes: [['A4', 1.5], ['Bb4', 0.5], ['C5', 1]], chord: ['F2', 'C3', 'A3', 'C4'] },
-  { notes: [['A5', 2], ['G5', 1]], chord: ['D2', 'A2', 'F3', 'A3'] },
-  { notes: [['F5', 1], ['E5', 1], ['D5', 1]], chord: ['G2', 'D3', 'Bb3', 'D4'] },
-  { notes: [['C5', 3]], chord: ['C2', 'E3', 'G3', 'Bb3'] },
-  { notes: [['D5', 1], ['E5', 1], ['F5', 1]], chord: ['Bb1', 'F2', 'D3', 'F3'] },
-  { notes: [['G5', 2], ['F5', 1]], chord: ['C2', 'G2', 'E3', 'G3'] },
-  { notes: [['E5', 1], ['D5', 1], ['C#5', 1]], chord: ['A1', 'E2', 'C#3', 'E3'] },
-  { notes: [['D5', 3]], chord: ['D2', 'A2', 'F3', 'A3'] },
-  { notes: [['Bb4', 1.5], ['C5', 0.5], ['D5', 1]], chord: ['G2', 'D3', 'Bb3', 'D4'] },
-  { notes: [['C5', 2], ['A4', 1]], chord: ['C2', 'A2', 'F3', 'A3'] },
-  { notes: [['Bb4', 1], ['A4', 1], ['G4', 1]], chord: ['C2', 'E3', 'G3', 'Bb3'] },
-  { notes: [['F4', 3]], chord: ['F2', 'C3', 'A3', 'C4'] },
+  { notes: [['G#4', 1.5], ['A4', 0.5], ['B4', 1]], chord: ['E2', 'B2', 'G#3', 'B3'] },
+  { notes: [['E5', 2], ['D#5', 1]], chord: ['C#2', 'G#2', 'E3', 'G#3'] },
+  { notes: [['C#5', 1], ['B4', 1], ['A4', 1]], chord: ['A1', 'E2', 'C#3', 'E3'] },
+  { notes: [['B4', 3]], chord: ['B1', 'F#2', 'D#3', 'F#3'] },
+  { notes: [['G#4', 1.5], ['A4', 0.5], ['B4', 1]], chord: ['E2', 'B2', 'G#3', 'B3'] },
+  { notes: [['G#5', 2], ['F#5', 1]], chord: ['C#2', 'G#2', 'E3', 'G#3'] },
+  { notes: [['E5', 1], ['D#5', 1], ['C#5', 1]], chord: ['F#2', 'C#3', 'A3', 'C#4'] },
+  { notes: [['B4', 3]], chord: ['B1', 'D#3', 'F#3', 'A3'] },
+  { notes: [['C#5', 1], ['D#5', 1], ['E5', 1]], chord: ['A1', 'E2', 'C#3', 'E3'] },
+  { notes: [['F#5', 2], ['E5', 1]], chord: ['B1', 'F#2', 'D#3', 'F#3'] },
+  { notes: [['D#5', 1], ['C#5', 1], ['C5', 1]], chord: ['G#1', 'D#2', 'C3', 'D#3'] },
+  { notes: [['C#5', 3]], chord: ['C#2', 'G#2', 'E3', 'G#3'] },
+  { notes: [['A4', 1.5], ['B4', 0.5], ['C#5', 1]], chord: ['F#2', 'C#3', 'A3', 'C#4'] },
+  { notes: [['B4', 2], ['G#4', 1]], chord: ['B1', 'G#2', 'E3', 'G#3'] },
+  { notes: [['A4', 1], ['G#4', 1], ['F#4', 1]], chord: ['B1', 'D#3', 'F#3', 'A3'] },
+  { notes: [['E4', 3]], chord: ['E2', 'B2', 'G#3', 'B3'] },
 ];
 const BEAT = 0.78, BAR = 3 * BEAT; // seconds
-const ROUND = THEME.length + 2; // bars: the tune, and two of rest (the chord of F held) before it comes round
-const MOTIF = THEME[0].notes.concat(THEME[1].notes).slice(0, 5); // A4 B♭4 C5 F5 E5, with their beats
+const ROUND = THEME.length + 2; // bars: the tune, and two of rest (the chord of E held) before it comes round
+const MOTIF = THEME[0].notes.concat(THEME[1].notes).slice(0, 5); // G♯4 A4 B4 E5 D♯5, with their beats
 
 let ctx = null, master = null, rooms = null, still = null, awake = false, held = false;
 // a room's tail: decaying noise, low-passed by `dark` (0 bright … 1 dull)
