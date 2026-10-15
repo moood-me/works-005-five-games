@@ -679,7 +679,8 @@ const FILM = {
       // would add the DOOR offsets on top of it)
       glide(s, CAM.P2MED, 2.5);
       await walk(s, 'toto', [P.SAL_P2]); await sal.turn(290);
-      sal.reach({ r: 'projector2#top', l: 'toto#chest' });
+      // (the tin under his arm a moment: one hand on the projector — the cast's tin is held in both)
+      sal.with(null); sal.reach({ r: 'projector2#top', l: null });
       await s.wait(6);
       sal.reach(null);
     },
@@ -690,7 +691,7 @@ const FILM = {
     run: async s => {
       const sal = s.person('toto');
       glide(s, CAM.DOOR, 1.8);
-      sal.reach({ r: 'toto#chest', l: 'toto#chest' });
+      sal.with(['tin']); sal.reach({ r: 'toto#chest', l: 'toto#chest' });
       await walk(s, 'toto', [[1.4, 1.2], P.SAL_DOOR]); await sal.turn(140);
       sal.reach({ r: 'booth_door#edge' });
       await s.move('door', 0, { over: 1.2 });
