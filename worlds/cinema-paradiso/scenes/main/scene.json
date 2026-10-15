@@ -1,0 +1,2428 @@
+{
+  "engine": 3,
+  "title": "Площадь",
+  "caption": "Джанкальдо. Площадь «Парадизо»",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -12,
+      12,
+      -14,
+      26
+    ]
+  },
+  "light": {
+    "ambient": 0.46,
+    "ambientColor": "#7486c0",
+    "tint": "#22305e",
+    "tintStrength": 0.06,
+    "vignette": 0.34,
+    "grain": 0.13,
+    "haze": 0.06,
+    "hazeColor": "#2e4470",
+    "hazeGlow": 0.8,
+    "shafts": 0.2,
+    "bounce": 0.55,
+    "brightness": 1.16,
+    "saturation": 0.95,
+    "wind": [
+      0.6,
+      0.3,
+      0.3
+    ],
+    "looks": {
+      "dusk_k": {
+        "ambient": 0.72,
+        "ambientColor": "#c0a8b0",
+        "tint": "#c88a66",
+        "tintStrength": 0.09,
+        "hazeColor": "#b89a96",
+        "lights": {
+          "moon": 0.35
+        }
+      },
+      "now_k": {
+        "ambientColor": "#8c8eaa",
+        "saturation": 0.6,
+        "tint": "#7b7ca4",
+        "tintStrength": 0.09,
+        "hazeColor": "#5a5c74"
+      },
+      "morning_k": {
+        "ambient": 0.95,
+        "ambientColor": "#c6c8ce",
+        "saturation": 0.5,
+        "haze": 0.22,
+        "hazeColor": "#a8aab2",
+        "brightness": 1.04,
+        "lights": {
+          "moon": 0
+        }
+      },
+      "rain": {
+        "ambient": 0.36,
+        "haze": 0.22,
+        "hazeColor": "#26304a",
+        "hazeGlow": 1.1,
+        "wind": [
+          1.6,
+          0.6,
+          1.2
+        ],
+        "lights": {
+          "moon": 0.25
+        }
+      },
+      "wind_k": {
+        "wind": [
+          2.2,
+          0.4,
+          1.6
+        ]
+      },
+      "cold_k": {
+        "ambientColor": "#6a80c8",
+        "saturation": 0.8,
+        "tint": "#203466",
+        "tintStrength": 0.1
+      },
+      "dust": {
+        "haze": 0.7,
+        "hazeColor": "#b6aea2",
+        "ambient": 1,
+        "ambientColor": "#c4beb4",
+        "lights": {
+          "moon": 0
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#disc",
+      "color": "#c4d0ff",
+      "strength": 0.55
+    },
+    {
+      "id": "booth_light",
+      "of": "booth_in#win",
+      "color": "#ffc27a",
+      "strength": 1.3,
+      "reach": 9,
+      "flicker": 0.1
+    },
+    {
+      "id": "marquee",
+      "of": "canopy_front#marquee",
+      "color": "#ffcf8a",
+      "strength": 1.1,
+      "reach": 7,
+      "flicker": 0.05
+    },
+    {
+      "id": "wall_light",
+      "across": 2,
+      "distance": 23.6,
+      "elevation": 4.2,
+      "color": "#ffe0b0",
+      "strength": 1.4,
+      "reach": 12,
+      "on": "wall_lit",
+      "flicker": 0.15
+    },
+    {
+      "id": "mother_light",
+      "of": "mother_room#lamp",
+      "color": "#ffbf75",
+      "strength": 0.8,
+      "reach": 6,
+      "on": "mother_light"
+    },
+    {
+      "id": "alf_lamp",
+      "of": "alfredo_door#lamp",
+      "color": "#e8dcc4",
+      "strength": 1,
+      "reach": 7
+    },
+    {
+      "id": "bank_lamp",
+      "of": "bank#lamp",
+      "color": "#e4e0d4",
+      "strength": 1,
+      "reach": 7
+    },
+    {
+      "id": "elena_light",
+      "of": "balcony_room#room",
+      "color": "#ffc882",
+      "strength": 0.9,
+      "reach": 7,
+      "on": "elena_window"
+    },
+    {
+      "id": "flash",
+      "across": 4,
+      "distance": 4,
+      "elevation": 14,
+      "color": "#ffe6c8",
+      "strength": 2.2,
+      "reach": 45,
+      "on": "flash"
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "era": "past",
+    "hour": 0.9,
+    "dusk_k": 0,
+    "now_k": 0,
+    "morning_k": 0,
+    "past": 1,
+    "paradiso_state": "old",
+    "poster": 0,
+    "full_sign": 0,
+    "mother_light": 0,
+    "beam_on": 0,
+    "beam_aim": 0,
+    "beam_turn": 193.6,
+    "beam_sky": 0,
+    "beam_focus": 0,
+    "wall_film": "none",
+    "wall_lit": 0,
+    "wall_burn": 0,
+    "smoke": 0,
+    "fireworks": 0,
+    "fw": 0,
+    "flash": 0,
+    "chalk": 0,
+    "mark_chalk": 0,
+    "night_kind": "clear",
+    "rain": 0,
+    "wind_k": 0,
+    "cold_k": 0,
+    "garland": 0,
+    "elena_window": 0,
+    "viewfinder": 0,
+    "pan": 0,
+    "elena_x": 1,
+    "madman_x": -1,
+    "rec": 0,
+    "cart": 0,
+    "hearse_a": -9.6,
+    "hearse_d": -8,
+    "hearse_f": 0,
+    "follow": 0,
+    "sal_rail": 0,
+    "collapse": 0,
+    "dust": 0,
+    "dust_burst": 0,
+    "booth_flash": 0,
+    "booth_fig": 0,
+    "crowd_k": 0,
+    "crowd_sit": 0,
+    "crowd_x": 0,
+    "crowd_z": -60,
+    "crowd_f": 180,
+    "chair_on": 0,
+    "bulbs": 1,
+    "warm": 0.5,
+    "place": "crowd",
+    "with_mother": 0,
+    "camera_x": 0,
+    "camera_z": -4,
+    "camera_yaw": 0,
+    "camera_h": 0.3,
+    "camera_pitch": 2,
+    "toto_a": 0,
+    "toto_d": -40,
+    "toto_here": false,
+    "alfredo_a": 0,
+    "alfredo_d": -40,
+    "alfredo_here": false,
+    "maria_a": 0,
+    "maria_d": -40,
+    "maria_here": false,
+    "elena_a": 0,
+    "elena_d": -40,
+    "elena_here": false,
+    "daughter_a": 0,
+    "daughter_d": -40,
+    "daughter_here": false,
+    "madman_a": 0,
+    "madman_d": -40,
+    "madman_here": false,
+    "anna_a": 0,
+    "anna_d": -40,
+    "anna_here": false,
+    "bearer1_a": 0,
+    "bearer1_d": -40,
+    "bearer1_here": false,
+    "bearer2_a": 0,
+    "bearer2_d": -40,
+    "bearer2_here": false,
+    "c1_a": 0,
+    "c1_d": -40,
+    "c1_here": false,
+    "c2_a": 0,
+    "c2_d": -40,
+    "c2_here": false,
+    "c3_a": 0,
+    "c3_d": -40,
+    "c3_here": false,
+    "c4_a": 0,
+    "c4_d": -40,
+    "c4_here": false,
+    "c5_a": 0,
+    "c5_d": -40,
+    "c5_here": false,
+    "c6_a": 0,
+    "c6_d": -40,
+    "c6_here": false,
+    "c7_a": 0,
+    "c7_d": -40,
+    "c7_here": false,
+    "c8_a": 0,
+    "c8_d": -40,
+    "c8_here": false,
+    "c9_a": 0,
+    "c9_d": -40,
+    "c9_here": false,
+    "c10_a": 0,
+    "c10_d": -40,
+    "c10_here": false
+  },
+  "states": {
+    "beat": {
+      "type": "string",
+      "means": "кусок, который играет сцена (ставит игра): now_open, rewind, after_show, alfredo_down, coins_taken, slap, paper, crowd, beam_out, wall_film, smoke, outside, new_sign, door, go_together, go_alone, dusk, seen, film_on, hello, story_door, chair, nights, eve, midnight, midnight_close, girl, follow, let, funeral, walk_behind, widow, stay_door, widow_late, demolition, dust"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "кусок, снимок начала которого готовить (ставит игра); пусто — следующий по таблице"
+    },
+    "era": {
+      "values": [
+        "past",
+        "now"
+      ],
+      "means": "время: past — тёплая ночь прошлого (1949–1958), now — прохладный 1988"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "час: 0.3 утро, 0.78–0.8 сумерки, 0.9 ночь"
+    },
+    "dusk_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: свет сумерек (ставит кусок из hour)",
+      "smooth": true
+    },
+    "now_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: свет 1988 года (ставит кусок из era)",
+      "smooth": true
+    },
+    "morning_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: серое утро 1988 года",
+      "smooth": true
+    },
+    "past": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "переход в прошлое (только rewind, слоями): 0 — 1988, 1 — прошлое; куски настоящего держат 0, прошлого 1",
+      "smooth": true
+    },
+    "paradiso_state": {
+      "values": [
+        "old",
+        "burnt",
+        "new",
+        "shut",
+        "charged"
+      ],
+      "means": "«Парадизо»: старый, сгоревший, новый, заколоченный, с зарядами"
+    },
+    "poster": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "афиша «Унесённые ветром» у дверей"
+    },
+    "full_sign": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "табличка «Мест нет» на дверях"
+    },
+    "mother_light": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "свет в окне матери",
+      "smooth": true
+    },
+    "beam_on": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "луч из окошка будки",
+      "smooth": true
+    },
+    "beam_aim": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "конец луча: 0 — пятно на камне и головах под окошком, 1 — белая стена (двигает игра)",
+      "smooth": true
+    },
+    "beam_turn": {
+      "type": "number",
+      "means": "служебный: поворот плоскости луча в плане, градусы (сцена из beam_aim)"
+    },
+    "beam_sky": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "служебный: луч вверх над площадью (пролог)"
+    },
+    "beam_focus": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "резкость фильма на стене (двигает игра)",
+      "smooth": true
+    },
+    "wall_film": {
+      "values": [
+        "none",
+        "comedy",
+        "white"
+      ],
+      "means": "кадр на стене"
+    },
+    "wall_lit": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "свет стены с фильмом (ставит сцена)"
+    },
+    "wall_burn": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "кадр на стене горит",
+      "smooth": true
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "дым из окошка будки",
+      "smooth": true
+    },
+    "fireworks": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "фейерверк идёт"
+    },
+    "fw": {
+      "type": "number",
+      "means": "служебный: счётчик залпов фейерверка"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: вспышка (фейерверк, переход в прошлое)",
+      "smooth": true
+    },
+    "chalk": {
+      "range": [
+        0,
+        99
+      ],
+      "means": "палочки мелом на стене банка (рисунок; меняется пачками)"
+    },
+    "mark_chalk": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "импульс: Тото ставит палочку (сцена играет chalk_mark и сбрасывает в 0)"
+    },
+    "night_kind": {
+      "values": [
+        "clear",
+        "rain",
+        "wind",
+        "feast",
+        "cold"
+      ],
+      "means": "какая ночь недели"
+    },
+    "rain": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: дождь (из night_kind)",
+      "smooth": true
+    },
+    "wind_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: ветер (из night_kind)",
+      "smooth": true
+    },
+    "cold_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: холод (из night_kind)",
+      "smooth": true
+    },
+    "garland": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: праздничная гирлянда (из night_kind)",
+      "smooth": true
+    },
+    "elena_window": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "ставня балкона Елены и свет за ней",
+      "smooth": true
+    },
+    "viewfinder": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "вставка «видоискатель»",
+      "smooth": true
+    },
+    "pan": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "видоискатель: куда смотрит камера",
+      "smooth": true
+    },
+    "elena_x": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "видоискатель: где девушка",
+      "smooth": true
+    },
+    "madman_x": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "видоискатель: где сумасшедший (виден при |x| < 0.97)",
+      "smooth": true
+    },
+    "rec": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "видоискатель: камера пишет"
+    },
+    "cart": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "катафалк на пути с юга вдоль западной стороны к ступеням церкви",
+      "smooth": true
+    },
+    "hearse_a": {
+      "type": "number",
+      "means": "служебный: где катафалк поперёк (из cart)"
+    },
+    "hearse_d": {
+      "type": "number",
+      "means": "служебный: где катафалк вглубь (из cart)"
+    },
+    "hearse_f": {
+      "type": "number",
+      "means": "служебный: куда катафалк едет, градусы (из cart)"
+    },
+    "follow": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "служебный: процессия идёт за катафалком"
+    },
+    "sal_rail": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "служебный: Сальваторе идёт у повозки, рука на ней"
+    },
+    "collapse": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "фасад «Парадизо» оседает (слоями)",
+      "smooth": true
+    },
+    "dust": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "пыль сноса в воздухе",
+      "smooth": true
+    },
+    "dust_burst": {
+      "type": "number",
+      "means": "служебный: облако пыли (вспышка частиц)"
+    },
+    "booth_flash": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: окошко будки вспыхивает",
+      "smooth": true
+    },
+    "booth_fig": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: Альфредо и мальчик в окошке будки (дальние)",
+      "smooth": true
+    },
+    "crowd_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: нарисованная толпа видна",
+      "smooth": true
+    },
+    "crowd_sit": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: нарисованная толпа сидит",
+      "smooth": true
+    },
+    "crowd_x": {
+      "type": "number",
+      "means": "служебный: где нарисованная толпа поперёк"
+    },
+    "crowd_z": {
+      "type": "number",
+      "means": "служебный: где нарисованная толпа вглубь"
+    },
+    "crowd_f": {
+      "type": "number",
+      "means": "служебный: куда она смотрит"
+    },
+    "chair_on": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "служебный: стул Тото у стены банка"
+    },
+    "bulbs": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: лампочки новой вывески загораются",
+      "smooth": true
+    },
+    "warm": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "ключ партии: тепло окон площади в прошлом (0.3 + 0.6·warm)",
+      "smooth": true
+    },
+    "place": {
+      "values": [
+        "crowd",
+        "apart"
+      ],
+      "means": "ключ партии: где Сальваторе на сносе"
+    },
+    "with_mother": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "ключ партии: старая Мария рядом с ним на сносе"
+    },
+    "toto_a": {
+      "type": "number",
+      "means": "служебный: где toto поперёк, м"
+    },
+    "toto_d": {
+      "type": "number",
+      "means": "служебный: где toto вглубь, м"
+    },
+    "alfredo_a": {
+      "type": "number",
+      "means": "служебный: где alfredo поперёк, м"
+    },
+    "alfredo_d": {
+      "type": "number",
+      "means": "служебный: где alfredo вглубь, м"
+    },
+    "maria_a": {
+      "type": "number",
+      "means": "служебный: где maria поперёк, м"
+    },
+    "maria_d": {
+      "type": "number",
+      "means": "служебный: где maria вглубь, м"
+    },
+    "elena_a": {
+      "type": "number",
+      "means": "служебный: где elena поперёк, м"
+    },
+    "elena_d": {
+      "type": "number",
+      "means": "служебный: где elena вглубь, м"
+    },
+    "daughter_a": {
+      "type": "number",
+      "means": "служебный: где daughter поперёк, м"
+    },
+    "daughter_d": {
+      "type": "number",
+      "means": "служебный: где daughter вглубь, м"
+    },
+    "madman_a": {
+      "type": "number",
+      "means": "служебный: где madman поперёк, м"
+    },
+    "madman_d": {
+      "type": "number",
+      "means": "служебный: где madman вглубь, м"
+    },
+    "anna_a": {
+      "type": "number",
+      "means": "служебный: где anna поперёк, м"
+    },
+    "anna_d": {
+      "type": "number",
+      "means": "служебный: где anna вглубь, м"
+    },
+    "bearer1_a": {
+      "type": "number",
+      "means": "служебный: где bearer1 поперёк, м"
+    },
+    "bearer1_d": {
+      "type": "number",
+      "means": "служебный: где bearer1 вглубь, м"
+    },
+    "bearer2_a": {
+      "type": "number",
+      "means": "служебный: где bearer2 поперёк, м"
+    },
+    "bearer2_d": {
+      "type": "number",
+      "means": "служебный: где bearer2 вглубь, м"
+    },
+    "c1_a": {
+      "type": "number",
+      "means": "служебный: где c1 поперёк, м"
+    },
+    "c1_d": {
+      "type": "number",
+      "means": "служебный: где c1 вглубь, м"
+    },
+    "c2_a": {
+      "type": "number",
+      "means": "служебный: где c2 поперёк, м"
+    },
+    "c2_d": {
+      "type": "number",
+      "means": "служебный: где c2 вглубь, м"
+    },
+    "c3_a": {
+      "type": "number",
+      "means": "служебный: где c3 поперёк, м"
+    },
+    "c3_d": {
+      "type": "number",
+      "means": "служебный: где c3 вглубь, м"
+    },
+    "c4_a": {
+      "type": "number",
+      "means": "служебный: где c4 поперёк, м"
+    },
+    "c4_d": {
+      "type": "number",
+      "means": "служебный: где c4 вглубь, м"
+    },
+    "c5_a": {
+      "type": "number",
+      "means": "служебный: где c5 поперёк, м"
+    },
+    "c5_d": {
+      "type": "number",
+      "means": "служебный: где c5 вглубь, м"
+    },
+    "c6_a": {
+      "type": "number",
+      "means": "служебный: где c6 поперёк, м"
+    },
+    "c6_d": {
+      "type": "number",
+      "means": "служебный: где c6 вглубь, м"
+    },
+    "c7_a": {
+      "type": "number",
+      "means": "служебный: где c7 поперёк, м"
+    },
+    "c7_d": {
+      "type": "number",
+      "means": "служебный: где c7 вглубь, м"
+    },
+    "c8_a": {
+      "type": "number",
+      "means": "служебный: где c8 поперёк, м"
+    },
+    "c8_d": {
+      "type": "number",
+      "means": "служебный: где c8 вглубь, м"
+    },
+    "c9_a": {
+      "type": "number",
+      "means": "служебный: где c9 поперёк, м"
+    },
+    "c9_d": {
+      "type": "number",
+      "means": "служебный: где c9 вглубь, м"
+    },
+    "c10_a": {
+      "type": "number",
+      "means": "служебный: где c10 поперёк, м"
+    },
+    "c10_d": {
+      "type": "number",
+      "means": "служебный: где c10 вглубь, м"
+    }
+  },
+  "modules": [
+    "cast",
+    "kino",
+    "closeups",
+    "beats",
+    "nebo"
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "quiet night ambience of a Sicilian town square, distant cicadas, faint murmur of voices, no melody",
+        "weight": 1
+      },
+      {
+        "text": "soft warm drone, slow and sparse, a little wind, nostalgic, no rhythm",
+        "weight": 0.4
+      },
+      {
+        "text": "gentle sea far away, a slow wash of waves behind stone houses",
+        "weight": 0.3
+      },
+      {
+        "text": "distant church bell reverb tail, very sparse",
+        "weight": 0
+      },
+      {
+        "text": "faint accordion far away, almost inaudible",
+        "weight": 0
+      }
+    ],
+    "bpm": 70,
+    "density": 0.15,
+    "brightness": 0.3
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Небо",
+      "sky": true
+    },
+    {
+      "id": "ground",
+      "name": "Площадь",
+      "plane": true,
+      "across": 0,
+      "distance": 6,
+      "elevation": 0,
+      "width": 44,
+      "depth": 100
+    },
+    {
+      "id": "sea_end",
+      "name": "Море",
+      "across": 10.5,
+      "distance": 80,
+      "elevation": -10,
+      "facing": 180,
+      "height": 11.7,
+      "box": [
+        -30,
+        -11.8,
+        30,
+        0.1
+      ]
+    },
+    {
+      "id": "alfredo_door",
+      "name": "Дом Альфредо",
+      "across": -12,
+      "distance": 0,
+      "facing": 90,
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        6.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "alfredo_door_win",
+      "name": "Окна",
+      "across": -12,
+      "distance": 0,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "alfredo_door"
+      ],
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        6.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_w2",
+      "name": "Дом",
+      "across": -12,
+      "distance": 20,
+      "facing": 90,
+      "height": 9.2,
+      "box": [
+        -0.3,
+        -9.799999999999999,
+        6.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_w2_win",
+      "name": "Окна",
+      "across": -12,
+      "distance": 20,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "f_w2"
+      ],
+      "height": 9.2,
+      "box": [
+        -0.3,
+        -9.799999999999999,
+        6.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_n1",
+      "name": "Дом с аркой",
+      "across": -12,
+      "distance": 26,
+      "facing": 180,
+      "height": 10,
+      "box": [
+        -0.3,
+        -10.6,
+        7.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_n1_win",
+      "name": "Окна",
+      "across": -12,
+      "distance": 26,
+      "facing": 180,
+      "glows": true,
+      "inFront": [
+        "f_n1"
+      ],
+      "height": 10,
+      "box": [
+        -0.3,
+        -10.6,
+        7.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_e3",
+      "name": "Дом",
+      "across": 12,
+      "distance": 26,
+      "facing": 270,
+      "height": 10.4,
+      "box": [
+        -0.3,
+        -11,
+        4.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_e3_win",
+      "name": "Окна",
+      "across": 12,
+      "distance": 26,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_e3"
+      ],
+      "height": 10.4,
+      "box": [
+        -0.3,
+        -11,
+        4.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_e1",
+      "name": "Дом",
+      "across": 12,
+      "distance": 8,
+      "facing": 270,
+      "height": 9.4,
+      "box": [
+        -0.3,
+        -10,
+        8.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_e1_win",
+      "name": "Окна",
+      "across": 12,
+      "distance": 8,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_e1"
+      ],
+      "height": 9.4,
+      "box": [
+        -0.3,
+        -10,
+        8.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_se",
+      "name": "Дом",
+      "across": 12,
+      "distance": 0,
+      "facing": 0,
+      "height": 9,
+      "box": [
+        -0.3,
+        -9.6,
+        7.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_se_win",
+      "name": "Окна",
+      "across": 12,
+      "distance": 0,
+      "facing": 0,
+      "glows": true,
+      "inFront": [
+        "f_se"
+      ],
+      "height": 9,
+      "box": [
+        -0.3,
+        -9.6,
+        7.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_sw",
+      "name": "Дом",
+      "across": -5,
+      "distance": 0,
+      "facing": 0,
+      "height": 8.4,
+      "box": [
+        -0.3,
+        -9,
+        7.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_sw_win",
+      "name": "Окна",
+      "across": -5,
+      "distance": 0,
+      "facing": 0,
+      "glows": true,
+      "inFront": [
+        "f_sw"
+      ],
+      "height": 8.4,
+      "box": [
+        -0.3,
+        -9,
+        7.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_lane_w",
+      "name": "Улица к морю",
+      "across": 9.1,
+      "distance": 26.3,
+      "facing": 90,
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        22.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_lane_w_win",
+      "name": "Окна",
+      "across": 9.1,
+      "distance": 26.3,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "f_lane_w"
+      ],
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        22.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_lane_e",
+      "name": "Улица к морю",
+      "across": 12,
+      "distance": 48.3,
+      "facing": 270,
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        22.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_lane_e_win",
+      "name": "Окна",
+      "across": 12,
+      "distance": 48.3,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_lane_e"
+      ],
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        22.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_st_w",
+      "name": "Улица",
+      "across": -5,
+      "distance": -34,
+      "facing": 90,
+      "height": 7.6,
+      "box": [
+        -0.3,
+        -8.2,
+        34.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_st_w_win",
+      "name": "Окна",
+      "across": -5,
+      "distance": -34,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "f_st_w"
+      ],
+      "height": 7.6,
+      "box": [
+        -0.3,
+        -8.2,
+        34.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_st_e",
+      "name": "Улица",
+      "across": 5,
+      "distance": 0,
+      "facing": 270,
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        34.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_st_e_win",
+      "name": "Окна",
+      "across": 5,
+      "distance": 0,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_st_e"
+      ],
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        34.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_st_end",
+      "name": "Остановка",
+      "across": 5,
+      "distance": -34,
+      "facing": 0,
+      "height": 6.5,
+      "box": [
+        -0.3,
+        -7.1,
+        12.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_st_end_win",
+      "name": "Окна",
+      "across": 5,
+      "distance": -34,
+      "facing": 0,
+      "glows": true,
+      "inFront": [
+        "f_st_end"
+      ],
+      "height": 6.5,
+      "box": [
+        -0.3,
+        -7.1,
+        12.3,
+        0.05
+      ]
+    },
+    {
+      "id": "paradiso",
+      "name": "«Парадизо»",
+      "across": -12,
+      "distance": 6,
+      "facing": 90,
+      "height": 10,
+      "box": [
+        -0.4,
+        -11.4,
+        14.4,
+        12
+      ],
+      "shadow": true
+    },
+    {
+      "id": "par_back",
+      "name": "Задняя стена",
+      "across": -16.5,
+      "distance": 6,
+      "facing": 90,
+      "height": 12,
+      "box": [
+        -0.2,
+        -12.2,
+        14.2,
+        0.05
+      ]
+    },
+    {
+      "id": "canopy",
+      "name": "Козырёк",
+      "plane": true,
+      "across": -11.25,
+      "distance": 12,
+      "elevation": 3.3,
+      "width": 1.5,
+      "depth": 7.4
+    },
+    {
+      "id": "canopy_front",
+      "name": "Вывеска",
+      "across": -10.5,
+      "distance": 8.3,
+      "elevation": 2.75,
+      "facing": 90,
+      "height": 0.6,
+      "box": [
+        -0.1,
+        -0.7,
+        7.5,
+        0.4
+      ]
+    },
+    {
+      "id": "booth_in",
+      "name": "Будка",
+      "across": -12.3,
+      "distance": 16,
+      "facing": 90,
+      "glows": true,
+      "height": 1.4,
+      "box": [
+        -1,
+        -6.8,
+        1,
+        -5.2
+      ]
+    },
+    {
+      "id": "beam",
+      "name": "Луч",
+      "across": -11.85,
+      "distance": 16,
+      "elevation": 6,
+      "facing": 144,
+      "place": {
+        "facing": "beam_turn"
+      },
+      "glows": true,
+      "height": 2,
+      "box": [
+        -0.3,
+        -2.4,
+        18.4,
+        2.4
+      ],
+      "uniforms": {
+        "on": 0
+      }
+    },
+    {
+      "id": "wall",
+      "name": "Белая стена",
+      "across": -5,
+      "distance": 26,
+      "facing": 180,
+      "height": 8.5,
+      "box": [
+        -0.2,
+        -8.8,
+        10.7,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "screen",
+      "name": "Кино на стене",
+      "across": 2,
+      "distance": 25.96,
+      "facing": 180,
+      "glows": true,
+      "height": 4,
+      "box": [
+        -3.1,
+        -6.6,
+        3.1,
+        -2.4
+      ]
+    },
+    {
+      "id": "church",
+      "name": "Церковь",
+      "across": 5.5,
+      "distance": 26.3,
+      "facing": 180,
+      "height": 12.4,
+      "box": [
+        -0.3,
+        -12.6,
+        3.9,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "step1",
+      "name": "Ступени",
+      "plane": true,
+      "across": 5.5,
+      "distance": 24.5,
+      "elevation": 0.25,
+      "width": 5,
+      "depth": 3,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "step2",
+      "name": "Ступени",
+      "plane": true,
+      "across": 5.5,
+      "distance": 24.875,
+      "elevation": 0.5,
+      "width": 5,
+      "depth": 2.25,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "step3",
+      "name": "Ступени",
+      "plane": true,
+      "across": 5.5,
+      "distance": 25.25,
+      "elevation": 0.75,
+      "width": 5,
+      "depth": 1.5,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "step4",
+      "name": "Ступени",
+      "plane": true,
+      "across": 5.5,
+      "distance": 25.625,
+      "elevation": 1,
+      "width": 5,
+      "depth": 0.75,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "steps",
+      "name": "Ступени церкви",
+      "across": 5.5,
+      "distance": 23,
+      "facing": 180,
+      "height": 0.25,
+      "box": [
+        -2.55,
+        -0.27,
+        2.55,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 5.5,
+          "distance": 23,
+          "elevation": 0
+        },
+        {
+          "across": 5.5,
+          "distance": 23.75,
+          "elevation": 0.25
+        },
+        {
+          "across": 5.5,
+          "distance": 24.5,
+          "elevation": 0.5
+        },
+        {
+          "across": 5.5,
+          "distance": 25.25,
+          "elevation": 0.75
+        }
+      ]
+    },
+    {
+      "id": "mother_room",
+      "name": "Комната матери",
+      "across": -9,
+      "distance": 26.75,
+      "facing": 180,
+      "glows": true,
+      "height": 2,
+      "box": [
+        -0.85,
+        -6,
+        0.85,
+        -4
+      ]
+    },
+    {
+      "id": "mother_floor",
+      "name": "Пол комнаты",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "across": -9,
+      "distance": 26.5,
+      "elevation": 4.05,
+      "width": 1.6,
+      "depth": 0.7
+    },
+    {
+      "id": "bank",
+      "name": "Банк",
+      "across": 12,
+      "distance": 22,
+      "facing": 270,
+      "height": 11,
+      "box": [
+        -0.3,
+        -11.6,
+        14.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "balcony_room",
+      "name": "Окно Елены",
+      "across": 11.975,
+      "distance": 13.7,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "bank"
+      ],
+      "height": 2.4,
+      "box": [
+        -0.05,
+        -6.8,
+        1.45,
+        -4.3
+      ]
+    },
+    {
+      "id": "balcony",
+      "name": "Балкон Елены",
+      "across": 11.95,
+      "distance": 13.7,
+      "facing": 270,
+      "inFront": [
+        "balcony_room",
+        "bank"
+      ],
+      "height": 2.4,
+      "box": [
+        -0.6,
+        -6.8,
+        2,
+        -4.3
+      ]
+    },
+    {
+      "id": "balcony_rail",
+      "name": "Перила балкона",
+      "across": 11.32,
+      "distance": 13.9,
+      "facing": 270,
+      "height": 1.1,
+      "box": [
+        -0.05,
+        -5.35,
+        1.85,
+        -4.15
+      ]
+    },
+    {
+      "id": "balcony_slab",
+      "name": "Балкон",
+      "plane": true,
+      "across": 11.66,
+      "distance": 13,
+      "elevation": 4.2,
+      "width": 0.68,
+      "depth": 1.9,
+      "color": "#a8957a"
+    },
+    {
+      "id": "chalk_wall",
+      "name": "Стена с мелом",
+      "across": 11.97,
+      "distance": 16.8,
+      "facing": 270,
+      "inFront": [
+        "bank"
+      ],
+      "height": 1.7,
+      "box": [
+        -0.05,
+        -1.75,
+        1.65,
+        0.05
+      ]
+    },
+    {
+      "id": "chair",
+      "name": "Стул Тото",
+      "across": 11.3,
+      "distance": 15.6,
+      "facing": 270,
+      "height": 0.95,
+      "box": [
+        -0.3,
+        -1,
+        0.3,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "alfredo_chair",
+      "name": "Стул Альфредо",
+      "across": -11.4,
+      "distance": 3.12,
+      "facing": 0,
+      "height": 0.95,
+      "box": [
+        -0.3,
+        -1,
+        0.3,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "garland",
+      "name": "Гирлянда",
+      "across": 11.4,
+      "distance": 21,
+      "facing": 270,
+      "glows": true,
+      "height": 7,
+      "box": [
+        -0.2,
+        -7,
+        12.2,
+        -5.4
+      ]
+    },
+    {
+      "id": "fountain",
+      "name": "Фонтан",
+      "across": 0,
+      "distance": 13,
+      "height": 0.5,
+      "box": [
+        -4.6,
+        -0.55,
+        4.6,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "fountain_col",
+      "name": "Фонтан",
+      "across": 0,
+      "distance": 13,
+      "height": 1.9,
+      "box": [
+        -1.2,
+        -1.95,
+        1.2,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "fountain_water",
+      "name": "Вода",
+      "plane": true,
+      "across": 0,
+      "distance": 13,
+      "elevation": 0.42,
+      "width": 2.9,
+      "depth": 2.9
+    },
+    {
+      "id": "fountain_spout",
+      "name": "Струйки",
+      "particles": {
+        "kind": "splashes",
+        "at": [
+          0,
+          13,
+          1.8
+        ],
+        "rate": 26,
+        "speed": [
+          0.6,
+          1
+        ],
+        "spread": 40,
+        "direction": [
+          0,
+          0,
+          1
+        ],
+        "size": [
+          0.02,
+          0.01
+        ],
+        "life": [
+          0.6,
+          0.9
+        ],
+        "color": "#c8d4dc",
+        "opacity": 0.5
+      }
+    },
+    {
+      "id": "lamppost",
+      "name": "Фонарь",
+      "across": -5.5,
+      "distance": 21.5,
+      "height": 4.1,
+      "box": [
+        -0.3,
+        -4.15,
+        0.3,
+        0.02
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -5.5,
+          "distance": 21.5
+        },
+        {
+          "across": 6.8,
+          "distance": 6.5
+        },
+        {
+          "across": -3.5,
+          "distance": 3.5
+        },
+        {
+          "across": 2.5,
+          "distance": -14
+        }
+      ]
+    },
+    {
+      "id": "crowd_far",
+      "name": "Толпа",
+      "across": 0,
+      "distance": -60,
+      "facing": 180,
+      "place": {
+        "across": "crowd_x",
+        "distance": "crowd_z",
+        "facing": "crowd_f"
+      },
+      "height": 1.7,
+      "box": [
+        -6.3,
+        -2,
+        6.6,
+        0.1
+      ]
+    },
+    {
+      "id": "crowd_sit",
+      "name": "Толпа на камнях",
+      "across": 0,
+      "distance": -60,
+      "facing": 180,
+      "place": {
+        "across": "crowd_x",
+        "distance": "crowd_z",
+        "facing": "crowd_f"
+      },
+      "height": 1.1,
+      "box": [
+        -6.3,
+        -1.4,
+        6.6,
+        0.1
+      ]
+    },
+    {
+      "id": "hearse_anchor",
+      "name": "Катафалк",
+      "unseen": true,
+      "across": -9.6,
+      "distance": -8,
+      "place": {
+        "across": "hearse_a",
+        "distance": "hearse_d",
+        "facing": "hearse_f"
+      }
+    },
+    {
+      "id": "hearse",
+      "name": "Повозка с гробом",
+      "on": "hearse_anchor",
+      "across": 0,
+      "distance": 1.2,
+      "facing": 0,
+      "height": 1.5,
+      "box": [
+        -0.7,
+        -1.6,
+        0.7,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hearse_l",
+      "name": "Повозка с гробом",
+      "on": "hearse_anchor",
+      "across": 0.58,
+      "distance": 0,
+      "facing": 90,
+      "height": 1.5,
+      "box": [
+        -1.25,
+        -1.6,
+        1.25,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hearse_r",
+      "name": "Повозка с гробом",
+      "on": "hearse_anchor",
+      "across": -0.58,
+      "distance": 0,
+      "facing": 270,
+      "height": 1.5,
+      "box": [
+        -1.25,
+        -1.6,
+        1.25,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hearse_front",
+      "name": "Повозка с гробом",
+      "on": "hearse_anchor",
+      "across": 0,
+      "distance": -1.2,
+      "facing": 180,
+      "height": 1.5,
+      "box": [
+        -0.7,
+        -1.6,
+        0.7,
+        0.03
+      ]
+    },
+    {
+      "id": "hearse_top",
+      "name": "Гроб",
+      "on": "hearse_anchor",
+      "plane": true,
+      "across": 0,
+      "distance": 0,
+      "elevation": 1.42,
+      "width": 0.8,
+      "depth": 2.1
+    },
+    {
+      "id": "smoke_booth",
+      "name": "Дым",
+      "particles": {
+        "kind": "smoke",
+        "at": "paradiso#booth_window",
+        "amount": "smoke",
+        "rate": 14,
+        "size": [
+          0.6,
+          3.2
+        ],
+        "life": [
+          4,
+          7
+        ],
+        "speed": [
+          0.4,
+          0.9
+        ],
+        "direction": [
+          1,
+          0,
+          0.6
+        ],
+        "spread": 30,
+        "gravity": -0.5,
+        "color": "#3a3532",
+        "opacity": 0.75,
+        "shadow": 0.6
+      }
+    },
+    {
+      "id": "fireworks",
+      "name": "Фейерверк",
+      "particles": {
+        "kind": "sparks",
+        "at": [
+          6,
+          -2,
+          11
+        ],
+        "source": [
+          10,
+          4,
+          3
+        ],
+        "burst": {
+          "on": "fw",
+          "count": 220
+        },
+        "speed": [
+          4,
+          8
+        ],
+        "spread": 180,
+        "direction": [
+          0,
+          0,
+          1
+        ],
+        "gravity": 2.2,
+        "drag": 0.6,
+        "life": [
+          1.2,
+          2.2
+        ],
+        "ground": "pass",
+        "colors": [
+          "#ffd28a",
+          "#ff8a6a",
+          "#a8c8ff",
+          "#fff2d8"
+        ],
+        "glow": [
+          7,
+          1
+        ]
+      }
+    },
+    {
+      "id": "rain_fall",
+      "name": "Дождь",
+      "particles": {
+        "kind": "rain",
+        "amount": "rain",
+        "count": 18000,
+        "reach": 18,
+        "color": "#cdd6e6",
+        "opacity": 0.6
+      }
+    },
+    {
+      "id": "demolition_dust",
+      "name": "Пыль",
+      "particles": {
+        "kind": "puff",
+        "at": [
+          -12.5,
+          13,
+          2.5
+        ],
+        "source": [
+          3,
+          14,
+          5
+        ],
+        "burst": {
+          "on": "dust_burst",
+          "count": 360,
+          "over": 2.5
+        },
+        "size": [
+          2.5,
+          7
+        ],
+        "life": [
+          9,
+          15
+        ],
+        "speed": [
+          1,
+          4
+        ],
+        "spread": 120,
+        "direction": [
+          1,
+          0,
+          0.3
+        ],
+        "gravity": -0.05,
+        "drag": 1.2,
+        "color": "#b9b1a4",
+        "opacity": 0.55,
+        "shadow": 0.4
+      }
+    },
+    {
+      "id": "viewfinder",
+      "name": "Видоискатель",
+      "insert": "viewfinder"
+    },
+    {
+      "id": "toto",
+      "name": "Тото",
+      "person": {
+        "cast": "cast",
+        "who": "toto_boy"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "toto_a",
+        "distance": "toto_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "alfredo",
+      "name": "Альфредо",
+      "person": {
+        "cast": "cast",
+        "who": "alfredo"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "alfredo_a",
+        "distance": "alfredo_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "maria",
+      "name": "Мария",
+      "person": {
+        "cast": "cast",
+        "who": "maria"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "maria_a",
+        "distance": "maria_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "elena",
+      "name": "Елена",
+      "person": {
+        "cast": "cast",
+        "who": "elena"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "elena_a",
+        "distance": "elena_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "daughter",
+      "name": "Девушка",
+      "person": {
+        "cast": "cast",
+        "who": "daughter"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "daughter_a",
+        "distance": "daughter_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "madman",
+      "name": "Сумасшедший",
+      "person": {
+        "cast": "cast",
+        "who": "madman"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "madman_a",
+        "distance": "madman_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "anna",
+      "name": "Анна",
+      "person": {
+        "cast": "cast",
+        "who": "anna"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "anna_a",
+        "distance": "anna_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "bearer1",
+      "name": "Носильщик",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#2a2826",
+            "bottom": "#1e1c1b",
+            "hat": "#1a1918"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "bearer1_a",
+        "distance": "bearer1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "bearer2",
+      "name": "Носильщик",
+      "person": {
+        "cast": "cast",
+        "who": "old_m",
+        "look": {
+          "colors": {
+            "garment": "#262422",
+            "hat": "#1a1918"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "bearer2_a",
+        "distance": "bearer2_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c1",
+      "name": "Мужчина",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#7a6a58",
+            "bottom": "#3a3530"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c1_a",
+        "distance": "c1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c2",
+      "name": "Женщина",
+      "person": {
+        "cast": "cast",
+        "who": "villager_w",
+        "look": {
+          "colors": {
+            "top": "#6e5a62",
+            "garment": "#3a2e34"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c2_a",
+        "distance": "c2_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c3",
+      "name": "Старик",
+      "person": {
+        "cast": "cast",
+        "who": "old_m",
+        "look": {
+          "colors": {
+            "garment": "#5a5246"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c3_a",
+        "distance": "c3_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c4",
+      "name": "Старуха",
+      "person": {
+        "cast": "cast",
+        "who": "old_w",
+        "look": {}
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c4_a",
+        "distance": "c4_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c5",
+      "name": "Мальчишка",
+      "person": {
+        "cast": "cast",
+        "who": "kid",
+        "look": {
+          "colors": {
+            "top": "#8a7a5a"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c5_a",
+        "distance": "c5_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c6",
+      "name": "Мужчина",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#5a6670",
+            "bottom": "#2e2c2a",
+            "hat": "#4a4038"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c6_a",
+        "distance": "c6_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c7",
+      "name": "Женщина",
+      "person": {
+        "cast": "cast",
+        "who": "villager_w",
+        "look": {
+          "colors": {
+            "top": "#7a6a4a",
+            "garment": "#4a3a2a"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c7_a",
+        "distance": "c7_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c8",
+      "name": "Старик",
+      "person": {
+        "cast": "cast",
+        "who": "old_m",
+        "look": {
+          "colors": {
+            "garment": "#3e3a36"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c8_a",
+        "distance": "c8_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c9",
+      "name": "Парень",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#a29a86",
+            "bottom": "#3a3530",
+            "hat": "#2a2826"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c9_a",
+        "distance": "c9_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c10",
+      "name": "Женщина",
+      "person": {
+        "cast": "cast",
+        "who": "villager_w",
+        "look": {
+          "colors": {
+            "top": "#5e5248"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c10_a",
+        "distance": "c10_d"
+      },
+      "shadow": true
+    }
+  ]
+}
