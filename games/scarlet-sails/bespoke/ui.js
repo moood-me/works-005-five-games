@@ -7,16 +7,15 @@
 //     the first time), 'mark' (remembered)
 //   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do); → a function that takes it
 //     away. One at a time: a new one takes the place of the one before
-//   view.onward(fn) — the button «Дальше» under the hint (the player's way out of a minigame); → a function that
-//     takes it away
 //   view.title(text, {signal}) — words in the middle of the frame, as a film's title; → once they have gone
 //   view.letter({text, sign}, {signal}) — a sheet of unbleached paper folded in three: pressed, it unfolds and can be
 //     read; pressed again, it folds and goes; → then. text: its lines ('\n')
-//   view.onSkip(fn) → off — what the author's ⏭ does now (the latest one, until off())
+//   view.onSkip(fn) → off — what the author's ⏭ does now (the latest one, until off()); null — none: the ⏭ not shown
+//     (a minigame: the language's own ⏭ skips it)
 //   view.pausing(b) — ⏸ in the corner, for every player: the play paused (bespoke.pause, and the game's own sounds:
 //     sound.js pause) and going on again
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
-//     its minigames], go(as, chapter, step, game)}) — the author's tools: ⏭ skips (a minigame, else the step); ☰ lists
+//     its minigames], go(as, chapter, step, game)}) — the author's tools: ⏭ skips the step; ☰ lists
 //     the chapters, their steps and the steps' minigames, to go to any (a minigame: its index among the step's) — as
 //     the play picked under «партия как…» has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
@@ -46,6 +45,8 @@ export function ui(layer) {
   // the corner's tools: ⏸ for everyone, ⏭ and ☰ for the author
   const tools = el('div', 'tools', layer);
   const skips = [];
+  let skipButton = null; // (the author's: shown while the latest skip is something)
+  const skipShown = () => { if (skipButton) skipButton.hidden = skips.at(-1)?.fn === null; };
   let hinted = () => {}; // takes the hint shown now away
   return {
     gauges(state, hero) {
@@ -75,11 +76,7 @@ export function ui(layer) {
       hinted = off;
       return off;
     },
-    onward(fn) {
-      const o = button('Дальше', '', fn, 'onward');
-      layer.append(o);
-      return () => o.remove();
-    },
+
     title(text, { signal } = {}) {
       const t = el('div', 'title', layer);
       el('span', '', t).textContent = text;
@@ -91,8 +88,10 @@ export function ui(layer) {
     },
     letter: (letter, { signal } = {}) => unfold(layer, letter, signal),
     onSkip(fn) {
-      skips.push(fn);
-      return () => { const i = skips.indexOf(fn); if (i >= 0) skips.splice(i, 1); };
+      const it = { fn };
+      skips.push(it);
+      skipShown();
+      return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
     },
     pausing(b) {
       // (the game's own sounds stand with the play: its audio's clock is not the page's)
@@ -133,7 +132,9 @@ export function ui(layer) {
         map.replaceChildren(panel);
         map.hidden = false;
       };
-      tools.append(button('⏭', 'пропустить (мини-игру, иначе шаг)', () => skips.at(-1)?.()),
+      skipButton = button('⏭', 'пропустить шаг', () => skips.at(-1)?.fn?.());
+      skipShown();
+      tools.append(skipButton,
         button('☰', 'главы и шаги', () => (map.hidden ? open() : close())));
     },
   };

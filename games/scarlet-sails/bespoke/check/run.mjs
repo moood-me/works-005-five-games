@@ -35,19 +35,19 @@ const sound = await load('sound.js');
 
 const WATCH = 90; // a stretch of watching longer than this, s, is reported
 const several = (stem, n, tail = '') => Array.from({ length: n }, (_, i) => `${stem}${i + 1}${tail}`);
-// game.md §7: the scene a minigame is played on, the keys it moves and listens to, the moments it waits for, the
-// points it asks, what it offers, the fields of its opts and of its result
+// The minigames (minigames/*.js heads): the scene a minigame is played on, the keys it moves and listens to, the moments
+// it waits for, the points its marks stand on, the fields of its opts and of its result
 const MINIGAMES = {
   osnastka: { scene: 'home', keys: [...several('rig', 4), 'guide'], points: several('closeup#rig', 4), opts: ['onGuide'], result: ['slips'] },
-  'za-korablikom': { scene: 'forest', keys: ['run', 'jump', 'toy', 'reeds', 'run_at'], tells: ['chase:snag'], result: ['seconds', 'lost', 'jumps'] },
+  'za-korablikom': { scene: 'forest', keys: ['run', 'jump', 'toy', 'reeds', 'run_at'], tells: ['chase:snag'], points: ['toy#toy', 'snag#snag', 'snag2#snag'], result: ['seconds', 'lost', 'jumps'] },
   kist: { scene: 'castle', keys: several('nail', 3), points: several('canvas#nail', 3), result: ['order', 'seconds'] },
   otpustit: { scene: 'castle', keys: several('grip', 4), points: several('hands#finger', 4), result: ['opened', 'waited'] },
-  vanty: { scene: 'deck', keys: ['climb', 'hand_l', 'hand_r', 'slip', 'roll'], result: ['slips', 'seconds'] },
-  koltso: { scene: 'forest', keys: ['ring_at', 'stir'], tells: ['ring:on'], result: ['on', 'stirs', 'seconds'] },
-  alyi: { scene: 'shop', keys: ['roll', 'roll_out', 'memory'], offers: ['roll'], opts: ['no', 'yes', 'last'], result: ['wrong', 'passed', 'shown'] },
-  zhdat: { scene: 'shore', keys: [...several('light', 3), 'windows'], offers: several('light', 3, '#light'), result: ['touched', 'waited'] },
+  vanty: { scene: 'deck', keys: ['climb', 'hand_l', 'hand_r', 'slip', 'roll'], points: ['ropes#left', 'ropes#right'], result: ['slips', 'seconds'] },
+  koltso: { scene: 'forest', keys: ['ring_at', 'stir'], tells: ['ring:on'], points: ['grey#ring'], result: ['on', 'stirs', 'seconds'] },
+  alyi: { scene: 'shop', keys: ['roll', 'roll_out', 'memory'], points: ['roll'], opts: ['no', 'yes', 'last'], result: ['wrong', 'passed', 'shown'] },
+  zhdat: { scene: 'shore', keys: [...several('light', 3), 'windows'], points: several('light', 3, '#light'), result: ['touched', 'waited'] },
   kurs: { scene: 'deck', keys: ['helm', 'heading', 'luff'], opts: ['leg', 'sea', 'onSteady'], result: ['steady'] },
-  smotri: { scene: 'home', keys: ['gaze'], opts: ['heavy'], result: ['tries', 'seconds'] },
+  smotri: { scene: 'home', keys: ['gaze'], points: ['book#book', 'window#window'], opts: ['heavy'], result: ['tries', 'seconds'] },
   ruka: { scene: 'shore', keys: ['reach'], points: ['hands#her', 'hands#his'], opts: ['onReach'], result: ['seconds', 'lets'] },
 };
 // game.md §3.8: what game.js itself takes of «Даль» (it is not run here)
@@ -299,7 +299,6 @@ function watched(g, j, ch, here, events) {
         else {
           for (const k of T.keys) key(k, what);
           for (const ref of T.points ?? []) point(ref, what);
-          for (const ref of T.offers ?? []) offer(ref, what);
           for (const text of T.tells ?? []) moment(text, what);
         }
       }

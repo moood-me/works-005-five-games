@@ -26,17 +26,18 @@
 //     the middle), in their voice; → a breath after it has been heard (unvoiced: once it could be read)
 //   g.choose(choice, {ref: options, …}) — the player presses one of the points, then one of its options
 //     ([{id, label}]); → the option's id, kept in state.choices[choice] (choice null: not a choice of the chapter's
-//     map). One who doesn't press is told how, after 8 s (not in a minigame: its hint is its own). g.withdraw() — what
-//     is offered is taken back
+//     map). One who doesn't press is told how, after 8 s. g.withdraw() — what is offered is taken back
 //   g.beat(name, {wait}) — a beat of the shown scene's film (the world's module `beats`); → once it
 //     has ended (the scene tells 'beat:<name>'), or at once with wait: false. To wait for a moment inside a beat,
 //     make the g.told / g.when / g.arrived before g.beat
 //   g.play(minigame, opts) — a small game of the hands: a module of minigames/ — export default {title, about,
-//     skipped, run: async (g, b, opts, signal) → its result}. The signal aborts when it is skipped (the author's ⏭,
-//     the player's «Дальше») or the step is left: it takes away what it showed, stops; → `skipped` then
+//     skipped, run: async (g, b, opts, signal) → its result}, made of the language of mini-games (bespoke.minigame:
+//     moood/docs/agents/minigames.md). The signal aborts when the author skips it (the language's ⏭: the game's own is
+//     not shown meanwhile) or the step is left: it stops; → `skipped` then. The player has no way out of it: each is
+//     passable
+//   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
+//     left when the signal aborts; the language's ⏭ skips the minigame
 //   g.hint(text, afterMs) — one line low on the screen, what to do; → a function that takes it away
-//   g.trouble() — the minigame played now: the player failed at it. After the second one, or a minute into it, the
-//     player is given «Дальше» — no minigame can lock anyone in
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name, {rule}) — the scale is shown from now on; its one line of what it means said once (rule: false —
 //     not yet)
@@ -121,7 +122,6 @@ export function carry(title, f) {
 }
 
 const BEAT = 180000; // a beat longer than this has not ended: the scene lacks it
-const ONWARD = 60000; // a minigame this long gives the player «Дальше»
 
 export function context(b, view, hub, state, j = null) {
   const left = new AbortController(); // the step is left behind (game.js)
@@ -134,7 +134,7 @@ export function context(b, view, hub, state, j = null) {
   let hero = 'both'; // whose scene it is
   let opening = null; // the beat the scene was opened with, till g.beat takes it up: {name, ended}
   let nudge = () => {}; // takes away the line that tells one who doesn't press how to choose
-  let failed = null; // the minigame played now: counts a failure of the player's
+  let playing = null; // the minigame played now: {signal, end}
   // a jump at its minigame (or stuck before it: a choice the play didn't make): the scene where the step has got to
   // — and the step on from there, seen
   let seeing = null;
@@ -219,8 +219,7 @@ export function context(b, view, hub, state, j = null) {
     async choose(choice, offers) {
       if (gone()) return never;
       const offer = async () => {
-        // (in a minigame the hint is the minigame's own: the page shows one at a time)
-        nudge = failed ? () => {} : g.hint('Коснись кольца', 8000);
+        nudge = g.hint('Коснись кольца', 8000);
         const { action } = await alive(hub.offer(offers));
         nudge();
         return action;
@@ -262,21 +261,14 @@ export function context(b, view, hub, state, j = null) {
         if (j.plays.length <= j.target) return j.result?.(minigame) ?? minigame.skipped;
         await seen();
       }
-      // skipped — by its author (⏭), by the player («Дальше»: theirs after two failures, or a minute), by the step
-      // left — it ends with its `skipped`
+      // skipped — by its author (the language's ⏭: g.minigame), by the step left — it ends with its `skipped`
       const stop = new AbortController();
       const end = () => stop.abort();
-      const off = view.onSkip(end);
+      const off = view.onSkip(null);
       left.signal.addEventListener('abort', end);
-      let onward = null, failures = 0;
-      const out = () => { onward ??= view.onward(end); };
-      const late = setTimeout(out, ONWARD);
-      failed = () => { if (++failures === 2) out(); };
+      playing = { signal: stop.signal, end };
       const skipped = new Promise(ok => stop.signal.addEventListener('abort', () => {
         off();
-        clearTimeout(late);
-        onward?.();
-        failed = null;
         ok(minigame.skipped);
       }));
       try {
@@ -284,16 +276,20 @@ export function context(b, view, hub, state, j = null) {
       } finally {
         left.signal.removeEventListener('abort', end);
         stop.abort();
+        playing = null;
       }
+    },
+    minigame(o = {}) {
+      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      const mg = b.minigame.start({ ...o, signal: playing.signal });
+      mg.on('skip', playing.end);
+      return mg;
     },
     hint(text, afterMs = 0) {
       if (gone() || unseen()) return () => {};
       const off = view.hint(text, afterMs);
       left.signal.addEventListener('abort', off);
       return off;
-    },
-    trouble() {
-      if (!gone()) failed?.();
     },
     scale(name, delta) {
       if (gone() || !delta) return;
