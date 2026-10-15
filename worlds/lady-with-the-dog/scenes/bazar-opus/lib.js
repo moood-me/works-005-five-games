@@ -16,8 +16,8 @@ const OUTSIDE = [-1.65, 6.45];                  // in the corridor behind the do
 const IN_DOOR = [-1.6, 5.35];                   // just inside the door
 const ANNA_WINDOW = [1.45, 5.45];               // at the window, her back to the room (turn 0)
 const GUROV_BEHIND = [0.98, 5.08];              // behind her and to her left, his hands on her shoulders
-const GUROV_MEET = [-1.3, 5.15];                // by the door, holding each other: he faces right (90) …
-const ANNA_MEET = [-0.82, 5.15];                // … she left (270)
+const GUROV_MEET = [-0.45, 5.3];                // come in from the door, holding each other before the mirror: he (90) …
+const ANNA_MEET = [0.0, 5.3];                   // … she (270)
 // at the window, face to face across the line the lamp lights them along: he by the window (150), she (330) — from the
 // cages shot both are in profile, the lamp behind the camera on both faces
 const GUROV_CLOSE = [1.05, 5.6], GUROV_CLOSE_TURN = 150;
@@ -29,7 +29,7 @@ const cam = (x, z, eye, yaw = 0, pitch = 0) => ({ camera_target: null, camera_sh
   camera_x: x, camera_z: z, camera_h: eye - 1.7, camera_yaw: yaw, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
   ROOM: cam(0, 0, 1.7),                  // the room: door left, mirror, window right; the table and the lamp; the offers in 4:3
-  CAGES: cam(-0.35, 4.5, 1.55, 58),      // from beside the lamp toward the window: the two in profile, 1.8 m off, lamp-lit
+  CAGES: cam(-0.35, 4.5, 1.55, 62),      // from beside the lamp toward the window: the two in profile, 1.8 m off, lamp-lit
   END: cam(0, -0.6, 1.7),                // drawn back
 };
 
@@ -76,7 +76,7 @@ function film(scene) {
   }
 
   return {
-    // he comes in at the door; she comes to meet him and they stand holding each other by the door, her face at his
+    // he comes in at the door; she comes to meet him and they stand holding each other before the mirror, her face at his
     // shoulder (anna_life 1) — or she stays at the window, her back to him (0). The envelope on the table (husband_knows
     // 0) is the table's painting.
     bazar_in: {

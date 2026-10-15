@@ -8,8 +8,10 @@ g.strokeStyle = 'rgba(170,160,140,0.5)'; g.lineWidth = 0.012; g.beginPath(); g.a
 if (!(Number(st.husband_knows) > 0.5)) {
   // «Анне. На профессора» — the envelope lying askew in front of the samovar, the writing a few grey strokes
   g.save(); g.translate(0.22, 0.16); g.rotate(-0.25);
-  g.fillStyle = '#f7f2e4'; g.fillRect(-0.12, -0.065, 0.24, 0.13);
-  g.strokeStyle = 'rgba(150,140,120,0.7)'; g.lineWidth = 0.006; g.strokeRect(-0.12, -0.065, 0.24, 0.13);
+  g.fillStyle = 'rgba(60,50,40,0.35)'; g.fillRect(-0.125, -0.06, 0.26, 0.14);          // its shadow on the cloth
+  g.fillStyle = '#dfe3ea'; g.fillRect(-0.135, -0.075, 0.26, 0.14);                      // cool white against the warm cloth
+  g.strokeStyle = 'rgba(90,90,110,0.9)'; g.lineWidth = 0.008; g.strokeRect(-0.135, -0.075, 0.26, 0.14);
+  g.fillStyle = '#6d6a78'; g.beginPath(); g.arc(0.085, 0.03, 0.018, 0, Math.PI * 2); g.fill();   // the seal
   g.strokeStyle = 'rgba(70,70,90,0.75)'; g.lineWidth = 0.007;
   for (const [x0, x1, y] of [[-0.07, 0.05, -0.012], [-0.05, 0.08, 0.018]]) {
     g.beginPath(); g.moveTo(x0, y);

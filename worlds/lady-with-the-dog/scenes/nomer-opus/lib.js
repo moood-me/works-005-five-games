@@ -8,13 +8,13 @@ const DOOR = { x0: 0.35, x1: 1.55, h: 2.5 };
 const BED = { x0: -2.55, x1: -0.55, d0: 4.45, d1: 5.45, top: 0.5 };
 const TABLE = { x: 1.75, d: 3.9, w: 0.9, depth: 0.7, top: 0.74 };
 const ANNA_SEAT = [-1.75, 4.62, 0.5];
-const ANNA_APART = [-1.88, 4.62, 0.5];         // a palm further from him (`apart` 1)
-const GUROV_BED_SEAT = [-1.02, 4.62, 0.5];
-const GUROV_BED_STAND = [-0.95, 4.15];         // where he stands by the bed to set the plate down
+const ANNA_APART = [-1.62, 4.62, 0.5];         // a palm further from him (`apart` 1)
+const GUROV_BED_SEAT = [-2.42, 4.62, 0.5];     // on her left, toward the bed's head: from the balcony she is nearer
+const GUROV_BED_STAND = [-2.3, 4.1];           // where he stands by the bed, past her, to set the plate down
 const CHAIR_SEAT = [2.48, 3.92, 0.46];         // his chair at the table's right end, facing her (turn 270)
 const GUROV_STAND = [1.75, 3.2];               // at the table, his back to us
 const PLATE_TABLE = [2.0, 3.86, 0.745];        // before him on the table
-const PLATE_BED = [-1.38, 4.85, 0.5];
+const PLATE_BED = [-2.0, 4.95, 0.5];
 const FLOOR_BEFORE_HER = [-1.25, 4.05, 0];
 
 // ── the shots: place x, z (metres from the start), the eye's height, yaw (right of straight ahead), pitch ──
@@ -24,8 +24,9 @@ const CAM = {
   ROOM: cam(0, 0, 1.7),                  // the whole room: bed left, table and candle right, the balcony door between
   EAT: cam(0.35, -0.4, 1.7),             // drawn back: she at the 4:3 window's left edge, he at its right, the candle between
   FACE: cam(-0.88, 3.52, 1.2, -38),      // her face at the candle, medium: 1.4 m off, three-quarter (she faces 115)
-  BED: cam(-0.95, 3.25, 1.15, -17, -3),  // the two side by side on the bed, medium, faces three-quarter
-  BALCONY: cam(-0.1, 5.3, 1.25, 242, -6),// from the balcony side, back into the room: she turned to the candle, his profile
+  BED: cam(-1.75, 3.2, 1.15, -13, -3),   // the two side by side on the bed (he left, she right), medium, faces three-quarter
+  BALCONY: cam(-0.6, 5.6, 1.25, 236, -6),// from the balcony side by the bed's foot, back into the room: she nearer, turned
+                                         // to the candle; he beyond her, his hand on her back
 };
 
 // ── the film ──
