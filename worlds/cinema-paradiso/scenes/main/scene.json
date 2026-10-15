@@ -978,7 +978,8 @@
     ],
     "bpm": 70,
     "density": 0.15,
-    "brightness": 0.3
+    "brightness": 0.3,
+    "scale": "E_MAJOR_D_FLAT_MINOR"
   },
   "objects": [
     {
