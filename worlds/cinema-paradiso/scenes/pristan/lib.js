@@ -15,7 +15,7 @@ const G = {
   SCREEN: [0.5, 34], SCREEN_SPAN: [1.4, 5.4], SCREEN_HALF: 3.5,
   TOTO_PROJ: [-3.3, 8.9],               // behind the projector
   CRATE: [-1.9, 10.4],                  // Elena's crate (her hips)
-  ELENA_BY: [-2.4, 8.45],               // beside Toto, under the rain
+  ELENA_BY: [-3.95, 9.1],               // beside Toto, on his far side by the wall, under the rain
   ROWS: [15, 16.1, 17.2, 18.3, 19.4, 20.5, 21.6],
   COLS: [-2.5, -1.5, -0.5, 0.5, 1.5, 2.5],
   C_SEATS: { c1: [-2.5, 15], c2: [-1.5, 15], c3: [0.5, 15], c4: [1.5, 15] },
@@ -327,7 +327,7 @@ function film(scene) {
         const her = (async () => {
           await s.wait(0.6);
           await elena.go('rise', { from: G.CRATE, turn: 340 });
-          await elena.walk([G.ELENA_BY]);
+          await elena.walk([[-2.9, 10.75], [-3.85, 10.0], G.ELENA_BY]);
           await elena.turn(brg(G.ELENA_BY, G.TOTO_PROJ));
           elena.look('toto');
         })();
