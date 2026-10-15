@@ -408,7 +408,23 @@ const CAM = {
   RUIN: cam(6, 8, -85, 0.2, 8),
 };
 // a cut to a shot made ready first (shown whole)
-async function cutTo(s, keys) { const sh = s.shot(keys); await s.until(() => sh.ready); sh.cut(); }
+// a cut to a shot made ready first (shown whole); never waits more than 2 s for it
+async function cutTo(s, keys) { const sh = s.shot(keys); await s.any(s.until(() => sh.ready), s.wait(2)); sh.cut(); }
+// a person whose actions a beat waits on never hold it for good: each wait ends by itself after the time the action
+// should take, and a little more (a walk by its way at a slow pace, a turn, a motion done once)
+const PACE = 0.5;
+function who(s, id) {
+  const p = s.person(id), cap = (a, sec) => s.any(a, s.wait(sec));
+  const len = pts => { let d = 3; for (let i = 1; i < pts.length; i++) d += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); return d; };
+  const q = {};
+  for (const k of ['look', 'reach', 'with', 'wear', 'gait', 'on', 'here', 'still', 'mood', 'talk', 'startOf', 'say']) if (typeof p[k] === 'function') q[k] = p[k].bind(p);
+  return Object.assign(q, {
+    walk: (pts, o) => cap(p.walk(pts, o), 2 + len(pts) / PACE),
+    turn: (...a) => cap(p.turn(...a), 3),
+    go: (m, o) => cap(p.go(m, o), 10),
+    do: (m, o) => (o?.loop ? p.do(m, o) : cap(p.do(m, o), 6)),
+  });
+}
 // a camera glided to a shot over `over` seconds
 function glide(s, keys, over = 2.5) {
   for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_pitch']) s.move(k, keys[k], { over, ease: 'inOut' });
@@ -509,10 +525,10 @@ B('after_show', {
     c1: { at: [-11.4, 11.6], turn: 110 }, c2: { at: [-11.3, 12.8], turn: 80 }, c3: { at: [-10.6, 13.6], turn: 60 },
     c4: { at: [-10.9, 10.9], turn: 130 }, c6: { at: [-10.4, 12.9], turn: 90 }, c7: { at: [-11.0, 14.0], turn: 70 } }), ...CAM.CROWD }),
   run: async s => {
-    const toto = s.person('toto'), maria = s.person('maria');
+    const toto = who(s, 'toto'), maria = who(s, 'maria');
     const out = [['c1', [[-8, 8.4], [-3, 3.5]]], ['c2', [[-8.2, 14.2], [-2.5, 20]]], ['c3', [[-7.6, 16.4], [-4.2, 22.8]]],
       ['c4', [[-8.8, 9.0], [-6.5, 2.5]]], ['c6', [[-7.4, 13.4], [1.5, 14.5]]], ['c7', [[-8.4, 17.2], [-6.8, 24.5]]]];
-    out.forEach(([id, path], i) => (async () => { await s.wait(0.2 + i * 0.45 + s.random() * 0.3); await s.person(id).walk(path); s.person(id).here(false); })());
+    out.forEach(([id, path], i) => (async () => { await s.wait(0.2 + i * 0.45 + s.random() * 0.3); await who(s, id).walk(path); who(s, id).here(false); })());
     await s.wait(0.8);
     const boy = toto.walk([[-10.2, 11.9], P.TOTO_P]);
     await s.wait(0.6);
@@ -534,7 +550,7 @@ B('alfredo_down', {
   after: ['after_show'],
   from: () => ({ ...PAST_NIGHT(), ...cast({ toto: BOY(), maria: MUM(), alfredo: { at: [-11.3, 12.1], turn: 90, mood: 'smile' } }), alfredo_here: false, ...PORCH2 }),
   run: async s => {
-    const alf = s.person('alfredo'), toto = s.person('toto'), maria = s.person('maria');
+    const alf = who(s, 'alfredo'), toto = who(s, 'toto'), maria = who(s, 'maria');
     alf.here(true);
     glide(s, PORCH3, 4);
     alf.reach({ r: 'alfredo#pocket' });
@@ -561,7 +577,7 @@ B('coins_taken', {
   after: ['alfredo_down'],
   from: () => ({ ...PAST_NIGHT(), ...cast(PORCH_THREE()), ...PORCH3 }),
   run: async s => {
-    const alf = s.person('alfredo'), toto = s.person('toto'), maria = s.person('maria');
+    const alf = who(s, 'alfredo'), toto = who(s, 'toto'), maria = who(s, 'maria');
     maria.reach({ r: 'alfredo#hand_r', l: 'toto#hand_r' }); maria.mood('neutral');
     await s.wait(1.5);
     s.tell('coins_taken:take');
@@ -587,12 +603,12 @@ B('slap', {
   after: ['alfredo_down'],
   from: () => ({ ...PAST_NIGHT(), ...cast(PORCH_THREE('neutral')), ...PORCH3 }),
   run: async s => {
-    const alf = s.person('alfredo'), toto = s.person('toto'), maria = s.person('maria');
+    const alf = who(s, 'alfredo'), toto = who(s, 'toto'), maria = who(s, 'maria');
     await cutTo(s, faceCam(P.MARIA_P, F_MARIA, 1.4, 20, 1.55));
     const wide = s.shot(CAM.WIDE);
     maria.look('toto'); maria.mood('angry'); maria.reach({ r: [P.TOTO_P[0] - 0.05, P.TOTO_P[1] + 0.1, 1.7], l: 'toto#hand_r' });
     await s.wait(1.5);
-    await s.until(() => wide.ready);
+    await s.any(s.until(() => wide.ready), s.wait(2));
     wide.cut();
     s.tell('slap:cut');
     maria.reach({ l: 'toto#hand_r' }); toto.reach({ r: 'maria#hand_l' }); toto.mood('sad');
@@ -613,7 +629,7 @@ B('paper', {
     maria: { at: [-7.0, 25.6], turn: 180, mood: 'sad', with: ['paper_sheet'] },
     toto: { at: [-6.55, 25.35], turn: 180 } }), ...CAM.CROWD }),
   run: async s => {
-    const maria = s.person('maria'), toto = s.person('toto');
+    const maria = who(s, 'maria'), toto = who(s, 'toto');
     const m = maria.walk([[-7.4, 20], [-9.6, 15.2], P.MARIA_PAPER]);
     await s.wait(0.15);
     const t = toto.walk([[-6.95, 19.8], [-9.6, 16.0], P.TOTO_PAPER]);
@@ -643,11 +659,11 @@ B('crowd', {
     c6: { at: [-7.9, 10.1], turn: 260, look: 'paradiso#booth_window', mood: 'angry' }, c7: { at: [-9.0, 13.6], turn: 230, do: loop('wave') },
     c8: { at: [-7.4, 13.4], turn: 225 }, madman: { at: [3.5, 9.5], turn: 250, wear: 'madman', gait: 'arms_wide_run', mood: 'laugh' } }), ...CAM.CROWD }),
   run: async s => {
-    const mad = s.person('madman');
+    const mad = who(s, 'madman');
     const run = mad.walk([[-2.5, 8.6], [-5.2, 7.0], [-6.0, 2.0], [-3.5, -3.5]]);
     await s.wait(3); s.tell('crowd:madman');
     await s.wait(6); s.tell('crowd:shout');
-    for (const id of ['c2', 'c5', 'c8']) s.person(id).do('wave');
+    for (const id of ['c2', 'c5', 'c8']) who(s, id).do('wave');
     await s.any(run, s.wait(4));
     mad.here(false);
     await s.wait(1);
@@ -662,7 +678,7 @@ B('beam_out', {
   from: () => ({ ...PAST_NIGHT(), ...crowdAt(-1.5, 21.5, 195, 1), booth_fig: 1, beam_on: 1, beam_aim: 0, ...WALL_CROWD(), ...CAM.WALL }),
   run: async s => {
     await s.wait(0.6);
-    for (const id of ['c4', 'c5', 'c6', 'c7', 'c8', 'c9']) s.person(id).look('paradiso#booth_window');
+    for (const id of ['c4', 'c5', 'c6', 'c7', 'c8', 'c9']) who(s, id).look('paradiso#booth_window');
     await s.wait(2);
     s.tell('beam_out:ready');
   },
@@ -672,9 +688,9 @@ B('wall_film', {
   from: () => ({ ...PAST_NIGHT(), ...crowdAt(-1.5, 21.5, 195, 1, 0), booth_fig: 1, beam_on: 1, beam_aim: 1, beam_focus: 1, wall_film: 'comedy', wall_lit: 1, ...WALL_CROWD(), ...CAM.WALL }),
   run: async s => {
     const order = ['c5', 'c7', 'c4', 'c8', 'c6', 'c9', 'c3', 'c1', 'c2'];
-    for (const id of order) { s.person(id).look('wall#screen'); s.person(id).mood('laugh'); }
+    for (const id of order) { who(s, id).look('wall#screen'); who(s, id).mood('laugh'); }
     s.set('crowd_sit', 1);
-    order.forEach((id, i) => (async () => { await s.wait(0.4 + i * 0.7 + s.random() * 0.5); await s.person(id).do('sit_ground'); })());
+    order.forEach((id, i) => (async () => { await s.wait(0.4 + i * 0.7 + s.random() * 0.5); await who(s, id).do('sit_ground'); })());
     await s.wait(8); s.tell('wall_film:sit');
     await s.wait(9);
   },
@@ -694,9 +710,9 @@ B('smoke', {
     s.move('smoke', 1, { over: 2 });
     s.move('beam_on', 0, { over: 3.5 });
     const ids = ['c5', 'c7', 'c4', 'c8', 'c6', 'c9', 'c3', 'c1', 'c2'];
-    ids.forEach((id, i) => (async () => { await s.wait(0.6 + i * 0.25 + s.random() * 0.3); s.person(id).look('paradiso#booth_window'); s.person(id).mood('afraid'); await s.person(id).do('stand_from_kneel'); })());
+    ids.forEach((id, i) => (async () => { await s.wait(0.6 + i * 0.25 + s.random() * 0.3); who(s, id).look('paradiso#booth_window'); who(s, id).mood('afraid'); await who(s, id).do('stand_from_kneel'); })());
     s.set('crowd_sit', 0);
-    const toto = s.person('toto');
+    const toto = who(s, 'toto');
     toto.gait('run');
     const run = toto.walk([[-6.0, 13.6], [-10.6, 12.2], [-11.6, 12.0]]);
     await s.any(run, s.wait(5));
@@ -717,7 +733,7 @@ B('outside', {
     c1: { at: [-2.4, 13.8], turn: 140, look: 'alfredo' }, c2: { at: [0.9, 14.9], turn: 230, look: 'alfredo', mood: 'sad' },
     c3: { at: [1.7, 13.9], turn: 250, look: 'alfredo' }, c4: { at: [-1.0, 14.9], turn: 190, look: 'alfredo', mood: 'sad' } }), ...CAM.FOUNTAIN }),
   run: async s => {
-    const alf = s.person('alfredo'), c1 = s.person('c1');
+    const alf = who(s, 'alfredo'), c1 = who(s, 'c1');
     await s.wait(1.5);
     c1.walk([[-1.75, 13.0]]);
     await s.wait(2.4);
@@ -742,7 +758,7 @@ B('new_sign', {
   run: async s => {
     await s.move('fade', 0, { over: 1.5 });
     s.move('bulbs', 1, { over: 5, ease: 'linear' });
-    const go = (id, p) => (async () => { await s.wait(s.random() * 1.2); await s.person(id).walk(p); s.person(id).here(false); })();
+    const go = (id, p) => (async () => { await s.wait(s.random() * 1.2); await who(s, id).walk(p); who(s, id).here(false); })();
     go('c1', [[-8.4, 11.6], [-11.4, 12.0]]); go('c2', [[-8.2, 12.6], [-11.4, 12.4]]); go('c5', [[-8.6, 13.0], [-11.4, 12.6]]);
     await s.wait(4.5); s.tell('new_sign:lit');
     go('c6', [[-7.8, 11.2], [-11.4, 11.7]]); go('c7', [[-8.0, 13.4], [-11.4, 12.2]]);
@@ -756,7 +772,7 @@ B('door', {
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', ...cast({ alfredo: ALF_SEATED('thinking', null),
     toto: { at: [-6.6, 5.6], turn: 230 } }), ...CAM.DOOR }),
   run: async s => {
-    const toto = s.person('toto'), alf = s.person('alfredo');
+    const toto = who(s, 'toto'), alf = who(s, 'alfredo');
     await toto.walk([[-9.6, 3.2], P.BOY_DOOR]);
     await toto.turn(70);
     toto.look('alfredo'); toto.mood('afraid');
@@ -769,7 +785,7 @@ B('go_together', {
   after: ['door'],
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', ...cast({ alfredo: ALF_SEATED(), toto: { at: P.BOY_DOOR, turn: 70, look: 'alfredo', mood: 'afraid' } }), ...CAM.DOOR }),
   run: async s => {
-    const toto = s.person('toto'), alf = s.person('alfredo');
+    const toto = who(s, 'toto'), alf = who(s, 'alfredo');
     alf.mood('smile');
     s.set('alfredo_on', null);
     await alf.go('rise', { from: [G.ALF_SEAT[0], G.ALF_SEAT[1]], turn: 95 });
@@ -788,7 +804,7 @@ B('go_alone', {
   after: ['door'],
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', ...cast({ alfredo: ALF_SEATED(), toto: { at: P.BOY_DOOR, turn: 70, look: 'alfredo', mood: 'afraid' } }), ...CAM.DOOR }),
   run: async s => {
-    const toto = s.person('toto'), alf = s.person('alfredo');
+    const toto = who(s, 'toto'), alf = who(s, 'alfredo');
     toto.mood('sad');
     await s.wait(0.8);
     await toto.turn(20);
@@ -810,7 +826,7 @@ B('dusk', {
   from: () => ({ ...PAST_DUSK(), fade: 1, ...STEPS_WALKERS(), ...cast({ toto: TOTO_CAM }), ...CAM.STEPS }),
   run: async s => {
     await s.move('fade', 0, { over: 1.4 });
-    for (const [id, p] of [['c1', [[3.5, 12.5]]], ['c2', [[-2.0, 9.5]]], ['c3', [[-1.0, 10.0]]], ['c4', [[-4.0, 12.0]]]]) s.person(id).walk(p);
+    for (const [id, p] of [['c1', [[3.5, 12.5]]], ['c2', [[-2.0, 9.5]]], ['c3', [[-1.0, 10.0]]], ['c4', [[-4.0, 12.0]]]]) who(s, id).walk(p);
     await s.wait(0.6); s.tell('dusk:aim');
     await s.wait(5.5);
     s.set('viewfinder', 1);
@@ -823,7 +839,7 @@ B('seen', {
     c3: { at: [-1.0, 10.0], turn: 140 }, c4: { at: [-4.0, 12.0], turn: 250 } }), ...CAM.STEPS }),
   run: async s => {
     await s.wait(1.5);
-    s.person('elena').mood('surprised');
+    who(s, 'elena').mood('surprised');
     await s.wait(1.5);
     s.tell('seen:turned');
   },
@@ -832,7 +848,7 @@ B('film_on', {
   after: ['seen'],
   from: () => ({ ...PAST_DUSK(), ...cast({ toto: { ...TOTO_CAM, do: loop('film8'), look: 'elena' }, elena: { at: P.ELENA_SEEN, turn: 20, look: 'toto' } }), ...CAM.STEPS }),
   run: async s => {
-    const el = s.person('elena'), toto = s.person('toto');
+    const el = who(s, 'elena'), toto = who(s, 'toto');
     el.look(null); el.mood('neutral');
     await s.wait(0.6);
     const w = el.walk([[5.0, 13.6], [9.6, 13.1], [11.6, 13.0]]);
@@ -853,7 +869,7 @@ B('hello', {
   run: async s => {
     await s.wait(0.4);
     await cutTo(s, { ...CAM.FOUNTAIN, elena_a: P.ELENA_F[0], elena_d: P.ELENA_F[1], elena_turn: 250, toto_a: 0.8, toto_d: 16.4, toto_turn: 225, toto_with: null, toto_do: 'stand' });
-    const el = s.person('elena'), toto = s.person('toto');
+    const el = who(s, 'elena'), toto = who(s, 'toto');
     el.look('toto'); el.mood('smile');
     toto.mood('surprised');
     await toto.walk([[-1.8, 14.2], P.TOTO_F]);
@@ -883,7 +899,7 @@ B('story_door', {
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', ...cast({ alfredo: { ...ALF_SEATED('thinking', null), do: loop('cane_sit') },
     toto: { at: [G.ALF_STEP[0], G.ALF_STEP[1]], turn: 60, on: G.ALF_STEP, do: loop('seated_hunched'), wear: 'toto_teen', look: 'alfredo', mood: 'neutral' } }), ...CAM.DOOR }),
   run: async s => {
-    const alf = s.person('alfredo'), toto = s.person('toto');
+    const alf = who(s, 'alfredo'), toto = who(s, 'toto');
     await s.wait(1); s.tell('story_door:start');
     alf.look('toto'); alf.do('tell_hand', { loop: true });
     glide(s, faceCam([G.ALF_SEAT[0], G.ALF_SEAT[1]], 95, 2.2, -28, 1.25), 8);
@@ -904,7 +920,7 @@ const TOTO_CHAIR = (more = {}) => ({ at: [G.CHAIR[0], G.CHAIR[1]], turn: 180, on
 B('chair', {
   from: () => ({ ...PAST_NIGHT(), chair_on: 0, ...cast({ toto: { at: [8.4, 19.2], turn: 150, wear: 'toto_teen', with: ['chair_carried'], gait: 'carry_chair' } }), ...CAM.BALCONY }),
   run: async s => {
-    const toto = s.person('toto');
+    const toto = who(s, 'toto');
     await toto.walk([[10.4, 17.4], [11.0, 16.2]]);
     toto.with(null); toto.gait(null);
     s.set('chair_on', 1);
@@ -925,9 +941,9 @@ B('eve', {
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', chalk: 99, chair_on: 1, night_kind: 'cold', cold_k: 1, ...crowdAt(-7.6, 12.2, 160, 1),
     ...cast({ toto: TOTO_CHAIR({ look: 'paradiso#booth_window' }), c1: { at: [-3, 6], turn: 300 }, c2: { at: [-1.5, 9], turn: 290 }, c3: { at: [-4.5, 9.5], turn: 290 } }), ...CAM.EVE }),
   run: async s => {
-    for (const [id, p] of [['c1', [[-11.4, 11.8]]], ['c2', [[-11.4, 12.3]]], ['c3', [[-11.4, 12.6]]]]) (async () => { await s.wait(s.random()); await s.person(id).walk(p); s.person(id).here(false); })();
+    for (const [id, p] of [['c1', [[-11.4, 11.8]]], ['c2', [[-11.4, 12.3]]], ['c3', [[-11.4, 12.6]]]]) (async () => { await s.wait(s.random()); await who(s, id).walk(p); who(s, id).here(false); })();
     await s.wait(4);
-    s.person('toto').look('balcony');
+    who(s, 'toto').look('balcony');
     await s.wait(4.5);
     s.tell('eve:ready');
   },
@@ -941,7 +957,7 @@ B('midnight', {
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', chalk: 99, chair_on: 1, night_kind: 'cold', cold_k: 1, ...cast({ toto: TOTO_CHAIR(), elena: { at: [11.55, 13.0], turn: 330, mood: 'laugh', look: 'toto' } }), elena_here: false, ...CAM.BALCONY }),
   run: async s => {
     await cutTo(s, { ...CAM.BALCONY, crowd_k: 0, c1_here: false, c2_here: false, c3_here: false, ...cast({ toto: TOTO_CHAIR(), elena: { at: [11.55, 13.0], turn: 330, mood: 'laugh', look: 'toto' } }), elena_here: false });
-    const toto = s.person('toto'), el = s.person('elena');
+    const toto = who(s, 'toto'), el = who(s, 'elena');
     await s.wait(1.2);
     s.set('fireworks', 1);
     const fw = bursts(s, 14);
@@ -973,7 +989,7 @@ B('midnight_close', {
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', chalk: 99, chair_on: 1, elena_window: 1, fireworks: 1, night_kind: 'cold', cold_k: 1, ...HUG(), ...HUG_CLOSE }),
   run: async s => {
     await cutTo(s, { ...HUG_CLOSE });
-    s.person('elena').look([HUG_CLOSE.camera_x, HUG_CLOSE.camera_z, 1.5]);
+    who(s, 'elena').look([HUG_CLOSE.camera_x, HUG_CLOSE.camera_z, 1.5]);
     await bursts(s, 3);
     await s.wait(0.5);
   },
@@ -989,7 +1005,7 @@ B('girl', {
   run: async s => {
     await s.wait(3);
     await cutTo(s, { ...CAM.GIRL });
-    const mad = s.person('madman'), d = s.person('daughter'), sal = s.person('toto');
+    const mad = who(s, 'madman'), d = who(s, 'daughter'), sal = who(s, 'toto');
     mad.here(true);
     const run = (async () => { await mad.walk([[2.0, 10.0], [-3.0, 16.0], [-5.0, 24.0]]); mad.here(false); })();
     await s.wait(1.8);
@@ -1016,7 +1032,7 @@ B('follow', {
   after: ['girl'],
   from: () => ({ ...NOW(0.8), chalk: 99, ...cast({ toto: SAL(P.SAL_GIRL, 50, { look: 'daughter' }), daughter: { at: P.DAUGHTER_STOP, turn: 215, look: 'toto' } }), ...CAM.GIRL }),
   run: async s => {
-    const d = s.person('daughter'), sal = s.person('toto');
+    const d = who(s, 'daughter'), sal = who(s, 'toto');
     d.look(null);
     (async () => { await d.walk([[10.5, 30], [10.6, 40]]); d.here(false); })();
     await s.wait(1);
@@ -1030,7 +1046,7 @@ B('let', {
   after: ['girl'],
   from: () => ({ ...NOW(0.8), chalk: 99, ...cast({ toto: SAL(P.SAL_GIRL, 50, { look: 'daughter' }), daughter: { at: P.DAUGHTER_STOP, turn: 215, look: 'toto' } }), ...CAM.GIRL }),
   run: async s => {
-    const d = s.person('daughter'), sal = s.person('toto');
+    const d = who(s, 'daughter'), sal = who(s, 'toto');
     d.look(null);
     (async () => { await d.walk([[10.5, 30], [10.6, 36]]); d.here(false); })();
     await s.wait(2.2);
@@ -1067,7 +1083,7 @@ B('funeral', {
   from: () => ({ ...NOW(0.3), cart: 0.12, ...cartKeys(0.12), follow: 1, sal_rail: 0,
     ...cast({ ...PROC(0.12), ...MOURNERS(0.12), toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired' }) }), ...CAM.FUNERAL }),
   run: async s => {
-    const sal = s.person('toto');
+    const sal = who(s, 'toto');
     sal.look('hearse');
     await s.move('cart', 0.4, { over: (0.28 * CART_L) / 0.6, ease: 'linear' });
     s.tell('funeral:passing');
@@ -1079,12 +1095,12 @@ B('walk_behind', {
   from: () => ({ ...NOW(0.3), cart: 0.4, ...cartKeys(0.4), follow: 1, sal_rail: 0,
     ...cast({ ...PROC(0.4), ...MOURNERS(0.4), toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired', look: 'hearse' }) }), ...CAM.FUNERAL }),
   run: async s => {
-    const sal = s.person('toto');
+    const sal = who(s, 'toto');
     await sal.walk([railAt(0.4)]);
     sal.gait('walk_slow');
     s.set('sal_rail', 1);
     sal.reach({ r: 'hearse#rail' });
-    for (const id of ['c1', 'c2', 'c3']) s.person(id).look('toto');
+    for (const id of ['c1', 'c2', 'c3']) who(s, id).look('toto');
     s.turn('camera_yaw', -112, 9, 'inOut');
     const go = s.move('cart', 0.6, { over: (0.2 * CART_L) / 0.6, ease: 'linear' });
     await s.wait(2.4);
@@ -1102,7 +1118,7 @@ B('widow', {
   from: () => ({ ...NOW(0.3), cart: 0.6, ...cartKeys(0.6), follow: 0,
     ...cast({ ...PROC(0.6), ...MOURNERS(0.6), toto: SAL(railAt(0.6), 0, { mood: 'tired' }) }), ...cam(-5, 18, -112, 0.2, 1) }),
   run: async s => {
-    const sal = s.person('toto'), anna = s.person('anna');
+    const sal = who(s, 'toto'), anna = who(s, 'anna');
     glide(s, WIDOW2, 3);
     s.set('anna_gait', null); s.set('toto_gait', null);
     await s.all(anna.walk([P.ANNA_W]), sal.walk([P.SAL_W]));
@@ -1123,7 +1139,7 @@ B('stay_door', {
   from: () => ({ ...NOW(0.3), cart: 0.4, ...cartKeys(0.4), follow: 1, sal_rail: 0,
     ...cast({ ...PROC(0.4), ...MOURNERS(0.4), toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired', look: 'hearse' }) }), ...CAM.FUNERAL }),
   run: async s => {
-    s.person('toto').look('hearse');
+    who(s, 'toto').look('hearse');
     s.turn('camera_yaw', -118, 8, 'inOut');
     await s.move('cart', 0.57, { over: (0.17 * CART_L) / 0.6, ease: 'linear' });
     s.tell('stay_door:passed');
@@ -1138,7 +1154,7 @@ B('widow_late', {
   run: async s => {
     // later: the square empty, the procession gone up to the church; the widow comes back alone
     await cutTo(s, { ...CAM.FUNERAL, cart: 1, ...cartKeys(1), follow: 0, ...cast({ toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired' }), anna: { at: [1.5, 21.5], turn: 250, mood: 'sad' } }) });
-    const sal = s.person('toto'), anna = s.person('anna');
+    const sal = who(s, 'toto'), anna = who(s, 'anna');
     const w = anna.walk([[-6.0, 16.0], P.ANNA_LATE]);
     sal.look('anna');
     await s.wait(3);
@@ -1169,7 +1185,7 @@ B('demolition', {
   run: async s => {
     // where Salvatore stands and whether his mother is by him: the party's keys (place, with_mother)
     const apart = s.get('place') === 'apart', mother = Number(s.get('with_mother')) === 1;
-    const sal = s.person('toto');
+    const sal = who(s, 'toto');
     const at = apart ? [0.0, 5.2] : [0.4, 9.2];
     s.set('toto_a', at[0]); s.set('toto_d', at[1]);
     s.set('anna_here', !apart);
@@ -1177,7 +1193,7 @@ B('demolition', {
     if (mother) { s.set('maria_a', at[0] + 0.15); s.set('maria_d', at[1] + 0.62); s.set('maria_reach', { l: 'toto#hand_l' }); }
     await s.wait(10);
     s.tell('demolition:whistle');
-    for (const id of Object.keys(DEMO_CROWD)) s.person(id).look('paradiso');
+    for (const id of Object.keys(DEMO_CROWD)) who(s, id).look('paradiso');
     await s.wait(3);
     s.tell('demolition:blast');
     s.set('dust_burst', 1);
@@ -1196,7 +1212,7 @@ B('dust', {
   run: async s => {
     s.set('dust_burst', (s.get('dust_burst') ?? 0) + 1);
     s.move('dust', 0.35, { over: 12, ease: 'out' });
-    const mad = s.person('madman');
+    const mad = who(s, 'madman');
     s.set('madman_a', -9.5); s.set('madman_d', 12.6); s.set('madman_wear', kit.cast.characters.madman_old); s.set('madman_gait', 'arms_wide_run');
     await s.wait(3.5);
     mad.here(true);
