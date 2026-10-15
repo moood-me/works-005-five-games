@@ -390,9 +390,9 @@ const FILM = {
   },
   // II.2 — Alfredo at the window looks down at the square; turns the projector to the window
   window: {
-    from: () => ({ ...base(0.92), ...show(1), ...CAM.SQUARE, ...people({
+    from: () => ({ ...base(0.92), ...show(1), crate_a: -1.35, crate_d: 1.75, ...CAM.SQUARE, ...people({
       alfredo: { at: P.ALF_WINDOW, turn: 110, look: 'projector', mood: 'smile' },
-      toto: { at: G.CRATE, turn: 250, look: 'alfredo', mood: 'surprised' } }) }),
+      toto: { at: [-1.35, 1.92], turn: 160, look: 'alfredo', mood: 'surprised' } }) }),
     run: async s => {
       const alf = s.person('alfredo');
       await s.wait(1); s.tell('window:hands');
