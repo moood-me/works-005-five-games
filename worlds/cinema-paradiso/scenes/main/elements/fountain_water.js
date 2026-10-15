@@ -1,0 +1,1 @@
+g.fillStyle = '#26323a'; g.beginPath(); g.arc(0, 0, 1.42, 0, Math.PI * 2); g.fill(); g.strokeStyle = 'rgba(200,210,220,0.18)'; g.lineWidth = 0.02; for (const r of [0.6, 0.9, 1.2]) { g.beginPath(); g.arc(0, 0, r, 0, Math.PI * 2); g.stroke(); }
