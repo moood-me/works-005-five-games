@@ -1253,6 +1253,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Night harbour in the Far East: soft guzheng and erhu over slow strings, lanterns on still water, distant ship's horn",

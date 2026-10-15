@@ -715,6 +715,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Light orchestral travel music in the rhythm of steam train wheels, brisk pizzicato strings and woodwinds, 1870s optimism, forward motion",

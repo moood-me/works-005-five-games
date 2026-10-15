@@ -1513,6 +1513,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Sparse felt piano in a foggy London street at night, single notes like a clock's tick, cold and exact, gaslight warmth underneath",
