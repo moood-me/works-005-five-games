@@ -117,7 +117,10 @@
     "with_pp": 0,
     "aouda_here": false,
     "passepartout_here": false,
-    "porter_here": false
+    "porter_here": false,
+    "with_fix": 0,
+    "fix_bruise": 0,
+    "fix_here": false
   },
   "states": {
     "minute": {
@@ -185,7 +188,7 @@
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма: countdown, whist, wager, leave, wait, door, no_door, friday, friday_in (null — ни один: вне игры сцена играет свой показ)"
+      "means": "кусок фильма: countdown, whist, wager, wager_down, leave, wait, door, no_door, friday, friday_in (null — ни один: вне игры сцена играет свой показ)"
     },
     "gentlemen": {
       "range": [
@@ -243,6 +246,20 @@
       ],
       "smooth": true,
       "means": "на сколько метров отодвинут стул Фогга за столом (он встаёт)"
+    },
+    "with_fix": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Фикс входит за Фоггом последним, у двери (кусок door)"
+    },
+    "fix_bruise": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — синяк у Фикса (каст: wears.fix_bruise)"
     }
   },
   "objects": [
@@ -1007,6 +1024,22 @@
       "place": {
         "across": "porter_a",
         "distance": "porter_d"
+      }
+    },
+    {
+      "id": "fix",
+      "name": "Фикс",
+      "person": {
+        "cast": "cast",
+        "who": "fix",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": 0.1,
+      "distance": 20.2,
+      "place": {
+        "across": "fix_a",
+        "distance": "fix_d"
       }
     }
   ],
