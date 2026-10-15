@@ -232,6 +232,7 @@ function film(scene) {
     back: look([-3.0, 6.3], [-5.05, 7.6], -0.5, -1),  // the bench at dusk: Alfredo and Toto, faces 3/4, the mole and the sea behind
     carNow: look([0.4, 45.2], [-1.0, 58.4], 0.1, 1),      // 1988: the car on the head, Elena by it; the daughter goes; he comes
     meet: look([-5.3, 57.55], [-1.5, 57.6], -0.1, 1),     // from the west edge of the head, side on: the two in the headlamps' glow
+    alone_now: look([-5.0, 51.4], [0.6, 59.4], 0.1, 2),   // he alone on the head, the lantern beyond him, the lamps going down the mole
   };
   // the keys a beat starts from
   const carKeys = (type, arrive = 1, go = 0) => {
@@ -527,7 +528,9 @@ function film(scene) {
         el.here(false);
         sal.look('car_side_l'); sal.mood('sad');
         s.move('car_go', 1, { over: goSeconds('new', 6.5), ease: 'in' });
-        await s.wait(9.5); s.tell('parting:gone');
+        await s.wait(3.5);
+        glide(s, CAM.alone_now, 5);
+        await s.wait(6); s.tell('parting:gone');
         sal.look([-1.5, 75, 0.5]);
         await s.wait(2);
       },
