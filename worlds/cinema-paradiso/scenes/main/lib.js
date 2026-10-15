@@ -75,6 +75,7 @@ const PAL = { lime: '#d2b98f', ochre: '#c9a271', honey: '#d8bd8a', pale: '#e2d3b
   shade: '#8f7b5f', shutter: '#5f705f', shutter2: '#6b6f5a', door: '#4e3a2a', dark: '#1e1a17', iron: '#26231f' };
 // plaster over w×h from (x, y) (y down), stains and a soft fall of grime under the cornice
 function plaster(g, x, y, w, h, base, seed, k = 1) {
+  g.save(); g.beginPath(); g.rect(x, y, w, h); g.clip();
   g.fillStyle = base; g.fillRect(x, y, w, h);
   const n = Math.min(260, Math.round(w * h * 1.4 * k));
   for (let i = 0; i < n; i++) {
@@ -88,6 +89,7 @@ function plaster(g, x, y, w, h, base, seed, k = 1) {
   const gb = g.createLinearGradient(0, y + h - 1.2, 0, y + h);
   gb.addColorStop(0, 'rgba(60,45,30,0)'); gb.addColorStop(1, 'rgba(60,45,30,0.25)');
   g.fillStyle = gb; g.fillRect(x, y + h - 1.2, w, 1.2);
+  g.restore();
 }
 // a cornice along the top, a string course at height y
 function cornice(g, x, w, y, deep = 0.35) {
