@@ -13,7 +13,7 @@
     ]
   },
   "light": {
-    "ambient": 0.52,
+    "ambient": 0.58,
     "ambientColor": "#7486c0",
     "tint": "#22305e",
     "tintStrength": 0.06,
@@ -23,7 +23,7 @@
     "hazeColor": "#2e4470",
     "hazeGlow": 0.8,
     "shafts": 0.2,
-    "bounce": 0.55,
+    "bounce": 0.62,
     "brightness": 1.16,
     "saturation": 0.95,
     "wind": [
@@ -88,8 +88,8 @@
         "tintStrength": 0.1
       },
       "dust": {
-        "haze": 0.7,
-        "hazeColor": "#b6aea2",
+        "haze": 0.9,
+        "hazeColor": "#bdb5a8",
         "ambient": 1,
         "ambientColor": "#c4beb4",
         "lights": {
@@ -173,12 +173,19 @@
     },
     {
       "id": "lamp2",
-      "across": 3.6,
-      "distance": 6.2,
+      "across": 6.5,
+      "distance": 8.5,
       "elevation": 3.8,
       "color": "#e2e0d6",
-      "strength": 1.1,
-      "reach": 9
+      "strength": 1.5,
+      "reach": 12
+    },
+    {
+      "id": "par_lamp",
+      "of": "paradiso#lamp",
+      "color": "#e8e2d2",
+      "strength": 1.3,
+      "reach": 8
     },
     {
       "id": "lamp4",
@@ -971,7 +978,8 @@
     ],
     "bpm": 70,
     "density": 0.15,
-    "brightness": 0.3
+    "brightness": 0.3,
+    "scale": "E_MAJOR_D_FLAT_MINOR"
   },
   "objects": [
     {
@@ -1179,7 +1187,7 @@
       "box": [
         -0.3,
         -9.6,
-        7.3,
+        7.6499999999999995,
         0.05
       ],
       "shadow": true
@@ -1198,7 +1206,7 @@
       "box": [
         -0.3,
         -9.6,
-        7.3,
+        7.6499999999999995,
         0.05
       ]
     },
@@ -1212,7 +1220,7 @@
       "box": [
         -0.3,
         -9,
-        7.3,
+        7.6499999999999995,
         0.05
       ],
       "shadow": true
@@ -1231,7 +1239,7 @@
       "box": [
         -0.3,
         -9,
-        7.3,
+        7.6499999999999995,
         0.05
       ]
     },
@@ -1418,15 +1426,29 @@
     {
       "id": "par_back",
       "name": "Задняя стена",
-      "across": -16.5,
+      "across": -18.5,
       "distance": 6,
       "facing": 90,
-      "height": 12,
+      "height": 8,
       "box": [
-        -0.2,
-        -12.2,
-        14.2,
-        0.05
+        -0.6,
+        -8.4,
+        14.6,
+        0.6
+      ]
+    },
+    {
+      "id": "rubble",
+      "name": "Обломки",
+      "across": -12.6,
+      "distance": 6,
+      "facing": 90,
+      "height": 3,
+      "box": [
+        -0.5,
+        -3.5,
+        14.5,
+        0.3
       ]
     },
     {
@@ -1757,7 +1779,6 @@
       "name": "Стул Тото",
       "across": 11.3,
       "distance": 15.6,
-      "facing": 270,
       "height": 0.95,
       "box": [
         -0.3,
@@ -1772,7 +1793,6 @@
       "name": "Стул Альфредо",
       "across": -11.4,
       "distance": 3.12,
-      "facing": 0,
       "height": 0.95,
       "box": [
         -0.3,
@@ -1887,8 +1907,8 @@
           "distance": 21.5
         },
         {
-          "across": 3.6,
-          "distance": 6.2
+          "across": 6.5,
+          "distance": 8.5
         },
         {
           "across": 2.5,
@@ -2133,16 +2153,16 @@
         ],
         "burst": {
           "on": "dust_burst",
-          "count": 360,
-          "over": 2.5
+          "count": 700,
+          "over": 3
         },
         "size": [
-          2.5,
-          7
+          3,
+          9
         ],
         "life": [
-          9,
-          15
+          14,
+          22
         ],
         "speed": [
           1,
