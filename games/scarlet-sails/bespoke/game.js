@@ -57,7 +57,7 @@ export default async function (b) {
   // the toy yacht of «Даль»: the player presses it (at the point the scene marks as its sail), then where to go
   const yacht = async options => {
     const away = view.hint('Коснись кораблика', 3000);
-    const { action } = await hub.offer({ 'korablik#sail': options });
+    const action = await hub.offer({ 'korablik#sail': options });
     away();
     return action.id;
   };
@@ -101,7 +101,6 @@ export default async function (b) {
       location.reload();
     },
   });
-  const jumps = () => (b.game.mine ? CHAPTERS.map((c, i) => ({ id: `jump:${i}`, label: `→ ${c.number ? `глава ${c.number}` : c.title}` })) : []);
   for (;;) {
     const ch = CHAPTERS[kept.chapter];
     if (!kept.start) {
@@ -136,11 +135,10 @@ export default async function (b) {
     }
     let next = null;
     if (kept.chapter === EPILOGUE) {
-      // the sails of the whole play; then all of it anew
+      // the sails of the whole play; then all of it anew (the author goes to a chapter by ☰)
       await far('', 'Алые паруса', whole(kept));
-      const to = await yacht([{ id: 'anew', label: 'Сыграть заново' }, ...jumps()]);
-      if (to === 'anew') return b.restart();
-      next = await coming(0, Number(to.slice(5)), 0);
+      await yacht([{ id: 'anew', label: 'Сыграть заново' }]);
+      return b.restart();
     } else if (ch.choices.length) {
       // the sails of the chapter; then on — or the chapter again, from how it began
       await far(ch.number, ch.title, rows(ch.choices, kept));
