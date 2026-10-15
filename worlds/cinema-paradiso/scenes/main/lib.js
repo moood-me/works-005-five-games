@@ -1066,8 +1066,8 @@ B('stay_door', {
   from: () => ({ ...NOW(0.3), cart: 0.4, ...cartKeys(0.4), follow: 1, sal_rail: 0,
     ...cast({ ...PROC(0.4), ...MOURNERS(0.4), toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired', look: 'hearse' }) }), ...CAM.FUNERAL }),
   run: async s => {
-    await s.move('cart', 1, { over: (0.6 * CART_L) / 0.6, ease: 'linear' });
-    s.set('follow', 0);
+    s.person('toto').look('hearse');
+    await s.move('cart', 0.57, { over: (0.17 * CART_L) / 0.6, ease: 'linear' });
     s.tell('stay_door:passed');
   },
 });
@@ -1076,9 +1076,11 @@ B('widow_late', {
   from: () => ({ ...NOW(0.3), cart: 1, ...cartKeys(1), follow: 0,
     ...cast({ toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired' }), anna: { at: [1.5, 21.5], turn: 250, mood: 'sad' } }), ...CAM.FUNERAL }),
   run: async s => {
+    // later: the square empty, the procession gone up to the church; the widow comes back alone
+    const empty = s.shot({ ...CAM.FUNERAL, cart: 1, ...cartKeys(1), follow: 0, ...cast({ toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired' }), anna: { at: [1.5, 21.5], turn: 250, mood: 'sad' } }) });
+    await s.until(() => empty.ready);
+    empty.cut();
     const sal = s.person('toto'), anna = s.person('anna');
-    s.set('bearer1_here', false); s.set('bearer2_here', false);
-    for (const id of ['c1', 'c2', 'c3', 'c4']) s.set(id + '_here', false);
     const near = [-10.6, 13.6];
     const w = anna.walk([[-6.0, 17.5], near]);
     sal.look('anna');

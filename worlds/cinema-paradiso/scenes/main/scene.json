@@ -134,7 +134,7 @@
     },
     {
       "id": "mother_light",
-      "of": "mother_room#lamp",
+      "of": "mother_window#lamp",
       "color": "#ffbf75",
       "strength": 0.8,
       "reach": 6,
@@ -1642,8 +1642,8 @@
       ]
     },
     {
-      "id": "mother_room",
-      "name": "Комната матери",
+      "id": "mother_window",
+      "name": "Окно матери",
       "across": -9,
       "distance": 26.75,
       "facing": 180,
