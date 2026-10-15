@@ -18,7 +18,8 @@ const base = f => 0.26 + (f.sea === 'home' ? 0.045 : 0);
 // steps 1…5 (the deck, the house, the deck, the house or the shore, the deck)
 const hour = (f, step) => base(f) + [0, 0.002, 0.005, 0.007, 0.01][step - 1];
 // the hour the ship comes (the deck's `arrive`, then the shore — marks.morning): not before the last leg's, later by
-// up to 0.045 as the three legs were clumsy (a leg not played leaves no mark: neither steady nor clumsy)
+// up to 0.045 as the three legs were clumsy (a leg not played leaves no mark: neither steady nor clumsy; a leg
+// skipped by its ⏭ — as played steady, kurs.skipped)
 const comes = (f, { kurs1 = 0.5, kurs2 = 0.5, kurs3 = 0.5 }) => hour(f, 5) + 0.045 * (1 - (kurs1 + kurs2 + kurs3) / 3);
 
 // a leg of «Курс» — the orchestra grows as the course is held; then the wheel let go, the sails full, the orchestra

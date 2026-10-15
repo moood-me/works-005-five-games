@@ -19,7 +19,7 @@ const SIDES = [{ key: 'hand_l', at: 'ropes#left' }, { key: 'hand_r', at: 'ropes#
 export default {
   title: 'Ванты', // (as the author's ☰ lists it)
   about: 40,
-  skipped: { slips: 1, seconds: 0 },
+  skipped: { slips: 0, seconds: 0 }, // (as played: the plain good outcome)
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: 'Ванты уходили в небо, и палуба кренилась под ногами' });
     const tension = mg.layer('tension');
