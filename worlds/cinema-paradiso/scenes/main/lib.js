@@ -408,8 +408,13 @@ const CAM = {
   RUIN: cam(6, 8, -85, 0.2, 8),
 };
 // a cut to a shot made ready first (shown whole)
-// a cut to a shot made ready first (shown whole)
 async function cutTo(s, keys) { const sh = s.shot(keys); await s.until(() => sh.ready); sh.cut(); }
+// someone brought into a beat that follows another (its from is not applied then): their keys set where the beat
+// wants them, before they are made to be here — else they appear where the scene last left them (or never placed)
+function bring(s, id, spec) {
+  for (const [k, v] of Object.entries(cast({ [id]: spec }))) if (k.startsWith(id + '_') && k !== id + '_here') s.set(k, v);
+  s.set(id + '_here', true);
+}
 // a camera glided to a shot over `over` seconds
 function glide(s, keys, over = 2.5) {
   for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_pitch']) s.move(k, keys[k], { over, ease: 'inOut' });
@@ -536,7 +541,7 @@ B('alfredo_down', {
   from: () => ({ ...PAST_NIGHT(), ...cast({ toto: BOY(), maria: MUM(), alfredo: { at: [-11.3, 12.1], turn: 90, mood: 'smile' } }), alfredo_here: false, ...PORCH2 }),
   run: async s => {
     const alf = s.person('alfredo'), toto = s.person('toto'), maria = s.person('maria');
-    alf.here(true);
+    bring(s, 'alfredo', { at: [-11.3, 12.1], turn: 90, mood: 'smile' });
     glide(s, PORCH3, 4);
     alf.reach({ r: 'alfredo#pocket' });
     const walk = alf.walk([[-10.4, 12.6], P.ALF_P]);
@@ -950,7 +955,7 @@ B('midnight', {
     s.move('elena_window', 1, { over: 1.4, ease: 'out' });
     await s.wait(2.4);
     s.tell('midnight:open');
-    el.here(true);
+    bring(s, 'elena', { at: [11.55, 13.0], turn: 330, mood: 'laugh', look: 'toto' });
     glide(s, MIDNIGHT_NEAR, 7);
     const walk = el.walk([P.ELENA_HUG]);
     await s.wait(1.2);
