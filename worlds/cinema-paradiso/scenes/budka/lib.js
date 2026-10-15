@@ -59,10 +59,12 @@ function plaster(g, x, y, w, h, base, seed, ruin) {
     g.beginPath(); g.ellipse(px, py, r, r * 0.7, hash(i, seed + 3) * 3, 0, Math.PI * 2); g.fill();
   }
   if (ruin) {
-    for (let i = 0; i < w * h * 1.2; i++) {
-      const px = x + hash(i, seed + 7) * w, py = y + hash(i, seed + 8) * h, r = 0.05 + hash(i, seed + 9) * 0.22;
-      g.fillStyle = i % 2 ? 'rgba(150,140,128,0.5)' : 'rgba(40,36,32,0.35)';
-      g.beginPath(); g.ellipse(px, py, r, r * 0.6, hash(i, seed + 10) * 3, 0, Math.PI * 2); g.fill();
+    for (let i = 0; i < w * h * 2.5; i++) {                                    // plaster fallen: torn patches, lath showing
+      const px = x + hash(i, seed + 7) * w, py = y + hash(i, seed + 8) * h, r = 0.03 + Math.pow(hash(i, seed + 9), 2) * 0.16;
+      g.fillStyle = i % 3 ? 'rgba(120,110,98,0.22)' : 'rgba(60,52,46,0.3)';
+      g.beginPath(); g.moveTo(px - r, py);
+      for (let k = 1; k < 7; k++) { const a = k / 7 * Math.PI * 2, q = r * (0.6 + 0.5 * hash(i * 7 + k, seed)); g.lineTo(px + Math.cos(a) * q, py + Math.sin(a) * q * 0.7); }
+      g.closePath(); g.fill();
     }
     const dmp = g.createLinearGradient(0, y + h - 0.6, 0, y + h);
     dmp.addColorStop(0, 'rgba(40,46,40,0)'); dmp.addColorStop(1, 'rgba(40,46,40,0.4)');
@@ -174,7 +176,7 @@ const P = {
   ALF_WINDOW: [-1.6, 1.45], ALF_PUSH: [-1.1, 2.45], BOY_JAM: [0.3, 1.6],
   TOTO_BENCH: [1.62, 1.75], TOTO_REEL: [1.25, 1.95], TOTO_HUG: [1.45, 0.97], EL_HUG: [1.76, 0.64],
   TOTO_STAND: [0.4, 0.95], EL_CAL: [1.4, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.25, 0.55],
-  TOTO_IN: [1.8, 0.6], SAL_P2: [1.25, 2.45], SAL_DOOR: [1.55, 0.7], SAL_WINDOW: [-1.72, 0.95],
+  TOTO_IN: [1.8, 0.6], SAL_P2: [0.98, 2.2], SAL_DOOR: [1.55, 0.7], SAL_WINDOW: [-1.72, 0.95],
 };
 const SEAT = [G.STOOL[0], G.STOOL[1], G.STOOL_H];
 const BENCH_SEAT = [P.TOTO_BENCH[0], P.TOTO_BENCH[1], G.BENCH_H];
@@ -652,8 +654,8 @@ const FILM = {
       s.set('pigeons', 1);
       sal.look('projector2');
       s.set('camera_shot', 'medium'); s.set('camera_glide', 2); s.set('camera_target', 'toto');
-      await walk(s, 'toto', [P.SAL_P2]); await sal.turn(300);
-      sal.reach({ l: 'projector2#side' });
+      await walk(s, 'toto', [P.SAL_P2]); await sal.turn(330);
+      sal.reach({ l: 'projector2' });
       await s.wait(6);
       sal.reach(null);
     },

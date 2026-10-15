@@ -52,16 +52,17 @@
         }
       },
       "ruin_k": {
-        "ambient": 0.4,
-        "ambientColor": "#7a8096",
-        "saturation": 0.62,
+        "ambient": 0.56,
+        "ambientColor": "#8a90a6",
+        "saturation": 0.66,
         "tint": "#5a6278",
-        "tintStrength": 0.08,
-        "haze": 0.12,
+        "tintStrength": 0.07,
+        "brightness": 1.25,
+        "haze": 0.1,
         "hazeColor": "#5a5e68",
         "hazeGlow": 0.6,
         "lights": {
-          "window_light": 2.2,
+          "window_light": 2.6,
           "lamp_light": 0
         }
       },
