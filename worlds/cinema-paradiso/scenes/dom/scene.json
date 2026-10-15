@@ -512,7 +512,7 @@
    "id": "chairs",
    "name": "Стулья",
    "across": -0.5,
-   "distance": 4.12,
+   "distance": 4.3,
    "facing": 180,
    "height": 1,
    "box": [
@@ -525,16 +525,16 @@
    "copies": [
     {
      "across": -0.5,
-     "distance": 4.12,
+     "distance": 4.3,
      "facing": 180
     },
     {
-     "across": 0.42,
+     "across": 0.58,
      "distance": 3.4,
      "facing": 270
     },
     {
-     "across": -1.42,
+     "across": -1.58,
      "distance": 3.4,
      "facing": 90
     }
