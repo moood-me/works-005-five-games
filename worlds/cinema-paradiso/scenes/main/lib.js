@@ -436,7 +436,7 @@ const P = {
   // the paper: the two of them stop by the poster
   MARIA_PAPER: [-10.5, 12.6], TOTO_PAPER: [-10.9, 13.3],
   // the fountain: Alfredo on the rim, the boy beside; Elena and Toto at seventeen
-  ALF_RIM: [-1.22, 12.32], BOY_RIM: [-0.29, 11.42], ELENA_F: [-0.27, 11.64], TOTO_F: [-1.19, 11.85],
+  ALF_RIM: [-1.22, 12.32], BOY_RIM: [-2.0, 11.6], ELENA_F: [-0.27, 11.64], TOTO_F: [-1.19, 11.85],
   // by Alfredo's door (DOOR shot)
   BOY_DOOR: [-11.62, 2.0],
   // the steps: Toto on the lowest
@@ -713,7 +713,7 @@ const ALF_CLOSE = aim(-0.42, 11.22, P.ALF_RIM, 1.18, -2);
 B('outside', {
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'burnt', smoke: 0.4, ...crowdAt(-1, 19.5, 200, 1), ...cast({
     alfredo: { at: P.ALF_RIM, turn: 205, on: [P.ALF_RIM[0], P.ALF_RIM[1], G.RIM], do: SIT, mood: 'tired', look: [P.ALF_RIM[0] - 0.2, P.ALF_RIM[1] - 1.5, 0.2] },
-    toto: { at: P.BOY_RIM, turn: 250, look: 'alfredo', mood: 'afraid' },
+    toto: { at: P.BOY_RIM, turn: 80, look: 'alfredo', mood: 'afraid' },
     c1: { at: [-2.4, 13.8], turn: 140, look: 'alfredo' }, c2: { at: [0.9, 14.9], turn: 230, look: 'alfredo', mood: 'sad' },
     c3: { at: [1.7, 13.9], turn: 250, look: 'alfredo' }, c4: { at: [-1.0, 14.9], turn: 190, look: 'alfredo', mood: 'sad' } }), ...CAM.FOUNTAIN }),
   run: async s => {
