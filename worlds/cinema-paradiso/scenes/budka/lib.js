@@ -397,7 +397,7 @@ const FILM = {
       const alf = s.person('alfredo');
       await s.wait(1); s.tell('window:hands');
       await s.wait(1.6);
-      await walk(s, 'alfredo', [P.ALF_PUSH]); await alf.turn(70);
+      await walk(s, 'alfredo', [[-0.9, 1.7], P.ALF_PUSH]); await alf.turn(70);
       alf.look('projector'); alf.reach({ r: 'projector', l: 'projector#lever' }); alf.do('push_turn');
       await s.move('turned', 1, { over: 2.6 });
       alf.reach(null); alf.do('stand');
