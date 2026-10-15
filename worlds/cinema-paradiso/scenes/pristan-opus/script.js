@@ -2,7 +2,7 @@
 // car's place from `car_arrive` and `car_go`. A beat plays from its start: if it follows (`after`) the beat that
 // last ended, it goes on from there (a cut to its camera when it has its own); otherwise it cuts to its `from`.
 // At its end it says `beat:<name>` and makes ready the opening shot of the beat that may come next.
-const L = scene.lib, G = L.G;
+const L = scene.lib, G = L.G, CH = scene.kit.cast_opus.characters;
 const IDS = ['toto', 'elena', 'daughter', 'alfredo', 'banker', 'c1', 'c2', 'c3', 'c4'];
 const SIT = { motion: 'seated', loop: true }, HUNCH = { motion: 'seated_hunched', loop: true };
 const brg = (a, b) => { const d = Math.atan2(b[0] - a[0], b[1] - a[1]) * 180 / Math.PI; return d < 0 ? d + 360 : d; };
@@ -210,7 +210,7 @@ const B = {
   },
   car: {
     from: () => ({ ...base('now', 0.9), ...carKeys('new', 1, 0), headlights: 1,
-      ...cast({ elena: { at: EL_NOW, turn: 0, wear: 'elena_grown' }, daughter: { at: [-0.4, 54.4], turn: 300, look: 'elena' }, toto: { at: [2.4, 36], turn: 345, wear: 'salvatore' } }), ...CAM.carNow }),
+      ...cast({ elena: { at: EL_NOW, turn: 0, wear: CH.elena_grown }, daughter: { at: [-0.4, 54.4], turn: 300, look: 'elena' }, toto: { at: [2.4, 36], turn: 345, wear: CH.salvatore } }), ...CAM.carNow }),
     run: async s => {
       const sal = s.person('toto'), d = s.person('daughter');
       await s.wait(1.2);
@@ -226,7 +226,7 @@ const B = {
     after: ['car'],
     open: () => ({ ...CAM.meet }),
     from: () => ({ ...base('now', 0.9), ...carKeys('new', 1, 0), headlights: 1,
-      ...cast({ elena: { at: EL_NOW, turn: 0, wear: 'elena_grown' }, toto: { at: SAL_STOP, turn: brg(SAL_STOP, EL_NOW), wear: 'salvatore', look: 'elena' } }), ...CAM.meet }),
+      ...cast({ elena: { at: EL_NOW, turn: 0, wear: CH.elena_grown }, toto: { at: SAL_STOP, turn: brg(SAL_STOP, EL_NOW), wear: CH.salvatore, look: 'elena' } }), ...CAM.meet }),
     run: async s => {
       const el = s.person('elena'), sal = s.person('toto');
       await s.wait(0.5);
@@ -239,7 +239,7 @@ const B = {
   ask: {
     after: ['meet'],
     from: () => ({ ...B.meet.from(),
-      ...cast({ elena: { at: EL_NOW, turn: brg(EL_NOW, SAL_MEET), wear: 'elena_grown', look: 'toto' }, toto: { at: SAL_MEET, turn: brg(SAL_MEET, EL_NOW), wear: 'salvatore', look: 'elena' } }) }),
+      ...cast({ elena: { at: EL_NOW, turn: brg(EL_NOW, SAL_MEET), wear: CH.elena_grown, look: 'toto' }, toto: { at: SAL_MEET, turn: brg(SAL_MEET, EL_NOW), wear: CH.salvatore, look: 'elena' } }) }),
     run: async s => {
       const el = s.person('elena'), sal = s.person('toto');
       await s.all(sal.walk([SAL_ASK]), el.walk([EL_ASK]));
@@ -268,7 +268,7 @@ const B = {
   parting: {
     after: ['ask', 'bye'],
     from: () => ({ ...B.meet.from(),
-      ...cast({ elena: { at: [-1.35, 55.4], turn: 20, wear: 'elena_grown' }, toto: { at: SAL_MEET, turn: brg(SAL_MEET, EL_NOW), wear: 'salvatore', look: 'elena' } }) }),
+      ...cast({ elena: { at: [-1.35, 55.4], turn: 20, wear: CH.elena_grown }, toto: { at: SAL_MEET, turn: brg(SAL_MEET, EL_NOW), wear: CH.salvatore, look: 'elena' } }) }),
     run: async s => {
       const el = s.person('elena'), sal = s.person('toto');
       await el.walk([[-0.2, 54.4], [1.15, 55.2], [1.15, 56.4]]);
