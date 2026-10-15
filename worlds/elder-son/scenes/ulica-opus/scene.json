@@ -1,6 +1,6 @@
 {
   "engine": 3,
-  "title": "Улица (Opus)",
+  "title": "Улица",
   "caption": "Ночная улица пригорода. Снег.",
   "horizon": 0.5,
   "camera": {
@@ -14,6 +14,8 @@
   },
   "modules": [
     "cast",
+    "beats",
+    "closeups",
     "izby"
   ],
   "light": {
@@ -116,8 +118,38 @@
       "of": "mak_window#pane",
       "color": "#eda055",
       "strength": 1.1,
-      "reach": 6,
+      "reach": 8,
       "on": "mak_window_lit"
+    },
+    {
+      "id": "fire_l",
+      "of": "shed#fire",
+      "color": "#ff8a3a",
+      "strength": 3.2,
+      "reach": 15,
+      "on": "fire",
+      "flicker": 0.5,
+      "glow": 2
+    },
+    {
+      "id": "mak_hall_l",
+      "across": 36.9,
+      "distance": 13.5,
+      "elevation": 2.45,
+      "color": "#f0b56e",
+      "strength": 1.2,
+      "reach": 3.5,
+      "on": "mak_door"
+    },
+    {
+      "id": "nb_hall_l",
+      "across": 12.8,
+      "distance": 14.5,
+      "elevation": 2.45,
+      "color": "#f0b56e",
+      "strength": 1,
+      "reach": 3.5,
+      "on": "nb_door"
     },
     {
       "id": "kitchen_l",
@@ -160,65 +192,210 @@
     }
   ],
   "state": {
-    "hour": 0.9,
     "late": 0,
-    "snow": 0.35,
     "beat": null,
     "beat_next": null,
     "knock": 0,
-    "win1": 1,
-    "win2": 1,
-    "win3": 1,
-    "win4": 1,
-    "win5": 1,
-    "mak_window": 0,
+    "vyodra": "none",
+    "run": 0,
+    "run_at": 0,
+    "look_back": 0,
+    "splash": 0,
+    "lay": 0,
+    "shed_left": 1,
+    "shed_burnt": 0,
     "win1_lit": 1,
+    "win1_who": 0,
     "win2_lit": 1,
+    "win2_who": 0,
     "win3_lit": 1,
+    "win3_who": 0,
     "win4_lit": 1,
+    "win4_who": 0,
     "win5_lit": 1,
+    "win5_who": 0,
     "mak_window_lit": 0,
     "mak_window_who": 0,
-    "win1_who": 0,
-    "win2_who": 0,
-    "win3_who": 0,
-    "win4_who": 0,
-    "win5_who": 0,
-    "porch_light": 0,
-    "door": 0,
     "door_f": 180,
-    "mak_door": 0,
     "mak_door_f": 180,
-    "vasenka_here": false,
-    "sarafanov_here": false,
-    "k1_here": false,
-    "k2_here": false,
-    "k3_here": false,
-    "k4_here": false,
+    "nb_door_f": 180,
     "warm": 0.36,
     "frost": 0.25,
-    "busygin_a": -2.7,
-    "busygin_d": 5,
-    "silva_a": -1.5,
-    "silva_d": 5.35,
-    "sarafanov_a": 25.2,
-    "sarafanov_d": 12.6,
-    "vasenka_a": 25.2,
-    "vasenka_d": 12.35,
+    "nina_is": "none",
+    "secret": 0,
+    "silva_door": 1,
+    "ending": "late",
+    "nina_end": "gone",
+    "nina_for": 0,
+    "knocked": "",
     "k1_a": 21,
     "k1_d": 13.55,
     "k2_a": 21.05,
     "k2_d": 14.3,
     "k3_a": 21.75,
     "k3_d": 14.25,
-    "busygin_turn": 0,
-    "silva_turn": 350,
+    "k4_a": 22.35,
+    "k4_d": 13.6,
+    "busygin_a": -2.5,
+    "busygin_d": 9.3,
+    "silva_a": -1.5,
+    "silva_d": 10.4,
+    "sarafanov_a": 23.9,
+    "sarafanov_d": 12.85,
+    "vasenka_a": 29.9,
+    "vasenka_d": 14.1,
+    "nina_a": 23.9,
+    "nina_d": 12.85,
+    "kudimov_a": 2,
+    "kudimov_d": 6.4,
+    "makarskaya_a": 35.9,
+    "makarskaya_d": 13.8,
+    "neighbor1_a": 11.9,
+    "neighbor1_d": 14.8,
+    "neighbor2_a": 11.9,
+    "neighbor2_d": 14.8,
+    "busygin_here": true,
+    "busygin_do": "stand",
     "busygin_look": "win2",
-    "silva_look": "win4",
-    "camera_x": -2.1,
-    "camera_z": 0,
-    "camera_yaw": 0,
-    "camera_h": 0
+    "busygin_reach": null,
+    "busygin_with": null,
+    "busygin_wear": null,
+    "busygin_gait": null,
+    "busygin_on": null,
+    "busygin_mood": "tired",
+    "silva_here": true,
+    "silva_do": "stand",
+    "silva_look": "street_lamp",
+    "silva_reach": null,
+    "silva_with": null,
+    "silva_wear": null,
+    "silva_gait": null,
+    "silva_on": null,
+    "silva_mood": "smile",
+    "sarafanov_here": false,
+    "sarafanov_do": "stand",
+    "sarafanov_look": null,
+    "sarafanov_reach": null,
+    "sarafanov_with": null,
+    "sarafanov_wear": null,
+    "sarafanov_gait": null,
+    "sarafanov_on": null,
+    "sarafanov_mood": null,
+    "vasenka_here": false,
+    "vasenka_do": "stand",
+    "vasenka_look": null,
+    "vasenka_reach": null,
+    "vasenka_with": null,
+    "vasenka_wear": null,
+    "vasenka_gait": null,
+    "vasenka_on": null,
+    "vasenka_mood": null,
+    "nina_here": false,
+    "nina_do": "stand",
+    "nina_look": null,
+    "nina_reach": null,
+    "nina_with": null,
+    "nina_wear": null,
+    "nina_gait": null,
+    "nina_on": null,
+    "nina_mood": null,
+    "kudimov_here": false,
+    "kudimov_do": "stand",
+    "kudimov_look": null,
+    "kudimov_reach": null,
+    "kudimov_with": null,
+    "kudimov_wear": null,
+    "kudimov_gait": null,
+    "kudimov_on": null,
+    "kudimov_mood": null,
+    "makarskaya_here": false,
+    "makarskaya_do": "stand",
+    "makarskaya_look": null,
+    "makarskaya_reach": null,
+    "makarskaya_with": null,
+    "makarskaya_wear": null,
+    "makarskaya_gait": null,
+    "makarskaya_on": null,
+    "makarskaya_mood": null,
+    "neighbor1_here": false,
+    "neighbor1_do": "stand",
+    "neighbor1_look": null,
+    "neighbor1_reach": null,
+    "neighbor1_with": null,
+    "neighbor1_wear": null,
+    "neighbor1_gait": null,
+    "neighbor1_on": null,
+    "neighbor1_mood": null,
+    "neighbor2_here": false,
+    "neighbor2_do": "stand",
+    "neighbor2_look": null,
+    "neighbor2_reach": null,
+    "neighbor2_with": null,
+    "neighbor2_wear": null,
+    "neighbor2_gait": null,
+    "neighbor2_on": null,
+    "neighbor2_mood": null,
+    "k1_here": false,
+    "k1_do": "stand",
+    "k1_look": null,
+    "k1_reach": null,
+    "k1_with": null,
+    "k1_wear": null,
+    "k1_gait": null,
+    "k1_on": null,
+    "k1_mood": null,
+    "k2_here": false,
+    "k2_do": "stand",
+    "k2_look": null,
+    "k2_reach": null,
+    "k2_with": null,
+    "k2_wear": null,
+    "k2_gait": null,
+    "k2_on": null,
+    "k2_mood": null,
+    "k3_here": false,
+    "k3_do": "stand",
+    "k3_look": null,
+    "k3_reach": null,
+    "k3_with": null,
+    "k3_wear": null,
+    "k3_gait": null,
+    "k3_on": null,
+    "k3_mood": null,
+    "k4_here": false,
+    "k4_do": "stand",
+    "k4_look": null,
+    "k4_reach": null,
+    "k4_with": null,
+    "k4_wear": null,
+    "k4_gait": null,
+    "k4_on": null,
+    "k4_mood": null,
+    "hour": 0.9,
+    "snow": 0.35,
+    "win1": 1,
+    "win2": 1,
+    "win3": 1,
+    "win4": 1,
+    "win5": 1,
+    "mak_window": 0,
+    "door": 0,
+    "mak_door": 0,
+    "nb_door": 0,
+    "porch_light": 0,
+    "fire": 0,
+    "steam": 0,
+    "silva_smoke": 0,
+    "shawl": 0,
+    "camera_target": null,
+    "camera_shot": null,
+    "camera_frame": null,
+    "camera_x": -6.2,
+    "camera_z": 8.1,
+    "camera_yaw": 112,
+    "camera_h": -0.15,
+    "busygin_turn": 318,
+    "silva_turn": 300
   },
   "states": {
     "hour": {
@@ -255,12 +432,44 @@
         "porch",
         "shut",
         "in",
-        "return"
+        "return",
+        "gate",
+        "evening",
+        "fire",
+        "after_fire",
+        "blame",
+        "own_up",
+        "porch_night",
+        "shawl",
+        "porch_after",
+        "run_out",
+        "night_window"
       ],
-      "means": "кусок фильма: игра ставит имя — кусок играется с начала"
+      "means": "кусок фильма: игра ставит имя — кусок играется с начала (модуль beats)"
     },
     "beat_next": {
-      "type": "string",
+      "values": [
+        null,
+        "walk",
+        "knock_ready",
+        "last_window",
+        "neighbor",
+        "porch",
+        "shut",
+        "in",
+        "return",
+        "gate",
+        "evening",
+        "fire",
+        "after_fire",
+        "blame",
+        "own_up",
+        "porch_night",
+        "shawl",
+        "porch_after",
+        "run_out",
+        "night_window"
+      ],
       "means": "какой кусок будет следующим: сцена готовит его первый кадр, склейка идёт по готовому"
     },
     "knock": {
@@ -273,6 +482,39 @@
         5
       ],
       "means": "«Окна»: N — Бусыгин идёт к окну winN и стучит (knock:hit, knock:done); 0 — возвращается к Сильве"
+    },
+    "vyodra": {
+      "values": [
+        "none",
+        "fill",
+        "throw"
+      ],
+      "means": "«Вёдра»: fill — к бочке, полное ведро (vyodra:full); throw — несёт к сараю, выплёскивает (vyodra:splash); none — ставит ведро"
+    },
+    "run": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«Бегом»: куда бежать Бусыгину, от калитки (0) до тропы на платформу (1), ≈ 65 м"
+    },
+    "run_at": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«Бегом»: где он сейчас (ставит сцена, 10 раз в секунду)"
+    },
+    "look_back": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "«Бегом»: 1 — стоит и оглядывается на окно кухни"
+    },
+    "splash": {
+      "type": "number",
+      "means": "вода на сарай: каждое изменение — брызги (ставит сцена)"
     },
     "win1": {
       "values": [
@@ -450,29 +692,69 @@
       "type": "number",
       "means": "поворот двери Макарской — ставит скрипт по mak_door"
     },
-    "vasenka_here": {
-      "type": "boolean",
-      "means": "Васенька на улице (ставит кусок)"
+    "nb_door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "дверь соседей (дом у Сарафановых): 0 закрыта … 1 открыта"
     },
-    "sarafanov_here": {
-      "type": "boolean",
-      "means": "Сарафанов на улице (ставит кусок)"
+    "nb_door_f": {
+      "type": "number",
+      "means": "поворот двери соседей — ставит скрипт по nb_door"
     },
-    "k1_here": {
-      "type": "boolean",
-      "means": "в окне кухни: Сильва"
+    "fire": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "огонь в сарае: свет в окошке, языки под крышей, дым, оранжевый свет на снегу (двигает игра в «Вёдрах»)"
     },
-    "k2_here": {
-      "type": "boolean",
-      "means": "в окне кухни: Бусыгин"
+    "steam": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "пар над потушенным сараем"
     },
-    "k3_here": {
-      "type": "boolean",
-      "means": "в окне кухни: Васенька"
+    "shed_burnt": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "сарай после пожара (ставит кусок after_fire): 1 — обгорел/выгорел по shed_left"
     },
-    "k4_here": {
-      "type": "boolean",
-      "means": "в окне кухни: четвёртый (в этой версии сцены его нет)"
+    "shed_left": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "сарай после пожара: 1 — устоял (крыша цела), 0 — выгорел (чёрные стены без крыши); ставит игра перед after_fire"
+    },
+    "silva_smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "дым от рукава Сильвы (кусок fire ставит, гасит за 30 с)"
+    },
+    "shawl": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "вставка «Пальто» (closeups, кадр shawl): 0 закрыта, 1 открыта"
+    },
+    "lay": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«Пальто»: пальто опускается ей на плечи (двигает игра; читает только animate вставки)"
     },
     "warm": {
       "range": [
@@ -488,61 +770,210 @@
       ],
       "means": "ключ партии: иней на окне кухни, от углов к середине"
     },
+    "nina_is": {
+      "values": [
+        "none",
+        "knows",
+        "sister"
+      ],
+      "means": "ключ партии: Нина знает правду / как сестра / нет — porch_night, porch_after"
+    },
+    "secret": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "ключ партии: тайна об оркестре (Р115 на крыльце — говорит игра)"
+    },
+    "silva_door": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "ключ партии: Сильва выбегает впереди в run_out"
+    },
+    "ending": {
+      "values": [
+        "late",
+        "saturday",
+        "anyway",
+        "suitcase"
+      ],
+      "means": "ключ партии: кто в окне кухни в night_window"
+    },
+    "nina_end": {
+      "values": [
+        "home",
+        "gone"
+      ],
+      "means": "ключ партии: Нина в окне в night_window или её нет"
+    },
+    "nina_for": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "ключ партии: Нина одна стоит у окна в night_window (при saturday/suitcase)"
+    },
+    "knocked": {
+      "type": "string",
+      "means": "ключ партии: номера окон, в которые он стучал в I (''…'12345'): в evening они тёмные"
+    },
+    "busygin_here": {
+      "type": "boolean",
+      "means": "Бусыгин в сцене (ставит кусок)"
+    },
     "busygin_a": {
       "type": "number",
-      "means": "где busygin: метры вправо"
+      "means": "где Бусыгин: метры вправо"
     },
     "busygin_d": {
       "type": "number",
-      "means": "где busygin: метры вперёд"
+      "means": "где Бусыгин: метры вперёд"
+    },
+    "silva_here": {
+      "type": "boolean",
+      "means": "Сильва в сцене (ставит кусок)"
     },
     "silva_a": {
       "type": "number",
-      "means": "где silva: метры вправо"
+      "means": "где Сильва: метры вправо"
     },
     "silva_d": {
       "type": "number",
-      "means": "где silva: метры вперёд"
+      "means": "где Сильва: метры вперёд"
+    },
+    "sarafanov_here": {
+      "type": "boolean",
+      "means": "Сарафанов в сцене (ставит кусок)"
     },
     "sarafanov_a": {
       "type": "number",
-      "means": "где sarafanov: метры вправо"
+      "means": "где Сарафанов: метры вправо"
     },
     "sarafanov_d": {
       "type": "number",
-      "means": "где sarafanov: метры вперёд"
+      "means": "где Сарафанов: метры вперёд"
+    },
+    "vasenka_here": {
+      "type": "boolean",
+      "means": "Васенька в сцене (ставит кусок)"
     },
     "vasenka_a": {
       "type": "number",
-      "means": "где vasenka: метры вправо"
+      "means": "где Васенька: метры вправо"
     },
     "vasenka_d": {
       "type": "number",
-      "means": "где vasenka: метры вперёд"
+      "means": "где Васенька: метры вперёд"
+    },
+    "nina_here": {
+      "type": "boolean",
+      "means": "Нина в сцене (ставит кусок)"
+    },
+    "nina_a": {
+      "type": "number",
+      "means": "где Нина: метры вправо"
+    },
+    "nina_d": {
+      "type": "number",
+      "means": "где Нина: метры вперёд"
+    },
+    "kudimov_here": {
+      "type": "boolean",
+      "means": "Кудимов в сцене (ставит кусок)"
+    },
+    "kudimov_a": {
+      "type": "number",
+      "means": "где Кудимов: метры вправо"
+    },
+    "kudimov_d": {
+      "type": "number",
+      "means": "где Кудимов: метры вперёд"
+    },
+    "makarskaya_here": {
+      "type": "boolean",
+      "means": "Макарская в сцене (ставит кусок)"
+    },
+    "makarskaya_a": {
+      "type": "number",
+      "means": "где Макарская: метры вправо"
+    },
+    "makarskaya_d": {
+      "type": "number",
+      "means": "где Макарская: метры вперёд"
+    },
+    "neighbor1_here": {
+      "type": "boolean",
+      "means": "сосед в сцене (ставит кусок)"
+    },
+    "neighbor1_a": {
+      "type": "number",
+      "means": "где сосед: метры вправо"
+    },
+    "neighbor1_d": {
+      "type": "number",
+      "means": "где сосед: метры вперёд"
+    },
+    "neighbor2_here": {
+      "type": "boolean",
+      "means": "соседка в сцене (ставит кусок)"
+    },
+    "neighbor2_a": {
+      "type": "number",
+      "means": "где соседка: метры вправо"
+    },
+    "neighbor2_d": {
+      "type": "number",
+      "means": "где соседка: метры вперёд"
+    },
+    "k1_here": {
+      "type": "boolean",
+      "means": "первый в окне кухни в сцене (ставит кусок)"
     },
     "k1_a": {
       "type": "number",
-      "means": "где k1: метры вправо"
+      "means": "где первый в окне кухни: метры вправо"
     },
     "k1_d": {
       "type": "number",
-      "means": "где k1: метры вперёд"
+      "means": "где первый в окне кухни: метры вперёд"
+    },
+    "k2_here": {
+      "type": "boolean",
+      "means": "второй в окне кухни в сцене (ставит кусок)"
     },
     "k2_a": {
       "type": "number",
-      "means": "где k2: метры вправо"
+      "means": "где второй в окне кухни: метры вправо"
     },
     "k2_d": {
       "type": "number",
-      "means": "где k2: метры вперёд"
+      "means": "где второй в окне кухни: метры вперёд"
+    },
+    "k3_here": {
+      "type": "boolean",
+      "means": "третий в окне кухни в сцене (ставит кусок)"
     },
     "k3_a": {
       "type": "number",
-      "means": "где k3: метры вправо"
+      "means": "где третий в окне кухни: метры вправо"
     },
     "k3_d": {
       "type": "number",
-      "means": "где k3: метры вперёд"
+      "means": "где третий в окне кухни: метры вперёд"
+    },
+    "k4_here": {
+      "type": "boolean",
+      "means": "четвёртый в окне кухни в сцене (ставит кусок)"
+    },
+    "k4_a": {
+      "type": "number",
+      "means": "где четвёртый в окне кухни: метры вправо"
+    },
+    "k4_d": {
+      "type": "number",
+      "means": "где четвёртый в окне кухни: метры вперёд"
     }
   },
   "objects": [
@@ -1259,6 +1690,7 @@
       "id": "mak_hall",
       "name": "Сени",
       "inside": true,
+      "glows": true,
       "across": 36.9,
       "distance": 13.6,
       "elevation": 0.45,
@@ -1281,6 +1713,42 @@
       "facing": 180,
       "place": {
         "facing": "mak_door_f"
+      },
+      "height": 1.95,
+      "box": [
+        -0.05,
+        -2,
+        0.9500000000000001,
+        0.05
+      ]
+    },
+    {
+      "id": "nb_hall",
+      "name": "Сени",
+      "inside": true,
+      "glows": true,
+      "across": 12.8,
+      "distance": 14.6,
+      "elevation": 0.45,
+      "facing": 180,
+      "height": 2.4,
+      "box": [
+        -1,
+        -2.45,
+        1,
+        0.05
+      ]
+    },
+    {
+      "id": "nb_door",
+      "name": "Дверь соседей",
+      "on": "h3",
+      "across": 1.85,
+      "distance": 0.03,
+      "elevation": 0.45,
+      "facing": 180,
+      "place": {
+        "facing": "nb_door_f"
       },
       "height": 1.95,
       "box": [
@@ -1415,11 +1883,12 @@
       "height": 2.4,
       "box": [
         -1.65,
-        -2.9,
+        -3.7,
         1.65,
         0.15
       ],
-      "shadow": true
+      "shadow": true,
+      "flicker": 0.5
     },
     {
       "id": "shed_side",
@@ -1438,8 +1907,8 @@
     {
       "id": "barrel",
       "name": "Бочка",
-      "across": 17,
-      "distance": 8.95,
+      "across": 23.2,
+      "distance": 8.85,
       "height": 0.95,
       "box": [
         -0.5,
@@ -1465,8 +1934,8 @@
     {
       "id": "woodpile",
       "name": "Поленница",
-      "across": 36.9,
-      "distance": 10.7,
+      "across": 34,
+      "distance": 12.45,
       "facing": 180,
       "height": 1.3,
       "box": [
@@ -1474,6 +1943,22 @@
         -1.4,
         0.95,
         0.1
+      ]
+    },
+    {
+      "id": "suitcase",
+      "name": "Чемодан",
+      "inside": true,
+      "across": 22.75,
+      "distance": 12.4,
+      "elevation": 0.95,
+      "facing": 180,
+      "height": 0.5,
+      "box": [
+        -0.4,
+        -0.5,
+        0.4,
+        0.55
       ]
     },
     {
@@ -1559,10 +2044,10 @@
       "person": {
         "cast": "cast",
         "who": "busygin",
-        "turn": 0
+        "turn": 318
       },
-      "across": -2.7,
-      "distance": 5,
+      "across": -2.5,
+      "distance": 9.3,
       "place": {
         "across": "busygin_a",
         "distance": "busygin_d"
@@ -1575,10 +2060,10 @@
       "person": {
         "cast": "cast",
         "who": "silva",
-        "turn": 350
+        "turn": 300
       },
       "across": -1.5,
-      "distance": 5.35,
+      "distance": 10.4,
       "place": {
         "across": "silva_a",
         "distance": "silva_d"
@@ -1593,8 +2078,8 @@
         "who": "sarafanov",
         "turn": 180
       },
-      "across": 25.2,
-      "distance": 12.6,
+      "across": 23.9,
+      "distance": 12.85,
       "place": {
         "across": "sarafanov_a",
         "distance": "sarafanov_d"
@@ -1609,8 +2094,8 @@
         "who": "vasenka",
         "turn": 180
       },
-      "across": 25.2,
-      "distance": 12.35,
+      "across": 29.9,
+      "distance": 14.1,
       "place": {
         "across": "vasenka_a",
         "distance": "vasenka_d"
@@ -1618,8 +2103,88 @@
       "shadow": true
     },
     {
+      "id": "nina",
+      "name": "Нина",
+      "person": {
+        "cast": "cast",
+        "who": "nina",
+        "turn": 180
+      },
+      "across": 23.9,
+      "distance": 12.85,
+      "place": {
+        "across": "nina_a",
+        "distance": "nina_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "kudimov",
+      "name": "Кудимов",
+      "person": {
+        "cast": "cast",
+        "who": "kudimov",
+        "turn": 180
+      },
+      "across": 2,
+      "distance": 6.4,
+      "place": {
+        "across": "kudimov_a",
+        "distance": "kudimov_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "makarskaya",
+      "name": "Макарская",
+      "person": {
+        "cast": "cast",
+        "who": "makarskaya",
+        "turn": 180
+      },
+      "across": 35.9,
+      "distance": 13.8,
+      "place": {
+        "across": "makarskaya_a",
+        "distance": "makarskaya_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "neighbor1",
+      "name": "Сосед",
+      "person": {
+        "cast": "cast",
+        "who": "neighbor1",
+        "turn": 180
+      },
+      "across": 11.9,
+      "distance": 14.8,
+      "place": {
+        "across": "neighbor1_a",
+        "distance": "neighbor1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "neighbor2",
+      "name": "Соседка",
+      "person": {
+        "cast": "cast",
+        "who": "neighbor2",
+        "turn": 180
+      },
+      "across": 11.9,
+      "distance": 14.8,
+      "place": {
+        "across": "neighbor2_a",
+        "distance": "neighbor2_d"
+      },
+      "shadow": true
+    },
+    {
       "id": "k1",
-      "name": "Сильва",
+      "name": "В окне кухни",
       "person": {
         "cast": "cast",
         "who": "silva",
@@ -1636,7 +2201,7 @@
     },
     {
       "id": "k2",
-      "name": "Бусыгин",
+      "name": "В окне кухни",
       "person": {
         "cast": "cast",
         "who": "busygin",
@@ -1653,7 +2218,7 @@
     },
     {
       "id": "k3",
-      "name": "Васенька",
+      "name": "В окне кухни",
       "person": {
         "cast": "cast",
         "who": "vasenka",
@@ -1667,6 +2232,28 @@
       },
       "shadow": true,
       "inside": true
+    },
+    {
+      "id": "k4",
+      "name": "В окне кухни",
+      "person": {
+        "cast": "cast",
+        "who": "busygin_shirt",
+        "turn": 270
+      },
+      "across": 22.35,
+      "distance": 13.6,
+      "place": {
+        "across": "k4_a",
+        "distance": "k4_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "shawl",
+      "name": "Пальто на плечи",
+      "insert": "shawl"
     },
     {
       "id": "snowfall",
@@ -1699,10 +2286,146 @@
         ],
         "opacity": 0.3
       }
+    },
+    {
+      "id": "shed_flames",
+      "name": "Огонь",
+      "particles": {
+        "kind": "fire",
+        "amount": "fire",
+        "at": [
+          29.2,
+          11.15,
+          2.3
+        ],
+        "source": [
+          2.2,
+          0.3,
+          0.3
+        ],
+        "rate": 40,
+        "size": [
+          0.5,
+          0.12
+        ]
+      }
+    },
+    {
+      "id": "shed_embers",
+      "name": "Искры",
+      "particles": {
+        "kind": "embers",
+        "amount": "fire",
+        "at": [
+          28.9,
+          11.7,
+          2.6
+        ],
+        "source": [
+          2,
+          1.5,
+          0.3
+        ],
+        "rate": 12
+      }
+    },
+    {
+      "id": "shed_smoke",
+      "name": "Дым",
+      "particles": {
+        "kind": "smoke",
+        "amount": "fire",
+        "at": [
+          28.9,
+          12,
+          2.7
+        ],
+        "source": [
+          2,
+          1.2,
+          0.3
+        ],
+        "rate": 7,
+        "size": [
+          0.6,
+          3.2
+        ],
+        "life": [
+          4,
+          8
+        ],
+        "opacity": 0.5,
+        "shadow": 0.4
+      }
+    },
+    {
+      "id": "steam",
+      "name": "Пар",
+      "particles": {
+        "kind": "smoke",
+        "amount": "steam",
+        "at": [
+          28.9,
+          11.8,
+          2
+        ],
+        "source": [
+          2.2,
+          1.4,
+          0.6
+        ],
+        "rate": 5,
+        "size": [
+          0.4,
+          2.4
+        ],
+        "life": [
+          4,
+          7
+        ],
+        "opacity": 0.35,
+        "color": "#d9dee8",
+        "gravity": -0.5
+      }
+    },
+    {
+      "id": "sleeve_smoke",
+      "name": "Дым от рукава",
+      "particles": {
+        "kind": "smoke",
+        "amount": "silva_smoke",
+        "at": "silva#hand_l",
+        "rate": 6,
+        "size": [
+          0.06,
+          0.5
+        ],
+        "life": [
+          1.5,
+          3
+        ],
+        "opacity": 0.35
+      }
+    },
+    {
+      "id": "splash",
+      "name": "Вода",
+      "particles": {
+        "kind": "splashes",
+        "at": [
+          29,
+          11,
+          1.3
+        ],
+        "burst": {
+          "on": "splash",
+          "count": 70
+        },
+        "color": "#cfd8e6"
+      }
     }
   ],
   "music": {
-    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Very quiet low drone of wind along an empty village street at night, sparse, cold",
@@ -1771,6 +2494,7 @@
     ],
     "bpm": 60,
     "density": 0.15,
-    "brightness": 0.25
+    "brightness": 0.25,
+    "scale": "A_FLAT_MAJOR_F_MINOR"
   }
 }

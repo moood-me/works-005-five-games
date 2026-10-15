@@ -10,7 +10,8 @@
 //     and shoulders against the light), layer `bars`; its glow `pane` (e.light) — the scene's animate shows them by
 //     its keys; o.dark — a window that never lights: the dark glass and its bars only
 //   fence(g, e, len, h, o) — pickets from x 0 to len; o.gaps: [[x0, x1]] — gates left open
-//   shed(g, e, o) — a board shed front, o.w wide, o.h high, a small window (dark)
+//   shed(g, e, o) — a board shed front, o.w wide, o.h high, a small window (dark); o.burnt 1 — scorched (soot, no snow
+//     on its roof), 2 — burnt down to black stumps of boards; o.fire — its fire's layers `fire`, `tongues` and glow `fire`
 //   barrel(g, e), bench(g, e), woodpile(g, e, w)
 //   lamp(g, e, h) — a wooden pole with a lamp under a tin shade at h; its light `lamp` (e.light)
 //   birch(g, e, h, o) — a bare birch, h tall; o.lean (its top that far aside), o.thick (its trunk that many times)
@@ -300,8 +301,34 @@ function fence(g, e, len, h, o = {}) {
 }
 
 function shed(g, e, o) {
-  const w = o.w, h = o.h;
-  g.fillStyle = '#5d5248';
+  const w = o.w, h = o.h, burnt = o.burnt || 0;
+  // burnt 2: what is left — black stumps of boards, no roof, the door gone; the snow round it trodden grey
+  if (burnt === 2) {
+    g.fillStyle = '#1b1613';
+    g.beginPath();
+    g.moveTo(-w / 2, 0);
+    for (let x = -w / 2; x <= w / 2 + 1e-6; x += 0.15) g.lineTo(x, -h * (0.35 + rnd(e) * 0.45));
+    g.lineTo(w / 2, 0);
+    g.closePath();
+    g.fill();
+    g.strokeStyle = 'rgba(70,52,40,0.6)';
+    g.lineWidth = 0.02;
+    for (let x = -w / 2 + 0.15; x < w / 2; x += 0.3) {
+      g.beginPath();
+      g.moveTo(x, -h * 0.3);
+      g.lineTo(x, 0);
+      g.stroke();
+    }
+    g.fillStyle = '#7f8188';
+    g.beginPath();
+    g.ellipse(0, 0, w / 2 + 0.4, 0.12, 0, Math.PI, 0);
+    g.fill();
+    e.at(0, -h * 0.25);
+    e.at(0, -h * 0.25, 'window');
+    if (o.fire) e.light(0, -h * 0.2, 0.6, '#c2502a', 0.4, 'fire');
+    return;
+  }
+  g.fillStyle = burnt ? '#3f362f' : '#5d5248';
   g.fillRect(-w / 2, -h, w, h + 0.03);
   g.strokeStyle = 'rgba(25,20,16,0.6)';
   g.lineWidth = 0.025;
@@ -317,21 +344,58 @@ function shed(g, e, o) {
   g.fillStyle = '#372f29';
   g.fillRect(-w / 2 + 0.3, -h * 0.5, 0.8, 0.08);
   // a small window, dark
+  const wx = w / 2 - 0.85, wy = -h + 0.6;
   g.fillStyle = '#1b1a1c';
-  g.fillRect(w / 2 - 0.85, -h + 0.6, 0.45, 0.35);
+  g.fillRect(wx, wy, 0.45, 0.35);
   g.fillStyle = '#7f7468';
   g.fillRect(w / 2 - 0.9, -h + 0.95, 0.55, 0.05);
-  // the roof's edge and its snow
+  // the roof's edge and its snow (scorched: soot up the boards from the window, the snow on it melted)
   g.fillStyle = '#3e3630';
   g.fillRect(-w / 2 - 0.2, -h - 0.16, w + 0.4, 0.18);
-  g.fillStyle = SNOW;
-  g.beginPath();
-  g.moveTo(-w / 2 - 0.25, -h - 0.14);
-  g.quadraticCurveTo(0, -h - 0.45, w / 2 + 0.25, -h - 0.14);
-  g.closePath();
-  g.fill();
-  drift(g, e, -w / 2 - 0.3, w / 2 + 0.3, 0.35);
-  e.at(w / 2 - 0.62, -h + 0.78, 'window');
+  if (burnt) {
+    const s = g.createLinearGradient(0, -h - 0.2, 0, -h * 0.3);
+    s.addColorStop(0, 'rgba(10,8,8,0.85)');
+    s.addColorStop(1, 'rgba(10,8,8,0)');
+    g.fillStyle = s;
+    g.fillRect(-w / 2 - 0.2, -h - 0.2, w + 0.4, h * 0.75);
+  } else {
+    g.fillStyle = SNOW;
+    g.beginPath();
+    g.moveTo(-w / 2 - 0.25, -h - 0.14);
+    g.quadraticCurveTo(0, -h - 0.45, w / 2 + 0.25, -h - 0.14);
+    g.closePath();
+    g.fill();
+  }
+  // o.fire: its fire, for a scene to show by its own key (its animate): layer `fire` — the window ablaze, `tongues` —
+  // flames under the eaves; the glow `fire` lights the yard
+  if (o.fire) e.layer('fire', { blend: 'add', flicker: 0.6 }, l => {
+    const gr = l.createRadialGradient(wx + 0.22, wy + 0.18, 0.02, wx + 0.22, wy + 0.18, 0.45);
+    gr.addColorStop(0, '#ffe2a0');
+    gr.addColorStop(0.4, '#ff9a3c');
+    gr.addColorStop(1, 'rgba(200,60,20,0)');
+    l.fillStyle = gr;
+    l.fillRect(wx - 0.3, wy - 0.3, 1.05, 0.95);
+  });
+  if (o.fire) e.layer('tongues', { blend: 'add', pivot: [0, -h - 0.1], box: [-w / 2 - 0.4, -h - 1.3, w / 2 + 0.4, -h + 0.3] }, l => {
+    for (let i = 0; i < 7; i++) {
+      const x = -w / 2 + 0.2 + i * (w - 0.4) / 6 + (rnd(e) - 0.5) * 0.15, tall = 0.5 + rnd(e) * 0.7;
+      const gr = l.createLinearGradient(0, -h + 0.1, 0, -h - tall);
+      gr.addColorStop(0, 'rgba(255,200,110,0.95)');
+      gr.addColorStop(0.5, 'rgba(255,120,40,0.75)');
+      gr.addColorStop(1, 'rgba(180,40,10,0)');
+      l.fillStyle = gr;
+      l.beginPath();
+      l.moveTo(x - 0.16, -h + 0.1);
+      l.quadraticCurveTo(x - 0.12, -h - tall * 0.5, x + (rnd(e) - 0.5) * 0.1, -h - tall);
+      l.quadraticCurveTo(x + 0.12, -h - tall * 0.5, x + 0.16, -h + 0.1);
+      l.closePath();
+      l.fill();
+    }
+  });
+  if (o.fire) e.light(wx + 0.22, wy + 0.18, 0.6, '#ff8a3a', 1.6, 'fire');
+  if (!burnt) drift(g, e, -w / 2 - 0.3, w / 2 + 0.3, 0.35);
+  e.at(wx + 0.22, wy + 0.18, 'window');
+  e.at(0, -h * 0.5);
 }
 
 function barrel(g, e) {
