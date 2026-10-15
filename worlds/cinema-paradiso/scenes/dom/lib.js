@@ -32,7 +32,7 @@ const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_shot
 const CAM = {
   table: cam(0.85, 1.05, -24, -0.3, 1),     // the table under the lamp, the photo over it, the window at the left
   photo: cam(-0.45, 2.05, -2, -0.15, -7),      // close on the mother at the table, the photo over her: medium
-  call: cam(-0.5, 0.75, -3, -0.28, 1),       // from the room's south: the two of them face to face by the table, the lamp over them
+  call: cam(-1.75, 4.5, 145, -0.25, -3),     // from behind the table, past the lamp: the two of them face to face in its light
   answer: cam(-1.6, 4.55, 148, -0.3, -2),    // from behind the table, past the lamp: Toto reading in its light, his face to us
   corner: cam(2.45, 0.72, -10, -0.38, -3),     // inside the corner by its partition: the bed, the gap in the curtain
   movie: cam(2.3, 4.45, 186, -0.25, -4),     // over the bed's head: his back, the beam, the square on the partition
@@ -132,7 +132,7 @@ const FILM = {
   // 1958, evening, the lamp: the mother holds out a paper to Toto; he takes it
   call: {
     from: () => ({ ...base(0.8), ...people({
-      maria: { at: P.M_CALL, turn: 100, look: 'toto', with: ['paper_sheet'], mood: 'sad' },
+      maria: { at: P.M_CALL, turn: 75, look: 'toto', with: ['paper_sheet'], mood: 'sad' },
       toto: { at: P.T_CALL, turn: 245, look: 'maria', wear: CHARS().toto_teen, mood: 'neutral' } }), ...CAM.call }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
@@ -156,7 +156,7 @@ const FILM = {
   returned: {
     after: ['call'],
     from: () => ({ ...base(0.8), letters: 'returned', ...people({
-      maria: { at: P.M_CALL, turn: 100, look: 'toto', mood: 'sad' },
+      maria: { at: P.M_CALL, turn: 75, look: 'toto', mood: 'sad' },
       toto: { at: P.T_CALL, turn: 245, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
@@ -180,7 +180,7 @@ const FILM = {
   answered: {
     after: ['call'],
     from: () => ({ ...base(0.8), letters: 'answered', ...people({
-      maria: { at: P.M_CALL, turn: 100, look: 'toto', mood: 'neutral' },
+      maria: { at: P.M_CALL, turn: 75, look: 'toto', mood: 'neutral' },
       toto: { at: P.T_CALL, turn: 245, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
     run: async s => {
       const t = s.person('toto'), m = s.person('maria');
@@ -269,6 +269,8 @@ const FILM = {
         await t.go('sit_down', { to: P.S_BED, turn: 210 });
         t.do('seated', { loop: true });
       }
+      // (the reel has run out: the little square goes dark)
+      s.move('projector_on', 0, { over: 1.5 });
       m.reach(null);
       await m.walk([P.M_IN]);
       await m.turn(78);

@@ -460,6 +460,21 @@
    "inside": true
   },
   {
+   "id": "curtain_in",
+   "name": "Занавеска",
+   "across": 1.22,
+   "distance": 0.6,
+   "facing": 90,
+   "height": 2.4,
+   "box": [
+    -0.3,
+    -2.35,
+    4.5,
+    0.02
+   ],
+   "inside": true
+  },
+  {
    "id": "table",
    "name": "Стол",
    "across": -0.5,
