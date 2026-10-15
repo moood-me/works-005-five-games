@@ -117,7 +117,7 @@ const C_FAR = { c1: { at: [14, 1.0], turn: 300 }, c2: { at: [-11, -2.2], turn: 2
 function film(scene) {
   const CH = scene.kit.cast.characters;
   const CAM = {
-    platform: look([0.95, 0.5], [1.42, 3.3], -0.15, 2),  // the farewell, medium: Toto and Alfredo ≈ 1/2, the mother a step behind; the green carriage
+    platform: look([0.25, 0.6], [1.42, 3.3], -0.15, 2),   // the farewell, medium: Toto and Alfredo ≈ 1/2, the mother a step behind; the green carriage
     window: cam(-3.2, 1.6, 30, 0.15, 8),                 // under Toto's window from the platform, looking up at him; tracks with the train
     away: cam(-5.5, 0.4, 60, 0, 2),                      // along the platform east: the carriage goes, the mother waves
     back: { ...cam(1.7, G.WIN1 - 0.2, 150, 1.25, -2), camera_on: 'train' },   // leaning out of Toto's window, back at the platform
