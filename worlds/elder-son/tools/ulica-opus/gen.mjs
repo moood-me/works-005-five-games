@@ -213,6 +213,7 @@ const scene = {
   states,
   objects,
   music: {
+    scale: 'A_FLAT_MAJOR_F_MINOR',
     prompts: [
       { text: 'Very quiet low drone of wind along an empty village street at night, sparse, cold', weight: 1.2 },
       { text: 'Soft sustained string pad, almost still, tender and aching, winter night, minor key', weight: 0.7 },

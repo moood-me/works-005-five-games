@@ -119,6 +119,7 @@ const scene = {
   states,
   objects,
   music: {
+    scale: 'A_FLAT_MAJOR_F_MINOR',
     prompts: [
       { text: 'Very quiet warm room tone, a clock ticking softly, a stove crackling, no melody', weight: 1.2 },
       { text: 'Soft low string pad, tender and uneasy, late night in a small kitchen', weight: 0.5 },
