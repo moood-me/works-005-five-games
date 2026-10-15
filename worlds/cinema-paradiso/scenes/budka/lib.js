@@ -178,7 +178,7 @@ const P = {
   ALF_BEHIND: [-1.1, 1.8], ALF_CRANK: [-0.05, 2.9], BOY_LEVER: [0.45, 2.25], ALF_LEVER: [0.12, 2.5],
   ALF_WINDOW: [-1.6, 1.45], ALF_PUSH: [-1.1, 2.45], BOY_JAM: [0.3, 1.6],
   TOTO_BENCH: [1.62, 1.75], TOTO_REEL: [1.25, 1.95], TOTO_HUG: [1.45, 0.97], EL_HUG: [1.76, 0.64],
-  TOTO_STAND: [0.4, 0.95], EL_CAL: [1.6, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.45, 0.55],
+  TOTO_STAND: [0.55, 1.95], EL_CAL: [1.6, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.45, 0.55],
   TOTO_IN: [1.8, 0.6], SAL_P2: [0.98, 2.2], SAL_DOOR: [1.55, 0.7], SAL_WINDOW: [-1.72, 0.95],
 };
 const SEAT = [G.STOOL[0], G.STOOL[1], G.STOOL_H];
@@ -507,8 +507,8 @@ const FILM = {
   // ten o'clock: Alfredo comes in (or turns on his stool); Toto goes to the pier
   alfredo_comes: {
     from: () => ({ ...base(0.9), ...show(2), month: 8, clock: 10, ...CAM.DOOR, ...people({
-      toto: teen({ at: P.TOTO_STAND, turn: 50, look: 'alfredo', mood: 'sad' }),
-      alfredo: here() ? blind({ turn: 230, look: 'toto', mood: 'tired' })
+      toto: teen({ at: P.TOTO_STAND, turn: 200, look: 'alfredo', mood: 'sad' }),
+      alfredo: here() ? blind({ turn: 300, look: 'toto', mood: 'tired' })
         : { at: P.LANDING, turn: 270, wear: 'alfredo_blind', look: null, mood: 'tired' } }), ...(here() ? {} : { alfredo_here: false }) }),
     run: async s => {
       const alf = s.person('alfredo'), toto = s.person('toto');
@@ -520,7 +520,7 @@ const FILM = {
         alf.gait('cane_walk');
         await walk(s, 'alfredo', [P.IN_DOOR, [1.3, 1.1], [1.05, 1.15]]);
         alf.gait(null);
-        await alf.go('sit_down', { to: G.STOOL, turn: 230 });
+        await alf.go('sit_down', { to: G.STOOL, turn: 300 });
         alf.on(SEAT); alf.do('cane_sit', { loop: true });
         s.move('door', 0, { over: 1.2 }); s.set('stair', 0);
         toto.look('alfredo');
@@ -530,9 +530,9 @@ const FILM = {
       }
       s.tell('alfredo_comes:turned');
       await s.wait(4);
-      toto.look([2, 0.55, 1.6]); await toto.turn(110);
+      toto.look([2, 0.55, 1.6]); await toto.turn(130);
       s.set('stair', 1); s.move('door', 1, { over: 0.8 });
-      await walk(s, 'toto', [P.IN_DOOR, P.LANDING]); toto.here(false);
+      await walk(s, 'toto', [[1.3, 1.5], P.IN_DOOR, P.LANDING]); toto.here(false);
       await s.move('door', 0, { over: 0.6 }); s.set('stair', 0);
       s.tell('alfredo_comes:gone');
       await s.wait(1);
