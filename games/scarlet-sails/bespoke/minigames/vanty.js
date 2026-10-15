@@ -1,123 +1,85 @@
-// «Ванты» (II, the deck): the boy climbs the shrouds. The scene «Палуба» (beat `shrouds`, the insert
-// `ropes`) shows it all; this moves its keys: hand_l / hand_r (1 — the hand grips, the default; 0 — lifted),
-// climb (0…1), slip (a pulse), roll (the ship's heel, which the insert's horizon follows).
-// A press on the left half of the screen lifts the left hand while it is down, on the right half the
-// right one. A hand let go after 0.3 s up grips higher: climb + 1/12. In the heel
-// (|roll| > 0.6) a hand must not be up: lifted longer than 0.25 s then, or both up, and the hands slip.
+// «Ванты» (II, the deck): the boy climbs the shrouds. The scene «Палуба» (beat `shrouds`, the insert `ropes`) shows
+// it all; this moves its keys: hand_l / hand_r (1 — the hand grips, the default; 0 — lifted), climb (0…1), slip (a
+// pulse), roll (the ship's heel, which the insert's horizon follows). One mark at a time, on one hand and then the
+// other (ropes#left, ropes#right): held, that hand is lifted, and a short fill grows; let go full — it grips higher
+// (climb + 1/12), the mark goes to the other hand; let go before — it grips where it was. The heel is the mark's arc
+// of danger: a hand up while the ship heels hard (|roll| > 0.6) longer than 0.25 s — the hands slip (climb − 2/12).
 //   → { slips, seconds }
+import { until } from '../hands.js';
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const STEP = 1 / 12; // a regrip
 const FALL = 2 / 12; // a slip
 const EASE = STEP / 0.4; // climb per second while it moves to its target
-const HELD = 0.3; // s a hand must be up for the regrip to count
+const HELD = 0.3; // s a hand must be up for the regrip
 const HEEL = 0.6; // |roll| above which a lifted hand is a danger
 const GRACE = 0.25; // s of a hand up in the heel before it slips
-const SEND = 0.01; // a key goes to the scene when it has changed by more than this
+const SIDES = [{ key: 'hand_l', at: 'ropes#left' }, { key: 'hand_r', at: 'ropes#right' }];
 
 export default {
   title: 'Ванты', // (as the author's ☰ lists it)
   about: 40,
   skipped: { slips: 1, seconds: 0 },
   async run(g, b, opts, signal) {
-    if (signal.aborted) return this.skipped;
-    const hands = [
-      { key: 'hand_l', up: false, held: 0, bad: 0, spent: false },
-      { key: 'hand_r', up: false, held: 0, bad: 0, spent: false },
-    ];
-    const sent = { roll: 0, climb: 0, wind: -1 };
-    let t = 0, last = null, target = 0, shown = 0, slips = 0, pointer = null, warned = false, frame = 0, finish;
-    const off = g.hint('Нажми слева или справа — рука перехватит выше. В крен — замри');
-    let hinted = true;
-    const acted = () => { if (hinted) { hinted = false; off(); } };
-
-    hands.forEach(h => g.set(h.key, 1));
+    const mg = g.minigame({ phrase: 'Ванты уходили в небо, и палуба кренилась под ногами' });
+    const tension = mg.layer('tension');
+    let target = 0, shown = 0, slips = 0, side = 0, bad = 0, spent = false, warned = false, wind = -1, sentRoll = 0, sentClimb = 0;
+    SIDES.forEach(s => g.set(s.key, 1));
     g.set('climb', 0);
     g.set('roll', 0);
-
-    const lift = (h) => {
-      if (h.up) return;
-      acted();
-      h.up = true; h.held = 0; h.bad = 0; h.spent = false;
-      g.set(h.key, 0);
+    let mark = null, hold = null;
+    // the hand that climbs now: its mark, its hold
+    const take = () => {
+      mark?.remove();
+      const s = SIDES[side];
+      mark = mg.mark({ at: s.at, kind: 'groove' });
+      hold = mg.hold({ on: mark, seconds: HELD, drain: 0.2 });
+      hold.on('down', () => { spent = false; bad = 0; g.set(s.key, 0); });
+      hold.on('up', () => {
+        g.set(s.key, 1);
+        if (spent) return;
+        if (hold.state.fill < 1) return;
+        target = Math.min(1, target + STEP);
+        mg.snap({ at: mark });
+        side = 1 - side;
+        take();
+      });
     };
-    const grip = (h) => {
-      if (!h.up) return;
-      h.up = false;
-      g.set(h.key, 1);
-      if (!h.spent && h.held >= HELD) target = Math.min(1, target + STEP);
-    };
+    take();
+    b.minigame.tricks.teach(mg, [hold], { id: 'hold' });
     const slip = () => {
       slips++;
-      hands.forEach(h => { if (h.up) { h.spent = true; g.set(h.key, 1); } });
+      spent = true;
+      g.set(SIDES[side].key, 1);
+      hold.set({ fill: 0 });
       target = Math.max(0, target - FALL);
       g.set('slip', 1);
       g.set('slip', 0, 0.8);
       g.sound.burn();
-      g.trouble();
+      mg.error('danger', { at: mark });
     };
-
-    const half = e => { const f = b.frame(); return e.clientX < f.x + f.w / 2 ? 0 : 1; };
-    const pad = document.createElement('div');
-    pad.style.cssText = 'position:absolute;inset:0;touch-action:none';
-    b.layer.append(pad);
-    let side = null;
-    const down = e => {
-      if (e.button > 0 || pointer !== null) return;
-      e.preventDefault();
-      pointer = e.pointerId;
-      pad.setPointerCapture?.(e.pointerId);
-      side = half(e);
-      lift(hands[side]);
-    };
-    const release = e => {
-      if (e.pointerId !== pointer) return;
-      pointer = null;
-      grip(hands[side]);
-      side = null;
-    };
-    pad.addEventListener('pointerdown', down);
-    pad.addEventListener('pointerup', release);
-    pad.addEventListener('pointercancel', release);
-
-    const tick = now => {
-      frame = requestAnimationFrame(tick);
-      const dt = last === null ? 0 : Math.min(0.1, (now - last) / 1000);
-      last = now;
-      t += dt;
-      const roll = 0.8 * Math.sin((2 * Math.PI * t) / 6);
-      if (Math.abs(roll) > HEEL && !warned) g.sound.rigging();
-      warned = Math.abs(roll) > HEEL;
-      if (Math.abs(roll - sent.roll) > SEND) { sent.roll = roll; g.set('roll', roll); }
-
-      hands.forEach(h => {
-        if (!h.up) return;
-        h.held += dt;
-        if (Math.abs(roll) > HEEL) h.bad += dt;
-      });
-      if (hands.every(h => h.up && !h.spent) || hands.some(h => h.up && !h.spent && h.bad > GRACE)) slip();
-
+    const t0 = mg.t;
+    const done = await until(mg, ({ t, dt }) => {
+      const since = t - t0, roll = 0.8 * Math.sin((2 * Math.PI * since) / 6), heel = Math.abs(roll);
+      if (heel > HEEL && !warned) g.sound.rigging();
+      warned = heel > HEEL;
+      if (Math.abs(roll - sentRoll) > 0.01) { sentRoll = roll; g.set('roll', roll); }
+      const level = clamp((heel - 0.25) / (HEEL - 0.25));
+      mark.set({ danger: level });
+      const up = hold.state.held && !spent;
+      tension.set({ u: up ? level : 0 });
+      if (up && heel > HEEL) { bad += dt; if (bad > GRACE) slip(); }
       const step = EASE * dt;
       shown = Math.abs(target - shown) <= step ? target : shown + Math.sign(target - shown) * step;
-      if (Math.abs(shown - sent.climb) > SEND || (shown === target && shown !== sent.climb)) {
-        sent.climb = shown;
-        g.set('climb', shown);
-      }
-      const wind = 0.3 + 0.5 * shown;
-      if (Math.abs(wind - sent.wind) > SEND) { sent.wind = wind; g.sound.wind(wind, 0.5); }
-      if (shown >= 1) finish();
-    };
-    frame = requestAnimationFrame(tick);
-
-    await new Promise(ok => {
-      finish = ok;
-      signal.addEventListener('abort', ok);
+      if (Math.abs(shown - sentClimb) > 0.01 || (shown === target && shown !== sentClimb)) { sentClimb = shown; g.set('climb', shown); }
+      const w = 0.3 + 0.5 * shown;
+      if (Math.abs(w - wind) > 0.01) { wind = w; g.sound.wind(w, 0.5); }
+      mg.plate.set({ fill: shown, glow: up && level >= 1 ? 'bad' : up ? 'good' : 'idle' });
+      return shown >= 1;
     });
-    cancelAnimationFrame(frame);
-    pad.remove();
-    acted();
-    if (signal.aborted) {
-      g.withdraw();
-      return this.skipped;
-    }
-    return { slips, seconds: Math.round(t) };
+    if (!done) return this.skipped;
+    const seconds = Math.round(mg.t - t0);
+    await mg.end({ as: slips ? 'flawed' : 'clean' });
+    return { slips, seconds };
   },
 };

@@ -1,94 +1,74 @@
-// «Ждать» (the shore, the night; scene «Берег Каперны», beat `wait`): Assol on the stone, three lights on the
-// horizon (the scene's keys light1…light3, each offered at its point `lightN#light`). A touched light comes near
-// and turns out to be what it is — a fishing boat (1), a steamer (2), the lighthouse (3) — stays a while and
-// goes behind the cape. Kaperna's windows go out one by one, never below 0.1. To do nothing is a way to play:
-// the game ends 40 s after its start or after the last touch.
+// «Ждать» (the shore, the night; scene «Берег Каперны», beat `wait`): Assol on the stone, three lights on the horizon
+// (the scene's keys light1…light3). A ring on each light (`lightN#light`): pressed, it comes near and turns out to be
+// what it is — a fishing boat (1), a steamer (2), the lighthouse (3) —, stays a while and goes behind the cape. Kaperna's
+// windows go out one by one, never below 0.1. To do nothing is a way: the ghost shows both — a light touched, hands
+// off. The bar is the night's waiting: it goes on as nothing is done and goes back, seen, at a touch; full — 40 s after
+// the start or the last touch — it ends.
 //   → { touched: [light ids in the order touched], waited: no light touched }
+import { until } from '../hands.js';
+
 const LIGHTS = [1, 2, 3];
 const COME = 5; // s: a light comes near
 const STAY = 3000; // ms: it stands, seen
 const GO = 6; // s: it goes behind the cape
 const DARKEN = 3; // s: the windows go down by a quarter of what they were
 const LOWEST = 0.1; // the windows never go below
-const EVERY = 12000; // ms after the last touch or going-out: one more quarter of the windows
-const END = 40000; // ms after the start or the last touch: the game ends
+const EVERY = 12; // s after the last touch or going-out: one more quarter of the windows
+const END = 40; // s after the start or the last touch: it ends
 
 export default {
   title: 'Ждать', // (as the author's ☰ lists it)
   about: 40,
   skipped: { touched: [], waited: true },
   async run(g, b, opts, signal) {
-    const w0 = g.get('windows');
-    let windows = w0, over = false, dimTimer = null, endTimer = null, finish;
-    const ended = new Promise(ok => { finish = ok; });
-    signal.addEventListener('abort', finish, { once: true });
-    const acts = new Set();
-    const touched = [];
-    let off = () => {};
-
+    const mg = g.minigame({ phrase: 'Ночь тянулась, и огни на горизонте вспыхивали и гасли' });
+    mg.plate.set({ glow: null });
+    const w0 = g.get('windows'), acts = new Set(), touched = [], journeys = [];
+    let windows = w0, calm = 0, since = 0;
+    signal.addEventListener('abort', () => { for (const action of acts) action.cancel(); });
     // the scene's key moves; the action is kept to be cancelled
     const move = (key, value, seconds) => {
       const action = b.act('state', 'move', key, value, { over: seconds });
       acts.add(action);
       return action;
     };
-    const dim = () => {
-      if (windows > LOWEST) move('windows', (windows = Math.max(LOWEST, windows - w0 / 4)), DARKEN);
-    };
-    // one more quarter after EVERY ms of calm
-    const calm = () => {
-      clearTimeout(dimTimer);
-      dimTimer = setTimeout(() => { dim(); calm(); }, EVERY);
-    };
-    const tired = () => {
-      clearTimeout(endTimer);
-      endTimer = setTimeout(finish, END);
-    };
-    const stand = ms => new Promise(ok => setTimeout(ok, ms));
-
+    const dim = () => { calm = 0; if (windows > LOWEST) move('windows', (windows = Math.max(LOWEST, windows - w0 / 4)), DARKEN); };
     const journey = async n => {
       const key = `light${n}`;
       await move(key, 1, COME);
-      if (over) return;
+      if (signal.aborted) return;
       if (n === 1) g.sound.oars();
       if (n === 2) g.sound.horn();
-      await stand(STAY);
-      if (over) return;
+      await new Promise(ok => setTimeout(ok, STAY));
+      if (signal.aborted) return;
       const going = move(key, 2, GO);
       dim();
-      calm();
       await going;
     };
-
-    tired();
-    calm();
-    const journeys = [];
-    const left = new Set(LIGHTS);
-    while (left.size && !over) {
-      const offers = Object.fromEntries([...left].map(n => [`light${n}#light`, [{ id: `light${n}`, label: 'Всмотреться' }]]));
-      const choice = g.choose(null, offers);
-      if (!touched.length) off = g.hint('Коснись огня на горизонте — или просто жди'); // after g.choose: it takes the nudge's place
-      const id = await Promise.race([choice, ended.then(() => null)]);
-      if (!id) break;
-      const n = Number(id.slice(5));
-      off();
-      left.delete(n);
-      touched.push(id);
-      tired();
-      calm();
-      journeys.push(journey(n));
-    }
-    if (!left.size) {
-      clearTimeout(endTimer);
-      await Promise.race([Promise.all(journeys), ended]);
-    } else await ended;
-
-    over = true;
-    clearTimeout(dimTimer);
-    clearTimeout(endTimer);
+    const presses = LIGHTS.map(n => {
+      const mark = mg.mark({ at: `light${n}#light` }), press = mg.press({ on: mark });
+      press.on('press', () => {
+        mark.remove();
+        touched.push(`light${n}`);
+        since = 0; calm = 0;
+        journeys.push(journey(n));
+      });
+      return press;
+    });
+    // (both ways: a light looked into — and hands off)
+    mg.show({ gestures: [presses[0]] }).finished.then(done => done && mg.show({ handsOff: true }));
+    const done = await until(mg, ({ dt }) => {
+      since += dt; calm += dt;
+      if (calm >= EVERY) dim();
+      mg.plate.set({ fill: Math.min(1, since / END) });
+      return since >= END || touched.length === LIGHTS.length;
+    });
+    if (!done) return this.skipped;
+    // (all three looked into: the last one's way to its end)
+    if (touched.length === LIGHTS.length) await Promise.race([Promise.all(journeys), new Promise(ok => signal.addEventListener('abort', ok))]);
+    if (signal.aborted) return this.skipped;
     for (const action of acts) action.cancel();
-    off();
-    g.withdraw();
-    return signal.aborted ? this.skipped : { touched, waited: touched.length === 0 };
+    await mg.end({ as: 'neutral' });
+    return { touched, waited: touched.length === 0 };
   },
 };
