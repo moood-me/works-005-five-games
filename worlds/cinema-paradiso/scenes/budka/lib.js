@@ -42,6 +42,7 @@ const CAM = {
   P2MED: cam(0.0, 1.45, 1.55, 52),     // a medium shot of whoever stands at projector 2's back (1988)
 };
 // the camera's keys moved together to a shot
+const EAR = [G.STOOL[0] - 0.17, G.STOOL[1] - 0.98, 1.25]; // toward the door, as far as a seated head turns from facing 250
 const glide = (s, shot, over) => { for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_yaw', 'camera_pitch']) s.move(k, shot[k], { over }); };
 
 // ── light by the hour and the era (looks' weights) ──
@@ -151,6 +152,7 @@ function projBody(g, e, inner, ruin) {
   e.at(...onBody(inner, 0.7, 0.55), 'gate');
   e.at(0.25, -0.6, 'lens');
   e.at(...onBody(inner === 'right' ? 'left' : 'right', 0.35, 0.45), 'side');
+  e.at(...onBody('back', 0.25, 0.72), 'top');
   e.at(...onBody('back', 0.25, 0.5));
 }
 // the projector seen side-on in the plane through its middle (x toward the lens, the floor y 0): what stands outside
@@ -174,11 +176,11 @@ function projProfile(g, e, ruin) {
 const P = {
   ALF_BENCH: [1.2, 1.9], BOY_BENCH: [0.95, 2.4], ALF_P2: [0.35, 2.75], BOY_TIN: [1.35, 2.3],
   DOORWAY: [2.05, 0.55], IN_DOOR: [1.72, 0.6], LANDING: [2.6, 0.5], AWAY: [2.7, -0.2],
-  BOX_DEAL: [0.5, 1.8], BOX_FAR: [1.7, 2.95],
-  ALF_BEHIND: [-1.1, 1.8], ALF_CRANK: [-0.05, 2.9], BOY_LEVER: [0.45, 2.25], ALF_LEVER: [0.12, 2.5],
-  ALF_WINDOW: [-1.6, 1.45], ALF_PUSH: [-1.1, 2.45], BOY_JAM: [0.3, 1.6],
+  BOX_DEAL: [0.35, 2.1], BOX_STORY: [1.35, 2.3], BOX_FAR: [1.7, 2.95],
+  ALF_BEHIND: [-1.1, 1.8], ALF_CRANK: [-0.05, 2.9], BOY_LEVER: [0.62, 2.3], ALF_LEVER: [0.12, 2.5],
+  ALF_WINDOW: [-1.6, 1.45], ALF_PUSH: [-1.1, 2.45], ALF_JAM: [-1.3, 2.1], BOY_JAM: [0.3, 1.6],
   TOTO_BENCH: [1.62, 1.75], TOTO_REEL: [1.25, 1.95], TOTO_HUG: [1.45, 0.97], EL_HUG: [1.76, 0.64],
-  TOTO_STAND: [0.55, 1.95], EL_CAL: [1.6, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.45, 0.55],
+  TOTO_STAND: [0.55, 1.95], EL_CAL: [1.6, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.35, 0.64],
   TOTO_IN: [1.8, 0.6], SAL_P2: [0.98, 2.2], SAL_DOOR: [1.55, 0.7], SAL_WINDOW: [-1.72, 0.95],
 };
 const SEAT = [G.STOOL[0], G.STOOL[1], G.STOOL_H];
@@ -333,13 +335,13 @@ const FILM = {
   // the insert closed: Alfredo lifts the slate to the lamp in both hands
   slate_out: {
     from: () => ({ ...FILM.deal.from(), slate: 0, ...people({
-      alfredo: { at: G.STOOL, on: SEAT, turn: 280, do: SIT, with: ['slate_held'], look: [0.45, 1.45, 1.3], mood: 'laugh' },
+      alfredo: { at: G.STOOL, on: SEAT, turn: 280, do: SIT, with: ['slate_held'], look: [0.5, 1.15, 1.4], mood: 'laugh' },
       toto: { at: P.BOX_DEAL, on: [P.BOX_DEAL[0], P.BOX_DEAL[1], 0.36], turn: 170, do: SIT, look: 'alfredo', mood: 'smile' } }) }),
     run: async s => {
       const alf = s.person('alfredo');
       alf.do('lift_show');
       await s.wait(0.8);
-      alf.reach({ r: [G.STOOL[0] - 0.36, G.STOOL[1] + 0.16, 1.25], l: [G.STOOL[0] - 0.36, G.STOOL[1] - 0.12, 1.25] });
+      alf.reach({ r: [G.STOOL[0] - 0.3, G.STOOL[1] - 0.06, 1.42], l: [G.STOOL[0] - 0.3, G.STOOL[1] - 0.34, 1.42] });
       await s.wait(1.2); s.tell('slate_out:up');
       await s.wait(3.5);
     },
@@ -407,8 +409,8 @@ const FILM = {
   // II.3 — the projector turned to the window; the boy goes down; fire in the gate; Alfredo falls
   jam: {
     from: () => ({ ...base(0.92), ...show(1), turned: 1, door: 1, stair: 1, crate_a: -1.5, crate_d: 0.75, ...CAM.SQUARE, ...people({
-      alfredo: { at: P.ALF_PUSH, turn: 60, look: 'toto', mood: 'smile' },
-      toto: { at: P.BOY_JAM, turn: 110, look: 'alfredo' } }) }),
+      alfredo: { at: P.ALF_JAM, turn: 50, look: 'toto', mood: 'smile' },
+      toto: { at: P.BOY_JAM, turn: 110, look: 'alfredo' } }), camera_pitch: -8 }),
     run: async s => {
       const alf = s.person('alfredo'), boy = s.person('toto');
       await s.wait(1.2);
@@ -449,7 +451,7 @@ const FILM = {
   story_booth: {
     from: () => ({ ...base(0.9), ...show(1), lamp: 0.9, ...CAM.DOOR, ...people({
       alfredo: blind({ turn: 320, look: null, mood: 'thinking' }),
-      toto: teen({ at: P.TOTO_BENCH, on: BENCH_SEAT, turn: 255, do: SIT, look: 'alfredo' }) }) }),
+      toto: teen({ at: P.BOX_STORY, on: [P.BOX_STORY[0], P.BOX_STORY[1], 0.36], turn: 240, do: SIT, look: 'alfredo' }) }), box_a: P.BOX_STORY[0], box_d: P.BOX_STORY[1] }),
     run: async s => {
       const alf = s.person('alfredo'), toto = s.person('toto');
       await s.wait(1); s.tell('story_booth:start');
@@ -458,7 +460,7 @@ const FILM = {
       await s.wait(5); s.tell('story_booth:99');
       await s.wait(6); toto.mood('surprised');
       await s.wait(1); s.tell('story_booth:why');
-      alf.look([0.95, 2.4, 1.15]); alf.do('cane_sit', { loop: true });
+      alf.look([1.2, 2.2, 1.0]); alf.do('cane_sit', { loop: true });
       await s.wait(3); alf.mood('smile'); toto.mood('thinking');
       await s.wait(5);
     },
@@ -475,6 +477,7 @@ const FILM = {
       s.set('stair', 1); s.set('elena_a', P.DOORWAY[0]); s.set('elena_d', P.DOORWAY[1]); el.here(true);
       await s.move('door', 1, { over: 0.9, ease: 'out' });
       s.tell('reels:door');
+      if (here()) s.person('alfredo').look(EAR);
       toto.do('stand'); toto.look('elena'); await toto.turn(150);
       await s.wait(1.6); el.mood('smile');
       await s.all(walk(s, 'toto', [P.TOTO_HUG]), walk(s, 'elena', [P.EL_HUG]));
@@ -545,7 +548,7 @@ const FILM = {
   // IV.3 — Alfredo alone at the running projector; the door: Elena
   knock: {
     from: () => ({ ...base(0.92), ...show(2), month: 8, clock: 10, lamp: 0.85, ...CAM.DOOR, ...people({
-      alfredo: blind({ turn: 200, look: 'projector2', mood: 'thinking' }),
+      alfredo: blind({ turn: 250, look: null, mood: 'thinking' }),
       elena: { at: P.DOORWAY, turn: 280, look: 'alfredo', mood: 'afraid' } }), elena_here: false }),
     run: async s => {
       const alf = s.person('alfredo'), el = s.person('elena');
@@ -554,7 +557,7 @@ const FILM = {
       await s.move('door', 1, { over: 0.8, ease: 'out' });
       s.tell('knock:in');
       await s.wait(1.2);
-      alf.look('elena');
+      alf.look(EAR);
       await s.wait(5);
     },
   },
@@ -653,7 +656,7 @@ const FILM = {
     run: async s => {
       const sal = s.person('toto');
       await s.wait(0.6);
-      sal.here(true);
+      sal.here(true); sal.reach({ r: 'toto#chest', l: 'toto#chest' });
       await s.move('door', 1, { over: 1.2 });
       await walk(s, 'toto', [P.IN_DOOR, [1.45, 1.1]]);
       sal.look('slate_nail'); await s.wait(0.8);
@@ -664,7 +667,7 @@ const FILM = {
       // would add the DOOR offsets on top of it)
       glide(s, CAM.P2MED, 2.5);
       await walk(s, 'toto', [P.SAL_P2]); await sal.turn(290);
-      sal.reach({ r: 'projector2' });
+      sal.reach({ r: 'projector2#top', l: 'toto#chest' });
       await s.wait(6);
       sal.reach(null);
     },
@@ -675,6 +678,7 @@ const FILM = {
     run: async s => {
       const sal = s.person('toto');
       glide(s, CAM.DOOR, 1.8);
+      sal.reach({ r: 'toto#chest', l: 'toto#chest' });
       await walk(s, 'toto', [[1.4, 1.2], P.SAL_DOOR]); await sal.turn(140);
       sal.reach({ r: 'booth_door#edge' });
       await s.move('door', 0, { over: 1.2 });

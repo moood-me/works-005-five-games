@@ -63,7 +63,8 @@
         "hazeGlow": 0.6,
         "lights": {
           "window_light": 2.6,
-          "lamp_light": 0
+          "lamp_light": 0,
+          "sconce_light": 0
         }
       },
       "smoke": {
@@ -79,8 +80,8 @@
       "id": "lamp_light",
       "of": "lamp#bulb",
       "color": "#ffcf94",
-      "strength": 1.6,
-      "reach": 4,
+      "strength": 1.7,
+      "reach": 5,
       "on": "lamp"
     },
     {
@@ -100,6 +101,14 @@
       "reach": 2.4,
       "on": "p2_on",
       "flicker": 0.06
+    },
+    {
+      "id": "sconce_light",
+      "of": "sconce#bulb",
+      "color": "#ffcf94",
+      "strength": 0.8,
+      "reach": 3.2,
+      "on": "lamp"
     },
     {
       "id": "stair_light",
@@ -899,6 +908,68 @@
       "inside": true
     },
     {
+      "id": "rack",
+      "name": "Стеллаж с плёнкой",
+      "across": -0.85,
+      "distance": 0.16,
+      "facing": 0,
+      "height": 2.1,
+      "box": [
+        -0.5,
+        -2.15,
+        0.5,
+        0.02
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "bucket",
+      "name": "Пожарное ведро",
+      "across": -0.15,
+      "distance": 0.2,
+      "facing": 0,
+      "height": 0.45,
+      "box": [
+        -0.2,
+        -0.75,
+        0.2,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "sconce",
+      "name": "Лампочка у стеллажа",
+      "across": 0.2,
+      "distance": 0.04,
+      "elevation": 1.86,
+      "facing": 0,
+      "height": 0.2,
+      "box": [
+        -0.12,
+        -0.2,
+        0.12,
+        0.08
+      ],
+      "inside": true
+    },
+    {
+      "id": "rack_n",
+      "name": "Полка у окошек",
+      "across": 1.55,
+      "distance": 3.47,
+      "facing": 180,
+      "height": 2.3,
+      "box": [
+        -0.45,
+        -2.3,
+        0.45,
+        0.02
+      ],
+      "inside": true
+    },
+    {
       "id": "wall_w",
       "name": "Стена с окошком на площадь",
       "across": -2,
@@ -985,6 +1056,21 @@
         -2.7,
         1.45,
         0.05
+      ]
+    },
+    {
+      "id": "landing_window",
+      "name": "Окно на лестнице",
+      "across": 3.28,
+      "distance": 0.55,
+      "facing": 270,
+      "glows": true,
+      "height": 0.8,
+      "box": [
+        -0.36,
+        -2,
+        0.36,
+        -1.15
       ]
     },
     {
@@ -1427,10 +1513,18 @@
         "at": "projector#gate",
         "amount": "fire",
         "size": [
-          0.34,
-          0.08
+          0.26,
+          0.05
         ],
-        "rate": 80
+        "rate": 120,
+        "color": [
+          "#fff4c8",
+          "#ff5a12"
+        ],
+        "glow": [
+          5,
+          1.5
+        ]
       },
       "inside": true
     },
@@ -1442,10 +1536,18 @@
         "at": "projector#lens",
         "amount": "fire",
         "size": [
-          0.3,
-          0.06
+          0.22,
+          0.05
         ],
-        "rate": 50
+        "rate": 80,
+        "color": [
+          "#fff4c8",
+          "#ff5a12"
+        ],
+        "glow": [
+          5,
+          1.5
+        ]
       },
       "inside": true
     },
@@ -1457,14 +1559,22 @@
         "at": "p1_side#reel",
         "amount": "fire",
         "size": [
-          0.4,
-          0.08
+          0.3,
+          0.06
         ],
-        "rate": 70,
+        "rate": 140,
         "source": [
-          0.3,
-          0.3,
-          0.3
+          0.2,
+          0.35,
+          0.35
+        ],
+        "color": [
+          "#fff4c8",
+          "#ff6a18"
+        ],
+        "glow": [
+          5,
+          1.5
         ]
       },
       "inside": true
