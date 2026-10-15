@@ -790,6 +790,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Very quiet warm room tone, a clock ticking softly, a stove crackling, no melody",
