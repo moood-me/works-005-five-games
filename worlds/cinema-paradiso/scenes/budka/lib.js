@@ -37,7 +37,7 @@ const CAM = {
   DOOR: cam(-1.8, 1.2, 1.5, 98),       // from the window's corner across the room: the stool −12°, the door +2°, the calendar +13°
   CLOSE: cam(0.2, 2.6, 1.2, 140),      // close by the stool: the seated man to the chest, the door behind him
   SQUARE: cam(1.6, 0.6, 1.5, -60),     // the window on the square and projector 1
-  FLOOR: cam(1.5, 0.3, 1.2, -40, -19), // low by the door, along the way from projector 1 to the door, looking down
+  FLOOR: cam(1.5, 0.3, 1.2, -40, -26), // low by the door, along the way from projector 1 to the door, looking down
   CAL: cam(1.25, 0.95, 1.55, 172),     // close at the calendar on the opposite wall
 };
 
@@ -401,7 +401,7 @@ const FILM = {
   },
   // II.3 — the projector turned to the window; the boy goes down; fire in the gate; Alfredo falls
   jam: {
-    from: () => ({ ...base(0.92), ...show(1), turned: 1, door: 1, stair: 1, crate_a: -1.55, crate_d: 2.45, ...CAM.SQUARE, ...people({
+    from: () => ({ ...base(0.92), ...show(1), turned: 1, door: 1, stair: 1, crate_a: -1.5, crate_d: 0.75, ...CAM.SQUARE, ...people({
       alfredo: { at: P.ALF_PUSH, turn: 60, look: 'toto', mood: 'smile' },
       toto: { at: P.BOY_JAM, turn: 110, look: 'alfredo' } }) }),
     run: async s => {
@@ -422,14 +422,13 @@ const FILM = {
   },
   // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
   smoke_in: {
-    from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, crate_a: -1.55, crate_d: 2.45, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
-      alfredo: { at: BEHIND(0), turn: PATH_TURN, steps: false, mood: 'tired' },
+    from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, crate_a: -1.5, crate_d: 0.75, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
+      alfredo: { at: BEHIND(0), turn: PATH_TURN, do: { motion: 'sleep', loop: true }, steps: false, mood: 'tired' },
       toto: { at: [AHEAD(0)[0] + UNIT[0] * 0.9, AHEAD(0)[1] + UNIT[1] * 0.9], turn: PATH_TURN, look: 'alfredo', mood: 'afraid' } }) }),
-    // (a motion done once is not played from a cut, nor from its middle: so the fall is seen again, through the
-    // smoke, as the boy runs to him and drops to his knees at his shoulders)
+    // (Alfredo unconscious on his side — a lying loop: a motion done once does not play from a cut; the boy runs in
+    // and drops to his knees at his shoulders)
     run: async s => {
       const boy = s.person('toto');
-      s.person('alfredo').do('fall_back');
       boy.gait('run');
       await walk(s, 'toto', [AHEAD(0)]); boy.gait(null);
       await boy.turn(PATH_TURN);
