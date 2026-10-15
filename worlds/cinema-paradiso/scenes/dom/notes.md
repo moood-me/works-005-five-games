@@ -78,7 +78,7 @@
   "answered": {"after": ["call"], "tells": ["answered:reading"], "seconds": 12, "show": false},
   "room": {"after": [], "tells": ["room:door"], "seconds": 14, "show": false},
   "home_movie": {"after": ["room"], "tells": ["home_movie:light"], "seconds": 16, "show": false},
-  "question": {"after": ["room", "home_movie"], "tells": ["question:asked"], "seconds": 10, "show": false}
+  "question": {"after": ["room", "home_movie"], "tells": ["question:asked"], "seconds": 11, "show": false}
 },
 "points": ["maria", "toto", "maria#lamp", "photo#photo", "home_projector", "home_projector#switch", "home_screen#square", "shelf#middle", "bed#pillow", "letters#pile", "milk", "jug#handle", "jug#spout", "lamp#bulb"],
 "offers": ["home_projector"],
