@@ -368,7 +368,7 @@
     }
   },
   "modules": [
-    "cast"
+    "cast_opus"
   ],
   "music": {
     "prompts": [
@@ -1585,7 +1585,7 @@
       "id": "toto",
       "name": "Тото",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "toto_teen"
       },
       "across": -3.3,
@@ -1600,7 +1600,7 @@
       "id": "elena",
       "name": "Елена",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "elena"
       },
       "across": -1.9,
@@ -1615,7 +1615,7 @@
       "id": "daughter",
       "name": "Дочь Елены",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "daughter"
       },
       "across": -0.4,
@@ -1630,7 +1630,7 @@
       "id": "alfredo",
       "name": "Альфредо",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "alfredo_blind"
       },
       "across": -5.05,
@@ -1645,7 +1645,7 @@
       "id": "banker",
       "name": "Отец Елены",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "banker"
       },
       "across": 8,
@@ -1660,7 +1660,7 @@
       "id": "c1",
       "name": "Зритель",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "villager_m"
       },
       "across": -2.5,
@@ -1675,7 +1675,7 @@
       "id": "c2",
       "name": "Зрительница",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "villager_w"
       },
       "across": -1.5,
@@ -1690,7 +1690,7 @@
       "id": "c3",
       "name": "Старик",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "old_m"
       },
       "across": 0.5,
@@ -1705,7 +1705,7 @@
       "id": "c4",
       "name": "Старуха",
       "person": {
-        "cast": "cast",
+        "cast": "cast_opus",
         "who": "old_w"
       },
       "across": 1.5,
