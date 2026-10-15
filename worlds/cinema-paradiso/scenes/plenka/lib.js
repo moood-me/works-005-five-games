@@ -148,7 +148,7 @@ function layout(A, st, measure) {
   L.numberX = cx - side;
   L.titleX = cx + side - tw;
   var TOP = 0.16;
-  var FLOOR = whole ? 0.93 : 0.8; // a chapter's map stays clear of the lamp; the whole play goes lower (its last
+  var FLOOR = whole ? 0.93 : 0.74; // a chapter's map stays clear of the lamp; the whole play goes lower (its last
   // strip is shorter and leaves the lamp's corner free)
   var best = null;
   var arr = arrangements(rows.length);
