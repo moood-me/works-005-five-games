@@ -33,11 +33,12 @@
 //     make the g.told / g.when / g.arrived before g.beat
 //   g.play(minigame, opts) — a small game of the hands: a module of minigames/ — export default {title, about,
 //     skipped, run: async (g, b, opts, signal) → its result}, made of the language of mini-games (bespoke.minigame:
-//     moood/docs/agents/minigames.md). The signal aborts when the author skips it (the game's ⏭ in its row of tools:
-//     b.minigame.skip()) or the step is left: it stops; → `skipped` then. The player has no way out of it: each is
-//     passable
+//     moood/docs/agents/minigames.md). The signal aborts when it is skipped (the game's ⏭ in its row of tools, for
+//     every player: b.minigame.skip()) or the step is left: it stops; → `skipped` then. The ⏭ is a safety net if a
+//     minigame glitches, not a way through: each is passable. `skipped` reads as played — a plain good outcome a play
+//     gives, so a skipped minigame leaves in the story the same trace as one played
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
-//     left when the signal aborts; the author's ⏭ skips the minigame
+//     left when the signal aborts; the ⏭ skips the minigame
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name, {rule}) — the scale is shown from now on; its one line of what it means said once (rule: false —
 //     not yet)
@@ -254,7 +255,7 @@ export function context(b, view, hub, state, j = null) {
         if (j.plays.length <= j.target) return j.result?.(minigame) ?? minigame.skipped;
         await seen();
       }
-      // skipped — by its author (the game's ⏭ → b.minigame.skip(): g.minigame hears it; before the language's mini-game
+      // skipped — by the player (the game's ⏭ → b.minigame.skip(): g.minigame hears it; before the language's mini-game
       // is begun, the ⏭ ends it itself), by the step left — it ends with its `skipped`
       const stop = new AbortController();
       const end = () => stop.abort();

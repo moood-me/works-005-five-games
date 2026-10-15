@@ -10,12 +10,13 @@
 //   view.title(text, {signal}) — words in the middle of the frame, as a film's title; → once they have gone
 //   view.letter({text, sign}, {signal}) — a sheet of unbleached paper folded in three: pressed, it unfolds and can be
 //     read; pressed again, it folds and goes; → then. text: its lines ('\n')
-//   view.onSkip(fn) → off — what the author's ⏭ does now (the latest one, until off()); null — none: the ⏭ not shown
-//     (a step: skips the step; a minigame: skips the minigame)
+//   view.onSkip(fn) → off — what the ⏭ does now (the latest one, until off()); none, or null — the ⏭ not shown
+//     (a minigame: skips the minigame, for every player — a safety net if it glitches, not a way through; a step:
+//     skips the step, the author's only — game.js)
 //   view.pausing(b) — ⏸ in the corner, for every player: the play paused (bespoke.pause, and the game's own sounds:
 //     sound.js pause) and going on again
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
-//     its minigames], go(as, chapter, step, game)}) — the author's tools: ⏭ skips the step; ☰ lists
+//     its minigames], go(as, chapter, step, game)}) — the author's tools: ☰ lists
 //     the chapters, their steps and the steps' minigames, to go to any (a minigame: its index among the step's) — as
 //     the play picked under «партия как…» has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
@@ -42,11 +43,14 @@ export function ui(layer) {
   const boat = yacht(layer);
   const needle = compass(layer);
   const toasts = el('div', 'toasts', layer);
-  // the corner's tools: ⏸ for everyone, ⏭ and ☰ for the author
+  // the corner's tools: ⏸ and ⏭ for everyone, ☰ for the author
   const tools = el('div', 'tools', layer);
   const skips = [];
-  let skipButton = null; // (the author's: shown while the latest skip is something)
-  const skipShown = () => { if (skipButton) skipButton.hidden = skips.at(-1)?.fn === null; };
+  // (shown while the latest skip is something)
+  const skipButton = button('⏭', 'пропустить', () => skips.at(-1)?.fn?.());
+  const skipShown = () => { skipButton.hidden = !skips.at(-1)?.fn; };
+  tools.append(skipButton);
+  skipShown();
   let hinted = () => {}; // takes the hint shown now away
   return {
     gauges(state, hero) {
@@ -132,10 +136,7 @@ export function ui(layer) {
         map.replaceChildren(panel);
         map.hidden = false;
       };
-      skipButton = button('⏭', 'пропустить', () => skips.at(-1)?.fn?.());
-      skipShown();
-      tools.append(skipButton,
-        button('☰', 'главы и шаги', () => (map.hidden ? open() : close())));
+      tools.append(button('☰', 'главы и шаги', () => (map.hidden ? open() : close())));
     },
   };
 }

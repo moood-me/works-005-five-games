@@ -8,7 +8,7 @@
 // run (target Infinity): the step played so through — to list the minigames it plays, to know the play as it comes
 // out of the step (game.js), to check every branch of the game (check/).
 //   jump(target, quiet, {result}) → j — quiet: the game's sounds unheard (sound.js unheard()); result(minigame) → what
-//     a minigame played unseen gives (nothing: its `skipped`)
+//     a minigame played unseen gives (nothing: its `skipped` — a plain good outcome)
 //   j.on — unseen still; j.plays — the minigames played so far; j.sounds — the sounds to play meanwhile
 //   j.scene(title, state) — the scene shown now (what it did in the one before: forgotten); j.shown — {title, state}
 //   j.did(change) — [key, value] | ['cut', values]; j.values — the shown scene's values as the step set them

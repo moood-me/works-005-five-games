@@ -17,7 +17,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const kurs = {
   title: 'Курс', // (as the author's ☰ lists it)
   about: 22,
-  skipped: { steady: 0.5 },
+  skipped: { steady: 0.8 }, // (as played: the plain good outcome — clean from 0.6)
   async run(g, b, opts, signal) {
     const leg = opts.leg, sea = opts.sea;
     const A = (0.5 - 0.06 * sea) * (0.8 + 0.2 * leg);
