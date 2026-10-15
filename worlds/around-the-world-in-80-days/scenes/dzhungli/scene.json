@@ -20,7 +20,7 @@
     "grain": 0.08,
     "ambient": 0.6,
     "ambientColor": "#8aa0d8",
-    "saturation": 1.0,
+    "saturation": 1,
     "haze": 0.14,
     "hazeColor": "#26334f",
     "hazeGlow": 0.25,
@@ -199,7 +199,19 @@
     "v7_here": false,
     "v8_a": -80,
     "v8_d": 11.858,
-    "v8_here": false
+    "v8_here": false,
+    "kiouni_x": -34,
+    "kiouni_d": 13.4,
+    "kiouni_facing": 90,
+    "kiouni_el": 0,
+    "kiouni_tilt": 0,
+    "kiouni_here": 1,
+    "kneel": 0,
+    "ears": 0,
+    "trunk": "rest",
+    "trumpet": 0,
+    "kiouni_blow": 0,
+    "balk": 0
   },
   "states": {
     "day": {
@@ -281,6 +293,86 @@
       ],
       "smooth": true,
       "means": "светлячки над тропой и ручьём (сцена ставит сама по day: ночью 1)"
+    },
+    "kiouni_x": {
+      "type": "number",
+      "smooth": true,
+      "means": "где Киуни вдоль тропы (м, как across); ставит сцена — из кусков, ride, charge; он идёт туда своим шагом"
+    },
+    "kiouni_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "на каком он расстоянии (м); ставит сцена вместе с kiouni_x"
+    },
+    "kiouni_facing": {
+      "type": "number",
+      "smooth": true,
+      "means": "куда он обращён (градусы, как facing): 90 — идёт вправо, 270 — влево; ставит сцена"
+    },
+    "kiouni_el": {
+      "type": "number",
+      "smooth": true,
+      "means": "насколько он опустился (м, ≤ 0), по kneel; ставит сцена"
+    },
+    "kiouni_tilt": {
+      "type": "number",
+      "smooth": true,
+      "means": "наклон (градусы: − голова вниз, + назад), по kneel и balk; ставит сцена"
+    },
+    "kiouni_here": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — Киуни в сцене, 0 — нет"
+    },
+    "kneel": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "0 — стоит, 1 — на коленях (гауда низко, чтобы сесть и сойти)"
+    },
+    "ears": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "уши: 0 — висят и хлопают, 1 — веером"
+    },
+    "trunk": {
+      "values": [
+        "rest",
+        "up",
+        "sugar",
+        "lift"
+      ],
+      "means": "хобот: висит, поднят, тянется назад к гауде (сахар), поднимает (Паспарту)"
+    },
+    "trumpet": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "подъём до 1 — он трубит раз (хобот вверх, голова вверх, уши веером); вернуть 0 перед следующим"
+    },
+    "kiouni_blow": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "как он трубит сейчас; ставит сцена по trumpet"
+    },
+    "balk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "упирается: 0 — нет, 1 — встал, откинулся, голова и уши вверх"
     }
   },
   "relief": "return lib.ground(across, distance);",
@@ -1019,6 +1111,89 @@
       ]
     },
     {
+      "id": "kiouni",
+      "name": "Киуни",
+      "across": -34,
+      "distance": 13.4,
+      "facing": 90,
+      "height": 1,
+      "box": [
+        -0.2,
+        -0.2,
+        0.2,
+        0
+      ],
+      "place": {
+        "across": "kiouni_x",
+        "distance": "kiouni_d",
+        "facing": "kiouni_facing",
+        "elevation": "kiouni_el",
+        "tilt": "kiouni_tilt"
+      }
+    },
+    {
+      "id": "kiouni_l",
+      "name": "Киуни",
+      "on": "kiouni",
+      "across": -0.85,
+      "facing": 270,
+      "height": 3.2,
+      "box": [
+        -3.5,
+        -5.1,
+        4,
+        0.25
+      ],
+      "shadow": true
+    },
+    {
+      "id": "kiouni_r",
+      "name": "Киуни",
+      "on": "kiouni",
+      "across": 0.85,
+      "facing": 90,
+      "height": 3.2,
+      "box": [
+        -4,
+        -5.1,
+        3.5,
+        0.25
+      ],
+      "shadow": true
+    },
+    {
+      "id": "gauda_l",
+      "name": "Гауда",
+      "on": "kiouni",
+      "across": -0.62,
+      "elevation": 2.86,
+      "facing": 270,
+      "height": 0.8,
+      "box": [
+        -1,
+        -0.8,
+        1,
+        0.1
+      ],
+      "shadow": true
+    },
+    {
+      "id": "gauda_r",
+      "name": "Гауда",
+      "on": "kiouni",
+      "across": 0.62,
+      "elevation": 2.86,
+      "facing": 90,
+      "height": 0.8,
+      "box": [
+        -1,
+        -0.8,
+        1,
+        0.1
+      ],
+      "shadow": true
+    },
+    {
       "id": "steam",
       "name": "Пар паровоза",
       "particles": {
@@ -1170,7 +1345,7 @@
       "glows": true,
       "box": [
         -2.8,
-        -4.0,
+        -4,
         2.8,
         0.5
       ]
@@ -1217,7 +1392,7 @@
         ],
         "rate": 30,
         "size": [
-          2.0,
+          2,
           10
         ],
         "life": [

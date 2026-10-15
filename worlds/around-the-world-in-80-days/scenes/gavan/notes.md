@@ -114,3 +114,9 @@ tavern, badge, pipe, pipe_on, carnatic, morning, cast_off, `yokohama` (толь�
 По листам против v1: день прозрачнее и цветнее — `haze` 0.12 → 0.04, `saturation` 0.9 → 1, `shafts` 0.15 → 0.1;
 вечер — `shafts` 0.5 → 0.3 (гора за пароходом видна); ночь светлее, чем в v1 (там люди на пирсе тонули в темноте) —
 `ambient` 0.32 → 0.55, луна `moon` `strength` 0.8 → 1.3.
+
+## Состояние работы (2026-10-15, остановлено по просьбе владельца)
+
+Из scenes.md («ДОБАВИТЬ / ИЗМЕНИТЬ») здесь ещё ничего не сделано: `pipe`/`pipe_on` с лодочником и `message`,
+`carnatic:aboard`, `bunsby`, люди в `cast_off`, `stay_behind`, Иокогама (`show`, `pyramid`, `see`, `collapse`,
+`finish`, `reunion`), люди `bunsby`, `boatman`, `batulcar`, `nose`. Сцена — как была.
