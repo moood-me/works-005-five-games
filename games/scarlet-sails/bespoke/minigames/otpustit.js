@@ -17,7 +17,7 @@ export default {
   about: 15,
   skipped: { opened: 0, waited: true },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Пальцы матери держат его руку' });
+    const mg = g.minigame({ phrase: 'Мать держала его руку и не могла отпустить' });
     mg.plate.set({ glow: null });
     const free = new Set();
     let opened = 0, mark = null, still = 0, hers = null, last = 0;

@@ -21,7 +21,7 @@ export default {
   about: 40,
   skipped: { slips: 1, seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Ванты уходят в небо, и корабль кренит' });
+    const mg = g.minigame({ phrase: 'Ванты уходили в небо, и палуба кренилась под ногами' });
     const tension = mg.layer('tension');
     let target = 0, shown = 0, slips = 0, side = 0, bad = 0, spent = false, warned = false, wind = -1, sentRoll = 0, sentClimb = 0;
     SIDES.forEach(s => g.set(s.key, 1));

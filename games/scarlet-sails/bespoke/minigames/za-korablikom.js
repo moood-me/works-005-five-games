@@ -26,7 +26,7 @@ export default {
   about: 40,
   skipped,
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Ручей уносит яхту к морю' });
+    const mg = g.minigame({ phrase: 'Ручей, играя, уносил кораблик всё дальше к морю' });
     const send = keys(g);
     const at = () => clamp(+g.get('run_at') || 0); // where she is (the scene keeps it)
     const run = mg.hold({ on: null, seconds: 1, drain: 0 }); // (held — she runs: what it reports is whether)

@@ -23,7 +23,7 @@ export default {
   about: 25,
   skipped: { on: false, stirs: 0, seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Она спит, и сон её чуток' });
+    const mg = g.minigame({ phrase: 'Она спала легко, как спят в детстве' });
     const send = keys(g), tension = mg.layer('tension');
     const mark = mg.mark({ at: 'grey#ring', kind: 'groove' });
     const hold = mg.hold({ on: mark, seconds: 1 / REACH, drain: 0 });

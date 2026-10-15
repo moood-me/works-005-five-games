@@ -12,7 +12,7 @@ export default {
   about: 5,
   skipped: { tries: 0, seconds: 0 },
   async run(g, b, { heavy = false } = {}, signal) {
-    const mg = g.minigame({ phrase: 'Строки книги ещё держат её взгляд' });
+    const mg = g.minigame({ phrase: 'Она читала, и строки не отпускали её' });
     const send = keys(g), t0 = mg.t;
     const book = mg.mark({ at: 'book#book', kind: 'dash' });
     const gaze = mg.pull({ on: book, to: 'window#window', release: 'spring', heavy });

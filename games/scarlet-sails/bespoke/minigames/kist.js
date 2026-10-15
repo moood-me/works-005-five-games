@@ -12,7 +12,7 @@ export default {
   about: 15,
   skipped: { order: [3, 1, 2], seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Из рук на картине торчат гвозди, и течёт кровь' });
+    const mg = g.minigame({ phrase: 'Гвозди на картине были написаны так, что больно было смотреть' });
     const send = keys(g), t0 = mg.t, order = [];
     const nails = NAILS.map(n => {
       const mark = mg.mark({ at: `canvas#nail${n}`, kind: 'spot' }), rub = mg.rub({ on: mark });

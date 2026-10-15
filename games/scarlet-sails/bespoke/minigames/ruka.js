@@ -13,7 +13,7 @@ export default {
   about: 6,
   skipped: { seconds: 0, lets: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Его рука протянута к ней' });
+    const mg = g.minigame({ phrase: 'Его рука ждала её руки' });
     const send = keys(g);
     const her = mg.mark({ at: 'hands#her', kind: 'dash' });
     const hand = mg.pull({ on: her, to: 'hands#his', heavy: true });
