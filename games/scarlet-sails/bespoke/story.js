@@ -26,8 +26,8 @@
 //     the middle), in their voice; → a breath after it has been heard (unvoiced: once it could be read)
 //   g.choose(choice, {ref: options, …}) — the player presses one of the points ('id#point' | 'id': where the element
 //     is pressed), then one of its options ([{id, label}]: one — at once, more — petals); → the option's id, kept in
-//     state.choices[choice] (choice null: not a choice of the chapter's map). One who doesn't press is told how,
-//     after 8 s. g.withdraw() — what is offered is taken back
+//     state.choices[choice] (choice null: not a choice of the chapter's map). One who doesn't press is shown how
+//     (hub.offer). g.withdraw() — what is offered is taken back
 //   g.beat(name, {wait}) — a beat of the shown scene's film (the world's module `beats`); → once it
 //     has ended (the scene tells 'beat:<name>'), or at once with wait: false. To wait for a moment inside a beat,
 //     make the g.told / g.when / g.arrived before g.beat
@@ -38,7 +38,6 @@
 //     passable
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
 //     left when the signal aborts; the author's ⏭ skips the minigame
-//   g.hint(text, afterMs) — one line low on the screen, what to do; → a function that takes it away
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name, {rule}) — the scale is shown from now on; its one line of what it means said once (rule: false —
 //     not yet)
@@ -134,7 +133,6 @@ export function context(b, view, hub, state, j = null) {
   const put = (key, value, seconds) => (unseen() ? j.did([key, value]) : b.set(key, value, seconds));
   let hero = 'both'; // whose scene it is
   let opening = null; // the beat the scene was opened with, till g.beat takes it up: {name, ended}
-  let nudge = () => {}; // takes away the line that tells one who doesn't press how to choose
   let playing = null; // the minigame played now: {signal, end}
   // a jump at its minigame (or stuck before it: a choice the play didn't make): the scene where the step has got to
   // — and the step on from there, seen
@@ -219,12 +217,7 @@ export function context(b, view, hub, state, j = null) {
     },
     async choose(choice, offers) {
       if (gone()) return never;
-      const offer = async () => {
-        nudge = g.hint('Коснись кольца', 8000);
-        const action = await alive(hub.offer(offers));
-        nudge();
-        return action;
-      };
+      const offer = () => alive(hub.offer(offers));
       // unseen: as the play chose it — else the first offered; one it chose that isn't here (the moment passed then):
       // offered once seen
       let action;
@@ -238,7 +231,6 @@ export function context(b, view, hub, state, j = null) {
     withdraw() {
       if (unseen()) return;
       hub.withdraw();
-      nudge();
     },
     async beat(name, { wait = true } = {}) {
       if (gone()) return never;
@@ -287,12 +279,6 @@ export function context(b, view, hub, state, j = null) {
       mg.on('skip', playing.end);
       return mg;
     },
-    hint(text, afterMs = 0) {
-      if (gone() || unseen()) return () => {};
-      const off = view.hint(text, afterMs);
-      left.signal.addEventListener('abort', off);
-      return off;
-    },
     scale(name, delta) {
       if (gone() || !delta) return;
       const S = SCALES[name];
@@ -336,10 +322,13 @@ export function context(b, view, hub, state, j = null) {
 // keeps a listener for good) — game.js owns it: whatever is being chosen now gets the action;
 // whoever waits for a tell, a key set, a walk's end hears it.
 //   hub.offer({ref: options}) → the action once the player has chosen it (what was offered before is dropped): a
-//     plain choice of the language of mini-games — a mark on each point, pressed: one option at once, more — petals
+//     plain choice of the language of mini-games — a mark on each point, pressed: one option at once, more — petals;
+//     one who touches no mark for SHOW s is shown how: the ghost finger on each in turn
 //   hub.withdraw() — nothing offered; hub.told(text, ms) → true once the scene tells it, false if ms pass
 //   hub.when(key, test, ms) → true once the scene sets the key to a value test holds for, false if ms pass;
 //   hub.arrived(who, ms) — a walk of theirs ended; hub.watch(key, fn) → off — fn(value, old) on each
+const SHOW = 8; // s: nothing pressed so long — the ghost shows how
+
 export function listen(b) {
   let offered = null; // the plain choice going on: the language's mini-game
   const waiting = new Set(), watching = new Set();
@@ -358,16 +347,21 @@ export function listen(b) {
   return {
     offer(offers) {
       offered?.leave();
-      const mg = offered = b.minigame.start({ plate: false }), refs = Object.keys(offers);
+      const mg = offered = b.minigame.start({ plate: false }), refs = Object.keys(offers), presses = [];
       // (the thing itself glows when it alone is offered: one breath in one place)
       if (refs.length === 1) mg.glow(refs[0].split('#')[0]);
+      // (the play's clock: it stands with the pause)
+      const ghost = setTimeout(() => mg.show({ gestures: presses }), SHOW * 1000);
+      mg.on('end', () => clearTimeout(ghost));
       return new Promise(ok => {
         const chosen = (mark, action) => { mg.snap({ at: mark }); mg.leave(); offered = null; ok(action); };
         for (const ref of refs) {
           const options = offers[ref], mark = mg.mark({ at: ref.includes('#') ? ref : `${ref}@` });
           const press = mg.press({ on: mark, ...(options.length > 1 ? { petals: options } : {}) });
+          press.on('down', () => clearTimeout(ghost));
           press.on('choose', ({ id }) => chosen(mark, options.find(o => o.id === id)));
           press.on('press', () => chosen(mark, options[0]));
+          presses.push(press);
         }
       });
     },
