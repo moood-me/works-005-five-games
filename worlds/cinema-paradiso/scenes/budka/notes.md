@@ -36,7 +36,7 @@ x across, left to right facing the ports; z from the opposite wall (0) to the po
 - Right wall: the door (z 0.1…1.0; `booth_door` hinged at z 0.1, `door` 0…1 → `door_f`: it opens into the room and at 1
   lies along the opposite wall), the stair landing beyond with its bulb (`stair`); the slate on its nail (z 1.2, 1.6 m,
   1988 only: `slate_nail`, its letters crooked as `slate_letters` says).
-- Opposite wall: the calendar (`wall_calendar`, x 1.4, 1.5 m) — behind the open door's leaf; `month` `none` (only the
+- Opposite wall: the calendar (`wall_calendar`, x 1.6 — scenes.md says 1.4: at 1.4 the open leaf, 8 cm before the wall, left its edge seen from DOOR; 1.5 m) — behind the open door's leaf; `month` `none` (only the
   nail; chapters I–III), 8, 9 (August turned over the top, its pencil edge showing), 12.
 - Floor: points `floor#path0` (−0.6, 2.3) and `floor#path1` (0.6, 1.4) — «Вытащить».
 - Fire (`fire`, `fire_lens`, `fire_reel`, `embers` at the turned projector by `fire`; light `fire_light`), smoke
@@ -70,7 +70,7 @@ door. `CAL` (1.25, 0.95; 172) — close at the calendar (`note_close`).
 | motor | — | the insert shut: Alfredo turns the crank, the beam, the port lights; `stutter` 1 — the frame trembles (`jitter`) till his palm on the gate; the boy to projector 2's lever, Alfredo's hand there too | motor:beam, motor:lever |
 | window | — | SQUARE, night: Alfredo at the window, smiling; he turns projector 1 to the window (`turned` 0 → 1) | window:hands |
 | jam | — | turned; the boy runs down; fire in the gate and on the reel; Alfredo reaches, falls (`fall_back`) | jam:flame |
-| smoke_in | — | FLOOR: smoke, fire; Alfredo falls again (a motion done once does not play from a cut — so his fall is seen through the smoke), the boy runs to him, kneels at his shoulders, hands at his nape | — |
+| smoke_in | — | FLOOR: smoke, fire; Alfredo lying on his side, the boy runs to him, kneels at his shoulders, hands at his nape | — |
 | story_booth | — | DOOR: blind Alfredo on the stool (`cane_sit`, `tell_hand`) facing the window, his face to us; Toto (17) on the bench's edge facing him and us | story_booth:start, :99, :why |
 | reels | — | DOOR: Toto at the bench changing reels (Alfredo on the stool if `alfredo_here`); the door: Elena; the hug in the door, her face over his shoulder; the tail flaps (the hall's screen white) | reels:door, reels:hug, reels:tail |
 | six | — | PORTS, evening, `month` 8, clock 6: Toto at his place turns toward the door | six:clock |
@@ -96,7 +96,8 @@ beats where he is always present set it themselves in their `from` (`knock`, `st
 the play read it there (`reels`, `six`, `alfredo_comes`).
 
 Motions: `bench_work`, `seated`, `cane_sit`, `tell_hand`, `doze`, `cane_walk` (gait), `sit_down`, `rise`, `run`,
-`paint`, `push_turn`, `fall_back`, `kneel_down`, `drag` (gait, «Вытащить»), `cough_stand`, `lift_show`.
+`paint`, `push_turn`, `fall_back`, `sleep` (lying on the side), `kneel_down`, `drag` (gait, «Вытащить»), `cough_stand`, `lift_show`.
+Looks (`_look`) far behind a person twist the body round: those who should face the camera look ahead or at what is before them.
 
 ## «Вытащить» (script.js)
 
@@ -110,7 +111,10 @@ a second without pulling.
 - `story_booth`: Toto on the bench's edge, but Alfredo faces the window, not Toto (blind, telling into the air) — so
   both faces are to the camera from DOOR; his head turns toward Toto only partly.
 - `deal`: the camera is BENCH turned to 74° (BENCH2) so the stool and the boy's box are both in the middle 4:3.
-- `smoke_in`: about 5 s (the fall seen again, the boy running in) — see above.
+- `smoke_in`: about 5 s — Alfredo already lying unconscious on his side (`sleep`, a loop: a motion done once does not play from a cut, and `lay_down` of the AP cast is «puts a thing on the table», not lying), the boy runs in and drops to his knees at his shoulders.
+- `FLOOR` looks down at −26° (scenes.md −19°): at −19° `floor#path1` is at the frame's bottom edge (−0.5 of the frame, not −0.36 as scenes.md counted); at −26° the way runs from +0.08 to −0.36 of the frame, the fire is above the frame (its light and smoke fill the room).
+- The crate is moved by the beats: by the window in `window` (the boy on it beside Alfredo, not hiding him), thrown aside under the window in `jam` and `smoke_in` (it stood where Alfredo falls).
+- In 1988 the camera comes to Salvatore at projector 2 by its own keys (a glide to a medium shot), not by the operator: `camera_target` adds the DOOR shot's offsets on top of its framing and ends inside the projector.
 - `knock`: Alfredo's face is turned to Elena, away from the camera (his profile from behind); Elena's face is the shot's.
 - The calendar exists from chapter IV (`month` 'none' before).
 
