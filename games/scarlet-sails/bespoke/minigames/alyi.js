@@ -1,8 +1,8 @@
 // Алый (Лавка в Лиссе, кусок `silk`): the rolls of silk are brought to the window one by one, and the player says by
 // eye whether this is the colour of the scrap — the scrap lies on the plate, the sample to compare with. The colours are
 // never named. Grey brings each roll himself (the scene's keys `roll`, `roll_out`; meanwhile the scene answers: no
-// mark); on the roll a ring with two petals, «Не то» and «Этот». A wrong «Этот» is an error («не то»): the scrap
-// comes near (`memory`) for a moment — the eye sees the difference. The chapter answers each choice (opts).
+// mark); on the roll a ring with two petals, «Не то» and «Этот» (the right roll brought again: «Этот» alone). A wrong
+// «Этот» is an error («не то»): the scrap comes near (`memory`) for a moment — the eye sees the difference. The chapter answers each choice (opts).
 // → { wrong: n, passed: bool, shown: n }
 //   opts: { no() — the answer to «Не то» (also after a wrong «Этот»), yes() — to the right «Этот»,
 //           last() — the merchant brings the right roll again after the last one was passed; all awaited }
@@ -41,10 +41,10 @@ export default {
       });
       if (signal.aborted) return null;
       const mark = mg.mark({ at: 'roll' });
-      const press = mg.press({ on: mark, ...(petals.length > 1 ? { petals } : {}) });
+      const press = mg.press({ on: mark, petals });
       mg.glow('roll');
       if (shown === 1) b.minigame.tricks.teach(mg, [press], { id: 'press:petals', still: null });
-      const chosen = await (petals.length > 1 ? once(mg, press, 'choose').then(c => c?.id ?? null) : once(mg, press, 'press').then(p => (p ? petals[0].id : null)));
+      const chosen = await once(mg, press, 'choose').then(c => c?.id ?? null);
       // (a wrong «Этот»: «не то», the roll shakes its head)
       if (chosen === 'yes' && roll !== RIGHT) mg.error('wrong', { at: mark });
       else if (chosen) mg.snap({ at: mark });
