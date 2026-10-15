@@ -31,10 +31,10 @@ G.BEAM = {
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_shot: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
   table: cam(0.85, 1.05, -24, -0.3, 1),     // the table under the lamp, the photo over it, the window at the left
-  photo: cam(-0.45, 2.1, -2, -0.3, -2),      // close on the mother at the table, the photo over her: medium
+  photo: cam(-0.45, 2.05, -2, -0.15, -7),      // close on the mother at the table, the photo over her: medium
   call: cam(-0.5, 0.75, -3, -0.28, 1),       // from the room's south: the two of them face to face by the table, the lamp over them
   answer: cam(-1.6, 4.55, 148, -0.3, -2),    // from behind the table, past the lamp: Toto reading in its light, his face to us
-  corner: cam(2.0, 0.85, -4, -0.4, -3),     // inside the corner by its partition: the bed, the gap in the curtain
+  corner: cam(2.45, 0.72, -10, -0.38, -3),     // inside the corner by its partition: the bed, the gap in the curtain
   movie: cam(2.3, 4.45, 186, -0.25, -4),     // over the bed's head: his back, the beam, the square on the partition
 };
 
@@ -46,6 +46,7 @@ const P = {
   BOY_SH: [-1.05, 3.98],       // beside her chair, at her right shoulder
   M_CALL: [-1.05, 2.8], T_CALL: [0.0, 2.85], T_LAMP: [-0.42, 2.8],
   GAP: [1.12, 3.05],           // the old mother in the gap of the curtain
+  M_IN: [1.45, 2.52],          // …and a step into the corner, by him
   S_IN: [0.4, 2.95], S_MID: [2.05, 2.62], S_BED: [2.0, 2.92], S_SHELF: [2.38, 3.25],
 };
 
@@ -75,6 +76,7 @@ const seat = (xz, h = G.SEAT) => [xz[0], xz[1], h];
 const SIT = { motion: 'seated', loop: true };
 // the old mother's lamp held up before her, at her chest, toward the corner
 const LAMP_UP = [1.45, 3.12, 1.15];
+const LAMP_IN = [1.72, 2.68, 1.12]; // …held toward him in the corner
 
 // ---- the film ----
 const FILM = {
@@ -135,14 +137,17 @@ const FILM = {
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
       await s.wait(1.2);
-      await m.do('give');
+      m.do('give');
+      await s.wait(1.2);
       t.look('maria#hand_r');
-      await s.wait(0.3);
+      t.reach({ r: 'maria#hand_r' });
+      await s.wait(0.8);
       m.with(null); t.with(['paper_sheet']);
-      t.do('take');
+      t.reach({ r: [-0.1, 2.62, 1.12] });
       s.tell('call:paper');
-      await s.wait(3.2);
-      t.do('stand');
+      await s.wait(1.2);
+      m.do('stand');
+      await s.wait(2.0);
       t.look('toto#hand_r'); t.mood('thinking');
       await s.wait(3);
     },
@@ -242,7 +247,7 @@ const FILM = {
       t.look('home_screen');
       await s.until(() => shot.ready);
       shot.cut();
-      await t.go('sit_down', { to: P.S_BED, turn: 180 });
+      await t.go("sit_down", { to: P.S_BED, turn: 210 });
       t.do('seated', { loop: true });
       t.look('home_screen');
       m.look('home_screen');
@@ -254,16 +259,20 @@ const FILM = {
   question: {
     after: ['room', 'home_movie'],
     from: () => ({ ...base(0.92, 'now'), ...people({
-      maria: { at: P.GAP, turn: 118, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_UP }, wear: CHARS().maria_old, mood: 'sad' },
-      toto: { at: P.S_BED, on: seat(P.S_BED, G.BED.top), turn: 180, do: SIT, look: 'maria', wear: CHARS().salvatore, mood: 'tired' } }), ...CAM.corner }),
+      maria: { at: P.M_IN, turn: 78, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_IN }, wear: CHARS().maria_old, mood: 'sad' },
+      toto: { at: P.S_BED, on: seat(P.S_BED, G.BED.top), turn: 210, do: SIT, look: 'maria', wear: CHARS().salvatore, mood: 'tired' } }), ...CAM.corner }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
       if (s.get('camera_z') > 3) s.cut({ ...CAM.corner });
       if (!s.get('projector_on')) {
         // (after `room`: he stands in the middle — he goes to the bed and sits; after `home_movie` he sits already)
-        await t.go('sit_down', { to: P.S_BED, turn: 180 });
+        await t.go('sit_down', { to: P.S_BED, turn: 210 });
         t.do('seated', { loop: true });
       }
+      m.reach(null);
+      await m.walk([P.M_IN]);
+      await m.turn(78);
+      m.reach({ r: LAMP_IN });
       t.look('maria'); m.look('toto');
       await s.wait(1);
       s.tell('question:asked');

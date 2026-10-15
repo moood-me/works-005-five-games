@@ -17,6 +17,8 @@ for (let k = 0; k < 3; k++) { g.fillStyle = k % 2 ? '#77786f' : '#8a8b82'; g.fil
 if (e.state.reel8) {
   g.fillStyle = '#9a9b90'; g.fillRect(L - 0.34, -0.15, 0.22, 0.03);
   g.fillStyle = '#e8e2cf'; g.fillRect(L - 0.25, -0.147, 0.05, 0.024);
-  g.fillStyle = '#2a2018'; g.font = '0.02px Georgia'; g.fillText('Е.', L - 0.245, -0.128);
+  g.strokeStyle = '#2a2018'; g.lineWidth = 0.003;
+  g.beginPath(); g.moveTo(L - 0.205, -0.142); g.lineTo(L - 0.222, -0.142); g.lineTo(L - 0.222, -0.127); g.lineTo(L - 0.205, -0.127);
+  g.moveTo(L - 0.222, -0.135); g.lineTo(L - 0.21, -0.135); g.stroke();
 }
 e.at(0, -0.15, 'middle');
