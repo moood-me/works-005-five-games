@@ -421,8 +421,12 @@ const FILM = {
       s.move('fire', 1, { over: 1.6 }); s.move('smoke', 0.6, { over: 4 });
       alf.reach({ r: 'projector#gate' }); alf.mood('afraid');
       await s.wait(1.0);
-      alf.reach(null); await alf.do('fall_back');
-      await s.wait(1.2);
+      // (the cast's fall_back recoils with an arm up but never reaches the floor: after its recoil he drops into
+      // the lying loop — a third of a second, a collapse)
+      alf.reach(null); alf.do('fall_back');
+      await s.wait(1.1);
+      alf.do('sleep', { loop: true });
+      await s.wait(1.6);
     },
   },
   // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
