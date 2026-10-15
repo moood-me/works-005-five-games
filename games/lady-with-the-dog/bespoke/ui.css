@@ -1,0 +1,124 @@
+/* The game over the scene (ui.js), as an old resort postcard written in pencil: warm white paper, a thin faded frame,
+   graphite words in a light hand. Nothing bright; red (--leash) is the leash of Anna's gauge alone. */
+#layer { --card: #f1ebdf; --card-edge: #cbbfa8; --graphite: #3b3a38; --leash: #a8322c;
+  --hand: "Dama Hand", "Segoe Script", cursive;
+  --serif: Georgia, "Times New Roman", serif;
+  --tooth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  --below-header: 46px; } /* where the site's header ends */
+#layer .gauge, #layer .toasts, #layer .hint, #layer .title { pointer-events: none; }
+
+/* a slip of postcard paper: the paper's tooth, a thin faded frame inside its edge, graphite letters */
+#layer .card { position: relative; box-sizing: border-box; color: var(--graphite); background: var(--tooth), var(--card);
+  border: 1px solid var(--card-edge); outline: 1px solid rgba(203, 191, 168, 0.7); outline-offset: -5px; border-radius: 2px;
+  font-family: var(--hand); box-shadow: 0 2px 8px rgba(40, 34, 26, 0.28); }
+#layer .card .arrows { font-family: var(--serif); }
+
+/* the scales: the spitz on its red leash on the left, the pocket watch on the right — each on a round of paper */
+#layer .gauge { position: absolute; bottom: 64px; width: 72px; height: 72px; overflow: visible; opacity: 0; transition: opacity 2s ease;
+  border-radius: 50%; background: radial-gradient(circle, rgba(241, 235, 223, 0.92) 55%, rgba(241, 235, 223, 0) 72%);
+  filter: drop-shadow(0 1px 2px rgba(40, 34, 26, 0.25)); }
+#layer .gauge.leash { left: 14px; }
+#layer .gauge.watch { right: 14px; }
+#layer .gauge * { vector-effect: non-scaling-stroke; }
+#layer .gauge .parapet { fill: none; stroke: var(--graphite); stroke-width: 1.2; stroke-linecap: round; }
+#layer .gauge .hand { fill: var(--card); stroke: var(--graphite); stroke-width: 1; }
+#layer .gauge .line { fill: none; stroke: var(--leash); stroke-width: 1.6; stroke-linecap: round; }
+#layer .gauge .spitz .body, #layer .gauge .spitz .tail { fill: #fbf8f2; stroke: var(--graphite); stroke-width: 1; stroke-linejoin: round; }
+#layer .gauge .spitz .ear { fill: #fbf8f2; stroke: var(--graphite); stroke-width: 1; stroke-linejoin: round; }
+#layer .gauge .spitz .eye { fill: var(--graphite); }
+#layer .gauge .spitz .collar { fill: none; stroke: var(--leash); stroke-width: 1.4; stroke-linecap: round; }
+#layer .gauge .chain { fill: none; stroke: var(--graphite); stroke-width: 1; stroke-dasharray: 1.6 1.1; stroke-linecap: round; }
+#layer .gauge .bow { fill: none; stroke: var(--graphite); stroke-width: 1.1; }
+#layer .gauge .crown { fill: var(--card); stroke: var(--graphite); stroke-width: 1; }
+#layer .gauge .case { fill: #ddd3c1; stroke: var(--graphite); stroke-width: 1.3; }
+#layer .gauge .face { fill: #fbf8f2; stroke: var(--graphite); stroke-width: 0.7; }
+#layer .gauge .tickmark { stroke: var(--graphite); stroke-width: 0.9; stroke-linecap: round; }
+#layer .gauge .hands { fill: none; stroke: var(--graphite); stroke-width: 1.2; stroke-linecap: round; }
+#layer .gauge .pin { fill: var(--graphite); }
+#layer .gauge .lid-face { fill: #d6cbb7; stroke: var(--graphite); stroke-width: 1.3; }
+#layer .gauge .lid-ring { fill: none; stroke: rgba(59, 58, 56, 0.55); stroke-width: 0.8; }
+#layer .gauge .lid.inside .lid-face { fill: #e9e1d2; }
+#layer .gauge .lid.inside .lid-ring { stroke: rgba(59, 58, 56, 0.25); }
+
+/* the slips under the tools */
+#layer .toasts { position: absolute; top: calc(var(--below-header) + 60px); right: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+#layer .slip { margin: 0; padding: 7px 18px 9px; max-width: min(340px, 46vw); font: 400 clamp(18px, 4.4vh, 23px)/1.25 var(--hand);
+  text-align: center; rotate: -0.6deg; animation: slip-in 0.7s ease both; transition: opacity 1.5s ease, translate 1.5s ease; }
+#layer .slip.gone { opacity: 0; translate: 0 -6px; }
+#layer .slip.rule { font-size: clamp(16px, 4vh, 20px); line-height: 1.3; rotate: 0.4deg; }
+@keyframes slip-in { from { opacity: 0; translate: 0 4px; } }
+
+/* the hint: one line low in the middle */
+#layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 5px 20px 7px; max-width: 80vw; white-space: nowrap;
+  font: 22px/1.25 var(--hand); opacity: 0; transition: opacity 1.2s ease; }
+#layer .hint.on { opacity: 0.95; }
+
+/* the title: a postcard's caption in the middle of the frame, on a soft breath of paper */
+#layer .title { position: absolute; inset: 0; display: grid; place-items: center; padding: 0 5vw; }
+#layer .title .caption { display: grid; place-items: center; width: min(80vw, 140vh); height: min(40vh, 30vw); padding: 0 4vw; text-align: center;
+  background: radial-gradient(ellipse at center, rgba(241, 235, 223, 0.82) 30%, rgba(241, 235, 223, 0.45) 58%, rgba(241, 235, 223, 0) 72%);
+  opacity: 0; filter: blur(3px); transition: opacity 2.6s ease, filter 2.6s ease; }
+#layer .title .words { font: 400 clamp(40px, 10vh, 108px)/1.15 var(--hand); color: var(--graphite); }
+#layer .title.on .caption { opacity: 1; filter: none; }
+
+/* the letter: three panels folded over the middle one; open-top, open-bottom unfold them. Old paper, graphite */
+#layer .letter-veil { position: absolute; inset: 0; display: grid; place-items: center; padding-top: 30px; background: rgba(40, 34, 26, 0.35); opacity: 0;
+  cursor: pointer; outline: none; perspective: 1600px; transition: opacity 1.2s ease; -webkit-tap-highlight-color: transparent; }
+#layer .letter-veil.on { opacity: 1; }
+#layer .letter { --h: min(calc(86vh - 30px), 600px, 128vw); --paper: #f1ebdf; --paper-dark: #d9cfbd;
+  position: relative; width: calc(var(--h) * 0.68); height: var(--h);
+  font-size: calc(var(--h) * 0.06); transform-style: preserve-3d; rotate: -2.5deg; translate: 0 -10px; scale: 0.92;
+  transition: rotate 1.6s ease, translate 1.6s ease, scale 1.6s ease; }
+#layer .letter-veil.on .letter { translate: 0 0; }
+#layer .letter.open-top { rotate: -0.8deg; scale: 1; }
+#layer .panel { position: absolute; left: 0; width: 100%; height: calc(100% / 3); transform-style: preserve-3d;
+  transition: transform 1.1s cubic-bezier(0.45, 0.05, 0.25, 1); }
+#layer .panel.top { top: 0; transform-origin: 50% 100%; transform: rotateX(-180deg) translateZ(-2px); }
+#layer .panel.mid { top: calc(100% / 3); }
+#layer .panel.bottom { top: calc(200% / 3); transform-origin: 50% 0; transform: rotateX(180deg) translateZ(-1px); }
+#layer .letter.open-top .panel.top, #layer .letter.open-bottom .panel.bottom { transform: rotateX(0deg) translateZ(0); }
+#layer .face { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+#layer .face.back { transform: rotateX(180deg); background: var(--tooth), var(--paper-dark); box-shadow: inset 0 0 18px rgba(60, 48, 30, 0.3); }
+#layer .face.front { background: var(--tooth), var(--paper); box-shadow: inset 0 0 14px rgba(60, 48, 30, 0.2); }
+#layer .face.front::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+#layer .panel.top .face.front::after { box-shadow: inset 0 -5px 6px -5px rgba(60, 48, 30, 0.45); }
+#layer .panel.mid .face.front::after { box-shadow: inset 0 5px 6px -5px rgba(60, 48, 30, 0.45), inset 0 -5px 6px -5px rgba(60, 48, 30, 0.45); }
+#layer .panel.bottom .face.front::after { box-shadow: inset 0 5px 6px -5px rgba(60, 48, 30, 0.45); }
+#layer .sheet { position: absolute; left: 0; top: 0; width: 100%; height: 300%; box-sizing: border-box; padding: 1.4em;
+  display: flex; flex-direction: column; justify-content: center; font: 1em/1.45 var(--hand); color: var(--graphite); }
+#layer .panel.mid .sheet { top: -100%; }
+#layer .panel.bottom .sheet { top: -200%; }
+#layer .sheet p { margin: 0 0 0.5em; }
+#layer .sheet .sign { margin: 1em 1em 0 0; text-align: right; }
+#layer .letter-hint { position: absolute; bottom: 2.5vh; left: 50%; translate: -50% 0; margin: 0; padding: 5px 18px 7px;
+  font: 21px/1.2 var(--hand); opacity: 0; transition: opacity 1.2s ease; pointer-events: none; }
+#layer .letter-hint.on { opacity: 0.95; }
+
+/* the corner's tools, under the site's header: ⏸ pause (everyone), ⏭ skip (a minigame: everyone; a step: the
+   author), ☰ the chapters and their steps (the author) — above whatever a minigame spreads over the scene */
+#layer .tools { position: absolute; z-index: 10; top: calc(var(--below-header) + 8px); right: 14px; display: flex; gap: 6px; }
+#layer .tools > button { width: 44px; height: 44px; border: 1px solid var(--card-edge); outline: 1px solid rgba(203, 191, 168, 0.7); outline-offset: -4px;
+  border-radius: 2px; color: var(--graphite); background: var(--card); font: 18px/1 var(--serif); cursor: pointer; opacity: 0.7; }
+#layer .tools > button[hidden] { display: none; }
+#layer .tools > button:hover, #layer .tools.paused > button:first-child { opacity: 1; }
+/* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
+   of its steps */
+#layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
+  background: rgba(40, 34, 26, 0.4); }
+#layer .author-map[hidden] { display: none; }
+#layer .author-panel { position: relative; box-sizing: border-box; width: min(1100px, 100%); max-height: calc(100vh - var(--below-header) - 24px); overflow: auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px 22px; padding: 22px 26px 26px; border-radius: 2px;
+  color: var(--graphite); background: var(--tooth), var(--card); border: 1px solid var(--card-edge); outline: 1px solid rgba(203, 191, 168, 0.7); outline-offset: -6px;
+  box-shadow: 0 12px 48px rgba(40, 34, 26, 0.4); font: 17px/1.35 var(--hand); }
+#layer .author-panel .close { position: absolute; top: 10px; right: 12px; width: 44px; height: 44px; border: 0; border-radius: 2px; background: none;
+  color: inherit; opacity: 0.6; cursor: pointer; font: 16px/1 var(--serif); }
+#layer .author-panel .close:hover { opacity: 1; background: rgba(59, 58, 56, 0.08); }
+#layer .author-panel .as { grid-column: 1 / -1; padding-right: 48px; }
+#layer .author-panel .as select { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--card-edge); border-radius: 2px; padding: 4px 8px; }
+#layer .author-panel section { display: flex; flex-direction: column; gap: 2px; }
+#layer .author-panel h3 { margin: 0 0 6px; font: 17px/1.3 var(--hand); opacity: 0.65; }
+#layer .author-panel section button { border: 0; border-radius: 2px; padding: 6px 10px; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+#layer .author-panel section button:hover { background: rgba(59, 58, 56, 0.08); }
+#layer .author-panel section button.here { background: rgba(59, 58, 56, 0.14); }
+#layer .author-panel .minigames { display: flex; flex-direction: column; }
+#layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 15px; }
