@@ -3,8 +3,8 @@
 Вставки движка 3 в одной манере: одна плоская модель руки (`hand(g, x, y, s, rot, {palm, side, sleeve, light})`), мягкий
 свет нарисован в кадре. Рисуют в высотах сцены (x 0…aspect, y 0…1), главное — в средних 4:3.
 
-Элемент сцены: `{ "id": "<кадр>", "insert": "<ключ>" }`; `elements/<кадр>.js`: `e.kit.closeups_opus.paint(g, e,
-'<кадр>');` · `elements/<кадр>.animate.js`: `e.kit.closeups_opus.live(e, '<кадр>');`
+Элемент сцены: `{ "id": "<кадр>", "insert": "<ключ>" }`; `elements/<кадр>.js`: `e.kit.closeups.paint(g, e,
+'<кадр>');` · `elements/<кадр>.animate.js`: `e.kit.closeups.live(e, '<кадр>');`
 
 | Кадр | Что | Ключи (`animate`) | Точки |
 | --- | --- | --- | --- |

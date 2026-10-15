@@ -6,9 +6,9 @@
     "mode": "picture"
   },
   "modules": [
-    "cast_opus",
-    "shpic_opus",
-    "closeups_opus"
+    "cast",
+    "shpic",
+    "closeups"
   ],
   "light": {
     "ambient": 0.48,
@@ -395,7 +395,7 @@
       "name": "Анна Сергеевна",
       "inside": true,
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "anna_grey",
         "turn": 0
       },
@@ -411,7 +411,7 @@
       "name": "Гуров",
       "inside": true,
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "gurov_grey",
         "turn": 160
       },
@@ -427,7 +427,7 @@
       "name": "официант",
       "inside": true,
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "waiter",
         "turn": 160
       },

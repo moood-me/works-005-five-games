@@ -6,8 +6,8 @@
     "mode": "picture"
   },
   "modules": [
-    "cast_opus",
-    "closeups_opus"
+    "cast",
+    "closeups"
   ],
   "light": {
     "ambient": 0.52,
@@ -373,7 +373,7 @@
       "name": "Анна Сергеевна",
       "inside": true,
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "anna_hairdown",
         "turn": 110,
         "does": "seated_bowed"
@@ -390,7 +390,7 @@
       "name": "Гуров",
       "inside": true,
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "gurov_indoor",
         "turn": 15
       },
