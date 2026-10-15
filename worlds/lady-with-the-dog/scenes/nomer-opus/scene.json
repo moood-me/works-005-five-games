@@ -584,6 +584,7 @@
     }
   },
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "very quiet night ambient, a candle in a hotel room by the sea, soft sustained strings, hesitant",

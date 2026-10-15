@@ -723,6 +723,7 @@
     }
   },
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "very quiet winter evening ambient in a hotel room, soft sustained strings, tender and heavy",

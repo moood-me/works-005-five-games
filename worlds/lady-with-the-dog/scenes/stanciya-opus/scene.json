@@ -726,6 +726,7 @@
     }
   },
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "very quiet ambient pad, late summer evening, faded and warm, a slow breath of strings",
