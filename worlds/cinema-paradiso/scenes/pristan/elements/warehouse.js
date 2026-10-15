@@ -3,10 +3,20 @@
 // the bench below (its own element). Painted in daylight colours; the night is the scene's light.
 const an = e.anim, L = 13, H = 5.6;
 g.fillStyle = '#cdb994'; g.fillRect(0, -H, L, H);
-for (let i = 0; i < 70; i++) {                                   // plaster fallen, the stone under it
-  const x = an.hash(i, 61) * L, y = -0.4 - an.hash(i, 62) * (H - 0.8), w = 0.3 + an.hash(i, 63) * 1.1, h = 0.2 + an.hash(i, 64) * 0.6;
-  g.fillStyle = an.hash(i, 65) < 0.5 ? '#b49f7c' : '#c3ae88';
-  g.beginPath(); g.ellipse(x, y, w, h, 0, 0, Math.PI * 2); g.fill();
+// the limestone under the plaster: courses of blocks, seen where the plaster has fallen in patches
+for (let i = 0; i < 26; i++) {
+  const x0 = an.hash(i, 61) * (L - 1.4), y0 = -0.5 - an.hash(i, 62) * (H - 1.4), w = 0.5 + an.hash(i, 63) * 1.0, h = 0.4 + an.hash(i, 64) * 0.5;
+  g.save(); g.beginPath(); g.ellipse(x0 + w / 2, y0 - h / 2, w / 2, h / 2, 0, 0, Math.PI * 2); g.clip();
+  g.fillStyle = '#b8a27e'; g.fillRect(x0, y0 - h, w, h);
+  g.strokeStyle = 'rgba(90,74,56,0.5)'; g.lineWidth = 0.025;
+  for (let y = Math.ceil(y0 / 0.3) * 0.3; y > y0 - h; y -= 0.3) { g.beginPath(); g.moveTo(x0, y); g.lineTo(x0 + w, y); g.stroke(); }
+  g.restore();
+}
+// the plaster's own weather: fine streaks down from the cornice, a few damp marks
+for (let i = 0; i < 90; i++) {
+  const x = an.hash(i, 71) * L, y = -H + 0.45, len = 0.6 + an.hash(i, 72) * 2.6;
+  g.fillStyle = 'rgba(120,100,76,' + (0.05 + an.hash(i, 73) * 0.07) + ')';
+  g.fillRect(x, y, 0.03 + an.hash(i, 74) * 0.08, len);
 }
 const base = g.createLinearGradient(0, -1.2, 0, 0);
 base.addColorStop(0, 'rgba(110,96,78,0)'); base.addColorStop(1, 'rgba(110,96,78,0.55)');

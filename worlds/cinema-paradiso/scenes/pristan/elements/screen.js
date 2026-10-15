@@ -9,5 +9,5 @@ g.fillRect(-3.95, -5.62, 7.9, 0.1);
 g.fillStyle = '#e9e5da'; g.fillRect(-W, -5.4, 2 * W, 4.0);
 g.fillStyle = '#1c1b1a'; g.fillRect(-W, -5.4, 2 * W, 0.06); g.fillRect(-W, -1.46, 2 * W, 0.06);
 const f = e.state.screen_film || 'romance';
-if (f !== 'none') P.film(g, f, -W + 0.12, -5.3, 2 * W - 0.24, 3.8);
+if (f !== 'none') e.kit.kino.frame(g, f, -W + 0.12, -5.3, 2 * W - 0.24, 3.8);
 e.at(0, -3.4, 'screen');
