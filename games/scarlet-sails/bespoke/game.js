@@ -10,9 +10,9 @@
 // What is kept of the play (bespoke.keep), after every step: { chapter, step, scales, shown, marks, choices, start:
 // the same as the chapter began } — a step cut short (the page closed) is played again from its beginning. The author
 // may go to any step of any chapter (☰) — or straight to a minigame of one (the step played up to it unseen:
-// jump.js) —, and skip a step or a minigame (⏭). What is gone to begins as one of PLAYS has it by then: that play's
-// choices, every step before played through unseen (its scales, marks and gauges come out of the steps themselves;
-// its minigames skipped). A step skipped leaves nothing chosen.
+// jump.js) —, and skip a step (⏭; a minigame's ⏭ is every player's: story.js g.play). What is gone to begins as one
+// of PLAYS has it by then: that play's choices, every step before played through unseen (its scales, marks and gauges
+// come out of the steps themselves; its minigames skipped, as played). A step skipped leaves nothing chosen.
 import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { beds, wake, unheard } from './sound.js';
@@ -123,7 +123,7 @@ export default async function (b) {
       // (gone to a minigame of it: the step played up to it unseen)
       const g = context(b, mine, hub, structuredClone(kept), kept.play != null ? unseen(kept.play, unheard()) : null);
       let skip;
-      const off = view.onSkip(() => skip());
+      const off = b.game.mine ? view.onSkip(() => skip()) : () => {};
       const done = await Promise.race([
         ch.steps[kept.step](g).then(() => true, e => { b.trouble(`шаг сломался: ${e.message || e}`); return false; }),
         new Promise(ok => { skip = () => ok(false); }),
