@@ -215,15 +215,15 @@ function bench(g, C, lamp, tone = '#6b5038') {
 // rang (kiss_cut1…3); Alfredo's left hand holds the film, his right the scissors; the press for the splice; the boy's
 // small hand at the right edge, reaching for the cut pieces
 const SPLICE = (() => {
-  const h = 0.25, y = -0.02, k = h * 0.72, fw = k * 1.33, gap = h * 0.06, step = fw + gap, x0 = -6 * step;
-  const names = ['romance', 'romance', 'romance', 'romance', 'kiss_cut1', 'romance', 'kiss_cut2', 'romance', 'kiss_cut3', 'romance', 'romance', 'romance'];
-  const cuts = [4, 6, 8].map(i => x0 + i * step); // the cut line: at the kiss frame's left edge
+  const h = 0.3, y = -0.03, k = h * 0.72, fw = k * 1.33, gap = h * 0.06, step = fw + gap, x0 = -2 * step;
+  const names = ['romance', 'romance', 'kiss_cut1', 'romance', 'kiss_cut2', 'romance', 'kiss_cut3', 'romance', 'romance'];
+  const cuts = [0, 2, 4].map(i => x0 + i * step); // the cut line: at the kiss frame's left edge
   const top = y - h / 2, bot = y + h / 2;
   return {
     h, y, step, x0, names, cuts, top, bot, fw,
     light: { dir: [0.7, -0.7], colour: '#ffd9a0' },
     lamp: [0.75, -0.62],
-    pile: [[0.86, 0.36], [0.98, 0.31], [0.9, 0.44]],
+    pile: [[0.86, 0.38], [0.98, 0.33], [0.92, 0.46]],
     left: aim(handOf('alfredo', { angle: -0.42, curl: [0.18, 0.14, 0.2, 0.3], spread: 0.2, thumb: { angle: -0.5, curl: 0.2 }, fine: true }), 1, [-0.92, y + h / 2 - 0.03]),
     right: handOf('alfredo', { angle: Math.PI / 2 + 0.18, curl: [0.62, 0.66, 0.7, 0.72], spread: 0.12, thumb: { angle: -0.5, curl: 0.5 }, fine: true }),
     boy: aim(handOf('boy', { angle: Math.PI + 0.55, side: -1, curl: [0.14, 0.12, 0.16, 0.22], spread: 0.4, thumb: { angle: -0.6, curl: 0.15 }, fine: true }), 1, [1.0, 0.36]),
@@ -231,6 +231,7 @@ const SPLICE = (() => {
 })();
 function scissors(g, open) {
   // drawn about the pivot at (0, 0): the blades down (+y), the bows up; open — radians apart
+  g.save(); g.scale(1.35, 1.35);
   for (const s of [-1, 1]) {
     g.save(); g.rotate(s * open / 2);
     g.fillStyle = '#9a9ca0'; g.beginPath(); g.moveTo(-0.008, 0); g.lineTo(0.012 * s, 0.17); g.lineTo(0.004 * s, 0.17); g.lineTo(0.008, -0.02); g.closePath(); g.fill();
@@ -240,6 +241,7 @@ function scissors(g, open) {
     g.restore();
   }
   oval(g, 0, 0, 0.009, 0.009, 0, '#c8c8cc');
+  g.restore();
 }
 function splice(g, e) {
   const C = painter(g, e), P = SPLICE, S = e.state, k = C.kino;
@@ -247,7 +249,7 @@ function splice(g, e) {
   bench(g, C, P.lamp);
   // the strip's shadow, the strip with its ordinary frames (under the kisses: what is left once they are out)
   g.fillStyle = 'rgba(12,8,4,0.45)'; g.fillRect(-W, P.y - P.h / 2 + 0.02, 2 * W, P.h);
-  k.strip(g, P.x0 - 2 * P.step, P.y, P.h, ['romance', 'romance', ...P.names.map(n => (n.startsWith('kiss') ? 'romance' : n)), 'romance', 'romance']);
+  k.strip(g, P.x0 - 4 * P.step, P.y, P.h, ['romance', 'romance', 'romance', 'romance', 'romance', 'romance', ...P.names.map(n => (n.startsWith('kiss') ? 'romance' : n)), 'romance', 'romance']);
   // a gloss along the film where the lamp catches it
   const gl = g.createLinearGradient(-W, 0, W, 0);
   gl.addColorStop(0, 'rgba(255,230,190,0)'); gl.addColorStop(0.7, 'rgba(255,230,190,0.12)'); gl.addColorStop(1, 'rgba(255,230,190,0)');
@@ -272,7 +274,7 @@ function splice(g, e) {
       p.fillStyle = '#2a211b'; p.fillRect(x, P.top, w, P.h);
       p.fillStyle = '#d9cfb8';
       for (let px = x + P.h * 0.04; px < x + w - 0.01; px += P.h * 0.14) { p.fillRect(px, P.top + P.h * 0.04, P.h * 0.07, P.h * 0.06); p.fillRect(px, P.bot - P.h * 0.1, P.h * 0.07, P.h * 0.06); }
-      k.frame(p, P.names[4 + 2 * n], x + P.h * 0.03, P.y - P.h * 0.36, P.fw, P.h * 0.72);
+      k.frame(p, P.names[2 + 2 * n], x + P.h * 0.03, P.y - P.h * 0.36, P.fw, P.h * 0.72);
       // the paper slip: tucked under the film, sticking up past its top edge, a little crooked
       p.save(); p.translate(x + w * 0.5, P.top); p.rotate(-0.1 + 0.08 * n);
       p.fillStyle = 'rgba(0,0,0,0.3)'; p.fillRect(-0.018, -0.15, 0.04, 0.17);
@@ -283,24 +285,26 @@ function splice(g, e) {
   });
   // the press's lid, its hand on it (one layer per joint: it comes down as it is pressed)
   P.cuts.forEach((xc, n) => {
-    C.layer(`press${n + 1}`, [xc, P.y], [xc - 0.3, P.top - 0.45, xc + 0.3, P.bot + 0.05], q => {
-      q.fillStyle = 'rgba(0,0,0,0.35)'; q.fillRect(xc - 0.1, P.top - 0.01, 0.2, P.h + 0.04);
-      const gr = q.createLinearGradient(xc - 0.1, 0, xc + 0.1, 0); gr.addColorStop(0, '#4a4a4e'); gr.addColorStop(0.5, '#8a8a90'); gr.addColorStop(1, '#3a3a3e');
-      q.fillStyle = gr; q.fillRect(xc - 0.1, P.top - 0.03, 0.2, P.h + 0.03);
-      q.fillStyle = '#2a2a2e'; q.fillRect(xc - 0.03, P.top - 0.09, 0.06, 0.06);
-      q.fillStyle = '#6b4a2a'; oval(q, xc, P.top - 0.12, 0.05, 0.03, 0, '#5a3c22');
-      hand(q, aim({ ...P.right, angle: Math.PI / 2 + 0.1, curl: [0.35, 0.38, 0.4, 0.45], spread: 0.25 }, 1, [xc + 0.01, P.top - 0.1]), P.light);
+    C.layer(`press${n + 1}`, [xc, P.y], [xc - 0.35, P.top - 0.75, xc + 0.35, P.bot + 0.08], q => {
+      // the splicer's lid seen from above: a steel plate the width of the film, its hinge pins, a knob — its shadow
+      q.fillStyle = 'rgba(8,5,3,0.45)'; q.fillRect(xc - 0.085, P.top - 0.005, 0.19, P.h + 0.04);
+      const gr = q.createLinearGradient(xc - 0.09, 0, xc + 0.09, 0); gr.addColorStop(0, '#3e3f44'); gr.addColorStop(0.45, '#9a9ba2'); gr.addColorStop(0.55, '#b4b5bc'); gr.addColorStop(1, '#3a3b40');
+      q.fillStyle = gr; q.fillRect(xc - 0.09, P.top - 0.02, 0.18, P.h + 0.04);
+      q.fillStyle = 'rgba(255,240,210,0.25)'; q.fillRect(xc - 0.09, P.top - 0.02, 0.18, 0.006);
+      for (const yy of [P.top + 0.02, P.bot - 0.02]) for (const xx of [xc - 0.06, xc + 0.06]) oval(q, xx, yy, 0.008, 0.008, 0, '#2a2a2e');
+      oval(q, xc, P.y, 0.035, 0.035, 0, '#2e2a26'); oval(q, xc - 0.008, P.y - 0.008, 0.02, 0.02, 0, '#5a4a3a');
+      hand(q, aim({ ...P.right, view: 'back', angle: Math.PI / 2 + 0.1, curl: [0.2, 0.22, 0.26, 0.3], spread: 0.25, thumb: { angle: -0.9, curl: 0.2 } }, 1, [xc + 0.01, P.y + 0.02]), P.light);
     });
   });
   // the scissors in his right hand: painted at the first cut's top; moved to the cut going on
   const [sx, sy] = [P.cuts[0], P.top - 0.02];
   C.layer('scissors', [sx, sy], [sx - 0.5, sy - 0.75, sx + 0.25, sy + 0.25], s => {
     s.save(); s.translate(sx, sy); scissors(s, 0.5); s.restore();
-    hand(s, aim(P.right, 1, [sx + 0.01, sy - 0.07]), P.light);
+    hand(s, aim(P.right, 1, [sx + 0.012, sy - 0.1]), P.light);
   });
   C.layer('scissors_shut', [sx, sy], [sx - 0.5, sy - 0.75, sx + 0.25, sy + 0.25], s => {
     s.save(); s.translate(sx, sy); scissors(s, 0.04); s.restore();
-    hand(s, aim({ ...P.right, curl: [0.72, 0.74, 0.76, 0.78] }, 1, [sx + 0.01, sy - 0.07]), P.light);
+    hand(s, aim({ ...P.right, curl: [0.72, 0.74, 0.76, 0.78] }, 1, [sx + 0.012, sy - 0.1]), P.light);
   });
   // his left hand holds the film down at the left; the boy's small hand comes in at the right
   C.layer('left', P.left.at, [-W, -0.2, -0.1, 0.6], l => hand(l, P.left, P.light));
