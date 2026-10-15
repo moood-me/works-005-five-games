@@ -1,1 +1,1 @@
-e.kit.closeups_opus.live(e, 'mirror');
+e.kit.closeups.live(e, 'mirror');

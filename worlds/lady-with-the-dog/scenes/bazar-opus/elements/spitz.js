@@ -1,2 +1,2 @@
-// the white spitz — the world's module draws it (modules/shpic_opus.md)
-e.kit.shpic_opus.paint(g, e);
+// the white spitz — the world's module draws it (modules/shpic.md)
+e.kit.shpic.paint(g, e);

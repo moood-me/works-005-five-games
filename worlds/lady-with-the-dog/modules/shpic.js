@@ -133,7 +133,8 @@ function live(e) {
   // the collar where paint() put the leash's pivot (the same pose numbers; its own painting's units)
   const c = s.spitz_view === 'back' ? [0, P.body[1] - 0.045] : [(P.head[0] - 0.06) * dir, P.head[1] + 0.06];
   let p = null;
-  if (typeof ref === 'string' && ref !== 'none' && ref !== 'chair') p = e.point(ref);
+  if (ref === 'chair') p = e.point('chair#leash');            // lying over the back of the scene's chair
+  else if (typeof ref === 'string' && ref !== 'none') p = e.point(ref);
   if (!p) p = [c[0] - dir * 1.1, 0];
   const dx = p[0] - c[0], dy = p[1] - c[1], len = Math.hypot(dx, dy);
   L.alpha = 1;

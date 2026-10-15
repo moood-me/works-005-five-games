@@ -16,10 +16,10 @@ II.1 «Дамы с собачкой». Её номер ночью: камера 
 - **Небо** рисует ночь только для двери: луна (`sky#moon`), дорожка (слой с `shimmer`), дальний берег с огоньками.
 - **Тарелка** (`watermelon`) — элемент на месте `melon_a/d/e`; скрипт ставит место по `plate` (`table` · `held` ·
   `bed`); в руках у него — часть каста `plate`, элемент тогда скрыт. После `slice` 1 на тарелке красный ломоть.
-- **Вставки** — модуль `closeups_opus` (сделан здесь же для двух сцен): `melon` (ключ `melon`; `cut`, `slice`; точки
+- **Вставки** — модуль `closeups` (сделан здесь же для двух сцен): `melon` (ключ `melon`; `cut`, `slice`; точки
   `melon#knife`, `melon#from`, `melon#to`) и `hands` (ключ `hands`; `hand_at`, `pull`, `palm`; точки `hands#his`,
   `hands#her`).
-- **Люди**: каст `cast_opus` — `anna_hairdown`, `gurov_indoor`; движения `seated_bowed`, `seated`, `sit_down`, `rise`,
+- **Люди**: каст `cast` — `anna_hairdown`, `gurov_indoor`; движения `seated_bowed`, `seated`, `sit_down`, `rise`,
   `eat_slow`. Сидят через `<id>_on` на точках (`lib.js`); на стуле он поворачивается ключом `_turn` и `_look`.
 - **Кадры**: `ROOM_CAM` (вся комната), `BED_CAM` (двое на постели ближе — после вставки рук), `TABLE_CAM` (стол и
   постель ближе — признание за столом). Склейки внутри куска сказаны заранее.

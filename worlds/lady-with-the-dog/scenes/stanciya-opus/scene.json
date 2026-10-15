@@ -10,7 +10,7 @@
     ]
   },
   "modules": [
-    "cast_opus"
+    "cast"
   ],
   "relief": "return -0.6 * anim.span(distance, 7.6, 7.75);",
   "light": {
@@ -519,7 +519,7 @@
       "name": "Анна Сергеевна",
       "on": "carriage",
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "anna_travel",
         "turn": 270,
         "does": "hold_dog"
@@ -537,7 +537,7 @@
       "id": "gurov",
       "name": "Гуров",
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "gurov_summer",
         "turn": 90
       },
@@ -552,7 +552,7 @@
       "id": "conductor",
       "name": "кондуктор",
       "person": {
-        "cast": "cast_opus",
+        "cast": "cast",
         "who": "conductor",
         "turn": 260
       },

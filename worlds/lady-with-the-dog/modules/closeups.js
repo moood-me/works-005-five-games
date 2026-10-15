@@ -1,4 +1,4 @@
-// Close-ups — inserts of hands and things, one manner for all (closeups_opus.md): flat hands of one model, a soft
+// Close-ups — inserts of hands and things, one manner for all (closeups.md): flat hands of one model, a soft
 // light painted in the shot. paint(g, e, shot) in the insert's code; live(e, shot) in its animate.
 // Stage heights: x 0..e.aspect, y 0..1 down; what matters stays in the middle 4:3 (x 0.125..0.875 of the width).
 
