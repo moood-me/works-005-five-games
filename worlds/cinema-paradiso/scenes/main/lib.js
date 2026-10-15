@@ -389,11 +389,11 @@ const CAM = {
   DOOR: cam(-8.5, 1.5, -65, -0.25, -1),
   STEPS: cam(5.5, 25.8, 180, 0.9, -6),
   BALCONY: cam(10, 19.6, 165, -0.1, 4),
-  EVE: cam(0, -10, 0, 0.4, 3),
+  EVE: cam(-1, -6, 3, 0.4, 3),
   GIRL: cam(-11, 8, 46, 0, 1),
   CHALK: cam(10, 14.2, 55, -0.4, -4),
   FUNERAL: cam(-4, 6, -35, 0.2, 1),
-  RUIN: cam(6, 12, -90, 0.2, 8),
+  RUIN: cam(6, 8, -85, 0.2, 8),
   CLOSE_HUG: cam(9.3, 15.6, 100, -0.15, 1),
   WIDOW: cam(-6.0, 14.0, -50, -0.1, 0),
   WIDOW_LATE: cam(-8.6, 10.2, -40, -0.1, 0),
@@ -1012,7 +1012,7 @@ B('funeral', {
   run: async s => {
     const sal = s.person('toto');
     sal.look('hearse');
-    await s.move('cart', 0.4, { over: (0.32 * CART_L) / 0.8, ease: 'linear' });
+    await s.move('cart', 0.4, { over: (0.32 * CART_L) / 0.6, ease: 'linear' });
     s.tell('funeral:passing');
     await s.wait(3.5);
   },
@@ -1028,7 +1028,7 @@ B('walk_behind', {
     s.set('sal_rail', 1);
     sal.reach({ r: 'hearse#rail' }); sal.gait('walk_slow');
     for (const id of ['c1', 'c2', 'c3']) s.person(id).look('toto');
-    const go = s.move('cart', 0.6, { over: (0.2 * CART_L) / 0.8, ease: 'linear' });
+    const go = s.move('cart', 0.6, { over: (0.2 * CART_L) / 0.6, ease: 'linear' });
     await s.wait(2.4);
     s.tell('walk_behind:hand');
     await go;
@@ -1066,7 +1066,7 @@ B('stay_door', {
   from: () => ({ ...NOW(0.3), cart: 0.4, ...cartKeys(0.4), follow: 1, sal_rail: 0,
     ...cast({ ...PROC(0.4), ...MOURNERS(0.4), toto: SAL(P.SAL_FUNERAL, 120, { mood: 'tired', look: 'hearse' }) }), ...CAM.FUNERAL }),
   run: async s => {
-    await s.move('cart', 1, { over: (0.6 * CART_L) / 0.8, ease: 'linear' });
+    await s.move('cart', 1, { over: (0.6 * CART_L) / 0.6, ease: 'linear' });
     s.set('follow', 0);
     s.tell('stay_door:passed');
   },
@@ -1098,25 +1098,24 @@ B('widow_late', {
   },
 });
 // Эпилог: the demolition
-const DEMO_CROWD = { c1: [-0.6, 9.0], c2: [-1.4, 10.4], c3: [-0.2, 13.6], c4: [-1.8, 14.6], c5: [0.4, 7.6], c6: [-2.6, 8.6], c7: [-0.8, 16.0], c8: [0.8, 15.2] };
+const DEMO_CROWD = { c1: [-1.5, 8.2], c2: [-2.3, 9.8], c3: [-1.0, 11.4], c4: [-3.0, 11.0], c5: [-0.6, 6.8], c6: [-3.4, 8.0], c7: [-2.0, 12.6], c8: [-0.4, 10.2] };
 const LOOKS_C = { c1: 'villager_m', c2: 'villager_w', c3: 'old_m', c4: 'old_w', c5: 'kid', c6: 'villager_m', c7: 'villager_w', c8: 'old_m' };
 B('demolition', {
   from: () => {
     const who = {};
     for (const [id, at] of Object.entries(DEMO_CROWD)) who[id] = { at, turn: 270, look: 'paradiso' };
-    return { ...NOW(0.32, 'charged'), ...crowdAt(-4.2, 12, 90, 1), ...cast({ ...who, toto: SAL([0.6, 12.3], 270, { look: 'paradiso' }), anna: { at: [0.7, 11.4], turn: 270, look: 'paradiso', mood: 'sad' },
-      maria: { at: [0.75, 13.0], turn: 270, wear: 'maria_old', look: 'paradiso', mood: 'sad' } }), ...CAM.RUIN };
+    return { ...NOW(0.32, 'charged'), ...crowdAt(-5.0, 9.8, 90, 1), ...cast({ ...who, toto: SAL([0.4, 9.2], 270, { look: 'paradiso' }), anna: { at: [0.5, 8.4], turn: 270, look: 'paradiso', mood: 'sad' },
+      maria: { at: [0.55, 9.9], turn: 270, wear: 'maria_old', look: 'paradiso', mood: 'sad' } }), ...CAM.RUIN };
   },
   run: async s => {
     // where Salvatore stands and whether his mother is by him: the party's keys (place, with_mother)
     const apart = s.get('place') === 'apart', mother = Number(s.get('with_mother')) === 1;
     const sal = s.person('toto');
-    const at = apart ? [-1.6, 17.6] : [0.6, 12.3];
+    const at = apart ? [0.0, 5.2] : [0.4, 9.2];
     s.set('toto_a', at[0]); s.set('toto_d', at[1]);
     s.set('anna_here', !apart);
     s.set('maria_here', mother);
     if (mother) { s.set('maria_a', at[0] + 0.15); s.set('maria_d', at[1] + 0.62); s.set('maria_reach', { l: 'toto#hand_l' }); }
-    if (apart) { s.set('c7_a', -0.4); s.set('c7_d', 14.8); s.set('c8_a', 0.9); s.set('c8_d', 13.6); }
     await s.wait(10);
     s.tell('demolition:whistle');
     for (const id of Object.keys(DEMO_CROWD)) s.person(id).look('paradiso');
@@ -1132,7 +1131,7 @@ B('demolition', {
 });
 B('dust', {
   after: ['demolition'],
-  from: () => ({ ...NOW(0.32, 'charged'), collapse: 1, dust: 1, ...crowdAt(-4.2, 12, 90, 1), ...cast({ toto: SAL([0.6, 12.3], 270), anna: { at: [0.7, 11.4], turn: 270, mood: 'sad' },
+  from: () => ({ ...NOW(0.32, 'charged'), collapse: 1, dust: 1, ...crowdAt(-5.0, 9.8, 90, 1), ...cast({ toto: SAL([0.4, 9.2], 270), anna: { at: [0.5, 8.4], turn: 270, mood: 'sad' },
     ...Object.fromEntries(Object.entries(DEMO_CROWD).map(([id, at]) => [id, { at, turn: 270 }])) }), ...CAM.RUIN }),
   run: async s => {
     s.move('dust', 0.25, { over: 12, ease: 'out' });
@@ -1410,18 +1409,17 @@ function backWall(g) {
 }
 // the feast's garland across the bank's front: coloured bulbs (their glow by `garland`)
 function garlandPaint(g, e) {
-  g.strokeStyle = '#2a2622'; g.lineWidth = 0.02;
   const yy = x => -6.2 + 0.4 * Math.sin(Math.PI * (x % 4) / 4);
-  g.beginPath(); g.moveTo(0, yy(0)); for (let x = 0.25; x <= 12; x += 0.25) g.lineTo(x, yy(x)); g.stroke();
+  e.layer('wire', {}, l => { l.strokeStyle = '#2a2622'; l.lineWidth = 0.02; l.beginPath(); l.moveTo(0, yy(0)); for (let x = 0.25; x <= 12; x += 0.25) l.lineTo(x, yy(x)); l.stroke(); });
   const cols = ['#ffd27a', '#ff9a7a', '#a8d0ff', '#c8ff9a'];
-  for (let i = 0; i < 24; i++) {
-    const x = 0.25 + i * 0.5, y = yy(x) + 0.06;
-    g.fillStyle = cols[i % 4]; g.beginPath(); g.arc(x, y, 0.05, 0, TAU); g.fill();
-    if (i % 2 === 0) e.light(x, y, 0.18, cols[i % 4], 0.6, 'g' + i);
-  }
+  e.layer('bulbs', {}, l => {
+    for (let i = 0; i < 24; i++) { const x = 0.25 + i * 0.5, y = yy(x) + 0.06; l.fillStyle = cols[i % 4]; l.beginPath(); l.arc(x, y, 0.05, 0, TAU); l.fill(); }
+  });
+  for (let i = 0; i < 24; i += 2) { const x = 0.25 + i * 0.5; e.light(x, yy(x) + 0.06, 0.18, cols[i % 4], 0.6, 'g' + i); }
 }
 function garlandMove(e) {
   const k = clamp(e.state.garland ?? 0);
+  e.layer('bulbs').alpha = k; e.layer('wire').alpha = k;
   for (let i = 0; i < 24; i += 2) e.glow('g' + i, k * (0.8 + 0.2 * anim.noise(e.t * 2 + i, 1)));
 }
 // the «Парадизо»'s front as it stands — or in pieces that fall (charged: the demolition)
