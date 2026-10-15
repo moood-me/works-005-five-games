@@ -13,7 +13,7 @@
     ]
   },
   "light": {
-    "ambient": 0.24,
+    "ambient": 0.3,
     "ambientColor": "#6c6690",
     "tint": "#2a1e30",
     "tintStrength": 0.04,
@@ -44,7 +44,7 @@
         }
       },
       "past": {
-        "ambient": 0.24,
+        "ambient": 0.3,
         "ambientColor": "#6c6690",
         "tint": "#2a1e30",
         "tintStrength": 0.04,
@@ -149,6 +149,15 @@
       "reach": 7,
       "on": "memory_light",
       "flicker": 0.12
+    },
+    {
+      "id": "corridor_light",
+      "across": -8.6,
+      "distance": 4.6,
+      "elevation": 2.3,
+      "color": "#c9b89a",
+      "strength": 0.7,
+      "reach": 5.5
     }
   ],
   "objects": [
@@ -706,7 +715,7 @@
         "cast": "cast",
         "who": "adelfio"
       },
-      "across": -4.675,
+      "across": -4.125,
       "distance": 8.82,
       "place": {
         "across": "adelfio_a",
@@ -746,7 +755,7 @@
     "bell": 0,
     "turn": 0,
     "adelfio_here": true,
-    "adelfio_a": -4.675,
+    "adelfio_a": -4.125,
     "adelfio_d": 8.82,
     "adelfio_turn": 0,
     "adelfio_do": {

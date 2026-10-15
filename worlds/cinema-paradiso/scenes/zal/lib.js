@@ -15,7 +15,7 @@ const G = {
   STAGE_Z: 17.2, STAGE_H: 0.8,
 };
 G.seat = (row, i) => [G.SEAT_X0 + i * G.SEAT_W, G.ROWS[row - 1] + G.HIP];
-G.PRIEST_I = 0;
+G.PRIEST_I = 1;
 G.PRIEST = G.seat(5, G.PRIEST_I);                         // the priest's seat: row 5, by the left aisle — ≈ 3 m from the side door
 
 const hash = (n, s) => anim.hash(n, s);

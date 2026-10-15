@@ -5,11 +5,11 @@
 if (e.state.era === 'ruin') return;
 const W = 2.0, H = 2.62;
 e.layer('drape', { pivot: [W, 0] }, d => {
-  d.fillStyle = '#5e1a20'; d.fillRect(0, -H, W, H);
+  d.fillStyle = '#7a2228'; d.fillRect(0, -H, W, H);
   for (let k = 0; k < 16; k++) {
     const x = k * W / 16;
     const gr = d.createLinearGradient(x, 0, x + W / 16, 0);
-    gr.addColorStop(0, '#4a1218'); gr.addColorStop(0.45, '#8a2a30'); gr.addColorStop(1, '#4a1218');
+    gr.addColorStop(0, '#5e1a20'); gr.addColorStop(0.45, '#a8383e'); gr.addColorStop(1, '#5e1a20');
     d.fillStyle = gr;
     d.beginPath(); d.moveTo(x, -H); d.quadraticCurveTo(x + 0.03, -H / 2, x + 0.01, -0.02); d.lineTo(x + W / 16, -0.02); d.quadraticCurveTo(x + W / 16 + 0.02, -H / 2, x + W / 16, -H); d.closePath(); d.fill();
   }
