@@ -564,7 +564,7 @@ const FILM = {
       s.move('door', 0, { over: 0.25, ease: 'in' }); s.tell('runs:gone');
       await away; el.here(false);
       alf.look('projector2'); await s.wait(0.6);
-      alf.reach({ r: 'projector2#side' });
+      alf.reach({ r: 'projector2' });
       await s.wait(2.6);
     },
   },
