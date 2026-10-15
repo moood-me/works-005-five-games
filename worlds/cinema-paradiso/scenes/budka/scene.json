@@ -1272,6 +1272,23 @@
       "inside": true
     },
     {
+      "id": "p1_knob",
+      "name": "Рукоять мотора 1",
+      "on": "p1",
+      "across": 0.33,
+      "distance": 0,
+      "elevation": 1.1,
+      "facing": 180,
+      "height": 0.3,
+      "box": [
+        -0.06,
+        -0.2,
+        0.06,
+        0.2
+      ],
+      "inside": true
+    },
+    {
       "id": "beam",
       "name": "Луч 1",
       "on": "p1",
@@ -1382,6 +1399,23 @@
         -0.16,
         0.16,
         0.16
+      ],
+      "inside": true
+    },
+    {
+      "id": "p2_knob",
+      "name": "Рукоять мотора 2",
+      "on": "p2",
+      "across": -0.33,
+      "distance": 0,
+      "elevation": 1.1,
+      "facing": 180,
+      "height": 0.3,
+      "box": [
+        -0.06,
+        -0.2,
+        0.06,
+        0.2
       ],
       "inside": true
     },
