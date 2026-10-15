@@ -1,0 +1,1775 @@
+{
+  "engine": 3,
+  "title": "Улица (Opus)",
+  "caption": "Ночная улица пригорода. Снег.",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -45,
+      45,
+      -9,
+      12
+    ]
+  },
+  "modules": [
+    "cast",
+    "izby"
+  ],
+  "light": {
+    "tint": "#6f80b8",
+    "tintStrength": 0.12,
+    "vignette": 0.5,
+    "grain": 0.22,
+    "haze": 0.12,
+    "hazeColor": "#323b5c",
+    "hazeGlow": 0.9,
+    "shafts": 0,
+    "brightness": 1.1,
+    "saturation": 0.85,
+    "ambient": 0.5,
+    "ambientColor": "#8796c8",
+    "bounce": 0.5,
+    "inside": 0.2,
+    "wind": [
+      0.6,
+      0.2,
+      0.35
+    ],
+    "looks": {
+      "late": {
+        "ambient": 0.4,
+        "ambientColor": "#7686bc",
+        "hazeColor": "#262e4a",
+        "tintStrength": 0.15
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "night_sky",
+      "from": [
+        -25,
+        40
+      ],
+      "color": "#a9b8e0",
+      "strength": 0.4
+    },
+    {
+      "id": "street_lamp_l",
+      "of": "street_lamp#lamp",
+      "color": "#f3dcae",
+      "strength": 1.6,
+      "reach": 10,
+      "glow": 1.2
+    },
+    {
+      "id": "gate_lamp_l",
+      "of": "gate_lamp#lamp",
+      "color": "#f3dcae",
+      "strength": 1.4,
+      "reach": 8,
+      "glow": 1
+    },
+    {
+      "id": "win1_l",
+      "of": "win1#pane",
+      "color": "#eda055",
+      "strength": 1.1,
+      "reach": 6,
+      "on": "win1_lit"
+    },
+    {
+      "id": "win2_l",
+      "of": "win2#pane",
+      "color": "#eda055",
+      "strength": 1.1,
+      "reach": 6,
+      "on": "win2_lit"
+    },
+    {
+      "id": "win3_l",
+      "of": "win3#pane",
+      "color": "#eda055",
+      "strength": 1.1,
+      "reach": 6,
+      "on": "win3_lit"
+    },
+    {
+      "id": "win4_l",
+      "of": "win4#pane",
+      "color": "#eda055",
+      "strength": 1.1,
+      "reach": 6,
+      "on": "win4_lit"
+    },
+    {
+      "id": "win5_l",
+      "of": "win5#pane",
+      "color": "#eda055",
+      "strength": 1.1,
+      "reach": 6,
+      "on": "win5_lit"
+    },
+    {
+      "id": "mak_window_l",
+      "of": "mak_window#pane",
+      "color": "#eda055",
+      "strength": 1.1,
+      "reach": 6,
+      "on": "mak_window_lit"
+    },
+    {
+      "id": "kitchen_l",
+      "of": "kitchen#glow",
+      "color": "#e8963a",
+      "reach": 6.5
+    },
+    {
+      "id": "lamp",
+      "of": "abajur#lamp",
+      "color": "#e8963a",
+      "strength": 2.2,
+      "reach": 2.6
+    },
+    {
+      "id": "stove_l",
+      "of": "stove#fire",
+      "color": "#e07a35",
+      "strength": 0.8,
+      "reach": 1.6,
+      "flicker": 0.4
+    },
+    {
+      "id": "hall_l",
+      "across": 25.2,
+      "distance": 13,
+      "elevation": 2.45,
+      "color": "#f0b56e",
+      "strength": 1.5,
+      "reach": 4.5,
+      "on": "door"
+    },
+    {
+      "id": "porch_l",
+      "of": "porch_bulb#bulb",
+      "color": "#f2c27e",
+      "strength": 1.3,
+      "reach": 5,
+      "on": "porch_light"
+    }
+  ],
+  "state": {
+    "hour": 0.9,
+    "late": 0,
+    "snow": 0.35,
+    "beat": null,
+    "beat_next": null,
+    "knock": 0,
+    "win1": 1,
+    "win2": 1,
+    "win3": 1,
+    "win4": 1,
+    "win5": 1,
+    "mak_window": 0,
+    "win1_lit": 1,
+    "win2_lit": 1,
+    "win3_lit": 1,
+    "win4_lit": 1,
+    "win5_lit": 1,
+    "mak_window_lit": 0,
+    "mak_window_who": 0,
+    "win1_who": 0,
+    "win2_who": 0,
+    "win3_who": 0,
+    "win4_who": 0,
+    "win5_who": 0,
+    "porch_light": 0,
+    "door": 0,
+    "door_f": 180,
+    "mak_door": 0,
+    "mak_door_f": 180,
+    "vasenka_here": false,
+    "sarafanov_here": false,
+    "k1_here": false,
+    "k2_here": false,
+    "k3_here": false,
+    "k4_here": false,
+    "warm": 0.36,
+    "frost": 0.25,
+    "busygin_a": -2.7,
+    "busygin_d": 5,
+    "silva_a": -1.5,
+    "silva_d": 5.35,
+    "sarafanov_a": 25.2,
+    "sarafanov_d": 12.6,
+    "vasenka_a": 25.2,
+    "vasenka_d": 12.35,
+    "k1_a": 21,
+    "k1_d": 13.55,
+    "k2_a": 21.05,
+    "k2_d": 14.3,
+    "k3_a": 21.75,
+    "k3_d": 14.25,
+    "busygin_turn": 0,
+    "silva_turn": 350,
+    "busygin_look": "win2",
+    "silva_look": "win4",
+    "camera_x": -2.1,
+    "camera_z": 0,
+    "camera_yaw": 0,
+    "camera_h": 0
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "время ночи: 0.9 ночь … 0.95 поздняя ночь (скрипт ставит late)"
+    },
+    "late": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "вес образа «поздняя ночь» — ставит скрипт по hour"
+    },
+    "snow": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "сила снегопада"
+    },
+    "beat": {
+      "values": [
+        null,
+        "walk",
+        "knock_ready",
+        "last_window",
+        "neighbor",
+        "porch",
+        "shut",
+        "in",
+        "return"
+      ],
+      "means": "кусок фильма: игра ставит имя — кусок играется с начала"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "какой кусок будет следующим: сцена готовит его первый кадр, склейка идёт по готовому"
+    },
+    "knock": {
+      "values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "means": "«Окна»: N — Бусыгин идёт к окну winN и стучит (knock:hit, knock:done); 0 — возвращается к Сильве"
+    },
+    "win1": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "окно 1: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+    },
+    "win2": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "окно 2: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+    },
+    "win3": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "окно 3: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+    },
+    "win4": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "окно 4: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+    },
+    "win5": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "окно 5: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+    },
+    "mak_window": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "окно Макарской: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+    },
+    "win1_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет окна win1 — ставит скрипт по win1"
+    },
+    "win1_who": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "силуэт в окне win1 — ставит скрипт по win1"
+    },
+    "win2_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет окна win2 — ставит скрипт по win2"
+    },
+    "win2_who": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "силуэт в окне win2 — ставит скрипт по win2"
+    },
+    "win3_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет окна win3 — ставит скрипт по win3"
+    },
+    "win3_who": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "силуэт в окне win3 — ставит скрипт по win3"
+    },
+    "win4_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет окна win4 — ставит скрипт по win4"
+    },
+    "win4_who": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "силуэт в окне win4 — ставит скрипт по win4"
+    },
+    "win5_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет окна win5 — ставит скрипт по win5"
+    },
+    "win5_who": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "силуэт в окне win5 — ставит скрипт по win5"
+    },
+    "mak_window_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "свет окна mak_window — ставит скрипт по mak_window"
+    },
+    "mak_window_who": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "силуэт в окне mak_window — ставит скрипт по mak_window"
+    },
+    "porch_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "лампочка над крыльцом Сарафановых"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "дверь Сарафановых: 0 закрыта … 1 открыта внутрь"
+    },
+    "door_f": {
+      "type": "number",
+      "means": "поворот двери Сарафановых, градусы — ставит скрипт по door"
+    },
+    "mak_door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "дверь Макарской: 0 закрыта … 1 открыта"
+    },
+    "mak_door_f": {
+      "type": "number",
+      "means": "поворот двери Макарской — ставит скрипт по mak_door"
+    },
+    "vasenka_here": {
+      "type": "boolean",
+      "means": "Васенька на улице (ставит кусок)"
+    },
+    "sarafanov_here": {
+      "type": "boolean",
+      "means": "Сарафанов на улице (ставит кусок)"
+    },
+    "k1_here": {
+      "type": "boolean",
+      "means": "в окне кухни: Сильва"
+    },
+    "k2_here": {
+      "type": "boolean",
+      "means": "в окне кухни: Бусыгин"
+    },
+    "k3_here": {
+      "type": "boolean",
+      "means": "в окне кухни: Васенька"
+    },
+    "k4_here": {
+      "type": "boolean",
+      "means": "в окне кухни: четвёртый (в этой версии сцены его нет)"
+    },
+    "warm": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "ключ партии: свет окна кухни и пятно на снегу (0.55 + 0.45·warm)"
+    },
+    "frost": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "ключ партии: иней на окне кухни, от углов к середине"
+    },
+    "busygin_a": {
+      "type": "number",
+      "means": "где busygin: метры вправо"
+    },
+    "busygin_d": {
+      "type": "number",
+      "means": "где busygin: метры вперёд"
+    },
+    "silva_a": {
+      "type": "number",
+      "means": "где silva: метры вправо"
+    },
+    "silva_d": {
+      "type": "number",
+      "means": "где silva: метры вперёд"
+    },
+    "sarafanov_a": {
+      "type": "number",
+      "means": "где sarafanov: метры вправо"
+    },
+    "sarafanov_d": {
+      "type": "number",
+      "means": "где sarafanov: метры вперёд"
+    },
+    "vasenka_a": {
+      "type": "number",
+      "means": "где vasenka: метры вправо"
+    },
+    "vasenka_d": {
+      "type": "number",
+      "means": "где vasenka: метры вперёд"
+    },
+    "k1_a": {
+      "type": "number",
+      "means": "где k1: метры вправо"
+    },
+    "k1_d": {
+      "type": "number",
+      "means": "где k1: метры вперёд"
+    },
+    "k2_a": {
+      "type": "number",
+      "means": "где k2: метры вправо"
+    },
+    "k2_d": {
+      "type": "number",
+      "means": "где k2: метры вперёд"
+    },
+    "k3_a": {
+      "type": "number",
+      "means": "где k3: метры вправо"
+    },
+    "k3_d": {
+      "type": "number",
+      "means": "где k3: метры вперёд"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Небо",
+      "sky": true
+    },
+    {
+      "id": "ground",
+      "name": "Улица",
+      "plane": true,
+      "drape": true,
+      "across": 0,
+      "distance": 20,
+      "elevation": 0,
+      "width": 150,
+      "depth": 90
+    },
+    {
+      "id": "far",
+      "name": "Дальние дворы",
+      "across": 4,
+      "distance": 32,
+      "height": 13,
+      "box": [
+        -75,
+        -13,
+        75,
+        0.5
+      ]
+    },
+    {
+      "id": "h1",
+      "name": "Дом",
+      "unseen": true,
+      "across": -11,
+      "distance": 14,
+      "facing": 180
+    },
+    {
+      "id": "h1_wall",
+      "name": "Дом",
+      "on": "h1",
+      "facing": 180,
+      "height": 2.95,
+      "box": [
+        -5,
+        -3.45,
+        5,
+        0.15
+      ]
+    },
+    {
+      "id": "h1_roof",
+      "name": "Крыша",
+      "plane": true,
+      "on": "h1",
+      "across": 0,
+      "distance": 1.28,
+      "elevation": 4,
+      "width": 10,
+      "depth": 4.04,
+      "tilt": 31.33
+    },
+    {
+      "id": "h1_endl",
+      "name": "Дом",
+      "on": "h1",
+      "across": -4.5,
+      "distance": 3,
+      "facing": 270,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "h1_endr",
+      "name": "Дом",
+      "on": "h1",
+      "across": 4.5,
+      "distance": 3,
+      "facing": 90,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "h2",
+      "name": "Дом",
+      "unseen": true,
+      "across": 0.5,
+      "distance": 14,
+      "facing": 180
+    },
+    {
+      "id": "h2_wall",
+      "name": "Дом",
+      "on": "h2",
+      "facing": 180,
+      "height": 2.95,
+      "box": [
+        -5.2,
+        -3.45,
+        5.2,
+        0.15
+      ]
+    },
+    {
+      "id": "h2_roof",
+      "name": "Крыша",
+      "plane": true,
+      "on": "h2",
+      "across": 0,
+      "distance": 1.28,
+      "elevation": 4,
+      "width": 10.4,
+      "depth": 4.04,
+      "tilt": 31.33
+    },
+    {
+      "id": "h2_endl",
+      "name": "Дом",
+      "on": "h2",
+      "across": -4.7,
+      "distance": 3,
+      "facing": 270,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "h2_endr",
+      "name": "Дом",
+      "on": "h2",
+      "across": 4.7,
+      "distance": 3,
+      "facing": 90,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "h3",
+      "name": "Дом",
+      "unseen": true,
+      "across": 10.5,
+      "distance": 14,
+      "facing": 180
+    },
+    {
+      "id": "h3_wall",
+      "name": "Дом",
+      "on": "h3",
+      "facing": 180,
+      "height": 2.95,
+      "box": [
+        -4,
+        -3.45,
+        4,
+        0.15
+      ]
+    },
+    {
+      "id": "h3_roof",
+      "name": "Крыша",
+      "plane": true,
+      "on": "h3",
+      "across": 0,
+      "distance": 1.28,
+      "elevation": 4,
+      "width": 8,
+      "depth": 4.04,
+      "tilt": 31.33
+    },
+    {
+      "id": "h3_endl",
+      "name": "Дом",
+      "on": "h3",
+      "across": -3.5,
+      "distance": 3,
+      "facing": 270,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "h3_endr",
+      "name": "Дом",
+      "on": "h3",
+      "across": 3.5,
+      "distance": 3,
+      "facing": 90,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "sar",
+      "name": "Дом",
+      "unseen": true,
+      "across": 21.5,
+      "distance": 12,
+      "facing": 180
+    },
+    {
+      "id": "sar_wall",
+      "name": "Дом Сарафановых",
+      "on": "sar",
+      "facing": 180,
+      "height": 2.95,
+      "box": [
+        -5.5,
+        -3.45,
+        5.5,
+        0.15
+      ]
+    },
+    {
+      "id": "sar_roof",
+      "name": "Крыша",
+      "plane": true,
+      "on": "sar",
+      "across": 0,
+      "distance": 1.53,
+      "elevation": 4,
+      "width": 11,
+      "depth": 4.47,
+      "tilt": 28
+    },
+    {
+      "id": "sar_endl",
+      "name": "Дом",
+      "on": "sar",
+      "across": -5,
+      "distance": 3.5,
+      "facing": 270,
+      "height": 5.050000000000001,
+      "box": [
+        -4.1,
+        -5.450000000000001,
+        4.1,
+        0.15
+      ]
+    },
+    {
+      "id": "sar_endr",
+      "name": "Дом",
+      "on": "sar",
+      "across": 5,
+      "distance": 3.5,
+      "facing": 90,
+      "height": 5.050000000000001,
+      "box": [
+        -4.1,
+        -5.450000000000001,
+        4.1,
+        0.15
+      ]
+    },
+    {
+      "id": "mak",
+      "name": "Дом",
+      "unseen": true,
+      "across": 34.5,
+      "distance": 13,
+      "facing": 180
+    },
+    {
+      "id": "mak_wall",
+      "name": "Дом Макарской",
+      "on": "mak",
+      "facing": 180,
+      "height": 2.95,
+      "box": [
+        -4.5,
+        -3.45,
+        4.5,
+        0.15
+      ]
+    },
+    {
+      "id": "mak_roof",
+      "name": "Крыша",
+      "plane": true,
+      "on": "mak",
+      "across": 0,
+      "distance": 1.28,
+      "elevation": 4,
+      "width": 9,
+      "depth": 4.04,
+      "tilt": 31.33
+    },
+    {
+      "id": "mak_endl",
+      "name": "Дом",
+      "on": "mak",
+      "across": -4,
+      "distance": 3,
+      "facing": 270,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "mak_endr",
+      "name": "Дом",
+      "on": "mak",
+      "across": 4,
+      "distance": 3,
+      "facing": 90,
+      "height": 5.050000000000001,
+      "box": [
+        -3.6,
+        -5.450000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "win1",
+      "name": "Окно",
+      "on": "h1",
+      "across": -3,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": true,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "win2",
+      "name": "Окно",
+      "on": "h1",
+      "across": 3,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": true,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "win3",
+      "name": "Окно",
+      "on": "h2",
+      "across": -2.5,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": true,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "win4",
+      "name": "Окно",
+      "on": "h2",
+      "across": 3.5,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": true,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "win5",
+      "name": "Окно",
+      "on": "h3",
+      "across": -0.5,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": true,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "sar_room",
+      "name": "Окно",
+      "on": "sar",
+      "across": -2.9,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": false,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "mak_window",
+      "name": "Окно",
+      "on": "mak",
+      "across": -2.5,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": true,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "mak_room",
+      "name": "Окно",
+      "on": "mak",
+      "across": 0.6,
+      "distance": 0.05,
+      "elevation": 1.15,
+      "facing": 180,
+      "glows": false,
+      "height": 1.1,
+      "box": [
+        -0.56,
+        -1.1600000000000001,
+        0.56,
+        0.06
+      ]
+    },
+    {
+      "id": "kitchen",
+      "name": "Окно кухни",
+      "on": "sar",
+      "across": 0.5,
+      "distance": 0.04,
+      "elevation": 1.1,
+      "facing": 180,
+      "glows": true,
+      "height": 1,
+      "box": [
+        -0.6799999999999999,
+        -1.08,
+        0.6799999999999999,
+        0.08
+      ]
+    },
+    {
+      "id": "k_floor",
+      "name": "Пол",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "across": 23.25,
+      "distance": 13.5,
+      "elevation": 0.45,
+      "width": 5.5,
+      "depth": 3
+    },
+    {
+      "id": "k_back",
+      "name": "Кухня",
+      "inside": true,
+      "across": 22,
+      "distance": 15,
+      "elevation": 0.45,
+      "facing": 180,
+      "height": 2.5,
+      "box": [
+        -1.6,
+        -2.6,
+        1.6,
+        0.05
+      ]
+    },
+    {
+      "id": "k_left",
+      "name": "Кухня",
+      "inside": true,
+      "across": 20.5,
+      "distance": 13.5,
+      "elevation": 0.45,
+      "facing": 90,
+      "height": 2.5,
+      "box": [
+        -1.6,
+        -2.6,
+        1.6,
+        0.05
+      ]
+    },
+    {
+      "id": "k_right",
+      "name": "Кухня",
+      "inside": true,
+      "across": 23.5,
+      "distance": 13.5,
+      "elevation": 0.45,
+      "facing": 270,
+      "height": 2.5,
+      "box": [
+        -1.6,
+        -2.6,
+        1.6,
+        0.05
+      ]
+    },
+    {
+      "id": "stove",
+      "name": "Печь",
+      "inside": true,
+      "across": 20.57,
+      "distance": 14.35,
+      "elevation": 0.45,
+      "facing": 90,
+      "height": 2.1,
+      "box": [
+        -0.75,
+        -2.15,
+        0.75,
+        0.05
+      ]
+    },
+    {
+      "id": "table",
+      "name": "Стол",
+      "inside": true,
+      "across": 21.65,
+      "distance": 13.25,
+      "elevation": 0.45,
+      "facing": 180,
+      "height": 0.78,
+      "box": [
+        -0.75,
+        -0.8,
+        0.75,
+        0.05
+      ]
+    },
+    {
+      "id": "table_top",
+      "name": "Стол",
+      "plane": true,
+      "inside": true,
+      "across": 21.65,
+      "distance": 13.65,
+      "elevation": 1.21,
+      "width": 1.3,
+      "depth": 0.8,
+      "shadow": {
+        "light": "lamp",
+        "onto": []
+      }
+    },
+    {
+      "id": "abajur",
+      "name": "Абажур",
+      "inside": true,
+      "glows": true,
+      "across": 21.65,
+      "distance": 13.65,
+      "elevation": 2.3000000000000003,
+      "height": 0.5,
+      "box": [
+        -0.4,
+        -0.9,
+        0.4,
+        0.12
+      ]
+    },
+    {
+      "id": "hall",
+      "name": "Сени",
+      "inside": true,
+      "glows": true,
+      "across": 25.2,
+      "distance": 13.4,
+      "elevation": 0.45,
+      "facing": 180,
+      "height": 2.4,
+      "box": [
+        -1.3,
+        -2.45,
+        1.3,
+        0.05
+      ]
+    },
+    {
+      "id": "door",
+      "name": "Дверь",
+      "on": "sar",
+      "across": 3.25,
+      "distance": 0.03,
+      "elevation": 0.45,
+      "facing": 180,
+      "place": {
+        "facing": "door_f"
+      },
+      "height": 1.95,
+      "box": [
+        -0.05,
+        -2,
+        0.9500000000000001,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "porch",
+      "name": "Крыльцо",
+      "across": 25.2,
+      "distance": 10.95,
+      "facing": 180,
+      "height": 3.3,
+      "box": [
+        -1,
+        -3.4,
+        1,
+        0.1
+      ]
+    },
+    {
+      "id": "porch_floor",
+      "name": "Крыльцо",
+      "plane": true,
+      "walk": true,
+      "across": 25.2,
+      "distance": 11.48,
+      "elevation": 0.45,
+      "width": 1.6,
+      "depth": 1.05
+    },
+    {
+      "id": "porch_steps",
+      "name": "Ступени",
+      "plane": true,
+      "walk": true,
+      "across": 25.2,
+      "distance": 10.58,
+      "elevation": 0.23,
+      "width": 1.2,
+      "depth": 0.87,
+      "tilt": 30.96
+    },
+    {
+      "id": "porch_bulb",
+      "name": "Лампочка над крыльцом",
+      "glows": true,
+      "across": 25.2,
+      "distance": 11.9,
+      "elevation": 2.62,
+      "height": 0.3,
+      "box": [
+        -0.15,
+        -0.3,
+        0.15,
+        0.05
+      ]
+    },
+    {
+      "id": "mak_hall",
+      "name": "Сени",
+      "inside": true,
+      "across": 36.9,
+      "distance": 13.6,
+      "elevation": 0.45,
+      "facing": 180,
+      "height": 2.4,
+      "box": [
+        -1,
+        -2.45,
+        1,
+        0.05
+      ]
+    },
+    {
+      "id": "mak_door",
+      "name": "Дверь Макарской",
+      "on": "mak",
+      "across": 1.95,
+      "distance": 0.03,
+      "elevation": 0.45,
+      "facing": 180,
+      "place": {
+        "facing": "mak_door_f"
+      },
+      "height": 1.95,
+      "box": [
+        -0.05,
+        -2,
+        0.9500000000000001,
+        0.05
+      ]
+    },
+    {
+      "id": "sar_fence",
+      "name": "Палисадник",
+      "across": 15.6,
+      "distance": 9.4,
+      "facing": 180,
+      "height": 1.2,
+      "box": [
+        -0.1,
+        -1.4,
+        8.299999999999999,
+        0.2
+      ]
+    },
+    {
+      "id": "side_fence",
+      "name": "Забор",
+      "across": 27.4,
+      "distance": 9.6,
+      "facing": 90,
+      "height": 1.2,
+      "box": [
+        -0.1,
+        -1.4,
+        5.1,
+        0.2
+      ]
+    },
+    {
+      "id": "fences",
+      "name": "Забор",
+      "across": -21.9,
+      "distance": 14,
+      "facing": 180,
+      "height": 1.2,
+      "box": [
+        -0.1,
+        -1.4,
+        2.3,
+        0.2
+      ],
+      "copies": [
+        {
+          "across": -21.9,
+          "distance": 14
+        },
+        {
+          "across": -19.7,
+          "distance": 14
+        },
+        {
+          "across": -17.5,
+          "distance": 14
+        },
+        {
+          "across": 5.1,
+          "distance": 14.05
+        },
+        {
+          "across": 14.05,
+          "distance": 13.9
+        },
+        {
+          "across": 38.6,
+          "distance": 13.1
+        },
+        {
+          "across": 40.8,
+          "distance": 13.1
+        }
+      ]
+    },
+    {
+      "id": "near_fence",
+      "name": "Забор",
+      "across": -34,
+      "distance": -7.9,
+      "facing": 180,
+      "height": 1.1,
+      "box": [
+        -0.1,
+        -1.3,
+        12.1,
+        0.2
+      ],
+      "copies": [
+        {
+          "across": -34,
+          "distance": -7.9
+        },
+        {
+          "across": -22,
+          "distance": -7.8
+        },
+        {
+          "across": -10,
+          "distance": -7.9
+        },
+        {
+          "across": 2,
+          "distance": -7.8
+        },
+        {
+          "across": 14,
+          "distance": -7.9
+        },
+        {
+          "across": 26,
+          "distance": -7.8
+        },
+        {
+          "across": 38,
+          "distance": -7.9
+        }
+      ]
+    },
+    {
+      "id": "shed",
+      "name": "Сарай",
+      "across": 28.9,
+      "distance": 11.2,
+      "facing": 180,
+      "height": 2.4,
+      "box": [
+        -1.65,
+        -2.9,
+        1.65,
+        0.15
+      ],
+      "shadow": true
+    },
+    {
+      "id": "shed_side",
+      "name": "Сарай",
+      "across": 30.2,
+      "distance": 12.2,
+      "facing": 90,
+      "height": 2.4,
+      "box": [
+        -1.1,
+        -2.6999999999999997,
+        1.1,
+        0.15
+      ]
+    },
+    {
+      "id": "barrel",
+      "name": "Бочка",
+      "across": 17,
+      "distance": 8.95,
+      "height": 0.95,
+      "box": [
+        -0.5,
+        -1,
+        0.5,
+        0.1
+      ]
+    },
+    {
+      "id": "bench",
+      "name": "Лавка",
+      "across": 21.9,
+      "distance": 11.55,
+      "facing": 180,
+      "height": 0.5,
+      "box": [
+        -0.85,
+        -0.55,
+        0.85,
+        0.05
+      ]
+    },
+    {
+      "id": "woodpile",
+      "name": "Поленница",
+      "across": 36.9,
+      "distance": 10.7,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -0.95,
+        -1.4,
+        0.95,
+        0.1
+      ]
+    },
+    {
+      "id": "gate_lamp",
+      "name": "Фонарь у калитки",
+      "across": 19.3,
+      "distance": 9.25,
+      "height": 2.9,
+      "box": [
+        -0.2,
+        -3,
+        0.8,
+        0.05
+      ]
+    },
+    {
+      "id": "street_lamp",
+      "name": "Фонарь",
+      "across": -5.3,
+      "distance": 13.4,
+      "height": 3.9,
+      "box": [
+        -0.2,
+        -4,
+        0.8,
+        0.05
+      ]
+    },
+    {
+      "id": "birches",
+      "name": "Берёзы",
+      "across": -19.5,
+      "distance": 16,
+      "height": 11,
+      "box": [
+        -4.5,
+        -13.6,
+        4.5,
+        0.3
+      ],
+      "copies": [
+        {
+          "across": -19.5,
+          "distance": 16.5
+        },
+        {
+          "across": 6.1,
+          "distance": 17,
+          "scale": 0.85,
+          "flip": true
+        },
+        {
+          "across": 15.2,
+          "distance": 15.5,
+          "scale": 1.1
+        },
+        {
+          "across": 41,
+          "distance": 15,
+          "flip": true
+        },
+        {
+          "across": -28,
+          "distance": 13,
+          "scale": 0.8
+        },
+        {
+          "across": -15,
+          "distance": -6.5,
+          "scale": 1.15,
+          "flip": true
+        },
+        {
+          "across": 30,
+          "distance": 16.5,
+          "scale": 0.9
+        }
+      ]
+    },
+    {
+      "id": "busygin",
+      "name": "Бусыгин",
+      "person": {
+        "cast": "cast",
+        "who": "busygin",
+        "turn": 0
+      },
+      "across": -2.7,
+      "distance": 5,
+      "place": {
+        "across": "busygin_a",
+        "distance": "busygin_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "silva",
+      "name": "Сильва",
+      "person": {
+        "cast": "cast",
+        "who": "silva",
+        "turn": 350
+      },
+      "across": -1.5,
+      "distance": 5.35,
+      "place": {
+        "across": "silva_a",
+        "distance": "silva_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "sarafanov",
+      "name": "Сарафанов",
+      "person": {
+        "cast": "cast",
+        "who": "sarafanov",
+        "turn": 180
+      },
+      "across": 25.2,
+      "distance": 12.6,
+      "place": {
+        "across": "sarafanov_a",
+        "distance": "sarafanov_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "vasenka",
+      "name": "Васенька",
+      "person": {
+        "cast": "cast",
+        "who": "vasenka",
+        "turn": 180
+      },
+      "across": 25.2,
+      "distance": 12.35,
+      "place": {
+        "across": "vasenka_a",
+        "distance": "vasenka_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "k1",
+      "name": "Сильва",
+      "person": {
+        "cast": "cast",
+        "who": "silva",
+        "turn": 90
+      },
+      "across": 21,
+      "distance": 13.55,
+      "place": {
+        "across": "k1_a",
+        "distance": "k1_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "k2",
+      "name": "Бусыгин",
+      "person": {
+        "cast": "cast",
+        "who": "busygin",
+        "turn": 270
+      },
+      "across": 21.05,
+      "distance": 14.3,
+      "place": {
+        "across": "k2_a",
+        "distance": "k2_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "k3",
+      "name": "Васенька",
+      "person": {
+        "cast": "cast",
+        "who": "vasenka",
+        "turn": 180
+      },
+      "across": 21.75,
+      "distance": 14.25,
+      "place": {
+        "across": "k3_a",
+        "distance": "k3_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "snowfall",
+      "name": "Снег",
+      "particles": {
+        "kind": "snow",
+        "amount": "snow",
+        "count": 9000,
+        "reach": 36
+      }
+    },
+    {
+      "id": "chimney_smoke",
+      "name": "Дым",
+      "particles": {
+        "kind": "smoke",
+        "at": [
+          19.9,
+          15.6,
+          6
+        ],
+        "rate": 2.5,
+        "size": [
+          0.3,
+          1.8
+        ],
+        "life": [
+          5,
+          9
+        ],
+        "opacity": 0.3
+      }
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Very quiet low drone of wind along an empty village street at night, sparse, cold",
+        "weight": 1.2
+      },
+      {
+        "text": "Soft sustained string pad, almost still, tender and aching, winter night, minor key",
+        "weight": 0.7
+      },
+      {
+        "text": "Distant dogs and snow hush rendered as soft ambient noise, no melody",
+        "weight": 0
+      },
+      {
+        "text": "Slow solo piano, few notes, lots of silence, Soviet film score, melancholic",
+        "weight": 0
+      },
+      {
+        "text": "Glassy high harmonics like frost on a window, shimmering, very slow",
+        "weight": 0.3
+      },
+      {
+        "text": "Warm low organ hum like a lit window in the cold, very soft",
+        "weight": 0
+      },
+      {
+        "text": "Muted felt piano lullaby, warm and sad, 1970s Russian chamber music",
+        "weight": 0
+      },
+      {
+        "text": "Cello long notes, quiet, breathing, intimate, late night",
+        "weight": 0
+      },
+      {
+        "text": "Gentle accordion far away behind a wall, provincial suburb, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Minimal ambient with soft bell-like tones, cold and still",
+        "weight": 0
+      },
+      {
+        "text": "Slow guitar arpeggios, sparse, lonely road at night, restrained",
+        "weight": 0
+      },
+      {
+        "text": "Celesta and strings, a winter tale but sad, very slow",
+        "weight": 0
+      },
+      {
+        "text": "Soft brushed snare and double bass, slow night jazz muffled by snow",
+        "weight": 0
+      },
+      {
+        "text": "Solemn wordless choir hum, far away, cold air",
+        "weight": 0
+      },
+      {
+        "text": "Tense quiet pulse, someone waiting outside a door",
+        "weight": 0
+      },
+      {
+        "text": "Faint ticking texture and warm chord, a kitchen seen from the street",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.25
+  }
+}
