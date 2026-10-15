@@ -94,4 +94,169 @@ function station(g, now) {
   g.fillText('GIANCALDO', 0, -400); g.restore();
 }
 
-return { G, carSide, carInside, locoSide, wheels, WHEELS, station };
+
+
+// ---- the sky (the world's nebo): dawn's gold low in the east-south-east, a pale moon going down in the west; 1988's
+// lilac evening with its afterglow in the west-north-west ----
+const SKY = { horizon: 0.5, round: true, moon: -100, glow: -70 };
+
+// ---- the film of the scene (the world's beats): film(scene) → { <beat>: { from, after, run } } ----
+// Metres: x east, z north; camera yaw — degrees right of north.
+const brg = (a, b) => { const d = Math.atan2(b[0] - a[0], b[1] - a[1]) * 180 / Math.PI; return d < 0 ? d + 360 : d; };
+const IDS = ['toto', 'maria', 'alfredo', 'c1', 'c2'];
+const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_on: null, camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
+const look = (at, to, h = 0, pitch = 0) => cam(at[0], at[1], +((brg(at, to) + 540) % 360 - 180).toFixed(1), h, pitch);
+// places (the train standing: train 0)
+const P = {
+  T_HUG: [1.2, 3.3], M_HUG: [0.72, 3.3], M_BACK: [0.25, 2.6], A_WAIT: [2.9, 2.4], A_HUG: [1.68, 3.3],
+  DOOR: [G.DOOR1, 4.35], A_EDGE: [1.6, 3.95], A_OFF: [-6, 0.4], A_GONE: [-16, 0.2],
+  SAL_OUT: [0.75, 3.95], SAL_STOP: [-0.2, 1.4],
+};
+const WIN = 'car1_floor#win'; // the spot behind Toto's window on car 1's floor: he stands there, carried
+const C_FAR = { c1: { at: [14, 1.0], turn: 300 }, c2: { at: [-11, -2.2], turn: 20 } };
+function film(scene) {
+  const CH = scene.kit.cast.characters;
+  const CAM = {
+    platform: look([0.95, 0.5], [1.42, 3.3], -0.15, 2),  // the farewell, medium: Toto and Alfredo ≈ 1/2, the mother a step behind; the green carriage
+    window: cam(-3.2, 1.6, 30, 0.15, 8),                 // under Toto's window from the platform, looking up at him; tracks with the train
+    away: cam(-5.5, 0.4, 60, 0, 2),                      // along the platform east: the carriage goes, the mother waves
+    back: { ...cam(1.7, G.WIN1 - 0.2, 150, 1.25, -2), camera_on: 'train' },   // leaning out of Toto's window, back at the platform
+    arrive: cam(1.9, 4.35, 205, 0, 3),                   // 1988, from the carriage's step: Salvatore's back, the empty platform, the clock
+  };
+  const trainKeys = t => ({ train: t, train_x: G.trainX(t) });
+  const base = (era, hour) => ({ era, hour, now_k: era === 'now' ? 1 : 0, dawn_k: era === 'now' ? 0 : 1, steam: era === 'now' ? 0 : 1,
+    wallet: 0, open: 0, ...trainKeys(0) });
+  function cast(who) {
+    const o = {};
+    for (const id of IDS) {
+      const p = who[id];
+      o[id + '_here'] = !!p;
+      if (!p) continue;
+      o[id + '_a'] = p.at[0]; o[id + '_d'] = p.at[1];
+      o[id + '_turn'] = p.turn ?? 180; o[id + '_do'] = p.do || 'stand';
+      o[id + '_look'] = p.look ?? null; o[id + '_reach'] = p.reach ?? null; o[id + '_gait'] = p.gait ?? null;
+      o[id + '_mood'] = p.mood ?? 'neutral';
+      if (id === 'toto') { o.toto_on = p.on ?? null; o.toto_with = p.with ?? null; o.toto_wear = p.wear ?? null; o.toto_steps = p.on ? false : null; }
+    }
+    return o;
+  }
+  const stays = () => scene.get('alfredo_stays') !== 0;
+  // where Alfredo is after Toto has boarded, by what the game chose
+  const alfAfter = far => stays() ? { at: P.A_EDGE, turn: 20, look: 'car1#window', mood: 'sad' } : { at: far ? P.A_GONE : P.A_OFF, turn: 270, gait: 'cane_walk', mood: 'sad' };
+  const B = {
+    // dawn, the train standing, steam; the mother holds Toto (5 s); she steps back; Alfredo comes with his cane and
+    // holds him. The pose under the choice `station`: Alfredo and Toto in the middle, faces; the mother a step behind
+    platform: {
+      from: () => ({ ...base('past', 0.25), ...cast({
+        toto: { at: P.T_HUG, turn: 270, look: 'maria', reach: { r: 'maria#back', l: 'maria#back' }, mood: 'thinking' },
+        maria: { at: P.M_HUG, turn: 90, look: 'toto', reach: { r: 'toto#nape', l: 'toto#nape' }, mood: 'sad' },
+        alfredo: { at: P.A_WAIT, turn: brg(P.A_WAIT, P.T_HUG), look: 'toto', mood: 'sad' }, ...C_FAR }), ...CAM.platform }),
+      run: async s => {
+        const toto = s.person('toto'), ma = s.person('maria'), alf = s.person('alfredo');
+        await s.wait(5); s.tell('platform:hug');
+        await s.wait(1.6);
+        toto.reach(null); ma.reach(null);
+        await ma.walk([P.M_BACK]); await ma.turn(brg(P.M_BACK, P.T_HUG)); ma.look('toto');
+        alf.gait('cane_walk');
+        await alf.walk([P.A_HUG]); alf.gait(null);
+        await s.all(alf.turn(255), toto.turn(105));
+        alf.look('toto'); toto.look('alfredo');
+        alf.reach({ l: 'toto#back' }); toto.reach({ r: 'alfredo#back', l: 'alfredo#back' });
+        await s.wait(3.5);
+      },
+    },
+    // Toto takes the suitcase and goes in at the door; the cut: he is at his window; the train starts, the camera
+    // tracks with the window; alfredo_stays 0 — Alfredo turns and goes off tapping his cane, 1 — he goes to the
+    // platform's edge. The pose under the choice `look`: the window with Toto in it
+    boarding: {
+      after: ['platform'],
+      from: () => ({ ...base('past', 0.25), ...cast({
+        toto: { at: P.T_HUG, turn: 105, look: 'alfredo', reach: { r: 'alfredo#back', l: 'alfredo#back' }, mood: 'thinking' },
+        maria: { at: P.M_BACK, turn: brg(P.M_BACK, P.T_HUG), look: 'toto', mood: 'sad' },
+        alfredo: { at: P.A_HUG, turn: 255, look: 'toto', reach: { l: 'toto#back' }, mood: 'sad' }, ...C_FAR }), ...CAM.platform }),
+      run: async s => {
+        const toto = s.person('toto'), ma = s.person('maria'), alf = s.person('alfredo');
+        const win = s.shot({ ...CAM.window, toto_here: true, toto_on: WIN, toto_steps: false, toto_turn: 90, toto_with: null, toto_do: 'stand', toto_look: 'alfredo', toto_reach: null, toto_gait: null, toto_mood: 'sad' });
+        toto.reach(null); alf.reach(null);
+        await s.wait(0.6);
+        toto.look('suitcase'); toto.reach({ r: 'suitcase' });
+        await s.wait(0.8);
+        toto.with(['suitcase']); toto.reach(null); toto.gait('carry_walk'); toto.look(null);
+        await toto.walk([[1.0, 3.9], P.DOOR]);
+        toto.here(false); toto.gait(null);
+        win.cut();
+        // the train starts; the camera tracks along the platform with Toto's window and stops with it
+        s.move('train', 0.08, { over: 4.5, ease: 'in' });
+        s.move('camera_x', CAM.window.camera_x + G.RUN * 0.08, { over: 4.5, ease: 'in' });
+        alf.look('car1#window'); ma.look('car1#window');
+        await s.wait(1.2); s.tell('boarding:window');
+        if (stays()) { await alf.walk([P.A_EDGE]); await alf.turn(20); }
+        else { await alf.turn(270); alf.look(null); alf.gait('cane_walk'); alf.walk([P.A_OFF, P.A_GONE]); }
+        await s.wait(3.3);
+      },
+    },
+    // from the platform: the carriage goes, Toto at his window in profile looking ahead; the mother waves; Alfredo as
+    // he chose
+    away: {
+      after: ['boarding'],
+      from: () => ({ ...base('past', 0.25), ...trainKeys(0.08), ...cast({ toto: { at: [0, 0], on: WIN, turn: 0, mood: 'sad' }, maria: { at: P.M_BACK, turn: 20, look: 'car1#window', mood: 'sad' }, alfredo: alfAfter(false), ...C_FAR }), ...CAM.away }),
+      run: async s => {
+        const ma = s.person('maria'), alf = s.person('alfredo'), toto = s.person('toto');
+        if (s.get('camera_yaw') !== CAM.away.camera_yaw) s.cut({ ...CAM.away, toto_turn: 0, toto_look: null, toto_steps: false });
+        if (!stays()) { alf.gait('cane_walk'); alf.walk([P.A_GONE]); }
+        toto.look(null);
+        const go = s.move('train', 1, { over: 12, ease: 'in' });
+        await s.wait(0.6); ma.do('wave');
+        await s.wait(4.2); ma.do('wave');
+        await go;
+        s.tell('away:gone');
+        await s.wait(0.6);
+      },
+    },
+    // from the train, backward: the platform going away; the mother waves; Alfredo — his back going, the cane; or he
+    // stands and lifts his hand
+    back_look: {
+      after: ['boarding'],
+      from: () => ({ ...base('past', 0.25), ...trainKeys(0.08), ...cast({ maria: { at: P.M_BACK, turn: 20, look: 'car1#window', mood: 'sad' }, alfredo: alfAfter(false), ...C_FAR }), ...CAM.back }),
+      run: async s => {
+        const ma = s.person('maria'), alf = s.person('alfredo');
+        if (s.get('camera_on') !== 'train') s.cut({ ...CAM.back, toto_here: false });
+        if (!stays()) { alf.gait('cane_walk'); alf.walk([P.A_GONE]); }
+        const go = s.move('train', 1, { over: 12, ease: 'in' });
+        await s.wait(0.5); ma.do('wave');
+        if (stays()) { await s.wait(1.2); alf.do('wave'); }
+        await s.wait(4.5); ma.do('wave');
+        await s.wait(2); s.tell('back_look:far');
+        await go;
+        await s.wait(0.5);
+      },
+    },
+    // 1988, a cool evening: the train standing, no steam; Salvatore (already on the platform) walks three steps from the
+    // carriage and stops in the empty platform, his back to us
+    arrival: {
+      from: () => ({ ...base('now', 0.8), ...cast({ toto: { at: P.SAL_OUT, turn: 200, wear: CH.salvatore, with: ['suitcase'], mood: 'tired' } }), ...CAM.arrive }),
+      run: async s => {
+        const sal = s.person('toto');
+        await s.wait(1.5);
+        await sal.walk([[0.35, 2.6], P.SAL_STOP]);
+        await s.wait(1.2); s.tell('arrival:stand');
+        sal.look('clock#face');
+        await s.wait(6);
+      },
+    },
+    // the insert: his hands open the old wallet, the one frame of a kiss against the station's lamp
+    wallet: {
+      after: ['arrival'],
+      from: () => ({ ...B.arrival.from(), toto_a: P.SAL_STOP[0], toto_d: P.SAL_STOP[1], toto_look: 'clock#face' }),
+      run: async s => {
+        s.set('open', 0); s.set('wallet', 1);
+        await s.wait(0.6);
+        await s.move('open', 1, { over: 2.6, ease: 'inOut' });
+        await s.wait(1.8);
+      },
+    },
+  };
+  return B;
+}
+
+return { G, carSide, carInside, locoSide, wheels, WHEELS, station, SKY, P, film };
