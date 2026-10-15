@@ -1,0 +1,800 @@
+{
+  "engine": 3,
+  "title": "Станция (Opus)",
+  "horizon": 0.56,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      -20,
+      40
+    ]
+  },
+  "modules": [
+    "cast_opus"
+  ],
+  "relief": "return -0.6 * anim.span(distance, 7.6, 7.75);",
+  "light": {
+    "ambient": 0.68,
+    "ambientColor": "#b4aac8",
+    "haze": 0.05,
+    "hazeColor": "#c6b0b6",
+    "hazeGlow": 0.6,
+    "vignette": 0.32,
+    "grain": 0.18,
+    "saturation": 0.9,
+    "bounce": 0.5,
+    "wind": [
+      1,
+      0.2,
+      0.3
+    ]
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": [
+        -110,
+        4
+      ],
+      "color": "#ffbf8a",
+      "strength": 0.9
+    },
+    {
+      "id": "lamp0",
+      "across": -18,
+      "distance": 6.9,
+      "elevation": 3.24,
+      "color": "#ffd08a",
+      "strength": 1.2,
+      "reach": 7,
+      "glow": 0.35
+    },
+    {
+      "id": "lamp1",
+      "across": -6,
+      "distance": 6.9,
+      "elevation": 3.24,
+      "color": "#ffd08a",
+      "strength": 1.2,
+      "reach": 7,
+      "glow": 0.35
+    },
+    {
+      "id": "lamp2",
+      "across": 6,
+      "distance": 6.9,
+      "elevation": 3.24,
+      "color": "#ffd08a",
+      "strength": 1.2,
+      "reach": 7,
+      "glow": 0.35
+    },
+    {
+      "id": "lamp3",
+      "across": 18,
+      "distance": 6.9,
+      "elevation": 3.24,
+      "color": "#ffd08a",
+      "strength": 1.2,
+      "reach": 7,
+      "glow": 0.35
+    },
+    {
+      "id": "lamp4",
+      "across": 28,
+      "distance": 6.9,
+      "elevation": 3.24,
+      "color": "#ffd08a",
+      "strength": 1.2,
+      "reach": 7,
+      "glow": 0.35
+    },
+    {
+      "id": "door_lamp",
+      "of": "house#lamp",
+      "reach": 6,
+      "strength": 1
+    },
+    {
+      "id": "compartment",
+      "of": "car_inside#lamp",
+      "reach": 2.4,
+      "strength": 1.2
+    },
+    {
+      "id": "lantern",
+      "at": "conductor#glass",
+      "color": "#ffd38a",
+      "strength": 0.8,
+      "reach": 3
+    },
+    {
+      "id": "tail",
+      "across": -6.95,
+      "distance": 8.4,
+      "elevation": 1.49,
+      "place": {
+        "across": "tail_a"
+      },
+      "color": "#ff3a26",
+      "strength": 3,
+      "reach": 2,
+      "glow": 24,
+      "on": "tail_on"
+    }
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "небо",
+      "sky": true
+    },
+    {
+      "id": "ground",
+      "name": "земля у станции",
+      "plane": true,
+      "across": 150,
+      "distance": -46.2,
+      "elevation": 0,
+      "width": 900,
+      "depth": 107.6
+    },
+    {
+      "id": "steppe",
+      "name": "степь",
+      "plane": true,
+      "across": 150,
+      "distance": 411.25,
+      "elevation": 0,
+      "width": 1500,
+      "depth": 800
+    },
+    {
+      "id": "track",
+      "name": "путь",
+      "plane": true,
+      "across": 280,
+      "distance": 9.45,
+      "elevation": 0.01,
+      "width": 640,
+      "depth": 3.6
+    },
+    {
+      "id": "platform",
+      "name": "платформа",
+      "plane": true,
+      "walk": true,
+      "across": 5,
+      "distance": 0.8,
+      "elevation": 0.02,
+      "width": 52,
+      "depth": 13.6
+    },
+    {
+      "id": "edge",
+      "name": "край платформы",
+      "across": 5,
+      "distance": 7.62,
+      "elevation": -0.6,
+      "onLand": false,
+      "height": 0.62,
+      "box": [
+        -26,
+        -0.64,
+        26,
+        0.02
+      ],
+      "facing": 180
+    },
+    {
+      "id": "poplars",
+      "name": "тополя",
+      "height": 15,
+      "box": [
+        -2.2,
+        -15.4,
+        2.2,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": -36,
+          "distance": 34
+        },
+        {
+          "across": -30.5,
+          "distance": 38,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": -25,
+          "distance": 33,
+          "scale": 1.1
+        },
+        {
+          "across": -19,
+          "distance": 41,
+          "scale": 0.85
+        },
+        {
+          "across": 34,
+          "distance": 46,
+          "scale": 0.8,
+          "flip": true
+        },
+        {
+          "across": 41,
+          "distance": 52,
+          "scale": 0.75
+        }
+      ]
+    },
+    {
+      "id": "poles",
+      "name": "телеграфные столбы",
+      "height": 7.5,
+      "box": [
+        -0.9,
+        -7.7,
+        0.9,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": -40,
+          "distance": 12.5
+        },
+        {
+          "across": 5,
+          "distance": 12.5
+        },
+        {
+          "across": 50,
+          "distance": 12.5
+        },
+        {
+          "across": 95,
+          "distance": 12.5
+        },
+        {
+          "across": 140,
+          "distance": 12.5
+        },
+        {
+          "across": 185,
+          "distance": 12.5
+        },
+        {
+          "across": 230,
+          "distance": 12.5
+        },
+        {
+          "across": 275,
+          "distance": 12.5
+        },
+        {
+          "across": 320,
+          "distance": 12.5
+        },
+        {
+          "across": 365,
+          "distance": 12.5
+        },
+        {
+          "across": 410,
+          "distance": 12.5
+        },
+        {
+          "across": 455,
+          "distance": 12.5
+        },
+        {
+          "across": 500,
+          "distance": 12.5
+        },
+        {
+          "across": 545,
+          "distance": 12.5
+        }
+      ]
+    },
+    {
+      "id": "wires",
+      "name": "провода",
+      "across": 252.5,
+      "distance": 12.52,
+      "height": 7.5,
+      "box": [
+        -293,
+        -7.5,
+        293,
+        -5.6
+      ],
+      "facing": 180
+    },
+    {
+      "id": "house",
+      "name": "станционный домик",
+      "across": -13.5,
+      "distance": 5.6,
+      "facing": 140,
+      "height": 5.6,
+      "box": [
+        -4.3,
+        -5.95,
+        4.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "house_lit",
+      "name": "окна станции",
+      "across": -13.5,
+      "distance": 5.6,
+      "facing": 140,
+      "glows": true,
+      "inFront": [
+        "house"
+      ],
+      "height": 5.6,
+      "box": [
+        -4.3,
+        -5.95,
+        4.3,
+        0.05
+      ]
+    },
+    {
+      "id": "lamp",
+      "name": "фонарь",
+      "height": 3.4,
+      "box": [
+        -0.35,
+        -3.6,
+        0.35,
+        0.05
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -18,
+          "distance": 6.9
+        },
+        {
+          "across": -6,
+          "distance": 6.9
+        },
+        {
+          "across": 6,
+          "distance": 6.9
+        },
+        {
+          "across": 18,
+          "distance": 6.9
+        },
+        {
+          "across": 28,
+          "distance": 6.9
+        }
+      ]
+    },
+    {
+      "id": "train",
+      "name": "поезд",
+      "unseen": true,
+      "across": 0,
+      "distance": 7.95,
+      "place": {
+        "across": "train_a"
+      }
+    },
+    {
+      "id": "carriage",
+      "name": "вагон Анны",
+      "on": "train",
+      "across": 0,
+      "distance": 0,
+      "height": 4.5,
+      "box": [
+        -7.1,
+        -4.5,
+        7.1,
+        0.05
+      ],
+      "shadow": true,
+      "facing": 180
+    },
+    {
+      "id": "car_inside",
+      "name": "купе",
+      "on": "train",
+      "across": 3.6,
+      "distance": 1.25,
+      "glows": true,
+      "height": 3.4,
+      "box": [
+        -1.0,
+        -3.4,
+        1.0,
+        -1.0
+      ],
+      "facing": 180
+    },
+    {
+      "id": "drape",
+      "name": "занавеска",
+      "on": "train",
+      "across": 3.6,
+      "distance": 0.12,
+      "glows": true,
+      "height": 1.2,
+      "box": [
+        -0.5,
+        -3.1,
+        0.5,
+        -2.0
+      ],
+      "facing": 180
+    },
+    {
+      "id": "carriage_end",
+      "name": "конец поезда",
+      "on": "train",
+      "across": -6.85,
+      "distance": 1.5,
+      "facing": 270,
+      "height": 4.4,
+      "box": [
+        -1.55,
+        -4.4,
+        1.55,
+        0.05
+      ]
+    },
+    {
+      "id": "cars",
+      "name": "вагоны",
+      "on": "train",
+      "across": 13.6,
+      "distance": 0,
+      "height": 4.5,
+      "box": [
+        -7.1,
+        -4.5,
+        34.3,
+        0.05
+      ],
+      "shadow": true,
+      "facing": 180
+    },
+    {
+      "id": "train_lit",
+      "name": "окна поезда",
+      "on": "train",
+      "across": 0,
+      "distance": -0.02,
+      "glows": true,
+      "inFront": [
+        "carriage",
+        "cars"
+      ],
+      "height": 4.5,
+      "box": [
+        -7.1,
+        -3.2,
+        47.9,
+        -1.9
+      ],
+      "facing": 180
+    },
+    {
+      "id": "loco",
+      "name": "паровоз",
+      "on": "train",
+      "across": 56.2,
+      "distance": 0.2,
+      "height": 5.2,
+      "box": [
+        -8.6,
+        -5.3,
+        9.6,
+        0.05
+      ],
+      "shadow": true,
+      "facing": 180
+    },
+    {
+      "id": "smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "loco#chimney",
+        "amount": 0.7,
+        "color": "#9a9498"
+      }
+    },
+    {
+      "id": "anna",
+      "name": "Анна Сергеевна",
+      "on": "carriage",
+      "person": {
+        "cast": "cast_opus",
+        "who": "anna_travel",
+        "turn": 270,
+        "does": "hold_dog"
+      },
+      "across": 3.9,
+      "distance": -1.4,
+      "elevation": 0.6,
+      "place": {
+        "across": "anna_a",
+        "distance": "anna_d",
+        "elevation": "anna_e"
+      }
+    },
+    {
+      "id": "gurov",
+      "name": "Гуров",
+      "person": {
+        "cast": "cast_opus",
+        "who": "gurov_summer",
+        "turn": 90
+      },
+      "across": 2.4,
+      "distance": 6.3,
+      "place": {
+        "across": "gurov_a",
+        "distance": "gurov_d"
+      }
+    },
+    {
+      "id": "conductor",
+      "name": "кондуктор",
+      "person": {
+        "cast": "cast_opus",
+        "who": "conductor",
+        "turn": 260
+      },
+      "across": 11.2,
+      "distance": 7.05,
+      "place": {
+        "across": "conductor_a",
+        "distance": "conductor_d"
+      }
+    }
+  ],
+  "state": {
+    "hour": 0.8,
+    "train": 0,
+    "far": 0,
+    "curtain": 0,
+    "beat": "",
+    "beat_end": "",
+    "train_a": 0,
+    "camera_x": -1,
+    "camera_z": 2.5,
+    "camera_yaw": 40,
+    "anna_a": 3.9,
+    "anna_d": -1.4,
+    "anna_e": 0.6,
+    "anna_turn": 270,
+    "anna_do": "hold_dog",
+    "anna_with": [
+      "spitz_held"
+    ],
+    "anna_look": "gurov",
+    "gurov_a": 2.4,
+    "gurov_d": 6.3,
+    "gurov_turn": 90,
+    "gurov_look": "anna",
+    "conductor_a": 11.2,
+    "conductor_d": 7.05,
+    "conductor_with": [
+      "lantern"
+    ],
+    "tail_a": -6.95,
+    "tail_on": 0
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0.75,
+        0.85
+      ],
+      "means": "час: вечер (0.8); свет сцены всегда вечерний — сумерки конца лета"
+    },
+    "train": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "поезд: 0 стоит у платформы, 1 ушёл за край (300 м вдоль пути)"
+    },
+    "far": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "поезд уходит дальше за горизонт: 0 — где его оставил train, 1 — 2 км, красный огонёк тает в дымке"
+    },
+    "curtain": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "занавеска её окна: 0 собрана у края, 1 задёрнута"
+    },
+    "beat": {
+      "values": [
+        "",
+        "platform",
+        "board",
+        "look_back",
+        "curtain",
+        "alone_far",
+        "alone_turn"
+      ],
+      "means": "кусок фильма: поставленный играет с начала"
+    },
+    "beat_end": {
+      "type": "string",
+      "means": "имя последнего доигравшего куска (ставит сцена)"
+    },
+    "train_a": {
+      "range": [
+        0,
+        2000
+      ],
+      "smooth": true,
+      "means": "где поезд вдоль пути, м (ставит сцена по train и far)"
+    },
+    "anna_a": {
+      "range": [
+        -8,
+        8
+      ],
+      "smooth": true,
+      "means": "где Анна вдоль вагона, м (в рамке её вагона)"
+    },
+    "anna_d": {
+      "range": [
+        -2,
+        1.5
+      ],
+      "smooth": true,
+      "means": "где Анна от стенки вагона: < 0 — на платформе, > 0 — в вагоне, м"
+    },
+    "anna_e": {
+      "range": [
+        0,
+        1.5
+      ],
+      "smooth": true,
+      "means": "её пол над рельсом: 0.6 — платформа, 1.2 — пол вагона"
+    },
+    "gurov_a": {
+      "range": [
+        -20,
+        31
+      ],
+      "smooth": true,
+      "means": "где Гуров вдоль платформы, м"
+    },
+    "gurov_d": {
+      "range": [
+        0.6,
+        7.5
+      ],
+      "smooth": true,
+      "means": "где Гуров поперёк платформы, м"
+    },
+    "conductor_a": {
+      "range": [
+        -20,
+        31
+      ],
+      "smooth": true,
+      "means": "где кондуктор вдоль платформы, м"
+    },
+    "conductor_d": {
+      "range": [
+        0.6,
+        7.5
+      ],
+      "smooth": true,
+      "means": "где кондуктор поперёк платформы, м"
+    },
+    "tail_a": {
+      "range": [
+        -10,
+        2000
+      ],
+      "smooth": true,
+      "means": "где хвостовой огонь вдоль пути, м (ставит сцена по train_a)"
+    },
+    "tail_on": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "большое свечение хвостового огня — для дали (ставит сцена: 0 у платформы, 1 с 120 м)"
+    }
+  },
+  "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "prompts": [
+      {
+        "text": "very quiet ambient pad, late summer evening, faded and warm, a slow breath of strings",
+        "weight": 1.1
+      },
+      {
+        "text": "sparse low cello notes with long silences, gentle farewell, restrained",
+        "weight": 0.9
+      },
+      {
+        "text": "soft field-recording texture of evening air, distant hum like telegraph wires, almost no melody",
+        "weight": 0.7
+      },
+      {
+        "text": "slow solo clarinet in the low register, a few notes, wistful and resigned",
+        "weight": 0.4
+      },
+      {
+        "text": "muted string quartet chorale, very slow, autumn coming",
+        "weight": 0.3
+      },
+      {
+        "text": "glass harmonica single tones fading into silence",
+        "weight": 0
+      },
+      {
+        "text": "low drone of a bowed double bass under faint high violins, dusk on the steppe",
+        "weight": 0
+      },
+      {
+        "text": "warm tape-saturated ambient texture, nostalgic, slow evolving",
+        "weight": 0
+      },
+      {
+        "text": "alto flute, breathy and lonely, open space",
+        "weight": 0
+      },
+      {
+        "text": "soft harp harmonics one at a time, like lamps lighting along a platform",
+        "weight": 0
+      },
+      {
+        "text": "slow cor anglais phrase over quiet strings, pastoral, distant",
+        "weight": 0
+      },
+      {
+        "text": "bowed vibraphone, overlapping soft tones, dreamy stillness",
+        "weight": 0
+      },
+      {
+        "text": "minimal ambient with distant train rumble texture fading away",
+        "weight": 0
+      },
+      {
+        "text": "slow viola line over a drone, Russian romance feeling, restrained",
+        "weight": 0
+      },
+      {
+        "text": "wordless choir far away, barely audible, evening calm",
+        "weight": 0
+      },
+      {
+        "text": "deep slow pads, empty and spacious, the end of something",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.3
+  }
+}

@@ -95,6 +95,7 @@
     "leash": { "type": "string", "means": "к чьей руке идёт поводок ('anna#hand_l'…), 'none' — волочится" }
   },
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       { "text": "very slow ambient drone of soft strings, distant and still, the hour before dawn by the sea", "weight": 1.2 },
       { "text": "sparse solo cello, long held low notes, quiet melancholy, lots of silence between phrases", "weight": 1 },
