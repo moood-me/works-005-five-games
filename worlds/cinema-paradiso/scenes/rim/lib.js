@@ -84,6 +84,7 @@ const FILM = {
       s.path(['camera_x', 'camera_z', 'camera_yaw', 'camera_h'], ROUND.slice(1), { over: 14, ease: 'inOut' });
       await s.wait(0.5);
       if (has('lean_seated')) he.do('lean_seated');
+      he.look('screen#screen');
       he.mood('smile');
       for (let i = 0; i < HOLD.length; i++) {
         await s.wait(i ? HOLD[i] : HOLD[0] - 0.5);
@@ -99,7 +100,7 @@ const FILM = {
       const he = s.person('toto');
       await s.wait(5);
       s.set('screen_film', 'white');
-      if (has('lean_back_seated')) he.do('lean_back_seated');
+      he.do({ motion: 'seated', loop: true }); // (lean_back_seated is hands behind the head: not this)
       await s.wait(1); s.tell('kisses_end:white');
       await s.wait(3); he.mood('sad');
       await s.wait(4); he.mood('smile');
