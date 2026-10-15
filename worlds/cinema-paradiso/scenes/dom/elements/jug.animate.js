@@ -1,3 +1,4 @@
+if (e.state.era === 'now') return;
 // held: the jug goes up into her hands (between them) and tips a little over the glass; let go — back on the table
 const m = e.mem, held = e.state.jug_held ? 1 : 0;
 m.u ??= held;
