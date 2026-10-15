@@ -15,87 +15,10 @@ const G = {
   STAGE_Z: 17.2, STAGE_H: 0.8,
 };
 G.seat = (row, i) => [G.SEAT_X0 + i * G.SEAT_W, G.ROWS[row - 1] + G.HIP];
-G.PRIEST = G.seat(5, 3);                                  // the priest's seat: row 5, left of the middle
+G.PRIEST_I = 0;
+G.PRIEST = G.seat(5, G.PRIEST_I);                         // the priest's seat: row 5, by the left aisle — ≈ 3 m from the side door
 
 const hash = (n, s) => anim.hash(n, s);
-
-// ---- films: one frame each, on a w×h rectangle at (x, y); old black-and-white prints, silhouettes, no faces ----
-function filmBg(g, x, y, w, h, a, b) {
-  const bg = g.createLinearGradient(x, y, x + w, y + h);
-  bg.addColorStop(0, a); bg.addColorStop(0.6, b); bg.addColorStop(1, a);
-  g.fillStyle = bg; g.fillRect(x, y, w, h);
-}
-function vignette(g, x, y, w, h) {
-  const v = g.createRadialGradient(x + w / 2, y + h / 2, h * 0.3, x + w / 2, y + h / 2, w * 0.62);
-  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(10,10,10,0.55)');
-  g.fillStyle = v; g.fillRect(x, y, w, h);
-}
-// the man in a hat, in profile facing right; his head's centre at (hx, hy), s — his scale (the frame's height)
-function hatMan(g, hx, hy, s, lean) {
-  g.save(); g.translate(hx, hy); g.rotate(lean || 0);
-  g.fillStyle = '#141312';
-  g.beginPath(); g.moveTo(-0.17 * s, 0.75 * s); g.lineTo(-0.13 * s, 0.22 * s); g.quadraticCurveTo(-0.02 * s, 0.1 * s, 0.1 * s, 0.2 * s);
-  g.lineTo(0.16 * s, 0.75 * s); g.fill();
-  g.beginPath(); g.ellipse(0.01 * s, 0, 0.055 * s, 0.1 * s, 0.1, 0, Math.PI * 2); g.fill();
-  g.beginPath(); g.ellipse(0.035 * s, 0.01 * s, 0.03 * s, 0.03 * s, 0, 0, Math.PI * 2); g.fill();   // the nose's line
-  g.fillRect(-0.09 * s, -0.11 * s, 0.2 * s, 0.025 * s);
-  g.beginPath(); g.ellipse(0.01 * s, -0.12 * s, 0.06 * s, 0.06 * s, 0, Math.PI, 0); g.fill();
-  g.restore();
-}
-// the woman, in profile facing left, hair up; head at (hx, hy)
-function lady(g, hx, hy, s, lean) {
-  g.save(); g.translate(hx, hy); g.rotate(lean || 0);
-  g.fillStyle = '#262422';
-  g.beginPath(); g.moveTo(-0.1 * s, 0.75 * s); g.lineTo(-0.07 * s, 0.25 * s); g.quadraticCurveTo(-0.05 * s, 0.12 * s, 0.0, 0.11 * s);
-  g.quadraticCurveTo(0.06 * s, 0.12 * s, 0.07 * s, 0.27 * s); g.lineTo(0.11 * s, 0.75 * s); g.fill();
-  g.beginPath(); g.ellipse(-0.005 * s, 0, 0.042 * s, 0.09 * s, -0.15, 0, Math.PI * 2); g.fill();
-  g.beginPath(); g.ellipse(0.025 * s, -0.04 * s, 0.05 * s, 0.075 * s, 0.4, 0, Math.PI * 2); g.fill();
-  g.restore();
-}
-function film(g, name, x, y, w, h) {
-  g.save(); g.beginPath(); g.rect(x, y, w, h); g.clip();
-  if (name === 'white') { g.fillStyle = '#f4f2ec'; g.fillRect(x, y, w, h); g.restore(); return; }
-  if (name === 'comedy') {
-    // «Пожарные из Виджу»: the fat one and the thin one with a ladder against a house front, the ladder tipping
-    filmBg(g, x, y, w, h, '#8e8c86', '#d2cfc6');
-    g.fillStyle = '#a9a69e'; g.fillRect(x + w * 0.55, y, w * 0.45, h);                       // a house front
-    g.fillStyle = '#5d5b57'; for (const [u, v] of [[0.62, 0.15], [0.82, 0.15], [0.62, 0.48], [0.82, 0.48]]) g.fillRect(x + w * u, y + h * v, w * 0.1, h * 0.2);
-    g.strokeStyle = '#2a2826'; g.lineWidth = w * 0.012;                                      // the ladder, leaning
-    g.save(); g.translate(x + w * 0.42, y + h); g.rotate(0.42);
-    g.beginPath(); g.moveTo(-w * 0.04, 0); g.lineTo(-w * 0.04, -h * 0.95); g.moveTo(w * 0.04, 0); g.lineTo(w * 0.04, -h * 0.95);
-    for (let k = 1; k < 9; k++) { g.moveTo(-w * 0.04, -h * 0.1 * k); g.lineTo(w * 0.04, -h * 0.1 * k); } g.stroke(); g.restore();
-    g.fillStyle = '#161514';
-    // the fat one at the foot, holding it, a helmet
-    const fx = x + w * 0.3, fy = y + h;
-    g.beginPath(); g.ellipse(fx, fy - h * 0.3, w * 0.09, h * 0.24, 0, 0, Math.PI * 2); g.fill();
-    g.fillRect(fx - w * 0.06, fy - h * 0.12, w * 0.12, h * 0.12);
-    g.beginPath(); g.ellipse(fx + w * 0.01, fy - h * 0.6, w * 0.04, h * 0.075, 0, 0, Math.PI * 2); g.fill();
-    g.beginPath(); g.ellipse(fx + w * 0.01, fy - h * 0.66, w * 0.055, h * 0.035, 0, Math.PI, 0); g.fill();
-    // the thin one high on the ladder, arms flung out
-    const tx = x + w * 0.63, ty = y + h * 0.28;
-    g.fillRect(tx - w * 0.012, ty, w * 0.024, h * 0.3);
-    g.beginPath(); g.ellipse(tx, ty - h * 0.05, w * 0.025, h * 0.05, 0, 0, Math.PI * 2); g.fill();
-    g.lineWidth = w * 0.012; g.strokeStyle = '#161514';
-    g.beginPath(); g.moveTo(tx, ty + h * 0.04); g.lineTo(tx - w * 0.08, ty - h * 0.06); g.moveTo(tx, ty + h * 0.04); g.lineTo(tx + w * 0.07, ty - h * 0.08);
-    g.moveTo(tx, ty + h * 0.29); g.lineTo(tx - w * 0.05, ty + h * 0.42); g.moveTo(tx, ty + h * 0.29); g.lineTo(tx + w * 0.04, ty + h * 0.43); g.stroke();
-    vignette(g, x, y, w, h); g.restore(); return;
-  }
-  // romance — a man in a hat and a woman at a window; romance_kiss — the same, their heads come together
-  filmBg(g, x, y, w, h, '#9c9a94', '#cfccc4');
-  const wx = x + w * 0.56, wy = y + h * 0.1, ww = w * 0.3, wh = h * 0.62;
-  g.fillStyle = '#efede6'; g.fillRect(wx, wy, ww, wh);
-  g.fillStyle = '#4a4844'; g.fillRect(wx + ww / 2 - w * 0.008, wy, w * 0.016, wh); g.fillRect(wx, wy + wh * 0.45, ww, h * 0.02);
-  g.fillStyle = 'rgba(80,78,74,0.55)'; g.fillRect(wx - w * 0.04, wy - h * 0.04, w * 0.06, wh + h * 0.08);
-  if (name === 'romance_kiss') {
-    hatMan(g, x + w * 0.47, y + h * 0.33, h, 0.18);
-    lady(g, x + w * 0.545, y + h * 0.36, h * 0.95, -0.22);
-  } else {
-    hatMan(g, x + w * 0.27, y + h * 0.3, h, 0);
-    lady(g, wx + ww * 0.42, y + h * 0.37, h * 0.95, 0);
-  }
-  vignette(g, x, y, w, h);
-  g.restore();
-}
 
 // ---- the rows ----
 // a row of seats as seen from behind: velvet backs on iron standards; ruin — the bare frames, a few backs hanging
@@ -129,7 +52,7 @@ function seatRow(g, ruin) {
 function audience(g, row, seed) {
   const n = G.SEATS, w = G.SEAT_W, x0 = G.SEAT_X0;
   for (let i = 0; i < n; i++) {
-    if (row === 5 && i === 3) continue;                           // the priest's own seat
+    if (row === 5 && i === G.PRIEST_I) continue;                           // the priest's own seat
     if (hash(i, seed) < 0.1) continue;
     const x = x0 + i * w + (hash(i, seed + 1) - 0.5) * 0.08, kind = Math.floor(hash(i, seed + 2) * 5);
     const s = kind === 4 ? 0.78 : 0.94 + hash(i, seed + 3) * 0.1, coat = ['#2c2a2e', '#3b3230', '#2e3338', '#45392f', '#33302c'][Math.floor(hash(i, seed + 4) * 5)];
@@ -150,7 +73,7 @@ function arms(g, row, seed) {
   const n = G.SEATS, w = G.SEAT_W, x0 = G.SEAT_X0;
   g.strokeStyle = '#2b2828'; g.lineWidth = 0.07; g.lineCap = 'round';
   for (let i = 0; i < n; i++) {
-    if ((row === 5 && i === 3) || hash(i, seed) < 0.1 || hash(i, seed + 6) < 0.45) continue;
+    if ((row === 5 && i === G.PRIEST_I) || hash(i, seed) < 0.1 || hash(i, seed + 6) < 0.45) continue;
     const x = x0 + i * w, both = hash(i, seed + 7) < 0.5, a = (hash(i, seed + 8) - 0.5) * 0.5;
     g.beginPath(); g.moveTo(x + 0.17, -1.02); g.lineTo(x + 0.25 + a * 0.3, -1.58);
     if (both) { g.moveTo(x - 0.17, -1.02); g.lineTo(x - 0.27 + a * 0.3, -1.55); }
@@ -175,4 +98,153 @@ function plaster(g, x, y, w, h, base, seed, ruin) {
   g.restore();
 }
 
-return { G, film, seatRow, audience, arms, plaster };
+// ---- the film in beats (modules/beats.js): the game sets `beat`; each beat's `from` — all it starts from, cut to
+// unless it follows one of its `after`. The shots: metres from the start (camera_x, camera_z), yaw — degrees right of
+// north, h — up from the eye (1.7 m), pitch — up.
+const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
+const CAM = {
+  BACK: cam(-2.6, 3.4, -2, 0.5, -3),           // behind the last rows: the heads, the beam over them, the screen; the priest left of the middle
+  CURTAIN: cam(-7.9, 5.6, 45, -0.35, 3),        // from the corridor behind the curtain: the curtain and the boy at its edge left, the priest right-front
+  RUIN: cam(3.0, 16.4, 196, 0.6, 5),           // 1988, from the stage's foot back over the ruined rows to the lion
+  LION: cam(-4.0, 15.0, 177, 0, 7),            // from the aisle at row 5 back: Salvatore right, the lion over the back wall
+  FACE: cam(-3.3, 8.2, 293, -0.1, 0),          // his face, 3/4 front, in the lion's light (medium, ≈ 2.5 m)
+};
+G.CAM = CAM;
+const SAL = [-5.6, 9.2];                      // where Salvatore stops in 1988, by the 5th row, facing the lion
+const BOY = [-6.85, 7.35];                    // in the corridor at the door's north jamb, behind the curtain's edge
+G.SAL = SAL; G.BOY = BOY;
+const brg = (a, b) => { const d = Math.atan2(b[0] - a[0], b[1] - a[1]) * 180 / Math.PI; return d < 0 ? d + 360 : d; };
+const IDS = ['adelfio', 'toto'];
+const SIT = { motion: 'seated', loop: true };
+const base = era => ({
+  era, hour: era === 'ruin' ? 0.8 : 0.9, ruin_k: era === 'ruin' ? 1 : 0, past: era === 'ruin' ? 0 : 1, memory_light: 0,
+  hall: 'empty', screen_film: 'romance', beam_on: era === 'ruin' ? 0 : 1, rise: 0, laugh: 0, peek: 0, bell: 0, turn: 0,
+});
+function people(who) {
+  const o = {};
+  for (const id of IDS) {
+    const p = who[id];
+    o[id + '_here'] = !!p;
+    if (!p) continue;
+    o[id + '_a'] = p.at[0]; o[id + '_d'] = p.at[1];
+    o[id + '_turn'] = p.turn ?? 180; o[id + '_do'] = p.do || 'stand';
+    o[id + '_look'] = p.look ?? null; o[id + '_reach'] = p.reach ?? null; o[id + '_mood'] = p.mood ?? 'neutral';
+    if (id === 'toto') { o.toto_wear = p.wear ?? null; o.toto_gait = null; }
+  }
+  return o;
+}
+const priestSits = { at: G.PRIEST, turn: 0, do: SIT, look: 'screen#screen' };
+const boyHides = { at: BOY, turn: brg(BOY, G.PRIEST), look: 'adelfio', mood: 'surprised' };
+const SALT = brg(SAL, [G.LION[0], G.LION[1]]);
+const salvatore = more => ({ at: SAL, turn: SALT, wear: kit.cast.characters.salvatore, look: 'lion', ...more });
+const FILM = {
+  priest: {
+    from: () => ({ ...base('past'), ...people({ adelfio: priestSits }), ...CAM.BACK }),
+    run: async s => {
+      const curtain = s.shot({ ...CAM.CURTAIN, ...people({ adelfio: priestSits, toto: boyHides }) });
+      await s.wait(3); s.tell('priest:sat');
+      await s.wait(10.5);
+      curtain.cut();
+      await s.wait(0.5);
+    },
+  },
+  peek: {
+    after: ['priest'],
+    from: () => ({ ...base('past'), ...people({ adelfio: priestSits, toto: boyHides }), ...CAM.CURTAIN }),
+    run: async s => { await s.wait(3); },
+  },
+  bell_end: {
+    after: ['peek'],
+    from: () => FILM.peek.from(),
+    run: async s => {
+      const p = s.person('adelfio'), boy = s.person('toto');
+      s.set('peek', 0, 0.4); s.set('bell', 0); s.set('turn', 0);
+      p.look(null); p.reach(null);
+      await p.go('rise_chair', { from: G.PRIEST, turn: 0 });
+      boy.look('adelfio');
+      await p.walk([[G.AISLE_X, G.PRIEST[1]], [G.AISLE_X, G.DOOR[1] + 0.3]]);
+      s.tell('bell_end:out');
+      await p.walk([[G.AISLE_X, 3.2], [-5.2, -0.8]]);
+      p.here(false);
+      boy.look(null);
+      await s.wait(0.6);
+    },
+  },
+  full_hall: {
+    from: () => ({ ...base('past'), hall: 'full', screen_film: 'comedy', ...people({}), ...CAM.BACK }),
+    run: async s => {
+      await s.wait(0.6); s.move('laugh', 1, { over: 0.4 }); await s.wait(0.4); s.tell('full_hall:laugh');
+      await s.wait(3.2); s.move('laugh', 0.25, { over: 1.2 });
+      await s.wait(2.4); s.move('laugh', 1, { over: 0.3 });
+      await s.wait(3.0); s.move('laugh', 0, { over: 2.0 });
+      await s.wait(2.4);
+    },
+  },
+  first_kiss: {
+    from: () => ({ ...base('past'), hall: 'full', screen_film: 'romance', ...people({ adelfio: priestSits }), ...CAM.BACK }),
+    run: async s => {
+      const p = s.person('adelfio');
+      await s.wait(1);
+      s.set('screen_film', 'romance_kiss');           // the screen dissolves into the kiss over 3 s (the screen's animate)
+      await s.wait(3); s.tell('first_kiss:kiss');
+      s.move('rise', 1, { over: 0.9, ease: 'out' });
+      await s.wait(3); s.move('rise', 0.35, { over: 2.5 });
+      await s.wait(2); s.tell('first_kiss:priest');
+      await p.go('rise_chair', { from: G.PRIEST, turn: 0 });
+      await p.walk([[G.AISLE_X, G.PRIEST[1]], [G.AISLE_X, 2.0]]);
+      p.here(false);
+      s.move('rise', 0, { over: 2 });
+      await s.wait(0.8);
+    },
+  },
+  whistle: {
+    from: () => ({ ...base('past'), hall: 'standing', screen_film: 'white', rise: 1, ...people({}), ...CAM.BACK }),
+    run: async s => {
+      s.move('laugh', 0.6, { over: 0.5 });
+      await s.wait(1); s.tell('whistle:white');
+      await s.wait(5);
+    },
+  },
+  ruin_hall: {
+    from: () => ({ ...base('ruin'), hall: 'full', screen_film: 'comedy',
+      ...people({ toto: { at: [-7.9, 6.9], turn: 90, wear: kit.cast.characters.salvatore, mood: 'tired' } }), ...CAM.RUIN }),
+    run: async s => {
+      const sal = s.person('toto');
+      const lion = s.shot({ ...CAM.LION });
+      await s.wait(1.2);
+      await sal.walk([[-6.2, 7.1], SAL]);
+      await sal.turn(SALT);
+      sal.look('lion'); sal.mood('sad');
+      await s.wait(1.2);
+      lion.cut();
+      s.tell('ruin_hall:seat');
+      await s.wait(2.2);
+    },
+  },
+  memory: {
+    after: ['ruin_hall'],
+    from: () => ({ ...base('ruin'), hall: 'full', screen_film: 'comedy', ...people({ toto: salvatore({ mood: 'sad' }) }), ...CAM.LION }),
+    run: async s => {
+      const sal = s.person('toto');
+      const face = s.shot({ ...CAM.FACE });
+      s.move('beam_on', 1, { over: 0.25, ease: 'out' });
+      s.move('past', 1, { over: 0.4, ease: 'out' });
+      s.move('memory_light', 1, { over: 0.4, ease: 'out' });
+      await s.wait(0.5); s.tell('memory:warm');
+      s.move('laugh', 1, { over: 0.4 });
+      await s.wait(0.7);
+      face.cut();
+      sal.mood('smile');
+      await s.wait(2.7); s.move('laugh', 0.2, { over: 1.2 });
+      await s.wait(1.1);
+      s.move('past', 0, { over: 1.5, ease: 'inOut' }); s.move('beam_on', 0, { over: 1.5, ease: 'inOut' });
+      s.move('laugh', 0, { over: 1.5 }); s.move('memory_light', 0, { over: 1.5, ease: 'inOut' });
+      await s.wait(0.6); sal.mood('sad');
+      await s.wait(0.9); s.tell('memory:gone');
+      await s.wait(1.5);
+    },
+  },
+};
+
+return { G, FILM, seatRow, audience, arms, plaster };
+
