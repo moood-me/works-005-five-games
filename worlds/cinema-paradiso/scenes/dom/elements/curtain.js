@@ -12,8 +12,11 @@ const length = (x0, x1, seed) => {
   g.fillStyle = gr;
   g.beginPath(); g.moveTo(x0, -2.27); g.lineTo(x1, -2.27);
   g.quadraticCurveTo(x1 + 0.02, -1.2, x1 + 0.03, -0.04); g.lineTo(x0 - 0.02, -0.03); g.closePath(); g.fill();
-  g.fillStyle = 'rgba(120,60,40,0.25)';
-  for (let y = -2.1; y < -0.2; y += 0.28) g.fillRect(x0, y, x1 - x0, 0.035);
+  // a faded print: small flowers in rows
+  for (let y = -2.15; y < -0.1; y += 0.16) for (let x = x0 + 0.05; x < x1 - 0.03; x += 0.14) {
+    g.fillStyle = 'rgba(170,80,60,0.45)'; g.beginPath(); g.arc(x + ((y * 10) % 2 ? 0.07 : 0), y, 0.022, 0, Math.PI * 2); g.fill();
+    g.fillStyle = 'rgba(90,110,70,0.45)'; g.fillRect(x + ((y * 10) % 2 ? 0.07 : 0) + 0.015, y + 0.01, 0.03, 0.01);
+  }
 };
 length(0, north, 1);
 length(south0, south1, 2);

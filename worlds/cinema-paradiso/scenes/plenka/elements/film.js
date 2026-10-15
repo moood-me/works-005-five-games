@@ -127,9 +127,10 @@ e.layer("order", {}, function (c) {
   }
   for (var f = 0; f < L.frames.length; f++) {
     var F = L.frames[f];
-    var top = Math.min(F.y, F.qy - F.question.size);
+    // (its own question and its own frame only: the next strip's questions are not uncovered by it)
+    var top = Math.min(F.y, F.qy - F.question.size * 0.65);
     c.fillStyle = grey(F.order);
-    c.fillRect(F.x - 0.017, top - 0.01, F.w + 0.034, F.y + F.h - top + 0.03);
+    c.fillRect(F.x - 0.017, top, F.w + 0.034, F.y + F.h - top + 0.004);
   }
 });
 function clampU(v) {
