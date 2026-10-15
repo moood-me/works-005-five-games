@@ -88,8 +88,9 @@ export default {
       g.hours(-12, 'Угля нет');
       if (f.pp !== 'with') await g.say('fogg', 'Сюртук мне сейчас ни к чему');
       const afford = Math.max(0, Math.floor(g.state.money / PART_PRICE));
-      const r = await g.play(kotly, { afford, hero: f.pp === 'with' ? 'pp' : 'fogg', say: (who, text) => g.say(who, text) });
-      const burned = r?.burned ?? [];
+      const r = await g.play(kotly, { who: f.pp === 'with' ? 'pp' : 'fogg' });
+      // (skipped, it burns all seven but the cabin: no more than the bag can pay)
+      const burned = (r?.burned ?? []).slice(0, afford);
       g.money(-PART_PRICE * burned.length);
       g.hours(PART_HOURS * burned.length, 'Сожжено: ' + burned.length);
       g.beds({ sea: 0.4, furnace: 0.2 }, 3);

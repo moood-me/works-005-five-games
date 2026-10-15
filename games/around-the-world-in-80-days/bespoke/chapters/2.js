@@ -190,7 +190,7 @@ export default {
       await g.say('batulcar', 'Длинные носы! Живая пирамида!');
       await show;
       await g.beat('pyramid', { wait: false });
-      const r = await g.play(piramida, { onFogg: () => g.say('pp', 'Хозяин!') });
+      const r = await g.play(piramida);
       const choice = r?.choice ?? 'drop';
       g.state.choices.pyramid = choice;
       g.mark('wings', true);

@@ -68,7 +68,7 @@ export default {
       await g.beat('haggle', { wait: false });
       await g.say('fogg', 'Тысяча фунтов');
       await g.say('owner', 'Нет');
-      const r = await g.play(torg, { say: (who, text) => g.say(who, text) });
+      const r = await g.play(torg, { onRefuse: () => g.say('owner', 'Нет') });
       g.money(-(r?.price ?? 2000));
       if (r?.minutes) g.hours(-r.minutes / 60, 'Торг');
       g.sound.notes();
