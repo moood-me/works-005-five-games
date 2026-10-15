@@ -170,14 +170,14 @@ return {
     // Salvatore, 47: a dark coat, greying hair, a pale scarf
     salvatore: look('man', { garment: 'coat', scarf: true, hair: 'short',
       colors: { garment: '#2d2c33', bottom: '#26252b', top: '#3a3a42', hair: '#8f8a84', skin: '#c49a7a', accent: '#ddd6c8', shoes: '#1e1b1a' } }),
-    // Alfredo, about fifty: stocky, a cap, a short work jacket (its pocket: alfredo#pocket — «карман жилета»), a collarless shirt
-    alfredo: look('grandpa', { garment: 'jacket', hat: 'cap', scarf: false, hair: 'short', parts: ['pocket', 'moustache'],
+    // Alfredo, about fifty: stocky, a cap, a work shirt, no jacket — a hung garment drew as a board (its pocket: alfredo#pocket — «карман жилета»), a collarless shirt
+    alfredo: look('grandpa', { garment: 'none', hat: 'cap', scarf: false, hair: 'short', parts: ['pocket', 'moustache'],
       body: { thick: 1.2, height: 0.98 },
-      colors: { garment: '#4a3d30', top: '#d9cfb6', bottom: '#3d362e', hat: '#3a3530', hair: '#4a3f36', skin: '#c29775', shoes: '#2a221c' } }),
+      colors: { top: '#8a7458', bottom: '#3d362e', hat: '#3a3530', hair: '#4a3f36', skin: '#c29775', shoes: '#2a221c' } }),
     // Alfredo blind, 55–65: greyer, round dark glasses, a jacket; the cane
-    alfredo_blind: look('grandpa', { garment: 'jacket', hat: 'cap', scarf: false, hair: 'short', parts: ['glasses', 'moustache', 'cane'],
+    alfredo_blind: look('grandpa', { garment: 'none', hat: 'cap', scarf: false, hair: 'short', parts: ['glasses', 'moustache', 'cane'],
       body: { thick: 1.15, height: 0.97 },
-      colors: { garment: '#4b4237', top: '#cfc6b2', bottom: '#3a352f', hat: '#3a3530', hair: '#bdb6aa', skin: '#c29775', shoes: '#2a221c' } }),
+      colors: { top: '#5a5044', bottom: '#3a352f', hat: '#3a3530', hair: '#bdb6aa', skin: '#c29775', shoes: '#2a221c' } }),
     // Maria, about thirty: a widow's dark dress, a shawl, hair in a knot
     maria: look('woman', { garment: 'dress', scarf: true, hair: 'bun',
       colors: { garment: '#1f1c20', accent: '#4a4046', hair: '#1c1512', skin: '#d0a684', shoes: '#1e1a18' } }),
