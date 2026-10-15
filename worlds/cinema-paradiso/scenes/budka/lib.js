@@ -235,14 +235,14 @@ const FILM = {
     run: async s => {
       const alf = s.person('alfredo'), boy = s.person('toto');
       await s.wait(0.8);
-      s.set('stair', 1); s.move('door', 0.4, { over: 0.9, ease: 'out' });
-      s.set('toto_a', 2.2); s.set('toto_d', 0.85); boy.here(true);
+      s.set('stair', 1); s.move('door', 0.7, { over: 0.9, ease: 'out' });
+      s.set('toto_a', 2.18); s.set('toto_d', 0.8); boy.here(true);
       await s.wait(1.2); s.tell('cutting:door');
       alf.look('toto'); alf.do('stand'); await alf.turn(230);
       await s.wait(1.6);
       s.move('door', 1, { over: 0.8 });
       await walk(s, 'toto', [[1.55, 0.95], [0.8, 1.55], [0.75, 2.2], P.BOY_BENCH]);
-      await boy.turn(225); boy.look('alfredo'); boy.mood('smile');
+      await boy.turn(225); boy.look(null); boy.mood('smile');
       s.tell('cutting:bench');
       s.move('door', 0, { over: 1.5 }); s.move('stair', 0, { over: 1.5 });
       await s.wait(2.4);
@@ -259,14 +259,14 @@ const FILM = {
   frames: {
     from: () => ({ ...base(0.9), ...show(1), clips: 1, ...CAM.BENCH, ...people({
       alfredo: { at: P.ALF_BENCH, turn: 100, look: 'tin', do: { motion: 'bench_work', loop: true }, mood: 'neutral' },
-      toto: { at: P.BOY_BENCH, turn: 215, look: 'tin', mood: 'surprised' } }) }),
+      toto: { at: P.BOY_BENCH, turn: 215, look: null, mood: 'surprised' } }) }),
     run: async s => {
       const alf = s.person('alfredo'), boy = s.person('toto');
       s.move('tin_open', 1, { over: 0.8 });
       await s.wait(2); s.tell('frames:tin');
       boy.look('alfredo');
       await s.wait(1.0);
-      alf.do('stand'); await alf.turn(250); alf.look('toto'); alf.mood('smile');
+      alf.do('stand'); await alf.turn(240); alf.look(null); alf.mood('smile');
       await s.wait(2.4);
       s.set('clips', 0);
       alf.look(null); alf.mood('neutral');
