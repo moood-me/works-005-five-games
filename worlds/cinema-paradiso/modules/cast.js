@@ -216,8 +216,9 @@ return {
     kid: look('child', { garment: 'tunic', hair: 'short', colors: { top: '#a69a80', bottom: '#4a4038', hair: '#2a1f17' } }),
   },
   shapes: {
-    // the world's style: the engine's `graphic` with a face that reads (eyes, brows, nose, mouth: `<id>_mood`)
-    styles: { paradizo: { from: 'graphic', face: 'simple' } },
+    // the world's style: the engine's `graphic` with a bigger head and a face that reads (eyes, brows, nose, mouth:
+    // `<id>_mood`), fuller limbs, toned paint
+    styles: { paradizo: { from: 'graphic', face: 'simple', head: 1.34, neck: 0.6, limb: 1.0, legs: 1.0, feet: 'bean', arms: 'mitten', paint: 'toned', line: 1.4 } },
     hats: {
       // a headscarf over the hair, tied at the nape
       kerchief: { name: 'платок', draw: F => {
