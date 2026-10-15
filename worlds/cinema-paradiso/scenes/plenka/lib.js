@@ -72,7 +72,7 @@ function partsOf(row, x, y, w, h, measure) {
     return o && (o.state === "chosen" || o.state === "open") ? o.state : "unseen";
   };
   var most = function (hh) {
-    return Math.max(1, Math.floor((hh - 2 * PAD + 0.2 * TEXT) / (TEXT * 1.2)));
+    return Math.max(1, Math.floor((hh - PAD + 0.2 * TEXT) / (TEXT * 1.2)));
   };
   var none = { lines: [], size: TEXT, fits: true };
   var even = [];
@@ -147,8 +147,8 @@ function layout(A, st, measure) {
   L.heading = title;
   L.numberX = cx - side;
   L.titleX = cx + side - tw;
-  var TOP = 0.16;
-  var FLOOR = whole ? 0.93 : 0.76; // a chapter's map stays clear of the lamp; the whole play goes lower (its last
+  var TOP = whole ? 0.14 : 0.15;
+  var FLOOR = whole ? 0.955 : 0.8; // a chapter's map stays clear of the lamp; the whole play goes lower (its last
   // strip is shorter and leaves the lamp's corner free)
   var best = null;
   var arr = arrangements(rows.length);
@@ -208,8 +208,8 @@ function layout(A, st, measure) {
         R.question = wrap(q, R.w, TEXT, true, measure, whole ? 1 : 2);
         ln.q = Math.max(ln.q, tall(R.question));
       }
-      // (the strip's band is 1.34 of its frames' height: the questions stand over it)
-      ln.height = ln.q + 0.01 + 1.34 * ln.h;
+      // (the strip's band is 1.24 of its frames' height: the questions stand over it)
+      ln.height = ln.q + 0.01 + 1.24 * ln.h;
       width = Math.max(width, ln.w + (ln.last ? B.XR - B.XL - ln.room : 0));
       height += ln.height + (li ? 0.015 : 0);
       lines.push(ln);
@@ -219,7 +219,7 @@ function layout(A, st, measure) {
     var idx = 0;
     for (var l2 = 0; l2 < lines.length; l2++) {
       var L2 = lines[l2];
-      var mid = y + L2.q + 0.01 + 0.67 * L2.h;
+      var mid = y + L2.q + 0.01 + 0.62 * L2.h;
       strips.push({ y: mid, h: L2.h });
       var x = L2.last ? B.XL + (L2.room - L2.w) / 2 : cx - L2.w / 2;
       for (var r2 = 0; r2 < L2.rows.length; r2++, idx++) {
@@ -228,7 +228,7 @@ function layout(A, st, measure) {
         var P = partsOf(R2.row, x, fy, R2.w, R2.h, measure);
         frames.push({
           x: x, y: fy, w: R2.w, h: R2.h, weight: R2.weight, question: R2.question,
-          qy: mid - 0.67 * L2.h - 0.01 - tall(R2.question) + R2.question.size / 2,
+          qy: mid - 0.62 * L2.h - 0.01 - tall(R2.question) + R2.question.size / 2,
           parts: P.parts, collapsed: P.collapsed, order: n > 1 ? (0.85 * idx) / (n - 1) : 0,
         });
         x += R2.w + GAP;

@@ -45,7 +45,7 @@ e.layer("strips", {}, function (c) {
   for (var i = 0; i < L.strips.length; i++) {
     var S = L.strips[i];
     var fh = S.h;
-    var band = fh * 1.34;
+    var band = fh * 1.24;
     var y0 = S.y - band / 2;
     c.fillStyle = "#1d150e";
     c.fillRect(-0.4, y0, A + 0.8, band);
@@ -53,8 +53,8 @@ e.layer("strips", {}, function (c) {
     var step = fh * 0.12;
     c.fillStyle = "#6b5236";
     for (var x = -0.4; x < A + 0.4; x += step) {
-      c.fillRect(x, y0 + fh * 0.04, step * 0.5, fh * 0.07);
-      c.fillRect(x, y0 + band - fh * 0.11, step * 0.5, fh * 0.07);
+      c.fillRect(x, y0 + fh * 0.025, step * 0.5, fh * 0.06);
+      c.fillRect(x, y0 + band - fh * 0.085, step * 0.5, fh * 0.06);
     }
     // the unexposed frames: where the frames of the map stand, and on past them both ways, spaced alike
     var on = L.big ? [L.big] : L.frames.filter(function (F) { return Math.abs(F.y + F.h / 2 - S.y) < 0.01; });
