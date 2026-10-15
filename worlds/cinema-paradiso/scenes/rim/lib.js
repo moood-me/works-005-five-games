@@ -36,12 +36,12 @@ function seatRow(g) {
 }
 // dark fabric walls with vertical panels of wood
 function panels(g, x0, x1, h, seed) {
-  g.fillStyle = '#2a2326'; g.fillRect(x0, -h - 0.05, x1 - x0, h + 0.05);
+  g.fillStyle = '#3a3034'; g.fillRect(x0, -h - 0.05, x1 - x0, h + 0.05);
   for (let x = x0 + 0.4; x < x1 - 0.2; x += 1.2) {
-    g.fillStyle = '#332a2c'; g.fillRect(x, -h + 0.35, 1.0, h - 1.3);
+    g.fillStyle = '#463a3c'; g.fillRect(x, -h + 0.35, 1.0, h - 1.3);
     g.fillStyle = 'rgba(0,0,0,0.25)'; g.fillRect(x, -h + 0.35, 0.03, h - 1.3);
   }
-  g.fillStyle = '#3a2a1e'; g.fillRect(x0, -0.9, x1 - x0, 0.9);
+  g.fillStyle = '#4e3826'; g.fillRect(x0, -0.9, x1 - x0, 0.9);
   g.fillStyle = '#4a3624'; g.fillRect(x0, -0.95, x1 - x0, 0.06);
   for (let i = 0; i < (x1 - x0) * 3; i++) { g.fillStyle = 'rgba(255,240,220,0.02)'; g.fillRect(x0 + hash(i, seed) * (x1 - x0), -h + hash(i, seed + 1) * h, 0.3, 0.3); }
 }
@@ -49,12 +49,12 @@ function panels(g, x0, x1, h, seed) {
 // ---- the film in beats (modules/beats.js) ----
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
-  PORT: cam(0, -0.9, 0, 0.3, -4),               // in the booth behind the port: the room through it, he alone in row 4 from behind
+  PORT: cam(0, -0.9, 0, 0.6, -6),               // in the booth behind the port: the room through it, he alone in row 4 from behind
   FACE: cam(-0.81, 6.37, 147, -0.35, -3),          // in front of him to the left, ≈ 2.2 m: his face 3/4 in the screen's light, the port behind him
 };
 G.CAM = CAM;
 // the camera's way round the row over 14 s: forward through the port, down the left side, round to his face
-const ROUND = [[0, -0.9, 0, 0.3], [0, 0.6, 0, 0.3], [-2.4, 2.8, 14, 0.05], [-3.0, 5.6, 70, -0.15], [-2.2, 7.2, 120, -0.3], [-0.81, 6.37, 147, -0.35]];
+const ROUND = [[0, -0.9, 0, 0.6], [0, 0.6, 0, 0.45], [-2.4, 2.8, 14, 0.05], [-3.0, 5.6, 70, -0.15], [-2.2, 7.2, 120, -0.3], [-0.81, 6.37, 147, -0.35]];
 // the film is a function of the scene: a beat's `from` reads the party's keys (note_in_hand: the note in his hand)
 function film(scene) {
 const sal = more => ({
@@ -100,7 +100,7 @@ const FILM = {
       const he = s.person('toto');
       await s.wait(5);
       s.set('screen_film', 'white');
-      he.do({ motion: 'seated', loop: true }); // (lean_back_seated is hands behind the head: not this)
+      he.do('seated', { loop: true }); // (lean_back_seated is hands behind the head: not this)
       await s.wait(1); s.tell('kisses_end:white');
       await s.wait(3); he.mood('sad');
       await s.wait(4); he.mood('smile');

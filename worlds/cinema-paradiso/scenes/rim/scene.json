@@ -13,8 +13,8 @@
     ]
   },
   "light": {
-    "ambient": 0.34,
-    "ambientColor": "#5a5876",
+    "ambient": 0.5,
+    "ambientColor": "#7a7090",
     "tint": "#20182a",
     "tintStrength": 0.05,
     "haze": 0.06,
@@ -41,7 +41,7 @@
     {
       "id": "booth_lamp",
       "across": -0.6,
-      "distance": -0.45,
+      "distance": 0.3,
       "elevation": 2.0,
       "color": "#ffbf78",
       "strength": 1.0,
@@ -437,7 +437,7 @@
     "camera_x": 0,
     "camera_z": -0.9,
     "camera_yaw": 0,
-    "camera_h": 0.3,
+    "camera_h": 0.6,
     "camera_pitch": -4,
     "camera_roll": 0,
     "camera_look": 0

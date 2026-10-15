@@ -32,7 +32,7 @@ function bell(v) {
     q.reach({ r: 'aud5#ring' });
     if (has('bell_ring')) await q.do('bell_ring'); else await s.wait(3.2);
     q.reach(null);
-    q.do({ motion: 'seated', loop: true });
+    q.do('seated', { loop: true });
   }, { name: 'bell' });
 }
 function turn(v) { scene.person('adelfio').look(v > 0.5 ? 'curtain#gap' : 'screen#screen'); }
