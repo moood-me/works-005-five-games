@@ -94,19 +94,19 @@ e.layer("frames", {}, function (c) {
     for (var p = 0; p < F.parts.length; p++) {
       var P = F.parts[p];
       var w = P.x1 - P.x0;
-      if (P.state === "chosen") lit(c, P.x0, F.y, w, F.h);
+      var h = P.y1 - P.y0;
+      if (P.state === "chosen") lit(c, P.x0, P.y0, w, h);
       else {
         c.fillStyle = P.state === "open" ? "#2c241c" : "#0b0907";
-        c.fillRect(P.x0, F.y, w, F.h);
+        c.fillRect(P.x0, P.y0, w, h);
       }
-      var mid = F.y + F.h / 2 - ((P.label.lines.length - 1) * P.label.size * 1.2) / 2;
+      var mid = P.y0 + h / 2 - ((P.label.lines.length - 1) * P.label.size * 1.2) / 2;
       if (P.state === "chosen") carve(c, P.label.lines, (P.x0 + P.x1) / 2, mid, P.label.size, INK_DARK, 1, true, true, "center");
       else if (P.state === "open") carve(c, P.label.lines, (P.x0 + P.x1) / 2, mid, P.label.size, "#cdb995", 0.42, true, false, "center");
-      // the cut between the parts
-      if (p) {
-        c.fillStyle = "#070504";
-        c.fillRect(P.x0 - 0.002, F.y, 0.004, F.h);
-      }
+      // the cut between the parts: beside the one before, or over the band along the foot
+      c.fillStyle = "#070504";
+      if (p && P.y0 > F.y + 1e-6) c.fillRect(P.x0, P.y0 - 0.002, w, 0.004);
+      if (p && P.x0 > F.x + 1e-6) c.fillRect(P.x0 - 0.002, P.y0, 0.004, h);
     }
     // the frame's own edge
     c.strokeStyle = "rgba(10,7,5,0.9)";
