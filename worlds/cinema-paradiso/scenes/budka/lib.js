@@ -423,7 +423,7 @@ const FILM = {
   // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
   smoke_in: {
     from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
-      alfredo: { at: BEHIND(0), turn: (PATH_TURN + 180) % 360, do: { motion: 'fall_back', from: 2.95 }, steps: false, mood: 'tired' },
+      alfredo: { at: BEHIND(0), turn: PATH_TURN, do: { motion: 'fall_back', from: 2.95 }, steps: false, mood: 'tired' },
       toto: { at: AHEAD(0), turn: PATH_TURN, do: { motion: 'kneel_down', from: 3.95 }, reach: { r: 'alfredo#nape', l: 'alfredo#nape' }, mood: 'afraid' } }) }),
     run: async s => { await s.wait(3.5); },
   },
