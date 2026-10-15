@@ -181,8 +181,8 @@ const BENCH_SEAT = [P.TOTO_BENCH[0], P.TOTO_BENCH[1], G.BENCH_H];
 const ALONG = (u) => [G.PATH0[0] + (G.PATH1[0] - G.PATH0[0]) * u, G.PATH0[1] + (G.PATH1[1] - G.PATH0[1]) * u];
 // «Вытащить»: where the boy (ahead of Alfredo's shoulders, toward the door) and Alfredo (his hips behind them) are at u
 const UNIT = (() => { const dx = G.PATH1[0] - G.PATH0[0], dz = G.PATH1[1] - G.PATH0[1], l = Math.hypot(dx, dz); return [dx / l, dz / l]; })();
-const AHEAD = u => { const p = ALONG(u); return [p[0] + UNIT[0] * 0.32, p[1] + UNIT[1] * 0.32]; };
-const BEHIND = u => { const p = ALONG(u); return [p[0] - UNIT[0] * 0.55, p[1] - UNIT[1] * 0.55]; };
+const AHEAD = u => { const p = ALONG(u); return [p[0] + UNIT[0] * 0.8, p[1] + UNIT[1] * 0.8]; };
+const BEHIND = u => ALONG(u);
 const PATH_TURN = Math.atan2(G.PATH0[0] - G.PATH1[0], G.PATH0[1] - G.PATH1[1]) / R; // facing back toward where he fell
 
 // ── the keys a beat starts from ──
@@ -423,9 +423,18 @@ const FILM = {
   // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
   smoke_in: {
     from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
-      alfredo: { at: BEHIND(0), turn: PATH_TURN, do: { motion: 'fall_back', from: 2.95 }, steps: false, mood: 'tired' },
-      toto: { at: AHEAD(0), turn: PATH_TURN, do: { motion: 'kneel_down', from: 3.95 }, reach: { r: 'alfredo#nape', l: 'alfredo#nape' }, mood: 'afraid' } }) }),
-    run: async s => { await s.wait(3.5); },
+      alfredo: { at: BEHIND(0), turn: PATH_TURN, do: 'fall_back', steps: false, mood: 'tired' },
+      toto: { at: [AHEAD(0)[0] + UNIT[0] * 0.9, AHEAD(0)[1] + UNIT[1] * 0.9], turn: PATH_TURN, look: 'alfredo', mood: 'afraid' } }) }),
+    // (the engine plays a motion from its beginning, whatever \`from\` says: so the fall is seen again, through the
+    // smoke, as the boy runs to him and drops to his knees at his shoulders)
+    run: async s => {
+      const boy = s.person('toto');
+      boy.gait('run');
+      await walk(s, 'toto', [AHEAD(0)]); boy.gait(null);
+      await boy.turn(PATH_TURN);
+      boy.do('kneel_down'); boy.reach({ r: 'alfredo#nape', l: 'alfredo#nape' });
+      await s.wait(2.4);
+    },
   },
   // III.2 — Alfredo (blind) on the stool tells of the soldier; Toto (17) on the bench's edge
   story_booth: {

@@ -27,8 +27,8 @@ const ux = DX / LEN, uz = DZ / LEN;
 let at = null, coughUntil = 0;
 function place(u) {
   const ax = G.PATH0[0] + DX * u, az = G.PATH0[1] + DZ * u;
-  scene.set('alfredo_a', ax - ux * 0.55); scene.set('alfredo_d', az - uz * 0.55);
-  scene.set('toto_a', ax + ux * 0.32); scene.set('toto_d', az + uz * 0.32);
+  scene.set('alfredo_a', ax); scene.set('alfredo_d', az);
+  scene.set('toto_a', ax + ux * 0.8); scene.set('toto_d', az + uz * 0.8);
 }
 scene.every(0.1, () => {
   const want = clamp(scene.get('drag'));
