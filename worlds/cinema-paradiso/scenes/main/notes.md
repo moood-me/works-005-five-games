@@ -57,10 +57,20 @@ z 23…26, по 0.25 м). Восток: банк (`bank`, z 8…22, дверь z
 Кусок за куском — `FILM` в `lib.js`: каждый `from` ставит всё, кроме ключей партии (`warm`, `place`, `with_mother`
 — их ставит игра); `demolition` читает `place` и `with_mother` в `run`.
 
+## Лица
+
+Ключевые минуты кончаются средним или крупным планом лица в 3/4 (`faceCam`, `aim` в `lib.js`; склейка — снимок
+готовится заранее, `cutTo`; или камера едет, `glide`): мать и мальчик у дверей (`after_show`), ладонь Альфредо с
+монетами и трое у дверей под выбор (`alfredo_down`), Альфредо машет (`coins_taken`), лицо матери перед пощёчиной
+(`slap`), мать с бумагой и мальчик у афиши (`paper`), Альфредо на краю фонтана с лицом к нам (`outside`), Альфредо
+смотрит вслед (`go_alone`), Елена и Тото у фонтана (`hello`), «Почему?» — «Не знаю» (`story_door`), её лицо над
+его плечом (`midnight`, `midnight_close`), лицо девушки у улицы к морю (`girl`, потом обратно в `GIRL` под выбор),
+Сальваторе у забитой двери (`let`), Сальваторе с жестянкой (`widow`), лицо Анны через его плечо (`widow_late`). Выбор
+всегда на общем или среднем плане. Свет на лица: `porch_fill`, фонарь на фасаде «Парадизо» (`par_lamp`), фонари площади.
+
 ## Чего нет и что слабо
 
-- Лица `simple` в стиле каста на среднем плане читаются слабо (мелкие и тёмные): нужен свет на лицо — у дверей
-  «Парадизо» добавлен `porch_fill`; крупных планов лиц сцена сама не делает (кроме `midnight_close`).
+- Широкие тела (пиджак Альфредо — «коробка») — каст, не сцена.
 - `pour`, `give_coins`, `phone_ear`, `cane_sit` — слабые движения каста: руки поддержаны `reach` (монеты вперёд,
   трубка у головы).
 - Фейерверк — искры частиц над южными домами и свет `flash`; в кадре `BALCONY` их видно над крышами.
@@ -68,7 +78,8 @@ z 23…26, по 0.25 м). Восток: банк (`bank`, z 8…22, дверь z
   как сказано (из (−1.5, 10.5) до края было 1.6 м). `EVE` — (−1, −8), яв 3.6 (из (0, −10) окошко будки закрывает дом
   улицы; так окошко и балкон оба в средних 4:3). `WIDE` — яв −8 (окошко будки дальше от края 4:3). `RUIN` — (6, 8), яв −85 (фонтан не перед фасадом). `BALCONY` — взгляд вверх 12°, чтобы балкон был в кадре.
   `stay_door` кончается, когда процессия уходит из середины кадра (`cart` 0.57); `widow_late` начинается склейкой —
-  площадь уже пуста.
+  площадь уже пуста. `FUNERAL` — (−5, 18), яв −150: процессия идёт с юга к объективу вдоль западной стороны, «Парадизо»
+  справа; в `walk_behind` / `stay_door` камера поворачивается за ней.
 
 ## Контракт для проверки
 
@@ -111,5 +122,5 @@ z 23…26, по 0.25 м). Восток: банк (`bank`, z 8…22, дверь z
   "demolition": {"after":[],"tells":["demolition:whistle","demolition:blast"],"seconds":26,"show":false},
   "dust": {"after":["demolition"],"tells":["dust:madman"],"seconds":16,"show":false}
 },
-"points":["paradiso","paradiso#door","paradiso#booth_window","paradiso#poster","wall#screen","mother_window","balcony","bank#door","chalk_wall#chalk","hearse","hearse#handle_l","hearse#handle_r","hearse#rail","alfredo_door#door","canopy_front#marquee","toto","alfredo","maria","elena","daughter","madman","anna","bearer1","bearer2","c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","alfredo#hand_r","alfredo#pocket","toto#hand_l","toto#hand_r","toto#shoulder_r","toto#nape","elena#back","maria#hand_l","maria#hand_r"],"offers":["paradiso#booth_window","alfredo#hand_r","toto","alfredo","elena","balcony","daughter","hearse","chalk_wall#chalk","wall#screen"],"party":{"warm":0.5,"place":"crowd","with_mother":0},"keys":{"beat_next":"","beam_aim":0,"beam_focus":0,"wall_film":"none","beam_on":0,"chalk":0,"mark_chalk":0,"night_kind":"clear","elena_window":0,"poster":0,"full_sign":0,"viewfinder":0,"pan":0,"elena_x":1,"madman_x":-1,"rec":0}}
+"points":["paradiso","paradiso#door","paradiso#booth_window","paradiso#poster","wall#screen","mother_window","balcony","bank#door","chalk_wall#chalk","hearse","hearse#handle_l","hearse#handle_r","hearse#rail","alfredo_door#door","canopy_front#marquee","toto","alfredo","maria","elena","daughter","madman","anna","bearer1","bearer2","c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","alfredo#hand_r","alfredo#pocket","toto#hand_l","toto#hand_r","toto#shoulder_r","toto#nape","elena#back","maria#hand_l","maria#hand_r","paradiso#lamp"],"offers":["paradiso#booth_window","alfredo#hand_r","toto","alfredo","elena","balcony","daughter","hearse","chalk_wall#chalk","wall#screen"],"party":{"warm":0.5,"place":"crowd","with_mother":0},"keys":{"beat_next":"","beam_aim":0,"beam_focus":0,"wall_film":"none","beam_on":0,"chalk":0,"mark_chalk":0,"night_kind":"clear","elena_window":0,"poster":0,"full_sign":0,"viewfinder":0,"pan":0,"elena_x":1,"madman_x":-1,"rec":0}}
 ```
