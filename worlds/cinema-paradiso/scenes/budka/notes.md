@@ -69,7 +69,7 @@ door. `CAL` (1.25, 0.95; 172) — close at the calendar (`note_close`).
 | lesson | — | OPER, evening: the boy (9) on the crate at projector 1, Alfredo's hand on his shoulder; the thread insert opens | lesson:crate |
 | motor | — | the insert shut: Alfredo turns the crank, the beam, the port lights; `stutter` 1 — the frame trembles (`jitter`) till his palm on the gate; the boy to projector 2's lever, Alfredo's hand there too | motor:beam, motor:lever |
 | window | — | SQUARE, night: Alfredo at the window, smiling; he turns projector 1 to the window (`turned` 0 → 1) | window:hands |
-| jam | — | turned; the boy runs down; fire in the gate and on the reel; Alfredo reaches, falls (`fall_back`) | jam:flame |
+| jam | — | turned; the boy runs down; fire in the gate and on the reel; Alfredo reaches, recoils (the first second of `fall_back`, which in the engine never reaches the floor) and collapses into `sleep` | jam:flame |
 | smoke_in | — | FLOOR: smoke, fire; Alfredo lying on his side, the boy runs to him, kneels at his shoulders, hands at his nape | — |
 | story_booth | — | DOOR: blind Alfredo on the stool (`cane_sit`, `tell_hand`) facing the window, his face to us; Toto (17) on the bench's edge facing him and us | story_booth:start, :99, :why |
 | reels | — | DOOR: Toto at the bench changing reels (Alfredo on the stool if `alfredo_here`); the door: Elena; the hug in the door, her face over his shoulder; the tail flaps (the hall's screen white) | reels:door, reels:hug, reels:tail |
