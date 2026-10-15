@@ -158,6 +158,7 @@ function projProfile(g, e, ruin) {
   g.fillStyle = iron; g.fillRect(-0.36, -1.98, 0.16, 0.3);                    // the lamp house's chimney
   g.fillStyle = ruin ? '#3a2a22' : '#1b1b1e'; g.fillRect(0.38, -1.56, 0.12, 0.12);   // the lens barrel
   g.fillStyle = ruin ? '#4a3a32' : '#8f8c84'; g.fillRect(0.49, -1.55, 0.02, 0.1);
+  e.at(0.08, -2.2, 'reel');
   if (!ruin) {
     e.layer('rt', { pivot: [0.08, -2.2] }, r => k.reel(r, 0.08, -2.2, 0.28));
     e.layer('rl', { pivot: [0.0, -0.58] }, r => k.reel(r, 0.0, -0.58, 0.2));
@@ -240,7 +241,7 @@ const FILM = {
       s.tell('cutting:bench');
       s.move('door', 0, { over: 1.5 }); s.move('stair', 0, { over: 1.5 });
       await s.wait(2.4);
-      alf.look('press#press'); await alf.turn(90); alf.do(WORK);
+      alf.look('press#press'); await alf.turn(90); alf.do('bench_work', { loop: true });
       await s.wait(1.0);
     },
   },
@@ -332,7 +333,9 @@ const FILM = {
     run: async s => {
       const alf = s.person('alfredo');
       alf.do('lift_show');
-      await s.wait(2); s.tell('slate_out:up');
+      await s.wait(0.8);
+      alf.reach({ r: [G.STOOL[0] - 0.08, G.STOOL[1] + 0.32, 1.22], l: [G.STOOL[0] - 0.3, G.STOOL[1] + 0.22, 1.22] });
+      await s.wait(1.2); s.tell('slate_out:up');
       await s.wait(3.5);
     },
   },
@@ -390,7 +393,7 @@ const FILM = {
       await s.wait(1); s.tell('window:hands');
       await s.wait(1.6);
       await walk(s, 'alfredo', [P.ALF_PUSH]); await alf.turn(70);
-      alf.look('projector'); alf.reach({ r: 'projector#side', l: 'projector#lever' }); alf.do('push_turn');
+      alf.look('projector'); alf.reach({ r: 'projector', l: 'projector#lever' }); alf.do('push_turn');
       await s.move('turned', 1, { over: 2.6 });
       alf.reach(null); alf.do('stand');
       await s.wait(1.2);
@@ -420,8 +423,8 @@ const FILM = {
   // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
   smoke_in: {
     from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
-      alfredo: { at: BEHIND(0), turn: (PATH_TURN + 180) % 360, do: { motion: 'lay_down', from: 99 }, steps: false, mood: 'tired' },
-      toto: { at: AHEAD(0), turn: PATH_TURN, do: { motion: 'kneel_down', from: 99 }, reach: { r: 'alfredo#nape', l: 'alfredo#nape' }, mood: 'afraid' } }) }),
+      alfredo: { at: BEHIND(0), turn: (PATH_TURN + 180) % 360, do: { motion: 'fall_back', from: 2.95 }, steps: false, mood: 'tired' },
+      toto: { at: AHEAD(0), turn: PATH_TURN, do: { motion: 'kneel_down', from: 3.95 }, reach: { r: 'alfredo#nape', l: 'alfredo#nape' }, mood: 'afraid' } }) }),
     run: async s => { await s.wait(3.5); },
   },
   // III.2 — Alfredo (blind) on the stool tells of the soldier; Toto (17) on the bench's edge
@@ -432,12 +435,12 @@ const FILM = {
     run: async s => {
       const alf = s.person('alfredo'), toto = s.person('toto');
       await s.wait(1); s.tell('story_booth:start');
-      alf.look([1.25, 1.2, 1.3]); alf.do({ motion: 'tell_hand', loop: true });
+      alf.look([1.25, 1.2, 1.3]); alf.do('tell_hand', { loop: true });
       await s.wait(4); alf.look(null);
       await s.wait(5); s.tell('story_booth:99');
       await s.wait(6); toto.mood('surprised');
       await s.wait(1); s.tell('story_booth:why');
-      alf.look([1.3, 1.3, 1.3]); alf.do(CANE);
+      alf.look([1.3, 1.3, 1.3]); alf.do('cane_sit', { loop: true });
       await s.wait(3); alf.mood('smile'); toto.mood('thinking');
       await s.wait(5);
     },
@@ -504,7 +507,7 @@ const FILM = {
         await walk(s, 'alfredo', [P.IN_DOOR, [1.3, 1.1], [1.05, 1.15]]);
         alf.gait(null);
         await alf.go('sit_down', { to: G.STOOL, turn: 230 });
-        alf.on(SEAT); alf.do(CANE);
+        alf.on(SEAT); alf.do('cane_sit', { loop: true });
         s.move('door', 0, { over: 1.2 }); s.set('stair', 0);
         toto.look('alfredo');
       } else {
@@ -598,7 +601,7 @@ const FILM = {
   },
   // dawn: Alfredo dozing on the stool wakes; Toto comes in: «Она приходила?» — «Нет»
   morning: {
-    from: () => ({ ...base(0.27), ...show(2), month: 9, clock: 6, lamp: 0.5, beam_on: 0, motor2: 0, ...CAM.CLOSE, ...people({
+    from: () => ({ ...base(0.27), ...show(2), month: 9, clock: 6, lamp: 0.9, beam_on: 0, motor2: 0, ...CAM.CLOSE, ...people({
       alfredo: blind({ turn: 330, do: { motion: 'doze', loop: true }, mood: 'neutral' }),
       toto: teen({ at: P.LANDING, turn: 270, look: 'alfredo', mood: 'thinking' }) }), toto_here: false }),
     run: async s => {
@@ -608,7 +611,7 @@ const FILM = {
       await s.move('door', 1, { over: 0.7 });
       s.tell('morning:in');
       await walk(s, 'toto', [P.TOTO_IN]); await toto.turn(305);
-      alf.do(CANE); alf.look('toto');
+      alf.do('cane_sit', { loop: true }); alf.look(null);
       await s.wait(4.5);
     },
   },

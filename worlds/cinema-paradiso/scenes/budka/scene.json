@@ -66,10 +66,10 @@
         }
       },
       "smoke": {
-        "haze": 0.85,
+        "haze": 0.7,
         "hazeColor": "#4a443e",
-        "hazeGlow": 1.6,
-        "ambient": 0.3
+        "hazeGlow": 0.9,
+        "ambient": 0.34
       }
     }
   },
@@ -1397,10 +1397,45 @@
         "at": "projector#gate",
         "amount": "fire",
         "size": [
-          0.22,
-          0.05
+          0.34,
+          0.08
         ],
-        "rate": 60
+        "rate": 80
+      },
+      "inside": true
+    },
+    {
+      "id": "fire_lens",
+      "name": "Огонь у объектива",
+      "particles": {
+        "kind": "fire",
+        "at": "projector#lens",
+        "amount": "fire",
+        "size": [
+          0.3,
+          0.06
+        ],
+        "rate": 50
+      },
+      "inside": true
+    },
+    {
+      "id": "fire_reel",
+      "name": "Огонь по бобине",
+      "particles": {
+        "kind": "fire",
+        "at": "p1_side#reel",
+        "amount": "fire",
+        "size": [
+          0.4,
+          0.08
+        ],
+        "rate": 70,
+        "source": [
+          0.3,
+          0.3,
+          0.3
+        ]
       },
       "inside": true
     },
