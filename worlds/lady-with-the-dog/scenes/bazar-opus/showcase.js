@@ -1,32 +1,24 @@
 // Outside the game: the finale. He comes in; she stays at the window; his hands on her shoulders, the grey temple in
-// the mirror; tea; she weeps at the window; together at the window, they turn to each other — the window, the door,
-// the table; the camera draws back. Then, as another party has it: the thaw, the spitz on the armchair, and she comes
-// to meet him at the door.
-const beat = name => async s => {
-  s.set('beat', name);
-  await s.until(() => s.state.beat_end === name);
+// the mirror; tea (poured by hand here, as the game would); she weeps at the window; the two at the window, in profile
+// in the lamp's light; the window, the door, the glasses; the camera draws back and he looks at his watch. Then, as
+// another party has it: the thaw, and she comes to meet him at the door.
+const F = scene.lib.film(scene);
+const beats = scene.kit.beats.showcase(scene, F, ['bazar_in', 'shoulders', 'tea', 'weep', 'cages', 'sovet', 'bazar_end']);
+const after = {
+  tea: async s => {
+    await s.move('glass_at', 1, { over: 1.5, ease: 'inOut' });
+    s.set('tap', 1);
+    await s.move('fill', 0.95, { over: 3.5 });
+    s.set('tap', 0);
+    await s.wait(0.8);
+  },
+  sovet: async s => { for (const t of ['window', 'door', 'table']) { s.set('think', t); await s.wait(2.2); } },
 };
 return [
-  { name: 'bazar_in', run: beat('bazar_in') },
-  { name: 'shoulders', run: beat('shoulders') },
-  { name: 'tea', run: async s => {
-    await beat('tea')(s);
-    s.set('tap', 1);
-    await s.move('fill', 0.9, { over: 4 });
-    s.set('tap', 0);
-    await s.wait(1);
-  } },
-  { name: 'weep', run: beat('weep') },
-  { name: 'cages', run: beat('cages') },
-  { name: 'sovet', run: async s => {
-    await beat('sovet')(s);
-    for (const t of ['window', 'door', 'table']) { s.set('think', t); await s.wait(2.5); }
-  } },
-  { name: 'bazar_end', run: beat('bazar_end') },
+  ...beats.map(b => after[b.name] ? { name: b.name, run: async s => { await b.run(s); await after[b.name](s); } } : b),
   { name: 'another party', run: async s => {
-    s.set('spring', 1);
-    s.set('dog_here', 1);
-    s.set('anna_life', 1);
-    await beat('bazar_in')(s);
+    s.set('spring', 1); s.set('anna_life', 1); s.set('husband_knows', 1);
+    s.cut(F.bazar_in.from());
+    await F.bazar_in.run(s);
   } },
 ];
