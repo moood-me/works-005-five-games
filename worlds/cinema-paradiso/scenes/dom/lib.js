@@ -269,15 +269,17 @@ const FILM = {
         await t.go('sit_down', { to: P.S_BED, turn: 210 });
         t.do('seated', { loop: true });
       }
-      // (the reel has run out: the little square goes dark)
+      // (the reel has run out: the little square goes dark) — she comes a step into the corner with her lamp
       s.move('projector_on', 0, { over: 1.5 });
+      t.look('maria');
       m.reach(null);
-      await m.walk([P.M_IN]);
-      await m.turn(78);
-      m.reach({ r: LAMP_IN });
-      t.look('maria'); m.look('toto');
+      const step = m.walk([P.M_IN]);
       await s.wait(1);
       s.tell('question:asked');
+      await step;
+      await m.turn(78);
+      m.reach({ r: LAMP_IN });
+      m.look('toto');
       await s.wait(3);
       t.look([1.6, 0.6, 1.0]);
       await s.wait(3);
