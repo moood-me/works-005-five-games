@@ -72,14 +72,14 @@ const FILM = {
     from: () => ({ lights: 1, beam_on: 0, screen_film: 'none', reel: 0, ...sal({}), ...CAM.PORT }),
     run: async s => {
       await s.wait(1.5);
-      await s.move('lights', 0.15, { over: 4, ease: 'inOut' });
+      await s.move('lights', 0.3, { over: 4, ease: 'inOut' });
       s.tell('rome:sat');
       await s.wait(2.5);
     },
   },
   kisses: {
     after: ['rome'],
-    from: () => ({ lights: 0.1, beam_on: 0, screen_film: 'none', reel: 0, ...sal({}), ...CAM.PORT }),
+    from: () => ({ lights: 0.3, beam_on: 0, screen_film: 'none', reel: 0, ...sal({}), ...CAM.PORT }),
     run: async s => {
       const he = s.person('toto');
       s.move('beam_on', 1, { over: 0.4, ease: 'out' });
@@ -105,7 +105,7 @@ const FILM = {
   },
   kisses_end: {
     after: ['kisses'],
-    from: () => ({ lights: 0.1, beam_on: 1, screen_film: 'kisses', reel: REEL.length - 1, ...sal({ toto_mood: 'smile' }), ...CAM.FACE }),
+    from: () => ({ lights: 0.3, beam_on: 1, screen_film: 'kisses', reel: REEL.length - 1, ...sal({ toto_mood: 'smile' }), ...CAM.FACE }),
     run: async s => {
       const he = s.person('toto');
       // over his shoulder: the last kiss held, then the white; back to his face in the white light
