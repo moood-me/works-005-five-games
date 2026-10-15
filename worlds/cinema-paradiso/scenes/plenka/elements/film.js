@@ -2,7 +2,7 @@
 // in the middle. A map: the chapter's heading at the top and the rows as frames — each cut into parts by its options:
 // the chosen one glowing warm (the lamp through the film), its words dark on it; the one passed over dark, its words
 // barely seen; the one never reached black, without a word. ⚑ big frames, ~ small. Painted whole, once a map (it does
-// not read `reveal`): the base — the glow round what is lit (its shader makes it light: emission); layer 1 — the strips
+// not read `reveal`): the base — nothing (the lit parts of the frames are light: film.wgsl); layer 1 — the strips
 // themselves, every frame unexposed; 2 — what the frames show and the words; 3 — when each frame comes up (grey: its
 // order 0…1; never shown). How the strip slides into the light and the frames come up — the shader (film.wgsl).
 var A = e.aspect;
@@ -136,19 +136,4 @@ function clampU(v) {
   return Math.max(0, Math.min(1, v));
 }
 
-// the base: the glow round what the lamp shines through
-var glow = function (x, y, r, a) {
-  var gr = g.createRadialGradient(x, y, 0, x, y, r);
-  gr.addColorStop(0, "rgba(255,206,140," + a + ")");
-  gr.addColorStop(1, "rgba(255,206,140,0)");
-  g.fillStyle = gr;
-  g.fillRect(x - r, y - r, 2 * r, 2 * r);
-};
-if (L.big) glow(A / 2, L.big.y + L.big.h / 2, L.big.w * 0.62, 0.45);
-for (var k = 0; k < L.frames.length; k++) {
-  var Fk = L.frames[k];
-  for (var q = 0; q < Fk.parts.length; q++) {
-    var Pq = Fk.parts[q];
-    if (Pq.state === "chosen") glow((Pq.x0 + Pq.x1) / 2, Fk.y + Fk.h / 2, Math.max(Pq.x1 - Pq.x0, Fk.h) * 0.6, 0.4);
-  }
-}
+// the base: nothing — what shines is the lit film itself (film.wgsl: the frames' warm parts as light)
