@@ -34,21 +34,21 @@ scene.on("change", "guide", (v) => {
   if (atBench() && !L.yachtMade(scene.state)) P("longren").reach(v > 0.5 ? { r: "work" } : null);
 });
 // «Смотри» (`gaze` 0…1), all the way: while she sits with the book, her eyes go from the page up to the window with it
-// (lib.js gazed) — and the camera with them: where the film has it lowered to the page (camera_pitch: the beat `look`),
-// `gaze` gives back as much of that as it has risen (camera_look, screen heights), level at 1.
+// (lib.js gazed). The camera stands while the game's gesture leads them (under a gesture at a point nothing moves) and
+// rises once they are at the window: where the film has it lowered to the page (camera_pitch: the beat `look`), `gaze`
+// 1 gives it back level (camera_look, screen heights), over RISE.
 const eyes = () => {
   const gaze = scene.get("gaze");
   if (scene.get("assol_on") && L.reading(scene.state)) P("assol").look(gaze > 0 ? L.gazed(gaze) : "assol#hands");
 };
 for (const on of ["change", "move"]) scene.on(on, "gaze", eyes);
-// The camera is led there by the director, a little behind (a camera's key set at once is a new shot to the engine; a
-// move begun anew each frame `gaze` moves would never get going): where it should be is looked at twice in a move's
-// length, the next move given before the last ends.
-const LEAD = 0.12;
+// The camera is led there by the director (a camera's key set at once is a new shot to the engine): where it should be
+// is looked at every LEAD / 2; a new place — a move there over RISE.
+const LEAD = 0.12, RISE = 1.5;
 let led = null, lead = null;
 scene.every(LEAD / 2, () => {
-  const to = Math.tan(((scene.get("camera_pitch") || 0) * Math.PI) / 180) * (scene.get("gaze") || 0);
+  const to = (scene.get("gaze") || 0) >= 1 ? Math.tan(((scene.get("camera_pitch") || 0) * Math.PI) / 180) : 0;
   if (to === led && !(lead.done && scene.get("camera_look") !== to)) return;
   led = to;
-  lead = scene.move("camera_look", to, { over: LEAD, ease: "linear" });
+  lead = scene.move("camera_look", to, { over: RISE, ease: "linear" });
 });

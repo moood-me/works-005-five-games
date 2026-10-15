@@ -1,5 +1,5 @@
 // Лавка в Лиссе — what the shop's elements share (the street's sky, the wares on the shelves, the rack and the counter, the
-// street's facades, the rolls of silk and where they are, the two inserts of the scarlet scrap) and its film in beats
+// street's facades, the rolls of silk and where they are, the insert of the scarlet scrap) and its film in beats
 // (film(scene), at the end: the world's module beats — notes.md lists them).
 const N = kit.nebo;
 const num = (v) => +v || 0;
@@ -475,12 +475,10 @@ function rollMotion(e) {
   e.at(x - 0.4 * out, y + R.radius + 0.2 + 0.5 * out * R.drop * 0.5);
 }
 
-// ── the inserts of the scarlet scrap (the closeups module, shot "scrap"): `memory` fills the frame, `scrap` is the same
-// scrap small in an oval in the upper left (the module paints it small by `frame`). The pictures read nothing of the scene;
-// what moves in them (the fingers closing on the scrap: `taken`) is `now`, which here is always closed ──
+// ── the insert of the scarlet scrap (the closeups module, shot "scrap"): `memory` fills the frame (in the game's «Алый»
+// the scrap to compare with is the sample on the plate of the language of mini-games). The picture reads nothing of
+// the scene; what moves in it (the fingers closing on the scrap: `taken`) is `now`, which here is always closed ──
 const SCRAP_NOW = { taken: 1 };
-const CORNER = [0.38, 0.21, 0.075, 0.075]; // the oval: centre and radii, in stage heights
-const CORNER_FRAME = { at: [CORNER[0], CORNER[1]], scale: 0.3 };
 
 // ── the film ──
 // where things are (metres: across, distance)
@@ -526,7 +524,7 @@ function film(scene) {
   // ── the states the beats begin at ──
   const room = {
     fade: 0, camera_target: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, hour: 0.4, goods: "toys", roll: "none", roll_out: 0, roll_at: "rack",
-    found: 0, violinist: 0, memory: 0, scrap: 0, basket: 0, basket_d: BASKET[1],
+    found: 0, violinist: 0, memory: 0, basket: 0, basket_d: BASKET[1],
   };
   const merchant = stands("merchant", "mer", M, 180, { merchant_look: LOOK_DOWN, merchant_on: null, merchant_still: false });
   const seated = stands("merchant", "mer", M, 180, { merchant_look: LOOK_DOWN, merchant_on: STOOL, merchant_do: loop("seated"), merchant_still: false });
@@ -543,9 +541,9 @@ function film(scene) {
   const COUNTER = whole({
     ...SILK, roll_at: "grey", ...merchant, ...noAssol, ...stands("grey", "gr", AT_COUNTER, 0, {}), ...stands("letika", "le", BY_DOOR, 180, {}),
   });
-  // Grey in the beam by the window, the roll held toward the light; the scrap in the corner; the merchant at his shelves
+  // Grey in the beam by the window, the roll held toward the light; the merchant at his shelves
   const WINDOW = {
-    ...COUNTER, scrap: 1, ...stands("grey", "gr", AT_WINDOW, TO_WINDOW, { grey_do: loop("hold_up") }), merchant_turn: 0, merchant_look: null,
+    ...COUNTER, ...stands("grey", "gr", AT_WINDOW, TO_WINDOW, { grey_do: loop("hold_up") }), merchant_turn: 0, merchant_look: null,
   };
   const FOUND = { ...WINDOW, roll: "scarlet", roll_out: 1 };
   const FOUND_NEAR = { ...FOUND, found: 1, ...FOUND_CAM, merchant_still: true };
@@ -632,13 +630,13 @@ function film(scene) {
         await s.wait(0.4);
       },
     },
-    // memory — the scarlet scrap of the first chapter fills the frame (3 s), then stays small in the corner
+    // memory — the scarlet scrap of the first chapter fills the frame (3 s)
     memory: {
       after: "silk_in",
       from: () => COUNTER,
       run: async (s) => {
         const insert = s.shot({ memory: 1 });
-        const back = s.shot({ memory: 0, scrap: 1 });
+        const back = s.shot({ memory: 0 });
         await s.wait(0.4);
         await s.until(() => insert.ready && back.ready);
         insert.cut();
@@ -652,7 +650,7 @@ function film(scene) {
     // The game's «Алый» goes on from here
     silk: {
       after: "memory",
-      from: () => ({ ...COUNTER, scrap: 1 }),
+      from: () => COUNTER,
       run: async (s) => {
         const gr = s.person("grey"), me = s.person("merchant");
         me.look(null);
@@ -702,4 +700,4 @@ function film(scene) {
     },
   };
 }
-return { SKY, paintShelves, paintRack, paintCounterTop, paintBasket, facade, paintRoll, rollPlace, rollMotion, ROLL_NAMES, SCRAP_NOW, CORNER_FRAME, film, ORDER };
+return { SKY, paintShelves, paintRack, paintCounterTop, paintBasket, facade, paintRoll, rollPlace, rollMotion, ROLL_NAMES, SCRAP_NOW, film, ORDER };

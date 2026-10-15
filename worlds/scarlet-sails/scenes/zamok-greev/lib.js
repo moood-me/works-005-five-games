@@ -150,8 +150,9 @@ function chairSide(g) {
 
 // ── the canvas close (the insert `canvas`): the crucifixion k times its size, its foot at y0 (stage heights, across
 // from the frame's middle); where the brush's tip waits (`hand`), and where the boy's shoulder is under the frame when
-// the tip is at x (`shoulder`: the arm reaches up from there) ──
-const CLOSE = { k: 0.46, y0: 1.08, hand: aspect => [aspect / 2 + 0.2, 0.97], shoulder: (aspect, x) => [(x + aspect / 2) / 2 + 0.1, 1.9] };
+// the tip is at x (`shoulder`: the arm reaches up from there). Its size and place keep the three nails (the game's
+// «Кисть» marks them) within the frame's middle band: the hands' at 0.2 of its height, the feet's at 0.76 ──
+const CLOSE = { k: 0.37, y0: 0.935, hand: aspect => [aspect / 2 + 0.2, 0.97], shoulder: (aspect, x) => [(x + aspect / 2) / 2 + 0.1, 1.9] };
 
 // ── the hour ──
 // The hall looks north-north-west (azimuth 340): its windows on the left face the west-south-west, the sun comes in at
