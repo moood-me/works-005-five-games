@@ -285,7 +285,7 @@ function splice(g, e) {
   });
   // the press's lid, its hand on it (one layer per joint: it comes down as it is pressed)
   P.cuts.forEach((xc, n) => {
-    C.layer(`press${n + 1}`, [xc, P.y], [xc - 0.35, P.top - 0.75, xc + 0.35, P.bot + 0.08], q => {
+    C.layer(`press${n + 1}`, [xc, P.y], [xc - 0.15, P.top - 0.1, xc + 1.6, P.bot + 0.7], q => {
       // the splicer's lid seen from above: a steel plate the width of the film, its hinge pins, a knob — its shadow
       q.fillStyle = 'rgba(8,5,3,0.45)'; q.fillRect(xc - 0.085, P.top - 0.005, 0.19, P.h + 0.04);
       const gr = q.createLinearGradient(xc - 0.09, 0, xc + 0.09, 0); gr.addColorStop(0, '#3e3f44'); gr.addColorStop(0.45, '#9a9ba2'); gr.addColorStop(0.55, '#b4b5bc'); gr.addColorStop(1, '#3a3b40');
@@ -293,7 +293,7 @@ function splice(g, e) {
       q.fillStyle = 'rgba(255,240,210,0.25)'; q.fillRect(xc - 0.09, P.top - 0.02, 0.18, 0.006);
       for (const yy of [P.top + 0.02, P.bot - 0.02]) for (const xx of [xc - 0.06, xc + 0.06]) oval(q, xx, yy, 0.008, 0.008, 0, '#2a2a2e');
       oval(q, xc, P.y, 0.035, 0.035, 0, '#2e2a26'); oval(q, xc - 0.008, P.y - 0.008, 0.02, 0.02, 0, '#5a4a3a');
-      hand(q, aim({ ...P.right, view: 'back', angle: Math.PI / 2 + 0.1, curl: [0.2, 0.22, 0.26, 0.3], spread: 0.25, thumb: { angle: -0.9, curl: 0.2 } }, 1, [xc + 0.01, P.y + 0.02]), P.light);
+      hand(q, aim({ ...P.right, view: 'back', side: -1, angle: Math.PI - 0.35, curl: [0.25, 0.3, 0.35, 0.4], spread: 0.2, thumb: { angle: -0.6, curl: 0.3 } }, 1, [xc + 0.015, P.y + 0.01]), P.light);
     });
   });
   // the scissors in his right hand: painted at the first cut's top; moved to the cut going on
@@ -358,7 +358,7 @@ const SLATE = {
   start: [-0.56, 0.0], end: [0.56, 0.0],
   light: { dir: [0.4, -0.9], colour: '#ffd9a0' },
 };
-SLATE.big = handOf('alfredo', { angle: -2.25, curl: [0.3, 0.55, 0.7, 0.75], spread: 0.15, thumb: { angle: -0.35, curl: 0.45 }, fine: true });
+SLATE.big = handOf('alfredo', { angle: -2.25, curl: [0.42, 0.62, 0.72, 0.78], spread: 0.12, thumb: { angle: -0.25, curl: 0.55 }, fine: true });
 SLATE.small = handOf('boy', { angle: -2.3, curl: [0.2, 0.25, 0.3, 0.35], spread: 0.3, thumb: { angle: -0.6, curl: 0.25 }, fine: true });
 const letterX = i => SLATE.x0 + (SLATE.x1 - SLATE.x0) * (i + 0.5) / 8;
 function slate(g, e) {
@@ -393,11 +393,15 @@ function slate(g, e) {
   // the two hands with the chalk: painted with the chalk at the first letter; carried along
   const [hx, hy] = P.start;
   C.layer('hands', [hx, hy], [hx - 0.25, hy - 0.1, hx + 0.9, hy + 0.9], h => {
-    oval(h, hx, hy, 0.016, 0.01, 0.4, '#efeee6');
-    line(h, hx, hy, hx + 0.03, hy + 0.04, 0.02, '#e8e6dc');
-    const big = aim(P.big, 0, [hx + 0.012, hy + 0.012]);
+    // the chalk: a short white stick from the slate up into the big hand's pinch, its point on the letter
+    const grip = [hx + 0.05, hy + 0.055];
+    const big = aim(P.big, 0, grip);
     hand(h, big, P.light);
-    hand(h, aim(P.small, 1, handPoint(big, [0.78, 0.02])), P.light);
+    line(h, hx, hy, grip[0] + 0.012, grip[1] + 0.014, 0.022, '#f2f0e8');
+    line(h, hx + 0.004, hy - 0.002, grip[0] + 0.008, grip[1] + 0.004, 0.006, 'rgba(255,255,255,0.8)');
+    oval(h, hx, hy, 0.012, 0.009, 0.7, '#ffffff');
+    // the boy's hand lies on the back of Alfredo's, its fingertips on his knuckles — the chalk free
+    hand(h, aim(P.small, 1, handPoint(big, [0.5, 0.02])), P.light);
   });
   C.layer('lamp', [0.1, -0.75], null, l => pool(l, 0.1, -0.75, 0.6, '#fff0c8', 0.35), { blend: 'add', flicker: 0.04 });
   C.at(...P.start, 'start'); C.at(...P.end, 'end');
@@ -601,11 +605,15 @@ function calendar(g, e) {
   const C = painter(g, e), P = CAL, S = e.state, pages = clamp(Math.round(Number(S.pages) || 0), 0, 4);
   C.begin();
   // the booth's plaster wall, cold light from the window on the left; the door's leaf at the right edge
-  const wall = g.createLinearGradient(-W, 0, W, 0); wall.addColorStop(0, '#8a8a94'); wall.addColorStop(0.5, '#6a6670'); wall.addColorStop(1, '#3a363c');
+  const wall = g.createLinearGradient(-W, 0, W, 0); wall.addColorStop(0, '#8e8478'); wall.addColorStop(0.5, '#6f665c'); wall.addColorStop(1, '#3c3631');
   g.fillStyle = wall; g.fillRect(-W, -0.6, 2 * W, 1.2);
-  for (let i = 0; i < 90; i++) oval(g, -W + 2 * W * C.rnd(), -0.6 + 1.2 * C.rnd(), 0.03 + 0.1 * C.rnd(), 0.02 + 0.06 * C.rnd(), C.rnd() * 3, 'rgba(40,34,30,0.05)');
+  for (let i = 0; i < 40; i++) oval(g, -W + 2 * W * C.rnd(), -0.6 + 1.2 * C.rnd(), 0.05 + 0.12 * C.rnd(), 0.04 + 0.08 * C.rnd(), C.rnd() * 3, 'rgba(70,58,44,0.06)');
+  // cracks in the plaster, a water stain under the ceiling
+  for (const [x, y] of [[-0.9, -0.4], [0.62, 0.2], [-0.55, 0.35]]) { g.strokeStyle = 'rgba(40,32,26,0.35)'; g.lineWidth = 0.0025; g.beginPath(); g.moveTo(x, y); g.lineTo(x + 0.05, y + 0.06); g.lineTo(x + 0.03, y + 0.12); g.lineTo(x + 0.08, y + 0.17); g.stroke(); }
+  const stain = g.createLinearGradient(0, -0.6, 0, -0.35); stain.addColorStop(0, 'rgba(70,56,40,0.3)'); stain.addColorStop(1, 'rgba(70,56,40,0)');
+  g.fillStyle = stain; g.fillRect(-W, -0.6, 2 * W, 0.25);
   g.fillStyle = '#3a2c22'; g.fillRect(0.95, -0.6, W - 0.95, 1.2); g.fillStyle = '#2a1e16'; g.fillRect(0.95, -0.6, 0.03, 1.2);
-  pool(g, -1.2, -0.3, 1.4, '#b8c4dc', 0.25);
+  pool(g, -1.2, -0.3, 1.5, '#a9b4cc', 0.2);
   // the nail, the string
   oval(g, 0, P.top - 0.12, 0.008, 0.008, 0, '#2a2a2a'); line(g, -0.12, P.top - 0.01, 0, P.top - 0.12, 0.002, '#3a3030'); line(g, 0.12, P.top - 0.01, 0, P.top - 0.12, 0.002, '#3a3030');
   // the sheet on view (pages brought down: November … August over December), its shadow
@@ -625,9 +633,16 @@ function calendar(g, e) {
     C.layer('hand', [0, 0], [-0.1, -0.1, 0.1, 0.1], () => {});
   }
   // the dust of thirty years over it
-  C.layer('dust', [0, 0], [P.x0 - 0.05, P.top - 0.08, P.x1 + 0.05, P.bot + 0.05], d => {
-    d.fillStyle = 'rgba(150,146,140,0.45)'; d.fillRect(P.x0, P.top - 0.06, P.x1 - P.x0, P.bot - P.top + 0.06);
-    for (let i = 0; i < 260; i++) oval(d, P.x0 + (P.x1 - P.x0) * C.rnd(), P.top - 0.05 + (P.bot - P.top + 0.05) * C.rnd(), 0.002 + 0.004 * C.rnd(), 0.002 + 0.003 * C.rnd(), 0, 'rgba(190,186,176,0.6)');
+  C.layer('dust', [0, 0], [P.x0 - 0.08, P.top - 0.2, P.x1 + 0.05, P.bot + 0.05], d => {
+    // a grey film of dust over the paper, thicker toward the top where it settles, a dusty rim along the roll
+    const film = d.createLinearGradient(0, P.top - 0.06, 0, P.bot);
+    film.addColorStop(0, 'rgba(128,118,104,0.62)'); film.addColorStop(0.35, 'rgba(128,118,104,0.42)'); film.addColorStop(1, 'rgba(128,118,104,0.3)');
+    d.fillStyle = film; d.fillRect(P.x0, P.top - 0.06, P.x1 - P.x0, P.bot - P.top + 0.06);
+    d.fillStyle = 'rgba(110,100,88,0.5)'; d.fillRect(P.x0 - 0.004, P.top - 0.065, P.x1 - P.x0 + 0.008, 0.02);
+    for (let i = 0; i < 70; i++) oval(d, P.x0 + (P.x1 - P.x0) * C.rnd(), P.top - 0.05 + (P.bot - P.top + 0.05) * C.rnd(), 0.0015 + 0.002 * C.rnd(), 0.0015 + 0.0015 * C.rnd(), 0, 'rgba(84,76,66,0.45)');
+    // a few cobweb threads from the nail
+    d.strokeStyle = 'rgba(200,196,186,0.35)'; d.lineWidth = 0.0015;
+    d.beginPath(); d.moveTo(P.x0, P.top - 0.06); d.quadraticCurveTo(P.x0 - 0.04, P.top - 0.12, P.x0 + 0.05, P.top - 0.16); d.stroke();
   });
   C.at(0, P.top - 0.03 - Math.max(0, 3 - pages) * 0.008, 'fold');
   C.at(0, (P.top + P.bot) / 2);
@@ -720,9 +735,9 @@ function stripMove(e) {
 // ── wallet ── at the station in the cool evening: his hands open an old wallet; from it, between the fingers of the
 // right, one frame of film (kiss_cut2) rises against the station's lamp
 const WALLET = {
-  lamp: [0.18, -0.34],
-  left: aim(handOf('grown', { angle: -0.35, curl: [0.45, 0.5, 0.55, 0.6], spread: 0.15, thumb: { angle: -1.0, curl: 0.2 }, fine: true }), 1, [-0.3, 0.3]),
-  right: aim(handOf('grown', { angle: -Math.PI + 1.25, side: -1, curl: [0.15, 0.7, 0.78, 0.82], spread: 0.1, thumb: { angle: -0.3, curl: 0.45 }, fine: true }), 0, [0.1, 0.03]),
+  lamp: [-0.42, -0.36],
+  left: aim(handOf('grown', { angle: -0.1, curl: [0.62, 0.66, 0.7, 0.74], spread: 0.08, thumb: { angle: -1.3, curl: 0.15 }, fine: true }), 1, [-0.31, 0.25]),
+  right: aim(handOf('grown', { angle: -Math.PI / 2 - 0.35, side: -1, curl: [0.5, 0.78, 0.84, 0.88], spread: 0.08, thumb: { angle: -0.05, curl: 0.55 }, fine: true }), 0, [0.135, 0.035]),
   light: { dir: [0.3, -0.95], colour: '#f2e6c8' },
 };
 function wallet(g, e) {
