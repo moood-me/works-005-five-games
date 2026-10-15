@@ -549,9 +549,7 @@
     {
       "id": "wallet",
       "name": "Бумажник",
-      "insert": "wallet",
-      "code": "e.kit.closeups.wallet(g, e);",
-      "animate": "e.kit.closeups.walletMove(e);"
+      "insert": "wallet"
     }
   ],
   "state": {
