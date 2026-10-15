@@ -124,6 +124,13 @@
       "strength": 1,
       "reach": 5,
       "on": "headlights"
+    },
+    {
+      "id": "bench_light",
+      "of": "wall_lamp#bulb",
+      "color": "#e9e4d4",
+      "strength": 1.1,
+      "reach": 5.5
     }
   ],
   "state": {
@@ -688,6 +695,22 @@
         -0.55,
         1.4,
         0.05
+      ]
+    },
+    {
+      "id": "wall_lamp",
+      "name": "Фонарь на стене",
+      "across": -5.48,
+      "distance": 7.6,
+      "elevation": 2.75,
+      "facing": 90,
+      "glows": true,
+      "height": 0.3,
+      "box": [
+        -0.05,
+        -0.05,
+        0.72,
+        0.3
       ]
     },
     {

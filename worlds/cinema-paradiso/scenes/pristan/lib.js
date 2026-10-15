@@ -229,7 +229,7 @@ function film(scene) {
     found: cam(1.0, 41, 2, 0.2, 1),                       // down the mole to Toto on his bollard by the lantern
     hug: look([4.6, 62.1], [2.2, 59.25], -0.1, 4),        // from the head's corner by the lantern: her face over his shoulder, lit
     alone: cam(1.6, 51.5, 6, 0.2, 2),                     // Toto alone, his back, the sea and the moon's path
-    back: look([-2.45, 5.55], [-5.05, 7.65], -0.45, -2),  // the bench at dusk: Alfredo and Toto, faces 3/4, the mole and the sea behind
+    back: look([-3.0, 6.3], [-5.05, 7.6], -0.5, -1),  // the bench at dusk: Alfredo and Toto, faces 3/4, the mole and the sea behind
     carNow: look([0.4, 45.2], [-1.0, 58.4], 0.1, 1),      // 1988: the car on the head, Elena by it; the daughter goes; he comes
     meet: look([-5.3, 57.55], [-1.5, 57.6], -0.1, 1),     // from the west edge of the head, side on: the two in the headlamps' glow
   };
