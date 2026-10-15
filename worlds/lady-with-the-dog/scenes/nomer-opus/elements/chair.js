@@ -1,4 +1,5 @@
-// A bentwood chair seen from its side, its back on the left (he sits facing right, to the table).
+// A bentwood chair seen from its side, its back on the right against the wall (he sits facing left, to her).
+g.scale(-1, 1);
 g.strokeStyle = '#3a2a20'; g.lineWidth = 0.035; g.lineCap = 'round';
 g.beginPath();
 g.moveTo(-0.2, 0); g.lineTo(-0.17, -0.46); g.moveTo(0.2, 0); g.lineTo(0.17, -0.46);

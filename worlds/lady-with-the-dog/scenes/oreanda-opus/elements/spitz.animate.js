@@ -1,1 +1,1 @@
-e.kit.shpic_opus.live(e);
+e.kit.shpic.live(e);
