@@ -1,0 +1,1720 @@
+{
+ "engine": 3,
+ "title": "Палуба",
+ "caption": "Палуба парохода у борта: море, дым из трубы, порт на горизонте.",
+ "horizon": 0.45,
+ "camera": {
+  "mode": "walk",
+  "area": [
+   -5,
+   5,
+   -6,
+   30
+  ]
+ },
+ "modules": [
+  "svet",
+  "cast",
+  "beats"
+ ],
+ "relief": "return across > 5.7 ? -2.6 : across < -5.7 ? -5.5 : 0;",
+ "light": {
+  "vignette": 0.35,
+  "grain": 0.06,
+  "ambient": 1.0,
+  "ambientColor": "#f2f0ea",
+  "haze": 0.05,
+  "hazeColor": "#d2dee4",
+  "hazeGlow": 0.7,
+  "shafts": 0.1,
+  "saturation": 1.0,
+  "wind": [
+   -0.25,
+   -1,
+   0.9
+  ],
+  "inside": 0.55,
+  "looks": {
+   "dawn": {
+    "ambient": 0.85,
+    "ambientColor": "#f2cdb8",
+    "tint": "#ff9a70",
+    "tintStrength": 0.12,
+    "haze": 0.1,
+    "hazeColor": "#ecc0a6",
+    "shafts": 0.35,
+    "lights": {
+     "sun_day": 0.15
+    }
+   },
+   "night": {
+    "ambient": 0.55,
+    "ambientColor": "#6a7cb4",
+    "haze": 0.08,
+    "hazeColor": "#1e2a46",
+    "saturation": 0.82,
+    "shafts": 0.45,
+    "lights": {
+     "sun_day": 0,
+     "sun_dawn": 0
+    }
+   },
+   "fog": {
+    "haze": 0.5,
+    "hazeColor": "#c6c8c4",
+    "ambient": 0.95,
+    "ambientColor": "#e6e6e2",
+    "saturation": 0.78,
+    "shafts": 0.2,
+    "lights": {
+     "sun_day": 0.4
+    }
+   }
+  }
+ },
+ "lights": [
+  {
+   "id": "sun_day",
+   "from": [
+    150,
+    42
+   ],
+   "color": "#fff2dc",
+   "strength": 1.0
+  },
+  {
+   "id": "sun_dawn",
+   "from": "sky#sun",
+   "color": "#ffb27a",
+   "strength": 1.1,
+   "on": "dawn"
+  },
+  {
+   "id": "moon",
+   "from": "sky#moon",
+   "color": "#b4c4ec",
+   "strength": 1.2,
+   "on": "night"
+  },
+  {
+   "id": "deck_lamp",
+   "of": "lantern#lamp",
+   "reach": 9,
+   "strength": 1.7,
+   "on": "night"
+  },
+  {
+   "id": "fire_light",
+   "across": 1.4,
+   "distance": 14.6,
+   "elevation": 1.0,
+   "color": "#ff8a3a",
+   "strength": 2.6,
+   "reach": 13,
+   "on": "fire",
+   "flicker": 0.5
+  },
+  {
+   "id": "flare_light",
+   "across": 1.4,
+   "distance": 14.6,
+   "elevation": 1.6,
+   "color": "#ffb060",
+   "strength": 4,
+   "reach": 18,
+   "on": "flare_glow"
+  },
+  {
+   "id": "cell_window",
+   "across": 400.6,
+   "distance": 5.6,
+   "elevation": 3.9,
+   "color": "#e8e4d8",
+   "strength": 1.5,
+   "reach": 10
+  }
+ ],
+ "state": {
+  "beat": null,
+  "ship": "mongolia",
+  "port": "suez",
+  "night": 0,
+  "dawn": 0,
+  "fog": 0,
+  "smoke": 1,
+  "speed": 0,
+  "sails": 0,
+  "fire": 0,
+  "flare": 0,
+  "flare_glow": 0,
+  "speedy_grief": 0,
+  "porthole": 0,
+  "cell_close": 0,
+  "cell_time": 0,
+  "release": null,
+  "door": 0,
+  "leaf": 0,
+  "with_aouda": 1,
+  "with_pp": 1,
+  "with_fix": 1,
+  "fix_bruise": 0,
+  "pp_wings": 0,
+  "aouda_dress": 0,
+  "deckhouse": 1,
+  "drag_deckhouse": 0,
+  "locked_deckhouse": 0,
+  "at_deckhouse_a": 0,
+  "at_deckhouse_d": 18,
+  "at_deckhouse_e": 0,
+  "boats": 1,
+  "drag_boats": 0,
+  "locked_boats": 0,
+  "at_boats_a": -2.6,
+  "at_boats_d": 15.8,
+  "at_boats_e": 0,
+  "bunks": 1,
+  "drag_bunks": 0,
+  "locked_bunks": 0,
+  "at_bunks_a": 3.4,
+  "at_bunks_d": 12.4,
+  "at_bunks_e": 0,
+  "yards": 1,
+  "drag_yards": 0,
+  "locked_yards": 0,
+  "at_yards_a": 0,
+  "at_yards_d": 11,
+  "at_yards_e": 0,
+  "mast_fore": 1,
+  "drag_mast_fore": 0,
+  "locked_mast_fore": 0,
+  "at_mast_fore_a": 0,
+  "at_mast_fore_d": 34,
+  "at_mast_fore_e": 0,
+  "mast_main": 1,
+  "drag_mast_main": 0,
+  "locked_mast_main": 0,
+  "at_mast_main_a": 0,
+  "at_mast_main_d": 11,
+  "at_mast_main_e": 0,
+  "bulwarks": 1,
+  "drag_bulwarks": 0,
+  "locked_bulwarks": 0,
+  "at_bulwarks_a": 0,
+  "at_bulwarks_d": 0,
+  "at_bulwarks_e": 0,
+  "speedy_cabin": 1,
+  "drag_speedy_cabin": 0,
+  "locked_speedy_cabin": 0,
+  "at_speedy_cabin_a": -3,
+  "at_speedy_cabin_d": 7,
+  "at_speedy_cabin_e": 0,
+  "fogg_a": -2,
+  "fogg_d": -3,
+  "fogg_here": false,
+  "passepartout_a": -2,
+  "passepartout_d": -3,
+  "passepartout_here": false,
+  "aouda_a": -2,
+  "aouda_d": -3,
+  "aouda_here": false,
+  "fix_a": -2,
+  "fix_d": -3,
+  "fix_here": false,
+  "consul_a": -2,
+  "consul_d": -3,
+  "consul_here": false,
+  "sailor_a": -2,
+  "sailor_d": -3,
+  "sailor_here": false,
+  "speedy_a": -2,
+  "speedy_d": -3,
+  "speedy_here": false,
+  "stoker_a": -2,
+  "stoker_d": -3,
+  "stoker_here": false,
+  "policeman_a": -2,
+  "policeman_d": -3,
+  "policeman_here": false,
+  "policeman_2_a": -2,
+  "policeman_2_d": -3,
+  "policeman_2_here": false
+ },
+ "states": {
+  "ship": {
+   "values": [
+    "mongolia",
+    "rangoon",
+    "general_grant",
+    "henrietta"
+   ],
+   "means": "корабль: mongolia — P&O, чёрная труба, белый фальшборт, тиковая рубка; rangoon — тот же вид (ночь — ключ night); general_grant — американский колёсный: белая рубка, красная труба, кожух колеса у борта, балансир машины; henrietta — железный винтовой с двумя мачтами и реями, деревянные рубка, фальшборт, каюта капитана на юте (части горят — «Котлы»). Меняется склейкой"
+  },
+  "port": {
+   "values": [
+    "suez",
+    "bombay",
+    "new_york",
+    "queenstown",
+    "liverpool",
+    "none"
+   ],
+   "means": "порт на горизонте справа по носу: suez — минареты, пальмы, мол, причал и сходни у борта; bombay — город и холмы (на рассвете); new_york — набережная, причал и сходни; queenstown — зелёные холмы Ирландии; liverpool — доки, краны, кирпич, причал и сходни; none — открытое море"
+  },
+  "night": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "ночь: луна справа, лунная дорожка, фонарь у борта горит"
+  },
+  "dawn": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "рассвет: низкое солнце справа по носу, розовое небо"
+  },
+  "fog": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "туман (Ливерпуль)"
+  },
+  "smoke": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "сколько дымит труба: 1 — под парами, 0.2 — угля нет, 0 — потушены"
+  },
+  "speed": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "ход: бег воды мимо борта, барашки, брызги у носа (0 — стоит)"
+  },
+  "sails": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "«Генриетта»: паруса на реях, 0 — убраны, 1 — все поставлены"
+  },
+  "fire": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "огонь в топке: пламя из люка кочегарки, его свет, искры из трубы («Котлы»)"
+  },
+  "flare": {
+   "type": "number",
+   "means": "вспышка в люке: каждый новый номер — сноп искр (ставит сцена, когда часть уходит в люк; игра может и сама)"
+  },
+  "flare_glow": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "свет вспышки в люке (ведёт сцена вместе с flare)"
+  },
+  "speedy_grief": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "Спиди хватается за голову: от 0.4 — руки к голове, лицо злое; от 0.8 — горе"
+  },
+  "porthole": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "вставка: Спиди в иллюминаторе каюты крупно, рыжая борода, ревёт (0 — закрыта)"
+  },
+  "cell_close": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "вставка: скамья таможенной камеры, часы Фогга открыты на ней, его руки на коленях (0 — закрыта)"
+  },
+  "cell_time": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "тень решётки ползёт по полу и скамье: 0 — утро, 1 — через три часа (ведёт игра)"
+  },
+  "release": {
+   "values": [
+    null,
+    "down",
+    "hand"
+   ],
+   "means": "чем кончается кусок release, если поставлен до него: down — Фогг бьёт, Фикс падает; hand — рука в руке; null — кусок кончается на release:in"
+  },
+  "door": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "дверь камеры: 0 — заперта, 1 — распахнута"
+  },
+  "leaf": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "лист календаря на рубке: 0 — «Среда», 1 — перевёрнут, под ним опять «Среда»"
+  },
+  "with_aouda": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "Ауда в пути (Нью-Йорк, Ливерпуль)"
+  },
+  "with_pp": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "Паспарту в пути (Нью-Йорк, «Котлы», Ливерпуль)"
+  },
+  "with_fix": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "Фикс в пути (Нью-Йорк)"
+  },
+  "fix_bruise": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "синяк Фикса (как его даёт каст)"
+  },
+  "pp_wings": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "Паспарту в крыльях «Длинных носов» (как их даёт каст)"
+  },
+  "aouda_dress": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "Ауда в дорожном платье (с Гонконга)"
+  },
+  "deckhouse": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», рубка: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_deckhouse": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "рубка: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_deckhouse": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "рубка: 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_deckhouse_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где рубка (ведёт сцена по drag_deckhouse; игре не трогать)"
+  },
+  "at_deckhouse_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где рубка (ведёт сцена по drag_deckhouse; игре не трогать)"
+  },
+  "at_deckhouse_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где рубка (ведёт сцена по drag_deckhouse; игре не трогать)"
+  },
+  "boats": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», шлюпки: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_boats": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "шлюпки: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_boats": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "шлюпки: 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_boats_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где шлюпки (ведёт сцена по drag_boats; игре не трогать)"
+  },
+  "at_boats_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где шлюпки (ведёт сцена по drag_boats; игре не трогать)"
+  },
+  "at_boats_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где шлюпки (ведёт сцена по drag_boats; игре не трогать)"
+  },
+  "bunks": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», койки (штабель у люка): 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_bunks": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "койки (штабель у люка): 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_bunks": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "койки (штабель у люка): 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_bunks_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где койки (штабель у люка) (ведёт сцена по drag_bunks; игре не трогать)"
+  },
+  "at_bunks_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где койки (штабель у люка) (ведёт сцена по drag_bunks; игре не трогать)"
+  },
+  "at_bunks_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где койки (штабель у люка) (ведёт сцена по drag_bunks; игре не трогать)"
+  },
+  "yards": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», реи: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_yards": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "реи: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_yards": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "реи: 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_yards_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где реи (ведёт сцена по drag_yards; игре не трогать)"
+  },
+  "at_yards_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где реи (ведёт сцена по drag_yards; игре не трогать)"
+  },
+  "at_yards_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где реи (ведёт сцена по drag_yards; игре не трогать)"
+  },
+  "mast_fore": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», фок-мачта: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_mast_fore": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "фок-мачта: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_mast_fore": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "фок-мачта: 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_mast_fore_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где фок-мачта (ведёт сцена по drag_mast_fore; игре не трогать)"
+  },
+  "at_mast_fore_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где фок-мачта (ведёт сцена по drag_mast_fore; игре не трогать)"
+  },
+  "at_mast_fore_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где фок-мачта (ведёт сцена по drag_mast_fore; игре не трогать)"
+  },
+  "mast_main": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», грот-мачта: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_mast_main": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "грот-мачта: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_mast_main": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "грот-мачта: 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_mast_main_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где грот-мачта (ведёт сцена по drag_mast_main; игре не трогать)"
+  },
+  "at_mast_main_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где грот-мачта (ведёт сцена по drag_mast_main; игре не трогать)"
+  },
+  "at_mast_main_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где грот-мачта (ведёт сцена по drag_mast_main; игре не трогать)"
+  },
+  "bulwarks": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», фальшборт: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_bulwarks": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "фальшборт: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_bulwarks": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "фальшборт: 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_bulwarks_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где фальшборт (ведёт сцена по drag_bulwarks; игре не трогать)"
+  },
+  "at_bulwarks_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где фальшборт (ведёт сцена по drag_bulwarks; игре не трогать)"
+  },
+  "at_bulwarks_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где фальшборт (ведёт сцена по drag_bulwarks; игре не трогать)"
+  },
+  "speedy_cabin": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "«Генриетта», каюта капитана: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+  },
+  "drag_speedy_cabin": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "каюта капитана: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+  },
+  "locked_speedy_cabin": {
+   "values": [
+    0,
+    1
+   ],
+   "means": "каюта капитана: 1 — не по деньгам (тусклее, как не своя)"
+  },
+  "at_speedy_cabin_a": {
+   "type": "number",
+   "smooth": true,
+   "means": "где каюта капитана (ведёт сцена по drag_speedy_cabin; игре не трогать)"
+  },
+  "at_speedy_cabin_d": {
+   "type": "number",
+   "smooth": true,
+   "means": "где каюта капитана (ведёт сцена по drag_speedy_cabin; игре не трогать)"
+  },
+  "at_speedy_cabin_e": {
+   "type": "number",
+   "smooth": true,
+   "means": "где каюта капитана (ведёт сцена по drag_speedy_cabin; игре не трогать)"
+  }
+ },
+ "objects": [
+  {
+   "id": "sky",
+   "name": "Небо",
+   "sky": true
+  },
+  {
+   "id": "sea",
+   "name": "Море",
+   "plane": true,
+   "across": 0,
+   "distance": 600,
+   "elevation": -5.5,
+   "width": 6000,
+   "depth": 4000,
+   "reflect": {
+    "strength": 0.5,
+    "fade": 0,
+    "rough": 0.55,
+    "ripple": 0.35
+   },
+   "uniforms": {
+    "phase": 0,
+    "caps": 0.5
+   }
+  },
+  {
+   "id": "port_far",
+   "name": "Порт на горизонте",
+   "across": 560,
+   "distance": 1500,
+   "elevation": -5.5,
+   "box": [
+    -1100,
+    -130,
+    1100,
+    2
+   ]
+  },
+  {
+   "id": "china",
+   "name": "Дым «Китая» на горизонте",
+   "across": -260,
+   "distance": 2200,
+   "elevation": -5.5,
+   "box": [
+    -60,
+    -150,
+    260,
+    2
+   ]
+  },
+  {
+   "id": "quay",
+   "name": "Причал",
+   "plane": true,
+   "across": 30,
+   "distance": 30,
+   "elevation": -2.6,
+   "width": 48,
+   "depth": 160
+  },
+  {
+   "id": "sheds",
+   "name": "Пакгаузы на причале",
+   "across": 42,
+   "distance": 110,
+   "elevation": -2.6,
+   "facing": 270,
+   "box": [
+    0,
+    -30,
+    150,
+    0.2
+   ]
+  },
+  {
+   "id": "gangway",
+   "name": "Сходни",
+   "plane": true,
+   "across": 7.35,
+   "distance": 9.7,
+   "elevation": -1.3,
+   "width": 1.1,
+   "depth": 4.69,
+   "rotation": 270,
+   "tilt": 33.7,
+   "walk": true
+  },
+  {
+   "id": "deck",
+   "name": "Палуба",
+   "plane": true,
+   "across": 0,
+   "distance": 22,
+   "elevation": 0.005,
+   "width": 11.2,
+   "depth": 54
+  },
+  {
+   "id": "bulwarks_at",
+   "name": "Фальшборт (место)",
+   "unseen": true,
+   "across": 0,
+   "distance": 0,
+   "place": {
+    "across": "at_bulwarks_a",
+    "distance": "at_bulwarks_d",
+    "elevation": "at_bulwarks_e"
+   }
+  },
+  {
+   "id": "bulwarks",
+   "name": "Фальшборт левого борта",
+   "on": "bulwarks_at",
+   "across": -5.45,
+   "distance": -5,
+   "facing": 90,
+   "box": [
+    -0.2,
+    -1.25,
+    52.2,
+    0.1
+   ]
+  },
+  {
+   "id": "bulwarks_s",
+   "name": "Фальшборт правого борта",
+   "on": "bulwarks_at",
+   "across": 5.45,
+   "distance": 47,
+   "facing": 270,
+   "box": [
+    -0.2,
+    -1.25,
+    52.2,
+    0.1
+   ]
+  },
+  {
+   "id": "gunwale",
+   "name": "Железный борт, левый",
+   "across": -5.5,
+   "distance": -5,
+   "facing": 90,
+   "box": [
+    -0.2,
+    -0.5,
+    52.2,
+    0.1
+   ]
+  },
+  {
+   "id": "gunwale_s",
+   "name": "Железный борт, правый",
+   "across": 5.5,
+   "distance": 47,
+   "facing": 270,
+   "box": [
+    -0.2,
+    -0.5,
+    52.2,
+    0.1
+   ]
+  },
+  {
+   "id": "bow",
+   "name": "Нос",
+   "across": 0,
+   "distance": 47.2,
+   "box": [
+    -6,
+    -6,
+    6,
+    0.2
+   ]
+  },
+  {
+   "id": "spray",
+   "name": "Брызги у форштевня",
+   "particles": {
+    "kind": "splashes",
+    "at": [
+     0,
+     50,
+     -4.8
+    ],
+    "amount": "speed",
+    "rate": 26,
+    "source": [
+     3.2,
+     1,
+     0.2
+    ],
+    "direction": [
+     0,
+     0,
+     1
+    ],
+    "spread": 50,
+    "speed": [
+     2,
+     4.5
+    ],
+    "life": [
+     0.8,
+     1.6
+    ],
+    "size": [
+     0.18,
+     0.4
+    ],
+    "color": "#eef4f4"
+   }
+  },
+  {
+   "id": "cabin",
+   "name": "Каюта капитана (место)",
+   "unseen": true,
+   "across": -3,
+   "distance": 7,
+   "place": {
+    "across": "at_speedy_cabin_a",
+    "distance": "at_speedy_cabin_d",
+    "elevation": "at_speedy_cabin_e"
+   }
+  },
+  {
+   "id": "speedy_cabin",
+   "name": "Каюта капитана",
+   "on": "cabin",
+   "facing": 180,
+   "box": [
+    -1.55,
+    -2.6,
+    1.55,
+    0.1
+   ]
+  },
+  {
+   "id": "speedy_cabin_side",
+   "name": "Каюта капитана, бок",
+   "on": "cabin",
+   "across": 1.5,
+   "facing": 90,
+   "box": [
+    -0.1,
+    -2.6,
+    3.7,
+    0.1
+   ]
+  },
+  {
+   "id": "cabin_roof",
+   "name": "Крыша каюты",
+   "plane": true,
+   "on": "cabin",
+   "distance": 1.8,
+   "elevation": 2.3,
+   "width": 3.1,
+   "depth": 3.7,
+   "walk": true
+  },
+  {
+   "id": "house",
+   "name": "Рубка (место)",
+   "unseen": true,
+   "across": 0,
+   "distance": 18,
+   "place": {
+    "across": "at_deckhouse_a",
+    "distance": "at_deckhouse_d",
+    "elevation": "at_deckhouse_e"
+   }
+  },
+  {
+   "id": "deckhouse",
+   "name": "Рубка",
+   "on": "house",
+   "facing": 180,
+   "box": [
+    -2.3,
+    -2.6,
+    2.3,
+    0.1
+   ]
+  },
+  {
+   "id": "deckhouse_side",
+   "name": "Рубка, правый бок",
+   "on": "house",
+   "across": 2.2,
+   "facing": 90,
+   "box": [
+    -0.1,
+    -2.6,
+    8.1,
+    0.1
+   ]
+  },
+  {
+   "id": "house_roof",
+   "name": "Мостик на рубке",
+   "plane": true,
+   "on": "house",
+   "distance": 4,
+   "elevation": 2.4,
+   "width": 4.6,
+   "depth": 8.2,
+   "walk": true
+  },
+  {
+   "id": "bridge_rail",
+   "name": "Поручни мостика",
+   "on": "house",
+   "distance": 0.15,
+   "elevation": 2.4,
+   "facing": 180,
+   "box": [
+    -2.5,
+    -1.3,
+    2.5,
+    0.05
+   ]
+  },
+  {
+   "id": "calendar",
+   "name": "Календарь на рубке",
+   "on": "house",
+   "across": -1.2,
+   "distance": -0.04,
+   "elevation": 1.62,
+   "facing": 180,
+   "box": [
+    -0.32,
+    -0.44,
+    0.32,
+    0.04
+   ]
+  },
+  {
+   "id": "funnel",
+   "name": "Труба",
+   "across": 0,
+   "distance": 22.5,
+   "box": [
+    -1.4,
+    -11.4,
+    1.4,
+    0.1
+   ]
+  },
+  {
+   "id": "smoke_p",
+   "name": "Дым из трубы",
+   "particles": {
+    "kind": "smoke",
+    "at": "funnel#top",
+    "amount": "smoke",
+    "rate": 4,
+    "life": [
+     14,
+     22
+    ],
+    "source": [
+     0.9,
+     0.9,
+     0
+    ],
+    "speed": [
+     2.2,
+     3.2
+    ],
+    "spread": 14,
+    "gravity": -0.15,
+    "drag": 0.3,
+    "wind": 1.4,
+    "size": [
+     1.6,
+     9
+    ],
+    "color": [
+     "#5a5652",
+     "#9a9690"
+    ],
+    "opacity": 0.75,
+    "shadow": 0.4
+   }
+  },
+  {
+   "id": "sparks_p",
+   "name": "Искры из трубы",
+   "particles": {
+    "kind": "sparks",
+    "at": "funnel#top",
+    "amount": "fire",
+    "rate": 30,
+    "speed": [
+     3,
+     7
+    ],
+    "spread": 30,
+    "direction": [
+     0,
+     0,
+     1
+    ],
+    "wind": 1
+   }
+  },
+  {
+   "id": "mast_main",
+   "name": "Грот-мачта",
+   "across": 0,
+   "distance": 11,
+   "box": [
+    -5.8,
+    -25.6,
+    5.8,
+    0.2
+   ],
+   "place": {
+    "across": "at_mast_main_a",
+    "distance": "at_mast_main_d",
+    "elevation": "at_mast_main_e"
+   }
+  },
+  {
+   "id": "mast_fore",
+   "name": "Фок-мачта",
+   "across": 0,
+   "distance": 34,
+   "box": [
+    -5.8,
+    -23.6,
+    5.8,
+    0.2
+   ],
+   "place": {
+    "across": "at_mast_fore_a",
+    "distance": "at_mast_fore_d",
+    "elevation": "at_mast_fore_e"
+   }
+  },
+  {
+   "id": "yards_at",
+   "name": "Реи (место)",
+   "unseen": true,
+   "across": 0,
+   "distance": 11,
+   "place": {
+    "across": "at_yards_a",
+    "distance": "at_yards_d",
+    "elevation": "at_yards_e"
+   }
+  },
+  {
+   "id": "yards",
+   "name": "Реи и паруса грот-мачты",
+   "on": "yards_at",
+   "box": [
+    -8,
+    -24.6,
+    8,
+    -5
+   ],
+   "translucent": 0.4
+  },
+  {
+   "id": "yards_fore",
+   "name": "Реи и паруса фок-мачты",
+   "on": "yards_at",
+   "distance": 23,
+   "box": [
+    -8,
+    -22.6,
+    8,
+    -5
+   ],
+   "translucent": 0.4
+  },
+  {
+   "id": "hatch",
+   "name": "Люк кочегарки",
+   "across": 1.4,
+   "distance": 13.8,
+   "box": [
+    -1.0,
+    -0.75,
+    1.0,
+    0.05
+   ]
+  },
+  {
+   "id": "hatch_glow",
+   "name": "Огонь в люке",
+   "plane": true,
+   "across": 1.4,
+   "distance": 14.6,
+   "elevation": 0.66,
+   "width": 1.5,
+   "depth": 1.5,
+   "glows": true
+  },
+  {
+   "id": "hatch_fire",
+   "name": "Пламя из люка",
+   "particles": {
+    "kind": "fire",
+    "at": "hatch#fire",
+    "amount": "fire",
+    "size": [
+     0.7,
+     0.15
+    ],
+    "source": [
+     1.1,
+     1.1,
+     0
+    ],
+    "rate": 40
+   }
+  },
+  {
+   "id": "flare_p",
+   "name": "Вспышка в люке",
+   "particles": {
+    "kind": "sparks",
+    "at": "hatch#fire",
+    "burst": {
+     "on": "flare",
+     "count": 160,
+     "over": 0.4
+    },
+    "speed": [
+     3,
+     8
+    ],
+    "spread": 40,
+    "direction": [
+     0,
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "id": "bunks",
+   "name": "Койки",
+   "across": 3.4,
+   "distance": 12.4,
+   "box": [
+    -1.2,
+    -1.6,
+    1.2,
+    0.1
+   ],
+   "place": {
+    "across": "at_bunks_a",
+    "distance": "at_bunks_d",
+    "elevation": "at_bunks_e"
+   }
+  },
+  {
+   "id": "boats",
+   "name": "Шлюпки",
+   "across": -2.6,
+   "distance": 15.8,
+   "box": [
+    -2.8,
+    -1.9,
+    2.8,
+    0.1
+   ],
+   "place": {
+    "across": "at_boats_a",
+    "distance": "at_boats_d",
+    "elevation": "at_boats_e"
+   }
+  },
+  {
+   "id": "paddle_box",
+   "name": "Кожух колеса",
+   "across": 5.45,
+   "distance": 20,
+   "facing": 270,
+   "box": [
+    -5.6,
+    -5.2,
+    5.6,
+    0.1
+   ]
+  },
+  {
+   "id": "walking_beam",
+   "name": "Балансир машины",
+   "across": 0,
+   "distance": 15.2,
+   "box": [
+    -4.6,
+    -10,
+    4.6,
+    0.1
+   ]
+  },
+  {
+   "id": "lantern",
+   "name": "Фонарь у борта",
+   "across": 4.75,
+   "distance": 11.3,
+   "box": [
+    -0.5,
+    -3,
+    0.5,
+    0.1
+   ]
+  },
+  {
+   "id": "deckchair",
+   "name": "Шезлонг",
+   "across": -2.6,
+   "distance": 13.2,
+   "facing": 210,
+   "box": [
+    -0.5,
+    -1.0,
+    0.5,
+    0.1
+   ]
+  },
+  {
+   "id": "night_two",
+   "name": "Двое у борта",
+   "unseen": true,
+   "across": 4.55,
+   "distance": 9.6,
+   "elevation": 1.45
+  },
+  {
+   "id": "fix_consul",
+   "name": "Фикс и консул",
+   "unseen": true,
+   "across": 3.9,
+   "distance": 12.3,
+   "elevation": 1.5
+  },
+  {
+   "id": "two_pacific",
+   "name": "Паспарту и Фикс",
+   "unseen": true,
+   "across": 4.2,
+   "distance": 9.65,
+   "elevation": 1.45
+  },
+  {
+   "id": "calendar_three",
+   "name": "У календаря",
+   "unseen": true,
+   "across": -0.6,
+   "distance": 15.8,
+   "elevation": 1.4
+  },
+  {
+   "id": "coal_three",
+   "name": "У люка",
+   "unseen": true,
+   "across": 0.9,
+   "distance": 12.2,
+   "elevation": 1.4
+  },
+  {
+   "id": "bridge_two",
+   "name": "На мостике",
+   "unseen": true,
+   "across": 0.1,
+   "distance": 18.9,
+   "elevation": 3.9
+  },
+  {
+   "id": "porthole",
+   "name": "Спиди в иллюминаторе",
+   "insert": "porthole",
+   "iris": [
+    0.889,
+    0.5,
+    0.46,
+    0.46
+   ]
+  },
+  {
+   "id": "cell_close",
+   "name": "Скамья в камере",
+   "insert": "cell_close"
+  },
+  {
+   "id": "cell",
+   "name": "Камера (место)",
+   "unseen": true,
+   "across": 400,
+   "distance": 0
+  },
+  {
+   "id": "cell_floor",
+   "name": "Пол камеры",
+   "plane": true,
+   "on": "cell",
+   "distance": 3,
+   "elevation": 0.01,
+   "width": 7.2,
+   "depth": 6.4,
+   "inside": true
+  },
+  {
+   "id": "cell_back",
+   "name": "Стена камеры с окном",
+   "on": "cell",
+   "distance": 6,
+   "facing": 180,
+   "box": [
+    -3.7,
+    -5.4,
+    3.7,
+    0.1
+   ],
+   "inside": true
+  },
+  {
+   "id": "cell_left",
+   "name": "Стена камеры с дверью",
+   "on": "cell",
+   "across": -3.5,
+   "distance": -0.6,
+   "facing": 90,
+   "box": [
+    -0.1,
+    -5.4,
+    6.8,
+    0.1
+   ],
+   "inside": true
+  },
+  {
+   "id": "cell_right",
+   "name": "Стена камеры",
+   "on": "cell",
+   "across": 3.5,
+   "distance": 6.2,
+   "facing": 270,
+   "box": [
+    -0.1,
+    -5.4,
+    6.8,
+    0.1
+   ],
+   "inside": true
+  },
+  {
+   "id": "cell_bench",
+   "name": "Скамья",
+   "on": "cell",
+   "across": -0.2,
+   "distance": 5.05,
+   "facing": 180,
+   "box": [
+    -1.3,
+    -0.6,
+    1.3,
+    0.05
+   ],
+   "inside": true
+  },
+  {
+   "id": "fogg",
+   "name": "Филеас Фогг",
+   "person": {
+    "cast": "cast",
+    "who": "fogg"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "fogg_a",
+    "distance": "fogg_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "passepartout",
+   "name": "Паспарту",
+   "person": {
+    "cast": "cast",
+    "who": "passepartout"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "passepartout_a",
+    "distance": "passepartout_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "aouda",
+   "name": "Ауда",
+   "person": {
+    "cast": "cast",
+    "who": "aouda"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "aouda_a",
+    "distance": "aouda_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "fix",
+   "name": "Фикс",
+   "person": {
+    "cast": "cast",
+    "who": "fix"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "fix_a",
+    "distance": "fix_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "consul",
+   "name": "Консул",
+   "person": {
+    "cast": "cast",
+    "who": "consul"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "consul_a",
+    "distance": "consul_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "sailor",
+   "name": "Матрос",
+   "person": {
+    "cast": "cast",
+    "who": "sailor"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "sailor_a",
+    "distance": "sailor_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "speedy",
+   "name": "Капитан Спиди",
+   "person": {
+    "cast": "cast",
+    "who": "speedy"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "speedy_a",
+    "distance": "speedy_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "stoker",
+   "name": "Кочегар",
+   "person": {
+    "cast": "cast",
+    "who": "stoker"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "stoker_a",
+    "distance": "stoker_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "policeman",
+   "name": "Констебль",
+   "person": {
+    "cast": "cast",
+    "who": "policeman"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "policeman_a",
+    "distance": "policeman_d"
+   },
+   "shadow": true
+  },
+  {
+   "id": "policeman_2",
+   "name": "Констебль",
+   "person": {
+    "cast": "cast",
+    "who": "policeman"
+   },
+   "across": -2,
+   "distance": -3,
+   "place": {
+    "across": "policeman_2_a",
+    "distance": "policeman_2_d"
+   },
+   "shadow": true
+  }
+ ],
+ "music": {
+  "scale": "A_FLAT_MAJOR_F_MINOR",
+  "bpm": 84,
+  "density": 0.4,
+  "brightness": 0.55,
+  "prompts": [
+   {
+    "text": "Light orchestral travel music in the Victorian manner, a mail steamer under way, strings and woodwinds over a steady engine pulse",
+    "weight": 1.1
+   },
+   {
+    "text": "Slow marimba and low strings like a ship's engine, a smoke trail on the horizon, the sea going by",
+    "weight": 0.8
+   },
+   {
+    "text": "Precise pizzicato and a ticking celesta, an Englishman who never hurries, wide sea air",
+    "weight": 0.5
+   },
+   {
+    "text": "Moonlit sea at night: solo cello and harp, a tender pause at the rail, the engine far below",
+    "weight": 0
+   },
+   {
+    "text": "Oriental colour in a European orchestra, Suez in the sun, oud and clarinet over light strings",
+    "weight": 0
+   },
+   {
+    "text": "Dawn over Bombay: warm horns, tanpura drone under strings, the town rising out of the haze",
+    "weight": 0
+   },
+   {
+    "text": "Comic orchestral bounce, bassoon and pizzicato, a valet laughing at a calendar",
+    "weight": 0
+   },
+   {
+    "text": "Sea shanty on concertina and fiddle, a red-bearded captain roaring, brisk and gruff",
+    "weight": 0
+   },
+   {
+    "text": "Driving low strings and timpani, furnaces roaring, wood thrown into the fire, urgent but bright",
+    "weight": 0
+   },
+   {
+    "text": "Full sails and a broad hymn-like brass theme, a ship going slowly under canvas, generous and warm",
+    "weight": 0
+   },
+   {
+    "text": "Grey Liverpool fog: muted brass, a slow clock, the quay and the constables",
+    "weight": 0
+   },
+   {
+    "text": "Solo piano and a ticking clock in a bare cell, the light moving across the floor",
+    "weight": 0
+   },
+   {
+    "text": "Pacific sunshine: bright flutes and strings, a steamer's paddle wheels churning",
+    "weight": 0
+   },
+   {
+    "text": "Minimal ambient pads, wind and sea, a wide grey-green Atlantic, modern game score",
+    "weight": 0
+   },
+   {
+    "text": "Victorian travelling waltz for small orchestra, the deck in the sun, gulls",
+    "weight": 0
+   },
+   {
+    "text": "Tense pizzicato, a detective whispering to the consul, sly and quiet",
+    "weight": 0
+   }
+  ]
+ }
+}
