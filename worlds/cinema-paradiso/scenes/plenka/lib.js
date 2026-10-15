@@ -208,9 +208,10 @@ function layout(A, st, measure) {
         R.question = wrap(q, R.w, TEXT, true, measure, whole ? 1 : 2);
         ln.q = Math.max(ln.q, tall(R.question));
       }
-      ln.height = ln.q + 0.014 + ln.h;
+      // (the strip's band is 1.34 of its frames' height: the questions stand over it)
+      ln.height = ln.q + 0.01 + 1.34 * ln.h;
       width = Math.max(width, ln.w + (ln.last ? B.XR - B.XL - ln.room : 0));
-      height += ln.height + (li ? 0.03 : 0);
+      height += ln.height + (li ? 0.015 : 0);
       lines.push(ln);
     }
     var y = TOP + Math.max(0, (FLOOR - TOP - height) * (whole ? 0.2 : 0.42));
@@ -218,7 +219,7 @@ function layout(A, st, measure) {
     var idx = 0;
     for (var l2 = 0; l2 < lines.length; l2++) {
       var L2 = lines[l2];
-      var mid = y + L2.q + 0.014 + L2.h / 2;
+      var mid = y + L2.q + 0.01 + 0.67 * L2.h;
       strips.push({ y: mid, h: L2.h });
       var x = L2.last ? B.XL + (L2.room - L2.w) / 2 : cx - L2.w / 2;
       for (var r2 = 0; r2 < L2.rows.length; r2++, idx++) {
@@ -227,12 +228,12 @@ function layout(A, st, measure) {
         var P = partsOf(R2.row, x, fy, R2.w, R2.h, measure);
         frames.push({
           x: x, y: fy, w: R2.w, h: R2.h, weight: R2.weight, question: R2.question,
-          qy: fy - 0.014 - tall(R2.question) + R2.question.size / 2,
+          qy: mid - 0.67 * L2.h - 0.01 - tall(R2.question) + R2.question.size / 2,
           parts: P.parts, collapsed: P.collapsed, order: n > 1 ? (0.85 * idx) / (n - 1) : 0,
         });
         x += R2.w + GAP;
       }
-      y += L2.height + 0.03;
+      y += L2.height + 0.015;
     }
     return { frames: frames, strips: strips, width: width, height: height };
   }
