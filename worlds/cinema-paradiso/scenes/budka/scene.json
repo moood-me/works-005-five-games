@@ -131,12 +131,12 @@
       "id": "fire_light",
       "across": -1,
       "distance": 2.75,
-      "elevation": 1.45,
+      "elevation": 1.6,
       "color": "#ff9a4a",
-      "strength": 2,
-      "reach": 7,
+      "strength": 2.2,
+      "reach": 4,
       "on": "fire",
-      "flicker": 0.5
+      "flicker": 0.35
     }
   ],
   "state": {
@@ -1222,25 +1222,26 @@
       "facing": 180,
       "height": 0.4,
       "box": [
-        -0.27,
-        -0.42,
-        0.27,
-        0.02
+        -0.85,
+        -0.4,
+        0.85,
+        0
       ],
+      "shadow": true,
       "inside": true
     },
     {
       "id": "crate_top",
       "name": "Верх ящика",
       "plane": true,
-      "unseen": true,
       "on": "crate",
       "across": 0,
-      "distance": 0.17,
+      "distance": 0.175,
       "elevation": 0.4,
       "width": 0.5,
       "depth": 0.35,
-      "walk": true
+      "walk": true,
+      "inside": true
     },
     {
       "id": "box",
@@ -1251,13 +1252,27 @@
         "across": "box_a",
         "distance": "box_d"
       },
+      "facing": 180,
       "height": 0.36,
       "box": [
-        -0.24,
-        -0.4,
-        0.24,
-        0.02
+        -0.74,
+        -0.36,
+        0.74,
+        0
       ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "box_top",
+      "name": "Крышка коробки",
+      "plane": true,
+      "on": "box",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0.36,
+      "width": 0.44,
+      "depth": 0.3,
       "inside": true
     },
     {
@@ -1518,12 +1533,12 @@
         ],
         "rate": 120,
         "color": [
-          "#fff4c8",
-          "#ff5a12"
+          "#ffd27a",
+          "#e8400c"
         ],
         "glow": [
-          5,
-          1.5
+          3,
+          1
         ]
       },
       "inside": true
@@ -1541,12 +1556,12 @@
         ],
         "rate": 80,
         "color": [
-          "#fff4c8",
-          "#ff5a12"
+          "#ffd27a",
+          "#e8400c"
         ],
         "glow": [
-          5,
-          1.5
+          3,
+          1
         ]
       },
       "inside": true
@@ -1569,12 +1584,12 @@
           0.35
         ],
         "color": [
-          "#fff4c8",
-          "#ff6a18"
+          "#ffd27a",
+          "#e8400c"
         ],
         "glow": [
-          5,
-          1.5
+          3,
+          1
         ]
       },
       "inside": true
@@ -1607,7 +1622,7 @@
           6
         ],
         "gravity": -0.3,
-        "color": "#5a5450",
+        "color": "#2e2a28",
         "shadow": 0.4
       },
       "inside": true

@@ -98,6 +98,18 @@ function projBodyForm(u, v) {
   if (s < 2 * W + D) return [W / 2 - (s - W - D), Y, -D / 2];
   return [-W / 2, Y, -D / 2 + (s - 2 * W - D)];
 }
+// a plain box as a form: W across, D deep, H high; its front face at Z = front (the anchor's offset), its back at
+// front − D; the painting unrolled round it like the projector's (front, right, back, left), by its height; no top
+function boxForm(W, D, H, front) {
+  const P = 2 * (W + D);
+  return (u, v) => {
+    const s = u * P, Y = H * (1 - v);
+    if (s < W) return [-W / 2 + s, Y, front];
+    if (s < W + D) return [W / 2, Y, front - (s - W)];
+    if (s < 2 * W + D) return [W / 2 - (s - W - D), Y, front - D];
+    return [-W / 2, Y, front - D + (s - 2 * W - D)];
+  };
+}
 // where a side's local point (a — metres from the back along the side; y — height over the body's bottom) is in the
 // painting; side 'back' (a: across from left to right seen from behind), 'right', 'front', 'left'
 function onBody(side, a, y) {
@@ -716,4 +728,4 @@ const FILM = {
 };
 return FILM;
 }
-return { G, R, CAM, P, SEAT, BENCH_SEAT, ALONG, PATH_TURN, tone, plaster, cans, BOX, projBodyForm, onBody, projBody, projProfile, film, base, people };
+return { G, R, CAM, P, SEAT, BENCH_SEAT, ALONG, PATH_TURN, tone, plaster, cans, BOX, projBodyForm, boxForm, onBody, projBody, projProfile, film, base, people };
