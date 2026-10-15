@@ -108,7 +108,7 @@ const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_on: null, camera_target: 
 const look = (at, to, h = 0, pitch = 0) => cam(at[0], at[1], +((brg(at, to) + 540) % 360 - 180).toFixed(1), h, pitch);
 // places (the train standing: train 0)
 const P = {
-  T_HUG: [1.2, 3.3], M_HUG: [0.72, 3.3], M_BACK: [0.25, 2.6], A_WAIT: [2.9, 2.4], A_HUG: [1.68, 3.3],
+  T_HUG: [1.2, 3.3], M_HUG: [0.72, 3.3], M_BACK: [-0.05, 3.7], A_WAIT: [2.9, 2.4], A_HUG: [1.68, 3.3],
   DOOR: [G.DOOR1, 4.35], A_EDGE: [1.6, 3.95], A_OFF: [-6, 0.4], A_GONE: [-16, 0.2],
   SAL_OUT: [0.75, 3.95], SAL_STOP: [-0.2, 1.4],
 };
