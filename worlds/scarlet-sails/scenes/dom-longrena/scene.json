@@ -1971,6 +1971,7 @@
     ],
     "bpm": 62,
     "density": 0.22,
-    "brightness": 0.4
+    "brightness": 0.4,
+    "scale": "D_MAJOR_B_MINOR"
   }
 }

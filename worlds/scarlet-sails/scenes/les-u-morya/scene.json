@@ -10483,6 +10483,7 @@
     ],
     "bpm": 72,
     "density": 0.25,
-    "brightness": 0.55
+    "brightness": 0.55,
+    "scale": "D_MAJOR_B_MINOR"
   }
 }
