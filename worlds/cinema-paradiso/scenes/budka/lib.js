@@ -39,7 +39,10 @@ const CAM = {
   SQUARE: cam(1.6, 0.6, 1.5, -60),     // the window on the square and projector 1
   FLOOR: cam(1.5, 0.3, 1.2, -40, -26), // low by the door, along the way from projector 1 to the door, looking down
   CAL: cam(1.25, 0.95, 1.55, 172),     // close at the calendar on the opposite wall
+  P2MED: cam(0.0, 1.45, 1.55, 52),     // a medium shot of whoever stands at projector 2's back (1988)
 };
+// the camera's keys moved together to a shot
+const glide = (s, shot, over) => { for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_yaw', 'camera_pitch']) s.move(k, shot[k], { over }); };
 
 // ── light by the hour and the era (looks' weights) ──
 const tone = (hour = 0.9, era = 'past') => {
@@ -653,9 +656,11 @@ const FILM = {
       s.tell('ruins:in');
       s.set('pigeons', 1);
       sal.look('projector2');
-      s.set('camera_shot', 'medium'); s.set('camera_glide', 2); s.set('camera_target', 'toto');
-      await walk(s, 'toto', [P.SAL_P2]); await sal.turn(330);
-      sal.reach({ l: 'projector2' });
+      // the camera comes with him to a medium shot by projector 2 (the shot's keys glide: an operator's framing
+      // would add the DOOR offsets on top of it)
+      glide(s, CAM.P2MED, 2.5);
+      await walk(s, 'toto', [P.SAL_P2]); await sal.turn(290);
+      sal.reach({ r: 'projector2' });
       await s.wait(6);
       sal.reach(null);
     },
@@ -665,7 +670,7 @@ const FILM = {
     after: 'ruins',
     run: async s => {
       const sal = s.person('toto');
-      s.set('camera_glide', 1.5); s.set('camera_target', null);
+      glide(s, CAM.DOOR, 1.8);
       await walk(s, 'toto', [[1.4, 1.2], P.SAL_DOOR]); await sal.turn(140);
       sal.reach({ r: 'booth_door#edge' });
       await s.move('door', 0, { over: 1.2 });
