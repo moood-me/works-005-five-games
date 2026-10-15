@@ -7,18 +7,17 @@ scene.kit.beats.play(scene, scene.lib.FILM);
 
 const has = name => !!scene.kit.cast.motions?.[name];
 let leaning = false;
-// (the cast's peek_lean barely leans: the boy is moved a step into the gap instead, no steps, his left hand on the
-// curtain's edge, his eyes on the priest)
+// (the cast's peek_lean barely leans: the boy is moved a step into the gap instead, no steps, his eyes on the priest)
 const B = scene.lib.G.BOY, OUT = [B[0] + 0.28, B[1] - 0.16];
 function peek(v) {
   if (v > 0.5 && !leaning) {
     leaning = true;
     const boy = scene.person('toto');
-    boy.walk([OUT], { steps: false, queue: false }); boy.reach({ l: 'curtain#gap' }); boy.look('adelfio');
+    boy.walk([OUT], { steps: false, queue: false }); boy.look('adelfio');
   } else if (v < 0.3 && leaning) {
     leaning = false;
     const boy = scene.person('toto');
-    boy.walk([B], { steps: false }); boy.reach(null);
+    boy.walk([B], { steps: false });
   }
 }
 let ringing = null;
