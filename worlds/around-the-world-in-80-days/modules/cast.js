@@ -97,12 +97,95 @@ return {
     porter: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt',
       body: { height: 0.98, shoulders: 1.0, thick: 1.04 },
       colors: { skin: '#d6ae90', hair: '#8e8a84', top: '#5a2a2c', garment: '#4c2326', bottom: '#2b2526', shoes: '#151313' } },
+    // Passepartout in the costume of the Long Noses (Yokohama): tights of the troupe's red, wings at his back, the nose
+    // (a whole look: passepartout_wear = scene.kit.cast.characters.passepartout_nose)
+    passepartout_nose: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'curls', parts: ['wings', 'long_nose'],
+      body: { height: 0.96, shoulders: 1.12, thick: 1.06, head: 1.06 },
+      colors: { skin: '#dcae8c', hair: '#2b211c', top: '#b8452f', bottom: '#b8452f', shoes: '#2a1c16', accent: '#e0b84a' } },
+    // the British consul at Suez: a light frock coat, a pith helmet, side-whiskers
+    consul: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt', hat: 'helmet', parts: ['shirtfront', 'whiskers'],
+      body: { height: 0.99, shoulders: 1.02, thick: 1.12 },
+      colors: { skin: '#dcae90', hair: '#8a7a64', top: '#ece8dc', garment: '#cfc4a8', bottom: '#bfb49a', shoes: '#3a2c22', hat: '#ebe5d2', accent: '#2a2622' } },
+    // Kiouni's owner: an old Indian, a white beard, a white turban, a dark cloak to the ground, barefoot
+    owner: { kind: 'shapes', style: 'vokrug', who: 'old', garment: 'robe', hair: 'short', hat: 'turban', barefoot: 'both', parts: ['beard'],
+      body: { height: 0.95, shoulders: 0.96, thick: 0.92 },
+      colors: { skin: '#7e5640', hair: '#ece8e0', top: '#4a3f36', garment: '#3c332c', bottom: '#4a3f36', hat: '#efeadf' } },
+    // the trader at Allahabad: stout, a bright turban, a motley robe, a sash
+    trader: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'robe', hair: 'short', hat: 'turban', parts: ['moustache', 'sash'],
+      body: { height: 0.97, shoulders: 1.08, thick: 1.38 },
+      colors: { skin: '#86593e', hair: '#1a1410', top: '#2f6a5a', garment: '#2f6a5a', bottom: '#d8ccb0', shoes: '#5a3a22', hat: '#e2a12c', accent: '#b8402e' } },
+    // the conductor of the Indian line: a white tunic-jacket, a dark peaked cap, a moustache
+    conductor: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['moustache'],
+      body: { height: 0.98, thick: 0.98 },
+      colors: { skin: '#c99a76', hair: '#2a211a', top: '#ece8de', garment: '#ece8de', bottom: '#ddd8cc', shoes: '#1e1a18', hat: '#22283a' } },
+    // John Bunsby, the pilot: weathered and ruddy, a grey beard, a yellow sou'wester, a pea jacket, a pipe in his teeth
+    bunsby: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'souwester', parts: ['beard', 'pipe'],
+      body: { height: 0.97, shoulders: 1.1, thick: 1.16 },
+      colors: { skin: '#c4805e', hair: '#9a948a', top: '#cfc6b0', garment: '#26324a', bottom: '#2c2a2a', shoes: '#1a1716', hat: '#d8a92c' } },
+    // a Hong Kong boatman: a wide conical straw hat, a blue jacket, barefoot; his lantern (with: ['lantern'])
+    boatman: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'straw', barefoot: 'both',
+      body: { height: 0.94, thick: 0.86 },
+      colors: { skin: '#c49a6c', hair: '#151210', top: '#2f5486', garment: '#2f5486', bottom: '#2c3440', hat: '#cdb27a' } },
+    // Batulcar, the showman: a top hat, a waistcoat over shirt-sleeves, long moustaches
+    batulcar: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'waistcoat', hair: 'kempt', hat: 'tophat', parts: ['mustachios'],
+      body: { height: 1.0, shoulders: 1.06, thick: 1.2 },
+      colors: { skin: '#d9aa86', hair: '#2a1e18', top: '#ece6d6', garment: '#8a2230', bottom: '#2a2830', shoes: '#141414', hat: '#1a1a1e' } },
+    // an acrobat of the Long Noses: tights, wings at his back, the nose two metres long. His colours his own:
+    // person.look.colors (top and bottom — the tights, accent — the wings; cast.md has six)
+    nose: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'short', parts: ['wings', 'long_nose'],
+      body: { height: 0.95, shoulders: 1.04, thick: 0.92 },
+      colors: { skin: '#d8ae86', hair: '#151210', top: '#3d5f9a', bottom: '#3d5f9a', shoes: '#1c1a20', accent: '#e0b84a' } },
+    // a sailor: a flat round cap, a striped shirt
+    sailor: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'short', hat: 'sailorcap', parts: ['stripes'],
+      body: { height: 0.96, thick: 0.94 },
+      colors: { skin: '#d2a07e', hair: '#3a2a1e', top: '#ece8e0', bottom: '#2a3044', shoes: '#1a1818', hat: '#1f2a44', accent: '#24314e' } },
+    // Captain Speedy of the Henrietta: big, a red beard, a peaked cap, a pea jacket
+    speedy: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['beard'],
+      body: { height: 1.04, shoulders: 1.14, thick: 1.3 },
+      colors: { skin: '#d49a78', hair: '#b4502a', top: '#cfc8b8', garment: '#1f2a40', bottom: '#262a34', shoes: '#151413', hat: '#1b2236' } },
+    // a stoker: no jacket, his sleeves rolled up, soot on his face
+    stoker: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'rolled', hair: 'short', parts: ['soot'],
+      body: { height: 0.97, shoulders: 1.1, thick: 1.12 },
+      colors: { skin: '#c8987a', hair: '#201a16', top: '#b8b2a4', bottom: '#33302c', shoes: '#151413' } },
+    // a Liverpool constable: a tall helmet, a dark tunic to the knee
+    policeman: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'short', hat: 'custodian', parts: ['whiskers'],
+      body: { height: 1.02, shoulders: 1.04, thick: 1.0 },
+      colors: { skin: '#d8ae90', hair: '#4a3a2c', top: '#1e2536', garment: '#1e2536', bottom: '#1b2030', shoes: '#111114', hat: '#1b2232', accent: '#b8a46a' } },
+    // the driver of an American locomotive: overalls, a cap, a beard
+    driver: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'short', hat: 'cap', parts: ['beard'],
+      body: { height: 1.0, shoulders: 1.08, thick: 1.08 },
+      colors: { skin: '#d0a07e', hair: '#4a3626', top: '#3f5878', bottom: '#3f5878', shoes: '#1c1814', hat: '#3a3a3c' } },
+    // the captain at Fort Kearney: a blue frock coat, a wide-brimmed hat, a moustache
+    captain: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'short', hat: 'hat', parts: ['moustache'],
+      body: { height: 1.02, shoulders: 1.04, thick: 1.0 },
+      colors: { skin: '#d4a684', hair: '#6a4e34', top: '#24345e', garment: '#24345e', bottom: '#5f7194', shoes: '#141414', hat: '#2a2622' } },
+    // a soldier of the fort: a sky-blue greatcoat, a kepi; his rifle (with: ['rifle'])
+    soldier: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'coat', hair: 'short', hat: 'kepi',
+      body: { height: 0.98, thick: 0.96 },
+      colors: { skin: '#d4a684', hair: '#3a2c20', top: '#24345e', garment: '#6f84a6', bottom: '#5f7194', shoes: '#141414', hat: '#22305a' } },
+    // Mudge, the owner of the sledge: a fur coat, a fur hat, a beard
+    mudge: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'coat', hair: 'short', hat: 'fur', parts: ['beard'],
+      body: { height: 1.0, shoulders: 1.1, thick: 1.3 },
+      colors: { skin: '#d2a07e', hair: '#5e4430', top: '#6e5640', garment: '#6a5038', bottom: '#3a3028', shoes: '#241c16', hat: '#4a3626' } },
+  },
+  // what is put on over a look as the game's keys say (<id>_wear: a scene's own key turned into these) — fields over the
+  // cast's look: Aouda's travelling dress (aouda_dress), Fix's bruise (fix_bruise), Passepartout's wings (pp_wings),
+  // the whole costume is characters.passepartout_nose
+  wears: {
+    aouda_dress: { garment: 'dress', hood: false, colors: { top: '#3c4a5e', garment: '#3c4a5e', accent: '#b8893a', shoes: '#2a2018' } },
+    fix_bruise: { parts: ['whiskers', 'bruise'] },
+    pp_wings: { parts: ['wings'] },
   },
   shapes: {
     // the world's style: the engine's flat geometry — straight-edged shapes, flat colours lit by the scene's own light,
     // the engine's face (simple: at rest, or as <id>_mood has it), no lines: as quiet as the rooms they stand in
-    styles: { vokrug: { from: 'flat', name: 'Вокруг света', face: 'simple', ground: 'night' } },
+    // — with a big head (the face reads at a distance: eyes, brows, nose, mouth) and fuller arms and legs
+    styles: { vokrug: { from: 'flat', name: 'Вокруг света', face: 'simple', ground: 'night', head: 1.34, neck: 0.6, limb: 1.15 } },
     garments: {
+      // a waistcoat over the shirt-sleeves: the trunk in the garment's colour to the waist, the sleeves the shirt's
+      waistcoat: { name: 'жилет', hang: [{ to: 0.06, from: 'shoulders', flare: 0.04, folds: false }] },
+      // no jacket, the shirt's sleeves rolled up (the forearms bare)
+      rolled: { name: 'рукава закатаны', short: true },
       // a frock coat: from the shoulders to the knees, straight, its sleeves of it
       frockcoat: { name: 'сюртук', hang: [{ to: 0.8, from: 'shoulders', flare: 0.1, folds: false }], sleeves: 'garment' },
       // a sari: a skirt to the ground from the waist, the bodice of it, and its end (the pallu) from the right hip over the
@@ -155,6 +238,48 @@ return {
         const { at, axes: [hs, hu, hf], r } = F.head;
         F.ball(add(at, mul(hu, r * 0.48)), [hs, hu, hf], [r * 1.12, r * 0.62, r * 1.14], F.colors.hat, F.sides);
         F.ball(add(at, add(mul(hu, r * 0.82), mul(hf, -r * 0.1))), [hs, hu, hf], [r * 0.8, r * 0.45, r * 0.85], F.colors.hat, F.sides);
+      } },
+      // a sou'wester: a round crown, the brim wide all round and longest behind, sloping down over the nape
+      souwester: { name: 'зюйдвестка', draw: F => {
+        const { at, axes: [hs, hu, hf], r } = F.head, tilt = unit(add(hu, mul(hf, -0.3))), ax = [hs, tilt, cross(hs, tilt)];
+        F.cap(add(at, mul(hu, r * 0.22)), [hs, hu, hf], [r * 1.1, r * 1.02, r * 1.12], [0, 1, 0], 0, F.colors.hat, F.sides);
+        F.ball(add(at, add(mul(hu, r * 0.24), mul(hf, -r * 0.3))), ax, [r * 1.5, r * 0.06, r * 1.75], F.colors.hat, F.sides * 2);
+      } },
+      // a wide conical straw hat: a low cone, its rim far out over the shoulders
+      straw: { name: 'соломенная шляпа', draw: F => {
+        const { at, axes: [hs, hu, hf], r } = F.head, rim = add(at, mul(hu, r * 0.5)), top = add(at, mul(hu, r * 1.45));
+        F.tube([top, rim], [[0, r * 0.06], [1, r * 2.3]], [[0, F.colors.hat]], F.sides * 2, hs);
+        F.ball(rim, [hs, hu, hf], [r * 2.3, r * 0.03, r * 2.3], F.colors.hat, F.sides * 2);
+      } },
+      // a sailor's flat round cap with no peak: a band round the head, a flat crown a little wider, two ribbons behind
+      sailorcap: { name: 'бескозырка', draw: F => {
+        const { at, axes: [hs, hu, hf], r } = F.head, tilt = unit(add(hu, mul(hf, -0.12))), ax = [hs, tilt, cross(hs, tilt)];
+        F.ball(add(at, mul(tilt, r * 0.5)), ax, [r * 1.02, r * 0.16, r * 1.04], F.colors.accent, F.sides);
+        F.ball(add(at, mul(tilt, r * 0.72)), ax, [r * 1.2, r * 0.13, r * 1.18], F.colors.hat, F.sides * 2);
+        for (const s of [-1, 1]) {
+          const from = add(add(at, mul(tilt, r * 0.45)), add(mul(hf, -r * 1.0), mul(hs, s * r * 0.15)));
+          F.tube([from, add(from, add(mul(hu, -r * 0.7), mul(hf, -r * 0.15)))], [[0, r * 0.06], [1, r * 0.06]], [[0, F.colors.accent]], 4, hs, 0.25);
+        }
+      } },
+      // a constable's tall helmet: a high dome over the crown, a narrow brim, a badge before
+      custodian: { name: 'шлем констебля', draw: F => {
+        const { at, axes: [hs, hu, hf], r } = F.head, ax = [hs, hu, hf];
+        F.ball(add(at, mul(hu, r * 0.3)), ax, [r * 1.25, r * 0.05, r * 1.3], F.colors.hat, F.sides * 2);
+        F.cap(add(at, mul(hu, r * 0.3)), ax, [r * 1.05, r * 1.55, r * 1.12], [0, 1, 0], 0, F.colors.hat, F.sides);
+        F.ball(add(at, add(mul(hu, r * 1.05), mul(hf, r * 1.0))), ax, [r * 0.2, r * 0.24, r * 0.06], F.colors.accent, 10);
+      } },
+      // a kepi: a short crown leaning forward, flat on top, a small peak
+      kepi: { name: 'кепи', draw: F => {
+        const { at, axes: [hs, hu, hf], r } = F.head, tilt = unit(add(hu, mul(hf, 0.35))), ax = [hs, tilt, cross(hs, tilt)];
+        const base = add(at, mul(hu, r * 0.3)), top = add(base, mul(tilt, r * 0.95));
+        F.tube([base, top], [[0, r * 1.0], [1, r * 0.82]], [[0, F.colors.hat]], F.sides, hs, 0.92, 2, true);
+        F.ball(top, ax, [r * 0.82, r * 0.03, r * 0.8], F.colors.hat, F.sides);
+        F.ball(add(base, mul(hf, r * 0.9)), [hs, unit(add(hu, mul(hf, -0.4))), unit(add(hf, mul(hu, 0.4)))], [r * 0.72, r * 0.05, r * 0.42], [0.08, 0.08, 0.1, 1], F.sides);
+      } },
+      // a round fur hat, big over the crown and the ears
+      fur: { name: 'меховая шапка', draw: F => {
+        const { at, axes: [hs, hu, hf], r } = F.head;
+        F.ball(add(at, add(mul(hu, r * 0.55), mul(hf, -r * 0.08))), [hs, hu, hf], [r * 1.28, r * 0.9, r * 1.3], F.colors.hat, F.sides);
       } },
     },
     parts: {
@@ -274,6 +399,118 @@ return {
       chain: { name: 'цепочка', draw: F => {
         const k = m(F), s = F.side('Spine1'), c = add(F.P('Spine1'), mul(F.up('Spine1'), 0.02 * k));
         F.tube([-1, 0, 1].map(u => F.clear(add(c, add(mul(s, u * 0.07 * k), [0, -0.02 * k * (1 - u * u), 0])), 1, 0.006 * k)), [[0, 0.004 * k], [2, 0.004 * k]], [[0, GOLD]], 5, s);
+      } },
+      // a sash wound round the waist, in the accent
+      sash: { name: 'кушак', draw: F => {
+        const k = m(F), c = F.P('Spine1'), s = F.side('Spine1'), f = F.fwd('Spine1');
+        F.ball(add(c, mul(F.up('Spine1'), -0.03 * k)), [s, F.up('Spine1'), f], [0.2 * k * 1.3, 0.05 * k, 0.15 * k * 1.3], F.colors.accent, F.sides);
+      } },
+      // a short pipe in the teeth at the corner of the mouth, its bowl out before the chin
+      pipe: { name: 'трубка', draw: F => {
+        const { axes, r, on } = F.head, [hs, hu, hf] = axes, mouth = on([0.22, -0.38, 0.95], 1.0);
+        const bowl = add(mouth, add(mul(hf, r * 0.75), add(mul(hu, -r * 0.18), mul(hs, r * 0.12))));
+        F.tube([mouth, bowl], [[0, r * 0.05], [1, r * 0.05]], [[0, WOOD]], 5, hs);
+        F.tube([add(bowl, mul(hu, -r * 0.08)), add(bowl, mul(hu, r * 0.24))], [[0, r * 0.11], [1, r * 0.12]], [[0, WOOD]], 8, hs, 0.92, 2, true);
+        F.point('pipe', add(bowl, mul(hu, r * 0.26)));
+      } },
+      // long moustaches: from under the nose out past the cheeks, drooping at their ends
+      mustachios: { name: 'длинные усы', draw: F => {
+        const { at, axes, r, out } = F.head, [hs, hu, hf] = axes, rr = r * out, mid = add(at, add(mul(hu, -rr * 0.36), mul(hf, rr * 0.92)));
+        for (const s of [-1, 1]) {
+          const a = add(mid, mul(hs, s * rr * 0.05)), b = add(at, add(add(mul(hs, s * rr * 0.75), mul(hu, -rr * 0.42)), mul(hf, rr * 0.75)));
+          const c = add(b, add(mul(hs, s * rr * 0.55), mul(hu, -rr * 0.35)));
+          F.tube([a, b, c], [[0, rr * 0.09], [1, rr * 0.07], [2, rr * 0.015]], [[0, F.colors.hair]], 6, hu);
+        }
+      } },
+      // soot on the face: smudges over a cheek and the brow
+      soot: { name: 'сажа', draw: F => {
+        const { axes, r, on } = F.head, SOOT = [0.24, 0.21, 0.2, 1];
+        F.ball(on([0.42, -0.18, 0.88], 0.99), axes, [r * 0.22, r * 0.14, r * 0.05], SOOT, 10);
+        F.ball(on([-0.2, 0.42, 0.88], 0.99), axes, [r * 0.26, r * 0.1, r * 0.05], SOOT, 10);
+      } },
+      // a bruise round the eye on his right, purple (Fix after Passepartout's fists)
+      bruise: { name: 'синяк', draw: F => {
+        const { axes, r, on } = F.head;
+        F.ball(on([-0.33, 0.06, 0.94], 0.975), axes, [r * 0.2, r * 0.18, r * 0.06], [0.45, 0.22, 0.4, 1], 12);
+      } },
+      // a striped shirt: dark bands round the chest and the belly
+      stripes: { name: 'полоски', draw: F => {
+        const T = F.trunk(1.035), n = Math.max(12, F.sides * 2), sq = F.style.square;
+        const sec = u => {
+          const a = u < 1 ? T[2] : T[3], b = u < 1 ? T[3] : T[4], v = u < 1 ? u : u - 1;
+          return [mix(a[0], b[0], v), b[1], b[2], a[3] + (b[3] - a[3]) * v, a[4] + (b[4] - a[4]) * v];
+        };
+        for (const u of [0.05, 0.42, 0.79, 1.16]) F.rings([F.ringOf(sec(u), n, sq), F.ringOf(sec(u + 0.13), n, sq)], F.colors.accent, null, null);
+      } },
+      // wings at the back: two long leaves from between the shoulders out and up, in the accent, a paler one under each
+      wings: { name: 'крылья', draw: F => {
+        const k = m(F), f = F.fwd('Chest'), s = F.side('Chest'), u = F.up('Chest'), back = add(F.P('Chest'), mul(f, -0.15 * k));
+        const pale = [...F.colors.accent.slice(0, 3).map(v => 0.55 + v * 0.45), 1];
+        for (const sd of [-1, 1]) {
+          for (const [lift, len, col] of [[0.32, 0.62, F.colors.accent], [0.05, 0.48, pale]]) {
+            const root = add(back, add(mul(s, sd * 0.07 * k), mul(u, (lift - 0.1) * 0.3 * k)));
+            const tip = add(root, add(add(mul(s, sd * len * k), mul(u, lift * k)), mul(f, -0.12 * k))), mid = add(mix(root, tip, 0.45), mul(u, 0.05 * k));
+            const along = unit(sub(tip, root)), wide = unit(cross(f, along));
+            F.tube([root, mid, tip], [[0, 0.03 * k], [1, 0.13 * k], [2, 0.015 * k]], [[0, col]], 8, wide, 0.1);
+          }
+        }
+      } },
+      // the Long Noses' nose: a tapering pole two metres long out of the face, a little up
+      long_nose: { name: 'длинный нос', draw: F => {
+        const k = m(F), { axes: [hs, hu, hf], r, on } = F.head, base = on([0, -0.1, 1], 0.97), dir = unit(add(hf, mul(hu, 0.18)));
+        F.tube([base, add(base, mul(dir, 2.0 * k))], [[0, r * 0.32], [1, r * 0.1]], [[0, [0.72, 0.2, 0.15, 1]]], 10, hs);
+        F.point('nose', add(base, mul(dir, 2.0 * k)));
+      } },
+      // a lantern on a short pole in the right hand: a paper body glowing, hanging from the pole's end, swinging; its
+      // point flame (a light "at": "<id>#flame")
+      lantern: { name: 'фонарь', draw: F => {
+        const k = m(F), hand = F.P('RightHand'), up = unit(add(F.up('RightHand'), [0, 1.2, 0])), fw = F.fwd('Hips'), side = F.side('Hips');
+        const end = add(add(hand, mul(up, 0.3 * k)), mul(fw, 0.22 * k)), body = F.swing('lantern', add(end, [0, -0.2 * k, 0]), 60);
+        const dn = unit(sub(body, end)), ax = [side, mul(dn, -1), fw];
+        F.bar(add(hand, mul(up, -0.06 * k)), end, 0.011 * k, 0.008 * k, [[0, WOOD]], 6, side);
+        F.tube([end, mix(end, body, 0.6)], [[0, 0.003 * k], [1, 0.003 * k]], [[0, INK]], 4, side);
+        F.ball(add(body, mul(dn, 0.04 * k)), ax, [0.085 * k, 0.11 * k, 0.085 * k], [1, 0.62, 0.3, 2], 12);
+        F.ball(add(body, mul(dn, -0.065 * k)), ax, [0.05 * k, 0.012 * k, 0.05 * k], INK, 10);
+        F.ball(add(body, mul(dn, 0.15 * k)), ax, [0.05 * k, 0.012 * k, 0.05 * k], INK, 10);
+        F.point('flame', add(body, mul(dn, 0.04 * k)));
+      } },
+      // a rifle held upright in the right hand, its butt down by the foot (order arms)
+      rifle: { name: 'ружьё', draw: F => {
+        const k = m(F), hand = F.P('RightHand'), side = F.side('Hips'), up = unit(add([0, 1, 0], mul(F.fwd('Hips'), 0.08)));
+        F.bar(add(hand, mul(up, -0.66 * k)), add(hand, mul(up, 0.06 * k)), 0.035 * k, 0.022 * k, [[0, WOOD]], 6, F.fwd('Hips'), 0.5);
+        F.bar(add(hand, mul(up, 0.04 * k)), add(hand, mul(up, 0.6 * k)), 0.012 * k, 0.01 * k, [[0, [0.25, 0.25, 0.27, 1]]], 6, side);
+      } },
+      // a plaid folded over the left forearm, its two ends hanging; its point plaid
+      plaid: { name: 'плед', draw: F => {
+        const k = m(F), c = mix(F.P('LeftForeArm'), F.P('LeftHand'), 0.45), ax = [F.side('Hips'), [0, 1, 0], F.fwd('Hips')];
+        F.ball(add(c, [0, -0.1 * k, 0]), ax, [0.06 * k, 0.17 * k, 0.15 * k], [0.46, 0.2, 0.18, 1], 10, 3);
+        F.ball(add(c, [0, -0.2 * k, 0]), ax, [0.064 * k, 0.03 * k, 0.152 * k], [0.2, 0.3, 0.24, 1], 10, 3);
+        F.point('plaid', c);
+      } },
+      // Fogg's notebook open in both hands, a pencil in the right; its point book
+      notebook: { name: 'книжка с карандашом', draw: F => {
+        sheet(F, 0.11, 0.15, LINEN, 'book');
+        const k = m(F), ax = axesOf(F, 'RightHand'), c = add(F.P('RightHand'), mul(ax[2], 0.04 * k));
+        F.bar(add(c, mul(ax[1], -0.06 * k)), add(c, mul(ax[1], 0.06 * k)), 0.004 * k, 0.003 * k, [[0, [0.3, 0.32, 0.24, 1]]], 5, ax[0]);
+      } },
+      // the book shut, held flat in both hands on the lap; its point book
+      book_shut: { name: 'книжка закрыта', draw: F => {
+        const k = m(F), L = F.P('LeftHand'), R = F.P('RightHand'), c = mix(L, R, 0.5), x = unit(sub(R, L)), y = unit(cross(x, F.fwd('Hips'))), n = cross(x, y);
+        F.ball(add(c, [0, 0.015 * k, 0]), [x, n, y], [0.075 * k, 0.012 * k, 0.1 * k], [0.32, 0.12, 0.1, 1], 8, 6);
+        F.point('book', c);
+      } },
+      // a lump of sugar on the right palm; its point sugar
+      sugar: { name: 'сахар', draw: F => {
+        const k = m(F), ax = axesOf(F, 'RightHand'), c = add(add(F.P('RightHand'), mul(ax[2], 0.05 * k)), mul(ax[1], 0.03 * k));
+        F.ball(c, ax, [0.022 * k, 0.022 * k, 0.022 * k], [0.97, 0.96, 0.92, 1], 4, 6);
+        F.point('sugar', c);
+      } },
+      // a sheet (a sail's rope) held in both hands, its end hanging from the left; its point sheet — the right hand, where
+      // the scene's own rope comes to it
+      sheet: { name: 'шкот', draw: F => {
+        const k = m(F), L = F.P('LeftHand'), R = F.P('RightHand'), low = F.swing('sheet', add(L, [0, -0.45 * k, 0]), 50);
+        F.tube([R, add(mix(R, L, 0.5), [0, -0.04 * k, 0]), L, low], [[0, 0.012 * k], [3, 0.012 * k]], [[0, [0.66, 0.58, 0.42, 1]]], 6, F.side('Hips'));
+        F.point('sheet', R);
       } },
     },
   },
