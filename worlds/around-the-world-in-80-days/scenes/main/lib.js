@@ -123,7 +123,7 @@ const WIDE = view();
 // table, on Fogg across it; Fogg at his cards, from a little above; Fogg come in, by the end of the clock's wall; Stuart
 // close, turning; Fogg in his armchair by the fire
 const ON_STUART = on('stuart', 0.4, [0.45, 0.55]), AT_DOOR = view(-0.3, 9.6, -0.1, 0), AT_STAND = view(-1.3, 9.6, -0.15, 0.01);
-const WHIST_TABLE = on('fogg', 0.55, [0.4, 0.32]), FOGG_CLOSE = on('fogg', 0.7, [0.45, 0.32], { camera_x: -0.4, camera_h: 1.3 });
+const WHIST_TABLE = on('fogg', 0.55, [0.4, 0.32]), FOGG_CLOSE = on('fogg', 0.7, [0.45, 0.36], { camera_x: -0.4, camera_h: 0.55 });
 const FOGG_IN = on('fogg', 0.7, [0.45, 0.42]), STUART_CLOSE = on('stuart', 0.6, [0.5, 0.35]), FRIDAY_FOGG = on('fogg', 0.5, [0.45, 0.45]);
 const same = (a, b) => (Array.isArray(a) && Array.isArray(b) ? a.length === b.length && a.every((v, i) => v === b[i]) : (a ?? 0) === (b ?? 0));
 const isView = (s, v) => Object.keys(CAM).every(k => k === 'camera_glide' || same(s.get(k), v[k]));
@@ -247,9 +247,7 @@ function film(scene) {
         s.cut(FOGG_CLOSE);
         await looks(s, [[0.3, 'fogg', 'stuart#head'], [0.3, 'fallentin', 'fogg#head'], [0.2, 'sullivan', 'fogg#head'],
           [0.2, 'flanagan', 'fogg#head'], [0.2, 'ralph', 'fogg#head']]);
-        await s.wait(0.8);
-        fogg.look(BAIZE);
-        await s.wait(0.6);
+        await s.wait(1.2);
         s.tell('wager:ready');
         await s.wait(0.5);
       },
@@ -257,7 +255,7 @@ function film(scene) {
     // ---- He lays his cards and his hands on the baize; Stuart gets up. All eyes on Fogg.
     wager_down: {
       after: 'wager',
-      from: () => ({ ...AFTER_WHIST(), ...FOGG_CLOSE, fogg_look: BAIZE,
+      from: () => ({ ...AFTER_WHIST(), ...FOGG_CLOSE, fogg_look: 'stuart#head',
         ...Object.fromEntries(['fallentin', 'sullivan', 'flanagan', 'ralph'].map(id => [`${id}_look`, 'fogg#head'])) }),
       run: async s => {
         const fogg = s.person('fogg'), stuart = s.person('stuart');
@@ -266,9 +264,7 @@ function film(scene) {
         fogg.with(null);
         s.set('cards_down', 1);
         s.tell('wager_down:cards-down');
-        await s.wait(0.3);
-        fogg.look('stuart#head');
-        await s.wait(0.3);
+        await s.wait(0.6);
         const up = stuart.go('rise_chair', { from: READER, turn: 200 });
         await s.wait(0.1);
         stuart.look('fogg#head');
