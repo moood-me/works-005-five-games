@@ -45,7 +45,14 @@ x across, left to right facing the ports; z from the opposite wall (0) to the po
 - Fire (`fire`, `fire_lens`, `fire_reel`, `embers` at the turned projector by `fire`; light `fire_light`), smoke
   (`smoke_gate`; the look `smoke` hazes the room), motes, pigeons' down (`feathers`, a burst on `pigeons`).
 
-Light: lamp, lamp houses, stair bulb, window, fire. `inside` 0.3. Looks by keys the script derives: `night_k`, `eve_k`,
+- Along the walls, for 21:9 (beyond the middle 4:3): a tall rack of cans and reels and a fire bucket against the
+  opposite wall (`rack`, `bucket`), a small wall lamp over them (`sconce`, light `sconce_light`), Alfredo's jacket and
+  a photo; a shelf with spare reels and a fuse box by the ports (`rack_n`); on the left wall toward the ports a shelf,
+  «VIETATO FUMARE», an extinguisher; the stair's window seen through the door (`landing_window`: rain by
+  `rain_window`, so autumn shows behind Alfredo in the doorway). The crate and the box are forms (boxes), with their
+  tops as planes.
+
+Light: lamp, wall lamp, lamp houses, stair bulb, window, fire. `inside` 0.3. Looks by keys the script derives: `night_k`, `eve_k`,
 `dawn_k` (from `hour`), `ruin_k` (from `era`), and `smoke`.
 
 ## Shots (lib.js `CAM`, scenes.md «Кадры»)
@@ -120,7 +127,8 @@ a second without pulling.
 - `FLOOR` looks down at −26° (scenes.md −19°): at −19° `floor#path1` is at the frame's bottom edge (−0.5 of the frame, not −0.36 as scenes.md counted); at −26° the way runs from +0.08 to −0.36 of the frame, the fire is above the frame (its light and smoke fill the room).
 - The crate is moved by the beats: by the window in `window` (the boy on it beside Alfredo, not hiding him), thrown aside under the window in `jam` and `smoke_in` (it stood where Alfredo falls).
 - In 1988 the camera comes to Salvatore at projector 2 by its own keys (a glide to a medium shot), not by the operator: `camera_target` adds the DOOR shot's offsets on top of its framing and ends inside the projector.
-- `knock`: Alfredo's face is turned to Elena, away from the camera (his profile from behind); Elena's face is the shot's.
+- `knock`, `reels`: Alfredo sits facing us and turns his ear (head ~60°) toward the door, not his face to Elena — a blind man's way, and his glasses stay seen.
+- `story_booth`: Toto sits on the low box by the bench (not on the bench's edge), beside Alfredo, both faces to the camera.
 - The calendar exists from chapter IV (`month` 'none' before).
 
 ## Контракт для проверки
