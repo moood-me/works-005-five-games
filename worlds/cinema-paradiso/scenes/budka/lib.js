@@ -253,16 +253,16 @@ const FILM = {
   // the insert closed: the clippings on the bench, into the tin; then Alfredo turns his back — the choice
   frames: {
     from: () => ({ ...base(0.9), ...show(1), clips: 1, ...CAM.BENCH, ...people({
-      alfredo: { at: P.ALF_BENCH, turn: 250, look: 'toto', mood: 'smile' },
+      alfredo: { at: P.ALF_BENCH, turn: 100, look: 'tin', do: { motion: 'bench_work', loop: true }, mood: 'neutral' },
       toto: { at: P.BOY_BENCH, turn: 215, look: 'tin', mood: 'surprised' } }) }),
     run: async s => {
       const alf = s.person('alfredo'), boy = s.person('toto');
       s.move('tin_open', 1, { over: 0.8 });
-      alf.look('tin'); alf.reach({ r: 'tin' });
       await s.wait(2); s.tell('frames:tin');
       boy.look('alfredo');
-      await s.wait(1.2); alf.reach(null); alf.look('toto');
-      await s.wait(2.2);
+      await s.wait(1.0);
+      alf.do('stand'); await alf.turn(250); alf.look('toto'); alf.mood('smile');
+      await s.wait(2.4);
       s.set('clips', 0);
       alf.look(null); alf.mood('neutral');
       await walk(s, 'alfredo', [[0.75, 2.2], P.ALF_P2]);
