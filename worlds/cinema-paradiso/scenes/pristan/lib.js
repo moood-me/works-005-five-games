@@ -224,7 +224,7 @@ function film(scene) {
   const CH = scene.kit.cast.characters;
   const CAM = {
     wide: cam(3.5, -1.0, -8, 0.5, 3),                     // the summer cinema: the beam over the chairs, the screen, the boats, the moon
-    close: look([0.6, 4.4], [-2.7, 9.6], 0, 2),           // Toto at the projector, Elena on her crate, the screen beyond
+    close: look([-0.5, 6.2], [-2.6, 9.6], -0.1, 2),           // Toto at the projector, Elena on her crate, the screen beyond
     head: look([-4.6, 12.6], [2.2, 2.6], 0, 0),           // behind Toto toward the quay: the car comes in the rain
     found: cam(1.0, 41, 2, 0.2, 1),                       // down the mole to Toto on his bollard by the lantern
     hug: look([5.3, 60.7], [2.2, 59.25], -0.1, 3),          // from the head's corner by the lantern: her face over his shoulder, lit
