@@ -50,11 +50,11 @@ function panels(g, x0, x1, h, seed) {
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
   PORT: cam(0, -0.9, 0, 0.3, -4),               // in the booth behind the port: the room through it, he alone in row 4 from behind
-  FACE: cam(-1.3, 7.05, 147, -0.3, -2),          // in front of him to the left, ≈ 2.2 m: his face 3/4 in the screen's light, the port behind him
+  FACE: cam(-0.81, 6.37, 147, -0.35, -3),          // in front of him to the left, ≈ 2.2 m: his face 3/4 in the screen's light, the port behind him
 };
 G.CAM = CAM;
 // the camera's way round the row over 14 s: forward through the port, down the left side, round to his face
-const ROUND = [[0, -0.9, 0, 0.3], [0, 0.6, 0, 0.3], [-2.4, 2.8, 14, 0.05], [-3.0, 5.6, 70, -0.15], [-2.6, 7.3, 125, -0.25], [-1.3, 7.05, 147, -0.3]];
+const ROUND = [[0, -0.9, 0, 0.3], [0, 0.6, 0, 0.3], [-2.4, 2.8, 14, 0.05], [-3.0, 5.6, 70, -0.15], [-2.2, 7.2, 120, -0.3], [-0.81, 6.37, 147, -0.35]];
 // the film is a function of the scene: a beat's `from` reads the party's keys (note_in_hand: the note in his hand)
 function film(scene) {
 const sal = more => ({
@@ -67,7 +67,7 @@ const FILM = {
     from: () => ({ lights: 1, beam_on: 0, screen_film: 'none', reel: 0, ...sal({}), ...CAM.PORT }),
     run: async s => {
       await s.wait(1.5);
-      await s.move('lights', 0.1, { over: 4, ease: 'inOut' });
+      await s.move('lights', 0.15, { over: 4, ease: 'inOut' });
       s.tell('rome:sat');
       await s.wait(2.5);
     },

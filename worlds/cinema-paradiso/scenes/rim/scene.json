@@ -13,7 +13,7 @@
     ]
   },
   "light": {
-    "ambient": 0.22,
+    "ambient": 0.34,
     "ambientColor": "#5a5876",
     "tint": "#20182a",
     "tintStrength": 0.05,
@@ -40,12 +40,12 @@
     },
     {
       "id": "booth_lamp",
-      "across": -0.7,
-      "distance": -0.7,
-      "elevation": 1.9,
+      "across": -0.6,
+      "distance": -0.45,
+      "elevation": 2.0,
       "color": "#ffbf78",
-      "strength": 0.8,
-      "reach": 2.2
+      "strength": 1.0,
+      "reach": 2.5
     },
     {
       "id": "sconce_l1",
@@ -53,7 +53,7 @@
       "distance": 2.5,
       "elevation": 2.4,
       "color": "#ffcfa2",
-      "strength": 0.7,
+      "strength": 0.9,
       "reach": 4,
       "on": "lights"
     },
@@ -63,7 +63,7 @@
       "distance": 6.5,
       "elevation": 2.4,
       "color": "#ffcfa2",
-      "strength": 0.7,
+      "strength": 0.9,
       "reach": 4,
       "on": "lights"
     },
@@ -73,7 +73,7 @@
       "distance": 2.5,
       "elevation": 2.4,
       "color": "#ffcfa2",
-      "strength": 0.7,
+      "strength": 0.9,
       "reach": 4,
       "on": "lights"
     },
@@ -83,7 +83,7 @@
       "distance": 6.5,
       "elevation": 2.4,
       "color": "#ffcfa2",
-      "strength": 0.7,
+      "strength": 0.9,
       "reach": 4,
       "on": "lights"
     }
