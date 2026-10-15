@@ -42,7 +42,7 @@
 
 **Из основы (не пересматривались): ** `run` 4 с, `sit_down` 3 с, `rise` 3 с, `seated` 10 с, `seated_hunched` 10 с,
 `rise_chair` 3 с, `peek_lean` 8 с (раз, с удержанием), `bench_work` 6 с (петля), `paint` 12 с, `wave` 4 с, `cane_walk`
-6 с (петля, ход), `carry_walk` 6 с, `give` 3 с, `take` 3 с, `kneel_down` 4 с, `lay_down` 3 с, `drag` 6 с, `doze` 10 с,
+6 с (петля, ход), `carry_walk` 6 с, `give` 3 с, `take` 3 с, `kneel_down` 4 с, `sleep` (лежит на боку, петля: лежащий Альфредо в дыму), `drag` 6 с, `doze` 10 с,
 `sad_stand` 10 с, `read` 10 с, `sit_ground` 4,5 с, `stand_from_kneel` 3 с.
 
 **Новые (2026-10-15, ветка `pd/motions`):**
