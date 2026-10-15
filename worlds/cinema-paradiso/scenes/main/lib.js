@@ -513,7 +513,8 @@ B('after_show', {
   from: () => ({ ...PAST_NIGHT(), ...cast({
     toto: { at: [-11.2, 12.2], turn: 100 }, maria: { at: [-6.2, 5.2], turn: 330, mood: 'angry' },
     c1: { at: [-11.4, 11.6], turn: 110 }, c2: { at: [-11.3, 12.8], turn: 80 }, c3: { at: [-10.6, 13.6], turn: 60 },
-    c4: { at: [-10.9, 10.9], turn: 130 }, c6: { at: [-10.4, 12.9], turn: 90 }, c7: { at: [-11.0, 14.0], turn: 70 } }), ...CAM.CROWD }),
+    c4: { at: [-10.9, 10.9], turn: 130 }, c6: { at: [-10.4, 12.9], turn: 90 }, c7: { at: [-11.0, 14.0], turn: 70 },
+    alfredo: { at: [-11.3, 12.1], turn: 90, mood: 'smile' } }), alfredo_here: false, ...CAM.CROWD }),
   run: async s => {
     const toto = s.person('toto'), maria = s.person('maria');
     const out = [['c1', [[-8, 8.4], [-3, 3.5]]], ['c2', [[-8.2, 14.2], [-2.5, 20]]], ['c3', [[-7.6, 16.4], [-4.2, 22.8]]],
