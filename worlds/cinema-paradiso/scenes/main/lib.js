@@ -388,7 +388,7 @@ const CAM = {
   WALL: cam(-4, 3, -10, -0.2, 6),
   DOOR: cam(-8.5, 1.5, -65, -0.25, -1),
   STEPS: cam(5.5, 25.8, 180, 0.9, -6),
-  BALCONY: cam(10, 19.6, 165, -0.1, 4),
+  BALCONY: cam(10, 19.6, 165, -0.1, 12),
   EVE: cam(-1, -6, 3, 0.4, 3),
   GIRL: cam(-11, 8, 46, 0, 1),
   CHALK: cam(10, 14.2, 55, -0.4, -4),
@@ -404,7 +404,7 @@ const CAM = {
 const REST = { past: 1, paradiso_state: 'old', poster: 0, full_sign: 0, mother_light: 0, beam_on: 0, beam_aim: 0, beam_focus: 0,
   wall_film: 'none', wall_lit: 0, wall_burn: 0, smoke: 0, fireworks: 0, chalk: 0, mark_chalk: 0, night_kind: 'clear',
   elena_window: 0, viewfinder: 0, pan: 0, elena_x: 1, madman_x: -1, rec: 0, cart: 0, collapse: 0, dust: 0,
-  booth_flash: 0, booth_fig: 0, crowd_k: 0, crowd_sit: 0, chair_on: 0, bulbs: 1, flash: 0, rain: 0, wind_k: 0, cold_k: 0,
+  beam_sky: 0, booth_flash: 0, booth_fig: 0, crowd_k: 0, crowd_sit: 0, chair_on: 0, bulbs: 1, flash: 0, rain: 0, wind_k: 0, cold_k: 0,
   garland: 0, fade: 0, fw: 0, dust_burst: 0, follow: 0, sal_rail: 0, crowd_x: 0, crowd_z: -60, crowd_f: 180, ...cartKeys(0) };
 function cartKeys(u) { const c = cartAt(u); return { hearse_a: c[0], hearse_d: c[1], hearse_f: c[2] }; }
 // where the painted crowd stands: [x, z, facing]
@@ -446,13 +446,14 @@ B('rewind', {
   after: ['now_open'],
   from: () => ({ ...NOW(0.78), mother_light: 1, ...cast({ maria: { at: [-9, 26.45], turn: 180, wear: 'maria_old', do: 'stand', reach: { r: 'maria#head' }, with: ['phone'] } }), ...CAM.WIDE }),
   run: async s => {
-    const flash = s.shot({ ...CAM.WIDE, camera_pitch: 5, ...LIGHT('past', 0.9), paradiso_state: 'old', past: 1, booth_flash: 0, beam_on: 1, mother_light: 0,
+    const flash = s.shot({ ...CAM.WIDE, camera_pitch: 5, ...LIGHT('past', 0.9), paradiso_state: 'old', past: 1, booth_flash: 0, beam_on: 0, beam_sky: 0, mother_light: 0,
       crowd_x: -1.5, crowd_z: 15, crowd_f: 180, crowd_k: 1, crowd_sit: 0, flash: 1,
       ...cast({ c1: { at: [-6.5, 9.5], turn: 300 }, c2: { at: [-5.6, 10.6], turn: 250 }, c3: { at: [-2.2, 16.5], turn: 210, look: 'c4' },
         c4: { at: [-1.4, 15.6], turn: 30, look: 'c3' }, c5: { at: [1.8, 9.0], turn: 160 }, c6: { at: [4.6, 18.2], turn: 240 },
         c7: { at: [3.6, 12.0], turn: 120 }, c8: { at: [-8.2, 19.0], turn: 120 }, c9: { at: [6.2, 6.4], turn: 300 } }) });
     await s.move('booth_flash', 1, { over: 0.35, ease: 'out' });
     s.tell('rewind:beam');
+    s.set('beam_sky', 1);
     s.move('beam_on', 1, { over: 1.2 });
     s.move('booth_flash', 0.6, { over: 1 });
     s.move('camera_pitch', 5, { over: 10, ease: 'inOut' });
@@ -590,7 +591,8 @@ B('paper', {
     s.move('camera_x', CAM.PORCH.camera_x, { over: 6, ease: 'inOut' }); s.move('camera_z', CAM.PORCH.camera_z, { over: 6, ease: 'inOut' });
     s.move('camera_h', CAM.PORCH.camera_h, { over: 6, ease: 'inOut' }); s.move('camera_pitch', 0, { over: 6, ease: 'inOut' });
     await s.all(m, t);
-    maria.do(loop('sad_stand'));
+    maria.do('sad_stand', { loop: true });
+    maria.turn(140); maria.look([-7.6, 9.6, 1.4]);
     await toto.turn(250);
     toto.look('paradiso#poster');
     await s.wait(4);
@@ -841,12 +843,12 @@ B('story_door', {
   run: async s => {
     const alf = s.person('alfredo'), toto = s.person('toto');
     await s.wait(1); s.tell('story_door:start');
-    alf.look('toto'); alf.do(loop('tell_hand'));
+    alf.look('toto'); alf.do('tell_hand', { loop: true });
     await s.wait(9); s.tell('story_door:99');
     await s.wait(7); s.tell('story_door:why');
     toto.mood('surprised');
     await s.wait(2.4);
-    alf.do(loop('cane_sit')); alf.look([G.ALF_SEAT[0] + 4, G.ALF_SEAT[1] + 1, 2.4]);
+    alf.do('cane_sit', { loop: true }); alf.look([G.ALF_SEAT[0] + 4, G.ALF_SEAT[1] + 1, 2.4]);
     await s.wait(6.6);
   },
 });
@@ -1141,7 +1143,7 @@ B('dust', {
     await s.wait(3.5);
     mad.here(true);
     await mad.walk([[-5.8, 12.4]]);
-    mad.gait(null); mad.do(loop('arms_wide'));
+    mad.gait(null); mad.do('arms_wide', { loop: true });
     await s.wait(1.4);
     s.tell('dust:madman');
     await s.wait(5);

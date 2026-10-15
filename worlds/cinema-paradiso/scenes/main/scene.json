@@ -192,7 +192,7 @@
     {
       "id": "lamp4",
       "across": -7.2,
-      "distance": -0.6,
+      "distance": 0.4,
       "elevation": 3.8,
       "color": "#e2e0d6",
       "strength": 1,
@@ -206,6 +206,22 @@
       "color": "#c9d0e4",
       "strength": 0.8,
       "reach": 8
+    },
+    {
+      "id": "beam_tip",
+      "across": -8.6,
+      "distance": 15.2,
+      "elevation": 1.1,
+      "place": {
+        "across": "tip_x",
+        "distance": "tip_z",
+        "elevation": "tip_y"
+      },
+      "color": "#ffd9a0",
+      "strength": 1.6,
+      "reach": 3.2,
+      "on": "tip_on",
+      "flicker": 0.12
     },
     {
       "id": "flash",
@@ -233,7 +249,12 @@
     "mother_light": 0,
     "beam_on": 0,
     "beam_aim": 0,
-    "beam_turn": 193.6,
+    "beam_turn": 103.6,
+    "beam_pitch": -55.3,
+    "tip_x": -8.6,
+    "tip_z": 15.2,
+    "tip_y": 1.1,
+    "tip_on": 0,
     "beam_sky": 0,
     "beam_focus": 0,
     "wall_film": "none",
@@ -445,7 +466,31 @@
     },
     "beam_turn": {
       "type": "number",
-      "means": "служебный: поворот плоскости луча в плане, градусы (сцена из beam_aim)"
+      "means": "служебный: куда луч смотрит в плане, градусы (сцена из beam_aim)"
+    },
+    "beam_pitch": {
+      "type": "number",
+      "means": "служебный: наклон луча, градусы (+ вверх; сцена из beam_aim)"
+    },
+    "tip_x": {
+      "type": "number",
+      "means": "служебный: пятно света на конце луча, поперёк"
+    },
+    "tip_z": {
+      "type": "number",
+      "means": "служебный: пятно, вглубь"
+    },
+    "tip_y": {
+      "type": "number",
+      "means": "служебный: пятно, высота"
+    },
+    "tip_on": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "служебный: пятно на конце луча горит",
+      "smooth": true
     },
     "beam_sky": {
       "values": [
@@ -1434,15 +1479,27 @@
       ]
     },
     {
-      "id": "beam",
+      "id": "beam_anchor",
       "name": "Луч",
+      "unseen": true,
       "across": -11.85,
       "distance": 16,
       "elevation": 6,
-      "facing": 144,
+      "facing": 104,
+      "tilt": -55,
       "place": {
-        "facing": "beam_turn"
-      },
+        "facing": "beam_turn",
+        "tilt": "beam_pitch"
+      }
+    },
+    {
+      "id": "beam",
+      "name": "Луч",
+      "on": "beam_anchor",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 270,
       "glows": true,
       "height": 2,
       "box": [
@@ -1852,7 +1909,7 @@
         },
         {
           "across": -7.2,
-          "distance": -0.6
+          "distance": 0.4
         }
       ]
     },

@@ -5,8 +5,19 @@
 const L = scene.lib;
 scene.kit.beats.play(scene, L.FILM);
 
-// the beam: its plane turned in plan toward where `beam_aim` puts its end (the tilt and the length are its animate's)
-const aimed = () => scene.set('beam_turn', L.beamOf(scene.state.beam_aim ?? 0).heading + 90);
+// the beam: its anchor turned in plan and pitched toward where `beam_aim` puts its end (what is past the end is hidden by
+// the stone or the wall it meets); the spot of light at the end (a light of the scene's, moved there)
+const aimed = () => {
+  const S = scene.state;
+  if (S.beam_sky) { scene.set('beam_turn', 70); scene.set('beam_pitch', 9); scene.set('tip_on', 0); return; }
+  const b = L.beamOf(S.beam_aim ?? 0), p = L.aimPoint(S.beam_aim ?? 0);
+  scene.set('beam_turn', b.heading); scene.set('beam_pitch', -b.tilt * 180 / Math.PI);
+  scene.set('tip_x', p[0]); scene.set('tip_z', p[1]); scene.set('tip_y', p[2] + 0.4);
+  scene.set('tip_on', Math.max(0, Math.min(1, S.beam_on ?? 0)));
+};
+scene.on('change', 'beam_sky', aimed);
+scene.on('change', 'beam_on', aimed);
+scene.on('move', 'beam_on', aimed);
 scene.on('change', 'beam_aim', aimed);
 scene.on('move', 'beam_aim', aimed);
 scene.on('load', aimed);
