@@ -1,7 +1,7 @@
 // Зал — the scene's mechanics: its film in beats (the world's `beats`: the game sets `beat`, lib.js FILM), the light's
 // key from `era`, and the bodies' answers to the keys «Подглядывать» moves: `peek` — the curtain gathers toward the
-// south jamb and the boy leans out past the north one (peek_lean once over 0.5, back to stand under 0.3); `bell` → 1 —
-// the priest rings once (bell_ring, 3 s; without that motion: his right hand to a point over his shoulder, shaken);
+// south jamb and the boy steps out into the gap past the north one (once over 0.5, back under 0.3); `bell` → 1 —
+// the priest rings once (bell_ring, 3 s, his right hand over his shoulder, shaken);
 // `turn` — he looks round at the curtain's gap, 0 — at the screen again.
 scene.kit.beats.play(scene, scene.lib.FILM);
 
