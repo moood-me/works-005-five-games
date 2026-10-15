@@ -80,14 +80,14 @@ const hats = {
   // a straw boater: a flat-topped low crown, a dark band, a flat brim
   boater: { name: 'канотье', draw: F => {
     const { add, mul } = V(), { at: head, axes, r: rh } = F.head, [, hu] = axes;
-    F.ball(add(head, mul(hu, rh * 0.5)), axes, [rh * 1.62, rh * 0.045, rh * 1.6], F.colors.hat, F.sides * 2);
-    F.ball(add(head, mul(hu, rh * 0.74)), axes, [rh * 0.98, rh * 0.28, rh * 0.96], F.colors.hat, F.sides, 3.2);
-    F.ball(add(head, mul(hu, rh * 0.6)), axes, [rh * 1.0, rh * 0.09, rh * 0.98], GRAPHITE, F.sides, 3.2);
+    F.ball(add(head, mul(hu, rh * 0.6)), axes, [rh * 1.66, rh * 0.06, rh * 1.64], F.colors.hat, F.sides * 2);
+    F.ball(add(head, mul(hu, rh * 0.92)), axes, [rh * 1.0, rh * 0.32, rh * 0.98], F.colors.hat, F.sides, 3.2);
+    F.ball(add(head, mul(hu, rh * 0.74)), axes, [rh * 1.02, rh * 0.1, rh * 1.0], GRAPHITE, F.sides, 3.2);
   } },
   // a tall round fur hat (a man's, winter)
   fur_hat: { name: 'меховая шапка', draw: F => {
     const { add, mul } = V(), { at: head, axes, r: rh } = F.head, [, hu] = axes;
-    F.ball(add(head, mul(hu, rh * 0.72)), axes, [rh * 1.14, rh * 0.6, rh * 1.12], F.colors.hat, F.sides, 2.8);
+    F.ball(add(head, mul(hu, rh * 0.84)), axes, [rh * 1.16, rh * 0.62, rh * 1.14], F.colors.hat, F.sides, 2.8);
   } },
   // a small round fur cap (a woman's, winter), high on the head
   fur_cap: { name: 'меховая шапочка', draw: F => {
@@ -317,7 +317,7 @@ const characters = {
     colors: { ...GUROV_C, top: '#ece7da', bottom: '#cfc7b1', garment: '#d8d0bb', shoes: '#6b5a48', accent: '#f4f1ea' } }),
   // Moscow winter: a long dark fur coat with a fur collar, a fur hat
   gurov_winter: man({ garment: 'coat', hair: 'short', hat: 'fur_hat', body: GUROV, parts: ['moustache', 'fur_collar'],
-    colors: { ...GUROV_C, top: '#e4e0d8', bottom: '#2c2d33', garment: '#34343c', hat: '#4a3f36', accent: '#5a4c40', shoes: '#222226' } }),
+    colors: { ...GUROV_C, top: '#e4e0d8', bottom: '#2c2d33', garment: '#34343c', hat: '#2e2b2c', accent: '#5a4c40', shoes: '#222226' } }),
   // years later in Moscow: a dark frock coat, no hat, the hair going grey
   gurov_grey: man({ garment: 'coat', hair: 'short', hat: 'none', body: GUROV, parts: ['moustache'],
     colors: { ...GUROV_C, hair: '#a9a59e', top: '#e4e0d8', bottom: '#2f3036', garment: '#34353d', shoes: '#26252a', accent: '#f4f1ea' } }),
