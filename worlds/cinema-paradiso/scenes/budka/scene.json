@@ -910,7 +910,7 @@
     {
       "id": "rack",
       "name": "Стеллаж с плёнкой",
-      "across": -0.85,
+      "across": 0.25,
       "distance": 0.16,
       "facing": 0,
       "height": 2.1,
@@ -926,7 +926,7 @@
     {
       "id": "bucket",
       "name": "Пожарное ведро",
-      "across": -0.15,
+      "across": -0.4,
       "distance": 0.2,
       "facing": 0,
       "height": 0.45,
@@ -941,7 +941,7 @@
     {
       "id": "sconce",
       "name": "Лампочка у стеллажа",
-      "across": 0.2,
+      "across": 0.95,
       "distance": 0.04,
       "elevation": 1.86,
       "facing": 0,
