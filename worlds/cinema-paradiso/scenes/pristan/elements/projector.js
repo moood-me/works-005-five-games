@@ -22,14 +22,14 @@ const reel = (name, x, y) => e.layer(name, { pivot: [x, y] }, r => {
   r.fillStyle = '#9a9ca2'; r.beginPath(); r.arc(x, y, 0.03, 0, Math.PI * 2); r.fill();
 });
 reel('reel_f', 0.15, -1.86); reel('reel_b', -0.32, -1.81);
-e.layer('tarp', { pivot: [-0.6, -0.95] }, t => {                // canvas draped over everything, from the back end
-  t.fillStyle = '#4b5144';
-  t.beginPath(); t.moveTo(-0.66, -0.72); t.quadraticCurveTo(-0.7, -1.7, -0.5, -1.98); t.quadraticCurveTo(-0.2, -2.16, 0.18, -2.1);
-  t.quadraticCurveTo(0.56, -1.98, 0.6, -1.5); t.quadraticCurveTo(0.66, -1.05, 0.7, -0.72);
-  t.quadraticCurveTo(0.35, -0.66, 0.0, -0.74); t.quadraticCurveTo(-0.35, -0.66, -0.66, -0.72); t.closePath(); t.fill();
-  t.strokeStyle = '#3a4036'; t.lineWidth = 0.03;
-  for (const [x, b] of [[-0.42, 0.06], [-0.12, -0.04], [0.22, 0.05], [0.45, -0.03]]) { t.beginPath(); t.moveTo(x, -2.0); t.quadraticCurveTo(x + b, -1.35, x - b, -0.76); t.stroke(); }
-  t.fillStyle = 'rgba(255,255,255,0.06)'; t.beginPath(); t.ellipse(-0.1, -1.85, 0.35, 0.12, -0.2, 0, Math.PI * 2); t.fill();
+e.layer('tarp', { pivot: [-0.6, -0.95] }, t => {                // an old oilcloth drawn over it from the back end: it hugs the shape under it
+  t.fillStyle = '#3b3a33';
+  t.beginPath(); t.moveTo(-0.64, -0.8); t.quadraticCurveTo(-0.66, -1.62, -0.48, -1.86); t.quadraticCurveTo(-0.3, -2.0, -0.05, -1.95);
+  t.quadraticCurveTo(0.2, -1.98, 0.32, -1.62); t.quadraticCurveTo(0.58, -1.5, 0.6, -1.28); t.quadraticCurveTo(0.64, -1.0, 0.66, -0.8);
+  t.quadraticCurveTo(0.3, -0.76, 0.0, -0.82); t.quadraticCurveTo(-0.32, -0.76, -0.64, -0.8); t.closePath(); t.fill();
+  t.strokeStyle = '#2c2b26'; t.lineWidth = 0.025;
+  for (const [x, b] of [[-0.4, 0.05], [-0.12, -0.03], [0.18, 0.04], [0.42, -0.02]]) { t.beginPath(); t.moveTo(x, -1.85); t.quadraticCurveTo(x + b, -1.3, x - b, -0.84); t.stroke(); }
+  t.fillStyle = '#4a4940'; t.beginPath(); t.ellipse(-0.15, -1.78, 0.28, 0.07, -0.2, 0, Math.PI * 2); t.fill();   // the wet shine on its top
 });
 e.at(0, -1.35);
 e.at(0.53, -1.33, 'lens');

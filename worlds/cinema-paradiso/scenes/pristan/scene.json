@@ -121,8 +121,8 @@
       "id": "car_lamps",
       "of": "car_front#hl_l",
       "color": "#ffefcc",
-      "strength": 1,
-      "reach": 5,
+      "strength": 1.6,
+      "reach": 7,
       "on": "headlights"
     },
     {
