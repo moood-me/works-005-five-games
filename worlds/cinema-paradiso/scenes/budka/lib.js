@@ -705,7 +705,7 @@ const FILM = {
   window_strip: {
     after: ['ruins', 'calendar'],
     run: async s => {
-      const v = { ...CAM.SQUARE, camera_glide: 0, toto_a: P.SAL_WINDOW[0], toto_d: P.SAL_WINDOW[1], toto_turn: 300, toto_look: 'square_window', toto_reach: null };
+      const v = { ...CAM.SQUARE, camera_glide: 0, toto_a: P.SAL_WINDOW[0], toto_d: P.SAL_WINDOW[1], toto_turn: 300, toto_look: 'square_window', toto_with: ['tin'], toto_reach: { r: 'toto#chest', l: 'toto#chest' } };
       const next = s.shot(v);
       await s.until(() => next.ready);
       next.cut();
