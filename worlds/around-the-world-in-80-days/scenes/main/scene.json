@@ -1011,6 +1011,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Sparse solo piano in a large quiet room, slow single notes falling like the tick of a clock, warm hall reverb, late evening, restrained and precise",

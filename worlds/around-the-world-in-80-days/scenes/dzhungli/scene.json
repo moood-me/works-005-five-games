@@ -1745,6 +1745,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Indian forest at dawn: bansuri flute over a soft tanpura drone, birds far off, slow and luminous",
