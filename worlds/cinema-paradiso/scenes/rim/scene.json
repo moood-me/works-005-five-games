@@ -39,15 +39,6 @@
       "flicker": 0.15
     },
     {
-      "id": "booth_lamp",
-      "across": -0.6,
-      "distance": 0.3,
-      "elevation": 2.0,
-      "color": "#ffbf78",
-      "strength": 1.0,
-      "reach": 2.5
-    },
-    {
       "id": "sconce_l1",
       "across": -3.3,
       "distance": 2.5,
@@ -86,6 +77,13 @@
       "strength": 0.9,
       "reach": 4,
       "on": "lights"
+    },
+    {
+      "id": "vents_light",
+      "of": "projector#vents",
+      "color": "#ffb870",
+      "strength": 1.0,
+      "reach": 2.4
     }
   ],
   "objects": [
