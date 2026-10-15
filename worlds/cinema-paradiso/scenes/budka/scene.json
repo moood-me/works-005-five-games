@@ -1008,7 +1008,7 @@
     {
       "id": "wall_calendar",
       "name": "Календарь",
-      "across": 1.4,
+      "across": 1.6,
       "distance": 0.015,
       "elevation": 1.13,
       "facing": 0,

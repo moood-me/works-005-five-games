@@ -19,7 +19,7 @@ const G = {
   LAMP: [1.72, 1.9, 1.62],                             // the lamp's bulb over the bench
   WINDOW: [1.2, 1.8, 1.0, 1.7],                        // the window on the square, left wall: z 1.2…1.8, 1.0…1.7 m up
   DOOR: [0.1, 1.0], DOOR_H: 2.0,                       // the door in the right wall: z 0.1 (hinge) … 1.0
-  CAL: [1.4, 1.5],                                     // the calendar on the opposite wall: x, height (behind the leaf)
+  CAL: [1.6, 1.5],                                     // the calendar on the opposite wall: x, height (behind the open leaf)
   SLATE: [1.2, 1.6],                                   // the slate on its nail, right wall: z, height (1988)
   PATH0: [-0.6, 2.3], PATH1: [0.6, 1.4],               // «Вытащить»: where Alfredo fell → the door
   SCREEN: [0, 23.3, 0.4, 4.4, 3.3],                    // the hall's screen far beyond the ports: x, z, middle height, w, h
@@ -38,7 +38,7 @@ const CAM = {
   CLOSE: cam(0.2, 2.6, 1.2, 140),      // close by the stool: the seated man to the chest, the door behind him
   SQUARE: cam(1.6, 0.6, 1.5, -60),     // the window on the square and projector 1
   FLOOR: cam(1.5, 0.3, 1.2, -40, -26), // low by the door, along the way from projector 1 to the door, looking down
-  CAL: cam(1.25, 0.95, 1.55, 172),     // close at the calendar on the opposite wall
+  CAL: cam(1.45, 0.95, 1.55, 172),     // close at the calendar on the opposite wall
   P2MED: cam(0.0, 1.45, 1.55, 52),     // a medium shot of whoever stands at projector 2's back (1988)
 };
 // the camera's keys moved together to a shot
@@ -178,7 +178,7 @@ const P = {
   ALF_BEHIND: [-1.1, 1.8], ALF_CRANK: [-0.05, 2.9], BOY_LEVER: [0.45, 2.25], ALF_LEVER: [0.12, 2.5],
   ALF_WINDOW: [-1.6, 1.45], ALF_PUSH: [-1.1, 2.45], BOY_JAM: [0.3, 1.6],
   TOTO_BENCH: [1.62, 1.75], TOTO_REEL: [1.25, 1.95], TOTO_HUG: [1.45, 0.97], EL_HUG: [1.76, 0.64],
-  TOTO_STAND: [0.4, 0.95], EL_CAL: [1.4, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.25, 0.55],
+  TOTO_STAND: [0.4, 0.95], EL_CAL: [1.6, 0.42], EL_PENCIL: [1.38, 1.5], ALF_CAL: [1.45, 0.55],
   TOTO_IN: [1.8, 0.6], SAL_P2: [0.98, 2.2], SAL_DOOR: [1.55, 0.7], SAL_WINDOW: [-1.72, 0.95],
 };
 const SEAT = [G.STOOL[0], G.STOOL[1], G.STOOL_H];
