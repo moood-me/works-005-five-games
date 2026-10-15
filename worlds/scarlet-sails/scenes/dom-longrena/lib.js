@@ -188,8 +188,8 @@ const RIG = (() => {
   };
 })();
 const turned = ([x, y], a) => [x * Math.cos(a) - y * Math.sin(a), x * Math.sin(a) + y * Math.cos(a)];
-// where the parts are as rig1…rig4 have them (x from the frame's middle): the sails' scales, the sheets' turns, the
-// point her fingers hold
+// where the parts are as rig1…rig4 have them (x from the frame's middle): the sails' scales, the sheets' turns, where
+// her fingers hold each fastening (holds) and the one she makes now (at)
 function rigged(S) {
   const r1 = clamp01(S.rig1), r2 = clamp01(S.rig2), r3 = clamp01(S.rig3), r4 = clamp01(S.rig4), R = RIG;
   const up = R.furled + (1 - R.furled) * r1, aft = R.swung + (1 - R.swung) * r2;
@@ -198,11 +198,14 @@ function rigged(S) {
   const clew = [R.jibTack[0] + (R.jibClew[0] - R.jibTack[0]) * flat, R.jibTack[1] + (R.jibClew[1] - R.jibTack[1]) * jib];
   const mainTurn = -0.785 * (1 - r2), jibTurn = 0.873 * (1 - r4);
   const sheet = turned([R.cleat[0] - R.clew[0], R.cleat[1] - R.clew[1]], mainTurn), jibSheet = turned([R.jibCleat[0] - R.jibClew[0], R.jibCleat[1] - R.jibClew[1]], jibTurn);
-  const at = r1 < 0.999 ? [R.head[0], R.tack[1] + (R.head[1] - R.tack[1]) * up]
-    : r2 < 0.999 ? [end[0] + sheet[0], end[1] + sheet[1]]
-    : r3 < 0.999 ? [R.jibTack[0] + (R.jibHead[0] - R.jibTack[0]) * flat, R.jibTack[1] + (R.jibHead[1] - R.jibTack[1]) * jib]
-    : r4 < 0.999 ? [clew[0] + jibSheet[0], clew[1] + jibSheet[1]] : null;
-  return { up, aft, jib, flat, end, clew, mainTurn, jibTurn, at, busy: [r1, r2, r3, r4].some((r) => r > 0.001 && r < 0.999) };
+  const holds = [
+    [R.head[0], R.tack[1] + (R.head[1] - R.tack[1]) * up],
+    [end[0] + sheet[0], end[1] + sheet[1]],
+    [R.jibTack[0] + (R.jibHead[0] - R.jibTack[0]) * flat, R.jibTack[1] + (R.jibHead[1] - R.jibTack[1]) * jib],
+    [clew[0] + jibSheet[0], clew[1] + jibSheet[1]],
+  ];
+  const now = [r1, r2, r3, r4].findIndex((r) => r < 0.999), at = now < 0 ? null : holds[now];
+  return { up, aft, jib, flat, end, clew, mainTurn, jibTurn, holds, at, busy: [r1, r2, r3, r4].some((r) => r > 0.001 && r < 0.999) };
 }
 const SKIN = { longren: ["#b4886a", "#8f6a50"], child: ["#c4936f", "#9d7354"], assol: ["#cf9f7c", "#a87c5d"] };
 // her hand: where its pinch is painted (the layer goes from there to what she holds), how it is turned, how long it is
@@ -377,11 +380,12 @@ function paintRig(g, e) {
     bar(g, -0.42, 0, -0.03, 0, 0.082, SKIN.child[0]);
     hand(g, HER.L, ...SKIN.child, PINCH.fingers, PINCH.thumb);
   });
-  // what the game aims at: where each fastening is made
-  e.at(cx + R.head[0], R.head[1], "rig1");
-  e.at(cx + R.cleat[0], R.cleat[1], "rig2");
-  e.at(cx + R.jibHead[0], R.jibHead[1], "rig3");
-  e.at(cx + R.jibCleat[0], R.jibCleat[1], "rig4");
+  // what the game marks: where her fingers take each fastening as it begins (those before it made, it and those after
+  // not yet) — where her hand comes to then
+  for (let n = 1; n <= 4; n++) {
+    const [x, y] = rigged({ rig1: n > 1 ? 1 : 0, rig2: n > 2 ? 1 : 0, rig3: n > 3 ? 1 : 0, rig4: 0 }).holds[n - 1];
+    e.at(cx + x, y, `rig${n}`);
+  }
   e.at(cx, 0.4);
 }
 // a layer of the yacht rocked `a` about its keel together with the rest: turned `own` about its own pivot (x from the
