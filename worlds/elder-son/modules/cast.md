@@ -71,5 +71,18 @@
 ## Движения (`cast.data.json`, `motions`)
 
 Положены `put_motion`. Были: `sit_down`, `seated` (сидит за столом, руки на столе), `rise`, `pick_up`, `put_down`,
-`hide_back`, `reach_put`, `hug`, `warm_hands` (трёт руки у груди), `knock`. Новые и чего нет — ниже (раздел
-дописывается по мере работы).
+`hide_back`, `reach_put`, `hug`, `warm_hands` (трёт руки у груди), `knock`.
+
+Добавлены 2026-10-15 (ветка `ss/people-motions`, сценами ещё не проверены; работа остановлена): `run`, `tiptoe`,
+`careful`, `march_walk`, `carry_walk`, `seated_bag`, `stand_bag`, `lie`, `lie_side`, `sit_up`, `bend_reach`, `cold`,
+`wave`, `toast`, `look_watch`, `take_shelf`, `put_shelf`, `turn_glass`, `put_heavy`, `point`, `lean`, `look_back`,
+`falter`, `fall_sit`, `crouch`, `crouch_rise`, `dip`, `throw_bucket`, `give`, `take` (`give`, `take`, `cold`,
+`carry_walk` — готовые, взяты повторно).
+
+- Нет: `rise_ground` — сделан моделью, не положен (ключ `97f8cf866e44ebbb5a265ee1f4ff99cedf634047`: с земли встаёт,
+  в конце согнут вперёд).
+- Слабые дубли: `lie_side` — уже на боку, без поворота; `throw_bucket` — выплеска не видно; `put_heavy` — кончается
+  низко в наклоне; `sit_up` — садится наполовину; `lean` — наклон с рукой у головы; `march_walk` — обычный быстрый шаг;
+  `carry_walk` — походка с чемоданом; `tiptoe` — крадётся пригнувшись; `run` — петля 2 с со скачком на стыке.
+- Где кончаются: `wave` — рука ещё поднята; `bend_reach`, `look_back` — ещё согнут / обернулся; `falter` начинается
+  уже согнутым.
