@@ -335,13 +335,13 @@ const FILM = {
   // the insert closed: Alfredo lifts the slate to the lamp in both hands
   slate_out: {
     from: () => ({ ...FILM.deal.from(), slate: 0, ...people({
-      alfredo: { at: G.STOOL, on: SEAT, turn: 280, do: SIT, with: ['slate_held'], look: [0.55, 1.1, 1.15], mood: 'laugh' },
+      alfredo: { at: G.STOOL, on: SEAT, turn: 280, do: SIT, with: ['slate_held'], look: [0.68, 0.9, 1.18], mood: 'laugh' },
       toto: { at: P.BOX_DEAL, on: [P.BOX_DEAL[0], P.BOX_DEAL[1], 0.36], turn: 170, do: SIT, look: 'alfredo', mood: 'smile' } }) }),
     run: async s => {
       const alf = s.person('alfredo');
       alf.do('lift_show');
       await s.wait(0.8);
-      alf.reach({ r: [G.STOOL[0] - 0.32, G.STOOL[1] - 0.14, 1.12], l: [G.STOOL[0] - 0.3, G.STOOL[1] - 0.46, 1.12] });
+      alf.reach({ r: [G.STOOL[0] - 0.22, G.STOOL[1] - 0.36, 1.18], l: [G.STOOL[0] - 0.16, G.STOOL[1] - 0.66, 1.18] });
       await s.wait(1.2); s.tell('slate_out:up');
       await s.wait(3.5);
     },
