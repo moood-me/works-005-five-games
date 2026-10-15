@@ -236,20 +236,6 @@
       ]
     },
     {
-      "id": "corr_side",
-      "name": "Коридор",
-      "across": -6.78,
-      "distance": 6.9,
-      "facing": 270,
-      "height": 3.2,
-      "box": [
-        -3.05,
-        -3.3,
-        3.05,
-        0.05
-      ]
-    },
-    {
       "id": "corr_ceil",
       "name": "Коридор",
       "across": -7.75,
@@ -580,15 +566,18 @@
       "id": "curtain",
       "name": "Занавес",
       "across": -6.35,
-      "distance": 7.7,
+      "distance": 5.7,
       "facing": 270,
       "height": 2.65,
       "box": [
-        -0.1,
+        -2.1,
         -2.75,
-        2.1,
+        0.1,
         0.05
-      ]
+      ],
+      "place": {
+        "facing": "curtain_f"
+      }
     },
     {
       "across": -6.35,
@@ -803,7 +792,8 @@
     "camera_pitch": -3,
     "camera_roll": 0,
     "camera_look": 0,
-    "memory_light": 0
+    "memory_light": 0,
+    "curtain_f": 270
   },
   "states": {
     "beat": {
@@ -915,6 +905,11 @@
       ],
       "smooth": true,
       "means": "служебный: тёплый свет зала прошлого на лице Сальваторе в memory (ставит кусок)"
+    },
+    "curtain_f": {
+      "type": "number",
+      "smooth": true,
+      "means": "служебный: поворот занавеса у южного края, градусы (сцена выводит из peek: 270 висит … 330 отведён в зал)"
     }
   },
   "modules": [
