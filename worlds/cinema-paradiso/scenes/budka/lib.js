@@ -439,17 +439,17 @@ const FILM = {
   // III.2 — Alfredo (blind) on the stool tells of the soldier; Toto (17) on the bench's edge
   story_booth: {
     from: () => ({ ...base(0.9), ...show(1), lamp: 0.9, ...CAM.DOOR, ...people({
-      alfredo: blind({ turn: 290, look: null, mood: 'thinking' }),
+      alfredo: blind({ turn: 320, look: null, mood: 'thinking' }),
       toto: teen({ at: P.TOTO_BENCH, on: BENCH_SEAT, turn: 255, do: SIT, look: 'alfredo' }) }) }),
     run: async s => {
       const alf = s.person('alfredo'), toto = s.person('toto');
       await s.wait(1); s.tell('story_booth:start');
-      alf.look([1.25, 1.2, 1.3]); alf.do('tell_hand', { loop: true });
-      await s.wait(4); alf.look(null);
+      alf.do('tell_hand', { loop: true });
+      await s.wait(4);
       await s.wait(5); s.tell('story_booth:99');
       await s.wait(6); toto.mood('surprised');
       await s.wait(1); s.tell('story_booth:why');
-      alf.look([1.3, 1.3, 1.3]); alf.do('cane_sit', { loop: true });
+      alf.look([0.95, 2.4, 1.15]); alf.do('cane_sit', { loop: true });
       await s.wait(3); alf.mood('smile'); toto.mood('thinking');
       await s.wait(5);
     },

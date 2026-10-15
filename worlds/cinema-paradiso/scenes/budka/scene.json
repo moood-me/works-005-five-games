@@ -32,7 +32,7 @@
         "ambient": 0.34,
         "ambientColor": "#5a5068",
         "lights": {
-          "window_light": 0.45
+          "window_light": 0.9
         }
       },
       "eve_k": {
@@ -114,8 +114,8 @@
       "distance": 1.5,
       "elevation": 1.4,
       "color": "#8fa4d8",
-      "strength": 0.8,
-      "reach": 3.6
+      "strength": 0.9,
+      "reach": 5
     },
     {
       "id": "fire_light",
