@@ -199,8 +199,8 @@
       "id": "corr_end",
       "name": "Коридор",
       "across": -7.75,
-      "distance": 10.4,
-      "facing": 180,
+      "distance": 3.4,
+      "facing": 0,
       "height": 3.2,
       "box": [
         -1.15,
@@ -211,44 +211,9 @@
       "copies": [
         {
           "across": -7.75,
-          "distance": 10.4,
-          "facing": 180
-        },
-        {
-          "across": -7.75,
           "distance": 3.4,
           "facing": 0
         }
-      ]
-    },
-    {
-      "id": "corr_wall",
-      "name": "Коридор",
-      "across": -8.95,
-      "distance": 6.9,
-      "facing": 90,
-      "height": 3.2,
-      "box": [
-        -3.6,
-        -3.3,
-        3.6,
-        0.05
-      ]
-    },
-    {
-      "id": "corr_ceil",
-      "name": "Коридор",
-      "across": -7.75,
-      "distance": 10.4,
-      "elevation": 3.2,
-      "facing": 180,
-      "tilt": -90,
-      "height": 7,
-      "box": [
-        -1.15,
-        -7.1,
-        1.15,
-        0.05
       ]
     },
     {
