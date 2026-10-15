@@ -6,8 +6,9 @@ film in beats (modules/beats.js). Mood: a small warm room in smoke — one lamp 
 glowing while a projector throws its beam, the hall's screen in the look port; cool only the window on the square
 (only sky in it) and the stair's bulb. 1988: rust, no reels, pigeons' down, the cold evening from the window, no lamp.
 
-The scene's spec is generated: `build.js` beside the world clone (not in the repository) writes scene.json and every
-element's file from one table; lib.js, script.js, showcase.js and this file are written by hand.
+**The scene is built by `tools/budka/build.js`** (`node tools/budka/build.js`): it writes scene.json, every element's
+file and the contract block at the end of this file — edit the builder, not those files. lib.js, script.js,
+showcase.js and the rest of this file are written by hand.
 
 ## The place (metres; lib.js `G`)
 

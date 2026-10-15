@@ -1798,7 +1798,8 @@
     "nebo",
     "beats"
   ],
-  "music": {"scale": "E_MAJOR_D_FLAT_MINOR", 
+  "music": {
+    "scale": "E_MAJOR_D_FLAT_MINOR",
     "prompts": [
       {
         "text": "a projector clattering steadily in a small booth, the motor humming, twenty-four clicks a second, no melody",
