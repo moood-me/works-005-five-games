@@ -21,7 +21,7 @@ export default {
     gaze.on('release', ({ u }) => { if (u > 0 && u < 0.99) tries++; });
     const done = await until(mg, () => {
       const s = gaze.state, u = s.shown ?? s.u;
-      send('gaze', u);
+      send('gaze', Math.min(0.99, u)); // (1 — only at the end: the camera rises with it)
       mg.plate.set({ fill: s.u, glow: s.held ? 'good' : 'idle' });
       return s.u >= 0.99;
     });
