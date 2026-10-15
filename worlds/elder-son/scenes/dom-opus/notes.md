@@ -1,3 +1,15 @@
+> **НЕДОДЕЛАНО — работа остановлена на полпути (ветка ss/dom, 2026-10-15), в env/malay/three не влито.**
+> Сделано: `lib.js` переписан под план scenes.md (x/z плана, across = x − 2; стол торцом к окну, шесть мест, раскладушка,
+> диван, дверь Сарафанова со щелью и его лампа, путь «На цыпочках», дальний поезд и фигура за окном — ключи), кадры
+> всех кусков числами (`CAM`), `film(scene)` — таблица модуля beats со всеми 33 кусками (from/after/run), облики из
+> `kit.cast.characters`, части в руках вместе с частями облика (`hold`/`WITH`). `tools/dom-opus/gen.mjs` переписан
+> (новые элементы, ключи, states, вставки hands/tea/box, модули cast/beats/closeups), но **ещё не запускался**:
+> `scene.json` — старый, `script.js` зовёт старый API — сцена на этой ветке сломана. Не сделано: `script.js` (beats.play,
+> door_f, sar_door_f = 270 − 90·sar_door, far_train_x, sneak/sneak_at/stir), `showcase.js`, рисунки новых элементов (window с WGSL-дырой hole, window_frame, sar_door,
+> sar_room, table/table_end/table_side, cot, cot_top, cot_chair, case_chair, coat_chair, rucksack_door, far_train,
+> father_far; правки stove/hook/clock/cupboard/k_back/r_right под новый план), прогон в node, рендер, блок контракта.
+> Ниже — описание прежней версии; оно уже не равно коду.
+
 # Дом Сарафановых (opus)
 
 Главы I–II: кухня под оранжевым абажуром и комната за дверным проёмом, ночь. Движок 3, камера `roam` (`area` по
