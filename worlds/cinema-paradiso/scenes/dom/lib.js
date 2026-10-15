@@ -31,10 +31,11 @@ G.BEAM = {
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_shot: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
   table: cam(0.85, 1.05, -24, -0.3, 1),     // the table under the lamp, the photo over it, the window at the left
-  photo: cam(-0.35, 1.45, -4, -0.38, 2),     // close on the mother at the table, the photo over her: medium
-  call: cam(-1.55, 1.05, 32, -0.25, 1),      // across the table from the door's side: the two of them standing by it
-  corner: cam(1.95, 0.88, -9, -0.38, 2),     // inside the corner by its partition: the bed, the gap in the curtain
-  movie: cam(1.45, 4.5, 172, -0.25, -4),     // behind the bed: his back, the beam, the square on the partition
+  photo: cam(-0.4, 2.15, -3, -0.42, 3),      // close on the mother at the table, the photo over her: medium
+  call: cam(0.95, 1.1, -42, -0.25, 1),       // from the room's middle: the two of them standing by the table, the lamp over them
+  answer: cam(-1.6, 4.55, 148, -0.3, -2),    // from behind the table, past the lamp: Toto reading in its light, his face to us
+  corner: cam(2.05, 0.88, -2, -0.38, 2),     // inside the corner by its partition: the bed, the gap in the curtain
+  movie: cam(2.3, 4.45, 186, -0.25, -4),     // over the bed's head: his back, the beam, the square on the partition
 };
 
 // ---- places ----
@@ -43,7 +44,7 @@ const P = {
   BOY_E: G.CHAIR_E,            // the boy at the table's east end
   BOY_W: [-1.42, 3.05],        // the boy by the table's west end
   BOY_SH: [-1.05, 3.98],       // beside her chair, at her right shoulder
-  M_CALL: [-0.35, 2.82], T_CALL: [0.5, 2.62], T_LAMP: [-0.15, 2.88],
+  M_CALL: [-1.0, 2.75], T_CALL: [-0.05, 2.9], T_LAMP: [-0.42, 2.8],
   GAP: [1.12, 3.05],           // the old mother in the gap of the curtain
   S_IN: [0.4, 2.95], S_MID: [1.95, 2.15], S_BED: [2.0, 2.92], S_SHELF: [2.38, 3.25],
 };
@@ -72,13 +73,15 @@ function people(who) {
 }
 const seat = (xz, h = G.SEAT) => [xz[0], xz[1], h];
 const SIT = { motion: 'seated', loop: true };
+// the old mother's lamp held up before her, at her chest, toward the corner
+const LAMP_UP = [1.45, 3.12, 1.15];
 
 // ---- the film ----
 const FILM = {
   // 1949, night, the lamp: the mother pours the milk; the boy at the table; the photo on the wall
   supper: {
     from: () => ({ ...base(0.92), ...people({
-      maria: { at: P.MILK_BY, turn: 170, look: 'milk', reach: { r: 'jug#handle', l: 'jug#spout' }, mood: 'tired' },
+      maria: { at: P.MILK_BY, turn: 170, look: 'milk', mood: 'tired' },
       toto: { at: G.CHAIR_E, on: seat(G.CHAIR_E), turn: 270, do: SIT, look: 'milk', mood: 'neutral' } }), ...CAM.table }),
     run: async s => {
       const m = s.person('maria'), boy = s.person('toto');
@@ -90,7 +93,7 @@ const FILM = {
       s.tell('supper:milk');
       await s.wait(0.5);
       s.set('jug_held', 0);
-      m.reach(null); m.do('stand');
+      m.do('stand');
       m.look('toto'); boy.look('maria');
       await s.wait(1.2);
       boy.mood('smile');
@@ -117,7 +120,7 @@ const FILM = {
       s.tell('photo:hand');
       await s.wait(1.2);
       m.reach(null);
-      m.do(SIT);
+      m.do('seated', { loop: true });
       m.look('photo#photo');
       await s.wait(4.5);
       m.look('toto');
@@ -133,14 +136,14 @@ const FILM = {
       const m = s.person('maria'), t = s.person('toto');
       await s.wait(1.2);
       await m.do('give');
-      t.look('maria#paper');
+      t.look('maria#hand_r');
       await s.wait(0.3);
       m.with(null); t.with(['paper_sheet']);
       t.do('take');
       s.tell('call:paper');
       await s.wait(3.2);
       t.do('stand');
-      t.look('toto#paper'); t.mood('thinking');
+      t.look('toto#hand_r'); t.mood('thinking');
       await s.wait(3);
     },
   },
@@ -149,7 +152,7 @@ const FILM = {
     after: ['call'],
     from: () => ({ ...base(0.8), letters: 'returned', ...people({
       maria: { at: P.M_CALL, turn: 70, look: 'toto', mood: 'sad' },
-      toto: { at: P.T_CALL, turn: 250, look: 'toto#paper', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
+      toto: { at: P.T_CALL, turn: 250, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
       s.set('letters', 'returned');
@@ -173,18 +176,22 @@ const FILM = {
     after: ['call'],
     from: () => ({ ...base(0.8), letters: 'answered', ...people({
       maria: { at: P.M_CALL, turn: 70, look: 'toto', mood: 'neutral' },
-      toto: { at: P.T_CALL, turn: 250, look: 'toto#paper', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
+      toto: { at: P.T_CALL, turn: 250, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
     run: async s => {
       const t = s.person('toto'), m = s.person('maria');
       s.set('letters', 'answered');
       t.with(null);
+      const shot = s.shot({ ...CAM.answer });
       await t.walk([P.T_LAMP]);
-      await t.turn(205);
+      await t.turn(330);
       t.with(['letter_sheet']);
-      t.do({ motion: 'read', loop: true });
+      t.do('read', { loop: true });
       t.look('toto#letter');
-      s.camera({ target: 'toto', shot: 'medium', glide: 2.2 });
-      await s.wait(2.4);
+      m.look('toto');
+      await s.wait(1.2);
+      await s.until(() => shot.ready);
+      shot.cut();
+      await s.wait(1.2);
       t.mood('smile');
       s.tell('answered:reading');
       m.look('toto');
@@ -195,7 +202,7 @@ const FILM = {
   // stands in the middle of it (the home projector and the tin «Е.» on the shelf, if he kept the reel)
   room: {
     from: () => ({ ...base(0.92, 'now'), ...people({
-      maria: { at: P.GAP, turn: 112, look: 'toto', with: ['lamp_hand'], wear: CHARS().maria_old, mood: 'sad' },
+      maria: { at: P.GAP, turn: 112, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_UP }, wear: CHARS().maria_old, mood: 'sad' },
       toto: { at: P.S_IN, turn: 90, look: [2.4, 3.6, 1.0], wear: CHARS().salvatore, mood: 'tired' } }), ...CAM.corner }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
@@ -218,7 +225,7 @@ const FILM = {
   home_movie: {
     after: ['room'],
     from: () => ({ ...base(0.92, 'now'), ...people({
-      maria: { at: P.GAP, turn: 112, look: 'toto', with: ['lamp_hand'], wear: CHARS().maria_old, mood: 'sad' },
+      maria: { at: P.GAP, turn: 112, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_UP }, wear: CHARS().maria_old, mood: 'sad' },
       toto: { at: P.S_MID, turn: 250, look: 'maria', wear: CHARS().salvatore, mood: 'tired' } }), ...CAM.corner }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
@@ -236,7 +243,7 @@ const FILM = {
       await s.until(() => shot.ready);
       shot.cut();
       await t.go('sit_down', { to: P.S_BED, turn: 180 });
-      t.do(SIT);
+      t.do('seated', { loop: true });
       t.look('home_screen');
       m.look('home_screen');
       s.tell('home_movie:light');
@@ -247,7 +254,7 @@ const FILM = {
   question: {
     after: ['room', 'home_movie'],
     from: () => ({ ...base(0.92, 'now'), ...people({
-      maria: { at: P.GAP, turn: 118, look: 'toto', with: ['lamp_hand'], wear: CHARS().maria_old, mood: 'sad' },
+      maria: { at: P.GAP, turn: 118, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_UP }, wear: CHARS().maria_old, mood: 'sad' },
       toto: { at: P.S_BED, on: seat(P.S_BED, G.BED.top), turn: 180, do: SIT, look: 'maria', wear: CHARS().salvatore, mood: 'tired' } }), ...CAM.corner }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
@@ -255,7 +262,7 @@ const FILM = {
       if (!s.get('projector_on')) {
         // (after `room`: he stands in the middle — he goes to the bed and sits; after `home_movie` he sits already)
         await t.go('sit_down', { to: P.S_BED, turn: 180 });
-        t.do(SIT);
+        t.do('seated', { loop: true });
       }
       t.look('maria'); m.look('toto');
       await s.wait(1);
