@@ -182,8 +182,8 @@
     },
     {
       "id": "lamp2",
-      "across": 2.8,
-      "distance": 9.6,
+      "across": 3.6,
+      "distance": 6.2,
       "elevation": 3.8,
       "color": "#e2e0d6",
       "strength": 1.1,
@@ -1900,8 +1900,8 @@
           "distance": 6.5
         },
         {
-          "across": 2.8,
-          "distance": 9.6
+          "across": 3.6,
+          "distance": 6.2
         },
         {
           "across": 2.5,

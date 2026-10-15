@@ -475,7 +475,7 @@ B('rewind', {
 
 // I.3 Молоко: out of the cinema, the mother, the coins
 B('after_show', {
-  from: () => ({ ...PAST_NIGHT(), ...crowdAt(-9.6, 15.5, 140, 0.7), ...cast({
+  from: () => ({ ...PAST_NIGHT(), ...cast({
     toto: { at: [-11.2, 12.2], turn: 100 }, maria: { at: [-3.4, 15.2], turn: 250, mood: 'angry' },
     c1: { at: [-11.4, 11.6], turn: 110 }, c2: { at: [-11.3, 12.8], turn: 80 }, c3: { at: [-10.6, 13.6], turn: 60 },
     c4: { at: [-10.9, 10.9], turn: 130 }, c6: { at: [-10.4, 12.9], turn: 90 }, c7: { at: [-11.0, 14.0], turn: 70 } }), ...CAM.CROWD }),
@@ -502,7 +502,7 @@ B('after_show', {
 });
 B('alfredo_down', {
   after: ['after_show'],
-  from: () => ({ ...PAST_NIGHT(), ...crowdAt(-9.6, 15.5, 140, 0.4), ...cast({
+  from: () => ({ ...PAST_NIGHT(), ...cast({
     toto: { at: P.TOTO_PORCH, turn: 110, look: 'maria', mood: 'afraid', reach: { l: 'maria#hand_r' } },
     maria: { at: P.MARIA_PORCH, turn: 203, look: 'toto', mood: 'angry', reach: { r: 'toto#hand_l' } } }), alfredo_here: false, ...CAM.CROWD }),
   run: async s => {
@@ -680,7 +680,7 @@ function smokeBoy() {
   return Object.fromEntries(Object.entries(o).filter(([k]) => k.startsWith('toto_')));
 }
 B('outside', {
-  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'burnt', smoke: 0.4, ...crowdAt(-1, 19, 200, 0.6), ...cast({
+  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'burnt', smoke: 0.4, ...crowdAt(-1, 19.5, 200, 1), ...cast({
     alfredo: { at: P.ALF_RIM, turn: 205, on: [P.ALF_RIM[0], P.ALF_RIM[1], G.RIM], do: SIT, mood: 'tired', look: [P.ALF_RIM[0] - 0.2, P.ALF_RIM[1] - 1.5, 0.2] },
     toto: { at: P.BOY_RIM, turn: 250, look: 'alfredo', mood: 'afraid' },
     c1: { at: [-2.4, 13.8], turn: 140, look: 'alfredo' }, c2: { at: [0.9, 14.9], turn: 230, look: 'alfredo' },
@@ -702,7 +702,7 @@ B('outside', {
 });
 // II.4 the new sign
 B('new_sign', {
-  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', bulbs: 0, fade: 1, ...crowdAt(-7.5, 13.5, 140, 0.5), ...cast({
+  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', bulbs: 0, fade: 1, ...cast({
     c1: { at: [-3.5, 11.0], turn: 280 }, c2: { at: [-2.2, 12.6], turn: 270 }, c5: { at: [-4.4, 13.8], turn: 250 },
     c6: { at: [-1.6, 9.5], turn: 290 }, c7: { at: [-0.6, 14.2], turn: 260 } }), ...CAM.CROWD }),
   run: async s => {
