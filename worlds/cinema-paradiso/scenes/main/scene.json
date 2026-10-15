@@ -172,15 +172,6 @@
       "reach": 8
     },
     {
-      "id": "lamp1",
-      "across": 6.8,
-      "distance": 6.5,
-      "elevation": 3.8,
-      "color": "#e2e0d6",
-      "strength": 1,
-      "reach": 8
-    },
-    {
       "id": "lamp2",
       "across": 3.6,
       "distance": 6.2,
@@ -300,7 +291,7 @@
     "with_mother": 0,
     "camera_x": 0,
     "camera_z": -4,
-    "camera_yaw": 0,
+    "camera_yaw": -8,
     "camera_h": 0.3,
     "camera_pitch": 2,
     "toto_a": 0,
@@ -1894,10 +1885,6 @@
         {
           "across": -5.5,
           "distance": 21.5
-        },
-        {
-          "across": 6.8,
-          "distance": 6.5
         },
         {
           "across": 3.6,

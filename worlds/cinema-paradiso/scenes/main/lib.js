@@ -381,7 +381,7 @@ function cast(who) {
 // ── the camera's shots (x, z — metres; yaw — degrees right of north; h — metres over the eye's 1.7; pitch up +) ───
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_shot: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
-  WIDE: cam(0, -4, 0, 0.3, 2),
+  WIDE: cam(0, -4, -8, 0.3, 2),
   CROWD: cam(-6, 7, -45, 0.1, 3),
   PORCH: cam(-7.5, 9.5, -45, -0.15, 0),
   FOUNTAIN: cam(-2.2, 9.3, 31, -0.25, -1),
@@ -389,7 +389,7 @@ const CAM = {
   DOOR: cam(-8.5, 1.5, -65, -0.25, -1),
   STEPS: cam(5.5, 25.8, 180, 0.9, -6),
   BALCONY: cam(10, 19.6, 165, -0.1, 12),
-  EVE: cam(-1, -6, 3, 0.4, 3),
+  EVE: cam(-1, -8, 3.6, 0.4, 3),
   GIRL: cam(-11, 8, 46, 0, 1),
   CHALK: cam(10, 14.2, 55, -0.4, -4),
   FUNERAL: cam(-4, 6, -35, 0.2, 1),
