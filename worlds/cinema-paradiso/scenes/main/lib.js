@@ -432,7 +432,7 @@ const NOW = (hour, state = 'shut') => ({ ...REST, ...LIGHT('now', hour), past: 0
 const P = {
   // after the show, by the «Парадизо»'s doors: the boy nearest (he faces the lens, looks up at his mother), the mother
   // on the left facing him and the lens, Alfredo on the right coming out of the doors
-  TOTO_P: [-9.3, 11.37], MARIA_P: [-10.29, 10.95], ALF_P: [-9.09, 12.43], COINS: [-9.78, 11.75, 1.02],
+  TOTO_P: [-9.3, 11.37], MARIA_P: [-10.29, 10.95], ALF_P: [-9.09, 12.43], COINS: [-9.42, 12.02, 0.92],
   // the paper: the two of them stop by the poster
   MARIA_PAPER: [-10.5, 12.6], TOTO_PAPER: [-10.9, 13.3],
   // the fountain: Alfredo on the rim, the boy beside; Elena and Toto at seventeen
@@ -500,7 +500,7 @@ B('rewind', {
 // I.3 Молоко: out of the cinema, the mother, the coins
 const PORCH2 = aim(-7.95, 9.85, [-9.8, 11.15], 1.42);        // mother and boy, medium
 const PORCH3 = aim(-7.3, 9.45, [-9.55, 11.6], 1.45);         // the three, medium: the choice
-const COINS_CLOSE = aim(-9.0, 11.0, P.COINS, 1.15, -12);     // Alfredo's palm with the coins
+const COINS_CLOSE = aim(-8.75, 11.25, P.COINS, 1.1, -10);     // Alfredo's palm with the coins
 const BOY = (more = {}) => ({ at: P.TOTO_P, turn: F_TOTO, look: 'maria', mood: 'afraid', reach: { r: 'maria#hand_l' }, ...more });
 const MUM = (more = {}) => ({ at: P.MARIA_P, turn: F_MARIA, look: 'toto', mood: 'angry', reach: { l: 'toto#hand_r' }, ...more });
 B('after_show', {
@@ -724,12 +724,13 @@ B('outside', {
     await c1.turn(brg([-1.75, 13.0], P.ALF_RIM));
     c1.reach({ r: 'alfredo#hand_r' }); c1.do('give');
     await s.wait(2.0);
+    c1.reach(null); c1.walk([[-2.9, 14.6]]);
+    await s.wait(1.2);
     // he lifts his face: the eyes don't see
     await cutTo(s, ALF_CLOSE);
     alf.look([ALF_CLOSE.camera_x - 0.4, ALF_CLOSE.camera_z - 0.6, 1.5]);
     await s.wait(1.6);
     s.tell('outside:sat');
-    c1.reach(null);
     await s.wait(5);
   },
 });
