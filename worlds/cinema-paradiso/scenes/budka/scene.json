@@ -168,8 +168,8 @@
     "drag": 0,
     "drag_at": 0,
     "cough": 0,
-    "box_a": 1.45,
-    "box_d": 0.75,
+    "box_a": 1.7,
+    "box_d": 2.95,
     "pigeons": 0,
     "hanging": 0,
     "jumps": 0,
@@ -1143,8 +1143,8 @@
     {
       "id": "box",
       "name": "Коробка с плёнкой",
-      "across": 1.45,
-      "distance": 0.75,
+      "across": 1.7,
+      "distance": 2.95,
       "place": {
         "across": "box_a",
         "distance": "box_d"
