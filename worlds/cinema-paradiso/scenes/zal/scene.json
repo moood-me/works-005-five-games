@@ -35,7 +35,7 @@
         "haze": 0.24,
         "hazeColor": "#8a90a8",
         "hazeGlow": 0.3,
-        "shafts": 1.2,
+        "shafts": 0.6,
         "brightness": 1,
         "saturation": 0.6,
         "lights": {
@@ -310,9 +310,9 @@
       "tilt": -90,
       "height": 20.5,
       "box": [
-        -6.6,
+        -6.5,
         -20.6,
-        6.6,
+        6.5,
         0.05
       ]
     },
