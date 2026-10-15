@@ -171,7 +171,7 @@ const parts = {
     F.ball(head, ax, [0.075 * m, 0.07 * m, 0.07 * m], fur, 12);
     F.ball(add(head, mul(ax[0], 0.07 * m)), ax, [0.04 * m, 0.025 * m, 0.03 * m], fur, 8);
     F.ball(add(head, add(mul(ax[0], 0.11 * m), mul(ax[1], 0.005 * m))), ax, [0.012 * m, 0.012 * m, 0.012 * m], C('#1e1c1c'), 6);
-    for (const s of [-1, 1]) F.ball(add(head, add(mul(ax[1], 0.07 * m), mul(ax[2], s * 0.03 * m))), ax, [0.018 * m, 0.035 * m, 0.015 * m], fur, 6);
+    for (const s of [-1, 1]) F.ball(add(head, add(mul(ax[1], 0.06 * m), mul(ax[2], s * 0.035 * m))), ax, [0.016 * m, 0.022 * m, 0.013 * m], fur, 6);
     F.ball(add(c, add(mul(ax[0], -0.15 * m), mul(ax[1], 0.08 * m))), ax, [0.06 * m, 0.06 * m, 0.06 * m], fur, 10);
     F.point('spitz', head);
   } },
@@ -431,11 +431,11 @@ return {
   ...data,
   characters,
   shapes: {
-    // the world's style: the engine's `soft` a little longer (a smaller head on longer legs, a longer neck, slimmer
+    // the world's style: the engine's `soft` a little longer (a smaller head on longer legs, a little longer neck, slimmer
     // limbs), the head still big enough for the face `simple` to read at a medium shot; toned paint, thin tinted lines.
     // `dama_narrow` — the same with a narrow long head (von Diderits, the stranger like him)
     styles: {
-      dama: { from: 'soft', head: 1.26, egg: [1.0, 1.06, 1.0], neck: 0.55, legs: 0.96, limb: 0.96, paint: 'toned', line: 1.6, face: 'simple' },
+      dama: { from: 'soft', head: 1.26, egg: [1.0, 1.06, 1.0], neck: 0.42, legs: 0.96, limb: 0.96, paint: 'toned', line: 1.6, face: 'simple' },
       dama_narrow: { from: 'dama', egg: [0.86, 1.14, 0.98] },
     },
     faces: { level },
