@@ -170,8 +170,8 @@ return {
     // Salvatore, 47: a dark coat, greying hair, a pale scarf
     salvatore: look('man', { garment: 'coat', scarf: true, hair: 'short',
       colors: { garment: '#2d2c33', bottom: '#26252b', top: '#3a3a42', hair: '#8f8a84', skin: '#c49a7a', accent: '#ddd6c8', shoes: '#1e1b1a' } }),
-    // Alfredo, about fifty: stocky, a cap, a waistcoat (its pocket: alfredo#pocket), a collarless shirt
-    alfredo: look('grandpa', { garment: 'waistcoat', hat: 'cap', scarf: false, hair: 'short', parts: ['pocket', 'moustache'],
+    // Alfredo, about fifty: stocky, a cap, a short work jacket (its pocket: alfredo#pocket — «карман жилета»), a collarless shirt
+    alfredo: look('grandpa', { garment: 'jacket', hat: 'cap', scarf: false, hair: 'short', parts: ['pocket', 'moustache'],
       body: { thick: 1.2, height: 0.98 },
       colors: { garment: '#4a3d30', top: '#d9cfb6', bottom: '#3d362e', hat: '#3a3530', hair: '#4a3f36', skin: '#c29775', shoes: '#2a221c' } }),
     // Alfredo blind, 55–65: greyer, round dark glasses, a jacket; the cane
@@ -216,12 +216,9 @@ return {
     kid: look('child', { garment: 'tunic', hair: 'short', colors: { top: '#a69a80', bottom: '#4a4038', hair: '#2a1f17' } }),
   },
   shapes: {
-    // the world's style: the engine's `graphic` with a face that reads (eyes, brows, nose, mouth: `<id>_mood`)
-    styles: { paradizo: { from: 'graphic', face: 'simple' } },
-    garments: {
-      // a waistcoat: from the shoulders to the waist, the shirt's sleeves bare of it
-      waistcoat: { name: 'жилет', hang: [{ to: 0.32, from: 'shoulders', flare: 0.05, folds: false }] },
-    },
+    // the world's style: the engine's `graphic` with a bigger head and a face that reads (eyes, brows, nose, mouth:
+    // `<id>_mood`), fuller limbs, toned paint
+    styles: { paradizo: { from: 'graphic', face: 'simple', head: 1.34, neck: 0.6, limb: 1.0, legs: 1.0, feet: 'bean', arms: 'mitten', paint: 'toned', line: 1.4 } },
     hats: {
       // a headscarf over the hair, tied at the nape
       kerchief: { name: 'платок', draw: F => {

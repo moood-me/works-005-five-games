@@ -296,12 +296,13 @@ function beam(e, o) {
 const mix = (a, b, u) => a + (b - a) * u;
 // in animate: on 0…1 (the shader's uniform and the glows); reach — the share of its length it reaches now (1 whole),
 // tilt — radians the beam is turned down (+) or up about its mouth (the cone, the dust and the tip turned together)
+const MOVED = ['cone', 'dust'];
 function beamMove(e, on, reach = 1, tilt = 0, len) {
   on = Math.max(0, Math.min(1, on || 0));
   e.uniform('on', on);
   e.glow('mouth', on);
   e.glow('tip', on);
-  for (const name of ['cone', 'dust']) { const l = e.layer(name); l.scaleX = reach; l.rotate = tilt; }
+  for (const name of MOVED) { const l = e.layer(name); l.scaleX = reach; l.rotate = tilt; }
   if (len != null) {
     const t = e.layer('tip'), d = len * reach;
     t.x = d * Math.cos(tilt) - len; t.y = d * Math.sin(tilt);
