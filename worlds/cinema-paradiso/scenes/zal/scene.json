@@ -141,12 +141,12 @@
     },
     {
       "id": "memory_warm",
-      "across": -2.6,
-      "distance": 6.4,
-      "elevation": 3,
+      "across": -4.3,
+      "distance": 7.7,
+      "elevation": 2.5,
       "color": "#ffcf8e",
-      "strength": 1.3,
-      "reach": 7,
+      "strength": 1.8,
+      "reach": 6,
       "on": "memory_light",
       "flicker": 0.12
     },

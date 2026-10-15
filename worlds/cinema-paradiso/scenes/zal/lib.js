@@ -107,7 +107,7 @@ const CAM = {
   CURTAIN: cam(-7.9, 5.6, 45, -0.35, 3),        // from the corridor behind the curtain: the curtain and the boy at its edge left, the priest right-front
   RUIN: cam(3.0, 16.4, 196, 0.6, 5),           // 1988, from the stage's foot back over the ruined rows to the lion
   LION: cam(-4.0, 15.0, 177, 0, 7),            // from the aisle at row 5 back: Salvatore right, the lion over the back wall
-  FACE: cam(-3.3, 8.2, 293, -0.1, 0),          // his face, 3/4 front, in the lion's light (medium, ≈ 2.5 m)
+  FACE: cam(-3.75, 8.4, 293, -0.15, 0),          // his face, 3/4 front, in the lion's light (medium, ≈ 2.5 m)
 };
 G.CAM = CAM;
 const SAL = [-5.6, 9.2];                      // where Salvatore stops in 1988, by the 5th row, facing the lion
