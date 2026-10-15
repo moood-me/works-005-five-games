@@ -417,7 +417,7 @@ function who(s, id) {
   const p = s.person(id), cap = (a, sec) => s.any(a, s.wait(sec));
   const len = pts => { let d = 3; for (let i = 1; i < pts.length; i++) d += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); return d; };
   const q = {};
-  for (const k of ['look', 'reach', 'with', 'wear', 'gait', 'on', 'here', 'still', 'mood', 'talk', 'startOf', 'say']) if (typeof p[k] === 'function') q[k] = p[k].bind(p);
+  for (const k of ['look', 'reach', 'with', 'wear', 'gait', 'on', 'here', 'still', 'mood', 'talk', 'startOf', 'say']) q[k] = (...args) => p[k](...args);
   return Object.assign(q, {
     walk: (pts, o) => cap(p.walk(pts, o), 2 + len(pts) / PACE),
     turn: (...a) => cap(p.turn(...a), 3),
