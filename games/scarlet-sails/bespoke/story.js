@@ -24,9 +24,10 @@
 //     frame's middle (x to the right, y down); asked each frame till the scene answers, for a second — else null
 //   g.say(who, text, at) — someone of PEOPLE says it, over `at` ('id' | 'id#point' of the scene; 'narrator' — low in
 //     the middle), in their voice; → a breath after it has been heard (unvoiced: once it could be read)
-//   g.choose(choice, {ref: options, …}) — the player presses one of the points, then one of its options
-//     ([{id, label}]); → the option's id, kept in state.choices[choice] (choice null: not a choice of the chapter's
-//     map). One who doesn't press is told how, after 8 s. g.withdraw() — what is offered is taken back
+//   g.choose(choice, {ref: options, …}) — the player presses one of the points ('id#point' | 'id': where the element
+//     is pressed), then one of its options ([{id, label}]: one — at once, more — petals); → the option's id, kept in
+//     state.choices[choice] (choice null: not a choice of the chapter's map). One who doesn't press is told how,
+//     after 8 s. g.withdraw() — what is offered is taken back
 //   g.beat(name, {wait}) — a beat of the shown scene's film (the world's module `beats`); → once it
 //     has ended (the scene tells 'beat:<name>'), or at once with wait: false. To wait for a moment inside a beat,
 //     make the g.told / g.when / g.arrived before g.beat
@@ -220,7 +221,7 @@ export function context(b, view, hub, state, j = null) {
       if (gone()) return never;
       const offer = async () => {
         nudge = g.hint('Коснись кольца', 8000);
-        const { action } = await alive(hub.offer(offers));
+        const action = await alive(hub.offer(offers));
         nudge();
         return action;
       };
@@ -331,15 +332,16 @@ export function context(b, view, hub, state, j = null) {
   return g;
 }
 
-// The page's actions and what its scenes tell and do, listened to once for the whole play (bespoke.on
+// The player's choices and what the scenes tell and do, listened to once for the whole play (bespoke.on
 // keeps a listener for good) — game.js owns it: whatever is being chosen now gets the action;
 // whoever waits for a tell, a key set, a walk's end hears it.
-//   hub.offer({ref: options}) → {element, action} once the player has done it (what was offered before is dropped)
+//   hub.offer({ref: options}) → the action once the player has chosen it (what was offered before is dropped): a
+//     plain choice of the language of mini-games — a mark on each point, pressed: one option at once, more — petals
 //   hub.withdraw() — nothing offered; hub.told(text, ms) → true once the scene tells it, false if ms pass
 //   hub.when(key, test, ms) → true once the scene sets the key to a value test holds for, false if ms pass;
 //   hub.arrived(who, ms) — a walk of theirs ended; hub.watch(key, fn) → off — fn(value, old) on each
 export function listen(b) {
-  let offered = null;
+  let offered = null; // the plain choice going on: the language's mini-game
   const waiting = new Set(), watching = new Set();
   const wait = (w, ms) => new Promise(ok => {
     w.ok = ok;
@@ -347,12 +349,6 @@ export function listen(b) {
     setTimeout(() => { if (waiting.delete(w)) ok(false); }, ms);
   });
   const heard = (kind, hit) => { for (const w of waiting) if (w.kind === kind && hit(w)) { waiting.delete(w); w.ok(true); } };
-  b.on('act', (element, action) => {
-    const ok = offered;
-    offered = null;
-    b.offer({});
-    ok?.({ element, action });
-  });
   b.on('tell', text => heard('tell', w => w.text === text));
   b.on('change', (value, old, key) => {
     heard('change', w => w.key === key && w.test(value));
@@ -360,8 +356,22 @@ export function listen(b) {
   });
   b.on('arrived', d => heard('arrived', w => w.who === d?.who));
   return {
-    offer: offers => new Promise(ok => { offered = ok; b.offer(offers); }),
-    withdraw() { offered = null; b.offer({}); },
+    offer(offers) {
+      offered?.leave();
+      const mg = offered = b.minigame.start({ plate: false }), refs = Object.keys(offers);
+      // (the thing itself glows when it alone is offered: one breath in one place)
+      if (refs.length === 1) mg.glow(refs[0].split('#')[0]);
+      return new Promise(ok => {
+        const chosen = (mark, action) => { mg.snap({ at: mark }); mg.leave(); offered = null; ok(action); };
+        for (const ref of refs) {
+          const options = offers[ref], mark = mg.mark({ at: ref.includes('#') ? ref : `${ref}@` });
+          const press = mg.press({ on: mark, ...(options.length > 1 ? { petals: options } : {}) });
+          press.on('choose', ({ id }) => chosen(mark, options.find(o => o.id === id)));
+          press.on('press', () => chosen(mark, options[0]));
+        }
+      });
+    },
+    withdraw() { offered?.leave(); offered = null; },
     told: (text, ms) => wait({ kind: 'tell', text }, ms),
     when: (key, test, ms) => wait({ kind: 'change', key, test }, ms),
     arrived: (who, ms) => wait({ kind: 'arrived', who }, ms),

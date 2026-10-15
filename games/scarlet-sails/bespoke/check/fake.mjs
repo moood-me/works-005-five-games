@@ -27,7 +27,7 @@ export function page(scenes, trouble) {
     },
     trouble,
     show: done, act: done, say: done, css: done, keep: done,
-    get: nothing, set: nothing, on: nothing, offer: nothing, hush: nothing, pause: nothing, restart: nothing,
+    get: nothing, set: nothing, on: nothing, hush: nothing, pause: nothing, restart: nothing,
     where: () => null, frame: () => null,
   };
 }
