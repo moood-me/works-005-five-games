@@ -306,10 +306,10 @@ return {
         const k = m(F), f = F.fwd('Hips'), s = F.side('Hips'), c = add(add(F.P('Hips'), mul(f, 0.2 * k)), [0, 0.06 * k, 0]);
         F.bar(add(c, mul(s, -0.17 * k)), add(c, mul(s, 0.17 * k)), 0.12 * k, 0.12 * k, [[0, [0.55, 0.36, 0.2, 1]]], 14, f);
       } },
-      // a full beard: over the jaw and the chin
+      // a full beard: over the jaw, the cheeks and the chin, below the nose (the eyes and the nose clear of it)
       beard: { name: 'борода', draw: F => {
         const h = F.head, [, hu, hf] = h.axes, r = h.r * h.out;
-        F.cap(h.at, h.axes, h.egg.map(e => e * r * 1.05), [0, -0.55, 0.83], 0.25, F.colors.hair, h.sides, h.square);
+        F.cap(h.at, h.axes, h.egg.map(e => e * r * 1.05), [0, -0.85, 0.53], 0.65, F.colors.hair, h.sides, h.square);
         F.ball(add(h.at, add(mul(hu, -r * 0.85), mul(hf, r * 0.45))), h.axes, [r * 0.55, r * 0.42, r * 0.38], F.colors.hair, h.sides);
       } },
       // a pocket watch open in the right palm, held to be read — its face turned to its owner's eyes, twelve away from
@@ -425,8 +425,8 @@ return {
       // soot on the face: smudges over a cheek and the brow
       soot: { name: 'сажа', draw: F => {
         const { axes, r, on } = F.head, SOOT = [0.24, 0.21, 0.2, 1];
-        F.ball(on([0.42, -0.18, 0.88], 0.99), axes, [r * 0.22, r * 0.14, r * 0.05], SOOT, 10);
-        F.ball(on([-0.2, 0.42, 0.88], 0.99), axes, [r * 0.26, r * 0.1, r * 0.05], SOOT, 10);
+        F.ball(on([0.5, -0.12, 0.8], 0.99), axes, [r * 0.18, r * 0.12, r * 0.05], SOOT, 10);
+        F.ball(on([-0.25, 0.55, 0.8], 0.99), axes, [r * 0.24, r * 0.08, r * 0.05], SOOT, 10);
       } },
       // a bruise round the eye on his right, purple (Fix after Passepartout's fists)
       bruise: { name: 'синяк', draw: F => {
