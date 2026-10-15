@@ -34,7 +34,7 @@
    },
    "now_k": {
     "saturation": 0.68,
-    "ambient": 0.3,
+    "ambient": 0.36,
     "ambientColor": "#555c80",
     "tint": "#56608a",
     "tintStrength": 0.08,
@@ -55,8 +55,8 @@
    "id": "hand_lamp",
    "at": "maria#lamp",
    "color": "#ffc882",
-   "strength": 1.2,
-   "reach": 3.4,
+   "strength": 1.7,
+   "reach": 3.8,
    "on": "hand_lamp",
    "flicker": 0.08
   },

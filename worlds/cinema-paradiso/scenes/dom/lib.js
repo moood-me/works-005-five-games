@@ -31,10 +31,10 @@ G.BEAM = {
 const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_shot: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
   table: cam(0.85, 1.05, -24, -0.3, 1),     // the table under the lamp, the photo over it, the window at the left
-  photo: cam(-0.4, 2.15, -3, -0.42, 3),      // close on the mother at the table, the photo over her: medium
-  call: cam(0.95, 1.1, -42, -0.25, 1),       // from the room's middle: the two of them standing by the table, the lamp over them
+  photo: cam(-0.45, 2.1, -2, -0.3, -2),      // close on the mother at the table, the photo over her: medium
+  call: cam(-0.5, 0.75, -3, -0.28, 1),       // from the room's south: the two of them face to face by the table, the lamp over them
   answer: cam(-1.6, 4.55, 148, -0.3, -2),    // from behind the table, past the lamp: Toto reading in its light, his face to us
-  corner: cam(2.05, 0.88, -2, -0.38, 2),     // inside the corner by its partition: the bed, the gap in the curtain
+  corner: cam(2.0, 0.85, -4, -0.4, -3),     // inside the corner by its partition: the bed, the gap in the curtain
   movie: cam(2.3, 4.45, 186, -0.25, -4),     // over the bed's head: his back, the beam, the square on the partition
 };
 
@@ -44,9 +44,9 @@ const P = {
   BOY_E: G.CHAIR_E,            // the boy at the table's east end
   BOY_W: [-1.42, 3.05],        // the boy by the table's west end
   BOY_SH: [-1.05, 3.98],       // beside her chair, at her right shoulder
-  M_CALL: [-1.0, 2.75], T_CALL: [-0.05, 2.9], T_LAMP: [-0.42, 2.8],
+  M_CALL: [-1.05, 2.8], T_CALL: [0.0, 2.85], T_LAMP: [-0.42, 2.8],
   GAP: [1.12, 3.05],           // the old mother in the gap of the curtain
-  S_IN: [0.4, 2.95], S_MID: [1.95, 2.15], S_BED: [2.0, 2.92], S_SHELF: [2.38, 3.25],
+  S_IN: [0.4, 2.95], S_MID: [2.05, 2.62], S_BED: [2.0, 2.92], S_SHELF: [2.38, 3.25],
 };
 
 // ---- the light a beat begins in ----
@@ -130,8 +130,8 @@ const FILM = {
   // 1958, evening, the lamp: the mother holds out a paper to Toto; he takes it
   call: {
     from: () => ({ ...base(0.8), ...people({
-      maria: { at: P.M_CALL, turn: 70, look: 'toto', with: ['paper_sheet'], mood: 'sad' },
-      toto: { at: P.T_CALL, turn: 250, look: 'maria', wear: CHARS().toto_teen, mood: 'neutral' } }), ...CAM.call }),
+      maria: { at: P.M_CALL, turn: 100, look: 'toto', with: ['paper_sheet'], mood: 'sad' },
+      toto: { at: P.T_CALL, turn: 245, look: 'maria', wear: CHARS().toto_teen, mood: 'neutral' } }), ...CAM.call }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
       await s.wait(1.2);
@@ -151,8 +151,8 @@ const FILM = {
   returned: {
     after: ['call'],
     from: () => ({ ...base(0.8), letters: 'returned', ...people({
-      maria: { at: P.M_CALL, turn: 70, look: 'toto', mood: 'sad' },
-      toto: { at: P.T_CALL, turn: 250, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
+      maria: { at: P.M_CALL, turn: 100, look: 'toto', mood: 'sad' },
+      toto: { at: P.T_CALL, turn: 245, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
       s.set('letters', 'returned');
@@ -175,8 +175,8 @@ const FILM = {
   answered: {
     after: ['call'],
     from: () => ({ ...base(0.8), letters: 'answered', ...people({
-      maria: { at: P.M_CALL, turn: 70, look: 'toto', mood: 'neutral' },
-      toto: { at: P.T_CALL, turn: 250, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
+      maria: { at: P.M_CALL, turn: 100, look: 'toto', mood: 'neutral' },
+      toto: { at: P.T_CALL, turn: 245, look: 'toto#hand_r', with: ['paper_sheet'], wear: CHARS().toto_teen, mood: 'thinking' } }), ...CAM.call }),
     run: async s => {
       const t = s.person('toto'), m = s.person('maria');
       s.set('letters', 'answered');
