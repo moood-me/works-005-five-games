@@ -1075,6 +1075,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Very quiet cold wind over a snowy hillside at dusk, sparse, no melody",

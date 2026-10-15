@@ -1082,6 +1082,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Very quiet low drone of wind over an empty snowfield at night, sparse, cold, distant",

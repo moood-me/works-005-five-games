@@ -1702,6 +1702,7 @@
     }
   ],
   "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
     "prompts": [
       {
         "text": "Very quiet low drone of wind along an empty village street at night, sparse, cold",
