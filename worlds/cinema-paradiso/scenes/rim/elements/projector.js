@@ -3,3 +3,4 @@
 e.kit.kino.projector(g, 'motor');
 e.kit.kino.projectorReels(e, false);
 e.light(-0.25, -1.45, 0.12, '#ffb860', 0.9, 'vents');
+e.at(-0.25, -1.45, 'vents');
