@@ -8,7 +8,7 @@ var FONT = '"Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif
 var TEXT = 0.045; // the smallest words
 var GAP = 0.035; // between frames on a strip
 var ASPECT = 4 / 3; // a frame of film
-var WIDEST = 2.4; // a frame drawn wider where its strip has room (the words of its parts need it)
+var WIDEST = 3.2; // a frame drawn wider where its strip has room (the words of its parts need it)
 var BIGH = { "⚑": 0.3, "~": 0.2 }; // a frame's height at its full size, by the weight of its row
 var PAD = 0.016; // words inside a frame's part keep off its edges
 
@@ -148,7 +148,7 @@ function layout(A, st, measure) {
   L.numberX = cx - side;
   L.titleX = cx + side - tw;
   var TOP = 0.16;
-  var FLOOR = whole ? 0.93 : 0.74; // a chapter's map stays clear of the lamp; the whole play goes lower (its last
+  var FLOOR = whole ? 0.93 : 0.76; // a chapter's map stays clear of the lamp; the whole play goes lower (its last
   // strip is shorter and leaves the lamp's corner free)
   var best = null;
   var arr = arrangements(rows.length);
