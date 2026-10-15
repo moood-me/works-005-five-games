@@ -279,7 +279,7 @@ return {
       // a round fur hat, big over the crown and the ears
       fur: { name: 'меховая шапка', draw: F => {
         const { at, axes: [hs, hu, hf], r } = F.head;
-        F.ball(add(at, add(mul(hu, r * 0.55), mul(hf, -r * 0.08))), [hs, hu, hf], [r * 1.28, r * 0.9, r * 1.3], F.colors.hat, F.sides);
+        F.ball(add(at, add(mul(hu, r * 0.78), mul(hf, -r * 0.1))), [hs, hu, hf], [r * 1.22, r * 0.72, r * 1.24], F.colors.hat, F.sides);
       } },
     },
     parts: {
