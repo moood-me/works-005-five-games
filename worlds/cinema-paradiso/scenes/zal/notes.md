@@ -12,10 +12,14 @@ Eight rows of 18 seats (one painted row, copies) at z 12.5 … 5.5 (row 1 neares
 side aisles at x ±5.7. The low stage z 17.2…19 (0.8 m); the screen 7 × 4 m (2.2…6.2 m up) in a proscenium with
 drawn velvet curtains and «CINEMA PARADISO» over it. The stone lion on the back wall at x 2.4 (right of the middle —
 so that the beam crosses the view from behind the rows), mouth 4.6 m up; the beam (`kino.beam`, the world's shader)
-from the mouth to the screen (20.44 m), the warm light on its tip at the screen. The side door with the curtain: left
-wall, z 5.9…7.9 — two rows behind the priest's row 5 — onto a short corridor (x −6.6…−8.95). The curtain hangs on the
-hall's side, 2 m wide (z 5.7…7.7), closing the door but for a slit at the north jamb, and gathers toward its south end
-as `peek` grows (a layer scaled; its edge the point `curtain#gap`). The priest's seat: row 5, the second from the left
+from the mouth to the screen's middle (20.44 m; `facing` 83.25 — its +x runs to bearing facing − 90), its plane tilted
+55° about its own line so that it is seen as a band of light from the rows, not edge-on; the warm light on its tip
+at the screen. The side door with the curtain: left
+wall, z 5.9…7.9 — two rows behind the priest's row 5 — onto a short corridor (x −6.6…−8.95: its floor, its far wall,
+two ends; none of its cards touches the hall's wall — cards a hair behind it showed through it as a grey slab). The
+curtain hangs on the hall's side, 2 m wide (z 5.7…7.7), closing the door but for a slit at the north jamb, and swings
+into the hall about its south end as `peek` grows (`curtain_f`, 270 → 330: a card turned by its place stays solid);
+its free edge is the point `curtain#gap`; the rod is its own element. The priest's seat: row 5, the second from the left
 aisle (x −4.125, hips z 8.82) — ≈ 3 m from the door.
 
 1988 (`era` ruin): grey plaster, bare seat frames, pigeons, boarded doors, a torn screen (`screen_frame`), a hole in
@@ -24,19 +28,21 @@ and a cold far light `through` it that lays a patch on the left aisle where Salv
 back, as layers and glows, the seats, the painted audience, the screen's film, the beam, and a warm light on his face
 (`memory_light`).
 
-Light: the screen's light (warm, flickering, `on` beam_on), the lion's glow, the corridor's light, the stair light,
-the hole (1988), `memory_warm`. Looks: `ruin_k` (the scene's from `era`), then `past`. Прожектора-конуса в движке
+Light: the screen's light (warm, flickering, `on` beam_on), the lion's glow, a dim warm fill from the back of the hall
+(`hall_fill`, `on` past: the seat backs and the people's backs read), the corridor's light, the stair light (both kept
+off the hall's wall), the hole (1988 only), `memory_warm`. The white film is toned (0.62): not blown out. Looks: `ruin_k` (the scene's from `era`), then `past`. Прожектора-конуса в движке
 нет; луч — светящийся клин со светом на кончике (`kino.beam`).
 
 ## Shots (`lib.js` CAM)
 
-`BACK` — behind the last rows, left of the middle: the priest left of the middle (≈ 5.6 m), the beam over the heads
+`BACK` — behind the last rows, left of the middle, a little high: the priest left of the middle (≈ 4.3 m), the beam over the heads
 from the right, the screen. `CURTAIN` — from the corridor behind the curtain (−7.9, 5.6; yaw 45): the curtain covers
 the right ⅔ of the frame at `peek` 0; the boy from behind at the north jamb, left of the middle (≈ 2 m); `peek` 1 —
 the hall opens: the priest from behind right-front (≈ 5 m, seated ≈ 0.3 of the frame), the screen beyond at the
 jamb. `RUIN` — from the stage's foot back over the ruined rows. `LION` — from the aisle at row 5 back: Salvatore
-right, from behind 3/4, the lion over the back wall in the middle 4:3. `FACE` — in front of Salvatore to his left
-(≈ 2 m): his face 3/4 in the warm light of the memory.
+right, from behind 3/4, the lion over the back wall in the middle 4:3. `FACE` — in the aisle in front of Salvatore to
+his right (≈ 2.2 m, looking north): his face 3/4 in the warm light of the memory, the warm hall and the screen behind
+him.
 
 ## Beats (`lib.js` FILM; the world's `beats`)
 
@@ -51,7 +57,7 @@ right, from behind 3/4, the lion over the back wall in the middle 4:3. `FACE` �
 | ruin_hall | — | 1988, `RUIN`: Salvatore comes in by the side door, walks to the aisle at row 5 into the hole's light, turns to the lion (`sad`); cut to `LION` — the pose under the touch | ruin_hall:seat (≈7) | 10 |
 | memory | ruin_hall | the lion's mouth flares, the hall as it was (layers); cut to `FACE`: his face warm, `smile`; at ≈ 5 s back to ruin over 1.5 s, `sad` | memory:warm (0.5), memory:gone (≈6.4) | 8 |
 
-«Подглядывать» (game keys, any time in `peek`): `peek` — the curtain gathers (its own animate); > 0.5 — the boy
+«Подглядывать» (game keys, any time in `peek`): `peek` — the curtain swings open (the script's `curtain_f`); > 0.5 — the boy
 steps into the slit, no steps (the cast's `peek_lean` barely leans — not used), < 0.3 — back; `bell` → 1 — the
 priest's right hand to `aud5#ring` (a point over his shoulder the row-5 audience element shakes for 3 s) and
 `bell_ring` played once, then `seated` again; `turn` — he looks round at `curtain#gap`, 0 — at the screen. The bell's
@@ -67,8 +73,10 @@ the cast's `salvatore` look object). Motions: `seated`, `rise_chair`, `bell_ring
 
 - The priest is ≈ 5 m from the camera of `CURTAIN`, not 3.5 (scenes.md): from behind the curtain, at the door, 3.5 m
   would put him in the aisle or behind the boy; he is ≈ 0.3 of the frame seated, as asked, and ≈ 3 m from the door.
-- As a seated person is drawn behind cards nearer the camera (the seat backs, the closed curtain), a thin outline of
-  him shows over them — the engine's lines drawn where the figure is hidden. The scene does nothing about it.
+- A person behind a nearer card shows a thin outline over it (the priest behind the seat backs). The curtain was a
+  layer over its own plane (drawn blended) — now a solid card turned by its place. The seat backs are one painting with
+  copies; whether they blend was not dug into (the lead's «quick look»).
+- The hall's raised arms (`standing`) — short thick arms with hands, painted.
 - `bell_ring` raises the hand only to the shoulder: the reach to a point over the shoulder carries it higher.
 - The audience is painted (eight rows of heads and shoulders, layers lifted by `rise` with a delay per row, arms a
   layer for `standing`); the priest's seat is left empty in it.

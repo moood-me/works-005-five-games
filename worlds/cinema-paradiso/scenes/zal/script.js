@@ -1,6 +1,6 @@
 // Зал — the scene's mechanics: its film in beats (the world's `beats`: the game sets `beat`, lib.js FILM), the light's
-// key from `era`, and the bodies' answers to the keys «Подглядывать» moves: `peek` — the curtain gathers toward the
-// south jamb and the boy steps out into the gap past the north one (once over 0.5, back under 0.3); `bell` → 1 —
+// key from `era`, and the bodies' answers to the keys «Подглядывать» moves: `peek` — the curtain swings into the hall
+// about its south end and the boy steps out into the gap past the north one (once over 0.5, back under 0.3); `bell` → 1 —
 // the priest rings once (bell_ring, 3 s, his right hand over his shoulder, shaken);
 // `turn` — he looks round at the curtain's gap, 0 — at the screen again.
 scene.kit.beats.play(scene, scene.lib.FILM);
@@ -35,12 +35,16 @@ function bell(v) {
   }, { name: 'bell' });
 }
 function turn(v) { scene.person('adelfio').look(v > 0.5 ? 'curtain#gap' : 'screen#screen'); }
+// the curtain swings into the hall about its south end as the boy pushes it: 0 — hanging, 1 — 60° open
+function curtain() { scene.set('curtain_f', 270 + 60 * Math.max(0, Math.min(1, scene.get('peek') || 0))); }
 function light() { scene.set('ruin_k', scene.get('era') === 'ruin' ? 1 : 0); }
 
 scene.on('change', 'era', light);
+scene.on('change', 'peek', curtain);
+scene.on('move', 'peek', curtain);
 scene.on('change', 'peek', peek);
 scene.on('move', 'peek', () => peek(scene.get('peek')));
 scene.on('change', 'bell', bell);
 scene.on('change', 'turn', turn);
-light();
+light(); curtain();
 leaning = scene.get('peek') > 0.5;

@@ -35,7 +35,7 @@
         "haze": 0.24,
         "hazeColor": "#8a90a8",
         "hazeGlow": 0.3,
-        "shafts": 2.6,
+        "shafts": 0.6,
         "brightness": 1,
         "saturation": 0.6,
         "lights": {
@@ -53,10 +53,7 @@
         "hazeGlow": 0.6,
         "shafts": 0.25,
         "brightness": 1.05,
-        "saturation": 0.95,
-        "lights": {
-          "hole": 0.2
-        }
+        "saturation": 0.95
       }
     }
   },
@@ -82,12 +79,12 @@
     },
     {
       "id": "stair_light",
-      "across": -8.3,
-      "distance": 8.9,
+      "across": -8.4,
+      "distance": 9.9,
       "elevation": 2.8,
       "color": "#9aa6c8",
       "strength": 0.3,
-      "reach": 4.5
+      "reach": 1.6
     },
     {
       "id": "hole",
@@ -135,7 +132,7 @@
         ]
       ],
       "color": "#c9d3ea",
-      "strength": 2.2,
+      "strength": 1.6,
       "on": "ruin_k",
       "soft": 0.3
     },
@@ -152,12 +149,22 @@
     },
     {
       "id": "corridor_light",
-      "across": -8.6,
-      "distance": 4.6,
-      "elevation": 2.3,
+      "across": -8.4,
+      "distance": 6.0,
+      "elevation": 2.0,
       "color": "#c9b89a",
-      "strength": 0.7,
-      "reach": 5.5
+      "strength": 1.3,
+      "reach": 2.6
+    },
+    {
+      "id": "hall_fill",
+      "across": 0.5,
+      "distance": 1.0,
+      "elevation": 4.0,
+      "color": "#e6b47a",
+      "strength": 0.75,
+      "reach": 17,
+      "on": "past"
     }
   ],
   "objects": [
@@ -192,21 +199,16 @@
       "id": "corr_end",
       "name": "Коридор",
       "across": -7.75,
-      "distance": 10.4,
-      "facing": 180,
+      "distance": 3.4,
+      "facing": 0,
       "height": 3.2,
       "box": [
-        -1.3,
+        -1.15,
         -3.25,
-        1.3,
+        1.15,
         0.05
       ],
       "copies": [
-        {
-          "across": -7.75,
-          "distance": 10.4,
-          "facing": 180
-        },
         {
           "across": -7.75,
           "distance": 3.4,
@@ -229,32 +231,16 @@
       ]
     },
     {
-      "id": "corr_side",
+      "id": "corr_far",
       "name": "Коридор",
-      "across": -6.58,
-      "distance": 6.9,
-      "facing": 270,
+      "across": -7.9,
+      "distance": 9.6,
+      "facing": 180,
       "height": 3.2,
       "box": [
-        -3.05,
-        -3.3,
-        3.05,
-        0.05
-      ]
-    },
-    {
-      "id": "corr_ceil",
-      "name": "Коридор",
-      "across": -7.75,
-      "distance": 10.4,
-      "elevation": 3.2,
-      "facing": 180,
-      "tilt": -90,
-      "height": 7,
-      "box": [
-        -1.3,
-        -7.1,
-        1.3,
+        -1.05,
+        -3.25,
+        1.05,
         0.05
       ]
     },
@@ -324,9 +310,9 @@
       "tilt": -90,
       "height": 20.5,
       "box": [
-        -6.6,
+        -6.5,
         -20.6,
-        6.6,
+        6.5,
         0.05
       ]
     },
@@ -415,7 +401,8 @@
       ],
       "uniforms": {
         "on": 0
-      }
+      },
+      "tilt": 55
     },
     {
       "id": "seats",
@@ -572,14 +559,31 @@
       "id": "curtain",
       "name": "Занавес",
       "across": -6.35,
-      "distance": 7.7,
+      "distance": 5.7,
       "facing": 270,
       "height": 2.65,
       "box": [
-        -0.1,
+        -2.1,
         -2.75,
-        2.1,
+        0.1,
         0.05
+      ],
+      "place": {
+        "facing": "curtain_f"
+      }
+    },
+    {
+      "across": -6.35,
+      "distance": 7.7,
+      "facing": 270,
+      "id": "curtain_rod",
+      "name": "Карниз",
+      "height": 0.1,
+      "box": [
+        -0.1,
+        -2.72,
+        2.12,
+        -2.55
       ]
     },
     {
@@ -781,7 +785,8 @@
     "camera_pitch": -3,
     "camera_roll": 0,
     "camera_look": 0,
-    "memory_light": 0
+    "memory_light": 0,
+    "curtain_f": 270
   },
   "states": {
     "beat": {
@@ -893,6 +898,11 @@
       ],
       "smooth": true,
       "means": "служебный: тёплый свет зала прошлого на лице Сальваторе в memory (ставит кусок)"
+    },
+    "curtain_f": {
+      "type": "number",
+      "smooth": true,
+      "means": "служебный: поворот занавеса у южного края, градусы (сцена выводит из peek: 270 висит … 330 отведён в зал)"
     }
   },
   "modules": [
@@ -901,7 +911,7 @@
     "nebo",
     "beats"
   ],
-  "music": {
+  "music": {"scale": "E_MAJOR_D_FLAT_MINOR", 
     "prompts": [
       {
         "text": "a dark small-town cinema hall at night, a film projector clattering softly behind the wall, no melody",

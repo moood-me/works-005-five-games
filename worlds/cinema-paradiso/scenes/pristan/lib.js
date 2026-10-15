@@ -188,12 +188,14 @@ function carSide(g, type) {
   // chrome line, door seams, handles
   g.fillStyle = old ? '#b8b6ae' : '#8d93a0'; g.fillRect(-2.0, -0.6, 4.0, 0.025);
   g.fillStyle = 'rgba(0,0,0,0.35)'; g.fillRect(-0.55, -0.92, 0.02, 0.6); g.fillRect(0.95, -0.95, 0.02, 0.62);
-  // wheels
+  // wheels in their arches: the arch a dark hollow cut in the body, the tyre under it, a pale hubcap, the arch's lip
   for (const wx of old ? [-1.38, 1.32] : [-1.45, 1.42]) {
-    g.fillStyle = '#0d0d0f'; g.beginPath(); g.arc(wx, -0.32, 0.32, 0, Math.PI * 2); g.fill();
-    g.fillStyle = old ? '#c9c6bd' : '#7d828c'; g.beginPath(); g.arc(wx, -0.32, 0.13, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#08080a'; g.beginPath(); g.arc(wx, -0.3, 0.37, Math.PI, 0); g.lineTo(wx + 0.37, -0.3); g.closePath(); g.fill();
+    g.fillStyle = '#141416'; g.beginPath(); g.arc(wx, -0.3, 0.29, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#26262a'; g.beginPath(); g.arc(wx, -0.3, 0.2, 0, Math.PI * 2); g.fill();
+    g.fillStyle = old ? '#c9c6bd' : '#9aa0aa'; g.beginPath(); g.arc(wx, -0.3, 0.11, 0, Math.PI * 2); g.fill();
+    g.strokeStyle = old ? '#2a2b31' : '#5d6574'; g.lineWidth = 0.045; g.beginPath(); g.arc(wx, -0.3, 0.38, Math.PI * 1.02, -0.02 * Math.PI); g.stroke();
   }
-  if (old) { g.fillStyle = body; g.beginPath(); g.ellipse(-1.38, -0.55, 0.42, 0.24, 0, Math.PI, 0); g.fill(); g.beginPath(); g.ellipse(1.32, -0.55, 0.42, 0.24, 0, Math.PI, 0); g.fill(); }
 }
 
 
@@ -212,27 +214,27 @@ const cam = (x, z, yaw, h = 0, pitch = 0) => ({ camera_target: null, camera_x: x
 const look = (at, to, h = 0, pitch = 0) => cam(at[0], at[1], +((brg(at, to) + 540) % 360 - 180).toFixed(1), h, pitch);
 // places
 const P = {
-  EL_NOW: [-1.55, 58.35],             // 1988: Elena by the left headlamp of her car, the sea ahead
-  SAL_STOP: [-1.45, 51.2],            // he stops ten paces off
-  SAL_MEET: [-1.5, 56.9],             // two steps nearer: they stand a stride and a half apart
-  SAL_ASK: [-1.52, 57.45],
-  EL_BY: [-1.0, 59.5],                // she goes back to the car's front corner
+  EL_NOW: [-1.5, 61.25],              // 1988: Elena ahead of her car's left lamp at the head's edge, the sea before her
+  SAL_STOP: [-2.0, 54.6],             // he stops ten paces off, beside the car
+  SAL_MEET: [-1.5, 59.85],            // two steps nearer: they stand a stride and a half apart
+  SAL_ASK: [-1.5, 60.45],
+  EL_BY: [-0.9, 60.0],                // she goes back to the car's nose
   EL_DOOR: [1.25, 56.6],              // round the car's front to the driver's door (east side): hidden by the car
-  HUG_T: [2.2, 59.55], HUG_E: [2.2, 59.2],   // the hug at the lantern: he north (his back to the sea), she south of him
+  HUG_T: [1.72, 59.4], HUG_E: [1.72, 59.05],  // the hug by the bollard: he north (his back to the sea), she south of him
 };
 function film(scene) {
   const CH = scene.kit.cast.characters;
   const CAM = {
-    wide: cam(3.5, -1.0, -8, 0.5, 3),                     // the summer cinema: the beam over the chairs, the screen, the boats, the moon
+    wide: cam(-1.0, 5.7, -5, -0.15, 5),                   // the summer cinema: Toto at the projector and Elena on her crate near, the beam over the chairs to the screen
     close: look([-0.5, 6.2], [-2.6, 9.6], -0.1, 2),           // Toto at the projector, Elena on her crate, the screen beyond
     head: look([-4.6, 12.6], [2.2, 2.6], 0, 0),           // behind Toto toward the quay: the car comes in the rain
     found: cam(1.0, 41, 2, 0.2, 1),                       // down the mole to Toto on his bollard by the lantern
-    hug: look([5.3, 60.7], [2.2, 59.35], -0.15, 1),          // from the head's corner by the lantern: her face over his shoulder, lit
+    hug: look([3.05, 60.95], [1.72, 59.2], -0.2, 0),        // from the sea side, close: Toto on the bollard facing us, then her face over his shoulder in the lantern's light
     alone: cam(1.6, 51.5, 6, 0.2, 2),                     // Toto alone, his back, the sea and the moon's path
-    back: look([-3.0, 6.3], [-5.05, 7.6], -0.5, -1),  // the bench at dusk: Alfredo and Toto, faces 3/4, the mole and the sea behind
-    carNow: look([0.4, 45.2], [-1.0, 58.4], 0.1, 1),      // 1988: the car on the head, Elena by it; the daughter goes; he comes
-    meet: look([-5.3, 57.55], [-1.5, 57.6], -0.1, 1),     // from the west edge of the head, side on: the two in the headlamps' glow
-    alone_now: look([-5.0, 51.4], [0.6, 59.4], 0.1, 2),   // he alone on the head, the lantern beyond him, the lamps going down the mole
+    back: look([-3.35, 6.55], [-5.0, 7.62], -0.55, -2), // the bench at dusk, close: Alfredo and Toto, faces 3/4 in the wall lamp's light, the sea beyond
+    carNow: look([-5.8, 53.0], [-1.7, 58.0], -0.1, 1),    // 1988 from the head's west side: the car, its lamps on the sea, Elena before it; he comes and stops
+    meet: look([-3.75, 60.75], [-1.5, 60.55], -0.15, 0),  // side on and close: the two in the lamps' glow, the sea and the lantern beyond
+    alone_now: look([-3.9, 56.6], [-0.6, 60.6], -0.1, 1),  // he alone on the head, medium, the lantern beyond him, the lamps going down the mole
   };
   // the keys a beat starts from
   const carKeys = (type, arrive = 1, go = 0) => {
@@ -268,7 +270,7 @@ function film(scene) {
   const letter = () => (scene.get('letter_in_hand') === 1 ? ['letter_sheet'] : null);
   // the banker's car where it stands; Elena's way to it, the banker round it
   const OLD = (side, fwd) => byCar('old', 1, 0, side, fwd);
-  const EL_TURN = OLD(-0.45, 2.7), EL_DOOR = OLD(-1.35, 0.2), BK_IN = OLD(-1.3, -0.7), BK_BACK = OLD(0, -2.9), BK_OUT = OLD(1.5, -0.6);
+  const EL_TURN = OLD(1.25, 0.95), EL_ROUND = OLD(0, 3.0), EL_DOOR = OLD(-1.35, 0.2), BK_IN = OLD(-1.3, -0.7), BK_BACK = OLD(0, -2.9), BK_OUT = OLD(1.5, -0.6);
   // the reverse on Elena turning at the car: from the side of the mole, Toto behind the camera, 4.2 m off her
   CAM.turn = (() => {
     const dx = G.TOTO_PROJ[0] - EL_TURN[0], dz = G.TOTO_PROJ[1] - EL_TURN[1], d = Math.hypot(dx, dz);
@@ -367,7 +369,7 @@ function film(scene) {
         s.tell('headlights:turn');
         await s.wait(4.2);
         const backShot = s.shot(CAM.head);
-        await elena.walk([EL_DOOR]); elena.here(false);
+        await elena.walk([EL_ROUND, EL_DOOR]); elena.here(false);
         await him;
         await banker.walk([BK_BACK, BK_IN]); banker.here(false);
         backShot.cut();
@@ -385,20 +387,21 @@ function film(scene) {
         const toto = s.person('toto'), elena = s.person('elena');
         const hug = s.shot(CAM.hug);
         elena.gait('run');
-        const run = elena.walk([[-0.3, 50], [1.4, 56.4], P.HUG_E]);
-        s.move('camera_z', 51.6, { over: 6.5, ease: 'inOut' });
-        s.move('camera_x', 1.3, { over: 6.5, ease: 'inOut' });
+        const run = elena.walk([[-0.3, 50], [1.3, 56.4], P.HUG_E]);
+        s.move('camera_z', 47, { over: 4, ease: 'inOut' });
         await s.wait(3); s.tell('found:run');
-        await s.wait(0.8);
-        toto.look('elena');
+        await s.wait(1.2);
+        // the cut to the sea side: he on the bollard facing us, hearing her steps behind him
+        hug.cut();
+        toto.look([2.3, 56, 1.2]); toto.mood('surprised');
+        await s.wait(1.2);
         await toto.go('rise', { from: G.BOLLARD, turn: 0 });
         await toto.walk([P.HUG_T]);
-        await toto.turn(180); toto.mood('surprised');
+        await toto.turn(180); toto.look('elena'); toto.mood('laugh');
         await run; elena.gait(null);
         await elena.turn(0); elena.look('toto');
-        hug.cut();
         toto.reach({ r: 'elena#back', l: 'elena#back' }); elena.reach({ r: 'toto#nape', l: 'toto#nape' });
-        toto.look([P.HUG_E[0] + 0.3, P.HUG_E[1] - 1, 1.4]); elena.look([5.3, 60.7, 1.5]); toto.mood('smile');
+        toto.look([0.6, 58.4, 1.4]); elena.look([3.05, 60.95, 1.6]); toto.mood('smile');
         await s.wait(1.2); s.tell('found:hug');
         await s.wait(7);
       },
@@ -423,7 +426,8 @@ function film(scene) {
         await toto.go('sit_down', { to: G.BENCH_B, turn: 90 });
         toto.do('seated', { loop: true });
         s.tell('back:sat');
-        toto.look(letter() ? [G.BENCH_B[0] + 0.45, G.BENCH_B[1], 0.5] : [4, 26, 0.8]);
+        const sheet = [G.BENCH_B[0] + 0.42, G.BENCH_B[1] - 0.05, 0.95];
+        if (letter()) { toto.reach({ r: sheet, l: sheet }); toto.look(sheet); } else toto.look([4, 26, 0.8]);
         await s.wait(8);
         alf.look('toto'); toto.look('alfredo');
         await s.wait(9);
@@ -437,7 +441,7 @@ function film(scene) {
           toto: { at: G.BENCH_B, turn: 90, do: SIT, with: letter(), look: 'alfredo', mood: 'thinking' } }), ...CAM.back }),
       run: async s => {
         const toto = s.person('toto'), alf = s.person('alfredo');
-        toto.with(null);
+        toto.with(null); toto.reach(null);
         await toto.go('rise', { from: G.BENCH_B, turn: 90 });
         toto.look('alfredo'); toto.reach({ r: 'alfredo#shoulder_l' });
         await s.wait(1.8);
@@ -452,17 +456,17 @@ function film(scene) {
     car: {
       from: () => ({ ...base('now', 0.9), ...carKeys('new', 1, 0), headlights: 1,
         ...cast({ elena: { at: P.EL_NOW, turn: 0, wear: nowWear.elena, look: [-1, 75, 0] },
-          daughter: { at: [-0.9, 57.2], turn: 340, look: 'elena', mood: 'smile' },
-          toto: { at: [2.2, 40.5], turn: 345, wear: nowWear.toto, mood: 'tired' } }), ...CAM.carNow }),
+          daughter: { at: [-0.7, 60.5], turn: 300, look: 'elena', mood: 'smile' },
+          toto: { at: [-1.7, 46.5], turn: 0, wear: nowWear.toto, mood: 'tired' } }), ...CAM.carNow }),
       run: async s => {
         const sal = s.person('toto'), d = s.person('daughter'), el = s.person('elena');
         await s.wait(2.2);
         el.look('daughter');
         await s.wait(1.2);
-        const her = (async () => { await d.walk([[-2.3, 52.5], [-2.6, 44.5], [-3.0, 38]]); d.here(false); })();
+        const her = (async () => { await d.walk([[0.0, 60.0], [1.4, 59.6], [1.5, 54], [2.4, 44]]); d.here(false); })();
         el.look([-1, 75, 0]);
         await s.wait(1.6);
-        await sal.walk([[0.2, 46.5], P.SAL_STOP]);
+        await sal.walk([[-2.0, 50.5], P.SAL_STOP]);
         await sal.turn(brg(P.SAL_STOP, P.EL_NOW)); sal.look('elena'); sal.mood('surprised');
         await her;
         await s.wait(1);
@@ -524,14 +528,14 @@ function film(scene) {
           toto: { at: P.SAL_MEET, turn: brg(P.SAL_MEET, P.EL_NOW), wear: nowWear.toto, look: 'elena', mood: 'tired' } }) }),
       run: async s => {
         const el = s.person('elena'), sal = s.person('toto');
-        await el.walk([[0.3, 59.8], [1.3, 58.4], P.EL_DOOR]);
+        await el.walk([[0.3, 59.65], [1.3, 58.4], P.EL_DOOR]);
         el.here(false);
         sal.look('car_side_l'); sal.mood('sad');
         s.move('car_go', 1, { over: goSeconds('new', 6.5), ease: 'in' });
         await s.wait(3.5);
         glide(s, CAM.alone_now, 5);
         await s.wait(6); s.tell('parting:gone');
-        sal.look([-1.5, 75, 0.5]);
+        sal.look([-3.0, 75, 1.5]);
         await s.wait(2);
       },
     },

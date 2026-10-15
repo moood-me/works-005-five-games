@@ -15,7 +15,7 @@ const G = {
   SHELF: { z0: 2.9, z1: 4.2, y: 1.38 },
   PROJ: [2.62, 3.115, 1.475], // the home projector's lens on the shelf (its element stands at z 3.3)
   SCREEN: [2.0, 0.63, 1.5], // the little square on the partition
-  SCREEN_W: 0.52, SCREEN_H: 0.39,
+  SCREEN_W: 0.72, SCREEN_H: 0.54,
 };
 // the bearing (degrees right of north) from a to b, and how far
 const bearing = (a, b) => (Math.atan2(b[0] - a[0], b[1] - a[1]) * 180) / Math.PI;
@@ -35,7 +35,7 @@ const CAM = {
   call: cam(-1.75, 4.5, 145, -0.25, -3),     // from behind the table, past the lamp: the two of them face to face in its light
   answer: cam(-1.6, 4.55, 148, -0.3, -2),    // from behind the table, past the lamp: Toto reading in its light, his face to us
   corner: cam(2.45, 0.72, -10, -0.38, -3),     // inside the corner by its partition: the bed, the gap in the curtain
-  movie: cam(2.3, 4.45, 186, -0.25, -4),     // over the bed's head: his back, the beam, the square on the partition
+  movie: cam(2.3, 4.4, 184, -0.12, -6),     // over the bed's head: his back, the beam, the square on the partition
 };
 
 // ---- places ----
@@ -44,7 +44,7 @@ const P = {
   BOY_E: G.CHAIR_E,            // the boy at the table's east end
   BOY_W: [-1.42, 3.05],        // the boy by the table's west end
   BOY_SH: [-1.05, 3.98],       // beside her chair, at her right shoulder
-  M_CALL: [-1.05, 2.8], T_CALL: [0.0, 2.85], T_LAMP: [-0.42, 2.8],
+  M_CALL: [-1.45, 2.6], T_CALL: [0.0, 2.85], T_LAMP: [-0.42, 2.8],
   GAP: [1.12, 3.05],           // the old mother in the gap of the curtain
   M_IN: [1.45, 2.52],          // …and a step into the corner, by him
   S_IN: [0.4, 2.95], S_MID: [2.05, 2.62], S_BED: [2.0, 2.92], S_SHELF: [2.38, 3.25],
@@ -54,7 +54,7 @@ const P = {
 const light = (hour, era) => ({ hour, era, night_k: hour >= 0.85 || hour < 0.2 ? 1 : 0, now_k: era === 'now' ? 1 : 0 });
 const base = (hour, era = 'past') => ({
   ...light(hour, era), lamp: era === 'now' ? 0 : 1, hand_lamp: era === 'now' ? 1 : 0, letters: 'none', pile: 0,
-  projector_on: 0, milk: 0, jug_held: 0,
+  projector_on: 0, milk: 0, jug_held: 0, table_set: 0,
 });
 // the people a beat begins with: {id: {at, turn, do, look, reach, with, wear, on, mood}} — the others not here
 const CHARS = () => kit.cast.characters;
@@ -82,7 +82,7 @@ const LAMP_IN = [1.72, 2.68, 1.12]; // …held toward him in the corner
 const FILM = {
   // 1949, night, the lamp: the mother pours the milk; the boy at the table; the photo on the wall
   supper: {
-    from: () => ({ ...base(0.92), ...people({
+    from: () => ({ ...base(0.92), table_set: 1, ...people({
       maria: { at: P.MILK_BY, turn: 170, look: 'milk', mood: 'tired' },
       toto: { at: G.CHAIR_E, on: seat(G.CHAIR_E), turn: 270, do: SIT, look: 'milk', mood: 'neutral' } }), ...CAM.table }),
     run: async s => {
@@ -108,7 +108,7 @@ const FILM = {
   // 1949, night, the lamp: the mother at the table, her head down on her arms; the boy's hand on her shoulder; she
   // lifts her face to the photo
   photo: {
-    from: () => ({ ...base(0.93), ...people({
+    from: () => ({ ...base(0.93), table_set: 1, ...people({
       maria: { at: G.CHAIR_N, on: seat(G.CHAIR_N), turn: 180, do: { motion: 'seated_bowed', from: 5.9 }, look: [-0.5, 3.4, 0.76], reach: { r: [-0.36, 3.62, 0.8], l: [-0.64, 3.62, 0.8] }, mood: 'sad' },
       toto: { at: P.BOY_W, turn: 40, look: 'maria', mood: 'sad' } }), ...CAM.photo }),
     run: async s => {
@@ -207,7 +207,7 @@ const FILM = {
   // stands in the middle of it (the home projector and the tin «Е.» on the shelf, if he kept the reel)
   room: {
     from: () => ({ ...base(0.92, 'now'), ...people({
-      maria: { at: P.GAP, turn: 112, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_UP }, wear: CHARS().maria_old, mood: 'sad' },
+      maria: { at: P.GAP, turn: 135, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_UP }, wear: CHARS().maria_old, mood: 'sad' },
       toto: { at: P.S_IN, turn: 90, look: [2.4, 3.6, 1.0], wear: CHARS().salvatore, mood: 'tired' } }), ...CAM.corner }),
     run: async s => {
       const m = s.person('maria'), t = s.person('toto');
@@ -279,8 +279,10 @@ const FILM = {
       await step;
       await m.turn(78);
       m.reach({ r: LAMP_IN });
-      m.look('toto');
+      m.look('toto'); m.mood('sad');
+      t.mood('thinking');
       await s.wait(3);
+      t.mood('sad');
       t.look([1.6, 0.6, 1.0]);
       await s.wait(3);
       t.look('maria');

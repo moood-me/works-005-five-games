@@ -121,8 +121,8 @@
       "id": "car_lamps",
       "of": "car_front#hl_l",
       "color": "#ffefcc",
-      "strength": 1,
-      "reach": 5,
+      "strength": 1.6,
+      "reach": 7,
       "on": "headlights"
     },
     {
@@ -393,7 +393,7 @@
     "nebo",
     "beats"
   ],
-  "music": {
+  "music": {"scale": "E_MAJOR_D_FLAT_MINOR", 
     "prompts": [
       {
         "text": "night sea ambience, slow small waves lapping on a stone pier, distant cicadas, no melody",

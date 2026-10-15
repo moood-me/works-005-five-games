@@ -17,11 +17,13 @@ beam (`kino.beam`, 10.85 m) from the port to the screen.
 
 ## Shots (`lib.js` CAM)
 
-`PORT` — the booth behind the port (0, −0.9, eye 2.3, yaw 0): the room through it, he alone in row 4 from behind
-(small, ≈ 0.1 of the frame — the rhyme with the priest asks for it), the screen. `FACE` — in front of him to his
-left, ≈ 1.6 m (−0.81, 6.37; yaw 147): his face 3/4 in the screen's light, medium, the back wall and the port's
-glow behind him. The camera goes from `PORT` to `FACE` in `kisses` along `ROUND` (14 s: forward through the port,
-down the left side, round the row).
+`PORT` — the booth behind the port (0, −0.9, eye 2.3, yaw 0): the booth's warm walls round the frame, the room through
+the port, he alone in row 4 from behind (small — the rhyme with the priest), the screen. `ROW` — behind the last row,
+left: the screen big, he ahead to the right. `OVER` — behind his right shoulder: his head at the left, the screen.
+`FACE` — in front of him to his left, ≈ 1.6 m (−0.81, 6.37; yaw 147): his face 3/4 in the screen's light, the back
+wall and the port's glow behind him. In `kisses` the camera goes in through the port to `ROW` (6 s; the three cut in
+chapter I seen), holds 1.5 s, then round the row by the left side to `FACE` (9 s); `kisses_end` cuts to `OVER` (the
+last kiss held, then the white), then back to `FACE` in the white light.
 
 ## Beats (`lib.js` film(scene); the world's `beats`)
 
@@ -29,7 +31,7 @@ down the left side, round the row).
 | --- | --- | --- | --- | --- |
 | rome | — | `PORT`: the room lit, he seated alone in row 4; the sconces dim to 0.15 (4 s); the screen dark. Under the touch on `port#window`. With `note_in_hand` 1 — the note in his right hand (the cast's part `note`) | rome:sat (≈5.5) | 8 |
 | kisses | rome | the beam flares; on the screen the three cut in chapter I (2.6 s each; the first `jumps` hop at their crooked splice every 0.9 s), then kiss1…kiss7 faster (2.2 → 1.2 s), kiss8 at the end; he leans forward (`lean_seated`), `smile`, his eyes on the screen; the camera goes round the row to `FACE` (14 s) | kisses:start (1) | 20 |
-| kisses_end | kisses | the last kiss held 5 s; the screen white; he sits back (`seated`); white light on his face and the rows; `smile` → `sad` → `smile`; held | kisses_end:white (6) | 18 |
+| kisses_end | kisses | cut to `OVER`: the last kiss held 5 s; the screen white; cut to `FACE`: he sits back (`seated`); white light on his face and the rows; `smile` → `sad` → `smile`; held | kisses_end:white (≈6) | 18 |
 
 Keys: `lights` (sconces), `beam_on`, `screen_film` (none · kisses · white), `reel` (the beat's: which frame of the
 reel), `note_in_hand`, `jumps` (party keys, read by `from` — the film is a function of the scene — and by the screen's
@@ -40,7 +42,8 @@ animate).
 - `lean_back_seated` (the cast's) is hands behind the head, not a slow lean back: in `kisses_end` he only settles back
   into `seated`. `lean_seated` bends the head down: his look at the screen lifts it.
 - The rows are seen from the front in `FACE` (a card shows both sides): the seat backs' painting, mirrored.
-- The sconces' glow and the room's light dim by `lights`; the room never goes quite black (ambient 0.5): he must read.
+- The sconces dim to 0.3 by `lights`; the room never goes black (ambient 0.5): he must read. The beam's glow is held at
+  0.4 (`beam.animate.js`): the camera passes under it.
 
 ## Контракт для проверки
 
