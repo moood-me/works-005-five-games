@@ -217,6 +217,34 @@
       ]
     },
     {
+      "id": "corr_wall",
+      "name": "Коридор",
+      "across": -8.95,
+      "distance": 6.9,
+      "facing": 90,
+      "height": 3.2,
+      "box": [
+        -3.6,
+        -3.3,
+        3.6,
+        0.05
+      ]
+    },
+    {
+      "id": "corr_far",
+      "name": "Коридор",
+      "across": -7.9,
+      "distance": 9.6,
+      "facing": 180,
+      "height": 3.2,
+      "box": [
+        -1.05,
+        -3.25,
+        1.05,
+        0.05
+      ]
+    },
+    {
       "id": "wall_l",
       "name": "Стена",
       "across": -6.5,
