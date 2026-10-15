@@ -1,7 +1,28 @@
-// The round table's front: the white cloth falling to the floor in soft folds (metres, origin at its foot's middle).
-// Its point: the table (an offer in «Советоваться»).
-g.fillStyle = '#e4ddcf';
-g.beginPath(); g.moveTo(-0.58, -0.78); g.lineTo(0.58, -0.78); g.bezierCurveTo(0.62, -0.4, 0.6, -0.15, 0.62, 0); g.lineTo(-0.62, 0); g.bezierCurveTo(-0.6, -0.15, -0.62, -0.4, -0.58, -0.78); g.closePath(); g.fill();
-g.fillStyle = 'rgba(150,140,120,0.25)';
-for (let x = -0.5; x < 0.55; x += 0.16) g.fillRect(x, -0.74, 0.03, 0.74);
-e.at(0.15, -0.9);
+// The round table's top from above (metres from its middle, y toward the viewer): a white cloth. On it, by the party
+// and the game (each changes once, so the painting reads them): the husband's envelope by the samovar's place
+// (husband_knows 0 — a pale rectangle written in the husband's hand), the tea stain by Gurov's glass (stain 1). Its point `glasses`
+// — the two glasses (an offer in «Советоваться»).
+const st = e.state;
+g.fillStyle = '#ece6da'; g.beginPath(); g.arc(0, 0, 0.57, 0, Math.PI * 2); g.fill();
+g.strokeStyle = 'rgba(170,160,140,0.5)'; g.lineWidth = 0.012; g.beginPath(); g.arc(0, 0, 0.5, 0, Math.PI * 2); g.stroke();
+if (!(Number(st.husband_knows) > 0.5)) {
+  // «Анне. На профессора» — the envelope lying askew in front of the samovar, the writing a few grey strokes
+  g.save(); g.translate(0.22, 0.16); g.rotate(-0.25);
+  g.fillStyle = '#f7f2e4'; g.fillRect(-0.12, -0.065, 0.24, 0.13);
+  g.strokeStyle = 'rgba(150,140,120,0.7)'; g.lineWidth = 0.006; g.strokeRect(-0.12, -0.065, 0.24, 0.13);
+  g.strokeStyle = 'rgba(70,70,90,0.75)'; g.lineWidth = 0.007;
+  for (const [x0, x1, y] of [[-0.07, 0.05, -0.012], [-0.05, 0.08, 0.018]]) {
+    g.beginPath(); g.moveTo(x0, y);
+    for (let x = x0; x <= x1; x += 0.012) g.lineTo(x, y + Math.sin(x * 260) * 0.004);
+    g.stroke();
+  }
+  g.restore();
+}
+if (Number(st.stain) > 0.5) {
+  // the tea he spilt: a brown blot spreading from the saucer's place toward the edge, by his hand
+  g.fillStyle = 'rgba(120,72,30,0.55)';
+  g.beginPath(); g.ellipse(0.37, 0.14, 0.09, 0.06, 0.4, 0, Math.PI * 2); g.fill();
+  g.fillStyle = 'rgba(120,72,30,0.35)';
+  g.beginPath(); g.ellipse(0.45, 0.2, 0.05, 0.035, 0.2, 0, Math.PI * 2); g.fill();
+}
+e.at(0.1, 0.05, 'glasses');

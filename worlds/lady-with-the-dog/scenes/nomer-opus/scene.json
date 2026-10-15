@@ -1,13 +1,14 @@
 {
   "engine": 3,
-  "title": "Номер в Ялте (Opus)",
+  "title": "Номер в Ялте",
   "horizon": 0.42,
   "camera": {
     "mode": "picture"
   },
   "modules": [
     "cast",
-    "closeups"
+    "closeups",
+    "beats"
   ],
   "light": {
     "ambient": 0.52,
@@ -148,6 +149,21 @@
       ]
     },
     {
+      "id": "front_wall",
+      "name": "стена с дверью в коридор",
+      "inside": true,
+      "across": 0,
+      "distance": -0.55,
+      "facing": 0,
+      "height": 3.2,
+      "box": [
+        -2.8,
+        -3.25,
+        2.8,
+        0.02
+      ]
+    },
+    {
       "id": "left_wall",
       "name": "левая стена",
       "inside": true,
@@ -231,8 +247,8 @@
       "across": -1.55,
       "distance": 4.95,
       "elevation": 0.5,
-      "width": 2.0,
-      "depth": 1.0,
+      "width": 2,
+      "depth": 1,
       "shadow": true
     },
     {
@@ -312,10 +328,10 @@
       "id": "chair",
       "name": "стул",
       "inside": true,
-      "across": 0.88,
-      "distance": 3.9,
+      "across": 2.48,
+      "distance": 3.92,
       "facing": 180,
-      "height": 1.0,
+      "height": 1,
       "box": [
         -0.3,
         -1.02,
@@ -327,8 +343,8 @@
       "id": "candle",
       "name": "свеча",
       "inside": true,
-      "across": 2.02,
-      "distance": 4.08,
+      "across": 1.45,
+      "distance": 4,
       "elevation": 0.74,
       "height": 0.5,
       "box": [
@@ -342,8 +358,8 @@
       "id": "watermelon",
       "name": "арбуз",
       "inside": true,
-      "across": 1.6,
-      "distance": 3.82,
+      "across": 2,
+      "distance": 3.86,
       "elevation": 0.745,
       "place": {
         "across": "melon_a",
@@ -392,10 +408,10 @@
       "person": {
         "cast": "cast",
         "who": "gurov_indoor",
-        "turn": 15
+        "turn": 5
       },
-      "across": 1.25,
-      "distance": 3.5,
+      "across": 1.75,
+      "distance": 3.2,
       "place": {
         "across": "gurov_a",
         "distance": "gurov_d"
@@ -413,11 +429,10 @@
     "pull": 0,
     "palm": 0,
     "plate": "table",
-    "melon_a": 1.6,
-    "melon_d": 3.82,
+    "melon_a": 2,
+    "melon_d": 3.86,
     "melon_e": 0.745,
     "beat": "",
-    "beat_end": "",
     "anna_a": -1.75,
     "anna_d": 4.62,
     "anna_on": [
@@ -427,9 +442,13 @@
     ],
     "anna_turn": 110,
     "anna_do": "seated_bowed",
-    "gurov_a": 1.25,
-    "gurov_d": 3.5,
-    "gurov_turn": 15
+    "gurov_a": 1.75,
+    "gurov_d": 3.2,
+    "gurov_turn": 5,
+    "apart": 0,
+    "beat_next": "",
+    "anna_mood": "sad",
+    "ragged": 0
   },
   "states": {
     "hour": {
@@ -532,23 +551,8 @@
       "means": "высота тарелки над полом, м (ставит сцена)"
     },
     "beat": {
-      "values": [
-        "",
-        "room",
-        "room_hold",
-        "melon",
-        "melon_hold",
-        "melon_eat",
-        "beside",
-        "beside_hold",
-        "confession_table",
-        "confession_bed"
-      ],
-      "means": "кусок фильма: поставленный играет с начала"
-    },
-    "beat_end": {
       "type": "string",
-      "means": "имя последнего доигравшего куска (ставит сцена)"
+      "means": "кусок фильма, который играет сцена (ставит игра); поставленный играет с начала"
     },
     "anna_a": {
       "range": [
@@ -581,6 +585,32 @@
       ],
       "smooth": true,
       "means": "где Гуров вглубь, м"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "кусок, склейку к которому готовить заранее (ставит игра; модуль beats)"
+    },
+    "apart": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "она отнимала руку (ставит игра): 1 — в «Рядом» сидит на ладонь дальше, голову к нему не склоняет"
+    },
+    "anna_mood": {
+      "type": "string",
+      "means": "лицо Анны (sad, thinking, …)"
+    },
+    "gurov_mood": {
+      "type": "string",
+      "means": "лицо Гурова"
+    },
+    "ragged": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "ломоть неровный, с зубцом (ставит игра; рисует вставка melon)"
     }
   },
   "music": {

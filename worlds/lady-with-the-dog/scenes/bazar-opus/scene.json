@@ -1,14 +1,14 @@
 {
   "engine": 3,
-  "title": "Славянский базар (Opus)",
+  "title": "Славянский базар",
   "horizon": 0.42,
   "camera": {
     "mode": "picture"
   },
   "modules": [
     "cast",
-    "shpic",
-    "closeups"
+    "closeups",
+    "beats"
   ],
   "light": {
     "ambient": 0.48,
@@ -32,7 +32,7 @@
       "id": "lamp_l",
       "of": "lamp#flame",
       "color": "#ffc27e",
-      "strength": 2.0,
+      "strength": 2,
       "reach": 4.8
     },
     {
@@ -92,7 +92,7 @@
       "name": "стена",
       "inside": true,
       "across": 0,
-      "distance": 6.0,
+      "distance": 6,
       "facing": 180,
       "height": 3.4,
       "box": [
@@ -187,7 +187,7 @@
       "across": 1.4,
       "distance": 5.97,
       "facing": 180,
-      "height": 3.0,
+      "height": 3,
       "box": [
         -0.85,
         -3.05,
@@ -258,7 +258,7 @@
       }
     },
     {
-      "id": "table_top",
+      "id": "table",
       "name": "стол",
       "plane": true,
       "inside": true,
@@ -270,7 +270,7 @@
       "shadow": true
     },
     {
-      "id": "table",
+      "id": "table_skirt",
       "name": "стол",
       "inside": true,
       "across": -0.55,
@@ -352,32 +352,12 @@
       "across": 0.2,
       "distance": 4.1,
       "facing": 180,
-      "height": 1.0,
+      "height": 1,
       "box": [
         -0.3,
         -1.02,
         0.3,
         0.02
-      ]
-    },
-    {
-      "id": "spitz",
-      "name": "шпиц",
-      "inside": true,
-      "across": -1.75,
-      "distance": 3.3,
-      "elevation": 0.46,
-      "place": {
-        "across": "spitz_a",
-        "distance": "spitz_d",
-        "elevation": "spitz_e"
-      },
-      "height": 0.45,
-      "box": [
-        -2.6,
-        -2.2,
-        2.6,
-        0.3
       ]
     },
     {
@@ -442,7 +422,6 @@
   "state": {
     "hour": 0.72,
     "anna_life": 0,
-    "dog_here": 0,
     "spring": 0,
     "tea": 0,
     "tap": 0,
@@ -455,7 +434,6 @@
     "samovar": 0,
     "snowing": 1,
     "beat": "",
-    "beat_end": "",
     "anna_a": 1.45,
     "anna_d": 5.45,
     "anna_turn": 0,
@@ -465,16 +443,12 @@
     "waiter_a": -1.65,
     "waiter_d": 6.45,
     "waiter_here": false,
-    "spitz_a": -1.75,
-    "spitz_d": 3.3,
-    "spitz_e": 0.46,
-    "spitz_view": "side",
-    "spitz_do": "lie",
-    "spitz_look": null,
-    "spitz_here": 0,
-    "spitz_old": 0,
-    "spitz_dir": 1,
-    "leash": "chair"
+    "husband_knows": 0,
+    "wife_knows": 0,
+    "glass_at": 0,
+    "stain": 0,
+    "beat_next": "",
+    "anna_mood": "sad"
   },
   "states": {
     "hour": {
@@ -491,12 +465,19 @@
       ],
       "means": "ключ партии: 1 — она идёт ему навстречу, они стоят обнявшись у двери; 0 — стоит у окна спиной"
     },
-    "dog_here": {
+    "husband_knows": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: 1 — на кресле белый шпиц, красный поводок на спинке (муж отдал собаку)"
+      "means": "ключ партии: 0 — конверт мужа («Анне. На профессора») лежит на столе у самовара (стол и вставка tea); 1 — его нет"
+    },
+    "wife_knows": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "ключ партии: 0 — в bazar_end Гуров смотрит на карманные часы; 1 — не трогает их"
     },
     "spring": {
       "values": [
@@ -533,7 +514,7 @@
         1
       ],
       "smooth": true,
-      "means": "лужица на блюдце во вставке: 0 нет, 1 пролито"
+      "means": "вставка «чай»: лужица на блюдце — двигает игра"
     },
     "mirror": {
       "values": [
@@ -549,7 +530,7 @@
         "door",
         "table"
       ],
-      "means": "куда они смотрят в «Советоваться»: window — Гуров к окну, door — Анна к двери, table — оба на два стакана"
+      "means": "куда они смотрят в «Советоваться» и потом: window — Гуров к окну, door — Анна к двери, table — оба на два стакана, none — друг на друга (ставит игра)"
     },
     "door": {
       "range": [
@@ -583,21 +564,8 @@
       "means": "сколько снега идёт за окном (ставит сцена: 1 − spring)"
     },
     "beat": {
-      "values": [
-        "",
-        "bazar_in",
-        "shoulders",
-        "tea",
-        "weep",
-        "cages",
-        "sovet",
-        "bazar_end"
-      ],
-      "means": "кусок фильма: поставленный играет с начала"
-    },
-    "beat_end": {
       "type": "string",
-      "means": "имя последнего доигравшего куска (ставит сцена)"
+      "means": "кусок фильма, который играет сцена (ставит игра); поставленный играет с начала"
     },
     "anna_a": {
       "range": [
@@ -647,79 +615,32 @@
       "smooth": true,
       "means": "где официант вглубь, м"
     },
-    "spitz_a": {
-      "range": [
-        -2.6,
-        2.6
-      ],
-      "smooth": true,
-      "means": "где шпиц поперёк, м"
-    },
-    "spitz_d": {
-      "range": [
-        0.5,
-        5.8
-      ],
-      "smooth": true,
-      "means": "где шпиц вглубь, м"
-    },
-    "spitz_e": {
+    "glass_at": {
       "range": [
         0,
         1
       ],
       "smooth": true,
-      "means": "высота шпица над полом, м (0.46 — на кресле)"
+      "means": "вставка «чай»: стакан с блюдцем от места сбоку (0) под кран (1) — двигает игра"
     },
-    "spitz_view": {
+    "stain": {
       "values": [
-        "side",
-        "back"
+        0,
+        1
       ],
-      "means": "вид шпица: сбоку или со спины"
+      "means": "1 — перелил: тёмное пятно от чая на скатерти у его руки (ставит игра после «Чая»)"
     },
-    "spitz_do": {
-      "values": [
-        "stand",
-        "sit",
-        "lie",
-        "trot",
-        "run",
-        "growl",
-        "bark",
-        "up",
-        "sniff"
-      ],
-      "means": "что делает шпиц"
-    },
-    "spitz_look": {
+    "beat_next": {
       "type": "string",
-      "means": "точка, на которую смотрит шпиц, или null"
+      "means": "кусок, склейку к которому готовить заранее (ставит игра; модуль beats)"
     },
-    "spitz_here": {
-      "values": [
-        0,
-        1
-      ],
-      "means": "шпиц в сцене (ставит сцена по dog_here)"
-    },
-    "spitz_old": {
-      "values": [
-        0,
-        1
-      ],
-      "means": "старый шпиц: шерсть желтее, движется медленнее"
-    },
-    "spitz_dir": {
-      "values": [
-        -1,
-        1
-      ],
-      "means": "куда смотрит шпиц сбоку: 1 — вправо, −1 — влево"
-    },
-    "leash": {
+    "anna_mood": {
       "type": "string",
-      "means": "поводок: 'chair' — лежит на спинке кресла (точка chair#leash)"
+      "means": "лицо Анны (sad, …)"
+    },
+    "gurov_mood": {
+      "type": "string",
+      "means": "лицо Гурова (thinking, …)"
     }
   },
   "music": {
