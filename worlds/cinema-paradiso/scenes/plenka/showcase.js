@@ -35,6 +35,6 @@ return FILMS.map((f, i) => ({
     else s.cut(start(f));
     next = FILMS[i + 1] ? { for: FILMS[i + 1].name, shot: scene.shot(start(FILMS[i + 1])) } : null;
     await s.move('reveal', 1, { over: seconds(f), ease: 'linear' });
-    await s.wait(4);
+    await s.wait(i ? 4 : 1.5);
   },
 }));

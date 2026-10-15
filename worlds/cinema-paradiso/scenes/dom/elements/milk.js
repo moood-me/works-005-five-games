@@ -1,6 +1,6 @@
 // The boy's glass on the table: plain glass (layer `glass`), the milk in it a layer that rises by `milk` (animate).
-// (1988: the table cleared — nothing on it)
-if (e.state.era === 'now') return;
+// (only at the 1949 supper and the photo: in 1958 and 1988 the table is cleared)
+if (e.state.era === 'now' || !e.state.table_set) return;
 e.layer('milk', { pivot: [0, 0] }, l => {
   l.fillStyle = '#f2eee4'; l.fillRect(-0.032, -0.1, 0.064, 0.1);
 });

@@ -1,10 +1,11 @@
-// The strip coming into the lamp's light (u_slide: from the right, its share of u_span still to go) and its frames
+// The frames coming along the strip into the lamp's light (u_slide: from the right, its share of u_span still to go) and its frames
 // coming up one by one (u_develop 0…1 against each frame's order, layer 3; where there is no order — the heading —
 // first): layer 1 the strips, unexposed; layer 2 what the frames show, laid over as they come up; the warm parts of the
 // frames glow as light (emission), breathing a little with the lamp (u_lamp).
 fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
+  // (the strips stand in the light; what the frames show comes along them from the right)
   let p = at - vec2f(u_slide * u_span, 0.0);
-  let strips = layer(1, p);
+  let strips = layer(1, at);
   let frames = layer(2, p);
   let ord = layer(3, p);
   let o = select(0.0, ord.r / max(ord.a, 0.001), ord.a > 0.5);
