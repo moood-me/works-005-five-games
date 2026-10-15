@@ -82,8 +82,8 @@
       "id": "vents_light",
       "of": "projector#vents",
       "color": "#ffb870",
-      "strength": 1.0,
-      "reach": 2.4
+      "strength": 1.6,
+      "reach": 3.2
     }
   ],
   "objects": [

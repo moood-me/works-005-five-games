@@ -1,7 +1,10 @@
 // The velvet curtain hanging on the hall's side of the side door (seen from the corridor: x from its north edge at the
 // boy's side, 0, south along the wall to 2.0 — wider than the door, so it closes it but for a slit at the north
 // jamb). As `peek` grows the boy pulls it: it gathers toward its south end (the layer `drape`, its folds bunching —
-// animate), the hall opening behind. Its free edge at the boy's eye is the point `gap`. Gone in 1988.
+// animate), the hall opening behind. Its free edge at the boy's eye is the point `gap`. Gone in 1988. The element
+// paints nothing but this layer: so the layer is the first (and only) sheet of its plane and is drawn solid — it
+// hides what is behind it, people's lines too (a layer over a painting of its own plane is drawn blended). The rod:
+// `curtain_rod`.
 if (e.state.era === 'ruin') return;
 const W = 2.0, H = 2.62;
 e.layer('drape', { pivot: [W, 0] }, d => {
@@ -16,7 +19,5 @@ e.layer('drape', { pivot: [W, 0] }, d => {
   d.fillStyle = '#c8a050'; d.fillRect(0, -0.16, W, 0.04);            // a gold braid near the hem
   d.fillStyle = '#3a0f12'; d.fillRect(0, -0.1, W, 0.1);
 });
-g.fillStyle = '#7a5a3a'; g.fillRect(-0.05, -H - 0.04, W + 0.1, 0.05);   // the rod
-for (let x = 0; x <= W; x += 0.25) { g.fillStyle = '#b08848'; g.beginPath(); g.arc(x, -H - 0.015, 0.025, 0, Math.PI * 2); g.fill(); }
 e.at(0, -1.15, 'gap');
 e.at(0, -1.15, 'edge');

@@ -35,7 +35,7 @@
         "haze": 0.24,
         "hazeColor": "#8a90a8",
         "hazeGlow": 0.3,
-        "shafts": 2.6,
+        "shafts": 1.2,
         "brightness": 1,
         "saturation": 0.6,
         "lights": {
@@ -135,7 +135,7 @@
         ]
       ],
       "color": "#c9d3ea",
-      "strength": 2.2,
+      "strength": 1.6,
       "on": "ruin_k",
       "soft": 0.3
     },
@@ -156,8 +156,18 @@
       "distance": 4.6,
       "elevation": 2.3,
       "color": "#c9b89a",
-      "strength": 0.7,
+      "strength": 1.1,
       "reach": 5.5
+    },
+    {
+      "id": "hall_fill",
+      "across": 0.5,
+      "distance": 1.0,
+      "elevation": 4.0,
+      "color": "#e6b47a",
+      "strength": 0.75,
+      "reach": 17,
+      "on": "past"
     }
   ],
   "objects": [
@@ -196,9 +206,9 @@
       "facing": 180,
       "height": 3.2,
       "box": [
-        -1.3,
+        -1.15,
         -3.25,
-        1.3,
+        1.15,
         0.05
       ],
       "copies": [
@@ -231,7 +241,7 @@
     {
       "id": "corr_side",
       "name": "Коридор",
-      "across": -6.58,
+      "across": -6.78,
       "distance": 6.9,
       "facing": 270,
       "height": 3.2,
@@ -252,9 +262,9 @@
       "tilt": -90,
       "height": 7,
       "box": [
-        -1.3,
+        -1.15,
         -7.1,
-        1.3,
+        1.15,
         0.05
       ]
     },
@@ -404,7 +414,7 @@
       "across": 2.4,
       "distance": -1.4,
       "elevation": 4.6,
-      "facing": 83.25,
+      "facing": 96.75,
       "glows": true,
       "height": 4,
       "box": [
@@ -580,6 +590,20 @@
         -2.75,
         2.1,
         0.05
+      ]
+    },
+    {
+      "across": -6.35,
+      "distance": 7.7,
+      "facing": 270,
+      "id": "curtain_rod",
+      "name": "Карниз",
+      "height": 0.1,
+      "box": [
+        -0.1,
+        -2.72,
+        2.12,
+        -2.55
       ]
     },
     {
