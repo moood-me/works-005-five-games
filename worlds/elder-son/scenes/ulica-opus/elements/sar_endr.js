@@ -1,0 +1,1 @@
+e.kit.izby.gable(g, e, { d: 7, h: 2.5, plinth: 0.45, rise: 2.1, color: '#6a5240' });
