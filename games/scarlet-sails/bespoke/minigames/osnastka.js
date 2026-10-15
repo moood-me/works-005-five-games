@@ -18,7 +18,7 @@ export default {
   about: 20,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Игрушечной яхте недостаёт только парусов' });
+    const mg = g.minigame({ phrase: 'Яхта была готова — недоставало лишь алого шёлка' });
     const send = keys(g);
     let slips = 0, acting = null;
     // рука отца: ключ идёт сценой; прежний ход снимается
