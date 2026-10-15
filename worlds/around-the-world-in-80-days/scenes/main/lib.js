@@ -245,7 +245,7 @@ function film(scene) {
       run: async s => {
         const fogg = s.person('fogg');
         s.cut(FOGG_CLOSE);
-        await looks(s, [[0.3, 'fogg', 'stuart#head'], [0.3, 'fallentin', 'fogg#head'], [0.2, 'sullivan', 'fogg#head'],
+        await looks(s, [[0.3, 'fogg', null], [0.3, 'fallentin', 'fogg#head'], [0.2, 'sullivan', 'fogg#head'],
           [0.2, 'flanagan', 'fogg#head'], [0.2, 'ralph', 'fogg#head']]);
         await s.wait(1.2);
         s.tell('wager:ready');
@@ -255,7 +255,7 @@ function film(scene) {
     // ---- He lays his cards and his hands on the baize; Stuart gets up. All eyes on Fogg.
     wager_down: {
       after: 'wager',
-      from: () => ({ ...AFTER_WHIST(), ...FOGG_CLOSE, fogg_look: 'stuart#head',
+      from: () => ({ ...AFTER_WHIST(), ...FOGG_CLOSE, fogg_look: null,
         ...Object.fromEntries(['fallentin', 'sullivan', 'flanagan', 'ralph'].map(id => [`${id}_look`, 'fogg#head'])) }),
       run: async s => {
         const fogg = s.person('fogg'), stuart = s.person('stuart');
@@ -264,7 +264,9 @@ function film(scene) {
         fogg.with(null);
         s.set('cards_down', 1);
         s.tell('wager_down:cards-down');
-        await s.wait(0.6);
+        await s.wait(0.3);
+        fogg.look('stuart#head');
+        await s.wait(0.3);
         const up = stuart.go('rise_chair', { from: READER, turn: 200 });
         await s.wait(0.1);
         stuart.look('fogg#head');

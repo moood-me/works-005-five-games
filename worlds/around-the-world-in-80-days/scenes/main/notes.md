@@ -87,7 +87,7 @@ wager, wager_down, leave, wait, door, no_door, friday, friday_in (около 110
 Склейка ждёт свой кадр (`s.until(() => shot.ready)`).
 
 Моменты кусков сцена говорит игре (`scene.tell`), кроме `beat:<имя>`: `countdown:handle` (ручка двери, :57),
-`whist:stuart-talks`, `wager:ready` (живая пауза: Фогг держит карты, смотрит на сукно — игрок кладёт их: игра ждёт касания `fogg#hands`, потом ставит `wager_down`), `wager_down:cards-down`, `wager_down:stuart-up`, `leave:up`, `leave:hat-on`, `leave:gone`, `door:fogg-in`
+`whist:stuart-talks`, `wager:ready` (живая пауза: Фогг держит карты, лицо к нам, ровное — игрок кладёт их: игра ждёт касания `fogg#hands`, потом ставит `wager_down`), `wager_down:cards-down`, `wager_down:stuart-up`, `leave:up`, `leave:hat-on`, `leave:gone`, `door:fogg-in`
 (Фогг встал перед ними — под «Вот и я, господа»), `no_door:watch-shut`, `friday:porter` (швейцар у кресла),
 `friday_in:round-him`.
 
