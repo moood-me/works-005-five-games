@@ -1,3 +1,4 @@
-// Projector 1, its inner (east) face — the operator's side, toward the crate: the motor's crank, the lever, the gate,
-// the lens; its reels turn while `motor1` (animate). Its other faces: projector_w, projector_b, projector_t.
-e.lib.projFace(g, e, false, true);
+// Projector 1's body: a box of iron (a form), the lamp house's vents and the lever at its back, the mechanism and
+// the gate on its sides, the motor's crank boss on the inner side; rusted in 1988. Points: lever, motor, gate, lens, side.
+e.lib.projBody(g, e, 'right', e.state.era === 'ruin');
+e.form(e.lib.projBodyForm, { closed: 'u' });

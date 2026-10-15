@@ -1,3 +1,2 @@
-// Projector 1's beam: from the lens through its port, across the hall (20.5 m) down to the screen — a wedge of light
-// in its vertical plane, bright in the booth's smoke at the lens; most of it is seen only through the ports.
-e.lib.beamPaint(e);
+// projector 1's beam: from its lens through the port to the hall's screen far down (kino.beam: a wedge of light)
+e.kit.kino.beam(e, { len: 19.8, top: -0.55, bot: 2.75, mouth: 0.04, dust: 260, drift: 0.7, tipRadius: 1.2, tipStrength: 0.6 });

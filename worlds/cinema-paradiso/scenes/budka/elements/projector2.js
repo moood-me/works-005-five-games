@@ -1,2 +1,4 @@
-// Projector 2, its inner (west) face toward the crate (its x runs south: painted mirrored): the crank, the lever
-e.lib.projFace(g, e, true, true);
+// Projector 2's body: a box of iron (a form), the lamp house's vents and the lever at its back, the mechanism and
+// the gate on its sides, the motor's crank boss on the inner side; rusted in 1988. Points: lever, motor, gate, lens, side.
+e.lib.projBody(g, e, 'left', e.state.era === 'ruin');
+e.form(e.lib.projBodyForm, { closed: 'u' });
