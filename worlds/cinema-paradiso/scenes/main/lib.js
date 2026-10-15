@@ -516,7 +516,7 @@ B('rewind', {
 // I.3 Молоко: out of the cinema, the mother, the coins
 const PORCH2 = aim(-7.95, 9.85, [-9.8, 11.15], 1.42);        // mother and boy, medium
 const PORCH3 = aim(-7.3, 9.45, [-9.55, 11.6], 1.45);         // the three, medium: the choice
-const COINS_CLOSE = aim(-8.75, 11.25, P.COINS, 1.1, -10);     // Alfredo's palm with the coins
+const COINS_CLOSE = aim(-7.75, 11.09, [-9.3, 12.2], 1.3, -4);    // his palm and his face     // Alfredo's palm with the coins
 const BOY = (more = {}) => ({ at: P.TOTO_P, turn: F_TOTO, look: 'maria', mood: 'afraid', reach: { r: 'maria#hand_l' }, ...more });
 const MUM = (more = {}) => ({ at: P.MARIA_P, turn: F_MARIA, look: 'toto', mood: 'angry', reach: { l: 'toto#hand_r' }, ...more });
 B('after_show', {
