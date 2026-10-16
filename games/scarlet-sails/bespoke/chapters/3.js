@@ -4,7 +4,7 @@
 // Reads: facts.ringKind (choices.leave), choices.longren. Leaves: choices.longren, ring, way; marks.longren;
 // scales.tale ±1 (the ring).
 import { SCENES, facts } from '../story.js';
-import koltso from '../minigames/koltso.js';
+import ring from '../minigames/ring.js';
 
 export default {
   number: 'III',
@@ -75,7 +75,7 @@ export default {
       g.sound.breath(0.2, 2);
       await sleeping;
       await g.beat('ring');
-      const r = await g.play(koltso);
+      const r = await g.play(ring);
       g.set('stir', 0, 1);
       g.sound.breath(0, 1);
       if (!r.on) await g.beat('ring_on');
@@ -93,10 +93,10 @@ export default {
       g.sound.gulls();
       await wake;
       await g.beat('wake_hold');
-      const ring = await g.choose('ring', {
+      const kept = await g.choose('ring', {
         'assol#ring': [{ id: 'wear', label: tr('Wear it') }, { id: 'hide', label: tr('Hide it on a cord under the dress') }],
       });
-      if (ring === 'wear') {
+      if (kept === 'wear') {
         await g.beat('wear');
         await g.say('narrator', 'She put the ring on and never took it off');
         g.scale('tale', 1);

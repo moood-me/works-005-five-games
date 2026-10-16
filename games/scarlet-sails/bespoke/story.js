@@ -50,8 +50,8 @@
 import * as sounds from './sound.js';
 
 // the world's scenes the game plays, by their folders
-export const SCENES = { shore: 'main', home: 'dom-longrena', forest: 'les-u-morya', castle: 'zamok-greev',
-  deck: 'paluba', shop: 'lavka-v-lisse', far: 'dal' };
+export const SCENES = { shore: 'main', home: 'longren-house', forest: 'seaside-wood', castle: 'gray-castle',
+  deck: 'deck', shop: 'liss-shop', far: 'far-sea' };
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean.

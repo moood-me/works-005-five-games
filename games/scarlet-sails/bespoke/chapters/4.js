@@ -3,8 +3,8 @@
 // rail before the dawn. design.md, game.md §6.
 // Reads: facts.longren (choices.way, longren). Leaves: choices.girl; marks.girl; scales.tale ±1 (the girl).
 import { SCENES, facts } from '../story.js';
-import alyi from '../minigames/alyi.js';
-import zhdat from '../minigames/zhdat.js';
+import scarlet from '../minigames/scarlet.js';
+import wait from '../minigames/wait.js';
 
 export default {
   number: 'IV',
@@ -24,7 +24,7 @@ export default {
       g.sound.motif();
       await memory;
       await g.beat('silk');
-      await g.play(alyi, {
+      await g.play(scarlet, {
         no: () => g.say('grey', 'Not that one'),
         yes: () => g.say('grey', 'This one. All of it'),
         last: () => g.say('merchant', 'This one, perhaps'),
@@ -107,7 +107,7 @@ export default {
       g.beds({ sea: 0.6 });
       await g.scene(SCENES.shore, { beat: 'wait' });
       await g.beat('wait');
-      await g.play(zhdat);
+      await g.play(wait);
       // a light that came near goes on behind the cape; one never looked into — or left on its way in — is gone at once,
       // from afar (its way to 2 lies through 1 — near: moved, it would come up to the shore first)
       for (const key of ['light1', 'light2', 'light3']) {

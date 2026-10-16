@@ -3,12 +3,12 @@
 // and «Look» (grin), the cry twice (cry), her father waking her (waited, kaperna) —; then the way to the water,
 // the hands («Hand»), the meeting, the boat leaving. No choices: every earlier one is read here. Every step opens
 // its scene by a cut. design.md, game.md §6.
-// Reads: facts.ending, sea, longren, girlToy; scales.sea; marks.kurs1…kurs3. Leaves: marks.kurs1, kurs2, kurs3 (how
+// Reads: facts.ending, sea, longren, girlToy; scales.sea; marks.course1…course3. Leaves: marks.course1, course2, course3 (how
 // steady each leg was), marks.morning (the hour the ship comes: clumsiness and Home cost time only).
 import { SCENES, facts } from '../story.js';
-import kurs from '../minigames/kurs.js';
-import smotri from '../minigames/smotri.js';
-import ruka from '../minigames/ruka.js';
+import course from '../minigames/course.js';
+import lookUp from '../minigames/look.js';
+import hand from '../minigames/hand.js';
 
 // The hour of each cut of the chapter, in the order they are shown — the deck's `sun`, the house's `sun`, the
 // shore's `morning`: time only goes forward, whatever the ending. All of it follows from the play (g.state), so a
@@ -19,13 +19,13 @@ const base = f => 0.26 + (f.sea === 'home' ? 0.045 : 0);
 const hour = (f, step) => base(f) + [0, 0.002, 0.005, 0.007, 0.01][step - 1];
 // the hour the ship comes (the deck's `arrive`, then the shore — marks.morning): not before the last leg's, later by
 // up to 0.045 as the three legs were clumsy (a leg not played leaves no mark: neither steady nor clumsy; a leg
-// skipped by its ⏭ — as played steady, kurs.skipped)
-const comes = (f, { kurs1 = 0.5, kurs2 = 0.5, kurs3 = 0.5 }) => hour(f, 5) + 0.045 * (1 - (kurs1 + kurs2 + kurs3) / 3);
+// skipped by its ⏭ — as played steady, course.skipped)
+const comes = (f, { course1 = 0.5, course2 = 0.5, course3 = 0.5 }) => hour(f, 5) + 0.045 * (1 - (course1 + course2 + course3) / 3);
 
 // a leg of «Course» — the orchestra grows as the course is held; then the wheel let go, the sails full, the orchestra
 // where a leg leaves it (played or skipped; the last one keeps its level), and how steady it was kept (marks[key])
-async function course(g, leg, key) {
-  const r = await g.play(kurs, { leg, sea: g.state.scales.sea, onSteady: u => g.sound.orchestra(0.25 + 0.6 * u, 0.5) });
+async function sail(g, leg, key) {
+  const r = await g.play(course, { leg, sea: g.state.scales.sea, onSteady: u => g.sound.orchestra(0.25 + 0.6 * u, 0.5) });
   g.set('helm', 0, 0.5);
   g.set('luff', 0, 0.5);
   if (leg < 2) g.sound.orchestra(0.4, 1); // the last leg leaves the bed where it is (0.85 at most): V.6 raises it
@@ -53,7 +53,7 @@ export default {
       await order;
       await raise;
       await g.beat('helm');
-      await course(g, 0, 'kurs1');
+      await sail(g, 0, 'course1');
     },
     // the house: she reads — the beetle on the page (grin); the cry outside, not believed (cry); or her father
     // wakes her and she runs out (waited, kaperna)
@@ -90,7 +90,7 @@ export default {
       g.beds({ sea: 0.6, wind: 0.4, orchestra: 0.4 });
       await g.scene(SCENES.deck, { beat: 'helm', leg: 0.5, sun: hour(f, 3) }, { cut: true });
       await g.beat('helm');
-      await course(g, 1, 'kurs2');
+      await sail(g, 1, 'course2');
     },
     // she sees the sails: at the shore's edge with her father, before the dawn (waited); from among all Kaperna
     // (kaperna); or at home — her eyes raised from the book («Look»: after the cry, now in earnest, they are
@@ -132,7 +132,7 @@ export default {
       }
       await look;
       if (cry && f.girlToy) await g.beat('girl_in');
-      await g.play(smotri, { heavy: cry });
+      await g.play(lookUp, { heavy: cry });
       g.set('gaze', 1);
       const seen = g.told('sails_window:seen');
       const sails = g.beat('sails_window');
@@ -149,7 +149,7 @@ export default {
       g.beds({ sea: 0.6, wind: 0.4, orchestra: 0.5 });
       await g.scene(SCENES.deck, { beat: 'helm', leg: 0.85, sun: hour(f, 5) }, { cut: true });
       await g.beat('helm');
-      await course(g, 2, 'kurs3');
+      await sail(g, 2, 'course3');
       const morning = comes(f, g.state.marks);
       g.mark('morning', morning);
       const boat = g.told('arrive:boat');
@@ -191,7 +191,7 @@ export default {
       g.beds({ sea: 0.6, orchestra: 0.5 });
       await g.scene(SCENES.shore, { beat: 'hands' }, { cut: true });
       await g.beat('hands');
-      await g.play(ruka, { onReach: u => g.sound.orchestra(0.5 + 0.5 * u, 0.3) });
+      await g.play(hand, { onReach: u => g.sound.orchestra(0.5 + 0.5 * u, 0.3) });
       g.set('reach', 1);
       g.sound.motif();
       g.sound.orchestra(1, 2);

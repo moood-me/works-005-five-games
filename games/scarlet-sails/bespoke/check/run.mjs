@@ -42,23 +42,23 @@ const several = (stem, n, tail = '') => Array.from({ length: n }, (_, i) => `${s
 // The minigames (minigames/*.js heads): the scene a minigame is played on, the keys it moves and listens to, the moments
 // it waits for, the points its marks stand on, the fields of its opts and of its result
 const MINIGAMES = {
-  osnastka: { scene: 'home', keys: [...several('rig', 4), 'guide'], points: several('closeup#rig', 4), opts: ['onGuide'], result: ['slips'] },
-  'za-korablikom': { scene: 'forest', keys: ['run', 'jump', 'toy', 'reeds', 'run_at'], tells: ['chase:snag'], points: ['toy#toy', 'snag#snag', 'snag2#snag'], result: ['seconds', 'lost', 'jumps'] },
-  kist: { scene: 'castle', keys: several('nail', 3), points: several('canvas#nail', 3), result: ['order', 'seconds'] },
-  otpustit: { scene: 'castle', keys: several('grip', 4), points: several('hands#finger', 4), result: ['opened', 'waited'] },
-  vanty: { scene: 'deck', keys: ['climb', 'hand_l', 'hand_r', 'slip', 'roll'], points: ['ropes#left', 'ropes#right'], result: ['slips', 'seconds'] },
-  koltso: { scene: 'forest', keys: ['ring_at', 'stir'], tells: ['ring:on'], points: ['grey#ring'], result: ['on', 'stirs', 'seconds'] },
-  alyi: { scene: 'shop', keys: ['roll', 'roll_out', 'memory'], points: ['roll'], opts: ['no', 'yes', 'last'], result: ['wrong', 'passed', 'shown'] },
-  zhdat: { scene: 'shore', keys: [...several('light', 3), 'windows'], points: several('light', 3, '#light'), result: ['touched', 'waited'] },
-  kurs: { scene: 'deck', keys: ['helm', 'heading', 'luff'], opts: ['leg', 'sea', 'onSteady'], result: ['steady'] },
-  smotri: { scene: 'home', keys: ['gaze'], points: ['book#book', 'window#window'], opts: ['heavy'], result: ['tries', 'seconds'] },
-  ruka: { scene: 'shore', keys: ['reach'], points: ['hands#her', 'hands#his'], opts: ['onReach'], result: ['seconds', 'lets'] },
+  rigging: { scene: 'home', keys: [...several('rig', 4), 'guide'], points: several('closeup#rig', 4), opts: ['onGuide'], result: ['slips'] },
+  chase: { scene: 'forest', keys: ['run', 'jump', 'toy', 'reeds', 'run_at'], tells: ['chase:snag'], points: ['toy#toy', 'snag#snag', 'snag2#snag'], result: ['seconds', 'lost', 'jumps'] },
+  brush: { scene: 'castle', keys: several('nail', 3), points: several('canvas#nail', 3), result: ['order', 'seconds'] },
+  'let-go': { scene: 'castle', keys: several('grip', 4), points: several('hands#finger', 4), result: ['opened', 'waited'] },
+  shrouds: { scene: 'deck', keys: ['climb', 'hand_l', 'hand_r', 'slip', 'roll'], points: ['ropes#left', 'ropes#right'], result: ['slips', 'seconds'] },
+  ring: { scene: 'forest', keys: ['ring_at', 'stir'], tells: ['ring:on'], points: ['grey#ring'], result: ['on', 'stirs', 'seconds'] },
+  scarlet: { scene: 'shop', keys: ['roll', 'roll_out', 'memory'], points: ['roll'], opts: ['no', 'yes', 'last'], result: ['wrong', 'passed', 'shown'] },
+  wait: { scene: 'shore', keys: [...several('light', 3), 'windows'], points: several('light', 3, '#light'), result: ['touched', 'waited'] },
+  course: { scene: 'deck', keys: ['helm', 'heading', 'luff'], opts: ['leg', 'sea', 'onSteady'], result: ['steady'] },
+  look: { scene: 'home', keys: ['gaze'], points: ['book#book', 'window#window'], opts: ['heavy'], result: ['tries', 'seconds'] },
+  hand: { scene: 'shore', keys: ['reach'], points: ['hands#her', 'hands#his'], opts: ['onReach'], result: ['seconds', 'lets'] },
 };
 // game.md §3.8: what game.js itself takes of the Far Sea (it is not run here)
-const FAR = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'korablik'], offer: 'korablik#sail' };
+const FAR = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'yacht'], offer: 'yacht#sail' };
 // the results put in (game.md §11): the outcomes a chapter branches on
-const CLEAN = { vanty: { slips: 0 }, koltso: { on: true } };
-const OTHER = [{ vanty: { slips: 1 } }, { koltso: { on: false } }];
+const CLEAN = { shrouds: { slips: 0 }, ring: { on: true } };
+const OTHER = [{ shrouds: { slips: 1 } }, { ring: { on: false } }];
 
 // what does not match: text → the plays it was met in
 const misses = new Map(), cuts = new Map();

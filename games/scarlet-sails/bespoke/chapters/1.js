@@ -2,8 +2,8 @@
 // shop that no longer takes toys; the ship let go on the stream; Egle, who tells her the tale (~ what she asks);
 // the tale told at home; the children at the boats (⚑ she stands by it or says she made it up).
 // Reads: nothing of the play. Leaves: choices.egl_ask, choices.kids; scales.tale (I.6), the tale's gauge shown.
-import osnastka from '../minigames/osnastka.js';
-import zaKorablikom from '../minigames/za-korablikom.js';
+import rigging from '../minigames/rigging.js';
+import chase from '../minigames/chase.js';
 import { SCENES } from '../story.js';
 
 export default {
@@ -30,7 +30,7 @@ export default {
       await g.move('scrap_taken', 1, 0.6);
       await g.wait(500); // held, seen
       await g.beat('rig');
-      await g.play(osnastka, { onGuide: () => g.say('longren', 'Hold the mast. Tighter', 'narrator') });
+      await g.play(rigging, { onGuide: () => g.say('longren', 'Hold the mast. Tighter', 'narrator') });
       for (const key of ['rig1', 'rig2', 'rig3', 'rig4']) g.set(key, 1);
       g.set('guide', 0);
       const up = g.told('glow:up');
@@ -63,7 +63,7 @@ export default {
       await g.say('narrator', 'By the stream she wanted to see how the yacht would sail');
       await launch;
       await g.beat('chase');
-      await g.play(zaKorablikom);
+      await g.play(chase);
       g.set('run', 1);
       g.set('toy', 1, 1);
       g.set('reeds', 0);

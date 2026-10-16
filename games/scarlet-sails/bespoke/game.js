@@ -57,7 +57,7 @@ export default async function (b) {
   // the toy yacht of the Far Sea: the player presses it (at the point the scene marks as its sail), then where to go
   const yacht = async options => {
     const away = view.hint(tr('Touch the little ship'), 3000);
-    const action = await hub.offer({ 'korablik#sail': options });
+    const action = await hub.offer({ 'yacht#sail': options });
     away();
     return action.id;
   };
@@ -66,7 +66,7 @@ export default async function (b) {
   const far = async (number, title, map) => {
     beds({ sea: 0.3 }, 2);
     view.gauges(null);
-    await b.show(SCENES.far, { state: { chapter_number: number, chapter_title: title, map, reveal: 0, korablik: 1 } });
+    await b.show(SCENES.far, { state: { chapter_number: number, chapter_title: title, map, reveal: 0, yacht: 1 } });
     // (the scene moves it: done once it is there)
     await b.act('state', 'move', 'reveal', 1, { over: map ? 2.5 + map.length * 1.2 : 3.5 });
   };

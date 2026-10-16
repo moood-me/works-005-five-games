@@ -14,7 +14,7 @@ const SAMPLES = 12; // 3 s of quarter-seconds
 const EASE = 0.5; // s: the wheel let go comes back
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-const kurs = {
+const course = {
   title: 'Course', // (as the author's ☰ lists it)
   about: 22,
   skipped: { steady: 0.8 }, // (as played: the plain good outcome — clean from 0.6)
@@ -56,11 +56,11 @@ const kurs = {
       mg.plate.set({ fill: since / LEG, glow: s.in ? 'good' : 'bad' });
       return since >= LEG;
     });
-    if (!done) return kurs.skipped;
+    if (!done) return course.skipped;
     const steady = clamp(steadyFor / LEG);
     await mg.end({ as: steady >= 0.6 ? 'clean' : 'flawed' });
     return { steady };
   },
 };
 
-export default kurs;
+export default course;

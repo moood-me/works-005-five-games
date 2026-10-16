@@ -3,9 +3,9 @@
 // shrouds under Gop; the letter of his father's death (⚑ home for long, or only for a share — the compass moves).
 // Reads: nothing of the play but its own choices. Leaves: choices.leave, choices.letter; scales.sea (II.3 ±1,
 // II.4 +1, II.5 ±2); marks.mother (quiet); the sea's gauge shown.
-import kist from '../minigames/kist.js';
-import otpustit from '../minigames/otpustit.js';
-import vanty from '../minigames/vanty.js';
+import brush from '../minigames/brush.js';
+import letGo from '../minigames/let-go.js';
+import shrouds from '../minigames/shrouds.js';
 import { SCENES } from '../story.js';
 
 export default {
@@ -26,7 +26,7 @@ export default {
       await g.say('narrator', 'Gray was born in a castle where everything was ordained for ever');
       await boy;
       await g.beat('brush');
-      await g.play(kist);
+      await g.play(brush);
       for (const key of ['nail1', 'nail2', 'nail3']) g.set(key, 1);
       await g.say('grey_boy', 'I won\'t have nails sticking out of hands and blood flowing while I\'m here', 'narrator');
       const stops = g.told('mother_in:stops');
@@ -73,7 +73,7 @@ export default {
         await ring;
         await g.say('lilian', 'Take it. Let it be with you');
         await farewell;
-        const r = await g.play(otpustit);
+        const r = await g.play(letGo);
         for (const key of ['grip1', 'grip2', 'grip3', 'grip4']) g.set(key, 0);
         g.set('pried', r.opened > 0 ? 1 : 0);
         await g.beat('let_go');
@@ -98,7 +98,7 @@ export default {
       await g.say('gop', 'Want to be a captain? Up to the crosstrees first. And don\'t look down');
       await anselm;
       await g.beat('shrouds');
-      const r = await g.play(vanty);
+      const r = await g.play(shrouds);
       g.set('climb', 1);
       g.set('hand_l', 1);
       g.set('hand_r', 1);
