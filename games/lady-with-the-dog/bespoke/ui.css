@@ -100,7 +100,7 @@
 #layer .tools > button { width: 44px; height: 44px; border: 1px solid var(--card-edge); outline: 1px solid rgba(203, 191, 168, 0.7); outline-offset: -4px;
   border-radius: 2px; color: var(--graphite); background: var(--card); font: 18px/1 var(--serif); cursor: pointer; opacity: 0.7; }
 #layer .tools > button[hidden] { display: none; }
-#layer .tools > button:hover, #layer .tools.paused > button:first-child { opacity: 1; }
+#layer .tools > button:hover { opacity: 1; }
 /* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
    of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
