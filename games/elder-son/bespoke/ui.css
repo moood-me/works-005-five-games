@@ -54,7 +54,7 @@
 #layer .tools > button { width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 3px; color: var(--ink);
   background: rgba(227, 233, 240, 0.88); font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.65;
   box-shadow: 0 1px 6px rgba(10, 16, 28, 0.4); }
-#layer .tools > button:hover, #layer .tools.paused > button:first-child { opacity: 1; }
+#layer .tools > button:hover { opacity: 1; }
 #layer .tools > button[hidden] { display: none; }
 /* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
    of its steps */

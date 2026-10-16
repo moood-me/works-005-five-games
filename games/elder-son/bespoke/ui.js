@@ -13,13 +13,11 @@
 //   view.onSkip(fn) → off — what the ⏭ does now (the latest one, until off()); none — the ⏭ not shown
 //     (a minigame: skips the minigame, for every player — a safety net if it glitches, not a way through; a step:
 //     skips the step, the author's only — game.js)
-//   view.pausing(b) — ⏸ in the corner, for every player: the play paused (bespoke.pause, and the game's own sounds:
-//     sound.js pause) and going on again
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
-//     its minigames], go(as, chapter, step, game)}) — the author's tools: ☰ lists the chapters, their steps and the
+//     its minigames], go(as, chapter, step, game)}) — the author's map,
+//     opened by the page's ☰ (author() → what opens it, for bespoke.menu), lists the chapters, their steps and the
 //     steps' minigames, to go to any — as the play picked under «партия как…» has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
-import { pause } from './sound.js';
 import { SCALES } from './story.js';
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -42,7 +40,7 @@ const button = (text, title, onclick, cls) =>
 export function ui(layer) {
   const window_ = windowGauge(layer);
   const toasts = el('div', 'toasts', layer);
-  // the corner's tools: ⏸ for everyone, ⏭ (a minigame: everyone; a step: the author), ☰ for the author
+  // the corner's tools: ⏭ (a minigame: everyone; a step: the author) (⏸, ☰ — the page's)
   const tools = el('div', 'tools', layer);
   const skips = [];
   // (shown while the latest skip is something)
@@ -93,15 +91,9 @@ export function ui(layer) {
       skipShown();
       return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
     },
-    pausing(b) {
-      // (the game's own sounds stand with the play: its audio's clock is not the page's)
-      const p = button('', '', () => { b.pause(!b.paused); pause(b.paused); paint(); });
-      const paint = () => { p.textContent = b.paused ? '▶' : '⏸'; p.title = b.paused ? 'дальше' : 'пауза'; tools.classList.toggle('paused', b.paused); };
-      paint();
-      tools.prepend(p);
-    },
     author({ chapters, plays, at, games, go }) {
-      // ☰: «партия как…», then every chapter a column of its steps (and their minigames) in a window over the scene;
+      // the map (the page's ☰ opens it): «партия как…», then every chapter a column of its steps (and their minigames)
+      // in a window over the scene;
       // a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
       map.hidden = true;
@@ -132,7 +124,8 @@ export function ui(layer) {
         map.replaceChildren(panel);
         map.hidden = false;
       };
-      tools.append(button('☰', 'главы и шаги', () => (map.hidden ? open() : close())));
+      const toggle = () => (map.hidden ? open() : close());
+      return toggle;
     },
   };
 }
