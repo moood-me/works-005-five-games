@@ -82,7 +82,7 @@
    author) — above whatever a minigame spreads over the scene */
 #layer .tools { position: absolute; z-index: 10; top: calc(var(--below-header) + 8px); right: 14px; display: flex; gap: 6px; }
 #layer .tools > button { width: 44px; height: 44px; border: 0; border-radius: 4px; font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.6; }
-#layer .tools > button:hover, #layer .tools.paused > button:first-child { opacity: 1; }
+#layer .tools > button:hover { opacity: 1; }
 /* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
    of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
