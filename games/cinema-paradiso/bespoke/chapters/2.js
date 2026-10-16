@@ -44,7 +44,7 @@ export default {
       g.beds({ whirr: 0.6 });
       g.sound.motif();
       await lever;
-      await g.say('alfredo', 'And this is the lever. The first dot blinks: the motor. The second: the lever', 'alfredo');
+      await g.say('alfredo', 'And this is the lever. When the first dot blinks, the motor. At the second, the lever', 'alfredo');
       await motor;
       const laugh = g.told('full_hall:laugh');
       await g.scene(SCENES.hall, { beat: 'full_hall' }, { cut: true });

@@ -154,7 +154,7 @@ export default {
       g.sound.church();
       await passing;
       await g.say('narrator', 'They carried Alfredo past the Paradiso');
-      if (g.state.choices.station === 'come') await g.say('narrator', 'He called me. I didn\'t come');
+      if (g.state.choices.station === 'come') await g.say('narrator', 'He asked me to come. I never did');
       else await g.say('narrator', 'He said: don\'t come back. And I didn\'t');
       await funeral;
       const way = await g.choose('funeral', {
@@ -181,7 +181,7 @@ export default {
       await tin;
       await g.say('anna', 'He left you this. He said to put it into your hands', 'anna');
       if (f.hold) await g.say('anna', 'Every summer he asked: has Totò come?', 'anna');
-      else await g.say('anna', 'He had me read about you in the papers. Out loud. But write to you — not once did he write', 'anna');
+      else await g.say('anna', 'He had me read about you in the papers. Out loud. But he never once wrote to you', 'anna');
       await widow;
     },
     // the ruined hall (the lion's flash of the past), the ruined booth; the note (if he knows); the strip (The Strip)
