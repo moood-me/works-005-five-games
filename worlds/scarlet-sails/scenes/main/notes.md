@@ -3,7 +3,7 @@
 The world's first scene; it sets its style: modern, fine, almost minimalist. A vast morning mirror of a sea and
 sky, a pearly silver-blue palette, clean volumes, long reflections, soft mist. The only warm thing in the frame is Longren's
 window (and the tavern's lantern when it is lit); the only scarlet — the ship's sails and Assol's yacht. The people are the engine's, the world's cast
-(`cast`); the film in beats — `beats` (`lib.film`); the sky and the hour's light — `nebo`; the ship, the skiff, the night's lights — `korabli`; the hands
+(`cast`); the film in beats — `beats` (`lib.film`); the sky and the hour's light — `sky`; the ship, the skiff, the night's lights — `ships`; the hands
 close up — `closeups`.
 
 Everything is painted once, in the day's colours. No painting reads a key: the hour, the mist, the wind, the windows, the lantern, the lighthouse,
@@ -16,10 +16,10 @@ the open sea, the cape with the lighthouse; the sun rises over the sea on the ri
 
 | Element | Where | What |
 | --- | --- | --- |
-| `sky` | the sky | the world's sky (`nebo.sky`, the shader `tools/nebo-sky.wgsl`): the hour's gradient, the stars, the clouds, the sun and the moon — layers; the points `sky#sun`, `sky#moon` |
+| `sky` | the sky | the world's sky (`sky.sky`, the shader `tools/sky.wgsl`): the hour's gradient, the stars, the clouds, the sun and the moon — layers; the points `sky#sun`, `sky#moon` |
 | `sea` | a plane to the horizon | a mirror (`reflect`: `rough`, `ripple`); its own colour under the mirror; the wind's ripple is the layer `ripple` (it drifts, seen at `wind`) |
 | `mist` | 700 m | the mist on the horizon by the cape: a layer-streak (the height and the thickness by `mist`) and two layers of banks drifting different ways |
-| `ship` and `ship_…` | 9000 → 260 m | the Secret (`node tools/korabl.js main ship`): the anchor `ship` (the place, the turn, the heel — keys) and 22 elements on it |
+| `ship` and `ship_…` | 9000 → 260 m | the Secret (`node tools/ship.js main ship`): the anchor `ship` (the place, the turn, the heel — keys) and 22 elements on it |
 | `cape`, `lighthouse`, `lighthouse_light` | 800 m | the cape; the lighthouse's tower; its light (`glows`): a flash once in 8 s and a beam both ways — layers, lit from dusk till morning (in the mist of the night of waiting it is not seen: `lib.capeMist`) |
 | `cape_mist` | 792 m | the mist on the cape on the night of waiting (`cape_mist`): a layer along the cape and a layer over its end and the tower — it parts while `light3` is about 1 |
 | `light1`, `light2`, `light2_smoke`, `light3` | the horizon → near → behind the cape | the three lights of the night of waiting (below, “Chapters IV–V”) |
@@ -33,12 +33,12 @@ the open sea, the cape with the lighthouse; the sun rises over the sea on the ri
 | `nets` | 30 m | nets on stakes |
 | `net` | on the keel of `boat2` | a coil of net (Longren lays his palm on it) |
 | `rope` | at the edge | a coil of rope — only in the past (a layer, seen by `past`) |
-| `skiff`, `skiff_far`, `skiff_in` | the sand by the boats or the water | the Secret's skiff (`korabli.skiff`): the near side (it is also the anchor and the point `skiff`), the far side 1.3 m behind it, an unseen “inside” between them (the point `skiff_in#stern` — where they stand in the stern); where it is, how it is turned and how high it floats — `lib.skiffAt` |
+| `skiff`, `skiff_far`, `skiff_in` | the sand by the boats or the water | the Secret's skiff (`ships.skiff`): the near side (it is also the anchor and the point `skiff`), the far side 1.3 m behind it, an unseen “inside” between them (the point `skiff_in#stern` — where they stand in the stern); where it is, how it is turned and how high it floats — `lib.skiffAt` |
 | `menners_skiff` | 46 → 260 m | Menners' boat — only in the storm (a layer, seen by `storm`); `menners_boat` carries it off, it rocks |
 | `blizzard`, `storm_rain` | the air | particles: a blizzard by `winter`, a downpour by `storm` |
 | `beach`, `sand` | planes `drape` | the near shore |
 | `boat1`, `boat2`, `stone` | 8.5, 17, 4.6 m | upturned boats; a stone at the edge |
-| `toy` | 6.3 m | Assol's yacht in the shallow water (`korabli.toy`): a layer, seen by `toy_water`, it rocks |
+| `toy` | 6.3 m | Assol's yacht in the shallow water (`ships.toy`): a layer, seen by `toy_water`, it rocks |
 | `assol`, `kid_boy`, `kid_girl`, `kid_small`, `girl`, `mother`, `longren` | by the boats | the engine's people |
 | `grey`, `hin`, `filipp`, `mary`, `menners`, `woman2`, `woman3` | by the tavern (Gray and Longren — at the water too) | the people of chapter III and of the past |
 | `fisher1`, `fisher2` | by the boats | Kaperna's fishermen (chapter V) |
@@ -84,12 +84,12 @@ Assol goes off along the road into the distance, towards the far hills, and not 
 
 | v1 | v2 |
 | --- | --- |
-| the sky was painted by `hour` (`nebo.palette`) | the world's sky: one painting, a shader and `animate` by `hour`; the sun and the moon are layers with points and glows |
+| the sky was painted by `hour` (`sky.palette`) | the world's sky: one painting, a shader and `animate` by `hour`; the sun and the moon are layers with points and glows |
 | the hour's light — only the looks' `ambient` | the looks `day/dawn/dusk/night` + the far sources `sun` (`sky#sun`), `moon` (`sky#moon`): the light comes from where they are painted; the shadows of the people and the stone |
 | the sea was painted anew by `wind` | the ripple is a layer with `drift`, its alpha — `wind` |
 | the mist and the veil were painted anew every frame (`e.t`) | layers with `drift`; the streak's height is the layer's `scaleY`, the thickness — the alpha |
 | the lighthouse was painted anew every frame | the tower is a painting; the light is the element `lighthouse_light`: `e.glow` and two beam layers in `animate` |
-| the ship — one flat painting `korabli.galliot`, far off a point by `e.px` | the world's assembled ship: faceted sides, decks, masts and yards, nine sails with the sailcloth shader (the wind on the cloth, white ↔ scarlet by `sails`, translucent); she comes bow to the shore and anchors three-quarters on (`ship_facing`), rolls (`ship_roll`); far off — a spark (`ship_spark`) |
+| the ship — one flat painting `ships.galliot`, far off a point by `e.px` | the world's assembled ship: faceted sides, decks, masts and yards, nine sails with the sailcloth shader (the wind on the cloth, white ↔ scarlet by `sails`, translucent); she comes bow to the shore and anchors three-quarters on (`ship_facing`), rolls (`ship_roll`); far off — a spark (`ship_spark`) |
 | Kaperna's windows — rectangles painted by `windows` | glows in the houses' parts, `e.glow` by `windows` |
 | the film — lines by seconds (`film`), the people moved in the seconds given | the director's beats (`beats`): people walk at their own pace and run at their own run, the beat waits for them |
 | fades (`fade`) at every cut | cuts with no fades; out of black — only the prologue; in `grey_dawn` the night turns into dawn before our eyes (`hour` moves) |
@@ -97,7 +97,7 @@ Assol goes off along the road into the distance, towards the far hills, and not 
 ## Light
 
 `light.looks`: `day`, `dawn` (pearly, a little warm), `dusk` (lilac-grey), `night` (blue). The weights and
-`sun_light`, `moon_light` are kept by `script.js` (`nebo.follow`); in cuts they go together with the hour (`nebo.keys`). The windows,
+`sun_light`, `moon_light` are kept by `script.js` (`sky.follow`); in cuts they go together with the hour (`sky.keys`). The windows,
 the tavern's lantern, the lighthouse are glows (`e.light`), `hazeGlow` — their light in the air. The reflections, the paths of the sun, the moon and the windows —
 the sea's mirror. The mist (`mist`) is only the layers by the cape and over the bay, it has no look of light: the morning air is clear to
 the horizon (`dawn` — a haze of 0.03, seen to 20 km; `day` 0.07 — to 7 km), else the ship's spark 6–9 km off is not seen at all
@@ -220,7 +220,7 @@ Kaperna's windows (the game puts them out: `windows`), the right half — the op
 `light` (which the game offers): in 16:9 they stand at 1.01, 1.18 and 1.35 of the frame's height from the left edge (between neighbours ≥ 0.15,
 all within the middle 4:3).
 
-- `light1` — a fishing boat (`korabli.far`), `light2` — a steamer (`korabli.steamer`, the smoke — the particles `light2_smoke`). Where
+- `light1` — a fishing boat (`ships.far`), `light2` — a steamer (`ships.steamer`, the smoke — the particles `light2_smoke`). Where
   they are — `lib.lightAt` (`LIGHTS`: the bearing and the range at 0, 1, 1.5, 2): far out at sea → near (the boat 100 m off, the steamer
   430 m) → back past the cape's end → behind the cape. The place is set by the script (`light1_a`…), the painting reads no keys. Far off the module's lantern
   is smaller than a pixel, so each has its own far glow `far` (like the ship's spark): `lib.lightMotion`

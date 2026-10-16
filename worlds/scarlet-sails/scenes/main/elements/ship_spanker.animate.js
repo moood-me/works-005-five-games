@@ -1,1 +1,1 @@
-e.kit.korabli.sailMotion(e, 'spanker');
+e.kit.ships.sailMotion(e, 'spanker');

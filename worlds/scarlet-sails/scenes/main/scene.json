@@ -101,8 +101,8 @@
     }
   ],
   "modules": [
-    "nebo",
-    "korabli",
+    "sky",
+    "ships",
     "cast",
     "beats",
     "closeups"
@@ -392,7 +392,7 @@
         1
       ],
       "smooth": true,
-      "means": "internal: the sunlight, the script sets it by hour (nebo)"
+      "means": "internal: the sunlight, the script sets it by hour (sky)"
     },
     "moon_light": {
       "range": [
@@ -400,7 +400,7 @@
         1
       ],
       "smooth": true,
-      "means": "internal: the moonlight, the script sets it by hour (nebo)"
+      "means": "internal: the moonlight, the script sets it by hour (sky)"
     },
     "ship_facing": {
       "type": "number",

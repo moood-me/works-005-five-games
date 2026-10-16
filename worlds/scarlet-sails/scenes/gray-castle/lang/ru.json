@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Grays' Castle","translation":"Замок Греев","where":"scenes/gray-castle/scene.json title"},
+  {"text":"Everything here is ordained for ever.","translation":"Всё здесь заведено навсегда.","where":"scenes/gray-castle/scene.json caption"}
+]}

@@ -1,4 +1,4 @@
-// The world's sailcloth (module korabli; written into a scene by tools/korabl.js — change it there, not in the scene).
+// The world's sailcloth (module ships; written into a scene by tools/ship.js — change it there, not in the scene).
 // A sail painted once, fully set, white: here it is set as far as `set` says (furled, a roll: dropping from its head, or
 // — `rise` — going up from its foot), white or scarlet (`scarlet`: the painting's lights and darks become the silk's),
 // and alive — the wind's long folds going over it, light on their crests (`wind`: how much; in gusts), and, when it

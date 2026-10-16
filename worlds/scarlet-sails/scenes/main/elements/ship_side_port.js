@@ -1,1 +1,1 @@
-e.kit.korabli.hull(g, e, 'side_port', 'secret');
+e.kit.ships.hull(g, e, 'side_port', 'secret');

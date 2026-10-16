@@ -1,14 +1,14 @@
 // «The Kaperna Shore» — the shore: where the sun and the moon stand on its sky, where the ship is as she comes in, the
 // land's shape (the relief reads it), what its elements paint and move with, and its film (film(scene): the world's
-// module beats). Everything is painted once, in daylight colours: the hour is the world's sky (kit.nebo) and the
+// module beats). Everything is painted once, in daylight colours: the hour is the world's sky (kit.sky) and the
 // scene's light (light.looks); what moves is moved by layers, animates and the engine (notes.md).
-const N = kit.nebo;
+const N = kit.sky;
 const { clamp, mix, ease, span } = anim;
 const HORIZON = 0.55;
 // the sea's surface, metres (the viewer stands at 0 on the sand by it)
 const SEA = -0.1;
 
-// The sky (kit.nebo.sky, skyMotion): the sun rises over the open sea on the right, stands above the frame at noon and
+// The sky (kit.sky.sky, skyMotion): the sun rises over the open sea on the right, stands above the frame at noon and
 // sets behind the hills on the left; the moon by night goes from the sea on the right across to the left
 const SKY = {
   horizon: HORIZON,
@@ -705,7 +705,7 @@ const loop = (motion) => ({ motion, loop: true });
 // nobody but whom a beat names: each person's keys at rest, not here
 const AWAY = () => Object.fromEntries(WHO.flatMap((id) => [[`${id}_here`, false], [`${id}_do`, "stand"], [`${id}_look`, null],
   [`${id}_reach`, null], [`${id}_with`, null], [`${id}_on`, null], [`${id}_gait`, null], [`${id}_wear`, null]]));
-// the hour with its light (a cut is made in its own light: nebo.keys), the shore's own keys, the camera
+// the hour with its light (a cut is made in its own light: sky.keys), the shore's own keys, the camera
 const hourOf = (hour) => ({ hour, ...N.keys(hour) });
 const shore = (hour, o) => ({ ...AWAY(), fade: 0, ...hourOf(hour), mist: 0.2, wind: 0.25, windows: 0.3, longren_window: 1, tavern_lamp: 0,
   tavern_door: 0, past: 0, winter: 0, storm: 0, menners_boat: 0, skiff_ashore: 0, boat: 0,

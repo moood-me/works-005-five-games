@@ -1,1 +1,1 @@
-e.kit.korabli.rigMotion(e);
+e.kit.ships.rigMotion(e);

@@ -13,7 +13,7 @@ const { clamp, span, ease, noise } = anim;
 const TAU = 2 * Math.PI;
 const clamp01 = (v) => clamp(Number(v) || 0, 0, 1);
 
-// (colours: a module stands by itself — the same lamplight and scarlet as the world's nebo, the skins of its cast)
+// (colours: a module stands by itself — the same lamplight and scarlet as the world's sky, the skins of its cast)
 const rgbOf = (c) => [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
 const blend = (a, b, u) => `#${rgbOf(a).map((v, i) => Math.round(v + (rgbOf(b)[i] - v) * u).toString(16).padStart(2, "0")).join("")}`;
 const rgba = (c, a) => `rgba(${rgbOf(c).join(",")},${a})`;
