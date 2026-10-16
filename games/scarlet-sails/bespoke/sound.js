@@ -8,13 +8,11 @@
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down),
 // getting there over `seconds`:
 //   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
-//   sea(level, seconds) — the sea from the shore: its low body, a wave every 7–9 s, the foam hissing back
-//   stream(level, seconds) — a brook over stones
-//   wind(level, seconds) — wind in the rigging, wandering
-//   storm(level, seconds) — a gale, lower and harder, and the waves slamming
-//   campfire(level, seconds) · hearth(level, seconds) — a fire crackling: in the open; in the castle's great fireplace
-//   breath(level, seconds) — a sleeper breathing, in and out in 3.5 s; the higher the level, the quicker and the
-//     less even (she stirs)
+//   sea(level, seconds) — the sea from the shore · stream(level, seconds) — a brook over stones · wind(level, seconds)
+//     — wind on a ship · storm(level, seconds) — a storm at sea · breath(level, seconds) — a sleeper breathing:
+//     recordings (sounds/)
+//   campfire(level, seconds) — a fire in the open: crackles over a low roar (ambience.js) · hearth(level, seconds) — the
+//     castle's great fireplace
 //   orchestra(level, seconds) — strings holding the chords under the motif, round and round; the level opens their
 //     tone and brings more of them in
 // Played once:
@@ -30,6 +28,7 @@
 //   violin() — one bowed violin playing SONG, round after round
 //   song() — the crew's song: four men humming SONG low, without words
 // The two play SONG together: whoever comes in second joins at the next bar of the first.
+import { built, kit } from './ambience.js';
 
 // SONG — the sail's motif and what grows out of it: sixteen bars in 3/4, D major; each bar its notes [pitch, beats]
 // (the violin's; the men's lead an octave lower) and the chord the other three men hold under it (lowest first)
@@ -235,6 +234,24 @@ function plop(t, dest, loud) {
   for (let s = 0.12; s < 0.6; s += 0.05 + Math.random() * 0.12) drop(t + s, dest, 1200 + Math.random() * 1500, 0.6, loud * 0.15);
 }
 
+// recordings (sounds/ — CC0, from Freesound: sounds/README.md): fetched and decoded once each; a bed plays one of its own
+// round and round from a random point, `gain` bringing it to as loud as the bed it took the place of
+const recordings = {};
+function recording(file) {
+  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b)));
+}
+function recorded(files, gain) {
+  return ({ a, out, keep }) => {
+    const s = a.createBufferSource(), g = a.createGain();
+    let on = true;
+    keep({ stop() { on = false; if (s.buffer) s.stop(); } });
+    g.gain.value = gain;
+    s.loop = true;
+    s.connect(g).connect(out);
+    recording(files[Math.floor(Math.random() * files.length)]).then(buf => { if (on) { s.buffer = buf; s.start(a.currentTime, Math.random() * buf.duration); } });
+  };
+}
+
 // the beds: one of each for the page, built when first heard and taken down once silent. build({a, t, out, noise,
 // sway, keep, every}) makes it into `out`: noise(kind) and sway(param, rate, depth) last as long as the bed does,
 // keep(node) — so does a node of its own, every(fn) — fn now and five times a second (to plan what comes: the
@@ -277,95 +294,17 @@ export function beds(levels = {}, seconds = 2) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }
 
-export function sea(level = 1, seconds = 2) {
-  bed('sea', 0.25, ({ a, t, out, noise, sway, every }) => {
-    // the water's body, always there
-    const deep = a.createGain();
-    deep.gain.value = 0.5;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 500 })).connect(deep).connect(out);
-    sway(deep.gain, 0.05, 0.12);
-    // a wave: it gathers and opens as it breaks, and its foam runs back down the sand hissing
-    const tone = filter({ type: 'lowpass', frequency: 350 }), swell = a.createGain(), foam = a.createGain();
-    swell.gain.value = 0;
-    foam.gain.value = 0;
-    noise('brown').connect(tone).connect(swell).connect(out);
-    noise('pink').connect(filter({ type: 'highpass', frequency: 2200 })).connect(foam).connect(out);
-    let next = t + 1;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.5) return;
-      const at = Math.max(next, now), big = 0.6 + Math.random() * 0.4;
-      shape(swell.gain, at, [[2.4, 0.9 * big], [3.1, 0.5 * big], [5.5, 0]]);
-      shape(tone.frequency, at, [[2.4, 950], [5.5, 350]], 350);
-      shape(foam.gain, at, [[2.2, 0], [2.9, 0.5 * big], [4, 0.25 * big], [6.4, 0]]);
-      next = at + 7 + Math.random() * 2;
-    });
-  }, level, seconds);
-}
+// the sea: a recording
+export function sea(level = 1, seconds = 2) { bed('sea', 0.05, recorded(['sea-shore-240645.mp3', 'sea-shore-517945.mp3'], 2.61), level, seconds); }
 
-export function stream(level = 1, seconds = 2) {
-  bed('stream', 0.15, ({ a, t, out, noise, sway, every }) => {
-    // the run of it: a band between 1.5 and 4 kHz that never keeps still
-    const run = filter({ type: 'bandpass', frequency: 2500, Q: 0.9 }), amp = a.createGain();
-    amp.gain.value = 0.35;
-    noise('white').connect(run).connect(amp).connect(out);
-    sway(run.frequency, 0.8, 550);
-    sway(run.frequency, 6.3, 350);
-    sway(amp.gain, 9.1, 0.06);
-    sway(amp.gain, 0.23, 0.06);
-    // and the bubbles in it
-    let next = t;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now; // (the page was hidden: what was missed then is not made up for)
-      for (; next < now + 0.4; next += 0.05 + Math.random() * 0.25)
-        drop(Math.max(next, now), out, 900 + Math.random() * 1800, 1.4, 0.015 + Math.random() * 0.03);
-    });
-  }, level, seconds);
-}
+// a brook: a recording
+export function stream(level = 1, seconds = 2) { bed('stream', 0.05, recorded(['stream-197023.mp3'], 2.35), level, seconds); }
 
-export function wind(level = 1, seconds = 2) {
-  bed('wind', 0.2, ({ a, out, noise, sway }) => {
-    // a band wandering between 300 and 900 Hz, now fuller, now thinner
-    const band = filter({ type: 'bandpass', frequency: 600, Q: 1.3 }), amp = a.createGain();
-    amp.gain.value = 0.7;
-    noise('pink').connect(band).connect(amp).connect(out);
-    sway(band.frequency, 0.07, 200);
-    sway(band.frequency, 0.031, 100);
-    sway(amp.gain, 0.11, 0.22);
-    sway(amp.gain, 0.043, 0.13);
-  }, level, seconds);
-}
+// the wind: a recording
+export function wind(level = 1, seconds = 2) { bed('wind', 0.05, recorded(['wind-rigging-481139.mp3'], 1.54), level, seconds); }
 
-export function storm(level = 1, seconds = 2) {
-  bed('storm', 0.3, ({ a, t, out, noise, sway, every }) => {
-    // the gale: the wind lower and harder, a howl in it, the sea's roar under
-    const band = filter({ type: 'bandpass', frequency: 330, Q: 1.1 }), amp = a.createGain();
-    amp.gain.value = 0.8;
-    noise('pink').connect(band).connect(amp).connect(out);
-    sway(band.frequency, 0.09, 130);
-    sway(band.frequency, 0.21, 50);
-    sway(amp.gain, 0.13, 0.35);
-    const howl = filter({ type: 'bandpass', frequency: 780, Q: 7 }), howlAmp = a.createGain();
-    howlAmp.gain.value = 0.35;
-    noise('pink').connect(howl).connect(howlAmp).connect(out);
-    sway(howl.frequency, 0.06, 260);
-    sway(howlAmp.gain, 0.17, 0.2);
-    const roar = a.createGain();
-    roar.gain.value = 0.6;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 200 })).connect(roar).connect(out);
-    // the waves slamming, and their spray
-    let next = t + 0.8;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.5) return;
-      const at = Math.max(next, now), hard = 0.6 + Math.random() * 0.4;
-      burst(at, out, { kind: 'brown', f: 140, Q: 0.6, len: 1.8, loud: 1.2 * hard, attack: 0.12 });
-      burst(at + 0.15, out, { f: 3600, Q: 0.6, len: 1.2, loud: 0.07 * hard, attack: 0.2 });
-      next = at + 2.5 + Math.random() * 3;
-    });
-  }, level, seconds);
-}
+// a storm at sea: a recording
+export function storm(level = 1, seconds = 2) { bed('storm', 0.05, recorded(['storm-441108.mp3'], 2.55), level, seconds); }
 
 // a fire: its low glow, the flutter of the flame, and the wood cracking — `pops` a second, around `tone` Hz
 function fire(name, { wet, pops, tone, glow }, level, seconds) {
@@ -390,31 +329,13 @@ function fire(name, { wet, pops, tone, glow }, level, seconds) {
     });
   }, level, seconds);
 }
-export function campfire(level = 1, seconds = 2) {
-  fire('campfire', { wet: 0.1, pops: 5, tone: 3200, glow: { frequency: 220, loud: 0.35 } }, level, seconds);
-}
+export function campfire(level = 1, seconds = 2) { bed('campfire', 0.15, ({ a, out, keep, every }) => built.campfire(kit(a, keep, every), out, 0.75), level, seconds); }
 export function hearth(level = 1, seconds = 2) {
   fire('hearth', { wet: 0.4, pops: 2.2, tone: 2200, glow: { frequency: 140, loud: 0.6 } }, level, seconds);
 }
 
-export function breath(level = 1, seconds = 2) {
-  bed('breath', 0.1, ({ a, t, out, noise, every }) => {
-    const throat = filter({ type: 'lowpass', frequency: 600 }), amp = a.createGain();
-    amp.gain.value = 0;
-    noise('pink').connect(throat).connect(amp).connect(out);
-    let next = t + 0.2, stir = 0;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.4) return;
-      const at = Math.max(next, now), len = 3.5 / (1 + 1.2 * stir) * (1 + (Math.random() - 0.5) * 0.9 * stir);
-      // in, higher; a moment's rest; out, lower and longer
-      shape(amp.gain, at, [[len * 0.36, 1.4], [len * 0.42, 0.25], [len * 0.55, 1.8], [len * 0.92, 0.1], [len, 0]]);
-      shape(throat.frequency, at, [[len * 0.36, 750], [len * 0.45, 420], [len, 380]], 520);
-      next = at + len;
-    });
-    return level => { stir = Math.min(1, Math.max(0, (level - 0.2) / 0.8)); };
-  }, level, seconds);
-}
+// a sleeper breathing: a recording
+export function breath(level = 1, seconds = 2) { bed('breath', 0.05, recorded(['breath-638868.mp3'], 4.72), level, seconds); }
 
 export function orchestra(level = 1, seconds = 2) {
   bed('orchestra', 0.55, ({ a, t, out, keep, sway, every }) => {
