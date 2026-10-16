@@ -1,4 +1,4 @@
-// Пристань — the scene's mechanics: its film in beats (the world's `beats`: the game sets `beat`; lib.film), the
+// The pier — the scene's mechanics: its film in beats (the world's `beats`: the game sets `beat`; lib.film), the
 // light's keys from `hour` and `era`, the car's place from `car_arrive` and `car_go`.
 const L = scene.lib;
 scene.kit.beats.play(scene, L.film(scene));

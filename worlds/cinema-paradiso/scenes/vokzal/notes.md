@@ -1,7 +1,7 @@
-# Вокзал
+# The station
 
-The small station (scenes.md «Вокзал»), chapters IV and V: the farewell at dawn, the train going, Salvatore's return,
-the frame in his wallet. Engine 3, camera `roam`. Begun as «Вокзал (opus)», brought to the 4th edition: the world's
+The small station (scenes.md "The station"), chapters IV and V: the farewell at dawn, the train going, Salvatore's return,
+the frame in his wallet. Engine 3, camera `roam`. Begun as the station's opus version, brought to the 4th edition: the world's
 modules (nebo, beats, cast, closeups), faces, the farewell in a medium shot, the wallet insert. Mood: a pale, still
 dawn, light sadness; the green carriage and the black engine; 1988 — the same platform, cool, empty, one window lit.
 
@@ -59,7 +59,7 @@ Motions: `wave`, `cane_walk` (his gait), `carry_walk` (Toto with the suitcase, t
   lines drawn where an opaque card hides the figure: an engine matter.
 - Only two far passengers (`c1`, `c2`); scenes.md allows three.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {

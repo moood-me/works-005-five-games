@@ -1,5 +1,5 @@
 // The shelf over Toto's bed (its x runs south): the board on two brackets; on it the little 8 mm camera, film tins
-// stacked, a few books — and, if he kept the reel of the girl (`reel8`), a tin marked «Е.» by the home projector
+// stacked, a few books — and, if he kept the reel of the girl (`reel8`), a tin marked «E.» by the home projector
 // (home_projector). Painted once (reel8 is the play's: it does not move).
 const B = e.lib.G.SHELF, L = (B.z1 - B.z0) / 2;
 g.fillStyle = '#4e3a29'; g.fillRect(-L, -0.03, 2 * L, 0.035);

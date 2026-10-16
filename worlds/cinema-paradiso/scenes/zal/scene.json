@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Зал",
-  "caption": "Отец Адельфио смотрел каждый фильм первым. Один",
+  "title": "The Hall",
+  "caption": "Father Adelfio saw every film first. Alone",
   "horizon": 0.5,
   "camera": {
     "mode": "roam",
@@ -170,12 +170,12 @@
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true
     },
     {
       "id": "floor",
-      "name": "Пол",
+      "name": "Floor",
       "plane": true,
       "across": 0,
       "distance": 8.75,
@@ -186,7 +186,7 @@
     },
     {
       "id": "corr_floor",
-      "name": "Пол коридора",
+      "name": "Corridor floor",
       "plane": true,
       "across": -7.75,
       "distance": 6.9,
@@ -197,7 +197,7 @@
     },
     {
       "id": "corr_end",
-      "name": "Коридор",
+      "name": "Corridor",
       "across": -7.75,
       "distance": 3.4,
       "facing": 0,
@@ -218,7 +218,7 @@
     },
     {
       "id": "corr_wall",
-      "name": "Коридор",
+      "name": "Corridor",
       "across": -8.95,
       "distance": 6.9,
       "facing": 90,
@@ -232,7 +232,7 @@
     },
     {
       "id": "corr_far",
-      "name": "Коридор",
+      "name": "Corridor",
       "across": -7.9,
       "distance": 9.6,
       "facing": 180,
@@ -246,7 +246,7 @@
     },
     {
       "id": "wall_l",
-      "name": "Стена",
+      "name": "Wall",
       "across": -6.5,
       "distance": -1.5,
       "facing": 90,
@@ -260,7 +260,7 @@
     },
     {
       "id": "wall_r",
-      "name": "Стена",
+      "name": "Wall",
       "across": 6.5,
       "distance": 19,
       "facing": 270,
@@ -274,7 +274,7 @@
     },
     {
       "id": "wall_b",
-      "name": "Задняя стена",
+      "name": "Back wall",
       "across": 0,
       "distance": -1.5,
       "facing": 0,
@@ -288,7 +288,7 @@
     },
     {
       "id": "wall_f",
-      "name": "Стена экрана",
+      "name": "Screen wall",
       "across": 0,
       "distance": 19,
       "facing": 180,
@@ -302,7 +302,7 @@
     },
     {
       "id": "ceiling",
-      "name": "Потолок",
+      "name": "Ceiling",
       "across": 0,
       "distance": 19,
       "elevation": 7.4,
@@ -318,7 +318,7 @@
     },
     {
       "id": "stage",
-      "name": "Сцена",
+      "name": "Stage",
       "across": 0,
       "distance": 17.2,
       "facing": 180,
@@ -332,7 +332,7 @@
     },
     {
       "id": "stage_top",
-      "name": "Сцена",
+      "name": "Stage",
       "plane": true,
       "across": 0,
       "distance": 18.1,
@@ -342,7 +342,7 @@
     },
     {
       "id": "screen_frame",
-      "name": "Экран",
+      "name": "Screen",
       "across": 0,
       "distance": 18.96,
       "facing": 180,
@@ -356,7 +356,7 @@
     },
     {
       "id": "screen",
-      "name": "Экран",
+      "name": "Screen",
       "across": 0,
       "distance": 18.93,
       "facing": 180,
@@ -371,7 +371,7 @@
     },
     {
       "id": "lion",
-      "name": "Львиная голова",
+      "name": "Lion's head",
       "across": 2.4,
       "distance": -1.44,
       "elevation": 3.7,
@@ -386,7 +386,7 @@
     },
     {
       "id": "beam",
-      "name": "Луч",
+      "name": "Beam",
       "across": 2.4,
       "distance": -1.4,
       "elevation": 4.6,
@@ -406,7 +406,7 @@
     },
     {
       "id": "seats",
-      "name": "Кресла",
+      "name": "Seats",
       "across": 0,
       "distance": 12.5,
       "facing": 180,
@@ -454,7 +454,7 @@
     },
     {
       "id": "pigeons",
-      "name": "Голуби",
+      "name": "Pigeons",
       "across": 1.2,
       "distance": 9.5,
       "elevation": 0.92,
@@ -492,7 +492,7 @@
     },
     {
       "id": "sconces",
-      "name": "Бра",
+      "name": "Sconces",
       "across": -6.45,
       "distance": 3,
       "elevation": 2.4,
@@ -557,7 +557,7 @@
     },
     {
       "id": "curtain",
-      "name": "Занавес",
+      "name": "Curtain",
       "across": -6.35,
       "distance": 5.7,
       "facing": 270,
@@ -577,7 +577,7 @@
       "distance": 7.7,
       "facing": 270,
       "id": "curtain_rod",
-      "name": "Карниз",
+      "name": "Cornice",
       "height": 0.1,
       "box": [
         -0.1,
@@ -588,7 +588,7 @@
     },
     {
       "id": "aud1",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 12.8,
       "height": 1.4,
@@ -601,7 +601,7 @@
     },
     {
       "id": "aud2",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 11.8,
       "height": 1.4,
@@ -614,7 +614,7 @@
     },
     {
       "id": "aud3",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 10.8,
       "height": 1.4,
@@ -627,7 +627,7 @@
     },
     {
       "id": "aud4",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 9.8,
       "height": 1.4,
@@ -640,7 +640,7 @@
     },
     {
       "id": "aud5",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 8.8,
       "height": 1.4,
@@ -653,7 +653,7 @@
     },
     {
       "id": "aud6",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 7.8,
       "height": 1.4,
@@ -666,7 +666,7 @@
     },
     {
       "id": "aud7",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 6.8,
       "height": 1.4,
@@ -679,7 +679,7 @@
     },
     {
       "id": "aud8",
-      "name": "Зрители",
+      "name": "Spectators",
       "across": 0,
       "distance": 5.8,
       "height": 1.4,
@@ -692,7 +692,7 @@
     },
     {
       "id": "motes",
-      "name": "Пылинки",
+      "name": "Motes",
       "particles": {
         "kind": "dust",
         "at": [
@@ -714,7 +714,7 @@
     },
     {
       "id": "adelfio",
-      "name": "Отец Адельфио",
+      "name": "Father Adelfio",
       "person": {
         "cast": "cast",
         "who": "adelfio"
@@ -729,7 +729,7 @@
     },
     {
       "id": "toto",
-      "name": "Тото",
+      "name": "Totò",
       "person": {
         "cast": "cast",
         "who": "toto_boy"
@@ -791,25 +791,25 @@
   "states": {
     "beat": {
       "type": "string",
-      "means": "кусок, который играет сцена (с начала): priest, peek, bell_end, full_hall, first_kiss, whistle, ruin_hall, memory; ставит игра (модуль beats)"
+      "means": "the beat the scene plays (from its beginning): priest, peek, bell_end, full_hall, first_kiss, whistle, ruin_hall, memory; the game sets it (the module beats)"
     },
     "beat_next": {
       "type": "string",
-      "means": "кусок, снимок начала которого готовить (ставит игра; пусто — следующий в таблице, если он склейка)"
+      "means": "the beat whose opening shot to make ready (the game sets it; empty — the next in the table, if it is a cut)"
     },
     "era": {
       "values": [
         "past",
         "ruin"
       ],
-      "means": "время: past — старый зал (1949–1958), ruin — заколоченный зал 1988 года: кресла без сидений, пролом в крыше"
+      "means": "era: past — the old hall (1949–1958), ruin — the boarded-up hall of 1988: seats without their seats, a hole in the roof"
     },
     "hour": {
       "range": [
         0,
         1
       ],
-      "means": "час: 0.9 ночь (сеанс), 0.8 вечер (1988); небо в проломе"
+      "means": "hour: 0.9 night (a show), 0.8 evening (1988); the sky in the hole"
     },
     "ruin_k": {
       "range": [
@@ -817,7 +817,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет руин 1988 (сцена выводит из era)"
+      "means": "internal: the light of the 1988 ruin (the scene derives it from era)"
     },
     "past": {
       "range": [
@@ -825,7 +825,7 @@
         1
       ],
       "smooth": true,
-      "means": "только в 1988 (memory): 1 — зал как прежде (сиденья, зрители, тёплый свет), 0 — руины"
+      "means": "only in 1988 (memory): 1 — the hall as it was (the seats, the audience, the warm light), 0 — the ruin"
     },
     "hall": {
       "values": [
@@ -833,7 +833,7 @@
         "full",
         "standing"
       ],
-      "means": "нарисованные зрители: empty — пустой зал, full — полный, standing — встали с поднятыми руками"
+      "means": "the painted audience: empty — an empty hall, full — a full one, standing — on their feet with their hands up"
     },
     "screen_film": {
       "values": [
@@ -842,7 +842,7 @@
         "comedy",
         "white"
       ],
-      "means": "что на экране; romance → romance_kiss — наплыв за 3 с"
+      "means": "what is on the screen; romance → romance_kiss — a dissolve over 3 s"
     },
     "beam_on": {
       "range": [
@@ -850,7 +850,7 @@
         1
       ],
       "smooth": true,
-      "means": "луч из пасти льва и свет экрана"
+      "means": "the beam from the lion's mouth and the screen's light"
     },
     "rise": {
       "range": [
@@ -858,7 +858,7 @@
         1
       ],
       "smooth": true,
-      "means": "зал поднимается волной (от первых рядов к последним): 0 сидят … 1 привстали"
+      "means": "the hall rises in a wave (from the front rows to the back): 0 seated … 1 half risen"
     },
     "laugh": {
       "range": [
@@ -866,7 +866,7 @@
         1
       ],
       "smooth": true,
-      "means": "зал смеётся: плечи трясутся"
+      "means": "the hall laughs: shoulders shaking"
     },
     "peek": {
       "range": [
@@ -874,14 +874,14 @@
         1
       ],
       "smooth": true,
-      "means": "«Подглядывать» (двигает игра): 0 — занавес закрыт, мальчик за ним у северного косяка; растёт — занавес собирается к югу; >0.5 — мальчик выглядывает (peek_lean), <0.3 — встаёт обратно"
+      "means": "«Peeking» (the game moves it): 0 — the curtain shut, the boy behind it by the north jamb; growing — the curtain gathers to the south; >0.5 — the boy peeks out (peek_lean), <0.3 — he stands back"
     },
     "bell": {
       "range": [
         0,
         1
       ],
-      "means": "1 — священник звонит в колокольчик один раз (bell_ring, 3 с); 0 его не обрывает"
+      "means": "1 — the priest rings the bell once (bell_ring, 3 s); 0 does not cut it short"
     },
     "turn": {
       "range": [
@@ -889,7 +889,7 @@
         1
       ],
       "smooth": true,
-      "means": "1 — священник оглядывается на щель занавеса (adelfio_look = curtain#gap), 0 — снова на экран"
+      "means": "1 — the priest looks round at the curtain's gap (adelfio_look = curtain#gap), 0 — back at the screen"
     },
     "memory_light": {
       "range": [
@@ -897,12 +897,12 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: тёплый свет зала прошлого на лице Сальваторе в memory (ставит кусок)"
+      "means": "internal: the warm light of the past's hall on Salvatore's face in memory (the beat sets it)"
     },
     "curtain_f": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: поворот занавеса у южного края, градусы (сцена выводит из peek: 270 висит … 330 отведён в зал)"
+      "means": "internal: the curtain's turn at its south edge, degrees (the scene derives it from peek: 270 hanging … 330 drawn into the hall)"
     }
   },
   "modules": [

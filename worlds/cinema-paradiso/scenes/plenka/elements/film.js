@@ -13,7 +13,7 @@ var measure = function (s, size, italic, bold) {
   return g.measureText(s).width / 1000;
 };
 var L = lib.layout(A, { map: st.map, chapter_number: st.chapter_number, chapter_title: st.chapter_title }, measure);
-if (!L.fits) e.warn("Плёнка: words wider than their place, or a frame shows only its chosen option (too narrow for all)");
+if (!L.fits) e.warn('The strip: words wider than their place, or a frame shows only its chosen option (too narrow for all)');
 
 var INK_DARK = "#24170c"; // words on the lit film
 var INK_PALE = "#efe8da"; // words in the dark: the white of old film

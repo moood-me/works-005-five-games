@@ -1,4 +1,4 @@
-// Просмотровый зал (Rome) — what the paintings and the script share: the small screening room in metres, its rows,
+// The screening room (Rome) — what the paintings and the script share: the small screening room in metres, its rows,
 // the reel of kisses and the film in beats. Metres: across x (right), distance z (north, toward the screen). The
 // start is in the projection booth behind the back wall, at its port: the room seen through the port.
 const hash = (n, s) => anim.hash(n, s);

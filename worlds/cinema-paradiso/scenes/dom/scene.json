@@ -1,7 +1,7 @@
 {
  "engine": 3,
- "title": "Дом Ди Вита",
- "caption": "Дом Ди Вита",
+ "title": "The Di Vita Home",
+ "caption": "The Di Vita Home",
  "horizon": 0.5,
  "camera": {
   "mode": "roam",
@@ -121,25 +121,25 @@
  "states": {
   "beat": {
    "type": "string",
-   "means": "кусок, который играет сцена (с начала): supper, photo, call, returned, answered, room, home_movie, question; ставит игра"
+   "means": "the beat the scene plays (from its beginning): supper, photo, call, returned, answered, room, home_movie, question; the game sets it"
   },
   "beat_next": {
    "type": "string",
-   "means": "кусок, снимок начала которого готовить заранее (ставит игра; пусто — следующий в таблице, если он начинается склейкой)"
+   "means": "the beat whose opening shot to make ready ahead (the game sets it; empty — the next in the table, if it begins with a cut)"
   },
   "era": {
    "values": [
     "past",
     "now"
    ],
-   "means": "время: past — 1949 и 1958 (лампа над столом), now — 1988 (лампа не горит, свет — лампа в руке старой матери)"
+   "means": "era: past — 1949 and 1958 (the lamp over the table), now — 1988 (the lamp not lit, the light — the lamp in the old mother's hand)"
   },
   "hour": {
    "range": [
     0,
     1
    ],
-   "means": "час: 0.8 вечер, 0.92 ночь"
+   "means": "hour: 0.8 evening, 0.92 night"
   },
   "night_k": {
    "range": [
@@ -147,7 +147,7 @@
     1
    ],
    "smooth": true,
-   "means": "служебный: свет ночи (сцена выводит из hour)"
+   "means": "internal: the night's light (the scene derives it from hour)"
   },
   "now_k": {
    "range": [
@@ -155,7 +155,7 @@
     1
    ],
    "smooth": true,
-   "means": "служебный: свет 1988 года (сцена выводит из era)"
+   "means": "internal: the light of 1988 (the scene derives it from era)"
   },
   "lamp": {
    "range": [
@@ -163,7 +163,7 @@
     1
    ],
    "smooth": true,
-   "means": "лампа над столом"
+   "means": "the lamp over the table"
   },
   "hand_lamp": {
    "range": [
@@ -171,7 +171,7 @@
     1
    ],
    "smooth": true,
-   "means": "лампа в руке матери (её свет у maria#lamp)"
+   "means": "the lamp in the mother's hand (its light at maria#lamp)"
   },
   "letters": {
    "values": [
@@ -179,14 +179,14 @@
     "returned",
     "answered"
    ],
-   "means": "на столе: ничего; его письма, вернувшиеся со штампом «Адресат выбыл»; её письма из Палермо"
+   "means": "on the table: nothing; his letters come back stamped «Addressee has moved»; her letters from Palermo"
   },
   "pile": {
    "values": [
     0,
     1
    ],
-   "means": "ещё одно вернувшееся письмо сверху стопки (мать положила)"
+   "means": "one more letter come back, on top of the pile (the mother laid it)"
   },
   "projector_on": {
    "range": [
@@ -194,7 +194,7 @@
     1
    ],
    "smooth": true,
-   "means": "домашний проектор работает: луч, квадрат на перегородке"
+   "means": "the home projector is running: the beam, the square on the partition"
   },
   "milk": {
    "range": [
@@ -202,55 +202,55 @@
     1
    ],
    "smooth": true,
-   "means": "молоко в стакане мальчика"
+   "means": "the milk in the boy's glass"
   },
   "jug_held": {
    "values": [
     0,
     1
    ],
-   "means": "кувшин в руках матери (наливает)"
+   "means": "the jug in the mother's hands (she pours)"
   },
   "reel8": {
    "values": [
     0,
     1
    ],
-   "means": "ключ партии: он сохранил плёнку с Еленой — на полке домашний проектор и жестянка «Е.»"
+   "means": "party key: he kept the film with Elena — the home projector and the tin «E.» on the shelf"
   },
   "share": {
    "range": [
     0,
     1
    ],
-   "means": "ключ партии: сколько её в его плёнке (удержал в «Камере»): 1 — она в кадре всё время, 0.3 — площадь почти пустая, она проходит у края"
+   "means": "party key: how much of her is in his film (held in «The Camera»): 1 — she is in the frame all the time, 0.3 — the square almost empty, she passes by the edge"
   },
   "maria_a": {
    "type": "number",
    "smooth": true,
-   "means": "где мать поперёк, м"
+   "means": "where the mother is, across, m"
   },
   "maria_d": {
    "type": "number",
    "smooth": true,
-   "means": "где мать вглубь, м"
+   "means": "where the mother is, in depth, m"
   },
   "toto_a": {
    "type": "number",
    "smooth": true,
-   "means": "где Тото поперёк, м"
+   "means": "where Totò is, across, m"
   },
   "toto_d": {
    "type": "number",
    "smooth": true,
-   "means": "где Тото вглубь, м"
+   "means": "where Totò is, in depth, m"
   },
   "table_set": {
    "values": [
     0,
     1
    ],
-   "means": "на столе кувшин и стакан (1949: ужин, фото); в 1958 и 1988 стол убран"
+   "means": "on the table the jug and the glass (1949: supper, photo); in 1958 and 1988 the table is cleared"
   }
  },
  "modules": [
@@ -329,7 +329,7 @@
  "objects": [
   {
    "id": "floor",
-   "name": "Пол",
+   "name": "Floor",
    "plane": true,
    "across": 0,
    "distance": 2.4,
@@ -341,7 +341,7 @@
   },
   {
    "id": "ceiling",
-   "name": "Потолок",
+   "name": "Ceiling",
    "across": 0,
    "distance": 4.8,
    "elevation": 2.8,
@@ -358,7 +358,7 @@
   },
   {
    "id": "wall_n",
-   "name": "Стена с окном",
+   "name": "Wall with the window",
    "across": 0,
    "distance": 4.8,
    "facing": 180,
@@ -373,7 +373,7 @@
   },
   {
    "id": "window_out",
-   "name": "Окно на площадь",
+   "name": "Window on the square",
    "across": -2.05,
    "distance": 4.95,
    "elevation": 0,
@@ -389,7 +389,7 @@
   },
   {
    "id": "wall_s",
-   "name": "Стена",
+   "name": "Wall",
    "across": 0,
    "distance": 0,
    "facing": 0,
@@ -404,7 +404,7 @@
   },
   {
    "id": "wall_w",
-   "name": "Стена с дверью",
+   "name": "Wall with the door",
    "across": -2.8,
    "distance": 0,
    "facing": 90,
@@ -419,7 +419,7 @@
   },
   {
    "id": "wall_e",
-   "name": "Стена",
+   "name": "Wall",
    "across": 2.8,
    "distance": 4.8,
    "facing": 270,
@@ -434,7 +434,7 @@
   },
   {
    "id": "partition_s",
-   "name": "Перегородка",
+   "name": "Partition",
    "across": 2,
    "distance": 0.58,
    "facing": 180,
@@ -449,7 +449,7 @@
   },
   {
    "id": "partition_n",
-   "name": "Перегородка",
+   "name": "Partition",
    "across": 2,
    "distance": 0.62,
    "facing": 0,
@@ -464,7 +464,7 @@
   },
   {
    "id": "curtain_n",
-   "name": "Занавеска",
+   "name": "Curtain",
    "across": 1.2,
    "distance": 4.8,
    "facing": 270,
@@ -479,7 +479,7 @@
   },
   {
    "id": "curtain_s",
-   "name": "Занавеска",
+   "name": "Curtain",
    "across": 1.2,
    "distance": 2.55,
    "facing": 270,
@@ -494,7 +494,7 @@
   },
   {
    "id": "table",
-   "name": "Стол",
+   "name": "Table",
    "across": -0.5,
    "distance": 3,
    "facing": 180,
@@ -510,7 +510,7 @@
   },
   {
    "id": "table_top",
-   "name": "Стол",
+   "name": "Table",
    "plane": true,
    "across": -0.5,
    "distance": 3.4,
@@ -528,7 +528,7 @@
   },
   {
    "id": "chairs",
-   "name": "Стулья",
+   "name": "Chairs",
    "across": -0.5,
    "distance": 4.3,
    "facing": 180,
@@ -560,7 +560,7 @@
   },
   {
    "id": "sideboard",
-   "name": "Буфет",
+   "name": "Dresser",
    "across": -2.72,
    "distance": 3.7,
    "facing": 90,
@@ -575,7 +575,7 @@
   },
   {
    "id": "chest",
-   "name": "Комод",
+   "name": "Chest of drawers",
    "across": 2.6,
    "distance": 1.75,
    "facing": 270,
@@ -590,7 +590,7 @@
   },
   {
    "id": "stove",
-   "name": "Печка",
+   "name": "Stove",
    "across": 0.88,
    "distance": 4.5,
    "facing": 180,
@@ -606,7 +606,7 @@
   },
   {
    "id": "lamp",
-   "name": "Лампа",
+   "name": "Lamp",
    "across": -0.5,
    "distance": 3.4,
    "elevation": 1.86,
@@ -621,7 +621,7 @@
   },
   {
    "id": "photo",
-   "name": "Фотография отца",
+   "name": "Father's photograph",
    "across": -0.5,
    "distance": 4.77,
    "elevation": 1.5,
@@ -637,7 +637,7 @@
   },
   {
    "id": "bed",
-   "name": "Кровать",
+   "name": "Bed",
    "across": 2.06,
    "distance": 3.6,
    "facing": 270,
@@ -652,7 +652,7 @@
   },
   {
    "id": "bed_top",
-   "name": "Кровать",
+   "name": "Bed",
    "plane": true,
    "across": 2.41,
    "distance": 3.6,
@@ -663,7 +663,7 @@
   },
   {
    "id": "headboard",
-   "name": "Спинка кровати",
+   "name": "Headboard",
    "across": 2.41,
    "distance": 4.62,
    "facing": 180,
@@ -678,7 +678,7 @@
   },
   {
    "id": "shelf",
-   "name": "Полка",
+   "name": "Shelf",
    "across": 2.76,
    "distance": 3.55,
    "elevation": 1.38,
@@ -694,7 +694,7 @@
   },
   {
    "id": "home_projector",
-   "name": "Домашний проектор",
+   "name": "Home projector",
    "across": 2.6,
    "distance": 3.3,
    "elevation": 1.38,
@@ -710,7 +710,7 @@
   },
   {
    "id": "home_beam",
-   "name": "Луч",
+   "name": "Beam",
    "across": 2.62,
    "distance": 3.115,
    "elevation": 1.475,
@@ -729,7 +729,7 @@
   },
   {
    "id": "home_screen",
-   "name": "Квадрат на стене",
+   "name": "Square on the wall",
    "across": 2,
    "distance": 0.64,
    "elevation": 1.23,
@@ -745,7 +745,7 @@
   },
   {
    "id": "jug",
-   "name": "Кувшин",
+   "name": "Jug",
    "across": -0.75,
    "distance": 3.55,
    "elevation": 0.76,
@@ -760,7 +760,7 @@
   },
   {
    "id": "milk",
-   "name": "Стакан молока",
+   "name": "Glass of milk",
    "across": 0.02,
    "distance": 3.38,
    "elevation": 0.76,
@@ -775,7 +775,7 @@
   },
   {
    "id": "letters",
-   "name": "Письма",
+   "name": "Letters",
    "across": -0.62,
    "distance": 3.3,
    "elevation": 0.76,
@@ -790,7 +790,7 @@
   },
   {
    "id": "motes",
-   "name": "Пылинки",
+   "name": "Motes",
    "particles": {
     "kind": "dust",
     "at": [
@@ -813,7 +813,7 @@
   },
   {
    "id": "maria",
-   "name": "Мария",
+   "name": "Maria",
    "person": {
     "cast": "cast",
     "who": "maria",
@@ -830,7 +830,7 @@
   },
   {
    "id": "toto",
-   "name": "Тото",
+   "name": "Totò",
    "person": {
     "cast": "cast",
     "who": "toto_boy",

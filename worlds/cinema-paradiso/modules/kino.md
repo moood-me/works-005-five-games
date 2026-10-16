@@ -1,53 +1,60 @@
-# kino — всё кино Джанкальдо
+# kino — all the cinema of Giancaldo
 
-Кадры фильмов тех лет, экран, луч проектора, проектор, жестянка, лента, точка смены. Только рисунки и помощники для
-`animate`; дым и пылинки луча — шейдер мира (`tools/kino-beam.wgsl`, в сцену его пишет `node tools/kino-beam.js
-<папка> <id луча>…`). Тёплое в мире — только свет кино.
+The frames of the films of those years, the screen, the projector's beam, the projector, the tin, the strip, the
+changeover dot. Only paintings and helpers for `animate`; the beam's smoke and motes are the world's shader
+(`tools/kino-beam.wgsl`, written into a scene by `node tools/kino-beam.js <folder> <the beam's id>…`). Warm in the world
+is the light of the cinema alone.
 
-## Кадры
+## The frames
 
-`kino.frame(g, name, x, y, w, h)` — один кадр чёрно-белого фильма на прямоугольнике: силуэты и профили против света,
-без лиц, зерно и тёмные углы копии. `kino.FRAMES` — все имена:
+`kino.frame(g, name, x, y, w, h)` — one frame of a black-and-white film on a rectangle: silhouettes and profiles against
+the light, no faces, the grain and dark corners of a print. `kino.FRAMES` — all the names:
 
-- `romance` — мужчина в шляпе и женщина у окна; `romance_kiss` — те же, головы сошлись;
-- `comedy` — «Пожарные из Виджу»: толстый у лестницы, тонкий наверху, руки врозь;
-- `kiss_cut1…3` — три поцелуя, которые игрок режет в «Склейке» (гостиная у лампы, садовая калитка, дверь бального зала),
-  со следами склейки по краю;
-- `kiss1…8` — ещё восемь: моряк и девушка на пристани, пара в светлой двери, под зонтом в дождь, в автомобиле, на
-  лестнице, у окна вагона, на балконе под луной, у моря на закате;
-- `elena8` — выцветший цвет восьмимиллиметровки: площадь в сумерках (девушка — отдельно, `kino.elena8Girl(g, x, y,
-  h)`: маленькая фигурка, её слой двигает сцена);
-- `white` — белый кадр (плёнка кончилась, смену не успели).
+- `romance` — a man in a hat and a woman by a window; `romance_kiss` — the same, their heads come together;
+- `comedy` — «I pompieri di Viggiù»: the fat one at a ladder, the thin one at the top, arms flung out;
+- `kiss_cut1…3` — the three kisses the player cuts in "Splicing" (a drawing room by a lamp, a garden gate, a ballroom's
+  door), with the marks of the splice along the edge;
+- `kiss1…8` — eight more: a sailor and a girl on a pier, a couple in a bright doorway, under an umbrella in the rain, in
+  a motor car, on a stair, at a carriage window, on a balcony under the moon, by the sea at sunset;
+- `elena8` — the faded colour of eight-millimetre film: the square at dusk (the girl apart, `kino.elena8Girl(g, x, y,
+  h)`: a small figure, its layer moved by the scene);
+- `white` — a white frame (the film has run out, the changeover was missed).
 
-## Экран
+## The screen
 
-`kino.screen(g, e, {x, y, w, h, frames: [имена], burn: true, sheet})` — белое полотно (рисунок) и каждый кадр своим
-слоем `f_<имя>` (лёгкое мерцание слоя); `burn` — слой `burn`: кадр пузырится и белеет от середины. Элемент —
-`"glows": true` (освещённый экран — свет, ночь его не гасит); свет на зал и стену — свет сцены у экрана (`on` — свой
-ключ, `flicker` 0.15). Точка `#screen`.
-`kino.screenMove(e, frames, key, burnKey?, onKey?)` — в `animate`: виден кадр `e.state[key]` (переход 0.15 с), `burn`
-растёт по `e.state[burnKey]`, всё гаснет по `e.state[onKey]`. Кадры — слои: рисунок не перерисовывается.
-`kino.cue(g, x, y, w, h)` — точка смены в правом верхнем углу кадра, диаметр 1/8 высоты кадра (свой слой у сцены, её
-`alpha` — ключ `cue`).
+`kino.screen(g, e, {x, y, w, h, frames: [names], burn: true, sheet})` — the white sheet (painting) and each frame a
+layer of its own `f_<name>` (a slight flicker of the layer); `burn` — the layer `burn`: the frame blisters and whitens
+from the middle. The element — `"glows": true` (a lit screen is a light, the night does not put it out); the light on
+the hall and the wall — the scene's light at the screen (`on` — its own key, `flicker` 0.15). The point `#screen`.
+`kino.screenMove(e, frames, key, burnKey?, onKey?)` — in `animate`: the frame `e.state[key]` is seen (a change of
+0.15 s), `burn` grows by `e.state[burnKey]`, everything goes out by `e.state[onKey]`. The frames are layers: the
+painting is not painted anew.
+`kino.cue(g, x, y, w, h)` — the changeover dot in the frame's top right corner, its diameter 1/8 of the frame's height
+(a layer of the scene's own, its `alpha` — the key `cue`).
 
-## Луч
+## The beam
 
-`kino.beam(e, {len, top, bot, mouth, dust, drift, tipRadius, tipStrength})` — в вертикальной плоскости луча: x от
-объектива (якорь, 0) до `len`, y вниз; на дальнем конце луч занимает y `top…bot`. Слои: 1 `cone` (тёплый, ярче у
-устья), 2 `dust` (пылинки плывут к концу; шейдер держит их в конусе и пускает по нему дым), 3 `tip` — **на кончике
-`e.light` радиусом 1.5 м**: кладёт пятно света движка на камень, головы, стену. Элемент `"glows": true` (ночь его не
-гасит; сам он ничего не освещает, кроме пятна на кончике), шейдер мира. Точки `#beam` (середина), `#tip`, `#mouth`.
-Стоит на якоре у устья, `facing` — плоскость луча; поворот в плане — `place: {facing: <ключ>}`.
-`kino.beamMove(e, on, reach, tilt, len)` — в `animate`: `on` 0…1 (униформа шейдера и свечения), `reach` — доля
-длины (1 — весь), `tilt` — радианы вниз (+) от горизонтали вокруг устья; кончик едет с концом.
-Прожектора-конуса в движке нет: луч — светящийся клин со светом на кончике (`artist3.md`, «The engine's limits»).
+`kino.beam(e, {len, top, bot, mouth, dust, drift, tipRadius, tipStrength})` — in the beam's upright plane: x from the
+lens (the anchor, 0) to `len`, y down; at the far end the beam takes up y `top…bot`. The layers: 1 `cone` (warm,
+brighter at the mouth), 2 `dust` (motes drift to the end; the shader keeps them in the cone and sends smoke along it),
+3 `tip` — **an `e.light` of radius 1.5 m at the tip**: lays the engine's spot of light on stone, heads, a wall. The
+element `"glows": true` (the night does not put it out; it lights nothing itself but the spot at the tip), the world's
+shader. The points `#beam` (the middle), `#tip`, `#mouth`. It stands on its anchor at the mouth, `facing` — the beam's
+plane; a turn in plan — `place: {facing: <key>}`.
+`kino.beamMove(e, on, reach, tilt, len)` — in `animate`: `on` 0…1 (the shader's uniform and the glow), `reach` — the
+share of the length (1 — all of it), `tilt` — radians down (+) from the horizontal about the mouth; the tip goes with
+the end.
+The engine has no cone spotlight: the beam is a glowing wedge with a light at its tip (`artist3.md`, "The engine's
+limits").
 
-## Проектор, жестянка, лента
+## The projector, the tin, the strip
 
-`kino.projector(g, side)` — проектор 1940-х сбоку (x к объективу, y вниз от верха, пол y 0): станина, механизм,
-фонарь с трубой, объектив; `side: 'motor'` — сторона с ручкой мотора. `kino.projectorReels(e, flip)` — две бобины
-слоями `rt`, `rl`; `kino.reelsMove(e, flip, motor)` — в `animate`: крутятся, пока `motor`. `kino.reel`,
-`REEL_TOP`, `REEL_LOW`. (Ручки, точки `#lens`, `#motor`, `#lever`, `#gate` — у сцены «Будка», по её устройству.)
-`kino.tin(g, e, cx, cy, r, open)` — плоская круглая жестянка (сверху под углом), точка `#tin`.
-`kino.strip(g, x0, y, h, [имена])` — лента с перфорацией по краям, кадры подряд → `{width, step, frameW, frameH}`.
-`kino.man`, `kino.woman`, `kino.kissing` — силуэты фильмов (для своих кадров сцены).
+`kino.projector(g, side)` — a 1940s projector from the side (x toward the lens, y down from the top, the floor y 0):
+the stand, the mechanism, the lamp house with its chimney, the lens; `side: 'motor'` — the side with the motor's
+handle. `kino.projectorReels(e, flip)` — two reels as the layers `rt`, `rl`; `kino.reelsMove(e, flip, motor)` — in
+`animate`: they turn while `motor`. `kino.reel`, `REEL_TOP`, `REEL_LOW`. (The handles, the points `#lens`, `#motor`,
+`#lever`, `#gate` — the booth scene's, as it is built.)
+`kino.tin(g, e, cx, cy, r, open)` — a flat round tin (from above, at an angle), the point `#tin`.
+`kino.strip(g, x0, y, h, [names])` — a strip with perforations along its edges, the frames one after another →
+`{width, step, frameW, frameH}`.
+`kino.man`, `kino.woman`, `kino.kissing` — the films' silhouettes (for a scene's own frames).

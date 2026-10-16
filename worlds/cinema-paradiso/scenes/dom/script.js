@@ -1,4 +1,4 @@
-// Дом Ди Вита — the scene's mechanics: its film (the game sets `beat`: modules/beats), and the keys of the light that
+// The Di Vita home — the scene's mechanics: its film (the game sets `beat`: modules/beats), and the keys of the light that
 // follow `hour` and `era` (night_k, now_k: the looks; lamp off and the mother's hand lamp in 1988).
 const L = scene.lib;
 scene.kit.beats.play(scene, L.FILM);

@@ -1,4 +1,4 @@
-// The letters on the table (`letters`): `returned` — his envelopes come back, a violet stamp «Адресат выбыл» on each,
+// The letters on the table (`letters`): `returned` — his envelopes come back, a violet stamp «Addressee has moved» on each,
 // a tidy pile (and one more on top once she lays it: `pile` 1); `answered` — her envelopes from Palermo, opened, a
 // few sheets out; `none` — nothing. Painted once a value.
 const kind = e.state.letters;

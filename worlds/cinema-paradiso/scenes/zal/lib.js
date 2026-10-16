@@ -1,4 +1,4 @@
-// Зал — what the paintings and the script share: the hall in metres, the films on its screen, the rows and the
+// The hall — what the paintings and the script share: the hall in metres, the films on its screen, the rows and the
 // painted audience. Metres: across x (right of the start's line of sight), distance z (north, toward the screen).
 // The start stands at the back of the hall, in the middle, looking at the screen.
 

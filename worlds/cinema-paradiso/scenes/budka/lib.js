@@ -1,4 +1,4 @@
-// Будка — what the paintings and the script share: the booth in metres (scenes.md «Будка», 4th edition), the shots,
+// The booth — what the paintings and the script share: the booth in metres (scenes.md "The booth", 4th edition), the shots,
 // the paintings' helpers and the film in beats (FILM: modules/beats.js plays it).
 // Metres: x — across, left to right standing facing the ports into the hall; z — from the wall opposite the ports
 // (z 0) toward them (z 3.5). The start (camera 0, 0) stands at the opposite wall looking at the ports; the shots move
@@ -21,12 +21,12 @@ const G = {
   DOOR: [0.1, 1.0], DOOR_H: 2.0,                       // the door in the right wall: z 0.1 (hinge) … 1.0
   CAL: [1.6, 1.5],                                     // the calendar on the opposite wall: x, height (behind the open leaf)
   SLATE: [1.2, 1.6],                                   // the slate on its nail, right wall: z, height (1988)
-  PATH0: [-0.6, 2.3], PATH1: [0.6, 1.4],               // «Вытащить»: where Alfredo fell → the door
+  PATH0: [-0.6, 2.3], PATH1: [0.6, 1.4],               // «Pull Him Out»: where Alfredo fell → the door
   SCREEN: [0, 23.3, 0.4, 4.4, 3.3],                    // the hall's screen far beyond the ports: x, z, middle height, w, h
 };
 const R = Math.PI / 180;
 
-// ── the shots (scenes.md «Будка», «Кадры»): place x, z, the eye's height, yaw, pitch ──
+// ── the shots (scenes.md "The booth", "Shots"): place x, z, the eye's height, yaw, pitch ──
 const cam = (x, z, eye, yaw, pitch = 0) => ({ camera_target: null, camera_shot: null, camera_x: x, camera_z: z, camera_h: eye - 1.7,
   camera_yaw: yaw, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
@@ -198,7 +198,7 @@ const P = {
 const SEAT = [G.STOOL[0], G.STOOL[1], G.STOOL_H];
 const BENCH_SEAT = [P.TOTO_BENCH[0], P.TOTO_BENCH[1], G.BENCH_H];
 const ALONG = (u) => [G.PATH0[0] + (G.PATH1[0] - G.PATH0[0]) * u, G.PATH0[1] + (G.PATH1[1] - G.PATH0[1]) * u];
-// «Вытащить»: where the boy (ahead of Alfredo's shoulders, toward the door) and Alfredo (his hips behind them) are at u
+// «Pull Him Out»: where the boy (ahead of Alfredo's shoulders, toward the door) and Alfredo (his hips behind them) are at u
 const UNIT = (() => { const dx = G.PATH1[0] - G.PATH0[0], dz = G.PATH1[1] - G.PATH0[1], l = Math.hypot(dx, dz); return [dx / l, dz / l]; })();
 const AHEAD = u => { const p = ALONG(u); return [p[0] + UNIT[0] * 0.8, p[1] + UNIT[1] * 0.8]; };
 const BEHIND = u => ALONG(u);
@@ -264,7 +264,7 @@ const FILM = {
       await s.wait(1.0);
     },
   },
-  // the splice insert opens (under «Склейка»)
+  // the splice insert opens (under «Splicing»)
   splice_in: {
     after: 'cutting',
     run: async s => { await s.move('splice', 1, { over: 0.8 }); s.tell('splice_in:close'); await s.wait(0.6); },
@@ -443,7 +443,7 @@ const FILM = {
       await s.wait(1.6);
     },
   },
-  // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Вытащить»)
+  // the cut to the floor in smoke: Alfredo lying, the boy on his knees at his shoulders (under «Pull Him Out»)
   smoke_in: {
     from: () => ({ ...base(0.92), ...show(1), beam_on: 0.6, turned: 1, fire: 1, smoke: 1, door: 1, stair: 1, crate_a: -1.5, crate_d: 0.75, drag: 0, drag_at: 0, cough: 0, ...CAM.FLOOR, ...people({
       alfredo: { at: BEHIND(0), turn: PATH_TURN, do: { motion: 'sleep', loop: true }, steps: false, mood: 'tired' },
@@ -514,7 +514,7 @@ const FILM = {
       await s.wait(4.5);
     },
   },
-  // he looks at the look port (under «Смена»)
+  // he looks at the look port (under «Changeover»)
   changeover: {
     after: 'six',
     run: async s => {
@@ -632,7 +632,7 @@ const FILM = {
       await s.wait(2.6);
     },
   },
-  // dawn: Alfredo dozing on the stool wakes; Toto comes in: «Она приходила?» — «Нет»
+  // dawn: Alfredo dozing on the stool wakes; Toto comes in: «Did she come?» — «No»
   morning: {
     from: () => ({ ...base(0.27), ...show(2), month: 9, clock: 6, lamp: 0.9, beam_on: 0, motor2: 0, ...CAM.CLOSE, ...people({
       alfredo: blind({ turn: 330, do: { motion: 'doze', loop: true }, mood: 'neutral' }),
@@ -685,7 +685,7 @@ const FILM = {
       sal.reach(null);
     },
   },
-  // back to the door; he shuts it: the calendar on December; its insert opens (under «Записка»)
+  // back to the door; he shuts it: the calendar on December; its insert opens (under «The Note»)
   calendar: {
     after: 'ruins',
     run: async s => {
@@ -701,7 +701,7 @@ const FILM = {
       await s.wait(0.4);
     },
   },
-  // at the window on the square he opens the tin; the strip insert opens (under «Лента»)
+  // at the window on the square he opens the tin; the strip insert opens (under «The Strip»)
   window_strip: {
     after: ['ruins', 'calendar'],
     run: async s => {

@@ -1,4 +1,4 @@
-// Пристань — what the paintings, the relief and the script share: the place in metres, the car's road, a few
+// The pier — what the paintings, the relief and the script share: the place in metres, the car's road, a few
 // painted things used by several elements. Metres: across x (right of the start's line of sight), distance z (north,
 // toward the sea). The start stands on the quay at the root of the mole, looking north along it.
 

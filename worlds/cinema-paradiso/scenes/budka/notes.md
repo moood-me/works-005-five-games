@@ -1,6 +1,6 @@
-# Будка
+# The booth
 
-The projection booth of the «Парадизо» from inside (scenes.md «Будка», 4th edition) — chapters I–V: one room, in the
+The projection booth of the Paradiso from inside (scenes.md "The booth", 4th edition) — chapters I–V: one room, in the
 old and the new cinema alike (rebuilt the same after the fire), and its ruin in 1988. Engine 3, camera `roam`, the
 film in beats (modules/beats.js). Mood: a small warm room in smoke — one lamp over the bench, the lamp houses' vents
 glowing while a projector throws its beam, the hall's screen in the look port; cool only the window on the square
@@ -42,7 +42,7 @@ x across, left to right facing the ports; z from the opposite wall (0) to the po
   1988 only: `slate_nail`, its letters crooked as `slate_letters` says).
 - Opposite wall: the calendar (`wall_calendar`, x 1.6 — scenes.md says 1.4: at 1.4 the open leaf, 8 cm before the wall, left its edge seen from DOOR; 1.5 m) — behind the open door's leaf; `month` `none` (only the
   nail; chapters I–III), 8, 9 (August turned over the top, its pencil edge showing), 12.
-- Floor: points `floor#path0` (−0.6, 2.3) and `floor#path1` (0.6, 1.4) — «Вытащить».
+- Floor: points `floor#path0` (−0.6, 2.3) and `floor#path1` (0.6, 1.4) — "Pull Him Out".
 - Fire (`fire`, `fire_lens`, `fire_reel`, `embers` at the turned projector by `fire`; light `fire_light`), smoke
   (`smoke_gate`; the look `smoke` hazes the room), motes, pigeons' down (`feathers`, a burst on `pigeons`).
 
@@ -56,7 +56,7 @@ x across, left to right facing the ports; z from the opposite wall (0) to the po
 Light: lamp, wall lamp, lamp houses, stair bulb, window, fire. `inside` 0.3. Looks by keys the script derives: `night_k`, `eve_k`,
 `dawn_k` (from `hour`), `ruin_k` (from `era`), and `smoke`.
 
-## Shots (lib.js `CAM`, scenes.md «Кадры»)
+## Shots (lib.js `CAM`, scenes.md "Shots")
 
 `PORTS` (0, 0.4, eye 1.5, yaw 0) — the four handles in the middle 4:3, the look port 3.1 m ahead, Toto at his place
 by projector 1 (x −1.3, z 2.8). `OPER` (1.6, 0.5; −40) — the boy on the crate, Alfredo behind; `projector#motor` on
@@ -102,15 +102,15 @@ door. `CAL` (1.25, 0.95; 172) — close at the calendar (`note_close`).
 
 `alfredo` (cast `alfredo`; `_wear` the cast's `alfredo_blind` object from chapter II.5 on), `toto` (`toto_boy`;
 `_wear` `toto_teen`, `salvatore`), `elena` (`elena`). Faces `simple`, `<id>_mood` per beat. **`alfredo_here` is both
-the play's key (scenes.md, game.md `carry`) and the engine's «Alfredo is in the scene»**: they mean the same here; the
+the play's key (scenes.md, game.md `carry`) and the engine's "Alfredo is in the scene"**: they mean the same here; the
 beats where he is always present set it themselves in their `from` (`knock`, `story_booth` …), the ones that depend on
 the play read it there (`reels`, `six`, `alfredo_comes`).
 
 Motions: `bench_work`, `seated`, `cane_sit`, `tell_hand`, `doze`, `cane_walk` (gait), `sit_down`, `rise`, `run`,
-`paint`, `push_turn`, `fall_back`, `sleep` (lying on the side), `kneel_down`, `drag` (gait, «Вытащить»), `cough_stand`, `lift_show`.
+`paint`, `push_turn`, `fall_back`, `sleep` (lying on the side), `kneel_down`, `drag` (gait, "Pull Him Out"), `cough_stand`, `lift_show`.
 Looks (`_look`) far behind a person twist the body round: those who should face the camera look ahead or at what is before them.
 
-## «Вытащить» (script.js)
+## "Pull Him Out" (script.js)
 
 The game moves `drag` (0 — Alfredo at `floor#path0`, 1 — at `floor#path1`); he comes heavily (at most 0.3 of the way a
 second): the boy backs along the way (gait `drag`) 0.8 m ahead of Alfredo's hips, his hands at Alfredo's nape;
@@ -119,12 +119,12 @@ a second without pulling.
 
 ## What is not as scenes.md says (and why)
 
-- No beams drawn into the hall (scenes.md: «Луч из port1 (или port2, по active) уходит в зал»): never seen from inside.
+- No beams drawn into the hall (scenes.md: "The beam from port1 (or port2, by active) goes into the hall"): never seen from inside.
 
 - `story_booth`: Toto on the bench's edge, but Alfredo faces the window, not Toto (blind, telling into the air) — so
   both faces are to the camera from DOOR; his head turns toward Toto only partly.
 - `deal`: the camera is BENCH turned to 74° (BENCH2) so the stool and the boy's box are both in the middle 4:3.
-- `smoke_in`: about 5 s — Alfredo already lying unconscious on his side (`sleep`, a loop: a motion done once does not play from a cut, and `lay_down` of the AP cast is «puts a thing on the table», not lying), the boy runs in and drops to his knees at his shoulders.
+- `smoke_in`: about 5 s — Alfredo already lying unconscious on his side (`sleep`, a loop: a motion done once does not play from a cut, and `lay_down` of the AP cast is "puts a thing on the table", not lying), the boy runs in and drops to his knees at his shoulders.
 - `FLOOR` looks down at −26° (scenes.md −19°): at −19° `floor#path1` is at the frame's bottom edge (−0.5 of the frame, not −0.36 as scenes.md counted); at −26° the way runs from +0.08 to −0.36 of the frame, the fire is above the frame (its light and smoke fill the room).
 - The crate is moved by the beats: by the window in `window` (the boy on it beside Alfredo, not hiding him), thrown aside under the window in `jam` and `smoke_in` (it stood where Alfredo falls).
 - In 1988 the camera comes to Salvatore at projector 2 by its own keys (a glide to a medium shot), not by the operator: `camera_target` adds the DOOR shot's offsets on top of its framing and ends inside the projector.
@@ -132,7 +132,7 @@ a second without pulling.
 - `story_booth`: Toto sits on the low box by the bench (not on the bench's edge), beside Alfredo, both faces to the camera.
 - The calendar exists from chapter IV (`month` 'none' before).
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats":{"cutting":{"after":[],"tells":["cutting:door","cutting:bench"],"seconds":12,"show":false},
@@ -163,6 +163,6 @@ a second without pulling.
 "calendar":{"after":["ruins"],"tells":["calendar:close"],"seconds":5,"show":false},
 "window_strip":{"after":["ruins","calendar"],"tells":["window_strip:close"],"seconds":3,"show":false},
 "strip_end":{"after":[],"tells":["strip_end:held"],"seconds":7,"show":false}},
-"points":["tin","toto","alfredo","elena","projector","projector#motor","projector#lever","projector#gate","projector#lens","projector#side","projector#top","projector2","projector2#motor","projector2#lever","projector2#gate","projector2#lens","projector2#side","projector2#top","floor#path0","floor#path1","toto#hand_r","wall_calendar#page","booth_door#edge","bench#pencil","press#press","lamp","look_port","clock#face","square_window","slate_nail","p1_side#reel","splice#cut1","splice#cut2","splice#cut3","splice#cut1_end","splice#cut2_end","splice#cut3_end","splice#glue1","splice#glue2","splice#glue3","slate#start","slate#end","thread#p0","thread#p1","thread#p2","thread#p3","thread#p4","thread#p5","calendar#fold","strip#hand_l","strip#hand_r"],"offers":["tin","toto","elena","alfredo"],"party":{"alfredo_here":0,"jumps":0,"slate_letters":"00000000"},
-"keys":{"beat_next":"","cue":0,"motor1":1,"motor2":0,"active":1,"white":0,"clock":6,"drag":0,"cough":0,"stutter":0,"cut1":0,"cut2":0,"cut3":0,"glue1":0,"glue2":0,"glue3":0,"bent1":0,"bent2":0,"bent3":0,"boy_reach":0,"chalk_x":0,"letters":0,"crooked":"00000000","wobble":0,"threaded":0,"pull":0,"loop":0,"pages":0,"fold":0,"dust":1,"strip_x":0,"splice":0,"slate":0,"thread":0,"calendar":0,"strip":0}}
+"points":["tin","toto","alfredo","elena","projector","projector#motor","projector#lever","projector#gate","projector#lens","projector#side","projector#top","projector2","projector2#motor","projector2#lever","projector2#gate","projector2#lens","projector2#side","projector2#top","floor#path0","floor#path1","toto#hand_r","wall_calendar#page","booth_door#edge","bench#pencil","press#press","lamp","look_port","clock#face","square_window","slate_nail","p1_side#reel","splice#cut1","splice#cut2","splice#cut3","splice#cut1_end","splice#cut2_end","splice#cut3_end","splice#glue1","splice#glue2","splice#glue3","slate#start","slate#end","thread#p0","thread#p1","thread#p2","thread#p3","thread#p4","thread#p5","calendar#fold","strip#hand_l","strip#hand_r"],"offers":["tin","toto","elena","alfredo"],"party":{"alfredo_here":0,"jumps":0,"slate_letters":"0000000"},
+"keys":{"beat_next":"","cue":0,"motor1":1,"motor2":0,"active":1,"white":0,"clock":6,"drag":0,"cough":0,"stutter":0,"cut1":0,"cut2":0,"cut3":0,"glue1":0,"glue2":0,"glue3":0,"bent1":0,"bent2":0,"bent3":0,"boy_reach":0,"chalk_x":0,"letters":0,"crooked":"0000000","wobble":0,"threaded":0,"pull":0,"loop":0,"pages":0,"fold":0,"dust":1,"strip_x":0,"splice":0,"slate":0,"thread":0,"calendar":0,"strip":0}}
 ```

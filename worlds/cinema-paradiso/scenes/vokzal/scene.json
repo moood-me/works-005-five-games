@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Вокзал",
-  "caption": "Маленькая станция. Рассвет",
+  "title": "The Station",
+  "caption": "A small station. Dawn",
   "horizon": 0.5,
   "camera": {
     "mode": "roam",
@@ -84,12 +84,12 @@
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true
     },
     {
       "id": "hills",
-      "name": "Холмы",
+      "name": "Hills",
       "across": 0,
       "distance": 90,
       "facing": 180,
@@ -103,7 +103,7 @@
     },
     {
       "id": "field",
-      "name": "Поле",
+      "name": "Field",
       "plane": true,
       "across": 0,
       "distance": 36,
@@ -113,7 +113,7 @@
     },
     {
       "id": "trees",
-      "name": "Оливы",
+      "name": "Olive trees",
       "across": -22,
       "distance": 16,
       "height": 3.6,
@@ -170,7 +170,7 @@
     },
     {
       "id": "track",
-      "name": "Пути",
+      "name": "Track",
       "plane": true,
       "across": 0,
       "distance": 7,
@@ -180,7 +180,7 @@
     },
     {
       "id": "edge",
-      "name": "Край перрона",
+      "name": "Platform edge",
       "across": 0,
       "distance": 4.5,
       "elevation": -0.9,
@@ -196,7 +196,7 @@
     },
     {
       "id": "ground",
-      "name": "Земля",
+      "name": "Ground",
       "plane": true,
       "across": 0,
       "distance": -27.5,
@@ -206,7 +206,7 @@
     },
     {
       "id": "platform",
-      "name": "Перрон",
+      "name": "Platform",
       "plane": true,
       "across": 0,
       "distance": 0.25,
@@ -217,7 +217,7 @@
     },
     {
       "id": "station",
-      "name": "Вокзал",
+      "name": "The Station",
       "across": 0,
       "distance": -4,
       "facing": 0,
@@ -232,7 +232,7 @@
     },
     {
       "id": "station_end",
-      "name": "Вокзал",
+      "name": "The Station",
       "across": 9.1,
       "distance": -7.0,
       "facing": 90,
@@ -247,7 +247,7 @@
     },
     {
       "id": "clock",
-      "name": "Часы",
+      "name": "Clock",
       "across": 0,
       "distance": -3.95,
       "elevation": 4.6,
@@ -262,7 +262,7 @@
     },
     {
       "id": "lamp",
-      "name": "Фонарь",
+      "name": "Street lamp",
       "across": 4.2,
       "distance": 2.6,
       "height": 3.8,
@@ -276,7 +276,7 @@
     },
     {
       "id": "benches",
-      "name": "Скамьи",
+      "name": "Benches",
       "across": -6,
       "distance": -3.6,
       "facing": 0,
@@ -302,7 +302,7 @@
     },
     {
       "id": "suitcase",
-      "name": "Чемодан",
+      "name": "Suitcase",
       "across": 1.45,
       "distance": 2.95,
       "height": 0.45,
@@ -315,7 +315,7 @@
     },
     {
       "id": "train",
-      "name": "Поезд",
+      "name": "Train",
       "unseen": true,
       "across": 0,
       "distance": 5.6,
@@ -326,7 +326,7 @@
     },
     {
       "id": "car1_in",
-      "name": "Вагон",
+      "name": "Carriage",
       "on": "train",
       "across": -0.95,
       "distance": -12.4,
@@ -342,7 +342,7 @@
     },
     {
       "id": "car1_floor",
-      "name": "Пол вагона",
+      "name": "Carriage floor",
       "plane": true,
       "on": "train",
       "across": 0.2,
@@ -354,7 +354,7 @@
     },
     {
       "id": "car2_in",
-      "name": "Вагон",
+      "name": "Carriage",
       "on": "train",
       "across": -0.95,
       "distance": -27.2,
@@ -370,7 +370,7 @@
     },
     {
       "id": "car1",
-      "name": "Вагон",
+      "name": "Carriage",
       "on": "train",
       "across": 1.35,
       "distance": -12.4,
@@ -387,7 +387,7 @@
     },
     {
       "id": "car2",
-      "name": "Вагон",
+      "name": "Carriage",
       "on": "train",
       "across": 1.35,
       "distance": -27.2,
@@ -404,7 +404,7 @@
     },
     {
       "id": "car2_end",
-      "name": "Вагон",
+      "name": "Carriage",
       "on": "train",
       "across": 0,
       "distance": -27.25,
@@ -420,7 +420,7 @@
     },
     {
       "id": "loco",
-      "name": "Паровоз",
+      "name": "Engine",
       "on": "train",
       "across": 1.25,
       "distance": 2.6,
@@ -437,7 +437,7 @@
     },
     {
       "id": "smoke",
-      "name": "Дым",
+      "name": "Smoke",
       "on": "train",
       "across": 0,
       "distance": 12.2,
@@ -463,7 +463,7 @@
     },
     {
       "id": "steam_low",
-      "name": "Пар",
+      "name": "Steam",
       "on": "train",
       "across": 1.5,
       "distance": 10.4,
@@ -488,7 +488,7 @@
     },
     {
       "id": "toto",
-      "name": "Тото",
+      "name": "Totò",
       "person": {
         "cast": "cast",
         "who": "toto_teen"
@@ -503,7 +503,7 @@
     },
     {
       "id": "maria",
-      "name": "Мария",
+      "name": "Maria",
       "person": {
         "cast": "cast",
         "who": "maria"
@@ -518,7 +518,7 @@
     },
     {
       "id": "alfredo",
-      "name": "Альфредо",
+      "name": "Alfredo",
       "person": {
         "cast": "cast",
         "who": "alfredo_blind"
@@ -533,7 +533,7 @@
     },
     {
       "id": "c1",
-      "name": "Пассажир",
+      "name": "Passenger",
       "person": {
         "cast": "cast",
         "who": "villager_m"
@@ -548,7 +548,7 @@
     },
     {
       "id": "c2",
-      "name": "Пассажирка",
+      "name": "Woman passenger",
       "person": {
         "cast": "cast",
         "who": "old_w"
@@ -563,7 +563,7 @@
     },
     {
       "id": "wallet",
-      "name": "Бумажник",
+      "name": "Wallet",
       "insert": "wallet"
     }
   ],
@@ -641,25 +641,25 @@
   "states": {
     "beat": {
       "type": "string",
-      "means": "кусок (с начала): platform, boarding, away, back_look, arrival, wallet; ставит игра (модуль beats)"
+      "means": "the beat (from its beginning): platform, boarding, away, back_look, arrival, wallet; the game sets it (the module beats)"
     },
     "beat_next": {
       "type": "string",
-      "means": "кусок, снимок начала которого готовить заранее (ставит игра; модуль beats)"
+      "means": "the beat whose opening shot to make ready ahead (the game sets it; the module beats)"
     },
     "era": {
       "values": [
         "past",
         "now"
       ],
-      "means": "время: past — рассвет 1959, now — прохладный вечер 1988"
+      "means": "era: past — the dawn of 1959, now — the cool evening of 1988"
     },
     "hour": {
       "range": [
         0,
         1
       ],
-      "means": "час: 0.25 рассвет, 0.8 вечер"
+      "means": "hour: 0.25 dawn, 0.8 evening"
     },
     "now_k": {
       "range": [
@@ -667,7 +667,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет 1988 (из era)"
+      "means": "internal: the light of 1988 (from era)"
     },
     "dawn_k": {
       "range": [
@@ -675,7 +675,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет рассвета (из era)"
+      "means": "internal: the dawn's light (from era)"
     },
     "train": {
       "range": [
@@ -683,12 +683,12 @@
         1
       ],
       "smooth": true,
-      "means": "поезд: 0 стоит у перрона, 0.08 тронулся, 1 ушёл (150 м на восток)"
+      "means": "the train: 0 standing at the platform, 0.08 moved off, 1 gone (150 m to the east)"
     },
     "train_x": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: где поезд, м (из train)"
+      "means": "internal: where the train is, m (from train)"
     },
     "steam": {
       "range": [
@@ -696,21 +696,21 @@
         1
       ],
       "smooth": true,
-      "means": "пар и дым паровоза"
+      "means": "the engine's steam and smoke"
     },
     "alfredo_stays": {
       "values": [
         0,
         1
       ],
-      "means": "ставит игра до boarding: 0 — Альфредо уходит по перрону, стуча тростью; 1 — стоит у края перрона"
+      "means": "the game sets it before boarding: 0 — Alfredo goes off along the platform, tapping his cane; 1 — he stands at the platform's edge"
     },
     "wallet": {
       "values": [
         0,
         1
       ],
-      "means": "вставка «бумажник» (closeups.wallet): 1 — открыта"
+      "means": "the insert «wallet» (closeups.wallet): 1 — open"
     },
     "open": {
       "range": [
@@ -718,7 +718,7 @@
         1
       ],
       "smooth": true,
-      "means": "вставка wallet: руки раскрывают бумажник, кадр поднимается между пальцами"
+      "means": "the insert wallet: the hands open the wallet, the frame rises between the fingers"
     }
   },
   "modules": [

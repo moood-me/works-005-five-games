@@ -1,7 +1,7 @@
-# Зал
+# The hall
 
-The hall of the «Парадизо» (scenes.md «Зал»), chapters I, II, III and V. Engine 3, camera `roam`. Begun as «Зал
-(opus)», brought to the 4th edition. Mood: a dark hall, the one warm thing the beam and the screen; heads in
+The hall of the Paradiso (scenes.md "The hall"), chapters I, II, III and V. Engine 3, camera `roam`. Begun as the
+hall's opus version, brought to the 4th edition. Mood: a dark hall, the one warm thing the beam and the screen; heads in
 silhouette against the film; 1988 — cold, grey, a hole in the roof, and for five seconds the warm hall again.
 Modules: `cast`, `kino` (the screen's frames, the beam), `nebo` (the sky in the hole), `beats` (the film).
 
@@ -30,8 +30,8 @@ back, as layers and glows, the seats, the painted audience, the screen's film, t
 
 Light: the screen's light (warm, flickering, `on` beam_on), the lion's glow, a dim warm fill from the back of the hall
 (`hall_fill`, `on` past: the seat backs and the people's backs read), the corridor's light, the stair light (both kept
-off the hall's wall), the hole (1988 only), `memory_warm`. The white film is toned (0.62): not blown out. Looks: `ruin_k` (the scene's from `era`), then `past`. Прожектора-конуса в движке
-нет; луч — светящийся клин со светом на кончике (`kino.beam`).
+off the hall's wall), the hole (1988 only), `memory_warm`. The white film is toned (0.62): not blown out. Looks: `ruin_k` (the scene's from `era`), then `past`. The engine has no cone
+spotlight; the beam is a glowing wedge with a light at its tip (`kino.beam`).
 
 ## Shots (`lib.js` CAM)
 
@@ -57,7 +57,7 @@ him.
 | ruin_hall | — | 1988, `RUIN`: Salvatore comes in by the side door, walks to the aisle at row 5 into the hole's light, turns to the lion (`sad`); cut to `LION` — the pose under the touch | ruin_hall:seat (≈7) | 10 |
 | memory | ruin_hall | the lion's mouth flares, the hall as it was (layers); cut to `FACE`: his face warm, `smile`; at ≈ 5 s back to ruin over 1.5 s, `sad` | memory:warm (0.5), memory:gone (≈6.4) | 8 |
 
-«Подглядывать» (game keys, any time in `peek`): `peek` — the curtain swings open (the script's `curtain_f`); > 0.5 — the boy
+"Peeking" (game keys, any time in `peek`): `peek` — the curtain swings open (the script's `curtain_f`); > 0.5 — the boy
 steps into the slit, no steps (the cast's `peek_lean` barely leans — not used), < 0.3 — back; `bell` → 1 — the
 priest's right hand to `aud5#ring` (a point over his shoulder the row-5 audience element shakes for 3 s) and
 `bell_ring` played once, then `seated` again; `turn` — he looks round at `curtain#gap`, 0 — at the screen. The bell's
@@ -81,7 +81,7 @@ the cast's `salvatore` look object). Motions: `seated`, `rise_chair`, `bell_ring
 - The audience is painted (eight rows of heads and shoulders, layers lifted by `rise` with a delay per row, arms a
   layer for `standing`); the priest's seat is left empty in it.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {

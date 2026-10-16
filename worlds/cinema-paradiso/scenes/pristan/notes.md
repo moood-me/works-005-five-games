@@ -1,7 +1,7 @@
-# Пристань
+# The pier
 
-The pier of «Новый кинотеатр „Парадизо“» (scenes.md «Пристань»), chapters IV and V. Engine 3, camera `roam`. Begun as
-«Пристань (opus)», brought to the 4th edition: the world's modules (nebo, kino, beats, cast), faces, the letter.
+The pier of Cinema Paradiso (scenes.md "The pier"), chapters IV and V. Engine 3, camera `roam`. Begun as
+the pier's opus version, brought to the 4th edition: the world's modules (nebo, kino, beats, cast), faces, the letter.
 Mood: a warm summer night with the cinema on the pier, the rain, the farewell at dusk; the cool lilac 1988.
 
 ## The place (metres; x across, z north toward the sea; the start on the quay at the mole's root)
@@ -29,8 +29,8 @@ Light: the moon (`sky#disc`), the lantern, the street lamp, the wall lamp; warm 
 `proj_lamp` by `beam_on`) and the headlamps. Looks: `dusk_k` (from `hour` < 0.84), `now_k` (from `era`), `rain`. The
 sky is the world's (`nebo`, `lib.SKY`: the moon over the sea a little right of the mole, the capes, the villages).
 
-Прожектора-конуса в движке нет; луч и фары — светящийся клин со светом на кончике (`kino.beam`; у экрана — свет сцены
-`screen_light`, у фар — `car_pool` на кончике клина).
+The engine has no cone spotlight; the beam and the headlamps are a glowing wedge with a light at its tip (`kino.beam`;
+at the screen — the scene's light `screen_light`, at the headlamps — `car_pool` at the wedge's tip).
 
 ## Beats (`lib.film(scene)`, played by the world's `beats`)
 
@@ -60,14 +60,14 @@ look's parts), `banker`, `c1…c4`. Faces `simple`; `<id>_mood` set by each beat
 
 ## What is not here / found
 
-- Elena «gets into the car»: she goes behind it and is gone (`here: false`) where the car hides her.
+- Elena "gets into the car": she goes behind it and is gone (`here: false`) where the car hides her.
 - The new car's front and back cards are only its body (no cabin): seen side on the cabin is the sides' and the
   roof's. Seen from right behind it the cabin's rear window is missing.
 - `pull_cover` is a weak take (passable): the hands' `reach` to the tarp's edge carries the action.
-- `ask`'s «шаг к ней» and `bye`'s «отступает на шаг» — a walk of half a metre / a slide back (no step-back motion).
+- `ask`'s "a step to her" and `bye`'s "steps back" — a walk of half a metre / a slide back (no step-back motion).
 - Through-the-card figure lines (engine) were not seen here.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {

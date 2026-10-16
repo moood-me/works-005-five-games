@@ -1,5 +1,5 @@
 
-// Вокзал — what the paintings and the script share: the station in metres, the train's frame, a few painted things.
+// The station — what the paintings and the script share: the station in metres, the train's frame, a few painted things.
 // Metres: across x (east +), distance z (north +). The start stands on the platform; the platform runs east–west,
 // its edge at z 4.5, the track beyond it 0.9 m lower; the station's front at z −4 faces north across the platform.
 

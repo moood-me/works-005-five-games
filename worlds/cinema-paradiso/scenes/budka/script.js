@@ -1,7 +1,7 @@
-// Будка — the scene's mechanics: its film in beats (lib.js film(scene), played by the world's module beats: the game
+// The booth — the scene's mechanics: its film in beats (lib.js film(scene), played by the world's module beats: the game
 // sets `beat`, the scene tells `beat:<name>`), and the keys it derives from others — the light's from `hour` and
 // `era`, the door's turn from `door`, projector 1's turn from `turned`, the lamp houses from `beam_on` and `active`;
-// «Вытащить»: the boy and Alfredo along the way by `drag` (where they are now: `drag_at`), the cough.
+// «Pull Him Out»: the boy and Alfredo along the way by `drag` (where they are now: `drag_at`), the cough.
 const L = scene.lib, G = L.G;
 scene.kit.beats.play(scene, L.film(scene));
 
@@ -19,7 +19,7 @@ scene.on('change', 'turned', turnF); scene.on('move', 'turned', turnF);
 for (const k of ['beam_on', 'active']) { scene.on('change', k, lamps); scene.on('move', k, lamps); }
 light(); doorF(); turnF(); lamps();
 
-// «Вытащить»: the game moves `drag` (where Alfredo is to be, 0 — where he fell, 1 — by the door); he comes heavily,
+// «Pull Him Out»: the game moves `drag` (where Alfredo is to be, 0 — where he fell, 1 — by the door); he comes heavily,
 // at most 0.3 of the way a second: the boy backs along the way pulling (gait `drag`), Alfredo lying slides behind
 // his hands with no steps. `drag_at` — where he is now, set ten times a second.
 const RATE = 0.3, DX = G.PATH1[0] - G.PATH0[0], DZ = G.PATH1[1] - G.PATH0[1], LEN = Math.hypot(DX, DZ);

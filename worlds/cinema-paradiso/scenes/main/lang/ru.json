@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"NO SEATS","translation":"МЕСТ НЕТ","where":"scenes/main/lib.js"},
+  {"text":"DEMOLITION","translation":"СНОС —","where":"scenes/main/lib.js"},
+  {"text":"ON SATURDAY","translation":"В СУББОТУ","where":"scenes/main/lib.js"},
+  {"text":"The Square","translation":"Площадь","where":"scenes/main/scene.json title"},
+  {"text":"Giancaldo. The Paradiso's square","translation":"Джанкальдо. Площадь «Парадизо»","where":"scenes/main/scene.json caption"}
+]}

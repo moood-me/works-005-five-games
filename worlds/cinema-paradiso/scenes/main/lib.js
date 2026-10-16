@@ -1,4 +1,4 @@
-// Площадь — what the scene's paintings, animate and script share: the place in metres (G), the painters of the
+// The square — what the scene's paintings, animate and script share: the place in metres (G), the painters of the
 // fronts round the square, the light of an hour and an era (LIGHT), the camera's shots (CAM), the people of each
 // beat (cast) and the film itself (FILM: the beats, scene.kit.beats).
 // Metres: x — across (east +), z — distance from the square's south edge (north +); the start is at (0, 0), looking
@@ -9,7 +9,7 @@ const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
 // ── the place ────────────────────────────────────────────────────────────────────────────────────────────────────
 const G = {
-  DOOR: [-12, 12],                 // the «Парадизо»'s doors (its face at x −12)
+  DOOR: [-12, 12],                 // the Paradiso's doors (its face at x −12)
   BOOTH: [-11.9, 16, 6],           // the booth's window on the square (the beam's mouth)
   ALF_DOOR: [-12, 3],              // Alfredo's door
   ALF_SEAT: [-11.38, 3.12, 0.45],  // his chair by it
@@ -21,7 +21,7 @@ const G = {
   MOTHER_WIN: [-9, 26, 5],
   // the beam's spot: on the stone and the heads under the window (aim 0) … up the white wall (aim 1)
   AIM0: [-8.6, 15.2, 1.1], AIM_GROUND: [1.6, 25.4, 1.1],
-  // the hearse's way: from the street along the west side, past the «Парадизо», to the church steps
+  // the hearse's way: from the street along the west side, past the Paradiso, to the church steps
   CART: [[-9.6, -8], [-9.6, 21], [4.6, 22.6]],
 };
 // the beam from the booth window to where `aim` puts its end → {heading (plan, degrees), tilt (radians down), len}
@@ -208,7 +208,7 @@ function windowsMove(e, n, seed) {
 
 // the fronts: [x, sill y, w, h, kind, balcony, lit]
 const FRONTS = {
-  // Alfredo's house, west side south of the «Парадизо» (anchor x −12, z 0, facing east; +x north)
+  // Alfredo's house, west side south of the Paradiso (anchor x −12, z 0, facing east; +x north)
   f_alf: { w: 6, h: 8.6, base: PAL.ochre, seed: 11, course: [-3.4],
     windows: [[1.1, -1.0, 0.7, 0.9, 'glass'], [1.5, -4.4, 0.9, 1.6, 'half', false, true], [4.5, -4.4, 0.9, 1.6, 'shut', true], [1.5, -7.2, 0.8, 1.2, 'shut'], [4.5, -7.2, 0.8, 1.2, 'glass', false, true]],
     doors: [[3.0, 1.1, 2.3, '#3f4a3c']], lamp: [1.6, -3.0], points: [['door', 3.0, -1.2]],
@@ -260,7 +260,7 @@ const FRONTS = {
     } },
 };
 
-// ── the «Парадизо» (anchor x −12, z 6; facing east; +x north; 14 m long, 10 high) ────────────────────────────────
+// ── the Paradiso (anchor x −12, z 6; facing east; +x north; 14 m long, 10 high) ────────────────────────────────
 // paradiso_state: old · burnt · new · shut · charged; poster, full_sign; past (shut → old: layers); collapse (charged)
 const PAR = { w: 14, h: 10, door: 6, doorW: 2.8, doorH: 3.1, booth: 10, boothY: 6, boothW: 1.25, boothH: 0.95, poster: 8.6 };
 function paradisoBase(g, s) {
@@ -309,12 +309,12 @@ function posters(g, s, poster, full) {
   const frame = (x, draw) => { g.save(); g.beginPath(); g.rect(x - 0.55, -2.83, 1.1, 1.76); g.clip(); draw(x); g.restore(); };
   if (s === 'burnt') return;
   if (s === 'shut' || s === 'charged') {
-    // torn paper, and the notice on the doors (girl): «Снос — в субботу»
+    // torn paper, and the notice on the doors (girl): «Demolition on Saturday»
     frame(3.9, x => { g.fillStyle = '#b8ad96'; g.fillRect(x - 0.55, -2.83, 1.1, 1.76); g.fillStyle = 'rgba(70,60,50,0.4)'; g.fillRect(x - 0.3, -2.2, 0.8, 0.9); });
     frame(PAR.poster, x => { g.fillStyle = '#a99d86'; g.fillRect(x - 0.55, -2.83, 1.1, 1.76); g.fillStyle = 'rgba(120,40,30,0.25)'; g.fillRect(x - 0.5, -2.0, 0.6, 0.7); });
     return;
   }
-  // «Унесённые ветром» (poster 1): two in an embrace, a fire behind; else the comedy's bill
+  // «Gone with the Wind» (poster 1): two in an embrace, a fire behind; else the comedy's bill
   frame(PAR.poster, x => {
     if (poster) {
       const gr = g.createLinearGradient(0, -2.83, 0, -1.07); gr.addColorStop(0, '#3b2a2a'); gr.addColorStop(0.55, '#a2502c'); gr.addColorStop(1, '#2a1c18');
@@ -334,10 +334,10 @@ function posters(g, s, poster, full) {
     g.fillStyle = '#3a2a22'; g.beginPath(); g.ellipse(x, -1.9, 0.22, 0.42, 0, 0, TAU); g.fill();
     g.font = 'bold 0.1px serif'; g.textAlign = 'center'; g.fillText('PROSSIMAMENTE', x, -2.63);
   });
-  if (full) {   // «Мест нет»: a board hung on the door
+  if (full) {   // «No seats»: a board hung on the door
     g.fillStyle = '#e9dfc6'; g.fillRect(PAR.door - 0.75, -2.35, 1.5, 0.5);
     g.strokeStyle = '#5a2a1a'; g.lineWidth = 0.03; g.strokeRect(PAR.door - 0.72, -2.32, 1.44, 0.44);
-    g.fillStyle = '#7a2a1a'; g.font = 'bold 0.22px serif'; g.textAlign = 'center'; g.fillText('МЕСТ НЕТ', PAR.door, -2.02);
+    g.fillStyle = '#7a2a1a'; g.font = 'bold 0.22px serif'; g.textAlign = 'center'; g.fillText(tr('NO SEATS'), PAR.door, -2.02);
   }
 }
 // the boarded front (shut, charged): boards over the doors and the windows, the notice; a layer (rewind lets it fall)
@@ -347,7 +347,7 @@ function paradisoBoards(g, charged) {
   boards(g, PAR.booth - 0.7, PAR.booth + 0.7, -PAR.boothY - 0.5, -PAR.boothY + 0.5, 9);
   g.fillStyle = '#efe8d4'; g.fillRect(PAR.door - 0.55, -2.0, 1.1, 0.62);
   g.fillStyle = '#2a2420'; g.font = 'bold 0.13px serif'; g.textAlign = 'center';
-  g.fillText('СНОС —', PAR.door, -1.72); g.fillText('В СУББОТУ', PAR.door, -1.52);
+  g.fillText(tr('DEMOLITION'), PAR.door, -1.72); g.fillText(tr('ON SATURDAY'), PAR.door, -1.52);
   if (charged) {   // the charges: red bundles at the pilasters' feet, the wires
     g.strokeStyle = '#6a1a12'; g.lineWidth = 0.025;
     g.beginPath(); g.moveTo(0.3, -0.6); g.lineTo(13.7, -0.6); g.stroke();
@@ -436,7 +436,7 @@ const PAST_DUSK = () => ({ ...REST, ...LIGHT('past', 0.8) });
 const NOW = (hour, state = 'shut') => ({ ...REST, ...LIGHT('now', hour), past: 0, paradiso_state: state, ...crowdAt(0, -60, 180, 0) });
 // people's places for the beats (faces 3/4 to the shots that see them)
 const P = {
-  // after the show, by the «Парадизо»'s doors: the boy nearest (he faces the lens, looks up at his mother), the mother
+  // after the show, by the Paradiso's doors: the boy nearest (he faces the lens, looks up at his mother), the mother
   // on the left facing him and the lens, Alfredo on the right coming out of the doors
   TOTO_P: [-9.3, 11.37], MARIA_P: [-10.29, 10.95], ALF_P: [-9.09, 12.43], COINS: [-9.42, 12.02, 0.92],
   // the paper: the two of them stop by the poster
@@ -457,7 +457,7 @@ const F_MARIA = 92, F_ALF = 175, F_TOTO = 175; // where the porch's three face
 const film = {};
 const B = (name, b) => { film[name] = b; };
 
-// Пролог: the square of 1988 at dusk, the mother's window; the booth's window flares and the square goes back
+// The prologue: the square of 1988 at dusk, the mother's window; the booth's window flares and the square goes back
 const MARIA_PHONE = { at: [-9, 26.45], turn: 180, wear: 'maria_old', do: 'stand', reach: { r: 'maria#head' }, with: ['phone'], mood: 'sad' };
 const REWIND_END = cam(-3.2, 2.5, -24, 0.4, 5);
 B('now_open', {
@@ -485,7 +485,7 @@ B('rewind', {
     s.set('beam_sky', 1);
     s.move('beam_on', 1, { over: 1.2 });
     s.move('booth_flash', 0.6, { over: 1 });
-    // the camera goes slowly toward the «Парадизо» as it comes back
+    // the camera goes slowly toward the Paradiso as it comes back
     glide(s, REWIND_END, 10);
     s.set('crowd_x', -1.5); s.set('crowd_z', 15); s.set('crowd_f', 180); s.set('crowd_sit', 0);
     s.move('crowd_k', 1, { over: 9, ease: 'in' });
@@ -503,7 +503,7 @@ B('rewind', {
   },
 });
 
-// I.3 Молоко: out of the cinema, the mother, the coins
+// I.3 Milk: out of the cinema, the mother, the coins
 const PORCH2 = aim(-7.95, 9.85, [-9.8, 11.15], 1.42);        // mother and boy, medium
 const PORCH3 = aim(-7.3, 9.45, [-9.55, 11.6], 1.45);         // the three, medium: the choice
 const COINS_CLOSE = aim(-7.75, 11.09, [-9.3, 12.2], 1.3, -4);    // his palm and his face     // Alfredo's palm with the coins
@@ -613,7 +613,7 @@ B('slap', {
     await s.wait(0.4);
   },
 });
-// I.5 Бумага: dusk; the mother in black with the paper, the boy by her; the poster
+// I.5 The Paper: dusk; the mother in black with the paper, the boy by her; the poster
 const PAPER = aim(-8.2, 11.9, [-10.7, 12.95], 1.45, -2);
 B('paper', {
   from: () => ({ ...PAST_DUSK(), poster: 1, ...cast({
@@ -642,7 +642,7 @@ B('paper', {
   },
 });
 
-// II.2 Толпа, the beam on the wall, the fire
+// II.2 The Crowd, the beam on the wall, the fire
 B('crowd', {
   from: () => ({ ...PAST_NIGHT(), full_sign: 1, ...crowdAt(-9.4, 13.4, 135, 1), ...cast({
     c1: { at: [-9.4, 10.6], turn: 250, do: loop('wave'), look: 'paradiso#booth_window', mood: 'angry' }, c2: { at: [-8.6, 11.5], turn: 250, look: 'paradiso#door', mood: 'angry' },
@@ -715,7 +715,7 @@ function smokeBoy() {
   const o = cast({ toto: { at: [-2.4, 15.2], turn: 270, look: 'paradiso#booth_window', mood: 'afraid' } });
   return Object.fromEntries(Object.entries(o).filter(([k]) => k.startsWith('toto_')));
 }
-// Alfredo on the fountain's rim: a close from the square's side, the burnt «Парадизо» behind him
+// Alfredo on the fountain's rim: a close from the square's side, the burnt Paradiso behind him
 const ALF_CLOSE = aim(-0.42, 11.22, P.ALF_RIM, 1.18, -2);
 B('outside', {
   from: () => ({ ...PAST_NIGHT(), paradiso_state: 'burnt', smoke: 0.4, ...crowdAt(-1, 19.5, 200, 1), ...cast({
@@ -810,7 +810,7 @@ B('go_alone', {
   },
 });
 
-// III.1 Камера: dusk; Toto on the steps; the girl at the fountain
+// III.1 The Camera: dusk; Toto on the steps; the girl at the fountain
 const STEPS_WALKERS = () => cast({ c1: { at: [-3.0, 8.0], turn: 70 }, c2: { at: [6.0, 6.0], turn: 300 }, c3: { at: [-6.5, 18.5], turn: 140 }, c4: { at: [3.5, 16.0], turn: 220 } });
 const TOTO_CAM = { at: P.TOTO_STEPS, turn: 200, wear: 'toto_teen', with: ['cam8'], do: loop('film8') };
 B('dusk', {
@@ -896,7 +896,7 @@ B('story_door', {
     glide(s, faceCam([G.ALF_SEAT[0], G.ALF_SEAT[1]], 95, 2.2, -28, 1.25), 8);
     await s.wait(9); s.tell('story_door:99');
     await s.wait(7);
-    // «Почему?» — his face; «Не знаю. Поймёшь — скажешь мне» — Alfredo's
+    // «Why?» — his face; «I don't know. When you figure it out, tell me» — Alfredo's
     await cutTo(s, TOTO_STEP_FACE);
     s.tell('story_door:why');
     toto.mood('surprised');
@@ -1164,7 +1164,7 @@ B('widow_late', {
     await s.wait(3.4);
   },
 });
-// Эпилог: the demolition
+// The epilogue: the demolition
 const DEMO_CROWD = { c1: [-1.5, 8.2], c2: [-2.3, 9.8], c3: [-1.0, 11.4], c4: [-3.0, 11.0], c5: [-0.6, 6.8], c6: [-3.4, 8.0], c7: [-2.0, 12.6], c8: [-0.4, 10.2] };
 B('demolition', {
   from: () => {
@@ -1422,7 +1422,7 @@ function lamppost(g, e) {
   g.fillStyle = '#efe9d8'; g.fillRect(-0.12, -3.98, 0.24, 0.32);
   e.light(0, -3.8, 0.25, '#e4e2d8', 1, 'lamp');
 }
-// the canopy's front over the «Парадизо»'s doors (+x north from z 8.3; 7.4 long): its name and its bulbs
+// the canopy's front over the Paradiso's doors (+x north from z 8.3; 7.4 long): its name and its bulbs
 function canopyFront(gg, e) {
   const st = e.state.paradiso_state ?? 'old', burnt = st === 'burnt', fresh = st === 'new', dead = st === 'shut' || st === 'charged';
   e.layer('all', { pivot: [3.7, 0], box: [-0.2, -1.3, 7.6, 9] }, g => canopyPaint(g, e, st, burnt, fresh, dead));
@@ -1487,7 +1487,7 @@ function motherRoom(g, e) {
   e.light(0.3, -5.1, 0.9, '#ffbf75', 1, 'lamp');
   e.at(0.3, -5.1, 'lamp');
 }
-// the back wall of the house behind the «Парадизо» (seen once its front is down): grey, scarred, a stair's ghost
+// the back wall of the house behind the Paradiso (seen once its front is down): grey, scarred, a stair's ghost
 function backWall(g) {
   plaster(g, 0, -8, 14, 8, '#b4ab9c', 79, 0.8);
   cornice(g, 0, 14, -7.7, 0.3);
@@ -1524,7 +1524,7 @@ function garlandMove(e) {
   e.layer('bulbs').alpha = k; e.layer('wire').alpha = k;
   for (let i = 0; i < 24; i += 2) e.glow('g' + i, k * (0.8 + 0.2 * anim.noise(e.t * 2 + i, 1)));
 }
-// the «Парадизо»'s front as it stands — or in pieces that fall (charged: the demolition)
+// the Paradiso's front as it stands — or in pieces that fall (charged: the demolition)
 function paradisoPaint(g, e) {
   const S = e.state, st = S.paradiso_state ?? 'old';
   const all = gg => { paradisoBase(gg, st); posters(gg, st, S.poster, S.full_sign); };

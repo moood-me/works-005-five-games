@@ -1,4 +1,4 @@
-// the «Контракт для проверки» block of notes.md, from the code (lib.js film, scene.json)
+// the «Contract for the check» block of notes.md, from the code (lib.js film, scene.json)
 const fs = require('fs'), path = require('path');
 const dir = path.join(__dirname, '..', '..', 'scenes', 'budka');
 const src = fs.readFileSync(path.join(dir, 'lib.js'), 'utf8'), spec = JSON.parse(fs.readFileSync(path.join(dir, 'scene.json'), 'utf8'));
@@ -22,7 +22,7 @@ const contract = {
     'splice#cut1', 'splice#cut2', 'splice#cut3', 'splice#cut1_end', 'splice#cut2_end', 'splice#cut3_end', 'splice#glue1', 'splice#glue2', 'splice#glue3',
     'slate#start', 'slate#end', 'thread#p0', 'thread#p1', 'thread#p2', 'thread#p3', 'thread#p4', 'thread#p5', 'calendar#fold', 'strip#hand_l', 'strip#hand_r'],
   offers: ['tin', 'toto', 'elena', 'alfredo'],
-  party: { alfredo_here: 0, jumps: 0, slate_letters: '00000000' },
+  party: { alfredo_here: 0, jumps: 0, slate_letters: '0000000' },
   keys: {},
 };
 for (const k of ['beat_next', 'cue', 'motor1', 'motor2', 'active', 'white', 'clock', 'drag', 'cough', 'stutter', 'cut1', 'cut2', 'cut3', 'glue1', 'glue2', 'glue3',
@@ -32,6 +32,6 @@ for (const k of ['beat_next', 'cue', 'motor1', 'motor2', 'active', 'white', 'clo
   contract.keys[k] = spec.state[k];
 }
 const block = '```json\n' + JSON.stringify(contract) .replace(/\},"/g, '},\n"') + '\n```\n';
-const notes = fs.readFileSync(path.join(dir, 'notes.md'), 'utf8').replace(/## Контракт для проверки[\s\S]*$/, '## Контракт для проверки\n\n' + block);
+const notes = fs.readFileSync(path.join(dir, 'notes.md'), 'utf8').replace(/## Contract for the check[\s\S]*$/, '## Contract for the check\n\n' + block);
 fs.writeFileSync(path.join(dir, 'notes.md'), notes);
 console.log(Object.keys(beats).length, 'beats');

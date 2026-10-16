@@ -1,73 +1,80 @@
-# Дом Ди Вита
+# The Di Vita home
 
-Кухня-комната матери Тото (scenes.md «Дом Ди Вита»): главы I, IV, V. Движок 3, камера `roam`. Настроение — тесно,
-бедно, тепло от одной лампы над столом; в 1988-м та же комната без лампы — тёплое только лампа в руке старой матери.
+The kitchen-room of Totò's mother (scenes.md "The Di Vita home"): chapters I, IV, V. Engine 3, camera `roam`. The mood —
+cramped, poor, warm from one lamp over the table; in 1988 the same room without the lamp — warm only the lamp in the
+old mother's hand.
 
-## Устройство (метры: x поперёк, вправо +; z вглубь от южной стены, где стоит старт и смотрит на север)
+## How it is built (metres: x across, right +; z inward from the south wall, where the start stands, looking north)
 
-Все числа — `lib.js` (`G`). Комната x −2.8…2.8, z 0…4.8, потолок 2.8. Северная стена: окно на площадь (x −2.05, 0.8 ×
-1.1, подоконник 1.0; за ним `window_out` — небо мира `nebo.pane` по часу и времени, дома напротив, колокольня; в
-прошлом одно тёплое окно), фотография отца в форме над столом (`photo`, точка `photo#photo`, x −0.5, высота 1.5…2.0),
-образок. Стол (x −0.5, z 3.4; 1.3 × 0.8, верх 0.76) — карточка спереди и плоскость сверху (тень от лампы на пол); три
-стула — копии одного (`chairs`: северный — где сидит мать, восточный — мальчик, западный); лампа над столом (`lamp`,
-свет `lamp_light` по ключу `lamp`). Западная стена — дверь на лестницу, пальто на крючке, буфет. Угол Тото — восток
-за занавеской (`curtain`, на штанге вдоль x 1.2; просвет z 2.55…3.45 — его дверь): кровать вдоль восточной стены
-(`bed`, `bed_top`, `headboard`; изголовье на севере), полка над ней (`shelf`: книги, камера, жестянки; при `reel8`
-жестянка «Е.»), домашний проектор на полке (`home_projector`, только при `reel8`; точки — сам и `#switch`),
-перегородка с юга (`partition_n` / `partition_s`, z 0.6) с вырезками кинозвёзд вокруг пустого места — туда ложится
-квадрат домашнего кино (`home_screen`: `kino.frame` `elena8` слоем, девушка `kino.elena8Girl` слоем; светится сам, пока
-`projector_on`), луч проектора (`home_beam`, `kino.beam` с шейдером мира). На столе: кувшин (`jug`; пока `jug_held`,
-его несёт `animate` к рукам матери), стакан (`milk`, молоко поднимается по `milk`), письма (`letters`).
+All the numbers are `lib.js`'s (`G`). The room x −2.8…2.8, z 0…4.8, the ceiling 2.8. The north wall: the window on the
+square (x −2.05, 0.8 × 1.1, the sill at 1.0; beyond it `window_out` — the world's sky `nebo.pane` by the hour and the
+era, the houses opposite, the bell tower; in the past one warm window), the father's photograph in uniform over the
+table (`photo`, the point `photo#photo`, x −0.5, height 1.5…2.0), an icon. The table (x −0.5, z 3.4; 1.3 × 0.8, its top
+at 0.76) — a card in front and a plane on top (the lamp's shadow on the floor); three chairs — copies of one (`chairs`:
+the northern — where the mother sits, the eastern — the boy's, the western); the lamp over the table (`lamp`, the light
+`lamp_light` by the key `lamp`). The west wall — the door to the stairs, a coat on a hook, the dresser. Totò's corner —
+the east, behind a curtain (`curtain`, on a rod along x 1.2; the gap z 2.55…3.45 — his door): the bed along the east
+wall (`bed`, `bed_top`, `headboard`; its head to the north), a shelf over it (`shelf`: books, the camera, tins; with
+`reel8` the tin «E.»), the home projector on the shelf (`home_projector`, only with `reel8`; its points — itself and
+`#switch`), the partition to the south (`partition_n` / `partition_s`, z 0.6) with cut-out film stars round an empty
+place — the square of the home movie falls there (`home_screen`: `kino.frame` `elena8` as a layer, the girl
+`kino.elena8Girl` as a layer; it glows by itself while `projector_on`), the projector's beam (`home_beam`, `kino.beam`
+with the world's shader). On the table: the jug (`jug`; while `jug_held`, `animate` carries it to the mother's hands),
+the glass (`milk`, the milk rises by `milk`), the letters (`letters`).
 
-Свет: лампа над столом (тёплая, `lamp`), лампа в руке матери в 1988-м (`hand_lamp`, свет `{"at": "maria#lamp"}`),
-холодный свет окна, тёплый отсвет домашнего кино (`movie_light`, по `projector_on`). Виды света (`looks`): `night_k`
-(из `hour`), `now_k` (из `era`: холоднее, бледнее) — их ставит `script.js`; `from` каждого куска ставит их сразу.
+The light: the lamp over the table (warm, `lamp`), the lamp in the mother's hand in 1988 (`hand_lamp`, the light
+`{"at": "maria#lamp"}`), the window's cold light, the warm glow of the home movie (`movie_light`, by `projector_on`).
+The looks of the light (`looks`): `night_k` (from `hour`), `now_k` (from `era`: colder, paler) — `script.js` sets them;
+each beat's `from` sets them at once.
 
-## Кадры (`lib.js` `CAM`; yaw — градусы от севера, h — глаз от 1.7)
+## The shots (`lib.js` `CAM`; yaw — degrees from north, h — the eye from 1.7)
 
-- `table` (0.85, 1.05; −24; глаз 1.4) — стол под лампой, фото над ним, окно слева: мать за столом ≈ 2.8 м, мальчик на
-  восточном стуле.
-- `photo` (−0.45, 2.05; −2; глаз 1.55, взгляд чуть вниз) — средний план через стол: сидящая мать ≈ 2 м, лицо под
-  лампой, фото над ней, мальчик слева у её правого плеча.
-- `call` (−1.75, 4.5; 145) — из-за стола мимо лампы: мать и Тото (17) стоят лицом друг к другу у стола, в её свете;
-  лицо Тото к нам вполоборота. `answer` (−1.6, 4.55; 148) — то же ближе: Тото читает у лампы, лицо в её свете.
-- `corner` (2.45, 0.72; −10; глаз 1.32) — в углу у перегородки: просвет занавески с матерью (≈ 2.6 м, −20°), кровать;
-  в `question` мать на шаг в углу, лампа между ними — свет на обоих лицах; точка `home_projector` ≈ +13°.
-- `movie` (2.3, 4.45; 186) — над изголовьем: его спина на кровати, полка с проектором, луч, квадрат на перегородке,
-  мать с лампой справа.
+- `table` (0.85, 1.05; −24; eye 1.4) — the table under the lamp, the photo over it, the window on the left: the mother
+  at the table ≈ 2.8 m, the boy on the eastern chair.
+- `photo` (−0.45, 2.05; −2; eye 1.55, looking a little down) — a medium shot across the table: the mother seated
+  ≈ 2 m, her face under the lamp, the photo over her, the boy on the left at her right shoulder.
+- `call` (−1.75, 4.5; 145) — from behind the table past the lamp: the mother and Totò (17) stand facing each other at
+  the table, in its light; Totò's face half turned to us. `answer` (−1.6, 4.55; 148) — the same, closer: Totò reads by
+  the lamp, his face in its light.
+- `corner` (2.45, 0.72; −10; eye 1.32) — in the corner by the partition: the curtain's gap with the mother (≈ 2.6 m,
+  −20°), the bed; in `question` the mother a step into the corner, the lamp between them — light on both faces; the
+  point `home_projector` ≈ +13°.
+- `movie` (2.3, 4.45; 186) — over the bed's head: his back on the bed, the shelf with the projector, the beam, the
+  square on the partition, the mother with the lamp on the right.
 
-## Куски
+## The beats
 
-| кусок | after | что | говорит | ≈ с |
+| beat | after | what | tells | ≈ s |
 | --- | --- | --- | --- | --- |
-| supper | — | 1949, ночь, лампа, `table`: мать наливает молоко (`pour`, кувшин в руках, молоко поднимается), мальчик сидит за столом; потом смотрят друг на друга, мальчик тянется к стакану (лицо: `smile`) | supper:milk (≈4) | 10 |
-| photo | — | ночь, лампа, `photo`: мать сидит, склонившись к столу (`seated_bowed` с конца, руки к столу); мальчик подходит, рука ей на правое плечо; она поднимает лицо к фото (`sad`), потом к нему | photo:hand (≈8) | 16 |
-| call | — | 1958, вечер, лампа, `call`: мать протягивает Тото (17) бумагу (`give`, часть `paper_sheet`), он берёт (`take`) и смотрит в неё (`thinking`) | call:paper (≈5) | 12 |
-| returned | call | на столе стопка конвертов «Адресат выбыл»; мать кладёт сверху ещё один (`pile` 1); Тото смотрит (`sad`) | returned:pile (≈6) | 12 |
-| answered | call | на столе её письма; Тото у лампы читает лист (`read`, часть `letter_sheet`), камера подходит к нему средним планом; лицо в свете лампы (`smile`) | answered:reading (≈5) | 12 |
-| room | — | 1988, ночь, лампа не горит, `corner`: старая мать в просвете занавески с лампой (`lamp_hand`), Сальваторе входит, встаёт посреди угла, смотрит на полку, на кровать, на неё. При `reel8` на полке проектор и жестянка «Е.». Поза под касание `home_projector` | room:door (≈6) | 14 |
-| home_movie | room | он идёт к полке, включает проектор (`reach` к `home_projector#switch`, `projector_on` 1); склейка в `movie`; садится на кровать (`sit_down` → `seated`), смотрит, спиной к нам; на квадрате девушка идёт через площадь — столько, сколько он удержал (`share`) | home_movie:light (≈8) | 16 |
-| question | room, home_movie | `corner`: он сидит на кровати вполоборота к нам, мать делает шаг в угол и держит лампу между ними — оба лица в её свете (мать `sad`, он `tired`); после `room` он сначала садится; квадрат гаснет (плёнка кончилась) | question:asked (≈1–4) | 11 |
+| supper | — | 1949, night, the lamp, `table`: the mother pours the milk (`pour`, the jug in her hands, the milk rising), the boy sits at the table; then they look at each other, the boy reaches for the glass (face: `smile`) | supper:milk (≈4) | 10 |
+| photo | — | night, the lamp, `photo`: the mother sits bowed over the table (`seated_bowed` from its end, the hands to the table); the boy comes up, his hand on her right shoulder; she raises her face to the photo (`sad`), then to him | photo:hand (≈8) | 16 |
+| call | — | 1958, evening, the lamp, `call`: the mother holds the paper out to Totò (17) (`give`, the part `paper_sheet`), he takes it (`take`) and looks at it (`thinking`) | call:paper (≈5) | 12 |
+| returned | call | on the table a pile of envelopes stamped «Addressee has moved»; the mother lays one more on top (`pile` 1); Totò looks (`sad`) | returned:pile (≈6) | 12 |
+| answered | call | her letters on the table; Totò by the lamp reads a sheet (`read`, the part `letter_sheet`), the camera comes up to him in a medium shot; his face in the lamp's light (`smile`) | answered:reading (≈5) | 12 |
+| room | — | 1988, night, the lamp not lit, `corner`: the old mother in the curtain's gap with a lamp (`lamp_hand`), Salvatore comes in, stands in the middle of the corner, looks at the shelf, at the bed, at her. With `reel8` the projector and the tin «E.» on the shelf. A pose for the touch on `home_projector` | room:door (≈6) | 14 |
+| home_movie | room | he goes to the shelf, switches the projector on (`reach` to `home_projector#switch`, `projector_on` 1); a cut to `movie`; he sits on the bed (`sit_down` → `seated`), watches, his back to us; on the square the girl walks across the square — as much of her as he held (`share`) | home_movie:light (≈8) | 16 |
+| question | room, home_movie | `corner`: he sits on the bed half turned to us, the mother takes a step into the corner and holds the lamp between them — both faces in its light (the mother `sad`, he `tired`); after `room` he sits down first; the square goes out (the film has run out) | question:asked (≈1–4) | 11 |
 
-Секунды — оценка по коду (шаги — темпом походки); сверено по показу на листе.
+The seconds — reckoned from the code (the steps at the gait's pace); checked against the showcase on the sheet.
 
-## Люди
+## The people
 
-`maria` (облик `maria`; в 1988 `maria_wear` = объект облика `maria_old`), `toto` (`toto_boy`; `toto_teen` в `call`,
-`returned`, `answered`; `salvatore` в 1988-м) — объекты из `scene.kit.cast.characters`. Движения каста: `pour`,
-`seated_bowed` (слабые дубли: подпёрты `reach` к кувшину и к столу), `seated`, `sit_down`, `give`, `take`, `read`,
-`stand`, `walk`.
+`maria` (the look `maria`; in 1988 `maria_wear` = the object of the look `maria_old`), `toto` (`toto_boy`; `toto_teen`
+in `call`, `returned`, `answered`; `salvatore` in 1988) — objects of `scene.kit.cast.characters`. The cast's motions:
+`pour`, `seated_bowed` (weak takes: propped up by `reach` to the jug and to the table), `seated`, `sit_down`, `give`,
+`take`, `read`, `stand`, `walk`.
 
-## Чего нет / что не так
+## What is not there / what is not so
 
-- Кувшин в руках — вещь сцены, которую `animate` подносит к рукам матери (у каста нет части «кувшин»); сам наклон
-  наливания — поворот слоя кувшина, у тела наклона нет (`pour` держит руки у стола).
-- Мать в `photo` начинает с конца `seated_bowed` (склонённой), руки — `reach` к столу.
-- В 1988-м стол пуст (кувшина и стакана нет); сквозь просвет занавески из угла видна тёмная комната.
-- Дверь на лестницу не открывается: в кусках никто не входит в неё в кадре (в `room` он входит из комнаты через
-  просвет занавески).
+- The jug in her hands is a thing of the scene that `animate` brings to the mother's hands (the cast has no part "jug");
+  the tilt of the pouring itself is a turn of the jug's layer, the body does not tilt (`pour` holds the hands at the
+  table).
+- The mother in `photo` begins from the end of `seated_bowed` (bowed), her hands — `reach` to the table.
+- In 1988 the table is bare (no jug, no glass); through the curtain's gap the dark room is seen from the corner.
+- The door to the stairs does not open: in the beats nobody comes in through it in the shot (in `room` he comes in from
+  the room through the curtain's gap).
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {

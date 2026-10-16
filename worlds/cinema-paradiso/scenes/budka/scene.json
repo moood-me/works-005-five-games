@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Будка",
-  "caption": "Будка «Парадизо»",
+  "title": "The Booth",
+  "caption": "The Paradiso's booth",
   "horizon": 0.5,
   "camera": {
     "mode": "roam",
@@ -185,7 +185,7 @@
     "pigeons": 0,
     "hanging": 0,
     "jumps": 0,
-    "slate_letters": "00000000",
+    "slate_letters": "0000000",
     "splice": 0,
     "cut1": 0,
     "cut2": 0,
@@ -200,7 +200,7 @@
     "slate": 0,
     "chalk_x": 0,
     "letters": 0,
-    "crooked": "00000000",
+    "crooked": "0000000",
     "wobble": 0,
     "thread": 0,
     "threaded": 0,
@@ -235,25 +235,25 @@
   "states": {
     "beat": {
       "type": "string",
-      "means": "кусок, который играет сцена (ставит игра)"
+      "means": "the beat the scene plays (the game sets it)"
     },
     "beat_next": {
       "type": "string",
-      "means": "кусок, снимок которого готовить заранее (ставит игра; модуль beats)"
+      "means": "the beat whose shot to make ready ahead (the game sets it; the module beats)"
     },
     "hour": {
       "range": [
         0,
         1
       ],
-      "means": "0.25 рассвет, 0.78 вечер, 0.9 ночь"
+      "means": "0.25 dawn, 0.78 evening, 0.9 night"
     },
     "era": {
       "values": [
         "past",
         "ruin"
       ],
-      "means": "past — будка живая (1949–1959); ruin — 1988: ржавчина, проекторы без бобин, стёкла выбиты, пух, лампы нет"
+      "means": "past — the booth alive (1949–1959); ruin — 1988: rust, projectors without reels, the panes knocked out, down, no lamp"
     },
     "night_k": {
       "range": [
@@ -261,7 +261,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет ночи (сцена — из hour)"
+      "means": "internal: the night's light (the scene — from hour)"
     },
     "eve_k": {
       "range": [
@@ -269,7 +269,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет вечера"
+      "means": "internal: the evening's light"
     },
     "dawn_k": {
       "range": [
@@ -277,7 +277,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет рассвета"
+      "means": "internal: the dawn's light"
     },
     "ruin_k": {
       "range": [
@@ -285,7 +285,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет руин 1988-го (сцена — из era)"
+      "means": "internal: the light of the 1988 ruin (the scene — from era)"
     },
     "lamp": {
       "range": [
@@ -293,7 +293,7 @@
         1
       ],
       "smooth": true,
-      "means": "лампа над скамьёй"
+      "means": "the lamp over the bench"
     },
     "door": {
       "range": [
@@ -301,12 +301,12 @@
         1
       ],
       "smooth": true,
-      "means": "дверь: 0 закрыта … 1 открыта внутрь и лежит на стене напротив окошек (закрывает календарь)"
+      "means": "the door: 0 shut … 1 open inward, lying on the wall opposite the ports (it hides the calendar)"
     },
     "door_f": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: поворот створки, градусы (сцена — из door)"
+      "means": "internal: the turn of the leaf, degrees (the scene — from door)"
     },
     "stair": {
       "range": [
@@ -314,7 +314,7 @@
         1
       ],
       "smooth": true,
-      "means": "лампочка на лестнице за дверью"
+      "means": "the bulb on the stair beyond the door"
     },
     "beam_on": {
       "range": [
@@ -322,14 +322,14 @@
         1
       ],
       "smooth": true,
-      "means": "луч в зал из окошка active"
+      "means": "the beam into the hall from the port active"
     },
     "active": {
       "values": [
         1,
         2
       ],
-      "means": "какой проектор светит в зал"
+      "means": "which projector throws its beam into the hall"
     },
     "motor1": {
       "range": [
@@ -337,7 +337,7 @@
         1
       ],
       "smooth": true,
-      "means": "бобины первого проектора крутятся"
+      "means": "the first projector's reels turn"
     },
     "motor2": {
       "range": [
@@ -345,7 +345,7 @@
         1
       ],
       "smooth": true,
-      "means": "бобины второго проектора крутятся"
+      "means": "the second projector's reels turn"
     },
     "p1_on": {
       "range": [
@@ -353,7 +353,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: фонарь первого светит (сцена — из beam_on, active)"
+      "means": "internal: the first one's lamp house is lit (the scene — from beam_on, active)"
     },
     "p2_on": {
       "range": [
@@ -361,28 +361,28 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: фонарь второго светит"
+      "means": "internal: the second one's lamp house is lit"
     },
     "crank": {
       "range": [
         0,
         1
       ],
-      "means": "Альфредо крутит ручку мотора первого (кусок motor)"
+      "means": "Alfredo turns the first one's motor crank (the beat motor)"
     },
     "jitter": {
       "values": [
         0,
         1
       ],
-      "means": "служебный: кадр в луче дрожит (кусок motor при stutter)"
+      "means": "internal: the frame in the beam trembles (the beat motor with stutter)"
     },
     "stutter": {
       "values": [
         0,
         1
       ],
-      "means": "в motor кадр дрожит, пока Альфредо не стукнет по кожуху (петля в «Заправке» не удержана; ставит игра)"
+      "means": "in motor the frame trembles till Alfredo knocks on the casing (the loop not held in «Threading»; the game sets it)"
     },
     "turned": {
       "range": [
@@ -390,12 +390,12 @@
         1
       ],
       "smooth": true,
-      "means": "первый проектор повёрнут к окошку на площадь"
+      "means": "the first projector is turned to the port on the square"
     },
     "p1_f": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: поворот первого проектора, градусы (сцена — из turned)"
+      "means": "internal: the first projector's turn, degrees (the scene — from turned)"
     },
     "fire": {
       "range": [
@@ -403,7 +403,7 @@
         1
       ],
       "smooth": true,
-      "means": "огонь в кадровом окне первого проектора"
+      "means": "fire in the first projector's gate"
     },
     "smoke": {
       "range": [
@@ -411,7 +411,7 @@
         1
       ],
       "smooth": true,
-      "means": "дым в будке"
+      "means": "smoke in the booth"
     },
     "clock": {
       "range": [
@@ -419,7 +419,7 @@
         10
       ],
       "smooth": true,
-      "means": "часы над смотровым окошком: 6…10 вечера"
+      "means": "the clock over the look port: 6…10 in the evening"
     },
     "month": {
       "values": [
@@ -428,7 +428,7 @@
         9,
         12
       ],
-      "means": "лист календаря на виду; none — календаря нет (главы I–III); ставят только куски"
+      "means": "the calendar's leaf in view; none — no calendar (chapters I–III); set by the beats only"
     },
     "written": {
       "range": [
@@ -436,7 +436,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: Елена пишет на августе (кусок note)"
+      "means": "internal: Elena writes on August (the beat note)"
     },
     "tin_open": {
       "range": [
@@ -444,97 +444,97 @@
         1
       ],
       "smooth": true,
-      "means": "жестянка на скамье открыта"
+      "means": "the tin on the bench is open"
     },
     "tin_at": {
       "values": [
         "bench",
         "pocket"
       ],
-      "means": "жестянка на скамье или в кармане Альфредо"
+      "means": "the tin on the bench or in Alfredo's pocket"
     },
     "clips": {
       "values": [
         0,
         1
       ],
-      "means": "обрезки поцелуев лежат на скамье"
+      "means": "the clippings of the kisses lie on the bench"
     },
     "tail": {
       "values": [
         0,
         1
       ],
-      "means": "хвост плёнки хлопает: катушка кончилась, экран зала белый"
+      "means": "the film's tail flaps: the reel has run out, the hall's screen white"
     },
     "cue": {
       "values": [
         0,
         1
       ],
-      "means": "точка смены в углу кадра; с ней мигает всё смотровое окошко"
+      "means": "the changeover dot in the frame's corner; the whole look port blinks with it"
     },
     "white": {
       "values": [
         0,
         1
       ],
-      "means": "экран белый (смену не успели)"
+      "means": "the screen is white (the changeover was missed)"
     },
     "rain_window": {
       "values": [
         0,
         1
       ],
-      "means": "дождь за окошком на площадь"
+      "means": "rain beyond the port on the square"
     },
     "drag": {
       "range": [
         0,
         1
       ],
-      "means": "«Вытащить»: куда мальчик тащит Альфредо (0 — floor#path0, 1 — floor#path1; двигает игра)"
+      "means": "«Pull Him Out»: where the boy drags Alfredo (0 — floor#path0, 1 — floor#path1; the game moves it)"
     },
     "drag_at": {
       "range": [
         0,
         1
       ],
-      "means": "где Альфредо на пути сейчас (ставит сцена, разом, десять раз в секунду)"
+      "means": "where Alfredo is on the way now (the scene sets it, at once, ten times a second)"
     },
     "cough": {
       "values": [
         0,
         1
       ],
-      "means": "импульс: мальчик кашляет"
+      "means": "pulse: the boy coughs"
     },
     "box_a": {
       "type": "number",
-      "means": "служебный: где коробка с плёнкой (поперёк)"
+      "means": "internal: where the box of film is (across)"
     },
     "box_d": {
       "type": "number",
-      "means": "служебный: где коробка с плёнкой (вглубь)"
+      "means": "internal: where the box of film is (in depth)"
     },
     "crate_a": {
       "type": "number",
-      "means": "служебный: где ящик мальчика (поперёк); в пожаре он отброшен к окну"
+      "means": "internal: where the boy's crate is (across); in the fire it is thrown to the window"
     },
     "crate_d": {
       "type": "number",
-      "means": "служебный: где ящик (вглубь; его передняя стенка)"
+      "means": "internal: where the crate is (in depth; its front side)"
     },
     "pigeons": {
       "type": "number",
-      "means": "импульс: голуби вспархивают (пух)"
+      "means": "pulse: the pigeons fly up (down)"
     },
     "hanging": {
       "values": [
         0,
         1
       ],
-      "means": "лента свисает из рук Сальваторе (strip_end)"
+      "means": "the strip hangs from Salvatore's hands (strip_end)"
     },
     "alfredo_here": {
       "values": [
@@ -543,18 +543,18 @@
         true,
         false
       ],
-      "means": "ключ партии: слепой Альфредо сидит на табурете в reels, six, changeover; в alfredo_comes — поворачивается, а не входит. Это и ключ движка «Альфредо в сцене»: куски, где он есть всегда, ставят его сами"
+      "means": "party key: blind Alfredo sits on the stool in reels, six, changeover; in alfredo_comes he turns rather than comes in. It is also the engine's key «Alfredo is in the scene»: the beats where he is always there set it themselves"
     },
     "jumps": {
       "range": [
         0,
         3
       ],
-      "means": "ключ партии: сколько из kiss_cut1…3 склеено криво — во вставке strip прыгают на склейке"
+      "means": "party key: how many of kiss_cut1…3 are spliced crooked — in the insert strip they jump at the splice"
     },
     "slate_letters": {
       "type": "string",
-      "means": "ключ партии: кривые буквы доски на гвозде в 1988 (строка из 8 знаков 0/1)"
+      "means": "party key: the crooked letters of the slate on the nail in 1988 (a string of 7 characters 0/1)"
     },
     "splice": {
       "range": [
@@ -562,7 +562,7 @@
         1
       ],
       "smooth": true,
-      "means": "вставка «Склейка»"
+      "means": "the insert «Splicing»"
     },
     "cut1": {
       "range": [
@@ -570,7 +570,7 @@
         1
       ],
       "smooth": true,
-      "means": "разрез первого кадра"
+      "means": "the cut of the first frame"
     },
     "cut2": {
       "range": [
@@ -578,7 +578,7 @@
         1
       ],
       "smooth": true,
-      "means": "разрез второго"
+      "means": "the cut of the second"
     },
     "cut3": {
       "range": [
@@ -586,28 +586,28 @@
         1
       ],
       "smooth": true,
-      "means": "разрез третьего"
+      "means": "the cut of the third"
     },
     "bent1": {
       "values": [
         0,
         1
       ],
-      "means": "первый разрез косой"
+      "means": "the first cut is slanted"
     },
     "bent2": {
       "values": [
         0,
         1
       ],
-      "means": "второй косой"
+      "means": "the second slanted"
     },
     "bent3": {
       "values": [
         0,
         1
       ],
-      "means": "третий косой"
+      "means": "the third slanted"
     },
     "glue1": {
       "range": [
@@ -615,7 +615,7 @@
         1
       ],
       "smooth": true,
-      "means": "пресс прижат к первой склейке"
+      "means": "the press pressed on the first splice"
     },
     "glue2": {
       "range": [
@@ -623,7 +623,7 @@
         1
       ],
       "smooth": true,
-      "means": "ко второй"
+      "means": "on the second"
     },
     "glue3": {
       "range": [
@@ -631,7 +631,7 @@
         1
       ],
       "smooth": true,
-      "means": "к третьей"
+      "means": "on the third"
     },
     "boy_reach": {
       "range": [
@@ -639,7 +639,7 @@
         1
       ],
       "smooth": true,
-      "means": "рука мальчика ближе к обрезкам"
+      "means": "the boy's hand nearer the clippings"
     },
     "slate": {
       "range": [
@@ -647,7 +647,7 @@
         1
       ],
       "smooth": true,
-      "means": "вставка «Буквы»"
+      "means": "the insert «Letters»"
     },
     "chalk_x": {
       "range": [
@@ -655,18 +655,18 @@
         1
       ],
       "smooth": true,
-      "means": "мел по строке"
+      "means": "the chalk along the line"
     },
     "letters": {
       "range": [
         0,
-        8
+        7
       ],
-      "means": "сколько букв написано"
+      "means": "how many letters are written"
     },
     "crooked": {
       "type": "string",
-      "means": "кривые буквы: строка из 8 знаков 0/1"
+      "means": "the crooked letters: a string of 7 characters 0/1"
     },
     "wobble": {
       "range": [
@@ -674,7 +674,7 @@
         1
       ],
       "smooth": true,
-      "means": "рука дёрнулась"
+      "means": "the hand twitched"
     },
     "thread": {
       "range": [
@@ -682,14 +682,14 @@
         1
       ],
       "smooth": true,
-      "means": "вставка «Заправка»"
+      "means": "the insert «Threading»"
     },
     "threaded": {
       "range": [
         0,
         5
       ],
-      "means": "сколько отрезков заправлено"
+      "means": "how many stretches are threaded"
     },
     "pull": {
       "range": [
@@ -697,14 +697,14 @@
         1
       ],
       "smooth": true,
-      "means": "конец плёнки по текущему отрезку"
+      "means": "the film's end along the stretch now"
     },
     "loop": {
       "values": [
         0,
         1
       ],
-      "means": "петля перед кадровым окном"
+      "means": "the loop before the gate"
     },
     "calendar": {
       "range": [
@@ -712,14 +712,14 @@
         1
       ],
       "smooth": true,
-      "means": "вставка «Календарь» (крупно)"
+      "means": "the insert «Calendar» (close)"
     },
     "pages": {
       "range": [
         0,
         4
       ],
-      "means": "опущено листов поверх декабря: ноябрь, октябрь, сентябрь, август"
+      "means": "sheets let down over December: November, October, September, August"
     },
     "fold": {
       "range": [
@@ -727,7 +727,7 @@
         1
       ],
       "smooth": true,
-      "means": "лист, который тянут вниз"
+      "means": "the sheet being pulled down"
     },
     "dust": {
       "range": [
@@ -735,7 +735,7 @@
         1
       ],
       "smooth": true,
-      "means": "пыль на календаре"
+      "means": "the dust on the calendar"
     },
     "strip": {
       "range": [
@@ -743,7 +743,7 @@
         1
       ],
       "smooth": true,
-      "means": "вставка «Лента»"
+      "means": "the insert «The Strip»"
     },
     "strip_x": {
       "range": [
@@ -751,43 +751,43 @@
         1
       ],
       "smooth": true,
-      "means": "лента справа налево"
+      "means": "the strip from right to left"
     },
     "alfredo_a": {
       "type": "number",
       "smooth": true,
-      "means": "где alfredo поперёк, м"
+      "means": "where alfredo is, across, m"
     },
     "alfredo_d": {
       "type": "number",
       "smooth": true,
-      "means": "где alfredo вглубь, м"
+      "means": "where alfredo is, in depth, m"
     },
     "toto_a": {
       "type": "number",
       "smooth": true,
-      "means": "где toto поперёк, м"
+      "means": "where toto is, across, m"
     },
     "toto_d": {
       "type": "number",
       "smooth": true,
-      "means": "где toto вглубь, м"
+      "means": "where toto is, in depth, m"
     },
     "elena_a": {
       "type": "number",
       "smooth": true,
-      "means": "где elena поперёк, м"
+      "means": "where elena is, across, m"
     },
     "elena_d": {
       "type": "number",
       "smooth": true,
-      "means": "где elena вглубь, м"
+      "means": "where elena is, in depth, m"
     }
   },
   "objects": [
     {
       "id": "hall_dark",
-      "name": "Зал внизу",
+      "name": "The hall below",
       "across": 0,
       "distance": 23.6,
       "elevation": -3,
@@ -802,7 +802,7 @@
     },
     {
       "id": "hall_screen",
-      "name": "Экран зала",
+      "name": "The hall's screen",
       "across": 0,
       "distance": 23.3,
       "elevation": -1.25,
@@ -818,7 +818,7 @@
     },
     {
       "id": "floor",
-      "name": "Пол будки",
+      "name": "Booth floor",
       "plane": true,
       "across": 0,
       "distance": 1.75,
@@ -830,7 +830,7 @@
     },
     {
       "id": "ceiling",
-      "name": "Потолок",
+      "name": "Ceiling",
       "across": 0,
       "distance": 3.5,
       "elevation": 2.6,
@@ -847,7 +847,7 @@
     },
     {
       "id": "wall_n",
-      "name": "Стена с окошками в зал",
+      "name": "Wall with the ports to the hall",
       "across": 0,
       "distance": 3.5,
       "facing": 180,
@@ -862,7 +862,7 @@
     },
     {
       "id": "look_port",
-      "name": "Смотровое окошко",
+      "name": "Look port",
       "across": 0,
       "distance": 3.485,
       "elevation": 1.4,
@@ -878,7 +878,7 @@
     },
     {
       "id": "clock",
-      "name": "Часы",
+      "name": "Clock",
       "across": 0,
       "distance": 3.47,
       "elevation": 1.94,
@@ -894,7 +894,7 @@
     },
     {
       "id": "wall_s",
-      "name": "Стена напротив окошек",
+      "name": "Wall opposite the ports",
       "across": 0,
       "distance": 0,
       "facing": 0,
@@ -909,7 +909,7 @@
     },
     {
       "id": "rack",
-      "name": "Стеллаж с плёнкой",
+      "name": "Film rack",
       "across": 0.25,
       "distance": 0.16,
       "facing": 0,
@@ -925,7 +925,7 @@
     },
     {
       "id": "bucket",
-      "name": "Пожарное ведро",
+      "name": "Fire bucket",
       "across": -0.4,
       "distance": 0.2,
       "facing": 0,
@@ -940,7 +940,7 @@
     },
     {
       "id": "sconce",
-      "name": "Лампочка у стеллажа",
+      "name": "Bulb by the rack",
       "across": 0.95,
       "distance": 0.04,
       "elevation": 1.86,
@@ -956,7 +956,7 @@
     },
     {
       "id": "rack_n",
-      "name": "Полка у окошек",
+      "name": "Shelf by the ports",
       "across": 1.55,
       "distance": 3.47,
       "facing": 180,
@@ -971,7 +971,7 @@
     },
     {
       "id": "wall_w",
-      "name": "Стена с окошком на площадь",
+      "name": "Wall with the port on the square",
       "across": -2,
       "distance": 0,
       "facing": 90,
@@ -986,7 +986,7 @@
     },
     {
       "id": "square_window",
-      "name": "Окошко на площадь",
+      "name": "Port on the square",
       "across": -2.04,
       "distance": 0,
       "facing": 90,
@@ -1001,7 +1001,7 @@
     },
     {
       "id": "pane_rain",
-      "name": "Капли на стекле",
+      "name": "Drops on the glass",
       "on": "square_window",
       "across": 1.5,
       "elevation": 1.35,
@@ -1020,7 +1020,7 @@
     },
     {
       "id": "wall_e",
-      "name": "Стена с дверью",
+      "name": "Wall with the door",
       "across": 2,
       "distance": 3.5,
       "facing": 270,
@@ -1035,7 +1035,7 @@
     },
     {
       "id": "landing_floor",
-      "name": "Площадка лестницы",
+      "name": "Stair landing",
       "plane": true,
       "across": 2.7,
       "distance": 0.55,
@@ -1046,7 +1046,7 @@
     },
     {
       "id": "landing",
-      "name": "Лестница",
+      "name": "Stair",
       "across": 3.3,
       "distance": 0.55,
       "facing": 270,
@@ -1060,7 +1060,7 @@
     },
     {
       "id": "landing_window",
-      "name": "Окно на лестнице",
+      "name": "Stair window",
       "across": 3.28,
       "distance": 0.55,
       "facing": 270,
@@ -1075,7 +1075,7 @@
     },
     {
       "id": "booth_door",
-      "name": "Дверь будки",
+      "name": "Booth door",
       "across": 2,
       "distance": 0.1,
       "facing": 270,
@@ -1093,7 +1093,7 @@
     },
     {
       "id": "wall_calendar",
-      "name": "Календарь",
+      "name": "Calendar",
       "across": 1.6,
       "distance": 0.015,
       "elevation": 1.13,
@@ -1109,7 +1109,7 @@
     },
     {
       "id": "bench",
-      "name": "Скамья",
+      "name": "Bench",
       "across": 1.5,
       "distance": 1.9,
       "facing": 270,
@@ -1124,7 +1124,7 @@
     },
     {
       "id": "bench_top",
-      "name": "Верх скамьи",
+      "name": "Bench top",
       "plane": true,
       "across": 1.75,
       "distance": 1.9,
@@ -1136,7 +1136,7 @@
     },
     {
       "id": "press",
-      "name": "Пресс и перемотка",
+      "name": "Press and rewinder",
       "across": 1.78,
       "distance": 2.2,
       "elevation": 0.85,
@@ -1152,7 +1152,7 @@
     },
     {
       "id": "clips",
-      "name": "Обрезки",
+      "name": "Clippings",
       "across": 1.62,
       "distance": 1.75,
       "elevation": 0.86,
@@ -1168,7 +1168,7 @@
     },
     {
       "id": "tin",
-      "name": "Жестянка",
+      "name": "Tin",
       "across": 1.65,
       "distance": 2,
       "elevation": 0.85,
@@ -1183,7 +1183,7 @@
     },
     {
       "id": "lamp",
-      "name": "Лампа над скамьёй",
+      "name": "Lamp over the bench",
       "across": 1.72,
       "distance": 1.9,
       "elevation": 1.62,
@@ -1198,7 +1198,7 @@
     },
     {
       "id": "stool",
-      "name": "Табурет",
+      "name": "Stool",
       "across": 0.9,
       "distance": 1.4,
       "height": 0.5,
@@ -1212,7 +1212,7 @@
     },
     {
       "id": "crate",
-      "name": "Ящик",
+      "name": "Crate",
       "across": -0.75,
       "distance": 2.03,
       "place": {
@@ -1232,7 +1232,7 @@
     },
     {
       "id": "crate_top",
-      "name": "Верх ящика",
+      "name": "Crate top",
       "plane": true,
       "on": "crate",
       "across": 0,
@@ -1245,7 +1245,7 @@
     },
     {
       "id": "box",
-      "name": "Коробка с плёнкой",
+      "name": "Box of film",
       "across": 1.7,
       "distance": 2.95,
       "place": {
@@ -1265,7 +1265,7 @@
     },
     {
       "id": "box_top",
-      "name": "Крышка коробки",
+      "name": "Box lid",
       "plane": true,
       "on": "box",
       "across": 0,
@@ -1277,7 +1277,7 @@
     },
     {
       "id": "p1",
-      "name": "Проектор 1 (основание)",
+      "name": "Projector 1 (base)",
       "unseen": true,
       "across": -0.75,
       "distance": 3,
@@ -1288,7 +1288,7 @@
     },
     {
       "id": "projector",
-      "name": "Проектор",
+      "name": "Projector",
       "on": "p1",
       "across": 0,
       "distance": 0,
@@ -1306,7 +1306,7 @@
     },
     {
       "id": "p1_ped",
-      "name": "Станина проектора 1",
+      "name": "Projector 1 stand",
       "on": "p1",
       "across": 0,
       "distance": 0,
@@ -1324,7 +1324,7 @@
     },
     {
       "id": "p1_side",
-      "name": "Бобины проектора 1",
+      "name": "Projector 1 reels",
       "on": "p1",
       "across": 0,
       "distance": 0,
@@ -1340,7 +1340,7 @@
     },
     {
       "id": "p1_vents",
-      "name": "Фонарь проектора 1",
+      "name": "Projector 1 lamp house",
       "on": "p1",
       "across": 0,
       "distance": -0.41,
@@ -1357,7 +1357,7 @@
     },
     {
       "id": "p1_crank",
-      "name": "Ручка мотора 1",
+      "name": "Motor 1 crank",
       "on": "p1",
       "across": 0.265,
       "distance": 0,
@@ -1374,7 +1374,7 @@
     },
     {
       "id": "p1_knob",
-      "name": "Рукоять мотора 1",
+      "name": "Motor 1 handle",
       "on": "p1",
       "across": 0.33,
       "distance": 0,
@@ -1391,7 +1391,7 @@
     },
     {
       "id": "beam",
-      "name": "Луч",
+      "name": "Beam",
       "on": "p1",
       "across": 0,
       "distance": 0.5,
@@ -1411,7 +1411,7 @@
     },
     {
       "id": "p2",
-      "name": "Проектор 2 (основание)",
+      "name": "Projector 2 (base)",
       "unseen": true,
       "across": 0.75,
       "distance": 3,
@@ -1419,7 +1419,7 @@
     },
     {
       "id": "projector2",
-      "name": "Второй проектор",
+      "name": "Second projector",
       "on": "p2",
       "across": 0,
       "distance": 0,
@@ -1437,7 +1437,7 @@
     },
     {
       "id": "p2_ped",
-      "name": "Станина проектора 2",
+      "name": "Projector 2 stand",
       "on": "p2",
       "across": 0,
       "distance": 0,
@@ -1455,7 +1455,7 @@
     },
     {
       "id": "p2_side",
-      "name": "Бобины проектора 2",
+      "name": "Projector 2 reels",
       "on": "p2",
       "across": 0,
       "distance": 0,
@@ -1471,7 +1471,7 @@
     },
     {
       "id": "p2_vents",
-      "name": "Фонарь проектора 2",
+      "name": "Projector 2 lamp house",
       "on": "p2",
       "across": 0,
       "distance": -0.41,
@@ -1488,7 +1488,7 @@
     },
     {
       "id": "p2_crank",
-      "name": "Ручка мотора 2",
+      "name": "Motor 2 crank",
       "on": "p2",
       "across": -0.265,
       "distance": 0,
@@ -1505,7 +1505,7 @@
     },
     {
       "id": "p2_knob",
-      "name": "Рукоять мотора 2",
+      "name": "Motor 2 handle",
       "on": "p2",
       "across": -0.33,
       "distance": 0,
@@ -1522,7 +1522,7 @@
     },
     {
       "id": "fire",
-      "name": "Огонь в кадровом окне",
+      "name": "Fire in the gate",
       "particles": {
         "kind": "fire",
         "at": "projector#gate",
@@ -1545,7 +1545,7 @@
     },
     {
       "id": "fire_lens",
-      "name": "Огонь у объектива",
+      "name": "Fire at the lens",
       "particles": {
         "kind": "fire",
         "at": "projector#lens",
@@ -1568,7 +1568,7 @@
     },
     {
       "id": "fire_reel",
-      "name": "Огонь по бобине",
+      "name": "Fire along the reel",
       "particles": {
         "kind": "fire",
         "at": "p1_side#reel",
@@ -1596,7 +1596,7 @@
     },
     {
       "id": "embers",
-      "name": "Искры",
+      "name": "Sparks",
       "particles": {
         "kind": "embers",
         "at": "projector#gate",
@@ -1607,7 +1607,7 @@
     },
     {
       "id": "smoke_gate",
-      "name": "Дым от плёнки",
+      "name": "Smoke from the film",
       "particles": {
         "kind": "smoke",
         "at": "projector#gate",
@@ -1629,7 +1629,7 @@
     },
     {
       "id": "motes",
-      "name": "Дым и пылинки",
+      "name": "Smoke and motes",
       "particles": {
         "kind": "dust",
         "at": [
@@ -1652,7 +1652,7 @@
     },
     {
       "id": "feathers",
-      "name": "Голубиный пух",
+      "name": "Pigeons' down",
       "particles": {
         "kind": "petals",
         "at": [
@@ -1688,7 +1688,7 @@
     },
     {
       "id": "slate_nail",
-      "name": "Доска с буквами",
+      "name": "Slate with the letters",
       "across": 1.97,
       "distance": 1.2,
       "elevation": 1.24,
@@ -1704,7 +1704,7 @@
     },
     {
       "id": "hanging_strip",
-      "name": "Лента в руках",
+      "name": "Strip in the hands",
       "across": -1.62,
       "distance": 1.02,
       "facing": 250,
@@ -1719,32 +1719,32 @@
     },
     {
       "id": "splice",
-      "name": "Склейка",
+      "name": "Splicing",
       "insert": "splice"
     },
     {
       "id": "slate",
-      "name": "Буквы",
+      "name": "Letters",
       "insert": "slate"
     },
     {
       "id": "thread",
-      "name": "Заправка",
+      "name": "Threading",
       "insert": "thread"
     },
     {
       "id": "calendar",
-      "name": "Календарь крупно",
+      "name": "Calendar close-up",
       "insert": "calendar"
     },
     {
       "id": "strip",
-      "name": "Лента против окна",
+      "name": "Strip against the window",
       "insert": "strip"
     },
     {
       "id": "alfredo",
-      "name": "Альфредо",
+      "name": "Alfredo",
       "person": {
         "cast": "cast",
         "who": "alfredo"
@@ -1760,7 +1760,7 @@
     },
     {
       "id": "toto",
-      "name": "Тото",
+      "name": "Totò",
       "person": {
         "cast": "cast",
         "who": "toto_boy"
@@ -1776,7 +1776,7 @@
     },
     {
       "id": "elena",
-      "name": "Елена",
+      "name": "Elena",
       "person": {
         "cast": "cast",
         "who": "elena"

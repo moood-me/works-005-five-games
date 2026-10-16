@@ -1,4 +1,4 @@
-// Дом Ди Вита — the room's numbers, its shots and its film in beats (beats module: FILM). Metres: x across (right +),
+// The Di Vita home — the room's numbers, its shots and its film in beats (beats module: FILM). Metres: x across (right +),
 // z ahead from the south wall where the start stands, looking north. Shared by the paintings and the script.
 const G = {
   ROOM: { x0: -2.8, x1: 2.8, z0: 0, z1: 4.8, h: 2.8 },
@@ -204,7 +204,7 @@ const FILM = {
     },
   },
   // 1988, night: the corner as it was; the old mother in the gap of the curtain with a lamp; Salvatore comes in and
-  // stands in the middle of it (the home projector and the tin «Е.» on the shelf, if he kept the reel)
+  // stands in the middle of it (the home projector and the tin «E.» on the shelf, if he kept the reel)
   room: {
     from: () => ({ ...base(0.92, 'now'), ...people({
       maria: { at: P.GAP, turn: 135, look: 'toto', with: ['lamp_hand'], reach: { r: LAMP_UP }, wear: CHARS().maria_old, mood: 'sad' },

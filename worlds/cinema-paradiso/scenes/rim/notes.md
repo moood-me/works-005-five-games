@@ -1,6 +1,6 @@
-# Просмотровый зал
+# The screening room
 
-The small screening room in Rome (scenes.md «Просмотровый зал»), the epilogue. Engine 3, camera `roam`. Mood: a dark
+The small screening room in Rome (scenes.md "The screening room"), the epilogue. Engine 3, camera `roam`. Mood: a dark
 plush room, one man alone in the middle of the rows; the reel of kisses; white light on his face. Modules: `cast`,
 `kino` (the screen's frames, the beam, the projector), `beats`.
 
@@ -45,7 +45,7 @@ animate).
 - The sconces dim to 0.3 by `lights`; the room never goes black (ambient 0.5): he must read. The beam's glow is held at
   0.4 (`beam.animate.js`): the camera passes under it.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {

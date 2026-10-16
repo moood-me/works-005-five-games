@@ -1,4 +1,4 @@
-// Вокзал — the scene's mechanics: its film in beats (the world's `beats`: the game sets `beat`; lib.film), the train's
+// The station — the scene's mechanics: its film in beats (the world's `beats`: the game sets `beat`; lib.film), the train's
 // place from `train`, the light's keys from `era`. `alfredo_stays` (the game's, set before `boarding`): 0 — Alfredo
 // turns and goes off along the platform, tapping his cane; 1 — he stays at the platform's edge.
 const L = scene.lib, G = L.G;

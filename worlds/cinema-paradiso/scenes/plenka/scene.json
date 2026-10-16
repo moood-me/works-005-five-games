@@ -1,6 +1,6 @@
 {
   "engine": 3,
-  "title": "Плёнка",
+  "title": "The Strip",
   "caption": "",
   "camera": { "mode": "picture" },
   "horizon": 0.5,
@@ -13,15 +13,15 @@
     "lamp": 1
   },
   "states": {
-    "chapter_number": { "type": "string", "means": "номер главы («I»…); пусто — пролог, эпилог, вся партия, самое начало" },
-    "chapter_title": { "type": "string", "means": "название главы — в большом кадре ленты (без карты) или в заголовке над картой; пусто вместе с номером и без карты — самое начало: только лампа" },
-    "map": { "means": "null — только титул в одном большом кадре; иначе строки выборов [{title, weight '⚑'|'~', options: [{label, state: 'chosen'|'open'|'unseen'}]}]: строка — кадр, разрезанный на части по вариантам; выбранный светится тёплым, подпись тёмным по свету; упущенный тёмный, подпись едва видна; недостигнутый чёрный без слова; ⚑ — большие кадры, ~ — маленькие; до пяти строк — одна лента (если подписи не встают — две), больше — вся партия: три ленты (4 + 3 + 3)" },
-    "reveal": { "range": [0, 1], "smooth": true, "means": "0 — лента ещё не въехала; первая треть — она въезжает справа в свет лампы, дальше кадры проявляются по очереди; 1 — всё видно" },
-    "lamp": { "range": [0, 1], "smooth": true, "means": "яркость лампы проектора справа внизу (элемент lamp; её игра предлагает нажать)" }
+    "chapter_number": { "type": "string", "means": "the chapter's number («I»…); empty — the prologue, the epilogue, the whole play, the very beginning" },
+    "chapter_title": { "type": "string", "means": "the chapter's name — in the strip's big frame (no map) or in the heading over the map; empty together with the number and no map — the very beginning: the lamp alone" },
+    "map": { "means": "null — only the title in one big frame; else the rows of choices [{title, weight '⚑'|'~', options: [{label, state: 'chosen'|'open'|'unseen'}]}]: a row is a frame cut into parts by its options; the chosen one glows warm, its label dark on the light; the one missed dark, its label barely seen; the one never reached black, no word; ⚑ — big frames, ~ — small ones; up to five rows — one strip (if the labels do not fit — two), more — the whole play: three strips (4 + 3 + 3)" },
+    "reveal": { "range": [0, 1], "smooth": true, "means": "0 — the strip has not come in yet; the first third — it comes in from the right into the lamp's light, then the frames develop one by one; 1 — all seen" },
+    "lamp": { "range": [0, 1], "smooth": true, "means": "the brightness of the projector's lamp at the bottom right (the element lamp; the game offers to press it)" }
   },
   "objects": [
-    { "id": "dark", "sky": true, "name": "Темнота" },
-    { "id": "film", "sky": true, "name": "Плёнка", "uniforms": { "slide": 0, "span": 2.6, "develop": 1, "lamp": 1 } },
-    { "id": "lamp", "sky": true, "name": "Лампа проектора" }
+    { "id": "dark", "sky": true, "name": "Dark" },
+    { "id": "film", "sky": true, "name": "The Strip", "uniforms": { "slide": 0, "span": 2.6, "develop": 1, "lamp": 1 } },
+    { "id": "lamp", "sky": true, "name": "Projector lamp" }
   ]
 }

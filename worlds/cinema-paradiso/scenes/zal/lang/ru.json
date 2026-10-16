@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"The Hall","translation":"Зал","where":"scenes/zal/scene.json title"},
+  {"text":"Father Adelfio saw every film first. Alone","translation":"Отец Адельфио смотрел каждый фильм первым. Один","where":"scenes/zal/scene.json caption"},
+  {"text":"peeking","translation":"подглядывать","where":"scenes/zal/showcase.js"}
+]}

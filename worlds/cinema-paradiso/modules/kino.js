@@ -80,7 +80,7 @@ const SCENES = {
     else { man(g, x + w * 0.27, y + h * 0.3, h); woman(g, wx + ww * 0.42, y + h * 0.37, h * 0.95); }
   },
   comedy(g, x, y, w, h) {
-    // «Пожарные из Виджу»: the fat one at the foot of a ladder, the thin one high on it, arms flung out
+    // «I pompieri di Viggiù»: the fat one at the foot of a ladder, the thin one high on it, arms flung out
     bg(g, x, y, w, h, '#8e8c86', '#d2cfc6');
     g.fillStyle = '#a9a69e'; g.fillRect(x + w * 0.55, y, w * 0.45, h);
     g.fillStyle = '#5d5b57'; for (const [u, v] of [[0.62, 0.15], [0.82, 0.15], [0.62, 0.48], [0.82, 0.48]]) g.fillRect(x + w * u, y + h * v, w * 0.1, h * 0.2);
