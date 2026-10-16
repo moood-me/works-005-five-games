@@ -17,7 +17,7 @@
 // and gauges come out of the steps themselves; its minigames skipped, as played). A step skipped leaves nothing chosen.
 import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
-import { beds, wake, unheard } from './sound.js';
+import { beds, wake, unheard, pause } from './sound.js';
 import { jump as unseen } from './jump.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
@@ -55,7 +55,7 @@ export default async function (b) {
   b.minigame.style({ key: 'E_MAJOR_D_FLAT_MINOR', font: '"Paradizo Title", Georgia, serif', colors: { mark: '#efe8da', ghost: '#efe8da' } });
   const hub = listen(b);
   const view = ui(b.layer);
-  view.pausing(b);
+  b.onPause(pause);
   // (the page is heard only after a touch: a chapter that begins without «Плёнка» does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
   let touched = false;
@@ -97,7 +97,7 @@ export default async function (b) {
     return { ...(n ? (await ran(as, n - 1)).state : fresh()), chapter, step };
   };
   let kept = { ...fresh(), ...b.saved };
-  if (b.game.mine) view.author({
+  if (b.game.mine) b.menu(view.author({
     chapters: CHAPTERS, plays: PLAYS.map(p => p.label), at: () => kept,
     games: (as, chapter, step) => ran(as, FIRST[chapter] + step).then(r => r.games),
     // (to a minigame: what the step itself chooses before it, chosen as the play does)
@@ -106,7 +106,7 @@ export default async function (b) {
       await b.keep(game == null ? { ...state, start } : { ...state, start, play: game, choices: (await ran(as, FIRST[chapter] + step)).state.choices });
       location.reload();
     },
-  });
+  }));
   for (;;) {
     const ch = CHAPTERS[kept.chapter];
     if (!kept.start) {
