@@ -29,7 +29,11 @@ if (!world || !existsSync(join(world, 'scenes'))) {
 }
 const game = fileURLToPath(new URL('..', import.meta.url));
 const load = file => import(pathToFileURL(join(game, file)).href);
-const { SCENES, PEOPLE, SCALES, ENDINGS, facts, carry, context } = await load('story.js');
+// the game's texts as written (the source language): tr as the page gives it, without the translations
+const fill = (t, p = {}) => t.replace(/\{(\w+)\}/g, (_, k) => String(p[k]));
+globalThis.tr = Object.assign(fill, { n: (n, one, other, p) => fill(n === 1 ? one : other, { n, ...p }), c: (c, t, p) => fill(t, p), line: (who, t) => t, thought: (who, t) => t });
+const PEOPLE = JSON.parse(readFileSync(join(game, 'people.json'), 'utf8'));
+const { SCENES, SCALES, ENDINGS, facts, carry, context } = await load('story.js');
 const { jump } = await load('jump.js');
 const sound = await load('sound.js');
 
@@ -82,13 +86,13 @@ function contract(notes) {
   return JSON.parse(block[1]);
 }
 const WORLD = scenes(world);
-for (const [title, scene] of WORLD) {
+for (const [folder, scene] of WORLD) {
   const notes = `scenes/${scene.folder}/notes.md`, spec = `scenes/${scene.folder}/scene.json`;
   scene.named = new Set();
   scene.states = scene.spec.states ?? {};
   scene.objects = new Map((scene.spec.objects ?? []).map(o => [o.id, o]));
   scene.contract = null;
-  if (!Object.values(SCENES).includes(title)) miss(spec, `сцены «${title}» нет в SCENES игры`);
+  if (!Object.values(SCENES).includes(folder)) miss(spec, `сцены «${folder}» нет в SCENES игры`);
   try {
     if (!existsSync(join(world, notes))) throw new Error('файла нет');
     const c = contract(readFileSync(join(world, notes), 'utf8'));
@@ -111,7 +115,7 @@ for (const [title, scene] of WORLD) {
   }
   for (const key in c.party) if (!(key in scene.states)) miss(notes, `ключа партии «${key}» нет в states (${spec})`);
   // (a key the play has not decided yet is carried as the scene's own default)
-  for (const [key, value] of Object.entries(carry(title, facts(fresh())) ?? {})) {
+  for (const [key, value] of Object.entries(carry(folder, facts(fresh())) ?? {})) {
     if (key in c.party && JSON.stringify(c.party[key]) !== JSON.stringify(value)) miss(notes, `ключ партии «${key}»: по умолчанию ${JSON.stringify(c.party[key])}, игра без выборов несёт ${JSON.stringify(value)}`);
   }
   for (const ref of [...c.points, ...c.offers]) {
@@ -122,7 +126,7 @@ for (const [title, scene] of WORLD) {
     if (o && !o.name) miss(notes, `предложение «${ref}»: у элемента нет name (${spec})`);
   }
 }
-for (const title of Object.values(SCENES)) if (!WORLD.has(title)) miss('story.js', `сцены «${title}» (SCENES) нет в мире`);
+for (const folder of Object.values(SCENES)) if (!WORLD.has(folder)) miss('story.js', `сцены «${folder}» (SCENES) нет в мире`);
 
 // --- the game's own files
 const CHAPTERS = [];
@@ -164,44 +168,44 @@ if (far) {
 }
 
 // --- a step's g, watched: `here` — where it is (file, step), `events` — what the step did, in order:
-// ['scene', title] | ['beat', name, seconds] | ['say', seconds] | ['act'] | ['play', name, about]
+// ['scene', folder] | ['beat', name, seconds] | ['say', seconds] | ['act'] | ['play', name, about]
 const lines = new Map(); // `${who}\n${text}` → {who, text, where}
 const mute = () => ({ loud() {}, stop() {} });
 function watched(g, j, ch, here, events) {
   const bad = text => miss(here, text);
-  let cur = null; // the scene shown: {title, scene, last: the beat begun last, opening: the beat it was opened with, not taken up yet}
+  let cur = null; // the scene shown: {folder, scene, last: the beat begun last, opening: the beat it was opened with, not taken up yet}
   let during = false; // a minigame is on: what is said now is said inside it
   let waits = []; // the moments waited for whose beat has not begun yet: {text, beat}
   const shown = what => (cur ? true : (bad(`${what} — до g.scene`), false));
-  const key = (name, what) => { if (shown(`${what} «${name}»`) && !(name in cur.scene.states)) bad(`${what}: ключа «${name}» нет в states сцены «${cur.title}»`); };
+  const key = (name, what) => { if (shown(`${what} «${name}»`) && !(name in cur.scene.states)) bad(`${what}: ключа «${name}» нет в states сцены «${cur.folder}»`); };
   const element = (ref, what) => {
     const o = cur.scene.objects.get(ref.split('#')[0]);
-    if (!o) bad(`${what}: элемента «${ref.split('#')[0]}» нет в сцене «${cur.title}»`);
+    if (!o) bad(`${what}: элемента «${ref.split('#')[0]}» нет в сцене «${cur.folder}»`);
     return o;
   };
   const point = (ref, what) => {
     element(ref, what);
     cur.scene.named.add(`ref:${ref}`);
-    if (cur.scene.contract && !cur.scene.contract.points.includes(ref)) bad(`${what}: точки «${ref}» нет в points сцены «${cur.title}»`);
+    if (cur.scene.contract && !cur.scene.contract.points.includes(ref)) bad(`${what}: точки «${ref}» нет в points сцены «${cur.folder}»`);
   };
   const offer = (ref, what) => {
     const o = element(ref, what);
     if (o && !o.name) bad(`${what}: у элемента «${o.id}» нет name`);
     cur.scene.named.add(`ref:${ref}`);
-    if (cur.scene.contract && !cur.scene.contract.offers.includes(ref)) bad(`${what}: предложения «${ref}» нет в offers сцены «${cur.title}»`);
+    if (cur.scene.contract && !cur.scene.contract.offers.includes(ref)) bad(`${what}: предложения «${ref}» нет в offers сцены «${cur.folder}»`);
   };
   const moment = (text, what) => {
     const c = cur.scene.contract, beat = text.split(':')[0];
     cur.scene.named.add(`tell:${text}`);
-    if (c && !c.beats[beat]?.tells.includes(text)) bad(`${what}: момента «${text}» нет у куска «${beat}» сцены «${cur.title}»`);
+    if (c && !c.beats[beat]?.tells.includes(text)) bad(`${what}: момента «${text}» нет у куска «${beat}» сцены «${cur.folder}»`);
   };
   const begins = (name, opening) => {
     const c = cur.scene.contract, beat = c?.beats[name];
     events.push(['beat', name, beat?.seconds ?? 0]);
     cur.scene.named.add(`beat:${name}`);
-    if (c && !beat) bad(`куска «${name}» нет в сцене «${cur.title}»`);
-    if (beat?.show === false) bad(`кусок «${name}» сцены «${cur.title}» — только для показа (show: false)`);
-    if (!opening && cur.last && beat && !beat.after.includes(cur.last)) put(cuts, here, `«${cur.title}»: ${cur.last} → ${name}`);
+    if (c && !beat) bad(`куска «${name}» нет в сцене «${cur.folder}»`);
+    if (beat?.show === false) bad(`кусок «${name}» сцены «${cur.folder}» — только для показа (show: false)`);
+    if (!opening && cur.last && beat && !beat.after.includes(cur.last)) put(cuts, here, `«${cur.folder}»: ${cur.last} → ${name}`);
     for (const w of waits.filter(w => w.beat === name)) if (!w.end) moment(w.text, 'g.told');
     waits = waits.filter(w => w.beat !== name);
     cur.last = name;
@@ -220,22 +224,22 @@ function watched(g, j, ch, here, events) {
   });
   const w = Object.create(g);
   Object.assign(w, {
-    async scene(title, st = {}, how) {
-      const scene = WORLD.get(title), party = carry(title, facts(g.state));
+    async scene(folder, st = {}, how) {
+      const scene = WORLD.get(folder), party = carry(folder, facts(g.state));
       if (scene && party) {
-        cur = { title, scene, last: null, opening: typeof st.beat === 'string' ? st.beat : null };
-        events.push(['scene', title]);
+        cur = { folder, scene, last: null, opening: typeof st.beat === 'string' ? st.beat : null };
+        events.push(['scene', folder]);
         for (const k in party) {
           scene.named.add(`party:${k}`);
-          if (!(k in scene.states)) bad(`ключа партии «${k}» нет в states сцены «${title}»`);
-          if (scene.contract && !(k in scene.contract.party)) bad(`ключа партии «${k}» нет в party сцены «${title}»`);
+          if (!(k in scene.states)) bad(`ключа партии «${k}» нет в states сцены «${folder}»`);
+          if (scene.contract && !(k in scene.contract.party)) bad(`ключа партии «${k}» нет в party сцены «${folder}»`);
         }
         // (a key the step itself opens the scene with is named too: the party's keys the play does not carry)
         for (const k in st) { key(k, 'g.scene'); scene.named.add(`party:${k}`); }
         if (cur.opening) begins(cur.opening, true);
-        else bad(`сцена «${title}» открыта без куска`);
+        else bad(`сцена «${folder}» открыта без куска`);
       }
-      return g.scene(title, st, how); // (a scene the world or SCENES lacks: the step breaks there)
+      return g.scene(folder, st, how); // (a scene the world or SCENES lacks: the step breaks there)
     },
     beat(name, how) {
       if (shown(`g.beat «${name}»`)) {
@@ -262,7 +266,7 @@ function watched(g, j, ch, here, events) {
     async spot(ref) { if (shown(`g.spot «${ref}»`)) point(ref, 'g.spot'); return (await g.spot(ref)) ?? { x: 0, y: 0 }; },
     say(who, text, at = who) {
       const what = `реплика «${text}»`;
-      if (!(who in PEOPLE)) bad(`${what}: говорящего «${who}» нет в PEOPLE`);
+      if (!(who in PEOPLE)) bad(`${what}: говорящего «${who}» нет в people.json`);
       if (at !== 'narrator' && shown(what)) {
         if (at.includes('#') && !cur.scene.contract?.offers.includes(at)) point(at, what);
         else if (element(at, what)) cur.scene.named.add(`ref:${at}`);
@@ -295,7 +299,7 @@ function watched(g, j, ch, here, events) {
       const what = `мини-игра «${m.name}»`;
       events.push(['play', m.name, minigame.about ?? 0]);
       if (shown(what)) {
-        if (cur.title !== SCENES[T.scene]) bad(`${what} идёт в сцене «${cur.title}», в §7 — «${SCENES[T.scene]}»`);
+        if (cur.folder !== SCENES[T.scene]) bad(`${what} идёт в сцене «${cur.folder}», в §7 — «${SCENES[T.scene]}»`);
         else {
           for (const k of T.keys) key(k, what);
           for (const ref of T.points ?? []) point(ref, what);
@@ -382,7 +386,7 @@ say(`\n== Склейки внутри сцены (кусок идёт не по�
 for (const [text, set] of cuts) say(`${text}${met(set)}`);
 
 say('\n== В контрактах сцен есть, ни одна партия не назвала ==');
-for (const [title, scene] of WORLD) {
+for (const [folder, scene] of WORLD) {
   const c = scene.contract;
   if (!c) continue;
   const left = [
@@ -391,7 +395,7 @@ for (const [title, scene] of WORLD) {
     ...Object.keys(c.party).filter(k => !scene.named.has(`party:${k}`)).map(k => `ключ партии ${k}`),
     ...[...new Set([...c.points, ...c.offers])].filter(ref => !scene.named.has(`ref:${ref}`)).map(ref => `точка ${ref}`),
   ];
-  say(`${title}: ${left.join('; ') || '—'}`);
+  say(`${folder}: ${left.join('; ') || '—'}`);
 }
 
 // (letters and digits only, ё as е: the same words written another way)
