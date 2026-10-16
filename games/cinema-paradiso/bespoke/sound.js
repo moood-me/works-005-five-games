@@ -12,10 +12,9 @@
 //     The heart of the past: in the booth, the hall, the pier in summer, Rome; in chapter V only the flash of `memory`
 //     and «Лента»
 //   hall — the film's music through a wall: strings and brass, muffled, in phrases with pauses; the hall's murmur
-//   square — the square at night: far voices, now and then steps on stone · crowd — a crowd, close and thick
-//   cicadas — high, pulsing, two or three of them · sea — the sea at the pier: its body, a wave every 7–9 s
-//   rain — rain and its drops · fire — a fire: the roar and the crackle · wind_cold — a thin cold wind (the present)
-//   station — the station: steam hissing, a bell far off now and then
+//   cicadas — high, pulsing, two or three of them · wind_cold — a thin cold wind (the present; ambience.js)
+//   recordings (sounds/): square — the square at night: far voices, steps · crowd — a crowd, close · sea — water at the
+//   pier · rain — rain in the street · fire — a fire · station — the station
 // Played once:
 //   motif() — the first five notes of the theme on a celesta
 //   bell · creak · scissors · press · chalk · chalkSqueak · click · clunk · motor · tick · tick2 · laugh · roar ·
@@ -24,6 +23,7 @@
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}: as loud as v (0…1) of its own; stop fades it out:
 //   theme() — the theme of «Парадизо»: our own melody (not the film's music) on strings over chords, round and round
 //   camera8() — the 8 mm camera running: eighteen thin clicks a second, quieter than the projector
+import { built, kit } from './ambience.js';
 
 // THEME — the melody of «Парадизо»: sixteen bars in 3/4, E major (the world's key: E_MAJOR_D_FLAT_MINOR), ♩ = 77. Each bar: its notes [pitch, beats] (the
 // strings' melody) and the chord held under it (lowest first). The motif is its first five notes (G♯ A B E D♯: a rise
@@ -209,18 +209,6 @@ function swell(t, dest, { kind = 'pink', f, Q = 1, type = 'bandpass', points, sw
   shape(e.gain, t, points);
   return e;
 }
-// a drop of water: a short note bending
-function drop(t, dest, f, bend, loud) {
-  const a = audio(), o = a.createOscillator(), e = a.createGain();
-  o.frequency.setValueAtTime(f, t);
-  o.frequency.exponentialRampToValueAtTime(f * bend, t + 0.05);
-  e.gain.setValueAtTime(0, t);
-  e.gain.linearRampToValueAtTime(loud, t + 0.003);
-  e.gain.exponentialRampToValueAtTime(0.0005, t + 0.14);
-  o.connect(e).connect(dest);
-  o.start(t);
-  o.stop(t + 0.18);
-}
 // a voice's syllable: noise through two formants (a vowel), up and down in `len` — far voices, a laugh, a cough
 function syllable(t, dest, { f1, f2, len, loud, kind = 'pink', pitch }) {
   const a = audio(), e = a.createGain(), src = a.createGain();
@@ -302,6 +290,24 @@ function bowed(dest, { body = 1 } = {}) {
       rest(at);
       for (const o of [saw, saw2, wobble, hair]) o.stop(at + 1.2);
     },
+  };
+}
+
+// recordings (sounds/ — CC0, from Freesound: sounds/README.md): fetched and decoded once each; a bed plays one of its own
+// round and round from a random point, `gain` bringing it to as loud as the bed it took the place of
+const recordings = {};
+function recording(file) {
+  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b)));
+}
+function recorded(files, gain) {
+  return ({ a, out, keep }) => {
+    const s = a.createBufferSource(), g = a.createGain();
+    let on = true;
+    keep({ stop() { on = false; if (s.buffer) s.stop(); } });
+    g.gain.value = gain;
+    s.loop = true;
+    s.connect(g).connect(out);
+    recording(files[Math.floor(Math.random() * files.length)]).then(buf => { if (on) { s.buffer = buf; s.start(a.currentTime, Math.random() * buf.duration); } });
   };
 }
 
@@ -432,32 +438,10 @@ export function hall(level = 1, seconds = 2) {
   }, level, seconds);
 }
 
-// a place full of people: voices far or near, syllables in many vowels and pitches
-function voices(name, { wet, rate, loud, far, steps }, level, seconds) {
-  bed(name, wet, 'square', ({ a, t, out, noise, sway, every }) => {
-    const dist = filter({ type: 'lowpass', frequency: far ? 1800 : 3200 });
-    dist.connect(out);
-    const body = a.createGain();
-    body.gain.value = loud * 0.5;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 600, Q: 0.8 })).connect(body).connect(dist);
-    sway(body.gain, 0.09, loud * 0.15);
-    let next = t + 0.1, step = t + 2;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next -= Math.log(1 - Math.random()) / rate) {
-        const [f1, f2] = VOWELS[Math.floor(Math.random() * VOWELS.length)], k = rnd(0.85, 1.2);
-        syllable(next, dist, { f1: f1 * k, f2: f2 * k, len: rnd(0.12, 0.35), loud: loud * rnd(0.3, 1), pitch: rnd(110, 260) });
-      }
-      if (steps && step < now + 0.4) { // a few steps on stone, someone crossing
-        for (let i = 0; i < 4; i++) burst(Math.max(step, now) + i * 0.52, out, { kind: 'brown', f: 900, Q: 1.5, len: 0.05, loud: 0.12 });
-        step = now + rnd(6, 14);
-      }
-    });
-  }, level, seconds);
-}
-export function square(level = 1, seconds = 2) { voices('square', { wet: 0.35, rate: 6, loud: 0.32, far: true, steps: true }, level, seconds); }
-export function crowd(level = 1, seconds = 2) { voices('crowd', { wet: 0.25, rate: 26, loud: 0.26, far: false }, level, seconds); }
+// a square at night: a recording
+export function square(level = 1, seconds = 2) { bed('square', 0.05, 'square', recorded(['square-414453.mp3'], 0.49), level, seconds); }
+// a crowd: a recording
+export function crowd(level = 1, seconds = 2) { bed('crowd', 0.05, 'square', recorded(['crowd-550916.mp3'], 0.52), level, seconds); }
 
 export function cicadas(level = 1, seconds = 2) {
   bed('cicadas', 0.25, 'square', ({ a, t, out, noise, keep, sway }) => {
@@ -479,110 +463,19 @@ export function cicadas(level = 1, seconds = 2) {
   }, level, seconds);
 }
 
-export function sea(level = 1, seconds = 2) {
-  bed('sea', 0.25, 'square', ({ a, t, out, noise, sway, every }) => {
-    const deep = a.createGain();
-    deep.gain.value = 0.5;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 450 })).connect(deep).connect(out);
-    sway(deep.gain, 0.05, 0.12);
-    const tone = filter({ type: 'lowpass', frequency: 350 }), body = a.createGain(), foam = a.createGain();
-    body.gain.value = 0;
-    foam.gain.value = 0;
-    noise('brown').connect(tone).connect(body).connect(out);
-    noise('pink').connect(filter({ type: 'highpass', frequency: 2200 })).connect(foam).connect(out);
-    let next = t + 1;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.5) return;
-      const at = Math.max(next, now), big = 0.5 + Math.random() * 0.4;
-      // against stone, not sand: the wave slaps the mole and falls back
-      shape(body.gain, at, [[2.2, 0.8 * big], [2.6, 0.6 * big], [5, 0]]);
-      shape(tone.frequency, at, [[2.2, 900], [5, 350]], 350);
-      shape(foam.gain, at, [[2.1, 0], [2.5, 0.45 * big], [3.4, 0.2 * big], [5.6, 0]]);
-      next = at + 7 + Math.random() * 2;
-    });
-  }, level, seconds);
-}
+// the sea: a recording
+export function sea(level = 1, seconds = 2) { bed('sea', 0.05, 'square', recorded(['sea-pier-838025.mp3'], 6.65), level, seconds); }
 
-export function rain(level = 1, seconds = 2) {
-  bed('rain', 0.2, 'square', ({ a, t, out, noise, sway, every }) => {
-    const sheet = a.createGain();
-    sheet.gain.value = 0.35;
-    noise('pink').connect(filter({ type: 'highpass', frequency: 1100 })).connect(filter({ type: 'lowpass', frequency: 7000 })).connect(sheet).connect(out);
-    sway(sheet.gain, 0.08, 0.08);
-    const roof = a.createGain();
-    roof.gain.value = 0.15;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 400 })).connect(roof).connect(out);
-    let next = t;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next += rnd(0.02, 0.09))
-        drop(Math.max(next, now), out, rnd(1500, 4200), 0.55, rnd(0.008, 0.03));
-    });
-  }, level, seconds);
-}
+// rain: a recording
+export function rain(level = 1, seconds = 2) { bed('rain', 0.05, 'square', recorded(['rain-city-521244.mp3'], 1.52), level, seconds); }
 
-export function fire(level = 1, seconds = 2) {
-  bed('fire', 0.25, 'booth', ({ a, t, out, noise, sway, every }) => {
-    const roar = a.createGain(), flame = a.createGain();
-    roar.gain.value = 0.55;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 190 })).connect(roar).connect(out);
-    sway(roar.gain, 0.3, 0.15);
-    flame.gain.value = 0.14;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 520, Q: 0.7 })).connect(flame).connect(out);
-    sway(flame.gain, 6.1, 0.06);
-    sway(flame.gain, 0.5, 0.04);
-    let next = t + 0.1;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next -= Math.log(1 - Math.random()) / 9) {
-        const at = Math.max(next, now);
-        if (Math.random() < 0.1) burst(at, out, { f: rnd(500, 900), Q: 2, len: 0.07, loud: 0.4 });
-        else burst(at, out, { f: rnd(1500, 5000), Q: 1.5, len: rnd(0.006, 0.025), loud: 0.05 + Math.random() ** 2 * 0.3 });
-      }
-    });
-  }, level, seconds);
-}
+// a fire: a recording
+export function fire(level = 1, seconds = 2) { bed('fire', 0.05, 'square', recorded(['blaze-484338.mp3'], 6.41), level, seconds); }
 
-export function wind_cold(level = 1, seconds = 2) {
-  bed('wind_cold', 0.2, 'square', ({ a, out, noise, sway }) => {
-    // a thin wind, 200–600 Hz, now fuller, now thinner; a faint whistle high in it
-    const band = filter({ type: 'bandpass', frequency: 380, Q: 1.4 }), amp = a.createGain();
-    amp.gain.value = 0.6;
-    noise('pink').connect(band).connect(amp).connect(out);
-    sway(band.frequency, 0.06, 170);
-    sway(band.frequency, 0.027, 60);
-    sway(amp.gain, 0.1, 0.2);
-    sway(amp.gain, 0.037, 0.12);
-    const whine = filter({ type: 'bandpass', frequency: 1700, Q: 14 }), wa = a.createGain();
-    wa.gain.value = 0.04;
-    noise('pink').connect(whine).connect(wa).connect(out);
-    sway(whine.frequency, 0.05, 250);
-    sway(wa.gain, 0.08, 0.035);
-  }, level, seconds);
-}
+export function wind_cold(level = 1, seconds = 2) { bed('wind_cold', 0.2, 'square', ({ a, out, keep, every }) => built.wind_cold(kit(a, keep, every), out, 1.53), level, seconds); }
 
-export function station(level = 1, seconds = 2) {
-  bed('station', 0.35, 'square', ({ a, t, out, noise, sway, every }) => {
-    const steam = a.createGain();
-    steam.gain.value = 0.12;
-    noise('white').connect(filter({ type: 'highpass', frequency: 2600 })).connect(filter({ type: 'lowpass', frequency: 8000 })).connect(steam).connect(out);
-    sway(steam.gain, 0.15, 0.07);
-    sway(steam.gain, 0.04, 0.04);
-    const far = filter({ type: 'lowpass', frequency: 1800 });
-    far.connect(out);
-    let next = t + 4;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.5) return;
-      const at = Math.max(next, now);
-      for (let i = 0; i < 3; i++) ring(at + i * 0.45, far, [[880, 1.6, 0.05], [2212, 0.8, 0.02], [1320, 1.1, 0.02]]);
-      next = at + rnd(18, 22);
-    });
-  }, level, seconds);
-}
+// a railway station: a recording
+export function station(level = 1, seconds = 2) { bed('station', 0.05, 'square', recorded(['station-474616.mp3'], 1.21), level, seconds); }
 
 const BEDS = { whirr, hall, square, crowd, cicadas, sea, rain, fire, wind_cold, station };
 export function beds(levels = {}, seconds = 2) {
