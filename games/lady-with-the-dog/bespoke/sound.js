@@ -9,12 +9,12 @@
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down),
 // getting there over `seconds` (a bed may be called by itself too — a gust: wind(0.7, 1)):
 //   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
-//   sea — brown noise under a low-pass, a wave every 7–9 s, the hiss of its going back · cicadas — clicks of a 4–6 kHz
-//   band in bursts, a slow swell · crowd — voices on the pier · wind — a band of noise wandering 300–900 Hz ·
-//   crickets — 4–5 kHz trills out of step · wires — the telegraph wires' hum, 100 and 150 Hz beating · steam — the
-//   engine's hiss, a sigh now and then · snow — the snow's silence: a low wind barely there, far bells now and then ·
-//   thaw — a rare drop, a wet rustle · room — a clock ticking, a faint hum · hall — the theatre: voices, a seat
-//   creaking · weep — quiet uneven weeping: breath, a sob every 3–6 s
+//   crickets — 4–5 kHz trills out of step · wires — the telegraph wires' hum, 100 and 150 Hz beating · room — a clock
+//   ticking, a faint hum
+//   wind — low wind in random gusts · snow — the snow's silence: a low wind barely there, far bells now and then ·
+//   thaw — rare drops · cicadas — three ringing tones trembling, swelling and fading (these four: ambience.js)
+//   recordings (sounds/): sea — the sea from the shore · crowd — voices on the pier · steam — a steam engine at the
+//   station · hall — the theatre before the curtain · weep — quiet weeping
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}: as loud as v (0…1) of its own; stop fades it out:
 //   band() — a brass band far off in the city garden: the waltz «Дунайские волны» (Ion Ivanovici, 1880; public domain)
 //   piano(tune, {wall}) — a piano heard through a window and the snow: tune 'waltz' — the same waltz, 'etude' — scales
@@ -22,6 +22,7 @@
 // Played once:
 //   tuning · bark · yap · growl · clink · heart · knife · horn · bell(level) · whistle(level) · wheels · sleigh · gate ·
 //   door · pour · spill · paper · watch
+import { built, kit } from './ambience.js';
 
 // The waltz, its first theme twice and its second strain, from Ivanovici's tune (A minor) set in F minor — the world's
 // key (A_FLAT_MAJOR_F_MINOR): four semitones down, nothing else changed. In beats of 3/4 from the first downbeat; the
@@ -258,13 +259,30 @@ function syllable(t, dest, { f1, f2, len, loud, kind = 'pink', pitch, fall = rnd
   shape(e.gain, t, [[len * 0.25, loud], [len * 0.6, loud * 0.7], [len, 0]]);
   e.connect(dest);
 }
-const VOWELS = [[700, 1200], [500, 1500], [400, 2000], [600, 1000], [300, 2300]];
 // small bells: a sleigh's, far or near — a few quick jingles
 function jingle(t, dest, n, loud) {
   for (let i = 0; i < n; i++) {
     const at = t + i * rnd(0.06, 0.13), f = rnd(2600, 4200);
     ring(at, dest, [[f, 0.35, loud * rnd(0.5, 1)], [f * 1.48, 0.22, loud * 0.4], [f * 2.31, 0.12, loud * 0.2]], 0.002);
   }
+}
+
+// recordings (sounds/ — CC0, from Freesound: sounds/README.md): fetched and decoded once each; a bed plays one of its own
+// round and round from a random point, `gain` bringing it to as loud as the bed it took the place of
+const recordings = {};
+function recording(file) {
+  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b)));
+}
+function recorded(files, gain) {
+  return ({ a, out, keep }) => {
+    const s = a.createBufferSource(), g = a.createGain();
+    let on = true;
+    keep({ stop() { on = false; if (s.buffer) s.stop(); } });
+    g.gain.value = gain;
+    s.loop = true;
+    s.connect(g).connect(out);
+    recording(files[Math.floor(Math.random() * files.length)]).then(buf => { if (on) { s.buffer = buf; s.start(a.currentTime, Math.random() * buf.duration); } });
+  };
 }
 
 // the beds: one of each for the page, built when first heard and taken down once silent: build({a, t, out, noise,
@@ -302,108 +320,18 @@ function bed(name, wet, room, build, level, seconds) {
     delete sounding[name];
   });
 }
-// (something of a bed that comes now and then: fn(at) when its time is near, then again `gap()` seconds on)
-function nowAndThen(a, every, first, gap, fn) {
-  let next = a.currentTime + first;
-  every(() => {
-    const now = a.currentTime;
-    if (next > now + 0.5) return;
-    const at = Math.max(next, now);
-    fn(at);
-    next = at + gap();
-  });
-}
 
-export function sea(level = 1, seconds = 2) {
-  bed('sea', 0.25, 'open', ({ a, t, out, noise, sway, every }) => {
-    const deep = a.createGain();
-    deep.gain.value = 0.5;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 420 })).connect(deep).connect(out);
-    sway(deep.gain, 0.05, 0.12);
-    // each wave: its body swells and its edge brightens, it breaks, the shingle hisses as it goes back
-    const tone = filter({ type: 'lowpass', frequency: 350 }), body = a.createGain(), foam = a.createGain();
-    body.gain.value = 0;
-    foam.gain.value = 0;
-    noise('brown').connect(tone).connect(body).connect(out);
-    noise('pink').connect(filter({ type: 'highpass', frequency: 2400 })).connect(foam).connect(out);
-    nowAndThen(a, every, 1, () => rnd(7, 9), at => {
-      const big = rnd(0.5, 0.9);
-      shape(body.gain, at, [[2.4, 0.8 * big], [2.8, 0.6 * big], [5.2, 0]]);
-      shape(tone.frequency, at, [[2.4, 900], [5.2, 350]], 350);
-      shape(foam.gain, at, [[2.3, 0], [2.7, 0.4 * big], [4.2, 0.22 * big], [6.4, 0]]);
-    });
-  }, level, seconds);
-}
+// the sea: a recording
+export function sea(level = 1, seconds = 2) { bed('sea', 0.05, 'open', recorded(['sea-shore-517945.mp3', 'sea-shore-240645.mp3'], 2.24), level, seconds); }
 
-export function cicadas(level = 1, seconds = 2) {
-  bed('cicadas', 0.25, 'open', ({ a, t, out, noise, keep, sway }) => {
-    // three of them: a 4–6 kHz band chopped into clicks by its own pulse, in bursts of a few seconds, swelling slowly
-    for (const [f, pulse, burstRate, swayRate, loud] of [[4700, 44, 0.31, 0.11, 0.16], [5500, 52, 0.23, 0.07, 0.11], [4200, 38, 0.41, 0.17, 0.09]]) {
-      const band = filter({ type: 'bandpass', frequency: f, Q: 6 }), chop = a.createGain(), gate = a.createGain(), amp = a.createGain();
-      noise('white').connect(band).connect(chop).connect(gate).connect(amp).connect(out);
-      chop.gain.value = 0.5;
-      gate.gain.value = 0.55;
-      const o = keep(a.createOscillator()), od = a.createGain();
-      o.type = 'square';
-      o.frequency.value = pulse;
-      od.gain.value = 0.5;
-      o.connect(od).connect(chop.gain);
-      o.start(t);
-      sway(gate.gain, burstRate, 0.45, 'square');
-      amp.gain.value = loud;
-      sway(amp.gain, swayRate, loud * 0.7);
-      sway(band.frequency, swayRate * 0.7, 150);
-    }
-  }, level, seconds);
-}
+export function cicadas(level = 1, seconds = 2) { bed('cicadas', 0.25, 'open', ({ a, out, keep, every }) => built.cicadas(kit(a, keep, every), out, 1.26), level, seconds); }
 
-// a place full of people: voices far or near, syllables in many vowels and pitches
-function voices(name, { wet, room, rate, loud, far, creaks }, level, seconds) {
-  bed(name, wet, room, ({ a, t, out, noise, sway, every }) => {
-    const dist = filter({ type: 'lowpass', frequency: far ? 1800 : 3000 });
-    dist.connect(out);
-    // the crowd's body: bands of pink noise 300–1200 Hz, each slowly coming and going
-    for (const [f, r] of [[340, 0.07], [620, 0.11], [1100, 0.05]]) {
-      const body = a.createGain();
-      body.gain.value = loud * 0.3;
-      noise('pink').connect(filter({ type: 'bandpass', frequency: f, Q: 1.2 })).connect(body).connect(dist);
-      sway(body.gain, r, loud * 0.12);
-    }
-    let next = t + 0.1, creak = t + 3;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next -= Math.log(1 - Math.random()) / rate) {
-        const [f1, f2] = VOWELS[Math.floor(Math.random() * VOWELS.length)], k = rnd(0.85, 1.2);
-        syllable(next, dist, { f1: f1 * k, f2: f2 * k, len: rnd(0.12, 0.35), loud: loud * rnd(0.3, 1), pitch: rnd(110, 260) });
-      }
-      if (creaks && creak < now + 0.4) { // a seat creaks somewhere
-        creakAt(Math.max(creak, now), out, rnd(0.3, 0.6));
-        creak = now + rnd(3, 8);
-      }
-    });
-  }, level, seconds);
-}
-export function crowd(level = 1, seconds = 2) { voices('crowd', { wet: 0.3, room: 'open', rate: 24, loud: 0.24, far: false }, level, seconds); }
-export function hall(level = 1, seconds = 2) { voices('hall', { wet: 0.4, room: 'room', rate: 16, loud: 0.2, far: true, creaks: true }, level, seconds); }
+// a crowd: a recording
+export function crowd(level = 1, seconds = 2) { bed('crowd', 0.05, 'open', recorded(['crowd-550916.mp3'], 0.48), level, seconds); }
+// a theatre hall: a recording
+export function hall(level = 1, seconds = 2) { bed('hall', 0.05, 'open', recorded(['hall-735472.mp3', 'hall-850562.mp3'], 0.39), level, seconds); }
 
-export function wind(level = 1, seconds = 2) {
-  bed('wind', 0.2, 'open', ({ a, out, noise, sway }) => {
-    // a band of wind wandering 300–900 Hz, now fuller, now thinner; a faint whistle high in it
-    const band = filter({ type: 'bandpass', frequency: 600, Q: 1.2 }), amp = a.createGain();
-    amp.gain.value = 0.6;
-    noise('pink').connect(band).connect(amp).connect(out);
-    sway(band.frequency, 0.05, 220);
-    sway(band.frequency, 0.021, 80);
-    sway(amp.gain, 0.09, 0.2);
-    sway(amp.gain, 0.034, 0.12);
-    const whine = filter({ type: 'bandpass', frequency: 1600, Q: 12 }), wa = a.createGain();
-    wa.gain.value = 0.03;
-    noise('pink').connect(whine).connect(wa).connect(out);
-    sway(whine.frequency, 0.05, 250);
-    sway(wa.gain, 0.08, 0.025);
-  }, level, seconds);
-}
+export function wind(level = 1, seconds = 2) { bed('wind', 0.2, 'open', ({ a, out, keep, every }) => built.wind(kit(a, keep, every), out, 1.45), level, seconds); }
 
 export function crickets(level = 1, seconds = 2) {
   bed('crickets', 0.3, 'open', ({ a, t, keep, sway, out }) => {
@@ -436,55 +364,12 @@ export function wires(level = 1, seconds = 2) {
   }, level, seconds);
 }
 
-export function steam(level = 1, seconds = 2) {
-  bed('steam', 0.3, 'open', ({ a, out, noise, sway, every }) => {
-    const hissing = a.createGain();
-    hissing.gain.value = 0.1;
-    noise('white').connect(filter({ type: 'highpass', frequency: 2600 })).connect(filter({ type: 'lowpass', frequency: 8000 })).connect(hissing).connect(out);
-    sway(hissing.gain, 0.13, 0.05);
-    // now and then the engine sighs: a burst of steam let off
-    nowAndThen(a, every, 3, () => rnd(5, 10), at => {
-      swell(at, out, { kind: 'white', type: 'highpass', f: 1800, Q: 0.7, points: [[0.12, 0.28], [1.2, 0.16], [2.6, 0]] });
-    });
-  }, level, seconds);
-}
+// a steam engine: a recording
+export function steam(level = 1, seconds = 2) { bed('steam', 0.05, 'open', recorded(['steam-473904.mp3'], 1.32), level, seconds); }
 
-export function snow(level = 1, seconds = 2) {
-  bed('snow', 0.4, 'open', ({ a, out, noise, sway, every }) => {
-    // a wind barely there, low; far off now and then a sleigh's bells
-    const low = a.createGain();
-    low.gain.value = 0.22;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 320 })).connect(low).connect(out);
-    sway(low.gain, 0.04, 0.08);
-    const breath = a.createGain();
-    breath.gain.value = 0.025;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 900, Q: 0.8 })).connect(breath).connect(out);
-    sway(breath.gain, 0.06, 0.018);
-    const far = filter({ type: 'lowpass', frequency: 2200 }), fg = a.createGain();
-    fg.gain.value = 0.35;
-    far.connect(fg).connect(out);
-    nowAndThen(a, every, rnd(5, 9), () => rnd(12, 25), at => jingle(at, far, 6 + Math.floor(Math.random() * 6), 0.05));
-  }, level, seconds);
-}
+export function snow(level = 1, seconds = 2) { bed('snow', 0.4, 'open', ({ a, out, keep, every }) => built.snow(kit(a, keep, every), out), level, seconds); }
 
-export function thaw(level = 1, seconds = 2) {
-  bed('thaw', 0.3, 'open', ({ a, t, out, noise, sway, every }) => {
-    // a wet rustle — slush, a runnel — and a drop now and then from the eaves, ringing
-    const wet = a.createGain();
-    wet.gain.value = 0.06;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 2200, Q: 0.6 })).connect(wet).connect(out);
-    sway(wet.gain, 0.09, 0.03);
-    let next = t + 0.5;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next += rnd(0.3, 1.6)) {
-        const f = rnd(1300, 2600);
-        drop(next, out, f, rnd(0.55, 0.75), rnd(0.03, 0.09), rnd(0.12, 0.3));
-      }
-    });
-  }, level, seconds);
-}
+export function thaw(level = 1, seconds = 2) { bed('thaw', 0.35, 'open', ({ a, out, keep, every }) => built.thaw(kit(a, keep, every), out, 1.29), level, seconds); }
 
 export function room(level = 1, seconds = 2) {
   bed('room', 0.25, 'room', ({ a, t, out, noise, every }) => {
@@ -505,21 +390,8 @@ export function room(level = 1, seconds = 2) {
   }, level, seconds);
 }
 
-export function weep(level = 1, seconds = 2) {
-  bed('weep', 0.3, 'room', ({ a, out, every }) => {
-    // her breath, uneven, through pink noise under 700 Hz; a sob every 3–6 s — a catch of the breath, a small voiced "a"
-    const lp = filter({ type: 'lowpass', frequency: 700 });
-    lp.connect(out);
-    nowAndThen(a, every, 0.2, () => rnd(1.6, 3.2), at => {
-      const inn = rnd(0.5, 0.9), outn = rnd(0.7, 1.2);
-      swell(at, lp, { kind: 'pink', f: 450, Q: 0.7, points: [[inn * 0.6, 0.35], [inn, 0.18], [inn + 0.1, 0.05], [inn + outn * 0.4, 0.3], [inn + outn, 0]] });
-    });
-    nowAndThen(a, every, rnd(1.5, 3), () => rnd(3, 6), at => {
-      for (let i = 0; i < 3; i++) swell(at + i * 0.13, lp, { kind: 'pink', f: 600, Q: 1, points: [[0.03, 0.4], [0.09, 0]] });
-      syllable(at + 0.42, out, { f1: 750, f2: 1300, len: rnd(0.35, 0.55), loud: 0.12, pitch: rnd(260, 330), fall: 0.8 });
-    });
-  }, level, seconds);
-}
+// weeping: a recording
+export function weep(level = 1, seconds = 2) { bed('weep', 0.05, 'open', recorded(['weep-171947.mp3', 'weep-172738.mp3'], 0.48), level, seconds); }
 
 const BEDS = { sea, cicadas, crowd, wind, crickets, wires, steam, snow, thaw, room, hall, weep };
 export function beds(levels = {}, seconds = 2) {
