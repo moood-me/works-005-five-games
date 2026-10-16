@@ -1,27 +1,27 @@
-// «Оснастка» (глава I, Дом, кусок `rig`): вставка `rig` открыта, лоскут Ассоль уже взяла. Девочка крепит алые паруса
-// к игрушечной мачте, отец придерживает. Четыре крепления по порядку (грот, гика-шкот, кливер, его шкот), одна метка за
-// раз — желоб там, где её пальцы берут крепление (`closeup#rigN`); держать, пока не нальётся: `rigN` растёт с наливом.
-// Первое — вместе с отцом (`guide` 1: его рука держит, ничего не падает). На остальных отпустить раньше — срыв: налив
-// стекает, счёт `slips`, приходит рука отца и держит это крепление до конца (вдвое быстрее, ничего не падает).
-//   opts: { onGuide() — отец говорит (глава ставит реплику), один раз, в начале; не ждётся }
-//   → { slips: сколько раз сорвалось }
+// «Rigging» (chapter I, the house, the beat `rig`): the insert `rig` is open, Assol has taken the scrap already. The girl makes the scarlet sails
+// fast to the toy mast, her father steadies it. Four fastenings in order (the mainsail, the main sheet, the jib, its sheet), one mark at a
+// time — a groove where her fingers take the fastening (`closeup#rigN`); held till it fills: `rigN` grows with the fill.
+// The first — together with her father (`guide` 1: his hand holds, nothing falls). On the rest, let go too early — a slip: the fill
+// drains, the count `slips`, her father's hand comes and holds that fastening to the end (twice as fast, nothing falls).
+//   opts: { onGuide() — the father speaks (the chapter puts the line), once, at the start; not awaited }
+//   → { slips: how many times it slipped }
 import { until, keys } from '../hands.js';
 
 const TOTAL = 4;
-const SECONDS = 2; // на крепление, пока держат
-const HELPED = 1; // с рукой отца
-const DRAIN = 1.25; // с: налив стекает от полного, отпущенный без отца
-const GUIDE = 0.6; // с: рука отца приходит и уходит
+const SECONDS = 2; // a fastening, while it is held
+const HELPED = 1; // with her father's hand
+const DRAIN = 1.25; // s: the fill drains from full, let go without her father
+const GUIDE = 0.6; // s: her father's hand comes and goes
 
 export default {
-  title: 'Оснастка', // как её зовёт ☰ автора
+  title: 'Rigging', // (as the author's ☰ lists it)
   about: 20,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Яхта была готова — недоставало лишь алого шёлка' });
+    const mg = g.minigame({ phrase: tr('The yacht was ready; all it lacked was the scarlet silk') });
     const send = keys(g);
     let slips = 0, acting = null;
-    // рука отца: ключ идёт сценой; прежний ход снимается
+    // her father's hand: the key is moved by the scene; the move before is cancelled
     const guide = on => { acting?.cancel(); acting = b.act('state', 'move', 'guide', on ? 1 : 0, { over: GUIDE }); };
     signal.addEventListener('abort', () => acting?.cancel());
     mg.plate.set({ notches: [0.25, 0.5, 0.75] });
@@ -29,7 +29,7 @@ export default {
     opts.onGuide?.();
     for (let n = 1; n <= TOTAL; n++) {
       const mark = mg.mark({ at: `closeup#rig${n}`, kind: 'groove' });
-      // (с отцом — его рука держит: отпущенное не падает)
+      // (with her father — his hand holds: what is let go does not fall)
       let helped = n === 1;
       const hold = mg.hold({ on: mark, seconds: SECONDS, drain: helped ? 0 : DRAIN });
       if (n === 1) b.minigame.tricks.teach(mg, [hold], { id: 'hold' });

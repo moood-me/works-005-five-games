@@ -1,110 +1,110 @@
 {
   "narrator": {
     "voice": "Schedar",
-    "how": "спокойно, светло, чуть торжественно — как рассказывают сказку, в которую верят",
-    "name": "рассказчик",
-    "short": "рассказчик"
+    "how": "calmly, brightly, a little solemnly — as one tells a fairy tale one believes in",
+    "name": "narrator",
+    "short": "narrator"
   },
   "assol_child": {
     "voice": "Leda",
-    "how": "девочка восьми лет: звонко, доверчиво, на одном дыхании",
-    "name": "Ассоль, восемь лет",
-    "short": "Ассоль"
+    "how": "a girl of eight: ringing, trusting, all in one breath",
+    "name": "Assol, eight years old",
+    "short": "Assol"
   },
   "assol": {
     "voice": "Vindemiatrix",
-    "how": "тихо, ясно, чуть удивлённо, без жалобы",
-    "name": "Ассоль, семнадцать лет",
-    "short": "Ассоль"
+    "how": "quietly, clearly, a little wondering, without complaint",
+    "name": "Assol, seventeen years old",
+    "short": "Assol"
   },
   "longren": {
     "voice": "Algenib",
-    "how": "низко, медленно, хрипловато, бережно",
-    "name": "Лонгрен, старый моряк, отец Ассоль",
-    "short": "Лонгрен"
+    "how": "low, slow, a little hoarse, tender",
+    "name": "Longren, an old sailor, Assol's father",
+    "short": "Longren"
   },
   "egl": {
     "voice": "Charon",
-    "how": "старик-сказочник: медленно, нараспев, с улыбкой в голосе",
-    "name": "Эгль, собиратель сказок",
-    "short": "Эгль"
+    "how": "an old teller of tales: slowly, in a singsong, with a smile in the voice",
+    "name": "Egle, a collector of tales",
+    "short": "Egle"
   },
   "grey_boy": {
     "voice": "Autonoe",
-    "how": "мальчик восьми лет: серьёзно, упрямо, негромко",
-    "name": "Артур Грей, восемь лет",
-    "short": "Грей"
+    "how": "a boy of eight: gravely, stubbornly, softly",
+    "name": "Arthur Gray, eight years old",
+    "short": "Gray"
   },
   "grey": {
     "voice": "Iapetus",
-    "how": "молодой капитан: ровно, негромко, уверенно",
-    "name": "Артур Грей, капитан",
-    "short": "Грей"
+    "how": "a young captain: evenly, softly, sure of himself",
+    "name": "Arthur Gray, a captain",
+    "short": "Gray"
   },
   "lilian": {
     "voice": "Achernar",
-    "how": "мягко, негромко, сдерживая волнение",
-    "name": "Лилиан Грей, мать Артура",
-    "short": "Лилиан"
+    "how": "gently, softly, holding back her feelings",
+    "name": "Lilian Gray, Arthur's mother",
+    "short": "Lilian"
   },
   "gop": {
     "voice": "Orus",
-    "how": "капитан старой школы: резко, громко, с насмешкой",
-    "name": "капитан Гоп",
-    "short": "Гоп"
+    "how": "a captain of the old school: sharply, loudly, mocking",
+    "name": "Captain Gop",
+    "short": "Gop"
   },
   "letika": {
     "voice": "Puck",
-    "how": "матрос-балагур: весело, быстро, вполголоса",
-    "name": "матрос Летика",
-    "short": "Летика"
+    "how": "a joking sailor: merrily, quickly, under his breath",
+    "name": "Letika, a sailor",
+    "short": "Letika"
   },
   "panten": {
     "voice": "Umbriel",
-    "how": "немолодой помощник: тревожно, осторожно",
-    "name": "помощник Пантен",
-    "short": "Пантен"
+    "how": "an ageing mate: anxiously, carefully",
+    "name": "Panten, the mate",
+    "short": "Panten"
   },
   "hin": {
     "voice": "Algieba",
-    "how": "трактирщик: вкрадчиво, с ухмылкой, сплетничая",
-    "name": "Хин Меннерс, трактирщик",
-    "short": "Хин"
+    "how": "an innkeeper: sly, smirking, gossiping",
+    "name": "Hin Menners, the innkeeper",
+    "short": "Hin"
   },
   "filipp": {
     "voice": "Achird",
-    "how": "угольщик: просто, добродушно, сердито заступаясь",
-    "name": "угольщик Филипп",
-    "short": "Филипп"
+    "how": "a collier: simply, good-naturedly, crossly taking her part",
+    "name": "Philip, the collier",
+    "short": "Philip"
   },
   "merchant": {
     "voice": "Sadaltager",
-    "how": "лавочник: сухо, равнодушно, по-деловому",
-    "name": "торговец в Лиссе",
-    "short": "торговец"
+    "how": "a shopkeeper: dry, indifferent, businesslike",
+    "name": "a merchant in Liss",
+    "short": "the merchant"
   },
   "kids": {
     "voice": "Laomedeia",
-    "how": "дети дразнят: звонко, нараспев, со смехом",
-    "name": "дети Каперны",
-    "short": "дети"
+    "how": "children teasing: ringing, in a singsong, laughing",
+    "name": "the children of Kaperna",
+    "short": "the children"
   },
   "kids_call": {
     "voice": "Laomedeia",
-    "how": "девочка постарше зовёт: по-доброму, чуть свысока, без смеха",
-    "name": "девочка Каперны",
-    "short": "девочка"
+    "how": "an older girl calling: kindly, a little condescending, not laughing",
+    "name": "a girl of Kaperna",
+    "short": "the girl"
   },
   "kids_true": {
     "voice": "Laomedeia",
-    "how": "те же дети кричат всерьёз: запыхавшись, взволнованно, без смеха",
-    "name": "дети Каперны",
-    "short": "дети"
+    "how": "the same children shouting in earnest: out of breath, excited, not laughing",
+    "name": "the children of Kaperna",
+    "short": "the children"
   },
   "girl": {
     "voice": "Zephyr",
-    "how": "маленькая девочка: робко, с восхищением",
-    "name": "девочка лет семи",
-    "short": "девочка"
+    "how": "a little girl: shyly, in delight",
+    "name": "a girl of about seven",
+    "short": "the girl"
   }
 }

@@ -1,29 +1,29 @@
-// «Кольцо» (Лес, кусок `ring`): Грей на коленях, кольцо в пальцах; он надевает его спящей Ассоль на палец. Желоб на
-// его руке с кольцом (`grey#ring`): пока держат, налив растёт — рука тянется, сцена показывает её по ключу `ring_at`.
-// Спящая шевелится (`stir`) — это дуга опасности на метке: пока держат, она шевелится всё сильнее, пока нет —
-// успокаивается, и время от времени вздыхает. Дошло до края под пальцем — она почти проснулась: рука отходит, и надо
-// замереть, пока дыхание не выровняется (держать нельзя секунду). Когда `ring_at` дошёл до 1, сцена говорит `ring:on` —
-// это конец. Дыхание её слышно (звук вещи).
-// → { on: true, stirs: сколько раз она почти проснулась, seconds: от начала до конца }
+// «The ring» (the wood, the beat `ring`): Gray on his knees, the ring in his fingers; he puts it on the sleeping Assol's finger. A groove on
+// his hand with the ring (`grey#ring`): while it is held, the fill grows — the hand reaches out, the scene shows it by the key `ring_at`.
+// The sleeping girl stirs (`stir`) — that is the danger arc on the mark: while it is held she stirs more and more, while not —
+// she calms down, and now and then she sighs. Reached the edge under the finger — she has almost woken: the hand draws back, and one must
+// keep still till her breathing evens out (no holding for a second). When `ring_at` has reached 1, the scene tells `ring:on` —
+// that is the end. Her breathing is heard (the thing's sound).
+// → { on: true, stirs: how many times she almost woke, seconds: from the start to the end }
 import { until, keys } from '../hands.js';
 
-const REACH = 0.11; // ring_at в секунду, пока держат
-const SPOOK = 0.25; // stir в секунду, пока держат
-const CALM = 0.35; // stir в секунду, пока нет
-const SIGH = [4, 7]; // раз в столько секунд — вздох
-const SIGH_BY = 0.3; // на сколько вздох прибавляет stir
-const WAKING_STIR = 0.6; // stir после «почти проснулась»
-const RECOIL = 0.15; // на сколько рука отходит
-const STILL = 1; // секунд, пока после этого держать нельзя
-const ON_WITHIN = 3000; // сколько ждать от сцены `ring:on`, мс
-const BREATH = [0.2, 0.8]; // дыхание: g.sound.breath(BREATH[0] + BREATH[1] * stir, 0.2)
+const REACH = 0.11; // ring_at a second, while it is held
+const SPOOK = 0.25; // stir a second, while it is held
+const CALM = 0.35; // stir a second, while it is not
+const SIGH = [4, 7]; // a sigh once in so many seconds
+const SIGH_BY = 0.3; // how much a sigh adds to stir
+const WAKING_STIR = 0.6; // stir after «she almost woke»
+const RECOIL = 0.15; // how far the hand draws back
+const STILL = 1; // seconds after that with no holding
+const ON_WITHIN = 3000; // how long to wait for the scene's `ring:on`, ms
+const BREATH = [0.2, 0.8]; // the breathing: g.sound.breath(BREATH[0] + BREATH[1] * stir, 0.2)
 
 export default {
-  title: 'Кольцо', // (как её зовёт ☰ автора)
+  title: 'The ring', // (as the author's ☰ lists it)
   about: 25,
   skipped: { on: false, stirs: 0, seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Она спала легко, как спят в детстве' });
+    const mg = g.minigame({ phrase: tr('She slept lightly, as children sleep') });
     const send = keys(g), tension = mg.layer('tension');
     const mark = mg.mark({ at: 'grey#ring', kind: 'groove' });
     const hold = mg.hold({ on: mark, seconds: 1 / REACH, drain: 0 });

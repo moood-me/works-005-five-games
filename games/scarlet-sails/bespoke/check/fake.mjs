@@ -22,7 +22,7 @@ export function page(scenes, trouble) {
   return {
     game: { mine: false }, layer: null, saved: null,
     specOf: async folder => {
-      if (!scenes.has(folder)) throw new Error(`сцены «${folder}» нет в мире`);
+      if (!scenes.has(folder)) throw new Error(`the world has no scene “${folder}”`);
       return scenes.get(folder).spec;
     },
     trouble,

@@ -11,7 +11,7 @@
   background: repeating-linear-gradient(0deg, rgba(92, 78, 54, 0.14) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(90deg, rgba(255, 251, 240, 0.22) 0 1px, transparent 1px 3px), var(--linen); }
 
-/* the scales: the yacht (Сказка ↔ Люди) on the left, the compass (Море ↔ Дом) on the right */
+/* the scales: the yacht (Tale ↔ People) on the left, the compass (Sea ↔ Home) on the right */
 #layer .gauge { position: absolute; bottom: 64px; width: 72px; height: 72px; overflow: visible; opacity: 0; transition: opacity 2s ease;
   filter: drop-shadow(0 0 2px rgba(216, 207, 189, 0.9)); }
 #layer .yacht { left: 14px; }
@@ -33,7 +33,7 @@
 #layer .slip .arrow { font-family: Georgia, "Times New Roman", serif; font-size: 0.8em; }
 @keyframes slip-in { from { opacity: 0; translate: 0 -8px; } }
 
-/* the hint: one line low in the middle; «Дальше» under it */
+/* the hint: one line low in the middle; «Onward» under it */
 #layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 4px 16px 5px; max-width: 80vw; white-space: nowrap;
   font: 22px/1.2 var(--hand); box-shadow: 0 1px 3px rgba(28, 42, 74, 0.45); opacity: 0; transition: opacity 1.2s ease; }
 #layer .hint.on { opacity: 0.95; }
@@ -83,7 +83,7 @@
 #layer .tools { position: absolute; z-index: 10; top: calc(var(--below-header) + 8px); right: 14px; display: flex; gap: 6px; }
 #layer .tools > button { width: 44px; height: 44px; border: 0; border-radius: 4px; font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.6; }
 #layer .tools > button:hover { opacity: 1; }
-/* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
+/* ☰: a window over the scene, below the site's header — «play as…», then the chapters side by side, each a column
    of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
   background: rgba(28, 42, 74, 0.4); }
@@ -104,7 +104,7 @@
 #layer .author-panel .minigames { display: flex; flex-direction: column; }
 #layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 13px; font-style: italic; }
 
-/* «Алый»: the scarlet scrap of the first chapter, the sample on the language's plate (its colours — the scrap's, as the
+/* «Scarlet»: the scarlet scrap of the first chapter, the sample on the language's plate (its colours — the scrap's, as the
    world's closeups paint it) */
 .scrap-sample { display: block; width: 46px; height: 30px; border-radius: 3px 9px 4px 7px; rotate: -4deg;
   background: radial-gradient(ellipse at 30% 30%, #ec4a52, #d4283a 55%, #a8182c); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }

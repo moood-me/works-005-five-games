@@ -1,4 +1,4 @@
-// «Отпустить» (Замок, после куска `farewell`): the insert `hold` is open — the mother's four fingers on her son's
+// «Let go» (the castle, after the beat `farewell`): the insert `hold` is open — the mother's four fingers on her son's
 // hand, the scene's keys grip1…grip4 (1 holding → 0 let go). A choice, not a skill: one finger at a time has a mark
 // (hands#fingerN) — pulled away from, it tears off, it lets go; or nothing is done, and she lets go herself, a finger
 // after a finger. Both ways are shown from the start; nothing says «wrong». The chapter reads `pried` = opened > 0.
@@ -13,11 +13,11 @@ const GAP = 1.5; // s between the fingers she lets go
 const END = 1; // s after the last finger
 
 export default {
-  title: 'Отпустить',
+  title: 'Let go',
   about: 15,
   skipped: { opened: 0, waited: true },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Мать держала его руку и не могла отпустить' });
+    const mg = g.minigame({ phrase: tr('His mother held his hand and could not let it go') });
     mg.plate.set({ glow: null });
     const free = new Set();
     let opened = 0, mark = null, still = 0, hers = null, last = 0;

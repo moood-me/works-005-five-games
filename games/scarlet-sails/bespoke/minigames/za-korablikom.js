@@ -1,9 +1,9 @@
-// «За корабликом» (I, «Лес у моря», the beat `chase`): Assol runs along the stream after her yacht. Held anywhere
+// «After the little ship» (I, «The Wood by the Sea», the beat `chase`): Assol runs along the stream after her yacht. Held anywhere
 // (the language's hold, no mark: she is the thing, she glows) she runs; let go, she stands where she is. The yacht's
 // place is the game's own number `toy`: it goes down the stream by its own clock (sent under the key `toy`, with time,
 // so that it glides), never read back. Held, she runs on to where the yacht is (a little ahead of it at most, never in
 // front of it by more); the scene walks her there (`run`) and says where she is (`run_at`). Left behind too far, the
-// yacht sticks in the reeds (`reeds`) and waits — «отстала»; caught up, it goes on. The scene stops her before a snag
+// yacht sticks in the reeds (`reeds`) and waits — «left behind»; caught up, it goes on. The scene stops her before a snag
 // (`chase:snag`): a ring on the snag, pressed — she is over it (`jump`). All in `run`'s units: 0 — where the yacht was
 // set afloat, 1 — the mouth.
 //   → { seconds, lost (how many times the yacht stuck), jumps }
@@ -22,15 +22,15 @@ const GLIDE = 0.34; // s: the scene glides the yacht between the places sent
 const skipped = { seconds: 0, lost: 0, jumps: 0 };
 
 export default {
-  title: 'За корабликом', // (as the author's ☰ lists it)
+  title: 'After the little ship', // (as the author's ☰ lists it)
   about: 40,
   skipped,
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Ручей, играя, уносил кораблик всё дальше к морю' });
+    const mg = g.minigame({ phrase: tr('The stream, at play, carried the little ship further and further towards the sea') });
     const send = keys(g);
     const at = () => clamp(+g.get('run_at') || 0); // where she is (the scene keeps it)
     const run = mg.hold({ on: null, seconds: 1, drain: 0 }); // (held — she runs: what it reports is whether)
-    const toyAt = mg.mark({ at: 'toy#toy', hidden: true }); // (where «отстала» is shown)
+    const toyAt = mg.mark({ at: 'toy#toy', hidden: true }); // (where «left behind» is shown)
     mg.glow('assol');
     b.minigame.tricks.teach(mg, [run], { id: 'hold:anywhere' });
     let toy = 0, stuck = false, lost = 0, jumps = 0, wasHeld = false, snag = null, over = false;

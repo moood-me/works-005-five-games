@@ -1,11 +1,13 @@
 {
   "type": "bespoke",
-  "title": "Алые паруса v3",
-  "description": "По повести Александра Грина: две жизни по очереди — Ассоль в Каперне и Грей в замке и в море; чудо, сделанное своими руками. На движке 3.",
+  "title": "Scarlet Sails",
+  "description": "Assol grows up in Kaperna, where people think her strange. Somewhere far away, Captain Gray is searching for what makes life worth living. Two lives that must meet — and a miracle someone has to make with their own hands.",
+  "line": "A girl was promised a ship with scarlet sails. The whole village laughs — and she waits.",
+  "source": "after the novella by Alexander Grin",
   "genres": {
-    "драма": 80,
-    "отношения": 70,
-    "погружение": 60
+    "drama": 80,
+    "relationships": 70,
+    "immersion": 60
   },
   "world": "pavel--alye-parusa-v3",
   "scenes": []

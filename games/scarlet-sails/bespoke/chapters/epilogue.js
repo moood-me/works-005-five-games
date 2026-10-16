@@ -1,18 +1,18 @@
-// Эпилог — the night on the «Секрет», the violin over it: the cask of the Greys opened (Дом: the letter brought him
-// home) or the crew's song (Море); at dawn the mail steamer overtaken, if Longren went to sea; his mother at her
+// Epilogue — the night on the Secret, the violin over it: the cask of the Grays opened (Home: the letter brought him
+// home) or the crew's song (Sea); at dawn the mail steamer overtaken, if Longren went to sea; his mother at her
 // window. Put together from what the play decided; no choices, no scales; after it — the sails of the whole play
-// (game.js). It begins without «Даль»: the finale's music is not cut off. design.md, game.md §6.
+// (game.js). It begins without the Far Sea: the finale's music is not cut off. design.md, game.md §6.
 // Reads: facts.wine, longren (and, through the scenes' own keys: wine; letter, home). Leaves: nothing.
 import { SCENES, facts } from '../story.js';
 
 export default {
   number: '',
-  title: 'Эпилог',
+  title: tr('Epilogue'),
   wall: false,
-  titles: ['Ночь на «Секрете»', 'Пароход', 'Окно'],
+  titles: ['The night on the Secret', 'The steamer', 'The window'],
   choices: [],
   steps: [
-    // the night on the «Секрет»: the violin; the old wine — or the crew sings (the orchestra goes)
+    // the night on the Secret: the violin; the old wine — or the crew sings (the orchestra goes)
     async g => {
       const f = facts(g.state);
       g.hero('both');
@@ -28,7 +28,7 @@ export default {
       };
       g.signal.addEventListener('abort', stop, { once: true });
       await look;
-      if (f.wine) await g.say('narrator', 'В ту ночь пили старое вино Греев. Его берегли для рая');
+      if (f.wine) await g.say('narrator', 'That night they drank the old wine of the Grays. It had been kept for paradise');
       else song = g.sound.song();
       await night;
       stop();

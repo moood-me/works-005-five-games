@@ -1,4 +1,4 @@
-// «Кисть» (II, the castle): the insert `canvas` is open — three nails on the painting. A spot on each (the insert's
+// «Brush» (II, the castle): the insert `canvas` is open — three nails on the painting. A spot on each (the insert's
 // points canvas#nail1…3), rubbed over with the brush, in any order, all three at once on the screen: how far each is
 // covered is how far it is painted over — the scene shows it by its keys nail1…nail3 (0…1). Each stroke's beginning —
 // the brush's own sound.
@@ -8,11 +8,11 @@ import { until, keys } from '../hands.js';
 const NAILS = [1, 2, 3];
 
 export default {
-  title: 'Кисть', // (as the author's ☰ lists it)
+  title: 'Brush', // (as the author's ☰ lists it)
   about: 15,
   skipped: { order: [3, 1, 2], seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Гвозди на картине были написаны так, что больно было смотреть' });
+    const mg = g.minigame({ phrase: tr('The nails in the picture were painted so that it hurt to look') });
     const send = keys(g), t0 = mg.t, order = [];
     const nails = NAILS.map(n => {
       const mark = mg.mark({ at: `canvas#nail${n}`, kind: 'spot' }), rub = mg.rub({ on: mark });

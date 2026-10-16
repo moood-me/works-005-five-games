@@ -56,25 +56,25 @@ export const SCENES = { shore: 'main', home: 'dom-longrena', forest: 'les-u-mory
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean.
 export const SCALES = {
-  tale: { start: 0, min: -3, max: 3, up: 'Сказка', down: 'Люди',
-    rule: 'Паруса алеют, когда Ассоль верит. Белеют, когда она живёт как все.' },
-  sea: { start: 0, min: -4, max: 4, up: 'Море', down: 'Дом', rule: 'Стрелка — куда тянет Грея: домой или в море.' },
+  tale: { start: 0, min: -3, max: 3, up: tr('Tale'), down: tr('People'),
+    rule: tr('The sails glow scarlet when Assol believes. They pale when she lives like everyone else.') },
+  sea: { start: 0, min: -4, max: 4, up: tr('Sea'), down: tr('Home'), rule: tr('The needle shows where Gray is drawn: home or out to sea.') },
 };
 export const ENDINGS = [
-  { id: 'grin', label: 'Как у Грина' }, { id: 'cry', label: 'Красные паруса плывут!' },
-  { id: 'waited', label: 'Она ждала' }, { id: 'kaperna', label: 'Вся Каперна' },
+  { id: 'grin', label: tr('As Grin wrote it') }, { id: 'cry', label: tr('Red sails are coming!') },
+  { id: 'waited', label: tr('She waited') }, { id: 'kaperna', label: tr('All Kaperna') },
 ];
 
 // What follows from the play so far — all a step reads of it besides g.state. A choice not made (its step skipped by
 // the author) gives the value written here.
 export function facts(state) {
   const c = state.choices, tale = state.scales.tale >= 0 ? 'tale' : 'people', way = c.way ?? 'secret';
-  const home = c.letter ? c.letter === 'home' : state.scales.sea < 0; // Grey's side: the letter decides it
+  const home = c.letter ? c.letter === 'home' : state.scales.sea < 0; // Gray's side: the letter decides it
   return {
     tale, // 'tale' | 'people'
-    warm: Math.min(1, Math.max(0, (3 - state.scales.tale) / 6)), // 0 Сказка … 1 Люди
+    warm: Math.min(1, Math.max(0, (3 - state.scales.tale) / 6)), // 0 Tale … 1 People
     sea: home ? 'home' : 'sea', // 'sea' | 'home'
-    home: Math.min(1, Math.max(0, (4 - state.scales.sea) / 8)), // 0 Море … 1 Дом
+    home: Math.min(1, Math.max(0, (4 - state.scales.sea) / 8)), // 0 Sea … 1 Home
     way, // 'secret' | 'straight'
     longren: way === 'straight' ? 'knows' : c.longren === 'go' ? 'sea' : 'home',
     ring: c.ring === 'wear' ? 'finger' : c.ring === 'hide' ? 'cord' : 'none',
@@ -216,7 +216,7 @@ export function context(b, view, hub, state, j = null) {
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`кусок «${name}» не кончился`);
+      if (wait && !(await ended)) b.trouble(`the beat “${name}” did not end`);
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
@@ -248,7 +248,7 @@ export function context(b, view, hub, state, j = null) {
       }
     },
     minigame(o = {}) {
-      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      if (!playing) throw new Error('g.minigame is only for inside a mini-game (g.play)');
       const mg = b.minigame.start({ ...o, signal: playing.signal });
       mg.on('skip', playing.end);
       return mg;
