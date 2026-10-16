@@ -1,7 +1,7 @@
 /* The game over the scene (ui.js), as a silent film's intertitles: black cards, a thin double white frame with
    corners, white serif letters, a little flicker and grain. Warm (--beam) is the beam of Toto's gauge alone. */
 #layer { --card: #0d0b09; --ink: #efe8da; --frame: rgba(239, 232, 218, 0.8); --beam: #f2c46b;
-  --title: "Paradizo Title", Georgia, "Times New Roman", serif;
+  --title: "Paradiso Title", Georgia, "Times New Roman", serif;
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
   --below-header: 46px; } /* where the site's header ends */
 #layer .gauge, #layer .toasts, #layer .hint, #layer .title { pointer-events: none; }

@@ -16,7 +16,7 @@ const GLUE = 1.2, DRAIN = 0.6; // s: the press's fill; it drains from full
 const STEPS = 2 * N;
 
 export default {
-  file: 'skleyka',
+  file: 'splice',
   title: 'Splicing', // as the author's ☰ lists it
   about: 18,
   skipped: { jumps: 0 },

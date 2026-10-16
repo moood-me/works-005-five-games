@@ -15,7 +15,7 @@ const STEPS = SEGMENTS + 1;
 const DONE = 0.98;
 
 export default {
-  file: 'zapravka',
+  file: 'thread',
   title: 'Threading', // as the author's ☰ lists it
   about: 14,
   skipped: { slips: 0 },

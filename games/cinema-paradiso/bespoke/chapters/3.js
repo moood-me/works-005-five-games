@@ -3,10 +3,10 @@
 // door if not), the hundred nights under her balcony (A Hundred Nights), ⚑ the ninety-ninth night — wait on, or go to the
 // booth where the New Year's film must run. game.md §6 "Chapter III".
 // Reads: facts.alfredoHere (where the story is told; L52). Leaves: choices.camera, choices.nights; scales.toto (III.1
-// ±1, III.4 ±1); marks.reel8 (film); hands.kamera, sto-nochey.
+// ±1, III.4 ±1); marks.reel8 (film); hands.camera, hundred-nights.
 import { SCENES, facts } from '../story.js';
-import kamera from '../minigames/kamera.js';
-import stoNochey from '../minigames/sto-nochey.js';
+import camera from '../minigames/camera.js';
+import hundredNights from '../minigames/hundred-nights.js';
 
 // a handle of sound (theme, camera8) stopped when the step is left
 const held = (g, h) => {
@@ -34,7 +34,7 @@ export default {
       await g.say('narrator', 'I was seventeen. I filmed everything with a little camera');
       await dusk;
       const cam = held(g, g.sound.camera8());
-      await g.play(kamera, { onFrame: inFrame => cam.loud(inFrame ? 0.6 : 0.15, 0.3) });
+      await g.play(camera, { onFrame: inFrame => cam.loud(inFrame ? 0.6 : 0.15, 0.3) });
       g.set('viewfinder', 0);
       g.set('pan', 0);
       g.set('elena_x', 0);
@@ -42,11 +42,11 @@ export default {
       g.set('rec', 0);
       cam.stop(0.5);
       await g.beat('seen');
-      const camera = await g.choose('camera', {
+      const shot = await g.choose('camera', {
         toto: [{ id: 'film', label: tr('Keep filming') }],
         elena: [{ id: 'speak', label: tr('Go up to her') }],
       });
-      if (camera === 'film') {
+      if (shot === 'film') {
         g.scale('toto', 1);
         g.mark('reel8', true, tr('Totò will keep the film.'));
         const still = held(g, g.sound.camera8());
@@ -98,7 +98,7 @@ export default {
       await g.say('narrator', 'I decided to stand there a hundred nights. To sit, to be honest');
       await chair;
       await g.beat('nights');
-      await g.play(stoNochey);
+      await g.play(hundredNights);
       g.set('chalk', 98);
       g.set('night_kind', 'cold');
       g.set('elena_window', 0);

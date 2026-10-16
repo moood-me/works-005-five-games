@@ -3,10 +3,10 @@
 // truth, or «if you love him — leave him» (the note on the calendar, the leaf turned by his hand; «No» in the morning);
 // the call-up and her letters (or his, returned); ⚑ the pier at dusk: go, or stay one more year; ⚑ the station at
 // dawn: «don't come back» or «come back when you want», ~ the look from the train. game.md §6 "Chapter IV".
-// Reads: hands.smena (facts.missed: L129), facts.elena (IV.4, IV.5), marks.alfredo (L71). Leaves: choices.elena,
-// stay, station, look; scales.alfredo (IV.3 ±1, IV.6 ±1), scales.toto (IV.5 ±1); hands.smena.
+// Reads: hands.changeover (facts.missed: L129), facts.elena (IV.4, IV.5), marks.alfredo (L71). Leaves: choices.elena,
+// stay, station, look; scales.alfredo (IV.3 ±1, IV.6 ±1), scales.toto (IV.5 ±1); hands.changeover.
 import { SCENES, facts } from '../story.js';
-import smena from '../minigames/smena.js';
+import changeover from '../minigames/changeover.js';
 
 export default {
   number: 'IV',
@@ -57,7 +57,7 @@ export default {
       await g.say('narrator', 'At six she didn\'t come');
       await six;
       await g.beat('changeover');
-      await g.play(smena);
+      await g.play(changeover);
       g.set('cue', 0);
       g.set('white', 0);
       g.set('clock', 10);

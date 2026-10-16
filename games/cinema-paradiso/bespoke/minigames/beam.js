@@ -18,7 +18,7 @@ const TELL = 0.25; // s between onFocus
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  file: 'luch',
+  file: 'beam',
   title: 'The Beam', // as the author's ☰ lists it
   about: 14,
   skipped: { seconds: 0 },

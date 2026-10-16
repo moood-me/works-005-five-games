@@ -52,7 +52,7 @@ export default async function (b) {
   await Promise.all([b.css('fonts.css'), b.css('ui.css')]);
   // the language of mini-games in this game's letters: the plate and the petals in the intertitles' serif, the marks'
   // lines and the ghost finger in the old film's white (warm is the beam's alone: none of it here)
-  b.minigame.style({ key: 'E_MAJOR_D_FLAT_MINOR', font: '"Paradizo Title", Georgia, serif', colors: { mark: '#efe8da', ghost: '#efe8da' } });
+  b.minigame.style({ key: 'E_MAJOR_D_FLAT_MINOR', font: '"Paradiso Title", Georgia, serif', colors: { mark: '#efe8da', ghost: '#efe8da' } });
   const hub = listen(b);
   const view = ui(b.layer);
   b.onPause(pause);

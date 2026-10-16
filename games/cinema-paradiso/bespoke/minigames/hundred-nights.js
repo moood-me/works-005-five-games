@@ -15,7 +15,7 @@ const SHUTTER_IN = 0.4, SHUTTER_HOLD = 1.5; // s
 const RAIN = 0.6; // the rain's level in a rainy week
 
 export default {
-  file: 'sto-nochey',
+  file: 'hundred-nights',
   title: 'A Hundred Nights', // as the author's ☰ lists it
   about: 36,
   skipped: {},

@@ -4,11 +4,11 @@
 // stay at the Paradiso; ⚑ the funeral — walk behind the coffin or stand at the door; the tin from Anna; the ruined
 // hall and booth: the note on the calendar (if he knows), the strip of kisses against the window (The Strip). No projector
 // whirr in this chapter except the memory's flash and «The Strip». game.md §6 "Chapter V".
-// Reads: facts.frame, reel8, kino, elena, knows, hold; marks.mother; choices.station. Leaves: choices.girl, ask (only
-// on follow), funeral; hands.zapiska, lenta.
+// Reads: facts.frame, reel8, cinema, elena, knows, hold; marks.mother; choices.station. Leaves: choices.girl, ask (only
+// on follow), funeral; hands.note, strip.
 import { SCENES, facts } from '../story.js';
-import zapiska from '../minigames/zapiska.js';
-import lenta from '../minigames/lenta.js';
+import note from '../minigames/note.js';
+import strip from '../minigames/strip.js';
 
 // a handle of sound (theme, camera8) stopped when the step is left
 const held = (g, h) => {
@@ -68,7 +68,7 @@ export default {
       await asked;
       if (g.state.marks.mother) await g.say('maria_old', 'Once in your life you told me the truth, about the milk. Tell me now too: are you happy?', 'maria');
       else await g.say('maria_old', 'Whenever I called, a different woman always answered. Not one of them sounded as if she loved you. Are you happy?', 'maria');
-      if (f.kino) await g.say('salvatore', 'I\'ve filmed everything I wanted to, Mamma', 'toto');
+      if (f.cinema) await g.say('salvatore', 'I\'ve filmed everything I wanted to, Mamma', 'toto');
       else await g.say('salvatore', 'No, Mamma', 'toto');
       await question;
     },
@@ -210,7 +210,7 @@ export default {
       await ruins;
       if (f.knows) {
         await g.beat('calendar');
-        await g.play(zapiska);
+        await g.play(note);
         g.set('pages', 4);
         g.set('dust', 0);
         g.set('fold', 0);
@@ -225,7 +225,7 @@ export default {
       const theme = held(g, g.sound.theme());
       g.signal.addEventListener('abort', () => g.sound.whirr(0, 0.5));
       g.sound.whirr(0.2, 2);
-      await g.play(lenta, { onProgress: u => theme.loud(0.2 + 0.6 * u, 0.5) });
+      await g.play(strip, { onProgress: u => theme.loud(0.2 + 0.6 * u, 0.5) });
       g.set('strip_x', 1);
       g.set('strip', 0);
       theme.loud(0.8, 1);

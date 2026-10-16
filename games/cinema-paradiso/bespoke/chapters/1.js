@@ -2,12 +2,12 @@
 // Alfredo's hands (the boy and the clippings: ~ a frame taken or not — the scale Cinema ↔ People appears), ⚑ the milk
 // money (Alfredo's lie, or the truth), the deal (the boy teaches Alfredo to write his name), the paper from Russia.
 // game.md §6 "Chapter I". Wall: false — it runs on from the prologue without the strip.
-// Reads: hands.podglyadyvat (facts.seen: L07 / L128). Leaves: choices.frame, choices.milk; scales.toto (I.2 ±1, I.3
-// ±1); marks.frame (take), marks.alfredo (lie), marks.mother (truth); hands.podglyadyvat, skleyka, bukvy.
+// Reads: hands.peek (facts.seen: L07 / L128). Leaves: choices.frame, choices.milk; scales.toto (I.2 ±1, I.3
+// ±1); marks.frame (take), marks.alfredo (lie), marks.mother (truth); hands.peek, splice, letters.
 import { SCENES, facts } from '../story.js';
-import podglyadyvat from '../minigames/podglyadyvat.js';
-import skleyka from '../minigames/skleyka.js';
-import bukvy from '../minigames/bukvy.js';
+import peek from '../minigames/peek.js';
+import splice from '../minigames/splice.js';
+import letters from '../minigames/letters.js';
 
 export default {
   number: 'I',
@@ -32,7 +32,7 @@ export default {
       await g.beat('peek');
       // (each line once, not waited for: the film goes on)
       let rang = false, caught = false;
-      await g.play(podglyadyvat, {
+      await g.play(peek, {
         onFirstBell: () => { if (!rang) { rang = true; g.say('adelfio', 'That\'s to be cut'); } },
         onCaught: () => { if (!caught) { caught = true; g.say('adelfio', 'Totò! Home, now!'); } },
       });
@@ -57,7 +57,7 @@ export default {
       await cutting;
       await g.beat('splice_in');
       let told = false;
-      const r = await g.play(skleyka, {
+      const r = await g.play(splice, {
         onCrooked: () => { if (!told) { told = true; g.say('alfredo', 'Cut right on the frame. So it doesn\'t jump', 'narrator'); } },
       });
       for (const n of [1, 2, 3]) {
@@ -153,7 +153,7 @@ export default {
       await g.say('alfredo', 'It\'s a deal. Just not a word to your mother');
       await deal;
       await g.beat('slate_in');
-      const r = await g.play(bukvy);
+      const r = await g.play(letters);
       g.set('letters', 7);
       g.set('chalk_x', 1);
       g.set('wobble', 0);

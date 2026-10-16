@@ -37,7 +37,7 @@
 //     every player: b.minigame.skip()) or the step is left: it stops; → `skipped` then. The ⏭ is a safety net if a
 //     minigame glitches, not a way through: each is passable. `skipped` reads as played — a plain good outcome a play
 //     gives, so a skipped minigame leaves in the story the same trace as one played.
-//     **Its result is kept in g.state.hands[<the minigame's file name>]** (game.md §3.6: 'skleyka', 'sto-nochey'…) —
+//     **Its result is kept in g.state.hands[<the minigame's file name>]** (game.md §3.6: 'splice', 'hundred-nights'…) —
 //     the name is the module's `file` field if it has one, else its `title` looked up in HANDS below (the titles of
 //     game.md §7, letter for letter): a minigame needs nothing more than its §7 title
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
@@ -56,13 +56,13 @@
 import * as sounds from './sound.js';
 
 // the world's scenes the game plays, by their folders
-export const SCENES = { square: 'main', booth: 'budka', hall: 'zal', home: 'dom', quay: 'pristan',
-  station: 'vokzal', rome: 'rim', strip: 'plenka' };
+export const SCENES = { square: 'main', booth: 'booth', hall: 'hall', home: 'home', quay: 'pier',
+  station: 'station', rome: 'rome', strip: 'strip' };
 
 // the minigames by their titles (game.md §7) → the file name their result is kept under (g.state.hands)
-export const HANDS = { 'Peeking': 'podglyadyvat', 'Splicing': 'skleyka', 'Letters': 'bukvy', 'Threading': 'zapravka',
-  'The Beam': 'luch', 'Pull Him Out': 'vytaschit', 'The Camera': 'kamera', 'A Hundred Nights': 'sto-nochey', 'Changeover': 'smena',
-  'The Note': 'zapiska', 'The Strip': 'lenta' };
+export const HANDS = { 'Peeking': 'peek', 'Splicing': 'splice', 'Letters': 'letters', 'Threading': 'thread',
+  'The Beam': 'beam', 'Pull Him Out': 'pull-out', 'The Camera': 'camera', 'A Hundred Nights': 'hundred-nights', 'Changeover': 'changeover',
+  'The Note': 'note', 'The Strip': 'strip' };
 const handsOf = m => m?.file ?? HANDS[m?.title];
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
@@ -83,20 +83,20 @@ export function facts(state) {
   const c = state.choices, t = state.scales.toto, a = state.scales.alfredo, elena = c.elena ?? 'future';
   const girl = c.girl ?? 'let', h = state.hands ?? {};
   return {
-    seen: h.podglyadyvat?.seen ?? 3,                     // I.2: L07 (≥ 2) or L128
-    slips: h.zapravka?.slips ?? 0,                       // II.1: the frame trembles in `motor` (`stutter`)
-    jumps: h.skleyka?.jumps ?? 0,                        // crooked splices: «The Strip», Rome
-    slate: h.bukvy?.crooked ?? '0000000',                // the slate with his letters in the booth of 1988
-    share: h.kamera?.share ?? 1,                         // how much of her is in his film (V.2)
-    missed: h.smena?.missed ?? 0,                        // IV.2: L129
-    letter: elena === 'truth',                           // her letter in Toto's hand on the pier (IV.5)
-    kino: t > 0,                                         // the answer to his mother in V.2, the mother at the demolition
-    warm: Math.min(1, Math.max(0, (5 - t) / 10)),        // 0 Cinema … 1 People
-    hold: a > 0,                                         // the widow's words in V.4
+    seen: h.peek?.seen ?? 3,                         // I.2: L07 (≥ 2) or L128
+    slips: h.thread?.slips ?? 0,                     // II.1: the frame trembles in `motor` (`stutter`)
+    jumps: h.splice?.jumps ?? 0,                     // crooked splices: «The Strip», Rome
+    slate: h.letters?.crooked ?? '0000000',          // the slate with his letters in the booth of 1988
+    share: h.camera?.share ?? 1,                     // how much of her is in his film (V.2)
+    missed: h.changeover?.missed ?? 0,               // IV.2: L129
+    letter: elena === 'truth',                       // her letter in Toto's hand on the pier (IV.5)
+    cinema: t > 0,                                   // the answer to his mother in V.2, the mother at the demolition
+    warm: Math.min(1, Math.max(0, (5 - t) / 10)),    // 0 Cinema … 1 People
+    hold: a > 0,                                     // the widow's words in V.4
     alfredoHere: c.booth === 'hold',
     frame: c.frame === 'take',
     reel8: c.camera === 'film',
-    elena,                                               // 'truth' | 'future'
+    elena,                                           // 'truth' | 'future'
     ending: girl === 'let' ? 'turn' : elena === 'future' ? 'note' : 'letters',
     knows: girl === 'follow' && elena === 'future',
     place: c.funeral === 'apart' ? 'apart' : 'crowd',
@@ -106,7 +106,7 @@ export function facts(state) {
 // The play's facts (f) as a scene's own keys: what g.scene opens it with, under the step's state (game.md §5).
 export function carry(folder, f) {
   return {
-    [SCENES.square]: { warm: f.warm, place: f.place, with_mother: f.kino ? 0 : 1 },
+    [SCENES.square]: { warm: f.warm, place: f.place, with_mother: f.cinema ? 0 : 1 },
     [SCENES.booth]: { alfredo_here: f.alfredoHere ? 1 : 0, jumps: f.jumps, slate_letters: f.slate },
     [SCENES.hall]: {},
     [SCENES.home]: { reel8: f.reel8 ? 1 : 0, share: f.share },

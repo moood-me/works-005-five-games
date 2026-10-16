@@ -21,7 +21,7 @@ const elenaAt = t => (t < WALK ? 1 - 0.5 * (t / WALK) : t < WALK + STOP ? 0.5 : 
 const PATH = 2 * WALK + STOP;
 
 export default {
-  file: 'kamera',
+  file: 'camera',
   title: 'The Camera', // as the author's ☰ lists it
   about: 26,
   skipped: { share: 1 },

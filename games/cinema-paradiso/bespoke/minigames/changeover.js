@@ -16,7 +16,7 @@ const STEPS = 2 * TO.length;
 const el = n => (n === 1 ? 'projector' : 'projector2');
 
 export default {
-  file: 'smena',
+  file: 'changeover',
   title: 'Changeover', // as the author's ☰ lists it
   about: 38,
   skipped: { missed: 0 },

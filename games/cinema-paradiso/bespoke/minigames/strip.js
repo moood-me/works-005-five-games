@@ -16,7 +16,7 @@ const TELL = 0.25; // s between onProgress
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  file: 'lenta',
+  file: 'strip',
   title: 'The Strip', // as the author's ☰ lists it
   about: 24,
   skipped: { seconds: 0 },

@@ -48,24 +48,24 @@ const several = (stem, n, tail = '', from = 1) => Array.from({ length: n }, (_, 
 // The minigames (game.md §7): the scene a minigame is played on, the keys it moves and those it only listens to, the
 // points its marks stand on, the fields of its opts and of its result
 const MINIGAMES = {
-  podglyadyvat: { scene: 'hall', keys: ['peek', 'screen_film', 'bell', 'turn'], points: ['curtain#gap'], opts: ['onFirstBell', 'onCaught'], result: ['seen', 'caught'] },
-  skleyka: { scene: 'booth', keys: [...several('cut', 3), ...several('glue', 3), ...several('bent', 3), 'boy_reach'],
+  peek: { scene: 'hall', keys: ['peek', 'screen_film', 'bell', 'turn'], points: ['curtain#gap'], opts: ['onFirstBell', 'onCaught'], result: ['seen', 'caught'] },
+  splice: { scene: 'booth', keys: [...several('cut', 3), ...several('glue', 3), ...several('bent', 3), 'boy_reach'],
     points: [...several('splice#cut', 3), ...several('splice#cut', 3, '_end'), ...several('splice#glue', 3)], opts: ['onCrooked'], result: ['jumps'] },
-  bukvy: { scene: 'booth', keys: ['chalk_x', 'letters', 'crooked', 'wobble'], points: ['slate#start', 'slate#end'], result: ['crooked'] },
-  zapravka: { scene: 'booth', keys: ['threaded', 'pull', 'loop'], points: several('thread#p', 6, '', 0), result: ['slips'] },
-  luch: { scene: 'square', keys: ['beam_aim', 'beam_focus', 'wall_film'], points: ['wall#screen'], opts: ['onFocus'], result: ['seconds'] },
-  vytaschit: { scene: 'booth', keys: ['drag', 'cough'], listens: ['drag_at'], points: ['toto#hand_r', 'floor#path0', 'floor#path1'], result: [] },
-  kamera: { scene: 'square', keys: ['pan', 'elena_x', 'madman_x', 'rec'], points: [], opts: ['onFrame'], result: ['share'] },
-  'sto-nochey': { scene: 'square', keys: ['chalk', 'night_kind', 'elena_window', 'mark_chalk'], points: ['toto', 'chalk_wall#chalk'], result: [] },
-  smena: { scene: 'booth', keys: ['cue', 'motor1', 'motor2', 'active', 'white', 'clock'], points: ['projector#motor', 'projector#lever', 'projector2#motor', 'projector2#lever'], result: ['missed'] },
-  zapiska: { scene: 'booth', keys: ['pages', 'fold', 'dust'], points: ['calendar#fold'], result: [] },
-  lenta: { scene: 'booth', keys: ['strip_x'], points: ['strip#hand_r'], opts: ['onProgress'], result: ['seconds'] },
+  letters: { scene: 'booth', keys: ['chalk_x', 'letters', 'crooked', 'wobble'], points: ['slate#start', 'slate#end'], result: ['crooked'] },
+  thread: { scene: 'booth', keys: ['threaded', 'pull', 'loop'], points: several('thread#p', 6, '', 0), result: ['slips'] },
+  beam: { scene: 'square', keys: ['beam_aim', 'beam_focus', 'wall_film'], points: ['wall#screen'], opts: ['onFocus'], result: ['seconds'] },
+  'pull-out': { scene: 'booth', keys: ['drag', 'cough'], listens: ['drag_at'], points: ['toto#hand_r', 'floor#path0', 'floor#path1'], result: [] },
+  camera: { scene: 'square', keys: ['pan', 'elena_x', 'madman_x', 'rec'], points: [], opts: ['onFrame'], result: ['share'] },
+  'hundred-nights': { scene: 'square', keys: ['chalk', 'night_kind', 'elena_window', 'mark_chalk'], points: ['toto', 'chalk_wall#chalk'], result: [] },
+  changeover: { scene: 'booth', keys: ['cue', 'motor1', 'motor2', 'active', 'white', 'clock'], points: ['projector#motor', 'projector#lever', 'projector2#motor', 'projector2#lever'], result: ['missed'] },
+  note: { scene: 'booth', keys: ['pages', 'fold', 'dust'], points: ['calendar#fold'], result: [] },
+  strip: { scene: 'booth', keys: ['strip_x'], points: ['strip#hand_r'], opts: ['onProgress'], result: ['seconds'] },
 };
 // game.md §3.2: what game.js itself takes of the strip (it is not run here)
 const STRIP = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'lamp'], offer: 'lamp#lamp' };
 // the results put in (game.md §11): none — every minigame skipped; then one play each with these
-const OTHER = [{ podglyadyvat: { seen: 0, caught: 1 } }, { skleyka: { jumps: 2 } }, { zapravka: { slips: 1 } },
-  { bukvy: { crooked: '0100010' } }, { kamera: { share: 0.3 } }, { smena: { missed: 1 } }];
+const OTHER = [{ peek: { seen: 0, caught: 1 } }, { splice: { jumps: 2 } }, { thread: { slips: 1 } },
+  { letters: { crooked: '0100010' } }, { camera: { share: 0.3 } }, { changeover: { missed: 1 } }];
 // the times of the script's length (game.md §11 "Length by the script"): a touch or a choice, a letter, the strip
 const ACT = 4, LETTER = 6, STRIP_S = 30;
 
@@ -410,11 +410,11 @@ const carried = (s, folder, key, beat) => {
   return at.length ? at.at(-1)[key] : undefined;
 };
 const ENDS = [
-  ['“The note”', (f, s) => [f.ending === 'note', said(s, 93), s.played.has('zapiska'), carried(s, SCENES.rome, 'note_in_hand') === 1, said(s, 107)]],
+  ['“The note”', (f, s) => [f.ending === 'note', said(s, 93), s.played.has('note'), carried(s, SCENES.rome, 'note_in_hand') === 1, said(s, 107)]],
   ['“The letters”', (f, s) => [f.ending === 'letters', said(s, 97)]],
   ['“Let it stay”', (f, s) => [f.ending === 'turn', said(s, 89)]],
   ['Alfredo holds on', (f, s) => [f.hold, said(s, 105)]],
-  ['Totò — the cinema', (f, s) => [f.kino, said(s, 85), carried(s, SCENES.square, 'with_mother', 'demolition') === 0]],
+  ['Totò — the cinema', (f, s) => [f.cinema, said(s, 85), carried(s, SCENES.square, 'with_mother', 'demolition') === 0]],
   ['the frame with Totò', (f, s) => [f.frame, s.beats.has('wallet')]],
   ['the film with Totò', (f, s) => [f.reel8, s.beats.has('home_movie')]],
   ['“I\'ll stay”', (f, s, st) => [st.choices.stay === 'stay', s.beats.has('autumn')]],

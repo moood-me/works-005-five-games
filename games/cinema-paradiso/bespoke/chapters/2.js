@@ -3,12 +3,12 @@
 // the theme whole for the first time); the fire, the boy drags him out of the smoke (Pull Him Out), Alfredo alive and
 // blind; the new Paradiso, the first uncut kiss; ⚑ blind Alfredo at his door: go with the boy to the booth, or send
 // him alone (the reel appears). game.md §6 "Chapter II".
-// Reads: hands.zapravka (facts.slips: the frame trembles in `motor`). Leaves: choices.booth; scales.alfredo (II.5 ±1);
-// the reel's gauge shown; hands.zapravka, luch, vytaschit.
+// Reads: hands.thread (facts.slips: the frame trembles in `motor`). Leaves: choices.booth; scales.alfredo (II.5 ±1);
+// the reel's gauge shown; hands.thread, beam, pull-out.
 import { SCENES, facts } from '../story.js';
-import zapravka from '../minigames/zapravka.js';
-import luch from '../minigames/luch.js';
-import vytaschit from '../minigames/vytaschit.js';
+import thread from '../minigames/thread.js';
+import beam from '../minigames/beam.js';
+import pullOut from '../minigames/pull-out.js';
 
 // a handle of sound (theme, camera8) stopped when the step is left
 const held = (g, h) => {
@@ -34,13 +34,13 @@ export default {
       await crate;
       await g.say('alfredo', 'Through here first. Leave a loop, or it\'ll tear');
       await lesson;
-      await g.play(zapravka);
+      await g.play(thread);
       g.set('threaded', 5);
       g.set('pull', 0);
       g.set('stutter', facts(g.state).slips >= 1 ? 1 : 0);
-      const beam = g.told('motor:beam'), lever = g.told('motor:lever');
+      const beamIn = g.told('motor:beam'), lever = g.told('motor:lever');
       const motor = g.beat('motor');
-      await beam;
+      await beamIn;
       g.beds({ whirr: 0.6 });
       g.sound.motif();
       await lever;
@@ -79,7 +79,7 @@ export default {
       await window;
       await g.scene(SCENES.square, { beat: 'beam_out' }, { cut: true });
       await g.beat('beam_out');
-      await g.play(luch, { onFocus: u => g.sound.whirr(0.3 + 0.3 * u, 0.3) });
+      await g.play(beam, { onFocus: u => g.sound.whirr(0.3 + 0.3 * u, 0.3) });
       g.set('beam_aim', 1);
       g.set('beam_focus', 1);
       g.set('wall_film', 'comedy');
@@ -117,7 +117,7 @@ export default {
       g.beds({ fire: 1 });
       await g.scene(SCENES.booth, { beat: 'smoke_in' }, { cut: true });
       await g.beat('smoke_in');
-      await g.play(vytaschit);
+      await g.play(pullOut);
       g.set('drag', 1);
       g.set('cough', 0);
       g.beds({ square: 0.4, fire: 0.2 }, 2);

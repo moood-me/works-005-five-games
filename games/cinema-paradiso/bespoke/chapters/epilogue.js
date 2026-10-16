@@ -2,7 +2,7 @@
 // `with_mother`: by the funeral and Toto's scale), the old madman out of the dust; Rome: the small screening room, the
 // strip of kisses on the screen under the theme, his face in the screen's white light (the note in his hand if he found
 // it — the party key `note_in_hand`). No choices; the scales are hidden (the framework). game.md §6 "Epilogue".
-// Reads: nothing directly (the scenes' party keys carry facts.place, kino, ending, jumps). Leaves: nothing.
+// Reads: nothing directly (the scenes' party keys carry facts.place, cinema, ending, jumps). Leaves: nothing.
 import { SCENES } from '../story.js';
 
 // a handle of sound (theme, camera8) stopped when the step is left

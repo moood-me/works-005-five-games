@@ -15,7 +15,7 @@ const DUST = 1; // s
 const READ = 1.5; // s on August
 
 export default {
-  file: 'zapiska',
+  file: 'note',
   title: 'The Note', // as the author's ☰ lists it
   about: 10,
   skipped: {},

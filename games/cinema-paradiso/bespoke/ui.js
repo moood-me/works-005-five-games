@@ -237,7 +237,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
       }
     };
     veil.addEventListener('click', press);
-    document.fonts.load('1em "Paradizo Title"').finally(async () => {
+    document.fonts.load('1em "Paradiso Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
       prompt(tr('unfold'));
@@ -284,7 +284,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
         leave();
       }
     });
-    document.fonts.load('1em "Paradizo Title"').finally(async () => {
+    document.fonts.load('1em "Paradiso Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
       prompt(tr('turn over'));

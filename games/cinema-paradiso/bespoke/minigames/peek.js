@@ -21,7 +21,7 @@ const PEEK = 0.5; // he peeks out when above this
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  file: 'podglyadyvat',
+  file: 'peek',
   title: 'Peeking', // as the author's ☰ lists it
   about: 28,
   skipped: { seen: 3, caught: 0 },

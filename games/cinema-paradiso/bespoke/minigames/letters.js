@@ -14,7 +14,7 @@ const SMOOTH = 0.3; // s: the speed's smoothing
 const WOBBLE = 0.4; // s
 
 export default {
-  file: 'bukvy',
+  file: 'letters',
   title: 'Letters', // as the author's ☰ lists it
   about: 14,
   skipped: { crooked: '0000000' },
