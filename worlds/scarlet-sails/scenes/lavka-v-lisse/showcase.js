@@ -1,5 +1,5 @@
 // The shop's own film, outside games: every beat of lib.js film in its order (ORDER), each cut made ready ahead (the
-// world's module beats) — and, after `silk`, what the game's «Алый» does here: the rolls one after another, each carried
+// world's module beats) — and, after `silk`, what the game's «Scarlet» does here: the rolls one after another, each carried
 // to the window, till the scarlet one.
 const L = scene.lib;
 const own = {

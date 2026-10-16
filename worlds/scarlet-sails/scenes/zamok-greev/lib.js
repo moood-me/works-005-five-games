@@ -1,4 +1,4 @@
-// The Greys' hall: what its paintings and its film share. Metres: across (right of the start), distance (ahead of it),
+// The Grays' hall: what its paintings and its film share. Metres: across (right of the start), distance (ahead of it),
 // elevation (over the floor). The hall is across −4…4.5, distance −1.5…9, 6 m high; it looks north-north-west.
 const A = anim, C = kit.cast, N = kit.nebo;
 
@@ -151,7 +151,7 @@ function chairSide(g) {
 // ── the canvas close (the insert `canvas`): the crucifixion k times its size, its foot at y0 (stage heights, across
 // from the frame's middle); where the brush's tip waits (`hand`), and where the boy's shoulder is under the frame when
 // the tip is at x (`shoulder`: the arm reaches up from there). Its size and place keep the three nails (the game's
-// «Кисть» marks them) within the frame's middle band: the hands' at 0.2 of its height, the feet's at 0.76 ──
+// «Brush» marks them) within the frame's middle band: the hands' at 0.2 of its height, the feet's at 0.76 ──
 const CLOSE = { k: 0.37, y0: 0.935, hand: aspect => [aspect / 2 + 0.2, 0.97], shoulder: (aspect, x) => [(x + aspect / 2) / 2 + 0.1, 1.9] };
 
 // ── the hour ──
@@ -176,7 +176,7 @@ const placed = st => ({ ladder_across: A.mix(plan.ladder[0], plan.ladder[1], st.
 const full = st => ({ ...st, ...N.keys(st.hour), ...placed(st) });
 
 // ── the film (the world's module beats: script.js plays a beat for the game, showcase.js all of them) ──
-// The people are the world's cast: Grey — one element `grey`: a boy of eight (`grey_boy`), at fifteen and at twenty his
+// The people are the world's cast: Gray — one element `grey`: a boy of eight (`grey_boy`), at fifteen and at twenty his
 // looks `grey_teen`, `grey` (`grey_wear`), his frock coat off `grey_shirt` — and his mother `lilian` (in mourning
 // `lilian_black`). Where they stand: gr_a / gr_d (and gr_e — how high: the ladder's rung), li_a / li_d. They face
 // (`_turn`): 0 the hearth, 90 her door, 270 the windows.
@@ -233,7 +233,7 @@ const EMBRACE = { ...UP, ...MOTHER_CLOSE, nail1: 1, nail2: 1, nail3: 1, door: 1,
   li_a: -1.92, li_d: 8.25, lilian_here: true, lilian_turn: 285, lilian_look: 'grey', lilian_reach: { r: 'grey#hips', l: 'grey#hips' } };
 // an evening: the lamps over the paintings, the fire; the boy before the ship
 const EVENING = { ...HALL, hour: 0.8, fire: 0.8, lamps: 1, gr_a: 2.75, gr_d: 8.2, grey_here: true, grey_turn: 0, grey_look: 'ship_painting#ship' };
-// the night he goes: Grey at fifteen at the table, his bundle on it; the light under her door; she behind it with a candle
+// the night he goes: Gray at fifteen at the table, his bundle on it; the light under her door; she behind it with a candle
 const NIGHT = { ...HALL, ...ACROSS_TABLE, hour: 0.96, fire: 0.25, candles: 1, door_light: 1, bundle: 1, lilian_candle: 1,
   gr_a: AT_TABLE[0], gr_d: AT_TABLE[1], grey_here: true, grey_wear: C.characters.grey_teen, grey_turn: 270, grey_look: 'table#bundle',
   li_a: AT_DOOR[0], li_d: AT_DOOR[1], lilian_turn: 270, lilian_with: ['candle'], lilian_reach: { r: CANDLE }, lilian_do: loop('sad_stand') };
@@ -311,7 +311,7 @@ const film = scene => ({
     },
   },
   // brush — closer: he is up on the ladder, painting; then the canvas close (the insert `canvas`): the nails, his hand
-  // with the brush — the game's «Кисть» paints them over (nail1…3)
+  // with the brush — the game's «Brush» paints them over (nail1…3)
   brush: {
     from: () => full(UP),
     run: async s => {
@@ -323,7 +323,7 @@ const film = scene => ({
       await s.wait(1);
     },
   },
-  // paint_over — (the scene's own showing; in the game it is «Кисть») the nails painted over one after another
+  // paint_over — (the scene's own showing; in the game it is «Brush») the nails painted over one after another
   paint_over: {
     after: 'brush',
     from: () => full({ ...UP, canvas: 1 }),
@@ -401,7 +401,7 @@ const film = scene => ({
       await s.wait(3);
     },
   },
-  // night — out of the dark, years on: Grey at fifteen at the table, his bundle on it; a strip of light under his
+  // night — out of the dark, years on: Gray at fifteen at the table, his bundle on it; a strip of light under his
   // mother's door (the game's choice)
   night: {
     from: () => full({ ...NIGHT, fade: 1 }),
@@ -521,7 +521,7 @@ const film = scene => ({
       await s.wait(1.5);
     },
   },
-  // return — out of the dark, years on, a day: Grey at twenty in his captain's frock coat comes in; his mother in black
+  // return — out of the dark, years on, a day: Gray at twenty in his captain's frock coat comes in; his mother in black
   // by his father's empty armchair turns to him. `leave` farewell — she takes a step to meet him; note — she stays by
   // the chair with his note in her hands, looking at him
   return: {
@@ -582,7 +582,7 @@ const film = scene => ({
       await s.wait(2.5);
     },
   },
-  // spring — out of the dark, a spring day: his mother at the window, Grey beside her in his frock coat; she turns to him
+  // spring — out of the dark, a spring day: his mother at the window, Gray beside her in his frock coat; she turns to him
   spring: {
     from: () => full({ ...SPRING, fade: 1, fire: warmth(scene), lamps: warmth(scene) }),
     run: async s => {

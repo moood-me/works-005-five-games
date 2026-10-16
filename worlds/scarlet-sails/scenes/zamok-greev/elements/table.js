@@ -1,4 +1,4 @@
-// What lies on the table: Grey's bundle — a knotted cloth (layer `bundle`, shown by `bundle`: table.animate.js) — and
+// What lies on the table: Gray's bundle — a knotted cloth (layer `bundle`, shown by `bundle`: table.animate.js) — and
 // where his note lies (the note itself is `note`, flat on the top): the game picks them here (`bundle`, `note`).
 e.layer("bundle", {}, (c) => {
   c.fillStyle = "#b9ae99";

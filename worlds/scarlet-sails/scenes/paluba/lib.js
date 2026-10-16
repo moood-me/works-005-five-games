@@ -1,9 +1,9 @@
-// «Палуба» — the ship seen from her own deck, her voyage, and the scene's film (film(scene): the world's module beats).
+// «The Deck» — the ship seen from her own deck, her voyage, and the scene's film (film(scene): the world's module beats).
 // Metres. The deck is laid round the unseen `ship` as a scene is laid round its start (the camera rides on it): across
 // to starboard, distance toward her bow, elevation up from the poop deck; the viewer stands on the poop to the right
 // of the wheel, the keel runs 2.4 m to the left (KEEL). `ship` stands on `hull` (her roll: its tilt is `heel`), `hull`
 // on `course` — where she is in the world and how she is turned (ship_x, ship_d, ship_f). The world lies where it is:
-// Kaperna ahead in the west, Lisse's quay far astern, the sea under all of it; she sails over it at her own speed.
+// Kaperna ahead in the west, Liss's quay far astern, the sea under all of it; she sails over it at her own speed.
 // Everything is painted once, in daylight colours (notes.md).
 const { clamp, mix, ease, span, hash } = anim;
 const N = kit.nebo;
@@ -301,7 +301,7 @@ function silkRunMotion(e) {
   });
 }
 
-// Lisse in depth (x along each row): 0 — the long warehouses on the quay, tall doors under steep roofs; 1 — the town's
+// Liss in depth (x along each row): 0 — the long warehouses on the quay, tall doors under steep roofs; 1 — the town's
 // houses behind them, narrower and taller; 2 — the town across the basin ahead, on its rise, and its one tower. Plain
 // pale shapes a tone apart; `lit` — only their windows that burn at night, warm (their own elements, `glows`).
 const TOWN = [
@@ -365,12 +365,12 @@ function sideOutside(g, e, runs) {
 const SKIFF_HUNG = 2.8;
 
 // ── the voyage: the world where it is ──
-// Kaperna lies ahead in the west; Lisse's quay 30 km astern; the open sea between and round them.
+// Kaperna lies ahead in the west; Liss's quay 30 km astern; the open sea between and round them.
 const KAPERNA = 6000, LISSE = -30000;
 // how far off Kaperna she is at `shore`: 0 — 6 km (the hill on the horizon), 1 — 600 m; below 0, farther out in the
 // open sea (−1: 15 km — no land in sight)
 const offShore = shore => (shore < 0 ? 6000 + 9000 * clamp(-shore, 0, 1) : Math.exp(mix(Math.log(6000), Math.log(600), ease.inOut(clamp(shore, 0, 1)))));
-// where the game's keys put her: alongside Lisse's quay (port), else on her course to Kaperna as far as `shore` says
+// where the game's keys put her: alongside Liss's quay (port), else on her course to Kaperna as far as `shore` says
 // (ship_at: which `port` and `shore` put her there — the script puts her anew when they say another place)
 const placedBy = ({ port = 0, shore = 0 }) => `${port >= 0.5 ? 1 : 0}:${shore}`;
 const placeOf = v => ({ ship_x: 0, ship_d: (v.port ?? 0) >= 0.5 ? LISSE : Math.round((KAPERNA - offShore(v.shore ?? 0)) * 100) / 100, ship_at: placedBy(v) });
@@ -437,7 +437,7 @@ const on = (target, shot, frame = null, more = {}) => ({ camera_target: target, 
 // it; cam_boat — low over the water off her starboard side, abaft her boat; cam_steamer — on the mail steamer's deck,
 // inboard of Longren and before him
 const off = (place, target, shot, frame) => ({ camera_on: place, ...on(target, shot, frame) });
-// her and the world at a beat's start: at sea under scarlet sails, or alongside in Lisse, her sails furled
+// her and the world at a beat's start: at sea under scarlet sails, or alongside in Liss, her sails furled
 // (a cut carries what the script would set after it: her place, the steamer's, the hour's light, her rig)
 const voyage = v => ({ ...v, ...placeOf(v), ...steamerAt(v.steamer ?? 0, placeOf(v)), ship_f: 180 + turnOf(v), ...N.keys(v.hour),
   harbour_lit: townLit(N.keys(v.hour)), ...rigOf(v) });
@@ -449,7 +449,7 @@ const OFF_KAPERNA = v => ({ ...AT_SEA({ shore: 1, ...v }), ship_d: KAPERNA - HOV
 const hands = { r: 'wheel#rim_r', l: 'wheel#rim_l' };
 // the «Anselm» far out in a swell, nobody on her yet
 const ANSELM = v => ({ ...NOBODY, ...CAM0, ...AT_SEA({ hour: 0.45, ship: 'anselm', sails: 0, roll: 0.25, storm: 0.25, shore: -1, ...v }) });
-// Grey as her ship's boy, fifteen
+// Gray as her ship's boy, fifteen
 const BOY = { wear: kit.cast.characters.grey_teen };
 // Zimmer and his two musicians, their instruments with them: sat in a row on the hatch, Zimmer between the two;
 // standing on the forecastle, swaying, the instruments lowered
@@ -483,7 +483,7 @@ function film(scene) {
     ...at('gop', MAST, toward(MAST, CROSSTREES), loop('hands_behind'), { look: 'grey#head' }) });
   return {
     // anselm — the «Anselm» in a swell, far out: Gop by the mainmast, his hands behind him, glancing at the boy; the
-    // ship's boy Grey (fifteen) before the shrouds, looking up them
+    // ship's boy Gray (fifteen) before the shrouds, looking up them
     anselm: {
       from: () => ({ ...ANSELM(), ...on('by_mast', 0.42, [0.5, 0.62]),
         ...at('gop', MAST, 200, loop('hands_behind')), ...at('grey', SHROUDS, 0, 'stand', BOY) }),
@@ -502,7 +502,7 @@ function film(scene) {
       },
     },
     // shrouds — the boy goes over to the shrouds and takes them, his hands up on the ropes; the cut into his hands
-    // close (the insert `ropes`: both closed on the shrouds, down by the deck) — the game's «Ванты» goes on from here
+    // close (the insert `ropes`: both closed on the shrouds, down by the deck) — the game's «Shrouds» goes on from here
     // (climb, hand_l, hand_r, slip, roll)
     shrouds: {
       after: 'anselm',
@@ -539,7 +539,7 @@ function film(scene) {
         await s.wait(4);
       },
     },
-    // letter — the «Anselm» in Lisse, a calm noon: Grey (twenty) at her rail reading a letter (under the game's choice)
+    // letter — the «Anselm» in Liss, a calm noon: Gray (twenty) at her rail reading a letter (under the game's choice)
     letter: {
       from: () => ({ ...NOBODY, ...CAM0, ...IN_PORT({ hour: 0.5, ship: 'anselm' }), ...on('grey', 0.9, [0.42, 0.3]),
         ...at('grey', RAIL, 90, loop('read_stand'), { with: ['letter'], look: 'grey#letter' }) }),
@@ -549,7 +549,7 @@ function film(scene) {
         await s.wait(2);
       },
     },
-    // gop_bye — the «Anselm» in Lisse, her sails furled: Gop at the rail, his hands behind him; Grey (twenty) in his
+    // gop_bye — the «Anselm» in Liss, her sails furled: Gop at the rail, his hands behind him; Gray (twenty) in his
     // frock coat, his bundle in his hand, come to say goodbye; Gop turns to him (under his line)
     gop_bye: {
       from: () => ({ ...NOBODY, ...CAM0, ...IN_PORT({ hour: 0.5, ship: 'anselm' }), ...on('by_rail', 0.7, [0.5, 0.56]),
@@ -563,7 +563,7 @@ function film(scene) {
         await s.wait(4);
       },
     },
-    // secret — the «Secret» in Lisse, her sails furled: Grey at the wheel lays his hand on its rim, looks ahead
+    // secret — the «Secret» in Liss, her sails furled: Gray at the wheel lays his hand on its rim, looks ahead
     secret: {
       from: () => ({ ...NOBODY, ...CAM0, ...IN_PORT({ hour: 0.6 }), ...on('grey', 0.9, [0.4, 0.3]), ...at('grey', AT_WHEEL, 0) }),
       run: async s => {
@@ -579,7 +579,7 @@ function film(scene) {
       },
     },
     // sew — night in port, the lanterns: the crew cut and sew the scarlet silk on the waist, Zimmer and his two
-    // musicians sat on the hatch among them, their instruments on their knees; Grey watching from the poop's rail;
+    // musicians sat on the hatch among them, their instruments on their knees; Gray watching from the poop's rail;
     // Panten comes up to him (under his line)
     sew: {
       from: () => ({ ...NOBODY, ...CAM0, ...IN_PORT({ hour: 0.95, lanterns: 1, silk: 1 }), ...on('crew2', 0.5, [0.5, 0.5]),
@@ -588,7 +588,7 @@ function film(scene) {
         ...bandSat() }),
       run: async s => {
         const grey = s.person('grey'), panten = s.person('panten');
-        // (the cut to Grey at the rail, made ready while the crew sews)
+        // (the cut to Gray at the rail, made ready while the crew sews)
         const next = s.shot({ ...on('grey', 0.75, [0.72, 0.3]), camera_pitch: -6 });
         await s.wait(3.4);
         next.cut();
@@ -603,7 +603,7 @@ function film(scene) {
         await s.wait(4);
       },
     },
-    // rail — before dawn, at sea under white sails half set: Grey at the rail turns his eyes to where Kaperna lies
+    // rail — before dawn, at sea under white sails half set: Gray at the rail turns his eyes to where Kaperna lies
     rail: {
       from: () => ({ ...NOBODY, ...CAM0, ...AT_SEA({ hour: 0.21, sails: 0, sails_set: 0.15 }), ...on('grey', 0.8, [0.36, 0.3]),
         ...at('grey', RAIL, 60, loop('hands_behind'), { look: AHEAD }) }),
@@ -614,7 +614,7 @@ function film(scene) {
         await s.wait(5);
       },
     },
-    // raise — dawn (the play's `sun` is the hour): the scarlet sails go up one after another and fill; Grey at the wheel
+    // raise — dawn (the play's `sun` is the hour): the scarlet sails go up one after another and fill; Gray at the wheel
     // looks up at them, Letika by the rail, the musicians far on the forecastle; the camera lifts its eyes with the sails
     raise: {
       from: () => ({ ...NOBODY, ...CAM0, ...AT_SEA({ hour: sun(), sails_set: 0 }), ...on('grey', 0.62, [0.26, 0.5]),
@@ -635,8 +635,8 @@ function film(scene) {
         await s.wait(2);
       },
     },
-    // helm — Grey at the wheel, steering for Kaperna; far on the forecastle the musicians stand swaying, their
-    // instruments lowered (under the game's «Курс»: helm, heading, luff). After `raise` it goes on where she is; the
+    // helm — Gray at the wheel, steering for Kaperna; far on the forecastle the musicians stand swaying, their
+    // instruments lowered (under the game's «Course»: helm, heading, luff). After `raise` it goes on where she is; the
     // scene opened on it, the play's keys place it: `leg` — how far along her way she is (as `shore`), `sun` — the hour
     helm: {
       after: 'raise',
@@ -650,7 +650,7 @@ function film(scene) {
         s.tell('helm:ready');
       },
     },
-    // arrive — Kaperna close (the play's `sun` is the hour): the hill, the houses, the cape; Grey and Letika at the rail
+    // arrive — Kaperna close (the play's `sun` is the hour): the hill, the houses, the cape; Gray and Letika at the rail
     // look at the shore as she stands in, shakes the wind out of her sails and lies to; the cut over her side, seen from
     // the water — her boat goes down from under the rail to the water (skiff_down), the two at the rail over it
     arrive: {
@@ -674,7 +674,7 @@ function film(scene) {
     },
     // steamer — the epilogue, dawn: the «Secret» comes up with the mail steamer, the two at the rail seen from the poop,
     // the steamer ahead; the cut to Assol from over the side, close (the ring with her, as the play has it): she waves,
-    // Grey beside her; the cut onto the steamer, from behind: Longren at her rail with his pipe, the scarlet sails
+    // Gray beside her; the cut onto the steamer, from behind: Longren at her rail with his pipe, the scarlet sails
     // beyond him — he lifts his hand
     steamer: {
       from: () => ({ ...NOBODY, ...CAM0, ...AT_SEA({ hour: 0.27, shore: -0.5, steamer: 0.97 }), ...on('by_rail', 0.7, [0.3, 0.56]),
@@ -703,8 +703,8 @@ function film(scene) {
       },
     },
     // night_end — the epilogue, night at sea under the scarlet sails, the lanterns: on the waist Zimmer stands by the
-    // mainmast, swaying, his fiddle lowered; the cut to Assol and Grey at the rail, their faces to us (from over the
-    // side). The play's `wine` (0 unless the game says 1): 1 — the old cask of the Greys and its mugs, two sailors
+    // mainmast, swaying, his fiddle lowered; the cut to Assol and Gray at the rail, their faces to us (from over the
+    // side). The play's `wine` (0 unless the game says 1): 1 — the old cask of the Grays and its mugs, two sailors
     // beyond it, seen between the two at the rail; 0 — no cask: four sailors sit on the hatch and sing (sitting still:
     // the song is the game's sound) — the beat opens on them from the poop's break, Zimmer standing behind them
     night_end: {

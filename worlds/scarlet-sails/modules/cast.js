@@ -1,4 +1,4 @@
-// The people of «Алые паруса» as people in a scene (the engine's people.js: an element with "person"): who they are —
+// The people of «Scarlet Sails» as people in a scene (the engine's people.js: an element with "person"): who they are —
 // figures of shapes in this world's style, clean straight-edged shapes in plain colours lit by the scene's own light, as
 // the world is painted (modern, quiet, minimal) — and how they move: the motions in cast.data.json (Kimodo's, put there
 // with put_motion). cast.md says who is who, what each carries and what each motion is. A part's lengths are a man's
@@ -77,19 +77,19 @@ return {
     longren: { kind: 'shapes', style: 'parusa', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['beard'],
       body: { height: 1.04, shoulders: 1.18, thick: 1.14, arms: 1.03 },
       colors: { skin: '#b4886a', hair: '#8e8880', top: '#bdb4a4', garment: '#3e4a58', bottom: '#3a3732', hat: '#2c3138', shoes: '#26221e' } },
-    // Arthur Grey, a captain of twenty: tall and lean, weathered, a dark-blue captain's frock coat, bare-headed
+    // Arthur Gray, a captain of twenty: tall and lean, weathered, a dark-blue captain's frock coat, bare-headed
     grey: { kind: 'shapes', style: 'parusa', who: 'man', garment: 'frockcoat', hair: 'short',
       body: { height: 1.06, thick: 0.9, shoulders: 1.02 },
       colors: { skin: '#c39a7a', hair: '#3b2a1f', top: '#e6e1d6', garment: '#1f2b46', bottom: '#262a33', shoes: '#1b1a1c' } },
-    // Grey, a boy of eight: fair hair, a velvet jacket
+    // Gray, a boy of eight: fair hair, a velvet jacket
     grey_boy: { kind: 'shapes', style: 'parusa', who: 'child', garment: 'jacket', hair: 'short',
       body: { height: 0.72, thick: 0.8 },
       colors: { skin: '#e2bd9d', hair: '#d4ba86', top: '#e9e4da', garment: '#5b2f3d', bottom: '#3a3438', shoes: '#231f22' } },
-    // Grey at fifteen, a ship's boy: shot up tall, a canvas smock, barefoot
+    // Gray at fifteen, a ship's boy: shot up tall, a canvas smock, barefoot
     grey_teen: { kind: 'shapes', style: 'parusa', who: 'teen', garment: 'tunic', hair: 'short', barefoot: 'both',
       body: { height: 0.94, thick: 0.78 },
       colors: { skin: '#c9a080', hair: '#b39a6c', top: '#b6ab92', bottom: '#5d584c' } },
-    // Lilian Grey, his mother: thin and pale, a dark dress (black, a widow — colors over it), her hair in a bun
+    // Lilian Gray, his mother: thin and pale, a dark dress (black, a widow — colors over it), her hair in a bun
     lilian: { kind: 'shapes', style: 'parusa', who: 'woman', garment: 'dress', hair: 'bun',
       body: { height: 0.94, thick: 0.76, shoulders: 0.84 },
       colors: { skin: '#e3cdbb', hair: '#4a3a30', top: '#3b3442', garment: '#3b3442', shoes: '#1e1b20' } },
@@ -97,7 +97,7 @@ return {
     lilian_black: { kind: 'shapes', style: 'parusa', who: 'woman', garment: 'dress', hair: 'bun',
       body: { height: 0.94, thick: 0.76, shoulders: 0.84 },
       colors: { skin: '#e3cdbb', hair: '#4a3a30', top: '#1d1b20', garment: '#1d1b20', shoes: '#141215' } },
-    // Grey with his frock coat off: a white shirt, dark trousers
+    // Gray with his frock coat off: a white shirt, dark trousers
     grey_shirt: { kind: 'shapes', style: 'parusa', who: 'man', garment: 'none', hair: 'short',
       body: { height: 1.06, thick: 0.9, shoulders: 1.02 },
       colors: { skin: '#c39a7a', hair: '#3b2a1f', top: '#e6e1d6', bottom: '#262a33', shoes: '#1b1a1c' } },
@@ -113,7 +113,7 @@ return {
     filipp: { kind: 'shapes', style: 'parusa', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['beard'],
       body: { height: 1.02, thick: 1.3, shoulders: 1.1 },
       colors: { skin: '#8c6c58', hair: '#2a2523', top: '#4a4642', garment: '#2f2d2b', bottom: '#2b2927', hat: '#242220', shoes: '#1d1b1a' } },
-    // Egl, the old storyteller: tall and lean, a white beard, a straw hat
+    // Egle, the old storyteller: tall and lean, a white beard, a straw hat
     egl: { kind: 'shapes', style: 'parusa', who: 'old', garment: 'coat', hair: 'short', hat: 'hat', parts: ['beard'],
       body: { height: 1.07, thick: 0.78 },
       colors: { skin: '#c49c80', hair: '#e2ddd3', garment: '#8f8a7c', bottom: '#5e5a52', hat: '#cdb98a', shoes: '#3a342d' } },
@@ -181,18 +181,18 @@ return {
   },
   shapes: {
     // the world's style: the engine's flat geometry — straight edges, plain colours, lit by the scene
-    styles: { parusa: { from: 'flat', name: 'Алые паруса', line: 0.8, face: 'simple' } },
+    styles: { parusa: { from: 'flat', name: 'Scarlet Sails', line: 0.8, face: 'simple' } },
     garments: {
       // a child's short frock: to the knee, bare arms, bare legs below it
-      frock: { name: 'платьице', hang: [{ to: 1.05, from: 'waist', flare: 0.4, off: 0.94 }], short: true, bare: true, bodice: true },
+      frock: { name: 'little frock', hang: [{ to: 1.05, from: 'waist', flare: 0.4, off: 0.94 }], short: true, bare: true, bodice: true },
       // a captain's frock coat: from the shoulders to above the knee, long sleeves
-      frockcoat: { name: 'сюртук', hang: [{ to: 0.85, from: 'shoulders', flare: 0.16 }], sleeves: 'garment' },
+      frockcoat: { name: 'frock coat', hang: [{ to: 0.85, from: 'shoulders', flare: 0.16 }], sleeves: 'garment' },
       // a waistcoat: from the shoulders to the waist, the shirt's sleeves bare of it
-      waistcoat: { name: 'жилет', hang: [{ to: 0.32, from: 'shoulders', flare: 0.05, folds: false }] },
+      waistcoat: { name: 'waistcoat', hang: [{ to: 0.32, from: 'shoulders', flare: 0.05, folds: false }] },
     },
     hats: {
       // a light kerchief over the hair, tied at the nape
-      kerchief: { name: 'косынка', draw: F => {
+      kerchief: { name: 'kerchief', draw: F => {
         const { add, mul } = V(), { at, axes, egg, r, out, sides, square } = F.head, [, hu, hf] = axes;
         F.cap(at, axes, egg.map(e => e * r * out * 1.08), [0, 0.7, -0.72], -0.05, F.colors.hat, sides, square);
         F.ball(add(at, add(mul(hu, -r * 0.45), mul(hf, -r * 1.02))), axes, [r * 0.22, r * 0.16, r * 0.14], F.colors.hat, 10);
@@ -200,31 +200,31 @@ return {
     },
     parts: {
       // a full beard over the jaw and the chin (the colour of the hair)
-      beard: { name: 'борода', draw: F => {
+      beard: { name: 'beard', draw: F => {
         const { add, mul } = V(), h = F.head, [, hu, hf] = h.axes, r = h.r * h.out;
         F.cap(h.at, h.axes, h.egg.map(e => e * r * 1.05), [0, -0.55, 0.83], 0.25, F.colors.hair, h.sides, h.square);
         F.ball(add(h.at, add(mul(hu, -r * 0.92), mul(hf, r * 0.5))), h.axes, [r * 0.6, r * 0.46, r * 0.4], F.colors.hair, h.sides);
       } },
       // the toy yacht held in both hands, between them, its mast up
-      yacht: { name: 'яхта в руках', draw: F => {
+      yacht: { name: 'yacht in the hands', draw: F => {
         const { add, mul, mix, sub, unit } = V(), m = F.fit.h, l = F.P('LeftHand'), r = F.P('RightHand');
         const across = sub(r, l), along = Math.hypot(...across) > 0.08 * m ? unit(across) : F.side('Chest');
         yacht(F, add(mix(l, r, 0.5), [0, 0.04 * m, 0]), along, [0, 1, 0]);
       } },
       // …in the right hand, held by the hull, upright
-      yacht_r: { name: 'яхта в правой', draw: F => {
+      yacht_r: { name: 'yacht in the right hand', draw: F => {
         const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand');
         yacht(F, add(add(h, mul(F.fwd('RightHand'), 0.05 * m)), [0, 0.03 * m, 0]), F.fwd('Hips'), [0, 1, 0]);
       } },
       // a carving knife in the right hand: a short blade out of the fist
-      knife: { name: 'нож', draw: F => {
+      knife: { name: 'knife', draw: F => {
         const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), [s, , f] = axesOf(F, 'RightHand');
         const grip = add(h, mul(f, 0.06 * m));
         F.bar(add(grip, mul(f, -0.04 * m)), add(grip, mul(f, 0.05 * m)), 0.011 * m, 0.011 * m, [[0, WOOD]], 6, s);
         F.bar(add(grip, mul(f, 0.05 * m)), add(grip, mul(f, 0.13 * m)), 0.009 * m, 0.002 * m, [[0, STEEL]], 4, s, 0.3);
       } },
       // a short pipe in the right hand: the stem out of the fist, the bowl at its end
-      pipe: { name: 'трубка', draw: F => {
+      pipe: { name: 'pipe', draw: F => {
         const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), [s, u, f] = axesOf(F, 'RightHand');
         const a = add(h, mul(f, 0.05 * m)), b = add(a, mul(f, 0.1 * m));
         F.bar(add(a, mul(f, -0.05 * m)), b, 0.005 * m, 0.005 * m, [[0, DARK]], 5, s);
@@ -232,51 +232,51 @@ return {
         F.point('pipe', add(b, mul(u, 0.04 * m)));
       } },
       // a book held open in both hands, its pages to the reader
-      book: { name: 'книга', draw: F => {
+      book: { name: 'book', draw: F => {
         const { mix, add } = V(), m = F.fit.h;
         openBook(F, add(mix(F.P('LeftHand'), F.P('RightHand'), 0.5), [0, 0.04 * m, 0]));
       } },
       // a basket of toys hanging from the right hand
-      basket: { name: 'корзина с игрушками', draw: F => basket(F, 'RightHand', 'basket', true) },
+      basket: { name: 'basket of toys', draw: F => basket(F, 'RightHand', 'basket', true) },
       // Longren's sea chest on his right shoulder, his right hand up on it: a long dark box across the shoulder
-      chest_shoulder: { name: 'сундук на плече', draw: F => {
+      chest_shoulder: { name: 'chest on the shoulder', draw: F => {
         const { add, mul, cross, unit } = V(), m = F.fit.h, s = F.P('RightArm'), up = F.up('Chest');
         const along = F.fwd('Chest'), side = unit(cross(up, along)), c = add(add(s, mul(up, 0.15 * m)), mul(side, 0.04 * m));
         F.ball(c, [side, up, along], [0.17 * m, 0.14 * m, 0.27 * m], [0.31, 0.29, 0.27, 1], 8, 5);
       } },
       // a fishing rod held out in both hands (the right one at its butt), up and out ahead over the water, its line
       // hanging straight down from the tip
-      rod: { name: 'удочка', draw: F => {
+      rod: { name: 'fishing rod', draw: F => {
         const { add, mul, unit, mix } = V(), m = F.fit.h, h = F.P('RightHand');
         const dir = unit(mix(F.fwd('Hips'), [0, 1, 0], 0.32)), tip = add(h, mul(dir, 2.3 * m));
         F.bar(add(h, mul(dir, -0.3 * m)), tip, 0.012 * m, 0.004 * m, [[0, WOOD]], 5, F.side('Hips'));
         F.bar(tip, add(tip, [0, -2.6 * m, 0]), 0.0015 * m, 0.0015 * m, [[0, [0.85, 0.85, 0.82, 1]]], 3, F.side('Hips'));
       } },
-      // a ring between the fingers of the right hand (Grey's mother's — gold, a small stone)
-      ring: { name: 'кольцо', draw: F => ring(F, 0.011, 0.006, [0.83, 0.66, 0.3, 1]) },
-      // …an old man's ring there instead (Grey's own): a broader, heavier band of darker gold; the same point `ring`
-      ring_old: { name: 'старинное кольцо', draw: F => ring(F, 0.014, 0.011, [0.69, 0.5, 0.2, 1]) },
+      // a ring between the fingers of the right hand (Gray's mother's — gold, a small stone)
+      ring: { name: 'ring', draw: F => ring(F, 0.011, 0.006, [0.83, 0.66, 0.3, 1]) },
+      // …an old man's ring there instead (Gray's own): a broader, heavier band of darker gold; the same point `ring`
+      ring_old: { name: 'old ring', draw: F => ring(F, 0.014, 0.011, [0.69, 0.5, 0.2, 1]) },
       // the ring on a cord round her neck, lying on her chest over the dress
-      ring_cord: { name: 'кольцо на шнурке', draw: F => {
+      ring_cord: { name: 'ring on a cord', draw: F => {
         const { add, mul } = V(), m = F.fit.h, neck = F.P('Neck1'), uc = F.up('Chest'), fc = F.fwd('Chest'), sc = F.side('Chest');
         const at = F.clear(add(neck, add(mul(uc, -0.17 * m), mul(fc, 0.1 * m))), 1, 0.012 * m);
         for (const s of [-1, 1]) F.bar(add(neck, add(mul(sc, s * 0.05 * m), mul(fc, 0.02 * m))), at, 0.003 * m, 0.003 * m, [[0, DARK]], 4, fc);
         F.ball(at, [sc, uc, fc], [0.013 * m, 0.013 * m, 0.006 * m], [0.83, 0.66, 0.3, 1], 10);
       } },
       // a paintbrush in the right hand, its bristles dipped in paint
-      brush: { name: 'кисть', draw: F => {
+      brush: { name: 'brush', draw: F => {
         const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), [s, , f] = axesOf(F, 'RightHand');
         const a = add(h, mul(f, -0.02 * m)), b = add(h, mul(f, 0.17 * m));
         F.bar(a, b, 0.006 * m, 0.005 * m, [[0, WOOD]], 5, s);
         F.bar(b, add(b, mul(f, 0.035 * m)), 0.008 * m, 0.002 * m, [[0, [0.55, 0.42, 0.3, 1]]], 5, s);
       } },
       // a box of paints in the left hand, held flat
-      paints: { name: 'краски', draw: F => {
+      paints: { name: 'paints', draw: F => {
         const { add, mul } = V(), m = F.fit.h, h = F.P('LeftHand'), ax = axesOf(F, 'LeftHand');
         F.ball(add(h, mul(ax[2], 0.05 * m)), ax, [0.09 * m, 0.02 * m, 0.06 * m], [0.42, 0.33, 0.26, 1], 6, 6);
       } },
       // a bundle hanging from the right hand: a cloth knotted round what he takes
-      bundle: { name: 'узел', draw: F => {
+      bundle: { name: 'bundle', draw: F => {
         const { add } = V(), m = F.fit.h, h = F.P('RightHand');
         const axes = [F.side('Hips'), [0, 1, 0], F.fwd('Hips')], cloth = [0.6, 0.55, 0.47, 1];
         F.ball(F.swing('bundle', add(h, [0, -0.16 * m, 0]), 70), axes, [0.14 * m, 0.12 * m, 0.11 * m], cloth, 14);
@@ -284,7 +284,7 @@ return {
       } },
       // a candle in a small holder, in the right hand before her: its flame glows (tone 2) and is her point `flame` —
       // the scene's light shines from it ("at": "<id>#flame")
-      candle: { name: 'свеча', draw: F => {
+      candle: { name: 'candle', draw: F => {
         const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), up = [0, 1, 0], axes = [F.side('Hips'), up, F.fwd('Hips')];
         F.ball(add(h, mul(up, 0.01 * m)), axes, [0.05 * m, 0.012 * m, 0.05 * m], [0.62, 0.52, 0.34, 1], 10);
         F.bar(add(h, mul(up, 0.02 * m)), add(h, mul(up, 0.15 * m)), 0.012 * m, 0.012 * m, [[0, [0.93, 0.9, 0.82, 1]]], 8, axes[0]);
@@ -292,17 +292,17 @@ return {
         F.point('flame', add(h, mul(up, 0.175 * m)));
       } },
       // a letter held open in both hands before her
-      letter: { name: 'письмо', draw: F => {
+      letter: { name: 'letter', draw: F => {
         const { add, mix, unit, sub, cross } = V(), m = F.fit.h, c = add(mix(F.P('LeftHand'), F.P('RightHand'), 0.5), [0, 0.05 * m, 0]);
         const n = unit(sub(F.P('Head'), c)), x = unit(cross([0, 1, 0], n)), y = cross(n, x);
         F.ball(c, [x, y, n], [0.1 * m, 0.13 * m, 0.003 * m], [0.92, 0.9, 0.84, 1], 4, 8);
         F.point('letter', c);
       } },
       // the collier's two baskets, one in each hand
-      baskets: { name: 'корзины', draw: F => { basket(F, 'RightHand', 'basket_r', false); basket(F, 'LeftHand', 'basket_l', false); } },
+      baskets: { name: 'baskets', draw: F => { basket(F, 'RightHand', 'basket_r', false); basket(F, 'LeftHand', 'basket_l', false); } },
       // a baby wrapped in a shawl, on both arms at the chest: lying from the right hand up to the crook of the left
       // arm, its head there
-      baby: { name: 'младенец', draw: F => {
+      baby: { name: 'baby', draw: F => {
         const { add, sub, mul, mix, unit, cross } = V(), m = F.fit.h, l = F.P('LeftForeArm'), r = F.P('RightHand');
         const fc = F.fwd('Chest'), lie = sub(l, r), along = Math.hypot(...lie) > 0.08 * m ? unit(lie) : rightOf(F).map(v => -v);
         const c = mix(mix(l, r, 0.5), add(F.P('Chest'), mul(fc, 0.15 * m)), 0.5), up = unit(cross(along, cross([0, 1, 0], along)));
@@ -314,7 +314,7 @@ return {
       } },
       // a fiddle by its neck in the left hand, the bow in the right. Standing, both hang down beside the legs; seated,
       // they lie across the knees
-      violin: { name: 'скрипка и смычок', draw: F => {
+      violin: { name: 'violin and bow', draw: F => {
         const { add, mul, mix, unit, cross } = V(), m = F.fit.h, s = seated(F), right = rightOf(F), fwd = cross([0, 1, 0], right);
         const l = F.P('LeftHand'), r = F.P('RightHand'), left = right.map(v => -v);
         const along = unit(mix([0, -1, 0], right, s)), wide = unit(cross(along, mix(fwd, [0, 1, 0], s))), flat = cross(wide, along), axes = [wide, along, flat];
@@ -325,7 +325,7 @@ return {
         F.bar(add(r, mul(bow, -0.06 * m)), add(r, mul(bow, 0.66 * m)), 0.006 * m, 0.004 * m, [[0, WOOD]], 4, flat);
       } },
       // a cello standing on the floor at the left side, the left hand on its neck
-      cello: { name: 'виолончель', draw: F => {
+      cello: { name: 'cello', draw: F => {
         const { add, sub, mul, unit, cross } = V(), m = F.fit.h, h = F.P('LeftHand'), right = rightOf(F), fwd = cross([0, 1, 0], right);
         const floor = Math.min(F.P('LeftFoot')[1], F.P('RightFoot')[1]) - 0.06 * m;
         const foot = add([h[0], floor, h[2]], add(mul(right, -0.1 * m), mul(fwd, 0.08 * m)));
@@ -337,14 +337,14 @@ return {
         F.ball(add(foot, mul(along, 1.24 * m)), axes, [0.03 * m, 0.04 * m, 0.035 * m], body, 8);
       } },
       // his cap in the right hand, held against the chest (in the look's hat colour)
-      cap_hand: { name: 'шапка в руке', draw: F => {
+      cap_hand: { name: 'cap in hand', draw: F => {
         const { add, mul } = V(), m = F.fit.h, rh = F.head.r, axes = [F.side('Chest'), F.up('Chest'), F.fwd('Chest')];
         const c = add(F.P('RightHand'), mul(axes[2], 0.04 * m));
         F.ball(c, axes, [rh * 1.0, rh * 0.9, rh * 0.42], F.colors.hat, 12);
         F.ball(add(c, mul(axes[1], -rh * 0.85)), axes, [rh * 0.7, rh * 0.3, rh * 0.1], F.colors.hat, 10);
       } },
       // two oars in the hands of one sitting in a boat: each out to its side from its hand, its blade over the water
-      oars: { name: 'вёсла', draw: F => {
+      oars: { name: 'oars', draw: F => {
         const { add, mul, unit, cross } = V(), m = F.fit.h, right = rightOf(F), fwd = cross([0, 1, 0], right);
         for (const [hand, s] of [['RightHand', 1], ['LeftHand', -1]]) {
           const h = F.P(hand), out = unit(add(mul(right, s), [0, 0.1, 0])), blade = add(h, mul(out, 2.0 * m));

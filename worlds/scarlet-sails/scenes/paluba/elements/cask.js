@@ -1,4 +1,4 @@
-// The Greys' old cask amidships on the poop (turned to the one who looks from over the starboard rail), standing on its end, dark with age, its hoops; two pewter
+// The Grays' old cask amidships on the poop (turned to the one who looks from over the starboard rail), standing on its end, dark with age, its hoops; two pewter
 // mugs on its head — a layer its animate shows as `cask` says
 e.layer("cask", {}, g => {
   g.fillStyle = "#4e3a2a";

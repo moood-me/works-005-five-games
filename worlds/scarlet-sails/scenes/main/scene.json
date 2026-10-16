@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Берег Каперны",
-  "caption": "Утро. Море ещё спит.",
+  "title": "The Kaperna Shore",
+  "caption": "Morning. The sea is still asleep.",
   "horizon": 0.55,
   "camera": {
     "mode": "panorama",
@@ -218,7 +218,7 @@
         1
       ],
       "smooth": true,
-      "means": "время суток по кругу: 0 полночь, 0.25 рассвет, 0.5 полдень, 0.75 закат"
+      "means": "the hour, round the clock: 0 midnight, 0.25 dawn, 0.5 noon, 0.75 sunset"
     },
     "mist": {
       "range": [
@@ -226,7 +226,7 @@
         1
       ],
       "smooth": true,
-      "means": "туман: 0 — лёгкая дымка у горизонта, 1 — мыс и подножие Каперны в тумане"
+      "means": "mist: 0 — a light haze on the horizon, 1 — the cape and the foot of Kaperna in mist"
     },
     "wind": {
       "range": [
@@ -234,7 +234,7 @@
         1
       ],
       "smooth": true,
-      "means": "ветер: рябь на воде — длинные светлые полосы"
+      "means": "wind: ripples on the water — long light streaks"
     },
     "windows": {
       "range": [
@@ -242,7 +242,7 @@
         1
       ],
       "smooth": true,
-      "means": "сколько окон Каперны горит (каждое зажигается на своём пороге)"
+      "means": "how many windows of Kaperna are lit (each lights up at a threshold of its own)"
     },
     "longren_window": {
       "range": [
@@ -250,7 +250,7 @@
         1
       ],
       "smooth": true,
-      "means": "окно дома Лонгрена на вершине: 0 тёмное, 1 горит"
+      "means": "the window of Longren's house at the top: 0 dark, 1 lit"
     },
     "tavern_lamp": {
       "range": [
@@ -258,7 +258,7 @@
         1
       ],
       "smooth": true,
-      "means": "фонарь на веранде трактира и его окна"
+      "means": "the lantern on the tavern's veranda and its windows"
     },
     "ship": {
       "range": [
@@ -266,7 +266,7 @@
         1
       ],
       "smooth": true,
-      "means": "корабль: 0 нет, до 0.15 разгорается точка на горизонте у мыса, дальше идёт к берегу, 1 — на якоре"
+      "means": "the ship: 0 none, up to 0.15 a point flares up on the horizon by the cape, then it comes to the shore, 1 — at anchor"
     },
     "sails": {
       "range": [
@@ -274,7 +274,7 @@
         1
       ],
       "smooth": true,
-      "means": "паруса корабля: 0 белые, 1 алые"
+      "means": "the ship's sails: 0 white, 1 scarlet"
     },
     "day": {
       "range": [
@@ -282,7 +282,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес дневного света, скрипт ставит по hour"
+      "means": "internal: the weight of daylight, the script sets it by hour"
     },
     "dawn": {
       "range": [
@@ -290,7 +290,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес рассвета, скрипт ставит по hour"
+      "means": "internal: the weight of dawn, the script sets it by hour"
     },
     "dusk": {
       "range": [
@@ -298,7 +298,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес заката, скрипт ставит по hour"
+      "means": "internal: the weight of sunset, the script sets it by hour"
     },
     "night": {
       "range": [
@@ -306,21 +306,21 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес ночи, скрипт ставит по hour"
+      "means": "internal: the weight of night, the script sets it by hour"
     },
     "ship_across": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: где корабль, м вправо — скрипт ставит по ship"
+      "means": "internal: where the ship is, m to the right — the script sets it by ship"
     },
     "ship_distance": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: как далеко корабль, м — скрипт ставит по ship"
+      "means": "internal: how far off the ship is, m — the script sets it by ship"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма (модуль beats): spark, prologue, kids, kids_hold, alone, play, tavern, past_mary, past_storm, tavern_back, passing, grey_close, grey_shore, to_skiff, longren_boat, girl, give, keep, longren_goes, wait, grey_dawn, dawn_two, sails_far, run, shore, hands, meet, away (только для показа: wait_lights, hands_reach)"
+      "means": "the film's beat (the beats module): spark, prologue, kids, kids_hold, alone, play, tavern, past_mary, past_storm, tavern_back, passing, grey_close, grey_shore, to_skiff, longren_boat, girl, give, keep, longren_goes, wait, grey_dawn, dawn_two, sails_far, run, shore, hands, meet, away (for showing only: wait_lights, hands_reach)"
     },
     "toy_water": {
       "range": [
@@ -328,63 +328,63 @@
         1
       ],
       "smooth": true,
-      "means": "яхта Ассоль на мелкой воде у кромки: 0 нет, 1 стоит на воде"
+      "means": "Assol's yacht in the shallow water at the edge: 0 none, 1 stands on the water"
     },
     "as_a": {
       "type": "number",
-      "means": "служебный: где Ассоль поперёк, м (куски)"
+      "means": "internal: where Assol is across, m (the beats)"
     },
     "as_d": {
       "type": "number",
-      "means": "служебный: где Ассоль вглубь, м"
+      "means": "internal: where Assol is in depth, m"
     },
     "kb_a": {
       "type": "number",
-      "means": "служебный: где мальчик поперёк, м (куски)"
+      "means": "internal: where the boy is across, m (the beats)"
     },
     "kb_d": {
       "type": "number",
-      "means": "служебный: где мальчик вглубь, м"
+      "means": "internal: where the boy is in depth, m"
     },
     "kg_a": {
       "type": "number",
-      "means": "служебный: где девочка постарше поперёк, м (куски)"
+      "means": "internal: where the older girl is across, m (the beats)"
     },
     "kg_d": {
       "type": "number",
-      "means": "служебный: где девочка постарше вглубь, м"
+      "means": "internal: where the older girl is in depth, m"
     },
     "ks_a": {
       "type": "number",
-      "means": "служебный: где малыш поперёк, м (куски)"
+      "means": "internal: where the little one is across, m (the beats)"
     },
     "ks_d": {
       "type": "number",
-      "means": "служебный: где малыш вглубь, м"
+      "means": "internal: where the little one is in depth, m"
     },
     "gi_a": {
       "type": "number",
-      "means": "служебный: где маленькая девочка поперёк, м (куски)"
+      "means": "internal: where the little girl is across, m (the beats)"
     },
     "gi_d": {
       "type": "number",
-      "means": "служебный: где маленькая девочка вглубь, м"
+      "means": "internal: where the little girl is in depth, m"
     },
     "mo_a": {
       "type": "number",
-      "means": "служебный: где её мать поперёк, м (куски)"
+      "means": "internal: where her mother is across, m (the beats)"
     },
     "mo_d": {
       "type": "number",
-      "means": "служебный: где её мать вглубь, м"
+      "means": "internal: where her mother is in depth, m"
     },
     "lo_a": {
       "type": "number",
-      "means": "служебный: где Лонгрен поперёк, м (куски)"
+      "means": "internal: where Longren is across, m (the beats)"
     },
     "lo_d": {
       "type": "number",
-      "means": "служебный: где Лонгрен вглубь, м"
+      "means": "internal: where Longren is in depth, m"
     },
     "sun_light": {
       "range": [
@@ -392,7 +392,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет солнца, скрипт ставит по hour (nebo)"
+      "means": "internal: the sunlight, the script sets it by hour (nebo)"
     },
     "moon_light": {
       "range": [
@@ -400,12 +400,12 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет луны, скрипт ставит по hour (nebo)"
+      "means": "internal: the moonlight, the script sets it by hour (nebo)"
     },
     "ship_facing": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: куда корабль носом, градусы (290 — на берег и влево, 338 — почти бортом, носом влево) — скрипт ставит по ship"
+      "means": "internal: where the ship's bow points, degrees (290 — to the shore and left, 338 — almost broadside, bow to the left) — the script sets it by ship"
     },
     "ship_spark": {
       "range": [
@@ -413,12 +413,12 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: искра парусов на горизонте, разгорается на первых 0.15 ключа ship"
+      "means": "internal: the spark of the sails on the horizon, flaring up over the first 0.15 of the key ship"
     },
     "ship_roll": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: крен корабля на зыби, градусы — ведёт скрипт"
+      "means": "internal: the ship's heel on the swell, degrees — led by the script"
     },
     "tavern_door": {
       "range": [
@@ -426,19 +426,19 @@
         1
       ],
       "smooth": true,
-      "means": "дверь трактира: 0 закрыта, 1 открыта внутрь"
+      "means": "the tavern door: 0 shut, 1 open inwards"
     },
     "tavern_door_facing": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: поворот двери трактира, градусы — скрипт ставит по tavern_door"
+      "means": "internal: the tavern door's turn, degrees — the script sets it by tavern_door"
     },
     "past": {
       "range": [
         0,
         1
       ],
-      "means": "вид света «прошлое»: 0 нет, 1 — выцветший, зерно гуще (ставится склейкой)"
+      "means": "the look of the light “the past”: 0 none, 1 — faded, the grain thicker (set by a cut)"
     },
     "winter": {
       "range": [
@@ -446,7 +446,7 @@
         1
       ],
       "smooth": true,
-      "means": "зима: снег на берегу у трактира, на его крыше и на склоне (слои), метель (частицы)"
+      "means": "winter: snow on the shore by the tavern, on its roof and on the slope (layers), a blizzard (particles)"
     },
     "storm": {
       "range": [
@@ -454,7 +454,7 @@
         1
       ],
       "smooth": true,
-      "means": "шторм: тёмный свет, низкая пелена неба, белые гребни на море, ливень, сильный ветер"
+      "means": "storm: a dark light, a low veil of sky, white crests on the sea, a downpour, a strong wind"
     },
     "menners_boat": {
       "range": [
@@ -462,22 +462,22 @@
         1
       ],
       "smooth": true,
-      "means": "лодка Меннерса: 0 — у берега за пристанью, 1 — унесло вправо, в волны"
+      "means": "Menners' boat: 0 — by the shore beyond the landing, 1 — carried off to the right, into the waves"
     },
     "mb_a": {
       "type": "number",
-      "means": "служебный: где лодка Меннерса поперёк, м — скрипт ставит по menners_boat"
+      "means": "internal: where Menners' boat is across, m — the script sets it by menners_boat"
     },
     "mb_d": {
       "type": "number",
-      "means": "служебный: где лодка Меннерса вглубь, м"
+      "means": "internal: where Menners' boat is in depth, m"
     },
     "skiff_ashore": {
       "values": [
         0,
         1
       ],
-      "means": "шлюпка «Секрета» вытащена на песок у лодок (1); иначе она на воде, где говорит boat"
+      "means": "the Secret's skiff hauled up on the sand by the boats (1); else it is on the water, where boat says"
     },
     "boat": {
       "range": [
@@ -485,15 +485,15 @@
         1
       ],
       "smooth": true,
-      "means": "шлюпка «Секрета» на воде: 0 — у борта корабля (где он сейчас), 1 — у Ассоль, вошедшей в воду; большую часть пути проходит издали (0.8 — в десяти метрах)"
+      "means": "the Secret's skiff on the water: 0 — by the ship's side (where she is now), 1 — by Assol, who has walked into the water; most of the way goes far off (0.8 — ten metres away)"
     },
     "sk_a": {
       "type": "number",
-      "means": "служебный: где шлюпка поперёк, м — скрипт ставит по skiff_ashore, boat и ship"
+      "means": "internal: where the skiff is across, m — the script sets it by skiff_ashore, boat and ship"
     },
     "sk_d": {
       "type": "number",
-      "means": "служебный: где шлюпка вглубь, м"
+      "means": "internal: where the skiff is in depth, m"
     },
     "ring": {
       "values": [
@@ -501,28 +501,28 @@
         "finger",
         "cord"
       ],
-      "means": "ключ партии: кольцо у Ассоль (17) — нет, на пальце, на шнурке"
+      "means": "the play's key: Assol's ring (17) — none, on her finger, on a cord"
     },
     "ring_kind": {
       "values": [
         "mother",
         "own"
       ],
-      "means": "ключ партии: какое кольцо — материнское, тонкое, с камнем (часть ring) или его своё, старинное, широкое (ring_old)"
+      "means": "the play's key: which ring — his mother's, thin, with a stone (the part ring), or his own, old, broad (ring_old)"
     },
     "warm": {
       "range": [
         0,
         1
       ],
-      "means": "ключ партии: насколько тепла Каперна — вечером и ночью windows = 0.45 + 0.45·warm"
+      "means": "the play's key: how warm Kaperna is — in the evening and at night windows = 0.45 + 0.45·warm"
     },
     "girl_toy": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: яхта у девочки"
+      "means": "the play's key: the girl has the yacht"
     },
     "longren": {
       "values": [
@@ -530,7 +530,7 @@
         "knows",
         "sea"
       ],
-      "means": "ключ партии: Лонгрен в главе V — дома, знает и стоит у воды, в море (ушёл в IV: его окно с того вечера тёмное)"
+      "means": "the play's key: Longren in chapter V — at home, knows and stands by the water, at sea (gone in IV: his window dark since that evening)"
     },
     "ending": {
       "values": [
@@ -539,86 +539,86 @@
         "waited",
         "kaperna"
       ],
-      "means": "ключ партии: концовка — кто на берегу в главе V"
+      "means": "the play's key: the ending — who is on the shore in chapter V"
     },
     "morning": {
       "range": [
         0.26,
         0.36
       ],
-      "means": "ключ партии: час утра алых парусов"
+      "means": "the play's key: the hour of the morning of the scarlet sails"
     },
     "gr_a": {
       "type": "number",
-      "means": "служебный: где Грей поперёк, м (куски)"
+      "means": "internal: where Gray is across, m (the beats)"
     },
     "gr_d": {
       "type": "number",
-      "means": "служебный: где Грей вглубь, м"
+      "means": "internal: where Gray is in depth, m"
     },
     "hi_a": {
       "type": "number",
-      "means": "служебный: где Хин поперёк, м (куски)"
+      "means": "internal: where Hin is across, m (the beats)"
     },
     "hi_d": {
       "type": "number",
-      "means": "служебный: где Хин вглубь, м"
+      "means": "internal: where Hin is in depth, m"
     },
     "fi_a": {
       "type": "number",
-      "means": "служебный: где Филипп поперёк, м (куски)"
+      "means": "internal: where Philip is across, m (the beats)"
     },
     "fi_d": {
       "type": "number",
-      "means": "служебный: где Филипп вглубь, м"
+      "means": "internal: where Philip is in depth, m"
     },
     "ma_a": {
       "type": "number",
-      "means": "служебный: где Мэри поперёк, м (куски)"
+      "means": "internal: where Mary is across, m (the beats)"
     },
     "ma_d": {
       "type": "number",
-      "means": "служебный: где Мэри вглубь, м"
+      "means": "internal: where Mary is in depth, m"
     },
     "me_a": {
       "type": "number",
-      "means": "служебный: где Меннерс-старший поперёк, м (куски)"
+      "means": "internal: where the elder Menners is across, m (the beats)"
     },
     "me_d": {
       "type": "number",
-      "means": "служебный: где Меннерс-старший вглубь, м"
+      "means": "internal: where the elder Menners is in depth, m"
     },
     "w2_a": {
       "type": "number",
-      "means": "служебный: где женщина у сетей поперёк, м (куски)"
+      "means": "internal: where the woman by the nets is across, m (the beats)"
     },
     "w2_d": {
       "type": "number",
-      "means": "служебный: где женщина у сетей вглубь, м"
+      "means": "internal: where the woman by the nets is in depth, m"
     },
     "w3_a": {
       "type": "number",
-      "means": "служебный: где вторая женщина у сетей поперёк, м (куски)"
+      "means": "internal: where the second woman by the nets is across, m (the beats)"
     },
     "w3_d": {
       "type": "number",
-      "means": "служебный: где вторая женщина у сетей вглубь, м"
+      "means": "internal: where the second woman by the nets is in depth, m"
     },
     "f1_a": {
       "type": "number",
-      "means": "служебный: где рыбак поперёк, м (куски)"
+      "means": "internal: where the fisherman is across, m (the beats)"
     },
     "f1_d": {
       "type": "number",
-      "means": "служебный: где рыбак вглубь, м"
+      "means": "internal: where the fisherman is in depth, m"
     },
     "f2_a": {
       "type": "number",
-      "means": "служебный: где второй рыбак поперёк, м (куски)"
+      "means": "internal: where the second fisherman is across, m (the beats)"
     },
     "f2_d": {
       "type": "number",
-      "means": "служебный: где второй рыбак вглубь, м"
+      "means": "internal: where the second fisherman is in depth, m"
     },
     "light1": {
       "range": [
@@ -626,7 +626,7 @@
         2
       ],
       "smooth": true,
-      "means": "первый огонь ночи ожидания: 0 — огонь на горизонте, 1 — подошёл: рыбачья лодка с фонарём, 2 — ушёл за мыс (вне этой ночи — 2). Двигает игра"
+      "means": "the first light of the night of waiting: 0 — a light on the horizon, 1 — it has come near: a fishing boat with a lantern, 2 — gone behind the cape (outside that night — 2). Moved by the game"
     },
     "light2": {
       "range": [
@@ -634,7 +634,7 @@
         2
       ],
       "smooth": true,
-      "means": "второй огонь: 0 — огонь на горизонте, 1 — подошёл: пароход с дымом, 2 — ушёл за мыс (вне этой ночи — 2). Двигает игра"
+      "means": "the second light: 0 — a light on the horizon, 1 — it has come near: a steamer with smoke, 2 — gone behind the cape (outside that night — 2). Moved by the game"
     },
     "light3": {
       "range": [
@@ -642,7 +642,7 @@
         2
       ],
       "smooth": true,
-      "means": "третий огонь: 0 — тусклый огонь в тумане у мыса, 1 — туман разошёлся: башня маяка, её огонь и луч, 2 — снова в тумане. Двигает игра"
+      "means": "the third light: 0 — a dim light in the mist by the cape, 1 — the mist has parted: the lighthouse tower, its light and beam, 2 — in the mist again. Moved by the game"
     },
     "cape_mist": {
       "range": [
@@ -650,14 +650,14 @@
         1
       ],
       "smooth": true,
-      "means": "туман на мысу в ночь ожидания: мыс и маяк скрыты, огонь маяка — тусклое пятно (расходится над башней, пока light3 около 1)"
+      "means": "the mist on the cape on the night of waiting: the cape and the lighthouse hidden, the lighthouse's light a dim blur (it parts over the tower while light3 is about 1)"
     },
     "hands": {
       "values": [
         0,
         1
       ],
-      "means": "вставка рук (кадр boat модуля closeups): рука Грея из шлюпки и рука Ассоль"
+      "means": "the hands insert (the closeups module's shot boat): Gray's hand out of the skiff and Assol's hand"
     },
     "reach": {
       "range": [
@@ -665,31 +665,31 @@
         1
       ],
       "smooth": true,
-      "means": "«Рука»: её рука на пути к его (читает только animate вставки). Двигает игра"
+      "means": "“Hand”: her hand on its way to his (read only by the insert's animate). Moved by the game"
     },
     "sk_f": {
       "type": "number",
-      "means": "служебный: куда повёрнута шлюпка, градусы — скрипт ставит по skiff_ashore"
+      "means": "internal: where the skiff is turned, degrees — the script sets it by skiff_ashore"
     },
     "sk_e": {
       "type": "number",
-      "means": "служебный: насколько шлюпка выше дна, м (на плаву над отмелью) — скрипт ставит по skiff_ashore, boat и ship"
+      "means": "internal: how high the skiff is above the bottom, m (afloat over the shallows) — the script sets it by skiff_ashore, boat and ship"
     },
     "light1_a": {
       "type": "number",
-      "means": "служебный: где рыбачья лодка поперёк, м — скрипт ставит по light1"
+      "means": "internal: where the fishing boat is across, m — the script sets it by light1"
     },
     "light1_d": {
       "type": "number",
-      "means": "служебный: где рыбачья лодка вглубь, м"
+      "means": "internal: where the fishing boat is in depth, m"
     },
     "light2_a": {
       "type": "number",
-      "means": "служебный: где пароход поперёк, м — скрипт ставит по light2"
+      "means": "internal: where the steamer is across, m — the script sets it by light2"
     },
     "light2_d": {
       "type": "number",
-      "means": "служебный: где пароход вглубь, м"
+      "means": "internal: where the steamer is in depth, m"
     },
     "light2_smoke": {
       "range": [
@@ -697,13 +697,13 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: дым парохода — скрипт ставит по light2 (за мысом его нет)"
+      "means": "internal: the steamer's smoke — the script sets it by light2 (behind the cape there is none)"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true,
       "uniforms": {
         "tr": 0.42,
@@ -739,7 +739,7 @@
     },
     {
       "id": "sea",
-      "name": "Море",
+      "name": "Sea",
       "plane": true,
       "across": 0,
       "distance": 1250,
@@ -756,7 +756,7 @@
     },
     {
       "id": "mist",
-      "name": "Туман у мыса",
+      "name": "Mist by the cape",
       "across": 0,
       "distance": 700,
       "height": 50,
@@ -769,7 +769,7 @@
     },
     {
       "id": "ship",
-      "name": "«Секрет»",
+      "name": "Secret",
       "unseen": true,
       "across": 3280,
       "distance": 9000,
@@ -784,7 +784,7 @@
     },
     {
       "id": "ship_side",
-      "name": "«Секрет»: правый борт",
+      "name": "Secret: starboard side",
       "on": "ship",
       "distance": -3.7,
       "facing": 180,
@@ -797,7 +797,7 @@
     },
     {
       "id": "ship_side_port",
-      "name": "«Секрет»: левый борт",
+      "name": "Secret: port side",
       "on": "ship",
       "distance": 3.7,
       "facing": 0,
@@ -810,7 +810,7 @@
     },
     {
       "id": "ship_bow",
-      "name": "«Секрет»: скула правого борта",
+      "name": "Secret: starboard bow",
       "on": "ship",
       "across": 7,
       "distance": -3.7,
@@ -824,7 +824,7 @@
     },
     {
       "id": "ship_bow_port",
-      "name": "«Секрет»: скула левого борта",
+      "name": "Secret: port bow",
       "on": "ship",
       "across": 7,
       "distance": 3.7,
@@ -838,7 +838,7 @@
     },
     {
       "id": "ship_quarter",
-      "name": "«Секрет»: раковина правого борта",
+      "name": "Secret: starboard quarter",
       "on": "ship",
       "across": -8,
       "distance": -3.7,
@@ -852,7 +852,7 @@
     },
     {
       "id": "ship_quarter_port",
-      "name": "«Секрет»: раковина левого борта",
+      "name": "Secret: port quarter",
       "on": "ship",
       "across": -8,
       "distance": 3.7,
@@ -866,7 +866,7 @@
     },
     {
       "id": "ship_transom",
-      "name": "«Секрет»: корма",
+      "name": "Secret: stern",
       "on": "ship",
       "across": -16.5,
       "facing": 270,
@@ -879,7 +879,7 @@
     },
     {
       "id": "ship_deck",
-      "name": "«Секрет»: палуба",
+      "name": "Secret: deck",
       "plane": true,
       "walk": true,
       "on": "ship",
@@ -890,7 +890,7 @@
     },
     {
       "id": "ship_poop",
-      "name": "«Секрет»: ют",
+      "name": "Secret: poop",
       "plane": true,
       "walk": true,
       "on": "ship",
@@ -901,7 +901,7 @@
     },
     {
       "id": "ship_break",
-      "name": "«Секрет»: срез юта",
+      "name": "Secret: break of the poop",
       "on": "ship",
       "across": -8.5,
       "elevation": 2.4,
@@ -915,7 +915,7 @@
     },
     {
       "id": "ship_rig",
-      "name": "«Секрет»: мачты и такелаж",
+      "name": "Secret: masts and rigging",
       "on": "ship",
       "facing": 180,
       "box": [
@@ -927,7 +927,7 @@
     },
     {
       "id": "ship_fore",
-      "name": "«Секрет»: фок-мачта и реи",
+      "name": "Secret: foremast and yards",
       "on": "ship",
       "across": 8.3,
       "facing": 55,
@@ -940,7 +940,7 @@
     },
     {
       "id": "ship_fore_course",
-      "name": "«Секрет»: нижний парус, фок-мачта",
+      "name": "Secret: course, foremast",
       "on": "ship_fore",
       "distance": -0.3,
       "facing": 180,
@@ -964,7 +964,7 @@
     },
     {
       "id": "ship_fore_top",
-      "name": "«Секрет»: марсель, фок-мачта",
+      "name": "Secret: topsail, foremast",
       "on": "ship_fore",
       "distance": -0.3,
       "facing": 180,
@@ -988,7 +988,7 @@
     },
     {
       "id": "ship_fore_tg",
-      "name": "«Секрет»: брамсель, фок-мачта",
+      "name": "Secret: topgallant, foremast",
       "on": "ship_fore",
       "distance": -0.3,
       "facing": 180,
@@ -1012,7 +1012,7 @@
     },
     {
       "id": "ship_main",
-      "name": "«Секрет»: грот-мачта и реи",
+      "name": "Secret: mainmast and yards",
       "on": "ship",
       "across": -0.7,
       "facing": 55,
@@ -1025,7 +1025,7 @@
     },
     {
       "id": "ship_main_course",
-      "name": "«Секрет»: нижний парус, грот-мачта",
+      "name": "Secret: course, mainmast",
       "on": "ship_main",
       "distance": -0.3,
       "facing": 180,
@@ -1049,7 +1049,7 @@
     },
     {
       "id": "ship_main_top",
-      "name": "«Секрет»: марсель, грот-мачта",
+      "name": "Secret: topsail, mainmast",
       "on": "ship_main",
       "distance": -0.3,
       "facing": 180,
@@ -1073,7 +1073,7 @@
     },
     {
       "id": "ship_main_tg",
-      "name": "«Секрет»: брамсель, грот-мачта",
+      "name": "Secret: topgallant, mainmast",
       "on": "ship_main",
       "distance": -0.3,
       "facing": 180,
@@ -1097,7 +1097,7 @@
     },
     {
       "id": "ship_jib",
-      "name": "«Секрет»: стаксель",
+      "name": "Secret: staysail",
       "on": "ship",
       "distance": 0.1,
       "facing": 180,
@@ -1121,7 +1121,7 @@
     },
     {
       "id": "ship_jib_outer",
-      "name": "«Секрет»: кливер",
+      "name": "Secret: jib",
       "on": "ship",
       "distance": -0.1,
       "facing": 180,
@@ -1145,7 +1145,7 @@
     },
     {
       "id": "ship_spanker",
-      "name": "«Секрет»: бизань",
+      "name": "Secret: spanker",
       "on": "ship",
       "distance": -0.1,
       "facing": 180,
@@ -1169,7 +1169,7 @@
     },
     {
       "id": "cape",
-      "name": "Мыс",
+      "name": "Cape",
       "across": 197,
       "distance": 800,
       "height": 30,
@@ -1182,7 +1182,7 @@
     },
     {
       "id": "lighthouse",
-      "name": "Маяк",
+      "name": "Lighthouse",
       "across": 271,
       "distance": 800,
       "height": 40,
@@ -1195,7 +1195,7 @@
     },
     {
       "id": "lighthouse_light",
-      "name": "Огонь маяка",
+      "name": "Lighthouse light",
       "across": 271,
       "distance": 800,
       "height": 40,
@@ -1209,7 +1209,7 @@
     },
     {
       "id": "cape_mist",
-      "name": "Туман на мысу",
+      "name": "Mist on the cape",
       "across": 271,
       "distance": 792,
       "height": 76,
@@ -1222,7 +1222,7 @@
     },
     {
       "id": "light3",
-      "name": "Огонь в тумане у мыса",
+      "name": "Light in the mist by the cape",
       "across": 271,
       "distance": 788,
       "height": 40,
@@ -1236,7 +1236,7 @@
     },
     {
       "id": "light1",
-      "name": "Огонь на горизонте: рыбачья лодка",
+      "name": "Light on the horizon: a fishing boat",
       "across": 243.29,
       "distance": 907.97,
       "height": 5,
@@ -1253,7 +1253,7 @@
     },
     {
       "id": "light2",
-      "name": "Огонь на горизонте: пароход",
+      "name": "Light on the horizon: a steamer",
       "across": 160.05,
       "distance": 1138.81,
       "height": 18,
@@ -1270,7 +1270,7 @@
     },
     {
       "id": "light2_smoke",
-      "name": "Дым парохода",
+      "name": "Steamer's smoke",
       "particles": {
         "kind": "smoke",
         "rate": 3,
@@ -1312,7 +1312,7 @@
     },
     {
       "id": "hill_far",
-      "name": "Холмы за Каперной",
+      "name": "Hills beyond Kaperna",
       "plane": true,
       "drape": true,
       "across": -372.5,
@@ -1322,7 +1322,7 @@
     },
     {
       "id": "hill",
-      "name": "Склон Каперны",
+      "name": "Kaperna's slope",
       "plane": true,
       "drape": true,
       "across": -102.5,
@@ -1332,7 +1332,7 @@
     },
     {
       "id": "kaperna",
-      "name": "Каперна",
+      "name": "Kaperna",
       "across": -40,
       "distance": 200,
       "height": 10,
@@ -1345,7 +1345,7 @@
     },
     {
       "id": "lit_windows",
-      "name": "Окна Каперны",
+      "name": "Windows of Kaperna",
       "across": -40,
       "distance": 200,
       "height": 10,
@@ -1359,7 +1359,7 @@
     },
     {
       "id": "veil",
-      "name": "Туман над бухтой",
+      "name": "Mist over the bay",
       "across": -110,
       "distance": 175,
       "height": 8,
@@ -1372,7 +1372,7 @@
     },
     {
       "id": "road",
-      "name": "Берег у трактира и дорога на Лисс",
+      "name": "The shore by the tavern and the road to Liss",
       "plane": true,
       "drape": true,
       "across": -80.25,
@@ -1382,7 +1382,7 @@
     },
     {
       "id": "tavern_set",
-      "name": "Трактир Меннерса: якорь",
+      "name": "Menners' tavern: anchor",
       "unseen": true,
       "across": 14,
       "distance": 140,
@@ -1391,7 +1391,7 @@
     {
       "on": "tavern_set",
       "id": "tavern",
-      "name": "Трактир Меннерса",
+      "name": "Menners' tavern",
       "facing": 180,
       "box": [
         -4.2,
@@ -1403,7 +1403,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_inside",
-      "name": "Трактир: за дверью",
+      "name": "Tavern: behind the door",
       "across": 3,
       "distance": 1.2,
       "elevation": 0.5,
@@ -1419,7 +1419,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_floor",
-      "name": "Трактир: пол за порогом",
+      "name": "Tavern: the floor past the threshold",
       "plane": true,
       "walk": true,
       "unseen": true,
@@ -1432,7 +1432,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_door",
-      "name": "Дверь трактира",
+      "name": "Tavern door",
       "across": 2.5,
       "distance": 0.03,
       "elevation": 0.5,
@@ -1450,7 +1450,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_light",
-      "name": "Окна трактира",
+      "name": "Tavern windows",
       "distance": -0.02,
       "facing": 180,
       "box": [
@@ -1464,7 +1464,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_side",
-      "name": "Трактир: стена к пристани",
+      "name": "Tavern: the wall to the landing",
       "across": 8,
       "distance": 3,
       "facing": 90,
@@ -1478,7 +1478,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_side_left",
-      "name": "Трактир: стена к дороге",
+      "name": "Tavern: the wall to the road",
       "across": -4,
       "distance": 3,
       "facing": 270,
@@ -1492,7 +1492,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_roof",
-      "name": "Крыша трактира",
+      "name": "Tavern roof",
       "plane": true,
       "across": 2,
       "distance": 1.35,
@@ -1504,7 +1504,7 @@
     {
       "on": "tavern_set",
       "id": "veranda",
-      "name": "Веранда трактира",
+      "name": "Tavern veranda",
       "plane": true,
       "walk": true,
       "across": 5,
@@ -1516,7 +1516,7 @@
     {
       "on": "tavern_set",
       "id": "veranda_steps",
-      "name": "Ступени веранды",
+      "name": "Veranda steps",
       "plane": true,
       "walk": true,
       "across": 3,
@@ -1529,7 +1529,7 @@
     {
       "on": "tavern_set",
       "id": "veranda_rail",
-      "name": "Перила веранды",
+      "name": "Veranda rail",
       "across": 5,
       "distance": -3,
       "facing": 180,
@@ -1543,7 +1543,7 @@
     {
       "on": "tavern_set",
       "id": "veranda_left",
-      "name": "Перила веранды слева",
+      "name": "Veranda rail, left",
       "across": 2,
       "distance": -1.5,
       "facing": 270,
@@ -1557,7 +1557,7 @@
     {
       "on": "tavern_set",
       "id": "veranda_right",
-      "name": "Перила веранды справа",
+      "name": "Veranda rail, right",
       "across": 8,
       "distance": -1.5,
       "facing": 90,
@@ -1571,7 +1571,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_lantern",
-      "name": "Фонарь над столом",
+      "name": "Lantern over the table",
       "across": 5.9,
       "distance": -2.98,
       "elevation": 2.84,
@@ -1587,7 +1587,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_bench",
-      "name": "Скамья у стола",
+      "name": "Bench by the table",
       "across": 6.3,
       "distance": -1.87,
       "elevation": 0.5,
@@ -1602,7 +1602,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_bench_top",
-      "name": "Сиденье скамьи",
+      "name": "Bench seat",
       "plane": true,
       "across": 6.3,
       "distance": -1.7,
@@ -1613,7 +1613,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_table",
-      "name": "Стол у перил",
+      "name": "Table by the rail",
       "across": 6.3,
       "distance": -2.75,
       "elevation": 0.5,
@@ -1628,7 +1628,7 @@
     {
       "on": "tavern_set",
       "id": "tavern_table_top",
-      "name": "Столешница",
+      "name": "Table top",
       "plane": true,
       "across": 6.3,
       "distance": -2.4,
@@ -1638,7 +1638,7 @@
     },
     {
       "id": "cart",
-      "name": "Воз Филиппа",
+      "name": "Philip's cart",
       "across": 12.7,
       "distance": 138.7,
       "height": 1.5,
@@ -1651,7 +1651,7 @@
     },
     {
       "id": "nets2",
-      "name": "Сети у трактира",
+      "name": "Nets by the tavern",
       "across": 26.5,
       "distance": 143.5,
       "height": 3,
@@ -1664,7 +1664,7 @@
     },
     {
       "id": "nets",
-      "name": "Сети на кольях",
+      "name": "Nets on stakes",
       "across": -18,
       "distance": 30,
       "height": 3,
@@ -1677,7 +1677,7 @@
     },
     {
       "id": "beach",
-      "name": "Берег",
+      "name": "Shore",
       "plane": true,
       "drape": true,
       "across": -60,
@@ -1687,7 +1687,7 @@
     },
     {
       "id": "sand",
-      "name": "Песок у воды",
+      "name": "Sand by the water",
       "plane": true,
       "drape": true,
       "across": -16.5,
@@ -1697,7 +1697,7 @@
     },
     {
       "id": "boat2",
-      "name": "Лодка",
+      "name": "Boat",
       "across": -17.3,
       "distance": 17,
       "height": 0.6,
@@ -1710,7 +1710,7 @@
     },
     {
       "id": "net",
-      "name": "Сеть на киле лодки",
+      "name": "Net on the boat's keel",
       "across": -16.9,
       "distance": 16.95,
       "elevation": 0.58,
@@ -1724,7 +1724,7 @@
     },
     {
       "id": "boat1",
-      "name": "Лодка",
+      "name": "Boat",
       "across": -5.6,
       "distance": 8.5,
       "height": 0.6,
@@ -1737,7 +1737,7 @@
     },
     {
       "id": "stone",
-      "name": "Камень у воды",
+      "name": "Stone by the water",
       "across": -1.4,
       "distance": 4.6,
       "height": 0.4,
@@ -1756,7 +1756,7 @@
     },
     {
       "id": "rope",
-      "name": "Бухта верёвки",
+      "name": "Coil of rope",
       "across": -1.9,
       "distance": 5.3,
       "height": 0.25,
@@ -1769,7 +1769,7 @@
     },
     {
       "id": "skiff",
-      "name": "Шлюпка «Секрета»",
+      "name": "The Secret's skiff",
       "across": 3274,
       "distance": 8990,
       "height": 0.9,
@@ -1790,7 +1790,7 @@
     },
     {
       "id": "skiff_far",
-      "name": "Шлюпка «Секрета»: дальний борт",
+      "name": "The Secret's skiff: the far side",
       "on": "skiff",
       "distance": 1.3,
       "facing": 180,
@@ -1803,7 +1803,7 @@
     },
     {
       "id": "skiff_in",
-      "name": "Шлюпка «Секрета»: внутри",
+      "name": "The Secret's skiff: inside",
       "on": "skiff",
       "unseen": true,
       "distance": 0.65,
@@ -1817,7 +1817,7 @@
     },
     {
       "id": "menners_skiff",
-      "name": "Лодка Меннерса",
+      "name": "Menners' boat",
       "across": 20,
       "distance": 46,
       "height": 0.9,
@@ -1834,7 +1834,7 @@
     },
     {
       "id": "toy",
-      "name": "Яхта на воде",
+      "name": "Yacht on the water",
       "across": -1.75,
       "distance": 6.3,
       "height": 0.45,
@@ -1848,7 +1848,7 @@
     },
     {
       "id": "assol",
-      "name": "Ассоль",
+      "name": "Assol",
       "person": {
         "cast": "cast",
         "who": "assol_child",
@@ -1863,7 +1863,7 @@
     },
     {
       "id": "kid_boy",
-      "name": "Мальчик",
+      "name": "Boy",
       "person": {
         "cast": "cast",
         "who": "kid_boy",
@@ -1878,7 +1878,7 @@
     },
     {
       "id": "kid_girl",
-      "name": "Девочка постарше",
+      "name": "Older girl",
       "person": {
         "cast": "cast",
         "who": "kid_girl",
@@ -1893,7 +1893,7 @@
     },
     {
       "id": "kid_small",
-      "name": "Малыш",
+      "name": "Little one",
       "person": {
         "cast": "cast",
         "who": "kid_small",
@@ -1908,7 +1908,7 @@
     },
     {
       "id": "girl",
-      "name": "Маленькая девочка",
+      "name": "Little girl",
       "person": {
         "cast": "cast",
         "who": "girl",
@@ -1923,7 +1923,7 @@
     },
     {
       "id": "mother",
-      "name": "Её мать",
+      "name": "Her mother",
       "person": {
         "cast": "cast",
         "who": "woman",
@@ -1938,7 +1938,7 @@
     },
     {
       "id": "longren",
-      "name": "Лонгрен",
+      "name": "Longren",
       "person": {
         "cast": "cast",
         "who": "longren",
@@ -1953,7 +1953,7 @@
     },
     {
       "id": "grey",
-      "name": "Грей",
+      "name": "Gray",
       "person": {
         "cast": "cast",
         "who": "grey",
@@ -1968,7 +1968,7 @@
     },
     {
       "id": "hin",
-      "name": "Хин Меннерс",
+      "name": "Hin Menners",
       "person": {
         "cast": "cast",
         "who": "hin",
@@ -1983,7 +1983,7 @@
     },
     {
       "id": "filipp",
-      "name": "Угольщик Филипп",
+      "name": "Philip the collier",
       "person": {
         "cast": "cast",
         "who": "filipp",
@@ -1998,7 +1998,7 @@
     },
     {
       "id": "mary",
-      "name": "Мэри",
+      "name": "Mary",
       "person": {
         "cast": "cast",
         "who": "mary",
@@ -2013,7 +2013,7 @@
     },
     {
       "id": "menners",
-      "name": "Меннерс-старший",
+      "name": "The elder Menners",
       "person": {
         "cast": "cast",
         "who": "menners",
@@ -2028,7 +2028,7 @@
     },
     {
       "id": "woman2",
-      "name": "Женщина у сетей",
+      "name": "Woman by the nets",
       "person": {
         "cast": "cast",
         "who": "woman",
@@ -2043,7 +2043,7 @@
     },
     {
       "id": "woman3",
-      "name": "Вторая женщина у сетей",
+      "name": "Second woman by the nets",
       "person": {
         "cast": "cast",
         "who": "woman",
@@ -2058,7 +2058,7 @@
     },
     {
       "id": "fisher1",
-      "name": "Рыбак",
+      "name": "Fisherman",
       "person": {
         "cast": "cast",
         "who": "fisher",
@@ -2073,7 +2073,7 @@
     },
     {
       "id": "fisher2",
-      "name": "Второй рыбак",
+      "name": "Second fisherman",
       "person": {
         "cast": "cast",
         "who": "fisher",
@@ -2088,7 +2088,7 @@
     },
     {
       "id": "letika",
-      "name": "Летика",
+      "name": "Letika",
       "person": {
         "cast": "cast",
         "who": "letika",
@@ -2101,7 +2101,7 @@
     },
     {
       "id": "blizzard",
-      "name": "Метель",
+      "name": "Blizzard",
       "particles": {
         "kind": "blizzard",
         "amount": "winter"
@@ -2109,7 +2109,7 @@
     },
     {
       "id": "storm_rain",
-      "name": "Ливень",
+      "name": "Downpour",
       "particles": {
         "kind": "rain",
         "amount": "storm"
@@ -2117,7 +2117,7 @@
     },
     {
       "id": "hands",
-      "name": "Руки крупно",
+      "name": "Hands, close up",
       "insert": "hands"
     }
   ],

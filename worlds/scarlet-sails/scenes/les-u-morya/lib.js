@@ -622,7 +622,7 @@ function hourKeys(hour) {
   };
 }
 
-// ── the bank, chapter I ── «За корабликом»: Assol (eight) runs down the stream's left bank after her yacht.
+// ── the bank, chapter I ── «After the little ship»: Assol (eight) runs down the stream's left bank after her yacht.
 // What a game says of it is 0…1 along the stream: 0 — where the yacht is put on the water, 1 — the mouth. Her way is
 // as long as her run takes in RUN_SECONDS without a stop (the cast's `run` on her legs, RUN_PACE m/s: its root goes
 // 2.8 m/s, she is 0.72 of a man), BANK_OFF metres left of the stream's middle, ending at the top of the beach (BANK_END).
@@ -721,7 +721,7 @@ function snag(g, e) {
   e.at(0, -0.3, "snag");
 }
 
-// ── the film ── chapter I by the stream and at its mouth: the yacht put on the water, the chase, Egl; chapter III on
+// ── the film ── chapter I by the stream and at its mouth: the yacht put on the water, the chase, Egle; chapter III on
 // the headland: the night fire, dawn, the sleeping girl, the ring, the morning.
 // The world's module beats plays it (modules/beats.md): for a game one beat at a time by `beat` (script.js); outside
 // games the showcase's, in order (showcase.js). Each beat is a sequence of the director: its people do what they do
@@ -730,7 +730,7 @@ function snag(g, e) {
 // (scene.tell('<beat>:<moment>')) — notes.md lists them. film(scene): a `from` reads what the game's play has decided
 // (`ring_kind`: which ring it is).
 // The people are the engine's (the world's cast): Assol (seventeen; in chapter I a girl of eight — her look
-// `assol_wear`), Grey, Letika, Egl — <id>_do, _turn (degrees: 0 away from the start — east, the sea; 90 right, 180
+// `assol_wear`), Gray, Letika, Egle — <id>_do, _turn (degrees: 0 away from the start — east, the sea; 90 right, 180
 // back toward the wood, 270 left — over the cliff's edge, the bay), _look, _reach, _with, _wear, _on, _gait, _here;
 // their places as_, gr_, le_, eg_ a/d.
 // A point of the world as the director takes it — [across, distance, metres over the land there] — from a height
@@ -743,7 +743,7 @@ const done = (motion) => ({ motion, loop: false, from: 99 });
 // which way (degrees, as people turn) it is from one place to another
 const toward = ([X0, Z0], [X1, Z1]) => (Math.atan2(X1 - X0, Z1 - Z0) / RAD + 360) % 360;
 // Where things are on the headland: the two fishing sit on the cliff's very edge, their legs over it, facing out over
-// the bay (the cliff's way); the girl asleep in the grass of the glade; where Grey stops over her, where he kneels by
+// the bay (the cliff's way); the girl asleep in the grass of the glade; where Gray stops over her, where he kneels by
 // her (facing her); her right hand lifted before her face, sitting (the ring on it), and laid out beside her as she
 // sits looking at the sea; the bay below, the open sea
 const OVER = 279;
@@ -787,7 +787,7 @@ const SHOTS = {
   chase: operator("assol", 0.4, [0.42, 0.46]),
   // from the sea, looking back at the wood: the old man in the shallows, the bushes and the bank beyond him
   mouth: placed(4.6, 42.6, -0.3, -144, -3),
-  // over the girl's right shoulder, low: Egl tall against the sea; ... turned after his hand to the empty horizon
+  // over the girl's right shoulder, low: Egle tall against the sea; ... turned after his hand to the empty horizon
   egl: placed(0.17, 34.45, -0.9, 14, 8),
   horizon: placed(0.17, 34.45, -0.9, -18, 4),
   // close behind her, lower: her nape thrown back, he over her against the sea
@@ -799,7 +799,7 @@ const SHOTS = {
   side: placed(-2.12, 37.05, -0.8, 108, 0),
   // the fire from inland: the two on the edge either side of it, the bay and the sea under the moon beyond
   fire: placed(21.64, 42.62, 0, -68, -6),
-  // Grey crossing the glade, the sea and the rising sun beyond; the same as he goes
+  // Gray crossing the glade, the sea and the rising sun beyond; the same as he goes
   walk: operator("grey", 0.42, [0.4, 0.3]),
   // close, over the grass, from the glade's side, looking out to the cliff's edge and the bay: she whole in the
   // grass — her hair, her shoulder, her hands; he a dark figure over her
@@ -912,7 +912,7 @@ function film(scene) {
       },
     },
     // chase — the camera behind her down the bank; she stands looking after the yacht, ready to run. A game's
-    // «За корабликом» goes on from here (run, jump, toy, reeds: script.js)
+    // «After the little ship» goes on from here (run, jump, toy, reeds: script.js)
     chase: {
       after: "launch",
       from: () => ({ ...AFLOAT(), ...SHOTS.chase, assol_gait: "run" }),
@@ -944,7 +944,7 @@ function film(scene) {
         await s.wait(1.5);
       },
     },
-    // egl — over the girl's shoulder: Egl tall against the sea, the yacht with its scarlet sails in his hand. He
+    // egl — over the girl's shoulder: Egle tall against the sea, the yacht with its scarlet sails in his hand. He
     // speaks; then turns to the sea — side on to her (SEAWARD) — and slowly lifts his hand out to the horizon (the
     // cast's `tell_sea`: the right arm forward to the shoulder's height, held, lowered) — the camera goes after it,
     // to the empty sea; the hand
@@ -972,7 +972,7 @@ function film(scene) {
       },
     },
     // assol_close — from behind her, close and low: her nape thrown back to him, her hands pressed to her breast;
-    // over her Egl against the sea
+    // over her Egle against the sea
     assol_close: {
       after: "egl",
       from: () => ({ ...MET(), ...SHOTS.nape, assol_reach: PRESSED }),
@@ -982,7 +982,7 @@ function film(scene) {
         await s.wait(5);
       },
     },
-    // egl_hold — the two of them at the water, from the wood's side; Egl holds the yacht (a game's choice: Egl)
+    // egl_hold — the two of them at the water, from the wood's side; Egle holds the yacht (a game's choice: Egle)
     egl_hold: {
       after: ["egl", "assol_close"],
       from: HELD,
@@ -994,7 +994,7 @@ function film(scene) {
         await s.wait(1.5);
       },
     },
-    // egl_when — «Когда?»: Egl turns away to the sea and looks long at the horizon; she looks there too, and the
+    // egl_when — «When?»: Egle turns away to the sea and looks long at the horizon; she looks there too, and the
     // camera after them: the light on the water
     egl_when: {
       after: "egl_hold",
@@ -1009,7 +1009,7 @@ function film(scene) {
         await s.wait(1.5);
       },
     },
-    // egl_how — «А как я его узнаю?»: Egl comes to her and goes down on his knee before her — they are of a height
+    // egl_how — «How will I know him?»: Egle comes to her and goes down on his knee before her — they are of a height
     // (from the side, close to both)
     egl_how: {
       after: "egl_hold",
@@ -1061,8 +1061,8 @@ function film(scene) {
         await s.wait(1);
       },
     },
-    // fire — night: the fire at the cliff's edge; Grey and Letika sit on the edge with their rods, the sea below under
-    // the moon; Letika turns his head to Grey («Рыба спит, капитан») and Grey to him; both look out again; the night
+    // fire — night: the fire at the cliff's edge; Gray and Letika sit on the edge with their rods, the sea below under
+    // the moon; Letika turns his head to Gray («The fish are asleep, captain») and Gray to him; both look out again; the night
     // closes (a fade: the hours passing till dawn)
     fire: {
       from: () => ({ ...NIGHT(), fade: 1 }),
@@ -1083,7 +1083,7 @@ function film(scene) {
         await s.move("fade", 1, { over: 1.2, ease: "in" });
       },
     },
-    // dawn_walk — dawn in the mist (the night's fade lifting): Grey crosses the glade, stepping carefully, and stops —
+    // dawn_walk — dawn in the mist (the night's fade lifting): Gray crosses the glade, stepping carefully, and stops —
     // in the grass a girl is asleep
     dawn_walk: {
       from: () => ({ ...DAWN(), fade: 1 }),
@@ -1112,7 +1112,7 @@ function film(scene) {
       },
     },
     // ring — he kneels by her, gently, his back straight, the ring in his fingers; he looks at her hand. A game's
-    // «Кольцо» goes on from here (ring_at, stir: script.js); ring_on is the same done by the scene
+    // «The ring» goes on from here (ring_at, stir: script.js); ring_on is the same done by the scene
     ring: {
       after: ["dawn_walk", "sleeping"],
       from: () => ({ ...FOUND(), ...SHOTS.ring }),
@@ -1240,7 +1240,7 @@ function film(scene) {
   };
 }
 // the film as the showcase plays it (after its own two beats: the stream by day, the hours at the mouth; and with
-// its own «За корабликом» after `chase`): chapter I with both of Egl's answers, chapter III with both ways it ends
+// its own «After the little ship» after `chase`): chapter I with both of Egle's answers, chapter III with both ways it ends
 const SHOWCASE = [
   "launch", "chase", "mouth", "egl", "assol_close", "egl_hold", "egl_when", "egl_how", "egl_goes",
   "fire", "dawn_walk", "sleeping", "ring", "ring_on", "leave", "wake", "wake_hold", "wear", "hide",

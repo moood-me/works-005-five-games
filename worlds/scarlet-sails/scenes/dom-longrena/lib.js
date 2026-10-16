@@ -1,4 +1,4 @@
-// Дом Лонгрена — what the room's elements share (the window's leaves, the shelves' toys, where the chest, the door and
+// Longren's House — what the room's elements share (the window's leaves, the shelves' toys, where the chest, the door and
 // the ship are as their keys say, the sky's bodies) and its film in beats (film(scene), at the end: the world's module
 // beats — notes.md lists them).
 const N = kit.nebo;
@@ -143,7 +143,7 @@ const pulling = (c) => [CHEST.across + CHEST.out[0] * c, CHEST.distance + CHEST.
 const pulled = (across, distance) => anim.clamp(((across - CHEST.across) * CHEST.out[0] + (distance - (CHEST.distance - STEP)) * CHEST.out[1]) / (PULL * PULL), 0, 1);
 
 // ── the close-ups: the insert `closeup` (opened by its key), `closeup_shot` says which — "rig": the bench with the
-// yacht being rigged (the game's «Оснастка»: rig1…rig4, guide); "page": the page of her book with the beetle on it
+// yacht being rigged (the game's «Rigging»: rig1…rig4, guide); "page": the page of her book with the beetle on it
 // (beetle). Painted once a shot, in stage heights (x 0…e.aspect, y 0…1); all that moves in them is layers moved by
 // closeupMotion. Their own light is painted: an insert is a picture of its own ──
 const clamp01 = (v) => anim.clamp(num(v), 0, 1);
@@ -493,7 +493,7 @@ function paintPage(g, e) {
   g.save();
   g.scale(0.001, 0.001);
   g.font = font(P.size);
-  const wide = g.measureText("Смотри").width / 1000;
+  const wide = g.measureText(tr('Look')).width / 1000;
   g.restore();
   const ink = "rgba(74,66,58,0.5)";
   for (let k = 0; k < P.lines; k++) {
@@ -515,7 +515,7 @@ function paintPage(g, e) {
   g.textAlign = "center";
   g.textBaseline = "alphabetic";
   g.fillStyle = "#2b2622";
-  g.fillText("Смотри", 0, 14);
+  g.fillText(tr('Look'), 0, 14);
   g.restore();
   g.restore();
   // her thumb on the page's edge, from below on the right
@@ -776,7 +776,7 @@ const WIDE = shot(1.1, 0.1, -22), // the room from its right, the bench and the 
   // window, the sails in its upper right pane over her shoulder, the floor by the chair where the book falls)
   BEHIND_HER = { ...shot(0.6, 2.3, 6), camera_pitch: -16 },
   DAWN = shot(0.9, 1.0, -2); // (the rising sun in the window's right pane, beside her head)
-// «Смотри»: the camera is lowered to the page with her eyes (degrees; the beat `look` leaves it so), and `gaze` 0…1
+// «Look»: the camera is lowered to the page with her eyes (degrees; the beat `look` leaves it so), and `gaze` 0…1
 // lifts it level again as her eyes go from the page to the window (the script: gazed, camera_look)
 const PAGE_PITCH = -12;
 const gazed = (gaze) => ON_PAGE.map((p, i) => p + (WINDOW[i] - p) * anim.clamp(num(gaze), 0, 1));
@@ -940,7 +940,7 @@ function film(scene) {
       },
     },
     // rig — he lays the knife down, her hands at the hull; close — the bench: the hull, the mast, the scarlet silk (the
-    // game's «Оснастка»: rig1…rig4 — the sails and their sheets made fast, `guide` — his hand steadying it)
+    // game's «Rigging»: rig1…rig4 — the sails and their sheets made fast, `guide` — his hand steadying it)
     rig: {
       after: ["evening", "scrap"],
       from: () => whole(EVENING),
@@ -1200,7 +1200,7 @@ function film(scene) {
         await s.wait(3);
       },
     },
-    // beetle — nearer, then close: the page — a beetle crawls over it and stops at the word «Смотри»
+    // beetle — nearer, then close: the page — a beetle crawls over it and stops at the word «Look»
     beetle: {
       after: "read",
       from: () => whole(READS()),
@@ -1234,7 +1234,7 @@ function film(scene) {
       },
     },
     // look — she sits with the book, her eyes on the page, and the camera comes down to the page with them: the game's
-    // «Смотри» is asked here (`gaze` 0…1: her eyes from the page up to the window, the camera rising with them — the
+    // «Look» is asked here (`gaze` 0…1: her eyes from the page up to the window, the camera rising with them — the
     // script)
     look: {
       after: ["read", "beetle", "cry", "girl_in"],
@@ -1251,7 +1251,7 @@ function film(scene) {
     },
     // girl_in — the door flung open; the little girl runs in with the yacht over her head (the cast's gait run_high), stops
     // by the chair and tugs at Assol's sleeve (her hand reaches for it); Assol lifts her eyes from the book to her. The
-    // camera lowered as in `look` (the girl is small: whole in the frame so) — «Смотри» lifts it from here too
+    // camera lowered as in `look` (the girl is small: whole in the frame so) — «Look» lifts it from here too
     girl_in: {
       after: ["look", "cry"],
       from: () => whole({ ...READS(), ...GIRL_VIEW, camera_pitch: PAGE_PITCH }),

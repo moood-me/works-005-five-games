@@ -1,8 +1,8 @@
-// «Палуба» — its mechanics. The hour's light (nebo.follow). The ship in the world: `course` is where she is and how
+// «The Deck» — its mechanics. The hour's light (nebo.follow). The ship in the world: `course` is where she is and how
 // she is turned — she sails on at her own speed the way her bow points (ship_x, ship_d moved on; `heading` turns her:
 // ship_f); `shore` and `port` put her at a place of her voyage, `steamer` puts the mail steamer ahead of her, and the
 // steamer goes on at hers. Her roll (`heel`): `roll` and the swell under her, more in a storm. Her rig as
-// her sails are set (lib.rigOf: belly_l, belly_r, belly_tilt, fore_tg_e, main_tg_e). Lisse's lamps at night. The film in beats for the game (lib.film).
+// her sails are set (lib.rigOf: belly_l, belly_r, belly_tilt, fore_tg_e, main_tg_e). Liss's lamps at night. The film in beats for the game (lib.film).
 const L = scene.lib, A = scene.anim;
 const num = (key, or = 0) => { const v = scene.get(key); return typeof v === 'number' ? v : or; };
 // a key's followers: set from it as it changes and each frame it moves

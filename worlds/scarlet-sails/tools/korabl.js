@@ -28,7 +28,7 @@ if (args[0] === 'cloth') {
   const brace = args[1] == null ? 35 : Number(args[1]);
   const parts = K.assembly(id, { brace });
   const mine = new Set(parts.map(p => p.id));
-  if (!spec.objects.some(o => o.id === id)) spec.objects.push({ id, name: '«Секрет»', unseen: true, across: 0, distance: 200, facing: 0 });
+  if (!spec.objects.some(o => o.id === id)) spec.objects.push({ id, name: 'Secret', unseen: true, across: 0, distance: 200, facing: 0 });
   spec.objects = spec.objects.filter(o => !mine.has(o.id));
   const at = spec.objects.findIndex(o => o.id === id);
   spec.objects.splice(at + 1, 0, ...parts.map(({ code, animate, wgsl: shader, ...el }) => el));

@@ -1,95 +1,95 @@
-# Лавка в Лиссе — движок 2
+# A Shop in Liss — engine 2
 
-Лавка изнутри, утро (`hour` 0.4). Светло, тонко, жемчужно; тёплое — луч солнца; алое — только рулон `scarlet` и лоскут
-(вставки). Остальные рулоны — тона того же цвета, не алые; на полках и вывесках красного нет вовсе. Камера `picture`:
-зритель у задней стены, смотрит на прилавок. Небо, свет часа — модуль мира `nebo`; люди — `cast`; фильм — `beats`;
-вставка лоскута — `closeups` (кадр `scrap`).
+The shop from inside, morning (`hour` 0.4). Light, fine, pearly; the warm thing is the sun's beam; the scarlet — only the roll `scarlet` and the scrap
+(the inserts). The other rolls are shades of the same colour, not scarlet; on the shelves and the signs there is no red at all. The camera `picture`:
+the viewer by the back wall, looking at the counter. The sky, the hour's light — the world's module `nebo`; the people — `cast`; the film — `beats`;
+the scrap's insert — `closeups` (the shot `scrap`).
 
-Игра играет куски по одному (ключ `beat` = имя; кончился — сцена говорит `beat:<имя>`); вне игры — `showcase.js`: все куски
-по порядку `lib.js ORDER` и после `silk` — то, что делает «Алый» (рулоны один за другим, до алого).
+The game plays the beats one at a time (the key `beat` = a name; once it has ended the scene tells `beat:<name>`); outside the game — `showcase.js`: all the beats
+in the order of `lib.js ORDER` and after `silk` — what “Scarlet” does (the rolls one after another, up to the scarlet one).
 
-## Пространство (метры: X вправо, Z вперёд, H вверх; зритель в X 0, Z 0)
+## The space (metres: X to the right, Z forward, H up; the viewer at X 0, Z 0)
 
-Лавка X −2.6…2.6, Z −0.6…6, потолок 3. Дальняя стена (Z 6): полки до потолка в середине (X −1.5…1.5), справа дверь
-(X 1.55…2.45, высота 2.15) на солнечную улицу. Левая стена (X −2.6): большое окно (Z 3.2…5.4, H 0.95…2.6) на улицу —
-в окне видны низкие лавки напротив и небо. Прилавок X −0.9…1.3, Z 4.45…5.05, верх 0.95; над ним подвесная полка
-(`rack`, H 2.05). За прилавком торговец (Z 5.3), перед ним — покупатели (Z ≈ 3.9).
+The shop X −2.6…2.6, Z −0.6…6, the ceiling 3. The far wall (Z 6): shelves to the ceiling in the middle (X −1.5…1.5), on the right a door
+(X 1.55…2.45, 2.15 high) onto the sunny street. The left wall (X −2.6): a big window (Z 3.2…5.4, H 0.95…2.6) onto the street —
+in the window the low shops opposite and the sky are seen. The counter X −0.9…1.3, Z 4.45…5.05, its top 0.95; over it a hanging shelf
+(`rack`, H 2.05). Behind the counter the merchant (Z 5.3), before it — the customers (Z ≈ 3.9).
 
-| Элемент | Что |
+| Element | What |
 | --- | --- |
-| `sky` | небо мира (nebo), солнце слева за стеной окна; шейдер `sky.wgsl` пишет `node tools/nebo-sky.js lavka-v-lisse` |
-| `street`, `row_left`, `row_far` | улица (плоскость чуть ниже пола) и низкие лавки напротив — в окне и в двери |
-| `floor`, `ceiling`, `wall_back`, `wall_left`, `wall_right`, `wall_front` | пол, потолок с балками, стены (`wall_back` с дверным проёмом, `wall_left` с окном) |
-| `window`, `opening`, `doorway` | рама окна (точка `window#window`); невидимые проёмы окна и двери — в них входит свет дня |
-| `shelves`, `rack`, `counter`, `counter_top` | полки, подвесная полка, прилавок; что на них — по `goods` |
-| `basket` | корзина Ассоль на прилавке (`basket` 0/1, `basket_d` — вглубь), точка `basket#basket` |
-| `roll` | рулон шёлка: по паре слоёв на цвет (намотанный рулон и спущенная ткань); какой цвет виден — `roll`, где он — `roll_at` |
-| `merchant`, `assol`, `grey`, `letika`, `violinist` | люди (`cast`): торговец; Ассоль (`assol_child`, в семнадцать `assol_wear`); Грей; Летика; Циммер на улице (`zimmer`, часть `violin`) |
-| `motes` | пылинки в луче |
-| `memory` | вставка: лоскут во весь кадр (в «Алом» игры образец лоскута — на плашке языка мини-игр) |
+| `sky` | the world's sky (nebo), the sun on the left behind the window's wall; the shader `sky.wgsl` is written by `node tools/nebo-sky.js lavka-v-lisse` |
+| `street`, `row_left`, `row_far` | the street (a plane a little below the floor) and the low shops opposite — in the window and in the door |
+| `floor`, `ceiling`, `wall_back`, `wall_left`, `wall_right`, `wall_front` | the floor, the ceiling with beams, the walls (`wall_back` with the doorway, `wall_left` with the window) |
+| `window`, `opening`, `doorway` | the window's frame (the point `window#window`); the unseen openings of the window and the door — the daylight comes in through them |
+| `shelves`, `rack`, `counter`, `counter_top` | the shelves, the hanging shelf, the counter; what is on them — by `goods` |
+| `basket` | Assol's basket on the counter (`basket` 0/1, `basket_d` — in depth), the point `basket#basket` |
+| `roll` | a roll of silk: a pair of layers for each colour (the wound roll and the cloth let down); which colour is seen — `roll`, where it is — `roll_at` |
+| `merchant`, `assol`, `grey`, `letika`, `violinist` | the people (`cast`): the merchant; Assol (`assol_child`, at seventeen `assol_wear`); Gray; Letika; Zimmer in the street (`zimmer`, the part `violin`) |
+| `motes` | motes in the beam |
+| `memory` | an insert: the scrap filling the frame (in the game's “Scarlet” the scrap's sample is on the mini-games' language's plate) |
 
-## Рулон и цвет
+## The roll and its colour
 
-Рулон один элемент (`roll`), карточка у людей или на месте покоя; рисунок читает только слои, `animate` (`rollMotion`)
-показывает один цвет, спускает ткань по `roll_out` (к окну, влево от рук) и ставит точку-нажатие `roll` на ткань.
-`roll_at` (ставится разом): `rack` — на подвесной полке, `merchant` — в руках торговца, `counter` — на прилавке,
-`grey` — в руках Грея (идёт за точкой `grey#hands`; если того, кто держит, в сцене нет, рулон остаётся где был); скрипт (`script.js`) держит `roll_a`, `roll_d` — карточка идёт
-за хозяином. Порядок и цвета (игра показывает в этом порядке): `cherry` #8b1d3d (темнее и синее алого), `pink` #eaa0ad
-(бледнее), `crimson` #a8182e (темнее), `brick` #b8472f (бурее), `scarlet` — `nebo.SCARLET` #d4283a, `raspberry`
-#cf2a63 (синее), `carrot` #e2662a (желтее). Алое рулона при `roll_out` 1 — свет солнца и окна на ткани (`translucent`
-0.6); лоскут рисует модуль `closeups` в своём свете. Сходство «на глаз» не измерено — смотреть на листах `silk` (`scarlet`)
-при `roll_out` 1 и на плашке.
+The roll is one element (`roll`), a card by the people or at its place of rest; the painting reads only the layers, `animate` (`rollMotion`)
+shows one colour, lets the cloth down by `roll_out` (to the window, to the left of the hands) and puts the press point `roll` on the cloth.
+`roll_at` (set at once): `rack` — on the hanging shelf, `merchant` — in the merchant's hands, `counter` — on the counter,
+`grey` — in Gray's hands (it follows the point `grey#hands`; if whoever holds it is not in the scene, the roll stays where it was); the script (`script.js`) keeps `roll_a`, `roll_d` — the card follows
+its owner. The order and the colours (the game shows them in this order): `cherry` #8b1d3d (darker and bluer than scarlet), `pink` #eaa0ad
+(paler), `crimson` #a8182e (darker), `brick` #b8472f (browner), `scarlet` — `nebo.SCARLET` #d4283a, `raspberry`
+#cf2a63 (bluer), `carrot` #e2662a (yellower). The roll's scarlet at `roll_out` 1 is the light of the sun and the window on the cloth (`translucent`
+0.6); the scrap is painted by the module `closeups` in its own light. The likeness “by eye” is not measured — look at the sheets `silk` (`scarlet`)
+at `roll_out` 1 and at the plate.
 
-`found` 0→1 — свет `silk_glow` (свечение слоя алой ткани) ложится на руки и сюртук Грея.
+`found` 0→1 — the light `silk_glow` (the glow of the scarlet cloth's layer) falls on Gray's hands and frock coat.
 
-## Вставки
+## The inserts
 
-`memory` — `closeups` кадр `scrap`, `taken` всегда 1, во весь кадр. Открывается склейкой (`s.shot` → `cut()`), без
-затемнений.
+`memory` — `closeups` the shot `scrap`, `taken` always 1, filling the frame. It opens by a cut (`s.shot` → `cut()`), with no
+fades.
 
-## Куски (lib.js film)
+## The beats (lib.js film)
 
-`from` — всё, с чего кусок начинается (склейка, если он идёт не после своего `after`). Моменты говорит сцена
-(`<кусок>:<момент>`). Секунды — паузы; люди идут и делают движения столько, сколько те длятся. Постоянные
-`PUT_UP_LET_GO`, `PUSH_AWAY_PUSHED`, `TAKE_DOWN_TAKEN`, `TAKE_DOWN_LAID` (lib.js) — оценки того, в какую секунду движения
-`put_up`, `push_away`, `take_down` отпускают вещь; сверить по готовым движениям (`look_at_motion`).
+`from` — all that the beat begins with (a cut, if it does not come after its `after`). The moments are told by the scene
+(`<beat>:<moment>`). Seconds — the pauses; people go and make their motions as long as these last. The constants
+`PUT_UP_LET_GO`, `PUSH_AWAY_PUSHED`, `TAKE_DOWN_TAKEN`, `TAKE_DOWN_LAID` (lib.js) — guesses at the second in which the motions
+`put_up`, `push_away`, `take_down` let the thing go; to be checked against the finished motions (`look_at_motion`).
 
-| Кусок | Что | Говорит |
+| Beat | What | Tells |
 | --- | --- | --- |
-| `toys_in` | `goods` `toys`. Ассоль (8) ставит корзину на прилавок (`put_up`); торговец перебирает (`sort`), качает головой (`shake_head`), отодвигает корзину (`push_away`); она берёт её и стоит | `toys_in:no` |
-| `toys_again` | девять лет спустя; торговец сидит за прилавком, голова вниз; Ассоль (17) с корзиной входит в дверь и встаёт в проёме; он поднимает голову | `toys_again:looks` |
-| `silk_in` | `goods` `silk`; Грей входит, Летика остаётся у двери; торговец снимает рулон с подвесной полки (`take_down`), кладёт на прилавок; Грей берёт его | `silk_in:first` |
-| `memory` (после `silk_in`) | склейка во вставку `memory` на 3 с, обратно | `memory:corner` |
-| `silk` (после `memory`) | Грей несёт рулон к окну, встаёт в луч (`hold_up`); торговец поворачивается к полкам. Под «Алый» | `silk:ready` |
-| `found` (после `silk`) | камера близко за Греем (`FOUND_CAM`: `camera_x` −1.3, `camera_z` 1.6): он со спины и сбоку; торговец замер; `found` 0→1 | `found:glow` |
-| `violin` (после `found`) | камера назад (к `SILK_CAM`); за окном встаёт скрипач (`violinist` 1); Грей оборачивается к окну, потом к Летике | `violin:heard`, `violin:letika` |
+| `toys_in` | `goods` `toys`. Assol (8) puts the basket on the counter (`put_up`); the merchant sorts through it (`sort`), shakes his head (`shake_head`), pushes the basket away (`push_away`); she takes it and stands | `toys_in:no` |
+| `toys_again` | nine years later; the merchant sits behind the counter, his head down; Assol (17) with a basket comes in at the door and stops in the doorway; he raises his head | `toys_again:looks` |
+| `silk_in` | `goods` `silk`; Gray comes in, Letika stays by the door; the merchant takes a roll down from the hanging shelf (`take_down`), puts it on the counter; Gray takes it | `silk_in:first` |
+| `memory` (after `silk_in`) | a cut into the insert `memory` for 3 s, and back | `memory:corner` |
+| `silk` (after `memory`) | Gray carries the roll to the window, stands in the beam (`hold_up`); the merchant turns to the shelves. Under “Scarlet” | `silk:ready` |
+| `found` (after `silk`) | the camera close behind Gray (`FOUND_CAM`: `camera_x` −1.3, `camera_z` 1.6): he from behind and from the side; the merchant still; `found` 0→1 | `found:glow` |
+| `violin` (after `found`) | the camera back (to `SILK_CAM`); outside the window the violinist stands (`violinist` 1); Gray turns to the window, then to Letika | `violin:heard`, `violin:letika` |
 
-Ключ `roll` кусок `silk_in` ставит сам (`cherry`: первый рулон игры; игра ставит его же в первом круге). `found` и
-`violin` начинаются с алого рулона, спущенного к окну (`roll` `scarlet`, `roll_out` 1) — как оставляет игра после «Алого».
+The key `roll` is set by the beat `silk_in` itself (`cherry`: the game's first roll; the game sets the same in its first round). `found` and
+`violin` begin with the scarlet roll let down to the window (`roll` `scarlet`, `roll_out` 1) — as the game leaves it after “Scarlet”.
 
-Камеры кусков (`lib.js`, ставятся в `from`): `toys_in` — `TOYS_IN_CAM` (`camera_x` 1.2, `camera_z` 2.1, `camera_yaw` −30):
-через прилавок от его правого конца, Ассоль (X −0.69, Z 4.05, повёрнута на 40° к корзине) сбоку, торговец лицом;
-`toys_again` — `TOYS_AGAIN_CAM` (0.9, 2.8): ближе, дверь и прилавок; куски шёлка — `SILK_CAM` (−0.5, 0.6): шаг влево,
-торговец не закрыт Греем (тот у прилавка в X 0.75). У окна Грей повёрнут к окну (`TO_WINDOW` 310): со спины и сбоку.
+The beats' cameras (`lib.js`, set in `from`): `toys_in` — `TOYS_IN_CAM` (`camera_x` 1.2, `camera_z` 2.1, `camera_yaw` −30):
+across the counter from its right end, Assol (X −0.69, Z 4.05, turned 40° to the basket) from the side, the merchant facing us;
+`toys_again` — `TOYS_AGAIN_CAM` (0.9, 2.8): nearer, the door and the counter; the silk beats — `SILK_CAM` (−0.5, 0.6): a step to the left,
+the merchant not hidden by Gray (who is at the counter at X 0.75). At the window Gray is turned to the window (`TO_WINDOW` 310): from behind and from the side.
 
-## Ключи
+## Keys
 
-Описаны в `states` сцены. Для игры: `hour`; `goods` (`toys` · `silk`, склейкой); `roll` (`none` · `cherry` · `pink` ·
-`crimson` · `brick` · `scarlet` · `raspberry` · `carrot`, разом); `roll_out` 0…1; `found` 0…1; `violinist` 0/1;
-`memory` 0/1 (склейкой); `beat`. Ключей партии нет. Служебные (скрипт, куски): `roll_at`, `roll_a`,
+Described in the scene's `states`. For the game: `hour`; `goods` (`toys` · `silk`, by a cut); `roll` (`none` · `cherry` · `pink` ·
+`crimson` · `brick` · `scarlet` · `raspberry` · `carrot`, at once); `roll_out` 0…1; `found` 0…1; `violinist` 0/1;
+`memory` 0/1 (by a cut); `beat`. There are no play's keys. Internal (the script, the beats): `roll_at`, `roll_a`,
 `roll_d`, `basket`, `basket_d`, `mer_*`, `as_*`, `gr_*`, `le_*`, `vi_*`, `day`, `dawn`, `dusk`, `night`, `sun_light`, `moon_light`.
 
-Нажимается: `roll` (рулон в руках; отмечает себя — точка на спущенной ткани, `roll_out` 1) — в «Алом», после `silk:ready`.
+Pressed: `roll` (the roll in his hands; it marks itself — a point on the cloth let down, `roll_out` 1) — in “Scarlet”, after `silk:ready`.
 
-## Что проверить на листах (не проверено)
+## What to check on the sheets (not checked)
 
-Луч на прилавке (позиция солнца `SKY.sun` выбрана расчётом, не глазом); читаются ли рулон и ткань за спиной Грея
-(`ROLL_WITH`, смещение 0.25); попадает ли точка `roll` в средние 4:3; цвет алого рулона против лоскута; секунды отпускания
-в движениях; видимость скрипача в окне (X −3.7, Z 6.2).
+The beam on the counter (the sun's place `SKY.sun` is chosen by reckoning, not by eye); whether the roll and the cloth behind Gray's back read
+(`ROLL_WITH`, the offset 0.25); whether the point `roll` falls within the middle 4:3; the scarlet roll's colour against the scrap; the seconds of letting go
+in the motions; whether the violinist is seen in the window (X −3.7, Z 6.2).
 
-## Контракт для проверки
+## Contract for the check
 
-Читает проверка веток игры; равен коду сцены (`lib.js film`, `scene.json`). `seconds` — цель длины куска.
+Read by the check of the game's branches; equal to the scene's code (`lib.js film`, `scene.json`). `seconds` — the beat's target length.
 
 ```json
 {

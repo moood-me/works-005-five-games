@@ -1,4 +1,4 @@
-// Дом Лонгрена — its mechanics: the hour's light (the world's module nebo keeps the looks' weights and the sun's and
+// Longren's House — its mechanics: the hour's light (the world's module nebo keeps the looks' weights and the sun's and
 // the moon's light by `hour`); the film in beats for the game (lib.js film, the world's module beats: `beat` names
 // one); the chest, the ship, the door and the window's leaves kept where their keys say; the chest going with the one
 // who drags it; what a game's keys do with the people and the camera (guide, gaze).
@@ -27,13 +27,13 @@ const drag = () => {
 scene.on("move", "lo_a", drag);
 scene.on("move", "lo_d", drag);
 
-// «Оснастка» (`guide`): the father's right hand on the hull, putting it right, while it is over a half — he at the
+// «Rigging» (`guide`): the father's right hand on the hull, putting it right, while it is over a half — he at the
 // bench, his hands free.
 const atBench = () => scene.get("longren_here") !== false && !scene.get("longren_on") && Math.hypot(scene.get("lo_a") - L.AT_WORK[0], scene.get("lo_d") - L.AT_WORK[1]) < 0.3;
 scene.on("change", "guide", (v) => {
   if (atBench() && !L.yachtMade(scene.state)) P("longren").reach(v > 0.5 ? { r: "work" } : null);
 });
-// «Смотри» (`gaze` 0…1), all the way: while she sits with the book, her eyes go from the page up to the window with it
+// «Look» (`gaze` 0…1), all the way: while she sits with the book, her eyes go from the page up to the window with it
 // (lib.js gazed). The camera stands while the game's gesture leads them (under a gesture at a point nothing moves) and
 // rises once they are at the window: where the film has it lowered to the page (camera_pitch: the beat `look`), `gaze`
 // 1 gives it back level (camera_look, screen heights), over RISE.

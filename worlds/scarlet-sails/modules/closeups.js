@@ -1,9 +1,9 @@
 // The world's close-ups of hands and things: five shots for the inserts of its scenes — `scrap` (the scarlet
 // scrap on Longren's bench, a child's fingers), `hold` (the ring on the boy's palm, his mother's four fingers over his
 // hand), `cellar` (the bottom of the old cask, the boy's hand wiping the dust off its words), `ropes` (the ship's boy's
-// two hands on the tarred shrouds, the sky and the horizon behind), `boat` (Grey's hand out of the skiff, Assol's hand
+// two hands on the tarred shrouds, the sky and the horizon behind), `boat` (Gray's hand out of the skiff, Assol's hand
 // on its way to it, the ring). No faces. One hand for all of them, flat, in the manner of the hand in the shot `rig`
-// of «Дом Лонгрена»; `hold` and `boat` are painted with care (the light on every finger, nails, creases, the ring's
+// of «Longren's House»; `hold` and `boat` are painted with care (the light on every finger, nails, creases, the ring's
 // glint), the other three plainly.
 //   paint(g, e, shot) is an insert's code: the shot painted once, each thing that moves a layer. live(e, shot, now) is
 // its animate: `now` — what moves — only sets the layers' numbers and marks the points that move. The painting reads
@@ -418,7 +418,7 @@ const CELLAR = (() => {
   const from = [left - wide / 2, rows[0] + lies];
   return {
     light, head, R, rows, left, right, wide, lies, from,
-    lines: ["Меня выпьет Грей,", "когда будет", "в раю"],
+    lines: [tr('Gray shall drink me'), tr('when he is'), tr('in paradise')],
     hand: {
       ...HAND, at: [from[0] - 0.3 * L * dir[0], from[1] - 0.3 * L * dir[1]], angle, L, skin: SKIN.boy, curl: [0.1, 0.06, 0.08, 0.14], spread: 0.5,
       thumb: { angle: -0.8, curl: 0.1 }, sleeve: { colour: "#5b2f3d", from: 0.16, cuff: "#e9e4da" },
@@ -696,7 +696,7 @@ function liveHold(L, now) {
   }
 }
 
-// ── boat: Grey's hand out of the skiff, Assol's hand on its way to it; the low sun behind, the sails' scarlet on the
+// ── boat: Gray's hand out of the skiff, Assol's hand on its way to it; the low sun behind, the sails' scarlet on the
 // water between them; the ring on her finger ──
 const BOAT = (() => {
   const light = { dir: [0.35, -0.94], colour: "#ffe0b0" };

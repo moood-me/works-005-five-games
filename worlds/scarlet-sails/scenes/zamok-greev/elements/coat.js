@@ -1,4 +1,4 @@
-// Grey's sea coat hung over the back of his father's chair: dark blue cloth over the top, the shoulders, the sleeves
+// Gray's sea coat hung over the back of his father's chair: dark blue cloth over the top, the shoulders, the sleeves
 // down the back. One layer, painted hung; `coat_on_chair` 0…1 brings it down over the back (coat.animate.js).
 e.layer("coat", { pivot: [0, -1.17] }, (c) => {
   c.fillStyle = "#2f3b4d";

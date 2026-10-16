@@ -465,34 +465,34 @@ function assembly(id, { ship = "secret", brace = 35 } = {}) {
   };
   const lit = { animate: `${K}.hullMotion(e);` };
   const out = [
-    plate("side", "«Секрет»: правый борт", { distance: -S.beam }, 180),
-    plate("side_port", "«Секрет»: левый борт", { distance: S.beam }, 0),
-    plate("bow", "«Секрет»: скула правого борта", { across: S.straight[1], distance: -S.beam }, 180 - bowTurn),
-    plate("bow_port", "«Секрет»: скула левого борта", { across: S.straight[1], distance: S.beam }, bowTurn),
-    plate("quarter", "«Секрет»: раковина правого борта", { across: S.straight[0], distance: -S.beam }, 180 + quarterTurn, lit),
-    plate("quarter_port", "«Секрет»: раковина левого борта", { across: S.straight[0], distance: S.beam }, 360 - quarterTurn, lit),
-    { id: `${id}_transom`, name: "«Секрет»: корма", on: id, across: S.stern, facing: 270, box: [a(-S.transom - 0.3), a(top - 1.2), a(S.transom + 0.3), 0.6], code: `${K}.hull(g, e, 'transom', '${ship}');`, ...lit },
-    { id: `${id}_deck`, name: "«Секрет»: палуба", plane: true, walk: true, on: id, across: (S.stern + S.stem) / 2, elevation: S.deck, width: S.stem - S.stern, depth: 2 * S.beam, code: `${K}.deck(g, e, 'deck', '${ship}');` },
-    { id: `${id}_poop`, name: "«Секрет»: ют", plane: true, walk: true, on: id, across: (S.stern + S.break) / 2, elevation: S.poop, width: S.break - S.stern, depth: 2 * S.beam, code: `${K}.deck(g, e, 'poop', '${ship}');` },
-    { id: `${id}_break`, name: "«Секрет»: срез юта", on: id, across: S.break, elevation: S.deck, facing: 90, box: [-S.beam, -(S.poop - S.deck) - 0.1, S.beam, 0], code: `${K}.breakFront(g, e, '${ship}');` },
-    { id: `${id}_rig`, name: "«Секрет»: мачты и такелаж", on: id, facing: 180, box: [-22, -32, 27, 0], code: `${K}.rig(g, e, '${ship}');`, animate: `${K}.rigMotion(e);` },
+    plate("side", 'Secret: starboard side', { distance: -S.beam }, 180),
+    plate("side_port", 'Secret: port side', { distance: S.beam }, 0),
+    plate("bow", 'Secret: starboard bow', { across: S.straight[1], distance: -S.beam }, 180 - bowTurn),
+    plate("bow_port", 'Secret: port bow', { across: S.straight[1], distance: S.beam }, bowTurn),
+    plate("quarter", 'Secret: starboard quarter', { across: S.straight[0], distance: -S.beam }, 180 + quarterTurn, lit),
+    plate("quarter_port", 'Secret: port quarter', { across: S.straight[0], distance: S.beam }, 360 - quarterTurn, lit),
+    { id: `${id}_transom`, name: 'Secret: stern', on: id, across: S.stern, facing: 270, box: [a(-S.transom - 0.3), a(top - 1.2), a(S.transom + 0.3), 0.6], code: `${K}.hull(g, e, 'transom', '${ship}');`, ...lit },
+    { id: `${id}_deck`, name: 'Secret: deck', plane: true, walk: true, on: id, across: (S.stern + S.stem) / 2, elevation: S.deck, width: S.stem - S.stern, depth: 2 * S.beam, code: `${K}.deck(g, e, 'deck', '${ship}');` },
+    { id: `${id}_poop`, name: 'Secret: poop', plane: true, walk: true, on: id, across: (S.stern + S.break) / 2, elevation: S.poop, width: S.break - S.stern, depth: 2 * S.beam, code: `${K}.deck(g, e, 'poop', '${ship}');` },
+    { id: `${id}_break`, name: 'Secret: break of the poop', on: id, across: S.break, elevation: S.deck, facing: 90, box: [-S.beam, -(S.poop - S.deck) - 0.1, S.beam, 0], code: `${K}.breakFront(g, e, '${ship}');` },
+    { id: `${id}_rig`, name: 'Secret: masts and rigging', on: id, facing: 180, box: [-22, -32, 27, 0], code: `${K}.rig(g, e, '${ship}');`, animate: `${K}.rigMotion(e);` },
   ];
   const sailOf = (name, title, where, seed) => {
     const rect = clothRect(name);
-    return { id: `${id}_${name}`, name: `«Секрет»: ${title}`, ...where, facing: 180, translucent: 0.55, box: [a(rect[0] - 0.5), a(rect[1] - 0.5), a(rect[2] + 0.5), a(rect[3] + 0.5)],
+    return { id: `${id}_${name}`, name: `Secret: ${title}`, ...where, facing: 180, translucent: 0.55, box: [a(rect[0] - 0.5), a(rect[1] - 0.5), a(rect[2] + 0.5), a(rect[3] + 0.5)],
       uniforms: clothUniforms(rect, SAILS[name].rise, seed), code: `${K}.sail(g, e, '${name}', '${ship}');`, animate: `${K}.sailMotion(e, '${name}');`, wgsl: "cloth" };
   };
-  const titles = { course: "нижний парус", top: "марсель", tg: "брамсель" };
+  const titles = { course: 'course', top: 'topsail', tg: 'topgallant' };
   ["fore", "main"].forEach((which, k) => {
     const m = S.masts[which];
-    const mastName = which === "fore" ? "фок-мачта" : "грот-мачта";
-    out.push({ id: `${id}_${which}`, name: `«Секрет»: ${mastName} и реи`, on: id, across: m.x, facing: 90 - brace, box: [-8.6, -m.top - 0.5, 8.6, -S.deck + 0.1],
+    const mastName = which === "fore" ? 'foremast' : 'mainmast';
+    out.push({ id: `${id}_${which}`, name: `Secret: ${mastName} and yards`, on: id, across: m.x, facing: 90 - brace, box: [-8.6, -m.top - 0.5, 8.6, -S.deck + 0.1],
       code: `${K}.mast(g, e, '${which}', '${ship}');`, animate: `${K}.mastMotion(e, '${which}');` });
     yardsOf(which).forEach((name, i) => out.push(sailOf(name, `${titles[name.split("_")[1]]}, ${mastName}`, { on: `${id}_${which}`, distance: -0.3 }, 1 + k * 3 + i)));
   });
-  out.push(sailOf("jib", "стаксель", { on: id, distance: 0.1 }, 7));
-  out.push(sailOf("jib_outer", "кливер", { on: id, distance: -0.1 }, 8));
-  out.push(sailOf("spanker", "бизань", { on: id, distance: -0.1 }, 9));
+  out.push(sailOf("jib", 'staysail', { on: id, distance: 0.1 }, 7));
+  out.push(sailOf("jib_outer", 'jib', { on: id, distance: -0.1 }, 8));
+  out.push(sailOf("spanker", 'spanker', { on: id, distance: -0.1 }, 9));
   return out;
 }
 

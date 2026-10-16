@@ -1,203 +1,203 @@
-# Палуба (`paluba`) — на движке 2
+# The Deck (`paluba`) — on engine 2
 
-На юте корабля, правее штурвала, лицом к носу: штурвал сбоку у края кадра, палуба ведёт взгляд вперёд, главная масса —
-паруса, за ними небо, по правому борту — море. Язык мира: светло, тонко, минимально; простор, контраст парусов с
-небом, тени парусов на палубе, влажный тик с лёгким отражением, море-зеркало. `ship` переставляет корабль: «Секрет» —
-белый галиот, «Ансельм» — тёмная потёртая шхуна, латаные серые паруса. Алое — только паруса и шёлк «Секрета».
+On a ship's poop, to the right of the wheel, facing the bow: the wheel to the side at the frame's edge, the deck leads the eye forward, the main mass is
+the sails, the sky behind them, to starboard the sea. The world's language: light, fine, minimal; space, the contrast of the sails against
+the sky, the sails' shadows on the deck, wet teak with a faint reflection, a mirror of a sea. `ship` changes the ship: the Secret —
+a white galliot, the Anselm — a dark worn schooner, patched grey sails. The only scarlet is the Secret's sails and silk.
 
-Всё нарисовано один раз, в дневных цветах. Ни один рисунок не читает ключ, который движется: рисунки читают только
-`ship` (меняется склейкой). Час — свет сцены и небо мира (`nebo`), паруса — шейдер парусины мира (`korabli`), остальное
-— слои и `animate`.
+Everything is painted once, in the day's colours. No painting reads a key that moves: the paintings read only
+`ship` (it changes by a cut). The hour is the scene's light and the world's sky (`nebo`), the sails — the world's sailcloth shader (`korabli`), the rest
+— layers and `animate`.
 
-## Мир лежит где лежит, корабль по нему идёт
+## The world lies where it lies, the ship sails over it
 
-Впереди, на западе, — Каперна (`kaperna`, 6 км от начала пути); порт Лисс — в 30 км за кормой (`harbour` и всё на нём);
-море — одна плоскость-зеркало 40 × 60 км подо всем; почтовый пароход — элемент со своим местом и ходом. Корабль стоит в
-мире там, где его держат ключи `ship_x`, `ship_d` (метры поперёк и вдоль курса на запад) и повёрнут как `ship_f`;
-скрипт ведёт его его же ходом — до 4 м/с по `sails_set` (меньше, когда паруса заполаскивают; 0 в порту и когда он лёг в
-дрейф в 450 м от Каперны) — туда, куда смотрит нос (`heading` поворачивает корабль на ±25°). Каперна, солнце, пароход
-уходят в сторону сами — потому что повернулся корабль.
+Ahead, in the west, is Kaperna (`kaperna`, 6 km from the start of the way); the port of Liss — 30 km astern (`harbour` and all on it);
+the sea — one mirror plane 40 × 60 km under everything; the mail steamer — an element with its own place and way. The ship stands in
+the world where the keys `ship_x`, `ship_d` hold her (metres across and along the course west) and is turned as `ship_f` says;
+the script leads her under her own way — up to 4 m/s by `sails_set` (less when the sails luff; 0 in port and when she has hove
+to 450 m off Kaperna) — where her bow points (`heading` turns the ship by ±25°). Kaperna, the sun, the steamer
+move aside by themselves — because the ship has turned.
 
-Камера едет на корабле: `"camera": {"mode": "roam", "on": "ship", "area": […]}` — старт, шаги зрителя, комната
-оператора и его кадры считаются в осях корабля. `area` — ют и шкафут до грот-мачты (оператору нужны кадры у мачты).
+The camera rides on the ship: `"camera": {"mode": "roam", "on": "ship", "area": […]}` — the start, the viewer's steps, the operator's
+room and his shots are reckoned in the ship's axes. `area` — the poop and the waist up to the mainmast (the operator needs shots by the mast).
 
-Три невидимые опоры, одна на другой:
+Three unseen supports, one on another:
 
-| Опора | Что |
+| Support | What |
 | --- | --- |
-| `course` | место и поворот корабля в мире (`ship_x`, `ship_d`, `ship_f`); ровная |
-| `hull` | киль: крен (`tilt` — `heel`) вокруг оси вдоль киля, в 2.5 м под ютом |
-| `ship` | рама палуб: её начало — место зрителя на юте (в 2.4 м правее киля), `across` — к правому борту, `distance` — к носу, `elevation` — вверх от юта (шкафут −1.4, море −3.8). Всё корабельное, люди и камера — `on: ship` |
+| `course` | the ship's place and turn in the world (`ship_x`, `ship_d`, `ship_f`); level |
+| `hull` | the keel: the heel (`tilt` — `heel`) about the axis along the keel, 2.5 m below the poop |
+| `ship` | the decks' frame: its origin is the viewer's place on the poop (2.4 m to the right of the keel), `across` — to starboard, `distance` — to the bow, `elevation` — up from the poop (the waist −1.4, the sea −3.8). All that is the ship's, the people and the camera — `on: ship` |
 
-Корабль вдоль (`distance`): гакаборт −3, штурвал 2.6, бизань 5.2 (только «Секрет»), край юта 6, люк 9…12, грот-мачта 14,
-фок-мачта 23, нос 32. Киль — `across` −2.4.
+The ship lengthwise (`distance`): the taffrail −3, the wheel 2.6, the mizzen 5.2 (the Secret only), the edge of the poop 6, the hatch 9…12, the mainmast 14,
+the foremast 23, the bow 32. The keel — `across` −2.4.
 
-## Что стало чем (v1 → v2)
+## What became what (v1 → v2)
 
 | v1 | v2 |
 | --- | --- |
-| корабль стоял, мир двигался: море уходило под корму (`travel`: `sailed`), Каперна подъезжала по `shore` (6 км → 600 м за 10 с), пароход — по `steamer`, причал Лисса въезжал сбоку по `port`; скрипт переставлял Каперну, пароход и солнце по `heading` | мир лежит на месте, корабль идёт и поворачивается (выше); `shore`, `port`, `steamer` — **места**: ставят корабль (пароход) туда, дальше все идут своим ходом |
-| камера стояла в начале мира | камера на корабле (`camera.on`) — понадобилось в движке (`engine2-camera-on`) |
-| прямые паруса — половины на петле у мачты, рисунок читал `sails`, `sails_set`, `luff` (перерисовка каждый кадр, пока они движутся) | те же половины (их поворачивает ветер: `belly_l`, `belly_r`, `belly_tilt` — свет ложится по повороту), рисунок — парус целиком поднятый, белый (`korabli.squareSail`, половина), остальное — шейдер парусины мира `tools/korabl-cloth.wgsl`: поднят насколько `set` (нижние падают с рея, марсели и брамсели растут от нижней шкаторины с реем), алый по `scarlet`, складки ветра, заполаскивание |
-| реи рисовались там, где они сейчас | реи — слои мачты, `animate` ведёт их за верхней шкаториной (`lib.yardsMotion`); брамсель висит на ключе высоты (`fore_tg_e`, `main_tg_e`): идёт вверх с реем марселя |
-| косые паруса «Ансельма» рисовались по `sails_set` | рисунок раз (`korabli.alongSail`) + шейдер парусины (растут от гика); гик и гафель — свой элемент (`mainsail_spars`, `foresail_spars`), гафель — слой, `animate` кладёт его к гику |
-| бизань «Секрета» меняла цвет в рисунке | шейдер парусины (`scarlet`, ветер); гафель — свой элемент `spanker_gaff` |
-| паруса против солнца были тёмные | `translucent`: просвечивают, тень паруса — алый свет |
-| небо рисовалось по `hour`, солнце и луну ставил скрипт (`sun_…`, `moon_…`) | небо мира `nebo` (шейдер, кругом); солнце и луна — его слои, свет — `from: "sky#sun"`, `"sky#moon"`; `storm` — униформа неба |
-| море: рисунок по `e.area`, гребни ехали с `sailed` | плоскость 40 × 60 км, цвет и гребни зыби — её шейдер `sea.wgsl` (лежат в мире, три размера, `storm`), зеркало — движка |
-| штурвал перерисовывался по `helm` | обод — слой, `animate` вращает |
-| фонари: цвет стекла и свет по `lanterns` в рисунке | стекло тёмное + слой `lit`, свечение `flame` — `e.glow`; свет сцены `of: "lantern_…#flame"` |
-| шёлк: штуки — части одного элемента, росли в рисунке по `silk` | каждая груда — элемент (`silk`, `silk_1…4`), каждая штука — слой, `animate` кладёт их по очереди; полотнища (`silk_run`) — слои, раскатываются `scaleY` |
-| бочка — `globalAlpha` по `cask` | слой, его альфа |
-| окна Лисса и фонари причала — альфа по ночи в рисунке | слой `lit` + `e.glow`, `animate` по `night`, `dusk`; свет фонарей — `on: harbour_lit` |
-| дым парохода рисовался по `e.t` | частицы `smoke` из `steamer#funnel` (`korabli.SMOKE`), пока пароход здесь |
-| фильм — строки секунд (`film`), люди ставились ключами по времени | куски режиссёра (`beats`, `lib.film(scene)`): люди идут своим шагом, склейки готовятся заранее, кадры на людях — оператор |
+| the ship stood, the world moved: the sea went under the stern (`travel`: `sailed`), Kaperna came near by `shore` (6 km → 600 m in 10 s), the steamer — by `steamer`, the Liss quay came in from the side by `port`; the script moved Kaperna, the steamer and the sun by `heading` | the world lies in its place, the ship sails and turns (above); `shore`, `port`, `steamer` are **places**: they put the ship (the steamer) there, from there all go under their own way |
+| the camera stood at the world's origin | the camera on the ship (`camera.on`) — it was needed in the engine (`engine2-camera-on`) |
+| the square sails — halves on a hinge at the mast, the painting read `sails`, `sails_set`, `luff` (repainted every frame while they moved) | the same halves (the wind turns them: `belly_l`, `belly_r`, `belly_tilt` — the light falls by the turn), the painting is the whole sail set, white (`korabli.squareSail`, a half), the rest is the world's sailcloth shader `tools/korabl-cloth.wgsl`: set as far as `set` says (the courses fall from the yard, the topsails and the topgallants grow from the foot with the yard), scarlet by `scarlet`, the wind's folds, the luffing |
+| the yards were painted where they are now | the yards are the mast's layers, `animate` leads them after the head (`lib.yardsMotion`); the topgallant hangs on a height key (`fore_tg_e`, `main_tg_e`): it goes up with the topsail yard |
+| the Anselm's fore-and-aft sails were painted by `sails_set` | painted once (`korabli.alongSail`) + the sailcloth shader (they grow from the boom); the boom and the gaff are an element of their own (`mainsail_spars`, `foresail_spars`), the gaff a layer, `animate` lays it to the boom |
+| the Secret's spanker changed colour in the painting | the sailcloth shader (`scarlet`, the wind); the gaff is an element of its own, `spanker_gaff` |
+| the sails against the sun were dark | `translucent`: they let the light through, the sail's shadow is scarlet light |
+| the sky was painted by `hour`, the sun and the moon were set by the script (`sun_…`, `moon_…`) | the world's sky `nebo` (a shader, all round); the sun and the moon are its layers, the light — `from: "sky#sun"`, `"sky#moon"`; `storm` — the sky's uniform |
+| the sea: a painting by `e.area`, the crests rode with `sailed` | a plane 40 × 60 km, the colour and the swell's crests are its shader `sea.wgsl` (they lie in the world, three sizes, `storm`), the mirror is the engine's |
+| the wheel was painted anew by `helm` | the rim is a layer, `animate` turns it |
+| the lanterns: the glass's colour and the light by `lanterns` in the painting | dark glass + the layer `lit`, the glow `flame` — `e.glow`; the scene's light `of: "lantern_…#flame"` |
+| the silk: the bolts were parts of one element, grew in the painting by `silk` | each heap is an element (`silk`, `silk_1…4`), each bolt a layer, `animate` lays them in turn; the lengths (`silk_run`) are layers, unrolled by `scaleY` |
+| the cask — `globalAlpha` by `cask` | a layer, its alpha |
+| the windows of Liss and the quay lamps — an alpha by the night in the painting | the layer `lit` + `e.glow`, `animate` by `night`, `dusk`; the lamps' light — `on: harbour_lit` |
+| the steamer's smoke was painted by `e.t` | the particles `smoke` from `steamer#funnel` (`korabli.SMOKE`), while the steamer is here |
+| the film — lines of seconds (`film`), the people were set by keys by time | the director's beats (`beats`, `lib.film(scene)`): people walk at their own pace, the cuts are made ready ahead, the shots on people are the operator's |
 
-## Ключи
+## Keys
 
-Описаны в `states` сцены.
+Described in the scene's `states`.
 
-| Ключ | Что | По умолчанию |
+| Key | What | By default |
 | --- | --- | --- |
-| `hour` | 0…1, как во всём мире; корабль идёт на запад: рассвет за кормой, закат впереди | 0.27 |
-| `ship` | `secret` · `anselm` (склейкой) | `secret` |
-| `sails` | 0…1: паруса «Секрета» белые → алые | 0 |
-| `sails_set` | 0…1: убраны → подняты, по одному — нижние, марсели, брамсели (у «Ансельма» — грот, фок, марсель); от него ход | 1 |
-| `luff` | 0…1: паруса заполаскивают (и ход падает) | 0 |
-| `roll` | −1…1: крен до 12°; качка — поверх, сильнее в шторм, слабее в порту | 0 |
-| `storm` | 0…1: небо, свет, море, ветер в парусах, качка | 0 |
-| `helm` | −1…1: штурвал, три четверти оборота | 0 |
-| `heading` | −1…1: нос на 25° левее … правее курса на Каперну; корабль туда и идёт | 0 |
-| `shore` | **изменилось:** место на пути к Каперне, куда корабль ставят (0 — 6 км, 1 — 600 м; ниже 0 — дальше в море, −1 — 15 км); дальше он идёт сам. В v1 значение двигали, и берег подъезжал — теперь к берегу подходят ходом корабля, а этапы пути — склейки | 0 |
-| `port` | **изменилось:** 0 · 1 — корабль у причала Лисса (склейкой; промежуточных значений нет) | 0 |
-| `steamer` | **изменилось:** 0 — парохода нет; значение ставит его впереди справа от корабля (к 0 — 420 м, 1 — 70 м), дальше пароход идёт своим ходом (2.6 м/с), «Секрет» его обгоняет | 0 |
-| `lanterns`, `silk`, `cask` | 0…1, как были | 0 |
-| `skiff_down` | 0…1: шлюпка у правого борта — висит под поручнем → спущена на воду | 0 |
-| `ropes` | 0 · 1 — вставка: руки юнги на вантах крупно (кадр `ropes` модуля `closeups`), во весь кадр | 0 |
-| `climb` | вставка: 0…1 — как высоко он поднялся (выбленки уходят вниз); двигает «Ванты» | 0 |
-| `hand_l`, `hand_r` | вставка: 1 — рука сжата на канате, 0 — поднята и раскрыта; двигает «Ванты» | 1 |
-| `slip` | вставка: 0…1 — срыв, руки съезжают (импульс); двигает «Ванты» | 0 |
-| `beat` | кусок фильма | null |
+| `hour` | 0…1, as in the whole world; the ship sails west: the dawn astern, the sunset ahead | 0.27 |
+| `ship` | `secret` · `anselm` (by a cut) | `secret` |
+| `sails` | 0…1: the Secret's sails white → scarlet | 0 |
+| `sails_set` | 0…1: furled → set, one by one — the courses, the topsails, the topgallants (the Anselm's — mainsail, foresail, topsail); the way comes from it | 1 |
+| `luff` | 0…1: the sails luff (and the way falls off) | 0 |
+| `roll` | −1…1: a heel up to 12°; the rolling — on top, stronger in a storm, weaker in port | 0 |
+| `storm` | 0…1: the sky, the light, the sea, the wind in the sails, the rolling | 0 |
+| `helm` | −1…1: the wheel, three quarters of a turn | 0 |
+| `heading` | −1…1: the bow 25° to the left … to the right of the course to Kaperna; the ship sails there | 0 |
+| `shore` | **changed:** the place on the way to Kaperna where the ship is put (0 — 6 km, 1 — 600 m; below 0 — further out at sea, −1 — 15 km); from there she goes by herself. In v1 the value was moved and the shore came near — now the shore is reached under the ship's way, and the stages of the way are cuts | 0 |
+| `port` | **changed:** 0 · 1 — the ship at the Liss quay (by a cut; there are no values in between) | 0 |
+| `steamer` | **changed:** 0 — no steamer; a value puts her ahead to starboard of the ship (towards 0 — 420 m, 1 — 70 m), from there the steamer goes under her own way (2.6 m/s), the Secret overtakes her | 0 |
+| `lanterns`, `silk`, `cask` | 0…1, as they were | 0 |
+| `skiff_down` | 0…1: the skiff by the starboard side — hanging under the rail → lowered onto the water | 0 |
+| `ropes` | 0 · 1 — an insert: the ship's boy's hands on the shrouds close up (the shot `ropes` of the module `closeups`), filling the frame | 0 |
+| `climb` | the insert: 0…1 — how high he has climbed (the ratlines go down); moved by “Shrouds” | 0 |
+| `hand_l`, `hand_r` | the insert: 1 — the hand closed on the rope, 0 — raised and open; moved by “Shrouds” | 1 |
+| `slip` | the insert: 0…1 — a slip, the hands slide (an impulse); moved by “Shrouds” | 0 |
+| `beat` | the film's beat | null |
 
-**Ключи партии** — их ставит игра, открывая сцену; ни один `from` их не ставит, куски их читают (`scene.get`):
+**The play's keys** — the game sets them on opening the scene; no `from` sets them, the beats read them (`scene.get`):
 
-| Ключ | Что | По умолчанию |
+| Key | What | By default |
 | --- | --- | --- |
-| `leg` | 0…1 — этап пути, когда сцену открывают на `helm`: ставит корабль как `shore` | нет (null): `helm` после `raise` идёт с места |
-| `sun` | 0.26…0.36 — час в `raise`, `helm`, `arrive` | 0.26 |
-| `wine` | 0 · 1 — в `night_end`: 1 — бочка Греев и два матроса, 0 — бочки нет, четверо поют на люке | 0 |
-| `ring` | `none` · `finger` · `cord` — кольцо у Ассоль на палубе (`steamer`, `night_end`), как на берегу в шлюпке: `finger` — часть каста по `ring_kind`, `cord` — на шнурке поверх платья (часть `ring_cord`) | `none` |
-| `ring_kind` | `mother` — материнское, тонкое, с камнем (часть `ring`) · `own` — его старинное, широкое (часть `ring_old`) | `own` |
+| `leg` | 0…1 — the stage of the way when the scene is opened on `helm`: puts the ship as `shore` does | none (null): `helm` after `raise` goes on from where she is |
+| `sun` | 0.26…0.36 — the hour in `raise`, `helm`, `arrive` | 0.26 |
+| `wine` | 0 · 1 — in `night_end`: 1 — the Grays' cask and two sailors, 0 — no cask, four sing on the hatch | 0 |
+| `ring` | `none` · `finger` · `cord` — Assol's ring on the deck (`steamer`, `night_end`), as on the shore in the skiff: `finger` — a part of the cast by `ring_kind`, `cord` — on a cord over her dress (the part `ring_cord`) | `none` |
+| `ring_kind` | `mother` — his mother's, thin, with a stone (the part `ring`) · `own` — his old one, broad (the part `ring_old`) | `own` |
 
-«Ванты» ведёт и `roll`: он кренит корабль (под вставкой) и горизонт вставки. «Курс» двигает `helm`, `heading`, `luff`.
-Ключи, которые мини-игра двигает каждый кадр, читают только `animate` и скрипт.
+“Shrouds” leads `roll` too: it heels the ship (under the insert) and the insert's horizon. “Course” moves `helm`, `heading`, `luff`.
+The keys a mini-game moves every frame are read only by `animate` and the script.
 
-Ведёт сцена (игре не трогать): `day`, `dawn`, `dusk`, `night`, `sun_light`, `moon_light` (`nebo.follow` по `hour`),
+Led by the scene (the game is not to touch them): `day`, `dawn`, `dusk`, `night`, `sun_light`, `moon_light` (`nebo.follow` by `hour`),
 `harbour_lit`, `heel`, `ship_x`, `ship_d`, `ship_f`, `ship_at`, `steamer_x`, `steamer_d`, `steamer_smoke`, `steamer_at`, `belly_l`, `belly_r`,
-`belly_tilt`, `fore_tg_e`, `main_tg_e`. Склейка, которая меняет час, паруса или место, несёт их с собой (`lib.js`:
-`voyage` — `placeOf`, `steamerAt`, `nebo.keys`, `rigOf`): иначе кадр, приготовленный заранее, был бы со старыми.
+`belly_tilt`, `fore_tg_e`, `main_tg_e`. A cut that changes the hour, the sails or the place carries them with it (`lib.js`:
+`voyage` — `placeOf`, `steamerAt`, `nebo.keys`, `rigOf`): else a shot made ready ahead would have the old ones.
 
-Убраны: `sailed` (море лежит в мире), `sun_bearing`, `sun_height`, `moon_bearing`, `moon_height`, `kaperna_…`,
-`harbour_across` (ничего не переставляется).
+Removed: `sailed` (the sea lies in the world), `sun_bearing`, `sun_height`, `moon_bearing`, `moon_height`, `kaperna_…`,
+`harbour_across` (nothing is moved about).
 
-**Где люди — изменилось:** `gr_`, `as_`, `go_`, `pa_`, `le_`, `sa_`, `cr_`, `s3_`, `s4_`, `zi_`, `m1_`, `m2_` с `a` — метры к **правому борту** от места
-зрителя, `d` — метры к **носу** от него (в v1: `a` — вперёд от середины корабля, `d` — к левому борту), `e` — высота
-палубы над ютом (ют 0, шкафут −1.4; в v1 — 2.5 и 1.1). Рама корабля стала обычной рамой сцены, поэтому `<id>_turn`
-сохранил смысл: 0 — к носу, 90 — к правому борту, 180 — к корме, 270 — к левому. Сидят (`<id>_on`) на месте в раме корабля:
-`{on: "ship", at: [поперёк, вдоль, верх сиденья над ютом]}` — салинг «Ансельма», задний комингс люка. Лонгрен стоит на
-пароходе (`"on": "steamer"`): `lo_a` — метры к корме от её середины, `lo_d` — от левого борта внутрь, `lo_e` — палуба над
-водой (3 м; плоскость `steamer_deck` за нарисованным бортом).
+**Where the people are — changed:** `gr_`, `as_`, `go_`, `pa_`, `le_`, `sa_`, `cr_`, `s3_`, `s4_`, `zi_`, `m1_`, `m2_` with `a` — metres to **starboard** from the viewer's
+place, `d` — metres to **the bow** from it (in v1: `a` — forward from the ship's middle, `d` — to port), `e` — the height
+of the deck above the poop (the poop 0, the waist −1.4; in v1 — 2.5 and 1.1). The ship's frame has become an ordinary scene frame, so `<id>_turn`
+has kept its sense: 0 — to the bow, 90 — to starboard, 180 — to the stern, 270 — to port. They sit (`<id>_on`) at a place in the ship's frame:
+`{on: "ship", at: [across, along, the seat's top above the poop]}` — the Anselm's crosstrees, the hatch's back coaming. Longren stands on
+the steamer (`"on": "steamer"`): `lo_a` — metres aft from her middle, `lo_d` — inwards from her port side, `lo_e` — the deck above
+the water (3 m; the plane `steamer_deck` behind the painted side).
 
-## Точки и элементы для игры
+## Points and elements for the game
 
-`wheel#wheel` (ступица), `wheel#rim_l`, `wheel#rim_r` (где лежат руки рулевого — новые), `shrouds#shrouds`,
-`shrouds#top` (салинг), `shrouds#hold_l`, `shrouds#hold_r` (где руки берутся за ванты с палубы), `mainmast#mainmast`, `foremast#foremast`, `bulwark_starboard#rail`, `bulwark_port#rail_port`,
+`wheel#wheel` (the hub), `wheel#rim_l`, `wheel#rim_r` (where the helmsman's hands lie — new), `shrouds#shrouds`,
+`shrouds#top` (the crosstrees), `shrouds#hold_l`, `shrouds#hold_r` (where the hands take hold of the shrouds from the deck), `mainmast#mainmast`, `foremast#foremast`, `bulwark_starboard#rail`, `bulwark_port#rail_port`,
 `hatch#hatch`, `silk#silk`, `cask#cask`, `kaperna#kaperna`, `kaperna#longren_house`, `steamer#steamer`,
-`steamer#funnel`, `skiff#skiff`, `skiff#bow`, `skiff#seat1`, `skiff#seat2` (идут со шлюпкой), `ropes#left`, `ropes#right` (руки на вставке — точки «Вант»), `quay#quay`, `lisse#lisse`, `quay_lamps#lamp0…3`, `sky#sun`, `sky#moon`; `<id>#letter` — письмо в
-руках. Для выбора: `shrouds`, `wheel`. Невидимые цели камеры: `by_rail` (двое у правого борта юта), `by_mast` (двое у
-грот-мачты).
+`steamer#funnel`, `skiff#skiff`, `skiff#bow`, `skiff#seat1`, `skiff#seat2` (they go with the skiff), `ropes#left`, `ropes#right` (the hands on the insert — the points of “Shrouds”), `quay#quay`, `lisse#lisse`, `quay_lamps#lamp0…3`, `sky#sun`, `sky#moon`; `<id>#letter` — a letter in
+the hands. For a choice: `shrouds`, `wheel`. Unseen targets for the camera: `by_rail` (the two by the poop's starboard rail), `by_mast` (the two by
+the mainmast).
 
-Невидимые места оператора вне палуб (`camera_on` куска: камера стартует там и идёт оттуда к цели; комната `area`
-считается от них же): `cam_rail` — над морем за правым бортом юта, перед теми, кто стоит у борта, на высоте груди
-(лица, руки между леером и планширем); `cam_boat` — низко над водой у правого борта, позади шлюпки (под 25° к борту:
-строго сбоку мачты и прямые паруса — карты ребром); `cam_steamer` — на палубе парохода, внутрь и вперёд от Лонгрена.
-С палубы шлюпку не видно (она под планширем, за бортом), а стоящие у борта — спиной.
+The operator's unseen places off the decks (a beat's `camera_on`: the camera starts there and goes from there to the target; the room `area`
+is reckoned from them too): `cam_rail` — over the sea beyond the poop's starboard side, before those standing at the rail, at chest height
+(the faces, the hands between the lifeline and the gunwale); `cam_boat` — low over the water by the starboard side, behind the skiff (at 25° to the side:
+straight from the side the masts and the square sails are cards edge-on); `cam_steamer` — on the steamer's deck, inwards and forward of Longren.
+From the deck the skiff is not seen (it is under the gunwale, over the side), and those standing at the rail have their backs to us.
 
-## Свет
+## Light
 
-`light` — день (ambient 0.9, лёгкая дымка: Каперна в 6 км видна); виды `dawn`, `dusk`, `night` по весам часа, `storm`
-(серый свет, дымка, ветер сильнее). Ночь и шторм светлые настолько, чтобы люди читались: ночь — ambient 0.7, голубой, луна 0.9, фонари 2.2. Солнце и луна — дальние источники из неба; фонари — свет своих свечений
-(`on: lanterns`), фонари причала — `on: harbour_lit`. Паруса, мачты, борта, поручни, штурвал, бочка, люди бросают тени
-на ют и шкафут. Палубы — слабое зеркало, море — зеркало (`rough`, `ripple`).
+`light` — day (ambient 0.9, a light haze: Kaperna 6 km off is seen); the looks `dawn`, `dusk`, `night` by the hour's weights, `storm`
+(a grey light, haze, a stronger wind). The night and the storm are light enough for the people to read: the night — ambient 0.7, blue, the moon 0.9, the lanterns 2.2. The sun and the moon are far sources from the sky; the lanterns — the light of their own glows
+(`on: lanterns`), the quay lamps — `on: harbour_lit`. The sails, the masts, the sides, the rails, the wheel, the cask, the people cast shadows
+on the poop and the waist. The decks are a faint mirror, the sea a mirror (`rough`, `ripple`).
 
-## Люди и фильм
+## The people and the film
 
-Люди — движка, каст мира: `grey` (юнгой на «Ансельме» — `grey_wear: cast.characters.grey_teen`), `assol`, `gop`,
-`panten`, `letika`, `sailor`, `crew2`, `sailor3`, `sailor4`; музыканты — `zimmer` (Циммер), `musician1` (облик `musician`),
-`musician2` (`cellist`), инструменты — части каста, их даёт кусок (`<id>_with`: `violin`, `violin`, `cello`). Стоят на
-корабле (`on: ship`): идут с ним, в качку остаются прямыми. `longren` — на пароходе (`on: steamer`), с трубкой (`pipe`). По
-умолчанию на палубе один Грей у штурвала.
+The people are the engine's, the world's cast: `grey` (as a ship's boy on the Anselm — `grey_wear: cast.characters.grey_teen`), `assol`, `gop`,
+`panten`, `letika`, `sailor`, `crew2`, `sailor3`, `sailor4`; the musicians — `zimmer` (Zimmer), `musician1` (the look `musician`),
+`musician2` (`cellist`), the instruments are the cast's parts, the beat gives them (`<id>_with`: `violin`, `violin`, `cello`). They stand on
+the ship (`on: ship`): they go with her, in the rolling they stay upright. `longren` — on the steamer (`on: steamer`), with his pipe (`pipe`). By
+default only Gray is on the deck, at the wheel.
 
-Чего модель не делает: лезть по вантам — вместо этого вставка `ropes` (только руки и небо), потом маленькая сидящая
-фигура на салинге; играть на скрипке — музыканты стоят с опущенными инструментами и покачиваются (`sway`), в `sew` сидят
-с ними на коленях; играет звук игры.
+What the model does not do: climb the shrouds — instead the insert `ropes` (only the hands and the sky), then a small sitting
+figure on the crosstrees; play the violin — the musicians stand with their instruments lowered and sway (`sway`), in `sew` they sit
+with them on their knees; the game's sound plays.
 
-Куски (`lib.film(scene)`; по концу — `beat:<имя>`), у каждого `from` — склейка: корабль, час, кто где. `after` — кусок
-идёт дальше без `from`.
+The beats (`lib.film(scene)`; at the end — `beat:<name>`), each with a `from` that is a cut: the ship, the hour, who is where. `after` — the beat
+goes on with no `from`.
 
-| Кусок | ≈ с | Что | Момент (`scene.tell`) |
+| Beat | ≈ s | What | Moment (`scene.tell`) |
 | --- | --- | --- | --- |
-| `anselm` | 8 | «Ансельм» в зыби далеко в море: Гоп у грот-мачты, руки за спиной; юнга Грей перед вантами смотрит наверх | `anselm:looks-up` |
-| `shrouds` (после `anselm`) | 5 | юнга идёт под ванты правого борта и берётся за них (руки на `shrouds#hold_l`, `hold_r`); склейка во вставку `ropes`: обе руки сжаты, у палубы — под «Ванты» | `shrouds:close` |
-| `top` (после `shrouds`) | 7 | склейка на палубу (вставка закрыта), камера смотрит вверх: на салинге сидит маленькая фигура против неба; склейка на Гопа под мачтой — голова задрана | `top:up` |
-| `letter` | 3 | «Ансельм» в Лиссе, полдень (`ship: anselm`, как `gop_bye` после него: «Секрет» ещё не куплен): Грей у борта читает письмо (под выбор) | `letter:reading` |
-| `gop_bye` | 7 | «Ансельм» в Лиссе: Гоп у борта, руки за спиной; Грей (20) в сюртуке, с узлом; Гоп поворачивается к нему | `gop_bye:turns` |
-| `secret` | 8 | «Секрет» в Лиссе, паруса убраны: Грей у штурвала кладёт руку на обод, смотрит вперёд | `secret:hand-on-wheel` |
-| `sew` | 12 | ночь в порту, фонари: команда шьёт алый шёлк на шкафуте, на люке сидят Циммер и двое музыкантов, инструменты на коленях; склейка на Грея у поручня; Пантен подходит к нему | `sew:panten` |
-| `rail` | 8 | перед рассветом, в море: Грей у борта переводит взгляд туда, где Каперна | `rail:looks` |
-| `raise` | 15 | рассвет (час — `sun`): алые паруса идут вверх один за другим и наполняются (12 с); Грей у штурвала, Летика у правого борта; камера поднимает взгляд за ними; музыканты уже на баке | `raise:going-up`, `raise:full` |
-| `helm` (после `raise`) | 2 | Грей у штурвала смотрит на Каперну; Летика у правого борта (как в `raise`); на баке стоят музыканты, покачиваются (дальние силуэты) — под «Курс». Открытый сам: `heading` 0, место — `shore` = `leg`, час — `sun` | `helm:ready` |
-| `arrive` | 12 | Каперна близко (480 м — склейка несёт и `ship_d`, и `ship_at`, скрипт не ставит корабль заново; час — `sun`): Грей и Летика у борта; паруса заполаскивают (`luff` 0.7), корабль доходит до 450 м и ложится в дрейф; склейка за борт, с воды (`camera_on: "cam_boat"`): правый борт, шлюпка идёт из-под планширя на воду (`skiff_down` 0 → 1), двое у борта над ней | `arrive:shore`, `arrive:boat` |
-| `steamer` | 12 | эпилог, рассвет: «Секрет» нагоняет пароход: двое у борта с юта, пароход впереди; склейка на Ассоль из-за борта, крупнее (`camera_on: "cam_rail"`; кольцо при ней — по `ring`, `ring_kind`): она машет, Грей рядом; склейка на пароход (`camera_on: "cam_steamer"`): со спины Лонгрен у поручня у кормы с трубкой, за ним алые паруса; он поднимает руку | `steamer:waved`, `steamer:longren` |
-| `night_end` | 18 | эпилог, ночь под алыми парусами, фонари: Циммер у грот-мачты покачивается, скрипка опущена; склейка на Ассоль (кольцо при ней — по `ring`, `ring_kind`) и Грея у борта — лицом к нам, из-за борта (`camera_on: "cam_rail"`). `wine` 1 — бочка посреди юта и два матроса за ней, видны между двумя у борта; 0 — бочки нет, четверо матросов сидят на люке и поют (сидят спокойно, `seated`: песню несёт звук игры) — кусок открывается на них с края юта, Циммер стоит за ними | `night_end:look` |
+| `anselm` | 8 | the Anselm in a swell far out at sea: Gop by the mainmast, hands behind his back; the ship's boy Gray before the shrouds looks up | `anselm:looks-up` |
+| `shrouds` (after `anselm`) | 5 | the boy goes under the starboard shrouds and takes hold of them (the hands on `shrouds#hold_l`, `hold_r`); a cut into the insert `ropes`: both hands closed, by the deck — under “Shrouds” | `shrouds:close` |
+| `top` (after `shrouds`) | 7 | a cut to the deck (the insert closed), the camera looks up: on the crosstrees a small figure sits against the sky; a cut to Gop under the mast — his head thrown back | `top:up` |
+| `letter` | 3 | the Anselm at Liss, noon (`ship: anselm`, as `gop_bye` after it: the Secret is not bought yet): Gray at the rail reads a letter (under a choice) | `letter:reading` |
+| `gop_bye` | 7 | the Anselm at Liss: Gop at the rail, hands behind his back; Gray (20) in a frock coat, with a bundle; Gop turns to him | `gop_bye:turns` |
+| `secret` | 8 | the Secret at Liss, the sails furled: Gray at the wheel lays his hand on the rim, looks ahead | `secret:hand-on-wheel` |
+| `sew` | 12 | night in port, the lanterns: the crew sews the scarlet silk in the waist, on the hatch sit Zimmer and two musicians, the instruments on their knees; a cut to Gray at the rail; Panten comes up to him | `sew:panten` |
+| `rail` | 8 | before dawn, at sea: Gray at the rail turns his eyes to where Kaperna is | `rail:looks` |
+| `raise` | 15 | dawn (the hour — `sun`): the scarlet sails go up one after another and fill (12 s); Gray at the wheel, Letika at the starboard rail; the camera raises its eyes after them; the musicians already on the forecastle | `raise:going-up`, `raise:full` |
+| `helm` (after `raise`) | 2 | Gray at the wheel looks at Kaperna; Letika at the starboard rail (as in `raise`); on the forecastle the musicians stand, swaying (far silhouettes) — under “Course”. Opened by itself: `heading` 0, the place — `shore` = `leg`, the hour — `sun` | `helm:ready` |
+| `arrive` | 12 | Kaperna near (480 m — the cut carries both `ship_d` and `ship_at`, the script does not put the ship anew; the hour — `sun`): Gray and Letika at the rail; the sails luff (`luff` 0.7), the ship comes to 450 m and heaves to; a cut over the side, from the water (`camera_on: "cam_boat"`): the starboard side, the skiff goes from under the gunwale onto the water (`skiff_down` 0 → 1), the two at the rail above it | `arrive:shore`, `arrive:boat` |
+| `steamer` | 12 | the epilogue, dawn: the Secret overtakes the steamer: the two at the rail from the poop, the steamer ahead; a cut to Assol from over the side, larger (`camera_on: "cam_rail"`; the ring on her — by `ring`, `ring_kind`): she waves, Gray beside her; a cut to the steamer (`camera_on: "cam_steamer"`): from behind, Longren at the rail by the stern with his pipe, the scarlet sails behind him; he raises his hand | `steamer:waved`, `steamer:longren` |
+| `night_end` | 18 | the epilogue, night under the scarlet sails, the lanterns: Zimmer by the mainmast sways, the violin lowered; a cut to Assol (the ring on her — by `ring`, `ring_kind`) and Gray at the rail — facing us, from over the side (`camera_on: "cam_rail"`). `wine` 1 — the cask amid the poop and two sailors behind it, seen between the two at the rail; 0 — no cask, four sailors sit on the hatch and sing (they sit at rest, `seated`: the song is carried by the game's sound) — the beat opens on them from the poop's edge, Zimmer stands behind them | `night_end:look` |
 
-Показ (`showcase.js`) — все тринадцать по порядку (`lib.SHOWCASE`), каждый короче 30 с.
+The showcase (`showcase.js`) — all thirteen in order (`lib.SHOWCASE`), each shorter than 30 s.
 
-Игре: этапы пути к Каперне — склейки (`shore`; в главе V — `leg` при открытии на `helm`), между ними корабль идёт сам
-(4 м/с: 6 км — 25 минут); где он — `ship_x`, `ship_d` (Каперна на `ship_d` 6000). Нажимается: `grey#letter` (после
+For the game: the stages of the way to Kaperna are cuts (`shore`; in chapter V — `leg` on opening on `helm`), between them the ship sails by herself
+(4 m/s: 6 km — 25 minutes); where she is — `ship_x`, `ship_d` (Kaperna at `ship_d` 6000). Pressed: `grey#letter` (after
 `letter`).
 
-Снаружи корабль в этой сцене — только правый борт (`side_starboard`, `side_bow_starboard`: его видно с парохода и от
-шлюпки); левого нет.
+From outside, the ship in this scene is only the starboard side (`side_starboard`, `side_bow_starboard`: it is seen from the steamer and from
+the skiff); there is no port side.
 
-## Генератор
+## The generator
 
-`node tools/paluba.js` (из корня мира) пишет `scene.json` целиком и то, что повторяется или принадлежит миру: файлы
-половин прямых парусов, шейдер парусины каждому парусу (`tools/korabl-cloth.wgsl` + `korabli.clothUniforms`), шейдер и
-униформы неба (`tools/nebo-sky.wgsl`, `nebo.UNIFORMS`). После правки шейдеров мира или модуля — запустить снова.
-`scene.json` руками не править.
+`node tools/paluba.js` (from the world's root) writes the whole `scene.json` and what repeats or belongs to the world: the files
+of the square sails' halves, the sailcloth shader for each sail (`tools/korabl-cloth.wgsl` + `korabli.clothUniforms`), the sky's shader and
+uniforms (`tools/nebo-sky.wgsl`, `nebo.UNIFORMS`). After a change to the world's shaders or the module — run it again.
+`scene.json` is not to be edited by hand.
 
-## Что важно не сломать
+## What must not be broken
 
-- Рисунки читают только `ship`. Нельзя рисовать по `sails`, `sails_set`, `luff`, `hour`, `lanterns`, `silk`, `helm`.
-- Слой, который ездит (реи, гафель), имеет `box` на весь путь.
-- Числа парусов — в двух местах: `lib.js` (`SQUARE`, `GAFF`, `SPANKER`) и `tools/paluba.js` (`SAILS`, вызовы `cloth`):
-  менять вместе.
-- Склейка с другим часом, парусами или местом — через `lib.js` `AT_SEA` / `IN_PORT`.
-- Ключи партии (`leg`, `sun`, `wine`, `ring`, `ring_kind`) не ставит ни один `from`; `climb`, `hand_l`, `hand_r`, `slip`, `skiff_down` читает
-  только `animate`.
-- Каждый `from` закрывает вставку (`CAM0`: `ropes: 0`) и возвращает камеру на корабль (`camera_on: null`).
-- Оператор берёт высоту сам: до «в рост» (`camera_shot` ≤ 0.8) — глаза над тем, на чём едет камера, ближе — высоту
-  точки цели. Поэтому камеру вне палуб ставят местом (`cam_…`: его высота — палуба под оператором), а не `camera_h`.
-- Грей у штурвала стоит в 32 см от него (`AT_WHEEL`), руки — на `wheel#rim_l`, `rim_r` на высоте плеч: дальше рука
-  не дотягивается и висит прямая рядом с ободом.
+- The paintings read only `ship`. Nothing may be painted by `sails`, `sails_set`, `luff`, `hour`, `lanterns`, `silk`, `helm`.
+- A layer that rides (the yards, the gaff) has a `box` for its whole way.
+- The sails' numbers are in two places: `lib.js` (`SQUARE`, `GAFF`, `SPANKER`) and `tools/paluba.js` (`SAILS`, the calls of `cloth`):
+  change them together.
+- A cut with another hour, other sails or another place — through `lib.js` `AT_SEA` / `IN_PORT`.
+- The play's keys (`leg`, `sun`, `wine`, `ring`, `ring_kind`) are set by no `from`; `climb`, `hand_l`, `hand_r`, `slip`, `skiff_down` are read
+  only by `animate`.
+- Every `from` closes the insert (`CAM0`: `ropes: 0`) and brings the camera back onto the ship (`camera_on: null`).
+- The operator takes the height himself: up to “full length” (`camera_shot` ≤ 0.8) — the eyes above what the camera rides on, nearer — the height
+  of the target's point. So a camera off the decks is set by a place (`cam_…`: its height is the deck under the operator), not by `camera_h`.
+- Gray at the wheel stands 32 cm from it (`AT_WHEEL`), his hands on `wheel#rim_l`, `rim_r` at shoulder height: further off the hand
+  does not reach and hangs straight beside the rim.
 
-## Дальше
+## Further
 
-Трап с юта на шкафут (сейчас люди на шкафуте ставятся склейкой), якорь, левый борт снаружи. Крупные планы лиц — не люди
-движка.
+A ladder from the poop to the waist (now the people in the waist are placed by a cut), an anchor, the port side from outside. Close-ups of faces are not the engine's
+people.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {

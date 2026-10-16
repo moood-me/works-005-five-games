@@ -1,4 +1,4 @@
-// «Лес у моря» — its mechanics: the hour's light, the yacht on the stream and the chase after it, the ring, the film
+// «The Wood by the Sea» — its mechanics: the hour's light, the yacht on the stream and the chase after it, the ring, the film
 // in beats for a game (lib.js film — the world's module beats: `beat` names one; notes.md tells them and the moments
 // they tell).
 const L = scene.lib;
@@ -29,7 +29,7 @@ for (const key of ["toy", "toy_out"]) {
   scene.on("move", key, toy);
 }
 
-// «За корабликом» — what a game drives while the yacht is on the water and her gait is the run (from the beat
+// «After the little ship» — what a game drives while the yacht is on the water and her gait is the run (from the beat
 // `chase`). `run` — how far along the bank she may run: she runs there at her run's own pace, down her way (lib.js
 // BANK); she does not set off for less than a couple of steps (L.NEAR), unless it is all that is left to a snag or
 // the end. A snag she is not let over stops her: she pulls up short of it (the cast's `halt`; lib.js STOPS) and the
@@ -118,7 +118,7 @@ scene.on("change", "jump", (v) => {
   run();
 });
 
-// The ring. `ring` says where it is: in Grey's fingers (grey), on Assol's finger (finger), on a cord under her dress
+// The ring. `ring` says where it is: in Gray's fingers (grey), on Assol's finger (finger), on a cord under her dress
 // or nowhere (cord, none) — whoever has it has the cast's part of it with them: `ring`, his mother's, or `ring_old`,
 // his own (`ring_kind`: lib.js ringPart).
 const RINGS = ["ring", "ring_old"];
@@ -134,7 +134,7 @@ scene.on("change", "ring", (where) => {
   has("grey", where === "grey");
   has("assol", where === "finger");
 });
-// «Кольцо» — what a game drives while the ring is in his fingers (he kneels by her): `ring_at`, his hand with it on
+// «The ring» — what a game drives while the ring is in his fingers (he kneels by her): `ring_at`, his hand with it on
 // its way to her finger — past 0.4 the hand reaches for her hand (the scene tells ring:reach), at 1 the ring is hers
 // (ring → finger; ring:on); `stir` — she stirs in her sleep, her head turning toward him
 function ringAt() {

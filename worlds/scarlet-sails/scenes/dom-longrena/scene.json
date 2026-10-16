@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Дом Лонгрена",
-  "caption": "Окно к морю.",
+  "title": "Longren's House",
+  "caption": "A window on the sea.",
   "horizon": 0.42,
   "camera": {
     "mode": "roam",
@@ -332,7 +332,7 @@
         1
       ],
       "smooth": true,
-      "means": "время суток по кругу, как во всём мире: 0 полночь, 0.25 рассвет (солнце встаёт прямо в окне), 0.5 полдень, 0.75 закат"
+      "means": "the hour, round the clock, as in the whole world: 0 midnight, 0.25 dawn (the sun rises right in the window), 0.5 noon, 0.75 sunset"
     },
     "lamp": {
       "range": [
@@ -340,7 +340,7 @@
         1
       ],
       "smooth": true,
-      "means": "лампа на верстаке: 0 погашена, 1 горит — тёплый свет на верстаке, левой стене и полу"
+      "means": "the lamp on the workbench: 0 out, 1 lit — warm light on the workbench, the left wall and the floor"
     },
     "toys": {
       "range": [
@@ -348,7 +348,7 @@
         1
       ],
       "smooth": true,
-      "means": "игрушки на полках: 0 все на месте, 1 полки пусты (уходят по одной)"
+      "means": "the toys on the shelves: 0 all in their places, 1 the shelves empty (they go one by one)"
     },
     "toy_on_shelf": {
       "range": [
@@ -356,7 +356,7 @@
         1
       ],
       "smooth": true,
-      "means": "яхта Ассоль с алыми парусами на полке над окном: 0 нет, 1 стоит"
+      "means": "Assol's yacht with scarlet sails on the shelf above the window: 0 none, 1 stands there"
     },
     "chest": {
       "range": [
@@ -364,7 +364,7 @@
         1
       ],
       "smooth": true,
-      "means": "морской сундук: 0 в углу, 1 выдвинут в комнату"
+      "means": "the sea chest: 0 in the corner, 1 pulled out into the room"
     },
     "door": {
       "range": [
@@ -372,7 +372,7 @@
         1
       ],
       "smooth": true,
-      "means": "дверь: 0 закрыта, 1 открыта внутрь — в проёме трава вершины и море"
+      "means": "the door: 0 shut, 1 open inwards — in the doorway the grass of the hilltop and the sea"
     },
     "window_open": {
       "range": [
@@ -380,7 +380,7 @@
         1
       ],
       "smooth": true,
-      "means": "створки окна: 0 закрыты, 1 распахнуты"
+      "means": "the window's leaves: 0 shut, 1 flung open"
     },
     "sails_window": {
       "range": [
@@ -388,7 +388,7 @@
         1
       ],
       "smooth": true,
-      "means": "корабль под алыми парусами: 0 нет, 1 стоит посередине окна (входит справа)"
+      "means": "the ship under scarlet sails: 0 none, 1 stands in the middle of the window (comes in from the right)"
     },
     "day": {
       "range": [
@@ -396,7 +396,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес дневного света, ведёт модуль nebo по hour"
+      "means": "internal: the weight of daylight, led by the nebo module by hour"
     },
     "dawn": {
       "range": [
@@ -404,7 +404,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес рассвета, ведёт модуль nebo по hour"
+      "means": "internal: the weight of dawn, led by the nebo module by hour"
     },
     "dusk": {
       "range": [
@@ -412,7 +412,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес заката, ведёт модуль nebo по hour"
+      "means": "internal: the weight of sunset, led by the nebo module by hour"
     },
     "night": {
       "range": [
@@ -420,49 +420,49 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес ночи, ведёт модуль nebo по hour"
+      "means": "internal: the weight of night, led by the nebo module by hour"
     },
     "chest_across": {
       "type": "number",
-      "means": "служебный: где сундук поперёк, м; скрипт ставит по chest"
+      "means": "internal: where the chest is across, m; the script sets it by chest"
     },
     "chest_distance": {
       "type": "number",
-      "means": "служебный: где сундук вглубь, м; скрипт ставит по chest"
+      "means": "internal: where the chest is in depth, m; the script sets it by chest"
     },
     "ship_across": {
       "type": "number",
-      "means": "служебный: где корабль поперёк, м; скрипт ставит по sails_window"
+      "means": "internal: where the ship is across, m; the script sets it by sails_window"
     },
     "door_facing": {
       "type": "number",
-      "means": "служебный: поворот двери, градусы (180 закрыта); скрипт ставит по door"
+      "means": "internal: the door's turn, degrees (180 shut); the script sets it by door"
     },
     "window_left_facing": {
       "type": "number",
-      "means": "служебный: поворот левой створки, градусы; скрипт ставит по window_open"
+      "means": "internal: the left leaf's turn, degrees; the script sets it by window_open"
     },
     "window_right_facing": {
       "type": "number",
-      "means": "служебный: поворот правой створки, градусы; скрипт ставит по window_open"
+      "means": "internal: the right leaf's turn, degrees; the script sets it by window_open"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма (модуль beats): match, evening, scrap, rig, glow, glow_close, tell, why, shelf, years, decide, chest_out, stay, unpack, read, beetle, cry, look, girl_in, sails_window, sails_close, wake, out; кончился — сцена говорит beat:<имя>"
+      "means": "the film's beat (the beats module): match, evening, scrap, rig, glow, glow_close, tell, why, shelf, years, decide, chest_out, stay, unpack, read, beetle, cry, look, girl_in, sails_window, sails_close, wake, out; once it has ended the scene tells beat:<name>"
     },
     "basket": {
       "values": [
         0,
         1
       ],
-      "means": "корзина с игрушками у двери: 0 нет, 1 стоит (Ассоль поставила); ставится разом"
+      "means": "the basket of toys by the door: 0 none, 1 stands there (Assol put it down); set at once"
     },
     "book_down": {
       "values": [
         0,
         1
       ],
-      "means": "книга Ассоль на полу у стула: 0 нет (у неё в руках или нигде), 1 лежит; ставится разом"
+      "means": "Assol's book on the floor by the chair: 0 none (in her hands or nowhere), 1 lies there; set at once"
     },
     "guide": {
       "range": [
@@ -470,7 +470,7 @@
         1
       ],
       "smooth": true,
-      "means": "«Оснастка»: рука Лонгрена придерживает яхту (в крупном плане — входит в кадр, яхта перестаёт качаться; в комнате — его рука на корпусе), от 0.5"
+      "means": "“Rigging”: Longren's hand steadies the yacht (in the close-up — it comes into the frame, the yacht stops rocking; in the room — his hand on the hull), from 0.5"
     },
     "gaze": {
       "range": [
@@ -478,31 +478,31 @@
         1
       ],
       "smooth": true,
-      "means": "«Смотри»: взгляд Ассоль от страницы (0) к окну (1), непрерывно; с ним поднимается камера, опущенная к странице в куске look"
+      "means": "“Look”: Assol's gaze from the page (0) to the window (1), continuously; the camera, lowered to the page in the beat look, rises with it"
     },
     "lo_a": {
       "type": "number",
-      "means": "служебный: где Лонгрен поперёк, м (скрипт и куски)"
+      "means": "internal: where Longren is across, m (the script and the beats)"
     },
     "lo_d": {
       "type": "number",
-      "means": "служебный: где Лонгрен вглубь, м"
+      "means": "internal: where Longren is in depth, m"
     },
     "as_a": {
       "type": "number",
-      "means": "служебный: где Ассоль поперёк, м"
+      "means": "internal: where Assol is across, m"
     },
     "as_d": {
       "type": "number",
-      "means": "служебный: где Ассоль вглубь, м"
+      "means": "internal: where Assol is in depth, m"
     },
     "fi_a": {
       "type": "number",
-      "means": "служебный: где угольщик за окном поперёк, м"
+      "means": "internal: where the collier outside the window is across, m"
     },
     "fi_d": {
       "type": "number",
-      "means": "служебный: где угольщик за окном вглубь, м"
+      "means": "internal: where the collier outside the window is in depth, m"
     },
     "sun_light": {
       "range": [
@@ -510,7 +510,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет солнца, ведёт модуль nebo по hour"
+      "means": "internal: the sunlight, led by the nebo module by hour"
     },
     "moon_light": {
       "range": [
@@ -518,7 +518,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет луны, ведёт модуль nebo по hour"
+      "means": "internal: the moonlight, led by the nebo module by hour"
     },
     "sails": {
       "range": [
@@ -526,18 +526,18 @@
         1
       ],
       "smooth": true,
-      "means": "паруса «Секрета» в окне: 0 белые … 1 алые (модуль korabli)"
+      "means": "the Secret's sails in the window: 0 white … 1 scarlet (the korabli module)"
     },
     "ship_roll": {
       "type": "number",
-      "means": "служебный: качка корабля, градусы (модуль korabli)"
+      "means": "internal: the ship's rolling, degrees (the korabli module)"
     },
     "closeup": {
       "values": [
         0,
         1
       ],
-      "means": "крупный план (вставка) открыт; какой — closeup_shot; ставится склейкой"
+      "means": "a close-up (an insert) is open; which — closeup_shot; set by a cut"
     },
     "closeup_shot": {
       "values": [
@@ -546,7 +546,7 @@
         "page",
         "match"
       ],
-      "means": "какой крупный план: rig — верстак с яхтой, которую оснащают; page — страница с жуком; match — склейка пролога: рассветное море и на нём парус игрушечной яхты, он вырастает до яхты на верстаке"
+      "means": "which close-up: rig — the workbench with the yacht being rigged; page — the page with the beetle; match — the prologue's cut: the sea at dawn and on it the sail of the toy yacht, growing into the yacht on the workbench"
     },
     "rig1": {
       "range": [
@@ -554,7 +554,7 @@
         1
       ],
       "smooth": true,
-      "means": "«Оснастка», крупный план rig: грот поднят по мачте (0 нет … 1 да); точка closeup#rig1 — где крепят"
+      "means": "“Rigging”, the close-up rig: the mainsail hoisted up the mast (0 no … 1 yes); the point closeup#rig1 — where it is made fast"
     },
     "rig2": {
       "range": [
@@ -562,7 +562,7 @@
         1
       ],
       "smooth": true,
-      "means": "«Оснастка», крупный план rig: гика-шкот закреплён на корме (0 нет … 1 да); точка closeup#rig2 — где крепят"
+      "means": "“Rigging”, the close-up rig: the main sheet made fast at the stern (0 no … 1 yes); the point closeup#rig2 — where it is made fast"
     },
     "rig3": {
       "range": [
@@ -570,7 +570,7 @@
         1
       ],
       "smooth": true,
-      "means": "«Оснастка», крупный план rig: кливер поднят по штагу (0 нет … 1 да); точка closeup#rig3 — где крепят"
+      "means": "“Rigging”, the close-up rig: the jib hoisted up the stay (0 no … 1 yes); the point closeup#rig3 — where it is made fast"
     },
     "rig4": {
       "range": [
@@ -578,7 +578,7 @@
         1
       ],
       "smooth": true,
-      "means": "«Оснастка», крупный план rig: шкот кливера закреплён (0 нет … 1 да); точка closeup#rig4 — где крепят"
+      "means": "“Rigging”, the close-up rig: the jib sheet made fast (0 no … 1 yes); the point closeup#rig4 — where it is made fast"
     },
     "beetle": {
       "range": [
@@ -586,7 +586,7 @@
         1
       ],
       "smooth": true,
-      "means": "крупный план page: жук ползёт по странице (0 — у края … 1 — встал у слова «Смотри»); точки closeup#beetle, closeup#word"
+      "means": "the close-up page: a beetle crawls over the page (0 — at the edge … 1 — stopped at the word “Look”); the points closeup#beetle, closeup#word"
     },
     "match": {
       "range": [
@@ -594,14 +594,14 @@
         1
       ],
       "smooth": true,
-      "means": "крупный план match: 0 — рассветное море и парус-искра там и такой, как корабль пролога; 1 — яхта стоит на верстаке у лампы, большие руки Лонгрена (двигает кусок match)"
+      "means": "the close-up match: 0 — the sea at dawn and the spark of a sail there, the same as the prologue's ship; 1 — the yacht stands on the workbench by the lamp, Longren's big hands (moved by the beat match)"
     },
     "scrap": {
       "values": [
         0,
         1
       ],
-      "means": "вставка лоскута открыта (алый лоскут на верстаке у лампы, рядом её пальцы); ставится склейкой; точка scrap#scrap"
+      "means": "the scrap's insert open (the scarlet scrap on the workbench by the lamp, her fingers beside it); set by a cut; the point scrap#scrap"
     },
     "scrap_taken": {
       "range": [
@@ -609,14 +609,14 @@
         1
       ],
       "smooth": true,
-      "means": "вставка scrap: пальцы Ассоль ложатся на лоскут и сжимают его (0 — лежит … 1 — взят); двигает игра"
+      "means": "the scrap insert: Assol's fingers lie on the scrap and close on it (0 — it lies there … 1 — taken); moved by the game"
     },
     "chest_here": {
       "values": [
         0,
         1
       ],
-      "means": "морской сундук в доме: 1 — стоит (по умолчанию), 0 — Лонгрен унёс его в море (сундук не рисуется); ставит кусок по ключу партии longren"
+      "means": "the sea chest in the house: 1 — stands (by default), 0 — Longren took it to sea (the chest is not painted); set by a beat by the play's key longren"
     },
     "yacht_glow": {
       "range": [
@@ -624,7 +624,7 @@
         1
       ],
       "smooth": true,
-      "means": "алый свет паруса яхты в руках Ассоль (малый свет сцены в точке assol#yacht): 0 нет … 1 есть; двигает кусок glow_close"
+      "means": "the scarlet light of the sail of the yacht in Assol's hands (the scene's small light at the point assol#yacht): 0 none … 1 there; moved by the beat glow_close"
     },
     "sails_light": {
       "range": [
@@ -632,15 +632,15 @@
         1
       ],
       "smooth": true,
-      "means": "алый свет парусов корабля в окне, ложится на неё и на комнату: 0 нет … 1 есть; двигает кусок sails_close"
+      "means": "the scarlet light of the ship's sails in the window, falling on her and on the room: 0 none … 1 there; moved by the beat sails_close"
     },
     "gi_a": {
       "type": "number",
-      "means": "служебный: где девочка поперёк, м (куски)"
+      "means": "internal: where the girl is across, m (the beats)"
     },
     "gi_d": {
       "type": "number",
-      "means": "служебный: где девочка вглубь, м (куски)"
+      "means": "internal: where the girl is in depth, m (the beats)"
     },
     "ring": {
       "values": [
@@ -648,14 +648,14 @@
         "finger",
         "cord"
       ],
-      "means": "ключ партии (ставит игра, ни один from его не ставит): кольцо у Ассоль (17) — нет, на пальце (часть каста по ring_kind, в кадре page на пальце, что держит страницу), на шнурке (в этой сцене не видно); по умолчанию none"
+      "means": "the play's key (set by the game, no from sets it): Assol's ring (17) — none, on her finger (a part of the cast by ring_kind, in the frame page on the finger that holds the page), on a cord (not seen in this scene); none by default"
     },
     "ring_kind": {
       "values": [
         "mother",
         "own"
       ],
-      "means": "ключ партии: какое кольцо — mother — материнское (часть ring), own — его старинное (часть ring_old); по умолчанию own"
+      "means": "the play's key: which ring — mother — his mother's (the part ring), own — his old one (the part ring_old); own by default"
     },
     "longren": {
       "values": [
@@ -663,39 +663,39 @@
         "knows",
         "sea"
       ],
-      "means": "ключ партии: Лонгрен в утро парусов — home и knows: сидит у пустого верстака (seated); sea: его и сундука нет (chest_here 0); по умолчанию home"
+      "means": "the play's key: Longren on the morning of the sails — home and knows: sits at the empty workbench (seated); sea: neither he nor the chest is there (chest_here 0); home by default"
     },
     "girl_toy": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: 1 — яхта у девочки, на доске над окном её нет; по умолчанию 0"
+      "means": "the play's key: 1 — the girl has the yacht, it is not on the board above the window; 0 by default"
     },
     "sun": {
       "range": [
         0.2,
         0.4
       ],
-      "means": "ключ партии: час утра парусов (как hour) в кусках read, beetle, cry, look, girl_in, sails_window, sails_close, wake, out; нет (null, по умолчанию) — у куска свой час: 0.31, в wake и out после него — 0.245"
+      "means": "the play's key: the hour of the morning of the sails (as hour) in the beats read, beetle, cry, look, girl_in, sails_window, sails_close, wake, out; none (null, by default) — the beat has its own hour: 0.31, in wake and in out after it — 0.245"
     },
     "match_x": {
       "type": "number",
-      "means": "ключ партии (читает animate кадра match): где парус на экране, в высотах кадра от его середины, x вправо; по умолчанию 0"
+      "means": "the play's key (read by the frame match's animate): where the sail is on the screen, in frame heights from its middle, x to the right; 0 by default"
     },
     "match_y": {
       "type": "number",
-      "means": "ключ партии (читает animate кадра match): где парус на экране, в высотах кадра от его середины, y вниз; по умолчанию 0"
+      "means": "the play's key (read by the frame match's animate): where the sail is on the screen, in frame heights from its middle, y down; 0 by default"
     },
     "match_s": {
       "type": "number",
-      "means": "ключ партии (читает animate кадра match): высота корабля в высотах кадра; по умолчанию 0.006"
+      "means": "the play's key (read by the frame match's animate): the ship's height in frame heights; 0.006 by default"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо и море",
+      "name": "Sky and sea",
       "sky": true,
       "uniforms": {
         "tr": 0.42,
@@ -731,7 +731,7 @@
     },
     {
       "id": "sea",
-      "name": "Море под холмом",
+      "name": "The sea below the hill",
       "plane": true,
       "across": 0,
       "distance": 10000,
@@ -748,7 +748,7 @@
     },
     {
       "id": "ship",
-      "name": "Корабль под алыми парусами",
+      "name": "Ship under scarlet sails",
       "unseen": true,
       "across": 520,
       "distance": 420,
@@ -761,7 +761,7 @@
     },
     {
       "id": "ship_side",
-      "name": "«Секрет»: правый борт",
+      "name": "Secret: starboard side",
       "on": "ship",
       "distance": -3.7,
       "facing": 180,
@@ -774,7 +774,7 @@
     },
     {
       "id": "ship_side_port",
-      "name": "«Секрет»: левый борт",
+      "name": "Secret: port side",
       "on": "ship",
       "distance": 3.7,
       "facing": 0,
@@ -787,7 +787,7 @@
     },
     {
       "id": "ship_bow",
-      "name": "«Секрет»: скула правого борта",
+      "name": "Secret: starboard bow",
       "on": "ship",
       "across": 7,
       "distance": -3.7,
@@ -801,7 +801,7 @@
     },
     {
       "id": "ship_bow_port",
-      "name": "«Секрет»: скула левого борта",
+      "name": "Secret: port bow",
       "on": "ship",
       "across": 7,
       "distance": 3.7,
@@ -815,7 +815,7 @@
     },
     {
       "id": "ship_quarter",
-      "name": "«Секрет»: раковина правого борта",
+      "name": "Secret: starboard quarter",
       "on": "ship",
       "across": -8,
       "distance": -3.7,
@@ -829,7 +829,7 @@
     },
     {
       "id": "ship_quarter_port",
-      "name": "«Секрет»: раковина левого борта",
+      "name": "Secret: port quarter",
       "on": "ship",
       "across": -8,
       "distance": 3.7,
@@ -843,7 +843,7 @@
     },
     {
       "id": "ship_transom",
-      "name": "«Секрет»: корма",
+      "name": "Secret: stern",
       "on": "ship",
       "across": -16.5,
       "facing": 270,
@@ -856,7 +856,7 @@
     },
     {
       "id": "ship_deck",
-      "name": "«Секрет»: палуба",
+      "name": "Secret: deck",
       "plane": true,
       "walk": true,
       "on": "ship",
@@ -867,7 +867,7 @@
     },
     {
       "id": "ship_poop",
-      "name": "«Секрет»: ют",
+      "name": "Secret: poop",
       "plane": true,
       "walk": true,
       "on": "ship",
@@ -878,7 +878,7 @@
     },
     {
       "id": "ship_break",
-      "name": "«Секрет»: срез юта",
+      "name": "Secret: break of the poop",
       "on": "ship",
       "across": -8.5,
       "elevation": 2.4,
@@ -892,7 +892,7 @@
     },
     {
       "id": "ship_rig",
-      "name": "«Секрет»: мачты и такелаж",
+      "name": "Secret: masts and rigging",
       "on": "ship",
       "facing": 180,
       "box": [
@@ -904,7 +904,7 @@
     },
     {
       "id": "ship_fore",
-      "name": "«Секрет»: фок-мачта и реи",
+      "name": "Secret: foremast and yards",
       "on": "ship",
       "across": 8.3,
       "facing": 55,
@@ -917,7 +917,7 @@
     },
     {
       "id": "ship_fore_course",
-      "name": "«Секрет»: нижний парус, фок-мачта",
+      "name": "Secret: course, foremast",
       "on": "ship_fore",
       "distance": -0.3,
       "facing": 180,
@@ -941,7 +941,7 @@
     },
     {
       "id": "ship_fore_top",
-      "name": "«Секрет»: марсель, фок-мачта",
+      "name": "Secret: topsail, foremast",
       "on": "ship_fore",
       "distance": -0.3,
       "facing": 180,
@@ -965,7 +965,7 @@
     },
     {
       "id": "ship_fore_tg",
-      "name": "«Секрет»: брамсель, фок-мачта",
+      "name": "Secret: topgallant, foremast",
       "on": "ship_fore",
       "distance": -0.3,
       "facing": 180,
@@ -989,7 +989,7 @@
     },
     {
       "id": "ship_main",
-      "name": "«Секрет»: грот-мачта и реи",
+      "name": "Secret: mainmast and yards",
       "on": "ship",
       "across": -0.7,
       "facing": 55,
@@ -1002,7 +1002,7 @@
     },
     {
       "id": "ship_main_course",
-      "name": "«Секрет»: нижний парус, грот-мачта",
+      "name": "Secret: course, mainmast",
       "on": "ship_main",
       "distance": -0.3,
       "facing": 180,
@@ -1026,7 +1026,7 @@
     },
     {
       "id": "ship_main_top",
-      "name": "«Секрет»: марсель, грот-мачта",
+      "name": "Secret: topsail, mainmast",
       "on": "ship_main",
       "distance": -0.3,
       "facing": 180,
@@ -1050,7 +1050,7 @@
     },
     {
       "id": "ship_main_tg",
-      "name": "«Секрет»: брамсель, грот-мачта",
+      "name": "Secret: topgallant, mainmast",
       "on": "ship_main",
       "distance": -0.3,
       "facing": 180,
@@ -1074,7 +1074,7 @@
     },
     {
       "id": "ship_jib",
-      "name": "«Секрет»: стаксель",
+      "name": "Secret: staysail",
       "on": "ship",
       "distance": 0.1,
       "facing": 180,
@@ -1098,7 +1098,7 @@
     },
     {
       "id": "ship_jib_outer",
-      "name": "«Секрет»: кливер",
+      "name": "Secret: jib",
       "on": "ship",
       "distance": -0.1,
       "facing": 180,
@@ -1122,7 +1122,7 @@
     },
     {
       "id": "ship_spanker",
-      "name": "«Секрет»: бизань",
+      "name": "Secret: spanker",
       "on": "ship",
       "distance": -0.1,
       "facing": 180,
@@ -1146,7 +1146,7 @@
     },
     {
       "id": "yard",
-      "name": "Вершина холма",
+      "name": "Hilltop",
       "plane": true,
       "across": 2,
       "distance": 6.75,
@@ -1155,7 +1155,7 @@
     },
     {
       "id": "wall_back",
-      "name": "Стена к морю",
+      "name": "Wall to the sea",
       "across": 0.7,
       "distance": 5,
       "facing": 180,
@@ -1170,7 +1170,7 @@
     },
     {
       "id": "wall_left",
-      "name": "Левая стена",
+      "name": "Left wall",
       "across": -1.6,
       "distance": 1.9,
       "facing": 90,
@@ -1185,7 +1185,7 @@
     },
     {
       "id": "wall_right",
-      "name": "Правая стена",
+      "name": "Right wall",
       "across": 3,
       "distance": 1.9,
       "facing": 270,
@@ -1200,7 +1200,7 @@
     },
     {
       "id": "wall_front",
-      "name": "Стена за спиной",
+      "name": "Wall behind",
       "across": 0.7,
       "distance": -1.2,
       "facing": 0,
@@ -1215,7 +1215,7 @@
     },
     {
       "id": "floor",
-      "name": "Пол",
+      "name": "Floor",
       "plane": true,
       "across": 0.7,
       "distance": 1.9,
@@ -1225,7 +1225,7 @@
     },
     {
       "id": "ceiling",
-      "name": "Потолок",
+      "name": "Ceiling",
       "plane": true,
       "across": 0.7,
       "distance": 1.9,
@@ -1236,7 +1236,7 @@
     },
     {
       "id": "window",
-      "name": "Окно",
+      "name": "Window",
       "across": 0.75,
       "distance": 4.97,
       "facing": 180,
@@ -1251,7 +1251,7 @@
     },
     {
       "id": "opening",
-      "name": "Проём окна",
+      "name": "Window opening",
       "unseen": true,
       "across": 0.75,
       "distance": 5,
@@ -1266,7 +1266,7 @@
     },
     {
       "id": "doorway",
-      "name": "Проём двери",
+      "name": "Doorway",
       "unseen": true,
       "across": 2.425,
       "distance": 5,
@@ -1281,7 +1281,7 @@
     },
     {
       "id": "glass_left",
-      "name": "Стекло левой створки",
+      "name": "Left leaf's glass",
       "across": 0,
       "distance": 4.965,
       "facing": 180,
@@ -1303,7 +1303,7 @@
     },
     {
       "id": "glass_right",
-      "name": "Стекло правой створки",
+      "name": "Right leaf's glass",
       "across": 1.5,
       "distance": 4.965,
       "facing": 180,
@@ -1325,7 +1325,7 @@
     },
     {
       "id": "window_left",
-      "name": "Левая створка",
+      "name": "Left leaf",
       "across": 0,
       "distance": 4.96,
       "facing": 180,
@@ -1352,7 +1352,7 @@
     },
     {
       "id": "window_right",
-      "name": "Правая створка",
+      "name": "Right leaf",
       "across": 1.5,
       "distance": 4.96,
       "facing": 180,
@@ -1379,7 +1379,7 @@
     },
     {
       "id": "sill",
-      "name": "Подоконник",
+      "name": "Windowsill",
       "plane": true,
       "across": 0.75,
       "distance": 4.9,
@@ -1398,7 +1398,7 @@
     },
     {
       "id": "sill_front",
-      "name": "Край подоконника",
+      "name": "Edge of the windowsill",
       "across": 0.75,
       "distance": 4.8,
       "elevation": 0.8,
@@ -1414,7 +1414,7 @@
     },
     {
       "id": "door",
-      "name": "Дверь",
+      "name": "Door",
       "across": 2.85,
       "distance": 4.96,
       "facing": 180,
@@ -1440,7 +1440,7 @@
     },
     {
       "id": "shelves",
-      "name": "Полки с игрушками",
+      "name": "Shelves of toys",
       "across": -0.8,
       "distance": 4.95,
       "facing": 180,
@@ -1455,7 +1455,7 @@
     },
     {
       "id": "toy",
-      "name": "Яхта Ассоль",
+      "name": "Assol's yacht",
       "across": 1.35,
       "distance": 4.93,
       "elevation": 2.2,
@@ -1471,7 +1471,7 @@
     },
     {
       "id": "chest",
-      "name": "Морской сундук",
+      "name": "Sea chest",
       "across": -1,
       "distance": 4.65,
       "height": 0.6,
@@ -1498,7 +1498,7 @@
     },
     {
       "id": "chest_end",
-      "name": "Сундук с торца",
+      "name": "Chest, end",
       "on": "chest",
       "across": 0.5,
       "distance": 0.16,
@@ -1522,7 +1522,7 @@
     },
     {
       "id": "chest_lid",
-      "name": "Крышка сундука",
+      "name": "Chest lid",
       "plane": true,
       "on": "chest",
       "elevation": 0.56,
@@ -1541,7 +1541,7 @@
     },
     {
       "id": "chair",
-      "name": "Стул у окна",
+      "name": "Chair by the window",
       "across": 0.75,
       "distance": 4.45,
       "height": 1,
@@ -1563,7 +1563,7 @@
     },
     {
       "id": "bench",
-      "name": "Верстак",
+      "name": "Workbench",
       "plane": true,
       "across": -1.25,
       "distance": 2.8,
@@ -1582,7 +1582,7 @@
     },
     {
       "id": "bench_side",
-      "name": "Верстак сбоку",
+      "name": "Workbench, side",
       "across": -0.9,
       "distance": 2.8,
       "facing": 90,
@@ -1597,7 +1597,7 @@
     },
     {
       "id": "bench_end",
-      "name": "Верстак с торца",
+      "name": "Workbench, end",
       "across": -1.25,
       "distance": 1.8,
       "facing": 180,
@@ -1612,7 +1612,7 @@
     },
     {
       "id": "lamp",
-      "name": "Лампа",
+      "name": "Lamp",
       "across": -1.3,
       "distance": 3.2,
       "elevation": 0.86,
@@ -1627,7 +1627,7 @@
     },
     {
       "id": "flame",
-      "name": "Огонь лампы",
+      "name": "Lamp flame",
       "across": -1.3,
       "distance": 3.2,
       "elevation": 0.86,
@@ -1642,7 +1642,7 @@
     },
     {
       "id": "work",
-      "name": "Работа на верстаке",
+      "name": "Work on the workbench",
       "across": -1.3,
       "distance": 2.55,
       "elevation": 0.86,
@@ -1657,7 +1657,7 @@
     },
     {
       "id": "box",
-      "name": "Ящик с обрезками",
+      "name": "Box of scraps",
       "across": -1.3,
       "distance": 2.9,
       "height": 0.36,
@@ -1672,7 +1672,7 @@
     },
     {
       "id": "box_end",
-      "name": "Ящик сбоку",
+      "name": "Box, side",
       "on": "box",
       "across": 0.26,
       "distance": 0.2,
@@ -1688,7 +1688,7 @@
     },
     {
       "id": "box_top",
-      "name": "Ящик сверху",
+      "name": "Box, top",
       "plane": true,
       "on": "box",
       "elevation": 0.36,
@@ -1699,7 +1699,7 @@
     },
     {
       "id": "box_wood",
-      "name": "Обрезки в ящике",
+      "name": "Scraps in the box",
       "on": "box",
       "distance": 0.2,
       "elevation": 0.3,
@@ -1714,7 +1714,7 @@
     },
     {
       "id": "stool",
-      "name": "Табурет у верстака",
+      "name": "Stool by the workbench",
       "across": -0.68,
       "distance": 3.45,
       "facing": 180,
@@ -1737,7 +1737,7 @@
     },
     {
       "id": "stool_back",
-      "name": "Табурет, задние ножки",
+      "name": "Stool, back legs",
       "on": "stool",
       "distance": 0.28,
       "facing": 180,
@@ -1760,7 +1760,7 @@
     },
     {
       "id": "stool_top",
-      "name": "Сиденье табурета",
+      "name": "Stool seat",
       "plane": true,
       "on": "stool",
       "elevation": 0.6,
@@ -1779,7 +1779,7 @@
     },
     {
       "id": "basket",
-      "name": "Корзина с игрушками",
+      "name": "Basket of toys",
       "across": 2.05,
       "distance": 4.55,
       "height": 0.36,
@@ -1801,7 +1801,7 @@
     },
     {
       "id": "book",
-      "name": "Книга",
+      "name": "Book",
       "plane": true,
       "across": 1.12,
       "distance": 4.25,
@@ -1812,7 +1812,7 @@
     },
     {
       "id": "longren",
-      "name": "Лонгрен",
+      "name": "Longren",
       "person": {
         "cast": "cast",
         "who": "longren",
@@ -1830,7 +1830,7 @@
     },
     {
       "id": "assol",
-      "name": "Ассоль",
+      "name": "Assol",
       "person": {
         "cast": "cast",
         "who": "assol_child",
@@ -1848,7 +1848,7 @@
     },
     {
       "id": "filipp",
-      "name": "Угольщик за окном",
+      "name": "Collier outside the window",
       "person": {
         "cast": "cast",
         "who": "filipp",
@@ -1864,7 +1864,7 @@
     },
     {
       "id": "girl",
-      "name": "Девочка с яхтой",
+      "name": "Girl with the yacht",
       "person": {
         "cast": "cast",
         "who": "girl",
@@ -1881,12 +1881,12 @@
     },
     {
       "id": "closeup",
-      "name": "Крупный план",
+      "name": "Close-up",
       "insert": "closeup"
     },
     {
       "id": "scrap",
-      "name": "Лоскут",
+      "name": "Scrap",
       "insert": "scrap"
     }
   ],

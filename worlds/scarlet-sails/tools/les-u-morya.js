@@ -1,4 +1,4 @@
-// «Лес у моря» (scenes/les-u-morya): writes into its scene.json the elements that stand one by one where the scene's
+// «The Wood by the Sea» (scenes/les-u-morya): writes into its scene.json the elements that stand one by one where the scene's
 // lib.js has them — each tree's crown (crown_<i>: TREES), the glade's grass (grass_<i>: GRASS), the undergrowth
 // (tuft_<i>: UNDER), the mist's banks (mist_<i>: MIST), the falls' white water (spray_<i>: SPRAY) — in place of
 // those written before, and sets the falls' anchor on the first lip, the two snags across Assol's way down the bank
@@ -35,25 +35,25 @@ const shadow = { onto: ['ground'], strength: 0.4 };
 const made = {
   // after the trunks: the crowns, thin — the light behind them comes through, their shadows let it through too
   trees: L.TREES.map(([X, Z, H, kind], i) => ({
-    id: `crown_${i}`, name: kind ? 'Крона сосны' : 'Крона берёзы', across: r3(X), distance: r3(Z), height: r3(H), box: box(L.crownBox(i)),
+    id: `crown_${i}`, name: kind ? 'Pine crown' : 'Birch crown', across: r3(X), distance: r3(Z), height: r3(H), box: box(L.crownBox(i)),
     translucent: 0.35, shadow, code: `e.lib.crown(e, ${i});`,
   })).concat(L.UNDER.map(([X, Z, size, fern], i) => ({
-    id: `tuft_${i}`, name: fern ? 'Папоротник' : 'Пучок травы', across: r3(X), distance: r3(Z), height: r3(size * 1.4), box: box(L.underBox(i)),
+    id: `tuft_${i}`, name: fern ? 'Fern' : 'Tuft of grass', across: r3(X), distance: r3(Z), height: r3(size * 1.4), box: box(L.underBox(i)),
     code: `e.lib.undergrowth(e, ${i});`,
   }))),
   // on the headland's top, by its axes
   cliff: L.GRASS.map(([a, b], i) => ({
-    id: `grass_${i}`, name: 'Трава поляны', on: 'headland', across: r3(a), distance: r3(b), height: 0.7, box: box(L.GRASS_BOX),
+    id: `grass_${i}`, name: 'Glade grass', on: 'headland', across: r3(a), distance: r3(b), height: 0.7, box: box(L.GRASS_BOX),
     code: `e.lib.grass(e, ${i});`,
   })),
   // on the land where each lies, or on the sea
   sea: L.MIST.map(([Z, X, , h], i) => ({
-    id: `mist_${i}`, name: 'Туман', across: X, distance: Z, elevation: r3(L.mistFoot(i)), onLand: false, height: r3(h), box: box(L.mistBox(i)),
+    id: `mist_${i}`, name: 'Mist', across: X, distance: Z, elevation: r3(L.mistFoot(i)), onLand: false, height: r3(h), box: box(L.mistBox(i)),
     code: `e.lib.mist(e, ${i});`, animate: 'e.lib.mistNow(e);',
   })),
   // over each lip, at the water's level: soft white dabs rising a little and falling back, all the time
   fall: L.SPRAY.map(([X, Z, w, over], i) => ({
-    id: `spray_${i}`, name: 'Белая вода', across: r3(X), distance: r3(Z + 0.35), elevation: r3(over + 0.04),
+    id: `spray_${i}`, name: 'White water', across: r3(X), distance: r3(Z + 0.35), elevation: r3(over + 0.04),
     particles: {
       kind: 'puff', rate: 16, life: [0.8, 1.7], source: [r3(1.8 * w), 0.9, 0.04], speed: [0.08, 0.25], direction: [0, 0, 1], spread: 50,
       gravity: 0.25, drag: 2, wind: 0, turbulence: 0.03, size: [0.07, 0.2], color: '#f4f6f5', opacity: 0.5, fade: [0.2, 0.6], soft: 0.04, shadow: 0,

@@ -1,182 +1,182 @@
-# Дом Лонгрена — движок 2
+# Longren's House — engine 2
 
-Комната-мастерская Лонгрена на вершине склона над Каперной. Язык тот же, что на берегу: современно, тонко,
-минимально, чистые формы, свет и пространство. Главный источник света — окно к морю: день лежит на полу у окна, на
-рассвете солнце встаёт прямо в окне и кладёт на пол переплёт рамы. Ему отвечает тёплая лампа на верстаке. Алое здесь
-только у яхты Ассоль (`toy` на доске над окном, в её руках, в крупном плане), у лоскута шёлка (вставка `scrap`) и у парусов
-в окне (`sails_window`; их алый свет — `sails_light`).
+Longren's room and workshop at the top of the slope above Kaperna. The language is the same as on the shore: modern, fine,
+minimal, clean forms, light and space. The main source of light is the window to the sea: the day lies on the floor by the window, at
+dawn the sun rises right in the window and lays the frame's bars on the floor. The warm lamp on the workbench answers it. Scarlet here
+belongs only to Assol's yacht (`toy` on the board above the window, in her hands, in the close-up), to the scrap of silk (the insert `scrap`) and to the sails
+in the window (`sails_window`; their scarlet light — `sails_light`).
 
-Сцена — одна из сцен игры «Алые паруса» (docs/alye-parusa/scenes.md, глава «Дом Лонгрена»): ключи партии игра ставит
-при открытии, ни один `from` их не ставит. Игра играет куски по одному (ключ `beat` = имя; кончился — сцена говорит `beat:<имя>`; модуль мира `beats`); вне игры —
-свой показ (`showcase.js`): все куски по порядку `lib.js ORDER` и между ними то, что делают ключи игры (оснастка, взгляд,
-полки пустеют); утро в показе — то, где яхта у девочки (`girl_toy` 1: доска над окном пуста). Небо, свет часа и корабль — модули мира `nebo` и `korabli`: тот же час и тот же корабль, что на берегу.
+The scene is one of the scenes of the game “Scarlet Sails” (docs/alye-parusa/scenes.md, the chapter “Longren's House”): the play's keys are set by the game
+on opening, no `from` sets them. The game plays the beats one at a time (the key `beat` = a name; once it has ended the scene tells `beat:<name>`; the world's module `beats`); outside the game —
+its own showcase (`showcase.js`): all the beats in the order of `lib.js ORDER` and between them what the game's keys do (the rigging, the gaze,
+the shelves emptying); the morning in the showcase is the one where the girl has the yacht (`girl_toy` 1: the board above the window empty). The sky, the hour's light and the ship are the world's modules `nebo` and `korabli`: the same hour and the same ship as on the shore.
 
-## Пространство
+## The space
 
-Камера `roam`: зритель у задней стены, смотрит на окно (восток, к морю), может отойти на 0.9 м вбок, 0.6 м назад,
-1.2 м вперёд. Горизонт 0.42. Комната (метры: X вправо, Z вперёд к морю, H вверх; старт — X 0, Z 0): X −1.6…3,
-Z −1.2…5, потолок 2.55. В стене к морю (Z 5) окно X 0…1.5, H 0.8…2.05, справа дверь X 2…2.85.
+The camera `roam`: the viewer by the back wall, looking at the window (east, to the sea), may step 0.9 m aside, 0.6 m back,
+1.2 m forward. The horizon 0.42. The room (metres: X to the right, Z forward to the sea, H up; the start — X 0, Z 0): X −1.6…3,
+Z −1.2…5, the ceiling 2.55. In the wall to the sea (Z 5) the window X 0…1.5, H 0.8…2.05, to the right the door X 2…2.85.
 
-| Элемент | Что |
+| Element | What |
 | --- | --- |
-| `sky` | небо мира (nebo): нарисовано раз, час — его шейдер и animate; солнце и луна — слои, точки `sky#sun`, `sky#moon` |
-| `sea` | море в 40 м под домом до горизонта: зеркало движка (`rough`, `ripple`) — в нём небо, дорожка солнца, корабль |
-| `ship`, `ship_*` | «Секрет» под алыми парусами в 420 м на воде: якорь `ship` — сцены (`place.across` — `ship_across`, качка — `ship_roll`), остальное пишет `node tools/korabl.js dom-longrena ship` |
-| `yard` | плоскость за дверью: трава до бровки и тропа |
-| `wall_back`, `wall_left`, `wall_right`, `wall_front`, `floor`, `ceiling` | стены (`facing`), пол, потолок с балками |
-| `window`, `sill`, `sill_front` | рама окна, подоконник (плоскость) и его край |
-| `opening`, `doorway` | невидимые проёмы окна и двери: в них входит свет дня (`window_light`, `door_light`) |
-| `window_left`, `window_right`, `glass_left`, `glass_right` | створки на петлях и их стёкла (`glass`), поворачиваются `place.facing`; створки бросают тень переплёта от солнца |
-| `door` | дверь на петлях справа (`place.facing`); закрытая, не пускает солнце в проём (её тень) |
-| `shelves` | три полки слева от окна и одна над ним; каждая игрушка — слой, animate убирает их по одной по `toys` |
-| `toy` | яхта Ассоль на доске над окном (`korabli.toy`), слой: есть по `toy_on_shelf` |
-| `bench`, `bench_side`, `bench_end`, `lamp`, `flame`, `work` | верстак; лампа (стекло холодное/тёплое — слои) и её огонь (слой, живёт; свет — `lamp_light`); на верстаке рубанок и стружка, слои: корпус яхты (пока яхта не сделана) и нож (пока он не в руке Лонгрена) |
-| `box`, `box_end`, `box_top`, `box_wood` | ящик с обрезками — под верстаком |
-| `chest`, `chest_end`, `chest_lid` | морской сундук в левом углу: объём на переднем (`place` — `chest_across`, `chest_distance`); при `chest_here` 0 не рисуется. Точка `chest` (без имени, середина крышки) — предложение игры |
-| `chair`, `stool`, `stool_back`, `stool_top` | стул у подоконника; высокий табурет у верстака |
-| `basket`, `book` | корзина у двери (`basket`), книга на полу (`book_down`) — рисуются по своему ключу (0 или 1, ставится разом) |
-| `longren`, `assol`, `filipp`, `girl` | люди движка (каст мира): Лонгрен, Ассоль (девочка; в семнадцать — облик `assol` через `assol_wear`, кольцо — часть по `ring`, `ring_kind`), угольщик за окном, маленькая девочка с яхтой (`girl`, часть `yacht`; вбегает в `girl_in`) |
-| `closeup` | вставка: крупные планы `rig`, `page`, `match` (ниже) |
-| `scrap` | вставка: кадр `scrap` модуля мира `closeups` (алый лоскут на верстаке у лампы, рядом детские пальцы); рисует и двигает модуль (`paint`, `live` с `taken`), точка `scrap#scrap` |
+| `sky` | the world's sky (nebo): painted once, the hour is its shader and animate; the sun and the moon are layers, the points `sky#sun`, `sky#moon` |
+| `sea` | the sea 40 m below the house out to the horizon: the engine's mirror (`rough`, `ripple`) — the sky in it, the sun's path, the ship |
+| `ship`, `ship_*` | the Secret under scarlet sails 420 m off on the water: the anchor `ship` is the scene's (`place.across` — `ship_across`, the rolling — `ship_roll`), the rest is written by `node tools/korabl.js dom-longrena ship` |
+| `yard` | a plane beyond the door: grass to the brow and a path |
+| `wall_back`, `wall_left`, `wall_right`, `wall_front`, `floor`, `ceiling` | the walls (`facing`), the floor, the ceiling with beams |
+| `window`, `sill`, `sill_front` | the window's frame, the sill (a plane) and its edge |
+| `opening`, `doorway` | the unseen openings of the window and the door: the daylight comes in through them (`window_light`, `door_light`) |
+| `window_left`, `window_right`, `glass_left`, `glass_right` | the leaves on their hinges and their panes (`glass`), turned by `place.facing`; the leaves cast the shadow of the bars from the sun |
+| `door` | the door on its hinges on the right (`place.facing`); shut, it does not let the sun into the doorway (its shadow) |
+| `shelves` | three shelves to the left of the window and one above it; each toy is a layer, animate takes them away one by one by `toys` |
+| `toy` | Assol's yacht on the board above the window (`korabli.toy`), a layer: there by `toy_on_shelf` |
+| `bench`, `bench_side`, `bench_end`, `lamp`, `flame`, `work` | the workbench; the lamp (its glass cold/warm — layers) and its flame (a layer, alive; the light — `lamp_light`); on the workbench a plane and shavings, layers: the yacht's hull (while the yacht is not made) and the knife (while it is not in Longren's hand) |
+| `box`, `box_end`, `box_top`, `box_wood` | the box of scraps — under the workbench |
+| `chest`, `chest_end`, `chest_lid` | the sea chest in the left corner: a volume in front (`place` — `chest_across`, `chest_distance`); with `chest_here` 0 it is not painted. The point `chest` (nameless, the middle of the lid) — the game's offer |
+| `chair`, `stool`, `stool_back`, `stool_top` | a chair by the sill; a high stool by the workbench |
+| `basket`, `book` | the basket by the door (`basket`), the book on the floor (`book_down`) — painted by their own key (0 or 1, set at once) |
+| `longren`, `assol`, `filipp`, `girl` | the engine's people (the world's cast): Longren, Assol (a girl; at seventeen — the look `assol` through `assol_wear`, the ring — a part by `ring`, `ring_kind`), the collier outside the window, the little girl with the yacht (`girl`, the part `yacht`; she runs in in `girl_in`) |
+| `closeup` | an insert: the close-ups `rig`, `page`, `match` (below) |
+| `scrap` | an insert: the shot `scrap` of the world's module `closeups` (the scarlet scrap on the workbench by the lamp, a child's fingers beside it); painted and moved by the module (`paint`, `live` with `taken`), the point `scrap#scrap` |
 
-`lib.js` — створки окна, игрушки полок, где сундук, дверь, створки и корабль по своим ключам (`placed`), крупные планы
-(`closeup`, `closeupMotion`), фильм (`film(scene)`, `ORDER`). Модули: `nebo`, `korabli`, `cast`, `beats`, `closeups`.
+`lib.js` — the window's leaves, the shelves' toys, where the chest, the door, the leaves and the ship are by their keys (`placed`), the close-ups
+(`closeup`, `closeupMotion`), the film (`film(scene)`, `ORDER`). Modules: `nebo`, `korabli`, `cast`, `beats`, `closeups`.
 
-## Куски (lib.js film)
+## The beats (lib.js film)
 
-Каждый кусок — последовательность режиссёра: люди идут своим шагом и делают движения столько, сколько те длятся;
-секунды — только паузы. `from` — всё, с чего кусок начинается (склейка, если он идёт не после своего `after`): игра
-может начать с любого. Что игра ждёт внутри куска, сцена говорит: `<кусок>:<момент>`.
+Each beat is a director's sequence: people go at their own pace and make their motions as long as these last;
+seconds — only the pauses. `from` — all that the beat begins with (a cut, if it does not come after its `after`): the game
+may begin with any. What the game waits for inside a beat, the scene tells: `<beat>:<moment>`.
 
-| Кусок | Что | Говорит |
+| Beat | What | Tells |
 | --- | --- | --- |
-| `match` | склейка пролога: вставка `closeup`, кадр `match`. Рассветное море и небо цветов конца пролога, на нём парус — белые паруса игрушечного парусника, там и такого размера, как корабль пролога (`match_x`, `match_y`, `match_s`). За 4 с (`match` 0 → 1) парусник вырастает до своего места на верстаке, море уходит, проявляются верстак, лампа и большие руки Лонгрена, ставящие его (≈ 6 с, Р01) | `match:near` |
-| `evening` | вечер, лампа (без затемнения: в игре — сразу за `match`, склейкой); Лонгрен строгает (carve), Ассоль на табурете, рука на верстаке; взгляд на лампу и обратно | |
-| `scrap` (после evening) | склейка во вставку `scrap`: алый лоскут на верстаке у лампы, рядом её пальцы. Под касание: игрок берёт лоскут (`scrap#scrap`; игра ведёт `scrap_taken` → 1). ≈ 3 с | `scrap:close` |
-| `rig` (после evening, scrap) | он кладёт нож (lay_down), её руки к корпусу, камера ближе; склейка в крупный план `rig` — верстак с яхтой (если шла вставка `scrap` — она закрывается склейкой в комнату). Под «Оснастку»: `rig1…rig4`, `guide` | `rig:close` |
-| `glow` (после rig) | обратно в комнату; яхта у неё в руках, поднята к лампе; он смотрит на неё | `glow:up` |
-| `glow_close` (после glow; крупно, камерой) | близко, со стороны лампы, над верстаком (камера −1.09, 2.68, поворот 22°, выше на 0.15 м, `camera_pitch` −26° — на линии от её лица через яхту): яхта перед её лицом, паруса закрывают лицо; алый свет паруса (малый свет сцены `yacht_light` в точке `assol#yacht`, ключ `yacht_glow`) на её руках и волосах. ≈ 5 с | |
-| `tell` (после glow, glow_close) | окно открывается (`yacht_glow` гаснет), камера обратно в общий план, ровно; она соскальзывает с табурета (hop_down), рассказывает руками (tell); он оборачивается к ней; за окном проходит угольщик, останавливается, смотрит | `tell:down`, `tell:collier` |
-| `why` (после tell) | окно закрывается; он садится на табурет лицом в комнату, она у его колен, руки на них; его ладонь у неё на голове | `why:knees` |
-| `shelf` | ночь; он ставит яхту на доску над окном (shelve) | `shelf:placed` |
-| `years` | девять лет спустя, день, полки наполовину пусты; он у окна с трубкой; дверь открывается, Ассоль (17) входит с корзиной и ставит её у двери; кольцо при ней, если `ring` = `finger` | `years:basket` |
-| `decide` (после years) | он оборачивается к ней; камера уходит к правой стене за 1.6 с (2.4, 1.3, поворот −27°), и в конце сундук в углу (целиком, не за табуретом и верстаком), он у окна и она у двери — в средних 4:3 кадра, камера стоит (правило позы под выбор: игра нажимает `longren` и `chest`). ≈ 2 с | `decide:turned` |
-| `chest_out` (после decide) | идёт к сундуку, берётся за крышку, тянет его из угла, пятясь (походка drag — сундук идёт за ним); смахивает пыль | `chest_out:out` |
-| `stay` (после decide) | ладонь ей на голову; садится у верстака, вертит нож | `stay:palm` |
-| `unpack` | ночь, лампа; входит с берега, дверь закрывается; задвигает сундук ногой в два толчка (push_foot), раскуривает трубку | `unpack:pushed` |
-| `read` | утро, склейкой (без затемнения); Ассоль (17) на стуле у окна с книгой. Лонгрен по ключу партии `longren`: `home`, `knows` — сидит у пустого верстака (seated, нож в руках); `sea` — его и сундука нет (`chest_here` 0). `girl_toy` 1 — яхты на доске над окном нет. ≈ 3 с | |
-| `beetle` (после read) | камера ближе; склейка в крупный план `page`: жук ползёт по странице и встаёт у слова «Смотри»; на пальце, что держит страницу, кольцо, если `ring` = `finger` | `beetle:word` |
-| `cry` (после read, beetle) | крик снаружи; не поднимает глаз; ещё — взгляд к двери и обратно | `cry:glance` |
-| `look` (после read, beetle, cry, girl_in) | она сидит с книгой, глаза в странице; камера рядом с ней (1.65, 3.0, поворот −26°: она в середине кадра, за ней окно, Лонгрен у верстака вне кадра) и опускается к странице вместе с её взглядом (`camera_pitch` −12°) — под «Смотри»: `gaze` 0…1 непрерывно ведёт её глаза от страницы к окну; камера стоит, пока игра ведёт взгляд, и поднимается обратно, когда `gaze` 1 (скрипт). `from` — как у `read`, камера у страницы. ≈ 2 с | `look:ready` |
-| `girl_in` (после look, cry) | дверь распахивается, вбегает девочка с яхтой над головой (походка `run_high`), встаёт у её колен со стороны комнаты (не на её пути от стула к двери), берёт яхту в правую руку (часть `yacht_r`) и левой тянет Ассоль за рукав (`reach` к `assol#hand_r`); Ассоль поднимает на неё глаза; камера (1.5, 2.0, поворот 2°) опущена, как в `look` (`camera_pitch` −12°: девочка в кадре целиком) — «Смотри» поднимает её и отсюда. ≈ 6 с | `girl_in:tugs` |
-| `sails_window` (после read, beetle, cry, look, girl_in) | в окно справа входит корабль под алыми парусами; она поднимает на него глаза; камера ровно (`camera_pitch` 0) | `sails_window:seen` |
-| `sails_close` (после sails_window; крупно, камерой) | из-за её спины (камера 0.6, 2.3, поворот 6°, `camera_pitch` −16°): она на стуле целиком, затылок чуть левее середины, окно, в его правой верхней створке паруса над её плечом — в средних 4:3; алый свет парусов (свет сцены `sails_glow`, ключ `sails_light`) ложится на неё и на комнату; книга съезжает с колен на пол (`book_down`) — пол у стула в кадре. ≈ 5 с | |
-| `wake` | рассвет, склейкой (без затемнения); она уснула на стуле (doze), он рядом, рука на её плече (при `longren` = `sea` его нет — она поднимает голову сама); она поднимает голову | `wake:touched` |
-| `out` (после wake, sails_window, sails_close, girl_in) | дверь распахивается, она вскакивает (wake_up), книга на полу, бежит в дверь (run); он смотрит вслед (девочка, если она здесь, отпускает рукав и смотрит ей вслед). Камера ровно; если корабль в окне (после `sails_window`, `sails_close`) — возвращается в кадр `sails_window`, где видна дверь | `out:gone` |
+| `match` | the prologue's cut: the insert `closeup`, the shot `match`. The sea and the sky at dawn in the colours of the prologue's end, on it a sail — the white sails of a toy sailing ship, there and of that size, as the prologue's ship (`match_x`, `match_y`, `match_s`). Over 4 s (`match` 0 → 1) the little ship grows to its place on the workbench, the sea goes, the workbench, the lamp and Longren's big hands setting it down come through (≈ 6 s, R01) | `match:near` |
+| `evening` | evening, the lamp (no fade: in the game — right after `match`, by a cut); Longren whittles (carve), Assol on the stool, her hand on the workbench; a look at the lamp and back | |
+| `scrap` (after evening) | a cut into the insert `scrap`: the scarlet scrap on the workbench by the lamp, her fingers beside it. Under a touch: the player takes the scrap (`scrap#scrap`; the game leads `scrap_taken` → 1). ≈ 3 s | `scrap:close` |
+| `rig` (after evening, scrap) | he lays down the knife (lay_down), her hands to the hull, the camera nearer; a cut into the close-up `rig` — the workbench with the yacht (if the insert `scrap` was on — it closes by a cut into the room). Under “Rigging”: `rig1…rig4`, `guide` | `rig:close` |
+| `glow` (after rig) | back into the room; the yacht in her hands, raised to the lamp; he looks at her | `glow:up` |
+| `glow_close` (after glow; close up, by the camera) | near, from the lamp's side, over the workbench (the camera −1.09, 2.68, turned 22°, 0.15 m higher, `camera_pitch` −26° — on the line from her face through the yacht): the yacht before her face, the sails hiding the face; the sail's scarlet light (the scene's small light `yacht_light` at the point `assol#yacht`, the key `yacht_glow`) on her hands and hair. ≈ 5 s | |
+| `tell` (after glow, glow_close) | the window opens (`yacht_glow` goes out), the camera back to the wide shot, level; she slides off the stool (hop_down), tells with her hands (tell); he turns to her; outside the window the collier passes, stops, looks | `tell:down`, `tell:collier` |
+| `why` (after tell) | the window closes; he sits on the stool facing the room, she by his knees, her hands on them; his palm on her head | `why:knees` |
+| `shelf` | night; he puts the yacht on the board above the window (shelve) | `shelf:placed` |
+| `years` | nine years later, day, the shelves half empty; he by the window with his pipe; the door opens, Assol (17) comes in with a basket and puts it down by the door; the ring on her, if `ring` = `finger` | `years:basket` |
+| `decide` (after years) | he turns to her; the camera goes to the right wall over 1.6 s (2.4, 1.3, turned −27°), and at the end the chest in the corner (whole, not behind the stool and the workbench), he by the window and she by the door — within the middle 4:3 of the frame, the camera still (the rule of the pose for a choice: the game presses `longren` and `chest`). ≈ 2 s | `decide:turned` |
+| `chest_out` (after decide) | he goes to the chest, takes hold of the lid, pulls it out of the corner, backing away (the gait drag — the chest goes after him); brushes off the dust | `chest_out:out` |
+| `stay` (after decide) | his palm on her head; he sits down by the workbench, turns the knife about | `stay:palm` |
+| `unpack` | night, the lamp; he comes in from the shore, the door closes; he pushes the chest back with his foot in two pushes (push_foot), lights his pipe | `unpack:pushed` |
+| `read` | morning, by a cut (no fade); Assol (17) on the chair by the window with a book. Longren by the play's key `longren`: `home`, `knows` — sits at the empty workbench (seated, the knife in his hands); `sea` — neither he nor the chest is there (`chest_here` 0). `girl_toy` 1 — no yacht on the board above the window. ≈ 3 s | |
+| `beetle` (after read) | the camera nearer; a cut into the close-up `page`: a beetle crawls over the page and stops at the word “Look”; on the finger that holds the page a ring, if `ring` = `finger` | `beetle:word` |
+| `cry` (after read, beetle) | a cry outside; she does not raise her eyes; again — a glance to the door and back | `cry:glance` |
+| `look` (after read, beetle, cry, girl_in) | she sits with the book, her eyes in the page; the camera beside her (1.65, 3.0, turned −26°: she in the middle of the frame, the window behind her, Longren at the workbench out of the frame) and lowered to the page together with her gaze (`camera_pitch` −12°) — under “Look”: `gaze` 0…1 continuously leads her eyes from the page to the window; the camera stays still while the game leads the gaze, and rises back when `gaze` is 1 (the script). `from` — as `read`'s, the camera at the page. ≈ 2 s | `look:ready` |
+| `girl_in` (after look, cry) | the door flies open, the girl runs in with the yacht over her head (the gait `run_high`), stops by her knees on the room's side (not on her way from the chair to the door), takes the yacht into her right hand (the part `yacht_r`) and with her left tugs Assol by the sleeve (`reach` to `assol#hand_r`); Assol raises her eyes to her; the camera (1.5, 2.0, turned 2°) lowered, as in `look` (`camera_pitch` −12°: the girl whole in the frame) — “Look” raises it from here too. ≈ 6 s | `girl_in:tugs` |
+| `sails_window` (after read, beetle, cry, look, girl_in) | a ship under scarlet sails comes into the window from the right; she raises her eyes to it; the camera level (`camera_pitch` 0) | `sails_window:seen` |
+| `sails_close` (after sails_window; close up, by the camera) | from behind her (the camera 0.6, 2.3, turned 6°, `camera_pitch` −16°): she whole on the chair, the back of her head a little left of the middle, the window, in its upper right leaf the sails over her shoulder — within the middle 4:3; the scarlet light of the sails (the scene's light `sails_glow`, the key `sails_light`) falls on her and on the room; the book slides off her knees to the floor (`book_down`) — the floor by the chair in the frame. ≈ 5 s | |
+| `wake` | dawn, by a cut (no fade); she has fallen asleep on the chair (doze), he beside her, his hand on her shoulder (with `longren` = `sea` he is not there — she raises her head by herself); she raises her head | `wake:touched` |
+| `out` (after wake, sails_window, sails_close, girl_in) | the door flies open, she springs up (wake_up), the book on the floor, runs out of the door (run); he looks after her (the girl, if she is here, lets go of the sleeve and looks after her). The camera level; if the ship is in the window (after `sails_window`, `sails_close`) — it goes back to the shot of `sails_window`, where the door is seen | `out:gone` |
 
-Кольцо Ассоль (17) — часть каста при `ring` = `finger`: `ring` (материнское, `ring_kind` = `mother`) или `ring_old` (его
-старинное, `own`); оно остаётся при ней, что бы она ни взяла и ни отдала (`worn` в `film`).
+The ring of Assol (17) is a part of the cast with `ring` = `finger`: `ring` (his mother's, `ring_kind` = `mother`) or `ring_old` (his
+old one, `own`); it stays on her whatever she takes or gives (`worn` in `film`).
 
-Затемнения — только ход времени (начало `shelf`, `years`, `unpack`: другой день или час); `evening`, `read` и `wake` — в них
-входят склейкой, без затемнения. Склейки в крупный план и обратно — без затемнений, кадр готовится заранее (`s.shot`).
+Fades — only for time passing (the start of `shelf`, `years`, `unpack`: another day or hour); `evening`, `read` and `wake` are
+entered by a cut, with no fade. The cuts into a close-up and back — with no fades, the shot made ready ahead (`s.shot`).
 
-## Ключи
+## Keys
 
-Описаны в `states` сцены.
+Described in the scene's `states`.
 
-- `hour` 0…1 — как во всём мире; по умолчанию 0.75. Окно смотрит на восток: солнце встаёт прямо в нём и уходит вправо.
-- `lamp` 0…1 — лампа: огонь, тёплый свет на верстаке, левой стене, потолке и полу.
-- `toys` 0…1 — полки полны → пусты: игрушки уходят по одной. `toy_on_shelf` 0…1 — яхта Ассоль на доске над окном.
-- `chest` 0…1 — сундук в углу → выдвинут. `door` 0…1, `window_open` 0…1 — дверь и створки открыты в комнату.
-- `sails_window` 0…1 — корабль: 0 — за мысом, не виден ни из окна, ни из двери; 1 — стоит посередине окна.
-- `sails` 0…1 — паруса корабля белые → алые (ключ модуля korabli; здесь 1).
-- `basket`, `book_down` — 0 или 1 (ставятся разом). `chest_here` 0/1 — сундук в доме (1, по умолчанию) или унесён в море (0).
-- `guide` 0…1 — «Оснастка»: рука отца (в крупном плане входит в кадр и держит корму — яхта перестаёт качаться; в
-  комнате — его рука на корпусе). `gaze` 0…1 — «Смотри»: взгляд Ассоль от страницы к окну (пока она сидит с книгой),
-  непрерывно на всём пути (точка взгляда — `lib.js gazed`); камера под жестом стоит: кусок `look` опускает её к странице
-  (`camera_pitch`), а при `gaze` 1 скрипт возвращает её ровно (`camera_look` = tg `camera_pitch`) за 1.5 с (ключ камеры скрипт
-  ведёт, а не ставит — поставленный разом ключ камеры для движка новый кадр: раз в 0.06 с (`scene.every`) смотрит, где
-  ему быть, и даёт `move` туда).
-- `closeup` 0/1, `closeup_shot` (`rig` | `page` | `match`) — крупный план; `rig1…rig4` 0…1 — грот поднят, гика-шкот закреплён,
-  кливер поднят, его шкот закреплён; `beetle` 0…1 — жук от края страницы до слова; `match` 0…1 — парусник растёт из искры
-  до яхты на верстаке (двигает кусок). `scrap` 0/1 — вставка лоскута; `scrap_taken` 0…1 — пальцы взяли лоскут (двигает игра).
-- `yacht_glow` 0…1 — алый свет паруса яхты в руках Ассоль (кусок `glow_close`); `sails_light` 0…1 — алый свет парусов в окне
-  на ней и на комнате (кусок `sails_close`).
-- Ключи партии (игра ставит при открытии, ни один `from` не ставит; по умолчанию в `state`): `ring` (`none` · `finger` ·
-  `cord`; `none`), `ring_kind` (`mother` · `own`; `own`) — кольцо у Ассоль (17) и в кадре `page`; `longren` (`home` · `knows` ·
-  `sea`; `home`) — Лонгрен в `read`, `look`, `wake`; `girl_toy` (0/1; 0) — яхта у девочки, на доске её нет; `sun` (0.2…0.4;
-  нет — null) — час утра парусов во всех его кусках (`read`, `beetle`, `cry`, `look`, `girl_in`, `sails_window`,
-  `sails_close`, `wake`, `out`): игра ведёт час последней главы только вперёд через свои сцены; без него у куска свой
-  час — 0.31, в `wake` и `out` после него 0.245; `match_x`,
-  `match_y` (0, 0) — где парус на экране в кадре `match`, в высотах кадра от его середины (x вправо, y вниз), `match_s`
-  (0.006) — высота корабля в высотах кадра; их читает только `animate` кадра.
-- `beat` — кусок (модуль beats); `fade`, `camera_*` — движка.
-- Служебные (их держит `script.js` и модули, вручную не задавать): `day`, `dawn`, `dusk`, `night`, `sun_light`,
-  `moon_light` (nebo по `hour`), `chest_across`, `chest_distance`, `ship_across`, `door_facing`, `window_left_facing`,
-  `window_right_facing`, `ship_roll`; `lo_a/lo_d`, `as_a/as_d`, `fi_a/fi_d` — где люди.
+- `hour` 0…1 — as in the whole world; 0.75 by default. The window faces east: the sun rises right in it and goes off to the right.
+- `lamp` 0…1 — the lamp: the flame, warm light on the workbench, the left wall, the ceiling and the floor.
+- `toys` 0…1 — the shelves full → empty: the toys go one by one. `toy_on_shelf` 0…1 — Assol's yacht on the board above the window.
+- `chest` 0…1 — the chest in the corner → pulled out. `door` 0…1, `window_open` 0…1 — the door and the leaves open into the room.
+- `sails_window` 0…1 — the ship: 0 — behind the cape, seen neither from the window nor from the door; 1 — stands in the middle of the window.
+- `sails` 0…1 — the ship's sails white → scarlet (the korabli module's key; here 1).
+- `basket`, `book_down` — 0 or 1 (set at once). `chest_here` 0/1 — the chest in the house (1, by default) or taken to sea (0).
+- `guide` 0…1 — “Rigging”: the father's hand (in the close-up it comes into the frame and holds the stern — the yacht stops rocking; in
+  the room — his hand on the hull). `gaze` 0…1 — “Look”: Assol's gaze from the page to the window (while she sits with the book),
+  continuously all the way (the point of the gaze — `lib.js gazed`); the camera under the gesture stays still: the beat `look` lowers it to the page
+  (`camera_pitch`), and at `gaze` 1 the script brings it back level (`camera_look` = tg `camera_pitch`) over 1.5 s (the script leads the camera's key
+  rather than setting it — a camera key set at once is a new shot for the engine: once every 0.06 s (`scene.every`) it looks where
+  it should be and gives a `move` there).
+- `closeup` 0/1, `closeup_shot` (`rig` | `page` | `match`) — the close-up; `rig1…rig4` 0…1 — the mainsail hoisted, the main sheet made fast,
+  the jib hoisted, its sheet made fast; `beetle` 0…1 — the beetle from the page's edge to the word; `match` 0…1 — the little ship grows out of the spark
+  into the yacht on the workbench (moved by the beat). `scrap` 0/1 — the scrap's insert; `scrap_taken` 0…1 — the fingers have taken the scrap (moved by the game).
+- `yacht_glow` 0…1 — the scarlet light of the sail of the yacht in Assol's hands (the beat `glow_close`); `sails_light` 0…1 — the scarlet light of the sails in the window
+  on her and on the room (the beat `sails_close`).
+- The play's keys (set by the game on opening, no `from` sets them; the defaults in `state`): `ring` (`none` · `finger` ·
+  `cord`; `none`), `ring_kind` (`mother` · `own`; `own`) — Assol's (17) ring, and in the shot `page`; `longren` (`home` · `knows` ·
+  `sea`; `home`) — Longren in `read`, `look`, `wake`; `girl_toy` (0/1; 0) — the girl has the yacht, it is not on the board; `sun` (0.2…0.4;
+  none — null) — the hour of the morning of the sails in all its beats (`read`, `beetle`, `cry`, `look`, `girl_in`, `sails_window`,
+  `sails_close`, `wake`, `out`): the game leads the last chapter's hour only forward through its scenes; without it a beat has its own
+  hour — 0.31, in `wake` and in `out` after it 0.245; `match_x`,
+  `match_y` (0, 0) — where the sail is on the screen in the shot `match`, in frame heights from its middle (x to the right, y down), `match_s`
+  (0.006) — the ship's height in frame heights; read only by the shot's `animate`.
+- `beat` — the beat (the beats module); `fade`, `camera_*` — the engine's.
+- Internal (kept by `script.js` and the modules, not to be set by hand): `day`, `dawn`, `dusk`, `night`, `sun_light`,
+  `moon_light` (nebo by `hour`), `chest_across`, `chest_distance`, `ship_across`, `door_facing`, `window_left_facing`,
+  `window_right_facing`, `ship_roll`; `lo_a/lo_d`, `as_a/as_d`, `fi_a/fi_d` — where the people are.
 
-Точки для игры: `window#window`, `door#door`, `shelves#shelves`, `shelves#yacht` (место яхты на доске), `toy#toy`,
+Points for the game: `window#window`, `door#door`, `shelves#shelves`, `shelves#yacht` (the yacht's place on the board), `toy#toy`,
 `chest#chest`, `chest#grip_l`, `chest#grip_r`, `chair#chair`, `stool#stool`, `box#box`, `work#work`, `flame#flame`,
-`basket#basket`, `book#book`, `ship_rig#ship`; люди — их голова, руки, плечи; в крупных планах — `closeup#rig1…rig4`
-(где её пальцы берут крепление, когда оно начинается: туда приходит её рука), `closeup#word`, `closeup#beetle`, во вставке лоскута — `scrap#scrap`.
+`basket#basket`, `book#book`, `ship_rig#ship`; the people — their head, hands, shoulders; in the close-ups — `closeup#rig1…rig4`
+(where her fingers take hold of the fastening as it begins: her hand comes there), `closeup#word`, `closeup#beetle`, in the scrap's insert — `scrap#scrap`.
 
-Нажимается (предложения игры): `scrap#scrap` после `scrap`; `longren` (голова) и `chest` (точка без имени на крышке) после
+Pressed (the game's offers): `scrap#scrap` after `scrap`; `longren` (the head) and `chest` (the nameless point on the lid) after
 `decide`.
 
-## Крупные планы (вставка `closeup`)
+## The close-ups (the insert `closeup`)
 
-Нарисованы раз на кадр (рисунок читает только то, что выбирает кадр: `closeup_shot`, и ключи партии `ring`, `ring_kind`,
-которые ставятся разом при открытии), в высотах кадра; свет в них написан — это своя картинка.
-Всё, что движется, — слои, их двигает `closeupMotion` (ничего не перерисовывается).
+Painted once a shot (the painting reads only what chooses the shot: `closeup_shot`, and the play's keys `ring`, `ring_kind`,
+which are set at once on opening), in frame heights; the light in them is painted — it is a picture of its own.
+All that moves is layers, moved by `closeupMotion` (nothing is painted anew).
 
-- `rig` — верстак вечером: яхта в люльке (корпус, мачта, гик, грот, кливер, шкоты — слои), остаток алого шёлка,
-  катушка, лампа справа. `rig1` поднимает грот от гика, `rig2` приводит гик и закрепляет шкот на корме, `rig3` поднимает
-  кливер от носа по штагу, `rig4` закрепляет его шкот. Рука девочки (справа) идёт к тому, что она крепит сейчас; пока
-  отец не держит (`guide`), яхта покачивается под её пальцами. Его рука входит слева: пальцы ложатся
-  вокруг кормы, большой палец — над палубой.
-- `page` — страница книги на её коленях, свет окна слева, тень переплёта; строки — штрихи, читается одно слово
-  «Смотри». Жук (тело и две фазы ног — слои) ползёт по пути `PAGE.way`, ноги переступают по пройденному, встаёт под
-  словом. Её большой палец держит край страницы; при `ring` = `finger` на нём кольцо: тонкое золотое (`mother`) или широкое
-  тёмное (`own`).
-- `match` — склейка пролога. Основа — верстак у лампы (общая с `rig`: стена, столешница, лампа и её огонь). Поверх него
-  слои: `sea` (рассветное небо и море цветов часа 0.25 — конца пролога, глушится альфой), `yacht` (игрушечный парусник с
-  белыми парусами: стоит и такого размера, как корабль пролога — `match_x`, `match_y`, `match_s` —, растёт к своему месту
-  на верстаке в геометрической прогрессии, `match` 0 → 1), `hand_l`, `hand_r` (большие руки Лонгрена в рукавах приходят
-  с боков и снизу к корпусу). Всё ставит `closeupMotion` по `match`.
+- `rig` — the workbench in the evening: the yacht in its cradle (the hull, the mast, the boom, the mainsail, the jib, the sheets — layers), the rest of the scarlet silk,
+  a reel, the lamp on the right. `rig1` hoists the mainsail from the boom, `rig2` brings the boom in and makes the sheet fast at the stern, `rig3` hoists
+  the jib from the bow up the stay, `rig4` makes its sheet fast. The girl's hand (on the right) goes to what she is fastening now; while
+  her father does not hold it (`guide`), the yacht rocks under her fingers. His hand comes in from the left: the fingers lie
+  round the stern, the thumb over the deck.
+- `page` — a page of the book on her knees, the window's light from the left, the shadow of the bars; the lines are strokes, one word can be read:
+  “Look”. The beetle (its body and two phases of its legs — layers) crawls along the path `PAGE.way`, its legs stepping over what it has passed, and stops under
+  the word. Her thumb holds the page's edge; with `ring` = `finger` a ring on it: a thin golden one (`mother`) or a broad
+  dark one (`own`).
+- `match` — the prologue's cut. The base is the workbench by the lamp (shared with `rig`: the wall, the bench top, the lamp and its flame). Over it
+  the layers: `sea` (the dawn sky and sea in the colours of hour 0.25 — the prologue's end, dimmed by alpha), `yacht` (the toy sailing ship with
+  white sails: it stands where and is of the size of the prologue's ship — `match_x`, `match_y`, `match_s` —, grows towards its place
+  on the workbench in a geometric progression, `match` 0 → 1), `hand_l`, `hand_r` (Longren's big hands in their sleeves come
+  from the sides and from below to the hull). All is set by `closeupMotion` by `match`.
 
-Вставка `scrap` — не этот элемент: её рисует и двигает модуль мира `closeups` (кадр `scrap`).
+The insert `scrap` is not this element: it is painted and moved by the world's module `closeups` (the shot `scrap`).
 
-## Свет
+## Light
 
-Всё нарисовано в дневных цветах; свет — движка. Снаружи — свет часа (`light.looks` по весам nebo) и солнце/луна
-(`sun`, `moon` — от точек неба). Комната — внутри (`inside`): в неё входит доля наружного света (`light.inside`), свет
-дня в проёмах окна и двери (`window_light`, `door_light` — `daylight` «of» невидимых проёмов; у двери — по `door`), и
-солнце с луной только сквозь проёмы (`through`): пятно на полу, переплёт створок, закрытая дверь его не пускает.
-Лампа — `lamp_light` (свет огня `flame`, `on`: `lamp`). Два алых света: `yacht_light` — малый, в точке `assol#yacht` (`on`:
-`yacht_glow`, кусок `glow_close`), и `sails_glow` — парусов в окне, издали, только сквозь проём окна (`on`: `sails_light`,
-кусок `sails_close`). Мебель и люди отбрасывают тени на пол и стены.
-Люди читаются в каждом кадре: ночью комнату держат лампа (до 5.5 м) и синий воздух ночи, луна кладёт пятно на пол.
+Everything is painted in the day's colours; the light is the engine's. Outside — the hour's light (`light.looks` by nebo's weights) and the sun/moon
+(`sun`, `moon` — from the sky's points). The room is inside (`inside`): a share of the outside light comes into it (`light.inside`), the
+daylight in the window's and the door's openings (`window_light`, `door_light` — `daylight` “of” the unseen openings; the door's — by `door`), and
+the sun and the moon only through the openings (`through`): a patch on the floor, the leaves' bars, a shut door does not let it in.
+The lamp — `lamp_light` (the light of the flame `flame`, `on`: `lamp`). Two scarlet lights: `yacht_light` — a small one, at the point `assol#yacht` (`on`:
+`yacht_glow`, the beat `glow_close`), and `sails_glow` — the sails' in the window, from afar, only through the window's opening (`on`: `sails_light`,
+the beat `sails_close`). The furniture and the people cast shadows on the floor and the walls.
+The people read in every shot: at night the room is held by the lamp (up to 5.5 m) and the blue air of the night, the moon lays a patch on the floor.
 
-## Перенос со старого движка (2026-10-11)
+## The move from the old engine (2026-10-11)
 
-- Небо читало `hour` и перерисовывалось — теперь небо мира (шейдер). Корабль был плоским рисунком — теперь «Секрет»
-  мира (сборка `tools/korabl.js`); он не прячется рисунком при `sails_window` 0, а стоит за мысом (вне всех линий
-  взгляда из комнаты) и входит в окно, замедляясь. Точка `ship#ship` → `ship_rig#ship`.
-- Полки, лампа, огонь, работа на верстаке — слои и animate вместо перерисовки по ключам. Яхта на полке — свой
-  элемент `toy` (для выбора в игре). `basket`, `book_down` — теперь 0 или 1.
-- Фильм — `lib.js film` для модуля `beats` вместо строк по секундам (`film`): люди идут своим шагом; сундук идёт за
-  Лонгреном, пока он его тянет (скрипт: походка `drag`), а не по секундам; `beat` в начале — `null` (вне игр — показ).
-- Камера кусков — те же ключи `camera_x/z/yaw`, что в v1, но движутся действиями.
-- Нож: Лонгрен кладёт его в `rig` (в v1 нож исчезал в `rig`, а «клал» он его в `tell`); нож лежит на верстаке, пока не
-  в руке. Корпус на верстаке исчезает, когда яхта сделана.
-- Ящик с обрезками переехал под верстак: в углу он стоял на пути сундука. Сундук выдвигается чуть правее (мимо
-  табурета). В `wake` Лонгрен стоит у стула со стороны комнаты (слева) — в `out` он не на её пути; час `wake` без ключа партии `sun` — 0.245 (солнце
-  уже над морем, в правой створке окна).
-- Книга падает у стула ближе к двери.
-- Новое: крупные планы `rig` и `page` (в v1 их не было — камера только подходила ближе), свет солнца и луны сквозь
-  окно и дверь, свет дня в открытой двери, живое пламя лампы, качка корабля, рябь и дорожка на море.
+- The sky read `hour` and was painted anew — now it is the world's sky (a shader). The ship was a flat painting — now it is the world's
+  Secret (the assembly `tools/korabl.js`); it does not hide by its painting at `sails_window` 0, but stands behind the cape (out of all the lines
+  of sight from the room) and comes into the window, slowing down. The point `ship#ship` → `ship_rig#ship`.
+- The shelves, the lamp, the flame, the work on the workbench — layers and animate instead of repainting by keys. The yacht on the shelf is an element
+  of its own, `toy` (to be chosen in the game). `basket`, `book_down` — now 0 or 1.
+- The film — `lib.js film` for the module `beats` instead of lines by seconds (`film`): people go at their own pace; the chest goes after
+  Longren while he pulls it (the script: the gait `drag`), and not by seconds; `beat` at the start — `null` (outside games — the showcase).
+- The beats' camera — the same keys `camera_x/z/yaw` as in v1, but they move by actions.
+- The knife: Longren lays it down in `rig` (in v1 the knife vanished in `rig`, and he “laid” it down in `tell`); the knife lies on the workbench while it is not
+  in his hand. The hull on the workbench vanishes when the yacht is made.
+- The box of scraps has moved under the workbench: in the corner it stood in the chest's way. The chest comes out a little more to the right (past
+  the stool). In `wake` Longren stands by the chair on the room's side (on the left) — in `out` he is not in her way; the hour of `wake` with no play's key `sun` is 0.245 (the sun
+  already over the sea, in the window's right leaf).
+- The book falls by the chair nearer the door.
+- New: the close-ups `rig` and `page` (in v1 there were none — the camera only came nearer), the light of the sun and the moon through
+  the window and the door, the daylight in the open door, the lamp's living flame, the ship's rolling, the ripple and the path on the sea.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {

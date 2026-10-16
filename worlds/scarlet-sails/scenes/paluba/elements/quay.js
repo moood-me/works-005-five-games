@@ -1,4 +1,4 @@
-// Lisse's quay, its face of dressed stone toward the ship lying alongside (x along it, + back toward her stern; its
+// Liss's quay, its face of dressed stone toward the ship lying alongside (x along it, + back toward her stern; its
 // top 1.2 m under her poop deck): courses of stone, paler at the top, dark and wet at the water, the fender beam, iron
 // bollards
 const face = g.createLinearGradient(0, -3.8, 0, 0);

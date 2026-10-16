@@ -73,7 +73,7 @@ var tall = function (t) {
 //     [{x, title (wrapped; its first line's middle at L.rows[i].ty), weight, seen, options: [{x, base (the water
 //     line), h (the sail's height; 0 for a sail not seen), state, label (wrapped; its first line's middle at ly)}]}];
 //     more than three rows (a whole play): no question over a row and no words under a sail — the title is the first
-//     word of the row's own (the chapter's number, «Финал»), under the group;
+//     word of the row's own (the chapter's number, «Finale»), under the group;
 //   L.fits — whether everything stood as wanted (rows too many for the sea, words too wide for their place: false).
 // Nothing at all (no number, no title, no map): the sea and the yacht alone.
 function layout(A, st, measure) {

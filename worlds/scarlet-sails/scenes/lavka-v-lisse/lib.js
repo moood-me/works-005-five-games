@@ -1,4 +1,4 @@
-// Лавка в Лиссе — what the shop's elements share (the street's sky, the wares on the shelves, the rack and the counter, the
+// A Shop in Liss — what the shop's elements share (the street's sky, the wares on the shelves, the rack and the counter, the
 // street's facades, the rolls of silk and where they are, the insert of the scarlet scrap) and its film in beats
 // (film(scene), at the end: the world's module beats — notes.md lists them).
 const N = kit.nebo;
@@ -380,7 +380,7 @@ function facade(g, w, h, e) {
   }
 }
 
-// ── the rolls of silk. «Алый» shows them one after another (ROLL_NAMES — the game's order); the roll is one element,
+// ── the rolls of silk. «Scarlet» shows them one after another (ROLL_NAMES — the game's order); the roll is one element,
 // a layer pair for each colour: the wound roll (body_<name>) and the cloth hanging from it (cloth_<name>), the one of the
 // key `roll` shown. The colours are tones of the one hue, each named for how it differs from the scarlet (notes.md) ──
 const ROLLS = {
@@ -475,7 +475,7 @@ function rollMotion(e) {
   e.at(x - 0.4 * out, y + R.radius + 0.2 + 0.5 * out * R.drop * 0.5);
 }
 
-// ── the insert of the scarlet scrap (the closeups module, shot "scrap"): `memory` fills the frame (in the game's «Алый»
+// ── the insert of the scarlet scrap (the closeups module, shot "scrap"): `memory` fills the frame (in the game's «Scarlet»
 // the scrap to compare with is the sample on the plate of the language of mini-games). The picture reads nothing of
 // the scene; what moves in it (the fingers closing on the scrap: `taken`) is `now`, which here is always closed ──
 const SCRAP_NOW = { taken: 1 };
@@ -487,11 +487,11 @@ const M = [0.2, 5.3], // the merchant behind the counter
   LOOK_DOWN = [0.2, 4.9, 0.95], // the counter's top before him
   BEFORE = [-0.69, 4.05], BEFORE_TURN = 40, // Assol before the counter, left of her basket and half turned to it: seen from her side
   BASKET = [-0.1, 4.75, 4.58], // the basket on the counter: across, where she sets it, where he pushes it back
-  OUT = [1.8, 7.2], IN = [1.8, 6.05], // Grey outside the door — in the doorway (the door is in the far wall, at the right)
+  OUT = [1.8, 7.2], IN = [1.8, 6.05], // Gray outside the door — in the doorway (the door is in the far wall, at the right)
   LET_OUT = [2.3, 7.2], LET_IN = [2.3, 6.05], BY_DOOR = [2.3, 5.55], // Letika the same, and where she stays
   ASSOL_OUT = [1.9, 7.2], ASSOL_IN = [1.9, 6.05], // Assol (seventeen) outside the door — in the doorway
-  PAST = [1.8, 3.9], AT_COUNTER = [0.75, 3.9], // Grey passing the counter's end — before the counter, right of the merchant
-  AT_WINDOW = [-1.3, 4.3], TO_WINDOW = 310, // Grey in the sunbeam by the window, turned to it: seen from behind and from his side
+  PAST = [1.8, 3.9], AT_COUNTER = [0.75, 3.9], // Gray passing the counter's end — before the counter, right of the merchant
+  AT_WINDOW = [-1.3, 4.3], TO_WINDOW = 310, // Gray in the sunbeam by the window, turned to it: seen from behind and from his side
   STREET = [-3.7, 6.2]; // the violinist on the street, seen through the window
 // into a motion: when the hands let go of what they put down or move, and when the merchant's take what he reaches for
 // (seconds from the motion's start — set by the motions' length: notes.md)
@@ -499,7 +499,7 @@ const PUT_UP_LET_GO = 2.0, PUSH_AWAY_PUSHED = 1.2, TAKE_DOWN_TAKEN = 2.2, TAKE_D
 // the way from one place to another, degrees (0 away from us, 90 to the right)
 const toward = ([a, d], [a2, d2]) => (Math.atan2(a2 - a, d2 - d) * 180) / Math.PI;
 // the cameras: across the counter from its right end, on Assol's side and the merchant's face (toys_in); near, the door
-// and the counter (toys_again); a step left, the merchant clear of Grey before him (the silk beats); close behind Grey
+// and the counter (toys_again); a step left, the merchant clear of Gray before him (the silk beats); close behind Gray
 // at the window (found)
 const TOYS_IN_CAM = { camera_x: 1.2, camera_z: 2.1, camera_yaw: -30 },
   TOYS_AGAIN_CAM = { camera_x: 0.9, camera_z: 2.8 },
@@ -537,11 +537,11 @@ function film(scene) {
   const TOYS_AGAIN = whole({ ...room, ...TOYS_AGAIN_CAM, ...seated, ...grown, ...outside });
   const SILK = { ...room, ...SILK_CAM, goods: "silk", roll: "cherry" };
   const SILK_IN = whole({ ...SILK, ...merchant, ...noAssol, ...outside });
-  // Grey before the counter with the roll in his hands, Letika by the door
+  // Gray before the counter with the roll in his hands, Letika by the door
   const COUNTER = whole({
     ...SILK, roll_at: "grey", ...merchant, ...noAssol, ...stands("grey", "gr", AT_COUNTER, 0, {}), ...stands("letika", "le", BY_DOOR, 180, {}),
   });
-  // Grey in the beam by the window, the roll held toward the light; the merchant at his shelves
+  // Gray in the beam by the window, the roll held toward the light; the merchant at his shelves
   const WINDOW = {
     ...COUNTER, ...stands("grey", "gr", AT_WINDOW, TO_WINDOW, { grey_do: loop("hold_up") }), merchant_turn: 0, merchant_look: null,
   };
@@ -596,8 +596,8 @@ function film(scene) {
         await s.wait(4.3);
       },
     },
-    // silk_in — Grey comes in, Letika stays by the door; the merchant takes a roll down from the rack and lays it on the
-    // counter; Grey takes it up
+    // silk_in — Gray comes in, Letika stays by the door; the merchant takes a roll down from the rack and lays it on the
+    // counter; Gray takes it up
     silk_in: {
       from: () => SILK_IN,
       run: async (s) => {
@@ -646,8 +646,8 @@ function film(scene) {
         await s.wait(0.6);
       },
     },
-    // silk — Grey, the roll in his hands, goes to the window and stands in the beam; the merchant turns to his shelves.
-    // The game's «Алый» goes on from here
+    // silk — Gray, the roll in his hands, goes to the window and stands in the beam; the merchant turns to his shelves.
+    // The game's «Scarlet» goes on from here
     silk: {
       after: "memory",
       from: () => COUNTER,
@@ -663,7 +663,7 @@ function film(scene) {
       },
     },
     // found — the scarlet roll let out in the beam; the camera comes close on it; the merchant stands still; the cloth's
-    // light lies on Grey's hands and coat
+    // light lies on Gray's hands and coat
     found: {
       after: "silk",
       from: () => whole(FOUND),
@@ -677,7 +677,7 @@ function film(scene) {
         await s.wait(2.4);
       },
     },
-    // violin — a fiddler stands in the street beyond the window; Grey turns to the window, then to Letika by the door
+    // violin — a fiddler stands in the street beyond the window; Gray turns to the window, then to Letika by the door
     violin: {
       after: "found",
       from: () => whole(FOUND_NEAR),

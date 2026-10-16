@@ -1,4 +1,4 @@
-// Лавка в Лиссе — its mechanics: the hour's light (the world's module nebo); the film in beats for the game (lib.js film,
+// A Shop in Liss — its mechanics: the hour's light (the world's module nebo); the film in beats for the game (lib.js film,
 // the world's module beats: `beat` names one); the roll of silk kept where its holder is; the fiddler on the street.
 const L = scene.lib;
 scene.kit.nebo.follow(scene);

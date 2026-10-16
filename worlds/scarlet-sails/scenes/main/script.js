@@ -1,4 +1,4 @@
-// «Берег Каперны» — its mechanics. The hour's light follows `hour` (the world's nebo: the looks' weights, the sun's and
+// «The Kaperna Shore» — its mechanics. The hour's light follows `hour` (the world's nebo: the looks' weights, the sun's and
 // the moon's light). What its keys place is kept where they say — at once when a key is set, along as it moves: "Secret"
 // by `ship` (where she is, how she heads, how far her spark is kindled: lib.shipAt), the tavern's door on its hinge by
 // `tavern_door`, Menners' boat by `menners_boat`, "Secret"'s skiff by `skiff_ashore`, `boat` and `ship` (lib.skiffAt: where,

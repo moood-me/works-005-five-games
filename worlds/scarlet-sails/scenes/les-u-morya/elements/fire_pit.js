@@ -1,4 +1,4 @@
-// Grey's fire on the glade by the cliff's edge: a ring of stones, a few branches crossed in it — there while the fire
+// Gray's fire on the glade by the cliff's edge: a ring of stones, a few branches crossed in it — there while the fire
 // is (its animate); the flame is particles (flame, embers), its light the scene's fire_light (the `fire` element)
 const A = e.anim;
 e.layer("pit", {}, (g) => {

@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Замок Греев",
-  "caption": "Всё здесь заведено навсегда.",
+  "title": "The Grays' Castle",
+  "caption": "Everything here is ordained for ever.",
   "horizon": 0.44,
   "camera": {
     "mode": "roam",
@@ -213,7 +213,7 @@
   "states": {
     "beat": {
       "type": "string",
-      "means": "кусок фильма, который играть (модуль beats): boy, brush, mother_in, mother_close, ship_painting, cellar, night, farewell, let_go, note, note_goes, return, stays, spring, one_evening, window_end (и paint_over — только показ); null — ни один"
+      "means": "the film's beat to play (the beats module): boy, brush, mother_in, mother_close, ship_painting, cellar, night, farewell, let_go, note, note_goes, return, stays, spring, one_evening, window_end (and paint_over — for showing only); null — none"
     },
     "hour": {
       "range": [
@@ -221,7 +221,7 @@
         1
       ],
       "smooth": true,
-      "means": "время суток по кругу, как во всём мире: 0 полночь, 0.25 рассвет, 0.5 полдень, 0.75 закат; окна смотрят на запад-юго-запад — солнце входит в них после полудня и до заката"
+      "means": "the hour, round the clock, as in the whole world: 0 midnight, 0.25 dawn, 0.5 noon, 0.75 sunset; the windows face west-south-west — the sun comes into them after noon and till sunset"
     },
     "fire": {
       "range": [
@@ -229,7 +229,7 @@
         1
       ],
       "smooth": true,
-      "means": "камин: 0 погашен, 1 горит — пламя, угли, тёплый свет из топки на полу, кресле, стенах"
+      "means": "the fireplace: 0 out, 1 burning — flames, embers, warm light from the firebox on the floor, the armchair, the walls"
     },
     "lamps": {
       "range": [
@@ -237,7 +237,7 @@
         1
       ],
       "smooth": true,
-      "means": "лампы: над двумя картинами и торшер у кресла"
+      "means": "the lamps: over the two pictures, and the floor lamp by the armchair"
     },
     "candles": {
       "range": [
@@ -245,7 +245,7 @@
         1
       ],
       "smooth": true,
-      "means": "свечи на столе: 0 не горят, 1 горят (ужин вдвоём)"
+      "means": "the candles on the table: 0 unlit, 1 lit (a supper for two)"
     },
     "ladder": {
       "range": [
@@ -253,7 +253,7 @@
         1
       ],
       "smooth": true,
-      "means": "лестница: 0 стоит в углу у окна, 1 приставлена к картине с распятием"
+      "means": "the ladder: 0 stands in the corner by the window, 1 set against the picture of the crucifixion"
     },
     "nail1": {
       "range": [
@@ -261,7 +261,7 @@
         1
       ],
       "smooth": true,
-      "means": "гвоздь в левой руке на распятии: 0 виден, 1 закрашен"
+      "means": "the nail in the left hand of the crucifixion: 0 seen, 1 painted over"
     },
     "nail2": {
       "range": [
@@ -269,7 +269,7 @@
         1
       ],
       "smooth": true,
-      "means": "гвоздь в правой руке на распятии: 0 виден, 1 закрашен"
+      "means": "the nail in the right hand of the crucifixion: 0 seen, 1 painted over"
     },
     "nail3": {
       "range": [
@@ -277,7 +277,7 @@
         1
       ],
       "smooth": true,
-      "means": "гвоздь в ногах на распятии: 0 виден, 1 закрашен"
+      "means": "the nail in the feet of the crucifixion: 0 seen, 1 painted over"
     },
     "painting_alive": {
       "range": [
@@ -285,7 +285,7 @@
         1
       ],
       "smooth": true,
-      "means": "картина с кораблём: 0 холст неподвижен, 1 волны на холсте идут, корабль поднимается на гребне"
+      "means": "the picture of the ship: 0 the canvas still, 1 the waves on the canvas move, the ship rises on a crest"
     },
     "door": {
       "range": [
@@ -293,7 +293,7 @@
         1
       ],
       "smooth": true,
-      "means": "дверь в покои матери: 0 закрыта, 1 открыта к ней"
+      "means": "the door to the mother's rooms: 0 shut, 1 open to her"
     },
     "door_light": {
       "range": [
@@ -301,7 +301,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет у матери: 0 темно, 1 горит — полоска света под её дверью, а открыта дверь — свет из проёма на пол зала"
+      "means": "the light in the mother's room: 0 dark, 1 lit — a strip of light under her door, and with the door open — light from the doorway on the hall's floor"
     },
     "bundle": {
       "range": [
@@ -309,7 +309,7 @@
         1
       ],
       "smooth": true,
-      "means": "узел Грея на столе: 0 нет, 1 лежит"
+      "means": "Gray's bundle on the table: 0 none, 1 lies there"
     },
     "note": {
       "range": [
@@ -317,7 +317,7 @@
         1
       ],
       "smooth": true,
-      "means": "записка на столе: 0 нет, 1 лежит"
+      "means": "the note on the table: 0 none, 1 lies there"
     },
     "coat_on_chair": {
       "range": [
@@ -325,7 +325,7 @@
         1
       ],
       "smooth": true,
-      "means": "морской сюртук Грея на спинке кресла отца: 0 нет, 1 висит"
+      "means": "Gray's sea coat on the back of his father's armchair: 0 none, 1 hangs there"
     },
     "lilian_candle": {
       "range": [
@@ -333,28 +333,28 @@
         1
       ],
       "smooth": true,
-      "means": "свеча в руке матери горит (свет у её пламени)"
+      "means": "the candle in the mother's hand is lit (the light by its flame)"
     },
     "letter": {
       "range": [
         0,
         1
       ],
-      "means": "эпилог: у матери в руках письмо сына (1) или она одна со свечой (0) — читает кусок window_end"
+      "means": "the epilogue: the mother holds her son's letter (1) or she is alone with a candle (0) — read by the beat window_end"
     },
     "canvas": {
       "range": [
         0,
         1
       ],
-      "means": "крупный план холста с распятием (вставка): 1 — открыт; на нём точки canvas#nail1…3"
+      "means": "a close-up of the canvas with the crucifixion (an insert): 1 — open; on it the points canvas#nail1…3"
     },
     "hands": {
       "range": [
         0,
         1
       ],
-      "means": "крупный план рук (вставка, кадр hold): 1 — открыт, на ладони Грея кольцо, сверху пальцы матери; на нём точки hands#finger1…finger4"
+      "means": "a close-up of the hands (an insert, the shot hold): 1 — open, the ring on Gray's palm, the mother's fingers over it; on it the points hands#finger1…finger4"
     },
     "grip1": {
       "range": [
@@ -362,7 +362,7 @@
         1
       ],
       "smooth": true,
-      "means": "палец матери 1 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+      "means": "the mother's finger 1 on his hand (the shot hold): 1 holds, 0 let go — moved by the game"
     },
     "grip2": {
       "range": [
@@ -370,7 +370,7 @@
         1
       ],
       "smooth": true,
-      "means": "палец матери 2 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+      "means": "the mother's finger 2 on his hand (the shot hold): 1 holds, 0 let go — moved by the game"
     },
     "grip3": {
       "range": [
@@ -378,7 +378,7 @@
         1
       ],
       "smooth": true,
-      "means": "палец матери 3 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+      "means": "the mother's finger 3 on his hand (the shot hold): 1 holds, 0 let go — moved by the game"
     },
     "grip4": {
       "range": [
@@ -386,14 +386,14 @@
         1
       ],
       "smooth": true,
-      "means": "палец матери 4 на его руке (кадр hold): 1 держит, 0 разжат — двигает игра"
+      "means": "the mother's finger 4 on his hand (the shot hold): 1 holds, 0 let go — moved by the game"
     },
     "card": {
       "range": [
         0,
         1
       ],
-      "means": "крупный план дна бочки (вставка, кадр cellar): 1 — открыт; на нём точка card#barrel"
+      "means": "a close-up of the cask's bottom (an insert, the shot cellar): 1 — open; on it the point card#barrel"
     },
     "dust": {
       "range": [
@@ -401,57 +401,57 @@
         1
       ],
       "smooth": true,
-      "means": "пыль на дне бочки (кадр cellar): 1 лежит, 0 стёрта и надпись читается"
+      "means": "the dust on the cask's bottom (the shot cellar): 1 lies there, 0 wiped off and the words can be read"
     },
     "pried": {
       "range": [
         0,
         1
       ],
-      "means": "ставит игра перед let_go: 1 — игрок сам разжал её пальцы, 0 — она отпустила сама"
+      "means": "set by the game before let_go: 1 — the player opened her fingers, 0 — she let go herself"
     },
     "home": {
       "range": [
         0,
         1
       ],
-      "means": "ключ партии: насколько в доме тепло и жизненно после возвращения (огонь и лампы в return, spring, one_evening, window_end: 0.35 + 0.65·home); по умолчанию 0.5"
+      "means": "the play's key: how warm and alive the house is after his return (the fire and the lamps in return, spring, one_evening, window_end: 0.35 + 0.65·home); 0.5 by default"
     },
     "leave": {
       "type": "string",
-      "means": "ключ партии: как Грей ушёл — farewell (простился с матерью) или note (оставил записку); читает кусок return"
+      "means": "the play's key: how Gray left — farewell (he said goodbye to his mother) or note (he left a note); read by the beat return"
     },
     "grey_pulls": {
       "range": [
         0,
         1
       ],
-      "means": "мальчик тянет лестницу: пока 1, лестница идёт за ним (ladder — по тому, где он); ставит кусок boy"
+      "means": "the boy pulls the ladder: while 1, the ladder follows him (ladder — by where he is); set by the beat boy"
     },
     "gr_a": {
       "type": "number",
       "smooth": true,
-      "means": "где Грей поперёк, м"
+      "means": "where Gray is across, m"
     },
     "gr_d": {
       "type": "number",
       "smooth": true,
-      "means": "где Грей вглубь, м"
+      "means": "where Gray is in depth, m"
     },
     "gr_e": {
       "type": "number",
       "smooth": true,
-      "means": "на какой высоте стоит Грей (ступенька лестницы), м"
+      "means": "at what height Gray stands (a rung of the ladder), m"
     },
     "li_a": {
       "type": "number",
       "smooth": true,
-      "means": "где мать поперёк, м"
+      "means": "where the mother is across, m"
     },
     "li_d": {
       "type": "number",
       "smooth": true,
-      "means": "где мать вглубь, м"
+      "means": "where the mother is in depth, m"
     },
     "day": {
       "range": [
@@ -459,7 +459,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес дневного света — держит скрипт (nebo) по hour"
+      "means": "internal: the weight of daylight — kept by the script (nebo) by hour"
     },
     "dawn": {
       "range": [
@@ -467,7 +467,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес рассвета — держит скрипт по hour"
+      "means": "internal: the weight of dawn — kept by the script by hour"
     },
     "dusk": {
       "range": [
@@ -475,7 +475,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес заката — держит скрипт по hour"
+      "means": "internal: the weight of sunset — kept by the script by hour"
     },
     "night": {
       "range": [
@@ -483,7 +483,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес ночи — держит скрипт по hour"
+      "means": "internal: the weight of night — kept by the script by hour"
     },
     "sun_light": {
       "range": [
@@ -491,7 +491,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: сколько светит солнце — держит скрипт по hour"
+      "means": "internal: how much the sun shines — kept by the script by hour"
     },
     "moon_light": {
       "range": [
@@ -499,23 +499,23 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: сколько светит луна — держит скрипт по hour"
+      "means": "internal: how much the moon shines — kept by the script by hour"
     },
     "ladder_across": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: где лестница поперёк, м — держит скрипт по ladder"
+      "means": "internal: where the ladder is across, m — kept by the script by ladder"
     },
     "door_facing": {
       "type": "number",
       "smooth": true,
-      "means": "служебный: поворот двери матери, градусы (270 закрыта) — держит скрипт по door"
+      "means": "internal: the turn of the mother's door, degrees (270 shut) — kept by the script by door"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true,
       "uniforms": {
         "tr": 0.42,
@@ -551,7 +551,7 @@
     },
     {
       "id": "sea",
-      "name": "Море за парком",
+      "name": "Sea beyond the park",
       "plane": true,
       "across": -2600,
       "distance": 2000,
@@ -567,7 +567,7 @@
     },
     {
       "id": "park",
-      "name": "Парк",
+      "name": "Park",
       "plane": true,
       "across": -44,
       "distance": 20,
@@ -577,7 +577,7 @@
     },
     {
       "id": "trees",
-      "name": "Деревья парка",
+      "name": "Trees of the park",
       "across": -30,
       "distance": 20,
       "elevation": -1.2,
@@ -598,7 +598,7 @@
     },
     {
       "id": "floor",
-      "name": "Пол",
+      "name": "Floor",
       "plane": true,
       "across": 0.25,
       "distance": 3.75,
@@ -614,7 +614,7 @@
     },
     {
       "id": "ceiling",
-      "name": "Потолок",
+      "name": "Ceiling",
       "plane": true,
       "across": 0.25,
       "distance": 3.75,
@@ -626,7 +626,7 @@
     },
     {
       "id": "wall_left",
-      "name": "Стена с окнами",
+      "name": "Wall with windows",
       "across": -4,
       "distance": 3.75,
       "facing": 90,
@@ -641,7 +641,7 @@
     },
     {
       "id": "jamb1",
-      "name": "Откос ближнего окна, дальний",
+      "name": "Near window's reveal, far",
       "across": -4.22,
       "distance": 3.4,
       "facing": 180,
@@ -657,7 +657,7 @@
     },
     {
       "id": "jamb1n",
-      "name": "Откос ближнего окна, ближний",
+      "name": "Near window's reveal, near",
       "across": -4.22,
       "distance": 2,
       "facing": 0,
@@ -673,7 +673,7 @@
     },
     {
       "id": "jamb2",
-      "name": "Откос дальнего окна, дальний",
+      "name": "Far window's reveal, far",
       "across": -4.22,
       "distance": 6.4,
       "facing": 180,
@@ -689,7 +689,7 @@
     },
     {
       "id": "jamb2n",
-      "name": "Откос дальнего окна, ближний",
+      "name": "Far window's reveal, near",
       "across": -4.22,
       "distance": 5,
       "facing": 0,
@@ -705,7 +705,7 @@
     },
     {
       "id": "sills",
-      "name": "Подоконники",
+      "name": "Windowsills",
       "plane": true,
       "across": -4.22,
       "distance": 4.2,
@@ -716,7 +716,7 @@
     },
     {
       "id": "soffits",
-      "name": "Своды окон",
+      "name": "Window vaults",
       "plane": true,
       "across": -4.22,
       "distance": 4.2,
@@ -728,7 +728,7 @@
     },
     {
       "id": "glass1",
-      "name": "Стекло ближнего окна",
+      "name": "Near window's glass",
       "across": -4.43,
       "distance": 2.7,
       "facing": 90,
@@ -751,7 +751,7 @@
     },
     {
       "id": "glass2",
-      "name": "Стекло дальнего окна",
+      "name": "Far window's glass",
       "across": -4.43,
       "distance": 5.7,
       "facing": 90,
@@ -774,7 +774,7 @@
     },
     {
       "id": "windows",
-      "name": "Окна",
+      "name": "Windows",
       "across": -4.42,
       "distance": 3.75,
       "facing": 90,
@@ -798,7 +798,7 @@
     },
     {
       "id": "wall_back",
-      "name": "Стена с камином",
+      "name": "Wall with the fireplace",
       "across": 0.25,
       "distance": 9,
       "facing": 180,
@@ -813,7 +813,7 @@
     },
     {
       "id": "wall_right",
-      "name": "Стена с дверью",
+      "name": "Wall with the door",
       "across": 4.5,
       "distance": 3.75,
       "facing": 270,
@@ -837,7 +837,7 @@
     },
     {
       "id": "wall_front",
-      "name": "Стена за спиной",
+      "name": "Wall behind",
       "across": 0.25,
       "distance": -1.5,
       "facing": 0,
@@ -852,7 +852,7 @@
     },
     {
       "id": "hearth",
-      "name": "Камин",
+      "name": "Fireplace",
       "across": 0.25,
       "distance": 8.97,
       "facing": 180,
@@ -876,7 +876,7 @@
     },
     {
       "id": "mantel",
-      "name": "Полка камина",
+      "name": "Mantelpiece",
       "plane": true,
       "across": 0.25,
       "distance": 8.85,
@@ -887,7 +887,7 @@
     },
     {
       "id": "hearth_floor",
-      "name": "Плита у камина",
+      "name": "Hearthstone",
       "plane": true,
       "across": 0.25,
       "distance": 8.6,
@@ -899,7 +899,7 @@
     },
     {
       "id": "firebox",
-      "name": "Топка",
+      "name": "Firebox",
       "across": 0.25,
       "distance": 9.5,
       "facing": 180,
@@ -917,7 +917,7 @@
     },
     {
       "id": "firebox_left",
-      "name": "Топка слева",
+      "name": "Firebox, left",
       "across": -0.5,
       "distance": 9.25,
       "facing": 90,
@@ -932,7 +932,7 @@
     },
     {
       "id": "firebox_right",
-      "name": "Топка справа",
+      "name": "Firebox, right",
       "across": 1,
       "distance": 9.25,
       "facing": 270,
@@ -947,7 +947,7 @@
     },
     {
       "id": "firebox_floor",
-      "name": "Под топки",
+      "name": "Firebox floor",
       "plane": true,
       "across": 0.25,
       "distance": 9.25,
@@ -959,7 +959,7 @@
     },
     {
       "id": "firebox_top",
-      "name": "Свод топки",
+      "name": "Firebox vault",
       "plane": true,
       "across": 0.25,
       "distance": 9.25,
@@ -971,7 +971,7 @@
     },
     {
       "id": "fire",
-      "name": "Огонь в камине",
+      "name": "Fire in the fireplace",
       "across": 0.25,
       "distance": 9.3,
       "elevation": 0.15,
@@ -989,7 +989,7 @@
     },
     {
       "id": "flames",
-      "name": "Пламя",
+      "name": "Flames",
       "across": 0.25,
       "distance": 9.3,
       "elevation": 0.24,
@@ -1005,7 +1005,7 @@
     },
     {
       "id": "fire_embers",
-      "name": "Искры",
+      "name": "Sparks",
       "across": 0.25,
       "distance": 9.3,
       "elevation": 0.3,
@@ -1021,7 +1021,7 @@
     },
     {
       "id": "crucifix",
-      "name": "Картина с распятием",
+      "name": "Picture of the crucifixion",
       "across": -2.45,
       "distance": 8.97,
       "facing": 180,
@@ -1037,7 +1037,7 @@
     },
     {
       "id": "lamp_cross",
-      "name": "Лампа над распятием",
+      "name": "Lamp over the crucifixion",
       "across": -2.45,
       "distance": 8.82,
       "elevation": 4.68,
@@ -1052,7 +1052,7 @@
     },
     {
       "id": "ship_painting",
-      "name": "Картина с кораблём",
+      "name": "Picture of the ship",
       "across": 2.95,
       "distance": 8.97,
       "facing": 180,
@@ -1071,7 +1071,7 @@
     },
     {
       "id": "lamp_ship",
-      "name": "Лампа над кораблём",
+      "name": "Lamp over the ship",
       "across": 2.95,
       "distance": 8.82,
       "elevation": 2.94,
@@ -1086,7 +1086,7 @@
     },
     {
       "id": "ladder",
-      "name": "Лестница",
+      "name": "Ladder",
       "across": -3.55,
       "distance": 8.48,
       "facing": 180,
@@ -1114,7 +1114,7 @@
     },
     {
       "id": "armchair",
-      "name": "Кресло отца",
+      "name": "Father's armchair",
       "unseen": true,
       "across": 2.15,
       "distance": 7.05,
@@ -1122,7 +1122,7 @@
     },
     {
       "id": "chair_back",
-      "name": "Кресло отца, спинка",
+      "name": "Father's armchair, back",
       "on": "armchair",
       "distance": 0.34,
       "facing": 0,
@@ -1145,7 +1145,7 @@
     },
     {
       "id": "chair_side",
-      "name": "Кресло отца, правый бок",
+      "name": "Father's armchair, right side",
       "on": "armchair",
       "across": 0.44,
       "facing": 90,
@@ -1168,7 +1168,7 @@
     },
     {
       "id": "chair_side_l",
-      "name": "Кресло отца, левый бок",
+      "name": "Father's armchair, left side",
       "on": "armchair",
       "across": -0.44,
       "facing": 270,
@@ -1191,7 +1191,7 @@
     },
     {
       "id": "chair_seat",
-      "name": "Кресло отца, сиденье",
+      "name": "Father's armchair, seat",
       "plane": true,
       "on": "armchair",
       "elevation": 0.44,
@@ -1201,7 +1201,7 @@
     },
     {
       "id": "coat",
-      "name": "Сюртук на кресле",
+      "name": "Coat on the armchair",
       "on": "armchair",
       "distance": 0.36,
       "facing": 0,
@@ -1216,7 +1216,7 @@
     },
     {
       "id": "floor_lamp",
-      "name": "Торшер",
+      "name": "Floor lamp",
       "across": 3.25,
       "distance": 7.75,
       "height": 1.62,
@@ -1242,7 +1242,7 @@
     },
     {
       "id": "table_top",
-      "name": "Стол",
+      "name": "Table",
       "plane": true,
       "across": -2.35,
       "distance": 5,
@@ -1261,7 +1261,7 @@
     },
     {
       "id": "table_edge",
-      "name": "Стол, край",
+      "name": "Table, edge",
       "across": -1.825,
       "distance": 5,
       "facing": 90,
@@ -1276,7 +1276,7 @@
     },
     {
       "id": "table_end",
-      "name": "Стол, торец",
+      "name": "Table, end",
       "across": -2.35,
       "distance": 3.7,
       "facing": 180,
@@ -1291,7 +1291,7 @@
     },
     {
       "id": "table_leg",
-      "name": "Стол, ближняя опора",
+      "name": "Table, near support",
       "across": -2.35,
       "distance": 3.95,
       "facing": 180,
@@ -1314,7 +1314,7 @@
     },
     {
       "id": "table_leg_far",
-      "name": "Стол, дальняя опора",
+      "name": "Table, far support",
       "across": -2.35,
       "distance": 6.05,
       "facing": 180,
@@ -1329,7 +1329,7 @@
     },
     {
       "id": "note",
-      "name": "Записка",
+      "name": "Note",
       "plane": true,
       "across": -2.23,
       "distance": 4.45,
@@ -1340,7 +1340,7 @@
     },
     {
       "id": "table",
-      "name": "Узел и записка",
+      "name": "Bundle and note",
       "across": -2.3,
       "distance": 4.65,
       "elevation": 0.76,
@@ -1355,7 +1355,7 @@
     },
     {
       "id": "candlesticks",
-      "name": "Подсвечники",
+      "name": "Candlesticks",
       "across": -2.35,
       "distance": 5.35,
       "elevation": 0.76,
@@ -1370,7 +1370,7 @@
     },
     {
       "id": "candles",
-      "name": "Свечи",
+      "name": "Candles",
       "across": -2.35,
       "distance": 5.35,
       "elevation": 0.76,
@@ -1388,7 +1388,7 @@
     },
     {
       "id": "chair_near",
-      "name": "Стул у стола",
+      "name": "Chair by the table",
       "across": -2.35,
       "distance": 3.35,
       "facing": 180,
@@ -1411,7 +1411,7 @@
     },
     {
       "id": "chair_near_seat",
-      "name": "Стул у стола, сиденье",
+      "name": "Chair by the table, seat",
       "plane": true,
       "across": -2.35,
       "distance": 3.57,
@@ -1422,7 +1422,7 @@
     },
     {
       "id": "chair_near_legs",
-      "name": "Стул у стола, передние ножки",
+      "name": "Chair by the table, front legs",
       "across": -2.35,
       "distance": 3.79,
       "facing": 180,
@@ -1437,7 +1437,7 @@
     },
     {
       "id": "chair_far",
-      "name": "Стул напротив",
+      "name": "Chair opposite",
       "across": -2.35,
       "distance": 6.65,
       "facing": 180,
@@ -1460,7 +1460,7 @@
     },
     {
       "id": "chair_far_seat",
-      "name": "Стул напротив, сиденье",
+      "name": "Chair opposite, seat",
       "plane": true,
       "across": -2.35,
       "distance": 6.43,
@@ -1471,7 +1471,7 @@
     },
     {
       "id": "chair_far_legs",
-      "name": "Стул напротив, передние ножки",
+      "name": "Chair opposite, front legs",
       "across": -2.35,
       "distance": 6.21,
       "facing": 180,
@@ -1486,7 +1486,7 @@
     },
     {
       "id": "shelves",
-      "name": "Книги",
+      "name": "Books",
       "across": 4.15,
       "distance": 3.75,
       "facing": 270,
@@ -1501,7 +1501,7 @@
     },
     {
       "id": "shelves_side",
-      "name": "Книги у двери",
+      "name": "Books by the door",
       "across": 4.325,
       "distance": 6.35,
       "facing": 180,
@@ -1516,7 +1516,7 @@
     },
     {
       "id": "shelves_lintel",
-      "name": "Книги над дверью, низ",
+      "name": "Books over the door, bottom",
       "plane": true,
       "across": 4.325,
       "distance": 5.7,
@@ -1528,7 +1528,7 @@
     },
     {
       "id": "mother_door",
-      "name": "Дверь матери",
+      "name": "Mother's door",
       "across": 4.5,
       "distance": 6.3,
       "facing": 270,
@@ -1555,7 +1555,7 @@
     },
     {
       "id": "mother_floor",
-      "name": "Пол у матери",
+      "name": "Mother's floor",
       "plane": true,
       "across": 6.25,
       "distance": 5.7,
@@ -1566,7 +1566,7 @@
     },
     {
       "id": "mother_ceiling",
-      "name": "Потолок у матери",
+      "name": "Mother's ceiling",
       "plane": true,
       "across": 6.25,
       "distance": 5.7,
@@ -1578,7 +1578,7 @@
     },
     {
       "id": "mother_wall",
-      "name": "Стена у матери",
+      "name": "Mother's wall",
       "across": 8,
       "distance": 5.7,
       "facing": 270,
@@ -1593,7 +1593,7 @@
     },
     {
       "id": "mother_wall_far",
-      "name": "Стена у матери, дальняя",
+      "name": "Mother's wall, far",
       "across": 6.25,
       "distance": 8,
       "facing": 180,
@@ -1608,7 +1608,7 @@
     },
     {
       "id": "grey",
-      "name": "Грей",
+      "name": "Gray",
       "person": {
         "cast": "cast",
         "who": "grey_boy",
@@ -1631,7 +1631,7 @@
     },
     {
       "id": "lilian",
-      "name": "Мать, Лилиан Грей",
+      "name": "Mother, Lilian Gray",
       "person": {
         "cast": "cast",
         "who": "lilian",
@@ -1653,7 +1653,7 @@
     },
     {
       "id": "dust",
-      "name": "Пыль в лучах",
+      "name": "Dust in the beams",
       "across": -1.2,
       "distance": 4.2,
       "elevation": 2.6,
@@ -1674,17 +1674,17 @@
     },
     {
       "id": "canvas",
-      "name": "Холст крупно",
+      "name": "Canvas, close up",
       "insert": "canvas"
     },
     {
       "id": "hands",
-      "name": "Руки крупно",
+      "name": "Hands, close up",
       "insert": "hands"
     },
     {
       "id": "card",
-      "name": "Бочка крупно",
+      "name": "Cask, close up",
       "insert": "card"
     }
   ],

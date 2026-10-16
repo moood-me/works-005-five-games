@@ -1,4 +1,4 @@
-// «Берег Каперны» — the shore: where the sun and the moon stand on its sky, where the ship is as she comes in, the
+// «The Kaperna Shore» — the shore: where the sun and the moon stand on its sky, where the ship is as she comes in, the
 // land's shape (the relief reads it), what its elements paint and move with, and its film (film(scene): the world's
 // module beats). Everything is painted once, in daylight colours: the hour is the world's sky (kit.nebo) and the
 // scene's light (light.looks); what moves is moved by layers, animates and the engine (notes.md).
@@ -682,7 +682,7 @@ function boat(g, len, h) {
 // ── The film (the world's module beats), for the game and the showcase ── (the beats and what a game does with them:
 // notes.md, docs/alye-parusa/scenes.md). The people are the engine's (the world's cast): Assol (a girl of eight;
 // seventeen — her look `assol_wear`), the Kaperna children (a boy, an older girl, a little one), the little girl of
-// chapter IV and her mother, Longren (in the past — his look `longren_young`); Grey, Hin Menners, Philip the collier;
+// chapter IV and her mother, Longren (in the past — his look `longren_young`); Gray, Hin Menners, Philip the collier;
 // Mary and Menners the elder (the past); two more women and two fishermen of Kaperna; Letika at the oars of "Secret"'s
 // skiff. Each one's keys: <id>_do, <id>_turn (degrees: 0 away from us, 90 to the right —
 // the sea, 180 toward us, 270 to the left — Kaperna), <id>_look, <id>_reach, <id>_with, <id>_on, <id>_here — and
@@ -728,14 +728,14 @@ const held = (scene, ...parts) => [...parts, ...(scene.get("ring") === "finger" 
 const TAVERN_CAM = { camera_x: 17.3, camera_z: 132.3, camera_yaw: 0 };
 const SEAT = tv(6.3, -1.7, 0.95); // the bench behind the table at the rail: its seat (over the land there)
 const AT_TABLE = tv(4.9, -1.9); // Hin standing by the table
-const AT_RAIL = tv(2.5, -2.3); // Grey risen, at the rail by the veranda's left end
+const AT_RAIL = tv(2.5, -2.3); // Gray risen, at the rail by the veranda's left end
 const DOORWAY = tv(3.05, 0.45); // in the doorway, within the threshold
 const AT_DOOR = tv(2.4, -1.0); // on the veranda before the door, by its left jamb: seen whole between the posts at the steps, clear of who stands in the doorway
 const CART = [12.7, 138.7, 1.0]; // Philip's cart on the road left of the veranda
 const AT_CART = [13.9, 137.9];
 const BY_VERANDA = [14.9, 137.6]; // … and where he steps to, toward the veranda
 const ALONG_ROAD = 135.7; // who passes the veranda goes along the road here, clear of the foot of its steps (they reach 136)
-// chapter III, by the water: Longren's boat (boat2), the coil of net on its keel; where Grey stands at the water
+// chapter III, by the water: Longren's boat (boat2), the coil of net on its keel; where Gray stands at the water
 const NET = [-16.9, 16.9];
 const AT_NET = [-16.5, 16.45];
 const MEETS = [-14.9, 16.3];
@@ -791,7 +791,7 @@ const WAY_CAM = [-2, 0.4, -6];
 const EDGE_CAM = [-1.6, 1.4, -2];
 const WADE_CAM = [0.3, 3.4, 8];
 const WIDE_CAM = [-2, 0.4, -2];
-// in the skiff (inSkiff, above): a seat — the aft thwart 0.9, the stern sheets 1.9; where Grey's hand is held out to
+// in the skiff (inSkiff, above): a seat — the aft thwart 0.9, the stern sheets 1.9; where Gray's hand is held out to
 // her over the stern; the camera of the two of them, from the shore's side, the ship over them
 const seat = (a) => ({ on: "skiff", at: [a, BEAM, 0.5] });
 const OFFERED = { on: "skiff", at: [2.3, BEAM, 1.05] };
@@ -800,7 +800,7 @@ const TWO_CAM = [...inSkiff(1.55, BEAM - 2), WAY];
 const put = (s, values) => Object.entries(values).forEach(([key, value]) => s.set(key, value));
 
 function film(scene) {
-  // an evening at the tavern (chapter III): the lantern lit; Grey at the table by the rail, Hin standing by him, his
+  // an evening at the tavern (chapter III): the lantern lit; Gray at the table by the rail, Hin standing by him, his
   // hands on his hips; Philip by his cart; two women by the nets; Assol (seventeen, her basket on her arm) not come
   // yet — off to the right along the road
   const TAVERN_EVENING = () => shore(0.76, {
@@ -813,7 +813,7 @@ function film(scene) {
   });
   // … Philip stepped toward the veranda (the game's touch)
   const ASKED = () => ({ ...TAVERN_EVENING(), ...at("filipp", BY_VERANDA), filipp_look: "grey", grey_look: "filipp" });
-  // … from behind Grey, risen and standing at the rail: along the road, over his shoulder, she goes away
+  // … from behind Gray, risen and standing at the rail: along the road, over his shoulder, she goes away
   const BEHIND_GREY = () => ({
     ...ASKED(), camera_x: 18.8, camera_z: 138.5, camera_h: 0.55, camera_yaw: -90,
     ...at("grey", AT_RAIL), grey_on: null, grey_do: "stand", grey_turn: 270, grey_look: "assol",
@@ -836,7 +836,7 @@ function film(scene) {
     longren_turn: 70, longren_look: "menners",
     ...at("menners", mennersAt(0)), menners_on: "menners_skiff#skiff", menners_turn: 200, menners_do: loop("wave_help"),
   });
-  // dusk by the water: Grey alone at the edge; "Secret"'s skiff drawn up on the sand; Longren by his boat with his
+  // dusk by the water: Gray alone at the edge; "Secret"'s skiff drawn up on the sand; Longren by his boat with his
   // pipe; his window lit on the slope
   const DUSK = () => shore(0.8, {
     mist: 0.15, windows: lit(scene), tavern_lamp: 1, skiff_ashore: 1, ...SHORE_CAM,
@@ -858,7 +858,7 @@ function film(scene) {
     ...at("longren", [-5.4, 7.9]), longren_turn: 300, longren_with: ["chest_shoulder"], longren_look: [-13, 14.6, 1.6],
   });
   // the night of waiting: Assol on the stone, arms round her knees, looking out to sea; the cape in mist, three lights
-  // on the horizon right of it (`light1`…`light3` 0: the game's «Ждать» looks into them); the camera turned to the sea —
+  // on the horizon right of it (`light1`…`light3` 0: the game's «Waiting» looks into them); the camera turned to the sea —
   // she at the left, Kaperna's windows behind her, the lights in the open right half; it stands back from the stone far
   // enough for the stone's foot to be in the frame (the frame's lower edge meets the sand 3.8 m before the eye)
   const NIGHT = () => shore(0.96, {
@@ -935,7 +935,7 @@ function film(scene) {
   });
   // … she comes down: the camera on her way (where all Kaperna waits it is on it already, and she stands at its head)
   const COMES_DOWN = () => ({ ...SAILS_SEEN(), ship: 0.62, ...cam(WAY_CAM), ...(ending() === "kaperna" && { assol_here: true }) });
-  // "Secret"'s skiff under way: Letika at the oars on the forward thwart, Grey standing in the stern
+  // "Secret"'s skiff under way: Letika at the oars on the forward thwart, Gray standing in the stern
   const CREW = () => ({
     letika_here: true, letika_turn: 90, letika_do: loop("seated"), letika_with: ["oars"],
     ...at("grey", SKIFF_MET), grey_on: "skiff_in#stern", grey_turn: 110, grey_look: "assol",
@@ -950,7 +950,7 @@ function film(scene) {
     ship: 1, boat: 0.8, ...cam(WADE_CAM), ...kaperna("waded"), ...CREW(),
     ...at("assol", IN_WATER), assol_turn: WAY, assol_look: "grey",
   });
-  // … she in the skiff: Grey on the aft thwart, she in the stern before him — the ring on its cord over her dress, if
+  // … she in the skiff: Gray on the aft thwart, she in the stern before him — the ring on its cord over her dress, if
   // she kept it so; Letika at his oars
   const ABOARD = () => ({
     ...CREW(), grey_on: seat(0.9), grey_turn: 90, grey_do: loop("seated"),
@@ -1120,7 +1120,7 @@ function film(scene) {
         await s.wait(0.6);
       },
     },
-    // tavern — chapter III, evening, the lantern lit, the tavern's camera: Grey at the table by the rail, Hin by him;
+    // tavern — chapter III, evening, the lantern lit, the tavern's camera: Gray at the table by the rail, Hin by him;
     // Philip by his cart. Hin nods aside, toward the slope where she lives (the game's lines on him)
     tavern: {
       from: TAVERN_EVENING,
@@ -1235,7 +1235,7 @@ function film(scene) {
         assol.here(false);
       },
     },
-    // grey_close — (close) from behind Grey (it makes its own cut: it follows passing in the game): he has risen and
+    // grey_close — (close) from behind Gray (it makes its own cut: it follows passing in the game): he has risen and
     // stands at the rail; over his shoulder the road and her small figure going away along it
     grey_close: {
       after: "passing",
@@ -1246,8 +1246,8 @@ function film(scene) {
         await s.person("assol").walk([[-13, ALONG_ROAD + 0.2]]);
       },
     },
-    // grey_shore — dusk, the scene's own camera: Grey alone at the water; the skiff on the sand; Longren by his boat;
-    // his window lit on the slope — Grey looks out to sea, then up at it (the game's choice: the skiff or Longren)
+    // grey_shore — dusk, the scene's own camera: Gray alone at the water; the skiff on the sand; Longren by his boat;
+    // his window lit on the slope — Gray looks out to sea, then up at it (the game's choice: the skiff or Longren)
     grey_shore: {
       from: DUSK,
       run: async (s) => {
@@ -1393,7 +1393,7 @@ function film(scene) {
       },
     },
     // wait — night: Assol on the stone at the water's edge, her arms round her knees, looking out to sea; three lights
-    // on the horizon, the cape in mist (the game's «Ждать»: it offers the lights — `light1#light`…, moves `light1`…
+    // on the horizon, the cape in mist (the game's «Waiting»: it offers the lights — `light1#light`…, moves `light1`…
     // `light3` — and puts out the windows of Kaperna, `windows`)
     wait: {
       from: NIGHT,
@@ -1401,7 +1401,7 @@ function film(scene) {
         await s.wait(3);
       },
     },
-    // wait_lights — the showcase's only (in a game it is «Ждать»): each light looked into in turn — it comes near and is
+    // wait_lights — the showcase's only (in a game it is «Waiting»): each light looked into in turn — it comes near and is
     // a fishing boat with a lantern, a steamer under her smoke, the lighthouse as the mist on the cape parts — and goes
     // off behind the cape; the windows of Kaperna go out by quarters
     wait_lights: {
@@ -1563,8 +1563,8 @@ function film(scene) {
         await s.wait(0.5);
       },
     },
-    // hands — the skiff comes up to her; Grey in its stern holds out his hand; a cut into the insert `hands` (the
-    // world's closeups, the shot "boat": his hand out of the skiff, hers on its way to it — the game's «Рука» moves
+    // hands — the skiff comes up to her; Gray in its stern holds out his hand; a cut into the insert `hands` (the
+    // world's closeups, the shot "boat": his hand out of the skiff, hers on its way to it — the game's «Hand» moves
     // `reach`)
     hands: {
       after: "shore",
@@ -1586,7 +1586,7 @@ function film(scene) {
         await s.wait(1);
       },
     },
-    // hands_reach — the showcase's only (in a game it is «Рука»): her hand goes to his
+    // hands_reach — the showcase's only (in a game it is «Hand»): her hand goes to his
     hands_reach: {
       after: "hands",
       run: async (s) => {

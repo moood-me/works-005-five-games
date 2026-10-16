@@ -1,7 +1,7 @@
-// «Лес у моря»'s own little film, outside games: first the wood by day — down the stream from pool to pool to its
+// «The Wood by the Sea»'s own little film, outside games: first the wood by day — down the stream from pool to pool to its
 // mouth —; then the hours at the mouth: the day going down to dusk and night, the fire lit on the cliff above; then
 // the film (lib.js film, in SHOWCASE's order): chapter I — the yacht put on the stream, the chase after it (what a
-// game's «За корабликом» drives, played here by itself after `chase`), Egl at the mouth and both his answers —, and
+// game's «After the little ship» drives, played here by itself after `chase`), Egle at the mouth and both his answers —, and
 // chapter III: the night fire, dawn in the mist, the sleeping girl, the ring, the morning — and both ways it ends.
 const L = scene.lib;
 const stream = {

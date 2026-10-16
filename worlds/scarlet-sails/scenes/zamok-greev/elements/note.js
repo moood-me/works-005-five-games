@@ -1,4 +1,4 @@
-// Grey's note on the table, seen from above: a folded sheet, a little askew (layer `sheet`, shown by `note`:
+// Gray's note on the table, seen from above: a folded sheet, a little askew (layer `sheet`, shown by `note`:
 // note.animate.js)
 e.layer("sheet", {}, (c) => {
   c.rotate(0.22);

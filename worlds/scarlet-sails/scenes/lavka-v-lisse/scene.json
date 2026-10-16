@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Лавка в Лиссе",
-  "caption": "Утро в лавке.",
+  "title": "A Shop in Liss",
+  "caption": "Morning in the shop.",
   "horizon": 0.42,
   "camera": {
     "mode": "picture"
@@ -162,7 +162,7 @@
   "states": {
     "beat": {
       "type": "string",
-      "means": "кусок фильма (модуль beats): toys_in, toys_again, silk_in, memory, silk, found, violin; кончился — сцена говорит beat:<имя>"
+      "means": "the film's beat (the beats module): toys_in, toys_again, silk_in, memory, silk, found, violin; once it has ended the scene tells beat:<name>"
     },
     "hour": {
       "range": [
@@ -170,14 +170,14 @@
         1
       ],
       "smooth": true,
-      "means": "время суток, как во всём мире; в лавке всегда утро, 0.4"
+      "means": "the hour, as in the whole world; in the shop it is always morning, 0.4"
     },
     "goods": {
       "values": [
         "toys",
         "silk"
       ],
-      "means": "чем торгуют: toys — игрушки на полках, silk — рулоны шёлка; ставится склейкой"
+      "means": "what is sold: toys — toys on the shelves, silk — rolls of silk; set by a cut"
     },
     "roll": {
       "values": [
@@ -190,7 +190,7 @@
         "raspberry",
         "carrot"
       ],
-      "means": "какой рулон у Грея в руках (вишнёвый, розовый, пунцовый, кирпичный, алый, малиновый, морковный); none — никакого; ставится разом"
+      "means": "which roll Gray has in his hands (cherry, rose, crimson, brick, scarlet, raspberry, carrot); none — none; set at once"
     },
     "roll_out": {
       "range": [
@@ -198,7 +198,7 @@
         1
       ],
       "smooth": true,
-      "means": "рулон развёрнут к окну: 0 — свёрнут, 1 — ткань спущена в луче"
+      "means": "the roll unrolled to the window: 0 — rolled up, 1 — the cloth let down in the beam"
     },
     "roll_at": {
       "values": [
@@ -207,7 +207,7 @@
         "counter",
         "grey"
       ],
-      "means": "где рулон: на подвесной полке, в руках торговца, на прилавке, в руках Грея; ставится разом"
+      "means": "where the roll is: on the hanging shelf, in the merchant's hands, on the counter, in Gray's hands; set at once"
     },
     "found": {
       "range": [
@@ -215,80 +215,80 @@
         1
       ],
       "smooth": true,
-      "means": "алый свет рулона лежит на руках и сюртуке Грея: 0 нет, 1 есть"
+      "means": "the scarlet light of the roll lies on Gray's hands and frock coat: 0 none, 1 there"
     },
     "violinist": {
       "values": [
         0,
         1
       ],
-      "means": "скрипач на улице за окном: 0 нет, 1 стоит и покачивается; ставится разом"
+      "means": "the violinist in the street outside the window: 0 none, 1 stands and sways; set at once"
     },
     "memory": {
       "values": [
         0,
         1
       ],
-      "means": "вставка: алый лоскут из главы I во весь кадр; ставится склейкой"
+      "means": "an insert: the scarlet scrap of chapter I filling the frame; set by a cut"
     },
     "basket": {
       "values": [
         0,
         1
       ],
-      "means": "корзина Ассоль стоит на прилавке: 0 нет, 1 стоит; ставится разом"
+      "means": "Assol's basket stands on the counter: 0 none, 1 stands; set at once"
     },
     "basket_d": {
       "type": "number",
-      "means": "служебный: где корзина на прилавке вглубь, м (торговец отодвигает её)"
+      "means": "internal: where the basket on the counter is in depth, m (the merchant pushes it away)"
     },
     "roll_a": {
       "type": "number",
-      "means": "служебный: где рулон поперёк, м; скрипт ставит по roll_at и по людям"
+      "means": "internal: where the roll is across, m; the script sets it by roll_at and by the people"
     },
     "roll_d": {
       "type": "number",
-      "means": "служебный: где рулон вглубь, м; скрипт ставит по roll_at и по людям"
+      "means": "internal: where the roll is in depth, m; the script sets it by roll_at and by the people"
     },
     "mer_a": {
       "type": "number",
-      "means": "служебный: где торговец поперёк, м"
+      "means": "internal: where the merchant is across, m"
     },
     "mer_d": {
       "type": "number",
-      "means": "служебный: где торговец вглубь, м"
+      "means": "internal: where the merchant is in depth, m"
     },
     "as_a": {
       "type": "number",
-      "means": "служебный: где Ассоль поперёк, м"
+      "means": "internal: where Assol is across, m"
     },
     "as_d": {
       "type": "number",
-      "means": "служебный: где Ассоль вглубь, м"
+      "means": "internal: where Assol is in depth, m"
     },
     "gr_a": {
       "type": "number",
-      "means": "служебный: где Грей поперёк, м"
+      "means": "internal: where Gray is across, m"
     },
     "gr_d": {
       "type": "number",
-      "means": "служебный: где Грей вглубь, м"
+      "means": "internal: where Gray is in depth, m"
     },
     "le_a": {
       "type": "number",
-      "means": "служебный: где Летика поперёк, м"
+      "means": "internal: where Letika is across, m"
     },
     "le_d": {
       "type": "number",
-      "means": "служебный: где Летика вглубь, м"
+      "means": "internal: where Letika is in depth, m"
     },
     "vi_a": {
       "type": "number",
-      "means": "служебный: где скрипач поперёк, м"
+      "means": "internal: where the violinist is across, m"
     },
     "vi_d": {
       "type": "number",
-      "means": "служебный: где скрипач вглубь, м"
+      "means": "internal: where the violinist is in depth, m"
     },
     "day": {
       "range": [
@@ -296,7 +296,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес дневного света, ведёт модуль nebo по hour"
+      "means": "internal: the weight of daylight, led by the nebo module by hour"
     },
     "dawn": {
       "range": [
@@ -304,7 +304,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес рассвета, ведёт модуль nebo по hour"
+      "means": "internal: the weight of dawn, led by the nebo module by hour"
     },
     "dusk": {
       "range": [
@@ -312,7 +312,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес заката, ведёт модуль nebo по hour"
+      "means": "internal: the weight of sunset, led by the nebo module by hour"
     },
     "night": {
       "range": [
@@ -320,7 +320,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес ночи, ведёт модуль nebo по hour"
+      "means": "internal: the weight of night, led by the nebo module by hour"
     },
     "sun_light": {
       "range": [
@@ -328,7 +328,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет солнца, ведёт модуль nebo по hour"
+      "means": "internal: the sunlight, led by the nebo module by hour"
     },
     "moon_light": {
       "range": [
@@ -336,7 +336,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: свет луны, ведёт модуль nebo по hour"
+      "means": "internal: the moonlight, led by the nebo module by hour"
     }
   },
   "music": {
@@ -414,7 +414,7 @@
   "objects": [
     {
       "id": "sky",
-      "name": "Небо над улицей",
+      "name": "Sky over the street",
       "sky": true,
       "uniforms": {
         "tr": 0.42,
@@ -450,7 +450,7 @@
     },
     {
       "id": "street",
-      "name": "Улица",
+      "name": "Street",
       "plane": true,
       "across": 0,
       "distance": 5,
@@ -460,7 +460,7 @@
     },
     {
       "id": "row_left",
-      "name": "Лавки через улицу, в окне",
+      "name": "Shops across the street, in the window",
       "across": -9,
       "distance": 5,
       "facing": 90,
@@ -474,7 +474,7 @@
     },
     {
       "id": "row_far",
-      "name": "Лавки через улицу, в двери",
+      "name": "Shops across the street, in the door",
       "across": 0,
       "distance": 14,
       "facing": 180,
@@ -488,7 +488,7 @@
     },
     {
       "id": "floor",
-      "name": "Пол",
+      "name": "Floor",
       "plane": true,
       "across": 0,
       "distance": 2.7,
@@ -498,7 +498,7 @@
     },
     {
       "id": "ceiling",
-      "name": "Потолок",
+      "name": "Ceiling",
       "plane": true,
       "across": 0,
       "distance": 2.7,
@@ -509,7 +509,7 @@
     },
     {
       "id": "wall_back",
-      "name": "Дальняя стена с дверью",
+      "name": "Far wall with the door",
       "across": 0,
       "distance": 6,
       "facing": 180,
@@ -524,7 +524,7 @@
     },
     {
       "id": "wall_left",
-      "name": "Левая стена с окном",
+      "name": "Left wall with the window",
       "across": -2.6,
       "distance": 2.7,
       "facing": 90,
@@ -539,7 +539,7 @@
     },
     {
       "id": "wall_right",
-      "name": "Правая стена",
+      "name": "Right wall",
       "across": 2.6,
       "distance": 2.7,
       "facing": 270,
@@ -554,7 +554,7 @@
     },
     {
       "id": "wall_front",
-      "name": "Стена за спиной",
+      "name": "Wall behind",
       "across": 0,
       "distance": -0.6,
       "facing": 0,
@@ -569,7 +569,7 @@
     },
     {
       "id": "window",
-      "name": "Окно на улицу",
+      "name": "Window to the street",
       "across": -2.58,
       "distance": 4.3,
       "facing": 90,
@@ -584,7 +584,7 @@
     },
     {
       "id": "opening",
-      "name": "Проём окна",
+      "name": "Window opening",
       "unseen": true,
       "across": -2.6,
       "distance": 4.3,
@@ -599,7 +599,7 @@
     },
     {
       "id": "doorway",
-      "name": "Проём двери",
+      "name": "Doorway",
       "unseen": true,
       "across": 2,
       "distance": 6,
@@ -614,7 +614,7 @@
     },
     {
       "id": "shelves",
-      "name": "Полки до потолка",
+      "name": "Shelves to the ceiling",
       "across": 0,
       "distance": 5.92,
       "facing": 180,
@@ -629,7 +629,7 @@
     },
     {
       "id": "rack",
-      "name": "Подвесная полка над прилавком",
+      "name": "Hanging shelf over the counter",
       "across": 0.2,
       "distance": 4.85,
       "facing": 180,
@@ -644,7 +644,7 @@
     },
     {
       "id": "counter",
-      "name": "Прилавок",
+      "name": "Counter",
       "across": 0.2,
       "distance": 4.45,
       "facing": 180,
@@ -666,7 +666,7 @@
     },
     {
       "id": "counter_top",
-      "name": "Прилавок сверху",
+      "name": "Counter top",
       "plane": true,
       "across": 0.2,
       "distance": 4.75,
@@ -677,7 +677,7 @@
     },
     {
       "id": "basket",
-      "name": "Корзина с игрушками",
+      "name": "Basket of toys",
       "across": -0.1,
       "distance": 4.75,
       "elevation": 0.95,
@@ -696,7 +696,7 @@
     },
     {
       "id": "roll",
-      "name": "Рулон шёлка",
+      "name": "Roll of silk",
       "across": 0.4,
       "distance": 4.62,
       "facing": 180,
@@ -716,7 +716,7 @@
     },
     {
       "id": "merchant",
-      "name": "Торговец",
+      "name": "Merchant",
       "person": {
         "cast": "cast",
         "who": "merchant",
@@ -734,7 +734,7 @@
     },
     {
       "id": "assol",
-      "name": "Ассоль",
+      "name": "Assol",
       "person": {
         "cast": "cast",
         "who": "assol_child",
@@ -752,7 +752,7 @@
     },
     {
       "id": "grey",
-      "name": "Грей",
+      "name": "Gray",
       "person": {
         "cast": "cast",
         "who": "grey",
@@ -770,7 +770,7 @@
     },
     {
       "id": "letika",
-      "name": "Летика",
+      "name": "Letika",
       "person": {
         "cast": "cast",
         "who": "letika",
@@ -788,7 +788,7 @@
     },
     {
       "id": "violinist",
-      "name": "Скрипач на улице",
+      "name": "Violinist in the street",
       "person": {
         "cast": "cast",
         "who": "zimmer",
@@ -805,7 +805,7 @@
     },
     {
       "id": "motes",
-      "name": "Пылинки в луче",
+      "name": "Motes in the beam",
       "inside": true,
       "particles": {
         "kind": "dust",
@@ -828,7 +828,7 @@
     },
     {
       "id": "memory",
-      "name": "Воспоминание: алый лоскут",
+      "name": "Memory: the scarlet scrap",
       "insert": "memory"
     }
   ]

@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Deck","translation":"Палуба","where":"scenes/paluba/scene.json title"},
+  {"text":"Course — straight ahead.","translation":"Курс — прямо.","where":"scenes/paluba/scene.json caption"}
+]}

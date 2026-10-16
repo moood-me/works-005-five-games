@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Лес у моря",
-  "caption": "Ручей бежит к морю.",
+  "title": "The Wood by the Sea",
+  "caption": "A stream runs to the sea.",
   "horizon": 0.45,
   "camera": {
     "mode": "walk",
@@ -158,7 +158,7 @@
         1
       ],
       "smooth": true,
-      "means": "время суток по кругу, как во всём мире: 0 полночь, 0.25 рассвет (солнце встаёт над морем впереди), 0.5 полдень (по умолчанию), 0.75 закат; ночью луна над морем"
+      "means": "the hour, round the clock, as in the whole world: 0 midnight, 0.25 dawn (the sun rises over the sea ahead), 0.5 noon (by default), 0.75 sunset; at night the moon over the sea"
     },
     "mist": {
       "range": [
@@ -166,7 +166,7 @@
         1
       ],
       "smooth": true,
-      "means": "туман: 0 — ясно, 1 — устье, бухта и даль в тумане (рассвет в тумане)"
+      "means": "mist: 0 — clear, 1 — the mouth, the bay and the distance in mist (a misty dawn)"
     },
     "fire": {
       "range": [
@@ -174,7 +174,7 @@
         1
       ],
       "smooth": true,
-      "means": "костёр Грея на поляне у края обрыва: 0 нет, 1 горит — свет на поляне и обрыве"
+      "means": "Gray's fire on the glade by the cliff's edge: 0 none, 1 burning — light on the glade and the cliff"
     },
     "day": {
       "range": [
@@ -182,7 +182,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес дневного света, скрипт ставит по hour"
+      "means": "internal: the weight of daylight, the script sets it by hour"
     },
     "dawn": {
       "range": [
@@ -190,7 +190,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес рассвета, скрипт ставит по hour"
+      "means": "internal: the weight of dawn, the script sets it by hour"
     },
     "dusk": {
       "range": [
@@ -198,7 +198,7 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес заката, скрипт ставит по hour"
+      "means": "internal: the weight of sunset, the script sets it by hour"
     },
     "night": {
       "range": [
@@ -206,15 +206,15 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: вес ночи, скрипт ставит по hour"
+      "means": "internal: the weight of night, the script sets it by hour"
     },
     "sun_bearing": {
       "type": "number",
-      "means": "служебный: где солнце, градусы вправо от взгляда (0 — над морем впереди); скрипт ставит по hour"
+      "means": "internal: where the sun is, degrees to the right of the gaze (0 — over the sea ahead); the script sets it by hour"
     },
     "sun_height": {
       "type": "number",
-      "means": "служебный: высота солнца, градусы; скрипт ставит по hour"
+      "means": "internal: the sun's height, degrees; the script sets it by hour"
     },
     "sun_light": {
       "range": [
@@ -222,15 +222,15 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: сколько светит солнце; скрипт ставит по hour"
+      "means": "internal: how much the sun shines; the script sets it by hour"
     },
     "moon_bearing": {
       "type": "number",
-      "means": "служебный: где луна, градусы вправо от взгляда; скрипт ставит по hour"
+      "means": "internal: where the moon is, degrees to the right of the gaze; the script sets it by hour"
     },
     "moon_height": {
       "type": "number",
-      "means": "служебный: высота луны, градусы; скрипт ставит по hour"
+      "means": "internal: the moon's height, degrees; the script sets it by hour"
     },
     "moon_light": {
       "range": [
@@ -238,11 +238,11 @@
         1
       ],
       "smooth": true,
-      "means": "служебный: сколько светит луна; скрипт ставит по hour"
+      "means": "internal: how much the moon shines; the script sets it by hour"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма (модуль beats): launch, chase, mouth, egl, assol_close, egl_hold, egl_when, egl_how, egl_goes, fire, dawn_walk, sleeping, ring, ring_on, leave, wake, wake_hold, wear, hide; по концу сцена говорит beat:<имя>"
+      "means": "the film's beat (the beats module): launch, chase, mouth, egl, assol_close, egl_hold, egl_when, egl_how, egl_goes, fire, dawn_walk, sleeping, ring, ring_on, leave, wake, wake_hold, wear, hide; at its end the scene tells beat:<name>"
     },
     "ring": {
       "values": [
@@ -251,7 +251,7 @@
         "finger",
         "cord"
       ],
-      "means": "где кольцо: none — его нет, grey — в пальцах Грея, finger — на пальце Ассоль, cord — у неё на шнурке под платьем; у кого оно, у того часть каста — ring или ring_old по ring_kind"
+      "means": "where the ring is: none — there is none, grey — in Gray's fingers, finger — on Assol's finger, cord — on a cord under her dress; whoever has it has the cast's part — ring or ring_old by ring_kind"
     },
     "ring_at": {
       "range": [
@@ -259,7 +259,7 @@
         1
       ],
       "smooth": true,
-      "means": "«Кольцо»: рука Грея с кольцом на пути к пальцу спящей (пока ring = grey): от 0.4 рука тянется к её руке, 1 — кольцо у неё на пальце (ring становится finger)"
+      "means": "“The ring”: Gray's hand with the ring on its way to the sleeping girl's finger (while ring = grey): from 0.4 the hand reaches for her hand, 1 — the ring is on her finger (ring becomes finger)"
     },
     "stir": {
       "range": [
@@ -267,35 +267,35 @@
         1
       ],
       "smooth": true,
-      "means": "«Кольцо»: она шевелится во сне (голова поворачивается к нему), от 0.5"
+      "means": "“The ring”: she stirs in her sleep (her head turns to him), from 0.5"
     },
     "ring_kind": {
       "values": [
         "mother",
         "own"
       ],
-      "means": "ключ партии (ставит игра, куски только читают): какое кольцо — mother (кольцо матери, часть каста ring) или own (его старинное, ring_old); по умолчанию own"
+      "means": "the play's key (set by the game, the beats only read it): which ring — mother (his mother's ring, the cast's part ring) or own (his old one, ring_old); own by default"
     },
     "run": {
       "range": [
         0,
         1
       ],
-      "means": "«За корабликом» (ставит игра): докуда Ассоль бежать по берегу ручья — 0 где яхту спустили, 1 устье; она бежит туда своим бегом; перед корягой, через которую её не пустили, встаёт (сцена говорит chase:snag) — отпустили и держат снова: бежит дальше"
+      "means": "“After the little ship” (set by the game): how far Assol is to run along the stream's bank — 0 where the yacht was let down, 1 the mouth; she runs there at her own run; before a snag she was not let past she stops (the scene tells chase:snag) — let go and held again: she runs on"
     },
     "run_at": {
       "range": [
         0,
         1
       ],
-      "means": "«За корабликом» (ставит сцена, разом, пока она бежит): где Ассоль сейчас вдоль ручья"
+      "means": "“After the little ship” (set by the scene, at once, while she runs): where Assol is now along the stream"
     },
     "jump": {
       "range": [
         0,
         1
       ],
-      "means": "«За корабликом» (ставит игра: 1, через 0.3 с 0): нажатие вовремя — перед корягой или у неё: Ассоль перебегает её, не сбивая бега (прыжка нет)"
+      "means": "“After the little ship” (set by the game: 1, after 0.3 s 0): a press in time — before the snag or at it: Assol runs across it without breaking her run (there is no jump)"
     },
     "toy": {
       "range": [
@@ -303,21 +303,21 @@
         1
       ],
       "smooth": true,
-      "means": "«За корабликом» (ставит игра): где яхта на ручье — 0 где её спустили, 1 устье"
+      "means": "“After the little ship” (set by the game): where the yacht is on the stream — 0 where it was let down, 1 the mouth"
     },
     "reeds": {
       "values": [
         0,
         1
       ],
-      "means": "«За корабликом» (ставит игра): 1 — яхта застряла, перед ней стебли камыша"
+      "means": "“After the little ship” (set by the game): 1 — the yacht is stuck, reed stems before it"
     },
     "toy_water": {
       "values": [
         0,
         1
       ],
-      "means": "яхта на воде ручья (элемент toy): 1 — есть; ставят куски"
+      "means": "the yacht on the stream's water (the element toy): 1 — there; set by the beats"
     },
     "toy_out": {
       "range": [
@@ -325,57 +325,57 @@
         1
       ],
       "smooth": true,
-      "means": "яхта от берега, где её опустили (0), до середины течения (1); ведёт кусок launch"
+      "means": "the yacht from the bank where it was let down (0) to the middle of the current (1); led by the beat launch"
     },
     "toy_a": {
       "type": "number",
-      "means": "служебный: где яхта поперёк, м; скрипт ставит по toy"
+      "means": "internal: where the yacht is across, m; the script sets it by toy"
     },
     "toy_d": {
       "type": "number",
-      "means": "служебный: где яхта вглубь, м; скрипт ставит по toy"
+      "means": "internal: where the yacht is in depth, m; the script sets it by toy"
     },
     "toy_e": {
       "type": "number",
-      "means": "служебный: яхта над дном ручья, м (на воде); скрипт ставит по toy"
+      "means": "internal: the yacht above the stream's bed, m (on the water); the script sets it by toy"
     },
     "as_a": {
       "type": "number",
-      "means": "служебный: где Ассоль поперёк, м (куски)"
+      "means": "internal: where Assol is across, m (the beats)"
     },
     "as_d": {
       "type": "number",
-      "means": "служебный: где Ассоль вглубь, м"
+      "means": "internal: where Assol is in depth, m"
     },
     "gr_a": {
       "type": "number",
-      "means": "служебный: где Грей поперёк, м (куски)"
+      "means": "internal: where Gray is across, m (the beats)"
     },
     "gr_d": {
       "type": "number",
-      "means": "служебный: где Грей вглубь, м"
+      "means": "internal: where Gray is in depth, m"
     },
     "le_a": {
       "type": "number",
-      "means": "служебный: где Летика поперёк, м (куски)"
+      "means": "internal: where Letika is across, m (the beats)"
     },
     "le_d": {
       "type": "number",
-      "means": "служебный: где Летика вглубь, м"
+      "means": "internal: where Letika is in depth, m"
     },
     "eg_a": {
       "type": "number",
-      "means": "служебный: где Эгль поперёк, м (куски)"
+      "means": "internal: where Egle is across, m (the beats)"
     },
     "eg_d": {
       "type": "number",
-      "means": "служебный: где Эгль вглубь, м"
+      "means": "internal: where Egle is in depth, m"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true,
       "uniforms": {
         "tr": 0.42,
@@ -411,7 +411,7 @@
     },
     {
       "id": "sea",
-      "name": "Море",
+      "name": "Sea",
       "plane": true,
       "across": 0,
       "distance": 1530,
@@ -428,7 +428,7 @@
     },
     {
       "id": "mist_0",
-      "name": "Туман",
+      "name": "Mist",
       "across": -6,
       "distance": 12,
       "elevation": -0.52,
@@ -445,7 +445,7 @@
     },
     {
       "id": "mist_1",
-      "name": "Туман",
+      "name": "Mist",
       "across": 8,
       "distance": 18,
       "elevation": 0.745,
@@ -462,7 +462,7 @@
     },
     {
       "id": "mist_2",
-      "name": "Туман",
+      "name": "Mist",
       "across": -2,
       "distance": 26,
       "elevation": -1.55,
@@ -479,7 +479,7 @@
     },
     {
       "id": "mist_3",
-      "name": "Туман",
+      "name": "Mist",
       "across": 4,
       "distance": 34,
       "elevation": -3,
@@ -496,7 +496,7 @@
     },
     {
       "id": "mist_4",
-      "name": "Туман",
+      "name": "Mist",
       "across": -10,
       "distance": 48,
       "elevation": -3,
@@ -513,7 +513,7 @@
     },
     {
       "id": "mist_5",
-      "name": "Туман",
+      "name": "Mist",
       "across": 10,
       "distance": 90,
       "elevation": -3,
@@ -530,7 +530,7 @@
     },
     {
       "id": "mist_6",
-      "name": "Туман",
+      "name": "Mist",
       "across": -40,
       "distance": 200,
       "elevation": -3,
@@ -547,7 +547,7 @@
     },
     {
       "id": "land",
-      "name": "Земля",
+      "name": "Land",
       "plane": true,
       "drape": true,
       "across": 10,
@@ -557,7 +557,7 @@
     },
     {
       "id": "headland",
-      "name": "Мыс",
+      "name": "Cape",
       "unseen": true,
       "across": 25.94,
       "distance": 41.98,
@@ -565,7 +565,7 @@
     },
     {
       "id": "cliff_face",
-      "name": "Обрыв",
+      "name": "Cliff",
       "on": "headland",
       "across": 0,
       "distance": -8,
@@ -581,7 +581,7 @@
     },
     {
       "id": "glade",
-      "name": "Поляна",
+      "name": "Glade",
       "unseen": true,
       "on": "headland",
       "across": 1,
@@ -590,7 +590,7 @@
     },
     {
       "id": "cliff",
-      "name": "Край обрыва",
+      "name": "Cliff's edge",
       "unseen": true,
       "on": "headland",
       "across": -1,
@@ -599,7 +599,7 @@
     },
     {
       "id": "grass_0",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": -6.65,
@@ -614,7 +614,7 @@
     },
     {
       "id": "grass_1",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": -4.15,
@@ -629,7 +629,7 @@
     },
     {
       "id": "grass_2",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": -1.65,
@@ -644,7 +644,7 @@
     },
     {
       "id": "grass_3",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": 0.85,
@@ -659,7 +659,7 @@
     },
     {
       "id": "grass_4",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": 3.35,
@@ -674,7 +674,7 @@
     },
     {
       "id": "grass_5",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": 5.85,
@@ -689,7 +689,7 @@
     },
     {
       "id": "grass_6",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": 8.35,
@@ -704,7 +704,7 @@
     },
     {
       "id": "grass_7",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -7,
       "distance": 10.85,
@@ -719,7 +719,7 @@
     },
     {
       "id": "grass_8",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": -6.65,
@@ -734,7 +734,7 @@
     },
     {
       "id": "grass_9",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": -4.15,
@@ -749,7 +749,7 @@
     },
     {
       "id": "grass_10",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": -1.65,
@@ -764,7 +764,7 @@
     },
     {
       "id": "grass_11",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": 0.85,
@@ -779,7 +779,7 @@
     },
     {
       "id": "grass_12",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": 3.35,
@@ -794,7 +794,7 @@
     },
     {
       "id": "grass_13",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": 5.85,
@@ -809,7 +809,7 @@
     },
     {
       "id": "grass_14",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": 8.35,
@@ -824,7 +824,7 @@
     },
     {
       "id": "grass_15",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -6.1,
       "distance": 10.85,
@@ -839,7 +839,7 @@
     },
     {
       "id": "grass_16",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": -6.65,
@@ -854,7 +854,7 @@
     },
     {
       "id": "grass_17",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": -4.15,
@@ -869,7 +869,7 @@
     },
     {
       "id": "grass_18",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": -1.65,
@@ -884,7 +884,7 @@
     },
     {
       "id": "grass_19",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": 0.85,
@@ -899,7 +899,7 @@
     },
     {
       "id": "grass_20",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": 3.35,
@@ -914,7 +914,7 @@
     },
     {
       "id": "grass_21",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": 5.85,
@@ -929,7 +929,7 @@
     },
     {
       "id": "grass_22",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": 8.35,
@@ -944,7 +944,7 @@
     },
     {
       "id": "grass_23",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -5.2,
       "distance": 10.85,
@@ -959,7 +959,7 @@
     },
     {
       "id": "grass_24",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": -6.65,
@@ -974,7 +974,7 @@
     },
     {
       "id": "grass_25",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": -4.15,
@@ -989,7 +989,7 @@
     },
     {
       "id": "grass_26",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": -1.65,
@@ -1004,7 +1004,7 @@
     },
     {
       "id": "grass_27",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": 0.85,
@@ -1019,7 +1019,7 @@
     },
     {
       "id": "grass_28",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": 3.35,
@@ -1034,7 +1034,7 @@
     },
     {
       "id": "grass_29",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": 5.85,
@@ -1049,7 +1049,7 @@
     },
     {
       "id": "grass_30",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": 8.35,
@@ -1064,7 +1064,7 @@
     },
     {
       "id": "grass_31",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -4.3,
       "distance": 10.85,
@@ -1079,7 +1079,7 @@
     },
     {
       "id": "grass_32",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": -6.65,
@@ -1094,7 +1094,7 @@
     },
     {
       "id": "grass_33",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": -4.15,
@@ -1109,7 +1109,7 @@
     },
     {
       "id": "grass_34",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": -1.65,
@@ -1124,7 +1124,7 @@
     },
     {
       "id": "grass_35",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": 0.85,
@@ -1139,7 +1139,7 @@
     },
     {
       "id": "grass_36",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": 3.35,
@@ -1154,7 +1154,7 @@
     },
     {
       "id": "grass_37",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": 5.85,
@@ -1169,7 +1169,7 @@
     },
     {
       "id": "grass_38",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": 8.35,
@@ -1184,7 +1184,7 @@
     },
     {
       "id": "grass_39",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -3.4,
       "distance": 10.85,
@@ -1199,7 +1199,7 @@
     },
     {
       "id": "grass_40",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": -6.65,
@@ -1214,7 +1214,7 @@
     },
     {
       "id": "grass_41",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": -4.15,
@@ -1229,7 +1229,7 @@
     },
     {
       "id": "grass_42",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": -1.65,
@@ -1244,7 +1244,7 @@
     },
     {
       "id": "grass_43",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": 0.85,
@@ -1259,7 +1259,7 @@
     },
     {
       "id": "grass_44",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": 3.35,
@@ -1274,7 +1274,7 @@
     },
     {
       "id": "grass_45",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": 5.85,
@@ -1289,7 +1289,7 @@
     },
     {
       "id": "grass_46",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": 8.35,
@@ -1304,7 +1304,7 @@
     },
     {
       "id": "grass_47",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -2.5,
       "distance": 10.85,
@@ -1319,7 +1319,7 @@
     },
     {
       "id": "grass_48",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": -6.65,
@@ -1334,7 +1334,7 @@
     },
     {
       "id": "grass_49",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": -4.15,
@@ -1349,7 +1349,7 @@
     },
     {
       "id": "grass_50",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": -1.65,
@@ -1364,7 +1364,7 @@
     },
     {
       "id": "grass_51",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": 0.85,
@@ -1379,7 +1379,7 @@
     },
     {
       "id": "grass_52",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": 3.35,
@@ -1394,7 +1394,7 @@
     },
     {
       "id": "grass_53",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": 5.85,
@@ -1409,7 +1409,7 @@
     },
     {
       "id": "grass_54",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": 8.35,
@@ -1424,7 +1424,7 @@
     },
     {
       "id": "grass_55",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -1.6,
       "distance": 10.85,
@@ -1439,7 +1439,7 @@
     },
     {
       "id": "grass_56",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": -6.65,
@@ -1454,7 +1454,7 @@
     },
     {
       "id": "grass_57",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": -4.15,
@@ -1469,7 +1469,7 @@
     },
     {
       "id": "grass_58",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": -1.65,
@@ -1484,7 +1484,7 @@
     },
     {
       "id": "grass_59",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": 0.85,
@@ -1499,7 +1499,7 @@
     },
     {
       "id": "grass_60",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": 3.35,
@@ -1514,7 +1514,7 @@
     },
     {
       "id": "grass_61",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": 5.85,
@@ -1529,7 +1529,7 @@
     },
     {
       "id": "grass_62",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": 8.35,
@@ -1544,7 +1544,7 @@
     },
     {
       "id": "grass_63",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": -0.7,
       "distance": 10.85,
@@ -1559,7 +1559,7 @@
     },
     {
       "id": "grass_64",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": -6.65,
@@ -1574,7 +1574,7 @@
     },
     {
       "id": "grass_65",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": -4.15,
@@ -1589,7 +1589,7 @@
     },
     {
       "id": "grass_66",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": -1.65,
@@ -1604,7 +1604,7 @@
     },
     {
       "id": "grass_67",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": 0.85,
@@ -1619,7 +1619,7 @@
     },
     {
       "id": "grass_68",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": 3.35,
@@ -1634,7 +1634,7 @@
     },
     {
       "id": "grass_69",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": 5.85,
@@ -1649,7 +1649,7 @@
     },
     {
       "id": "grass_70",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": 8.35,
@@ -1664,7 +1664,7 @@
     },
     {
       "id": "grass_71",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 0.2,
       "distance": 10.85,
@@ -1679,7 +1679,7 @@
     },
     {
       "id": "grass_72",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": -6.65,
@@ -1694,7 +1694,7 @@
     },
     {
       "id": "grass_73",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": -4.15,
@@ -1709,7 +1709,7 @@
     },
     {
       "id": "grass_74",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": -1.65,
@@ -1724,7 +1724,7 @@
     },
     {
       "id": "grass_75",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": 0.85,
@@ -1739,7 +1739,7 @@
     },
     {
       "id": "grass_76",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": 3.35,
@@ -1754,7 +1754,7 @@
     },
     {
       "id": "grass_77",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": 5.85,
@@ -1769,7 +1769,7 @@
     },
     {
       "id": "grass_78",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": 8.35,
@@ -1784,7 +1784,7 @@
     },
     {
       "id": "grass_79",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 1.1,
       "distance": 10.85,
@@ -1799,7 +1799,7 @@
     },
     {
       "id": "grass_80",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": -6.65,
@@ -1814,7 +1814,7 @@
     },
     {
       "id": "grass_81",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": -4.15,
@@ -1829,7 +1829,7 @@
     },
     {
       "id": "grass_82",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": -1.65,
@@ -1844,7 +1844,7 @@
     },
     {
       "id": "grass_83",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": 0.85,
@@ -1859,7 +1859,7 @@
     },
     {
       "id": "grass_84",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": 3.35,
@@ -1874,7 +1874,7 @@
     },
     {
       "id": "grass_85",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": 5.85,
@@ -1889,7 +1889,7 @@
     },
     {
       "id": "grass_86",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": 8.35,
@@ -1904,7 +1904,7 @@
     },
     {
       "id": "grass_87",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2,
       "distance": 10.85,
@@ -1919,7 +1919,7 @@
     },
     {
       "id": "grass_88",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": -6.65,
@@ -1934,7 +1934,7 @@
     },
     {
       "id": "grass_89",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": -4.15,
@@ -1949,7 +1949,7 @@
     },
     {
       "id": "grass_90",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": -1.65,
@@ -1964,7 +1964,7 @@
     },
     {
       "id": "grass_91",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": 0.85,
@@ -1979,7 +1979,7 @@
     },
     {
       "id": "grass_92",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": 3.35,
@@ -1994,7 +1994,7 @@
     },
     {
       "id": "grass_93",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": 5.85,
@@ -2009,7 +2009,7 @@
     },
     {
       "id": "grass_94",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": 8.35,
@@ -2024,7 +2024,7 @@
     },
     {
       "id": "grass_95",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 2.9,
       "distance": 10.85,
@@ -2039,7 +2039,7 @@
     },
     {
       "id": "grass_96",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": -6.65,
@@ -2054,7 +2054,7 @@
     },
     {
       "id": "grass_97",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": -4.15,
@@ -2069,7 +2069,7 @@
     },
     {
       "id": "grass_98",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": -1.65,
@@ -2084,7 +2084,7 @@
     },
     {
       "id": "grass_99",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": 0.85,
@@ -2099,7 +2099,7 @@
     },
     {
       "id": "grass_100",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": 3.35,
@@ -2114,7 +2114,7 @@
     },
     {
       "id": "grass_101",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": 5.85,
@@ -2129,7 +2129,7 @@
     },
     {
       "id": "grass_102",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": 8.35,
@@ -2144,7 +2144,7 @@
     },
     {
       "id": "grass_103",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 3.8,
       "distance": 10.85,
@@ -2159,7 +2159,7 @@
     },
     {
       "id": "grass_104",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": -6.65,
@@ -2174,7 +2174,7 @@
     },
     {
       "id": "grass_105",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": -4.15,
@@ -2189,7 +2189,7 @@
     },
     {
       "id": "grass_106",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": -1.65,
@@ -2204,7 +2204,7 @@
     },
     {
       "id": "grass_107",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": 0.85,
@@ -2219,7 +2219,7 @@
     },
     {
       "id": "grass_108",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": 3.35,
@@ -2234,7 +2234,7 @@
     },
     {
       "id": "grass_109",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": 5.85,
@@ -2249,7 +2249,7 @@
     },
     {
       "id": "grass_110",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": 8.35,
@@ -2264,7 +2264,7 @@
     },
     {
       "id": "grass_111",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 4.7,
       "distance": 10.85,
@@ -2279,7 +2279,7 @@
     },
     {
       "id": "grass_112",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": -6.65,
@@ -2294,7 +2294,7 @@
     },
     {
       "id": "grass_113",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": -4.15,
@@ -2309,7 +2309,7 @@
     },
     {
       "id": "grass_114",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": -1.65,
@@ -2324,7 +2324,7 @@
     },
     {
       "id": "grass_115",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": 0.85,
@@ -2339,7 +2339,7 @@
     },
     {
       "id": "grass_116",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": 3.35,
@@ -2354,7 +2354,7 @@
     },
     {
       "id": "grass_117",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": 5.85,
@@ -2369,7 +2369,7 @@
     },
     {
       "id": "grass_118",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": 8.35,
@@ -2384,7 +2384,7 @@
     },
     {
       "id": "grass_119",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 5.6,
       "distance": 10.85,
@@ -2399,7 +2399,7 @@
     },
     {
       "id": "grass_120",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": -6.65,
@@ -2414,7 +2414,7 @@
     },
     {
       "id": "grass_121",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": -4.15,
@@ -2429,7 +2429,7 @@
     },
     {
       "id": "grass_122",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": -1.65,
@@ -2444,7 +2444,7 @@
     },
     {
       "id": "grass_123",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": 0.85,
@@ -2459,7 +2459,7 @@
     },
     {
       "id": "grass_124",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": 3.35,
@@ -2474,7 +2474,7 @@
     },
     {
       "id": "grass_125",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": 5.85,
@@ -2489,7 +2489,7 @@
     },
     {
       "id": "grass_126",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": 8.35,
@@ -2504,7 +2504,7 @@
     },
     {
       "id": "grass_127",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 6.5,
       "distance": 10.85,
@@ -2519,7 +2519,7 @@
     },
     {
       "id": "grass_128",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": -6.65,
@@ -2534,7 +2534,7 @@
     },
     {
       "id": "grass_129",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": -4.15,
@@ -2549,7 +2549,7 @@
     },
     {
       "id": "grass_130",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": -1.65,
@@ -2564,7 +2564,7 @@
     },
     {
       "id": "grass_131",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": 0.85,
@@ -2579,7 +2579,7 @@
     },
     {
       "id": "grass_132",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": 3.35,
@@ -2594,7 +2594,7 @@
     },
     {
       "id": "grass_133",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": 5.85,
@@ -2609,7 +2609,7 @@
     },
     {
       "id": "grass_134",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": 8.35,
@@ -2624,7 +2624,7 @@
     },
     {
       "id": "grass_135",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 7.4,
       "distance": 10.85,
@@ -2639,7 +2639,7 @@
     },
     {
       "id": "grass_136",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": -6.65,
@@ -2654,7 +2654,7 @@
     },
     {
       "id": "grass_137",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": -4.15,
@@ -2669,7 +2669,7 @@
     },
     {
       "id": "grass_138",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": -1.65,
@@ -2684,7 +2684,7 @@
     },
     {
       "id": "grass_139",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": 0.85,
@@ -2699,7 +2699,7 @@
     },
     {
       "id": "grass_140",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": 3.35,
@@ -2714,7 +2714,7 @@
     },
     {
       "id": "grass_141",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": 5.85,
@@ -2729,7 +2729,7 @@
     },
     {
       "id": "grass_142",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": 8.35,
@@ -2744,7 +2744,7 @@
     },
     {
       "id": "grass_143",
-      "name": "Трава поляны",
+      "name": "Glade grass",
       "on": "headland",
       "across": 8.3,
       "distance": 10.85,
@@ -2759,7 +2759,7 @@
     },
     {
       "id": "trees",
-      "name": "Лес: стволы",
+      "name": "Wood: trunks",
       "across": 0,
       "distance": 30,
       "height": 15,
@@ -2778,7 +2778,7 @@
     },
     {
       "id": "crown_0",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 5.4,
       "distance": 7.4,
       "height": 15.594,
@@ -2799,7 +2799,7 @@
     },
     {
       "id": "crown_1",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 8.8,
       "distance": 13.6,
       "height": 16.469,
@@ -2820,7 +2820,7 @@
     },
     {
       "id": "crown_2",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 6.6,
       "distance": 19.8,
       "height": 14.281,
@@ -2841,7 +2841,7 @@
     },
     {
       "id": "crown_3",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 11.2,
       "distance": 17.5,
       "height": 13.188,
@@ -2862,7 +2862,7 @@
     },
     {
       "id": "crown_4",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 59.379,
       "distance": 51.358,
       "height": 15.156,
@@ -2883,7 +2883,7 @@
     },
     {
       "id": "crown_5",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 41.077,
       "distance": 28.326,
       "height": 17.344,
@@ -2904,7 +2904,7 @@
     },
     {
       "id": "crown_6",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 62.039,
       "distance": 24.768,
       "height": 13.844,
@@ -2925,7 +2925,7 @@
     },
     {
       "id": "crown_7",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 49.32,
       "distance": 31.171,
       "height": 13.188,
@@ -2946,7 +2946,7 @@
     },
     {
       "id": "crown_8",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -20.401,
       "distance": 22.483,
       "height": 11.219,
@@ -2967,7 +2967,7 @@
     },
     {
       "id": "crown_9",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 31.756,
       "distance": 12.103,
       "height": 14.719,
@@ -2988,7 +2988,7 @@
     },
     {
       "id": "crown_10",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 33.777,
       "distance": 8.392,
       "height": 13.844,
@@ -3009,7 +3009,7 @@
     },
     {
       "id": "crown_11",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 45.081,
       "distance": 16.359,
       "height": 16.469,
@@ -3030,7 +3030,7 @@
     },
     {
       "id": "crown_12",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 35.416,
       "distance": 25.88,
       "height": 15.594,
@@ -3051,7 +3051,7 @@
     },
     {
       "id": "crown_13",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 42.146,
       "distance": 34.241,
       "height": 12.094,
@@ -3072,7 +3072,7 @@
     },
     {
       "id": "crown_14",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 24.242,
       "distance": 28.445,
       "height": 15.594,
@@ -3093,7 +3093,7 @@
     },
     {
       "id": "crown_15",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 59.641,
       "distance": 1.767,
       "height": 14.719,
@@ -3114,7 +3114,7 @@
     },
     {
       "id": "crown_16",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 45.461,
       "distance": 39.138,
       "height": 15.156,
@@ -3135,7 +3135,7 @@
     },
     {
       "id": "crown_17",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -25.476,
       "distance": 21.21,
       "height": 12.531,
@@ -3156,7 +3156,7 @@
     },
     {
       "id": "crown_18",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 46.688,
       "distance": 13.264,
       "height": 13.406,
@@ -3177,7 +3177,7 @@
     },
     {
       "id": "crown_19",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -39.3,
       "distance": 23.994,
       "height": 16.469,
@@ -3198,7 +3198,7 @@
     },
     {
       "id": "crown_20",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 19.971,
       "distance": 30.196,
       "height": 17.781,
@@ -3219,7 +3219,7 @@
     },
     {
       "id": "crown_21",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -9.519,
       "distance": 12.525,
       "height": 15.594,
@@ -3240,7 +3240,7 @@
     },
     {
       "id": "crown_22",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 53.847,
       "distance": 54.645,
       "height": 17.781,
@@ -3261,7 +3261,7 @@
     },
     {
       "id": "crown_23",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 52.979,
       "distance": 37.658,
       "height": 16.906,
@@ -3282,7 +3282,7 @@
     },
     {
       "id": "crown_24",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 63.837,
       "distance": 5.31,
       "height": 12.531,
@@ -3303,7 +3303,7 @@
     },
     {
       "id": "crown_25",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 16.476,
       "distance": 14.363,
       "height": 14.719,
@@ -3324,7 +3324,7 @@
     },
     {
       "id": "crown_26",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 43.955,
       "distance": 28.335,
       "height": 11.438,
@@ -3345,7 +3345,7 @@
     },
     {
       "id": "crown_27",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 56.127,
       "distance": 25.408,
       "height": 15.594,
@@ -3366,7 +3366,7 @@
     },
     {
       "id": "crown_28",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -16.569,
       "distance": 5.035,
       "height": 11.656,
@@ -3387,7 +3387,7 @@
     },
     {
       "id": "crown_29",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -8.136,
       "distance": 5.847,
       "height": 12.969,
@@ -3408,7 +3408,7 @@
     },
     {
       "id": "crown_30",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -45.477,
       "distance": 3.436,
       "height": 13.406,
@@ -3429,7 +3429,7 @@
     },
     {
       "id": "crown_31",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -12.085,
       "distance": 20.989,
       "height": 13.844,
@@ -3450,7 +3450,7 @@
     },
     {
       "id": "crown_32",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 55.143,
       "distance": 22.105,
       "height": 13.844,
@@ -3471,7 +3471,7 @@
     },
     {
       "id": "crown_33",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 30.81,
       "distance": 4.624,
       "height": 17.344,
@@ -3492,7 +3492,7 @@
     },
     {
       "id": "crown_34",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -5.038,
       "distance": 14.114,
       "height": 11.438,
@@ -3513,7 +3513,7 @@
     },
     {
       "id": "crown_35",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 44.525,
       "distance": 51.84,
       "height": 12.531,
@@ -3534,7 +3534,7 @@
     },
     {
       "id": "crown_36",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 53.442,
       "distance": 41.149,
       "height": 13.406,
@@ -3555,7 +3555,7 @@
     },
     {
       "id": "crown_37",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 22.145,
       "distance": 10.315,
       "height": 16.469,
@@ -3576,7 +3576,7 @@
     },
     {
       "id": "crown_38",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 30.56,
       "distance": 19.615,
       "height": 12.094,
@@ -3597,7 +3597,7 @@
     },
     {
       "id": "crown_39",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 60.818,
       "distance": 41.296,
       "height": 16.688,
@@ -3618,7 +3618,7 @@
     },
     {
       "id": "crown_40",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -32.859,
       "distance": 4.33,
       "height": 14.281,
@@ -3639,7 +3639,7 @@
     },
     {
       "id": "crown_41",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 39.695,
       "distance": 37.482,
       "height": 16.031,
@@ -3660,7 +3660,7 @@
     },
     {
       "id": "crown_42",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -21.72,
       "distance": 10.949,
       "height": 17.563,
@@ -3681,7 +3681,7 @@
     },
     {
       "id": "crown_43",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -16.432,
       "distance": 16.265,
       "height": 12.313,
@@ -3702,7 +3702,7 @@
     },
     {
       "id": "crown_44",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 48.886,
       "distance": 24.316,
       "height": 17.563,
@@ -3723,7 +3723,7 @@
     },
     {
       "id": "crown_45",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 41.098,
       "distance": 45.719,
       "height": 15.813,
@@ -3744,7 +3744,7 @@
     },
     {
       "id": "crown_46",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 62.154,
       "distance": 3.128,
       "height": 17.781,
@@ -3765,7 +3765,7 @@
     },
     {
       "id": "crown_47",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 58.294,
       "distance": 47.211,
       "height": 11.656,
@@ -3786,7 +3786,7 @@
     },
     {
       "id": "crown_48",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -38.117,
       "distance": 14.823,
       "height": 16.031,
@@ -3807,7 +3807,7 @@
     },
     {
       "id": "crown_49",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 52.638,
       "distance": 23.806,
       "height": 17.781,
@@ -3828,7 +3828,7 @@
     },
     {
       "id": "crown_50",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -33.486,
       "distance": 16.691,
       "height": 11.656,
@@ -3849,7 +3849,7 @@
     },
     {
       "id": "crown_51",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -12.609,
       "distance": 24.968,
       "height": 17.344,
@@ -3870,7 +3870,7 @@
     },
     {
       "id": "crown_52",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 20.165,
       "distance": 12.392,
       "height": 12.531,
@@ -3891,7 +3891,7 @@
     },
     {
       "id": "crown_53",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -39.841,
       "distance": 11.876,
       "height": 14.063,
@@ -3912,7 +3912,7 @@
     },
     {
       "id": "crown_54",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -40.833,
       "distance": 21.364,
       "height": 14.938,
@@ -3933,7 +3933,7 @@
     },
     {
       "id": "crown_55",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 62.582,
       "distance": 14.807,
       "height": 16.469,
@@ -3954,7 +3954,7 @@
     },
     {
       "id": "crown_56",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 13.377,
       "distance": 20.22,
       "height": 15.594,
@@ -3975,7 +3975,7 @@
     },
     {
       "id": "crown_57",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 47.127,
       "distance": 22.305,
       "height": 13.188,
@@ -3996,7 +3996,7 @@
     },
     {
       "id": "crown_58",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 33.956,
       "distance": 28.502,
       "height": 12.313,
@@ -4017,7 +4017,7 @@
     },
     {
       "id": "crown_59",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 11.74,
       "distance": 8.579,
       "height": 13.188,
@@ -4038,7 +4038,7 @@
     },
     {
       "id": "crown_60",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 33.647,
       "distance": 21.522,
       "height": 15.813,
@@ -4059,7 +4059,7 @@
     },
     {
       "id": "crown_61",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -27.185,
       "distance": 4.163,
       "height": 15.594,
@@ -4080,7 +4080,7 @@
     },
     {
       "id": "crown_62",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 25.191,
       "distance": 23.886,
       "height": 15.156,
@@ -4101,7 +4101,7 @@
     },
     {
       "id": "crown_63",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 56.643,
       "distance": 18.653,
       "height": 13.844,
@@ -4122,7 +4122,7 @@
     },
     {
       "id": "crown_64",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 46.934,
       "distance": 59.539,
       "height": 12.531,
@@ -4143,7 +4143,7 @@
     },
     {
       "id": "crown_65",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 14.365,
       "distance": 16.149,
       "height": 15.594,
@@ -4164,7 +4164,7 @@
     },
     {
       "id": "crown_66",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -24.132,
       "distance": 6.374,
       "height": 12.531,
@@ -4185,7 +4185,7 @@
     },
     {
       "id": "crown_67",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 42.204,
       "distance": 8.726,
       "height": 16.031,
@@ -4206,7 +4206,7 @@
     },
     {
       "id": "crown_68",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 38.024,
       "distance": 28.37,
       "height": 13.844,
@@ -4227,7 +4227,7 @@
     },
     {
       "id": "crown_69",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -27.787,
       "distance": 13.726,
       "height": 12.969,
@@ -4248,7 +4248,7 @@
     },
     {
       "id": "crown_70",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 37.554,
       "distance": 17.179,
       "height": 11.438,
@@ -4269,7 +4269,7 @@
     },
     {
       "id": "crown_71",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 23.502,
       "distance": 16.191,
       "height": 17.781,
@@ -4290,7 +4290,7 @@
     },
     {
       "id": "crown_72",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 63.578,
       "distance": 8.295,
       "height": 17.344,
@@ -4311,7 +4311,7 @@
     },
     {
       "id": "crown_73",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -21.207,
       "distance": 20.001,
       "height": 17.781,
@@ -4332,7 +4332,7 @@
     },
     {
       "id": "crown_74",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -4.559,
       "distance": 6.807,
       "height": 13.188,
@@ -4353,7 +4353,7 @@
     },
     {
       "id": "crown_75",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 52.018,
       "distance": 18.925,
       "height": 11.219,
@@ -4374,7 +4374,7 @@
     },
     {
       "id": "crown_76",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 53.95,
       "distance": 51.244,
       "height": 12.094,
@@ -4395,7 +4395,7 @@
     },
     {
       "id": "crown_77",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 49.523,
       "distance": 34.256,
       "height": 12.313,
@@ -4416,7 +4416,7 @@
     },
     {
       "id": "crown_78",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 18.741,
       "distance": 2.289,
       "height": 15.594,
@@ -4437,7 +4437,7 @@
     },
     {
       "id": "crown_79",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 41.18,
       "distance": 14.94,
       "height": 12.313,
@@ -4458,7 +4458,7 @@
     },
     {
       "id": "crown_80",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 48.782,
       "distance": 40.908,
       "height": 13.406,
@@ -4479,7 +4479,7 @@
     },
     {
       "id": "crown_81",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 55.513,
       "distance": 34.986,
       "height": 11.656,
@@ -4500,7 +4500,7 @@
     },
     {
       "id": "crown_82",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 35.643,
       "distance": 4.006,
       "height": 16.031,
@@ -4521,7 +4521,7 @@
     },
     {
       "id": "crown_83",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 60.375,
       "distance": 60.79,
       "height": 15.594,
@@ -4542,7 +4542,7 @@
     },
     {
       "id": "crown_84",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 41.945,
       "distance": 12.164,
       "height": 17.344,
@@ -4563,7 +4563,7 @@
     },
     {
       "id": "crown_85",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 23.095,
       "distance": 2.036,
       "height": 15.594,
@@ -4584,7 +4584,7 @@
     },
     {
       "id": "crown_86",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -9.925,
       "distance": 16.896,
       "height": 16.031,
@@ -4605,7 +4605,7 @@
     },
     {
       "id": "crown_87",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -15.817,
       "distance": 22.563,
       "height": 17.781,
@@ -4626,7 +4626,7 @@
     },
     {
       "id": "crown_88",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 60.715,
       "distance": 55.946,
       "height": 16.906,
@@ -4647,7 +4647,7 @@
     },
     {
       "id": "crown_89",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 59.626,
       "distance": 27.686,
       "height": 11.656,
@@ -4668,7 +4668,7 @@
     },
     {
       "id": "crown_90",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 50.234,
       "distance": 49.959,
       "height": 13.406,
@@ -4689,7 +4689,7 @@
     },
     {
       "id": "crown_91",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -35.972,
       "distance": 7.495,
       "height": 16.031,
@@ -4710,7 +4710,7 @@
     },
     {
       "id": "crown_92",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 52.319,
       "distance": 43.737,
       "height": 12.531,
@@ -4731,7 +4731,7 @@
     },
     {
       "id": "crown_93",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 52.694,
       "distance": 32.357,
       "height": 11.219,
@@ -4752,7 +4752,7 @@
     },
     {
       "id": "crown_94",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -26.532,
       "distance": 7.727,
       "height": 13.406,
@@ -4773,7 +4773,7 @@
     },
     {
       "id": "crown_95",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 48.821,
       "distance": 3.567,
       "height": 16.031,
@@ -4794,7 +4794,7 @@
     },
     {
       "id": "crown_96",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 61.64,
       "distance": 47.082,
       "height": 12.969,
@@ -4815,7 +4815,7 @@
     },
     {
       "id": "crown_97",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 56.675,
       "distance": 51.917,
       "height": 15.813,
@@ -4836,7 +4836,7 @@
     },
     {
       "id": "crown_98",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 55.947,
       "distance": 62.071,
       "height": 12.531,
@@ -4857,7 +4857,7 @@
     },
     {
       "id": "crown_99",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 15.273,
       "distance": 6.99,
       "height": 12.094,
@@ -4878,7 +4878,7 @@
     },
     {
       "id": "crown_100",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 62.111,
       "distance": 52.409,
       "height": 12.969,
@@ -4899,7 +4899,7 @@
     },
     {
       "id": "crown_101",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 59.052,
       "distance": 9.352,
       "height": 12.313,
@@ -4920,7 +4920,7 @@
     },
     {
       "id": "crown_102",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 47.756,
       "distance": 54.302,
       "height": 14.719,
@@ -4941,7 +4941,7 @@
     },
     {
       "id": "crown_103",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 49.861,
       "distance": 21.869,
       "height": 14.063,
@@ -4962,7 +4962,7 @@
     },
     {
       "id": "crown_104",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 61.452,
       "distance": 30.329,
       "height": 16.906,
@@ -4983,7 +4983,7 @@
     },
     {
       "id": "crown_105",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 59.944,
       "distance": 14.153,
       "height": 16.906,
@@ -5004,7 +5004,7 @@
     },
     {
       "id": "crown_106",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 8.544,
       "distance": 22.356,
       "height": 15.594,
@@ -5025,7 +5025,7 @@
     },
     {
       "id": "crown_107",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 33.643,
       "distance": 14.898,
       "height": 12.094,
@@ -5046,7 +5046,7 @@
     },
     {
       "id": "crown_108",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 63.768,
       "distance": 40.865,
       "height": 16.031,
@@ -5067,7 +5067,7 @@
     },
     {
       "id": "crown_109",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -10.532,
       "distance": 9.744,
       "height": 15.594,
@@ -5088,7 +5088,7 @@
     },
     {
       "id": "crown_110",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 16.752,
       "distance": 18.241,
       "height": 16.688,
@@ -5109,7 +5109,7 @@
     },
     {
       "id": "crown_111",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -5.562,
       "distance": 10.707,
       "height": 11.656,
@@ -5130,7 +5130,7 @@
     },
     {
       "id": "crown_112",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -22.688,
       "distance": 24.017,
       "height": 11.219,
@@ -5151,7 +5151,7 @@
     },
     {
       "id": "crown_113",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 25.668,
       "distance": 6.34,
       "height": 17.563,
@@ -5172,7 +5172,7 @@
     },
     {
       "id": "crown_114",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 60.621,
       "distance": 18.685,
       "height": 12.531,
@@ -5193,7 +5193,7 @@
     },
     {
       "id": "crown_115",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -42.339,
       "distance": 17.595,
       "height": 13.406,
@@ -5214,7 +5214,7 @@
     },
     {
       "id": "crown_116",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 55.99,
       "distance": 37.702,
       "height": 16.031,
@@ -5235,7 +5235,7 @@
     },
     {
       "id": "crown_117",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 42.229,
       "distance": 20.283,
       "height": 13.188,
@@ -5256,7 +5256,7 @@
     },
     {
       "id": "crown_118",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 49.26,
       "distance": 6.664,
       "height": 17.563,
@@ -5277,7 +5277,7 @@
     },
     {
       "id": "crown_119",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 30.931,
       "distance": 26.976,
       "height": 16.031,
@@ -5298,7 +5298,7 @@
     },
     {
       "id": "crown_120",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 55.915,
       "distance": 5.613,
       "height": 15.594,
@@ -5319,7 +5319,7 @@
     },
     {
       "id": "crown_121",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 48.193,
       "distance": 10.342,
       "height": 17.344,
@@ -5340,7 +5340,7 @@
     },
     {
       "id": "crown_122",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -5.417,
       "distance": 18.237,
       "height": 17.563,
@@ -5361,7 +5361,7 @@
     },
     {
       "id": "crown_123",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 63.274,
       "distance": 59.03,
       "height": 13.844,
@@ -5382,7 +5382,7 @@
     },
     {
       "id": "crown_124",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 54.844,
       "distance": 58.188,
       "height": 16.031,
@@ -5403,7 +5403,7 @@
     },
     {
       "id": "crown_125",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 21.653,
       "distance": 19.838,
       "height": 15.594,
@@ -5424,7 +5424,7 @@
     },
     {
       "id": "crown_126",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -16.682,
       "distance": 13.504,
       "height": 15.156,
@@ -5445,7 +5445,7 @@
     },
     {
       "id": "crown_127",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 22.022,
       "distance": 7.04,
       "height": 16.906,
@@ -5466,7 +5466,7 @@
     },
     {
       "id": "crown_128",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -23.74,
       "distance": 17.128,
       "height": 16.688,
@@ -5487,7 +5487,7 @@
     },
     {
       "id": "crown_129",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -16.819,
       "distance": 9.066,
       "height": 11.656,
@@ -5508,7 +5508,7 @@
     },
     {
       "id": "crown_130",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -42.933,
       "distance": 14.728,
       "height": 11.438,
@@ -5529,7 +5529,7 @@
     },
     {
       "id": "crown_131",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -7.483,
       "distance": 23.785,
       "height": 13.844,
@@ -5550,7 +5550,7 @@
     },
     {
       "id": "crown_132",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -44.276,
       "distance": 24.023,
       "height": 13.188,
@@ -5571,7 +5571,7 @@
     },
     {
       "id": "crown_133",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 29.042,
       "distance": 13.64,
       "height": 13.188,
@@ -5592,7 +5592,7 @@
     },
     {
       "id": "crown_134",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -25.381,
       "distance": 12.409,
       "height": 16.688,
@@ -5613,7 +5613,7 @@
     },
     {
       "id": "crown_135",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 62.195,
       "distance": 12.157,
       "height": 12.969,
@@ -5634,7 +5634,7 @@
     },
     {
       "id": "crown_136",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 55.217,
       "distance": 45.112,
       "height": 12.313,
@@ -5655,7 +5655,7 @@
     },
     {
       "id": "crown_137",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -32.878,
       "distance": 11.497,
       "height": 13.844,
@@ -5676,7 +5676,7 @@
     },
     {
       "id": "crown_138",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 39.479,
       "distance": 10.913,
       "height": 15.594,
@@ -5697,7 +5697,7 @@
     },
     {
       "id": "crown_139",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -38.359,
       "distance": 4.839,
       "height": 11.656,
@@ -5718,7 +5718,7 @@
     },
     {
       "id": "crown_140",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -28.875,
       "distance": 18.62,
       "height": 16.469,
@@ -5739,7 +5739,7 @@
     },
     {
       "id": "crown_141",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 45.296,
       "distance": 6.644,
       "height": 15.594,
@@ -5760,7 +5760,7 @@
     },
     {
       "id": "crown_142",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 45.109,
       "distance": 55.97,
       "height": 12.094,
@@ -5781,7 +5781,7 @@
     },
     {
       "id": "crown_143",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 26.792,
       "distance": 27.776,
       "height": 15.594,
@@ -5802,7 +5802,7 @@
     },
     {
       "id": "crown_144",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 44.807,
       "distance": 30.898,
       "height": 11.656,
@@ -5823,7 +5823,7 @@
     },
     {
       "id": "crown_145",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 41.957,
       "distance": 40.969,
       "height": 16.688,
@@ -5844,7 +5844,7 @@
     },
     {
       "id": "crown_146",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 58.366,
       "distance": 23.857,
       "height": 16.906,
@@ -5865,7 +5865,7 @@
     },
     {
       "id": "crown_147",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -11.938,
       "distance": 6.954,
       "height": 16.031,
@@ -5886,7 +5886,7 @@
     },
     {
       "id": "crown_148",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 40.884,
       "distance": 31.324,
       "height": 14.063,
@@ -5907,7 +5907,7 @@
     },
     {
       "id": "crown_149",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -12.873,
       "distance": 11.396,
       "height": 16.031,
@@ -5928,7 +5928,7 @@
     },
     {
       "id": "crown_150",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 20.082,
       "distance": 27.593,
       "height": 12.313,
@@ -5949,7 +5949,7 @@
     },
     {
       "id": "crown_151",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 30.292,
       "distance": 7.804,
       "height": 12.313,
@@ -5970,7 +5970,7 @@
     },
     {
       "id": "crown_152",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 21.914,
       "distance": 25.706,
       "height": 11.656,
@@ -5991,7 +5991,7 @@
     },
     {
       "id": "crown_153",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -28.542,
       "distance": 25.967,
       "height": 14.719,
@@ -6012,7 +6012,7 @@
     },
     {
       "id": "crown_154",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 45.312,
       "distance": 43.199,
       "height": 12.531,
@@ -6033,7 +6033,7 @@
     },
     {
       "id": "crown_155",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 28.752,
       "distance": 16.476,
       "height": 17.344,
@@ -6054,7 +6054,7 @@
     },
     {
       "id": "crown_156",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -22.898,
       "distance": 3.627,
       "height": 15.594,
@@ -6075,7 +6075,7 @@
     },
     {
       "id": "crown_157",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 48.604,
       "distance": 46.197,
       "height": 12.531,
@@ -6096,7 +6096,7 @@
     },
     {
       "id": "crown_158",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 37.171,
       "distance": 22.243,
       "height": 14.719,
@@ -6117,7 +6117,7 @@
     },
     {
       "id": "crown_159",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -36.066,
       "distance": 23.742,
       "height": 11.656,
@@ -6138,7 +6138,7 @@
     },
     {
       "id": "crown_160",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 63.734,
       "distance": 22.374,
       "height": 12.969,
@@ -6159,7 +6159,7 @@
     },
     {
       "id": "crown_161",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -30.569,
       "distance": 14.162,
       "height": 17.781,
@@ -6180,7 +6180,7 @@
     },
     {
       "id": "crown_162",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 57.943,
       "distance": 42.875,
       "height": 16.688,
@@ -6201,7 +6201,7 @@
     },
     {
       "id": "crown_163",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -14.858,
       "distance": 19.459,
       "height": 11.438,
@@ -6222,7 +6222,7 @@
     },
     {
       "id": "crown_164",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -31.293,
       "distance": 24.446,
       "height": 12.094,
@@ -6243,7 +6243,7 @@
     },
     {
       "id": "crown_165",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 56.586,
       "distance": 56.125,
       "height": 13.406,
@@ -6264,7 +6264,7 @@
     },
     {
       "id": "crown_166",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 9.192,
       "distance": 10.352,
       "height": 12.313,
@@ -6285,7 +6285,7 @@
     },
     {
       "id": "crown_167",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 30.079,
       "distance": 24.121,
       "height": 15.156,
@@ -6306,7 +6306,7 @@
     },
     {
       "id": "crown_168",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 48.078,
       "distance": 62.405,
       "height": 15.156,
@@ -6327,7 +6327,7 @@
     },
     {
       "id": "crown_169",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -11.045,
       "distance": 3.975,
       "height": 15.594,
@@ -6348,7 +6348,7 @@
     },
     {
       "id": "crown_170",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 12.574,
       "distance": 24.418,
       "height": 13.188,
@@ -6369,7 +6369,7 @@
     },
     {
       "id": "crown_171",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 32.783,
       "distance": -1.177,
       "height": 17.781,
@@ -6390,7 +6390,7 @@
     },
     {
       "id": "crown_172",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 17.989,
       "distance": 7.806,
       "height": 11.219,
@@ -6411,7 +6411,7 @@
     },
     {
       "id": "crown_173",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 35.92,
       "distance": -1.867,
       "height": 11.656,
@@ -6432,7 +6432,7 @@
     },
     {
       "id": "crown_174",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 13.2,
       "distance": -0.273,
       "height": 13.844,
@@ -6453,7 +6453,7 @@
     },
     {
       "id": "crown_175",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 42.269,
       "distance": 25.467,
       "height": 17.563,
@@ -6474,7 +6474,7 @@
     },
     {
       "id": "crown_176",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 35.727,
       "distance": 19.44,
       "height": 12.969,
@@ -6495,7 +6495,7 @@
     },
     {
       "id": "crown_177",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 27.044,
       "distance": 30.491,
       "height": 14.719,
@@ -6516,7 +6516,7 @@
     },
     {
       "id": "crown_178",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 28.52,
       "distance": 2.865,
       "height": 15.156,
@@ -6537,7 +6537,7 @@
     },
     {
       "id": "crown_179",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 6.659,
       "distance": 17.166,
       "height": 17.344,
@@ -6558,7 +6558,7 @@
     },
     {
       "id": "crown_180",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 25.137,
       "distance": 11.883,
       "height": 11.656,
@@ -6579,7 +6579,7 @@
     },
     {
       "id": "crown_181",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 17.828,
       "distance": 26.509,
       "height": 14.938,
@@ -6600,7 +6600,7 @@
     },
     {
       "id": "crown_182",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 16.908,
       "distance": -0.834,
       "height": 11.438,
@@ -6621,7 +6621,7 @@
     },
     {
       "id": "crown_183",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 16.393,
       "distance": 24.017,
       "height": 13.844,
@@ -6642,7 +6642,7 @@
     },
     {
       "id": "crown_184",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 26.771,
       "distance": 0.049,
       "height": 11.219,
@@ -6663,7 +6663,7 @@
     },
     {
       "id": "crown_185",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 14.951,
       "distance": 2.927,
       "height": 11.656,
@@ -6684,7 +6684,7 @@
     },
     {
       "id": "crown_186",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 18.206,
       "distance": 10.56,
       "height": 14.938,
@@ -6705,7 +6705,7 @@
     },
     {
       "id": "crown_187",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 26.118,
       "distance": 20.225,
       "height": 16.031,
@@ -6726,7 +6726,7 @@
     },
     {
       "id": "crown_188",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 24.506,
       "distance": -1.195,
       "height": 17.563,
@@ -6747,7 +6747,7 @@
     },
     {
       "id": "crown_189",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 14.691,
       "distance": 9.51,
       "height": 15.156,
@@ -6768,7 +6768,7 @@
     },
     {
       "id": "crown_190",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 34.009,
       "distance": -3.488,
       "height": 12.094,
@@ -6789,7 +6789,7 @@
     },
     {
       "id": "crown_191",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 11.485,
       "distance": 21.942,
       "height": 13.406,
@@ -6810,7 +6810,7 @@
     },
     {
       "id": "crown_192",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 38.516,
       "distance": 7.413,
       "height": 13.406,
@@ -6831,7 +6831,7 @@
     },
     {
       "id": "crown_193",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 38.34,
       "distance": 2.172,
       "height": 12.969,
@@ -6852,7 +6852,7 @@
     },
     {
       "id": "crown_194",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 44.541,
       "distance": 23.515,
       "height": 16.906,
@@ -6873,7 +6873,7 @@
     },
     {
       "id": "crown_195",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 40.689,
       "distance": 0.344,
       "height": 14.938,
@@ -6894,7 +6894,7 @@
     },
     {
       "id": "crown_196",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 13.593,
       "distance": 11.837,
       "height": 17.344,
@@ -6915,7 +6915,7 @@
     },
     {
       "id": "crown_197",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 29.248,
       "distance": -1.593,
       "height": 17.344,
@@ -6936,7 +6936,7 @@
     },
     {
       "id": "crown_198",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 42.206,
       "distance": 4.217,
       "height": 13.844,
@@ -6957,7 +6957,7 @@
     },
     {
       "id": "crown_199",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 21.371,
       "distance": -0.948,
       "height": 12.313,
@@ -6978,7 +6978,7 @@
     },
     {
       "id": "crown_200",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 16.214,
       "distance": 28.809,
       "height": 12.531,
@@ -6999,7 +6999,7 @@
     },
     {
       "id": "crown_201",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 20.95,
       "distance": 22.826,
       "height": 13.188,
@@ -7020,7 +7020,7 @@
     },
     {
       "id": "crown_202",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 40.364,
       "distance": 17.812,
       "height": 15.813,
@@ -7041,7 +7041,7 @@
     },
     {
       "id": "crown_203",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 23.754,
       "distance": 21.555,
       "height": 13.844,
@@ -7062,7 +7062,7 @@
     },
     {
       "id": "crown_204",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 40.902,
       "distance": -3.504,
       "height": 12.094,
@@ -7083,7 +7083,7 @@
     },
     {
       "id": "crown_205",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 39.729,
       "distance": 4.604,
       "height": 17.344,
@@ -7104,7 +7104,7 @@
     },
     {
       "id": "crown_206",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 33.864,
       "distance": 1.814,
       "height": 16.469,
@@ -7125,7 +7125,7 @@
     },
     {
       "id": "crown_207",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 25.754,
       "distance": 8.755,
       "height": 11.219,
@@ -7146,7 +7146,7 @@
     },
     {
       "id": "crown_208",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 40.61,
       "distance": 22.706,
       "height": 16.906,
@@ -7167,7 +7167,7 @@
     },
     {
       "id": "crown_209",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 11.616,
       "distance": 13.374,
       "height": 12.969,
@@ -7188,7 +7188,7 @@
     },
     {
       "id": "crown_210",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 19.573,
       "distance": 18.189,
       "height": 13.406,
@@ -7209,7 +7209,7 @@
     },
     {
       "id": "crown_211",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 22.705,
       "distance": 12.691,
       "height": 17.563,
@@ -7230,7 +7230,7 @@
     },
     {
       "id": "crown_212",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 11.927,
       "distance": 3.47,
       "height": 15.156,
@@ -7251,7 +7251,7 @@
     },
     {
       "id": "crown_213",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 30.118,
       "distance": 10.302,
       "height": 12.531,
@@ -7272,7 +7272,7 @@
     },
     {
       "id": "crown_214",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 33.025,
       "distance": 24.983,
       "height": 13.844,
@@ -7293,7 +7293,7 @@
     },
     {
       "id": "crown_215",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 26.393,
       "distance": 17.793,
       "height": 11.438,
@@ -7314,7 +7314,7 @@
     },
     {
       "id": "crown_216",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 35.469,
       "distance": 11.816,
       "height": 17.781,
@@ -7335,7 +7335,7 @@
     },
     {
       "id": "crown_217",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 18.436,
       "distance": 16.052,
       "height": 16.906,
@@ -7356,7 +7356,7 @@
     },
     {
       "id": "crown_218",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 34.771,
       "distance": 17.166,
       "height": 11.219,
@@ -7377,7 +7377,7 @@
     },
     {
       "id": "crown_219",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 38.687,
       "distance": 25.122,
       "height": 16.688,
@@ -7398,7 +7398,7 @@
     },
     {
       "id": "crown_220",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 5.033,
       "distance": 22.036,
       "height": 17.781,
@@ -7419,7 +7419,7 @@
     },
     {
       "id": "crown_221",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 38.346,
       "distance": 19.447,
       "height": 15.813,
@@ -7440,7 +7440,7 @@
     },
     {
       "id": "crown_222",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 32.018,
       "distance": 17.344,
       "height": 16.031,
@@ -7461,7 +7461,7 @@
     },
     {
       "id": "crown_223",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 8.986,
       "distance": 18.556,
       "height": 11.219,
@@ -7482,7 +7482,7 @@
     },
     {
       "id": "crown_224",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 31.349,
       "distance": 29.927,
       "height": 15.156,
@@ -7503,7 +7503,7 @@
     },
     {
       "id": "crown_225",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 36.91,
       "distance": 9.276,
       "height": 15.813,
@@ -7524,7 +7524,7 @@
     },
     {
       "id": "crown_226",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 19.904,
       "distance": 5.063,
       "height": 17.781,
@@ -7545,7 +7545,7 @@
     },
     {
       "id": "crown_227",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 16.568,
       "distance": 21.157,
       "height": 13.844,
@@ -7566,7 +7566,7 @@
     },
     {
       "id": "crown_228",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 46.511,
       "distance": -9.234,
       "height": 11.656,
@@ -7587,7 +7587,7 @@
     },
     {
       "id": "crown_229",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 63.759,
       "distance": -25.593,
       "height": 17.344,
@@ -7608,7 +7608,7 @@
     },
     {
       "id": "crown_230",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -6.461,
       "distance": -29.219,
       "height": 15.156,
@@ -7629,7 +7629,7 @@
     },
     {
       "id": "crown_231",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 46.825,
       "distance": -32.158,
       "height": 16.469,
@@ -7650,7 +7650,7 @@
     },
     {
       "id": "crown_232",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 15.667,
       "distance": -5.09,
       "height": 11.438,
@@ -7671,7 +7671,7 @@
     },
     {
       "id": "crown_233",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 58.153,
       "distance": -23.151,
       "height": 17.344,
@@ -7692,7 +7692,7 @@
     },
     {
       "id": "crown_234",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 43.695,
       "distance": -24.103,
       "height": 16.469,
@@ -7713,7 +7713,7 @@
     },
     {
       "id": "crown_235",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 46.261,
       "distance": -28.556,
       "height": 16.469,
@@ -7734,7 +7734,7 @@
     },
     {
       "id": "crown_236",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -33.248,
       "distance": 0.969,
       "height": 16.469,
@@ -7755,7 +7755,7 @@
     },
     {
       "id": "crown_237",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -38.956,
       "distance": -14.486,
       "height": 11.656,
@@ -7776,7 +7776,7 @@
     },
     {
       "id": "crown_238",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -8.819,
       "distance": -33.294,
       "height": 14.719,
@@ -7797,7 +7797,7 @@
     },
     {
       "id": "crown_239",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 32.162,
       "distance": -17.723,
       "height": 14.281,
@@ -7818,7 +7818,7 @@
     },
     {
       "id": "crown_240",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -2.035,
       "distance": -4.03,
       "height": 14.719,
@@ -7839,7 +7839,7 @@
     },
     {
       "id": "crown_241",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -42.056,
       "distance": -23.734,
       "height": 14.719,
@@ -7860,7 +7860,7 @@
     },
     {
       "id": "crown_242",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 8.956,
       "distance": -17.713,
       "height": 14.063,
@@ -7881,7 +7881,7 @@
     },
     {
       "id": "crown_243",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 41.778,
       "distance": -7.345,
       "height": 15.813,
@@ -7902,7 +7902,7 @@
     },
     {
       "id": "crown_244",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -45.166,
       "distance": -4.577,
       "height": 12.969,
@@ -7923,7 +7923,7 @@
     },
     {
       "id": "crown_245",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 39.284,
       "distance": -27.562,
       "height": 13.844,
@@ -7944,7 +7944,7 @@
     },
     {
       "id": "crown_246",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 23.829,
       "distance": -21.641,
       "height": 14.719,
@@ -7965,7 +7965,7 @@
     },
     {
       "id": "crown_247",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -18.637,
       "distance": 0.048,
       "height": 16.031,
@@ -7986,7 +7986,7 @@
     },
     {
       "id": "crown_248",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -26.962,
       "distance": -19.795,
       "height": 12.313,
@@ -8007,7 +8007,7 @@
     },
     {
       "id": "crown_249",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -3.89,
       "distance": -10.058,
       "height": 14.063,
@@ -8028,7 +8028,7 @@
     },
     {
       "id": "crown_250",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 30.373,
       "distance": -24.054,
       "height": 11.438,
@@ -8049,7 +8049,7 @@
     },
     {
       "id": "crown_251",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 12.57,
       "distance": -26.635,
       "height": 16.031,
@@ -8070,7 +8070,7 @@
     },
     {
       "id": "crown_252",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 26.911,
       "distance": -18.068,
       "height": 13.188,
@@ -8091,7 +8091,7 @@
     },
     {
       "id": "crown_253",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 20.729,
       "distance": -30.086,
       "height": 14.938,
@@ -8112,7 +8112,7 @@
     },
     {
       "id": "crown_254",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 29.236,
       "distance": -13.623,
       "height": 12.969,
@@ -8133,7 +8133,7 @@
     },
     {
       "id": "crown_255",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -38.152,
       "distance": -4.629,
       "height": 11.438,
@@ -8154,7 +8154,7 @@
     },
     {
       "id": "crown_256",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 25.083,
       "distance": -14.24,
       "height": 14.938,
@@ -8175,7 +8175,7 @@
     },
     {
       "id": "crown_257",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -3.463,
       "distance": -25.217,
       "height": 11.438,
@@ -8196,7 +8196,7 @@
     },
     {
       "id": "crown_258",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 14.505,
       "distance": -15.155,
       "height": 13.844,
@@ -8217,7 +8217,7 @@
     },
     {
       "id": "crown_259",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 33.636,
       "distance": -11.411,
       "height": 15.156,
@@ -8238,7 +8238,7 @@
     },
     {
       "id": "crown_260",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 22.684,
       "distance": -9.92,
       "height": 13.844,
@@ -8259,7 +8259,7 @@
     },
     {
       "id": "crown_261",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 14.516,
       "distance": -8.945,
       "height": 17.781,
@@ -8280,7 +8280,7 @@
     },
     {
       "id": "crown_262",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 53.832,
       "distance": -28.397,
       "height": 14.938,
@@ -8301,7 +8301,7 @@
     },
     {
       "id": "crown_263",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 12.538,
       "distance": -12.496,
       "height": 16.031,
@@ -8322,7 +8322,7 @@
     },
     {
       "id": "crown_264",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 8.135,
       "distance": -25.188,
       "height": 16.688,
@@ -8343,7 +8343,7 @@
     },
     {
       "id": "crown_265",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -6.739,
       "distance": -12.707,
       "height": 14.938,
@@ -8364,7 +8364,7 @@
     },
     {
       "id": "crown_266",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 56.552,
       "distance": -30.247,
       "height": 13.844,
@@ -8385,7 +8385,7 @@
     },
     {
       "id": "crown_267",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 61.734,
       "distance": -14.085,
       "height": 14.281,
@@ -8406,7 +8406,7 @@
     },
     {
       "id": "crown_268",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -36.903,
       "distance": -27.044,
       "height": 11.656,
@@ -8427,7 +8427,7 @@
     },
     {
       "id": "crown_269",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -40.055,
       "distance": -19.231,
       "height": 16.031,
@@ -8448,7 +8448,7 @@
     },
     {
       "id": "crown_270",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -32.656,
       "distance": -2.901,
       "height": 14.719,
@@ -8469,7 +8469,7 @@
     },
     {
       "id": "crown_271",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -23.03,
       "distance": -1.551,
       "height": 14.938,
@@ -8490,7 +8490,7 @@
     },
     {
       "id": "crown_272",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 6.172,
       "distance": -8.294,
       "height": 14.719,
@@ -8511,7 +8511,7 @@
     },
     {
       "id": "crown_273",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 56.372,
       "distance": -25.797,
       "height": 14.938,
@@ -8532,7 +8532,7 @@
     },
     {
       "id": "crown_274",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 59.177,
       "distance": -9.677,
       "height": 17.344,
@@ -8553,7 +8553,7 @@
     },
     {
       "id": "crown_275",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -29.044,
       "distance": -28.629,
       "height": 12.969,
@@ -8574,7 +8574,7 @@
     },
     {
       "id": "crown_276",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 43.863,
       "distance": -5.319,
       "height": 11.656,
@@ -8595,7 +8595,7 @@
     },
     {
       "id": "crown_277",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -33.395,
       "distance": -29.351,
       "height": 14.281,
@@ -8616,7 +8616,7 @@
     },
     {
       "id": "crown_278",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -12.965,
       "distance": -20.251,
       "height": 12.531,
@@ -8637,7 +8637,7 @@
     },
     {
       "id": "crown_279",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 9.235,
       "distance": -0.889,
       "height": 16.688,
@@ -8658,7 +8658,7 @@
     },
     {
       "id": "crown_280",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 24.309,
       "distance": -16.888,
       "height": 12.969,
@@ -8679,7 +8679,7 @@
     },
     {
       "id": "crown_281",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 50.749,
       "distance": -14.541,
       "height": 15.156,
@@ -8700,7 +8700,7 @@
     },
     {
       "id": "crown_282",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -41.809,
       "distance": -16.776,
       "height": 14.281,
@@ -8721,7 +8721,7 @@
     },
     {
       "id": "crown_283",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -17.866,
       "distance": -23.899,
       "height": 11.656,
@@ -8742,7 +8742,7 @@
     },
     {
       "id": "crown_284",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -34.135,
       "distance": -26.079,
       "height": 13.844,
@@ -8763,7 +8763,7 @@
     },
     {
       "id": "crown_285",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": 37.037,
       "distance": -14.958,
       "height": 14.938,
@@ -8784,7 +8784,7 @@
     },
     {
       "id": "crown_286",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 26.361,
       "distance": -7.535,
       "height": 14.719,
@@ -8805,7 +8805,7 @@
     },
     {
       "id": "crown_287",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -23.024,
       "distance": -17.992,
       "height": 13.406,
@@ -8826,7 +8826,7 @@
     },
     {
       "id": "crown_288",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -16.323,
       "distance": -8.178,
       "height": 12.531,
@@ -8847,7 +8847,7 @@
     },
     {
       "id": "crown_289",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -30.231,
       "distance": -32.157,
       "height": 11.438,
@@ -8868,7 +8868,7 @@
     },
     {
       "id": "crown_290",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -19.757,
       "distance": -25.916,
       "height": 15.813,
@@ -8889,7 +8889,7 @@
     },
     {
       "id": "crown_291",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -43.341,
       "distance": -12.07,
       "height": 17.344,
@@ -8910,7 +8910,7 @@
     },
     {
       "id": "crown_292",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -19.574,
       "distance": -18.481,
       "height": 17.344,
@@ -8931,7 +8931,7 @@
     },
     {
       "id": "crown_293",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 50.774,
       "distance": -31.23,
       "height": 16.469,
@@ -8952,7 +8952,7 @@
     },
     {
       "id": "crown_294",
-      "name": "Крона сосны",
+      "name": "Pine crown",
       "across": -20.083,
       "distance": -13.661,
       "height": 12.313,
@@ -8973,7 +8973,7 @@
     },
     {
       "id": "crown_295",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 16.898,
       "distance": -12.217,
       "height": 16.031,
@@ -8994,7 +8994,7 @@
     },
     {
       "id": "crown_296",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": 7.401,
       "distance": -30.803,
       "height": 13.406,
@@ -9015,7 +9015,7 @@
     },
     {
       "id": "crown_297",
-      "name": "Крона берёзы",
+      "name": "Birch crown",
       "across": -22.579,
       "distance": -26.975,
       "height": 16.469,
@@ -9036,7 +9036,7 @@
     },
     {
       "id": "tuft_0",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -10.312,
       "distance": 18.811,
       "height": 0.793,
@@ -9050,7 +9050,7 @@
     },
     {
       "id": "tuft_1",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -8.931,
       "distance": 6.899,
       "height": 0.749,
@@ -9064,7 +9064,7 @@
     },
     {
       "id": "tuft_2",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -11.728,
       "distance": 12.374,
       "height": 0.386,
@@ -9078,7 +9078,7 @@
     },
     {
       "id": "tuft_3",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -7.372,
       "distance": 22.278,
       "height": 0.368,
@@ -9092,7 +9092,7 @@
     },
     {
       "id": "tuft_4",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 11.768,
       "distance": 20.307,
       "height": 0.566,
@@ -9106,7 +9106,7 @@
     },
     {
       "id": "tuft_5",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 5.055,
       "distance": 20.451,
       "height": 0.458,
@@ -9120,7 +9120,7 @@
     },
     {
       "id": "tuft_6",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 4.775,
       "distance": 13.576,
       "height": 0.514,
@@ -9134,7 +9134,7 @@
     },
     {
       "id": "tuft_7",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 7.843,
       "distance": 2.698,
       "height": 0.609,
@@ -9148,7 +9148,7 @@
     },
     {
       "id": "tuft_8",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -4.542,
       "distance": 18.958,
       "height": 0.561,
@@ -9162,7 +9162,7 @@
     },
     {
       "id": "tuft_9",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -2.538,
       "distance": 9.385,
       "height": 0.821,
@@ -9176,7 +9176,7 @@
     },
     {
       "id": "tuft_10",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -9.498,
       "distance": 18.073,
       "height": 0.687,
@@ -9190,7 +9190,7 @@
     },
     {
       "id": "tuft_11",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 6.293,
       "distance": 23.605,
       "height": 0.455,
@@ -9204,7 +9204,7 @@
     },
     {
       "id": "tuft_12",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -3.243,
       "distance": 21.453,
       "height": 0.558,
@@ -9218,7 +9218,7 @@
     },
     {
       "id": "tuft_13",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 10.666,
       "distance": 14.013,
       "height": 0.599,
@@ -9232,7 +9232,7 @@
     },
     {
       "id": "tuft_14",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 9.434,
       "distance": 19.828,
       "height": 0.5,
@@ -9246,7 +9246,7 @@
     },
     {
       "id": "tuft_15",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 4.721,
       "distance": 12.728,
       "height": 0.697,
@@ -9260,7 +9260,7 @@
     },
     {
       "id": "tuft_16",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 4.563,
       "distance": 1.073,
       "height": 0.47,
@@ -9274,7 +9274,7 @@
     },
     {
       "id": "tuft_17",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 11.34,
       "distance": 21.723,
       "height": 0.468,
@@ -9288,7 +9288,7 @@
     },
     {
       "id": "tuft_18",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -1.984,
       "distance": 21.029,
       "height": 0.521,
@@ -9302,7 +9302,7 @@
     },
     {
       "id": "tuft_19",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -0.882,
       "distance": 20.74,
       "height": 0.423,
@@ -9316,7 +9316,7 @@
     },
     {
       "id": "tuft_20",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 6.138,
       "distance": 8.57,
       "height": 0.836,
@@ -9330,7 +9330,7 @@
     },
     {
       "id": "tuft_21",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -4.068,
       "distance": 19.722,
       "height": 0.78,
@@ -9344,7 +9344,7 @@
     },
     {
       "id": "tuft_22",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -11.69,
       "distance": 18.736,
       "height": 0.74,
@@ -9358,7 +9358,7 @@
     },
     {
       "id": "tuft_23",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -7.81,
       "distance": 3.957,
       "height": 0.82,
@@ -9372,7 +9372,7 @@
     },
     {
       "id": "tuft_24",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 5.168,
       "distance": 1.277,
       "height": 0.649,
@@ -9386,7 +9386,7 @@
     },
     {
       "id": "tuft_25",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -2.8,
       "distance": 9.881,
       "height": 0.656,
@@ -9400,7 +9400,7 @@
     },
     {
       "id": "tuft_26",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -5.929,
       "distance": 9.883,
       "height": 0.394,
@@ -9414,7 +9414,7 @@
     },
     {
       "id": "tuft_27",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 11.36,
       "distance": 6.21,
       "height": 0.438,
@@ -9428,7 +9428,7 @@
     },
     {
       "id": "tuft_28",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 7.484,
       "distance": 6.833,
       "height": 0.716,
@@ -9442,7 +9442,7 @@
     },
     {
       "id": "tuft_29",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 9.94,
       "distance": 7.512,
       "height": 0.638,
@@ -9456,7 +9456,7 @@
     },
     {
       "id": "tuft_30",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -6.973,
       "distance": 14.44,
       "height": 0.498,
@@ -9470,7 +9470,7 @@
     },
     {
       "id": "tuft_31",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 7.971,
       "distance": 22.505,
       "height": 0.829,
@@ -9484,7 +9484,7 @@
     },
     {
       "id": "tuft_32",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 9.916,
       "distance": 5.816,
       "height": 0.602,
@@ -9498,7 +9498,7 @@
     },
     {
       "id": "tuft_33",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -1.895,
       "distance": 19.911,
       "height": 0.454,
@@ -9512,7 +9512,7 @@
     },
     {
       "id": "tuft_34",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -11.897,
       "distance": 18.429,
       "height": 0.824,
@@ -9526,7 +9526,7 @@
     },
     {
       "id": "tuft_35",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 3.81,
       "distance": 6.141,
       "height": 0.645,
@@ -9540,7 +9540,7 @@
     },
     {
       "id": "tuft_36",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -7.905,
       "distance": 10.657,
       "height": 0.798,
@@ -9554,7 +9554,7 @@
     },
     {
       "id": "tuft_37",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 3.625,
       "distance": 14.236,
       "height": 0.446,
@@ -9568,7 +9568,7 @@
     },
     {
       "id": "tuft_38",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 5.617,
       "distance": 14.858,
       "height": 0.668,
@@ -9582,7 +9582,7 @@
     },
     {
       "id": "tuft_39",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -4.409,
       "distance": 19.837,
       "height": 0.404,
@@ -9596,7 +9596,7 @@
     },
     {
       "id": "tuft_40",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -13.991,
       "distance": 5.914,
       "height": 0.808,
@@ -9610,7 +9610,7 @@
     },
     {
       "id": "tuft_41",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 2.31,
       "distance": 17.72,
       "height": 0.397,
@@ -9624,7 +9624,7 @@
     },
     {
       "id": "tuft_42",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 3.719,
       "distance": 16.075,
       "height": 0.448,
@@ -9638,7 +9638,7 @@
     },
     {
       "id": "tuft_43",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 2.907,
       "distance": 7.096,
       "height": 0.576,
@@ -9652,7 +9652,7 @@
     },
     {
       "id": "tuft_44",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -13.639,
       "distance": 19.673,
       "height": 0.643,
@@ -9666,7 +9666,7 @@
     },
     {
       "id": "tuft_45",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 5.699,
       "distance": 10.438,
       "height": 0.435,
@@ -9680,7 +9680,7 @@
     },
     {
       "id": "tuft_46",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -1.795,
       "distance": 16.312,
       "height": 0.451,
@@ -9694,7 +9694,7 @@
     },
     {
       "id": "tuft_47",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": 11.582,
       "distance": 24.434,
       "height": 0.357,
@@ -9708,7 +9708,7 @@
     },
     {
       "id": "tuft_48",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -0.464,
       "distance": 21.043,
       "height": 0.424,
@@ -9722,7 +9722,7 @@
     },
     {
       "id": "tuft_49",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -13.672,
       "distance": 5.599,
       "height": 0.527,
@@ -9736,7 +9736,7 @@
     },
     {
       "id": "tuft_50",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -8.713,
       "distance": 3.001,
       "height": 0.738,
@@ -9750,7 +9750,7 @@
     },
     {
       "id": "tuft_51",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": -7.079,
       "distance": 23.905,
       "height": 0.832,
@@ -9764,7 +9764,7 @@
     },
     {
       "id": "tuft_52",
-      "name": "Папоротник",
+      "name": "Fern",
       "across": -4.848,
       "distance": 7.683,
       "height": 0.351,
@@ -9778,7 +9778,7 @@
     },
     {
       "id": "tuft_53",
-      "name": "Пучок травы",
+      "name": "Tuft of grass",
       "across": 6.791,
       "distance": 8.409,
       "height": 0.566,
@@ -9792,7 +9792,7 @@
     },
     {
       "id": "fire_pit",
-      "name": "Кострище",
+      "name": "Fire pit",
       "on": "headland",
       "across": -1,
       "distance": -6.6,
@@ -9806,7 +9806,7 @@
     },
     {
       "id": "fire",
-      "name": "Костёр",
+      "name": "Fire",
       "on": "headland",
       "across": -1,
       "distance": -6.6,
@@ -9821,7 +9821,7 @@
     },
     {
       "id": "flame",
-      "name": "Пламя костра",
+      "name": "Flames of the fire",
       "on": "headland",
       "across": -1,
       "distance": -6.6,
@@ -9847,7 +9847,7 @@
     },
     {
       "id": "embers",
-      "name": "Искры костра",
+      "name": "Sparks of the fire",
       "on": "headland",
       "across": -1,
       "distance": -6.6,
@@ -9860,7 +9860,7 @@
     },
     {
       "id": "drift",
-      "name": "Плавник у устья",
+      "name": "Driftwood at the mouth",
       "across": 7,
       "distance": 37.5,
       "height": 0.3,
@@ -9873,7 +9873,7 @@
     },
     {
       "id": "bushes",
-      "name": "Кусты",
+      "name": "Bushes",
       "across": -6,
       "distance": 31.5,
       "height": 1.4,
@@ -9886,7 +9886,7 @@
     },
     {
       "id": "fall",
-      "name": "Перекаты",
+      "name": "Rapids",
       "across": 1.661,
       "distance": 8.8,
       "height": 2.5,
@@ -9899,7 +9899,7 @@
     },
     {
       "id": "spray_0",
-      "name": "Белая вода",
+      "name": "White water",
       "across": 1.661,
       "distance": 9.15,
       "elevation": 0.29,
@@ -9945,7 +9945,7 @@
     },
     {
       "id": "spray_1",
-      "name": "Белая вода",
+      "name": "White water",
       "across": 1.182,
       "distance": 19.15,
       "elevation": 0.29,
@@ -9991,7 +9991,7 @@
     },
     {
       "id": "spray_2",
-      "name": "Белая вода",
+      "name": "White water",
       "across": 2.974,
       "distance": 26.95,
       "elevation": 0.29,
@@ -10037,7 +10037,7 @@
     },
     {
       "id": "spray_3",
-      "name": "Белая вода",
+      "name": "White water",
       "across": 3.106,
       "distance": 28.25,
       "elevation": 0.29,
@@ -10083,7 +10083,7 @@
     },
     {
       "id": "spray_4",
-      "name": "Белая вода",
+      "name": "White water",
       "across": 3.22,
       "distance": 29.55,
       "elevation": 0.29,
@@ -10129,7 +10129,7 @@
     },
     {
       "id": "spray_5",
-      "name": "Белая вода",
+      "name": "White water",
       "across": 3.331,
       "distance": 30.85,
       "elevation": 0.29,
@@ -10175,7 +10175,7 @@
     },
     {
       "id": "spray_6",
-      "name": "Белая вода",
+      "name": "White water",
       "across": 3.397,
       "distance": 32.15,
       "elevation": 0.29,
@@ -10221,7 +10221,7 @@
     },
     {
       "id": "reeds",
-      "name": "Камыш",
+      "name": "Reeds",
       "across": 5.2,
       "distance": 25.5,
       "height": 1.7,
@@ -10234,7 +10234,7 @@
     },
     {
       "id": "snag",
-      "name": "Коряга",
+      "name": "Snag",
       "across": -0.747,
       "distance": 2.631,
       "height": 0.8,
@@ -10247,7 +10247,7 @@
     },
     {
       "id": "snag2",
-      "name": "Вторая коряга",
+      "name": "Second snag",
       "across": -1.612,
       "distance": 16.865,
       "height": 0.8,
@@ -10260,7 +10260,7 @@
     },
     {
       "id": "pool_1",
-      "name": "Ручей у ног",
+      "name": "Stream at the feet",
       "plane": true,
       "across": 2,
       "distance": -18.6,
@@ -10277,7 +10277,7 @@
     },
     {
       "id": "pool_2",
-      "name": "Ручей, вторая заводь",
+      "name": "Stream, the second pool",
       "plane": true,
       "across": 2,
       "distance": 14.3,
@@ -10294,7 +10294,7 @@
     },
     {
       "id": "pool_3",
-      "name": "Ручей над перекатом",
+      "name": "Stream above the rapids",
       "plane": true,
       "across": 2,
       "distance": 23.2,
@@ -10311,7 +10311,7 @@
     },
     {
       "id": "stones",
-      "name": "Камни ручья",
+      "name": "Stream's stones",
       "across": 0,
       "distance": 15,
       "height": 0.5,
@@ -10324,7 +10324,7 @@
     },
     {
       "id": "toy",
-      "name": "Яхта на ручье",
+      "name": "Yacht on the stream",
       "across": 3.276,
       "distance": -16.456,
       "elevation": 0.25,
@@ -10343,7 +10343,7 @@
     },
     {
       "id": "assol",
-      "name": "Ассоль",
+      "name": "Assol",
       "person": {
         "cast": "cast",
         "who": "assol",
@@ -10359,7 +10359,7 @@
     },
     {
       "id": "grey",
-      "name": "Грей",
+      "name": "Gray",
       "person": {
         "cast": "cast",
         "who": "grey",
@@ -10375,7 +10375,7 @@
     },
     {
       "id": "letika",
-      "name": "Летика",
+      "name": "Letika",
       "person": {
         "cast": "cast",
         "who": "letika",
@@ -10391,7 +10391,7 @@
     },
     {
       "id": "egl",
-      "name": "Эгль",
+      "name": "Egle",
       "person": {
         "cast": "cast",
         "who": "egl",
