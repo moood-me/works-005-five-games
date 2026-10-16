@@ -8,15 +8,17 @@
 // The beds — what lasts; one of each for the page, as loud as `level`, getting there over `seconds`:
 //   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
 //   clock — the leitmotif: Fogg's watch and Passepartout's ticking, the club's pendulum under them
-//   wheels — the train on the rail joints · jungle — birds and leaves · elephant — Kiouni's footfall and the howdah
-//   drums — drums at night, far · storm — a gale at sea · runners — the sledge on snow · fog — London in the fog
-//   furnace — the «Henrietta»'s fire and engine · town — far voices, steps (a harbour, a street) · crowd — a crowd
-//   close · sea — the sea at a quay or a ship's side · fire — a fire's roar and crackle · wind_cold — a thin cold wind
+//   wheels — the train on the rail joints · elephant — Kiouni's footfall and the howdah · drums — drums at night, far
+//   fog — London in the fog · runners — the sledge on snow · fire — a fire's crackle over its roar · wind_cold — a thin
+//   cold wind (these three: ambience.js)
+//   recordings (sounds/): jungle — birds in a rainforest · storm — a gale at sea · furnace — an engine room · town — far
+//   voices, steps (a harbour, a street) · crowd — a crowd close · sea — water along a boat's side
 // Played once: motif() — the theme's first five notes on a celesta; trumpet · tock · cannon · shots · crack · splash ·
 //   stamp · notes · hooves; and the frame's: bell · creak · click · clunk · tick · tick2 · laugh · roar · applause ·
 //   whistle · whisper · coins · slap · flame · drag · cough · steps · door · trainHiss · trainWhistle · church · paper ·
 //   puff · whistleBlow · blast
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}: theme() — the game's own tune on strings
+import { built, kit } from './ambience.js';
 
 // THEME — the tune of «Вокруг света»: sixteen bars in 3/4, A♭ major (the world's key: A_FLAT_MAJOR_F_MINOR), ♩ = 120,
 // light and going, a journey's step. Each bar: its notes [pitch, beats] and the chord held under it (lowest first).
@@ -202,18 +204,6 @@ function swell(t, dest, { kind = 'pink', f, Q = 1, type = 'bandpass', points, sw
   shape(e.gain, t, points);
   return e;
 }
-// a drop of water: a short note bending
-function drop(t, dest, f, bend, loud) {
-  const a = audio(), o = a.createOscillator(), e = a.createGain();
-  o.frequency.setValueAtTime(f, t);
-  o.frequency.exponentialRampToValueAtTime(f * bend, t + 0.05);
-  e.gain.setValueAtTime(0, t);
-  e.gain.linearRampToValueAtTime(loud, t + 0.003);
-  e.gain.exponentialRampToValueAtTime(0.0005, t + 0.14);
-  o.connect(e).connect(dest);
-  o.start(t);
-  o.stop(t + 0.18);
-}
 // a voice's syllable: noise through two formants (a vowel), up and down in `len` — far voices, a laugh, a cough
 function syllable(t, dest, { f1, f2, len, loud, kind = 'pink', pitch }) {
   const a = audio(), e = a.createGain(), src = a.createGain();
@@ -298,6 +288,24 @@ function bowed(dest, { body = 1 } = {}) {
   };
 }
 
+// recordings (sounds/ — CC0, from Freesound: sounds/README.md): fetched and decoded once each; a bed plays one of its own
+// round and round from a random point, `gain` bringing it to as loud as the bed it took the place of
+const recordings = {};
+function recording(file) {
+  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b)));
+}
+function recorded(files, gain) {
+  return ({ a, out, keep }) => {
+    const s = a.createBufferSource(), g = a.createGain();
+    let on = true;
+    keep({ stop() { on = false; if (s.buffer) s.stop(); } });
+    g.gain.value = gain;
+    s.loop = true;
+    s.connect(g).connect(out);
+    recording(files[Math.floor(Math.random() * files.length)]).then(buf => { if (on) { s.buffer = buf; s.start(a.currentTime, Math.random() * buf.duration); } });
+  };
+}
+
 // the beds: one of each for the page, built when first heard and taken down once silent (as AP's): build({a, t, out,
 // noise, sway, keep, every}) → optionally tune(level, seconds)
 const sounding = {};
@@ -334,98 +342,17 @@ function bed(name, wet, room, build, level, seconds) {
   });
 }
 
-// a place full of people: voices far or near, syllables in many vowels and pitches
-function voices(name, { wet, rate, loud, far, steps }, level, seconds) {
-  bed(name, wet, 'square', ({ a, t, out, noise, sway, every }) => {
-    const dist = filter({ type: 'lowpass', frequency: far ? 1800 : 3200 });
-    dist.connect(out);
-    const body = a.createGain();
-    body.gain.value = loud * 0.5;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 600, Q: 0.8 })).connect(body).connect(dist);
-    sway(body.gain, 0.09, loud * 0.15);
-    let next = t + 0.1, step = t + 2;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next -= Math.log(1 - Math.random()) / rate) {
-        const [f1, f2] = VOWELS[Math.floor(Math.random() * VOWELS.length)], k = rnd(0.85, 1.2);
-        syllable(next, dist, { f1: f1 * k, f2: f2 * k, len: rnd(0.12, 0.35), loud: loud * rnd(0.3, 1), pitch: rnd(110, 260) });
-      }
-      if (steps && step < now + 0.4) { // a few steps on stone, someone crossing
-        for (let i = 0; i < 4; i++) burst(Math.max(step, now) + i * 0.52, out, { kind: 'brown', f: 900, Q: 1.5, len: 0.05, loud: 0.12 });
-        step = now + rnd(6, 14);
-      }
-    });
-  }, level, seconds);
-}
-export function town(level = 1, seconds = 2) { voices('town', { wet: 0.35, rate: 6, loud: 0.32, far: true, steps: true }, level, seconds); }
-export function crowd(level = 1, seconds = 2) { voices('crowd', { wet: 0.25, rate: 26, loud: 0.26, far: false }, level, seconds); }
+// a street, far voices: a recording
+export function town(level = 1, seconds = 2) { bed('town', 0.05, 'square', recorded(['square-414453.mp3'], 0.48), level, seconds); }
+// a crowd: a recording
+export function crowd(level = 1, seconds = 2) { bed('crowd', 0.05, 'square', recorded(['crowd-689725.mp3'], 0.5), level, seconds); }
 
-export function sea(level = 1, seconds = 2) {
-  bed('sea', 0.25, 'square', ({ a, t, out, noise, sway, every }) => {
-    const deep = a.createGain();
-    deep.gain.value = 0.5;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 450 })).connect(deep).connect(out);
-    sway(deep.gain, 0.05, 0.12);
-    const tone = filter({ type: 'lowpass', frequency: 350 }), body = a.createGain(), foam = a.createGain();
-    body.gain.value = 0;
-    foam.gain.value = 0;
-    noise('brown').connect(tone).connect(body).connect(out);
-    noise('pink').connect(filter({ type: 'highpass', frequency: 2200 })).connect(foam).connect(out);
-    let next = t + 1;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.5) return;
-      const at = Math.max(next, now), big = 0.5 + Math.random() * 0.4;
-      // against stone, not sand: the wave slaps the mole and falls back
-      shape(body.gain, at, [[2.2, 0.8 * big], [2.6, 0.6 * big], [5, 0]]);
-      shape(tone.frequency, at, [[2.2, 900], [5, 350]], 350);
-      shape(foam.gain, at, [[2.1, 0], [2.5, 0.45 * big], [3.4, 0.2 * big], [5.6, 0]]);
-      next = at + 7 + Math.random() * 2;
-    });
-  }, level, seconds);
-}
+// the sea: a recording
+export function sea(level = 1, seconds = 2) { bed('sea', 0.05, 'square', recorded(['sea-ship-690162.mp3'], 2.23), level, seconds); }
 
-export function fire(level = 1, seconds = 2) {
-  bed('fire', 0.25, 'booth', ({ a, t, out, noise, sway, every }) => {
-    const roar = a.createGain(), flame = a.createGain();
-    roar.gain.value = 0.55;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 190 })).connect(roar).connect(out);
-    sway(roar.gain, 0.3, 0.15);
-    flame.gain.value = 0.14;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 520, Q: 0.7 })).connect(flame).connect(out);
-    sway(flame.gain, 6.1, 0.06);
-    sway(flame.gain, 0.5, 0.04);
-    let next = t + 0.1;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next -= Math.log(1 - Math.random()) / 9) {
-        const at = Math.max(next, now);
-        if (Math.random() < 0.1) burst(at, out, { f: rnd(500, 900), Q: 2, len: 0.07, loud: 0.4 });
-        else burst(at, out, { f: rnd(1500, 5000), Q: 1.5, len: rnd(0.006, 0.025), loud: 0.05 + Math.random() ** 2 * 0.3 });
-      }
-    });
-  }, level, seconds);
-}
+export function fire(level = 1, seconds = 2) { bed('fire', 0.15, 'square', ({ a, out, keep, every }) => built.campfire(kit(a, keep, every), out, 1.53), level, seconds); }
 
-export function wind_cold(level = 1, seconds = 2) {
-  bed('wind_cold', 0.2, 'square', ({ a, out, noise, sway }) => {
-    // a thin wind, 200–600 Hz, now fuller, now thinner; a faint whistle high in it
-    const band = filter({ type: 'bandpass', frequency: 380, Q: 1.4 }), amp = a.createGain();
-    amp.gain.value = 0.6;
-    noise('pink').connect(band).connect(amp).connect(out);
-    sway(band.frequency, 0.06, 170);
-    sway(band.frequency, 0.027, 60);
-    sway(amp.gain, 0.1, 0.2);
-    sway(amp.gain, 0.037, 0.12);
-    const whine = filter({ type: 'bandpass', frequency: 1700, Q: 14 }), wa = a.createGain();
-    wa.gain.value = 0.04;
-    noise('pink').connect(whine).connect(wa).connect(out);
-    sway(whine.frequency, 0.05, 250);
-    sway(wa.gain, 0.08, 0.035);
-  }, level, seconds);
-}
+export function wind_cold(level = 1, seconds = 2) { bed('wind_cold', 0.2, 'square', ({ a, out, keep, every }) => built.wind_cold(kit(a, keep, every), out, 1.36), level, seconds); }
 
 // the clocks — the game's leitmotif: Fogg's exact watch (bright, quick), Passepartout's big silver one (a little behind
 // it, deeper), and under them, when `level` > 0.6, the club's pendulum (a slow wooden tock every second). Each tick a
@@ -466,30 +393,8 @@ export function wheels(level = 1, seconds = 2) {
 }
 
 // the jungle by day: birds far off (a whistle bending), insects in a thin band, leaves
-export function jungle(level = 1, seconds = 2) {
-  bed('jungle', 0.3, 'square', ({ a, t, out, noise, sway, every }) => {
-    const leaves = a.createGain();
-    leaves.gain.value = 0.08;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 2400, Q: 0.6 })).connect(leaves).connect(out);
-    sway(leaves.gain, 0.12, 0.05);
-    let next = t + 0.5;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.4) return;
-      const at = Math.max(next, now), f = rnd(1800, 3400), n = 1 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < n; i++) {
-        const o = a.createOscillator(), e = a.createGain(), s = at + i * 0.18;
-        o.frequency.setValueAtTime(f, s);
-        o.frequency.exponentialRampToValueAtTime(f * rnd(0.6, 1.4), s + 0.14);
-        shape(e.gain, s, [[0.02, 0.03], [0.15, 0]]);
-        o.connect(e).connect(out);
-        o.start(s);
-        o.stop(s + 0.2);
-      }
-      next = at + rnd(1.2, 4);
-    });
-  }, level, seconds);
-}
+// the jungle: a recording
+export function jungle(level = 1, seconds = 2) { bed('jungle', 0.05, 'square', recorded(['jungle-636072.mp3'], 0.89), level, seconds); }
 
 // the elephant's walk: a heavy soft footfall, four to a stride, the howdah's ropes creaking with the sway
 export function elephant(level = 1, seconds = 2) {
@@ -525,47 +430,11 @@ export function drums(level = 1, seconds = 2) {
 }
 
 // the storm at sea: the gale's roar and whine, big waves breaking, spray
-export function storm(level = 1, seconds = 2) {
-  bed('storm', 0.2, 'square', ({ a, t, out, noise, sway, every }) => {
-    const gale = filter({ type: 'bandpass', frequency: 500, Q: 0.8 }), g = a.createGain();
-    g.gain.value = 0.55;
-    noise('pink').connect(gale).connect(g).connect(out);
-    sway(gale.frequency, 0.09, 250);
-    sway(g.gain, 0.13, 0.2);
-    const whine = filter({ type: 'bandpass', frequency: 1300, Q: 10 }), w = a.createGain();
-    w.gain.value = 0.05;
-    noise('pink').connect(whine).connect(w).connect(out);
-    sway(whine.frequency, 0.07, 400);
-    let next = t + 1;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.5) return;
-      const at = Math.max(next, now), big = rnd(0.6, 1);
-      swell(at, out, { kind: 'brown', f: 300, type: 'lowpass', points: [[1.5, 0.9 * big], [2.2, 0.6 * big], [4.5, 0]] });
-      swell(at + 1.3, out, { kind: 'white', f: 3000, type: 'highpass', points: [[0.3, 0.25 * big], [2.5, 0]] });
-      next = at + rnd(4.5, 6.5);
-    });
-  }, level, seconds);
-}
+// a storm at sea: a recording
+export function storm(level = 1, seconds = 2) { bed('storm', 0.05, 'square', recorded(['storm-441108.mp3'], 1.73), level, seconds); }
 
 // the sledge: the runners hissing on the snow, a soft thump on each wave of it, the sail's cloth
-export function runners(level = 1, seconds = 2) {
-  bed('runners', 0.2, 'square', ({ a, t, out, noise, sway, every }) => {
-    const hissing = a.createGain();
-    hissing.gain.value = 0.3;
-    noise('white').connect(filter({ type: 'bandpass', frequency: 4200, Q: 0.7 })).connect(hissing).connect(out);
-    sway(hissing.gain, 0.6, 0.1);
-    let next = t + 0.5;
-    every(() => {
-      const now = a.currentTime;
-      if (next > now + 0.4) return;
-      const at = Math.max(next, now);
-      burst(at, out, { kind: 'brown', f: 140, Q: 1, len: 0.2, loud: 0.3 });
-      if (Math.random() < 0.3) swell(at + 0.1, out, { f: 600, Q: 1.5, points: [[0.08, 0.15], [0.4, 0]] });
-      next = at + rnd(0.9, 2);
-    });
-  }, level, seconds);
-}
+export function runners(level = 1, seconds = 2) { bed('runners', 0.2, 'square', ({ a, out, keep, every }) => built.runners(kit(a, keep, every), out, 1.62), level, seconds); }
 
 // London in the fog: a low city hum, hooves and wheels far off now and then, a cab passing
 export function fog(level = 1, seconds = 2) {
@@ -588,23 +457,8 @@ export function fog(level = 1, seconds = 2) {
 }
 
 // the furnace of the «Henrietta»: the fire's roar through an open hatch, the engine's thud and the screw
-export function furnace(level = 1, seconds = 2) {
-  bed('furnace', 0.2, 'booth', ({ a, t, out, noise, sway, every }) => {
-    const roar = a.createGain();
-    roar.gain.value = 0.55;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 260 })).connect(roar).connect(out);
-    sway(roar.gain, 0.4, 0.2);
-    let next = t + 0.1;
-    every(() => {
-      const now = a.currentTime;
-      if (next < now) next = now;
-      for (; next < now + 0.4; next += 0.55) {
-        burst(next, out, { kind: 'brown', f: 70, Q: 1.5, len: 0.25, loud: 0.4 });
-        if (Math.random() < 0.3) burst(next + 0.2, out, { f: rnd(1500, 4000), Q: 1.5, len: 0.02, loud: 0.15 });
-      }
-    });
-  }, level, seconds);
-}
+// an engine room: a recording
+export function furnace(level = 1, seconds = 2) { bed('furnace', 0.05, 'square', recorded(['furnace-74915.mp3'], 1.94), level, seconds); }
 
 const BEDS = { clock, wheels, jungle, elephant, drums, storm, runners, fog, furnace, town, crowd, sea, fire, wind_cold };
 export function beds(levels = {}, seconds = 2) {
