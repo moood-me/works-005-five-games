@@ -198,8 +198,8 @@ export default {
       const boat = g.told('meet:boat');
       const meet = g.beat('meet');
       await boat;
-      await g.say('grey', 'Well, here I am. Do you know me?');
-      await g.say('assol', 'Just so I imagined you');
+      await g.say('grey', 'Well, here I am. Do you recognise me?');
+      await g.say('assol', 'Just as I imagined you');
       await g.say('assol', 'And will you take my Longren too?');
       if (f.longren === 'sea') await g.say('grey', 'Yes. We\'ll find him');
       else await g.say('grey', 'Yes');

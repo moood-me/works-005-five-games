@@ -21,7 +21,7 @@ export default {
   about: 40,
   skipped: { touched: [], waited: true },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The night dragged on, and the lights on the horizon flared and died') });
+    const mg = g.minigame({ phrase: tr('The night dragged on; lights flared and died on the horizon') });
     mg.plate.set({ glow: null });
     const w0 = g.get('windows'), acts = new Set(), touched = [], journeys = [];
     let windows = w0, calm = 0, since = 0;

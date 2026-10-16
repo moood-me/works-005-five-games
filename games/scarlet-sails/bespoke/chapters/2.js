@@ -48,7 +48,7 @@ export default {
       await g.say('narrator', 'Gray made up his mind to be a captain');
       await painting;
       g.beds({});
-      await g.say('narrator', 'In the cellar he found a cask with words on it');
+      await g.say('narrator', 'In the cellar he found a cask with an inscription on it');
       await g.beat('cellar');
     },
     // the night he goes: ⚑ farewell at his mother's door, or quietly with the note

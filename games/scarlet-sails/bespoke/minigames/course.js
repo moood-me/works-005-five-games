@@ -21,7 +21,7 @@ const course = {
   async run(g, b, opts, signal) {
     const leg = opts.leg, sea = opts.sea;
     const A = (0.5 - 0.06 * sea) * (0.8 + 0.2 * leg);
-    const mg = g.minigame({ phrase: tr('The wind was carrying the Secret off her course for Kaperna') });
+    const mg = g.minigame({ phrase: tr('The wind drove the Secret off her course for Kaperna') });
     const send = keys(g);
     const helm = mg.lead({ steer: 'rate', zone: { at: 0, width: 2 * STEADY } });
     mg.glow('wheel');

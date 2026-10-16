@@ -142,7 +142,7 @@ export default async function (b) {
     } else if (ch.choices.length) {
       // the sails of the chapter; then on — or the chapter again, from how it began
       await far(ch.number, ch.title, rows(ch.choices, kept));
-      const to = await yacht([{ id: 'on', label: tr('Onward') }, { id: 'again', label: tr('The chapter again') }]);
+      const to = await yacht([{ id: 'on', label: tr('Onward') }, { id: 'again', label: tr('Play the chapter again') }]);
       if (to === 'again') next = kept.start;
     }
     kept = next || { ...kept, chapter: kept.chapter + 1, step: 0, start: undefined };

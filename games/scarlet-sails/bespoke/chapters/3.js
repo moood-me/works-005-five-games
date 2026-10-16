@@ -9,11 +9,11 @@ import ring from '../minigames/ring.js';
 export default {
   number: 'III',
   title: tr('Dawn'),
-  titles: ['Longren', 'The fire', 'Asleep', 'The ring', 'The tavern', 'The secret or straight'],
+  titles: ['Longren', 'The fire', 'Asleep', 'The ring', 'The tavern', 'The secret, or Longren'],
   choices: [
     { id: 'longren', weight: '⚑', title: tr('Longren goes to sea'), options: [{ id: 'go', label: tr('“Go. I\'ll manage”') }, { id: 'stay', label: tr('“Don\'t go”') }] },
     { id: 'ring', weight: '~', title: tr('The ring'), options: [{ id: 'wear', label: tr('Wear it') }, { id: 'hide', label: tr('Hide it on a cord') }] },
-    { id: 'way', weight: '⚑', title: tr('The secret or straight'), options: [{ id: 'secret', label: tr('The secret') }, { id: 'straight', label: tr('Straight') }] },
+    { id: 'way', weight: '⚑', title: tr('The secret, or Longren'), options: [{ id: 'secret', label: tr('The secret') }, { id: 'straight', label: tr('To Longren') }] },
   ],
   steps: [
     // Longren: the shop turns the toys away again; at home he means to go back to the sea
@@ -131,7 +131,7 @@ export default {
       const storm = g.beat('past_storm');
       g.beds({ storm: 1 }, 1);
       await cry;
-      await g.say('longren', 'She begged you just so!');
+      await g.say('longren', 'She begged you just the same way!');
       await gone;
       await g.say('narrator', 'A steamer picked Menners up. He lived long enough to tell Kaperna how Longren had watched');
       await storm;

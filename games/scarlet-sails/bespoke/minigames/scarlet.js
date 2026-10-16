@@ -21,7 +21,7 @@ export default {
     // the sample: the scarlet scrap of the first chapter (ui.css .scrap-sample)
     const scrap = document.createElement('i');
     scrap.className = 'scrap-sample';
-    const mg = g.minigame({ phrase: tr('There was much silk — cherry, rose, crimson — but not the right one'), sample: scrap });
+    const mg = g.minigame({ phrase: tr('Silk in plenty — cherry, rose, crimson — but not the right one'), sample: scrap });
     let wrong = 0, passed = false, shown = 0;
     const aborted = new Promise(ok => signal.addEventListener('abort', () => ok(null), { once: true }));
     const until = promise => Promise.race([promise, aborted]);

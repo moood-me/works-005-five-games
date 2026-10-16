@@ -49,7 +49,7 @@ export default {
       await g.scene(SCENES.shop, { beat: 'toys_in' });
       const toys = g.beat('toys_in');
       await no;
-      await g.say('merchant', 'We take no more. It\'s foreign ones in fashion now');
+      await g.say('merchant', 'We don\'t take them any more. Foreign toys are the fashion now');
       await toys;
     },
     // the stream: the toy ship afloat, and the run after it
@@ -77,7 +77,7 @@ export default {
       const tale = g.told('egl:tale'), sail = g.told('egl:sail'), boat = g.told('egl:boat');
       const egl = g.beat('egl');
       await tale;
-      await g.say('egl', 'I know not how many years will pass, but in Kaperna a tale will blossom');
+      await g.say('egl', 'I don\'t know how many years will pass, but in Kaperna a fairy tale will blossom');
       await sail;
       await g.say('egl', 'One morning, far out at sea, a scarlet sail will flash in the sun. A white ship will come straight towards you');
       await boat;
