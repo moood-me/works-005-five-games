@@ -379,12 +379,10 @@ const seconds = events => events.reduce((sum, e) => sum + (e[0] === 'beat' || e[
 say(`World: ${world} — ${WORLD.size} scenes. Game: ${CHAPTERS.length} chapters, ${CHAPTERS.reduce((n, ch) => n + ch.steps.length, 0)} steps, ${CHOICES.length} choices.`);
 say(`Plays: ${plays.length} (${combos.length} combinations of the choices and one each with ${OTHER.map(o => JSON.stringify(o)).join(', ')}).`);
 
-say(`
-== Discrepancies: ${misses.size} ==`);
+say(`\n== Discrepancies: ${misses.size} ==`);
 for (const [text, set] of misses) say(`${text}${met(set)}`);
 
-say(`
-== Cuts inside a scene (a beat not after its after): ${cuts.size} ==`);
+say(`\n== Cuts inside a scene (a beat not after its after): ${cuts.size} ==`);
 for (const [text, set] of cuts) say(`${text}${met(set)}`);
 
 say('\n== In the scenes\' contracts, named by no play ==');
@@ -411,8 +409,7 @@ const apart = (a, b) => {
   }
   return row[b.length];
 };
-say(`
-== Lines: ${lines.size} (who | text | ≈ s | where first) ==`);
+say(`\n== Lines: ${lines.size} (who | text | ≈ s | where first) ==`);
 const said = [...lines.values()];
 for (const line of said) {
   say(`${line.who} | ${line.text} | ${(0.3 + 0.06 * line.text.length).toFixed(1)} | ${line.where}`);
@@ -427,8 +424,7 @@ for (const line of said) {
 say('\n== Beats and time by ending (beats — the contract\'s seconds, lines — 0.3 s + 0.06 s a letter, mini-games — about) ==');
 for (const ending of ENDINGS) {
   const mine = plays.filter(p => p.ending === ending.id);
-  say(`
--- ${ending.label} (${ending.id}): ${mine.length} plays --`);
+  say(`\n-- ${ending.label} (${ending.id}): ${mine.length} plays --`);
   if (!mine.length) continue;
   const times = mine.map(p => p.chapters.map(steps => seconds(steps.flat())));
   say(`time: ${CHAPTERS.map((ch, c) => `${ch.number || ch.title} ${span(times.map(t => t[c]))}`).join(' · ')} · in all ${span(times.map(t => t.reduce((a, x) => a + x, 0)))}`);
@@ -468,8 +464,7 @@ for (const p of plays) {
   }
   acted('the end');
 }
-say(`
-== Watching with nothing to do longer than ${WATCH} s: ${long.size} ==`);
+say(`\n== Watching with nothing to do longer than ${WATCH} s: ${long.size} ==`);
 for (const [where, all] of long) say(`${where}: ${span(all)} (plays: ${all.length})`);
 
 // (a dry run's clock — jump.js — keeps the process alive: leave once all is written)
