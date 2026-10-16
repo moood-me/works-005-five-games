@@ -1,6 +1,6 @@
 # cast — the people of Cinema Paradiso
 
-The people are figures made of figures, the world's style `paradizo` (the engine's `graphic`, the face `simple`: eyes,
+The people are figures made of figures, the world's style `paradiso` (the engine's `graphic`, the face `simple`: eyes,
 brows, nose, mouth; the expression — `<id>_mood`). The motions are Kimodo's, kept in `cast.data.json` (`motions`), put
 there by `put_motion`. One person at different ages is one element: `<id>_wear` = the object of the look
 (`scene.kit.cast.characters.<name>`), not a name.

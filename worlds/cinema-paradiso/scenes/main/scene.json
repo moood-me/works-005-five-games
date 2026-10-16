@@ -948,10 +948,10 @@
   },
   "modules": [
     "cast",
-    "kino",
+    "cinema",
     "closeups",
     "beats",
-    "nebo"
+    "sky"
   ],
   "music": {
     "prompts": [

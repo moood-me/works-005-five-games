@@ -1,5 +1,5 @@
 // The people of Cinema Paradiso as people in a scene (the engine's people: an element with "person"):
-// who they are — figures of shapes in the world's style `paradizo` (the engine's `graphic`, faces `simple`: eyes,
+// who they are — figures of shapes in the world's style `paradiso` (the engine's `graphic`, faces `simple`: eyes,
 // brows, nose, mouth, an expression by `<id>_mood`) — what they carry (the parts), and how they move: the motions in
 // cast.data.json (Kimodo's, put there with put_motion). cast.md says who is who, what each part is and every motion.
 // A part's lengths are a man's metres times F.fit.h (the person's height as a share of a man's 1.76 m); the points a
@@ -157,7 +157,7 @@ const parts = {
   } },
 };
 
-const look = (who, more) => Object.assign({ kind: 'shapes', style: 'paradizo', who, face: 'simple' }, more);
+const look = (who, more) => Object.assign({ kind: 'shapes', style: 'paradiso', who, face: 'simple' }, more);
 return {
   ...data,
   characters: {
@@ -218,7 +218,7 @@ return {
   shapes: {
     // the world's style: the engine's `graphic` with a bigger head and a face that reads (eyes, brows, nose, mouth:
     // `<id>_mood`), fuller limbs, toned paint
-    styles: { paradizo: { from: 'graphic', face: 'simple', head: 1.34, neck: 0.6, limb: 1.0, legs: 1.0, feet: 'bean', arms: 'mitten', paint: 'toned', line: 1.4 } },
+    styles: { paradiso: { from: 'graphic', face: 'simple', head: 1.34, neck: 0.6, limb: 1.0, legs: 1.0, feet: 'bean', arms: 'mitten', paint: 'toned', line: 1.4 } },
     hats: {
       // a headscarf over the hair, tied at the nape
       kerchief: { name: 'kerchief', draw: F => {

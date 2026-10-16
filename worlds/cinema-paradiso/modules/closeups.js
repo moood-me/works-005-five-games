@@ -172,7 +172,7 @@ function frameOf(e) { const ax = e.aspect / 2, ay = 0.5; return { ax, ay, to: (x
 function painter(g, e) {
   const { ax, ay, to } = frameOf(e);
   return {
-    e, kino: e.kit.kino, rnd: e.rnd,
+    e, cinema: e.kit.cinema, rnd: e.rnd,
     // a layer in the shot's units: its pivot, its box (none: the frame's), the engine's own motion of it
     layer(name, pivot, box, fn, opts) {
       e.layer(name, { ...opts, pivot: to(...pivot), ...(box && { box: [...to(box[0], box[1]), ...to(box[2], box[3])] }) }, g2 => { g2.translate(ax, ay); fn(g2); });
@@ -244,7 +244,7 @@ function scissors(g, open) {
   g.restore();
 }
 function splice(g, e) {
-  const C = painter(g, e), P = SPLICE, S = e.state, k = C.kino;
+  const C = painter(g, e), P = SPLICE, S = e.state, k = C.cinema;
   C.begin();
   bench(g, C, P.lamp);
   // the strip's shadow, the strip with its ordinary frames (under the kisses: what is left once they are out)
@@ -671,7 +671,7 @@ const STRIP = (() => {
   };
 })();
 function strip(g, e) {
-  const C = painter(g, e), P = STRIP, k = C.kino, S = e.state, [wx0, wy0, wx1, wy1] = P.win;
+  const C = painter(g, e), P = STRIP, k = C.cinema, S = e.state, [wx0, wy0, wx1, wy1] = P.win;
   C.begin();
   // the booth's wall round the window, dark; the window: only the cool evening sky, a last warmth low
   g.fillStyle = '#1a1716'; g.fillRect(-W, -0.6, 2 * W, 1.2);
@@ -741,7 +741,7 @@ const WALLET = {
   light: { dir: [0.3, -0.95], colour: '#f2e6c8' },
 };
 function wallet(g, e) {
-  const C = painter(g, e), P = WALLET, k = C.kino;
+  const C = painter(g, e), P = WALLET, k = C.cinema;
   C.begin();
   // the evening over the platform: lilac steel, the lamp's pale glow
   const sky = g.createLinearGradient(0, -0.6, 0, 0.6); sky.addColorStop(0, '#20243a'); sky.addColorStop(0.6, '#4a4660'); sky.addColorStop(1, '#2a2832');

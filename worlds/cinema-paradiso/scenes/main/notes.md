@@ -1,8 +1,8 @@
 # The square (`main`)
 
 The square of Giancaldo: the prologue, chapters I, II, III, V, the epilogue (scenes.md "The square"). Engine 3, camera
-`roam`, the shots — the keys `camera_*` (the constants `CAM` in `lib.js`). Modules: `cast`, `kino`, `closeups`, `beats`,
-`nebo`.
+`roam`, the shots — the keys `camera_*` (the constants `CAM` in `lib.js`). Modules: `cast`, `cinema`, `closeups`, `beats`,
+`sky`.
 
 **The scene is built by `tools/main.js`** (`node tools/main.js`): `scene.json` and all of `elements/` come out of it —
 edit it (and the hand-written `lib.js`, `script.js`, `showcase.js`, `notes.md`), not `scene.json` or `elements/`.
@@ -34,8 +34,8 @@ The windows that can be lit — each front has a twin `<id>_win` (`glows`): each
 
 `beam_anchor` (an unseen anchor in the booth's port) is turned in plan by `beam_turn` and tilted by `beam_pitch` —
 `script.js` sets them from `beam_aim` (the function `beamOf`): the beam's end goes over the stone and the heads from
-the spot under the port (0) to the white wall (1). The beam itself (`beam`, `kino.beam` + the world's shader
-`tools/kino-beam.wgsl`) is a glowing wedge 18 m long on the anchor; what is longer than the way is hidden by the stone or
+the spot under the port (0) to the white wall (1). The beam itself (`beam`, `cinema.beam` + the world's shader
+`tools/cinema-beam.wgsl`) is a glowing wedge 18 m long on the anchor; what is longer than the way is hidden by the stone or
 the wall. The spot at the end — the scene's light `beam_tip`, going by `tip_x/tip_z/tip_y`. The engine has no cone
 spotlight; the beam and the headlights are a glowing wedge with a light at the tip. The layers of the frame on the wall
 (`screen`): `blur` / `sharp` by `beam_focus`, `white`, `burn` by `wall_burn`; the wall's light — `wall_light` by
@@ -46,7 +46,7 @@ beam goes up over the square.
 
 `era` / `hour` — the look of the light: the keys `dusk_k`, `now_k`, `morning_k` (the beat's `from` sets them through
 `LIGHT`), `rain`, `wind_k`, `cold_k` (from `night_kind`, the script), `dust` (the demolition's dust — a look of the light
-too), `flash` (a flash: the fireworks, the end of the way back into the past). The sky — the world's module `nebo`
+too), `flash` (a flash: the fireworks, the end of the way back into the past). The sky — the world's module `sky`
 (the moon over the sea at 15° from north). `past` — the way back into the past, by layers only (the boards fall from
 the doors, the sign lights up, the windows one by one, the painted crowd comes through): the beats of the present hold
 `past` 0, those of the past — 1; at the end of `rewind` a flash — a cut into the night of the past with the people

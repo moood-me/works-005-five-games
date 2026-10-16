@@ -1,0 +1,1869 @@
+{
+  "engine": 3,
+  "title": "The Booth",
+  "caption": "The Paradiso's booth",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -1.95,
+      1.95,
+      0.05,
+      3.45
+    ]
+  },
+  "light": {
+    "ambient": 0.44,
+    "ambientColor": "#76666e",
+    "tint": "#2a1e22",
+    "tintStrength": 0.04,
+    "vignette": 0.42,
+    "grain": 0.2,
+    "haze": 0.08,
+    "hazeColor": "#3a2e24",
+    "hazeGlow": 1.1,
+    "shafts": 0,
+    "bounce": 0.55,
+    "brightness": 1.16,
+    "saturation": 0.95,
+    "inside": 0.3,
+    "looks": {
+      "night_k": {
+        "ambient": 0.34,
+        "ambientColor": "#5a5068",
+        "lights": {
+          "window_light": 0.9
+        }
+      },
+      "eve_k": {
+        "ambient": 0.34,
+        "ambientColor": "#6a5a70",
+        "lights": {
+          "window_light": 0.7
+        }
+      },
+      "dawn_k": {
+        "ambient": 0.42,
+        "ambientColor": "#8a8090",
+        "tint": "#6a6a80",
+        "tintStrength": 0.05,
+        "lights": {
+          "window_light": 1.4
+        }
+      },
+      "ruin_k": {
+        "ambient": 0.82,
+        "ambientColor": "#a6abbc",
+        "saturation": 0.7,
+        "tint": "#5a6278",
+        "tintStrength": 0.06,
+        "brightness": 1.3,
+        "haze": 0.1,
+        "hazeColor": "#5a5e68",
+        "hazeGlow": 0.6,
+        "lights": {
+          "window_light": 2.6,
+          "lamp_light": 0,
+          "sconce_light": 0
+        }
+      },
+      "smoke": {
+        "haze": 0.7,
+        "hazeColor": "#4a443e",
+        "hazeGlow": 0.9,
+        "ambient": 0.34
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "lamp_light",
+      "of": "lamp#bulb",
+      "color": "#ffcf94",
+      "strength": 1.7,
+      "reach": 5,
+      "on": "lamp"
+    },
+    {
+      "id": "p1_lamp",
+      "of": "p1_vents#vents",
+      "color": "#ffb860",
+      "strength": 0.9,
+      "reach": 2.4,
+      "on": "p1_on",
+      "flicker": 0.06
+    },
+    {
+      "id": "p2_lamp",
+      "of": "p2_vents#vents",
+      "color": "#ffb860",
+      "strength": 0.9,
+      "reach": 2.4,
+      "on": "p2_on",
+      "flicker": 0.06
+    },
+    {
+      "id": "sconce_light",
+      "of": "sconce#bulb",
+      "color": "#ffcf94",
+      "strength": 0.8,
+      "reach": 3.2,
+      "on": "lamp"
+    },
+    {
+      "id": "stair_light",
+      "of": "landing#bulb",
+      "color": "#e8dfc4",
+      "strength": 1,
+      "reach": 3.5,
+      "on": "stair"
+    },
+    {
+      "id": "window_light",
+      "across": -1.75,
+      "distance": 1.5,
+      "elevation": 1.4,
+      "color": "#8fa4d8",
+      "strength": 0.9,
+      "reach": 5
+    },
+    {
+      "id": "fire_light",
+      "across": -1,
+      "distance": 2.75,
+      "elevation": 1.6,
+      "color": "#ff9a4a",
+      "strength": 2.2,
+      "reach": 4,
+      "on": "fire",
+      "flicker": 0.35
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "hour": 0.9,
+    "era": "past",
+    "night_k": 1,
+    "eve_k": 0,
+    "dawn_k": 0,
+    "ruin_k": 0,
+    "lamp": 1,
+    "door": 0,
+    "door_f": 270,
+    "stair": 0,
+    "beam_on": 1,
+    "active": 1,
+    "motor1": 1,
+    "motor2": 0,
+    "p1_on": 1,
+    "p2_on": 0,
+    "crank": 0,
+    "jitter": 0,
+    "stutter": 0,
+    "turned": 0,
+    "p1_f": 180,
+    "fire": 0,
+    "smoke": 0,
+    "clock": 6,
+    "month": "none",
+    "written": 0,
+    "tin_open": 0,
+    "tin_at": "bench",
+    "clips": 0,
+    "tail": 0,
+    "cue": 0,
+    "white": 0,
+    "rain_window": 0,
+    "drag": 0,
+    "drag_at": 0,
+    "cough": 0,
+    "box_a": 1.7,
+    "box_d": 2.95,
+    "crate_a": -0.75,
+    "crate_d": 2.03,
+    "pigeons": 0,
+    "hanging": 0,
+    "jumps": 0,
+    "slate_letters": "0000000",
+    "splice": 0,
+    "cut1": 0,
+    "cut2": 0,
+    "cut3": 0,
+    "bent1": 0,
+    "bent2": 0,
+    "bent3": 0,
+    "glue1": 0,
+    "glue2": 0,
+    "glue3": 0,
+    "boy_reach": 0,
+    "slate": 0,
+    "chalk_x": 0,
+    "letters": 0,
+    "crooked": "0000000",
+    "wobble": 0,
+    "thread": 0,
+    "threaded": 0,
+    "pull": 0,
+    "loop": 0,
+    "calendar": 0,
+    "pages": 0,
+    "fold": 0,
+    "dust": 1,
+    "strip": 0,
+    "strip_x": 0,
+    "alfredo_a": 1.2,
+    "alfredo_d": 1.9,
+    "alfredo_turn": 90,
+    "alfredo_do": {
+      "motion": "bench_work",
+      "loop": true
+    },
+    "alfredo_look": "press#press",
+    "toto_a": 2.6,
+    "toto_d": 0.5,
+    "toto_here": false,
+    "elena_a": 2.6,
+    "elena_d": 0.5,
+    "elena_here": false,
+    "camera_x": -1.8,
+    "camera_z": 0.3,
+    "camera_h": -0.2,
+    "camera_yaw": 62,
+    "alfredo_here": true
+  },
+  "states": {
+    "beat": {
+      "type": "string",
+      "means": "the beat the scene plays (the game sets it)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose shot to make ready ahead (the game sets it; the module beats)"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "0.25 dawn, 0.78 evening, 0.9 night"
+    },
+    "era": {
+      "values": [
+        "past",
+        "ruin"
+      ],
+      "means": "past — the booth alive (1949–1959); ruin — 1988: rust, projectors without reels, the panes knocked out, down, no lamp"
+    },
+    "night_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the night's light (the scene — from hour)"
+    },
+    "eve_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the evening's light"
+    },
+    "dawn_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the dawn's light"
+    },
+    "ruin_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the light of the 1988 ruin (the scene — from era)"
+    },
+    "lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lamp over the bench"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the door: 0 shut … 1 open inward, lying on the wall opposite the ports (it hides the calendar)"
+    },
+    "door_f": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: the turn of the leaf, degrees (the scene — from door)"
+    },
+    "stair": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the bulb on the stair beyond the door"
+    },
+    "beam_on": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the beam into the hall from the port active"
+    },
+    "active": {
+      "values": [
+        1,
+        2
+      ],
+      "means": "which projector throws its beam into the hall"
+    },
+    "motor1": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the first projector's reels turn"
+    },
+    "motor2": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the second projector's reels turn"
+    },
+    "p1_on": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the first one's lamp house is lit (the scene — from beam_on, active)"
+    },
+    "p2_on": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the second one's lamp house is lit"
+    },
+    "crank": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Alfredo turns the first one's motor crank (the beat motor)"
+    },
+    "jitter": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: the frame in the beam trembles (the beat motor with stutter)"
+    },
+    "stutter": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "in motor the frame trembles till Alfredo knocks on the casing (the loop not held in «Threading»; the game sets it)"
+    },
+    "turned": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the first projector is turned to the port on the square"
+    },
+    "p1_f": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: the first projector's turn, degrees (the scene — from turned)"
+    },
+    "fire": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "fire in the first projector's gate"
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "smoke in the booth"
+    },
+    "clock": {
+      "range": [
+        6,
+        10
+      ],
+      "smooth": true,
+      "means": "the clock over the look port: 6…10 in the evening"
+    },
+    "month": {
+      "values": [
+        "none",
+        8,
+        9,
+        12
+      ],
+      "means": "the calendar's leaf in view; none — no calendar (chapters I–III); set by the beats only"
+    },
+    "written": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: Elena writes on August (the beat note)"
+    },
+    "tin_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the tin on the bench is open"
+    },
+    "tin_at": {
+      "values": [
+        "bench",
+        "pocket"
+      ],
+      "means": "the tin on the bench or in Alfredo's pocket"
+    },
+    "clips": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the clippings of the kisses lie on the bench"
+    },
+    "tail": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the film's tail flaps: the reel has run out, the hall's screen white"
+    },
+    "cue": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the changeover dot in the frame's corner; the whole look port blinks with it"
+    },
+    "white": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the screen is white (the changeover was missed)"
+    },
+    "rain_window": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "rain beyond the port on the square"
+    },
+    "drag": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«Pull Him Out»: where the boy drags Alfredo (0 — floor#path0, 1 — floor#path1; the game moves it)"
+    },
+    "drag_at": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "where Alfredo is on the way now (the scene sets it, at once, ten times a second)"
+    },
+    "cough": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "pulse: the boy coughs"
+    },
+    "box_a": {
+      "type": "number",
+      "means": "internal: where the box of film is (across)"
+    },
+    "box_d": {
+      "type": "number",
+      "means": "internal: where the box of film is (in depth)"
+    },
+    "crate_a": {
+      "type": "number",
+      "means": "internal: where the boy's crate is (across); in the fire it is thrown to the window"
+    },
+    "crate_d": {
+      "type": "number",
+      "means": "internal: where the crate is (in depth; its front side)"
+    },
+    "pigeons": {
+      "type": "number",
+      "means": "pulse: the pigeons fly up (down)"
+    },
+    "hanging": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the strip hangs from Salvatore's hands (strip_end)"
+    },
+    "alfredo_here": {
+      "values": [
+        0,
+        1,
+        true,
+        false
+      ],
+      "means": "party key: blind Alfredo sits on the stool in reels, six, changeover; in alfredo_comes he turns rather than comes in. It is also the engine's key «Alfredo is in the scene»: the beats where he is always there set it themselves"
+    },
+    "jumps": {
+      "range": [
+        0,
+        3
+      ],
+      "means": "party key: how many of kiss_cut1…3 are spliced crooked — in the insert strip they jump at the splice"
+    },
+    "slate_letters": {
+      "type": "string",
+      "means": "party key: the crooked letters of the slate on the nail in 1988 (a string of 7 characters 0/1)"
+    },
+    "splice": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the insert «Splicing»"
+    },
+    "cut1": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the cut of the first frame"
+    },
+    "cut2": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the cut of the second"
+    },
+    "cut3": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the cut of the third"
+    },
+    "bent1": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the first cut is slanted"
+    },
+    "bent2": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the second slanted"
+    },
+    "bent3": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the third slanted"
+    },
+    "glue1": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the press pressed on the first splice"
+    },
+    "glue2": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "on the second"
+    },
+    "glue3": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "on the third"
+    },
+    "boy_reach": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the boy's hand nearer the clippings"
+    },
+    "slate": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the insert «Letters»"
+    },
+    "chalk_x": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the chalk along the line"
+    },
+    "letters": {
+      "range": [
+        0,
+        7
+      ],
+      "means": "how many letters are written"
+    },
+    "crooked": {
+      "type": "string",
+      "means": "the crooked letters: a string of 7 characters 0/1"
+    },
+    "wobble": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the hand twitched"
+    },
+    "thread": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the insert «Threading»"
+    },
+    "threaded": {
+      "range": [
+        0,
+        5
+      ],
+      "means": "how many stretches are threaded"
+    },
+    "pull": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the film's end along the stretch now"
+    },
+    "loop": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the loop before the gate"
+    },
+    "calendar": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the insert «Calendar» (close)"
+    },
+    "pages": {
+      "range": [
+        0,
+        4
+      ],
+      "means": "sheets let down over December: November, October, September, August"
+    },
+    "fold": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sheet being pulled down"
+    },
+    "dust": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dust on the calendar"
+    },
+    "strip": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the insert «The Strip»"
+    },
+    "strip_x": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the strip from right to left"
+    },
+    "alfredo_a": {
+      "type": "number",
+      "smooth": true,
+      "means": "where alfredo is, across, m"
+    },
+    "alfredo_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "where alfredo is, in depth, m"
+    },
+    "toto_a": {
+      "type": "number",
+      "smooth": true,
+      "means": "where toto is, across, m"
+    },
+    "toto_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "where toto is, in depth, m"
+    },
+    "elena_a": {
+      "type": "number",
+      "smooth": true,
+      "means": "where elena is, across, m"
+    },
+    "elena_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "where elena is, in depth, m"
+    }
+  },
+  "objects": [
+    {
+      "id": "hall_dark",
+      "name": "The hall below",
+      "across": 0,
+      "distance": 23.6,
+      "elevation": -3,
+      "facing": 180,
+      "height": 8,
+      "box": [
+        -6,
+        -7,
+        6,
+        1
+      ]
+    },
+    {
+      "id": "hall_screen",
+      "name": "The hall's screen",
+      "across": 0,
+      "distance": 23.3,
+      "elevation": -1.25,
+      "facing": 180,
+      "glows": true,
+      "height": 3.4,
+      "box": [
+        -2.9,
+        -3.5,
+        2.9,
+        0.1
+      ]
+    },
+    {
+      "id": "floor",
+      "name": "Booth floor",
+      "plane": true,
+      "across": 0,
+      "distance": 1.75,
+      "elevation": 0,
+      "width": 4.1,
+      "depth": 3.6,
+      "walk": true,
+      "inside": true
+    },
+    {
+      "id": "ceiling",
+      "name": "Ceiling",
+      "across": 0,
+      "distance": 3.5,
+      "elevation": 2.6,
+      "facing": 180,
+      "tilt": -90,
+      "height": 3.6,
+      "box": [
+        -2.1,
+        -3.65,
+        2.1,
+        0.05
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_n",
+      "name": "Wall with the ports to the hall",
+      "across": 0,
+      "distance": 3.5,
+      "facing": 180,
+      "height": 2.6,
+      "box": [
+        -2.1,
+        -2.7,
+        2.1,
+        0.05
+      ],
+      "inside": true
+    },
+    {
+      "id": "look_port",
+      "name": "Look port",
+      "across": 0,
+      "distance": 3.485,
+      "elevation": 1.4,
+      "facing": 180,
+      "glows": true,
+      "height": 0.3,
+      "box": [
+        -0.36,
+        -0.44,
+        0.36,
+        0.14
+      ]
+    },
+    {
+      "id": "clock",
+      "name": "Clock",
+      "across": 0,
+      "distance": 3.47,
+      "elevation": 1.94,
+      "facing": 180,
+      "height": 0.34,
+      "box": [
+        -0.18,
+        -0.35,
+        0.18,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_s",
+      "name": "Wall opposite the ports",
+      "across": 0,
+      "distance": 0,
+      "facing": 0,
+      "height": 2.6,
+      "box": [
+        -2.1,
+        -2.7,
+        2.1,
+        0.05
+      ],
+      "inside": true
+    },
+    {
+      "id": "rack",
+      "name": "Film rack",
+      "across": 0.25,
+      "distance": 0.16,
+      "facing": 0,
+      "height": 2.1,
+      "box": [
+        -0.5,
+        -2.15,
+        0.5,
+        0.02
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "bucket",
+      "name": "Fire bucket",
+      "across": -0.4,
+      "distance": 0.2,
+      "facing": 0,
+      "height": 0.45,
+      "box": [
+        -0.2,
+        -0.75,
+        0.2,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "sconce",
+      "name": "Bulb by the rack",
+      "across": 0.95,
+      "distance": 0.04,
+      "elevation": 1.86,
+      "facing": 0,
+      "height": 0.2,
+      "box": [
+        -0.12,
+        -0.2,
+        0.12,
+        0.08
+      ],
+      "inside": true
+    },
+    {
+      "id": "rack_n",
+      "name": "Shelf by the ports",
+      "across": 1.55,
+      "distance": 3.47,
+      "facing": 180,
+      "height": 2.3,
+      "box": [
+        -0.45,
+        -2.3,
+        0.45,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_w",
+      "name": "Wall with the port on the square",
+      "across": -2,
+      "distance": 0,
+      "facing": 90,
+      "height": 2.6,
+      "box": [
+        -0.1,
+        -2.7,
+        3.6,
+        0.05
+      ],
+      "inside": true
+    },
+    {
+      "id": "square_window",
+      "name": "Port on the square",
+      "across": -2.04,
+      "distance": 0,
+      "facing": 90,
+      "glows": true,
+      "height": 0.8,
+      "box": [
+        1.15,
+        -1.75,
+        1.85,
+        -0.95
+      ]
+    },
+    {
+      "id": "pane_rain",
+      "name": "Drops on the glass",
+      "on": "square_window",
+      "across": 1.5,
+      "elevation": 1.35,
+      "distance": -0.03,
+      "particles": {
+        "kind": "drops",
+        "source": [
+          0.5,
+          0,
+          0.55
+        ],
+        "flat": true,
+        "rate": 4,
+        "amount": "rain_window"
+      }
+    },
+    {
+      "id": "wall_e",
+      "name": "Wall with the door",
+      "across": 2,
+      "distance": 3.5,
+      "facing": 270,
+      "height": 2.6,
+      "box": [
+        -0.1,
+        -2.7,
+        3.6,
+        0.05
+      ],
+      "inside": true
+    },
+    {
+      "id": "landing_floor",
+      "name": "Stair landing",
+      "plane": true,
+      "across": 2.7,
+      "distance": 0.55,
+      "elevation": 0,
+      "width": 1.4,
+      "depth": 2.4,
+      "walk": true
+    },
+    {
+      "id": "landing",
+      "name": "Stair",
+      "across": 3.3,
+      "distance": 0.55,
+      "facing": 270,
+      "height": 2.6,
+      "box": [
+        -1.45,
+        -2.7,
+        1.45,
+        0.05
+      ]
+    },
+    {
+      "id": "landing_window",
+      "name": "Stair window",
+      "across": 3.28,
+      "distance": 0.55,
+      "facing": 270,
+      "glows": true,
+      "height": 0.8,
+      "box": [
+        -0.36,
+        -2,
+        0.36,
+        -1.15
+      ]
+    },
+    {
+      "id": "booth_door",
+      "name": "Booth door",
+      "across": 2,
+      "distance": 0.1,
+      "facing": 270,
+      "place": {
+        "facing": "door_f"
+      },
+      "height": 2,
+      "box": [
+        -0.95,
+        -2.05,
+        0.05,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_calendar",
+      "name": "Calendar",
+      "across": 1.6,
+      "distance": 0.015,
+      "elevation": 1.13,
+      "facing": 0,
+      "height": 0.78,
+      "box": [
+        -0.25,
+        -0.8,
+        0.25,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "bench",
+      "name": "Bench",
+      "across": 1.5,
+      "distance": 1.9,
+      "facing": 270,
+      "height": 0.85,
+      "box": [
+        -0.55,
+        -0.9,
+        0.55,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "bench_top",
+      "name": "Bench top",
+      "plane": true,
+      "across": 1.75,
+      "distance": 1.9,
+      "elevation": 0.85,
+      "width": 0.5,
+      "depth": 1,
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "press",
+      "name": "Press and rewinder",
+      "across": 1.78,
+      "distance": 2.2,
+      "elevation": 0.85,
+      "facing": 270,
+      "height": 0.42,
+      "box": [
+        -0.35,
+        -0.45,
+        0.35,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "clips",
+      "name": "Clippings",
+      "across": 1.62,
+      "distance": 1.75,
+      "elevation": 0.86,
+      "facing": 270,
+      "height": 0.05,
+      "box": [
+        -0.2,
+        -0.04,
+        0.2,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "tin",
+      "name": "Tin",
+      "across": 1.65,
+      "distance": 2,
+      "elevation": 0.85,
+      "height": 0.1,
+      "box": [
+        -0.15,
+        -0.2,
+        0.3,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "lamp",
+      "name": "Lamp over the bench",
+      "across": 1.72,
+      "distance": 1.9,
+      "elevation": 1.62,
+      "height": 1,
+      "box": [
+        -0.2,
+        -1,
+        0.2,
+        0.04
+      ],
+      "inside": true
+    },
+    {
+      "id": "stool",
+      "name": "Stool",
+      "across": 0.9,
+      "distance": 1.4,
+      "height": 0.5,
+      "box": [
+        -0.22,
+        -0.54,
+        0.22,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "crate",
+      "name": "Crate",
+      "across": -0.75,
+      "distance": 2.03,
+      "place": {
+        "across": "crate_a",
+        "distance": "crate_d"
+      },
+      "facing": 180,
+      "height": 0.4,
+      "box": [
+        -0.85,
+        -0.4,
+        0.85,
+        0
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "crate_top",
+      "name": "Crate top",
+      "plane": true,
+      "on": "crate",
+      "across": 0,
+      "distance": 0.175,
+      "elevation": 0.4,
+      "width": 0.5,
+      "depth": 0.35,
+      "walk": true,
+      "inside": true
+    },
+    {
+      "id": "box",
+      "name": "Box of film",
+      "across": 1.7,
+      "distance": 2.95,
+      "place": {
+        "across": "box_a",
+        "distance": "box_d"
+      },
+      "facing": 180,
+      "height": 0.36,
+      "box": [
+        -0.74,
+        -0.36,
+        0.74,
+        0
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "box_top",
+      "name": "Box lid",
+      "plane": true,
+      "on": "box",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0.36,
+      "width": 0.44,
+      "depth": 0.3,
+      "inside": true
+    },
+    {
+      "id": "p1",
+      "name": "Projector 1 (base)",
+      "unseen": true,
+      "across": -0.75,
+      "distance": 3,
+      "facing": 180,
+      "place": {
+        "facing": "p1_f"
+      }
+    },
+    {
+      "id": "projector",
+      "name": "Projector",
+      "on": "p1",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0.9,
+      "facing": 180,
+      "height": 0.8,
+      "box": [
+        -1.3,
+        -0.8,
+        1.3,
+        0
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "p1_ped",
+      "name": "Projector 1 stand",
+      "on": "p1",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 180,
+      "height": 0.9,
+      "box": [
+        -0.4,
+        -1,
+        0.4,
+        0
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "p1_side",
+      "name": "Projector 1 reels",
+      "on": "p1",
+      "across": 0,
+      "distance": 0,
+      "facing": 90,
+      "height": 2.5,
+      "box": [
+        -0.5,
+        -2.55,
+        0.6,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "p1_vents",
+      "name": "Projector 1 lamp house",
+      "on": "p1",
+      "across": 0,
+      "distance": -0.41,
+      "elevation": 0.9,
+      "facing": 180,
+      "height": 0.8,
+      "box": [
+        -0.2,
+        -0.8,
+        0.2,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "p1_crank",
+      "name": "Motor 1 crank",
+      "on": "p1",
+      "across": 0.265,
+      "distance": 0,
+      "elevation": 1.1,
+      "facing": 90,
+      "height": 0.3,
+      "box": [
+        -0.16,
+        -0.16,
+        0.16,
+        0.16
+      ],
+      "inside": true
+    },
+    {
+      "id": "p1_knob",
+      "name": "Motor 1 handle",
+      "on": "p1",
+      "across": 0.33,
+      "distance": 0,
+      "elevation": 1.1,
+      "facing": 180,
+      "height": 0.3,
+      "box": [
+        -0.06,
+        -0.2,
+        0.06,
+        0.2
+      ],
+      "inside": true
+    },
+    {
+      "id": "beam",
+      "name": "Beam",
+      "on": "p1",
+      "across": 0,
+      "distance": 0.5,
+      "elevation": 1.5,
+      "facing": 90,
+      "glows": true,
+      "height": 0.8,
+      "box": [
+        -0.1,
+        -0.5,
+        4.8,
+        0.5
+      ],
+      "uniforms": {
+        "on": 0
+      }
+    },
+    {
+      "id": "p2",
+      "name": "Projector 2 (base)",
+      "unseen": true,
+      "across": 0.75,
+      "distance": 3,
+      "facing": 180
+    },
+    {
+      "id": "projector2",
+      "name": "Second projector",
+      "on": "p2",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0.9,
+      "facing": 180,
+      "height": 0.8,
+      "box": [
+        -1.3,
+        -0.8,
+        1.3,
+        0
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "p2_ped",
+      "name": "Projector 2 stand",
+      "on": "p2",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 180,
+      "height": 0.9,
+      "box": [
+        -0.4,
+        -1,
+        0.4,
+        0
+      ],
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "p2_side",
+      "name": "Projector 2 reels",
+      "on": "p2",
+      "across": 0,
+      "distance": 0,
+      "facing": 90,
+      "height": 2.5,
+      "box": [
+        -0.5,
+        -2.55,
+        0.6,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "p2_vents",
+      "name": "Projector 2 lamp house",
+      "on": "p2",
+      "across": 0,
+      "distance": -0.41,
+      "elevation": 0.9,
+      "facing": 180,
+      "height": 0.8,
+      "box": [
+        -0.2,
+        -0.8,
+        0.2,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "p2_crank",
+      "name": "Motor 2 crank",
+      "on": "p2",
+      "across": -0.265,
+      "distance": 0,
+      "elevation": 1.1,
+      "facing": 270,
+      "height": 0.3,
+      "box": [
+        -0.16,
+        -0.16,
+        0.16,
+        0.16
+      ],
+      "inside": true
+    },
+    {
+      "id": "p2_knob",
+      "name": "Motor 2 handle",
+      "on": "p2",
+      "across": -0.33,
+      "distance": 0,
+      "elevation": 1.1,
+      "facing": 180,
+      "height": 0.3,
+      "box": [
+        -0.06,
+        -0.2,
+        0.06,
+        0.2
+      ],
+      "inside": true
+    },
+    {
+      "id": "fire",
+      "name": "Fire in the gate",
+      "particles": {
+        "kind": "fire",
+        "at": "projector#gate",
+        "amount": "fire",
+        "size": [
+          0.26,
+          0.05
+        ],
+        "rate": 120,
+        "color": [
+          "#ffd27a",
+          "#e8400c"
+        ],
+        "glow": [
+          3,
+          1
+        ]
+      },
+      "inside": true
+    },
+    {
+      "id": "fire_lens",
+      "name": "Fire at the lens",
+      "particles": {
+        "kind": "fire",
+        "at": "projector#lens",
+        "amount": "fire",
+        "size": [
+          0.22,
+          0.05
+        ],
+        "rate": 80,
+        "color": [
+          "#ffd27a",
+          "#e8400c"
+        ],
+        "glow": [
+          3,
+          1
+        ]
+      },
+      "inside": true
+    },
+    {
+      "id": "fire_reel",
+      "name": "Fire along the reel",
+      "particles": {
+        "kind": "fire",
+        "at": "p1_side#reel",
+        "amount": "fire",
+        "size": [
+          0.3,
+          0.06
+        ],
+        "rate": 140,
+        "source": [
+          0.2,
+          0.35,
+          0.35
+        ],
+        "color": [
+          "#ffd27a",
+          "#e8400c"
+        ],
+        "glow": [
+          3,
+          1
+        ]
+      },
+      "inside": true
+    },
+    {
+      "id": "embers",
+      "name": "Sparks",
+      "particles": {
+        "kind": "embers",
+        "at": "projector#gate",
+        "amount": "fire",
+        "rate": 12
+      },
+      "inside": true
+    },
+    {
+      "id": "smoke_gate",
+      "name": "Smoke from the film",
+      "particles": {
+        "kind": "smoke",
+        "at": "projector#gate",
+        "amount": "smoke",
+        "rate": 8,
+        "size": [
+          0.2,
+          1.4
+        ],
+        "life": [
+          3,
+          6
+        ],
+        "gravity": -0.3,
+        "color": "#2e2a28",
+        "shadow": 0.4
+      },
+      "inside": true
+    },
+    {
+      "id": "motes",
+      "name": "Smoke and motes",
+      "particles": {
+        "kind": "dust",
+        "at": [
+          0,
+          1.75,
+          1.4
+        ],
+        "source": [
+          3.8,
+          3.3,
+          2.4
+        ],
+        "rate": 25,
+        "life": [
+          8,
+          14
+        ]
+      },
+      "inside": true
+    },
+    {
+      "id": "feathers",
+      "name": "Pigeons' down",
+      "particles": {
+        "kind": "petals",
+        "at": [
+          0.4,
+          2.6,
+          2.2
+        ],
+        "source": [
+          2.4,
+          1.2,
+          0.4
+        ],
+        "burst": {
+          "on": "pigeons",
+          "count": 60,
+          "over": 1.5
+        },
+        "color": "#e4dfd4",
+        "size": [
+          0.03,
+          0.02
+        ],
+        "gravity": 0.5,
+        "drag": 1.2,
+        "life": [
+          4,
+          7
+        ],
+        "ground": "stop",
+        "settle": 6
+      },
+      "inside": true
+    },
+    {
+      "id": "slate_nail",
+      "name": "Slate with the letters",
+      "across": 1.97,
+      "distance": 1.2,
+      "elevation": 1.24,
+      "facing": 270,
+      "height": 0.36,
+      "box": [
+        -0.22,
+        -0.38,
+        0.22,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "hanging_strip",
+      "name": "Strip in the hands",
+      "across": -1.62,
+      "distance": 1.02,
+      "facing": 250,
+      "height": 1.3,
+      "box": [
+        -0.2,
+        -1.3,
+        0.25,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "splice",
+      "name": "Splicing",
+      "insert": "splice"
+    },
+    {
+      "id": "slate",
+      "name": "Letters",
+      "insert": "slate"
+    },
+    {
+      "id": "thread",
+      "name": "Threading",
+      "insert": "thread"
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar close-up",
+      "insert": "calendar"
+    },
+    {
+      "id": "strip",
+      "name": "Strip against the window",
+      "insert": "strip"
+    },
+    {
+      "id": "alfredo",
+      "name": "Alfredo",
+      "person": {
+        "cast": "cast",
+        "who": "alfredo"
+      },
+      "across": 1.2,
+      "distance": 1.9,
+      "place": {
+        "across": "alfredo_a",
+        "distance": "alfredo_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "toto",
+      "name": "Totò",
+      "person": {
+        "cast": "cast",
+        "who": "toto_boy"
+      },
+      "across": 2.6,
+      "distance": 0.5,
+      "place": {
+        "across": "toto_a",
+        "distance": "toto_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "elena",
+      "name": "Elena",
+      "person": {
+        "cast": "cast",
+        "who": "elena"
+      },
+      "across": 2.6,
+      "distance": 0.5,
+      "place": {
+        "across": "elena_a",
+        "distance": "elena_d"
+      },
+      "shadow": true,
+      "inside": true
+    }
+  ],
+  "modules": [
+    "cast",
+    "cinema",
+    "closeups",
+    "sky",
+    "beats"
+  ],
+  "music": {
+    "scale": "E_MAJOR_D_FLAT_MINOR",
+    "prompts": [
+      {
+        "text": "a projector clattering steadily in a small booth, the motor humming, twenty-four clicks a second, no melody",
+        "weight": 1.3
+      },
+      {
+        "text": "muffled film music and laughter heard through a wall from a cinema hall below, far away",
+        "weight": 0.7
+      },
+      {
+        "text": "a quiet small room at night, a clock ticking, the square outside murmuring",
+        "weight": 0
+      },
+      {
+        "text": "footsteps running down a stone stair, a door closing, then only the projector",
+        "weight": 0
+      },
+      {
+        "text": "a soft celesta motif of five slow notes, nostalgic, Sicilian, very sparse",
+        "weight": 0
+      },
+      {
+        "text": "warm analog tape hiss and a low drone, still and tender",
+        "weight": 0
+      },
+      {
+        "text": "scissors snipping film, a splicing press clicking, quiet work sounds",
+        "weight": 0
+      },
+      {
+        "text": "gentle strings, bright sadness, slow, no percussion",
+        "weight": 0
+      },
+      {
+        "text": "a summer night in a Sicilian town through a small open window, cicadas, a far voice",
+        "weight": 0
+      },
+      {
+        "text": "a film reel spinning down, the tail flapping, the motor winding down",
+        "weight": 0
+      },
+      {
+        "text": "pencil scratching on paper in a quiet room",
+        "weight": 0
+      },
+      {
+        "text": "low cello drone, solemn and tender",
+        "weight": 0
+      },
+      {
+        "text": "mandolin tremolo far away, nostalgic, very quiet",
+        "weight": 0
+      },
+      {
+        "text": "rain on a window of a small room, evening",
+        "weight": 0
+      },
+      {
+        "text": "the hum of a cinema crowd waiting, far below",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.18,
+    "brightness": 0.35
+  }
+}

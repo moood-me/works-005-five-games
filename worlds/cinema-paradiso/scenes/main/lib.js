@@ -39,7 +39,7 @@ function beamOf(aim) {
   return { heading: Math.atan2(dx, dz) * 180 / Math.PI, tilt: Math.atan2(-dy, flat), len: Math.hypot(flat, dy) };
 }
 const BEAM_LEN = 18;
-// the sky (the world's nebo): the moon over the sea, north-north-east, over the lane's end
+// the sky (the world's sky): the moon over the sea, north-north-east, over the lane's end
 const SKY = { horizon: 0.5, round: true, moon: 15, glow: -60 }; // the beam is painted this long; its reach is the share of it
 // the hearse's way: a point at share u of it → [x, z, heading]
 const CART_L = (() => { let L = 0; for (let i = 1; i < G.CART.length; i++) L += Math.hypot(G.CART[i][0] - G.CART[i - 1][0], G.CART[i][1] - G.CART[i - 1][1]); return L; })();

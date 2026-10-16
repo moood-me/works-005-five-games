@@ -14,7 +14,7 @@ const el = (o, code, animate) => {
 };
 
 // the sky, the ground, the sea at the lane's end
-el({ id: 'sky', name: 'Sky', sky: true }, 'e.kit.nebo.sky(g, e, e.lib.SKY);');
+el({ id: 'sky', name: 'Sky', sky: true }, 'e.kit.sky.sky(g, e, e.lib.SKY);');
 el({ id: 'ground', name: 'Square', plane: true, across: 0, distance: 6, elevation: 0, width: 44, depth: 100 }, 'e.lib.ground(g);');
 el({ id: 'sea_end', name: 'Sea', across: 10.5, distance: 80, elevation: -10, facing: 180, height: 11.7, box: [-30, -11.8, 30, 0.1] }, 'e.lib.seaEnd(g, e);');
 
@@ -51,14 +51,14 @@ el({ id: 'booth_in', name: 'Booth', across: -12.3, distance: 16, facing: 90, glo
 objects.push({ id: 'beam_anchor', name: 'Beam', unseen: true, across: -11.85, distance: 16, elevation: 6, facing: 104, tilt: -55, place: { facing: 'beam_turn', tilt: 'beam_pitch' } });
 el({ id: 'beam', name: 'Beam', on: 'beam_anchor', across: 0, distance: 0, elevation: 0, facing: 270, glows: true, height: 2,
   box: [-0.3, -2.4, 18.4, 2.4], uniforms: { on: 0 } },
-  'e.kit.kino.beam(e, { len: e.lib.BEAM_LEN, top: -0.75, bot: 0.75, mouth: 0.14, dust: 300, drift: 1.2, tipRadius: 1.5, tipStrength: 1.1 });',
+  'e.kit.cinema.beam(e, { len: e.lib.BEAM_LEN, top: -0.75, bot: 0.75, mouth: 0.14, dust: 300, drift: 1.2, tipRadius: 1.5, tipStrength: 1.1 });',
   `const on = Math.max(0, Math.min(1, e.state.beam_on ?? 0));
 e.uniform('on', on); e.glow('mouth', on); e.glow('tip', 0);`);
 
 // the north side: the white wall and its film, the chapel, the steps, the mother's room
 el({ id: 'wall', name: 'White wall', across: -5, distance: 26, facing: 180, height: 8.5, box: [-0.2, -8.8, 10.7, 0.05], shadow: true }, 'e.lib.whiteWall(g, e);');
 el({ id: 'screen', name: 'Film on the wall', across: 2, distance: 25.96, facing: 180, glows: true, height: 4, box: [-3.1, -6.6, 3.1, -2.4] },
-  `const k = e.kit.kino, W = 6, H = 4, x = -3, y = -6.5;
+  `const k = e.kit.cinema, W = 6, H = 4, x = -3, y = -6.5;
 e.layer('blur', {}, l => { l.filter = 'blur(0.18px)'; k.frame(l, 'comedy', x, y, W, H); l.filter = 'none'; });
 e.layer('sharp', { flicker: 0.12 }, l => k.frame(l, 'comedy', x, y, W, H));
 e.layer('white', { flicker: 0.1 }, l => k.frame(l, 'white', x, y, W, H));
@@ -271,7 +271,7 @@ for (const [id] of PEOPLE) {
 const spec = {
   engine: 3, title: 'The Square', caption: 'Giancaldo. The Paradiso\'s square', horizon: 0.5,
   camera: { mode: 'roam', area: [-12, 12, -14, 26] },
-  light, lights, state, states, modules: ['cast', 'kino', 'closeups', 'beats', 'nebo'],
+  light, lights, state, states, modules: ['cast', 'cinema', 'closeups', 'beats', 'sky'],
   music: { prompts: [
     { text: 'quiet night ambience of a Sicilian town square, distant cicadas, faint murmur of voices, no melody', weight: 1 },
     { text: 'soft warm drone, slow and sparse, a little wind, nostalgic, no rhythm', weight: 0.4 },
@@ -280,11 +280,11 @@ const spec = {
   ], bpm: 70, density: 0.15, brightness: 0.3, scale: 'E_MAJOR_D_FLAT_MINOR' },
   objects,
 };
-// the world's shaders: the sky's (tools/nebo-sky.wgsl) and the beam's (tools/kino-beam.wgsl)
+// the world's shaders: the sky's (tools/sky.wgsl) and the beam's (tools/cinema-beam.wgsl)
 const sky = objects.find(o => o.id === 'sky'); sky.sky = true;
-files['elements/sky.wgsl'] = wgsl('nebo-sky');
+files['elements/sky.wgsl'] = wgsl('sky');
 const beam = objects.find(o => o.id === 'beam'); beam.glows = true; beam.uniforms = { on: 0, ...(beam.uniforms || {}) };
-files['elements/beam.wgsl'] = wgsl('kino-beam');
+files['elements/beam.wgsl'] = wgsl('cinema-beam');
 fs.writeFileSync(path.join(DIR, 'scene.json'), JSON.stringify(spec, null, 2) + '\n');
 fs.rmSync(path.join(DIR, 'elements'), { recursive: true, force: true });
 for (const [f, text] of Object.entries(files)) {

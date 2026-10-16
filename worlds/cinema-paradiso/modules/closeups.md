@@ -12,7 +12,7 @@ grown man's (Salvatore: a dark coat sleeve, a light cuff) — `closeups.WHO`, `c
 { "id": "splice", "name": "Splicing", "insert": "splice",
   "code": "e.kit.closeups.splice(g, e);", "animate": "e.kit.closeups.spliceMove(e);" }
 ```
-In the scene's `modules` — `kino` and `closeups`; the insert's keys — in the scene's `states` (the table below). An insert
+In the scene's `modules` — `cinema` and `closeups`; the insert's keys — in the scene's `states` (the table below). An insert
 opens by its key 0 → 1 (no shot, no cut), no `iris`: from the middle over the whole frame.
 
 - The frame's units — the frame's height, the origin in the middle (x −0.89…0.89 at 16:9); painted out to ±1.3 —
