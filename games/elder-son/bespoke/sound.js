@@ -9,12 +9,12 @@
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down), getting
 // there over `seconds`:
 //   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
-//   wind — pink noise through a band wandering 250–700 Hz, now and then a gust · rails — the far railway: every 20–40 s
+//   wind — low wind in random gusts (ambience.js) · rails — the far railway: every 20–40 s
 //   far wheels («та-та, та-та»), now and then a far horn · train — the electric train close by: the motor's hum, the
 //   wheels on the joints · freight — the goods train: heavier, faster wheels, the screech, the diesel · crossing — the
 //   level crossing's bell, twice a second · room — the room's hum and the stove's crackle · clock — the wall clock: tick
-//   and tock in turn, every 0.5 s · fire — the roar and the crackle · crowd — people far off, no words · pour — tea into a
-//   glass, higher as it is louder
+//   and tock in turn, every 0.5 s · fire — a fire · crowd — people far off · pour — tea into a glass: recordings
+//   (sounds/)
 // Played once:
 //   horn(level) · doors · knock · dog · door · creak · cough · tick · strike(n) · rub · spill · box · glass ·
 //   splash(level) · crunch · thud · scrape · dance(seconds)
@@ -23,6 +23,7 @@
 //     and the phrase goes on to its end; far — still more muffled and quiet (heard from the street, through the window)
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}:
 //   march() — the funeral band far off: four brass voices a little out of tune, the bass drum on the strong beats
+import { built, kit } from './ambience.js';
 
 // The world's key is A♭ major / F minor (A_FLAT_MAJOR_F_MINOR): the phrase and the march are in F minor.
 // PHRASE — the oratorio «Все люди — братья», the place he cannot get past: C F A♭ G F E, and the seventh — D♭ — breaks
@@ -211,7 +212,6 @@ function syllable(t, dest, { f1, f2, len, loud, kind = 'pink', pitch }) {
   shape(e.gain, t, [[len * 0.25, loud], [len * 0.6, loud * 0.7], [len, 0]]);
   e.connect(dest);
 }
-const VOWELS = [[700, 1200], [500, 1500], [400, 2000], [600, 1000], [300, 2300]];
 // wheels over a rail joint: two knocks a bogie, «та-та» — `gap` between the two, `loud`, `f` how deep
 function joint(t, dest, { gap = 0.12, loud = 0.5, f = 160 }) {
   for (const s of [0, gap]) {
@@ -232,6 +232,24 @@ function hornAt(t, dest, { len = 1.6, loud = 0.4, lp = 1800 }) {
   }
   lpf.connect(e).connect(dest);
   shape(e.gain, t, [[0.08, loud], [len - 0.15, loud * 0.9], [len + 0.2, 0]]);
+}
+
+// recordings (sounds/ — CC0, from Freesound: sounds/README.md): fetched and decoded once each; a bed plays one of its own
+// round and round from a random point, `gain` bringing it to as loud as the bed it took the place of
+const recordings = {};
+function recording(file) {
+  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b)));
+}
+function recorded(files, gain) {
+  return ({ a, out, keep }) => {
+    const s = a.createBufferSource(), g = a.createGain();
+    let on = true;
+    keep({ stop() { on = false; if (s.buffer) s.stop(); } });
+    g.gain.value = gain;
+    s.loop = true;
+    s.connect(g).connect(out);
+    recording(files[Math.floor(Math.random() * files.length)]).then(buf => { if (on) { s.buffer = buf; s.start(a.currentTime, Math.random() * buf.duration); } });
+  };
 }
 
 // the beds: one of each for the page, built when first heard and taken down once silent: build({a, t, out, noise,
@@ -279,29 +297,7 @@ function schedule(a, first, fn) {
   };
 }
 
-export function wind(level = 1, seconds = 2) {
-  bed('wind', 0.3, 'street', ({ a, t, out, noise, sway, every }) => {
-    // pink noise through a band wandering 250–700 Hz; now and then a gust
-    const band = filter({ type: 'bandpass', frequency: 450, Q: 1.1 }), amp = a.createGain(), gust = a.createGain();
-    amp.gain.value = 0.55;
-    gust.gain.value = 1;
-    noise('pink').connect(band).connect(amp).connect(gust).connect(out);
-    sway(band.frequency, 0.05, 160);
-    sway(band.frequency, 0.021, 70);
-    sway(amp.gain, 0.08, 0.18);
-    const low = a.createGain();
-    low.gain.value = 0.25;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 220 })).connect(low).connect(out);
-    every(schedule(a, t + rnd(6, 12), at => {
-      const len = rnd(2.5, 4.5);
-      gust.gain.setValueAtTime(1, at);
-      gust.gain.linearRampToValueAtTime(rnd(1.6, 2.2), at + len * 0.4);
-      gust.gain.linearRampToValueAtTime(1, at + len);
-      band.frequency.setTargetAtTime(rnd(550, 700), at, len * 0.3);
-      return at + len + rnd(8, 18);
-    }));
-  }, level, seconds);
-}
+export function wind(level = 1, seconds = 2) { bed('wind', 0.2, 'street', ({ a, out, keep, every }) => built.wind(kit(a, keep, every), out, 1.3), level, seconds); }
 
 export function rails(level = 1, seconds = 2) {
   bed('rails', 0.6, 'street', ({ a, t, out, every }) => {
@@ -407,55 +403,14 @@ export function clock(level = 1, seconds = 2) {
   }, level, seconds);
 }
 
-export function fire(level = 1, seconds = 2) {
-  bed('fire', 0.3, 'street', ({ a, t, out, noise, sway, every }) => {
-    // the roar (brown noise) and a quick crackle
-    const roar = a.createGain(), flame = a.createGain();
-    roar.gain.value = 0.55;
-    noise('brown').connect(filter({ type: 'lowpass', frequency: 190 })).connect(roar).connect(out);
-    sway(roar.gain, 0.3, 0.15);
-    flame.gain.value = 0.14;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 520, Q: 0.7 })).connect(flame).connect(out);
-    sway(flame.gain, 6.1, 0.06);
-    sway(flame.gain, 0.5, 0.04);
-    every(schedule(a, t + 0.1, at => {
-      if (Math.random() < 0.1) burst(at, out, { f: rnd(500, 900), Q: 2, len: 0.07, loud: 0.4 });
-      else burst(at, out, { f: rnd(1500, 5000), Q: 1.5, len: rnd(0.006, 0.025), loud: 0.05 + Math.random() ** 2 * 0.3 });
-      return at - Math.log(1 - Math.random()) / 9;
-    }));
-  }, level, seconds);
-}
+// a fire: a recording
+export function fire(level = 1, seconds = 2) { bed('fire', 0.05, 'street', recorded(['stove-346321.mp3'], 7.17), level, seconds); }
 
-export function crowd(level = 1, seconds = 2) {
-  bed('crowd', 0.35, 'street', ({ a, t, out, noise, sway, every }) => {
-    // people far off: a murmur and syllables without words, unevenly
-    const dist = filter({ type: 'lowpass', frequency: 1600 });
-    dist.connect(out);
-    const body = a.createGain();
-    body.gain.value = 0.12;
-    noise('pink').connect(filter({ type: 'bandpass', frequency: 600, Q: 0.8 })).connect(body).connect(dist);
-    sway(body.gain, 0.09, 0.05);
-    every(schedule(a, t + 0.1, at => {
-      const [f1, f2] = VOWELS[Math.floor(Math.random() * VOWELS.length)], k = rnd(0.85, 1.2);
-      syllable(at, dist, { f1: f1 * k, f2: f2 * k, len: rnd(0.12, 0.4), loud: 0.3 * rnd(0.3, 1), pitch: rnd(110, 280) });
-      return at - Math.log(1 - Math.random()) / 14;
-    }));
-  }, level, seconds);
-}
+// a crowd: a recording
+export function crowd(level = 1, seconds = 2) { bed('crowd', 0.05, 'street', recorded(['people-far-405317.mp3'], 0.78), level, seconds); }
 
-export function pour(level = 1, seconds = 2) {
-  bed('pour', 0.25, 'room', ({ a, out, noise, sway }) => {
-    // a stream into a glass: noise through a band, higher as it is louder (the glass filling)
-    const band = filter({ type: 'bandpass', frequency: 700, Q: 3 }), e = a.createGain();
-    e.gain.value = 0.7;
-    noise('white').connect(band).connect(e).connect(out);
-    sway(e.gain, 11, 0.15);
-    const bubbles = filter({ type: 'bandpass', frequency: 1300, Q: 9 });
-    noise('pink').connect(bubbles).connect(out);
-    sway(bubbles.frequency, 7, 300);
-    return (v, s) => { to(band.frequency, 600 + 1400 * v, s); };
-  }, level, seconds);
-}
+// tea poured: a recording
+export function pour(level = 1, seconds = 2) { bed('pour', 0.05, 'street', recorded(['pour-627625.mp3'], 8.0), level, seconds); }
 
 const BEDS = { wind, rails, train, freight, crossing, room, clock, fire, crowd, pour };
 export function beds(levels = {}, seconds = 2) {
