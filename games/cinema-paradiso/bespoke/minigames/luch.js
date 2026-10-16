@@ -1,32 +1,32 @@
-// «Луч» (II.2, Площадь, после куска `beam_out`; кадр WALL): руками Альфредо — луч из окошка будки через площадь на
-// белую стену дома напротив. Фаза 1 — вести (где угодно): стрелка — конец луча (пятно света на камне и головах), зона —
-// белая стена (`beam_aim` 1). Нажал и ведёт вбок: цель `beam_aim` — смещение пальца (четверть ширины окна = 1) от
-// `beam_aim` на миг нажатия; сам `beam_aim` идёт к цели не быстрее 0.25 в секунду — проектор тяжёлый; отпустил — луч
-// стоит. В зоне (`beam_aim` ≥ 0.95) полсекунды — защёлка: `beam_aim` 1, лязг, на стене мутное пятно (`wall_film`
-// comedy, `beam_focus` 0). Фаза 2 — крутить: кольцо с пунктиром по кругу на `wall#screen`; полтора оборота по стрелке —
-// резкость 0 → 1; против стрелки — назад (ошибка «против»).
-//   Чувство: Альфредо дарит кино тем, кому не хватило мест; хочет, чтобы вся площадь увидела; озорство и гордость;
-//   игрок — щедрость.
-//   opts: { onFocus(u) — четыре раза в секунду во второй фазе: резкость (глава ведёт стрекот) }
-//   → { seconds: от начала до конца }
+// "The Beam" (II.2, the square, after the beat `beam_out`; the shot WALL): with Alfredo's hands — the beam from the booth's port across the square
+// onto the white wall of the house opposite. Phase 1 — lead (anywhere): the arrow — the beam's end (a spot of light on the stone and the heads), the zone —
+// the white wall (`beam_aim` 1). Pressed and led sideways: the aim of `beam_aim` — the finger's shift (a quarter of the window's width = 1) from
+// `beam_aim` at the moment of the press; `beam_aim` itself goes to the aim no faster than 0.25 a second — the projector is heavy; let go — the beam
+// stands. Half a second in the zone (`beam_aim` ≥ 0.95) — the latch: `beam_aim` 1, a clang, a blurred patch on the wall (`wall_film`
+// comedy, `beam_focus` 0). Phase 2 — turn: a ring with a dotted circle on `wall#screen`; one and a half turns clockwise —
+// the focus 0 → 1; anticlockwise — back (the mistake "against").
+//   The feeling: Alfredo gives the cinema to those who got no seats; he wants the whole square to see; mischief and pride;
+//   the player — generosity.
+//   opts: { onFocus(u) — four times a second in the second phase: the focus (the chapter keeps the whirr) }
+//   → { seconds: from the beginning to the end }
 import { until, keys } from '../hands.js';
 
-const SPEED = 0.25; // beam_aim в секунду, не быстрее
-const ZONE = 0.95, LATCH = 0.5; // в зоне — сколько секунд до защёлки
-const TURNS = 1.5; // оборотов до полной резкости
-const TELL = 0.25; // с между onFocus
+const SPEED = 0.25; // beam_aim a second, no faster
+const ZONE = 0.95, LATCH = 0.5; // in the zone — how many seconds to the latch
+const TURNS = 1.5; // turns to the full focus
+const TELL = 0.25; // s between onFocus
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'luch',
-  title: 'Луч', // как её зовёт ☰ автора
+  title: 'The Beam', // as the author's ☰ lists it
   about: 14,
   skipped: { seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Белая стена дома напротив пустая. Проектор тяжёлый, луч ползёт медленно' });
+    const mg = g.minigame({ phrase: tr('The white wall of the house opposite is empty. The projector is heavy, the beam creeps slowly') });
     const send = keys(g), t0 = mg.t;
     mg.plate.set({ notches: [0.5] });
-    // ── фаза 1: вести луч на стену ──
+    // ── phase 1: lead the beam onto the wall ──
     let aim = clamp(+g.get('beam_aim') || 0), target = aim, from = aim, inZone = 0;
     const lead = mg.lead({ zone: { at: 1 - aim, width: 0.1 }, release: 'return' });
     b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
@@ -47,8 +47,8 @@ export default {
     lead.remove();
     send('wall_film', 'comedy');
     send('beam_focus', 0);
-    // ── фаза 2: навести резкость ──
-    mg.plate.set({ phrase: 'На стене уже смеются, а кадр ещё мутный' });
+    // ── phase 2: bring it into focus ──
+    mg.plate.set({ phrase: tr('On the wall they\'re laughing already, and the picture\'s still blurred') });
     const ring = mg.mark({ at: 'wall#screen', kind: 'dash' });
     const knob = mg.turn({ on: ring, dir: 1 });
     b.minigame.tricks.teach(mg, [knob], { id: 'turn' });

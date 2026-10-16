@@ -1,25 +1,25 @@
-// «Буквы» (I.4, Будка, после куска `slate_in`; вставка `slate`): маленькая рука на большой руке Альфредо с мелом —
-// «АЛЬФРЕДО» по пунктиру на грифельной доске. Вести по линии от `slate#start` до `slate#end`: пройдено — `chalk_x`,
-// буквы — `letters` = floor(8 · chalk_x). Поспешил (мел идёт быстрее 0.1 строки в секунду, сглажено за 0.3 с) — рука
-// дёрнулась: `wobble` 1 на 0.4 с, текущая буква в `crooked` становится 1, скрип мела (не чаще раза на букву). Отпустил —
-// стоит; дальше с того же места.
-//   Чувство: взрослый Альфредо учится писать своё имя у мальчика; хочет сдать экзамен; стыдно и смешно; игрок —
-//   нежность и терпение.
-//   → { crooked: строка из 8 знаков '0'/'1' — кривые буквы (доска на гвозде в будке 1988 года) }
+// "Letters" (I.4, the booth, after the beat `slate_in`; the insert `slate`): the small hand on Alfredo's big hand with the chalk —
+// «ALFREDO» along the dotted letters on the slate (the world's Italian letters: seven). Lead along the line from `slate#start` to `slate#end`: gone through — `chalk_x`,
+// the letters — `letters` = floor(7 · chalk_x). In a hurry (the chalk goes faster than 0.1 of the line a second, smoothed over 0.3 s) — the hand
+// twitched: `wobble` 1 for 0.4 s, the letter now in `crooked` becomes 1, the chalk squeaks (no more than once a letter). Let go —
+// it stands; on from the same place.
+//   The feeling: grown-up Alfredo learns to write his name from the boy; he wants to pass the exam; shameful and funny; the player —
+//   tenderness and patience.
+//   → { crooked: a string of 7 characters '0'/'1' — the crooked letters (the slate on the nail in the booth of 1988) }
 import { until, keys } from '../hands.js';
 
-const LETTERS = 8;
-const FAST = 0.1; // строки в секунду — быстрее рука дёргается
-const SMOOTH = 0.3; // с: сглаживание скорости
-const WOBBLE = 0.4; // с
+const LETTERS = 7; // «ALFREDO»
+const FAST = 0.1; // of the line a second — faster, the hand twitches
+const SMOOTH = 0.3; // s: the speed's smoothing
+const WOBBLE = 0.4; // s
 
 export default {
   file: 'bukvy',
-  title: 'Буквы', // как её зовёт ☰ автора
+  title: 'Letters', // as the author's ☰ lists it
   about: 14,
-  skipped: { crooked: '00000000' },
+  skipped: { crooked: '0000000' },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Рука у Альфредо тяжёлая. Мел слушается её, только когда она идёт медленно' });
+    const mg = g.minigame({ phrase: tr('Alfredo\'s hand is heavy. The chalk obeys it only when it moves slowly') });
     const send = keys(g);
     const start = mg.mark({ at: 'slate#start', kind: 'dash' });
     const chalk = mg.trace({ on: start, line: ['slate#start', 'slate#end'] });
@@ -30,7 +30,7 @@ export default {
     const done = await until(mg, ({ t, dt }) => {
       const s = chalk.state, was = x;
       x = Math.min(1, s.u);
-      // скорость мела, сглаженная
+      // the chalk's speed, smoothed
       if (dt > 0) rate += ((x - was) / dt - rate) * Math.min(1, dt / SMOOTH);
       const now = Math.min(LETTERS - 1, Math.floor(LETTERS * x));
       if (rate > FAST && s.tracing && faulted !== now) {

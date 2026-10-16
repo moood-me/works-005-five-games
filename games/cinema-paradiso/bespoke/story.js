@@ -60,21 +60,21 @@ export const SCENES = { square: 'main', booth: 'budka', hall: 'zal', home: 'dom'
   station: 'vokzal', rome: 'rim', strip: 'plenka' };
 
 // the minigames by their titles (game.md §7) → the file name their result is kept under (g.state.hands)
-export const HANDS = { 'Подглядывать': 'podglyadyvat', 'Склейка': 'skleyka', 'Буквы': 'bukvy', 'Заправка': 'zapravka',
-  'Луч': 'luch', 'Вытащить': 'vytaschit', 'Камера': 'kamera', 'Сто ночей': 'sto-nochey', 'Смена': 'smena',
-  'Записка': 'zapiska', 'Лента': 'lenta' };
+export const HANDS = { 'Peeking': 'podglyadyvat', 'Splicing': 'skleyka', 'Letters': 'bukvy', 'Threading': 'zapravka',
+  'The Beam': 'luch', 'Pull Him Out': 'vytaschit', 'The Camera': 'kamera', 'A Hundred Nights': 'sto-nochey', 'Changeover': 'smena',
+  'The Note': 'zapiska', 'The Strip': 'lenta' };
 const handsOf = m => m?.file ?? HANDS[m?.title];
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean.
 export const SCALES = {
-  toto: { start: 0, min: -5, max: 5, up: 'Кино', down: 'Люди',
-    rule: 'Луч ярче — Тото живёт кино. Окна теплее — Тото живёт людьми.' },
-  alfredo: { start: 0, min: -3, max: 3, up: 'Держать', down: 'Отпустить',
-    rule: 'Катушка: держит Альфредо мальчика при себе — или отпускает в большую жизнь.' },
+  toto: { start: 0, min: -5, max: 5, up: tr('Cinema'), down: tr('People'),
+    rule: tr('A brighter beam — Totò lives for the cinema. Warmer windows — Totò lives for people.') },
+  alfredo: { start: 0, min: -3, max: 3, up: tr('Hold'), down: tr('Let go'),
+    rule: tr('The reel: Alfredo keeps the boy by him — or lets him go out into the big life.') },
 };
 export const ENDINGS = [
-  { id: 'turn', label: 'Пусть останется' }, { id: 'note', label: 'Записка' }, { id: 'letters', label: 'Письма' },
+  { id: 'turn', label: tr('Let it stay') }, { id: 'note', label: tr('The note') }, { id: 'letters', label: tr('The letters') },
 ];
 
 // What follows from the play so far — all a step reads of it besides g.state. A choice not made (its step skipped by
@@ -83,16 +83,16 @@ export function facts(state) {
   const c = state.choices, t = state.scales.toto, a = state.scales.alfredo, elena = c.elena ?? 'future';
   const girl = c.girl ?? 'let', h = state.hands ?? {};
   return {
-    seen: h.podglyadyvat?.seen ?? 3,                     // I.2: Р07 (≥ 2) или Р128
-    slips: h.zapravka?.slips ?? 0,                       // II.1: кадр дрожит в `motor` (`stutter`)
-    jumps: h.skleyka?.jumps ?? 0,                        // кривые склейки: «Лента», Рим
-    slate: h.bukvy?.crooked ?? '00000000',               // доска с его буквами в будке 1988 года
-    share: h.kamera?.share ?? 1,                         // сколько её в его плёнке (V.2)
-    missed: h.smena?.missed ?? 0,                        // IV.2: Р129
-    letter: elena === 'truth',                           // её письмо в руке Тото на пристани (IV.5)
-    kino: t > 0,                                         // ответ матери в V.2, мать на сносе
-    warm: Math.min(1, Math.max(0, (5 - t) / 10)),        // 0 Кино … 1 Люди
-    hold: a > 0,                                         // слова вдовы в V.4
+    seen: h.podglyadyvat?.seen ?? 3,                     // I.2: L07 (≥ 2) or L128
+    slips: h.zapravka?.slips ?? 0,                       // II.1: the frame trembles in `motor` (`stutter`)
+    jumps: h.skleyka?.jumps ?? 0,                        // crooked splices: «The Strip», Rome
+    slate: h.bukvy?.crooked ?? '0000000',                // the slate with his letters in the booth of 1988
+    share: h.kamera?.share ?? 1,                         // how much of her is in his film (V.2)
+    missed: h.smena?.missed ?? 0,                        // IV.2: L129
+    letter: elena === 'truth',                           // her letter in Toto's hand on the pier (IV.5)
+    kino: t > 0,                                         // the answer to his mother in V.2, the mother at the demolition
+    warm: Math.min(1, Math.max(0, (5 - t) / 10)),        // 0 Cinema … 1 People
+    hold: a > 0,                                         // the widow's words in V.4
     alfredoHere: c.booth === 'hold',
     frame: c.frame === 'take',
     reel8: c.camera === 'film',
@@ -147,7 +147,7 @@ export function context(b, view, hub, state, j = null) {
   // a minigame's result kept where the story reads it (game.md §3.6)
   const keepHands = (minigame, result) => {
     const name = handsOf(minigame);
-    if (!name) { b.trouble?.(`мини-игра «${minigame?.title}»: её файла нет в HANDS (story.js)`); return result; }
+    if (!name) { b.trouble?.(`minigame “${minigame?.title}”: its file is not in HANDS (story.js)`); return result; }
     state.hands[name] = result && typeof result === 'object' ? { ...result } : result;
     return result;
   };
@@ -240,7 +240,7 @@ export function context(b, view, hub, state, j = null) {
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`кусок «${name}» не кончился`);
+      if (wait && !(await ended)) b.trouble(`the beat “${name}” did not end`);
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
@@ -272,7 +272,7 @@ export function context(b, view, hub, state, j = null) {
       }
     },
     minigame(o = {}) {
-      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      if (!playing) throw new Error('g.minigame — only inside a minigame (g.play)');
       const mg = b.minigame.start({ ...o, signal: playing.signal });
       mg.on('skip', playing.end);
       return mg;

@@ -1,39 +1,39 @@
-// «Подглядывать» (I.1, Зал, после куска `peek`; кадр CURTAIN): мальчик за занавеской у боковой двери, в пятом ряду —
-// отец Адельфио один смотрит фильм. Держать где угодно (налив и дуга — у щели занавеса `curtain#gap`): держат — мальчик
-// выглядывает (`peek` к 1 на 2 в секунду), отпустили — прячется (к 0 на 3 в секунду). Фильм идёт сам: три поцелуя на
-// 6-й, 15-й, 24-й секунде — `screen_film` romance_kiss, через 1.2 с колокольчик (`bell` 1, сцена играет bell_ring), через
-// 0.8 с `bell` 0 и снова romance; выглядывал на звонке — увидел (`seen`). Дважды за фильм священник оглядывается на
-// занавес (`turn`), скрипнув креслом за 0.8 с до того: дуга опасности; выглядывал, пока он смотрит, — попался.
-//   Чувство: мальчик подглядывает из-за занавески за тем, что ему нельзя; хочет увидеть, что режет священник;
-//   страшно и смешно; игрок — сообщник.
-//   opts: { onFirstBell() — на первом звонке (Р04), не ждётся; onCaught() — когда попался впервые (Р05) }
-//   → { seen: сколько звонков он видел (0…3), caught: сколько раз попался }
+// "Peeking" (I.1, the hall, after the beat `peek`; the shot CURTAIN): the boy behind the curtain at the side door, in the fifth row
+// Father Adelfio watches the film alone. Hold anywhere (the fill and the arc — at the curtain's gap `curtain#gap`): held — the boy
+// peeks out (`peek` toward 1 at 2 a second), let go — he hides (toward 0 at 3 a second). The film runs by itself: three kisses at
+// the 6th, the 15th, the 24th second — `screen_film` romance_kiss, 1.2 s later the bell (`bell` 1, the scene plays bell_ring), 0.8 s
+// later `bell` 0 and romance again; peeking at a ring — he saw it (`seen`). Twice in the film the priest looks round at the
+// curtain (`turn`), his seat creaking 0.8 s before: the arc of danger; peeking while he looks — caught.
+//   The feeling: the boy peeks from behind the curtain at what he mustn't see; he wants to see what the priest cuts;
+//   frightening and funny; the player — an accomplice.
+//   opts: { onFirstBell() — at the first ring (L04), not waited for; onCaught() — the first time he is caught (L05) }
+//   → { seen: how many rings he saw (0…3), caught: how many times he was caught }
 import { until, keys } from '../hands.js';
 
-const KISSES = [6, 15, 24]; // с от начала: поцелуй на экране
-const BELL = 1.2, BELL_OFF = 0.8; // с: колокольчик после поцелуя; сколько звенит
-const TURNS = [[8, 12], [18, 22]]; // с: в эти промежутки он оглядывается (миг — случайный)
-const CREAK = 0.8, TURN_IN = 0.4, TURN_HOLD = 1.6, TURN_OUT = 0.4; // с
-const FILM = 26; // с: заливка — время фильма
-const AFTER = 2; // с после третьего звонка — конец
-const BLOCK = 2; // с: попался — держание не принимается
-const PEEK = 0.5; // выглядывает, когда больше
+const KISSES = [6, 15, 24]; // s from the beginning: a kiss on the screen
+const BELL = 1.2, BELL_OFF = 0.8; // s: the bell after the kiss; how long it rings
+const TURNS = [[8, 12], [18, 22]]; // s: within these spans he looks round (the moment — at random)
+const CREAK = 0.8, TURN_IN = 0.4, TURN_HOLD = 1.6, TURN_OUT = 0.4; // s
+const FILM = 26; // s: the fill — the film's time
+const AFTER = 2; // s after the third ring — the end
+const BLOCK = 2; // s: caught — the hold is not taken
+const PEEK = 0.5; // he peeks out when above this
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'podglyadyvat',
-  title: 'Подглядывать', // как её зовёт ☰ автора
+  title: 'Peeking', // as the author's ☰ lists it
   about: 28,
   skipped: { seen: 3, caught: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Отец Адельфио смотрит фильм один. Прежде чем обернуться, его кресло скрипит' });
+    const mg = g.minigame({ phrase: tr('Father Adelfio watches the film alone. Before he turns round, his seat creaks') });
     const send = keys(g);
     const gap = mg.mark({ at: 'curtain#gap', kind: 'groove' });
-    // (держит — выглядывает: налив и есть `peek` — 2 в секунду туда, 3 обратно)
+    // (held — he peeks out: the fill is `peek` itself — 2 a second there, 3 back)
     const hold = mg.hold({ on: null, show: gap, seconds: 0.5, drain: 1 / 3 });
     b.minigame.tricks.teach(mg, [hold], { id: 'hold:anywhere' });
     mg.plate.set({ notches: KISSES.map(k => (k + BELL) / FILM) });
-    // когда он оглядывается: начало поворота в своём промежутке
+    // when he looks round: the turn's beginning within its span
     const turns = TURNS.map(([a, z]) => a + CREAK + Math.random() * (z - a - CREAK));
     const turnAt = t => {
       for (const T of turns) {
@@ -51,17 +51,17 @@ export default {
       return 0;
     };
     let seen = 0, caught = 0, toldCaught = false, blockedTill = -1;
-    const fired = new Set(); // события фильма, уже случившиеся
+    const fired = new Set(); // the film's events that have happened
     const once = (name, fn) => { if (!fired.has(name)) { fired.add(name); fn(); } };
     send('screen_film', 'romance');
     const t0 = mg.t;
     const done = await until(mg, ({ t: now }) => {
       const t = now - t0;
-      // попался — держание не принимается: мальчик за занавесом
+      // caught — the hold is not taken: the boy is behind the curtain
       if (t < blockedTill) hold.set({ fill: 0 });
       const peek = hold.state.fill;
       send('peek', peek);
-      // фильм: поцелуй, колокольчик, снова фильм
+      // the film: a kiss, the bell, the film again
       KISSES.forEach((K, i) => {
         if (t >= K) once(`kiss${i}`, () => send('screen_film', 'romance_kiss'));
         if (t >= K + BELL) once(`bell${i}`, () => {
@@ -72,7 +72,7 @@ export default {
         });
         if (t >= K + BELL + BELL_OFF) once(`off${i}`, () => { send('bell', 0); send('screen_film', 'romance'); });
       });
-      // он оглядывается: скрип, дуга растёт; держат, пока он смотрит, — попался
+      // he looks round: the creak, the arc grows; held while he looks — caught
       turns.forEach((T, i) => {
         if (t >= T - CREAK) once(`creak${i}`, () => g.sound.creak());
         if (t >= T && t < T + TURN_IN + TURN_HOLD + TURN_OUT && turnAt(t) > 0.5 && peek > PEEK) once(`caught${i}`, () => {

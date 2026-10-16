@@ -1,7 +1,7 @@
-// Эпилог «Поцелуи» — the demolition of the «Парадизо» (where Salvatore stands — the square's party keys `place`,
+// The epilogue "The Kisses" — the demolition of the Paradiso (where Salvatore stands — the square's party keys `place`,
 // `with_mother`: by the funeral and Toto's scale), the old madman out of the dust; Rome: the small screening room, the
 // strip of kisses on the screen under the theme, his face in the screen's white light (the note in his hand if he found
-// it — the party key `note_in_hand`). No choices; the scales are hidden (the framework). game.md §6 «Эпилог».
+// it — the party key `note_in_hand`). No choices; the scales are hidden (the framework). game.md §6 "Epilogue".
 // Reads: nothing directly (the scenes' party keys carry facts.place, kino, ending, jumps). Leaves: nothing.
 import { SCENES } from '../story.js';
 
@@ -13,9 +13,9 @@ const held = (g, h) => {
 
 export default {
   number: '',
-  title: 'Эпилог',
+  title: tr('Epilogue'),
   wall: false,
-  titles: ['Снос', 'Рим'],
+  titles: ['The Demolition', 'Rome'],
   choices: [],
   steps: [
     // the demolition: the full square goes silent, the whistle, the facade comes down; the madman out of the dust
@@ -34,7 +34,7 @@ export default {
       const madman = g.told('dust:madman');
       const dust = g.beat('dust');
       await madman;
-      await g.say('madman_old', 'Моя площадь…', 'madman');
+      await g.say('madman_old', 'My square…', 'madman');
       await dust;
     },
     // Rome: alone in the rows; the kisses on the screen; the white light on his face
@@ -43,8 +43,8 @@ export default {
       g.beds({});
       await g.scene(SCENES.rome, { beat: 'rome' });
       await g.beat('rome');
-      await g.choose(null, { 'port#window': [{ id: 'play', label: 'Пустить' }] });
-      await g.say('salvatore', 'Пускай', 'toto');
+      await g.choose(null, { 'port#window': [{ id: 'play', label: tr('Roll the film') }] });
+      await g.say('salvatore', 'Roll it', 'toto');
       g.beds({ whirr: 0.5 });
       const theme = held(g, g.sound.theme());
       await g.beat('kisses');

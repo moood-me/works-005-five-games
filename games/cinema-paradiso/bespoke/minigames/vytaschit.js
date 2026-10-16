@@ -1,27 +1,27 @@
-// «Вытащить» (II.3, Будка в дыму, после куска `smoke_in`; кадр FLOOR): мальчик тащит Альфредо по полу к двери.
-// Тянуть с сопротивлением: кольцо на руках мальчика (`toto#hand_r`), путь — от проектора (`floor#path0`) к двери
-// (`floor#path1`), сверху вниз по кадру; Альфредо идёт за пальцем тяжело (натяжение — языка); `drag` — где он на пути,
-// сцена ведёт двоих и говорит, где они сейчас (`drag_at`). Дыхание: тянут дольше 3 с подряд — кашель: ошибка «сорвал»,
-// `cough` 1 (мальчик выпрямляется), Альфредо сползает назад на 0.05, секунду тянуть нельзя. Отпустил и снова взялся —
-// вдохнул, без ошибки. Конец — у двери (`drag` 1 и `drag_at` ≥ 0.97).
-//   Чувство: мальчик тащит Альфредо из дыма; хочет спасти; страх и упрямство; игрок — усилие и дыхание.
-//   → {} (кашель стоит только секунд; итог рук — то, что Альфредо жив)
+// "Pull Him Out" (II.3, the booth in smoke, after the beat `smoke_in`; the shot FLOOR): the boy drags Alfredo along the floor to the door.
+// Pull against resistance: a ring on the boy's hands (`toto#hand_r`), the way — from the projector (`floor#path0`) to the door
+// (`floor#path1`), down the frame; Alfredo follows the finger heavily (the pull is the language's); `drag` — where he is on the way,
+// the scene leads the two and says where they are now (`drag_at`). The breath: pulling longer than 3 s on end — a cough: the mistake "slipped",
+// `cough` 1 (the boy straightens up), Alfredo slides back by 0.05, a second when pulling is not taken. Let go and took hold again —
+// a breath taken, no mistake. The end — at the door (`drag` 1 and `drag_at` ≥ 0.97).
+//   The feeling: the boy drags Alfredo out of the smoke; he wants to save him; fear and stubbornness; the player — effort and breath.
+//   → {} (the cough costs only seconds; what the hands give — that Alfredo is alive)
 import { until, keys } from '../hands.js';
 
-const BREATH = 3; // с: тянуть подряд, пока хватает воздуха
-const SLIDE = 0.05; // на сколько он сползает назад при кашле
-const STILL = 1; // с после кашля — тянуть нельзя
-const STAND = 0.6; // с: мальчик выпрямляется (cough 1)
-const SHUFFLE = 0.1; // шорох по доскам — через каждую такую долю пути
+const BREATH = 3; // s: pulling on end while the air lasts
+const SLIDE = 0.05; // how far he slides back at a cough
+const STILL = 1; // s after the cough — no pulling
+const STAND = 0.6; // s: the boy straightens up (cough 1)
+const SHUFFLE = 0.1; // a rustle on the boards — at every such share of the way
 const AT_DOOR = 0.97;
 
 export default {
   file: 'vytaschit',
-  title: 'Вытащить', // как её зовёт ☰ автора
+  title: 'Pull Him Out', // as the author's ☰ lists it
   about: 18,
   skipped: {},
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Дым стоит под потолком. У пола ещё можно дышать — недолго' });
+    const mg = g.minigame({ phrase: tr('Smoke hangs under the ceiling. Near the floor you can still breathe — not for long') });
     const send = keys(g);
     const hands = mg.mark({ at: 'toto#hand_r', kind: 'dash' });
     const pull = mg.pull({ on: hands, to: 'floor#path1', heavy: true });
@@ -35,7 +35,7 @@ export default {
       else if (s.held) {
         held += dt;
         if (held > BREATH) {
-          // кашель
+          // the cough
           held = 0;
           frozen = Math.max(0, s.u - SLIDE);
           pull.set({ u: frozen });

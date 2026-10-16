@@ -1,30 +1,30 @@
-// «Лента» (V.5, Будка в руинах, после куска `window_strip`; вставка `strip`): Сальваторе ведёт склеенную ленту против
-// окна будки. Тянуть с сопротивлением: кольцо у правой руки (`strip#hand_r`), путь — к левой (`strip#hand_l`), лента
-// идёт справа налево (`strip_x` 0…1), не быстрее 0.045 в секунду — тянется, кадры успевают засветиться; отпустил — стоит,
-// кольцо снова у руки, и следующий захват ведёт оставшееся. Первыми идут три поцелуя, разрезанные в главе I (кривые —
-// прыгают: это сцена), потом ещё восемь; кадр в свете — мотив темы, не чаще раза в 3 с. Ошибок нет.
-//   Чувство: Сальваторе ведёт к свету ленту, которую сохранил для него Альфредо; хочет увидеть всё; благодарность и
-//   горе; игрок — бережно, не торопясь.
-//   opts: { onProgress(u) — четыре раза в секунду: где лента (глава ведёт тему) }
-//   → { seconds: от первого касания до конца }
+// "The Strip" (V.5, the booth in ruins, after the beat `window_strip`; the insert `strip`): Salvatore draws the spliced strip across
+// the booth's window. Pull against resistance: a ring at the right hand (`strip#hand_r`), the way — to the left one (`strip#hand_l`), the strip
+// goes from right to left (`strip_x` 0…1), no faster than 0.045 a second — it is drawn out, the frames have time to light up; let go — it stands,
+// the ring at the hand again, and the next grip leads what is left. First come the three kisses cut in chapter I (the crooked ones
+// jump: that is the scene's), then eight more; a frame in the light — the theme's motif, no more than once in 3 s. No mistakes.
+//   The feeling: Salvatore draws to the light the strip that Alfredo kept for him; he wants to see it all; gratitude and
+//   grief; the player — carefully, unhurried.
+//   opts: { onProgress(u) — four times a second: where the strip is (the chapter keeps the theme) }
+//   → { seconds: from the first touch to the end }
 import { until, keys } from '../hands.js';
 
-const SPEED = 0.045; // strip_x в секунду, не быстрее
+const SPEED = 0.045; // strip_x a second, no faster
 const FRAMES = 11; // kiss_cut1…3, kiss1…8
-const MOTIF = 3; // с: мотив не чаще
-const TELL = 0.25; // с между onProgress
+const MOTIF = 3; // s: the motif no more often
+const TELL = 0.25; // s between onProgress
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'lenta',
-  title: 'Лента', // как её зовёт ☰ автора
+  title: 'The Strip', // as the author's ☰ lists it
   about: 24,
   skipped: { seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Обрезки склеены в одну ленту, кадр к кадру. За стеклом ещё светло' });
+    const mg = g.minigame({ phrase: tr('The clippings are spliced into one strip, frame to frame. It\'s still light behind the glass') });
     const send = keys(g);
     let x = clamp(+g.get('strip_x') || 0), base = x, mark = null, pull = null, started = null, told = -1, motif = -MOTIF, lit = -1;
-    // кольцо у руки; захват ведёт оставшуюся ленту: u пути — доля оставшегося
+    // the ring at the hand; a grip leads the strip that is left: u of the way — a share of what is left
     const grab = first => {
       mark = mg.mark({ at: 'strip#hand_r', kind: 'dash' });
       pull = mg.pull({ on: mark, to: 'strip#hand_l', heavy: true });
@@ -36,9 +36,9 @@ export default {
     const done = await until(mg, ({ t, dt }) => {
       const s = pull.state, want = base + s.u * (1 - base);
       x = Math.min(want, x + SPEED * dt, 1);
-      if (x < want - 1e-4) pull.set({ u: (x - base) / Math.max(1e-6, 1 - base) }); // (лента тянется: палец впереди неё)
+      if (x < want - 1e-4) pull.set({ u: (x - base) / Math.max(1e-6, 1 - base) }); // (the strip is drawn out: the finger ahead of it)
       send('strip_x', x);
-      // кадр в середине окна засветился
+      // the frame in the middle of the window has lit up
       const k = Math.floor(x * FRAMES + 0.5) - 1;
       if (k > lit && k < FRAMES) { lit = k; if (t - motif >= MOTIF) { motif = t; g.sound.motif(); } }
       if (started !== null && t - told >= TELL) { told = t; opts.onProgress?.(x); }

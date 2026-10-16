@@ -1,32 +1,32 @@
-// «Камера» (III.1, Площадь, после куска `dusk`; вставка `viewfinder` открыта): Тото снимает незнакомую девушку на
-// восьмимиллиметровку. Вести (где угодно): стрелка — перекрестие видоискателя (`pan`), зона — девушка (`elena_x`,
-// её ведёт игра: от автобуса справа к фонтану за 22 с, на середине — остановка 2 с: оглядывается на церковь). На 9-й
-// секунде через кадр перебегает сумасшедший (`madman_x` −1 → 1 за 3 с). Нажал и ведёт вбок: `pan` — смещение пальца
-// (четверть ширины окна = 1) от `pan` на миг нажатия; отпустил — стоит. В зоне (|elena_x − pan| < 0.22) камера пишет
-// (`rec` 1); вне зоны дольше 4 с подряд — «отстал» (раз на выход). Конец — через 1.5 с после того, как она дошла.
-//   Чувство: Тото снимает незнакомую девушку; хочет удержать её в кадре; любопытство и робость; игрок — не потерять её.
-//   opts: { onFrame(inFrame) — когда она входит в кадр и выходит из него (глава ведёт стрекот камеры) }
-//   → { share: доля времени, что она была в кадре, 0…1 (столько её в его плёнке в V.2) }
+// "The Camera" (III.1, the square, after the beat `dusk`; the insert `viewfinder` open): Toto films a girl he does not know with
+// the eight-millimetre camera. Lead (anywhere): the arrow — the viewfinder's crosshair (`pan`), the zone — the girl (`elena_x`,
+// the game leads her: from the bus on the right to the fountain in 22 s, halfway a stop of 2 s: she looks round at the church). At the 9th
+// second the madman runs across the frame (`madman_x` −1 → 1 in 3 s). Pressed and led sideways: `pan` — the finger's shift
+// (a quarter of the window's width = 1) from `pan` at the moment of the press; let go — it stands. In the zone (|elena_x − pan| < 0.22) the camera records
+// (`rec` 1); out of the zone longer than 4 s on end — "fell behind" (once each time out). The end — 1.5 s after she has got there.
+//   The feeling: Toto films a girl he does not know; he wants to keep her in the frame; curiosity and shyness; the player — not to lose her.
+//   opts: { onFrame(inFrame) — when she comes into the frame and goes out of it (the chapter keeps the camera's whirr) }
+//   → { share: the share of the time she was in the frame, 0…1 (so much of her is in his film in V.2) }
 import { until, keys } from '../hands.js';
 
-const WALK = 10, STOP = 2; // с: полпути, остановка на середине, полпути
-const MADMAN = 9, RUN = 3; // с: когда и сколько он перебегает
-const ZONE = 0.22; // полуширина зоны
-const LOST = 4; // с вне зоны подряд — «отстал»
-const AFTER = 1.5; // с после того, как она дошла
+const WALK = 10, STOP = 2; // s: half the way, the stop halfway, half the way
+const MADMAN = 9, RUN = 3; // s: when and how long he runs across
+const ZONE = 0.22; // the zone's half-width
+const LOST = 4; // s out of the zone on end — "fell behind"
+const AFTER = 1.5; // s after she has got there
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-// где она в момент t (от начала): 1 → 0.5 за 10 с, стоит 2 с, 0.5 → 0 за 10 с
+// where she is at the moment t (from the beginning): 1 → 0.5 in 10 s, stands 2 s, 0.5 → 0 in 10 s
 const elenaAt = t => (t < WALK ? 1 - 0.5 * (t / WALK) : t < WALK + STOP ? 0.5 : Math.max(0, 0.5 - 0.5 * ((t - WALK - STOP) / WALK)));
 const PATH = 2 * WALK + STOP;
 
 export default {
   file: 'kamera',
-  title: 'Камера', // как её зовёт ☰ автора
+  title: 'The Camera', // as the author's ☰ lists it
   about: 26,
   skipped: { share: 1 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Незнакомая девушка идёт от автобуса через площадь. Камера стрекочет, пока она в кадре' });
+    const mg = g.minigame({ phrase: tr('A girl nobody knows walks across the square from the bus. The camera whirs while she\'s in the frame') });
     const send = keys(g);
     let pan = clamp(+g.get('pan') || 0, -1, 1), from = pan, inside = null, out = 0, lostOnce = false, errors = 0, inTime = 0;
     const lead = mg.lead({ zone: { at: 1 - pan, width: 2 * ZONE }, release: 'return' });

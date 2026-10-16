@@ -1,10 +1,12 @@
 {
   "type": "bespoke",
-  "title": "Новый кинотеатр «Парадизо»",
-  "description": "Игра по фильму Торнаторе: мальчик, киномеханик и кино на площади сицилийского городка.",
+  "title": "Cinema Paradiso",
+  "description": "Totò spends his childhood in Alfredo's projection booth, among the reels of film and the projector's beam. The Paradiso is the heart of the little town. But one day he will have to choose between it and a big life somewhere far away.",
+  "line": "A boy from a little Sicilian town and the projectionist who taught him to love the cinema.",
+  "source": "after the film by Giuseppe Tornatore",
   "genres": {
-    "драма": 3,
-    "отношения": 2
+    "drama": 3,
+    "relationships": 2
   },
   "world": "pavel--novyy-kinoteatr-paradizo",
   "scenes": []

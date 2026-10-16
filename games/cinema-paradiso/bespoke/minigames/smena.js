@@ -1,27 +1,27 @@
-// «Смена» (IV.2, Будка, после куска `changeover`; кадр PORTS): Тото меняет катушки весь вечер и ждёт Елену. Три смены;
-// переключают на тот проектор, что стоит (`to`: 2, 1, 2 — 1 элемент `projector`, 2 — `projector2`); на другом меток
-// нет. Ожидание 6 с: часы идут (`clock` 6 + k за 2 с); на второй — шаги на лестнице мимо. Первая точка: `cue` 1 на 0.8 с
-// (мигает смотровое окошко), тик; кольцо на `#motor` стоящего с дугой времени 2.5 с — нажал: мотор (`motor{to}` 1).
-// Через 3 с — вторая точка, тик выше; кольцо на `#lever`, дуга 2 с — нажал: переключил (`active` to, `motor{from}` 0).
-// Дуга кончилась — «отстал», `missed` + 1, кольцо ждёт (на рычаге — экран белеет, зал свистит, пока не переключат).
-//   Чувство: Тото работает и ждёт Елену; хочет не пропустить ни смену, ни её шаги; тревога; игрок — работать, ожидая.
-//   → { missed: сколько точек пропущено (≥ 1 — Альфредо слышал свист: Р129) }
+// "Changeover" (IV.2, the booth, after the beat `changeover`; the shot PORTS): Toto changes the reels all evening and waits for Elena. Three changeovers;
+// they switch to the projector that stands (`to`: 2, 1, 2 — 1 the element `projector`, 2 — `projector2`); the other has no marks.
+// A wait of 6 s: the clock goes (`clock` 6 + k in 2 s); at the second — steps on the stair, passing. The first dot: `cue` 1 for 0.8 s
+// (the look port blinks), a tick; a ring on the standing one's `#motor` with an arc of time 2.5 s — pressed: the motor (`motor{to}` 1).
+// 3 s later — the second dot, a higher tick; a ring on `#lever`, the arc 2 s — pressed: switched (`active` to, `motor{from}` 0).
+// The arc ran out — "fell behind", `missed` + 1, the ring waits (at the lever — the screen goes white, the hall whistles till they switch).
+//   The feeling: Toto works and waits for Elena; he wants to miss neither a changeover nor her steps; unease; the player — to work while waiting.
+//   → { missed: how many dots were missed (≥ 1 — Alfredo heard the whistling: L129) }
 import { until, keys } from '../hands.js';
 
 const TO = [2, 1, 2];
-const WAIT = 6, CLOCK = 2; // с: ожидание; часы переходят
-const CUE = 0.8; // с: точка мигает
-const MOTOR_TIME = 2.5, LEVER_TIME = 2, GAP = 3; // с
+const WAIT = 6, CLOCK = 2; // s: the wait; the clock moves on
+const CUE = 0.8; // s: the dot blinks
+const MOTOR_TIME = 2.5, LEVER_TIME = 2, GAP = 3; // s
 const STEPS = 2 * TO.length;
 const el = n => (n === 1 ? 'projector' : 'projector2');
 
 export default {
   file: 'smena',
-  title: 'Смена', // как её зовёт ☰ автора
+  title: 'Changeover', // as the author's ☰ lists it
   about: 38,
   skipped: { missed: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Катушка на исходе. Перед концом в углу кадра мигает точка, потом вторая' });
+    const mg = g.minigame({ phrase: tr('The reel is running out. Before its end a dot blinks in the corner of the frame, then a second') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel(); });
@@ -29,7 +29,7 @@ export default {
     send('clock', 6); send('motor1', 1); send('motor2', 0); send('active', 1); send('white', 0); send('cue', 0);
     let missed = 0, step = 0;
     const wait = async s => { const t1 = mg.t; return until(mg, ({ t }) => { mg.plate.set({ fill: step / STEPS, glow: 'idle' }); return t - t1 >= s; }); };
-    // одна точка: мигнуло окошко, кольцо с дугой времени на ручке; → нажали (true) или мини-игру покинули (false)
+    // one dot: the port blinked, a ring with an arc of time on the handle; → pressed (true) or the minigame left (false)
     const point = async (ref, seconds, sound, late) => {
       send('cue', 1);
       g.sound[sound]();
@@ -59,12 +59,12 @@ export default {
       move('clock', 6 + k, CLOCK);
       if (k === 2) g.sound.steps();
       if (!(await wait(WAIT))) return this.skipped;
-      // мотор стоящего
+      // the standing one's motor
       if (!(await point(`${el(to)}#motor`, MOTOR_TIME, 'tick'))) return this.skipped;
       send(`motor${to}`, 1);
       g.sound.motor();
       if (!(await wait(GAP))) return this.skipped;
-      // рычаг: переключить
+      // the lever: switch over
       let white = false;
       const switched = await point(`${el(to)}#lever`, LEVER_TIME, 'tick2', () => { white = true; send('white', 1); g.sound.whistle(); });
       if (!switched) return this.skipped;
