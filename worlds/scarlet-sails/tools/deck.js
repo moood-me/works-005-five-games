@@ -212,7 +212,7 @@ Object.assign(state, { grey_do: { motion: 'helm', loop: true }, grey_reach: { r:
 const spec = {
   engine: 2,
   title: 'The Deck',
-  caption: 'Course — straight ahead.',
+  caption: 'Holding course, straight ahead.',
   horizon: 0.56,
   // the camera rides on the ship; the film and the viewer may go over the poop and out over the waist to the mainmast
   camera: { mode: 'roam', on: 'ship', area: [4.2, 1.4, 2.6, 11.5] },

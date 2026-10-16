@@ -4,7 +4,7 @@
 const L = scene.lib;
 const own = {
   silk: {
-    name: "alyi",
+    name: "scarlet",
     run: async (s) => {
       for (const name of L.ROLL_NAMES) {
         s.set("roll_out", 0);

@@ -8,14 +8,14 @@ const SEAS = [
   { name: tr('Chapter III\'s map'), state: { chapter_number: 'III', chapter_title: tr('Dawn'), map: [
     { title: tr('Longren goes to sea'), weight: '⚑', options: [opt(tr('“Go. I\'ll manage”'), 'chosen'), opt(tr('“Don\'t go”'), 'open')] },
     { title: tr('The ring'), weight: '~', options: [opt(tr('Wear it'), 'open'), opt(tr('Hide it on a cord'), 'chosen')] },
-    { title: tr('The secret or straight'), weight: '⚑', options: [opt(tr('The secret'), 'chosen'), opt(tr('Straight'), 'open')] },
+    { title: tr('The secret, or Longren'), weight: '⚑', options: [opt(tr('The secret'), 'chosen'), opt(tr('To Longren'), 'open')] },
   ] } },
   { name: tr('The whole play'), state: { chapter_number: '', chapter_title: tr('Scarlet Sails'), map: [
     { title: tr('I. The children by the boats'), weight: '⚑', options: [opt(tr('“I\'m not lying”'), 'chosen'), opt(tr('“I made it up”'), 'open')] },
     { title: tr('II. The night he left'), weight: '⚑', options: [opt(tr('Say goodbye'), 'open'), opt(tr('Slip away'), 'chosen')] },
     { title: tr('II. The letter'), weight: '⚑', options: [opt(tr('Home for a long while'), 'chosen'), opt(tr('Only to take his share'), 'open')] },
     { title: tr('III. Longren goes to sea'), weight: '⚑', options: [opt(tr('“Go. I\'ll manage”'), 'chosen'), opt(tr('“Don\'t go”'), 'open')] },
-    { title: tr('III. The secret or straight'), weight: '⚑', options: [opt(tr('The secret'), 'open'), opt(tr('Straight'), 'chosen')] },
+    { title: tr('III. The secret, or Longren'), weight: '⚑', options: [opt(tr('The secret'), 'open'), opt(tr('To Longren'), 'chosen')] },
     { title: tr('Finale'), weight: '⚑', options: [opt(tr('As Grin wrote it'), 'open'), opt(tr('Red sails are coming!'), 'chosen'), opt(tr('She waited'), 'open'), opt(tr('All Kaperna'), 'open')] },
   ] } },
 ];

@@ -1,7 +1,7 @@
 {
  "engine": 3,
  "title": "The Deck",
- "caption": "Course — straight ahead.",
+ "caption": "Holding course, straight ahead.",
  "horizon": 0.56,
  "camera": {
   "mode": "roam",
