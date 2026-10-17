@@ -9,6 +9,8 @@ pinch come nearer (the points nearer — their depth less). The background is a 
 view moves it stands, the chapters' points move.
 
 - `shown` — the chapter the player is at; `camera_x` — where the view is: chapter i — i·5 m.
+- `come` — each new value brings the view back to the chapter shown (the game sets it when that chapter is
+  pressed again after the player dragged away).
 - `dark` — the dark of the booth, the warm air by the lamp, painted once; `lamp` — the projector's lamp low on the right
   (`lib.js` lampAt), the lens's light breathes (lamp.animate.js).
 - `c0`…`c6` — the chapters' unseen points (unseen; across i·5, at 0.2 of the frame's height — where the game's tree
@@ -23,6 +25,6 @@ view moves it stands, the chapters' points move.
   "points": ["c0", "c1", "c2", "c3", "c4", "c5", "c6", "author"],
   "offers": [],
   "party": {},
-  "keys": { "shown": 0 }
+  "keys": { "shown": 0, "come": 0 }
 }
 ```
