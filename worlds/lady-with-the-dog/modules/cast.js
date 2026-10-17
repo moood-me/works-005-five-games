@@ -1,5 +1,5 @@
 // The people of “The Lady with the Dog” as people in a scene (the engine's people: an element with "person"): who
-// they are — figures of shapes in the world's style `dama` (from the engine's `soft`: a little longer, a head big
+// they are — figures of shapes in the world's style `lady` (from the engine's `soft`: a little longer, a head big
 // enough for the face `simple` — eyes, brows, nose, mouth, an expression by `<id>_mood` — to read), faded colours
 // (white, grey-blue, sand, graphite); what they carry (the parts, with their named points: "anna#lorgnette",
 // "gurov#watch"); how they move — the motions in cast.data.json (Kimodo's, put there with put_motion). cast.md says who
@@ -96,7 +96,7 @@ const hats = {
     F.ball(add(head, add(mul(hu, rh * 0.68), mul(hf, -rh * 0.08))), axes, [rh * 1.1, rh * 0.42, rh * 1.08], F.colors.hat, F.sides, 2.4);
   } },
   // a girl's bonnet: round the crown and the back of the head, a brim framing the face
-  capor: { name: 'capote', draw: F => {
+  capote: { name: 'capote', draw: F => {
     const { add, mul, unit, cross } = V(), { at: head, axes, egg, r: rh, out, sides, square } = F.head, [hs, hu, hf] = axes;
     F.cap(head, axes, egg.map(e => e * rh * out * 1.14), [0, 0.45, -0.89], -0.1, F.colors.hat, sides, square);
     const tilt = unit(add(hu, mul(hf, 0.9))), axes2 = [hs, tilt, cross(hs, tilt)];
@@ -302,7 +302,7 @@ const parts = {
 };
 
 // ── the looks ──
-const look = (who, more) => Object.assign({ kind: 'shapes', style: 'dama', who }, more);
+const look = (who, more) => Object.assign({ kind: 'shapes', style: 'lady', who }, more);
 const man = more => look('man', more), woman = more => look('woman', more);
 const GUROV = { height: 1.03, thick: 1.12, shoulders: 1.06, head: 1.08 };
 const ANNA = { height: 0.92, head: 1.02 };
@@ -345,11 +345,11 @@ const characters = {
     colors: { ...ANNA_C, top: '#a8a6ab', garment: '#9c9aa0', bottom: '#9c9aa0', shoes: '#4c4a52', accent: '#f7f5f0' } }),
   // von Diderits: young, very tall, stooping, a narrow face, small side-whiskers, a pince-nez; a tail coat with a
   // scholarly badge on the breast ("diderits#badge")
-  diderits: man({ style: 'dama_narrow', garment: 'jacket', hair: 'short', hat: 'none', parts: ['sideburns', 'pince_nez', 'badge'],
+  diderits: man({ style: 'lady_narrow', garment: 'jacket', hair: 'short', hat: 'none', parts: ['sideburns', 'pince_nez', 'badge'],
     body: { height: 1.12, thick: 0.84, shoulders: 0.92 },
     colors: { hair: '#8a7258', skin: '#e2c2a8', top: '#eeeae2', bottom: '#202026', garment: '#222228', shoes: '#18181c', accent: '#eeeae2' } }),
   // the same at the gate: a coat, a peaked cap with a cockade
-  diderits_coat: man({ style: 'dama_narrow', garment: 'coat', hair: 'short', hat: 'cap_cockade', parts: ['sideburns', 'pince_nez'],
+  diderits_coat: man({ style: 'lady_narrow', garment: 'coat', hair: 'short', hat: 'cap_cockade', parts: ['sideburns', 'pince_nez'],
     body: { height: 1.12, thick: 0.84, shoulders: 0.92 },
     colors: { hair: '#8a7258', skin: '#e2c2a8', top: '#3a3d46', bottom: '#2a2c33', garment: '#3a3e48', hat: '#2a2c33', shoes: '#18181c', accent: '#d8d2c4' } }),
   // Gurov's wife: tall, upright, dark hair, straight dark brows, a dark dress
@@ -359,7 +359,7 @@ const characters = {
   wife_shawl: woman({ face: 'level', garment: 'dress', hair: 'bun', hat: 'none', scarf: true, body: { height: 0.99, shoulders: 0.92 },
     colors: { hair: '#2a2220', skin: '#e0c0a6', top: '#34303a', garment: '#2e2b33', bottom: '#2e2b33', shoes: '#1e1c20', accent: '#9a9096' } }),
   // the daughter, twelve: a gymnasium coat, a bonnet
-  daughter: look('child', { garment: 'coat', hair: 'long', hat: 'capor', body: { height: 0.84, head: 1.08 },
+  daughter: look('child', { garment: 'coat', hair: 'long', hat: 'capote', body: { height: 0.84, head: 1.08 },
     colors: { hair: '#7a5a3a', skin: '#ecccb4', top: '#6f6656', garment: '#5d5a52', bottom: '#4a4740', hat: '#e2ddd2', shoes: '#2a2626', accent: '#e2ddd2' } }),
   // the official: stout, a fur coat and a fur hat
   official: man({ garment: 'coat', hair: 'short', hat: 'fur_hat', parts: ['fur_collar'], body: { height: 0.98, thick: 1.32, shoulders: 1.08 },
@@ -399,7 +399,7 @@ const characters = {
   p5: woman({ garment: 'coat', hair: 'bun', hat: 'toque', body: { height: 0.9 }, colors: { hair: '#7a5a3a', garment: '#c8bca4', top: '#c8bca4', bottom: '#8a8070', hat: '#5a5048', shoes: '#3a3430' } }),
   p6: man({ garment: 'jacket', hair: 'short', hat: 'cap', body: { height: 0.97 }, colors: { hair: '#4a3a2c', garment: '#6f7a8a', top: '#e8e4da', bottom: '#4e5662', hat: '#3a3e48', shoes: '#26262a' } }),
   // the tall stooping stranger with small side-whiskers in a light coat — from far, like von Diderits
-  stranger: man({ style: 'dama_narrow', garment: 'coat', hair: 'short', hat: 'hat', parts: ['sideburns'], body: { height: 1.1, thick: 0.86, shoulders: 0.92 },
+  stranger: man({ style: 'lady_narrow', garment: 'coat', hair: 'short', hat: 'hat', parts: ['sideburns'], body: { height: 1.1, thick: 0.86, shoulders: 0.92 },
     colors: { hair: '#7a6450', skin: '#e0c0a6', top: '#e6e1d6', bottom: '#8a8478', garment: '#d2cab8', hat: '#8a8274', shoes: '#2a2826' } }),
   stranger_lady: woman({ garment: 'dress', hair: 'bun', hat: 'toque', colors: { hair: '#4a3628', garment: '#b9aec0', top: '#b9aec0', hat: '#6e6478', shoes: '#3a3640' } }),
   // the strollers in the garden: a lady with a light parasol, an officer, an old man
@@ -434,10 +434,10 @@ return {
   shapes: {
     // the world's style: the engine's `soft` a little longer (a smaller head on longer legs, a little longer neck, slimmer
     // limbs), the head still big enough for the face `simple` to read at a medium shot; toned paint, thin tinted lines.
-    // `dama_narrow` — the same with a narrow long head (von Diderits, the stranger like him)
+    // `lady_narrow` — the same with a narrow long head (von Diderits, the stranger like him)
     styles: {
-      dama: { from: 'soft', head: 1.26, egg: [1.0, 1.06, 1.0], neck: 0.42, legs: 0.96, limb: 0.96, paint: 'toned', line: 1.6, face: 'simple' },
-      dama_narrow: { from: 'dama', egg: [0.86, 1.14, 0.98] },
+      lady: { from: 'soft', head: 1.26, egg: [1.0, 1.06, 1.0], neck: 0.42, legs: 0.96, limb: 0.96, paint: 'toned', line: 1.6, face: 'simple' },
+      lady_narrow: { from: 'lady', egg: [0.86, 1.14, 0.98] },
     },
     faces: { level },
     hats,

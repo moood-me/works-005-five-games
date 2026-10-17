@@ -1,10 +1,10 @@
 # cast — the people of “The Lady with the Dog”
 
-The people — figures of shapes in the world's style `dama`: the engine's `soft`, a little longer (head 1.26, neck 0.42,
+The people — figures of shapes in the world's style `lady`: the engine's `soft`, a little longer (head 1.26, neck 0.42,
 legs 0.96), the face `simple` (eyes, brows, nose, mouth; the expression — the key `<id>_mood`: `neutral`, `smile`,
 `laugh`, `sad`, `angry`, `surprised`, `afraid`, `disgusted`, `thinking`, `tired`). The paint `toned` — chosen from test
 pictures of the room in Yalta (a candle, night) and the station (`rim` made Anna and Gurov dark silhouettes: the white
-dress did not read). `dama_narrow` — the same style with a narrow long head (von Diderits and the `stranger` who looks
+dress did not read). `lady_narrow` — the same style with a narrow long head (von Diderits and the `stranger` who looks
 like him). The colours are faded: white, grey-blue, sand, graphite; no red, but the messenger's cap (`redcap`) and the
 watermelon (`plate`).
 
@@ -27,10 +27,10 @@ in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The pa
 | `anna_winter` | Anna, S., winter | a pale grey fur coat, a white fur cap (`fur_cap`); the scene gives the muff: `anna_with: ["muff"]` (its fur — the cap's colour) |
 | `anna_theatre` | Anna at the theatre | a light grey evening dress, a light shawl (`scarf`) |
 | `anna_grey` | Anna, the Slavyansky Bazaar | a grey dress, no hat |
-| `diderits` | von Diderits at the theatre | `dama_narrow`; very tall (1.12), thin; side-whiskers, a pince-nez; a tail coat, a white shirt front, a scholarly badge (`badge`, the point `#badge`) |
+| `diderits` | von Diderits at the theatre | `lady_narrow`; very tall (1.12), thin; side-whiskers, a pince-nez; a tail coat, a white shirt front, a scholarly badge (`badge`, the point `#badge`) |
 | `diderits_coat` | the same at the gate | a coat, a peaked cap with a cockade (`cap_cockade`), side-whiskers, the pince-nez |
 | `wife`, `wife_shawl` | Gurov's wife | tall (0.99), dark hair in a knot, the face `level` (straight dark brows), a dark dress; `wife_shawl` — with a shawl |
-| `daughter` | his daughter, 12 | `child` 0.84; a school coat, a capote (`capor`); the satchel — `daughter_with: ["satchel"]` |
+| `daughter` | his daughter, 12 | `child` 0.84; a school coat, a capote (`capote`); the satchel — `daughter_with: ["satchel"]` |
 | `official` | the official | stout (1.32), a fur coat, a fur collar, a fur hat |
 | `maid` | the old maid | `old`, a kerchief (`kerchief`), a dark dress and jacket, a light apron (`apron_front`) |
 | `watchman` | the keeper | `grandpa`, a peaked cap, a coat, a stick (`stick`) |
@@ -42,7 +42,7 @@ in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The pa
 | `conductor` | the conductor (far off) | a uniform, a peaked cap; the lantern — the part `lantern` |
 | `cabman` | a cabman (far off) | a dark coachman's coat (`robe`), a low hat |
 | `p1`…`p6` | arrivals on the pier | `p1`, `p3`, `p5` — ladies (toques; light / grey-blue / sand), `p2`, `p4`, `p6` — gentlemen (a boater, a hat, a peaked cap); bouquets and valises — `pN_with: ["bouquet"]` / `["valise"]` |
-| `stranger` | the tall stooping man | `dama_narrow`, 1.10, side-whiskers, a light coat, a hat — from far off like von Diderits |
+| `stranger` | the tall stooping man | `lady_narrow`, 1.10, side-whiskers, a light coat, a hat — from far off like von Diderits |
 | `stranger_lady` | his lady | a lilac-grey dress, a toque |
 | `stroller1` | a lady out walking | a light dress, a toque, a light parasol (`parasol` — part of the look) |
 | `stroller2` | an officer | a white tunic, a peaked cap with a cockade, a moustache |
@@ -57,7 +57,7 @@ in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The pa
 ## Hats (`hats`, the world's own)
 
 `beret` a béret · `toque` a toque · `boater` a boater · `fur_hat` a fur hat (a man's) · `fur_cap` a fur cap (a
-woman's) · `capor` a capote · `kerchief` a kerchief · `cap_cockade` a peaked cap with a cockade. The engine's: `cap` a
+woman's) · `capote` a capote · `kerchief` a kerchief · `cap_cockade` a peaked cap with a cockade. The engine's: `cap` a
 peaked cap, `hat` a hat.
 
 ## Parts (`parts`) and their points

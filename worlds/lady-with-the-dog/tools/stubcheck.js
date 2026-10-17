@@ -15,7 +15,7 @@ const G = () => new Proxy({}, { get: (t, k) => {
 }, set: (t, k, v) => { t[k] = v; return true; } });
 const lib = new Function('anim', 'scene', fs.readFileSync(path.join(dir, 'lib.js'), 'utf8'))(anim, null);
 const state = { ...J.state };
-const kit = { closeups: { paint() {}, live() {} }, shpic: { paint() {}, live() {}, LEASH: '#a8322c' }, cast: { characters: {} },
+const kit = { closeups: { paint() {}, live() {} }, spitz: { paint() {}, live() {}, LEASH: '#a8322c' }, cast: { characters: {} },
   beats: null };
 const mkE = (id) => {
   const layers = {};
