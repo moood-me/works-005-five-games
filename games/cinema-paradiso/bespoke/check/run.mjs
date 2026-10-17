@@ -61,9 +61,9 @@ const MINIGAMES = {
   note: { scene: 'booth', keys: ['pages', 'fold', 'dust'], points: ['calendar#fold'], result: [] },
   strip: { scene: 'booth', keys: ['strip_x'], points: ['strip#hand_r'], opts: ['onProgress'], result: ['seconds'] },
 };
-// what game.js itself takes of the strip (it is not run here): its key, the points its trees stand at (map.js) — each
+// what game.js itself takes of the strip (it is not run here): its keys, the points its trees stand at (map.js) — each
 // chapter's and the author's sign's
-const MAP = { keys: ['shown'], points: [...Array.from({ length: 7 }, (_, i) => `c${i}`), 'author'] };
+const MAP = { keys: ['shown', 'come'], points: [...Array.from({ length: 7 }, (_, i) => `c${i}`), 'author'] };
 // the results put in (game.md §11): none — every minigame skipped; then one play each with these
 const OTHER = [{ peek: { seen: 0, caught: 1 } }, { splice: { jumps: 2 } }, { thread: { slips: 1 } },
   { letters: { crooked: '0100010' } }, { camera: { share: 0.3 } }, { changeover: { missed: 1 } }];
