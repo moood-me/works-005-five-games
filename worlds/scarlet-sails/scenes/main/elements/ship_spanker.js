@@ -1,1 +1,1 @@
-e.kit.ships.sail(g, e, 'spanker', 'secret');
+e.kit.korabli.sail(g, e, 'spanker', 'secret');

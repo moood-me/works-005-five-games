@@ -1,1 +1,1 @@
-e.kit.ships.sail(g, e, 'main_top', 'secret');
+e.kit.korabli.sail(g, e, 'main_top', 'secret');

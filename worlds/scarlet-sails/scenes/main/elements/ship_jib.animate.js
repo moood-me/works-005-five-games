@@ -1,1 +1,1 @@
-e.kit.ships.sailMotion(e, 'jib');
+e.kit.korabli.sailMotion(e, 'jib');

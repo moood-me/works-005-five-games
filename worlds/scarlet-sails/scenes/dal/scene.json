@@ -1,0 +1,158 @@
+{
+  "engine": 3,
+  "title": "Даль",
+  "caption": "",
+  "camera": {
+    "mode": "panorama",
+    "span": [0, 30]
+  },
+  "horizon": 0.22,
+  "light": {
+    "grain": 0.08,
+    "vignette": 0.25
+  },
+  "modules": [
+    "nebo"
+  ],
+  "state": {
+    "shown": 0,
+    "camera_x": 0
+  },
+  "states": {
+    "shown": {
+      "type": "number",
+      "means": "глава, на которой игрок: вид едет к её точке c<i> (camera_x)"
+    }
+  },
+  "objects": [
+    {
+      "id": "sea",
+      "sky": true,
+      "name": "Море на рассвете",
+      "uniforms": {
+        "sun_x": 1.1,
+        "horizon": 0.22
+      }
+    },
+    {
+      "id": "c0",
+      "name": "Глава",
+      "unseen": true,
+      "across": 0,
+      "distance": 10,
+      "elevation": 1.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c1",
+      "name": "Глава",
+      "unseen": true,
+      "across": 5,
+      "distance": 10,
+      "elevation": 1.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Глава",
+      "unseen": true,
+      "across": 10,
+      "distance": 10,
+      "elevation": 1.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Глава",
+      "unseen": true,
+      "across": 15,
+      "distance": 10,
+      "elevation": 1.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c4",
+      "name": "Глава",
+      "unseen": true,
+      "across": 20,
+      "distance": 10,
+      "elevation": 1.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c5",
+      "name": "Глава",
+      "unseen": true,
+      "across": 25,
+      "distance": 10,
+      "elevation": 1.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c6",
+      "name": "Глава",
+      "unseen": true,
+      "across": 30,
+      "distance": 10,
+      "elevation": 1.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "author",
+      "name": "Карта автора",
+      "unseen": true,
+      "across": -3.2,
+      "distance": 10,
+      "elevation": 0.85,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    }
+  ]
+}

@@ -1,1 +1,1 @@
-e.kit.ships.deck(g, e, 'deck', 'secret');
+e.kit.korabli.deck(g, e, 'deck', 'secret');
