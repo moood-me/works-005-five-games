@@ -100,7 +100,11 @@ export function trees(b, chapters, { grow = null, seconds = 6, author = false } 
   };
   const arrow = () => { const a = svg('svg', { class: 'arr', viewBox: '0 0 26 10', 'aria-hidden': 'true' }); a.append(svg('path', { d: 'M0 5H24M19 1l5 4-5 4' })); return a; };
   // a press's place: a button (none of it seen) over what it is on
-const hit = (ref, label) => Object.assign(el('button', 'hit'), { type: 'button', tabIndex: -1, ariaLabel: label, dataset: { ref } });
+const hit = (ref, label) => {
+  const h = Object.assign(el('button', 'hit'), { type: 'button', tabIndex: -1, ariaLabel: label });
+  h.dataset.ref = ref;
+  return h;
+};
 const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '0 0 12 8', 'aria-hidden': 'true' }); t.append(svg('path', { d: 'M1 1L6 6L11 1' })); return t; };
 
   // a chapter's tree (one to come: its number only)
@@ -134,7 +138,8 @@ const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '
       return { li, n, stem, dot };
     };
     const pointer = (row, words, replay, ref) => {
-      const go = Object.assign(el('button', replay ? 'go go-replay' : 'go go-game'), { type: 'button', tabIndex: -1, dataset: { ref } }), w = el('span');
+      const go = Object.assign(el('button', replay ? 'go go-replay' : 'go go-game'), { type: 'button', tabIndex: -1 }), w = el('span');
+      go.dataset.ref = ref;
       words.split('\n').forEach((t, k) => { if (k) w.append(el('br')); w.append(t); });
       go.append(w, arrow());
       row.n.append(go);
@@ -148,7 +153,11 @@ const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '
       const opts = el('ul', 'opts'), chosen = row.options.filter(o => o.state === 'chosen' || o.state === 'both');
       const rest = row.options.filter(o => !chosen.includes(o) && o.state !== 'unseen');
       if (!chosen.length && !rest.length) opts.append(el('li', 'opt unseen', '· · ·'));
-      for (const o of chosen) opts.append(Object.assign(el('li', 'opt chosen', o.label), { dataset: { ref: `fork:${i}:${k}` } }));
+      for (const o of chosen) {
+        const li = el('li', 'opt chosen', o.label);
+        li.dataset.ref = `fork:${i}:${k}`;
+        opts.append(li);
+      }
       for (const o of rest) {
         const li = el('li', `opt alt${o.state === 'tried' ? ' tried' : ''}`), t = svg('svg', { class: 'twig', viewBox: '0 0 22 16', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
         t.append(svg('path', { d: twig }));
