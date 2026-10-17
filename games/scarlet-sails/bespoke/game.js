@@ -214,7 +214,10 @@ export default async function (b) {
     let at = reveal ?? here; // (the chapter the view is at)
     const go = i => { if (i !== at) { at = i; b.set('shown', i); } };
     // (something of a chapter pressed — the view goes to it)
-    const touched = ref => { const i = /^(?:knot|fork|go|goreplay):(\d+)/.exec(ref)?.[1]; if (i != null) go(Number(i)); };
+    const touched = ref => { const i = /^(?:knot|fork|go|goreplay):(\d+)/.exec(ref)?.[1]; if (i != null) bring(Number(i)); };
+    // (pressed on the chapter already shown, wherever the player dragged the view: back to it)
+    let come = 0;
+    const bring = i => { if (i === at) b.set('come', ++come); else go(i); };
     // what the map's drawing offers now; pressed — told here (while a choice is open nothing else is pressed: a touch
     // off its petals folds it)
     let pressed = () => {};
