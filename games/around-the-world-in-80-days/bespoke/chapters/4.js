@@ -1,5 +1,5 @@
-// IV. Атлантика «в которой „Генриетта“ сгорает до ватерлинии» — game.md §3. New York: the «China» gone forty-five
-// minutes; the «Henrietta» and Captain Speedy; the mutiny; no coal — ⚑ henrietta: buy her and burn her («Котлы») or go
+// IV. The Atlantic «in which the Henrietta burns to the water's edge» — game.md §3. New York: the «China» gone forty-five
+// minutes; the «Henrietta» and Captain Speedy; the mutiny; no coal — ⚑ henrietta: buy her and burn her («The boilers») or go
 // under sail; Liverpool: the arrest, the cell, the release (~ liverpool: strike or the hand); the special train.
 // Reads: facts aouda, pp; marks fix; hands kotly. Leaves: choices henrietta, liverpool; hours, money; marks fix,
 // speedy.
@@ -8,13 +8,13 @@ import kotly from '../minigames/kotly.js';
 
 export default {
   number: 'IV',
-  title: 'Атлантика',
-  heading: 'в которой «Генриетта» сгорает до ватерлинии',
+  title: tr('The Atlantic'),
+  heading: tr('in which the Henrietta burns to the water\'s edge'),
   route: [0.78, 0.97],
-  titles: ['Сорок пять минут', 'Бунт', 'Угля нет', 'Котлы', 'Ливерпуль', 'Экстренный поезд'],
+  titles: ['Forty-five minutes', 'The mutiny', 'No coal', 'The boilers', 'Liverpool', 'The special train'],
   choices: [
-    { id: 'henrietta', weight: '⚑', title: '«Генриетта»', options: [{ id: 'burn', label: 'Купить и жечь' }, { id: 'sails', label: 'Идти под парусами' }] },
-    { id: 'liverpool', weight: '~', title: 'Фикс в Ливерпуле', options: [{ id: 'hit', label: 'Ударить' }, { id: 'hand', label: 'Протянуть руку' }] },
+    { id: 'henrietta', weight: '⚑', title: tr('The Henrietta'), options: [{ id: 'burn', label: tr('Buy her and burn her') }, { id: 'sails', label: tr('Go under sail') }] },
+    { id: 'liverpool', weight: '~', title: tr('Fix at Liverpool'), options: [{ id: 'hit', label: tr('Strike him') }, { id: 'hand', label: tr('Hold out a hand') }] },
   ],
   steps: [
     // New York: the «China» is gone; the «Henrietta» takes no passengers — for two thousand dollars a head she does
@@ -26,15 +26,15 @@ export default {
       await g.scene(SCENES.deck, { beat: 'new_york', ship: 'henrietta', port: 'new_york' });
       const ny = g.beat('new_york');
       await smoke;
-      await (f.pp === 'with' ? g.say('pp', '«Китай» ушёл сорок пять минут назад!') : g.say('fix', '«Китай» ушёл сорок пять минут назад!'));
+      await (f.pp === 'with' ? g.say('pp', 'The China sailed forty-five minutes ago!') : g.say('fix', 'The China sailed forty-five minutes ago!'));
       await speedy;
-      await g.say('speedy', 'Иду в Бордо. Пассажиров не беру');
-      await g.say('fogg', 'А за две тысячи долларов с человека?');
+      await g.say('speedy', 'Bound for Bordeaux. No passengers');
+      await g.say('fogg', 'And for two thousand dollars a head?');
       await ny;
       const heads = 2 + (f.aouda === 'with' ? 1 : 0) + (f.pp === 'with' ? 1 : 0);
       g.money(-400 * heads);
       g.sound.notes();
-      await g.say('speedy', 'Ладно. Но курс — на Бордо');
+      await g.say('speedy', 'Very well. But the course is for Bordeaux');
     },
     // the mutiny: Speedy locked in his cabin, roaring
     async g => {
@@ -44,9 +44,9 @@ export default {
       await g.scene(SCENES.deck, { beat: 'mutiny', ship: 'henrietta', port: 'none' });
       const mutiny = g.beat('mutiny');
       await porthole;
-      await g.say('speedy', 'Пираты! Я вас всех повешу!');
+      await g.say('speedy', 'Pirates! I\'ll hang the lot of you!');
       await mutiny;
-      await g.say('fogg', 'Курс на Ливерпуль');
+      await g.say('fogg', 'Course for Liverpool');
     },
     // no coal — ⚑ buy her and burn her, or under sail
     async g => {
@@ -56,25 +56,25 @@ export default {
       await g.scene(SCENES.deck, { beat: 'coal', ship: 'henrietta', port: 'none' }, { cut: true });
       const coal = g.beat('coal');
       await stoker;
-      await g.say('stoker', 'Угля — на день, сэр. До Ливерпуля — четыре');
+      await g.say('stoker', 'Coal for one day, sir. Four days to Liverpool');
       await speedy;
-      await g.say('fogg', 'Капитан Спиди, продайте мне ваш корабль');
-      await g.say('speedy', 'Шестьдесят тысяч долларов!');
+      await g.say('fogg', 'Captain Speedy, sell me your vessel');
+      await g.say('speedy', 'Sixty thousand dollars!');
       await coal;
       const choice = await g.choose('henrietta', {
-        'fogg#head': [{ id: 'burn', label: 'Купить и жечь' }],
-        'speedy#head': [{ id: 'sails', label: 'Идти под парусами' }],
+        'fogg#head': [{ id: 'burn', label: tr('Buy her and burn her') }],
+        'speedy#head': [{ id: 'sails', label: tr('Go under sail') }],
       });
       if (choice === 'burn') {
-        await g.say('fogg', 'Мне нужно только то, что горит');
+        await g.say('fogg', 'I want only what will burn');
       } else {
-        g.hours(-16, 'Под парусами');
+        g.hours(-16, tr('Under sail'));
         g.mark('speedy', true);
         const laugh = g.told('sails_only:laugh');
         g.set('sails', 1, 4);
         const sails = g.beat('sails_only');
         await laugh;
-        await g.say('speedy', 'Вот это джентльмен! Ха-ха-ха!');
+        await g.say('speedy', 'Now there\'s a gentleman! Ha-ha-ha!');
         await sails;
       }
     },
@@ -85,14 +85,14 @@ export default {
       g.hero(f.pp === 'with' ? 'pp' : 'fogg');
       g.beds({ sea: 0.4, furnace: 0.7 }, 2);
       await g.scene(SCENES.deck, { beat: 'burn', ship: 'henrietta', port: 'none' });
-      g.hours(-12, 'Угля нет');
-      if (f.pp !== 'with') await g.say('fogg', 'Сюртук мне сейчас ни к чему');
+      g.hours(-12, tr('No coal'));
+      if (f.pp !== 'with') await g.say('fogg', 'I have no use for a frock-coat now');
       const afford = Math.max(0, Math.floor(g.state.money / PART_PRICE));
       const r = await g.play(kotly, { who: f.pp === 'with' ? 'pp' : 'fogg' });
       // (skipped, it burns all seven but the cabin: no more than the bag can pay)
       const burned = (r?.burned ?? []).slice(0, afford);
       g.money(-PART_PRICE * burned.length);
-      g.hours(PART_HOURS * burned.length, `Сожжено: ${burned.length}`);
+      g.hours(PART_HOURS * burned.length, tr('Burnt: {length}', { length: burned.length }));
       g.beds({ sea: 0.4, furnace: 0.2 }, 3);
       await g.beat('queenstown');
     },
@@ -104,25 +104,25 @@ export default {
       await g.scene(SCENES.deck, { beat: 'liverpool', ship: 'henrietta', port: 'liverpool' });
       const lp = g.beat('liverpool');
       await hand;
-      await g.say('fix', 'Филеас Фогг, именем королевы — вы арестованы');
+      await g.say('fix', 'Phileas Fogg, I arrest you in the Queen\'s name');
       await lp;
       g.beds({ clock: 0.9 }, 2);
       const quick = (g.state.marks.fix ?? 0) >= 2;
       await g.beat('cell', { wait: false });
       await g.move('cell_time', 1, quick ? 8 : 14);
-      g.hours(quick ? -1 : -3, 'Таможня, камера');
+      g.hours(quick ? -1 : -3, tr('The custom-house, the cell'));
       g.beds({ clock: 0.4, town: 0.3 }, 2);
       const choice = await g.choose('liverpool', {
-        'fix#head': [{ id: 'hit', label: 'Ударить' }, { id: 'hand', label: 'Протянуть руку' }],
+        'fix#head': [{ id: 'hit', label: tr('Strike him') }, { id: 'hand', label: tr('Hold out a hand') }],
       });
       g.set('release', choice === 'hit' ? 'down' : 'hand');
       const inside = g.told('release:in');
       const release = g.beat('release');
       await inside;
-      await g.say('fix', 'Сэр… вор пойман три дня назад. Простите');
+      await g.say('fix', 'Sir… the robber was arrested three days ago. Forgive me');
       if (choice === 'hit') {
         g.sound.slap();
-        g.mark('hit', true, 'Фикс это запомнит');
+        g.mark('hit', true, tr('Fix will remember this'));
       } else {
         g.relate('fix', 1);
       }
@@ -138,13 +138,13 @@ export default {
       await watch;
       await special;
       const h = g.state.hours;
-      if (h >= 0) await g.say('fogg', 'Лондон. Вовремя');
+      if (h >= 0) await g.say('fogg', 'London. On time');
       else {
         // (by how much — the notebook says)
-        await g.say('fogg', 'Опоздал');
+        await g.say('fogg', 'Behind time');
         g.set('book_shut', 1, 1.5);
         await g.told('special:shut', 4000);
-        await g.say('fogg', 'Двадцать тысяч — всё, что у меня было');
+        await g.say('fogg', 'Twenty thousand — all that I had');
       }
     },
   ],

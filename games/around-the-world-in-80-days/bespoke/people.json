@@ -1,128 +1,128 @@
 {
   "narrator": {
     "voice": "Iapetus",
-    "how": "рассказчик старой книги: ровно, с лёгкой иронией, негромко",
-    "name": "от автора",
-    "short": "автор"
+    "how": "the narrator of an old book: evenly, with a light irony, not loud",
+    "name": "the narrator",
+    "short": "the narrator"
   },
   "fogg": {
     "voice": "Alnilam",
-    "how": "английский джентльмен: ровно, низко, сухо и точно, ни одного лишнего слова, никогда не повышает голоса",
-    "name": "Филеас Фогг",
-    "short": "Фогг"
+    "how": "an English gentleman: even, low, dry and precise, not one word too many, never raises his voice",
+    "name": "Phileas Fogg",
+    "short": "Fogg"
   },
   "pp": {
     "voice": "Puck",
-    "how": "молодой француз-слуга: живо, звонко, с восклицаниями и французским «мсье»",
-    "name": "Паспарту",
-    "short": "Паспарту"
+    "how": "a young French manservant: lively, ringing, full of exclamations and a French “monsieur”",
+    "name": "Passepartout",
+    "short": "Passepartout"
   },
   "aouda": {
     "voice": "Despina",
-    "how": "молодая индийская женщина: мягко, тихо, с достоинством",
-    "name": "Ауда",
-    "short": "Ауда"
+    "how": "a young Indian woman: soft, quiet, with dignity",
+    "name": "Aouda",
+    "short": "Aouda"
   },
   "fix": {
     "voice": "Umbriel",
-    "how": "сыщик: быстро, вкрадчиво, с хитрецой",
-    "name": "Фикс",
-    "short": "Фикс"
+    "how": "a detective: quick, ingratiating, sly",
+    "name": "Fix",
+    "short": "Fix"
   },
   "stuart": {
     "voice": "Schedar",
-    "how": "английский инженер в клубе: веско, с усмешкой",
-    "name": "Эндрю Стюарт",
-    "short": "Стюарт"
+    "how": "an English engineer at the club: weighty, with a smirk",
+    "name": "Andrew Stuart",
+    "short": "Stuart"
   },
   "porter": {
     "voice": "Zubenelgenubi",
-    "how": "клубный швейцар: почтительно, негромко",
-    "name": "швейцар",
-    "short": "швейцар"
+    "how": "the club's porter: respectful, quiet",
+    "name": "the porter",
+    "short": "the porter"
   },
   "cromarty": {
     "voice": "Charon",
-    "how": "старый британский генерал: коротко, твёрдо",
-    "name": "сэр Фрэнсис Кромарти",
-    "short": "Кромарти"
+    "how": "an old British general: brief, firm",
+    "name": "Sir Francis Cromarty",
+    "short": "Cromarty"
   },
   "guide": {
     "voice": "Enceladus",
-    "how": "молодой проводник-парс: тихо, быстро, взволнованно",
-    "name": "проводник",
-    "short": "проводник"
+    "how": "a young Parsee guide: quiet, quick, agitated",
+    "name": "the guide",
+    "short": "the guide"
   },
   "owner": {
     "voice": "Gacrux",
-    "how": "старик-индиец: упрямо, коротко, не глядя",
-    "name": "хозяин слона",
-    "short": "хозяин слона"
+    "how": "an old Indian: stubborn, curt, not looking up",
+    "name": "the elephant's owner",
+    "short": "the elephant's owner"
   },
   "conductor": {
     "voice": "Algieba",
-    "how": "кондуктор: казённо, громко",
-    "name": "кондуктор",
-    "short": "кондуктор"
+    "how": "a conductor: official, loud",
+    "name": "the conductor",
+    "short": "the conductor"
   },
   "consul": {
     "voice": "Schedar",
-    "how": "консул: сухо, недоверчиво",
-    "name": "консул",
-    "short": "консул"
+    "how": "a consul: dry, mistrustful",
+    "name": "the consul",
+    "short": "the consul"
   },
   "bunsby": {
     "voice": "Algenib",
-    "how": "старый лоцман: хрипло, неторопливо, по-морскому",
-    "name": "Джон Бансби",
-    "short": "Бансби"
+    "how": "an old pilot: hoarse, unhurried, a seaman's way",
+    "name": "John Bunsby",
+    "short": "Bunsby"
   },
   "batulcar": {
     "voice": "Fenrir",
-    "how": "антрепренёр бродячей труппы: громко, нараспев, как зазывала",
-    "name": "Батулкар",
-    "short": "Батулкар"
+    "how": "the manager of a travelling troupe: loud, sing-song, like a barker at a fair",
+    "name": "Batulcar",
+    "short": "Batulcar"
   },
   "sailor": {
     "voice": "Achird",
-    "how": "американский матрос: весело, просто",
-    "name": "матрос",
-    "short": "матрос"
+    "how": "an American sailor: cheerful, simple",
+    "name": "the sailor",
+    "short": "the sailor"
   },
   "driver": {
     "voice": "Sadachbia",
-    "how": "американский машинист: лихо, громко",
-    "name": "машинист",
-    "short": "машинист"
+    "how": "an American engineer at the throttle: dashing, loud",
+    "name": "the engineer",
+    "short": "the engineer"
   },
   "captain": {
     "voice": "Sadaltager",
-    "how": "армейский капитан: устало, твёрдо",
-    "name": "капитан форта",
-    "short": "капитан форта"
+    "how": "an army captain: tired, firm",
+    "name": "the captain of the fort",
+    "short": "the captain of the fort"
   },
   "mudge": {
     "voice": "Rasalgethi",
-    "how": "бывалый американец: громко, весело, на ветру",
-    "name": "Мадж",
-    "short": "Мадж"
+    "how": "a seasoned American: loud, cheerful, into the wind",
+    "name": "Mudge",
+    "short": "Mudge"
   },
   "speedy": {
     "voice": "Orus",
-    "how": "капитан-грубиян: ревёт, рычит, хохочет",
-    "name": "капитан Спиди",
-    "short": "Спиди"
+    "how": "a ruffian of a captain: roars, growls, guffaws",
+    "name": "Captain Speedy",
+    "short": "Speedy"
   },
   "stoker": {
     "voice": "Algieba",
-    "how": "кочегар: глухо, устало",
-    "name": "кочегар",
-    "short": "кочегар"
+    "how": "a stoker: muffled, tired",
+    "name": "the stoker",
+    "short": "the stoker"
   },
   "pastor": {
     "voice": "Charon",
-    "how": "старый пастор за дверью: спокойно, удивлённо",
-    "name": "преподобный Уилсон",
-    "short": "пастор"
+    "how": "an old clergyman behind a door: calm, surprised",
+    "name": "the Reverend Samuel Wilson",
+    "short": "the clergyman"
   }
 }

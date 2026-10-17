@@ -1,34 +1,37 @@
-// «Котлы» (IV.4, Палуба, кусок `burn`; палуба «Генриетты» с юта, видно всё, что горит): Фогг купил корабль, угля нет.
-// Кольцо с пунктиром на каждой части корабля (`<часть>#part`), какие по карману: тянуть (тяжело) к открытому люку
-// кочегарки `hatch#fire`; часть едет по ключу `drag_<часть>` (0 на месте … 1 у люка), отпустил не у люка — видимо
-// возвращается. Донёс — часть в топку: `<часть>` 0 (сцена — вспышка в люке), `fire` и `speed` растут, Спиди хватается за
-// голову (`speedy_grief`). Каждая — PRICE £ из Саквояжа (`g.state.money`); на следующую не хватает — остальные заперты
-// (`locked_<часть>` 1, меток нет). Каюта Спиди — последней, когда всё остальное сгорело: выбор — тянуть и её (кольцо
-// на каюте) или оставить (тихое кольцо на `speedy#head`, лепесток «Оставить каюту»); отклик ровный.
-//   Что делает: Паспарту (или Фогг, впервые сняв сюртук) таскает в топку куски купленного корабля.
-//   Чего хочет: дойти до Ливерпуля на последнем дереве — угля нет, а до Англии четыре дня.
-//   Каково ему: азарт и жертва чужим — корабль раздевается на глазах, капитан стонет.
-//   Что чувствует игрок: азарт разрушения и цену каждой доски.
-//   opts: { who: 'pp' | 'fogg' — чьими руками (фраза плашки) }
-//   → { burned: [части, сожжённые по порядку], cabin: сожжена ли каюта Спиди }
+// «The boilers» (IV.4, the deck, the beat `burn`; the Henrietta's deck from the poop, all that burns in sight): Fogg has
+// bought the ship, there is no coal. A dashed ring on each part of the ship (`<part>#part`) the purse can pay for: pull
+// (heavy) to the open stokehold hatch `hatch#fire`; the part moves by the key `drag_<part>` (0 in place … 1 at the
+// hatch), let go not at the hatch — it goes back, seen. Brought there — the part into the furnace: `<part>` 0 (the
+// scene — a flare in the hatch), `fire` and `speed` grow, Speedy clutches his head (`speedy_grief`). Each — PRICE £
+// from the carpet-bag (`g.state.money`); not enough for the next — the rest are locked (`locked_<part>` 1, no marks).
+// Speedy's cabin — last, when all the rest has burnt: a choice — pull it too (a ring on the cabin) or spare it (a quiet
+// ring on `speedy#head`, the petal «Spare the cabin»); the response even.
+//   What he does: Passepartout (or Fogg, his frock-coat off for the first time) hauls pieces of the bought ship into
+//     the furnace.
+//   What he wants: to reach Liverpool on the last of the wood — there is no coal, and England is four days off.
+//   How it is for him: excitement and the sacrifice of what is another's — the ship is stripped before his eyes, the
+//     captain groans.
+//   What the player feels: the thrill of destruction and the price of every plank.
+//   opts: { who: 'pp' | 'fogg' — whose hands (the plate's phrase) }
+//   → { burned: [the parts, burnt in order], cabin: whether Speedy's cabin is burnt }
 import { until, keys } from '../hands.js';
 
 const PARTS = ['deckhouse', 'boats', 'bunks', 'yards', 'mast_fore', 'mast_main', 'bulwarks'];
 const CABIN = 'speedy_cabin';
-const PRICE = 1500; // £ за часть
-const FLASH = 0.8; // с: огонь разгорается после части
+const PRICE = 1500; // £ a part
+const FLASH = 0.8; // s: the fire flares up after a part
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'kotly',
-  title: 'Котлы', // как её зовёт ☰ автора
+  title: 'The boilers', // (as the author's ☰ lists it)
   about: 50,
-  // (пропуск: всё дерево, кроме каюты; сколько из этого по карману — глава сверяет с Саквояжем: skipped не знает денег)
+  // (skipped: all the wood but the cabin; how much of it the purse can pay for the chapter checks against the carpet-bag: skipped knows no money)
   skipped: { burned: [...PARTS], cabin: false },
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: opts.who === 'fogg'
-      ? 'Мистер Фогг снял сюртук. Угля нет; горит всё, что из дерева'
-      : 'Угля нет. Паспарту кормит топку всем, что горит' });
+      ? tr('Mr. Fogg has taken off his frock-coat. No coal; everything wooden burns')
+      : tr('No coal. Passepartout feeds the furnace with everything that burns') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });
@@ -44,8 +47,8 @@ export default {
     send('fire', 0.3); send('speed', 0.2); send('speedy_grief', 0);
     for (const part of [...PARTS, CABIN]) { send(part, 1); send(`drag_${part}`, 0); send(`locked_${part}`, 0); }
     const lock = parts => parts.forEach(p => send(`locked_${p}`, 1));
-    // одна часть: кольцо, тянуть к люку; отпустили у люка — в топку
-    const items = new Map(); // часть → {mark, pull}
+    // one part: a ring, pull to the hatch; let go at the hatch — into the furnace
+    const items = new Map(); // part → {mark, pull}
     const burn = part => {
       const { mark } = items.get(part);
       burned.push(part);
@@ -65,13 +68,13 @@ export default {
       return pull;
     };
     const left = () => PARTS.filter(p => !burned.includes(p));
-    // ── всё, кроме каюты, в любом порядке ──
+    // ── all but the cabin, in any order ──
     if (money < PRICE) lock([...PARTS, CABIN]);
     else {
       const pulls = left().map(part => offer(part));
       b.minigame.tricks.teach(mg, pulls.slice(0, 1), { id: 'pull:heavy' });
       const done = await until(mg, () => {
-        // на следующую не хватает — остальные заперты
+        // not enough for the next — the rest are locked
         if (money < PRICE && items.size) { for (const it of items.values()) it.mark.remove(); items.clear(); lock([...left(), CABIN]); }
         for (const [part, { pull }] of items) send(`drag_${part}`, pull.state.u);
         mg.plate.set({ fill: burned.length / ALL, glow: [...items.values()].some(it => it.pull.state.held) ? 'good' : 'idle' });
@@ -79,15 +82,15 @@ export default {
       });
       if (!done) return this.skipped;
     }
-    // ── каюта Спиди: сжечь или оставить ──
+    // ── Speedy's cabin: burn it or spare it ──
     let cabin = false;
     if (money >= PRICE && left().length === 0) {
-      mg.plate.set({ phrase: 'Осталась каюта капитана Спиди. Спиди держится за голову', glow: null });
+      mg.plate.set({ phrase: tr('Captain Speedy\'s cabin is all that is left. Speedy clutches his head'), glow: null });
       send('speedy_grief', 1);
       let kept = false;
       const pull = offer(CABIN, () => !kept);
       const spare = mg.mark({ at: 'speedy#head', kind: 'ring', quiet: true });
-      const keep = mg.press({ on: spare, petals: [{ id: 'spare', label: 'Оставить каюту' }] });
+      const keep = mg.press({ on: spare, petals: [{ id: 'spare', label: tr('Spare the cabin') }] });
       keep.on('choose', () => { kept = true; });
       mg.show({ gestures: [pull, keep] });
       const decided = await until(mg, () => {

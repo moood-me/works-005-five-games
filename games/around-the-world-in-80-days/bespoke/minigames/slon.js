@@ -1,42 +1,45 @@
-// «Слон» (I.4, Джунгли, кусок `ride`; кадр стоит на слоне сбоку, тропа бежит мимо): Киуни идёт своим шагом. Ритм где
-// угодно — доля шага Киуни (кольцо сходится на `kiouni#head`): в долю — шаг ровнее, `pace` растёт до STEADY; мимо доли
-// или пропущенная доля — шаг вязнет (не ниже SLOW). Крюк — держать желоб на `guide#hands` (проводник поднимает крюк,
-// `goad` 1): `pace` 1, доля чаще, но слон злится — дуга опасности на крюке; полная — Киуни встаёт (`balk` → 1, `pace`
-// 0, крюк выпадает из рук). Тогда кольцо на хоботе `kiouni#trunk`: нажать — Паспарту даёт сахар (`sugar` подъём до 1),
-// слон успокаивается и идёт. Путь `ride` 0 → 1 со скоростью по `pace`; итог — часы против расписания по времени пути.
-//   Что делает: Киуни несёт путников лесом к Аллахабаду; Фогг, Паспарту и Кромарти качаются в гауде.
-//   Чего хочет: дойти до ночи — каждый час леса стоит часа в книжке.
-//   Каково ему: жара, качка; слон живой и своенравный, его не заведёшь, как паровоз.
-//   Что чувствует игрок: терпение к живому — идти с ним в шаг; погонишь — встанет.
-//   → { hours: сколько часов выиграно (+) или потеряно (−) против расписания, −2…+2 }
+// «The elephant» (I.4, the jungle, the beat `ride`; the frame rides on the elephant from the side, the trail runs by):
+// Kiouni goes at his own pace. A rhythm anywhere — the beat of Kiouni's step (the ring closes on `kiouni#head`): on the
+// beat — the step steadier, `pace` grows up to STEADY; off the beat or a beat missed — the step drags (no lower than
+// SLOW). The goad — hold the groove on `guide#hands` (the guide raises the goad, `goad` 1): `pace` 1, the beat quicker,
+// but the elephant grows angry — the danger arc on the goad; full — Kiouni stops dead (`balk` → 1, `pace` 0, the goad
+// drops from the hands). Then a ring on the trunk `kiouni#trunk`: pressed — Passepartout gives him sugar (`sugar` a
+// rise to 1), the elephant calms down and goes on. The way `ride` 0 → 1 at a speed by `pace`; the outcome — hours
+// against the timetable by the time the way took.
+//   What it does: Kiouni carries the travellers through the forest to Allahabad; Fogg, Passepartout and Cromarty sway
+//     in the howdah.
+//   What they want: to get there by nightfall — every hour of forest costs an hour in the notebook.
+//   How it is for them: heat, swaying; the elephant is alive and wilful, you cannot wind him up like an engine.
+//   What the player feels: patience with a living thing — to go in step with him; drive him, and he stops.
+//   → { hours: how many hours gained (+) or lost (−) against the timetable, −2…+2 }
 import { until, keys } from '../hands.js';
 
-const BPM = 48, BPM_GOAD = 64; // шаг Киуни; под крюком
-const SLOW = 0.3, STEADY = 0.6, START = 0.4; // pace: самый вязкий шаг; ровный, в долю; в начале
-const HIT = 0.1, MISS = 0.08, LAPSE = 0.05; // pace: за долю в такт; за касание мимо доли; за пропущенную долю
-const PATH = 36; // с: путь ровным шагом (STEADY) — по расписанию
-const HOUR = 6; // с пути — час в книжке
-const ANGER = 0.35, CALM = 0.2; // в секунду: злость под крюком; остывает без него
-const BALK_IN = 0.6, SUGAR_OUT = 1.2; // с: встаёт; успокаивается
-const EASE = 1.5; // в секунду: pace идёт к цели
+const BPM = 48, BPM_GOAD = 64; // Kiouni's step; under the goad
+const SLOW = 0.3, STEADY = 0.6, START = 0.4; // pace: the slowest step; steady, on the beat; at the start
+const HIT = 0.1, MISS = 0.08, LAPSE = 0.05; // pace: for a beat in time; for a touch off the beat; for a beat missed
+const PATH = 36; // s: the way at a steady step (STEADY) — on time
+const HOUR = 6; // s of the way — an hour in the notebook
+const ANGER = 0.35, CALM = 0.2; // a second: the anger under the goad; it cools without it
+const BALK_IN = 0.6, SUGAR_OUT = 1.2; // s: he stops; he calms down
+const EASE = 1.5; // a second: pace goes to its aim
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'slon',
-  title: 'Слон', // как её зовёт ☰ автора
+  title: 'The elephant', // (as the author's ☰ lists it)
   about: 38,
-  skipped: { hours: 0 }, // в шаг, без крюка — по расписанию
+  skipped: { hours: 0 }, // in step, no goad — on time
   async run(g, b, opts, signal) {
-    const PHRASE = 'Киуни идёт своим шагом. Гауда качается, до Аллахабада — лес';
+    const PHRASE = tr('Kiouni goes at his own pace. The howdah sways; forest all the way to Allahabad');
     const mg = g.minigame({ phrase: PHRASE });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });
     send('ride', 0); send('pace', START); send('goad', 0); send('balk', 0); send('sugar', 0);
-    // шаг: доля на голове слона, касание где угодно
+    // the step: the beat on the elephant's head, a touch anywhere
     const head = mg.mark({ at: 'kiouni#head', kind: 'ring' });
     const step = mg.rhythm({ on: null, show: [head], bpm: BPM });
-    // крюк
+    // the goad
     const hook = mg.mark({ at: 'guide#hands', kind: 'groove', quiet: true, danger: 0 });
     const goad = mg.hold({ on: hook, seconds: 0.3, drain: 0.3 });
     b.minigame.tricks.teach(mg, [step], { id: 'rhythm:anywhere', still: null });
@@ -44,7 +47,7 @@ export default {
     let sugar = null, sugarPress = null, sugarOff = -1, t0 = mg.t;
     step.on('tap', ({ hit }) => {
       tapped = true;
-      if (balked || goad.state.held) return; // под крюком и стоя — не до шага
+      if (balked || goad.state.held) return; // under the goad and standing — no time for the step
       if (hit) steady = Math.min(STEADY, steady + HIT);
       else { steady = Math.max(SLOW, steady - MISS); mg.error('timing', { at: head }); }
     });
@@ -59,7 +62,7 @@ export default {
       send('goad', 0);
       move('balk', 1, BALK_IN);
       mg.error('danger', { at: hook });
-      mg.plate.set({ phrase: 'Киуни встал посреди тропы, растопырив уши. Крюк тут ничего не решит' });
+      mg.plate.set({ phrase: tr('Kiouni has stopped in the middle of the path, ears spread wide. The goad will settle nothing here') });
       sugar = mg.mark({ at: 'kiouni#trunk', kind: 'ring' });
       sugarPress = mg.press({ on: sugar });
       if (balks === 1) b.minigame.tricks.teach(mg, [sugarPress], { id: 'press' });

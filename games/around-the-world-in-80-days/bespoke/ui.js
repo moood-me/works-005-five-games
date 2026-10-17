@@ -1,8 +1,8 @@
 // What the game shows over the scene (bespoke.layer), as the pages of an old illustrated edition: cream paper, sepia
 // ink, a thin double engraved frame with corners, a serif (game.md §6). The notebook and the bag are the play's two
 // figures; the stamps of a consul's visa say who remembers.
-//   view.gauges({hours, money, shown, lines} | null) — the notebook (Запас) low on the left, the bag (Саквояж) low on
-//     the right, each once the player has met it; null — none («Маршрут»)
+//   view.gauges({hours, money, shown, lines} | null) — the notebook (Time in hand) low on the left, the bag (the carpet-bag) low on
+//     the right, each once the player has met it; null — none («The route»)
 //   view.hours(state, was, line) — the old figure struck out, the new one written; `line` beside it a while
 //   view.money(state, was) — the sum changes; spent: notes fly from the bag
 //   view.hero('fogg' | 'pp') — the medallion of his face, a moment, high in the middle
@@ -14,7 +14,7 @@
 //   view.letter({text, sign, kind}, {signal, onOpen}) — a sheet the player unfolds and folds: 'note', 'letter',
 //     'envelope'; → once it has gone
 //   view.onSkip(fn) → off — what the ⏭ does now; view.author({...}) → what opens the author's map, for the page's ☰
-//     (bespoke.menu) (as in «Парадизо»)
+//     (bespoke.menu) (as in «Cinema Paradiso»)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
 import { BOOK, hoursText, moneyText } from './story.js';
@@ -47,7 +47,7 @@ export function ui(layer) {
   const tools = el('div', 'tools', layer);
   const skips = [];
   // (shown while the latest skip is something)
-  const skipButton = button('⏭', 'пропустить', () => skips.at(-1)?.fn?.());
+  const skipButton = button('⏭', tr('skip'), () => skips.at(-1)?.fn?.());
   const skipShown = () => { skipButton.hidden = !skips.at(-1)?.fn; };
   tools.append(skipButton);
   skipShown();
@@ -63,7 +63,7 @@ export function ui(layer) {
       medal.className = `medal ${who}`;
       medal.replaceChildren();
       el('div', 'face', medal);
-      el('p', 'name', medal).textContent = who === 'pp' ? 'Паспарту' : 'Филеас Фогг';
+      el('p', 'name', medal).textContent = who === 'pp' ? tr('Passepartout') : tr('Phileas Fogg');
       void medal.offsetWidth;
       medal.classList.add('on');
       clearTimeout(medal.timer);
@@ -109,7 +109,7 @@ export function ui(layer) {
       return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
     },
     author({ chapters, plays, at, games, go }) {
-      // the map (the page's ☰ opens it): «партия как…», then every chapter a column of its steps (and their minigames)
+      // the map (the page's ☰ opens it): «play as…», then every chapter a column of its steps (and their minigames)
       // in a window over the scene;
       // a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
@@ -121,11 +121,11 @@ export function ui(layer) {
       const open = () => {
         const here = at(), panel = el('div', 'author-panel');
         const pick = el('label', 'as');
-        pick.append('партия как… ');
+        pick.append('play as… ');
         const list = el('select', '', pick);
         list.append(...plays.map((label, i) => Object.assign(el('option'), { value: i, textContent: label, selected: i === as })));
         list.onchange = () => { as = Number(list.value); open(); };
-        panel.append(button('✕', 'закрыть (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
+        panel.append(button('✕', 'close (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
@@ -133,7 +133,7 @@ export function ui(layer) {
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'сразу к мини-игре', () => go(as, ci, si, k), 'minigame'))));
+              button(`◆ ${name}`, 'straight to the minigame', () => go(as, ci, si, k), 'minigame'))));
             col.append(step, under);
           }
           return col;
@@ -147,12 +147,12 @@ export function ui(layer) {
   };
 }
 
-// Fogg's notebook, low on the left: a narrow ruled page, «Запас» and the figure in an even hand; a change strikes the
+// Fogg's notebook, low on the left: a narrow ruled page, «Time in hand» and the figure in an even hand; a change strikes the
 // old figure out above the new one; the lines others wrote below — Aouda's slanted, Passepartout's a scrawl
 function bookGauge(layer) {
   const box = el('div', 'book', layer);
   const page = el('div', 'page', box);
-  el('p', 'head', page).textContent = 'Запас';
+  el('p', 'head', page).textContent = tr('Time in hand');
   const was = el('p', 'was', page), now = el('p', 'now', page), note = el('p', 'note', page);
   const lines = el('div', 'lines', page);
   let noteTimer = 0;
@@ -247,7 +247,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
         letter.classList.add('open-bottom');
         onOpen?.();
         await wait(2400);
-        ask('сложить');
+        ask(tr('fold'));
         hint.classList.add('on');
         stage = 'open';
       } else if (stage === 'open') {
@@ -269,7 +269,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
     document.fonts.load('1em "Vokrug Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      ask('развернуть');
+      ask(tr('unfold'));
       if (stage === 'folded') hint.classList.add('on');
     });
   });
@@ -282,7 +282,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
   const env = el('div', 'envelope', veil);
   el('div', 'side back', env);
   const face = el('div', 'side front', env);
-  el('p', 'address', face).textContent = 'Лондон, Сэвил-Роу, 7';
+  el('p', 'address', face).textContent = tr('No. 7, Saville Row, London');
   el('p', 'stamp', face).textContent = text;
   if (sign) el('p', 'sign', face).textContent = sign;
   const hint = card('p', 'letter-hint', veil);
@@ -300,7 +300,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
         env.classList.add('turned');
         onOpen?.();
         await wait(2400);
-        ask('отложить');
+        ask(tr('put aside'));
         hint.classList.add('on');
         stage = 'up';
       } else if (stage === 'up') {
@@ -316,7 +316,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
     document.fonts.load('1em "Vokrug Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      ask('перевернуть');
+      ask(tr('turn over'));
       if (stage === 'down') hint.classList.add('on');
     });
   });

@@ -1,34 +1,35 @@
-// «Тайфун» (II.5, Море, кусок `typhoon`; камера на корме «Танкадеры», низко): гребни идут на нос один за другим. Вести
-// где угодно: стрелка — руль (`helm` −1…1: румпель и нос бота), зона — куда держать нос: на подходе гребня — на волну
-// (она идёт то с левой скулы, то с правой), во впадине — прямо. Волна — `wave` 0 → 1 за PERIOD с (0.5 — гребень под
-// носом), высота `wave_h` растёт к середине шторма и спадает. Два мига на волну: гребень под носом (нос не на волну —
-// вода через борт, `green_water` подъём до 1) и впадина (не прямо — бот рыскает, тоже вода). Крен `heel` — от того,
-// насколько нос не туда, и от гребня. Итог — часы: каждые две ошибки — час.
-//   Что делает: Фогг и Бансби ведут крошечную «Танкадеру» сквозь тайфун к Шанхаю.
-//   Чего хочет: не дать волне положить бот на борт — и не потерять ни мили.
-//   Каково ему: держаться; холодная выдержка Фогга посреди воя и пены.
-//   Что чувствует игрок: держаться — встречать каждую волну носом, не дёргаясь.
+// «The typhoon» (II.5, the sea, the beat `typhoon`; the camera at the Tankadere's stern, low): crests come at the bow
+// one after another. Lead anywhere: the arrow — the helm (`helm` −1…1: the tiller and the boat's bow), the zone — where
+// to keep the bow: as a crest comes — into the wave (it comes now from the port bow, now from the starboard), in the
+// trough — straight. The wave — `wave` 0 → 1 in PERIOD s (0.5 — the crest under the bow), its height `wave_h` grows to
+// the middle of the storm and falls. Two instants a wave: the crest under the bow (the bow not into the wave — water
+// over the side, `green_water` a rise to 1) and the trough (not straight — the boat yaws, water too). The heel `heel` —
+// from how far the bow is off, and from the crest. The outcome — hours: every two mistakes — an hour.
+//   What he does: Fogg and Bunsby take the tiny Tankadere through the typhoon to Shanghai.
+//   What he wants: not to let a wave lay the boat on her side — and not to lose a mile.
+//   How it is for him: holding on; Fogg's cold self-command amid the howling and the foam.
+//   What the player feels: holding on — meeting each wave bow on, without a jerk.
 //   → { hours: 0…−3 }
 import { until, keys } from '../hands.js';
 
-const WAVES = 8, PERIOD = 5; // волн; с на волну
-const CREST = 0.5, TROUGH = 0.9; // wave: проверка на гребне; во впадине
-const ZONE = 0.4; // ширина зоны
-const STRAIGHT = 0.3; // во впадине — прямо, если |руль| не больше
-const SPLASH = 1.2; // с: green_water стоит на 1
+const WAVES = 8, PERIOD = 5; // waves; s a wave
+const CREST = 0.5, TROUGH = 0.9; // wave: the check on the crest; in the trough
+const ZONE = 0.4; // the zone's width
+const STRAIGHT = 0.3; // in the trough — straight, if |helm| is no more
+const SPLASH = 1.2; // s: green_water stays at 1
 const clamp = (v, a = -1, b = 1) => Math.min(b, Math.max(a, v));
 const smooth = (a, b, x) => { const u = Math.min(1, Math.max(0, (x - a) / (b - a))); return u * u * (3 - 2 * u); };
 
 export default {
   file: 'tayfun',
-  title: 'Тайфун', // как её зовёт ☰ автора
+  title: 'The typhoon', // (as the author's ☰ lists it)
   about: 42,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Волны выше мачты. «Танкадера» — двадцать тонн, и она идёт им навстречу' });
+    const mg = g.minigame({ phrase: tr('Waves higher than the mast. The Tankadere — twenty tons, and she goes to meet them') });
     const send = keys(g);
     mg.plate.set({ notches: Array.from({ length: WAVES - 1 }, (_, i) => (i + 1) / WAVES) });
-    // откуда каждая волна: то слева, то справа, на сколько
+    // where each wave comes from: now the left, now the right, by how much
     const dirs = Array.from({ length: WAVES }, (_, k) => (k % 2 ? 1 : -1) * (0.45 + 0.25 * Math.random()));
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, release: 'stay' });
     b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
@@ -45,7 +46,7 @@ export default {
       const now = t - t0;
       k = Math.min(WAVES - 1, Math.floor(now / PERIOD));
       const w = Math.min(1, (now - k * PERIOD) / PERIOD), dir = dirs[k];
-      // куда держать нос: на подходе — на волну; после гребня — снова прямо
+      // where to keep the bow: as it comes — into the wave; after the crest — straight again
       const at = dir * (smooth(0.12, 0.35, w) - smooth(0.58, 0.78, w));
       lead.set({ zone: { at, width: ZONE } });
       const helm = lead.state.arrow;

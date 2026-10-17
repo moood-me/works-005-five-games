@@ -4,6 +4,9 @@ import { pathToFileURL } from 'node:url';
 import { join } from 'node:path';
 
 const DIR = process.argv[2] && process.argv[2].includes('/') ? process.argv[2] : join(import.meta.dirname, '..', 'minigames');
+// the minigames' texts as written (the source language): tr as the page gives it, without the translations
+const fill = (t, p = {}) => t.replace(/\{(\w+)\}/g, (_, k) => String(p[k]));
+globalThis.tr = Object.assign(fill, { n: (n, one, other, p) => fill(n === 1 ? one : other, { n, ...p }), c: (c, t, p) => fill(t, p), line: (who, t) => t, thought: (who, t) => t, lang: 'en' });
 const DT = 1 / 30;
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
@@ -152,7 +155,7 @@ const BOTS = {
   },
   piramida(mg, v, t, variant, mem) {
     const l = live(mg, 'lead')[0]; if (!l) return;
-    const choosing = mg.phrases.some(p => p.includes('Фогг'));
+    const choosing = mg.phrases.some(p => p.includes('Fogg'));
     l.state.held = !(choosing && variant === 'drop');
     l.state.knob = clamp(-3 * l.state.arrow, -1, 1);
   },
@@ -210,7 +213,7 @@ async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
     act(kind, verb, key, value, { over } = {}) { if (kind !== 'state' || verb !== 'move') throw new Error('act'); values[key] = value; const a = { cancel() {} }; acts.push(a); return a; },
     minigame: { tricks: { teach: () => ({ remove() {} }) } },
   };
-  for (const k of ['file', 'title', 'about', 'skipped', 'run']) if (!(k in mod)) throw new Error(`${name}: нет ${k}`);
+  for (const k of ['file', 'title', 'about', 'skipped', 'run']) if (!(k in mod)) throw new Error(`${name}: no ${k}`);
   if (mod.file !== name) throw new Error(`${name}: file ${mod.file}`);
   // g.play's race: the run, or skipped once the signal aborts
   const skipped = new Promise(ok => abort.signal.addEventListener('abort', () => { mg.leave(); ok(mod.skipped); }));
@@ -230,7 +233,7 @@ async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
   }
   for (let i = 0; i < 5 && !done; i++) await new Promise(r => setImmediate(r));
   if (err) throw err;
-  if (!done) throw new Error(`${name}/${variant}: не кончилась за ${t.toFixed(0)} с`);
+  if (!done) throw new Error(`${name}/${variant}: did not end in ${t.toFixed(0)} s`);
   return { result, t: +t.toFixed(1), end: mg.ended, errors: mg.errors.length, phrases: [...new Set(mg.phrases)] };
 }
 
@@ -246,9 +249,9 @@ for (const [name, variants] of Object.entries(CASES)) {
   for (const variant of variants) {
     try {
       const r = await play(name, variant, { money: variant === 'poor' ? 7000 : 20000 });
-      console.log(`${name}/${variant}: ${JSON.stringify(r.result)} — ${r.t} с, ${r.end}, ошибок ${r.errors}`);
+      console.log(`${name}/${variant}: ${JSON.stringify(r.result)} — ${r.t} s, ${r.end}, errors ${r.errors}`);
       if (variant === variants[0]) for (const p of r.phrases) console.log(`    «${p}»`);
-    } catch (e) { console.log(`${name}/${variant}: ОШИБКА ${e.stack}`); }
+    } catch (e) { console.log(`${name}/${variant}: ERROR ${e.stack}`); }
   }
   const s = await play(name, variants[0], { skipAt: 2 });
   console.log(`${name}/skip: ${JSON.stringify(s.result)}`);

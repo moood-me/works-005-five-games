@@ -1,10 +1,10 @@
-# Записи подложек
+# The beds' recordings
 
-Настоящие записи с Freesound, лицензия CC0 (без условий): из каждой вырезан кусок ~45 с, закольцованный (последние
-2,5 с сведены в начало), громкость приведена к −24 dBFS RMS, MP3 96 кбит/с. Выбраны Павлом 2026-10-16
-(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` подгоняет каждую к громкости прежней подложки.
+Real recordings from Freesound, licence CC0 (no conditions): a piece of ~45 s cut out of each, looped (the last 2.5 s
+mixed into the beginning), the loudness brought to −24 dBFS RMS, MP3 96 kbit/s. Chosen by Pavel 2026-10-16
+(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` fits each to the loudness of the bed it replaced.
 
-| Файл | Запись | Автор |
+| File | Recording | Author |
 |---|---|---|
 | `crowd-689725.mp3` | [full restaurant talking german people](https://freesound.org/people/Garuda1982/sounds/689725/) | Garuda1982 |
 | `furnace-74915.mp3` | [ferry engine room2.wav](https://freesound.org/people/mrmayo/sounds/74915/) | mrmayo |

@@ -24,7 +24,7 @@
   0% { opacity: 1; } 8% { opacity: 0.96; } 17% { opacity: 1; } 25% { opacity: 0.94; } 33% { opacity: 0.99; } 42% { opacity: 1; }
   50% { opacity: 0.95; } 58% { opacity: 1; } 67% { opacity: 0.97; } 75% { opacity: 1; } 83% { opacity: 0.95; } 92% { opacity: 0.99; } 100% { opacity: 1; } }
 
-/* the notebook (Запас) low on the left: a narrow ruled page; the bag (Саквояж) low on the right */
+/* the notebook (Time in hand) low on the left: a narrow ruled page; the carpet-bag low on the right */
 #layer .book { position: absolute; left: 14px; bottom: 64px; width: 150px; opacity: 0; transition: opacity 1.6s ease;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55)); rotate: -2deg; }
 #layer .book.on { opacity: 1; }
@@ -160,7 +160,7 @@
 #layer .tools > button { width: 44px; height: 44px; border: 1px solid var(--frame); outline: 1px solid var(--frame); outline-offset: -4px;
   border-radius: 2px; color: var(--ink); background: var(--card); font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.6; }
 #layer .tools > button:hover { opacity: 1; }
-/* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
+/* ☰: a window over the scene, below the site's header — «play as…», then the chapters side by side, each a column
    of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
   background: rgba(5, 4, 3, 0.55); }

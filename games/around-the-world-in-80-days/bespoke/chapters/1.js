@@ -1,6 +1,6 @@
-// I. Индия «в которой слон стоит две тысячи фунтов» — game.md §3. Suez (Fix names Fogg to the consul), Bombay two
-// days early; the rails end in the forest; the elephant bought («Торг») and ridden («Слон»); the procession and the
-// suttee — ⚑ sati: tonight, quietly (the pyre, «Как мёртвый») or now, on the road («Рывок»); Allahabad, Aouda wakes;
+// I. India «in which an elephant costs two thousand pounds» — game.md §3. Suez (Fix names Fogg to the consul), Bombay two
+// days early; the rails end in the forest; the elephant bought («The bargain») and ridden («The elephant»); the procession and the
+// suttee — ⚑ sati: tonight, quietly (the pyre, «Like the dead») or now, on the road («The dash»); Allahabad, Aouda wakes;
 // ~ kiouni: given to the guide or sold; the Ganges.
 // Reads: hands torg, slon, kak-mertvyy, ryvok. Leaves: choices.sati, choices.kiouni; hours, money; marks aouda, pp,
 // guide.
@@ -12,13 +12,13 @@ import ryvok from '../minigames/ryvok.js';
 
 export default {
   number: 'I',
-  title: 'Индия',
-  heading: 'в которой слон стоит две тысячи фунтов',
+  title: tr('India'),
+  heading: tr('in which an elephant costs two thousand pounds'),
   route: [0, 0.22],
-  titles: ['Суэц', 'Конец рельсов', 'Торг', 'Слон', 'Процессия', 'Аллахабад', 'Ганг'],
+  titles: ['Suez', 'The end of the rails', 'The bargain', 'The elephant', 'The procession', 'Allahabad', 'The Ganges'],
   choices: [
-    { id: 'sati', weight: '⚑', title: 'Сати', options: [{ id: 'night', label: 'Ночью, тихо' }, { id: 'road', label: 'Сейчас, на дороге' }] },
-    { id: 'kiouni', weight: '~', title: 'Киуни', options: [{ id: 'gift', label: 'Отдать проводнику' }, { id: 'sell', label: 'Продать' }] },
+    { id: 'sati', weight: '⚑', title: tr('The suttee'), options: [{ id: 'night', label: tr('At night, quietly') }, { id: 'road', label: tr('Now, on the road') }] },
+    { id: 'kiouni', weight: '~', title: tr('Kiouni'), options: [{ id: 'gift', label: tr('Give him to the guide') }, { id: 'sell', label: tr('Sell him') }] },
   ],
   steps: [
     // Suez: Passepartout and an amiable stranger; the stranger to the consul. Bombay at dawn, two days early
@@ -29,17 +29,17 @@ export default {
       await g.scene(SCENES.deck, { beat: 'suez', ship: 'mongolia', port: 'suez' });
       const suez = g.beat('suez');
       await chat;
-      await g.say('pp', 'Мсье Фикс — какой любезный человек!');
+      await g.say('pp', 'Monsieur Fix — what an obliging man!');
       await whisper;
-      await g.say('fix', 'Это он. Вор из Английского банка. Мне нужен ордер');
+      await g.say('fix', 'It is he. The Bank of England robber. I need a warrant');
       await suez;
       g.hero('fogg');
       const book = g.told('bombay:book');
       await g.scene(SCENES.deck, { beat: 'bombay', ship: 'mongolia', port: 'bombay' });
       const bombay = g.beat('bombay');
       await book;
-      g.hours(48, '«Монголия»: на два дня раньше');
-      await g.say('fogg', 'Бомбей. Два дня в запасе');
+      g.hours(48, tr('The Mongolia: two days early'));
+      await g.say('fogg', 'Bombay. Two days in hand');
       await bombay;
     },
     // the train stops in the forest: the rails end here
@@ -51,11 +51,11 @@ export default {
       const brake = g.beat('brake');
       await stopped;
       g.beds({ jungle: 0.3 }, 3);
-      await g.say('conductor', 'Рельсы кончаются здесь, господа. До Аллахабада пятьдесят миль');
+      await g.say('conductor', 'The line stops here, gentlemen. Fifty miles to Allahabad');
       await brake;
-      g.hours(-34, 'Пятьдесят миль без рельсов');
+      g.hours(-34, tr('Fifty miles without rails'));
     },
-    // the end of the rails; Passepartout finds the elephant; the bargain («Торг»); all up into the howdah
+    // the end of the rails; Passepartout finds the elephant; the bargain («The bargain»); all up into the howdah
     async g => {
       g.hero('fogg');
       g.beds({ jungle: 0.5 }, 2);
@@ -63,16 +63,16 @@ export default {
       await g.scene(SCENES.jungle, { beat: 'rails_end', day: 1, station: 'kholby' });
       const end = g.beat('rails_end');
       await shed;
-      await g.say('pp', 'Мсье! Слон! Настоящий слон!');
+      await g.say('pp', 'Monsieur! An elephant! A real elephant!');
       await end;
       await g.beat('haggle', { wait: false });
-      await g.say('fogg', 'Тысяча фунтов');
-      await g.say('owner', 'Нет');
-      const r = await g.play(torg, { onRefuse: () => g.say('owner', 'Нет') });
+      await g.say('fogg', 'A thousand pounds');
+      await g.say('owner', 'No');
+      const r = await g.play(torg, { onRefuse: () => g.say('owner', 'No') });
       g.money(-(r?.price ?? 2000));
-      if (r?.minutes) g.hours(-r.minutes / 60, 'Торг');
+      if (r?.minutes) g.hours(-r.minutes / 60, tr('The bargain'));
       g.sound.notes();
-      await g.say('owner', 'Он ваш, сахиб. Его зовут Киуни');
+      await g.say('owner', 'He is yours, sahib. His name is Kiouni');
       const up = g.told('mount:up');
       const mount = g.beat('mount');
       await up;
@@ -86,7 +86,7 @@ export default {
       await g.scene(SCENES.jungle, { beat: 'ride', day: 1 }, { cut: true });
       await g.beat('ride', { wait: false });
       const r = await g.play(slon);
-      g.hours(r?.hours ?? 0, r?.hours > 0 ? 'Киуни прибавил шагу' : 'Киуни упрямится');
+      g.hours(r?.hours ?? 0, r?.hours > 0 ? tr('Kiouni quickened his pace') : tr('Kiouni is being stubborn'));
       g.beds({ jungle: 0.2, elephant: 0.3 }, 3);
     },
     // drums at dusk; the procession; the suttee — ⚑ tonight or now
@@ -97,34 +97,34 @@ export default {
       await g.scene(SCENES.jungle, { beat: 'drums' });
       const drums = g.beat('drums');
       await heard;
-      await g.say('guide', 'Барабаны, сахиб. Надо спрятаться');
+      await g.say('guide', 'Drums, sahib. We must hide');
       await drums;
       g.beds({ drums: 0.7, fire: 0.15 }, 4);
       const widow = g.told('procession:widow'), stopped = g.told('procession:stopped');
       const procession = g.beat('procession');
       await widow;
-      await g.say('guide', 'Это сати, сахиб. Вдову сожгут на рассвете — вместе с ним');
+      await g.say('guide', 'It is a suttee, sahib. The widow will be burned at dawn — with him');
       await stopped;
-      await g.say('cromarty', 'Её одурманили. Она ничего не понимает');
+      await g.say('cromarty', 'She has been drugged. She understands nothing');
       await procession;
-      await g.say('fogg', 'У меня двенадцать часов запаса. Я могу их потратить');
+      await g.say('fogg', 'I have yet twelve hours to spare. I can devote them to that');
       const sati = await g.choose('sati', {
-        'fogg#head': [{ id: 'night', label: 'Ночью, тихо' }],
-        'kiouni#head': [{ id: 'road', label: 'Сейчас, на дороге' }],
+        'fogg#head': [{ id: 'night', label: tr('At night, quietly') }],
+        'kiouni#head': [{ id: 'road', label: tr('Now, on the road') }],
       });
       if (sati === 'night') {
-        g.hours(-12, 'Ночь у пагоды');
+        g.hours(-12, tr('A night by the pagoda'));
         const gone = g.told('night_wall:gone');
         const wall = g.beat('night_wall');
         await gone;
-        await g.say('cromarty', 'Где ваш слуга, мистер Фогг?');
+        await g.say('cromarty', 'Where is your servant, Mr. Fogg?');
         await wall;
         g.beds({ fire: 0.5, drums: 0.4, crowd: 0.3 }, 3);
         const kindled = g.told('pyre:kindled');
         await g.scene(SCENES.jungle, { beat: 'pyre' });
         const pyre = g.beat('pyre');
         await kindled;
-        await g.say('cromarty', 'Поздно, мистер Фогг. Их сотни');
+        await g.say('cromarty', 'Too late, Mr. Fogg. There are hundreds of them');
         await pyre;
         const risen = g.told('rise:risen');
         const rise = g.beat('rise');
@@ -134,24 +134,24 @@ export default {
         g.hero('pp');
         await g.beat('walk', { wait: false });
         const r = await g.play(kakMertvyy);
-        if (r?.hours) g.hours(r.hours, 'Погоня');
+        if (r?.hours) g.hours(r.hours, tr('The chase'));
         const pp = g.told('flee:pp');
         const flee = g.beat('flee');
         await pp;
-        await g.say('pp', 'Бежим, мсье!');
+        await g.say('pp', 'Run, monsieur!');
         await flee;
         g.relate('aouda', 1);
       } else {
-        g.hours(-2, 'Рывок на дороге');
+        g.hours(-2, tr('A dash on the road'));
         g.hero('pp');
         g.beds({ drums: 0.9, elephant: 0.8, crowd: 0.5 }, 1);
         g.sound.trumpet();
         await g.beat('charge', { wait: false });
         const r = await g.play(ryvok);
-        if (r?.hours) g.hours(r.hours, 'Погоня');
+        if (r?.hours) g.hours(r.hours, tr('The chase'));
         g.beds({ elephant: 0.6, drums: 0.3 }, 3);
-        await g.say('guide', 'Меня узнали. Мне теперь нельзя домой');
-        g.mark('guide', true, 'Проводник это запомнит');
+        await g.say('guide', 'They knew me. I can never go home now');
+        g.mark('guide', true, tr('The guide will remember this'));
         await g.beat('aouda_fear');
       }
     },
@@ -169,21 +169,21 @@ export default {
       g.set('aouda_calm', night ? 1 : 0);
       const wake = g.beat('wake');
       await eyes;
-      await g.say('aouda', 'Где я?');
-      if (night) await g.say('fogg', 'В безопасности, сударыня. Это Аллахабад');
-      else await g.say('cromarty', 'Тише, сударыня. Вы среди друзей');
+      await g.say('aouda', 'Where am I?');
+      if (night) await g.say('fogg', 'You are safe, madam. This is Allahabad');
+      else await g.say('cromarty', 'Hush, madam. You are among friends');
       await wake;
       const kiouni = await g.choose('kiouni', {
-        'guide#head': [{ id: 'gift', label: 'Отдать Киуни проводнику' }],
-        'kiouni#head': [{ id: 'sell', label: 'Продать' }],
+        'guide#head': [{ id: 'gift', label: tr('Give Kiouni to the guide') }],
+        'kiouni#head': [{ id: 'sell', label: tr('Sell him') }],
       });
       if (kiouni === 'gift') {
         const lift = g.told('gift:lift');
         const gift = g.beat('gift');
-        await g.say('fogg', 'Киуни ваш');
+        await g.say('fogg', 'Kiouni is yours');
         await lift;
         g.sound.trumpet();
-        await g.say('pp', 'Ха-ха! Прощай, Киуни!');
+        await g.say('pp', 'Ha-ha! Goodbye, Kiouni!');
         await gift;
         g.relate('pp', 1);
       } else {
@@ -193,7 +193,7 @@ export default {
         const away = g.told('sold:away');
         const sold = g.beat('sold');
         await away;
-        await g.say('pp', 'Прощай, Киуни…');
+        await g.say('pp', 'Goodbye, Kiouni…');
         await sold;
       }
     },

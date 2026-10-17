@@ -1,17 +1,20 @@
-// «Десять минут» (Пролог, Сэвил-Роу, кусок `pack`; фасад, все окна в кадре, саквояж у двери): Паспарту мечется по
-// дому. Кольцо на каждом окне со списком Фогга — гардеробная (две рубашки), спальня (три пары чулок), холл (плащ),
-// кабинет (Брэдшо); тихое кольцо на мансарде — газ, его в списке нет. Нажал окно — Паспарту бежит туда (`pp_in`
-// 'none' на лестнице, этаж — RUN с, потом окно), и вещь летит в саквояж (`fly_what`, `fly` подъём до 1; `bag` растёт);
-// каждое следующее нажатие того же окна — следующая вещь (не чаще THROW с; нажатия, пока он бежит, копятся). Мансарда
-// — он гасит газ (`gas` → 0, GAS с). Тридцать секунд (тень плашки, слой времени); всё уложено — конец сразу.
-//   Что делает: Паспарту за десять минут собирает хозяина в кругосветное путешествие.
-//   Чего хочет: уложить всё по списку и не задержать мистера Фогга ни на минуту.
-//   Каково ему: ошарашен — только что нанялся в самый спокойный дом Лондона; мечется, весело и бестолково.
-//   Что чувствует игрок: весёлую суматоху — конец спокойной жизни; газ — мелочь, которую легко забыть.
-//   → { missing: сколько вещей списка не уложено (0…4; каждая — Саквояж −50), gas: горит ли газ в мансарде }
+// «Ten minutes» (Prologue, Saville Row, the beat `pack`; the front, all the windows in the frame, the carpet-bag at the
+// door): Passepartout rushes about the house. A ring on each window of Fogg's list — the dressing-room (two shirts),
+// the bedroom (three pairs of stockings), the hall (the mackintosh), the study (the Bradshaw); a quiet ring on the
+// attic — the gas, not on the list. A window pressed — Passepartout runs there (`pp_in` 'none' on the stairs, a floor —
+// RUN s, then the window), and a thing flies into the bag (`fly_what`, `fly` a rise to 1; `bag` grows); each next press
+// of the same window — the next thing (no oftener than THROW s; presses while he runs add up). The attic — he turns off
+// the gas (`gas` → 0, GAS s). Thirty seconds (the plate's shade, the time layer); all packed — the end at once.
+//   What he does: Passepartout packs his master for a journey round the world in ten minutes.
+//   What he wants: to pack everything on the list and not delay Mr. Fogg by a minute.
+//   How it is for him: dumbfounded — he has only just taken a place in the quietest house in London; he rushes about,
+//     merrily and muddle-headedly.
+//   What the player feels: a merry bustle — the end of a quiet life; the gas — a trifle, easily forgotten.
+//   → { missing: how many things of the list are not packed (0…4; each — the carpet-bag −50), gas: whether the gas burns
+//     in the attic }
 import { until, keys } from '../hands.js';
 
-// окно → что там по списку (сколько штук), этаж
+// a window → what the list has there (how many), the floor
 const ROOMS = {
   dressing: { at: 'win_dressing', what: 'shirt', n: 2, floor: 2 },
   bedroom: { at: 'win_bedroom', what: 'stockings', n: 3, floor: 2 },
@@ -19,22 +22,22 @@ const ROOMS = {
   study: { at: 'win_study', what: 'bradshaw', n: 1, floor: 1 },
 };
 const ATTIC = { at: 'attic', floor: 3 };
-const LIMIT = 30; // с
-const RUN = 0.45, ROOM = 0.5; // с: этаж по лестнице; от двери к окну комнаты
-const THROW = 0.6; // с: от вещи к вещи в одной комнате
-const FLY = 0.5; // с: `fly` стоит на 1, потом 0 (следующий подъём)
-const GAS = 1.2; // с: дотянуться до рожка
-const BAG0 = 0.15; // саквояж у двери, пустой
-const AFTER = 0.8; // с после последней вещи — конец
+const LIMIT = 30; // s
+const RUN = 0.45, ROOM = 0.5; // s: a floor by the stairs; from the door to the room's window
+const THROW = 0.6; // s: from thing to thing in one room
+const FLY = 0.5; // s: `fly` stays at 1, then 0 (the next rise)
+const GAS = 1.2; // s: to reach the burner
+const BAG0 = 0.15; // the carpet-bag at the door, empty
+const AFTER = 0.8; // s after the last thing — the end
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'desyat-minut',
-  title: 'Десять минут', // как её зовёт ☰ автора
+  title: 'Ten minutes', // (as the author's ☰ lists it)
   about: 30,
-  skipped: { missing: 0, gas: true }, // список уложен; газ, которого в списке нет, горит — как у Верна
+  skipped: { missing: 0, gas: true }, // the list packed; the gas, not on the list, burns — as in Verne
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Две рубашки, три пары чулок, плащ, путеводитель Брэдшо — и десять минут' });
+    const mg = g.minigame({ phrase: tr('Two shirts, three pairs of stockings, a mackintosh, a Bradshaw — and ten minutes') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });
@@ -45,7 +48,7 @@ export default {
     send('fly', 0);
     send('bag', BAG0);
     send('gas', 1);
-    // кольца: окна списка и тихое — мансарда
+    // the rings: the list's windows and a quiet one — the attic
     const left = {}, rings = {}, presses = [];
     for (const [room, r] of Object.entries(ROOMS)) {
       left[room] = r.n;
@@ -57,8 +60,8 @@ export default {
     rings.attic = mg.mark({ at: ATTIC.at, kind: 'ring', quiet: true });
     mg.press({ on: rings.attic }).on('press', () => go('attic'));
     b.minigame.tricks.teach(mg, presses.slice(0, 1), { id: 'press' });
-    // где он: floor — последний этаж, куда добежал; dest — куда бежит или где он; там с arrive; want — сколько ещё
-    // нажатий в этой комнате ждут; next — когда он сможет бросить следующую
+    // where he is: floor — the last floor he ran to; dest — where he runs to or where he is; there at arrive; want — how
+    // many more presses in this room wait; next — when he can throw the next thing
     let floor = 0, dest = null, here = null, arrive = 0, want = 0, next = 0, flyOff = -1, gasAt = -1, gasOff = false, packed = 0, t0 = mg.t, now = 0;
     const floorOf = room => (room === 'attic' ? ATTIC : ROOMS[room]).floor;
     function go(room) {
@@ -76,7 +79,7 @@ export default {
     }
     const done = await until(mg, ({ t }) => {
       now = t - t0;
-      // прибежал: свет в окне, он там
+      // he has run there: light in the window, he is there
       if (dest && now >= arrive && here !== dest) { here = dest; send('pp_in', dest); floor = floorOf(dest); }
       if (dest && now >= arrive) {
         if (dest === 'attic') {
@@ -88,7 +91,7 @@ export default {
             rings.attic.remove();
           }
         } else if (want > 0 && left[dest] > 0 && now >= next) {
-          // вещь летит в саквояж
+          // a thing flies into the bag
           want--;
           left[dest]--;
           packed++;

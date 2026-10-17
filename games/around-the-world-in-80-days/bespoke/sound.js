@@ -1,6 +1,6 @@
-// The sounds of «Вокруг света за 80 дней», made in the page (Web Audio): nothing to load; as loud as the page's
+// The sounds of «Around the World in 80 Days», made in the page (Web Audio): nothing to load; as loud as the page's
 // "sounds" slider says (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes
-// it then. The frame (the airs, the beds, the struck things) is «Парадизо»'s; the sounds are this game's (game.md §9).
+// it then. The frame (the airs, the beds, the struck things) is «Cinema Paradiso»'s; the sounds are this game's (game.md §9).
 //   wake() — the page may be heard from now on (called on the first touch)
 //   pause(on) — all of it stands while the play is paused (ui.js ⏸) and goes on from there after
 //   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
@@ -20,7 +20,7 @@
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}: theme() — the game's own tune on strings
 import { built, kit } from './ambience.js';
 
-// THEME — the tune of «Вокруг света»: sixteen bars in 3/4, A♭ major (the world's key: A_FLAT_MAJOR_F_MINOR), ♩ = 120,
+// THEME — the tune of «Around the World»: sixteen bars in 3/4, A♭ major (the world's key: A_FLAT_MAJOR_F_MINOR), ♩ = 120,
 // light and going, a journey's step. Each bar: its notes [pitch, beats] and the chord held under it (lowest first).
 // The motif is its first five notes (E♭ A♭ C E♭ D♭: a rise to the octave, a step back).
 export const THEME = [

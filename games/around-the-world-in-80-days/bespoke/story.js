@@ -1,6 +1,6 @@
 // What a chapter's steps play with: context(b, view, hub, state) → g. Its state is a working copy — kept only once the
 // step is done (game.js). A step left behind (its author skipped it: ⏭) does nothing more and never ends: whatever it
-// still calls returns a promise that never settles. The frame is «Новый кинотеатр „Парадизо“»'s; what is this game's
+// still calls returns a promise that never settles. The frame is «Cinema Paradiso»'s; what is this game's
 // own: the notebook and the bag instead of scales, the stamps of who remembers, the medallion of whose step it is.
 //   g.state — what the play carries: {hours, money, shown, marks, choices, hands, lines} (game.js); what follows from
 //     it: facts(g.state)
@@ -34,11 +34,11 @@
 //     g.state.hands[minigame.file]
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun, left when it ends
 //   g.hint(text, afterMs) → off() — one line low in the middle (not in a minigame)
-//   g.hours(delta, line) — Запас moves by delta hours: the old figure struck out in the notebook, the new written;
-//     `line` — what the notebook says beside it, if anything ('Монголия: +2 дня')
-//   g.money(delta) — Саквояж moves by delta £: the notes fly
+//   g.hours(delta, line) — the time in hand moves by delta hours: the old figure struck out in the notebook, the new written;
+//     `line` — what the notebook says beside it, if anything ('The Mongolia: two days early')
+//   g.money(delta) — the carpet-bag moves by delta £: the notes fly
 //   g.gauge('hours' | 'money') — the notebook / the bag shown from now on; its one line of what it means said once
-//   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… это запомнит»
+//   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… will remember this» (REMEMBERS)
 //   g.mark(key, value, text) — remembered (state.marks[key]); text — a stamp, if any
 //   g.book(line, hand) — the player gives the notebook (touches it), and the line BOOK[line] is written in it by
 //     `hand` ('aouda' | 'pp' | 'fogg'); it stays there (state.lines: {line, hand} — its name, not its text)
@@ -61,17 +61,18 @@ const handsOf = m => (HANDS.includes(m?.file) ? m.file : null);
 // The notebook and the bag: where they start, the one line of what each means (said once, when it appears)
 export const START = { hours: 0, money: 20000 };
 export const RULES = {
-  money: 'Саквояж: деньги на дорогу. Ими покупают время.',
-  hours: 'Книжка: запас против расписания. Всё непредвиденное платится отсюда.',
+  money: tr('The carpet-bag: money for the road. It buys time.'),
+  hours: tr('The notebook: time in hand against the timetable. Everything unforeseen is paid out of it.'),
 };
-export const WHO = { aouda: 'Ауда', fix: 'Фикс', pp: 'Паспарту' };
+// the stamp of who remembers (g.relate)
+export const REMEMBERS = { aouda: tr('Aouda will remember this'), fix: tr('Fix will remember this'), pp: tr('Passepartout will remember this') };
 // the lines written in the notebook (g.book), by their names
-export const BOOK = { cousin: 'Гонконг. Кузен Джиджибхай', day: '+1 день: ехали навстречу солнцу!' };
+export const BOOK = { cousin: tr('Hong Kong. Cousin Jeejeeh'), day: tr('+1 day: we travelled towards the sun!') };
 export const ENDINGS = [
-  { id: 'door', label: 'Вот и я, господа' }, { id: 'friday', label: 'По расписанию' },
-  { id: 'lost', label: 'Проиграл — и выиграл' }, { id: 'sunday', label: 'Две среды' },
+  { id: 'door', label: tr('Here I am, gentlemen') }, { id: 'friday', label: tr('On time') },
+  { id: 'lost', label: tr('Lost — and won') }, { id: 'sunday', label: tr('Two Wednesdays') },
 ];
-// the parts of the «Генриетта» as «Котлы» burns them (game.md §7.11): the cabin last
+// the parts of the Henrietta as «The boilers» burns them (game.md §7.11): the cabin last
 export const PARTS = ['deckhouse', 'boats', 'bunks', 'yards', 'mast_fore', 'mast_main', 'bulwarks', 'speedy_cabin'];
 export const PART_PRICE = 1500, PART_HOURS = 1.5;
 
@@ -89,7 +90,7 @@ export function facts(state) {
   const ending = hours >= 0 ? 'friday' : !opener ? 'sunday' : gained < 0 || h.keb?.late ? 'lost' : 'door';
   return {
     aouda, pp, opener, forgiven, ending,
-    gas: !!m.gas,                                   // the attic's gas burns all the way (Десять минут)
+    gas: !!m.gas,                                   // the attic's gas burns all the way («Ten minutes»)
     sati: c.sati ?? 'night',
     guideHome: c.sati !== 'road',                   // the guide may go home (not recognised on the road)
     kiouni: c.kiouni ?? 'gift',
@@ -124,15 +125,16 @@ export function carry(folder, f, state) {
   }[folder];
 }
 
-// how the notebook writes hours: '+2 д 6 ч', '−20 ч', 'по расписанию'
+// how the notebook writes hours: '+2 d 6 h', '−20 h', 'on time' (the numbers as the play's language writes them)
 export function hoursText(h) {
   const r = Math.round(h * 2) / 2;
-  if (!r) return 'по расписанию';
+  if (!r) return tr('on time');
   const a = Math.abs(r), d = Math.floor(a / 24), rest = a - d * 24;
-  const t = [d ? `${d} д` : '', rest ? `${String(rest).replace('.5', ',5')} ч` : ''].filter(Boolean).join(' ');
+  const t = [d ? tr('{d} d', { d }) : '', rest ? tr('{h} h', { h: rest.toLocaleString(tr.lang) }) : ''].filter(Boolean).join(' ');
   return `${r > 0 ? '+' : '−'}${t}`;
 }
-export const moneyText = m => `£ ${Math.round(m).toLocaleString('ru-RU').replace(/\s/g, ' ')}`;
+// the bag's sum, its thousands apart as the play's language writes them (a space — a narrow one)
+export const moneyText = m => tr('£{sum}', { sum: Math.round(m).toLocaleString(tr.lang).replace(/\s/g, ' ') });
 
 const BEAT = 180000; // a beat longer than this has not ended: the scene lacks it
 
@@ -164,7 +166,7 @@ export function context(b, view, hub, state, j = null) {
   // a minigame's result kept where the story reads it (game.md §3.6)
   const keepHands = (minigame, result) => {
     const name = handsOf(minigame);
-    if (!name) { b.trouble?.(`мини-игра «${minigame?.title}»: её файла нет в HANDS (story.js)`); return result; }
+    if (!name) { b.trouble?.(`minigame “${minigame?.title}”: its file is not in HANDS (story.js)`); return result; }
     state.hands[name] = result && typeof result === 'object' ? { ...result } : result;
     return result;
   };
@@ -260,7 +262,7 @@ export function context(b, view, hub, state, j = null) {
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`кусок «${name}» не кончился`);
+      if (wait && !(await ended)) b.trouble(`beat “${name}” did not end`);
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
@@ -292,7 +294,7 @@ export function context(b, view, hub, state, j = null) {
       }
     },
     minigame(o = {}) {
-      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      if (!playing) throw new Error('g.minigame — only inside a minigame (g.play)');
       const mg = b.minigame.start({ ...o, signal: playing.signal });
       mg.on('skip', playing.end);
       return mg;
@@ -325,7 +327,7 @@ export function context(b, view, hub, state, j = null) {
     relate(who, delta) {
       if (gone() || !delta) return;
       state.marks[who] = (state.marks[who] ?? 0) + delta;
-      if (!unseen()) view.toast(`${WHO[who]} это запомнит`, delta > 0 ? 'stamp' : 'stamp cold');
+      if (!unseen()) view.toast(REMEMBERS[who], delta > 0 ? 'stamp' : 'stamp cold');
     },
     mark(key, value, text) {
       if (gone()) return;

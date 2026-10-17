@@ -1,16 +1,16 @@
-// Пролог «в которой Филеас Фогг держит пари» — game.md §3. The countdown of the last evening first (20:44:37 →
+// Prologue «in which Phileas Fogg makes a wager» — game.md §3. The countdown of the last evening first (20:44:37 →
 // the handle turns, dark), then back to 2 October: the whist, the wager — the player lays Fogg's cards down himself —,
-// ten minutes at Savile Row («Десять минут»: the bag appears), the train out of Charing Cross (the gas, the London
+// ten minutes at Saville Row («Ten minutes»: the bag appears), the train out of Charing Cross (the gas, the London
 // watch; the notebook appears). Reads: hands['desyat-minut'] (the gas). Leaves: marks.gas; shown.money, shown.hours.
 import { SCENES } from '../story.js';
 import desyatMinut from '../minigames/desyat-minut.js';
 
 export default {
   number: '',
-  title: 'Пролог',
-  heading: 'в которой Филеас Фогг держит пари',
+  title: tr('Prologue'),
+  heading: tr('in which Phileas Fogg makes a wager'),
   route: [0, 0],
-  titles: ['Без четверти девять', 'Пари', 'Десять минут', 'Чаринг-Кросс'],
+  titles: ['A quarter to nine', 'The wager', 'Ten minutes', 'Charing Cross'],
   choices: [],
   steps: [
     // 21 December, 20:44: five gentlemen before the clock, Stuart counting; the door's handle turns — dark
@@ -20,12 +20,12 @@ export default {
       const handle = g.told('countdown:handle');
       await g.scene(SCENES.club, { beat: 'countdown' });
       const countdown = g.beat('countdown');
-      await g.say('stuart', 'Пятьдесят пять… пятьдесят шесть…');
+      await g.say('stuart', 'Fifty-five… fifty-six…');
       await handle;
       g.sound.tock();
       await countdown;
       g.sound.motif();
-      await g.title('Вокруг света за восемьдесят дней');
+      await g.title(tr('Around the World in Eighty Days'));
     },
     // 2 October: the whist; the wager — the player lays the cards down; Fogg rises and goes
     async g => {
@@ -35,19 +35,19 @@ export default {
       await g.scene(SCENES.club, { beat: 'whist' });
       const whist = g.beat('whist');
       await talks;
-      await g.say('stuart', 'Земля уменьшилась. Сто лет назад её объезжали за годы');
-      await g.say('fogg', 'Теперь — за восемьдесят дней');
-      await g.say('stuart', 'С поездами, пароходами — и с непредвиденным?');
+      await g.say('stuart', 'The world has grown smaller. A hundred years ago it took years to go round it');
+      await g.say('fogg', 'In eighty days, now');
+      await g.say('stuart', 'With trains, with steamers — and with the unforeseen?');
       await whist;
-      await g.say('fogg', 'Непредвиденного не существует');
+      await g.say('fogg', 'The unforeseen does not exist');
       await g.beat('wager');
-      await g.choose(null, { 'fogg#hands': [{ id: 'bet', label: 'Держу двадцать тысяч' }] });
+      await g.choose(null, { 'fogg#hands': [{ id: 'bet', label: tr('I bet twenty thousand') }] });
       const down = g.told('wager_down:cards-down');
       const wager = g.beat('wager_down');
       await down;
-      await g.say('fogg', 'Держу двадцать тысяч фунтов, что объеду её за восемьдесят дней. Или меньше');
+      await g.say('fogg', 'I will bet twenty thousand pounds that I will make the tour of the world in eighty days. Or less');
       await wager;
-      await g.say('fogg', 'Я вернусь в субботу, двадцать первого декабря, в восемь сорок пять вечера');
+      await g.say('fogg', 'I shall be back on Saturday, the twenty-first of December, at a quarter before nine in the evening');
       await g.beat('leave');
     },
     // Savile Row: «Passepartout, we are going round the world. In ten minutes»; the ten minutes; the bag
@@ -59,17 +59,17 @@ export default {
       await g.beat('home');
       const news = g.beat('news');
       await door;
-      await g.say('fogg', 'Паспарту, мы едем вокруг света. Через десять минут');
-      await g.say('pp', 'Вокруг… света?');
+      await g.say('fogg', 'Passepartout, we are going round the world. In ten minutes');
+      await g.say('pp', 'Round… the world?');
       await news;
       g.hero('pp');
-      await g.say('fogg', 'Две рубашки, три пары чулок, плащ и путеводитель Брэдшо. Остальное купим в дороге');
+      await g.say('fogg', 'Two shirts, three pairs of stockings, a mackintosh and a Bradshaw. We\'ll buy the rest on the way');
       await g.beat('pack', { wait: false });
       g.beds({ fog: 0.3, clock: 0.6 }, 1);
       const r = await g.play(desyatMinut);
       g.mark('gas', !!r?.gas);
       g.hero('fogg');
-      await g.say('fogg', 'Саквояж. В нём двадцать тысяч. Не выпускайте его из рук');
+      await g.say('fogg', 'The carpet-bag. There are twenty thousand in it. Take good care of it');
       g.sound.notes();
       g.gauge('money');
       if (r?.missing) g.money(-50 * r.missing);
@@ -91,20 +91,20 @@ export default {
       const gas = g.beat('gas');
       await up;
       if (g.state.marks.gas) {
-        await g.say('pp', 'Газ! Я не выключил газ у себя в комнате!');
-        await g.say('fogg', 'Он будет гореть за ваш счёт');
+        await g.say('pp', 'The gas! I forgot to turn off the gas in my room!');
+        await g.say('fogg', 'It will burn — at your expense');
       } else {
-        await g.say('pp', 'Газ выключен, мсье! Я проверил');
-        await g.say('fogg', 'Хорошо');
+        await g.say('pp', 'The gas is off, monsieur! I made sure');
+        await g.say('fogg', 'Good');
       }
       await gas;
       const out = g.told('watch:out');
       const watch = g.beat('watch');
       await out;
-      await g.say('pp', 'Лондонское время. Не переведу, мсье');
+      await g.say('pp', 'London time. I shan\'t change it, monsieur');
       await watch;
       g.gauge('hours');
-      await g.say('fogg', 'Лондон — Суэц: семь дней. Ровно по расписанию');
+      await g.say('fogg', 'London to Suez: seven days. Exactly to the timetable');
     },
   ],
 };

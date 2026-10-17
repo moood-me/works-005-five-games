@@ -1,30 +1,31 @@
-// «Кэб» (Эпилог, Сэвил-Роу, кусок `cab`; кэб в тумане к Реформ-клубу, камера с ним): ритм где угодно — доля копыт
-// (кольцо сходится на голове лошади `cab#horse`). В долю — лошадь прибавляет (`cab_pace` к 1: шаг → галоп), мимо доли
-// — сбивается, пропущенная доля — понемногу сдаёт. Игра ведёт кэб вперёд по `cab_pace` (`cab_to` — куда он едет,
-// сцена везёт его туда и говорит, где он, `cab_at`); из тумана навстречу выплывают фонари экипажей (`traffic`). Часы
-// идут: LIMIT с — от 20:35 до 20:45 (тень плашки, слой времени). Кэб у клуба (`cab_at` ≥ ARRIVE) — успел; часы
-// вышли раньше — опоздал. Щедрая: опоздать можно, только почти не понукая.
-//   Что делает: кэб гонит сквозь лондонский туман к Реформ-клубу; Фогг считает секунды.
-//   Чего хочет: войти в клуб до восьми сорока пяти — суббота открыта, день выигран.
-//   Каково ему: последние минуты; туман, фонари, стук копыт и сердца.
-//   Что чувствует игрок: гнать — в лад с лошадью, не сбиваясь, пока идут часы.
-//   → { late: опоздал ли }
+// «The cab» (Epilogue, Saville Row, the beat `cab`; the cab in the fog to the Reform Club, the camera with it): a rhythm
+// anywhere — the beat of the hooves (the ring closes on the horse's head `cab#horse`). On the beat — the horse quickens
+// (`cab_pace` towards 1: a walk → a gallop), off the beat — it falters, a beat missed — it slackens little by little.
+// The game drives the cab on by `cab_pace` (`cab_to` — where it goes, the scene takes it there and says where it is,
+// `cab_at`); out of the fog the lamps of carriages loom towards it (`traffic`). The clock goes: LIMIT s — from 20:35 to
+// 20:45 (the plate's shade, the time layer). The cab at the club (`cab_at` ≥ ARRIVE) — in time; the time up before —
+// late. A generous one: one can be late only by hardly urging it on at all.
+//   What it does: the cab races through the London fog to the Reform Club; Fogg counts the seconds.
+//   What he wants: to enter the club before a quarter to nine — Saturday found, the day gained.
+//   How it is for him: the last minutes; fog, lamps, the beat of hooves and of his heart.
+//   What the player feels: driving on — in time with the horse, without faltering, while the clock goes.
+//   → { late: whether he is late }
 import { until, keys } from '../hands.js';
 
-const BPM = 100; // доля копыт
-const START = 0.3, HIT = 0.12, MISS = 0.1, LAPSE = 0.04; // cab_pace: в начале; за долю в такт; мимо; пропущенная доля
-const BASE = 0.012, GAIN = 0.04; // cab_to в секунду: шагом; прибавка на полном ходу
-const LIMIT = 50; // с: до 20:45
-const ARRIVE = 0.98; // cab_at: у клуба
+const BPM = 100; // the beat of the hooves
+const START = 0.3, HIT = 0.12, MISS = 0.1, LAPSE = 0.04; // cab_pace: at the start; for a beat in time; off; a beat missed
+const BASE = 0.012, GAIN = 0.04; // cab_to a second: at a walk; the rise at full speed
+const LIMIT = 50; // s: to 20:45
+const ARRIVE = 0.98; // cab_at: at the club
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'keb',
-  title: 'Кэб', // как её зовёт ☰ автора
+  title: 'The cab', // (as the author's ☰ lists it)
   about: 36,
   skipped: { late: false },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Двадцать часов тридцать пять минут. До Пэлл-Мэлл — туман и десять минут' });
+    const mg = g.minigame({ phrase: tr('Twenty-five minutes to nine. Fog all the way to Pall Mall — and ten minutes') });
     const send = keys(g);
     const horse = mg.mark({ at: 'cab#horse', kind: 'ring' });
     const hooves = mg.rhythm({ on: null, show: [horse], bpm: BPM });
@@ -46,7 +47,7 @@ export default {
       send('cab_pace', pace);
       const at = clamp(+g.get('cab_at') || 0), u = clamp(now / LIMIT);
       time.set({ u, level: 1 });
-      // (минуты на плашке — когда меняются)
+      // (the minutes on the plate — when they change)
       const minute = 35 + Math.min(10, Math.floor(u * 10));
       if (minute !== last) { last = minute; if (minute > 35) mg.plate.set({ phrase: MINUTES[minute - 36] }); }
       mg.plate.set({ fill: at, shade: u, glow: pace >= 0.6 ? 'good' : 'idle' });
@@ -61,8 +62,8 @@ export default {
 };
 
 // the plate's phrase at each minute from 20:36 to 20:45
-const MINUTES = ['Двадцать часов тридцать шесть минут. Туман, фонари экипажей', 'Двадцать часов тридцать семь минут. Туман, фонари экипажей',
-  'Двадцать часов тридцать восемь минут. Туман, фонари экипажей', 'Двадцать часов тридцать девять минут. Туман, фонари экипажей',
-  'Двадцать часов сорок минут. Туман, фонари экипажей', 'Двадцать часов сорок одна минута. Туман, фонари экипажей',
-  'Двадцать часов сорок две минуты. Туман, фонари экипажей', 'Двадцать часов сорок три минуты. Туман, фонари экипажей',
-  'Двадцать часов сорок четыре минуты. Туман, фонари экипажей', 'Двадцать часов сорок пять минут'];
+const MINUTES = [tr('Twenty-four minutes to nine. Fog, the lamps of carriages'), tr('Twenty-three minutes to nine. Fog, the lamps of carriages'),
+  tr('Twenty-two minutes to nine. Fog, the lamps of carriages'), tr('Twenty-one minutes to nine. Fog, the lamps of carriages'),
+  tr('Twenty minutes to nine. Fog, the lamps of carriages'), tr('Nineteen minutes to nine. Fog, the lamps of carriages'),
+  tr('Eighteen minutes to nine. Fog, the lamps of carriages'), tr('Seventeen minutes to nine. Fog, the lamps of carriages'),
+  tr('Sixteen minutes to nine. Fog, the lamps of carriages'), tr('A quarter to nine')];
