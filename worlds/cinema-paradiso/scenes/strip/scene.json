@@ -1,0 +1,156 @@
+{
+  "engine": 3,
+  "title": "The Strip",
+  "caption": "",
+  "camera": {
+    "mode": "panorama",
+    "span": [0, 30]
+  },
+  "horizon": 0.5,
+  "light": {
+    "grain": 0.14,
+    "vignette": 0.45
+  },
+  "state": {
+    "shown": 0,
+    "camera_x": 0
+  },
+  "states": {
+    "shown": {
+      "type": "number",
+      "means": "the chapter the player is at: the view goes to its point c<i> (camera_x)"
+    }
+  },
+  "objects": [
+    {
+      "id": "dark",
+      "sky": true,
+      "name": "Dark"
+    },
+    {
+      "id": "lamp",
+      "sky": true,
+      "name": "Projector lamp"
+    },
+    {
+      "id": "c0",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 0,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c1",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 5,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 10,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 15,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c4",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 20,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c5",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 25,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c6",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 30,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "author",
+      "name": "The author’s map",
+      "unseen": true,
+      "across": -3.2,
+      "distance": 10,
+      "elevation": 3.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    }
+  ]
+}

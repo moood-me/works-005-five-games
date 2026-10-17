@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"The Pier","translation":"Пристань","where":"scenes/pier/scene.json title"},
+  {"text":"In summer they showed films on the pier","translation":"Летом кино крутили на пристани","where":"scenes/pier/scene.json caption"},
+  {"text":"the letter in his hands","translation":"письмо в руках","where":"scenes/pier/showcase.js"}
+]}

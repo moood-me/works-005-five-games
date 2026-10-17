@@ -1,0 +1,519 @@
+{
+  "engine": 3,
+  "title": "The Screening Room",
+  "caption": "Rome. A small screening room",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -3.4,
+      3.4,
+      -2.6,
+      10.5
+    ]
+  },
+  "light": {
+    "ambient": 0.5,
+    "ambientColor": "#7a7090",
+    "tint": "#20182a",
+    "tintStrength": 0.05,
+    "haze": 0.06,
+    "hazeColor": "#1e1a20",
+    "hazeGlow": 0.8,
+    "bounce": 0.5,
+    "brightness": 1.05,
+    "saturation": 0.9,
+    "vignette": 0.45,
+    "grain": 0.16
+  },
+  "lights": [
+    {
+      "id": "screen_light",
+      "across": 0,
+      "distance": 10.4,
+      "elevation": 2.35,
+      "color": "#f4ecdc",
+      "strength": 1.5,
+      "reach": 13,
+      "on": "beam_on",
+      "flicker": 0.15
+    },
+    {
+      "id": "sconce_l1",
+      "across": -3.3,
+      "distance": 2.5,
+      "elevation": 2.4,
+      "color": "#ffcfa2",
+      "strength": 0.9,
+      "reach": 4,
+      "on": "lights"
+    },
+    {
+      "id": "sconce_l2",
+      "across": -3.3,
+      "distance": 6.5,
+      "elevation": 2.4,
+      "color": "#ffcfa2",
+      "strength": 0.9,
+      "reach": 4,
+      "on": "lights"
+    },
+    {
+      "id": "sconce_r1",
+      "across": 3.3,
+      "distance": 2.5,
+      "elevation": 2.4,
+      "color": "#ffcfa2",
+      "strength": 0.9,
+      "reach": 4,
+      "on": "lights"
+    },
+    {
+      "id": "sconce_r2",
+      "across": 3.3,
+      "distance": 6.5,
+      "elevation": 2.4,
+      "color": "#ffcfa2",
+      "strength": 0.9,
+      "reach": 4,
+      "on": "lights"
+    },
+    {
+      "id": "vents_light",
+      "of": "projector#vents",
+      "color": "#ffb870",
+      "strength": 2.2,
+      "reach": 3.6
+    }
+  ],
+  "objects": [
+    {
+      "id": "floor",
+      "name": "Floor",
+      "plane": true,
+      "across": 0,
+      "distance": 5.5,
+      "elevation": 0,
+      "width": 7.2,
+      "depth": 11,
+      "walk": true
+    },
+    {
+      "id": "booth_floor",
+      "name": "Booth floor",
+      "plane": true,
+      "across": 0,
+      "distance": -1.4,
+      "elevation": 0.3,
+      "width": 3.2,
+      "depth": 2.8,
+      "color": "#1e1916"
+    },
+    {
+      "id": "wall_l",
+      "name": "Wall",
+      "across": -3.6,
+      "distance": 0,
+      "facing": 90,
+      "height": 3.6,
+      "box": [
+        0,
+        -3.7,
+        11.05,
+        0.05
+      ]
+    },
+    {
+      "id": "wall_r",
+      "name": "Wall",
+      "across": 3.6,
+      "distance": 11,
+      "facing": 270,
+      "height": 3.6,
+      "box": [
+        0,
+        -3.7,
+        11.05,
+        0.05
+      ]
+    },
+    {
+      "id": "wall_f",
+      "name": "Screen wall",
+      "across": 0,
+      "distance": 11,
+      "facing": 180,
+      "height": 3.6,
+      "box": [
+        -3.7,
+        -3.97,
+        3.88,
+        0.06
+      ]
+    },
+    {
+      "id": "wall_b",
+      "name": "Back wall",
+      "across": 0,
+      "distance": 0,
+      "facing": 0,
+      "height": 3.6,
+      "box": [
+        -3.65,
+        -3.7,
+        3.65,
+        0.05
+      ]
+    },
+    {
+      "id": "ceiling",
+      "name": "Ceiling",
+      "across": 0,
+      "distance": 11,
+      "facing": 180,
+      "height": 11,
+      "box": [
+        -3.7,
+        -11.1,
+        3.7,
+        0.05
+      ],
+      "elevation": 3.6,
+      "tilt": -90
+    },
+    {
+      "id": "booth",
+      "name": "Booth",
+      "across": 0,
+      "distance": -2.8,
+      "facing": 0,
+      "height": 3.2,
+      "box": [
+        -1.65,
+        -3.25,
+        1.65,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": -2.8,
+          "facing": 0
+        },
+        {
+          "across": -1.6,
+          "distance": -1.4,
+          "facing": 90
+        },
+        {
+          "across": 1.6,
+          "distance": -1.4,
+          "facing": 270
+        }
+      ]
+    },
+    {
+      "id": "port",
+      "name": "Port",
+      "across": 0,
+      "distance": -0.02,
+      "facing": 180,
+      "height": 0.9,
+      "box": [
+        -0.65,
+        -0.48,
+        0.65,
+        0.48
+      ],
+      "elevation": 2.3
+    },
+    {
+      "id": "projector",
+      "name": "Projector",
+      "across": -0.85,
+      "distance": -0.6,
+      "facing": 90,
+      "height": 2.2,
+      "box": [
+        -0.5,
+        -2.6,
+        0.6,
+        0.05
+      ],
+      "elevation": 0.3
+    },
+    {
+      "id": "seats",
+      "name": "Seats",
+      "across": 0,
+      "distance": 7.6,
+      "facing": 180,
+      "height": 1,
+      "box": [
+        -2.8,
+        -1.05,
+        2.8,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": 7.6
+        },
+        {
+          "across": 0,
+          "distance": 6.7
+        },
+        {
+          "across": 0,
+          "distance": 5.8
+        },
+        {
+          "across": 0,
+          "distance": 4.9
+        },
+        {
+          "across": 0,
+          "distance": 4
+        },
+        {
+          "across": 0,
+          "distance": 3.1
+        }
+      ]
+    },
+    {
+      "id": "sconces",
+      "name": "Sconces",
+      "across": -3.55,
+      "distance": 2.5,
+      "facing": 90,
+      "height": 0.45,
+      "box": [
+        -0.14,
+        -0.46,
+        0.14,
+        0.02
+      ],
+      "elevation": 2.1,
+      "copies": [
+        {
+          "across": -3.55,
+          "distance": 2.5,
+          "elevation": 2.1,
+          "facing": 90
+        },
+        {
+          "across": -3.55,
+          "distance": 6.5,
+          "elevation": 2.1,
+          "facing": 90
+        },
+        {
+          "across": 3.55,
+          "distance": 2.5,
+          "elevation": 2.1,
+          "facing": 270
+        },
+        {
+          "across": 3.55,
+          "distance": 6.5,
+          "elevation": 2.1,
+          "facing": 270
+        }
+      ]
+    },
+    {
+      "id": "screen_frame",
+      "name": "Screen",
+      "across": 0,
+      "distance": 10.96,
+      "facing": 180,
+      "height": 3.2,
+      "box": [
+        -2.75,
+        -3.05,
+        2.75,
+        0.15
+      ],
+      "elevation": 0.9
+    },
+    {
+      "id": "screen",
+      "name": "Screen",
+      "across": 0,
+      "distance": 10.93,
+      "facing": 180,
+      "height": 2.9,
+      "box": [
+        -2.65,
+        -2.95,
+        2.65,
+        0.05
+      ],
+      "elevation": 0.9,
+      "glows": true
+    },
+    {
+      "id": "beam",
+      "name": "Beam",
+      "across": 0,
+      "distance": 0.02,
+      "elevation": 2.3,
+      "facing": 90,
+      "height": 3,
+      "box": [
+        -0.2,
+        -1.7,
+        11.1,
+        1.6
+      ],
+      "glows": true,
+      "uniforms": {
+        "on": 0
+      }
+    },
+    {
+      "id": "motes",
+      "name": "Motes",
+      "particles": {
+        "kind": "dust",
+        "at": [
+          0,
+          5.5,
+          2.3
+        ],
+        "source": [
+          6,
+          10,
+          3
+        ],
+        "rate": 30,
+        "life": [
+          8,
+          14
+        ]
+      }
+    },
+    {
+      "id": "toto",
+      "name": "Salvatore",
+      "person": {
+        "cast": "cast",
+        "who": "salvatore"
+      },
+      "across": 0,
+      "distance": 5.22,
+      "place": {
+        "across": "toto_a",
+        "distance": "toto_d"
+      },
+      "shadow": true
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "lights": 1,
+    "beam_on": 0,
+    "screen_film": "none",
+    "reel": 0,
+    "note_in_hand": 0,
+    "jumps": 0,
+    "toto_here": true,
+    "toto_a": 0,
+    "toto_d": 5.22,
+    "toto_turn": 0,
+    "toto_do": {
+      "motion": "seated",
+      "loop": true
+    },
+    "toto_look": "screen#screen",
+    "toto_mood": "neutral",
+    "toto_with": null,
+    "camera_target": null,
+    "camera_x": 0,
+    "camera_z": -0.9,
+    "camera_yaw": 0,
+    "camera_h": 0.6,
+    "camera_pitch": -4,
+    "camera_roll": 0,
+    "camera_look": 0
+  },
+  "states": {
+    "beat": {
+      "type": "string",
+      "means": "the beat the scene plays (from its beginning): rome, kisses, kisses_end; the game sets it (the module beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose opening shot to make ready (the game sets it; empty — the next in the table, if it is a cut)"
+    },
+    "lights": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sconces in the room: 1 lit … 0.1 almost out"
+    },
+    "beam_on": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the beam from the port and the screen's light"
+    },
+    "screen_film": {
+      "values": [
+        "none",
+        "kisses",
+        "white"
+      ],
+      "means": "what is on the screen: none — dark, kisses — the reel of kisses (the frame — reel), white — the white tail"
+    },
+    "reel": {
+      "range": [
+        0,
+        10
+      ],
+      "means": "internal: which frame of the reel is on the screen (0…2 — the three cut in chapter I, 3…10 — kiss1…kiss8; the beat sets it)"
+    },
+    "note_in_hand": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "party key: 1 — a sheet in his hand (Elena's note)"
+    },
+    "jumps": {
+      "range": [
+        0,
+        3
+      ],
+      "means": "party key: how many of the three cut frames are spliced crooked — they jump at the splice"
+    }
+  },
+  "modules": [
+    "cast",
+    "cinema",
+    "beats"
+  ],
+  "music": {"scale": "E_MAJOR_D_FLAT_MINOR", 
+    "prompts": [
+      {
+        "text": "a small dark private screening room, a projector clattering softly behind the wall, no melody",
+        "weight": 1.2
+      },
+      {
+        "text": "the hush of an empty theatre, air conditioning hum, very quiet, no melody",
+        "weight": 0.6
+      },
+      {
+        "text": "nostalgic strings far away, slow, Italian, 1980s film score heard through a wall",
+        "weight": 0
+      }
+    ]
+  }
+}

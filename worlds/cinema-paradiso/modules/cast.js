@@ -1,5 +1,5 @@
-// The people of «Новый кинотеатр „Парадизо“» as people in a scene (the engine's people: an element with "person"):
-// who they are — figures of shapes in the world's style `paradizo` (the engine's `graphic`, faces `simple`: eyes,
+// The people of Cinema Paradiso as people in a scene (the engine's people: an element with "person"):
+// who they are — figures of shapes in the world's style `paradiso` (the engine's `graphic`, faces `simple`: eyes,
 // brows, nose, mouth, an expression by `<id>_mood`) — what they carry (the parts), and how they move: the motions in
 // cast.data.json (Kimodo's, put there with put_motion). cast.md says who is who, what each part is and every motion.
 // A part's lengths are a man's metres times F.fit.h (the person's height as a share of a man's 1.76 m); the points a
@@ -31,7 +31,7 @@ function sheetInHand(F, w, h, colour, name) {
 
 const parts = {
   // the priest's small brass hand bell in the right hand, its clapper swinging a little late as the hand moves
-  bell: { name: 'колокольчик', draw: F => {
+  bell: { name: 'bell', draw: F => {
     const { add, mul } = V(), h = F.fit.h, hand = F.P('RightHand'), axes = [[1, 0, 0], UP, [0, 0, 1]];
     const top = add(hand, mul(UP, -0.03 * h)), body = add(hand, mul(UP, -0.1 * h));
     F.bar(add(hand, mul(UP, 0.02 * h)), top, 0.012 * h, 0.012 * h, [[0, C('#3a2a1c')]], 6, [1, 0, 0]);
@@ -41,14 +41,14 @@ const parts = {
     F.point('bell', body);
   } },
   // a blind man's cane in the right hand: from the crook in the hand down to the floor
-  cane: { name: 'трость', draw: F => {
+  cane: { name: 'cane', draw: F => {
     const { add, mul } = V(), h = F.fit.h, hand = F.P('RightHand'), fwd = F.fwd('Hips');
     const tip = [hand[0] + fwd[0] * 0.06 * h, Math.max(0.01, hand[1] - 0.92 * h), hand[2] + fwd[2] * 0.06 * h];
     F.bar(hand, tip, 0.012 * h, 0.01 * h, [[0, C('#2e2119')]], 6, F.side('Hips'));
     F.bar(hand, add(hand, mul(fwd, 0.08 * h)), 0.013 * h, 0.013 * h, [[0, C('#2e2119')]], 6, UP);
   } },
   // round dark glasses (the blind Alfredo's look)
-  glasses: { name: 'тёмные очки', draw: F => {
+  glasses: { name: 'dark glasses', draw: F => {
     const { add, mul } = V(), { at, axes, r, out } = F.head, [hs, hu, hf] = axes, R = r * out;
     for (const s of [-1, 1]) {
       F.ball(add(at, add(add(mul(hs, s * R * 0.36), mul(hu, R * 0.12)), mul(hf, R * 0.98))), axes, [R * 0.27, R * 0.24, R * 0.06], C('#0d0d10'), 12);
@@ -57,9 +57,9 @@ const parts = {
       add(at, add(mul(hs, R * 0.12), add(mul(hu, R * 0.16), mul(hf, R * 1.02)))), R * 0.03, R * 0.03, [[0, METAL]], 4, hu);
   } },
   // the pocket of Alfredo's waistcoat where he keeps coins and the tin: a point (`alfredo#pocket`), nothing drawn
-  pocket: { name: 'карман жилета', points: { pocket: { joint: 'Chest', off: [-0.09, -0.14, 0.13] } }, draw: () => {} },
+  pocket: { name: 'waistcoat pocket', points: { pocket: { joint: 'Chest', off: [-0.09, -0.14, 0.13] } }, draw: () => {} },
   // a few coins on the right palm, held out
-  coins: { name: 'монеты', draw: F => {
+  coins: { name: 'coins', draw: F => {
     const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), [s, u, f] = axesOf(F, 'RightHand');
     for (const [a, b] of [[0, 0.03], [0.018, 0.045], [-0.016, 0.05]]) {
       F.ball(add(h, add(mul(s, a * m), add(mul(f, b * m), mul(UP, 0.015 * m)))), [s, UP, f], [0.011 * m, 0.003 * m, 0.011 * m], C('#c9b27a'), 8);
@@ -67,21 +67,21 @@ const parts = {
     F.point('coins', add(h, mul(f, 0.04 * m)));
   } },
   // the flat round film tin held in both hands before the chest
-  tin: { name: 'жестянка', draw: F => {
+  tin: { name: 'tin', draw: F => {
     const { c, axes } = held(F, 0.02), m = F.fit.h;
     F.ball(c, [axes[0], axes[2], axes[1]], [0.13 * m, 0.025 * m, 0.13 * m], TIN, 16);
     F.point('tin', c);
   } },
   // the edge of the tin showing out of the waistcoat's pocket
-  tin_pocket: { name: 'жестянка в кармане', draw: F => {
+  tin_pocket: { name: 'tin in the pocket', draw: F => {
     const { add, mul } = V(), m = F.fit.h, c = F.P('Chest'), [s, u, f] = [F.side('Chest'), F.up('Chest'), F.fwd('Chest')];
     const at = add(c, add(mul(s, -0.09 * m), add(mul(u, -0.1 * m), mul(f, 0.14 * m))));
     F.ball(at, [s, f, u], [0.06 * m, 0.012 * m, 0.04 * m], TIN, 12);
   } },
   // a single frame of film between the fingers of the right hand
-  frame_hand: { name: 'кадр плёнки', draw: F => sheetInHand(F, 0.022, 0.017, FILM, 'frame') },
+  frame_hand: { name: 'frame of film', draw: F => sheetInHand(F, 0.022, 0.017, FILM, 'frame') },
   // a primer, open, in both hands
-  primer: { name: 'букварь', draw: F => {
+  primer: { name: 'primer', draw: F => {
     const { add, mul } = V(), m = F.fit.h, { c, axes } = held(F, 0.04), [x, y, n] = axes;
     F.ball(add(c, mul(n, -0.006 * m)), axes, [0.12 * m, 0.09 * m, 0.01 * m], C('#5b3b2c'), 8, 10);
     for (const s of [-1, 1]) F.ball(add(add(c, mul(x, s * 0.058 * m)), mul(n, 0.004 * m)), axes, [0.055 * m, 0.08 * m, 0.006 * m], PAPER, 8, 10);
@@ -89,7 +89,7 @@ const parts = {
   } },
   // the slate in both hands at the face's height, its face to the eyes' front (its letters are the insert's: here it
   // shows the chalk as a pale band)
-  slate_held: { name: 'грифельная доска', draw: F => {
+  slate_held: { name: 'slate', draw: F => {
     const { add, mul, mix, unit, sub, cross } = V(), m = F.fit.h, c = add(mix(F.P('LeftHand'), F.P('RightHand'), 0.5), [0, 0.06 * m, 0]);
     const n = F.fwd('Chest'), x = unit(cross(UP, n)), y = cross(n, x), axes = [x, y, n];
     F.ball(c, axes, [0.2 * m, 0.14 * m, 0.012 * m], C('#6b4c32'), 4, 8);
@@ -98,15 +98,15 @@ const parts = {
     F.point('slate', c);
   } },
   // a sheet of official paper in the right hand
-  paper_sheet: { name: 'бумага', draw: F => sheetInHand(F, 0.09, 0.12, PAPER, 'paper') },
+  paper_sheet: { name: 'paper', draw: F => sheetInHand(F, 0.09, 0.12, PAPER, 'paper') },
   // a letter held open in both hands before the eyes
-  letter_sheet: { name: 'письмо', draw: F => {
+  letter_sheet: { name: 'letter', draw: F => {
     const { c, axes } = held(F, 0.05), m = F.fit.h;
     F.ball(c, axes, [0.1 * m, 0.13 * m, 0.003 * m], C('#ece6d6'), 4, 8);
     F.point('letter', c);
   } },
   // the small 8 mm camera at the right eye in both hands
-  cam8: { name: 'камера', draw: F => {
+  cam8: { name: 'camera', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hd = F.head, [hs, hu, hf] = hd.axes, R = hd.r * hd.out;
     const c = add(hd.at, add(mul(hf, R * 1.55), add(mul(hs, R * 0.25), mul(hu, R * 0.05))));
     F.ball(c, [hs, hu, hf], [0.035 * m, 0.06 * m, 0.08 * m], C('#2a2a2c'), 4, 6);
@@ -114,7 +114,7 @@ const parts = {
     F.point('camera', c);
   } },
   // a plain wooden chair carried before him in both hands, its seat at the hands
-  chair_carried: { name: 'стул в руках', draw: F => {
+  chair_carried: { name: 'chair in the hands', draw: F => {
     const { add, mul, mix, unit, cross } = V(), m = F.fit.h, c = mix(F.P('LeftHand'), F.P('RightHand'), 0.5);
     const f = F.fwd('Hips'), x = unit(cross(UP, f)), axes = [x, UP, f];
     const seat = add(c, mul(f, 0.12 * m));
@@ -128,13 +128,13 @@ const parts = {
     for (const a of [-1, 1]) F.bar(add(back, mul(x, a * 0.18 * m)), add(add(back, mul(x, a * 0.18 * m)), mul(UP, 0.4 * m)), 0.013 * m, 0.013 * m, [[0, WOOD]], 5, f);
   } },
   // a telephone's receiver at the ear in the right hand
-  phone: { name: 'трубка', draw: F => {
+  phone: { name: 'receiver', draw: F => {
     const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), [s, u, f] = axesOf(F, 'RightHand');
     F.bar(add(h, mul(u, 0.09 * m)), add(h, mul(u, -0.08 * m)), 0.018 * m, 0.018 * m, [[0, C('#151517')]], 6, f);
     F.ball(add(h, mul(u, 0.1 * m)), [s, u, f], [0.03 * m, 0.025 * m, 0.03 * m], C('#151517'), 8);
   } },
   // an oil lamp in the right hand: its glass glows (the scene's light is at "<id>#lamp")
-  lamp_hand: { name: 'лампа', draw: F => {
+  lamp_hand: { name: 'lamp', draw: F => {
     const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), axes = [F.side('Hips'), UP, F.fwd('Hips')];
     const c = add(h, mul(UP, -0.1 * m));
     F.ball(add(c, mul(UP, -0.06 * m)), axes, [0.06 * m, 0.035 * m, 0.06 * m], BRASS, 10);
@@ -143,21 +143,21 @@ const parts = {
     F.point('lamp', add(c, mul(UP, 0.03 * m)));
   } },
   // a pencil in the right hand's fingers
-  pencil: { name: 'карандаш', draw: F => {
+  pencil: { name: 'pencil', draw: F => {
     const { add, mul } = V(), m = F.fit.h, h = F.P('RightHand'), [s, u, f] = axesOf(F, 'RightHand');
     F.bar(add(h, mul(f, 0.02 * m)), add(h, add(mul(f, 0.1 * m), mul(u, 0.04 * m))), 0.004 * m, 0.002 * m, [[0, C('#c9a640')]], 5, s);
   } },
   // a small folded note in the right hand
-  note: { name: 'записка', draw: F => sheetInHand(F, 0.04, 0.05, YELLOWED, 'note') },
+  note: { name: 'note', draw: F => sheetInHand(F, 0.04, 0.05, YELLOWED, 'note') },
   // an old suitcase hanging from the right hand, its long side along the way the person faces
-  suitcase: { name: 'чемодан', draw: F => {
+  suitcase: { name: 'suitcase', draw: F => {
     const { add, mul } = V(), h = F.fit.h, hand = F.P('RightHand'), c = add(hand, mul(UP, -0.22 * h));
     F.ball(c, [F.side('Hips'), UP, F.fwd('Hips')], [0.075 * h, 0.2 * h, 0.3 * h], C('#6b4a30'), 12, 6);
     F.bar(add(c, mul(UP, 0.2 * h)), hand, 0.01 * h, 0.01 * h, [[0, C('#2a1d14')]], 5, F.fwd('Hips'));
   } },
 };
 
-const look = (who, more) => Object.assign({ kind: 'shapes', style: 'paradizo', who, face: 'simple' }, more);
+const look = (who, more) => Object.assign({ kind: 'shapes', style: 'paradiso', who, face: 'simple' }, more);
 return {
   ...data,
   characters: {
@@ -170,7 +170,7 @@ return {
     // Salvatore, 47: a dark coat, greying hair, a pale scarf
     salvatore: look('man', { garment: 'coat', scarf: true, hair: 'short',
       colors: { garment: '#2d2c33', bottom: '#26252b', top: '#3a3a42', hair: '#8f8a84', skin: '#c49a7a', accent: '#ddd6c8', shoes: '#1e1b1a' } }),
-    // Alfredo, about fifty: stocky, a cap, a work shirt, no jacket — a hung garment drew as a board (its pocket: alfredo#pocket — «карман жилета»), a collarless shirt
+    // Alfredo, about fifty: stocky, a cap, a work shirt, no jacket — a hung garment drew as a board (its pocket: alfredo#pocket — «waistcoat pocket»), a collarless shirt
     alfredo: look('grandpa', { garment: 'none', hat: 'cap', scarf: false, hair: 'short', parts: ['pocket', 'moustache'],
       body: { thick: 1.2, height: 0.98 },
       colors: { top: '#8a7458', bottom: '#3d362e', hat: '#3a3530', hair: '#4a3f36', skin: '#c29775', shoes: '#2a221c' } }),
@@ -218,10 +218,10 @@ return {
   shapes: {
     // the world's style: the engine's `graphic` with a bigger head and a face that reads (eyes, brows, nose, mouth:
     // `<id>_mood`), fuller limbs, toned paint
-    styles: { paradizo: { from: 'graphic', face: 'simple', head: 1.34, neck: 0.6, limb: 1.0, legs: 1.0, feet: 'bean', arms: 'mitten', paint: 'toned', line: 1.4 } },
+    styles: { paradiso: { from: 'graphic', face: 'simple', head: 1.34, neck: 0.6, limb: 1.0, legs: 1.0, feet: 'bean', arms: 'mitten', paint: 'toned', line: 1.4 } },
     hats: {
       // a headscarf over the hair, tied at the nape
-      kerchief: { name: 'платок', draw: F => {
+      kerchief: { name: 'kerchief', draw: F => {
         const { add, mul } = V(), { at, axes, egg, r, out, sides, square } = F.head, [, hu, hf] = axes;
         F.cap(at, axes, egg.map(e => e * r * out * 1.08), [0, 0.7, -0.72], -0.05, F.colors.hat, sides, square);
         F.ball(add(at, add(mul(hu, -r * 0.45), mul(hf, -r * 1.02))), axes, [r * 0.22, r * 0.16, r * 0.14], F.colors.hat, 10);
@@ -230,12 +230,12 @@ return {
     parts: {
       ...parts,
       // a thick moustache under the nose (the hair's colour)
-      moustache: { name: 'усы', draw: F => {
+      moustache: { name: 'moustache', draw: F => {
         const { add, mul } = V(), h = F.head, [hs, hu, hf] = h.axes, r = h.r * h.out;
         F.ball(add(h.at, add(mul(hu, -r * 0.42), mul(hf, r * 0.96))), h.axes, [r * 0.34, r * 0.08, r * 0.08], F.colors.hair, 10);
       } },
       // a beard over the jaw and the chin (the hair's colour)
-      beard: { name: 'борода', draw: F => {
+      beard: { name: 'beard', draw: F => {
         const { add, mul } = V(), h = F.head, [, hu, hf] = h.axes, r = h.r * h.out;
         F.cap(h.at, h.axes, h.egg.map(e => e * r * 1.05), [0, -0.55, 0.83], 0.25, F.colors.hair, h.sides, h.square);
         F.ball(add(h.at, add(mul(hu, -r * 0.92), mul(hf, r * 0.5))), h.axes, [r * 0.6, r * 0.46, r * 0.4], F.colors.hair, h.sides);

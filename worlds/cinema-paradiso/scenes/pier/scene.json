@@ -1,0 +1,1747 @@
+{
+  "engine": 3,
+  "title": "The Pier",
+  "caption": "In summer they showed films on the pier",
+  "horizon": 0.55,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -14,
+      14,
+      -10,
+      66
+    ]
+  },
+  "light": {
+    "ambient": 0.4,
+    "ambientColor": "#7083bc",
+    "tint": "#22305e",
+    "tintStrength": 0.06,
+    "vignette": 0.36,
+    "grain": 0.14,
+    "haze": 0,
+    "hazeColor": "#2e4a7c",
+    "hazeGlow": 0.7,
+    "shafts": 0,
+    "bounce": 0.5,
+    "brightness": 1.1,
+    "saturation": 0.95,
+    "wind": [
+      0.6,
+      0.4,
+      0.35
+    ],
+    "looks": {
+      "dusk_k": {
+        "ambient": 0.66,
+        "ambientColor": "#b4a0ac",
+        "tint": "#c88a66",
+        "tintStrength": 0.1,
+        "hazeColor": "#b89a96",
+        "lights": {
+          "moon": 0.3
+        }
+      },
+      "now_k": {
+        "ambientColor": "#80829f",
+        "saturation": 0.62,
+        "tint": "#7b7ca4",
+        "tintStrength": 0.08,
+        "hazeColor": "#282a3c"
+      },
+      "rain": {
+        "ambient": 0.3,
+        "haze": 0.2,
+        "hazeColor": "#26304a",
+        "hazeGlow": 1.1,
+        "wind": [
+          1.6,
+          0.6,
+          1.4
+        ],
+        "brightness": 1,
+        "lights": {
+          "moon": 0.2
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#disc",
+      "color": "#c4d0ff",
+      "strength": 0.6
+    },
+    {
+      "id": "lantern_light",
+      "of": "lantern#lamp",
+      "color": "#dbe6ff",
+      "strength": 1.2,
+      "reach": 10
+    },
+    {
+      "id": "street_light",
+      "of": "street_lamp#lamp",
+      "color": "#d9def0",
+      "strength": 0.9,
+      "reach": 9
+    },
+    {
+      "id": "screen_light",
+      "across": 0.5,
+      "distance": 33.4,
+      "elevation": 3.4,
+      "color": "#ffd8a0",
+      "strength": 1.6,
+      "reach": 16,
+      "on": "beam_on",
+      "flicker": 0.15
+    },
+    {
+      "id": "proj_lamp",
+      "across": -2.9,
+      "distance": 9.7,
+      "elevation": 1.5,
+      "color": "#ffcf8a",
+      "strength": 0.9,
+      "reach": 4.5,
+      "on": "beam_on",
+      "flicker": 0.1
+    },
+    {
+      "id": "car_pool",
+      "of": "car_beam#tip",
+      "color": "#ffe9c4",
+      "strength": 1.4,
+      "reach": 9,
+      "on": "headlights"
+    },
+    {
+      "id": "car_lamps",
+      "of": "car_front#hl_l",
+      "color": "#ffefcc",
+      "strength": 1.6,
+      "reach": 7,
+      "on": "headlights"
+    },
+    {
+      "id": "bench_light",
+      "of": "wall_lamp#bulb",
+      "color": "#e9e4d4",
+      "strength": 1.25,
+      "reach": 9
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "era": "past",
+    "hour": 0.9,
+    "dusk_k": 0,
+    "now_k": 0,
+    "rain": 0,
+    "screen_up": 1,
+    "screen_film": "romance",
+    "beam_on": 1,
+    "cover": 0,
+    "crowd": 1,
+    "boats_out": 0,
+    "headlights": 0,
+    "car": "none",
+    "car_arrive": 1,
+    "car_go": 0,
+    "toto_here": true,
+    "toto_a": -3.3,
+    "toto_d": 8.9,
+    "toto_turn": 5,
+    "toto_do": "stand",
+    "toto_look": "screen#screen",
+    "toto_reach": null,
+    "toto_gait": null,
+    "toto_wear": null,
+    "elena_here": true,
+    "elena_a": -1.9,
+    "elena_d": 10.4,
+    "elena_turn": 340,
+    "elena_do": {
+      "motion": "seated",
+      "loop": true
+    },
+    "elena_look": "screen#screen",
+    "elena_reach": null,
+    "elena_gait": null,
+    "elena_wear": null,
+    "daughter_here": false,
+    "alfredo_here": false,
+    "banker_here": false,
+    "c1_here": true,
+    "c1_a": -2.5,
+    "c1_d": 15,
+    "c1_turn": 0,
+    "c1_do": {
+      "motion": "seated",
+      "loop": true
+    },
+    "c1_look": null,
+    "c1_reach": null,
+    "c1_gait": null,
+    "c2_here": true,
+    "c2_a": -1.5,
+    "c2_d": 15,
+    "c2_turn": 0,
+    "c2_do": {
+      "motion": "seated",
+      "loop": true
+    },
+    "c2_look": null,
+    "c2_reach": null,
+    "c2_gait": null,
+    "c3_here": true,
+    "c3_a": 0.5,
+    "c3_d": 15,
+    "c3_turn": 0,
+    "c3_do": {
+      "motion": "seated",
+      "loop": true
+    },
+    "c3_look": null,
+    "c3_reach": null,
+    "c3_gait": null,
+    "c4_here": true,
+    "c4_a": 1.5,
+    "c4_d": 15,
+    "c4_turn": 0,
+    "c4_do": {
+      "motion": "seated",
+      "loop": true
+    },
+    "c4_look": null,
+    "c4_reach": null,
+    "c4_gait": null,
+    "camera_target": null,
+    "camera_x": 3.5,
+    "camera_z": -1,
+    "camera_yaw": -8,
+    "camera_h": 0.5,
+    "camera_pitch": 3,
+    "camera_roll": 0,
+    "camera_look": 0,
+    "letter_in_hand": 0,
+    "toto_mood": "neutral",
+    "elena_mood": "neutral",
+    "daughter_mood": "neutral",
+    "alfredo_mood": "neutral",
+    "banker_mood": "neutral",
+    "c1_mood": "neutral",
+    "c2_mood": "neutral",
+    "c3_mood": "neutral",
+    "c4_mood": "neutral",
+    "toto_with": null
+  },
+  "states": {
+    "beat": {
+      "type": "string",
+      "means": "the beat the scene plays (from its beginning): summer, covered, headlights, found, alone, back, rise_go, car, meet, ask, bye, parting; the game sets it (the module beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose opening shot to make ready ahead (the game sets it; the module beats); empty — the next in the table, if it is a cut"
+    },
+    "era": {
+      "values": [
+        "past",
+        "now"
+      ],
+      "means": "era: past — the warm night of 1958, now — the cool 1988"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "hour: 0.78 dusk, 0.9 night"
+    },
+    "dusk_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal, the light of dusk; the scene derives it from hour"
+    },
+    "now_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal, the light of 1988; the scene derives it from era"
+    },
+    "rain": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the downpour: 0 none … 1 a wall of rain"
+    },
+    "screen_up": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the summer screen on masts stands at the end of the chairs"
+    },
+    "screen_film": {
+      "values": [
+        "romance",
+        "none"
+      ],
+      "means": "what is on the summer screen: a film's frame (cinema.frame) or nothing"
+    },
+    "beam_on": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the projector's beam is on"
+    },
+    "cover": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the tarp drawn over the projector: 0 folded … 1 covered"
+    },
+    "crowd": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the painted audience on the chairs: 1 seated … 0 gone"
+    },
+    "boats_out": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the boats with spectators: 0 at the mole … 1 gone into the dark"
+    },
+    "car": {
+      "values": [
+        "none",
+        "old",
+        "new"
+      ],
+      "means": "the car: old — the black car of Elena's father (1958), new — grown Elena's car (1988)"
+    },
+    "car_arrive": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the car comes up: 0 far off … 1 standing (old — along the quay; new always stands)"
+    },
+    "car_go": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the car drives off: 0 standing … 1 gone (old — along the quay to the west, new — turns round on the mole's head and down the mole to the road)"
+    },
+    "headlights": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the headlamps are on"
+    },
+    "car_a": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: where the car is, across, m (the scene from car_arrive, car_go)"
+    },
+    "car_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: where the car is, in depth, m"
+    },
+    "car_f": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: where the car is facing, degrees"
+    },
+    "letter_in_hand": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "party key: 1 — her letter in Totò's hands in back (he holds it on his knees while Alfredo says “Leave”; in rise_go — into his pocket)"
+    }
+  },
+  "modules": [
+    "cast",
+    "cinema",
+    "sky",
+    "beats"
+  ],
+  "music": {"scale": "E_MAJOR_D_FLAT_MINOR", 
+    "prompts": [
+      {
+        "text": "night sea ambience, slow small waves lapping on a stone pier, distant cicadas, no melody",
+        "weight": 1.2
+      },
+      {
+        "text": "soft warm summer night air, crickets and cicadas far away, very quiet, sparse",
+        "weight": 0.8
+      },
+      {
+        "text": "heavy summer rain on stone and water, distant thunder, no melody",
+        "weight": 0
+      },
+      {
+        "text": "faint 1950s film soundtrack heard across the water, muffled strings, far away",
+        "weight": 0
+      },
+      {
+        "text": "low wind over the sea at night, a rope creaking on a boat, sparse",
+        "weight": 0
+      },
+      {
+        "text": "dusk harbour ambience, gulls far off, the sea breathing, calm",
+        "weight": 0
+      },
+      {
+        "text": "cold quiet night by the sea in the eighties, a car engine idling far away, no melody",
+        "weight": 0
+      },
+      {
+        "text": "gentle celesta notes, five slow notes, nostalgic, Sicilian, very sparse",
+        "weight": 0
+      },
+      {
+        "text": "warm low drone, analog tape hiss, still and tender",
+        "weight": 0
+      },
+      {
+        "text": "soft mandolin tremolo far away across water, nostalgic, very quiet",
+        "weight": 0
+      },
+      {
+        "text": "ambient pads, slow and melancholy, bright sadness, no percussion",
+        "weight": 0
+      },
+      {
+        "text": "projector clatter in the open air, film whirring, night insects",
+        "weight": 0
+      },
+      {
+        "text": "fishing boats knocking gently against a mooring, water slapping",
+        "weight": 0
+      },
+      {
+        "text": "empty night pier, only the sea and a far lighthouse bell",
+        "weight": 0
+      },
+      {
+        "text": "summer night Mediterranean village, distant voices fading, cicadas",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.35
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true
+    },
+    {
+      "id": "sea",
+      "name": "Sea",
+      "plane": true,
+      "across": 0,
+      "distance": 700,
+      "elevation": -0.6,
+      "width": 3000,
+      "depth": 1400,
+      "reflect": {
+        "strength": 0.55,
+        "rough": 0.45,
+        "ripple": 0.45,
+        "fade": 0
+      }
+    },
+    {
+      "id": "quay",
+      "name": "Quay",
+      "plane": true,
+      "across": 0,
+      "distance": -16,
+      "elevation": 0,
+      "width": 400,
+      "depth": 40,
+      "walk": true
+    },
+    {
+      "id": "mole",
+      "name": "Mole",
+      "plane": true,
+      "across": 0,
+      "distance": 27,
+      "elevation": 0,
+      "width": 7,
+      "depth": 46,
+      "walk": true
+    },
+    {
+      "id": "head",
+      "name": "Mole head",
+      "plane": true,
+      "across": 0,
+      "distance": 57,
+      "elevation": 0,
+      "width": 14,
+      "depth": 14,
+      "walk": true
+    },
+    {
+      "id": "jetty",
+      "name": "Warehouse jetty",
+      "plane": true,
+      "across": -7.75,
+      "distance": 7.5,
+      "elevation": 0,
+      "width": 8.5,
+      "depth": 13,
+      "walk": true
+    },
+    {
+      "id": "face_mr",
+      "name": "Mole wall",
+      "across": 3.5,
+      "distance": 4,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 90,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        46,
+        0.02
+      ]
+    },
+    {
+      "id": "face_ml",
+      "name": "Mole wall",
+      "across": -3.5,
+      "distance": 50,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 270,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        36,
+        0.02
+      ]
+    },
+    {
+      "id": "face_he",
+      "name": "Mole wall",
+      "across": 7,
+      "distance": 50,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 90,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        14,
+        0.02
+      ]
+    },
+    {
+      "id": "face_hw",
+      "name": "Mole wall",
+      "across": -7,
+      "distance": 64,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 270,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        14,
+        0.02
+      ]
+    },
+    {
+      "id": "face_hn",
+      "name": "Mole wall",
+      "across": 7,
+      "distance": 64,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 0,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        14,
+        0.02
+      ]
+    },
+    {
+      "id": "face_hs1",
+      "name": "Mole wall",
+      "across": 3.5,
+      "distance": 50,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 180,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        3.5,
+        0.02
+      ]
+    },
+    {
+      "id": "face_hs2",
+      "name": "Mole wall",
+      "across": -7,
+      "distance": 50,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 180,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        3.5,
+        0.02
+      ]
+    },
+    {
+      "id": "face_q",
+      "name": "Mole wall",
+      "across": 200,
+      "distance": 4,
+      "elevation": -1.2,
+      "onLand": false,
+      "facing": 0,
+      "height": 1.2,
+      "box": [
+        0,
+        -1.25,
+        188,
+        0.02
+      ]
+    },
+    {
+      "id": "warehouse",
+      "name": "Warehouse",
+      "across": -5.5,
+      "distance": 1,
+      "facing": 90,
+      "height": 5.6,
+      "box": [
+        -1.3,
+        -6.1,
+        14.2,
+        0.3
+      ],
+      "shadow": true
+    },
+    {
+      "id": "warehouse_end",
+      "name": "Warehouse",
+      "across": -8.75,
+      "distance": 1,
+      "facing": 180,
+      "height": 5.6,
+      "box": [
+        -4.4,
+        -6.1,
+        4.4,
+        0.1
+      ]
+    },
+    {
+      "id": "bench",
+      "name": "Bench",
+      "across": -4.78,
+      "distance": 7.6,
+      "facing": 90,
+      "height": 0.5,
+      "box": [
+        -1.4,
+        -0.55,
+        1.4,
+        0.05
+      ]
+    },
+    {
+      "id": "wall_lamp",
+      "name": "Lamp on the wall",
+      "across": -5.48,
+      "distance": 7.6,
+      "elevation": 2.75,
+      "facing": 90,
+      "glows": true,
+      "height": 0.3,
+      "box": [
+        -0.05,
+        -0.05,
+        0.72,
+        0.3
+      ]
+    },
+    {
+      "id": "crate",
+      "name": "Crate",
+      "across": -1.9,
+      "distance": 10.18,
+      "facing": 160,
+      "height": 0.45,
+      "box": [
+        -0.35,
+        -0.5,
+        0.35,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "projector",
+      "name": "Projector",
+      "across": -3,
+      "distance": 9.5,
+      "facing": 90,
+      "height": 2.2,
+      "box": [
+        -0.75,
+        -2.3,
+        0.75,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "beam",
+      "name": "Beam",
+      "across": -3,
+      "distance": 9.85,
+      "elevation": 1.35,
+      "facing": 98.25,
+      "glows": true,
+      "height": 4.5,
+      "box": [
+        -0.2,
+        -5.0,
+        26.2,
+        1.0
+      ],
+      "uniforms": {
+        "on": 1
+      }
+    },
+    {
+      "id": "screen",
+      "name": "Screen",
+      "across": 0.5,
+      "distance": 34,
+      "facing": 180,
+      "height": 6.1,
+      "box": [
+        -5.7,
+        -6.2,
+        5.7,
+        0.05
+      ],
+      "uniforms": {
+        "on": 1
+      }
+    },
+    {
+      "id": "chairs",
+      "name": "Chairs",
+      "across": 0,
+      "distance": 15,
+      "height": 0.9,
+      "box": [
+        -0.3,
+        -0.92,
+        0.3,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -2.5,
+          "distance": 14.9,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 14.9,
+          "flip": true
+        },
+        {
+          "across": -0.5,
+          "distance": 14.9,
+          "flip": false
+        },
+        {
+          "across": 0.5,
+          "distance": 14.9,
+          "flip": true
+        },
+        {
+          "across": 1.5,
+          "distance": 14.9,
+          "flip": false
+        },
+        {
+          "across": 2.5,
+          "distance": 14.9,
+          "flip": true
+        },
+        {
+          "across": -2.5,
+          "distance": 16,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 16,
+          "flip": true
+        },
+        {
+          "across": -0.5,
+          "distance": 16,
+          "flip": false
+        },
+        {
+          "across": 0.5,
+          "distance": 16,
+          "flip": true
+        },
+        {
+          "across": 1.5,
+          "distance": 16,
+          "flip": false
+        },
+        {
+          "across": 2.5,
+          "distance": 16,
+          "flip": true
+        },
+        {
+          "across": -2.5,
+          "distance": 17.099999999999998,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 17.099999999999998,
+          "flip": true
+        },
+        {
+          "across": -0.5,
+          "distance": 17.099999999999998,
+          "flip": false
+        },
+        {
+          "across": 0.5,
+          "distance": 17.099999999999998,
+          "flip": true
+        },
+        {
+          "across": 1.5,
+          "distance": 17.099999999999998,
+          "flip": false
+        },
+        {
+          "across": 2.5,
+          "distance": 17.099999999999998,
+          "flip": true
+        },
+        {
+          "across": -2.5,
+          "distance": 18.2,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 18.2,
+          "flip": true
+        },
+        {
+          "across": -0.5,
+          "distance": 18.2,
+          "flip": false
+        },
+        {
+          "across": 0.5,
+          "distance": 18.2,
+          "flip": true
+        },
+        {
+          "across": 1.5,
+          "distance": 18.2,
+          "flip": false
+        },
+        {
+          "across": 2.5,
+          "distance": 18.2,
+          "flip": true
+        },
+        {
+          "across": -2.5,
+          "distance": 19.299999999999997,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 19.299999999999997,
+          "flip": true
+        },
+        {
+          "across": -0.5,
+          "distance": 19.299999999999997,
+          "flip": false
+        },
+        {
+          "across": 0.5,
+          "distance": 19.299999999999997,
+          "flip": true
+        },
+        {
+          "across": 1.5,
+          "distance": 19.299999999999997,
+          "flip": false
+        },
+        {
+          "across": 2.5,
+          "distance": 19.299999999999997,
+          "flip": true
+        },
+        {
+          "across": -2.5,
+          "distance": 20.4,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 20.4,
+          "flip": true
+        },
+        {
+          "across": -0.5,
+          "distance": 20.4,
+          "flip": false
+        },
+        {
+          "across": 0.5,
+          "distance": 20.4,
+          "flip": true
+        },
+        {
+          "across": 1.5,
+          "distance": 20.4,
+          "flip": false
+        },
+        {
+          "across": 2.5,
+          "distance": 20.4,
+          "flip": true
+        },
+        {
+          "across": -2.5,
+          "distance": 21.5,
+          "flip": false
+        },
+        {
+          "across": -1.5,
+          "distance": 21.5,
+          "flip": true
+        },
+        {
+          "across": -0.5,
+          "distance": 21.5,
+          "flip": false
+        },
+        {
+          "across": 0.5,
+          "distance": 21.5,
+          "flip": true
+        },
+        {
+          "across": 1.5,
+          "distance": 21.5,
+          "flip": false
+        },
+        {
+          "across": 2.5,
+          "distance": 21.5,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "aud_m",
+      "name": "Spectators",
+      "across": 0,
+      "distance": 16.2,
+      "height": 1.3,
+      "box": [
+        -0.3,
+        -1.32,
+        0.3,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": -0.5266489658636602,
+          "distance": 15.12,
+          "flip": true,
+          "tint": "#ffffff",
+          "scale": 0.963226622595539
+        },
+        {
+          "across": -2.50618989936047,
+          "distance": 16.220000000000002,
+          "flip": false,
+          "tint": "#e8e2ff",
+          "scale": 0.9987703190257888
+        },
+        {
+          "across": -0.4998800391793338,
+          "distance": 16.220000000000002,
+          "flip": false,
+          "tint": "#fff0e0",
+          "scale": 1.0066335528581476
+        },
+        {
+          "across": 1.4668473619611178,
+          "distance": 16.220000000000002,
+          "flip": true,
+          "tint": "#dcdcdc",
+          "scale": 1.046005867675558
+        },
+        {
+          "across": -2.4942214046419395,
+          "distance": 17.32,
+          "flip": false,
+          "tint": "#f0f0ff",
+          "scale": 1.0419574960165703
+        },
+        {
+          "across": -0.4999364295381383,
+          "distance": 17.32,
+          "flip": false,
+          "tint": "#ffffff",
+          "scale": 0.9924078836884291
+        },
+        {
+          "across": 1.4606898765727236,
+          "distance": 17.32,
+          "flip": true,
+          "tint": "#e8e2ff",
+          "scale": 0.9634208168085023
+        },
+        {
+          "across": -2.4994264343593384,
+          "distance": 18.42,
+          "flip": false,
+          "tint": "#fff0e0",
+          "scale": 0.9613794675577082
+        },
+        {
+          "across": -0.5114393291587476,
+          "distance": 18.42,
+          "flip": false,
+          "tint": "#dcdcdc",
+          "scale": 0.9518498571571399
+        },
+        {
+          "across": 1.504463134749858,
+          "distance": 18.42,
+          "flip": true,
+          "tint": "#f0f0ff",
+          "scale": 0.9583204323949758
+        },
+        {
+          "across": -2.546946435330028,
+          "distance": 19.52,
+          "flip": false,
+          "tint": "#ffffff",
+          "scale": 1.0091491492952627
+        },
+        {
+          "across": -0.4929438059290078,
+          "distance": 19.52,
+          "flip": false,
+          "tint": "#e8e2ff",
+          "scale": 1.0432585449067118
+        },
+        {
+          "across": 1.4548565382130618,
+          "distance": 19.52,
+          "flip": true,
+          "tint": "#fff0e0",
+          "scale": 0.9960732700921653
+        },
+        {
+          "across": -2.4544901532330186,
+          "distance": 20.62,
+          "flip": false,
+          "tint": "#dcdcdc",
+          "scale": 0.9781752982886246
+        },
+        {
+          "across": -0.5130364195276342,
+          "distance": 20.62,
+          "flip": false,
+          "tint": "#f0f0ff",
+          "scale": 1.0081012355556596
+        },
+        {
+          "across": 1.5037607110050886,
+          "distance": 20.62,
+          "flip": true,
+          "tint": "#ffffff",
+          "scale": 0.9704570609822895
+        },
+        {
+          "across": -2.5267576156329596,
+          "distance": 21.720000000000002,
+          "flip": false,
+          "tint": "#e8e2ff",
+          "scale": 1.000814739366615
+        },
+        {
+          "across": -0.49975262200823634,
+          "distance": 21.720000000000002,
+          "flip": false,
+          "tint": "#fff0e0",
+          "scale": 1.0428143907670346
+        },
+        {
+          "across": 1.4715820060209808,
+          "distance": 21.720000000000002,
+          "flip": true,
+          "tint": "#dcdcdc",
+          "scale": 1.0088603246033017
+        }
+      ]
+    },
+    {
+      "id": "aud_w",
+      "name": "Women spectators",
+      "across": 0,
+      "distance": 16.2,
+      "height": 1.3,
+      "box": [
+        -0.3,
+        -1.32,
+        0.3,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 2.468372436851496,
+          "distance": 15.12,
+          "flip": true,
+          "tint": "#fff0e0",
+          "scale": 0.9463102573882498
+        },
+        {
+          "across": -1.513394153334957,
+          "distance": 16.220000000000002,
+          "flip": false,
+          "tint": "#dcdcdc",
+          "scale": 0.9689613761177316
+        },
+        {
+          "across": 0.49687139351808585,
+          "distance": 16.220000000000002,
+          "flip": true,
+          "tint": "#f0f0ff",
+          "scale": 0.999435314628936
+        },
+        {
+          "across": 2.5442377605078947,
+          "distance": 16.220000000000002,
+          "flip": false,
+          "tint": "#ffffff",
+          "scale": 0.9843742227662734
+        },
+        {
+          "across": -1.5184464465281053,
+          "distance": 17.32,
+          "flip": true,
+          "tint": "#e8e2ff",
+          "scale": 0.9903553391272727
+        },
+        {
+          "across": 0.5039102334674681,
+          "distance": 17.32,
+          "flip": false,
+          "tint": "#fff0e0",
+          "scale": 1.0056018810687237
+        },
+        {
+          "across": 2.452553773134059,
+          "distance": 17.32,
+          "flip": true,
+          "tint": "#dcdcdc",
+          "scale": 0.9571084786887514
+        },
+        {
+          "across": -1.4984108038828707,
+          "distance": 18.42,
+          "flip": false,
+          "tint": "#f0f0ff",
+          "scale": 0.9633084212677933
+        },
+        {
+          "across": 0.5317684282945265,
+          "distance": 18.42,
+          "flip": true,
+          "tint": "#ffffff",
+          "scale": 0.9349362999525329
+        },
+        {
+          "across": 2.5049187216915016,
+          "distance": 18.42,
+          "flip": false,
+          "tint": "#e8e2ff",
+          "scale": 1.0060047500822111
+        },
+        {
+          "across": -1.529257893704289,
+          "distance": 19.52,
+          "flip": true,
+          "tint": "#fff0e0",
+          "scale": 0.9838311551710649
+        },
+        {
+          "across": 0.46290325511581615,
+          "distance": 19.52,
+          "flip": false,
+          "tint": "#dcdcdc",
+          "scale": 0.9451378060785647
+        },
+        {
+          "across": 2.5321946946285605,
+          "distance": 19.52,
+          "flip": true,
+          "tint": "#f0f0ff",
+          "scale": 1.0029810617951445
+        },
+        {
+          "across": -1.5290856369458197,
+          "distance": 20.62,
+          "flip": false,
+          "tint": "#ffffff",
+          "scale": 1.0040816034835007
+        },
+        {
+          "across": 0.4982920343405567,
+          "distance": 20.62,
+          "flip": true,
+          "tint": "#e8e2ff",
+          "scale": 0.9479732227842238
+        },
+        {
+          "across": 2.512761875940123,
+          "distance": 20.62,
+          "flip": false,
+          "tint": "#fff0e0",
+          "scale": 0.9822533103896421
+        },
+        {
+          "across": -1.460076089634822,
+          "distance": 21.720000000000002,
+          "flip": true,
+          "tint": "#dcdcdc",
+          "scale": 0.9891735055941172
+        },
+        {
+          "across": 0.4893002323500696,
+          "distance": 21.720000000000002,
+          "flip": false,
+          "tint": "#f0f0ff",
+          "scale": 1.0035791497492756
+        },
+        {
+          "across": 2.4594187179500295,
+          "distance": 21.720000000000002,
+          "flip": true,
+          "tint": "#ffffff",
+          "scale": 0.9483041383021191
+        }
+      ]
+    },
+    {
+      "id": "boat1",
+      "name": "Boat with spectators",
+      "across": -9.5,
+      "distance": 24,
+      "elevation": 0.6,
+      "height": 1.4,
+      "box": [
+        -14.6,
+        -1.6,
+        2.6,
+        0.4
+      ]
+    },
+    {
+      "id": "boat2",
+      "name": "Boat with spectators",
+      "across": -8,
+      "distance": 33,
+      "elevation": 0.6,
+      "height": 1.4,
+      "box": [
+        -14.6,
+        -1.6,
+        2.6,
+        0.4
+      ]
+    },
+    {
+      "id": "boat3",
+      "name": "Boat with spectators",
+      "across": 9.5,
+      "distance": 29,
+      "elevation": 0.6,
+      "height": 1.4,
+      "box": [
+        -2.6,
+        -1.6,
+        14.6,
+        0.4
+      ]
+    },
+    {
+      "id": "lantern",
+      "name": "Street lamp",
+      "across": 5.5,
+      "distance": 62.5,
+      "height": 4.3,
+      "box": [
+        -0.3,
+        -4.35,
+        0.3,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "street_lamp",
+      "name": "Street lamp",
+      "across": -2.6,
+      "distance": 3.2,
+      "height": 4.6,
+      "box": [
+        -0.2,
+        -4.7,
+        1.1,
+        0.02
+      ]
+    },
+    {
+      "id": "bollards",
+      "name": "Bollards",
+      "across": 3,
+      "distance": 8,
+      "height": 0.42,
+      "box": [
+        -0.22,
+        -0.45,
+        0.22,
+        0.02
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 3,
+          "distance": 8
+        },
+        {
+          "across": 3,
+          "distance": 18
+        },
+        {
+          "across": 3,
+          "distance": 28
+        },
+        {
+          "across": 3,
+          "distance": 38
+        },
+        {
+          "across": 3,
+          "distance": 46
+        },
+        {
+          "across": -3,
+          "distance": 22
+        },
+        {
+          "across": -3,
+          "distance": 32
+        },
+        {
+          "across": -3,
+          "distance": 42
+        },
+        {
+          "across": 2.5,
+          "distance": 59.6
+        },
+        {
+          "across": -6.3,
+          "distance": 52
+        },
+        {
+          "across": 6.3,
+          "distance": 53.5
+        },
+        {
+          "across": -6.3,
+          "distance": 62.5
+        }
+      ]
+    },
+    {
+      "id": "houses",
+      "name": "Houses",
+      "across": -10,
+      "distance": -16,
+      "facing": 0,
+      "height": 10,
+      "box": [
+        -7.2,
+        -10.2,
+        7.2,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -16,
+          "distance": -16
+        },
+        {
+          "across": 0,
+          "distance": -16,
+          "flip": true,
+          "glow": 0
+        },
+        {
+          "across": 16,
+          "distance": -16,
+          "glow": 0
+        }
+      ]
+    },
+    {
+      "id": "car",
+      "name": "Car",
+      "unseen": true,
+      "across": 30,
+      "distance": -2,
+      "place": {
+        "across": "car_a",
+        "distance": "car_d",
+        "facing": "car_f"
+      }
+    },
+    {
+      "id": "car_side_r",
+      "name": "Car",
+      "on": "car",
+      "across": 0.85,
+      "distance": 0,
+      "facing": 90,
+      "height": 1.5,
+      "box": [
+        -2.35,
+        -1.55,
+        2.35,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "car_side_l",
+      "name": "Car",
+      "on": "car",
+      "across": -0.85,
+      "distance": 0,
+      "facing": 270,
+      "height": 1.5,
+      "box": [
+        -2.35,
+        -1.55,
+        2.35,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "car_front",
+      "name": "Car",
+      "on": "car",
+      "across": 0,
+      "distance": -2.15,
+      "facing": 180,
+      "height": 1.5,
+      "box": [
+        -0.95,
+        -1.5,
+        0.95,
+        0.02
+      ]
+    },
+    {
+      "id": "car_back",
+      "name": "Car",
+      "on": "car",
+      "across": 0,
+      "distance": 2.15,
+      "facing": 0,
+      "height": 1.5,
+      "box": [
+        -0.95,
+        -1.5,
+        0.95,
+        0.02
+      ]
+    },
+    {
+      "id": "car_roof",
+      "name": "Car",
+      "on": "car",
+      "plane": true,
+      "across": 0,
+      "distance": 0.2,
+      "elevation": 1.44,
+      "width": 1.4,
+      "depth": 1.95
+    },
+    {
+      "id": "car_hood",
+      "name": "Car",
+      "on": "car",
+      "plane": true,
+      "across": 0,
+      "distance": -1.55,
+      "elevation": 0.9,
+      "width": 1.66,
+      "depth": 1.22
+    },
+    {
+      "id": "car_trunk",
+      "name": "Car",
+      "on": "car",
+      "plane": true,
+      "across": 0,
+      "distance": 1.65,
+      "elevation": 0.86,
+      "width": 1.66,
+      "depth": 1
+    },
+    {
+      "id": "car_beam",
+      "name": "Headlamps",
+      "on": "car",
+      "across": 0,
+      "distance": -2.2,
+      "facing": 270,
+      "glows": true,
+      "height": 2,
+      "box": [
+        -0.2,
+        -2.0,
+        18.7,
+        2.6
+      ],
+      "uniforms": {
+        "on": 0
+      },
+      "elevation": 0.62
+    },
+    {
+      "id": "rain_fall",
+      "name": "Downpour",
+      "particles": {
+        "kind": "rain",
+        "amount": "rain",
+        "count": 30000,
+        "reach": 20,
+        "size": [
+          0.014,
+          0.014
+        ],
+        "color": "#d4deef",
+        "opacity": 0.75,
+        "streak": 0.06
+      }
+    },
+    {
+      "id": "toto",
+      "name": "Totò",
+      "person": {
+        "cast": "cast",
+        "who": "toto_teen"
+      },
+      "across": -3.3,
+      "distance": 8.9,
+      "place": {
+        "across": "toto_a",
+        "distance": "toto_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "elena",
+      "name": "Elena",
+      "person": {
+        "cast": "cast",
+        "who": "elena"
+      },
+      "across": -1.9,
+      "distance": 10.4,
+      "place": {
+        "across": "elena_a",
+        "distance": "elena_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "daughter",
+      "name": "Elena's daughter",
+      "person": {
+        "cast": "cast",
+        "who": "daughter"
+      },
+      "across": -0.4,
+      "distance": 54.4,
+      "place": {
+        "across": "daughter_a",
+        "distance": "daughter_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "alfredo",
+      "name": "Alfredo",
+      "person": {
+        "cast": "cast",
+        "who": "alfredo_blind"
+      },
+      "across": -5.05,
+      "distance": 7,
+      "place": {
+        "across": "alfredo_a",
+        "distance": "alfredo_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "banker",
+      "name": "Elena's father",
+      "person": {
+        "cast": "cast",
+        "who": "banker"
+      },
+      "across": 8,
+      "distance": 1,
+      "place": {
+        "across": "banker_a",
+        "distance": "banker_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c1",
+      "name": "Spectator",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m"
+      },
+      "across": -2.5,
+      "distance": 15,
+      "place": {
+        "across": "c1_a",
+        "distance": "c1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c2",
+      "name": "Woman spectator",
+      "person": {
+        "cast": "cast",
+        "who": "villager_w"
+      },
+      "across": -1.5,
+      "distance": 15,
+      "place": {
+        "across": "c2_a",
+        "distance": "c2_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c3",
+      "name": "Old man",
+      "person": {
+        "cast": "cast",
+        "who": "old_m"
+      },
+      "across": 0.5,
+      "distance": 15,
+      "place": {
+        "across": "c3_a",
+        "distance": "c3_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c4",
+      "name": "Old woman",
+      "person": {
+        "cast": "cast",
+        "who": "old_w"
+      },
+      "across": 1.5,
+      "distance": 15,
+      "place": {
+        "across": "c4_a",
+        "distance": "c4_d"
+      },
+      "shadow": true
+    }
+  ]
+}
