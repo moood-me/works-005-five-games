@@ -200,8 +200,8 @@ export default {
         const shout = g.told('collapse:batulcar');
         const collapse = g.beat('collapse');
         await shout;
-        await g.say('batulcar', 'And who is to pay for my Noses!');
-        await g.say('fogg', 'I am');
+        await g.say('batulcar', 'Who will pay for my Noses?');
+        await g.say('fogg', 'I will');
         g.money(-200);
         g.sound.notes();
         await collapse;
@@ -211,7 +211,7 @@ export default {
         await bow;
         g.sound.applause();
         await finish;
-        g.hours(-1, tr('The act to the end'));
+        g.hours(-1, tr('To the end of the act'));
         const face = g.told('reunion:face');
         const reunion = g.beat('reunion');
         await face;

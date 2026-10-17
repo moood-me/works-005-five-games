@@ -29,7 +29,7 @@ export default {
       await g.say('pp', 'Out of the way, will you!');
       await buffalo;
       await g.say('fogg', 'Three hours');
-      g.hours(-3, 'The buffalo');
+      g.hours(-3, tr('The buffalo'));
     },
     // the bridge at Medicine Bow: ~ full speed or on foot
     async g => {
