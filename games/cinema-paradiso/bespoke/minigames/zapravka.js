@@ -1,26 +1,26 @@
-// "Threading" (II.1, the booth, after the beat `lesson`; the insert `thread`): the boy threads the projector — the film's end from
-// sprocket to sprocket, five stretches, one mark at a time. Pull along the way: a ring at the film's end at `thread#p{threaded}`, the way —
-// to the next point; `pull` — where the film is on the stretch; got there — `threaded` + 1, the sprocket's click. Let go too soon — a spring:
-// the film visibly goes back to the stretch's beginning, no mistake. At the loop (before the stretch 2 → 3, at `thread#p2`) — hold
-// the groove 0.8 s: `loop` 1, the scene makes the loop; let go too soon — it drains, a mistake, `slips` + 1.
-//   The feeling: the boy threads the projector for the first time; he wants to do it like the master; pride and care; the player — to learn
-//   with the hands.
-//   → { slips: how many times the loop slipped (≥ 1 — the frame in the beam trembles in `motor`) }
+// «Заправка» (II.1, Будка, после куска `lesson`; вставка `thread`): мальчик заправляет проектор — конец плёнки от
+// зубца к зубцу, пять отрезков, одна метка за раз. Тянуть по пути: кольцо на конце плёнки у `thread#p{threaded}`, путь —
+// до следующей точки; `pull` — где плёнка на отрезке; дошёл — `threaded` + 1, щелчок зубца. Отпустил раньше — пружина:
+// плёнка видимо возвращается к началу отрезка, без ошибки. У петли (перед отрезком 2 → 3, на `thread#p2`) — держать
+// желоб 0.8 с: `loop` 1, сцена делает петлю; отпустил раньше — стекает, ошибка, `slips` + 1.
+//   Чувство: мальчик впервые заправляет проектор; хочет сделать как мастер; гордость и осторожность; игрок — учиться
+//   руками.
+//   → { slips: сколько раз петля сорвалась (≥ 1 — кадр в луче дрожит в `motor`) }
 import { until, keys } from '../hands.js';
 
 const SEGMENTS = 5;
-const LOOP_AT = 2; // before the stretch 2 → 3
-const LOOP = 0.8, DRAIN = 0.5; // s: the loop's fill; it drains from full
+const LOOP_AT = 2; // перед отрезком 2 → 3
+const LOOP = 0.8, DRAIN = 0.5; // с: налив петли; стекает от полного
 const STEPS = SEGMENTS + 1;
 const DONE = 0.98;
 
 export default {
-  file: 'thread',
-  title: 'Threading', // as the author's ☰ lists it
+  file: 'zapravka',
+  title: 'Заправка', // как её зовёт ☰ автора
   about: 14,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The film goes from sprocket to sprocket. Without a loop before the gate, it tears') });
+    const mg = g.minigame({ phrase: 'Плёнка идёт от зубца к зубцу. Без петли перед кадровым окном её рвёт' });
     const send = keys(g);
     mg.plate.set({ notches: Array.from({ length: STEPS - 1 }, (_, i) => (i + 1) / STEPS) });
     let slips = 0, step = 0;
@@ -28,7 +28,7 @@ export default {
     send('pull', 0);
     for (let k = 0; k < SEGMENTS; k++) {
       if (k === LOOP_AT) {
-        // the loop before the gate
+        // петля перед кадровым окном
         const ring = mg.mark({ at: `thread#p${k}`, kind: 'groove' });
         const hold = mg.hold({ on: ring, seconds: LOOP, drain: DRAIN });
         b.minigame.tricks.teach(mg, [hold], { id: 'hold' });
@@ -48,7 +48,7 @@ export default {
         ring.remove();
         step++;
       }
-      // the stretch k → k + 1
+      // отрезок k → k + 1
       const end = mg.mark({ at: `thread#p${k}`, kind: 'dash' });
       const pull = mg.pull({ on: end, to: `thread#p${k + 1}`, release: 'spring' });
       if (k === 0) b.minigame.tricks.teach(mg, [pull], { id: 'pull:spring' });

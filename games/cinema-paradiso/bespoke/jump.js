@@ -10,7 +10,7 @@
 //   jump(target, quiet, {result}) → j — quiet: the game's sounds unheard (sound.js unheard()); result(minigame) → what
 //     a minigame played unseen gives (nothing: its `skipped` — a plain good outcome)
 //   j.on — unseen still; j.plays — the minigames played so far; j.sounds — the sounds to play meanwhile
-//   j.scene(folder, state) — the scene shown now (what it did in the one before: forgotten); j.shown — {folder, state}
+//   j.scene(title, state) — the scene shown now (what it did in the one before: forgotten); j.shown — {title, state}
 //   j.did(change) — [key, value] | ['cut', values]; j.values — the shown scene's values as the step set them
 //   j.sleep(ms), j.heard(text, ms) — on the step's own clock: the seconds go by as nothing else is left to do now; what
 //     the scene tells, heard as soon as nothing else is left to do now (and before any seconds go by)
@@ -45,7 +45,7 @@ export function jump(target, quiet, { result } = {}) {
   };
   const j = {
     on: true, target, result, plays: [], shown: null, then: [], values: {}, sounds: quiet.sounds, idle,
-    scene(folder, state) { j.shown = { folder, state }; j.then = []; j.values = { ...state }; },
+    scene(title, state) { j.shown = { title, state }; j.then = []; j.values = { ...state }; },
     did(change) {
       j.then.push(change);
       if (change[0] === 'cut') Object.assign(j.values, change[1]); else j.values[change[0]] = change[1];

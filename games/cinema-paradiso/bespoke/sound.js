@@ -1,4 +1,4 @@
-// The sounds of Cinema Paradiso, made in the page (Web Audio): nothing to load; as loud as the page's
+// The sounds of «Новый кинотеатр „Парадизо“», made in the page (Web Audio): nothing to load; as loud as the page's
 // "sounds" slider says (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes
 // it then; till then its time stands, and what was asked for begins at the touch. (game.md §8.)
 //   wake() — the page may be heard from now on (called on the first touch)
@@ -10,7 +10,7 @@
 //   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
 //   whirr — the projector: twenty-four clicks a second of the claw and the shutter, the motor's hum, the film's rustle.
 //     The heart of the past: in the booth, the hall, the pier in summer, Rome; in chapter V only the flash of `memory`
-//     and «The Strip»
+//     and «Лента»
 //   hall — the film's music through a wall: strings and brass, muffled, in phrases with pauses; the hall's murmur
 //   cicadas — high, pulsing, two or three of them · wind_cold — a thin cold wind (the present; ambience.js)
 //   recordings (sounds/): square — the square at night: far voices, steps · crowd — a crowd, close · sea — water at the
@@ -21,11 +21,11 @@
 //   applause · whistle · whisper · giggle · coins · slap · flame · drag · cough · band · shutter · fireworks · reelEnd ·
 //   steps · door · car · trainHiss · trainWhistle · church · pigeons · paper · puff · whistleBlow · blast
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}: as loud as v (0…1) of its own; stop fades it out:
-//   theme() — the theme of the Paradiso: our own melody (not the film's music) on strings over chords, round and round
+//   theme() — the theme of «Парадизо»: our own melody (not the film's music) on strings over chords, round and round
 //   camera8() — the 8 mm camera running: eighteen thin clicks a second, quieter than the projector
 import { built, kit } from './ambience.js';
 
-// THEME — the melody of the Paradiso: sixteen bars in 3/4, E major (the world's key: E_MAJOR_D_FLAT_MINOR), ♩ = 77. Each bar: its notes [pitch, beats] (the
+// THEME — the melody of «Парадизо»: sixteen bars in 3/4, E major (the world's key: E_MAJOR_D_FLAT_MINOR), ♩ = 77. Each bar: its notes [pitch, beats] (the
 // strings' melody) and the chord held under it (lowest first). The motif is its first five notes (G♯ A B E D♯: a rise
 // to the E, and the sigh down to D♯).
 export const THEME = [
@@ -918,15 +918,15 @@ export function puff() {
 export function whistleBlow() {
   const a = audio(), t = now(), out = air(0.6);
   for (const [s, len] of [[0, 1.1], [1.4, 1.6]]) {
-    const o = a.createOscillator(), e = a.createGain(), trill = a.createOscillator(), td = a.createGain();
+    const o = a.createOscillator(), e = a.createGain(), tr = a.createOscillator(), td = a.createGain();
     o.frequency.value = 3100;
-    trill.frequency.value = 28;
+    tr.frequency.value = 28;
     td.gain.value = 140;
-    trill.connect(td).connect(o.frequency);
+    tr.connect(td).connect(o.frequency);
     shape(e.gain, t + s, [[0.03, 0.06], [len - 0.1, 0.055], [len, 0]]);
     o.connect(e).connect(out);
-    o.start(t + s); trill.start(t + s);
-    o.stop(t + s + len + 0.05); trill.stop(t + s + len + 0.05);
+    o.start(t + s); tr.start(t + s);
+    o.stop(t + s + len + 0.05); tr.stop(t + s + len + 0.05);
   }
 }
 // the blast: a low blow, then the long roar of falling stone, its debris
