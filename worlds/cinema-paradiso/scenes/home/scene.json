@@ -1,7 +1,7 @@
 {
  "engine": 3,
- "title": "The Di Vita Home",
- "caption": "The Di Vita Home",
+ "title": "The Di Vita House",
+ "caption": "The Di Vita House",
  "horizon": 0.5,
  "camera": {
   "mode": "roam",
@@ -179,7 +179,7 @@
     "returned",
     "answered"
    ],
-   "means": "on the table: nothing; his letters come back stamped «Addressee has moved»; her letters from Palermo"
+   "means": "on the table: nothing; his letters come back stamped «Moved away»; her letters from Palermo"
   },
   "pile": {
    "values": [

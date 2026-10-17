@@ -6,7 +6,7 @@ const opt = (label, state) => ({ label, state });
 const FILMS = [
   { name: tr('The very beginning'), state: { chapter_number: '', chapter_title: '', map: null } },
   { name: tr('Chapter I\'s title'), state: { chapter_number: 'I', chapter_title: tr('The Bell'), map: null } },
-  { name: tr('Chapter IV\'s map'), state: { chapter_number: 'IV', chapter_title: tr('Go Away'), map: [
+  { name: tr('Chapter IV\'s map'), state: { chapter_number: 'IV', chapter_title: tr('Leave'), map: [
     { title: tr('Elena at the booth'), weight: '⚑', options: [opt(tr('“He\'s on the pier. Run”'), 'open'), opt(tr('“If you love him, leave him”'), 'chosen')] },
     { title: tr('Go or stay'), weight: '⚑', options: [opt(tr('“I\'ll go”'), 'chosen'), opt(tr('“I\'ll stay”'), 'open')] },
     { title: tr('What to say on the platform'), weight: '⚑', options: [opt(tr('“Don\'t come back”'), 'chosen'), opt(tr('“Come back when you like”'), 'open')] },
@@ -16,7 +16,7 @@ const FILMS = [
     { title: tr('I. The milk money'), weight: '⚑', options: [opt(tr('Keep quiet'), 'chosen'), opt(tr('Tell the truth'), 'open')] },
     { title: tr('II. A projectionist at ten'), weight: '⚑', options: [opt(tr('“Come. I\'ll be near”'), 'open'), opt(tr('“Go alone”'), 'chosen')] },
     { title: tr('III. The girl nobody knew'), weight: '⚑', options: [opt(tr('Keep filming'), 'chosen'), opt(tr('Go up to her'), 'open')] },
-    { title: tr('III. The ninety-ninth night'), weight: '⚑', options: [opt(tr('Wait on'), 'open'), opt(tr('Go to the booth'), 'chosen')] },
+    { title: tr('III. The ninety-ninth night'), weight: '⚑', options: [opt(tr('Keep waiting'), 'open'), opt(tr('Go to the booth'), 'chosen')] },
     { title: tr('IV. Elena at the booth'), weight: '⚑', options: [opt(tr('“He\'s on the pier. Run”'), 'open'), opt(tr('“If you love him, leave him”'), 'chosen')] },
     { title: tr('IV. Go or stay'), weight: '⚑', options: [opt(tr('“I\'ll go”'), 'chosen'), opt(tr('“I\'ll stay”'), 'open')] },
     { title: tr('IV. What to say on the platform'), weight: '⚑', options: [opt(tr('“Don\'t come back”'), 'chosen'), opt(tr('“Come back when you like”'), 'open')] },

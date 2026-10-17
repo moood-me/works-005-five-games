@@ -337,7 +337,7 @@ function posters(g, s, poster, full) {
   if (full) {   // «No seats»: a board hung on the door
     g.fillStyle = '#e9dfc6'; g.fillRect(PAR.door - 0.75, -2.35, 1.5, 0.5);
     g.strokeStyle = '#5a2a1a'; g.lineWidth = 0.03; g.strokeRect(PAR.door - 0.72, -2.32, 1.44, 0.44);
-    g.fillStyle = '#7a2a1a'; g.font = 'bold 0.22px serif'; g.textAlign = 'center'; g.fillText(tr('NO SEATS'), PAR.door, -2.02);
+    g.fillStyle = '#7a2a1a'; g.font = 'bold 0.22px serif'; g.textAlign = 'center'; g.fillText(tr('SOLD OUT'), PAR.door, -2.02);
   }
 }
 // the boarded front (shut, charged): boards over the doors and the windows, the notice; a layer (rewind lets it fall)
@@ -347,7 +347,7 @@ function paradisoBoards(g, charged) {
   boards(g, PAR.booth - 0.7, PAR.booth + 0.7, -PAR.boothY - 0.5, -PAR.boothY + 0.5, 9);
   g.fillStyle = '#efe8d4'; g.fillRect(PAR.door - 0.55, -2.0, 1.1, 0.62);
   g.fillStyle = '#2a2420'; g.font = 'bold 0.13px serif'; g.textAlign = 'center';
-  g.fillText(tr('DEMOLITION'), PAR.door, -1.72); g.fillText(tr('ON SATURDAY'), PAR.door, -1.52);
+  g.fillText(tr('DEMOLITION'), PAR.door, -1.72); g.fillText(tr('SATURDAY'), PAR.door, -1.52);
   if (charged) {   // the charges: red bundles at the pilasters' feet, the wires
     g.strokeStyle = '#6a1a12'; g.lineWidth = 0.025;
     g.beginPath(); g.moveTo(0.3, -0.6); g.lineTo(13.7, -0.6); g.stroke();
