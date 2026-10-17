@@ -17,7 +17,7 @@
 //     (bespoke.menu) (as in «Парадизо»)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
-import { hoursText, moneyText } from './story.js';
+import { BOOK, hoursText, moneyText } from './story.js';
 
 const NS = 'http://www.w3.org/2000/svg';
 const el = (tag, cls, parent) => {
@@ -158,7 +158,7 @@ function bookGauge(layer) {
   let noteTimer = 0;
   const write = state => {
     now.textContent = hoursText(state.hours);
-    lines.replaceChildren(...(state.lines ?? []).map(l => Object.assign(el('p', `hand-${l.hand}`), { textContent: l.text })));
+    lines.replaceChildren(...(state.lines ?? []).map(l => Object.assign(el('p', `hand-${l.hand}`), { textContent: BOOK[l.line] })));
   };
   return {
     show(met, state) {
@@ -232,7 +232,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
   }
   let stage = 'folded';
   const wait = ms => new Promise(ok => setTimeout(ok, ms));
-  const say = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
+  const ask = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
   return new Promise(done => {
     const leave = () => { veil.remove(); done(); };
     signal?.addEventListener('abort', leave);
@@ -247,7 +247,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
         letter.classList.add('open-bottom');
         onOpen?.();
         await wait(2400);
-        say('сложить');
+        ask('сложить');
         hint.classList.add('on');
         stage = 'open';
       } else if (stage === 'open') {
@@ -269,7 +269,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
     document.fonts.load('1em "Vokrug Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      say('развернуть');
+      ask('развернуть');
       if (stage === 'folded') hint.classList.add('on');
     });
   });
@@ -288,7 +288,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
   const hint = card('p', 'letter-hint', veil);
   let stage = 'down';
   const wait = ms => new Promise(ok => setTimeout(ok, ms));
-  const say = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
+  const ask = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
   return new Promise(done => {
     const leave = () => { veil.remove(); done(); };
     signal?.addEventListener('abort', leave);
@@ -300,7 +300,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
         env.classList.add('turned');
         onOpen?.();
         await wait(2400);
-        say('отложить');
+        ask('отложить');
         hint.classList.add('on');
         stage = 'up';
       } else if (stage === 'up') {
@@ -316,7 +316,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
     document.fonts.load('1em "Vokrug Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      say('перевернуть');
+      ask('перевернуть');
       if (stage === 'down') hint.classList.add('on');
     });
   });

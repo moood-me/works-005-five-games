@@ -8,7 +8,7 @@
 //   g.sound — the game's sounds (sound.js)
 //   g.hero(who) — whose step it is: 'fogg' | 'pp' | 'both'; a change shows the medallion of his face for a moment
 //   g.beds(levels, seconds) — the beds of sound: those named go to their level, every other one to nothing
-//   g.scene(title, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
+//   g.scene(folder, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
 //     under it what the play has decided, as this scene's keys (carry). It plays no beat until one is named: the
 //     step's first beat goes in `state` ({beat: name}) — the scene opens playing it — and g.beat(name) then takes it
 //     up (waits for its end). cut: the scene before stays till this one is drawn, then gives way in one frame; else
@@ -21,8 +21,9 @@
 //   g.arrived(who, ms) — until someone's walk in the scene ends there (→ true), or ms pass (→ false)
 //   g.watch(key, fn) — fn(value, old) each time the scene sets the key, till the step is left
 //   g.spot(ref) — where a point of the scene is on the screen: {x, y} in frame heights from the frame's middle
-//   g.say(who, text, at) — someone of PEOPLE says it, over `at` ('id' | 'id#point'; 'narrator' — low in the middle),
-//     in their voice; → a breath after it has been heard
+//   g.say(who, text, at) — someone of the game's people (people.json: bespoke.say) says it, over `at` ('id' |
+//     'id#point'; 'narrator' — low in the middle), in their voice; → a breath after it has been heard (unvoiced: once it
+//     could be read)
 //   g.choose(choice, {ref: options, …}) — the player presses one of the points, then one of its options ([{id,
 //     label}]: petals, one too); → the option's id, kept in state.choices[choice] (null: not on the chapter's map)
 //   g.withdraw() — what is offered is taken back
@@ -39,41 +40,18 @@
 //   g.gauge('hours' | 'money') — the notebook / the bag shown from now on; its one line of what it means said once
 //   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… это запомнит»
 //   g.mark(key, value, text) — remembered (state.marks[key]); text — a stamp, if any
-//   g.book(line, hand) — the player gives the notebook (touches it), and `line` is written in it by `hand` ('aouda'
-//     | 'pp'); it stays there (state.lines)
+//   g.book(line, hand) — the player gives the notebook (touches it), and the line BOOK[line] is written in it by
+//     `hand` ('aouda' | 'pp' | 'fogg'); it stays there (state.lines: {line, hand} — its name, not its text)
 //   g.letter({text, sign, kind, voice}) — a sheet the player unfolds, reads and folds again (ui.js)
 //   g.title(text) — words over the scene, as a title of the old edition; → once they have gone
 // A step may be played up to a minigame unseen, without time (the author's ☰: jump.js), or all through (a dry run):
 // then nothing of it is said, shown or heard, and a minigame gives what j.result says, else its `skipped`.
 import * as sounds from './sound.js';
 
-export const SCENES = { club: 'Реформ-клуб', row: 'Сэвил-Роу', train: 'Из окна поезда', deck: 'Палуба',
-  jungle: 'Джунгли', harbour: 'Гавань', sea: 'Море', prairie: 'Прерия', map: 'Маршрут' };
+// the world's scenes the game plays, by their folders (sea, route: not in the world yet)
+export const SCENES = { club: 'main', row: 'sevil-rou', train: 'iz-okna-poezda', deck: 'paluba', jungle: 'dzhungli',
+  harbour: 'gavan', sea: 'sea', prairie: 'preriya', map: 'route' };
 
-// who speaks: the sound service's voice, how it says it, who it is (game.md §8)
-export const PEOPLE = {
-  narrator: { voice: 'Iapetus', how: 'рассказчик старой книги: ровно, с лёгкой иронией, негромко', name: 'от автора' },
-  fogg: { voice: 'Alnilam', how: 'английский джентльмен: ровно, низко, сухо и точно, ни одного лишнего слова, никогда не повышает голоса', name: 'Филеас Фогг' },
-  pp: { voice: 'Puck', how: 'молодой француз-слуга: живо, звонко, с восклицаниями и французским «мсье»', name: 'Паспарту' },
-  aouda: { voice: 'Despina', how: 'молодая индийская женщина: мягко, тихо, с достоинством', name: 'Ауда' },
-  fix: { voice: 'Umbriel', how: 'сыщик: быстро, вкрадчиво, с хитрецой', name: 'Фикс' },
-  stuart: { voice: 'Schedar', how: 'английский инженер в клубе: веско, с усмешкой', name: 'Эндрю Стюарт' },
-  porter: { voice: 'Zubenelgenubi', how: 'клубный швейцар: почтительно, негромко', name: 'швейцар' },
-  cromarty: { voice: 'Charon', how: 'старый британский генерал: коротко, твёрдо', name: 'сэр Фрэнсис Кромарти' },
-  guide: { voice: 'Enceladus', how: 'молодой проводник-парс: тихо, быстро, взволнованно', name: 'проводник' },
-  owner: { voice: 'Gacrux', how: 'старик-индиец: упрямо, коротко, не глядя', name: 'хозяин слона' },
-  conductor: { voice: 'Algieba', how: 'кондуктор: казённо, громко', name: 'кондуктор' },
-  consul: { voice: 'Schedar', how: 'консул: сухо, недоверчиво', name: 'консул' },
-  bunsby: { voice: 'Algenib', how: 'старый лоцман: хрипло, неторопливо, по-морскому', name: 'Джон Бансби' },
-  batulcar: { voice: 'Fenrir', how: 'антрепренёр бродячей труппы: громко, нараспев, как зазывала', name: 'Батулкар' },
-  sailor: { voice: 'Achird', how: 'американский матрос: весело, просто', name: 'матрос' },
-  driver: { voice: 'Sadachbia', how: 'американский машинист: лихо, громко', name: 'машинист' },
-  captain: { voice: 'Sadaltager', how: 'армейский капитан: устало, твёрдо', name: 'капитан форта' },
-  mudge: { voice: 'Rasalgethi', how: 'бывалый американец: громко, весело, на ветру', name: 'Мадж' },
-  speedy: { voice: 'Orus', how: 'капитан-грубиян: ревёт, рычит, хохочет', name: 'капитан Спиди' },
-  stoker: { voice: 'Algieba', how: 'кочегар: глухо, устало', name: 'кочегар' },
-  pastor: { voice: 'Charon', how: 'старый пастор за дверью: спокойно, удивлённо', name: 'преподобный Уилсон' },
-};
 
 // The minigames by their files (game.md §7): a minigame's result is kept under its `file`
 export const HANDS = ['desyat-minut', 'torg', 'slon', 'kak-mertvyy', 'ryvok', 'ne-usnut', 'tayfun', 'piramida', 'stsepka',
@@ -87,6 +65,8 @@ export const RULES = {
   hours: 'Книжка: запас против расписания. Всё непредвиденное платится отсюда.',
 };
 export const WHO = { aouda: 'Ауда', fix: 'Фикс', pp: 'Паспарту' };
+// the lines written in the notebook (g.book), by their names
+export const BOOK = { cousin: 'Гонконг. Кузен Джиджибхай', day: '+1 день: ехали навстречу солнцу!' };
 export const ENDINGS = [
   { id: 'door', label: 'Вот и я, господа' }, { id: 'friday', label: 'По расписанию' },
   { id: 'lost', label: 'Проиграл — и выиграл' }, { id: 'sunday', label: 'Две среды' },
@@ -126,7 +106,7 @@ export function facts(state) {
 
 // The play's facts (f) as a scene's own keys: what g.scene opens it with, under the step's state (only those keys the
 // scene has).
-export function carry(title, f, state) {
+export function carry(folder, f, state) {
   const after = k => k in (state?.choices ?? {});
   const party = {
     with_aouda: f.aouda === 'with' && after('sati') ? 1 : 0,
@@ -141,7 +121,7 @@ export function carry(title, f, state) {
     [SCENES.row]: { with_aouda: party.with_aouda, with_pp: party.with_pp, gas: f.gas ? 1 : 0 },
     [SCENES.train]: party, [SCENES.deck]: party, [SCENES.jungle]: {}, [SCENES.harbour]: party, [SCENES.sea]: party,
     [SCENES.prairie]: party, [SCENES.map]: {},
-  }[title];
+  }[folder];
 }
 
 // how the notebook writes hours: '+2 д 6 ч', '−20 ч', 'по расписанию'
@@ -175,19 +155,12 @@ export function context(b, view, hub, state, j = null) {
     const { shown, then } = j;
     for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
     view.gauges(state, hero);
-    if (shown) await alive(b.show(shown.title, { state: shown.state, captions: false, then }));
+    if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
   })());
   if (j && j.target < Infinity) j.idle.then(seen);
-  // a line, and the time it asks: heard — a breath after; shown without a voice — as long as it
-  // takes to read it (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
-  async function speak(at, text, opts) {
-    if (unseen()) return sleep(300 + text.length * 60);
-    let heard = false;
-    const hear = e => { if (e.detail.on && e.detail.text === text.trim()) heard = true; };
-    addEventListener('moood:speech', hear);
-    try { await b.say(at, text, opts); } finally { removeEventListener('moood:speech', hear); }
-    await sleep(heard ? 500 : 300 + text.length * 60);
-  }
+  // the time a line asks, once said: heard — a breath after; shown without a voice — as long as it takes to read it
+  // (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
+  const after = ({ heard, text }) => sleep(heard ? 500 : 300 + text.length * 60);
   // a minigame's result kept where the story reads it (game.md §3.6)
   const keepHands = (minigame, result) => {
     const name = handsOf(minigame);
@@ -210,17 +183,17 @@ export function context(b, view, hub, state, j = null) {
     beds(levels, seconds = 2) {
       if (!gone()) g.sound.beds(levels, seconds);
     },
-    async scene(title, st = {}, { cut = false } = {}) {
+    async scene(folder, st = {}, { cut = false } = {}) {
       if (gone()) return never;
       // (opened as it is to be: what the play has decided — those of its keys the scene has —, the beat it opens
       // with playing from its first frame)
-      const spec = await alive(unseen() ? j.real(b.specOf(title)) : b.specOf(title));
-      st = { ...Object.fromEntries(Object.entries(carry(title, facts(state), state) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
+      const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
+      st = { ...Object.fromEntries(Object.entries(carry(folder, facts(state), state) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
       opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
-      if (unseen()) j.scene(title, st);
+      if (unseen()) j.scene(folder, st);
       else {
         g.withdraw();
-        await alive(b.show(title, { state: st, captions: false, fade: !cut }));
+        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       }
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
@@ -257,7 +230,8 @@ export function context(b, view, hub, state, j = null) {
       }
     },
     say(who, text, at = who) {
-      return gone() ? never : speak(at, text, PEOPLE[who]);
+      if (gone()) return never;
+      return unseen() ? sleep(300 + text.length * 60) : alive(b.say(who, text, { at })).then(after);
     },
     async choose(choice, offers) {
       if (gone()) return never;
@@ -361,7 +335,7 @@ export function context(b, view, hub, state, j = null) {
     // the player gives the notebook (touches it): the line is written in the hand given; it stays
     async book(line, hand) {
       if (gone()) return never;
-      state.lines = [...(state.lines ?? []), { text: line, hand }];
+      state.lines = [...(state.lines ?? []), { line, hand }];
       if (unseen()) return;
       await alive(view.giveBook({ signal: left.signal }));
       view.gauges(state);

@@ -47,7 +47,7 @@ export default {
         await g.say('fogg', 'Я люблю вас');
         await proposal;
         const runner = f.pp === 'with' ? 'pp' : 'fogg';
-        await g.say('fogg', runner === 'pp' ? 'Паспарту, к преподобному Уилсону. Венчание — завтра, в понедельник' : 'Я сам схожу к преподобному Уилсону');
+        await (runner === 'pp' ? g.say('fogg', 'Паспарту, к преподобному Уилсону. Венчание — завтра, в понедельник') : g.say('fogg', 'Я сам схожу к преподобному Уилсону'));
         g.set('runner', runner);
         const out = g.told('run_out:away');
         const run = g.beat('run_out');
@@ -88,7 +88,7 @@ export default {
       // the day is found: written in the notebook in Passepartout's scrawl (or Fogg's own hand)
       g.mark('day', true);
       g.hours(24, 'Ехали навстречу солнцу');
-      await g.book('+1 день: ехали навстречу солнцу!', f.pp === 'with' ? 'pp' : 'fogg');
+      await g.book('day', f.pp === 'with' ? 'pp' : 'fogg');
     },
     // the race: the cab through the fog; the fifty-seventh second — or the door shut
     async g => {

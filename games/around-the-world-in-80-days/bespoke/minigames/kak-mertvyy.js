@@ -33,7 +33,7 @@ export default {
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: nerves(0) });
     b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
     let walk = clamp(+g.get('walk') || 0), heads = 0, smoke = SMOKE0, alarms = 0, upTill = -1, smokeAlarm = false, phrase = PHRASE;
-    const say = p => { if (p !== phrase) { phrase = p; mg.plate.set({ phrase: p }); } };
+    const put = p => { if (p !== phrase) { phrase = p; mg.plate.set({ phrase: p }); } };
     send('heads', 0);
     send('smoke', smoke);
     const t0 = mg.t;
@@ -61,7 +61,7 @@ export default {
       smoke = Math.max(SMOKE_GONE, smoke - (SMOKE_FADE + (slow ? SMOKE_SLOW : 0)) * dt);
       send('smoke', smoke);
       if (!smokeAlarm && smoke <= SMOKE_GONE && walk < 1) { smokeAlarm = true; alarms++; mg.error('behind', { chip: true }); }
-      say(heads > 0.5 ? 'Головы поднимаются от земли одна за другой' : smoke < 0.35 && !smokeAlarm ? 'Дым над костром редеет' : PHRASE);
+      put(heads > 0.5 ? 'Головы поднимаются от земли одна за другой' : smoke < 0.35 && !smokeAlarm ? 'Дым над костром редеет' : PHRASE);
       mg.plate.set({ fill: walk, glow: fast || slow ? 'bad' : lead.state.held ? 'good' : 'idle' });
       return walk >= 1;
     });

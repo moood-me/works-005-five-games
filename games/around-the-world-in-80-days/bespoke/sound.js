@@ -878,15 +878,15 @@ export function puff() {
 export function whistleBlow() {
   const a = audio(), t = now(), out = air(0.6);
   for (const [s, len] of [[0, 1.1], [1.4, 1.6]]) {
-    const o = a.createOscillator(), e = a.createGain(), tr = a.createOscillator(), td = a.createGain();
+    const o = a.createOscillator(), e = a.createGain(), trill = a.createOscillator(), td = a.createGain();
     o.frequency.value = 3100;
-    tr.frequency.value = 28;
+    trill.frequency.value = 28;
     td.gain.value = 140;
-    tr.connect(td).connect(o.frequency);
+    trill.connect(td).connect(o.frequency);
     shape(e.gain, t + s, [[0.03, 0.06], [len - 0.1, 0.055], [len, 0]]);
     o.connect(e).connect(out);
-    o.start(t + s); tr.start(t + s);
-    o.stop(t + s + len + 0.05); tr.stop(t + s + len + 0.05);
+    o.start(t + s); trill.start(t + s);
+    o.stop(t + s + len + 0.05); trill.stop(t + s + len + 0.05);
   }
 }
 // the blast: a low blow, then the long roar of falling stone, its debris

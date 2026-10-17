@@ -26,7 +26,7 @@ export default {
       await g.scene(SCENES.deck, { beat: 'new_york', ship: 'henrietta', port: 'new_york' });
       const ny = g.beat('new_york');
       await smoke;
-      await g.say(f.pp === 'with' ? 'pp' : 'fix', '«Китай» ушёл сорок пять минут назад!');
+      await (f.pp === 'with' ? g.say('pp', '«Китай» ушёл сорок пять минут назад!') : g.say('fix', '«Китай» ушёл сорок пять минут назад!'));
       await speedy;
       await g.say('speedy', 'Иду в Бордо. Пассажиров не беру');
       await g.say('fogg', 'А за две тысячи долларов с человека?');
@@ -140,8 +140,8 @@ export default {
       const h = g.state.hours;
       if (h >= 0) await g.say('fogg', 'Лондон. Вовремя');
       else {
-        const late = Math.ceil(-h);
-        await g.say('fogg', `Опоздал на ${late} ${late % 10 === 1 && late % 100 !== 11 ? 'час' : late % 10 >= 2 && late % 10 <= 4 && (late % 100 < 10 || late % 100 >= 20) ? 'часа' : 'часов'}`);
+        // (by how much — the notebook says)
+        await g.say('fogg', 'Опоздал');
         g.set('book_shut', 1, 1.5);
         await g.told('special:shut', 4000);
         await g.say('fogg', 'Двадцать тысяч — всё, что у меня было');

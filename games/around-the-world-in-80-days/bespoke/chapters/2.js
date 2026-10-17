@@ -32,7 +32,7 @@ export default {
       await g.scene(SCENES.deck, { beat: 'rail_night', ship: 'rangoon', port: 'none', with_aouda: 1 });
       const night = g.beat('rail_night');
       await turns;
-      await g.say('aouda', g.state.choices.sati === 'road' ? 'Вы рисковали из-за меня' : 'Вы потеряли из-за меня двенадцать часов');
+      await (g.state.choices.sati === 'road' ? g.say('aouda', 'Вы рисковали из-за меня') : g.say('aouda', 'Вы потеряли из-за меня двенадцать часов'));
       await night;
       const answer = await g.choose('answer', {
         'fogg#head': [{ id: 'spare', label: 'Они были в запасе' }, { id: 'plaid', label: 'Отдать плед' }, { id: 'notlost', label: 'Я их не потерял' }],
@@ -46,7 +46,7 @@ export default {
         g.relate('aouda', 1);
       }
       await g.say('aouda', 'Можно мне вашу книжку, мистер Фогг?');
-      await g.book('Гонконг. Кузен Джиджибхай', 'aouda');
+      await g.book('cousin', 'aouda');
       await g.beat('writes');
     },
     // Hong Kong: the cousin gone two years — ⚑ Europe or Holland
@@ -98,7 +98,7 @@ export default {
       await g.say('fix', 'Выпейте со мной. Одну трубку — за дружбу');
       await g.beat('pipe');
       g.beds({ town: 0.25, sea: 0.4 }, 3);
-      const r = await g.play(neUsnut, { say: text => g.say('pp', text) });
+      const r = await g.play(neUsnut);
       g.mark('told', !!r?.told);
       g.beds({ sea: 0.5 }, 3);
       const aboard = g.told('carnatic:aboard');
@@ -118,7 +118,7 @@ export default {
       await g.scene(SCENES.harbour, { beat: 'morning', port: 'hongkong', evening: 0, night: 0 });
       const morning = g.beat('morning');
       await watch;
-      await g.say('fogg', told ? 'Лодочник был прав. «Карнатик» ушёл ночью' : '«Карнатик» ушёл. И Паспарту с ним');
+      await (told ? g.say('fogg', 'Лодочник был прав. «Карнатик» ушёл ночью') : g.say('fogg', '«Карнатик» ушёл. И Паспарту с ним'));
       await morning;
       g.hours(told ? -4 : -10, told ? 'Весть дошла ночью' : 'Весть пришла утром');
       const fix = g.told('bunsby:fix');
