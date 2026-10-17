@@ -1,4 +1,4 @@
-// «Ждать» (the shore, the night; scene «Берег Каперны», beat `wait`): Assol on the stone, three lights on the horizon
+// «Waiting» (the shore, the night; scene «The Kaperna Shore», beat `wait`): Assol on the stone, three lights on the horizon
 // (the scene's keys light1…light3). A ring on each light (`lightN#light`): pressed, it comes near and turns out to be
 // what it is — a fishing boat (1), a steamer (2), the lighthouse (3) —, stays a while and goes behind the cape. Kaperna's
 // windows go out one by one, never below 0.1. To do nothing is a way: the ghost shows both — a light touched, hands
@@ -17,11 +17,11 @@ const EVERY = 12; // s after the last touch or going-out: one more quarter of th
 const END = 40; // s after the start or the last touch: it ends
 
 export default {
-  title: 'Ждать', // (as the author's map lists it)
+  title: 'Waiting', // (as the author's map lists it)
   about: 40,
   skipped: { touched: [], waited: true },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Ночь тянулась, и огни на горизонте вспыхивали и гасли' });
+    const mg = g.minigame({ phrase: tr('The night dragged on, and the lights on the horizon flared and died') });
     mg.plate.set({ glow: null });
     const w0 = g.get('windows'), acts = new Set(), touched = [], journeys = [];
     let windows = w0, calm = 0, since = 0;

@@ -6,7 +6,7 @@
 //   g.sound — the game's sounds (sound.js)
 //   g.hero(who) — whose scene it is: 'assol' | 'grey' | 'both' — the hero's scale in full, the other one faint
 //   g.beds(levels, seconds) — the beds of sound: those named go to their level, every other one to nothing
-//   g.scene(title, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
+//   g.scene(folder, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
 //     under it what the play has decided, as this scene's keys (carry). It plays no beat until one is named: the
 //     step's first beat goes in `state` ({beat: name}) — the scene opens playing it, its first frame the beat's own —
 //     and g.beat(name) then takes it up (waits for its end). cut: the scene before stays on the screen till this one
@@ -22,7 +22,7 @@
 //   g.watch(key, fn) — fn(value, old) each time the scene sets the key, till the step is left
 //   g.spot(ref) — where a point of the scene ('id' | 'id#point') is on the screen: {x, y} in frame heights from the
 //     frame's middle (x to the right, y down); asked each frame till the scene answers, for a second — else null
-//   g.say(who, text, at) — someone of PEOPLE says it, over `at` ('id' | 'id#point' of the scene; 'narrator' — low in
+//   g.say(who, text, at) — someone of the game's people (people.json: bespoke.say) says it, over `at` ('id' | 'id#point' of the scene; 'narrator' — low in
 //     the middle), in their voice; → a breath after it has been heard (unvoiced: once it could be read)
 //   g.choose(choice, {ref: options, …}) — the player presses one of the points ('id#point' | 'id': where the element
 //     is pressed), then one of its options ([{id, label}]: petals, one too — seen in words, pressed); → the option's
@@ -58,53 +58,32 @@
 // (a dry run): then nothing of it is said, shown or heard, and a minigame gives what j.result says, else its `skipped`.
 import * as sounds from './sound.js';
 
-export const SCENES = { shore: 'Берег Каперны', home: 'Дом Лонгрена', forest: 'Лес у моря', castle: 'Замок Греев',
-  deck: 'Палуба', shop: 'Лавка в Лиссе', far: 'Даль' };
-
-// who speaks: the sound service's voice, how it says it, who it is
-export const PEOPLE = {
-  narrator: { voice: 'Schedar', how: 'спокойно, светло, чуть торжественно — как рассказывают сказку, в которую верят', name: 'рассказчик' },
-  assol_child: { voice: 'Leda', how: 'девочка восьми лет: звонко, доверчиво, на одном дыхании', name: 'Ассоль, восемь лет' },
-  assol: { voice: 'Vindemiatrix', how: 'тихо, ясно, чуть удивлённо, без жалобы', name: 'Ассоль, семнадцать лет' },
-  longren: { voice: 'Algenib', how: 'низко, медленно, хрипловато, бережно', name: 'Лонгрен, старый моряк, отец Ассоль' },
-  egl: { voice: 'Charon', how: 'старик-сказочник: медленно, нараспев, с улыбкой в голосе', name: 'Эгль, собиратель сказок' },
-  grey_boy: { voice: 'Autonoe', how: 'мальчик восьми лет: серьёзно, упрямо, негромко', name: 'Артур Грей, восемь лет' },
-  grey: { voice: 'Iapetus', how: 'молодой капитан: ровно, негромко, уверенно', name: 'Артур Грей, капитан' },
-  lilian: { voice: 'Achernar', how: 'мягко, негромко, сдерживая волнение', name: 'Лилиан Грей, мать Артура' },
-  gop: { voice: 'Orus', how: 'капитан старой школы: резко, громко, с насмешкой', name: 'капитан Гоп' },
-  letika: { voice: 'Puck', how: 'матрос-балагур: весело, быстро, вполголоса', name: 'матрос Летика' },
-  panten: { voice: 'Umbriel', how: 'немолодой помощник: тревожно, осторожно', name: 'помощник Пантен' },
-  hin: { voice: 'Algieba', how: 'трактирщик: вкрадчиво, с ухмылкой, сплетничая', name: 'Хин Меннерс, трактирщик' },
-  filipp: { voice: 'Achird', how: 'угольщик: просто, добродушно, сердито заступаясь', name: 'угольщик Филипп' },
-  merchant: { voice: 'Sadaltager', how: 'лавочник: сухо, равнодушно, по-деловому', name: 'торговец в Лиссе' },
-  kids: { voice: 'Laomedeia', how: 'дети дразнят: звонко, нараспев, со смехом', name: 'дети Каперны' },
-  kids_call: { voice: 'Laomedeia', how: 'девочка постарше зовёт: по-доброму, чуть свысока, без смеха', name: 'девочка Каперны' },
-  kids_true: { voice: 'Laomedeia', how: 'те же дети кричат всерьёз: запыхавшись, взволнованно, без смеха', name: 'дети Каперны' },
-  girl: { voice: 'Zephyr', how: 'маленькая девочка: робко, с восхищением', name: 'девочка лет семи' },
-};
+// the world's scenes the game plays, by their folders
+export const SCENES = { shore: 'main', home: 'longren-house', forest: 'seaside-wood', castle: 'gray-castle',
+  deck: 'deck', shop: 'liss-shop', far: 'far-sea' };
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean.
 export const SCALES = {
-  tale: { start: 0, min: -3, max: 3, up: 'Сказка', down: 'Люди',
-    rule: 'Паруса алеют, когда Ассоль верит. Белеют, когда она живёт как все.' },
-  sea: { start: 0, min: -4, max: 4, up: 'Море', down: 'Дом', rule: 'Стрелка — куда тянет Грея: домой или в море.' },
+  tale: { start: 0, min: -3, max: 3, up: tr('Tale'), down: tr('People'),
+    rule: tr('The sails glow scarlet when Assol believes. They pale when she lives like everyone else.') },
+  sea: { start: 0, min: -4, max: 4, up: tr('Sea'), down: tr('Home'), rule: tr('The needle shows where Gray is drawn: home or out to sea.') },
 };
 export const ENDINGS = [
-  { id: 'grin', label: 'Как у Грина' }, { id: 'cry', label: 'Красные паруса плывут!' },
-  { id: 'waited', label: 'Она ждала' }, { id: 'kaperna', label: 'Вся Каперна' },
+  { id: 'grin', label: tr('As Grin wrote it') }, { id: 'cry', label: tr('Red sails are coming!') },
+  { id: 'waited', label: tr('She waited') }, { id: 'kaperna', label: tr('All Kaperna') },
 ];
 
 // What follows from the play so far — all a step reads of it besides g.state. A choice not made (its step skipped by
 // the author) gives the value written here.
 export function facts(state) {
   const c = state.choices, tale = state.scales.tale >= 0 ? 'tale' : 'people', way = c.way ?? 'secret';
-  const home = c.letter ? c.letter === 'home' : state.scales.sea < 0; // Grey's side: the letter decides it
+  const home = c.letter ? c.letter === 'home' : state.scales.sea < 0; // Gray's side: the letter decides it
   return {
     tale, // 'tale' | 'people'
-    warm: Math.min(1, Math.max(0, (3 - state.scales.tale) / 6)), // 0 Сказка … 1 Люди
+    warm: Math.min(1, Math.max(0, (3 - state.scales.tale) / 6)), // 0 Tale … 1 People
     sea: home ? 'home' : 'sea', // 'sea' | 'home'
-    home: Math.min(1, Math.max(0, (4 - state.scales.sea) / 8)), // 0 Море … 1 Дом
+    home: Math.min(1, Math.max(0, (4 - state.scales.sea) / 8)), // 0 Sea … 1 Home
     way, // 'secret' | 'straight'
     longren: way === 'straight' ? 'knows' : c.longren === 'go' ? 'sea' : 'home',
     ring: c.ring === 'wear' ? 'finger' : c.ring === 'hide' ? 'cord' : 'none',
@@ -118,7 +97,7 @@ export function facts(state) {
 }
 
 // The play's facts (f) as a scene's own keys: what g.scene opens it with, under the step's state.
-export function carry(title, f) {
+export function carry(folder, f) {
   const toy = f.girlToy ? 1 : 0;
   return {
     [SCENES.shore]: { ring: f.ring, ring_kind: f.ringKind, warm: f.warm, girl_toy: toy, longren: f.longren, ending: f.ending, morning: f.morning },
@@ -128,7 +107,7 @@ export function carry(title, f) {
     [SCENES.deck]: { wine: f.wine ? 1 : 0, ring: f.ring, ring_kind: f.ringKind },
     [SCENES.shop]: {},
     [SCENES.far]: {},
-  }[title];
+  }[folder];
 }
 
 const BEAT = 180000; // a beat longer than this has not ended: the scene lacks it
@@ -181,20 +160,13 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     const { shown, then } = j;
     for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
     view.gauges(state, hero);
-    if (shown) await alive(b.show(shown.title, { state: shown.state, captions: false, then }));
+    if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
     ahead();
   })());
   if (j && j.target < Infinity) j.idle.then(seen);
-  // a line, and the time it asks: heard — a breath after; shown without a voice — as long as it
-  // takes to read it (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
-  async function speak(at, text, opts) {
-    if (unseen()) return sleep(300 + text.length * 60);
-    let heard = false;
-    const hear = e => { if (e.detail.on && e.detail.text === text.trim()) heard = true; };
-    addEventListener('moood:speech', hear);
-    try { await b.say(at, text, opts); } finally { removeEventListener('moood:speech', hear); }
-    await sleep(heard ? 500 : 300 + text.length * 60);
-  }
+  // the time a line asks, once said: heard — a breath after; shown without a voice — as long as it takes to read it
+  // (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
+  const after = ({ heard, text }) => sleep(heard ? 500 : 300 + text.length * 60);
   const g = {
     state,
     signal: left.signal,
@@ -207,15 +179,15 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     beds(levels, seconds = 2) {
       if (!gone()) g.sound.beds(levels, seconds);
     },
-    async scene(title, st = {}, { cut = false } = {}) {
+    async scene(folder, st = {}, { cut = false } = {}) {
       if (gone()) return never;
       // (opened as it is to be: what the play has decided — those of its keys the scene has —, the beat it opens
       // with playing from its first frame)
-      const spec = await alive(unseen() ? j.real(b.specOf(title)) : b.specOf(title));
-      st = { ...Object.fromEntries(Object.entries(carry(title, facts(state))).filter(([key]) => key in spec.states)), ...st };
+      const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
+      st = { ...Object.fromEntries(Object.entries(carry(folder, facts(state))).filter(([key]) => key in spec.states)), ...st };
       if (unseen()) {
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
-        j.scene(title, st);
+        j.scene(folder, st);
         return;
       }
       showing = true;
@@ -223,7 +195,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         if (fast) await alive(land());
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
         g.withdraw();
-        await alive(b.show(title, { state: st, captions: false, fade: !cut }));
+        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       } finally { showing = false; }
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
@@ -261,8 +233,9 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     },
     async say(who, text, at = who) {
       if (gone()) return never;
+      if (unseen()) return sleep(300 + text.length * 60);
       if (fast) await alive(land());
-      return speak(at, text, PEOPLE[who]);
+      return alive(b.say(who, text, { at })).then(after);
     },
     async choose(choice, offers) {
       if (gone()) return never;
@@ -297,7 +270,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`кусок «${name}» не кончился`);
+      if (wait && !(await ended)) b.trouble(`the beat “${name}” did not end`);
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
@@ -329,7 +302,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       }
     },
     minigame(o = {}) {
-      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      if (!playing) throw new Error('g.minigame is only for inside a mini-game (g.play)');
       const mg = b.minigame.start({ ...o, signal: playing.signal });
       mg.on('skip', playing.end);
       return mg;

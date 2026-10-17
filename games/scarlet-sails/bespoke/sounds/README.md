@@ -1,10 +1,10 @@
-# Записи подложек
+# The beds' recordings
 
-Настоящие записи с Freesound, лицензия CC0 (без условий): из каждой вырезан кусок ~45 с, закольцованный (последние
-2,5 с сведены в начало), громкость приведена к −24 dBFS RMS, MP3 96 кбит/с. Выбраны Павлом 2026-10-16
-(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` подгоняет каждую к громкости прежней подложки.
+Real recordings from Freesound, CC0 licence (no conditions): a piece of ~45 s cut from each, looped (the last 2.5 s mixed
+into the start), the loudness brought to −24 dBFS RMS, MP3 96 kbit/s. Chosen by Pavel 2026-10-16
+(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` fits each to the loudness of the bed before it.
 
-| Файл | Запись | Автор |
+| File | Recording | Author |
 |---|---|---|
 | `breath-638868.mp3` | [Snoring while sleeping at night with crickets, cicada in the countryside in the forest](https://freesound.org/people/felix.blume/sounds/638868/) | felix.blume |
 | `sea-shore-240645.mp3` | [Ocean Lake Sea Shore Waves.wav](https://freesound.org/people/GLM_KG/sounds/240645/) | GLM_KG |
