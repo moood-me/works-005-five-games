@@ -21,7 +21,7 @@ export default {
   about: 40,
   skipped: { slips: 0, seconds: 0 }, // (as played: the plain good outcome)
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The shrouds ran up to the sky; the deck heeled underfoot') });
+    const mg = g.minigame({ phrase: tr('The shrouds ran up into the sky, and the deck heeled underfoot') });
     const tension = mg.layer('tension');
     let target = 0, shown = 0, slips = 0, side = 0, bad = 0, spent = false, warned = false, wind = -1, sentRoll = 0, sentClimb = 0;
     SIDES.forEach(s => g.set(s.key, 1));
