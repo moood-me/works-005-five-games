@@ -1,10 +1,10 @@
-# The beds' recordings
+# Записи подложек
 
-Real recordings from Freesound, licence CC0 (no conditions): a piece of ~45 s cut from each, looped (the last
-2.5 s mixed into the beginning), the loudness brought to −24 dBFS RMS, MP3 96 kbit/s. Chosen by Pavel on 2026-10-16
-(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` fits each to the loudness of the bed it replaced.
+Настоящие записи с Freesound, лицензия CC0 (без условий): из каждой вырезан кусок ~45 с, закольцованный (последние
+2,5 с сведены в начало), громкость приведена к −24 dBFS RMS, MP3 96 кбит/с. Выбраны Павлом 2026-10-16
+(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` подгоняет каждую к громкости прежней подложки.
 
-| File | Recording | Author |
+| Файл | Запись | Автор |
 |---|---|---|
 | `blaze-484338.mp3` | [Fireplace crackling wood little flame.wav](https://freesound.org/people/BonnyOrbit/sounds/484338/) | BonnyOrbit |
 | `crowd-550916.mp3` | [BGSaSc Walla Medium Crowd German Berlin Talking People 01](https://freesound.org/people/Profispiesser/sounds/550916/) | Profispiesser |
