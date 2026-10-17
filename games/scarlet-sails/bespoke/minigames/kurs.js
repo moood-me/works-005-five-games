@@ -1,4 +1,4 @@
-// «Course» (V, the ship on its way to Kaperna; played in three legs, `opts.leg` 0, 1, 2): Gray at the helm, the bow on
+// «Курс» (V, the ship on its way to Kaperna; played in three legs, `opts.leg` 0, 1, 2): Grey at the helm, the bow on
 // Kaperna. The language's lead, anywhere — the helm: the finger's offset turns the wheel (`helm`) and steers the bow
 // (`heading`, the lead's arrow, a rate), gusts push it off (the lead's push, set each frame); kept in the zone (|heading|
 // < 0.2) the sails stay full, out of it they luff (`luff`). The scene (`helm`) shows it all by those three keys; the
@@ -14,14 +14,14 @@ const SAMPLES = 12; // 3 s of quarter-seconds
 const EASE = 0.5; // s: the wheel let go comes back
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-const course = {
-  title: 'Course', // (as the author's ☰ lists it)
+const kurs = {
+  title: 'Курс', // (as the author's ☰ lists it)
   about: 22,
   skipped: { steady: 0.8 }, // (as played: the plain good outcome — clean from 0.6)
   async run(g, b, opts, signal) {
     const leg = opts.leg, sea = opts.sea;
     const A = (0.5 - 0.06 * sea) * (0.8 + 0.2 * leg);
-    const mg = g.minigame({ phrase: tr('The wind was carrying the Secret off her course for Kaperna') });
+    const mg = g.minigame({ phrase: 'Ветер сносил «Секрет» с курса на Каперну' });
     const send = keys(g);
     const helm = mg.lead({ steer: 'rate', zone: { at: 0, width: 2 * STEADY } });
     mg.glow('wheel');
@@ -56,11 +56,11 @@ const course = {
       mg.plate.set({ fill: since / LEG, glow: s.in ? 'good' : 'bad' });
       return since >= LEG;
     });
-    if (!done) return course.skipped;
+    if (!done) return kurs.skipped;
     const steady = clamp(steadyFor / LEG);
     await mg.end({ as: steady >= 0.6 ? 'clean' : 'flawed' });
     return { steady };
   },
 };
 
-export default course;
+export default kurs;

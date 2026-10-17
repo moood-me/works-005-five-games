@@ -1,4 +1,4 @@
-// «Look» (V, the house, beat `look`): Assol sits with the book, her eyes in the page. Her gaze is the thing pulled:
+// «Смотри» (V, the house, beat `look`): Assol sits with the book, her eyes in the page. Her gaze is the thing pulled:
 // a mark on the book (`book#book`), drawn along its way up to the window (`window#window`) — let go short of it, the
 // gaze sinks back to the page, seen (a spring): a try. opts.heavy — she does not believe her eyes: it comes only while
 // the finger pulls ahead of it. The scene shows it all by its key `gaze` (0 — the page, 1 — the window); the camera
@@ -8,11 +8,11 @@
 import { until, keys } from '../hands.js';
 
 export default {
-  title: 'Look', // (as the author's ☰ lists it)
+  title: 'Смотри', // (as the author's ☰ lists it)
   about: 5,
   skipped: { tries: 0, seconds: 0 },
   async run(g, b, { heavy = false } = {}, signal) {
-    const mg = g.minigame({ phrase: tr('She was reading, and the lines would not let her go') });
+    const mg = g.minigame({ phrase: 'Она читала, и строки не отпускали её' });
     const send = keys(g), t0 = mg.t;
     const book = mg.mark({ at: 'book#book', kind: 'dash' });
     const gaze = mg.pull({ on: book, to: 'window#window', release: 'spring', heavy });
