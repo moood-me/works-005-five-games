@@ -1,4 +1,4 @@
-// The square scene (scenes/main) is built here: its scene.json and every file in elements/ come out of this. Edit
+// The scene «Площадь» (scenes/main) is built here: its scene.json and every file in elements/ come out of this. Edit
 // this (and the hand-written scenes/main/lib.js, script.js, showcase.js, notes.md) — never scene.json or elements/.
 //   node tools/main.js
 const fs = require('fs'), path = require('path');
@@ -14,51 +14,51 @@ const el = (o, code, animate) => {
 };
 
 // the sky, the ground, the sea at the lane's end
-el({ id: 'sky', name: 'Sky', sky: true }, 'e.kit.sky.sky(g, e, e.lib.SKY);');
-el({ id: 'ground', name: 'Square', plane: true, across: 0, distance: 6, elevation: 0, width: 44, depth: 100 }, 'e.lib.ground(g);');
-el({ id: 'sea_end', name: 'Sea', across: 10.5, distance: 80, elevation: -10, facing: 180, height: 11.7, box: [-30, -11.8, 30, 0.1] }, 'e.lib.seaEnd(g, e);');
+el({ id: 'sky', name: 'Небо', sky: true }, 'e.kit.nebo.sky(g, e, e.lib.SKY);');
+el({ id: 'ground', name: 'Площадь', plane: true, across: 0, distance: 6, elevation: 0, width: 44, depth: 100 }, 'e.lib.ground(g);');
+el({ id: 'sea_end', name: 'Море', across: 10.5, distance: 80, elevation: -10, facing: 180, height: 11.7, box: [-30, -11.8, 30, 0.1] }, 'e.lib.seaEnd(g, e);');
 
 // the fronts round the square: [id, name, x, z, facing, f]
 const fronts = [
-  ['alfredo_door', 'Alfredo\'s house', -12, 0, 90, 'f_alf'], ['f_w2', 'House', -12, 20, 90, 'f_w2'],
-  ['f_n1', 'House with the arch', -12, 26, 180, 'f_n1'], ['f_e3', 'House', 12, 26, 270, 'f_e3'], ['f_e1', 'House', 12, 8, 270, 'f_e1'],
-  ['f_se', 'House', 12, 0, 0, 'f_se'], ['f_sw', 'House', -5, 0, 0, 'f_sw'],
-  ['f_lane_w', 'Street to the sea', 9.1, 26.3, 90, 'f_lane_w'], ['f_lane_e', 'Street to the sea', 12, 48.3, 270, 'f_lane_e'],
-  ['f_st_w', 'Street', -5, -34, 90, 'f_st_w'], ['f_st_e', 'Street', 5, 0, 270, 'f_st_e'], ['f_st_end', 'Bus stop', 5, -34, 0, 'f_st_end'],
+  ['alfredo_door', 'Дом Альфредо', -12, 0, 90, 'f_alf'], ['f_w2', 'Дом', -12, 20, 90, 'f_w2'],
+  ['f_n1', 'Дом с аркой', -12, 26, 180, 'f_n1'], ['f_e3', 'Дом', 12, 26, 270, 'f_e3'], ['f_e1', 'Дом', 12, 8, 270, 'f_e1'],
+  ['f_se', 'Дом', 12, 0, 0, 'f_se'], ['f_sw', 'Дом', -5, 0, 0, 'f_sw'],
+  ['f_lane_w', 'Улица к морю', 9.1, 26.3, 90, 'f_lane_w'], ['f_lane_e', 'Улица к морю', 12, 48.3, 270, 'f_lane_e'],
+  ['f_st_w', 'Улица', -5, -34, 90, 'f_st_w'], ['f_st_e', 'Улица', 5, 0, 270, 'f_st_e'], ['f_st_end', 'Остановка', 5, -34, 0, 'f_st_end'],
 ];
 const FR = Object.fromEntries(Object.entries(LIB.FRONTS).map(([k, v]) => [k, { w: v.w, h: v.h, lit: (v.windows || []).filter(w => w[6]).length }]));
 fronts.forEach(([id, name, x, z, facing, key], i) => {
   const f = FR[key];
   el({ id, name, across: x, distance: z, facing, height: f.h, box: [-0.3, -f.h - 0.6, f.w + 0.3, 0.05], shadow: true },
     `e.lib.front(g, e, e.lib.FRONTS.${key});`);
-  if (f.lit) el({ id: `${id}_win`, name: 'Windows', across: x, distance: z, facing, glows: true, inFront: [id], height: f.h, box: [-0.3, -f.h - 0.6, f.w + 0.3, 0.05] },
+  if (f.lit) el({ id: `${id}_win`, name: 'Окна', across: x, distance: z, facing, glows: true, inFront: [id], height: f.h, box: [-0.3, -f.h - 0.6, f.w + 0.3, 0.05] },
     `e.lib.litWindows(g, e, e.lib.FRONTS.${key});`, `e.lib.windowsMove(e, ${f.lit}, ${i * 7 + 3});`);
 });
 
-// the Paradiso: its front, the canopy, the booth's room, the house behind it; its beam
-el({ id: 'paradiso', name: 'Paradiso', across: -12, distance: 6, facing: 90, height: 10, box: [-0.4, -11.4, 14.4, 12], shadow: true },
+// the «Парадизо»: its front, the canopy, the booth's room, the house behind it; its beam
+el({ id: 'paradiso', name: '«Парадизо»', across: -12, distance: 6, facing: 90, height: 10, box: [-0.4, -11.4, 14.4, 12], shadow: true },
   'e.lib.paradisoPaint(g, e);', 'e.lib.paradisoMove(e);');
-el({ id: 'par_back', name: 'Back wall', across: -18.5, distance: 6, facing: 90, height: 8, box: [-0.6, -8.4, 14.6, 0.6] }, 'e.lib.backWall(g);');
-el({ id: 'rubble', name: 'Rubble', across: -12.6, distance: 6, facing: 90, height: 3, box: [-0.5, -3.5, 14.5, 0.3] }, 'e.lib.rubble(g, e);',
+el({ id: 'par_back', name: 'Задняя стена', across: -18.5, distance: 6, facing: 90, height: 8, box: [-0.6, -8.4, 14.6, 0.6] }, 'e.lib.backWall(g);');
+el({ id: 'rubble', name: 'Обломки', across: -12.6, distance: 6, facing: 90, height: 3, box: [-0.5, -3.5, 14.5, 0.3] }, 'e.lib.rubble(g, e);',
   "const c = Math.max(0, Math.min(1, ((e.state.collapse ?? 0) - 0.35) / 0.65)), l = e.layer('heap'); l.alpha = c > 0 ? 1 : 0; l.scaleY = Math.max(0.01, c); l.y = 0;");
-el({ id: 'canopy', name: 'Canopy', plane: true, across: -11.25, distance: 12, elevation: 3.3, width: 1.5, depth: 7.4 },
+el({ id: 'canopy', name: 'Козырёк', plane: true, across: -11.25, distance: 12, elevation: 3.3, width: 1.5, depth: 7.4 },
   "e.layer('all', {}, l => { l.fillStyle = '#4a3a2e'; l.fillRect(-0.75, -3.7, 1.5, 7.4); l.fillStyle = 'rgba(0,0,0,0.3)'; l.fillRect(-0.75, -3.7, 0.1, 7.4); });",
   "e.layer('all').alpha = (e.state.collapse ?? 0) > 0.25 ? 0 : 1;");
-el({ id: 'canopy_front', name: 'Sign', across: -10.5, distance: 8.3, elevation: 2.75, facing: 90, height: 0.6, box: [-0.2, -1.3, 7.6, 0.9] },
+el({ id: 'canopy_front', name: 'Вывеска', across: -10.5, distance: 8.3, elevation: 2.75, facing: 90, height: 0.6, box: [-0.2, -1.3, 7.6, 0.9] },
   'e.lib.canopyFront(g, e);', 'e.lib.canopyMove(e);');
-el({ id: 'booth_in', name: 'Booth', across: -12.3, distance: 16, facing: 90, glows: true, height: 1.4, box: [-1, -6.8, 1, -5.2] },
+el({ id: 'booth_in', name: 'Будка', across: -12.3, distance: 16, facing: 90, glows: true, height: 1.4, box: [-1, -6.8, 1, -5.2] },
   'e.lib.boothRoom(g, e);', 'e.lib.boothMove(e);');
-objects.push({ id: 'beam_anchor', name: 'Beam', unseen: true, across: -11.85, distance: 16, elevation: 6, facing: 104, tilt: -55, place: { facing: 'beam_turn', tilt: 'beam_pitch' } });
-el({ id: 'beam', name: 'Beam', on: 'beam_anchor', across: 0, distance: 0, elevation: 0, facing: 270, glows: true, height: 2,
+objects.push({ id: 'beam_anchor', name: 'Луч', unseen: true, across: -11.85, distance: 16, elevation: 6, facing: 104, tilt: -55, place: { facing: 'beam_turn', tilt: 'beam_pitch' } });
+el({ id: 'beam', name: 'Луч', on: 'beam_anchor', across: 0, distance: 0, elevation: 0, facing: 270, glows: true, height: 2,
   box: [-0.3, -2.4, 18.4, 2.4], uniforms: { on: 0 } },
-  'e.kit.cinema.beam(e, { len: e.lib.BEAM_LEN, top: -0.75, bot: 0.75, mouth: 0.14, dust: 300, drift: 1.2, tipRadius: 1.5, tipStrength: 1.1 });',
+  'e.kit.kino.beam(e, { len: e.lib.BEAM_LEN, top: -0.75, bot: 0.75, mouth: 0.14, dust: 300, drift: 1.2, tipRadius: 1.5, tipStrength: 1.1 });',
   `const on = Math.max(0, Math.min(1, e.state.beam_on ?? 0));
 e.uniform('on', on); e.glow('mouth', on); e.glow('tip', 0);`);
 
 // the north side: the white wall and its film, the chapel, the steps, the mother's room
-el({ id: 'wall', name: 'White wall', across: -5, distance: 26, facing: 180, height: 8.5, box: [-0.2, -8.8, 10.7, 0.05], shadow: true }, 'e.lib.whiteWall(g, e);');
-el({ id: 'screen', name: 'Film on the wall', across: 2, distance: 25.96, facing: 180, glows: true, height: 4, box: [-3.1, -6.6, 3.1, -2.4] },
-  `const k = e.kit.cinema, W = 6, H = 4, x = -3, y = -6.5;
+el({ id: 'wall', name: 'Белая стена', across: -5, distance: 26, facing: 180, height: 8.5, box: [-0.2, -8.8, 10.7, 0.05], shadow: true }, 'e.lib.whiteWall(g, e);');
+el({ id: 'screen', name: 'Кино на стене', across: 2, distance: 25.96, facing: 180, glows: true, height: 4, box: [-3.1, -6.6, 3.1, -2.4] },
+  `const k = e.kit.kino, W = 6, H = 4, x = -3, y = -6.5;
 e.layer('blur', {}, l => { l.filter = 'blur(0.18px)'; k.frame(l, 'comedy', x, y, W, H); l.filter = 'none'; });
 e.layer('sharp', { flicker: 0.12 }, l => k.frame(l, 'comedy', x, y, W, H));
 e.layer('white', { flicker: 0.1 }, l => k.frame(l, 'white', x, y, W, H));
@@ -75,85 +75,85 @@ e.layer('sharp').alpha = on * film * f; e.layer('blur').alpha = on * film * (1 -
 e.layer('white').alpha = S.wall_film === 'white' ? on : 0;
 const b = Math.max(0, Math.min(1, S.wall_burn ?? 0)), on2 = film || S.wall_film === 'white' ? 1 : 0;
 [0, 0.18, 0.35, 0.5].forEach((d, i) => { const u = Math.max(0, Math.min(1, (b - d) / (1 - d))), l = e.layer('burn' + i); l.alpha = u > 0 ? on2 : 0; l.scale = 0.05 + 1.6 * u; });`);
-el({ id: 'church', name: 'Church', across: 5.5, distance: 26.3, facing: 180, height: 12.4, box: [-0.3, -12.6, 3.9, 0.05], shadow: true }, 'e.lib.chapel(g, e);');
+el({ id: 'church', name: 'Церковь', across: 5.5, distance: 26.3, facing: 180, height: 12.4, box: [-0.3, -12.6, 3.9, 0.05], shadow: true }, 'e.lib.chapel(g, e);');
 for (let k = 1; k <= 4; k++) {
   const z0 = 23 + 0.75 * (k - 1);
-  objects.push({ id: `step${k}`, name: 'Steps', plane: true, across: 5.5, distance: (z0 + 26) / 2, elevation: 0.25 * k, width: 5, depth: 26 - z0, walk: true, color: '#b9a57f' });
+  objects.push({ id: `step${k}`, name: 'Ступени', plane: true, across: 5.5, distance: (z0 + 26) / 2, elevation: 0.25 * k, width: 5, depth: 26 - z0, walk: true, color: '#b9a57f' });
 }
-el({ id: 'steps', name: 'Church steps', across: 5.5, distance: 23, facing: 180, height: 0.25, box: [-2.55, -0.27, 2.55, 0.02],
+el({ id: 'steps', name: 'Ступени церкви', across: 5.5, distance: 23, facing: 180, height: 0.25, box: [-2.55, -0.27, 2.55, 0.02],
   copies: [0, 1, 2, 3].map(k => ({ across: 5.5, distance: 23 + 0.75 * k, elevation: 0.25 * k })) }, 'e.lib.riser(g);');
-el({ id: 'mother_window', name: 'Mother\'s window', across: -9, distance: 26.75, facing: 180, glows: true, height: 2, box: [-0.85, -6.0, 0.85, -4.0] },
+el({ id: 'mother_window', name: 'Окно матери', across: -9, distance: 26.75, facing: 180, glows: true, height: 2, box: [-0.85, -6.0, 0.85, -4.0] },
   'e.lib.motherRoom(g, e);', "const k = Math.max(0, Math.min(1, e.state.mother_light ?? 0)); e.layer('lit').alpha = k; e.glow('lamp', k);");
-objects.push({ id: 'mother_floor', name: 'Room floor', plane: true, unseen: true, walk: true, across: -9, distance: 26.5, elevation: 4.05, width: 1.6, depth: 0.7 });
+objects.push({ id: 'mother_floor', name: 'Пол комнаты', plane: true, unseen: true, walk: true, across: -9, distance: 26.5, elevation: 4.05, width: 1.6, depth: 0.7 });
 
 // the east side: the bank, its balcony, the chalk wall, the chair, the garland
-el({ id: 'bank', name: 'Bank', across: 12, distance: 22, facing: 270, height: 11, box: [-0.3, -11.6, 14.3, 0.05], shadow: true }, 'e.lib.bank(g, e);');
-el({ id: 'balcony_room', name: 'Elena\'s window', across: 11.975, distance: 13.7, facing: 270, glows: true, inFront: ['bank'], height: 2.4, box: [-0.05, -6.8, 1.45, -4.3] },
+el({ id: 'bank', name: 'Банк', across: 12, distance: 22, facing: 270, height: 11, box: [-0.3, -11.6, 14.3, 0.05], shadow: true }, 'e.lib.bank(g, e);');
+el({ id: 'balcony_room', name: 'Окно Елены', across: 11.975, distance: 13.7, facing: 270, glows: true, inFront: ['bank'], height: 2.4, box: [-0.05, -6.8, 1.45, -4.3] },
   'e.lib.balconyRoom(g, e);', "const k = Math.max(0, Math.min(1, e.state.elena_window ?? 0)); e.layer('room').alpha = Math.min(1, k * 1.5); e.glow('room', k);");
-el({ id: 'balcony', name: 'Elena\'s balcony', across: 11.95, distance: 13.7, facing: 270, inFront: ['balcony_room', 'bank'], height: 2.4, box: [-0.6, -6.8, 2.0, -4.3] },
+el({ id: 'balcony', name: 'Балкон Елены', across: 11.95, distance: 13.7, facing: 270, inFront: ['balcony_room', 'bank'], height: 2.4, box: [-0.6, -6.8, 2.0, -4.3] },
   'e.lib.balconyLeaves(g, e);', "const k = Math.max(0, Math.min(1, e.state.elena_window ?? 0)); e.layer('sl').scaleX = 1 - 0.82 * k; e.layer('sr').scaleX = 1 - 0.82 * k;");
-el({ id: 'balcony_rail', name: 'Balcony railing', across: 11.32, distance: 13.9, facing: 270, height: 1.1, box: [-0.05, -5.35, 1.85, -4.15] }, 'e.lib.balconyRail(g);');
-objects.push({ id: 'balcony_slab', name: 'Balcony', plane: true, across: 11.66, distance: 13.0, elevation: 4.2, width: 0.68, depth: 1.9, color: '#a8957a' });
-el({ id: 'chalk_wall', name: 'Chalk wall', across: 11.97, distance: 16.8, facing: 270, inFront: ['bank'], height: 1.7, box: [-0.05, -1.75, 1.65, 0.05] }, 'e.lib.chalkMarks(g, e);');
-el({ id: 'chair', name: 'Totò\'s chair', across: 11.3, distance: 15.6, height: 0.95, box: [-0.3, -1.0, 0.3, 0.03], shadow: true },
+el({ id: 'balcony_rail', name: 'Перила балкона', across: 11.32, distance: 13.9, facing: 270, height: 1.1, box: [-0.05, -5.35, 1.85, -4.15] }, 'e.lib.balconyRail(g);');
+objects.push({ id: 'balcony_slab', name: 'Балкон', plane: true, across: 11.66, distance: 13.0, elevation: 4.2, width: 0.68, depth: 1.9, color: '#a8957a' });
+el({ id: 'chalk_wall', name: 'Стена с мелом', across: 11.97, distance: 16.8, facing: 270, inFront: ['bank'], height: 1.7, box: [-0.05, -1.75, 1.65, 0.05] }, 'e.lib.chalkMarks(g, e);');
+el({ id: 'chair', name: 'Стул Тото', across: 11.3, distance: 15.6, height: 0.95, box: [-0.3, -1.0, 0.3, 0.03], shadow: true },
   'if (e.state.chair_on) e.lib.chairPaint(g, false);');
-el({ id: 'alfredo_chair', name: 'Alfredo\'s chair', across: -11.4, distance: 3.12, height: 0.95, box: [-0.3, -1.0, 0.3, 0.03], shadow: true },
+el({ id: 'alfredo_chair', name: 'Стул Альфредо', across: -11.4, distance: 3.12, height: 0.95, box: [-0.3, -1.0, 0.3, 0.03], shadow: true },
   "if (e.state.paradiso_state === 'new' && e.state.era === 'past') e.lib.chairPaint(g, true);");
-el({ id: 'garland', name: 'Garland', across: 11.4, distance: 21, facing: 270, glows: true, height: 7, box: [-0.2, -7, 12.2, -5.4] }, 'e.lib.garlandPaint(g, e);', 'e.lib.garlandMove(e);');
+el({ id: 'garland', name: 'Гирлянда', across: 11.4, distance: 21, facing: 270, glows: true, height: 7, box: [-0.2, -7, 12.2, -5.4] }, 'e.lib.garlandPaint(g, e);', 'e.lib.garlandMove(e);');
 
 // the fountain: its basin and its column (forms), its water
-el({ id: 'fountain', name: 'Fountain', across: 0, distance: 13, height: 0.5, box: [-4.6, -0.55, 4.6, 0.02], shadow: true },
+el({ id: 'fountain', name: 'Фонтан', across: 0, distance: 13, height: 0.5, box: [-4.6, -0.55, 4.6, 0.02], shadow: true },
   `g.fillStyle = '#b3a07c'; g.fillRect(-4.6, -0.55, 9.2, 0.57);
 g.fillStyle = 'rgba(60,45,30,0.25)'; for (let i = 0; i < 20; i++) g.fillRect(-4.6 + i * 0.46, -0.55, 0.03, 0.57);
 g.fillStyle = '#c8b690'; g.fillRect(-4.6, -0.55, 9.2, 0.08);
 e.form(e.kit.revolve([[1.42, 0.5], [1.45, 0.47], [1.45, 0.05], [1.5, 0]]), { closed: 'u' });
 e.at(0, -0.5);`);
-el({ id: 'fountain_col', name: 'Fountain', across: 0, distance: 13, height: 1.9, box: [-1.2, -1.95, 1.2, 0.02], shadow: true },
+el({ id: 'fountain_col', name: 'Фонтан', across: 0, distance: 13, height: 1.9, box: [-1.2, -1.95, 1.2, 0.02], shadow: true },
   `g.fillStyle = '#b9a67f'; g.fillRect(-1.2, -1.95, 2.4, 1.97);
 g.fillStyle = 'rgba(60,45,30,0.3)'; for (let i = 0; i < 8; i++) g.fillRect(-1.2 + i * 0.3, -1.95, 0.02, 1.97);
 e.form(e.kit.revolve([[0.05, 1.9], [0.38, 1.62], [0.4, 1.55], [0.1, 1.45], [0.13, 0.5], [0.22, 0.4], [0.22, 0.42]]), { closed: 'u' });`);
-el({ id: 'fountain_water', name: 'Water', plane: true, across: 0, distance: 13, elevation: 0.42, width: 2.9, depth: 2.9 },
+el({ id: 'fountain_water', name: 'Вода', plane: true, across: 0, distance: 13, elevation: 0.42, width: 2.9, depth: 2.9 },
   "g.fillStyle = '#26323a'; g.beginPath(); g.arc(0, 0, 1.42, 0, Math.PI * 2); g.fill(); g.strokeStyle = 'rgba(200,210,220,0.18)'; g.lineWidth = 0.02; for (const r of [0.6, 0.9, 1.2]) { g.beginPath(); g.arc(0, 0, r, 0, Math.PI * 2); g.stroke(); }");
-objects.push({ id: 'fountain_spout', name: 'Jets', particles: { kind: 'splashes', at: [0, 13, 1.8], rate: 26, speed: [0.6, 1.0], spread: 40, direction: [0, 0, 1], size: [0.02, 0.01], life: [0.6, 0.9], color: '#c8d4dc', opacity: 0.5 } });
+objects.push({ id: 'fountain_spout', name: 'Струйки', particles: { kind: 'splashes', at: [0, 13, 1.8], rate: 26, speed: [0.6, 1.0], spread: 40, direction: [0, 0, 1], size: [0.02, 0.01], life: [0.6, 0.9], color: '#c8d4dc', opacity: 0.5 } });
 
 // lampposts of the square
-el({ id: 'lamppost', name: 'Street lamp', across: -5.5, distance: 21.5, height: 4.1, box: [-0.3, -4.15, 0.3, 0.02], shadow: true,
+el({ id: 'lamppost', name: 'Фонарь', across: -5.5, distance: 21.5, height: 4.1, box: [-0.3, -4.15, 0.3, 0.02], shadow: true,
   copies: [{ across: -5.5, distance: 21.5 }, { across: 6.5, distance: 8.5 }, { across: 2.5, distance: -14 }, { across: -7.2, distance: 0.4 }] }, 'e.lib.lamppost(g, e);');
 
 // the painted crowds (standing, sitting), moved to where a beat wants them
-el({ id: 'crowd_far', name: 'Crowd', across: 0, distance: -60, facing: 180, place: { across: 'crowd_x', distance: 'crowd_z', facing: 'crowd_f' }, height: 1.7, box: [-6.3, -2.0, 6.6, 0.1] },
+el({ id: 'crowd_far', name: 'Толпа', across: 0, distance: -60, facing: 180, place: { across: 'crowd_x', distance: 'crowd_z', facing: 'crowd_f' }, height: 1.7, box: [-6.3, -2.0, 6.6, 0.1] },
   'e.lib.crowdRows(g, e, false);', 'e.lib.crowdMove(e, false);');
-el({ id: 'crowd_sit', name: 'Crowd on the stones', across: 0, distance: -60, facing: 180, place: { across: 'crowd_x', distance: 'crowd_z', facing: 'crowd_f' }, height: 1.1, box: [-6.3, -1.4, 6.6, 0.1] },
+el({ id: 'crowd_sit', name: 'Толпа на камнях', across: 0, distance: -60, facing: 180, place: { across: 'crowd_x', distance: 'crowd_z', facing: 'crowd_f' }, height: 1.1, box: [-6.3, -1.4, 6.6, 0.1] },
   'e.lib.crowdRows(g, e, true);', 'e.lib.crowdMove(e, true);');
 
 // the hearse: an anchor moved along its way, its parts on it (laid out as if it went south: its back north)
-objects.push({ id: 'hearse_anchor', name: 'Hearse', unseen: true, across: -9.6, distance: -8, place: { across: 'hearse_a', distance: 'hearse_d', facing: 'hearse_f' } });
-el({ id: 'hearse', name: 'Cart with the coffin', on: 'hearse_anchor', across: 0, distance: 1.2, facing: 0, height: 1.5, box: [-1.0, -1.65, 1.0, 0.03], shadow: true }, 'e.lib.hearseBack(g, e);');
-el({ id: 'hearse_l', name: 'Cart with the coffin', on: 'hearse_anchor', across: 0.58, distance: 0, facing: 90, height: 1.5, box: [-1.25, -1.6, 1.25, 0.03], shadow: true }, 'e.lib.hearseSide(g);');
-el({ id: 'hearse_r', name: 'Cart with the coffin', on: 'hearse_anchor', across: -0.58, distance: 0, facing: 270, height: 1.5, box: [-1.25, -1.6, 1.25, 0.03], shadow: true }, 'e.lib.hearseSide(g);');
-el({ id: 'hearse_front', name: 'Cart with the coffin', on: 'hearse_anchor', across: 0, distance: -1.2, facing: 180, height: 1.5, box: [-1.0, -1.65, 1.0, 0.03] }, 'e.lib.hearseBack(g, { at() {} });');
-el({ id: 'hearse_top', name: 'Coffin', on: 'hearse_anchor', plane: true, across: 0, distance: 0, elevation: 1.42, width: 0.8, depth: 2.1 }, 'e.lib.hearseTop(g);');
+objects.push({ id: 'hearse_anchor', name: 'Катафалк', unseen: true, across: -9.6, distance: -8, place: { across: 'hearse_a', distance: 'hearse_d', facing: 'hearse_f' } });
+el({ id: 'hearse', name: 'Повозка с гробом', on: 'hearse_anchor', across: 0, distance: 1.2, facing: 0, height: 1.5, box: [-1.0, -1.65, 1.0, 0.03], shadow: true }, 'e.lib.hearseBack(g, e);');
+el({ id: 'hearse_l', name: 'Повозка с гробом', on: 'hearse_anchor', across: 0.58, distance: 0, facing: 90, height: 1.5, box: [-1.25, -1.6, 1.25, 0.03], shadow: true }, 'e.lib.hearseSide(g);');
+el({ id: 'hearse_r', name: 'Повозка с гробом', on: 'hearse_anchor', across: -0.58, distance: 0, facing: 270, height: 1.5, box: [-1.25, -1.6, 1.25, 0.03], shadow: true }, 'e.lib.hearseSide(g);');
+el({ id: 'hearse_front', name: 'Повозка с гробом', on: 'hearse_anchor', across: 0, distance: -1.2, facing: 180, height: 1.5, box: [-1.0, -1.65, 1.0, 0.03] }, 'e.lib.hearseBack(g, { at() {} });');
+el({ id: 'hearse_top', name: 'Гроб', on: 'hearse_anchor', plane: true, across: 0, distance: 0, elevation: 1.42, width: 0.8, depth: 2.1 }, 'e.lib.hearseTop(g);');
 
 // particles: the booth's smoke, the fireworks, the rain, the dust of the demolition
-objects.push({ id: 'smoke_booth', name: 'Smoke', particles: { kind: 'smoke', at: 'paradiso#booth_window', amount: 'smoke', rate: 14, size: [0.6, 3.2], life: [4, 7], speed: [0.4, 0.9], direction: [1, 0, 0.6], spread: 30, gravity: -0.5, color: '#3a3532', opacity: 0.75, shadow: 0.6 } });
-objects.push({ id: 'fireworks', name: 'Fireworks', particles: { kind: 'sparks', at: [6, -2, 11], source: [10, 4, 3], burst: { on: 'fw', count: 220 }, speed: [4, 8], spread: 180, direction: [0, 0, 1], gravity: 2.2, drag: 0.6, life: [1.2, 2.2], ground: 'pass', colors: ['#ffd28a', '#ff8a6a', '#a8c8ff', '#fff2d8'], glow: [7, 1] } });
-objects.push({ id: 'rain_fall', name: 'Rain', particles: { kind: 'rain', amount: 'rain', count: 18000, reach: 18, color: '#cdd6e6', opacity: 0.6 } });
-objects.push({ id: 'demolition_dust', name: 'Dust', particles: { kind: 'puff', at: [-12.5, 13, 2.5], source: [3, 14, 5], burst: { on: 'dust_burst', count: 700, over: 3 }, size: [3, 9], life: [14, 22], speed: [1, 4], spread: 120, direction: [1, 0, 0.3], gravity: -0.05, drag: 1.2, color: '#b9b1a4', opacity: 0.55, shadow: 0.4 } });
+objects.push({ id: 'smoke_booth', name: 'Дым', particles: { kind: 'smoke', at: 'paradiso#booth_window', amount: 'smoke', rate: 14, size: [0.6, 3.2], life: [4, 7], speed: [0.4, 0.9], direction: [1, 0, 0.6], spread: 30, gravity: -0.5, color: '#3a3532', opacity: 0.75, shadow: 0.6 } });
+objects.push({ id: 'fireworks', name: 'Фейерверк', particles: { kind: 'sparks', at: [6, -2, 11], source: [10, 4, 3], burst: { on: 'fw', count: 220 }, speed: [4, 8], spread: 180, direction: [0, 0, 1], gravity: 2.2, drag: 0.6, life: [1.2, 2.2], ground: 'pass', colors: ['#ffd28a', '#ff8a6a', '#a8c8ff', '#fff2d8'], glow: [7, 1] } });
+objects.push({ id: 'rain_fall', name: 'Дождь', particles: { kind: 'rain', amount: 'rain', count: 18000, reach: 18, color: '#cdd6e6', opacity: 0.6 } });
+objects.push({ id: 'demolition_dust', name: 'Пыль', particles: { kind: 'puff', at: [-12.5, 13, 2.5], source: [3, 14, 5], burst: { on: 'dust_burst', count: 700, over: 3 }, size: [3, 9], life: [14, 22], speed: [1, 4], spread: 120, direction: [1, 0, 0.3], gravity: -0.05, drag: 1.2, color: '#b9b1a4', opacity: 0.55, shadow: 0.4 } });
 
 // the viewfinder (the world's closeups)
-el({ id: 'viewfinder', name: 'Viewfinder', insert: 'viewfinder' }, 'e.kit.closeups.viewfinder(g, e);', 'e.kit.closeups.viewfinderMove(e);');
+el({ id: 'viewfinder', name: 'Видоискатель', insert: 'viewfinder' }, 'e.kit.closeups.viewfinder(g, e);', 'e.kit.closeups.viewfinderMove(e);');
 
 // the people
 const PEOPLE = [
-  ['toto', 'Totò', 'toto_boy'], ['alfredo', 'Alfredo', 'alfredo'], ['maria', 'Maria', 'maria'], ['elena', 'Elena', 'elena'],
-  ['daughter', 'Girl', 'daughter'], ['madman', 'Madman', 'madman'], ['anna', 'Anna', 'anna'],
-  ['bearer1', 'Bearer', 'villager_m', { colors: { top: '#2a2826', bottom: '#1e1c1b', hat: '#1a1918' } }],
-  ['bearer2', 'Bearer', 'old_m', { colors: { garment: '#262422', hat: '#1a1918' } }],
-  ['c1', 'Man', 'villager_m', { colors: { top: '#7a6a58', bottom: '#3a3530' } }], ['c2', 'Woman', 'villager_w', { colors: { top: '#6e5a62', garment: '#3a2e34' } }],
-  ['c3', 'Old man', 'old_m', { colors: { garment: '#5a5246' } }], ['c4', 'Old woman', 'old_w', {}], ['c5', 'Boy', 'kid', { colors: { top: '#8a7a5a' } }],
-  ['c6', 'Man', 'villager_m', { colors: { top: '#5a6670', bottom: '#2e2c2a', hat: '#4a4038' } }], ['c7', 'Woman', 'villager_w', { colors: { top: '#7a6a4a', garment: '#4a3a2a' } }],
-  ['c8', 'Old man', 'old_m', { colors: { garment: '#3e3a36' } }], ['c9', 'Young man', 'villager_m', { colors: { top: '#a29a86', bottom: '#3a3530', hat: '#2a2826' } }],
-  ['c10', 'Woman', 'villager_w', { colors: { top: '#5e5248' } }],
+  ['toto', 'Тото', 'toto_boy'], ['alfredo', 'Альфредо', 'alfredo'], ['maria', 'Мария', 'maria'], ['elena', 'Елена', 'elena'],
+  ['daughter', 'Девушка', 'daughter'], ['madman', 'Сумасшедший', 'madman'], ['anna', 'Анна', 'anna'],
+  ['bearer1', 'Носильщик', 'villager_m', { colors: { top: '#2a2826', bottom: '#1e1c1b', hat: '#1a1918' } }],
+  ['bearer2', 'Носильщик', 'old_m', { colors: { garment: '#262422', hat: '#1a1918' } }],
+  ['c1', 'Мужчина', 'villager_m', { colors: { top: '#7a6a58', bottom: '#3a3530' } }], ['c2', 'Женщина', 'villager_w', { colors: { top: '#6e5a62', garment: '#3a2e34' } }],
+  ['c3', 'Старик', 'old_m', { colors: { garment: '#5a5246' } }], ['c4', 'Старуха', 'old_w', {}], ['c5', 'Мальчишка', 'kid', { colors: { top: '#8a7a5a' } }],
+  ['c6', 'Мужчина', 'villager_m', { colors: { top: '#5a6670', bottom: '#2e2c2a', hat: '#4a4038' } }], ['c7', 'Женщина', 'villager_w', { colors: { top: '#7a6a4a', garment: '#4a3a2a' } }],
+  ['c8', 'Старик', 'old_m', { colors: { garment: '#3e3a36' } }], ['c9', 'Парень', 'villager_m', { colors: { top: '#a29a86', bottom: '#3a3530', hat: '#2a2826' } }],
+  ['c10', 'Женщина', 'villager_w', { colors: { top: '#5e5248' } }],
 ];
 for (const [id, name, who, look] of PEOPLE) {
   const p = { id, name, person: { cast: 'cast', who, ...(look ? { look } : {}) }, across: 0, distance: -40, place: { across: `${id}_a`, distance: `${id}_d` }, shadow: true };
@@ -194,67 +194,67 @@ const light = {
 };
 const num = (range, means, smooth) => ({ range, means, ...(smooth ? { smooth: true } : {}) });
 const states = {
-  beat: { type: 'string', means: 'the beat the scene plays (the game sets it): ' + LIB.ORDER.join(', ') },
-  beat_next: { type: 'string', means: 'the beat whose opening shot to make ready (the game sets it); empty — the next in the table' },
-  era: { values: ['past', 'now'], means: 'era: past — the warm night of the past (1949–1958), now — the cool 1988' },
-  hour: num([0, 1], 'hour: 0.3 morning, 0.78–0.8 dusk, 0.9 night'),
-  dusk_k: num([0, 1], 'internal: the light of dusk (the beat sets it from hour)', true),
-  now_k: num([0, 1], 'internal: the light of 1988 (the beat sets it from era)', true),
-  morning_k: num([0, 1], 'internal: the grey morning of 1988', true),
-  past: num([0, 1], 'the way back into the past (rewind only, by layers): 0 — 1988, 1 — the past; the beats of the present hold 0, of the past 1', true),
-  paradiso_state: { values: ['old', 'burnt', 'new', 'shut', 'charged'], means: 'the Paradiso: old, burnt, new, boarded up, charged' },
-  poster: { values: [0, 1], means: 'the poster of «Gone with the Wind» by the doors' },
-  full_sign: { values: [0, 1], means: 'the board «No seats» on the doors' },
-  mother_light: num([0, 1], 'the light in the mother\'s window', true),
-  beam_on: num([0, 1], 'the beam from the booth\'s port', true),
-  beam_aim: num([0, 1], 'the beam\'s end: 0 — a spot on the stone and the heads under the port, 1 — the white wall (the game moves it)', true),
-  beam_turn: { type: 'number', means: 'internal: where the beam looks in plan, degrees (the scene from beam_aim)' },
-  beam_pitch: { type: 'number', means: 'internal: the beam\'s tilt, degrees (+ up; the scene from beam_aim)' },
-  tip_x: { type: 'number', means: 'internal: the spot of light at the beam\'s end, across' }, tip_z: { type: 'number', means: 'internal: the spot, in depth' }, tip_y: { type: 'number', means: 'internal: the spot, height' },
-  tip_on: num([0, 1], 'internal: the spot at the beam\'s end is lit', true),
-  beam_sky: { values: [0, 1], means: 'internal: the beam up over the square (the prologue)' },
-  beam_focus: num([0, 1], 'the sharpness of the film on the wall (the game moves it)', true),
-  wall_film: { values: ['none', 'comedy', 'white'], means: 'the frame on the wall' },
-  wall_lit: { values: [0, 1], means: 'the light of the wall with the film (the scene sets it)' },
-  wall_burn: num([0, 1], 'the frame on the wall is burning', true),
-  smoke: num([0, 1], 'smoke from the booth\'s port', true),
-  fireworks: { values: [0, 1], means: 'the fireworks are going' },
-  fw: { type: 'number', means: 'internal: the count of the fireworks\' volleys' },
-  flash: num([0, 1], 'internal: a flash (the fireworks, the way back into the past)', true),
-  chalk: num([0, 99], 'the chalk strokes on the bank\'s wall (painting; changes in batches)'),
-  mark_chalk: { values: [0, 1], means: 'pulse: Totò makes a stroke (the scene plays chalk_mark and resets it to 0)' },
-  night_kind: { values: ['clear', 'rain', 'wind', 'feast', 'cold'], means: 'which night of the week' },
-  rain: num([0, 1], 'internal: rain (from night_kind)', true),
-  wind_k: num([0, 1], 'internal: wind (from night_kind)', true),
-  cold_k: num([0, 1], 'internal: cold (from night_kind)', true),
-  garland: num([0, 1], 'internal: the festive garland (from night_kind)', true),
-  elena_window: num([0, 1], 'the shutter of Elena\'s balcony and the light behind it', true),
-  viewfinder: num([0, 1], 'the insert «viewfinder»', true),
-  pan: num([-1, 1], 'viewfinder: where the camera looks', true),
-  elena_x: num([-1, 1], 'viewfinder: where the girl is', true),
-  madman_x: num([-1, 1], 'viewfinder: where the madman is (seen while |x| < 0.97)', true),
-  rec: { values: [0, 1], means: 'viewfinder: the camera is recording' },
-  cart: num([0, 1], 'the hearse on its way from the south along the west side to the church steps', true),
-  hearse_a: { type: 'number', means: 'internal: where the hearse is, across (from cart)' },
-  hearse_d: { type: 'number', means: 'internal: where the hearse is, in depth (from cart)' },
-  hearse_f: { type: 'number', means: 'internal: where the hearse is heading, degrees (from cart)' },
-  follow: { values: [0, 1], means: 'internal: the procession walks behind the hearse' },
-  sal_rail: { values: [0, 1], means: 'internal: Salvatore walks by the cart, his hand on it' },
-  collapse: num([0, 1], 'the Paradiso\'s front sinks (by layers)', true),
-  dust: num([0, 1], 'the demolition\'s dust in the air', true),
-  dust_burst: { type: 'number', means: 'internal: the cloud of dust (a burst of particles)' },
-  booth_flash: num([0, 1], 'internal: the booth\'s port flares', true),
-  booth_fig: num([0, 1], 'internal: Alfredo and the boy in the booth\'s port (far ones)', true),
-  crowd_k: num([0, 1], 'internal: the painted crowd is seen', true),
-  crowd_sit: num([0, 1], 'internal: the painted crowd is seated', true),
-  crowd_x: { type: 'number', means: 'internal: where the painted crowd is, across' },
-  crowd_z: { type: 'number', means: 'internal: where the painted crowd is, in depth' },
-  crowd_f: { type: 'number', means: 'internal: where it looks' },
-  chair_on: { values: [0, 1], means: 'internal: Totò\'s chair by the bank\'s wall' },
-  bulbs: num([0, 1], 'internal: the new sign\'s bulbs light up', true),
-  warm: num([0, 1], 'party key: the warmth of the square\'s windows in the past (0.3 + 0.6·warm)', true),
-  place: { values: ['crowd', 'apart'], means: 'party key: where Salvatore stands at the demolition' },
-  with_mother: { values: [0, 1], means: 'party key: old Maria beside him at the demolition' },
+  beat: { type: 'string', means: 'кусок, который играет сцена (ставит игра): ' + LIB.ORDER.join(', ') },
+  beat_next: { type: 'string', means: 'кусок, снимок начала которого готовить (ставит игра); пусто — следующий по таблице' },
+  era: { values: ['past', 'now'], means: 'время: past — тёплая ночь прошлого (1949–1958), now — прохладный 1988' },
+  hour: num([0, 1], 'час: 0.3 утро, 0.78–0.8 сумерки, 0.9 ночь'),
+  dusk_k: num([0, 1], 'служебный: свет сумерек (ставит кусок из hour)', true),
+  now_k: num([0, 1], 'служебный: свет 1988 года (ставит кусок из era)', true),
+  morning_k: num([0, 1], 'служебный: серое утро 1988 года', true),
+  past: num([0, 1], 'переход в прошлое (только rewind, слоями): 0 — 1988, 1 — прошлое; куски настоящего держат 0, прошлого 1', true),
+  paradiso_state: { values: ['old', 'burnt', 'new', 'shut', 'charged'], means: '«Парадизо»: старый, сгоревший, новый, заколоченный, с зарядами' },
+  poster: { values: [0, 1], means: 'афиша «Унесённые ветром» у дверей' },
+  full_sign: { values: [0, 1], means: 'табличка «Мест нет» на дверях' },
+  mother_light: num([0, 1], 'свет в окне матери', true),
+  beam_on: num([0, 1], 'луч из окошка будки', true),
+  beam_aim: num([0, 1], 'конец луча: 0 — пятно на камне и головах под окошком, 1 — белая стена (двигает игра)', true),
+  beam_turn: { type: 'number', means: 'служебный: куда луч смотрит в плане, градусы (сцена из beam_aim)' },
+  beam_pitch: { type: 'number', means: 'служебный: наклон луча, градусы (+ вверх; сцена из beam_aim)' },
+  tip_x: { type: 'number', means: 'служебный: пятно света на конце луча, поперёк' }, tip_z: { type: 'number', means: 'служебный: пятно, вглубь' }, tip_y: { type: 'number', means: 'служебный: пятно, высота' },
+  tip_on: num([0, 1], 'служебный: пятно на конце луча горит', true),
+  beam_sky: { values: [0, 1], means: 'служебный: луч вверх над площадью (пролог)' },
+  beam_focus: num([0, 1], 'резкость фильма на стене (двигает игра)', true),
+  wall_film: { values: ['none', 'comedy', 'white'], means: 'кадр на стене' },
+  wall_lit: { values: [0, 1], means: 'свет стены с фильмом (ставит сцена)' },
+  wall_burn: num([0, 1], 'кадр на стене горит', true),
+  smoke: num([0, 1], 'дым из окошка будки', true),
+  fireworks: { values: [0, 1], means: 'фейерверк идёт' },
+  fw: { type: 'number', means: 'служебный: счётчик залпов фейерверка' },
+  flash: num([0, 1], 'служебный: вспышка (фейерверк, переход в прошлое)', true),
+  chalk: num([0, 99], 'палочки мелом на стене банка (рисунок; меняется пачками)'),
+  mark_chalk: { values: [0, 1], means: 'импульс: Тото ставит палочку (сцена играет chalk_mark и сбрасывает в 0)' },
+  night_kind: { values: ['clear', 'rain', 'wind', 'feast', 'cold'], means: 'какая ночь недели' },
+  rain: num([0, 1], 'служебный: дождь (из night_kind)', true),
+  wind_k: num([0, 1], 'служебный: ветер (из night_kind)', true),
+  cold_k: num([0, 1], 'служебный: холод (из night_kind)', true),
+  garland: num([0, 1], 'служебный: праздничная гирлянда (из night_kind)', true),
+  elena_window: num([0, 1], 'ставня балкона Елены и свет за ней', true),
+  viewfinder: num([0, 1], 'вставка «видоискатель»', true),
+  pan: num([-1, 1], 'видоискатель: куда смотрит камера', true),
+  elena_x: num([-1, 1], 'видоискатель: где девушка', true),
+  madman_x: num([-1, 1], 'видоискатель: где сумасшедший (виден при |x| < 0.97)', true),
+  rec: { values: [0, 1], means: 'видоискатель: камера пишет' },
+  cart: num([0, 1], 'катафалк на пути с юга вдоль западной стороны к ступеням церкви', true),
+  hearse_a: { type: 'number', means: 'служебный: где катафалк поперёк (из cart)' },
+  hearse_d: { type: 'number', means: 'служебный: где катафалк вглубь (из cart)' },
+  hearse_f: { type: 'number', means: 'служебный: куда катафалк едет, градусы (из cart)' },
+  follow: { values: [0, 1], means: 'служебный: процессия идёт за катафалком' },
+  sal_rail: { values: [0, 1], means: 'служебный: Сальваторе идёт у повозки, рука на ней' },
+  collapse: num([0, 1], 'фасад «Парадизо» оседает (слоями)', true),
+  dust: num([0, 1], 'пыль сноса в воздухе', true),
+  dust_burst: { type: 'number', means: 'служебный: облако пыли (вспышка частиц)' },
+  booth_flash: num([0, 1], 'служебный: окошко будки вспыхивает', true),
+  booth_fig: num([0, 1], 'служебный: Альфредо и мальчик в окошке будки (дальние)', true),
+  crowd_k: num([0, 1], 'служебный: нарисованная толпа видна', true),
+  crowd_sit: num([0, 1], 'служебный: нарисованная толпа сидит', true),
+  crowd_x: { type: 'number', means: 'служебный: где нарисованная толпа поперёк' },
+  crowd_z: { type: 'number', means: 'служебный: где нарисованная толпа вглубь' },
+  crowd_f: { type: 'number', means: 'служебный: куда она смотрит' },
+  chair_on: { values: [0, 1], means: 'служебный: стул Тото у стены банка' },
+  bulbs: num([0, 1], 'служебный: лампочки новой вывески загораются', true),
+  warm: num([0, 1], 'ключ партии: тепло окон площади в прошлом (0.3 + 0.6·warm)', true),
+  place: { values: ['crowd', 'apart'], means: 'ключ партии: где Сальваторе на сносе' },
+  with_mother: { values: [0, 1], means: 'ключ партии: старая Мария рядом с ним на сносе' },
 };
 const state = { beat: '', beat_next: '', era: 'past', hour: 0.9, dusk_k: 0, now_k: 0, morning_k: 0, past: 1, paradiso_state: 'old', poster: 0, full_sign: 0,
   mother_light: 0, beam_on: 0, beam_aim: 0, beam_turn: 103.6, beam_pitch: -55.3, tip_x: -8.6, tip_z: 15.2, tip_y: 1.1, tip_on: 0, beam_sky: 0, beam_focus: 0, wall_film: 'none', wall_lit: 0, wall_burn: 0, smoke: 0,
@@ -264,14 +264,14 @@ const state = { beat: '', beat_next: '', era: 'past', hour: 0.9, dusk_k: 0, now_
   chair_on: 0, bulbs: 1, warm: 0.5, place: 'crowd', with_mother: 0, camera_x: 0, camera_z: -4, camera_yaw: -8, camera_h: 0.3, camera_pitch: 2 };
 for (const [id] of PEOPLE) {
   state[`${id}_a`] = 0; state[`${id}_d`] = -40; state[`${id}_here`] = false;
-  states[`${id}_a`] = { type: 'number', means: `internal: where ${id} is, across, m` };
-  states[`${id}_d`] = { type: 'number', means: `internal: where ${id} is, in depth, m` };
+  states[`${id}_a`] = { type: 'number', means: `служебный: где ${id} поперёк, м` };
+  states[`${id}_d`] = { type: 'number', means: `служебный: где ${id} вглубь, м` };
 }
 // the first pose: the beat now_open's (the square of 1988 at dusk)
 const spec = {
-  engine: 3, title: 'The Square', caption: 'Giancaldo. The Paradiso\'s square', horizon: 0.5,
+  engine: 3, title: 'Площадь', caption: 'Джанкальдо. Площадь «Парадизо»', horizon: 0.5,
   camera: { mode: 'roam', area: [-12, 12, -14, 26] },
-  light, lights, state, states, modules: ['cast', 'cinema', 'closeups', 'beats', 'sky'],
+  light, lights, state, states, modules: ['cast', 'kino', 'closeups', 'beats', 'nebo'],
   music: { prompts: [
     { text: 'quiet night ambience of a Sicilian town square, distant cicadas, faint murmur of voices, no melody', weight: 1 },
     { text: 'soft warm drone, slow and sparse, a little wind, nostalgic, no rhythm', weight: 0.4 },
@@ -280,11 +280,11 @@ const spec = {
   ], bpm: 70, density: 0.15, brightness: 0.3, scale: 'E_MAJOR_D_FLAT_MINOR' },
   objects,
 };
-// the world's shaders: the sky's (tools/sky.wgsl) and the beam's (tools/cinema-beam.wgsl)
+// the world's shaders: the sky's (tools/nebo-sky.wgsl) and the beam's (tools/kino-beam.wgsl)
 const sky = objects.find(o => o.id === 'sky'); sky.sky = true;
-files['elements/sky.wgsl'] = wgsl('sky');
+files['elements/sky.wgsl'] = wgsl('nebo-sky');
 const beam = objects.find(o => o.id === 'beam'); beam.glows = true; beam.uniforms = { on: 0, ...(beam.uniforms || {}) };
-files['elements/beam.wgsl'] = wgsl('cinema-beam');
+files['elements/beam.wgsl'] = wgsl('kino-beam');
 fs.writeFileSync(path.join(DIR, 'scene.json'), JSON.stringify(spec, null, 2) + '\n');
 fs.rmSync(path.join(DIR, 'elements'), { recursive: true, force: true });
 for (const [f, text] of Object.entries(files)) {

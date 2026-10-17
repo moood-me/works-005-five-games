@@ -1,4 +1,4 @@
-const k = e.kit.cinema, W = 6, H = 4, x = -3, y = -6.5;
+const k = e.kit.kino, W = 6, H = 4, x = -3, y = -6.5;
 e.layer('blur', {}, l => { l.filter = 'blur(0.18px)'; k.frame(l, 'comedy', x, y, W, H); l.filter = 'none'; });
 e.layer('sharp', { flicker: 0.12 }, l => k.frame(l, 'comedy', x, y, W, H));
 e.layer('white', { flicker: 0.1 }, l => k.frame(l, 'white', x, y, W, H));

@@ -1,4 +1,4 @@
-// the projector's beam (cinema.beam): the cone (layer 1) breathing with smoke, the motes (layer 2) kept inside the
+// the projector's beam (kino.beam): the cone (layer 1) breathing with smoke, the motes (layer 2) kept inside the
 // cone, the tip (layer 3: its glow is the engine's); all of it light added — u_on its strength
 fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   let cone = layer(1, at);

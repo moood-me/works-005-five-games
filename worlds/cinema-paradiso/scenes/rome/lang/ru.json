@@ -1,5 +1,0 @@
-{"strings": [
-  {"text":"The Screening Room","translation":"Просмотровый зал","where":"scenes/rome/scene.json title"},
-  {"text":"Rome. A small screening room","translation":"Рим. Маленький просмотровый зал","where":"scenes/rome/scene.json caption"},
-  {"text":"the play","translation":"партия","where":"scenes/rome/showcase.js"}
-]}

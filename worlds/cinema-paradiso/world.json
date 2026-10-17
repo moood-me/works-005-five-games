@@ -1,9 +1,9 @@
 {
-  "title": "Cinema Paradiso",
-  "description": "A game after Tornatore's film. A warm Sicilian night, the projector's beam, a reel of kisses.",
+  "title": "Новый кинотеатр «Парадизо»",
+  "description": "Игра по фильму Торнаторе. Тёплая сицилийская ночь, луч проектора, лента поцелуев.",
   "themes": {
-    "drama": 60,
-    "cinema": 40
+    "драма": 60,
+    "кино": 40
   },
   "main": "main"
 }

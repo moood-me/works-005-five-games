@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "The Square",
-  "caption": "Giancaldo. The Paradiso's square",
+  "title": "Площадь",
+  "caption": "Джанкальдо. Площадь «Парадизо»",
   "horizon": 0.5,
   "camera": {
     "mode": "roam",
@@ -362,32 +362,32 @@
   "states": {
     "beat": {
       "type": "string",
-      "means": "the beat the scene plays (the game sets it): now_open, rewind, after_show, alfredo_down, coins_taken, slap, paper, crowd, beam_out, wall_film, smoke, outside, new_sign, door, go_together, go_alone, dusk, seen, film_on, hello, story_door, chair, nights, eve, midnight, midnight_close, girl, follow, let, funeral, walk_behind, widow, stay_door, widow_late, demolition, dust"
+      "means": "кусок, который играет сцена (ставит игра): now_open, rewind, after_show, alfredo_down, coins_taken, slap, paper, crowd, beam_out, wall_film, smoke, outside, new_sign, door, go_together, go_alone, dusk, seen, film_on, hello, story_door, chair, nights, eve, midnight, midnight_close, girl, follow, let, funeral, walk_behind, widow, stay_door, widow_late, demolition, dust"
     },
     "beat_next": {
       "type": "string",
-      "means": "the beat whose opening shot to make ready (the game sets it); empty — the next in the table"
+      "means": "кусок, снимок начала которого готовить (ставит игра); пусто — следующий по таблице"
     },
     "era": {
       "values": [
         "past",
         "now"
       ],
-      "means": "era: past — the warm night of the past (1949–1958), now — the cool 1988"
+      "means": "время: past — тёплая ночь прошлого (1949–1958), now — прохладный 1988"
     },
     "hour": {
       "range": [
         0,
         1
       ],
-      "means": "hour: 0.3 morning, 0.78–0.8 dusk, 0.9 night"
+      "means": "час: 0.3 утро, 0.78–0.8 сумерки, 0.9 ночь"
     },
     "dusk_k": {
       "range": [
         0,
         1
       ],
-      "means": "internal: the light of dusk (the beat sets it from hour)",
+      "means": "служебный: свет сумерек (ставит кусок из hour)",
       "smooth": true
     },
     "now_k": {
@@ -395,7 +395,7 @@
         0,
         1
       ],
-      "means": "internal: the light of 1988 (the beat sets it from era)",
+      "means": "служебный: свет 1988 года (ставит кусок из era)",
       "smooth": true
     },
     "morning_k": {
@@ -403,7 +403,7 @@
         0,
         1
       ],
-      "means": "internal: the grey morning of 1988",
+      "means": "служебный: серое утро 1988 года",
       "smooth": true
     },
     "past": {
@@ -411,7 +411,7 @@
         0,
         1
       ],
-      "means": "the way back into the past (rewind only, by layers): 0 — 1988, 1 — the past; the beats of the present hold 0, of the past 1",
+      "means": "переход в прошлое (только rewind, слоями): 0 — 1988, 1 — прошлое; куски настоящего держат 0, прошлого 1",
       "smooth": true
     },
     "paradiso_state": {
@@ -422,28 +422,28 @@
         "shut",
         "charged"
       ],
-      "means": "the Paradiso: old, burnt, new, boarded up, charged"
+      "means": "«Парадизо»: старый, сгоревший, новый, заколоченный, с зарядами"
     },
     "poster": {
       "values": [
         0,
         1
       ],
-      "means": "the poster of «Gone with the Wind» by the doors"
+      "means": "афиша «Унесённые ветром» у дверей"
     },
     "full_sign": {
       "values": [
         0,
         1
       ],
-      "means": "the board «No seats» on the doors"
+      "means": "табличка «Мест нет» на дверях"
     },
     "mother_light": {
       "range": [
         0,
         1
       ],
-      "means": "the light in the mother's window",
+      "means": "свет в окне матери",
       "smooth": true
     },
     "beam_on": {
@@ -451,7 +451,7 @@
         0,
         1
       ],
-      "means": "the beam from the booth's port",
+      "means": "луч из окошка будки",
       "smooth": true
     },
     "beam_aim": {
@@ -459,35 +459,35 @@
         0,
         1
       ],
-      "means": "the beam's end: 0 — a spot on the stone and the heads under the port, 1 — the white wall (the game moves it)",
+      "means": "конец луча: 0 — пятно на камне и головах под окошком, 1 — белая стена (двигает игра)",
       "smooth": true
     },
     "beam_turn": {
       "type": "number",
-      "means": "internal: where the beam looks in plan, degrees (the scene from beam_aim)"
+      "means": "служебный: куда луч смотрит в плане, градусы (сцена из beam_aim)"
     },
     "beam_pitch": {
       "type": "number",
-      "means": "internal: the beam's tilt, degrees (+ up; the scene from beam_aim)"
+      "means": "служебный: наклон луча, градусы (+ вверх; сцена из beam_aim)"
     },
     "tip_x": {
       "type": "number",
-      "means": "internal: the spot of light at the beam's end, across"
+      "means": "служебный: пятно света на конце луча, поперёк"
     },
     "tip_z": {
       "type": "number",
-      "means": "internal: the spot, in depth"
+      "means": "служебный: пятно, вглубь"
     },
     "tip_y": {
       "type": "number",
-      "means": "internal: the spot, height"
+      "means": "служебный: пятно, высота"
     },
     "tip_on": {
       "range": [
         0,
         1
       ],
-      "means": "internal: the spot at the beam's end is lit",
+      "means": "служебный: пятно на конце луча горит",
       "smooth": true
     },
     "beam_sky": {
@@ -495,14 +495,14 @@
         0,
         1
       ],
-      "means": "internal: the beam up over the square (the prologue)"
+      "means": "служебный: луч вверх над площадью (пролог)"
     },
     "beam_focus": {
       "range": [
         0,
         1
       ],
-      "means": "the sharpness of the film on the wall (the game moves it)",
+      "means": "резкость фильма на стене (двигает игра)",
       "smooth": true
     },
     "wall_film": {
@@ -511,21 +511,21 @@
         "comedy",
         "white"
       ],
-      "means": "the frame on the wall"
+      "means": "кадр на стене"
     },
     "wall_lit": {
       "values": [
         0,
         1
       ],
-      "means": "the light of the wall with the film (the scene sets it)"
+      "means": "свет стены с фильмом (ставит сцена)"
     },
     "wall_burn": {
       "range": [
         0,
         1
       ],
-      "means": "the frame on the wall is burning",
+      "means": "кадр на стене горит",
       "smooth": true
     },
     "smoke": {
@@ -533,7 +533,7 @@
         0,
         1
       ],
-      "means": "smoke from the booth's port",
+      "means": "дым из окошка будки",
       "smooth": true
     },
     "fireworks": {
@@ -541,18 +541,18 @@
         0,
         1
       ],
-      "means": "the fireworks are going"
+      "means": "фейерверк идёт"
     },
     "fw": {
       "type": "number",
-      "means": "internal: the count of the fireworks' volleys"
+      "means": "служебный: счётчик залпов фейерверка"
     },
     "flash": {
       "range": [
         0,
         1
       ],
-      "means": "internal: a flash (the fireworks, the way back into the past)",
+      "means": "служебный: вспышка (фейерверк, переход в прошлое)",
       "smooth": true
     },
     "chalk": {
@@ -560,14 +560,14 @@
         0,
         99
       ],
-      "means": "the chalk strokes on the bank's wall (painting; changes in batches)"
+      "means": "палочки мелом на стене банка (рисунок; меняется пачками)"
     },
     "mark_chalk": {
       "values": [
         0,
         1
       ],
-      "means": "pulse: Totò makes a stroke (the scene plays chalk_mark and resets it to 0)"
+      "means": "импульс: Тото ставит палочку (сцена играет chalk_mark и сбрасывает в 0)"
     },
     "night_kind": {
       "values": [
@@ -577,14 +577,14 @@
         "feast",
         "cold"
       ],
-      "means": "which night of the week"
+      "means": "какая ночь недели"
     },
     "rain": {
       "range": [
         0,
         1
       ],
-      "means": "internal: rain (from night_kind)",
+      "means": "служебный: дождь (из night_kind)",
       "smooth": true
     },
     "wind_k": {
@@ -592,7 +592,7 @@
         0,
         1
       ],
-      "means": "internal: wind (from night_kind)",
+      "means": "служебный: ветер (из night_kind)",
       "smooth": true
     },
     "cold_k": {
@@ -600,7 +600,7 @@
         0,
         1
       ],
-      "means": "internal: cold (from night_kind)",
+      "means": "служебный: холод (из night_kind)",
       "smooth": true
     },
     "garland": {
@@ -608,7 +608,7 @@
         0,
         1
       ],
-      "means": "internal: the festive garland (from night_kind)",
+      "means": "служебный: праздничная гирлянда (из night_kind)",
       "smooth": true
     },
     "elena_window": {
@@ -616,7 +616,7 @@
         0,
         1
       ],
-      "means": "the shutter of Elena's balcony and the light behind it",
+      "means": "ставня балкона Елены и свет за ней",
       "smooth": true
     },
     "viewfinder": {
@@ -624,7 +624,7 @@
         0,
         1
       ],
-      "means": "the insert «viewfinder»",
+      "means": "вставка «видоискатель»",
       "smooth": true
     },
     "pan": {
@@ -632,7 +632,7 @@
         -1,
         1
       ],
-      "means": "viewfinder: where the camera looks",
+      "means": "видоискатель: куда смотрит камера",
       "smooth": true
     },
     "elena_x": {
@@ -640,7 +640,7 @@
         -1,
         1
       ],
-      "means": "viewfinder: where the girl is",
+      "means": "видоискатель: где девушка",
       "smooth": true
     },
     "madman_x": {
@@ -648,7 +648,7 @@
         -1,
         1
       ],
-      "means": "viewfinder: where the madman is (seen while |x| < 0.97)",
+      "means": "видоискатель: где сумасшедший (виден при |x| < 0.97)",
       "smooth": true
     },
     "rec": {
@@ -656,48 +656,48 @@
         0,
         1
       ],
-      "means": "viewfinder: the camera is recording"
+      "means": "видоискатель: камера пишет"
     },
     "cart": {
       "range": [
         0,
         1
       ],
-      "means": "the hearse on its way from the south along the west side to the church steps",
+      "means": "катафалк на пути с юга вдоль западной стороны к ступеням церкви",
       "smooth": true
     },
     "hearse_a": {
       "type": "number",
-      "means": "internal: where the hearse is, across (from cart)"
+      "means": "служебный: где катафалк поперёк (из cart)"
     },
     "hearse_d": {
       "type": "number",
-      "means": "internal: where the hearse is, in depth (from cart)"
+      "means": "служебный: где катафалк вглубь (из cart)"
     },
     "hearse_f": {
       "type": "number",
-      "means": "internal: where the hearse is heading, degrees (from cart)"
+      "means": "служебный: куда катафалк едет, градусы (из cart)"
     },
     "follow": {
       "values": [
         0,
         1
       ],
-      "means": "internal: the procession walks behind the hearse"
+      "means": "служебный: процессия идёт за катафалком"
     },
     "sal_rail": {
       "values": [
         0,
         1
       ],
-      "means": "internal: Salvatore walks by the cart, his hand on it"
+      "means": "служебный: Сальваторе идёт у повозки, рука на ней"
     },
     "collapse": {
       "range": [
         0,
         1
       ],
-      "means": "the Paradiso's front sinks (by layers)",
+      "means": "фасад «Парадизо» оседает (слоями)",
       "smooth": true
     },
     "dust": {
@@ -705,19 +705,19 @@
         0,
         1
       ],
-      "means": "the demolition's dust in the air",
+      "means": "пыль сноса в воздухе",
       "smooth": true
     },
     "dust_burst": {
       "type": "number",
-      "means": "internal: the cloud of dust (a burst of particles)"
+      "means": "служебный: облако пыли (вспышка частиц)"
     },
     "booth_flash": {
       "range": [
         0,
         1
       ],
-      "means": "internal: the booth's port flares",
+      "means": "служебный: окошко будки вспыхивает",
       "smooth": true
     },
     "booth_fig": {
@@ -725,7 +725,7 @@
         0,
         1
       ],
-      "means": "internal: Alfredo and the boy in the booth's port (far ones)",
+      "means": "служебный: Альфредо и мальчик в окошке будки (дальние)",
       "smooth": true
     },
     "crowd_k": {
@@ -733,7 +733,7 @@
         0,
         1
       ],
-      "means": "internal: the painted crowd is seen",
+      "means": "служебный: нарисованная толпа видна",
       "smooth": true
     },
     "crowd_sit": {
@@ -741,34 +741,34 @@
         0,
         1
       ],
-      "means": "internal: the painted crowd is seated",
+      "means": "служебный: нарисованная толпа сидит",
       "smooth": true
     },
     "crowd_x": {
       "type": "number",
-      "means": "internal: where the painted crowd is, across"
+      "means": "служебный: где нарисованная толпа поперёк"
     },
     "crowd_z": {
       "type": "number",
-      "means": "internal: where the painted crowd is, in depth"
+      "means": "служебный: где нарисованная толпа вглубь"
     },
     "crowd_f": {
       "type": "number",
-      "means": "internal: where it looks"
+      "means": "служебный: куда она смотрит"
     },
     "chair_on": {
       "values": [
         0,
         1
       ],
-      "means": "internal: Totò's chair by the bank's wall"
+      "means": "служебный: стул Тото у стены банка"
     },
     "bulbs": {
       "range": [
         0,
         1
       ],
-      "means": "internal: the new sign's bulbs light up",
+      "means": "служебный: лампочки новой вывески загораются",
       "smooth": true
     },
     "warm": {
@@ -776,7 +776,7 @@
         0,
         1
       ],
-      "means": "party key: the warmth of the square's windows in the past (0.3 + 0.6·warm)",
+      "means": "ключ партии: тепло окон площади в прошлом (0.3 + 0.6·warm)",
       "smooth": true
     },
     "place": {
@@ -784,174 +784,174 @@
         "crowd",
         "apart"
       ],
-      "means": "party key: where Salvatore stands at the demolition"
+      "means": "ключ партии: где Сальваторе на сносе"
     },
     "with_mother": {
       "values": [
         0,
         1
       ],
-      "means": "party key: old Maria beside him at the demolition"
+      "means": "ключ партии: старая Мария рядом с ним на сносе"
     },
     "toto_a": {
       "type": "number",
-      "means": "internal: where toto is, across, m"
+      "means": "служебный: где toto поперёк, м"
     },
     "toto_d": {
       "type": "number",
-      "means": "internal: where toto is, in depth, m"
+      "means": "служебный: где toto вглубь, м"
     },
     "alfredo_a": {
       "type": "number",
-      "means": "internal: where alfredo is, across, m"
+      "means": "служебный: где alfredo поперёк, м"
     },
     "alfredo_d": {
       "type": "number",
-      "means": "internal: where alfredo is, in depth, m"
+      "means": "служебный: где alfredo вглубь, м"
     },
     "maria_a": {
       "type": "number",
-      "means": "internal: where maria is, across, m"
+      "means": "служебный: где maria поперёк, м"
     },
     "maria_d": {
       "type": "number",
-      "means": "internal: where maria is, in depth, m"
+      "means": "служебный: где maria вглубь, м"
     },
     "elena_a": {
       "type": "number",
-      "means": "internal: where elena is, across, m"
+      "means": "служебный: где elena поперёк, м"
     },
     "elena_d": {
       "type": "number",
-      "means": "internal: where elena is, in depth, m"
+      "means": "служебный: где elena вглубь, м"
     },
     "daughter_a": {
       "type": "number",
-      "means": "internal: where daughter is, across, m"
+      "means": "служебный: где daughter поперёк, м"
     },
     "daughter_d": {
       "type": "number",
-      "means": "internal: where daughter is, in depth, m"
+      "means": "служебный: где daughter вглубь, м"
     },
     "madman_a": {
       "type": "number",
-      "means": "internal: where madman is, across, m"
+      "means": "служебный: где madman поперёк, м"
     },
     "madman_d": {
       "type": "number",
-      "means": "internal: where madman is, in depth, m"
+      "means": "служебный: где madman вглубь, м"
     },
     "anna_a": {
       "type": "number",
-      "means": "internal: where anna is, across, m"
+      "means": "служебный: где anna поперёк, м"
     },
     "anna_d": {
       "type": "number",
-      "means": "internal: where anna is, in depth, m"
+      "means": "служебный: где anna вглубь, м"
     },
     "bearer1_a": {
       "type": "number",
-      "means": "internal: where bearer1 is, across, m"
+      "means": "служебный: где bearer1 поперёк, м"
     },
     "bearer1_d": {
       "type": "number",
-      "means": "internal: where bearer1 is, in depth, m"
+      "means": "служебный: где bearer1 вглубь, м"
     },
     "bearer2_a": {
       "type": "number",
-      "means": "internal: where bearer2 is, across, m"
+      "means": "служебный: где bearer2 поперёк, м"
     },
     "bearer2_d": {
       "type": "number",
-      "means": "internal: where bearer2 is, in depth, m"
+      "means": "служебный: где bearer2 вглубь, м"
     },
     "c1_a": {
       "type": "number",
-      "means": "internal: where c1 is, across, m"
+      "means": "служебный: где c1 поперёк, м"
     },
     "c1_d": {
       "type": "number",
-      "means": "internal: where c1 is, in depth, m"
+      "means": "служебный: где c1 вглубь, м"
     },
     "c2_a": {
       "type": "number",
-      "means": "internal: where c2 is, across, m"
+      "means": "служебный: где c2 поперёк, м"
     },
     "c2_d": {
       "type": "number",
-      "means": "internal: where c2 is, in depth, m"
+      "means": "служебный: где c2 вглубь, м"
     },
     "c3_a": {
       "type": "number",
-      "means": "internal: where c3 is, across, m"
+      "means": "служебный: где c3 поперёк, м"
     },
     "c3_d": {
       "type": "number",
-      "means": "internal: where c3 is, in depth, m"
+      "means": "служебный: где c3 вглубь, м"
     },
     "c4_a": {
       "type": "number",
-      "means": "internal: where c4 is, across, m"
+      "means": "служебный: где c4 поперёк, м"
     },
     "c4_d": {
       "type": "number",
-      "means": "internal: where c4 is, in depth, m"
+      "means": "служебный: где c4 вглубь, м"
     },
     "c5_a": {
       "type": "number",
-      "means": "internal: where c5 is, across, m"
+      "means": "служебный: где c5 поперёк, м"
     },
     "c5_d": {
       "type": "number",
-      "means": "internal: where c5 is, in depth, m"
+      "means": "служебный: где c5 вглубь, м"
     },
     "c6_a": {
       "type": "number",
-      "means": "internal: where c6 is, across, m"
+      "means": "служебный: где c6 поперёк, м"
     },
     "c6_d": {
       "type": "number",
-      "means": "internal: where c6 is, in depth, m"
+      "means": "служебный: где c6 вглубь, м"
     },
     "c7_a": {
       "type": "number",
-      "means": "internal: where c7 is, across, m"
+      "means": "служебный: где c7 поперёк, м"
     },
     "c7_d": {
       "type": "number",
-      "means": "internal: where c7 is, in depth, m"
+      "means": "служебный: где c7 вглубь, м"
     },
     "c8_a": {
       "type": "number",
-      "means": "internal: where c8 is, across, m"
+      "means": "служебный: где c8 поперёк, м"
     },
     "c8_d": {
       "type": "number",
-      "means": "internal: where c8 is, in depth, m"
+      "means": "служебный: где c8 вглубь, м"
     },
     "c9_a": {
       "type": "number",
-      "means": "internal: where c9 is, across, m"
+      "means": "служебный: где c9 поперёк, м"
     },
     "c9_d": {
       "type": "number",
-      "means": "internal: where c9 is, in depth, m"
+      "means": "служебный: где c9 вглубь, м"
     },
     "c10_a": {
       "type": "number",
-      "means": "internal: where c10 is, across, m"
+      "means": "служебный: где c10 поперёк, м"
     },
     "c10_d": {
       "type": "number",
-      "means": "internal: where c10 is, in depth, m"
+      "means": "служебный: где c10 вглубь, м"
     }
   },
   "modules": [
     "cast",
-    "cinema",
+    "kino",
     "closeups",
     "beats",
-    "sky"
+    "nebo"
   ],
   "music": {
     "prompts": [
@@ -984,12 +984,12 @@
   "objects": [
     {
       "id": "sky",
-      "name": "Sky",
+      "name": "Небо",
       "sky": true
     },
     {
       "id": "ground",
-      "name": "Square",
+      "name": "Площадь",
       "plane": true,
       "across": 0,
       "distance": 6,
@@ -999,7 +999,7 @@
     },
     {
       "id": "sea_end",
-      "name": "Sea",
+      "name": "Море",
       "across": 10.5,
       "distance": 80,
       "elevation": -10,
@@ -1014,7 +1014,7 @@
     },
     {
       "id": "alfredo_door",
-      "name": "Alfredo's house",
+      "name": "Дом Альфредо",
       "across": -12,
       "distance": 0,
       "facing": 90,
@@ -1029,7 +1029,7 @@
     },
     {
       "id": "alfredo_door_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": -12,
       "distance": 0,
       "facing": 90,
@@ -1047,7 +1047,7 @@
     },
     {
       "id": "f_w2",
-      "name": "House",
+      "name": "Дом",
       "across": -12,
       "distance": 20,
       "facing": 90,
@@ -1062,7 +1062,7 @@
     },
     {
       "id": "f_w2_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": -12,
       "distance": 20,
       "facing": 90,
@@ -1080,7 +1080,7 @@
     },
     {
       "id": "f_n1",
-      "name": "House with the arch",
+      "name": "Дом с аркой",
       "across": -12,
       "distance": 26,
       "facing": 180,
@@ -1095,7 +1095,7 @@
     },
     {
       "id": "f_n1_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": -12,
       "distance": 26,
       "facing": 180,
@@ -1113,7 +1113,7 @@
     },
     {
       "id": "f_e3",
-      "name": "House",
+      "name": "Дом",
       "across": 12,
       "distance": 26,
       "facing": 270,
@@ -1128,7 +1128,7 @@
     },
     {
       "id": "f_e3_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": 12,
       "distance": 26,
       "facing": 270,
@@ -1146,7 +1146,7 @@
     },
     {
       "id": "f_e1",
-      "name": "House",
+      "name": "Дом",
       "across": 12,
       "distance": 8,
       "facing": 270,
@@ -1161,7 +1161,7 @@
     },
     {
       "id": "f_e1_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": 12,
       "distance": 8,
       "facing": 270,
@@ -1179,7 +1179,7 @@
     },
     {
       "id": "f_se",
-      "name": "House",
+      "name": "Дом",
       "across": 12,
       "distance": 0,
       "facing": 0,
@@ -1194,7 +1194,7 @@
     },
     {
       "id": "f_se_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": 12,
       "distance": 0,
       "facing": 0,
@@ -1212,7 +1212,7 @@
     },
     {
       "id": "f_sw",
-      "name": "House",
+      "name": "Дом",
       "across": -5,
       "distance": 0,
       "facing": 0,
@@ -1227,7 +1227,7 @@
     },
     {
       "id": "f_sw_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": -5,
       "distance": 0,
       "facing": 0,
@@ -1245,7 +1245,7 @@
     },
     {
       "id": "f_lane_w",
-      "name": "Street to the sea",
+      "name": "Улица к морю",
       "across": 9.1,
       "distance": 26.3,
       "facing": 90,
@@ -1260,7 +1260,7 @@
     },
     {
       "id": "f_lane_w_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": 9.1,
       "distance": 26.3,
       "facing": 90,
@@ -1278,7 +1278,7 @@
     },
     {
       "id": "f_lane_e",
-      "name": "Street to the sea",
+      "name": "Улица к морю",
       "across": 12,
       "distance": 48.3,
       "facing": 270,
@@ -1293,7 +1293,7 @@
     },
     {
       "id": "f_lane_e_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": 12,
       "distance": 48.3,
       "facing": 270,
@@ -1311,7 +1311,7 @@
     },
     {
       "id": "f_st_w",
-      "name": "Street",
+      "name": "Улица",
       "across": -5,
       "distance": -34,
       "facing": 90,
@@ -1326,7 +1326,7 @@
     },
     {
       "id": "f_st_w_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": -5,
       "distance": -34,
       "facing": 90,
@@ -1344,7 +1344,7 @@
     },
     {
       "id": "f_st_e",
-      "name": "Street",
+      "name": "Улица",
       "across": 5,
       "distance": 0,
       "facing": 270,
@@ -1359,7 +1359,7 @@
     },
     {
       "id": "f_st_e_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": 5,
       "distance": 0,
       "facing": 270,
@@ -1377,7 +1377,7 @@
     },
     {
       "id": "f_st_end",
-      "name": "Bus stop",
+      "name": "Остановка",
       "across": 5,
       "distance": -34,
       "facing": 0,
@@ -1392,7 +1392,7 @@
     },
     {
       "id": "f_st_end_win",
-      "name": "Windows",
+      "name": "Окна",
       "across": 5,
       "distance": -34,
       "facing": 0,
@@ -1410,7 +1410,7 @@
     },
     {
       "id": "paradiso",
-      "name": "Paradiso",
+      "name": "«Парадизо»",
       "across": -12,
       "distance": 6,
       "facing": 90,
@@ -1425,7 +1425,7 @@
     },
     {
       "id": "par_back",
-      "name": "Back wall",
+      "name": "Задняя стена",
       "across": -18.5,
       "distance": 6,
       "facing": 90,
@@ -1439,7 +1439,7 @@
     },
     {
       "id": "rubble",
-      "name": "Rubble",
+      "name": "Обломки",
       "across": -12.6,
       "distance": 6,
       "facing": 90,
@@ -1453,7 +1453,7 @@
     },
     {
       "id": "canopy",
-      "name": "Canopy",
+      "name": "Козырёк",
       "plane": true,
       "across": -11.25,
       "distance": 12,
@@ -1463,7 +1463,7 @@
     },
     {
       "id": "canopy_front",
-      "name": "Sign",
+      "name": "Вывеска",
       "across": -10.5,
       "distance": 8.3,
       "elevation": 2.75,
@@ -1478,7 +1478,7 @@
     },
     {
       "id": "booth_in",
-      "name": "Booth",
+      "name": "Будка",
       "across": -12.3,
       "distance": 16,
       "facing": 90,
@@ -1493,7 +1493,7 @@
     },
     {
       "id": "beam_anchor",
-      "name": "Beam",
+      "name": "Луч",
       "unseen": true,
       "across": -11.85,
       "distance": 16,
@@ -1507,7 +1507,7 @@
     },
     {
       "id": "beam",
-      "name": "Beam",
+      "name": "Луч",
       "on": "beam_anchor",
       "across": 0,
       "distance": 0,
@@ -1527,7 +1527,7 @@
     },
     {
       "id": "wall",
-      "name": "White wall",
+      "name": "Белая стена",
       "across": -5,
       "distance": 26,
       "facing": 180,
@@ -1542,7 +1542,7 @@
     },
     {
       "id": "screen",
-      "name": "Film on the wall",
+      "name": "Кино на стене",
       "across": 2,
       "distance": 25.96,
       "facing": 180,
@@ -1557,7 +1557,7 @@
     },
     {
       "id": "church",
-      "name": "Church",
+      "name": "Церковь",
       "across": 5.5,
       "distance": 26.3,
       "facing": 180,
@@ -1572,7 +1572,7 @@
     },
     {
       "id": "step1",
-      "name": "Steps",
+      "name": "Ступени",
       "plane": true,
       "across": 5.5,
       "distance": 24.5,
@@ -1584,7 +1584,7 @@
     },
     {
       "id": "step2",
-      "name": "Steps",
+      "name": "Ступени",
       "plane": true,
       "across": 5.5,
       "distance": 24.875,
@@ -1596,7 +1596,7 @@
     },
     {
       "id": "step3",
-      "name": "Steps",
+      "name": "Ступени",
       "plane": true,
       "across": 5.5,
       "distance": 25.25,
@@ -1608,7 +1608,7 @@
     },
     {
       "id": "step4",
-      "name": "Steps",
+      "name": "Ступени",
       "plane": true,
       "across": 5.5,
       "distance": 25.625,
@@ -1620,7 +1620,7 @@
     },
     {
       "id": "steps",
-      "name": "Church steps",
+      "name": "Ступени церкви",
       "across": 5.5,
       "distance": 23,
       "facing": 180,
@@ -1656,7 +1656,7 @@
     },
     {
       "id": "mother_window",
-      "name": "Mother's window",
+      "name": "Окно матери",
       "across": -9,
       "distance": 26.75,
       "facing": 180,
@@ -1671,7 +1671,7 @@
     },
     {
       "id": "mother_floor",
-      "name": "Room floor",
+      "name": "Пол комнаты",
       "plane": true,
       "unseen": true,
       "walk": true,
@@ -1683,7 +1683,7 @@
     },
     {
       "id": "bank",
-      "name": "Bank",
+      "name": "Банк",
       "across": 12,
       "distance": 22,
       "facing": 270,
@@ -1698,7 +1698,7 @@
     },
     {
       "id": "balcony_room",
-      "name": "Elena's window",
+      "name": "Окно Елены",
       "across": 11.975,
       "distance": 13.7,
       "facing": 270,
@@ -1716,7 +1716,7 @@
     },
     {
       "id": "balcony",
-      "name": "Elena's balcony",
+      "name": "Балкон Елены",
       "across": 11.95,
       "distance": 13.7,
       "facing": 270,
@@ -1734,7 +1734,7 @@
     },
     {
       "id": "balcony_rail",
-      "name": "Balcony railing",
+      "name": "Перила балкона",
       "across": 11.32,
       "distance": 13.9,
       "facing": 270,
@@ -1748,7 +1748,7 @@
     },
     {
       "id": "balcony_slab",
-      "name": "Balcony",
+      "name": "Балкон",
       "plane": true,
       "across": 11.66,
       "distance": 13,
@@ -1759,7 +1759,7 @@
     },
     {
       "id": "chalk_wall",
-      "name": "Chalk wall",
+      "name": "Стена с мелом",
       "across": 11.97,
       "distance": 16.8,
       "facing": 270,
@@ -1776,7 +1776,7 @@
     },
     {
       "id": "chair",
-      "name": "Totò's chair",
+      "name": "Стул Тото",
       "across": 11.3,
       "distance": 15.6,
       "height": 0.95,
@@ -1790,7 +1790,7 @@
     },
     {
       "id": "alfredo_chair",
-      "name": "Alfredo's chair",
+      "name": "Стул Альфредо",
       "across": -11.4,
       "distance": 3.12,
       "height": 0.95,
@@ -1804,7 +1804,7 @@
     },
     {
       "id": "garland",
-      "name": "Garland",
+      "name": "Гирлянда",
       "across": 11.4,
       "distance": 21,
       "facing": 270,
@@ -1819,7 +1819,7 @@
     },
     {
       "id": "fountain",
-      "name": "Fountain",
+      "name": "Фонтан",
       "across": 0,
       "distance": 13,
       "height": 0.5,
@@ -1833,7 +1833,7 @@
     },
     {
       "id": "fountain_col",
-      "name": "Fountain",
+      "name": "Фонтан",
       "across": 0,
       "distance": 13,
       "height": 1.9,
@@ -1847,7 +1847,7 @@
     },
     {
       "id": "fountain_water",
-      "name": "Water",
+      "name": "Вода",
       "plane": true,
       "across": 0,
       "distance": 13,
@@ -1857,7 +1857,7 @@
     },
     {
       "id": "fountain_spout",
-      "name": "Jets",
+      "name": "Струйки",
       "particles": {
         "kind": "splashes",
         "at": [
@@ -1890,7 +1890,7 @@
     },
     {
       "id": "lamppost",
-      "name": "Street lamp",
+      "name": "Фонарь",
       "across": -5.5,
       "distance": 21.5,
       "height": 4.1,
@@ -1922,7 +1922,7 @@
     },
     {
       "id": "crowd_far",
-      "name": "Crowd",
+      "name": "Толпа",
       "across": 0,
       "distance": -60,
       "facing": 180,
@@ -1941,7 +1941,7 @@
     },
     {
       "id": "crowd_sit",
-      "name": "Crowd on the stones",
+      "name": "Толпа на камнях",
       "across": 0,
       "distance": -60,
       "facing": 180,
@@ -1960,7 +1960,7 @@
     },
     {
       "id": "hearse_anchor",
-      "name": "Hearse",
+      "name": "Катафалк",
       "unseen": true,
       "across": -9.6,
       "distance": -8,
@@ -1972,7 +1972,7 @@
     },
     {
       "id": "hearse",
-      "name": "Cart with the coffin",
+      "name": "Повозка с гробом",
       "on": "hearse_anchor",
       "across": 0,
       "distance": 1.2,
@@ -1988,7 +1988,7 @@
     },
     {
       "id": "hearse_l",
-      "name": "Cart with the coffin",
+      "name": "Повозка с гробом",
       "on": "hearse_anchor",
       "across": 0.58,
       "distance": 0,
@@ -2004,7 +2004,7 @@
     },
     {
       "id": "hearse_r",
-      "name": "Cart with the coffin",
+      "name": "Повозка с гробом",
       "on": "hearse_anchor",
       "across": -0.58,
       "distance": 0,
@@ -2020,7 +2020,7 @@
     },
     {
       "id": "hearse_front",
-      "name": "Cart with the coffin",
+      "name": "Повозка с гробом",
       "on": "hearse_anchor",
       "across": 0,
       "distance": -1.2,
@@ -2035,7 +2035,7 @@
     },
     {
       "id": "hearse_top",
-      "name": "Coffin",
+      "name": "Гроб",
       "on": "hearse_anchor",
       "plane": true,
       "across": 0,
@@ -2046,7 +2046,7 @@
     },
     {
       "id": "smoke_booth",
-      "name": "Smoke",
+      "name": "Дым",
       "particles": {
         "kind": "smoke",
         "at": "paradiso#booth_window",
@@ -2078,7 +2078,7 @@
     },
     {
       "id": "fireworks",
-      "name": "Fireworks",
+      "name": "Фейерверк",
       "particles": {
         "kind": "sparks",
         "at": [
@@ -2126,7 +2126,7 @@
     },
     {
       "id": "rain_fall",
-      "name": "Rain",
+      "name": "Дождь",
       "particles": {
         "kind": "rain",
         "amount": "rain",
@@ -2138,7 +2138,7 @@
     },
     {
       "id": "demolition_dust",
-      "name": "Dust",
+      "name": "Пыль",
       "particles": {
         "kind": "puff",
         "at": [
@@ -2183,12 +2183,12 @@
     },
     {
       "id": "viewfinder",
-      "name": "Viewfinder",
+      "name": "Видоискатель",
       "insert": "viewfinder"
     },
     {
       "id": "toto",
-      "name": "Totò",
+      "name": "Тото",
       "person": {
         "cast": "cast",
         "who": "toto_boy"
@@ -2203,7 +2203,7 @@
     },
     {
       "id": "alfredo",
-      "name": "Alfredo",
+      "name": "Альфредо",
       "person": {
         "cast": "cast",
         "who": "alfredo"
@@ -2218,7 +2218,7 @@
     },
     {
       "id": "maria",
-      "name": "Maria",
+      "name": "Мария",
       "person": {
         "cast": "cast",
         "who": "maria"
@@ -2233,7 +2233,7 @@
     },
     {
       "id": "elena",
-      "name": "Elena",
+      "name": "Елена",
       "person": {
         "cast": "cast",
         "who": "elena"
@@ -2248,7 +2248,7 @@
     },
     {
       "id": "daughter",
-      "name": "Girl",
+      "name": "Девушка",
       "person": {
         "cast": "cast",
         "who": "daughter"
@@ -2263,7 +2263,7 @@
     },
     {
       "id": "madman",
-      "name": "Madman",
+      "name": "Сумасшедший",
       "person": {
         "cast": "cast",
         "who": "madman"
@@ -2278,7 +2278,7 @@
     },
     {
       "id": "anna",
-      "name": "Anna",
+      "name": "Анна",
       "person": {
         "cast": "cast",
         "who": "anna"
@@ -2293,7 +2293,7 @@
     },
     {
       "id": "bearer1",
-      "name": "Bearer",
+      "name": "Носильщик",
       "person": {
         "cast": "cast",
         "who": "villager_m",
@@ -2315,7 +2315,7 @@
     },
     {
       "id": "bearer2",
-      "name": "Bearer",
+      "name": "Носильщик",
       "person": {
         "cast": "cast",
         "who": "old_m",
@@ -2336,7 +2336,7 @@
     },
     {
       "id": "c1",
-      "name": "Man",
+      "name": "Мужчина",
       "person": {
         "cast": "cast",
         "who": "villager_m",
@@ -2357,7 +2357,7 @@
     },
     {
       "id": "c2",
-      "name": "Woman",
+      "name": "Женщина",
       "person": {
         "cast": "cast",
         "who": "villager_w",
@@ -2378,7 +2378,7 @@
     },
     {
       "id": "c3",
-      "name": "Old man",
+      "name": "Старик",
       "person": {
         "cast": "cast",
         "who": "old_m",
@@ -2398,7 +2398,7 @@
     },
     {
       "id": "c4",
-      "name": "Old woman",
+      "name": "Старуха",
       "person": {
         "cast": "cast",
         "who": "old_w",
@@ -2414,7 +2414,7 @@
     },
     {
       "id": "c5",
-      "name": "Boy",
+      "name": "Мальчишка",
       "person": {
         "cast": "cast",
         "who": "kid",
@@ -2434,7 +2434,7 @@
     },
     {
       "id": "c6",
-      "name": "Man",
+      "name": "Мужчина",
       "person": {
         "cast": "cast",
         "who": "villager_m",
@@ -2456,7 +2456,7 @@
     },
     {
       "id": "c7",
-      "name": "Woman",
+      "name": "Женщина",
       "person": {
         "cast": "cast",
         "who": "villager_w",
@@ -2477,7 +2477,7 @@
     },
     {
       "id": "c8",
-      "name": "Old man",
+      "name": "Старик",
       "person": {
         "cast": "cast",
         "who": "old_m",
@@ -2497,7 +2497,7 @@
     },
     {
       "id": "c9",
-      "name": "Young man",
+      "name": "Парень",
       "person": {
         "cast": "cast",
         "who": "villager_m",
@@ -2519,7 +2519,7 @@
     },
     {
       "id": "c10",
-      "name": "Woman",
+      "name": "Женщина",
       "person": {
         "cast": "cast",
         "who": "villager_w",
