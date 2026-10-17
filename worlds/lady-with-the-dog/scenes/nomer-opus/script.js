@@ -1,4 +1,4 @@
-// Номер в Ялте: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module beats: the
+// A room in Yalta: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module beats: the
 // game sets `beat`, the scene tells `beat:<name>`); the plate stands where `plate` says (one function).
 const L = scene.lib;
 scene.kit.beats.play(scene, L.film(scene));

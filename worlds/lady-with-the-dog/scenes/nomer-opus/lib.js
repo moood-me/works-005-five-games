@@ -1,4 +1,4 @@
-// Номер в Ялте: what the paintings and the script share — the room in metres, the shots, the film in beats (FILM:
+// A room in Yalta: what the paintings and the script share — the room in metres, the shots, the film in beats (FILM:
 // modules/beats.js plays it). The room seen from the wall opposite the balcony: the back wall at distance 5.8 with the
 // open balcony door (across 0.35…1.55), the bed along it on the left, the little table on the right with the candle
 // on its left end (between the two of them) and his chair at its right end, its back to the right wall.
@@ -45,7 +45,7 @@ function film(scene) {
     const [a, d, h] = plateAt(v.plate);
     return { ...v, melon_a: a, melon_d: d, melon_e: h };
   };
-  // he at the table on his chair, the slice cut; the candle lower (what the game leaves after «Арбуз»)
+  // he at the table on his chair, the slice cut; the candle lower (what the game leaves after “Watermelon”)
   const AT_TABLE = { gurov_a: CHAIR_SEAT[0], gurov_d: CHAIR_SEAT[1], gurov_on: CHAIR_SEAT, gurov_turn: 270, gurov_do: 'seated',
     gurov_look: 'watermelon', cut: 1, slice: 1, candle: 0.4 };
   // he beside her on the bed, both turned a little to the room; the plate with the slice by her

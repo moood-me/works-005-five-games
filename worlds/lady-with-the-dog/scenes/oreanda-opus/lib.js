@@ -1,4 +1,4 @@
-// Ореанда: what the paintings and the script share — the cliff in metres, the shots, the film in beats (FILM:
+// Oreanda: what the paintings and the script share — the cliff in metres, the shots, the film in beats (FILM:
 // modules/beats.js plays it).
 const clamp01 = v => Math.max(0, Math.min(1, Number(v) || 0));
 const SEAT_D = 3.6;       // the bench's seat: its middle, metres ahead of the start
@@ -58,7 +58,7 @@ function film(scene) {
         await s.wait(3);
       },
     },
-    // the same: the game's «Море» plays over it (it moves dawn, lights, cicada, hand)
+    // the same: the game's “The sea” plays over it (it moves dawn, lights, cicada, hand)
     still: { after: 'bench', from: () => base({}), run: async s => { await s.wait(2); } },
     // light; the watchman with his stick comes along the path behind them, looks at them, goes — a far figure
     watchman: {

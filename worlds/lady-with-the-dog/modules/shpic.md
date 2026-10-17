@@ -1,33 +1,34 @@
-# shpic — белый шпиц и красный поводок
+# shpic — the white Pomeranian and the red leash
 
-Один шпиц на все сцены мира. Элемент сцены (не человек), нарисованный раз на позу, движимый слоями.
+One Pomeranian for all the world's scenes. A scene's element (not a person), painted once for a pose, moved by layers.
 
 ```json
-{ "id": "spitz", "name": "шпиц", "across": -1.3, "distance": 3.95,
+{ "id": "spitz", "name": "Pomeranian", "across": -1.3, "distance": 3.95,
   "place": { "across": "spitz_a", "distance": "spitz_d", "elevation": "spitz_e" },
   "height": 0.45, "box": [-2.6, -2.2, 2.6, 0.3], "shadow": true }
 ```
-`elements/spitz.js`: `e.kit.shpic.paint(g, e);` · `elements/spitz.animate.js`: `e.kit.shpic.live(e);` · сцена
-называет `"shpic"` в `modules`. `box` такой широкий ради поводка (слой, который поворачивается и растягивается до руки).
+`elements/spitz.js`: `e.kit.shpic.paint(g, e);` · `elements/spitz.animate.js`: `e.kit.shpic.live(e);` · the scene
+names `"shpic"` in `modules`. The `box` is so wide for the leash (a layer that turns and stretches to the hand).
 
-## Ключи (сцена держит их в `states`)
+## Keys (the scene keeps them in `states`)
 
-| Ключ | Что |
+| Key | What |
 | --- | --- |
-| `spitz_a`, `spitz_d`, `spitz_e` | место и высота над землёй, м |
-| `spitz_view` | `side` (сбоку) · `back` (со спины). `front3q` не нарисован — предупреждение |
-| `spitz_dir` | 1 — мордой вправо, −1 — влево (рисунок заново на смене; сцена ставит по направлению хода) |
-| `spitz_do` | `stand` · `sit` · `lie` · `up` (на задних лапах) — свои позы рисунка; `trot`, `run` — поза `stand` и шаг ног; `growl`, `bark` — рывок головы; `sniff` — голова вниз |
-| `spitz_look` | точка, к которой он чуть поворачивает голову, или `null` |
-| `spitz_here` | 0/1 — есть ли он |
-| `spitz_old` | 0/1 — старый: шерсть желтее, всё медленнее |
-| `leash` | точка руки (`'anna#hand_l'`) — поводок к ней; `'none'` — волочится по земле назад; `'chair'` — к точке `chair#leash` (элемент сцены `chair` отмечает её на спинке кресла) |
+| `spitz_a`, `spitz_d`, `spitz_e` | the place and the height above the ground, m |
+| `spitz_view` | `side` (from the side) · `back` (from behind). `front3q` is not painted — a warning |
+| `spitz_dir` | 1 — facing right, −1 — left (painted anew on a change; the scene sets it by the way it goes) |
+| `spitz_do` | `stand` · `sit` · `lie` · `up` (on its hind legs) — the painting's own poses; `trot`, `run` — the pose `stand` and the legs' step; `growl`, `bark` — a jerk of the head; `sniff` — the head down |
+| `spitz_look` | a point it turns its head a little toward, or `null` |
+| `spitz_here` | 0/1 — whether it is there |
+| `spitz_old` | 0/1 — old: its coat yellower, everything slower |
+| `leash` | a hand's point (`'anna#hand_l'`) — the leash to it; `'none'` — it trails on the ground behind; `'chair'` — to the point `chair#leash` (the scene's element `chair` marks it on the armchair's back) |
 
-Точки: `spitz` (голова; нажатие), `spitz#collar`, `spitz#back`. Цвет поводка — `kit.shpic.LEASH` (`#a8322c`).
+Points: `spitz` (the head; a press), `spitz#collar`, `spitz#back`. The leash's colour — `kit.shpic.LEASH` (`#a8322c`).
 
-## Чего нет (пока)
+## What is not here (yet)
 
-- Вид `front3q`; провиса поводка (прямой ремешок); отражение `scaleX` по скорости — направление ключом `spitz_dir`.
-- Свечения поводка (`emission`) нет: свой шейдер элемента читал бы все слои сам; на рассвете поводок читается и
-  без него. Ночным сценам — проверить.
-- Длина поводка не ограничена: сцена сама ставит шпица не дальше 2 м от руки.
+- The view `front3q`; the leash's sag (a straight strap); the `scaleX` mirror by speed — the direction is the key
+  `spitz_dir`.
+- No glow of the leash (`emission`): an element's own shader would have to read all the layers itself; at dawn the leash
+  reads without it. Night scenes — to check.
+- The leash's length is not limited: the scene itself keeps the Pomeranian no more than 2 m from the hand.

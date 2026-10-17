@@ -1,6 +1,6 @@
 {
   "engine": 3,
-  "title": "Славянский базар",
+  "title": "The Slavyansky Bazaar",
   "horizon": 0.42,
   "camera": {
     "mode": "picture"
@@ -44,7 +44,7 @@
   "objects": [
     {
       "id": "sky",
-      "name": "вечер за окном",
+      "name": "evening behind the window",
       "sky": true
     },
     {
@@ -62,7 +62,7 @@
     },
     {
       "id": "floor",
-      "name": "пол",
+      "name": "floor",
       "plane": true,
       "inside": true,
       "across": 0,
@@ -73,7 +73,7 @@
     },
     {
       "id": "ceiling",
-      "name": "потолок",
+      "name": "ceiling",
       "inside": true,
       "across": 0,
       "distance": -0.8,
@@ -89,7 +89,7 @@
     },
     {
       "id": "back_wall",
-      "name": "стена",
+      "name": "wall",
       "inside": true,
       "across": 0,
       "distance": 6,
@@ -104,7 +104,7 @@
     },
     {
       "id": "left_wall",
-      "name": "левая стена",
+      "name": "left wall",
       "inside": true,
       "across": -2.7,
       "distance": 2.6,
@@ -119,7 +119,7 @@
     },
     {
       "id": "right_wall",
-      "name": "правая стена",
+      "name": "right wall",
       "inside": true,
       "across": 2.7,
       "distance": 2.6,
@@ -134,7 +134,7 @@
     },
     {
       "id": "front_wall",
-      "name": "стена за спиной",
+      "name": "wall behind",
       "inside": true,
       "across": 0,
       "distance": -0.8,
@@ -149,7 +149,7 @@
     },
     {
       "id": "corridor",
-      "name": "коридор",
+      "name": "corridor",
       "inside": true,
       "across": -1.65,
       "distance": 7.2,
@@ -164,7 +164,7 @@
     },
     {
       "id": "door",
-      "name": "дверь",
+      "name": "door",
       "inside": true,
       "across": -2.1,
       "distance": 5.98,
@@ -182,7 +182,7 @@
     },
     {
       "id": "window",
-      "name": "окно",
+      "name": "window",
       "inside": true,
       "across": 1.4,
       "distance": 5.97,
@@ -213,7 +213,7 @@
     },
     {
       "id": "drapes",
-      "name": "портьеры",
+      "name": "drapes",
       "inside": true,
       "across": 1.4,
       "distance": 5.9,
@@ -228,7 +228,7 @@
     },
     {
       "id": "mirror_frame",
-      "name": "золочёная рама",
+      "name": "gilt frame",
       "inside": true,
       "across": -0.3,
       "distance": 5.985,
@@ -243,7 +243,7 @@
     },
     {
       "id": "mirror_glass",
-      "name": "зеркало",
+      "name": "mirror",
       "plane": true,
       "inside": true,
       "across": -0.3,
@@ -259,7 +259,7 @@
     },
     {
       "id": "table",
-      "name": "стол",
+      "name": "table",
       "plane": true,
       "inside": true,
       "across": -0.55,
@@ -271,7 +271,7 @@
     },
     {
       "id": "table_skirt",
-      "name": "стол",
+      "name": "table",
       "inside": true,
       "across": -0.55,
       "distance": 3.55,
@@ -286,7 +286,7 @@
     },
     {
       "id": "glasses",
-      "name": "стаканы",
+      "name": "glasses",
       "inside": true,
       "across": -0.45,
       "distance": 4.05,
@@ -302,7 +302,7 @@
     },
     {
       "id": "lamp",
-      "name": "лампа",
+      "name": "lamp",
       "inside": true,
       "across": -0.78,
       "distance": 4.25,
@@ -317,7 +317,7 @@
     },
     {
       "id": "samovar",
-      "name": "самовар",
+      "name": "samovar",
       "inside": true,
       "across": -0.28,
       "distance": 4.22,
@@ -332,7 +332,7 @@
     },
     {
       "id": "chair",
-      "name": "кресло",
+      "name": "armchair",
       "inside": true,
       "across": -1.75,
       "distance": 3.45,
@@ -347,7 +347,7 @@
     },
     {
       "id": "tea_chair",
-      "name": "стул",
+      "name": "chair",
       "inside": true,
       "across": 0.2,
       "distance": 4.1,
@@ -362,17 +362,17 @@
     },
     {
       "id": "tea",
-      "name": "чай (вставка)",
+      "name": "tea (insert)",
       "insert": "tea"
     },
     {
       "id": "mirror",
-      "name": "зеркало (вставка)",
+      "name": "mirror (insert)",
       "insert": "mirror"
     },
     {
       "id": "anna",
-      "name": "Анна Сергеевна",
+      "name": "Anna Sergeyevna",
       "inside": true,
       "person": {
         "cast": "cast",
@@ -388,7 +388,7 @@
     },
     {
       "id": "gurov",
-      "name": "Гуров",
+      "name": "Gurov",
       "inside": true,
       "person": {
         "cast": "cast",
@@ -404,7 +404,7 @@
     },
     {
       "id": "waiter",
-      "name": "официант",
+      "name": "waiter",
       "inside": true,
       "person": {
         "cast": "cast",
@@ -456,49 +456,49 @@
         0.68,
         0.78
       ],
-      "means": "час: вечер (0.72); сцена всегда вечером — лампа и окно"
+      "means": "the hour: evening (0.72); the scene is always in the evening — the lamp and the window"
     },
     "anna_life": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: 1 — она идёт ему навстречу, они стоят обнявшись у двери; 0 — стоит у окна спиной"
+      "means": "the play’s key: 1 — she goes to meet him, they stand embracing by the door; 0 — she stands at the window, her back to him"
     },
     "husband_knows": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: 0 — конверт мужа («Анне. На профессора») лежит на столе у самовара (стол и вставка tea); 1 — его нет"
+      "means": "the play’s key: 0 — the husband’s envelope (“To Anna. For the professor”) lies on the table by the samovar (the table and the insert tea); 1 — it is not there"
     },
     "wife_knows": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: 0 — в bazar_end Гуров смотрит на карманные часы; 1 — не трогает их"
+      "means": "the play’s key: 0 — in bazar_end Gurov looks at his pocket watch; 1 — he does not touch it"
     },
     "spring": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: 1 — за окном оттепель: мокрые крыши, капли по стеклу; 0 — идёт снег"
+      "means": "the play’s key: 1 — the thaw behind the window: wet roofs, drops on the glass; 0 — snow is falling"
     },
     "tea": {
       "values": [
         0,
         1
       ],
-      "means": "вставка «чай»: 1 — открыта (склейка)"
+      "means": "the insert “tea”: 1 — open (a cut)"
     },
     "tap": {
       "values": [
         0,
         1
       ],
-      "means": "кран самовара во вставке: 1 — открыт, течёт струя"
+      "means": "the samovar’s tap in the insert: 1 — open, a stream runs"
     },
     "fill": {
       "range": [
@@ -506,7 +506,7 @@
         1
       ],
       "smooth": true,
-      "means": "сколько чаю в стакане во вставке"
+      "means": "how much tea is in the glass in the insert"
     },
     "spill": {
       "range": [
@@ -514,14 +514,14 @@
         1
       ],
       "smooth": true,
-      "means": "вставка «чай»: лужица на блюдце — двигает игра"
+      "means": "the insert “tea”: the puddle on the saucer — moved by the game"
     },
     "mirror": {
       "values": [
         0,
         1
       ],
-      "means": "вставка «зеркало»: 1 — открыта"
+      "means": "the insert “mirror”: 1 — open"
     },
     "think": {
       "values": [
@@ -530,7 +530,7 @@
         "door",
         "table"
       ],
-      "means": "куда они смотрят в «Советоваться» и потом: window — Гуров к окну, door — Анна к двери, table — оба на два стакана, none — друг на друга (ставит игра)"
+      "means": "where they look in “Taking counsel” and after: window — Gurov to the window, door — Anna to the door, table — both at the two glasses, none — at each other (set by the game)"
     },
     "door": {
       "range": [
@@ -538,7 +538,7 @@
         1
       ],
       "smooth": true,
-      "means": "дверь: 0 закрыта, 1 открыта в комнату"
+      "means": "the door: 0 shut, 1 open into the room"
     },
     "door_f": {
       "range": [
@@ -546,14 +546,14 @@
         262
       ],
       "smooth": true,
-      "means": "поворот створки двери, градусы (ставит сцена по door)"
+      "means": "the door leaf’s turn, degrees (set by the scene from door)"
     },
     "samovar": {
       "values": [
         0,
         1
       ],
-      "means": "1 — самовар стоит на столе (его принёс официант)"
+      "means": "1 — the samovar stands on the table (the waiter brought it)"
     },
     "snowing": {
       "range": [
@@ -561,11 +561,11 @@
         1
       ],
       "smooth": true,
-      "means": "сколько снега идёт за окном (ставит сцена: 1 − spring)"
+      "means": "how much snow is falling behind the window (set by the scene: 1 − spring)"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма, который играет сцена (ставит игра); поставленный играет с начала"
+      "means": "the beat of the film the scene plays (set by the game); one set plays from its beginning"
     },
     "anna_a": {
       "range": [
@@ -573,7 +573,7 @@
         2.6
       ],
       "smooth": true,
-      "means": "где Анна поперёк, м"
+      "means": "where Anna is across, m"
     },
     "anna_d": {
       "range": [
@@ -581,7 +581,7 @@
         5.8
       ],
       "smooth": true,
-      "means": "где Анна вглубь, м"
+      "means": "where Anna is in depth, m"
     },
     "gurov_a": {
       "range": [
@@ -589,7 +589,7 @@
         2.6
       ],
       "smooth": true,
-      "means": "где Гуров поперёк, м"
+      "means": "where Gurov is across, m"
     },
     "gurov_d": {
       "range": [
@@ -597,7 +597,7 @@
         7
       ],
       "smooth": true,
-      "means": "где Гуров вглубь, м (за 6 — в коридоре за дверью)"
+      "means": "where Gurov is in depth, m (beyond 6 — in the corridor behind the door)"
     },
     "waiter_a": {
       "range": [
@@ -605,7 +605,7 @@
         2.6
       ],
       "smooth": true,
-      "means": "где официант поперёк, м"
+      "means": "where the waiter is across, m"
     },
     "waiter_d": {
       "range": [
@@ -613,7 +613,7 @@
         7
       ],
       "smooth": true,
-      "means": "где официант вглубь, м"
+      "means": "where the waiter is in depth, m"
     },
     "glass_at": {
       "range": [
@@ -621,26 +621,26 @@
         1
       ],
       "smooth": true,
-      "means": "вставка «чай»: стакан с блюдцем от места сбоку (0) под кран (1) — двигает игра"
+      "means": "the insert “tea”: the glass with its saucer from its place at the side (0) to under the tap (1) — moved by the game"
     },
     "stain": {
       "values": [
         0,
         1
       ],
-      "means": "1 — перелил: тёмное пятно от чая на скатерти у его руки (ставит игра после «Чая»)"
+      "means": "1 — it overflowed: a dark tea stain on the cloth by his hand (set by the game after “Tea”)"
     },
     "beat_next": {
       "type": "string",
-      "means": "кусок, склейку к которому готовить заранее (ставит игра; модуль beats)"
+      "means": "the beat whose cut is made ready ahead (set by the game; the module beats)"
     },
     "anna_mood": {
       "type": "string",
-      "means": "лицо Анны (sad, …)"
+      "means": "Anna’s face (sad, …)"
     },
     "gurov_mood": {
       "type": "string",
-      "means": "лицо Гурова (thinking, …)"
+      "means": "Gurov’s face (thinking, …)"
     }
   },
   "music": {

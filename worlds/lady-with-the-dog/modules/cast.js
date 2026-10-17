@@ -1,8 +1,9 @@
-// The people of «Дама с собачкой» as people in a scene (the engine's people: an element with "person"): who they are —
-// figures of shapes in the world's style `dama` (from the engine's `soft`: a little longer, a head big enough for the
-// face `simple` — eyes, brows, nose, mouth, an expression by `<id>_mood` — to read), faded colours (white, grey-blue,
-// sand, graphite); what they carry (the parts, with their named points: "anna#lorgnette", "gurov#watch"); how they move
-// — the motions in cast.data.json (Kimodo's, put there with put_motion). cast.md says who is who, every part and motion.
+// The people of “The Lady with the Dog” as people in a scene (the engine's people: an element with "person"): who
+// they are — figures of shapes in the world's style `dama` (from the engine's `soft`: a little longer, a head big
+// enough for the face `simple` — eyes, brows, nose, mouth, an expression by `<id>_mood` — to read), faded colours
+// (white, grey-blue, sand, graphite); what they carry (the parts, with their named points: "anna#lorgnette",
+// "gurov#watch"); how they move — the motions in cast.data.json (Kimodo's, put there with put_motion). cast.md says who
+// is who, every part and motion.
 // A part's lengths are a man's metres times F.fit.h (the person's height as a share of a man's 1.76 m).
 // A look changed on a cut: `<id>_wear` = the look object (scene.kit.cast.characters.gurov_winter), never its name.
 const V = () => MooodShapes.V;
@@ -48,7 +49,7 @@ const EXPRESSIONS = {
   thinking: { inner: -0.03, outer: 0.03, eye: 0.85, wide: 0.08, corners: -0.01, open: 0 },
   tired: { inner: 0.02, outer: -0.05, eye: 0.5, wide: 0.12, corners: -0.015, open: 0 },
 };
-const level = { name: 'простое, прямые брови', draw: F => {
+const level = { name: 'plain, straight brows', draw: F => {
   const { axes, r: rh, on } = F.head, [, hu] = axes, dark = [0.17, 0.14, 0.13], brow = F.colors.hair.map(v => v * 0.7);
   const x = EXPRESSIONS[F.look.expression] ?? EXPRESSIONS.neutral, lips = F.colors.skin.map(v => v * 0.72);
   for (const sx of [-1, 1]) {
@@ -66,49 +67,49 @@ const level = { name: 'простое, прямые брови', draw: F => {
 // ── hats ──
 const hats = {
   // a beret: a soft flat disc on the crown, tilted a little to one side
-  beret: { name: 'берет', draw: F => {
+  beret: { name: 'béret', draw: F => {
     const { add, mul, unit, cross } = V(), { at: head, axes: [hs, hu], r: rh } = F.head;
     const tilt = unit(add(hu, mul(hs, 0.22))), fwd = unit(cross(hs, tilt)), axes = [unit(cross(tilt, fwd)), tilt, fwd];
     F.ball(add(head, add(mul(hu, rh * 0.66), mul(hs, rh * 0.1))), axes, [rh * 1.14, rh * 0.3, rh * 1.08], F.colors.hat, F.sides);
   } },
   // a small travelling hat: a low round crown on a narrow brim, set high on the head
-  toque: { name: 'шляпка', draw: F => {
+  toque: { name: 'toque', draw: F => {
     const { add, mul } = V(), { at: head, axes, r: rh } = F.head, [, hu] = axes;
     F.ball(add(head, mul(hu, rh * 0.62)), axes, [rh * 1.18, rh * 0.12, rh * 1.15], F.colors.hat, F.sides);
     F.ball(add(head, mul(hu, rh * 0.86)), axes, [rh * 0.78, rh * 0.36, rh * 0.76], F.colors.hat, F.sides);
   } },
   // a straw boater: a flat-topped low crown, a dark band, a flat brim
-  boater: { name: 'канотье', draw: F => {
+  boater: { name: 'boater', draw: F => {
     const { add, mul } = V(), { at: head, axes, r: rh } = F.head, [, hu] = axes;
     F.ball(add(head, mul(hu, rh * 0.6)), axes, [rh * 1.66, rh * 0.06, rh * 1.64], F.colors.hat, F.sides * 2);
     F.ball(add(head, mul(hu, rh * 0.92)), axes, [rh * 1.0, rh * 0.32, rh * 0.98], F.colors.hat, F.sides, 3.2);
     F.ball(add(head, mul(hu, rh * 0.74)), axes, [rh * 1.02, rh * 0.1, rh * 1.0], GRAPHITE, F.sides, 3.2);
   } },
   // a tall round fur hat (a man's, winter)
-  fur_hat: { name: 'меховая шапка', draw: F => {
+  fur_hat: { name: 'fur hat', draw: F => {
     const { add, mul } = V(), { at: head, axes, r: rh } = F.head, [, hu] = axes;
     F.ball(add(head, mul(hu, rh * 0.84)), axes, [rh * 1.16, rh * 0.62, rh * 1.14], F.colors.hat, F.sides, 2.8);
   } },
   // a small round fur cap (a woman's, winter), high on the head
-  fur_cap: { name: 'меховая шапочка', draw: F => {
+  fur_cap: { name: 'fur cap', draw: F => {
     const { add, mul } = V(), { at: head, axes, r: rh } = F.head, [, hu, hf] = axes;
     F.ball(add(head, add(mul(hu, rh * 0.68), mul(hf, -rh * 0.08))), axes, [rh * 1.1, rh * 0.42, rh * 1.08], F.colors.hat, F.sides, 2.4);
   } },
   // a girl's bonnet: round the crown and the back of the head, a brim framing the face
-  capor: { name: 'капор', draw: F => {
+  capor: { name: 'capote', draw: F => {
     const { add, mul, unit, cross } = V(), { at: head, axes, egg, r: rh, out, sides, square } = F.head, [hs, hu, hf] = axes;
     F.cap(head, axes, egg.map(e => e * rh * out * 1.14), [0, 0.45, -0.89], -0.1, F.colors.hat, sides, square);
     const tilt = unit(add(hu, mul(hf, 0.9))), axes2 = [hs, tilt, cross(hs, tilt)];
     F.ball(add(head, add(mul(hu, rh * 0.62), mul(hf, rh * 0.42))), axes2, [rh * 1.2, rh * 0.07, rh * 0.62], F.colors.hat, F.sides);
   } },
   // a headscarf over the hair, tied at the nape
-  kerchief: { name: 'платок', draw: F => {
+  kerchief: { name: 'kerchief', draw: F => {
     const { add, mul } = V(), { at, axes, egg, r, out, sides, square } = F.head, [, hu, hf] = axes;
     F.cap(at, axes, egg.map(e => e * r * out * 1.08), [0, 0.7, -0.72], -0.05, F.colors.hat, sides, square);
     F.ball(add(at, add(mul(hu, -r * 0.45), mul(hf, -r * 1.02))), axes, [r * 0.22, r * 0.16, r * 0.14], F.colors.hat, 10);
   } },
   // a peaked cap with a cockade: the engine's cap and a small bright badge over the peak
-  cap_cockade: { name: 'фуражка с кокардой', draw: F => {
+  cap_cockade: { name: 'peaked cap with a cockade', draw: F => {
     MooodShapes.HATS.cap.draw(F);
     const { add, mul } = V(), { at: head, axes, r: rh } = F.head, [, hu, hf] = axes;
     F.ball(add(head, add(mul(hu, rh * 0.62), mul(hf, rh * 0.98))), axes, [rh * 0.12, rh * 0.1, rh * 0.05], BRASS, 8);
@@ -118,16 +119,16 @@ const hats = {
 // ── parts: what is on the face and the body, what is in the hands ──
 const parts = {
   // a thick moustache under the nose (the hair's colour)
-  moustache: { name: 'усы', draw: F => {
+  moustache: { name: 'moustache', draw: F => {
     const { add, mul } = V(), h = F.head, [, hu, hf] = h.axes, r = h.r * h.out;
     F.ball(add(h.at, add(mul(hu, -r * 0.24), mul(hf, r * 0.95))), h.axes, [r * 0.36, r * 0.085, r * 0.09], F.colors.hair, 10);
   } },
   // small side-whiskers down the cheeks (the hair's colour)
-  sideburns: { name: 'бакены', draw: F => {
+  sideburns: { name: 'side-whiskers', draw: F => {
     for (const s of [-1, 1]) F.ball(onHead(F, s * 0.86, -0.22, 0.28), F.head.axes, [F.head.r * 0.16, F.head.r * 0.34, F.head.r * 0.22], F.colors.hair, 10);
   } },
   // a pince-nez: two thin dark rims over the eyes, a bridge between, a cord down to the chest
-  pince_nez: { name: 'пенсне', draw: F => {
+  pince_nez: { name: 'pince-nez', draw: F => {
     const h = F.head, rh = h.r, hu = h.axes[1];
     for (const s of [-1, 1]) {
       const ring = [];
@@ -137,31 +138,31 @@ const parts = {
     F.tube([h.on([-0.2, 0.1, 0.98], 1.05), h.on([0, 0.13, 1], 1.06), h.on([0.2, 0.1, 0.98], 1.05)], [[0, rh * 0.012], [2, rh * 0.012]], [[0, DARK]], 5, hu);
   } },
   // the small scholarly badge on the breast of his tail coat: a glint (its point: "diderits#badge")
-  badge: { name: 'значок', draw: F => {
+  badge: { name: 'badge', draw: F => {
     const { add, mul } = V(), m = F.fit.h, [s, u, f] = axesOf(F, 'Chest');
     const at = add(F.P('Chest'), add(mul(s, 0.08 * m), add(mul(u, 0.02 * m), mul(f, 0.125 * F.k))));
     F.ball(at, [s, u, f], [0.016 * m, 0.02 * m, 0.008 * m], C('#e3cf8a'), 8);
     F.point('badge', at);
   } },
   // a fur collar round the neck over the coat (the accent's colour)
-  fur_collar: { name: 'меховой воротник', draw: F => {
+  fur_collar: { name: 'fur collar', draw: F => {
     const { add, mul } = V(), k = F.k, ax = axesOf(F, 'Chest');
     F.ball(add(F.P('Neck1'), mul(ax[1], -0.035 * F.fit.h)), ax, [0.2 * k, 0.07 * F.fit.h, 0.14 * k], F.colors.accent, 16);
   } },
   // an apron in front of the skirt or the coat (the accent's colour), from the waist to the knees
-  apron_front: { name: 'фартук', draw: F => {
+  apron_front: { name: 'apron', draw: F => {
     const { add, mul } = V(), k = F.k, [s, u, f] = axesOf(F, 'Hips');
     F.ball(add(F.P('Hips'), add(mul(f, 0.15 * k), mul(UP, -0.1 * F.fit.h))), [s, UP, f], [0.17 * k, 0.26 * F.fit.h, 0.03 * k], F.colors.accent, 12, 3);
   } },
   // gloves: dark over both hands
-  gloves: { name: 'перчатки', draw: F => {
+  gloves: { name: 'gloves', draw: F => {
     for (const hn of ['LeftHand', 'RightHand']) {
       const { add, mul } = V(), [s, u, f] = axesOf(F, hn);
       F.ball(add(F.P(hn), mul(u, 0.035 * F.fit.h)), [s, u, f], [0.034 * F.k, 0.052 * F.fit.h, 0.03 * F.k], C('#36343a'), 10);
     }
   } },
   // the white spitz held in both arms at the chest: a simple white bundle, the ears and the muzzle just told
-  spitz_held: { name: 'шпиц на руках', draw: F => {
+  spitz_held: { name: 'Pomeranian in her arms', draw: F => {
     const { add, mul, mix, unit } = V(), m = F.fit.h;
     const a = F.P('LeftHand'), b = F.P('RightHand'), f = unit(add(F.fwd('LeftHand'), F.fwd('RightHand')));
     const c = add(add(mix(a, b, 0.5), mul(UP, 0.07 * m)), mul(f, 0.06 * m));
@@ -176,7 +177,7 @@ const parts = {
     F.point('spitz', head);
   } },
   // a lorgnette in the right hand: a short handle and two small lenses (its point: the lenses, "anna#lorgnette")
-  lorgnette: { name: 'лорнетка', draw: F => {
+  lorgnette: { name: 'lorgnette', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hand = F.P('RightHand'), [s, u, f] = axesOf(F, 'RightHand');
     const top = add(hand, mul(u, 0.09 * m));
     F.bar(add(hand, mul(u, 0.02 * m)), top, 0.006 * m, 0.006 * m, [[0, C('#d9c9a0')]], 5, f);
@@ -185,14 +186,14 @@ const parts = {
     F.point('lorgnette', c);
   } },
   // a light parasol in the right hand: the stick upright from the hand, the canopy over her head
-  parasol: { name: 'зонт', draw: F => {
+  parasol: { name: 'parasol', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hand = F.P('RightHand'), tip = add(hand, mul(UP, 1.02 * m));
     F.bar(add(hand, mul(UP, -0.08 * m)), add(tip, mul(UP, 0.2 * m)), 0.007 * m, 0.006 * m, [[0, C('#8f8577')]], 5, [1, 0, 0]);
     F.cap(tip, AX, [0.48 * m, 0.2 * m, 0.48 * m], [0, 1, 0], 0, C('#f1ece2'), 18);
     F.point('parasol', add(tip, mul(UP, 0.12 * m)));
   } },
   // the conductor's lantern in his right hand: a dark frame round a glowing glass ("conductor#glass")
-  lantern: { name: 'фонарь', draw: F => {
+  lantern: { name: 'lantern', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hand = F.P('RightHand'), c = add(hand, mul(UP, -0.16 * m));
     F.ball(add(hand, mul(UP, -0.06 * m)), AX, [0.015 * m, 0.04 * m, 0.015 * m], DARK, 6);
     F.ball(c, AX, [0.055 * m, 0.08 * m, 0.055 * m], C('#ffd38a', 2), 10);
@@ -200,7 +201,7 @@ const parts = {
     F.point('glass', c);
   } },
   // a white plate with the red slice of watermelon on it, held in both hands before him ("gurov#plate")
-  plate: { name: 'тарелка с ломтем', draw: F => {
+  plate: { name: 'plate with a slice', draw: F => {
     const { add, mix, mul, unit } = V(), m = F.fit.h, f = unit(add(F.fwd('LeftHand'), F.fwd('RightHand')));
     const c = add(add(mix(F.P('LeftHand'), F.P('RightHand'), 0.5), mul(UP, 0.03 * m)), mul(f, 0.08 * m));
     F.ball(c, AX, [0.12 * m, 0.012 * m, 0.12 * m], C('#f2efe8'), 16);
@@ -209,7 +210,7 @@ const parts = {
     F.point('plate', c);
   } },
   // the waiter's brass tray with the samovar on it, carried in both hands ("waiter#tray")
-  tray: { name: 'поднос с самоваром', draw: F => {
+  tray: { name: 'tray with a samovar', draw: F => {
     const { add, mix, mul, unit } = V(), m = F.fit.h, f = unit(add(F.fwd('LeftHand'), F.fwd('RightHand')));
     const c = add(mix(F.P('LeftHand'), F.P('RightHand'), 0.5), mul(f, 0.1 * m));
     F.ball(c, AX, [0.24 * m, 0.012 * m, 0.17 * m], BRASS, 18);
@@ -219,13 +220,13 @@ const parts = {
     F.point('tray', c);
   } },
   // a man's coat folded over the left forearm, hanging
-  coat_carried: { name: 'пальто в руках', draw: F => {
+  coat_carried: { name: 'coat over the arm', draw: F => {
     const { add, mix, mul, unit, cross } = V(), m = F.fit.h, along = unit([F.fwd('Hips')[0], 0, F.fwd('Hips')[2]]);
     const c = add(mix(F.P('LeftForeArm'), F.P('LeftHand'), 0.5), mul(UP, -0.14 * m)), x = unit(cross(UP, along));
     F.ball(c, [x, UP, along], [0.07 * m, 0.24 * m, 0.13 * m], GRAPHITE, 12, 2.6);
   } },
   // a bunch of white and yellow flowers in the right hand ("p1#bouquet")
-  bouquet: { name: 'букет', draw: F => {
+  bouquet: { name: 'bouquet', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hand = F.P('RightHand'), [s, u, f] = axesOf(F, 'RightHand');
     F.bar(add(hand, mul(u, -0.06 * m)), add(hand, mul(u, 0.08 * m)), 0.016 * m, 0.022 * m, [[0, C('#6d7a55')]], 6, f);
     const top = add(hand, mul(u, 0.13 * m)), W = C('#f3f0e6'), Y = C('#e6cc6a');
@@ -234,61 +235,61 @@ const parts = {
     F.point('bouquet', top);
   } },
   // a letter held open in both hands at the chest, turned to the eyes ("anna#letter")
-  letter_paper: { name: 'письмо', draw: F => {
+  letter_paper: { name: 'letter', draw: F => {
     const { c, axes } = held(F, 0.05), m = F.fit.h;
     F.ball(c, axes, [0.1 * m, 0.13 * m, 0.003 * m], PAPER, 4, 8);
     F.point('letter', c);
   } },
   // a small folded note in the right hand ("gurov#note")
-  note: { name: 'записка', draw: F => sheetInHand(F, 0.04, 0.05, C('#e4dcc4'), 'note') },
+  note: { name: 'note', draw: F => sheetInHand(F, 0.04, 0.05, C('#e4dcc4'), 'note') },
   // the husband's envelope, light, in the right hand ("anna#envelope")
-  envelope: { name: 'конверт', draw: F => sheetInHand(F, 0.075, 0.045, C('#efe9dc'), 'envelope') },
+  envelope: { name: 'envelope', draw: F => sheetInHand(F, 0.075, 0.045, C('#efe9dc'), 'envelope') },
   // a suitcase hanging from the right hand, its long side along the way the person faces
-  valise: { name: 'чемодан', draw: F => {
+  valise: { name: 'valise', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hand = F.P('RightHand'), c = add(hand, mul(UP, -0.2 * m));
     F.ball(c, [F.side('Hips'), UP, F.fwd('Hips')], [0.07 * m, 0.17 * m, 0.27 * m], BROWN, 12, 6);
     F.bar(add(c, mul(UP, 0.17 * m)), hand, 0.01 * m, 0.01 * m, [[0, LEATHER]], 5, F.fwd('Hips'));
   } },
   // a soft travelling bag hanging from the left hand
-  bag: { name: 'дорожная сумка', draw: F => {
+  bag: { name: 'travelling bag', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hand = F.P('LeftHand'), c = add(hand, mul(UP, -0.13 * m));
     F.ball(c, [F.side('Hips'), UP, F.fwd('Hips')], [0.06 * m, 0.1 * m, 0.15 * m], C('#5d5650'), 12, 3);
     F.bar(add(c, mul(UP, 0.09 * m)), hand, 0.008 * m, 0.008 * m, [[0, LEATHER]], 5, F.fwd('Hips'));
   } },
   // a walking stick in the right hand: from the hand down to the floor
-  stick: { name: 'палка', draw: F => {
+  stick: { name: 'stick', draw: F => {
     const { add, mul } = V(), m = F.fit.h, hand = F.P('RightHand'), fwd = F.fwd('Hips');
     const tip = [hand[0] + fwd[0] * 0.06 * m, Math.max(0.01, hand[1] - 0.92 * m), hand[2] + fwd[2] * 0.06 * m];
     F.bar(hand, tip, 0.012 * m, 0.01 * m, [[0, C('#3a2e26')]], 6, F.side('Hips'));
     F.bar(hand, add(hand, mul(fwd, 0.08 * m)), 0.013 * m, 0.013 * m, [[0, C('#3a2e26')]], 6, UP);
   } },
   // a school satchel on the back
-  satchel: { name: 'ранец', draw: F => {
+  satchel: { name: 'satchel', draw: F => {
     const { add, mul } = V(), m = F.fit.h, [s, u, f] = axesOf(F, 'Chest');
     F.ball(add(F.P('Chest'), add(mul(f, -0.15 * F.k), mul(u, -0.05 * m))), [s, u, f], [0.12 * m, 0.14 * m, 0.05 * m], C('#4e4136'), 10, 4);
   } },
   // a fur muff between the hands before her (the hat's colour: the fur of her cap)
-  muff: { name: 'муфта', draw: F => {
+  muff: { name: 'muff', draw: F => {
     const { add, mix, mul, unit, sub, cross } = V(), m = F.fit.h, a = F.P('LeftHand'), b = F.P('RightHand');
     const c = mix(a, b, 0.5), x = unit(sub(b, a)), f = unit(cross(x, UP)), y = cross(f, x);
     F.ball(c, [x, y, f], [0.11 * m, 0.075 * m, 0.075 * m], F.colors.hat, 14);
     F.point('muff', c);
   } },
   // a parcel from a shop, tied, held at the chest in both hands
-  parcel: { name: 'свёрток', draw: F => {
+  parcel: { name: 'parcel', draw: F => {
     const { c, axes } = held(F, 0.02), m = F.fit.h;
     F.ball(c, axes, [0.1 * m, 0.07 * m, 0.06 * m], C('#cdbd9c'), 6, 4);
     F.ball(c, axes, [0.006 * m, 0.072 * m, 0.062 * m], C('#7d6a52'), 4, 4);
     F.point('parcel', c);
   } },
   // a man's coat over her shoulders: down her back and her arms to the hips, open in front (the accent's colour)
-  coat_over: { name: 'пальто на плечах', draw: F => {
+  coat_over: { name: 'coat over the shoulders', draw: F => {
     const { add, mul } = V(), m = F.fit.h, [s, u, f] = axesOf(F, 'Chest'), c = add(F.P('Chest'), mul(u, -0.1 * m)), col = C('#3a3c42');
     for (const k of [-1, 1]) F.ball(add(c, add(mul(s, k * 0.15 * m), mul(f, -0.01 * m))), [s, u, f], [0.12 * m, 0.3 * m, 0.15 * m], col, 12);
     F.ball(add(c, mul(f, -0.07 * m)), [s, u, f], [0.25 * m, 0.3 * m, 0.09 * m], col, 12);
   } },
   // Gurov's pocket watch in the right hand, its face up to the eyes, the chain to the waistcoat ("gurov#watch")
-  watch: { name: 'часы', draw: F => {
+  watch: { name: 'watch', draw: F => {
     const { add, mul, unit, sub, cross } = V(), m = F.fit.h, hand = F.P('RightHand'), f = F.fwd('RightHand');
     const c = add(hand, mul(f, 0.04 * m)), n = unit(sub(F.P('Head'), c)), x = unit(cross(UP, n)), y = cross(n, x);
     F.ball(c, [x, y, n], [0.026 * m, 0.026 * m, 0.008 * m], SILVER, 12);
@@ -339,7 +340,7 @@ const characters = {
   // the theatre: a light grey evening dress, a light shawl
   anna_theatre: woman({ garment: 'dress', hair: 'bun', hat: 'none', scarf: true, body: ANNA,
     colors: { ...ANNA_C, top: '#d6d4d8', garment: '#cfccd2', bottom: '#cfccd2', shoes: '#6b6670', accent: '#f1ede4' } }),
-  // Moscow, «Славянский базар»: his favourite grey dress, no hat
+  // Moscow, the Slavyansky Bazaar: his favourite grey dress, no hat
   anna_grey: woman({ garment: 'dress', hair: 'bun', hat: 'none', body: ANNA,
     colors: { ...ANNA_C, top: '#a8a6ab', garment: '#9c9aa0', bottom: '#9c9aa0', shoes: '#4c4a52', accent: '#f7f5f0' } }),
   // von Diderits: young, very tall, stooping, a narrow face, small side-whiskers, a pince-nez; a tail coat with a

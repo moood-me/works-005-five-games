@@ -1,50 +1,54 @@
-# Станция
+# The station
 
-II.4 «Дамы с собачкой» (scenes.md «Станция», 4-я редакция). Маленькая станция в сумерках конца лета: деревянная
-платформа с фонарями, станционный домик с колоколом, поезд (паровоз, три вагона и вагон Анны — последний), за путями
-степь, телеграфные столбы, провода, тополя. Светлая грусть, «уже пахло осенью»: тёплая заря слева, холодная сирень
-справа, куда уходит поезд; тёплые окна вагонов и фонари; красное — только хвостовые огни.
+II.4 of “The Lady with the Dog” (scenes.md, the station, the 4th edition). A small station in the dusk of late summer: a
+wooden platform with lamps, the station house with its bell, the train (the engine, three carriages and Anna's carriage —
+the last one), beyond the tracks the steppe, telegraph poles, wires, poplars. A light sadness, “there was already a scent
+of autumn”: a warm afterglow on the left, a cold lilac on the right, where the train goes; the warm windows of the
+carriages and the lamps; red — only the tail lights.
 
-## Как устроено
+## How it is made
 
-- **Камера** `panorama`, `span` [−20, 40]; кадры — ключами камеры (`lib.js` `CAM`): `PLATFORM` (вдоль платформы под
-  углом), `FACE` (под фонарём через его плечо: её лицо к нему, 3 м, три четверти, фонарь у неё перед лицом), `WINDOW`
-  (снизу с платформы на её окно, 2.4 м: лицо за стеклом, занавеска), `END` (конец платформы вдоль путей), `HOUSE`
-  (к домику). Длинные карточки стоят с `facing` 180 (повёрнутые кадры).
-- **Небо** — своё элемент неба (с запасом по ширине для повёрнутых кадров); `nebo` не нужен.
-- **Поезд**: невидимый якорь `train` на `train_a`; на нём `carriage` (вагон Анны: окно-дыра, точки `glass`, `sill`,
-  `curtain`), `car_inside` (купе), `drape` (занавеска по `curtain`), `carriage_end` (красные огни), `cars`,
-  `train_lit`, `loco`. Смысл → метры одной функцией `L.placeTrain` (`train_a`, `tail_a`, `tail_on`, `winlamp_a`).
-- **Свет на её лице в окне** — свет сцены `winlamp` (лампа купе у окна, перед ней), едет с поездом по `winlamp_a`.
-  На платформе её лицо светит фонарь `lamp2` (над ней).
-- **Анна** стоит `on: "carriage"` всю сцену (в рамке вагона): на платформе (пол 0.6 над рельсом) и у окна (пол 1.2).
-  Шпиц у неё на руках — часть каста `spitz_held` (движение `hold_dog`); элемент `spitz` (модуль `shpic`) есть, но
-  скрыт (`spitz_here` 0).
-- **Фонари** — копии одной картины; их свет — свои источники `lamp0…lamp4`.
-- **Фильм** — `lib.js` `film(scene)`, играет модуль `beats`. Склейки внутри кусков сказаны заранее.
+- **The camera** `panorama`, `span` [−20, 40]; shots — by the camera's keys (`lib.js` `CAM`): `PLATFORM` (along the
+  platform at an angle), `FACE` (under a lamp over his shoulder: her face to him, 3 m, three-quarter, the lamp before
+  her face), `WINDOW` (from the platform up at her window, 2.4 m: her face behind the glass, the curtain), `END` (the end
+  of the platform along the tracks), `HOUSE` (toward the station house). The long cards stand with `facing` 180 (the
+  turned shots).
+- **The sky** — a sky element of its own (wide enough for the turned shots); `nebo` is not needed.
+- **The train**: an invisible anchor `train` at `train_a`; on it `carriage` (Anna's carriage: the window a hole, the
+  points `glass`, `sill`, `curtain`), `car_inside` (the compartment), `drape` (the curtain by `curtain`),
+  `carriage_end` (the red lights), `cars`, `train_lit`, `loco`. Meaning → metres by one function `L.placeTrain`
+  (`train_a`, `tail_a`, `tail_on`, `winlamp_a`).
+- **The light on her face at the window** — the scene's light `winlamp` (the compartment's lamp by the window, before
+  her), travelling with the train by `winlamp_a`. On the platform her face is lit by the lamp `lamp2` (above her).
+- **Anna** stands `on: "carriage"` the whole scene (in the carriage's frame): on the platform (the floor 0.6 above the
+  rail) and at the window (the floor 1.2). The Pomeranian in her arms — the cast's part `spitz_held` (the motion
+  `hold_dog`); the element `spitz` (the module `shpic`) is there but hidden (`spitz_here` 0).
+- **The lamps** — copies of one painting; their light — sources of their own `lamp0…lamp4`.
+- **The film** — `lib.js` `film(scene)`, played by the module `beats`. The cuts inside the beats are said ahead.
 
-## Куски
+## Beats
 
-| Кусок | after | ≈ с | Что |
+| Beat | after | ≈ s | What |
 | --- | --- | --- | --- |
-| `platform` | — | 14 | общий план 3 с, потом лица: склейка `FACE` — она к нему (Р37, `sad`), мимо него вдоль поезда (Р36), снова к нему; кондуктор с фонарём далеко; в конце `platform:bell` |
-| `board` | platform | 6 | лица: склейка `WINDOW` — она в вагоне у окна, рука на раме, лицо за стеклом при лампе, смотрит на нас; занавеска в кадре — под выбор |
-| `look_back` | board | 15 | её рука на стекле; поезд трогается; склейка `END`: окно уходит и уменьшается, хвостовой огонь |
-| `curtain` | board | 17 | она задёргивает занавеску; поезд трогается; склейка `END`: уходит светлый задёрнутый квадрат |
-| `alone_far` | — | 21 | пустая платформа: он идёт до последнего фонаря, стоит (`alone_far:stands`), красный огонёк тает (`far` → 1) |
-| `alone_turn` | — | 12 | у домика: стоит под фонарём, идёт к дверям станции (`alone_turn:door`) |
+| `platform` | — | 14 | a wide shot 3 s, then faces: a cut to `FACE` — she to him (L37, `sad`), past him along the train (L36), to him again; the conductor with a lantern far off; at the end `platform:bell` |
+| `board` | platform | 6 | faces: a cut to `WINDOW` — she in the carriage at the window, her hand on the frame, her face behind the glass by the lamp, looking at us; the curtain in the shot — under the choice |
+| `look_back` | board | 15 | her hand on the glass; the train moves off; a cut to `END`: the window goes away and grows smaller, the tail light |
+| `curtain` | board | 17 | she draws the curtain; the train moves off; a cut to `END`: a light curtained square goes away |
+| `alone_far` | — | 21 | the empty platform: he walks to the last lamp, stands (`alone_far:stands`), the red light melts away (`far` → 1) |
+| `alone_turn` | — | 12 | by the station house: he stands under a lamp, goes to the station's doors (`alone_turn:door`) |
 
-Ключи: `hour`, `train`, `far`, `curtain`, ключи `shpic`, `beat`, `beat_next`. Ключей партии нет.
+Keys: `hour`, `train`, `far`, `curtain`, the keys of `shpic`, `beat`, `beat_next`. No keys of the play.
 
-## Чего нет / что знать
+## What is not here / what to know
 
-- `platform` начинается общим планом (3 с: поезд, станция, кондуктор), лица — после склейки.
-- Р36/Р37: сцена не знает, какую реплику скажут; в `FACE` она сначала смотрит на него, потом мимо, потом снова на
-  него — поза годится под обе.
-- Движение `hold_dog` (держит шпица у груди) — не из списка scenes.md «Движения»; нужно, чтобы каст его сохранил.
-- Колокол не качается (удар — звук игры). `hour` описан, но свет всегда вечерний.
+- `platform` begins with a wide shot (3 s: the train, the station, the conductor), the faces — after the cut.
+- L36/L37 (game.md §8, the lines' numbers): the scene does not know which line will be said; in `FACE` she first looks
+  at him, then past him, then at him again — the pose fits both.
+- The motion `hold_dog` (she holds the Pomeranian to her breast) is not from scenes.md's list of motions; the cast must
+  keep it.
+- The bell does not swing (its stroke is the game's sound). `hour` is described, but the light is always the evening's.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {"platform": {"after": [], "tells": ["platform:bell"], "seconds": 14, "show": false},

@@ -1,6 +1,6 @@
 {
   "engine": 3,
-  "title": "Станция",
+  "title": "The station",
   "horizon": 0.56,
   "camera": {
     "mode": "panorama",
@@ -140,12 +140,12 @@
   "objects": [
     {
       "id": "sky",
-      "name": "небо",
+      "name": "sky",
       "sky": true
     },
     {
       "id": "ground",
-      "name": "земля у станции",
+      "name": "ground by the station",
       "plane": true,
       "across": 150,
       "distance": -46.2,
@@ -155,7 +155,7 @@
     },
     {
       "id": "steppe",
-      "name": "степь",
+      "name": "steppe",
       "plane": true,
       "across": 150,
       "distance": 411.25,
@@ -165,7 +165,7 @@
     },
     {
       "id": "track",
-      "name": "путь",
+      "name": "track",
       "plane": true,
       "across": 280,
       "distance": 9.45,
@@ -175,7 +175,7 @@
     },
     {
       "id": "platform",
-      "name": "платформа",
+      "name": "platform",
       "plane": true,
       "walk": true,
       "across": 5,
@@ -186,7 +186,7 @@
     },
     {
       "id": "edge",
-      "name": "край платформы",
+      "name": "platform’s edge",
       "across": 5,
       "distance": 7.62,
       "elevation": -0.6,
@@ -202,7 +202,7 @@
     },
     {
       "id": "poplars",
-      "name": "тополя",
+      "name": "poplars",
       "height": 15,
       "box": [
         -2.2,
@@ -246,7 +246,7 @@
     },
     {
       "id": "poles",
-      "name": "телеграфные столбы",
+      "name": "telegraph poles",
       "height": 7.5,
       "box": [
         -0.9,
@@ -315,7 +315,7 @@
     },
     {
       "id": "wires",
-      "name": "провода",
+      "name": "wires",
       "across": 252.5,
       "distance": 12.52,
       "height": 7.5,
@@ -329,7 +329,7 @@
     },
     {
       "id": "house",
-      "name": "станционный домик",
+      "name": "station house",
       "across": -13.5,
       "distance": 5.6,
       "facing": 140,
@@ -344,7 +344,7 @@
     },
     {
       "id": "house_lit",
-      "name": "окна станции",
+      "name": "station windows",
       "across": -13.5,
       "distance": 5.6,
       "facing": 140,
@@ -362,7 +362,7 @@
     },
     {
       "id": "lamp",
-      "name": "фонарь",
+      "name": "lamp",
       "height": 3.4,
       "box": [
         -0.35,
@@ -396,7 +396,7 @@
     },
     {
       "id": "train",
-      "name": "поезд",
+      "name": "train",
       "unseen": true,
       "across": 0,
       "distance": 7.95,
@@ -406,7 +406,7 @@
     },
     {
       "id": "carriage",
-      "name": "вагон Анны",
+      "name": "Anna’s carriage",
       "on": "train",
       "across": 0,
       "distance": 0,
@@ -422,7 +422,7 @@
     },
     {
       "id": "car_inside",
-      "name": "купе",
+      "name": "compartment",
       "on": "train",
       "across": 3.6,
       "distance": 1.25,
@@ -438,7 +438,7 @@
     },
     {
       "id": "drape",
-      "name": "занавеска",
+      "name": "curtain",
       "on": "train",
       "across": 3.6,
       "distance": 0.12,
@@ -454,7 +454,7 @@
     },
     {
       "id": "carriage_end",
-      "name": "конец поезда",
+      "name": "end of the train",
       "on": "train",
       "across": -6.85,
       "distance": 1.5,
@@ -469,7 +469,7 @@
     },
     {
       "id": "cars",
-      "name": "вагоны",
+      "name": "carriages",
       "on": "train",
       "across": 13.6,
       "distance": 0,
@@ -485,7 +485,7 @@
     },
     {
       "id": "train_lit",
-      "name": "окна поезда",
+      "name": "train windows",
       "on": "train",
       "across": 0,
       "distance": -0.02,
@@ -505,7 +505,7 @@
     },
     {
       "id": "loco",
-      "name": "паровоз",
+      "name": "engine",
       "on": "train",
       "across": 56.2,
       "distance": 0.2,
@@ -530,7 +530,7 @@
     },
     {
       "id": "spitz",
-      "name": "шпиц",
+      "name": "Pomeranian",
       "across": 4.9,
       "distance": 6.6,
       "place": {
@@ -549,7 +549,7 @@
     },
     {
       "id": "anna",
-      "name": "Анна Сергеевна",
+      "name": "Anna Sergeyevna",
       "on": "carriage",
       "person": {
         "cast": "cast",
@@ -568,7 +568,7 @@
     },
     {
       "id": "gurov",
-      "name": "Гуров",
+      "name": "Gurov",
       "person": {
         "cast": "cast",
         "who": "gurov_summer",
@@ -583,7 +583,7 @@
     },
     {
       "id": "conductor",
-      "name": "кондуктор",
+      "name": "conductor",
       "person": {
         "cast": "cast",
         "who": "conductor",
@@ -646,7 +646,7 @@
         0.75,
         0.85
       ],
-      "means": "час: вечер (0.8); свет сцены всегда вечерний — сумерки конца лета"
+      "means": "the hour: evening (0.8); the scene’s light is always the evening’s — the dusk of late summer"
     },
     "train": {
       "range": [
@@ -654,7 +654,7 @@
         1
       ],
       "smooth": true,
-      "means": "поезд: 0 стоит у платформы, 1 ушёл за край (300 м вдоль пути)"
+      "means": "the train: 0 stands at the platform, 1 gone past the edge (300 m along the track)"
     },
     "far": {
       "range": [
@@ -662,7 +662,7 @@
         1
       ],
       "smooth": true,
-      "means": "поезд уходит дальше за горизонт: 0 — где его оставил train, 1 — 2 км, красный огонёк тает в дымке"
+      "means": "the train goes on past the horizon: 0 — where train left it, 1 — 2 km, the red light melts in the haze"
     },
     "curtain": {
       "range": [
@@ -670,11 +670,11 @@
         1
       ],
       "smooth": true,
-      "means": "занавеска её окна: 0 собрана у края, 1 задёрнута"
+      "means": "the curtain of her window: 0 gathered at the side, 1 drawn"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма, который играет сцена (ставит игра); поставленный играет с начала"
+      "means": "the beat of the film the scene plays (set by the game); one set plays from its beginning"
     },
     "train_a": {
       "range": [
@@ -682,7 +682,7 @@
         2000
       ],
       "smooth": true,
-      "means": "где поезд вдоль пути, м (ставит сцена по train и far)"
+      "means": "where the train is along the track, m (set by the scene from train and far)"
     },
     "anna_a": {
       "range": [
@@ -690,7 +690,7 @@
         8
       ],
       "smooth": true,
-      "means": "где Анна вдоль вагона, м (в рамке её вагона)"
+      "means": "where Anna is along the carriage, m (in her carriage’s frame)"
     },
     "anna_d": {
       "range": [
@@ -698,7 +698,7 @@
         1.5
       ],
       "smooth": true,
-      "means": "где Анна от стенки вагона: < 0 — на платформе, > 0 — в вагоне, м"
+      "means": "where Anna is from the carriage’s side: < 0 — on the platform, > 0 — in the carriage, m"
     },
     "anna_e": {
       "range": [
@@ -706,7 +706,7 @@
         1.5
       ],
       "smooth": true,
-      "means": "её пол над рельсом: 0.6 — платформа, 1.2 — пол вагона"
+      "means": "her floor above the rail: 0.6 — the platform, 1.2 — the carriage’s floor"
     },
     "gurov_a": {
       "range": [
@@ -714,7 +714,7 @@
         31
       ],
       "smooth": true,
-      "means": "где Гуров вдоль платформы, м"
+      "means": "where Gurov is along the platform, m"
     },
     "gurov_d": {
       "range": [
@@ -722,7 +722,7 @@
         7.5
       ],
       "smooth": true,
-      "means": "где Гуров поперёк платформы, м"
+      "means": "where Gurov is across the platform, m"
     },
     "conductor_a": {
       "range": [
@@ -730,7 +730,7 @@
         31
       ],
       "smooth": true,
-      "means": "где кондуктор вдоль платформы, м"
+      "means": "where the conductor is along the platform, m"
     },
     "conductor_d": {
       "range": [
@@ -738,7 +738,7 @@
         7.5
       ],
       "smooth": true,
-      "means": "где кондуктор поперёк платформы, м"
+      "means": "where the conductor is across the platform, m"
     },
     "tail_a": {
       "range": [
@@ -746,7 +746,7 @@
         2000
       ],
       "smooth": true,
-      "means": "где хвостовой огонь вдоль пути, м (ставит сцена по train_a)"
+      "means": "where the tail light is along the track, m (set by the scene from train_a)"
     },
     "tail_on": {
       "range": [
@@ -754,11 +754,11 @@
         1
       ],
       "smooth": true,
-      "means": "большое свечение хвостового огня — для дали (ставит сцена: 0 у платформы, 1 с 120 м)"
+      "means": "the tail light’s big glow — for the distance (set by the scene: 0 at the platform, 1 from 120 m)"
     },
     "beat_next": {
       "type": "string",
-      "means": "кусок, склейку к которому готовить заранее (ставит игра; модуль beats)"
+      "means": "the beat whose cut is made ready ahead (set by the game; the module beats)"
     },
     "winlamp_a": {
       "range": [
@@ -766,15 +766,15 @@
         2100
       ],
       "smooth": true,
-      "means": "где лампа купе у её окна вдоль пути, м (ставит сцена по train_a)"
+      "means": "where the compartment’s lamp by her window is along the track, m (set by the scene from train_a)"
     },
     "anna_mood": {
       "type": "string",
-      "means": "лицо Анны (sad, …)"
+      "means": "Anna’s face (sad, …)"
     },
     "gurov_mood": {
       "type": "string",
-      "means": "лицо Гурова"
+      "means": "Gurov’s face"
     },
     "spitz_a": {
       "range": [
@@ -782,7 +782,7 @@
         31
       ],
       "smooth": true,
-      "means": "где шпиц вдоль платформы, м (здесь он у неё на руках — элемент скрыт)"
+      "means": "where the Pomeranian is along the platform, m (here it is in her arms — the element hidden)"
     },
     "spitz_d": {
       "range": [
@@ -790,7 +790,7 @@
         7.6
       ],
       "smooth": true,
-      "means": "где шпиц поперёк платформы, м"
+      "means": "where the Pomeranian is across the platform, m"
     },
     "spitz_e": {
       "range": [
@@ -798,7 +798,7 @@
         1.5
       ],
       "smooth": true,
-      "means": "высота шпица над платформой, м"
+      "means": "the Pomeranian’s height above the platform, m"
     },
     "spitz_view": {
       "values": [
@@ -806,7 +806,7 @@
         "back",
         "front3q"
       ],
-      "means": "вид шпица (модуль shpic)"
+      "means": "the Pomeranian’s view (the module shpic)"
     },
     "spitz_do": {
       "values": [
@@ -820,29 +820,29 @@
         "up",
         "sniff"
       ],
-      "means": "что делает шпиц"
+      "means": "what the Pomeranian does"
     },
     "spitz_look": {
       "type": "string",
-      "means": "точка, на которую смотрит шпиц, или null"
+      "means": "the point the Pomeranian looks at, or null"
     },
     "spitz_here": {
       "values": [
         0,
         1
       ],
-      "means": "шпиц-элемент виден (здесь 0: шпиц на руках — часть каста spitz_held)"
+      "means": "the Pomeranian element is seen (here 0: the Pomeranian in her arms — part of the cast’s spitz_held)"
     },
     "spitz_old": {
       "values": [
         0,
         1
       ],
-      "means": "старый шпиц"
+      "means": "an old Pomeranian"
     },
     "leash": {
       "type": "string",
-      "means": "поводок: точка руки или none"
+      "means": "the leash: a hand’s point or none"
     }
   },
   "music": {

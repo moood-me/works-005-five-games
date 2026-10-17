@@ -1,17 +1,17 @@
-# nebo — небо Каперны и свет часа (движок 2)
+# nebo — the sky of Kaperna and the hour's light (engine 2)
 
-Одно небо и один час на все сцены мира: берег, дом, лес, замок и палуба видят один и тот же час. `hour` 0…1: 0 —
-полночь, 0.25 — рассвет, 0.5 — полдень, 0.75 — закат. Небо нарисовано один раз; час ведут `animate` неба и его шейдер.
-**Ни один рисунок не читает `hour`**: всё, что стоит в сцене, нарисовано в дневных цветах, час — свет сцены
-(`light.looks`, дальние источники).
+One sky and one hour for all the world's scenes: the shore, the house, the wood, the castle and the deck see the same hour. `hour` 0…1: 0 —
+midnight, 0.25 — dawn, 0.5 — noon, 0.75 — sunset. The sky is painted once; the hour is led by the sky's `animate` and its shader.
+**No painting reads `hour`**: all that stands in a scene is painted in the day's colours, the hour is the scene's light
+(`light.looks`, the far sources).
 
-## Небо в сцене
+## The sky in a scene
 
 ```json
-{ "id": "sky", "name": "Небо", "sky": true }
+{ "id": "sky", "name": "Sky", "sky": true }
 ```
 ```js
-// lib.js сцены — один раз, не в animate
+// the scene's lib.js — once, not in animate
 const SKY = { horizon: 0.55, sun: (u, height, state, out) => { out[0] = …; out[1] = …; }, moon: … };
 // elements/sky.js
 e.kit.nebo.sky(g, e, e.lib.SKY);
@@ -19,27 +19,27 @@ e.kit.nebo.sky(g, e, e.lib.SKY);
 e.kit.nebo.skyMotion(e, e.lib.SKY);
 ```
 ```
-node tools/nebo-sky.js <папка сцены> [id неба]
+node tools/nebo-sky.js <the scene's folder> [the sky's id]
 ```
-— пишет шейдер мира `elements/sky.wgsl` (из `tools/nebo-sky.wgsl`) и `uniforms` элемента. Шейдер правится только в
-`tools/`; после правки запустить снова.
+— writes the world's shader `elements/sky.wgsl` (from `tools/nebo-sky.wgsl`) and the element's `uniforms`. The shader is changed only in
+`tools/`; after a change, run it again.
 
 `SKY`:
-- `horizon` — горизонт сцены (её `"horizon"`);
-- `round: true` — небо кругом (камеры `around`, `roam`: x 0…2π, прямо — π); иначе небо сцены (x 0…`e.aspect`);
-- `sun`, `moon` — где сцена держит солнце и луну на своём небе: `(u, height, state, out)` → пишет `out[0] = x; out[1] = y`
-  (или возвращает `[x, y]`). `u` — путь: 0 восход над морем на востоке, 0.5 юг, 1 закат на западе за холмами (меньше 0
-  и больше 1 — под горизонтом); `height` 0…1; `state` — значения сцены. Для неба кругом — `nebo.onRound(bearing,
-  heightDeg, horizon, out)` (азимут в градусах от «прямо», вправо +). `null` — в сцене их нет;
-- `clouds` — `[[x, y, длина, толщина], …]` длинные мягкие полосы (высоты сцены); без них — свои;
-- `storm` — имя ключа 0…1: низкая серая пелена, солнце и луна глохнут (без перерисовки).
+- `horizon` — the scene's horizon (its `"horizon"`);
+- `round: true` — a sky all round (the cameras `around`, `roam`: x 0…2π, straight ahead — π); else the scene's sky (x 0…`e.aspect`);
+- `sun`, `moon` — where the scene keeps the sun and the moon on its sky: `(u, height, state, out)` → writes `out[0] = x; out[1] = y`
+  (or returns `[x, y]`). `u` — the path: 0 the sunrise over the sea in the east, 0.5 the south, 1 the sunset in the west behind the hills (below 0
+  and above 1 — under the horizon); `height` 0…1; `state` — the scene's values. For a sky all round — `nebo.onRound(bearing,
+  heightDeg, horizon, out)` (the bearing in degrees from “straight ahead”, to the right +). `null` — the scene has none;
+- `clouds` — `[[x, y, length, thickness], …]` long soft streaks (scene heights); without them — its own;
+- `storm` — a key's name, 0…1: a low grey veil, the sun and the moon go dim (with no repainting).
 
-Что делает шейдер: градиент часа (палитра v1, точно), дальнее море ниже горизонта, звёзды ночью (мерцают, каждая
-по-своему), облака в цветах часа — подсвечены снизу низким солнцем, медленно плывут, — свет солнца вдоль горизонта и
-вокруг него, диски солнца и луны.
+What the shader does: the hour's gradient (v1's palette, exactly), the far sea below the horizon, the stars at night (twinkling, each
+in its own way), clouds in the hour's colours — lit from below by a low sun, drifting slowly, — the sun's light along the horizon and
+about it, the discs of the sun and the moon.
 
-Солнце и луна — слои: `animate` ведёт их, точки `sky#sun`, `sky#moon` идут с ними, их свечения (`e.light`) тянут
-дорожки по зеркальной воде. Свет сцены идёт оттуда, где они нарисованы:
+The sun and the moon are layers: `animate` leads them, the points `sky#sun`, `sky#moon` go with them, their glows (`e.light`) draw
+paths on mirror water. The scene's light comes from where they are painted:
 
 ```json
 "lights": [
@@ -48,27 +48,27 @@ node tools/nebo-sky.js <папка сцены> [id неба]
 ]
 ```
 
-## Свет часа
+## The hour's light
 
-- `nebo.follow(scene)` — в `script.js`: держит ключи `day`, `dawn`, `dusk`, `night` (веса `light.looks` сцены, как в v1)
-  и `sun_light`, `moon_light` (0…1, `on` дальних источников) по `hour`, когда его ставят или двигают. Все шесть ключей
-  описать в `states` сцены.
-- **Склейка в другой час — вместе с его светом:** `nebo.keys(hour)` → `{ day, dawn, dusk, night, sun_light, moon_light }`
-  (ровно то, что ставит `follow`). В `from` куска, в `s.shot` / `s.cut`: `{ hour: 0.96, ...nebo.keys(0.96), … }` — иначе
-  кадр, приготовленный заранее, получит свет старого часа.
+- `nebo.follow(scene)` — in `script.js`: keeps the keys `day`, `dawn`, `dusk`, `night` (the weights of the scene's `light.looks`, as in v1)
+  and `sun_light`, `moon_light` (0…1, the far sources' `on`) by `hour`, when it is set or moved. All six keys are
+  to be described in the scene's `states`.
+- **A cut to another hour — together with its light:** `nebo.keys(hour)` → `{ day, dawn, dusk, night, sun_light, moon_light }`
+  (exactly what `follow` sets). In a beat's `from`, in `s.shot` / `s.cut`: `{ hour: 0.96, ...nebo.keys(0.96), … }` — else
+  a shot made ready ahead gets the old hour's light.
 - `nebo.looks(hour)` → `{ day, dawn, dusk, night }`; `nebo.shine(hour)` → `{ sun, moon }`; `nebo.sun(hour)`,
-  `nebo.moon(hour)` → `{ u, height, visible }` (как в v1); `nebo.palette(hour)` → `{ top, mid, low, glow, sea, day, night }`
-  (`#rrggbb`) — для скриптов и `animate`, не для рисунков; `nebo.paletteInto(hour, out)` — то же числами (16: пять цветов
-  r, g, b 0…1 и `day`), ничего не создаёт — для `animate`.
+  `nebo.moon(hour)` → `{ u, height, visible }` (as in v1); `nebo.palette(hour)` → `{ top, mid, low, glow, sea, day, night }`
+  (`#rrggbb`) — for scripts and `animate`, not for paintings; `nebo.paletteInto(hour, out)` — the same in numbers (16: five colours'
+  r, g, b 0…1 and `day`), it makes nothing new — for `animate`.
 
-## Цвета
+## Colours
 
-- `WARM`, `PALE` — свет ламп: тёплый (лампа, окно Лонгрена) и бледный (окна деревни).
-- `WHITE`, `SCARLET`, `SCARLET_LIGHT`, `SCARLET_DEEP` — парусина и алый шёлк днём (тело, свет, складка); `sail(k)` —
-  белый → алый.
-- `mix(a, b, u)`, `rgba(c, a)` — цвета `#rrggbb`; `lin(c, out?)` — цвет для шейдера (линейный 0…1; `out` — свой массив
-  `animate`).
-- `glow(g, x, y, r, flat, colour, a)` — мягкое пятно рисунком (облако, полоса тумана). Свечение ламп и ореолы в воздухе
-  — движка (`e.light`, `light.hazeGlow`).
+- `WARM`, `PALE` — the lamps' light: warm (a lamp, Longren's window) and pale (the village's windows).
+- `WHITE`, `SCARLET`, `SCARLET_LIGHT`, `SCARLET_DEEP` — sailcloth and scarlet silk by day (the body, the light, a fold); `sail(k)` —
+  white → scarlet.
+- `mix(a, b, u)`, `rgba(c, a)` — `#rrggbb` colours; `lin(c, out?)` — a colour for a shader (linear 0…1; `out` — `animate`'s own
+  array).
+- `glow(g, x, y, r, flat, colour, a)` — a soft patch in a painting (a cloud, a streak of mist). The lamps' glow and the haloes in the air
+  are the engine's (`e.light`, `light.hazeGlow`).
 
-Нет больше: `stars`, `sky(g, {hour, …})` v1 (небо по часу рисунком), `e.px`.
+No more: `stars`, v1's `sky(g, {hour, …})` (the sky by the hour in a painting), `e.px`.

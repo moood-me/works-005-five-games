@@ -1,6 +1,6 @@
 {
   "engine": 3,
-  "title": "Ореанда",
+  "title": "Oreanda",
   "horizon": 0.45,
   "camera": {
     "mode": "picture"
@@ -58,12 +58,12 @@
   "objects": [
     {
       "id": "sky",
-      "name": "небо и море",
+      "name": "sky and sea",
       "sky": true
     },
     {
       "id": "steamer",
-      "name": "пароход",
+      "name": "steamer",
       "across": -520,
       "distance": 1500,
       "elevation": -90,
@@ -81,7 +81,7 @@
     },
     {
       "id": "cliff",
-      "name": "обрыв",
+      "name": "cliff",
       "plane": true,
       "across": 0,
       "distance": 15,
@@ -91,7 +91,7 @@
     },
     {
       "id": "edge",
-      "name": "край обрыва",
+      "name": "cliff’s edge",
       "across": -7,
       "distance": 7.85,
       "height": 1.6,
@@ -104,7 +104,7 @@
     },
     {
       "id": "church",
-      "name": "церковь",
+      "name": "church",
       "across": 9.5,
       "distance": 17.5,
       "height": 10.5,
@@ -118,7 +118,7 @@
     },
     {
       "id": "cypresses",
-      "name": "кипарисы у церкви",
+      "name": "cypresses by the church",
       "height": 10,
       "box": [
         -1,
@@ -158,7 +158,7 @@
     },
     {
       "id": "cypress",
-      "name": "кипарис",
+      "name": "cypress",
       "across": 4.3,
       "distance": 8.6,
       "height": 11,
@@ -172,7 +172,7 @@
     },
     {
       "id": "bushes",
-      "name": "кусты",
+      "name": "bushes",
       "height": 1,
       "box": [
         -1.2,
@@ -221,7 +221,7 @@
     },
     {
       "id": "tufts",
-      "name": "трава",
+      "name": "grass",
       "height": 0.8,
       "box": [
         -0.6,
@@ -264,7 +264,7 @@
     },
     {
       "id": "bench_seat",
-      "name": "скамья",
+      "name": "seat",
       "plane": true,
       "across": 0,
       "distance": 3.6,
@@ -275,7 +275,7 @@
     },
     {
       "id": "bench_legs",
-      "name": "скамья",
+      "name": "seat",
       "across": 0,
       "distance": 3.38,
       "height": 0.5,
@@ -288,7 +288,7 @@
     },
     {
       "id": "anna",
-      "name": "Анна Сергеевна",
+      "name": "Anna Sergeyevna",
       "person": {
         "cast": "cast",
         "who": "anna_summer",
@@ -304,7 +304,7 @@
     },
     {
       "id": "gurov",
-      "name": "Гуров",
+      "name": "Gurov",
       "person": {
         "cast": "cast",
         "who": "gurov_summer",
@@ -320,7 +320,7 @@
     },
     {
       "id": "watchman",
-      "name": "сторож",
+      "name": "keeper",
       "person": {
         "cast": "cast",
         "who": "watchman",
@@ -335,7 +335,7 @@
     },
     {
       "id": "spitz",
-      "name": "шпиц",
+      "name": "Pomeranian",
       "across": -1.3,
       "distance": 3.95,
       "place": {
@@ -407,7 +407,7 @@
         0.1,
         0.3
       ],
-      "means": "час (0.18 — перед рассветом); сцена всегда в этом часе — свет ведёт dawn"
+      "means": "the hour (0.18 — before dawn); the scene is always in this hour — the light is led by dawn"
     },
     "dawn": {
       "range": [
@@ -415,7 +415,7 @@
         1
       ],
       "smooth": true,
-      "means": "рассвет: 0 — синий час перед рассветом, 1 — светло, заря над морем; пароход идёт к берегу вместе с ним"
+      "means": "the dawn: 0 — the blue hour before dawn, 1 — light, the glow over the sea; the steamer comes toward the shore with it"
     },
     "mist": {
       "range": [
@@ -423,7 +423,7 @@
         1
       ],
       "smooth": true,
-      "means": "туман на море под обрывом: 1 — лежит, 0 — ушёл"
+      "means": "the mist on the sea below the cliff: 1 — lying, 0 — gone"
     },
     "lights": {
       "range": [
@@ -431,25 +431,25 @@
         3
       ],
       "smooth": true,
-      "means": "сколько огней парохода горит (гаснут по одному: палуба, корма, мачта)"
+      "means": "how many of the steamer’s lights are burning (they go out one by one: the deck, the stern, the mast)"
     },
     "cicada": {
       "values": [
         0,
         1
       ],
-      "means": "1 — в кроне ближнего кипариса поёт цикада (точка cypress#cicada); 0 — замолчала"
+      "means": "1 — a cicada sings in the crown of the near cypress (the point cypress#cicada); 0 — it has stopped"
     },
     "hand": {
       "values": [
         0,
         1
       ],
-      "means": "1 — его левая рука накрывает её правую на скамье"
+      "means": "1 — his left hand covers her right on the seat"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма, который играет сцена (ставит игра); поставленный играет с начала"
+      "means": "the beat of the film the scene plays (set by the game); one set plays from its beginning"
     },
     "steamer_a": {
       "range": [
@@ -457,7 +457,7 @@
         0
       ],
       "smooth": true,
-      "means": "где пароход поперёк, м (ставит сцена по dawn)"
+      "means": "where the steamer is across, m (set by the scene from dawn)"
     },
     "steamer_d": {
       "range": [
@@ -465,7 +465,7 @@
         1600
       ],
       "smooth": true,
-      "means": "как далеко пароход, м (ставит сцена по dawn)"
+      "means": "how far the steamer is, m (set by the scene from dawn)"
     },
     "anna_a": {
       "range": [
@@ -473,7 +473,7 @@
         3
       ],
       "smooth": true,
-      "means": "где стоит Анна поперёк, м"
+      "means": "where Anna stands across, m"
     },
     "anna_d": {
       "range": [
@@ -481,7 +481,7 @@
         6
       ],
       "smooth": true,
-      "means": "как далеко стоит Анна, м"
+      "means": "how far Anna stands, m"
     },
     "gurov_a": {
       "range": [
@@ -489,7 +489,7 @@
         3
       ],
       "smooth": true,
-      "means": "где стоит Гуров поперёк, м"
+      "means": "where Gurov stands across, m"
     },
     "gurov_d": {
       "range": [
@@ -497,7 +497,7 @@
         6
       ],
       "smooth": true,
-      "means": "как далеко стоит Гуров, м"
+      "means": "how far Gurov stands, m"
     },
     "watchman_a": {
       "range": [
@@ -505,7 +505,7 @@
         12
       ],
       "smooth": true,
-      "means": "где сторож поперёк, м"
+      "means": "where the keeper is across, m"
     },
     "watchman_d": {
       "range": [
@@ -513,7 +513,7 @@
         22
       ],
       "smooth": true,
-      "means": "как далеко сторож, м"
+      "means": "how far the keeper is, m"
     },
     "spitz_a": {
       "range": [
@@ -521,7 +521,7 @@
         3
       ],
       "smooth": true,
-      "means": "где шпиц поперёк, м"
+      "means": "where the Pomeranian is across, m"
     },
     "spitz_d": {
       "range": [
@@ -529,7 +529,7 @@
         8
       ],
       "smooth": true,
-      "means": "как далеко шпиц, м"
+      "means": "how far the Pomeranian is, m"
     },
     "spitz_e": {
       "range": [
@@ -537,7 +537,7 @@
         1
       ],
       "smooth": true,
-      "means": "высота шпица над землёй, м"
+      "means": "the Pomeranian’s height above the ground, m"
     },
     "spitz_view": {
       "values": [
@@ -545,7 +545,7 @@
         "back",
         "front3q"
       ],
-      "means": "вид шпица (модуль shpic)"
+      "means": "the Pomeranian’s view (the module shpic)"
     },
     "spitz_do": {
       "values": [
@@ -559,41 +559,41 @@
         "up",
         "sniff"
       ],
-      "means": "что делает шпиц"
+      "means": "what the Pomeranian does"
     },
     "spitz_look": {
       "type": "string",
-      "means": "точка, на которую смотрит шпиц, или null"
+      "means": "the point the Pomeranian looks at, or null"
     },
     "spitz_here": {
       "values": [
         0,
         1
       ],
-      "means": "шпиц в сцене"
+      "means": "the Pomeranian in the scene"
     },
     "spitz_old": {
       "values": [
         0,
         1
       ],
-      "means": "старый шпиц: шерсть желтее, движется медленнее"
+      "means": "an old Pomeranian: its coat yellower, it moves more slowly"
     },
     "leash": {
       "type": "string",
-      "means": "к чьей руке идёт поводок ('anna#hand_l'…), 'none' — волочится"
+      "means": "whose hand the leash goes to ('anna#hand_l'…), 'none' — it trails"
     },
     "beat_next": {
       "type": "string",
-      "means": "кусок, склейку к которому готовить заранее (ставит игра; модуль beats)"
+      "means": "the beat whose cut is made ready ahead (set by the game; the module beats)"
     },
     "anna_mood": {
       "type": "string",
-      "means": "лицо Анны (sad, …)"
+      "means": "Anna’s face (sad, …)"
     },
     "gurov_mood": {
       "type": "string",
-      "means": "лицо Гурова"
+      "means": "Gurov’s face"
     }
   },
   "music": {

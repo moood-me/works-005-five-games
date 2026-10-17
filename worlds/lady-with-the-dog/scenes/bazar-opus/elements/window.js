@@ -1,5 +1,5 @@
 // The tall window's frame: white sashes and glazing bars over the opening (the evening is the sky's); its middle is
-// a point (an offer in «Советоваться»). Metres, origin at the window's middle across, on the floor.
+// a point (an offer in “Taking counsel”). Metres, origin at the window's middle across, on the floor.
 const L = e.lib, Wn = L.WIN, w = (Wn.x1 - Wn.x0) / 2;
 g.fillStyle = '#e4dfd4';
 g.fillRect(-w - 0.05, -Wn.top - 0.05, 2 * w + 0.1, 0.08);

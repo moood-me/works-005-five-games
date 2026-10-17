@@ -1,4 +1,4 @@
-// Станция: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module beats); the
+// The station: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module beats); the
 // train goes where `train` and `far` say (one function: L.placeTrain) — the carriages, the far tail light, the lamp
 // by her window.
 const L = scene.lib;

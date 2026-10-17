@@ -1,4 +1,4 @@
-// Станция: what the paintings and the script share — the station in metres, the shots, the film in beats (FILM: modules/beats.js plays it).
+// The station: what the paintings and the script share — the station in metres, the shots, the film in beats (FILM: modules/beats.js plays it).
 // The platform runs across the frame (across −21…31, distance 0.6…7.6); beyond its edge the track lies 0.6 m lower;
 // the train stands on it, its side at distance 7.95; behind it the steppe, the poles and the wires.
 const clamp01 = v => Math.max(0, Math.min(1, Number(v) || 0));
@@ -133,7 +133,7 @@ function film(scene) {
 
   return {
     // evening; the train stands; the wide shot, then faces: the two at her steps under the lamp, over his shoulder —
-    // she looks at him (Р37), past him down the train (Р36), at him again; the conductor far off; the bell at the end
+    // she looks at him (L37), past him down the train (L36), at him again; the conductor far off; the bell at the end
     platform: {
       from: () => base({}),
       run: async s => {

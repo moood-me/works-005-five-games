@@ -1,116 +1,120 @@
-# cast — люди «Дамы с собачкой»
+# cast — the people of “The Lady with the Dog”
 
-Люди — фигуры из форм в стиле мира `dama`: `soft` движка, чуть вытянутый (голова 1.26, шея 0.42, ноги 0.96), лицо
-`simple` (глаза, брови, нос, рот; выражение — ключ `<id>_mood`: `neutral`, `smile`, `laugh`, `sad`, `angry`,
-`surprised`, `afraid`, `disgusted`, `thinking`, `tired`). Краска `toned` — выбрана по пробным снимкам «Номера» (свеча,
-ночь) и «Станции» (`rim` делал Анну и Гурова тёмными силуэтами: белое платье не читалось). `dama_narrow` — тот же стиль
-с узкой длинной головой (фон Дидериц и похожий на него `stranger`). Цвета выцветшие: белое, серо-голубое, песок,
-графит; красного нет, кроме шапки посыльного (`redcap`) и арбуза (`plate`).
+The people — figures of shapes in the world's style `dama`: the engine's `soft`, a little longer (head 1.26, neck 0.42,
+legs 0.96), the face `simple` (eyes, brows, nose, mouth; the expression — the key `<id>_mood`: `neutral`, `smile`,
+`laugh`, `sad`, `angry`, `surprised`, `afraid`, `disgusted`, `thinking`, `tired`). The paint `toned` — chosen from test
+pictures of the room in Yalta (a candle, night) and the station (`rim` made Anna and Gurov dark silhouettes: the white
+dress did not read). `dama_narrow` — the same style with a narrow long head (von Diderits and the `stranger` who looks
+like him). The colours are faded: white, grey-blue, sand, graphite; no red, but the messenger's cap (`redcap`) and the
+watermelon (`plate`).
 
-В сцене: `"modules": ["cast"]`, у человека `"person": {"cast": "cast", "who": "<облик>"}`. Облик на склейке —
-`<id>_wear` = **объект** облика: `scene.kit.cast.characters.gurov_winter` (строку движок не читает). Части в руки —
-`<id>_with: ["watch"]`, `null` — части облика. Длины частей — метры мужчины × `F.fit.h`.
+In a scene: `"modules": ["cast"]`, a person has `"person": {"cast": "cast", "who": "<look>"}`. A look on a cut —
+`<id>_wear` = the look's **object**: `scene.kit.cast.characters.gurov_winter` (the engine does not read a string). Parts
+in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The parts' lengths — a man's metres × `F.fit.h`.
 
-## Облики (`characters`, 48)
+## Looks (`characters`, 48)
 
-| имя | кто | основа, что видно |
+| name | who | what it is, what is seen |
 | --- | --- | --- |
-| `gurov_summer` | Гуров, Ялта | крупный (рост 1.03, голова 1.08), усы; светлый летний костюм, канотье (`boater`) |
-| `gurov_indoor` | Гуров без шляпы | тот же костюм, усы; в театре сцена даёт тёмный сюртук через `colors` ({`garment`: '#34353d', `bottom`: '#2f3036'}) |
-| `gurov_winter` | Гуров, зима | тёмная шуба, меховой воротник (`fur_collar`), меховая шапка (`fur_hat`), усы |
-| `gurov_grey` | Гуров, «Славянский базар» | тёмный сюртук, без шляпы, волосы с проседью, усы |
-| `anna_summer` | Анна, Ялта | невысокая (0.92), белокурая (светлые брови), белое платье, берет (`beret`) |
-| `anna_hairdown` | Анна в номере | то же платье, волосы распущены (`long`) |
-| `anna_travel` | Анна, станция | серо-голубое дорожное платье, шляпка (`toque`) |
-| `anna_autumn` | Анна, С., осень | тёмное пальто, шляпка, тёмные перчатки (`gloves`) |
-| `anna_winter` | Анна, С., зима | светло-серая шубка, белая меховая шапочка (`fur_cap`); муфту даёт сцена: `anna_with: ["muff"]` (мех — цвет шапки) |
-| `anna_theatre` | Анна в театре | светло-серое вечернее платье, светлая шаль (`scarf`) |
-| `anna_grey` | Анна, «Славянский базар» | серое платье, без шляпы |
-| `diderits` | фон Дидериц в театре | `dama_narrow`; очень высокий (1.12), худой; бакены, пенсне; фрак, белая манишка, учёный значок (`badge`, точка `#badge`) |
-| `diderits_coat` | он же у калитки | пальто, фуражка с кокардой (`cap_cockade`), бакены, пенсне |
-| `wife`, `wife_shawl` | жена Гурова | высокая (0.99), тёмные волосы в узел, лицо `level` (прямые тёмные брови), тёмное платье; `wife_shawl` — с шалью |
-| `daughter` | дочь, 12 лет | `child` 0.84; гимназическое пальто, капор (`capor`); ранец — `daughter_with: ["satchel"]` |
-| `official` | чиновник | полный (1.32), шуба, меховой воротник, меховая шапка |
-| `maid` | старая горничная | `old`, платок (`kerchief`), тёмное платье-кофта, светлый фартук (`apron_front`) |
-| `watchman` | сторож | `grandpa`, картуз, пальто, палка (`stick`) |
-| `redcap` | посыльный | тёмное пальто, **красная** шапка |
-| `waiter` | официант, Москва | фрак, белая манишка; поднос — `waiter_with: ["tray"]` |
-| `waiter_summer` | официант, Ялта | белая куртка, длинный белый передник |
-| `yardman` | дворник | `janitor`: овчинный тулуп (верх), светлый фартук, картуз |
-| `boy` | мальчик из гостиницы | `child` 0.8, курточка, картуз |
-| `conductor` | кондуктор (дальний) | форма, фуражка; фонарь — часть `lantern` |
-| `cabman` | извозчик (дальний) | тёмный армяк (`robe`), низкая шляпа |
-| `p1`…`p6` | приезжие на пристани | `p1`, `p3`, `p5` — дамы (шляпки, светлое/серо-голубое/песочное), `p2`, `p4`, `p6` — господа (канотье, шляпа, картуз); букеты и саквояжи — `pN_with: ["bouquet"]` / `["valise"]` |
-| `stranger` | высокий сутулый | `dama_narrow`, 1.10, бакены, светлое пальто, шляпа — издали как фон Дидериц |
-| `stranger_lady` | его дама | сиреневато-серое платье, шляпка |
-| `stroller1` | гуляющая дама | светлое платье, шляпка, светлый зонт (`parasol` — часть облика) |
-| `stroller2` | офицер | белый китель, фуражка с кокардой, усы |
-| `stroller3` | старик | светлый пиджак, канотье, палка |
-| `shade1` | тень: старше, сутулая | `old` 0.86, тёмное пальто, платок, палка (`stick`) |
-| `shade2` | тень: в тёмном | 0.9, тёмная шубка, меховая шапочка; муфта — `shade2_with: ["muff"]` |
-| `shade3` | тень: со свёртком | 0.9, серо-лиловое пальто, шляпка; свёрток — `shade3_with: ["parcel"]` |
-| `shade4` | тень: выше, светлая шубка | 0.98, светлая шубка, светлая меховая шапочка |
-| `lady1`…`lady5` | дамы в театре | тёмные вечерние платья: тёмно-синее, коричневое, чёрное, бордово-бурое, тёмно-зелёное |
-| `schoolboy1`, `schoolboy2` | гимназисты | `youth`, серые шинели, фуражки с кокардой |
+| `gurov_summer` | Gurov, Yalta | big (height 1.03, head 1.08), a moustache; a light summer suit, a boater (`boater`) |
+| `gurov_indoor` | Gurov without a hat | the same suit, the moustache; in the theatre the scene gives a dark frock coat through `colors` ({`garment`: '#34353d', `bottom`: '#2f3036'}) |
+| `gurov_winter` | Gurov, winter | a dark fur coat, a fur collar (`fur_collar`), a fur hat (`fur_hat`), the moustache |
+| `gurov_grey` | Gurov, the Slavyansky Bazaar | a dark frock coat, no hat, greying hair, the moustache |
+| `anna_summer` | Anna, Yalta | short (0.92), fair-haired (light brows), a white dress, a béret (`beret`) |
+| `anna_hairdown` | Anna in her room | the same dress, her hair down (`long`) |
+| `anna_travel` | Anna, the station | a grey-blue travelling dress, a toque (`toque`) |
+| `anna_autumn` | Anna, S., autumn | a dark coat, the toque, dark gloves (`gloves`) |
+| `anna_winter` | Anna, S., winter | a pale grey fur coat, a white fur cap (`fur_cap`); the scene gives the muff: `anna_with: ["muff"]` (its fur — the cap's colour) |
+| `anna_theatre` | Anna at the theatre | a light grey evening dress, a light shawl (`scarf`) |
+| `anna_grey` | Anna, the Slavyansky Bazaar | a grey dress, no hat |
+| `diderits` | von Diderits at the theatre | `dama_narrow`; very tall (1.12), thin; side-whiskers, a pince-nez; a tail coat, a white shirt front, a scholarly badge (`badge`, the point `#badge`) |
+| `diderits_coat` | the same at the gate | a coat, a peaked cap with a cockade (`cap_cockade`), side-whiskers, the pince-nez |
+| `wife`, `wife_shawl` | Gurov's wife | tall (0.99), dark hair in a knot, the face `level` (straight dark brows), a dark dress; `wife_shawl` — with a shawl |
+| `daughter` | his daughter, 12 | `child` 0.84; a school coat, a capote (`capor`); the satchel — `daughter_with: ["satchel"]` |
+| `official` | the official | stout (1.32), a fur coat, a fur collar, a fur hat |
+| `maid` | the old maid | `old`, a kerchief (`kerchief`), a dark dress and jacket, a light apron (`apron_front`) |
+| `watchman` | the keeper | `grandpa`, a peaked cap, a coat, a stick (`stick`) |
+| `redcap` | the messenger | a dark coat, a **red** cap |
+| `waiter` | a waiter, Moscow | a tail coat, a white shirt front; the tray — `waiter_with: ["tray"]` |
+| `waiter_summer` | a waiter, Yalta | a white jacket, a long white apron |
+| `yardman` | a yard porter | `janitor`: a sheepskin coat (the top), a light apron, a peaked cap |
+| `boy` | a hotel boy | `child` 0.8, a short jacket, a peaked cap |
+| `conductor` | the conductor (far off) | a uniform, a peaked cap; the lantern — the part `lantern` |
+| `cabman` | a cabman (far off) | a dark coachman's coat (`robe`), a low hat |
+| `p1`…`p6` | arrivals on the pier | `p1`, `p3`, `p5` — ladies (toques; light / grey-blue / sand), `p2`, `p4`, `p6` — gentlemen (a boater, a hat, a peaked cap); bouquets and valises — `pN_with: ["bouquet"]` / `["valise"]` |
+| `stranger` | the tall stooping man | `dama_narrow`, 1.10, side-whiskers, a light coat, a hat — from far off like von Diderits |
+| `stranger_lady` | his lady | a lilac-grey dress, a toque |
+| `stroller1` | a lady out walking | a light dress, a toque, a light parasol (`parasol` — part of the look) |
+| `stroller2` | an officer | a white tunic, a peaked cap with a cockade, a moustache |
+| `stroller3` | an old man | a light jacket, a boater, a stick |
+| `shade1` | a shadow: older, stooping | `old` 0.86, a dark coat, a kerchief, a stick (`stick`) |
+| `shade2` | a shadow: in dark clothes | 0.9, a dark fur coat, a fur cap; the muff — `shade2_with: ["muff"]` |
+| `shade3` | a shadow: with a parcel | 0.9, a grey-lilac coat, a toque; the parcel — `shade3_with: ["parcel"]` |
+| `shade4` | a shadow: taller, a light fur coat | 0.98, a light fur coat, a light fur cap |
+| `lady1`…`lady5` | ladies at the theatre | dark evening dresses: dark blue, brown, black, maroon-brown, dark green |
+| `schoolboy1`, `schoolboy2` | schoolboys | `youth`, grey greatcoats, peaked caps with cockades |
 
-## Шляпы (`hats`, свои)
+## Hats (`hats`, the world's own)
 
-`beret` берет · `toque` шляпка · `boater` канотье · `fur_hat` меховая шапка (мужская) · `fur_cap` меховая шапочка
-(женская) · `capor` капор · `kerchief` платок · `cap_cockade` фуражка с кокардой. Движка: `cap` картуз/фуражка, `hat`
-шляпа.
+`beret` a béret · `toque` a toque · `boater` a boater · `fur_hat` a fur hat (a man's) · `fur_cap` a fur cap (a
+woman's) · `capor` a capote · `kerchief` a kerchief · `cap_cockade` a peaked cap with a cockade. The engine's: `cap` a
+peaked cap, `hat` a hat.
 
-## Части (`parts`) и их точки
+## Parts (`parts`) and their points
 
-Точка части — точка человека (`"anna#lorgnette"`): для взгляда, руки, камеры, метки игры; есть, пока часть у него.
+A part's point is the person's point (`"anna#lorgnette"`): for a look, a hand, the camera, the game's mark; there while
+the part is with them.
 
-| часть | что | точка |
+| part | what | point |
 | --- | --- | --- |
-| `spitz_held` | белый шпиц на обеих руках у груди (ком, голова, уши, нос) | `#spitz` (его голова) |
-| `lorgnette` | лорнетка в правой руке: ручка и два стёклышка | `#lorgnette` (стёкла) |
-| `parasol` | светлый зонт: палка из правой руки вверх, купол над головой | `#parasol` |
-| `lantern` | фонарь кондуктора в правой руке, стекло светится | `#glass` |
-| `plate` | тарелка с красным ломтем арбуза в обеих руках | `#plate` |
-| `coat_carried` | мужское пальто, перекинутое через левую руку | — |
-| `bouquet` | букет белых и жёлтых цветов в правой руке | `#bouquet` |
-| `letter_paper` | раскрытое письмо в обеих руках у груди, к глазам | `#letter` |
-| `valise` | чемодан в правой руке | — |
-| `bag` | дорожная сумка в левой руке | — |
-| `tray` | латунный поднос с самоваром в обеих руках | `#tray` |
-| `stick` | палка в правой руке до земли | — |
-| `satchel` | ранец на спине | — |
-| `note` | записка в правой руке | `#note` |
-| `muff` | меховая муфта между руками (цвет шапки облика) | `#muff` |
-| `parcel` | свёрток из магазина в обеих руках у груди | `#parcel` |
-| `coat_over` | мужское пальто на её плечах (графит), открыто спереди | — |
-| `envelope` | светлый конверт в правой руке | `#envelope` |
-| `watch` | карманные часы Гурова в правой руке, циферблатом к глазам, цепочка к жилету | `#watch` |
-| `moustache` | усы (цвет волос) | — |
-| `sideburns` | бакены (цвет волос) | — |
-| `pince_nez` | пенсне: тонкие тёмные ободки и перемычка | — |
-| `badge` | учёный значок на груди фрака, светлый блик | `#badge` |
-| `fur_collar` | меховой воротник (цвет `accent`) | — |
-| `apron_front` | фартук спереди от пояса до колен (цвет `accent`) | — |
-| `gloves` | тёмные перчатки | — |
+| `spitz_held` | the white Pomeranian in both arms at her breast (a ball, the head, ears, nose) | `#spitz` (its head) |
+| `lorgnette` | a lorgnette in the right hand: a handle and two lenses | `#lorgnette` (the lenses) |
+| `parasol` | a light parasol: the stick up from the right hand, the canopy over the head | `#parasol` |
+| `lantern` | the conductor's lantern in the right hand, its glass glowing | `#glass` |
+| `plate` | a plate with a red slice of watermelon in both hands | `#plate` |
+| `coat_carried` | a man's coat over the left arm | — |
+| `bouquet` | a bouquet of white and yellow flowers in the right hand | `#bouquet` |
+| `letter_paper` | an open letter in both hands at the breast, toward the eyes | `#letter` |
+| `valise` | a valise in the right hand | — |
+| `bag` | a travelling bag in the left hand | — |
+| `tray` | a brass tray with the samovar in both hands | `#tray` |
+| `stick` | a stick in the right hand down to the ground | — |
+| `satchel` | a satchel on the back | — |
+| `note` | a note in the right hand | `#note` |
+| `muff` | a fur muff between the hands (the colour of the look's cap) | `#muff` |
+| `parcel` | a parcel from a shop in both hands at the breast | `#parcel` |
+| `coat_over` | a man's coat over her shoulders (graphite), open in front | — |
+| `envelope` | a light envelope in the right hand | `#envelope` |
+| `watch` | Gurov's pocket watch in the right hand, its face to his eyes, the chain to the waistcoat | `#watch` |
+| `moustache` | a moustache (the hair's colour) | — |
+| `sideburns` | side-whiskers (the hair's colour) | — |
+| `pince_nez` | a pince-nez: thin dark rims and a bridge | — |
+| `badge` | a scholarly badge on the breast of the tail coat, a light glint | `#badge` |
+| `fur_collar` | a fur collar (the colour `accent`) | — |
+| `apron_front` | an apron in front from the waist to the knees (the colour `accent`) | — |
+| `gloves` | dark gloves | — |
 
-Свои точки человека движка — `head`, `hand_r`, `hand_l`, `hands`, `chest`, `hips`, `shoulder_r`, `shoulder_l`, `back`,
-`nape`, `foot_r`, `foot_l`, `feet`.
+The engine's own points of a person — `head`, `hand_r`, `hand_l`, `hands`, `chest`, `hips`, `shoulder_r`,
+`shoulder_l`, `back`, `nape`, `foot_r`, `foot_l`, `feet`.
 
-## Движения (33, в cast.data.json; `stand`, `walk` — движка)
+## Motions (33, in cast.data.json; `stand`, `walk` — the engine's)
 
-Из зачатка: `seated`, `rise`, `sit_down`, `seated_bowed`, `eat_slow`, `hold_dog`, `embrace`, `weep_stand`, `carry_tray`.
-Из каста «Алых парусов v3»: `run` (бег, петля; их `run`), `read_letter` (их `read_stand`: читает стоя, петля, 10 с).
-Новые (Kimodo, просмотрены на фигуре): `wag_finger` (сидя, правая рука вперёд, грозит — на средней высоте, не низко),
-`pat_low` (сидя нагибается, гладит у пола перед собой), `beckon_low` (стоя нагибается, рука к земле), `bend_take`
-(нагибается, поднимает левой), `lorgnette_up` (правая рука к глазам и держит — рука закрывает часть лица),
-`embrace_him`, `embrace_her` (шаг вперёд, руки вперёд на высоте плеч — объятие довести `reach` к `#back`/`#nape`),
-`give_small`, `take_small` (правой рукой на высоте пояса), `step_back` (шаг назад, руки к груди), `bow_walk` (сутулая
-медленная ходьба, голова опущена, 0.85 м/с — поклона на каждом шаге модель не дала: запасной вариант сценария) и `bow`
-(глубокий поклон на месте — «поклон у кресла»), `stroll` (походка 1.30 м/с на мужчине = темп Анны с ходьбой движка),
-`walk_child` (короткий шаг, 1.11 м/с = темп дочери с ходьбой движка), `laugh_stand`, `kiss_hand` (берёт руку,
-кланяется, выпрямляется), `walk_fast` (быстрая ходьба 1.9 м/с), `pulled_walk` (быстро, правая рука вытянута вперёд —
-на высоте груди, не вниз), `carry_walk` (с тяжёлым в правой руке, 0.85 м/с), `lean_rail` (наклон вперёд, локти на
-стойке/перилах, голова вниз; колени согнуты сильнее, чем надо — лучшая из трёх попыток), `stand_cold` (руки у груди,
-голова опущена — переминания почти нет), `take_watch` (правая рука к груди перед собой и держит — к глазам не
-поднимает: смотреть `look` на `#watch`).
+From the seed: `seated`, `rise`, `sit_down`, `seated_bowed`, `eat_slow`, `hold_dog`, `embrace`, `weep_stand`,
+`carry_tray`. From the cast of “Scarlet Sails v3”: `run` (running, a loop; their `run`), `read_letter` (their
+`read_stand`: reads standing, a loop, 10 s). New (Kimodo's, looked at on a figure): `wag_finger` (sitting, the right hand
+forward, shaking a finger — at middle height, not low), `pat_low` (sitting, bends and pats at the floor before him),
+`beckon_low` (standing, bends, the hand to the ground), `bend_take` (bends, picks up with the left), `lorgnette_up` (the
+right hand to the eyes and holds — the hand hides part of the face), `embrace_him`, `embrace_her` (a step forward, the
+arms forward at shoulder height — the embrace finished by `reach` to `#back`/`#nape`), `give_small`, `take_small` (with
+the right hand at waist height), `step_back` (a step back, the hands to the breast), `bow_walk` (a stooping slow walk,
+the head lowered, 0.85 m/s — the model gave no bow at every step: the script's fallback) and `bow` (a deep bow on the
+spot — “a bow by the armchair”), `stroll` (a gait of 1.30 m/s on a man = Anna's pace with the engine's walk),
+`walk_child` (a short step, 1.11 m/s = the daughter's pace with the engine's walk), `laugh_stand`, `kiss_hand` (takes the
+hand, bows, straightens), `walk_fast` (a fast walk, 1.9 m/s), `pulled_walk` (fast, the right arm stretched forward — at
+breast height, not down), `carry_walk` (with something heavy in the right hand, 0.85 m/s), `lean_rail` (leaning
+forward, the elbows on a counter/railing, the head down; the knees bent more than they should be — the best of three
+tries), `stand_cold` (the hands at the breast, the head lowered — almost no shifting from foot to foot), `take_watch`
+(the right hand to the breast before him and holds — does not raise it to the eyes: look with `look` at `#watch`).
 
-Не проверено в сцене: `stroll`/`walk_child` рядом с Анной и дочерью (темп посчитан по росту и ногам обликов, не снят).
+Not checked in a scene: `stroll`/`walk_child` beside Anna and the daughter (the pace worked out from the looks' height
+and legs, not filmed).

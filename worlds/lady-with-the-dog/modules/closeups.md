@@ -1,16 +1,16 @@
-# closeups — крупные планы рук и вещей
+# closeups — close-ups of hands and things
 
-Вставки движка 3 в одной манере: одна плоская модель руки (`hand(g, x, y, s, rot, {palm, side, sleeve, light})`), мягкий
-свет нарисован в кадре. Рисуют в высотах сцены (x 0…aspect, y 0…1), главное — в средних 4:3.
+Engine 3 inserts in one manner: one flat model of a hand (`hand(g, x, y, s, rot, {palm, side, sleeve, light})`), a soft
+light painted in the shot. They paint in the scene's heights (x 0…aspect, y 0…1), what matters — in the middle 4:3.
 
-Элемент сцены: `{ "id": "<кадр>", "insert": "<ключ>" }`; `elements/<кадр>.js`: `e.kit.closeups.paint(g, e,
-'<кадр>');` · `elements/<кадр>.animate.js`: `e.kit.closeups.live(e, '<кадр>');`
+A scene's element: `{ "id": "<shot>", "insert": "<key>" }`; `elements/<shot>.js`: `e.kit.closeups.paint(g, e,
+'<shot>');` · `elements/<shot>.animate.js`: `e.kit.closeups.live(e, '<shot>');`
 
-| Кадр | Что | Ключи (`animate`) | Точки |
+| Shot | What | Keys (`animate`) | Points |
 | --- | --- | --- | --- |
-| `melon` | стол при свече, полосатый арбуз на тарелке, его левая рука держит, правая с ножом | `cut` 0…1 — нож и линия разреза; `slice` 0/1 — красный ломоть | `melon#knife`, `melon#from`, `melon#to` |
-| `hands` | светлое покрывало, её рука справа, его слева | `hand_at` 0…1 — его рука к её; `pull` 0…1 — её отодвинута; `palm` 0/1 — ладонь вверх (переход 0.6 с) | `hands#his`, `hands#her` |
-| `tea` | латунный кран самовара, стакан в подстаканнике на блюдце, его рука у крана | `fill` 0…1 — чай; `tap` 0/1 — струя; `spill` 0…1 — лужица; пар плывёт | `tea#tap` |
-| `mirror` | угол золочёной рамы; в зеркале её светлый затылок и серое плечо, его рука на плече, его ухо и седой висок; лампа | лампа дрожит | — |
+| `melon` | the table by the candle, a striped watermelon on a plate, his left hand holding it, the right with the knife | `cut` 0…1 — the knife and the line of the cut; `slice` 0/1 — the red slice | `melon#knife`, `melon#from`, `melon#to` |
+| `hands` | a light bedspread, her hand on the right, his on the left | `hand_at` 0…1 — his hand to hers; `pull` 0…1 — hers drawn away; `palm` 0/1 — the palm up (0.6 s to turn) | `hands#his`, `hands#her` |
+| `tea` | the samovar's brass tap, a glass in its holder on a saucer, his hand at the tap | `fill` 0…1 — the tea; `tap` 0/1 — the stream; `spill` 0…1 — the puddle; the steam drifts | `tea#tap` |
+| `mirror` | a corner of the gilt frame; in the mirror the back of her fair head and her grey shoulder, his hand on the shoulder, his ear and grey temple; the lamp | the lamp trembles | — |
 
-Кадра `inkwell` (Город С.) нет.
+There is no shot `inkwell` (the town of S.).

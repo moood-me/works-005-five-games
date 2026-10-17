@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Lady with the Dog","translation":"Дама с собачкой","where":"world.json title"},
+  {"text":"A game after Chekhov’s story. The sea, the turning seasons, a white Pomeranian on a red leash.","translation":"Игра по рассказу Чехова. Море, смена времён года, белый шпиц с красным поводком.","where":"world.json description"}
+]}

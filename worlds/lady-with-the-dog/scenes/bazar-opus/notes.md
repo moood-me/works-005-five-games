@@ -1,58 +1,61 @@
-# Славянский базар
+# The Slavyansky Bazaar
 
-V.3 и финал «Дамы с собачкой» (scenes.md «Славянский базар», 4-я редакция). Номер московской гостиницы зимним
-вечером: камера `picture`. В задней стене слева дверь (створка на петлях, за ней тусклый коридор), посередине
-золочёное зеркало, справа высокое окно с портьерами: за ним снежные крыши, купола, редкие жёлтые окна — или оттепель,
-мокрые крыши и капли по стеклу. Круглый стол под белой скатертью, лампа под шёлковым абажуром (единственный тёплый
-свет), два стакана; кресло слева, стул у стола. Седина, тяжёлая нежность, «самое сложное только начинается». Шпица
-здесь нет ни в одной ветке.
+V.3 and the ending of “The Lady with the Dog” (scenes.md, the Slavyansky Bazaar, the 4th edition). A room of a Moscow hotel on
+a winter evening: the camera `picture`. In the back wall on the left a door (a leaf on hinges, a dim corridor behind it),
+in the middle a gilt mirror, on the right a tall window with drapes: behind it snowy roofs, domes, a few yellow windows —
+or the thaw, wet roofs and drops on the glass. A round table under a white cloth, a lamp under a silk shade (the one
+warm light), two glasses; an armchair on the left, a chair at the table. Grey hair, a heavy tenderness, “the most
+complicated part is only just beginning”. The Pomeranian is not here in any branch.
 
-## Как устроено
+## How it is made
 
-- **Комната** — карточки стен (задняя с дырами двери и окна; передняя за спиной зрителя), потолок, пол. Зеркало —
-  стоящая плоскость с `reflect`, рама — своя карточка.
-- **Свет**: лампа (`lamp_l`, точка `lamp#flame`), свет окна (`window_l`). Небо за окном своё (`spring` перерисовывает
-  его раз); снег — частицы (`snowing` = 1 − `spring`), капли по стеклу — частицы (`spring`).
-- **Стол** (`table`, плоскость скатерти) рисует по ключам, которые меняются раз: конверт мужа у самовара
-  (`husband_knows` 0 — светлый прямоугольник с надписью), пятно от чая у его руки (`stain` 1); точка `table#glasses`
-  — два стакана (элемент `glasses` стоит на нём). `table_skirt` — край скатерти и ножки.
-- **Точки «Советоваться»**: `window#window`, `door#door`, `table#glasses` — все в окне 4:3 общего плана `ROOM`.
-  `think` ставит взгляды (окно — он, дверь — она, стол — оба на стаканы, `none` — друг на друга) и держит их до конца.
-- **Дверь** — `door` 0…1 → поворот створки (`door_f`) одной функцией.
-- **Вставки** — модуль `closeups`: `tea` (`tea`; `glass_at`, `tap`, `fill`, `spill`; конверт по `husband_knows`; точки
-  `tea#glass`, `tea#under`, `tea#tap`) и `mirror` (`mirror`).
-- **Люди**: `gurov_grey`, `anna_grey`, `waiter` (поднос с самоваром — часть `tray`, походка `carry_tray`); движения
-  `embrace_her` / `embrace_him` (+ `reach` к спинам), `weep_stand`, `sit_down`, `seated`, `rise`, `take_watch` (часть
-  `watch`, точка `gurov#watch`). Лица — `anna_mood` / `gurov_mood`.
-- **Фильм** — `lib.js` `film(scene)`, играет модуль `beats`. Кадры: `ROOM`, `CAGES` (от лампы к окну: двое в профиль
-  лицом друг к другу, 1.8 м; лампа позади камеры светит обоим в лица), `END` (отъехали, `camera_z` −0.6). Куски,
-  которые идут после разных кусков (`shoulders`, `tea`, `cages`), идут оттуда, где люди есть: встаёт из-за стола,
-  если сидел; идёт к окну.
+- **The room** — cards of the walls (the back one with holes for the door and the window; the front one behind the
+  viewer), the ceiling, the floor. The mirror — a standing plane with `reflect`, its frame a card of its own.
+- **Light**: the lamp (`lamp_l`, the point `lamp#flame`), the window's light (`window_l`). The sky behind the window is
+  its own (`spring` repaints it once); the snow — particles (`snowing` = 1 − `spring`), the drops on the glass —
+  particles (`spring`).
+- **The table** (`table`, the plane of the cloth) paints by keys that change once: the husband's envelope by the
+  samovar (`husband_knows` 0 — a light rectangle with writing), the tea stain by his hand (`stain` 1); the point
+  `table#glasses` — the two glasses (the element `glasses` stands on it). `table_skirt` — the cloth's edge and the legs.
+- **The points of “Taking counsel”**: `window#window`, `door#door`, `table#glasses` — all within the 4:3 window of the
+  wide shot `ROOM`. `think` sets where they look (the window — he, the door — she, the table — both at the glasses,
+  `none` — at each other) and keeps it to the end.
+- **The door** — `door` 0…1 → the leaf's turn (`door_f`) by one function.
+- **Inserts** — the module `closeups`: `tea` (`tea`; `glass_at`, `tap`, `fill`, `spill`; the envelope by
+  `husband_knows`; the points `tea#glass`, `tea#under`, `tea#tap`) and `mirror` (`mirror`).
+- **People**: `gurov_grey`, `anna_grey`, `waiter` (the tray with the samovar — the part `tray`, the gait `carry_tray`);
+  motions `embrace_her` / `embrace_him` (+ `reach` to their backs), `weep_stand`, `sit_down`, `seated`, `rise`,
+  `take_watch` (the part `watch`, the point `gurov#watch`). Faces — `anna_mood` / `gurov_mood`.
+- **The film** — `lib.js` `film(scene)`, played by the module `beats`. Shots: `ROOM`, `CAGES` (from the lamp toward the
+  window: the two in profile, face to face, 1.8 m; the lamp behind the camera lights both faces), `END` (drawn back,
+  `camera_z` −0.6). The beats that come after different beats (`shoulders`, `tea`, `cages`) go on from where the people
+  are: he rises from the table if he was sitting; goes to the window.
 
-## Куски
+## Beats
 
-| Кусок | after | ≈ с | Что |
+| Beat | after | ≈ s | What |
 | --- | --- | --- | --- |
-| `bazar_in` | — | 10 | вечер; дверь открывается, он входит; `anna_life` 1 — она идёт навстречу, стоят обнявшись у двери, её лицо у его плеча (`sad`); 0 — у окна спиной; `husband_knows` 0 — конверт на столе (`bazar_in:met`) |
-| `shoulders` | bazar_in, weep | 9 | он у неё за спиной у окна, руки на плечах; вставка `mirror` 4 с (`shoulders:mirror`), обратно |
-| `tea` | bazar_in, shoulders | 11 | официант вносит самовар, ставит, уходит; он садится к столу; вставка `tea` открыта |
-| `weep` | tea | 10 | вставка закрыта: он за столом со стаканом (пятно при `stain` 1); она у окна спиной, плечи вздрагивают |
-| `cages` | shoulders, weep | 14 | лица: двое у окна, она поворачивается к нему (`cages:turned`); склейка `CAGES` — профили в свете лампы (`sad`, `thinking`) ≈ 9 с; склейка обратно на `ROOM` |
-| `sovet` | cages | 2 | то же — под «Советоваться»; камера стоит, метки на окне, двери, стаканах в 4:3 |
-| `bazar_end` | sovet | 12 | камера медленно отъезжает; двое стоят, как оставил `think`; `wife_knows` 0 — на 5-й с он достаёт часы, подносит к свету, смотрит (`bazar_end:watch`) |
+| `bazar_in` | — | 10 | evening; the door opens, he comes in; `anna_life` 1 — she goes to meet him, they stand embracing by the door, her face at his shoulder (`sad`); 0 — at the window, her back to him; `husband_knows` 0 — the envelope on the table (`bazar_in:met`) |
+| `shoulders` | bazar_in, weep | 9 | he behind her at the window, his hands on her shoulders; the insert `mirror` 4 s (`shoulders:mirror`), back |
+| `tea` | bazar_in, shoulders | 11 | the waiter brings in the samovar, sets it down, goes; he sits down at the table; the insert `tea` open |
+| `weep` | tea | 10 | the insert closed: he at the table with the glass (the stain if `stain` 1); she at the window, her back to him, her shoulders shaking |
+| `cages` | shoulders, weep | 14 | faces: the two at the window, she turns to him (`cages:turned`); a cut to `CAGES` — profiles in the lamplight (`sad`, `thinking`) ≈ 9 s; a cut back to `ROOM` |
+| `sovet` | cages | 2 | the same — under “Taking counsel”; the camera stands, marks on the window, the door, the glasses in 4:3 |
+| `bazar_end` | sovet | 12 | the camera slowly draws back; the two stand as `think` left them; `wife_knows` 0 — at the 5th s he takes out his watch, holds it to the light, looks (`bazar_end:watch`) |
 
-Ключи: `hour`, `tea`, `glass_at`, `tap`, `fill`, `spill`, `stain`, `mirror`, `think`, `door`, `samovar`, `beat`,
-`beat_next`; ключи партии — ниже.
+Keys: `hour`, `tea`, `glass_at`, `tap`, `fill`, `spill`, `stain`, `mirror`, `think`, `door`, `samovar`, `beat`,
+`beat_next`; the play's keys — below.
 
-## Чего нет / что знать
+## What is not here / what to know
 
-- `anna_life` 1: они обнимаются не у самой двери, а в двух шагах от неё, перед зеркалом: у двери их закрывала лампа.
-- «Отъезжает к двери» — дверь здесь в задней стене, камера отъезжает назад (к зрителю).
-- В `cages` последние ≈ 1 с — общий план (`ROOM`): «Советоваться» ставит метки на окно, дверь и стаканы, которых в
-  кадре профилей нет.
-- `hour` описан, но свет всегда вечерний.
+- `anna_life` 1: they embrace not at the very door but two steps from it, before the mirror: by the door the lamp hid
+  them.
+- “Draws back toward the door” — the door here is in the back wall; the camera draws back (toward the viewer).
+- In `cages` the last ≈ 1 s is the wide shot (`ROOM`): “Taking counsel” puts its marks on the window, the door and the
+  glasses, which the shot of the profiles does not have.
+- `hour` is described, but the light is always the evening's.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {"bazar_in": {"after": [], "tells": ["bazar_in:met"], "seconds": 10, "show": false},

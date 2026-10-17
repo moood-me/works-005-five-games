@@ -1,9 +1,9 @@
 {
-  "title": "Дама с собачкой",
-  "description": "Игра по рассказу Чехова. Море, смена времён года, белый шпиц с красным поводком.",
+  "title": "The Lady with the Dog",
+  "description": "A game after Chekhov’s story. The sea, the turning seasons, a white Pomeranian on a red leash.",
   "themes": {
-    "драма": 60,
-    "море": 40
+    "drama": 60,
+    "sea": 40
   },
   "main": ""
 }

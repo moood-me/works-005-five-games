@@ -1,4 +1,4 @@
-// Ореанда: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module beats); the
+// Oreanda: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module beats); the
 // steamer goes where the dawn says (one function); his hand follows `hand`.
 const L = scene.lib;
 scene.kit.beats.play(scene, L.film(scene));
