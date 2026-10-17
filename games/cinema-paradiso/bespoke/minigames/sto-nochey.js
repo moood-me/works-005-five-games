@@ -16,7 +16,7 @@ const RAIN = 0.6; // уровень дождя на дождливую неде�
 
 export default {
   file: 'sto-nochey',
-  title: 'Сто ночей', // как её зовёт ☰ автора
+  title: 'Сто ночей', // как её зовёт карта автора
   about: 36,
   skipped: {},
   async run(g, b, opts, signal) {

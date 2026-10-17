@@ -16,7 +16,7 @@ const READ = 1.5; // с на августе
 
 export default {
   file: 'zapiska',
-  title: 'Записка', // как её зовёт ☰ автора
+  title: 'Записка', // как её зовёт карта автора
   about: 10,
   skipped: {},
   async run(g, b, opts, signal) {

@@ -17,7 +17,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'lenta',
-  title: 'Лента', // как её зовёт ☰ автора
+  title: 'Лента', // как её зовёт карта автора
   about: 24,
   skipped: { seconds: 0 },
   async run(g, b, opts, signal) {

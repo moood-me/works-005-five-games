@@ -17,7 +17,7 @@ const el = n => (n === 1 ? 'projector' : 'projector2');
 
 export default {
   file: 'smena',
-  title: 'Смена', // как её зовёт ☰ автора
+  title: 'Смена', // как её зовёт карта автора
   about: 38,
   skipped: { missed: 0 },
   async run(g, b, opts, signal) {

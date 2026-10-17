@@ -43,7 +43,7 @@
 #layer .gauge .tail { transform-box: view-box; transform-origin: 42px 30px; animation: tail-fly 3.4s ease-in-out infinite alternate; }
 @keyframes tail-fly { from { rotate: calc(var(--fly, 0deg) * -1); } to { rotate: var(--fly, 0deg); } }
 
-/* the cards under the tools */
+/* the cards in the corner */
 #layer .toasts { position: absolute; top: calc(var(--below-header) + 60px); right: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 #layer .slip { margin: 0; padding: 8px 18px 9px; max-width: min(340px, 46vw); font: 500 clamp(18px, 4.6vh, 23px)/1.18 var(--title);
   text-align: center; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); animation: slip-in 0.7s ease both;
@@ -120,12 +120,6 @@
   border: 3px double rgba(110, 50, 140, 0.75); border-radius: 4px; }
 #layer .envelope .sign { position: absolute; right: 8%; bottom: 8%; margin: 0; font: italic 1em/1 var(--title); color: #2c3a78; }
 
-/* the corner's tools, under the site's header: ⏸ pause (everyone), ⏭ skip (a minigame: everyone; a step: the
-   author), ☰ the chapters and their steps (the author) — above whatever a minigame spreads over the scene */
-#layer .tools { position: absolute; z-index: 10; top: calc(var(--below-header) + 8px); right: 14px; display: flex; gap: 6px; }
-#layer .tools > button { width: 44px; height: 44px; border: 1px solid var(--frame); outline: 1px solid var(--frame); outline-offset: -4px;
-  border-radius: 2px; color: var(--ink); background: var(--card); font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.6; }
-#layer .tools > button:hover { opacity: 1; }
 /* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
    of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
@@ -147,3 +141,75 @@
 #layer .author-panel section button.here { background: rgba(239, 232, 218, 0.18); }
 #layer .author-panel .minigames { display: flex; flex-direction: column; }
 #layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 14px; font-style: italic; }
+
+/* the card «Переигровка» in the corner (ui.js replaying) */
+#layer .replay { position: absolute; right: 14px; bottom: 14px; padding: 6px 14px; color: var(--ink); background: var(--card);
+  border: 1px solid var(--frame); outline: 1px solid var(--frame); outline-offset: -4px; font: italic 16px/1.3 var(--title); pointer-events: none; }
+#layer .replay[hidden] { display: none; }
+
+/* the map (map.js): each chapter's tree under the language's marks (bespoke.underlay), at its chapter's point, laid out
+   in the frame's height (--h): what stands in a row shares it, words wrap, nothing runs into anything. Bright where the
+   main run went, a replay's dashed beside it, faint the ways not taken. */
+#underlay .map { position: absolute; inset: 0; font-family: "Paradizo Title", Georgia, "Times New Roman", serif; color: var(--map-text); animation: map-in 0.9s ease;
+  --map-text: #ddd4c4; --map-title: #f4eee2; --map-num: #c9b38a; --map-dim: #a8a092; --map-chosen: #f2c46b; --map-chosen-glow: rgba(242, 196, 107, 0.8); --map-tried: #b8c8e0; --map-main: rgba(242, 196, 107, 0.92); --map-other: rgba(220, 212, 196, 0.38); --map-glow: rgba(242, 180, 90, 0.25); --map-shadow: rgba(4, 3, 2, 0.95); --map-halo: rgba(242, 196, 107, 0.45); }
+@keyframes map-in { from { opacity: 0; } }
+#underlay .map .stand { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-origin: 0 0; }
+#underlay .map .stand[hidden] { display: none; }
+#underlay .tree { position: absolute; left: calc(var(--h) * -0.22); top: calc(var(--h) * -0.102); width: calc(var(--h) * 0.44);
+  display: flex; flex-direction: column; align-items: center; text-align: center; text-shadow: 0 0 calc(var(--h) * 0.006) var(--map-shadow); }
+#underlay .tree .num { height: calc(var(--h) * 0.032); font-size: calc(var(--h) * 0.022); line-height: calc(var(--h) * 0.032); letter-spacing: 0.12em;
+  color: var(--map-num); }
+#underlay .tree .title { height: calc(var(--h) * 0.05); font-size: calc(var(--h) * 0.034); line-height: calc(var(--h) * 0.05); font-style: italic;
+  white-space: nowrap; color: var(--map-title); }
+#underlay .tree.future .num { opacity: 0.45; }
+#underlay .tree .knot { position: relative; width: calc(var(--h) * 0.04); height: calc(var(--h) * 0.04); flex: none; }
+#underlay .tree .knot i { position: absolute; left: 50%; top: 50%; border-radius: 50%; }
+#underlay .tree .knot .halo { width: calc(var(--h) * 0.08); height: calc(var(--h) * 0.08); margin: calc(var(--h) * -0.04) 0 0 calc(var(--h) * -0.04);
+  background: radial-gradient(circle, var(--map-halo) 0%, transparent 70%); animation: map-breathe 4.6s ease-in-out infinite alternate;
+  will-change: transform, opacity; }
+#underlay .tree .knot .core { width: calc(var(--h) * 0.013); height: calc(var(--h) * 0.013); margin: calc(var(--h) * -0.0065) 0 0 calc(var(--h) * -0.0065);
+  background: var(--map-chosen); box-shadow: 0 0 calc(var(--h) * 0.012) var(--map-chosen-glow); }
+#underlay .tree:not(.shown) .knot { opacity: 0.62; }
+@keyframes map-breathe { from { transform: scale(0.82); opacity: 0.55; } to { transform: scale(1.15); opacity: 1; } }
+#underlay .tree .rows { width: 100%; margin-top: calc(var(--h) * 0.022); display: flex; flex-direction: column; gap: calc(var(--h) * 0.016); }
+#underlay .tree .name { font-size: calc(var(--h) * 0.0165); line-height: 1.25; font-style: italic; color: var(--map-text); margin-bottom: calc(var(--h) * 0.007); }
+#underlay .tree .opts { display: flex; justify-content: center; gap: calc(var(--h) * 0.012); }
+#underlay .tree .opt { flex: 1 1 0; min-width: 0; max-width: calc(var(--h) * 0.15); display: flex; flex-direction: column; align-items: center;
+  gap: calc(var(--h) * 0.006); }
+#underlay .tree .dot { display: block; width: calc(var(--h) * 0.009); height: calc(var(--h) * 0.009); border-radius: 50%; background: var(--map-dim); }
+#underlay .tree .label { font-size: calc(var(--h) * 0.0165); line-height: 1.22; color: var(--map-dim); overflow-wrap: break-word; }
+#underlay .tree .chosen .dot, #underlay .tree .both .dot { width: calc(var(--h) * 0.013); height: calc(var(--h) * 0.013); background: var(--map-chosen);
+  box-shadow: 0 0 calc(var(--h) * 0.012) var(--map-chosen-glow); }
+#underlay .tree .chosen .label, #underlay .tree .both .label { color: var(--map-title); }
+#underlay .tree .tried .dot { background: var(--map-tried); }
+#underlay .tree .tried .label { color: var(--map-tried); font-style: italic; }
+#underlay .tree .unseen .dot { opacity: 0.5; }
+#underlay .tree .unseen .label { opacity: 0.6; letter-spacing: 0.2em; }
+/* (a chapter of many rows: all of it smaller, to stay in the frame) */
+#underlay .tree.dense .rows { gap: calc(var(--h) * 0.009); }
+#underlay .tree.dense .name, #underlay .tree.dense .label { font-size: calc(var(--h) * 0.0142); }
+#underlay .tree.dense .name { margin-bottom: calc(var(--h) * 0.004); }
+/* the threads (SVG, at the knot: its coordinates the tree's own); the glow under the main run's breathes with the knot */
+#underlay .stand .threads { position: absolute; left: 0; top: 0; width: 1px; height: 1px; overflow: visible; fill: none; stroke-linecap: round; }
+#underlay .threads path.main { stroke: var(--map-main); stroke-width: calc(var(--h) * 0.0019); }
+#underlay .threads path.other { stroke: var(--map-other); stroke-width: calc(var(--h) * 0.0012); }
+#underlay .threads path.unseen { stroke: var(--map-other); opacity: 0.6; stroke-width: calc(var(--h) * 0.0011); stroke-dasharray: calc(var(--h) * 0.003) calc(var(--h) * 0.006); }
+#underlay .threads path.tried { stroke: var(--map-tried); stroke-width: calc(var(--h) * 0.0017); stroke-dasharray: calc(var(--h) * 0.01) calc(var(--h) * 0.005); }
+#underlay .threads.glow path { stroke: var(--map-glow); stroke-width: calc(var(--h) * 0.008); }
+#underlay .threads.glow { animation: map-glow 4.6s ease-in-out infinite alternate; will-change: opacity; }
+@keyframes map-glow { from { opacity: 0.55; } to { opacity: 1; } }
+/* a chapter just played: its rows and their threads come one after another (map.js gives each its delay) */
+#underlay .tree.grow .row, #underlay .stand .threads g.grow { animation: map-grow 1.4s ease-out both; }
+@keyframes map-grow { from { opacity: 0; } }
+/* the author's sign (map.js), left of the first chapter: a small ring of dots, «автор» */
+#underlay .sign { position: absolute; left: calc(var(--h) * -0.06); top: calc(var(--h) * -0.03); width: calc(var(--h) * 0.12); display: flex; flex-direction: column;
+  align-items: center; gap: calc(var(--h) * 0.01); }
+#underlay .sign .ring { position: relative; width: calc(var(--h) * 0.06); height: calc(var(--h) * 0.06); border-radius: 50%; border: 1px dashed var(--map-other); }
+#underlay .sign .ring i { position: absolute; left: 50%; top: 50%; width: calc(var(--h) * 0.007); height: calc(var(--h) * 0.007); margin: calc(var(--h) * -0.0035);
+  border-radius: 50%; background: var(--map-title); }
+#underlay .sign .ring i:nth-child(1) { transform: rotate(-90deg) translateX(calc(var(--h) * 0.03)); }
+#underlay .sign .ring i:nth-child(2) { transform: rotate(-18deg) translateX(calc(var(--h) * 0.03)); }
+#underlay .sign .ring i:nth-child(3) { transform: rotate(54deg) translateX(calc(var(--h) * 0.03)); }
+#underlay .sign .ring i:nth-child(4) { transform: rotate(126deg) translateX(calc(var(--h) * 0.03)); }
+#underlay .sign .ring i:nth-child(5) { transform: rotate(198deg) translateX(calc(var(--h) * 0.03)); }
+#underlay .sign .label { font-size: calc(var(--h) * 0.017); font-style: italic; color: var(--map-text); text-shadow: 0 0 calc(var(--h) * 0.006) var(--map-shadow); }

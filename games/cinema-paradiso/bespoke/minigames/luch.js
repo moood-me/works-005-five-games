@@ -19,7 +19,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'luch',
-  title: 'Луч', // как её зовёт ☰ автора
+  title: 'Луч', // как её зовёт карта автора
   about: 14,
   skipped: { seconds: 0 },
   async run(g, b, opts, signal) {

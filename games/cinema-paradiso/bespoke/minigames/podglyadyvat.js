@@ -22,7 +22,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'podglyadyvat',
-  title: 'Подглядывать', // как её зовёт ☰ автора
+  title: 'Подглядывать', // как её зовёт карта автора
   about: 28,
   skipped: { seen: 3, caught: 0 },
   async run(g, b, opts, signal) {

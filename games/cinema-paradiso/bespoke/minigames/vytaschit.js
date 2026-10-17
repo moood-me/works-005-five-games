@@ -17,7 +17,7 @@ const AT_DOOR = 0.97;
 
 export default {
   file: 'vytaschit',
-  title: 'Вытащить', // как её зовёт ☰ автора
+  title: 'Вытащить', // как её зовёт карта автора
   about: 18,
   skipped: {},
   async run(g, b, opts, signal) {

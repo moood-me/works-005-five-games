@@ -1,5 +1,5 @@
 // The check of the game's branches (game.md §11): node bespoke/check/run.mjs <a clone of the world>. No browser, no
-// engine, nothing drawn. Every step of every chapter is played unseen, the way the author's ☰ plays it (jump.js: a dry
+// engine, nothing drawn. Every step of every chapter is played unseen, the way the author's map plays it (jump.js: a dry
 // run, story.js context(…, j)), on a page that only knows the scenes' specs (fake.mjs): no time passes, the choices
 // are those of the play walked, a minigame gives the result put in for it (else its `skipped`), a point asked for
 // (g.spot) is answered with one.
@@ -57,8 +57,9 @@ const MINIGAMES = {
   zapiska: { scene: 'booth', keys: ['pages', 'fold', 'dust'], points: ['calendar#fold'], result: [] },
   lenta: { scene: 'booth', keys: ['strip_x'], points: ['strip#hand_r'], opts: ['onProgress'], result: ['seconds'] },
 };
-// game.md §3.2: what game.js itself takes of «Плёнка» (it is not run here)
-const STRIP = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'lamp'], offer: 'lamp#lamp' };
+// what game.js itself takes of «Плёнка» (it is not run here): its key, the points its trees stand at (map.js) — each
+// chapter's and the author's sign's
+const MAP = { keys: ['shown'], points: [...Array.from({ length: 7 }, (_, i) => `c${i}`), 'author'] };
 // the results put in (game.md §11): none — every minigame skipped; then one play each with these
 const OTHER = [{ podglyadyvat: { seen: 0, caught: 1 } }, { skleyka: { jumps: 2 } }, { zapravka: { slips: 1 } },
   { bukvy: { crooked: '01000100' } }, { kamera: { share: 0.3 } }, { smena: { missed: 1 } }];
@@ -185,12 +186,15 @@ for (const handle of ['theme', 'camera8']) {
 // «Плёнка», as game.js opens it
 const strip = WORLD.get(SCENES.strip);
 if (strip) {
-  for (const key of STRIP.keys) {
+  for (const key of MAP.keys) {
     if (!(key in strip.states)) miss('game.js', `«${SCENES.strip}»: ключа «${key}» нет в states`);
+    if (strip.contract && !(key in (strip.contract.keys ?? {}))) miss('game.js', `«${SCENES.strip}»: ключа «${key}» нет в keys контракта`);
     strip.named.add(`party:${key}`);
   }
-  if (strip.contract && !strip.contract.offers.includes(STRIP.offer)) miss('game.js', `«${SCENES.strip}»: предложения «${STRIP.offer}» нет в контракте`);
-  strip.named.add(`ref:${STRIP.offer}`);
+  for (const ref of MAP.points) {
+    if (strip.contract && !strip.contract.points.includes(ref)) miss('game.js', `«${SCENES.strip}»: точки «${ref}» нет в контракте`);
+    strip.named.add(`ref:${ref}`);
+  }
 }
 
 // --- a step's g, watched: `here` — where it is (file, step), `events` — what the step did, in order:
@@ -509,7 +513,7 @@ for (const line of [...lines.values()].sort((a, z) => (a.n ?? 999) - (z.n ?? 999
 }
 
 say(`\n== Куски и время по концовкам (куски — seconds контракта, реплики — 0.3 с + 0.06 с на букву, мини-игры — about; в скобках — с касаниями и выборами по ${ACT} с, письмами по ${LETTER} с и «Плёнкой» по ${STRIP_S} с) ==`);
-const stripsOf = () => CHAPTERS.reduce((n, ch) => n + (ch.wall !== false ? 1 : 0) + (ch.choices.length ? 1 : 0), 0) + 1;
+const stripsOf = () => CHAPTERS.reduce((n, ch) => n + (ch.wall !== false ? 1 : 0), 0) + 1;
 for (const ending of ENDINGS) {
   const mine = plays.filter(p => p.ending === ending.id);
   say(`\n-- ${ending.label} (${ending.id}): партий ${mine.length} --`);
@@ -549,7 +553,6 @@ for (const p of plays) {
         else if (e[0] !== 'scene') acted(`${ch.file}, шаг ${n + 1} «${ch.titles?.[n] ?? ''}»`);
       }
     }
-    if (ch.choices.length) acted(`«Плёнка» после ${ch.file}`);
   }
   acted('конец');
 }

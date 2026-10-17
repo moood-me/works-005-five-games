@@ -15,7 +15,7 @@ const WOBBLE = 0.4; // с
 
 export default {
   file: 'bukvy',
-  title: 'Буквы', // как её зовёт ☰ автора
+  title: 'Буквы', // как её зовёт карта автора
   about: 14,
   skipped: { crooked: '00000000' },
   async run(g, b, opts, signal) {

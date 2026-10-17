@@ -16,7 +16,7 @@ const DONE = 0.98;
 
 export default {
   file: 'zapravka',
-  title: 'Заправка', // как её зовёт ☰ автора
+  title: 'Заправка', // как её зовёт карта автора
   about: 14,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {

@@ -17,7 +17,7 @@ const STEPS = 2 * N;
 
 export default {
   file: 'skleyka',
-  title: 'Склейка', // как её зовёт ☰ автора
+  title: 'Склейка', // как её зовёт карта автора
   about: 18,
   skipped: { jumps: 0 },
   async run(g, b, opts, signal) {
