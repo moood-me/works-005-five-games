@@ -18,7 +18,7 @@
 //   view.replaying(on) — the plate «Переигровка» in the corner while a replay goes on (game.js)
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
-//     opened by his mark on the map (author() → what opens or closes it), lists the chapters, their steps and the
+//     opened by his sign on the map (author() → what opens or closes it), lists the chapters, their steps and the
 //     steps' minigames, to go to any — as the play picked under «партия как…» has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
@@ -89,9 +89,8 @@ export function ui(layer) {
     letter: (letter, { signal, onOpen } = {}) => (letter.kind === 'envelope' ? envelope(layer, letter, signal, onOpen) : unfold(layer, letter, signal, onOpen)),
     replaying(on) { replay.hidden = !on; },
     author({ chapters, plays, at, games, go }) {
-      // the map (his mark on the map opens it): «партия как…», then every chapter a column of its steps (and their minigames)
-      // in a window over the scene;
-      // a click outside, ✕ or Esc closes it
+      // the map (his sign on the map opens it): «партия как…», then every chapter a column of its steps (and their
+      // minigames) in a window over the scene; a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
       map.hidden = true;
       let as = 0; // the play picked

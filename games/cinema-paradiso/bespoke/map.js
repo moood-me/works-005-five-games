@@ -1,121 +1,182 @@
 // The map's trees (game.js map), over «Плёнка» — the play on the dark of the booth. The scene is only the background
 // and a point for each chapter (c<i>: unseen, where the chapter's knot is) and for the author's sign (author); each
-// tree is the game's own — HTML laid out by CSS (its words never run into one another), its threads SVG drawn once it
-// is laid out —, in bespoke.underlay (under the language's marks, which stand on its knots and forks). A tree stands at
-// its chapter's point and goes with it each frame the scene says (bespoke.onFrame): the view dragged, brought to a
+// tree is the game's own, HTML laid out by CSS in normal flow (its words never run into one another) — each chapter a
+// strip of 35 mm film; the forks its frames; what was chosen in the projector's warm light —, in bespoke.underlay
+// (under the language's marks, which stand on its knots, forks and pointers). A tree: its number and title, its knot,
+// its rows — the question left, the trunk and its dot in the middle (a short SVG, seg), the answers right: the one
+// chosen first, the others on twigs; a replay's thread dashed beside the trunk, its badge over the tree; where the play
+// stands — a pointer at the trunk's end, «продолжить игру» or «продолжить переигровку». It stands at its chapter's
+// point, the knot there, and goes with it each frame the scene says (bespoke.onFrame): the view dragged, brought to a
 // chapter, walked toward (the wheel, a pinch: nearer, larger — by the point's depth). What lives is CSS, the page's own
-// (it stands with the play's pause): the knots breathe; a chapter just played grows row by row.
-//   trees(b, chapters, {shown, grow, seconds, author}) → { at(ref) → () => {x, y} | null — where a mark on it stands
-//     on the page now (refs: knot:<i>, fork:<i>:<k> — the main run's choice of that row —, author); shown(i) — the
-//     chapter in the middle (its knot brighter); remove() }
-//   chapters — as game.js sky() gives them: [{number, title, kind: here | played | next | future | end, map: [{title,
-//     weight, options: [{label, state: chosen | tried | both | open | unseen}]}] | null}]; grow — the chapter whose
-//     rows come one after another over `seconds`; author — the author's sign shown
+// (it stands with the play's pause): the knots breathe, the pointers nudge; a chapter just played grows row by row.
+// What can be done on it is the map's own: its pointers, played forks (the dot, the answer chosen), knots and heads,
+// the author's sign — pressed, the game opens the language's mark there, born open (story.js hub.ask). Only what is
+// offered takes a touch (≥ 44 px); the rest of it is the scene's (the view dragged).
+//   trees(b, chapters, {grow, seconds, author}) → { at(ref) → () => {x, y} | null — that element's page point now
+//     (refs: knot:<i>, fork:<i>:<k> — the dot of row k —, go:<i> — the main run's pointer —, goreplay:<i> — the
+//     replay's —, author); offer(refs, fn) — those take a press, fn(ref) told; remove() }
+//   chapters — as game.js sky() gives them: [{number, title, kind: here | played | next | future, rows: [{title, weight,
+//     options: [{label, state: chosen | tried | both | open | unseen}]}], go: the play's pointer's words | null, replay:
+//     a replay goes on in it, badge: a replay of it}]; grow — the chapter whose rows come one after another over
+//     `seconds`; author — the author's sign shown
 const DIST = 10; // m: the points' distance from the eye — a tree drawn at its size there
+const THEME = 'cine', CRACK = false, FLAG = '●'; // the game's look; the trunk a crack, not a thread; a key fork's sign
+const AUTHOR = '<svg viewBox="-26 -26 52 52" aria-hidden="true"><circle r="21"></circle><circle r="3.5"></circle><circle class="hole" cx="0" cy="-11" r="5"></circle><circle class="hole" cx="10.5" cy="-3.4" r="5"></circle><circle class="hole" cx="6.5" cy="8.9" r="5"></circle><circle class="hole" cx="-6.5" cy="8.9" r="5"></circle><circle class="hole" cx="-10.5" cy="-3.4" r="5"></circle></svg>'; // the author's sign (SVG)
 const NS = 'http://www.w3.org/2000/svg';
 const el = (tag, cls, text) => Object.assign(document.createElement(tag), cls ? { className: cls } : {}, text != null ? { textContent: text } : {});
 const svg = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
 
-export function trees(b, chapters, { shown = 0, grow = null, seconds = 6, author = false } = {}) {
-  const root = el('div', 'map');
+export function trees(b, chapters, { grow = null, seconds = 6, author = false } = {}) {
+  const root = el('div', `map ${THEME}`);
   b.underlay.append(root);
-  // [{ref: the scene's point, box: at it (scaled there), node: what stands in it, nodes: Map ref → an element marks stand
-  // on, offsets: Map ref → [x, y] from the point at size 1, draw(at), i: the chapter}]
+  // [{ref: the scene's point, box: at it (scaled there), nodes: Map ref → an element a mark stands on, offsets: Map ref
+  // → [x, y] from the point at size 1}]
   const stands = [];
-  const offsets = new Map(); // a mark's ref → the stand it is in
+  const where = new Map(); // a mark's ref → the stand it is in
+  let offered = new Set(), told = null;
+  root.addEventListener('click', e => {
+    const ref = e.target.closest?.('[data-ref]')?.dataset.ref;
+    if (ref && offered.has(ref)) told?.(ref);
+  });
+  // (what is offered takes a touch, the rest does not)
+  const can = () => {
+    for (const n of root.querySelectorAll('[data-ref]')) {
+      const on = offered.has(n.dataset.ref);
+      n.classList.toggle('can', on);
+      if (n.tagName === 'BUTTON') n.tabIndex = on ? 0 : -1;
+    }
+  };
 
   function build() {
     root.replaceChildren();
     stands.length = 0;
-    offsets.clear();
+    where.clear();
     root.style.setProperty('--h', `${b.frame().h}px`);
-    chapters.forEach((c, i) => stand(`c${i}`, chapter(c, i), i));
+    chapters.forEach((c, i) => stand(`c${i}`, chapter(c, i)));
     if (author) stand('author', sign());
-    // (laid out: where each knot, fork and its threads are, at the point's size 1 — then the threads drawn)
+    can();
+    // (laid out: the tree hung by its knot from its point; where each mark's element is — offsets, as laid out, not as
+    // drawn: no transform counts)
     for (const s of stands) {
-      s.box.hidden = false;
-      s.box.style.transform = 'none';
-      const o = s.box.getBoundingClientRect();
+      const [ox, oy] = s.origin();
+      s.tree.style.left = `${-ox}px`;
+      s.tree.style.top = `${-oy}px`;
       for (const [ref, node] of s.nodes) {
-        const r = node.getBoundingClientRect();
-        s.offsets.set(ref, [r.left + r.width / 2 - o.left, r.top + r.height / 2 - o.top]);
-        offsets.set(ref, s);
+        const [x, y] = within(node, s.tree);
+        s.offsets.set(ref, [x + node.offsetWidth / 2 - ox, y + node.offsetHeight / 2 - oy]);
+        where.set(ref, s);
       }
-      s.draw?.(ref => s.offsets.get(ref));
     }
     place(true);
   }
-  // a stand: an element at a point of the scene, its content laid out round it — the point its origin
-  function stand(ref, { node, nodes, draw }, i = null) {
+  // where an element lies in the tree, as laid out
+  const within = (node, tree) => {
+    let x = 0, y = 0;
+    for (let n = node; n && n !== tree; n = n.offsetParent) { x += n.offsetLeft; y += n.offsetTop; }
+    return [x, y];
+  };
+  // a stand: an element at a point of the scene; origin() — where in the tree the point is
+  function stand(ref, { tree, nodes, origin }) {
     const box = el('div', 'stand');
-    box.append(node);
+    box.append(tree);
     root.append(box);
-    stands.push({ ref, box, node, nodes, draw: draw && (at => draw(box, at)), offsets: new Map(), i, now: '' });
+    stands.push({ ref, box, tree, nodes, origin, offsets: new Map(), now: '' });
   }
 
-  // a chapter's tree: its number and title over its knot, its rows of choices under it (one to come: its number only)
+  // the trunk's piece of a row: a straight thread, or a crack (seeded: the same each time)
+  let seed = 11;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const piece = () => {
+    if (!CRACK) return 'M5 0V100';
+    let d = 'M5 0';
+    for (let y = 9; y < 100; y += 8 + Math.round(rnd() * 6)) d += ` L${(5 + (rnd() - 0.5) * 5).toFixed(1)} ${y}`;
+    return `${d} L5 100`;
+  };
+  const twig = CRACK ? 'M0 0 L1.5 5 L5 6.5 L8 11 L14 12 L22 16' : 'M0 0 C0 9 9 16 22 16';
+  const seg = () => {
+    const s = svg('svg', { class: 'seg', viewBox: '0 0 10 100', preserveAspectRatio: 'none', 'aria-hidden': 'true' }), d = piece();
+    s.append(svg('path', { class: 'glow', d }), svg('path', { class: 'line', d }));
+    return s;
+  };
+  const arrow = () => { const a = svg('svg', { class: 'arr', viewBox: '0 0 26 10', 'aria-hidden': 'true' }); a.append(svg('path', { d: 'M0 5H24M19 1l5 4-5 4' })); return a; };
+  // a press's place: a button (none of it seen) over what it is on
+const hit = (ref, label) => Object.assign(el('button', 'hit'), { type: 'button', tabIndex: -1, ariaLabel: label, dataset: { ref } });
+const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '0 0 12 8', 'aria-hidden': 'true' }); t.append(svg('path', { d: 'M1 1L6 6L11 1' })); return t; };
+
+  // a chapter's tree (one to come: its number only)
   function chapter(c, i) {
-    const tree = el('div', `tree ${c.kind}${i === shown ? ' shown' : ''}${i === grow ? ' grow' : ''}`), nodes = new Map();
-    tree.append(el('div', 'num', c.number || ''));
-    if (c.kind === 'future') return { node: tree, nodes };
-    tree.append(el('div', 'title', c.title));
-    const knot = el('div', 'knot');
-    knot.append(el('i', 'halo'), el('i', 'core'));
+    const tree = el('section', `tree ${c.kind}${c.kind === 'here' ? ' current' : ''}${i === grow ? ' grow' : ''}`), nodes = new Map();
+    const head = el('header', 'head');
+    head.append(el('div', 'num', c.number || ''));
+    tree.append(head);
+    if (c.kind === 'future') return { tree, nodes, origin: () => [tree.offsetWidth / 2, head.offsetHeight] };
+    tree.append(el('i', 'sprocket l'), el('i', 'sprocket r'), el('i', 'edge', 'PARADISO · 35 ▸'));
+    if (c.badge) { const badge = el('div', 'badge'); badge.append(el('i'), 'Переигровка'); tree.prepend(badge); }
+    head.append(el('div', 'title', c.title));
+    head.dataset.ref = `knot:${i}`;
+    const knot = el('div', 'knot'), core = el('i', 'core');
+    knot.append(seg(), el('i', 'halo'), core, hit(`knot:${i}`, c.title));
     tree.append(knot);
-    nodes.set(`knot:${i}`, knot);
-    const rows = c.map || [], list = el('div', 'rows');
+    nodes.set(`knot:${i}`, core);
+    const rows = c.rows || [], list = el('ol', 'rows');
     if (rows.length > 6) tree.classList.add('dense');
+    // the replay's thread: from the first row it chose in to the last — its pointer under that, while it goes on
+    const tried = rows.map(r => r.options.some(o => o.state === 'tried' || o.state === 'both'));
+    const r0 = tried.indexOf(true), r1 = tried.lastIndexOf(true);
+    const line = (cls, name, opts) => {
+      const li = el('li', cls), stem = el('div', 'stem'), dot = el('i', 'dot');
+      stem.append(seg());
+      if (cls.includes(' r')) stem.append(el('i', 'rseg'));
+      stem.append(dot);
+      const n = el('div', 'name');
+      if (name) n.append(name);
+      li.append(n, stem, opts);
+      list.append(li);
+      return { li, n, stem, dot };
+    };
+    const pointer = (row, words, replay, ref) => {
+      const go = Object.assign(el('button', replay ? 'go go-replay' : 'go go-game'), { type: 'button', tabIndex: -1, dataset: { ref } }), w = el('span');
+      words.split('\n').forEach((t, k) => { if (k) w.append(el('br')); w.append(t); });
+      go.append(w, arrow());
+      row.n.append(go);
+      // (its mark on the arrow's tip, at the trunk)
+      const at = el('i', 'at');
+      row.stem.append(tip(replay), at);
+      nodes.set(ref, at);
+    };
+    if (c.replay && r1 < 0) pointer(line('row cursor r', '', el('ul', 'opts')), 'продолжить\nпереигровку', true, `goreplay:${i}`);
     rows.forEach((row, k) => {
-      const r = el('div', 'row');
-      if (i === grow) r.style.animationDelay = `${(k * seconds) / rows.length}s`;
-      r.append(el('div', 'name', `${row.weight === '⚑' ? '⚑ ' : ''}${row.title}`));
-      const opts = el('div', 'opts');
-      row.options.forEach((o, j) => {
-        const opt = el('div', `opt ${o.state}`), dot = el('i', 'dot');
-        opt.append(dot, el('span', 'label', o.state === 'unseen' ? '· · ·' : o.label));
-        opts.append(opt);
-        nodes.set(`dot:${i}:${k}:${j}`, dot);
-        if (o.state === 'chosen' || o.state === 'both') nodes.set(`fork:${i}:${k}`, dot);
-      });
-      r.append(opts);
-      list.append(r);
+      const opts = el('ul', 'opts'), chosen = row.options.filter(o => o.state === 'chosen' || o.state === 'both');
+      const rest = row.options.filter(o => !chosen.includes(o) && o.state !== 'unseen');
+      if (!chosen.length && !rest.length) opts.append(el('li', 'opt unseen', '· · ·'));
+      for (const o of chosen) opts.append(Object.assign(el('li', 'opt chosen', o.label), { dataset: { ref: `fork:${i}:${k}` } }));
+      for (const o of rest) {
+        const li = el('li', `opt alt${o.state === 'tried' ? ' tried' : ''}`), t = svg('svg', { class: 'twig', viewBox: '0 0 22 16', preserveAspectRatio: 'none', 'aria-hidden': 'true' });
+        t.append(svg('path', { d: twig }));
+        li.append(t, el('i', 'pip'), o.label);
+        opts.append(li);
+      }
+      const name = el('span');
+      if (row.weight === '⚑') name.append(el('span', 'flag', `${FLAG} `));
+      name.append(row.title);
+      const inReplay = k >= r0 && k <= r1 && r0 >= 0;
+      const r = line(['row', row.weight === '⚑' ? 'key' : '', inReplay ? 'r' : '', k === r0 ? 'r-start' : ''].filter(Boolean).join(' '), name, opts);
+      if (i === grow) r.li.style.animationDelay = `${(k * seconds) / rows.length}s`;
+      if (chosen.length) { r.stem.append(hit(`fork:${i}:${k}`, row.title)); nodes.set(`fork:${i}:${k}`, r.dot); }
+      if (c.replay && k === r1) pointer(line('row cursor r', '', el('ul', 'opts')), 'продолжить\nпереигровку', true, `goreplay:${i}`);
     });
+    if (c.go) pointer(line('row pending', '', el('ul', 'opts')), c.go, false, `go:${i}`);
     tree.append(list);
-    return { node: tree, nodes, draw: (box, at) => threads(box, c, i, at) };
+    // (the knot's core: where the chapter's point is)
+    return { tree, nodes, origin: () => { const [x, y] = within(core, tree); return [x + core.offsetWidth / 2, y + core.offsetHeight / 2]; } };
   }
-  // the threads: from the knot down through the main run's choices (bright, a soft glow under), to each other option
-  // of a row reached from where the main run came (faint; one never reached — dotted), a replay's (pale blue, dashed)
-  function threads(box, c, i, at) {
-    const sheet = svg('svg', { class: 'threads' }), glow = svg('svg', { class: 'threads glow' });
-    let main = at(`knot:${i}`), tried = main;
-    (c.map || []).forEach((row, k) => {
-      const g = svg('g', {}), h = svg('g', {});
-      // (a chapter growing: its row's threads come with it)
-      if (i === grow) for (const x of [g, h]) { x.classList.add('grow'); x.style.animationDelay = `${(k * seconds) / c.map.length}s`; }
-      let nextMain = null, nextTried = null;
-      row.options.forEach((o, j) => {
-        const p = at(`dot:${i}:${k}:${j}`), isMain = o.state === 'chosen' || o.state === 'both', isTried = o.state === 'tried' || o.state === 'both';
-        if (isTried) g.append(svg('path', { d: curve(tried, p), class: 'tried' }));
-        if (isMain) h.append(svg('path', { d: curve(main, p) }));
-        g.append(svg('path', { d: curve(main, p), class: isMain ? 'main' : o.state === 'unseen' ? 'unseen' : 'other' }));
-        if (isMain) nextMain = p;
-        if (isTried) nextTried = p;
-      });
-      sheet.append(g);
-      glow.append(h);
-      main = nextMain || main;
-      tried = nextTried || main;
-    });
-    box.prepend(glow, sheet);
-  }
-  const curve = (a, z) => `M${a[0]} ${a[1]} C${a[0]} ${a[1] + (z[1] - a[1]) * 0.55} ${z[0]} ${z[1] - (z[1] - a[1]) * 0.45} ${z[0]} ${z[1]}`;
 
-  // the author's sign: a small ring of stars, «автор» under it
+  // the author's sign, «автор» under it
   function sign() {
-    const node = el('div', 'sign'), ring = el('div', 'ring');
-    for (let k = 0; k < 5; k++) ring.append(el('i'));
-    node.append(ring, el('span', 'label', 'автор'));
-    return { node, nodes: new Map([['author', ring]]) };
+    const tree = el('div', 'author'), mark = el('div');
+    mark.innerHTML = AUTHOR;
+    tree.append(mark, el('span', '', 'автор'), hit('author', 'Карта автора'));
+    return { tree, nodes: new Map([['author', mark]]), origin: () => [tree.offsetWidth / 2, mark.offsetHeight / 2] };
   }
 
   // each frame the scene says: every stand at its point, as large as its depth makes it
@@ -137,12 +198,12 @@ export function trees(b, chapters, { shown = 0, grow = null, seconds = 6, author
 
   return {
     at: ref => () => {
-      const s = offsets.get(ref), o = s?.offsets.get(ref), p = s && b.where(s.ref);
+      const s = where.get(ref), o = s?.offsets.get(ref), p = s && b.where(s.ref);
       if (!p) return null;
       const k = scale(p);
       return { x: p.x + o[0] * k, y: p.y + o[1] * k };
     },
-    shown(i) { for (const s of stands) if (s.i != null) s.node.classList.toggle('shown', s.i === i); },
+    offer(refs, fn) { offered = new Set(refs); told = fn; can(); },
     remove() { off(); removeEventListener('resize', resized); root.remove(); },
   };
 }
