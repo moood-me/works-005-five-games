@@ -1,33 +1,33 @@
-// «Иней» (II.6, Дом, после куска `window_watch`; game.md §7): пятно на `window#pane` (радиус 0.3 высоты кадра), тереть;
-// дыра в инее — своё `hole` (до 1): растёт с тем, что палец протёр; не трут — медленно затягивается (−0.02 в секунду),
-// но не ниже 0.4 после начала поезда; каждые 0.4 высоты кадра пути пальца — шорох ногтя по инею. Смотреть — тоже путь:
-// когда `hole` впервые ≥ 0.6 или после 12 с без движения — за окном идёт электричка (`far_train` → 1 за 14 с), гудок,
-// подложки с поездом. Конец — когда поезд прошёл (neutral).
-//   Чувство: остался; хочет увидеть, что упустил; тихо, свобода уходит мимо; игрок — окно в инее, протёртое пальцем.
+// “Frost” (II.6, the Home, after the beat `window_watch`; game.md §7): a spot on `window#pane` (radius 0.3 of the frame's height), rubbed;
+// the hole in the frost — its own `hole` (up to 1): grows with what the finger has rubbed; not rubbed — it slowly heals over (−0.02 a second),
+// but not below 0.4 once the train has begun; every 0.4 of the frame's height of the finger's path — a nail's scratch on the frost. Watching is a way too:
+// once `hole` first reaches 0.6, or after 12 s without moving, a train goes past beyond the window (`far_train` → 1 over 14 s), a horn,
+// the beds with the train. The end — once the train has gone (neutral).
+//   Feeling: he stayed; wants to see what he let go; quiet, freedom passing by; the player — a frosted window rubbed with a finger.
 //   → { hole }
 import { until, keys } from '../hands.js';
 
-const SPOT = 0.3; // радиус пятна, доля высоты кадра
-const HEAL = 0.02; // в секунду — иней затягивает
-const FLOOR = 0.4; // ниже — нет, когда поезд пошёл
-const TRAIN_AT = 0.6; // hole — поезд
-const STILL = 12; // с без движения — поезд
-const TRAIN = 14; // с — поезд за окном
-const SCRAPE = 0.4; // высоты кадра пути — шорох
+const SPOT = 0.3; // the spot's radius, a share of the frame's height
+const HEAL = 0.02; // a second — the frost heals over
+const FLOOR = 0.4; // no lower, once the train has gone
+const TRAIN_AT = 0.6; // hole — the train
+const STILL = 12; // s without moving — the train
+const TRAIN = 14; // s — the train beyond the window
+const SCRAPE = 0.4; // of the frame's height of path — a scratch
 
 export default {
-  title: 'Иней', // как её зовёт ☰ автора
+  title: 'Frost', // (as the author's ☰ lists it)
   about: 18,
   skipped: { hole: 0.6 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Стекло заросло инеем. За ним — огороды и станция' });
+    const mg = g.minigame({ phrase: tr('Frost has grown over the glass. Beyond it, the vegetable plots and the station') });
     const send = keys(g);
     const h = () => b.frame()?.h || 600;
     let train = null;
     signal.addEventListener('abort', () => { train?.cancel?.(); g.beds({ clock: 0.4, rails: 0.3 }, 2); });
     const pane = mg.mark({ at: 'window#pane', kind: 'spot' });
     let rub = mg.rub({ on: pane, radius: Math.round(SPOT * h()), full: 0.85 });
-    // (смотреть — путь: палец показывают при первой встрече, не когда игрок замер)
+    // (watching is a way: the finger is shown at the first meeting, not when the player stands still)
     b.minigame.tricks.teach(mg, [rub], { id: 'rub', still: null });
     let hole = 0, covered = 0, still = 0, path = 0, last = null, going = false, gone = false;
     send('hole', 0);

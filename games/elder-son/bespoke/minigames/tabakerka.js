@@ -1,29 +1,29 @@
-// «Табакерка» (II.4, Дом, после куска `box_take` или `box_give`; вставка `box` открыта, режим в кадре — `box_mode`;
+// “The Snuffbox” (II.4, the Home, after the beat `box_take` or `box_give`; the insert `box` open, the mode in the frame — `box_mode`;
 // game.md §7). opts.mode:
-// - take: ладонь раскрыта, старая рука ещё над табакеркой. Четыре кольца с пунктиром на `box#finger1…4`, сразу все;
-//   каждое тянуть к табакерке (`box#box`): дошёл — палец сжимается (`fingerN` → 1 за 0.5 с), кольцо снято; не дошёл —
-//   палец назад. Порядок любой; сами пальцы не сжимаются. Все четыре — щелчок крышки, старая рука уходит (`old` → 0 за
-//   1.5 с), конец (clean).
-// - give: табакерка на клеёнке между ними. Кольцо с пунктиром на `box#box`, путь к `box#old`; тянуть с сопротивлением
-//   (тяжёлая: идёт, пока палец тянет впереди неё); `push` — место на пути, назад не идёт; отпустил — стоит. Дошла —
-//   старые пальцы смыкаются не сразу (`old_close` → 1 за 2 с), щелчок, конец (clean). Сама не едет.
-//   Чувство: берёт (или отдаёт) дедову табакерку «старшему сыну»; хочет не обидеть старика; стыдно; игрок — вещь,
-//   которая тяжелее, чем весит.
+// - take: the palm open, the old hand still over the snuffbox. Four dashed rings on `box#finger1…4`, all at once;
+//   each pulled to the snuffbox (`box#box`): there — the finger closes (`fingerN` → 1 over 0.5 s), the ring gone; not there —
+//   the finger back. Any order; the fingers do not close by themselves. All four — the lid clicks, the old hand goes (`old` → 0 over
+//   1.5 s), the end (clean).
+// - give: the snuffbox on the oilcloth between them. A dashed ring on `box#box`, the way to `box#old`; pulled against resistance
+//   (heavy: it moves while the finger pulls ahead of it); `push` — the place on the way, it does not go back; let go — it stays. There —
+//   the old fingers close on it not at once (`old_close` → 1 over 2 s), a click, the end (clean). It does not move by itself.
+//   Feeling: taking (or giving back) the grandfather's snuffbox, “for the elder son”; wants not to hurt the old man; ashamed; the player — a thing
+//   heavier than it weighs.
 //   opts: { mode: 'take' | 'give' }
-//   → { closed: сколько пальцев сжато (take — 4; give — 0), seconds: от первого касания до конца }
+//   → { closed: how many fingers closed (take — 4; give — 0), seconds: from the first touch to the end }
 import { until, keys } from '../hands.js';
 
 const FINGERS = 4;
-const THERE = 0.97; // push — дошла
+const THERE = 0.97; // push — there
 
 export default {
-  title: 'Табакерка', // как её зовёт ☰ автора
+  title: 'The Snuffbox', // (as the author's ☰ lists it)
   about: 8,
-  // (одна форма на оба режима: глава поля итога не читает; game.md §7 — take {closed: 4}, give {seconds: 6})
+  // (one shape for both modes: the chapter reads none of the result's fields; game.md §7 — take {closed: 4}, give {seconds: 6})
   skipped: { closed: 4, seconds: 6 },
   async run(g, b, opts, signal) {
     const take = opts.mode !== 'give';
-    const mg = g.minigame({ phrase: take ? 'Табакерка лежит на ладони. Старая рука ещё над ней' : 'Табакерка стоит на клеёнке между ними' });
+    const mg = g.minigame({ phrase: take ? tr('The snuffbox lies in his palm. The old hand is still over it') : tr('The snuffbox sits on the oilcloth between them') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });
@@ -60,7 +60,7 @@ export default {
       let push = 0;
       const done = await until(mg, () => {
         const s = pull.state;
-        if (s.u > push) push = s.u; // (назад не идёт)
+        if (s.u > push) push = s.u; // (it does not go back)
         else if (s.u < push) pull.set({ u: push });
         send('push', push);
         mg.plate.set({ fill: push, glow: s.held ? 'good' : 'idle' });

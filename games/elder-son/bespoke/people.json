@@ -1,68 +1,68 @@
 {
   "narrator": {
     "voice": "Rasalgethi",
-    "how": "спокойно, суховато, с тихой усмешкой, не торопясь — как ремарки пьесы вслух",
-    "name": "рассказчик",
-    "short": "рассказчик"
+    "how": "calmly, a little dry, with a quiet smile, unhurried — like the play's stage directions read aloud",
+    "name": "narrator",
+    "short": "narrator"
   },
   "busygin": {
     "voice": "Iapetus",
-    "how": "молодой: негромко, сдержанно, чуть хрипло с мороза; неловко, когда врёт",
-    "name": "Володя Бусыгин, студент",
-    "short": "Бусыгин"
+    "how": "young: quiet, restrained, a little hoarse from the cold; awkward when he lies",
+    "name": "Volodya Busygin, a student",
+    "short": "Busygin"
   },
   "silva": {
     "voice": "Puck",
-    "how": "бойко, весело, нагловато, быстро; злость — тем же весёлым голосом",
-    "name": "Сильва, Семён Севостьянов",
-    "short": "Сильва"
+    "how": "brisk, merry, cheeky, quick; his anger in the same merry voice",
+    "name": "Silva, Semyon Sevostyanov",
+    "short": "Silva"
   },
   "sarafanov": {
     "voice": "Algenib",
-    "how": "немолодой: мягко, торопливо, взволнованно, с одышкой и улыбкой; тихо, когда больно",
-    "name": "Андрей Григорьевич Сарафанов, музыкант",
-    "short": "Сарафанов"
+    "how": "no longer young: soft, hurried, excited, short of breath and smiling; quiet when it hurts",
+    "name": "Andrei Grigorievich Sarafanov, a musician",
+    "short": "Sarafanov"
   },
   "nina": {
     "voice": "Kore",
-    "how": "ровно, прямо, чуть насмешливо и устало; без жалобы",
-    "name": "Нина, дочь Сарафанова",
-    "short": "Нина"
+    "how": "even, direct, a little mocking and tired; never complaining",
+    "name": "Nina, Sarafanov's daughter",
+    "short": "Nina"
   },
   "vasenka": {
     "voice": "Fenrir",
-    "how": "ломкий голос подростка: хмуро, отрывисто, обиженно",
-    "name": "Васенька, сын Сарафанова",
-    "short": "Васенька"
+    "how": "a teenager's breaking voice: sullen, curt, hurt",
+    "name": "Vasenka, Sarafanov's son",
+    "short": "Vasenka"
   },
   "kudimov": {
     "voice": "Alnilam",
-    "how": "чётко, громко, по-уставному, без улыбки",
-    "name": "Михаил Кудимов, курсант",
-    "short": "Кудимов"
+    "how": "crisp, loud, by the regulations, unsmiling",
+    "name": "Mikhail Kudimov, a cadet",
+    "short": "Kudimov"
   },
   "makarskaya": {
     "voice": "Aoede",
-    "how": "низко, лениво, насмешливо; в крике — испуганно",
-    "name": "Наталья Макарская, соседка",
-    "short": "Макарская"
+    "how": "low, lazy, mocking; frightened when she shouts",
+    "name": "Natalya Makarskaya, the neighbour",
+    "short": "Makarskaya"
   },
   "neighbor_m": {
     "voice": "Orus",
-    "how": "из-за окна: сонно, сердито",
-    "name": "сосед",
-    "short": "сосед"
+    "how": "from behind a window: sleepy, cross",
+    "name": "neighbour",
+    "short": "neighbour"
   },
   "neighbor_w": {
     "voice": "Gacrux",
-    "how": "из-за окна: визгливо, испуганно-сердито",
-    "name": "соседка",
-    "short": "соседка"
+    "how": "from behind a window: shrill, frightened and cross",
+    "name": "neighbour woman",
+    "short": "neighbour woman"
   },
   "neighbor_old": {
     "voice": "Enceladus",
-    "how": "из-за окна: старик, шёпотом, лукаво",
-    "name": "старик-сосед",
-    "short": "старик"
+    "how": "from behind a window: an old man, in a whisper, sly",
+    "name": "the old neighbour",
+    "short": "old man"
   }
 }

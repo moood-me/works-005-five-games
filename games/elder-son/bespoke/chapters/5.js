@@ -1,6 +1,6 @@
-// V. Старший сын (game.md §6). On the porch at night with Nina: «I don't know my father» — his coat on her shoulders
-// (Пальто); Sarafanov packs a suitcase to go with him «to your mother» — ⚑ tell him yourself, or keep silent and let
-// Silva tell; the run to the last train (Бегом); at its open door — ⚑ get in, or stay; home, if he stayed.
+// V. The Elder Son (game.md §6). On the porch at night with Nina: «I don't know my father» — his coat on her shoulders
+// (The Coat); Sarafanov packs a suitcase to go with him «to your mother» — ⚑ tell him yourself, or keep silent and let
+// Silva tell; the run to the last train (Running); at its open door — ⚑ get in, or stay; home, if he stayed.
 // Reads: facts (ninaIs, secret, entry, boxWhere, came, ninaCame, silvaDoor, boxHand, told, hurt, train, tune, ending).
 // Leaves: choices.truth, .train; scales lie. No map after it (game.md §3.5): the epilogue comes at once.
 import { SCENES, facts } from '../story.js';
@@ -12,11 +12,11 @@ import steklo from '../minigames/steklo.js';
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 export default {
-  number: 'V', title: 'Старший сын',
-  titles: ['Крыльцо', 'Правда', 'Последняя', 'Дом'],
+  number: 'V', title: tr('The Elder Son'),
+  titles: ['The Porch', 'Truth', 'The Last Train', 'Home'],
   choices: [
-    { id: 'truth', weight: '⚑', title: 'Правда', options: [{ id: 'self', label: 'Сказать самому' }, { id: 'silent', label: 'Промолчать' }] },
-    { id: 'train', weight: '⚑', title: 'Последняя', options: [{ id: 'stay', label: 'Остаться' }, { id: 'go', label: 'Войти в вагон' }] },
+    { id: 'truth', weight: '⚑', title: tr('Truth'), options: [{ id: 'self', label: tr('Tell him yourself') }, { id: 'silent', label: tr('Keep quiet') }] },
+    { id: 'train', weight: '⚑', title: tr('The Last Train'), options: [{ id: 'stay', label: tr('Stay') }, { id: 'go', label: tr('Get on the train') }] },
   ],
   steps: [
     // the porch at night: Nina, and his own father
@@ -28,13 +28,13 @@ export default {
       const porch = g.beat('porch_night');
       await sat;
       if (f.secret) {
-        await g.say('nina', 'Он тебе сказал? Про оркестр');
-        await g.say('busygin', 'Ни слова');
+        await g.say('nina', 'Did he tell you? About the orchestra');
+        await g.say('busygin', 'Not a word');
       }
-      // (Р89 is left unanswered — so it is meant: his answer is the choice of V.2)
-      if (f.ninaIs === 'knows') await g.say('nina', 'Скажешь ему? Про себя');
-      else await g.say('nina', 'Хорошо, что ты к нам приехал');
-      await g.say('busygin', 'Я своего отца не знаю. Видел раз — на вокзале. Он меня не узнал');
+      // (L89 is left unanswered — so it is meant: his answer is the choice of V.2)
+      if (f.ninaIs === 'knows') await g.say('nina', 'Will you tell him? About yourself');
+      else await g.say('nina', 'I\'m glad you came to us');
+      await g.say('busygin', 'I don\'t know my own father. I saw him once — at a station. He didn\'t recognise me');
       await porch;
       await g.beat('shawl');
       await g.play(palto);
@@ -47,16 +47,16 @@ export default {
       const suitcase = g.told('pack:case'), silva = g.told('pack:silva');
       await g.scene(SCENES.home, { beat: 'pack' });
       const pack = g.beat('pack');
-      await g.say('silva', 'Всё, сынок. Спектакль окончен. На последнюю ещё успеем');
+      await g.say('silva', 'That\'s it, sonny. The show\'s over. We can still make the last one');
       await suitcase;
-      await g.say('sarafanov', 'Я с тобой. Тут я никому не нужен');
-      await g.say('sarafanov', 'Поеду к твоей маме. Повинюсь');
+      await g.say('sarafanov', 'I\'m coming with you. Nobody needs me here');
+      await g.say('sarafanov', 'I\'ll go to your mother. I\'ll ask her to forgive me');
       await silva;
-      await g.say('silva', 'Андрей Григорьевич, да какой он вам…');
+      await g.say('silva', 'Andrei Grigorievich, what sort of…');
       await pack;
       const truth = await g.choose('truth', {
-        sarafanov: [{ id: 'self', label: 'Сказать самому' }],
-        silva: [{ id: 'silent', label: 'Промолчать' }],
+        sarafanov: [{ id: 'self', label: tr('Tell him yourself') }],
+        silva: [{ id: 'silent', label: tr('Keep quiet') }],
       });
       g.apply('truth');
       if (truth === 'self') {
@@ -64,18 +64,18 @@ export default {
         const said = g.told('confess:said'), sarafanov = g.told('confess:sarafanov');
         const confess = g.beat('confess');
         await said;
-        await g.say('busygin', 'Я вам не сын. Мы опоздали на электричку. Надо было где-то ночевать');
+        await g.say('busygin', 'I\'m not your son. We missed the train. We had to spend the night somewhere');
         await sarafanov;
-        await g.say('sarafanov', 'Ну и что. Я всё равно считаю тебя своим сыном');
+        await g.say('sarafanov', 'So what. I still think of you as my son');
         await confess;
       } else {
         const said = g.told('exposed:said'), window = g.told('exposed:window');
         const exposed = g.beat('exposed');
         await said;
-        if (facts(g.state).entry === 'asked') await g.say('silva', '…сын! Он вас вчера первый раз увидел. Это я его сыном назвал — для смеху');
-        else await g.say('silva', '…сын! Он вас вчера первый раз увидел. Сам назвался — артист');
+        if (facts(g.state).entry === 'asked') await g.say('silva', '…son is he to you! He first set eyes on you yesterday. I was the one who called him your son — for a laugh');
+        else await g.say('silva', '…son is he to you! He first set eyes on you yesterday. He came up with it himself — what an actor');
         await window;
-        await g.say('sarafanov', 'Ну и что. Я всё равно считаю тебя своим сыном', 'sarafanov');
+        await g.say('sarafanov', 'So what. I still think of you as my son', 'sarafanov');
         await exposed;
       }
       on(g, 'go_out:gone', () => g.sound.door());
@@ -96,14 +96,14 @@ export default {
       const last = g.beat('last');
       await open;
       g.sound.doors();
-      if (f.silvaDoor) await g.say('silva', 'Ну? Едешь, сынок?');
+      if (f.silvaDoor) await g.say('silva', 'Well? Coming, sonny?');
       await came;
-      if (f.came !== 'none') await g.say('sarafanov', 'Володя!');
-      else if (f.ninaCame) await g.say('nina', 'Володя');
+      if (f.came !== 'none') await g.say('sarafanov', 'Volodya!');
+      else if (f.ninaCame) await g.say('nina', 'Volodya');
       await last;
       const train = await g.choose('train', {
-        'train#door': [{ id: 'go', label: 'Войти в вагон' }],
-        [f.came !== 'none' ? 'sarafanov' : f.ninaCame ? 'nina' : 'far_window']: [{ id: 'stay', label: 'Остаться' }],
+        'train#door': [{ id: 'go', label: tr('Get on the train') }],
+        [f.came !== 'none' ? 'sarafanov' : f.ninaCame ? 'nina' : 'far_window']: [{ id: 'stay', label: tr('Stay') }],
       });
       g.apply('train');
       if (train === 'stay') {
@@ -114,7 +114,7 @@ export default {
         on(g, 'boards:in', () => g.sound.doors());
         const boards = g.beat('boards');
         await box;
-        if (f.boxHand) await g.say('sarafanov', 'Возьми. Она — старшему');
+        if (f.boxHand) await g.say('sarafanov', 'Take it. It goes to the eldest');
         await boards;
         await g.beat('glass');
         const w = await g.play(steklo);
@@ -123,11 +123,11 @@ export default {
         const away = g.beat('away');
         g.beds({ train: 0.8 }, 2);
         await wave;
-        if (f.told === 'self' && f.came !== 'none') await g.say('sarafanov', 'В субботу приезжай! Слышишь — в субботу!');
+        if (f.told === 'self' && f.came !== 'none') await g.say('sarafanov', 'Come on Saturday! Do you hear — on Saturday!');
         await away;
       }
     },
-    // home, if he stayed: late for the train — or «Чаю?»
+    // home, if he stayed: late for the train — or “Tea?”
     async g => {
       const f = facts(g.state);
       if (f.train !== 'stay') return;
@@ -137,10 +137,10 @@ export default {
         await g.scene(SCENES.home, { beat: 'home_late' });
         const home = g.beat('home_late');
         await sat;
-        await g.say('busygin', 'Я опоздал на электричку');
-        await g.say('sarafanov', 'Вот и хорошо. Вот и правильно');
+        await g.say('busygin', 'I\'ve missed the train');
+        await g.say('sarafanov', 'That\'s good. That\'s how it should be');
         await box;
-        if (f.boxWhere === 'cupboard') await g.say('sarafanov', 'Теперь возьмёшь?');
+        if (f.boxWhere === 'cupboard') await g.say('sarafanov', 'Will you take it now?');
         await room;
         // now — the phrase for the first time goes on and resolves (≈ 14 s; it ends by itself, in the epilogue
         // already); else it breaks off, as always: `later` — much untruth, it does not heal at once (it resolves in the
@@ -153,7 +153,7 @@ export default {
         await g.scene(SCENES.home, { beat: 'home_anyway' });
         const home = g.beat('home_anyway');
         await turn;
-        await g.say('sarafanov', 'Чаю?');
+        await g.say('sarafanov', 'Tea?');
         await home;
       }
     },

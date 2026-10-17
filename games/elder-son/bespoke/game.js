@@ -1,9 +1,9 @@
-// Старший сын — по пьесе Александра Вампилова. A bespoke game (moood/engines/bespoke) on the world «Старший сын»
+// The Elder Son — after the play by Alexander Vampilov. A bespoke game (moood/engines/bespoke) on the world “The Elder Son”
 // (engine 3): a student who missed the last train calls himself a stranger's elder son, and the lie holds a family
 // together for two days. A prologue, five chapters, an epilogue — each a row of steps on the world's scenes. The
-// choices, the two scales (Ложь ↔ Правда, Вместе ↔ Врозь) and what is remembered carry from chapter to chapter; how it
+// choices, the two scales (Lie ↔ Truth, Together ↔ Apart) and what is remembered carry from chapter to chapter; how it
 // ends follows from them (story.js facts) — the play always goes through to the epilogue. Between the chapters, the
-// scene «Состав»: a night station seen from a footbridge — the chapter's title on the board, and after a chapter its
+// scene “The Yard”: a night station seen from a footbridge — the chapter's title on the board, and after a chapter its
 // choices as railway cars on their tracks (each option a window: lit — chosen; frosted — could have been; boarded up —
 // never reached); after the epilogue, those of the whole play. The player presses the semaphore's red light to go on:
 // it turns green and the cars leave. A chapter with wall: false begins without its title (the one before runs into it);
@@ -30,19 +30,19 @@ import epilogue from './chapters/epilogue.js';
 const CHAPTERS = [prologue, one, two, three, four, five, epilogue];
 const EPILOGUE = CHAPTERS.length - 1;
 const LAST = EPILOGUE - 1; // chapter V: no map after it (game.md §3.5)
-const TITLE = 'Старший сын';
+const TITLE = tr('The Elder Son');
 // every step of the play in order, and where each chapter's first one is among them
 const STEPS = CHAPTERS.flatMap(ch => ch.steps);
 const FIRST = CHAPTERS.map((_, c) => CHAPTERS.slice(0, c).reduce((n, ch) => n + ch.steps.length, 0));
-// «партия как…» — whole plays the author goes from (game.md §5): every ending, and who comes to the platform
+// “play as…” — whole plays the author goes from (game.md §5): every ending, and who comes to the platform
 const PLAYS = [
-  { label: 'Опоздал — вся семья', choices: { entry: 'asked', galya: 'remembered', box: 'take', dawn: 'stay', father: 'approach', crossing: 'truth', kudimov: 'for_me', fire: 'blame', truth: 'self', train: 'stay' } },
-  { label: 'Опоздал — честно, никто', choices: { entry: 'asked', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'for_me', fire: 'own_up', truth: 'self', train: 'stay' } },
-  { label: 'В субботу — никто', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'let', fire: 'own_up', truth: 'self', train: 'go' } },
-  { label: 'В субботу — отец, табакерка в дверях', choices: { entry: 'said', galya: 'remembered', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'roar', kudimov: 'ask', fire: 'own_up', truth: 'self', train: 'go' } },
-  { label: 'Всё равно — отец', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'stay' } },
-  { label: 'Чемодан — отец', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'go' } },
-  { label: 'Чемодан — никто', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'brother', kudimov: 'let', fire: 'own_up', truth: 'silent', train: 'go' } },
+  { label: 'Missed the train — the whole family', choices: { entry: 'asked', galya: 'remembered', box: 'take', dawn: 'stay', father: 'approach', crossing: 'truth', kudimov: 'for_me', fire: 'blame', truth: 'self', train: 'stay' } },
+  { label: 'Missed the train — honest, no one', choices: { entry: 'asked', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'for_me', fire: 'own_up', truth: 'self', train: 'stay' } },
+  { label: 'On Saturday — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'let', fire: 'own_up', truth: 'self', train: 'go' } },
+  { label: 'On Saturday — father, the snuffbox at the door', choices: { entry: 'said', galya: 'remembered', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'roar', kudimov: 'ask', fire: 'own_up', truth: 'self', train: 'go' } },
+  { label: 'All the same — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'stay' } },
+  { label: 'The suitcase — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'go' } },
+  { label: 'The suitcase — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'brother', kudimov: 'let', fire: 'own_up', truth: 'silent', train: 'go' } },
 ];
 const fresh = () => ({
   chapter: 0, step: 0, scales: Object.fromEntries(Object.entries(SCALES).map(([k, s]) => [k, s.start])),
@@ -61,11 +61,11 @@ export default async function (b) {
   const hub = listen(b);
   const view = ui(b.layer);
   b.onPause(pause);
-  // (the page is heard only after a touch: a chapter that begins without «Состав» does so only once there was one —
+  // (the page is heard only after a touch: a chapter that begins without “The Yard” does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
   let touched = false;
   for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, () => { touched = true; }, { once: true, capture: true });
-  // «Состав»: the station alone (no title: the very beginning), the chapter's title on the board, or the cars of `map`,
+  // “The Yard”: the station alone (no title: the very beginning), the chapter's title on the board, or the cars of `map`,
   // as the lamps along the tracks light up; → once they have. The wind and the far railway; no scales
   const yard = async (number, title, map) => {
     beds({ wind: 0.2, rails: 0.4 }, 2);
@@ -118,14 +118,14 @@ export default async function (b) {
       const { start, play, ...now } = kept;
       kept.start = structuredClone({ ...now, step: 0 });
     }
-    // «Состав» before the chapter: the station alone at the very beginning, else the chapter's title; the player presses
+    // “The Yard” before the chapter: the station alone at the very beginning, else the chapter's title; the player presses
     // the semaphore to begin — unless the chapter is over (the page was left at its map): its map again; or gone
     // straight to a minigame; or the chapter before runs into this one (wall: false, once the page has been touched)
     if (kept.step < ch.steps.length && kept.play == null && !(touched && ch.wall === false)) {
       const opening = !kept.chapter && !kept.step;
       const plain = opening || ch.wall === false;
       await yard(plain ? '' : ch.number, plain ? '' : ch.title, null);
-      await signal([{ id: 'go', label: kept.step ? 'Продолжить' : 'Начать' }]);
+      await signal([{ id: 'go', label: kept.step ? tr('Continue') : tr('Begin') }]);
     }
     wake();
     // (the epilogue: the play's scales are done — its steps show none)
@@ -138,7 +138,7 @@ export default async function (b) {
       // (⏭ outside a minigame skips the step — the author's only; in a minigame it is everyone's: story.js g.play)
       const off = b.game.mine ? view.onSkip(() => skip()) : () => {};
       const done = await Promise.race([
-        ch.steps[kept.step](g).then(() => true, e => { b.trouble(`шаг сломался: ${e.message || e}`); return false; }),
+        ch.steps[kept.step](g).then(() => true, e => { b.trouble(`the step broke: ${e.message || e}`); return false; }),
         new Promise(ok => { skip = () => ok(false); }),
       ]);
       off();
@@ -150,12 +150,12 @@ export default async function (b) {
     if (kept.chapter === EPILOGUE) {
       // the cars of the whole play; then all of it anew (the author goes to a chapter by ☰)
       await yard('', TITLE, whole(kept));
-      await signal([{ id: 'anew', label: 'Сыграть заново' }]);
+      await signal([{ id: 'anew', label: tr('Play again') }]);
       return b.restart();
     } else if (ch.choices.length && kept.chapter !== LAST) {
       // the cars of the chapter; then on — or the chapter again, from how it began
       await yard(ch.number, ch.title, rows(ch.choices, kept));
-      const to = await signal([{ id: 'on', label: 'Дальше' }, { id: 'again', label: 'Пройти главу заново' }]);
+      const to = await signal([{ id: 'on', label: tr('Go on') }, { id: 'again', label: tr('Replay the chapter') }]);
       if (to === 'again') next = kept.start;
     }
     kept = next || { ...kept, chapter: kept.chapter + 1, step: 0, start: undefined };
@@ -163,7 +163,7 @@ export default async function (b) {
   }
 }
 
-// choices as rows of «Состав» (a car on its track each): chosen, could have been, never reached
+// choices as rows of “The Yard” (a car on its track each): chosen, could have been, never reached
 const rows = (choices, kept, title = c => c.title) => choices.map(c => ({
   title: title(c), weight: c.weight,
   options: c.options.map(o => ({ label: o.label, state: kept.choices[c.id] === o.id ? 'chosen' : c.id in kept.choices ? 'open' : 'unseen' })),
@@ -171,5 +171,5 @@ const rows = (choices, kept, title = c => c.title) => choices.map(c => ({
 // the whole play: the turns (⚑) of chapters I–IV — five — and how it ended (game.md §3.5)
 const whole = kept => [
   ...CHAPTERS.slice(1, LAST).flatMap(ch => rows(ch.choices.filter(c => c.weight === '⚑'), kept, c => `${ch.number}. ${c.title}`)),
-  { title: 'Финал', weight: '⚑', options: ENDINGS.map(e => ({ label: e.label, state: e.id === facts(kept).ending ? 'chosen' : 'open' })) },
+  { title: tr('Finale'), weight: '⚑', options: ENDINGS.map(e => ({ label: e.label, state: e.id === facts(kept).ending ? 'chosen' : 'open' })) },
 ];

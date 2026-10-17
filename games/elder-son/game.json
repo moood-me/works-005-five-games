@@ -1,10 +1,12 @@
 {
   "type": "bespoke",
-  "title": "Старший сын",
-  "description": "Игра по пьесе Вампилова: студент опоздал на последнюю электричку и назвался чужому отцу старшим сыном.",
+  "title": "The Elder Son",
+  "description": "Night, a suburb, the last train gone. So as not to freeze till morning, Busygin passes himself off as Sarafanov's elder son. A joke that goes too far — and turns out to be truer than anyone is ready to admit.",
+  "line": "Two men miss the last train — and one of them calls himself a stranger's son.",
+  "source": "after the play by Alexander Vampilov",
   "genres": {
-    "драма": 80,
-    "отношения": 70
+    "drama": 80,
+    "relationships": 70
   },
   "world": "pavel--starshiy-syn",
   "scenes": []

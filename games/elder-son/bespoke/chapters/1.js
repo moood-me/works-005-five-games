@@ -1,5 +1,5 @@
-// I. Чужие окна (game.md §6). Two knock at the lit windows of the settlement (Окна); one window is left at the end of
-// the street; at Sarafanov's door ⚑ ask for the night — or say «I am his son»; hands at the stove (Руки); Sarafanov
+// I. Strangers' Windows (game.md §6). Two knock at the lit windows of the settlement (Windows); one window is left at the end of
+// the street; at Sarafanov's door ⚑ ask for the night — or say «I am his son»; hands at the stove (Hands); Sarafanov
 // comes home and takes the stranger for his son.
 // Reads: nothing. Leaves: choices.entry, scales.lie, shown.lie, shown.home, marks.knocked (the windows knocked at).
 import { SCENES } from '../story.js';
@@ -10,10 +10,10 @@ import ruki from '../minigames/ruki.js';
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 export default {
-  number: 'I', title: 'Чужие окна', wall: false,
-  titles: ['Окна', 'У двери', 'Руки', 'Сарафанов'],
+  number: 'I', title: tr('Strangers\' Windows'), wall: false,
+  titles: ['Windows', 'At the Door', 'Hands', 'Sarafanov'],
   choices: [
-    { id: 'entry', weight: '⚑', title: 'У двери', options: [{ id: 'asked', label: 'Попроситься на ночь' }, { id: 'said', label: '«Я его сын»' }] },
+    { id: 'entry', weight: '⚑', title: tr('At the Door'), options: [{ id: 'asked', label: tr('Ask to stay the night') }, { id: 'said', label: tr('“I\'m his son”') }] },
   ],
   steps: [
     // the street at night: knock where the light is still on
@@ -21,13 +21,13 @@ export default {
       g.beds({ wind: 0.5 });
       await g.scene(SCENES.street, { beat: 'walk' }, { cut: true });
       await g.beat('walk');
-      await g.say('silva', 'Стучим, где горит свет. Кто-нибудь да пустит');
+      await g.say('silva', 'We knock wherever there\'s a light. Someone\'s bound to let us in');
       await g.beat('knock_ready');
       g.set('beat_next', 'last_window');
       const r = await g.play(okna, { refuse: [
-        ref => g.say('neighbor_m', 'Иди, иди отсюда!', ref),
-        ref => g.say('neighbor_w', 'Ночь на дворе! Милицию позову!', ref),
-        ref => g.say('neighbor_old', 'Нету никого. Спят все', ref),
+        ref => g.say('neighbor_m', 'Go on, clear off!', ref),
+        ref => g.say('neighbor_w', 'It\'s the middle of the night! I\'ll call the police!', ref),
+        ref => g.say('neighbor_old', 'Nobody here. They\'re all asleep', ref),
       ] });
       for (let i = 1; i <= 5; i++) g.set(`win${i}`, 0);
       g.set('knock', 0);
@@ -36,7 +36,7 @@ export default {
       const corner = g.told('last_window:corner');
       const last = g.beat('last_window');
       await corner;
-      await g.say('narrator', 'Свет остался в одном окне — в конце улицы');
+      await g.say('narrator', 'One window was still lit — at the end of the street');
       await last;
     },
     // at the corner Sarafanov at Makarskaya's window; at his own door — ⚑ how to get in
@@ -48,42 +48,42 @@ export default {
       await g.scene(SCENES.street, { beat: 'neighbor' }, { cut: true });
       const neighbor = g.beat('neighbor');
       await answer;
-      await g.say('sarafanov', 'Наталья… Васеньки у вас нет? Простите, ради бога');
-      await g.say('makarskaya', 'Нет вашего Васеньки. Идите спать, Андрей Григорьевич', 'mak_window');
+      await g.say('sarafanov', 'Natalya… Is Vasenka at your place? Forgive me, for heaven\'s sake');
+      await g.say('makarskaya', 'Your Vasenka isn\'t here. Go to bed, Andrei Grigorievich', 'mak_window');
       await neighbor;
       on(g, 'porch:knock', () => g.sound.knock());
       const open = g.told('porch:open');
       const porch = g.beat('porch');
-      await g.say('silva', 'Сарафанов. Андрей Григорьевич. Сын — Васенька');
-      await g.say('silva', 'Слушай, студент. А ведь ты ему — сын. Старший');
+      await g.say('silva', 'Sarafanov. Andrei Grigorievich. The son\'s called Vasenka');
+      await g.say('silva', 'Listen, student. You\'re his son, you know. His elder son');
       await open;
       g.sound.door();
-      await g.say('vasenka', 'Вам кого?', 'vasenka');
+      await g.say('vasenka', 'Who do you want?', 'vasenka');
       await porch;
       const entry = await g.choose('entry', {
-        vasenka: [{ id: 'asked', label: 'Попроситься на ночь' }],
-        kitchen: [{ id: 'said', label: 'Сказать: «Я его сын»' }],
+        vasenka: [{ id: 'asked', label: tr('Ask to stay the night') }],
+        kitchen: [{ id: 'said', label: tr('Say: “I\'m his son”') }],
       });
       g.gauge('lie');
       g.apply('entry');
       if (entry === 'asked') {
-        await g.say('busygin', 'Пусти переночевать. Мы на электричку опоздали');
+        await g.say('busygin', 'Let us stay the night. We missed the train');
         const closed = g.told('shut:closed'), again = g.told('shut:again');
         on(g, 'shut:knock', () => g.sound.knock());
         const shut = g.beat('shut');
-        await g.say('vasenka', 'Тут не гостиница', 'vasenka');
+        await g.say('vasenka', 'This isn\'t a hotel', 'vasenka');
         await closed;
         g.sound.door();
-        await g.say('silva', 'Учись, студент');
+        await g.say('silva', 'Watch and learn, student');
         await again;
         g.sound.door();
-        await g.say('silva', 'Мы к Андрею Григорьевичу. Вот — сын его. Старший');
+        await g.say('silva', 'We\'ve come for Andrei Grigorievich. Here\'s his son. The elder one');
         await shut;
       } else {
-        await g.say('busygin', 'Я к отцу. Я — сын Андрея Григорьевича');
+        await g.say('busygin', 'I\'ve come to see my father. I\'m Andrei Grigorievich\'s son');
       }
       const inside = g.beat('in');
-      await g.say('vasenka', 'Сын?.. Ну, входите. Отец скоро придёт');
+      await g.say('vasenka', 'His son…? Well, come in. Father will be back soon');
       await inside;
     },
     // hands at the open stove door
@@ -98,11 +98,11 @@ export default {
       const turn = g.told('warm_up:turn');
       const warm = g.beat('warm_up');
       await turn;
-      await g.say('vasenka', 'Он вам обрадуется. Он всем радуется');
-      await g.say('vasenka', 'А я завтра уезжаю. В тайгу');
+      await g.say('vasenka', 'He\'ll be glad to see you. He\'s glad to see everybody');
+      await g.say('vasenka', 'And I\'m leaving tomorrow. For the taiga');
       await warm;
     },
-    // Sarafanov comes home: «Сын?..»
+    // Sarafanov comes home: “My son…?”
     async g => {
       g.beds({ wind: 0.4 });
       on(g, 'return:door', () => g.sound.door());
@@ -113,12 +113,12 @@ export default {
       await g.scene(SCENES.home, { beat: 'enter' }, { cut: true });
       const enter = g.beat('enter');
       await inside;
-      await g.say('silva', 'Андрей Григорьевич! Не узнаёте? Это же ваш сын');
-      await g.say('sarafanov', 'Сын?..');
+      await g.say('silva', 'Andrei Grigorievich! Don\'t you recognise him? It\'s your son');
+      await g.say('sarafanov', 'My son…?');
       await g.wait(2000); // (the clock)
-      await g.say('sarafanov', 'Сорок пятый год… Чернигов…');
+      await g.say('sarafanov', 'Nineteen forty-five… Chernigov…');
       await near;
-      await g.say('sarafanov', 'Похож. Честное слово, похож');
+      await g.say('sarafanov', 'He looks like me. My word, he does');
       await enter;
       const held = g.told('embrace:held');
       const embrace = g.beat('embrace');

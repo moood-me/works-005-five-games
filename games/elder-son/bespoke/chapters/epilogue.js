@@ -1,6 +1,6 @@
-// Эпилог (game.md §6). The window at the end of the street that night — the clarinet behind it, as the play has made it
+// Epilogue (game.md §6). The window at the end of the street that night — the clarinet behind it, as the play has made it
 // (facts.tune); the platform at dawn — Vasenka leaves by the first train, or it is empty. What became of Nina and
-// Vasenka the narrator does not say: it is seen. Then game.js shows «Состав» with the whole play.
+// Vasenka the narrator does not say: it is seen. Then game.js shows “The Yard” with the whole play.
 // Reads: facts (tune, ending, boxGone; the scenes carry vasya_end, nina_end…). Leaves: nothing. The scales hidden.
 import { SCENES, facts } from '../story.js';
 
@@ -8,8 +8,8 @@ import { SCENES, facts } from '../story.js';
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 export default {
-  number: '', title: 'Эпилог', wall: false,
-  titles: ['Окно', 'Рассвет'],
+  number: '', title: tr('Epilogue'), wall: false,
+  titles: ['The Window', 'Dawn'],
   choices: [],
   steps: [
     // the window at the end of the street
@@ -24,9 +24,9 @@ export default {
       // always (he left — or stayed, and no one came for him); now — nothing (it has sounded in the house already)
       if (f.tune === 'later') g.sound.clarinet({ times: 1, resolve: true, far: true });
       else if (f.tune === 'cut') g.sound.clarinet({ times: 1, far: true });
-      if (f.ending === 'saturday') await g.say('narrator', 'Окно в конце улицы горело до утра');
-      else if (f.ending === 'suitcase') await g.say('narrator', 'Чемодан он так и не разобрал');
-      if (f.boxGone) await g.say('narrator', 'Табакерка уехала с ним');
+      if (f.ending === 'saturday') await g.say('narrator', 'The window at the end of the street stayed lit till morning');
+      else if (f.ending === 'suitcase') await g.say('narrator', 'He never did unpack the suitcase');
+      if (f.boxGone) await g.say('narrator', 'The snuffbox went with him');
       await window;
     },
     // the platform at dawn: the first train

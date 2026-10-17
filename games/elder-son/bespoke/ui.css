@@ -56,7 +56,7 @@
   box-shadow: 0 1px 6px rgba(10, 16, 28, 0.4); }
 #layer .tools > button:hover { opacity: 1; }
 #layer .tools > button[hidden] { display: none; }
-/* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
+/* ☰: a window over the scene, below the site's header — “play as…”, then the chapters side by side, each a column
    of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
   background: rgba(8, 12, 20, 0.55); }

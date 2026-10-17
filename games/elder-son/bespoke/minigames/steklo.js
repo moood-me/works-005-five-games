@@ -1,21 +1,21 @@
-// «Стекло» (V.3, Платформа, после куска `glass`; камера в вагоне; game.md §7): пятно на `train_window#pane`, тереть;
-// протёрто — `wipe` (покрытие пятна, до 1); каждые 0.4 высоты кадра пути пальца — шорох ногтя по инею. `wipe` ≥ 0.8 —
-// clean. Электричка ждёт недолго: 15 с без движения — конец (neutral): видно столько, сколько протёрто.
-//   Чувство: уехал; хочет увидеть, кто остался; уезжает от них; игрок — протереть иней, его ложь, на стекле.
+// “The Glass” (V.3, the Platform, after the beat `glass`; the camera in the carriage; game.md §7): a spot on `train_window#pane`, rubbed;
+// rubbed — `wipe` (the spot's coverage, up to 1); every 0.4 of the frame's height of the finger's path — a nail's scratch on the frost. `wipe` ≥ 0.8 —
+// clean. The train does not wait long: 15 s without moving — the end (neutral): as much is seen as was rubbed.
+//   Feeling: he left; wants to see who stayed; is leaving them; the player — rubbing the frost, his lie, off the glass.
 //   → { wipe }
 import { until, keys } from '../hands.js';
 
-const SPOT = 0.3; // радиус пятна, доля высоты кадра
+const SPOT = 0.3; // the spot's radius, a share of the frame's height
 const CLEAR = 0.8;
-const STILL = 15; // с без движения
-const SCRAPE = 0.4; // высоты кадра пути — шорох
+const STILL = 15; // s without moving
+const SCRAPE = 0.4; // of the frame's height of path — a scratch
 
 export default {
-  title: 'Стекло', // как её зовёт ☰ автора
+  title: 'The Glass', // (as the author's ☰ lists it)
   about: 6,
   skipped: { wipe: 0.8 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Стекло вагона в инее. За ним — платформа' });
+    const mg = g.minigame({ phrase: tr('The carriage window is frosted over. Beyond it, the platform') });
     const send = keys(g);
     const h = () => b.frame()?.h || 600;
     const pane = mg.mark({ at: 'train_window#pane', kind: 'spot' });

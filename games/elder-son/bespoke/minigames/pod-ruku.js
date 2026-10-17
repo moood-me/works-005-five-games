@@ -1,26 +1,26 @@
-// «Под руку» (III.1, Косогор, после куска `meet`; game.md §7): путь по обледенелой тропе 0…1 (`down`; где они сейчас —
-// `down_at`, ставит сцена; походка `careful`). Держать где угодно — идут: `down` = min(`down_at` + 0.08, 1); отпустил —
-// `down` = `down_at`: стоят. На ледяной полосе сцена говорит `down:slip` и сама останавливает обоих; держание кончается
-// (один палец: чтобы поймать, его надо поднять); на `sarafanov#shoulder_l` — кольцо с дугой времени 1.5 с. Нажал —
-// поймал (`catch` 1, хруст снега), через 1.5 с можно идти. Не нажал — ошибка (отстал), Сарафанов садится в снег
-// (`fall` 1, мягкое падение), счёт `falls`; через 2 с встаёт, ещё 2 с — можно идти. Конец: у ворот (`down_at` ≥ 0.98).
-//   Чувство: ведёт чужого отца вниз по льду; хочет, чтобы тот не упал; узнал его тайну — бережно; игрок — забота рукой.
+// “Arm in Arm” (III.1, the Hillside, after the beat `meet`; game.md §7): the way down the iced path 0…1 (`down`; where they are now —
+// `down_at`, the scene sets it; the gait `careful`). Held anywhere — they walk: `down` = min(`down_at` + 0.08, 1); let go —
+// `down` = `down_at`: they stand. On a strip of ice the scene tells `down:slip` and stops them both itself; the hold ends
+// (one finger: to catch him it must be lifted); on `sarafanov#shoulder_l` — a ring with an arc of time, 1.5 s. Pressed —
+// caught (`catch` 1, the snow crunches), 1.5 s later they can walk on. Not pressed — a mistake (behind), Sarafanov sits down in the snow
+// (`fall` 1, a soft fall), counted in `falls`; 2 s later he gets up, 2 s more — they can walk on. The end: at the gate (`down_at` ≥ 0.98).
+//   Feeling: leading a stranger's father down the ice; wants him not to fall; has learnt his secret — gently; the player — care in a hand.
 //   → { falls }
 import { until, keys } from '../hands.js';
 
-const AHEAD = 0.08; // насколько цель впереди того, где они
-const CATCH = 1.5; // с — дуга времени
-const CAUGHT = 1.5; // с — держит его, потом можно идти
-const DOWN = 2, UP = 2; // с — сидит в снегу; встав, ещё стоит
+const AHEAD = 0.08; // how far the aim is ahead of where they are
+const CATCH = 1.5; // s — the arc of time
+const CAUGHT = 1.5; // s — holding him, then they can walk on
+const DOWN = 2, UP = 2; // s — sitting in the snow; up, still standing
 const GATE = 0.98;
 const SLIP_MS = 600000;
 
 export default {
-  title: 'Под руку', // как её зовёт ☰ автора
+  title: 'Arm in Arm', // (as the author's ☰ lists it)
   about: 36,
   skipped: { falls: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Тропа обледенела. Старик ступает осторожно' });
+    const mg = g.minigame({ phrase: tr('The path is iced over. The old man treads carefully') });
     const send = keys(g);
     const at = () => +g.get('down_at') || 0;
     const pause = s => { const t0 = mg.t; return until(mg, ({ t }) => t - t0 >= s); };
@@ -30,7 +30,7 @@ export default {
       if (first) b.minigame.tricks.teach(mg, [walk], { id: 'hold:anywhere' });
       first = false;
     };
-    // (сцена говорит `down:slip` на каждой ледяной полосе: ожидание — заново после каждого)
+    // (the scene tells `down:slip` on every strip of ice: waited for anew after each)
     const listen = () => g.told('down:slip', SLIP_MS).then(ok => { if (ok && !signal.aborted) { slipped = true; listen(); } });
     listen();
     send('catch', 0);
@@ -45,7 +45,7 @@ export default {
       });
       if (!step) return this.skipped;
       if (!slipped) break;
-      // поскользнулся: стоят; держание кончилось — поймать можно, только подняв палец
+      // he slipped: they stand; the hold is over — he can be caught only with the finger lifted
       slipped = false;
       walk.remove();
       send('down', at());

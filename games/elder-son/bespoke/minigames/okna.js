@@ -1,25 +1,25 @@
-// «Окна» (I.1, Улица, после куска `knock_ready`; game.md §7): пять окон посёлка ещё горят (`win1…win5` = 1); на каждом
-// горящем — кольцо, нажать (касание и есть стук, без лепестков). Нажато окно N: ход сцены (метки скрыты) — Бусыгин
-// идёт и стучит (`knock` = N; сцена говорит `knock:hit`, `knock:done`); в окне силуэт (`winN` = 2); первые три —
-// отказ голосом (opts.refuse[i]), четвёртое и пятое — молча, лает собака; окно гаснет. Ждать — тоже путь: каждые 9 с
-// без касания гаснет горящее окно с наименьшим номером. Снег гуще с каждым тёмным. Все пять тёмные — конец (neutral).
-//   Чувство: стучит в чужие окна; хочет, чтобы пустили; замёрз, неловко будить людей; игрок — холод и закрытый мир.
-//   opts: { refuse: [ref => …, ref => …, ref => …] — три отказа, каждый своей репликой у окна ref ('winN') }
-//   → { knocked: [номера окон, в которые стучал, по порядку] }
+// “Windows” (I.1, the Street, after the beat `knock_ready`; game.md §7): five windows of the settlement still lit (`win1…win5` = 1); on each
+// lit one a ring, pressed (the touch is the knock itself, no petals). Window N pressed: the scene's turn (the marks hidden) — Busygin
+// goes and knocks (`knock` = N; the scene tells `knock:hit`, `knock:done`); a figure in the window (`winN` = 2); the first three —
+// a refusal aloud (opts.refuse[i]), the fourth and fifth — silence, a dog barks; the window goes dark. Waiting is a way too: every 9 s
+// with no touch the lit window with the lowest number goes dark. The snow thicker with each dark one. All five dark — the end (neutral).
+//   Feeling: knocking at strangers' windows; wants to be let in; frozen, awkward about waking people; the player — the cold and a shut world.
+//   opts: { refuse: [ref => …, ref => …, ref => …] — three refusals, each a line of its own at the window ref ('winN') }
+//   → { knocked: [the numbers of the windows knocked at, in order] }
 import { until, keys } from '../hands.js';
 
 const WINDOWS = 5;
-const IDLE = 9; // с без касания — гаснет окно с наименьшим номером
-const SILHOUETTE = 0.6; // с: силуэт в окне до ответа
-const AFTER = 1; // с после ответа — окно гаснет
-const KNOCK_MS = 30000; // мс: ждать стука и его конца (ход сцены — до 8 с)
+const IDLE = 9; // s with no touch — the window with the lowest number goes dark
+const SILHOUETTE = 0.6; // s: the figure in the window before the answer
+const AFTER = 1; // s after the answer — the window goes dark
+const KNOCK_MS = 30000; // ms: waiting for the knock and its end (the scene's turn — up to 8 s)
 
 export default {
-  title: 'Окна', // как её зовёт ☰ автора
+  title: 'Windows', // (as the author's ☰ lists it)
   about: 50,
   skipped: { knocked: [] },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Ночь. В посёлке ещё горит свет — в пяти окнах' });
+    const mg = g.minigame({ phrase: tr('Night. In the settlement the light is still on in five windows') });
     const send = keys(g);
     const pause = s => { const t0 = mg.t; return until(mg, ({ t }) => t - t0 >= s); };
     const lit = new Set(), marks = new Map(), presses = [];
@@ -34,7 +34,7 @@ export default {
       marks.set(n, mark);
       presses.push(press);
     }
-    // (ждать — путь: палец показывают только при первой встрече, не когда игрок замер)
+    // (waiting is a way: the finger is shown only at the first meeting, not when the player stands still)
     b.minigame.tricks.teach(mg, presses, { id: 'press:okna', still: null });
     const out = n => {
       lit.delete(n);
@@ -49,14 +49,14 @@ export default {
     while (lit.size) {
       pressed = null;
       idle = 0;
-      // нажали — или 9 с без касания
+      // pressed — or 9 s with no touch
       const went = await until(mg, ({ dt }) => {
         if (pressed) return true;
         idle += dt;
         return idle >= IDLE;
       });
       if (!went) return this.skipped;
-      if (!pressed) { out(Math.min(...lit)); continue; } // (люди ложатся)
+      if (!pressed) { out(Math.min(...lit)); continue; } // (people go to bed)
       const n = pressed;
       busy = true;
       knocked.push(n);

@@ -1,22 +1,22 @@
-// «Руки» (I.3, Дом, после куска `kitchen`; вставка `stove` открыта; game.md §7): на `hands#hands` — пятно, тереть.
-// Отогрев `thaw` растёт, пока палец живо трёт по пятну, — так, что живого растирания нужно ≈ 10 с (своё число: покрытие
-// пятна языка набирается быстрее); `rub` — направление и скорость пальца, знак dx · min(1, |dx|/dt / 1.5 высоты кадра в
-// секунду). Стоит без дела — ничего не остывает. На смене направления — шорох ладоней. `thaw` 1 — `rub` 0, через 1 с
-// конец (clean).
-//   Чувство: греет руки у чужой печи; хочет согреться; тепло взято ложью — неловко; игрок — тепло, которое жжёт.
-//   → { seconds: от первого касания до конца }
+// “Hands” (I.3, the Home, after the beat `kitchen`; the insert `stove` open; game.md §7): on `hands#hands` — a spot, rubbed.
+// The thaw `thaw` grows while the finger rubs the spot briskly — so that ≈ 10 s of brisk rubbing are needed (a number of its own: the
+// language's spot coverage fills faster); `rub` — the finger's way and speed, the sign of dx · min(1, |dx|/dt / 1.5 frame heights a
+// second). Left idle — nothing cools. At each change of way — the palms rustle. `thaw` 1 — `rub` 0, 1 s later
+// the end (clean).
+//   Feeling: warming his hands at a stranger's stove; wants to get warm; the warmth is taken by a lie — awkward; the player — warmth that burns.
+//   → { seconds: from the first touch to the end }
 import { until, keys } from '../hands.js';
 
-const RUB = 10; // с живого растирания до тепла
-const LIVELY = 1.5; // высот кадра в секунду — скорость пальца «вовсю»
-const SPOT = 0.22; // радиус пятна, доля высоты кадра
+const RUB = 10; // s of brisk rubbing till warm
+const LIVELY = 1.5; // frame heights a second — the finger's speed “for all it's worth”
+const SPOT = 0.22; // the spot's radius, a share of the frame's height
 
 export default {
-  title: 'Руки', // как её зовёт ☰ автора
+  title: 'Hands', // (as the author's ☰ lists it)
   about: 12,
   skipped: { seconds: 10 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Руки с мороза не гнутся. Дверца печи открыта' });
+    const mg = g.minigame({ phrase: tr('Hands too frozen to bend. The stove door is open') });
     const send = keys(g);
     const h = () => b.frame()?.h || 600;
     const spot = mg.mark({ at: 'hands#hands', kind: 'spot' });

@@ -1,6 +1,6 @@
-// II. Табакерка (game.md §6). Nina and her cadet at the gate; supper — «Все люди — братья!»; tea and Galya Busygina
-// (Чай) — ~ «she remembered» or «she never told»; the grandfather's snuffbox, always the elder son's — ⚑ take it
-// (Табакерка) or not; the clarinet behind the wall; at dawn — ⚑ slip away (На цыпочках) or stay (Иней).
+// II. The Snuffbox (game.md §6). Nina and her cadet at the gate; supper — “All men are brothers!”; tea and Galya Busygina
+// (Tea) — ~ «she remembered» or «she never told»; the grandfather's snuffbox, always the elder son's — ⚑ take it
+// (The Snuffbox) or not; the clarinet behind the wall; at dawn — ⚑ slip away (On Tiptoe) or stay (Frost).
 // Reads: nothing. Leaves: choices.galya, .box, .dawn; marks.sarafanov; scales home, lie.
 import { SCENES } from '../story.js';
 import chai from '../minigames/chai.js';
@@ -12,12 +12,12 @@ import inei from '../minigames/inei.js';
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 export default {
-  number: 'II', title: 'Табакерка',
-  titles: ['Нина', 'Ужин', 'Галя', 'Табакерка', 'Кларнет', 'Рассвет'],
+  number: 'II', title: tr('The Snuffbox'),
+  titles: ['Nina', 'Supper', 'Galya', 'The Snuffbox', 'The Clarinet', 'Dawn'],
   choices: [
-    { id: 'galya', weight: '~', title: 'Галя', options: [{ id: 'remembered', label: '«Помнила»' }, { id: 'never', label: '«Не рассказывала»' }] },
-    { id: 'box', weight: '⚑', title: 'Табакерка', options: [{ id: 'take', label: 'Взять' }, { id: 'refuse', label: 'Не брать' }] },
-    { id: 'dawn', weight: '⚑', title: 'Рассвет', options: [{ id: 'leave', label: 'Уйти тайком' }, { id: 'stay', label: 'Остаться' }] },
+    { id: 'galya', weight: '~', title: tr('Galya'), options: [{ id: 'remembered', label: tr('“She remembered”') }, { id: 'never', label: tr('“Never told me”') }] },
+    { id: 'box', weight: '⚑', title: tr('The Snuffbox'), options: [{ id: 'take', label: tr('Take it') }, { id: 'refuse', label: tr('Don\'t take it') }] },
+    { id: 'dawn', weight: '⚑', title: tr('Dawn'), options: [{ id: 'leave', label: tr('Slip away') }, { id: 'stay', label: tr('Stay') }] },
   ],
   steps: [
     // Nina and the cadet at the gate; inside — «your brother»
@@ -27,16 +27,16 @@ export default {
       await g.scene(SCENES.street, { beat: 'gate' });
       const gate = g.beat('gate');
       await watch;
-      await g.say('kudimov', 'Ноль пятьдесят. В час я должен быть в казарме');
-      await g.say('nina', 'Иди, Миша. Опоздаешь');
+      await g.say('kudimov', 'Zero fifty. I have to be in barracks by one');
+      await g.say('nina', 'Go on, Misha. You\'ll be late');
       await gate;
       g.beds({ room: 0.4, clock: 0.4 }, 1);
       const door = g.told('nina_in:door');
       await g.scene(SCENES.home, { beat: 'nina_in' }, { cut: true });
       const nina = g.beat('nina_in');
       await door;
-      await g.say('sarafanov', 'Нина! Это Володя. Твой брат');
-      await g.say('nina', 'Брат. Ну конечно');
+      await g.say('sarafanov', 'Nina! This is Volodya. Your brother');
+      await g.say('nina', 'A brother. Well, of course');
       await nina;
     },
     // supper: a toast, the glasses
@@ -46,12 +46,12 @@ export default {
       await g.scene(SCENES.home, { beat: 'supper' });
       const supper = g.beat('supper');
       await toast;
-      await g.say('sarafanov', 'Все люди — братья!');
+      await g.say('sarafanov', 'All men are brothers!');
       await supper;
-      await g.choose(null, { 'table#glass': [{ id: 'clink', label: 'Чокнуться' }] });
+      await g.choose(null, { 'table#glass': [{ id: 'clink', label: tr('Clink glasses') }] });
       g.sound.glass();
       const after = g.beat('supper_after');
-      await g.say('narrator', 'Сарафанов писал ораторию «Все люди — братья»');
+      await g.say('narrator', 'Sarafanov was writing an oratorio, “All Men Are Brothers”');
       await after;
     },
     // tea, and the question that spills over: ~ what to say of Galya
@@ -59,11 +59,11 @@ export default {
       g.beds({ room: 0.3, clock: 0.5 });
       await g.scene(SCENES.home, { beat: 'talk' });
       const talk = g.beat('talk');
-      await g.say('sarafanov', 'Галя Бусыгина… Я ей писал. Она не ответила');
+      await g.say('sarafanov', 'Galya Busygina… I wrote to her. She never answered');
       await talk;
       let asked = false;
-      await g.play(chai, { ask: () => { asked = true; return g.say('sarafanov', 'Она меня… вспоминала?', 'narrator'); } });
-      if (!asked) await g.say('sarafanov', 'Она меня… вспоминала?', 'narrator');
+      await g.play(chai, { ask: () => { asked = true; return g.say('sarafanov', 'Did she… remember me?', 'narrator'); } });
+      if (!asked) await g.say('sarafanov', 'Did she… remember me?', 'narrator');
       g.set('glass1', 1);
       g.set('glass2', 1);
       g.set('pour', 0);
@@ -72,13 +72,13 @@ export default {
       g.set('spill', 1); // (the question spills over always; skipped — the same trace)
       g.sound.pour(0, 0.3);
       await g.beat('talk_back');
-      const galya = await g.choose('galya', { sarafanov: [{ id: 'remembered', label: '«Помнила»' }, { id: 'never', label: '«Не рассказывала»' }] });
+      const galya = await g.choose('galya', { sarafanov: [{ id: 'remembered', label: tr('“She remembered”') }, { id: 'never', label: tr('“Never told me”') }] });
       g.apply('galya');
       if (galya === 'remembered') {
-        await g.say('busygin', 'Помнила. Часто');
+        await g.say('busygin', 'She remembered. Often');
         await g.beat('galya_yes');
       } else {
-        await g.say('busygin', 'Мама про вас не рассказывала');
+        await g.say('busygin', 'Mum never told me about you');
         await g.beat('galya_no');
       }
     },
@@ -89,10 +89,10 @@ export default {
       await g.scene(SCENES.home, { beat: 'box_out' }, { cut: true });
       const out = g.beat('box_out');
       await down;
-      await g.say('sarafanov', 'Табакерка моего деда. Её всегда отдавали старшему сыну');
-      await g.say('sarafanov', 'Возьми');
+      await g.say('sarafanov', 'My grandfather\'s snuffbox. It always went to the elder son');
+      await g.say('sarafanov', 'Take it');
       await out;
-      const box = await g.choose('box', { 'table#box': [{ id: 'take', label: 'Взять' }, { id: 'refuse', label: 'Не брать' }] });
+      const box = await g.choose('box', { 'table#box': [{ id: 'take', label: tr('Take it') }, { id: 'refuse', label: tr('Don\'t take it') }] });
       g.apply('box');
       if (box === 'take') {
         await g.beat('box_take');
@@ -102,10 +102,10 @@ export default {
         const back = g.told('box_kept:back');
         const kept = g.beat('box_kept');
         await back;
-        await g.say('sarafanov', 'Ну вот. Теперь я спокоен');
+        await g.say('sarafanov', 'There. Now my mind\'s at rest');
         await kept;
       } else {
-        await g.say('busygin', 'Не надо. Пусть Васе');
+        await g.say('busygin', 'No, don\'t. Let Vasya have it');
         await g.beat('box_give');
         await g.play(tabakerka, { mode: 'give' });
         g.set('push', 1);
@@ -113,7 +113,7 @@ export default {
         const shelf = g.told('box_back:shelf');
         const back = g.beat('box_back');
         await shelf;
-        await g.say('sarafanov', 'Ну… Пусть полежит. Она подождёт');
+        await g.say('sarafanov', 'Well… Let it stay where it is. It can wait');
         await back;
       }
     },
@@ -124,9 +124,9 @@ export default {
       const turn = g.told('wall:turn');
       await g.scene(SCENES.home, { beat: 'wall' });
       const wall = g.beat('wall');
-      await g.say('silva', 'У меня батя тоже есть. В Чите. Пишет раз в год — денег просит', 'silva');
+      await g.say('silva', 'I\'ve got a dad too. In Chita. Writes once a year — asking for money', 'silva');
       await turn;
-      await g.say('narrator', 'За стеной он играл одно и то же место. Дальше оно не шло');
+      await g.say('narrator', 'Behind the wall he played the same passage over and over. It never went any further');
       await wall;
     },
     // dawn: ⚑ slip away with Silva, or stay
@@ -136,11 +136,11 @@ export default {
       await g.scene(SCENES.home, { beat: 'wake' });
       const wake = g.beat('wake');
       await up;
-      await g.say('silva', 'Подъём. Первая — в шесть ноль пять. Уходим по-тихому');
+      await g.say('silva', 'Rise and shine. The first one\'s at six-oh-five. We slip out quietly');
       await wake;
       const dawn = await g.choose('dawn', {
-        'cot_chair#coat': [{ id: 'leave', label: 'Уйти тайком' }],
-        cot: [{ id: 'stay', label: 'Остаться' }],
+        'cot_chair#coat': [{ id: 'leave', label: tr('Slip away') }],
+        cot: [{ id: 'stay', label: tr('Stay') }],
       });
       g.apply('dawn');
       if (dawn === 'leave') {
@@ -157,15 +157,15 @@ export default {
         on(g, 'caught:out', () => g.sound.door());
         const caught = g.beat('caught');
         await face;
-        await g.say('sarafanov', 'Уходите?.. Вот и Нина уходит. И Вася. Все уходят');
-        await g.say('silva', 'Да мы… за папиросами');
-        await g.say('sarafanov', 'Останься до вечера, Володя. Нина жениха приведёт');
+        await g.say('sarafanov', 'Leaving…? Nina\'s leaving too. And Vasya. Everyone\'s leaving');
+        await g.say('silva', 'We\'re just… going for cigarettes');
+        await g.say('sarafanov', 'Stay till evening, Volodya. Nina\'s bringing her fiancé');
         await hook;
-        await g.say('sarafanov', 'Пойду. В филармонии репетиция');
+        await g.say('sarafanov', 'I\'ll be off. There\'s a rehearsal at the Philharmonic');
         await caught;
       } else {
         const watch = g.beat('window_watch');
-        await g.say('silva', 'Ну и сиди, сынок');
+        await g.say('silva', 'Sit there, then, sonny');
         await watch;
         const r = await g.play(inei);
         g.set('far_train', 1);
@@ -175,11 +175,11 @@ export default {
         on(g, 'morning:out', () => g.sound.door());
         const morning = g.beat('morning');
         await inside;
-        await g.say('sarafanov', 'Не спится? И мне');
-        await g.say('sarafanov', 'Пойду. В филармонии репетиция');
+        await g.say('sarafanov', 'Can\'t sleep? Nor can I');
+        await g.say('sarafanov', 'I\'ll be off. There\'s a rehearsal at the Philharmonic');
         await morning;
       }
-      await g.say('narrator', 'Он сказал, что идёт в филармонию');
+      await g.say('narrator', 'He said he was going to the Philharmonic');
     },
   ],
 };

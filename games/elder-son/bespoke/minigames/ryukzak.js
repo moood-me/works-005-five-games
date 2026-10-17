@@ -1,26 +1,26 @@
-// «Рюкзак» (IV.1, Платформа, после куска `strap`; вставка `strap` открыта, двери вагона за ней открыты; game.md §7):
-// кольцо с желобом на `strap#grip`, держать; дуга опасности — как тянет Васенька (`pull`). Он тянет: `pull` растёт на
-// 0.12 в секунду и рывками +0.15 каждые 2–3 с. Держат — кулак сжат (`grip` 1), `pull` −0.2 в секунду (не ниже 0);
-// отпустил — `grip` 0, `pull` +0.25 в секунду. `pull` 1 — вырвался: ошибка (сорвал), счёт `slips`, `pull` 0.6, кулак
-// снова сжат на 1 с (поймал). Через 22 с — сцена своим ходом: двери шипят и закрываются (`door_bg` → 1 за 1.5 с),
-// ремень обвисает (`pull` → 0 за 1 с), конец (clean / flawed).
-//   Чувство: держит младшего за рюкзак, говоря «я не держу»; хочет, чтобы тот не уехал; смешно и больно; игрок — «не
-//   держу» — и держу.
+// “The Rucksack” (IV.1, the Platform, after the beat `strap`; the insert `strap` open, the carriage doors behind it open; game.md §7):
+// a ring with a groove on `strap#grip`, held; the arc of danger — how Vasenka pulls (`pull`). He pulls: `pull` grows
+// 0.12 a second and by jerks of +0.15 every 2–3 s. Held — the fist clenched (`grip` 1), `pull` −0.2 a second (not below 0);
+// let go — `grip` 0, `pull` +0.25 a second. `pull` 1 — torn free: a mistake (jerked away), counted in `slips`, `pull` 0.6, the fist
+// clenched again for 1 s (caught). After 22 s — the scene goes its own way: the doors hiss and shut (`door_bg` → 1 over 1.5 s),
+// the strap goes slack (`pull` → 0 over 1 s), the end (clean / flawed).
+//   Feeling: holding the younger one by his rucksack while saying “I'm not holding you”; wants him not to leave; funny and painful; the player — “I'm not
+//   holding you” — and holding.
 //   → { slips }
 import { until, keys } from '../hands.js';
 
-const PULL = 0.12, JERK = 0.15; // в секунду; рывок
-const JERK_EVERY = [2, 3]; // с между рывками
-const HELD = -0.2, LOOSE = 0.25; // в секунду: держат; отпустил
-const CAUGHT = 1; // с — снова поймал
-const DOORS = 22; // с — двери закрываются
+const PULL = 0.12, JERK = 0.15; // a second; a jerk
+const JERK_EVERY = [2, 3]; // s between jerks
+const HELD = -0.2, LOOSE = 0.25; // a second: held; let go
+const CAUGHT = 1; // s — caught again
+const DOORS = 22; // s — the doors shut
 
 export default {
-  title: 'Рюкзак', // как её зовёт ☰ автора
+  title: 'The Rucksack', // (as the author's ☰ lists it)
   about: 25,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Двери вагона открыты. Васенька тянет рюкзак к себе' });
+    const mg = g.minigame({ phrase: tr('The carriage doors are open. Vasenka pulls the rucksack his way') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });
@@ -32,7 +32,7 @@ export default {
     const done = await until(mg, ({ t, dt }) => {
       const held = hold.state.held || t < caughtTill;
       if (held) touched = true;
-      // (до первого касания он тянет сам; потом — держат или отпустили)
+      // (till the first touch he pulls by himself; then — held or let go)
       pull += (held ? HELD : touched ? LOOSE : PULL) * dt;
       if (t >= jerkAt) { pull += JERK; jerkAt = t + JERK_EVERY[0] + Math.random() * (JERK_EVERY[1] - JERK_EVERY[0]); }
       pull = Math.max(0, pull);

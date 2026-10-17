@@ -1,4 +1,4 @@
-// The sounds of «Старший сын», made in the page (Web Audio): nothing to load; as loud as the page's "sounds" slider says
+// The sounds of “The Elder Son”, made in the page (Web Audio): nothing to load; as loud as the page's "sounds" slider says
 // (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes it then; till then its
 // time stands, and what was asked for begins at the touch. (game.md §8.)
 //   wake() — the page may be heard from now on (called on the first touch)
@@ -10,7 +10,7 @@
 // there over `seconds`:
 //   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
 //   wind — low wind in random gusts (ambience.js) · rails — the far railway: every 20–40 s
-//   far wheels («та-та, та-та»), now and then a far horn · train — the electric train close by: the motor's hum, the
+//   far wheels (“ta-ta, ta-ta”), now and then a far horn · train — the electric train close by: the motor's hum, the
 //   wheels on the joints · freight — the goods train: heavier, faster wheels, the screech, the diesel · crossing — the
 //   level crossing's bell, twice a second · room — the room's hum and the stove's crackle · clock — the wall clock: tick
 //   and tock in turn, every 0.5 s · fire — a fire · crowd — people far off · pour — tea into a glass: recordings
@@ -26,7 +26,7 @@
 import { built, kit } from './ambience.js';
 
 // The world's key is A♭ major / F minor (A_FLAT_MAJOR_F_MINOR): the phrase and the march are in F minor.
-// PHRASE — the oratorio «Все люди — братья», the place he cannot get past: C F A♭ G F E, and the seventh — D♭ — breaks
+// PHRASE — the oratorio “All Men Are Brothers”, the place he cannot get past: C F A♭ G F E, and the seventh — D♭ — breaks
 // off at its first 80 ms (the same intervals as game.md's D-minor reading: A D F E D C♯ | B♭). Resolved: the seventh is
 // F — found — whole, and on: G A♭ C, and F an octave up, long. [midi, beats]
 export const PHRASE = [[60, 1], [65, 2], [68, 1], [67, 1], [65, 1], [64, 2.5]];
@@ -212,7 +212,7 @@ function syllable(t, dest, { f1, f2, len, loud, kind = 'pink', pitch }) {
   shape(e.gain, t, [[len * 0.25, loud], [len * 0.6, loud * 0.7], [len, 0]]);
   e.connect(dest);
 }
-// wheels over a rail joint: two knocks a bogie, «та-та» — `gap` between the two, `loud`, `f` how deep
+// wheels over a rail joint: two knocks a bogie, “ta-ta” — `gap` between the two, `loud`, `f` how deep
 function joint(t, dest, { gap = 0.12, loud = 0.5, f = 160 }) {
   for (const s of [0, gap]) {
     burst(t + s, dest, { kind: 'brown', f, Q: 1.2, len: 0.09, loud });
@@ -301,7 +301,7 @@ export function wind(level = 1, seconds = 2) { bed('wind', 0.2, 'street', ({ a, 
 
 export function rails(level = 1, seconds = 2) {
   bed('rails', 0.6, 'street', ({ a, t, out, every }) => {
-    // the far railway: a train passing somewhere — its wheels «та-та, та-та» swelling and fading; now and then a horn
+    // the far railway: a train passing somewhere — its wheels “ta-ta, ta-ta” swelling and fading; now and then a horn
     const far = filter({ type: 'lowpass', frequency: 700, Q: 0.5 }), e = a.createGain();
     e.gain.value = 0.6;
     far.connect(e).connect(out);
@@ -366,7 +366,7 @@ export function freight(level = 1, seconds = 2) {
 
 export function crossing(level = 1, seconds = 2) {
   bed('crossing', 0.35, 'street', ({ a, t, out, every }) => {
-    // the level crossing's bell: a metal «динь» twice a second (two sines 1.9 / 2.4 kHz, a quick fall)
+    // the level crossing's bell: a metal “ding” twice a second (two sines 1.9 / 2.4 kHz, a quick fall)
     every(schedule(a, t + 0.1, at => {
       ring(at, out, [[1900, 0.32, 0.12], [2400, 0.26, 0.08], [4750, 0.1, 0.02]], 0.002);
       return at + 0.5;
@@ -390,7 +390,7 @@ export function room(level = 1, seconds = 2) {
 
 export function clock(level = 1, seconds = 2) {
   bed('clock', 0.3, 'room', ({ a, t, out, every }) => {
-    // the wall clock: «тик» and «так» in turn, each every 0.5 s — short clicks of two pitches through a 3 kHz resonance
+    // the wall clock: “tick” and “tock” in turn, each every 0.5 s — short clicks of two pitches through a 3 kHz resonance
     const res = filter({ type: 'peaking', frequency: 3000, Q: 4, gain: 9 });
     res.connect(out);
     let tick = true;

@@ -1,6 +1,6 @@
-// IV. Пожар (game.md §6). Vasenka on the platform bench with his rucksack — «don't hold me»: the strap (Рюкзак); the
+// IV. The Fire (game.md §6). Vasenka on the platform bench with his rucksack — «don't hold me»: the strap (The Rucksack); the
 // bridegroom at nine — ~ let Nina go to Sakhalin, ask her to stay for father, or (if she knows the truth) for him; the
-// shed on fire (Вёдра) — ⚑ take the blame for Vasenka, or let him own up.
+// shed on fire (Buckets) — ⚑ take the blame for Vasenka, or let him own up.
 // Reads: facts.ninaIs. Leaves: choices.kudimov, .fire; marks.nina_stay, .vasenka, .silva; scales home, lie.
 import { SCENES, facts } from '../story.js';
 import ryukzak from '../minigames/ryukzak.js';
@@ -10,11 +10,11 @@ import vyodra from '../minigames/vyodra.js';
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 export default {
-  number: 'IV', title: 'Пожар',
-  titles: ['Рюкзак', 'Жених', 'Пожар'],
+  number: 'IV', title: tr('The Fire'),
+  titles: ['The Rucksack', 'The Fiancé', 'The Fire'],
   choices: [
-    { id: 'kudimov', weight: '~', title: 'Жених', options: [{ id: 'let', label: '«Пусть едет»' }, { id: 'ask', label: '«Нина, останься»' }, { id: 'for_me', label: '«Останься. Не ради отца»' }] },
-    { id: 'fire', weight: '⚑', title: 'Пожар', options: [{ id: 'blame', label: 'Взять на себя' }, { id: 'own_up', label: 'Пусть скажет сам' }] },
+    { id: 'kudimov', weight: '~', title: tr('The Fiancé'), options: [{ id: 'let', label: tr('“Let her go”') }, { id: 'ask', label: tr('“Nina, stay”') }, { id: 'for_me', label: tr('“Stay. Not for Father\'s sake”') }] },
+    { id: 'fire', weight: '⚑', title: tr('The Fire'), options: [{ id: 'blame', label: tr('Take the blame') }, { id: 'own_up', label: tr('Let him own up') }] },
   ],
   steps: [
     // Vasenka on the bench, the train's open door, the strap
@@ -24,8 +24,8 @@ export default {
       await g.scene(SCENES.platform, { beat: 'bench' });
       const bench = g.beat('bench');
       await sit;
-      await g.say('vasenka', 'Не держи. Всё равно уеду');
-      await g.say('busygin', 'Я не держу');
+      await g.say('vasenka', 'Don\'t hold me back. I\'m going anyway');
+      await g.say('busygin', 'I\'m not holding you');
       await bench;
       on(g, 'strap:open', () => g.sound.doors());
       const strap = g.beat('strap');
@@ -40,7 +40,7 @@ export default {
       const back = g.beat('bench_back');
       g.beds({ wind: 0.2 }, 6);
       await sat;
-      await g.say('vasenka', 'Ладно. Пошли жениха смотреть');
+      await g.say('vasenka', 'All right. Let\'s go and see the fiancé');
       await back;
     },
     // the bridegroom at nine: Sakhalin — ~ what the elder brother says
@@ -50,48 +50,48 @@ export default {
       const inside = g.told('table:in'), sat = g.told('table:sat');
       await g.scene(SCENES.home, { beat: 'table' });
       const table = g.beat('table');
-      await g.say('narrator', 'Жениха ждали к девяти');
+      await g.say('narrator', 'The fiancé was expected at nine');
       await inside;
       g.sound.door();
-      await g.say('kudimov', 'Двадцать один ноль-ноль. Курсант Кудимов');
+      await g.say('kudimov', 'Twenty-one hundred. Cadet Kudimov');
       await sat;
-      await g.say('kudimov', 'Нина сказала — у неё брат нашёлся. Поздравляю');
+      await g.say('kudimov', 'Nina says her brother has turned up. Congratulations');
       await table;
       const news = g.told('toast:news'), turn = g.told('toast:turn');
       const toast = g.beat('toast');
       await news;
-      await g.say('kudimov', 'Я никогда не вру. Это у меня принцип');
-      await g.say('kudimov', 'Мы с Ниной в субботу уезжаем. На Сахалин');
+      await g.say('kudimov', 'I never lie. It\'s a principle with me');
+      await g.say('kudimov', 'Nina and I leave on Saturday. For Sakhalin');
       await turn;
-      await g.say('sarafanov', 'Скажи хоть ты, Володя. Ты старший');
+      await g.say('sarafanov', 'You say something, Volodya. You\'re the eldest');
       await toast;
       const f = facts(g.state);
       const said = await g.choose('kudimov', {
-        kudimov: [{ id: 'let', label: '«Пусть едет»' }],
-        sarafanov: [{ id: 'ask', label: '«Нина, останься»' }],
-        ...(f.ninaIs === 'knows' ? { nina: [{ id: 'for_me', label: '«Останься. Не ради отца»' }] } : {}),
+        kudimov: [{ id: 'let', label: tr('“Let her go”') }],
+        sarafanov: [{ id: 'ask', label: tr('“Nina, stay”') }],
+        ...(f.ninaIs === 'knows' ? { nina: [{ id: 'for_me', label: tr('“Stay. Not for Father\'s sake”') }] } : {}),
       });
       g.apply('kudimov');
       if (said === 'let') {
-        await g.say('busygin', 'Пусть едет. Это её жизнь');
+        await g.say('busygin', 'Let her go. It\'s her life');
         const glass = g.told('let_go:glass');
         const beat = g.beat('let_go');
         await glass;
-        await g.say('sarafanov', 'Да… Да, конечно');
+        await g.say('sarafanov', 'Yes… Yes, of course');
         await beat;
       } else if (said === 'ask') {
-        await g.say('busygin', 'Нина, не уезжай. Отцу одному нельзя');
+        await g.say('busygin', 'Nina, don\'t go. Father can\'t be left on his own');
         const stand = g.told('ask_stay:stand');
         const beat = g.beat('ask_stay');
         await stand;
-        await g.say('kudimov', 'Это решать нам');
+        await g.say('kudimov', 'That\'s for us to decide');
         await beat;
       } else {
-        await g.say('busygin', 'Останься. Не ради отца');
+        await g.say('busygin', 'Stay. Not for Father\'s sake');
         const stand = g.told('for_me:stand');
         const beat = g.beat('for_me');
         await stand;
-        await g.say('kudimov', 'Я понял');
+        await g.say('kudimov', 'I see');
         await beat;
       }
     },
@@ -105,7 +105,7 @@ export default {
       const fire = g.beat('fire');
       g.beds({ wind: 0.3, fire: 0.6, crowd: 0.5 }, 2);
       await cry;
-      await g.say('makarskaya', 'Горим! Сарай горит!');
+      await g.say('makarskaya', 'Fire! The shed\'s on fire!');
       await fire;
       g.set('beat_next', 'after_fire');
       const r = await g.play(vyodra);
@@ -117,27 +117,27 @@ export default {
       const who = g.told('after_fire:who');
       const after = g.beat('after_fire');
       await who;
-      await g.say('silva', 'Кто поджёг? Найду — убью!');
+      await g.say('silva', 'Who set it? I\'ll find him and kill him!');
       await after;
       const blame = await g.choose('fire', {
-        makarskaya: [{ id: 'blame', label: 'Взять на себя' }],
-        vasenka: [{ id: 'own_up', label: 'Пусть скажет сам' }],
+        makarskaya: [{ id: 'blame', label: tr('Take the blame') }],
+        vasenka: [{ id: 'own_up', label: tr('Let him own up') }],
       });
       g.apply('fire');
       if (blame === 'blame') {
         const step = g.told('blame:step');
         const beat = g.beat('blame');
         await step;
-        await g.say('busygin', 'Это я. Курил у сарая');
-        await g.say('silva', 'Ты?!');
+        await g.say('busygin', 'It was me. I was smoking by the shed');
+        await g.say('silva', 'You?!');
         await beat;
       } else {
         const said = g.told('own_up:said');
         const beat = g.beat('own_up');
         await said;
-        await g.say('vasenka', 'Это я. Я поджёг');
+        await g.say('vasenka', 'It was me. I set it on fire');
         await g.wait(2000);
-        await g.say('makarskaya', 'Дурак ты, Васенька');
+        await g.say('makarskaya', 'You\'re a fool, Vasenka');
         await beat;
       }
     },

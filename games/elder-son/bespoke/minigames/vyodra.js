@@ -1,32 +1,32 @@
-// «Вёдра» (IV.3, Улица, после куска `fire`; game.md §7): свой огонь `fire` 0.6, растёт на 0.01 в секунду (шлётся
-// ключом), рёв пожара по нему. Одна метка за раз: с пустым ведром — кольцо на бочке (`barrel`); нажал — ход сцены:
-// Бусыгин набирает (`vyodra` 'fill' → `vyodra:full`); с полным — кольцо на сарае (`shed`); нажал — плещет (`vyodra`
-// 'throw' → `vyodra:splash`): огонь −0.18, всплеск, счёт `buckets`. Соседи своим ходом: каждые 6 с огонь −0.07, всплеск
-// тише. Полоса — 1 − `fire` / 0.6. Огонь погас — 2 с пара — clean. Через 55 с соседи справились сами (`fire` → 0 за
-// 4 с) — neutral.
-//   Чувство: тушит чужой сарай с соседями; хочет погасить; паника и смех; игрок — бочка — сарай, быстрее.
+// “Buckets” (IV.3, the Street, after the beat `fire`; game.md §7): its own fire `fire` 0.6, growing 0.01 a second (sent
+// as the key), the fire's roar by it. One mark at a time: with an empty bucket — a ring on the barrel (`barrel`); pressed — the scene's turn:
+// Busygin fills it (`vyodra` 'fill' → `vyodra:full`); with a full one — a ring on the shed (`shed`); pressed — he throws (`vyodra`
+// 'throw' → `vyodra:splash`): the fire −0.18, a splash, counted in `buckets`. The neighbours go their own way: every 6 s the fire −0.07, a
+// quieter splash. The bar — 1 − `fire` / 0.6. The fire out — 2 s of steam — clean. After 55 s the neighbours have managed by themselves (`fire` → 0 over
+// 4 s) — neutral.
+//   Feeling: putting out a stranger's shed with the neighbours; wants to put it out; panic and laughter; the player — barrel, shed, faster.
 //   → { buckets }
 import { until, keys } from '../hands.js';
 
-const START = 0.6, GROW = 0.01; // огонь; в секунду
-const ROAR = 0.25; // с между правками рёва
-const BUCKET = 0.18, NEIGHBOURS = 0.07, EVERY = 6; // огонь за ведро; за соседей, раз в 6 с
-const STEAM = 2; // с пара в конце
-const ENOUGH = 55; // с — соседи справились
+const START = 0.6, GROW = 0.01; // the fire; a second
+const ROAR = 0.25; // s between changes of the roar
+const BUCKET = 0.18, NEIGHBOURS = 0.07, EVERY = 6; // the fire a bucket; the neighbours', once in 6 s
+const STEAM = 2; // s of steam at the end
+const ENOUGH = 55; // s — the neighbours have managed
 const SCENE_MS = 30000;
 
 export default {
-  title: 'Вёдра', // как её зовёт ☰ автора
+  title: 'Buckets', // (as the author's ☰ lists it)
   about: 35,
   skipped: { buckets: 3 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Сарай горит. Бочка у забора полная' });
+    const mg = g.minigame({ phrase: tr('The shed is on fire. The barrel by the fence is full') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); g.sound.fire(0, 1); });
     let fire = START, buckets = 0, roared = -ROAR, helped = 0, full = false, busy = false, tapped = false, first = true;
     let mark = null, press = null;
-    // одна метка за раз: бочка (пустой) или сарай (с ведром)
+    // one mark at a time: the barrel (empty) or the shed (with a bucket)
     const place = () => {
       mark = mg.mark({ at: full ? 'shed' : 'barrel', kind: 'ring' });
       press = mg.press({ on: mark });
@@ -34,7 +34,7 @@ export default {
       if (first) b.minigame.tricks.teach(mg, [press], { id: 'press' });
       first = false;
     };
-    // ход сцены: набрать или плеснуть; → когда сцена сказала, что сделано
+    // the scene's turn: fill or throw; → once the scene has said it is done
     const act = async () => {
       busy = true;
       tapped = false;
@@ -68,7 +68,7 @@ export default {
     if (!out) return this.skipped;
     const clean = fire <= 0;
     if (clean) send('fire', 0);
-    else move('fire', 0, 4); // (соседи справились)
+    else move('fire', 0, 4); // (the neighbours have managed)
     const t1 = mg.t;
     if (!(await until(mg, ({ t }) => t - t1 >= (clean ? STEAM : 4)))) return this.skipped;
     await mg.end({ as: clean ? 'clean' : 'neutral' });

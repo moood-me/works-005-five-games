@@ -32,7 +32,7 @@
 //     skipped, run: async (g, b, opts, signal) → its result}, made of the language of mini-games. The signal aborts
 //     when it is skipped (the game's ⏭ in its row of tools, for every player while a minigame goes: b.minigame.skip())
 //     or the step is left; → `skipped` then — a plain outcome, the same trace in the story as one played. The chapter
-//     itself puts what it did into the scene (game.md §4, «после игры»)
+//     itself puts what it did into the scene (game.md §4, “after the game”)
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
 //     left when the signal aborts; the ⏭ skips the minigame
 //   g.hint(text, afterMs) → off() — one line low in the middle (not in a minigame nor a choice: the language speaks)
@@ -53,33 +53,33 @@ export const SCENES = { platform: 'platform', street: 'ulica-opus', home: 'dom-o
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean.
 export const SCALES = {
-  lie: { start: 0, min: -6, max: 9, up: 'Ложь', down: 'Правда',
-    rule: 'Иней на стекле — сколько неправды в доме.' },
-  home: { start: 0, min: -4, max: 7, up: 'Вместе', down: 'Врозь',
-    rule: 'Свет в окне — держится ли семья Сарафановых вместе.' },
+  lie: { start: 0, min: -6, max: 9, up: tr('Lie'), down: tr('Truth'),
+    rule: tr('Frost on the glass — how much untruth there is in the house.') },
+  home: { start: 0, min: -4, max: 7, up: tr('Together'), down: tr('Apart'),
+    rule: tr('Light in the window — whether the Sarafanovs hold together.') },
 };
 // What each option of each choice does: the scales, then the marks ([key, value, text | null]) — game.md §5
 export const EFFECTS = {
   entry: { asked: { lie: 1 }, said: { lie: 2 } },
   galya: { remembered: { home: 1, lie: 1 }, never: { home: -1 } },
   box: { take: { home: 1, lie: 1 },
-    refuse: { home: -1, lie: -1, marks: [['sarafanov', 'box', 'Сарафанов это запомнит.']] } },
+    refuse: { home: -1, lie: -1, marks: [['sarafanov', 'box', tr('Sarafanov will remember this.')]] } },
   dawn: { leave: { home: -1 }, stay: { home: 1, lie: 1 } },
   father: { approach: { home: 1, lie: 1 }, hide: {} },
-  crossing: { truth: { lie: -2, marks: [['nina', 'knows', 'Нина это запомнит.']] }, roar: { lie: -1 },
-    brother: { home: 1, lie: 1, marks: [['nina', 'sister', 'Нина это запомнит.']] } },
+  crossing: { truth: { lie: -2, marks: [['nina', 'knows', tr('Nina will remember this.')]] }, roar: { lie: -1 },
+    brother: { home: 1, lie: 1, marks: [['nina', 'sister', tr('Nina will remember this.')]] } },
   kudimov: { let: { home: -1 },
-    ask: { home: 1, lie: 1, marks: [['nina_stay', 'father', 'Нина это запомнит.']] },
-    for_me: { home: 1, marks: [['nina_stay', 'me', 'Нина это запомнит.']] } },
+    ask: { home: 1, lie: 1, marks: [['nina_stay', 'father', tr('Nina will remember this.')]] },
+    for_me: { home: 1, marks: [['nina_stay', 'me', tr('Nina will remember this.')]] } },
   fire: { blame: { home: 1, lie: 1, marks: [['silva', 'grudge', null],
-      ['vasenka', 'saved', 'Сильва и Васенька это запомнят.']] },
-    own_up: { lie: -1, marks: [['vasenka', 'confessed', 'Васенька это запомнит.']] } },
+      ['vasenka', 'saved', tr('Silva and Vasenka will remember this.')]] },
+    own_up: { lie: -1, marks: [['vasenka', 'confessed', tr('Vasenka will remember this.')]] } },
   truth: { self: { lie: -3 }, silent: { lie: -1 } },
   train: { stay: {}, go: {} },
 };
 export const ENDINGS = [
-  { id: 'late', label: 'Опоздал на электричку' }, { id: 'saturday', label: 'В субботу' },
-  { id: 'anyway', label: 'Всё равно' }, { id: 'suitcase', label: 'Чемодан' },
+  { id: 'late', label: tr('Missed the Train') }, { id: 'saturday', label: tr('On Saturday') },
+  { id: 'anyway', label: tr('All the Same') }, { id: 'suitcase', label: tr('The Suitcase') },
 ];
 
 // What follows from the play so far — all a step reads of it besides g.state. A choice not made (its step skipped by
@@ -91,31 +91,31 @@ export function facts(state) {
   const train = c.train === 'go' ? 'go' : 'stay';
   const came = s.home >= 3 ? 'family' : s.home >= 0 ? 'father' : 'none';
   const boxWhere = c.box === 'take' ? 'busygin' : 'cupboard';
-  const boxHand = boxWhere === 'cupboard' && came === 'father';     // в дверях вагона — только когда пришёл он один
-  const hurt = told === 'silva' || s.lie > 1;                       // читается после V.2 (шкала уже сдвинута)
+  const boxHand = boxWhere === 'cupboard' && came === 'father';     // at the carriage door — only when he alone came
+  const hurt = told === 'silva' || s.lie > 1;                       // read after V.2 (the scale moved already)
   return {
-    warm: clamp((s.home + 4) / 11),                    // 0 Врозь … 1 Вместе
-    frost: clamp((s.lie + 2) / 8),                     // 0 чистое стекло … 1 всё в инее (полупрозрачном)
-    entry: c.entry === 'said' ? 'said' : 'asked',      // кто соврал у двери
+    warm: clamp((s.home + 4) / 11),                    // 0 Apart … 1 Together
+    frost: clamp((s.lie + 2) / 8),                     // 0 clear glass … 1 all frosted (translucent)
+    entry: c.entry === 'said' ? 'said' : 'asked',      // who lied at the door
     boxWhere,                                          // 'cupboard' | 'busygin'
     ninaIs: c.crossing === 'truth' ? 'knows' : c.crossing === 'brother' ? 'sister' : 'none',
-    secret: c.father === 'approach',                   // Бусыгин обещал отцу молчать про оркестр
+    secret: c.father === 'approach',                   // Busygin promised his father to keep quiet about the orchestra
     told,                                              // 'self' | 'silva'
     train,                                             // 'stay' | 'go'
     came,                                              // 'none' | 'father' | 'family'
     hurt,
-    // фраза кларнета: 'now' — в доме сразу; 'later' — в эпилоге, издали; 'cut' — обрывается, как всегда.
-    // Разрешается только там, где он остался и за ним пришли (семья держится); правда без тепла — обрыв.
+    // the clarinet's phrase: 'now' — in the house at once; 'later' — in the epilogue, from afar; 'cut' — it breaks off, as always.
+    // It resolves only where he stayed and they came for him (the family holds together); the truth without warmth — it breaks off.
     tune: train === 'go' || came === 'none' ? 'cut' : hurt ? 'later' : 'now',
     silvaDoor: c.fire !== 'blame',
     vasenkaBy: c.fire === 'blame',
     suitcase: told === 'silva' && came !== 'none',
     boxHand,
-    boxGone: train === 'go' && ((boxWhere === 'busygin' && told === 'silva') || boxHand), // табакерка уехала с ним
+    boxGone: train === 'go' && ((boxWhere === 'busygin' && told === 'silva') || boxHand), // the snuffbox went with him
     ninaEnd: c.kudimov === 'ask' || c.kudimov === 'for_me' ? 'home' : 'gone',
     ninaFor: c.kudimov === 'for_me',
-    ninaCame: c.kudimov === 'for_me',                  // она приходит на платформу всегда: ради него, не по «Вместе»
-    knocked: state.marks.knocked ?? '',                // окна, в которые стучал (итог «Окон»)
+    ninaCame: c.kudimov === 'for_me',                  // she always comes to the platform: for him, not by “Together”
+    knocked: state.marks.knocked ?? '',                // the windows he knocked at (the result of “Windows”)
     vasyaEnd: c.fire === 'own_up' ? 'home' : 'taiga',
     ending: told === 'self' ? (train === 'stay' ? 'late' : 'saturday') : (train === 'stay' ? 'anyway' : 'suitcase'),
   };
@@ -229,7 +229,7 @@ export function context(b, view, hub, state, j = null) {
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`кусок «${name}» не кончился`);
+      if (wait && !(await ended)) b.trouble(`the beat “${name}” did not end`);
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
@@ -261,7 +261,7 @@ export function context(b, view, hub, state, j = null) {
       }
     },
     minigame(o = {}) {
-      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      if (!playing) throw new Error('g.minigame: only inside a minigame (g.play)');
       const mg = b.minigame.start({ ...o, signal: playing.signal });
       mg.on('skip', playing.end);
       return mg;
