@@ -2,10 +2,10 @@
 // full speed or Passepartout's way); the Sioux, the coupling («The coupling»), the cars stop at Fort Kearney without
 // Passepartout; ⚑ fort: Fogg goes himself or pays the soldiers; the sledge under sail («The sail») — everyone, or
 // Passepartout alone after the train; the snow.
-// Reads: choices aouda, boat; hands stsepka, parus. Leaves: choices bridge, fort; hours, money; marks aouda, pp.
+// Reads: choices aouda, boat; hands coupling, sail. Leaves: choices bridge, fort; hours, money; marks aouda, pp.
 import { SCENES } from '../story.js';
-import stsepka from '../minigames/stsepka.js';
-import parus from '../minigames/parus.js';
+import coupling from '../minigames/coupling.js';
+import sail from '../minigames/sail.js';
 
 export default {
   number: 'III',
@@ -76,7 +76,7 @@ export default {
       await g.say('pp', 'The engineer is shot! The fort! We must stop at the fort!');
       await attack;
       await g.beat('under', { wait: false });
-      const r = await g.play(stsepka);
+      const r = await g.play(coupling);
       if (r?.hours) g.hours(r.hours, tr('The cars stopped past the fort'));
       g.set('stop_at', Math.min(1, -(r?.hours ?? 0) / 2));
       g.beds({ wind_cold: 0.4 }, 3);
@@ -144,7 +144,7 @@ export default {
       const alone = g.state.choices.fort === 'pay';
       g.hero(alone ? 'pp' : 'fogg');
       g.beds({ wind_cold: 0.6 }, 2);
-      const sail = g.told('sledge:sail');
+      const hoisted = g.told('sledge:sail');
       const st = alone
         ? { beat: 'sledge', sl_fogg: 0, sl_aouda: 0, sl_pp: 1, sl_fix: 0 }
         : { beat: 'sledge', sl_fogg: 1, sl_aouda: g.state.choices.aouda === 'holland' ? 0 : 1, sl_pp: 1, sl_fix: 1 };
@@ -155,12 +155,12 @@ export default {
         await g.say('fix', 'There is a sledge. Under sail. Omaha by morning');
         g.money(-200);
       }
-      await sail;
+      await hoisted;
       await g.say('mudge', 'Hold on, the wind\'s behind us!');
       await sledge;
       g.beds({ runners: 0.7, wind_cold: 0.7 }, 2);
       await g.beat('sail', { wait: false });
-      const r = await g.play(parus, { alone });
+      const r = await g.play(sail, { alone });
       g.beds({ runners: 0, wind_cold: 0.4 }, 3);
       if (!alone) g.hours(r?.hours ?? 16, tr('The sledge under sail'));
       const caught = alone ? r?.caught !== false : true;

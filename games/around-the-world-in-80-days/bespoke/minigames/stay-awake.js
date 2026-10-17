@@ -23,7 +23,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const reel = (t, daze) => daze * (0.5 * Math.sin(0.7 * t) + 0.3 * Math.sin(1.9 * t + 2));
 
 export default {
-  file: 'ne-usnut',
+  file: 'stay-awake',
   title: 'Stay awake', // (as the author's ☰ lists it)
   about: 40,
   skipped: { told: true },

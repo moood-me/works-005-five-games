@@ -3,9 +3,9 @@
 // the pastor: «tomorrow is Sunday») or Fix (the evening paper) —, then the cab («The cab») and the fifty-seventh second;
 // no one — Sunday, «Two Wednesdays». Then the codas by the people: Aouda's letter from Holland, Passepartout back from
 // Omaha, the gas, Kiouni's postcard, Speedy.
-// Reads: facts (opener, ending, aouda, pp, gas, kiouni, henrietta, cabin), marks, hands keb. Leaves: marks.day; lines.
+// Reads: facts (opener, ending, aouda, pp, gas, kiouni, henrietta, cabin), marks, hands cab. Leaves: marks.day; lines.
 import { SCENES, facts } from '../story.js';
-import keb from '../minigames/keb.js';
+import cab from '../minigames/cab.js';
 
 export default {
   number: '',
@@ -99,7 +99,7 @@ export default {
         g.beds({ fog: 0.5, clock: 0.8 }, 1);
         await g.scene(SCENES.row, { beat: 'cab', night: 1 });
         await g.say('fogg', 'Twenty minutes past eight. To the Reform Club!');
-        const r = await g.play(keb);
+        const r = await g.play(cab);
         await g.told('cab:arrived', 20000);
         if (!r?.late) {
           g.beds({ clock: 0.9, crowd: 0.3 }, 1);

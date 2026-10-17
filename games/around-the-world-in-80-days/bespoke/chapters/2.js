@@ -3,12 +3,12 @@
 // awake»), the «Carnatic» sails with Passepartout alone; the morning, the «Tankadere» (~ boat: Fix taken or not);
 // the typhoon («The typhoon»), the gun at Shanghai; Yokohama — the Long Noses («The pyramid»: drop or hold, by the hands); the
 // «General Grant» (~ punch), two Wednesdays.
-// Reads: choices.sati; hands ne-usnut, tayfun, piramida; marks fix. Leaves: choices answer, aouda, boat, punch;
+// Reads: choices.sati; hands stay-awake, typhoon, pyramid; marks fix. Leaves: choices answer, aouda, boat, punch;
 // choices.pyramid (by the hands); hours, money; marks aouda, fix, pp, bruise, wings; lines.
 import { SCENES } from '../story.js';
-import neUsnut from '../minigames/ne-usnut.js';
-import tayfun from '../minigames/tayfun.js';
-import piramida from '../minigames/piramida.js';
+import stayAwake from '../minigames/stay-awake.js';
+import typhoon from '../minigames/typhoon.js';
+import pyramid from '../minigames/pyramid.js';
 
 export default {
   number: 'II',
@@ -98,7 +98,7 @@ export default {
       await g.say('fix', 'Drink with me. One pipe — for friendship\'s sake');
       await g.beat('pipe');
       g.beds({ town: 0.25, sea: 0.4 }, 3);
-      const r = await g.play(neUsnut);
+      const r = await g.play(stayAwake);
       g.mark('told', !!r?.told);
       g.beds({ sea: 0.5 }, 3);
       const aboard = g.told('carnatic:aboard');
@@ -166,7 +166,7 @@ export default {
       await squall;
       g.beds({ storm: 0.9 }, 2);
       await g.beat('typhoon', { wait: false });
-      const r = await g.play(tayfun);
+      const r = await g.play(typhoon);
       if (r?.hours) g.hours(r.hours, tr('The typhoon'));
       if (withAouda) await g.beat('aouda_storm');
       g.beds({ storm: 0.3, sea: 0.4 }, 4);
@@ -190,7 +190,7 @@ export default {
       await g.say('batulcar', 'The Long Noses! The human pyramid!');
       await show;
       await g.beat('pyramid', { wait: false });
-      const r = await g.play(piramida);
+      const r = await g.play(pyramid);
       const choice = r?.choice ?? 'drop';
       g.state.choices.pyramid = choice;
       g.mark('wings', true);

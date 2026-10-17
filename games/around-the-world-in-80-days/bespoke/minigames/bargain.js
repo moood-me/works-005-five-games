@@ -22,7 +22,7 @@ const TURN = 0.8, BACK = 1.6; // s: turns away; stands with his back turned
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  file: 'torg',
+  file: 'bargain',
   title: 'The bargain', // (as the author's ☰ lists it)
   about: 20,
   skipped: { price: 2000, minutes: 0 }, // Verne's price, no minutes lost

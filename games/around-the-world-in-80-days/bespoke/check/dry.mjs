@@ -109,7 +109,7 @@ function fakeScene(values) {
 const live = (mg, kind) => mg.gestures.filter(h => h.kind === kind && !h.removed);
 const at = h => h.o.on?.o.at;
 const BOTS = {
-  'desyat-minut'(mg, v, t, variant, mem) {
+  'ten-minutes'(mg, v, t, variant, mem) {
     if (t - (mem.last ?? -1) < 0.45) return;
     mem.last = t;
     const ps = live(mg, 'press');
@@ -118,13 +118,13 @@ const BOTS = {
     if (variant === 'lazy' && t > 6) return;
     if (rooms[0]) mg.tap(rooms[0]);
   },
-  torg(mg, v, t, variant, mem) {
+  bargain(mg, v, t, variant, mem) {
     const h = live(mg, 'hold')[0]; if (!h) return;
     const target = variant === 'rich' ? 1 : (mem.n ?? 0) * 0.2 + 0.15;
     if (!h.state.held && t > (mem.next ?? 0)) { h.state.held = true; h.emit('down', {}); }
     if (h.state.held && h.state.fill >= target) { h.state.held = false; mem.n = (mem.n ?? 0) + 1; mem.next = t + 3.5; h.emit('up', {}); }
   },
-  slon(mg, v, t, variant, mem) {
+  elephant(mg, v, t, variant, mem) {
     const r = live(mg, 'rhythm')[0], goad = live(mg, 'hold')[0], p = live(mg, 'press')[0];
     if (p) { mg.tap(p); }
     if (r && r.beatAt) { const k = r.state.k; if (k >= 0 && mem.k !== k && r.state.t - r.beatAt(k) < 0.05) { mem.k = k; if (variant !== 'lazy') mg.tap(r); } }
@@ -133,33 +133,33 @@ const BOTS = {
       if (want !== goad.state.held) { goad.state.held = want; goad.emit(want ? 'down' : 'up', {}); }
     }
   },
-  'kak-mertvyy'(mg, v, t, variant) {
+  'like-the-dead'(mg, v, t, variant) {
     const l = live(mg, 'lead')[0]; if (!l) return;
     l.state.held = variant !== 'lazy';
     l.state.knob = clamp(-3 * (l.state.arrow - (variant === 'rush' ? 0.9 : 0)), -1, 1);
   },
-  ryvok(mg, v, t, variant) {
+  dash(mg, v, t, variant) {
     const l = live(mg, 'lead')[0];
     if (l) { l.state.held = true; l.state.knob = variant === 'lazy' ? 0.9 : clamp(l.o.zone.at, -1, 1); }
     const p = live(mg, 'pull')[0];
     if (p) { p.state.held = true; p.state.u = Math.min(1, p.state.u + DT * 0.8); if (p.state.u >= 1 && !p.torn) { p.torn = true; p.emit('tear', {}); } }
   },
-  'ne-usnut'(mg, v, t, variant) {
+  'stay-awake'(mg, v, t, variant) {
     const l = live(mg, 'lead')[0]; if (!l) return;
     l.state.held = variant === 'lazy' ? (t % 5) < 1 : true;
     l.state.knob = clamp(-3 * l.state.arrow, -1, 1);
   },
-  tayfun(mg, v, t, variant) {
+  typhoon(mg, v, t, variant) {
     const l = live(mg, 'lead')[0]; if (!l) return;
     l.state.held = true; l.state.knob = variant === 'lazy' ? 0 : l.o.zone.at;
   },
-  piramida(mg, v, t, variant, mem) {
+  pyramid(mg, v, t, variant, mem) {
     const l = live(mg, 'lead')[0]; if (!l) return;
     const choosing = mg.phrases.some(p => p.includes('Fogg'));
     l.state.held = !(choosing && variant === 'drop');
     l.state.knob = clamp(-3 * l.state.arrow, -1, 1);
   },
-  stsepka(mg, v, t, variant, mem) {
+  coupling(mg, v, t, variant, mem) {
     v.swing_at = (t / 1.3) % 1;
     const r = live(mg, 'rhythm')[0];
     if (r && r.o.times?.length) {
@@ -170,11 +170,11 @@ const BOTS = {
     const p = live(mg, 'pull')[0];
     if (p) { p.state.held = true; p.state.u = Math.min(1, p.state.u + DT); if (p.state.u >= 1 && !p.torn) { p.torn = true; p.emit('tear', {}); } }
   },
-  parus(mg, v, t, variant) {
+  sail(mg, v, t, variant) {
     const l = live(mg, 'lead')[0]; if (!l) return;
     l.state.held = true; l.state.knob = variant === 'lazy' ? 0.5 : l.o.zone.at;
   },
-  kotly(mg, v, t, variant, mem) {
+  boilers(mg, v, t, variant, mem) {
     const pulls = live(mg, 'pull');
     const p = pulls[0];
     const keep = live(mg, 'press').find(h => h.o.petals);
@@ -184,7 +184,7 @@ const BOTS = {
       if (p.state.u >= 1) { p.state.held = false; p.state.inTarget = true; p.emit('release', { u: 1, inTarget: true }); p.state.u = 0; p.state.inTarget = false; }
     }
   },
-  keb(mg, v, t, variant, mem) {
+  cab(mg, v, t, variant, mem) {
     v.cab_at = Math.min(v.cab_to ?? 0, (v.cab_at ?? 0) + DT * 0.05);
     const r = live(mg, 'rhythm')[0];
     if (r && r.beatAt) { const k = r.state.k; if (k >= 0 && mem.k !== k) { mem.k = k; if (variant !== 'lazy' && (variant !== 'half' || k % 2)) mg.tap(r); } }
@@ -192,7 +192,7 @@ const BOTS = {
 };
 // what the scene does on its own: someone walking toward the key the game sets
 const SCENE = {
-  'ne-usnut'(v) { v.pp_walk_at = Math.min(v.pp_walk ?? 0, (v.pp_walk_at ?? 0) + DT * 0.03); },
+  'stay-awake'(v) { v.pp_walk_at = Math.min(v.pp_walk ?? 0, (v.pp_walk_at ?? 0) + DT * 0.03); },
 };
 
 async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
@@ -238,10 +238,10 @@ async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
 }
 
 const CASES = {
-  'desyat-minut': ['good', 'gas', 'lazy'], torg: ['haggle', 'rich'], slon: ['steady', 'smart', 'goad', 'lazy'],
-  'kak-mertvyy': ['good', 'rush', 'lazy'], ryvok: ['good', 'lazy'], 'ne-usnut': ['good', 'lazy'], tayfun: ['good', 'lazy'],
-  piramida: ['hold', 'drop'], stsepka: ['good', 'clumsy'], parus: ['good', 'lazy', 'alone'], kotly: ['burn', 'spare', 'poor', 'fogg'],
-  keb: ['good', 'half', 'lazy'],
+  'ten-minutes': ['good', 'gas', 'lazy'], bargain: ['haggle', 'rich'], elephant: ['steady', 'smart', 'goad', 'lazy'],
+  'like-the-dead': ['good', 'rush', 'lazy'], dash: ['good', 'lazy'], 'stay-awake': ['good', 'lazy'], typhoon: ['good', 'lazy'],
+  pyramid: ['hold', 'drop'], coupling: ['good', 'clumsy'], sail: ['good', 'lazy', 'alone'], boilers: ['burn', 'spare', 'poor', 'fogg'],
+  cab: ['good', 'half', 'lazy'],
 };
 const only = process.argv.find(a => CASES[a]);
 for (const [name, variants] of Object.entries(CASES)) {

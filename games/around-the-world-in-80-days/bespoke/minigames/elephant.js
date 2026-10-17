@@ -25,7 +25,7 @@ const EASE = 1.5; // a second: pace goes to its aim
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  file: 'slon',
+  file: 'elephant',
   title: 'The elephant', // (as the author's ☰ lists it)
   about: 38,
   skipped: { hours: 0 }, // in step, no goad — on time

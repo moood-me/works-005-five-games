@@ -21,7 +21,7 @@ const clamp = (v, a = -1, b = 1) => Math.min(b, Math.max(a, v));
 const smooth = (a, b, x) => { const u = Math.min(1, Math.max(0, (x - a) / (b - a))); return u * u * (3 - 2 * u); };
 
 export default {
-  file: 'tayfun',
+  file: 'typhoon',
   title: 'The typhoon', // (as the author's ☰ lists it)
   about: 42,
   skipped: { hours: 0 },

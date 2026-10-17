@@ -26,7 +26,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const litter = t => clamp(0.55 * Math.sin(0.8 * t + 0.6) + 0.15 * Math.sin(2.1 * t), -0.8, 0.8);
 
 export default {
-  file: 'ryvok',
+  file: 'dash',
   title: 'The dash', // (as the author's ☰ lists it)
   about: 14,
   skipped: { hours: 0 },

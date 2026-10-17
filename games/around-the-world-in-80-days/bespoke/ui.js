@@ -266,7 +266,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
       }
     };
     veil.addEventListener('click', press);
-    document.fonts.load('1em "Vokrug Title"').finally(async () => {
+    document.fonts.load('1em "Around Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
       ask(tr('unfold'));
@@ -313,7 +313,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
         leave();
       }
     });
-    document.fonts.load('1em "Vokrug Title"').finally(async () => {
+    document.fonts.load('1em "Around Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
       ask(tr('turn over'));

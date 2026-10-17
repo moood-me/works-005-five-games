@@ -25,7 +25,7 @@ const WINDOW = 0.2; // s: the beat's tolerance
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  file: 'stsepka',
+  file: 'coupling',
   title: 'The coupling', // (as the author's ☰ lists it)
   about: 16,
   skipped: { hours: 0 },

@@ -1,9 +1,9 @@
 // Prologue «in which Phileas Fogg makes a wager» — game.md §3. The countdown of the last evening first (20:44:37 →
 // the handle turns, dark), then back to 2 October: the whist, the wager — the player lays Fogg's cards down himself —,
 // ten minutes at Saville Row («Ten minutes»: the bag appears), the train out of Charing Cross (the gas, the London
-// watch; the notebook appears). Reads: hands['desyat-minut'] (the gas). Leaves: marks.gas; shown.money, shown.hours.
+// watch; the notebook appears). Reads: hands['ten-minutes'] (the gas). Leaves: marks.gas; shown.money, shown.hours.
 import { SCENES } from '../story.js';
-import desyatMinut from '../minigames/desyat-minut.js';
+import tenMinutes from '../minigames/ten-minutes.js';
 
 export default {
   number: '',
@@ -50,7 +50,7 @@ export default {
       await g.say('fogg', 'I shall be back on Saturday, the twenty-first of December, at a quarter before nine in the evening');
       await g.beat('leave');
     },
-    // Savile Row: «Passepartout, we are going round the world. In ten minutes»; the ten minutes; the bag
+    // Saville Row: «Passepartout, we are going round the world. In ten minutes»; the ten minutes; the bag
     async g => {
       g.hero('fogg');
       g.beds({ fog: 0.5, clock: 0.25 }, 2);
@@ -66,7 +66,7 @@ export default {
       await g.say('fogg', 'Two shirts, three pairs of stockings, a mackintosh and a Bradshaw. We\'ll buy the rest on the way');
       await g.beat('pack', { wait: false });
       g.beds({ fog: 0.3, clock: 0.6 }, 1);
-      const r = await g.play(desyatMinut);
+      const r = await g.play(tenMinutes);
       g.mark('gas', !!r?.gas);
       g.hero('fogg');
       await g.say('fogg', 'The carpet-bag. There are twenty thousand in it. Take good care of it');

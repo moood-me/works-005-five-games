@@ -32,7 +32,7 @@ const AFTER = 0.8; // s after the last thing — the end
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  file: 'desyat-minut',
+  file: 'ten-minutes',
   title: 'Ten minutes', // (as the author's ☰ lists it)
   about: 30,
   skipped: { missing: 0, gas: true }, // the list packed; the gas, not on the list, burns — as in Verne

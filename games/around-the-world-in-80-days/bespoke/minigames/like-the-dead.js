@@ -24,7 +24,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const nerves = t => 0.12 + 0.18 * Math.sin(0.8 * t) + 0.06 * Math.sin(2.3 * t + 1);
 
 export default {
-  file: 'kak-mertvyy',
+  file: 'like-the-dead',
   title: 'Like the dead', // (as the author's ☰ lists it)
   about: 24,
   skipped: { hours: 0 },

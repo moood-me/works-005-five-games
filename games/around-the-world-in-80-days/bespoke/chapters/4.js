@@ -1,10 +1,10 @@
 // IV. The Atlantic «in which the Henrietta burns to the water's edge» — game.md §3. New York: the «China» gone forty-five
 // minutes; the «Henrietta» and Captain Speedy; the mutiny; no coal — ⚑ henrietta: buy her and burn her («The boilers») or go
 // under sail; Liverpool: the arrest, the cell, the release (~ liverpool: strike or the hand); the special train.
-// Reads: facts aouda, pp; marks fix; hands kotly. Leaves: choices henrietta, liverpool; hours, money; marks fix,
+// Reads: facts aouda, pp; marks fix; hands boilers. Leaves: choices henrietta, liverpool; hours, money; marks fix,
 // speedy.
 import { SCENES, facts, PART_PRICE, PART_HOURS } from '../story.js';
-import kotly from '../minigames/kotly.js';
+import boilers from '../minigames/boilers.js';
 
 export default {
   number: 'IV',
@@ -88,7 +88,7 @@ export default {
       g.hours(-12, tr('No coal'));
       if (f.pp !== 'with') await g.say('fogg', 'I have no use for a frock-coat now');
       const afford = Math.max(0, Math.floor(g.state.money / PART_PRICE));
-      const r = await g.play(kotly, { who: f.pp === 'with' ? 'pp' : 'fogg' });
+      const r = await g.play(boilers, { who: f.pp === 'with' ? 'pp' : 'fogg' });
       // (skipped, it burns all seven but the cabin: no more than the bag can pay)
       const burned = (r?.burned ?? []).slice(0, afford);
       g.money(-PART_PRICE * burned.length);

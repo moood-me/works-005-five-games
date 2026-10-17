@@ -1,7 +1,7 @@
 /* The game over the scene (ui.js), as the pages of an old illustrated edition of Verne: cream paper, sepia ink, a thin
    double engraved frame with corners, a serif; red ink for the route, violet for the visa stamps. */
 #layer { --card: #f1e6cb; --ink: #3b2a1a; --frame: rgba(59, 42, 26, 0.75); --red: #a3271d; --stamp: #5b3a8c;
-  --title: "Vokrug Title", Georgia, "Times New Roman", serif;
+  --title: "Around Title", Georgia, "Times New Roman", serif;
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
   --below-header: 46px; } /* where the site's header ends */
 #layer .book, #layer .bag, #layer .medal, #layer .toasts, #layer .hint, #layer .title { pointer-events: none; }

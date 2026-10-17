@@ -49,13 +49,13 @@
 import * as sounds from './sound.js';
 
 // the world's scenes the game plays, by their folders (sea, route: not in the world yet)
-export const SCENES = { club: 'main', row: 'sevil-rou', train: 'iz-okna-poezda', deck: 'paluba', jungle: 'dzhungli',
-  harbour: 'gavan', sea: 'sea', prairie: 'preriya', map: 'route' };
+export const SCENES = { club: 'main', row: 'saville-row', train: 'train-window', deck: 'deck', jungle: 'jungle',
+  harbour: 'harbour', sea: 'sea', prairie: 'prairie', map: 'route' };
 
 
 // The minigames by their files (game.md §7): a minigame's result is kept under its `file`
-export const HANDS = ['desyat-minut', 'torg', 'slon', 'kak-mertvyy', 'ryvok', 'ne-usnut', 'tayfun', 'piramida', 'stsepka',
-  'parus', 'kotly', 'keb'];
+export const HANDS = ['ten-minutes', 'bargain', 'elephant', 'like-the-dead', 'dash', 'stay-awake', 'typhoon', 'pyramid', 'coupling',
+  'sail', 'boilers', 'cab'];
 const handsOf = m => (HANDS.includes(m?.file) ? m.file : null);
 
 // The notebook and the bag: where they start, the one line of what each means (said once, when it appears)
@@ -81,13 +81,13 @@ export const PART_PRICE = 1500, PART_HOURS = 1.5;
 export function facts(state) {
   const c = state.choices, m = state.marks ?? {}, h = state.hands ?? {};
   const aouda = c.aouda === 'holland' ? 'holland' : 'with';
-  const pp = c.fort === 'pay' && h.parus && h.parus.caught === false ? 'omaha' : 'with';
+  const pp = c.fort === 'pay' && h.sail && h.sail.caught === false ? 'omaha' : 'with';
   const forgiven = c.liverpool === 'hand';
   const opener = aouda === 'with' && (m.aouda ?? 0) >= 2 ? 'aouda' : forgiven && (m.fix ?? 0) >= 2 ? 'fix' : null;
   // the notebook's hours as they were before the day won from the sun was written in (marks.day: +24 in it)
   const hours = m.day ? state.hours - 24 : state.hours;
   const gained = hours < 0 && opener ? hours + 24 : hours; // the day won from the sun, once someone finds it
-  const ending = hours >= 0 ? 'friday' : !opener ? 'sunday' : gained < 0 || h.keb?.late ? 'lost' : 'door';
+  const ending = hours >= 0 ? 'friday' : !opener ? 'sunday' : gained < 0 || h.cab?.late ? 'lost' : 'door';
   return {
     aouda, pp, opener, forgiven, ending,
     gas: !!m.gas,                                   // the attic's gas burns all the way («Ten minutes»)
@@ -100,7 +100,7 @@ export function facts(state) {
     fixLevel: m.fix ?? 0, aoudaLevel: m.aouda ?? 0, ppLevel: m.pp ?? 0,
     ppStays: (m.pp ?? 0) >= 2,
     henrietta: c.henrietta ?? 'burn',
-    cabin: h.kotly ? !h.kotly.burned?.includes('speedy_cabin') : false,
+    cabin: h.boilers ? !h.boilers.burned?.includes('speedy_cabin') : false,
     hours, gained,
   };
 }

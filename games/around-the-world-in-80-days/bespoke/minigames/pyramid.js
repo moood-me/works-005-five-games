@@ -22,7 +22,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const sway = (t, h) => 0.2 * Math.sin(1.1 * t) + 0.12 * Math.sin(2.7 * t + 1) + 0.06 * h;
 
 export default {
-  file: 'piramida',
+  file: 'pyramid',
   title: 'The pyramid', // (as the author's ☰ lists it)
   about: 24,
   skipped: { choice: 'drop' }, // as in Verne: he saw his master — and the pyramid collapsed

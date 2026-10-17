@@ -28,7 +28,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const smooth = x => { const u = clamp(x); return u * u * (3 - 2 * u); };
 
 export default {
-  file: 'parus',
+  file: 'sail',
   title: 'The sail', // (as the author's ☰ lists it)
   about: 40,
   skipped: { hours: 18, caught: true },

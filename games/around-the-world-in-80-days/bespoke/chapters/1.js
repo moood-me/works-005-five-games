@@ -2,13 +2,13 @@
 // days early; the rails end in the forest; the elephant bought («The bargain») and ridden («The elephant»); the procession and the
 // suttee — ⚑ sati: tonight, quietly (the pyre, «Like the dead») or now, on the road («The dash»); Allahabad, Aouda wakes;
 // ~ kiouni: given to the guide or sold; the Ganges.
-// Reads: hands torg, slon, kak-mertvyy, ryvok. Leaves: choices.sati, choices.kiouni; hours, money; marks aouda, pp,
+// Reads: hands bargain, elephant, like-the-dead, dash. Leaves: choices.sati, choices.kiouni; hours, money; marks aouda, pp,
 // guide.
 import { SCENES } from '../story.js';
-import torg from '../minigames/torg.js';
-import slon from '../minigames/slon.js';
-import kakMertvyy from '../minigames/kak-mertvyy.js';
-import ryvok from '../minigames/ryvok.js';
+import bargain from '../minigames/bargain.js';
+import elephant from '../minigames/elephant.js';
+import likeTheDead from '../minigames/like-the-dead.js';
+import dash from '../minigames/dash.js';
 
 export default {
   number: 'I',
@@ -68,7 +68,7 @@ export default {
       await g.beat('haggle', { wait: false });
       await g.say('fogg', 'A thousand pounds');
       await g.say('owner', 'No');
-      const r = await g.play(torg, { onRefuse: () => g.say('owner', 'No') });
+      const r = await g.play(bargain, { onRefuse: () => g.say('owner', 'No') });
       g.money(-(r?.price ?? 2000));
       if (r?.minutes) g.hours(-r.minutes / 60, tr('The bargain'));
       g.sound.notes();
@@ -85,7 +85,7 @@ export default {
       g.beds({ jungle: 0.4, elephant: 0.6 }, 2);
       await g.scene(SCENES.jungle, { beat: 'ride', day: 1 }, { cut: true });
       await g.beat('ride', { wait: false });
-      const r = await g.play(slon);
+      const r = await g.play(elephant);
       g.hours(r?.hours ?? 0, r?.hours > 0 ? tr('Kiouni quickened his pace') : tr('Kiouni is being stubborn'));
       g.beds({ jungle: 0.2, elephant: 0.3 }, 3);
     },
@@ -133,7 +133,7 @@ export default {
         await rise;
         g.hero('pp');
         await g.beat('walk', { wait: false });
-        const r = await g.play(kakMertvyy);
+        const r = await g.play(likeTheDead);
         if (r?.hours) g.hours(r.hours, tr('The chase'));
         const pp = g.told('flee:pp');
         const flee = g.beat('flee');
@@ -147,7 +147,7 @@ export default {
         g.beds({ drums: 0.9, elephant: 0.8, crowd: 0.5 }, 1);
         g.sound.trumpet();
         await g.beat('charge', { wait: false });
-        const r = await g.play(ryvok);
+        const r = await g.play(dash);
         if (r?.hours) g.hours(r.hours, tr('The chase'));
         g.beds({ elephant: 0.6, drums: 0.3 }, 3);
         await g.say('guide', 'They knew me. I can never go home now');
