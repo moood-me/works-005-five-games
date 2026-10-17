@@ -19,7 +19,7 @@ export default {
   about: 50,
   skipped: { knocked: [] },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('Night. Five windows in the settlement are still lit') });
+    const mg = g.minigame({ phrase: tr('Night. In the settlement the light is still on in five windows') });
     const send = keys(g);
     const pause = s => { const t0 = mg.t; return until(mg, ({ t }) => t - t0 >= s); };
     const lit = new Set(), marks = new Map(), presses = [];

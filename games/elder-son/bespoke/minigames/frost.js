@@ -20,7 +20,7 @@ export default {
   about: 18,
   skipped: { hole: 0.6 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('Frost on the glass. Beyond it, the plots and the station') });
+    const mg = g.minigame({ phrase: tr('Frost has grown over the glass. Beyond it, the vegetable plots and the station') });
     const send = keys(g);
     const h = () => b.frame()?.h || 600;
     let train = null;

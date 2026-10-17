@@ -19,7 +19,7 @@ export default {
   about: 15,
   skipped: { creaks: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('Old floorboards. The wall clock\'s ticking fills the kitchen') });
+    const mg = g.minigame({ phrase: tr('The floorboards are old. The wall clock ticks loud enough to fill the kitchen') });
     const send = keys(g);
     const clock = mg.mark({ at: 'clock#face', kind: 'light' });
     const beat = mg.rhythm({ on: null, show: [clock], bpm: BPM, window: WINDOW });

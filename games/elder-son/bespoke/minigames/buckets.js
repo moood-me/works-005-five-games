@@ -20,7 +20,7 @@ export default {
   about: 35,
   skipped: { buckets: 3 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The shed\'s on fire. The barrel by the fence is full') });
+    const mg = g.minigame({ phrase: tr('The shed is on fire. The barrel by the fence is full') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); g.sound.fire(0, 1); });

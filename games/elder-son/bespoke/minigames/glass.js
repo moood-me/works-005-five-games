@@ -15,7 +15,7 @@ export default {
   about: 6,
   skipped: { wipe: 0.8 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The carriage window is frosted. Beyond it, the platform') });
+    const mg = g.minigame({ phrase: tr('The carriage window is frosted over. Beyond it, the platform') });
     const send = keys(g);
     const h = () => b.frame()?.h || 600;
     const pane = mg.mark({ at: 'train_window#pane', kind: 'spot' });
