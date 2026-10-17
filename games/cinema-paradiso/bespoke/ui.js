@@ -1,10 +1,10 @@
 // What the game shows over the scene (bespoke.layer), as the intertitles of a silent film: black cards, a thin double
 // white frame with corners, white serif letters, a little flicker and grain (game.md §9). Warm is the beam's alone:
-// the beam of the Тото gauge and, in «Плёнка», the chosen frames — nothing else here.
+// the beam of Toto's gauge and, in the strip, the chosen frames — nothing else here.
 //   view.gauges({scales, shown} | null, hero) — each scale once the player has met it: the booth's window with its beam
-//     low on the left (Кино ↔ Люди: the beam brighter ↔ the square's three windows warmer), the reel low on the right
-//     (Держать ↔ Отпустить: the film wound tight ↔ a long tail flying); hero ('toto' | 'alfredo' | 'both') — whose
-//     scene it is: their scale in full, the other at a third. view.gauges(null) — none («Плёнка», the epilogue)
+//     low on the left (Cinema ↔ People: the beam brighter ↔ the square's three windows warmer), the reel low on the right
+//     (Hold ↔ Let go: the film wound tight ↔ a long tail flying); hero ('toto' | 'alfredo' | 'both') — whose
+//     scene it is: their scale in full, the other at a third. view.gauges(null) — none (the strip, the epilogue)
 //   view.toast(text, kind) — a card in the corner: 'scale' (a scale moved), 'rule' (what a scale means, the first
 //     time), 'mark' (remembered); three at most
 //   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do); → a function that takes it
@@ -15,11 +15,11 @@
 //     calendar leaf, pencil), 'letter' (a ruled sheet, blue ink) — folded in three, pressed it opens, pressed again it
 //     folds and goes; 'envelope' — an envelope face down: pressed it turns over (its violet stamp: the text), pressed
 //     again it goes. onOpen — once it lies open (its voice). → once it has gone. text: its lines ('\n')
-//   view.replaying(on) — the plate «Переигровка» in the corner while a replay goes on (game.js)
+//   view.replaying(on) — the plate «Replay» in the corner while a replay goes on (game.js)
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
 //     opened by his sign on the map (author() → what opens or closes it), lists the chapters, their steps and the
-//     steps' minigames, to go to any — as the play picked under «партия как…» has it by then (as: its index)
+//     steps' minigames, to go to any — as the play picked under «play as…» has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
 
@@ -47,7 +47,7 @@ export function ui(layer) {
   const reel = reelGauge(layer);
   const toasts = el('div', 'toasts', layer);
   const replay = el('div', 'replay', layer);
-  replay.textContent = 'Переигровка';
+  replay.textContent = tr('Replay');
   replay.hidden = true;
   let hinted = () => {}; // takes the hint shown now away
   return {
@@ -89,7 +89,7 @@ export function ui(layer) {
     letter: (letter, { signal, onOpen } = {}) => (letter.kind === 'envelope' ? envelope(layer, letter, signal, onOpen) : unfold(layer, letter, signal, onOpen)),
     replaying(on) { replay.hidden = !on; },
     author({ chapters, plays, at, games, go }) {
-      // the map (his sign on the map opens it): «партия как…», then every chapter a column of its steps (and their
+      // the map (his sign on the map opens it): «play as…», then every chapter a column of its steps (and their
       // minigames) in a window over the scene; a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
       map.hidden = true;
@@ -100,11 +100,11 @@ export function ui(layer) {
       const open = () => {
         const here = at(), panel = el('div', 'author-panel');
         const pick = el('label', 'as');
-        pick.append('партия как… ');
+        pick.append('play as… ');
         const list = el('select', '', pick);
         list.append(...plays.map((label, i) => Object.assign(el('option'), { value: i, textContent: label, selected: i === as })));
         list.onchange = () => { as = Number(list.value); open(); };
-        panel.append(button('✕', 'закрыть (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
+        panel.append(button('✕', 'close (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
@@ -112,7 +112,7 @@ export function ui(layer) {
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'сразу к мини-игре', () => { close(); go(as, ci, si, k); }, 'minigame'))));
+              button(`◆ ${name}`, 'straight to the minigame', () => { close(); go(as, ci, si, k); }, 'minigame'))));
             col.append(step, under);
           }
           return col;
@@ -134,7 +134,7 @@ const gauge = (box, set) => ({
   },
 });
 
-// Тото (Кино ↔ Люди, −5…5): the booth's dark window top left, its beam down to the right — brighter the more he lives
+// Toto (Cinema ↔ People, −5…5): the booth's dark window top left, its beam down to the right — brighter the more he lives
 // for the cinema —, the square's three small windows below — warmer the more he lives for people
 function beamGauge(layer) {
   const box = svg('svg', { class: 'gauge beam', viewBox: '0 0 72 72', 'aria-hidden': 'true' }, layer);
@@ -152,7 +152,7 @@ function beamGauge(layer) {
   });
 }
 
-// Альфредо (Держать ↔ Отпустить, −3…3): a reel, the film wound on it; its tail goes out right and up — short when he
+// Alfredo (Hold ↔ Let go, −3…3): a reel, the film wound on it; its tail goes out right and up — short when he
 // holds the boy, long and flying when he lets him go
 function reelGauge(layer) {
   const box = svg('svg', { class: 'gauge reel', viewBox: '0 0 72 72', 'aria-hidden': 'true' }, layer);
@@ -190,7 +190,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
   }
   let stage = 'folded';
   const wait = ms => new Promise(ok => setTimeout(ok, ms));
-  const say = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
+  const prompt = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
   return new Promise(done => {
     const leave = () => { veil.remove(); done(); };
     signal?.addEventListener('abort', leave);
@@ -205,7 +205,7 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
         letter.classList.add('open-bottom');
         onOpen?.();
         await wait(2400);
-        say('сложить');
+        prompt(tr('fold'));
         hint.classList.add('on');
         stage = 'open';
       } else if (stage === 'open') {
@@ -224,10 +224,10 @@ function unfold(layer, { text, sign, kind = 'letter' }, signal, onOpen) {
       }
     };
     veil.addEventListener('click', press);
-    document.fonts.load('1em "Paradizo Title"').finally(async () => {
+    document.fonts.load('1em "Paradiso Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      say('развернуть');
+      prompt(tr('unfold'));
       if (stage === 'folded') hint.classList.add('on');
     });
   });
@@ -240,13 +240,13 @@ function envelope(layer, { text, sign }, signal, onOpen) {
   const env = el('div', 'envelope', veil);
   el('div', 'side back', env);
   const face = el('div', 'side front', env);
-  el('p', 'address', face).textContent = 'Палермо';
+  el('p', 'address', face).textContent = tr('Palermo');
   el('p', 'stamp', face).textContent = text;
   if (sign) el('p', 'sign', face).textContent = sign;
   const hint = card('p', 'letter-hint', veil);
   let stage = 'down';
   const wait = ms => new Promise(ok => setTimeout(ok, ms));
-  const say = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
+  const prompt = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
   return new Promise(done => {
     const leave = () => { veil.remove(); done(); };
     signal?.addEventListener('abort', leave);
@@ -258,7 +258,7 @@ function envelope(layer, { text, sign }, signal, onOpen) {
         env.classList.add('turned');
         onOpen?.();
         await wait(2400);
-        say('отложить');
+        prompt(tr('put aside'));
         hint.classList.add('on');
         stage = 'up';
       } else if (stage === 'up') {
@@ -271,10 +271,10 @@ function envelope(layer, { text, sign }, signal, onOpen) {
         leave();
       }
     });
-    document.fonts.load('1em "Paradizo Title"').finally(async () => {
+    document.fonts.load('1em "Paradiso Title"').finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      say('перевернуть');
+      prompt(tr('turn over'));
       if (stage === 'down') hint.classList.add('on');
     });
   });

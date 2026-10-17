@@ -6,7 +6,7 @@
 //   g.sound — the game's sounds (sound.js)
 //   g.hero(who) — whose scene it is: 'toto' | 'alfredo' | 'both' — the hero's scale in full, the other one at a third
 //   g.beds(levels, seconds) — the beds of sound: those named go to their level, every other one to nothing
-//   g.scene(title, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
+//   g.scene(folder, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
 //     under it what the play has decided, as this scene's keys (carry). It plays no beat until one is named: the
 //     step's first beat goes in `state` ({beat: name}) — the scene opens playing it, its first frame the beat's own —
 //     and g.beat(name) then takes it up (waits for its end). cut: the scene before stays on the screen till this one
@@ -22,8 +22,8 @@
 //   g.watch(key, fn) — fn(value, old) each time the scene sets the key, till the step is left
 //   g.spot(ref) — where a point of the scene ('id' | 'id#point') is on the screen: {x, y} in frame heights from the
 //     frame's middle (x to the right, y down); asked each frame till the scene answers, for a second — else null
-//   g.say(who, text, at) — someone of PEOPLE says it, over `at` ('id' | 'id#point' of the scene; 'narrator' — low in
-//     the middle), in their voice; → a breath after it has been heard (unvoiced: once it could be read)
+//   g.say(who, text, at) — someone of the game's people (people.json: bespoke.say) says it, over `at` ('id' | 'id#point'
+//     of the scene; 'narrator' — low in the middle), in their voice; → a breath after it has been heard (unvoiced: once it could be read)
 //   g.choose(choice, {ref: options, …}) — the player presses one of the points ('id#point' | 'id': where the element
 //     is pressed), then one of its options ([{id, label}]: petals, one too — seen in words, pressed); → the option's
 //     id, kept in state.choices[choice] (choice null: not a choice of the chapter's map). One who doesn't press is
@@ -38,7 +38,7 @@
 //     or the step is left: it stops; → `skipped` then. Not a way through: each minigame is passable. `skipped` reads
 //     as played — a plain good outcome a play gives, so a skipped minigame leaves in the story the same trace as one
 //     played.
-//     **Its result is kept in g.state.hands[<the minigame's file name>]** (game.md §3.6: 'skleyka', 'sto-nochey'…) —
+//     **Its result is kept in g.state.hands[<the minigame's file name>]** (game.md §3.6: 'splice', 'hundred-nights'…) —
 //     the name is the module's `file` field if it has one, else its `title` looked up in HANDS below (the titles of
 //     game.md §7, letter for letter): a minigame needs nothing more than its §7 title
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
@@ -64,44 +64,26 @@
 // (a dry run): then nothing of it is said, shown or heard, and a minigame gives what j.result says, else its `skipped`.
 import * as sounds from './sound.js';
 
-export const SCENES = { square: 'Площадь', booth: 'Будка', hall: 'Зал', home: 'Дом Ди Вита', quay: 'Пристань',
-  station: 'Вокзал', rome: 'Просмотровый зал', strip: 'Плёнка' };
+// the world's scenes the game plays, by their folders
+export const SCENES = { square: 'main', booth: 'booth', hall: 'hall', home: 'home', quay: 'pier',
+  station: 'station', rome: 'rome', strip: 'strip' };
 
 // the minigames by their titles (game.md §7) → the file name their result is kept under (g.state.hands)
-export const HANDS = { 'Подглядывать': 'podglyadyvat', 'Склейка': 'skleyka', 'Буквы': 'bukvy', 'Заправка': 'zapravka',
-  'Луч': 'luch', 'Вытащить': 'vytaschit', 'Камера': 'kamera', 'Сто ночей': 'sto-nochey', 'Смена': 'smena',
-  'Записка': 'zapiska', 'Лента': 'lenta' };
+export const HANDS = { 'Peeking': 'peek', 'Splicing': 'splice', 'Letters': 'letters', 'Threading': 'thread',
+  'The Beam': 'beam', 'Pull Him Out': 'pull-out', 'The Camera': 'camera', 'A Hundred Nights': 'hundred-nights', 'Changeover': 'changeover',
+  'The Note': 'note', 'The Strip': 'strip' };
 const handsOf = m => m?.file ?? HANDS[m?.title];
-
-// who speaks: the sound service's voice, how it says it, who it is (game.md §8)
-export const PEOPLE = {
-  narrator: { voice: 'Iapetus', how: 'негромко, тепло, чуть с усмешкой, как вспоминают давнее — без нажима', name: 'Сальваторе вспоминает' },
-  salvatore: { voice: 'Iapetus', how: 'взрослый мужчина: сдержанно, устало, коротко', name: 'Сальваторе, сорок семь лет' },
-  toto_boy: { voice: 'Puck', how: 'мальчик восьми–десяти лет: бойко, звонко, хитро', name: 'Тото, мальчик' },
-  toto: { voice: 'Achird', how: 'юноша: горячо, просто, немного смущённо', name: 'Тото, семнадцать–восемнадцать лет' },
-  alfredo: { voice: 'Algenib', how: 'низко, хрипловато, ворчливо и нежно; сицилийский выговор', name: 'Альфредо, киномеханик' },
-  maria: { voice: 'Achernar', how: 'молодая вдова: резко, устало, с надрывом', name: 'Мария, мать Тото' },
-  maria_old: { voice: 'Sulafat', how: 'старая женщина: тихо, ровно, без жалобы', name: 'Мария, мать, через тридцать лет' },
-  elena: { voice: 'Leda', how: 'девушка: живо, светло, немного дерзко; письма — тихо, как читают про себя', name: 'Елена, семнадцать лет' },
-  elena_grown: { voice: 'Vindemiatrix', how: 'женщина: спокойно, низко, с улыбкой и грустью', name: 'Елена, сорок семь лет' },
-  adelfio: { voice: 'Charon', how: 'старый священник: строго, в нос, с досадой', name: 'отец Адельфио' },
-  madman: { voice: 'Fenrir', how: 'сумасшедший: громко, нараспев, радостно', name: 'сумасшедший с площади' },
-  madman_old: { voice: 'Fenrir', how: 'тот же, старый: хрипло, нараспев', name: 'сумасшедший с площади, старый' },
-  anna: { voice: 'Gacrux', how: 'старая вдова: тихо, просто, по-деревенски', name: 'Анна, вдова Альфредо' },
-  banker: { voice: 'Orus', how: 'сухо, властно, громко', name: 'отец Елены' },
-  crowd: { voice: 'Sadachbia', how: 'толпа кричит: несколько голосов, громко, весело или испуганно', name: 'люди на площади' },
-};
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean.
 export const SCALES = {
-  toto: { start: 0, min: -5, max: 5, up: 'Кино', down: 'Люди',
-    rule: 'Луч ярче — Тото живёт кино. Окна теплее — Тото живёт людьми.' },
-  alfredo: { start: 0, min: -3, max: 3, up: 'Держать', down: 'Отпустить',
-    rule: 'Катушка: держит Альфредо мальчика при себе — или отпускает в большую жизнь.' },
+  toto: { start: 0, min: -5, max: 5, up: tr('Cinema'), down: tr('People'),
+    rule: tr('The brighter the beam, the more Totò lives for the cinema. The warmer the windows, the more he lives for people.') },
+  alfredo: { start: 0, min: -3, max: 3, up: tr('Hold'), down: tr('Let go'),
+    rule: tr('The reel: Alfredo keeps the boy close, or lets him go out into the world.') },
 };
 export const ENDINGS = [
-  { id: 'turn', label: 'Пусть останется' }, { id: 'note', label: 'Записка' }, { id: 'letters', label: 'Письма' },
+  { id: 'turn', label: tr('Let it stay') }, { id: 'note', label: tr('The note') }, { id: 'letters', label: tr('The letters') },
 ];
 
 // What follows from the play so far — all a step reads of it besides g.state. A choice not made (its step skipped by
@@ -110,20 +92,20 @@ export function facts(state) {
   const c = state.choices, t = state.scales.toto, a = state.scales.alfredo, elena = c.elena ?? 'future';
   const girl = c.girl ?? 'let', h = state.hands ?? {};
   return {
-    seen: h.podglyadyvat?.seen ?? 3,                     // I.2: Р07 (≥ 2) или Р128
-    slips: h.zapravka?.slips ?? 0,                       // II.1: кадр дрожит в `motor` (`stutter`)
-    jumps: h.skleyka?.jumps ?? 0,                        // кривые склейки: «Лента», Рим
-    slate: h.bukvy?.crooked ?? '00000000',               // доска с его буквами в будке 1988 года
-    share: h.kamera?.share ?? 1,                         // сколько её в его плёнке (V.2)
-    missed: h.smena?.missed ?? 0,                        // IV.2: Р129
-    letter: elena === 'truth',                           // её письмо в руке Тото на пристани (IV.5)
-    kino: t > 0,                                         // ответ матери в V.2, мать на сносе
-    warm: Math.min(1, Math.max(0, (5 - t) / 10)),        // 0 Кино … 1 Люди
-    hold: a > 0,                                         // слова вдовы в V.4
+    seen: h.peek?.seen ?? 3,                         // I.2: L07 (≥ 2) or L128
+    slips: h.thread?.slips ?? 0,                     // II.1: the frame trembles in `motor` (`stutter`)
+    jumps: h.splice?.jumps ?? 0,                     // crooked splices: «The Strip», Rome
+    slate: h.letters?.crooked ?? '0000000',          // the slate with his letters in the booth of 1988
+    share: h.camera?.share ?? 1,                     // how much of her is in his film (V.2)
+    missed: h.changeover?.missed ?? 0,               // IV.2: L129
+    letter: elena === 'truth',                       // her letter in Toto's hand on the pier (IV.5)
+    cinema: t > 0,                                   // the answer to his mother in V.2, the mother at the demolition
+    warm: Math.min(1, Math.max(0, (5 - t) / 10)),    // 0 Cinema … 1 People
+    hold: a > 0,                                     // the widow's words in V.4
     alfredoHere: c.booth === 'hold',
     frame: c.frame === 'take',
     reel8: c.camera === 'film',
-    elena,                                               // 'truth' | 'future'
+    elena,                                           // 'truth' | 'future'
     ending: girl === 'let' ? 'turn' : elena === 'future' ? 'note' : 'letters',
     knows: girl === 'follow' && elena === 'future',
     place: c.funeral === 'apart' ? 'apart' : 'crowd',
@@ -131,9 +113,9 @@ export function facts(state) {
 }
 
 // The play's facts (f) as a scene's own keys: what g.scene opens it with, under the step's state (game.md §5).
-export function carry(title, f) {
+export function carry(folder, f) {
   return {
-    [SCENES.square]: { warm: f.warm, place: f.place, with_mother: f.kino ? 0 : 1 },
+    [SCENES.square]: { warm: f.warm, place: f.place, with_mother: f.cinema ? 0 : 1 },
     [SCENES.booth]: { alfredo_here: f.alfredoHere ? 1 : 0, jumps: f.jumps, slate_letters: f.slate },
     [SCENES.hall]: {},
     [SCENES.home]: { reel8: f.reel8 ? 1 : 0, share: f.share },
@@ -141,7 +123,7 @@ export function carry(title, f) {
     [SCENES.station]: {},
     [SCENES.rome]: { note_in_hand: f.ending === 'note' ? 1 : 0, jumps: f.jumps },
     [SCENES.strip]: {},
-  }[title];
+  }[folder];
 }
 
 const BEAT = 180000; // a beat longer than this has not ended: the scene lacks it
@@ -195,24 +177,17 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     const { shown, then } = j;
     for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
     view.gauges(state, hero);
-    if (shown) await alive(b.show(shown.title, { state: shown.state, captions: false, then }));
+    if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
     ahead();
   })());
   if (j && j.target < Infinity) j.idle.then(seen);
-  // a line, and the time it asks: heard — a breath after; shown without a voice — as long as it
-  // takes to read it (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
-  async function speak(at, text, opts) {
-    if (unseen()) return sleep(300 + text.length * 60);
-    let heard = false;
-    const hear = e => { if (e.detail.on && e.detail.text === text.trim()) heard = true; };
-    addEventListener('moood:speech', hear);
-    try { await b.say(at, text, opts); } finally { removeEventListener('moood:speech', hear); }
-    await sleep(heard ? 500 : 300 + text.length * 60);
-  }
+  // the time a line asks, once said: heard — a breath after; shown without a voice — as long as it takes to read it
+  // (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
+  const after = ({ heard, text }) => sleep(heard ? 500 : 300 + text.length * 60);
   // a minigame's result kept where the story reads it (game.md §3.6)
   const keepHands = (minigame, result) => {
     const name = handsOf(minigame);
-    if (!name) { b.trouble?.(`мини-игра «${minigame?.title}»: её файла нет в HANDS (story.js)`); return result; }
+    if (!name) { b.trouble?.(`minigame “${minigame?.title}”: its file is not in HANDS (story.js)`); return result; }
     state.hands[name] = result && typeof result === 'object' ? { ...result } : result;
     return result;
   };
@@ -228,15 +203,15 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     beds(levels, seconds = 2) {
       if (!gone()) g.sound.beds(levels, seconds);
     },
-    async scene(title, st = {}, { cut = false } = {}) {
+    async scene(folder, st = {}, { cut = false } = {}) {
       if (gone()) return never;
       // (opened as it is to be: what the play has decided — those of its keys the scene has —, the beat it opens
       // with playing from its first frame)
-      const spec = await alive(unseen() ? j.real(b.specOf(title)) : b.specOf(title));
-      st = { ...Object.fromEntries(Object.entries(carry(title, facts(state)) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
+      const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
+      st = { ...Object.fromEntries(Object.entries(carry(folder, facts(state)) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
       if (unseen()) {
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
-        j.scene(title, st);
+        j.scene(folder, st);
         return;
       }
       showing = true;
@@ -244,7 +219,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         if (fast) await alive(land());
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
         g.withdraw();
-        await alive(b.show(title, { state: st, captions: false, fade: !cut }));
+        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       } finally { showing = false; }
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
@@ -282,8 +257,9 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     },
     async say(who, text, at = who) {
       if (gone()) return never;
+      if (unseen()) return sleep(300 + text.length * 60);
       if (fast) await alive(land());
-      return speak(at, text, PEOPLE[who]);
+      return alive(b.say(who, text, { at })).then(after);
     },
     async choose(choice, offers) {
       if (gone()) return never;
@@ -318,7 +294,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`кусок «${name}» не кончился`);
+      if (wait && !(await ended)) b.trouble(`the beat “${name}” did not end`);
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
@@ -350,7 +326,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       }
     },
     minigame(o = {}) {
-      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      if (!playing) throw new Error('g.minigame — only inside a minigame (g.play)');
       const mg = b.minigame.start({ ...o, signal: playing.signal });
       mg.on('skip', playing.end);
       return mg;

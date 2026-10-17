@@ -1,11 +1,11 @@
-// The map's trees (game.js map), over «Плёнка» — the play on the dark of the booth. The scene is only the background
+// The map's trees (game.js map), over «The Strip» — the play on the dark of the booth. The scene is only the background
 // and a point for each chapter (c<i>: unseen, where the chapter's knot is) and for the author's sign (author); each
 // tree is the game's own, HTML laid out by CSS in normal flow (its words never run into one another) — each chapter a
 // strip of 35 mm film; the forks its frames; what was chosen in the projector's warm light —, in bespoke.underlay
 // (under the language's marks, which stand on its knots, forks and pointers). A tree: its number and title, its knot,
 // its rows — the question left, the trunk and its dot in the middle (a short SVG, seg), the answers right: the one
 // chosen first, the others on twigs; a replay's thread dashed beside the trunk, its badge over the tree; where the play
-// stands — a pointer at the trunk's end, «продолжить игру» or «продолжить переигровку». It stands at its chapter's
+// stands — a pointer at the trunk's end, «continue the game» or «continue the replay». It stands at its chapter's
 // point, the knot there, and goes with it each frame the scene says (bespoke.onFrame): the view dragged, brought to a
 // chapter, walked toward (the wheel, a pinch: nearer, larger — by the point's depth). What lives is CSS, the page's own
 // (it stands with the play's pause): the knots breathe, the pointers nudge; a chapter just played grows row by row.
@@ -111,7 +111,7 @@ const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '
     tree.append(head);
     if (c.kind === 'future') return { tree, nodes, origin: () => [tree.offsetWidth / 2, head.offsetHeight] };
     tree.append(el('i', 'sprocket l'), el('i', 'sprocket r'), el('i', 'edge', 'PARADISO · 35 ▸'));
-    if (c.badge) { const badge = el('div', 'badge'); badge.append(el('i'), 'Переигровка'); tree.prepend(badge); }
+    if (c.badge) { const badge = el('div', 'badge'); badge.append(el('i'), tr('Replay')); tree.prepend(badge); }
     head.append(el('div', 'title', c.title));
     head.dataset.ref = `knot:${i}`;
     const knot = el('div', 'knot'), core = el('i', 'core');
@@ -144,7 +144,7 @@ const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '
       row.stem.append(tip(replay), at);
       nodes.set(ref, at);
     };
-    if (c.replay && r1 < 0) pointer(line('row cursor r', '', el('ul', 'opts')), 'продолжить\nпереигровку', true, `goreplay:${i}`);
+    if (c.replay && r1 < 0) pointer(line('row cursor r', '', el('ul', 'opts')), tr('continue\nthe replay'), true, `goreplay:${i}`);
     rows.forEach((row, k) => {
       const opts = el('ul', 'opts'), chosen = row.options.filter(o => o.state === 'chosen' || o.state === 'both');
       const rest = row.options.filter(o => !chosen.includes(o) && o.state !== 'unseen');
@@ -163,7 +163,7 @@ const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '
       const r = line(['row', row.weight === '⚑' ? 'key' : '', inReplay ? 'r' : '', k === r0 ? 'r-start' : ''].filter(Boolean).join(' '), name, opts);
       if (i === grow) r.li.style.animationDelay = `${(k * seconds) / rows.length}s`;
       if (chosen.length) { r.stem.append(hit(`fork:${i}:${k}`, row.title)); nodes.set(`fork:${i}:${k}`, r.dot); }
-      if (c.replay && k === r1) pointer(line('row cursor r', '', el('ul', 'opts')), 'продолжить\nпереигровку', true, `goreplay:${i}`);
+      if (c.replay && k === r1) pointer(line('row cursor r', '', el('ul', 'opts')), tr('continue\nthe replay'), true, `goreplay:${i}`);
     });
     if (c.go) pointer(line('row pending', '', el('ul', 'opts')), c.go, false, `go:${i}`);
     tree.append(list);
@@ -171,11 +171,11 @@ const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '
     return { tree, nodes, origin: () => { const [x, y] = within(core, tree); return [x + core.offsetWidth / 2, y + core.offsetHeight / 2]; } };
   }
 
-  // the author's sign, «автор» under it
+  // the author's sign, «the author» under it
   function sign() {
     const tree = el('div', 'author'), mark = el('div');
     mark.innerHTML = AUTHOR;
-    tree.append(mark, el('span', '', 'автор'), hit('author', 'Карта автора'));
+    tree.append(mark, el('span', '', tr('the author')), hit('author', tr('The author’s map')));
     return { tree, nodes: new Map([['author', mark]]), origin: () => [tree.offsetWidth / 2, mark.offsetHeight / 2] };
   }
 

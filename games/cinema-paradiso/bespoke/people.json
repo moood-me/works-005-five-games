@@ -1,0 +1,92 @@
+{
+  "narrator": {
+    "voice": "Iapetus",
+    "how": "quietly, warmly, with a faint smile, the way one remembers long ago — never pressing",
+    "name": "Salvatore remembering",
+    "short": "Salvatore"
+  },
+  "salvatore": {
+    "voice": "Iapetus",
+    "how": "a grown man: restrained, tired, few words",
+    "name": "Salvatore, forty-seven",
+    "short": "Salvatore"
+  },
+  "toto_boy": {
+    "voice": "Puck",
+    "how": "a boy of eight to ten: lively, ringing, sly",
+    "name": "Totò, a boy",
+    "short": "Totò"
+  },
+  "toto": {
+    "voice": "Achird",
+    "how": "a young man: ardent, simple, a little shy",
+    "name": "Totò, seventeen or eighteen",
+    "short": "Totò"
+  },
+  "alfredo": {
+    "voice": "Algenib",
+    "how": "low, a little hoarse, grumbling and tender; a Sicilian accent",
+    "name": "Alfredo, the projectionist",
+    "short": "Alfredo"
+  },
+  "maria": {
+    "voice": "Achernar",
+    "how": "a young widow: sharp, weary, close to breaking",
+    "name": "Maria, Totò's mother",
+    "short": "Maria"
+  },
+  "maria_old": {
+    "voice": "Sulafat",
+    "how": "an old woman: quiet, even, without complaint",
+    "name": "Maria, his mother, thirty years on",
+    "short": "Maria"
+  },
+  "elena": {
+    "voice": "Leda",
+    "how": "a girl: lively, bright, a little bold; her letters quietly, the way one reads to oneself",
+    "name": "Elena, seventeen",
+    "short": "Elena"
+  },
+  "elena_grown": {
+    "voice": "Vindemiatrix",
+    "how": "a woman: calm, low, with a smile and a sadness",
+    "name": "Elena, forty-seven",
+    "short": "Elena"
+  },
+  "adelfio": {
+    "voice": "Charon",
+    "how": "an old priest: stern, nasal, annoyed",
+    "name": "Father Adelfio",
+    "short": "Father Adelfio"
+  },
+  "madman": {
+    "voice": "Fenrir",
+    "how": "a madman: loud, sing-song, joyful",
+    "name": "the madman of the square",
+    "short": "the madman"
+  },
+  "madman_old": {
+    "voice": "Fenrir",
+    "how": "the same man, old: hoarse, sing-song",
+    "name": "the madman of the square, old",
+    "short": "the madman"
+  },
+  "anna": {
+    "voice": "Gacrux",
+    "how": "an old widow: quiet, plain, a village woman",
+    "name": "Anna, Alfredo's widow",
+    "short": "Anna"
+  },
+  "banker": {
+    "voice": "Orus",
+    "how": "dry, commanding, loud",
+    "name": "Elena's father",
+    "short": "Elena's father"
+  },
+  "crowd": {
+    "voice": "Sadachbia",
+    "how": "a crowd shouting: several voices, loud, merry or frightened",
+    "name": "the people in the square",
+    "short": "the crowd"
+  }
+}
