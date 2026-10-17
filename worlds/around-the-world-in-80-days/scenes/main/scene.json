@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Реформ-клуб",
-  "caption": "Пэлл-Мэлл, вечер. Часы идут.",
+  "title": "The Reform Club",
+  "caption": "Pall Mall, evening. The clock is going.",
   "horizon": 0.55,
   "camera": {
     "mode": "picture"
@@ -128,7 +128,7 @@
         0,
         1439
       ],
-      "means": "минуты от полуночи: часовая и минутная стрелки (20:44 — 1244)"
+      "means": "minutes from midnight: the hour and the minute hands (20:44 — 1244)"
     },
     "second": {
       "range": [
@@ -136,7 +136,7 @@
         60
       ],
       "smooth": true,
-      "means": "секунды; скрипт сцены ведёт их сам, плавно: маятник ходит по ним, секундная стрелка шагает на целых"
+      "means": "seconds; the scene's script leads them itself, smoothly: the pendulum swings by them, the second hand steps on the whole ones"
     },
     "fire": {
       "range": [
@@ -144,7 +144,7 @@
         1
       ],
       "smooth": true,
-      "means": "огонь в камине: 0 — угли, 1 — полное пламя; столько же его света в зале"
+      "means": "the fire in the fireplace: 0 — embers, 1 — full flame; as much of its light in the saloon"
     },
     "door": {
       "range": [
@@ -152,7 +152,7 @@
         1
       ],
       "smooth": true,
-      "means": "двустворчатая дверь: 0 — закрыта (свет холла в щели), 1 — распахнута в зал; свет холла входит в зал"
+      "means": "the double door: 0 — shut (the hall's light in the chink), 1 — flung open into the saloon; the hall's light comes into the saloon"
     },
     "crowd_outside": {
       "range": [
@@ -160,7 +160,7 @@
         1
       ],
       "smooth": true,
-      "means": "толпа на Пэлл-Мэлл за окнами: 0 — никого, 1 — плотная толпа с фонарями"
+      "means": "the crowd on Pall Mall behind the windows: 0 — nobody, 1 — a thick crowd with lanterns"
     },
     "day": {
       "range": [
@@ -168,7 +168,7 @@
         1
       ],
       "smooth": true,
-      "means": "час за окнами и свет в зале: 0 — серый день, 0.5 — сумерки, газ зажигают, 1 — ночь"
+      "means": "the hour behind the windows and the light in the saloon: 0 — a grey day, 0.5 — dusk, the gas is lit, 1 — night"
     },
     "leaf_l": {
       "range": [
@@ -176,7 +176,7 @@
         280
       ],
       "smooth": true,
-      "means": "поворот левой створки, градусы: 180 — закрыта, 280 — распахнута в зал; ведёт script.js по door, игре трогать не нужно"
+      "means": "the left leaf's turn, degrees: 180 — shut, 280 — wide open into the saloon; led by script.js by door, the game need not touch it"
     },
     "leaf_r": {
       "range": [
@@ -184,60 +184,60 @@
         180
       ],
       "smooth": true,
-      "means": "поворот правой створки, градусы: 180 — закрыта, 80 — распахнута в зал; ведёт script.js по door, игре трогать не нужно"
+      "means": "the right leaf's turn, degrees: 180 — shut, 80 — wide open into the saloon; led by script.js by door, the game need not touch it"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма: countdown, whist, wager, wager_down, leave, wait, door, no_door, friday, friday_in (null — ни один: вне игры сцена играет свой показ)"
+      "means": "a beat of the film: countdown, whist, wager, wager_down, leave, wait, door, no_door, friday, friday_in (null — none: outside the game the scene plays its showcase)"
     },
     "gentlemen": {
       "range": [
         0,
         5
       ],
-      "means": "сколько джентльменов в зале: Стюарт, Фланаган, Фаллентин, Салливан, Ральф — по порядку"
+      "means": "how many gentlemen are in the saloon: Stuart, Flanagan, Fallentin, Sullivan, Ralph — in that order"
     },
     "fogg_present": {
       "range": [
         0,
         1
       ],
-      "means": "Фогг в зале"
+      "means": "Fogg in the saloon"
     },
     "fogg_seated": {
       "range": [
         0,
         1
       ],
-      "means": "Фогг сидит в своём кресле у огня с газетой (пятница)"
+      "means": "Fogg sits in his armchair by the fire with a newspaper (Friday)"
     },
     "with_aouda": {
       "range": [
         0,
         1
       ],
-      "means": "Ауда входит за Фоггом (кусок door)"
+      "means": "Aouda comes in after Fogg (the beat door)"
     },
     "with_pp": {
       "range": [
         0,
         1
       ],
-      "means": "Паспарту входит за Фоггом (кусок door)"
+      "means": "Passepartout comes in after Fogg (the beat door)"
     },
     "fogg_hat": {
       "range": [
         0,
         1
       ],
-      "means": "цилиндр Фогга на вешалке у двери; 0 — он у Фогга"
+      "means": "Fogg's top hat on the stand by the door; 0 — Fogg has it"
     },
     "cards_down": {
       "range": [
         0,
         1
       ],
-      "means": "карты Фогга положены на сукно рубашкой вверх (пари)"
+      "means": "Fogg's cards laid face down on the felt (the wager)"
     },
     "chair_back": {
       "range": [
@@ -245,27 +245,27 @@
         0.4
       ],
       "smooth": true,
-      "means": "на сколько метров отодвинут стул Фогга за столом (он встаёт)"
+      "means": "how many metres Fogg's chair is pushed back from the table (he rises)"
     },
     "with_fix": {
       "range": [
         0,
         1
       ],
-      "means": "Фикс входит за Фоггом последним, у двери (кусок door)"
+      "means": "Fix comes in after Fogg, last, by the door (the beat door)"
     },
     "fix_bruise": {
       "range": [
         0,
         1
       ],
-      "means": "1 — синяк у Фикса (каст: wears.fix_bruise)"
+      "means": "1 — Fix's bruise (the cast: wears.fix_bruise)"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Туман над Пэлл-Мэлл",
+      "name": "Fog over Pall Mall",
       "sky": true,
       "uniforms": {
         "high_r": 0.034,
@@ -278,7 +278,7 @@
     },
     {
       "id": "pavement",
-      "name": "Мостовая Пэлл-Мэлл",
+      "name": "Pall Mall roadway",
       "plane": true,
       "across": -10,
       "distance": 30,
@@ -289,7 +289,7 @@
     },
     {
       "id": "street",
-      "name": "Дома напротив",
+      "name": "Houses opposite",
       "across": 0,
       "distance": 40,
       "height": 24,
@@ -311,7 +311,7 @@
     },
     {
       "id": "crowd",
-      "name": "Толпа на улице",
+      "name": "Crowd in the street",
       "across": 0,
       "distance": 27,
       "height": 3,
@@ -324,7 +324,7 @@
     },
     {
       "id": "lamps",
-      "name": "Газовые фонари",
+      "name": "Gas lamps",
       "across": 0,
       "distance": 23,
       "height": 5,
@@ -338,7 +338,7 @@
     },
     {
       "id": "mist",
-      "name": "Туман",
+      "name": "Fog",
       "across": 0,
       "distance": 20,
       "height": 12,
@@ -357,7 +357,7 @@
     },
     {
       "id": "floor",
-      "name": "Пол",
+      "name": "Floor",
       "plane": true,
       "across": 0,
       "distance": 10,
@@ -374,7 +374,7 @@
     },
     {
       "id": "hall",
-      "name": "Холл за дверью",
+      "name": "Hall beyond the door",
       "across": 0,
       "distance": 18.6,
       "height": 5,
@@ -388,7 +388,7 @@
     },
     {
       "id": "glazing",
-      "name": "Переплёты окон",
+      "name": "Window frames",
       "across": 0,
       "distance": 18.7,
       "height": 10.4,
@@ -401,7 +401,7 @@
     },
     {
       "id": "jamb1",
-      "name": "Откос окна 1",
+      "name": "Window 1 jamb",
       "across": -7.0,
       "distance": 18,
       "height": 10.4,
@@ -415,7 +415,7 @@
     },
     {
       "id": "sill1",
-      "name": "Подоконник окна 1",
+      "name": "Window 1 sill",
       "plane": true,
       "across": -5.2,
       "distance": 18.35,
@@ -425,7 +425,7 @@
     },
     {
       "id": "soffit1",
-      "name": "Верх проёма окна 1",
+      "name": "Window 1 head",
       "plane": true,
       "across": -5.2,
       "distance": 18.35,
@@ -435,7 +435,7 @@
     },
     {
       "id": "jamb2",
-      "name": "Откос окна 2",
+      "name": "Window 2 jamb",
       "across": -13.0,
       "distance": 18,
       "height": 10.4,
@@ -449,7 +449,7 @@
     },
     {
       "id": "sill2",
-      "name": "Подоконник окна 2",
+      "name": "Window 2 sill",
       "plane": true,
       "across": -11.2,
       "distance": 18.35,
@@ -459,7 +459,7 @@
     },
     {
       "id": "soffit2",
-      "name": "Верх проёма окна 2",
+      "name": "Window 2 head",
       "plane": true,
       "across": -11.2,
       "distance": 18.35,
@@ -469,7 +469,7 @@
     },
     {
       "id": "jamb3",
-      "name": "Откос окна 3",
+      "name": "Window 3 jamb",
       "across": -19.0,
       "distance": 18,
       "height": 10.4,
@@ -483,7 +483,7 @@
     },
     {
       "id": "sill3",
-      "name": "Подоконник окна 3",
+      "name": "Window 3 sill",
       "plane": true,
       "across": -17.2,
       "distance": 18.35,
@@ -493,7 +493,7 @@
     },
     {
       "id": "soffit3",
-      "name": "Верх проёма окна 3",
+      "name": "Window 3 head",
       "plane": true,
       "across": -17.2,
       "distance": 18.35,
@@ -503,7 +503,7 @@
     },
     {
       "id": "jamb4",
-      "name": "Откос окна 4",
+      "name": "Window 4 jamb",
       "across": -25.0,
       "distance": 18,
       "height": 10.4,
@@ -517,7 +517,7 @@
     },
     {
       "id": "sill4",
-      "name": "Подоконник окна 4",
+      "name": "Window 4 sill",
       "plane": true,
       "across": -23.2,
       "distance": 18.35,
@@ -527,7 +527,7 @@
     },
     {
       "id": "soffit4",
-      "name": "Верх проёма окна 4",
+      "name": "Window 4 head",
       "plane": true,
       "across": -23.2,
       "distance": 18.35,
@@ -537,7 +537,7 @@
     },
     {
       "id": "wall",
-      "name": "Стена с окнами",
+      "name": "Wall with windows",
       "across": 0,
       "distance": 18,
       "height": 18,
@@ -550,7 +550,7 @@
     },
     {
       "id": "door",
-      "name": "Дверь",
+      "name": "Door",
       "across": -1.3,
       "distance": 18,
       "height": 5,
@@ -570,7 +570,7 @@
     },
     {
       "id": "door_r",
-      "name": "Дверь, правая створка",
+      "name": "Door, right leaf",
       "across": 1.3,
       "distance": 18,
       "height": 5,
@@ -590,7 +590,7 @@
     },
     {
       "id": "hatstand",
-      "name": "Вешалка у двери",
+      "name": "Hat-stand by the door",
       "across": -2.6,
       "distance": 17.0,
       "height": 2.2,
@@ -603,7 +603,7 @@
     },
     {
       "id": "papers",
-      "name": "Газеты на подставке",
+      "name": "Newspapers on a rack",
       "across": -5.0,
       "distance": 13,
       "height": 1.7,
@@ -616,7 +616,7 @@
     },
     {
       "id": "armchair_far",
-      "name": "Кресло у окна",
+      "name": "Armchair by the window",
       "across": -8.4,
       "distance": 12,
       "height": 1.1,
@@ -629,7 +629,7 @@
     },
     {
       "id": "partition",
-      "name": "Стена с часами",
+      "name": "Wall with the clock",
       "across": 0,
       "distance": 8,
       "height": 12,
@@ -642,7 +642,7 @@
     },
     {
       "id": "partition_end",
-      "name": "Торец стены с часами",
+      "name": "End of the wall with the clock",
       "across": 0.95,
       "distance": 8,
       "height": 12,
@@ -656,7 +656,7 @@
     },
     {
       "id": "hearth",
-      "name": "Очаг камина",
+      "name": "Fireplace recess",
       "across": 4.2,
       "distance": 8.55,
       "height": 1.2,
@@ -675,7 +675,7 @@
     },
     {
       "id": "hearth_floor",
-      "name": "Под очага",
+      "name": "Hearth floor",
       "plane": true,
       "across": 4.2,
       "distance": 8.275,
@@ -689,7 +689,7 @@
     },
     {
       "id": "fireplace",
-      "name": "Камин",
+      "name": "Fireplace",
       "across": 4.2,
       "distance": 8,
       "height": 1.5,
@@ -705,7 +705,7 @@
     },
     {
       "id": "flames",
-      "name": "Огонь в камине",
+      "name": "Fire in the fireplace",
       "across": 4.2,
       "distance": 8.3,
       "elevation": 0.03,
@@ -730,7 +730,7 @@
     },
     {
       "id": "embers",
-      "name": "Искры в камине",
+      "name": "Sparks in the fireplace",
       "across": 4.2,
       "distance": 8.3,
       "elevation": 0.05,
@@ -746,7 +746,7 @@
     },
     {
       "id": "clock",
-      "name": "Часы",
+      "name": "Clock",
       "across": 2.35,
       "distance": 8,
       "height": 5.6,
@@ -769,7 +769,7 @@
     },
     {
       "id": "felt",
-      "name": "Зелёное сукно",
+      "name": "Green felt",
       "plane": true,
       "across": -1.6,
       "distance": 7,
@@ -787,7 +787,7 @@
     },
     {
       "id": "table",
-      "name": "Ломберный стол",
+      "name": "Card table",
       "across": -1.6,
       "distance": 6.55,
       "height": 1,
@@ -807,7 +807,7 @@
     },
     {
       "id": "fogg_chair",
-      "name": "Стул Фогга",
+      "name": "Fogg's chair",
       "on": "table",
       "across": 0,
       "distance": 0,
@@ -831,7 +831,7 @@
     },
     {
       "id": "lamp",
-      "name": "Лампа над столом",
+      "name": "Lamp over the table",
       "across": -1.6,
       "distance": 7,
       "elevation": 2.3,
@@ -846,7 +846,7 @@
     },
     {
       "id": "dust",
-      "name": "Пыль в свете лампы",
+      "name": "Dust in the lamplight",
       "particles": {
         "kind": "dust",
         "at": [
@@ -864,7 +864,7 @@
     },
     {
       "id": "armchair",
-      "name": "Кресло у камина",
+      "name": "Armchair by the fire",
       "across": 1.6,
       "distance": 5.2,
       "height": 1,
@@ -884,7 +884,7 @@
     },
     {
       "id": "fogg",
-      "name": "Филеас Фогг",
+      "name": "Phileas Fogg",
       "person": {
         "cast": "cast",
         "who": "fogg",
@@ -900,7 +900,7 @@
     },
     {
       "id": "flanagan",
-      "name": "Томас Фланаган",
+      "name": "Thomas Flanagan",
       "person": {
         "cast": "cast",
         "who": "flanagan",
@@ -916,7 +916,7 @@
     },
     {
       "id": "fallentin",
-      "name": "Сэмюэл Фаллентин",
+      "name": "Samuel Fallentin",
       "person": {
         "cast": "cast",
         "who": "fallentin",
@@ -932,7 +932,7 @@
     },
     {
       "id": "sullivan",
-      "name": "Джон Салливан",
+      "name": "John Sullivan",
       "person": {
         "cast": "cast",
         "who": "sullivan",
@@ -948,7 +948,7 @@
     },
     {
       "id": "stuart",
-      "name": "Эндрю Стюарт",
+      "name": "Andrew Stuart",
       "person": {
         "cast": "cast",
         "who": "stuart",
@@ -964,7 +964,7 @@
     },
     {
       "id": "ralph",
-      "name": "Готье Ральф",
+      "name": "Gauthier Ralph",
       "person": {
         "cast": "cast",
         "who": "ralph",
@@ -980,7 +980,7 @@
     },
     {
       "id": "passepartout",
-      "name": "Паспарту",
+      "name": "Passepartout",
       "person": {
         "cast": "cast",
         "who": "passepartout",
@@ -996,7 +996,7 @@
     },
     {
       "id": "aouda",
-      "name": "Ауда",
+      "name": "Aouda",
       "person": {
         "cast": "cast",
         "who": "aouda",
@@ -1012,7 +1012,7 @@
     },
     {
       "id": "porter",
-      "name": "Швейцар",
+      "name": "Porter",
       "person": {
         "cast": "cast",
         "who": "porter",
@@ -1028,7 +1028,7 @@
     },
     {
       "id": "fix",
-      "name": "Фикс",
+      "name": "Fix",
       "person": {
         "cast": "cast",
         "who": "fix",

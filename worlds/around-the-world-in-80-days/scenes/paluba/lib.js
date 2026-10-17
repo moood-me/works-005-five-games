@@ -1,4 +1,4 @@
-// Палуба — what the scene's elements, script and film share: the ship's plan (one deck, four ships told apart by
+// The deck — what the scene's elements, script and film share: the ship's plan (one deck, four ships told apart by
 // their details), the ports on the horizon, the colours, the parts of the «Henrietta» that go into her furnaces and how
 // they go (burn), and the film in beats (film(scene), for the world's module beats).
 //   Metres, the ship's own: `distance` forward along her keel (the bow at +46), `across` to starboard (her right, the
@@ -59,7 +59,7 @@ const COLOURS = {
 };
 const colours = st => COLOURS[shipOf(st)];
 
-// ── the «Henrietta»'s parts that burn (the game's «Котлы») ──
+// ── the «Henrietta»'s parts that burn (the game's «The boilers») ──
 // Each: its key (1 aboard, 0 burnt), its element (or the anchor its cards stand on), where it is and the point the
 // player takes it by (`<part>#part`, its element's), and how it goes: dragged to the hatch (`drag_<part>` 0…1), a mast
 // falling first (its animate tips it over sideways, the first 0.35 of the drag). The script places them (keys
@@ -545,7 +545,7 @@ function film(scene) {
         await s.wait(2);
       },
     },
-    // ---- «Котлы»: the deck from the poop; the game drags the parts to the hatch (its keys); the beat only cuts here.
+    // ---- «The boilers»: the deck from the poop; the game drags the parts to the hatch (its keys); the beat only cuts here.
     burn: { from: BURN, run: async s => { await s.wait(1); } },
     // ---- Dawn, from the stern: the bare iron hull, Queenstown on the horizon; Speedy saluting from his cabin's roof
     // if it is left him.

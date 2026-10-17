@@ -1,6 +1,6 @@
 // The world's colours and London's hour, one for every scene: colours mixed and written, a soft glow, London's
 // hour (the colours of its fog, its gas) and the gas lamp of its streets — so the Pall Mall seen from the club's windows
-// and Savile Row are the same London at the same hour. Things are painted once, in their daylight colours: the hour is the
+// and Saville Row are the same London at the same hour. Things are painted once, in their daylight colours: the hour is the
 // scene's light (its looks on the hour's key). What the light can't make — the fog of a sky (a sky is not lit) — takes
 // the hour's colours from london() in an animate, as uniforms of its shader (lin); the gas lamps' light follows the hour
 // by e.glow (gas).

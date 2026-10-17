@@ -1,4 +1,4 @@
-// Из окна поезда — its mechanics: the train runs (the camera is the train: camera_x along the line, the carriage riding
+// From the train window — its mechanics: the train runs (the camera is the train: camera_x along the line, the carriage riding
 // on it), at the speed `speed` says; it stays in the land `land` names; the herd crosses where the train stands; who is
 // in the carriage follows the game's with_*. And the film in beats (lib.js film, the world's module beats) for the game.
 const L = scene.lib, P = L.plan;

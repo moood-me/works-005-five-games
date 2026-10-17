@@ -1,4 +1,4 @@
-// «Сэвил-Роу» — its mechanics: the door's leaf, Fix by the lamp when the game says he is there, the street's own life
+// «Saville Row» — its mechanics: the door's leaf, Fix by the lamp when the game says he is there, the street's own life
 // (`traffic`: cabs and passers-by), and the film in beats for the game (lib.js film, the world's module beats: `beat`
 // names one; notes.md tells them).
 const L = scene.lib, P = L.plan;

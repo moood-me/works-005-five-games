@@ -1,121 +1,133 @@
-# Из окна поезда (`iz-okna-poezda`) — движок 3
+# From the train window (`iz-okna-poezda`) — engine 3
 
-Связки всех глав (docs/vokrug-sveta/scenes.md). Купе первого класса; люди — движка (каст мира `cast`), фильм — куски
-модуля `beats`. Тёплое купе (орех, красный бархат, лампы) против мира за стеклом, у каждой земли свой свет. Всё
-нарисовано один раз, движется на видеокарте.
+The links of every chapter (docs/vokrug-sveta/scenes.md). A first-class compartment; the people are the engine's (the
+world's cast `cast`), the film is in beats of the module `beats`. A warm compartment (walnut, red velvet, lamps)
+against the world behind the glass, each land with a light of its own. All painted once, moving on the graphics card.
 
-## Как устроена
+## How it is made
 
-- **Мир лежит вдоль пути, поезд едет по нему.** `across` — вдоль пути (поезд идёт к +across), `distance` — от пути, за
-  окно. Камера — это поезд: `camera_x` — где он; невидимый `train` стоит на `camera_x`, на нём `carriage` (купе; его
-  `carriage_x` — сдвиг плана вбок: камера на 0.4 м правее середины купе — `carriage_x` −0.4), всё купе и люди — `on`
-  купе. Отсюда честный параллакс, тени, свет и туман; ничего не прокручивается.
-- **Пять земель — пять участков мира** (lib.js `plan`): середина земли k — k × 30 км (europe 0, india 30 км, prairie
-  60, snow 90, england 120). Смена `land` — склейка поезда на участок той земли (script.js; куски готовят её заранее
-  своим `from`) — картины не перерисовываются.
-- **Участок повторяется каждые 8 км** (`period`): всё вдоль пути стоит через шаг, делящий период, его облик —
-  `hash(j)` номера в периоде; холмы — периодический шум (`pnoise`). Поезд проходит свой участок (период вокруг
-  середины), в конце скрипт склеивает его на период назад — кадр до и после один и тот же (то же место в
-  повторе, тот же свет, люди на купе как были), склейка готовится заранее (`scene.shot` за 3 с до конца участка — для самого места склейки: поезд доезжает ровно до
-  конца и склеивается там). Почему не одна
-  длинная дорога: в игре `ride` может длиться сколько угодно; 8 км — 6.7 мин на полном ходу, показ их не доходит.
-  Картины нарисованы на период плюс сколько видно в окно сбоку (`reach` × дистанция: самый широкий план — глаз 1.1 м
-  сбоку и 1.2 м ближе к окну).
-- **Поезд едет** (script.js): `camera_x` двигается на полсекунды пути вперёд со скоростью `speed` × 20 м/с, следующее
-  движение дают раньше конца прежнего (каждые 0.25 с и каждый кадр, пока движется сам `speed`) — без остановок,
-  скорость — состояния. Склейка (кусок, земля, повтор) — продолжает с нового места.
-- **Земля** — `relief` (lib.js): у пути вровень с полом купе, насыпь спускается к земле на 1.3 м ниже к 7.5 м; в Индии
-  русло Ганга. На ней одна `drape`-плоскость `ground` 150 × 4 км: у каждой земли свои цвета по дистанции, поля полосами
-  от пути (борозды), просёлки поперёк, сухая трава сквозь снег прерии, заструги снега, илистые берега Ганга.
-- **Ганг** — плоскость-зеркало `river` над руслом (Индия), `reflect` без затухания, `rough` 0.3, `ripple` 0.3.
-- **Слои за окном** — карточки на своих дистанциях, каждая вдоль всех земель: `near` 14 м (столбы через 50 м, провода,
-  трава, пальмы, сугробы; бросает тени на землю), `herd` 60 м, `mid` 120 м, `far_bank` 330 м (Индия), `distant` 400 м,
-  `far` 3 км.
-- **Огни** — окна деревень и Лондона, газовые фонари (`distant`), окна кирпичных домов (`mid`), лампы гхат
-  (`far_bank`): окна — слой `lights`, шейдер (`distant.wgsl` и т. п.) добавляет его светом (`emission`) насколько горит
-  газ (`lit`, animate: lib `litMotion`), свечения `e.light` гаснут так же (`e.glow`).
-- **Небо** — шейдер `sky.wgsl`: цвета (земля, ночь, рассвет) — униформы от animate (lib `skyMotion`), лунная дымка у
-  горизонта и тёплое небо у низкого солнца; слои — звёзды (мерцают каждая своей фазой), луна, солнце (поднимается с
-  `dawn`). Свет луны и солнца — `from: "sky#moon"`, `"sky#sun"`.
-- **Бизоны** — `herd.js` рисует одного бизона в 12 фазах шага (слой `atlas`, вне своей рамки); `herd.wgsl` складывает
-  из него стадо: 6 рядов, в каждом бизон через 7 м, свой размер и длина шага (3.2…3.8 м), поза — по пройденному пути.
-  Стадо идёт через путь там, где стоит поезд (`herd_x`).
-- **Купе** — стена с окном (`window`), стекло `glass` (ночью в нём слабо видно купе), подоконник, столик, лампа, диваны
-  и их подлокотники. Свет окна — `window_light` (`daylight`, `of: "glass"`: входит через весь проём, только в купе).
-  Лампы — `sconce_l`, `sconce_r` (`window#…`), `table_lamp` (`lamp#bulb`), `on: night`; их стекло изнутри — слой
-  `lights`, добавляемый светом. Сколько света в купе — ниже («Свет купе»).
+- **The world lies along the line, the train goes along it.** `across` — along the line (the train goes towards
+  +across), `distance` — away from the line, out of the window. The camera is the train: `camera_x` — where it is; an
+  unseen `train` stands at `camera_x`, on it the `carriage` (the compartment; its `carriage_x` — the plan's offset
+  sideways: the camera 0.4 m right of the compartment's middle — `carriage_x` −0.4), the whole compartment and the
+  people are `on` the compartment. Hence an honest parallax, shadows, light and fog; nothing scrolls.
+- **Five lands — five stretches of the world** (lib.js `plan`): the middle of land k — k × 30 km (europe 0, india
+  30 km, prairie 60, snow 90, england 120). A change of `land` — a cut of the train to a stretch of that land
+  (script.js; the beats make it ready ahead with their `from`) — no painting is painted again.
+- **The stretch repeats every 8 km** (`period`): everything along the line stands at a step that divides the period,
+  its look — `hash(j)` of its number in the period; the hills — a periodic noise (`pnoise`). The train goes through its
+  stretch (a period about the middle), at the end the script cuts it a period back — the frame before and after is
+  one and the same (the same place in the repeat, the same light, the people on the compartment as they were), the cut
+  made ready ahead (`scene.shot` 3 s before the end of the stretch — for the very place of the cut: the train goes
+  exactly to the end and is cut there). Why not one long road: in the game `ride` may last as long as it likes; 8 km
+  is 6.7 min at full speed, the showcase never gets that far. The pictures are painted over the period plus as much as
+  is seen out of the window to the side (`reach` × distance: the widest shot — the eye 1.1 m to the side and 1.2 m
+  nearer the window).
+- **The train runs** (script.js): `camera_x` moves half a second of the way ahead at `speed` × 20 m/s, the next move is
+  given before the last one ends (every 0.25 s and every frame while `speed` itself moves) — no stops, the speed is a
+  state. A cut (a beat, a land, a repeat) goes on from the new place.
+- **The ground** — a `relief` (lib.js): at the line level with the compartment's floor, the embankment goes down to the
+  ground 1.3 m lower by 7.5 m; in India the bed of the Ganges. On it one `drape` plane `ground` 150 × 4 km: each land
+  its own colours by distance, fields in strips from the line (furrows), lanes across, dry grass through the snow of the
+  prairie, snow ridges, the Ganges' muddy banks.
+- **The Ganges** — a mirror plane `river` over its bed (India), `reflect` with no fade, `rough` 0.3, `ripple` 0.3.
+- **The layers outside the window** — cards at their own distances, each along all the lands: `near` 14 m (poles every
+  50 m, wires, grass, palms, snowdrifts; casts shadows on the ground), `herd` 60 m, `mid` 120 m, `far_bank` 330 m
+  (India), `distant` 400 m, `far` 3 km.
+- **The lights** — the windows of villages and of London, gas lamps (`distant`), the windows of brick houses (`mid`),
+  the lamps of the ghats (`far_bank`): the windows are the layer `lights`, the shader (`distant.wgsl` and so on) adds it
+  as light (`emission`) as much as the gas burns (`lit`, animate: lib `litMotion`), the glows `e.light` go out the same
+  way (`e.glow`).
+- **The sky** — the shader `sky.wgsl`: the colours (the land, night, dawn) are uniforms from the animate (lib
+  `skyMotion`), a moonlit haze at the horizon and a warm sky by a low sun; the layers — stars (twinkling each at its own
+  phase), the moon, the sun (rising with `dawn`). The light of the moon and the sun — `from: "sky#moon"`, `"sky#sun"`.
+- **The buffalo** — `herd.js` paints one buffalo in 12 phases of its step (the layer `atlas`, outside its frame);
+  `herd.wgsl` makes a herd of it: 6 rows, a buffalo every 7 m in each, its own size and length of step (3.2…3.8 m), the
+  pose by the way gone. The herd crosses the line where the train stands (`herd_x`).
+- **The compartment** — the wall with the window (`window`), the glass `glass` (at night the compartment shows faintly
+  in it), the sill, the table, the lamp, the sofas and their armrests. The window's light — `window_light` (`daylight`,
+  `of: "glass"`: it comes in through the whole opening, only into the compartment). The lamps — `sconce_l`, `sconce_r`
+  (`window#…`), `table_lamp` (`lamp#bulb`), `on: night`; their glass from inside — the layer `lights`, added as light.
+  How much light there is in the compartment — below («The compartment's light»).
 
-## Ключи
+## Keys
 
-| Ключ | Что | По умолчанию |
+| Key | What | By default |
 | --- | --- | --- |
-| `land` | `europe` · `india` · `prairie` · `snow` · `england` — земля за окном (склейка на её участок) | `europe` |
-| `speed` | 0…1: 0 — поезд стоит; 1 — 20 м/с | 1 |
-| `night` | 0…1: день → лунная ночь; с ночью горят лампы купе, окна деревень, газ Лондона | 1 |
-| `dawn` | 0…1: низкое тёплое солнце у горизонта | 0 |
-| `herd` | 0…1: бизоны на `prairie` — сколько стада прошло мимо | 0 |
-| `fog` | 0…1: туман; ставится склейкой вместе с `land` (`england` → 1, другие → 0), игра может задать иначе | 0 |
-| `with_pp`, `with_aouda`, `with_fix` | кто в купе (Фогг всегда) | 1 |
-| `fix_bruise` | синяк Фикса: каст теперь даёт (`scene.kit.cast.wears.fix_bruise` в `fix_wear`), сцена его ещё не ставит | 0 |
-| `beat` | кусок фильма | null |
-| `watch_close` | 0…1: крупный план — часы Фогга на ладони (вставка поверх купе); ставит кусок `special` склейкой | 0 |
+| `land` | `europe` · `india` · `prairie` · `snow` · `england` — the land outside the window (a cut to its stretch) | `europe` |
+| `speed` | 0…1: 0 — the train stands; 1 — 20 m/s | 1 |
+| `night` | 0…1: day → a moonlit night; with the night the compartment's lamps, the villages' windows, London's gas are lit | 1 |
+| `dawn` | 0…1: a low warm sun at the horizon | 0 |
+| `herd` | 0…1: the buffalo on `prairie` — how much of the herd has gone by | 0 |
+| `fog` | 0…1: fog; set on a cut together with `land` (`england` → 1, the others → 0), the game may set it otherwise | 0 |
+| `with_pp`, `with_aouda`, `with_fix` | who is in the compartment (Fogg always) | 1 |
+| `fix_bruise` | Fix's bruise: the cast now gives it (`scene.kit.cast.wears.fix_bruise` in `fix_wear`), the scene does not set it yet | 0 |
+| `beat` | a beat of the film | null |
+| `watch_close` | 0…1: a close-up — Fogg's watch in his palm (an insert over the compartment); set by the beat `special` on a cut | 0 |
 
-Ставит скрипт: `camera_x` (поезд), `herd_x`, `<id>_here` по `with_*`. Куски ставят `carriage_x`, `camera_z`, `camera_h`
-(планы).
+Set by the script: `camera_x` (the train), `herd_x`, `<id>_here` by `with_*`. The beats set `carriage_x`, `camera_z`,
+`camera_h` (the shots).
 
-**Изменилось против v1:** `way` больше нет — его место занял `camera_x` (поезд едет по миру, а не мир под окном);
-`fog` при смене `land` ставится склейкой сразу (смена земли — склейка), а не за 3 с; кусок `brake` начинается в
-Индии своей склейкой (в v1 он шёл после `ride` и оставался в Европе, хотя заметки говорили «Индия»); новый кусок
-`snow`. Точки взгляда и ладоней — точки купе, едущие с ним (`{"on": "carriage", "at": [across, distance, elevation]}`, lib.js `LOOK`, `PALM`) вместо точек мира v1; стекло под ладонями — `window#pane_r`, `window#pane_l`.
-Свет: `moon` и `sun` — из неба (`sky#moon`, `sky#sun`), а не с постоянных направлений.
+**Changed against v1:** there is no `way` any more — `camera_x` took its place (the train goes through the world, not
+the world under the window); `fog` on a change of `land` is set at once on a cut (a change of land is a cut), not over
+3 s; the beat `brake` begins in India with its own cut (in v1 it came after `ride` and stayed in Europe, though the
+notes said «India»); a new beat `snow`. The points of the looks and the palms are points of the compartment, riding
+with it (`{"on": "carriage", "at": [across, distance, elevation]}`, lib.js `LOOK`, `PALM`), instead of v1's points of
+the world; the glass under the palms — `window#pane_r`, `window#pane_l`. The light: `moon` and `sun` — from the sky
+(`sky#moon`, `sky#sun`), not from fixed directions.
 
-Точки: `window#window`, `table#table`, `lamp#lamp`, `sky#moon`, `sky#sun`. Для выбора в игре: `window`, `fogg`,
-`passepartout`, `aouda`, `fix`.
+Points: `window#window`, `table#table`, `lamp#lamp`, `sky#moon`, `sky#sun`. For a choice in the game: `window`,
+`fogg`, `passepartout`, `aouda`, `fix`.
 
-## Фильм
+## The film
 
-`lib.js` `film(scene)` → куски модуля `beats` (script.js — по ключу `beat`; showcase.js — показ `SHOWCASE`).
+`lib.js` `film(scene)` → beats of the module `beats` (script.js — by the key `beat`; showcase.js — the showcase
+`SHOWCASE`).
 
-| Кусок | Что | После |
+| Beat | What | After |
 | --- | --- | --- |
-| `depart` | Европа, ночь: поезд набирает ход; Паспарту у окна, смотрит вперёд на огни; Фогг раскрывает книжку | — |
-| `gas` | Паспарту вскакивает (`gas_up`), склейка ближе, поворачивается к хозяину; Фогг поднимает глаза | depart |
-| `watch` | Паспарту садится (`sit_down`), склейка крупнее; серебряные часы на ладони, смотрит на них | gas |
-| `ride` | ночь, все четверо: Фогг читает, Ауда у окна, Фикс за газетой, Паспарту спит | — |
-| `brake` | Индия, рассвет: поезд встаёт (`speed` → 0 за 6 с); просыпаются, смотрят наружу | — |
-| `ganges` | поезд идёт тихо вдоль Ганга; Ауда поворачивает голову — профиль на фоне реки | — |
-| `buffalo` | прерия, поезд стоит, идёт стадо (24 с); Паспарту встаёт, к стеклу, ладони на нём | — |
-| `snow` | снег, ясный день; едут | — |
-| `special` | Англия, туман: экстренный на полном ходу; Фогг достаёт часы — склейка на крупный план (вставка `watch_close`) — склейка обратно в купе: все смотрят на часы | — |
+| `depart` | Europe, night: the train gathers speed; Passepartout at the window, looking ahead at the lights; Fogg opens his notebook | — |
+| `gas` | Passepartout jumps up (`gas_up`), a cut closer, turns to his master; Fogg looks up | depart |
+| `watch` | Passepartout sits down (`sit_down`), a cut tighter; the silver watch in his palm, he looks at it | gas |
+| `ride` | night, all four: Fogg reads, Aouda at the window, Fix behind his paper, Passepartout asleep | — |
+| `brake` | India, dawn: the train stops (`speed` → 0 in 6 s); they wake, look out | — |
+| `ganges` | the train goes quietly along the Ganges; Aouda turns her head — a profile against the river | — |
+| `buffalo` | the prairie, the train stands, the herd goes by (24 s); Passepartout gets up, to the glass, his palms on it | — |
+| `snow` | snow, a clear day; they ride | — |
+| `special` | England, fog: the special at full speed; Fogg takes out his watch — a cut to the close-up (the insert `watch_close`) — a cut back into the compartment: all look at the watch | — |
 
-Моменты кусков сцена говорит игре (`scene.tell`), кроме `beat:<имя>`: `depart:book`, `gas:up` (вскочил),
-`watch:out` (часы на ладони), `brake:stopped`, `ganges:profile`, `buffalo:at-glass`, `special:watch` (склейка на часы
-Фогга крупно), `special:eyes` (склейка обратно в купе: все смотрят).
+The scene tells the game the beats' moments (`scene.tell`), besides `beat:<name>`: `depart:book`, `gas:up` (jumped
+up), `watch:out` (the watch in his palm), `brake:stopped`, `ganges:profile`, `buffalo:at-glass`, `special:watch` (the
+cut to Fogg's watch close up), `special:eyes` (the cut back into the compartment: all look).
 
-Свет купе. Днём купе полно света из окна: `light.inside` 1 (всё, что видно — спины людей, стена с окном, — обращено
-от окна и освещено светом вокруг), свет окна `window_light` — до 4.5 м (бока, плечи и головы людей, ковёр, столик);
-рассвет — `ambientColor` мягче, чем в v1 (свет линейный: прежний цвет гасил купе). Ночью — как было: `inside` 0.75, лампы
-(`sconce_l`, `sconce_r`, `table_lamp`) — сила 2, до 3 м. Газ и окна горят по часу мира (`svet.gas`). Тёмные краски (стены,
-сюртуки) на экране темнее и насыщеннее нарисованных при любом свете — это тональная кривая движка (её вычет чёрного),
-не свет сцены: светом сцены это не поправлять.
+The compartment's light. By day the compartment is full of the light from the window: `light.inside` 1 (all that is
+seen — the people's backs, the wall with the window — faces away from the window and is lit by the light around), the
+window's light `window_light` — up to 4.5 m (the people's sides, shoulders and heads, the carpet, the table); dawn —
+`ambientColor` softer than in v1 (the light is linear: the old colour darkened the compartment). At night — as it was:
+`inside` 0.75, the lamps (`sconce_l`, `sconce_r`, `table_lamp`) — strength 2, up to 3 m. The gas and the windows burn
+by the world's hour (`svet.gas`). Dark paints (walls, frock-coats) are darker and more saturated on the screen than
+painted, in any light — that is the engine's tone curve (its black subtracted), not the scene's light: do not correct
+it with the scene's light.
 
-Часы Фогга крупно — вставка `watch_close` (elements/watch_close.js, её место и размер — lib.js `CLOSE`): вид сверху, с
-его колен, вдоль правого предплечья — рукав, манжета, ладонь с пальцами, открытые часы циферблатом к нам (римские цифры,
-стрелки — 8:17, секундный циферблат), крышка сбоку, цепочка к жилету; свет лампы справа сверху. Нарисована раз в манере
-мира (плоские формы, у каждой одна освещённая или затенённая грань); animate качает руку с вагоном и дыханием, секундная
-стрелка тикает. Камерой сцены этот кадр не снять: `camera_pitch` — сдвиг объектива (круг в ладони виден овалом), а у
-людей каста нет пальцев. Точка `watch_close#dial`. Часы каста (`watch`) в руке — для общих планов.
+Fogg's watch close up — the insert `watch_close` (elements/watch_close.js, its place and size — lib.js `CLOSE`): a
+view from above, from his knees, along the right forearm — the sleeve, the cuff, the palm with its fingers, the open
+watch, its dial to us (Roman numerals, the hands at 8:17, the seconds dial), the lid at the side, the chain to the
+waistcoat; the lamp's light from the upper right. Painted once in the world's manner (flat shapes, each with one lit
+or shaded face); the animate rocks the hand with the carriage and the breath, the second hand ticks. The scene's camera
+cannot take this shot: `camera_pitch` is a shift of the lens (a circle in the palm is seen as an oval), and the cast's
+people have no fingers. The point `watch_close#dial`. The cast's watch (`watch`) in the hand — for the wide shots.
 
-## Не сделано (сборка 2026-10-15 остановлена)
+## Not done (the build stopped 2026-10-15)
 
-Из scenes.md не сделано: `buffalo` — ждать `herd` 1 от игры и Фогг с часами (`buffalo:watch`); `special` — ожидание и
-ключ `book_shut` (вещь каста `book_shut` уже есть), момент `special:shut`; `fix_bruise` на Фиксе.
+Not done of scenes.md: `buffalo` — waiting for `herd` 1 from the game, and Fogg with his watch (`buffalo:watch`);
+`special` — the waiting and the key `book_shut` (the cast's thing `book_shut` is there already), the moment
+`special:shut`; `fix_bruise` on Fix.
 
-## Что важно не сломать
+## What must not be broken
 
-- Нарисованное не читает движущихся ключей: `land` — только небо через animate; ночь, рассвет, газ, стадо — униформы
-  и `e.glow`. Нельзя рисовать по `camera_x`, `night`, `dawn`, `herd`.
-- Всё вдоль пути — шагом, делящим `period`, облик — по номеру в периоде (`along`, `pnoise`): иначе склейка повтора
-  станет видна.
-- Карточки и плоскости — по `reachOf(D)` вокруг середины земли; рамки (`box`) в scene.json это покрывают.
-- Земли отстоят на 30 км: из окна одной другую не видно (дальше всего видно `far`: ±(4 + 5.1) км).
+- What is painted reads no moving keys: `land` — only the sky, through the animate; the night, dawn, the gas, the herd
+  — uniforms and `e.glow`. Never paint by `camera_x`, `night`, `dawn`, `herd`.
+- Everything along the line — at a step that divides `period`, its look by its number in the period (`along`,
+  `pnoise`): else the repeat's cut would show.
+- The cards and planes — by `reachOf(D)` about the land's middle; the frames (`box`) in scene.json cover it.
+- The lands are 30 km apart: from the window of one the other is not seen (the farthest seen is `far`: ±(4 + 5.1) km).

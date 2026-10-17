@@ -1,4 +1,4 @@
-// «Джунгли»'s own little film, outside games: first the jungle by day — along the trail from the end of the rails (the
+// «The jungle»'s own little film, outside games: first the jungle by day — along the trail from the end of the rails (the
 // train, its steam, the station's board) into the forest —; then every beat of lib.js FILM in its order: dusk and the
 // drums, the procession at night, the pyre at dawn, the raja rising from the smoke, his walk to the trees.
 const L = scene.lib;

@@ -1,144 +1,159 @@
-# Джунгли (`dzhungli`) — на движке 3
+# The jungle (`dzhungli`) — on engine 3
 
-Глава «Джунгли» (rpg docs/vokrug-sveta/scenes.md). Индийский лес, панорама вдоль тропы. Люди — движка (каст мира
-`cast`), фильм — куски (`beats`: lib.js `FILM`), цвета — `svet`; слон Киуни есть (ниже), его куски — ещё нет. Тёмные силуэты зарослей впереди,
-освещённый лес за тропой, дальний полог в дымке; справа лес расступается к реке. Утро шафрановое, день зелёный, ночь
-светлая, с луной, светлячками и факелами.
+The chapter «The jungle» (rpg docs/vokrug-sveta/scenes.md). An Indian forest, a panorama along the trail. The people are
+the engine's (the world's cast `cast`), the film is in beats (`beats`: lib.js `FILM`), the colours — `svet`; the
+elephant Kiouni is there (below), his beats are not yet. Dark silhouettes of thicket in front,
+the lit forest beyond the trail, the far canopy in haze; on the right the forest opens out to the river. The morning
+saffron, the day green, the night light, with the moon, fireflies and torches.
 
-## Кадр
+## The frame
 
-Камера `panorama` (`span` [75, 80]), горизонт 0.42. Зритель стоит в зарослях перед тропой. План — `lib.plan`, формы —
-`lib.trail(across)` (тропа петляет на ~10 м), `lib.stream(d)` (ручей от ног зрителя наискось под мостками),
-`lib.bank(across)` (берег реки). По `across`, слева направо: конец рельсов (−65…−28: поезд `train` на насыпи, перед
-паровоза `train_front`, навес `shed`, вывеска `sign`, хижина `hut`); лес (стартовый кадр, около 0: тропа, ручей,
-мостки `bridge`); поляна у реки (22…85: костёр `pyre` 40 / 14 м, пагода 56 / 22 м под фикусом, пальмы над водой, река
-`river`). Кадр с костром — `camera_x` ≈ 42.
+Camera `panorama` (`span` [75, 80]), horizon 0.42. The viewer stands in the thicket before the trail. The plan —
+`lib.plan`, the shapes — `lib.trail(across)` (the trail winds over ~10 m), `lib.stream(d)` (a stream from the viewer's
+feet slantwise under the footbridge), `lib.bank(across)` (the river bank). By `across`, left to right: the end of the
+rails (−65…−28: the train `train` on its embankment, the front of the engine `train_front`, the shed `shed`, the sign
+`sign`, the hut `hut`); the forest (the opening frame, about 0: the trail, the stream, the footbridge `bridge`); the
+clearing by the river (22…85: the pyre `pyre` 40 / 14 m, the pagoda 56 / 22 m under a fig tree, palms over the water,
+the river `river`). The frame with the pyre — `camera_x` ≈ 42.
 
-Земля — один `relief` (`lib.ground`): насыпь, русло ручья, берег к реке; её покрывает плоскость `ground` (`drape`).
-Вода — плоскости-зеркала (`stream`, `river`), их форма — где земля ниже уровня воды (`lib.shoreline` по рельефу).
-Постройки — объёмы из карточек и плоскостей на невидимых местах (`pagoda_site`, `hut_site`, `shed_site`), как в v1.
+The ground is one `relief` (`lib.ground`): the embankment, the stream's bed, the bank down to the river; the plane
+`ground` covers it (`drape`). The water — mirror planes (`stream`, `river`), their shape where the ground is below the
+water level (`lib.shoreline` by the relief). The buildings — volumes of cards and planes on unseen sites
+(`pagoda_site`, `hut_site`, `shed_site`), as in v1.
 
-## Растения — нарисованы раз, движет ветер
+## Plants — painted once, the wind moves them
 
-Где стоит каждое растение, `lib` выбирает раз (`TREES`, `PALMS`, `BAMBOO`, `LOW`, `SHORE`, `NEAR_TRUNKS`, `NEAR_LOW`,
-`LIANAS`); элементы рисуют свою долю:
-- `forest` (якорь 12 м) — дерево: стволы высоких деревьев, ствол, ветви и воздушные корни фикуса — части (`e.part`) на
-  своей глубине, неподвижны; точка `forest#trail`;
-- `canopy` — кроны высоких деревьев с лианами и купол фикуса: каждая — слой (`e.layer`) с `depth` до своего дерева,
-  ногой на земле там (`lib.plantLayer`: смещение по `lib.ground`), гнётся ветром около развилки (`wind` 0.1, порывы);
-  `translucent` — солнце сквозь листву зелёное, и в их тени тоже; тени крон на земле движутся с ветром;
-- `undergrowth` — пальмы подлеска, бамбук у тропы, папоротники и широкие листья, пальмы на берегу: слои, гнутся от
-  ноги, каждый сам по себе;
-- `near` (якорь 4 м) — большие тёмные стволы перед тропой (части); `near_leaves` — папоротники, листья у ног и лианы
-  сверху (слои; лианы качаются от верха).
-Ветер сцены — `light.wind`. Слои с `depth` идут не через глубинный предпроход, а по порядку глубины — так у движка.
+Where each plant stands `lib` chooses once (`TREES`, `PALMS`, `BAMBOO`, `LOW`, `SHORE`, `NEAR_TRUNKS`, `NEAR_LOW`,
+`LIANAS`); the elements paint their share:
+- `forest` (anchor 12 m) — the trees: the trunks of the tall trees, the fig's trunk, branches and aerial roots — parts
+  (`e.part`) at their own depth, still; point `forest#trail`;
+- `canopy` — the tall trees' crowns with lianas and the fig's dome: each a layer (`e.layer`) with `depth` to its own
+  tree, its foot on the ground there (`lib.plantLayer`: offset by `lib.ground`), bending in the wind about the fork
+  (`wind` 0.1, gusts); `translucent` — the sun through the leaves is green, in their shade too; the crowns' shadows on
+  the ground move with the wind;
+- `undergrowth` — the palms of the undergrowth, bamboo by the trail, ferns and broad leaves, palms on the bank: layers,
+  bending from the foot, each on its own;
+- `near` (anchor 4 m) — big dark trunks before the trail (parts); `near_leaves` — ferns, leaves at the feet and lianas
+  from above (layers; the lianas swing from the top).
+The scene's wind — `light.wind`. Layers with `depth` go not through the depth prepass but in order of depth — the
+engine's way.
 
-## Воздух и свет
+## Air and light
 
-- Небо (`sky`): ночь — его рисунок, день, рассвет, звёзды, луна, солнце — слои; шейдер (`sky.wgsl`) смешивает их по
-  `day`/`dawn` (uniforms из animate), звёзды мерцают каждая сама; солнце animate ведёт от реки на рассвете вверх днём
-  (`sky#sun` — свет `sun` светит оттуда), луна — `sky#moon`. Свечения солнца и луны — их `e.light`, гаснут `e.glow`.
-- Свет: базовый — ночь, `looks.day`, `looks.dawn` поверх; днём гаснет луна. `shafts` — лучи солнца сквозь кроны (и
-  луны ночью), `hazeGlow` — ореолы факелов и костра. Костёр — свет `pyre` (`pyre#fire`, `on: pyre_fire`), факелы —
-  свет у пламени `<id>#flame` (`torch_pb1…4`, `torch_pr1/2`, `on: torches`), лампы паровоза и пагоды — их `e.light`.
-- Костёр (`pyre`): поленья — уложенные вдоль брёвна и торцы поперечных, все разные (толщина, цвет, стыки), хворост
-  между рядами. Пламя — в рост человека: `pyre_flames` (ряд за лежащими на костре: языки до 2–2.8 м, выше головы
-  стоящего) и `pyre_flames_near` (перед ними, до бёдер) — кто стоит на костре, стоит в огне. Каждый огонь ряда — тело
-  огня (широкое мягкое пятно), языки из него (пять широких красных, три узких горячих, остриё загнуто) и два оторвавшихся
-  язычка; всё — слои, нарисованные раз (`lib.FLAMES`, `flamePaint`). `flameMotion` (animate): высота — медленный вздох и
-  быстрая дрожь по шуму, наклон к реке, язычки по очереди взлетают над огнём и гаснут; размер — по `pyre_fire`; элементы
-  `glows`. Свет костра — из середины пламени (`pyre#fire`, 2.2 / 16 м), дым выходит над языками (`pyre#smoke`), искры —
-  по всей высоте огня.
-- Частицы: искры костра (`pyre_embers`, `amount: pyre_fire`), его дым (`smoke`, `amount:
-  smoke`, бросает тень, ветер уносит к реке), пламя факелов (`fire_<id>`), пар паровоза (`steam` из `train#chimney`),
-  светлячки (`fireflies`, `amount: fireflies`), пылинки в лучах (`motes`), падающие листья (`leaf_fall`).
-- Туман: `mist_stream` (над ручьём и подстилкой) и `mist_river` — по два слоя, плывущих навстречу (`drift`); их
-  animate делает его густым на рассвете, заметным ночью, редким днём.
-- Сердце костра светится между поленьями: слой `heat`, его шейдер (`pyre.wgsl`) — по `pyre_fire`.
+- The sky (`sky`): the night is its painting; the day, dawn, the stars, the moon, the sun — layers; the shader
+  (`sky.wgsl`) mixes them by `day`/`dawn` (uniforms from the animate), the stars twinkle each on its own; the animate
+  leads the sun from the river at dawn up by day (`sky#sun` — the light `sun` shines from there), the moon —
+  `sky#moon`. The glows of the sun and the moon — their `e.light`, put out by `e.glow`.
+- The light: the base is the night, `looks.day`, `looks.dawn` over it; by day the moon goes out. `shafts` — the sun's
+  rays through the crowns (and the moon's at night), `hazeGlow` — the halos of the torches and the pyre. The pyre — the
+  light `pyre` (`pyre#fire`, `on: pyre_fire`), the torches — a light at the flame `<id>#flame` (`torch_pb1…4`,
+  `torch_pr1/2`, `on: torches`), the lamps of the engine and the pagoda — their `e.light`.
+- The pyre (`pyre`): its logs — trunks laid lengthwise and the ends of the crosswise ones, all different (thickness,
+  colour, joints), brushwood between the rows. The flames — a man's height: `pyre_flames` (a row behind those lying on
+  the pyre: tongues up to 2–2.8 m, above the head of one standing) and `pyre_flames_near` (in front of them, up to the
+  thighs) — whoever stands on the pyre stands in the fire. Each fire of the row — a body of flame (a broad soft patch),
+  tongues out of it (five broad red ones, three narrow hot ones, the tip curled) and two little tongues torn off; all
+  of it layers painted once (`lib.FLAMES`, `flamePaint`). `flameMotion` (animate): the height — a slow breath and a
+  fast tremble by noise, a lean towards the river, the little tongues fly up over the fire in turn and go out; the size
+  — by `pyre_fire`; the elements `glows`. The pyre's light comes from the middle of the flame (`pyre#fire`, 2.2 / 16 m),
+  the smoke rises above the tongues (`pyre#smoke`), the sparks — the whole height of the fire.
+- Particles: the pyre's sparks (`pyre_embers`, `amount: pyre_fire`), its smoke (`smoke`, `amount: smoke`, casts a
+  shadow, the wind carries it to the river), the torches' flames (`fire_<id>`), the engine's steam (`steam` from
+  `train#chimney`), fireflies (`fireflies`, `amount: fireflies`), motes in the rays (`motes`), falling leaves
+  (`leaf_fall`).
+- Mist: `mist_stream` (over the stream and the litter) and `mist_river` — two layers each, drifting towards each other
+  (`drift`); their animate makes it thick at dawn, noticeable at night, thin by day.
+- The heart of the pyre glows between the logs: the layer `heat`, its shader (`pyre.wgsl`) — by `pyre_fire`.
 
-Рисунки не читают движущиеся ключи: `sign` читает только `station` (меняется склейкой).
+The paintings read no moving keys: `sign` reads only `station` (changed on a cut).
 
-## Ключи
+## Keys
 
-| Ключ | Что |
+| Key | What |
 | --- | --- |
-| `day` | 0…1: 0 — ночь (луна, звёзды, светлая), 1 — день |
-| `dawn` | 0…1: рассвет — шафрановый свет, низкое солнце над рекой |
-| `station` | `kholby` · `allahabad` — надпись на вывеске |
-| `procession` | куда идёт колонна по тропе (0 — не пришла, 0.476 — стоит перед зарослями, 1 — прошла). **Было:** ключ двигал колонну по секундам (люди шли с его скоростью). **Стало:** поставленное значение — колонна идёт туда своим шагом (походки каста); 0 — её нет |
-| `torches` | 0…1: горят ли факелы (и у жрецов на рассвете) |
-| `pyre_fire` | 0…1: пламя костра и столько же его света |
-| `smoke` | 0…1: дым костра |
-| `heads` | толпа у костра: 0 — ниц, 1 — смотрят (каждый чуть позже соседа) |
-| `walk` | докуда «раджа» несёт вдову от костра к деревьям (0…1, путь `WAY`). **Было:** ключ вёл его по секундам. **Стало:** поставленное — он идёт туда своим шагом (`carry_walk`) |
-| `fireflies` | светлячки; сцена ставит сама по `day` |
-| `beat` | кусок (`beats`): drums, procession, pyre, rise, walk; по концу — `beat:<имя>`. Было `film` — монтаж; теперь монтаж — показ (`showcase.js`) |
+| `day` | 0…1: 0 — night (the moon, stars, light), 1 — day |
+| `dawn` | 0…1: dawn — saffron light, a low sun over the river |
+| `station` | `kholby` · `allahabad` — the words on the sign |
+| `procession` | where the column goes along the trail (0 — not come, 0.476 — stands before the thicket, 1 — gone by). **Was:** the key moved the column by the seconds (the people walked at its speed). **Now:** the value set — the column walks there at its own pace (the cast's gaits); 0 — it is not there |
+| `torches` | 0…1: whether the torches burn (the priests' at dawn too) |
+| `pyre_fire` | 0…1: the pyre's flame and as much of its light |
+| `smoke` | 0…1: the pyre's smoke |
+| `heads` | the crowd at the pyre: 0 — face down, 1 — looking (each a little after its neighbour) |
+| `walk` | how far the «rajah» carries the widow from the pyre to the trees (0…1, the way `WAY`). **Was:** the key led him by the seconds. **Now:** the value set — he walks there at his own pace (`carry_walk`) |
+| `fireflies` | fireflies; the scene sets it itself by `day` |
+| `beat` | a beat (`beats`): drums, procession, pyre, rise, walk; at its end — `beat:<name>`. It was `film` — the montage; the montage is now the showcase (`showcase.js`) |
 
-Люди — `person` (каст `cast`): ключи `<id>_a`, `_d`, `_do`, `_turn`, `_look`, `_reach`, `_with`, `_wear`, `_gait`, `_on`,
-`_here`. Мостки (`bridge`), верх костра (`pyre_top`) и его уступы (`pyre_steps`) — плоскости `walk`.
+The people — `person` (the cast `cast`): the keys `<id>_a`, `_d`, `_do`, `_turn`, `_look`, `_reach`, `_with`, `_wear`,
+`_gait`, `_on`, `_here`. The footbridge (`bridge`), the top of the pyre (`pyre_top`) and its steps (`pyre_steps`) —
+`walk` planes.
 
-## Куски (lib.js `FILM`)
+## Beats (lib.js `FILM`)
 
-| Кусок | after | Что |
+| Beat | after | What |
 | --- | --- | --- |
-| `drums` | — | Сумерки: четверо идут по тропе своим шагом; проводник оборачивается на барабаны; все уходят в заросли и прячутся (`crouch_hide`, `kneel_up`) |
-| `procession` | — | Ночь (склейка ближе, через плечи спрятавшихся): колонна идёт по тропе слева (`procession` → 0.476), через мостки, встаёт; спрятавшиеся смотрят на первого факельщика, когда он входит в кадр, на Ауду — когда она |
-| `pyre` | — | Рассвет на поляне: жрецы подходят и поджигают, костёр разгорается, камера подходит; Фогг рвётся, Кромарти держит |
-| `rise` | pyre | Дым гуще, камера ближе; склейка (готовится заранее) на низкий план: «раджа» стоит на костре с Аудой на руках; толпа ниц |
-| `walk` | rise | Камера отходит; он спускается по уступам и идёт к деревьям (`walk` → 1); сойдя, толпа поднимает головы, дым редеет; Фогг отходит |
+| `drums` | — | Dusk: the four walk along the trail at their own pace; the guide turns at the drums; all go off into the thicket and hide (`crouch_hide`, `kneel_up`) |
+| `procession` | — | Night (a cut closer, over the shoulders of those hiding): the column comes along the trail from the left (`procession` → 0.476), over the footbridge, and stops; those hiding look at the first torch-bearer as he comes into the frame, at Aouda — as she does |
+| `pyre` | — | Dawn in the clearing: the priests come up and set it alight, the pyre flares up, the camera comes closer; Fogg strains forward, Cromarty holds him back |
+| `rise` | pyre | The smoke thicker, the camera closer; a cut (made ready ahead) to a low shot: the «rajah» stands on the pyre with Aouda in his arms; the crowd face down |
+| `walk` | rise | The camera draws back; he comes down the steps and walks to the trees (`walk` → 1); once he is down, the crowd raises its heads, the smoke thins; Fogg steps back |
 
-Каждый кусок ≤ 30 с, ждёт того, что случается (дошёл, вошёл в кадр), время — только в паузах. Показ (`showcase.js`):
-свой кусок `day` (день, камера идёт вдоль тропы от конца рельсов в лес), потом все куски по порядку.
+Each beat ≤ 30 s, waits for what happens (got there, came into the frame), time only in the pauses. The showcase
+(`showcase.js`): its own beat `day` (day, the camera goes along the trail from the end of the rails into the forest),
+then all the beats in order.
 
-Моменты кусков сцена говорит игре (`scene.tell`), кроме `beat:<имя>`: `drums:heard` (проводник обернулся),
-`drums:hidden`, `procession:torches` (первый факельщик в кадре), `procession:widow` (вдова в кадре),
-`procession:stopped`, `pyre:kindled` (жрецы поднесли факелы), `rise:risen` (склейка: он стоит на костре),
-`walk:down` (сошёл с костра), `walk:away` (у деревьев).
+The scene tells the game the beats' moments (`scene.tell`), besides `beat:<name>`: `drums:heard` (the guide turned),
+`drums:hidden`, `procession:torches` (the first torch-bearer in the frame), `procession:widow` (the widow in the frame),
+`procession:stopped`, `pyre:kindled` (the priests put their torches to it), `rise:risen` (the cut: he stands on the
+pyre), `walk:down` (came down from the pyre), `walk:away` (at the trees).
 
-Спрятавшиеся: `crouch_hide` каста — настоящее приседание на корточках (движение сделано заново).
+Those hiding: the cast's `crouch_hide` — a real squat on the heels (the motion made anew).
 
-## Точки
+## Points
 
 `train#train`, `train#chimney`, `shed#kiouni_shed`, `sign#station`, `hut#hut`, `forest#trail`,
-`procession#procession` (над головой первого факельщика — animate), `pyre#pyre`, `pyre#flames`, `pyre#smoke`, `pagoda#pagoda`,
-`sky#moon`, `sky#sun`.
+`procession#procession` (over the head of the first torch-bearer — animate), `pyre#pyre`, `pyre#flames`, `pyre#smoke`,
+`pagoda#pagoda`, `sky#moon`, `sky#sun`.
 
-## Свет после правки тональной кривой (2026-10-11)
+## The light after the tone curve was changed (2026-10-11)
 
-Тёмное стало светлее и серее — дымка и ореолы, подобранные под старую кривую, затянули кадр розово-серой пеленой.
-По листам против v1 (воздух чище, зелень и золото костра видны): `haze` 0.25 → 0.14, `hazeGlow` 0.9 → 0.25, `shafts`
-0.4 → 0.25, `saturation` 0.85 → 1; взгляд `day`: `haze` 0.32 → 0.16, `shafts` 0.7 → 0.4; `dawn`: `haze` 0.3 → 0.18,
-`shafts` 1.1 → 0.5; костёр `pyre` `strength` 2.2 → 1.6 (не выбеливает кадр). Туман над ручьём и рекой — нарисованные
-слои (`mist_*`), их свет не меняет.
+The dark became lighter and greyer — the haze and the halos, chosen for the old curve, drew a pinkish-grey veil over
+the frame. By sheets against v1 (the air cleaner, the green and the pyre's gold seen): `haze` 0.25 → 0.14,
+`hazeGlow` 0.9 → 0.25, `shafts` 0.4 → 0.25, `saturation` 0.85 → 1; the look `day`: `haze` 0.32 → 0.16, `shafts`
+0.7 → 0.4; `dawn`: `haze` 0.3 → 0.18, `shafts` 1.1 → 0.5; the pyre `pyre` `strength` 2.2 → 1.6 (it does not bleach the
+frame). The mist over the stream and the river — painted layers (`mist_*`); the light does not change them.
 
-## Киуни — состояние работы (2026-10-15, остановлено по просьбе владельца)
+## Kiouni — where the work stands (2026-10-15, stopped at the owner's request)
 
-**Сделано и проверено одним листом на GPU (ошибок нет):** слон — элементы `kiouni` (якорь: place `kiouni_x`, `kiouni_d`,
-`kiouni_facing`, `kiouni_el`, `kiouni_tilt`; рисует пустое, его animate ставит точки `kiouni#head` (глаз), `kiouni#trunk`
-(кончик хобота), `kiouni#lift` (изгиб хобота, чтобы поднять человека)), бока `kiouni_l` / `kiouni_r` (карточки по
-бокам, `lib.kiouniPaint`: тело с красной попоной, ноги по две части, голова с расписным лбом и глазом, ухо, хобот из
-пяти частей, хвост; ближний бок показывает всё, дальний — только свои две ноги), гауда `gauda_l` / `gauda_r` (борта
-на спине). Движение — `lib.kiouniMove` (animate боков): ноги шагают по пройденному пути (без скольжения; шаг длиннее
-на бегу и с `pace`), складываются, когда он на коленях; хобот плавно идёт к позе `trunk` (`rest`, `up`, `sugar`,
-`lift`; при `kneel` складывается), уши хлопают и веером (`ears`, `balk`, `kiouni_blow`), голова кивает, моргает.
-Сиденья — `lib.KIOUNI_SEATS` (`guide` на шее, `front`, `mid`, `back` в гауде; точки в его кадре: `<id>_on:
-lib.seat('front')`, сидят `sit_calm`, `_turn` 180 — по ходу). Проверено: стоит, на коленях, хобот вверх и к гауде,
-идёт по тропе, четверо сидят в гауде.
+**Done and checked with one sheet on the GPU (no errors):** the elephant — the elements `kiouni` (an anchor: place
+`kiouni_x`, `kiouni_d`, `kiouni_facing`, `kiouni_el`, `kiouni_tilt`; it paints nothing, its animate sets the points
+`kiouni#head` (the eye), `kiouni#trunk` (the tip of the trunk), `kiouni#lift` (the bend of the trunk, to lift a
+man)), the sides `kiouni_l` / `kiouni_r` (cards at the sides, `lib.kiouniPaint`: the body with a red caparison, the
+legs in two parts each, the head with a painted forehead and an eye, the ear, the trunk of five parts, the tail; the
+near side shows all, the far side only its own two legs), the howdah `gauda_l` / `gauda_r` (its sides on his back).
+The motion — `lib.kiouniMove` (the sides' animate): the legs step by the way gone (no sliding; a longer step at a run
+and with `pace`), fold when he kneels; the trunk goes smoothly to the pose `trunk` (`rest`, `up`, `sugar`, `lift`;
+folds with `kneel`), the ears flap and fan out (`ears`, `balk`, `kiouni_blow`), the head nods, blinks. The seats —
+`lib.KIOUNI_SEATS` (`guide` on the neck, `front`, `mid`, `back` in the howdah; points in his frame: `<id>_on:
+lib.seat('front')`, they sit `sit_calm`, `_turn` 180 — facing the way he goes). Checked: standing, kneeling, the trunk
+up and to the howdah, walking along the trail, four sitting in the howdah.
 
-**Не сделано:**
-- Скрипт: перевод `kneel`/`balk` → `kiouni_el`/`kiouni_tilt` (лист проверял, ставя их руками: el = −1.15·kneel,
-  tilt ≈ −9·sin(π·kneel) + 6·balk); `trumpet` → `kiouni_blow` (подъём 0.4 с, 1.3 с, спад 0.9 с); `sugar`, `goad`,
-  `ride`, `pace`, `charge`, `scatter`, `grab`, `guide_seen`, `owner_turn`, `offer` — ничего из этого сцена ещё не
-  слышит. `kiouni_here` читает только animate (прозрачность), якорь не уводится.
-- Ни одного нового куска: `rails_end`, `haggle`, `mount`, `ride`, `drums` с Киуни, `night_wall`, `flee`, `charge`,
-  `aouda_fear`, `allahabad`, `wake`, `gift`, `sold`. Старые куски (drums…walk) — как были, слон в них не участвует.
-- Люди `owner`, `trader`, `conductor` не добавлены (их нет в касте на момент остановки); пачка банкнот (`offer`) — нет.
-- Сиденье на крупе (`rump`) для пятого (с Аудой) не добавлено.
-- Мелочи вида по листу: ухо почти сливается с головой (нужен тёмный контур), глаз можно крупнее, попона великовата.
+**Not done:**
+- The script: `kneel`/`balk` → `kiouni_el`/`kiouni_tilt` (the sheet checked it by setting them by hand: el =
+  −1.15·kneel, tilt ≈ −9·sin(π·kneel) + 6·balk); `trumpet` → `kiouni_blow` (a rise of 0.4 s, 1.3 s, a fall of 0.9 s);
+  `sugar`, `goad`, `ride`, `pace`, `charge`, `scatter`, `grab`, `guide_seen`, `owner_turn`, `offer` — the scene hears
+  none of them yet. `kiouni_here` is read only by the animate (transparency); the anchor is not taken away.
+- Not one new beat: `rails_end`, `haggle`, `mount`, `ride`, `drums` with Kiouni, `night_wall`, `flee`, `charge`,
+  `aouda_fear`, `allahabad`, `wake`, `gift`, `sold`. The old beats (drums…walk) — as they were, the elephant takes no
+  part in them.
+- The people `owner`, `trader`, `conductor` not added (not in the cast when the work stopped); the roll of banknotes
+  (`offer`) — none.
+- The seat on the rump (`rump`) for a fifth (with Aouda) not added.
+- Small things of the look, by the sheet: the ear nearly merges with the head (a dark outline is needed), the eye could
+  be bigger, the caparison is a little large.
 
-**По умолчанию** Киуни стоит под навесом (−34, 13.4), лицом вправо; в кадрах старых кусков его не видно.
+**By default** Kiouni stands under the shed (−34, 13.4), facing right; he is not seen in the frames of the old beats.
 
-**Задуманное (не код):** `ride` — камера `camera_on: 'kiouni'` сбоку (camera_x ≈ −5.6, camera_yaw 90, camera_h ≈ 1),
-путь `ride` 0…1 = x −22 → 18 по тропе (d = trail + 0.3, у ручья обход за мостками, d = trail + 2.6), день → сумерки по
-`ride`; `charge` — из зарослей справа от колонны наискось на тропу и влево сквозь неё; `flee`, `allahabad` — посадка и
-спуск склейкой (люди не умеют залезть).
+**Planned (not code):** `ride` — the camera `camera_on: 'kiouni'` from the side (camera_x ≈ −5.6, camera_yaw 90,
+camera_h ≈ 1), the way `ride` 0…1 = x −22 → 18 along the trail (d = trail + 0.3; at the stream a detour behind the
+footbridge, d = trail + 2.6), day → dusk by `ride`; `charge` — out of the thicket right of the column slantwise onto
+the trail and left through it; `flee`, `allahabad` — mounting and getting down on a cut (people cannot climb up).

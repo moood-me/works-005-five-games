@@ -1,123 +1,139 @@
-# Реформ-клуб (`main`) — движок 3
+# The Reform Club (`main`) — engine 3
 
-Главная сцена мира: салон клуба на Пэлл-Мэлл, пролог и эпилог (docs/vokrug-sveta/scenes.md). Перенесена с v1 (мир
-`pavel/vokrug-sveta`) на месте: те же элементы, ключи, точки, куски. Язык мира: современно и тонко, чистые плоскости и
-силуэты, большое тёмное пространство, точный свет, длинные отражения в полированном полу; тёплое (камин, лампа, газ)
-против холодного (туман за стеклом). Фокус — большие часы.
+The world's main scene: the club's saloon on Pall Mall, the prologue and the epilogue (docs/vokrug-sveta/scenes.md).
+Moved from v1 (the world `pavel/vokrug-sveta`) as it stood: the same elements, keys, points, beats. The world's
+language: modern and fine, clean planes and silhouettes, a large dark space, exact light, long reflections in a
+polished floor; the warm (the fire, the lamp, the gas) against the cold (the fog behind the glass). The focus — the big
+clock.
 
-## Кадр
+## The frame
 
-Камера `picture`, горизонт 0.55. Слои по глубине: улица в тумане (40 м), стена с окнами (18 м), стол под лампой (7 м),
-ближе всех — перегородка с часами и камином (8 м, справа). Повёрнутое — движком (`facing`, плоскости): откосы окон
-(`jamb…` 90°, `sill…`, `soffit…`), торец перегородки, створки двери. Пол — плоскость-зеркало (`reflect` strength 0.5,
-fade 5, rough 0.15), `lit`; сукно (`felt`) — плоскость на 0.76 м.
+Camera `picture`, horizon 0.55. The layers by depth: the street in fog (40 m), the wall with the windows (18 m), the
+table under the lamp (7 m), nearest of all — the partition with the clock and the fireplace (8 m, on the right). What
+is turned is turned by the engine (`facing`, planes): the window jambs (`jamb…` 90°, `sill…`, `soffit…`), the
+partition's end, the door's leaves. The floor — a mirror plane (`reflect` strength 0.5, fade 5, rough 0.15), `lit`; the
+felt (`felt`) — a plane at 0.76 m.
 
-Камин теперь — настоящий проём: перегородка (`partition`) вырезает его (`evenodd`), за ним ниша — `hearth` (закопчённая
-задняя стенка в 0.55 м за лицом стены, `behind: partition`, шире проёма — видно наискось) и её под (`hearth_floor`). Огонь — частицы `flames`
-(`fire`, `amount: fire`) и `embers` в нише, в 0.3 м за лицом стены: над проёмом их прячет стена. Свечение огня на заднике —
-слой `glow`, его светит шейдер (`hearth.wgsl`: `emission`, дыхание огня — `u_time`, сила — `fire`). Полка и свет огня —
-`fireplace` (как в v1: его точка `fireplace#fire`, свет `fire_light`).
+The fireplace is now a real opening: the partition (`partition`) cuts it out (`evenodd`), behind it a recess —
+`hearth` (a sooty back wall 0.55 m behind the wall's face, `behind: partition`, wider than the opening — seen
+slantwise) and its floor (`hearth_floor`). The fire — the particles `flames` (`fire`, `amount: fire`) and `embers` in
+the recess, 0.3 m behind the wall's face: above the opening the wall hides them. The fire's glow on the back — the
+layer `glow`, lit by the shader (`hearth.wgsl`: `emission`, the fire's breath — `u_time`, the strength — `fire`). The
+mantelpiece and the fire's light — `fireplace` (as in v1: its point `fireplace#fire`, the light `fire_light`).
 
-## Свет
+## The light
 
-Зал написан своими цветами, как днём; ночь — свет сцены. `ambient` 0.8 серого дня, взгляд `day` (0 день → 1 ночь) — к
-ночи. Источники: `lamp_light` (лампа, `lamp#bulb`), `fire_light` (`fireplace#fire`, `on: fire`, мерцает), `hall_light`
-(`hall#light`, `on: door`), три холодных у окон, и газ на улице — `gas1…3` (`lamps#lamp1…3`): их гасит по часу
-`lamps.animate.js` (`e.glow`, модуль `svet`, `gas`). `hazeGlow` — ореолы лампы, огня, фонарей в воздухе (их больше не
-рисуем). Тени: стол, сукно, стул Фогга, кресло — на пол; часы — на перегородку. Люди отбрасывают сами.
+The saloon is painted in its own colours, as by day; the night is the scene's light. `ambient` 0.8 of a grey day, the
+look `day` (0 day → 1 night) — towards night. The sources: `lamp_light` (the lamp, `lamp#bulb`), `fire_light`
+(`fireplace#fire`, `on: fire`, flickers), `hall_light` (`hall#light`, `on: door`), three cold ones at the windows, and
+the gas in the street — `gas1…3` (`lamps#lamp1…3`): `lamps.animate.js` puts them out by the hour (`e.glow`, the module
+`svet`, `gas`). `hazeGlow` — the halos of the lamp, the fire, the street lamps in the air (we no longer paint them).
+Shadows: the table, the felt, Fogg's chair, the armchair — on the floor; the clock — on the partition. The people cast
+their own.
 
-Улица — снаружи, освещена светом сцены (не `glows`): дома (`street`), толпа (`crowd`), фонари (`lamps`), туман (`mist`)
-написаны в дневных цветах; ночь им даёт взгляд `day`, фонари светят на толпу и мостовую (`pavement` — плоскость за
-окнами, 0.5 м ниже пола). Туман светится сам — светом города, в цветах часа (`svet.london`): свет сцены его не темнит.
-Что свет не делает:
-- небо (`sky`) — туман нарисован раз, цвета часа (`svet.london(day)`) даёт шейдеру `sky.animate.js`;
-- окна домов напротив — слой `windows`, светит шейдер `street.wgsl` по газу (`gas` из `street.animate.js`);
-- туман над домами — слой `fog` улицы: доля тумана, цвет часа даёт `street.wgsl` как свой свет (`emission`), дома под
-  ним гаснут на его долю;
-- туман у окон (`mist`, `glows`) — нарисованная густота (белым), два слоя банок плывут в `mist.wgsl` (`u_time`, с
-  переносом через ширину коробки), цвет — час и газ (`mist.animate.js`);
-- толпа — шесть групп-слоёв (`lib.js CROWD`): `crowd_outside` показывает их по очереди (`alpha`), каждая качается в
-  своё время; фонарики толпы — свечения `l0…l25` со своей группой (`e.glow`).
+The street is outside, lit by the scene's light (not `glows`): the houses (`street`), the crowd (`crowd`), the street
+lamps (`lamps`), the fog (`mist`) are painted in daylight colours; the look `day` gives them the night, the lamps shine
+on the crowd and the roadway (`pavement` — a plane behind the windows, 0.5 m below the floor). The fog glows by
+itself — with the town's light, in the hour's colours (`svet.london`): the scene's light does not darken it. What the
+light does not do:
+- the sky (`sky`) — the fog is painted once, the hour's colours (`svet.london(day)`) are given to the shader by
+  `sky.animate.js`;
+- the windows of the houses opposite — the layer `windows`, lit by the shader `street.wgsl` by the gas (`gas` from
+  `street.animate.js`);
+- the fog over the houses — the street's layer `fog`: a share of fog, its colour the hour's, given by `street.wgsl` as
+  its own light (`emission`), the houses under it fading by its share;
+- the fog at the windows (`mist`, `glows`) — a painted density (in white), two layers of banks drift in `mist.wgsl`
+  (`u_time`, wrapping across the box's width), the colour — the hour and the gas (`mist.animate.js`);
+- the crowd — six groups as layers (`lib.js CROWD`): `crowd_outside` shows them in turn (`alpha`), each sways in its
+  own time; the crowd's lanterns — the glows `l0…l25` with their group (`e.glow`).
 
-## Часы
+## The clock
 
-Корпус, циферблат — рисунок раз. Стрелки (`hour`, `minute`, `second`) и маятник (`pendulum`) — слои, их ставит
-`clock.animate.js` из `minute` и `second`: маятник `cos(π·second)` (в крайней точке на каждой целой секунде, его точка
-`clock#pendulum` движется), секундная стрелка шагает на целых. Стекло корпуса — проём в рисунке, за ним `inside`.
-`script.js` ведёт `second` плавно (раз в секунду к следующей целой; на 60 — ноль и `minute` + 1).
+The case, the dial — painted once. The hands (`hour`, `minute`, `second`) and the pendulum (`pendulum`) are layers,
+set by `clock.animate.js` from `minute` and `second`: the pendulum `cos(π·second)` (at its far point on every whole
+second, its point `clock#pendulum` moves), the second hand steps on the whole ones. The case's glass — an opening in
+the painting, behind it `inside`. `script.js` leads `second` smoothly (once a second to the next whole one; at 60 —
+zero and `minute` + 1).
 
-## Ключи
+## Keys
 
-| Ключ | Что | По умолчанию |
+| Key | What | By default |
 | --- | --- | --- |
-| `minute` | минуты от полуночи (20:44 = 1244): стрелки | 1244 |
-| `second` | 0…60, плавно: маятник, секундная стрелка | 0 |
-| `fire` | 0…1 огонь: угли → пламя; частицы, свечение ниши, свет | 0.75 |
-| `door` | 0…1 дверь: створки в зал, свет холла | 0 |
-| `crowd_outside` | 0…1 толпа за окнами (группами) | 0 |
-| `day` | 0…1 час: 0 серый день, 0.5 сумерки (газ зажигают), 1 ночь | 1 |
-| `leaf_l`, `leaf_r` | поворот створок, ведёт `script.js` по `door` | 180 |
-| `chair_back` | 0…0.4 м: стул Фогга отодвинут (`fogg_chair` стоит `on: table`, `place.distance`) | 0 |
-| `fogg_hat`, `cards_down` | цилиндр на вешалке; карты Фогга на сукне | 1, 0 |
-| `beat` | кусок (ниже); `null` — ни один | null |
-| `gentlemen`, `fogg_present`, `fogg_seated`, `with_aouda`, `with_pp` | ключи игры (как в v1) | |
-| `with_fix` | 0/1: Фикс входит в `door` последним, встаёт позади у двери (`IN.fix`) | 0 |
-| `fix_bruise` | 0/1: синяк у Фикса (каст `wears.fix_bruise`), ставится, когда он входит | 0 |
+| `minute` | minutes from midnight (20:44 = 1244): the hands | 1244 |
+| `second` | 0…60, smoothly: the pendulum, the second hand | 0 |
+| `fire` | 0…1 the fire: embers → flame; particles, the recess's glow, the light | 0.75 |
+| `door` | 0…1 the door: the leaves into the saloon, the hall's light | 0 |
+| `crowd_outside` | 0…1 the crowd behind the windows (in groups) | 0 |
+| `day` | 0…1 the hour: 0 a grey day, 0.5 dusk (the gas is lit), 1 night | 1 |
+| `leaf_l`, `leaf_r` | the leaves' turn, led by `script.js` by `door` | 180 |
+| `chair_back` | 0…0.4 m: Fogg's chair pushed back (`fogg_chair` stands `on: table`, `place.distance`) | 0 |
+| `fogg_hat`, `cards_down` | the hat on the stand; Fogg's cards on the felt | 1, 0 |
+| `beat` | a beat (below); `null` — none | null |
+| `gentlemen`, `fogg_present`, `fogg_seated`, `with_aouda`, `with_pp` | the game's keys (as in v1) | |
+| `with_fix` | 0/1: Fix comes in with `door` last, stands behind by the door (`IN.fix`) | 0 |
+| `fix_bruise` | 0/1: Fix's bruise (the cast's `wears.fix_bruise`), set as he comes in | 0 |
 
-Точки: `clock#dial`, `clock#pendulum`, `door#door`, `door#handle`, `fireplace#fire`, `table#table`, `lamp#lamp`,
-`papers#papers`, `armchair#armchair`, `hatstand#hat`, `wall#window1…3` — как в v1; новые — `lamps#lamp1…3`, части каста
-(`stuart#watch`, `fogg#paper`…).
+Points: `clock#dial`, `clock#pendulum`, `door#door`, `door#handle`, `fireplace#fire`, `table#table`, `lamp#lamp`,
+`papers#papers`, `armchair#armchair`, `hatstand#hat`, `wall#window1…3` — as in v1; new — `lamps#lamp1…3`, the cast's
+parts (`stuart#watch`, `fogg#paper`…).
 
-## Люди и куски
+## The people and the beats
 
-Люди — каст мира (`cast`), ключи `<id>_a`, `_d`, `_do`, `_turn`, `_look`, `_reach`, `_with`, `_wear`, `_gait`, `_here`.
-Куски — `lib.js film(scene)` (модуль `beats`): последовательности режиссёра; люди идут своим шагом (Фогг — `fogg_walk`,
-джентльмены в пятницу — `run`), движения «раз» длятся сколько длятся; секунды — только где идёт время (отсчёт часов,
-пауза взгляда). `from` у каждого куска — всё состояние; где кусок продолжает предыдущий (`after`), он идёт с того, что
-есть. Где люди после движения «раз» (Стюарт встал, Фогг положил карты) — `startOf` движения (`ended` в lib.js).
-Игра: `beat` = имя, конец — `beat:<имя>`. Вне игры — показ (`showcase.js`, порядок `lib.js ORDER`): countdown, whist,
-wager, wager_down, leave, wait, door, no_door, friday, friday_in (около 110 с).
+The people — the world's cast (`cast`), the keys `<id>_a`, `_d`, `_do`, `_turn`, `_look`, `_reach`, `_with`, `_wear`,
+`_gait`, `_here`. The beats — `lib.js film(scene)` (the module `beats`): the director's sequences; the people walk at
+their own pace (Fogg — `fogg_walk`, the gentlemen on the Friday — `run`), the «once» motions take as long as they take;
+seconds only where time goes (the clock's countdown, the pause of a look). Each beat's `from` is the whole state; where
+a beat goes on from the one before (`after`), it goes on from what there is. Where the people are after a «once» motion
+(Stuart has risen, Fogg has laid his cards down) — the motion's `startOf` (`ended` in lib.js). The game: `beat` = the
+name, the end — `beat:<name>`. Outside the game — the showcase (`showcase.js`, the order `lib.js ORDER`): countdown,
+whist, wager, wager_down, leave, wait, door, no_door, friday, friday_in (about 110 s).
 
-Камера — двумя способами (`lib.js`). Кадр на человеке — оператор (`on(кто, размер, место головы в кадре)`: `camera_target`,
-`camera_shot` — рост человека в высотах кадра, `camera_frame`), числа v1: Стюарт и циферблат над пятью спинами 0.4
-(наезд за 5 с — `frame`), вист через стол на Фогга 0.55, пари 0.7 → 0.8 через стол, чуть сверху (`camera_x` −0.4, `camera_h` 0.55: лицо Фогга видно), Фогг
-вошедший 0.7, Стюарт в `no_door` 0.6, Фогг в кресле 0.5. Кадр комнаты — картина сцены, сдвинутая ключами (`view`:
-`camera_x`, `camera_z`, `camera_h`, `camera_look`): дверь и вешалка из-за торца перегородки (z 9.6), общий план. В
-`leave`, когда Фогг встал, оператор отходит на общий план (`frame(s, WIDE, 3)`), склейка на дверь — когда он дошёл.
-Склейка ждёт свой кадр (`s.until(() => shot.ready)`).
+The camera — in two ways (`lib.js`). A shot on a person — the operator (`on(who, size, where the head is in the
+frame)`: `camera_target`, `camera_shot` — the person's height in frame heights, `camera_frame`), v1's numbers: Stuart
+and the dial over five backs 0.4 (a push-in over 5 s — `frame`), the whist across the table on Fogg 0.55, the wager
+0.7 → 0.8 across the table, a little from above (`camera_x` −0.4, `camera_h` 0.55: Fogg's face seen), Fogg come in
+0.7, Stuart in `no_door` 0.6, Fogg in his armchair 0.5. A shot of the room — the scene's picture shifted by the keys
+(`view`: `camera_x`, `camera_z`, `camera_h`, `camera_look`): the door and the hat-stand from behind the partition's end
+(z 9.6), the wide shot. In `leave`, once Fogg has risen, the operator draws back to the wide shot (`frame(s, WIDE, 3)`),
+the cut to the door — when he has reached it. A cut waits for its shot (`s.until(() => shot.ready)`).
 
-Моменты кусков сцена говорит игре (`scene.tell`), кроме `beat:<имя>`: `countdown:handle` (ручка двери, :57),
-`whist:stuart-talks`, `wager:ready` (живая пауза: Фогг держит карты, лицо к нам, ровное — игрок кладёт их: игра ждёт касания `fogg#hands`, потом ставит `wager_down`), `wager_down:cards-down`, `wager_down:stuart-up`, `leave:up`, `leave:hat-on`, `leave:gone`, `door:fogg-in`
-(Фогг встал перед ними — под «Вот и я, господа»), `no_door:watch-shut`, `friday:porter` (швейцар у кресла),
-`friday_in:round-him`.
+The scene tells the game the beats' moments (`scene.tell`), besides `beat:<name>`: `countdown:handle` (the door's
+handle, :57), `whist:stuart-talks`, `wager:ready` (a living pause: Fogg holds his cards, his face to us, steady — the
+player lays them down: the game waits for a touch on `fogg#hands`, then sets `wager_down`), `wager_down:cards-down`,
+`wager_down:stuart-up`, `leave:up`, `leave:hat-on`, `leave:gone`, `door:fogg-in` (Fogg has stopped before them — for
+«Here I am, gentlemen»), `no_door:watch-shut`, `friday:porter` (the porter at the armchair), `friday_in:round-him`.
 
-| Кусок | Что |
+| Beat | What |
 | --- | --- |
-| `countdown` | 20:44:37 → :57. Пятеро полукругом перед часами, Стюарт держит часы (`with: watch`, взгляд `stuart#watch`); взгляды вразнобой; на :56 склейка на дверь (готова заранее), на :57 дверь подаётся |
-| `whist` | 2 октября, 19:10. Вист; Стюарт складывает газету, говорит, глядя на Фогга |
-| `wager` | Фогг крупно с картами, все взгляды на него; кусок останавливается живой позой (`wager:ready`) |
-| `wager_down` | (после `wager`) Фогг кладёт карты (`lay_cards`, `cards_down`), смотрит на Стюарта; Стюарт встаёт (`rise_chair`) |
-| `leave` | 19:25. Фогг встаёт (`rise_table`, `chair_back`), идёт к вешалке (склейка на дверь, пока идёт), надевает цилиндр, уходит; дверь закрывается |
-| `wait` | 21 декабря, 20:43:10. Пятеро у часов, толпа за окнами |
-| `door` | 20:44:57. Дверь распахивается: Фогг входит (за ним Ауда, Паспарту и последним Фикс — у двери, — если `with_aouda`, `with_pp`, `with_fix`); джентльмены оборачиваются; склейка на Фогга, когда он встал |
-| `no_door` | 20:45:00. Стюарт закрывает часы, поворачивается к остальным |
-| `friday` | Пятница: Фогг в кресле у огня; день — ночь — вечер, огонь выше и ниже; швейцар подходит и уходит |
-| `friday_in` | (после `friday`) 20:45: дверь настежь, пятеро вбегают (`run`) и встают вокруг кресла |
+| `countdown` | 20:44:37 → :57. Five in a half-circle before the clock, Stuart holds his watch (`with: watch`, the look `stuart#watch`); their looks this way and that; at :56 a cut to the door (made ready ahead), at :57 the door gives |
+| `whist` | 2 October, 19:10. Whist; Stuart folds his paper, speaks, looking at Fogg |
+| `wager` | Fogg close with his cards, all eyes on him; the beat stops in a living pose (`wager:ready`) |
+| `wager_down` | (after `wager`) Fogg lays his cards down (`lay_cards`, `cards_down`), looks at Stuart; Stuart rises (`rise_chair`) |
+| `leave` | 19:25. Fogg rises (`rise_table`, `chair_back`), goes to the hat-stand (a cut to the door while he goes), puts on his hat, leaves; the door shuts |
+| `wait` | 21 December, 20:43:10. Five at the clock, the crowd behind the windows |
+| `door` | 20:44:57. The door flies open: Fogg comes in (behind him Aouda, Passepartout and last of all Fix — by the door — if `with_aouda`, `with_pp`, `with_fix`); the gentlemen turn round; a cut to Fogg once he has stopped |
+| `no_door` | 20:45:00. Stuart shuts his watch, turns to the others |
+| `friday` | Friday: Fogg in his armchair by the fire; day — night — evening, the fire higher and lower; the porter comes up and goes |
+| `friday_in` | (after `friday`) 20:45: the door wide open, the five run in (`run`) and stand round the armchair |
 
-Изменилось 2026-10-15 (кадр `wager` после последней правки — Фогг смотрит прямо, камера ниже — не отрендерен): `wager` разделён на `wager` (до карт, живая пауза) и `wager_down`; в `door` может войти Фикс.
+Changed 2026-10-15 (the frame of `wager` after the last change — Fogg looks straight, the camera lower — not
+rendered): `wager` split into `wager` (before the cards, a living pause) and `wager_down`; Fix may come in with `door`.
 
-Изменилось против v1: кусок `friday` разделён на `friday` и `friday_in` (своим шагом он шёл 35 с); `beat` по умолчанию `null` (v1: `film`; монтаж для зрителя — показ); `with_aouda`, `with_pp` — только игры (куски их не ставят); в `door` кадр сразу у двери
-(после `countdown` — та же склейка), на Фогга — когда он встал, а не на 6-й секунде; в `friday` швейцар уходит в дверь до
-того, как вбегут джентльмены (в v1 шёл им навстречу). Люди ждут в холле (`OUT`), а не ставятся склейкой посреди куска.
+Changed against v1: the beat `friday` split into `friday` and `friday_in` (at his own pace it went on for 35 s);
+`beat` by default `null` (v1: `film`; the montage for the viewer is the showcase); `with_aouda`, `with_pp` — the game's
+only (the beats do not set them); in `door` the shot is at the door at once (after `countdown` — the same cut), on Fogg
+— once he has stopped, not at the 6th second; in `friday` the porter goes out of the door before the gentlemen run in
+(in v1 he went to meet them). The people wait in the hall (`OUT`), not put there by a cut in the middle of a beat.
 
-## Что важно не сломать
+## What must not be broken
 
-- Положения в `lib.plan` — общие (окна, фонари, перегородка, проём камина, места). Двигать там.
-- Рисунки не читают того, что движется: `day`, `fire`, `second`, `crowd_outside`, `chair_back` — только `animate`,
-  шейдеры, `place`. Новый элемент на `day` — его `animate`, не рисунок.
-- Свет не рисовать: ореолы — `hazeGlow`, пятна на полу — `lit`.
-- Слои, что двигаются (туман, толпа), — в коробке элемента целиком.
+- The positions in `lib.plan` are shared (the windows, the street lamps, the partition, the fireplace's opening, the
+  places). Move them there.
+- The paintings do not read what moves: `day`, `fire`, `second`, `crowd_outside`, `chair_back` — only `animate`,
+  shaders, `place`. A new element on `day` — its `animate`, not its painting.
+- Do not paint light: halos — `hazeGlow`, patches on the floor — `lit`.
+- Layers that move (the fog, the crowd) — wholly within the element's box.
 
-## Ждёт движка
+## Waiting for the engine
 
-- v1: изнанка плоскости в зеркале пола (сукно снизу зелёное) — проверить на движке 3.
+- v1: the underside of a plane in the floor's mirror (the felt green from below) — check on engine 3.

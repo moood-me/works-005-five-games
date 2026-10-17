@@ -1,4 +1,4 @@
-// «Гавань» — the harbour's plan, what several elements paint and move, and its film (film(scene): the world's module
+// «The harbour» — the harbour's plan, what several elements paint and move, and its film (film(scene): the world's module
 // beats). Metres: `across` along the quay (left negative), `d` ahead of the viewer, who stands on the quay looking out
 // over the water; the water is 1.6 m below the quay. Everything is painted once, in daylight colours: the evening, the
 // night and the lit lanterns are the scene's light and the elements' animate (notes.md).
@@ -469,7 +469,7 @@ function film(scene) {
         await s.wait(1.2);
       },
     },
-    // ---- (the game's «Не уснуть»: `daze`, `pp_walk`, `pp_stumble`) Off the terrace, reeling, along the quay toward the
+    // ---- (the game's «Stay awake»: `daze`, `pp_walk`, `pp_stumble`) Off the terrace, reeling, along the quay toward the
     // steamer: the film plays a stretch of it, as the game would — `pp_walk` sends him on, he stumbles.
     pipe: {
       from: () => DAZED(0, 0),

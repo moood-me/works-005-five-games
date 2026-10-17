@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Гавань",
-  "caption": "Дальневосточный порт: набережная, вода, пароходы.",
+  "title": "The harbour",
+  "caption": "A Far Eastern port: the quay, the water, the steamers.",
   "horizon": 0.52,
   "camera": {
     "mode": "panorama",
@@ -152,7 +152,7 @@
         "hongkong",
         "yokohama"
       ],
-      "means": "город: hongkong — пик с огнями, джонки, красные и золотые фонари, «Карнатик» у пирса, «Танкадера» у пристани; yokohama — холмы с пагодой, сампаны, белые бумажные фонари, «Генерал Грант» с колёсами, балаган Батулкара на пристани"
+      "means": "the town: hongkong — the Peak with its lights, junks, red and gold lanterns, the Carnatic at the pier, the Tankadere at the landing; yokohama — hills with a pagoda, sampans, white paper lanterns, the General Grant with her paddle-wheels, Batulcar's booth on the landing"
     },
     "evening": {
       "range": [
@@ -160,7 +160,7 @@
         1
       ],
       "smooth": true,
-      "means": "0 — день в светлой дымке, 1 — вечер: низкое красное солнце над водой"
+      "means": "0 — day in a light haze, 1 — evening: a low red sun over the water"
     },
     "night": {
       "range": [
@@ -168,7 +168,7 @@
         1
       ],
       "smooth": true,
-      "means": "ночь поверх вечера: 0 — нет, 1 — ночь, луна на воде"
+      "means": "night over the evening: 0 — none, 1 — night, the moon on the water"
     },
     "lanterns": {
       "range": [
@@ -176,7 +176,7 @@
         1
       ],
       "smooth": true,
-      "means": "фонари таверны, окна, огни пароходов и лодок, огни берега, рампа балагана: 0 — не горят, 1 — горят"
+      "means": "the tavern's lanterns, the windows, the lights of steamers and boats, the lights of the shore, the booth's footlights: 0 — unlit, 1 — lit"
     },
     "carnatic_present": {
       "range": [
@@ -184,7 +184,7 @@
         1
       ],
       "smooth": true,
-      "means": "пароход у пирса («Карнатик» в Гонконге, «Генерал Грант» в Иокогаме): 1 — стоит у причала, дымит, сходни на месте; к 0 — отваливает, разворачивается и уходит из гавани в дымку; 0 — причал пуст"
+      "means": "the steamer at the pier (the Carnatic at Hong Kong, the General Grant at Yokohama): 1 — at her berth, smoking, the gangway in place; towards 0 — casts off, turns and leaves the harbour into the haze; 0 — the berth empty"
     },
     "tankadere_out": {
       "range": [
@@ -192,7 +192,7 @@
         1
       ],
       "smooth": true,
-      "means": "лоцманский бот «Танкадера»: 0 — у пристани, к 1 — выходит из гавани (Гонконг)"
+      "means": "the pilot-boat Tankadere: 0 — at the landing, towards 1 — leaves the harbour (Hong Kong)"
     },
     "sail": {
       "range": [
@@ -200,7 +200,7 @@
         1
       ],
       "smooth": true,
-      "means": "паруса «Танкадеры»: 0 — убраны, 1 — подняты"
+      "means": "the Tankadere's sails: 0 — furled, 1 — set"
     },
     "daze": {
       "range": [
@@ -208,17 +208,17 @@
         1
       ],
       "smooth": true,
-      "means": "опиум («Не уснуть»): ореолы фонарей разбухают и двоятся, горизонт кренится (camera_roll = 4 × daze: поставленный сразу — ставит script.js; двигая daze, двигать рядом и camera_roll)"
+      "means": "opium («Stay awake»): the lanterns' halos swell and double, the horizon tilts (camera_roll = 4 × daze: set at once — script.js sets it; moving daze, move camera_roll beside it)"
     },
     "steamer_x": {
       "type": "number",
       "smooth": true,
-      "means": "где пароход (across, м); ведёт script.js по carnatic_present, игре трогать не нужно"
+      "means": "where the steamer is (across, m); led by script.js by carnatic_present, the game need not touch it"
     },
     "steamer_d": {
       "type": "number",
       "smooth": true,
-      "means": "где пароход (distance, м); ведёт script.js"
+      "means": "where the steamer is (distance, m); led by script.js"
     },
     "steamer_facing": {
       "range": [
@@ -226,17 +226,17 @@
         360
       ],
       "smooth": true,
-      "means": "куда повёрнут пароход, градусы; ведёт script.js"
+      "means": "which way the steamer is turned, degrees; led by script.js"
     },
     "boat_x": {
       "type": "number",
       "smooth": true,
-      "means": "где «Танкадера» (across, м); ведёт script.js по tankadere_out"
+      "means": "where the Tankadere is (across, m); led by script.js by tankadere_out"
     },
     "boat_d": {
       "type": "number",
       "smooth": true,
-      "means": "где «Танкадера» (distance, м); ведёт script.js"
+      "means": "where the Tankadere is (distance, m); led by script.js"
     },
     "boat_facing": {
       "range": [
@@ -244,81 +244,81 @@
         360
       ],
       "smooth": true,
-      "means": "куда повёрнута «Танкадера», градусы; ведёт script.js"
+      "means": "which way the Tankadere is turned, degrees; led by script.js"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма (модуль beats): quay, cousin, tavern, badge, pipe, pipe_on, carnatic, morning, cast_off; по концу сцена говорит beat:<имя>"
+      "means": "a beat of the film (the module beats): quay, cousin, tavern, badge, pipe, pipe_on, carnatic, morning, cast_off; at its end the scene says beat:<name>"
     },
     "with_aouda": {
       "range": [
         0,
         1
       ],
-      "means": "Ауда с Фоггом"
+      "means": "Aouda with Fogg"
     },
     "with_fix": {
       "range": [
         0,
         1
       ],
-      "means": "Фикс с ними (утром)"
+      "means": "Fix with them (in the morning)"
     },
     "aouda_dress": {
       "range": [
         0,
         1
       ],
-      "means": "Ауда в дорожном платье вместо сари"
+      "means": "Aouda in a travelling dress instead of the sari"
     },
     "pp_walk": {
       "range": [
         0,
         1
       ],
-      "means": "куда игра посылает Паспарту в опиуме по его пути (0 — у таверны, 1 — пирс у парохода): он идёт туда своим шагом, шатаясь; камера с ним"
+      "means": "where the game sends Passepartout in the opium along his way (0 — at the tavern, 1 — the pier by the steamer): he walks there at his own pace, reeling; the camera with him"
     },
     "pp_stumble": {
       "range": [
         0,
         1
       ],
-      "means": "Паспарту спотыкается (каждый новый подъём до 1 — раз), потом идёт дальше"
+      "means": "Passepartout stumbles (each new rise to 1 — once), then walks on"
     },
     "pp_walk_at": {
       "range": [
         0,
         1
       ],
-      "means": "где Паспарту сейчас на своём пути, в единицах pp_walk; ставит сцена, пока он идёт — для игры"
+      "means": "where Passepartout is on his way now, in units of pp_walk; set by the scene as he walks — for the game"
     },
     "steamer_roll": {
       "type": "number",
       "smooth": true,
-      "means": "крен парохода, градусы (качка на волне); ведёт script.js"
+      "means": "the steamer's roll, degrees (rocking on the swell); led by script.js"
     },
     "boat_roll": {
       "type": "number",
       "smooth": true,
-      "means": "крен «Танкадеры», градусы (качка); ведёт script.js"
+      "means": "the Tankadere's roll, degrees (rocking); led by script.js"
     },
     "steamer_smoke": {
       "range": [
         0,
         1
       ],
-      "means": "дымит ли пароход: 1, пока carnatic_present > 0; ведёт script.js"
+      "means": "whether the steamer is smoking: 1 while carnatic_present > 0; led by script.js"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true
     },
     {
       "id": "far",
-      "name": "Берег за гаванью",
+      "name": "Shore beyond the harbour",
       "across": 0,
       "distance": 800,
       "elevation": -1.6,
@@ -331,7 +331,7 @@
     },
     {
       "id": "city_lights",
-      "name": "Огни берега",
+      "name": "Lights of the shore",
       "across": 0,
       "distance": 790,
       "elevation": -1.6,
@@ -345,7 +345,7 @@
     },
     {
       "id": "water",
-      "name": "Вода гавани",
+      "name": "Harbour water",
       "plane": true,
       "across": 0,
       "distance": 1002.5,
@@ -362,7 +362,7 @@
     },
     {
       "id": "mist_far",
-      "name": "Дымка над водой, вдали",
+      "name": "Haze over the water, far",
       "across": 0,
       "distance": 320,
       "elevation": -1.6,
@@ -375,7 +375,7 @@
     },
     {
       "id": "mist_mid",
-      "name": "Дымка над водой, за серединой",
+      "name": "Haze over the water, beyond the middle",
       "across": 0,
       "distance": 180,
       "elevation": -1.6,
@@ -388,7 +388,7 @@
     },
     {
       "id": "mist",
-      "name": "Дымка над водой",
+      "name": "Haze over the water",
       "across": 0,
       "distance": 100,
       "elevation": -1.6,
@@ -401,7 +401,7 @@
     },
     {
       "id": "mist_near",
-      "name": "Дымка над водой, ближе",
+      "name": "Haze over the water, nearer",
       "across": 0,
       "distance": 50,
       "elevation": -1.6,
@@ -414,7 +414,7 @@
     },
     {
       "id": "boat_0",
-      "name": "Джонка или сампан 1",
+      "name": "Junk or sampan 1",
       "across": -170,
       "distance": 132,
       "elevation": -1.6,
@@ -427,7 +427,7 @@
     },
     {
       "id": "boat_1",
-      "name": "Джонка или сампан 2",
+      "name": "Junk or sampan 2",
       "across": 0,
       "distance": 168,
       "elevation": -1.6,
@@ -440,7 +440,7 @@
     },
     {
       "id": "boat_2",
-      "name": "Джонка или сампан 3",
+      "name": "Junk or sampan 3",
       "across": -38,
       "distance": 214,
       "elevation": -1.6,
@@ -453,7 +453,7 @@
     },
     {
       "id": "boat_3",
-      "name": "Джонка или сампан 4",
+      "name": "Junk or sampan 4",
       "across": 0,
       "distance": 260,
       "elevation": -1.6,
@@ -466,7 +466,7 @@
     },
     {
       "id": "boat_4",
-      "name": "Джонка или сампан 5",
+      "name": "Junk or sampan 5",
       "across": -260,
       "distance": 305,
       "elevation": -1.6,
@@ -479,7 +479,7 @@
     },
     {
       "id": "boat_5",
-      "name": "Джонка или сампан 6",
+      "name": "Junk or sampan 6",
       "across": 120,
       "distance": 338,
       "elevation": -1.6,
@@ -492,7 +492,7 @@
     },
     {
       "id": "boat_6",
-      "name": "Джонка или сампан 7",
+      "name": "Junk or sampan 7",
       "across": 0,
       "distance": 382,
       "elevation": -1.6,
@@ -505,7 +505,7 @@
     },
     {
       "id": "boat_7",
-      "name": "Джонка или сампан 8",
+      "name": "Junk or sampan 8",
       "across": 300,
       "distance": 412,
       "elevation": -1.6,
@@ -518,7 +518,7 @@
     },
     {
       "id": "boat_8",
-      "name": "Джонка или сампан 9",
+      "name": "Junk or sampan 9",
       "across": 0,
       "distance": 438,
       "elevation": -1.6,
@@ -531,7 +531,7 @@
     },
     {
       "id": "boat_9",
-      "name": "Джонка или сампан 10",
+      "name": "Junk or sampan 10",
       "across": -330,
       "distance": 448,
       "elevation": -1.6,
@@ -544,7 +544,7 @@
     },
     {
       "id": "boat_10",
-      "name": "Джонка или сампан 11",
+      "name": "Junk or sampan 11",
       "across": 176,
       "distance": 98,
       "elevation": -1.6,
@@ -557,7 +557,7 @@
     },
     {
       "id": "steamer",
-      "name": "Пароход (место)",
+      "name": "Steamer (site)",
       "unseen": true,
       "across": 4,
       "distance": 85,
@@ -572,7 +572,7 @@
     },
     {
       "id": "steamer_hull",
-      "name": "Пароход",
+      "name": "Steamer",
       "on": "steamer",
       "distance": -4.5,
       "facing": 180,
@@ -585,7 +585,7 @@
     },
     {
       "id": "steamer_bow",
-      "name": "Пароход, нос",
+      "name": "Steamer, bow",
       "on": "steamer",
       "across": 30,
       "distance": -4.5,
@@ -599,7 +599,7 @@
     },
     {
       "id": "steamer_stern",
-      "name": "Пароход, корма",
+      "name": "Steamer, stern",
       "on": "steamer",
       "across": -30,
       "distance": -4.5,
@@ -613,7 +613,7 @@
     },
     {
       "id": "steamer_house",
-      "name": "Рубка и шлюпки",
+      "name": "Deckhouse and boats",
       "on": "steamer",
       "distance": -2.2,
       "elevation": 4.6,
@@ -627,7 +627,7 @@
     },
     {
       "id": "steamer_rig",
-      "name": "Мачты и такелаж",
+      "name": "Masts and rigging",
       "on": "steamer",
       "elevation": 4.6,
       "facing": 180,
@@ -640,7 +640,7 @@
     },
     {
       "id": "steamer_funnel",
-      "name": "Труба",
+      "name": "Funnel",
       "on": "steamer",
       "across": -4,
       "elevation": 4.6,
@@ -653,7 +653,7 @@
     },
     {
       "id": "smoke",
-      "name": "Дым парохода",
+      "name": "Steamer's smoke",
       "particles": {
         "kind": "smoke",
         "at": "steamer_funnel#funnel",
@@ -695,7 +695,7 @@
     },
     {
       "id": "jetty",
-      "name": "Причал у парохода",
+      "name": "Berth by the steamer",
       "plane": true,
       "across": 17,
       "distance": 78,
@@ -705,7 +705,7 @@
     },
     {
       "id": "pier",
-      "name": "Пирс",
+      "name": "Pier",
       "plane": true,
       "across": 12,
       "distance": 40.5,
@@ -715,7 +715,7 @@
     },
     {
       "id": "boat",
-      "name": "«Танкадера» (место)",
+      "name": "Tankadere (site)",
       "unseen": true,
       "across": 41,
       "distance": 20.6,
@@ -730,7 +730,7 @@
     },
     {
       "id": "tankadere_far",
-      "name": "«Танкадера», дальний фальшборт",
+      "name": "Tankadere, far bulwark",
       "on": "boat",
       "distance": 2.2,
       "elevation": 2.0,
@@ -744,7 +744,7 @@
     },
     {
       "id": "tankadere_deck",
-      "name": "«Танкадера», палуба",
+      "name": "Tankadere, deck",
       "plane": true,
       "on": "boat",
       "elevation": 2.0,
@@ -753,7 +753,7 @@
     },
     {
       "id": "tankadere",
-      "name": "«Танкадера»",
+      "name": "Tankadere",
       "on": "boat",
       "distance": -2.2,
       "facing": 180,
@@ -766,7 +766,7 @@
     },
     {
       "id": "tankadere_bow",
-      "name": "«Танкадера», нос",
+      "name": "Tankadere, bow",
       "on": "boat",
       "across": 6,
       "distance": -2.2,
@@ -780,7 +780,7 @@
     },
     {
       "id": "tankadere_stern",
-      "name": "«Танкадера», корма",
+      "name": "Tankadere, stern",
       "on": "boat",
       "across": -9,
       "facing": 270,
@@ -793,7 +793,7 @@
     },
     {
       "id": "tankadere_rig",
-      "name": "«Танкадера», мачты и паруса",
+      "name": "Tankadere, masts and sails",
       "on": "boat",
       "elevation": 2.0,
       "facing": 180,
@@ -806,7 +806,7 @@
     },
     {
       "id": "tankadere_sails",
-      "name": "«Танкадера», паруса",
+      "name": "Tankadere, sails",
       "on": "boat",
       "elevation": 2.0,
       "facing": 180,
@@ -820,7 +820,7 @@
     },
     {
       "id": "landing",
-      "name": "Пристань",
+      "name": "Landing",
       "plane": true,
       "across": 38,
       "distance": 12.5,
@@ -831,7 +831,7 @@
     },
     {
       "id": "ramp",
-      "name": "Сходни к понтону",
+      "name": "Gangway to the pontoon",
       "plane": true,
       "across": 32,
       "distance": 6,
@@ -843,7 +843,7 @@
     },
     {
       "id": "stage_back",
-      "name": "Задник балагана",
+      "name": "Back of the booth",
       "across": 38,
       "distance": 16.6,
       "facing": 180,
@@ -857,7 +857,7 @@
     },
     {
       "id": "stage",
-      "name": "Сцена балагана",
+      "name": "Booth stage",
       "plane": true,
       "across": 38,
       "distance": 14,
@@ -868,7 +868,7 @@
     },
     {
       "id": "stage_front",
-      "name": "Балаган",
+      "name": "Booth",
       "across": 38,
       "distance": 12,
       "facing": 180,
@@ -882,7 +882,7 @@
     },
     {
       "id": "banners",
-      "name": "Полотнища",
+      "name": "Cloths",
       "across": 38,
       "distance": 13,
       "box": [
@@ -895,14 +895,14 @@
     },
     {
       "id": "tavern",
-      "name": "Таверна (место)",
+      "name": "Tavern (site)",
       "unseen": true,
       "across": -36,
       "distance": 17
     },
     {
       "id": "tavern_inside",
-      "name": "Таверна внутри",
+      "name": "Tavern inside",
       "on": "tavern",
       "distance": 3,
       "facing": 180,
@@ -916,7 +916,7 @@
     },
     {
       "id": "tavern_front",
-      "name": "Таверна",
+      "name": "Tavern",
       "on": "tavern",
       "facing": 180,
       "box": [
@@ -928,7 +928,7 @@
     },
     {
       "id": "tavern_left",
-      "name": "Таверна, слева",
+      "name": "Tavern, left",
       "on": "tavern",
       "across": -7,
       "facing": 270,
@@ -941,7 +941,7 @@
     },
     {
       "id": "tavern_right",
-      "name": "Таверна, справа",
+      "name": "Tavern, right",
       "on": "tavern",
       "across": 7,
       "facing": 90,
@@ -954,7 +954,7 @@
     },
     {
       "id": "tavern_roof",
-      "name": "Крыша таверны",
+      "name": "Tavern roof",
       "plane": true,
       "on": "tavern",
       "distance": 1.1,
@@ -965,7 +965,7 @@
     },
     {
       "id": "terrace",
-      "name": "Терраса",
+      "name": "Terrace",
       "plane": true,
       "across": -36,
       "distance": 11,
@@ -975,7 +975,7 @@
     },
     {
       "id": "rail_l",
-      "name": "Перила террасы, слева",
+      "name": "Terrace railing, left",
       "across": -43,
       "distance": 5,
       "facing": 270,
@@ -988,7 +988,7 @@
     },
     {
       "id": "rail_r",
-      "name": "Перила террасы, справа",
+      "name": "Terrace railing, right",
       "across": -29,
       "distance": 5,
       "facing": 90,
@@ -1001,7 +1001,7 @@
     },
     {
       "id": "tables",
-      "name": "Столики",
+      "name": "Tables",
       "across": -36,
       "distance": 10,
       "box": [
@@ -1013,7 +1013,7 @@
     },
     {
       "id": "piles",
-      "name": "Сваи",
+      "name": "Piles",
       "across": 0,
       "distance": 30,
       "elevation": -1.6,
@@ -1026,7 +1026,7 @@
     },
     {
       "id": "lanterns",
-      "name": "Фонари над террасой",
+      "name": "Lanterns over the terrace",
       "across": -36,
       "distance": 8.5,
       "box": [
@@ -1038,7 +1038,7 @@
     },
     {
       "id": "lanterns_back",
-      "name": "Фонари над террасой, дальний ряд",
+      "name": "Lanterns over the terrace, far row",
       "across": -36,
       "distance": 13,
       "box": [
@@ -1050,7 +1050,7 @@
     },
     {
       "id": "lanterns_eaves",
-      "name": "Фонари под стрехой",
+      "name": "Lanterns under the eaves",
       "across": -36,
       "distance": 16.4,
       "box": [
@@ -1062,7 +1062,7 @@
     },
     {
       "id": "lanterns_stage",
-      "name": "Фонари над балаганом",
+      "name": "Lanterns over the booth",
       "across": 38,
       "distance": 12.4,
       "box": [
@@ -1074,7 +1074,7 @@
     },
     {
       "id": "quay",
-      "name": "Набережная",
+      "name": "Quay",
       "plane": true,
       "across": 0,
       "distance": 1.5,
@@ -1090,7 +1090,7 @@
     },
     {
       "id": "steps",
-      "name": "Ступени к воде",
+      "name": "Steps down to the water",
       "plane": true,
       "across": -8,
       "distance": 6.5,
@@ -1102,7 +1102,7 @@
     },
     {
       "id": "parapet_top",
-      "name": "Парапет, верх",
+      "name": "Parapet, top",
       "plane": true,
       "across": 0,
       "distance": 4.8,
@@ -1113,7 +1113,7 @@
     },
     {
       "id": "fogg",
-      "name": "Филеас Фогг",
+      "name": "Phileas Fogg",
       "person": {
         "cast": "cast",
         "who": "fogg"
@@ -1128,7 +1128,7 @@
     },
     {
       "id": "aouda",
-      "name": "Ауда",
+      "name": "Aouda",
       "person": {
         "cast": "cast",
         "who": "aouda"
@@ -1143,7 +1143,7 @@
     },
     {
       "id": "passepartout",
-      "name": "Паспарту",
+      "name": "Passepartout",
       "person": {
         "cast": "cast",
         "who": "passepartout"
@@ -1158,7 +1158,7 @@
     },
     {
       "id": "fix",
-      "name": "Фикс",
+      "name": "Fix",
       "person": {
         "cast": "cast",
         "who": "fix"
@@ -1173,7 +1173,7 @@
     },
     {
       "id": "parapet",
-      "name": "Парапет",
+      "name": "Parapet",
       "across": 0,
       "distance": 4.6,
       "facing": 180,
@@ -1186,7 +1186,7 @@
     },
     {
       "id": "bollards",
-      "name": "Кнехты",
+      "name": "Bollards",
       "across": 0,
       "distance": 4.7,
       "box": [
@@ -1198,7 +1198,7 @@
     },
     {
       "id": "gulls",
-      "name": "Чайки",
+      "name": "Gulls",
       "box": [
         -1.5,
         -0.5,

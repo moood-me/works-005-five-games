@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Джунгли",
-  "caption": "Индийский лес. Тропа от конца рельсов к реке.",
+  "title": "The jungle",
+  "caption": "An Indian forest. A trail from the end of the rails to the river.",
   "horizon": 0.42,
   "camera": {
     "mode": "panorama",
@@ -220,7 +220,7 @@
         1
       ],
       "smooth": true,
-      "means": "время суток: 0 — ночь (луна, светлая), 1 — день"
+      "means": "the time of day: 0 — night (the moon, light), 1 — day"
     },
     "dawn": {
       "range": [
@@ -228,21 +228,21 @@
         1
       ],
       "smooth": true,
-      "means": "рассвет: шафрановый свет, низкое солнце над рекой"
+      "means": "dawn: saffron light, a low sun over the river"
     },
     "station": {
       "values": [
         "kholby",
         "allahabad"
       ],
-      "means": "вывеска станции у конца рельсов: Кхолби (вечер прибытия) или Аллахабад (утро после)"
+      "means": "the station sign at the end of the rails: Kholby (the evening they arrive) or Allahabad (the morning after)"
     },
     "procession": {
       "range": [
         0,
         1
       ],
-      "means": "куда идёт процессия по тропе слева направо: 0 — ещё не пришла, 0.476 — стоит перед зарослями, 1 — прошла; поставленное — колонна идёт туда своим шагом"
+      "means": "where the procession goes along the trail, left to right: 0 — not come yet, 0.476 — stands before the thicket, 1 — gone by; the value set — the column walks there at its own pace"
     },
     "torches": {
       "range": [
@@ -250,7 +250,7 @@
         1
       ],
       "smooth": true,
-      "means": "факелы процессии: 0 — не горят, 1 — горят ярко"
+      "means": "the procession's torches: 0 — unlit, 1 — burning bright"
     },
     "pyre_fire": {
       "range": [
@@ -258,7 +258,7 @@
         1
       ],
       "smooth": true,
-      "means": "костёр на поляне: 0 — не зажжён, 1 — полное пламя; столько же его света"
+      "means": "the pyre in the clearing: 0 — unlit, 1 — full flame; as much of its light"
     },
     "smoke": {
       "range": [
@@ -266,25 +266,25 @@
         1
       ],
       "smooth": true,
-      "means": "дым костра: 0 — нет, 1 — густой (редеет к 0)"
+      "means": "the pyre's smoke: 0 — none, 1 — thick (thins towards 0)"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма (модуль beats): drums, procession, pyre, rise, walk; по концу сцена говорит beat:<имя>"
+      "means": "a beat of the film (the module beats): drums, procession, pyre, rise, walk; at its end the scene says beat:<name>"
     },
     "heads": {
       "range": [
         0,
         1
       ],
-      "means": "толпа у костра: 0 — ниц, 1 — на коленях, смотрят"
+      "means": "the crowd at the pyre: 0 — face down, 1 — on their knees, looking"
     },
     "walk": {
       "range": [
         0,
         1
       ],
-      "means": "«раджа» с вдовой на руках: докуда он несёт её от костра к деревьям (0 — на костре, 1 — у деревьев); поставленное — идёт туда своим шагом"
+      "means": "the «rajah» with the widow in his arms: how far he carries her from the pyre to the trees (0 — on the pyre, 1 — at the trees); the value set — he walks there at his own pace"
     },
     "fireflies": {
       "range": [
@@ -292,39 +292,39 @@
         1
       ],
       "smooth": true,
-      "means": "светлячки над тропой и ручьём (сцена ставит сама по day: ночью 1)"
+      "means": "fireflies over the trail and the stream (the scene sets it itself by day: at night 1)"
     },
     "kiouni_x": {
       "type": "number",
       "smooth": true,
-      "means": "где Киуни вдоль тропы (м, как across); ставит сцена — из кусков, ride, charge; он идёт туда своим шагом"
+      "means": "where Kiouni is along the trail (m, as across); set by the scene — from the beats, ride, charge; he walks there at his own pace"
     },
     "kiouni_d": {
       "type": "number",
       "smooth": true,
-      "means": "на каком он расстоянии (м); ставит сцена вместе с kiouni_x"
+      "means": "at what distance he is (m); set by the scene together with kiouni_x"
     },
     "kiouni_facing": {
       "type": "number",
       "smooth": true,
-      "means": "куда он обращён (градусы, как facing): 90 — идёт вправо, 270 — влево; ставит сцена"
+      "means": "which way he faces (degrees, as facing): 90 — going right, 270 — left; set by the scene"
     },
     "kiouni_el": {
       "type": "number",
       "smooth": true,
-      "means": "насколько он опустился (м, ≤ 0), по kneel; ставит сцена"
+      "means": "how far he has sunk (m, ≤ 0), by kneel; set by the scene"
     },
     "kiouni_tilt": {
       "type": "number",
       "smooth": true,
-      "means": "наклон (градусы: − голова вниз, + назад), по kneel и balk; ставит сцена"
+      "means": "his tilt (degrees: − head down, + back), by kneel and balk; set by the scene"
     },
     "kiouni_here": {
       "range": [
         0,
         1
       ],
-      "means": "1 — Киуни в сцене, 0 — нет"
+      "means": "1 — Kiouni in the scene, 0 — not"
     },
     "kneel": {
       "range": [
@@ -332,7 +332,7 @@
         1
       ],
       "smooth": true,
-      "means": "0 — стоит, 1 — на коленях (гауда низко, чтобы сесть и сойти)"
+      "means": "0 — standing, 1 — kneeling (the howdah low, to get in and out)"
     },
     "ears": {
       "range": [
@@ -340,7 +340,7 @@
         1
       ],
       "smooth": true,
-      "means": "уши: 0 — висят и хлопают, 1 — веером"
+      "means": "the ears: 0 — hanging and flapping, 1 — fanned out"
     },
     "trunk": {
       "values": [
@@ -349,14 +349,14 @@
         "sugar",
         "lift"
       ],
-      "means": "хобот: висит, поднят, тянется назад к гауде (сахар), поднимает (Паспарту)"
+      "means": "the trunk: hanging, raised, reaching back to the howdah (sugar), lifting (Passepartout)"
     },
     "trumpet": {
       "range": [
         0,
         1
       ],
-      "means": "подъём до 1 — он трубит раз (хобот вверх, голова вверх, уши веером); вернуть 0 перед следующим"
+      "means": "a rise to 1 — he trumpets once (trunk up, head up, ears fanned out); set back to 0 before the next"
     },
     "kiouni_blow": {
       "range": [
@@ -364,7 +364,7 @@
         1
       ],
       "smooth": true,
-      "means": "как он трубит сейчас; ставит сцена по trumpet"
+      "means": "how he trumpets now; set by the scene by trumpet"
     },
     "balk": {
       "range": [
@@ -372,14 +372,14 @@
         1
       ],
       "smooth": true,
-      "means": "упирается: 0 — нет, 1 — встал, откинулся, голова и уши вверх"
+      "means": "balking: 0 — no, 1 — stopped dead, leaning back, head and ears up"
     }
   },
   "relief": "return lib.ground(across, distance);",
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true,
       "uniforms": {
         "day": 0.85,
@@ -392,7 +392,7 @@
     },
     {
       "id": "far",
-      "name": "Лес вдали",
+      "name": "Far forest",
       "across": 0,
       "distance": 150,
       "height": 40,
@@ -405,7 +405,7 @@
     },
     {
       "id": "river",
-      "name": "Река",
+      "name": "River",
       "plane": true,
       "across": 70,
       "distance": 83.5,
@@ -422,7 +422,7 @@
     },
     {
       "id": "ground",
-      "name": "Земля",
+      "name": "Ground",
       "plane": true,
       "across": 5,
       "distance": 43.5,
@@ -433,7 +433,7 @@
     },
     {
       "id": "stream",
-      "name": "Ручей",
+      "name": "Stream",
       "plane": true,
       "across": 7.5,
       "distance": 22,
@@ -449,7 +449,7 @@
     },
     {
       "id": "bridge",
-      "name": "Мостки",
+      "name": "Footbridge",
       "plane": true,
       "across": 4.7,
       "distance": 11,
@@ -467,7 +467,7 @@
     },
     {
       "id": "pagoda_site",
-      "name": "Пагода (место)",
+      "name": "Pagoda (site)",
       "unseen": true,
       "across": 56,
       "distance": 22,
@@ -475,7 +475,7 @@
     },
     {
       "id": "plinth_front",
-      "name": "Цоколь пагоды",
+      "name": "Pagoda plinth",
       "on": "pagoda_site",
       "distance": -3.6,
       "facing": 180,
@@ -494,7 +494,7 @@
     },
     {
       "id": "plinth_left",
-      "name": "Цоколь пагоды, слева",
+      "name": "Pagoda plinth, left",
       "on": "pagoda_site",
       "across": -4.2,
       "facing": 270,
@@ -513,7 +513,7 @@
     },
     {
       "id": "plinth_right",
-      "name": "Цоколь пагоды, справа",
+      "name": "Pagoda plinth, right",
       "on": "pagoda_site",
       "across": 4.2,
       "facing": 90,
@@ -532,7 +532,7 @@
     },
     {
       "id": "plinth_top",
-      "name": "Площадка пагоды",
+      "name": "Pagoda platform",
       "plane": true,
       "on": "pagoda_site",
       "elevation": 0.8,
@@ -548,7 +548,7 @@
     },
     {
       "id": "pagoda",
-      "name": "Пагода",
+      "name": "Pagoda",
       "on": "pagoda_site",
       "distance": -1,
       "elevation": 0.8,
@@ -569,7 +569,7 @@
     },
     {
       "id": "cella_left",
-      "name": "Святилище, слева",
+      "name": "Shrine, left",
       "on": "pagoda_site",
       "across": -2,
       "distance": 1,
@@ -591,7 +591,7 @@
     },
     {
       "id": "cella_right",
-      "name": "Святилище, справа",
+      "name": "Shrine, right",
       "on": "pagoda_site",
       "across": 2,
       "distance": 1,
@@ -613,7 +613,7 @@
     },
     {
       "id": "porch",
-      "name": "Портик",
+      "name": "Portico",
       "on": "pagoda_site",
       "distance": -2.9,
       "elevation": 0.8,
@@ -634,7 +634,7 @@
     },
     {
       "id": "porch_left",
-      "name": "Портик, слева",
+      "name": "Portico, left",
       "on": "pagoda_site",
       "across": -2.2,
       "distance": -1.95,
@@ -656,7 +656,7 @@
     },
     {
       "id": "porch_right",
-      "name": "Портик, справа",
+      "name": "Portico, right",
       "on": "pagoda_site",
       "across": 2.2,
       "distance": -1.95,
@@ -678,7 +678,7 @@
     },
     {
       "id": "porch_roof",
-      "name": "Кровля портика",
+      "name": "Portico roof",
       "plane": true,
       "on": "pagoda_site",
       "distance": -1.95,
@@ -696,7 +696,7 @@
     },
     {
       "id": "tower_front_lo",
-      "name": "Башня, низ",
+      "name": "Tower, lower",
       "on": "pagoda_site",
       "distance": -1.1,
       "elevation": 4,
@@ -719,7 +719,7 @@
     },
     {
       "id": "tower_left_lo",
-      "name": "Башня, низ слева",
+      "name": "Tower, lower left",
       "on": "pagoda_site",
       "across": -2.1,
       "distance": 1,
@@ -743,7 +743,7 @@
     },
     {
       "id": "tower_right_lo",
-      "name": "Башня, низ справа",
+      "name": "Tower, lower right",
       "on": "pagoda_site",
       "across": 2.1,
       "distance": 1,
@@ -767,7 +767,7 @@
     },
     {
       "id": "tower_front_hi",
-      "name": "Башня, верх",
+      "name": "Tower, upper",
       "on": "pagoda_site",
       "distance": -0.75,
       "elevation": 7.6,
@@ -790,7 +790,7 @@
     },
     {
       "id": "tower_left_hi",
-      "name": "Башня, верх слева",
+      "name": "Tower, upper left",
       "on": "pagoda_site",
       "across": -1.75,
       "distance": 1,
@@ -814,7 +814,7 @@
     },
     {
       "id": "tower_right_hi",
-      "name": "Башня, верх справа",
+      "name": "Tower, upper right",
       "on": "pagoda_site",
       "across": 1.75,
       "distance": 1,
@@ -838,7 +838,7 @@
     },
     {
       "id": "crown",
-      "name": "Навершие",
+      "name": "Finial",
       "on": "pagoda_site",
       "distance": 1,
       "elevation": 10,
@@ -858,7 +858,7 @@
     },
     {
       "id": "train",
-      "name": "Поезд",
+      "name": "Train",
       "across": -52,
       "distance": 20,
       "height": 5,
@@ -877,7 +877,7 @@
     },
     {
       "id": "train_front",
-      "name": "Паровоз спереди",
+      "name": "Engine, front",
       "on": "train",
       "across": 17,
       "distance": 1.3,
@@ -897,7 +897,7 @@
     },
     {
       "id": "hut_site",
-      "name": "Хижина (место)",
+      "name": "Hut (site)",
       "unseen": true,
       "across": -20,
       "distance": 24,
@@ -905,7 +905,7 @@
     },
     {
       "id": "hut",
-      "name": "Хижина",
+      "name": "Hut",
       "on": "hut_site",
       "distance": -1.7,
       "facing": 180,
@@ -924,7 +924,7 @@
     },
     {
       "id": "hut_left",
-      "name": "Хижина, слева",
+      "name": "Hut, left",
       "on": "hut_site",
       "across": -2.2,
       "facing": 270,
@@ -943,7 +943,7 @@
     },
     {
       "id": "hut_right",
-      "name": "Хижина, справа",
+      "name": "Hut, right",
       "on": "hut_site",
       "across": 2.2,
       "facing": 90,
@@ -962,7 +962,7 @@
     },
     {
       "id": "hut_roof",
-      "name": "Крыша хижины",
+      "name": "Hut roof",
       "plane": true,
       "on": "hut_site",
       "distance": -1.075,
@@ -980,14 +980,14 @@
     },
     {
       "id": "shed_site",
-      "name": "Навес для слона (место)",
+      "name": "Elephant shed (site)",
       "unseen": true,
       "across": -34,
       "distance": 13
     },
     {
       "id": "shed",
-      "name": "Навес для слона",
+      "name": "Elephant shed",
       "on": "shed_site",
       "distance": -2.2,
       "facing": 180,
@@ -1006,7 +1006,7 @@
     },
     {
       "id": "shed_back",
-      "name": "Навес, задние столбы",
+      "name": "Shed, back posts",
       "on": "shed_site",
       "distance": 2.2,
       "facing": 180,
@@ -1025,7 +1025,7 @@
     },
     {
       "id": "shed_roof",
-      "name": "Кровля навеса",
+      "name": "Shed roof",
       "plane": true,
       "on": "shed_site",
       "distance": -1.3,
@@ -1042,7 +1042,7 @@
     },
     {
       "id": "shed_roof_back",
-      "name": "Кровля навеса, задний скат",
+      "name": "Shed roof, back slope",
       "plane": true,
       "on": "shed_site",
       "distance": 1.3,
@@ -1059,7 +1059,7 @@
     },
     {
       "id": "shed_left",
-      "name": "Навес, фронтон слева",
+      "name": "Shed, gable left",
       "on": "shed_site",
       "across": -4.4,
       "elevation": 4.382,
@@ -1079,7 +1079,7 @@
     },
     {
       "id": "shed_right",
-      "name": "Навес, фронтон справа",
+      "name": "Shed, gable right",
       "on": "shed_site",
       "across": 4.4,
       "elevation": 4.382,
@@ -1099,7 +1099,7 @@
     },
     {
       "id": "sign",
-      "name": "Вывеска станции",
+      "name": "Station sign",
       "across": -44,
       "distance": 13,
       "height": 2.5,
@@ -1112,7 +1112,7 @@
     },
     {
       "id": "kiouni",
-      "name": "Киуни",
+      "name": "Kiouni",
       "across": -34,
       "distance": 13.4,
       "facing": 90,
@@ -1133,7 +1133,7 @@
     },
     {
       "id": "kiouni_l",
-      "name": "Киуни",
+      "name": "Kiouni",
       "on": "kiouni",
       "across": -0.85,
       "facing": 270,
@@ -1148,7 +1148,7 @@
     },
     {
       "id": "kiouni_r",
-      "name": "Киуни",
+      "name": "Kiouni",
       "on": "kiouni",
       "across": 0.85,
       "facing": 90,
@@ -1163,7 +1163,7 @@
     },
     {
       "id": "gauda_l",
-      "name": "Гауда",
+      "name": "Howdah",
       "on": "kiouni",
       "across": -0.62,
       "elevation": 2.86,
@@ -1179,7 +1179,7 @@
     },
     {
       "id": "gauda_r",
-      "name": "Гауда",
+      "name": "Howdah",
       "on": "kiouni",
       "across": 0.62,
       "elevation": 2.86,
@@ -1195,7 +1195,7 @@
     },
     {
       "id": "steam",
-      "name": "Пар паровоза",
+      "name": "Engine's steam",
       "particles": {
         "kind": "smoke",
         "at": "train#chimney",
@@ -1215,7 +1215,7 @@
     },
     {
       "id": "forest",
-      "name": "Лес у тропы",
+      "name": "Forest by the trail",
       "across": 0,
       "distance": 12,
       "height": 30,
@@ -1235,7 +1235,7 @@
     },
     {
       "id": "canopy",
-      "name": "Кроны леса",
+      "name": "Forest crowns",
       "across": 0,
       "distance": 12,
       "height": 30,
@@ -1256,7 +1256,7 @@
     },
     {
       "id": "undergrowth",
-      "name": "Подлесок",
+      "name": "Undergrowth",
       "across": 0,
       "distance": 12,
       "height": 3,
@@ -1277,7 +1277,7 @@
     },
     {
       "id": "mist_river",
-      "name": "Туман над рекой",
+      "name": "Mist over the river",
       "across": 55,
       "distance": 26,
       "height": 3,
@@ -1290,7 +1290,7 @@
     },
     {
       "id": "pyre",
-      "name": "Костёр",
+      "name": "Pyre",
       "across": 40,
       "distance": 14,
       "height": 2,
@@ -1312,7 +1312,7 @@
     },
     {
       "id": "pyre_top",
-      "name": "Верх костра",
+      "name": "Top of the pyre",
       "plane": true,
       "unseen": true,
       "walk": true,
@@ -1324,7 +1324,7 @@
     },
     {
       "id": "pyre_steps",
-      "name": "Уступы костра",
+      "name": "Steps of the pyre",
       "plane": true,
       "unseen": true,
       "walk": true,
@@ -1338,7 +1338,7 @@
     },
     {
       "id": "pyre_flames",
-      "name": "Пламя костра",
+      "name": "Pyre flames",
       "across": 40,
       "distance": 14.3,
       "elevation": 1.38,
@@ -1352,7 +1352,7 @@
     },
     {
       "id": "pyre_flames_near",
-      "name": "Пламя костра, ближнее",
+      "name": "Pyre flames, near",
       "across": 40,
       "distance": 13.62,
       "elevation": 1.38,
@@ -1366,7 +1366,7 @@
     },
     {
       "id": "pyre_embers",
-      "name": "Искры костра",
+      "name": "Pyre sparks",
       "particles": {
         "kind": "embers",
         "at": "pyre#flames",
@@ -1380,7 +1380,7 @@
     },
     {
       "id": "smoke",
-      "name": "Дым костра",
+      "name": "Pyre smoke",
       "particles": {
         "kind": "smoke",
         "at": "pyre#smoke",
@@ -1406,7 +1406,7 @@
     },
     {
       "id": "procession",
-      "name": "Процессия",
+      "name": "Procession",
       "across": 0,
       "distance": 10,
       "height": 3,
@@ -1419,7 +1419,7 @@
     },
     {
       "id": "pb1",
-      "name": "Факельщик",
+      "name": "Torch-bearer",
       "person": {
         "cast": "cast",
         "who": "bearer"
@@ -1433,7 +1433,7 @@
     },
     {
       "id": "pb2",
-      "name": "Факельщик",
+      "name": "Torch-bearer",
       "person": {
         "cast": "cast",
         "who": "bearer"
@@ -1447,7 +1447,7 @@
     },
     {
       "id": "dr1",
-      "name": "Барабанщик",
+      "name": "Drummer",
       "person": {
         "cast": "cast",
         "who": "drummer"
@@ -1461,7 +1461,7 @@
     },
     {
       "id": "dr2",
-      "name": "Барабанщик",
+      "name": "Drummer",
       "person": {
         "cast": "cast",
         "who": "drummer"
@@ -1475,7 +1475,7 @@
     },
     {
       "id": "pr1",
-      "name": "Жрец",
+      "name": "Priest",
       "person": {
         "cast": "cast",
         "who": "priest"
@@ -1489,7 +1489,7 @@
     },
     {
       "id": "aouda",
-      "name": "Ауда",
+      "name": "Aouda",
       "person": {
         "cast": "cast",
         "who": "aouda"
@@ -1503,7 +1503,7 @@
     },
     {
       "id": "pr2",
-      "name": "Жрец",
+      "name": "Priest",
       "person": {
         "cast": "cast",
         "who": "priest"
@@ -1517,7 +1517,7 @@
     },
     {
       "id": "pb3",
-      "name": "Факельщик",
+      "name": "Torch-bearer",
       "person": {
         "cast": "cast",
         "who": "bearer"
@@ -1531,7 +1531,7 @@
     },
     {
       "id": "pb4",
-      "name": "Факельщик",
+      "name": "Torch-bearer",
       "person": {
         "cast": "cast",
         "who": "bearer"
@@ -1545,7 +1545,7 @@
     },
     {
       "id": "fogg",
-      "name": "Филеас Фогг",
+      "name": "Phileas Fogg",
       "person": {
         "cast": "cast",
         "who": "fogg"
@@ -1559,7 +1559,7 @@
     },
     {
       "id": "cromarty",
-      "name": "Сэр Фрэнсис Кромарти",
+      "name": "Sir Francis Cromarty",
       "person": {
         "cast": "cast",
         "who": "cromarty"
@@ -1573,7 +1573,7 @@
     },
     {
       "id": "passepartout",
-      "name": "Паспарту",
+      "name": "Passepartout",
       "person": {
         "cast": "cast",
         "who": "passepartout"
@@ -1587,7 +1587,7 @@
     },
     {
       "id": "guide",
-      "name": "Проводник-парс",
+      "name": "Parsee guide",
       "person": {
         "cast": "cast",
         "who": "guide"
@@ -1601,7 +1601,7 @@
     },
     {
       "id": "v1",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager"
@@ -1615,7 +1615,7 @@
     },
     {
       "id": "v2",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager"
@@ -1629,7 +1629,7 @@
     },
     {
       "id": "v3",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager_woman"
@@ -1643,7 +1643,7 @@
     },
     {
       "id": "v4",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager"
@@ -1657,7 +1657,7 @@
     },
     {
       "id": "v5",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager"
@@ -1671,7 +1671,7 @@
     },
     {
       "id": "v6",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager_woman"
@@ -1685,7 +1685,7 @@
     },
     {
       "id": "v7",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager"
@@ -1699,7 +1699,7 @@
     },
     {
       "id": "v8",
-      "name": "Толпа у костра",
+      "name": "Crowd at the pyre",
       "person": {
         "cast": "cast",
         "who": "villager"
@@ -1713,7 +1713,7 @@
     },
     {
       "id": "fire_pb1",
-      "name": "Факел",
+      "name": "Torch",
       "particles": {
         "kind": "fire",
         "at": "pb1#flame",
@@ -1726,7 +1726,7 @@
     },
     {
       "id": "fire_pb2",
-      "name": "Факел",
+      "name": "Torch",
       "particles": {
         "kind": "fire",
         "at": "pb2#flame",
@@ -1739,7 +1739,7 @@
     },
     {
       "id": "fire_pb3",
-      "name": "Факел",
+      "name": "Torch",
       "particles": {
         "kind": "fire",
         "at": "pb3#flame",
@@ -1752,7 +1752,7 @@
     },
     {
       "id": "fire_pb4",
-      "name": "Факел",
+      "name": "Torch",
       "particles": {
         "kind": "fire",
         "at": "pb4#flame",
@@ -1765,7 +1765,7 @@
     },
     {
       "id": "fire_pr1",
-      "name": "Факел",
+      "name": "Torch",
       "particles": {
         "kind": "fire",
         "at": "pr1#flame",
@@ -1778,7 +1778,7 @@
     },
     {
       "id": "fire_pr2",
-      "name": "Факел",
+      "name": "Torch",
       "particles": {
         "kind": "fire",
         "at": "pr2#flame",
@@ -1791,7 +1791,7 @@
     },
     {
       "id": "mist_stream",
-      "name": "Туман у ручья",
+      "name": "Mist by the stream",
       "across": 0,
       "distance": 9,
       "height": 2,
@@ -1804,7 +1804,7 @@
     },
     {
       "id": "fireflies",
-      "name": "Светлячки",
+      "name": "Fireflies",
       "particles": {
         "kind": "fireflies",
         "amount": "fireflies",
@@ -1835,7 +1835,7 @@
     },
     {
       "id": "motes",
-      "name": "Пылинки в лучах",
+      "name": "Motes in the rays",
       "particles": {
         "kind": "dust",
         "at": [
@@ -1852,7 +1852,7 @@
     },
     {
       "id": "leaf_fall",
-      "name": "Падающие листья",
+      "name": "Falling leaves",
       "particles": {
         "kind": "leaves",
         "at": [
@@ -1879,7 +1879,7 @@
     },
     {
       "id": "near",
-      "name": "Стволы у тропы",
+      "name": "Trunks by the trail",
       "across": 0,
       "distance": 4,
       "height": 32,
@@ -1899,7 +1899,7 @@
     },
     {
       "id": "near_leaves",
-      "name": "Заросли",
+      "name": "Thicket",
       "across": 0,
       "distance": 4,
       "height": 2,

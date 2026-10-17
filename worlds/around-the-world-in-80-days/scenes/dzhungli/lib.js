@@ -1246,7 +1246,7 @@ const FILM = {
     s.set('cromarty_look', 'passepartout#head');
     await s.move('smoke', 0.6, { over: 4 });
   } },
-  // ---- (the game's «Как мёртвый»: `walk`, `heads`, `smoke`) He carries her down from the pyre and across the clearing
+  // ---- (the game's «Like the dead»: `walk`, `heads`, `smoke`) He carries her down from the pyre and across the clearing
   // toward the trees, as stiffly as the dead; the crowd lifts its heads; the smoke thins.
   walk: { after: 'rise', from: ROSE, run: async s => {
     s.set('passepartout_gait', 'carry_walk');

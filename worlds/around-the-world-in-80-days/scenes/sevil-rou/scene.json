@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Сэвил-Роу",
-  "caption": "Лондон, ночь, туман. Дом номер семь.",
+  "title": "Saville Row",
+  "caption": "London, night, fog. House number seven.",
   "horizon": 0.7,
   "camera": {
     "mode": "panorama",
@@ -272,7 +272,7 @@
         1
       ],
       "smooth": true,
-      "means": "час: 0 — серый лондонский день, 0.5 — сумерки, газ зажигают, 1 — ночь"
+      "means": "the hour: 0 — a grey London day, 0.5 — dusk, the gas is lit, 1 — night"
     },
     "fog": {
       "range": [
@@ -280,7 +280,7 @@
         1
       ],
       "smooth": true,
-      "means": "туман: 0 — воздух чище, 1 — густой лондонский туман"
+      "means": "fog: 0 — the air clearer, 1 — a thick London fog"
     },
     "sunday": {
       "range": [
@@ -288,7 +288,7 @@
         1
       ],
       "smooth": true,
-      "means": "воскресное утро: туман реже, бледное солнце за ним (с night 0)"
+      "means": "the Sunday morning: the fog thinner, a pale sun behind it (with night 0)"
     },
     "win_hall": {
       "range": [
@@ -296,7 +296,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет в холле (окно первого этажа): 0 — темно, 1 — горит газ"
+      "means": "the light in the hall (the ground-floor window): 0 — dark, 1 — the gas burning"
     },
     "win_study": {
       "range": [
@@ -304,7 +304,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет в кабинете (широкое окно над балконом)"
+      "means": "the light in the study (the wide window over the balcony)"
     },
     "win_bedroom": {
       "range": [
@@ -312,7 +312,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет в спальне (третий этаж, слева)"
+      "means": "the light in the bedroom (the third floor, left)"
     },
     "win_dressing": {
       "range": [
@@ -320,7 +320,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет в гардеробной (третий этаж, справа)"
+      "means": "the light in the dressing-room (the third floor, right)"
     },
     "gas": {
       "range": [
@@ -328,7 +328,7 @@
         1
       ],
       "smooth": true,
-      "means": "газовый рожок в мансарде Паспарту: 0 — выключен, 1 — горит (весь путь)"
+      "means": "the gas-burner in Passepartout's attic: 0 — off, 1 — burning (all the way round)"
     },
     "door": {
       "range": [
@@ -336,7 +336,7 @@
         1
       ],
       "smooth": true,
-      "means": "дверь дома: 0 — закрыта, 1 — распахнута в холл"
+      "means": "the house door: 0 — shut, 1 — flung open into the hall"
     },
     "door_leaf": {
       "range": [
@@ -344,7 +344,7 @@
         280
       ],
       "smooth": true,
-      "means": "поворот створки, градусы; ведёт script.js по door, игре трогать не нужно"
+      "means": "the leaf's turn, degrees; led by script.js by door, the game need not touch it"
     },
     "bag": {
       "range": [
@@ -352,58 +352,58 @@
         1
       ],
       "smooth": true,
-      "means": "саквояж у двери: 0 — его нет, дальше — набит на столько, 1 — собран и застёгнут"
+      "means": "the carpet-bag by the door: 0 — not there, then stuffed so far, 1 — packed and clasped"
     },
     "beat": {
       "type": "string",
-      "means": "кусок фильма (модуль beats): dusk, home, news, out, run_out, fix_paper, run_back, to_club, pp_returns; по концу сцена говорит beat:<имя>"
+      "means": "a beat of the film (the module beats): dusk, home, news, out, run_out, fix_paper, run_back, to_club, pp_returns; at its end the scene says beat:<name>"
     },
     "runner": {
-      "means": "кто бежит (run_out, run_back): pp — Паспарту, fogg — Фогг"
+      "means": "who runs (run_out, run_back): pp — Passepartout, fogg — Fogg"
     },
     "with_pp": {
       "range": [
         0,
         1
       ],
-      "means": "Паспарту с Фоггом"
+      "means": "Passepartout with Fogg"
     },
     "with_aouda": {
       "range": [
         0,
         1
       ],
-      "means": "Ауда с Фоггом"
+      "means": "Aouda with Fogg"
     },
     "fix_present": {
       "range": [
         0,
         1
       ],
-      "means": "Фикс под фонарём у двери"
+      "means": "Fix under the lamp by the door"
     },
     "traffic": {
       "range": [
         0,
         1
       ],
-      "means": "жизнь улицы: 0 — пусто; больше — чаще проезжают кэбы (в обе стороны) и проходят прохожие по дальнему тротуару"
+      "means": "the street's life: 0 — empty; more — cabs go by more often (both ways) and passers-by walk along the far pavement"
     },
     "cab_across": {
       "type": "number",
       "smooth": true,
-      "means": "кэб на дальней полосе (едет вправо, к клубу): метры вдоль улицы; ведёт traffic, кусок to_club"
+      "means": "the cab in the far lane (going right, to the club): metres along the street; led by traffic, the beat to_club"
     },
     "cab2_across": {
       "type": "number",
       "smooth": true,
-      "means": "кэб на ближней полосе (едет влево): метры вдоль улицы; ведёт traffic"
+      "means": "the cab in the near lane (going left): metres along the street; led by traffic"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Туман над крышами",
+      "name": "Fog over the roofs",
       "sky": true,
       "uniforms": {
         "high_r": 0.03,
@@ -418,7 +418,7 @@
     },
     {
       "id": "side_far",
-      "name": "Конец переулка",
+      "name": "End of the lane",
       "across": 17.4,
       "distance": 150,
       "height": 30,
@@ -432,7 +432,7 @@
     },
     {
       "id": "side_street",
-      "name": "Переулок",
+      "name": "Lane",
       "plane": true,
       "across": 17.4,
       "distance": 82.7,
@@ -448,7 +448,7 @@
     },
     {
       "id": "side_l",
-      "name": "Переулок, стена слева",
+      "name": "Lane, left wall",
       "across": 12.4,
       "distance": 21,
       "facing": 90,
@@ -462,7 +462,7 @@
     },
     {
       "id": "side_r",
-      "name": "Переулок, стена справа",
+      "name": "Lane, right wall",
       "across": 22.4,
       "distance": 21,
       "facing": 270,
@@ -476,7 +476,7 @@
     },
     {
       "id": "club_rooms",
-      "name": "Залы клуба",
+      "name": "The club's saloons",
       "across": 53.4,
       "distance": 29.6,
       "glows": true,
@@ -493,7 +493,7 @@
     },
     {
       "id": "club",
-      "name": "Реформ-клуб",
+      "name": "The Reform Club",
       "across": 53.4,
       "distance": 29,
       "facing": 180,
@@ -507,7 +507,7 @@
     },
     {
       "id": "club_steps",
-      "name": "Ступени клуба",
+      "name": "The club's steps",
       "plane": true,
       "across": 53.4,
       "distance": 28.2,
@@ -519,7 +519,7 @@
     },
     {
       "id": "block_end",
-      "name": "Торец квартала",
+      "name": "End of the block",
       "across": 37.4,
       "distance": 21,
       "facing": 90,
@@ -533,7 +533,7 @@
     },
     {
       "id": "terrace_rooms",
-      "name": "Комнаты соседей",
+      "name": "The neighbours' rooms",
       "across": -12,
       "distance": 23.6,
       "inside": true,
@@ -547,7 +547,7 @@
     },
     {
       "id": "party_l",
-      "name": "Стена с соседом слева",
+      "name": "Wall with the neighbour, left",
       "across": -3.6,
       "distance": 0,
       "facing": 90,
@@ -562,7 +562,7 @@
     },
     {
       "id": "party_r",
-      "name": "Стена с соседом справа",
+      "name": "Wall with the neighbour, right",
       "across": 3.6,
       "distance": 0,
       "facing": 270,
@@ -577,7 +577,7 @@
     },
     {
       "id": "house",
-      "name": "Дом Фогга",
+      "name": "Fogg's house",
       "unseen": true,
       "across": -5,
       "distance": 21,
@@ -585,7 +585,7 @@
     },
     {
       "id": "win_hall",
-      "name": "Окно холла",
+      "name": "Hall window",
       "on": "house",
       "distance": 2.6,
       "facing": 180,
@@ -599,7 +599,7 @@
     },
     {
       "id": "win_study",
-      "name": "Окно кабинета",
+      "name": "Study window",
       "on": "house",
       "distance": 2.6,
       "facing": 180,
@@ -613,7 +613,7 @@
     },
     {
       "id": "win_bedroom",
-      "name": "Окно спальни",
+      "name": "Bedroom window",
       "on": "house",
       "distance": 2.6,
       "facing": 180,
@@ -627,7 +627,7 @@
     },
     {
       "id": "win_dressing",
-      "name": "Окно гардеробной",
+      "name": "Dressing-room window",
       "on": "house",
       "distance": 2.6,
       "facing": 180,
@@ -641,7 +641,7 @@
     },
     {
       "id": "partition",
-      "name": "Стена между спальней и гардеробной",
+      "name": "Wall between the bedroom and the dressing-room",
       "on": "house",
       "elevation": 7.9,
       "facing": 90,
@@ -655,7 +655,7 @@
     },
     {
       "id": "attic",
-      "name": "Окно мансарды",
+      "name": "Attic window",
       "on": "house",
       "distance": 2.1,
       "facing": 180,
@@ -669,7 +669,7 @@
     },
     {
       "id": "hall_floor",
-      "name": "Пол холла",
+      "name": "Hall floor",
       "plane": true,
       "on": "house",
       "elevation": 0.84,
@@ -681,7 +681,7 @@
     },
     {
       "id": "ceil_study",
-      "name": "Потолок кабинета",
+      "name": "Study ceiling",
       "plane": true,
       "on": "house",
       "elevation": 7.9,
@@ -693,7 +693,7 @@
     },
     {
       "id": "ceil_bed",
-      "name": "Потолок спальни",
+      "name": "Bedroom ceiling",
       "plane": true,
       "on": "house",
       "elevation": 11.3,
@@ -705,7 +705,7 @@
     },
     {
       "id": "terrace_glass",
-      "name": "Стёкла соседей",
+      "name": "The neighbours' panes",
       "across": -12,
       "distance": 21.04,
       "facing": 180,
@@ -723,7 +723,7 @@
     },
     {
       "id": "glass",
-      "name": "Стёкла дома Фогга",
+      "name": "The panes of Fogg's house",
       "on": "house",
       "distance": 0.04,
       "facing": 180,
@@ -740,7 +740,7 @@
     },
     {
       "id": "door",
-      "name": "Дверь",
+      "name": "Door",
       "on": "house",
       "across": -2.375,
       "distance": 0.1,
@@ -758,7 +758,7 @@
     },
     {
       "id": "facade",
-      "name": "Фасад дома Фогга",
+      "name": "Front of Fogg's house",
       "on": "house",
       "facing": 180,
       "box": [
@@ -778,7 +778,7 @@
     },
     {
       "id": "terrace",
-      "name": "Дома Сэвил-Роу",
+      "name": "Houses of Saville Row",
       "across": -12,
       "distance": 21,
       "facing": 180,
@@ -792,7 +792,7 @@
     },
     {
       "id": "chimneys",
-      "name": "Трубы",
+      "name": "Chimneys",
       "across": -12,
       "distance": 21.95,
       "facing": 180,
@@ -806,7 +806,7 @@
     },
     {
       "id": "roof",
-      "name": "Мансарды",
+      "name": "Attics",
       "plane": true,
       "across": -12,
       "distance": 21.625,
@@ -817,7 +817,7 @@
     },
     {
       "id": "dormers",
-      "name": "Слуховые окна",
+      "name": "Dormers",
       "across": -12,
       "distance": 21.35,
       "elevation": 11.9,
@@ -832,7 +832,7 @@
     },
     {
       "id": "dormer_tops",
-      "name": "Крыши слуховых окон",
+      "name": "Dormer roofs",
       "plane": true,
       "across": -12,
       "distance": 21.62,
@@ -842,7 +842,7 @@
     },
     {
       "id": "dormer_l",
-      "name": "Слуховое окно, бок слева",
+      "name": "Dormer, left cheek",
       "across": -5.8,
       "distance": 21.35,
       "elevation": 11.9,
@@ -857,7 +857,7 @@
     },
     {
       "id": "dormer_r",
-      "name": "Слуховое окно, бок справа",
+      "name": "Dormer, right cheek",
       "across": -4.2,
       "distance": 21.35,
       "elevation": 11.9,
@@ -872,7 +872,7 @@
     },
     {
       "id": "cornice",
-      "name": "Карниз",
+      "name": "Cornice",
       "plane": true,
       "across": -12,
       "distance": 20.8,
@@ -889,7 +889,7 @@
     },
     {
       "id": "balcony",
-      "name": "Балкон",
+      "name": "Balcony",
       "plane": true,
       "on": "house",
       "elevation": 4.3,
@@ -906,7 +906,7 @@
     },
     {
       "id": "balcony_rail",
-      "name": "Решётка балкона",
+      "name": "Balcony railing",
       "on": "house",
       "distance": -0.58,
       "elevation": 4.3,
@@ -926,7 +926,7 @@
     },
     {
       "id": "steps",
-      "name": "Ступени",
+      "name": "Steps",
       "plane": true,
       "across": -12,
       "distance": 20.4,
@@ -938,7 +938,7 @@
     },
     {
       "id": "cheeks_l",
-      "name": "Ступени, бок слева",
+      "name": "Steps, left cheek",
       "across": -7.75,
       "distance": 20.4,
       "facing": 270,
@@ -959,7 +959,7 @@
     },
     {
       "id": "cheeks_r",
-      "name": "Ступени, бок справа",
+      "name": "Steps, right cheek",
       "across": -5.85,
       "distance": 20.4,
       "facing": 90,
@@ -980,7 +980,7 @@
     },
     {
       "id": "bag",
-      "name": "Саквояж",
+      "name": "Carpet-bag",
       "on": "house",
       "across": -1.32,
       "distance": -0.25,
@@ -994,7 +994,7 @@
     },
     {
       "id": "fogg",
-      "name": "Филеас Фогг",
+      "name": "Phileas Fogg",
       "person": {
         "cast": "cast",
         "who": "fogg",
@@ -1018,7 +1018,7 @@
     },
     {
       "id": "passepartout",
-      "name": "Паспарту",
+      "name": "Passepartout",
       "person": {
         "cast": "cast",
         "who": "passepartout",
@@ -1042,7 +1042,7 @@
     },
     {
       "id": "fix",
-      "name": "Фикс",
+      "name": "Fix",
       "person": {
         "cast": "cast",
         "who": "fix",
@@ -1066,7 +1066,7 @@
     },
     {
       "id": "walker1",
-      "name": "Прохожий в цилиндре",
+      "name": "Passer-by in a top hat",
       "person": {
         "cast": "cast",
         "look": {
@@ -1110,7 +1110,7 @@
     },
     {
       "id": "walker2",
-      "name": "Прохожая",
+      "name": "Lady passer-by",
       "person": {
         "cast": "cast",
         "look": {
@@ -1152,7 +1152,7 @@
     },
     {
       "id": "walker3",
-      "name": "Прохожий в котелке",
+      "name": "Passer-by in a bowler",
       "person": {
         "cast": "cast",
         "look": {
@@ -1195,7 +1195,7 @@
     },
     {
       "id": "cab",
-      "name": "Кэб",
+      "name": "Cab",
       "across": 104,
       "distance": 12.4,
       "box": [
@@ -1217,7 +1217,7 @@
     },
     {
       "id": "cab2",
-      "name": "Встречный кэб",
+      "name": "Oncoming cab",
       "across": -96,
       "distance": 5.8,
       "box": [
@@ -1239,7 +1239,7 @@
     },
     {
       "id": "railings",
-      "name": "Ограда",
+      "name": "Railings",
       "across": -12,
       "distance": 19.8,
       "facing": 180,
@@ -1260,7 +1260,7 @@
     },
     {
       "id": "pavement",
-      "name": "Тротуар",
+      "name": "Pavement",
       "plane": true,
       "across": 5.0,
       "distance": 22.2,
@@ -1277,7 +1277,7 @@
     },
     {
       "id": "kerb",
-      "name": "Бордюр",
+      "name": "Kerb",
       "across": 5.0,
       "distance": 15.4,
       "facing": 180,
@@ -1291,7 +1291,7 @@
     },
     {
       "id": "road",
-      "name": "Мостовая",
+      "name": "Roadway",
       "plane": true,
       "across": 5.0,
       "distance": 9,
@@ -1307,7 +1307,7 @@
     },
     {
       "id": "lamps",
-      "name": "Газовые фонари",
+      "name": "Gas lamps",
       "across": 0,
       "distance": 15.9,
       "box": [
@@ -1329,7 +1329,7 @@
     },
     {
       "id": "mist",
-      "name": "Туман",
+      "name": "Fog",
       "particles": {
         "kind": "smoke",
         "at": [
@@ -1382,7 +1382,7 @@
     },
     {
       "id": "droplets",
-      "name": "Морось в свете фонарей",
+      "name": "Drizzle in the lamplight",
       "particles": {
         "kind": "dust",
         "at": [
@@ -1412,7 +1412,7 @@
     },
     {
       "id": "smoke1",
-      "name": "Дым из трубы",
+      "name": "Smoke from the funnel",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s5",
@@ -1431,7 +1431,7 @@
     },
     {
       "id": "smoke2",
-      "name": "Дым из трубы",
+      "name": "Smoke from the funnel",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s7",
@@ -1450,7 +1450,7 @@
     },
     {
       "id": "smoke3",
-      "name": "Дым из трубы",
+      "name": "Smoke from the funnel",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s9",
@@ -1469,7 +1469,7 @@
     },
     {
       "id": "smoke4",
-      "name": "Дым из трубы",
+      "name": "Smoke from the funnel",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s12",
@@ -1488,7 +1488,7 @@
     },
     {
       "id": "pavement_near",
-      "name": "Тротуар у ног",
+      "name": "Pavement at our feet",
       "plane": true,
       "across": 5.0,
       "distance": 0.8,
@@ -1499,7 +1499,7 @@
     },
     {
       "id": "near_lamps",
-      "name": "Фонари у ног",
+      "name": "Lamps at our feet",
       "across": 0,
       "distance": 2.35,
       "box": [

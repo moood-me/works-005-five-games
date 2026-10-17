@@ -1,4 +1,4 @@
-// Прерия — what the scene's elements, script and film share: the plan of the line across the winter plain (the gorge
+// The prairie — what the scene's elements, script and film share: the plan of the line across the winter plain (the gorge
 // and the Medicine Bow bridge on the left, the open plain in the middle, Fort Kearney's station on the right), the land,
 // the train's and the sledge's geometry, and the film in beats (film(scene), for the world's module beats).
 //   Metres: `across` along the line (the train runs toward +across: east, to Omaha), `distance` away from the viewer,
@@ -238,7 +238,7 @@ function film(scene) {
         await s.wait(0.6);
       },
     },
-    // ---- «Сцепка» (the game's): under the cars, low, the snow streaming; Passepartout on his back hand over hand along
+    // ---- «The coupling» (the game's): under the cars, low, the snow streaming; Passepartout on his back hand over hand along
     // the chains toward the locomotive (pp_car), the cars swinging (swing; its phase swing_at), the coupling's pin
     // (uncouple). The beat only cuts here; the minigame plays it.
     under: {
@@ -297,7 +297,7 @@ function film(scene) {
         await s.wait(2.4);
       },
     },
-    // ---- «Тогда я пойду один»: the column of soldiers goes out with Fogg into the white.
+    // ---- «Then I will go alone»: the column of soldiers goes out with Fogg into the white.
     column: {
       from: () => ({
         ...PLATFORM(), ...LIGHT.snow,
@@ -406,7 +406,7 @@ function film(scene) {
         await s.wait(3);
       },
     },
-    // ---- «Парус» (the game's): the sledge flies along the line under its sail; the plain and the sky run. Only the cut.
+    // ---- «The sail» (the game's): the sledge flies along the line under its sail; the plain and the sky run. Only the cut.
     sail: {
       from: () => {
         const v = film(scene).sledge.from();

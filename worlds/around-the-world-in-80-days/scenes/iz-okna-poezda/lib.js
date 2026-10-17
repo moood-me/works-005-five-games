@@ -1,4 +1,4 @@
-// Из окна поезда — what the scene's elements, script and film share: the carriage's plan, the five lands laid along the
+// From the train window — what the scene's elements, script and film share: the carriage's plan, the five lands laid along the
 // line (each its own stretch of the world), their colours, the sky's colours, the things standing along the line, the
 // sofas; and the film in beats (film(scene), for the world's module beats).
 //   Metres: `across` along the line (the train runs toward +across), `distance` away from it (out of the window),

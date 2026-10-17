@@ -1,7 +1,7 @@
 {
  "engine": 3,
- "title": "Палуба",
- "caption": "Палуба парохода у борта: море, дым из трубы, порт на горизонте.",
+ "title": "The deck",
+ "caption": "A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.",
  "horizon": 0.45,
  "camera": {
   "mode": "walk",
@@ -247,7 +247,7 @@
     "general_grant",
     "henrietta"
    ],
-   "means": "корабль: mongolia — P&O, чёрная труба, белый фальшборт, тиковая рубка; rangoon — тот же вид (ночь — ключ night); general_grant — американский колёсный: белая рубка, красная труба, кожух колеса у борта, балансир машины; henrietta — железный винтовой с двумя мачтами и реями, деревянные рубка, фальшборт, каюта капитана на юте (части горят — «Котлы»). Меняется склейкой"
+   "means": "the ship: mongolia — P&O, a black funnel, white bulwarks, a teak deckhouse; rangoon — the same look (night — the key night); general_grant — an American paddle-steamer: a white deckhouse, a red funnel, the paddle-box at the side, the engine's walking-beam; henrietta — an iron screw-steamer with two masts and yards, a wooden deckhouse, bulwarks, the captain's cabin on the poop (the parts burn — «The boilers»). Changed on a cut"
   },
   "port": {
    "values": [
@@ -258,7 +258,7 @@
     "liverpool",
     "none"
    ],
-   "means": "порт на горизонте справа по носу: suez — минареты, пальмы, мол, причал и сходни у борта; bombay — город и холмы (на рассвете); new_york — набережная, причал и сходни; queenstown — зелёные холмы Ирландии; liverpool — доки, краны, кирпич, причал и сходни; none — открытое море"
+   "means": "the port on the horizon on the starboard bow: suez — minarets, palms, a mole, a quay and a gangway at the side; bombay — the town and hills (at dawn); new_york — a waterfront, a quay and a gangway; queenstown — the green hills of Ireland; liverpool — docks, cranes, brick, a quay and a gangway; none — the open sea"
   },
   "night": {
    "range": [
@@ -266,7 +266,7 @@
     1
    ],
    "smooth": true,
-   "means": "ночь: луна справа, лунная дорожка, фонарь у борта горит"
+   "means": "night: the moon on the right, the moon's path, the lantern at the rail burning"
   },
   "dawn": {
    "range": [
@@ -274,7 +274,7 @@
     1
    ],
    "smooth": true,
-   "means": "рассвет: низкое солнце справа по носу, розовое небо"
+   "means": "dawn: a low sun on the starboard bow, a pink sky"
   },
   "fog": {
    "range": [
@@ -282,7 +282,7 @@
     1
    ],
    "smooth": true,
-   "means": "туман (Ливерпуль)"
+   "means": "fog (Liverpool)"
   },
   "smoke": {
    "range": [
@@ -290,7 +290,7 @@
     1
    ],
    "smooth": true,
-   "means": "сколько дымит труба: 1 — под парами, 0.2 — угля нет, 0 — потушены"
+   "means": "how much the funnel smokes: 1 — under steam, 0.2 — no coal, 0 — the fires out"
   },
   "speed": {
    "range": [
@@ -298,7 +298,7 @@
     1
    ],
    "smooth": true,
-   "means": "ход: бег воды мимо борта, барашки, брызги у носа (0 — стоит)"
+   "means": "way: the water running past the side, whitecaps, spray at the bow (0 — standing)"
   },
   "sails": {
    "range": [
@@ -306,7 +306,7 @@
     1
    ],
    "smooth": true,
-   "means": "«Генриетта»: паруса на реях, 0 — убраны, 1 — все поставлены"
+   "means": "the Henrietta: the sails on the yards, 0 — furled, 1 — all set"
   },
   "fire": {
    "range": [
@@ -314,11 +314,11 @@
     1
    ],
    "smooth": true,
-   "means": "огонь в топке: пламя из люка кочегарки, его свет, искры из трубы («Котлы»)"
+   "means": "the fire in the furnace: flames from the stokehold hatch, its light, sparks from the funnel («The boilers»)"
   },
   "flare": {
    "type": "number",
-   "means": "вспышка в люке: каждый новый номер — сноп искр (ставит сцена, когда часть уходит в люк; игра может и сама)"
+   "means": "a flare in the hatch: each new number — a sheaf of sparks (set by the scene as a part goes into the hatch; the game may set it too)"
   },
   "flare_glow": {
    "range": [
@@ -326,7 +326,7 @@
     1
    ],
    "smooth": true,
-   "means": "свет вспышки в люке (ведёт сцена вместе с flare)"
+   "means": "the light of the flare in the hatch (led by the scene together with flare)"
   },
   "speedy_grief": {
    "range": [
@@ -334,7 +334,7 @@
     1
    ],
    "smooth": true,
-   "means": "Спиди хватается за голову: от 0.4 — руки к голове, лицо злое; от 0.8 — горе"
+   "means": "Speedy clutches his head: from 0.4 — hands to the head, the face angry; from 0.8 — grief"
   },
   "porthole": {
    "range": [
@@ -342,7 +342,7 @@
     1
    ],
    "smooth": true,
-   "means": "вставка: Спиди в иллюминаторе каюты крупно, рыжая борода, ревёт (0 — закрыта)"
+   "means": "insert: Speedy at his cabin's porthole close up, red beard, roaring (0 — shut)"
   },
   "cell_close": {
    "range": [
@@ -350,7 +350,7 @@
     1
    ],
    "smooth": true,
-   "means": "вставка: скамья таможенной камеры, часы Фогга открыты на ней, его руки на коленях (0 — закрыта)"
+   "means": "insert: the bench of the custom-house cell, Fogg's watch open on it, his hands on his knees (0 — shut)"
   },
   "cell_time": {
    "range": [
@@ -358,7 +358,7 @@
     1
    ],
    "smooth": true,
-   "means": "тень решётки ползёт по полу и скамье: 0 — утро, 1 — через три часа (ведёт игра)"
+   "means": "the bars' shadow creeps over the floor and the bench: 0 — morning, 1 — three hours later (led by the game)"
   },
   "release": {
    "values": [
@@ -366,7 +366,7 @@
     "down",
     "hand"
    ],
-   "means": "чем кончается кусок release, если поставлен до него: down — Фогг бьёт, Фикс падает; hand — рука в руке; null — кусок кончается на release:in"
+   "means": "how the beat release ends, if set before it: down — Fogg strikes, Fix falls; hand — hand in hand; null — the beat ends at release:in"
   },
   "door": {
    "range": [
@@ -374,7 +374,7 @@
     1
    ],
    "smooth": true,
-   "means": "дверь камеры: 0 — заперта, 1 — распахнута"
+   "means": "the cell's door: 0 — locked, 1 — flung open"
   },
   "leaf": {
    "range": [
@@ -382,56 +382,56 @@
     1
    ],
    "smooth": true,
-   "means": "лист календаря на рубке: 0 — «Среда», 1 — перевёрнут, под ним опять «Среда»"
+   "means": "the calendar's leaf on the deckhouse: 0 — «Wednesday», 1 — turned over, under it «Wednesday» again"
   },
   "with_aouda": {
    "values": [
     0,
     1
    ],
-   "means": "Ауда в пути (Нью-Йорк, Ливерпуль)"
+   "means": "Aouda on the voyage (New York, Liverpool)"
   },
   "with_pp": {
    "values": [
     0,
     1
    ],
-   "means": "Паспарту в пути (Нью-Йорк, «Котлы», Ливерпуль)"
+   "means": "Passepartout on the voyage (New York, «The boilers», Liverpool)"
   },
   "with_fix": {
    "values": [
     0,
     1
    ],
-   "means": "Фикс в пути (Нью-Йорк)"
+   "means": "Fix on the voyage (New York)"
   },
   "fix_bruise": {
    "values": [
     0,
     1
    ],
-   "means": "синяк Фикса (как его даёт каст)"
+   "means": "Fix's bruise (as the cast gives it)"
   },
   "pp_wings": {
    "values": [
     0,
     1
    ],
-   "means": "Паспарту в крыльях «Длинных носов» (как их даёт каст)"
+   "means": "Passepartout in the Long Noses' wings (as the cast gives them)"
   },
   "aouda_dress": {
    "values": [
     0,
     1
    ],
-   "means": "Ауда в дорожном платье (с Гонконга)"
+   "means": "Aouda in a travelling dress (from Hong Kong)"
   },
   "deckhouse": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», рубка: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the deckhouse: 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_deckhouse": {
    "range": [
@@ -439,36 +439,36 @@
     1
    ],
    "smooth": true,
-   "means": "рубка: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the deckhouse: 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_deckhouse": {
    "values": [
     0,
     1
    ],
-   "means": "рубка: 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the deckhouse: 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_deckhouse_a": {
    "type": "number",
    "smooth": true,
-   "means": "где рубка (ведёт сцена по drag_deckhouse; игре не трогать)"
+   "means": "where the deckhouse is (led by the scene by drag_deckhouse; the game is not to touch it)"
   },
   "at_deckhouse_d": {
    "type": "number",
    "smooth": true,
-   "means": "где рубка (ведёт сцена по drag_deckhouse; игре не трогать)"
+   "means": "where the deckhouse is (led by the scene by drag_deckhouse; the game is not to touch it)"
   },
   "at_deckhouse_e": {
    "type": "number",
    "smooth": true,
-   "means": "где рубка (ведёт сцена по drag_deckhouse; игре не трогать)"
+   "means": "where the deckhouse is (led by the scene by drag_deckhouse; the game is not to touch it)"
   },
   "boats": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», шлюпки: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the boats: 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_boats": {
    "range": [
@@ -476,36 +476,36 @@
     1
    ],
    "smooth": true,
-   "means": "шлюпки: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the boats: 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_boats": {
    "values": [
     0,
     1
    ],
-   "means": "шлюпки: 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the boats: 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_boats_a": {
    "type": "number",
    "smooth": true,
-   "means": "где шлюпки (ведёт сцена по drag_boats; игре не трогать)"
+   "means": "where the boats are (led by the scene by drag_boats; the game is not to touch it)"
   },
   "at_boats_d": {
    "type": "number",
    "smooth": true,
-   "means": "где шлюпки (ведёт сцена по drag_boats; игре не трогать)"
+   "means": "where the boats are (led by the scene by drag_boats; the game is not to touch it)"
   },
   "at_boats_e": {
    "type": "number",
    "smooth": true,
-   "means": "где шлюпки (ведёт сцена по drag_boats; игре не трогать)"
+   "means": "where the boats are (led by the scene by drag_boats; the game is not to touch it)"
   },
   "bunks": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», койки (штабель у люка): 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the bunks (a stack by the hatch): 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_bunks": {
    "range": [
@@ -513,36 +513,36 @@
     1
    ],
    "smooth": true,
-   "means": "койки (штабель у люка): 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the bunks (a stack by the hatch): 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_bunks": {
    "values": [
     0,
     1
    ],
-   "means": "койки (штабель у люка): 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the bunks (a stack by the hatch): 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_bunks_a": {
    "type": "number",
    "smooth": true,
-   "means": "где койки (штабель у люка) (ведёт сцена по drag_bunks; игре не трогать)"
+   "means": "where the bunks (a stack by the hatch) are (led by the scene by drag_bunks; the game is not to touch it)"
   },
   "at_bunks_d": {
    "type": "number",
    "smooth": true,
-   "means": "где койки (штабель у люка) (ведёт сцена по drag_bunks; игре не трогать)"
+   "means": "where the bunks (a stack by the hatch) are (led by the scene by drag_bunks; the game is not to touch it)"
   },
   "at_bunks_e": {
    "type": "number",
    "smooth": true,
-   "means": "где койки (штабель у люка) (ведёт сцена по drag_bunks; игре не трогать)"
+   "means": "where the bunks (a stack by the hatch) are (led by the scene by drag_bunks; the game is not to touch it)"
   },
   "yards": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», реи: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the yards: 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_yards": {
    "range": [
@@ -550,36 +550,36 @@
     1
    ],
    "smooth": true,
-   "means": "реи: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the yards: 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_yards": {
    "values": [
     0,
     1
    ],
-   "means": "реи: 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the yards: 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_yards_a": {
    "type": "number",
    "smooth": true,
-   "means": "где реи (ведёт сцена по drag_yards; игре не трогать)"
+   "means": "where the yards are (led by the scene by drag_yards; the game is not to touch it)"
   },
   "at_yards_d": {
    "type": "number",
    "smooth": true,
-   "means": "где реи (ведёт сцена по drag_yards; игре не трогать)"
+   "means": "where the yards are (led by the scene by drag_yards; the game is not to touch it)"
   },
   "at_yards_e": {
    "type": "number",
    "smooth": true,
-   "means": "где реи (ведёт сцена по drag_yards; игре не трогать)"
+   "means": "where the yards are (led by the scene by drag_yards; the game is not to touch it)"
   },
   "mast_fore": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», фок-мачта: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the foremast: 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_mast_fore": {
    "range": [
@@ -587,36 +587,36 @@
     1
    ],
    "smooth": true,
-   "means": "фок-мачта: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the foremast: 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_mast_fore": {
    "values": [
     0,
     1
    ],
-   "means": "фок-мачта: 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the foremast: 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_mast_fore_a": {
    "type": "number",
    "smooth": true,
-   "means": "где фок-мачта (ведёт сцена по drag_mast_fore; игре не трогать)"
+   "means": "where the foremast is (led by the scene by drag_mast_fore; the game is not to touch it)"
   },
   "at_mast_fore_d": {
    "type": "number",
    "smooth": true,
-   "means": "где фок-мачта (ведёт сцена по drag_mast_fore; игре не трогать)"
+   "means": "where the foremast is (led by the scene by drag_mast_fore; the game is not to touch it)"
   },
   "at_mast_fore_e": {
    "type": "number",
    "smooth": true,
-   "means": "где фок-мачта (ведёт сцена по drag_mast_fore; игре не трогать)"
+   "means": "where the foremast is (led by the scene by drag_mast_fore; the game is not to touch it)"
   },
   "mast_main": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», грот-мачта: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the mainmast: 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_mast_main": {
    "range": [
@@ -624,36 +624,36 @@
     1
    ],
    "smooth": true,
-   "means": "грот-мачта: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the mainmast: 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_mast_main": {
    "values": [
     0,
     1
    ],
-   "means": "грот-мачта: 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the mainmast: 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_mast_main_a": {
    "type": "number",
    "smooth": true,
-   "means": "где грот-мачта (ведёт сцена по drag_mast_main; игре не трогать)"
+   "means": "where the mainmast is (led by the scene by drag_mast_main; the game is not to touch it)"
   },
   "at_mast_main_d": {
    "type": "number",
    "smooth": true,
-   "means": "где грот-мачта (ведёт сцена по drag_mast_main; игре не трогать)"
+   "means": "where the mainmast is (led by the scene by drag_mast_main; the game is not to touch it)"
   },
   "at_mast_main_e": {
    "type": "number",
    "smooth": true,
-   "means": "где грот-мачта (ведёт сцена по drag_mast_main; игре не трогать)"
+   "means": "where the mainmast is (led by the scene by drag_mast_main; the game is not to touch it)"
   },
   "bulwarks": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», фальшборт: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the bulwarks: 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_bulwarks": {
    "range": [
@@ -661,36 +661,36 @@
     1
    ],
    "smooth": true,
-   "means": "фальшборт: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the bulwarks: 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_bulwarks": {
    "values": [
     0,
     1
    ],
-   "means": "фальшборт: 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the bulwarks: 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_bulwarks_a": {
    "type": "number",
    "smooth": true,
-   "means": "где фальшборт (ведёт сцена по drag_bulwarks; игре не трогать)"
+   "means": "where the bulwarks are (led by the scene by drag_bulwarks; the game is not to touch it)"
   },
   "at_bulwarks_d": {
    "type": "number",
    "smooth": true,
-   "means": "где фальшборт (ведёт сцена по drag_bulwarks; игре не трогать)"
+   "means": "where the bulwarks are (led by the scene by drag_bulwarks; the game is not to touch it)"
   },
   "at_bulwarks_e": {
    "type": "number",
    "smooth": true,
-   "means": "где фальшборт (ведёт сцена по drag_bulwarks; игре не трогать)"
+   "means": "where the bulwarks are (led by the scene by drag_bulwarks; the game is not to touch it)"
   },
   "speedy_cabin": {
    "values": [
     0,
     1
    ],
-   "means": "«Генриетта», каюта капитана: 1 — на месте, 0 — сгорела (ушла в люк со вспышкой)"
+   "means": "the Henrietta, the captain's cabin: 1 — in place, 0 — burnt (gone into the hatch with a flare)"
   },
   "drag_speedy_cabin": {
    "range": [
@@ -698,40 +698,40 @@
     1
    ],
    "smooth": true,
-   "means": "каюта капитана: 0 — на месте, 1 — дотащена к люку (уменьшается по пути; мачта сначала валится)"
+   "means": "the captain's cabin: 0 — in place, 1 — dragged to the hatch (shrinking on the way; a mast falls first)"
   },
   "locked_speedy_cabin": {
    "values": [
     0,
     1
    ],
-   "means": "каюта капитана: 1 — не по деньгам (тусклее, как не своя)"
+   "means": "the captain's cabin: 1 — beyond the purse (dimmer, as if not one's own)"
   },
   "at_speedy_cabin_a": {
    "type": "number",
    "smooth": true,
-   "means": "где каюта капитана (ведёт сцена по drag_speedy_cabin; игре не трогать)"
+   "means": "where the captain's cabin is (led by the scene by drag_speedy_cabin; the game is not to touch it)"
   },
   "at_speedy_cabin_d": {
    "type": "number",
    "smooth": true,
-   "means": "где каюта капитана (ведёт сцена по drag_speedy_cabin; игре не трогать)"
+   "means": "where the captain's cabin is (led by the scene by drag_speedy_cabin; the game is not to touch it)"
   },
   "at_speedy_cabin_e": {
    "type": "number",
    "smooth": true,
-   "means": "где каюта капитана (ведёт сцена по drag_speedy_cabin; игре не трогать)"
+   "means": "where the captain's cabin is (led by the scene by drag_speedy_cabin; the game is not to touch it)"
   }
  },
  "objects": [
   {
    "id": "sky",
-   "name": "Небо",
+   "name": "Sky",
    "sky": true
   },
   {
    "id": "sea",
-   "name": "Море",
+   "name": "Sea",
    "plane": true,
    "across": 0,
    "distance": 600,
@@ -751,7 +751,7 @@
   },
   {
    "id": "port_far",
-   "name": "Порт на горизонте",
+   "name": "Port on the horizon",
    "across": 560,
    "distance": 1500,
    "elevation": -5.5,
@@ -764,7 +764,7 @@
   },
   {
    "id": "china",
-   "name": "Дым «Китая» на горизонте",
+   "name": "The China's smoke on the horizon",
    "across": -260,
    "distance": 2200,
    "elevation": -5.5,
@@ -777,7 +777,7 @@
   },
   {
    "id": "quay",
-   "name": "Причал",
+   "name": "Quay",
    "plane": true,
    "across": 30,
    "distance": 30,
@@ -787,7 +787,7 @@
   },
   {
    "id": "sheds",
-   "name": "Пакгаузы на причале",
+   "name": "Warehouses on the quay",
    "across": 42,
    "distance": 110,
    "elevation": -2.6,
@@ -801,7 +801,7 @@
   },
   {
    "id": "gangway",
-   "name": "Сходни",
+   "name": "Gangway",
    "plane": true,
    "across": 7.35,
    "distance": 9.7,
@@ -814,7 +814,7 @@
   },
   {
    "id": "deck",
-   "name": "Палуба",
+   "name": "The deck",
    "plane": true,
    "across": 0,
    "distance": 22,
@@ -824,7 +824,7 @@
   },
   {
    "id": "bulwarks_at",
-   "name": "Фальшборт (место)",
+   "name": "Bulwarks (site)",
    "unseen": true,
    "across": 0,
    "distance": 0,
@@ -836,7 +836,7 @@
   },
   {
    "id": "bulwarks",
-   "name": "Фальшборт левого борта",
+   "name": "Port bulwarks",
    "on": "bulwarks_at",
    "across": -5.45,
    "distance": -5,
@@ -850,7 +850,7 @@
   },
   {
    "id": "bulwarks_s",
-   "name": "Фальшборт правого борта",
+   "name": "Starboard bulwarks",
    "on": "bulwarks_at",
    "across": 5.45,
    "distance": 47,
@@ -864,7 +864,7 @@
   },
   {
    "id": "gunwale",
-   "name": "Железный борт, левый",
+   "name": "Iron side, port",
    "across": -5.5,
    "distance": -5,
    "facing": 90,
@@ -877,7 +877,7 @@
   },
   {
    "id": "gunwale_s",
-   "name": "Железный борт, правый",
+   "name": "Iron side, starboard",
    "across": 5.5,
    "distance": 47,
    "facing": 270,
@@ -890,7 +890,7 @@
   },
   {
    "id": "bow",
-   "name": "Нос",
+   "name": "Bow",
    "across": 0,
    "distance": 47.2,
    "box": [
@@ -902,7 +902,7 @@
   },
   {
    "id": "spray",
-   "name": "Брызги у форштевня",
+   "name": "Spray at the stem",
    "particles": {
     "kind": "splashes",
     "at": [
@@ -940,7 +940,7 @@
   },
   {
    "id": "cabin",
-   "name": "Каюта капитана (место)",
+   "name": "Captain's cabin (site)",
    "unseen": true,
    "across": -3,
    "distance": 7,
@@ -952,7 +952,7 @@
   },
   {
    "id": "speedy_cabin",
-   "name": "Каюта капитана",
+   "name": "Captain's cabin",
    "on": "cabin",
    "facing": 180,
    "box": [
@@ -964,7 +964,7 @@
   },
   {
    "id": "speedy_cabin_side",
-   "name": "Каюта капитана, бок",
+   "name": "Captain's cabin, side",
    "on": "cabin",
    "across": 1.5,
    "facing": 90,
@@ -977,7 +977,7 @@
   },
   {
    "id": "cabin_roof",
-   "name": "Крыша каюты",
+   "name": "Cabin roof",
    "plane": true,
    "on": "cabin",
    "distance": 1.8,
@@ -988,7 +988,7 @@
   },
   {
    "id": "house",
-   "name": "Рубка (место)",
+   "name": "Deckhouse (site)",
    "unseen": true,
    "across": 0,
    "distance": 18,
@@ -1000,7 +1000,7 @@
   },
   {
    "id": "deckhouse",
-   "name": "Рубка",
+   "name": "Deckhouse",
    "on": "house",
    "facing": 180,
    "box": [
@@ -1012,7 +1012,7 @@
   },
   {
    "id": "deckhouse_side",
-   "name": "Рубка, правый бок",
+   "name": "Deckhouse, starboard side",
    "on": "house",
    "across": 2.2,
    "facing": 90,
@@ -1025,7 +1025,7 @@
   },
   {
    "id": "house_roof",
-   "name": "Мостик на рубке",
+   "name": "Bridge on the deckhouse",
    "plane": true,
    "on": "house",
    "distance": 4,
@@ -1036,7 +1036,7 @@
   },
   {
    "id": "bridge_rail",
-   "name": "Поручни мостика",
+   "name": "Bridge rail",
    "on": "house",
    "distance": 0.15,
    "elevation": 2.4,
@@ -1050,7 +1050,7 @@
   },
   {
    "id": "calendar",
-   "name": "Календарь на рубке",
+   "name": "Calendar on the deckhouse",
    "on": "house",
    "across": -1.2,
    "distance": -0.04,
@@ -1065,7 +1065,7 @@
   },
   {
    "id": "funnel",
-   "name": "Труба",
+   "name": "Funnel",
    "across": 0,
    "distance": 22.5,
    "box": [
@@ -1077,7 +1077,7 @@
   },
   {
    "id": "smoke_p",
-   "name": "Дым из трубы",
+   "name": "Smoke from the funnel",
    "particles": {
     "kind": "smoke",
     "at": "funnel#top",
@@ -1114,7 +1114,7 @@
   },
   {
    "id": "sparks_p",
-   "name": "Искры из трубы",
+   "name": "Sparks from the funnel",
    "particles": {
     "kind": "sparks",
     "at": "funnel#top",
@@ -1135,7 +1135,7 @@
   },
   {
    "id": "mast_main",
-   "name": "Грот-мачта",
+   "name": "Mainmast",
    "across": 0,
    "distance": 11,
    "box": [
@@ -1152,7 +1152,7 @@
   },
   {
    "id": "mast_fore",
-   "name": "Фок-мачта",
+   "name": "Foremast",
    "across": 0,
    "distance": 34,
    "box": [
@@ -1169,7 +1169,7 @@
   },
   {
    "id": "yards_at",
-   "name": "Реи (место)",
+   "name": "Yards (site)",
    "unseen": true,
    "across": 0,
    "distance": 11,
@@ -1181,7 +1181,7 @@
   },
   {
    "id": "yards",
-   "name": "Реи и паруса грот-мачты",
+   "name": "Mainmast yards and sails",
    "on": "yards_at",
    "box": [
     -8,
@@ -1193,7 +1193,7 @@
   },
   {
    "id": "yards_fore",
-   "name": "Реи и паруса фок-мачты",
+   "name": "Foremast yards and sails",
    "on": "yards_at",
    "distance": 23,
    "box": [
@@ -1206,7 +1206,7 @@
   },
   {
    "id": "hatch",
-   "name": "Люк кочегарки",
+   "name": "Stokehold hatch",
    "across": 1.4,
    "distance": 13.8,
    "box": [
@@ -1218,7 +1218,7 @@
   },
   {
    "id": "hatch_glow",
-   "name": "Огонь в люке",
+   "name": "Fire in the hatch",
    "plane": true,
    "across": 1.4,
    "distance": 14.6,
@@ -1229,7 +1229,7 @@
   },
   {
    "id": "hatch_fire",
-   "name": "Пламя из люка",
+   "name": "Flames from the hatch",
    "particles": {
     "kind": "fire",
     "at": "hatch#fire",
@@ -1248,7 +1248,7 @@
   },
   {
    "id": "flare_p",
-   "name": "Вспышка в люке",
+   "name": "Flare in the hatch",
    "particles": {
     "kind": "sparks",
     "at": "hatch#fire",
@@ -1271,7 +1271,7 @@
   },
   {
    "id": "bunks",
-   "name": "Койки",
+   "name": "Bunks",
    "across": 3.4,
    "distance": 12.4,
    "box": [
@@ -1288,7 +1288,7 @@
   },
   {
    "id": "boats",
-   "name": "Шлюпки",
+   "name": "Boats",
    "across": -2.6,
    "distance": 15.8,
    "box": [
@@ -1305,7 +1305,7 @@
   },
   {
    "id": "paddle_box",
-   "name": "Кожух колеса",
+   "name": "Paddle-box",
    "across": 5.45,
    "distance": 20,
    "facing": 270,
@@ -1318,7 +1318,7 @@
   },
   {
    "id": "walking_beam",
-   "name": "Балансир машины",
+   "name": "Walking-beam",
    "across": 0,
    "distance": 15.2,
    "box": [
@@ -1330,7 +1330,7 @@
   },
   {
    "id": "lantern",
-   "name": "Фонарь у борта",
+   "name": "Lantern at the rail",
    "across": 4.75,
    "distance": 11.3,
    "box": [
@@ -1342,7 +1342,7 @@
   },
   {
    "id": "deckchair",
-   "name": "Шезлонг",
+   "name": "Deck-chair",
    "across": -2.6,
    "distance": 13.2,
    "facing": 210,
@@ -1355,7 +1355,7 @@
   },
   {
    "id": "night_two",
-   "name": "Двое у борта",
+   "name": "Two at the rail",
    "unseen": true,
    "across": 4.55,
    "distance": 9.6,
@@ -1363,7 +1363,7 @@
   },
   {
    "id": "fix_consul",
-   "name": "Фикс и консул",
+   "name": "Fix and the consul",
    "unseen": true,
    "across": 3.9,
    "distance": 12.3,
@@ -1371,7 +1371,7 @@
   },
   {
    "id": "two_pacific",
-   "name": "Паспарту и Фикс",
+   "name": "Passepartout and Fix",
    "unseen": true,
    "across": 4.2,
    "distance": 9.65,
@@ -1379,7 +1379,7 @@
   },
   {
    "id": "calendar_three",
-   "name": "У календаря",
+   "name": "At the calendar",
    "unseen": true,
    "across": -0.6,
    "distance": 15.8,
@@ -1387,7 +1387,7 @@
   },
   {
    "id": "coal_three",
-   "name": "У люка",
+   "name": "At the hatch",
    "unseen": true,
    "across": 0.9,
    "distance": 12.2,
@@ -1395,7 +1395,7 @@
   },
   {
    "id": "bridge_two",
-   "name": "На мостике",
+   "name": "On the bridge",
    "unseen": true,
    "across": 0.1,
    "distance": 18.9,
@@ -1403,7 +1403,7 @@
   },
   {
    "id": "porthole",
-   "name": "Спиди в иллюминаторе",
+   "name": "Speedy at the porthole",
    "insert": "porthole",
    "iris": [
     0.889,
@@ -1414,19 +1414,19 @@
   },
   {
    "id": "cell_close",
-   "name": "Скамья в камере",
+   "name": "Bench in the cell",
    "insert": "cell_close"
   },
   {
    "id": "cell",
-   "name": "Камера (место)",
+   "name": "Cell (site)",
    "unseen": true,
    "across": 400,
    "distance": 0
   },
   {
    "id": "cell_floor",
-   "name": "Пол камеры",
+   "name": "Cell floor",
    "plane": true,
    "on": "cell",
    "distance": 3,
@@ -1437,7 +1437,7 @@
   },
   {
    "id": "cell_back",
-   "name": "Стена камеры с окном",
+   "name": "Cell wall with a window",
    "on": "cell",
    "distance": 6,
    "facing": 180,
@@ -1451,7 +1451,7 @@
   },
   {
    "id": "cell_left",
-   "name": "Стена камеры с дверью",
+   "name": "Cell wall with the door",
    "on": "cell",
    "across": -3.5,
    "distance": -0.6,
@@ -1466,7 +1466,7 @@
   },
   {
    "id": "cell_right",
-   "name": "Стена камеры",
+   "name": "Cell wall",
    "on": "cell",
    "across": 3.5,
    "distance": 6.2,
@@ -1481,7 +1481,7 @@
   },
   {
    "id": "cell_bench",
-   "name": "Скамья",
+   "name": "Bench",
    "on": "cell",
    "across": -0.2,
    "distance": 5.05,
@@ -1496,7 +1496,7 @@
   },
   {
    "id": "fogg",
-   "name": "Филеас Фогг",
+   "name": "Phileas Fogg",
    "person": {
     "cast": "cast",
     "who": "fogg"
@@ -1511,7 +1511,7 @@
   },
   {
    "id": "passepartout",
-   "name": "Паспарту",
+   "name": "Passepartout",
    "person": {
     "cast": "cast",
     "who": "passepartout"
@@ -1526,7 +1526,7 @@
   },
   {
    "id": "aouda",
-   "name": "Ауда",
+   "name": "Aouda",
    "person": {
     "cast": "cast",
     "who": "aouda"
@@ -1541,7 +1541,7 @@
   },
   {
    "id": "fix",
-   "name": "Фикс",
+   "name": "Fix",
    "person": {
     "cast": "cast",
     "who": "fix"
@@ -1556,7 +1556,7 @@
   },
   {
    "id": "consul",
-   "name": "Консул",
+   "name": "Consul",
    "person": {
     "cast": "cast",
     "who": "consul"
@@ -1571,7 +1571,7 @@
   },
   {
    "id": "sailor",
-   "name": "Матрос",
+   "name": "Sailor",
    "person": {
     "cast": "cast",
     "who": "sailor"
@@ -1586,7 +1586,7 @@
   },
   {
    "id": "speedy",
-   "name": "Капитан Спиди",
+   "name": "Captain Speedy",
    "person": {
     "cast": "cast",
     "who": "speedy"
@@ -1601,7 +1601,7 @@
   },
   {
    "id": "stoker",
-   "name": "Кочегар",
+   "name": "Stoker",
    "person": {
     "cast": "cast",
     "who": "stoker"
@@ -1616,7 +1616,7 @@
   },
   {
    "id": "policeman",
-   "name": "Констебль",
+   "name": "Constable",
    "person": {
     "cast": "cast",
     "who": "policeman"
@@ -1631,7 +1631,7 @@
   },
   {
    "id": "policeman_2",
-   "name": "Констебль",
+   "name": "Constable",
    "person": {
     "cast": "cast",
     "who": "policeman"

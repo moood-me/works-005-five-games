@@ -1,4 +1,4 @@
-// Savile Row's plan and what several elements paint and move. Metres: `across` along the street (left negative), `d`
+// Saville Row's plan and what several elements paint and move. Metres: `across` along the street (left negative), `d`
 // ahead of the viewer, who stands on the near pavement across the street from Fogg's house; up from the pavement on
 // the houses (painted y down, as the engine has it). Everything is painted once, in its daylight colours: the hour is
 // the scene's light (`night`, its looks), the gas and the lit rooms are glows and layers their animates set.
@@ -647,7 +647,7 @@ function film(scene) {
         await s.wait(1.5);
       },
     },
-    // ---- Passepartout on the threshold, the hall's light behind him: «Around… the world?» (the game says the line)
+    // ---- Passepartout on the threshold, the hall's light behind him: «Round… the world?» (the game says the line)
     news: {
       after: 'home',
       from: () => ({ ...NIGHT, ...OFF, ...STREET(0), ...person('fogg', HALL, 180, { ...FOGG, fogg_here: false }), ...person('passepartout', HALL, 180, { ...PP, passepartout_here: false }) }),

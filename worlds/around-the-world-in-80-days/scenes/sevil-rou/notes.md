@@ -1,125 +1,141 @@
-# Сэвил-Роу (`sevil-rou`) — движок 3
+# Saville Row (`sevil-rou`) — engine 3
 
-Пролог и эпилог (rpg docs/vokrug-sveta/scenes.md). Лондонская улица ночью в тумане, панорама вдоль неё. Люди — движка
-(каст мира `cast`), фильм — куски (`beats`), цвета и газ — `svet`. Язык мира: современно, тонко, минимально. Дом Фогга —
-точный и холодный, ряд одинаковых фасадов, порядок; главный контраст — тёмная мокрая улица и тёплые окна, газ в тумане,
-отражения в мостовой. Внутри дома — часы.
+The prologue and the epilogue (rpg docs/vokrug-sveta/scenes.md). A London street at night in fog, a panorama along
+it. The people are the engine's (the world's cast `cast`), the film is in beats (`beats`), the colours and the gas —
+`svet`. The world's language: modern, fine, minimal. Fogg's house — exact and cold, a row of identical fronts, order;
+the main contrast — the dark wet street and the warm windows, the gas in the fog, the reflections in the roadway.
+Inside the house — clocks.
 
-## Как устроена (движок 3)
+## How it is made (engine 3)
 
-- **Ничего не перерисовывается со временем.** Рисунки не читают ни времени, ни ключей сцены: всё нарисовано раз, в
-  дневных цветах. Что движется — слои, `animate`, шейдеры, частицы.
-- **Час — свет сцены.** Базовый `light` — серый лондонский день; `looks`: `night` (окружающий свет синий и тусклый,
-  `inside` 1 — ночью комнаты не темнее улицы), `fog` (дымка 0.8, `hazeGlow` — ореолы газа в тумане), `sunday` (утро:
-  туман реже, тёплый оттенок, `shafts` — низкое солнце `sun` сзади справа светит в дымке).
-- **Небо** (`sky`) — шейдер `sky.wgsl`: туман от верха к низу в цветах часа Лондона (`svet.london(night)`, утром
-  воскресенья — бледнее и теплее), медленно плывущие сгущения тумана, тёплое пятно солнца справа. Цвета даёт
-  `lib.skyMotion` униформами (считаются только когда меняются `night`/`sunday`).
-- **Газ.** Фонари — `svet.gasLamp` по частям (`lamps`, `near_lamps`), каждый свой `e.light`; `lights` дают им `reach` 8.
-  Их animate (`lib.lampsMotion`) ставит каждому `e.glow(имя, svet.gas(night))` — гаснет и свечение, и свет. Ореол в
-  тумане — `hazeGlow`, не нарисован.
-- **Окна дома Фогга.** Комнаты — карточки `inside` за фасадом; у каждой рожок (`lib.bracket`): стеклянный тюльпан
-  нарисован тусклым, горящий — слой `lit`, его прозрачность — ключ окна (`lib.roomMotion`); свет комнаты — `lights` `of`
-  рожка с `on` = ключ окна (гасит и свечение). Лампа на столе в кабинете — часть комнаты; её горящий край — слой `lit`
-  с `depth` 1.3 (там, где стол).
-- **Клуб** (`club_rooms`, glows) — шейдер `club_rooms.wgsl`: залы нарисованы тёмными и (слой 1) горящими, люстры —
-  слой 2; показываются горящими, как горит газ (униформа `gas` от animate), тёплый свет — `emission`. Его `hall` и
-  `saloon` — `e.glow` по газу.
-- **Туман** — частицы `mist` (пресет `smoke`: большие мягкие клубы на всю улицу, медленно плывут, сквозные — газ светит
-  сквозь них), сколько — `fog`; `droplets` — морось в воздухе (пресет `dust`: видна только в свете фонарей); дым угля
-  из четырёх труб (`smoke1…4`, из точек `chimneys#s5, s7, s9, s12`).
-- **Мостовая** — плоскость `road` (мокрая брусчатка, `reflect` с `rough` 0.4 — фонари и окна тянутся по ней),
-  `pavement` (плиты, зеркало слабее), `side_street`, `pavement_near`; бордюр `kerb`. Улица — от −100 до 110 м
-  (`plan.street`): дальше, чем откуда выезжают кэбы.
-- **Саквояж** (`bag`) — нарисован полным (слой `bag`) и застёжка (слой `clasp`); animate растит его по `bag` (scaleY от
-  половины), застёжку показывает у 1, точку `bag#bag` ставит у его горловины.
-- **Щёки ступеней и слуховых окон** — теперь у каждого дома: карточка у дома Фогга (`cheeks_l` 270, `cheeks_r` 90,
-  `dormer_l`, `dormer_r`) и часть у каждого соседа (части повёрнутой карточки лежат в её плоскости: `dz` — вдоль улицы).
+- **Nothing is painted again over time.** The paintings read neither time nor the scene's keys: all painted once, in
+  daylight colours. What moves — layers, `animate`, shaders, particles.
+- **The hour is the scene's light.** The base `light` — a grey London day; `looks`: `night` (the ambient light blue and
+  dim, `inside` 1 — at night the rooms are no darker than the street), `fog` (haze 0.8, `hazeGlow` — the gas's halos in
+  the fog), `sunday` (morning: the fog thinner, a warm tint, `shafts` — a low sun `sun` behind on the right shines in
+  the haze).
+- **The sky** (`sky`) — the shader `sky.wgsl`: fog from top to bottom in the colours of London's hour
+  (`svet.london(night)`; on the Sunday morning paler and warmer), slowly drifting thickenings of fog, a warm patch of
+  sun on the right. The colours are given by `lib.skyMotion` as uniforms (worked out only when `night`/`sunday`
+  change).
+- **The gas.** The street lamps — `svet.gasLamp` in parts (`lamps`, `near_lamps`), each its own `e.light`; `lights`
+  give them `reach` 8. Their animate (`lib.lampsMotion`) gives each `e.glow(name, svet.gas(night))` — the glow and the
+  light go out together. The halo in the fog — `hazeGlow`, not painted.
+- **The windows of Fogg's house.** The rooms — cards `inside` behind the front; each has a gas bracket
+  (`lib.bracket`): the glass tulip painted dim, the burning one — the layer `lit`, its transparency the window's key
+  (`lib.roomMotion`); the room's light — `lights` `of` the bracket with `on` = the window's key (puts out the glow too).
+  The lamp on the desk in the study is part of the room; its burning edge — the layer `lit` with `depth` 1.3 (where the
+  desk is).
+- **The club** (`club_rooms`, glows) — the shader `club_rooms.wgsl`: the saloons painted dark and (layer 1) lit, the
+  chandeliers — layer 2; shown lit as the gas burns (the uniform `gas` from the animate), the warm light — `emission`.
+  Its `hall` and `saloon` — `e.glow` by the gas.
+- **The fog** — the particles `mist` (the preset `smoke`: big soft wreaths over the whole street, drifting slowly,
+  see-through — the gas shines through them), how much — `fog`; `droplets` — drizzle in the air (the preset `dust`:
+  seen only in the lamps' light); coal smoke from four chimneys (`smoke1…4`, from the points `chimneys#s5, s7, s9,
+  s12`).
+- **The roadway** — the plane `road` (wet cobbles, `reflect` with `rough` 0.4 — the lamps and windows stretch along
+  it), `pavement` (flags, a weaker mirror), `side_street`, `pavement_near`; the kerb `kerb`. The street — from −100 to
+  110 m (`plan.street`): further than where the cabs come out from.
+- **The carpet-bag** (`bag`) — painted full (the layer `bag`) and its clasp (the layer `clasp`); the animate grows it
+  by `bag` (scaleY from a half), shows the clasp at 1, sets the point `bag#bag` at its mouth.
+- **The cheeks of the steps and the dormers** — now at every house: a card at Fogg's house (`cheeks_l` 270, `cheeks_r`
+  90, `dormer_l`, `dormer_r`) and a part at each neighbour's (the parts of a turned card lie in its plane: `dz` —
+  along the street).
 
-## Улица живёт (`traffic`)
+## The street lives (`traffic`)
 
-- **Кэбы** `cab` (дальняя полоса, едет вправо, к клубу; гнедой) и `cab2` (ближняя, влево — в Лондоне левостороннее;
-  серый). Кэб — одна карточка боком (`lib.cab`): кэб, кэбмен наверху сзади, оглобли, лошадь. Колесо, тело, голова,
-  хвост и восемь кусков ног — слои; `lib.cabMotion` катит колесо и ведёт рысь по пройденной земле (`<id>_across`):
-  ноги идут так быстро, как едет кэб, — никогда не скользят; стоит кэб — лошадь стоит (размах ног — по скорости, с
-  разгоном). Диагональные пары вместе, колени сгибаются на выносе, тело качается дважды за шаг. Фонарь кэба — `e.light`
-  `lamp`, горит по газу; `lights` `cab_lamp`, `cab2_lamp`.
-- **Прохожие** `walker1` (цилиндр), `walker2` (дама), `walker3` (котелок) — люди движка (каст `cast`, свой `look`),
-  идут по дальнему тротуару у бордюра (Фогг и другие — ближе к домам) из конца в конец улицы своим шагом.
-- `script.js`, раз в секунду: кто стоит на конце (кэб — на конце полосы, прохожий — на конце улицы) — свободен; с
-  вероятностью по `traffic` его отправляют на другой конец (кэб — `path` со скоростью 3.6–3.8 м/с; прохожий — `walk`).
-  Свободный прохожий не виден (`_here` false). Всё — по состоянию, восстановленная сцена идёт дальше.
-- Куски ставят `traffic` в своём `from` (`lib` `STREET`): где камера стоит на дальнем тротуаре близко к человеку — 0 и
-  прохожие убраны (иначе прохожий проходит между камерой и героем); общие планы (`dusk` 1, `to_club` 0.6) — улица живёт.
+- **The cabs** `cab` (the far lane, going right, to the club; a bay) and `cab2` (the near lane, going left — London
+  keeps to the left; a grey). A cab is one card side on (`lib.cab`): the cab, the cabman up behind, the shafts, the
+  horse. The wheel, the body, the head, the tail and eight pieces of legs are layers; `lib.cabMotion` rolls the wheel
+  and leads the trot by the ground gone (`<id>_across`): the legs go as fast as the cab goes — they never slide; the cab
+  stands — the horse stands (the legs' swing by the speed, with a run-up). The diagonal pairs together, the knees bend
+  on the carry, the body sways twice a step. The cab's lamp — `e.light` `lamp`, burning by the gas; `lights`
+  `cab_lamp`, `cab2_lamp`.
+- **The passers-by** `walker1` (a top hat), `walker2` (a lady), `walker3` (a bowler) — the engine's people (the cast
+  `cast`, a `look` of their own), walking along the far pavement by the kerb (Fogg and the others — nearer the houses)
+  from one end of the street to the other at their own pace.
+- `script.js`, once a second: whoever stands at an end (a cab — at the end of its lane, a passer-by — at the end of
+  the street) is free; with a probability by `traffic` he is sent to the other end (a cab — `path` at 3.6–3.8 m/s; a
+  passer-by — `walk`). A free passer-by is not seen (`_here` false). All by the state: a restored scene goes on.
+- The beats set `traffic` in their `from` (`lib` `STREET`): where the camera stands on the far pavement close to a
+  person — 0 and the passers-by taken away (else a passer-by goes between the camera and the hero); the wide shots
+  (`dusk` 1, `to_club` 0.6) — the street lives.
 
-## Ключи
+## Keys
 
-| Ключ | Что | По умолчанию |
+| Key | What | By default |
 | --- | --- | --- |
-| `night` | 0…1: 0 — серый день, 0.5 — сумерки, газ зажигают, 1 — ночь | 1 |
-| `fog` | 0…1: густота тумана | 1 |
-| `sunday` | 0…1: воскресное утро (с `night` 0): туман реже, низкое солнце | 0 |
-| `win_hall`, `win_study`, `win_bedroom`, `win_dressing` | 0…1: свет в холле, кабинете, спальне, гардеробной | 1, 1, 0, 0 |
-| `gas` | 0…1: газовый рожок в мансарде Паспарту (окно `attic`) | 0 |
-| `door` | 0…1: дверь распахивается в холл (`door_leaf` — градусы створки, ведёт `script.js`) | 0 |
-| `bag` | 0…1: саквояж на верхней ступени: 0 — нет, дальше набит на столько, 1 — застёгнут | 0 |
-| `traffic` | 0…1: жизнь улицы — кэбы и прохожие | 0.5 |
-| `cab_across`, `cab2_across` | где кэбы (метры вдоль улицы) | на концах |
-| `beat` | кусок фильма | null |
-| `runner` | кто бежит в `run_out` / `run_back`: `pp` или `fogg` | pp |
-| `fix_present` | Фикс под фонарём у двери (ставит `fix_here`) | 0 |
-| `with_pp`, `with_aouda` | спутники (для игры) | 1, 0 |
+| `night` | 0…1: 0 — a grey day, 0.5 — dusk, the gas is lit, 1 — night | 1 |
+| `fog` | 0…1: how thick the fog is | 1 |
+| `sunday` | 0…1: the Sunday morning (with `night` 0): the fog thinner, a low sun | 0 |
+| `win_hall`, `win_study`, `win_bedroom`, `win_dressing` | 0…1: the light in the hall, the study, the bedroom, the dressing-room | 1, 1, 0, 0 |
+| `gas` | 0…1: the gas-burner in Passepartout's attic (the window `attic`) | 0 |
+| `door` | 0…1: the door swings open into the hall (`door_leaf` — the leaf's degrees, led by `script.js`) | 0 |
+| `bag` | 0…1: the carpet-bag on the top step: 0 — none, then stuffed so far, 1 — clasped | 0 |
+| `traffic` | 0…1: the street's life — cabs and passers-by | 0.5 |
+| `cab_across`, `cab2_across` | where the cabs are (metres along the street) | at the ends |
+| `beat` | a beat of the film | null |
+| `runner` | who runs in `run_out` / `run_back`: `pp` or `fogg` | pp |
+| `fix_present` | Fix under the lamp by the door (sets `fix_here`) | 0 |
+| `with_pp`, `with_aouda` | the companions (for the game) | 1, 0 |
 
-## Точки и элементы для выбора
+## Points and elements for a choice
 
-`win_hall`, `win_study`, `win_bedroom`, `win_dressing`, `attic`, `door` (середина створки; `door#handle`), `bag#bag`,
-`club` (вход клуба), `lamps#door` (под фонарём у двери — место Фикса), `cab` (кэб; `cab#horse` — голова лошади),
-`chimneys#s0…s14` (трубы слева направо).
+`win_hall`, `win_study`, `win_bedroom`, `win_dressing`, `attic`, `door` (the middle of the leaf; `door#handle`),
+`bag#bag`, `club` (the club's entrance), `lamps#door` (under the lamp by the door — Fix's place), `cab` (the cab;
+`cab#horse` — the horse's head), `chimneys#s0…s14` (the chimneys left to right).
 
-## Люди и фильм
+## The people and the film
 
-Люди — `fogg`, `passepartout`, `fix` (каст `cast`) и прохожие. Ключи каждого — `<id>_a`, `<id>_d`, `_do`, `_turn`,
-`_look`, `_reach`, `_with`, `_wear`, `_gait`, `_here`. Земля для людей — `relief.js`: мостовая 0, тротуары на бордюр
-выше (0.14), ступени Фогга — один скат (0.14 → 0.84), за дверью — пол холла (0.84).
+The people — `fogg`, `passepartout`, `fix` (the cast `cast`) and the passers-by. Each one's keys — `<id>_a`,
+`<id>_d`, `_do`, `_turn`, `_look`, `_reach`, `_with`, `_wear`, `_gait`, `_here`. The ground for the people —
+`relief.js`: the roadway 0, the pavements a kerb higher (0.14), Fogg's steps — one slope (0.14 → 0.84), beyond the
+door — the hall's floor (0.84).
 
-Куски — `lib.film(scene)` (модуль `beats`): `script.js` играет их для игры (`beat`, в конце `beat:<имя>`), `showcase.js`
-— показ (порядок `SHOWCASE`, реплики игры сказаны там). Люди идут своим шагом, движения — сколько длятся; моменты — по
-событиям (дошёл, вышел за порог), пауза — только где человек мнётся или тянется к звонку. `from` — склейка, если кусок
-идёт не после своего `after`.
+The beats — `lib.film(scene)` (the module `beats`): `script.js` plays them for the game (`beat`, at its end
+`beat:<name>`), `showcase.js` — the showcase (the order `SHOWCASE`, the game's lines said there). The people walk at
+their own pace, the motions take as long as they take; the moments by events (got there, stepped over the threshold),
+a pause only where a person hesitates or reaches for the bell. `from` — a cut, if the beat does not come after its
+`after`.
 
-| Кусок | Что | после |
+| Beat | What | after |
 | --- | --- | --- |
-| `dusk` | сумерки 2 октября: ночь опускается (`night` 0.2 → 0.8), газ зажигается, в кабинете загорается свет; кэбы и прохожие | — |
-| `home` | Фогг по дальнему тротуару, к ступеням, вверх, к двери, открывает её, входит; холл, потом кабинет загораются | — |
-| `news` | Паспарту на пороге (крупнее), свет холла за ним, разводит руками (`surprised`) | home |
-| `out` | Фогг выходит, за ним Паспарту — берёт саквояж с верхней ступени; Фогг ждёт его внизу; оба вправо, в туман | — |
-| `run_out` | дверь распахивается: бегун без шляпы вниз и налево, бегом | — |
-| `fix_paper` | Фикс под фонарём с газетой мнётся, смотрит на дверь, на улицу, решается, поднимается и звонит | — |
-| `run_back` | бегун из тумана бегом по ступеням в открытую дверь | run_out |
-| `to_club` | кэб рысью по улице к Реформ-клубу, камера с ним (`camera_x` → 50) | — |
-| `pp_returns` | утро: Паспарту с узелком, у ступеней смотрит на часы (`watch_look`), поднимается, звонит | — |
+| `dusk` | dusk on 2 October: the night comes down (`night` 0.2 → 0.8), the gas is lit, the light comes on in the study; cabs and passers-by | — |
+| `home` | Fogg along the far pavement, to the steps, up, to the door, opens it, goes in; the hall, then the study light up | — |
+| `news` | Passepartout on the threshold (closer), the hall's light behind him, spreads his hands (`surprised`) | home |
+| `out` | Fogg comes out, Passepartout after him — takes the carpet-bag from the top step; Fogg waits for him below; both go right, into the fog | — |
+| `run_out` | the door flies open: the runner, hatless, down and to the left, at a run | — |
+| `fix_paper` | Fix under the lamp with a newspaper hesitates, looks at the door, at the street, makes up his mind, goes up and rings | — |
+| `run_back` | the runner out of the fog at a run up the steps into the open door | run_out |
+| `to_club` | a cab at a trot along the street to the Reform Club, the camera with it (`camera_x` → 50) | — |
+| `pp_returns` | morning: Passepartout with a bundle, at the steps looks at his watch (`watch_look`), goes up, rings | — |
 
-Моменты кусков сцена говорит игре (`scene.tell`), кроме `beat:<имя>`: `home:door` (рука на ручке), `home:in`,
-`news:at-door` (Паспарту встал на пороге — под реплику), `out:bag`, `out:away`, `run_out:out` (за порогом),
-`run_out:away`, `fix_paper:rings`, `run_back:in`, `to_club:arrived`, `pp_returns:watch`, `pp_returns:rings`.
+The scene tells the game the beats' moments (`scene.tell`), besides `beat:<name>`: `home:door` (his hand on the
+handle), `home:in`, `news:at-door` (Passepartout has stopped on the threshold — for his line), `out:bag`, `out:away`,
+`run_out:out` (over the threshold), `run_out:away`, `fix_paper:rings`, `run_back:in`, `to_club:arrived`,
+`pp_returns:watch`, `pp_returns:rings`.
 
-Кадры на людях — оператор (`camera_target`, `camera_shot` — рост человека в высотах кадра). Люди ходят вдоль домов по
-`WALK_D` 18.8 м: камера оператора (0.7–0.8 — в 2.4 м перед человеком) стоит тогда между ними и фонарями у бордюра
-(15.9 м), столб не проходит перед объективом. Фонарь у двери (`lamps#door`) остаётся в кадре сбоку, когда человек у
-ступеней. Газ светит на 10 м (`reach`): между фонарями улица не проваливается в темноту.
+The shots on people — the operator (`camera_target`, `camera_shot` — the person's height in frame heights). People
+walk along the houses at `WALK_D` 18.8 m: the operator's camera (0.7–0.8 — 2.4 m in front of the person) stands then
+between them and the lamps by the kerb (15.9 m), no post passes before the lens. The lamp by the door (`lamps#door`)
+stays at the side of the frame when a person is at the steps. The gas shines for 10 m (`reach`): between the lamps
+the street does not fall into darkness.
 
-## Чего нет
+## What there is not
 
-- **Не сделано (сборка 2026-10-15 остановлена):** куски `pack` (силуэт Паспарту в окнах, `pp_in`, `fly`, `fly_what`),
-  `proposal`, `sunday`, `lost`, `gas_off`, мини-игра `cab` (`cab_to`, `cab_pace`, `cab_at`, `cab_out`) из scenes.md —
-  ни кода, ни ключей. Ауды в сцене нет (нужна для `proposal`, `lost`). Есть только то, что ниже и выше.
+- **Not done (the build stopped 2026-10-15):** the beats `pack` (Passepartout's silhouette in the windows, `pp_in`,
+  `fly`, `fly_what`), `proposal`, `sunday`, `lost`, `gas_off`, the minigame `cab` (`cab_to`, `cab_pace`, `cab_at`,
+  `cab_out`) of scenes.md — neither code nor keys. Aouda is not in the scene (needed for `proposal`, `lost`). There is
+  only what is below and above.
 
-- **Люди в окнах верхних этажей** (`evening`, `proposal`, `lost`, `sunday`, силуэт Паспарту в `pack`) — по-прежнему
-  нет: нужен пол людей на этаже над холлом, в котором ходят (плоскость `walk` кабинета лежала бы и над холлом).
-- **Кэб у дома Фогга** (`home`, `out` по scenes.md) — кэбы есть, но Фогг не садится и не выходит: нужны движения
-  «сесть в кэб» / «выйти» (Kimodo). Фогг приходит и они уходят пешком, как в v1.
-- Крупные планы (`news`, `proposal`) — модуля `closeups` в мире нет.
+- **People in the windows of the upper floors** (`evening`, `proposal`, `lost`, `sunday`, Passepartout's silhouette in
+  `pack`) — still none: a floor for people is needed on the storey above the hall, to walk on (the study's `walk`
+  plane would lie over the hall too).
+- **A cab at Fogg's house** (`home`, `out` by scenes.md) — there are cabs, but Fogg does not get in or out: the motions
+  «get into a cab» / «get out» are needed (Kimodo). Fogg comes and they leave on foot, as in v1.
+- Close-ups (`news`, `proposal`) — the world has no module `closeups`.
 
-## Свет после правки тональной кривой (2026-10-11)
+## The light after the tone curve was changed (2026-10-11)
 
-Ночь и туман — как были (светлее v1: прохожие и дом читаются). Утро `sunday`: `ambient` 0.5 → 0.65.
+The night and the fog — as they were (lighter than v1: the passers-by and the house read). The morning `sunday`:
+`ambient` 0.5 → 0.65.

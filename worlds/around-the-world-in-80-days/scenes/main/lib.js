@@ -406,7 +406,7 @@ function film(scene) {
         await s.wait(3);
       },
     },
-    // ---- Friday (the ending «по расписанию»). The salon half empty; Fogg in his armchair by the fire, his paper open.
+    // ---- Friday (the ending «On time»). The salon half empty; Fogg in his armchair by the fire, his paper open.
     // Outside, day — night — day — evening; the fire high and low. The porter comes to him, and goes.
     friday: {
       from: () => ({ ...FRIDAY, ...FRIDAY_FOGG }),

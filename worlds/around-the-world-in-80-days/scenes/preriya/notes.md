@@ -1,54 +1,60 @@
-# Прерия (`preriya`) — НЕ ГОТОВА (остановлена на середине, 2026-10-15)
+# The prairie (`preriya`) — NOT READY (stopped halfway, 2026-10-15)
 
-Глава III (rpg docs/vokrug-sveta/scenes.md, «Прерия»). Работа остановлена по слову координатора: владелец ставит игру
-на паузу. Сцена в ветке, но **не играется**: нет `script.js` и `showcase.js`, у большинства элементов нет рисунка.
-Ничего не рендерилось и не проверялось (ни в node, ни на GPU).
+Chapter III (rpg docs/vokrug-sveta/scenes.md, the prairie). The work stopped at the coordinator's word: the owner puts
+the game on pause. The scene is in the branch but **does not play**: there is no `script.js` or `showcase.js`, most of
+the elements have no painting. Nothing was rendered or checked (neither in node nor on the GPU).
 
-## Что есть
+## What there is
 
-- `scene.json` — полный план: 67 элементов, свет и `looks` (`speed`, `wind_l`, `wind_r`, `snowing`, `dawn`, `night`),
-  источники (`sun`, `dawn_sun`, `moon`, `platform_lamp`, `depot_window`, `headlamp`, `car_windows`), все ключи в
-  `states` с описанием, музыка (`scale` `A_FLAT_MAJOR_F_MINOR`), `relief` (`lib.ground`). Он собирается скриптом
-  `gen_scene.py` (python gen_scene.py scene.json) — правьте генератор, не JSON руками.
-- `lib.js` — план места (`plan`), земля (`ground`: ущелье поперёк пути у −260, пологие увалы вдали), `ppX`, `sailFace`
-  и **фильм целиком** (`film(scene)`): все 14 кусков scenes.md с `from` и `run`, моменты, плюс показ (`SHOWCASE`,
-  `SHOWCASE_ONLY`: `under_show`, `sail_show`). Код не прогонялся.
-- Рисунки: только `sky` (+ animate: день, рассвет, ночь, луна, звёзды, облака бегут с поездом/санями) и `far` (+ animate:
-  дальние увалы, бегут периодом 2000 м).
+- `scene.json` — the full plan: 67 elements, the light and `looks` (`speed`, `wind_l`, `wind_r`, `snowing`, `dawn`,
+  `night`), the sources (`sun`, `dawn_sun`, `moon`, `platform_lamp`, `depot_window`, `headlamp`, `car_windows`), all the
+  keys in `states` with their meanings, the music (`scale` `A_FLAT_MAJOR_F_MINOR`), `relief` (`lib.ground`). It is
+  made by the script `gen_scene.py` (python gen_scene.py scene.json) — edit the generator, not the JSON by hand.
+- `lib.js` — the place's plan (`plan`), the ground (`ground`: a gorge across the line at −260, gentle rises far off),
+  `ppX`, `sailFace` and **the whole film** (`film(scene)`): all 14 beats of scenes.md with `from` and `run`, the
+  moments, and the showcase (`SHOWCASE`, `SHOWCASE_ONLY`: `under_show`, `sail_show`). The code has not been run.
+- Paintings: only `sky` (+ animate: day, dawn, night, the moon, the stars, the clouds running with the train/the
+  sledge) and `far` (+ animate: the far rises, running with a period of 2000 m).
 
-## Чего нет
+## What there is not
 
-- Рисунков всех остальных элементов: `ground` (снег, скалы ущелья, лёд реки), `river`, `rush`, `track_w`, `track_e`
-  (их шейдер — шпалы, бегущие по фазе), `poles`, `scrub0..2`, мост (`bridge`, `bridge_far`, `bridge_deck`, `bridge_mid`),
-  поезд (`loco_side`, `loco_far`, `cab_floor` с точками `driver`/`pp`, `coupling` с точкой `pin` и слоем пальца,
-  `cars_side` с точками `middle`/`rear`/`lit`, `cars_far`, `chain` с точками `c0…c3` и `pp`, `rear_floor` с точками
-  `fogg`/`pp`), `riders` (точки `gun1`, `gun2`, `hooves`), станция (`platform`, `platform_edge`, `depot` с `window` и
-  вывеской по `town`, `depot_side`, `depot_roof`, `lamp` с `flame`, `tank`), `fort` (частокол/Омаха по `town`, ворота
-  по `gate`, точка `chimney`), сани (`sledge_deck` с точкой `mudge`, `sledge_side`, `sledge_back`, `mast` с флажком по
-  `wind`, `sail` с точками `clew`/`sheet`/`peak` и слоем по `sail_up`, `sheet_rope`), `ridge`, `wolves`.
-- `script.js`: train_x → loco_x/cars_x (пока не `cars_free`), `bridge_down` → `span_drop`/`span_tilt`/`bridge_splash`,
-  фаза `swing_at` (ведёт сцена, пока Паспарту под вагонами), `pp_car` → руки Паспарту к цепям и момент
-  `under:coupling`, `firing` → `shots`, `wind` → `wind_l`/`wind_r` и `sail_face`, `drift` → `ridge_x`, `wolves` →
-  `wolves_x`, `sledge` → `omaha_near`, `snow_on_aouda` → цвета Ауды шагами, `speed` → `steam`, `sl_*` → кто в санях;
-  `scene.kit.beats.play`.
+- The paintings of all the other elements: `ground` (snow, the gorge's rocks, the river's ice), `river`, `rush`,
+  `track_w`, `track_e` (their shader — sleepers running by the phase), `poles`, `scrub0..2`, the bridge (`bridge`,
+  `bridge_far`, `bridge_deck`, `bridge_mid`), the train (`loco_side`, `loco_far`, `cab_floor` with the points
+  `driver`/`pp`, `coupling` with the point `pin` and the pin's layer, `cars_side` with the points
+  `middle`/`rear`/`lit`, `cars_far`, `chain` with the points `c0…c3` and `pp`, `rear_floor` with the points
+  `fogg`/`pp`), `riders` (the points `gun1`, `gun2`, `hooves`), the station (`platform`, `platform_edge`, `depot` with
+  `window` and a sign by `town`, `depot_side`, `depot_roof`, `lamp` with `flame`, `tank`), `fort` (the stockade/Omaha
+  by `town`, the gate by `gate`, the point `chimney`), the sledge (`sledge_deck` with the point `mudge`,
+  `sledge_side`, `sledge_back`, `mast` with a pennant by `wind`, `sail` with the points `clew`/`sheet`/`peak` and a
+  layer by `sail_up`, `sheet_rope`), `ridge`, `wolves`.
+- `script.js`: train_x → loco_x/cars_x (while not `cars_free`), `bridge_down` → `span_drop`/`span_tilt`/
+  `bridge_splash`, the phase `swing_at` (led by the scene while Passepartout is under the cars), `pp_car` →
+  Passepartout's hands to the chains and the moment `under:coupling`, `firing` → `shots`, `wind` → `wind_l`/`wind_r`
+  and `sail_face`, `drift` → `ridge_x`, `wolves` → `wolves_x`, `sledge` → `omaha_near`, `snow_on_aouda` → Aouda's
+  colours in steps, `speed` → `steam`, `sl_*` → who is in the sledge; `scene.kit.beats.play`.
 - `showcase.js`.
-- Люди каста `driver`, `captain`, `soldier`, `mudge` и вещь `rifle` — у автора Лондона, в касте их ещё не было.
-  Движение `knocked_down` (машинист падает) — у автора «Палубы».
+- The cast's people `driver`, `captain`, `soldier`, `mudge` and the thing `rifle` — with London's author, the cast did
+  not have them yet. The motion `knocked_down` (the engineer falls) — with «The deck»'s author.
 
-## Задуманное устройство (для того, кто продолжит)
+## The intended design (for whoever goes on)
 
-Панорама вдоль пути (рельсы на distance 22, поезд идёт к +across — на восток): слева ущелье и деревянная эстакада
-Медисин-Боу (−292…−228, средний пролёт падает слоем и плоскостью `bridge_mid`), посередине равнина, справа станция
-форта Керни (платформа 196…256 на ближней стороне, станция, фонарь, водокачка; за путём частокол форта на 72 м;
-`town: omaha` — тот же перрон как Омаха). Поезд «на месте» (`speed`): стоит, бегут шейдеры пути и снега у пути (`rush`,
-`track_e`), столбы и кусты (слой копий по модулю шага), увалы (`far`), облака; ветер look `speed` уносит дым назад.
-«Сцепка»: камера низко у колёс (`camera_h` −1.15, оператор на Паспарту), Паспарту на спине (`lie_limp`) на точке
-`chain#pp`, руки — к цепям `chain#c0…c3`; `swing` — размах, `swing_at` — фаза (ведёт сцена). «Парус»: сани у пути
-посередине равнины, всё бежит по `sl_speed`; парус поворачивается по `sheet` и `wind` (`sailFace`).
+A panorama along the line (the rails at distance 22, the train goes to +across — east): on the left the gorge and the
+wooden trestle of Medicine Bow (−292…−228, the middle span falls as a layer and the plane `bridge_mid`), in the
+middle the plain, on the right the station of Fort Kearney (the platform 196…256 on the near side, the station, a
+lamp, a water tank; beyond the line the fort's stockade at 72 m; `town: omaha` — the same platform as Omaha). The
+train «on the spot» (`speed`): it stands, the shaders of the line and of the snow by the line run (`rush`,
+`track_e`), the poles and the bushes (a layer of copies modulo the step), the rises (`far`), the clouds; the wind of
+the look `speed` carries the smoke back. «The coupling»: the camera low by the wheels (`camera_h` −1.15, the operator
+on Passepartout), Passepartout on his back (`lie_limp`) at the point `chain#pp`, his hands — to the chains
+`chain#c0…c3`; `swing` — the sway, `swing_at` — the phase (led by the scene). «The sail»: the sledge by the line in the
+middle of the plain, everything runs by `sl_speed`; the sail turns by `sheet` and `wind` (`sailFace`).
 
-## Отличия от scenes.md (задуманные)
+## Differences from scenes.md (intended)
 
-- `stop_at` ставит игра до куска `stop`: 0 — вагоны у платформы, 1 — на 130 м дальше.
-- Ключи мини-игр в `from` кусков `under`/`sail` ставятся в начальные значения: игре ставить свои после `beat`.
-- `snow_on_aouda` — цвета её платья белеют четырьмя шагами (своей части «снег на плечах» в касте нет).
-- `fogg_went`, `fogg_on_train`, `omaha_train` — 0/1, как в scenes.md.
+- `stop_at` is set by the game before the beat `stop`: 0 — the cars at the platform, 1 — 130 m further.
+- The minigames' keys in the `from` of the beats `under`/`sail` are set to their starting values: the game sets its
+  own after `beat`.
+- `snow_on_aouda` — the colours of her dress whiten in four steps (the cast has no part of its own for «snow on the
+  shoulders»).
+- `fogg_went`, `fogg_on_train`, `omaha_train` — 0/1, as in scenes.md.

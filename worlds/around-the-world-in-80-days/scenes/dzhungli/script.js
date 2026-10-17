@@ -1,4 +1,4 @@
-// «Джунгли» — its mechanics: the film in beats for the game (lib.js FILM, the world's module beats: `beat` names one;
+// «The jungle» — its mechanics: the film in beats for the game (lib.js FILM, the world's module beats: `beat` names one;
 // notes.md tells them); the keys the game moves the people by — `procession` (the column walks along the trail to
 // there), `walk` (the «raja» carries the widow toward the trees as far as that), `heads` (the crowd at the pyre face down
 // or looking up); `fireflies` follows the night.

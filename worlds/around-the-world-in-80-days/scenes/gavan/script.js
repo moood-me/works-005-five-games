@@ -1,4 +1,4 @@
-// «Гавань» — its mechanics. The ships go where their keys say: `carnatic_present` (1 → 0) takes the steamer off the
+// «The harbour» — its mechanics. The ships go where their keys say: `carnatic_present` (1 → 0) takes the steamer off the
 // jetty and out of the harbour, `tankadere_out` (0 → 1) the pilot boat — their places (steamer_x, _d, _facing; boat_x,
 // _d, _facing) follow along lib.steamerAt and lib.boatAt as the keys move, or at once when they are set so; the
 // steamer smokes while she is in the harbour (`steamer_smoke`). Both roll on the swell (`steamer_roll`, `boat_roll`).
@@ -45,7 +45,7 @@ const dress = () => scene.set('aouda_wear', (scene.get('aouda_dress') ?? 0) > 0.
 scene.on('change', 'aouda_dress', dress);
 if ((scene.get('aouda_dress') ?? 0) > 0.5) dress();
 
-// ── Passepartout in the opium (the game's «Не уснуть»): `pp_walk` — where he is sent along his way (0 the tavern's terrace,
+// ── Passepartout in the opium (the game's «Stay awake»): `pp_walk` — where he is sent along his way (0 the tavern's terrace,
 // 1 the pier by the steamer): he goes there at his own reeling pace, the camera with him; `pp_walk_at` — where he is now.
 // Each `pp_stumble` that rises to 1 — he stumbles, and goes on. ──
 const P = () => scene.person('passepartout');
