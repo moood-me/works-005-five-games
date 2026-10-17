@@ -1,6 +1,6 @@
 // the sea at dawn to the horizon, the sky over it: a low sun on the water's edge and its road of light, long soft
 // clouds, the water in streaks that grow longer toward the viewer. Painted once, in the colours of the hour; the
-// mist that hides it, the glints on it and the sun's road twinkling are its shader's (sea.glsl).
+// glints on it and the sun's road twinkling are its shader's (sea.wgsl).
 var A = e.aspect;
 var N = e.kit.sky;
 var HZ = e.lib.HORIZON;
