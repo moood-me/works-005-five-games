@@ -14,7 +14,7 @@
 // heard.
 // Compared with each scene's scene.json and the block «Контракт для проверки» that ends its notes.md (scenes.md
 // «Общее»): {beats: {name: {after, tells, seconds, show}}, points, offers, party, acts: {key: {values, tells}}}; with
-// the minigames' table (§7, MINIGAMES below) and the moments their files wait for; PEOPLE, sound.js and its unheard(),
+// the minigames' table (§7, MINIGAMES below) and the moments their files wait for; people.json, sound.js and its unheard(),
 // the lines of §8 (lines.mjs) letter for letter; and the logic of the play (LOGIC below: one ending, the scales within
 // their bounds, every mark read in facts, the lines said only on their condition, no b.offer).
 // Printed: what does not match (file, step, name) — a scene the world lacks is said, the walk goes on; the cuts inside
@@ -37,7 +37,11 @@ if (!world || !existsSync(join(world, 'scenes'))) {
 }
 const game = fileURLToPath(new URL('..', import.meta.url));
 const load = file => import(pathToFileURL(join(game, file)).href);
-const { SCENES, PEOPLE, SCALES, EFFECTS, ENDINGS, facts, carry, context } = await load('story.js');
+// the game's texts as written (the source language): tr as the page gives it, without the translations
+const fill = (t, p = {}) => t.replace(/\{(\w+)\}/g, (_, k) => String(p[k]));
+globalThis.tr = Object.assign(fill, { n: (n, one, other, p) => fill(n === 1 ? one : other, { n, ...p }), c: (c, t, p) => fill(t, p), line: (who, t) => t, thought: (who, t) => t });
+const PEOPLE = JSON.parse(readFileSync(join(game, 'people.json'), 'utf8'));
+const { SCENES, SCALES, EFFECTS, ENDINGS, facts, carry, context } = await load('story.js');
 const { jump } = await load('jump.js');
 const sound = await load('sound.js');
 
@@ -102,13 +106,13 @@ function contract(notes) {
   return JSON.parse(block[1]);
 }
 const WORLD = scenes(world);
-for (const [title, scene] of WORLD) {
+for (const [folder, scene] of WORLD) {
   const notes = `scenes/${scene.folder}/notes.md`, spec = `scenes/${scene.folder}/scene.json`;
   scene.named = new Set();
   scene.states = scene.spec.states ?? {};
   scene.objects = new Map((scene.spec.objects ?? []).map(o => [o.id, o]));
   scene.contract = null;
-  if (!Object.values(SCENES).includes(title)) { miss(spec, `сцены «${title}» нет в SCENES игры (название сцены — ровно как в scenes.md?)`); continue; }
+  if (!Object.values(SCENES).includes(folder)) { miss(spec, `сцены «${folder}» нет в SCENES игры (в игре её нет)`); continue; }
   try {
     if (!existsSync(join(world, notes))) throw new Error('файла нет');
     const c = contract(readFileSync(join(world, notes), 'utf8'));
@@ -140,7 +144,7 @@ for (const [title, scene] of WORLD) {
   }
   for (const key in c.party) if (!(key in scene.states)) miss(notes, `ключа партии «${key}» нет в states (${spec})`);
   // (a key the play has not decided yet is carried as the scene's own default)
-  for (const [key, value] of Object.entries(carry(title, facts(fresh())) ?? {})) {
+  for (const [key, value] of Object.entries(carry(folder, facts(fresh())) ?? {})) {
     if (!(key in c.party)) miss(notes, `ключа партии «${key}» (game.md §5 carry) нет в party контракта`);
     else if (JSON.stringify(c.party[key]) !== JSON.stringify(value)) miss(notes, `ключ партии «${key}»: по умолчанию ${JSON.stringify(c.party[key])}, игра без выборов несёт ${JSON.stringify(value)}`);
   }
@@ -152,7 +156,7 @@ for (const [title, scene] of WORLD) {
     if (o && !o.name) miss(notes, `предложение «${ref}»: у элемента нет name (${spec})`);
   }
 }
-for (const title of Object.values(SCENES)) if (!WORLD.has(title)) miss('story.js', `сцены «${title}» (SCENES) нет в мире`);
+for (const folder of Object.values(SCENES)) if (!WORLD.has(folder)) miss('story.js', `сцены «${folder}» (SCENES) нет в мире`);
 const sceneOf = name => WORLD.get(SCENES[name]);
 // a moment the scene tells: of a beat, or of a key of action → whether the contract has it
 const tells = (scene, text) => {
@@ -246,58 +250,58 @@ for (const file of ['game.js', 'story.js', 'ui.js', ...CHAPTERS.map(c => c.file)
 }
 
 // --- a step's g, watched: `here` — where it is (file, step), `events` — what the step did, in order:
-// ['scene', title] | ['beat', name, seconds] | ['say', seconds] | ['act'] | ['play', name, about];
+// ['scene', folder] | ['beat', name, seconds] | ['say', seconds] | ['act'] | ['play', name, about];
 // `seen` — what the play did that its logic is checked by (LOGIC)
 const lines = new Map(); // `${who}\n${text}` → {who, text, where}
 const mute = () => ({ loud() {}, stop() {} });
 function watched(g, j, ch, here, events, seen) {
   const bad = text => miss(here, text);
-  let cur = null; // the scene shown: {title, scene, last: the beat begun last, opening: the beat it was opened with, not taken up yet, next: beat_next set}
+  let cur = null; // the scene shown: {folder, scene, last: the beat begun last, opening: the beat it was opened with, not taken up yet, next: beat_next set}
   let during = false; // a minigame is on: what is said now is said inside it
   let open = 0; // beats begun and not yet waited for: a line said meanwhile is in the beat's own length
   let waits = []; // the moments waited for whose beat has not begun yet: {text, beat}
   const shown = what => (cur ? true : (bad(`${what} — до g.scene`), false));
   const key = (name, what, value) => {
     if (!shown(`${what} «${name}»`)) return;
-    if (!(name in cur.scene.states)) bad(`${what}: ключа «${name}» нет в states сцены «${cur.title}»`);
+    if (!(name in cur.scene.states)) bad(`${what}: ключа «${name}» нет в states сцены «${cur.folder}»`);
     const act = cur.scene.contract?.acts[name];
-    if (act && typeof value === 'string' && !act.values.includes(value)) bad(`${what}: значения «${value}» ключа действия «${name}» нет в acts сцены «${cur.title}»`);
+    if (act && typeof value === 'string' && !act.values.includes(value)) bad(`${what}: значения «${value}» ключа действия «${name}» нет в acts сцены «${cur.folder}»`);
   };
   const element = (ref, what) => {
     const o = cur.scene.objects.get(ref.split('#')[0]);
-    if (!o) bad(`${what}: элемента «${ref.split('#')[0]}» нет в сцене «${cur.title}»`);
+    if (!o) bad(`${what}: элемента «${ref.split('#')[0]}» нет в сцене «${cur.folder}»`);
     return o;
   };
   const point = (ref, what) => {
     element(ref, what);
     cur.scene.named.add(`ref:${ref}`);
-    if (cur.scene.contract && !cur.scene.contract.points.includes(ref) && !cur.scene.contract.offers.includes(ref)) bad(`${what}: точки «${ref}» нет в points сцены «${cur.title}»`);
+    if (cur.scene.contract && !cur.scene.contract.points.includes(ref) && !cur.scene.contract.offers.includes(ref)) bad(`${what}: точки «${ref}» нет в points сцены «${cur.folder}»`);
   };
   const offer = (ref, what) => {
     const o = element(ref, what);
     if (o && !o.name) bad(`${what}: у элемента «${o.id}» нет name`);
     cur.scene.named.add(`ref:${ref}`);
-    if (cur.scene.contract && !cur.scene.contract.offers.includes(ref)) bad(`${what}: предложения «${ref}» нет в offers сцены «${cur.title}»`);
+    if (cur.scene.contract && !cur.scene.contract.offers.includes(ref)) bad(`${what}: предложения «${ref}» нет в offers сцены «${cur.folder}»`);
   };
   const moment = (text, what) => {
     cur.scene.named.add(`tell:${text}`);
-    if (!tells(cur.scene, text)) bad(`${what}: момента «${text}» нет у куска «${text.split(':')[0]}» сцены «${cur.title}»`);
+    if (!tells(cur.scene, text)) bad(`${what}: момента «${text}» нет у куска «${text.split(':')[0]}» сцены «${cur.folder}»`);
   };
   const begins = (name, opening) => {
     const c = cur.scene.contract, beat = c?.beats[name];
     events.push(['beat', name, beat?.seconds ?? 0]);
     seen.beats.add(name);
     cur.scene.named.add(`beat:${name}`);
-    if (c && !beat) bad(`куска «${name}» нет в сцене «${cur.title}»`);
-    if (beat?.show === true) bad(`кусок «${name}» сцены «${cur.title}» — только для показа (show: true)`);
+    if (c && !beat) bad(`куска «${name}» нет в сцене «${cur.folder}»`);
+    if (beat?.show === true) bad(`кусок «${name}» сцены «${cur.folder}» — только для показа (show: true)`);
     // a beat not opening the scene: after one of its `after`, or a cut-beat — the next in the table after the one
     // before it, or the one beat_next named (game.md §4)
     if (!opening && cur.last && beat && !beat.after.includes(cur.last)) {
       const next = cur.scene.order[cur.scene.order.indexOf(cur.last) + 1];
-      if (name !== next && cur.next !== name) put(cuts, here, `«${cur.title}»: ${cur.last} → ${name} — склейка не по таблице и без beat_next`);
+      if (name !== next && cur.next !== name) put(cuts, here, `«${cur.folder}»: ${cur.last} → ${name} — склейка не по таблице и без beat_next`);
     }
     // beat_next names the beat that truly comes next
-    if (cur.next && cur.next !== name && !opening) bad(`beat_next «${cur.next}», а следующим играется «${name}» (сцена «${cur.title}»)`);
+    if (cur.next && cur.next !== name && !opening) bad(`beat_next «${cur.next}», а следующим играется «${name}» (сцена «${cur.folder}»)`);
     cur.next = null;
     for (const w of waits.filter(w => w.beat === name)) moment(w.text, 'g.told');
     waits = waits.filter(w => w.beat !== name);
@@ -317,26 +321,26 @@ function watched(g, j, ch, here, events, seen) {
   });
   const w = Object.create(g);
   Object.assign(w, {
-    async scene(title, st = {}, how) {
-      const scene = WORLD.get(title), party = carry(title, facts(g.state));
-      if (!party) bad(`g.scene «${title}»: такой сцены нет в SCENES`);
-      events.push(['scene', title]);
+    async scene(folder, st = {}, how) {
+      const scene = WORLD.get(folder), party = carry(folder, facts(g.state));
+      if (!party) bad(`g.scene «${folder}»: такой сцены нет в SCENES`);
+      events.push(['scene', folder]);
       if (scene && party) {
-        cur = { title, scene, last: null, opening: typeof st.beat === 'string' ? st.beat : null, next: null };
+        cur = { folder, scene, last: null, opening: typeof st.beat === 'string' ? st.beat : null, next: null };
         const carried = {};
         for (const k in party) {
           scene.named.add(`party:${k}`);
-          if (!(k in scene.states)) bad(`ключа партии «${k}» нет в states сцены «${title}»`);
-          if (scene.contract && !(k in scene.contract.party)) bad(`ключа партии «${k}» нет в party сцены «${title}»`);
+          if (!(k in scene.states)) bad(`ключа партии «${k}» нет в states сцены «${folder}»`);
+          if (scene.contract && !(k in scene.contract.party)) bad(`ключа партии «${k}» нет в party сцены «${folder}»`);
           carried[k] = party[k];
         }
-        (seen.opened[title] ??= []).push({ ...carried, ...st });
+        (seen.opened[folder] ??= []).push({ ...carried, ...st });
         // (a key the step itself opens the scene with: in states)
         for (const k in st) if (k !== 'beat') { key(k, 'g.scene', st[k]); scene.named.add(`party:${k}`); }
         if (cur.opening) begins(cur.opening, true);
-        else bad(`сцена «${title}» открыта без куска`);
+        else bad(`сцена «${folder}» открыта без куска`);
       } else if (!scene) cur = null;
-      return g.scene(title, st, how); // (a scene the world lacks: the step breaks there — said)
+      return g.scene(folder, st, how); // (a scene the world lacks: the step breaks there — said)
     },
     beat(name, how) {
       if (shown(`g.beat «${name}»`)) {
@@ -363,19 +367,19 @@ function watched(g, j, ch, here, events, seen) {
       key(k, 'g.set', value);
       if (k === 'beat_next' && cur) {
         cur.next = value;
-        if (cur.scene.contract && !(value in cur.scene.contract.beats)) bad(`beat_next «${value}»: такого куска нет в сцене «${cur.title}»`);
+        if (cur.scene.contract && !(value in cur.scene.contract.beats)) bad(`beat_next «${value}»: такого куска нет в сцене «${cur.folder}»`);
       }
-      if (cur) (seen.set[cur.title] ??= {})[k] = value;
+      if (cur) (seen.set[cur.folder] ??= {})[k] = value;
       return g.set(k, value, seconds);
     },
     get(k) { key(k, 'g.get'); return g.get(k); },
-    move(k, value, seconds, ease) { key(k, 'g.move', value); if (cur) (seen.set[cur.title] ??= {})[k] = value; return g.move(k, value, seconds, ease); },
+    move(k, value, seconds, ease) { key(k, 'g.move', value); if (cur) (seen.set[cur.folder] ??= {})[k] = value; return g.move(k, value, seconds, ease); },
     when(k, test, ms) { key(k, 'g.when'); return g.when(k, test, ms); },
     watch(k, fn) { key(k, 'g.watch'); return g.watch(k, fn); },
     arrived(who, ms) { if (shown(`g.arrived «${who}»`)) element(who, 'g.arrived'); return g.arrived(who, ms); },
     say(who, text, at = who) {
       const what = `реплика «${text}»`;
-      if (!(who in PEOPLE)) bad(`${what}: говорящего «${who}» нет в PEOPLE`);
+      if (!(who in PEOPLE)) bad(`${what}: говорящего «${who}» нет в people.json`);
       if (typeof text !== 'string' || typeof who !== 'string') bad(`${what}: не строка`);
       const n = LINE.get(`${who}\n${text}`);
       if (!n) {
@@ -421,7 +425,7 @@ function watched(g, j, ch, here, events, seen) {
       events.push(['play', m.name, minigame.about ?? 0]);
       seen.played.add(m.name);
       if (shown(what)) {
-        if (cur.title !== SCENES[T.scene]) bad(`${what} идёт в сцене «${cur.title}», в §7 — «${SCENES[T.scene]}»`);
+        if (cur.folder !== SCENES[T.scene]) bad(`${what} идёт в сцене «${cur.folder}», в §7 — «${SCENES[T.scene]}»`);
         else {
           for (const k of T.keys) key(k, what);
           for (const k of T.listens ?? []) key(k, what);
@@ -455,7 +459,7 @@ function watched(g, j, ch, here, events, seen) {
 
 // --- the logic of the play (game.md §11): each a name and the sides that must all be true or all false
 const said = (s, n) => s.lines.has(n);
-const opened = (s, title, beat) => (s.opened[title] ?? []).filter(o => !beat || o.beat === beat).at(-1);
+const opened = (s, folder, beat) => (s.opened[folder] ?? []).filter(o => !beat || o.beat === beat).at(-1);
 const LOGIC = [
   ['Р102 «Возьми. Она — старшему»', (f, s) => [f.train === 'go' && f.boxHand, said(s, 102)]],
   ['Р106 «Теперь возьмёшь?»', (f, s) => [f.train === 'stay' && f.told === 'self' && f.boxWhere === 'cupboard', said(s, 106)]],
@@ -577,7 +581,7 @@ say(`\n== Склейки внутри сцены не по таблице и б�
 for (const [text, set] of cuts) say(`${text}${met(set)}`);
 
 say('\n== В контрактах сцен есть, ни одна партия не назвала ==');
-for (const [title, scene] of WORLD) {
+for (const [folder, scene] of WORLD) {
   const c = scene.contract;
   if (!c) continue;
   const left = [
@@ -586,7 +590,7 @@ for (const [title, scene] of WORLD) {
     ...Object.keys(c.party).filter(k => !scene.named.has(`party:${k}`)).map(k => `ключ партии ${k}`),
     ...[...new Set([...c.points, ...c.offers])].filter(ref => !scene.named.has(`ref:${ref}`)).map(ref => `точка ${ref}`),
   ];
-  say(`${title}: ${left.join('; ') || '—'}`);
+  say(`${folder}: ${left.join('; ') || '—'}`);
 }
 
 const never = LINES.filter(([n]) => !plays.some(p => p.lines.has(n)));
