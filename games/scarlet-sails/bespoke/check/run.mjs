@@ -54,9 +54,9 @@ const MINIGAMES = {
   look: { scene: 'home', keys: ['gaze'], points: ['book#book', 'window#window'], opts: ['heavy'], result: ['tries', 'seconds'] },
   hand: { scene: 'shore', keys: ['reach'], points: ['hands#her', 'hands#his'], opts: ['onReach'], result: ['seconds', 'lets'] },
 };
-// what game.js itself takes of the Far Sea (it is not run here): its key, the points its trees stand at (map.js) —
+// what game.js itself takes of the Far Sea (it is not run here): its keys, the points its trees stand at (map.js) —
 // each chapter's and the author's sign's
-const MAP = { keys: ['shown'], points: [...Array.from({ length: 7 }, (_, i) => `c${i}`), 'author'] };
+const MAP = { keys: ['shown', 'come'], points: [...Array.from({ length: 7 }, (_, i) => `c${i}`), 'author'] };
 // the results put in (game.md §11): the outcomes a chapter branches on
 const CLEAN = { shrouds: { slips: 0 }, ring: { on: true } };
 const OTHER = [{ shrouds: { slips: 1 } }, { ring: { on: false } }];
