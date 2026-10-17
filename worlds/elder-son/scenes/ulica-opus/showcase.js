@@ -1,6 +1,6 @@
 // Outside the game: down from the platform to the five lit windows; the camera back to the fence; a knock at the
-// middle window — a figure, and it goes dark; the others go out by themselves; on to the dark corner; Сарафанов at
-// Макарская's window and Васенька slipping home; the porch, the door, inside; later — Сарафанов under his own window.
+// middle window — a figure, and it goes dark; the others go out by themselves; on to the dark corner; Sarafanov at
+// Makarskaya's window and Vasenka slipping home; the porch, the door, inside; later — Sarafanov under his own window.
 const L = scene.lib;
 return [
   { name: 'walk', run: async s => { await L.film.walk(s, null); } },

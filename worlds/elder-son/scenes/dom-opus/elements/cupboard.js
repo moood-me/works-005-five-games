@@ -1,4 +1,4 @@
-// The cupboard (буфет) in the room: dark varnished wood, glass doors above with the crockery, the shelf where the
+// The cupboard in the room: dark varnished wood, glass doors above with the crockery, the shelf where the
 // snuffbox stands (`box_at` shelf). Its points: shelf, box. Metres; 1.1 wide, 1.95 high.
 const w = 1.1, h = 1.95, shelf = 1.32;
 g.fillStyle = '#4a3020';

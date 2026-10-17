@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Elder Son","translation":"Старший сын","where":"world.json title"},
+  {"text":"A game after Vampilov's play. The cold outside, a warm window within.","translation":"Игра по пьесе Вампилова. Холод снаружи, тёплое окно внутри.","where":"world.json description"}
+]}

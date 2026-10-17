@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Дом Сарафановых (Opus)",
-  "caption": "Кухня под оранжевым абажуром. Ночь.",
+  "title": "The Sarafanovs' Home (Opus)",
+  "caption": "The kitchen under an orange lampshade. Night.",
   "horizon": 0.52,
   "camera": {
     "mode": "roam",
@@ -130,7 +130,7 @@
         0,
         1
       ],
-      "means": "время за окном: 0.9 ночь"
+      "means": "the time beyond the window: 0.9 night"
     },
     "beat": {
       "values": [
@@ -145,25 +145,25 @@
         "box_kept",
         "box_back"
       ],
-      "means": "кусок фильма: игра ставит имя — кусок играется с начала"
+      "means": "the film's beat: the game sets a name — the beat plays from its beginning"
     },
     "beat_next": {
       "type": "string",
-      "means": "какой кусок будет следующим: сцена готовит его первый кадр"
+      "means": "which beat comes next: the scene makes its first frame ready"
     },
     "warm": {
       "range": [
         0,
         1
       ],
-      "means": "ключ партии: лампа под абажуром — 0.6 + 0.4·warm (скрипт ставит lamp)"
+      "means": "a key of the play: the lamp under the lampshade — 0.6 + 0.4·warm (the script sets lamp)"
     },
     "frost": {
       "range": [
         0,
         1
       ],
-      "means": "ключ партии: иней на окне, от углов к середине"
+      "means": "a key of the play: frost on the window, from the corners to the middle"
     },
     "lamp": {
       "range": [
@@ -171,7 +171,7 @@
         1
       ],
       "smooth": true,
-      "means": "лампа под абажуром — ставит скрипт по warm"
+      "means": "the lamp under the lampshade — the script sets it by warm"
     },
     "door": {
       "range": [
@@ -179,11 +179,11 @@
         1
       ],
       "smooth": true,
-      "means": "входная дверь: 0 закрыта … 1 открыта внутрь"
+      "means": "the front door: 0 shut … 1 open inward"
     },
     "door_f": {
       "type": "number",
-      "means": "поворот двери, градусы — ставит скрипт по door"
+      "means": "the door's turn, degrees — the script sets it by door"
     },
     "stove_door": {
       "range": [
@@ -191,7 +191,7 @@
         1
       ],
       "smooth": true,
-      "means": "печная дверца: 0 закрыта … 1 открыта, огонь виден"
+      "means": "the stove door: 0 shut … 1 open, the fire seen"
     },
     "box_at": {
       "values": [
@@ -199,14 +199,14 @@
         "none",
         "table"
       ],
-      "means": "табакерка: на полке буфета · ни там ни там (в руке) · на клеёнке"
+      "means": "the snuffbox: on the cupboard's shelf · neither there nor there (in a hand) · on the oilcloth"
     },
     "coat_b": {
       "values": [
         "none",
         "hook"
       ],
-      "means": "пальто Бусыгина: на нём · на крючке у двери (cot, arm, chair этой версии сцены нет)"
+      "means": "Busygin's coat: on him · on the hook by the door (cot, arm, chair are not in this version of the scene)"
     },
     "rucksack": {
       "values": [
@@ -214,57 +214,57 @@
         "chair",
         "door"
       ],
-      "means": "рюкзак Васеньки: нет · у его стула (door — у двери: в этой версии как chair нет)"
+      "means": "Vasenka's rucksack: none · by his chair (door — by the door: in this version as chair, none)"
     },
     "hat_on_stool": {
       "values": [
         0,
         1
       ],
-      "means": "шапка Сарафанова на табурете у двери (ставит кусок)"
+      "means": "Sarafanov's hat on the stool by the door (a beat sets it)"
     },
     "busygin_a": {
       "type": "number",
-      "means": "где busygin: метры вправо"
+      "means": "where busygin is: metres to the right"
     },
     "busygin_d": {
       "type": "number",
-      "means": "где busygin: метры вглубь"
+      "means": "where busygin is: metres inward"
     },
     "silva_a": {
       "type": "number",
-      "means": "где silva: метры вправо"
+      "means": "where silva is: metres to the right"
     },
     "silva_d": {
       "type": "number",
-      "means": "где silva: метры вглубь"
+      "means": "where silva is: metres inward"
     },
     "vasenka_a": {
       "type": "number",
-      "means": "где vasenka: метры вправо"
+      "means": "where vasenka is: metres to the right"
     },
     "vasenka_d": {
       "type": "number",
-      "means": "где vasenka: метры вглубь"
+      "means": "where vasenka is: metres inward"
     },
     "sarafanov_a": {
       "type": "number",
-      "means": "где sarafanov: метры вправо"
+      "means": "where sarafanov is: metres to the right"
     },
     "sarafanov_d": {
       "type": "number",
-      "means": "где sarafanov: метры вглубь"
+      "means": "where sarafanov is: metres inward"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true
     },
     {
       "id": "outside",
-      "name": "Огороды",
+      "name": "Vegetable plots",
       "across": -0.2,
       "distance": 30,
       "facing": 180,
@@ -278,7 +278,7 @@
     },
     {
       "id": "yard",
-      "name": "Снег",
+      "name": "Snow",
       "plane": true,
       "across": 0,
       "distance": 18,
@@ -288,7 +288,7 @@
     },
     {
       "id": "floor",
-      "name": "Пол",
+      "name": "Floor",
       "plane": true,
       "walk": true,
       "inside": true,
@@ -300,7 +300,7 @@
     },
     {
       "id": "ceiling",
-      "name": "Потолок",
+      "name": "Ceiling",
       "plane": true,
       "inside": true,
       "across": 2,
@@ -312,7 +312,7 @@
     },
     {
       "id": "k_back",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 0,
       "distance": 4,
@@ -327,7 +327,7 @@
     },
     {
       "id": "k_left",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": -2,
       "distance": 2,
@@ -342,7 +342,7 @@
     },
     {
       "id": "k_near_a",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": -0.625,
       "distance": 0,
@@ -357,7 +357,7 @@
     },
     {
       "id": "k_near_b",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 1.825,
       "distance": 0,
@@ -372,7 +372,7 @@
     },
     {
       "id": "k_near_top",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 1.2,
       "distance": 0,
@@ -388,7 +388,7 @@
     },
     {
       "id": "k_right_a",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 2,
       "distance": 1.25,
@@ -403,7 +403,7 @@
     },
     {
       "id": "k_right_b",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 2,
       "distance": 3.75,
@@ -418,7 +418,7 @@
     },
     {
       "id": "k_lintel",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 2,
       "distance": 3,
@@ -434,7 +434,7 @@
     },
     {
       "id": "r_back",
-      "name": "Комната",
+      "name": "Room",
       "inside": true,
       "across": 4,
       "distance": 4,
@@ -449,7 +449,7 @@
     },
     {
       "id": "r_right",
-      "name": "Комната",
+      "name": "Room",
       "inside": true,
       "across": 6,
       "distance": 2,
@@ -464,7 +464,7 @@
     },
     {
       "id": "r_near",
-      "name": "Комната",
+      "name": "Room",
       "inside": true,
       "across": 4,
       "distance": 0,
@@ -479,7 +479,7 @@
     },
     {
       "id": "hall",
-      "name": "Сени",
+      "name": "Passage",
       "inside": true,
       "across": 1.2,
       "distance": -1.6,
@@ -494,7 +494,7 @@
     },
     {
       "id": "window",
-      "name": "Окно",
+      "name": "Window",
       "inside": true,
       "across": -0.2,
       "distance": 3.985,
@@ -510,7 +510,7 @@
     },
     {
       "id": "door",
-      "name": "Дверь",
+      "name": "Door",
       "inside": true,
       "across": 1.65,
       "distance": 0.03,
@@ -528,7 +528,7 @@
     },
     {
       "id": "stove",
-      "name": "Печь",
+      "name": "Stove",
       "inside": true,
       "across": -1.25,
       "distance": 1.6,
@@ -543,7 +543,7 @@
     },
     {
       "id": "stove_side",
-      "name": "Печь",
+      "name": "Stove",
       "inside": true,
       "across": -1.625,
       "distance": 1,
@@ -558,7 +558,7 @@
     },
     {
       "id": "table",
-      "name": "Стол",
+      "name": "Table",
       "inside": true,
       "across": -0.2,
       "distance": 2.8000000000000003,
@@ -573,7 +573,7 @@
     },
     {
       "id": "table_top",
-      "name": "Стол",
+      "name": "Table",
       "plane": true,
       "inside": true,
       "across": -0.2,
@@ -588,7 +588,7 @@
     },
     {
       "id": "abajur",
-      "name": "Абажур",
+      "name": "Lampshade",
       "inside": true,
       "glows": true,
       "across": -0.2,
@@ -604,7 +604,7 @@
     },
     {
       "id": "chairs",
-      "name": "Стул",
+      "name": "Chair",
       "inside": true,
       "across": -1.4,
       "distance": 3.2,
@@ -630,7 +630,7 @@
     },
     {
       "id": "clock",
-      "name": "Часы",
+      "name": "Clock",
       "inside": true,
       "across": -1.35,
       "distance": 3.97,
@@ -646,7 +646,7 @@
     },
     {
       "id": "hook",
-      "name": "Вешалка",
+      "name": "Hooks",
       "inside": true,
       "across": 1.85,
       "distance": 0.03,
@@ -662,7 +662,7 @@
     },
     {
       "id": "stool",
-      "name": "Табурет",
+      "name": "Stool",
       "inside": true,
       "across": -0.35,
       "distance": 0.32,
@@ -677,7 +677,7 @@
     },
     {
       "id": "cupboard",
-      "name": "Буфет",
+      "name": "Cupboard",
       "inside": true,
       "across": 3.15,
       "distance": 3.82,
@@ -692,7 +692,7 @@
     },
     {
       "id": "sofa",
-      "name": "Диван",
+      "name": "Sofa",
       "inside": true,
       "across": 4.7,
       "distance": 3.55,
@@ -707,7 +707,7 @@
     },
     {
       "id": "rucksack",
-      "name": "Рюкзак",
+      "name": "Rucksack",
       "inside": true,
       "across": 1.33,
       "distance": 2.95,
@@ -722,7 +722,7 @@
     },
     {
       "id": "busygin",
-      "name": "Бусыгин",
+      "name": "Busygin",
       "inside": true,
       "person": {
         "cast": "cast",
@@ -739,7 +739,7 @@
     },
     {
       "id": "silva",
-      "name": "Сильва",
+      "name": "Silva",
       "inside": true,
       "person": {
         "cast": "cast",
@@ -756,7 +756,7 @@
     },
     {
       "id": "vasenka",
-      "name": "Васенька",
+      "name": "Vasenka",
       "inside": true,
       "person": {
         "cast": "cast",
@@ -773,7 +773,7 @@
     },
     {
       "id": "sarafanov",
-      "name": "Сарафанов",
+      "name": "Sarafanov",
       "inside": true,
       "person": {
         "cast": "cast",

@@ -1,9 +1,9 @@
 {
-  "title": "Старший сын",
-  "description": "Игра по пьесе Вампилова. Холод снаружи, тёплое окно внутри.",
+  "title": "The Elder Son",
+  "description": "A game after Vampilov's play. The cold outside, a warm window within.",
   "themes": {
-    "драма": 60,
-    "ночь": 40
+    "drama": 60,
+    "night": 40
   },
   "main": ""
 }

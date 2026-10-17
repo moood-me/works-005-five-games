@@ -42,7 +42,7 @@ function shade(hex, k) {
   return `rgb(${c[0]},${c[1]},${c[2]})`;
 }
 
-// a carved window frame (наличник) round an opening x0…x1, top…sill: white boards, a fretted crown, a ledge
+// a carved window frame round an opening x0…x1, top…sill: white boards, a fretted crown, a ledge
 function frame(g, x0, x1, top, sill) {
   const w = x1 - x0;
   g.fillStyle = '#dcd8cc';

@@ -1,4 +1,4 @@
-// Макарская's сени behind her door: plank walls in the warm light of a bulb inside (seen only with the door open). Metres.
+// Makarskaya's passage behind her door: plank walls in the warm light of a bulb inside (seen only with the door open). Metres.
 const gr = g.createRadialGradient(0.2, -1.9, 0.1, 0, -1.3, 1.5);
 gr.addColorStop(0, '#d9a868');
 gr.addColorStop(0.6, '#9a6a3e');

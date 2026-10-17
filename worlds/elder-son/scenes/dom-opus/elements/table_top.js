@@ -1,5 +1,5 @@
 // The table top from above: the checked oilcloth, the bread bin, two glasses in holders, the snuffbox when it is
-// there (`box_at` table). Its points: bread, glass (Бусыгин's), box. Metres; 1.6 × 0.8, y toward the near side.
+// there (`box_at` table). Its points: bread, glass (Busygin's), box. Metres; 1.6 × 0.8, y toward the near side.
 g.fillStyle = '#cdc8b6';
 g.fillRect(-0.8, -0.4, 1.6, 0.8);
 g.fillStyle = 'rgba(80,110,140,0.3)';

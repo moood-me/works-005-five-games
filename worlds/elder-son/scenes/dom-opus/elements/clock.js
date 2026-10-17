@@ -1,4 +1,4 @@
-// The ходики clock: a painted wooden face, the weights on their chains; the pendulum swings (a layer, animate).
+// The wall clock: a painted wooden face, the weights on their chains; the pendulum swings (a layer, animate).
 g.fillStyle = '#5b4632';
 g.fillRect(-0.14, -0.9, 0.28, 0.32);
 g.fillStyle = '#efe9da';

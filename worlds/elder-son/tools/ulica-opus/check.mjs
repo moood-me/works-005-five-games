@@ -1,4 +1,4 @@
-// Runs every beat of «Улица» (and the actions by key) in node with a stub director on a virtual clock, and prints at
+// Runs every beat of “The Street” (and the actions by key) in node with a stub director on a virtual clock, and prints at
 // each moment the scene tells: where the camera is, where each person here stands in the frame (x from the middle in
 // frame heights: the 4:3 edges ±0.667, 16:9 ±0.889; y from the top 0…1; size — height in frame heights) and where the
 // points the game offers are. Mistakes of code (a key misspelt, NaN, a walk to nowhere) show here, not on the GPU.

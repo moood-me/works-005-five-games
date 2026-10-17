@@ -1,4 +1,4 @@
-// The hall (сени) behind the door, lit by a bare bulb: plank walls in warm light, a bucket, felt boots. Seen only
+// The passage behind the door, lit by a bare bulb: plank walls in warm light, a bucket, felt boots. Seen only
 // through the open door. Metres.
 const gr = g.createRadialGradient(0, -1.9, 0.1, 0, -1.4, 1.6);
 gr.addColorStop(0, '#f6c98a');

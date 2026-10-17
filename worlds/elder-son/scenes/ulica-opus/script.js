@@ -1,5 +1,5 @@
 // The scene's mechanics: the windows' light and figures eased by their keys; the doors turned by theirs; the late
-// look by `hour`; the knock of «Окна» by `knock`; the film's beats by `beat` (one at a time — a new one replaces the
+// look by `hour`; the knock of “Windows” by `knock`; the film's beats by `beat` (one at a time — a new one replaces the
 // one playing), the next one's opening made ready by `beat_next`.
 const L = scene.lib;
 
@@ -50,7 +50,7 @@ scene.on('change', 'beat_next', name => {
 function play(name) {
   const run = L.film[name];
   if (!run) {
-    scene.warn(`«Улица» has no beat "${name}"`);
+    scene.warn(`“The Street” has no beat "${name}"`);
     return;
   }
   const shot = ready && ready.name === name ? ready.shot : null;

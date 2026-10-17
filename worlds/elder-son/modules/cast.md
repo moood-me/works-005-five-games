@@ -1,88 +1,89 @@
-# cast — люди «Старшего сына»
+# cast — the people of “The Elder Son”
 
-Фигуры из форм в стиле мира `zima`: из `shadow` (тонкое тело, кисти с пальцами), но голова крупнее (×1.3), шея
-короче, руки и ноги полнее — лицо читается в среднем плане. Краска `toned`: свет лампы, окна, фонаря ложится на
-лицо и грудь, со стороны тьмы — тень; **не силуэт**. Без линий. Лицо у всех — `simple` (глаза, брови, нос, рот),
-выражение — ключ `<id>_mood` (`neutral`, `smile`, `laugh`, `sad`, `angry`, `surprised`, `afraid`, `disgusted`,
-`thinking`, `tired`). У каждого своё: Сарафанов — морщины у глаз, седые брови (`f_sarafanov`); Нина — прямые брови
-(`f_nina`); Васенька — вихры на лоб (волосы `vihry`); Сильва — усики (`f_silva`); Кудимов — квадратный подбородок
-(`f_kudimov`); старуха в тулупе — морщины (`f_old`).
+Figures of shapes in the world's style `zima`: from `shadow` (a slender body, hands with fingers), but the head bigger
+(×1.3), the neck shorter, the arms and legs fuller — the face reads in a medium shot. The paint `toned`: the light of a
+lamp, a window, a street lamp falls on the face and chest, on the dark side a shadow; **not a silhouette**. No lines.
+Everyone's face is `simple` (eyes, brows, nose, mouth), the expression — the key `<id>_mood` (`neutral`, `smile`,
+`laugh`, `sad`, `angry`, `surprised`, `afraid`, `disgusted`, `thinking`, `tired`). Each has something of their own:
+Sarafanov — lines at the eyes, grey brows (`f_sarafanov`); Nina — straight brows (`f_nina`); Vasenka — tufts down on
+the forehead (the hair `vihry`); Silva — a thin moustache (`f_silva`); Kudimov — a square chin (`f_kudimov`); the old
+woman in the sheepskin — lines (`f_old`).
 
-В сцене: `"modules": ["cast"]`, у человека `"person": {"cast": "cast", "who": "nina"}`. Облик на время — ключ
-`<id>_wear` = **объект** облика (`scene.kit.cast.characters.sarafanov_home`), не имя. Часть в руках —
-`<id>_with: ["bucket"]` (свои части облика заменяются этим списком: у `sarafanov` есть `long_scarf` — с ведром пишите
-`["long_scarf", "bucket"]`); `null` — части облика.
+In a scene: `"modules": ["cast"]`, on a person `"person": {"cast": "cast", "who": "nina"}`. A look for a while — the
+key `<id>_wear` = the look's **object** (`scene.kit.cast.characters.sarafanov_home`), not its name. A part in the
+hands — `<id>_with: ["bucket"]` (the look's own parts are replaced by this list: `sarafanov` has `long_scarf` — with a
+bucket write `["long_scarf", "bucket"]`); `null` — the look's parts.
 
-## Облики (27)
+## Looks (27)
 
-| id | кто | как |
+| id | who | how |
 | --- | --- | --- |
-| `busygin` | Бусыгин | высокий (1.83 м), длинное тёмно-серое пальто, светлый шарф, без шапки |
-| `busygin_shirt` | он же дома | тёмный свитер, светлый воротник рубашки |
-| `silva` | Сильва | плотный, коричневое пальто с полосами клетки, шляпа набок, пёстрый (рыжий) шарф, усики |
-| `silva_shirt` | он же дома | пиджак, светлый воротник, без шляпы |
-| `silva_burnt` | он же после пожара | `silva` + обгоревший левый рукав (`burnt_sleeve`) |
-| `sarafanov` | Сарафанов | маленький (1.62 м), худой, старое тёмное пальто, длинный светлый шарф (`long_scarf`), меховая шапка |
-| `sarafanov_hat` | он же, входит | без шапки, шапка в правой руке (`hat_hand`) |
-| `sarafanov_nohat` | он же на платформе | пальто нараспашку поверх коричневой кофты, без шапки, шарф |
-| `sarafanov_home` | он же дома | коричневая вязаная кофта, воротник рубашки, седой |
-| `sarafanov_best` | он же в выходном | тёмный пиджак, белая рубашка, галстук (`tie`) |
-| `sarafanov_funeral` | он же на похоронах | чёрное пальто, шапка, светлый шарф, кларнет в опущенных руках (`clarinet_low`) |
-| `nina` | Нина | пальто с меховым воротником (`fur_collar`), без шапки, коса |
-| `nina_home` | она же дома | тёмное платье; платок на крыльце — `_with: ["shawl"]` |
-| `vasenka` | Васенька | долговязый, тонкий, телогрейка нараспашку (свитер виден), вихры |
-| `vasenka_home` | он же дома | серый свитер |
-| `kudimov` | Кудимов | шинель с двумя рядами пуговиц, ушанка со звездой, широкие плечи |
-| `kudimov_in` | он же в доме | гимнастёрка, ремень с пряжкой (`belt`), без шапки |
-| `makarskaya` | Макарская | красно-коричневое пальто, светлый платок, тёмные сапоги |
-| `neighbor1` | сосед | телогрейка, ушанка |
-| `neighbor2` | соседка | тулуп, платок |
-| `band1`, `band2`, `band3` | медные | чёрные пальто, шапки; труба / туба / барабан |
-| `mourner1…mourner4` | провожающие | тёмные пальто, платки; `mourner2` — старуха в тулупе |
+| `busygin` | Busygin | tall (1.83 m), a long dark grey coat, a light scarf, no hat |
+| `busygin_shirt` | he, at home | a dark sweater, a shirt's light collar |
+| `silva` | Silva | stocky, a brown coat with check stripes, a hat tipped aside, a gaudy (ginger) scarf, a thin moustache |
+| `silva_shirt` | he, at home | a jacket, a light collar, no hat |
+| `silva_burnt` | he, after the fire | `silva` + a scorched left sleeve (`burnt_sleeve`) |
+| `sarafanov` | Sarafanov | small (1.62 m), thin, an old dark coat, a long light scarf (`long_scarf`), a fur hat |
+| `sarafanov_hat` | he, coming in | no hat, the hat in his right hand (`hat_hand`) |
+| `sarafanov_nohat` | he, on the platform | the coat open over a brown cardigan, no hat, the scarf |
+| `sarafanov_home` | he, at home | a brown knitted cardigan, a shirt's collar, grey-haired |
+| `sarafanov_best` | he, in his best | a dark jacket, a white shirt, a tie (`tie`) |
+| `sarafanov_funeral` | he, at the funeral | a black coat, a hat, a light scarf, a clarinet in his lowered hands (`clarinet_low`) |
+| `nina` | Nina | a coat with a fur collar (`fur_collar`), no hat, a plait |
+| `nina_home` | she, at home | a dark dress; a shawl on the porch — `_with: ["shawl"]` |
+| `vasenka` | Vasenka | lanky, thin, a quilted jacket open (the sweater seen), tufts |
+| `vasenka_home` | he, at home | a grey sweater |
+| `kudimov` | Kudimov | a greatcoat with two rows of buttons, an ushanka with a star, broad shoulders |
+| `kudimov_in` | he, in the house | a tunic, a belt with a buckle (`belt`), no hat |
+| `makarskaya` | Makarskaya | a red-brown coat, a light headscarf, dark boots |
+| `neighbor1` | the neighbour | a quilted jacket, an ushanka |
+| `neighbor2` | the neighbour woman | a sheepskin coat, a headscarf |
+| `band1`, `band2`, `band3` | the brass | black coats, hats; trumpet / tuba / drum |
+| `mourner1…mourner4` | the mourners | dark coats, headscarves; `mourner2` — an old woman in a sheepskin |
 
-## Части (`<id>_with`), их точки
+## Parts (`<id>_with`), their points
 
-Точка части — `"<id>#<точка>"` (для `look`, `reach`, света, камеры).
+A part's point — `"<id>#<point>"` (for `look`, `reach`, the light, the camera).
 
-| часть | что | точка |
+| part | what | point |
 | --- | --- | --- |
-| `case` | футляр кларнета в правой руке | `case` |
-| `hat_hand` | шапка в правой руке | — |
-| `clarinet_low` | кларнет в обеих опущенных руках | `clarinet` |
-| `trumpet`, `tuba`, `drum` | медные | — |
-| `rucksack` | брезентовый рюкзак за спиной, лямки через плечи | `rucksack` |
-| `rucksack_lap` | рюкзак на коленях сидящего, между руками | `rucksack` |
-| `rucksack_lap_torn` | он же после `torn` — узел на лямке (вместо `rucksack_lap`) | `rucksack` |
-| `bucket` | пустое ведро в правой руке | `bucket` |
-| `bucket_full` | полное ведро (вода под краем) — вместо `bucket` | `bucket` |
-| `matches` | коробок в правом кулаке | `matches` |
-| `suitcase` | фибровый чемодан в **левой** руке | `suitcase` |
-| `coat_arm` | пальто через левое предплечье | `coat` |
-| `coat_over` | пальто Бусыгина на плечах (на Нине) | `coat` (на спине) |
-| `shawl` | вязаный платок на плечах | `shawl` (на спине) |
-| `glass_held` | гранёный стакан с чаем в подстаканнике, правая рука | `glass` |
-| `box_held` | табакерка в пальцах правой руки | `box` |
-| `kettle` | чайник в правой руке | `kettle` |
-| `sheet` | нотный лист в правой руке | `sheet` |
-| `burnt_sleeve` | обгоревший левый рукав | — |
-| `snow_back` | снег на спине и полах | — |
-| `long_scarf`, `fur_collar`, `collar`, `tie`, `belt` | части обликов | — |
+| `case` | the clarinet case in the right hand | `case` |
+| `hat_hand` | the hat in the right hand | — |
+| `clarinet_low` | the clarinet in both lowered hands | `clarinet` |
+| `trumpet`, `tuba`, `drum` | the brass | — |
+| `rucksack` | a canvas rucksack on the back, the straps over the shoulders | `rucksack` |
+| `rucksack_lap` | the rucksack on the lap of one seated, between the arms | `rucksack` |
+| `rucksack_lap_torn` | the same after `torn` — a knot on the strap (instead of `rucksack_lap`) | `rucksack` |
+| `bucket` | an empty bucket in the right hand | `bucket` |
+| `bucket_full` | a full bucket (water below the rim) — instead of `bucket` | `bucket` |
+| `matches` | a matchbox in the right fist | `matches` |
+| `suitcase` | a fibreboard suitcase in the **left** hand | `suitcase` |
+| `coat_arm` | a coat over the left forearm | `coat` |
+| `coat_over` | Busygin's coat on her shoulders (on Nina) | `coat` (on the back) |
+| `shawl` | a knitted shawl on the shoulders | `shawl` (on the back) |
+| `glass_held` | a faceted glass of tea in a holder, the right hand | `glass` |
+| `box_held` | the snuffbox in the fingers of the right hand | `box` |
+| `kettle` | a kettle in the right hand | `kettle` |
+| `sheet` | a sheet of music in the right hand | `sheet` |
+| `burnt_sleeve` | a scorched left sleeve | — |
+| `snow_back` | snow on the back and the skirts | — |
+| `long_scarf`, `fur_collar`, `collar`, `tie`, `belt` | parts of looks | — |
 
-## Движения (`cast.data.json`, `motions`)
+## Motions (`cast.data.json`, `motions`)
 
-Положены `put_motion`. Были: `sit_down`, `seated` (сидит за столом, руки на столе), `rise`, `pick_up`, `put_down`,
-`hide_back`, `reach_put`, `hug`, `warm_hands` (трёт руки у груди), `knock`.
+Put by `put_motion`. There were: `sit_down`, `seated` (sits at the table, hands on the table), `rise`, `pick_up`,
+`put_down`, `hide_back`, `reach_put`, `hug`, `warm_hands` (rubs the hands at the chest), `knock`.
 
-Добавлены 2026-10-15 (ветка `ss/people-motions`, сценами ещё не проверены; работа остановлена): `run`, `tiptoe`,
+Added 2026-10-15 (the branch `ss/people-motions`, not yet checked by the scenes; the work stopped): `run`, `tiptoe`,
 `careful`, `march_walk`, `carry_walk`, `seated_bag`, `stand_bag`, `lie`, `lie_side`, `sit_up`, `bend_reach`, `cold`,
 `wave`, `toast`, `look_watch`, `take_shelf`, `put_shelf`, `turn_glass`, `put_heavy`, `point`, `lean`, `look_back`,
 `falter`, `fall_sit`, `crouch`, `crouch_rise`, `dip`, `throw_bucket`, `give`, `take` (`give`, `take`, `cold`,
-`carry_walk` — готовые, взяты повторно).
+`carry_walk` — ready ones, taken again).
 
-- Нет: `rise_ground` — сделан моделью, не положен (ключ `97f8cf866e44ebbb5a265ee1f4ff99cedf634047`: с земли встаёт,
-  в конце согнут вперёд).
-- Слабые дубли: `lie_side` — уже на боку, без поворота; `throw_bucket` — выплеска не видно; `put_heavy` — кончается
-  низко в наклоне; `sit_up` — садится наполовину; `lean` — наклон с рукой у головы; `march_walk` — обычный быстрый шаг;
-  `carry_walk` — походка с чемоданом; `tiptoe` — крадётся пригнувшись; `run` — петля 2 с со скачком на стыке.
-- Где кончаются: `wave` — рука ещё поднята; `bend_reach`, `look_back` — ещё согнут / обернулся; `falter` начинается
-  уже согнутым.
+- Missing: `rise_ground` — made by the model, not put (key `97f8cf866e44ebbb5a265ee1f4ff99cedf634047`: gets up from
+  the ground, at the end bent forward).
+- Weak doubles: `lie_side` — already on its side, no turn; `throw_bucket` — the splash not seen; `put_heavy` — ends low
+  in a bend; `sit_up` — sits up halfway; `lean` — a lean with a hand at the head; `march_walk` — an ordinary quick
+  step; `carry_walk` — a gait with a suitcase; `tiptoe` — creeps crouching; `run` — a 2 s loop with a jump at the join.
+- Where they end: `wave` — the arm still raised; `bend_reach`, `look_back` — still bent / turned round; `falter` begins
+  already bent.

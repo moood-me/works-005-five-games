@@ -1,4 +1,4 @@
-// «Улица»: where everything stands (metres: across to the right along the street, distance away from the near side),
+// “The Street”: where everything stands (metres: across to the right along the street, distance away from the near side),
 // the people's marks, the film in beats (film(scene): the world's module `beats` plays it), the actions the mini-games
 // ask for by key (knock, vyodra, run / look_back). Shared by the paintings, the script and the showcase; the generator
 // (tools/ulica-opus/gen.mjs) writes scene.json from it.
@@ -7,17 +7,17 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const span = (v, a, b) => clamp((v - a) / (b - a), 0, 1);
 
 // ── the place ──
-// the far side: three houses with the five windows of «Окна»; Сарафановы; Макарская. Each house a long log wall
+// the far side: three houses with the five windows of “Windows”; the Sarafanovs'; Makarskaya. Each house a long log wall
 // facing the street (its front at `d`), `w` wide, `deep` back; windows by x from the house's middle.
 const SILL = 1.15;
 const HOUSES = [
   { id: 'h1', a: -11, d: 14, w: 9, deep: 6, color: '#6f5844', windows: [{ x: -3, w: 1.0, h: 1.1, sill: SILL, pane: 'win1' }, { x: 3, w: 1.0, h: 1.1, sill: SILL, pane: 'win2' }] },
   { id: 'h2', a: 0.5, d: 14, w: 9.4, deep: 6, color: '#665443', windows: [{ x: -2.5, w: 1.0, h: 1.1, sill: SILL, pane: 'win3' }, { x: 3.5, w: 1.0, h: 1.1, sill: SILL, pane: 'win4' }] },
-  // the neighbours' house nearest Сарафановы: its door (the two with buckets come out of it in IV)
+  // the neighbours' house nearest the Sarafanovs': its door (the two with buckets come out of it in IV)
   { id: 'h3', a: 10.5, d: 14, w: 7, deep: 6, color: '#735b47', windows: [{ x: -0.5, w: 1.0, h: 1.1, sill: SILL, pane: 'win5' }], door: { x: 2.3, w: 0.9, h: 1.95 } },
-  // Сарафановы: the room's window (dark), the kitchen's (cut through: the kitchen is behind it), the door
+  // the Sarafanovs': the room's window (dark), the kitchen's (cut through: the kitchen is behind it), the door
   { id: 'sar', a: 21.5, d: 12, w: 10, deep: 7, color: '#6a5240', windows: [{ x: -2.9, w: 1.0, h: 1.1, sill: SILL, pane: 'sar_room' }, { x: 0.5, w: 1.2, h: 1.0, sill: 1.1 }], door: { x: 3.7, w: 0.9, h: 1.95 } },
-  // Макарская: her window, her door (closed: its leaf is mak_door)
+  // Makarskaya: her window, her door (closed: its leaf is mak_door)
   { id: 'mak', a: 34.5, d: 13, w: 8, deep: 6, color: '#70573f', windows: [{ x: -2.5, w: 1.0, h: 1.1, sill: SILL, pane: 'mak_window' }, { x: 0.6, w: 1.0, h: 1.1, sill: SILL, pane: 'mak_room' }], door: { x: 2.4, w: 0.9, h: 1.95 } },
 ];
 const PLINTH = 0.45;      // the floors inside are this high over the snow
@@ -43,17 +43,17 @@ const LAMP = [21.65, 13.65, PLINTH + 1.85];
 const STOVE = { a: 20.55, d: 14.35 };
 // the porch before the door: a landing at the floor's height, its steps down to the snow
 const PORCH = { a0: 24.4, a1: 26.0, d0: 10.95, d1: 12, steps: 10.2 };
-// the front garden's fence before Сарафановы, its gate; the fence between the yards (its wicket); the near fence
+// the front garden's fence before the Sarafanovs', its gate; the fence between the yards (its wicket); the near fence
 const SAR_FENCE = { a: 15.6, d: 9.4, len: 8.2, gate: [4.0, 5.2] };
 const GATE_LAMP = [19.3, 9.25];
 const SIDE_FENCE = { a: 27.4, d: 9.6, len: 5, gate: [0.6, 1.4] };
 const STREET_LAMP = [-5.3, 13.4];
 const SHED = { a: 28.9, d: 11.2, w: 2.6, h: 2.4, deep: 2 };
-// the barrel by Сарафановы's fence, at its right end (four metres of snow from the shed: «Вёдра»)
+// the barrel by the Sarafanovs' fence, at its right end (four metres of snow from the shed: “Buckets”)
 const BARREL = [23.2, 8.85];
 const BENCH = [21.9, 11.55];
 const WOODPILE = [34.0, 12.45];
-// the run of «Бегом»: from Сарафановы's gate along the street to the path up to the platform (≈ 65 m)
+// the run of “Running”: from the Sarafanovs' gate along the street to the path up to the platform (≈ 65 m)
 const RUN = [[20.3, 8.35], [16.0, 6.2], [-34.0, 5.6], [-44.6, 7.4]];
 const RUN_LEN = (() => { let l = 0; for (let i = 1; i < RUN.length; i++) l += Math.hypot(RUN[i][0] - RUN[i - 1][0], RUN[i][1] - RUN[i - 1][1]); return l; })();
 // where along the run (0…1) a point is, and the point at u
@@ -92,29 +92,29 @@ function runWay(u0, u1) {
 
 // ── the people's marks ──
 const SPOT = {
-  // «Окна»: in the street before the windows, under the street lamp's light
+  // “Windows”: in the street before the windows, under the street lamp's light
   windows: { busygin: [-2.5, 9.3], silva: [-1.5, 10.4] },
-  // the hiding place: by Макарская's fence, in the shed's shadow — her window 6 m on, Сарафановы's door 4 m back
+  // the hiding place: by Makarskaya's fence, in the shed's shadow — her window 6 m on, the Sarafanovs' door 4 m back
   corner: { busygin: [27.95, 8.55], silva: [28.85, 8.25] },
-  // the porch: Сильва up on the landing, left of the door; Бусыгин below it, left of the steps
+  // the porch: Silva up on the landing, left of the door; Busygin below it, left of the steps
   porch: { busygin: [24.0, 10.25], silva: [24.75, 11.5], vasenka: [25.2, 12.35] },
-  // Сарафанов under Макарская's window; under his own kitchen window
+  // Sarafanov under Makarskaya's window; under his own kitchen window
   mak: [32.0, 12.4],
   under: [20.95, 10.8],
-  // the gate: Нина and Кудимов under its lamp, face to face
+  // the gate: Nina and Kudimov under its lamp, face to face
   gate: { nina: [19.55, 8.55], kudimov: [20.45, 8.6] },
-  // «Вёдра»: at the barrel (filling), before the shed (throwing); the neighbours' throwing places; Makarskaya by her shed
+  // “Buckets”: at the barrel (filling), before the shed (throwing); the neighbours' throwing places; Makarskaya by her shed
   barrel: [24.0, 8.55],
   throw: [29.0, 9.75],
   nb1: [27.75, 9.6], nb2: [30.25, 9.55],
-  // after the fire: the half-ring at the shed; Васенька aside by Сарафановы's fence; Бусыгин near him
+  // after the fire: the half-ring at the shed; Vasenka aside by the Sarafanovs' fence; Busygin near him
   ring: { makarskaya: [30.1, 9.0], silva: [28.9, 8.4], neighbor1: [27.9, 9.4], neighbor2: [31.1, 9.6] },
   aside: { vasenka: [22.6, 8.7], busygin: [24.2, 8.5] },
-  // the bench under the kitchen window: Бусыгин (left as seen from the street), Нина (right, under the window)
+  // the bench under the kitchen window: Busygin (left as seen from the street), Nina (right, under the window)
   bench: { busygin: [21.45, 11.6], nina: [22.35, 11.6] },
 };
 const BENCH_Y = 0.47;
-// before a window of «Окна», close enough to knock
+// before a window of “Windows”, close enough to knock
 const knockSpot = n => { const w = winOf(`win${n}`); return [w.a + 0.05, w.d - 0.6]; };
 // the kitchen's places (across, distance, turn): at the table — the far side (facing the window), its ends; at the
 // stove; at the window (facing the glass)
@@ -135,9 +135,9 @@ const CAM = {
   wide: cam(-2.1, -7.2, 0, 0.3),
   last0: cam(4, -0.5, 4),
   last1: cam(24.0, 1.5, 6),
-  // the corner from the near side: the two in profile, the kitchen window on the left, Макарская's on the right
+  // the corner from the near side: the two in profile, the kitchen window on the left, Makarskaya's on the right
   corner: cam(26.9, 2.6, 0, -0.1),
-  // the same corner from just behind them: Макарская's window ahead, Сарафановы's door at the left
+  // the same corner from just behind them: Makarskaya's window ahead, the Sarafanovs' door at the left
   behind: cam(27.0, 6.9, 22, 0.1),
   porch: cam(29.3, 9.0, -64, -0.1),
   dark: cam(20.6, 7.4, 34, -0.1),
@@ -208,7 +208,7 @@ const FROM = {
       ...AT('vasenka', [24.75, 11.45], 90, { vasenka_mood: 'sad', vasenka_look: [MAK_DOOR.a, MAK_DOOR.d, 1.5] }),
       ...AT('silva', THRESHOLD, 180, { silva_here: false }) };
   },
-  // the fire put out: the shed by `shed_left` (its painting), steam; the people in a half-ring; Васенька aside
+  // the fire put out: the shed by `shed_left` (its painting), steam; the people in a half-ring; Vasenka aside
   after_fire: () => ({ ...base(0.9, 0), ...CAM.ring, steam: 1, shed_burnt: 1, mak_window: 1, door: 1, porch_light: 1,
     ...KAT('k1', K.far_r, 'sarafanov_home'), ...KAT('k2', K.far_l, 'nina_home'), ...KAT('k3', K.end_w, 'kudimov_in'),
     ...AT('makarskaya', SPOT.ring.makarskaya, 200, { makarskaya_look: 'shed', makarskaya_mood: 'sad' }),
@@ -216,7 +216,7 @@ const FROM = {
     ...AT('neighbor1', SPOT.ring.neighbor1, 60, { neighbor1_look: 'shed' }), ...AT('neighbor2', SPOT.ring.neighbor2, 300, { neighbor2_look: 'shed' }),
     ...AT('busygin', SPOT.aside.busygin, 60, { busygin_wear: LOOK('busygin_shirt'), busygin_look: 'shed' }),
     ...AT('vasenka', SPOT.aside.vasenka, 70, { vasenka_with: ['matches'], vasenka_mood: 'afraid', vasenka_look: 'shed' }) }),
-  // the third night, the bench under the kitchen window; Нина on it in her shawl
+  // the third night, the bench under the kitchen window; Nina on it in her shawl
   porch_night: () => ({ ...base(0.95, 0.5), ...CAM.bench, porch_light: 1,
     ...AT('nina', SPOT.bench.nina, 180, { nina_wear: LOOK('nina_home'), nina_with: ['shawl'], nina_on: [SPOT.bench.nina[0], SPOT.bench.nina[1], BENCH_Y], nina_do: { motion: 'seated', loop: true }, nina_mood: 'thinking' }) }),
   run_out: () => ({ ...base(0.95, 0.4), ...CAM.run, porch_light: 1,
@@ -253,9 +253,9 @@ const END = {
     ...AT('busygin', SPOT.bench.busygin, 180, { busygin_wear: LOOK('busygin_shirt'), busygin_with: ['coat_arm'], busygin_on: [SPOT.bench.busygin[0], SPOT.bench.busygin[1], BENCH_Y], busygin_do: { motion: 'seated', loop: true }, busygin_mood: 'tired', busygin_look: 'nina' }) }),
 };
 END.knock_ready = () => ({ ...END.walk(), ...CAM.wide });
-// the second night's end: Васенька alone on the dark porch, close; Макарская's door shut on the two
+// the second night's end: Vasenka alone on the dark porch, close; Makarskaya's door shut on the two
 END.evening = () => ({ ...FROM.evening(), ...CAM.ev3, silva_here: false, makarskaya_here: false });
-// the fire's opening: later the same night, the yard from the street (Васенька gone from the porch)
+// the fire's opening: later the same night, the yard from the street (Vasenka gone from the porch)
 const FIRE_OPEN = () => ({ ...END.evening(), ...CAM.fire, vasenka_here: false, vasenka_mood: null, vasenka_look: null });
 END.shawl = () => ({ ...END.porch_night() });
 
@@ -264,7 +264,7 @@ function film(scene) {
   // (the `from`s read the play's keys through this scene)
   FROM_SCENE.scene = scene;
   const F = name => () => FROM[name](), E = name => () => END[name]();
-  // the neighbours' buckets during «Вёдра» (a sequence of its own, stopped when the beat after begins)
+  // the neighbours' buckets during “Buckets” (a sequence of its own, stopped when the beat after begins)
   let crowd = null;
   const stopCrowd = () => { if (crowd) { crowd.cancel(); crowd = null; } };
 
@@ -293,7 +293,7 @@ function film(scene) {
       s.cut({ ...CAM.wide });
       await s.wait(2.2);
     } },
-    // the windows dark, the snow thicker; along the street to the corner by Макарская's fence, in the shed's shadow;
+    // the windows dark, the snow thicker; along the street to the corner by Makarskaya's fence, in the shed's shadow;
     // the side: both in profile toward her lit window, the kitchen window behind them
     last_window: { from: F('last_window'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva');
@@ -312,8 +312,8 @@ function film(scene) {
       s.tell('last_window:corner');
       await s.wait(3.5);
     } },
-    // from just behind them: Сарафанов comes out, knocks at her window, is answered, goes off along the street past
-    // them; then Васенька comes out from behind the shed and goes into the house
+    // from just behind them: Sarafanov comes out, knocks at her window, is answered, goes off along the street past
+    // them; then Vasenka comes out from behind the shed and goes into the house
     neighbor: { from: F('neighbor'), run: async s => {
       const sar = s.person('sarafanov'), vas = s.person('vasenka'), bus = s.person('busygin'), sil = s.person('silva');
       await s.wait(1.2);
@@ -335,7 +335,7 @@ function film(scene) {
       await s.wait(1.0);
       s.set('mak_window', 2);
       s.tell('neighbor:answer');
-      // Р09, Р10 (≈ 7 s): «Простите, ради бога» — a guilty smile
+      // L09, L10 (≈ 7 s): “Forgive me, for heaven's sake” — a guilty smile
       await s.wait(2.6);
       sar.mood('smile');
       await s.wait(4.6);
@@ -363,8 +363,8 @@ function film(scene) {
       sil.look([DOOR.a, DOOR.d, 1.4]);
       s.tell('neighbor:vasya');
     } },
-    // to the porch (Р11, Р12 on the way); Сильва knocks; the door opens, Васенька against the light; the camera at
-    // the porch's side, the two in three quarters; the pose for the choice: Васенька and the kitchen window
+    // to the porch (L11, L12 on the way); Silva knocks; the door opens, Vasenka against the light; the camera at
+    // the porch's side, the two in three quarters; the pose for the choice: Vasenka and the kitchen window
     porch: { after: 'neighbor', from: E('neighbor'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva'), vas = s.person('vasenka');
       bus.look(null);
@@ -395,8 +395,8 @@ function film(scene) {
       bus.look('vasenka');
       await s.wait(2.6);
     } },
-    // «Тут не гостиница»: he steps back, the door shuts, the porch light goes out; the two in the dark under the
-    // gate lamp's light, Бусыгин hugging himself; Сильва knocks again; the light, the door
+    // “This isn't a hotel”: he steps back, the door shuts, the porch light goes out; the two in the dark under the
+    // gate lamp's light, Busygin hugging himself; Silva knocks again; the light, the door
     shut: { after: 'porch', from: E('porch'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva'), vas = s.person('vasenka');
       const dark = s.shot({ ...CAM.dark });
@@ -433,7 +433,7 @@ function film(scene) {
       s.tell('shut:again');
       await s.wait(1.6);
     } },
-    // in: Васенька goes back inside, they after him; the door shuts; in the kitchen window their shapes take places
+    // in: Vasenka goes back inside, they after him; the door shuts; in the kitchen window their shapes take places
     in: { after: ['porch', 'shut'], from: E('porch'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva'), vas = s.person('vasenka');
       vas.look(null);
@@ -455,7 +455,7 @@ function film(scene) {
       );
       s.tell('in:inside');
     } },
-    // later, snow: Сарафанов comes back along the street and stops under his own window — strangers at his table; his
+    // later, snow: Sarafanov comes back along the street and stops under his own window — strangers at his table; his
     // back to us (he looks at them); he stands; to the porch, the door
     return: { from: F('return'), run: async s => {
       const sar = s.person('sarafanov');
@@ -471,7 +471,7 @@ function film(scene) {
       await s.move('door', 1, { over: 1.1, ease: 'out' });
       s.tell('return:door');
     } },
-    // the late night at the gate: Нина and Кудимов under its lamp in profile; his watch; he goes off left, she to the porch
+    // the late night at the gate: Nina and Kudimov under its lamp in profile; his watch; he goes off left, she to the porch
     gate: { from: F('gate'), run: async s => {
       const nina = s.person('nina'), kud = s.person('kudimov');
       await s.wait(1.8);
@@ -482,7 +482,7 @@ function film(scene) {
       await watch;
       kud.do('stand');
       kud.look('nina');
-      // Р26, Р27
+      // L26, L27
       await s.wait(4.2);
       kud.look(null);
       kud.gait('march_walk');
@@ -502,8 +502,8 @@ function film(scene) {
       nina.here(false);
       await s.move('door', 0, { over: 1.0 });
     } },
-    // the second night, three shots: the street from the windows; Сильва to Макарская's door, Васенька on the dark
-    // porch; Васенька close, her door shutting off the frame
+    // the second night, three shots: the street from the windows; Silva to Makarskaya's door, Vasenka on the dark
+    // porch; Vasenka close, her door shutting off the frame
     evening: { from: F('evening'), run: async s => {
       const sil = s.person('silva'), vas = s.person('vasenka'), mak = s.person('makarskaya');
       const two = s.shot({ ...CAM.ev2 });
@@ -538,12 +538,12 @@ function film(scene) {
       s.tell('evening:in');
       await s.wait(3);
     } },
-    // later: the shed's window orange, smoke; Макарская runs out — the cry; Сильва with his smoking sleeve; the
-    // neighbours with buckets; Бусыгин leaves the table and runs to the barrel. The pose for «Вёдра»
+    // later: the shed's window orange, smoke; Makarskaya runs out — the cry; Silva with his smoking sleeve; the
+    // neighbours with buckets; Busygin leaves the table and runs to the barrel. The pose for “Buckets”
     fire: { after: 'evening', from: FIRE_OPEN, run: async s => {
       stopCrowd();
       const mak = s.person('makarskaya'), sil = s.person('silva'), bus = s.person('busygin'), n1 = s.person('neighbor1'), n2 = s.person('neighbor2');
-      // (time has passed: Васенька is gone from the porch; the kitchen as it was)
+      // (time has passed: Vasenka is gone from the porch; the kitchen as it was)
       if (s.get('camera_x') !== CAM.fire.camera_x || s.get('camera_z') !== CAM.fire.camera_z) s.cut({ ...CAM.fire, vasenka_here: false, vasenka_mood: null, vasenka_look: null, silva_here: false, makarskaya_here: false, mak_door: 0, door: 0 });
       await s.move('fire', 0.6, { over: 3, ease: 'in' });
       s.set('makarskaya_a', MAK_DOOR.a); s.set('makarskaya_d', 13.4); s.set('makarskaya_turn', 180);
@@ -570,7 +570,7 @@ function film(scene) {
       n2.here(true);
       const w2 = n2.walk([[NB_DOOR.a + 0.3, 13.2], [17.5, 7.0], [26.0, 7.2], SPOT.nb2], { gait: 'run' });
       s.move('nb_door', 0, { over: 1.5 });
-      // Бусыгин leaves the table, out of the door, to the barrel
+      // Busygin leaves the table, out of the door, to the barrel
       s.person('k4').here(false);
       await s.wait(0.8);
       s.set('busygin_a', INSIDE[0]); s.set('busygin_d', INSIDE[1]); s.set('busygin_turn', 90);
@@ -591,8 +591,8 @@ function film(scene) {
       // the neighbours throw by themselves as long as it burns
       crowd = scene.sequence(async c => { await neighbours(c); }, { name: 'crowd' });
     } },
-    // the fire out: steam; the half-ring at the shed (Сильва angry: who?); Васенька aside, the matchbox in his fist;
-    // the pose for the choice: Васенька and Макарская
+    // the fire out: steam; the half-ring at the shed (Silva angry: who?); Vasenka aside, the matchbox in his fist;
+    // the pose for the choice: Vasenka and Makarskaya
     after_fire: { from: F('after_fire'), run: async s => {
       stopCrowd();
       const sil = s.person('silva'), vas = s.person('vasenka'), mak = s.person('makarskaya');
@@ -601,7 +601,7 @@ function film(scene) {
       await sil.turn(20);
       sil.look('neighbor1');
       s.tell('after_fire:who');
-      // Р84
+      // L84
       await s.wait(2.4);
       const close = s.shot({ ...CAM.vas });
       await s.wait(0.2);
@@ -616,7 +616,7 @@ function film(scene) {
       mak.look('silva');
       await s.wait(1.6);
     } },
-    // he takes it on himself: two steps toward the people; Сильва turns, points at him; Васенька's fist into his pocket
+    // he takes it on himself: two steps toward the people; Silva turns, points at him; Vasenka's fist into his pocket
     blame: { after: 'after_fire', from: E('after_fire'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva'), vas = s.person('vasenka');
       for (const [k, v] of Object.entries(CAM.blame)) if (v != null && k.startsWith('camera_') && k !== 'camera_target' && k !== 'camera_shot' && k !== 'camera_frame') s.move(k, v, { over: 3, ease: 'inOut' });
@@ -639,7 +639,7 @@ function film(scene) {
       vas.reach(null);
       await s.wait(2.6);
     } },
-    // he lets the boy say it himself: a hand on his shoulder; the two to Макарская; «Это я»; she goes in; Сарафанов
+    // he lets the boy say it himself: a hand on his shoulder; the two to Makarskaya; “It was me”; she goes in; Sarafanov
     // runs out onto his porch
     own_up: { after: 'after_fire', from: E('after_fire'), run: async s => {
       const bus = s.person('busygin'), vas = s.person('vasenka'), mak = s.person('makarskaya'), sar = s.person('sarafanov');
@@ -661,7 +661,7 @@ function film(scene) {
       mak.mood('neutral');
       bus.look('vasenka');
       s.tell('own_up:said');
-      // Р87, two seconds, Р88
+      // L87, two seconds, L88
       await s.wait(5.4);
       mak.look(null);
       const home = mak.walk([[31.6, 10.6], [35.4, 11.9], [MAK_DOOR.a, 12.4]]);
@@ -682,8 +682,8 @@ function film(scene) {
       s.tell('own_up:gone');
       await s.wait(1.4);
     } },
-    // the third night on the bench under the kitchen window: Нина in her shawl; he comes out, his coat over his arm,
-    // sits by her; both in profile, their faces in the window's light (Р115, Р57, Р89/Р90, Р91 over it)
+    // the third night on the bench under the kitchen window: Nina in her shawl; he comes out, his coat over his arm,
+    // sits by her; both in profile, their faces in the window's light (L115, L57, L89/L90, L91 over it)
     porch_night: { from: F('porch_night'), run: async s => {
       const bus = s.person('busygin'), nina = s.person('nina');
       const knows = scene.get('nina_is') === 'knows';
@@ -753,8 +753,8 @@ function film(scene) {
       }
       s.tell('porch_after:lean');
     } },
-    // the door flung open: he runs off the porch into the street (Сильва ahead, by `silva_door`); they stand at the
-    // gate facing left — the pose for «Бегом»
+    // the door flung open: he runs off the porch into the street (Silva ahead, by `silva_door`); they stand at the
+    // gate facing left — the pose for “Running”
     run_out: { from: F('run_out'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva');
       const two = Number(scene.get('silva_door') ?? 1) === 1;
@@ -817,7 +817,7 @@ async function follow(s, walk, to) {
 }
 
 // ── the actions the mini-games ask for by key ──
-// «Окна» (`knock`): N — to window N, knock; 0 — back to Сильва
+// “Windows” (`knock`): N — to window N, knock; 0 — back to Silva
 async function knock(s, n) {
   const bus = s.person('busygin');
   bus.look(null);
@@ -838,7 +838,7 @@ async function knock(s, n) {
   s.tell('knock:done');
 }
 const near = (s, id, p, tol = 0.35) => Math.hypot(Number(s.get(`${id}_a`)) - p[0], Number(s.get(`${id}_d`)) - p[1]) < tol;
-// «Вёдра» (`vyodra`): fill — to the barrel, a full bucket up (vyodra:full); throw — carried to the shed, thrown
+// “Buckets” (`vyodra`): fill — to the barrel, a full bucket up (vyodra:full); throw — carried to the shed, thrown
 // (vyodra:splash); none — the bucket set down on the snow, he stands where he stands
 async function vyodra(s, v) {
   const bus = s.person('busygin');

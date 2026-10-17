@@ -1,4 +1,4 @@
-// «Косогор»: the suburban cemetery on its slope at dusk — where everything stands (metres: across to the right along
+// “The Hillside”: the suburban cemetery on its slope at dusk — where everything stands (metres: across to the right along
 // the road, distance up the slope), the land's shape, the people's marks, the film's beats. Shared by the paintings,
 // the script, the showcase and the relief; the generator (tools/kosogor-opus/gen.mjs) writes scene.json from it.
 
@@ -35,13 +35,13 @@ function pathAt(u) {
 // the people's marks
 const SPOT = {
   nina: [-2.0, 6.15], busygin: [-1.1, 6.3],
-  behind: [-3.55, 6.25],               // Нина behind the birch, out of sight from the slope
+  behind: [-3.55, 6.25],               // Nina behind the birch, out of sight from the slope
   pillar: { nina: [5.75, 6.15], busygin: [6.45, 6.4] },   // in the shadow of the gate's left pillar
   top: [1.4, 24.8],                    // the head of the path
-  meet: [2.25, 24.1],                  // Бусыгин on the path a step below his father, facing him
+  meet: [2.25, 24.1],                  // Busygin on the path a step below his father, facing him
   caseAt: [0.4, 26.45],                // where the case lies on the snow by the grave, before him
 };
-// the funeral: the mourners round the grave on its near side, the brass in a row to its right, Сарафанов at the row's
+// the funeral: the mourners round the grave on its near side, the brass in a row to its right, Sarafanov at the row's
 // grave end; all with their backs to us
 const FUNERAL = {
   mourner1: [-2.5, 25.35, 20], mourner2: [-1.5, 25.0, 0], mourner3: [0.0, 25.2, 340], mourner4: [-3.4, 25.9, 30],
@@ -69,7 +69,7 @@ const FROM = {
 const END = {
   road: { ...FROM.road, ...CAM.march, ...AT('nina', SPOT.nina, 0), ...AT('busygin', SPOT.busygin, 8), nina_look: 'sarafanov', busygin_look: 'band2' },
 };
-// after `march`: the mourners and the brass gone over the crest, Сарафанов alone by the grave
+// after `march`: the mourners and the brass gone over the crest, Sarafanov alone by the grave
 const GONE = Object.assign({}, ...Object.keys(AWAY).map(id => ({ [`${id}_here`]: false, [`${id}_a`]: AWAY[id][0], [`${id}_d`]: AWAY[id][1] })));
 END.march = { ...END.road, ...GONE };
 // after `alone`: he stands at the head of the path with the case; the camera nearer the fence
@@ -91,7 +91,7 @@ async function follow(s, walk, cam) {
 const camTo = (s, cam, over, ease = 'inOut') => { for (const k of CAMKEYS) if (k in cam) s.move(k, cam[k], { over, ease }); };
 
 const film = {
-  // dusk; along the road from the left, Нина and Бусыгин; the people on the slope above; they stop at the fence by the
+  // dusk; along the road from the left, Nina and Busygin; the people on the slope above; they stop at the fence by the
   // birch
   async road(s, ready) {
     open(s, ready, FROM.road);

@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Косогор (Opus)",
-  "caption": "Кладбище на косогоре за посёлком. Сумерки.",
+  "title": "The Hillside (Opus)",
+  "caption": "The cemetery on the hillside beyond the settlement. Dusk.",
   "horizon": 0.62,
   "camera": {
     "mode": "roam",
@@ -117,7 +117,7 @@
         1
       ],
       "smooth": true,
-      "means": "время: 0.74 сумерки … 0.8 почти темно (скрипт ставит dusk)"
+      "means": "time: 0.74 dusk … 0.8 almost dark (the script sets dusk)"
     },
     "dusk": {
       "range": [
@@ -125,7 +125,7 @@
         1
       ],
       "smooth": true,
-      "means": "вес образа «темнеет» — ставит скрипт по hour"
+      "means": "the weight of the look “darkening” — the script sets it by hour"
     },
     "beat": {
       "values": [
@@ -136,109 +136,109 @@
         "meet",
         "hide"
       ],
-      "means": "кусок фильма: игра ставит имя — кусок играется с начала"
+      "means": "the film's beat: the game sets a name — the beat plays from its beginning"
     },
     "beat_next": {
       "type": "string",
-      "means": "какой кусок будет следующим: сцена готовит его первый кадр"
+      "means": "which beat comes next: the scene makes its first frame ready"
     },
     "case_down": {
       "values": [
         0,
         1
       ],
-      "means": "футляр кларнета лежит на снегу у могилы (1) или у Сарафанова в руке (0) — ставит кусок"
+      "means": "the clarinet case lies on the snow by the grave (1) or is in Sarafanov's hand (0) — a beat sets it"
     },
     "nina_a": {
       "type": "number",
-      "means": "где nina: метры вправо"
+      "means": "where nina is: metres to the right"
     },
     "nina_d": {
       "type": "number",
-      "means": "где nina: метры вверх по склону"
+      "means": "where nina is: metres up the slope"
     },
     "busygin_a": {
       "type": "number",
-      "means": "где busygin: метры вправо"
+      "means": "where busygin is: metres to the right"
     },
     "busygin_d": {
       "type": "number",
-      "means": "где busygin: метры вверх по склону"
+      "means": "where busygin is: metres up the slope"
     },
     "sarafanov_a": {
       "type": "number",
-      "means": "где sarafanov: метры вправо"
+      "means": "where sarafanov is: metres to the right"
     },
     "sarafanov_d": {
       "type": "number",
-      "means": "где sarafanov: метры вверх по склону"
+      "means": "where sarafanov is: metres up the slope"
     },
     "band1_a": {
       "type": "number",
-      "means": "где band1: метры вправо"
+      "means": "where band1 is: metres to the right"
     },
     "band1_d": {
       "type": "number",
-      "means": "где band1: метры вверх по склону"
+      "means": "where band1 is: metres up the slope"
     },
     "band2_a": {
       "type": "number",
-      "means": "где band2: метры вправо"
+      "means": "where band2 is: metres to the right"
     },
     "band2_d": {
       "type": "number",
-      "means": "где band2: метры вверх по склону"
+      "means": "where band2 is: metres up the slope"
     },
     "band3_a": {
       "type": "number",
-      "means": "где band3: метры вправо"
+      "means": "where band3 is: metres to the right"
     },
     "band3_d": {
       "type": "number",
-      "means": "где band3: метры вверх по склону"
+      "means": "where band3 is: metres up the slope"
     },
     "mourner1_a": {
       "type": "number",
-      "means": "где mourner1: метры вправо"
+      "means": "where mourner1 is: metres to the right"
     },
     "mourner1_d": {
       "type": "number",
-      "means": "где mourner1: метры вверх по склону"
+      "means": "where mourner1 is: metres up the slope"
     },
     "mourner2_a": {
       "type": "number",
-      "means": "где mourner2: метры вправо"
+      "means": "where mourner2 is: metres to the right"
     },
     "mourner2_d": {
       "type": "number",
-      "means": "где mourner2: метры вверх по склону"
+      "means": "where mourner2 is: metres up the slope"
     },
     "mourner3_a": {
       "type": "number",
-      "means": "где mourner3: метры вправо"
+      "means": "where mourner3 is: metres to the right"
     },
     "mourner3_d": {
       "type": "number",
-      "means": "где mourner3: метры вверх по склону"
+      "means": "where mourner3 is: metres up the slope"
     },
     "mourner4_a": {
       "type": "number",
-      "means": "где mourner4: метры вправо"
+      "means": "where mourner4 is: metres to the right"
     },
     "mourner4_d": {
       "type": "number",
-      "means": "где mourner4: метры вверх по склону"
+      "means": "where mourner4 is: metres up the slope"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true
     },
     {
       "id": "ground",
-      "name": "Косогор",
+      "name": "Hillside",
       "plane": true,
       "drape": true,
       "across": 10,
@@ -249,7 +249,7 @@
     },
     {
       "id": "beyond",
-      "name": "Поле за косогором",
+      "name": "Field beyond the hillside",
       "plane": true,
       "across": 10,
       "distance": 120,
@@ -259,7 +259,7 @@
     },
     {
       "id": "behind",
-      "name": "Поле до посёлка",
+      "name": "Field before the settlement",
       "plane": true,
       "across": 10,
       "distance": -60,
@@ -269,7 +269,7 @@
     },
     {
       "id": "forest",
-      "name": "Дальний лес",
+      "name": "Far forest",
       "across": 10,
       "distance": 165,
       "height": 22,
@@ -282,7 +282,7 @@
     },
     {
       "id": "suburb",
-      "name": "Посёлок",
+      "name": "Settlement",
       "across": -10,
       "distance": -105,
       "facing": 0,
@@ -296,7 +296,7 @@
     },
     {
       "id": "fence",
-      "name": "Ограда",
+      "name": "Fence",
       "across": 0.8,
       "distance": 7,
       "facing": 180,
@@ -356,7 +356,7 @@
     },
     {
       "id": "gate",
-      "name": "Ворота",
+      "name": "Gate",
       "across": 8,
       "distance": 7,
       "facing": 180,
@@ -371,7 +371,7 @@
     },
     {
       "id": "birch",
-      "name": "Берёза",
+      "name": "Birch",
       "across": -3.2,
       "distance": 7.55,
       "height": 15,
@@ -385,7 +385,7 @@
     },
     {
       "id": "birches",
-      "name": "Берёзы",
+      "name": "Birches",
       "across": -14,
       "distance": 12,
       "height": 11,
@@ -454,7 +454,7 @@
     },
     {
       "id": "crosses",
-      "name": "Кресты",
+      "name": "Crosses",
       "across": -10.63,
       "distance": 29.6,
       "height": 1.7,
@@ -707,7 +707,7 @@
     },
     {
       "id": "rails",
-      "name": "Оградки",
+      "name": "Grave railings",
       "across": -3.7,
       "distance": 19.19,
       "height": 0.8,
@@ -818,7 +818,7 @@
     },
     {
       "id": "stars",
-      "name": "Памятники",
+      "name": "Monuments",
       "across": 23.53,
       "distance": 21.1,
       "height": 1.5,
@@ -887,7 +887,7 @@
     },
     {
       "id": "grave",
-      "name": "Могила",
+      "name": "Grave",
       "across": -1,
       "distance": 26.6,
       "facing": 180,
@@ -901,7 +901,7 @@
     },
     {
       "id": "case_snow",
-      "name": "Футляр",
+      "name": "Case",
       "across": 0.4,
       "distance": 26.45,
       "facing": 160,
@@ -915,7 +915,7 @@
     },
     {
       "id": "nina",
-      "name": "Нина",
+      "name": "Nina",
       "person": {
         "cast": "cast",
         "who": "nina",
@@ -931,7 +931,7 @@
     },
     {
       "id": "busygin",
-      "name": "Бусыгин",
+      "name": "Busygin",
       "person": {
         "cast": "cast",
         "who": "busygin",
@@ -947,7 +947,7 @@
     },
     {
       "id": "sarafanov",
-      "name": "Сарафанов",
+      "name": "Sarafanov",
       "person": {
         "cast": "cast",
         "who": "sarafanov_funeral",
@@ -963,7 +963,7 @@
     },
     {
       "id": "band1",
-      "name": "Трубач",
+      "name": "Trumpeter",
       "person": {
         "cast": "cast",
         "who": "band1",
@@ -979,7 +979,7 @@
     },
     {
       "id": "band2",
-      "name": "Тубист",
+      "name": "Tuba player",
       "person": {
         "cast": "cast",
         "who": "band2",
@@ -995,7 +995,7 @@
     },
     {
       "id": "band3",
-      "name": "Барабанщик",
+      "name": "Drummer",
       "person": {
         "cast": "cast",
         "who": "band3",
@@ -1011,7 +1011,7 @@
     },
     {
       "id": "mourner1",
-      "name": "Провожающий",
+      "name": "Mourner",
       "person": {
         "cast": "cast",
         "who": "mourner1",
@@ -1027,7 +1027,7 @@
     },
     {
       "id": "mourner2",
-      "name": "Провожающий",
+      "name": "Mourner",
       "person": {
         "cast": "cast",
         "who": "mourner2",
@@ -1043,7 +1043,7 @@
     },
     {
       "id": "mourner3",
-      "name": "Провожающий",
+      "name": "Mourner",
       "person": {
         "cast": "cast",
         "who": "mourner3",
@@ -1059,7 +1059,7 @@
     },
     {
       "id": "mourner4",
-      "name": "Провожающий",
+      "name": "Mourner",
       "person": {
         "cast": "cast",
         "who": "mourner4",

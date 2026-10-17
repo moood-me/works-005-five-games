@@ -1,4 +1,4 @@
-// «Дом Сарафановых»: the kitchen and the room beyond its doorway — the plan (scenes.md «Дом Сарафановых», metres: x
+// “The Sarafanovs' Home”: the kitchen and the room beyond its doorway — the plan (scenes.md “The Sarafanovs' Home”, metres: x
 // to the right, z in from the kitchen's near wall; the scene's across = x − 2, distance = z), the seats, the shots,
 // the film (film(scene): the beats module's table). Shared by the paintings, the script, the showcase; the generator
 // (tools/dom-opus/gen.mjs) writes scene.json from it.
@@ -16,14 +16,14 @@ const DOORWAY = { z0: 2.5, z1: 3.5, h: 2.05 };                 // in the kitchen
 const STOVE = { front: 0.75, z0: 1.0, z1: 2.2, h: 2.0 };       // against the left wall; its fire door at z 1.6
 const TABLE = { x0: 1.4, x1: 2.2, z0: 1.8, z1: 3.6, h: 0.76 }; // its end to the window
 const LAMP = [1.8, 2.7, 2.1];                                  // the bulb under the orange shade
-const CLOCK = { z: 0.6, face: 1.8 };                           // the ходики on the left wall near the corner
+const CLOCK = { z: 0.6, face: 1.8 };                           // the wall clock on the left wall near the corner
 const HOOK = [3.8, 0.03];                                      // the hooks by the door
 const STOOL = [1.65, 0.32];                                    // the stool left of the door (the old man's hat)
 const CUPBOARD = { x: 5.2, z: 0.25, w: 1.1, h: 1.95, shelf: 1.32 }; // in the room, against its near wall, glass above
 const COT = { x: 4.45, z0: 0.7, z1: 2.4, w: 0.7, top: 0.42 };  // the folding bed along the kitchen wall, its head by the doorway
 const COT_CHAIR = [5.05, 2.4];                                 // the chair by the cot's head (his coat at night)
 const SOFA = { x0: 5.6, x1: 7.6, z: 3.62, top: 0.45 };         // against the room's back wall
-const SAR_DOOR = { z0: 3.1, z1: 3.9 };                         // in the room's right wall (x 8): Сарафанов's room
+const SAR_DOOR = { z0: 3.1, z1: 3.9 };                         // in the room's right wall (x 8): Sarafanov's room
 const SAR_LAMP = [8.62, 3.98, 1.3];                            // his lamp beyond it: the wedge through the gap
 const CASE_CHAIR = [7.35, 1.0];                                // the chair with the clarinet case
 const TOP = TABLE.h + 0.02;
@@ -50,16 +50,16 @@ const SPOT = {
   doorway: [3.85, 3.0],        // in the doorway between kitchen and room
   roomIn: [4.5, 3.0],
   cupboard: [5.2, 0.9],        // before the cupboard
-  sarDoor: [7.6, 3.55],        // inside the room before Сарафанов's door
+  sarDoor: [7.6, 3.55],        // inside the room before Sarafanov's door
   sarIn: [8.5, 3.6],           // beyond it (out of sight)
   byCot: [4.98, 1.55],         // beside the cot, the room's side
   hook: [3.62, 0.5],           // before the hooks
   stool: [1.75, 0.78],         // before the stool, facing it
 };
-// the way «На цыпочках» creeps: from the stove past the ходики along the near wall to the front door (≈ 3.7 m)
+// the way “On Tiptoe” creeps: from the stove past the wall clock along the near wall to the front door (≈ 3.7 m)
 const SNEAK = [[1.2, 1.55], [0.55, 0.85], [1.1, 0.5], [2.4, 0.5], [2.9, 0.55]];
 const SNEAK_LEN = SNEAK.slice(1).reduce((n, p, i) => n + Math.hypot(p[0] - SNEAK[i][0], p[1] - SNEAK[i][1]), 0);
-const SNEAK_BEHIND = 0.7;      // Сильва a step behind
+const SNEAK_BEHIND = 0.7;      // Silva a step behind
 // a point of the way at metres m along it, and how far along it a point lies
 function sneakAt(m) {
   let left = clamp(m, 0, SNEAK_LEN);
@@ -98,33 +98,33 @@ const FATHER_FAR = { z: 19, from: 9, to: 21 };      // across: the small figure 
 // the people: their height (metres), the head of one seated
 const HEIGHT = { busygin: 1.83, sarafanov: 1.62, nina: 1.66, silva: 1.76, vasenka: 1.8, kudimov: 1.8 };
 const PEOPLE = ['busygin', 'silva', 'vasenka', 'sarafanov', 'nina', 'kudimov'];
-const NAMES = { busygin: 'Бусыгин', silva: 'Сильва', vasenka: 'Васенька', sarafanov: 'Сарафанов', nina: 'Нина', kudimov: 'Кудимов' };
+const NAMES = { busygin: 'Busygin', silva: 'Silva', vasenka: 'Vasenka', sarafanov: 'Sarafanov', nina: 'Nina', kudimov: 'Kudimov' };
 
 // the shots: where the camera stands (plan x, z, the eye's height), which way it looks (degrees to the right of +z),
 // how far down (screen heights) — numbers, worked out by h/d (tools/dom-opus/run.mjs prints each beat's frame)
 const cam = (x, z, h, yaw, look = 0) => ({ camera_target: null, camera_x: A(x), camera_z: z, camera_h: h - 1.7, camera_yaw: yaw, camera_look: look, camera_pitch: 0 });
 const CAM = {
   win: cam(1.8, 3.85, 1.7, 180, 0.08),        // from the window down the kitchen: the door left, the stove right, the table under us
-  warm: cam(2.95, 1.15, 1.45, -62),           // the stove and Васенька at the table, from the near right
+  warm: cam(2.95, 1.15, 1.45, -62),           // the stove and Vasenka at the table, from the near right
   near: cam(1.55, 0.3, 1.45, 0),              // the two at the stove side by side in profile, the lamp between and above
-  embrace: cam(2.3, 1.0, 1.75, -62),          // over the old man's shoulder: Бусыгин's face in three quarters
-  nina: cam(2.2, 1.55, 1.5, 132),             // Нина in the door, three quarters, in the lamp's light
+  embrace: cam(2.3, 1.0, 1.75, -62),          // over the old man's shoulder: Busygin's face in three quarters
+  nina: cam(2.2, 1.55, 1.5, 132),             // Nina in the door, three quarters, in the lamp's light
   supper: cam(3.1, 0.75, 1.15, -55),          // low, the old man standing with his glass, three quarters
   tb: cam(1.8, 0.4, 1.2, 0, 0.06),            // talk_back, box_out: along the table, the two face to face in profile
   talk: cam(1.42, 1.05, 1.22, -6),            // the old man nearer, in profile
   cupboard: cam(6.05, 2.95, 1.55, -160),      // in the room: the cupboard, the cot right
-  sofa: cam(7.25, 2.78, 0.82, 12),            // Сильва on the sofa close, in the wedge of light
+  sofa: cam(7.25, 2.78, 0.82, 12),            // Silva on the sofa close, in the wedge of light
   cot: cam(7.0, 3.5, 1.15, -122),             // wake: from the room's far wall onto the cot and the chair by it
-  sneak: cam(3.8, 3.3, 1.6, -143),            // from the doorway onto the near left corner: stove, the way, the ходики
+  sneak: cam(3.8, 3.3, 1.6, -143),            // from the doorway onto the near left corner: stove, the way, the wall clock
   caught: cam(2.55, 0.75, 1.55, 30),          // from the front door: the old man in the doorway, facing us
   door: cam(2.95, 2.45, 1.5, 172),            // from the table's side onto the front door and the hooks
   ww: cam(0.6, 2.75, 1.65, 44),               // the window: his shoulder left, the frosted glass in the middle
-  morning: cam(1.75, 0.6, 1.5, 0),            // across the table: the old man at its far corner, Бусыгин at the window
+  morning: cam(1.75, 0.6, 1.5, 0),            // across the table: the old man at its far corner, Busygin at the window
   toast: cam(1.8, 0.4, 1.9, 0, 0.25),         // high along the table: all six in profile
-  ask: cam(2.55, 0.4, 1.55, -21),             // Нина standing between her father and him
-  for_me: cam(1.7, 3.72, 1.35, -145),         // close on Нина from the window's end, the old man behind her
-  pack: cam(0.4, 3.8, 1.5, 122),              // from the far left corner: the old man in the doorway, Сильва at the door
-  confess: cam(3.2, 1.3, 1.6, 12),            // the two by the doorway in profile, Бусыгин nearer
+  ask: cam(2.55, 0.4, 1.55, -21),             // Nina standing between her father and him
+  for_me: cam(1.7, 3.72, 1.35, -145),         // close on Nina from the window's end, the old man behind her
+  pack: cam(0.4, 3.8, 1.5, 122),              // from the far left corner: the old man in the doorway, Silva at the door
+  confess: cam(3.2, 1.3, 1.6, 12),            // the two by the doorway in profile, Busygin nearer
   back: cam(2.2, 0.5, 1.6, -5),               // the old man at the window, his back; the table
 };
 
@@ -210,8 +210,8 @@ const film = scene => {
 
   // ── the film, in the order the game mostly plays it ──
   const F = {
-    // I. Night: the door, the three come in from the cold; Васенька sits down at the table, his rucksack by his chair;
-    // Сильва sits and reaches for the bread; Бусыгин goes to the stove, opens its door, holds his hands to the fire —
+    // I. Night: the door, the three come in from the cold; Vasenka sits down at the table, his rucksack by his chair;
+    // Silva sits and reaches for the bread; Busygin goes to the stove, opens its door, holds his hands to the fire —
     // the insert `hands` opens
     kitchen: {
       from: () => ROOM({ ...CAM.win, coat_b: 'none', thaw: 0, rub: 0, ...wear('sarafanov', 'sarafanov_hat') }),
@@ -241,7 +241,7 @@ const film = scene => {
         await s.wait(0.8);
       },
     },
-    // the insert closes: he turns from the stove to the table; Васенька, not looking up (Р20, Р21)
+    // the insert closes: he turns from the stove to the table; Vasenka, not looking up (L20, L21)
     warm_up: {
       after: 'kitchen',
       from: () => ({ ...I_HOME(), ...STAND('busygin', SPOT.stove, 270, { busygin_reach: { r: 'stove#fire', l: 'stove#fire' }, busygin_look: 'stove#fire' }),
@@ -259,8 +259,8 @@ const film = scene => {
         await s.wait(6);
       },
     },
-    // the door: Сарафанов in his coat, his hat in his hand — Р22 as Сильва gets up; the hat put down on the stool;
-    // Р23; the clock; Р24; slowly to Бусыгин at the stove, a step from him — Р25. Side by side in profile at the end
+    // the door: Sarafanov in his coat, his hat in his hand — L22 as Silva gets up; the hat put down on the stool;
+    // L23; the clock; L24; slowly to Busygin at the stove, a step from him — L25. Side by side in profile at the end
     enter: {
       from: () => ({ ...I_HOME(), ...CAM.win }),
       run: async s => {
@@ -299,7 +299,7 @@ const film = scene => {
         await s.wait(2.5);
       },
     },
-    // he takes him in his arms; Бусыгин's hands come to his back; Сильва sits down again behind them
+    // he takes him in his arms; Busygin's hands come to his back; Silva sits down again behind them
     embrace: {
       after: 'enter',
       from: () => ({ ...I_HOME(), ...CAM.near, hat_on_stool: 1, ...STAND('busygin', SPOT.stove, 90, { busygin_look: 'sarafanov', busygin_mood: 'afraid' }),
@@ -323,8 +323,8 @@ const film = scene => {
       },
     },
 
-    // II. Night: the door, Нина in her coat; the old man gets up from the table — Р28; she stands in the door, not
-    // taking it off — Р29 (close: three quarters in the lamp's light); goes through the kitchen into the room
+    // II. Night: the door, Nina in her coat; the old man gets up from the table — L28; she stands in the door, not
+    // taking it off — L29 (close: three quarters in the lamp's light); goes through the kitchen into the room
     nina_in: {
       from: () => II_TABLE({ ...CAM.win, ...wear('nina', 'nina'), ...SIT('silva', 'R2'), ...LIE('vasenka', 'sofa', { vasenka_turn: 270 }), ...wear('vasenka', 'vasenka_home') }),
       run: async s => {
@@ -359,7 +359,7 @@ const film = scene => {
         await s.wait(1.0);
       },
     },
-    // the table under the lamp; the old man stands with his glass — Р30 — and holds it up, waiting; Бусыгин's glass
+    // the table under the lamp; the old man stands with his glass — L30 — and holds it up, waiting; Busygin's glass
     // on the oilcloth (a touch)
     supper: {
       from: () => II_TABLE({ ...CAM.supper, ...SIT('silva', 'R2'), glass_b: 'table', ...LIE('vasenka', 'sofa', { vasenka_turn: 270 }), ...wear('vasenka', 'vasenka_home') }),
@@ -379,7 +379,7 @@ const film = scene => {
         await s.wait(4.0);
       },
     },
-    // he raises his glass, the glasses meet; the old man sits and lays a page of music on the oilcloth — Р31
+    // he raises his glass, the glasses meet; the old man sits and lays a page of music on the oilcloth — L31
     supper_after: {
       after: 'supper',
       from: () => ({ ...F.supper.from(), ...STAND('sarafanov', [1.0, 2.1], 90, { sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.3, 2.1, 1.45) },
@@ -411,8 +411,8 @@ const film = scene => {
         await s.wait(4.0);
       },
     },
-    // late night, out of the dark: Сильва goes to lie down; the two face to face; the old man pushes the kettle to
-    // him — Р32 (closer: in profile); Бусыгин takes it — the insert `tea` opens
+    // late night, out of the dark: Silva goes to lie down; the two face to face; the old man pushes the kettle to
+    // him — L32 (closer: in profile); Busygin takes it — the insert `tea` opens
     talk: {
       from: () => NIGHT_TALK({ ...CAM.tb, fade: 1, ...SIT('silva', 'R2'), tea: 0, which: 0, pour: 0, glass1: 0, glass2: 0, spill: 0, shake: 0, puddle: 0 }),
       run: async s => {
@@ -468,7 +468,7 @@ const film = scene => {
         void sar; void bus;
       },
     },
-    // «Помнила»: he puts the glass down, reaches across and lays his hand on Бусыгин's; then looks at the window
+    // “She remembered”: he puts the glass down, reaches across and lays his hand on Busygin's; then looks at the window
     galya_yes: {
       after: 'talk_back',
       from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'hand', sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.38, 2.08, 1.0), l: P3(1.38, 2.16, 0.98) },
@@ -489,7 +489,7 @@ const film = scene => {
         await s.wait(3.2);
       },
     },
-    // «Не рассказывала»: he lowers his head to the glass and turns it slowly in its holder
+    // “Never told me”: he lowers his head to the glass and turns it slowly in its holder
     galya_no: {
       after: 'talk_back',
       from: () => F.galya_yes.from(),
@@ -508,7 +508,7 @@ const film = scene => {
       },
     },
     // the same night (opening the scene again): he gets up, goes to the cupboard in the room, takes the snuffbox
-    // from its shelf, comes back, sits and sets it on the oilcloth between them — Р36, Р37; a choice on it
+    // from its shelf, comes back, sits and sets it on the oilcloth between them — L36, L37; a choice on it
     box_out: {
       from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'table', box_at: 'shelf', sarafanov_look: 'busygin', busygin_look: 'table#glass' }),
       run: async s => {
@@ -581,7 +581,7 @@ const film = scene => {
       },
     },
     // the insert closes: no box on the table; his hand to his breast pocket; the old man leans back, his palms on
-    // the oilcloth — Р38
+    // the oilcloth — L38
     box_kept: {
       after: 'box_take',
       from: () => ({ ...F.box_take.from(), box: 1, finger1: 1, finger2: 1, finger3: 1, finger4: 1, old: 0, busygin_reach: { r: 'table#box' } }),
@@ -600,7 +600,7 @@ const film = scene => {
       },
     },
     // the insert closes: the box in his hand; he gets up, takes it back to its shelf and stands there, his back to
-    // us — Р40
+    // us — L40
     box_back: {
       after: 'box_give',
       from: () => ({ ...F.box_give.from(), box: 1, push: 1, old_close: 1, busygin_reach: { r: 'table#box' } }),
@@ -629,8 +629,8 @@ const film = scene => {
       },
     },
     // night, out of the dark: the room; his lamp burns beyond his door ajar — a narrow wedge across the room.
-    // Бусыгин on the cot, his coat on the chair by it; Сильва on the sofa, his head in the wedge — Р118 (close, in
-    // profile, without his smile); then the clarinet; Бусыгин turns on his side to the wall — under Р41
+    // Busygin on the cot, his coat on the chair by it; Silva on the sofa, his head in the wedge — L118 (close, in
+    // profile, without his smile); then the clarinet; Busygin turns on his side to the wall — under L41
     wall: {
       from: () => ROOM({ ...CAM.sofa, fade: 1, lamp: 0, sar_light: 1, coat_b: 'cot', box_at: boxAt(), ...wear('busygin', 'busygin_shirt'), ...wear('silva', 'silva_shirt'),
         ...LIE('busygin', 'cot'), ...LIE('silva', 'sofa', { silva_mood: 'tired', silva_look: P3(6.6, 3.0, 2.6) }) }),
@@ -650,8 +650,8 @@ const film = scene => {
         await s.wait(6.0);
       },
     },
-    // grey dawn, out of the dark: Сильва, in his coat already, bends over the cot and shakes him by the shoulder —
-    // Р42; he sits up. A choice: his coat on the chair (go), the cot (stay)
+    // grey dawn, out of the dark: Silva, in his coat already, bends over the cot and shakes him by the shoulder —
+    // L42; he sits up. A choice: his coat on the chair (go), the cot (stay)
     wake: {
       from: () => ({ ...WAKE(), ...CAM.cot, fade: 1, ...LIE('busygin', 'cot'), ...STAND('silva', SPOT.byCot, 270) }),
       run: async s => {
@@ -671,7 +671,7 @@ const film = scene => {
         await s.wait(2.0);
       },
     },
-    // «Уйти тайком»: his coat over his arm, both into the kitchen to the stove (the way starts there); the old man's
+    // “Slip away”: his coat over his arm, both into the kitchen to the stove (the way starts there); the old man's
     // lamp is out. Then the game creeps them along the way (`sneak`, scene: script); `stir` lights his lamp
     sneak: {
       after: 'wake',
@@ -702,7 +702,7 @@ const film = scene => {
       },
     },
     // both at the front door, coats over the arm; the old man in the doorway (he comes through the room, or — he
-    // heard them — stands there already): Р43, Р44, Р45; Бусыгин hangs his coat on the hook — Р48; the old man goes
+    // heard them — stands there already): L43, L44, L45; Busygin hangs his coat on the hook — L48; the old man goes
     // past them and out, the door slams
     caught: {
       from: () => ROOM({ ...DAWN, ...CAM.caught, box_at: boxAt(), coat_b: 'arm', case_on: 0, ...wear('busygin', 'busygin_shirt'),
@@ -749,8 +749,8 @@ const film = scene => {
         await s.wait(1.5);
       },
     },
-    // «Остаться»: Сильва lies down again — Р46; Бусыгин gets up, goes into the kitchen to the window and stands at it:
-    // the frosted glass in the middle of the frame (the game rubs the hole: «Иней»)
+    // “Stay”: Silva lies down again — L46; Busygin gets up, goes into the kitchen to the window and stands at it:
+    // the frosted glass in the middle of the frame (the game rubs the hole: “Frost”)
     window_watch: {
       after: 'wake',
       from: () => ({ ...WAKE(), ...CAM.cot }),
@@ -778,7 +778,7 @@ const film = scene => {
         await lie;
       },
     },
-    // to the table: the old man comes out of the room in his coat, with his case, stops at the table — Р47, Р48; goes
+    // to the table: the old man comes out of the room in his coat, with his case, stops at the table — L47, L48; goes
     // to the door and out; back to the window: through the hole the small figure with the case crosses the gardens
     morning: {
       after: 'window_watch',
@@ -814,9 +814,9 @@ const film = scene => {
       },
     },
 
-    // IV. The second day's late evening, out of the dark: the table laid; the place facing Нина empty; the clock
-    // strikes nine — on the ninth stroke the door: Кудимов in his greatcoat — Р73; cut: in his tunic, he comes and
-    // sits at his place — Р74
+    // IV. The second day's late evening, out of the dark: the table laid; the place facing Nina empty; the clock
+    // strikes nine — on the ninth stroke the door: Kudimov in his greatcoat — L73; cut: in his tunic, he comes and
+    // sits at his place — L74
     table: {
       from: () => IV_TABLE({ ...CAM.toast, fade: 1, ...OUT('kudimov'), ...wear('kudimov', 'kudimov'),
         busygin_mood: 'thinking', nina_look: P3(1.5, 2.7, TOP), sarafanov_look: 'nina' }),
@@ -851,8 +851,8 @@ const film = scene => {
         await s.wait(3.0);
       },
     },
-    // the old man stands up with his glass; Кудимов stands too, straight — Р75, Р76; the glass put down, he sits and
-    // turns to Бусыгин — Р77. All six in profile; a choice on the father, the bridegroom, Нина
+    // the old man stands up with his glass; Kudimov stands too, straight — L75, L76; the glass put down, he sits and
+    // turns to Busygin — L77. All six in profile; a choice on the father, the bridegroom, Nina
     toast: {
       after: 'table',
       from: () => IV_TABLE({ ...CAM.toast, kudimov_look: 'nina', kudimov_mood: 'smile', busygin_mood: 'afraid', nina_look: P3(1.5, 2.7, TOP) }),
@@ -889,7 +889,7 @@ const film = scene => {
         await s.wait(3.0);
       },
     },
-    // «Пусть едет»: Нина lowers her head; Кудимов nods; the old man slowly raises his glass again
+    // “Let her go”: Nina lowers her head; Kudimov nods; the old man slowly raises his glass again
     let_go: {
       after: 'toast',
       from: () => IV_TABLE({ ...CAM.toast, sarafanov_look: 'busygin', sarafanov_mood: 'sad', nina_mood: 'thinking', nina_look: 'kudimov', busygin_look: 'sarafanov' }),
@@ -908,7 +908,7 @@ const film = scene => {
         await s.wait(6.0);
       },
     },
-    // «Нина, останься»: Кудимов stands — Р81; Нина gets up and stands between him and her father, in profile, angry
+    // “Nina, stay”: Kudimov stands — L81; Nina gets up and stands between him and her father, in profile, angry
     ask_stay: {
       after: 'toast',
       from: () => F.let_go.from(),
@@ -932,8 +932,8 @@ const film = scene => {
         await s.wait(3.0);
       },
     },
-    // «Останься. Не ради отца»: Нина looks at Бусыгин (close, in profile: surprised, then a smile); the old man looks
-    // from her to him; Кудимов slowly stands, sets his chair straight, stands upright — Р117
+    // “Stay. Not for Father's sake”: Nina looks at Busygin (close, in profile: surprised, then a smile); the old man looks
+    // from her to him; Kudimov slowly stands, sets his chair straight, stands upright — L117
     for_me: {
       after: 'toast',
       from: () => F.let_go.from(),
@@ -961,9 +961,9 @@ const film = scene => {
       },
     },
 
-    // V. The second night, out of the dark: Сильва at the front door, his sleeve burnt; Бусыгин by the table — Р92;
-    // the old man comes out of the room with his case and the old suitcase and stands in the doorway — Р93, Р94; Нина
-    // and Васенька behind him; Сильва turns to him — Р95. A choice: the father, Сильва
+    // V. The second night, out of the dark: Silva at the front door, his sleeve burnt; Busygin by the table — L92;
+    // the old man comes out of the room with his case and the old suitcase and stands in the doorway — L93, L94; Nina
+    // and Vasenka behind him; Silva turns to him — L95. A choice: the father, Silva
     pack: {
       from: () => PACK({ ...CAM.pack, fade: 1, ...OUT('sarafanov'), sarafanov_a: A(5.2), sarafanov_d: 2.9, ...wear('sarafanov', 'sarafanov'),
         silva_mood: 'smile', silva_look: 'busygin', busygin_mood: 'tired', busygin_look: 'silva' }),
@@ -993,9 +993,9 @@ const film = scene => {
         await s.wait(3.5);
       },
     },
-    // «Сказать самому»: he goes to the old man, a step from him — Р96; (the box out of his pocket onto the table); the
+    // “Tell him yourself”: he goes to the old man, a step from him — L96; (the box out of his pocket onto the table); the
     // suitcase put down; then — he sits down at the table and reaches for his hand (`hurt` 0), or goes to the window
-    // and stands with his back to us (`hurt` 1) — Р99
+    // and stands with his back to us (`hurt` 1) — L99
     confess: {
       after: 'pack',
       from: () => PACK({ ...CAM.pack, sarafanov_mood: 'tired', sarafanov_look: 'busygin', busygin_look: 'sarafanov', silva_turn: 10, silva_look: 'sarafanov',
@@ -1052,8 +1052,8 @@ const film = scene => {
         }
       },
     },
-    // «Промолчать»: Сильва steps toward the old man and points at Бусыгин — Р97 / Р98; the old man, the suitcase in his
-    // hand, turns and goes to the window, stands with his back to us — Р99 (into the glass)
+    // “Keep quiet”: Silva steps toward the old man and points at Busygin — L97 / L98; the old man, the suitcase in his
+    // hand, turns and goes to the window, stands with his back to us — L99 (into the glass)
     exposed: {
       after: 'pack',
       from: () => F.confess.from(),
@@ -1081,8 +1081,8 @@ const film = scene => {
         await s.wait(4.0);
       },
     },
-    // he takes his coat off the hook; Сильва opens the door and waits, they go out together (`silva_door` 1) — or
-    // Сильва goes first, the door slams, he goes after (0). The old man stays where he stands
+    // he takes his coat off the hook; Silva opens the door and waits, they go out together (`silva_door` 1) — or
+    // Silva goes first, the door slams, he goes after (0). The old man stays where he stands
     go_out: {
       after: ['confess', 'exposed'],
       from: () => PACK({ ...CAM.door, ...STAND('sarafanov', SPOT.window, 10, { sarafanov_with: WITH('sarafanov', 'case', 'suitcase'), sarafanov_look: 'window#pane' }),
@@ -1128,9 +1128,9 @@ const film = scene => {
         await s.wait(1.0);
       },
     },
-    // night, out of the dark: the door — Бусыгин (and who came with him from the platform); he hangs his coat on the
-    // back of his chair and sits — Р104; the old man sits facing him — Р105; the snuffbox comes before him (off the
-    // shelf — Р106 — or slid across the oilcloth); the old man goes to his room, his door left ajar
+    // night, out of the dark: the door — Busygin (and who came with him from the platform); he hangs his coat on the
+    // back of his chair and sits — L104; the old man sits facing him — L105; the snuffbox comes before him (off the
+    // shelf — L106 — or slid across the oilcloth); the old man goes to his room, his door left ajar
     home_late: {
       from: () => HOME({ fade: 1 }),
       run: async s => {
@@ -1193,8 +1193,8 @@ const film = scene => {
       },
     },
     // night, out of the dark: the old man at the window, his back to us (or he comes in first and goes to it);
-    // Бусыгин comes in, his coat on his chair's back, sits (the box onto the oilcloth — he does not take it); the
-    // clock; the old man turns, takes the kettle to the stove — Р107 — and sits facing him
+    // Busygin comes in, his coat on his chair's back, sits (the box onto the oilcloth — he does not take it); the
+    // clock; the old man turns, takes the kettle to the stove — L107 — and sits facing him
     home_anyway: {
       from: () => HOME({ fade: 1, anyway: true }),
       run: async s => {
@@ -1248,7 +1248,7 @@ const film = scene => {
     },
   };
 
-  // Нина at home (`nina_end` home) who did not come with him: out of the room to the table
+  // Nina at home (`nina_end` home) who did not come with him: out of the room to the table
   async function ninaComes(s, withNina) {
     if (get('nina_end') !== 'home' || withNina) return;
     const nina = s.person('nina');
@@ -1272,8 +1272,8 @@ const film = scene => {
       ...(ninaHome && !withNina ? { ...OUT('nina'), nina_a: A(5.4), nina_d: 3.0 } : {}),
     });
   }
-  // the door at night: Бусыгин in (with who came), his coat onto his chair's back, he sits — Р104 — `home_late:sat`;
-  // the old man (who came in with him, or sat here) sits facing him — Р105
+  // the door at night: Busygin in (with who came), his coat onto his chair's back, he sits — L104 — `home_late:sat`;
+  // the old man (who came in with him, or sat here) sits facing him — L105
   async function comeIn(s, came, withNina, quiet) {
     const bus = s.person('busygin'), sar = s.person('sarafanov'), nina = s.person('nina'), vas = s.person('vasenka');
     await s.move('door', 1, { over: 1.0, ease: 'out' });

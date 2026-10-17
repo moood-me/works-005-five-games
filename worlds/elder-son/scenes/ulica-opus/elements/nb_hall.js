@@ -1,4 +1,4 @@
-// The neighbours' сени behind their door, a dim bulb (seen only with the door open). Metres.
+// The neighbours' passage behind their door, a dim bulb (seen only with the door open). Metres.
 const gr = g.createRadialGradient(0, -1.9, 0.1, 0, -1.3, 1.5);
 gr.addColorStop(0, '#c99a60');
 gr.addColorStop(0.7, '#7e5634');

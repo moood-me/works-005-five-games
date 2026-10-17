@@ -1,4 +1,4 @@
-// The porch before Сарафановы's door: two posts holding a little gabled canopy with snow on it, a rail on the left,
+// The porch before the Sarafanovs' door: two posts holding a little gabled canopy with snow on it, a rail on the left,
 // the landing's edge boards. Metres; the anchor at the landing's front, on the snow.
 const fl = 0.45;
 g.fillStyle = '#5a4838';

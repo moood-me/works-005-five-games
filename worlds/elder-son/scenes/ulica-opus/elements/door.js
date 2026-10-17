@@ -1,4 +1,4 @@
-// Сарафановы's door: planks under old padded oilcloth, studded, a handle; painted from its hinge (x 0) to its free
+// the Sarafanovs' door: planks under old padded oilcloth, studded, a handle; painted from its hinge (x 0) to its free
 // edge (0.9). Turned open by `door` (its place's facing, door_f).
 g.fillStyle = '#4f3a2c';
 g.fillRect(0, -1.95, 0.9, 1.95);

@@ -1,4 +1,4 @@
-// The kitchen's back wall: whitewashed boards gone yellow, a shelf with crockery, the ходики clock, a calendar.
+// The kitchen's back wall: whitewashed boards gone yellow, a shelf with crockery, the wall clock, a calendar.
 // Metres; 3 wide.
 g.fillStyle = '#c9bfa8';
 g.fillRect(-1.55, -2.55, 3.1, 2.58);

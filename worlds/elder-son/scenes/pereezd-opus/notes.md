@@ -1,55 +1,60 @@
-# Переезд (opus)
+# The Crossing (opus)
 
-III глава «Старшего сына»: железнодорожный переезд за посёлком, темнеет. Движок 3, камера `picture` (неподвижна —
-склеек нет, `beat_next` принимается и ничего не меняет). Модули: `cast` (Нина, Бусыгин), `poezd` (товарный).
-`scene.json` и `elements/freight.js`, `car1…car15.js` пишет генератор `tools/pereezd-opus/gen.mjs` из `lib.js`
-(путь, состав): правьте `lib.js` и запускайте его.
+Chapter III of “The Elder Son”: the level crossing beyond the settlement, growing dark. Engine 3, the camera `picture`
+(still — no cuts, `beat_next` is taken and changes nothing). Modules: `cast` (Nina, Busygin), `poezd` (the freight).
+`scene.json` and `elements/freight.js`, `car1…car15.js` are written by the generator `tools/pereezd-opus/gen.mjs` from
+`lib.js` (the track, the train): change `lib.js` and run it.
 
-## Как устроено
+## How it is made
 
-- **Пути** (`lib.js`, `CONTROL`): Catmull-Rom из ельника справа (≈ 400 м) дугой к переезду и наискосок перед людьми
-  справа налево, за левый край. `at(s)` — точка и направление в `s` метрах от леса. Земля (`ground`, плоскость
-  1900 × 1440 м) рисует по нему насыпь, шпалы (ближние 120 м до переезда и дальше), рельсы и настил переезда; дорога —
-  по `ROAD`.
-- **Товарный**: тепловоз `freight` (бок; фара — точка `freight#light`, свечение и свет `headlight`) с лбом
-  `freight_nose` (`on: freight`) и 15 вагонов `car1…car15` (цистерны, крытые, полувагоны под снегом, платформа с
-  брёвнами). Каждый — карточка вдоль пути, её место и поворот — ключи `<id>_a/_d/_f`; их ставит скрипт по `freight`
-  (`places(f)`), каждый кадр, пока `freight` движется. `freight` → нос: 0 — в лесу, 0.04 — фара на дуге в 200 м (x ≈
-  0.72 кадра), 0.1 — нос на переезде, 0.9 — хвост на переезде, 1 — ушёл влево. Куски двигают `freight` с постоянной
-  скоростью 23 м/с (разгон от фары — `in`, на 30 % дольше).
-- **Будка дежурной** справа (`booth` — невидимый якорь, `booth_front`, `booth_side`, тёплое окно `booth_window` —
-  единственный тёплый свет, `booth_lamp`), дым из трубы.
-- **Светофор** `signal`: два красных огня мигают по очереди при `bell` 1 (animate, `e.glow`), их свет `red1`, `red2`
-  на снегу. **Шлагбаум** `barrier`: слой `arm` поворачивается по ключу `barrier` в animate; его точка (середина
-  стрелы) — там же.
-- Небо: сумерки, ночь — слой поверх по `night` (скрипт ставит `night` по `hour`), звёзды. Дальний лес, ельник, огни
-  посёлка слева за полем, столбы вдоль линии, бурьян у дороги (ветер), снег.
-- Люди — фигуры стиля `zima` (из `shadow`, `rim`, без лиц): Бусыгин — высокий, длинное серое пальто, светлый шарф,
-  без шапки; Нина — пальто с меховым воротником, коса. Стоят у шлагбаума на ≈ 5 м, со спины: ≈ 0.36 высоты кадра.
+- **The track** (`lib.js`, `CONTROL`): a Catmull-Rom from the spruce wood on the right (≈ 400 m) in a curve to the
+  crossing and slantwise before the people from right to left, past the left edge. `at(s)` — the point and the
+  direction `s` metres from the wood. The ground (`ground`, a plane 1900 × 1440 m) paints the embankment along it, the
+  sleepers (the near 120 m up to the crossing and beyond), the rails and the crossing's planking; the road — along
+  `ROAD`.
+- **The freight**: the locomotive `freight` (its side; the headlight — the point `freight#light`, the glow and the light
+  `headlight`) with its front `freight_nose` (`on: freight`) and 15 cars `car1…car15` (tank cars, boxcars, open cars
+  under snow, a flatcar with logs). Each is a card along the track, its place and turn — the keys `<id>_a/_d/_f`; the
+  script sets them by `freight` (`places(f)`), every frame while `freight` moves. `freight` → the nose: 0 — in the wood,
+  0.04 — the headlight on the curve at 200 m (x ≈ 0.72 of the frame), 0.1 — the nose on the crossing, 0.9 — the tail on
+  the crossing, 1 — gone to the left. The beats move `freight` at a steady 23 m/s (the start from the headlight — `in`,
+  30 % longer).
+- **The keeper's booth** on the right (`booth` — an unseen anchor, `booth_front`, `booth_side`, the warm window
+  `booth_window` — the only warm light, `booth_lamp`), smoke from its chimney.
+- **The signal** `signal`: two red lights blink in turn at `bell` 1 (animate, `e.glow`), their light `red1`, `red2` on
+  the snow. **The barrier** `barrier`: the layer `arm` turns by the key `barrier` in animate; its point (the arm's
+  middle) — there too.
+- The sky: dusk, the night — a layer over it by `night` (the script sets `night` by `hour`), stars. The far forest, the
+  spruce wood, the settlement's lights on the left beyond the field, poles along the line, weeds by the road (the wind),
+  snow.
+- The people — figures in the style `zima` (from `shadow`, `rim`, no faces): Busygin — tall, a long grey coat, a light
+  scarf, no hat; Nina — a coat with a fur collar, a plait. They stand by the barrier at ≈ 5 m, seen from behind: ≈ 0.36
+  of the frame's height.
 
-## Куски (`lib.js`, `film`; скрипт играет по ключу `beat`, показ — `showcase.js`)
+## Beats (`lib.js`, `film`; the script plays them by the key `beat`, the showcase — `showcase.js`)
 
-- `wait` (≈ 22 с, со склейки): сумерки темнеют (`hour` 0.78 → 0.82); они приходят по дороге из-за левого нижнего края;
-  звонок, огни, шлагбаум опускается; встают; из ельника выходит фара и встаёт на дуге — `wait:light`; Нина смотрит на
-  фару, Бусыгин потом — на неё. Поза под выбор: `nina`, `freight#light`, `barrier` в средних 4:3.
-- `truth` (≈ 30 с, после `wait`): он поворачивается к ней — `truth:said`; товарный подходит; когда вагоны перед ними,
-  она отворачивается к ним; хвост прошёл, огни погасли, шлагбаум поднялся — `truth:passed`; она поворачивается к нему;
-  идёт через пути первая, он за ней.
-- `roar` (≈ 30 с, после `wait`): товарный подходит; вагоны перед ними — `roar:loud` — он поворачивается к ней; она
-  шагает к нему (наклона нет: движения `lean` нет — шаг и поворот головы), кивок (`look` вниз и обратно); хвост
-  прошёл, шлагбаум поднялся — `roar:passed`; переходят рядом.
-- `brother` (≈ 32 с, после `wait`): он поворачивается к ней; она берёт его за руку — её правая к его левой
-  (`reach`; она стоит слева от него, поэтому не `hand_r`, как в scenes.md) — `brother:arm`; товарный проходит;
-  шлагбаум поднялся — `brother:passed`; переходят рука в руке.
-- Кусок после `wait`, открытый не после `wait`, начинается склейкой в конец `wait` (`WAIT_END`).
+- `wait` (≈ 22 s, from a cut): the dusk darkens (`hour` 0.78 → 0.82); they come along the road from beyond the lower
+  left edge; the bell, the lights, the barrier comes down; they stop; out of the spruce wood comes the headlight and
+  stops on the curve — `wait:light`; Nina looks at the headlight, Busygin then at her. The pose for the choice: `nina`,
+  `freight#light`, `barrier` in the middle 4:3.
+- `truth` (≈ 30 s, after `wait`): he turns to her — `truth:said`; the freight comes up; when the cars are before them
+  she turns away to them; the tail has passed, the lights are out, the barrier has gone up — `truth:passed`; she turns
+  to him; she crosses the tracks first, he after her.
+- `roar` (≈ 30 s, after `wait`): the freight comes up; the cars before them — `roar:loud` — he turns to her; she steps
+  to him (no lean: there is no motion `lean` — a step and a turn of the head), a nod (`look` down and back); the tail
+  has passed, the barrier has gone up — `roar:passed`; they cross side by side.
+- `brother` (≈ 32 s, after `wait`): he turns to her; she takes his hand — her right to his left (`reach`; she stands on
+  his left, so not `hand_r` as in scenes.md) — `brother:arm`; the freight goes by; the barrier has gone up —
+  `brother:passed`; they cross hand in hand.
+- A beat after `wait` opened not after `wait` begins with a cut to the end of `wait` (`WAIT_END`).
 
-## Что не так / открыто
+## What is wrong / open
 
-- Наклона Нины (`lean`) нет — нет движения; три движения из модели не делались.
-- Модуль `beats` «Вокруг света v3» не взят: фильм — функции `lib.js`, скрипт играет кусок по `beat`. Склеек нет —
-  камера одна.
+- No lean of Nina's (`lean`) — no such motion; three motions from the model were not made.
+- The module `beats` of “Around the World v3” is not taken: the film is `lib.js`'s functions, the script plays a beat by
+  `beat`. No cuts — one camera.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {"wait": {"after": [], "tells": ["wait:light"], "seconds": 22, "show": false},

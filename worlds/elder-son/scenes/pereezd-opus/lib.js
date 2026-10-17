@@ -1,4 +1,4 @@
-// «Переезд»: the track's way, the freight train along it, the people's marks, the film's beats.
+// “The Crossing”: the track's way, the freight train along it, the people's marks, the film's beats.
 // Shared by the paintings (the ground draws the track by it), the script (the cars' places) and the showcase.
 
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -221,7 +221,7 @@ const film = {
     await Promise.all([nina.walk([[-1.2, 8.8], BEYOND.nina]), bus.walk([[-0.6, 8.6], BEYOND.busygin])]);
     s.tell('beat:roar');
   },
-  // «Брат.» — she takes his hand; the train goes by; over the tracks together, hand in hand
+  // “Brother.” — she takes his hand; the train goes by; over the tracks together, hand in hand
   async brother(s) {
     await fromWaitEnd(s);
     const nina = s.person('nina'), bus = s.person('busygin');

@@ -29,7 +29,7 @@ for (const d of [3.6, 5.3]) {
   g.lineWidth = 0.12;
   g.stroke();
 }
-// trodden ways: to the porch, through the gate, to Макарская's window, along the far houses
+// trodden ways: to the porch, through the gate, to Makarskaya's window, along the far houses
 g.strokeStyle = 'rgba(190,196,204,0.8)';
 g.lineCap = 'round';
 g.lineWidth = 0.8;

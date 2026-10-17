@@ -1,4 +1,4 @@
-// Васенька's packed rucksack by his chair (`rucksack` chair): canvas, straps, a rolled blanket on top.
+// Vasenka's packed rucksack by his chair (`rucksack` chair): canvas, straps, a rolled blanket on top.
 if (e.state.rucksack !== 'none') {
   g.fillStyle = '#5d6044';
   g.beginPath();

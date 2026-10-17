@@ -19,7 +19,7 @@ scene.on('change', 'beat_next', name => {
 function play(name) {
   const run = L.film[name];
   if (!run) {
-    scene.warn(`«Косогор» has no beat "${name}"`);
+    scene.warn(`“The Hillside” has no beat "${name}"`);
     return;
   }
   const shot = ready && ready.name === name ? ready.shot : null;

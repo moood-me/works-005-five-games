@@ -1,7 +1,7 @@
 // poezd — the world's trains, painted side-on in daylight colours (the scene's light makes the night).
 // Every painting is in metres, its anchor on the rail head under the middle, y down; +x toward the train's tail.
-//   car(g, e, kind, len) — a freight car: 'tank' (цистерна), 'box' (крытый), 'gondola' (полувагон под снегом),
-//     'flat' (платформа с брёвнами); len — buffer to buffer
+//   car(g, e, kind, len) — a freight car: 'tank' (a tank car), 'box' (a boxcar), 'gondola' (an open car under snow),
+//     'flat' (a flatcar with logs); len — buffer to buffer
 //   loco(g, e, len) — the diesel's side; its headlight is the point `#light` at the nose (e.at, e.light)
 //   nose(g, e) — the diesel's front face (a card turned to look ahead), its lamp unlit: the glow is loco's
 // Box for a car: [-len/2 - 0.4, -4.9, len/2 + 0.4, 0.2].

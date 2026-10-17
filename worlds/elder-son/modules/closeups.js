@@ -1,10 +1,10 @@
-// The world's close-ups of hands and things: five shots for the inserts of «Старший сын»'s scenes — `stove` (two
+// The world's close-ups of hands and things: five shots for the inserts of “The Elder Son”'s scenes — `stove` (two
 // frozen hands at the open stove door, the fire in it), `tea` (two faceted glasses in holders under the lamp, the
 // kettle in a young hand over them), `box` (the silver snuffbox between an old hand and a young one on the oilcloth),
 // `strap` (the rucksack's canvas strap: a thin hand pulling it up, a fist below holding on, the lit carriage door
 // behind), `shawl` (from behind: Nina's shoulders in her knitted shawl, a coat held over them by its collar). No
-// faces. The hand is «Алые паруса v3»'s (fingers, back and palm, a sleeve with its cuff) — here three of them: the
-// young Бусыгин's, the old Сарафанов's (drier, darker, a knitted cardigan's sleeve), the thin Васенька's (a quilted
+// faces. The hand is “Scarlet Sails v3”'s (fingers, back and palm, a sleeve with its cuff) — here three of them: the
+// young Busygin's, the old Sarafanov's (drier, darker, a knitted cardigan's sleeve), the thin Vasenka's (a quilted
 // sleeve). Their light is painted: warm from the stove, the lamp, a window; cold from the snow.
 //   paint(g, e, shot) is an insert's code: the shot painted once, each thing that moves a layer. live(e, shot, now) is
 // its animate: `now` — what moves — only sets the layers' numbers and marks the points that move. The painting reads
@@ -20,10 +20,10 @@ const rgbOf = (c) => [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), 
 const blend = (a, b, u) => `#${rgbOf(a).map((v, i) => Math.round(v + (rgbOf(b)[i] - v) * u).toString(16).padStart(2, "0")).join("")}`;
 const rgba = (c, a) => `rgba(${rgbOf(c).join(",")},${a})`;
 const WARM = "#e8963a", LAMP = "#f1c587", FIRE = "#f08a32", NIGHT = "#1b2233", SNOW = "#e8eef5";
-// the skins: Бусыгин's young (and cold: blue-red), Сарафанов's old, Васенька's thin and pale
+// the skins: Busygin's young (and cold: blue-red), Sarafanov's old, Vasenka's thin and pale
 const SKIN = { bus: "#d9a789", cold: "#b07d80", sar: "#b98a6c", vas: "#dcb59c" };
 const SILVER = { dark: "#5d5f63", mid: "#a9abaf", light: "#eef0f2" };
-// the sleeves: Бусыгин's dark sweater, his coat; Сарафанов's knitted cardigan; Васенька's quilted jacket
+// the sleeves: Busygin's dark sweater, his coat; Sarafanov's knitted cardigan; Vasenka's quilted jacket
 const SLEEVE = {
   sweater: { colour: "#323846", from: 0.22, cuff: "#3b4252", knit: true },
   coat: { colour: "#4f525a", from: 0.24 },

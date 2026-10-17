@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Переезд (opus)",
-  "caption": "Переезд за посёлком. Темнеет.",
+  "title": "The Crossing (opus)",
+  "caption": "The level crossing beyond the settlement. Growing dark.",
   "horizon": 0.45,
   "camera": {
     "mode": "picture"
@@ -156,7 +156,7 @@
         1
       ],
       "smooth": true,
-      "means": "время суток — вес образов света: 0.78 сумерки … 0.82 почти ночь (скрипт ставит night)"
+      "means": "the time of day — the weight of the light's looks: 0.78 dusk … 0.82 almost night (the script sets night)"
     },
     "night": {
       "range": [
@@ -164,7 +164,7 @@
         1
       ],
       "smooth": true,
-      "means": "вес образа «ночь» — ставит скрипт по hour"
+      "means": "the weight of the look “night” — the script sets it by hour"
     },
     "beat": {
       "values": [
@@ -174,11 +174,11 @@
         "roar",
         "brother"
       ],
-      "means": "кусок фильма: игра ставит имя — кусок играется с начала"
+      "means": "the film's beat: the game sets a name — the beat plays from its beginning"
     },
     "beat_next": {
       "type": "string",
-      "means": "какой кусок будет следующим (камера сцены неподвижна — склеек нет, ключ принимается)"
+      "means": "which beat comes next (the scene's camera is still — no cuts, the key is taken)"
     },
     "barrier": {
       "range": [
@@ -186,14 +186,14 @@
         1
       ],
       "smooth": true,
-      "means": "шлагбаум: 0 поднят, 1 опущен поперёк дороги"
+      "means": "the barrier: 0 up, 1 down across the road"
     },
     "bell": {
       "range": [
         0,
         1
       ],
-      "means": "1 — звонок: два красных огня мигают по очереди; 0 — темны"
+      "means": "1 — the bell: two red lights blink in turn; 0 — dark"
     },
     "freight": {
       "range": [
@@ -201,11 +201,11 @@
         1
       ],
       "smooth": true,
-      "means": "товарный: 0 в лесу; 0.04 — фара на дуге вдали (≈ 200 м), стоит; 0.1…0.9 — идёт перед ними справа налево; 1 — ушёл влево"
+      "means": "the freight: 0 in the wood; 0.04 — the headlight on the far curve (≈ 200 m), standing; 0.1…0.9 — going before them from right to left; 1 — gone to the left"
     },
     "freight_x": {
       "type": "number",
-      "means": "нос товарного, метры вдоль пути от леса — ставит скрипт по freight"
+      "means": "the freight's nose, metres along the track from the wood — the script sets it by freight"
     },
     "snow": {
       "range": [
@@ -213,226 +213,226 @@
         1
       ],
       "smooth": true,
-      "means": "сила снегопада"
+      "means": "how hard it snows"
     },
     "nina_a": {
       "type": "number",
-      "means": "где Нина: метры вправо"
+      "means": "where Nina is: metres to the right"
     },
     "nina_d": {
       "type": "number",
-      "means": "где Нина: метры вперёд"
+      "means": "where Nina is: metres forward"
     },
     "busygin_a": {
       "type": "number",
-      "means": "где Бусыгин: метры вправо"
+      "means": "where Busygin is: metres to the right"
     },
     "busygin_d": {
       "type": "number",
-      "means": "где Бусыгин: метры вперёд"
+      "means": "where Busygin is: metres forward"
     },
     "freight_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "freight_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "freight_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car1_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car1_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car1_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car2_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car2_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car2_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car3_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car3_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car3_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car4_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car4_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car4_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car5_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car5_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car5_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car6_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car6_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car6_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car7_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car7_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car7_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car8_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car8_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car8_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car9_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car9_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car9_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car10_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car10_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car10_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car11_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car11_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car11_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car12_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car12_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car12_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car13_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car13_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car13_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car14_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car14_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car14_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car15_a": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car15_d": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     },
     "car15_f": {
       "type": "number",
-      "means": "ставит скрипт"
+      "means": "the script sets it"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true
     },
     {
       "id": "ground",
-      "name": "Поле и пути",
+      "name": "Field and tracks",
       "plane": true,
       "across": 50,
       "distance": 680,
@@ -442,7 +442,7 @@
     },
     {
       "id": "treeline",
-      "name": "Дальний лес",
+      "name": "Far forest",
       "across": 0,
       "distance": 1100,
       "height": 18,
@@ -455,7 +455,7 @@
     },
     {
       "id": "forest",
-      "name": "Ельник",
+      "name": "Spruce wood",
       "across": 190,
       "distance": 392,
       "height": 30,
@@ -468,7 +468,7 @@
     },
     {
       "id": "village",
-      "name": "Посёлок",
+      "name": "Settlement",
       "across": -125,
       "distance": 330,
       "height": 15,
@@ -481,7 +481,7 @@
     },
     {
       "id": "poles",
-      "name": "Столбы",
+      "name": "Poles",
       "across": 157.17,
       "distance": 407.3,
       "height": 7.8,
@@ -556,7 +556,7 @@
     },
     {
       "id": "booth",
-      "name": "Будка дежурной",
+      "name": "Keeper's booth",
       "unseen": true,
       "across": 6.3,
       "distance": 7.9,
@@ -564,7 +564,7 @@
     },
     {
       "id": "booth_front",
-      "name": "Будка дежурной",
+      "name": "Keeper's booth",
       "on": "booth",
       "facing": 180,
       "height": 4.3,
@@ -578,7 +578,7 @@
     },
     {
       "id": "booth_window",
-      "name": "Окно будки",
+      "name": "Booth window",
       "on": "booth",
       "across": 0.45,
       "distance": -0.04,
@@ -595,7 +595,7 @@
     },
     {
       "id": "booth_side",
-      "name": "Будка дежурной",
+      "name": "Keeper's booth",
       "on": "booth",
       "across": -1.35,
       "distance": 1.15,
@@ -611,7 +611,7 @@
     },
     {
       "id": "chimney_smoke",
-      "name": "Дым из трубы",
+      "name": "Smoke from the chimney",
       "particles": {
         "kind": "smoke",
         "at": {
@@ -636,7 +636,7 @@
     },
     {
       "id": "signal",
-      "name": "Светофор переезда",
+      "name": "Crossing signal",
       "across": 2.55,
       "distance": 8.9,
       "height": 3.3,
@@ -650,7 +650,7 @@
     },
     {
       "id": "barrier",
-      "name": "Шлагбаум",
+      "name": "Barrier",
       "across": -3.25,
       "distance": 7.75,
       "facing": 197.5,
@@ -665,7 +665,7 @@
     },
     {
       "id": "weeds",
-      "name": "Бурьян",
+      "name": "Weeds",
       "across": -1.9,
       "distance": 2.3,
       "height": 0.8,
@@ -721,7 +721,7 @@
     },
     {
       "id": "freight",
-      "name": "Товарный",
+      "name": "Freight",
       "across": 81.18,
       "distance": 208.19,
       "facing": 110.34,
@@ -740,7 +740,7 @@
     },
     {
       "id": "car1",
-      "name": "Вагон",
+      "name": "Car",
       "across": 86.75,
       "distance": 223.19,
       "facing": 110.41,
@@ -759,7 +759,7 @@
     },
     {
       "id": "car2",
-      "name": "Вагон",
+      "name": "Car",
       "across": 91.33,
       "distance": 235.47,
       "facing": 110.49,
@@ -778,7 +778,7 @@
     },
     {
       "id": "car3",
-      "name": "Вагон",
+      "name": "Car",
       "across": 96.36,
       "distance": 248.9,
       "facing": 110.59,
@@ -797,7 +797,7 @@
     },
     {
       "id": "car4",
-      "name": "Вагон",
+      "name": "Car",
       "across": 101.87,
       "distance": 263.5,
       "facing": 110.73,
@@ -816,7 +816,7 @@
     },
     {
       "id": "car5",
-      "name": "Вагон",
+      "name": "Car",
       "across": 107.27,
       "distance": 277.71,
       "facing": 110.94,
@@ -835,7 +835,7 @@
     },
     {
       "id": "car6",
-      "name": "Вагон",
+      "name": "Car",
       "across": 112.59,
       "distance": 291.52,
       "facing": 111.08,
@@ -854,7 +854,7 @@
     },
     {
       "id": "car7",
-      "name": "Вагон",
+      "name": "Car",
       "across": 117.97,
       "distance": 305.68,
       "facing": 110.61,
@@ -873,7 +873,7 @@
     },
     {
       "id": "car8",
-      "name": "Вагон",
+      "name": "Car",
       "across": 123,
       "distance": 319.07,
       "facing": 110.74,
@@ -892,7 +892,7 @@
     },
     {
       "id": "car9",
-      "name": "Вагон",
+      "name": "Car",
       "across": 128.17,
       "distance": 332.45,
       "facing": 111.59,
@@ -911,7 +911,7 @@
     },
     {
       "id": "car10",
-      "name": "Вагон",
+      "name": "Car",
       "across": 133.94,
       "distance": 346.51,
       "facing": 113.24,
@@ -930,7 +930,7 @@
     },
     {
       "id": "car11",
-      "name": "Вагон",
+      "name": "Car",
       "across": 139.64,
       "distance": 359.24,
       "facing": 115.17,
@@ -949,7 +949,7 @@
     },
     {
       "id": "car12",
-      "name": "Вагон",
+      "name": "Car",
       "across": 145.43,
       "distance": 371,
       "facing": 117.09,
@@ -968,7 +968,7 @@
     },
     {
       "id": "car13",
-      "name": "Вагон",
+      "name": "Car",
       "across": 152.12,
       "distance": 383.69,
       "facing": 118.34,
@@ -987,7 +987,7 @@
     },
     {
       "id": "car14",
-      "name": "Вагон",
+      "name": "Car",
       "across": 159.6,
       "distance": 397.32,
       "facing": 119.09,
@@ -1006,7 +1006,7 @@
     },
     {
       "id": "car15",
-      "name": "Вагон",
+      "name": "Car",
       "across": 167.23,
       "distance": 410.88,
       "facing": 119.53,
@@ -1025,7 +1025,7 @@
     },
     {
       "id": "freight_nose",
-      "name": "Товарный",
+      "name": "Freight",
       "on": "freight",
       "across": -9,
       "distance": 0,
@@ -1040,7 +1040,7 @@
     },
     {
       "id": "nina",
-      "name": "Нина",
+      "name": "Nina",
       "person": {
         "cast": "cast",
         "who": "nina",
@@ -1056,7 +1056,7 @@
     },
     {
       "id": "busygin",
-      "name": "Бусыгин",
+      "name": "Busygin",
       "person": {
         "cast": "cast",
         "who": "busygin",
@@ -1072,7 +1072,7 @@
     },
     {
       "id": "snowfall",
-      "name": "Снег",
+      "name": "Snow",
       "particles": {
         "kind": "snow",
         "amount": "snow",

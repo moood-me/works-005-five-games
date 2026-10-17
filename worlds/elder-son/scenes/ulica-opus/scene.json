@@ -1,7 +1,7 @@
 {
   "engine": 3,
-  "title": "Улица",
-  "caption": "Ночная улица пригорода. Снег.",
+  "title": "The Street",
+  "caption": "A suburb's street at night. Snow.",
   "horizon": 0.5,
   "camera": {
     "mode": "roam",
@@ -404,7 +404,7 @@
         1
       ],
       "smooth": true,
-      "means": "время ночи: 0.9 ночь … 0.95 поздняя ночь (скрипт ставит late)"
+      "means": "the time of night: 0.9 night … 0.95 late night (the script sets late)"
     },
     "late": {
       "range": [
@@ -412,7 +412,7 @@
         1
       ],
       "smooth": true,
-      "means": "вес образа «поздняя ночь» — ставит скрипт по hour"
+      "means": "the weight of the look “late night” — the script sets it by hour"
     },
     "snow": {
       "range": [
@@ -420,7 +420,7 @@
         1
       ],
       "smooth": true,
-      "means": "сила снегопада"
+      "means": "how hard it snows"
     },
     "beat": {
       "values": [
@@ -445,7 +445,7 @@
         "run_out",
         "night_window"
       ],
-      "means": "кусок фильма: игра ставит имя — кусок играется с начала (модуль beats)"
+      "means": "the film's beat: the game sets a name — the beat plays from its beginning (the module beats)"
     },
     "beat_next": {
       "values": [
@@ -470,7 +470,7 @@
         "run_out",
         "night_window"
       ],
-      "means": "какой кусок будет следующим: сцена готовит его первый кадр, склейка идёт по готовому"
+      "means": "which beat comes next: the scene makes its first frame ready, the cut goes to the ready one"
     },
     "knock": {
       "values": [
@@ -481,7 +481,7 @@
         4,
         5
       ],
-      "means": "«Окна»: N — Бусыгин идёт к окну winN и стучит (knock:hit, knock:done); 0 — возвращается к Сильве"
+      "means": "“Windows”: N — Busygin goes to the window winN and knocks (knock:hit, knock:done); 0 — goes back to Silva"
     },
     "vyodra": {
       "values": [
@@ -489,32 +489,32 @@
         "fill",
         "throw"
       ],
-      "means": "«Вёдра»: fill — к бочке, полное ведро (vyodra:full); throw — несёт к сараю, выплёскивает (vyodra:splash); none — ставит ведро"
+      "means": "“Buckets”: fill — to the barrel, a full bucket (vyodra:full); throw — carries it to the shed, throws the water (vyodra:splash); none — puts the bucket down"
     },
     "run": {
       "range": [
         0,
         1
       ],
-      "means": "«Бегом»: куда бежать Бусыгину, от калитки (0) до тропы на платформу (1), ≈ 65 м"
+      "means": "“Running”: where Busygin is to run, from the gate (0) to the path to the platform (1), ≈ 65 m"
     },
     "run_at": {
       "range": [
         0,
         1
       ],
-      "means": "«Бегом»: где он сейчас (ставит сцена, 10 раз в секунду)"
+      "means": "“Running”: where he is now (the scene sets it, 10 times a second)"
     },
     "look_back": {
       "values": [
         0,
         1
       ],
-      "means": "«Бегом»: 1 — стоит и оглядывается на окно кухни"
+      "means": "“Running”: 1 — he stands and looks back at the kitchen window"
     },
     "splash": {
       "type": "number",
-      "means": "вода на сарай: каждое изменение — брызги (ставит сцена)"
+      "means": "water on the shed: each change — a splash (the scene sets it)"
     },
     "win1": {
       "values": [
@@ -522,7 +522,7 @@
         1,
         2
       ],
-      "means": "окно 1: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+      "means": "window 1: 0 dark · 1 lit · 2 lit, a silhouette in it"
     },
     "win2": {
       "values": [
@@ -530,7 +530,7 @@
         1,
         2
       ],
-      "means": "окно 2: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+      "means": "window 2: 0 dark · 1 lit · 2 lit, a silhouette in it"
     },
     "win3": {
       "values": [
@@ -538,7 +538,7 @@
         1,
         2
       ],
-      "means": "окно 3: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+      "means": "window 3: 0 dark · 1 lit · 2 lit, a silhouette in it"
     },
     "win4": {
       "values": [
@@ -546,7 +546,7 @@
         1,
         2
       ],
-      "means": "окно 4: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+      "means": "window 4: 0 dark · 1 lit · 2 lit, a silhouette in it"
     },
     "win5": {
       "values": [
@@ -554,7 +554,7 @@
         1,
         2
       ],
-      "means": "окно 5: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+      "means": "window 5: 0 dark · 1 lit · 2 lit, a silhouette in it"
     },
     "mak_window": {
       "values": [
@@ -562,7 +562,7 @@
         1,
         2
       ],
-      "means": "окно Макарской: 0 тёмное · 1 горит · 2 горит, в нём силуэт"
+      "means": "Makarskaya's window: 0 dark · 1 lit · 2 lit, a silhouette in it"
     },
     "win1_lit": {
       "range": [
@@ -570,7 +570,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет окна win1 — ставит скрипт по win1"
+      "means": "the light of the window win1 — the script sets it by win1"
     },
     "win1_who": {
       "range": [
@@ -578,7 +578,7 @@
         1
       ],
       "smooth": true,
-      "means": "силуэт в окне win1 — ставит скрипт по win1"
+      "means": "the silhouette in the window win1 — the script sets it by win1"
     },
     "win2_lit": {
       "range": [
@@ -586,7 +586,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет окна win2 — ставит скрипт по win2"
+      "means": "the light of the window win2 — the script sets it by win2"
     },
     "win2_who": {
       "range": [
@@ -594,7 +594,7 @@
         1
       ],
       "smooth": true,
-      "means": "силуэт в окне win2 — ставит скрипт по win2"
+      "means": "the silhouette in the window win2 — the script sets it by win2"
     },
     "win3_lit": {
       "range": [
@@ -602,7 +602,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет окна win3 — ставит скрипт по win3"
+      "means": "the light of the window win3 — the script sets it by win3"
     },
     "win3_who": {
       "range": [
@@ -610,7 +610,7 @@
         1
       ],
       "smooth": true,
-      "means": "силуэт в окне win3 — ставит скрипт по win3"
+      "means": "the silhouette in the window win3 — the script sets it by win3"
     },
     "win4_lit": {
       "range": [
@@ -618,7 +618,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет окна win4 — ставит скрипт по win4"
+      "means": "the light of the window win4 — the script sets it by win4"
     },
     "win4_who": {
       "range": [
@@ -626,7 +626,7 @@
         1
       ],
       "smooth": true,
-      "means": "силуэт в окне win4 — ставит скрипт по win4"
+      "means": "the silhouette in the window win4 — the script sets it by win4"
     },
     "win5_lit": {
       "range": [
@@ -634,7 +634,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет окна win5 — ставит скрипт по win5"
+      "means": "the light of the window win5 — the script sets it by win5"
     },
     "win5_who": {
       "range": [
@@ -642,7 +642,7 @@
         1
       ],
       "smooth": true,
-      "means": "силуэт в окне win5 — ставит скрипт по win5"
+      "means": "the silhouette in the window win5 — the script sets it by win5"
     },
     "mak_window_lit": {
       "range": [
@@ -650,7 +650,7 @@
         1
       ],
       "smooth": true,
-      "means": "свет окна mak_window — ставит скрипт по mak_window"
+      "means": "the light of the window mak_window — the script sets it by mak_window"
     },
     "mak_window_who": {
       "range": [
@@ -658,7 +658,7 @@
         1
       ],
       "smooth": true,
-      "means": "силуэт в окне mak_window — ставит скрипт по mak_window"
+      "means": "the silhouette in the window mak_window — the script sets it by mak_window"
     },
     "porch_light": {
       "range": [
@@ -666,7 +666,7 @@
         1
       ],
       "smooth": true,
-      "means": "лампочка над крыльцом Сарафановых"
+      "means": "the bulb over the Sarafanovs' porch"
     },
     "door": {
       "range": [
@@ -674,11 +674,11 @@
         1
       ],
       "smooth": true,
-      "means": "дверь Сарафановых: 0 закрыта … 1 открыта внутрь"
+      "means": "the Sarafanovs' door: 0 shut … 1 open inward"
     },
     "door_f": {
       "type": "number",
-      "means": "поворот двери Сарафановых, градусы — ставит скрипт по door"
+      "means": "the turn of the Sarafanovs' door, degrees — the script sets it by door"
     },
     "mak_door": {
       "range": [
@@ -686,11 +686,11 @@
         1
       ],
       "smooth": true,
-      "means": "дверь Макарской: 0 закрыта … 1 открыта"
+      "means": "Makarskaya's door: 0 shut … 1 open"
     },
     "mak_door_f": {
       "type": "number",
-      "means": "поворот двери Макарской — ставит скрипт по mak_door"
+      "means": "the turn of Makarskaya's door — the script sets it by mak_door"
     },
     "nb_door": {
       "range": [
@@ -698,11 +698,11 @@
         1
       ],
       "smooth": true,
-      "means": "дверь соседей (дом у Сарафановых): 0 закрыта … 1 открыта"
+      "means": "the neighbours' door (the house next to the Sarafanovs'): 0 shut … 1 open"
     },
     "nb_door_f": {
       "type": "number",
-      "means": "поворот двери соседей — ставит скрипт по nb_door"
+      "means": "the turn of the neighbours' door — the script sets it by nb_door"
     },
     "fire": {
       "range": [
@@ -710,7 +710,7 @@
         1
       ],
       "smooth": true,
-      "means": "огонь в сарае: свет в окошке, языки под крышей, дым, оранжевый свет на снегу (двигает игра в «Вёдрах»)"
+      "means": "the fire in the shed: light in its little window, tongues under the roof, smoke, orange light on the snow (the game moves it in “Buckets”)"
     },
     "steam": {
       "range": [
@@ -718,21 +718,21 @@
         1
       ],
       "smooth": true,
-      "means": "пар над потушенным сараем"
+      "means": "steam over the shed put out"
     },
     "shed_burnt": {
       "values": [
         0,
         1
       ],
-      "means": "сарай после пожара (ставит кусок after_fire): 1 — обгорел/выгорел по shed_left"
+      "means": "the shed after the fire (the beat after_fire sets it): 1 — scorched/burnt out by shed_left"
     },
     "shed_left": {
       "values": [
         0,
         1
       ],
-      "means": "сарай после пожара: 1 — устоял (крыша цела), 0 — выгорел (чёрные стены без крыши); ставит игра перед after_fire"
+      "means": "the shed after the fire: 1 — it stood (the roof whole), 0 — burnt out (black walls with no roof); the game sets it before after_fire"
     },
     "silva_smoke": {
       "range": [
@@ -740,35 +740,35 @@
         1
       ],
       "smooth": true,
-      "means": "дым от рукава Сильвы (кусок fire ставит, гасит за 30 с)"
+      "means": "smoke from Silva's sleeve (the beat fire sets it, puts it out over 30 s)"
     },
     "shawl": {
       "range": [
         0,
         1
       ],
-      "means": "вставка «Пальто» (closeups, кадр shawl): 0 закрыта, 1 открыта"
+      "means": "the insert “The Coat” (closeups, the shot shawl): 0 shut, 1 open"
     },
     "lay": {
       "range": [
         0,
         1
       ],
-      "means": "«Пальто»: пальто опускается ей на плечи (двигает игра; читает только animate вставки)"
+      "means": "“The Coat”: the coat comes down on her shoulders (the game moves it; only the insert's animate reads it)"
     },
     "warm": {
       "range": [
         0,
         1
       ],
-      "means": "ключ партии: свет окна кухни и пятно на снегу (0.55 + 0.45·warm)"
+      "means": "a key of the play: the kitchen window's light and the patch on the snow (0.55 + 0.45·warm)"
     },
     "frost": {
       "range": [
         0,
         1
       ],
-      "means": "ключ партии: иней на окне кухни, от углов к середине"
+      "means": "a key of the play: frost on the kitchen window, from the corners to the middle"
     },
     "nina_is": {
       "values": [
@@ -776,21 +776,21 @@
         "knows",
         "sister"
       ],
-      "means": "ключ партии: Нина знает правду / как сестра / нет — porch_night, porch_after"
+      "means": "a key of the play: Nina knows the truth / as a sister / no — porch_night, porch_after"
     },
     "secret": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: тайна об оркестре (Р115 на крыльце — говорит игра)"
+      "means": "a key of the play: the secret of the orchestra (L115 on the porch — the game says it)"
     },
     "silva_door": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: Сильва выбегает впереди в run_out"
+      "means": "a key of the play: Silva runs out ahead in run_out"
     },
     "ending": {
       "values": [
@@ -799,192 +799,192 @@
         "anyway",
         "suitcase"
       ],
-      "means": "ключ партии: кто в окне кухни в night_window"
+      "means": "a key of the play: who is in the kitchen window in night_window"
     },
     "nina_end": {
       "values": [
         "home",
         "gone"
       ],
-      "means": "ключ партии: Нина в окне в night_window или её нет"
+      "means": "a key of the play: Nina in the window in night_window, or she is not"
     },
     "nina_for": {
       "values": [
         0,
         1
       ],
-      "means": "ключ партии: Нина одна стоит у окна в night_window (при saturday/suitcase)"
+      "means": "a key of the play: Nina alone stands at the window in night_window (at saturday/suitcase)"
     },
     "knocked": {
       "type": "string",
-      "means": "ключ партии: номера окон, в которые он стучал в I (''…'12345'): в evening они тёмные"
+      "means": "a key of the play: the numbers of the windows he knocked at in I (''…'12345'): in evening they are dark"
     },
     "busygin_here": {
       "type": "boolean",
-      "means": "Бусыгин в сцене (ставит кусок)"
+      "means": "Busygin in the scene (the beat sets it)"
     },
     "busygin_a": {
       "type": "number",
-      "means": "где Бусыгин: метры вправо"
+      "means": "where Busygin is: metres to the right"
     },
     "busygin_d": {
       "type": "number",
-      "means": "где Бусыгин: метры вперёд"
+      "means": "where Busygin is: metres forward"
     },
     "silva_here": {
       "type": "boolean",
-      "means": "Сильва в сцене (ставит кусок)"
+      "means": "Silva in the scene (the beat sets it)"
     },
     "silva_a": {
       "type": "number",
-      "means": "где Сильва: метры вправо"
+      "means": "where Silva is: metres to the right"
     },
     "silva_d": {
       "type": "number",
-      "means": "где Сильва: метры вперёд"
+      "means": "where Silva is: metres forward"
     },
     "sarafanov_here": {
       "type": "boolean",
-      "means": "Сарафанов в сцене (ставит кусок)"
+      "means": "Sarafanov in the scene (the beat sets it)"
     },
     "sarafanov_a": {
       "type": "number",
-      "means": "где Сарафанов: метры вправо"
+      "means": "where Sarafanov is: metres to the right"
     },
     "sarafanov_d": {
       "type": "number",
-      "means": "где Сарафанов: метры вперёд"
+      "means": "where Sarafanov is: metres forward"
     },
     "vasenka_here": {
       "type": "boolean",
-      "means": "Васенька в сцене (ставит кусок)"
+      "means": "Vasenka in the scene (the beat sets it)"
     },
     "vasenka_a": {
       "type": "number",
-      "means": "где Васенька: метры вправо"
+      "means": "where Vasenka is: metres to the right"
     },
     "vasenka_d": {
       "type": "number",
-      "means": "где Васенька: метры вперёд"
+      "means": "where Vasenka is: metres forward"
     },
     "nina_here": {
       "type": "boolean",
-      "means": "Нина в сцене (ставит кусок)"
+      "means": "Nina in the scene (the beat sets it)"
     },
     "nina_a": {
       "type": "number",
-      "means": "где Нина: метры вправо"
+      "means": "where Nina is: metres to the right"
     },
     "nina_d": {
       "type": "number",
-      "means": "где Нина: метры вперёд"
+      "means": "where Nina is: metres forward"
     },
     "kudimov_here": {
       "type": "boolean",
-      "means": "Кудимов в сцене (ставит кусок)"
+      "means": "Kudimov in the scene (the beat sets it)"
     },
     "kudimov_a": {
       "type": "number",
-      "means": "где Кудимов: метры вправо"
+      "means": "where Kudimov is: metres to the right"
     },
     "kudimov_d": {
       "type": "number",
-      "means": "где Кудимов: метры вперёд"
+      "means": "where Kudimov is: metres forward"
     },
     "makarskaya_here": {
       "type": "boolean",
-      "means": "Макарская в сцене (ставит кусок)"
+      "means": "Makarskaya in the scene (the beat sets it)"
     },
     "makarskaya_a": {
       "type": "number",
-      "means": "где Макарская: метры вправо"
+      "means": "where Makarskaya is: metres to the right"
     },
     "makarskaya_d": {
       "type": "number",
-      "means": "где Макарская: метры вперёд"
+      "means": "where Makarskaya is: metres forward"
     },
     "neighbor1_here": {
       "type": "boolean",
-      "means": "сосед в сцене (ставит кусок)"
+      "means": "the neighbour in the scene (the beat sets it)"
     },
     "neighbor1_a": {
       "type": "number",
-      "means": "где сосед: метры вправо"
+      "means": "where the neighbour is: metres to the right"
     },
     "neighbor1_d": {
       "type": "number",
-      "means": "где сосед: метры вперёд"
+      "means": "where the neighbour is: metres forward"
     },
     "neighbor2_here": {
       "type": "boolean",
-      "means": "соседка в сцене (ставит кусок)"
+      "means": "the neighbour woman in the scene (the beat sets it)"
     },
     "neighbor2_a": {
       "type": "number",
-      "means": "где соседка: метры вправо"
+      "means": "where the neighbour woman is: metres to the right"
     },
     "neighbor2_d": {
       "type": "number",
-      "means": "где соседка: метры вперёд"
+      "means": "where the neighbour woman is: metres forward"
     },
     "k1_here": {
       "type": "boolean",
-      "means": "первый в окне кухни в сцене (ставит кусок)"
+      "means": "the first in the kitchen window in the scene (the beat sets it)"
     },
     "k1_a": {
       "type": "number",
-      "means": "где первый в окне кухни: метры вправо"
+      "means": "where the first in the kitchen window is: metres to the right"
     },
     "k1_d": {
       "type": "number",
-      "means": "где первый в окне кухни: метры вперёд"
+      "means": "where the first in the kitchen window is: metres forward"
     },
     "k2_here": {
       "type": "boolean",
-      "means": "второй в окне кухни в сцене (ставит кусок)"
+      "means": "the second in the kitchen window in the scene (the beat sets it)"
     },
     "k2_a": {
       "type": "number",
-      "means": "где второй в окне кухни: метры вправо"
+      "means": "where the second in the kitchen window is: metres to the right"
     },
     "k2_d": {
       "type": "number",
-      "means": "где второй в окне кухни: метры вперёд"
+      "means": "where the second in the kitchen window is: metres forward"
     },
     "k3_here": {
       "type": "boolean",
-      "means": "третий в окне кухни в сцене (ставит кусок)"
+      "means": "the third in the kitchen window in the scene (the beat sets it)"
     },
     "k3_a": {
       "type": "number",
-      "means": "где третий в окне кухни: метры вправо"
+      "means": "where the third in the kitchen window is: metres to the right"
     },
     "k3_d": {
       "type": "number",
-      "means": "где третий в окне кухни: метры вперёд"
+      "means": "where the third in the kitchen window is: metres forward"
     },
     "k4_here": {
       "type": "boolean",
-      "means": "четвёртый в окне кухни в сцене (ставит кусок)"
+      "means": "the fourth in the kitchen window in the scene (the beat sets it)"
     },
     "k4_a": {
       "type": "number",
-      "means": "где четвёртый в окне кухни: метры вправо"
+      "means": "where the fourth in the kitchen window is: metres to the right"
     },
     "k4_d": {
       "type": "number",
-      "means": "где четвёртый в окне кухни: метры вперёд"
+      "means": "where the fourth in the kitchen window is: metres forward"
     }
   },
   "objects": [
     {
       "id": "sky",
-      "name": "Небо",
+      "name": "Sky",
       "sky": true
     },
     {
       "id": "ground",
-      "name": "Улица",
+      "name": "The Street",
       "plane": true,
       "drape": true,
       "across": 0,
@@ -995,7 +995,7 @@
     },
     {
       "id": "far",
-      "name": "Дальние дворы",
+      "name": "Far yards",
       "across": 4,
       "distance": 32,
       "height": 13,
@@ -1008,7 +1008,7 @@
     },
     {
       "id": "h1",
-      "name": "Дом",
+      "name": "House",
       "unseen": true,
       "across": -11,
       "distance": 14,
@@ -1016,7 +1016,7 @@
     },
     {
       "id": "h1_wall",
-      "name": "Дом",
+      "name": "House",
       "on": "h1",
       "facing": 180,
       "height": 2.95,
@@ -1029,7 +1029,7 @@
     },
     {
       "id": "h1_roof",
-      "name": "Крыша",
+      "name": "Roof",
       "plane": true,
       "on": "h1",
       "across": 0,
@@ -1041,7 +1041,7 @@
     },
     {
       "id": "h1_endl",
-      "name": "Дом",
+      "name": "House",
       "on": "h1",
       "across": -4.5,
       "distance": 3,
@@ -1056,7 +1056,7 @@
     },
     {
       "id": "h1_endr",
-      "name": "Дом",
+      "name": "House",
       "on": "h1",
       "across": 4.5,
       "distance": 3,
@@ -1071,7 +1071,7 @@
     },
     {
       "id": "h2",
-      "name": "Дом",
+      "name": "House",
       "unseen": true,
       "across": 0.5,
       "distance": 14,
@@ -1079,7 +1079,7 @@
     },
     {
       "id": "h2_wall",
-      "name": "Дом",
+      "name": "House",
       "on": "h2",
       "facing": 180,
       "height": 2.95,
@@ -1092,7 +1092,7 @@
     },
     {
       "id": "h2_roof",
-      "name": "Крыша",
+      "name": "Roof",
       "plane": true,
       "on": "h2",
       "across": 0,
@@ -1104,7 +1104,7 @@
     },
     {
       "id": "h2_endl",
-      "name": "Дом",
+      "name": "House",
       "on": "h2",
       "across": -4.7,
       "distance": 3,
@@ -1119,7 +1119,7 @@
     },
     {
       "id": "h2_endr",
-      "name": "Дом",
+      "name": "House",
       "on": "h2",
       "across": 4.7,
       "distance": 3,
@@ -1134,7 +1134,7 @@
     },
     {
       "id": "h3",
-      "name": "Дом",
+      "name": "House",
       "unseen": true,
       "across": 10.5,
       "distance": 14,
@@ -1142,7 +1142,7 @@
     },
     {
       "id": "h3_wall",
-      "name": "Дом",
+      "name": "House",
       "on": "h3",
       "facing": 180,
       "height": 2.95,
@@ -1155,7 +1155,7 @@
     },
     {
       "id": "h3_roof",
-      "name": "Крыша",
+      "name": "Roof",
       "plane": true,
       "on": "h3",
       "across": 0,
@@ -1167,7 +1167,7 @@
     },
     {
       "id": "h3_endl",
-      "name": "Дом",
+      "name": "House",
       "on": "h3",
       "across": -3.5,
       "distance": 3,
@@ -1182,7 +1182,7 @@
     },
     {
       "id": "h3_endr",
-      "name": "Дом",
+      "name": "House",
       "on": "h3",
       "across": 3.5,
       "distance": 3,
@@ -1197,7 +1197,7 @@
     },
     {
       "id": "sar",
-      "name": "Дом",
+      "name": "House",
       "unseen": true,
       "across": 21.5,
       "distance": 12,
@@ -1205,7 +1205,7 @@
     },
     {
       "id": "sar_wall",
-      "name": "Дом Сарафановых",
+      "name": "The Sarafanovs' house",
       "on": "sar",
       "facing": 180,
       "height": 2.95,
@@ -1218,7 +1218,7 @@
     },
     {
       "id": "sar_roof",
-      "name": "Крыша",
+      "name": "Roof",
       "plane": true,
       "on": "sar",
       "across": 0,
@@ -1230,7 +1230,7 @@
     },
     {
       "id": "sar_endl",
-      "name": "Дом",
+      "name": "House",
       "on": "sar",
       "across": -5,
       "distance": 3.5,
@@ -1245,7 +1245,7 @@
     },
     {
       "id": "sar_endr",
-      "name": "Дом",
+      "name": "House",
       "on": "sar",
       "across": 5,
       "distance": 3.5,
@@ -1260,7 +1260,7 @@
     },
     {
       "id": "mak",
-      "name": "Дом",
+      "name": "House",
       "unseen": true,
       "across": 34.5,
       "distance": 13,
@@ -1268,7 +1268,7 @@
     },
     {
       "id": "mak_wall",
-      "name": "Дом Макарской",
+      "name": "Makarskaya's house",
       "on": "mak",
       "facing": 180,
       "height": 2.95,
@@ -1281,7 +1281,7 @@
     },
     {
       "id": "mak_roof",
-      "name": "Крыша",
+      "name": "Roof",
       "plane": true,
       "on": "mak",
       "across": 0,
@@ -1293,7 +1293,7 @@
     },
     {
       "id": "mak_endl",
-      "name": "Дом",
+      "name": "House",
       "on": "mak",
       "across": -4,
       "distance": 3,
@@ -1308,7 +1308,7 @@
     },
     {
       "id": "mak_endr",
-      "name": "Дом",
+      "name": "House",
       "on": "mak",
       "across": 4,
       "distance": 3,
@@ -1323,7 +1323,7 @@
     },
     {
       "id": "win1",
-      "name": "Окно",
+      "name": "Window",
       "on": "h1",
       "across": -3,
       "distance": 0.05,
@@ -1340,7 +1340,7 @@
     },
     {
       "id": "win2",
-      "name": "Окно",
+      "name": "Window",
       "on": "h1",
       "across": 3,
       "distance": 0.05,
@@ -1357,7 +1357,7 @@
     },
     {
       "id": "win3",
-      "name": "Окно",
+      "name": "Window",
       "on": "h2",
       "across": -2.5,
       "distance": 0.05,
@@ -1374,7 +1374,7 @@
     },
     {
       "id": "win4",
-      "name": "Окно",
+      "name": "Window",
       "on": "h2",
       "across": 3.5,
       "distance": 0.05,
@@ -1391,7 +1391,7 @@
     },
     {
       "id": "win5",
-      "name": "Окно",
+      "name": "Window",
       "on": "h3",
       "across": -0.5,
       "distance": 0.05,
@@ -1408,7 +1408,7 @@
     },
     {
       "id": "sar_room",
-      "name": "Окно",
+      "name": "Window",
       "on": "sar",
       "across": -2.9,
       "distance": 0.05,
@@ -1425,7 +1425,7 @@
     },
     {
       "id": "mak_window",
-      "name": "Окно",
+      "name": "Window",
       "on": "mak",
       "across": -2.5,
       "distance": 0.05,
@@ -1442,7 +1442,7 @@
     },
     {
       "id": "mak_room",
-      "name": "Окно",
+      "name": "Window",
       "on": "mak",
       "across": 0.6,
       "distance": 0.05,
@@ -1459,7 +1459,7 @@
     },
     {
       "id": "kitchen",
-      "name": "Окно кухни",
+      "name": "Kitchen window",
       "on": "sar",
       "across": 0.5,
       "distance": 0.04,
@@ -1476,7 +1476,7 @@
     },
     {
       "id": "k_floor",
-      "name": "Пол",
+      "name": "Floor",
       "plane": true,
       "unseen": true,
       "walk": true,
@@ -1488,7 +1488,7 @@
     },
     {
       "id": "k_back",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 22,
       "distance": 15,
@@ -1504,7 +1504,7 @@
     },
     {
       "id": "k_left",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 20.5,
       "distance": 13.5,
@@ -1520,7 +1520,7 @@
     },
     {
       "id": "k_right",
-      "name": "Кухня",
+      "name": "Kitchen",
       "inside": true,
       "across": 23.5,
       "distance": 13.5,
@@ -1536,7 +1536,7 @@
     },
     {
       "id": "stove",
-      "name": "Печь",
+      "name": "Stove",
       "inside": true,
       "across": 20.57,
       "distance": 14.35,
@@ -1552,7 +1552,7 @@
     },
     {
       "id": "table",
-      "name": "Стол",
+      "name": "Table",
       "inside": true,
       "across": 21.65,
       "distance": 13.25,
@@ -1568,7 +1568,7 @@
     },
     {
       "id": "table_top",
-      "name": "Стол",
+      "name": "Table",
       "plane": true,
       "inside": true,
       "across": 21.65,
@@ -1583,7 +1583,7 @@
     },
     {
       "id": "abajur",
-      "name": "Абажур",
+      "name": "Lampshade",
       "inside": true,
       "glows": true,
       "across": 21.65,
@@ -1599,7 +1599,7 @@
     },
     {
       "id": "hall",
-      "name": "Сени",
+      "name": "Passage",
       "inside": true,
       "glows": true,
       "across": 25.2,
@@ -1616,7 +1616,7 @@
     },
     {
       "id": "door",
-      "name": "Дверь",
+      "name": "Door",
       "on": "sar",
       "across": 3.25,
       "distance": 0.03,
@@ -1636,7 +1636,7 @@
     },
     {
       "id": "porch",
-      "name": "Крыльцо",
+      "name": "Porch",
       "across": 25.2,
       "distance": 10.95,
       "facing": 180,
@@ -1650,7 +1650,7 @@
     },
     {
       "id": "porch_floor",
-      "name": "Крыльцо",
+      "name": "Porch",
       "plane": true,
       "walk": true,
       "across": 25.2,
@@ -1661,7 +1661,7 @@
     },
     {
       "id": "porch_steps",
-      "name": "Ступени",
+      "name": "Steps",
       "plane": true,
       "walk": true,
       "across": 25.2,
@@ -1673,7 +1673,7 @@
     },
     {
       "id": "porch_bulb",
-      "name": "Лампочка над крыльцом",
+      "name": "Bulb over the porch",
       "glows": true,
       "across": 25.2,
       "distance": 11.9,
@@ -1688,7 +1688,7 @@
     },
     {
       "id": "mak_hall",
-      "name": "Сени",
+      "name": "Passage",
       "inside": true,
       "glows": true,
       "across": 36.9,
@@ -1705,7 +1705,7 @@
     },
     {
       "id": "mak_door",
-      "name": "Дверь Макарской",
+      "name": "Makarskaya's door",
       "on": "mak",
       "across": 1.95,
       "distance": 0.03,
@@ -1724,7 +1724,7 @@
     },
     {
       "id": "nb_hall",
-      "name": "Сени",
+      "name": "Passage",
       "inside": true,
       "glows": true,
       "across": 12.8,
@@ -1741,7 +1741,7 @@
     },
     {
       "id": "nb_door",
-      "name": "Дверь соседей",
+      "name": "Neighbours' door",
       "on": "h3",
       "across": 1.85,
       "distance": 0.03,
@@ -1760,7 +1760,7 @@
     },
     {
       "id": "sar_fence",
-      "name": "Палисадник",
+      "name": "Front garden",
       "across": 15.6,
       "distance": 9.4,
       "facing": 180,
@@ -1774,7 +1774,7 @@
     },
     {
       "id": "side_fence",
-      "name": "Забор",
+      "name": "Fence",
       "across": 27.4,
       "distance": 9.6,
       "facing": 90,
@@ -1788,7 +1788,7 @@
     },
     {
       "id": "fences",
-      "name": "Забор",
+      "name": "Fence",
       "across": -21.9,
       "distance": 14,
       "facing": 180,
@@ -1832,7 +1832,7 @@
     },
     {
       "id": "near_fence",
-      "name": "Забор",
+      "name": "Fence",
       "across": -34,
       "distance": -7.9,
       "facing": 180,
@@ -1876,7 +1876,7 @@
     },
     {
       "id": "shed",
-      "name": "Сарай",
+      "name": "Shed",
       "across": 28.9,
       "distance": 11.2,
       "facing": 180,
@@ -1892,7 +1892,7 @@
     },
     {
       "id": "shed_side",
-      "name": "Сарай",
+      "name": "Shed",
       "across": 30.2,
       "distance": 12.2,
       "facing": 90,
@@ -1906,7 +1906,7 @@
     },
     {
       "id": "barrel",
-      "name": "Бочка",
+      "name": "Barrel",
       "across": 23.2,
       "distance": 8.85,
       "height": 0.95,
@@ -1919,7 +1919,7 @@
     },
     {
       "id": "bench",
-      "name": "Лавка",
+      "name": "Bench",
       "across": 21.9,
       "distance": 11.55,
       "facing": 180,
@@ -1933,7 +1933,7 @@
     },
     {
       "id": "woodpile",
-      "name": "Поленница",
+      "name": "Woodpile",
       "across": 34,
       "distance": 12.45,
       "facing": 180,
@@ -1947,7 +1947,7 @@
     },
     {
       "id": "suitcase",
-      "name": "Чемодан",
+      "name": "Suitcase",
       "inside": true,
       "across": 22.75,
       "distance": 12.4,
@@ -1963,7 +1963,7 @@
     },
     {
       "id": "gate_lamp",
-      "name": "Фонарь у калитки",
+      "name": "Lamp by the gate",
       "across": 19.3,
       "distance": 9.25,
       "height": 2.9,
@@ -1976,7 +1976,7 @@
     },
     {
       "id": "street_lamp",
-      "name": "Фонарь",
+      "name": "Street lamp",
       "across": -5.3,
       "distance": 13.4,
       "height": 3.9,
@@ -1989,7 +1989,7 @@
     },
     {
       "id": "birches",
-      "name": "Берёзы",
+      "name": "Birches",
       "across": -19.5,
       "distance": 16,
       "height": 11,
@@ -2040,7 +2040,7 @@
     },
     {
       "id": "busygin",
-      "name": "Бусыгин",
+      "name": "Busygin",
       "person": {
         "cast": "cast",
         "who": "busygin",
@@ -2056,7 +2056,7 @@
     },
     {
       "id": "silva",
-      "name": "Сильва",
+      "name": "Silva",
       "person": {
         "cast": "cast",
         "who": "silva",
@@ -2072,7 +2072,7 @@
     },
     {
       "id": "sarafanov",
-      "name": "Сарафанов",
+      "name": "Sarafanov",
       "person": {
         "cast": "cast",
         "who": "sarafanov",
@@ -2088,7 +2088,7 @@
     },
     {
       "id": "vasenka",
-      "name": "Васенька",
+      "name": "Vasenka",
       "person": {
         "cast": "cast",
         "who": "vasenka",
@@ -2104,7 +2104,7 @@
     },
     {
       "id": "nina",
-      "name": "Нина",
+      "name": "Nina",
       "person": {
         "cast": "cast",
         "who": "nina",
@@ -2120,7 +2120,7 @@
     },
     {
       "id": "kudimov",
-      "name": "Кудимов",
+      "name": "Kudimov",
       "person": {
         "cast": "cast",
         "who": "kudimov",
@@ -2136,7 +2136,7 @@
     },
     {
       "id": "makarskaya",
-      "name": "Макарская",
+      "name": "Makarskaya",
       "person": {
         "cast": "cast",
         "who": "makarskaya",
@@ -2152,7 +2152,7 @@
     },
     {
       "id": "neighbor1",
-      "name": "Сосед",
+      "name": "Neighbour",
       "person": {
         "cast": "cast",
         "who": "neighbor1",
@@ -2168,7 +2168,7 @@
     },
     {
       "id": "neighbor2",
-      "name": "Соседка",
+      "name": "Neighbour woman",
       "person": {
         "cast": "cast",
         "who": "neighbor2",
@@ -2184,7 +2184,7 @@
     },
     {
       "id": "k1",
-      "name": "В окне кухни",
+      "name": "In the kitchen window",
       "person": {
         "cast": "cast",
         "who": "silva",
@@ -2201,7 +2201,7 @@
     },
     {
       "id": "k2",
-      "name": "В окне кухни",
+      "name": "In the kitchen window",
       "person": {
         "cast": "cast",
         "who": "busygin",
@@ -2218,7 +2218,7 @@
     },
     {
       "id": "k3",
-      "name": "В окне кухни",
+      "name": "In the kitchen window",
       "person": {
         "cast": "cast",
         "who": "vasenka",
@@ -2235,7 +2235,7 @@
     },
     {
       "id": "k4",
-      "name": "В окне кухни",
+      "name": "In the kitchen window",
       "person": {
         "cast": "cast",
         "who": "busygin_shirt",
@@ -2252,12 +2252,12 @@
     },
     {
       "id": "shawl",
-      "name": "Пальто на плечи",
+      "name": "Coat on the shoulders",
       "insert": "shawl"
     },
     {
       "id": "snowfall",
-      "name": "Снег",
+      "name": "Snow",
       "particles": {
         "kind": "snow",
         "amount": "snow",
@@ -2267,7 +2267,7 @@
     },
     {
       "id": "chimney_smoke",
-      "name": "Дым",
+      "name": "Smoke",
       "particles": {
         "kind": "smoke",
         "at": [
@@ -2289,7 +2289,7 @@
     },
     {
       "id": "shed_flames",
-      "name": "Огонь",
+      "name": "Fire",
       "particles": {
         "kind": "fire",
         "amount": "fire",
@@ -2312,7 +2312,7 @@
     },
     {
       "id": "shed_embers",
-      "name": "Искры",
+      "name": "Sparks",
       "particles": {
         "kind": "embers",
         "amount": "fire",
@@ -2331,7 +2331,7 @@
     },
     {
       "id": "shed_smoke",
-      "name": "Дым",
+      "name": "Smoke",
       "particles": {
         "kind": "smoke",
         "amount": "fire",
@@ -2360,7 +2360,7 @@
     },
     {
       "id": "steam",
-      "name": "Пар",
+      "name": "Steam",
       "particles": {
         "kind": "smoke",
         "amount": "steam",
@@ -2390,7 +2390,7 @@
     },
     {
       "id": "sleeve_smoke",
-      "name": "Дым от рукава",
+      "name": "Smoke from the sleeve",
       "particles": {
         "kind": "smoke",
         "amount": "silva_smoke",
@@ -2409,7 +2409,7 @@
     },
     {
       "id": "splash",
-      "name": "Вода",
+      "name": "Water",
       "particles": {
         "kind": "splashes",
         "at": [

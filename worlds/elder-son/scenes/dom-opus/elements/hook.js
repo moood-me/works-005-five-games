@@ -1,4 +1,4 @@
-// The hooks by the door; Бусыгин's long grey coat hangs on one when `coat_b` is hook.
+// The hooks by the door; Busygin's long grey coat hangs on one when `coat_b` is hook.
 g.fillStyle = '#4a3a2c';
 g.fillRect(-0.35, -1.82, 0.7, 0.06);
 g.fillStyle = '#2a2420';

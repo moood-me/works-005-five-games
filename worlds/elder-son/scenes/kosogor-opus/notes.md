@@ -1,49 +1,54 @@
-# Косогор (opus)
+# The Hillside (opus)
 
-Глава III «Марш»: пригородное кладбище на склоне, сумерки. Движок 3, камера `roam` (небо по кругу: кадр встречи
-повёрнут на 41°, а `panorama` дальше ≈ 65° неба не рисует), ставится ключами `camera_x/z/yaw/h`; наклона камеры
-(`camera_pitch`) нет — линия глаз ниже в кадре (`horizon` 0.62). Модули: `cast`, `izby`. `scene.json` и кресты,
-оградки, берёзы пишет генератор `tools/kosogor-opus/gen.mjs` из `lib.js`.
+Chapter III, “The March”: the suburban cemetery on its slope, dusk. Engine 3, the camera `roam` (the sky all round: the
+meeting's shot is turned by 41°, and `panorama` paints no sky beyond ≈ 65°), set by the keys `camera_x/z/yaw/h`; the
+camera has no tilt (`camera_pitch`) — the eye line lower in the frame (`horizon` 0.62). Modules: `cast`, `izby`.
+`scene.json` and the crosses, the grave railings, the birches are written by the generator `tools/kosogor-opus/gen.mjs`
+from `lib.js`.
 
-## Как устроено
+## How it is made
 
-- **Земля** (`lib.height`, `relief.js`): у дороги ровно; за оградой склон до гребня (≈ 6.2 м на 31–34 м), за ним
-  вниз до ровного поля к 56 м. Дальше — плоское поле `beyond`, дальний лес `forest` (165 м); за дорогой — поле `behind`
-  и посёлок `suburb` (105 м назад: крыши, огни окон, водокачка, фонарь станции).
-- Дорога по distance 4.8; ограда из штакетника по 7 (6-метровые пролёты копиями), **ворота** `gate` на across 8 —
-  кирпичные столбы; толстая **берёза** `birch` у ограды (−3.2), за ней прячется Нина; 34 креста, 16 оградок, 9
-  обелисков, берёзы — копии на склоне (места — генератор, мимо тропы и могилы).
-- **Могила** `grave` (−1, 26.6): холм, временный обелиск, венки. **Тропа** зигзагом от могилы к воротам
-  (`lib.PATH`), три ледяные полосы на 0.3, 0.55, 0.8 пути — нарисованы на земле.
-- **Похороны**: провожающие `mourner1…4` у могилы, трое медных `band1…3` (труба, туба, барабан) в ряд справа,
-  Сарафанов (`sarafanov_funeral`: чёрное пальто, шапка, длинный светлый шарф, кларнет в опущенных руках) с краю
-  ряда, у могилы; все спиной к нам. Футляр лежит на снегу перед ним (`case_snow`, `case_down`).
-- Свет: сумеречное небо (низкое, лилово-серое, красная полоса на западе), закатный свет `sunset` низко слева,
-  `sky_light` сверху; `hour` → образ `dusk` (темнеет).
+- **The ground** (`lib.height`, `relief.js`): level by the road; beyond the fence the slope up to the crest (≈ 6.2 m at
+  31–34 m), beyond it down to a level field by 56 m. Further — the flat field `beyond`, the far forest `forest` (165 m);
+  across the road — the field `behind` and the settlement `suburb` (105 m back: roofs, lit windows, a water tower, the
+  station's lamp).
+- The road along distance 4.8; a picket fence along 7 (6-metre spans as copies), **the gate** `gate` at across 8 —
+  brick posts; a thick **birch** `birch` by the fence (−3.2), Nina hides behind it; 34 crosses, 16 grave railings, 9
+  obelisks, birches — copies on the slope (their places — the generator's, clear of the path and the grave).
+- **The grave** `grave` (−1, 26.6): a mound, a temporary obelisk, wreaths. **The path** zigzags from the grave to the
+  gate (`lib.PATH`), three strips of ice at 0.3, 0.55, 0.8 of the way — painted on the ground.
+- **The funeral**: the mourners `mourner1…4` at the grave, the three brass `band1…3` (trumpet, tuba, drum) in a row on
+  the right, Sarafanov (`sarafanov_funeral`: a black coat, a hat, a long light scarf, a clarinet in his lowered hands)
+  at the row's end, by the grave; all with their backs to us. The case lies on the snow before him (`case_snow`,
+  `case_down`).
+- The light: a dusk sky (low, lilac-grey, a red band in the west), the sunset light `sunset` low on the left,
+  `sky_light` from above; `hour` → the look `dusk` (it grows dark).
 
-## Куски
+## Beats
 
-- `road` (≈ 15 с, склейкой): по дороге слева Нина и Бусыгин, камера рядом (столько, сколько идёт он); наверху видна
-  группа; у ограды у берёзы встают — `road:fence`.
-- `march` (≈ 24 с, после `road`): камера за их спинами (оба ≈ 0.3 кадра), похороны наверху (≈ 0.06–0.07); в конце
-  провожающие поворачиваются и уходят за гребень — `march:end`.
-- `alone` (≈ 25 с, после `march`): медные уходят за ними (скрываются за гребнем); камера медленно к ограде; он
-  кладёт кларнет в футляр (`put_down`), поднимает футляр (`pick_up`) — `alone:case`; встаёт наверху тропы. Поза под
-  выбор: `sarafanov` (x ≈ 0.54) и `nina` (≈ 0.33) в средних 4:3.
-- `meet` (≈ 18 с, после `alone`): Нина за берёзу; Бусыгин через ворота вверх по тропе; камера через ворота вверх по
-  склону (`scene.path`) туда, где оба в профиль на шаг друг от друга (≈ 0.33 кадра); отец убирает футляр за спину
-  (`hide_back` — руки за спиной) — `meet:talk`; Бусыгин берёт футляр (`reach`, потом футляр у него) — `meet:ready`.
-- `hide` (≈ 26 с, после `alone`): двое отходят в тень левого столба ворот; он сам спускается по тропе (обычной
-  походкой — `careful` нет), выходит на дорогу и вправо — `hide:ready`. Цель в 8 с недостижима: 25 м тропы пешком.
+- `road` (≈ 15 s, by a cut): along the road from the left Nina and Busygin, the camera beside them (as far as he walks);
+  the group seen up the slope; by the fence at the birch they stop — `road:fence`.
+- `march` (≈ 24 s, after `road`): the camera behind their backs (both ≈ 0.3 of the frame), the funeral up the slope
+  (≈ 0.06–0.07); at the end the mourners turn and go over the crest — `march:end`.
+- `alone` (≈ 25 s, after `march`): the brass go after them (hidden by the crest); the camera slowly to the fence; he
+  puts the clarinet in its case (`put_down`), picks the case up (`pick_up`) — `alone:case`; he stands at the top of
+  the path. The pose for the choice: `sarafanov` (x ≈ 0.54) and `nina` (≈ 0.33) in the middle 4:3.
+- `meet` (≈ 18 s, after `alone`): Nina behind the birch; Busygin through the gate up the path; the camera through the
+  gate up the slope (`scene.path`) to where both are in profile a step apart (≈ 0.33 of the frame); the father puts the
+  case behind his back (`hide_back` — hands behind the back) — `meet:talk`; Busygin takes the case (`reach`, then the
+  case is his) — `meet:ready`.
+- `hide` (≈ 26 s, after `alone`): the two step back into the shadow of the gate's left post; he comes down the path by
+  himself (in an ordinary gait — there is no `careful`), out onto the road and to the right — `hide:ready`. The aim of
+  8 s cannot be met: 25 m of path on foot.
 
-## Чего нет / открыто
+## What is missing / open
 
-- Куски `bottom`, `club`, мини-игры «Под руку» (`down`, `catch`, `fall`, `falter`) и «Следом» (`follow`, `sar_go`,
-  `hold`, `duck`), клуб железнодорожников справа — не сделаны.
-- Движений `careful`, `take`, `look_back`, `falter`, `fall_sit`, `crouch` нет; `hide_back` — готовое движение «руки
-  за спиной»: футляр в правой руке оказывается за спиной.
+- The beats `bottom`, `club`, the mini-games “Arm in Arm” (`down`, `catch`, `fall`, `falter`) and “Following” (`follow`,
+  `sar_go`, `hold`, `duck`), the railwaymen's club on the right — not done.
+- No motions `careful`, `take`, `look_back`, `falter`, `fall_sit`, `crouch`; `hide_back` — a ready motion, “hands behind
+  the back”: the case in the right hand ends up behind the back.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {"beats": {"road": {"after": [], "tells": ["road:fence"], "seconds": 15, "show": false},
