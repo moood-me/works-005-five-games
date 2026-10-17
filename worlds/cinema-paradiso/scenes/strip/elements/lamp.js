@@ -1,5 +1,5 @@
-// The projector's lamp low on the right of the middle 4:3: the dark lamp house, its round lens glowing warm — the
-// thing the player touches to go on (it marks its point `lamp` itself). Painted once; its glow breathes by `lamp`.
+// The projector's lamp low on the right of the middle 4:3: the dark lamp house, its round lens glowing warm. Painted
+// once; its glow breathes (lamp.animate.js).
 const A = e.aspect, L = e.lib.lampAt(A), R = 0.05;
 // the lamp house: a dark box with vents, the lens's barrel toward us
 e.layer('house', {}, c => {
@@ -31,5 +31,3 @@ e.layer('lens', {}, c => {
   c.beginPath(); c.arc(L.x + 0.02, L.y + 0.01, R, 0, Math.PI * 2); c.fill();
 });
 e.light(L.x + 0.02, L.y + 0.01, 0.02, '#ffd9a0', 0.8, 'lens');
-// the point the player touches: the glowing lens itself (marked by the painting, not inside a layer)
-e.at(L.x + 0.02, L.y + 0.01, 'lamp');
