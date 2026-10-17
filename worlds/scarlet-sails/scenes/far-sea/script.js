@@ -4,3 +4,5 @@ const SPACING = 5; // m between the chapters' points (c0…)
 const s = scene;
 s.set('camera_x', (s.get('shown') ?? 0) * SPACING);
 s.on('change', 'shown', v => s.move('camera_x', (v ?? 0) * SPACING, { over: 1, ease: 'inOut' }));
+// (come: the chapter shown pressed again — the view back to it, from wherever it was dragged)
+s.on('change', 'come', () => s.move('camera_x', (s.get('shown') ?? 0) * SPACING, { over: 1, ease: 'inOut' }));
