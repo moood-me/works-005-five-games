@@ -4,8 +4,8 @@
 // us go to your hotel”. Without “Lights” before it: the prologue runs into it (wall: false). game.md §6, chapter I.
 // Reads: —. Leaves: choices.dog, marks.dog, shown.heart.
 import { SCENES } from '../story.js';
-import podmanit from '../minigames/podmanit.js';
-import lornetka from '../minigames/lornetka.js';
+import coax from '../minigames/coax.js';
+import lorgnette from '../minigames/lorgnette.js';
 
 export default {
   number: 'I',
@@ -31,10 +31,10 @@ export default {
       await sat;
       await SAY(4);
       await garden;
-      const coax = g.beat('coax');
+      const beckon = g.beat('coax');
       g.next('coax_hold');
-      await coax;
-      const r = await g.play(podmanit);
+      await beckon;
+      const r = await g.play(coax);
       g.set('spitz_near', 1);
       g.set('hand', 0);
       g.set('trust', r.startles ? 0 : 1);
@@ -88,19 +88,19 @@ export default {
     async g => {
       g.hero('anna');
       g.beds({ sea: 0.5, wind: 0.5, crowd: 0.6 });
-      const lorgnette = g.told('pier:lorgnette');
+      const looking = g.told('pier:lorgnette');
       await g.scene(SCENES.quay, { beat: 'pier' });
       const pier = g.beat('pier');
       g.next('gangway');
       g.sound.horn();
       await SAY(14);
-      await lorgnette;
+      await looking;
       await SAY(15);
       await pier;
       const gangway = g.beat('gangway');
       g.next('lost');
       await gangway;
-      const r = await g.play(lornetka);
+      const r = await g.play(lorgnette);
       g.set('pass', 7);
       g.set('look_at', '');
       g.set('stranger_turn', 1);

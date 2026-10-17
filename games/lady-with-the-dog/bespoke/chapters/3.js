@@ -6,8 +6,8 @@
 // Reads: facts.heart (“The shadow”: how many figures), facts.life (“The leash”: how hard the spitz pulls). Leaves:
 // choices.club.
 import { SCENES, facts } from '../story.js';
-import ten from '../minigames/ten.js';
-import povodok from '../minigames/povodok.js';
+import shadow from '../minigames/shadow.js';
+import leash from '../minigames/leash.js';
 
 export default {
   number: 'III',
@@ -36,7 +36,7 @@ export default {
       await walk;
       let first = false;
       const count = facts(g.state).heart === 'frank' ? 4 : 2;
-      const r = await g.play(ten, { count, onFirst: () => (first = true, g.say('narrator', 'More than a month passed. She did not visit him in dreams, but followed him about everywhere like a shadow')) });
+      const r = await g.play(shadow, { count, onFirst: () => (first = true, g.say('narrator', 'More than a month passed. She did not visit him in dreams, but followed him about everywhere like a shadow')) });
       g.set('walk_on', count);
       g.set('gurov_look', null);
       for (const shade of ['shade1', 'shade2', 'shade3', 'shade4']) g.set(shade, 0);
@@ -58,7 +58,7 @@ export default {
       const walk = g.beat('autumn_walk');
       await g.say('narrator', 'In S. it was late autumn. Every evening Anna Sergeyevna walked the Pomeranian along the fence');
       await walk;
-      const r = await g.play(povodok, { pull: facts(g.state).life === 'life' ? 0.09 : 0.06 });
+      const r = await g.play(leash, { pull: facts(g.state).life === 'life' ? 0.09 : 0.06 });
       // (the beat after the game is the result's: named as soon as it is known)
       const road = r.end === 'road';
       g.next(road ? 'road_end' : 'gate_home');

@@ -1,7 +1,7 @@
 /* The game over the scene (ui.js), as an old resort postcard written in pencil: warm white paper, a thin faded frame,
    graphite words in a light hand. Nothing bright; red (--leash) is the leash of Anna's gauge alone. */
 #layer { --card: #f1ebdf; --card-edge: #cbbfa8; --graphite: #3b3a38; --leash: #a8322c;
-  --hand: "Dama Hand", "Segoe Script", cursive;
+  --hand: "Lady Hand", "Segoe Script", cursive;
   --serif: Georgia, "Times New Roman", serif;
   --tooth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
   --below-header: 46px; } /* where the site's header ends */

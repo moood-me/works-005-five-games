@@ -51,7 +51,7 @@ export default async function (b) {
   // the language of mini-games in this game's hand: the plate and the petals in Bad Script, the marks and their fill
   // in graphite, «good» the postcard's white, danger a dull ochre (red is the leash's alone), the second path grey-blue
   b.minigame.style({
-    key: 'A_FLAT_MAJOR_F_MINOR', font: '"Dama Hand", "Segoe Script", cursive',
+    key: 'A_FLAT_MAJOR_F_MINOR', font: '"Lady Hand", "Segoe Script", cursive',
     colors: { mark: '#3b3a38', fill: '#3b3a38', good: '#f1ebdf', danger: '#b07a3a', fork: '#8a9bab', ghost: 'rgba(59, 58, 56, 0.55)' },
   });
   const hub = listen(b);

@@ -6,8 +6,8 @@
 // Reads: facts.life (the piano), facts.dog (the spitz to the call), facts.talk (the interval; “I knew”), facts.spring
 // (the gate). Leaves: choices.fence, choices.stairs, choices.husband, marks.maid, marks.husband.
 import { SCENES, facts } from '../story.js';
-import uZabora from '../minigames/u-zabora.js';
-import najti from '../minigames/najti.js';
+import byTheFence from '../minigames/by-the-fence.js';
+import findHer from '../minigames/find-her.js';
 
 export default {
   number: 'IV',
@@ -42,7 +42,7 @@ export default {
       g.next('gate_open');
       await wait;
       let heard = false;
-      const r = await g.play(uZabora, { tune: f.life === 'life' ? 'waltz' : 'etude', onPiano: () => (heard = true, g.say('narrator', 'He heard a piano; the sounds were faint and indistinct. Probably it was Anna Sergeyevna playing')) });
+      const r = await g.play(byTheFence, { tune: f.life === 'life' ? 'waltz' : 'etude', onPiano: () => (heard = true, g.say('narrator', 'He heard a piano; the sounds were faint and indistinct. Probably it was Anna Sergeyevna playing')) });
       if (!heard) await g.say('narrator', 'He heard a piano; the sounds were faint and indistinct. Probably it was Anna Sergeyevna playing');
       g.set('under', r.stood ? 1 : 0);
       g.sound.gate();
@@ -84,7 +84,7 @@ export default {
       const find = g.beat('hall_find');
       g.next('husband_in');
       await find;
-      const r = await g.play(najti);
+      const r = await g.play(findHer);
       g.set('enter', 6);
       g.set('glint', 0);
       g.set('noticed', r.wrong ? 1 : 0);

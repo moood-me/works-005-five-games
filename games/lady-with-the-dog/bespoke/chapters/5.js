@@ -6,9 +6,9 @@
 // watch), facts.ending (the ending's words); through carry — wife_knows, husband_knows. Leaves: choices.wife,
 // marks.wife.
 import { SCENES, facts } from '../story.js';
-import zaRuku from '../minigames/za-ruku.js';
-import chaj from '../minigames/chaj.js';
-import sovet from '../minigames/sovet.js';
+import byTheHand from '../minigames/by-the-hand.js';
+import tea from '../minigames/tea.js';
+import counsel from '../minigames/counsel.js';
 
 const weather = state => (facts(state).spring ? { thaw: 0.4 } : { snow: 0.4 });
 
@@ -68,7 +68,7 @@ export default {
       g.next('gate_school');
       await walk;
       let said = 0;
-      const r = await g.play(zaRuku, { lines: [
+      const r = await g.play(byTheHand, { lines: [
         () => (said = 1, g.say('gurov', 'It’s three degrees above freezing, and yet it is snowing')),
         () => (said = 2, g.say('gurov', 'The thaw is only on the surface of the earth; there is quite a different temperature at a higher level in the atmosphere')),
         () => (said = 3, g.say('daughter', 'And why are there no thunderstorms in the winter, father?')),
@@ -102,13 +102,13 @@ export default {
       g.beds({ room: 0.3 });
       const piano = g.sound.piano('waltz', { wall: true });
       g.signal.addEventListener('abort', () => piano.stop(1));
-      const met = g.told('bazar_in:met');
-      await g.scene(SCENES.bazar, { beat: 'bazar_in' });
-      const tea = async next => {
+      const met = g.told('bazaar_in:met');
+      await g.scene(SCENES.bazaar, { beat: 'bazaar_in' });
+      const atTea = async next => {
         const pour = g.beat('tea');
         g.next('weep');
         await pour;
-        const r = await g.play(chaj);
+        const r = await g.play(tea);
         g.set('glass_at', 1);
         g.set('tap', 0);
         g.set('fill', 0.9);
@@ -127,7 +127,7 @@ export default {
         await g.say('narrator', 'His hair was already beginning to turn grey');
         await hands;
       };
-      const into = g.beat('bazar_in');
+      const into = g.beat('bazaar_in');
       if (f.heart === 'frank') {
         g.next('shoulders');
         await met;
@@ -135,7 +135,7 @@ export default {
         await into;
         await shoulders('tea');
         g.beds({ room: 0.3, weep: 0.3 });
-        await tea('cages');
+        await atTea('cages');
       } else {
         // (as Chekhov has it: he sat, ordered tea, then went to her)
         g.next('tea');
@@ -143,13 +143,13 @@ export default {
         await g.say('narrator', 'She was wearing his favourite grey dress');
         await into;
         g.beds({ room: 0.3, weep: 0.3 });
-        await tea('shoulders');
+        await atTea('shoulders');
         await shoulders('cages');
       }
       g.beds({ room: 0.3 });
       const turned = g.told('cages:turned');
       const cages = g.beat('cages');
-      g.next('sovet');
+      g.next('counsel');
       await turned;
       await g.say('narrator', 'They were like a pair of birds of passage, male and female, caught and forced to live in different cages');
       if (f.ending === 'cages') await g.say('gurov', 'How can we be free from this intolerable bondage?');
@@ -160,10 +160,10 @@ export default {
         await g.say('gurov', 'And what now?');
       }
       await cages;
-      const sovetBeat = g.beat('sovet');
-      g.next('bazar_end');
-      await sovetBeat;
-      const t = await g.play(sovet, {
+      const taking = g.beat('counsel');
+      g.next('bazaar_end');
+      await taking;
+      const t = await g.play(counsel, {
         window: async () => { await g.say('gurov', 'Move to Moscow'); await g.say('anna', 'And he? He is not to blame for anything'); },
         door: async () => { await g.say('anna', 'If only we could go away together…'); await g.say('gurov', 'And the children?'); },
         table: async () => { await g.say('gurov', 'If only we could see each other every day…'); await g.say('anna', 'And say goodbye every day?'); },
@@ -171,8 +171,8 @@ export default {
       g.set('think', t.touched.at(-1) ?? 'none');
       await g.say('gurov', 'How? How?');
       // (the scene tells the watch only when the wife does not know: waited for only then)
-      const watch = f.wife === 'lie' ? g.told('bazar_end:watch') : null;
-      const end = g.beat('bazar_end');
+      const watch = f.wife === 'lie' ? g.told('bazaar_end:watch') : null;
+      const end = g.beat('bazaar_end');
       const last = g.say('narrator', 'And it seemed as though in a little while the solution would be found, and then a new and splendid life would begin; and it was clear to both of them that they had still a long, long road before them, and that the most complicated and difficult part of it was only just beginning');
       if (watch && (await watch)) g.sound.watch();
       await last;

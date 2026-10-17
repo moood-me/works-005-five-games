@@ -1,5 +1,5 @@
 // What the game shows over the scene (bespoke.layer), as an old resort postcard written in pencil: warm white paper
-// with a thin faded frame, graphite words in a light hand (Bad Script — "Dama Hand"), nothing bright (game.md §9). Red
+// with a thin faded frame, graphite words in a light hand (Bad Script — "Lady Hand"), nothing bright (game.md §9). Red
 // is the leash's alone: the leash of Anna's gauge, nothing else here.
 //   view.gauges({scales, shown} | null, hero) — each scale once the player has met it: the white spitz on its red
 //     leash low on the left (Anna: Duty ↔ Life — it sits by the parapet's end on a short leash ↔ runs ahead on a long
@@ -24,7 +24,7 @@
 import { paper } from './sound.js';
 
 const NS = 'http://www.w3.org/2000/svg';
-const HAND = '1em "Dama Hand"';
+const HAND = '1em "Lady Hand"';
 const el = (tag, cls, parent) => {
   const e = document.createElement(tag);
   if (cls) e.className = cls;

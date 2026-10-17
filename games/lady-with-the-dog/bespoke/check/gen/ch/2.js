@@ -5,10 +5,10 @@
 // Reads: facts.eat (the station: what she says), facts.heart (the station: he goes at once or walks after the train).
 // Leaves: choices.room, choices.window, shown.anna.
 import { SCENES, facts } from '../story.js';
-import arbuz from '../minigames/arbuz.js';
-import ryadom from '../minigames/ryadom.js';
-import more from '../minigames/more.js';
-import sOgljadkoj from '../minigames/s-ogljadkoj.js';
+import watermelon from '../minigames/watermelon.js';
+import besideHer from '../minigames/beside-her.js';
+import sea from '../minigames/sea.js';
+import lookingRound from '../minigames/looking-round.js';
 
 export default {
   number: 'II',
@@ -37,7 +37,7 @@ export default {
       const melon = g.beat('melon');
       g.next('melon_hold');
       await melon;
-      const r = await g.play(arbuz);
+      const r = await g.play(watermelon);
       g.set('cut', 1);
       g.set('slice', 1);
       g.set('ragged', r.lifts ? 1 : 0);
@@ -67,7 +67,7 @@ export default {
         const beside = g.beat('beside');
         g.next('beside_hold');
         await beside;
-        const q = await g.play(ryadom);
+        const q = await g.play(besideHer);
         g.set('hand_at', 1);
         g.set('pull', 0);
         g.set('palm', 1);
@@ -101,14 +101,14 @@ export default {
       const still = g.beat('still');
       g.next('watchman');
       await still;
-      let sea = false;
-      const r = await g.play(more, { sea: () => (sea = true, SAY(27)) });
+      let told = false;
+      const r = await g.play(sea, { sea: () => (told = true, SAY(27)) });
       g.set('dawn', 1, 1);
       g.set('lights', 0, 2);
       g.set('cicada', 0);
       g.set('hand', r.touched.includes('hand') ? 1 : 0);
       g.beds({ sea: 0.6 });
-      if (!sea) await SAY(27);
+      if (!told) await SAY(27);
       const looks = g.told('watchman:looks');
       const gone = g.told('watchman:gone');
       const watchman = g.beat('watchman');
@@ -133,7 +133,7 @@ export default {
       await SAY(32);
       await SAY(33);
       await garden;
-      const r = await g.play(sOgljadkoj);
+      const r = await g.play(lookingRound);
       g.set('kiss_now', 1);
       g.set('seen', 0);
       g.set('gossip', r.seen ? 1 : 0);

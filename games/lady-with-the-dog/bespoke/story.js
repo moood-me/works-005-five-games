@@ -59,8 +59,8 @@
 import * as sounds from './sound.js';
 
 // the world's scenes the game plays, by their folders
-export const SCENES = { quay: 'main', room: 'nomer-opus', oreanda: 'oreanda-opus', station: 'stanciya-opus',
-  moscow: 'moskva', town: 'gorod-s', theatre: 'teatr', bazar: 'bazar-opus', lights: 'ogni' };
+export const SCENES = { quay: 'main', room: 'room', oreanda: 'oreanda', station: 'station', moscow: 'moscow', town: 'town',
+  theatre: 'theatre', bazaar: 'bazaar', lights: 'lights' };
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean (game.md §5).
@@ -101,7 +101,7 @@ export function carry(folder, f) {
     [SCENES.moscow]: { wife_knows: f.wife === 'truth' ? 1 : 0, spring: f.spring ? 1 : 0 },
     [SCENES.town]: { spring: f.spring ? 1 : 0, talk: f.talk ? 1 : 0, husband_knows: f.husband === 'truth' ? 1 : 0, dog_pat: f.dog === 'pat' ? 1 : 0 },
     [SCENES.theatre]: { anna_life: f.life === 'life' ? 1 : 0 },
-    [SCENES.bazar]: { anna_life: f.life === 'life' ? 1 : 0, husband_knows: f.husband === 'truth' ? 1 : 0, wife_knows: f.wife === 'truth' ? 1 : 0, spring: f.spring ? 1 : 0 },
+    [SCENES.bazaar]: { anna_life: f.life === 'life' ? 1 : 0, husband_knows: f.husband === 'truth' ? 1 : 0, wife_knows: f.wife === 'truth' ? 1 : 0, spring: f.spring ? 1 : 0 },
     [SCENES.lights]: {},
   }[folder];
 }
