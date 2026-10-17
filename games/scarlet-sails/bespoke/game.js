@@ -14,7 +14,7 @@
 // one before runs into it, once the page has been touched: it may be heard) —, by ☰ (the page's: the step going on is
 // left — played again from its beginning), and whenever it is opened again. Its author has one more sign (left of the
 // prologue): his map of the chapters and their steps (ui.js author) — straight to any step, or a minigame of one, as
-// one of PLAYS has it by then: a replay from there.
+// one of PLAYS has it by then (as the main run stood at that step, where it has played it): a replay from there.
 //
 // The play is one — its main run, as far as the player has come. A replay (begun on the map) goes on its own and is
 // never kept: closed, it is gone. Meanwhile the plate «Replay» in the corner; on the map its threads beside the main
@@ -169,9 +169,19 @@ export default async function (b) {
     return keep({ ...kept, ...on, steps: { ...kept.steps, [on.chapter]: [on] } });
   }
   // a replay begun on the map: a chapter from its beginning (`chapter:i`) or from a fork's step (`fork:i:s`) — as the
-  // main run was then —, or where the author's map went ({jump}: as the play he picked has it by then)
+  // main run was then —, or where the author's map went ({jump}: as the main run stood there where it has played that
+  // step, else as the play he picked has it by then)
   function replayFrom(to) {
-    if (to.jump) return { run: structuredClone(to.jump), steps: Object.assign([], { [to.jump.step]: run(to.jump) }), done: false };
+    if (to.jump) {
+      // (a step of a chapter the main run has played: as it stood there, its steps before as they were — as «Replay
+      // from here»)
+      const { chapter, step, play } = to.jump, at = kept.steps[chapter];
+      if (at?.[step]) {
+        return { run: { ...structuredClone(at[step]), ...(play != null ? { play } : {}) }, steps: structuredClone(at.slice(0, step + 1)), done: false };
+      }
+      // (else as the play he picked has it by then)
+      return { run: structuredClone(to.jump), steps: Object.assign([], { [step]: run(to.jump) }), done: false };
+    }
     const [, i, s = 0] = to.split(':').map(Number), at = kept.steps[i];
     return { run: structuredClone(at[s]), steps: structuredClone(at.slice(0, s + 1)), done: false };
   }
@@ -207,7 +217,10 @@ export default async function (b) {
     // (the chapter just played grown: its forks offered too, the view on to where the play is)
     const growing = grown ? null : setTimeout(() => { grown = true; offer(); go(here); }, REVEAL * 1000);
     try {
-      for (let again = null; ;) {
+      // (a replay played to its end: its knot's mark opens by itself — keep it or not, the question the map asks; the
+      // one mark that opens untouched)
+      const asking = replay?.done ? await standing(drawn, `knot:${replay.run.chapter}`) : null;
+      for (let again = asking; ;) {
         offer();
         // (a choice that would leave the replay: its mark opens again at once, asking)
         const ref = again ?? await new Promise(ok => { pressed = ok; jumped = ok; });
@@ -230,6 +243,16 @@ export default async function (b) {
       notice();
       drawn.remove();
     }
+  }
+  // a ref of the map's drawing once it stands in the frame (some frames at most; else null)
+  function standing(drawn, ref) {
+    return new Promise(ok => {
+      let n = 0;
+      const off = b.onFrame(() => {
+        const at = drawn.at(ref)();
+        if (at || ++n > 30) { off(); ok(at ? ref : null); }
+      });
+    });
   }
   // what can be done on the map: {ref (map.js: what of its drawing is pressed): options} — `asked`: the option that
   // would leave the replay, now «Drop the replay»; `growing`: the chapter whose forks are not there yet
