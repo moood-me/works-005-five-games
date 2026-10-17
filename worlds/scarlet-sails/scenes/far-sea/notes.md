@@ -8,6 +8,8 @@ pinch come nearer (the points nearer — their depth less). The background is a 
 view moves it stands, the chapters' points move.
 
 - `shown` — the chapter the player is at; `camera_x` — where the view is: chapter i — i·5 m.
+- `come` — each new value brings the view back to the chapter shown (the game sets it when that chapter is
+  pressed again after the player dragged away).
 - `sea` — the sea and the sky, painted once (the module sky); the glints on the water and the sun's road twinkle in the
   shader (elements/sea.wgsl, `lib.js`: the horizon, the sun).
 - `c0`…`c6` — the chapters' unseen points (unseen; across i·5, at 0.2 of the frame's height — where the game's tree
@@ -21,6 +23,6 @@ view moves it stands, the chapters' points move.
   "beats": {},
   "points": ["c0", "c1", "c2", "c3", "c4", "c5", "c6", "author"],
   "offers": [],
-  "party": { "shown": 0 }
+  "party": { "shown": 0, "come": 0 }
 }
 ```
