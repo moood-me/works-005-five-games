@@ -1,4 +1,4 @@
-// The Slavyansky Bazaar: what the paintings and the script share — the room in metres, the shots, the film in beats
+// The Slaviansky Bazaar: what the paintings and the script share — the room in metres, the shots, the film in beats
 // (FILM: modules/beats.js plays it). A room of a Moscow hotel seen from its open side: the back wall at distance 6
 // with the door on the left (across −2.1…−1.2), the gilt mirror between, the tall window on the right (across
 // 0.6…2.2); the round table with the lamp (the one warm light) in the middle-left, the armchair on the left.

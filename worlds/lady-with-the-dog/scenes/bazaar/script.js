@@ -1,4 +1,4 @@
-// The Slavyansky Bazaar: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module
+// The Slaviansky Bazaar: the scene's mechanics. Its film in beats (lib.js film(scene), played by the world's module
 // beats); the door's leaf turns by `door`; the party's `spring` — the snow or the thaw — shows at once; `think` turns
 // their looks (“Taking counsel”).
 const L = scene.lib;

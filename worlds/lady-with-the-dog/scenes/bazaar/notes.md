@@ -1,6 +1,6 @@
-# The Slavyansky Bazaar
+# The Slaviansky Bazaar
 
-V.3 and the ending of “The Lady with the Dog” (scenes.md, the Slavyansky Bazaar, the 4th edition). A room of a Moscow hotel on
+V.3 and the ending of “The Lady with the Dog” (scenes.md, the Slaviansky Bazaar, the 4th edition). A room of a Moscow hotel on
 a winter evening: the camera `picture`. In the back wall on the left a door (a leaf on hinges, a dim corridor behind it),
 in the middle a gilt mirror, on the right a tall window with drapes: behind it snowy roofs, domes, a few yellow windows —
 or the thaw, wet roofs and drops on the glass. A round table under a white cloth, a lamp under a silk shade (the one

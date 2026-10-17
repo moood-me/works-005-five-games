@@ -340,7 +340,7 @@ const characters = {
   // the theatre: a light grey evening dress, a light shawl
   anna_theatre: woman({ garment: 'dress', hair: 'bun', hat: 'none', scarf: true, body: ANNA,
     colors: { ...ANNA_C, top: '#d6d4d8', garment: '#cfccd2', bottom: '#cfccd2', shoes: '#6b6670', accent: '#f1ede4' } }),
-  // Moscow, the Slavyansky Bazaar: his favourite grey dress, no hat
+  // Moscow, the Slaviansky Bazaar: his favourite grey dress, no hat
   anna_grey: woman({ garment: 'dress', hair: 'bun', hat: 'none', body: ANNA,
     colors: { ...ANNA_C, top: '#a8a6ab', garment: '#9c9aa0', bottom: '#9c9aa0', shoes: '#4c4a52', accent: '#f7f5f0' } }),
   // von Diderits: young, very tall, stooping, a narrow face, small side-whiskers, a pince-nez; a tail coat with a

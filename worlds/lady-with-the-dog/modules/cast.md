@@ -19,14 +19,14 @@ in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The pa
 | `gurov_summer` | Gurov, Yalta | big (height 1.03, head 1.08), a moustache; a light summer suit, a boater (`boater`) |
 | `gurov_indoor` | Gurov without a hat | the same suit, the moustache; in the theatre the scene gives a dark frock coat through `colors` ({`garment`: '#34353d', `bottom`: '#2f3036'}) |
 | `gurov_winter` | Gurov, winter | a dark fur coat, a fur collar (`fur_collar`), a fur hat (`fur_hat`), the moustache |
-| `gurov_grey` | Gurov, the Slavyansky Bazaar | a dark frock coat, no hat, greying hair, the moustache |
+| `gurov_grey` | Gurov, the Slaviansky Bazaar | a dark frock coat, no hat, greying hair, the moustache |
 | `anna_summer` | Anna, Yalta | short (0.92), fair-haired (light brows), a white dress, a béret (`beret`) |
 | `anna_hairdown` | Anna in her room | the same dress, her hair down (`long`) |
 | `anna_travel` | Anna, the station | a grey-blue travelling dress, a toque (`toque`) |
 | `anna_autumn` | Anna, S., autumn | a dark coat, the toque, dark gloves (`gloves`) |
 | `anna_winter` | Anna, S., winter | a pale grey fur coat, a white fur cap (`fur_cap`); the scene gives the muff: `anna_with: ["muff"]` (its fur — the cap's colour) |
 | `anna_theatre` | Anna at the theatre | a light grey evening dress, a light shawl (`scarf`) |
-| `anna_grey` | Anna, the Slavyansky Bazaar | a grey dress, no hat |
+| `anna_grey` | Anna, the Slaviansky Bazaar | a grey dress, no hat |
 | `diderits` | von Diderits at the theatre | `lady_narrow`; very tall (1.12), thin; side-whiskers, a pince-nez; a tail coat, a white shirt front, a scholarly badge (`badge`, the point `#badge`) |
 | `diderits_coat` | the same at the gate | a coat, a peaked cap with a cockade (`cap_cockade`), side-whiskers, the pince-nez |
 | `wife`, `wife_shawl` | Gurov's wife | tall (0.99), dark hair in a knot, the face `level` (straight dark brows), a dark dress; `wife_shawl` — with a shawl |
