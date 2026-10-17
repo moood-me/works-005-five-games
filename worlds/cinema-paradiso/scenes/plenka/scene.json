@@ -2,26 +2,155 @@
   "engine": 3,
   "title": "Плёнка",
   "caption": "",
-  "camera": { "mode": "picture" },
+  "camera": {
+    "mode": "panorama",
+    "span": [0, 30]
+  },
   "horizon": 0.5,
-  "light": { "grain": 0.14, "vignette": 0.45 },
+  "light": {
+    "grain": 0.14,
+    "vignette": 0.45
+  },
   "state": {
-    "chapter_number": "",
-    "chapter_title": "",
-    "map": null,
-    "reveal": 1,
-    "lamp": 1
+    "shown": 0,
+    "camera_x": 0
   },
   "states": {
-    "chapter_number": { "type": "string", "means": "номер главы («I»…); пусто — пролог, эпилог, вся партия, самое начало" },
-    "chapter_title": { "type": "string", "means": "название главы — в большом кадре ленты (без карты) или в заголовке над картой; пусто вместе с номером и без карты — самое начало: только лампа" },
-    "map": { "means": "null — только титул в одном большом кадре; иначе строки выборов [{title, weight '⚑'|'~', options: [{label, state: 'chosen'|'open'|'unseen'}]}]: строка — кадр, разрезанный на части по вариантам; выбранный светится тёплым, подпись тёмным по свету; упущенный тёмный, подпись едва видна; недостигнутый чёрный без слова; ⚑ — большие кадры, ~ — маленькие; до пяти строк — одна лента (если подписи не встают — две), больше — вся партия: три ленты (4 + 3 + 3)" },
-    "reveal": { "range": [0, 1], "smooth": true, "means": "0 — лента ещё не въехала; первая треть — она въезжает справа в свет лампы, дальше кадры проявляются по очереди; 1 — всё видно" },
-    "lamp": { "range": [0, 1], "smooth": true, "means": "яркость лампы проектора справа внизу (элемент lamp; её игра предлагает нажать)" }
+    "shown": {
+      "type": "number",
+      "means": "глава, на которой игрок: вид едет к её точке c<i> (camera_x)"
+    }
   },
   "objects": [
-    { "id": "dark", "sky": true, "name": "Темнота" },
-    { "id": "film", "sky": true, "name": "Плёнка", "uniforms": { "slide": 0, "span": 2.6, "develop": 1, "lamp": 1 } },
-    { "id": "lamp", "sky": true, "name": "Лампа проектора" }
+    {
+      "id": "dark",
+      "sky": true,
+      "name": "Темнота"
+    },
+    {
+      "id": "lamp",
+      "sky": true,
+      "name": "Лампа проектора"
+    },
+    {
+      "id": "c0",
+      "name": "Глава",
+      "unseen": true,
+      "across": 0,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c1",
+      "name": "Глава",
+      "unseen": true,
+      "across": 5,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Глава",
+      "unseen": true,
+      "across": 10,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Глава",
+      "unseen": true,
+      "across": 15,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c4",
+      "name": "Глава",
+      "unseen": true,
+      "across": 20,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c5",
+      "name": "Глава",
+      "unseen": true,
+      "across": 25,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c6",
+      "name": "Глава",
+      "unseen": true,
+      "across": 30,
+      "distance": 10,
+      "elevation": 4.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "author",
+      "name": "Карта автора",
+      "unseen": true,
+      "across": -3.2,
+      "distance": 10,
+      "elevation": 3.65,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    }
   ]
 }
