@@ -1,23 +1,21 @@
 // What the game shows over the scene (bespoke.layer), on linen, in ink:
 //   view.gauges({scales, shown} | null, hero) — each scale once the player has met it: the toy yacht low on the left
-//     (Tale ↔ People: its sails scarlet ↔ white), the compass low on the right (Sea ↔ Home: its needle to the wave or
+//     (Сказка ↔ Люди: its sails scarlet ↔ white), the compass low on the right (Море ↔ Дом: its needle to the wave or
 //     to the tower); hero ('assol' | 'grey' | 'both') — whose scene it is: their scale in full, the other one faint.
-//     view.gauges(null) — none (the Far Sea, the epilogue)
-//   view.toast(text, kind) — a strip of linen under the tools: 'scale' (a scale moved), 'rule' (what a scale means,
+//     view.gauges(null) — none («Даль», the epilogue)
+//   view.toast(text, kind) — a strip of linen in the corner: 'scale' (a scale moved), 'rule' (what a scale means,
 //     the first time), 'mark' (remembered)
 //   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do); → a function that takes it
 //     away. One at a time: a new one takes the place of the one before
 //   view.title(text, {signal}) — words in the middle of the frame, as a film's title; → once they have gone
 //   view.letter({text, sign}, {signal}) — a sheet of unbleached paper folded in three: pressed, it unfolds and can be
 //     read; pressed again, it folds and goes; → then. text: its lines ('\n')
-//   view.onSkip(fn) → off — what the ⏭ does now (the latest one, until off()); none, or null — the ⏭ not shown
-//     (a minigame: skips the minigame, for every player — a safety net if it glitches, not a way through; a step:
-//     skips the step, the author's only — game.js)
+//   view.replaying(on) — the plate «Переигровка» in the corner while a replay goes on (game.js)
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
-//     opened by the page's ☰ (author() → what opens it, for bespoke.menu), lists
+//     opened by his sign on the map (author() → what opens or closes it), lists
 //     the chapters, their steps and the steps' minigames, to go to any (a minigame: its index among the step's) — as
-//     the play picked under «play as…» has it by then (as: its index)
+//     the play picked under «партия как…» has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
 
@@ -42,14 +40,9 @@ export function ui(layer) {
   const boat = yacht(layer);
   const needle = compass(layer);
   const toasts = el('div', 'toasts', layer);
-  // the corner's tools: ⏭ for everyone (⏸, ☰ — the page's)
-  const tools = el('div', 'tools', layer);
-  const skips = [];
-  // (shown while the latest skip is something)
-  const skipButton = button('⏭', tr('skip'), () => skips.at(-1)?.fn?.());
-  const skipShown = () => { skipButton.hidden = !skips.at(-1)?.fn; };
-  tools.append(skipButton);
-  skipShown();
+  const replay = el('div', 'replay', layer);
+  replay.textContent = 'Переигровка';
+  replay.hidden = true;
   let hinted = () => {}; // takes the hint shown now away
   return {
     gauges(state, hero) {
@@ -90,16 +83,10 @@ export function ui(layer) {
       });
     },
     letter: (letter, { signal } = {}) => unfold(layer, letter, signal),
-    onSkip(fn) {
-      const it = { fn };
-      skips.push(it);
-      skipShown();
-      return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
-    },
+    replaying(on) { replay.hidden = !on; },
     author({ chapters, plays, at, games, go }) {
-      // the map (the page's ☰ opens it): «play as…», then every chapter a column of its steps (and their minigames)
-      // in a window over the scene;
-      // a click outside, ✕ or Esc closes it
+      // the map (his sign on the map opens it): «партия как…», then every chapter a column of its steps (and their
+      // minigames) in a window over the scene; a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
       map.hidden = true;
       let as = 0; // the play picked
@@ -109,19 +96,19 @@ export function ui(layer) {
       const open = () => {
         const here = at(), panel = el('div', 'author-panel');
         const pick = el('label', 'as');
-        pick.append('play as… ');
+        pick.append('партия как… ');
         const list = el('select', '', pick);
         list.append(...plays.map((label, i) => Object.assign(el('option'), { value: i, textContent: label, selected: i === as })));
         list.onchange = () => { as = Number(list.value); open(); };
-        panel.append(button('✕', 'close (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
+        panel.append(button('✕', 'закрыть (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
-            const step = button(c.titles[si], '', () => go(as, ci, si), ci === here.chapter && si === here.step ? 'here' : '');
+            const step = button(c.titles[si], '', () => { close(); go(as, ci, si); }, ci === here.chapter && si === here.step ? 'here' : '');
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'straight to the mini-game', () => go(as, ci, si, k), 'minigame'))));
+              button(`◆ ${name}`, 'сразу к мини-игре', () => { close(); go(as, ci, si, k); }, 'minigame'))));
             col.append(step, under);
           }
           return col;
@@ -143,7 +130,7 @@ const gauge = (box, set) => ({
   },
 });
 
-// the toy yacht (Tale ↔ People, −3…3): hull and mast in ink, its two sails between white and scarlet
+// the toy yacht (Сказка ↔ Люди, −3…3): hull and mast in ink, its two sails between white and scarlet
 function yacht(layer) {
   const box = svg('svg', { class: 'gauge yacht', viewBox: '0 0 72 72', 'aria-hidden': 'true' }, layer);
   svg('path', { class: 'ink', d: 'M8 50 H64 L55 62 H19 Z' }, box);
@@ -155,7 +142,7 @@ function yacht(layer) {
   });
 }
 
-// the compass (Sea ↔ Home, −4…4): a ring, the tower on its left, the wave on its right, the needle 15° a step —
+// the compass (Море ↔ Дом, −4…4): a ring, the tower on its left, the wave on its right, the needle 15° a step —
 // to the wave: to the right
 function compass(layer) {
   const box = svg('svg', { class: 'gauge compass', viewBox: '0 0 72 72', 'aria-hidden': 'true' }, layer);
@@ -199,7 +186,7 @@ function unfold(layer, { text, sign }, signal) {
         paper();
         letter.classList.add('open-bottom');
         await wait(2400);
-        hint.textContent = tr('fold');
+        hint.textContent = 'сложить';
         hint.classList.add('on');
         stage = 'open';
       } else if (stage === 'open') {
@@ -224,7 +211,7 @@ function unfold(layer, { text, sign }, signal) {
       veil.classList.add('on');
       veil.focus({ preventScroll: true });
       await wait(1600);
-      hint.textContent = tr('unfold');
+      hint.textContent = 'развернуть';
       if (stage === 'folded') hint.classList.add('on');
     });
   });

@@ -1,4 +1,4 @@
-// «Shrouds» (II, the deck): the boy climbs the shrouds. The scene «The Deck» (beat `shrouds`, the insert `ropes`) shows
+// «Ванты» (II, the deck): the boy climbs the shrouds. The scene «Палуба» (beat `shrouds`, the insert `ropes`) shows
 // it all; this moves its keys: hand_l / hand_r (1 — the hand grips, the default; 0 — lifted), climb (0…1), slip (a
 // pulse), roll (the ship's heel, which the insert's horizon follows). One mark at a time, on one hand and then the
 // other (ropes#left, ropes#right): held, that hand is lifted, and a short fill grows; let go full — it grips higher
@@ -17,11 +17,11 @@ const GRACE = 0.25; // s of a hand up in the heel before it slips
 const SIDES = [{ key: 'hand_l', at: 'ropes#left' }, { key: 'hand_r', at: 'ropes#right' }];
 
 export default {
-  title: 'Shrouds', // (as the author's ☰ lists it)
+  title: 'Ванты', // (as the author's map lists it)
   about: 40,
   skipped: { slips: 0, seconds: 0 }, // (as played: the plain good outcome)
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The shrouds ran up into the sky, and the deck heeled underfoot') });
+    const mg = g.minigame({ phrase: 'Ванты уходили в небо, и палуба кренилась под ногами' });
     const tension = mg.layer('tension');
     let target = 0, shown = 0, slips = 0, side = 0, bad = 0, spent = false, warned = false, wind = -1, sentRoll = 0, sentClimb = 0;
     SIDES.forEach(s => g.set(s.key, 1));
