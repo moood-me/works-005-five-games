@@ -1,5 +1,5 @@
 // II. The Snuffbox (game.md §6). Nina and her cadet at the gate; supper — “All men are brothers!”; tea and Galya Busygina
-// (Tea) — ~ «she remembered» or «she never told»; the grandfather's snuffbox, always the elder son's — ⚑ take it
+// (Tea) — ~ “she did” or “never told me”; the grandfather's snuffbox, always the elder son's — ⚑ take it
 // (The Snuffbox) or not; the clarinet behind the wall; at dawn — ⚑ slip away (On Tiptoe) or stay (Frost).
 // Reads: nothing. Leaves: choices.galya, .box, .dawn; marks.sarafanov; scales home, lie.
 import { SCENES } from '../story.js';
@@ -12,11 +12,11 @@ import frost from '../minigames/frost.js';
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 export default {
-  number: 'II', title: tr('The Snuffbox'),
+  number: 'II', title: tr('Snuffbox'),
   titles: ['Nina', 'Supper', 'Galya', 'The Snuffbox', 'The Clarinet', 'Dawn'],
   choices: [
-    { id: 'galya', weight: '~', title: tr('Galya'), options: [{ id: 'remembered', label: tr('“She remembered”') }, { id: 'never', label: tr('“Never told me”') }] },
-    { id: 'box', weight: '⚑', title: tr('The Snuffbox'), options: [{ id: 'take', label: tr('Take it') }, { id: 'refuse', label: tr('Don\'t take it') }] },
+    { id: 'galya', weight: '~', title: tr('Galya'), options: [{ id: 'remembered', label: tr('“She did”') }, { id: 'never', label: tr('“Never told me”') }] },
+    { id: 'box', weight: '⚑', title: tr('Snuffbox'), options: [{ id: 'take', label: tr('Take') }, { id: 'refuse', label: tr('Refuse') }] },
     { id: 'dawn', weight: '⚑', title: tr('Dawn'), options: [{ id: 'leave', label: tr('Slip away') }, { id: 'stay', label: tr('Stay') }] },
   ],
   steps: [
@@ -72,10 +72,10 @@ export default {
       g.set('spill', 1); // (the question spills over always; skipped — the same trace)
       g.sound.pour(0, 0.3);
       await g.beat('talk_back');
-      const galya = await g.choose('galya', { sarafanov: [{ id: 'remembered', label: tr('“She remembered”') }, { id: 'never', label: tr('“Never told me”') }] });
+      const galya = await g.choose('galya', { sarafanov: [{ id: 'remembered', label: tr('“She did”') }, { id: 'never', label: tr('“Never told me”') }] });
       g.apply('galya');
       if (galya === 'remembered') {
-        await g.say('busygin', 'She remembered. Often');
+        await g.say('busygin', 'She did. Often');
         await g.beat('galya_yes');
       } else {
         await g.say('busygin', 'Mum never told me about you');
@@ -92,7 +92,7 @@ export default {
       await g.say('sarafanov', 'My grandfather\'s snuffbox. It always went to the elder son');
       await g.say('sarafanov', 'Take it');
       await out;
-      const box = await g.choose('box', { 'table#box': [{ id: 'take', label: tr('Take it') }, { id: 'refuse', label: tr('Don\'t take it') }] });
+      const box = await g.choose('box', { 'table#box': [{ id: 'take', label: tr('Take') }, { id: 'refuse', label: tr('Refuse') }] });
       g.apply('box');
       if (box === 'take') {
         await g.beat('box_take');

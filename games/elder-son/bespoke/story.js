@@ -78,8 +78,8 @@ export const EFFECTS = {
   train: { stay: {}, go: {} },
 };
 export const ENDINGS = [
-  { id: 'late', label: tr('Missed the Train') }, { id: 'saturday', label: tr('On Saturday') },
-  { id: 'anyway', label: tr('All the Same') }, { id: 'suitcase', label: tr('The Suitcase') },
+  { id: 'late', label: tr('Missed the Train') }, { id: 'saturday', label: tr('Saturday') },
+  { id: 'anyway', label: tr('Anyway') }, { id: 'suitcase', label: tr('Suitcase') },
 ];
 
 // What follows from the play so far — all a step reads of it besides g.state. A choice not made (its step skipped by

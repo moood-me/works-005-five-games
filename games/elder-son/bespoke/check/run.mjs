@@ -471,9 +471,9 @@ const LOGIC = [
   ['L100 Silva at the door', (f, s) => [f.silvaDoor, said(s, 100)]],
   ['L103 “Come on Saturday!”', (f, s) => [f.train === 'go' && f.told === 'self' && f.came !== 'none', said(s, 103)]],
   ['the ending “Missed the Train”', (f, s) => [f.ending === 'late', said(s, 104), s.beats.has('home_late')]],
-  ['the ending “All the Same”', (f, s) => [f.ending === 'anyway', said(s, 107), s.beats.has('home_anyway')]],
-  ['the ending “On Saturday”', (f, s) => [f.ending === 'saturday', said(s, 108)]],
-  ['the ending “The Suitcase”', (f, s) => [f.ending === 'suitcase', said(s, 109)]],
+  ['the ending “Anyway”', (f, s) => [f.ending === 'anyway', said(s, 107), s.beats.has('home_anyway')]],
+  ['the ending “Saturday”', (f, s) => [f.ending === 'saturday', said(s, 108)]],
+  ['the ending “Suitcase”', (f, s) => [f.ending === 'suitcase', said(s, 109)]],
   ['he left', (f, s) => [f.train === 'go', s.beats.has('boards'), s.played.has('glass')]],
   ['L89 / L90', (f, s) => [f.ninaIs === 'knows', said(s, 89), !said(s, 90)]],
   ['L97 / L98', (f, s, st) => (st.choices.truth === 'silent' ? [f.entry === 'asked', said(s, 97), !said(s, 98)] : [true])],
@@ -539,7 +539,7 @@ async function walk(choices, results, steps = null) {
   return { ending: f.ending, came: f.came, chapters, lines: seen.lines };
 }
 const CHOICES = CHAPTERS.flatMap(ch => ch.choices);
-// (kudimov's third — “Stay. Not for Father's sake” — only when Nina knows: crossing truth)
+// (kudimov's third — “Not for Father's sake” — only when Nina knows: crossing truth)
 const allowed = (c, o, made) => !(c.id === 'kudimov' && o.id === 'for_me' && made.crossing !== 'truth');
 const combos = CHOICES.reduce((all, c) => all.flatMap(made => c.options.filter(o => allowed(c, o, made)).map(o => ({ ...made, [c.id]: o.id }))), [{}]);
 // three plays that between them take every option of every choice (for the live results)

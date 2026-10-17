@@ -10,11 +10,11 @@ import buckets from '../minigames/buckets.js';
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
 
 export default {
-  number: 'IV', title: tr('The Fire'),
+  number: 'IV', title: tr('Fire'),
   titles: ['The Rucksack', 'The Fiancé', 'The Fire'],
   choices: [
-    { id: 'kudimov', weight: '~', title: tr('The Fiancé'), options: [{ id: 'let', label: tr('“Let her go”') }, { id: 'ask', label: tr('“Nina, stay”') }, { id: 'for_me', label: tr('“Stay. Not for Father\'s sake”') }] },
-    { id: 'fire', weight: '⚑', title: tr('The Fire'), options: [{ id: 'blame', label: tr('Take the blame') }, { id: 'own_up', label: tr('Let him own up') }] },
+    { id: 'kudimov', weight: '~', title: tr('Fiancé'), options: [{ id: 'let', label: tr('“Let her go”') }, { id: 'ask', label: tr('“Nina, stay”') }, { id: 'for_me', label: tr('“Not for Father\'s sake”') }] },
+    { id: 'fire', weight: '⚑', title: tr('Fire'), options: [{ id: 'blame', label: tr('Take the blame') }, { id: 'own_up', label: tr('Let him own up') }] },
   ],
   steps: [
     // Vasenka on the bench, the train's open door, the strap
@@ -69,7 +69,7 @@ export default {
       const said = await g.choose('kudimov', {
         kudimov: [{ id: 'let', label: tr('“Let her go”') }],
         sarafanov: [{ id: 'ask', label: tr('“Nina, stay”') }],
-        ...(f.ninaIs === 'knows' ? { nina: [{ id: 'for_me', label: tr('“Stay. Not for Father\'s sake”') }] } : {}),
+        ...(f.ninaIs === 'knows' ? { nina: [{ id: 'for_me', label: tr('“Not for Father\'s sake”') }] } : {}),
       });
       g.apply('kudimov');
       if (said === 'let') {

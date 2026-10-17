@@ -13,8 +13,8 @@ export default {
   number: 'III', title: tr('The March'),
   titles: ['Father', 'The Crossing'],
   choices: [
-    { id: 'father', weight: '~', title: tr('Father on the hillside'), options: [{ id: 'approach', label: tr('Go up to him') }, { id: 'hide', label: tr('Leave unseen') }] },
-    { id: 'crossing', weight: '⚑', title: tr('The Crossing'), options: [{ id: 'truth', label: tr('Tell the truth') }, { id: 'roar', label: tr('Say it under the roar') }, { id: 'brother', label: tr('“Brother”') }] },
+    { id: 'father', weight: '~', title: tr('On the Hillside'), options: [{ id: 'approach', label: tr('Go up to him') }, { id: 'hide', label: tr('Leave unseen') }] },
+    { id: 'crossing', weight: '⚑', title: tr('Crossing'), options: [{ id: 'truth', label: tr('Tell the truth') }, { id: 'roar', label: tr('Under the roar') }, { id: 'brother', label: tr('“Brother”') }] },
   ],
   steps: [
     // the funeral band on the hillside, and their father in it
@@ -86,7 +86,7 @@ export default {
       await wait;
       const said = await g.choose('crossing', {
         nina: [{ id: 'truth', label: tr('Tell the truth') }],
-        'freight#light': [{ id: 'roar', label: tr('Say it under the roar') }],
+        'freight#light': [{ id: 'roar', label: tr('Under the roar') }],
         barrier: [{ id: 'brother', label: tr('Answer: “Brother”') }],
       });
       g.apply('crossing');

@@ -34,7 +34,7 @@ export const LINES = [
   [31, "narrator", 'Sarafanov was writing an oratorio, “All Men Are Brothers”'],
   [32, "sarafanov", 'Galya Busygina… I wrote to her. She never answered'],
   [33, "sarafanov", 'Did she… remember me?'],
-  [34, "busygin", 'She remembered. Often'],
+  [34, "busygin", 'She did. Often'],
   [35, "busygin", 'Mum never told me about you'],
   [36, "sarafanov", 'My grandfather\'s snuffbox. It always went to the elder son'],
   [37, "sarafanov", 'Take it'],

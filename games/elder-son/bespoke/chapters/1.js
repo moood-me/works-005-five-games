@@ -13,7 +13,7 @@ export default {
   number: 'I', title: tr('Strangers\' Windows'), wall: false,
   titles: ['Windows', 'At the Door', 'Hands', 'Sarafanov'],
   choices: [
-    { id: 'entry', weight: '⚑', title: tr('At the Door'), options: [{ id: 'asked', label: tr('Ask to stay the night') }, { id: 'said', label: tr('“I\'m his son”') }] },
+    { id: 'entry', weight: '⚑', title: tr('At the Door'), options: [{ id: 'asked', label: tr('Ask for the night') }, { id: 'said', label: tr('“I\'m his son”') }] },
   ],
   steps: [
     // the street at night: knock where the light is still on
@@ -61,7 +61,7 @@ export default {
       await g.say('vasenka', 'Who do you want?', 'vasenka');
       await porch;
       const entry = await g.choose('entry', {
-        vasenka: [{ id: 'asked', label: tr('Ask to stay the night') }],
+        vasenka: [{ id: 'asked', label: tr('Ask for the night') }],
         kitchen: [{ id: 'said', label: tr('Say: “I\'m his son”') }],
       });
       g.gauge('lie');

@@ -15,8 +15,8 @@ export default {
   number: 'V', title: tr('The Elder Son'),
   titles: ['The Porch', 'Truth', 'The Last Train', 'Home'],
   choices: [
-    { id: 'truth', weight: '⚑', title: tr('Truth'), options: [{ id: 'self', label: tr('Tell him yourself') }, { id: 'silent', label: tr('Keep quiet') }] },
-    { id: 'train', weight: '⚑', title: tr('The Last Train'), options: [{ id: 'stay', label: tr('Stay') }, { id: 'go', label: tr('Get on the train') }] },
+    { id: 'truth', weight: '⚑', title: tr('Truth'), options: [{ id: 'self', label: tr('Confess') }, { id: 'silent', label: tr('Keep quiet') }] },
+    { id: 'train', weight: '⚑', title: tr('Last Train'), options: [{ id: 'stay', label: tr('Stay') }, { id: 'go', label: tr('Get on') }] },
   ],
   steps: [
     // the porch at night: Nina, and his own father
@@ -55,7 +55,7 @@ export default {
       await g.say('silva', 'Andrei Grigorievich, what sort of…');
       await pack;
       const truth = await g.choose('truth', {
-        sarafanov: [{ id: 'self', label: tr('Tell him yourself') }],
+        sarafanov: [{ id: 'self', label: tr('Confess') }],
         silva: [{ id: 'silent', label: tr('Keep quiet') }],
       });
       g.apply('truth');
@@ -102,7 +102,7 @@ export default {
       else if (f.ninaCame) await g.say('nina', 'Volodya');
       await last;
       const train = await g.choose('train', {
-        'train#door': [{ id: 'go', label: tr('Get on the train') }],
+        'train#door': [{ id: 'go', label: tr('Get on') }],
         [f.came !== 'none' ? 'sarafanov' : f.ninaCame ? 'nina' : 'far_window']: [{ id: 'stay', label: tr('Stay') }],
       });
       g.apply('train');
