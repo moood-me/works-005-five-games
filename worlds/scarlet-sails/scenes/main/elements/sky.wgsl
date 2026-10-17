@@ -1,5 +1,5 @@
-// The world's sky (module sky; written into a scene by tools/sky.js — change it there, not in the scene).
-// The hour's sky from what its animate gives (sky.skyMotion): the gradient from the top through the middle to the
+// The world's sky (module nebo; written into a scene by tools/nebo-sky.js — change it there, not in the scene).
+// The hour's sky from what its animate gives (nebo.skyMotion): the gradient from the top through the middle to the
 // horizon, the far sea under it; the stars of the night, each twinkling its own way; long bands of cloud (layer 1,
 // painted white) in the hour's colours, lit from under by a low sun, drifting slowly round; the sun's light along the
 // horizon and round it, its disc (layer 2), the moon (layer 3) — where the animate has them; a storm's low grey cover.

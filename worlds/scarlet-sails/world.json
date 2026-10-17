@@ -1,10 +1,10 @@
 {
-  "title": "Scarlet Sails v3",
-  "description": "Scarlet Sails on engine 3: the scenes moved over from engine 2.",
+  "title": "Алые паруса v3",
+  "description": "Алые паруса на движке 3: сцены перенесены с движка 2.",
   "themes": {
-    "sea": 70,
-    "fairy-tale": 30,
-    "romance": 50
+    "море": 70,
+    "сказка": 30,
+    "романтика": 50
   },
   "main": "main"
 }

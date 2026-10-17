@@ -1,71 +1,71 @@
-# closeups — hands and things close up (engine 2)
+# closeups — руки и вещи крупно (движок 2)
 
-Five shots for the world's scenes' inserts (`insert`): `scrap`, `hold`, `cellar`, `ropes`, `boat`. No faces. The hand is one model
-for all the shots, flat, in the manner of the hand of the shot `rig` of “Longren's House”. `hold` and `boat` are painted with finish (the light on
-every finger, the nails, the creases of the joints, the glint on the ring), the other three — simply.
+Пять кадров для вставок (`insert`) сцен мира: `scrap`, `hold`, `cellar`, `ropes`, `boat`. Лиц нет. Рука — одна модель
+на все кадры, плоская, в манере руки из кадра `rig` «Дома Лонгрена». `hold` и `boat` писаны с отделкой (свет по
+каждому пальцу, ногти, складки суставов, блик на кольце), остальные три — просто.
 
-The painting is done once a shot. All that moves is layers moved by `live()`; the painting reads nothing of `now`.
+Рисунок — один раз на кадр. Всё, что движется, — слои, которые двигает `live()`; рисунок из `now` не читает ничего.
 
-## How a scene shows a shot
+## Как сцена показывает кадр
 
 ```json
-{ "id": "hands", "name": "Hands", "insert": "hands",
+{ "id": "hands", "name": "Руки", "insert": "hands",
   "code": "e.kit.closeups.paint(g, e, \"hold\")",
   "animate": "const S = e.state; e.kit.closeups.live(e, \"hold\", { grip: [S.grip1, S.grip2, S.grip3, S.grip4] })" }
 ```
 
-- **`paint(g, e, shot)`** — the insert's `code`. `shot` — the shot's name, a string: `"scrap"`, `"hold"`, `"cellar"`, `"ropes"`,
-  `"boat"`. The painting reads none of the scene's keys — except the shot `boat`: it reads `e.state.ring` and `e.state.ring_kind`
-  (they change at once).
-- **`live(e, shot, now)`** — the insert's `animate`. `now` — a plain object; its fields are named as in the table below (the scene's numbered
-  keys — as an array: `grip` ← `grip1…grip4`). The keys the game moves every frame are read by it alone.
-- An insert opens with a cut (`s.shot({ hands: 1, … })` → `cut()`), with no fades; the insert's key is the scene's.
-- The shot's units are the frame's height, the origin at its middle (x −0.89…0.89, y −0.5…0.5); in the scene the shot takes the whole scene.
+- **`paint(g, e, shot)`** — `code` вставки. `shot` — имя кадра, строка: `"scrap"`, `"hold"`, `"cellar"`, `"ropes"`,
+  `"boat"`. Ключей сцены рисунок не читает — кроме кадра `boat`: он читает `e.state.ring` и `e.state.ring_kind`
+  (меняются разом).
+- **`live(e, shot, now)`** — `animate` вставки. `now` — простой объект; поля названы как в таблице ниже (нумерованные
+  ключи сцены — массивом: `grip` ← `grip1…grip4`). Ключи, которые игра двигает каждый кадр, читает только он.
+- Вставка открывается склейкой (`s.shot({ hands: 1, … })` → `cut()`), без затемнений; ключ вставки — сцены.
+- Единицы кадра — высота кадра, начало в его середине (x −0.89…0.89, y −0.5…0.5); на сцене кадр занимает всю сцену.
 
-## The shots
+## Кадры
 
-| `shot` | What is in the shot | `now` | Points (on the insert's element) |
+| `shot` | Что в кадре | `now` | Точки (на элементе вставки) |
 | --- | --- | --- | --- |
-| `scrap` | a workbench, the lamp's light from the right, a scarlet scrap in the middle, a child's hand from below | `taken` 0…1: up to 0.6 the fingers lie on the scrap, then they close on it (the scrap gathers) | `scrap` — the middle of the scrap |
-| `hold` | the palm of Gray as a boy (on the left, palm up) with a ring on it, over it, across his fingers, his mother's four fingers; a candle on the left, a glint on the ring | `grip` — `[4]`, each 1…0: the finger holds → let go (it straightens, lifts, its shadow moves away); the order — from left to right | `finger1`…`finger4` — the middles of her fingers, from left to right |
-| `cellar` | the bottom of a cask by candlelight (on the left), words in three lines “Gray shall drink me / when he is / in paradise”, the boy's hand | `dust` 1…0: the dust wiped off — three passes of the hand, line after line | `barrel` — the middle of the bottom |
-| `ropes` | three tarred shrouds with ratlines, the ship's boy's two hands on the outer ones, the sky and the sea behind them | `climb` 0…1 — the ratlines go down (12 hand-over-hands); `left`, `right` 0/1 — the hand closed (0 — raised and open; the key jumps, the hand follows it by itself); `roll` −1…1 — the horizon heels (up to 8°); `slip` 0…1 — the hands slide and tremble | `left`, `right` — the palms (they move with the hands) |
-| `boat` | on the left Gray's hand out of the skiff (a blue sleeve, palm up), on the right Assol's hand; the skiff's side low on the left, water, a low sun behind, between the hands a scarlet gleam on the water | `reach` 0…1 — her hand on its way to his (along a line from the start to his palm, with a small arc); from 0.8 his thumb lies on her fingers | `her` — her hand (the base of the fingers: what lies in his palm; it moves), `his` — his palm; at `reach` 1 they meet |
+| `scrap` | верстак, свет лампы справа, посередине алый лоскут, снизу детская рука | `taken` 0…1: до 0.6 пальцы ложатся на лоскут, дальше сжимают его (лоскут собирается) | `scrap` — середина лоскута |
+| `hold` | ладонь Грея-подростка (слева, ладонью вверх) с кольцом на ней, сверху поперёк его пальцев четыре пальца матери; свеча слева, блик на кольце | `grip` — `[4]`, каждое 1…0: палец держит → разжат (выпрямляется, приподнимается, тень отходит); порядок — слева направо | `finger1`…`finger4` — середины её пальцев, слева направо |
+| `cellar` | дно бочки при свече (слева), надпись в три строки «Меня выпьет Грей, / когда будет / в раю», рука мальчика | `dust` 1…0: пыль стёрта — три прохода руки, строка за строкой | `barrel` — середина дна |
+| `ropes` | три просмолённые ванты с выбленками, две руки юнги на крайних, за ними небо и море | `climb` 0…1 — выбленки уходят вниз (12 перехватов); `left`, `right` 0/1 — рука сжата (0 — поднята и раскрыта; ключ прыгает, рука идёт за ним сама); `roll` −1…1 — горизонт кренится (до 8°); `slip` 0…1 — руки съезжают и дрожат | `left`, `right` — ладони (движутся с руками) |
+| `boat` | слева рука Грея из шлюпки (синий рукав, ладонью вверх), справа рука Ассоль; борт шлюпки слева внизу, вода, низкое солнце сзади, между руками алый отсвет на воде | `reach` 0…1 — её рука на пути к его (по отрезку от начала до его ладони, с малой дугой); с 0.8 его большой палец ложится на её пальцы | `her` — её рука (основания пальцев: то, что ложится в его ладонь; движется), `his` — его ладонь; при `reach` 1 они совпадают |
 
-The insert's name with no point (`hands`, `card`…) is the main thing in the shot: the scrap, the ring on the palm, the cask's bottom, the middle of the shot at the shrouds,
-the middle between the hands in the skiff.
+Имя вставки без точки (`hands`, `card`…) — главное в кадре: лоскут, кольцо на ладони, дно бочки, середина кадра у вант,
+середина между руками в шлюпке.
 
-- **The ring in `boat`** — on Assol's ring finger, only with `ring` = `finger`: `ring_kind` `mother` — thin, with a
-  stone; `own` — old, broad. With `cord` and `none` there is none on the hand (the cord is out of the shot).
-- **The ring in `hold`** — his mother's, lying in his palm.
-- The points that move (`finger1…4`, `left`, `right`, `her`) are set by `live` every frame; the rest — by the painting.
-  All of them — only while the insert is open.
+- **Кольцо в `boat`** — на безымянном пальце Ассоль, только при `ring` = `finger`: `ring_kind` `mother` — тонкое, с
+  камнем; `own` — старинное, широкое. При `cord` и `none` на руке его нет (шнурок — вне кадра).
+- **Кольцо в `hold`** — материнское, лежит в его ладони.
+- Точки, которые движутся (`finger1…4`, `left`, `right`, `her`), ставит `live` каждый кадр; остальные — рисунок.
+  Все — только пока вставка открыта.
 
-## Where the points stand (the scene, frame heights; the whole frame)
+## Где точки стоят (сцена, высоты кадра; во весь кадр)
 
-`scrap#scrap` (0.89, 0.48). `finger1…4` at `grip` 1: (0.74, 0.58), (0.81, 0.63), (0.89, 0.62), (0.97, 0.56) — between
-neighbours ≈ 0.08. `barrel` (0.95, 0.50). `left` (0.41, 0.61), `right` (1.37, 0.51); a raised hand — 0.16 higher.
-`his` (0.54, 0.59); `her` at `reach` 0 — (1.38, 0.39). All within the middle 4:3.
+`scrap#scrap` (0.89, 0.48). `finger1…4` при `grip` 1: (0.74, 0.58), (0.81, 0.63), (0.89, 0.62), (0.97, 0.56) — между
+соседними ≈ 0.08. `barrel` (0.95, 0.50). `left` (0.41, 0.61), `right` (1.37, 0.51); поднятая рука — на 0.16 выше.
+`his` (0.54, 0.59); `her` при `reach` 0 — (1.38, 0.39). Все — в средних 4:3.
 
-## The layers (what `live` moves)
+## Слои (что двигает `live`)
 
-- `scrap`: `lamp` (the light, breathing), `scrap`, `open`, `closed` (the hand open and closed: one replaces the other).
-- `hold`: `glow`, `his`, `ring`, `glint`, `shadow1…4`, `her` (the back of her hand and the sleeve), `finger1…4`, `finger1…4_open`.
-- `cellar`: `dust0…2` (the dust by lines: it goes from edge to edge), `hand`, `flame`.
-- `ropes`: `horizon` (the sky and the sea, heeling), `rigging` (the shrouds and the ratlines, the same from ratline to ratline — they slide
-  down without end), `left_grip`, `left_open`, `right_grip`, `right_open`.
-- `boat`: `scarlet` (the gleam, rippling), `his`, `her`, `glint` (if the ring is on the finger), `his_thumb`.
+- `scrap`: `lamp` (свет, дышит), `scrap`, `open`, `closed` (рука раскрытая и сжатая: одна сменяет другую).
+- `hold`: `glow`, `his`, `ring`, `glint`, `shadow1…4`, `her` (тыл её кисти и рукав), `finger1…4`, `finger1…4_open`.
+- `cellar`: `dust0…2` (пыль по строкам: убирается от края к краю), `hand`, `flame`.
+- `ropes`: `horizon` (небо и море, кренится), `rigging` (ванты и выбленки, одинаковы от выбленки до выбленки — едут
+  вниз без конца), `left_grip`, `left_open`, `right_grip`, `right_open`.
+- `boat`: `scarlet` (отсвет, рябит), `his`, `her`, `glint` (если кольцо на пальце), `his_thumb`.
 
-## The hand
+## Рука
 
-One function `hand` (inside the module): the wrist, where the fingers point, the length, the side (a mirror), the view (`back` — from the back,
-`palm` — from the palm), each finger's bend 0…1 (a bent finger is shorter in a flat painting; bent beyond a right angle it is not seen from the
-back, from the palm it lies over it), the fan, the thumb, the skin, a sleeve with a cuff, a ring on a finger, `fine` —
-the finish, `parts` — which parts to paint (a finger — a layer of its own). The skin is the cast's colours (`assol_child`, `assol`, `grey`,
-`grey_teen`, `grey_boy`, `lilian`). There is one light in a shot, painted in the picture: an insert is a picture by itself, the scene's light does not
-fall on it.
+Одна функция `hand` (внутри модуля): запястье, куда смотрят пальцы, длина, сторона (зеркало), вид (`back` — с тыла,
+`palm` — с ладони), сгиб каждого пальца 0…1 (согнутый палец на плоском рисунке короче; согнутое дальше прямого угла с
+тыла не видно, с ладони лежит поверх неё), веер, большой палец, кожа, рукав с манжетой, кольцо на пальце, `fine` —
+отделка, `parts` — какие части писать (палец — свой слой). Кожа — цвета каста (`assol_child`, `assol`, `grey`,
+`grey_teen`, `grey_boy`, `lilian`). Свет в кадре один, писан в рисунке: вставка — картина сама по себе, свет сцены на
+неё не ложится.
 
-## The cost
+## Цена
 
-A shot is painted once (before the cut to it: `s.shot(…)` makes it ready); while it is on, the code does not paint it — `live` gives the layers
-numbers. Only `boat` is painted anew — when `ring` or `ring_kind` changes.
+Кадр рисуется один раз (до склейки на него: `s.shot(…)` готовит); пока он идёт, код его не рисует — `live` ставит слоям
+числа. Перерисуется только `boat` — когда сменится `ring` или `ring_kind`.

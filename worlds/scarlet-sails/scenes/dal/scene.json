@@ -1,0 +1,28 @@
+{
+  "engine": 3,
+  "title": "Даль",
+  "caption": "",
+  "camera": { "mode": "picture" },
+  "horizon": 0.22,
+  "light": { "grain": 0.08, "vignette": 0.25 },
+  "modules": ["nebo"],
+  "state": {
+    "chapter_number": "",
+    "chapter_title": "",
+    "map": null,
+    "reveal": 1,
+    "korablik": 1
+  },
+  "states": {
+    "chapter_number": { "type": "string", "means": "номер главы над её названием («I»…; пусто — пролог, эпилог, вся партия, самое начало)" },
+    "chapter_title": { "type": "string", "means": "название главы, проступающее на парусе (пусто вместе с номером — самое начало: только яхта)" },
+    "map": { "means": "null — только титул на одном большом парусе; иначе строки выборов: [{title, weight '⚑'|'~', options: [{label, state: 'chosen'|'open'|'unseen'}]}] — по парусу на вариант: выбранный алый и светится, открытый белый контур, недостигнутый едва видная точка без слова" },
+    "reveal": { "range": [0, 1], "smooth": true, "means": "как далеко сошёл туман: 0 — всё в тумане, 1 — туман сошёл с моря до самого низа кадра; титул и строки проступают по мере того, как он сходит" },
+    "korablik": { "range": [0, 1], "smooth": true, "means": "яркость яхты у нижней кромки (элемент korablik, её игра предлагает нажать)" }
+  },
+  "objects": [
+    { "id": "sea", "sky": true, "name": "Море на рассвете", "uniforms": { "front": 1, "sun_x": 1.1, "horizon": 0.22 } },
+    { "id": "fleet", "sky": true, "name": "Флот", "uniforms": { "front": 1 } },
+    { "id": "korablik", "sky": true, "name": "Кораблик" }
+  ]
+}
