@@ -204,7 +204,7 @@ export default async function (b) {
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, EPILOGUE);
     await b.show(SCENES.far, { state: { shown: reveal ?? here } });
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: !!author });
-    const notice = replay?.done && again() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
+    const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let grown = reveal == null, asked = null; // (an option that would leave the replay: asked again)
     let at = reveal ?? here; // (the chapter the view is at)
     const go = i => { if (i !== at) { at = i; b.set('shown', i); } };
@@ -233,7 +233,7 @@ export default async function (b) {
         const picked = options ? await hub.ask(drawn.at(ref), options) : null;
         if (!picked) { asked = null; continue; }
         if (picked.id === 'author') { author(); continue; }
-        if (replay && !['replay', 'keep', 'drop'].includes(picked.id) && asked !== picked.id) { asked = picked.id; again = ref; continue; }
+        if (replay && !['replay', 'keep', 'drop', 'main'].includes(picked.id) && asked !== picked.id) { asked = picked.id; again = ref; continue; }
         return picked.id;
       }
     } finally {
@@ -264,7 +264,7 @@ export default async function (b) {
       if (replay.done) { add(`knot:${c}`, 'keep', tr('Keep')); add(`knot:${c}`, 'drop', tr('Undo')); }
       else { add(`goreplay:${c}`, 'replay', tr('Continue the replay')); add(`goreplay:${c}`, 'back', tr('Back to the main run')); }
     }
-    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', kept.step ? tr('Continue') : tr('Start'));
+    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start'));
     for (let i = 0; i < Math.min(kept.chapter, END); i++) {
       if (kept.steps[i]?.[0]) add(`knot:${i}`, `chapter:${i}`, tr('Replay the chapter'));
       if (i === growing) continue;
@@ -284,7 +284,9 @@ export default async function (b) {
     return null;
   }
   // whether keeping the replay played to its end makes chapters the main run has played since to be played anew
-  const again = () => kept.chapter > replay.run.chapter + 1 || (kept.chapter === replay.run.chapter + 1 && kept.step > 0);
+  function anew() {
+    return kept.chapter > replay.run.chapter + 1 || (kept.chapter === replay.run.chapter + 1 && kept.step > 0);
+  }
   // the chapters as the map draws them (map.js): each one's rows — the main run's, and the replay's where it is —, the
   // play's pointer, the replay's
   function sky() {
