@@ -1,4 +1,4 @@
-// A jump (the author's ☰ → a minigame of a step): the step played up to that minigame unseen and without time, then
+// A jump (the author's map → a minigame of a step): the step played up to that minigame unseen and without time, then
 // on as ever. What it does unseen is kept for the scene it shows: the values it sets, the seconds it waits, what it
 // waits to hear from the scene — the scene works all of it out before it is seen (bespoke.show's `then`: a
 // scene in its instant mode takes the values and cuts, all it does then ending at once as it would; the seconds and

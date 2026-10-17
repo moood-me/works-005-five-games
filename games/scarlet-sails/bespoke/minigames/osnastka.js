@@ -14,7 +14,7 @@ const DRAIN = 1.25; // с: налив стекает от полного, отп
 const GUIDE = 0.6; // с: рука отца приходит и уходит
 
 export default {
-  title: 'Оснастка', // как её зовёт ☰ автора
+  title: 'Оснастка', // как её зовёт карта автора
   about: 20,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {

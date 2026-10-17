@@ -19,7 +19,7 @@ const ON_WITHIN = 3000; // сколько ждать от сцены `ring:on`, 
 const BREATH = [0.2, 0.8]; // дыхание: g.sound.breath(BREATH[0] + BREATH[1] * stir, 0.2)
 
 export default {
-  title: 'Кольцо', // (как её зовёт ☰ автора)
+  title: 'Кольцо', // (как её зовёт карта автора)
   about: 25,
   skipped: { on: false, stirs: 0, seconds: 0 },
   async run(g, b, opts, signal) {

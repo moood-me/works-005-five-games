@@ -15,7 +15,7 @@ const EASE = 0.5; // s: the wheel let go comes back
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 const kurs = {
-  title: 'Курс', // (as the author's ☰ lists it)
+  title: 'Курс', // (as the author's map lists it)
   about: 22,
   skipped: { steady: 0.8 }, // (as played: the plain good outcome — clean from 0.6)
   async run(g, b, opts, signal) {

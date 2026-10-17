@@ -14,7 +14,7 @@ const NO = { id: 'no', label: 'Не то' };
 const YES = { id: 'yes', label: 'Этот' };
 
 export default {
-  title: 'Алый', // (as the author's ☰ lists it)
+  title: 'Алый', // (as the author's map lists it)
   about: 45,
   skipped: { wrong: 0, passed: false, shown: 5 },
   async run(g, b, opts, signal) {

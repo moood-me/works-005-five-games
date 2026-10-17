@@ -22,7 +22,7 @@ const GLIDE = 0.34; // s: the scene glides the yacht between the places sent
 const skipped = { seconds: 0, lost: 0, jumps: 0 };
 
 export default {
-  title: 'За корабликом', // (as the author's ☰ lists it)
+  title: 'За корабликом', // (as the author's map lists it)
   about: 40,
   skipped,
   async run(g, b, opts, signal) {

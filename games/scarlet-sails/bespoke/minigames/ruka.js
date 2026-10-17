@@ -9,7 +9,7 @@ const DONE = 0.97;
 const TELL = 0.25; // s between onReach
 
 export default {
-  title: 'Рука', // (as the author's ☰ lists it)
+  title: 'Рука', // (as the author's map lists it)
   about: 6,
   skipped: { seconds: 0, lets: 0 },
   async run(g, b, opts, signal) {

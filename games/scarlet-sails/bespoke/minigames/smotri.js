@@ -8,7 +8,7 @@
 import { until, keys } from '../hands.js';
 
 export default {
-  title: 'Смотри', // (as the author's ☰ lists it)
+  title: 'Смотри', // (as the author's map lists it)
   about: 5,
   skipped: { tries: 0, seconds: 0 },
   async run(g, b, { heavy = false } = {}, signal) {

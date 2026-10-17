@@ -1,5 +1,5 @@
 // The check of the game's branches: node bespoke/check/run.mjs <a clone of the world>. No browser, no engine,
-// nothing drawn. Every step of every chapter is played unseen, the way the author's ☰ plays it (jump.js: a dry run,
+// nothing drawn. Every step of every chapter is played unseen, the way the author's map plays it (jump.js: a dry run,
 // story.js context(…, j)), on a page that only knows the scenes' specs (fake.mjs): no time passes, the choices are
 // those of the play walked, a minigame gives the result put in for it, a point asked for (g.spot) is answered with one.
 // Walked: every combination of the chapters' choices with «Ванты» climbed clean and the ring put on in «Кольцо»; and
@@ -50,8 +50,9 @@ const MINIGAMES = {
   smotri: { scene: 'home', keys: ['gaze'], points: ['book#book', 'window#window'], opts: ['heavy'], result: ['tries', 'seconds'] },
   ruka: { scene: 'shore', keys: ['reach'], points: ['hands#her', 'hands#his'], opts: ['onReach'], result: ['seconds', 'lets'] },
 };
-// game.md §3.8: what game.js itself takes of «Даль» (it is not run here)
-const FAR = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'korablik'], offer: 'korablik#sail' };
+// what game.js itself takes of «Даль» (it is not run here): its key, the points its trees stand at (map.js) — each
+// chapter's and the author's sign's
+const MAP = { keys: ['shown'], points: [...Array.from({ length: 7 }, (_, i) => `c${i}`), 'author'] };
 // the results put in (game.md §11): the outcomes a chapter branches on
 const CLEAN = { vanty: { slips: 0 }, koltso: { on: true } };
 const OTHER = [{ vanty: { slips: 1 } }, { koltso: { on: false } }];
@@ -154,13 +155,15 @@ for (const name in sound) {
 // «Даль», as game.js opens it
 const far = WORLD.get(SCENES.far);
 if (far) {
-  for (const key of FAR.keys) {
+  for (const key of MAP.keys) {
     if (!(key in far.states)) miss('game.js', `«${SCENES.far}»: ключа «${key}» нет в states`);
     if (far.contract && !(key in far.contract.party)) miss('game.js', `«${SCENES.far}»: ключа «${key}» нет в party контракта`);
     far.named.add(`party:${key}`);
   }
-  if (far.contract && !far.contract.offers.includes(FAR.offer)) miss('game.js', `«${SCENES.far}»: предложения «${FAR.offer}» нет в контракте`);
-  far.named.add(`ref:${FAR.offer}`);
+  for (const ref of MAP.points) {
+    if (far.contract && !far.contract.points.includes(ref)) miss('game.js', `«${SCENES.far}»: точки «${ref}» нет в контракте`);
+    far.named.add(`ref:${ref}`);
+  }
 }
 
 // --- a step's g, watched: `here` — where it is (file, step), `events` — what the step did, in order:
@@ -456,7 +459,6 @@ for (const p of plays) {
         else if (e[0] !== 'scene') acted(`${ch.file}, шаг ${n + 1} «${ch.titles?.[n] ?? ''}»`);
       }
     }
-    if (ch.choices.length) acted(`«Даль» после ${ch.file}`);
   }
   acted('конец');
 }
