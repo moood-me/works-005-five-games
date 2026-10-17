@@ -13,12 +13,17 @@
   },
   "state": {
     "shown": 0,
+    "come": 0,
     "camera_x": 0
   },
   "states": {
     "shown": {
       "type": "number",
       "means": "the chapter the player is at: the view goes to its point c<i> (camera_x)"
+    },
+    "come": {
+      "type": "number",
+      "means": "each new value brings the view back to the chapter shown (camera_x), the player's drag with it"
     }
   },
   "objects": [
