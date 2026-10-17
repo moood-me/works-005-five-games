@@ -21,7 +21,7 @@ export default {
   about: 38,
   skipped: { missed: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The reel is nearly out. A dot blinks in the frame\'s corner, then a second one') });
+    const mg = g.minigame({ phrase: tr('The reel is running out. Before its end a dot blinks in the corner of the frame, then a second') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel(); });

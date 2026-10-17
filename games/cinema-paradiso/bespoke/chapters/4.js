@@ -151,7 +151,7 @@ export default {
         await pile;
         await g.say('narrator', 'I wrote to her in Palermo. The letters came back');
         await returned;
-        await g.letter({ text: tr('Moved away'), sign: '', kind: 'envelope' });
+        await g.letter({ text: tr('Addressee has moved'), sign: '', kind: 'envelope' });
       }
     },
     // the pier at dusk, a year later: «Leave» (⚑ stay)

@@ -26,7 +26,7 @@ export default {
   about: 26,
   skipped: { share: 1 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('A strange girl crosses the square from the bus. The camera runs while she\'s in frame') });
+    const mg = g.minigame({ phrase: tr('A girl nobody knows walks across the square from the bus. The camera whirs while she\'s in the frame') });
     const send = keys(g);
     let pan = clamp(+g.get('pan') || 0, -1, 1), from = pan, inside = null, out = 0, lostOnce = false, errors = 0, inTime = 0;
     const lead = mg.lead({ zone: { at: 1 - pan, width: 2 * ZONE }, release: 'return' });

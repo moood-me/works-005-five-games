@@ -21,7 +21,7 @@ export default {
   about: 24,
   skipped: { seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The clippings are spliced into one strip. It\'s still light behind the glass') });
+    const mg = g.minigame({ phrase: tr('The clippings are spliced into one strip, frame to frame. It\'s still light behind the glass') });
     const send = keys(g);
     let x = clamp(+g.get('strip_x') || 0), base = x, mark = null, pull = null, started = null, told = -1, motif = -MOTIF, lit = -1;
     // the ring at the hand; a grip leads the strip that is left: u of the way — a share of what is left
