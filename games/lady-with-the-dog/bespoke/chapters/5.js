@@ -1,6 +1,6 @@
 // Chapter V “Two lives” — Moscow, winter (or the thaw, if she held out till the spring). At night: “Where have you been,
 // Dimitri?” — lie to his wife or tell the truth. To school: he takes his daughter, “three degrees above freezing”; two
-// lives; a note. The Slavyansky Bazaar: grey hair in the mirror, tea, “like a pair of birds of passage”, the ending's
+// lives; a note. The Slaviansky Bazaar: grey hair in the mirror, tea, “like a pair of birds of passage”, the ending's
 // words — who of the spouses knows; taking counsel; Chekhov's last sentence. game.md §6, chapter V.
 // Reads: facts.spring (the weather's bed of sound), facts.heart (to her first or the tea first), facts.wife (the
 // watch), facts.ending (the ending's words); through carry — wife_knows, husband_knows. Leaves: choices.wife,
@@ -16,7 +16,7 @@ export default {
   number: 'V',
   title: tr('Two lives'),
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['At night', 'To school', 'The Slavyansky Bazaar'],
+  titles: ['At night', 'To school', 'The Slaviansky Bazaar'],
   choices: [
     { id: 'wife', weight: '⚑', title: tr('His wife in the doorway'), options: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] },
   ],
@@ -70,7 +70,7 @@ export default {
       let said = 0;
       const r = await g.play(byTheHand, { lines: [
         () => (said = 1, g.say('gurov', 'It’s three degrees above freezing, and yet it is snowing')),
-        () => (said = 2, g.say('gurov', 'The thaw is only on the surface of the earth; there is quite a different temperature at a higher level in the atmosphere')),
+        () => (said = 2, g.say('gurov', 'The thaw is only on the surface of the earth; there is quite a different temperature at a greater height in the atmosphere')),
         () => (said = 3, g.say('daughter', 'And why are there no thunderstorms in the winter, father?')),
         () => (said = 4, g.say('narrator', 'He explained that, too')),
       ] });
@@ -78,23 +78,23 @@ export default {
       g.set('wave', r.stops ? 1 : 0);
       // (what the game did not get to say: in order, the same lines)
       if (said < 1) await g.say('gurov', 'It’s three degrees above freezing, and yet it is snowing');
-      if (said < 2) await g.say('gurov', 'The thaw is only on the surface of the earth; there is quite a different temperature at a higher level in the atmosphere');
+      if (said < 2) await g.say('gurov', 'The thaw is only on the surface of the earth; there is quite a different temperature at a greater height in the atmosphere');
       if (said < 3) await g.say('daughter', 'And why are there no thunderstorms in the winter, father?');
       if (said < 4) await g.say('narrator', 'He explained that, too');
       const gate = g.beat('gate_school');
       g.next('red_cap');
-      await g.say('narrator', 'He had two lives: one open, full of relative truth and of relative falsehood, and another — secret');
+      await g.say('narrator', 'He had two lives: one open, full of relative truth and of relative falsehood, and another life running its course in secret');
       await g.say('narrator', 'All personal life rests on secrecy');
       await gate;
       const note = g.told('red_cap:note');
       const cap = g.beat('red_cap');
       await note;
       await g.say('narrator', 'A man in a red cap brought him a note');
-      await Promise.all([g.letter({ text: tr('I have come. The Slavyansky Bazaar.'), sign: tr('A.') }), g.say('anna', 'I have come. The Slavyansky Bazaar', 'narrator')]);
+      await Promise.all([g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.') }), g.say('anna', 'I have come. The Slaviansky Bazaar', 'narrator')]);
       g.sound.paper();
       await cap;
     },
-    // The Slavyansky Bazaar: her grey dress; grey hair; tea; the cages; taking counsel; “the most complicated and
+    // The Slaviansky Bazaar: her grey dress; grey hair; tea; the cages; taking counsel; “the most complicated and
     // difficult part of it was only just beginning”
     async g => {
       const f = facts(g.state);

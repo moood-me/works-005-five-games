@@ -122,7 +122,7 @@ export default {
       const landing = g.told('stairs:landing');
       const stairs = g.beat('stairs');
       await landing;
-      await g.say('anna', 'How you frightened me! Why have you come? Why?', 'anna');
+      await g.say('anna', 'How you have frightened me! Why have you come? Why?', 'anna');
       await g.say('gurov', 'But do understand, Anna, do understand…');
       await stairs;
       const how = await g.choose('stairs', { anna: [{ id: 'promise', label: tr('“I will come to Moscow”') }], 'stairs#down': [{ id: 'away', label: tr('“Go away today”') }] });
@@ -169,7 +169,7 @@ export default {
         const goes = g.told('leave_lie:goes');
         const leave = g.beat('leave_lie');
         await envelope;
-        await g.say('diderits', 'For the professor. And buy yourself something in Moscow');
+        await g.say('diderits', 'That’s for the professor. And buy yourself something in Moscow');
         g.sound.paper();
         await goes;
         await g.say('narrator', 'Her husband believed her, and did not believe her');

@@ -1,4 +1,4 @@
-// “Taking counsel” (V.3, the Slavyansky Bazaar, after the beat `counsel`): they look for a way out. Press with a petal on
+// “Taking counsel” (V.3, the Slaviansky Bazaar, after the beat `counsel`): they look for a way out. Press with a petal on
 // three things — the window (`window#window`, “Live in one town”), the door (`door#door`, “Go away together”), the
 // glasses (`table#glasses`, “See each other every day”) — or keep silent (the finger shows “hands off” too). A petal
 // chosen — the marks hidden (the scene's turn), `think` = the thing, `await opts[thing]()` — their talk, `think` =

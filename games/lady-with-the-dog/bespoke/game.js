@@ -1,6 +1,6 @@
 // The Lady with the Dog — after the story by Anton Chekhov. A bespoke game (moood/engines/bespoke) on the world “The
 // Lady with the Dog” (engine 3): Gurov and Anna played in turn — Yalta in summer, Oreanda, the station, the Moscow
-// winter, the fence in S., the theatre, the Slavyansky Bazaar. A prologue, five chapters, an epilogue — each a row of
+// winter, the fence in S., the theatre, the Slaviansky Bazaar. A prologue, five chapters, an epilogue — each a row of
 // steps on the world's scenes. The choices, the two scales (Lightness ↔ Openness, Duty ↔ Life) and what is remembered
 // carry from chapter to chapter; how it ends follows from who of the two spouses knows (story.js facts) — the play
 // always goes through to the epilogue. Between the chapters, the scene “Lights”: the night sea, the far arc of the

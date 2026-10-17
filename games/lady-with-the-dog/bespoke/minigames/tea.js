@@ -1,4 +1,4 @@
-// “Tea” (V.3, the Slavyansky Bazaar, after the beat `tea`; the insert `tea`): Gurov pours tea while she weeps at the
+// “Tea” (V.3, the Slaviansky Bazaar, after the beat `tea`; the insert `tea`): Gurov pours tea while she weeps at the
 // window. Two moves. 1) Pull: a ring with dashes on the glass (`tea#glass`), the target — under the tap (`tea#under`);
 // where the glass is — `glass_at`; there — a snap. 2) Hold with danger: a ring with a groove on the tap (`tea#tap`):
 // held — the tap open (`tap` 1), the tea (`fill`) rises 0.12 a second, at each opening — a gurgle; the arc of danger —

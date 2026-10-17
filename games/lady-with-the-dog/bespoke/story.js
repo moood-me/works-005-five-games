@@ -66,9 +66,9 @@ export const SCENES = { quay: 'main', room: 'room', oreanda: 'oreanda', station:
 // delta > 0, down: delta < 0), and the one line that says what they mean (game.md §5).
 export const SCALES = {
   heart: { start: 0, min: -5, max: 5, up: tr('Openness'), down: tr('Lightness'),
-    rule: tr('The watch is open when Gurov hides nothing. Shut when he keeps it light.') },
+    rule: tr('The watch is open when Gurov hides nothing, shut when he takes it all lightly.') },
   anna: { start: 0, min: -3, max: 3, up: tr('Life'), down: tr('Duty'),
-    rule: tr('The leash is longer when Anna lives. Shorter when she remembers her duty.') },
+    rule: tr('The leash is longer when Anna lets herself live, shorter when she remembers her duty.') },
 };
 export const ENDINGS = [
   { id: 'cages', label: tr('Two cages') }, { id: 'wife', label: tr('His wife knows') },

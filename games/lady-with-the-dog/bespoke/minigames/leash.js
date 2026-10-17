@@ -21,7 +21,7 @@ export default {
   skipped: { end: 'home' },
   async run(g, b, opts, signal) {
     const pull = opts.pull ?? 0.06;
-    const mg = g.minigame({ phrase: tr('The Pomeranian pulled to the end of the fence, toward the station road') });
+    const mg = g.minigame({ phrase: tr('The Pomeranian pulled toward the end of the fence and the station road') });
     const send = keys(g);
     const leash = mg.mark({ at: 'anna#hand_l', kind: 'groove' });
     const hold = mg.hold({ on: null, show: leash, seconds: 0.4, drain: 0.4 });

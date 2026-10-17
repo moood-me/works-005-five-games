@@ -1,6 +1,6 @@
 // Chapter V “Two lives” — Moscow, winter (or the thaw, if she held out till the spring). At night: “Where have you been,
 // Dimitri?” — lie to his wife or tell the truth. To school: he takes his daughter, “three degrees above freezing”; two
-// lives; a note. The Slavyansky Bazaar: grey hair in the mirror, tea, “like a pair of birds of passage”, the ending's
+// lives; a note. The Slaviansky Bazaar: grey hair in the mirror, tea, “like a pair of birds of passage”, the ending's
 // words — who of the spouses knows; taking counsel; Chekhov's last sentence. game.md §6, chapter V.
 // Reads: facts.spring (the weather's bed of sound), facts.heart (to her first or the tea first), facts.wife (the
 // watch), facts.ending (the ending's words); through carry — wife_knows, husband_knows. Leaves: choices.wife,
@@ -16,7 +16,7 @@ export default {
   number: 'V',
   title: tr('Two lives'),
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['At night', 'To school', 'The Slavyansky Bazaar'],
+  titles: ['At night', 'To school', 'The Slaviansky Bazaar'],
   choices: [
     { id: 'wife', weight: '⚑', title: tr('His wife in the doorway'), options: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] },
   ],
@@ -90,11 +90,11 @@ export default {
       const cap = g.beat('red_cap');
       await note;
       await SAY(95);
-      await Promise.all([g.letter({ text: tr('I have come. The Slavyansky Bazaar.'), sign: tr('A.') }), SAY(96, 'narrator')]);
+      await Promise.all([g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.') }), SAY(96, 'narrator')]);
       g.sound.paper();
       await cap;
     },
-    // The Slavyansky Bazaar: her grey dress; grey hair; tea; the cages; taking counsel; “the most complicated and
+    // The Slaviansky Bazaar: her grey dress; grey hair; tea; the cages; taking counsel; “the most complicated and
     // difficult part of it was only just beginning”
     async g => {
       const f = facts(g.state);

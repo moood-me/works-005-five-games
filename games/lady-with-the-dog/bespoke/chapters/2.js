@@ -28,7 +28,7 @@ export default {
       await g.scene(SCENES.room, { beat: 'room' });
       const room = g.beat('room');
       g.next('room_hold');
-      await g.say('narrator', 'Her room was close and smelt of the scent she had bought at a Japanese shop');
+      await g.say('narrator', 'Her room was close and smelt of the scent she had bought at the Japanese shop');
       await room;
       const hold = g.beat('room_hold');
       g.next('melon');
@@ -74,7 +74,7 @@ export default {
         g.set('apart', q.pulls ? 1 : 0);
         const besideHold = g.beat('beside_hold');
         g.next('confession_bed');
-        await g.say('gurov', 'Why should I cease to respect you?');
+        await g.say('gurov', 'How could I despise you?');
         await besideHold;
         const speaks = g.told('confession_bed:speaks');
         const confession = g.beat('confession_bed');
@@ -102,13 +102,13 @@ export default {
       g.next('watchman');
       await still;
       let told = false;
-      const r = await g.play(sea, { sea: () => (told = true, g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and as hollowly when we are no more')) });
+      const r = await g.play(sea, { sea: () => (told = true, g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and monotonously when we are all no more')) });
       g.set('dawn', 1, 1);
       g.set('lights', 0, 2);
       g.set('cicada', 0);
       g.set('hand', r.touched.includes('hand') ? 1 : 0);
       g.beds({ sea: 0.6 });
-      if (!told) await g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and as hollowly when we are no more');
+      if (!told) await g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and monotonously when we are all no more');
       const looks = g.told('watchman:looks');
       const gone = g.told('watchman:gone');
       const watchman = g.beat('watchman');
@@ -116,7 +116,7 @@ export default {
       await looks;
       await g.say('narrator', 'A man walked up to them — probably a keeper — looked at them and walked away');
       await gone;
-      await g.say('narrator', 'They saw a steamer come in from Theodosia, lit by the glow of dawn, its lights already out');
+      await g.say('narrator', 'They saw a steamer come from Theodosia, with its lights out in the glow of dawn');
       await watchman;
       const dew = g.beat('dew');
       await g.say('anna', 'There is dew on the grass', 'anna');

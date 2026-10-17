@@ -18,7 +18,7 @@ export default {
   about: 40,
   skipped: { touched: [] },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('Below, the sea was sounding, and it was growing light') });
+    const mg = g.minigame({ phrase: tr('Below, the sea murmured, and it was growing light') });
     const send = keys(g);
     const acts = [b.act('state', 'move', 'dawn', 1, { over: LONG })];
     signal.addEventListener('abort', () => acts.forEach(a => a.cancel()));
