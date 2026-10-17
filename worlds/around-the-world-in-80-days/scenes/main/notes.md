@@ -27,16 +27,16 @@ The saloon is painted in its own colours, as by day; the night is the scene's li
 look `day` (0 day → 1 night) — towards night. The sources: `lamp_light` (the lamp, `lamp#bulb`), `fire_light`
 (`fireplace#fire`, `on: fire`, flickers), `hall_light` (`hall#light`, `on: door`), three cold ones at the windows, and
 the gas in the street — `gas1…3` (`lamps#lamp1…3`): `lamps.animate.js` puts them out by the hour (`e.glow`, the module
-`svet`, `gas`). `hazeGlow` — the halos of the lamp, the fire, the street lamps in the air (we no longer paint them).
+`light`, `gas`). `hazeGlow` — the halos of the lamp, the fire, the street lamps in the air (we no longer paint them).
 Shadows: the table, the felt, Fogg's chair, the armchair — on the floor; the clock — on the partition. The people cast
 their own.
 
 The street is outside, lit by the scene's light (not `glows`): the houses (`street`), the crowd (`crowd`), the street
 lamps (`lamps`), the fog (`mist`) are painted in daylight colours; the look `day` gives them the night, the lamps shine
 on the crowd and the roadway (`pavement` — a plane behind the windows, 0.5 m below the floor). The fog glows by
-itself — with the town's light, in the hour's colours (`svet.london`): the scene's light does not darken it. What the
+itself — with the town's light, in the hour's colours (`light.london`): the scene's light does not darken it. What the
 light does not do:
-- the sky (`sky`) — the fog is painted once, the hour's colours (`svet.london(day)`) are given to the shader by
+- the sky (`sky`) — the fog is painted once, the hour's colours (`light.london(day)`) are given to the shader by
   `sky.animate.js`;
 - the windows of the houses opposite — the layer `windows`, lit by the shader `street.wgsl` by the gas (`gas` from
   `street.animate.js`);

@@ -2,7 +2,7 @@
 // with the club. Nobody comes in; only their lights. Painted once, whole, in its groups (lib.js CROWD) — each a layer the
 // animate shows as `crowd_outside` comes to it, swaying a little in its own time; the lanterns' glows with them.
 // In a London day's colours, each figure fading into the fog the farther it stands; the look on `day` makes the night.
-const L = e.lib, C = L.CROWD, h = e.anim.hash, svet = e.kit.svet;
+const L = e.lib, C = L.CROWD, h = e.anim.hash, light = e.kit.light;
 const facade = '#8e9599', low = '#c9ccc8';
 const base = -L.plan.street;
 const figure = (w, i) => {
@@ -14,7 +14,7 @@ const figure = (w, i) => {
   w.save();
   w.translate(x, y);
   w.scale(k, k);
-  w.fillStyle = svet.rgba(svet.mixc(svet.mixc(facade, '#06080b', 0.6), low, far * 0.6));
+  w.fillStyle = light.rgba(light.mixc(light.mixc(facade, '#06080b', 0.6), low, far * 0.6));
   const tall = 1.62 + 0.18 * h(i, 3);
   const wide = 0.26 + 0.08 * h(i, 6);
   w.beginPath();

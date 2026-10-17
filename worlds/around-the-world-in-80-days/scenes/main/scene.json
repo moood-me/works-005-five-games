@@ -7,7 +7,7 @@
     "mode": "picture"
   },
   "modules": [
-    "svet",
+    "light",
     "cast",
     "beats"
   ],

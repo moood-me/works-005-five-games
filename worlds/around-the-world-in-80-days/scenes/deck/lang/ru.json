@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The deck","translation":"Палуба","where":"scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"Палуба парохода у борта: море, дым из трубы, порт на горизонте.","where":"scenes/deck/scene.json caption"}
+]}

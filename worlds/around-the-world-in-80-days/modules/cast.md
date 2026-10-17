@@ -6,7 +6,7 @@ lengths are a man's metres times `F.fit.h` (a share of a man's 1.76 m), a flame'
 
 ## Who
 
-All in the world's style `vokrug` (the engine's `flat`: straight-edged shapes, flat colours lit by the scene's own
+All in the world's style `around` (the engine's `flat`: straight-edged shapes, flat colours lit by the scene's own
 light, no lines; the engine's face `simple` — eyes, brows, nose, mouth, at rest or as `<id>_mood` says — on a big head
 (1.34, as «Cinema Paradiso»'s), the arms and legs fuller (limb 1.15): the faces read at a distance): as quiet as
 the rooms they stand in. The Englishmen's hair is `kempt` (smoothed back from the brow to the nape).

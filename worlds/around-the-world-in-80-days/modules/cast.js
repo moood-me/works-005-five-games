@@ -30,141 +30,141 @@ return {
   characters: {
     // Phileas Fogg: about forty, tall and straight; fair hair and side-whiskers; a dark frock coat open over a white
     // shirt-front; out of doors his top hat (wear {hat: 'tophat'})
-    fogg: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'whiskers'],
+    fogg: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'whiskers'],
       body: { height: 1.04, shoulders: 1.0, thick: 0.9 },
       colors: { skin: '#d8b496', hair: '#94713f', top: '#e6e1d6', garment: '#1d1f24', bottom: '#2a2b30', shoes: '#141416', hat: '#16171a', accent: '#16171a' } },
     // Passepartout: about thirty, a Parisian, an acrobat once — broad shoulders, a round head, dark curly hair; his
     // livery jacket, short, in a deep blue
-    passepartout: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'curls',
+    passepartout: { kind: 'shapes', style: 'around', who: 'man', garment: 'jacket', hair: 'curls',
       body: { height: 0.96, shoulders: 1.12, thick: 1.06, head: 1.06 },
       colors: { skin: '#dcae8c', hair: '#2b211c', top: '#d9d2c4', garment: '#2f3d58', bottom: '#3b3934', shoes: '#1c1a18', hat: '#2a2622' } },
     // Aouda: young and slight, dark hair in a knot; a sari of deep red, its end over the shoulder in gold
-    aouda: { kind: 'shapes', style: 'vokrug', who: 'woman', garment: 'sari', hair: 'bun',
+    aouda: { kind: 'shapes', style: 'around', who: 'woman', garment: 'sari', hair: 'bun',
       body: { height: 0.93, shoulders: 0.86, thick: 0.84 },
       colors: { skin: '#b9875f', hair: '#17120f', top: '#7e1f2c', garment: '#7e1f2c', accent: '#b8893a', shoes: '#3a2418' } },
     // Fix: short and thin, a sharp face, thick brows and whiskers; a bowler, a checked overcoat
-    fix: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'coat', hair: 'kempt', hat: 'bowler', parts: ['whiskers'],
+    fix: { kind: 'shapes', style: 'around', who: 'man', garment: 'coat', hair: 'kempt', hat: 'bowler', parts: ['whiskers'],
       body: { height: 0.94, shoulders: 0.94, thick: 0.84 },
       colors: { skin: '#d6ae90', hair: '#3a2c22', garment: '#5e5848', bottom: '#33302b', shoes: '#1a1816', hat: '#1b1a19' } },
     // the gentlemen of the Reform Club, Fogg's partners at whist: frock coats over white shirt-fronts, each his build
     // and his hair. Andrew Stuart, the engineer — grey, broad, side-whiskers
-    stuart: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'whiskers'],
+    stuart: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'whiskers'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.12 },
       colors: { skin: '#d6aa8a', hair: '#6f6b65', top: '#e4dfd4', garment: '#22201e', bottom: '#2d2b29', shoes: '#151413', accent: '#151413' } },
     // Thomas Flanagan, the brewer — stout, red-haired, a beard
-    flanagan: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'beard'],
+    flanagan: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'beard'],
       body: { height: 0.97, shoulders: 1.08, thick: 1.3 },
       colors: { skin: '#dcae90', hair: '#7a4a2c', top: '#e4dfd4', garment: '#26221f', bottom: '#302c28', shoes: '#151413', accent: '#151413' } },
     // Samuel Fallentin, a banker — tall and thin, bald
-    fallentin: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'none', parts: ['shirtfront', 'whiskers'],
+    fallentin: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'none', parts: ['shirtfront', 'whiskers'],
       body: { height: 1.05, shoulders: 0.96, thick: 0.86 },
       colors: { skin: '#d4ad92', hair: '#6c6258', top: '#e4dfd4', garment: '#1e2026', bottom: '#2a2c31', shoes: '#141416', accent: '#141416' } },
     // John Sullivan, a banker — middling, dark-haired, clean-shaven
-    sullivan: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront'],
+    sullivan: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront'],
       body: { height: 0.99, shoulders: 1.02, thick: 1.0 },
       colors: { skin: '#d9b294', hair: '#2a2420', top: '#e4dfd4', garment: '#24232a', bottom: '#2c2b30', shoes: '#141416', accent: '#141416' } },
     // Gauthier Ralph, a director of the Bank of England — old, white-haired, a little bent
-    ralph: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'whiskers'],
+    ralph: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'kempt', parts: ['shirtfront', 'whiskers'],
       body: { height: 0.97, shoulders: 0.98, thick: 1.0 },
       colors: { skin: '#d8b4a0', hair: '#d4d0c8', top: '#e4dfd4', garment: '#1f1e22', bottom: '#2b2a2e', shoes: '#141416', accent: '#141416' } },
     // Sir Francis Cromarty, brigadier-general: a white uniform, a pith helmet, a grey moustache
-    cromarty: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'kempt', hat: 'helmet', parts: ['moustache'],
+    cromarty: { kind: 'shapes', style: 'around', who: 'man', garment: 'jacket', hair: 'kempt', hat: 'helmet', parts: ['moustache'],
       body: { height: 1.0, shoulders: 1.04, thick: 1.0 },
       colors: { skin: '#d2a07e', hair: '#b8b2a8', top: '#ddd8c8', garment: '#d6d0bc', bottom: '#cfc9b6', shoes: '#3a2c22', hat: '#e2dcc8' } },
     // the Parsi guide: young and slight, a white turban, a light tunic, barefoot
-    guide: { kind: 'shapes', style: 'vokrug', who: 'youth', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both',
+    guide: { kind: 'shapes', style: 'around', who: 'youth', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both',
       body: { height: 0.95, thick: 0.82 },
       colors: { skin: '#8e6246', hair: '#1a1410', top: '#d8d2c2', bottom: '#cfc6b2', shoes: '#2a1e16', hat: '#e8e2d2' } },
     // the procession (night): a brahmin priest in a saffron robe, his head shaven
-    priest: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'robe', hair: 'none',
+    priest: { kind: 'shapes', style: 'around', who: 'man', garment: 'robe', hair: 'none',
       body: { height: 0.98, thick: 0.92 },
       colors: { skin: '#8a5e42', top: '#b9611f', garment: '#b9611f', shoes: '#3a2418' } },
     // …a torch-bearer, a drummer: white tunic and dhoti, a turban
-    bearer: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both',
+    bearer: { kind: 'shapes', style: 'around', who: 'man', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both',
       body: { height: 0.96, thick: 0.88 },
       colors: { skin: '#7e5640', hair: '#16110e', top: '#d6cfbd', bottom: '#cfc8b4', hat: '#d9cfb8' } },
-    drummer: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both', parts: ['drum'],
+    drummer: { kind: 'shapes', style: 'around', who: 'man', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both', parts: ['drum'],
       body: { height: 0.95, thick: 0.95 },
       colors: { skin: '#7a523c', hair: '#16110e', top: '#cfc6b0', bottom: '#c8c0aa', hat: '#9c3b24' } },
     // the crowd at the pyre: men and women of the villages
-    villager: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both',
+    villager: { kind: 'shapes', style: 'around', who: 'man', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both',
       body: { height: 0.95, thick: 0.9 },
       colors: { skin: '#80583f', hair: '#16110e', top: '#c4b89c', bottom: '#b8ad94', hat: '#cdbf9e' } },
-    villager_woman: { kind: 'shapes', style: 'vokrug', who: 'woman', garment: 'sari', hair: 'bun', hood: true, barefoot: 'both',
+    villager_woman: { kind: 'shapes', style: 'around', who: 'woman', garment: 'sari', hair: 'bun', hood: true, barefoot: 'both',
       body: { height: 0.9, thick: 0.86 },
       colors: { skin: '#80583f', hair: '#16110e', top: '#7a4a5a', garment: '#6e4252', accent: '#a8803c' } },
     // the club's porter: a livery coat of dark claret, grey hair
-    porter: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt',
+    porter: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'kempt',
       body: { height: 0.98, shoulders: 1.0, thick: 1.04 },
       colors: { skin: '#d6ae90', hair: '#8e8a84', top: '#5a2a2c', garment: '#4c2326', bottom: '#2b2526', shoes: '#151313' } },
     // Passepartout in the costume of the Long Noses (Yokohama): tights of the troupe's red, wings at his back, the nose
     // (a whole look: passepartout_wear = scene.kit.cast.characters.passepartout_nose)
-    passepartout_nose: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'curls', parts: ['wings', 'long_nose'],
+    passepartout_nose: { kind: 'shapes', style: 'around', who: 'man', garment: 'none', hair: 'curls', parts: ['wings', 'long_nose'],
       body: { height: 0.96, shoulders: 1.12, thick: 1.06, head: 1.06 },
       colors: { skin: '#dcae8c', hair: '#2b211c', top: '#b8452f', bottom: '#b8452f', shoes: '#2a1c16', accent: '#e0b84a' } },
     // the British consul at Suez: a light frock coat, a pith helmet, side-whiskers
-    consul: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'kempt', hat: 'helmet', parts: ['shirtfront', 'whiskers'],
+    consul: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'kempt', hat: 'helmet', parts: ['shirtfront', 'whiskers'],
       body: { height: 0.99, shoulders: 1.02, thick: 1.12 },
       colors: { skin: '#dcae90', hair: '#8a7a64', top: '#ece8dc', garment: '#cfc4a8', bottom: '#bfb49a', shoes: '#3a2c22', hat: '#ebe5d2', accent: '#2a2622' } },
     // Kiouni's owner: an old Indian, a white beard, a white turban, a dark cloak to the ground, barefoot
-    owner: { kind: 'shapes', style: 'vokrug', who: 'old', garment: 'robe', hair: 'short', hat: 'turban', barefoot: 'both', parts: ['beard'],
+    owner: { kind: 'shapes', style: 'around', who: 'old', garment: 'robe', hair: 'short', hat: 'turban', barefoot: 'both', parts: ['beard'],
       body: { height: 0.95, shoulders: 0.96, thick: 0.92 },
       colors: { skin: '#7e5640', hair: '#ece8e0', top: '#4a3f36', garment: '#3c332c', bottom: '#4a3f36', hat: '#efeadf' } },
     // the trader at Allahabad: stout, a bright turban, a motley robe, a sash
-    trader: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'robe', hair: 'short', hat: 'turban', parts: ['moustache', 'sash'],
+    trader: { kind: 'shapes', style: 'around', who: 'man', garment: 'robe', hair: 'short', hat: 'turban', parts: ['moustache', 'sash'],
       body: { height: 0.97, shoulders: 1.08, thick: 1.38 },
       colors: { skin: '#86593e', hair: '#1a1410', top: '#2f6a5a', garment: '#2f6a5a', bottom: '#d8ccb0', shoes: '#5a3a22', hat: '#e2a12c', accent: '#b8402e' } },
     // the conductor of the Indian line: a white tunic-jacket, a dark peaked cap, a moustache
-    conductor: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['moustache'],
+    conductor: { kind: 'shapes', style: 'around', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['moustache'],
       body: { height: 0.98, thick: 0.98 },
       colors: { skin: '#c99a76', hair: '#2a211a', top: '#ece8de', garment: '#ece8de', bottom: '#ddd8cc', shoes: '#1e1a18', hat: '#22283a' } },
     // John Bunsby, the pilot: weathered and ruddy, a grey beard, a yellow sou'wester, a pea jacket, a pipe in his teeth
-    bunsby: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'souwester', parts: ['beard', 'pipe'],
+    bunsby: { kind: 'shapes', style: 'around', who: 'man', garment: 'jacket', hair: 'short', hat: 'souwester', parts: ['beard', 'pipe'],
       body: { height: 0.97, shoulders: 1.1, thick: 1.16 },
       colors: { skin: '#c4805e', hair: '#9a948a', top: '#cfc6b0', garment: '#26324a', bottom: '#2c2a2a', shoes: '#1a1716', hat: '#d8a92c' } },
     // a Hong Kong boatman: a wide conical straw hat, a blue jacket, barefoot; his lantern (with: ['lantern'])
-    boatman: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'straw', barefoot: 'both',
+    boatman: { kind: 'shapes', style: 'around', who: 'man', garment: 'jacket', hair: 'short', hat: 'straw', barefoot: 'both',
       body: { height: 0.94, thick: 0.86 },
       colors: { skin: '#c49a6c', hair: '#151210', top: '#2f5486', garment: '#2f5486', bottom: '#2c3440', hat: '#cdb27a' } },
     // Batulcar, the showman: a top hat, a waistcoat over shirt-sleeves, long moustaches
-    batulcar: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'waistcoat', hair: 'kempt', hat: 'tophat', parts: ['mustachios'],
+    batulcar: { kind: 'shapes', style: 'around', who: 'man', garment: 'waistcoat', hair: 'kempt', hat: 'tophat', parts: ['mustachios'],
       body: { height: 1.0, shoulders: 1.06, thick: 1.2 },
       colors: { skin: '#d9aa86', hair: '#2a1e18', top: '#ece6d6', garment: '#8a2230', bottom: '#2a2830', shoes: '#141414', hat: '#1a1a1e' } },
     // an acrobat of the Long Noses: tights, wings at his back, the nose two metres long. His colours his own:
     // person.look.colors (top and bottom — the tights, accent — the wings; cast.md has six)
-    nose: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'short', parts: ['wings', 'long_nose'],
+    nose: { kind: 'shapes', style: 'around', who: 'man', garment: 'none', hair: 'short', parts: ['wings', 'long_nose'],
       body: { height: 0.95, shoulders: 1.04, thick: 0.92 },
       colors: { skin: '#d8ae86', hair: '#151210', top: '#3d5f9a', bottom: '#3d5f9a', shoes: '#1c1a20', accent: '#e0b84a' } },
     // a sailor: a flat round cap, a striped shirt
-    sailor: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'short', hat: 'sailorcap', parts: ['stripes'],
+    sailor: { kind: 'shapes', style: 'around', who: 'man', garment: 'none', hair: 'short', hat: 'sailorcap', parts: ['stripes'],
       body: { height: 0.96, thick: 0.94 },
       colors: { skin: '#d2a07e', hair: '#3a2a1e', top: '#ece8e0', bottom: '#2a3044', shoes: '#1a1818', hat: '#1f2a44', accent: '#24314e' } },
     // Captain Speedy of the Henrietta: big, a red beard, a peaked cap, a pea jacket
-    speedy: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['beard'],
+    speedy: { kind: 'shapes', style: 'around', who: 'man', garment: 'jacket', hair: 'short', hat: 'cap', parts: ['beard'],
       body: { height: 1.04, shoulders: 1.14, thick: 1.3 },
       colors: { skin: '#d49a78', hair: '#b4502a', top: '#cfc8b8', garment: '#1f2a40', bottom: '#262a34', shoes: '#151413', hat: '#1b2236' } },
     // a stoker: no jacket, his sleeves rolled up, soot on his face
-    stoker: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'rolled', hair: 'short', parts: ['soot'],
+    stoker: { kind: 'shapes', style: 'around', who: 'man', garment: 'rolled', hair: 'short', parts: ['soot'],
       body: { height: 0.97, shoulders: 1.1, thick: 1.12 },
       colors: { skin: '#c8987a', hair: '#201a16', top: '#b8b2a4', bottom: '#33302c', shoes: '#151413' } },
     // a Liverpool constable: a tall helmet, a dark tunic to the knee
-    policeman: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'short', hat: 'custodian', parts: ['whiskers'],
+    policeman: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'short', hat: 'custodian', parts: ['whiskers'],
       body: { height: 1.02, shoulders: 1.04, thick: 1.0 },
       colors: { skin: '#d8ae90', hair: '#4a3a2c', top: '#1e2536', garment: '#1e2536', bottom: '#1b2030', shoes: '#111114', hat: '#1b2232', accent: '#b8a46a' } },
     // the driver of an American locomotive: overalls, a cap, a beard
-    driver: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'none', hair: 'short', hat: 'cap', parts: ['beard'],
+    driver: { kind: 'shapes', style: 'around', who: 'man', garment: 'none', hair: 'short', hat: 'cap', parts: ['beard'],
       body: { height: 1.0, shoulders: 1.08, thick: 1.08 },
       colors: { skin: '#d0a07e', hair: '#4a3626', top: '#3f5878', bottom: '#3f5878', shoes: '#1c1814', hat: '#3a3a3c' } },
     // the captain at Fort Kearney: a blue frock coat, a wide-brimmed hat, a moustache
-    captain: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'frockcoat', hair: 'short', hat: 'hat', parts: ['moustache'],
+    captain: { kind: 'shapes', style: 'around', who: 'man', garment: 'frockcoat', hair: 'short', hat: 'hat', parts: ['moustache'],
       body: { height: 1.02, shoulders: 1.04, thick: 1.0 },
       colors: { skin: '#d4a684', hair: '#6a4e34', top: '#24345e', garment: '#24345e', bottom: '#5f7194', shoes: '#141414', hat: '#2a2622' } },
     // a soldier of the fort: a sky-blue greatcoat, a kepi; his rifle (with: ['rifle'])
-    soldier: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'coat', hair: 'short', hat: 'kepi',
+    soldier: { kind: 'shapes', style: 'around', who: 'man', garment: 'coat', hair: 'short', hat: 'kepi',
       body: { height: 0.98, thick: 0.96 },
       colors: { skin: '#d4a684', hair: '#3a2c20', top: '#24345e', garment: '#6f84a6', bottom: '#5f7194', shoes: '#141414', hat: '#22305a' } },
     // Mudge, the owner of the sledge: a fur coat, a fur hat, a beard
-    mudge: { kind: 'shapes', style: 'vokrug', who: 'man', garment: 'coat', hair: 'short', hat: 'fur', parts: ['beard'],
+    mudge: { kind: 'shapes', style: 'around', who: 'man', garment: 'coat', hair: 'short', hat: 'fur', parts: ['beard'],
       body: { height: 1.0, shoulders: 1.1, thick: 1.3 },
       colors: { skin: '#d2a07e', hair: '#5e4430', top: '#6e5640', garment: '#6a5038', bottom: '#3a3028', shoes: '#241c16', hat: '#4a3626' } },
   },
@@ -180,7 +180,7 @@ return {
     // the world's style: the engine's flat geometry — straight-edged shapes, flat colours lit by the scene's own light,
     // the engine's face (simple: at rest, or as <id>_mood has it), no lines: as quiet as the rooms they stand in
     // — with a big head (the face reads at a distance: eyes, brows, nose, mouth) and fuller arms and legs
-    styles: { vokrug: { from: 'flat', name: 'Around the World', face: 'simple', ground: 'night', head: 1.34, neck: 0.6, limb: 1.15 } },
+    styles: { around: { from: 'flat', name: 'Around the World', face: 'simple', ground: 'night', head: 1.34, neck: 0.6, limb: 1.15 } },
     garments: {
       // a waistcoat over the shirt-sleeves: the trunk in the garment's colour to the waist, the sleeves the shirt's
       waistcoat: { name: 'waistcoat', hang: [{ to: 0.06, from: 'shoulders', flare: 0.04, folds: false }] },

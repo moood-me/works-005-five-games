@@ -1,6 +1,0 @@
-{"strings": [
-  {"text":"Saville Row","translation":"Сэвил-Роу","where":"scenes/sevil-rou/scene.json title"},
-  {"text":"London, night, fog. House number seven.","translation":"Лондон, ночь, туман. Дом номер семь.","where":"scenes/sevil-rou/scene.json caption"},
-  {"text":"Round… the world?","who":"passepartout","translation":"Вокруг… света?","where":"scenes/sevil-rou/showcase.js"},
-  {"text":"By London time — to the minute.","who":"passepartout","translation":"По Лондону — минута в минуту.","where":"scenes/sevil-rou/showcase.js"}
-]}

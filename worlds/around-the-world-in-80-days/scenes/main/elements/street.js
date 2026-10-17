@@ -4,9 +4,9 @@
 // the hour by street.animate.js).
 const P = e.lib.plan;
 const base = -P.street;
-const svet = e.kit.svet;
+const light = e.kit.light;
 const facade = '#8e9599', low = '#c9ccc8';
-const fog = svet.mixc(facade, low, 0.35);
+const fog = light.mixc(facade, low, 0.35);
 // blocks of houses: [left, right, height]
 const blocks = [
   [-52, -41, 19],
@@ -15,10 +15,10 @@ const blocks = [
   [-16, -4, 21],
 ];
 for (const [x0, x1, h] of blocks) {
-  g.fillStyle = svet.rgba(svet.mixc(fog, low, (h - 17) * 0.05));
+  g.fillStyle = light.rgba(light.mixc(fog, low, (h - 17) * 0.05));
   g.fillRect(x0, base - h, x1 - x0, h);
   // the cornice: one quiet line
-  g.fillStyle = svet.rgba(svet.mixc(fog, low, 0.35));
+  g.fillStyle = light.rgba(light.mixc(fog, low, 0.35));
   g.fillRect(x0, base - h + 1.2, x1 - x0, 0.25);
 }
 // the fog over them, thickening toward the street: its share (the colour is the hour's — street.wgsl, light of its own:
@@ -36,7 +36,7 @@ e.layer('windows', {}, w => {
     for (let x = x0 + 1.4; x < x1 - 1; x += 2.6) {
       for (let y = 4; y < h - 3; y += 4.2) {
         if (e.rnd() > 0.16) continue;
-        w.fillStyle = svet.rgba('#e9b26a', 0.16 * (0.25 + 0.6 * Math.min(1, y / 22)));
+        w.fillStyle = light.rgba('#e9b26a', 0.16 * (0.25 + 0.6 * Math.min(1, y / 22)));
         w.fillRect(x, base - y - 2.2, 1, 2);
       }
     }
