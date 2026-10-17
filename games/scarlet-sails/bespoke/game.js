@@ -46,6 +46,8 @@ const CHAPTERS = [prologue, one, two, three, four, five, epilogue];
 const EPILOGUE = CHAPTERS.length - 1;
 const END = CHAPTERS.length; // the play played through: no chapter of the main run
 const REVEAL = 6; // s: a chapter's threads growing over the sea, row by row, as it has been played through
+// a replay's end asks on its knot once the knot has stood still REST looks REST_STEP ms apart (REST_MAX s at most)
+const REST = 3, REST_STEP = 100, REST_MAX = 12;
 // every step of the play in order, and where each chapter's first one is among them
 const STEPS = CHAPTERS.flatMap(ch => ch.steps);
 const FIRST = CHAPTERS.map((_, c) => CHAPTERS.slice(0, c).reduce((n, ch) => n + ch.steps.length, 0));
@@ -198,6 +200,9 @@ export default async function (b) {
   // —, then the view goes on to where the play is now). → what was picked: an option's id, or {jump} — the author's map
   async function map({ reveal = null }) {
     b.menu(null);
+    // (nothing of the chapter said or shown stays over the map)
+    b.hush();
+    view.quiet();
     beds({ sea: 0.3 }, 2);
     view.gauges(null);
     view.replaying(!!replay);
@@ -244,14 +249,19 @@ export default async function (b) {
       drawn.remove();
     }
   }
-  // a ref of the map's drawing once it stands in the frame (some frames at most; else null)
+  // a ref of the map's drawing once it has come to rest in the frame — the scene there, the view arrived (a mark
+  // opened on it while the view still moves could go out of sight: folded); none within REST_MAX s — null
   function standing(drawn, ref) {
     return new Promise(ok => {
-      let n = 0;
-      const off = b.onFrame(() => {
+      let last = null, still = 0, waited = 0;
+      // (looked at every REST_STEP ms, not each frame: a scene at rest may send none)
+      const look = setInterval(() => {
         const at = drawn.at(ref)();
-        if (at || ++n > 30) { off(); ok(at ? ref : null); }
-      });
+        still = at && last && Math.hypot(at.x - last.x, at.y - last.y) < 0.5 ? still + 1 : 0;
+        last = at;
+        waited += REST_STEP;
+        if (still >= REST || waited >= REST_MAX * 1000) { clearInterval(look); ok(still >= REST ? ref : null); }
+      }, REST_STEP);
     });
   }
   // what can be done on the map: {ref (map.js: what of its drawing is pressed): options} — `asked`: the option that
