@@ -26,7 +26,7 @@ export default {
       await cold;
       await g.say('narrator', 'The last train left at eleven forty. The next one is at six-oh-five');
       await g.say('silva', 'That\'s it, student. End of the line');
-      await g.say('busygin', 'We\'ll freeze here by six');
+      await g.say('busygin', 'We\'ll freeze to death here before six');
       await stand;
     },
   ],

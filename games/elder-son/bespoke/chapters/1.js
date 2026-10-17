@@ -48,7 +48,7 @@ export default {
       await g.scene(SCENES.street, { beat: 'neighbor' }, { cut: true });
       const neighbor = g.beat('neighbor');
       await answer;
-      await g.say('sarafanov', 'Natalya… Is Vasenka at your place? Forgive me, for heaven\'s sake');
+      await g.say('sarafanov', 'Natalya… Is Vasenka with you? Forgive me, for heaven\'s sake');
       await g.say('makarskaya', 'Your Vasenka isn\'t here. Go to bed, Andrei Grigorievich', 'mak_window');
       await neighbor;
       on(g, 'porch:knock', () => g.sound.knock());
@@ -77,7 +77,7 @@ export default {
         await g.say('silva', 'Watch and learn, student');
         await again;
         g.sound.door();
-        await g.say('silva', 'We\'ve come for Andrei Grigorievich. Here\'s his son. The elder one');
+        await g.say('silva', 'We\'re here to see Andrei Grigorievich. Here\'s his son. The elder one');
         await shut;
       } else {
         await g.say('busygin', 'I\'ve come to see my father. I\'m Andrei Grigorievich\'s son');

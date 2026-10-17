@@ -38,11 +38,11 @@ const FIRST = CHAPTERS.map((_, c) => CHAPTERS.slice(0, c).reduce((n, ch) => n + 
 const PLAYS = [
   { label: 'Missed the train — the whole family', choices: { entry: 'asked', galya: 'remembered', box: 'take', dawn: 'stay', father: 'approach', crossing: 'truth', kudimov: 'for_me', fire: 'blame', truth: 'self', train: 'stay' } },
   { label: 'Missed the train — honest, no one', choices: { entry: 'asked', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'for_me', fire: 'own_up', truth: 'self', train: 'stay' } },
-  { label: 'On Saturday — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'let', fire: 'own_up', truth: 'self', train: 'go' } },
-  { label: 'On Saturday — father, the snuffbox at the door', choices: { entry: 'said', galya: 'remembered', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'roar', kudimov: 'ask', fire: 'own_up', truth: 'self', train: 'go' } },
-  { label: 'All the same — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'stay' } },
-  { label: 'The suitcase — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'go' } },
-  { label: 'The suitcase — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'brother', kudimov: 'let', fire: 'own_up', truth: 'silent', train: 'go' } },
+  { label: 'Saturday — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'let', fire: 'own_up', truth: 'self', train: 'go' } },
+  { label: 'Saturday — father, the snuffbox at the door', choices: { entry: 'said', galya: 'remembered', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'roar', kudimov: 'ask', fire: 'own_up', truth: 'self', train: 'go' } },
+  { label: 'Anyway — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'stay' } },
+  { label: 'Suitcase — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'go' } },
+  { label: 'Suitcase — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'brother', kudimov: 'let', fire: 'own_up', truth: 'silent', train: 'go' } },
 ];
 const fresh = () => ({
   chapter: 0, step: 0, scales: Object.fromEntries(Object.entries(SCALES).map(([k, s]) => [k, s.start])),

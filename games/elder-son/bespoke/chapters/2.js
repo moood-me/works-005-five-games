@@ -27,7 +27,7 @@ export default {
       await g.scene(SCENES.street, { beat: 'gate' });
       const gate = g.beat('gate');
       await watch;
-      await g.say('kudimov', 'Zero fifty. I have to be in barracks by one');
+      await g.say('kudimov', 'Zero-zero-fifty. I have to be in barracks by one');
       await g.say('nina', 'Go on, Misha. You\'ll be late');
       await gate;
       g.beds({ room: 0.4, clock: 0.4 }, 1);
@@ -136,7 +136,7 @@ export default {
       await g.scene(SCENES.home, { beat: 'wake' });
       const wake = g.beat('wake');
       await up;
-      await g.say('silva', 'Rise and shine. The first one\'s at six-oh-five. We slip out quietly');
+      await g.say('silva', 'Rise and shine. The first one\'s at six-oh-five. We\'ll slip out quietly');
       await wake;
       const dawn = await g.choose('dawn', {
         'cot_chair#coat': [{ id: 'leave', label: tr('Slip away') }],

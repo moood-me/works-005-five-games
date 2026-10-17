@@ -25,7 +25,7 @@ export default {
       await g.scene(SCENES.hill, { beat: 'road' });
       const road = g.beat('road');
       await g.say('narrator', 'In the evening Nina took him out past the settlement');
-      await g.say('nina', 'Come on. I\'ll show you what Philharmonic our father plays in');
+      await g.say('nina', 'Come on. I\'ll show you the kind of Philharmonic our father plays in');
       await road;
       on(g, 'march:end', () => m?.stop(3));
       const march = g.beat('march');
@@ -57,7 +57,7 @@ export default {
         g.set('snowy', r.falls > 0 ? 1 : 0);
         g.set('beat_next', 'bottom'); // (made ready again, by the keys of how it went)
         const bottom = g.beat('bottom');
-        await g.say('sarafanov', 'Off you go, then. I\'ve still got the club — playing for the dance');
+        await g.say('sarafanov', 'Off you go, then. I\'ve still got to play for the dance at the club');
         await bottom;
       } else {
         await g.beat('hide');

@@ -574,12 +574,10 @@ const yards = () => TITLE_S + CHAPTERS.reduce((s, ch, c) => s + (c && ch.wall !=
 say(`World: ${world}, ${WORLD.size} scenes. Game: ${CHAPTERS.length} chapters, ${CHAPTERS.reduce((n, ch) => n + ch.steps.length, 0)} steps, ${CHOICES.length} choices.`);
 say(`Plays: ${full} (${combos.length} combinations of the choices and ${EDGES.length * cover.length} with live minigame results on both edges), and every step alone.`);
 
-say(`
-== Discrepancies: ${misses.size} ==`);
+say(`\n== Discrepancies: ${misses.size} ==`);
 for (const [text, set] of misses) say(`${text}${met(set)}`);
 
-say(`
-== Cuts inside a scene not by its table and without beat_next: ${cuts.size} ==`);
+say(`\n== Cuts inside a scene not by its table and without beat_next: ${cuts.size} ==`);
 for (const [text, set] of cuts) say(`${text}${met(set)}`);
 
 say('\n== In the scenes\' contracts, named by no play ==');
@@ -596,22 +594,18 @@ for (const [folder, scene] of WORLD) {
 }
 
 const never = LINES.filter(([n]) => !plays.some(p => p.lines.has(n)));
-say(`
-== Lines of §8 said in no play: ${never.length} ==`);
+say(`\n== Lines of §8 said in no play: ${never.length} ==`);
 for (const [n, who, text] of never) say(`L${String(n).padStart(2, '0')} ${who} | ${text}`);
 
-say(`
-== Lines: ${lines.size} (№ | who | voice | text | ≈ s) — the voices are recorded from them ==`);
+say(`\n== Lines: ${lines.size} (№ | who | voice | text | ≈ s) — the voices are recorded from them ==`);
 for (const line of [...lines.values()].sort((a, z) => (a.n ?? 999) - (z.n ?? 999))) {
   say(`${line.n ? `L${String(line.n).padStart(2, '0')}` : '—'} | ${line.who} | ${PEOPLE[line.who]?.voice ?? '?'} | ${line.text} | ${(0.3 + 0.06 * line.text.length).toFixed(1)}`);
 }
 
-say(`
-== Beats and time by ending and by who came (beats — the contract's seconds, lines in the pauses — 0.3 s + 0.06 s a letter, minigames — about; in brackets — with the choices at ${ACT} s, a scene's opening at ${OPEN} s and “The Yard”: a title ${TITLE_S} s, a map ${MAP_S} s) ==`);
+say(`\n== Beats and time by ending and by who came (beats — the contract's seconds, lines in the pauses — 0.3 s + 0.06 s a letter, minigames — about; in brackets — with the choices at ${ACT} s, a scene's opening at ${OPEN} s and “The Yard”: a title ${TITLE_S} s, a map ${MAP_S} s) ==`);
 for (const ending of ENDINGS) for (const who of ['family', 'father', 'none']) {
   const mine = plays.slice(0, full).filter(p => p.ending === ending.id && p.came === who);
-  say(`
--- ${ending.label} (${ending.id}), came: ${who} — ${mine.length} plays --`);
+  say(`\n-- ${ending.label} (${ending.id}), came: ${who} — ${mine.length} plays --`);
   if (!mine.length) continue;
   const times = mine.map(p => p.chapters.map(steps => seconds(steps.flat())));
   const all = mine.map(p => p.chapters.reduce((sum, steps) => sum + withActs(steps.flat()), 0) + yards());
@@ -652,8 +646,7 @@ for (const p of plays.slice(0, full)) {
   }
   acted('the end');
 }
-say(`
-== Watching with nothing to do longer than ${WATCH} s: ${long.size} ==`);
+say(`\n== Watching with nothing to do longer than ${WATCH} s: ${long.size} ==`);
 for (const [where, all] of long) say(`${where}: ${span(all)} (plays: ${all.length})`);
 
 // (a dry run's clock — jump.js — keeps the process alive: leave once all is written)

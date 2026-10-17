@@ -33,7 +33,7 @@ export default {
       }
       // (L89 is left unanswered — so it is meant: his answer is the choice of V.2)
       if (f.ninaIs === 'knows') await g.say('nina', 'Will you tell him? About yourself');
-      else await g.say('nina', 'I\'m glad you came to us');
+      else await g.say('nina', 'I\'m glad you came');
       await g.say('busygin', 'I don\'t know my own father. I saw him once — at a station. He didn\'t recognise me');
       await porch;
       await g.beat('shawl');
@@ -52,7 +52,7 @@ export default {
       await g.say('sarafanov', 'I\'m coming with you. Nobody needs me here');
       await g.say('sarafanov', 'I\'ll go to your mother. I\'ll ask her to forgive me');
       await silva;
-      await g.say('silva', 'Andrei Grigorievich, what sort of…');
+      await g.say('silva', 'Andrei Grigorievich, he\'s no…');
       await pack;
       const truth = await g.choose('truth', {
         sarafanov: [{ id: 'self', label: tr('Confess') }],
@@ -72,8 +72,8 @@ export default {
         const said = g.told('exposed:said'), window = g.told('exposed:window');
         const exposed = g.beat('exposed');
         await said;
-        if (facts(g.state).entry === 'asked') await g.say('silva', '…son is he to you! He first set eyes on you yesterday. I was the one who called him your son — for a laugh');
-        else await g.say('silva', '…son is he to you! He first set eyes on you yesterday. He came up with it himself — what an actor');
+        if (facts(g.state).entry === 'asked') await g.say('silva', '…son of yours! He first set eyes on you yesterday. I was the one who called him your son — for a laugh');
+        else await g.say('silva', '…son of yours! He first set eyes on you yesterday. He came up with it himself — what an actor');
         await window;
         await g.say('sarafanov', 'So what. I still think of you as my son', 'sarafanov');
         await exposed;
@@ -123,7 +123,7 @@ export default {
         const away = g.beat('away');
         g.beds({ train: 0.8 }, 2);
         await wave;
-        if (f.told === 'self' && f.came !== 'none') await g.say('sarafanov', 'Come on Saturday! Do you hear — on Saturday!');
+        if (f.told === 'self' && f.came !== 'none') await g.say('sarafanov', 'Come on Saturday! Do you hear? On Saturday!');
         await away;
       }
     },

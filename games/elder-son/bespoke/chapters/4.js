@@ -25,7 +25,7 @@ export default {
       const bench = g.beat('bench');
       await sit;
       await g.say('vasenka', 'Don\'t hold me back. I\'m going anyway');
-      await g.say('busygin', 'I\'m not holding you');
+      await g.say('busygin', 'I\'m not holding you back');
       await bench;
       on(g, 'strap:open', () => g.sound.doors());
       const strap = g.beat('strap');
