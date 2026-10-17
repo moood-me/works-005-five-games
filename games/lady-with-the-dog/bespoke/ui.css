@@ -101,7 +101,7 @@
   border-radius: 2px; color: var(--graphite); background: var(--card); font: 18px/1 var(--serif); cursor: pointer; opacity: 0.7; }
 #layer .tools > button[hidden] { display: none; }
 #layer .tools > button:hover { opacity: 1; }
-/* ☰: a window over the scene, below the site's header — «партия как…», then the chapters side by side, each a column
+/* ☰: a window over the scene, below the site's header — “play as…”, then the chapters side by side, each a column
    of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
   background: rgba(40, 34, 26, 0.4); }

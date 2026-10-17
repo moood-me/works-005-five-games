@@ -2,13 +2,13 @@
 // with a thin faded frame, graphite words in a light hand (Bad Script — "Dama Hand"), nothing bright (game.md §9). Red
 // is the leash's alone: the leash of Anna's gauge, nothing else here.
 //   view.gauges({scales, shown} | null, hero) — each scale once the player has met it: the white spitz on its red
-//     leash low on the left (Anna: Долг ↔ Жизнь — it sits by the parapet's end on a short leash ↔ runs ahead on a long
-//     one), the pocket watch low on the right (Gurov: Лёгкость ↔ Открытость — its lid shut ↔ open); hero ('gurov' |
+//     leash low on the left (Anna: Duty ↔ Life — it sits by the parapet's end on a short leash ↔ runs ahead on a long
+//     one), the pocket watch low on the right (Gurov: Lightness ↔ Openness — its lid shut ↔ open); hero ('gurov' |
 //     'anna' | 'both') — whose scene it is: their scale in full, the other at a third. view.gauges(null) — none
-//     («Огни», the epilogue)
+//     (“Lights”, the epilogue)
 //   view.toast(text, kind) — a slip of the postcard's paper under the tools: 'scale' (a scale moved), 'rule' (what a
 //     scale means, the first time), 'mark' (remembered); three at most
-//   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do: «Коснись шпица»); → a function
+//   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do: “Touch the dog”); → a function
 //     that takes it away. One at a time: a new one takes the place of the one before
 //   view.title(text, {signal}) — the words over the scene, as a postcard's caption; → once they have gone (9 s)
 //   view.letter({text, sign}, {signal}) — a sheet the player unfolds and folds: folded in three, pressed it opens,
@@ -19,7 +19,7 @@
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
 //     opened by the page's ☰ (author() → what opens it, for bespoke.menu), lists the chapters, their steps and the
-//     steps' minigames, to go to any — as the play picked under «партия как…» has it by then (as: its index)
+//     steps' minigames, to go to any — as the play picked under “play as…” has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
 
@@ -51,7 +51,7 @@ export function ui(layer) {
   const tools = el('div', 'tools', layer);
   const skips = [];
   // (shown while the latest skip is something)
-  const skipButton = button('⏭', 'пропустить', () => skips.at(-1)?.fn?.());
+  const skipButton = button('⏭', tr('skip'), () => skips.at(-1)?.fn?.());
   const skipShown = () => { skipButton.hidden = !skips.at(-1)?.fn; };
   tools.append(skipButton);
   skipShown();
@@ -103,7 +103,7 @@ export function ui(layer) {
       return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
     },
     author({ chapters, plays, at, games, go }) {
-      // the map (the page's ☰ opens it): «партия как…», then every chapter a column of its steps (and their minigames)
+      // the map (the page's ☰ opens it): “play as…”, then every chapter a column of its steps (and their minigames)
       // in a window over the scene;
       // a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
@@ -115,11 +115,11 @@ export function ui(layer) {
       const open = () => {
         const here = at(), panel = el('div', 'author-panel');
         const pick = el('label', 'as');
-        pick.append('партия как… ');
+        pick.append('play as… ');
         const list = el('select', '', pick);
         list.append(...plays.map((label, i) => Object.assign(el('option'), { value: i, textContent: label, selected: i === as })));
         list.onchange = () => { as = Number(list.value); open(); };
-        panel.append(button('✕', 'закрыть (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
+        panel.append(button('✕', 'close (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
@@ -127,7 +127,7 @@ export function ui(layer) {
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'сразу к мини-игре', () => go(as, ci, si, k), 'minigame'))));
+              button(`◆ ${name}`, 'straight to the mini-game', () => go(as, ci, si, k), 'minigame'))));
             col.append(step, under);
           }
           return col;
@@ -165,7 +165,7 @@ const gauge = (box, set) => ({
   },
 });
 
-// Anna (Долг ↔ Жизнь, −3…3): the parapet's line, a hand at the left edge holding the red leash, the white spitz on the
+// Anna (Duty ↔ Life, −3…3): the parapet's line, a hand at the left edge holding the red leash, the white spitz on the
 // parapet at x = 14 + 44·(a + 3)/6 — the further it has run, the longer the leash
 function leashGauge(layer) {
   const box = svg('svg', { class: 'gauge leash', viewBox: '0 0 72 72', 'aria-hidden': 'true' }, layer);
@@ -190,7 +190,7 @@ function leashGauge(layer) {
   return gauge(box, move);
 }
 
-// Gurov (Лёгкость ↔ Открытость, −5…5): a pocket watch, its chain, its lid on a hinge at the top — shut when he keeps
+// Gurov (Lightness ↔ Openness, −5…5): a pocket watch, its chain, its lid on a hinge at the top — shut when he keeps
 // it light (0…15°: a little ajar about the middle), open when he hides nothing (60…110°); the lid seen turning over its
 // hinge (its height cos of the angle: past 90° it stands above the watch, its inside to us)
 function watchGauge(layer) {
@@ -251,7 +251,7 @@ function unfold(layer, { text = '', sign }, signal) {
         paper();
         letter.classList.add('open-bottom');
         await wait(2400);
-        cue('сложить');
+        cue(tr('fold'));
         hint.classList.add('on');
         stage = 'open';
       } else if (stage === 'open') {
@@ -273,7 +273,7 @@ function unfold(layer, { text = '', sign }, signal) {
     document.fonts.load(HAND).finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      cue('развернуть');
+      cue(tr('unfold'));
       if (stage === 'folded') hint.classList.add('on');
     });
   });

@@ -1,28 +1,29 @@
-// «Тень» (III.1, Москва, после куска `evening_walk`; STREET_CAM): Гуров идёт по вечерней улице к камере, и в каждой
-// женщине ему видится она. Для N = 1…count: ожидание `evening_walk:stopN` (поставлено заранее), `walk_on` = N — он идёт
-// к N-й точке и стоит; дошёл — впереди выходит тень N (`shadeN` 1, сцена: 1–2 с) и стоит спиной; первая — `opts.onFirst()`
-// (не ждётся). Нажать: кольцо на её голове, дуга времени 6 с. Нажал — он всматривается (`gurov_look` на неё, 1 с), она
-// оборачивается — чужое лицо — и уходит (`shadeN` 2), через 2.5 с он отводит взгляд. Не нажал за 6 с — она уходит сама.
-// Следующая — через 2 с; после последней — 2 с, конец.
-//   Кто что делает: Гуров идёт по московской улице. Чего хочет: забыть. Что чувствует: память не отпускает.
-//   Игрок: всмотреться, узнать, ошибиться.
-//   opts: { count — 4 или 2 фигуры; onFirst() — при первой }
-//   → { touched: [номера тех, в кого всмотрелся] }
+// “The shadow” (III.1, Moscow, after the beat `evening_walk`; STREET_CAM): Gurov walks down the evening street toward
+// the camera, and in every woman he sees her. For N = 1…count: a wait for `evening_walk:stopN` (set ahead), `walk_on` =
+// N — he walks to the N-th point and stands; there — shadow N comes out ahead (`shadeN` 1, the scene: 1–2 s) and
+// stands, her back to him; the first — `opts.onFirst()` (not waited for). Press: a ring on her head, an arc of time of
+// 6 s. Pressed — he looks hard (`gurov_look` at her, 1 s), she turns round — a stranger's face — and goes (`shadeN`
+// 2), 2.5 s later he looks away. Not pressed in 6 s — she goes by herself. The next — 2 s later; after the last —
+// 2 s, the end.
+//   Who does what: Gurov walks down a Moscow street. What he wants: to forget. What he feels: memory will not let go.
+//   The player: to look hard, to know her, to be wrong.
+//   opts: { count — 4 or 2 figures; onFirst() — at the first }
+//   → { touched: [the numbers of those he looked hard at] }
 import { until, keys } from '../hands.js';
 
-const STOP = 30000; // мс: дошёл до точки (сцена говорит)
-const OUT = 1.5; // с: она выходит
-const TIME = 6; // с на взгляд
-const LOOK = 1, AWAY = 2.5; // с: всматривается; потом отводит взгляд
-const GAP = 2; // с до следующей; после последней
+const STOP = 30000; // ms: he has come to the point (the scene tells)
+const OUT = 1.5; // s: she comes out
+const TIME = 6; // s for a look
+const LOOK = 1, AWAY = 2.5; // s: he looks hard; then looks away
+const GAP = 2; // s to the next one; after the last
 
 export default {
-  title: 'Тень',
+  title: 'The shadow',
   about: 26,
   skipped: { touched: [] },
   async run(g, b, opts, signal) {
     const count = opts.count ?? 4;
-    const mg = g.minigame({ phrase: 'На улице были женщины, и каждая издали была похожа на неё' });
+    const mg = g.minigame({ phrase: tr('Women passed in the street, and from far off each one looked like her') });
     const send = keys(g);
     const wait = s => { const at = mg.t + s; return until(mg, ({ t }) => t >= at); };
     const touched = [];

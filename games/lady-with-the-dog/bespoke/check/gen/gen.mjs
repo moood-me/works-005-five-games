@@ -8,9 +8,9 @@ const by = new Map(LINES.map(l => [l[0], l]));
 for (const f of readdirSync(src)) {
   const text = readFileSync(join(src, f), 'utf8').replace(/SAY\((\d+)(?:,\s*('[^']*'))?\)/g, (_, n, at) => {
     const l = by.get(Number(n));
-    if (!l) throw new Error(`${f}: Р${n} нет`);
+    if (!l) throw new Error(`${f}: L${n} is not there`);
     return `g.say('${l[1]}', '${l[2]}'${at ? `, ${at}` : ''})`;
   });
-  if (/SAY\(/.test(text)) throw new Error(`${f}: SAY не заменён`);
+  if (/SAY\(/.test(text)) throw new Error(`${f}: a SAY not replaced`);
   writeFileSync(join(out, f), text);
 }

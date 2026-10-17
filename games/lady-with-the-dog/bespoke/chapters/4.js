@@ -1,25 +1,27 @@
-// Глава IV «Город С.» — декабрь в С. Забор: Гуров у её дома, рояль за окном (вальс или этюд — по её шкале); калитка,
-// старая горничная со шпицем — позвать шпица или отойти за угол (шпиц помнит, гладил ли он его). Гейша: театр, найти её
-// в толпе, муж-«лакей»; на лестнице — глазами Анны: «Я приеду к вам в Москву» или «Уезжайте сегодня же». Калитка:
-// глазами Анны, через месяц или весной — солгать мужу («к профессору») или сказать правду. game.md §6 «Глава IV».
-// Читает: facts.life (рояль), facts.dog (шпиц на зов), facts.talk (антракт; «Я знал»), facts.spring (калитка).
-// Оставляет: choices.fence, choices.stairs, choices.husband, marks.maid, marks.husband.
+// Chapter IV “The town of S.” — December in S. The fence: Gurov by her house, a piano behind the window (a waltz or a
+// study — by her scale); the gate, the old maid with the spitz — call the dog or step round the corner (the spitz
+// remembers whether he patted it). The Geisha: the theatre, finding her in the crowd, the husband, the “flunkey”; on
+// the stairs — through Anna's eyes: “I will come to Moscow” or “Go away today”. The gate: through Anna's eyes, a month
+// later or in spring — lie to her husband (“to the professor”) or tell the truth. game.md §6, chapter IV.
+// Reads: facts.life (the piano), facts.dog (the spitz to the call), facts.talk (the interval; “I knew”), facts.spring
+// (the gate). Leaves: choices.fence, choices.stairs, choices.husband, marks.maid, marks.husband.
 import { SCENES, facts } from '../story.js';
 import uZabora from '../minigames/u-zabora.js';
 import najti from '../minigames/najti.js';
 
 export default {
   number: 'IV',
-  title: 'Город С.',
+  title: tr('The town of S.'),
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['Забор', 'Гейша', 'Калитка'],
+  titles: ['The fence', 'The Geisha', 'The gate'],
   choices: [
-    { id: 'fence', weight: '⚑', title: 'У калитки', options: [{ id: 'call', label: 'Позвать шпица' }, { id: 'hide', label: 'Отойти за угол' }] },
-    { id: 'stairs', weight: '~', title: 'На лестнице', options: [{ id: 'promise', label: '«Я приеду к вам в Москву»' }, { id: 'away', label: '«Уезжайте сегодня же»' }] },
-    { id: 'husband', weight: '⚑', title: 'Муж у калитки', options: [{ id: 'lie', label: '«К профессору»' }, { id: 'truth', label: '«Я еду к нему»' }] },
+    { id: 'fence', weight: '⚑', title: tr('At the gate'), options: [{ id: 'call', label: tr('Call the dog') }, { id: 'hide', label: tr('Step round the corner') }] },
+    { id: 'stairs', weight: '~', title: tr('On the stairs'), options: [{ id: 'promise', label: tr('“I will come to Moscow”') }, { id: 'away', label: tr('“Go away today”') }] },
+    { id: 'husband', weight: '⚑', title: tr('Her husband at the gate'), options: [{ id: 'lie', label: tr('“To the professor”') }, { id: 'truth', label: tr('“I am going to him”') }] },
   ],
   steps: [
-    // Забор: чернильница в гостинице; серый забор; рояль; калитка — позвать шпица или отойти за угол; афиша
+    // The fence: the inkstand at the hotel; the grey fence; the piano; the gate — call the dog or step round the corner;
+    // the poster
     async g => {
       const f = facts(g.state);
       g.hero('gurov');
@@ -27,30 +29,30 @@ export default {
       await g.scene(SCENES.town, { beat: 'inkwell' });
       const inkwell = g.beat('inkwell');
       g.next('fence');
-      await g.say('narrator', 'В С. он остановился в лучшей гостинице. На столе стояла чернильница: всадник, у которого поднята рука со шляпой, а голова отбита', 'narrator');
+      await g.say('narrator', 'In S. he took the best room at the hotel. On the table was an inkstand: a figure on horseback, with its hat in its hand and its head broken off', 'narrator');
       await inkwell;
       const stops = g.told('fence:stops');
       const fence = g.beat('fence');
       g.next('fence_wait');
-      await g.say('narrator', 'Швейцар сказал: фон Дидериц живёт на Старо-Гончарной, в собственном доме');
+      await g.say('narrator', 'The porter said that von Diderits lived in Old Gontcharny Street, in a house of his own');
       await stops;
-      await g.say('gurov_inner', 'От такого забора убежишь', 'gurov');
+      await g.say('gurov_inner', 'One would run away from a fence like that', 'gurov');
       await fence;
       const wait = g.beat('fence_wait');
       g.next('gate_open');
       await wait;
       let heard = false;
-      const r = await g.play(uZabora, { tune: f.life === 'life' ? 'waltz' : 'etude', onPiano: () => (heard = true, g.say('narrator', 'Он услышал звуки рояля, слабые, неясные. Должно быть, Анна Сергеевна играла')) });
-      if (!heard) await g.say('narrator', 'Он услышал звуки рояля, слабые, неясные. Должно быть, Анна Сергеевна играла');
+      const r = await g.play(uZabora, { tune: f.life === 'life' ? 'waltz' : 'etude', onPiano: () => (heard = true, g.say('narrator', 'He heard a piano; the sounds were faint and indistinct. Probably it was Anna Sergeyevna playing')) });
+      if (!heard) await g.say('narrator', 'He heard a piano; the sounds were faint and indistinct. Probably it was Anna Sergeyevna playing');
       g.set('under', r.stood ? 1 : 0);
       g.sound.gate();
       await g.beat('gate_open');
-      const how = await g.choose('fence', { spitz: [{ id: 'call', label: 'Позвать шпица' }], 'fence#corner': [{ id: 'hide', label: 'Отойти за угол' }] });
+      const how = await g.choose('fence', { spitz: [{ id: 'call', label: tr('Call the dog') }], 'fence#corner': [{ id: 'hide', label: tr('Step round the corner') }] });
       if (how === 'call') {
-        g.mark('maid', true, 'Горничная это запомнит.');
+        g.mark('maid', true, tr('The maid will remember this.'));
         const run = f.dog === 'pat' ? 'call_run' : 'call_bark';
         g.next(run);
-        await g.say('narrator', 'Он хотел позвать собаку — и не мог вспомнить, как зовут шпица');
+        await g.say('narrator', 'He wanted to call to the dog — and could not remember its name');
         const call = g.beat(run);
         g.next('fence_dusk');
         if (run === 'call_run') g.sound.yap();
@@ -65,11 +67,11 @@ export default {
       const poster = g.told('fence_dusk:poster');
       const dusk = g.beat('fence_dusk');
       await poster;
-      await g.say('narrator', 'На заборе висела афиша: в этот вечер в театре шла первый раз «Гейша»');
-      await g.say('gurov_inner', 'Вот тебе и дама с собачкой… Вот тебе и приключение… Вот и сиди тут', 'gurov');
+      await g.say('narrator', 'On the fence hung a poster: that evening “The Geisha” was to be given at the theatre for the first time');
+      await g.say('gurov_inner', 'So much for the lady with the dog… So much for the adventure… You’re in a nice fix…', 'gurov');
       await dusk;
     },
-    // Гейша: театр, найти её; муж; антракт; лестница — её ответ
+    // The Geisha: the theatre, finding her; the husband; the interval; the stairs — her answer
     async g => {
       const f = facts(g.state);
       g.hero('gurov');
@@ -90,9 +92,9 @@ export default {
       const husband = g.beat('husband_in');
       g.next(f.talk ? 'interval_stay' : 'interval_out');
       await sat;
-      await g.say('narrator', 'Она затерялась в провинциальной толпе, эта маленькая женщина с вульгарною лорнеткой в руках');
-      await g.say('narrator', 'С ней вошёл молодой человек с небольшими бакенами, очень высокий, сутулый. Он при каждом шаге кланялся');
-      await g.say('narrator', 'Это был муж, которого она тогда в Ялте назвала лакеем');
+      await g.say('narrator', 'She was lost in the provincial crowd, this little woman with a vulgar lorgnette in her hand');
+      await g.say('narrator', 'A young man with small side-whiskers, very tall and stooping, came in with her. He bowed at every step');
+      await g.say('narrator', 'This was the husband whom at Yalta she had called a flunkey');
       await husband;
       if (!f.talk) {
         const out = g.beat('interval_out');
@@ -102,7 +104,7 @@ export default {
         const approach = g.beat('approach');
         g.next('stairs');
         await at;
-        await g.say('gurov', 'Здравствуйте');
+        await g.say('gurov', 'Good evening');
         await approach;
       } else {
         const stay = g.beat('interval_stay');
@@ -112,7 +114,7 @@ export default {
         const corridor = g.beat('corridor');
         g.next('stairs');
         await meet;
-        await g.say('gurov', 'Здравствуйте');
+        await g.say('gurov', 'Good evening');
         await corridor;
       }
       g.hero('anna');
@@ -120,24 +122,24 @@ export default {
       const landing = g.told('stairs:landing');
       const stairs = g.beat('stairs');
       await landing;
-      await g.say('anna', 'Как вы меня испугали! Зачем вы приехали? Зачем?', 'anna');
-      await g.say('gurov', 'Но поймите, Анна, поймите…');
+      await g.say('anna', 'How you frightened me! Why have you come? Why?', 'anna');
+      await g.say('gurov', 'But do understand, Anna, do understand…');
       await stairs;
-      const how = await g.choose('stairs', { anna: [{ id: 'promise', label: '«Я приеду к вам в Москву»' }], 'stairs#down': [{ id: 'away', label: '«Уезжайте сегодня же»' }] });
+      const how = await g.choose('stairs', { anna: [{ id: 'promise', label: tr('“I will come to Moscow”') }], 'stairs#down': [{ id: 'away', label: tr('“Go away today”') }] });
       if (how === 'promise') {
         g.scale('anna', 2);
         g.next('promise_go');
-        await g.say('anna', 'Я приеду к вам в Москву. Клянусь, я приеду. А теперь расстанемся!');
+        await g.say('anna', 'I will come and see you in Moscow. I swear I’ll come. But now let us part!');
         const back = g.told('promise_go:back');
         const go = g.beat('promise_go');
         g.next('bell');
         await back;
-        await g.say('anna', 'Мой дорогой, хороший, расстанемся!');
+        await g.say('anna', 'My precious, good one, let us part!');
         await go;
       } else {
         g.scale('anna', -2);
         g.next('away_go');
-        await g.say('anna', 'Уезжайте сегодня же. Я никогда не была счастлива и никогда не буду. Не заставляйте же меня страдать ещё больше!');
+        await g.say('anna', 'Go away today. I have never been happy, and I never shall be. Don’t make me suffer still more!');
         const go = g.beat('away_go');
         g.next('bell');
         await go;
@@ -146,7 +148,7 @@ export default {
       g.sound.bell();
       await bell;
     },
-    // Калитка: глазами Анны — она уезжает «к профессору»; солгать мужу или сказать правду
+    // The gate: through Anna's eyes — she leaves “for the professor”; lie to her husband or tell the truth
     async g => {
       const f = facts(g.state);
       g.hero('anna');
@@ -154,26 +156,26 @@ export default {
       const asks = g.told('gate_leave:asks');
       await g.scene(SCENES.town, { beat: 'gate_leave' });
       const gate = g.beat('gate_leave');
-      if (f.spring) await g.say('narrator', 'Она продержалась до весны');
-      else await g.say('narrator', 'Через месяц она собралась в Москву');
+      if (f.spring) await g.say('narrator', 'She held out till the spring');
+      else await g.say('narrator', 'A month later she made ready to go to Moscow');
       await asks;
-      await g.say('diderits', 'Когда вернёшься?');
+      await g.say('diderits', 'When will you be back?');
       await gate;
-      const how = await g.choose('husband', { diderits: [{ id: 'lie', label: '«К профессору»' }, { id: 'truth', label: '«Я еду к нему»' }] });
+      const how = await g.choose('husband', { diderits: [{ id: 'lie', label: tr('“To the professor”') }, { id: 'truth', label: tr('“I am going to him”') }] });
       if (how === 'lie') {
         g.next('leave_lie');
-        await g.say('anna', 'Через неделю. Профессор велел показаться ещё раз');
+        await g.say('anna', 'In a week. The professor told me to come again');
         const envelope = g.told('leave_lie:envelope');
         const goes = g.told('leave_lie:goes');
         const leave = g.beat('leave_lie');
         await envelope;
-        await g.say('diderits', 'На профессора. И купи себе что-нибудь в Москве');
+        await g.say('diderits', 'For the professor. And buy yourself something in Moscow');
         g.sound.paper();
         await goes;
-        await g.say('narrator', 'Муж верил и не верил');
+        await g.say('narrator', 'Her husband believed her, and did not believe her');
         await leave;
       } else {
-        g.mark('husband', 'knows', 'Фон Дидериц это запомнит.');
+        g.mark('husband', 'knows', tr('Von Diderits will remember this.'));
         g.next('leave_truth');
         const close = g.told('leave_truth:close');
         // (the scene tells this moment only when the maid saw Gurov: waited for only then)
@@ -182,13 +184,13 @@ export default {
         const pulls = g.told('leave_truth:pulls');
         const leave = g.beat('leave_truth');
         await close;
-        await g.say('anna', 'Я еду к нему', 'anna');
+        await g.say('anna', 'I am going to him', 'anna');
         if (still) {
           await still;
-          await g.say('diderits_low', 'Я знал', 'diderits');
+          await g.say('diderits_low', 'I knew', 'diderits');
         }
         await answer;
-        await g.say('diderits_low', 'Поезжай. Только чтобы в городе не знали. Шпиц останется со мной', 'diderits');
+        await g.say('diderits_low', 'Go. Only the town must not know. The Pomeranian stays with me', 'diderits');
         if (await pulls) g.sound.yap();
         await leave;
       }

@@ -1,24 +1,25 @@
-// «Арбуз» (II.1, Номер в Ялте, после куска `melon`; вставка `melon`): Гуров режет арбуз. Вести по линии: кольцо у ножа
-// (`melon#knife`), пунктир разреза от `melon#from` до `melon#to`. Пройденное — `cut` (не быстрее 0.15 в секунду: язык
-// сообщает, сколько пройдено, игра шлёт меньшее из этого и своего предела); отпускать и продолжать можно — счёт
-// `lifts`. Сошёл с линии — ошибка «сошёл». Каждые 0.15 пути — хруст. Дорезал — защёлка, ломоть отвалился (`slice` 1),
-// потом молчание: меток нет, ход сцены, тихий плач (подложка `weep` 0.15; на выходе — 0: подложки шага ставит глава),
-// свеча оплывает своим действием (`candle` к 0.4 за 10 с), 10 с — конец.
-//   Кто что делает: Гуров режет арбуз. Чего хочет: занять руки рядом с её стыдом. Что чувствует: неловкость, иронию.
-//   Игрок: медленный аккуратный разрез — и потом ничего.
-//   → { lifts: сколько раз отрывал нож }
+// “Watermelon” (II.1, A room in Yalta, after the beat `melon`; the insert `melon`): Gurov cuts the watermelon. Trace
+// the line: a ring at the knife (`melon#knife`), the cut's dashes from `melon#from` to `melon#to`. What is traced —
+// `cut` (no faster than 0.15 a second: the language tells how far it has gone, the game sends the lesser of that and
+// its own limit); one may let go and go on — counted in `lifts`. Off the line — the error `off`. Every 0.15 of the
+// way — a crunch. Cut through — a snap, the slice falls away (`slice` 1), then silence: no marks, the scene's turn,
+// quiet weeping (the bed `weep` 0.15; on the way out — 0: the step's beds are the chapter's), the candle burns down by
+// an action of its own (`candle` to 0.4 over 10 s), 10 s — the end.
+//   Who does what: Gurov cuts the watermelon. What he wants: to keep his hands busy beside her shame. What he feels:
+//   awkwardness, irony. The player: a slow careful cut — and then nothing.
+//   → { lifts: how many times the knife was lifted }
 import { until, keys } from '../hands.js';
 
-const SPEED = 0.15; // доля разреза в секунду, не быстрее
-const CRUNCH = 0.15; // хруст через каждую такую долю
-const SILENCE = 10; // с молчания после разреза
+const SPEED = 0.15; // the cut's share a second, no faster
+const CRUNCH = 0.15; // a crunch every such share
+const SILENCE = 10; // s of silence after the cut
 
 export default {
-  title: 'Арбуз',
+  title: 'Watermelon',
   about: 18,
   skipped: { lifts: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'На столе в номере лежал арбуз' });
+    const mg = g.minigame({ phrase: tr('There was a watermelon on the table') });
     const send = keys(g);
     const knife = mg.mark({ at: 'melon#knife', kind: 'dash' });
     const trace = mg.trace({ on: knife, line: ['melon#from', 'melon#to'] });

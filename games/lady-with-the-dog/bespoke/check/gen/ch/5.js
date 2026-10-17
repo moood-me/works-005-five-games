@@ -1,9 +1,10 @@
-// Глава V «Две жизни» — Москва, зима (или оттепель, если она продержалась до весны). Ночью: «Где ты был, Димитрий?» —
-// солгать жене или сказать правду. В гимназию: он ведёт дочь, «три градуса тепла»; две жизни; записка. «Славянский
-// базар»: седина в зеркале, чай, «как две перелётные птицы», слова концовки — кто из супругов знает; советоваться;
-// последняя фраза Чехова. game.md §6 «Глава V».
-// Читает: facts.spring (подложка погоды), facts.heart (сначала к ней или сначала чай), facts.wife (часы),
-// facts.ending (слова концовки); через carry — wife_knows, husband_knows. Оставляет: choices.wife, marks.wife.
+// Chapter V “Two lives” — Moscow, winter (or the thaw, if she held out till the spring). At night: “Where have you been,
+// Dimitri?” — lie to his wife or tell the truth. To school: he takes his daughter, “three degrees above freezing”; two
+// lives; a note. The Slavyansky Bazaar: grey hair in the mirror, tea, “like a pair of birds of passage”, the ending's
+// words — who of the spouses knows; taking counsel; Chekhov's last sentence. game.md §6, chapter V.
+// Reads: facts.spring (the weather's bed of sound), facts.heart (to her first or the tea first), facts.wife (the
+// watch), facts.ending (the ending's words); through carry — wife_knows, husband_knows. Leaves: choices.wife,
+// marks.wife.
 import { SCENES, facts } from '../story.js';
 import zaRuku from '../minigames/za-ruku.js';
 import chaj from '../minigames/chaj.js';
@@ -13,14 +14,14 @@ const weather = state => (facts(state).spring ? { thaw: 0.4 } : { snow: 0.4 });
 
 export default {
   number: 'V',
-  title: 'Две жизни',
+  title: tr('Two lives'),
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['Ночью', 'В гимназию', 'Славянский базар'],
+  titles: ['At night', 'To school', 'The Slavyansky Bazaar'],
   choices: [
-    { id: 'wife', weight: '⚑', title: 'Жена в дверях', options: [{ id: 'lie', label: '«В клубе»' }, { id: 'truth', label: '«Я был у неё»' }] },
+    { id: 'wife', weight: '⚑', title: tr('His wife in the doorway'), options: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] },
   ],
   steps: [
-    // Ночью: он возвращается от неё поздно; жена в дверях
+    // At night: he comes home late from her; his wife in the doorway
     async g => {
       g.hero('gurov');
       g.beds(weather(g.state));
@@ -32,7 +33,7 @@ export default {
       g.sound.door();
       await SAY(84, 'wife');
       await late;
-      const how = await g.choose('wife', { wife: [{ id: 'lie', label: '«В клубе»' }, { id: 'truth', label: '«Я был у неё»' }] });
+      const how = await g.choose('wife', { wife: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] });
       if (how === 'lie') {
         g.next('wife_lie');
         await SAY(85);
@@ -42,7 +43,7 @@ export default {
         g.sound.door();
         await lie;
       } else {
-        g.mark('wife', 'knows', 'Жена это запомнит.');
+        g.mark('wife', 'knows', tr('His wife will remember this.'));
         g.next('wife_truth');
         // (the beat first: her close-up holds while he says it and she answers)
         const shut = g.told('wife_truth:door');
@@ -54,7 +55,7 @@ export default {
         await truth;
       }
     },
-    // В гимназию: утро другого её приезда; он ведёт дочь; две жизни; записка от неё
+    // To school: the morning of another of her visits; he takes his daughter; two lives; a note from her
     async g => {
       g.hero('gurov');
       g.beds(weather(g.state));
@@ -89,11 +90,12 @@ export default {
       const cap = g.beat('red_cap');
       await note;
       await SAY(95);
-      await Promise.all([g.letter({ text: 'Я приехала. «Славянский базар».', sign: 'А.' }), SAY(96, 'narrator')]);
+      await Promise.all([g.letter({ text: tr('I have come. The Slavyansky Bazaar.'), sign: tr('A.') }), SAY(96, 'narrator')]);
       g.sound.paper();
       await cap;
     },
-    // «Славянский базар»: её серое платье; седина; чай; клетки; советоваться; «самое сложное и трудное только ещё начинается»
+    // The Slavyansky Bazaar: her grey dress; grey hair; tea; the cages; taking counsel; “the most complicated and
+    // difficult part of it was only just beginning”
     async g => {
       const f = facts(g.state);
       g.hero('both');

@@ -1,26 +1,27 @@
-// «Подманить» (I.1, Набережная, после куска `coax`; GARDEN_CAM): Гуров опускает руку к чужому шпицу.
-// Вести (язык §4.9): стрелка — его опущенная рука (`hand` 0…1: как низко и как близко к морде), зона — у морды шпица
-// (`spitz#head`; светится сам шпиц). Пока стрелка в зоне и движение не резкое, своё `near` растёт на 0.09 в секунду и
-// шлётся ключом `spitz_near` (сцена ставит шпица разом). Резкое движение — шпиц ворчит: ошибка «в опасность» у его
-// морды, `near` −0.2, секунду роста нет. `near` 1 — шпиц у колена: защёлка, через 0.5 с конец.
-//   Кто что делает: Гуров тянет руку к чужой собачке. Чего хочет: развлечься, подойти к даме через неё.
-//   Что чувствует: ленив, насмешлив, чуть любопытен. Игрок: терпение и маленькая хитрость.
-//   → { startles: сколько раз спугнул }
+// “Coax” (I.1, the sea-front, after the beat `coax`; GARDEN_CAM): Gurov lowers his hand to another's spitz.
+// Lead (the language §4.9): the arrow — his lowered hand (`hand` 0…1: how low and how near the muzzle), the zone — at
+// the spitz's muzzle (`spitz#head`; the spitz itself glows). While the arrow is in the zone and the move not sharp,
+// its own `near` grows 0.09 a second and is sent as the key `spitz_near` (the scene sets the spitz at once). A sharp
+// move — the spitz growls: the error `danger` at its muzzle, `near` −0.2, a second without growth. `near` 1 — the
+// spitz at his knee: a snap, the end 0.5 s later.
+//   Who does what: Gurov reaches out to a stranger's little dog. What he wants: to amuse himself, to come to the lady
+//   through it. What he feels: lazy, mocking, a little curious. The player: patience and a small trick.
+//   → { startles: how many times he startled it }
 import { until, keys } from '../hands.js';
 
-const ZONE = { at: 0.45, width: 0.4 }; // где у морды держать стрелку (−1…1: рука высоко и далеко … низко и близко)
-const RATE = 0.09; // доля пути шпица в секунду
-const SHARP = 0.12; // резкость движения, от которой шпиц пугается (язык: насколько резко, за кадр)
-const STARTLE = 0.2, STILL = 1; // на сколько он отходит; сколько секунд не подходит
-const AFTER = 0.5; // с от защёлки до конца
+const ZONE = { at: 0.45, width: 0.4 }; // where at the muzzle to keep the arrow (−1…1: the hand high and far … low and near)
+const RATE = 0.09; // the spitz's share of the way a second
+const SHARP = 0.12; // how sharp a move startles the spitz (the language: how sharp, per frame)
+const STARTLE = 0.2, STILL = 1; // how far he backs off; how many seconds he does not come
+const AFTER = 0.5; // s from the snap to the end
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'Подманить', // как её зовёт ☰ автора
+  title: 'Coax', // as the author's ☰ lists it
   about: 15,
   skipped: { startles: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Шпиц смотрел на чужую руку и не решался подойти' });
+    const mg = g.minigame({ phrase: tr('The Pomeranian looked at the stranger’s hand and did not dare come near') });
     const send = keys(g);
     const lead = mg.lead({ zone: ZONE, steer: 'follow', release: 'stay' });
     b.minigame.tricks.teach(mg, [lead], { id: 'lead' });

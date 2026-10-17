@@ -1,31 +1,32 @@
-// «Лорнетка» (I.2, Набережная, после куска `gangway`; GANGWAY_CAM, вид света `glass`): Анна в лорнетку смотрит на
-// приезжих. Нажать: кольцо на голове каждого из двух последних отпущенных (метка идёт за точкой). Своё `pass` (сколько
-// сошло) растёт на 1 каждые 4 с — сцена ведёт следующего вниз по сходням, по порядку p1…p4, stranger (с дамой), p5, p6.
-// Нажал — `look_at` = он на 1.5 с (замедлился, повернул голову), метка снята. Перед пятым — ожидание
-// `gangway:stranger`: когда высокий сутулый встал внизу спиной, поток стоит, метка только на нём; нажал — сердце,
-// всмотрелась, он оборачивается к своей даме — чужое лицо (`stranger_turn` 1); 12 с не нажала — оборачивается сам, без
-// звука. Потом p5, p6; толпа хлынула (`surge` 1), через 1 с конец.
-//   Кто что делает: Анна ищет в лорнетку знакомых из С. Чего хочет: чтобы их не было. Что чувствует: страх и стыд.
-//   Игрок: всматриваться и бояться узнать.
-//   → { looked: в скольких всмотрелась, stranger: всмотрелась ли в сутулого }
+// “Lorgnette” (I.2, the sea-front, after the beat `gangway`; GANGWAY_CAM, the light's look `glass`): Anna looks at the
+// arrivals through her lorgnette. Press: a ring on the head of each of the last two let go (the mark follows the
+// point). Its own `pass` (how many have come down) rises by 1 every 4 s — the scene leads the next one down the
+// gangway, in order p1…p4, stranger (with a lady), p5, p6. Pressed — `look_at` = him for 1.5 s (he slows, turns his
+// head), the mark taken off. Before the fifth — a wait for `gangway:stranger`: when the tall stooping man has stopped
+// below, his back to us, the stream stands, the mark on him alone; pressed — a heartbeat, she looks hard, he turns to
+// his lady — a stranger's face (`stranger_turn` 1); 12 s not pressed — he turns by himself, without a sound. Then p5,
+// p6; the crowd surges (`surge` 1), the end 1 s later.
+//   Who does what: Anna looks through her lorgnette for acquaintances from S. What she wants: that there be none.
+//   What she feels: fear and shame. The player: to look hard and to dread being known.
+//   → { looked: how many she looked hard at, stranger: whether she looked at the stooping man }
 import { until, keys } from '../hands.js';
 
 const ORDER = ['p1', 'p2', 'p3', 'p4', 'stranger', 'p5', 'p6'];
-const STEP = 4; // с между приезжими
-const LOOK = 1.5; // с всматривается
-const WAIT = 12; // с сутулый ждёт взгляда
-const TOLD = 20000; // мс: сутулый дошёл до низа сходней (сцена говорит; без неё — дальше так)
-const AFTER = 1; // с после `surge` — конец
+const STEP = 4; // s between arrivals
+const LOOK = 1.5; // s she looks hard
+const WAIT = 12; // s the stooping man waits for a look
+const TOLD = 20000; // ms: the stooping man has come to the gangway's foot (the scene tells; without it — on all the same)
+const AFTER = 1; // s after `surge` — the end
 
 export default {
-  title: 'Лорнетка',
+  title: 'Lorgnette',
   about: 32,
   skipped: { looked: 0, stranger: false },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Пассажиры сходили по сходням, и между ними могли быть знакомые' });
+    const mg = g.minigame({ phrase: tr('Passengers came down the gangway; there might be acquaintances among them') });
     const send = keys(g);
     let pass = 0, next = STEP, phase = 'flow', looked = 0, stranger = false, lookTill = -1, standFrom = -1, end = -1, taught = false;
-    const marks = []; // [{id, mark}] — на отпущенных, последние две
+    const marks = []; // [{id, mark}] — on those let go, the last two
     const unmark = m => { m.mark.remove(); marks.splice(marks.indexOf(m), 1); };
     const look = (id, t) => { send('look_at', id); lookTill = t + LOOK; };
     const markOn = (id, onPress) => {
@@ -37,7 +38,7 @@ export default {
       return m;
     };
     const onPassenger = m => { looked++; look(m.id, mg.t - t0); mg.snap({ at: m.mark }); unmark(m); };
-    let arrived = null; // ожидание сутулого внизу сходней
+    let arrived = null; // the wait for the stooping man at the gangway's foot
     const t0 = mg.t;
     send('pass', 0);
     send('look_at', '');
@@ -54,7 +55,7 @@ export default {
         }
         const id = ORDER[pass];
         if (id === 'stranger') {
-          // (ожидание ставится до того, как его отпустили)
+          // (the wait is set before he is let go)
           arrived = g.told('gangway:stranger', TOLD);
           arrived.then(() => { if (phase === 'walk') phase = 'arrived'; });
           phase = 'walk';
@@ -69,7 +70,7 @@ export default {
         next = t + STEP;
       }
       if (phase === 'arrived') {
-        // поток стоит: метка только на нём
+        // the stream stands: the mark on him alone
         phase = 'stranger';
         standFrom = t;
         marks.push(markOn('stranger', m => {

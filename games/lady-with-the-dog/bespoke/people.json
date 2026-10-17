@@ -1,62 +1,62 @@
 {
   "narrator": {
     "voice": "Sadachbia",
-    "how": "спокойно, тепло, чуть насмешливо — как автор читает свой рассказ вслух",
-    "name": "рассказчик",
-    "short": "рассказчик"
+    "how": "calmly, warmly, a little mockingly — as an author reads his own story aloud",
+    "name": "the narrator",
+    "short": "the narrator"
   },
   "gurov": {
     "voice": "Algenib",
-    "how": "мужчина под сорок: негромко, бархатно, с ленцой и лёгкой усмешкой",
-    "name": "Дмитрий Дмитрич Гуров",
-    "short": "Гуров"
+    "how": "a man not yet forty: quiet, velvety, lazy, with a slight smile",
+    "name": "Dmitri Dmitritch Gurov",
+    "short": "Gurov"
   },
   "gurov_inner": {
     "voice": "Algenib",
-    "how": "тот же, тихо, про себя, с усмешкой над собой",
-    "name": "Гуров, про себя",
-    "short": "Гуров"
+    "how": "the same, quietly, to himself, smiling at himself",
+    "name": "Gurov, to himself",
+    "short": "Gurov"
   },
   "anna": {
     "voice": "Sulafat",
-    "how": "молодая женщина: тихо, быстро, взволнованно, без жалобы",
-    "name": "Анна Сергеевна",
-    "short": "Анна"
+    "how": "a young woman: quiet, quick, agitated, without complaint",
+    "name": "Anna Sergeyevna",
+    "short": "Anna"
   },
   "diderits": {
     "voice": "Umbriel",
-    "how": "молодой мужчина: вежливо, мягко, чуть неловко, по-домашнему",
-    "name": "фон Дидериц, муж Анны",
-    "short": "фон Дидериц"
+    "how": "a young man: polite, gentle, a little awkward, homely",
+    "name": "von Diderits, Anna’s husband",
+    "short": "von Diderits"
   },
   "diderits_low": {
     "voice": "Umbriel",
-    "how": "тот же: глухо, медленно, не глядя на неё",
-    "name": "фон Дидериц, муж Анны",
-    "short": "фон Дидериц"
+    "how": "the same: dull, slow, not looking at her",
+    "name": "von Diderits, Anna’s husband",
+    "short": "von Diderits"
   },
   "wife": {
     "voice": "Gacrux",
-    "how": "зрелая женщина: ровно, прямо, негромко, с достоинством",
-    "name": "жена Гурова",
-    "short": "жена"
+    "how": "a mature woman: even, straight, quiet, dignified",
+    "name": "Gurov’s wife",
+    "short": "his wife"
   },
   "wife_low": {
     "voice": "Gacrux",
-    "how": "та же: тихо, ровно",
-    "name": "жена Гурова",
-    "short": "жена"
+    "how": "the same: quiet, even",
+    "name": "Gurov’s wife",
+    "short": "his wife"
   },
   "daughter": {
     "voice": "Leda",
-    "how": "девочка двенадцати лет: серьёзно, звонко",
-    "name": "дочь Гурова",
-    "short": "дочь"
+    "how": "a girl of twelve: serious, clear-voiced",
+    "name": "Gurov’s daughter",
+    "short": "his daughter"
   },
   "official": {
     "voice": "Algieba",
-    "how": "чиновник: сыто, громко, добродушно, о своём",
-    "name": "чиновник, партнёр по картам",
-    "short": "чиновник"
+    "how": "an official: well-fed, loud, good-natured, full of his own affairs",
+    "name": "an official, Gurov’s partner at cards",
+    "short": "the official"
   }
 }

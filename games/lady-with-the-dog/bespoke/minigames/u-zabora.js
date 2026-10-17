@@ -1,26 +1,28 @@
-// «У забора» (IV.1, Город С., после куска `fence_wait`; FENCE_CAM): Гуров ходит вдоль серого забора её дома. Тянуть к
-// целям: кольцо с пунктиром на Гурове (`gurov#head`), цели — пять мест вдоль забора (`fence#p1…p5`); отпустил у цели —
-// он идёт туда своим шагом (`walk_to`), туда и обратно, сколько угодно. Где он — `gurov_at` (сцена ставит разом). Рояль
-// за окном (`opts.tune`: вальс или этюд) слышен глухо — тем громче, чем ближе он к окну (место 0.6): четыре раза в
-// секунду уровень 0.15 + 0.6 · близость; полоса — тот же уровень. Впервые громче 0.4 — `opts.onPiano()` (не ждётся).
-// Пять секунд под окном (ближе 0.08) — дождался: защёлка, конец; или 35 с — конец. На выходе рояль стихает за 3 с.
-//   Кто что делает: Гуров ходит вдоль забора её дома. Чего хочет: увидеть её. Что чувствует: нелепость, надежду.
-//   Игрок: искать место, где слышнее.
-//   opts: { tune — 'waltz' | 'etude'; onPiano() — когда рояль впервые слышен }
-//   → { stood: дождался ли под окном }
+// “By the fence” (IV.1, the town of S., after the beat `fence_wait`; FENCE_CAM): Gurov walks along the grey fence of
+// her house. Pull to targets: a ring with dashes on Gurov (`gurov#head`), the targets — five places along the fence
+// (`fence#p1…p5`); let go at a target — he walks there at his own pace (`walk_to`), there and back, as often as one
+// likes. Where he is — `gurov_at` (the scene sets it at once). The piano behind the window (`opts.tune`: a waltz or a
+// study) is heard dully — the louder the nearer he is to the window (place 0.6): four times a second the level 0.15 +
+// 0.6 · nearness; the bar — the same level. First louder than 0.4 — `opts.onPiano()` (not waited for). Five seconds
+// under the window (nearer than 0.08) — he has waited it out: a snap, the end; or 35 s — the end. On the way out the
+// piano dies away over 3 s.
+//   Who does what: Gurov walks along the fence of her house. What he wants: to see her. What he feels: the
+//   absurdity, hope. The player: to find the place where it is heard better.
+//   opts: { tune — 'waltz' | 'etude'; onPiano() — when the piano is first heard }
+//   → { stood: whether he waited it out under the window }
 import { until, keys } from '../hands.js';
 
-const PLACES = [0.1, 0.3, 0.5, 0.6, 0.85]; // `gurov_at` мест fence#p1…p5
+const PLACES = [0.1, 0.3, 0.5, 0.6, 0.85]; // `gurov_at` of the places fence#p1…p5
 const WINDOW = 0.6, NEAR = 0.35, UNDER = 0.08, STAND = 5, LONG = 35;
-const HEARD = 0.4; // уровень, на котором рояль впервые слышен
+const HEARD = 0.4; // the level at which the piano is first heard
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'У забора',
+  title: 'By the fence',
   about: 18,
   skipped: { stood: true },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Из дома доносились звуки рояля, слабые, неясные' });
+    const mg = g.minigame({ phrase: tr('From the house came the sounds of a piano, faint and indistinct') });
     const send = keys(g);
     const p = g.sound.piano(opts.tune ?? 'etude');
     signal.addEventListener('abort', () => p.stop(3));

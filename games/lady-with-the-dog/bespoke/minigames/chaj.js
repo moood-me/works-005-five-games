@@ -1,25 +1,26 @@
-// «Чай» (V.3, Славянский базар, после куска `tea`; вставка `tea`): Гуров наливает чай, пока она плачет у окна. Два
-// движения. 1) Тянуть: кольцо с пунктиром на стакане (`tea#glass`), цель — под краном (`tea#under`); где стакан —
-// `glass_at`; дошёл — защёлка. 2) Держать с опасностью: кольцо с желобом на кране (`tea#tap`): держит — кран открыт
-// (`tap` 1), чай (`fill`) растёт на 0.12 в секунду, на каждом открытии — журчание; дуга опасности — от 0.8 к 1.
-// Отпустил при 0.82…0.95 — защёлка, через 0.8 с конец. Перелил (больше 1) — ошибка «в опасность», лужица на блюдце
-// (`spill` к 1 за 0.5 с), капли, кран закрыт, `fill` 0.9, через 1 с конец. Подложку плача ставит глава.
-//   Кто что делает: Гуров наливает чай, пока она плачет. Чего хочет: переждать её слёзы, сделать что-то.
-//   Что чувствует: заботу мелочью. Игрок: два движения, второе с опасностью.
-//   → { spills: перелил ли (0 | 1) }
+// “Tea” (V.3, the Slavyansky Bazaar, after the beat `tea`; the insert `tea`): Gurov pours tea while she weeps at the
+// window. Two moves. 1) Pull: a ring with dashes on the glass (`tea#glass`), the target — under the tap (`tea#under`);
+// where the glass is — `glass_at`; there — a snap. 2) Hold with danger: a ring with a groove on the tap (`tea#tap`):
+// held — the tap open (`tap` 1), the tea (`fill`) rises 0.12 a second, at each opening — a gurgle; the arc of danger —
+// from 0.8 to 1. Let go at 0.82…0.95 — a snap, the end 0.8 s later. Overfilled (more than 1) — the error `danger`,
+// a puddle on the saucer (`spill` to 1 over 0.5 s), drops, the tap shut, `fill` 0.9, the end 1 s later. The
+// bed of weeping is the chapter's.
+//   Who does what: Gurov pours tea while she weeps. What he wants: to wait out her tears, to do something. What he
+//   feels: care in a small thing. The player: two moves, the second with danger.
+//   → { spills: whether it overflowed (0 | 1) }
 import { until, keys } from '../hands.js';
 
-const RATE = 0.12; // чай в секунду
-const FROM = 0.82, TO = 0.95; // где отпустить
-const DANGER = 0.8; // с какого уровня дуга
+const RATE = 0.12; // tea a second
+const FROM = 0.82, TO = 0.95; // where to let go
+const DANGER = 0.8; // from what level the arc
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'Чай',
+  title: 'Tea',
   about: 14,
   skipped: { spills: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Самовар был горячий, а она всё плакала у окна' });
+    const mg = g.minigame({ phrase: tr('The samovar was hot, and she was still crying at the window') });
     const send = keys(g);
     const acts = [];
     signal.addEventListener('abort', () => acts.forEach(a => a.cancel()));

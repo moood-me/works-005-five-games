@@ -1,23 +1,24 @@
-// «Советоваться» (V.3, Славянский базар, после куска `sovet`): они ищут выход. Нажать с лепестком на трёх вещах — окно
-// (`window#window`, «Жить в одном городе»), дверь (`door#door`, «Уехать вдвоём»), стаканы (`table#glasses`, «Видеться
-// каждый день») — или молчать (палец показывает и «руки прочь»). Выбран лепесток — метки скрыты (ход сцены), `think` =
-// вещь, `await opts[вещь]()` — их разговор, `think` = 'none', метки остальных снова. Конец: все три тронуты — или 15 с
-// молчания от начала или от конца последних слов. Полоса — время молчания.
-//   Кто что делает: они ищут, как жить. Чего хотят: придумать выход. Что чувствуют: всё упирается.
-//   Игрок: трогать выходы — или молчать.
-//   opts: { window(), door(), table() — разговор у каждой вещи (реплики говорит глава) }
-//   → { touched: ['window' | 'door' | 'table', … по порядку] }
+// “Taking counsel” (V.3, the Slavyansky Bazaar, after the beat `sovet`): they look for a way out. Press with a petal on
+// three things — the window (`window#window`, “Live in one town”), the door (`door#door`, “Go away together”), the
+// glasses (`table#glasses`, “See each other every day”) — or keep silent (the finger shows “hands off” too). A petal
+// chosen — the marks hidden (the scene's turn), `think` = the thing, `await opts[thing]()` — their talk, `think` =
+// 'none', the others' marks again. The end: all three touched — or 15 s of silence from the start or from the end of
+// the last words. The bar — the time of silence.
+//   Who does what: they look for a way to live. What they want: to think of a way out. What they feel: everything
+//   comes up against a wall. The player: to touch the ways out — or to keep silent.
+//   opts: { window(), door(), table() — the talk at each thing (the chapter says the lines) }
+//   → { touched: ['window' | 'door' | 'table', … in order] }
 import { until, keys } from '../hands.js';
 
-const THINGS = [['window', 'window#window', 'Жить в одном городе'], ['door', 'door#door', 'Уехать вдвоём'], ['table', 'table#glasses', 'Видеться каждый день']];
-const SILENCE = 15; // с
+const THINGS = [['window', 'window#window', tr('Live in one town')], ['door', 'door#door', tr('Go away together')], ['table', 'table#glasses', tr('See each other every day')]];
+const SILENCE = 15; // s
 
 export default {
-  title: 'Советоваться',
+  title: 'Taking counsel',
   about: 18,
   skipped: { touched: [] },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Потом они долго советовались' });
+    const mg = g.minigame({ phrase: tr('Then they spent a long while taking counsel together') });
     const send = keys(g);
     const touched = [], marks = [];
     let talking = false, quiet = 0;

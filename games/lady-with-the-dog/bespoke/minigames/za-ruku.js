@@ -1,23 +1,24 @@
-// «За руку» (V.2, Москва, после куска `walk_hand`; STREET_CAM): Гуров ведёт дочь в гимназию — к камере, от подъезда к
-// воротам. Держать где угодно (отклик у руки дочери, `daughter#hand_r`): держит — идут (`go` 1); отпустил — стоят (`go`
-// 0; дочь поднимает к нему лицо — сцена), счёт остановок — не ошибка. Где они — `walked` 0…1 (сцена ставит разом).
-// Реплики — `opts.lines[i]()` по очереди, когда `walked` переходит 0.35, 0.6, 0.9, 1, одна за другой, не перебивая.
-// Конец — дошли и все четыре сказаны.
-//   Кто что делает: Гуров ведёт дочь в гимназию. Чего хочет: быть хорошим отцом в явной жизни.
-//   Что чувствует: тепло и пустоту. Игрок: вести и слушать.
-//   opts: { lines: [четыре функции — реплики по порядку] }
-//   → { stops: сколько раз останавливались }
+// “By the hand” (V.2, Moscow, after the beat `walk_hand`; STREET_CAM): Gurov takes his daughter to school — toward
+// the camera, from the porch to the gates. Hold anywhere (the response at the daughter's hand, `daughter#hand_r`):
+// held — they walk (`go` 1); let go — they stand (`go` 0; the daughter raises her face to him — the scene), the stops
+// counted — not an error. Where they are — `walked` 0…1 (the scene sets it at once). The lines — `opts.lines[i]()` in
+// turn, when `walked` passes 0.35, 0.6, 0.9, 1, one after another, not interrupting. The end — they are there and all
+// four are said.
+//   Who does what: Gurov takes his daughter to school. What he wants: to be a good father in the open life.
+//   What he feels: warmth and emptiness. The player: to lead and to listen.
+//   opts: { lines: [four functions — the lines in order] }
+//   → { stops: how many times they stopped }
 import { until, keys } from '../hands.js';
 
-const AT = [0.35, 0.6, 0.9, 1]; // где говорится каждая реплика
+const AT = [0.35, 0.6, 0.9, 1]; // where each line is said
 
 export default {
-  title: 'За руку',
+  title: 'By the hand',
   about: 20,
   skipped: { stops: 0 },
   async run(g, b, opts, signal) {
     const lines = opts.lines ?? [];
-    const mg = g.minigame({ phrase: 'Шёл мокрый снег; дочь держала его за руку' });
+    const mg = g.minigame({ phrase: tr('Wet snow was falling; his daughter held his hand') });
     const send = keys(g);
     const hand = mg.mark({ at: 'daughter#hand_r', kind: 'groove' });
     const hold = mg.hold({ on: null, show: hand, seconds: 0.3, drain: 0.3 });

@@ -1,13 +1,13 @@
-// Дама с собачкой — по рассказу А. П. Чехова. A bespoke game (moood/engines/bespoke) on the world «Дама с собачкой»
-// (engine 3): Gurov and Anna played in turn — Yalta in summer, Oreanda, the station, the Moscow winter, the fence in
-// S., the theatre, «Славянский базар». A prologue, five chapters, an epilogue — each a row of steps on the world's
-// scenes. The choices, the two scales (Лёгкость ↔ Открытость, Долг ↔ Жизнь) and what is remembered carry from chapter
-// to chapter; how it ends follows from who of the two spouses knows (story.js facts) — the play always goes through to
-// the epilogue. Between the chapters, the scene «Огни»: the night sea, the far arc of the quay's lamps, a white spitz
-// on the parapet — the chapter's title on the moon's path, and after the chapter its choices as groups of lamps by
-// the water (chosen ones lit); after the epilogue, those of the whole play. The season is the chapter's: its title in
-// the season it begins in, its map in the one it ends in. The player touches the spitz to go on. A chapter with wall:
-// false begins without «Огни» (the one before runs into it).
+// The Lady with the Dog — after the story by Anton Chekhov. A bespoke game (moood/engines/bespoke) on the world “The
+// Lady with the Dog” (engine 3): Gurov and Anna played in turn — Yalta in summer, Oreanda, the station, the Moscow
+// winter, the fence in S., the theatre, the Slavyansky Bazaar. A prologue, five chapters, an epilogue — each a row of
+// steps on the world's scenes. The choices, the two scales (Lightness ↔ Openness, Duty ↔ Life) and what is remembered
+// carry from chapter to chapter; how it ends follows from who of the two spouses knows (story.js facts) — the play
+// always goes through to the epilogue. Between the chapters, the scene “Lights”: the night sea, the far arc of the
+// quay's lamps, a white spitz on the parapet — the chapter's title on the moon's path, and after the chapter its
+// choices as groups of lamps by the water (chosen ones lit); after the epilogue, those of the whole play. The season is
+// the chapter's: its title in the season it begins in, its map in the one it ends in. The player touches the spitz to
+// go on. A chapter with wall: false begins without “Lights” (the one before runs into it).
 //
 // What is kept of the play (bespoke.keep), after every step: { chapter, step, scales, shown, marks, choices, start:
 // the same as the chapter began } — a step cut short (the page closed) is played again from its beginning. The author
@@ -32,14 +32,14 @@ const EPILOGUE = CHAPTERS.length - 1;
 // every step of the play in order, and where each chapter's first one is among them
 const STEPS = CHAPTERS.flatMap(ch => ch.steps);
 const FIRST = CHAPTERS.map((_, c) => CHAPTERS.slice(0, c).reduce((n, ch) => n + ch.steps.length, 0));
-// «партия как…» — whole plays the author goes from (game.md §3.8): eight choices each; the scales come out of them
+// “play as…” — whole plays the author goes from (game.md §3.8): eight choices each; the scales come out of them
 const OPEN = { dog: 'pat', room: 'bring', window: 'look', club: 'walk', fence: 'call', stairs: 'promise', husband: 'truth', wife: 'truth' };
 const PLAYS = [
-  { label: 'Две клетки', choices: { dog: 'finger', room: 'eat', window: 'curtain', club: 'laugh', fence: 'hide', stairs: 'away', husband: 'lie', wife: 'lie' } },
-  { label: 'Без лжи', choices: OPEN },
-  { label: 'Жена знает', choices: { ...OPEN, husband: 'lie' } },
-  { label: 'Муж знает', choices: { ...OPEN, wife: 'lie' } },
-  { label: 'До весны', choices: { ...OPEN, stairs: 'away' } },
+  { label: 'Two cages', choices: { dog: 'finger', room: 'eat', window: 'curtain', club: 'laugh', fence: 'hide', stairs: 'away', husband: 'lie', wife: 'lie' } },
+  { label: 'No lies', choices: OPEN },
+  { label: 'His wife knows', choices: { ...OPEN, husband: 'lie' } },
+  { label: 'Her husband knows', choices: { ...OPEN, wife: 'lie' } },
+  { label: 'Till spring', choices: { ...OPEN, stairs: 'away' } },
 ];
 const fresh = () => ({
   chapter: 0, step: 0, scales: Object.fromEntries(Object.entries(SCALES).map(([k, s]) => [k, s.start])),
@@ -57,18 +57,18 @@ export default async function (b) {
   const hub = listen(b);
   const view = ui(b.layer);
   b.onPause(pause);
-  // (the page is heard only after a touch: a chapter that begins without «Огни» does so only once there was one —
+  // (the page is heard only after a touch: a chapter that begins without “Lights” does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
   let touched = false;
   for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, () => { touched = true; }, { once: true, capture: true });
-  // the spitz on the parapet of «Огни»: the player presses it, then where to go
+  // the spitz on the parapet of “Lights”: the player presses it, then where to go
   const spitz = async options => {
-    const away = view.hint('Коснись шпица', 3000);
+    const away = view.hint(tr('Touch the dog'), 3000);
     const action = await hub.offer({ 'spitz#spitz': options });
     away();
     return action.id;
   };
-  // «Огни»: the spitz alone (no title: the very beginning), the chapter's title, or the lamps of `map`, as the mist
+  // “Lights”: the spitz alone (no title: the very beginning), the chapter's title, or the lamps of `map`, as the mist
   // goes off the sea; → once it has. The sea in summer and autumn, the snow's silence in winter and the thaw; no scales
   const lights = async (number, title, map, season) => {
     beds(season === 'winter' || season === 'thaw' ? { snow: 0.3 } : { sea: 0.3 }, 2);
@@ -114,14 +114,14 @@ export default async function (b) {
       const { start, play, ...now } = kept;
       kept.start = structuredClone({ ...now, step: 0 });
     }
-    // «Огни» before the chapter: the spitz alone at the very beginning (summer), else the chapter's title in the season
+    // “Lights” before the chapter: the spitz alone at the very beginning (summer), else the chapter's title in the season
     // it begins in; the player touches the spitz to begin — unless the chapter is over (the page was left at its
     // map): its map again; or gone straight to a minigame; or the chapter before runs into this one. (A chapter
     // without its wall, come to on a page just opened: the spitz alone — that chapter has no title of its own.)
     if (kept.step < ch.steps.length && kept.play == null && !(touched && ch.wall === false)) {
       const bare = (!kept.chapter && !kept.step) || ch.wall === false;
       await lights(bare ? '' : ch.number, bare ? '' : ch.title, null, !kept.chapter && !kept.step ? 'summer' : ch.season(kept));
-      await spitz([{ id: 'go', label: 'Дальше' }]);
+      await spitz([{ id: 'go', label: tr('Go on') }]);
     }
     wake();
     // (the epilogue: the play's scales are done — its steps show none)
@@ -134,7 +134,7 @@ export default async function (b) {
       // (⏭ outside a minigame skips the step — the author's only; in a minigame it is everyone's: story.js g.play)
       const off = b.game.mine ? view.onSkip(() => skip()) : () => {};
       const done = await Promise.race([
-        ch.steps[kept.step](g).then(() => true, e => { b.trouble(`шаг сломался: ${e.message || e}`); return false; }),
+        ch.steps[kept.step](g).then(() => true, e => { b.trouble(`the step broke: ${e.message || e}`); return false; }),
         new Promise(ok => { skip = () => ok(false); }),
       ]);
       off();
@@ -146,12 +146,12 @@ export default async function (b) {
     if (kept.chapter === EPILOGUE) {
       // the lamps of the whole play, in the epilogue's season; then all of it anew (the author goes to a chapter by ☰)
       await lights('', '', whole(kept), ch.season(kept));
-      await spitz([{ id: 'anew', label: 'Сыграть заново' }]);
+      await spitz([{ id: 'anew', label: tr('Play again') }]);
       return b.restart();
     } else if (ch.choices.length) {
       // the lamps of the chapter, in the season it ended in; then on — or the chapter again, from how it began
       await lights(ch.number, ch.title, rows(ch.choices, kept), ch.season(kept));
-      const to = await spitz([{ id: 'on', label: 'Дальше' }, { id: 'again', label: 'Пройти главу заново' }]);
+      const to = await spitz([{ id: 'on', label: tr('Go on') }, { id: 'again', label: tr('Play the chapter again') }]);
       if (to === 'again') next = kept.start;
     }
     kept = next || { ...kept, chapter: kept.chapter + 1, step: 0, start: undefined };
@@ -159,7 +159,7 @@ export default async function (b) {
   }
 }
 
-// choices as rows of «Огни»: chosen, could have been, never reached
+// choices as rows of “Lights”: chosen, could have been, never reached
 const rows = (choices, kept, title = c => c.title) => choices.map(c => ({
   title: title(c), weight: c.weight,
   options: c.options.map(o => ({ label: o.label, state: kept.choices[c.id] === o.id ? 'chosen' : c.id in kept.choices ? 'open' : 'unseen' })),
@@ -168,5 +168,5 @@ const rows = (choices, kept, title = c => c.title) => choices.map(c => ({
 // with its chapter's number, and how it ended
 const whole = kept => [
   ...CHAPTERS.flatMap(ch => rows(ch.choices.filter(c => c.weight === '⚑'), kept, c => `${ch.number}. ${c.title}`)),
-  { title: 'Финал', weight: '⚑', options: ENDINGS.map(e => ({ label: e.label, state: e.id === facts(kept).ending ? 'chosen' : 'open' })) },
+  { title: tr('Ending'), weight: '⚑', options: ENDINGS.map(e => ({ label: e.label, state: e.id === facts(kept).ending ? 'chosen' : 'open' })) },
 ];

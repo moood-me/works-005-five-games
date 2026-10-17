@@ -1,6 +1,6 @@
-// The sounds of «Дама с собачкой», made in the page (Web Audio): nothing to load; as loud as the page's "sounds"
+// The sounds of “The Lady with the Dog”, made in the page (Web Audio): nothing to load; as loud as the page's "sounds"
 // slider says (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes it then;
-// till then its time stands, and what was asked for begins at the touch. (game.md §8 «Звуки страницы».)
+// till then its time stands, and what was asked for begins at the touch. (game.md §8, the page's sounds.)
 //   wake() — the page may be heard from now on (called on the first touch)
 //   pause(on) — all of it stands while the play is paused (ui.js ⏸) and goes on from there after
 //   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
@@ -16,7 +16,7 @@
 //   recordings (sounds/): sea — the sea from the shore · crowd — voices on the pier · steam — a steam engine at the
 //   station · hall — the theatre before the curtain · weep — quiet weeping
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}: as loud as v (0…1) of its own; stop fades it out:
-//   band() — a brass band far off in the city garden: the waltz «Дунайские волны» (Ion Ivanovici, 1880; public domain)
+//   band() — a brass band far off in the city garden: the waltz “Waves of the Danube” (Ion Ivanovici, 1880; public domain)
 //   piano(tune, {wall}) — a piano heard through a window and the snow: tune 'waltz' — the same waltz, 'etude' — scales
 //     and a simple study; wall: true — through a wall, duller and quieter
 // Played once:
@@ -469,7 +469,7 @@ function brass(dest, m, at, len, v, { bright = 1800, vibrato = 0 } = {}) {
   lp.connect(e).connect(dest);
 }
 // the band in the garden: the cornet's tune (with a slow vibrato), the tuba's bass on each bar's first beat — the root
-// and the fifth by turns —, the horns' chord on the second and third («ум-па-па»), a drum's soft thud under the bass;
+// and the fifth by turns —, the horns' chord on the second and third (“oom-pah-pah”), a drum's soft thud under the bass;
 // far, under a low-pass, much of it the garden's air. ♩ = 160
 export function band() {
   const a = audio(), out = a.createGain(), t0 = a.currentTime + 0.2, beat = 0.375, round = BARS * 3;
@@ -510,7 +510,7 @@ function key(dest, m, at, len, v) {
   }
   burst(at, dest, { f: 1800, Q: 0.8, len: 0.025, loud: v * 0.25 });
 }
-// the piano: `tune` 'waltz' — the garden's waltz, the left hand's «ум-па-па», ♩ = 132; 'etude' — her scales and study,
+// the piano: `tune` 'waltz' — the garden's waltz, the left hand's “oom-pah-pah”, ♩ = 132; 'etude' — her scales and study,
 // ♩ = 104; heard through a window and the snow (a low-pass at 1.2 kHz) — or, wall: true, through a wall (600 Hz, quieter)
 export function piano(tune = 'waltz', { wall = false } = {}) {
   const a = audio(), out = a.createGain(), t0 = a.currentTime + 0.2;

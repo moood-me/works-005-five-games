@@ -42,10 +42,10 @@
 //     every player: b.minigame.skip()) or the step is left: it stops; → `skipped` then. The ⏭ is a safety net if a
 //     minigame glitches, not a way through: each is passable. `skipped` reads as played — a plain outcome a play
 //     gives, so a skipped minigame leaves in the story the same trace as one played (the chapter sets the scene's
-//     keys from the result: game.md §6 «после игры»)
+//     keys from the result: game.md §6, after the game)
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
 //     left when the signal aborts; the ⏭ skips the minigame
-//   g.hint(text, afterMs) → off() — one line low in the middle (the frame's alone — «Коснись шпица»; not in a
+//   g.hint(text, afterMs) → off() — one line low in the middle (the frame's alone — “Touch the dog”; not in a
 //     minigame: the language prompts there)
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name, {rule}) — the scale is shown from now on; its one line of what it means said once (rule: false —
@@ -65,25 +65,25 @@ export const SCENES = { quay: 'main', room: 'nomer-opus', oreanda: 'oreanda-opus
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean (game.md §5).
 export const SCALES = {
-  heart: { start: 0, min: -5, max: 5, up: 'Открытость', down: 'Лёгкость',
-    rule: 'Часы открыты, когда Гуров не прячется. Закрыты — когда держится легко.' },
-  anna: { start: 0, min: -3, max: 3, up: 'Жизнь', down: 'Долг',
-    rule: 'Поводок длиннее, когда Анна живёт. Короче — когда помнит о долге.' },
+  heart: { start: 0, min: -5, max: 5, up: tr('Openness'), down: tr('Lightness'),
+    rule: tr('The watch is open when Gurov hides nothing. Shut when he keeps it light.') },
+  anna: { start: 0, min: -3, max: 3, up: tr('Life'), down: tr('Duty'),
+    rule: tr('The leash is longer when Anna lives. Shorter when she remembers her duty.') },
 };
 export const ENDINGS = [
-  { id: 'cages', label: 'Две клетки' }, { id: 'wife', label: 'Жена знает' },
-  { id: 'husband', label: 'Муж знает' }, { id: 'open', label: 'Без лжи' },
+  { id: 'cages', label: tr('Two cages') }, { id: 'wife', label: tr('His wife knows') },
+  { id: 'husband', label: tr('Her husband knows') }, { id: 'open', label: tr('No lies') },
 ];
 
 // What follows from the play so far — all a step reads of it besides g.state. A choice not made (its step skipped by
-// the author) gives the value written here; a scale at 0 — «лёгкость» and «долг» (game.md §5).
+// the author) gives the value written here; a scale at 0 — lightness and duty (game.md §5).
 export function facts(state) {
   const c = state.choices, husband = c.husband ?? 'lie', wife = c.wife ?? 'lie';
   return {
-    heart: state.scales.heart > 0 ? 'frank' : 'light',     // 'frank' (открытость) | 'light' (лёгкость)
+    heart: state.scales.heart > 0 ? 'frank' : 'light',     // 'frank' (openness) | 'light' (lightness)
     life: state.scales.anna > 0 ? 'life' : 'duty',         // 'life' | 'duty'
     dog: c.dog ?? 'finger',                                // 'finger' | 'pat'
-    eat: c.room !== 'bring',                               // по умолчанию — как у Чехова: ест за столом
+    eat: c.room !== 'bring',                               // by default — as Chekhov has it: he eats at the table
     talk: c.fence === 'call',
     spring: c.stairs === 'away',
     husband, wife,                                         // 'lie' | 'truth'
@@ -209,7 +209,7 @@ export function context(b, view, hub, state, j = null) {
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`кусок «${name}» не кончился`);
+      if (wait && !(await ended)) b.trouble(`the beat “${name}” did not end`);
     },
     next(name) {
       if (!gone()) put('beat_next', name);
@@ -244,7 +244,7 @@ export function context(b, view, hub, state, j = null) {
       }
     },
     minigame(o = {}) {
-      if (!playing) throw new Error('g.minigame — только внутри мини-игры (g.play)');
+      if (!playing) throw new Error('g.minigame — only inside a mini-game (g.play)');
       const mg = b.minigame.start({ ...o, signal: playing.signal });
       mg.on('skip', playing.end);
       return mg;

@@ -1,22 +1,23 @@
-// «С оглядкой» (II.3, Набережная, после куска `noon_garden`; ALLEY_CAM): поцелуй среди белого дня. Нажать: кольцо на
-// Анне (`anna#head`), дуга опасности на нём — гуляющие в аллее: 1, пока в видимой части аллеи кто-то есть (`watched`,
-// сцена ставит разом; аллея пуста около 4 с раз в 10–12 с), 0 — пусто. Нажал при гуляющих — ошибка «в опасность»:
-// `seen` 1 (импульс; сцена сама вернёт 0) — прохожая с зонтом оборачивается, Анна отступает; метка снова через 2 с.
-// Нажал, когда пусто, — `kiss_now` 1, объятие; дождаться `noon_garden:kiss` (до 6 с) — защёлка, конец.
-//   Кто что делает: Гуров целует её среди белого дня. Чего хочет: поцеловать — и чтобы не увидели.
-//   Что чувствует: азарт тайны. Игрок: выждать миг.
-//   → { seen: сколько раз их видели }
+// “Looking round” (II.3, the sea-front, after the beat `noon_garden`; ALLEY_CAM): a kiss in broad daylight. Press: a
+// ring on Anna (`anna#head`), the arc of danger on it — the people walking in the avenue: 1 while someone is in the seen
+// part of the avenue (`watched`, the scene sets it at once; the avenue is empty for about 4 s once in 10–12 s), 0 —
+// empty. Pressed while people are there — the error `danger`: `seen` 1 (a pulse; the scene itself sets it back to
+// 0) — a lady with a parasol turns round, Anna steps back; the mark again 2 s later. Pressed when it is empty —
+// `kiss_now` 1, the embrace; wait for `noon_garden:kiss` (up to 6 s) — a snap, the end.
+//   Who does what: Gurov kisses her in broad daylight. What he wants: to kiss her — and not be seen.
+//   What he feels: the thrill of a secret. The player: to wait for the moment.
+//   → { seen: how many times they were seen }
 import { until, keys } from '../hands.js';
 
-const AGAIN = 2; // с: метка снова после того, как их видели
-const KISS = 6000; // мс: объятие кончается (сцена говорит)
+const AGAIN = 2; // s: the mark again after they were seen
+const KISS = 6000; // ms: the embrace ends (the scene tells)
 
 export default {
-  title: 'С оглядкой',
+  title: 'Looking round',
   about: 15,
   skipped: { seen: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'По аллее ходили, и всякий мог оглянуться' });
+    const mg = g.minigame({ phrase: tr('People walked in the avenue, and anyone might look round') });
     const send = keys(g);
     let watched = g.get('watched') === 0 ? 0 : 1;
     g.watch('watched', v => { watched = v ? 1 : 0; });
@@ -34,7 +35,7 @@ export default {
         backAt = mg.t + AGAIN;
         return;
       }
-      // (ожидание — до того, как объятие началось)
+      // (the wait — before the embrace has begun)
       kissed = g.told('noon_garden:kiss', KISS);
       send('kiss_now', 1);
       mark.set({ hidden: true });

@@ -1,24 +1,24 @@
-// «Море» (II.2, Ореанда, после куска `still`): двое над морем перед рассветом. Нажать ×3 — или ничего (бездействие —
-// путь: палец показывает и нажатие, и «руки прочь»). Светает само (`dawn` к 1 за 40 с, своим действием). Кольца: огни
-// парохода (`steamer#lights` — гаснут по одному, `lights` к 0 за 6 с), цикада в ближнем кипарисе (`cypress#cicada` —
-// замолкает: `cicada` 0, звук цикад к 0), её рука на скамье (`anna#hand_r` — он накрывает её своей: `hand` 1). Тронутое
-// снимается. На 12-й секунде — `opts.sea()` (рассказчик о море; не ждётся). Конец — через 40 с от начала, как бы ни
-// нажимали.
-//   Кто что делает: сидят над морем. Чего хотят: ничего. Что чувствуют: покой. Игрок: можно ничего не делать.
-//   opts: { sea() — на 12-й секунде }
-//   → { touched: ['lights' | 'cicada' | 'hand', … по порядку] }
+// “The sea” (II.2, Oreanda, after the beat `still`): the two above the sea before dawn. Press ×3 — or nothing (doing
+// nothing is a way too: the finger shows both the press and “hands off”). It grows light by itself (`dawn` to 1 over
+// 40 s, by an action of its own). Rings: the steamer's lights (`steamer#lights` — they go out one by one, `lights` to
+// 0 over 6 s), the cicada in the near cypress (`cypress#cicada` — it stops: `cicada` 0, the cicadas' sound to 0), her
+// hand on the seat (`anna#hand_r` — he covers it with his: `hand` 1). What is touched is taken off. At the 12th second
+// — `opts.sea()` (the narrator on the sea; not waited for). The end — 40 s from the start, however one presses.
+//   Who does what: they sit above the sea. What they want: nothing. What they feel: peace. The player: may do nothing.
+//   opts: { sea() — at the 12th second }
+//   → { touched: ['lights' | 'cicada' | 'hand', … in order] }
 import { until, keys } from '../hands.js';
 
-const LONG = 40; // с
-const SEA = 12; // с: слова о море
+const LONG = 40; // s
+const SEA = 12; // s: the words on the sea
 const POINTS = [['lights', 'steamer#lights'], ['cicada', 'cypress#cicada'], ['hand', 'anna#hand_r']];
 
 export default {
-  title: 'Море',
+  title: 'The sea',
   about: 40,
   skipped: { touched: [] },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Внизу шумело море, и светало' });
+    const mg = g.minigame({ phrase: tr('Below, the sea was sounding, and it was growing light') });
     const send = keys(g);
     const acts = [b.act('state', 'move', 'dawn', 1, { over: LONG })];
     signal.addEventListener('abort', () => acts.forEach(a => a.cancel()));

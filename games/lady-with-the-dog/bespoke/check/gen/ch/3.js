@@ -1,22 +1,24 @@
-// Глава III «Зима» — Москва и С. Первый снег; она идёт за ним всюду, как тень (две фигуры или четыре — по его
-// манере); окно, где жена смеётся над «ролью фата». Поводок: глазами Анны, поздняя осень в С. — держать шпица или
-// отпустить к дороге на станцию. Клуб: «осетрина-то с душком» — засмеяться и сесть в сани или уйти пешком. Отъезд в
-// С. под предлогом Петербурга. game.md §6 «Глава III».
-// Читает: facts.heart («Тень»: сколько фигур), facts.life («Поводок»: как сильно тянет шпиц). Оставляет: choices.club.
+// Chapter III “Winter” — Moscow and S. The first snow; she follows him everywhere like a shadow (two figures or four —
+// by his manner); the window where his wife laughs at “the part of a lady-killer”. The leash: through Anna's eyes, late
+// autumn in S. — hold the spitz or let it go toward the station road. The club: “the sturgeon was a bit too strong” —
+// laugh and get into the sledge or walk away. The departure for S. on the pretext of Petersburg. game.md §6, chapter
+// III.
+// Reads: facts.heart (“The shadow”: how many figures), facts.life (“The leash”: how hard the spitz pulls). Leaves:
+// choices.club.
 import { SCENES, facts } from '../story.js';
 import ten from '../minigames/ten.js';
 import povodok from '../minigames/povodok.js';
 
 export default {
   number: 'III',
-  title: 'Зима',
+  title: tr('Winter'),
   season: () => 'winter',
-  titles: ['Первый снег', 'Поводок', 'Клуб', 'Отъезд'],
+  titles: ['First snow', 'The leash', 'The club', 'Departure'],
   choices: [
-    { id: 'club', weight: '~', title: 'После осетрины', options: [{ id: 'laugh', label: 'Засмеяться и сесть в сани' }, { id: 'walk', label: 'Уйти пешком' }] },
+    { id: 'club', weight: '~', title: tr('After the sturgeon'), options: [{ id: 'laugh', label: tr('Laugh and get into the sledge') }, { id: 'walk', label: tr('Walk away') }] },
   ],
   steps: [
-    // Первый снег: утро, сани; вечерняя улица и тени; окно наверху, её голос
+    // The first snow: morning, the sledges; the evening street and the shadows; the window upstairs, her voice
     async g => {
       g.hero('gurov');
       g.beds({ snow: 0.4 });
@@ -47,7 +49,8 @@ export default {
       await SAY(46, 'window_up');
       await window;
     },
-    // Поводок: глазами Анны — поздняя осень в С., забор, шпиц тянет к дороге на станцию; муж с пальто
+    // The leash: through Anna's eyes — late autumn in S., the fence, the spitz pulls toward the station road; the
+    // husband with a coat
     async g => {
       g.hero('anna');
       g.beds({ wind: 0.5 });
@@ -73,7 +76,7 @@ export default {
       await SAY(48);
       await home;
     },
-    // Клуб: ночь, «осетрина-то с душком»; засмеяться и сесть в сани — или уйти пешком
+    // The club: night, “the sturgeon was a bit too strong”; laugh and get into the sledge — or walk away
     async g => {
       g.hero('gurov');
       g.beds({ snow: 0.3 });
@@ -92,7 +95,7 @@ export default {
       await SAY(52);
       await SAY(53);
       await sturgeon;
-      const how = await g.choose('club', { sledge: [{ id: 'laugh', label: 'Засмеяться и сесть в сани' }], lamp2: [{ id: 'walk', label: 'Уйти пешком' }] });
+      const how = await g.choose('club', { sledge: [{ id: 'laugh', label: tr('Laugh and get into the sledge') }], lamp2: [{ id: 'walk', label: tr('Walk away') }] });
       if (how === 'laugh') {
         g.scale('heart', -2);
         g.next('laugh_sit');
@@ -109,7 +112,7 @@ export default {
       await SAY(55);
       g.sound.sleigh();
     },
-    // Отъезд: декабрь, до рассвета; жена в дверях
+    // The departure: December, before dawn; his wife in the doorway
     async g => {
       g.hero('gurov');
       g.beds({ snow: 0.3 });

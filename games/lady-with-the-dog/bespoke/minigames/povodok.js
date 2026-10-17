@@ -1,26 +1,27 @@
-// «Поводок» (III.2, Город С., после куска `autumn_walk`; FENCE_CAM): Анна гуляет со шпицем вдоль забора. Выбор жестом —
-// держать где угодно (отклик у её руки с поводком, `anna#hand_l`): держит — она держит шпица и идёт к калитке
-// (`anna_to` = где она − 0.05); отпустил — шпиц тянет к концу забора, к дороге на станцию (`anna_to` = где она +
-// `opts.pull`). Где она — `anna_at` (сцена ставит разом); ключ шлётся при каждом его изменении. Отклик нейтральный, оба
-// пути показаны пальцем в начале. Конец: у калитки (≤ 0.05) — 'home', у дороги (≥ 0.95) — 'road', через 35 с — к
-// какому ближе. Ветер порывами: подложка `wind` до 0.7 на секунду раз в 5–8 с, потом 0.5 (уровень шага).
-//   Кто что делает: Анна гуляет со шпицем вдоль забора. Чего хочет: забыть Ялту — и не может.
-//   Что чувствует: тоску; шпиц тянет к дороге на станцию. Игрок: держать или отпустить.
-//   opts: { pull — как сильно тянет шпиц: 0.06 (долг) или 0.09 (жизнь) }
+// “The leash” (III.2, the town of S., after the beat `autumn_walk`; FENCE_CAM): Anna walks the spitz along the fence.
+// A choice by gesture — hold anywhere (the response at her hand with the leash, `anna#hand_l`): held — she holds the
+// spitz back and goes to the gate (`anna_to` = where she is − 0.05); let go — the spitz pulls to the fence's end,
+// toward the station road (`anna_to` = where she is + `opts.pull`). Where she is — `anna_at` (the scene sets it at
+// once); the key is sent at each change of it. The response neutral, both ways shown by the finger at the start. The
+// end: at the gate (≤ 0.05) — 'home', at the road (≥ 0.95) — 'road', after 35 s — whichever is nearer. Wind in gusts:
+// the bed `wind` up to 0.7 for a second once in 5–8 s, then 0.5 (the step's level).
+//   Who does what: Anna walks the spitz along the fence. What she wants: to forget Yalta — and she cannot.
+//   What she feels: longing; the spitz pulls toward the station road. The player: to hold or to let go.
+//   opts: { pull — how hard the spitz pulls: 0.06 (duty) or 0.09 (life) }
 //   → { end: 'home' | 'road' }
 import { until, keys } from '../hands.js';
 
-const HOME = 0.05, ROAD = 0.95, LONG = 35; // где конец пути; с
-const BACK = 0.05; // держит — шаг к калитке
-const WIND = 0.5, GUST = 0.7; // подложка ветра шага; порыв
+const HOME = 0.05, ROAD = 0.95, LONG = 35; // where the way ends; s
+const BACK = 0.05; // held — a step toward the gate
+const WIND = 0.5, GUST = 0.7; // the step's bed of wind; a gust
 
 export default {
-  title: 'Поводок',
+  title: 'The leash',
   about: 20,
   skipped: { end: 'home' },
   async run(g, b, opts, signal) {
     const pull = opts.pull ?? 0.06;
-    const mg = g.minigame({ phrase: 'Шпиц тянул к концу забора, туда, где дорога к станции' });
+    const mg = g.minigame({ phrase: tr('The Pomeranian pulled to the end of the fence, toward the station road') });
     const send = keys(g);
     const leash = mg.mark({ at: 'anna#hand_l', kind: 'groove' });
     const hold = mg.hold({ on: null, show: leash, seconds: 0.4, drain: 0.4 });

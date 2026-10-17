@@ -1,11 +1,13 @@
 {
   "type": "bespoke",
-  "title": "Дама с собачкой",
-  "description": "Игра по рассказу Чехова: Ялта, белый шпиц на красном поводке, московская зима, забор в С. и «Славянский базар».",
+  "title": "The Lady with the Dog",
+  "description": "Gurov has long since ceased to be surprised by anything. Anna Sergeyevna has come to Yalta alone, with a white Pomeranian. Both of them think it will not be for long.",
+  "line": "A holiday romance in Yalta that would not end.",
+  "source": "after the story by Anton Chekhov",
   "genres": {
-    "драма": 85,
-    "отношения": 80,
-    "погружение": 50
+    "drama": 85,
+    "relationships": 80,
+    "immersion": 50
   },
   "world": "pavel--dama-s-sobachkoy",
   "scenes": []

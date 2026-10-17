@@ -1,9 +1,9 @@
-// Глава II «Ореанда» — Ялта, лето, оба. Номер: свеча, её стыд, арбуз (режут всегда) — и выбор, как он с ней обошёлся
-// (есть за столом или отнести ей ломоть); её исповедь. Ореанда: перед рассветом над морем. Полдень: поцелуй с
-// оглядкой, письмо мужа. Станция: глазами Анны — окно вагона (смотреть или задёрнуть: начинается её шкала, поводок);
-// Гуров один на платформе. game.md §6 «Глава II».
-// Читает: facts.eat (станция: что она говорит), facts.heart (станция: уходит сразу или идёт за поездом).
-// Оставляет: choices.room, choices.window, shown.anna.
+// Chapter II “Oreanda” — Yalta, summer, both of them. The room: a candle, her shame, the watermelon (always cut) — and
+// the choice of how he treated her (eat at the table or bring her a slice); her confession. Oreanda: before dawn above
+// the sea. Noon: a kiss looking round, the husband's letter. The station: through Anna's eyes — the carriage window
+// (keep looking or draw the curtain: her scale begins, the leash); Gurov alone on the platform. game.md §6, chapter II.
+// Reads: facts.eat (the station: what she says), facts.heart (the station: he goes at once or walks after the train).
+// Leaves: choices.room, choices.window, shown.anna.
 import { SCENES, facts } from '../story.js';
 import arbuz from '../minigames/arbuz.js';
 import ryadom from '../minigames/ryadom.js';
@@ -12,26 +12,27 @@ import sOgljadkoj from '../minigames/s-ogljadkoj.js';
 
 export default {
   number: 'II',
-  title: 'Ореанда',
+  title: tr('Oreanda'),
   season: () => 'summer',
-  titles: ['Номер', 'Ореанда', 'Полдень', 'Станция'],
+  titles: ['The room', 'Oreanda', 'Noon', 'The station'],
   choices: [
-    { id: 'room', weight: '~', title: 'После арбуза', options: [{ id: 'eat', label: 'Есть за столом' }, { id: 'bring', label: 'Отнести ей ломоть' }] },
-    { id: 'window', weight: '~', title: 'Окно вагона', options: [{ id: 'look', label: 'Смотреть, пока видно' }, { id: 'curtain', label: 'Задёрнуть занавеску' }] },
+    { id: 'room', weight: '~', title: tr('After the watermelon'), options: [{ id: 'eat', label: tr('Eat at the table') }, { id: 'bring', label: tr('Bring her a slice') }] },
+    { id: 'window', weight: '~', title: tr('The carriage window'), options: [{ id: 'look', label: tr('Keep looking') }, { id: 'curtain', label: tr('Draw the curtain') }] },
   ],
   steps: [
-    // Номер: ночь, свеча; арбуз; есть за столом — или отнести ей ломоть и сесть рядом; её исповедь
+    // The room: night, a candle; the watermelon; eat at the table — or bring her a slice and sit beside her; her
+    // confession
     async g => {
       g.hero('gurov');
       g.beds({ sea: 0.25, room: 0.3 });
       await g.scene(SCENES.room, { beat: 'room' });
       const room = g.beat('room');
       g.next('room_hold');
-      await g.say('narrator', 'У неё в номере было душно и пахло духами, которые она купила в японском магазине');
+      await g.say('narrator', 'Her room was close and smelt of the scent she had bought at a Japanese shop');
       await room;
       const hold = g.beat('room_hold');
       g.next('melon');
-      await g.say('anna', 'Нехорошо. Вы же первый меня не уважаете теперь');
+      await g.say('anna', 'It’s wrong. You will be the first to despise me now');
       await hold;
       const melon = g.beat('melon');
       g.next('melon_hold');
@@ -43,9 +44,9 @@ export default {
       g.set('candle', 0.4, 2);
       g.beds({ sea: 0.25, room: 0.3, weep: 0.15 });
       const melonHold = g.beat('melon_hold');
-      await g.say('narrator', 'Прошло, по крайней мере, полчаса в молчании');
+      await g.say('narrator', 'There followed at least half an hour of silence');
       await melonHold;
-      const how = await g.choose('room', { watermelon: [{ id: 'eat', label: 'Есть за столом' }], anna: [{ id: 'bring', label: 'Отнести ей ломоть' }] });
+      const how = await g.choose('room', { watermelon: [{ id: 'eat', label: tr('Eat at the table') }], anna: [{ id: 'bring', label: tr('Bring her a slice') }] });
       if (how === 'eat') {
         g.scale('heart', -2);
         g.next('melon_eat');
@@ -55,10 +56,10 @@ export default {
         const speaks = g.told('confession_table:speaks');
         const confession = g.beat('confession_table');
         await speaks;
-        await g.say('anna', 'Я не мужа обманула, а самоё себя');
-        await g.say('anna', 'Мой муж, может быть, честный, хороший человек, но ведь он лакей!');
-        await g.say('anna', 'Хотелось пожить! Пожить и пожить…');
-        await g.say('gurov', 'Полно, полно…');
+        await g.say('anna', 'It’s not my husband but myself I have deceived');
+        await g.say('anna', 'My husband may be a good, honest man, but he is a flunkey!');
+        await g.say('anna', 'I wanted to live! To live, to live…');
+        await g.say('gurov', 'Hush, hush…');
         await confession;
       } else {
         g.scale('heart', 2);
@@ -73,20 +74,20 @@ export default {
         g.set('apart', q.pulls ? 1 : 0);
         const besideHold = g.beat('beside_hold');
         g.next('confession_bed');
-        await g.say('gurov', 'Отчего бы я мог перестать уважать тебя?');
+        await g.say('gurov', 'Why should I cease to respect you?');
         await besideHold;
         const speaks = g.told('confession_bed:speaks');
         const confession = g.beat('confession_bed');
         await speaks;
-        await g.say('anna', 'Я не мужа обманула, а самоё себя');
-        await g.say('anna', 'Мой муж, может быть, честный, хороший человек, но ведь он лакей!');
-        await g.say('anna', 'Хотелось пожить! Пожить и пожить…');
-        await g.say('gurov', 'Полно, полно…');
+        await g.say('anna', 'It’s not my husband but myself I have deceived');
+        await g.say('anna', 'My husband may be a good, honest man, but he is a flunkey!');
+        await g.say('anna', 'I wanted to live! To live, to live…');
+        await g.say('gurov', 'Hush, hush…');
         await confession;
       }
       g.beds({ sea: 0.25, room: 0.3 });
     },
-    // Ореанда: перед рассветом, скамья над морем; сторож; роса на траве
+    // Oreanda: before dawn, the seat above the sea; the keeper; dew on the grass
     async g => {
       g.hero('both');
       g.beds({ sea: 0.6, cicadas: 0.4 }, 3);
@@ -95,42 +96,42 @@ export default {
       const bench = g.beat('bench');
       g.next('still');
       await sat;
-      await g.say('narrator', 'В Ореанде сидели на скамье недалеко от церкви, смотрели вниз на море и молчали');
+      await g.say('narrator', 'At Oreanda they sat on a seat not far from the church, looked down at the sea, and were silent');
       await bench;
       const still = g.beat('still');
       g.next('watchman');
       await still;
       let sea = false;
-      const r = await g.play(more, { sea: () => (sea = true, g.say('narrator', 'Так шумело внизу, когда ещё тут не было ни Ялты, ни Ореанды. Теперь шумит и будет шуметь так же равнодушно и глухо, когда нас не будет')) });
+      const r = await g.play(more, { sea: () => (sea = true, g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and as hollowly when we are no more')) });
       g.set('dawn', 1, 1);
       g.set('lights', 0, 2);
       g.set('cicada', 0);
       g.set('hand', r.touched.includes('hand') ? 1 : 0);
       g.beds({ sea: 0.6 });
-      if (!sea) await g.say('narrator', 'Так шумело внизу, когда ещё тут не было ни Ялты, ни Ореанды. Теперь шумит и будет шуметь так же равнодушно и глухо, когда нас не будет');
+      if (!sea) await g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and as hollowly when we are no more');
       const looks = g.told('watchman:looks');
       const gone = g.told('watchman:gone');
       const watchman = g.beat('watchman');
       g.next('dew');
       await looks;
-      await g.say('narrator', 'Подошёл какой-то человек — должно быть, сторож, — посмотрел на них и ушёл');
+      await g.say('narrator', 'A man walked up to them — probably a keeper — looked at them and walked away');
       await gone;
-      await g.say('narrator', 'Видно было, как пришёл пароход из Феодосии, освещённый утренней зарёй, уже без огней');
+      await g.say('narrator', 'They saw a steamer come in from Theodosia, lit by the glow of dawn, its lights already out');
       await watchman;
       const dew = g.beat('dew');
-      await g.say('anna', 'Роса на траве', 'anna');
-      await g.say('gurov', 'Да. Пора домой');
+      await g.say('anna', 'There is dew on the grass', 'anna');
+      await g.say('gurov', 'Yes. It’s time to go home');
       await dew;
     },
-    // Полдень: каждый полдень вместе; поцелуй с оглядкой; письмо мужа
+    // Noon: every day at noon together; a kiss looking round; the husband's letter
     async g => {
       g.hero('both');
       g.beds({ sea: 0.4, cicadas: 0.5 });
       await g.scene(SCENES.quay, { beat: 'noon_garden' });
       const garden = g.beat('noon_garden');
       g.next('days');
-      await g.say('narrator', 'Каждый полдень они встречались на набережной, вместе завтракали, обедали, гуляли');
-      await g.say('narrator', 'Они целовались среди белого дня, с оглядкой — как бы кто не увидел');
+      await g.say('narrator', 'Every day at twelve o’clock they met on the sea-front, lunched and dined together, went for walks');
+      await g.say('narrator', 'They kissed in broad daylight, looking round in dread of someone’s seeing them');
       await garden;
       const r = await g.play(sOgljadkoj);
       g.set('kiss_now', 1);
@@ -139,12 +140,12 @@ export default {
       const letter = g.told('days:letter');
       const days = g.beat('days');
       await letter;
-      await g.say('narrator', 'Но вот пришло письмо от мужа');
-      await Promise.all([g.letter({ text: 'Анна, у меня разболелись глаза. Возвращайся, если можно. Шпица не перекармливай.', sign: 'Твой муж' }), g.say('diderits', 'Анна, у меня разболелись глаза. Возвращайся, если можно. Шпица не перекармливай', 'narrator')]);
+      await g.say('narrator', 'But then a letter came from her husband');
+      await Promise.all([g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband') }), g.say('diderits', 'Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian', 'narrator')]);
       g.sound.paper();
       await days;
     },
-    // Станция: глазами Анны — прощание, окно вагона; потом Гуров один на платформе
+    // The station: through Anna's eyes — the parting, the carriage window; then Gurov alone on the platform
     async g => {
       const f = facts(g.state);
       g.hero('anna');
@@ -154,13 +155,13 @@ export default {
       const platform = g.beat('platform');
       g.next('board');
       bell.then(rang => { if (rang) g.sound.bell(); });
-      if (f.eat) await g.say('anna', 'Хорошо, что я уезжаю. Это сама судьба');
-      else await g.say('anna', 'Дайте я погляжу на вас ещё… Погляжу ещё раз. Вот так');
-      await g.say('anna', 'Мы навсегда прощаемся, это так нужно, потому что не следовало бы вовсе встречаться');
+      if (f.eat) await g.say('anna', 'It’s a good thing I am going away. It’s the finger of destiny');
+      else await g.say('anna', 'Let me look at you once more… Look at you once again. That’s right');
+      await g.say('anna', 'We are parting for ever — it must be so, for we ought never to have met');
       await bell;
       await platform;
       await g.beat('board');
-      const way = await g.choose('window', { anna: [{ id: 'look', label: 'Смотреть, пока видно' }], 'carriage#curtain': [{ id: 'curtain', label: 'Задёрнуть занавеску' }] });
+      const way = await g.choose('window', { anna: [{ id: 'look', label: tr('Keep looking') }], 'carriage#curtain': [{ id: 'curtain', label: tr('Draw the curtain') }] });
       g.gauge('anna');
       g.sound.whistle();
       const alone = f.heart === 'frank' ? 'alone_far' : 'alone_turn';
@@ -183,11 +184,11 @@ export default {
       g.beds({ crickets: 0.6, wires: 0.4 });
       const moment = g.told(alone === 'alone_far' ? 'alone_far:stands' : 'alone_turn:door');
       const last = g.beat(alone);
-      await g.say('narrator', 'Он остался на платформе один. Кричали кузнечики, гудели телеграфные проволоки');
+      await g.say('narrator', 'He was left alone on the platform. The grasshoppers chirruped and the telegraph wires hummed');
       await moment;
-      await g.say('gurov_inner', 'Вот и ещё одно приключение… И оно тоже уже кончилось', 'gurov');
+      await g.say('gurov_inner', 'So that was one more adventure… And it, too, is at an end', 'gurov');
       await last;
-      await g.say('narrator', 'На станции уже пахло осенью, вечер был прохладный');
+      await g.say('narrator', 'There was already a scent of autumn at the station; it was a cool evening');
     },
   ],
 };

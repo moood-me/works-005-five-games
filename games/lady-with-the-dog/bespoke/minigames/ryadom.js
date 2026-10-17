@@ -1,30 +1,30 @@
-// «Рядом» (II.1, Номер в Ялте, после куска `beside`; вставка `hands`): Гуров кладёт руку на её руку. Тянуть с
-// сопротивлением: кольцо с пунктиром на его руке (`hands#his`), цель — её рука (`hands#her`); его рука идёт, пока палец
-// ведёт впереди неё; где она — `hand_at`. Палец обгоняет руку больше чем на 0.25 пути дольше 0.3 с — спешит: она
-// отнимает руку (ошибка «в опасность» у её руки, `pull` к 1 за 0.5 с, его рука назад на 0.2), через 2 с кладёт её
-// обратно (`pull` к 0 за 1 с). Рука у её руки (≥ 0.95) и 2 с без нового движения — её ладонь поворачивается вверх
-// (`palm` 1), защёлка, через 1.5 с конец.
-//   Кто что делает: Гуров кладёт руку на её руку. Чего хочет: утешить. Что чувствует: осторожность, нежность.
-//   Игрок: не спешить.
-//   → { pulls: сколько раз она отнимала руку }
+// “Beside her” (II.1, A room in Yalta, after the beat `beside`; the insert `hands`): Gurov puts his hand on hers. Pull
+// against resistance: a ring with dashes on his hand (`hands#his`), the target — her hand (`hands#her`); his hand goes
+// while the finger leads ahead of it; where it is — `hand_at`. The finger ahead of the hand by more than 0.25 of the
+// way for longer than 0.3 s — he hurries: she draws her hand away (the error `danger` at her hand, `pull` to 1
+// over 0.5 s, his hand back by 0.2), 2 s later she puts it back (`pull` to 0 over 1 s). The hand at hers (≥ 0.95) and
+// 2 s without a new move — her palm turns up (`palm` 1), a snap, the end 1.5 s later.
+//   Who does what: Gurov puts his hand on hers. What he wants: to comfort her. What he feels: care, tenderness.
+//   The player: not to hurry.
+//   → { pulls: how many times she drew her hand away }
 import { until, keys } from '../hands.js';
 
-const AHEAD = 0.25, RUSH = 0.3; // доля пути, на которую палец обгоняет руку; сколько секунд — уже спешка
-const BACK = 0.2; // на сколько его рука отходит, когда она отнимает свою
-const AWAY = 2; // с её рука отнята
-const THERE = 0.95, STILL = 2, AFTER = 1.5; // у её руки; с без движения; с от защёлки до конца
+const AHEAD = 0.25, RUSH = 0.3; // the share of the way the finger is ahead of the hand; how many seconds make a hurry
+const BACK = 0.2; // how far his hand goes back when she draws hers away
+const AWAY = 2; // s her hand is drawn away
+const THERE = 0.95, STILL = 2, AFTER = 1.5; // at her hand; s without a move; s from the snap to the end
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'Рядом',
+  title: 'Beside her',
   about: 12,
   skipped: { pulls: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: 'Её рука лежала на покрывале, ладонью вниз' });
+    const mg = g.minigame({ phrase: tr('Her hand lay on the bedspread, palm down') });
     const send = keys(g);
     const his = mg.mark({ at: 'hands#his', kind: 'dash' });
     const pull = mg.pull({ on: his, to: 'hands#her', heavy: true });
-    // (где палец: на той же метке — касание как есть)
+    // (where the finger is: on the same mark — the touch as it is)
     const finger = mg.touch({ on: his });
     b.minigame.tricks.teach(mg, [pull], { id: 'pull:heavy' });
     const acts = [];

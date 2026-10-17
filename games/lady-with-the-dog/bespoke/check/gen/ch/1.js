@@ -1,23 +1,24 @@
-// Глава I «Набережная» — Ялта, лето. Сад: Гуров подманивает шпица за соседним столом и выбирает, как обойтись с ним
-// (погрозить пальцем или погладить) — так начинается его шкала (часы); разговор через проход; ночная набережная.
-// Пристань: глазами Анны — лорнетка, приезжие, страх узнать; потерянная лорнетка, «Пойдёмте к вам». Без «Огней» перед
-// собой: пролог переходит в неё (wall: false). game.md §6 «Глава I».
-// Читает: —. Оставляет: choices.dog, marks.dog, shown.heart.
+// Chapter I “The sea-front” — Yalta, summer. The gardens: Gurov coaxes the spitz at the next table and chooses how to
+// treat it (shake a finger at it or pat it) — so his scale begins (the watch); a talk across the way; the sea-front at
+// night. The pier: through Anna's eyes — the lorgnette, the arrivals, the fear of being known; the lorgnette lost, “Let
+// us go to your hotel”. Without “Lights” before it: the prologue runs into it (wall: false). game.md §6, chapter I.
+// Reads: —. Leaves: choices.dog, marks.dog, shown.heart.
 import { SCENES } from '../story.js';
 import podmanit from '../minigames/podmanit.js';
 import lornetka from '../minigames/lornetka.js';
 
 export default {
   number: 'I',
-  title: 'Набережная',
+  title: tr('The sea-front'),
   wall: false,
   season: () => 'summer',
-  titles: ['Сад', 'Пристань'],
+  titles: ['The gardens', 'The pier'],
   choices: [
-    { id: 'dog', weight: '~', title: 'Шпиц у колена', options: [{ id: 'finger', label: 'Погрозить пальцем' }, { id: 'pat', label: 'Погладить' }] },
+    { id: 'dog', weight: '~', title: tr('The dog at his knee'), options: [{ id: 'finger', label: tr('Shake a finger') }, { id: 'pat', label: tr('Pat him') }] },
   ],
   steps: [
-    // Сад: вечер, фонари сада, далёкий оркестр; шпиц, его рука, её «Он не кусается»; разговор; ночь, лунная дорожка
+    // The gardens: evening, the gardens' lamps, a band far off; the spitz, his hand, her “He doesn’t bite”; the talk;
+    // night, the moon's path
     async g => {
       g.hero('gurov');
       g.beds({ sea: 0.3, cicadas: 0.2 });
@@ -38,11 +39,11 @@ export default {
       g.set('hand', 0);
       g.set('trust', r.startles ? 0 : 1);
       await g.beat('coax_hold');
-      const dog = await g.choose('dog', { spitz: [{ id: 'finger', label: 'Погрозить пальцем' }, { id: 'pat', label: 'Погладить' }] });
+      const dog = await g.choose('dog', { spitz: [{ id: 'finger', label: tr('Shake a finger') }, { id: 'pat', label: tr('Pat him') }] });
       g.gauge('heart');
       if (dog === 'finger') {
         g.scale('heart', -1);
-        g.mark('dog', 'finger', 'Шпиц это запомнит.');
+        g.mark('dog', 'finger', tr('The dog will remember this.'));
         g.next('finger');
         const growl = g.told('finger:growl');
         const finger = g.beat('finger');
@@ -54,7 +55,7 @@ export default {
         await finger;
       } else {
         g.scale('heart', 1);
-        g.mark('dog', 'pat', 'Шпиц это запомнит.');
+        g.mark('dog', 'pat', tr('The dog will remember this.'));
         g.next('pat');
         const sits = g.told('pat:sits');
         const pat = g.beat('pat');
@@ -82,7 +83,8 @@ export default {
       await walk;
       band.stop(3);
     },
-    // Пристань: праздничный день, ветер, пароход пришёл поздно; Анна в лорнетку ищет знакомых среди приезжих
+    // The pier: a holiday, the wind, the steamer came in late; Anna looks through her lorgnette for acquaintances among
+    // the arrivals
     async g => {
       g.hero('anna');
       g.beds({ sea: 0.5, wind: 0.5, crowd: 0.6 });

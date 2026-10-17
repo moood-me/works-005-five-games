@@ -1,10 +1,10 @@
-# Записи подложек
+# The beds' recordings
 
-Настоящие записи с Freesound, лицензия CC0 (без условий): из каждой вырезан кусок ~45 с, закольцованный (последние
-2,5 с сведены в начало), громкость приведена к −24 dBFS RMS, MP3 96 кбит/с. Выбраны Павлом 2026-10-16
-(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` подгоняет каждую к громкости прежней подложки.
+Real recordings from Freesound, CC0 licence (no conditions): a piece of ~45 s cut from each, looped (the last 2.5 s mixed
+into the start), the loudness brought to −24 dBFS RMS, MP3 96 kbit/s. Chosen by Pavel 2026-10-16
+(rpg docs/history/2026-10-16-game-sounds.md); `sound.js` fits each to the loudness of the bed before it.
 
-| Файл | Запись | Автор |
+| File | Recording | Author |
 |---|---|---|
 | `crowd-550916.mp3` | [BGSaSc Walla Medium Crowd German Berlin Talking People 01](https://freesound.org/people/Profispiesser/sounds/550916/) | Profispiesser |
 | `hall-735472.mp3` | [Large Crowd before a chior concert 2](https://freesound.org/people/pluralz/sounds/735472/) | pluralz |

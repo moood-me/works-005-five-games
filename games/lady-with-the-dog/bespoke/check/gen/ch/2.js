@@ -1,9 +1,9 @@
-// Глава II «Ореанда» — Ялта, лето, оба. Номер: свеча, её стыд, арбуз (режут всегда) — и выбор, как он с ней обошёлся
-// (есть за столом или отнести ей ломоть); её исповедь. Ореанда: перед рассветом над морем. Полдень: поцелуй с
-// оглядкой, письмо мужа. Станция: глазами Анны — окно вагона (смотреть или задёрнуть: начинается её шкала, поводок);
-// Гуров один на платформе. game.md §6 «Глава II».
-// Читает: facts.eat (станция: что она говорит), facts.heart (станция: уходит сразу или идёт за поездом).
-// Оставляет: choices.room, choices.window, shown.anna.
+// Chapter II “Oreanda” — Yalta, summer, both of them. The room: a candle, her shame, the watermelon (always cut) — and
+// the choice of how he treated her (eat at the table or bring her a slice); her confession. Oreanda: before dawn above
+// the sea. Noon: a kiss looking round, the husband's letter. The station: through Anna's eyes — the carriage window
+// (keep looking or draw the curtain: her scale begins, the leash); Gurov alone on the platform. game.md §6, chapter II.
+// Reads: facts.eat (the station: what she says), facts.heart (the station: he goes at once or walks after the train).
+// Leaves: choices.room, choices.window, shown.anna.
 import { SCENES, facts } from '../story.js';
 import arbuz from '../minigames/arbuz.js';
 import ryadom from '../minigames/ryadom.js';
@@ -12,15 +12,16 @@ import sOgljadkoj from '../minigames/s-ogljadkoj.js';
 
 export default {
   number: 'II',
-  title: 'Ореанда',
+  title: tr('Oreanda'),
   season: () => 'summer',
-  titles: ['Номер', 'Ореанда', 'Полдень', 'Станция'],
+  titles: ['The room', 'Oreanda', 'Noon', 'The station'],
   choices: [
-    { id: 'room', weight: '~', title: 'После арбуза', options: [{ id: 'eat', label: 'Есть за столом' }, { id: 'bring', label: 'Отнести ей ломоть' }] },
-    { id: 'window', weight: '~', title: 'Окно вагона', options: [{ id: 'look', label: 'Смотреть, пока видно' }, { id: 'curtain', label: 'Задёрнуть занавеску' }] },
+    { id: 'room', weight: '~', title: tr('After the watermelon'), options: [{ id: 'eat', label: tr('Eat at the table') }, { id: 'bring', label: tr('Bring her a slice') }] },
+    { id: 'window', weight: '~', title: tr('The carriage window'), options: [{ id: 'look', label: tr('Keep looking') }, { id: 'curtain', label: tr('Draw the curtain') }] },
   ],
   steps: [
-    // Номер: ночь, свеча; арбуз; есть за столом — или отнести ей ломоть и сесть рядом; её исповедь
+    // The room: night, a candle; the watermelon; eat at the table — or bring her a slice and sit beside her; her
+    // confession
     async g => {
       g.hero('gurov');
       g.beds({ sea: 0.25, room: 0.3 });
@@ -45,7 +46,7 @@ export default {
       const melonHold = g.beat('melon_hold');
       await SAY(20);
       await melonHold;
-      const how = await g.choose('room', { watermelon: [{ id: 'eat', label: 'Есть за столом' }], anna: [{ id: 'bring', label: 'Отнести ей ломоть' }] });
+      const how = await g.choose('room', { watermelon: [{ id: 'eat', label: tr('Eat at the table') }], anna: [{ id: 'bring', label: tr('Bring her a slice') }] });
       if (how === 'eat') {
         g.scale('heart', -2);
         g.next('melon_eat');
@@ -86,7 +87,7 @@ export default {
       }
       g.beds({ sea: 0.25, room: 0.3 });
     },
-    // Ореанда: перед рассветом, скамья над морем; сторож; роса на траве
+    // Oreanda: before dawn, the seat above the sea; the keeper; dew on the grass
     async g => {
       g.hero('both');
       g.beds({ sea: 0.6, cicadas: 0.4 }, 3);
@@ -122,7 +123,7 @@ export default {
       await SAY(31);
       await dew;
     },
-    // Полдень: каждый полдень вместе; поцелуй с оглядкой; письмо мужа
+    // Noon: every day at noon together; a kiss looking round; the husband's letter
     async g => {
       g.hero('both');
       g.beds({ sea: 0.4, cicadas: 0.5 });
@@ -140,11 +141,11 @@ export default {
       const days = g.beat('days');
       await letter;
       await SAY(34);
-      await Promise.all([g.letter({ text: 'Анна, у меня разболелись глаза. Возвращайся, если можно. Шпица не перекармливай.', sign: 'Твой муж' }), SAY(35, 'narrator')]);
+      await Promise.all([g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband') }), SAY(35, 'narrator')]);
       g.sound.paper();
       await days;
     },
-    // Станция: глазами Анны — прощание, окно вагона; потом Гуров один на платформе
+    // The station: through Anna's eyes — the parting, the carriage window; then Gurov alone on the platform
     async g => {
       const f = facts(g.state);
       g.hero('anna');
@@ -160,7 +161,7 @@ export default {
       await bell;
       await platform;
       await g.beat('board');
-      const way = await g.choose('window', { anna: [{ id: 'look', label: 'Смотреть, пока видно' }], 'carriage#curtain': [{ id: 'curtain', label: 'Задёрнуть занавеску' }] });
+      const way = await g.choose('window', { anna: [{ id: 'look', label: tr('Keep looking') }], 'carriage#curtain': [{ id: 'curtain', label: tr('Draw the curtain') }] });
       g.gauge('anna');
       g.sound.whistle();
       const alone = f.heart === 'frank' ? 'alone_far' : 'alone_turn';

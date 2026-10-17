@@ -1,22 +1,24 @@
-// Глава III «Зима» — Москва и С. Первый снег; она идёт за ним всюду, как тень (две фигуры или четыре — по его
-// манере); окно, где жена смеётся над «ролью фата». Поводок: глазами Анны, поздняя осень в С. — держать шпица или
-// отпустить к дороге на станцию. Клуб: «осетрина-то с душком» — засмеяться и сесть в сани или уйти пешком. Отъезд в
-// С. под предлогом Петербурга. game.md §6 «Глава III».
-// Читает: facts.heart («Тень»: сколько фигур), facts.life («Поводок»: как сильно тянет шпиц). Оставляет: choices.club.
+// Chapter III “Winter” — Moscow and S. The first snow; she follows him everywhere like a shadow (two figures or four —
+// by his manner); the window where his wife laughs at “the part of a lady-killer”. The leash: through Anna's eyes, late
+// autumn in S. — hold the spitz or let it go toward the station road. The club: “the sturgeon was a bit too strong” —
+// laugh and get into the sledge or walk away. The departure for S. on the pretext of Petersburg. game.md §6, chapter
+// III.
+// Reads: facts.heart (“The shadow”: how many figures), facts.life (“The leash”: how hard the spitz pulls). Leaves:
+// choices.club.
 import { SCENES, facts } from '../story.js';
 import ten from '../minigames/ten.js';
 import povodok from '../minigames/povodok.js';
 
 export default {
   number: 'III',
-  title: 'Зима',
+  title: tr('Winter'),
   season: () => 'winter',
-  titles: ['Первый снег', 'Поводок', 'Клуб', 'Отъезд'],
+  titles: ['First snow', 'The leash', 'The club', 'Departure'],
   choices: [
-    { id: 'club', weight: '~', title: 'После осетрины', options: [{ id: 'laugh', label: 'Засмеяться и сесть в сани' }, { id: 'walk', label: 'Уйти пешком' }] },
+    { id: 'club', weight: '~', title: tr('After the sturgeon'), options: [{ id: 'laugh', label: tr('Laugh and get into the sledge') }, { id: 'walk', label: tr('Walk away') }] },
   ],
   steps: [
-    // Первый снег: утро, сани; вечерняя улица и тени; окно наверху, её голос
+    // The first snow: morning, the sledges; the evening street and the shadows; the window upstairs, her voice
     async g => {
       g.hero('gurov');
       g.beds({ snow: 0.4 });
@@ -25,35 +27,36 @@ export default {
       const snow = g.beat('first_snow');
       g.next('evening_walk');
       g.sound.sleigh();
-      await g.say('narrator', 'В Москве уже всё было по-зимнему. Выпал первый снег, и поехали сани');
+      await g.say('narrator', 'In Moscow everything was in its winter routine already. The first snow had fallen, and the sledges were out');
       await out;
-      await g.say('gurov_inner', 'Пройдёт какой-нибудь месяц — и всё это покроется в памяти туманом', 'gurov');
+      await g.say('gurov_inner', 'In another month or so it will all be shrouded in a mist in my memory', 'gurov');
       await snow;
       const walk = g.beat('evening_walk');
       g.next('table_window');
       await walk;
       let first = false;
       const count = facts(g.state).heart === 'frank' ? 4 : 2;
-      const r = await g.play(ten, { count, onFirst: () => (first = true, g.say('narrator', 'Прошло больше месяца. Она не снилась ему, а шла за ним всюду, как тень')) });
+      const r = await g.play(ten, { count, onFirst: () => (first = true, g.say('narrator', 'More than a month passed. She did not visit him in dreams, but followed him about everywhere like a shadow')) });
       g.set('walk_on', count);
       g.set('gurov_look', null);
       for (const shade of ['shade1', 'shade2', 'shade3', 'shade4']) g.set(shade, 0);
       g.set('look_back', r.touched.length === count ? 1 : 0);
-      if (!first) await g.say('narrator', 'Прошло больше месяца. Она не снилась ему, а шла за ним всюду, как тень');
+      if (!first) await g.say('narrator', 'More than a month passed. She did not visit him in dreams, but followed him about everywhere like a shadow');
       const lit = g.told('table_window:lit');
       const window = g.beat('table_window');
       await lit;
-      await g.say('narrator', 'Иногда за обедом он вдруг начинал говорить о любви, о женщинах');
-      await g.say('wife', 'Тебе, Димитрий, совсем не идёт роль фата', 'window_up');
+      await g.say('narrator', 'Sometimes at dinner he would suddenly begin talking of love, of women');
+      await g.say('wife', 'The part of a lady-killer does not suit you at all, Dimitri', 'window_up');
       await window;
     },
-    // Поводок: глазами Анны — поздняя осень в С., забор, шпиц тянет к дороге на станцию; муж с пальто
+    // The leash: through Anna's eyes — late autumn in S., the fence, the spitz pulls toward the station road; the
+    // husband with a coat
     async g => {
       g.hero('anna');
       g.beds({ wind: 0.5 });
       await g.scene(SCENES.town, { beat: 'autumn_walk' });
       const walk = g.beat('autumn_walk');
-      await g.say('narrator', 'А в С. стояла поздняя осень. Каждый вечер Анна Сергеевна гуляла со шпицем вдоль забора');
+      await g.say('narrator', 'In S. it was late autumn. Every evening Anna Sergeyevna walked the Pomeranian along the fence');
       await walk;
       const r = await g.play(povodok, { pull: facts(g.state).life === 'life' ? 0.09 : 0.06 });
       // (the beat after the game is the result's: named as soon as it is known)
@@ -70,10 +73,10 @@ export default {
       const coat = g.told('gate_home:coat');
       const home = g.beat('gate_home');
       await coat;
-      await g.say('diderits', 'Анна, простудишься. Пойдём в дом');
+      await g.say('diderits', 'Anna, you’ll catch cold. Come indoors');
       await home;
     },
-    // Клуб: ночь, «осетрина-то с душком»; засмеяться и сесть в сани — или уйти пешком
+    // The club: night, “the sturgeon was a bit too strong”; laugh and get into the sledge — or walk away
     async g => {
       g.hero('gurov');
       g.beds({ snow: 0.3 });
@@ -81,18 +84,18 @@ export default {
       await g.scene(SCENES.moscow, { beat: 'club' });
       const club = g.beat('club');
       g.next('say');
-      await g.say('narrator', 'Однажды ночью он выходил из докторского клуба со своим партнёром, чиновником');
+      await g.say('narrator', 'One night he was coming out of the doctors’ club with his partner, an official');
       await out;
-      await g.say('gurov', 'Если б вы знали, с какой очаровательной женщиной я познакомился в Ялте!');
+      await g.say('gurov', 'If only you knew what a fascinating woman I made the acquaintance of in Yalta!');
       await club;
       const turns = g.told('say:turns');
       const sturgeon = g.beat('say');
       await turns;
-      await g.say('official', 'Дмитрий Дмитрич!');
-      await g.say('gurov', 'Что?');
-      await g.say('official', 'А давеча вы были правы: осетрина-то с душком!');
+      await g.say('official', 'Dmitri Dmitritch!');
+      await g.say('gurov', 'What?');
+      await g.say('official', 'You were right this evening: the sturgeon was a bit too strong!');
       await sturgeon;
-      const how = await g.choose('club', { sledge: [{ id: 'laugh', label: 'Засмеяться и сесть в сани' }], lamp2: [{ id: 'walk', label: 'Уйти пешком' }] });
+      const how = await g.choose('club', { sledge: [{ id: 'laugh', label: tr('Laugh and get into the sledge') }], lamp2: [{ id: 'walk', label: tr('Walk away') }] });
       if (how === 'laugh') {
         g.scale('heart', -2);
         g.next('laugh_sit');
@@ -103,23 +106,23 @@ export default {
         const off = g.told('say_walk:off');
         const walk = g.beat('say_walk');
         await off;
-        await g.say('gurov_inner', 'Какие дикие нравы, какие лица! Что за бестолковые ночи…', 'gurov');
+        await g.say('gurov_inner', 'What savage manners, what people! What senseless nights…', 'gurov');
         await walk;
       }
-      await g.say('narrator', 'Он не спал всю ночь');
+      await g.say('narrator', 'He did not sleep all night');
       g.sound.sleigh();
     },
-    // Отъезд: декабрь, до рассвета; жена в дверях
+    // The departure: December, before dawn; his wife in the doorway
     async g => {
       g.hero('gurov');
       g.beds({ snow: 0.3 });
       const turns = g.told('porch_go:turns');
       await g.scene(SCENES.moscow, { beat: 'porch_go' });
       const porch = g.beat('porch_go');
-      await g.say('narrator', 'В декабре, на праздниках, он собрался в дорогу');
+      await g.say('narrator', 'In December, in the Christmas holidays, he made ready for a journey');
       await turns;
-      await g.say('gurov', 'Еду в Петербург хлопотать за одного молодого человека');
-      await g.say('wife', 'Поезжай, Димитрий. К Новому году вернись', 'wife');
+      await g.say('gurov', 'I am going to Petersburg to do something in the interests of a young friend');
+      await g.say('wife', 'Go, Dimitri. Be back by the New Year', 'wife');
       await porch;
     },
   ],
