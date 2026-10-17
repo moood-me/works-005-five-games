@@ -62,7 +62,7 @@ export default {
       send('goad', 0);
       move('balk', 1, BALK_IN);
       mg.error('danger', { at: hook });
-      mg.plate.set({ phrase: tr('Kiouni has stopped in the middle of the path, ears spread wide. The goad will settle nothing here') });
+      mg.plate.set({ phrase: tr('Kiouni stands stock-still, ears spread wide. The goad will settle nothing here') });
       sugar = mg.mark({ at: 'kiouni#trunk', kind: 'ring' });
       sugarPress = mg.press({ on: sugar });
       if (balks === 1) b.minigame.tricks.teach(mg, [sugarPress], { id: 'press' });

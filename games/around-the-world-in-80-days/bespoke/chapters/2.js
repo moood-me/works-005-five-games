@@ -17,7 +17,7 @@ export default {
   route: [0.22, 0.55],
   titles: ['The Rangoon\'s deck', 'The cousin', 'The tavern', 'The Tankadere', 'The typhoon', 'The Long Noses', 'Two Wednesdays'],
   choices: [
-    { id: 'answer', weight: '~', title: tr('Fogg\'s answer'), options: [{ id: 'spare', label: tr('They were to spare') }, { id: 'plaid', label: tr('Give her the plaid') }, { id: 'notlost', label: tr('I have not lost them') }] },
+    { id: 'answer', weight: '~', title: tr('Fogg\'s answer'), options: [{ id: 'spare', label: tr('I had them to spare') }, { id: 'plaid', label: tr('Give her the plaid') }, { id: 'notlost', label: tr('I have not lost them') }] },
     { id: 'aouda', weight: '⚑', title: tr('Aouda'), options: [{ id: 'europe', label: tr('Come with us to Europe') }, { id: 'holland', label: tr('A passage to Holland') }] },
     { id: 'boat', weight: '~', title: tr('Fix on the boat'), options: [{ id: 'take', label: tr('Take him') }, { id: 'leave', label: tr('Cast off') }] },
     { id: 'pyramid', weight: '~', title: tr('The pyramid'), options: [{ id: 'drop', label: tr('Let go') }, { id: 'hold', label: tr('Hold to the end') }] },
@@ -35,9 +35,9 @@ export default {
       await (g.state.choices.sati === 'road' ? g.say('aouda', 'You took a risk for my sake') : g.say('aouda', 'You lost twelve hours because of me'));
       await night;
       const answer = await g.choose('answer', {
-        'fogg#head': [{ id: 'spare', label: tr('They were to spare') }, { id: 'plaid', label: tr('Give her the plaid') }, { id: 'notlost', label: tr('I have not lost them') }],
+        'fogg#head': [{ id: 'spare', label: tr('I had them to spare') }, { id: 'plaid', label: tr('Give her the plaid') }, { id: 'notlost', label: tr('I have not lost them') }],
       });
-      if (answer === 'spare') await g.say('fogg', 'They were to spare');
+      if (answer === 'spare') await g.say('fogg', 'I had them to spare');
       else if (answer === 'notlost') {
         await g.say('fogg', 'I have not lost them');
         g.relate('aouda', 1);
@@ -72,9 +72,9 @@ export default {
         await g.say('fogg', 'Come with us to Europe');
         await g.say('aouda', 'With you… Yes');
       } else {
-        await g.say('fogg', 'I will pay your passage to Holland. The mail steamer — safe, and to your kin');
+        await g.say('fogg', 'I will pay your passage to Holland. The mail steamer is safe, and it will take you to your kin');
         g.money(-500);
-        g.mark('holland', true, tr('Aouda will remember this'));
+        g.mark('holland', true, tr('Aouda won\'t forget'));
         await g.say('aouda', 'Thank you, Mr. Fogg');
       }
     },
@@ -162,7 +162,7 @@ export default {
       await g.scene(SCENES.sea, { beat: 'squall', with_aouda: withAouda ? 1 : 0, with_fix: g.state.choices.boat === 'take' ? 1 : 0 });
       const squall = g.beat('squall');
       await reef;
-      await g.say('bunsby', 'A typhoon, sir. Head to the sea — or she\'ll capsize');
+      await g.say('bunsby', 'A typhoon, sir. Head to sea — or she\'ll capsize');
       await squall;
       g.beds({ storm: 0.9 }, 2);
       await g.beat('typhoon', { wait: false });
@@ -211,7 +211,7 @@ export default {
         await bow;
         g.sound.applause();
         await finish;
-        g.hours(-1, tr('To the end of the act'));
+        g.hours(-1, tr('Till the act was over'));
         const face = g.told('reunion:face');
         const reunion = g.beat('reunion');
         await face;
@@ -243,7 +243,7 @@ export default {
         await beat;
         g.relate('fix', -1);
         g.mark('bruise', true);
-        await g.say('fix', 'I expected that. And now — as far as England');
+        await g.say('fix', 'I expected that. And now, on to England');
       } else {
         await g.beat('shake');
         g.relate('fix', 1);

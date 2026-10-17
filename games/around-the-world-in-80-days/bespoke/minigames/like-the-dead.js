@@ -29,7 +29,7 @@ export default {
   about: 24,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {
-    const PHRASE = tr('The crowd lies face down. The dead rajah comes down from the pyre with the widow in his arms');
+    const PHRASE = tr('The crowd lies face down. The dead rajah steps off the pyre, the widow in his arms');
     const mg = g.minigame({ phrase: PHRASE });
     const send = keys(g);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: nerves(0) });

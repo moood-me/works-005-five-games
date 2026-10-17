@@ -47,7 +47,7 @@ export default {
         await g.say('fogg', 'I love you');
         await proposal;
         const runner = f.pp === 'with' ? 'pp' : 'fogg';
-        await (runner === 'pp' ? g.say('fogg', 'Passepartout — to the Reverend Samuel Wilson. The marriage is for tomorrow, Monday') : g.say('fogg', 'I shall go to the Reverend Samuel Wilson myself'));
+        await (runner === 'pp' ? g.say('fogg', 'Passepartout, go to the Reverend Samuel Wilson. The marriage is for tomorrow, Monday') : g.say('fogg', 'I shall go to the Reverend Samuel Wilson myself'));
         g.set('runner', runner);
         const out = g.told('run_out:away');
         const run = g.beat('run_out');
@@ -140,7 +140,7 @@ export default {
       g.hero('both');
       g.beds({ fog: 0.3, clock: 0.4 }, 2);
       if (f.aouda === 'holland') {
-        await g.letter({ kind: 'letter', text: tr('Mr. Fogg,\nit is raining in The Hague, and I think of your notebook.\nMay I come?'), sign: tr('Aouda') });
+        await g.letter({ kind: 'letter', text: tr('Mr. Fogg,\nit is raining in The Hague, and I am thinking of your notebook.\nMay I come?'), sign: tr('Aouda') });
         await g.say('fogg', 'Come');
       }
       if (f.pp === 'omaha') {

@@ -27,7 +27,7 @@ export default {
   about: 20,
   skipped: { price: 2000, minutes: 0 }, // Verne's price, no minutes lost
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The old Parsee looks at the roll of banknotes and says nothing. What an elephant costs, he alone knows') });
+    const mg = g.minigame({ phrase: tr('The old Parsee eyes the banknotes in silence. Only he knows what an elephant costs') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });

@@ -104,7 +104,7 @@ export default {
       await g.say('pp', 'London time. I shan\'t change it, monsieur');
       await watch;
       g.gauge('hours');
-      await g.say('fogg', 'London to Suez: seven days. Exactly to the timetable');
+      await g.say('fogg', 'London to Suez: seven days. Exactly on time');
     },
   ],
 };

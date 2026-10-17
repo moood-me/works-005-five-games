@@ -30,7 +30,7 @@ export default {
   about: 16,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('Under the cars — sleepers and snow. The chains meet when the cars swing together') });
+    const mg = g.minigame({ phrase: tr('Under the cars, sleepers and snow. The chains meet when the cars swing together') });
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });

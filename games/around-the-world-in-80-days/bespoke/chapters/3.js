@@ -15,7 +15,7 @@ export default {
   titles: ['The buffalo', 'The bridge', 'The Sioux', 'Fort Kearney', 'The sail', 'The snow'],
   choices: [
     { id: 'bridge', weight: '~', title: tr('The bridge at Medicine Bow'), options: [{ id: 'run', label: tr('At full speed') }, { id: 'walk', label: tr('As Passepartout proposes') }] },
-    { id: 'fort', weight: '⚑', title: tr('Fort Kearney'), options: [{ id: 'go', label: tr('Go himself') }, { id: 'pay', label: tr('Pay the soldiers') }] },
+    { id: 'fort', weight: '⚑', title: tr('Fort Kearney'), options: [{ id: 'go', label: tr('Go in person') }, { id: 'pay', label: tr('Pay the soldiers') }] },
   ],
   steps: [
     // the buffalo cross the line: three hours
@@ -131,7 +131,7 @@ export default {
         g.money(-5000);
         g.sound.notes();
         g.hours(-1, tr('The soldiers went without him'));
-        g.mark('paid', true, tr('Passepartout will remember this'));
+        g.mark('paid', true, tr('Passepartout won\'t forget'));
         g.set('fogg_on_train', 1);
         const gone = g.told('train_leaves:gone');
         const leaves = g.beat('train_leaves');

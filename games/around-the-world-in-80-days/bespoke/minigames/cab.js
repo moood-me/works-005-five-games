@@ -62,8 +62,8 @@ export default {
 };
 
 // the plate's phrase at each minute from 20:36 to 20:45
-const MINUTES = [tr('Twenty-four minutes to nine. Fog, the lamps of carriages'), tr('Twenty-three minutes to nine. Fog, the lamps of carriages'),
-  tr('Twenty-two minutes to nine. Fog, the lamps of carriages'), tr('Twenty-one minutes to nine. Fog, the lamps of carriages'),
-  tr('Twenty minutes to nine. Fog, the lamps of carriages'), tr('Nineteen minutes to nine. Fog, the lamps of carriages'),
-  tr('Eighteen minutes to nine. Fog, the lamps of carriages'), tr('Seventeen minutes to nine. Fog, the lamps of carriages'),
-  tr('Sixteen minutes to nine. Fog, the lamps of carriages'), tr('A quarter to nine')];
+const MINUTES = [tr('Twenty-four minutes to nine. Fog, carriage lamps'), tr('Twenty-three minutes to nine. Fog, carriage lamps'),
+  tr('Twenty-two minutes to nine. Fog, carriage lamps'), tr('Twenty-one minutes to nine. Fog, carriage lamps'),
+  tr('Twenty minutes to nine. Fog, carriage lamps'), tr('Nineteen minutes to nine. Fog, carriage lamps'),
+  tr('Eighteen minutes to nine. Fog, carriage lamps'), tr('Seventeen minutes to nine. Fog, carriage lamps'),
+  tr('Sixteen minutes to nine. Fog, carriage lamps'), tr('A quarter to nine')];

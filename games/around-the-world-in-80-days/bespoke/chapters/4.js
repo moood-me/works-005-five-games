@@ -122,7 +122,7 @@ export default {
       await g.say('fix', 'Sir… the robber was arrested three days ago. Forgive me');
       if (choice === 'hit') {
         g.sound.slap();
-        g.mark('hit', true, tr('Fix will remember this'));
+        g.mark('hit', true, tr('Fix won\'t forget'));
       } else {
         g.relate('fix', 1);
       }
