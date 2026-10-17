@@ -40,7 +40,7 @@ const LOOKS = {
   door: { gurov: 'anna', anna: 'door#door' },
   table: { gurov: 'table#glasses', anna: 'table#glasses' },
 };
-const looks = think => LOOKS[think] || LOOKS.none;
+const looks = to => LOOKS[to] || LOOKS.none;
 
 function film(scene) {
   const on = k => Number(scene.get(k)) > 0.5;
