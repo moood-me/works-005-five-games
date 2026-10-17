@@ -1,6 +1,6 @@
 // closeups — the hands and things of Giancaldo close up (closeups.md): seven inserts — `splice` (Alfredo cuts the
 // kisses out at the bench, the boy's hand at the edge), `slate` (the big hand with the chalk, the small one on it,
-// «ALFREDO»), `thread` (the boy's fingers lead the film from tooth to tooth), `viewfinder` (the square at dusk through
+// «АЛЬФРЕДО»), `thread` (the boy's fingers lead the film from tooth to tooth), `viewfinder` (the square at dusk through
 // an 8 mm camera), `calendar` (the old 1958 calendar behind the booth's door, its months folded over the top), `strip`
 // (the spliced kisses held against the booth's window), `wallet` (an old frame of film against a station lamp).
 // One hand for all of them (a boy's, Alfredo's, a youth's, a grown man's: size, skin and sleeve).
@@ -47,7 +47,7 @@ function words(g, text, x, y, size, colour, { style = 'bold', align = 'center' }
   g.restore();
 }
 
-// ── the hand ── one for every shot (the shape of Scarlet Sails'): its own units its length, the wrist at (0, 0), the
+// ── the hand ── one for every shot (the shape of «Алые паруса»'s): its own units its length, the wrist at (0, 0), the
 // fingers toward +x, the thumb on −y. at, angle, L, side (−1 mirrored), view 'back' | 'palm', curl [4] 0…1, spread,
 // thumb {angle, curl}, skin, arm (forearm, in hands), sleeve {colour, from, cuff}, fine, flat (a silhouette colour),
 // parts (which of arm, palm, thumb, f0…f3)
@@ -172,7 +172,7 @@ function frameOf(e) { const ax = e.aspect / 2, ay = 0.5; return { ax, ay, to: (x
 function painter(g, e) {
   const { ax, ay, to } = frameOf(e);
   return {
-    e, cinema: e.kit.cinema, rnd: e.rnd,
+    e, kino: e.kit.kino, rnd: e.rnd,
     // a layer in the shot's units: its pivot, its box (none: the frame's), the engine's own motion of it
     layer(name, pivot, box, fn, opts) {
       e.layer(name, { ...opts, pivot: to(...pivot), ...(box && { box: [...to(box[0], box[1]), ...to(box[2], box[3])] }) }, g2 => { g2.translate(ax, ay); fn(g2); });
@@ -244,7 +244,7 @@ function scissors(g, open) {
   g.restore();
 }
 function splice(g, e) {
-  const C = painter(g, e), P = SPLICE, S = e.state, k = C.cinema;
+  const C = painter(g, e), P = SPLICE, S = e.state, k = C.kino;
   C.begin();
   bench(g, C, P.lamp);
   // the strip's shadow, the strip with its ordinary frames (under the kisses: what is left once they are out)
@@ -351,18 +351,18 @@ function spliceMove(e) {
   L.set('lamp', { alpha: 0.9 + 0.1 * noise(t * 1.3, 9) });
 }
 
-// ── slate ── the slate on the bench under the lamp, «ALFREDO» dotted on it (in the world's Italian letters, like its signs); the big hand with the chalk, the small
+// ── slate ── the slate on the bench under the lamp, «АЛЬФРЕДО» dotted on it; the big hand with the chalk, the small
 // hand over it, going along the letters as chalk_x goes
 const SLATE = {
-  letters: ['A', 'L', 'F', 'R', 'E', 'D', 'O'], x0: -0.5, x1: 0.5, y: 0.0, size: 0.17,
+  letters: ['А', 'Л', 'Ь', 'Ф', 'Р', 'Е', 'Д', 'О'], x0: -0.5, x1: 0.5, y: 0.0, size: 0.17,
   start: [-0.56, 0.0], end: [0.56, 0.0],
   light: { dir: [0.4, -0.9], colour: '#ffd9a0' },
 };
 SLATE.big = handOf('alfredo', { angle: -2.25, curl: [0.42, 0.62, 0.72, 0.78], spread: 0.12, thumb: { angle: -0.25, curl: 0.55 }, fine: true });
 SLATE.small = handOf('boy', { angle: -2.3, curl: [0.2, 0.25, 0.3, 0.35], spread: 0.3, thumb: { angle: -0.6, curl: 0.25 }, fine: true });
-const letterX = i => SLATE.x0 + (SLATE.x1 - SLATE.x0) * (i + 0.5) / SLATE.letters.length;
+const letterX = i => SLATE.x0 + (SLATE.x1 - SLATE.x0) * (i + 0.5) / 8;
 function slate(g, e) {
-  const C = painter(g, e), P = SLATE, S = e.state, crooked = String(S.crooked ?? '');
+  const C = painter(g, e), P = SLATE, S = e.state, crooked = String(S.crooked ?? '00000000');
   C.begin();
   bench(g, C, [0.1, -0.75], '#5e4632');
   // the slate in its wooden frame
@@ -405,14 +405,14 @@ function slate(g, e) {
   });
   C.layer('lamp', [0.1, -0.75], null, l => pool(l, 0.1, -0.75, 0.6, '#fff0c8', 0.35), { blend: 'add', flicker: 0.04 });
   C.at(...P.start, 'start'); C.at(...P.end, 'end');
-  P.letters.forEach((ch, i) => C.at(letterX(i), P.y, `l${i}`));
+  for (let i = 0; i < 8; i++) C.at(letterX(i), P.y, `l${i}`);
   C.at(0, P.y);
   C.end();
 }
 function slateMove(e) {
   if (!ready(e, 'hands')) return;
-  const L = mover(e), P = SLATE, S = e.state, t = e.t, n = P.letters.length, u = Math.max(c01(S.chalk_x), c01((Number(S.letters) || 0) / n));
-  for (let i = 0; i < n; i++) L.set(`l${i}`, { alpha: c01(u * n - i) });
+  const L = mover(e), P = SLATE, S = e.state, t = e.t, u = Math.max(c01(S.chalk_x), c01((Number(S.letters) || 0) / 8));
+  for (let i = 0; i < 8; i++) L.set(`l${i}`, { alpha: c01(u * 8 - i) });
   const w = c01(S.wobble), x = (P.end[0] - P.start[0]) * u;
   L.set('hands', { x, y: 0.004 * noise(t * 0.6, 1) + w * 0.02 * Math.sin(t * 47), rotate: w * 0.06 * Math.sin(t * 31) });
 }
@@ -671,7 +671,7 @@ const STRIP = (() => {
   };
 })();
 function strip(g, e) {
-  const C = painter(g, e), P = STRIP, k = C.cinema, S = e.state, [wx0, wy0, wx1, wy1] = P.win;
+  const C = painter(g, e), P = STRIP, k = C.kino, S = e.state, [wx0, wy0, wx1, wy1] = P.win;
   C.begin();
   // the booth's wall round the window, dark; the window: only the cool evening sky, a last warmth low
   g.fillStyle = '#1a1716'; g.fillRect(-W, -0.6, 2 * W, 1.2);
@@ -741,7 +741,7 @@ const WALLET = {
   light: { dir: [0.3, -0.95], colour: '#f2e6c8' },
 };
 function wallet(g, e) {
-  const C = painter(g, e), P = WALLET, k = C.cinema;
+  const C = painter(g, e), P = WALLET, k = C.kino;
   C.begin();
   // the evening over the platform: lilac steel, the lamp's pale glow
   const sky = g.createLinearGradient(0, -0.6, 0, 0.6); sky.addColorStop(0, '#20243a'); sky.addColorStop(0.6, '#4a4660'); sky.addColorStop(1, '#2a2832');

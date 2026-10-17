@@ -1,4 +1,4 @@
-// The square — the scene's mechanics: its film (the game sets `beat`: scene.kit.beats, lib.FILM), and what follows from
+// Площадь — the scene's mechanics: its film (the game sets `beat`: scene.kit.beats, lib.FILM), and what follows from
 // the keys the game and the beats move: the beam's turn in plan from `beam_aim`, the wall's light from the film on it,
 // Toto's chalk mark from the impulse `mark_chalk`, the weather of the week from `night_kind`, the procession walking
 // with the hearse as `cart` moves.

@@ -1,108 +1,97 @@
-# The square (`main`)
+# Площадь (`main`)
 
-The square of Giancaldo: the prologue, chapters I, II, III, V, the epilogue (scenes.md "The square"). Engine 3, camera
-`roam`, the shots — the keys `camera_*` (the constants `CAM` in `lib.js`). Modules: `cast`, `cinema`, `closeups`, `beats`,
-`sky`.
+Площадь Джанкальдо: пролог, главы I, II, III, V, эпилог (scenes.md «Площадь»). Движок 3, камера `roam`, кадры — ключи
+`camera_*` (константы `CAM` в `lib.js`). Модули: `cast`, `kino`, `closeups`, `beats`, `nebo`.
 
-**The scene is built by `tools/main.js`** (`node tools/main.js`): `scene.json` and all of `elements/` come out of it —
-edit it (and the hand-written `lib.js`, `script.js`, `showcase.js`, `notes.md`), not `scene.json` or `elements/`.
+**Сцену строит `tools/main.js`** (`node tools/main.js`): `scene.json` и всё в `elements/` выходят из него — правят его
+(и написанные руками `lib.js`, `script.js`, `showcase.js`, `notes.md`), а не `scene.json` и не `elements/`.
 
-The mood: the warm night of the past — honey stone, blue shadows, the amber beam, the booth's port, one or two warm
-windows; the cool lilac 1988 — grey lime, the boarded-up Paradiso, warm only the mother's window; the grey morning of
-the funeral and the demolition.
+Настроение: тёплая ночь прошлого — медовый камень, синие тени, янтарный луч, окошко будки, одно-два тёплых окна;
+прохладный сиреневый 1988 год — серая известь, заколоченный «Парадизо», тёплое только окно матери; серое утро
+похорон и сноса.
 
-## The place (metres: x — across, east +; z — from the square's south edge, north +; the start (0, 0), looking north)
+## Место (метры: x — поперёк, восток +; z — от южного края площади, север +; старт (0, 0), взгляд на север)
 
-All in `lib.js` (`G`, `FRONTS`, `PAR`, `BANK`). The square x −12…12, z 0…26; the street to the bus to the south
-(x −5…5, to z −34; at its end — the stop); the street to the sea in the north-east corner (x 9…12, to the north), at
-its end a card of the sea with the moon's path (z 80, its top at the eye's level). West: Alfredo's house
-(`alfredo_door`, z 0…6, the door z 3, the chair `alfredo_chair` with `paradiso_state` `new`), the Paradiso
-(`paradiso`, z 6…20: the doors z 12, the booth's port z 16 at 6 m, the posters, the canopy `canopy` with its sign
-`canopy_front`), a house z 20…26. North: the house with the arch and the mother's window (`f_n1`; the window cut through,
-behind it `mother_window` — a room with a lamp, Maria standing in it on an unseen floor at 4.05 m), the white blind wall
-(`wall`, x −5…5.5; the film — `screen`, x −1…5, 2.5…6.5 m), the chapel (`church`, x 5.5…9.1) and the steps `step1…4`
-+ `steps` (x 3…8, z 23…26, 0.25 m each). East: the bank (`bank`, z 8…22, the door z 13), the balcony over the door
-(`balcony` — the shutters as layers, `balcony_room` — the warm room behind them, `balcony_rail`, `balcony_slab`), the
-chalk wall (`chalk_wall`, by the chair), Totò's chair (`chair`, x 11.3, z 15.6, the key `chair_on`), the garland
-(`garland`). The fountain (`fountain`, `fountain_col` — forms, `fountain_water`, `fountain_spout`) at (0, 13), its rim
-1.4 m. The street lamps `lamppost` (copies) and their light — points in `lights`.
+Всё в `lib.js` (`G`, `FRONTS`, `PAR`, `BANK`). Площадь x −12…12, z 0…26; улица к автобусу на юг (x −5…5, до z −34;
+в конце — остановка); улица к морю в северо-восточном углу (x 9…12, на север), в её конце карточка моря с лунной
+дорожкой (z 80, верх на уровне глаз). Запад: дом Альфредо (`alfredo_door`, z 0…6, дверь z 3, стул `alfredo_chair`
+при `paradiso_state` `new`), «Парадизо» (`paradiso`, z 6…20: двери z 12, окошко будки z 16 на 6 м, афиши, козырёк
+`canopy` с вывеской `canopy_front`), дом z 20…26. Север: дом с аркой и окном матери (`f_n1`; окно прорезано, за ним
+`mother_window` — комната с лампой, Мария стоит в ней на невидимом полу на 4.05 м), белая глухая стена (`wall`,
+x −5…5.5; фильм — `screen`, x −1…5, 2.5…6.5 м), часовня (`church`, x 5.5…9.1) и ступени `step1…4` + `steps` (x 3…8,
+z 23…26, по 0.25 м). Восток: банк (`bank`, z 8…22, дверь z 13), балкон над дверью (`balcony` — ставни слоями,
+`balcony_room` — тёплая комната за ними, `balcony_rail`, `balcony_slab`), стена с мелом (`chalk_wall`, у стула), стул
+Тото (`chair`, x 11.3, z 15.6, ключ `chair_on`), гирлянда (`garland`). Фонтан (`fountain`, `fountain_col` — формы,
+`fountain_water`, `fountain_spout`) в (0, 13), край 1.4 м. Фонари `lamppost` (копии) и их свет — точки в `lights`.
 
-The windows that can be lit — each front has a twin `<id>_win` (`glows`): each window's light is an `e.light`, lit
-0.3 + 0.6·`warm` at night (0.65 of that at dusk), in 1988 — not; in `rewind` they light up one by one with `past`.
+Окна, которые могут гореть, — у каждого фасада близнец `<id>_win` (`glows`): свет каждого окна — `e.light`, горит
+0.3 + 0.6·`warm` ночью (0.65 того в сумерки), в 1988-м — нет; при `rewind` загораются по одному с `past`.
 
-## The beam
+## Луч
 
-`beam_anchor` (an unseen anchor in the booth's port) is turned in plan by `beam_turn` and tilted by `beam_pitch` —
-`script.js` sets them from `beam_aim` (the function `beamOf`): the beam's end goes over the stone and the heads from
-the spot under the port (0) to the white wall (1). The beam itself (`beam`, `cinema.beam` + the world's shader
-`tools/cinema-beam.wgsl`) is a glowing wedge 18 m long on the anchor; what is longer than the way is hidden by the stone or
-the wall. The spot at the end — the scene's light `beam_tip`, going by `tip_x/tip_z/tip_y`. The engine has no cone
-spotlight; the beam and the headlights are a glowing wedge with a light at the tip. The layers of the frame on the wall
-(`screen`): `blur` / `sharp` by `beam_focus`, `white`, `burn` by `wall_burn`; the wall's light — `wall_light` by
-`wall_lit` (the scene sets it when there is a film on the wall and the beam is on). In the prologue (`beam_sky` 1) the
-beam goes up over the square.
+`beam_anchor` (невидимый якорь в окошке будки) повёрнут в плане `beam_turn` и наклонён `beam_pitch` — их ставит
+`script.js` из `beam_aim` (функция `beamOf`): конец луча идёт по камню и головам от пятна под окошком (0) к белой
+стене (1). Сам луч (`beam`, `kino.beam` + шейдер мира `tools/kino-beam.wgsl`) — светящийся клин 18 м на якоре; что
+длиннее пути, прячут камень или стена. Пятно на конце — свет сцены `beam_tip`, едущий по `tip_x/tip_z/tip_y`.
+Прожектора-конуса в движке нет; луч и фары — светящийся клин со светом на кончике. Слои кадра на стене (`screen`):
+`blur` / `sharp` по `beam_focus`, `white`, `burn` по `wall_burn`; свет стены — `wall_light` по `wall_lit` (ставит сцена,
+когда на стене фильм и горит луч). В прологе (`beam_sky` 1) луч уходит над площадью вверх.
 
-## The time and the light
+## Время и свет
 
-`era` / `hour` — the look of the light: the keys `dusk_k`, `now_k`, `morning_k` (the beat's `from` sets them through
-`LIGHT`), `rain`, `wind_k`, `cold_k` (from `night_kind`, the script), `dust` (the demolition's dust — a look of the light
-too), `flash` (a flash: the fireworks, the end of the way back into the past). The sky — the world's module `sky`
-(the moon over the sea at 15° from north). `past` — the way back into the past, by layers only (the boards fall from
-the doors, the sign lights up, the windows one by one, the painted crowd comes through): the beats of the present hold
-`past` 0, those of the past — 1; at the end of `rewind` a flash — a cut into the night of the past with the people
-`c1…c9`. `collapse` — the Paradiso's front (`charged`) is painted as four pieces in layers, they sink; the booth's
-port falls last; behind it — the back wall of the house next door (`par_back`).
+`era` / `hour` — вид света: ключи `dusk_k`, `now_k`, `morning_k` (их ставит `from` куска через `LIGHT`), `rain`,
+`wind_k`, `cold_k` (из `night_kind`, скрипт), `dust` (пыль сноса — тоже вид света), `flash` (вспышка: фейерверк,
+конец перехода в прошлое). Небо — модуль мира `nebo` (луна над морем на 15° от севера). `past` — переход в прошлое,
+только слоями (доски падают с дверей, вывеска загорается, окна по одному, нарисованная толпа проступает): куски
+настоящего держат `past` 0, прошлого — 1; в конце `rewind` вспышка — склейка в ночь прошлого с людьми `c1…c9`.
+`collapse` — фасад «Парадизо» (`charged`) рисуется четырьмя кусками-слоями, они оседают; окошко будки падает
+последним; за ним — задняя стена соседнего дома (`par_back`).
 
-## The people
+## Люди
 
-`toto` (the looks `toto_boy`, `toto_teen`, `salvatore` — `toto_wear` as the cast's object), `alfredo` (`alfredo`,
+`toto` (облики `toto_boy`, `toto_teen`, `salvatore` — `toto_wear` объектом каста), `alfredo` (`alfredo`,
 `alfredo_blind`), `maria` (`maria`, `maria_old`), `elena`, `daughter`, `madman` (`madman`, `madman_old`), `anna`,
-`bearer1`, `bearer2`, the crowd `c1…c10`. The painted crowds — `crowd_far` (standing) and `crowd_sit` (on the stones):
-one card for three rows, its place — `crowd_x/z/f`, seen whole (`crowd_k` 0 or 1; only `rewind` brings it through).
-The procession: `cart` moves the anchor `hearse_anchor` (on it `hearse` — the back with the handles
-`#handle_l`/`#handle_r`, `#rail`, the sides, the top with the coffin); with `follow` 1 the script keeps the bearers,
-Anna and the old people in their places behind the cart (they walk at its pace — `walk_slow`, 0.6 m/s), with `sal_rail`
-1 — Salvatore too, at its side.
+`bearer1`, `bearer2`, толпа `c1…c10`. Нарисованные толпы — `crowd_far` (стоя) и `crowd_sit` (на камнях): одна
+карточка на три ряда, её место — `crowd_x/z/f`, видна целиком (`crowd_k` 0 или 1; только `rewind` проявляет её).
+Процессия: `cart` двигает якорь `hearse_anchor` (на нём `hearse` — задок с ручками `#handle_l`/`#handle_r`, `#rail`,
+бока, верх с гробом); при `follow` 1 скрипт держит носильщиков, Анну и стариков на их местах за повозкой (они
+идут её ходом — `walk_slow`, 0.6 м/с), при `sal_rail` 1 — и Сальваторе у её края.
 
-Beat by beat — `FILM` in `lib.js`: each `from` sets everything but the party's keys (`warm`, `place`, `with_mother` —
-the game sets them); `demolition` reads `place` and `with_mother` in its `run`.
+Кусок за куском — `FILM` в `lib.js`: каждый `from` ставит всё, кроме ключей партии (`warm`, `place`, `with_mother`
+— их ставит игра); `demolition` читает `place` и `with_mother` в `run`.
 
-## The faces
+## Лица
 
-The key minutes end in a medium shot or a close-up of a face at 3/4 (`faceCam`, `aim` in `lib.js`; a cut — the shot
-made ready ahead, `cutTo`; or the camera moves, `glide`): the mother and the boy at the doors (`after_show`), Alfredo's
-palm with the coins and the three at the doors for the choice (`alfredo_down`), Alfredo waves (`coins_taken`), the
-mother's face before the slap (`slap`), the mother with the paper and the boy at the poster (`paper`), Alfredo on the
-fountain's rim with his face to us (`outside`), Alfredo looks after him (`go_alone`), Elena and Totò at the fountain
-(`hello`), "Why?" — "I don't know" (`story_door`), her face over his shoulder (`midnight`, `midnight_close`), the girl's
-face by the street to the sea (`girl`, then back to `GIRL` for the choice), Salvatore at the boarded door (`let`),
-Salvatore with the tin (`widow`), Anna's face over his shoulder (`widow_late`). A choice is always in a wide or a
-medium shot. The light on the faces: `porch_fill`, the lamp on the Paradiso's front (`par_lamp`), the square's lamps.
+Ключевые минуты кончаются средним или крупным планом лица в 3/4 (`faceCam`, `aim` в `lib.js`; склейка — снимок
+готовится заранее, `cutTo`; или камера едет, `glide`): мать и мальчик у дверей (`after_show`), ладонь Альфредо с
+монетами и трое у дверей под выбор (`alfredo_down`), Альфредо машет (`coins_taken`), лицо матери перед пощёчиной
+(`slap`), мать с бумагой и мальчик у афиши (`paper`), Альфредо на краю фонтана с лицом к нам (`outside`), Альфредо
+смотрит вслед (`go_alone`), Елена и Тото у фонтана (`hello`), «Почему?» — «Не знаю» (`story_door`), её лицо над
+его плечом (`midnight`, `midnight_close`), лицо девушки у улицы к морю (`girl`, потом обратно в `GIRL` под выбор),
+Сальваторе у забитой двери (`let`), Сальваторе с жестянкой (`widow`), лицо Анны через его плечо (`widow_late`). Выбор
+всегда на общем или среднем плане. Свет на лица: `porch_fill`, фонарь на фасаде «Парадизо» (`par_lamp`), фонари площади.
 
-## Who comes into a beat that follows
+## Кто входит в кусок, который идёт следом
 
-A beat with `after` does not set its `from`: the people stand where the beat before left them. Whoever was not in the
-beat before, its `run` puts in place itself (`bring` in `lib.js`: all their keys, then `_here`) — else they appear where
-they stood by default (0, −40), and their steps to their place take a minute. So it was with Alfredo in `alfredo_down`
-after `after_show` (the moment `alfredo_down:coins` came after ~60 s) and with Elena in `midnight` after `eve`.
+Кусок с `after` не ставит свой `from`: люди стоят там, где их оставил прошлый кусок. Кого не было в прошлом куске,
+того `run` ставит на место сам (`bring` в `lib.js`: все его ключи, потом `_here`) — иначе он появляется там, где
+стоял по умолчанию (0, −40), и его шаги к месту идут минуту. Так было с Альфредо в `alfredo_down` после
+`after_show` (момент `alfredo_down:coins` приходил через ~60 с) и с Еленой в `midnight` после `eve`.
 
-## What is not there and what is weak
+## Чего нет и что слабо
 
-- Broad bodies (Alfredo's jacket a "box") — the cast's, not the scene's.
-- `pour`, `give_coins`, `phone_ear`, `cane_sit` — the cast's weak motions: the hands propped up by `reach` (the coins
-  forward, the receiver at the head).
-- The fireworks — particle sparks over the southern houses and the light `flash`; in the shot `BALCONY` they are seen
-  over the roofs.
-- The points to press stand by scenes.md's shots; the shot `FOUNTAIN` is moved back (−2.2, 9.3), so that the
-  fountain's rim is at 2.9 m, as it says (from (−1.5, 10.5) the rim was 1.6 m away). `EVE` — (−1, −8), yaw 3.6 (from
-  (0, −10) the booth's port hides a house of the street; so the port and the balcony are both in the middle 4:3).
-  `WIDE` — yaw −8 (the booth's port further from the 4:3's edge). `RUIN` — (6, 8), yaw −85 (the fountain not in front
-  of the front). `BALCONY` — looking up 12°, so that the balcony is in the shot. `stay_door` ends when the procession
-  leaves the middle of the shot (`cart` 0.57); `widow_late` begins with a cut — the square already empty. `FUNERAL` —
-  (−5, 18), yaw −150: the procession comes from the south toward the lens along the west side, the Paradiso on the
-  right; in `walk_behind` / `stay_door` the camera turns after it.
+- Широкие тела (пиджак Альфредо — «коробка») — каст, не сцена.
+- `pour`, `give_coins`, `phone_ear`, `cane_sit` — слабые движения каста: руки поддержаны `reach` (монеты вперёд,
+  трубка у головы).
+- Фейерверк — искры частиц над южными домами и свет `flash`; в кадре `BALCONY` их видно над крышами.
+- Нажимаемые точки стоят по кадрам scenes.md; кадр `FOUNTAIN` отодвинут (−2.2, 9.3), чтобы край фонтана был в 2.9 м,
+  как сказано (из (−1.5, 10.5) до края было 1.6 м). `EVE` — (−1, −8), яв 3.6 (из (0, −10) окошко будки закрывает дом
+  улицы; так окошко и балкон оба в средних 4:3). `WIDE` — яв −8 (окошко будки дальше от края 4:3). `RUIN` — (6, 8), яв −85 (фонтан не перед фасадом). `BALCONY` — взгляд вверх 12°, чтобы балкон был в кадре.
+  `stay_door` кончается, когда процессия уходит из середины кадра (`cart` 0.57); `widow_late` начинается склейкой —
+  площадь уже пуста. `FUNERAL` — (−5, 18), яв −150: процессия идёт с юга к объективу вдоль западной стороны, «Парадизо»
+  справа; в `walk_behind` / `stay_door` камера поворачивается за ней.
 
-## Contract for the check
+## Контракт для проверки
 
 ```json
 {"beats": {

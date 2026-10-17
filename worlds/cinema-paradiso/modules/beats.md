@@ -1,34 +1,32 @@
-# beats — a scene's film in beats: for the game and for the showcase
+# beats — фильм сцены кусками: для игры и для показа
 
-For scenes with `"engine": 3` (in the v1 world on the old engine — the module `film`, lines by seconds; the key `beat` and `beat:<name>` are the same). A beat is a sequence of the
-director's (`s`): people walk as long as they walk, keys move, the camera films; time — only where
-there really is some (a pause). The beats are written once (usually in the scene's `lib.js`) and played two ways:
+Для сцен с `"engine": 3` (в мире v1 на старом движке — модуль `film`, строки по секундам; ключ `beat` и `beat:<имя>` — те же). Кусок — последовательность
+режиссёра (`s`): люди идут столько, сколько идут, ключи движутся, камера снимает; время — только где
+оно есть на самом деле (пауза). Куски описаны один раз (обычно в `lib.js` сцены) и играются двумя путями:
 
 ```js
-// the scene's lib.js
+// lib.js сцены
 const FILM = {
   arrive: { from: () => ({ ...DUSK, fade: 1 }), run: async s => { await s.move('fade', 0, { over: 3 }); … } },
   look: { after: 'arrive', from: () => ({ ...DUSK }), run: async s => { await s.move('camera_z', 0.8, { over: 3 }); } },
   walk_out: { from: () => ({ ...DAY }), run: async s => { await s.person('narrator').walk([[0.3, 70]]); … } },
 };
-// script.js — for the game
+// script.js — для игры
 scene.kit.beats.play(scene, scene.lib.FILM);
-// showcase.js — the showcase, outside the games
+// showcase.js — показ вне игр
 return scene.kit.beats.showcase(scene, scene.lib.FILM, ['arrive', 'look', 'walk_out']);
 ```
 
-- **The key `beat`.** The game sets a beat's name — it plays from its beginning (the beat going on stops). Once the beat
-  has ended, the scene says `scene.tell('beat:<name>')`; of a name it does not know — at once `beat-unknown:<name>`. The
-  same beat once more — `null` first. A scene opened (or restored) with a name in `beat` plays that beat from its
-  beginning.
-- **`from`** — a function giving the values the beat begins from: all it does not set itself (the light, the people —
-  where they stand and whether they are seen, the camera). A cut (`s.cut`): set at once, shown whole. Not set if the beat
-  comes after one of its `after` (that one still going or the last to end): then it goes on from what there is.
-- **The game's cut is made ready ahead.** Once a beat has begun, the module makes ready (`scene.shot`) the beginning of
-  the beat most likely to come next: the one the game named in the key `beat_next` (the module's own key; a game that
-  knows its way sets it), else the next one in the film's table — if it begins with a cut. The cut to it comes at once and
-  whole; to another beat or with other values — an ordinary one.
-- **The showcase** (`showcase`) — the beats in order; the cut to the next is made ready ahead (`scene.shot`) as soon as
-  the one before has begun, and is shown whole at its moment. A jump along the showcase's scale lands on a beat's
-  beginning.
-- A beat ends in a living pose: after it the values hold, the people breathe.
+- **Ключ `beat`.** Игра ставит имя куска — он играется с начала (идущий кусок останавливается). Когда кусок кончился,
+  сцена говорит `scene.tell('beat:<имя>')`; про неизвестное имя — сразу `beat-unknown:<имя>`. Тот же кусок ещё раз — сначала
+  `null`. Сцена, открытая (или восстановленная) с именем в `beat`, играет этот кусок с начала.
+- **`from`** — функция, отдающая значения, с которых кусок начинается: всё, что он сам не ставит (свет, люди — где стоят и
+  видны ли, камера). Склейка (`s.cut`): ставятся сразу, показ целиком. Не ставится, если кусок идёт после одного из своих
+  `after` (тот ещё идёт или кончился последним): тогда он продолжает с того, что есть.
+- **Склейка игры готовится заранее.** Когда кусок начался, модуль готовит (`scene.shot`) начало куска, который вероятнее
+  всего будет следующим: того, что игра назвала в ключе `beat_next` (ключ самого модуля; игра, знающая свой путь, ставит
+  его), иначе следующего в таблице фильма — если он начинается склейкой. Склейка к нему приходит сразу и целой; к
+  другому куску или с другими значениями — обычная.
+- **Показ** (`showcase`) — куски по порядку; склейка к следующему готовится заранее (`scene.shot`), как только начался
+  предыдущий, и показывается целиком в свой миг. Прыжок по шкале показа попадает на начало куска.
+- Кусок кончается живой позой: после него значения держатся, люди дышат.
