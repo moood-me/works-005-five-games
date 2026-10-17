@@ -1412,7 +1412,7 @@
     },
     {
       "id": "smoke1",
-      "name": "Smoke from the funnel",
+      "name": "Smoke from a chimney",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s5",
@@ -1431,7 +1431,7 @@
     },
     {
       "id": "smoke2",
-      "name": "Smoke from the funnel",
+      "name": "Smoke from a chimney",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s7",
@@ -1450,7 +1450,7 @@
     },
     {
       "id": "smoke3",
-      "name": "Smoke from the funnel",
+      "name": "Smoke from a chimney",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s9",
@@ -1469,7 +1469,7 @@
     },
     {
       "id": "smoke4",
-      "name": "Smoke from the funnel",
+      "name": "Smoke from a chimney",
       "particles": {
         "kind": "smoke",
         "at": "chimneys#s12",
@@ -1488,7 +1488,7 @@
     },
     {
       "id": "pavement_near",
-      "name": "Pavement at our feet",
+      "name": "Pavement in the foreground",
       "plane": true,
       "across": 5.0,
       "distance": 0.8,
@@ -1499,7 +1499,7 @@
     },
     {
       "id": "near_lamps",
-      "name": "Lamps at our feet",
+      "name": "Lamps in the foreground",
       "across": 0,
       "distance": 2.35,
       "box": [
