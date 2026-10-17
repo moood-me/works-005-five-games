@@ -1,0 +1,1362 @@
+// “The Sarafanovs' Home”: the kitchen and the room beyond its doorway — the plan (scenes.md “The Sarafanovs' Home”, metres: x
+// to the right, z in from the kitchen's near wall; the scene's across = x − 2, distance = z), the seats, the shots,
+// the film (film(scene): the beats module's table). Shared by the paintings, the script, the showcase; the generator
+// (tools/home/gen.mjs) writes scene.json from it.
+
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const A = x => x - 2;                         // plan x → across
+const W = (x, z) => [x - 2, z];               // a plan point → [across, distance]
+const P3 = (x, z, h) => [x - 2, z, h];        // … with its height
+
+const H = 2.6;                                // the rooms' height
+// the kitchen (x 0…4, z 0…4) and the room (x 4…8)
+const WINDOW = { x: 1.8, w: 1.2, h: 1.0, sill: 1.0 };          // in the kitchen's back wall (z 4)
+const DOOR = { x: 3.2, w: 0.9, h: 2.0 };                       // the front door, in the near wall (on its spring)
+const DOORWAY = { z0: 2.5, z1: 3.5, h: 2.05 };                 // in the kitchen's right wall (x 4), into the room
+const STOVE = { front: 0.75, z0: 1.0, z1: 2.2, h: 2.0 };       // against the left wall; its fire door at z 1.6
+const TABLE = { x0: 1.4, x1: 2.2, z0: 1.8, z1: 3.6, h: 0.76 }; // its end to the window
+const LAMP = [1.8, 2.7, 2.1];                                  // the bulb under the orange shade
+const CLOCK = { z: 0.6, face: 1.8 };                           // the wall clock on the left wall near the corner
+const HOOK = [3.8, 0.03];                                      // the hooks by the door
+const STOOL = [1.65, 0.32];                                    // the stool left of the door (the old man's hat)
+const CUPBOARD = { x: 5.2, z: 0.25, w: 1.1, h: 1.95, shelf: 1.32 }; // in the room, against its near wall, glass above
+const COT = { x: 4.45, z0: 0.7, z1: 2.4, w: 0.7, top: 0.42 };  // the folding bed along the kitchen wall, its head by the doorway
+const COT_CHAIR = [5.05, 2.4];                                 // the chair by the cot's head (his coat at night)
+const SOFA = { x0: 5.6, x1: 7.6, z: 3.62, top: 0.45 };         // against the room's back wall
+const SAR_DOOR = { z0: 3.1, z1: 3.9 };                         // in the room's right wall (x 8): Sarafanov's room
+const SAR_LAMP = [8.62, 3.98, 1.3];                            // his lamp beyond it: the wedge through the gap
+const CASE_CHAIR = [7.35, 1.0];                                // the chair with the clarinet case
+const TOP = TABLE.h + 0.02;
+// on the oilcloth (plan x, z)
+const ON = {
+  box: [1.8, 2.15], glass_b: [2.12, 2.12], glass_s: [1.5, 2.12], bread: [1.95, 2.95], kettle: [1.62, 2.42],
+  kettle_pushed: [1.92, 2.3], sheet: [1.52, 2.32], puddle: [2.0, 2.1],
+};
+
+// the six places: three a side; the left ones face +x (turn 90), the right ones −x (270)
+const SEATS = {
+  L1: [1.0, 2.1, 90], L2: [1.0, 2.7, 90], L3: [1.0, 3.3, 90],
+  R1: [2.6, 2.1, 270], R2: [2.6, 2.7, 270], R3: [2.6, 3.3, 270],
+};
+const SEAT_H = 0.46;
+// the marks (plan)
+const SPOT = {
+  hall: [3.2, -1.1],           // beyond the front door, out of sight
+  inDoor: [3.15, 0.75],        // a step in from the door
+  stove: [1.2, 1.6],           // before the stove, its fire door at his left
+  near: [1.85, 1.5],           // a step from him there
+  close: [1.62, 1.56],         // in the old man's arms
+  window: [1.0, 3.72],         // at the window, left of the table's end
+  doorway: [3.85, 3.0],        // in the doorway between kitchen and room
+  roomIn: [4.5, 3.0],
+  cupboard: [5.2, 0.9],        // before the cupboard
+  sarDoor: [7.6, 3.55],        // inside the room before Sarafanov's door
+  sarIn: [8.5, 3.6],           // beyond it (out of sight)
+  byCot: [4.98, 1.55],         // beside the cot, the room's side
+  hook: [3.62, 0.5],           // before the hooks
+  stool: [1.75, 0.78],         // before the stool, facing it
+};
+// the way “On Tiptoe” creeps: from the stove past the wall clock along the near wall to the front door (≈ 3.7 m)
+const SNEAK = [[1.2, 1.55], [0.55, 0.85], [1.1, 0.5], [2.4, 0.5], [2.9, 0.55]];
+const SNEAK_LEN = SNEAK.slice(1).reduce((n, p, i) => n + Math.hypot(p[0] - SNEAK[i][0], p[1] - SNEAK[i][1]), 0);
+const SNEAK_BEHIND = 0.7;      // Silva a step behind
+// a point of the way at metres m along it, and how far along it a point lies
+function sneakAt(m) {
+  let left = clamp(m, 0, SNEAK_LEN);
+  for (let i = 1; i < SNEAK.length; i++) {
+    const [x0, z0] = SNEAK[i - 1], [x1, z1] = SNEAK[i], l = Math.hypot(x1 - x0, z1 - z0);
+    if (left <= l) return [x0 + (x1 - x0) * left / l, z0 + (z1 - z0) * left / l];
+    left -= l;
+  }
+  return SNEAK[SNEAK.length - 1];
+}
+function sneakOf(x, z) {
+  let best = Infinity, at = 0, run = 0;
+  for (let i = 1; i < SNEAK.length; i++) {
+    const [x0, z0] = SNEAK[i - 1], [x1, z1] = SNEAK[i], dx = x1 - x0, dz = z1 - z0, l = Math.hypot(dx, dz);
+    const u = clamp(((x - x0) * dx + (z - z0) * dz) / (l * l), 0, 1), d = Math.hypot(x0 + dx * u - x, z0 + dz * u - z);
+    if (d < best) { best = d; at = run + u * l; }
+    run += l;
+  }
+  return at;
+}
+// the way from a point of the sneak to another (the corners between)
+function sneakWay(m0, m1) {
+  const pts = [], run = [0];
+  for (let i = 1; i < SNEAK.length; i++) run.push(run[i - 1] + Math.hypot(SNEAK[i][0] - SNEAK[i - 1][0], SNEAK[i][1] - SNEAK[i - 1][1]));
+  const lo = Math.min(m0, m1), hi = Math.max(m0, m1);
+  const mid = run.map((r, i) => [r, SNEAK[i]]).filter(([r]) => r > lo && r < hi).map(([, p]) => p);
+  if (m1 < m0) mid.reverse();
+  pts.push(...mid, sneakAt(m1));
+  return pts.map(([x, z]) => W(x, z));
+}
+
+// the far things through the window: the far train's lights (its place along the gardens), the old man going off
+const FAR_TRAIN = { z: 29.5, from: -6, to: 52 };   // across: far_train 0 … 1 (seen through the window from the left)
+const FATHER_FAR = { z: 19, from: 9, to: 21 };      // across: the small figure with the case, across the gardens
+
+// the people: their height (metres), the head of one seated
+const HEIGHT = { busygin: 1.83, sarafanov: 1.62, nina: 1.66, silva: 1.76, vasenka: 1.8, kudimov: 1.8 };
+const PEOPLE = ['busygin', 'silva', 'vasenka', 'sarafanov', 'nina', 'kudimov'];
+const NAMES = { busygin: 'Busygin', silva: 'Silva', vasenka: 'Vasenka', sarafanov: 'Sarafanov', nina: 'Nina', kudimov: 'Kudimov' };
+
+// the shots: where the camera stands (plan x, z, the eye's height), which way it looks (degrees to the right of +z),
+// how far down (screen heights) — numbers, worked out by h/d (tools/home/run.mjs prints each beat's frame)
+const cam = (x, z, h, yaw, look = 0) => ({ camera_target: null, camera_x: A(x), camera_z: z, camera_h: h - 1.7, camera_yaw: yaw, camera_look: look, camera_pitch: 0 });
+const CAM = {
+  win: cam(1.8, 3.85, 1.7, 180, 0.08),        // from the window down the kitchen: the door left, the stove right, the table under us
+  warm: cam(2.95, 1.15, 1.45, -62),           // the stove and Vasenka at the table, from the near right
+  near: cam(1.55, 0.3, 1.45, 0),              // the two at the stove side by side in profile, the lamp between and above
+  embrace: cam(2.3, 1.0, 1.75, -62),          // over the old man's shoulder: Busygin's face in three quarters
+  nina: cam(2.2, 1.55, 1.5, 132),             // Nina in the door, three quarters, in the lamp's light
+  supper: cam(3.1, 0.75, 1.15, -55),          // low, the old man standing with his glass, three quarters
+  tb: cam(1.8, 0.4, 1.2, 0, 0.06),            // talk_back, box_out: along the table, the two face to face in profile
+  talk: cam(1.42, 1.05, 1.22, -6),            // the old man nearer, in profile
+  cupboard: cam(6.05, 2.95, 1.55, -160),      // in the room: the cupboard, the cot right
+  sofa: cam(7.25, 2.78, 0.82, 12),            // Silva on the sofa close, in the wedge of light
+  cot: cam(7.0, 3.5, 1.15, -122),             // wake: from the room's far wall onto the cot and the chair by it
+  sneak: cam(3.8, 3.3, 1.6, -143),            // from the doorway onto the near left corner: stove, the way, the wall clock
+  caught: cam(2.55, 0.75, 1.55, 30),          // from the front door: the old man in the doorway, facing us
+  door: cam(2.95, 2.45, 1.5, 172),            // from the table's side onto the front door and the hooks
+  ww: cam(0.6, 2.75, 1.65, 44),               // the window: his shoulder left, the frosted glass in the middle
+  morning: cam(1.75, 0.6, 1.5, 0),            // across the table: the old man at its far corner, Busygin at the window
+  toast: cam(1.8, 0.4, 1.9, 0, 0.25),         // high along the table: all six in profile
+  ask: cam(2.55, 0.4, 1.55, -21),             // Nina standing between her father and him
+  for_me: cam(1.7, 3.72, 1.35, -145),         // close on Nina from the window's end, the old man behind her
+  pack: cam(0.4, 3.8, 1.5, 122),              // from the far left corner: the old man in the doorway, Silva at the door
+  confess: cam(3.2, 1.3, 1.6, 12),            // the two by the doorway in profile, Busygin nearer
+  back: cam(2.2, 0.5, 1.6, -5),               // the old man at the window, his back; the table
+};
+
+const film = scene => {
+  const kit = scene.kit, get = k => scene.get(k);
+  const LOOK = name => {
+    const l = kit.cast && kit.cast.characters && kit.cast.characters[name];
+    if (!l) scene.warn(`cast: no look "${name}"`);
+    return l || null;
+  };
+  const ownOf = look => (kit.cast && kit.cast.shapes && kit.cast.shapes.characters[look] && kit.cast.shapes.characters[look].parts) || [];
+  // what is in their hands, with their look's own parts (a scarf, a collar): a look's parts are replaced by the list
+  const WITH = (look, ...parts) => (parts.length ? [...ownOf(look), ...parts] : null);
+  const hold = (s, id, ...parts) => { const w = s.get(`${id}_wear`); s.person(id).with(WITH((w && w.who) || id, ...parts)); };
+  const loop = motion => ({ motion, loop: true });
+  const held = motion => ({ motion, loop: false, from: 99 });
+  const lampOn = () => 0.6 + 0.4 * (Number(get('warm')) || 0);
+  const boxAt = () => (get('box_where') === 'busygin' ? 'none' : 'shelf');
+
+  // ── the values of a shot ──
+  const OUT = id => ({ [`${id}_here`]: false, [`${id}_a`]: A(SPOT.hall[0]), [`${id}_d`]: SPOT.hall[1], [`${id}_turn`]: 0,
+    [`${id}_do`]: 'stand', [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_on`]: null,
+    [`${id}_mood`]: 'neutral', [`${id}_gait`]: null });
+  const STAND = (id, [x, z], turn, more = {}) => ({ ...OUT(id), [`${id}_here`]: true, [`${id}_a`]: A(x), [`${id}_d`]: z,
+    [`${id}_turn`]: turn, ...more });
+  const SIT = (id, seat, more = {}) => {
+    const [x, z, turn] = SEATS[seat];
+    return STAND(id, [x, z], turn, { [`${id}_do`]: loop('seated'), [`${id}_on`]: P3(x, z, SEAT_H), ...more });
+  };
+  // lying on the cot (head by the doorway) or on the sofa (head at its right end, in the wedge from his door)
+  const LIE = (id, where, more = {}) => where === 'cot'
+    ? STAND(id, [COT.x, 1.55], 0, { [`${id}_do`]: loop('lie'), [`${id}_on`]: P3(COT.x, 1.55, COT.top), ...more })
+    : STAND(id, [6.75, SOFA.z], 90, { [`${id}_do`]: loop('lie'), [`${id}_on`]: P3(6.75, SOFA.z, SOFA.top), ...more });
+  const wear = (id, name) => ({ [`${id}_wear`]: name ? LOOK(name) : null });
+  const OUTS = () => Object.assign({}, ...PEOPLE.map(OUT));
+  // the room at night (or at dawn): every key a shot sets that the beats move
+  const ROOM = (more = {}) => ({
+    fade: 0, hour: 0.9, lamp: lampOn(), stove_door: 0, door: 0, door_f: 0, sar_door: 0.08, sar_door_f: 270 - 60 * 0.08,
+    sar_light: 0, stir: 0, hands: 0, tea: 0, box: 0, table_set: 0, puddle: 0, sheet_on: 0, kettle_at: 'stove', glass_b: 'none',
+    glass_s: 'none', hat_on_stool: 0, case_on: 1, nina_coat: 0, father_x: FATHER_FAR.from, father_on: 0, sneak: 0, sneak_at: 0,
+    box_at: 'shelf', coat_b: 'hook', rucksack: 'none',
+    ...OUTS(), ...wear('busygin', null), ...wear('silva', null), ...wear('vasenka', null), ...wear('sarafanov', null),
+    ...wear('nina', null), ...wear('kudimov', null), ...more,
+  });
+  const DAWN = { hour: 0.25, lamp: 0 };
+  const cut = (s, v) => s.cut({ ...v });
+  const shot = (s, v) => s.shot({ ...v });
+  const W2 = p => W(p[0], p[1]);
+  const walk = (p, pts, o) => p.walk(pts.map(W2), o);
+  // sit down on a place, up from it
+  async function sit(p, seat) {
+    const [x, z, turn] = SEATS[seat];
+    await p.go('sit_down', { to: W(x, z), turn });
+    p.on(P3(x, z, SEAT_H));
+    p.do('seated', { loop: true });
+  }
+  async function rise(p, seat) {
+    const [x, z] = SEATS[seat];
+    p.on(null);
+    await p.go('rise', { from: W(x, z) });
+  }
+  const turnTo = (from, to) => ((Math.atan2(to[0] - from[0], to[1] - from[1]) * 180 / Math.PI) + 360) % 360;
+
+  // ── the beats' starts that follow others (also what a cut to them sets) ──
+  const I_HOME = () => ROOM({ ...wear('sarafanov', 'sarafanov_hat'), stove_door: 1, rucksack: 'chair', coat_b: 'none',
+    ...STAND('busygin', SPOT.stove, 65), ...SIT('silva', 'R2'), ...SIT('vasenka', 'L2') });
+  const II_TABLE = (more = {}) => ROOM({ ...wear('sarafanov', 'sarafanov_home'), ...wear('busygin', 'busygin_shirt'), ...wear('silva', 'silva_shirt'),
+    ...SIT('sarafanov', 'L1'), ...SIT('busygin', 'R1'), ...more });
+  const NIGHT_TALK = (more = {}) => II_TABLE({ hour: 0.95, puddle: 1, sheet_on: 1, glass_b: 'table', glass_s: 'table', kettle_at: 'table',
+    ...LIE('silva', 'sofa'), ...more });
+  const IV_TABLE = (more = {}) => ROOM({ hour: 0.88, table_set: 1, box_at: boxAt(), ...wear('sarafanov', 'sarafanov_best'), ...wear('nina', 'nina_home'),
+    ...wear('busygin', 'busygin_shirt'), ...wear('silva', 'silva_shirt'), ...wear('vasenka', 'vasenka_home'), ...wear('kudimov', 'kudimov_in'),
+    ...SIT('sarafanov', 'L1'), ...SIT('nina', 'L2'), ...SIT('busygin', 'R1'), ...SIT('kudimov', 'R2'), ...SIT('silva', 'L3'), ...SIT('vasenka', 'R3'),
+    ...more });
+  const PACK = (more = {}) => ROOM({ box_at: boxAt(), ...wear('silva', 'silva_burnt'), ...wear('busygin', 'busygin_shirt'), ...wear('nina', 'nina_home'),
+    ...wear('vasenka', 'vasenka_home'),
+    ...STAND('silva', [3.1, 0.62], 315), ...STAND('busygin', [2.75, 1.55], 330),
+    ...STAND('sarafanov', SPOT.doorway, 283, { sarafanov_with: WITH('sarafanov', 'case', 'suitcase') }),
+    ...STAND('nina', [4.75, 3.25], 270), ...STAND('vasenka', [4.95, 2.75], 280), ...more });
+  const WAKE = () => ROOM({ ...DAWN, box_at: boxAt(), coat_b: 'cot', ...wear('busygin', 'busygin_shirt'),
+    ...STAND('busygin', [COT.x, 1.55], 0, { busygin_do: held('sit_up'), busygin_on: P3(COT.x, 1.55, COT.top) }),
+    ...STAND('silva', SPOT.byCot, 270, { silva_do: held('bend_reach') }) });
+
+  // ── the film, in the order the game mostly plays it ──
+  const F = {
+    // I. Night: the door, the three come in from the cold; Vasenka sits down at the table, his rucksack by his chair;
+    // Silva sits and reaches for the bread; Busygin goes to the stove, opens its door, holds his hands to the fire —
+    // the insert `hands` opens
+    kitchen: {
+      from: () => ROOM({ ...CAM.win, coat_b: 'none', thaw: 0, rub: 0, ...wear('sarafanov', 'sarafanov_hat') }),
+      run: async s => {
+        const bus = s.person('busygin'), sil = s.person('silva'), vas = s.person('vasenka');
+        await s.move('door', 1, { over: 1.0, ease: 'out' });
+        vas.here(true);
+        const v = (async () => { await walk(vas, [SPOT.inDoor, [1.75, 1.35]]); s.set('rucksack', 'chair'); await sit(vas, 'L2'); vas.mood('tired'); })();
+        await s.wait(1.0);
+        sil.here(true);
+        const si = (async () => { await walk(sil, [SPOT.inDoor, [3.0, 1.9]]); await sit(sil, 'R2'); sil.reach({ r: 'table#bread' }); await s.wait(1.6); sil.reach(null); })();
+        await s.wait(1.0);
+        bus.here(true);
+        await walk(bus, [SPOT.inDoor, [2.2, 1.35], SPOT.stove]);
+        s.move('door', 0, { over: 0.5, ease: 'in' });
+        await bus.turn(270);
+        bus.look('stove#door');
+        bus.reach({ l: 'stove#door' });
+        await s.wait(0.5);
+        await s.move('stove_door', 1, { over: 0.8, ease: 'out' });
+        bus.reach({ r: 'stove#fire', l: 'stove#fire' });
+        bus.look('stove#fire');
+        await s.all(v, si);
+        await s.wait(1.2);
+        s.set('hands', 1);
+        s.tell('kitchen:stove');
+        await s.wait(0.8);
+      },
+    },
+    // the insert closes: he turns from the stove to the table; Vasenka, not looking up (L20, L21)
+    warm_up: {
+      after: 'kitchen',
+      from: () => ({ ...I_HOME(), ...STAND('busygin', SPOT.stove, 270, { busygin_reach: { r: 'stove#fire', l: 'stove#fire' }, busygin_look: 'stove#fire' }),
+        ...CAM.win, sarafanov_here: false, hands: 1, thaw: 1, rub: 0 }),
+      run: async s => {
+        const bus = s.person('busygin'), vas = s.person('vasenka');
+        cut(s, { hands: 0, ...CAM.warm });
+        bus.reach(null);
+        bus.look('vasenka');
+        await bus.turn(65);
+        vas.look(P3(1.45, 2.75, TOP));
+        vas.mood('tired');
+        bus.mood('thinking');
+        s.tell('warm_up:turn');
+        await s.wait(6);
+      },
+    },
+    // the door: Sarafanov in his coat, his hat in his hand — L22 as Silva gets up; the hat put down on the stool;
+    // L23; the clock; L24; slowly to Busygin at the stove, a step from him — L25. Side by side in profile at the end
+    enter: {
+      from: () => ({ ...I_HOME(), ...CAM.win }),
+      run: async s => {
+        const sar = s.person('sarafanov'), sil = s.person('silva'), bus = s.person('busygin');
+        await s.wait(1.0);
+        await s.move('door', 1, { over: 1.0, ease: 'out' });
+        sar.here(true);
+        sar.mood('surprised');
+        await walk(sar, [SPOT.inDoor]);
+        s.tell('enter:in');
+        bus.look('sarafanov');
+        bus.mood('afraid');
+        sar.look('busygin');
+        await rise(sil, 'R2');
+        sil.look('sarafanov');
+        await sil.turn(200);
+        await walk(sar, [SPOT.stool]);
+        await sar.turn(180);
+        sar.look(P3(STOOL[0], STOOL[1], 0.5));
+        sar.reach({ r: P3(STOOL[0], STOOL[1], 0.55) });
+        await sar.do('reach_put');
+        s.set('hat_on_stool', 1);
+        sar.with(['long_scarf']);
+        sar.reach(null);
+        s.move('door', 0, { over: 0.5, ease: 'in' });
+        sar.look('busygin');
+        await s.wait(4.5);
+        // close: the two side by side in profile, the lamp between them — made ready while he comes
+        const two = shot(s, { ...CAM.near });
+        await walk(sar, [[2.2, 1.2], SPOT.near]);
+        two.cut();
+        await s.all(sar.turn(270), bus.turn(90));
+        s.tell('enter:near');
+        await s.wait(1.5);
+        sar.mood('smile');
+        await s.wait(2.5);
+      },
+    },
+    // he takes him in his arms; Busygin's hands come to his back; Silva sits down again behind them
+    embrace: {
+      after: 'enter',
+      from: () => ({ ...I_HOME(), ...CAM.near, hat_on_stool: 1, ...STAND('busygin', SPOT.stove, 90, { busygin_look: 'sarafanov', busygin_mood: 'afraid' }),
+        ...STAND('sarafanov', SPOT.near, 270, { sarafanov_look: 'busygin', sarafanov_mood: 'smile', sarafanov_with: ['long_scarf'] }),
+        ...STAND('silva', [2.65, 2.3], 200, { silva_look: 'sarafanov' }) }),
+      run: async s => {
+        const sar = s.person('sarafanov'), sil = s.person('silva'), bus = s.person('busygin');
+        await walk(sar, [SPOT.close]);
+        cut(s, { ...CAM.embrace });
+        sar.turn(270);
+        sar.do('hug');
+        sar.reach({ r: 'busygin#back', l: 'busygin#back' });
+        sar.look(null);
+        await s.wait(1.0);
+        bus.reach({ r: 'sarafanov#back', l: 'sarafanov#back' });
+        bus.mood('sad');
+        bus.look(P3(2.6, 1.0, 1.7));
+        s.tell('embrace:held');
+        await sit(sil, 'R2');
+        await s.wait(3);
+      },
+    },
+
+    // II. Night: the door, Nina in her coat; the old man gets up from the table — L28; she stands in the door, not
+    // taking it off — L29 (close: three quarters in the lamp's light); goes through the kitchen into the room
+    nina_in: {
+      from: () => II_TABLE({ ...CAM.win, ...wear('nina', 'nina'), ...SIT('silva', 'R2'), ...LIE('vasenka', 'sofa', { vasenka_turn: 270 }), ...wear('vasenka', 'vasenka_home') }),
+      run: async s => {
+        const nina = s.person('nina'), sar = s.person('sarafanov'), bus = s.person('busygin');
+        await s.wait(0.8);
+        await s.move('door', 1, { over: 1.0, ease: 'out' });
+        nina.here(true);
+        await walk(nina, [SPOT.inDoor]);
+        nina.turn(turnTo(SPOT.inDoor, SEATS.L1));
+        nina.look('sarafanov');
+        s.move('door', 0, { over: 0.6, ease: 'in' });
+        bus.look('nina');
+        await rise(sar, 'L1');
+        sar.look('nina');
+        sar.mood('smile');
+        await sar.turn(turnTo(SEATS.L1, SPOT.inDoor));
+        s.tell('nina_in:door');
+        const close = shot(s, { ...CAM.nina });
+        await s.wait(3.0);
+        close.cut();
+        nina.mood('thinking');
+        await s.wait(3.5);
+        nina.mood('smile');
+        await s.wait(2.0);
+        nina.look(null);
+        await walk(nina, [[3.4, 1.7], [3.55, 2.9], SPOT.doorway, SPOT.roomIn]);
+        s.tell('nina_in:gone');
+        await walk(nina, [[5.4, 2.7]]);
+        nina.here(false);
+        sar.look(SPOT.doorway.concat(1.5).map((v, i) => (i === 0 ? A(v) : v)));
+        sar.mood('thinking');
+        await s.wait(1.0);
+      },
+    },
+    // the table under the lamp; the old man stands with his glass — L30 — and holds it up, waiting; Busygin's glass
+    // on the oilcloth (a touch)
+    supper: {
+      from: () => II_TABLE({ ...CAM.supper, ...SIT('silva', 'R2'), glass_b: 'table', ...LIE('vasenka', 'sofa', { vasenka_turn: 270 }), ...wear('vasenka', 'vasenka_home') }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin'), sil = s.person('silva');
+        await s.wait(1.0);
+        hold(s, 'sarafanov', 'glass_held');
+        await rise(sar, 'L1');
+        sar.turn(90);
+        sar.mood('smile');
+        sar.look('busygin');
+        bus.look('sarafanov');
+        sil.look('sarafanov');
+        await sar.do('toast');
+        sar.reach({ r: P3(1.3, 2.1, 1.45) });
+        s.tell('supper:toast');
+        await s.wait(4.0);
+      },
+    },
+    // he raises his glass, the glasses meet; the old man sits and lays a page of music on the oilcloth — L31
+    supper_after: {
+      after: 'supper',
+      from: () => ({ ...F.supper.from(), ...STAND('sarafanov', [1.0, 2.1], 90, { sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.3, 2.1, 1.45) },
+        sarafanov_look: 'busygin', sarafanov_mood: 'smile' }), ...wear('sarafanov', 'sarafanov_home') }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin');
+        bus.reach({ r: 'table#glass' });
+        await s.wait(0.8);
+        s.set('glass_b', 'hand');
+        hold(s, 'busygin', 'glass_held');
+        bus.reach({ r: P3(1.82, 2.1, 1.32) });
+        sar.reach({ r: P3(1.7, 2.1, 1.36) });
+        await s.wait(1.4);
+        bus.reach({ r: 'table#glass' });
+        sar.reach(null);
+        await s.wait(0.7);
+        s.set('glass_b', 'table');
+        bus.with(null);
+        bus.reach(null);
+        await sit(sar, 'L1');
+        hold(s, 'sarafanov', 'sheet');
+        sar.reach({ r: P3(ON.sheet[0], ON.sheet[1], TOP + 0.05) });
+        await s.wait(1.0);
+        s.set('sheet_on', 1);
+        sar.with(null);
+        sar.reach(null);
+        sar.look('table#sheet');
+        s.tell('supper_after:sheet');
+        await s.wait(4.0);
+      },
+    },
+    // late night, out of the dark: Silva goes to lie down; the two face to face; the old man pushes the kettle to
+    // him — L32 (closer: in profile); Busygin takes it — the insert `tea` opens
+    talk: {
+      from: () => NIGHT_TALK({ ...CAM.tb, fade: 1, ...SIT('silva', 'R2'), tea: 0, which: 0, pour: 0, glass1: 0, glass2: 0, spill: 0, shake: 0, puddle: 0 }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin'), sil = s.person('silva');
+        s.move('fade', 0, { over: 1.6, ease: 'out' });
+        await s.wait(1.0);
+        const lies = (async () => {
+          await rise(sil, 'R2');
+          await walk(sil, [[3.2, 2.8], SPOT.doorway, SPOT.roomIn, [6.75, 3.05]]);
+          await sil.turn(90);
+          sil.on(P3(6.75, SOFA.z, SOFA.top));
+          s.set('silva_a', A(6.75));
+          s.set('silva_d', SOFA.z);
+          sil.do('lie', { loop: true });
+        })();
+        sar.look('table#kettle');
+        sar.reach({ r: 'table#kettle' });
+        await s.wait(1.2);
+        s.set('kettle_at', 'pushed');
+        sar.reach(null);
+        sar.look('busygin');
+        const close = shot(s, { ...CAM.talk });
+        await s.wait(1.0);
+        close.cut();
+        sar.mood('sad');
+        await s.wait(5.0);
+        bus.look('table#kettle');
+        bus.reach({ r: 'table#kettle' });
+        await s.wait(0.9);
+        s.set('kettle_at', 'none');
+        hold(s, 'busygin', 'kettle');
+        bus.reach(null);
+        await s.wait(0.6);
+        s.set('tea', 1);
+        s.tell('talk:kettle');
+        await lies;
+      },
+    },
+    // the insert closes: the two at the table, the old man's glass in both hands, a puddle on the oilcloth; he waits
+    // for the answer (a choice on him)
+    talk_back: {
+      after: 'talk',
+      from: () => NIGHT_TALK({ ...CAM.talk, tea: 1, which: 1, pour: 0, glass1: 1, glass2: 1, spill: 1, shake: 0, puddle: 0, kettle_at: 'none',
+        busygin_with: WITH('busygin_shirt', 'kettle'), sarafanov_look: 'busygin', sarafanov_mood: 'sad' }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin');
+        cut(s, { tea: 0, puddle: 1, kettle_at: 'table', glass_s: 'hand', ...CAM.tb, busygin_with: null, sarafanov_with: WITH('sarafanov_home', 'glass_held'),
+          sarafanov_reach: { r: P3(1.38, 2.08, 1.0), l: P3(1.38, 2.16, 0.98) }, sarafanov_look: 'busygin', sarafanov_mood: 'thinking',
+          busygin_look: 'table#glass', busygin_mood: 'afraid' });
+        await s.wait(1.4);
+        s.tell('talk_back:ready');
+        await s.wait(1.4);
+        void sar; void bus;
+      },
+    },
+    // “She remembered”: he puts the glass down, reaches across and lays his hand on Busygin's; then looks at the window
+    galya_yes: {
+      after: 'talk_back',
+      from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'hand', sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.38, 2.08, 1.0), l: P3(1.38, 2.16, 0.98) },
+        sarafanov_look: 'busygin', sarafanov_mood: 'thinking', busygin_mood: 'afraid', busygin_look: 'table#glass' }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin');
+        sar.reach({ r: 'table#glass_s' });
+        await s.wait(0.9);
+        s.set('glass_s', 'table');
+        sar.with(null);
+        sar.reach({ r: 'busygin#hand_r' });
+        bus.look('sarafanov');
+        await s.wait(1.6);
+        s.tell('galya_yes:hand');
+        await s.wait(1.4);
+        sar.look('window#pane');
+        sar.mood('smile');
+        await s.wait(3.2);
+      },
+    },
+    // “Never told me”: he lowers his head to the glass and turns it slowly in its holder
+    galya_no: {
+      after: 'talk_back',
+      from: () => F.galya_yes.from(),
+      run: async s => {
+        const sar = s.person('sarafanov');
+        sar.reach({ r: 'table#glass_s' });
+        await s.wait(0.9);
+        s.set('glass_s', 'table');
+        sar.with(null);
+        sar.reach(null);
+        sar.look('table#glass_s');
+        sar.mood('sad');
+        sar.do('turn_glass', { loop: true });
+        s.tell('galya_no:glass');
+        await s.wait(6.5);
+      },
+    },
+    // the same night (opening the scene again): he gets up, goes to the cupboard in the room, takes the snuffbox
+    // from its shelf, comes back, sits and sets it on the oilcloth between them — L36, L37; a choice on it
+    box_out: {
+      from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'table', box_at: 'shelf', sarafanov_look: 'busygin', busygin_look: 'table#glass' }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin');
+        await s.wait(1.4);
+        bus.look('sarafanov');
+        sar.mood('smile');
+        await rise(sar, 'L1');
+        const room = shot(s, { ...CAM.cupboard });
+        await walk(sar, [[1.0, 1.55], [2.9, 1.55], [3.5, 2.85], SPOT.doorway]);
+        room.cut();
+        const back = shot(s, { ...CAM.tb });
+        await walk(sar, [SPOT.roomIn, SPOT.cupboard]);
+        await sar.turn(180);
+        sar.look('cupboard#box');
+        sar.reach({ r: 'cupboard#box' });
+        const take = sar.do('take_shelf');
+        await s.wait(1.2);
+        s.set('box_at', 'none');
+        hold(s, 'sarafanov', 'box_held');
+        await take;
+        sar.reach(null);
+        sar.look(null);
+        await walk(sar, [SPOT.roomIn, SPOT.doorway]);
+        back.cut();
+        await walk(sar, [[3.5, 2.85], [2.9, 1.55], [1.0, 1.55]]);
+        await sit(sar, 'L1');
+        sar.look('table#box');
+        sar.reach({ r: 'table#box' });
+        const put = sar.do('reach_put');
+        await s.wait(1.2);
+        s.set('box_at', 'table');
+        sar.with(null);
+        await put;
+        sar.reach(null);
+        sar.look('busygin');
+        bus.look('table#box');
+        bus.mood('afraid');
+        s.tell('box_out:down');
+        await s.wait(4.0);
+      },
+    },
+    // he reaches for it — the insert `box`: taking it
+    box_take: {
+      after: 'box_out',
+      from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'table', box_at: 'table', sarafanov_look: 'busygin', sarafanov_mood: 'smile',
+        busygin_look: 'table#box', busygin_mood: 'afraid', box: 0, box_mode: 'take', finger1: 0, finger2: 0, finger3: 0, finger4: 0, old: 1, push: 0, old_close: 0 }),
+      run: async s => {
+        const bus = s.person('busygin');
+        s.set('box_mode', 'take');
+        bus.reach({ r: 'table#box' });
+        await s.wait(1.8);
+        s.set('box', 1);
+        s.tell('box_take:close');
+        await s.wait(0.6);
+      },
+    },
+    // his hand lies on it — the insert `box`: giving it back
+    box_give: {
+      after: 'box_out',
+      from: () => ({ ...F.box_take.from(), box_mode: 'give' }),
+      run: async s => {
+        const bus = s.person('busygin');
+        s.set('box_mode', 'give');
+        bus.reach({ r: 'table#box' });
+        await s.wait(1.8);
+        s.set('box', 1);
+        s.tell('box_give:close');
+        await s.wait(0.6);
+      },
+    },
+    // the insert closes: no box on the table; his hand to his breast pocket; the old man leans back, his palms on
+    // the oilcloth — L38
+    box_kept: {
+      after: 'box_take',
+      from: () => ({ ...F.box_take.from(), box: 1, finger1: 1, finger2: 1, finger3: 1, finger4: 1, old: 0, busygin_reach: { r: 'table#box' } }),
+      run: async s => {
+        const bus = s.person('busygin'), sar = s.person('sarafanov');
+        cut(s, { box: 0, box_at: 'none', ...CAM.tb });
+        bus.reach({ r: 'busygin#chest' });
+        sar.reach({ r: P3(1.5, 2.0, TOP), l: P3(1.5, 2.28, TOP) });
+        sar.look('busygin');
+        sar.mood('smile');
+        await s.wait(1.6);
+        s.tell('box_kept:back');
+        await s.wait(2.0);
+        bus.reach(null);
+        await s.wait(3.0);
+      },
+    },
+    // the insert closes: the box in his hand; he gets up, takes it back to its shelf and stands there, his back to
+    // us — L40
+    box_back: {
+      after: 'box_give',
+      from: () => ({ ...F.box_give.from(), box: 1, push: 1, old_close: 1, busygin_reach: { r: 'table#box' } }),
+      run: async s => {
+        const bus = s.person('busygin'), sar = s.person('sarafanov');
+        cut(s, { box: 0, box_at: 'none', ...CAM.tb, sarafanov_with: WITH('sarafanov_home', 'box_held'), busygin_reach: null });
+        void bus;
+        sar.mood('sad');
+        await s.wait(0.8);
+        await rise(sar, 'L1');
+        const room = shot(s, { ...CAM.cupboard });
+        await walk(sar, [[1.0, 1.55], [2.9, 1.55], [3.5, 2.85], SPOT.doorway]);
+        room.cut();
+        await walk(sar, [SPOT.roomIn, SPOT.cupboard]);
+        await sar.turn(180);
+        sar.reach({ r: 'cupboard#shelf' });
+        const put = sar.do('put_shelf');
+        await s.wait(1.2);
+        s.set('box_at', 'shelf');
+        sar.with(null);
+        await put;
+        sar.reach(null);
+        sar.look(P3(CUPBOARD.x, CUPBOARD.z, 1.4));
+        s.tell('box_back:shelf');
+        await s.wait(3.2);
+      },
+    },
+    // night, out of the dark: the room; his lamp burns beyond his door ajar — a narrow wedge across the room.
+    // Busygin on the cot, his coat on the chair by it; Silva on the sofa, his head in the wedge — L118 (close, in
+    // profile, without his smile); then the clarinet; Busygin turns on his side to the wall — under L41
+    wall: {
+      from: () => ROOM({ ...CAM.sofa, fade: 1, lamp: 0, sar_light: 1, coat_b: 'cot', box_at: boxAt(), ...wear('busygin', 'busygin_shirt'), ...wear('silva', 'silva_shirt'),
+        ...LIE('busygin', 'cot'), ...LIE('silva', 'sofa', { silva_mood: 'tired', silva_look: P3(6.6, 3.0, 2.6) }) }),
+      run: async s => {
+        const bus = s.person('busygin');
+        s.move('fade', 0, { over: 1.8, ease: 'out' });
+        const cot = shot(s, { ...CAM.cot });
+        await s.wait(6.5);
+        s.tell('wall:dark');
+        await s.wait(3.0);
+        cot.cut();
+        await s.wait(0.8);
+        bus.turn(270);
+        await bus.do('lie_side');
+        bus.do(held('lie_side').motion, { from: 99 });
+        s.tell('wall:turn');
+        await s.wait(6.0);
+      },
+    },
+    // grey dawn, out of the dark: Silva, in his coat already, bends over the cot and shakes him by the shoulder —
+    // L42; he sits up. A choice: his coat on the chair (go), the cot (stay)
+    wake: {
+      from: () => ({ ...WAKE(), ...CAM.cot, fade: 1, ...LIE('busygin', 'cot'), ...STAND('silva', SPOT.byCot, 270) }),
+      run: async s => {
+        const bus = s.person('busygin'), sil = s.person('silva');
+        s.move('fade', 0, { over: 1.6, ease: 'out' });
+        await s.wait(1.2);
+        sil.look('busygin');
+        sil.reach({ r: 'busygin#shoulder_r' });
+        await sil.do('bend_reach');
+        await s.wait(2.6);
+        sil.reach(null);
+        sil.mood('neutral');
+        await bus.do('sit_up');
+        bus.look('silva');
+        bus.mood('tired');
+        s.tell('wake:up');
+        await s.wait(2.0);
+      },
+    },
+    // “Slip away”: his coat over his arm, both into the kitchen to the stove (the way starts there); the old man's
+    // lamp is out. Then the game creeps them along the way (`sneak`, scene: script); `stir` lights his lamp
+    sneak: {
+      after: 'wake',
+      from: () => ({ ...WAKE(), ...CAM.cot }),
+      run: async s => {
+        const bus = s.person('busygin'), sil = s.person('silva');
+        bus.on(null);
+        await bus.do('rise');
+        await walk(bus, [[4.95, 2.15]]);
+        bus.look('cot_chair#coat');
+        bus.reach({ r: 'cot_chair#coat' });
+        await bus.do('take');
+        s.set('coat_b', 'arm');
+        hold(s, 'busygin', 'coat_arm');
+        bus.reach(null);
+        bus.look(null);
+        const kitchen = shot(s, { ...CAM.sneak, sar_light: 0, stir: 0, sneak: 0, sneak_at: 0 });
+        const b = walk(bus, [[4.6, 2.85], SPOT.roomIn, SPOT.doorway, [2.9, 1.5], SNEAK[0]], { gait: 'tiptoe' });
+        await s.wait(0.8);
+        const si = walk(sil, [[4.6, 2.85], SPOT.roomIn, SPOT.doorway, [2.9, 1.5], sneakAt(0.05)], { gait: 'tiptoe' });
+        await s.until(() => s.get('busygin_a') < A(4.0));
+        kitchen.cut();
+        await s.all(b, si);
+        await bus.turn(200);
+        sil.turn(200);
+        s.tell('sneak:ready');
+        await s.wait(0.5);
+      },
+    },
+    // both at the front door, coats over the arm; the old man in the doorway (he comes through the room, or — he
+    // heard them — stands there already): L43, L44, L45; Busygin hangs his coat on the hook — L48; the old man goes
+    // past them and out, the door slams
+    caught: {
+      from: () => ROOM({ ...DAWN, ...CAM.caught, box_at: boxAt(), coat_b: 'arm', case_on: 0, ...wear('busygin', 'busygin_shirt'),
+        ...STAND('busygin', [3.15, 0.95], 20, { busygin_with: WITH('busygin_shirt', 'coat_arm'), busygin_look: 'sarafanov' }),
+        ...STAND('silva', [2.3, 0.9], 30, { silva_look: 'sarafanov' }),
+        ...(Number(get('heard')) >= 0.5
+          ? STAND('sarafanov', SPOT.doorway, turnTo(SPOT.doorway, [2.7, 0.9]), { sarafanov_with: WITH('sarafanov', 'case'), sarafanov_look: 'busygin' })
+          : { ...OUT('sarafanov'), sarafanov_a: A(SPOT.sarIn[0]), sarafanov_d: SPOT.sarIn[1] }) }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin'), sil = s.person('silva');
+        if (!(Number(get('heard')) >= 0.5)) {
+          await s.move('sar_door', 1, { over: 0.9, ease: 'out' });
+          hold(s, 'sarafanov', 'case');
+          sar.here(true);
+          await walk(sar, [SPOT.sarDoor, [5.2, 2.9], SPOT.doorway]);
+          s.move('sar_door', 0.08, { over: 1.0 });
+          await sar.turn(turnTo(SPOT.doorway, [2.7, 0.9]));
+          sar.look('busygin');
+        }
+        sar.mood('sad');
+        bus.mood('afraid');
+        s.tell('caught:face');
+        await s.wait(9.0);
+        const door = shot(s, { ...CAM.door });
+        await walk(bus, [SPOT.hook]);
+        door.cut();
+        await bus.turn(180);
+        bus.look('hook#coat');
+        bus.reach({ r: 'hook#coat' });
+        await s.wait(0.9);
+        s.set('coat_b', 'hook');
+        bus.with(null);
+        bus.reach(null);
+        bus.look('sarafanov');
+        s.tell('caught:hook');
+        await s.wait(3.0);
+        sil.look('sarafanov');
+        await walk(sar, [[3.3, 2.0], [3.05, 1.1], SPOT.inDoor]);
+        await s.move('door', 1, { over: 0.6, ease: 'out' });
+        await walk(sar, [SPOT.hall]);
+        sar.here(false);
+        await s.move('door', 0, { over: 0.25, ease: 'in' });
+        s.tell('caught:out');
+        await s.wait(1.5);
+      },
+    },
+    // “Stay”: Silva lies down again — L46; Busygin gets up, goes into the kitchen to the window and stands at it:
+    // the frosted glass in the middle of the frame (the game rubs the hole: “Frost”)
+    window_watch: {
+      after: 'wake',
+      from: () => ({ ...WAKE(), ...CAM.cot }),
+      run: async s => {
+        const bus = s.person('busygin'), sil = s.person('silva');
+        sil.mood('tired');
+        const lie = (async () => {
+          await walk(sil, [[5.6, 2.6], [6.75, 3.05]]);
+          await sil.turn(90);
+          sil.on(P3(6.75, SOFA.z, SOFA.top));
+          s.set('silva_a', A(6.75));
+          s.set('silva_d', SOFA.z);
+          sil.do('lie', { loop: true });
+        })();
+        bus.on(null);
+        await bus.do('rise');
+        const win = shot(s, { ...CAM.ww });
+        await walk(bus, [[4.6, 2.85], SPOT.roomIn, SPOT.doorway, [3.0, 3.75], [2.4, 3.85]]);
+        win.cut();
+        await walk(bus, [SPOT.window]);
+        await bus.turn(72);
+        bus.look('window#pane');
+        bus.mood('thinking');
+        s.tell('window_watch:pane');
+        await lie;
+      },
+    },
+    // to the table: the old man comes out of the room in his coat, with his case, stops at the table — L47, L48; goes
+    // to the door and out; back to the window: through the hole the small figure with the case crosses the gardens
+    morning: {
+      after: 'window_watch',
+      from: () => ({ ...WAKE(), ...CAM.ww, case_on: 0, ...LIE('silva', 'sofa'),
+        ...STAND('busygin', SPOT.window, 72, { busygin_look: 'window#pane', busygin_mood: 'thinking' }) }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin');
+        cut(s, { ...CAM.morning, ...OUT('sarafanov'), sarafanov_a: A(SPOT.sarIn[0]), sarafanov_d: SPOT.sarIn[1], case_on: 0 });
+        await s.move('sar_door', 1, { over: 0.8, ease: 'out' });
+        hold(s, 'sarafanov', 'case');
+        sar.here(true);
+        await walk(sar, [SPOT.sarDoor, [5.2, 2.95], SPOT.doorway, [3.1, 3.55], [2.5, 3.6]]);
+        s.move('sar_door', 0.08, { over: 1.0 });
+        await sar.turn(270);
+        sar.look('busygin');
+        bus.look('sarafanov');
+        await bus.turn(90);
+        sar.mood('smile');
+        s.tell('morning:in');
+        await s.wait(7.0);
+        sar.look(null);
+        const win = shot(s, { ...CAM.ww, father_on: 1, father_x: FATHER_FAR.from, busygin_look: 'window#pane', busygin_turn: 72 });
+        await walk(sar, [[3.0, 3.0], [3.15, 1.4], SPOT.inDoor]);
+        await s.move('door', 1, { over: 0.6, ease: 'out' });
+        await walk(sar, [SPOT.hall]);
+        sar.here(false);
+        await s.move('door', 0, { over: 0.25, ease: 'in' });
+        s.tell('morning:out');
+        await s.wait(1.0);
+        win.cut();
+        await s.move('father_x', FATHER_FAR.to, { over: (FATHER_FAR.to - FATHER_FAR.from) / 1.1, ease: 'linear' });
+        s.set('father_on', 0);
+      },
+    },
+
+    // IV. The second day's late evening, out of the dark: the table laid; the place facing Nina empty; the clock
+    // strikes nine — on the ninth stroke the door: Kudimov in his greatcoat — L73; cut: in his tunic, he comes and
+    // sits at his place — L74
+    table: {
+      from: () => IV_TABLE({ ...CAM.toast, fade: 1, ...OUT('kudimov'), ...wear('kudimov', 'kudimov'),
+        busygin_mood: 'thinking', nina_look: P3(1.5, 2.7, TOP), sarafanov_look: 'nina' }),
+      run: async s => {
+        const kud = s.person('kudimov'), bus = s.person('busygin'), nina = s.person('nina'), sar = s.person('sarafanov');
+        await s.move('fade', 0, { over: 1.6, ease: 'out' });
+        await s.wait(1.2);
+        s.tell('table:nine');
+        const door = shot(s, { ...CAM.win });
+        await s.wait(6.6);
+        door.cut();
+        await s.wait(1.2);
+        await s.move('door', 1, { over: 1.0, ease: 'out' });
+        kud.here(true);
+        await walk(kud, [SPOT.inDoor]);
+        kud.turn(turnTo(SPOT.inDoor, SEATS.L1));
+        kud.look('sarafanov');
+        s.tell('table:in');
+        sar.look('kudimov');
+        nina.look('kudimov');
+        bus.look('kudimov');
+        bus.mood('afraid');
+        await s.wait(3.0);
+        cut(s, { door: 0, door_f: 0, kudimov_wear: LOOK('kudimov_in'), kudimov_a: A(3.05), kudimov_d: 1.05, kudimov_mood: 'smile' });
+        await walk(kud, [[3.1, 2.7]]);
+        const sitting = sit(kud, 'R2');
+        const table = shot(s, { ...CAM.toast });
+        await sitting;
+        table.cut();
+        kud.look('nina');
+        s.tell('table:sat');
+        await s.wait(3.0);
+      },
+    },
+    // the old man stands up with his glass; Kudimov stands too, straight — L75, L76; the glass put down, he sits and
+    // turns to Busygin — L77. All six in profile; a choice on the father, the bridegroom, Nina
+    toast: {
+      after: 'table',
+      from: () => IV_TABLE({ ...CAM.toast, kudimov_look: 'nina', kudimov_mood: 'smile', busygin_mood: 'afraid', nina_look: P3(1.5, 2.7, TOP) }),
+      run: async s => {
+        const sar = s.person('sarafanov'), kud = s.person('kudimov'), nina = s.person('nina'), bus = s.person('busygin');
+        hold(s, 'sarafanov', 'glass_held');
+        await rise(sar, 'L1');
+        sar.turn(90);
+        sar.mood('smile');
+        const t = sar.do('toast');
+        kud.mood('neutral');
+        await rise(kud, 'R2');
+        await kud.turn(270);
+        kud.look('sarafanov');
+        await t;
+        sar.reach({ r: P3(1.3, 2.1, 1.45) });
+        s.tell('toast:news');
+        nina.look('kudimov');
+        nina.mood('thinking');
+        await s.wait(5.5);
+        sar.reach({ r: P3(1.45, 2.12, TOP + 0.05) });
+        const put = sar.do('reach_put');
+        await s.wait(1.0);
+        sar.with(null);
+        await put;
+        sar.reach(null);
+        const down = sit(kud, 'R2');
+        await sit(sar, 'L1');
+        await down;
+        sar.look('busygin');
+        sar.mood('sad');
+        bus.look('sarafanov');
+        s.tell('toast:turn');
+        await s.wait(3.0);
+      },
+    },
+    // “Let her go”: Nina lowers her head; Kudimov nods; the old man slowly raises his glass again
+    let_go: {
+      after: 'toast',
+      from: () => IV_TABLE({ ...CAM.toast, sarafanov_look: 'busygin', sarafanov_mood: 'sad', nina_mood: 'thinking', nina_look: 'kudimov', busygin_look: 'sarafanov' }),
+      run: async s => {
+        const sar = s.person('sarafanov'), kud = s.person('kudimov'), nina = s.person('nina');
+        nina.look(P3(1.45, 2.7, TOP));
+        nina.mood('sad');
+        await s.wait(1.0);
+        kud.look(P3(2.2, 2.7, TOP));
+        await s.wait(0.9);
+        kud.look('nina');
+        hold(s, 'sarafanov', 'glass_held');
+        sar.look(null);
+        sar.reach({ r: P3(1.35, 2.1, 1.3) });
+        s.tell('let_go:glass');
+        await s.wait(6.0);
+      },
+    },
+    // “Nina, stay”: Kudimov stands — L81; Nina gets up and stands between him and her father, in profile, angry
+    ask_stay: {
+      after: 'toast',
+      from: () => F.let_go.from(),
+      run: async s => {
+        const kud = s.person('kudimov'), nina = s.person('nina'), sar = s.person('sarafanov');
+        const view = shot(s, { ...CAM.ask });
+        await s.wait(0.6);
+        view.cut();
+        await rise(kud, 'R2');
+        await kud.turn(270);
+        kud.look('sarafanov');
+        kud.mood('angry');
+        s.tell('ask_stay:stand');
+        await s.wait(2.0);
+        await rise(nina, 'L2');
+        await walk(nina, [[1.0, 1.55], [1.7, 1.45]]);
+        await nina.turn(80);
+        nina.look('kudimov');
+        nina.mood('angry');
+        sar.look('nina');
+        await s.wait(3.0);
+      },
+    },
+    // “Stay. Not for Father's sake”: Nina looks at Busygin (close, in profile: surprised, then a smile); the old man looks
+    // from her to him; Kudimov slowly stands, sets his chair straight, stands upright — L117
+    for_me: {
+      after: 'toast',
+      from: () => F.let_go.from(),
+      run: async s => {
+        const kud = s.person('kudimov'), nina = s.person('nina'), sar = s.person('sarafanov');
+        cut(s, { ...CAM.for_me });
+        nina.look('busygin');
+        nina.mood('surprised');
+        await s.wait(2.0);
+        nina.mood('smile');
+        sar.look('nina');
+        sar.mood('thinking');
+        await s.wait(1.5);
+        sar.look('busygin');
+        await s.wait(1.2);
+        const view = shot(s, { ...CAM.toast });
+        kud.mood('neutral');
+        await rise(kud, 'R2');
+        view.cut();
+        await walk(kud, [[3.0, 2.75]]);
+        await kud.turn(270);
+        kud.look(null);
+        s.tell('for_me:stand');
+        await s.wait(4.0);
+      },
+    },
+
+    // V. The second night, out of the dark: Silva at the front door, his sleeve burnt; Busygin by the table — L92;
+    // the old man comes out of the room with his case and the old suitcase and stands in the doorway — L93, L94; Nina
+    // and Vasenka behind him; Silva turns to him — L95. A choice: the father, Silva
+    pack: {
+      from: () => PACK({ ...CAM.pack, fade: 1, ...OUT('sarafanov'), sarafanov_a: A(5.2), sarafanov_d: 2.9, ...wear('sarafanov', 'sarafanov'),
+        silva_mood: 'smile', silva_look: 'busygin', busygin_mood: 'tired', busygin_look: 'silva' }),
+      run: async s => {
+        const sar = s.person('sarafanov'), sil = s.person('silva'), vas = s.person('vasenka'), bus = s.person('busygin');
+        s.move('fade', 0, { over: 1.6, ease: 'out' });
+        await s.wait(4.0);
+        hold(s, 'sarafanov', 'case', 'suitcase');
+        sar.here(true);
+        await walk(sar, [SPOT.doorway]);
+        await sar.turn(283);
+        sar.mood('tired');
+        sar.look('busygin');
+        bus.look('sarafanov');
+        s.tell('pack:case');
+        if (Number(get('vasenka_by')) >= 0.5) {
+          await s.wait(1.5);
+          await walk(vas, [[4.3, 2.4], [3.6, 2.2], [3.15, 1.85]]);
+          await vas.turn(290);
+          vas.look('sarafanov');
+          await s.wait(3.0);
+        } else await s.wait(6.5);
+        await sil.turn(10);
+        sil.look('sarafanov');
+        sil.mood('smile');
+        s.tell('pack:silva');
+        await s.wait(3.5);
+      },
+    },
+    // “Tell him yourself”: he goes to the old man, a step from him — L96; (the box out of his pocket onto the table); the
+    // suitcase put down; then — he sits down at the table and reaches for his hand (`hurt` 0), or goes to the window
+    // and stands with his back to us (`hurt` 1) — L99
+    confess: {
+      after: 'pack',
+      from: () => PACK({ ...CAM.pack, sarafanov_mood: 'tired', sarafanov_look: 'busygin', busygin_look: 'sarafanov', silva_turn: 10, silva_look: 'sarafanov',
+        silva_mood: 'smile', ...(Number(get('vasenka_by')) >= 0.5 ? STAND('vasenka', [3.15, 1.85], 290, { vasenka_look: 'sarafanov' }) : {}) }),
+      run: async s => {
+        const sar = s.person('sarafanov'), bus = s.person('busygin');
+        const two = shot(s, { ...CAM.confess });
+        await walk(bus, [[3.1, 2.3], [3.3, 2.72]]);
+        two.cut();
+        await bus.turn(turnTo([3.3, 2.72], SPOT.doorway));
+        bus.look('sarafanov');
+        bus.mood('sad');
+        sar.mood('sad');
+        s.tell('confess:said');
+        await s.wait(5.0);
+        if (get('box_where') === 'busygin') {
+          hold(s, 'busygin', 'box_held');
+          await bus.turn(250);
+          bus.reach({ r: P3(2.18, 2.6, TOP + 0.04) });
+          const put = bus.do('reach_put');
+          await s.wait(1.0);
+          s.set('box_at', 'table');
+          bus.with(null);
+          await put;
+          bus.reach(null);
+          await bus.turn(turnTo([3.3, 2.72], SPOT.doorway));
+        }
+        sar.look(P3(3.6, 3.0, 0));
+        await sar.do('put_heavy');
+        hold(s, 'sarafanov', 'case');
+        sar.look('busygin');
+        if (Number(get('hurt')) >= 0.5) {
+          const back = shot(s, { ...CAM.back });
+          await walk(sar, [[3.3, 3.45], [2.4, 3.75], SPOT.window]);
+          back.cut();
+          await sar.turn(10);
+          sar.look('window#pane');
+          s.tell('confess:sarafanov');
+          await s.wait(5.0);
+        } else {
+          const p = sar.go('sit_down', { to: W(SEATS.R2[0], SEATS.R2[1]), turn: 270 });
+          await walk(bus, [[2.85, 2.25]]);
+          await bus.turn(270);
+          await p;
+          sar.on(P3(SEATS.R2[0], SEATS.R2[1], SEAT_H));
+          sar.do('seated', { loop: true });
+          bus.reach({ r: P3(2.15, 2.3, TOP) });
+          sar.reach({ r: 'busygin#hand_r' });
+          sar.look('busygin');
+          s.tell('confess:sarafanov');
+          await s.wait(1.5);
+          sar.mood('smile');
+          await s.wait(3.5);
+        }
+      },
+    },
+    // “Keep quiet”: Silva steps toward the old man and points at Busygin — L97 / L98; the old man, the suitcase in his
+    // hand, turns and goes to the window, stands with his back to us — L99 (into the glass)
+    exposed: {
+      after: 'pack',
+      from: () => F.confess.from(),
+      run: async s => {
+        const sar = s.person('sarafanov'), sil = s.person('silva'), bus = s.person('busygin');
+        await walk(sil, [[3.35, 1.55]]);
+        await sil.turn(turnTo([3.35, 1.55], SPOT.doorway));
+        sil.look('sarafanov');
+        sil.mood('angry');
+        sil.reach({ r: 'busygin' });
+        await sil.do('point');
+        bus.mood('afraid');
+        s.tell('exposed:said');
+        await s.wait(5.0);
+        sil.reach(null);
+        sil.look('busygin');
+        sar.look(null);
+        const back = shot(s, { ...CAM.back });
+        await walk(sar, [[3.3, 3.45], [2.4, 3.75]]);
+        back.cut();
+        await walk(sar, [SPOT.window]);
+        await sar.turn(10);
+        sar.look('window#pane');
+        s.tell('exposed:window');
+        await s.wait(4.0);
+      },
+    },
+    // he takes his coat off the hook; Silva opens the door and waits, they go out together (`silva_door` 1) — or
+    // Silva goes first, the door slams, he goes after (0). The old man stays where he stands
+    go_out: {
+      after: ['confess', 'exposed'],
+      from: () => PACK({ ...CAM.door, ...STAND('sarafanov', SPOT.window, 10, { sarafanov_with: WITH('sarafanov', 'case', 'suitcase'), sarafanov_look: 'window#pane' }),
+        ...STAND('busygin', [2.85, 2.25], 300, { busygin_mood: 'sad' }), ...STAND('silva', [3.35, 1.55], 330, { silva_mood: 'angry' }) }),
+      run: async s => {
+        const bus = s.person('busygin'), sil = s.person('silva');
+        cut(s, { ...CAM.door });
+        const together = Number(get('silva_door')) >= 0.5;
+        const sw = walk(sil, [SPOT.inDoor]);
+        await walk(bus, [[3.3, 1.2], SPOT.hook]);
+        await bus.turn(180);
+        bus.look('hook#coat');
+        bus.reach({ r: 'hook#coat' });
+        await bus.do('take');
+        s.set('coat_b', 'arm');
+        hold(s, 'busygin', 'coat_arm');
+        bus.reach(null);
+        await sw;
+        if (together) {
+          await sil.turn(180);
+          await s.move('door', 1, { over: 0.8, ease: 'out' });
+          await sil.turn(45);
+          sil.look('busygin');
+          await s.wait(1.0);
+          await s.all(walk(sil, [SPOT.hall]), (async () => { await s.wait(0.6); await walk(bus, [SPOT.inDoor, SPOT.hall]); })());
+          sil.here(false);
+          bus.here(false);
+          await s.move('door', 0, { over: 1.2, ease: 'inOut' });
+        } else {
+          await sil.turn(180);
+          await s.move('door', 1, { over: 0.5, ease: 'out' });
+          await walk(sil, [SPOT.hall]);
+          sil.here(false);
+          await s.move('door', 0, { over: 0.25, ease: 'in' });
+          await s.wait(1.2);
+          await walk(bus, [SPOT.inDoor]);
+          await s.move('door', 1, { over: 0.6, ease: 'out' });
+          await walk(bus, [SPOT.hall]);
+          bus.here(false);
+          await s.move('door', 0, { over: 0.25, ease: 'in' });
+        }
+        s.tell('go_out:gone');
+        await s.wait(1.0);
+      },
+    },
+    // night, out of the dark: the door — Busygin (and who came with him from the platform); he hangs his coat on the
+    // back of his chair and sits — L104; the old man sits facing him — L105; the snuffbox comes before him (off the
+    // shelf — L106 — or slid across the oilcloth); the old man goes to his room, his door left ajar
+    home_late: {
+      from: () => HOME({ fade: 1 }),
+      run: async s => {
+        const bus = s.person('busygin'), sar = s.person('sarafanov'), nina = s.person('nina'), vas = s.person('vasenka');
+        const came = get('came') || 'father', withNina = Number(get('nina_came')) >= 0.5 && get('nina_end') === 'home';
+        await s.move('fade', 0, { over: 1.6, ease: 'out' });
+        await comeIn(s, came, withNina);
+        // the box before him
+        if (get('box_where') === 'busygin') {
+          sar.reach({ r: 'table#box' });
+          await s.wait(1.0);
+          s.set('box_at', 'near');
+          await s.wait(0.6);
+          sar.reach(null);
+        } else {
+          await rise(sar, 'L1');
+          const room = shot(s, { ...CAM.cupboard });
+          await walk(sar, [[1.0, 1.55], [2.9, 1.55], [3.5, 2.85], SPOT.doorway]);
+          room.cut();
+          const back = shot(s, { ...CAM.tb });
+          await walk(sar, [SPOT.roomIn, SPOT.cupboard]);
+          await sar.turn(180);
+          sar.reach({ r: 'cupboard#box' });
+          const take = sar.do('take_shelf');
+          await s.wait(1.2);
+          s.set('box_at', 'none');
+          hold(s, 'sarafanov', 'box_held');
+          await take;
+          sar.reach(null);
+          await walk(sar, [SPOT.roomIn, SPOT.doorway]);
+          back.cut();
+          await walk(sar, [[3.5, 2.85], [2.95, 1.95]]);
+          await sar.turn(250);
+          sar.reach({ r: P3(2.0, 2.12, TOP + 0.04) });
+          const put = sar.do('reach_put');
+          await s.wait(1.0);
+          s.set('box_at', 'near');
+          sar.with(null);
+          await put;
+          sar.reach(null);
+        }
+        bus.look('table#box');
+        s.tell('home_late:box');
+        await s.wait(3.5);
+        // he goes to his room; the door stays ajar
+        sar.look(null);
+        if (s.get('sarafanov_on')) {
+          await rise(sar, 'L1');
+          await walk(sar, [[1.0, 1.55], [2.9, 1.55], [3.5, 2.85], SPOT.doorway, SPOT.roomIn, SPOT.sarDoor]);
+        } else await walk(sar, [[3.5, 2.85], SPOT.doorway, SPOT.roomIn, SPOT.sarDoor]);
+        await s.move('sar_door', 1, { over: 0.6, ease: 'out' });
+        await walk(sar, [SPOT.sarIn]);
+        sar.here(false);
+        s.move('sar_door', 0.3, { over: 1.0 });
+        s.set('sar_light', 1);
+        s.tell('home_late:room');
+        await ninaComes(s, withNina);
+        void vas;
+        await s.wait(3.0);
+      },
+    },
+    // night, out of the dark: the old man at the window, his back to us (or he comes in first and goes to it);
+    // Busygin comes in, his coat on his chair's back, sits (the box onto the oilcloth — he does not take it); the
+    // clock; the old man turns, takes the kettle to the stove — L107 — and sits facing him
+    home_anyway: {
+      from: () => HOME({ fade: 1, anyway: true }),
+      run: async s => {
+        const bus = s.person('busygin'), sar = s.person('sarafanov');
+        const came = get('came') || 'father', withNina = Number(get('nina_came')) >= 0.5 && get('nina_end') === 'home';
+        await s.move('fade', 0, { over: 1.6, ease: 'out' });
+        if (came !== 'none') {
+          await s.move('door', 1, { over: 0.8, ease: 'out' });
+          sar.here(true);
+          await walk(sar, [SPOT.inDoor, [2.9, 2.0], [2.4, 3.75], SPOT.window]);
+          await sar.turn(10);
+          sar.look('window#pane');
+        }
+        await comeIn(s, 'none', withNina, true);
+        if (get('box_where') === 'busygin') {
+          hold(s, 'busygin', 'box_held');
+          bus.reach({ r: 'table#box' });
+          const put = bus.do('reach_put');
+          await s.wait(1.0);
+          s.set('box_at', 'table');
+          bus.with(null);
+          await put;
+          bus.reach(null);
+        }
+        await s.wait(8.0);
+        sar.look(null);
+        await sar.turn(190);
+        sar.mood('tired');
+        s.tell('home_anyway:turn');
+        await walk(sar, [[1.0, 3.0], [1.2, 2.45]]);
+        sar.look('table#kettle');
+        sar.reach({ r: 'table#kettle' });
+        await s.wait(0.8);
+        s.set('kettle_at', 'none');
+        hold(s, 'sarafanov', 'kettle');
+        sar.reach(null);
+        await walk(sar, [SPOT.stove]);
+        await sar.turn(270);
+        sar.reach({ r: P3(0.7, 1.75, 1.05) });
+        await s.wait(0.8);
+        s.set('kettle_at', 'stove');
+        sar.with(null);
+        sar.reach(null);
+        sar.mood('smile');
+        await sar.turn(60);
+        sar.look('busygin');
+        await sit(sar, 'L1');
+        await ninaComes(s, withNina);
+        await s.wait(2.0);
+      },
+    },
+  };
+
+  // Nina at home (`nina_end` home) who did not come with him: out of the room to the table
+  async function ninaComes(s, withNina) {
+    if (get('nina_end') !== 'home' || withNina) return;
+    const nina = s.person('nina');
+    nina.here(true);
+    await walk(nina, [[5.0, 2.9], SPOT.roomIn, SPOT.doorway, [3.2, 2.7], [3.0, 3.3]]);
+    await sit(nina, 'R3');
+    nina.look('busygin');
+  }
+
+  // the end of the film: the kitchen at night, who is home (nina_end, vasya_end), the box where the party left it
+  function HOME({ fade, anyway }) {
+    const ninaHome = get('nina_end') === 'home', withNina = Number(get('nina_came')) >= 0.5 && ninaHome;
+    const came = get('came') || 'father';
+    const box = get('box_where') === 'busygin' ? (anyway ? 'none' : 'table') : 'shelf';
+    return ROOM({ ...(anyway ? CAM.back : CAM.win), fade, box_at: box, coat_b: 'none', rucksack: get('vasya_end') === 'home' ? 'none' : 'door',
+      nina_coat: ninaHome ? 1 : 0, sar_door: 0.08, kettle_at: 'table',
+      ...wear('busygin', 'busygin'), ...wear('sarafanov', 'sarafanov_home'), ...wear('nina', withNina ? 'nina' : 'nina_home'), ...wear('vasenka', 'vasenka_home'),
+      ...(came === 'none' && !anyway ? SIT('sarafanov', 'L1', { sarafanov_look: P3(3.2, 0.5, 1.6) })
+        : anyway && came === 'none' ? STAND('sarafanov', SPOT.window, 10, { sarafanov_look: 'window#pane' })
+          : { ...OUT('sarafanov'), ...wear('sarafanov', 'sarafanov') }),
+      ...(ninaHome && !withNina ? { ...OUT('nina'), nina_a: A(5.4), nina_d: 3.0 } : {}),
+    });
+  }
+  // the door at night: Busygin in (with who came), his coat onto his chair's back, he sits — L104 — `home_late:sat`;
+  // the old man (who came in with him, or sat here) sits facing him — L105
+  async function comeIn(s, came, withNina, quiet) {
+    const bus = s.person('busygin'), sar = s.person('sarafanov'), nina = s.person('nina'), vas = s.person('vasenka');
+    await s.move('door', 1, { over: 1.0, ease: 'out' });
+    bus.here(true);
+    const goes = [walk(bus, [SPOT.inDoor, [2.95, 1.75]])];
+    if (came !== 'none' && !quiet) {
+      await s.wait(0.9);
+      sar.here(true);
+      goes.push(walk(sar, [SPOT.inDoor, [2.5, 1.45], [1.0, 1.55]]));
+      if (came === 'family' && get('vasya_end') === 'home') {
+        await s.wait(0.9);
+        vas.here(true);
+        goes.push((async () => { await walk(vas, [SPOT.inDoor, [3.3, 2.0], SPOT.doorway, SPOT.roomIn, [5.3, 2.6]]); vas.here(false); })());
+      }
+    }
+    if (withNina) {
+      await s.wait(0.9);
+      nina.here(true);
+      goes.push((async () => { await walk(nina, [SPOT.inDoor, [3.15, 2.4]]); await sit(nina, 'R2'); nina.look('busygin'); })());
+    }
+    await goes[0];
+    s.move('door', 0, { over: 1.0, ease: 'in' });
+    // the coat on the back of his chair, not the hook
+    bus.reach({ r: P3(2.85, 2.1, 0.9) });
+    await s.wait(0.9);
+    s.set('coat_b', 'chair');
+    s.set('busygin_wear', LOOK('busygin_shirt'));
+    bus.reach(null);
+    await sit(bus, 'R1');
+    bus.mood('tired');
+    if (quiet) { await s.all(...goes); return; }
+    const table = shot(s, { ...CAM.tb });
+    s.tell('home_late:sat');
+    await s.all(...goes);
+    table.cut();
+    if (!s.get('sarafanov_on')) await sit(sar, 'L1');
+    sar.look('busygin');
+    sar.mood('smile');
+    bus.look('sarafanov');
+    await s.wait(4.0);
+  }
+
+  return F;
+};
+
+// the walls' paint (shared by the wall cards): the kitchen — green oil paint to 1.2 m under a dark line, whitewash
+// above; the room — faded wallpaper with a small pattern over a skirting. w wide, from its foot up h (the room's
+// height unless said: a piece over a door is whitewash or paper only)
+function kitchenWall(g, e, w, h) {
+  const top = -(h || H);
+  g.fillStyle = '#d6cbb4';
+  g.fillRect(-w / 2, top, w, -top + 0.02);
+  if (!h) {
+    g.fillStyle = '#62725f';
+    g.fillRect(-w / 2, -1.2, w, 1.22);
+    g.fillStyle = '#3a4238';
+    g.fillRect(-w / 2, -1.24, w, 0.04);
+    g.fillStyle = '#4a3a2c';
+    g.fillRect(-w / 2, -0.1, w, 0.12);
+  }
+  g.fillStyle = 'rgba(120,110,95,0.12)';
+  for (let i = 0; i < (w > 1.4 ? 6 : 0); i++) {
+    g.beginPath();
+    g.ellipse(-w / 2 + 0.7 + e.rnd() * (w - 1.4), top + 0.4 + e.rnd() * (-top - 1.8), 0.3 + e.rnd() * 0.3, 0.12 + e.rnd() * 0.2, 0, 0, Math.PI * 2);
+    g.fill();
+  }
+}
+function roomWall(g, e, w, h) {
+  const top = -(h || H);
+  g.fillStyle = '#a39479';
+  g.fillRect(-w / 2, top, w, -top + 0.02);
+  g.fillStyle = 'rgba(70,58,44,0.35)';
+  for (let x = -w / 2 + 0.1; x < w / 2; x += 0.22) for (let y = top + 0.12; y < -0.2; y += 0.26) {
+    g.beginPath();
+    g.arc(x + ((Math.round(y * 100) % 2) ? 0.11 : 0), y, 0.025, 0, Math.PI * 2);
+    g.fill();
+  }
+  if (!h) {
+    g.fillStyle = '#4a3a2c';
+    g.fillRect(-w / 2, -0.12, w, 0.14);
+  }
+}
+
+return { clamp, A, W, P3, H, WINDOW, DOOR, DOORWAY, STOVE, TABLE, TOP, LAMP, CLOCK, HOOK, STOOL, CUPBOARD, COT, COT_CHAIR, SOFA, SAR_DOOR, SAR_LAMP,
+  CASE_CHAIR, ON, SEATS, SEAT_H, SPOT, SNEAK, SNEAK_LEN, SNEAK_BEHIND, sneakAt, sneakOf, sneakWay, FAR_TRAIN, FATHER_FAR, HEIGHT, PEOPLE, NAMES, CAM,
+  film, kitchenWall, roomWall };

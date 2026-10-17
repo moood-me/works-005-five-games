@@ -1,12 +1,12 @@
 # cast — the people of “The Elder Son”
 
-Figures of shapes in the world's style `zima`: from `shadow` (a slender body, hands with fingers), but the head bigger
+Figures of shapes in the world's style `winter`: from `shadow` (a slender body, hands with fingers), but the head bigger
 (×1.3), the neck shorter, the arms and legs fuller — the face reads in a medium shot. The paint `toned`: the light of a
 lamp, a window, a street lamp falls on the face and chest, on the dark side a shadow; **not a silhouette**. No lines.
 Everyone's face is `simple` (eyes, brows, nose, mouth), the expression — the key `<id>_mood` (`neutral`, `smile`,
 `laugh`, `sad`, `angry`, `surprised`, `afraid`, `disgusted`, `thinking`, `tired`). Each has something of their own:
 Sarafanov — lines at the eyes, grey brows (`f_sarafanov`); Nina — straight brows (`f_nina`); Vasenka — tufts down on
-the forehead (the hair `vihry`); Silva — a thin moustache (`f_silva`); Kudimov — a square chin (`f_kudimov`); the old
+the forehead (the hair `tufts`); Silva — a thin moustache (`f_silva`); Kudimov — a square chin (`f_kudimov`); the old
 woman in the sheepskin — lines (`f_old`).
 
 In a scene: `"modules": ["cast"]`, on a person `"person": {"cast": "cast", "who": "nina"}`. A look for a while — the

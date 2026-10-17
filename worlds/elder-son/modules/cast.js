@@ -1,4 +1,4 @@
-// cast — the people of “The Elder Son”: figures of shapes in the world's style `zima` (made from `shadow`: slender, the
+// cast — the people of “The Elder Son”: figures of shapes in the world's style `winter` (made from `shadow`: slender, the
 // fingers of its hands — but a bigger head, a shorter neck, fuller arms and legs, so a face reads in a medium shot),
 // painted lit: the lamp's, the window's, the street lamp's light lies on the face and the chest, the side away from it
 // in shade — never a silhouette. No lines. Every one has the face `simple` (eyes, brows, a nose, a mouth; the
@@ -275,7 +275,7 @@ const C_SIL = { skin: '#ddb293', hair: '#2e2018', garment: '#7a5538', top: '#7a5
 const C_SAR = { skin: '#d8ad90', hair: '#c4bfb7', garment: '#433f3d', top: '#433f3d', bottom: '#2a2827', shoes: '#1d1b1a', hat: '#4f4034', accent: '#dcd6c8' };
 const C_VAS = { skin: '#e0ba9e', hair: '#5e4433', garment: '#3e4438', top: '#8f8a80', bottom: '#2e2e30', shoes: '#211f1d' };
 const C_KUD = { skin: '#dbb194', hair: '#3a2c22', garment: '#55594a', top: '#55594a', bottom: '#33352d', shoes: '#191817', hat: '#4a4038' };
-const look = (who, more) => ({ kind: 'shapes', style: 'zima', who, line: false, ...more });
+const look = (who, more) => ({ kind: 'shapes', style: 'winter', who, line: false, ...more });
 const ids = ['busygin', 'busygin_shirt', 'silva', 'silva_shirt', 'silva_burnt', 'sarafanov', 'sarafanov_hat', 'sarafanov_nohat',
   'sarafanov_home', 'sarafanov_best', 'sarafanov_funeral', 'nina', 'nina_home', 'vasenka', 'vasenka_home', 'kudimov', 'kudimov_in',
   'makarskaya', 'neighbor1', 'neighbor2', 'band1', 'band2', 'band3', 'mourner1', 'mourner2', 'mourner3', 'mourner4'];
@@ -286,7 +286,7 @@ return {
   shapes: {
     // the world's style: `shadow`'s slender trunk and fingered hands, a bigger head on a shorter neck, fuller limbs;
     // painted lit (colours under the scene's light, shade on the far side), no lines, the face `simple`
-    styles: { zima: { from: 'shadow', name: 'winter', head: 1.3, egg: [0.88, 1.1, 0.98], neck: 0.6, legs: 1.05, limb: 1.0, feet: 'bean', paint: 'toned', line: 0, face: 'simple' } },
+    styles: { winter: { from: 'shadow', name: 'winter', head: 1.3, egg: [0.88, 1.1, 0.98], neck: 0.6, legs: 1.05, limb: 1.0, feet: 'bean', paint: 'toned', line: 0, face: 'simple' } },
     characters: {
       busygin: { from: 'man', name: 'Busygin', body: { height: 1.04, shoulders: 1.08, thick: 1.0 },
         garment: 'long_coat', hair: 'short', hat: 'none', scarf: true, face: 'f_plain', colors: C_BUS },
@@ -314,18 +314,18 @@ return {
       nina_home: { from: 'nina', name: 'Nina at home', garment: 'dress', parts: [],
         colors: { skin: '#e6c2a5', hair: '#4a2c1d', garment: '#3c3140', top: '#3c3140', bottom: '#2e292b', shoes: '#231c1b', accent: '#8f7a66' } },
       vasenka: { from: 'youth', name: 'Vasenka', body: { height: 1.01, shoulders: 0.94, thick: 0.8, arms: 1.04, legs: 1.03 },
-        garment: 'telogreika', hair: 'vihry', hat: 'none', scarf: false, face: 'f_plain', colors: C_VAS },
+        garment: 'quilted_jacket', hair: 'tufts', hat: 'none', scarf: false, face: 'f_plain', colors: C_VAS },
       vasenka_home: { from: 'vasenka', name: 'Vasenka at home', garment: 'sweater', colors: { ...C_VAS, garment: '#7b7c7e', top: '#7b7c7e' } },
       kudimov: { from: 'man', name: 'Kudimov', body: { height: 1.02, shoulders: 1.16, thick: 1.04 },
-        garment: 'shinel', hair: 'short', hat: 'ushanka_star', scarf: false, face: 'f_kudimov', colors: C_KUD },
-      kudimov_in: { from: 'kudimov', name: 'Kudimov indoors', garment: 'gimnastyorka', hat: 'none', parts: ['belt'],
+        garment: 'greatcoat', hair: 'short', hat: 'ushanka_star', scarf: false, face: 'f_kudimov', colors: C_KUD },
+      kudimov_in: { from: 'kudimov', name: 'Kudimov indoors', garment: 'tunic', hat: 'none', parts: ['belt'],
         colors: { ...C_KUD, garment: '#68694e', top: '#68694e' } },
       makarskaya: { from: 'woman', name: 'Makarskaya', body: { height: 0.97, shoulders: 0.9, hips: 1.06, thick: 0.9 },
         garment: 'coat', hair: 'bun', hat: 'kerchief', scarf: false, face: 'f_plain',
         colors: { skin: '#e3bc9e', hair: '#3a2219', garment: '#8c3d2c', top: '#8c3d2c', bottom: '#241b19', shoes: '#1d1716', hat: '#b49a6a' } },
-      neighbor1: { from: 'man', name: 'Neighbour', body: { height: 0.98, thick: 1.06 }, garment: 'telogreika_shut', hair: 'short', hat: 'ushanka', face: 'f_plain',
+      neighbor1: { from: 'man', name: 'Neighbour', body: { height: 0.98, thick: 1.06 }, garment: 'quilted_jacket_shut', hair: 'short', hat: 'ushanka', face: 'f_plain',
         colors: { skin: '#d6a98a', hair: '#3a3029', garment: '#3c4038', top: '#3c4038', bottom: '#2b2a2a', shoes: '#1c1a19', hat: '#4a4038' } },
-      neighbor2: { from: 'woman', name: 'Neighbour woman', body: { height: 0.92, thick: 1.08 }, garment: 'tulup', hair: 'bun', hat: 'kerchief', face: 'f_plain',
+      neighbor2: { from: 'woman', name: 'Neighbour woman', body: { height: 0.92, thick: 1.08 }, garment: 'sheepskin', hair: 'bun', hat: 'kerchief', face: 'f_plain',
         colors: { skin: '#dcb193', hair: '#4a3a30', garment: '#75604a', top: '#75604a', bottom: '#2b2622', shoes: '#1c1a19', hat: '#5c4f55' } },
       band1: { from: 'man', name: 'Trumpeter', body: { height: 1.0, thick: 1.05 }, garment: 'coat', hair: 'short', hat: 'fur_hat', scarf: false, face: 'f_plain', parts: ['trumpet'],
         colors: { skin: '#d6a98a', garment: '#1e1d20', top: '#1e1d20', bottom: '#1a191b', hat: '#252226', shoes: '#141313' } },
@@ -335,7 +335,7 @@ return {
         colors: { skin: '#d3a587', garment: '#1f1e21', top: '#1f1e21', bottom: '#1a191b', hat: '#1d1c1e', shoes: '#141313' } },
       mourner1: { from: 'woman', name: 'Mourner', body: { height: 0.92, thick: 0.95 }, garment: 'coat', hair: 'bun', hat: 'kerchief', face: 'f_plain',
         colors: { skin: '#dcb193', garment: '#2c282a', top: '#2c282a', hat: '#3d363a', bottom: '#211e1f' } },
-      mourner2: { from: 'woman', name: 'Old woman in a sheepskin', body: { height: 0.86, thick: 1.12, shoulders: 0.92 }, garment: 'tulup', hair: 'bun', hat: 'kerchief', face: 'f_old',
+      mourner2: { from: 'woman', name: 'Old woman in a sheepskin', body: { height: 0.86, thick: 1.12, shoulders: 0.92 }, garment: 'sheepskin', hair: 'bun', hat: 'kerchief', face: 'f_old',
         colors: { skin: '#d4a88c', hair: '#c4bfb7', garment: '#6e5a45', top: '#6e5a45', hat: '#4c4648', bottom: '#2b2521' } },
       mourner3: { from: 'man', name: 'Mourner', body: { height: 0.97, thick: 1.0 }, garment: 'coat', hair: 'short', hat: 'cap', face: 'f_plain',
         colors: { skin: '#d6a98a', garment: '#2b2b2e', top: '#2b2b2e', hat: '#252428', bottom: '#1e1d1f' } },
@@ -361,16 +361,16 @@ return {
       old_coat: { name: 'old coat', hang: [{ to: 1.18, from: 'shoulders', flare: 0.16, ragged: true }], sleeves: 'garment' },
       old_coat_open: { name: 'open coat', hang: [{ to: 1.18, from: 'shoulders', flare: 0.2, ragged: true }], sleeves: 'garment',
         draw: F => { front(F, 0.4, F.colors.top); } },
-      shinel: { name: 'greatcoat', hang: [{ to: 1.42, from: 'shoulders', flare: 0.22, ragged: false }], sleeves: 'garment',
+      greatcoat: { name: 'greatcoat', hang: [{ to: 1.42, from: 'shoulders', flare: 0.22, ragged: false }], sleeves: 'garment',
         draw: F => { // two rows of brass buttons
           const { add, mul } = V(), [c, sd, fw, w, d] = sec(F, 3), uc = F.up('Chest');
           for (const s of [-1, 1]) for (const y of [0.06, -0.04, -0.14]) F.ball(add(c, add(mul(sd, s * w * 0.32), add(mul(fw, d * 1.08), mul(uc, y * F.fit.h)))), [sd, uc, fw], [0.012 * F.fit.h, 0.012 * F.fit.h, 0.006 * F.fit.h], BRASS, 6);
         } },
-      gimnastyorka: { name: 'tunic', hang: [{ to: 0.3, from: 'shoulders', flare: 0.06, folds: false }], sleeves: 'garment' },
-      tulup: { name: 'sheepskin coat', hang: [{ to: 1.2, from: 'shoulders', flare: 0.34, ragged: false }], sleeves: 'garment' },
-      telogreika: { name: 'open quilted jacket', hang: [{ to: 0.55, from: 'shoulders', flare: 0.18, folds: false }], sleeves: 'garment',
+      tunic: { name: 'tunic', hang: [{ to: 0.3, from: 'shoulders', flare: 0.06, folds: false }], sleeves: 'garment' },
+      sheepskin: { name: 'sheepskin coat', hang: [{ to: 1.2, from: 'shoulders', flare: 0.34, ragged: false }], sleeves: 'garment' },
+      quilted_jacket: { name: 'open quilted jacket', hang: [{ to: 0.55, from: 'shoulders', flare: 0.18, folds: false }], sleeves: 'garment',
         draw: F => { front(F, 0.42, F.colors.top); } },
-      telogreika_shut: { name: 'quilted jacket', hang: [{ to: 0.55, from: 'shoulders', flare: 0.14, folds: false }], sleeves: 'garment' },
+      quilted_jacket_shut: { name: 'quilted jacket', hang: [{ to: 0.55, from: 'shoulders', flare: 0.14, folds: false }], sleeves: 'garment' },
       cardigan: { name: 'knitted cardigan', hang: [{ to: 0.5, from: 'shoulders', flare: 0.08, folds: false }], sleeves: 'garment' },
       sweater: { name: 'sweater', hang: [{ to: 0.32, from: 'shoulders', flare: 0.05, folds: false }], sleeves: 'garment' },
     },
@@ -385,7 +385,7 @@ return {
         F.tube([from, mid, end], [[0, rh * 0.32], [0.6, rh * 0.28], [1.6, rh * 0.2], [1.9, rh * 0.24], [2, 0.004]], [[0, F.colors.hair]], 10, hs, 0.85);
       } },
       // Vasenka's: short hair standing up, tufts falling on the forehead
-      vihry: { name: 'tufts', draw: F => {
+      tufts: { name: 'tufts', draw: F => {
         MooodShapes.HAIR.spiky.draw(F);
         const { on, axes, r: rh } = F.head;
         for (const [x, l] of [[-0.3, 0.16], [-0.08, 0.2], [0.16, 0.17], [0.36, 0.12]]) {
