@@ -21,7 +21,7 @@ export default {
   about: 15,
   skipped: { startles: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The Pomeranian eyed the stranger’s hand and would not come near') });
+    const mg = g.minigame({ phrase: tr('The Pomeranian looked at the stranger’s hand and did not dare come near') });
     const send = keys(g);
     const lead = mg.lead({ zone: ZONE, steer: 'follow', release: 'stay' });
     b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
