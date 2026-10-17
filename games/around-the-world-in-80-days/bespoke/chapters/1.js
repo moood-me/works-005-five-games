@@ -151,7 +151,7 @@ export default {
         if (r?.hours) g.hours(r.hours, tr('The chase'));
         g.beds({ elephant: 0.6, drums: 0.3 }, 3);
         await g.say('guide', 'They knew me. I can never go home now');
-        g.mark('guide', true, tr('The guide won\'t forget'));
+        g.mark('guide', true, tr('The guide will remember this'));
         await g.beat('aouda_fear');
       }
     },

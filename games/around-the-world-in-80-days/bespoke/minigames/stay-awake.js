@@ -28,7 +28,7 @@ export default {
   about: 40,
   skipped: { told: true },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The quay lights swim double. The Carnatic sails tonight, and his master doesn\'t know') });
+    const mg = g.minigame({ phrase: tr('The lights of the quay swim double. The Carnatic sails tonight, and his master does not know') });
     const send = keys(g);
     send('boatman', 1);
     send('message', 0);

@@ -87,7 +87,7 @@
 @keyframes slip-in { from { opacity: 0; } }
 
 /* the hint: one line low in the middle */
-#layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 6px 20px 7px; max-width: 80vw; white-space: nowrap;
+#layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 6px 20px 7px; max-width: 80vw; text-wrap: balance;
   font: italic 22px/1.2 var(--title); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); opacity: 0; transition: opacity 1.2s ease; }
 #layer .hint.on { opacity: 0.95; }
 

@@ -38,7 +38,7 @@
 //     `line` — what the notebook says beside it, if anything ('The Mongolia: two days early')
 //   g.money(delta) — the carpet-bag moves by delta £: the notes fly
 //   g.gauge('hours' | 'money') — the notebook / the bag shown from now on; its one line of what it means said once
-//   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… won't forget» (REMEMBERS)
+//   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… will remember this» (REMEMBERS)
 //   g.mark(key, value, text) — remembered (state.marks[key]); text — a stamp, if any
 //   g.book(line, hand) — the player gives the notebook (touches it), and the line BOOK[line] is written in it by
 //     `hand` ('aouda' | 'pp' | 'fogg'); it stays there (state.lines: {line, hand} — its name, not its text)
@@ -65,7 +65,7 @@ export const RULES = {
   hours: tr('The notebook: time in hand against the timetable. Everything unforeseen is paid out of it.'),
 };
 // the stamp of who remembers (g.relate)
-export const REMEMBERS = { aouda: tr('Aouda won\'t forget'), fix: tr('Fix won\'t forget'), pp: tr('Passepartout won\'t forget') };
+export const REMEMBERS = { aouda: tr('Aouda will remember this'), fix: tr('Fix will remember this'), pp: tr('Passepartout will remember this') };
 // the lines written in the notebook (g.book), by their names
 export const BOOK = { cousin: tr('Hong Kong. Cousin Jeejeeh'), day: tr('+1 day: we travelled towards the sun!') };
 export const ENDINGS = [

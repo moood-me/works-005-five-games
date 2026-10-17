@@ -74,7 +74,7 @@ export default {
       } else {
         await g.say('fogg', 'I will pay your passage to Holland. The mail steamer is safe, and it will take you to your kin');
         g.money(-500);
-        g.mark('holland', true, tr('Aouda won\'t forget'));
+        g.mark('holland', true, tr('Aouda will remember this'));
         await g.say('aouda', 'Thank you, Mr. Fogg');
       }
     },

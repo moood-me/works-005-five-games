@@ -131,7 +131,7 @@ export default {
         g.money(-5000);
         g.sound.notes();
         g.hours(-1, tr('The soldiers went without him'));
-        g.mark('paid', true, tr('Passepartout won\'t forget'));
+        g.mark('paid', true, tr('Passepartout will remember this'));
         g.set('fogg_on_train', 1);
         const gone = g.told('train_leaves:gone');
         const leaves = g.beat('train_leaves');
