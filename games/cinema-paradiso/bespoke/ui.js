@@ -16,6 +16,7 @@
 //     folds and goes; 'envelope' — an envelope face down: pressed it turns over (its violet stamp: the text), pressed
 //     again it goes. onOpen — once it lies open (its voice). → once it has gone. text: its lines ('\n')
 //   view.replaying(on) — the plate «Replay» in the corner while a replay goes on (game.js)
+//   view.quiet() — what a chapter left showing taken away (the map comes)
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
 //     opened by his sign on the map (author() → what opens or closes it), lists the chapters, their steps and the
@@ -88,6 +89,11 @@ export function ui(layer) {
     },
     letter: (letter, { signal, onOpen } = {}) => (letter.kind === 'envelope' ? envelope(layer, letter, signal, onOpen) : unfold(layer, letter, signal, onOpen)),
     replaying(on) { replay.hidden = !on; },
+    // what a chapter left showing (its strips, its hint) taken away: the map comes
+    quiet() {
+      toasts.replaceChildren();
+      hinted();
+    },
     author({ chapters, plays, at, games, go }) {
       // the map (his sign on the map opens it): «play as…», then every chapter a column of its steps (and their
       // minigames) in a window over the scene; a click outside, ✕ or Esc closes it
