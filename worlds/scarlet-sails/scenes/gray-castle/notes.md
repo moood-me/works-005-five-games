@@ -158,7 +158,7 @@ stands on the straight line from the start to the target: where there is furnitu
 - The paintings do not read what moves: `hour`, `fire`, `lamps`, `candles`, `nail1…3`, `painting_alive`, `bundle`,
   `note`, `coat_on_chair`, `grip1…grip4`, `dust` — only `animate`, shaders, particles, `place`.
 - Light is not painted: the patches on the floor are light through the panes, the haloes — `hazeGlow`.
-- `sky.wgsl` and the sky's `uniforms` are written by `node tools/sky.js scenes/gray-castle` (the module `sky`).
+- `sky.wgsl` and the sky's `uniforms` are written by `node tools/sky.js gray-castle` (the module `sky`).
 
 ## Contract for the check
 

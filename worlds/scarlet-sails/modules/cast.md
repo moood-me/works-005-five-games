@@ -6,7 +6,7 @@ lengths are a man's metres, multiplied by `F.fit.h` (the height as a share of 1.
 
 ## Style
 
-`parusa` — the engine's flat geometry (`flat`): straight edges, clean colours, the light and the shadows the scene's (`paint: lit`), a fine
+`sails` — the engine's flat geometry (`flat`): straight edges, clean colours, the light and the shadows the scene's (`paint: lit`), a fine
 line. Like the whole world: modern, fine, minimal; faces are dots (the close-ups are not the engine's people).
 
 ## Who
