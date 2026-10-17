@@ -50,29 +50,29 @@ const several = (stem, n, tail = '', from = 1) => Array.from({ length: n }, (_, 
 // The minigames (game.md §7): the scene a minigame is played on, the keys it moves and those it only listens to, the
 // points its marks stand on, the fields of its opts and of its result
 const MINIGAMES = {
-  okna: { scene: 'street', keys: ['knock', ...several('win', 5), 'snow'], points: several('win', 5), opts: ['refuse'], result: ['knocked'] },
-  ruki: { scene: 'home', keys: ['thaw', 'rub'], points: ['hands#hands'], result: ['seconds'] },
-  chai: { scene: 'home', keys: ['which', 'pour', 'glass1', 'glass2', 'spill', 'shake'], points: ['tea#glass1', 'tea#glass2'], opts: ['ask'], result: ['spills'] },
-  tabakerka: { scene: 'home', keys: [...several('finger', 4), 'old', 'push', 'old_close'],
+  windows: { scene: 'street', keys: ['knock', ...several('win', 5), 'snow'], points: several('win', 5), opts: ['refuse'], result: ['knocked'] },
+  hands: { scene: 'home', keys: ['thaw', 'rub'], points: ['hands#hands'], result: ['seconds'] },
+  tea: { scene: 'home', keys: ['which', 'pour', 'glass1', 'glass2', 'spill', 'shake'], points: ['tea#glass1', 'tea#glass2'], opts: ['ask'], result: ['spills'] },
+  snuffbox: { scene: 'home', keys: [...several('finger', 4), 'old', 'push', 'old_close'],
     points: [...several('box#finger', 4), 'box#box', 'box#old'], opts: ['mode'], result: ['closed', 'seconds'] },
-  tsypochki: { scene: 'home', keys: ['sneak', 'stir'], listens: ['sneak_at'], points: ['clock#face'], result: ['creaks'] },
-  inei: { scene: 'home', keys: ['hole', 'far_train'], points: ['window#pane'], result: ['hole'] },
-  'pod-ruku': { scene: 'hill', keys: ['down', 'catch', 'fall'], listens: ['down_at'], points: ['sarafanov#shoulder_l'], result: ['falls'] },
-  sledom: { scene: 'hill', keys: ['sar_go', 'follow', 'hold', 'duck'], listens: ['follow_at', 'sar_at'], points: ['sarafanov'], result: ['seen'] },
-  ryukzak: { scene: 'platform', keys: ['pull', 'grip', 'door_bg'], points: ['strap#grip'], result: ['slips'] },
-  vyodra: { scene: 'street', keys: ['vyodra', 'fire'], points: ['barrel', 'shed'], result: ['buckets'] },
-  palto: { scene: 'street', keys: ['lay'], points: ['shawl#coat', 'shawl#shoulders'], result: ['seconds'] },
-  begom: { scene: 'street', keys: ['run', 'look_back'], listens: ['run_at'], points: ['busygin'], result: ['seconds', 'looks'] },
-  steklo: { scene: 'platform', keys: ['wipe'], points: ['train_window#pane'], result: ['wipe'] },
+  tiptoe: { scene: 'home', keys: ['sneak', 'stir'], listens: ['sneak_at'], points: ['clock#face'], result: ['creaks'] },
+  frost: { scene: 'home', keys: ['hole', 'far_train'], points: ['window#pane'], result: ['hole'] },
+  'arm-in-arm': { scene: 'hill', keys: ['down', 'catch', 'fall'], listens: ['down_at'], points: ['sarafanov#shoulder_l'], result: ['falls'] },
+  following: { scene: 'hill', keys: ['sar_go', 'follow', 'hold', 'duck'], listens: ['follow_at', 'sar_at'], points: ['sarafanov'], result: ['seen'] },
+  rucksack: { scene: 'platform', keys: ['pull', 'grip', 'door_bg'], points: ['strap#grip'], result: ['slips'] },
+  buckets: { scene: 'street', keys: ['buckets', 'fire'], points: ['barrel', 'shed'], result: ['buckets'] },
+  coat: { scene: 'street', keys: ['lay'], points: ['shawl#coat', 'shawl#shoulders'], result: ['seconds'] },
+  running: { scene: 'street', keys: ['run', 'look_back'], listens: ['run_at'], points: ['busygin'], result: ['seconds', 'looks'] },
+  glass: { scene: 'platform', keys: ['wipe'], points: ['train_window#pane'], result: ['wipe'] },
 };
 // game.md §3.4: what game.js itself takes of “The Yard” (it is not run here)
 const YARD = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'go', 'snow'], offer: 'signal#light' };
 // the "live" results put in (game.md §11): both edges
 const EDGES = [
-  { okna: { knocked: [] }, chai: { spills: 1 }, tsypochki: { creaks: 0 }, inei: { hole: 0 }, 'pod-ruku': { falls: 0 }, sledom: { seen: 0 },
-    ryukzak: { slips: 0 }, vyodra: { buckets: 0 }, begom: { looks: 0 }, steklo: { wipe: 0.3 } },
-  { okna: { knocked: [1, 2, 3, 4, 5] }, chai: { spills: 2 }, tsypochki: { creaks: 2 }, inei: { hole: 1 }, 'pod-ruku': { falls: 1 }, sledom: { seen: 1 },
-    ryukzak: { slips: 2 }, vyodra: { buckets: 3 }, begom: { looks: 3 }, steklo: { wipe: 1 } },
+  { windows: { knocked: [] }, tea: { spills: 1 }, tiptoe: { creaks: 0 }, frost: { hole: 0 }, 'arm-in-arm': { falls: 0 }, following: { seen: 0 },
+    rucksack: { slips: 0 }, buckets: { buckets: 0 }, running: { looks: 0 }, glass: { wipe: 0.3 } },
+  { windows: { knocked: [1, 2, 3, 4, 5] }, tea: { spills: 2 }, tiptoe: { creaks: 2 }, frost: { hole: 1 }, 'arm-in-arm': { falls: 1 }, following: { seen: 1 },
+    rucksack: { slips: 2 }, buckets: { buckets: 3 }, running: { looks: 3 }, glass: { wipe: 1 } },
 ];
 // the script's length (game.md §11): a choice, a scene's opening, “The Yard” with a title, with a map
 const ACT = 8, OPEN = 1, TITLE_S = 7, MAP_S = 12;
@@ -474,17 +474,17 @@ const LOGIC = [
   ['the ending “All the Same”', (f, s) => [f.ending === 'anyway', said(s, 107), s.beats.has('home_anyway')]],
   ['the ending “On Saturday”', (f, s) => [f.ending === 'saturday', said(s, 108)]],
   ['the ending “The Suitcase”', (f, s) => [f.ending === 'suitcase', said(s, 109)]],
-  ['he left', (f, s) => [f.train === 'go', s.beats.has('boards'), s.played.has('steklo')]],
+  ['he left', (f, s) => [f.train === 'go', s.beats.has('boards'), s.played.has('glass')]],
   ['L89 / L90', (f, s) => [f.ninaIs === 'knows', said(s, 89), !said(s, 90)]],
   ['L97 / L98', (f, s, st) => (st.choices.truth === 'silent' ? [f.entry === 'asked', said(s, 97), !said(s, 98)] : [true])],
   ['the Fiancé\'s third option', (f, s) => [f.ninaIs === 'knows', (s.offered.kudimov ?? []).includes('for_me')]],
-  ['the result of “Windows” → knocked', (f, s) => [true, f.knocked === (s.results.okna?.knocked ?? []).join(''), (opened(s, SCENES.street, 'evening')?.knocked ?? f.knocked) === f.knocked]],
-  ['the result of “On Tiptoe” → heard', (f, s) => (s.played.has('tsypochki') ? [true, s.set[SCENES.home]?.heard === (s.results.tsypochki.creaks > 0 ? 1 : 0)] : [true])],
-  ['the result of “Arm in Arm” → snowy', (f, s) => (s.played.has('pod-ruku') ? [true, s.set[SCENES.hill]?.snowy === (s.results['pod-ruku'].falls > 0 ? 1 : 0)] : [true])],
-  ['the result of “Following” → seen', (f, s) => (s.played.has('sledom') ? [true, s.set[SCENES.hill]?.seen === (s.results.sledom.seen > 0 ? 1 : 0)] : [true])],
-  ['the result of “The Rucksack” → torn', (f, s) => (s.played.has('ryukzak') ? [true, s.set[SCENES.platform]?.torn === (s.results.ryukzak.slips >= 2 ? 1 : 0)] : [true])],
-  ['the result of “Buckets” → shed_left', (f, s) => (s.played.has('vyodra') ? [true, s.set[SCENES.street]?.shed_left === (s.results.vyodra.buckets >= 3 ? 1 : 0)] : [true])],
-  ['the result of “Running” → late_run', (f, s) => (s.played.has('begom') ? [true, opened(s, SCENES.platform, 'last')?.late_run === (s.results.begom.looks >= 2 ? 1 : 0)] : [true])],
+  ['the result of “Windows” → knocked', (f, s) => [true, f.knocked === (s.results.windows?.knocked ?? []).join(''), (opened(s, SCENES.street, 'evening')?.knocked ?? f.knocked) === f.knocked]],
+  ['the result of “On Tiptoe” → heard', (f, s) => (s.played.has('tiptoe') ? [true, s.set[SCENES.home]?.heard === (s.results.tiptoe.creaks > 0 ? 1 : 0)] : [true])],
+  ['the result of “Arm in Arm” → snowy', (f, s) => (s.played.has('arm-in-arm') ? [true, s.set[SCENES.hill]?.snowy === (s.results['arm-in-arm'].falls > 0 ? 1 : 0)] : [true])],
+  ['the result of “Following” → seen', (f, s) => (s.played.has('following') ? [true, s.set[SCENES.hill]?.seen === (s.results.following.seen > 0 ? 1 : 0)] : [true])],
+  ['the result of “The Rucksack” → torn', (f, s) => (s.played.has('rucksack') ? [true, s.set[SCENES.platform]?.torn === (s.results.rucksack.slips >= 2 ? 1 : 0)] : [true])],
+  ['the result of “Buckets” → shed_left', (f, s) => (s.played.has('buckets') ? [true, s.set[SCENES.street]?.shed_left === (s.results.buckets.buckets >= 3 ? 1 : 0)] : [true])],
+  ['the result of “Running” → late_run', (f, s) => (s.played.has('running') ? [true, opened(s, SCENES.platform, 'last')?.late_run === (s.results.running.looks >= 2 ? 1 : 0)] : [true])],
 ];
 // the scales as the choices move them, unclamped: within their bounds (a clamp would hide a slip)
 const raw = choices => {

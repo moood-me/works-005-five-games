@@ -3,8 +3,8 @@
 // shed on fire (Buckets) — ⚑ take the blame for Vasenka, or let him own up.
 // Reads: facts.ninaIs. Leaves: choices.kudimov, .fire; marks.nina_stay, .vasenka, .silva; scales home, lie.
 import { SCENES, facts } from '../story.js';
-import ryukzak from '../minigames/ryukzak.js';
-import vyodra from '../minigames/vyodra.js';
+import rucksack from '../minigames/rucksack.js';
+import buckets from '../minigames/buckets.js';
 
 // a sound of the game's on a moment of the scene's (not waited for)
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
@@ -31,7 +31,7 @@ export default {
       const strap = g.beat('strap');
       g.beds({ wind: 0.2, train: 0.6 }, 2);
       await strap;
-      const r = await g.play(ryukzak);
+      const r = await g.play(rucksack);
       g.set('pull', 0);
       g.set('grip', 1);
       g.set('door_bg', 1);
@@ -108,9 +108,9 @@ export default {
       await g.say('makarskaya', 'Fire! The shed\'s on fire!');
       await fire;
       g.set('beat_next', 'after_fire');
-      const r = await g.play(vyodra);
+      const r = await g.play(buckets);
       g.set('fire', 0, 3);
-      g.set('vyodra', 'none'); // (the bucket put away)
+      g.set('buckets', 'none'); // (the bucket put away)
       g.set('shed_left', r.buckets >= 3 ? 1 : 0);
       g.set('beat_next', 'after_fire'); // (made ready again, by the keys of how it went)
       g.beds({ wind: 0.3, crowd: 0.3 }, 3);

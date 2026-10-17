@@ -1,6 +1,6 @@
 /* The game over the scene (ui.js): frost and ink (game.md §9) — slips of frosted glass with rime at their edges, the
    words in dark blue ink, in the hand. Warm (--lamp) is the lamp in the window-gauge alone. */
-#layer { --frost: #e3e9f0; --frost-dark: #b8c3cf; --ink: #1b2230; --lamp: #e8963a; --hand: "Syn Hand", "Neucha", "Comic Sans MS", sans-serif;
+#layer { --frost: #e3e9f0; --frost-dark: #b8c3cf; --ink: #1b2230; --lamp: #e8963a; --hand: "Son Hand", "Neucha", "Comic Sans MS", sans-serif;
   --rime: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.07 0.14' numOctaves='4' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 3 -1.1'/%3E%3C/filter%3E%3Crect width='220' height='120' filter='url(%23r)'/%3E%3C/svg%3E");
   --below-header: 46px; } /* where the site's header ends */
 #layer .gauge, #layer .toasts, #layer .hint, #layer .title { pointer-events: none; }

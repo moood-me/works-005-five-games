@@ -4,9 +4,9 @@
 // Reads: facts (ninaIs, secret, entry, boxWhere, came, ninaCame, silvaDoor, boxHand, told, hurt, train, tune, ending).
 // Leaves: choices.truth, .train; scales lie. No map after it (game.md §3.5): the epilogue comes at once.
 import { SCENES, facts } from '../story.js';
-import palto from '../minigames/palto.js';
-import begom from '../minigames/begom.js';
-import steklo from '../minigames/steklo.js';
+import coat from '../minigames/coat.js';
+import running from '../minigames/running.js';
+import glass from '../minigames/glass.js';
 
 // a sound of the game's on a moment of the scene's (not waited for)
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
@@ -37,7 +37,7 @@ export default {
       await g.say('busygin', 'I don\'t know my own father. I saw him once — at a station. He didn\'t recognise me');
       await porch;
       await g.beat('shawl');
-      await g.play(palto);
+      await g.play(coat);
       g.set('lay', 1);
       await g.beat('porch_after');
     },
@@ -87,7 +87,7 @@ export default {
       g.beds({ wind: 0.5 });
       await g.scene(SCENES.street, { beat: 'run_out' }, { cut: true });
       await g.beat('run_out');
-      const r = await g.play(begom);
+      const r = await g.play(running);
       g.set('run', 1);
       g.set('look_back', 0);
       g.beds({ wind: 0.5, train: 0.6 }, 1);
@@ -117,7 +117,7 @@ export default {
         if (f.boxHand) await g.say('sarafanov', 'Take it. It goes to the eldest');
         await boards;
         await g.beat('glass');
-        const w = await g.play(steklo);
+        const w = await g.play(glass);
         g.set('wipe', Math.max(w.wipe, 0.3)); // (as much seen as he wiped)
         const wave = g.told('away:wave');
         const away = g.beat('away');

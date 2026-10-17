@@ -55,7 +55,7 @@ export default async function (b) {
   // petals in the hand, «good» plain white (the lamp's warm is the windows' alone), danger the crossing's cold red; on
   // the world's key
   b.minigame.style({
-    key: 'A_FLAT_MAJOR_F_MINOR', font: '"Syn Hand", "Neucha", "Comic Sans MS", sans-serif',
+    key: 'A_FLAT_MAJOR_F_MINOR', font: '"Son Hand", "Neucha", "Comic Sans MS", sans-serif',
     colors: { mark: '#e3e9f0', fill: '#e3e9f0', good: '#ffffff', danger: '#e0303c', fork: '#b8c3cf', ghost: '#e3e9f0' },
   });
   const hub = listen(b);

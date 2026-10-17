@@ -1,5 +1,5 @@
 // What the game shows over the scene (bespoke.layer): frost and ink (game.md §9) — slips of frosted glass with a rime
-// pattern at their edges, the words in dark blue ink, in the hand («Syn Hand»). Warm (--lamp) is the lamp in the
+// pattern at their edges, the words in dark blue ink, in the hand («Son Hand»). Warm (--lamp) is the lamp in the
 // window-gauge alone.
 //   view.gauge({scales, shown} | null) — the window-gauge low on the left: a wooden window of four panes, a dark room
 //     behind it; the lamp in the room (Together ↔ Apart: warm ↔ almost out) once the player has met `home`, the rime on
@@ -138,7 +138,7 @@ export function ui(layer) {
 const LAMP = '#e8963a', DARK = '#1d2a3c';
 let gauges = 0; // (each gauge's own ids in the page)
 function windowGauge(layer) {
-  const id = `syn-gauge-${gauges++}`;
+  const id = `son-gauge-${gauges++}`;
   const box = svg('svg', { class: 'gauge window', viewBox: '0 0 80 80', 'aria-hidden': 'true' }, layer);
   const defs = svg('defs', {}, box);
   // the light of the lamp: a soft circle

@@ -3,8 +3,8 @@
 // (Following); at the level crossing, under the goods train — ⚑ the truth, the truth no one hears, or «brother».
 // Reads: nothing. Leaves: choices.father, .crossing; marks.nina; scales home, lie.
 import { SCENES } from '../story.js';
-import podRuku from '../minigames/pod-ruku.js';
-import sledom from '../minigames/sledom.js';
+import armInArm from '../minigames/arm-in-arm.js';
+import following from '../minigames/following.js';
 
 // a sound of the game's on a moment of the scene's (not waited for)
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
@@ -50,7 +50,7 @@ export default {
         await g.say('busygin', 'Not a word');
         await meet;
         g.set('beat_next', 'bottom');
-        const r = await g.play(podRuku);
+        const r = await g.play(armInArm);
         g.set('down', 1);
         g.set('catch', 0);
         g.set('fall', 0);
@@ -62,7 +62,7 @@ export default {
       } else {
         await g.beat('hide');
         g.set('beat_next', 'club');
-        const r = await g.play(sledom);
+        const r = await g.play(following);
         g.set('seen', r.seen > 0 ? 1 : 0); // (the rest the beat `club` sets by its `from`)
         g.set('beat_next', 'club'); // (made ready again, by the keys of how it went)
         const inside = g.told('club:in');

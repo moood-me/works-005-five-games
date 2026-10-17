@@ -3,8 +3,8 @@
 // comes home and takes the stranger for his son.
 // Reads: nothing. Leaves: choices.entry, scales.lie, shown.lie, shown.home, marks.knocked (the windows knocked at).
 import { SCENES } from '../story.js';
-import okna from '../minigames/okna.js';
-import ruki from '../minigames/ruki.js';
+import windows from '../minigames/windows.js';
+import hands from '../minigames/hands.js';
 
 // a sound of the game's on a moment of the scene's (not waited for)
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
@@ -24,7 +24,7 @@ export default {
       await g.say('silva', 'We knock wherever there\'s a light. Someone\'s bound to let us in');
       await g.beat('knock_ready');
       g.set('beat_next', 'last_window');
-      const r = await g.play(okna, { refuse: [
+      const r = await g.play(windows, { refuse: [
         ref => g.say('neighbor_m', 'Go on, clear off!', ref),
         ref => g.say('neighbor_w', 'It\'s the middle of the night! I\'ll call the police!', ref),
         ref => g.say('neighbor_old', 'Nobody here. They\'re all asleep', ref),
@@ -92,7 +92,7 @@ export default {
       await g.scene(SCENES.home, { beat: 'kitchen' }, { cut: true });
       g.sound.door();
       await g.beat('kitchen');
-      await g.play(ruki);
+      await g.play(hands);
       g.set('thaw', 1);
       g.set('rub', 0);
       const turn = g.told('warm_up:turn');

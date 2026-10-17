@@ -35,7 +35,7 @@ export default {
       presses.push(press);
     }
     // (waiting is a way: the finger is shown only at the first meeting, not when the player stands still)
-    b.minigame.tricks.teach(mg, presses, { id: 'press:okna', still: null });
+    b.minigame.tricks.teach(mg, presses, { id: 'press:windows', still: null });
     const out = n => {
       lit.delete(n);
       send(`win${n}`, 0);

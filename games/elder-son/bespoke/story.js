@@ -47,8 +47,8 @@
 import * as sounds from './sound.js';
 
 // the world's scenes the game plays, by their folders (platform and yard: the world has none yet)
-export const SCENES = { platform: 'platform', street: 'ulica-opus', home: 'dom-opus', hill: 'kosogor-opus',
-  crossing: 'pereezd-opus', yard: 'yard' };
+export const SCENES = { platform: 'platform', street: 'street', home: 'home', hill: 'hillside',
+  crossing: 'crossing', yard: 'yard' };
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean.

@@ -3,10 +3,10 @@
 // (The Snuffbox) or not; the clarinet behind the wall; at dawn — ⚑ slip away (On Tiptoe) or stay (Frost).
 // Reads: nothing. Leaves: choices.galya, .box, .dawn; marks.sarafanov; scales home, lie.
 import { SCENES } from '../story.js';
-import chai from '../minigames/chai.js';
-import tabakerka from '../minigames/tabakerka.js';
-import tsypochki from '../minigames/tsypochki.js';
-import inei from '../minigames/inei.js';
+import tea from '../minigames/tea.js';
+import snuffbox from '../minigames/snuffbox.js';
+import tiptoe from '../minigames/tiptoe.js';
+import frost from '../minigames/frost.js';
 
 // a sound of the game's on a moment of the scene's (not waited for)
 const on = (g, moment, fn) => { g.told(moment).then(ok => { if (ok) fn(); }); };
@@ -62,7 +62,7 @@ export default {
       await g.say('sarafanov', 'Galya Busygina… I wrote to her. She never answered');
       await talk;
       let asked = false;
-      await g.play(chai, { ask: () => { asked = true; return g.say('sarafanov', 'Did she… remember me?', 'narrator'); } });
+      await g.play(tea, { ask: () => { asked = true; return g.say('sarafanov', 'Did she… remember me?', 'narrator'); } });
       if (!asked) await g.say('sarafanov', 'Did she… remember me?', 'narrator');
       g.set('glass1', 1);
       g.set('glass2', 1);
@@ -96,7 +96,7 @@ export default {
       g.apply('box');
       if (box === 'take') {
         await g.beat('box_take');
-        await g.play(tabakerka, { mode: 'take' });
+        await g.play(snuffbox, { mode: 'take' });
         for (let i = 1; i <= 4; i++) g.set(`finger${i}`, 1);
         g.set('old', 0);
         const back = g.told('box_kept:back');
@@ -107,7 +107,7 @@ export default {
       } else {
         await g.say('busygin', 'No, don\'t. Let Vasya have it');
         await g.beat('box_give');
-        await g.play(tabakerka, { mode: 'give' });
+        await g.play(snuffbox, { mode: 'give' });
         g.set('push', 1);
         g.set('old_close', 1);
         const shelf = g.told('box_back:shelf');
@@ -147,7 +147,7 @@ export default {
         await g.beat('sneak');
         g.beds({ rails: 0.3 }, 1); // (the clock ticks in the minigame itself)
         g.set('beat_next', 'caught');
-        const r = await g.play(tsypochki);
+        const r = await g.play(tiptoe);
         g.set('sneak', 1);
         g.set('stir', 0);
         g.set('heard', r.creaks > 0 ? 1 : 0);
@@ -167,7 +167,7 @@ export default {
         const watch = g.beat('window_watch');
         await g.say('silva', 'Sit there, then, sonny');
         await watch;
-        const r = await g.play(inei);
+        const r = await g.play(frost);
         g.set('far_train', 1);
         g.set('hole', Math.max(r.hole, 0.4));
         g.beds({ clock: 0.4, rails: 0.3 }, 1);

@@ -1,7 +1,7 @@
 // “Buckets” (IV.3, the Street, after the beat `fire`; game.md §7): its own fire `fire` 0.6, growing 0.01 a second (sent
 // as the key), the fire's roar by it. One mark at a time: with an empty bucket — a ring on the barrel (`barrel`); pressed — the scene's turn:
-// Busygin fills it (`vyodra` 'fill' → `vyodra:full`); with a full one — a ring on the shed (`shed`); pressed — he throws (`vyodra`
-// 'throw' → `vyodra:splash`): the fire −0.18, a splash, counted in `buckets`. The neighbours go their own way: every 6 s the fire −0.07, a
+// Busygin fills it (`buckets` 'fill' → `buckets:full`); with a full one — a ring on the shed (`shed`); pressed — he throws (`buckets`
+// 'throw' → `buckets:splash`): the fire −0.18, a splash, counted in `buckets`. The neighbours go their own way: every 6 s the fire −0.07, a
 // quieter splash. The bar — 1 − `fire` / 0.6. The fire out — 2 s of steam — clean. After 55 s the neighbours have managed by themselves (`fire` → 0 over
 // 4 s) — neutral.
 //   Feeling: putting out a stranger's shed with the neighbours; wants to put it out; panic and laughter; the player — barrel, shed, faster.
@@ -39,8 +39,8 @@ export default {
       busy = true;
       tapped = false;
       mg.sceneTurn(true);
-      const done = g.told(full ? 'vyodra:splash' : 'vyodra:full', SCENE_MS);
-      g.set('vyodra', full ? 'throw' : 'fill');
+      const done = g.told(full ? 'buckets:splash' : 'buckets:full', SCENE_MS);
+      g.set('buckets', full ? 'throw' : 'fill');
       const ok = await done;
       if (signal.aborted) return;
       if (ok && full) {
