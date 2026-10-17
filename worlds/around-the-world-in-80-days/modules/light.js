@@ -21,7 +21,7 @@ const rgba = (c, a = 1) => {
 
 // A soft glow painted: a radial gradient from colour c (alpha a) to nothing, squeezed sy times vertically — fog lit low
 // over a street, a warm wash on a painted sky. (A lamp's own glow and its halo in the air are the engine's: e.light,
-// light.hazeGlow.)
+// the scene's light.hazeGlow.)
 function glow(g, x, y, r, c, a, sy = 1) {
   g.save();
   g.translate(x, y);
@@ -63,7 +63,7 @@ function lin(c, out = [0, 0, 0]) {
 // A London gas lamp, its foot at (0, 0): a slender iron post, a glass globe and its flame — e.light, named `name` if
 // given ("lamps#door"), as strong as the gas fully lit: the element's animate sets it to the hour (e.glow(name,
 // gas(night))), and the scene may take it into `lights` with `of` and give it a `reach` (the haze round it lit by
-// light.hazeGlow). Painted in its daylight colours: the scene's light makes the evening.
+// the scene's light.hazeGlow). Painted in its daylight colours: the scene's light makes the evening.
 function gasLamp(g, e, name) {
   g.fillStyle = '#1d2024';
   g.beginPath();

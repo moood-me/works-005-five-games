@@ -71,7 +71,7 @@ return {
     cromarty: { kind: 'shapes', style: 'around', who: 'man', garment: 'jacket', hair: 'kempt', hat: 'helmet', parts: ['moustache'],
       body: { height: 1.0, shoulders: 1.04, thick: 1.0 },
       colors: { skin: '#d2a07e', hair: '#b8b2a8', top: '#ddd8c8', garment: '#d6d0bc', bottom: '#cfc9b6', shoes: '#3a2c22', hat: '#e2dcc8' } },
-    // the Parsi guide: young and slight, a white turban, a light tunic, barefoot
+    // the Parsee guide: young and slight, a white turban, a light tunic, barefoot
     guide: { kind: 'shapes', style: 'around', who: 'youth', garment: 'tunic', hair: 'short', hat: 'turban', barefoot: 'both',
       body: { height: 0.95, thick: 0.82 },
       colors: { skin: '#8e6246', hair: '#1a1410', top: '#d8d2c2', bottom: '#cfc6b2', shoes: '#2a1e16', hat: '#e8e2d2' } },

@@ -24,7 +24,7 @@ the rooms they stand in. The Englishmen's hair is `kempt` (smoothed back from th
   bald), `sullivan` (a banker: dark, clean-shaven), `ralph` (Gauthier Ralph of the Bank of England: old, white-haired).
 - `porter` — the club's porter: a claret livery coat, grey hair.
 - `cromarty` — Sir Francis Cromarty: a white uniform, a pith helmet (`helmet`), a grey moustache (`moustache`).
-- `guide` — the Parsi guide: young and slight, a white turban (`turban`), a light tunic, barefoot.
+- `guide` — the Parsee guide: young and slight, a white turban (`turban`), a light tunic, barefoot.
 - The procession and the crowd at the pyre: `priest` (a saffron robe, shaven), `bearer` (white tunic and dhoti, a
   turban, barefoot), `drummer` (the same, a red turban, a drum at the waist — `drum`), `villager`, `villager_woman`
   (a sari, her head covered).

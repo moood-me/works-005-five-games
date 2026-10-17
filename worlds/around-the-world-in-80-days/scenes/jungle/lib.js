@@ -1054,12 +1054,12 @@ const EDGE = { fogg: [35.6, 8.3], cromarty: [34.9, 8.0] };
 const CROWD = [[37.2, 11.2], [38.8, 10.6], [40.4, 10.3], [42.0, 10.7], [43.4, 11.4], [36.0, 12.4], [44.6, 12.6], [41.2, 9.3]];
 const CROWD_IDS = CROWD.map((_, i) => `v${i + 1}`);
 const WAY = [ON_PYRE.passepartout, [37.4, 14.0], [36.2, 14.0], [35.0, 12.0], [32.2, 9.4]];
-// the raja's body on the pyre — Passepartout under the shroud: a white robe over him, his head covered
+// the rajah's body on the pyre — Passepartout under the shroud: a white robe over him, his head covered
 const SHROUD = { garment: 'robe', hood: true, colors: { garment: '#e4dccb', top: '#e4dccb', skin: '#7e5640' } };
 // the crowd at the pyre: face down, or looking up (each a little after the one before)
 const crowdDo = (i, up) => loop(up ? 'kneel_up' : 'prostrate', i * 0.7);
 
-// The «raja» carrying the widow from the pyre to the trees as far as `walk` (0…1) says: the way's point there, and the
+// The «rajah» carrying the widow from the pyre to the trees as far as `walk` (0…1) says: the way's point there, and the
 // way to it from where he stands now (its corners between).
 const segs = WAY.slice(1).map((q, i) => Math.hypot(q[0] - WAY[i][0], q[1] - WAY[i][1])), wayLen = segs.reduce((a, b) => a + b, 0);
 function along(v) {
@@ -1134,7 +1134,7 @@ const LIT = () => ({
     [`${id}_look`, KINDLE[id][1]]])),
   fogg_do: loop('strain'), fogg_look: 'aouda#head', cromarty_reach: { r: 'fogg#shoulder_r', l: 'fogg#shoulder_l' }, cromarty_look: 'fogg#head',
 });
-// the «raja» risen in the smoke, the widow in his arms, the crowd on its face (the shot low and close on the pyre)
+// the «rajah» risen in the smoke, the widow in his arms, the crowd on its face (the shot low and close on the pyre)
 const RISEN = { passepartout_do: loop('carry_stand'), passepartout_turn: 225, aouda_on: { at: 'passepartout#hands', up: -0.08 },
   aouda_do: loop('lie_limp'), aouda_turn: 90, camera_x: 39.8, camera_z: 8.6, camera_h: -0.5 };
 const ROSE = () => ({
@@ -1192,7 +1192,7 @@ const FILM = {
     s.set('fogg_look', 'aouda#head');
     await s.wait(1);
   } },
-  // ---- Dawn on the clearing. The pyre: the raja's body and the widow on it; the crowd on their knees round it; the
+  // ---- Dawn on the clearing. The pyre: the rajah's body and the widow on it; the crowd on their knees round it; the
   // priests set their torches to it. Fogg strains forward — Cromarty holds him back.
   pyre: { from: DAWN, run: async s => {
     s.move('smoke', 0.7, { over: 6 });
@@ -1224,7 +1224,7 @@ const FILM = {
     await fire;
     await s.wait(1.5);
   } },
-  // ---- The dead raja rises out of the smoke with the widow in his arms; the crowd falls on its face.
+  // ---- The dead rajah rises out of the smoke with the widow in his arms; the crowd falls on its face.
   rise: { after: 'pyre', from: LIT, run: async s => {
     const shot = s.shot({ ...RISEN });
     s.move('camera_x', 39.5, { over: 1.6, ease: 'inOut' });

@@ -9,7 +9,7 @@ make — and the gas.
   `fillStyle`; `css(c)` — `#rrggbb` (what `e.light`, `lights`, `looks` take); `lin(c, out?)` — a colour for a shader,
   linear 0…1 (`out` — an `animate`'s own array, so as not to make a new one every frame).
 - `glow(g, x, y, r, c, a, sy)` — a soft patch, painted: a radial gradient of the colour c (opacity a) into nothing,
-  squeezed sy times in height. A lamp's glow and its halo in the air are the engine's (`e.light`, `light.hazeGlow`) —
+  squeezed sy times in height. A lamp's glow and its halo in the air are the engine's (`e.light`, the scene's `light.hazeGlow`) —
   do not paint them.
 - `london(night)` — the fog's colours at the hour `night` (0 — a grey day, 0.5 — dusk, the gas is lit, 1 — night) →
   `{ night, high, low, gas }`: the fog high up and low over the street, the gas 0…1. The sky is not lit by the scene's
