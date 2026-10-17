@@ -237,7 +237,7 @@ function unfold(layer, { text = '', sign }, signal) {
   }
   let stage = 'folded';
   const wait = ms => new Promise(ok => setTimeout(ok, ms));
-  const say = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
+  const cue = word => { hint.replaceChildren(); el('span', 'words', hint).textContent = word; };
   return new Promise(done => {
     const leave = () => { veil.remove(); done(); };
     signal?.addEventListener('abort', leave);
@@ -251,7 +251,7 @@ function unfold(layer, { text = '', sign }, signal) {
         paper();
         letter.classList.add('open-bottom');
         await wait(2400);
-        say('сложить');
+        cue('сложить');
         hint.classList.add('on');
         stage = 'open';
       } else if (stage === 'open') {
@@ -273,7 +273,7 @@ function unfold(layer, { text = '', sign }, signal) {
     document.fonts.load(HAND).finally(async () => {
       veil.classList.add('on');
       await wait(1600);
-      say('развернуть');
+      cue('развернуть');
       if (stage === 'folded') hint.classList.add('on');
     });
   });

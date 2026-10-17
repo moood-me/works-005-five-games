@@ -86,12 +86,12 @@ export default {
       await g.say('gurov', 'Если б вы знали, с какой очаровательной женщиной я познакомился в Ялте!');
       await club;
       const turns = g.told('say:turns');
-      const say = g.beat('say');
+      const sturgeon = g.beat('say');
       await turns;
       await g.say('official', 'Дмитрий Дмитрич!');
       await g.say('gurov', 'Что?');
       await g.say('official', 'А давеча вы были правы: осетрина-то с душком!');
-      await say;
+      await sturgeon;
       const how = await g.choose('club', { sledge: [{ id: 'laugh', label: 'Засмеяться и сесть в сани' }], lamp2: [{ id: 'walk', label: 'Уйти пешком' }] });
       if (how === 'laugh') {
         g.scale('heart', -2);

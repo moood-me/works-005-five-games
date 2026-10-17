@@ -337,14 +337,14 @@ export function crickets(level = 1, seconds = 2) {
   bed('crickets', 0.3, 'open', ({ a, t, keep, sway, out }) => {
     // four of them, 4–5 kHz: each a sine trilled ~30 times a second, in chirps of its own rhythm — out of step
     for (const [f, trill, chirp, loud] of [[4200, 31, 1.7, 0.05], [4550, 27, 2.3, 0.04], [4850, 34, 1.3, 0.035], [4400, 29, 2.9, 0.03]]) {
-      const o = keep(a.createOscillator()), tr = a.createGain(), ch = a.createGain(), amp = a.createGain();
+      const o = keep(a.createOscillator()), trills = a.createGain(), ch = a.createGain(), amp = a.createGain();
       o.frequency.value = f;
-      tr.gain.value = 0.5;
+      trills.gain.value = 0.5;
       ch.gain.value = 0.5;
       amp.gain.value = loud;
-      o.connect(tr).connect(ch).connect(amp).connect(out);
+      o.connect(trills).connect(ch).connect(amp).connect(out);
       o.start(t);
-      sway(tr.gain, trill, 0.5, 'square');
+      sway(trills.gain, trill, 0.5, 'square');
       sway(ch.gain, chirp, 0.5, 'square');
       sway(amp.gain, rnd(0.03, 0.08), loud * 0.5);
     }

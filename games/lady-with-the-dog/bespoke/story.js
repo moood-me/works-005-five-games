@@ -7,7 +7,7 @@
 //   g.hero(who) — whose scene it is: 'gurov' | 'anna' | 'both' — the hero's scale in full, the other one at a third;
 //     the first line of every step, and again inside one when the scene passes to the other hero
 //   g.beds(levels, seconds) — the beds of sound: those named go to their level, every other one to nothing
-//   g.scene(title, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
+//   g.scene(folder, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
 //     under it what the play has decided, as this scene's keys (carry). It plays no beat until one is named: the
 //     step's first beat goes in `state` ({beat: name}) — the scene opens playing it, its first frame the beat's own —
 //     and g.beat(name) then takes it up (waits for its end). cut: the scene before stays on the screen till this one
@@ -22,8 +22,9 @@
 //     one that test(value) holds for (a value: that one) (→ true), or ms pass (→ false)
 //   g.arrived(who, ms) — until someone's walk in the scene ends there (→ true), or ms pass (→ false)
 //   g.watch(key, fn) — fn(value, old) each time the scene sets the key, till the step is left
-//   g.say(who, text, at) — someone of PEOPLE says it, over `at` ('id' | 'id#point' of the scene; 'narrator' — low in
-//     the middle), in their voice; → a breath after it has been heard (unvoiced: once it could be read)
+//   g.say(who, text, at) — someone of the game's people (people.json: bespoke.say) says it, over `at` ('id' | 'id#point'
+//     of the scene; 'narrator' — low in the middle), in their voice; → a breath after it has been heard (unvoiced: once
+//     it could be read)
 //   g.choose(choice, {ref: options, …}) — the player presses one of the points ('id#point' | 'id': where the element
 //     is pressed), then one of its options ([{id, label}]: petals, one too — seen in words, pressed); → the option's
 //     id, kept in state.choices[choice] (choice null: not a choice of the chapter's map). One who doesn't press is
@@ -57,22 +58,9 @@
 // (a dry run): then nothing of it is said, shown or heard, and a minigame gives what j.result says, else its `skipped`.
 import * as sounds from './sound.js';
 
-export const SCENES = { quay: 'Набережная', room: 'Номер в Ялте', oreanda: 'Ореанда', station: 'Станция',
-  moscow: 'Москва', town: 'Город С.', theatre: 'Театр в С.', bazar: 'Славянский базар', lights: 'Огни' };
-
-// who speaks: the sound service's voice, how it says it, who it is (game.md §8)
-export const PEOPLE = {
-  narrator: { voice: 'Sadachbia', how: 'спокойно, тепло, чуть насмешливо — как автор читает свой рассказ вслух', name: 'рассказчик' },
-  gurov: { voice: 'Algenib', how: 'мужчина под сорок: негромко, бархатно, с ленцой и лёгкой усмешкой', name: 'Дмитрий Дмитрич Гуров' },
-  gurov_inner: { voice: 'Algenib', how: 'тот же, тихо, про себя, с усмешкой над собой', name: 'Гуров, про себя' },
-  anna: { voice: 'Sulafat', how: 'молодая женщина: тихо, быстро, взволнованно, без жалобы', name: 'Анна Сергеевна' },
-  diderits: { voice: 'Umbriel', how: 'молодой мужчина: вежливо, мягко, чуть неловко, по-домашнему', name: 'фон Дидериц, муж Анны' },
-  diderits_low: { voice: 'Umbriel', how: 'тот же: глухо, медленно, не глядя на неё', name: 'фон Дидериц, муж Анны' },
-  wife: { voice: 'Gacrux', how: 'зрелая женщина: ровно, прямо, негромко, с достоинством', name: 'жена Гурова' },
-  wife_low: { voice: 'Gacrux', how: 'та же: тихо, ровно', name: 'жена Гурова' },
-  daughter: { voice: 'Leda', how: 'девочка двенадцати лет: серьёзно, звонко', name: 'дочь Гурова' },
-  official: { voice: 'Algieba', how: 'чиновник: сыто, громко, добродушно, о своём', name: 'чиновник, партнёр по картам' },
-};
+// the world's scenes the game plays, by their folders
+export const SCENES = { quay: 'main', room: 'nomer-opus', oreanda: 'oreanda-opus', station: 'stanciya-opus',
+  moscow: 'moskva', town: 'gorod-s', theatre: 'teatr', bazar: 'bazar-opus', lights: 'ogni' };
 
 // The scales, each with two sides: where they start, their bounds, the side the player reads when they move (up:
 // delta > 0, down: delta < 0), and the one line that says what they mean (game.md §5).
@@ -104,7 +92,7 @@ export function facts(state) {
 }
 
 // The play's facts (f) as a scene's own keys: what g.scene opens it with, under the step's state (game.md §5).
-export function carry(title, f) {
+export function carry(folder, f) {
   return {
     [SCENES.quay]: {},
     [SCENES.room]: {},
@@ -115,7 +103,7 @@ export function carry(title, f) {
     [SCENES.theatre]: { anna_life: f.life === 'life' ? 1 : 0 },
     [SCENES.bazar]: { anna_life: f.life === 'life' ? 1 : 0, husband_knows: f.husband === 'truth' ? 1 : 0, wife_knows: f.wife === 'truth' ? 1 : 0, spring: f.spring ? 1 : 0 },
     [SCENES.lights]: {},
-  }[title];
+  }[folder];
 }
 
 const BEAT = 180000; // a beat longer than this has not ended: the scene lacks it
@@ -138,19 +126,12 @@ export function context(b, view, hub, state, j = null) {
     const { shown, then } = j;
     for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
     view.gauges(state, hero);
-    if (shown) await alive(b.show(shown.title, { state: shown.state, captions: false, then }));
+    if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
   })());
   if (j && j.target < Infinity) j.idle.then(seen);
-  // a line, and the time it asks: heard — a breath after; shown without a voice — as long as it
-  // takes to read it (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
-  async function speak(at, text, opts) {
-    if (unseen()) return sleep(300 + text.length * 60);
-    let heard = false;
-    const hear = e => { if (e.detail.on && e.detail.text === text.trim()) heard = true; };
-    addEventListener('moood:speech', hear);
-    try { await b.say(at, text, opts); } finally { removeEventListener('moood:speech', hear); }
-    await sleep(heard ? 500 : 300 + text.length * 60);
-  }
+  // the time a line asks, once said: heard — a breath after; shown without a voice — as long as it takes to read it
+  // (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
+  const after = ({ heard, text }) => sleep(heard ? 500 : 300 + text.length * 60);
   const g = {
     state,
     signal: left.signal,
@@ -163,17 +144,17 @@ export function context(b, view, hub, state, j = null) {
     beds(levels, seconds = 2) {
       if (!gone()) g.sound.beds(levels, seconds);
     },
-    async scene(title, st = {}, { cut = false } = {}) {
+    async scene(folder, st = {}, { cut = false } = {}) {
       if (gone()) return never;
       // (opened as it is to be: what the play has decided — those of its keys the scene has —, the beat it opens
       // with playing from its first frame)
-      const spec = await alive(unseen() ? j.real(b.specOf(title)) : b.specOf(title));
-      st = { ...Object.fromEntries(Object.entries(carry(title, facts(state)) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
+      const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
+      st = { ...Object.fromEntries(Object.entries(carry(folder, facts(state)) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
       opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
-      if (unseen()) j.scene(title, st);
+      if (unseen()) j.scene(folder, st);
       else {
         g.withdraw();
-        await alive(b.show(title, { state: st, captions: false, fade: !cut }));
+        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       }
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
@@ -198,7 +179,8 @@ export function context(b, view, hub, state, j = null) {
       left.signal.addEventListener('abort', off);
     },
     say(who, text, at = who) {
-      return gone() ? never : speak(at, text, PEOPLE[who]);
+      if (gone()) return never;
+      return unseen() ? sleep(300 + text.length * 60) : alive(b.say(who, text, { at })).then(after);
     },
     async choose(choice, offers) {
       if (gone()) return never;

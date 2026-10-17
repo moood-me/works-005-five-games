@@ -86,12 +86,12 @@ export default {
       await SAY(50);
       await club;
       const turns = g.told('say:turns');
-      const say = g.beat('say');
+      const sturgeon = g.beat('say');
       await turns;
       await SAY(51);
       await SAY(52);
       await SAY(53);
-      await say;
+      await sturgeon;
       const how = await g.choose('club', { sledge: [{ id: 'laugh', label: 'Засмеяться и сесть в сани' }], lamp2: [{ id: 'walk', label: 'Уйти пешком' }] });
       if (how === 'laugh') {
         g.scale('heart', -2);
