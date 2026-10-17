@@ -1,0 +1,1977 @@
+{
+  "engine": 3,
+  "title": "Longren's House",
+  "caption": "A window on the sea.",
+  "horizon": 0.42,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      0.9,
+      0.9,
+      0.6,
+      1.2
+    ],
+    "look": 0.06
+  },
+  "light": {
+    "vignette": 0.35,
+    "grain": 0.1,
+    "haze": 0,
+    "hazeColor": "#cdd6de",
+    "inside": 0.65,
+    "looks": {
+      "day": {
+        "ambient": 1,
+        "ambientColor": "#ffffff",
+        "haze": 0.04,
+        "hazeColor": "#cdd6de"
+      },
+      "dawn": {
+        "ambient": 0.72,
+        "ambientColor": "#d6d9e6",
+        "haze": 0.06,
+        "hazeColor": "#d9dade",
+        "tint": "#f3d2b8",
+        "tintStrength": 0.1
+      },
+      "dusk": {
+        "ambient": 0.85,
+        "ambientColor": "#cbc5d8",
+        "haze": 0.06,
+        "hazeColor": "#a7a4b2",
+        "tint": "#e9bba3",
+        "tintStrength": 0.07
+      },
+      "night": {
+        "ambient": 0.62,
+        "ambientColor": "#7b93c4",
+        "haze": 0.05,
+        "hazeColor": "#1f2b3e",
+        "saturation": 0.85
+      }
+    },
+    "ambient": 1,
+    "ambientColor": "#ffffff",
+    "bounce": 0.7,
+    "wind": [
+      1,
+      0.2,
+      0.4
+    ]
+  },
+  "lights": [
+    {
+      "id": "window_light",
+      "of": "opening",
+      "daylight": 1.6,
+      "reach": 5.5
+    },
+    {
+      "id": "door_light",
+      "of": "doorway",
+      "daylight": 1.4,
+      "reach": 4.5,
+      "on": "door"
+    },
+    {
+      "id": "lamp_light",
+      "of": "flame",
+      "reach": 5.5,
+      "on": "lamp",
+      "flicker": 0.1,
+      "strength": 1.6
+    },
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "on": "sun_light",
+      "through": [
+        [
+          [
+            0,
+            5,
+            0.8
+          ],
+          [
+            1.5,
+            5,
+            0.8
+          ],
+          [
+            1.5,
+            5,
+            2.05
+          ],
+          [
+            0,
+            5,
+            2.05
+          ]
+        ],
+        [
+          [
+            2,
+            5,
+            0
+          ],
+          [
+            2.85,
+            5,
+            0
+          ],
+          [
+            2.85,
+            5,
+            2
+          ],
+          [
+            2,
+            5,
+            2
+          ]
+        ]
+      ],
+      "soft": 0.12,
+      "color": "#fff1de",
+      "strength": 1
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "on": "moon_light",
+      "through": [
+        [
+          [
+            0,
+            5,
+            0.8
+          ],
+          [
+            1.5,
+            5,
+            0.8
+          ],
+          [
+            1.5,
+            5,
+            2.05
+          ],
+          [
+            0,
+            5,
+            2.05
+          ]
+        ],
+        [
+          [
+            2,
+            5,
+            0
+          ],
+          [
+            2.85,
+            5,
+            0
+          ],
+          [
+            2.85,
+            5,
+            2
+          ],
+          [
+            2,
+            5,
+            2
+          ]
+        ]
+      ],
+      "soft": 0.12,
+      "color": "#b8c7e6",
+      "strength": 0.9
+    },
+    {
+      "id": "yacht_light",
+      "at": "assol#yacht",
+      "color": "#ff4a38",
+      "strength": 0.9,
+      "reach": 1.3,
+      "on": "yacht_glow"
+    },
+    {
+      "id": "sails_glow",
+      "from": [
+        10,
+        5
+      ],
+      "color": "#e8402f",
+      "strength": 1.1,
+      "on": "sails_light",
+      "size": 14,
+      "through": [
+        [
+          [
+            0,
+            5,
+            0.8
+          ],
+          [
+            1.5,
+            5,
+            0.8
+          ],
+          [
+            1.5,
+            5,
+            2.05
+          ],
+          [
+            0,
+            5,
+            2.05
+          ]
+        ]
+      ],
+      "soft": 0.3
+    }
+  ],
+  "modules": [
+    "sky",
+    "ships",
+    "cast",
+    "beats",
+    "closeups"
+  ],
+  "state": {
+    "beat": null,
+    "fade": 0,
+    "basket": 0,
+    "book_down": 0,
+    "guide": 0,
+    "gaze": 0,
+    "lo_a": -0.58,
+    "lo_d": 2.5,
+    "as_a": -0.68,
+    "as_d": 3.6,
+    "fi_a": 4.5,
+    "fi_d": 6.3,
+    "hour": 0.75,
+    "lamp": 1,
+    "toys": 0,
+    "toy_on_shelf": 0,
+    "chest": 0,
+    "door": 0,
+    "window_open": 0,
+    "sails_window": 0,
+    "day": 0,
+    "dawn": 0,
+    "dusk": 1,
+    "night": 0,
+    "chest_across": -1,
+    "chest_distance": 4.65,
+    "ship_across": 520,
+    "door_facing": 180,
+    "window_left_facing": 180,
+    "window_right_facing": 180,
+    "sun_light": 0,
+    "moon_light": 0,
+    "sails": 1,
+    "ship_roll": 0,
+    "closeup": 0,
+    "closeup_shot": null,
+    "rig1": 0,
+    "rig2": 0,
+    "rig3": 0,
+    "rig4": 0,
+    "beetle": 0,
+    "longren_with": [
+      "knife"
+    ],
+    "longren_look": "work",
+    "assol_on": [
+      -0.68,
+      3.6,
+      0.6
+    ],
+    "assol_look": "work",
+    "assol_reach": {
+      "r": [
+        -0.93,
+        3.5,
+        0.88
+      ]
+    },
+    "filipp_here": false,
+    "filipp_with": [
+      "baskets"
+    ],
+    "ring": "none",
+    "ring_kind": "own",
+    "longren": "home",
+    "girl_toy": 0,
+    "sun": null,
+    "match_x": 0,
+    "match_y": 0,
+    "match_s": 0.006,
+    "match": 0,
+    "scrap": 0,
+    "scrap_taken": 0,
+    "chest_here": 1,
+    "yacht_glow": 0,
+    "sails_light": 0,
+    "girl_here": false,
+    "gi_a": 2.55,
+    "gi_d": 8.4,
+    "girl_with": [
+      "yacht"
+    ]
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the hour, round the clock, as in the whole world: 0 midnight, 0.25 dawn (the sun rises right in the window), 0.5 noon, 0.75 sunset"
+    },
+    "lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lamp on the workbench: 0 out, 1 lit — warm light on the workbench, the left wall and the floor"
+    },
+    "toys": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the toys on the shelves: 0 all in their places, 1 the shelves empty (they go one by one)"
+    },
+    "toy_on_shelf": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Assol's yacht with scarlet sails on the shelf above the window: 0 none, 1 stands there"
+    },
+    "chest": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sea chest: 0 in the corner, 1 pulled out into the room"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the door: 0 shut, 1 open inwards — in the doorway the grass of the hilltop and the sea"
+    },
+    "window_open": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the window's leaves: 0 shut, 1 flung open"
+    },
+    "sails_window": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the ship under scarlet sails: 0 none, 1 stands in the middle of the window (comes in from the right)"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of daylight, led by the sky module by hour"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of dawn, led by the sky module by hour"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of sunset, led by the sky module by hour"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of night, led by the sky module by hour"
+    },
+    "chest_across": {
+      "type": "number",
+      "means": "internal: where the chest is across, m; the script sets it by chest"
+    },
+    "chest_distance": {
+      "type": "number",
+      "means": "internal: where the chest is in depth, m; the script sets it by chest"
+    },
+    "ship_across": {
+      "type": "number",
+      "means": "internal: where the ship is across, m; the script sets it by sails_window"
+    },
+    "door_facing": {
+      "type": "number",
+      "means": "internal: the door's turn, degrees (180 shut); the script sets it by door"
+    },
+    "window_left_facing": {
+      "type": "number",
+      "means": "internal: the left leaf's turn, degrees; the script sets it by window_open"
+    },
+    "window_right_facing": {
+      "type": "number",
+      "means": "internal: the right leaf's turn, degrees; the script sets it by window_open"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the film's beat (the beats module): match, evening, scrap, rig, glow, glow_close, tell, why, shelf, years, decide, chest_out, stay, unpack, read, beetle, cry, look, girl_in, sails_window, sails_close, wake, out; once it has ended the scene tells beat:<name>"
+    },
+    "basket": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the basket of toys by the door: 0 none, 1 stands there (Assol put it down); set at once"
+    },
+    "book_down": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "Assol's book on the floor by the chair: 0 none (in her hands or nowhere), 1 lies there; set at once"
+    },
+    "guide": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“Rigging”: Longren's hand steadies the yacht (in the close-up — it comes into the frame, the yacht stops rocking; in the room — his hand on the hull), from 0.5"
+    },
+    "gaze": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“Look”: Assol's gaze from the page (0) to the window (1), continuously; the camera, lowered to the page in the beat look, rises with it"
+    },
+    "lo_a": {
+      "type": "number",
+      "means": "internal: where Longren is across, m (the script and the beats)"
+    },
+    "lo_d": {
+      "type": "number",
+      "means": "internal: where Longren is in depth, m"
+    },
+    "as_a": {
+      "type": "number",
+      "means": "internal: where Assol is across, m"
+    },
+    "as_d": {
+      "type": "number",
+      "means": "internal: where Assol is in depth, m"
+    },
+    "fi_a": {
+      "type": "number",
+      "means": "internal: where the collier outside the window is across, m"
+    },
+    "fi_d": {
+      "type": "number",
+      "means": "internal: where the collier outside the window is in depth, m"
+    },
+    "sun_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the sunlight, led by the sky module by hour"
+    },
+    "moon_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the moonlight, led by the sky module by hour"
+    },
+    "sails": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the Secret's sails in the window: 0 white … 1 scarlet (the ships module)"
+    },
+    "ship_roll": {
+      "type": "number",
+      "means": "internal: the ship's rolling, degrees (the ships module)"
+    },
+    "closeup": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a close-up (an insert) is open; which — closeup_shot; set by a cut"
+    },
+    "closeup_shot": {
+      "values": [
+        null,
+        "rig",
+        "page",
+        "match"
+      ],
+      "means": "which close-up: rig — the workbench with the yacht being rigged; page — the page with the beetle; match — the prologue's cut: the sea at dawn and on it the sail of the toy yacht, growing into the yacht on the workbench"
+    },
+    "rig1": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“Rigging”, the close-up rig: the mainsail hoisted up the mast (0 no … 1 yes); the point closeup#rig1 — where it is made fast"
+    },
+    "rig2": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“Rigging”, the close-up rig: the main sheet made fast at the stern (0 no … 1 yes); the point closeup#rig2 — where it is made fast"
+    },
+    "rig3": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“Rigging”, the close-up rig: the jib hoisted up the stay (0 no … 1 yes); the point closeup#rig3 — where it is made fast"
+    },
+    "rig4": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“Rigging”, the close-up rig: the jib sheet made fast (0 no … 1 yes); the point closeup#rig4 — where it is made fast"
+    },
+    "beetle": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up page: a beetle crawls over the page (0 — at the edge … 1 — stopped at the word “Look”); the points closeup#beetle, closeup#word"
+    },
+    "match": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the close-up match: 0 — the sea at dawn and the spark of a sail there, the same as the prologue's ship; 1 — the yacht stands on the workbench by the lamp, Longren's big hands (moved by the beat match)"
+    },
+    "scrap": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the scrap's insert open (the scarlet scrap on the workbench by the lamp, her fingers beside it); set by a cut; the point scrap#scrap"
+    },
+    "scrap_taken": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scrap insert: Assol's fingers lie on the scrap and close on it (0 — it lies there … 1 — taken); moved by the game"
+    },
+    "chest_here": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the sea chest in the house: 1 — stands (by default), 0 — Longren took it to sea (the chest is not painted); set by a beat by the play's key longren"
+    },
+    "yacht_glow": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scarlet light of the sail of the yacht in Assol's hands (the scene's small light at the point assol#yacht): 0 none … 1 there; moved by the beat glow_close"
+    },
+    "sails_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the scarlet light of the ship's sails in the window, falling on her and on the room: 0 none … 1 there; moved by the beat sails_close"
+    },
+    "gi_a": {
+      "type": "number",
+      "means": "internal: where the girl is across, m (the beats)"
+    },
+    "gi_d": {
+      "type": "number",
+      "means": "internal: where the girl is in depth, m (the beats)"
+    },
+    "ring": {
+      "values": [
+        "none",
+        "finger",
+        "cord"
+      ],
+      "means": "the play's key (set by the game, no from sets it): Assol's ring (17) — none, on her finger (a part of the cast by ring_kind, in the frame page on the finger that holds the page), on a cord (not seen in this scene); none by default"
+    },
+    "ring_kind": {
+      "values": [
+        "mother",
+        "own"
+      ],
+      "means": "the play's key: which ring — mother — his mother's (the part ring), own — his old one (the part ring_old); own by default"
+    },
+    "longren": {
+      "values": [
+        "home",
+        "knows",
+        "sea"
+      ],
+      "means": "the play's key: Longren on the morning of the sails — home and knows: sits at the empty workbench (seated); sea: neither he nor the chest is there (chest_here 0); home by default"
+    },
+    "girl_toy": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play's key: 1 — the girl has the yacht, it is not on the board above the window; 0 by default"
+    },
+    "sun": {
+      "range": [
+        0.2,
+        0.4
+      ],
+      "means": "the play's key: the hour of the morning of the sails (as hour) in the beats read, beetle, cry, look, girl_in, sails_window, sails_close, wake, out; none (null, by default) — the beat has its own hour: 0.31, in wake and in out after it — 0.245"
+    },
+    "match_x": {
+      "type": "number",
+      "means": "the play's key (read by the frame match's animate): where the sail is on the screen, in frame heights from its middle, x to the right; 0 by default"
+    },
+    "match_y": {
+      "type": "number",
+      "means": "the play's key (read by the frame match's animate): where the sail is on the screen, in frame heights from its middle, y down; 0 by default"
+    },
+    "match_s": {
+      "type": "number",
+      "means": "the play's key (read by the frame match's animate): the ship's height in frame heights; 0.006 by default"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky and sea",
+      "sky": true,
+      "uniforms": {
+        "tr": 0.42,
+        "tg": 0.5,
+        "tb": 0.61,
+        "mr": 0.65,
+        "mg": 0.71,
+        "mb": 0.77,
+        "lr": 0.89,
+        "lg": 0.85,
+        "lb": 0.83,
+        "gr": 0.96,
+        "gg": 0.87,
+        "gb": 0.8,
+        "sr": 0.31,
+        "sg": 0.39,
+        "sb": 0.47,
+        "horizon": 0.5,
+        "x0": -0.4,
+        "span": 2.58,
+        "all_round": 0,
+        "day": 0.55,
+        "night": 0,
+        "storm": 0,
+        "sun_x": 0.89,
+        "sun_y": 0.2,
+        "sun_up": 0,
+        "sun_low": 0,
+        "moon_x": 0.89,
+        "moon_y": 0.3,
+        "moon_up": 0
+      }
+    },
+    {
+      "id": "sea",
+      "name": "The sea below the hill",
+      "plane": true,
+      "across": 0,
+      "distance": 10000,
+      "elevation": -40,
+      "width": 40000,
+      "depth": 20000,
+      "reflect": {
+        "strength": 0.7,
+        "fade": 0,
+        "blur": 0.01,
+        "rough": 0.5,
+        "ripple": 0.35
+      }
+    },
+    {
+      "id": "ship",
+      "name": "Ship under scarlet sails",
+      "unseen": true,
+      "across": 520,
+      "distance": 420,
+      "elevation": -40,
+      "facing": 0,
+      "place": {
+        "across": "ship_across",
+        "tilt": "ship_roll"
+      }
+    },
+    {
+      "id": "ship_side",
+      "name": "Secret: starboard side",
+      "on": "ship",
+      "distance": -3.7,
+      "facing": 180,
+      "box": [
+        -8.1,
+        -6.2,
+        7.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_side_port",
+      "name": "Secret: port side",
+      "on": "ship",
+      "distance": 3.7,
+      "facing": 0,
+      "box": [
+        -7.1,
+        -6.2,
+        8.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_bow",
+      "name": "Secret: starboard bow",
+      "on": "ship",
+      "across": 7,
+      "distance": -3.7,
+      "facing": 159.7,
+      "box": [
+        -0.1,
+        -6.2,
+        10.76,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_bow_port",
+      "name": "Secret: port bow",
+      "on": "ship",
+      "across": 7,
+      "distance": 3.7,
+      "facing": 20.3,
+      "box": [
+        -10.76,
+        -6.2,
+        0.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_quarter",
+      "name": "Secret: starboard quarter",
+      "on": "ship",
+      "across": -8,
+      "distance": -3.7,
+      "facing": 188.7,
+      "box": [
+        -8.7,
+        -6.2,
+        0.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_quarter_port",
+      "name": "Secret: port quarter",
+      "on": "ship",
+      "across": -8,
+      "distance": 3.7,
+      "facing": 351.3,
+      "box": [
+        -0.1,
+        -6.2,
+        8.7,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_transom",
+      "name": "Secret: stern",
+      "on": "ship",
+      "across": -16.5,
+      "facing": 270,
+      "box": [
+        -2.7,
+        -6.3,
+        2.7,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_deck",
+      "name": "Secret: deck",
+      "plane": true,
+      "walk": true,
+      "on": "ship",
+      "across": 0.25,
+      "elevation": 2.4,
+      "width": 33.5,
+      "depth": 7.4
+    },
+    {
+      "id": "ship_poop",
+      "name": "Secret: poop",
+      "plane": true,
+      "walk": true,
+      "on": "ship",
+      "across": -12.5,
+      "elevation": 3.8,
+      "width": 8,
+      "depth": 7.4
+    },
+    {
+      "id": "ship_break",
+      "name": "Secret: break of the poop",
+      "on": "ship",
+      "across": -8.5,
+      "elevation": 2.4,
+      "facing": 90,
+      "box": [
+        -3.7,
+        -1.5,
+        3.7,
+        0
+      ]
+    },
+    {
+      "id": "ship_rig",
+      "name": "Secret: masts and rigging",
+      "on": "ship",
+      "facing": 180,
+      "box": [
+        -22,
+        -32,
+        27,
+        0
+      ]
+    },
+    {
+      "id": "ship_fore",
+      "name": "Secret: foremast and yards",
+      "on": "ship",
+      "across": 8.3,
+      "facing": 55,
+      "box": [
+        -8.6,
+        -26.5,
+        8.6,
+        -2.3
+      ]
+    },
+    {
+      "id": "ship_fore_course",
+      "name": "Secret: course, foremast",
+      "on": "ship_fore",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -8,
+        -13.3,
+        8,
+        -5.8
+      ],
+      "uniforms": {
+        "head": -12.8,
+        "foot": -6.3,
+        "rise": 0,
+        "seed": 1,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_fore_top",
+      "name": "Secret: topsail, foremast",
+      "on": "ship_fore",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -7.2,
+        -19.9,
+        7.2,
+        -12.8
+      ],
+      "uniforms": {
+        "head": -19.4,
+        "foot": -13.3,
+        "rise": 1,
+        "seed": 2,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_fore_tg",
+      "name": "Secret: topgallant, foremast",
+      "on": "ship_fore",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -5.9,
+        -24.7,
+        5.9,
+        -19.3
+      ],
+      "uniforms": {
+        "head": -24.2,
+        "foot": -19.8,
+        "rise": 1,
+        "seed": 3,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_main",
+      "name": "Secret: mainmast and yards",
+      "on": "ship",
+      "across": -0.7,
+      "facing": 55,
+      "box": [
+        -8.6,
+        -29.5,
+        8.6,
+        -2.3
+      ]
+    },
+    {
+      "id": "ship_main_course",
+      "name": "Secret: course, mainmast",
+      "on": "ship_main",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -8.6,
+        -14.3,
+        8.6,
+        -5.8
+      ],
+      "uniforms": {
+        "head": -13.8,
+        "foot": -6.3,
+        "rise": 0,
+        "seed": 4,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_main_top",
+      "name": "Secret: topsail, mainmast",
+      "on": "ship_main",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -7.8,
+        -21.5,
+        7.8,
+        -13.8
+      ],
+      "uniforms": {
+        "head": -21,
+        "foot": -14.3,
+        "rise": 1,
+        "seed": 5,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_main_tg",
+      "name": "Secret: topgallant, mainmast",
+      "on": "ship_main",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -6.4,
+        -26.8,
+        6.4,
+        -20.9
+      ],
+      "uniforms": {
+        "head": -26.3,
+        "foot": -21.4,
+        "rise": 1,
+        "seed": 6,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_jib",
+      "name": "Secret: staysail",
+      "on": "ship",
+      "distance": 0.1,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        8,
+        -19.1,
+        17.7,
+        -3.9
+      ],
+      "uniforms": {
+        "head": -18.6,
+        "foot": -4.4,
+        "rise": 1,
+        "seed": 7,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_jib_outer",
+      "name": "Secret: jib",
+      "on": "ship",
+      "distance": -0.1,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        7.9,
+        -25.1,
+        26.1,
+        -4.7
+      ],
+      "uniforms": {
+        "head": -24.6,
+        "foot": -5.2,
+        "rise": 1,
+        "seed": 8,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_spanker",
+      "name": "Secret: spanker",
+      "on": "ship",
+      "distance": -0.1,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -18.1,
+        -20.3,
+        -9.2,
+        -5.7
+      ],
+      "uniforms": {
+        "head": -19.8,
+        "foot": -6.2,
+        "rise": 1,
+        "seed": 9,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "yard",
+      "name": "Hilltop",
+      "plane": true,
+      "across": 2,
+      "distance": 6.75,
+      "width": 8,
+      "depth": 3.5
+    },
+    {
+      "id": "wall_back",
+      "name": "Wall to the sea",
+      "across": 0.7,
+      "distance": 5,
+      "facing": 180,
+      "height": 2.55,
+      "box": [
+        -2.3,
+        -2.55,
+        2.3,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_left",
+      "name": "Left wall",
+      "across": -1.6,
+      "distance": 1.9,
+      "facing": 90,
+      "height": 2.55,
+      "box": [
+        -3.1,
+        -2.55,
+        3.1,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_right",
+      "name": "Right wall",
+      "across": 3,
+      "distance": 1.9,
+      "facing": 270,
+      "height": 2.55,
+      "box": [
+        -3.1,
+        -2.55,
+        3.1,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "wall_front",
+      "name": "Wall behind",
+      "across": 0.7,
+      "distance": -1.2,
+      "facing": 0,
+      "height": 2.55,
+      "box": [
+        -2.3,
+        -2.55,
+        2.3,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "floor",
+      "name": "Floor",
+      "plane": true,
+      "across": 0.7,
+      "distance": 1.9,
+      "width": 4.6,
+      "depth": 6.2,
+      "inside": true
+    },
+    {
+      "id": "ceiling",
+      "name": "Ceiling",
+      "plane": true,
+      "across": 0.7,
+      "distance": 1.9,
+      "elevation": 2.55,
+      "width": 4.6,
+      "depth": 6.2,
+      "inside": true
+    },
+    {
+      "id": "window",
+      "name": "Window",
+      "across": 0.75,
+      "distance": 4.97,
+      "facing": 180,
+      "height": 1.4,
+      "box": [
+        -0.9,
+        -2.15,
+        0.9,
+        -0.72
+      ],
+      "inside": true
+    },
+    {
+      "id": "opening",
+      "name": "Window opening",
+      "unseen": true,
+      "across": 0.75,
+      "distance": 5,
+      "facing": 180,
+      "height": 1.25,
+      "box": [
+        -0.75,
+        -2.05,
+        0.75,
+        -0.8
+      ]
+    },
+    {
+      "id": "doorway",
+      "name": "Doorway",
+      "unseen": true,
+      "across": 2.425,
+      "distance": 5,
+      "facing": 180,
+      "height": 2,
+      "box": [
+        -0.425,
+        -2,
+        0.425,
+        0
+      ]
+    },
+    {
+      "id": "glass_left",
+      "name": "Left leaf's glass",
+      "across": 0,
+      "distance": 4.965,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -0.02,
+        -2.06,
+        0.77,
+        -0.79
+      ],
+      "place": {
+        "facing": "window_left_facing"
+      },
+      "glass": true,
+      "inside": true,
+      "behind": [
+        "window_left"
+      ]
+    },
+    {
+      "id": "glass_right",
+      "name": "Right leaf's glass",
+      "across": 1.5,
+      "distance": 4.965,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -0.77,
+        -2.06,
+        0.02,
+        -0.79
+      ],
+      "place": {
+        "facing": "window_right_facing"
+      },
+      "glass": true,
+      "inside": true,
+      "behind": [
+        "window_right"
+      ]
+    },
+    {
+      "id": "window_left",
+      "name": "Left leaf",
+      "across": 0,
+      "distance": 4.96,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -0.02,
+        -2.06,
+        0.77,
+        -0.79
+      ],
+      "place": {
+        "facing": "window_left_facing"
+      },
+      "inside": true,
+      "shadow": {
+        "light": "sun",
+        "onto": [
+          "floor",
+          "wall_right",
+          "wall_front"
+        ],
+        "soft": 0.05
+      }
+    },
+    {
+      "id": "window_right",
+      "name": "Right leaf",
+      "across": 1.5,
+      "distance": 4.96,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -0.79,
+        -2.06,
+        0.02,
+        -0.79
+      ],
+      "place": {
+        "facing": "window_right_facing"
+      },
+      "inside": true,
+      "shadow": {
+        "light": "sun",
+        "onto": [
+          "floor",
+          "wall_right",
+          "wall_front"
+        ],
+        "soft": 0.05
+      }
+    },
+    {
+      "id": "sill",
+      "name": "Windowsill",
+      "plane": true,
+      "across": 0.75,
+      "distance": 4.9,
+      "elevation": 0.8,
+      "width": 1.75,
+      "depth": 0.2,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "sill_front",
+      "name": "Edge of the windowsill",
+      "across": 0.75,
+      "distance": 4.8,
+      "elevation": 0.8,
+      "facing": 180,
+      "height": 0.05,
+      "box": [
+        -0.875,
+        -0.05,
+        0.875,
+        0
+      ],
+      "inside": true
+    },
+    {
+      "id": "door",
+      "name": "Door",
+      "across": 2.85,
+      "distance": 4.96,
+      "facing": 180,
+      "height": 2.05,
+      "box": [
+        -0.9,
+        -2.05,
+        0.05,
+        0.01
+      ],
+      "inside": true,
+      "place": {
+        "facing": "door_facing"
+      },
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_right",
+          "wall_front"
+        ],
+        "soft": 0.05
+      }
+    },
+    {
+      "id": "shelves",
+      "name": "Shelves of toys",
+      "across": -0.8,
+      "distance": 4.95,
+      "facing": 180,
+      "height": 2.6,
+      "box": [
+        -0.7,
+        -2.6,
+        2.5,
+        -1.25
+      ],
+      "inside": true
+    },
+    {
+      "id": "toy",
+      "name": "Assol's yacht",
+      "across": 1.35,
+      "distance": 4.93,
+      "elevation": 2.2,
+      "facing": 180,
+      "height": 0.45,
+      "box": [
+        -0.2,
+        -0.45,
+        0.2,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "chest",
+      "name": "Sea chest",
+      "across": -1,
+      "distance": 4.65,
+      "height": 0.6,
+      "box": [
+        -0.56,
+        -0.6,
+        0.56,
+        0.02
+      ],
+      "place": {
+        "across": "chest_across",
+        "distance": "chest_distance"
+      },
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true,
+      "facing": 180
+    },
+    {
+      "id": "chest_end",
+      "name": "Chest, end",
+      "on": "chest",
+      "across": 0.5,
+      "distance": 0.16,
+      "facing": 90,
+      "height": 0.6,
+      "box": [
+        -0.19,
+        -0.6,
+        0.19,
+        0.02
+      ],
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "chest_lid",
+      "name": "Chest lid",
+      "plane": true,
+      "on": "chest",
+      "elevation": 0.56,
+      "distance": 0.16,
+      "width": 1.04,
+      "depth": 0.34,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "chair",
+      "name": "Chair by the window",
+      "across": 0.75,
+      "distance": 4.45,
+      "height": 1,
+      "box": [
+        -0.3,
+        -1.02,
+        0.3,
+        0.02
+      ],
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "bench",
+      "name": "Workbench",
+      "plane": true,
+      "across": -1.25,
+      "distance": 2.8,
+      "elevation": 0.86,
+      "width": 0.7,
+      "depth": 2,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "bench_side",
+      "name": "Workbench, side",
+      "across": -0.9,
+      "distance": 2.8,
+      "facing": 90,
+      "height": 0.9,
+      "box": [
+        -1,
+        -0.92,
+        1,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "bench_end",
+      "name": "Workbench, end",
+      "across": -1.25,
+      "distance": 1.8,
+      "facing": 180,
+      "height": 0.9,
+      "box": [
+        -0.36,
+        -0.92,
+        0.36,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "lamp",
+      "name": "Lamp",
+      "across": -1.3,
+      "distance": 3.2,
+      "elevation": 0.86,
+      "height": 0.4,
+      "box": [
+        -0.15,
+        -0.42,
+        0.15,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "flame",
+      "name": "Lamp flame",
+      "across": -1.3,
+      "distance": 3.2,
+      "elevation": 0.86,
+      "height": 0.4,
+      "glows": true,
+      "box": [
+        -0.06,
+        -0.3,
+        0.06,
+        -0.14
+      ]
+    },
+    {
+      "id": "work",
+      "name": "Work on the workbench",
+      "across": -1.3,
+      "distance": 2.55,
+      "elevation": 0.86,
+      "height": 0.12,
+      "box": [
+        -0.4,
+        -0.12,
+        0.5,
+        0.01
+      ],
+      "inside": true
+    },
+    {
+      "id": "box",
+      "name": "Box of scraps",
+      "across": -1.3,
+      "distance": 2.9,
+      "height": 0.36,
+      "box": [
+        -0.28,
+        -0.38,
+        0.28,
+        0.02
+      ],
+      "inside": true,
+      "facing": 180
+    },
+    {
+      "id": "box_end",
+      "name": "Box, side",
+      "on": "box",
+      "across": 0.26,
+      "distance": 0.2,
+      "facing": 90,
+      "height": 0.36,
+      "box": [
+        -0.22,
+        -0.38,
+        0.22,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "box_top",
+      "name": "Box, top",
+      "plane": true,
+      "on": "box",
+      "elevation": 0.36,
+      "distance": 0.2,
+      "width": 0.52,
+      "depth": 0.4,
+      "inside": true
+    },
+    {
+      "id": "box_wood",
+      "name": "Scraps in the box",
+      "on": "box",
+      "distance": 0.2,
+      "elevation": 0.3,
+      "height": 0.35,
+      "box": [
+        -0.3,
+        -0.36,
+        0.3,
+        0.02
+      ],
+      "inside": true
+    },
+    {
+      "id": "stool",
+      "name": "Stool by the workbench",
+      "across": -0.68,
+      "distance": 3.45,
+      "facing": 180,
+      "height": 0.6,
+      "box": [
+        -0.2,
+        -0.62,
+        0.2,
+        0.02
+      ],
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "stool_back",
+      "name": "Stool, back legs",
+      "on": "stool",
+      "distance": 0.28,
+      "facing": 180,
+      "height": 0.6,
+      "box": [
+        -0.2,
+        -0.62,
+        0.2,
+        0.02
+      ],
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "stool_top",
+      "name": "Stool seat",
+      "plane": true,
+      "on": "stool",
+      "elevation": 0.6,
+      "distance": 0.15,
+      "width": 0.36,
+      "depth": 0.32,
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "basket",
+      "name": "Basket of toys",
+      "across": 2.05,
+      "distance": 4.55,
+      "height": 0.36,
+      "box": [
+        -0.24,
+        -0.4,
+        0.24,
+        0.02
+      ],
+      "shadow": {
+        "onto": [
+          "floor",
+          "wall_left",
+          "wall_back"
+        ],
+        "soft": 0.2
+      },
+      "inside": true
+    },
+    {
+      "id": "book",
+      "name": "Book",
+      "plane": true,
+      "across": 1.12,
+      "distance": 4.25,
+      "elevation": 0.005,
+      "width": 0.4,
+      "depth": 0.32,
+      "inside": true
+    },
+    {
+      "id": "longren",
+      "name": "Longren",
+      "person": {
+        "cast": "cast",
+        "who": "longren",
+        "turn": 270,
+        "does": "carve"
+      },
+      "across": -0.58,
+      "distance": 2.5,
+      "place": {
+        "across": "lo_a",
+        "distance": "lo_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "assol",
+      "name": "Assol",
+      "person": {
+        "cast": "cast",
+        "who": "assol_child",
+        "turn": 200,
+        "does": "seated"
+      },
+      "across": -0.68,
+      "distance": 3.6,
+      "place": {
+        "across": "as_a",
+        "distance": "as_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "filipp",
+      "name": "Collier outside the window",
+      "person": {
+        "cast": "cast",
+        "who": "filipp",
+        "turn": 270
+      },
+      "across": 4.5,
+      "distance": 6.3,
+      "place": {
+        "across": "fi_a",
+        "distance": "fi_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "girl",
+      "name": "Girl with the yacht",
+      "person": {
+        "cast": "cast",
+        "who": "girl",
+        "turn": 180
+      },
+      "across": 2.55,
+      "distance": 8.4,
+      "place": {
+        "across": "gi_a",
+        "distance": "gi_d"
+      },
+      "shadow": true,
+      "inside": true
+    },
+    {
+      "id": "closeup",
+      "name": "Close-up",
+      "insert": "closeup"
+    },
+    {
+      "id": "scrap",
+      "name": "Scrap",
+      "insert": "scrap"
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Solo felt piano, slow and intimate, a quiet room by the sea at evening, modern indie game score",
+        "weight": 1.2
+      },
+      {
+        "text": "Warm low cello drone with a soft music-box melody far away, lamplight and patience",
+        "weight": 0.8
+      },
+      {
+        "text": "Ambient pads like sea air through an open window, airy and calm, minimalist",
+        "weight": 0.7
+      },
+      {
+        "text": "Four rising notes on a celesta, gentle and hopeful, repeating like a promise",
+        "weight": 0
+      },
+      {
+        "text": "Sparse nylon guitar fingerpicking, close and quiet, a craftsman at his bench",
+        "weight": 0
+      },
+      {
+        "text": "Soft clarinet melody over low strings, tender, a father and a daughter",
+        "weight": 0
+      },
+      {
+        "text": "Glassy synth swells with long reverb tails, morning light on pale walls",
+        "weight": 0
+      },
+      {
+        "text": "Neo-classical string quartet, sustained and silvery, slow tempo, nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "Woodblock and soft marimba textures like small tools on wood, rhythmic and calm",
+        "weight": 0
+      },
+      {
+        "text": "Accordion very softly in another room, faded memory of a fishing village",
+        "weight": 0
+      },
+      {
+        "text": "Harp arpeggios and flute, impressionistic sea seen through glass",
+        "weight": 0
+      },
+      {
+        "text": "Low ambient hum with distant gulls implied by high strings harmonics, still afternoon",
+        "weight": 0
+      },
+      {
+        "text": "Minimalist repeating piano figure in the style of Max Richter, wistful and patient",
+        "weight": 0
+      },
+      {
+        "text": "Lonely violin line over an open fifth drone, waiting by the window",
+        "weight": 0
+      },
+      {
+        "text": "Wordless distant choir, very soft, a dream rising at dawn",
+        "weight": 0
+      },
+      {
+        "text": "Bowed vibraphone and glass harmonica, suspended, dreamlike stillness",
+        "weight": 0
+      },
+      {
+        "text": "Rhodes electric piano chords with tape warmth, cozy night with a lamp",
+        "weight": 0
+      },
+      {
+        "text": "Full orchestra slowly swelling into triumph, strings and horns, scarlet sails appearing in the window",
+        "weight": 0
+      },
+      {
+        "text": "Night ambience with a slow solo oboe, deep blue, the lamp low",
+        "weight": 0
+      }
+    ],
+    "bpm": 62,
+    "density": 0.22,
+    "brightness": 0.4,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}

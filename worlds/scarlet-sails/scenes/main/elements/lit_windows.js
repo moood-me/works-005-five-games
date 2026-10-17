@@ -1,4 +1,4 @@
-const N = e.kit.nebo;
+const N = e.kit.sky;
 const L = e.lib;
 
 // The windows of Kaperna, lit: each a glow in its house's place (parts, as `kaperna` stands them: `w0`… by its index

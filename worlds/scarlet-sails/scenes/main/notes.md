@@ -1,274 +1,274 @@
-# Берег Каперны (`main`) — на движке 2
+# The Kaperna Shore (`main`) — on engine 2
 
-Первая сцена мира, она задаёт ему стиль: современный, тонкий, почти минималистичный. Огромное утреннее море-зеркало и
-небо, жемчужная серебристо-голубая палитра, чистые объёмы, длинные отражения, мягкий туман. Тёплое в кадре — только окно
-Лонгрена (и фонарь трактира, когда горит); алое — только паруса корабля и яхта Ассоль. Люди — движка, каст мира
-(`cast`); фильм кусками — `beats` (`lib.film`); небо и свет часа — `nebo`; корабль, шлюпка, огни ночи — `korabli`; руки
-крупно — `closeups`.
+The world's first scene; it sets its style: modern, fine, almost minimalist. A vast morning mirror of a sea and
+sky, a pearly silver-blue palette, clean volumes, long reflections, soft mist. The only warm thing in the frame is Longren's
+window (and the tavern's lantern when it is lit); the only scarlet — the ship's sails and Assol's yacht. The people are the engine's, the world's cast
+(`cast`); the film in beats — `beats` (`lib.film`); the sky and the hour's light — `sky`; the ship, the skiff, the night's lights — `ships`; the hands
+close up — `closeups`.
 
-Всё нарисовано один раз, в дневных цветах. Ни один рисунок не читает ключ: час, туман, ветер, окна, фонарь, маяк,
-корабль, паруса, яхта на воде, снег, шторм, прошлое — свет сцены, слои, `animate`, шейдеры, частицы.
+Everything is painted once, in the day's colours. No painting reads a key: the hour, the mist, the wind, the windows, the lantern, the lighthouse,
+the ship, the sails, the yacht on the water, the snow, the storm, the past — they are the scene's light, layers, `animate`, shaders, particles.
 
-## Кадр
+## The frame
 
-Камера `panorama` у самой воды (глаз 1.7 м, горизонт 0.55), смотрит вдоль кромки: слева холм с Каперной, справа
-открытое море, мыс с маяком; солнце встаёт над морем справа и садится за холм слева.
+The camera `panorama` right at the water (the eye at 1.7 m, the horizon 0.55), looking along the water's edge: on the left the hill with Kaperna, on the right
+the open sea, the cape with the lighthouse; the sun rises over the sea on the right and sets behind the hill on the left.
 
-| Элемент | Где | Что |
+| Element | Where | What |
 | --- | --- | --- |
-| `sky` | небо | небо мира (`nebo.sky`, шейдер `tools/nebo-sky.wgsl`): градиент часа, звёзды, облака, солнце и луна — слои; точки `sky#sun`, `sky#moon` |
-| `sea` | плоскость до горизонта | зеркало (`reflect`: `rough`, `ripple`); свой цвет под зеркалом; рябь ветра — слой `ripple` (плывёт, виден на `wind`) |
-| `mist` | 700 м | туман на горизонте у мыса: слой-полоса (высота и плотность по `mist`) и два слоя банок, плывущих в разные стороны |
-| `ship` и `ship_…` | 9000 → 260 м | «Секрет» (`node tools/korabl.js main ship`): якорь `ship` (место, поворот, крен — ключи) и 22 элемента на нём |
-| `cape`, `lighthouse`, `lighthouse_light` | 800 м | мыс; башня маяка; его огонь (`glows`): вспышка раз в 8 с и луч в обе стороны — слои, горит с сумерек до утра (в тумане ночи ожидания не виден: `lib.capeMist`) |
-| `cape_mist` | 792 м | туман на мысу в ночь ожидания (`cape_mist`): слой вдоль мыса и слой над его концом и башней — он расходится, пока `light3` около 1 |
-| `light1`, `light2`, `light2_smoke`, `light3` | горизонт → близко → за мыс | три огня ночи ожидания (ниже, «Главы IV–V») |
-| `hill`, `hill_far` | плоскости `drape` | склон холма по рельефу, галька у воды, лестница |
-| `kaperna` | 200 м | дома на холме — части (`e.part`) на рельефе, окна тёмные |
-| `lit_windows` | 200 м, `glows` | горящие окна: свечения `w0`…`w42` в частях домов; `animate` зажигает их по `windows`, окно Лонгрена (последнее) — по `longren_window`; оно тёплое и втрое ярче остальных (сила 3: с берега это 3 пикселя, а на него смотрит Грей и оно гаснет в `to_skiff`) |
-| `veil` | 175 м | пелена над бухтой: два слоя банок (по `mist`) |
-| `road` | плоскость `drape`, 127–182 м | берег за бухтой под трактиром и влево от него: галька, дорога на Лисс вдоль воды, двор перед трактиром; снег — слой |
-| `tavern_set` и что на нём | 140 м | трактир Меннерса, собранный на якоре (ниже, «Трактир») |
-| `cart`, `nets2` | у трактира | воз Филиппа с корзинами слева от веранды; сети на кольях справа, к воде |
-| `nets` | 30 м | сети на кольях |
-| `net` | на киле `boat2` | бухта сети (на неё Лонгрен кладёт ладонь) |
-| `rope` | у кромки | бухта верёвки — только в прошлом (слой, виден по `past`) |
-| `skiff`, `skiff_far`, `skiff_in` | песок у лодок или вода | шлюпка «Секрета» (`korabli.skiff`): ближний борт (он же якорь и точка `skiff`), дальний борт в 1.3 м за ним, невидимое «внутри» между ними (точка `skiff_in#stern` — где стоят на корме); где она, как повёрнута и как высоко на плаву — `lib.skiffAt` |
-| `menners_skiff` | 46 → 260 м | лодка Меннерса — только в шторм (слой, виден по `storm`); её уносит `menners_boat`, качается |
-| `blizzard`, `storm_rain` | воздух | частицы: метель по `winter`, ливень по `storm` |
-| `beach`, `sand` | плоскости `drape` | ближний берег |
-| `boat1`, `boat2`, `stone` | 8.5, 17, 4.6 м | перевёрнутые лодки; камень у кромки |
-| `toy` | 6.3 м | яхта Ассоль на мелкой воде (`korabli.toy`): слой, виден по `toy_water`, покачивается |
-| `assol`, `kid_boy`, `kid_girl`, `kid_small`, `girl`, `mother`, `longren` | у лодок | люди движка |
-| `grey`, `hin`, `filipp`, `mary`, `menners`, `woman2`, `woman3` | у трактира (Грей и Лонгрен — и у воды) | люди главы III и прошлого |
-| `fisher1`, `fisher2` | у лодок | рыбаки Каперны (глава V) |
-| `letika` | в шлюпке (`"on": "skiff"`, носовая банка) | Летика на вёслах (часть `oars`) |
-| `hands` | вставка (`hands`) | руки крупно: кадр `boat` модуля `closeups`; `reach` читает только `animate` |
+| `sky` | the sky | the world's sky (`sky.sky`, the shader `tools/sky.wgsl`): the hour's gradient, the stars, the clouds, the sun and the moon — layers; the points `sky#sun`, `sky#moon` |
+| `sea` | a plane to the horizon | a mirror (`reflect`: `rough`, `ripple`); its own colour under the mirror; the wind's ripple is the layer `ripple` (it drifts, seen at `wind`) |
+| `mist` | 700 m | the mist on the horizon by the cape: a layer-streak (the height and the thickness by `mist`) and two layers of banks drifting different ways |
+| `ship` and `ship_…` | 9000 → 260 m | the Secret (`node tools/ship.js main ship`): the anchor `ship` (the place, the turn, the heel — keys) and 22 elements on it |
+| `cape`, `lighthouse`, `lighthouse_light` | 800 m | the cape; the lighthouse's tower; its light (`glows`): a flash once in 8 s and a beam both ways — layers, lit from dusk till morning (in the mist of the night of waiting it is not seen: `lib.capeMist`) |
+| `cape_mist` | 792 m | the mist on the cape on the night of waiting (`cape_mist`): a layer along the cape and a layer over its end and the tower — it parts while `light3` is about 1 |
+| `light1`, `light2`, `light2_smoke`, `light3` | the horizon → near → behind the cape | the three lights of the night of waiting (below, “Chapters IV–V”) |
+| `hill`, `hill_far` | planes `drape` | the hill's slope over the relief, pebbles at the water, a stair |
+| `kaperna` | 200 m | the houses on the hill — parts (`e.part`) on the relief, the windows dark |
+| `lit_windows` | 200 m, `glows` | the lit windows: the glows `w0`…`w42` in the houses' parts; `animate` lights them by `windows`, Longren's window (the last) — by `longren_window`; it is warm and three times brighter than the rest (strength 3: from the shore it is 3 pixels, and Gray looks at it and it goes out in `to_skiff`) |
+| `veil` | 175 m | a veil over the bay: two layers of banks (by `mist`) |
+| `road` | a plane `drape`, 127–182 m | the shore beyond the bay under the tavern and to the left of it: pebbles, the road to Liss along the water, the yard before the tavern; the snow is a layer |
+| `tavern_set` and what is on it | 140 m | Menners' tavern, put together on an anchor (below, “The tavern”) |
+| `cart`, `nets2` | by the tavern | Philip's cart with baskets to the left of the veranda; nets on stakes to the right, towards the water |
+| `nets` | 30 m | nets on stakes |
+| `net` | on the keel of `boat2` | a coil of net (Longren lays his palm on it) |
+| `rope` | at the edge | a coil of rope — only in the past (a layer, seen by `past`) |
+| `skiff`, `skiff_far`, `skiff_in` | the sand by the boats or the water | the Secret's skiff (`ships.skiff`): the near side (it is also the anchor and the point `skiff`), the far side 1.3 m behind it, an unseen “inside” between them (the point `skiff_in#stern` — where they stand in the stern); where it is, how it is turned and how high it floats — `lib.skiffAt` |
+| `menners_skiff` | 46 → 260 m | Menners' boat — only in the storm (a layer, seen by `storm`); `menners_boat` carries it off, it rocks |
+| `blizzard`, `storm_rain` | the air | particles: a blizzard by `winter`, a downpour by `storm` |
+| `beach`, `sand` | planes `drape` | the near shore |
+| `boat1`, `boat2`, `stone` | 8.5, 17, 4.6 m | upturned boats; a stone at the edge |
+| `toy` | 6.3 m | Assol's yacht in the shallow water (`ships.toy`): a layer, seen by `toy_water`, it rocks |
+| `assol`, `kid_boy`, `kid_girl`, `kid_small`, `girl`, `mother`, `longren` | by the boats | the engine's people |
+| `grey`, `hin`, `filipp`, `mary`, `menners`, `woman2`, `woman3` | by the tavern (Gray and Longren — at the water too) | the people of chapter III and of the past |
+| `fisher1`, `fisher2` | by the boats | Kaperna's fishermen (chapter V) |
+| `letika` | in the skiff (`"on": "skiff"`, the bow thwart) | Letika at the oars (the part `oars`) |
+| `hands` | an insert (`hands`) | the hands close up: the shot `boat` of the module `closeups`; `reach` is read only by `animate` |
 
-## Трактир (глава III)
+## The tavern (chapter III)
 
-Раньше — одна плоская карточка в 140 м на пристани в воде. Теперь это постройка на том же месте.
+Before — one flat card 140 m off on a landing in the water. Now it is a building in the same place.
 
-**Рельеф** (`lib.js`: `LAND`, `strand`): за бухтой берег продолжен — низкая ровная земля (1.1 м над морем) от своей
-кромки в 127 м до подножия холма, под трактиром и влево от него; правее трактира (27 м вправо) она кончается, пристань
-стоит над водой. С обычной камеры это полоска в пару пикселей у подножия холма: вид издали прежний.
+**The relief** (`lib.js`: `LAND`, `strand`): beyond the bay the shore goes on — low level land (1.1 m above the sea) from its
+edge at 127 m to the foot of the hill, under the tavern and to the left of it; to the right of the tavern (27 m to the right) it ends, the landing
+stands over the water. From the usual camera it is a strip of a couple of pixels at the foot of the hill: the view from afar is as before.
 
-**Постройка** — на якоре `tavern_set` (14 м вправо, 140 м; `lib.tv(x, z)` — точка постройки в метрах сцены: x вдоль
-передней стены, z от неё вглубь, перед ней — минус). Дом — блок 12 × 6 м (x −4…8), стены 4 м, конёк 6.2 м.
+**The building** — on the anchor `tavern_set` (14 m to the right, 140 m; `lib.tv(x, z)` — a point of the building in the scene's metres: x along
+the front wall, z from it inwards, in front of it — minus). The house is a block of 12 × 6 m (x −4…8), the walls 4 m, the ridge 6.2 m.
 
-| Элемент | Что |
+| Element | What |
 | --- | --- |
-| `tavern` | передняя стена с прорезанным дверным проёмом, тёмные окна; правее — пристань на сваях. Точки `#tavern`, `#landing`, `#veranda`, `#lamp` (на стене: за верандой и за фонарём) |
-| `tavern_inside`, `tavern_floor` | что видно в проёме (темно; тепло — слой по `tavern_lamp`) и пол за порогом (невидимая плоскость `walk`: в проёме стоит Меннерс) |
-| `tavern_door` | дверь на петлях слева, открывается внутрь: ключ `tavern_door` 0…1 (скрипт ведёт `tavern_door_facing`) |
-| `tavern_light` | горящие окна: слой и свечения по `tavern_lamp` |
-| `tavern_side`, `tavern_side_left` | торцы под щипцом (правый — к пристани; левый видит обычная камера сцены) |
-| `tavern_roof` | скат крыши к морю (плоскость с наклоном); снег — слой |
-| `veranda`, `veranda_steps` | пол веранды 6 × 3 м, 0.5 м над землёй (x 2…8, перед стеной), `walk`; ступени перед дверью (наклонная плоскость `walk`) |
-| `veranda_rail`, `veranda_left`, `veranda_right` | перила спереди (с проходом у ступеней), столбы и балка с корпусом фонаря; торцы |
-| `tavern_lantern` | фонарь над столом: стекло (слой по `tavern_lamp`), точка `#lamp`; его свет — источник сцены `lantern` |
-| `tavern_table`, `tavern_table_top`, `tavern_bench`, `tavern_bench_top` | стол у перил и скамья за ним; сиденье — `lib.js` `SEAT` (для `<id>_on`), точка `tavern_bench#seat` |
+| `tavern` | the front wall with a doorway cut in it, dark windows; to the right — the landing on piles. The points `#tavern`, `#landing`, `#veranda`, `#lamp` (on the wall: behind the veranda and behind the lantern) |
+| `tavern_inside`, `tavern_floor` | what is seen in the doorway (dark; the warmth is a layer by `tavern_lamp`) and the floor past the threshold (an unseen plane `walk`: Menners stands in the doorway) |
+| `tavern_door` | a door on hinges on the left, opening inwards: the key `tavern_door` 0…1 (the script leads `tavern_door_facing`) |
+| `tavern_light` | the lit windows: a layer and glows by `tavern_lamp` |
+| `tavern_side`, `tavern_side_left` | the gable ends (the right one — to the landing; the left one is seen by the scene's usual camera) |
+| `tavern_roof` | the roof's slope to the sea (a tilted plane); the snow is a layer |
+| `veranda`, `veranda_steps` | the veranda's floor of 6 × 3 m, 0.5 m above the ground (x 2…8, before the wall), `walk`; the steps before the door (a tilted plane `walk`) |
+| `veranda_rail`, `veranda_left`, `veranda_right` | the rail in front (with a gap at the steps), the posts and the beam with the lantern's body; the ends |
+| `tavern_lantern` | the lantern over the table: the glass (a layer by `tavern_lamp`), the point `#lamp`; its light is the scene's source `lantern` |
+| `tavern_table`, `tavern_table_top`, `tavern_bench`, `tavern_bench_top` | a table by the rail and a bench behind it; the seat — `lib.js` `SEAT` (for `<id>_on`), the point `tavern_bench#seat` |
 
-**Камера кадров трактира** — `TAVERN_CAM` в `lib.js` (ключи `camera_x`, `camera_z`, `camera_yaw`): на дороге в 4.7 м перед
-верандой, чуть левее её середины, смотрит на веранду. Объектив движка — высота кадра = расстояние, поэтому: люди на
-веранде в 5.8–6 м — около 0.3 высоты кадра (Хин 0.30), а в кадр по ширине входит около 10 м постройки: воз у левого
-края (16:9), сети и женщины у них — у правого. **В 8 м (как в scenes.md) люди были бы 0.2 кадра** — меньше четверти, а
-Хин говорит; выбрано расстояние под размер людей. В `passing` камера поворачивается вправо (к сетям, откуда идёт
-Ассоль) и ведёт её влево.
+**The tavern shots' camera** — `TAVERN_CAM` in `lib.js` (the keys `camera_x`, `camera_z`, `camera_yaw`): on the road 4.7 m before
+the veranda, a little to the left of its middle, looking at the veranda. The engine's lens — the frame's height = the distance, so: the people on
+the veranda at 5.8–6 m are about 0.3 of the frame's height (Hin 0.30), and about 10 m of the building go into the frame's width: the cart at the left
+edge (16:9), the nets and the women by them — at the right one. **At 8 m (as in scenes.md) the people would be 0.2 of the frame** — less than a quarter, and
+Hin speaks; the distance is chosen for the people's size. In `passing` the camera turns to the right (to the nets, where Assol
+comes from) and follows her to the left.
 
-Кадр со спины Грея (`grey_close`) — камера на веранде за его плечом (`camera_h` 0.55: глаз камеры держится рельефа, не
-пола веранды), смотрит вдоль дороги на запад. Склон с домами отсюда не виден — его закрывает сам дом трактира, — поэтому
-Ассоль уходит по дороге вдаль, к дальним холмам, а не «вверх по склону».
+The shot from behind Gray (`grey_close`) — the camera on the veranda behind his shoulder (`camera_h` 0.55: the camera's eye keeps to the relief, not
+to the veranda's floor), looking along the road to the west. The slope with the houses is not seen from here — the tavern's house itself hides it, — so
+Assol goes off along the road into the distance, towards the far hills, and not “up the slope”.
 
-## Что стало чем (v1 → v2)
+## What became what (v1 → v2)
 
 | v1 | v2 |
 | --- | --- |
-| небо рисовалось по `hour` (`nebo.palette`) | небо мира: один рисунок, шейдер и `animate` по `hour`; солнце и луна — слои с точками и свечениями |
-| свет часа — только `ambient` видов | виды `day/dawn/dusk/night` + дальние источники `sun` (`sky#sun`), `moon` (`sky#moon`): свет идёт оттуда, где они нарисованы; тени людей и камня |
-| море перерисовывалось по `wind` | рябь — слой с `drift`, его альфа — `wind` |
-| туман и пелена перерисовывались каждый кадр (`e.t`) | слои с `drift`; высота полосы — `scaleY` слоя, плотность — альфа |
-| маяк перерисовывался каждый кадр | башня — рисунок; огонь — элемент `lighthouse_light`: `e.glow` и два слоя-луча в `animate` |
-| корабль — один плоский рисунок `korabli.galliot`, вдали точка по `e.px` | собранный корабль мира: борта-грани, палубы, мачты и реи, девять парусов с шейдером парусины (ветер по ткани, белые ↔ алые по `sails`, просвечивают); идёт носом к берегу и встаёт на якорь в три четверти (`ship_facing`), качается (`ship_roll`); вдали — искра (`ship_spark`) |
-| окна Каперны — закрашенные прямоугольники по `windows` | свечения в частях домов, `e.glow` по `windows` |
-| фильм — строки по секундам (`film`), люди двигались за заданные секунды | куски режиссёра (`beats`): люди идут своим шагом и бегут своим бегом, кусок ждёт их |
-| затемнения (`fade`) на каждой склейке | склейки без затемнений; из чёрного — только пролог; в `grey_dawn` ночь переходит в рассвет на глазах (движется `hour`) |
+| the sky was painted by `hour` (`sky.palette`) | the world's sky: one painting, a shader and `animate` by `hour`; the sun and the moon are layers with points and glows |
+| the hour's light — only the looks' `ambient` | the looks `day/dawn/dusk/night` + the far sources `sun` (`sky#sun`), `moon` (`sky#moon`): the light comes from where they are painted; the shadows of the people and the stone |
+| the sea was painted anew by `wind` | the ripple is a layer with `drift`, its alpha — `wind` |
+| the mist and the veil were painted anew every frame (`e.t`) | layers with `drift`; the streak's height is the layer's `scaleY`, the thickness — the alpha |
+| the lighthouse was painted anew every frame | the tower is a painting; the light is the element `lighthouse_light`: `e.glow` and two beam layers in `animate` |
+| the ship — one flat painting `ships.galliot`, far off a point by `e.px` | the world's assembled ship: faceted sides, decks, masts and yards, nine sails with the sailcloth shader (the wind on the cloth, white ↔ scarlet by `sails`, translucent); she comes bow to the shore and anchors three-quarters on (`ship_facing`), rolls (`ship_roll`); far off — a spark (`ship_spark`) |
+| Kaperna's windows — rectangles painted by `windows` | glows in the houses' parts, `e.glow` by `windows` |
+| the film — lines by seconds (`film`), the people moved in the seconds given | the director's beats (`beats`): people walk at their own pace and run at their own run, the beat waits for them |
+| fades (`fade`) at every cut | cuts with no fades; out of black — only the prologue; in `grey_dawn` the night turns into dawn before our eyes (`hour` moves) |
 
-## Свет
+## Light
 
-`light.looks`: `day`, `dawn` (жемчужный, чуть тёплый), `dusk` (сиренево-серый), `night` (синий). Веса и
-`sun_light`, `moon_light` держит `script.js` (`nebo.follow`); в склейках они идут вместе с часом (`nebo.keys`). Окна,
-фонарь трактира, маяк — свечения (`e.light`), `hazeGlow` — их свет в воздухе. Отражения, дорожки солнца, луны и окон —
-зеркало моря. Туман (`mist`) — только слои у мыса и над бухтой, вида света у него нет: воздух утра прозрачен до
-горизонта (`dawn` — дымка 0.03, видно на 20 км; `day` 0.07 — на 7 км), иначе искры корабля за 6–9 км не видно совсем
-(свечение гаснет как e^(−D/дальность дымки): при дымке 0.1 от него на 9.5 км остаётся двадцатая часть, с прежним видом
-`mist` — пятисотая). Ночь поднята (ambient 0.62, луна 0.6): Ассоль на камне должна читаться.
+`light.looks`: `day`, `dawn` (pearly, a little warm), `dusk` (lilac-grey), `night` (blue). The weights and
+`sun_light`, `moon_light` are kept by `script.js` (`sky.follow`); in cuts they go together with the hour (`sky.keys`). The windows,
+the tavern's lantern, the lighthouse are glows (`e.light`), `hazeGlow` — their light in the air. The reflections, the paths of the sun, the moon and the windows —
+the sea's mirror. The mist (`mist`) is only the layers by the cape and over the bay, it has no look of light: the morning air is clear to
+the horizon (`dawn` — a haze of 0.03, seen to 20 km; `day` 0.07 — to 7 km), else the ship's spark 6–9 km off is not seen at all
+(a glow fades as e^(−D/the haze's range): with a haze of 0.1, a twentieth of it is left at 9.5 km, with the old look
+`mist` — a five-hundredth). The night is raised (ambient 0.62, the moon 0.6): Assol on the stone must read.
 
-## Ключи
+## Keys
 
-Описаны в `states`. Игре: `hour`, `mist`, `wind`, `windows`, `longren_window`, `tavern_lamp`, `ship` (0 нет → до 0.15
-разгорается искра у мыса → идёт к берегу → 1 на якоре), `sails` (белые → алые), `toy_water`, `beat`; `tavern_door`
-(дверь трактира), `past` (вид света «прошлое»: выцветший, зерно гуще — склейкой), `winter` (снег слоями на берегу у
-трактира, его крыше и склоне; метель — частицы), `storm` (вид света, пелена неба, белые гребни — слой моря, ливень,
-ветер), `menners_boat` (лодку Меннерса уносит), `boat` (шлюпка «Секрета» на воде: 0 у борта корабля → 1 у Ассоль в
-воде; место — `lib.skiffAt`), `skiff_ashore` (шлюпка вытащена на песок у лодок — глава III), `light1`, `light2`,
-`light3` (0…2 — огни ночи ожидания, двигает игра; вне этой ночи 2), `cape_mist` (туман на мысу в ту ночь), `hands`
-(вставка рук), `reach` («Рука»).
-Служебные (ведёт сцена): `day`, `dawn`, `dusk`, `night`, `sun_light`, `moon_light`, `ship_across`, `ship_distance`,
+Described in `states`. For the game: `hour`, `mist`, `wind`, `windows`, `longren_window`, `tavern_lamp`, `ship` (0 none → up to 0.15
+a spark flares up by the cape → comes to the shore → 1 at anchor), `sails` (white → scarlet), `toy_water`, `beat`; `tavern_door`
+(the tavern's door), `past` (the look of light “the past”: faded, the grain thicker — by a cut), `winter` (snow in layers on the shore by the
+tavern, its roof and the slope; a blizzard — particles), `storm` (a look of light, a veil of sky, white crests — a layer of the sea, a downpour,
+wind), `menners_boat` (Menners' boat is carried off), `boat` (the Secret's skiff on the water: 0 by the ship's side → 1 by Assol in
+the water; the place — `lib.skiffAt`), `skiff_ashore` (the skiff hauled up on the sand by the boats — chapter III), `light1`, `light2`,
+`light3` (0…2 — the lights of the night of waiting, moved by the game; outside that night 2), `cape_mist` (the mist on the cape that night), `hands`
+(the hands insert), `reach` (“Hand”).
+Internal (led by the scene): `day`, `dawn`, `dusk`, `night`, `sun_light`, `moon_light`, `ship_across`, `ship_distance`,
 `ship_facing`, `ship_spark`, `ship_roll`, `tavern_door_facing`, `mb_a`/`mb_d`, `sk_a`/`sk_d`/`sk_f`/`sk_e`,
-`light1_a`/`light1_d`, `light2_a`/`light2_d`, `light2_smoke`; места людей — `lib.js`
-`PLACE` (`as_`, `kb_`, … + `a`/`d`; их ставят куски).
+`light1_a`/`light1_d`, `light2_a`/`light2_d`, `light2_smoke`; the people's places — `lib.js`
+`PLACE` (`as_`, `kb_`, … + `a`/`d`; set by the beats).
 
-**Ключи партии** — игра ставит их, открывая сцену; ни один `from` их не ставит; без игры — значения из `state`:
+**The play's keys** — the game sets them on opening the scene; no `from` sets them; without the game — the values from `state`:
 `ring` (`none` · `finger` · `cord`), `ring_kind` (`mother` · `own`), `warm` 0…1, `girl_toy` 0/1, `longren` (`home` ·
-`knows` · `sea`), `ending` (`grin` · `cry` · `waited` · `kaperna`), `morning` 0.26…0.36. Читают их куски через
-`lib.js`: `lit(scene)` — окна вечером и ночью 0.45 + 0.45·`warm`; `held(scene, …части)` — что у Ассоль (17) с собой:
-названные части и кольцо при `ring` = `finger` (`ring_kind` `mother` → часть `ring`, тонкое, с камнем; `own` → `ring_old`, старинное, широкое — как в «Доме» и «Лесе»); `hisWindow(scene)` — окно Лонгрена вечером и ночью главы IV: тёмное при `longren` = `sea` — **каждый кусок, который даёт ей что-то в руки,
-ставит `assol_with` только через `held`**, иначе кольцо пропадёт. Читают: III — `tavern`, `tavern_back`, `passing`,
+`knows` · `sea`), `ending` (`grin` · `cry` · `waited` · `kaperna`), `morning` 0.26…0.36. The beats read them through
+`lib.js`: `lit(scene)` — the windows in the evening and at night 0.45 + 0.45·`warm`; `held(scene, …parts)` — what Assol (17) has with her:
+the parts named and the ring with `ring` = `finger` (`ring_kind` `mother` → the part `ring`, thin, with a stone; `own` → `ring_old`, old, broad — as in “The House” and “The Wood”); `hisWindow(scene)` — Longren's window in the evening and at night of chapter IV: dark with `longren` = `sea` — **every beat that puts something into her hands
+sets `assol_with` only through `held`**, else the ring vanishes. Read by: III — `tavern`, `tavern_back`, `passing`,
 `grey_close`, `grey_shore`, `to_skiff`, `longren_boat`; IV — `longren_goes` (`ring`, `ring_kind`), `girl`, `give`, `keep`,
 `wait`, `grey_dawn` (`ring`, `ring_kind`, `warm`, `longren`); V — `dawn_two` (`ring`, `ring_kind`, `morning`), `sails_far` (`morning`,
 `ending`), `run`, `shore` (`ending`, `longren`, `girl_toy`, `ring`, `ring_kind`, `morning`), `hands`, `meet` (`ring`,
-`ring_kind`, `morning`; при `ring` = `cord` в `meet` и `away` на ней часть `ring_cord`), `away` (`ending`, `longren`,
+`ring_kind`, `morning`; with `ring` = `cord` in `meet` and `away` she has the part `ring_cord`), `away` (`ending`, `longren`,
 `girl_toy`, `morning`).
 
-Без куска на берегу никого: в `state` у каждого человека `<id>_here` = `false`; людей ставит `from` куска (`shore()` —
-всех нет, `at()` — кто здесь). Побочные дела куска (дети уходят в `alone`, бегут в `run`, Лонгрен спускается в `shore`) —
-`s.sequence`: остановленный на середине кусок останавливает и их.
+With no beat there is nobody on the shore: in `state` every person's `<id>_here` = `false`; the people are placed by the beat's `from` (`shore()` —
+none of them, `at()` — who is here). A beat's side affairs (the children leave in `alone`, run in `run`, Longren comes down in `shore`) —
+`s.sequence`: a beat stopped midway stops them too.
 
-**Изменилось против v1:** `beat` по умолчанию `null` (показ вне игр — `showcase.js`, значения `film` больше нет);
-`fade` не участвует в склейках.
+**Changed against v1:** `beat` by default `null` (the showcase outside games — `showcase.js`, there is no value `film` any more);
+`fade` takes no part in the cuts.
 
-## Точки для игры
+## Points for the game
 
-`ship` (якорь; годится для взгляда и камеры), `ship_rig#ship` (было `ship#ship`), `ship_rig#masthead`, `#bow`, `#stern`,
+`ship` (the anchor; will do for a gaze and the camera), `ship_rig#ship` (was `ship#ship`), `ship_rig#masthead`, `#bow`, `#stern`,
 `#deck`, `#ladder`; `lighthouse#light`, `tavern#landing`, `tavern#tavern`, `tavern#veranda`, `tavern#lamp`,
 `tavern_lantern#lamp`, `tavern_door#door`, `tavern_table#table`, `tavern_bench#seat`, `cart#cart`, `nets2#nets`, `net`,
-`skiff` (сам — точка на борту; `#skiff`, `#bow`, `#seat1`, `#seat2` — модуля), `skiff_in#stern`, `light1#light`,
-`light2#light` (и `#funnel`, `#steamer` модуля), `light3#light`, `hands#her`, `hands#his` (ставит `closeups.live`, пока
-вставка открыта), `menners_skiff#skiff`, `nets#nets`,
+`skiff` (itself — a point on the side; `#skiff`, `#bow`, `#seat1`, `#seat2` — the module's), `skiff_in#stern`, `light1#light`,
+`light2#light` (and the module's `#funnel`, `#steamer`), `light3#light`, `hands#her`, `hands#his` (set by `closeups.live` while
+the insert is open), `menners_skiff#skiff`, `nets#nets`,
 `boat1#boat`, `boat2#boat`, `kaperna#longren_house`, `lit_windows#longren_window`, `stone#stone`, `toy#toy`, `sky#sun`,
-`sky#moon`; точки людей (`assol#hands`, `assol#yacht` — яхта в руках…).
+`sky#moon`; the people's points (`assol#hands`, `assol#yacht` — the yacht in her hands…).
 
-## Куски (`lib.film`; в конце сцена говорит `beat:<имя>`)
+## The beats (`lib.film`; at the end the scene tells `beat:<name>`)
 
-| Кусок | after | Что | Моменты (`scene.tell`) |
+| Beat | after | What | Moments (`scene.tell`) |
 | --- | --- | --- | --- |
-| `spark` | — | рассвет, из темноты (2 с), пустой берег; у мыса загорается алая искра (`ship` → 0.12) и стоит — под первое касание (`ship_rig#ship`) | `spark:lit` |
-| `prologue` | spark | искра растёт в корабль под алыми парусами, далеко (`ship` → 0.32); без склейки и без затемнения | `prologue:spark` (в начале) |
-| `kids` | — | вечер: Ассоль (8) бежит с яхтой к лодкам; дети оборачиваются, показывают пальцами, смеются; старшая выходит вперёд и зовёт | `kids:came`, `kids:laugh`, `kids:beckon` |
-| `kids_hold` | kids | она стоит с яхтой, дети ждут — под выбор | |
-| `alone` | kids_hold | идёт к воде, ставит яхту на мелкую воду (`toy_water`); дети уходят вверх, мальчик оглядывается и смеётся | `alone:toy-down`, `alone:left` |
-| `play` | kids_hold | старшая берёт её за руку, они садятся у лодки, бросают камешки; Ассоль оглядывается на море | `play:hand`, `play:sat` |
-| `tavern` | — | III, вечер (`hour` 0.76), фонарь, камера трактира: Грей за столом у перил, Хин рядом, руки в бока (`hands_hips`), у воза Филипп, у сетей две женщины. Хин кивает в сторону склона (`nod_aside`) | `tavern:hin` |
-| `past_mary` | — | прошлое (склейка): зима, метель, сумерки, та же камера. Мэри с младенцем у двери (`baby_stand`) — слева от проёма, боком к нам: с камеры трактира она целиком видна между столбами у ступеней, справа от проёма её закрывал столб; Меннерс-старший в проёме качает головой (`shake_head`); она сходит по ступеням и уходит по дороге влево (`baby_walk`); дверь закрывается | `past_mary:door`, `past_mary:goes` |
-| `past_storm` | past_mary | прошлое, ближний берег (**кусок сам делает склейку** — первой строкой `run`): шторм. Лонгрен моложе (`longren_young`) у воды с трубкой, у ног верёвка; лодку с Меннерсом на коленях (`wave_help`, дальний силуэт) уносит в волны (`menners_boat` 0 → 1) | `past_storm:cry`, `past_storm:gone` |
-| `tavern_back` | — | снова вечер, камера трактира (склейка): те же позы, Филипп шагнул к веранде и стоит — под касание (`filipp`) | `tavern_back:ready` |
-| `passing` | tavern_back | по дороге мимо веранды справа налево идёт Ассоль (17) с корзиной, не глядя (выходит через полсекунды после начала куска, ещё за кадром); трое смотрят вслед; при `ring` = `finger` женщины у сетей тянут руку к `assol#ring`. Камера поворачивается к ней и ведёт её | `passing:assol` |
-| `grey_close` | passing | (крупно; **сам делает склейку**) со спины Грея: он встал у перил, за плечом дорога и её маленькая фигура, уходящая вдаль | |
-| `grey_shore` | — | сумерки (`hour` 0.8), обычная камера: Грей один у воды; шлюпка на песке у лодок; Лонгрен с трубкой у `boat2`; его окно горит на склоне — под выбор (`skiff`, `longren`) | `grey_shore:alone` |
-| `to_skiff` | grey_shore | Грей идёт к шлюпке, кладёт руку на борт; окно на склоне гаснет за его спиной | `to_skiff:dark` |
-| `longren_boat` | grey_shore | Грей идёт к лодкам, обходя нос шлюпки на песке (камера идёт за ним и приходит к лодкам чуть позже него: 12 с — иначе она его догоняла и резала по колено; шлюпка остаётся за кадром); Лонгрен кладёт ладонь на бухту сети (`reach`), поворачивается; стоят лицом к лицу; в конце Лонгрен поворачивает голову к дороге, где воз | `longren_boat:met` |
-| `longren_goes` | — | IV, закат: Лонгрен с сундуком уходит по берегу, оборачивается, поднимает руку; Ассоль у лодки | `longren_goes:wave` |
-| `girl` | — | вечер, закат (`hour` 0.76 — не раньше `longren_goes`; окна по `warm`, окно Лонгрена тёмное при `longren` = `sea`): Ассоль (17) на киле лодки, яхта на коленях; подходит маленькая девочка, смотрит на яхту — под выбор (`girl`, `assol#yacht`) | `girl:came` |
-| `give` | girl | протягивает яхту; девочка берёт и убегает вверх, держа её над головой (походка `run_high`) | `give:given`, `give:gone` |
-| `keep` | girl | девочка уходит к матери у сетей, оглядывается | `keep:looks-back` |
-| `wait` | — | ночь: Ассоль на камне, обхватила колени; камера повёрнута к морю и стоит в 4.7 м от камня (ближе — камень и её ноги уходят под нижний край кадра) — она слева, за ней окна Каперны (по `warm`; окно Лонгрена тёмное при `longren` = `sea`), справа от мыса три огня (`light1…3` = 0), мыс в тумане (`cape_mist`) — под «Ждать» (`light1#light`…`light3#light`) | |
-| `wait_lights` | wait | **только показ** (в игре это «Ждать»): огни по очереди подходят (лодка, пароход, маяк в разошедшемся тумане) и уходят за мыс; окна гаснут четвертями | |
-| `grey_dawn` | wait, wait_lights | ночь проходит в серый рассвет (голова на коленях); она слезает и уходит домой, камера поворачивается за ней | `grey_dawn:light`, `grey_dawn:home` |
-| `dawn_two` | — | V, концовка `waited`: то же утро (`hour` = `morning`, как у остальных кусков берега в V) — Лонгрен и Ассоль вдвоём у самой кромки, со спины и сбоку; у мыса загорается и встаёт алая точка (`ship` 0 → 0.32); она оборачивается к отцу | `dawn_two:spark`, `dawn_two:turns` |
-| `sails_far` | — | утро (`hour` = `morning`): корабль под алыми парусами выходит из-за мыса (`ship` 0.32 → 0.62). Камера смотрит на море — людей берега в кадре нет; при `ending` = `kaperna` камера на берег: вся Каперна уже стоит двумя группами | `sails_far:seen` |
-| `run` | sails_far | камера поворачивается к её пути; Ассоль сбегает к воде и встаёт у кромки (при `kaperna` — идёт шагом между двумя группами); люди — по `ending` (ниже); корабль подходит (`ship` → 0.8) | `run:at-the-edge` |
-| `shore` | run | корабль встаёт на якорь (`ship` → 1); от него идёт шлюпка (`boat` 0 → 0.8): Летика сидит с вёслами, Грей стоит на корме; Ассоль входит в воду по колено, камера за ней. Лонгрен (`home`) спускается к лодкам | `shore:anchor`, `shore:boat`, `shore:water` |
-| `hands` | shore | шлюпка подходит к ней (`boat` → 1), Грей протягивает руку; склейка во вставку `hands` (`reach` 0) — под «Руку» | `hands:close` |
-| `hands_reach` | hands | **только показ** (в игре это «Рука»): `reach` → 1 | |
-| `meet` | hands | (**сам делает склейку**) она в шлюпке, на корме перед ним; камера сбоку, средний план: два профиля против светлой воды, над ними корабль под алыми парусами; руки встречаются; она оглядывается на Каперну | `meet:boat` |
-| `away` | meet | (**сам делает склейку**) общий план с берега: шлюпка уже далеко, уходит к кораблю (`boat` 0.6 → 0.3); кто остался, смотрит вслед; один поднимает руку (`wave`); девочка с яхтой над головой (`girl_toy`) | `away:wave` (говорится и тогда, когда руку не поднимает никто) |
+| `spark` | — | dawn, out of the dark (2 s), the empty shore; by the cape a scarlet spark flares up (`ship` → 0.12) and stays — under the first touch (`ship_rig#ship`) | `spark:lit` |
+| `prologue` | spark | the spark grows into a ship under scarlet sails, far off (`ship` → 0.32); no cut and no fade | `prologue:spark` (at the start) |
+| `kids` | — | evening: Assol (8) runs with the yacht to the boats; the children turn round, point, laugh; the eldest girl steps forward and calls | `kids:came`, `kids:laugh`, `kids:beckon` |
+| `kids_hold` | kids | she stands with the yacht, the children wait — under a choice | |
+| `alone` | kids_hold | she goes to the water, puts the yacht on the shallow water (`toy_water`); the children go off up the slope, the boy looks back and laughs | `alone:toy-down`, `alone:left` |
+| `play` | kids_hold | the eldest girl takes her by the hand, they sit down by a boat, throw pebbles; Assol looks back at the sea | `play:hand`, `play:sat` |
+| `tavern` | — | III, evening (`hour` 0.76), the lantern, the tavern's camera: Gray at the table by the rail, Hin beside him, hands on his hips (`hands_hips`), by the cart Philip, by the nets two women. Hin nods towards the slope (`nod_aside`) | `tavern:hin` |
+| `past_mary` | — | the past (a cut): winter, a blizzard, dusk, the same camera. Mary with the baby by the door (`baby_stand`) — to the left of the doorway, side-on to us: from the tavern's camera she is seen whole between the posts by the steps, to the right of the doorway a post hid her; the elder Menners in the doorway shakes his head (`shake_head`); she goes down the steps and away along the road to the left (`baby_walk`); the door closes | `past_mary:door`, `past_mary:goes` |
+| `past_storm` | past_mary | the past, the near shore (**the beat makes the cut itself** — as the first line of `run`): a storm. Longren, younger (`longren_young`), at the water with his pipe, a rope at his feet; the boat with Menners on his knees (`wave_help`, a far silhouette) is carried off into the waves (`menners_boat` 0 → 1) | `past_storm:cry`, `past_storm:gone` |
+| `tavern_back` | — | evening again, the tavern's camera (a cut): the same poses, Philip has stepped towards the veranda and stands — under a touch (`filipp`) | `tavern_back:ready` |
+| `passing` | tavern_back | along the road past the veranda, from right to left, goes Assol (17) with a basket, not looking (she comes out half a second after the beat's start, still out of the frame); the three look after her; with `ring` = `finger` the women by the nets reach a hand towards `assol#ring`. The camera turns to her and follows her | `passing:assol` |
+| `grey_close` | passing | (close up; **it makes the cut itself**) from behind Gray: he has stood up by the rail, over his shoulder the road and her small figure going off into the distance | |
+| `grey_shore` | — | dusk (`hour` 0.8), the usual camera: Gray alone at the water; the skiff on the sand by the boats; Longren with his pipe by `boat2`; his window is lit on the slope — under a choice (`skiff`, `longren`) | `grey_shore:alone` |
+| `to_skiff` | grey_shore | Gray goes to the skiff, lays his hand on its side; the window on the slope goes out behind his back | `to_skiff:dark` |
+| `longren_boat` | grey_shore | Gray goes to the boats, round the bow of the skiff on the sand (the camera goes after him and comes to the boats a little later than he does: 12 s — else it caught up with him and cut him off at the knee; the skiff stays out of the frame); Longren lays his palm on the coil of net (`reach`), turns; they stand face to face; at the end Longren turns his head to the road, where the cart is | `longren_boat:met` |
+| `longren_goes` | — | IV, sunset: Longren with his chest goes off along the shore, turns, raises his hand; Assol by a boat | `longren_goes:wave` |
+| `girl` | — | evening, sunset (`hour` 0.76 — no earlier than `longren_goes`; the windows by `warm`, Longren's window dark with `longren` = `sea`): Assol (17) on a boat's keel, the yacht on her knees; a little girl comes up, looks at the yacht — under a choice (`girl`, `assol#yacht`) | `girl:came` |
+| `give` | girl | she holds out the yacht; the girl takes it and runs off up the slope, holding it over her head (the gait `run_high`) | `give:given`, `give:gone` |
+| `keep` | girl | the girl goes off to her mother by the nets, looks back | `keep:looks-back` |
+| `wait` | — | night: Assol on the stone, hugging her knees; the camera turned to the sea and standing 4.7 m from the stone (nearer — the stone and her feet go under the frame's bottom edge) — she on the left, behind her Kaperna's windows (by `warm`; Longren's window dark with `longren` = `sea`), to the right of the cape three lights (`light1…3` = 0), the cape in mist (`cape_mist`) — under “Waiting” (`light1#light`…`light3#light`) | |
+| `wait_lights` | wait | **for showing only** (in the game it is “Waiting”): the lights come near in turn (the boat, the steamer, the lighthouse in the parted mist) and go off behind the cape; the windows go out by quarters | |
+| `grey_dawn` | wait, wait_lights | the night passes into a grey dawn (her head on her knees); she gets down and goes home, the camera turns after her | `grey_dawn:light`, `grey_dawn:home` |
+| `dawn_two` | — | V, the ending `waited`: the same morning (`hour` = `morning`, as with the shore's other beats in V) — Longren and Assol together at the very edge, from behind and from the side; by the cape a scarlet point flares up and stays (`ship` 0 → 0.32); she turns to her father | `dawn_two:spark`, `dawn_two:turns` |
+| `sails_far` | — | morning (`hour` = `morning`): the ship under scarlet sails comes out from behind the cape (`ship` 0.32 → 0.62). The camera looks at the sea — the shore's people are not in the frame; with `ending` = `kaperna` the camera is on the shore: all Kaperna already stands in two groups | `sails_far:seen` |
+| `run` | sails_far | the camera turns to her way; Assol runs down to the water and stops at the edge (with `kaperna` — she walks between the two groups); the people — by `ending` (below); the ship comes near (`ship` → 0.8) | `run:at-the-edge` |
+| `shore` | run | the ship anchors (`ship` → 1); the skiff comes from her (`boat` 0 → 0.8): Letika sits at the oars, Gray stands in the stern; Assol walks into the water up to her knees, the camera after her. Longren (`home`) comes down to the boats | `shore:anchor`, `shore:boat`, `shore:water` |
+| `hands` | shore | the skiff comes up to her (`boat` → 1), Gray holds out his hand; a cut into the insert `hands` (`reach` 0) — under “Hand” | `hands:close` |
+| `hands_reach` | hands | **for showing only** (in the game it is “Hand”): `reach` → 1 | |
+| `meet` | hands | (**it makes the cut itself**) she is in the skiff, in the stern before him; the camera from the side, a medium shot: two profiles against the light water, over them the ship under scarlet sails; the hands meet; she looks back at Kaperna | `meet:boat` |
+| `away` | meet | (**it makes the cut itself**) a wide shot from the shore: the skiff already far off, going to the ship (`boat` 0.6 → 0.3); those left behind look after it; one raises a hand (`wave`); the girl with the yacht over her head (`girl_toy`) | `away:wave` (told even when nobody raises a hand) |
 
-Показ (`showcase.js`, `lib.SHOWCASE`): spark, prologue, kids, kids_hold, alone, tavern, past_mary, past_storm, tavern_back,
+The showcase (`showcase.js`, `lib.SHOWCASE`): spark, prologue, kids, kids_hold, alone, tavern, past_mary, past_storm, tavern_back,
 passing, grey_close, grey_shore, longren_boat, girl, give, longren_goes, wait, wait_lights, grey_dawn, dawn_two, sails_far,
-run, shore, hands, hands_reach, meet, away (с ключами партии по умолчанию: концовка `grin`, Лонгрен `home`). `from`
-каждого куска — склейка: состояния в `lib.js` — DAWN, KIDS, MET, HELD (без ключей партии, перед фильмом) и внутри
-`film(scene)` (читают ключи партии): TAVERN_EVENING, ASKED, BEHIND_GREY, WINTER, STORM, DUSK, BOATSIDE, GIRL_CAME, GOES,
-NIGHT, DAWN_TWO, SAILS_SEEN, COMES_DOWN, AT_THE_EDGE, WADED, TWO, LEFT. **Кусок, который по контракту идёт «после»
-другого, но открывается склейкой** (`past_storm`, `grey_close`, `meet`, `away`), `from` не имеет: его `run` начинается с
-`s.cut(…)` полного состояния — так склейка одна, идёт ли он после своего `after` или открывает сцену.
+run, shore, hands, hands_reach, meet, away (with the play's keys at their defaults: the ending `grin`, Longren `home`). Every beat's
+`from` is a cut: the states in `lib.js` — DAWN, KIDS, MET, HELD (with no play's keys, before the film) and inside
+`film(scene)` (they read the play's keys): TAVERN_EVENING, ASKED, BEHIND_GREY, WINTER, STORM, DUSK, BOATSIDE, GIRL_CAME, GOES,
+NIGHT, DAWN_TWO, SAILS_SEEN, COMES_DOWN, AT_THE_EDGE, WADED, TWO, LEFT. **A beat that by the contract comes “after”
+another but opens with a cut** (`past_storm`, `grey_close`, `meet`, `away`) has no `from`: its `run` begins with
+`s.cut(…)` of the full state — so there is one cut, whether it comes after its `after` or opens the scene.
 
-Места (метры) — константы перед фильмом в `lib.js`: киль лодки (BOAT), камень (STONE), у кромки (AT_EDGE), дорога вверх
-(UP — до края кадра и за него), сети (NETS); трактир — SEAT, AT_TABLE, AT_RAIL, DOORWAY, AT_DOOR, CART, AT_CART,
-BY_VERANDA, ALONG_ROAD; у воды в III — AT_WATER, AT_SKIFF, NET, AT_NET, MEETS, камеры SHORE_CAM, BOATS_CAM; утро V —
+The places (metres) — constants before the film in `lib.js`: a boat's keel (BOAT), the stone (STONE), at the edge (AT_EDGE), the way up
+(UP — to the frame's edge and beyond), the nets (NETS); the tavern — SEAT, AT_TABLE, AT_RAIL, DOORWAY, AT_DOOR, CART, AT_CART,
+BY_VERANDA, ALONG_ROAD; at the water in III — AT_WATER, AT_SKIFF, NET, AT_NET, MEETS, the cameras SHORE_CAM, BOATS_CAM; the morning of V —
 FROM_UP, WAY_HEAD, DOWN, STAND, BY_BOAT, KIDS_FROM, KIDS_EDGE, GIRL_FROM, GIRL_EDGE, LONGREN_EDGE, LONGREN_BOATS, WAVES,
 SLOPE,
-IN_WATER, камеры SEA_CAM, WAY_CAM, EDGE_CAM, WADE_CAM, WIDE_CAM, TWO_CAM.
+IN_WATER, the cameras SEA_CAM, WAY_CAM, EDGE_CAM, WADE_CAM, WIDE_CAM, TWO_CAM.
 
-**Облик, надетый склейкой, и шаг.** Облик из `<id>_wear` движок надевает на кадре после склейки, а скорость ходьбы берёт
-с ног в момент начала ходьбы: ходьба, начатая в одном кадре со склейкой, которая меняет облик (Ассоль 8 → 17), идёт
-шагом детских ног — предупреждение «moved slower than its gait». Поэтому в `passing` и `grey_close` она выходит через
-0.3–0.5 с после начала куска.
+**A look put on by a cut, and the pace.** The engine puts on a look from `<id>_wear` in the frame after the cut, and takes the walking speed
+from the legs at the moment the walk begins: a walk begun in the same frame as a cut that changes the look (Assol 8 → 17) goes
+at the pace of a child's legs — the warning “moved slower than its gait”. So in `passing` and `grey_close` she comes out
+0.3–0.5 s after the beat's start.
 
-## Рельеф и дома
+## The relief and the houses
 
-`relief.js` — `lib.ground`: море на −0.1 м; пляж поднимается от кромки (`EDGE`), а его дно тем же уклоном уходит под воду
-— отмель у ближнего берега (до 0.55 м; в 9–14 м от кромки и в 14–22 м вглубь дно возвращается к уровню моря, чтобы всё,
-что на плаву и вдали, стояло как прежде): по ней Ассоль входит в воду по колено обычным шагом. Что плавает над отмелью,
-поднято на её глубину (яхта `toy` — `elevation`, шлюпка — `sk_e`); холм (`HILL`, `PROFILE`) в 200 м с двумя
-террасами. Дома — `lib.houses`: блоки ступенями, каждый — часть элемента на рельефе.
+`relief.js` — `lib.ground`: the sea at −0.1 m; the beach rises from the edge (`EDGE`), and its bottom goes under the water at the same slope
+— shallows by the near shore (up to 0.55 m; 9–14 m from the edge and 14–22 m deep the bottom comes back to the sea's level, so that all
+that floats and is far off stands as before): Assol walks into the water up to her knees over them at her usual pace. What floats over the shallows is
+raised to their depth (the yacht `toy` — `elevation`, the skiff — `sk_e`); the hill (`HILL`, `PROFILE`) 200 m off with two
+terraces. The houses — `lib.houses`: blocks in steps, each a part of an element on the relief.
 
-## Главы IV–V
+## Chapters IV–V
 
-**Ночь ожидания (`wait`, «Ждать»).** Камера повёрнута к морю на 12°: Ассоль на камне в левой трети, за ней склон с
-окнами Каперны (их гасит игра: `windows`), правая половина — открытое море правее мыса. Три огня — элементы с точкой
-`light` (её игра предлагает): на 16:9 они стоят в 1.01, 1.18 и 1.35 высоты кадра от левого края (между соседними ≥ 0.15,
-все в средних 4:3).
+**The night of waiting (`wait`, “Waiting”).** The camera turned 12° to the sea: Assol on the stone in the left third, behind her the slope with
+Kaperna's windows (the game puts them out: `windows`), the right half — the open sea to the right of the cape. The three lights are elements with the point
+`light` (which the game offers): in 16:9 they stand at 1.01, 1.18 and 1.35 of the frame's height from the left edge (between neighbours ≥ 0.15,
+all within the middle 4:3).
 
-- `light1` — рыбачья лодка (`korabli.far`), `light2` — пароход (`korabli.steamer`, дым — частицы `light2_smoke`). Где
-  они — `lib.lightAt` (`LIGHTS`: пеленг и дальность при 0, 1, 1.5, 2): далеко в море → близко (лодка в 100 м, пароход в
-  430 м) → обратно за конец мыса → за мыс. Место ставит скрипт (`light1_a`…), рисунок ключей не читает. Вдали фонарь
-  модуля меньше пикселя, поэтому у каждого есть своё дальнее свечение `far` (как искра корабля): `lib.lightMotion`
-  гасит его вблизи и оба — за мысом. Дальние свечения — 12 м (сила 4) у лодки и 26 м (сила 4) у парохода: точки в 3–5 пикселей с ореолом,
-  слабее они терялись; огонь маяка в тумане (`light3`) — сила 1, широкий и бледный. **Вне этой ночи `light1…3` = 2** (так ставит каждая склейка, `shore()`): лодка и
-  пароход стоят за мысом, огни и дым погашены.
-- `light3` — маяк. В эту ночь на мысу лежит туман (`cape_mist` 1: элемент `cape_mist`, два слоя); башни и её огня не
-  видно, виден только тусклый широкий огонь в тумане (элемент `light3`). При `light3` → 1 слой тумана над башней
-  расходится (`lib.capeMist`), `lighthouse_light` горит и ведёт луч; к 2 туман смыкается, огонь в нём слабее.
-- После «Ждать» игра сама ведёт огни к 2 и окна к 0.1; `grey_dawn` начинается с этого (его `from` — огни 2).
+- `light1` — a fishing boat (`ships.far`), `light2` — a steamer (`ships.steamer`, the smoke — the particles `light2_smoke`). Where
+  they are — `lib.lightAt` (`LIGHTS`: the bearing and the range at 0, 1, 1.5, 2): far out at sea → near (the boat 100 m off, the steamer
+  430 m) → back past the cape's end → behind the cape. The place is set by the script (`light1_a`…), the painting reads no keys. Far off the module's lantern
+  is smaller than a pixel, so each has its own far glow `far` (like the ship's spark): `lib.lightMotion`
+  puts it out near by and both of them behind the cape. The far glows — 12 m (strength 4) for the boat and 26 m (strength 4) for the steamer: points of 3–5 pixels with a halo,
+  weaker ones got lost; the lighthouse's light in the mist (`light3`) — strength 1, broad and pale. **Outside that night `light1…3` = 2** (so every cut sets them, `shore()`): the boat and
+  the steamer stand behind the cape, the lights and the smoke out.
+- `light3` — the lighthouse. That night mist lies on the cape (`cape_mist` 1: the element `cape_mist`, two layers); the tower and its light are not
+  seen, only a dim broad light in the mist is seen (the element `light3`). At `light3` → 1 the layer of mist over the tower
+  parts (`lib.capeMist`), `lighthouse_light` is lit and sweeps its beam; towards 2 the mist closes, the light in it is weaker.
+- After “Waiting” the game itself leads the lights to 2 and the windows to 0.1; `grey_dawn` begins with that (its `from` — the lights at 2).
 
-**Утро парусов.** Час — ключ партии `morning`. Кто на берегу — `kaperna(when)` в `film` (по `ending`, `longren`,
+**The morning of the sails.** The hour is the play's key `morning`. Who is on the shore — `kaperna(when)` in `film` (by `ending`, `longren`,
 `girl_toy`; `when`: `comes` → `edge` → `waded` → `away`):
 
-| `ending` | Кто и где | Рука в `away` |
+| `ending` | Who and where | The hand in `away` |
 | --- | --- | --- |
-| `grin` | два рыбака и три женщины стоят слева от её пути (`STAND`), смотрят; `woman2` шепчет `woman3` (`whisper`, повёрнута к ней) | Лонгрен, если он здесь; иначе никто |
-| `cry` | те же машут ей вслед (`wave`); Филипп без шапки (`filipp_bare`, `cap_hand` — с первого кадра); трое детей бегут за ней к кромке; при `girl_toy` впереди бежит девочка с яхтой (`run_high`) | Лонгрен, если здесь; иначе Филипп |
-| `waited` | у воды только Лонгрен и Ассоль; с `shore` трое далеко на склоне (`SLOPE`) | Лонгрен |
-| `kaperna` | вся Каперна двумя группами (`STAND` слева, `BY_BOAT` у лодки), между ними проход; Ассоль идёт шагом | Лонгрен |
+| `grin` | two fishermen and three women stand to the left of her way (`STAND`), looking; `woman2` whispers to `woman3` (`whisper`, turned to her) | Longren, if he is here; else nobody |
+| `cry` | the same wave after her (`wave`); Philip without his cap (`filipp_bare`, `cap_hand` — from the first frame); three children run after her to the edge; with `girl_toy` the girl with the yacht runs ahead (`run_high`) | Longren, if here; else Philip |
+| `waited` | at the water only Longren and Assol; from `shore` on, three people far off on the slope (`SLOPE`) | Longren |
+| `kaperna` | all Kaperna in two groups (`STAND` on the left, `BY_BOAT` by the boat), a way between them; Assol walks | Longren |
 
-Лонгрен (`father()`): у воды — при `longren` = `knows` и в концовках `waited`, `kaperna`; `home` — в `run` его нет, в
-`shore` спускается и встаёт у лодок; `sea` — нет. Шапку Филипп в кадре не снимает: он без неё с первого кадра.
-В `away` (склейка на общий план) тот, кто поднимает руку, стоит в кадре, а не у его края: Лонгрен, спустившийся из
-дома, и Филипп, когда машет он, — за ближней лодкой (`WAVES`); Лонгрен у воды остаётся на `LONGREN_EDGE`.
+Longren (`father()`): at the water — with `longren` = `knows` and in the endings `waited`, `kaperna`; `home` — in `run` he is not there, in
+`shore` he comes down and stands by the boats; `sea` — not there. Philip does not take his cap off in the frame: he is without it from the first frame.
+In `away` (a cut to the wide shot) whoever raises a hand stands within the frame, not at its edge: Longren, come down from
+the house, and Philip, when it is he who waves, — behind the near boat (`WAVES`); Longren at the water stays at `LONGREN_EDGE`.
 
-- **`sails_far` → `run` без склейки.** В `sails_far` (кроме `kaperna`) камера смотрит на море (`SEA_CAM`, 14° вправо),
-  и люди, уже стоящие на берегу, остаются за левым краем кадра (и на 21:9); `run` поворачивает камеру к ним
-  (`WAY_CAM`). Ассоль и девочка с яхтой появляются выше по берегу, пока камера ещё не повернулась; трое детей — на
-  1.2–2.2 с, уже у левого края кадра 16:9 (как и Лонгрен из дома в `shore`).
-- **`run` при `kaperna` открывается склейкой** (так его играет игра): камера сразу на её пути, и Ассоль уже стоит в
-  начале прохода (`WAY_HEAD`: `COMES_DOWN` ставит `assol_here`).
-- **`shore` после `dawn_two` — склейка** (концовка `waited`, `run` не играется): `dawn_two` оставляет корабль далеко
-  (`ship` 0.32), `shore` начинается с `AT_THE_EDGE` (`ship` 0.8); оба в часе `morning`. `after` у `shore` — только `run`.
-- **Шлюпка.** `boat` 0…1 — по прямой от борта корабля к месту встречи (`SKIFF_MET`), квадратично: при 0.8 остаётся
-  десять метров, при 0.6 — около пятидесяти. На воде шлюпка лежит бортом к берегу (`sk_f` 207: поперёк линии
-  берег — корабль) и так идёт всю дорогу, туда и обратно; гребли и разворота нет. Борта два (`skiff`, `skiff_far`), люди
-  между ними: Летика — элемент `"on": "skiff"`, сидит (`seated`, часть `oars`); Грей стоит на корме
-  (`grey_on: "skiff_in#stern"`), в `meet` и `away` сидит на кормовой банке, Ассоль — на корме перед ним (`<id>_on`:
+- **`sails_far` → `run` with no cut.** In `sails_far` (except `kaperna`) the camera looks at the sea (`SEA_CAM`, 14° to the right),
+  and the people already standing on the shore stay beyond the frame's left edge (on 21:9 too); `run` turns the camera to them
+  (`WAY_CAM`). Assol and the girl with the yacht appear higher up the shore while the camera has not turned yet; the three children — at
+  1.2–2.2 s, already at the left edge of a 16:9 frame (as Longren from the house does in `shore`).
+- **`run` with `kaperna` opens with a cut** (so the game plays it): the camera at once on her way, and Assol already stands at
+  the start of the passage (`WAY_HEAD`: `COMES_DOWN` sets `assol_here`).
+- **`shore` after `dawn_two` is a cut** (the ending `waited`, `run` is not played): `dawn_two` leaves the ship far off
+  (`ship` 0.32), `shore` begins with `AT_THE_EDGE` (`ship` 0.8); both at the hour `morning`. `shore`'s `after` is only `run`.
+- **The skiff.** `boat` 0…1 — straight from the ship's side to the meeting place (`SKIFF_MET`), quadratically: at 0.8
+  ten metres are left, at 0.6 — about fifty. On the water the skiff lies side-on to the shore (`sk_f` 207: across the line
+  shore — ship) and goes so all the way, there and back; there is no rowing and no turning. There are two sides (`skiff`, `skiff_far`), the people
+  between them: Letika is an element `"on": "skiff"`, sitting (`seated`, the part `oars`); Gray stands in the stern
+  (`grey_on: "skiff_in#stern"`), in `meet` and `away` he sits on the stern thwart, Assol — in the stern before him (`<id>_on`:
   `{"on": "skiff", "at": […]}`).
-- **Вода по колено.** Ассоль идёт по дну отмели (`IN_WATER`, глубина 0.42 м) обычным шагом — ноги скрывает зеркало моря.
-- **`hands`.** Вставка `hands` — кадр `boat` модуля `closeups`; открывается склейкой (`s.shot({hands: 1, reach: 0})` →
-  `cut()`), закрывает её склейка `meet`. В кадре рука Грея слева — поэтому Ассоль стоит у кормы, справа от него.
-- **`meet`.** Камера стоит в воде со стороны берега и смотрит вдоль линии на корабль (`TWO_CAM`): головы у горизонта,
-  корабль между ними и над ними. Оба в профиль (в раме шлюпки `turn` 90 и 270); Летика отвернулся к кораблю и на 16:9 за
-  левым краем кадра.
+- **Knee-deep water.** Assol walks over the shallows' bottom (`IN_WATER`, 0.42 m deep) at her usual pace — the sea's mirror hides her legs.
+- **`hands`.** The insert `hands` is the shot `boat` of the module `closeups`; it opens by a cut (`s.shot({hands: 1, reach: 0})` →
+  `cut()`), the cut of `meet` closes it. In the shot Gray's hand is on the left — so Assol stands by the stern, to the right of him.
+- **`meet`.** The camera stands in the water on the shore's side and looks along the line at the ship (`TWO_CAM`): the heads at the horizon,
+  the ship between them and above them. Both in profile (in the skiff's frame `turn` 90 and 270); Letika has turned away to the ship and in 16:9 is beyond
+  the frame's left edge.
 
-## Контракт для проверки
+## Contract for the check
 
 ```json
 {

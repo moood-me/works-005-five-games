@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"Look","translation":"Смотри","where":"scenes/longren-house/lib.js"},
+  {"text":"Longren's House","translation":"Дом Лонгрена","where":"scenes/longren-house/scene.json title"},
+  {"text":"A window on the sea.","translation":"Окно к морю.","where":"scenes/longren-house/scene.json caption"}
+]}

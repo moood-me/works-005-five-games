@@ -1,4 +1,4 @@
-const N = e.kit.nebo;
+const N = e.kit.sky;
 // The tavern's windows lit (tavern_lamp), over the front wall's own dark panes (the same metres) — a layer and glows
 // its animate lights
 e.layer("lit", {}, (g) => {

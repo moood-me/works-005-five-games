@@ -1,4 +1,4 @@
-const N = e.kit.nebo;
+const N = e.kit.sky;
 // The lantern on the veranda's beam, over the table: its glass, cold — and lit (a layer its animate shows by
 // `tavern_lamp`); its light is the scene's (`lights`: lantern), its point `lamp`
 g.fillStyle = "#8f979c";

@@ -1,1 +1,1 @@
-e.kit.korabli.mastMotion(e, 'main');
+e.kit.ships.mastMotion(e, 'main');

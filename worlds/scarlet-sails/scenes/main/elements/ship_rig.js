@@ -1,1 +1,1 @@
-e.kit.korabli.rig(g, e, 'secret');
+e.kit.ships.rig(g, e, 'secret');

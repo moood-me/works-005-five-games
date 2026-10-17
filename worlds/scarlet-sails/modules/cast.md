@@ -1,93 +1,93 @@
-# cast — люди «Алых парусов» как люди движка
+# cast — the people of “Scarlet Sails” as the engine's people
 
-Модуль для сцен с людьми (элементы с `person`: `{"cast": "cast", "who": …}` — docs/agents/people.md движка). В
-`modules` сцены — рядом с остальными (`beats` — фильм кусками). 30 обликов, 23 части, 61 движение. Длины
-частей — метры мужчины, умноженные на `F.fit.h` (рост как доля от 1.76 м).
+A module for scenes with people (elements with `person`: `{"cast": "cast", "who": …}` — the engine's docs/agents/people.md). In
+the scene's `modules` — beside the rest (`beats` — the film in beats). 30 looks, 23 parts, 61 motions. The parts'
+lengths are a man's metres, multiplied by `F.fit.h` (the height as a share of 1.76 m).
 
-## Стиль
+## Style
 
-`parusa` — плоская геометрия движка (`flat`): прямые грани, чистые цвета, свет и тени — сцены (`paint: lit`), тонкая
-линия. Как весь мир: современно, тонко, минимально; лица — точки (крупные планы — не люди движка).
+`sails` — the engine's flat geometry (`flat`): straight edges, clean colours, the light and the shadows the scene's (`paint: lit`), a fine
+line. Like the whole world: modern, fine, minimal; faces are dots (the close-ups are not the engine's people).
 
-## Кто
+## Who
 
-- `assol_child` — Ассоль, восемь лет: худенькая, загорелая, тёмные растрёпанные волосы, короткое выцветшее ситцевое
-  платьице (`frock`), босая.
-- `assol` — Ассоль, семнадцать: невысокая, тонкая, тёмные волосы под лёгкой косынкой (`kerchief`), простое светлое
-  платье, босая. Та же Ассоль годы спустя — `<id>_wear: cast.characters.assol` на элементе девочки.
-- `longren` — Лонгрен: крупный, тяжёлый, седеющая борода (`beard`), тёмная морская куртка, кепка.
-- `grey` — Грей, капитан: высокий, худой, обветренный, тёмно-синий сюртук (`frockcoat`), без шляпы.
-- `grey_boy` — Грей восьми лет: светлые волосы, бархатная куртка. `grey_teen` — юнга пятнадцати: парусиновая роба, босой.
-- `lilian` — Лилиан Грей, мать: тонкая, бледная, тёмное платье, волосы в узел; `lilian_black` — она же в трауре, вся
-  в чёрном. `grey_shirt` — Грей без сюртука: белая рубашка (облик через `<id>_wear`, когда снимает сюртук).
-- `letika` — Летика, матрос: худой, весёлый, кепка набок. `sailor` — матрос «Секрета». `panten` — Пантен, помощник:
-  круглый, застёгнутый сюртук. `gop` — Гоп, боцман «Ансельма».
-- `hin` — Хин Меннерс, трактирщик: грузный, фартук. `filipp` — угольщик Филипп: большой, чёрный от угольной пыли,
-  кепка, борода. `egl` — Эгль: высокий худой старик, белая борода, соломенная шляпа. `merchant` — торговец в Лиссе.
-- Каперна: `fisher` (рыбак), `woman` (женщина в косынке), дети `kid_boy`, `kid_girl`, `kid_small`, `girl` — маленькая
-  девочка, которой Ассоль может отдать яхту.
-- Прошлое Каперны: `mary` — Мэри, мать Ассоль: молодая, тонкая, тёмные волосы под косынкой, тёмное платье; младенец
-  (`baby`) — часть её облика, всегда при ней. `menners` — Меннерс-старший: как `hin`, старше, плешивый, жилет
-  (`waistcoat`) поверх рубахи. `longren_young` — Лонгрен с тёмной бородой и волосами (облик через `<id>_wear`).
-- `filipp_bare` — Филипп без шапки (через `<id>_wear`, когда снял; шапка в руке — часть `cap_hand`).
-- Музыканты: `zimmer` — Циммер, скрипач: худой, длинные волосы, тёмный сюртук; `musician` — музыкант в тёмной куртке
-  и кепке; `cellist` — виолончелист: плотный, с бородой, тёмный сюртук. Инструменты — части (`violin`, `cello`), их
-  даёт сцена (`<id>_with`).
+- `assol_child` — Assol, eight years old: slight, sunburnt, dark tousled hair, a short faded cotton
+  frock (`frock`), barefoot.
+- `assol` — Assol, seventeen: not tall, slender, dark hair under a light kerchief (`kerchief`), a plain light
+  dress, barefoot. The same Assol years later — `<id>_wear: cast.characters.assol` on the girl's element.
+- `longren` — Longren: big, heavy, a greying beard (`beard`), a dark sea jacket, a cap.
+- `grey` — Gray, the captain: tall, lean, weather-beaten, a dark blue frock coat (`frockcoat`), no hat.
+- `grey_boy` — Gray at eight: fair hair, a velvet jacket. `grey_teen` — a ship's boy of fifteen: canvas clothes, barefoot.
+- `lilian` — Lilian Gray, the mother: slender, pale, a dark dress, her hair in a knot; `lilian_black` — the same in mourning, all
+  in black. `grey_shirt` — Gray without his frock coat: a white shirt (a look through `<id>_wear`, when he takes the coat off).
+- `letika` — Letika, a sailor: lean, merry, his cap askew. `sailor` — a sailor of the Secret. `panten` — Panten, the mate:
+  round, a buttoned frock coat. `gop` — Gop, the boatswain of the Anselm.
+- `hin` — Hin Menners, the innkeeper: heavy, an apron. `filipp` — Philip the collier: big, black with coal dust,
+  a cap, a beard. `egl` — Egle: a tall lean old man, a white beard, a straw hat. `merchant` — a merchant in Liss.
+- Kaperna: `fisher` (a fisherman), `woman` (a woman in a kerchief), the children `kid_boy`, `kid_girl`, `kid_small`, `girl` — a little
+  girl Assol may give the yacht to.
+- Kaperna's past: `mary` — Mary, Assol's mother: young, slender, dark hair under a kerchief, a dark dress; a baby
+  (`baby`) — a part of her look, always with her. `menners` — the elder Menners: like `hin`, older, balding, a waistcoat
+  (`waistcoat`) over his shirt. `longren_young` — Longren with a dark beard and hair (a look through `<id>_wear`).
+- `filipp_bare` — Philip without his cap (through `<id>_wear`, when he has taken it off; the cap in his hand — the part `cap_hand`).
+- The musicians: `zimmer` — Zimmer, the violinist: lean, long hair, a dark frock coat; `musician` — a musician in a dark jacket
+  and a cap; `cellist` — a cellist: stocky, bearded, a dark frock coat. The instruments are parts (`violin`, `cello`), given
+  by the scene (`<id>_with`).
 
-## Вещи (части каста: `<id>_with`, или `parts` облика)
+## Things (the cast's parts: `<id>_with`, or a look's `parts`)
 
-`yacht` — игрушечная яхта Лонгрена с алыми парусами в обеих руках, между ними; `yacht_r` — в правой руке. `knife` —
-нож в правой. `pipe` — трубка в правой. `book` — раскрытая книга в обеих руках, страницами к глазам. `basket` — корзина
-с игрушками, висит в правой руке (качается); `baskets` — две пустые корзины угольщика. `chest_shoulder` — сундук
-Лонгрена на правом плече. `rod` — удочка вперёд над водой, леска отвесно. `ring` — кольцо между пальцами правой;
-`ring_old` — там же старинное мужское кольцо, шире и темнее; `ring_cord` — кольцо на шнурке на груди поверх платья.
-`brush` — кисть в правой, `paints` — коробка красок в левой. `bundle` — узел в правой. `candle` — свеча в подсвечнике
-в правой: пламя светится само, свет — сцены (`"at": "<id>#flame"`). `letter` — раскрытое письмо в обеих руках. `beard` —
-борода (облика).
+`yacht` — Longren's toy yacht with scarlet sails in both hands, between them; `yacht_r` — in the right hand. `knife` —
+a knife in the right hand. `pipe` — a pipe in the right hand. `book` — an open book in both hands, its pages to the eyes. `basket` — a basket
+of toys hanging from the right hand (it swings); `baskets` — the collier's two empty baskets. `chest_shoulder` — Longren's
+chest on his right shoulder. `rod` — a fishing rod forward over the water, the line hanging straight down. `ring` — a ring between the fingers of the right hand;
+`ring_old` — there too, an old man's ring, broader and darker; `ring_cord` — a ring on a cord on the breast, over the dress.
+`brush` — a brush in the right hand, `paints` — a box of paints in the left. `bundle` — a bundle in the right hand. `candle` — a candle in a candlestick
+in the right hand: the flame glows by itself, the light is the scene's (`"at": "<id>#flame"`). `letter` — an open letter in both hands. `beard` —
+a beard (a look's).
 
-`baby` — младенец в платке на обеих руках у груди: лежит от правой кисти к сгибу левой руки, голова там. `violin` —
-скрипка за гриф в левой руке и смычок в правой: стоя висят вдоль ног, сидя лежат поперёк колен (часть сама видит,
-сидит ли человек, — по высоте таза над стопами). `cello` — виолончель стоймя на полу слева, левая кисть на грифе.
-`cap_hand` — шапка в правой руке у груди, цвета шапки облика (`colors.hat`). `oars` — два весла в руках сидящего, каждое
-в свою сторону от кисти, лопасти над водой.
+`baby` — a baby in a shawl in both arms at the breast: it lies from the right wrist to the crook of the left arm, the head there. `violin` —
+a violin by its neck in the left hand and the bow in the right: standing, they hang along the legs, sitting, they lie across the knees (the part sees for itself
+whether the person sits — by the height of the pelvis above the feet). `cello` — a cello upright on the floor to the left, the left hand on its neck.
+`cap_hand` — a cap in the right hand at the breast, the colour of the look's cap (`colors.hat`). `oars` — two oars in the hands of someone sitting, each
+to its own side of the hand, the blades over the water.
 
-Часть, названная в `<id>_with`, прибавляется к частям облика (борода остаётся); названная дважды рисуется один раз.
+A part named in `<id>_with` is added to the look's parts (the beard stays); one named twice is drawn once.
 
-Точки частей (точки человека, как `#hand_r`: для взгляда, руки, камеры, игры): `#yacht` (середина парусов яхты),
-`#book`, `#letter`, `#ring` (у `ring` и у `ring_old` — одна и та же; у `ring_cord` точки нет), `#pipe` (чашка трубки: дым — частицы сцены оттуда), `#flame` (свеча), `#basket` (верх
-корзины). Точка есть, пока часть у человека (`<id>_with`).
+The parts' points (the person's points, like `#hand_r`: for a gaze, a hand, the camera, the game): `#yacht` (the middle of the yacht's sails),
+`#book`, `#letter`, `#ring` (`ring` and `ring_old` have the same one; `ring_cord` has no point), `#pipe` (the pipe's bowl: smoke is the scene's particles from there), `#flame` (the candle), `#basket` (the top
+of the basket). A point is there while the person has the part (`<id>_with`).
 
-## Движения (Kimodo; ребёнок двигается как маленький взрослый)
+## Motions (Kimodo; a child moves like a small grown-up)
 
-Стоя: `carve` (строгает ножом у верстака, петля), `lay_down` (кладёт на стол правой рукой), `shelve` (ставит вещь на
-высокую полку обеими руками), `pipe` (стоит с трубкой у рта, петля), `light_pipe` (раскуривает), `push_foot` (толкает
-ногой ящик на полу), `put_basket` (ставит корзину на пол), `tell` (ребёнок рассказывает руками: вот такой, там),
-`point_laugh` (показывает пальцем и смеётся), `crouch_put` (присаживается и ставит вещь на землю у ног), `wave` (машет
-рукой), `beckon` (зовёт рукой), `pick_up` (берёт со стола), `coat_off` (снимает сюртук), `hide_ring` (снимает кольцо и
-прячет на шнурке под платье); петли: `hands_behind` (руки за спиной), `sad_stand` (стоит, опустив голову), `helm` (у
-штурвала, руки на спицах), `read_stand` (читает стоя), `paint` (пишет кистью на стене).
-Походки: `drag` (пятится, волоча тяжёлое руками перед собой), `run` (бег), `carry_chest` (идёт с сундуком на плече),
-`careful` (крадётся, осторожно ступая).
-Сидя (на стуле, таз 0.57 м у мужчины — сиденье через `<id>_on`): `seated` (сидит спокойно, петля), `read` (книга в
-руках, петля), `doze` (сидит, голова опущена, петля), `turn_knife` (вертит нож), `eat` (ест за столом, петля), `fish`
-(с удочкой на краю, петля); один раз: `sit_down` (садится), `hop_down` (соскальзывает с высокого табурета на ноги),
-`wake_up` (вздрагивает и встаёт).
-На земле: `sit_ground` (садится на песок), `hug_knees` (сидит, обхватив колени, петля), `head_on_knees` (голова на
-коленях, петля), `sleep` (спит на боку, петля), `wake_sit` (просыпается и садится), `sit_look` (сидит на земле,
-смотрит вдаль, петля), `sew` (шьёт, сидя на палубе, петля), `stand_from_kneel` (встаёт с колен); `kneel_down` и
-`kneel_rise` (бережно опускается на колени, спина прямая, — и встаёт).
+Standing: `carve` (whittles with a knife at the workbench, a loop), `lay_down` (lays something on the table with the right hand), `shelve` (puts a thing on a
+high shelf with both hands), `pipe` (stands with a pipe at the mouth, a loop), `light_pipe` (lights a pipe), `push_foot` (pushes
+a box on the floor with a foot), `put_basket` (puts a basket on the floor), `tell` (a child tells with her hands: this big, over there),
+`point_laugh` (points a finger and laughs), `crouch_put` (crouches and puts a thing on the ground at the feet), `wave` (waves
+a hand), `beckon` (beckons with a hand), `pick_up` (takes from the table), `coat_off` (takes off the frock coat), `hide_ring` (takes the ring off and
+hides it on a cord under the dress); loops: `hands_behind` (hands behind the back), `sad_stand` (stands with the head bowed), `helm` (at the
+wheel, hands on the spokes), `read_stand` (reads standing), `paint` (paints with a brush on the wall).
+Gaits: `drag` (backs away, dragging something heavy with the hands in front), `run` (a run), `carry_chest` (walks with a chest on the shoulder),
+`careful` (creeps, stepping carefully).
+Sitting (on a chair, the pelvis at 0.57 m for a man — the seat through `<id>_on`): `seated` (sits at rest, a loop), `read` (a book in the
+hands, a loop), `doze` (sits, the head lowered, a loop), `turn_knife` (turns a knife about), `eat` (eats at the table, a loop), `fish`
+(with a fishing rod at the edge, a loop); once: `sit_down` (sits down), `hop_down` (slides off a high stool onto the feet),
+`wake_up` (starts and gets up).
+On the ground: `sit_ground` (sits down on the sand), `hug_knees` (sits hugging the knees, a loop), `head_on_knees` (the head on the
+knees, a loop), `sleep` (sleeps on the side, a loop), `wake_sit` (wakes and sits up), `sit_look` (sits on the ground,
+looks into the distance, a loop), `sew` (sews, sitting on the deck, a loop), `stand_from_kneel` (gets up from the knees); `kneel_down` and
+`kneel_rise` (carefully kneels down, the back straight, — and gets up).
 
-Для игры (2026-10-11). Стоя: `turn_toy` (старик, согнувшись, вертит в обеих руках небольшую вещь у груди и разглядывает,
-петля), `tell_sea` (поднимает правую руку вперёд на высоту плеча, держит, показывая вдаль, опускает), `give` (протягивает
-обеими руками вещь вперёд на высоте пояса и опускает руки), `hands_hips` (руки в бока, петля), `nod_aside` (корпусом и
-головой кивает влево и выпрямляется, руки опущены), `shake_head` (качает головой и разводит руками ладонями вверх),
-`baby_stand` (стоит, руки сложены у груди — младенец в них, — чуть покачивает, петля), `whisper` (наклоняется ВПЕРЁД,
-правая ладонь у рта, шепчет, выпрямляется: к соседке её поворачивает сцена — `<id>_turn`), `sway` (стоит, руки опущены,
-плавно покачивается из стороны в сторону — на ладонь в каждую, петля), `sort` (берёт правой рукой вещь перед собой и
-откладывает вправо, дважды, петля), `push_away` (наклонясь, отодвигает обеими руками от себя и выпрямляется),
-`take_down` (тянется обеими руками вверх, снимает и кладёт перед собой на высоте пояса), `put_up` (ставит обеими
-руками перед собой на высоте пояса и выпрямляется), `hold_up` (держит длинную вещь на раскрытых ладонях у груди,
-неподвижно, петля), `halt` (бежит, резко останавливается и стоит).
-Походки: `baby_walk` (идёт медленно, согнувшись, голова опущена, руки сложены у груди), `run_high` (бежит широким
-шагом, обе руки подняты вперёд-вверх над головой).
-На коленях: `wave_help` (на обоих коленях, обе руки вскинуты над головой, машет, петля).
+For the game (2026-10-11). Standing: `turn_toy` (an old man, bent, turns a small thing in both hands at his breast and looks it over,
+a loop), `tell_sea` (raises the right hand forward to shoulder height, holds it, pointing into the distance, lowers it), `give` (holds out
+a thing forward in both hands at waist height and lowers the hands), `hands_hips` (hands on the hips, a loop), `nod_aside` (nods to the left with the body and
+the head and straightens up, the hands down), `shake_head` (shakes the head and spreads the hands, palms up),
+`baby_stand` (stands, the hands folded at the breast — the baby in them, — rocking a little, a loop), `whisper` (leans FORWARD,
+the right palm at the mouth, whispers, straightens up: the scene turns her to her neighbour — `<id>_turn`), `sway` (stands, the hands down,
+sways smoothly from side to side — a palm's width each way, a loop), `sort` (takes a thing before her with the right hand and
+puts it aside to the right, twice, a loop), `push_away` (leaning, pushes something away with both hands and straightens up),
+`take_down` (reaches up with both hands, takes something down and puts it before her at waist height), `put_up` (puts something with both
+hands before her at waist height and straightens up), `hold_up` (holds a long thing on open palms at the breast,
+still, a loop), `halt` (runs, stops short and stands).
+Gaits: `baby_walk` (walks slowly, bent, the head lowered, the hands folded at the breast), `run_high` (runs with a wide
+stride, both hands raised forward and up over the head).
+On the knees: `wave_help` (on both knees, both hands flung up over the head, waving, a loop).

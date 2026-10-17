@@ -1,1 +1,1 @@
-e.kit.korabli.breakFront(g, e, 'secret');
+e.kit.ships.breakFront(g, e, 'secret');

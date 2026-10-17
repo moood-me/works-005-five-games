@@ -1,1 +1,1 @@
-e.kit.korabli.mast(g, e, 'main', 'secret');
+e.kit.ships.mast(g, e, 'main', 'secret');

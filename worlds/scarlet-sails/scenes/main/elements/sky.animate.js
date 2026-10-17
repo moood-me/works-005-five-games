@@ -1,1 +1,1 @@
-e.kit.nebo.skyMotion(e, e.lib.SKY);
+e.kit.sky.skyMotion(e, e.lib.SKY);
