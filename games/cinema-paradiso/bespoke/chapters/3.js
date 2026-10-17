@@ -20,7 +20,7 @@ export default {
   titles: ['The Camera', 'The Soldier and the Princess', 'A Hundred Nights', 'New Year\'s Eve'],
   choices: [
     { id: 'camera', weight: '⚑', title: tr('The girl nobody knew'), options: [{ id: 'film', label: tr('Keep filming') }, { id: 'speak', label: tr('Go up to her') }] },
-    { id: 'nights', weight: '⚑', title: tr('The ninety-ninth night'), options: [{ id: 'wait', label: tr('Wait on') }, { id: 'booth', label: tr('Go to the booth') }] },
+    { id: 'nights', weight: '⚑', title: tr('The ninety-ninth night'), options: [{ id: 'wait', label: tr('Keep waiting') }, { id: 'booth', label: tr('Go to the booth') }] },
   ],
   steps: [
     // dusk on the church steps; the camera follows a girl across the square (⚑ camera)
@@ -115,7 +115,7 @@ export default {
       await g.say('narrator', 'The ninety-ninth night. The New Year\'s film at the Paradiso. And I was the one who had to run it');
       await eve;
       const nights = await g.choose('nights', {
-        balcony: [{ id: 'wait', label: tr('Wait on') }],
+        balcony: [{ id: 'wait', label: tr('Keep waiting') }],
         'paradiso#booth_window': [{ id: 'booth', label: tr('Go to the booth') }],
       });
       if (nights === 'wait') {
@@ -130,7 +130,7 @@ export default {
         await g.say('elena', 'Ninety-nine. I was counting too', 'elena');
         await midnight;
         await g.beat('midnight_close'); // (close)
-        await g.say('narrator', 'The hall went without its film that night. Ciccio docked my pay');
+        await g.say('narrator', 'The audience got no film that night. Ciccio docked my pay');
       } else {
         g.scale('toto', 1);
         g.beds({ whirr: 0.6, hall: 0.3 });

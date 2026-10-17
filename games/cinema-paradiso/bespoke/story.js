@@ -69,9 +69,9 @@ const handsOf = m => m?.file ?? HANDS[m?.title];
 // delta > 0, down: delta < 0), and the one line that says what they mean.
 export const SCALES = {
   toto: { start: 0, min: -5, max: 5, up: tr('Cinema'), down: tr('People'),
-    rule: tr('A brighter beam — Totò lives for the cinema. Warmer windows — Totò lives for people.') },
+    rule: tr('The brighter the beam, the more Totò lives for the cinema. The warmer the windows, the more he lives for people.') },
   alfredo: { start: 0, min: -3, max: 3, up: tr('Hold'), down: tr('Let go'),
-    rule: tr('The reel: Alfredo keeps the boy by him — or lets him go out into the big life.') },
+    rule: tr('The reel: Alfredo keeps the boy close, or lets him go out into the world.') },
 };
 export const ENDINGS = [
   { id: 'turn', label: tr('Let it stay') }, { id: 'note', label: tr('The note') }, { id: 'letters', label: tr('The letters') },

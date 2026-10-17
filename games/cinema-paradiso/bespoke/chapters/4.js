@@ -1,4 +1,4 @@
-// IV. Go Away — the summer cinema on the pier and the rain, Elena's father's car («in the booth, at six»); six o'clock,
+// IV. Leave — the summer cinema on the pier and the rain, Elena's father's car («in the booth, at six»); six o'clock,
 // three changeovers and steps on the stair that pass (Changeover); ⚑ Elena at the booth's door and blind Alfredo alone — the
 // truth, or «if you love him — leave him» (the note on the calendar, the leaf turned by his hand; «No» in the morning);
 // the call-up and her letters (or his, returned); ⚑ the pier at dusk: go, or stay one more year; ⚑ the station at
@@ -10,7 +10,7 @@ import changeover from '../minigames/changeover.js';
 
 export default {
   number: 'IV',
-  title: tr('Go Away'),
+  title: tr('Leave'),
   titles: ['The Downpour', 'At Six', 'Elena', 'The Letters', 'The Pier', 'The Station'],
   choices: [
     { id: 'elena', weight: '⚑', title: tr('Elena at the booth'), options: [{ id: 'truth', label: tr('“He\'s on the pier. Run”') }, { id: 'future', label: tr('“If you love him, leave him”') }] },
@@ -67,7 +67,7 @@ export default {
       const turned = g.told('alfredo_comes:turned');
       const comes = g.beat('alfredo_comes');
       await turned;
-      if (facts(g.state).missed >= 1) await g.say('alfredo', 'The hall was whistling. I heard it', 'alfredo');
+      if (facts(g.state).missed >= 1) await g.say('alfredo', 'The audience was whistling. I heard it', 'alfredo');
       await g.say('alfredo', 'Go home, Totò. I\'ll sit here. If she comes, I\'ll tell her where you are', 'alfredo');
       await g.say('toto', 'I\'ll be on the pier', 'toto');
       await comes;
@@ -151,10 +151,10 @@ export default {
         await pile;
         await g.say('narrator', 'I wrote to her in Palermo. The letters came back');
         await returned;
-        await g.letter({ text: tr('Addressee has moved'), sign: '', kind: 'envelope' });
+        await g.letter({ text: tr('Moved away'), sign: '', kind: 'envelope' });
       }
     },
-    // the pier at dusk, a year later: «Go away» (⚑ stay)
+    // the pier at dusk, a year later: «Leave» (⚑ stay)
     async g => {
       g.hero('both');
       g.beds({ sea: 0.5 });
@@ -165,7 +165,7 @@ export default {
       await g.say('narrator', 'I came back from the army a year later');
       if (facts(g.state).elena === 'truth') await g.say('toto', 'She writes to me. I could stay here and wait', 'toto');
       if (g.state.marks.alfredo) await g.say('alfredo', 'I lied for you once, about the milk. I\'m not lying now', 'alfredo');
-      await g.say('alfredo', 'Go away. This land is cursed. As long as you\'re here, you think it\'s the center of the world', 'alfredo');
+      await g.say('alfredo', 'Leave. This land is cursed. As long as you\'re here, you think it\'s the center of the world', 'alfredo');
       await g.say('alfredo', 'Life isn\'t like in the movies. Life is much harder', 'alfredo');
       await back;
       g.hero('toto');

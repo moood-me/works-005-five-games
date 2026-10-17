@@ -23,7 +23,7 @@ export default {
   about: 14,
   skipped: { seconds: 0 },
   async run(g, b, opts, signal) {
-    const mg = g.minigame({ phrase: tr('The white wall of the house opposite is empty. The projector is heavy, the beam creeps slowly') });
+    const mg = g.minigame({ phrase: tr('The wall opposite is blank. The projector is heavy, the beam creeps slowly') });
     const send = keys(g), t0 = mg.t;
     mg.plate.set({ notches: [0.5] });
     // ── phase 1: lead the beam onto the wall ──
