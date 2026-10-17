@@ -8,7 +8,7 @@ import { until, keys } from '../hands.js';
 const NAILS = [1, 2, 3];
 
 export default {
-  title: 'Brush', // (as the author's ☰ lists it)
+  title: 'Brush', // (as the author's map lists it)
   about: 15,
   skipped: { order: [3, 1, 2], seconds: 0 },
   async run(g, b, opts, signal) {

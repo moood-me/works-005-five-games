@@ -19,7 +19,7 @@ const ON_WITHIN = 3000; // how long to wait for the scene's `ring:on`, ms
 const BREATH = [0.2, 0.8]; // the breathing: g.sound.breath(BREATH[0] + BREATH[1] * stir, 0.2)
 
 export default {
-  title: 'The ring', // (as the author's ☰ lists it)
+  title: 'The ring', // (as the author's map lists it)
   about: 25,
   skipped: { on: false, stirs: 0, seconds: 0 },
   async run(g, b, opts, signal) {

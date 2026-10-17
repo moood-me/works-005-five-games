@@ -14,7 +14,7 @@ const NO = { id: 'no', label: tr('Not that one') };
 const YES = { id: 'yes', label: tr('This one') };
 
 export default {
-  title: 'Scarlet', // (as the author's ☰ lists it)
+  title: 'Scarlet', // (as the author's map lists it)
   about: 45,
   skipped: { wrong: 0, passed: false, shown: 5 },
   async run(g, b, opts, signal) {

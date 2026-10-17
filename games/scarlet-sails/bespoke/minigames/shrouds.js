@@ -17,7 +17,7 @@ const GRACE = 0.25; // s of a hand up in the heel before it slips
 const SIDES = [{ key: 'hand_l', at: 'ropes#left' }, { key: 'hand_r', at: 'ropes#right' }];
 
 export default {
-  title: 'Shrouds', // (as the author's ☰ lists it)
+  title: 'Shrouds', // (as the author's map lists it)
   about: 40,
   skipped: { slips: 0, seconds: 0 }, // (as played: the plain good outcome)
   async run(g, b, opts, signal) {

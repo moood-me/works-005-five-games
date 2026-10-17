@@ -1,5 +1,5 @@
 // The check of the game's branches: node bespoke/check/run.mjs <a clone of the world>. No browser, no engine,
-// nothing drawn. Every step of every chapter is played unseen, the way the author's ☰ plays it (jump.js: a dry run,
+// nothing drawn. Every step of every chapter is played unseen, the way the author's map plays it (jump.js: a dry run,
 // story.js context(…, j)), on a page that only knows the scenes' specs (fake.mjs): no time passes, the choices are
 // those of the play walked, a minigame gives the result put in for it, a point asked for (g.spot) is answered with one.
 // Walked: every combination of the chapters' choices with «Shrouds» climbed clean and the ring put on in «The ring»; and
@@ -54,8 +54,9 @@ const MINIGAMES = {
   look: { scene: 'home', keys: ['gaze'], points: ['book#book', 'window#window'], opts: ['heavy'], result: ['tries', 'seconds'] },
   hand: { scene: 'shore', keys: ['reach'], points: ['hands#her', 'hands#his'], opts: ['onReach'], result: ['seconds', 'lets'] },
 };
-// game.md §3.8: what game.js itself takes of the Far Sea (it is not run here)
-const FAR = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'yacht'], offer: 'yacht#sail' };
+// what game.js itself takes of the Far Sea (it is not run here): its key, the points its trees stand at (map.js) —
+// each chapter's and the author's sign's
+const MAP = { keys: ['shown'], points: [...Array.from({ length: 7 }, (_, i) => `c${i}`), 'author'] };
 // the results put in (game.md §11): the outcomes a chapter branches on
 const CLEAN = { shrouds: { slips: 0 }, ring: { on: true } };
 const OTHER = [{ shrouds: { slips: 1 } }, { ring: { on: false } }];
@@ -158,13 +159,15 @@ for (const name in sound) {
 // the Far Sea, as game.js opens it
 const far = WORLD.get(SCENES.far);
 if (far) {
-  for (const key of FAR.keys) {
+  for (const key of MAP.keys) {
     if (!(key in far.states)) miss('game.js', `“${SCENES.far}”: no key “${key}” in states`);
     if (far.contract && !(key in far.contract.party)) miss('game.js', `“${SCENES.far}”: no key “${key}” in the contract's party`);
     far.named.add(`party:${key}`);
   }
-  if (far.contract && !far.contract.offers.includes(FAR.offer)) miss('game.js', `“${SCENES.far}”: no offer “${FAR.offer}” in the contract`);
-  far.named.add(`ref:${FAR.offer}`);
+  for (const ref of MAP.points) {
+    if (far.contract && !far.contract.points.includes(ref)) miss('game.js', `“${SCENES.far}”: no point “${ref}” in the contract`);
+    far.named.add(`ref:${ref}`);
+  }
 }
 
 // --- a step's g, watched: `here` — where it is (file, step), `events` — what the step did, in order:
@@ -460,7 +463,6 @@ for (const p of plays) {
         else if (e[0] !== 'scene') acted(`${ch.file}, step ${n + 1} “${ch.titles?.[n] ?? ''}”`);
       }
     }
-    if (ch.choices.length) acted(`the Far Sea after ${ch.file}`);
   }
   acted('the end');
 }

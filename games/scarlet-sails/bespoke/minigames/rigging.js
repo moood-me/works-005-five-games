@@ -14,7 +14,7 @@ const DRAIN = 1.25; // s: the fill drains from full, let go without her father
 const GUIDE = 0.6; // s: her father's hand comes and goes
 
 export default {
-  title: 'Rigging', // (as the author's ☰ lists it)
+  title: 'Rigging', // (as the author's map lists it)
   about: 20,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {

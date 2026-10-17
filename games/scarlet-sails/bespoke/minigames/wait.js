@@ -17,7 +17,7 @@ const EVERY = 12; // s after the last touch or going-out: one more quarter of th
 const END = 40; // s after the start or the last touch: it ends
 
 export default {
-  title: 'Waiting', // (as the author's ☰ lists it)
+  title: 'Waiting', // (as the author's map lists it)
   about: 40,
   skipped: { touched: [], waited: true },
   async run(g, b, opts, signal) {
