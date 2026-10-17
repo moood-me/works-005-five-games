@@ -92,7 +92,7 @@ export default {
       // (skipped, it burns all seven but the cabin: no more than the bag can pay)
       const burned = (r?.burned ?? []).slice(0, afford);
       g.money(-PART_PRICE * burned.length);
-      g.hours(PART_HOURS * burned.length, 'Сожжено: ' + burned.length);
+      g.hours(PART_HOURS * burned.length, `Сожжено: ${burned.length}`);
       g.beds({ sea: 0.4, furnace: 0.2 }, 3);
       await g.beat('queenstown');
     },
