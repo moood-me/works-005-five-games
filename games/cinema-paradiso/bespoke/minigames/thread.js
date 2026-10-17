@@ -16,7 +16,7 @@ const DONE = 0.98;
 
 export default {
   file: 'thread',
-  title: 'Threading', // as the author's ☰ lists it
+  title: 'Threading', // as the author's map lists it
   about: 14,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {

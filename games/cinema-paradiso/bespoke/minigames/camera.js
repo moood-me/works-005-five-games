@@ -22,7 +22,7 @@ const PATH = 2 * WALK + STOP;
 
 export default {
   file: 'camera',
-  title: 'The Camera', // as the author's ☰ lists it
+  title: 'The Camera', // as the author's map lists it
   about: 26,
   skipped: { share: 1 },
   async run(g, b, opts, signal) {

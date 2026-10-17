@@ -16,7 +16,7 @@ const READ = 1.5; // s on August
 
 export default {
   file: 'note',
-  title: 'The Note', // as the author's ☰ lists it
+  title: 'The Note', // as the author's map lists it
   about: 10,
   skipped: {},
   async run(g, b, opts, signal) {

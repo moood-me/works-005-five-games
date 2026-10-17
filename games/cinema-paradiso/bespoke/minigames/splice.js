@@ -17,7 +17,7 @@ const STEPS = 2 * N;
 
 export default {
   file: 'splice',
-  title: 'Splicing', // as the author's ☰ lists it
+  title: 'Splicing', // as the author's map lists it
   about: 18,
   skipped: { jumps: 0 },
   async run(g, b, opts, signal) {

@@ -16,7 +16,7 @@ const RAIN = 0.6; // the rain's level in a rainy week
 
 export default {
   file: 'hundred-nights',
-  title: 'A Hundred Nights', // as the author's ☰ lists it
+  title: 'A Hundred Nights', // as the author's map lists it
   about: 36,
   skipped: {},
   async run(g, b, opts, signal) {

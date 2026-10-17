@@ -17,7 +17,7 @@ const AT_DOOR = 0.97;
 
 export default {
   file: 'pull-out',
-  title: 'Pull Him Out', // as the author's ☰ lists it
+  title: 'Pull Him Out', // as the author's map lists it
   about: 18,
   skipped: {},
   async run(g, b, opts, signal) {

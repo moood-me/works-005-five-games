@@ -17,7 +17,7 @@ const el = n => (n === 1 ? 'projector' : 'projector2');
 
 export default {
   file: 'changeover',
-  title: 'Changeover', // as the author's ☰ lists it
+  title: 'Changeover', // as the author's map lists it
   about: 38,
   skipped: { missed: 0 },
   async run(g, b, opts, signal) {

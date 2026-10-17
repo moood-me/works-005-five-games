@@ -5,7 +5,7 @@
 //     low on the left (Cinema ↔ People: the beam brighter ↔ the square's three windows warmer), the reel low on the right
 //     (Hold ↔ Let go: the film wound tight ↔ a long tail flying); hero ('toto' | 'alfredo' | 'both') — whose
 //     scene it is: their scale in full, the other at a third. view.gauges(null) — none (the strip, the epilogue)
-//   view.toast(text, kind) — a card under the tools: 'scale' (a scale moved), 'rule' (what a scale means, the first
+//   view.toast(text, kind) — a card in the corner: 'scale' (a scale moved), 'rule' (what a scale means, the first
 //     time), 'mark' (remembered); three at most
 //   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do); → a function that takes it
 //     away. One at a time: a new one takes the place of the one before
@@ -15,12 +15,10 @@
 //     calendar leaf, pencil), 'letter' (a ruled sheet, blue ink) — folded in three, pressed it opens, pressed again it
 //     folds and goes; 'envelope' — an envelope face down: pressed it turns over (its violet stamp: the text), pressed
 //     again it goes. onOpen — once it lies open (its voice). → once it has gone. text: its lines ('\n')
-//   view.onSkip(fn) → off — what the ⏭ does now (the latest one, until off()); none — the ⏭ not shown
-//     (a minigame: skips the minigame, for every player — a safety net if it glitches, not a way through; a step:
-//     skips the step, the author's only — game.js)
+//   view.replaying(on) — the plate «Replay» in the corner while a replay goes on (game.js)
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
-//     opened by the page's ☰ (author() → what opens it, for bespoke.menu), lists the chapters, their steps and the
+//     opened by his sign on the map (author() → what opens or closes it), lists the chapters, their steps and the
 //     steps' minigames, to go to any — as the play picked under «play as…» has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
@@ -48,14 +46,9 @@ export function ui(layer) {
   const beam = beamGauge(layer);
   const reel = reelGauge(layer);
   const toasts = el('div', 'toasts', layer);
-  // the corner's tools: ⏭ (a minigame: everyone; a step: the author) (⏸, ☰ — the page's)
-  const tools = el('div', 'tools', layer);
-  const skips = [];
-  // (shown while the latest skip is something)
-  const skipButton = button('⏭', tr('skip'), () => skips.at(-1)?.fn?.());
-  const skipShown = () => { skipButton.hidden = !skips.at(-1)?.fn; };
-  tools.append(skipButton);
-  skipShown();
+  const replay = el('div', 'replay', layer);
+  replay.textContent = tr('Replay');
+  replay.hidden = true;
   let hinted = () => {}; // takes the hint shown now away
   return {
     gauges(state, hero) {
@@ -94,16 +87,10 @@ export function ui(layer) {
       });
     },
     letter: (letter, { signal, onOpen } = {}) => (letter.kind === 'envelope' ? envelope(layer, letter, signal, onOpen) : unfold(layer, letter, signal, onOpen)),
-    onSkip(fn) {
-      const it = { fn };
-      skips.push(it);
-      skipShown();
-      return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
-    },
+    replaying(on) { replay.hidden = !on; },
     author({ chapters, plays, at, games, go }) {
-      // the map (the page's ☰ opens it): «play as…», then every chapter a column of its steps (and their minigames)
-      // in a window over the scene;
-      // a click outside, ✕ or Esc closes it
+      // the map (his sign on the map opens it): «play as…», then every chapter a column of its steps (and their
+      // minigames) in a window over the scene; a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
       map.hidden = true;
       let as = 0; // the play picked
@@ -121,11 +108,11 @@ export function ui(layer) {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
-            const step = button(c.titles[si], '', () => go(as, ci, si), ci === here.chapter && si === here.step ? 'here' : '');
+            const step = button(c.titles[si], '', () => { close(); go(as, ci, si); }, ci === here.chapter && si === here.step ? 'here' : '');
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'straight to the minigame', () => go(as, ci, si, k), 'minigame'))));
+              button(`◆ ${name}`, 'straight to the minigame', () => { close(); go(as, ci, si, k); }, 'minigame'))));
             col.append(step, under);
           }
           return col;

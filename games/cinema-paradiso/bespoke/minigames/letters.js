@@ -15,7 +15,7 @@ const WOBBLE = 0.4; // s
 
 export default {
   file: 'letters',
-  title: 'Letters', // as the author's ☰ lists it
+  title: 'Letters', // as the author's map lists it
   about: 14,
   skipped: { crooked: '0000000' },
   async run(g, b, opts, signal) {
