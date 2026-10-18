@@ -81,7 +81,7 @@ export default {
       await g.say('alfredo', 'Once a king gave a feast. A soldier saw the princess, and he was lost');
       await g.say('alfredo', 'She told him: wait a hundred nights under my balcony, and I\'ll be yours');
       await ninety;
-      await g.say('alfredo', 'He stood there. And on the ninety-ninth night he stood up, took his chair and went away');
+      await g.say('alfredo', 'He waited. And on the ninety-ninth night he stood up, took his chair and went away');
       await why;
       await g.say('toto', 'Why?', 'toto');
       await g.say('alfredo', 'I don\'t know. When you figure it out, tell me');
