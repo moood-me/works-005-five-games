@@ -11,11 +11,15 @@ frame's heights): as the view moves it stands, the chapters' points move.
 - `shown` — the chapter the player is at; `camera_x` — where the view is: chapter i — i·5 m.
 - `come` — each new value brings the view back to the chapter shown (the game sets it when that chapter is
   pressed again after the player dragged away).
-- `dark` — the dark of the booth, the warm air by the lamp, painted once; `lamp` — the projector's lamp low on the right
-  (`lib.js` lampAt), the lens's light breathes (lamp.animate.js).
-- `c0`…`c7` — the chapters' unseen points and the finale's (`c7`, after the epilogue; unseen; across i·5, at 0.2 of the
-  frame's height — where the game's tree has its knot); `author` — the unseen point of the author's sign (across −3.2,
-  left of the first chapter, at 0.3 of the frame's height).
+- `dark` — the booth, painted once: its plastered wall in the warm dark (lighter toward the lamp), the panelling's
+  boards low down, a shelf of film cans up on the left, a big reel low on the left, the strip's band across the middle
+  a little warmer. `lamp` — the projector low on the right (`lib.js` lampAt): its beam thrown up to the left across the
+  whole booth, through the strip's band, dust hanging in it; the lamp house, the lens glowing. The beam and the glow
+  breathe — their layers' alpha only (lamp.animate.js).
+- `c0`…`c7` — the chapters' unseen points and the finale's (`c7`, after the epilogue; unseen; across i·5, at 0.29 of
+  the frame's height — where the game's tree has its knot: the strip of frames runs across the middle, in the beam);
+  `author` — the unseen point of the author's sign (across −3.2, left of the first chapter, at 0.33 of the frame's
+  height).
 
 ## Contract for the check
 
