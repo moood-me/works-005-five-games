@@ -16,9 +16,9 @@ frame's heights): as the view moves it stands, the chapters' points move.
   a little warmer. `lamp` — the projector low on the right (`lib.js` lampAt): its beam thrown up to the left across the
   whole booth, through the strip's band, dust hanging in it; the lamp house, the lens glowing. The beam and the glow
   breathe — their layers' alpha only (lamp.animate.js).
-- `c0`…`c7` — the chapters' unseen points and the finale's (`c7`, after the epilogue; unseen; across i·5, at 0.29 of
+- `c0`…`c7` — the chapters' unseen points and the finale's (`c7`, after the epilogue; unseen; across i·5, at 0.4 of
   the frame's height — where the game's tree has its knot: the strip of frames runs across the middle, in the beam);
-  `author` — the unseen point of the author's sign (across −3.2, left of the first chapter, at 0.33 of the frame's
+  `author` — the unseen point of the author's sign (across −3.2, left of the first chapter, at 0.4 of the frame's
   height).
 
 ## Contract for the check
