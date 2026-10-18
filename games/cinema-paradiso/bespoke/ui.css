@@ -143,10 +143,6 @@
 #layer .author-panel .minigames { display: flex; flex-direction: column; }
 #layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 14px; font-style: italic; }
 
-/* the card «Replay» in the corner (ui.js replaying) */
-#layer .replay { position: absolute; right: 14px; bottom: 14px; padding: 6px 14px; color: var(--ink); background: var(--card);
-  border: 1px solid var(--frame); outline: 1px solid var(--frame); outline-offset: -4px; font: italic 16px/1.3 var(--title); pointer-events: none; }
-#layer .replay[hidden] { display: none; }
 
 /* the map (map.js): each chapter's tree under the language's marks (bespoke.underlay), at its chapter's point —
    each chapter a strip of 35 mm film; the forks its frames; what was chosen in the projector's warm light (Claude Design's mockup). Sizes in the frame's height (--u: its 900th) */
@@ -218,6 +214,11 @@
 #underlay .map .go-replay{color:var(--c-replay)}
 #underlay .map .go .arr{width:calc(var(--u) * 26);height:calc(var(--u) * 10);flex:none;overflow:visible;animation:m-nudge 1.1s ease-in-out infinite alternate}
 #underlay .map .arr path{fill:none;stroke:currentColor;stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#underlay .map .badge{position:absolute;left:0;top:calc(var(--u) * -34);display:inline-flex;align-items:center;gap:calc(var(--u) * 7);
+  padding:calc(var(--u) * 3) calc(var(--u) * 11);border-radius:999px;font-size:calc(var(--u) * 12.5);font-style:italic;color:var(--c-replay)}
+#underlay .map .badge i{width:calc(var(--u) * 16);border-top:1.5px dashed var(--c-replay)}
+/* (the plate pressed — its mark: the replay on, or dropped; its touch at least 44 px) */
+#underlay .map .badge::after { content: ""; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); translate: -50% -50%; }
 #underlay .map .author{position:absolute;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u) * 6)}
 #underlay .map .author svg{width:calc(var(--u) * 52);height:calc(var(--u) * 52);overflow:visible}
 #underlay .map .author span{font:italic calc(var(--u) * 14)/1 var(--f-text);color:var(--c-name)}
@@ -254,5 +255,6 @@
 #underlay .map.cine .row{border-top:1px solid rgba(255,214,160,.10);padding-top:calc(var(--u) * var(--s) * 6)}
 #underlay .map.cine .row.cursor,#underlay .map.cine .row.pending{border-top-color:transparent}
 #underlay .map.cine .stem .dot{background:#ffc677;box-shadow:0 0 0 calc(var(--u) * 2.5) rgba(255,198,119,.25),0 0 calc(var(--u) * 8) rgba(255,190,100,.7)}
+#underlay .map.cine .badge{left:calc(var(--u) * 20);top:calc(var(--u) * -30);background:rgba(20,16,12,.85);border:1px solid rgba(188,213,242,.35)}
 #underlay .map.cine .author svg circle{fill:none;stroke:#e0b46e;stroke-width:1.4px}
 #underlay .map.cine .author svg .hole{fill:rgba(224,180,110,.35);stroke:none}
