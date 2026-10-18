@@ -21,10 +21,7 @@ e.layer('beam', { blend: 'add' }, c => {
     c.closePath();
     c.fill();
   };
-  cone(1.5, 0.04);
-  cone(1.25, 0.05);
-  cone(1, 0.07);
-  cone(0.7, 0.07);
+  for (let k = 0; k < 12; k++) cone(1.6 - k * 0.09, 0.022); // (many thin steps: no edge seen)
   // dust in the light
   for (let k = 0; k < 260; k++) {
     const t = e.rnd(), s = (e.rnd() * 2 - 1) * 0.9;
