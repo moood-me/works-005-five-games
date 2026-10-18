@@ -1,5 +1,5 @@
-// The booth: its plastered wall in the warm dark — boards of the panelling, a shelf of film cans, a reel low on the
-// left — lit by the lamp low on the right; the strip's band across the middle a little warmer. Painted once.
+// The booth: its plastered wall in the warm dark — boards of the panelling, a reel low on the left — lit by the lamp
+// low on the right; the strip's band across the middle a little warmer. Painted once.
 const A = e.aspect, L = e.lib.lampAt(A), X0 = -0.3, X1 = A + 0.3, Y0 = -0.35, Y1 = 1.25;
 // the wall: dark umber, a shade lighter toward the lamp
 const wall = g.createLinearGradient(0, Y0, 0, Y1);
@@ -25,22 +25,11 @@ g.fillStyle = 'rgba(0,0,0,0.3)';
 g.fillRect(X0, 0.615, X1 - X0, 0.01);
 g.fillStyle = 'rgba(255,214,160,0.06)';
 g.fillRect(X0, 0.625, X1 - X0, 0.004);
-// the shelf up on the left with its film cans, dark against the wall
-const shelfY = 0.13;
-g.fillStyle = 'rgba(8,6,4,0.75)';
-g.fillRect(0.05, shelfY, 0.62, 0.012);
-for (let k = 0; k < 6; k++) {
-  const x = 0.08 + k * 0.095 + e.rnd() * 0.02, h = 0.022 + e.rnd() * 0.012;
-  g.fillStyle = k % 2 ? 'rgba(40,30,22,0.8)' : 'rgba(30,23,17,0.8)';
-  g.fillRect(x, shelfY - h, 0.08, h);
-  g.fillStyle = 'rgba(255,210,150,0.07)';
-  g.fillRect(x, shelfY - h, 0.08, 0.003);
-}
 // a big reel low on the left, its spokes' holes, half in the dark
-const R = { x: 0.2, y: 0.93, r: 0.2 };
+const R = { x: 0.2, y: 0.95, r: 0.17 };
 g.fillStyle = 'rgba(6,4,3,0.7)';
 g.beginPath(); g.arc(R.x, R.y, R.r, 0, Math.PI * 2); g.fill();
-g.strokeStyle = 'rgba(200,150,90,0.16)';
+g.strokeStyle = 'rgba(200,150,90,0.12)';
 g.lineWidth = 0.004;
 g.beginPath(); g.arc(R.x, R.y, R.r, 0, Math.PI * 2); g.stroke();
 g.beginPath(); g.arc(R.x, R.y, R.r * 0.18, 0, Math.PI * 2); g.stroke();

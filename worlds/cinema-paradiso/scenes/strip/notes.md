@@ -12,7 +12,7 @@ frame's heights): as the view moves it stands, the chapters' points move.
 - `come` — each new value brings the view back to the chapter shown (the game sets it when that chapter is
   pressed again after the player dragged away).
 - `dark` — the booth, painted once: its plastered wall in the warm dark (lighter toward the lamp), the panelling's
-  boards low down, a shelf of film cans up on the left, a big reel low on the left, the strip's band across the middle
+  boards low down, a big reel low on the left, the strip's band across the middle
   a little warmer. `lamp` — the projector low on the right (`lib.js` lampAt): its beam thrown up to the left across the
   whole booth, through the strip's band, dust hanging in it; the lamp house, the lens glowing. The beam and the glow
   breathe — their layers' alpha only (lamp.animate.js).
