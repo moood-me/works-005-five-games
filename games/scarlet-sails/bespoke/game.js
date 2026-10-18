@@ -119,7 +119,7 @@ export default async function (b) {
     straight = false;
     wake(); // (a touch: the page may be heard from now on)
     if (to === 'drop') { replay = null; continue; }
-    if (to === 'keep') { await keepReplay(); continue; }
+    if (to === 'keep') { await keepReplay(); if (kept.chapter === END) b.ended({ ending: facts(kept).ending ?? null }); continue; }
     if (to === 'main' || to === 'back') replay = null; // («Back to the main run»: the main run goes on from where it stands)
     else if (to !== 'replay') replay = replayFrom(to);
     if ((await play()) === 'away') continue;
@@ -130,6 +130,7 @@ export default async function (b) {
     }
     const done = kept.chapter;
     await onward();
+    if (kept.chapter === END) b.ended({ ending: facts(kept).ending ?? null });
     after = { reveal: done };
     straight = touched && CHAPTERS[kept.chapter]?.wall === false;
   }
@@ -146,6 +147,8 @@ export default async function (b) {
       // (gone to a minigame of it by the author's map: the step played up to it unseen)
       const g = context(b, mine, hub, structuredClone(run(r)), r.play != null ? unseen(r.play, unheard()) : null,
         { forward: r.step < (kept.seen[r.chapter] ?? 0) });
+      // (where the play is, for the account of what players do: bespoke.at)
+      b.at({ chapter: r.chapter, step: r.step, replay: !!replay });
       const how = await Promise.race([
         ch.steps[r.step](g).then(() => 'done', e => { b.trouble(`the step broke: ${e.message || e}`); return 'broke'; }),
         away(),
