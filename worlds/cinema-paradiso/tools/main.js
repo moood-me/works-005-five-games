@@ -261,7 +261,7 @@ const state = { beat: '', beat_next: '', era: 'past', hour: 0.9, dusk_k: 0, now_
   fireworks: 0, fw: 0, flash: 0, chalk: 0, mark_chalk: 0, night_kind: 'clear', rain: 0, wind_k: 0, cold_k: 0, garland: 0, elena_window: 0,
   viewfinder: 0, pan: 0, elena_x: 1, madman_x: -1, rec: 0, cart: 0, hearse_a: -9.6, hearse_d: -8, hearse_f: 0, follow: 0, sal_rail: 0,
   collapse: 0, dust: 0, dust_burst: 0, booth_flash: 0, booth_fig: 0, crowd_k: 0, crowd_sit: 0, crowd_x: 0, crowd_z: -60, crowd_f: 180,
-  chair_on: 0, bulbs: 1, warm: 0.5, place: 'crowd', with_mother: 0, camera_x: 0, camera_z: -4, camera_yaw: -8, camera_h: 0.3, camera_pitch: 2 };
+  chair_on: 0, bulbs: 1, warm: 0.5, place: 'crowd', with_mother: 1, camera_x: 0, camera_z: -4, camera_yaw: -8, camera_h: 0.3, camera_pitch: 2 };
 for (const [id] of PEOPLE) {
   state[`${id}_a`] = 0; state[`${id}_d`] = -40; state[`${id}_here`] = false;
   states[`${id}_a`] = { type: 'number', means: `internal: where ${id} is, across, m` };
