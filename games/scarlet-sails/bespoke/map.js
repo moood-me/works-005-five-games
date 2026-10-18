@@ -15,7 +15,7 @@
 //   trees(b, chapters, {grow, seconds, author}) → { at(ref) → () => {x, y} | null — that element's page point now
 //     (refs: knot:<i>, fork:<i>:<k> — the dot of row k —, go:<i> — the main run's pointer —, goreplay:<i> — the
 //     replay's —, badge:<i> — the replay's plate —, author); offer(refs, fn) — those take a press, fn(ref) told; remove() }
-//   chapters — as game.js sky() gives them: [{number, title, kind: here | played | next | future, rows: [{title, weight,
+//   chapters — as game.js sky() gives them: [{number, title, kind: here | played | next | future | end (the finale), rows: [{title, weight,
 //     options: [{label, state: chosen | tried | both | open | unseen}]}], go: the play's pointer's words | null, replay:
 //     a replay goes on in it, badge: a replay of it — its plate, badge:<i>}]; grow — the chapter whose rows come one after another over
 //     `seconds`; author — the author's sign shown
