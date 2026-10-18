@@ -107,14 +107,21 @@ const hit = (ref, label) => {
 };
 const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '0 0 12 8', 'aria-hidden': 'true' }); t.append(svg('path', { d: 'M1 1L6 6L11 1' })); return t; };
 
-  // a chapter's tree (one to come: its number only)
+  // a chapter's tree — a frame of the strip (one to come: an empty frame, its number only, its knot where a played
+  // one's is: the frames run on in one line)
   function chapter(c, i) {
     const tree = el('section', `tree ${c.kind}${c.kind === 'here' ? ' current' : ''}${i === grow ? ' grow' : ''}`), nodes = new Map();
     const head = el('header', 'head');
     head.append(el('div', 'num', c.number || ''));
-    tree.append(head);
-    if (c.kind === 'future') return { tree, nodes, origin: () => [tree.offsetWidth / 2, head.offsetHeight] };
-    tree.append(el('i', 'sprocket l'), el('i', 'sprocket r'), el('i', 'edge', 'PARADISO · 35 ▸'));
+    tree.append(head, el('i', 'sprocket l'), el('i', 'sprocket r'));
+    if (c.kind === 'future') {
+      const knot = el('div', 'knot'), core = el('i', 'core');
+      head.append(el('div', 'title', ' '));
+      knot.append(core);
+      tree.append(knot);
+      return { tree, nodes, origin: () => { const [x, y] = within(core, tree); return [x + core.offsetWidth / 2, y + core.offsetHeight / 2]; } };
+    }
+    tree.append(el('i', 'edge', 'PARADISO · 35 ▸'));
     if (c.badge) {
       const badge = el('div', 'badge');
       badge.append(el('i'), tr('Replay'));
