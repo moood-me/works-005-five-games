@@ -1,11 +1,12 @@
-// The projector low on the right of the middle 4:3: its beam thrown up to the left across the whole booth, through the
-// strip's band (dust hanging in it); the dark lamp house, its round lens glowing warm. Painted once; the beam and the
+// The projector low on the right of the middle 4:3: its beam thrown up to the left through the strip's middle and out
+// at the top left (dust hanging in it); the dark lamp house, its round lens glowing warm. Painted once; the beam and the
 // glow breathe (lamp.animate.js).
 const A = e.aspect, L = e.lib.lampAt(A), R = 0.05, O = { x: L.x + 0.02, y: L.y + 0.01 };
 // the beam: a cone from the lens up to the left, past the stage's edge — a clear shaft, soft at its sides (cones
 // within cones), dust hanging in it
 e.layer('beam', { blend: 'add' }, c => {
-  const far = { x: -0.4, y: 0.3 }, half = 0.2; // where it goes, and its half-width there
+  // where it goes — up through the strip's middle, out at the top left — and its half-width there
+  const far = { x: -0.4, y: -0.45 }, half = 0.28;
   const dx = far.x - O.x, dy = far.y - O.y, n = Math.hypot(dx, dy), px = -dy / n, py = dx / n;
   const cone = (spread, alpha) => {
     const gr = c.createLinearGradient(O.x, O.y, far.x, far.y);
