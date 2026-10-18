@@ -4,7 +4,7 @@
 // strip of 35 mm film; the forks its frames; what was chosen in the projector's warm light —, in bespoke.underlay
 // (under the language's marks, which stand on its knots, forks and pointers). A tree: its number and title, its knot,
 // its rows — the question left, the trunk and its dot in the middle (a short SVG, seg), the answers right: the one
-// chosen first, the others on twigs; a replay's thread dashed beside the trunk, its badge over the tree; where the play
+// chosen first, the others on twigs; a replay's thread dashed beside the trunk; where the play
 // stands — a pointer at the trunk's end, «continue the game» or «continue the replay». It stands at its chapter's
 // point, the knot there, and goes with it each frame the scene says (bespoke.onFrame): the view dragged, brought to a
 // chapter, walked toward (the wheel, a pinch: nearer, larger — by the point's depth). What lives is CSS, the page's own
@@ -17,7 +17,7 @@
 //     replay's —, author); offer(refs, fn) — those take a press, fn(ref) told; remove() }
 //   chapters — as game.js sky() gives them: [{number, title, kind: here | played | next | future, rows: [{title, weight,
 //     options: [{label, state: chosen | tried | both | open | unseen}]}], go: the play's pointer's words | null, replay:
-//     a replay goes on in it, badge: a replay of it}]; grow — the chapter whose rows come one after another over
+//     a replay goes on in it}]; grow — the chapter whose rows come one after another over
 //     `seconds`; author — the author's sign shown
 const DIST = 10; // m: the points' distance from the eye — a tree drawn at its size there
 const THEME = 'cine', CRACK = false, FLAG = '●'; // the game's look; the trunk a crack, not a thread; a key fork's sign
@@ -115,7 +115,6 @@ const tip = r => { const t = svg('svg', { class: r ? 'tip r' : 'tip', viewBox: '
     tree.append(head);
     if (c.kind === 'future') return { tree, nodes, origin: () => [tree.offsetWidth / 2, head.offsetHeight] };
     tree.append(el('i', 'sprocket l'), el('i', 'sprocket r'), el('i', 'edge', 'PARADISO · 35 ▸'));
-    if (c.badge) { const badge = el('div', 'badge'); badge.append(el('i'), tr('Replay')); tree.prepend(badge); }
     head.append(el('div', 'title', c.title));
     head.dataset.ref = `knot:${i}`;
     const knot = el('div', 'knot'), core = el('i', 'core');
