@@ -150,7 +150,6 @@
   {"text":"The author’s map","translation":"Карта автора","where":"bespoke/game.js"},
   {"text":"continue\nthe game","translation":"продолжить\nигру","where":"bespoke/game.js"},
   {"text":"start\nthe game","translation":"начать\nигру","where":"bespoke/game.js"},
-  {"text":"Replay","translation":"Переигровка","where":"bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"продолжить\nпереигровку","where":"bespoke/map.js"},
   {"text":"the author","translation":"автор","where":"bespoke/map.js"},
   {"text":"The nails in the picture were painted so that it hurt to look","translation":"Гвозди на картине были написаны так, что больно было смотреть","where":"bespoke/minigames/brush.js"},
@@ -189,6 +188,7 @@
   {"text":"Red sails are coming!","translation":"Красные паруса плывут!","where":"bespoke/story.js"},
   {"text":"She waited","translation":"Она ждала","where":"bespoke/story.js"},
   {"text":"All Kaperna","translation":"Вся Каперна","where":"bespoke/story.js"},
+  {"text":"Replay","translation":"Переигровка","where":"bespoke/ui.js"},
   {"text":"fold","translation":"сложить","where":"bespoke/ui.js"},
   {"text":"unfold","translation":"развернуть","where":"bespoke/ui.js"}
 ]}
