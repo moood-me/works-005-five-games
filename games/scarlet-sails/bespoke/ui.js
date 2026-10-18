@@ -10,7 +10,6 @@
 //   view.title(text, {signal}) — words in the middle of the frame, as a film's title; → once they have gone
 //   view.letter({text, sign}, {signal}) — a sheet of unbleached paper folded in three: pressed, it unfolds and can be
 //     read; pressed again, it folds and goes; → then. text: its lines ('\n')
-//   view.replaying(on) — the plate «Replay» in the corner while a replay goes on (game.js)
 //   view.quiet() — what a chapter left showing taken away (the map comes)
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
@@ -41,9 +40,6 @@ export function ui(layer) {
   const boat = yacht(layer);
   const needle = compass(layer);
   const toasts = el('div', 'toasts', layer);
-  const replay = el('div', 'replay', layer);
-  replay.textContent = tr('Replay');
-  replay.hidden = true;
   let hinted = () => {}; // takes the hint shown now away
   return {
     gauges(state, hero) {
@@ -84,7 +80,6 @@ export function ui(layer) {
       });
     },
     letter: (letter, { signal } = {}) => unfold(layer, letter, signal),
-    replaying(on) { replay.hidden = !on; },
     // what a chapter left showing (its strips, its hint) taken away: the map comes
     quiet() {
       toasts.replaceChildren();

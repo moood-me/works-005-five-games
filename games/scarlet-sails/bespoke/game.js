@@ -17,11 +17,11 @@
 // one of PLAYS has it by then (as the main run stood at that step, where it has played it): a replay from there.
 //
 // The play is one — its main run, as far as the player has come. A replay (begun on the map) goes on its own and is
-// never kept: closed, it is gone. Meanwhile the plate «Replay» in the corner; on the map its threads beside the main
-// run's, its pointer «Continue the replay» or «Back to the main run» (the main run played on at once); whatever would
-// leave it asks first (its mark opens again) — «Drop the replay». Played to its chapter's end, the player keeps it —
-// «Keep»: it becomes the main run from the next chapter on, the chapters after it to be played anew (said beside) — or
-// not, «Undo».
+// never kept: closed, it is gone. On the map: the plate «Replay» on its tree (pressed, or its knot: «Continue the
+// replay», «Drop the replay»), its threads beside the main run's, its pointer «Continue the replay» or «Back to the
+// main run» (the main run played on at once); whatever would leave it asks first (its mark opens again) — «Drop the
+// replay». Played to its chapter's end, the player keeps it — «Keep»: it becomes the main run from the next chapter on,
+// the chapters after it to be played anew (said beside) — or not, «Undo».
 //
 // What is kept of the play (bespoke.keep), after every step: the main run — { chapter, step, scales, shown, marks,
 // choices } —, steps: {chapter: [the main run as each of its steps began, and as it ended]} (what «Replay from here»
@@ -122,7 +122,6 @@ export default async function (b) {
     if (to === 'keep') { await keepReplay(); continue; }
     if (to === 'main' || to === 'back') replay = null; // («Back to the main run»: the main run goes on from where it stands)
     else if (to !== 'replay') replay = replayFrom(to);
-    view.replaying(!!replay);
     if ((await play()) === 'away') continue;
     if (replay) {
       replay.done = true;
@@ -191,7 +190,6 @@ export default async function (b) {
   function keepReplay() {
     const i = replay.run.chapter, on = { ...run(replay.run), chapter: i + 1, step: 0 }, steps = replay.steps;
     replay = null;
-    view.replaying(false);
     return keep({ ...on, steps: { ...pick(kept.steps, j => j < i), [i]: steps, [i + 1]: [on] }, seen: kept.seen });
   }
 
@@ -205,7 +203,6 @@ export default async function (b) {
     view.quiet();
     beds({ sea: 0.3 }, 2);
     view.gauges(null);
-    view.replaying(!!replay);
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, EPILOGUE);
     await b.show(SCENES.far, { state: { shown: reveal ?? here } });
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: !!author });
@@ -214,7 +211,7 @@ export default async function (b) {
     let at = reveal ?? here; // (the chapter the view is at)
     const go = i => { if (i !== at) { at = i; b.set('shown', i); } };
     // (something of a chapter pressed — the view goes to it)
-    const touched = ref => { const i = /^(?:knot|fork|go|goreplay):(\d+)/.exec(ref)?.[1]; if (i != null) bring(Number(i)); };
+    const touched = ref => { const i = /^(?:knot|fork|go|goreplay|badge):(\d+)/.exec(ref)?.[1]; if (i != null) bring(Number(i)); };
     // (pressed on the chapter already shown, wherever the player dragged the view: back to it)
     let come = 0;
     const bring = i => { if (i === at) b.set('come', ++come); else go(i); };
@@ -274,8 +271,13 @@ export default async function (b) {
     const add = (ref, id, label) => { (offers[ref] ??= []).push({ id, label: id === asked ? tr('Drop the replay') : label }); };
     if (replay) {
       const c = replay.run.chapter;
-      if (replay.done) { add(`knot:${c}`, 'keep', tr('Keep')); add(`knot:${c}`, 'drop', tr('Undo')); }
-      else { add(`goreplay:${c}`, 'replay', tr('Continue the replay')); add(`goreplay:${c}`, 'back', tr('Back to the main run')); }
+      if (replay.done) for (const at of [`knot:${c}`, `badge:${c}`]) { add(at, 'keep', tr('Keep')); add(at, 'drop', tr('Undo')); }
+      else {
+        add(`goreplay:${c}`, 'replay', tr('Continue the replay')); add(`goreplay:${c}`, 'back', tr('Back to the main run'));
+        // (its plate on the tree, its knot: the replay itself — on, or dropped)
+        add(`badge:${c}`, 'replay', tr('Continue the replay')); add(`badge:${c}`, 'drop', tr('Drop the replay'));
+        add(`knot:${c}`, 'drop', tr('Drop the replay'));
+      }
     }
     if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start'));
     for (let i = 0; i < Math.min(kept.chapter, END); i++) {
@@ -311,7 +313,7 @@ export default async function (b) {
       // (a chapter played: all its rows; one going on — those reached so far)
       const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
       return { number: c.number, title: c.title, kind, rows: i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen')),
-        go: i === kept.chapter ? (kept.step ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done };
+        go: i === kept.chapter ? (kept.step ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
     });
   }
 }
