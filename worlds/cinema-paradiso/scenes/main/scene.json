@@ -295,7 +295,7 @@
     "bulbs": 1,
     "warm": 0.5,
     "place": "crowd",
-    "with_mother": 0,
+    "with_mother": 1,
     "camera_x": 0,
     "camera_z": -4,
     "camera_yaw": -8,

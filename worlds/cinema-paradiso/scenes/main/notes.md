@@ -65,7 +65,8 @@ Anna and the old people in their places behind the cart (they walk at its pace �
 1 — Salvatore too, at its side.
 
 Beat by beat — `FILM` in `lib.js`: each `from` sets everything but the party's keys (`warm`, `place`, `with_mother` —
-the game sets them); `demolition` reads `place` and `with_mother` in its `run`.
+the game sets them); `demolition` reads `place` and `with_mother` in its `run` (`with_mother` 1 by default: till the
+play has chosen the cinema he is with people — his mother there at the demolition).
 
 ## The faces
 
@@ -143,5 +144,5 @@ after `after_show` (the moment `alfredo_down:coins` came after ~60 s) and with E
   "demolition": {"after":[],"tells":["demolition:whistle","demolition:blast"],"seconds":26,"show":false},
   "dust": {"after":["demolition"],"tells":["dust:madman"],"seconds":16,"show":false}
 },
-"points":["paradiso","paradiso#door","paradiso#booth_window","paradiso#poster","wall#screen","mother_window","balcony","bank#door","chalk_wall#chalk","hearse","hearse#handle_l","hearse#handle_r","hearse#rail","alfredo_door#door","canopy_front#marquee","toto","alfredo","maria","elena","daughter","madman","anna","bearer1","bearer2","c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","alfredo#hand_r","alfredo#pocket","toto#hand_l","toto#hand_r","toto#shoulder_r","toto#nape","elena#back","maria#hand_l","maria#hand_r","paradiso#lamp"],"offers":["paradiso#booth_window","alfredo#hand_r","toto","alfredo","elena","balcony","daughter","hearse","chalk_wall#chalk","wall#screen"],"party":{"warm":0.5,"place":"crowd","with_mother":0},"keys":{"beat_next":"","beam_aim":0,"beam_focus":0,"wall_film":"none","beam_on":0,"chalk":0,"mark_chalk":0,"night_kind":"clear","elena_window":0,"poster":0,"full_sign":0,"viewfinder":0,"pan":0,"elena_x":1,"madman_x":-1,"rec":0}}
+"points":["paradiso","paradiso#door","paradiso#booth_window","paradiso#poster","wall#screen","mother_window","balcony","bank#door","chalk_wall#chalk","hearse","hearse#handle_l","hearse#handle_r","hearse#rail","alfredo_door#door","canopy_front#marquee","toto","alfredo","maria","elena","daughter","madman","anna","bearer1","bearer2","c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","alfredo#hand_r","alfredo#pocket","toto#hand_l","toto#hand_r","toto#shoulder_r","toto#nape","elena#back","maria#hand_l","maria#hand_r","paradiso#lamp"],"offers":["paradiso#booth_window","alfredo#hand_r","toto","alfredo","elena","balcony","daughter","hearse","chalk_wall#chalk","wall#screen"],"party":{"warm":0.5,"place":"crowd","with_mother":1},"keys":{"beat_next":"","beam_aim":0,"beam_focus":0,"wall_film":"none","beam_on":0,"chalk":0,"mark_chalk":0,"night_kind":"clear","elena_window":0,"poster":0,"full_sign":0,"viewfinder":0,"pan":0,"elena_x":1,"madman_x":-1,"rec":0}}
 ```
