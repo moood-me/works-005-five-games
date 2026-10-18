@@ -239,9 +239,16 @@
 #underlay .map.cine{--f-text:'PT Serif',Georgia,serif;--f-title:'Playfair Display',Georgia,serif;--f-num:'PT Mono',monospace;
   --c-main:#ffc677;--c-glow:rgba(255,190,100,.2);--c-chosen:#ffd596;--c-title:#f6e7cb;--c-num:#e0b46e;
   --c-name:#c9baa3;--c-key:#f0e1c6;--c-alt:#a49683;--c-thin:rgba(200,180,150,.36);--c-replay:#bcd5f2;
-  --c-halo:rgba(255,196,110,.5);--c-core:#ffe3b0;--trunk:1.6px;--glow:7px;--w:calc(var(--u) * 440)}
-#underlay .map.cine .tree{padding:calc(var(--u) * 14) calc(var(--u) * 20) calc(var(--u) * 4);
-  background:linear-gradient(180deg,rgba(46,34,22,.86),rgba(36,27,18,.86));text-shadow:0 1px 2px rgba(0,0,0,.7)}
+  --c-halo:rgba(255,196,110,.5);--c-core:#ffe3b0;--trunk:1.6px;--glow:7px;--w:calc(var(--u) * 448)}
+/* the strip: the chapters' frames side by side (5 m apart — a frame as wide), one height, across the middle of the booth
+   in the projector's beam; a frame to come — empty, its number only */
+#underlay .map.cine .tree{--s:1.1;min-height:calc(var(--u) * 430);padding:calc(var(--u) * 14) calc(var(--u) * 26) calc(var(--u) * 8);
+  background:linear-gradient(180deg,rgba(46,34,22,.88),rgba(36,27,18,.88));text-shadow:0 1px 2px rgba(0,0,0,.7);
+  box-shadow:inset 1px 0 0 rgba(0,0,0,.55),inset -1px 0 0 rgba(255,214,160,.07)}
+#underlay .map.cine .tree.dense{--s:.92}
+#underlay .map.cine .tree .title{font-size:calc(var(--u) * 32)}
+#underlay .map.cine .tree.future{background:linear-gradient(180deg,rgba(30,23,16,.78),rgba(22,17,12,.78))}
+#underlay .map.cine .tree.future .core{visibility:hidden}
 #underlay .map.cine .tree.current{background:linear-gradient(0deg,rgba(120,80,36,.6),rgba(46,34,22,.86) 70%)}
 #underlay .map.cine .tree .sprocket{position:absolute;top:0;bottom:0;width:calc(var(--u) * 20);
   background:repeating-linear-gradient(180deg,transparent 0 calc(var(--u) * 7),rgba(6,4,3,.95) calc(var(--u) * 7) calc(var(--u) * 16)) center / calc(var(--u) * 9) 100% no-repeat}
@@ -249,7 +256,6 @@
 #underlay .map.cine .tree .sprocket.r{right:0}
 #underlay .map.cine .tree .edge{position:absolute;right:calc(var(--u) * 26);top:calc(var(--u) * 6);
   font:calc(var(--u) * 9)/1 'PT Mono',monospace;letter-spacing:.3em;color:rgba(224,180,110,.45)}
-#underlay .map.cine .tree.future .sprocket,#underlay .map.cine .tree.future .edge{display:none}
 #underlay .map.cine .tree .num{font-size:calc(var(--u) * 13)}
 #underlay .map.cine .tree .title{font-weight:500}
 #underlay .map.cine .row{border-top:1px solid rgba(255,214,160,.10);padding-top:calc(var(--u) * var(--s) * 6)}
