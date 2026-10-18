@@ -13,8 +13,8 @@ frame's heights): as the view moves it stands, the chapters' points move.
   pressed again after the player dragged away).
 - `dark` — the booth, painted once: its plastered wall in the warm dark (lighter toward the lamp), the panelling's
   boards low down, a big reel low on the left, the strip's band across the middle
-  a little warmer. `lamp` — the projector low on the right (`lib.js` lampAt): its beam thrown up to the left across the
-  whole booth, through the strip's band, dust hanging in it; the lamp house, the lens glowing. The beam and the glow
+  a little warmer. `lamp` — the projector low on the right (`lib.js` lampAt): its beam thrown up to the left through the
+  strip's middle (its frames lit) and out at the top left, dust hanging in it; the lamp house, the lens glowing. The beam and the glow
   breathe — their layers' alpha only (lamp.animate.js).
 - `c0`…`c7` — the chapters' unseen points and the finale's (`c7`, after the epilogue; unseen; across i·5, at 0.4 of
   the frame's height — where the game's tree has its knot: the strip of frames runs across the middle, in the beam);
