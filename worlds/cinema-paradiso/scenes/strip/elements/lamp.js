@@ -2,33 +2,35 @@
 // strip's band (dust hanging in it); the dark lamp house, its round lens glowing warm. Painted once; the beam and the
 // glow breathe (lamp.animate.js).
 const A = e.aspect, L = e.lib.lampAt(A), R = 0.05, O = { x: L.x + 0.02, y: L.y + 0.01 };
-// the beam: a cone from the lens to past the left edge, soft at its sides (cones within cones), dust in it
+// the beam: a cone from the lens up to the left, past the stage's edge — a clear shaft, soft at its sides (cones
+// within cones), dust hanging in it
 e.layer('beam', { blend: 'add' }, c => {
-  const far = -0.4, top = -0.05, bottom = 0.8;
+  const far = { x: -0.4, y: 0.3 }, half = 0.2; // where it goes, and its half-width there
+  const dx = far.x - O.x, dy = far.y - O.y, n = Math.hypot(dx, dy), px = -dy / n, py = dx / n;
   const cone = (spread, alpha) => {
-    const gr = c.createLinearGradient(O.x, O.y, far, (top + bottom) / 2);
+    const gr = c.createLinearGradient(O.x, O.y, far.x, far.y);
     gr.addColorStop(0, `rgba(255,214,150,${alpha})`);
-    gr.addColorStop(0.45, `rgba(255,190,120,${alpha * 0.45})`);
-    gr.addColorStop(1, `rgba(255,170,100,${alpha * 0.12})`);
+    gr.addColorStop(0.5, `rgba(255,196,124,${alpha * 0.5})`);
+    gr.addColorStop(1, `rgba(255,180,110,${alpha * 0.2})`);
     c.fillStyle = gr;
     c.beginPath();
-    c.moveTo(O.x, O.y - R * 0.6 * spread);
-    c.lineTo(far, top - 0.12 * (spread - 1));
-    c.lineTo(far, bottom + 0.12 * (spread - 1));
-    c.lineTo(O.x, O.y + R * 0.6 * spread);
+    c.moveTo(O.x + px * R * 0.7 * spread, O.y + py * R * 0.7 * spread);
+    c.lineTo(far.x + px * half * spread, far.y + py * half * spread);
+    c.lineTo(far.x - px * half * spread, far.y - py * half * spread);
+    c.lineTo(O.x - px * R * 0.7 * spread, O.y - py * R * 0.7 * spread);
     c.closePath();
     c.fill();
   };
-  c.filter = 'blur(0.03px)';
-  cone(1.9, 0.035);
-  cone(1.4, 0.05);
-  cone(1, 0.08);
-  c.filter = 'none';
+  cone(1.5, 0.04);
+  cone(1.25, 0.05);
+  cone(1, 0.07);
+  cone(0.7, 0.07);
   // dust in the light
   for (let k = 0; k < 260; k++) {
-    const t = e.rnd(), s = e.rnd();
-    const x = O.x + (far - O.x) * t, y = O.y + ((top + (bottom - top) * s) - O.y) * t;
-    c.fillStyle = `rgba(255,220,170,${0.05 + 0.12 * e.rnd() * (1 - t)})`;
+    const t = e.rnd(), s = (e.rnd() * 2 - 1) * 0.9;
+    const w = R * 0.7 + (half - R * 0.7) * t;
+    const x = O.x + dx * t + px * w * s, y = O.y + dy * t + py * w * s;
+    c.fillStyle = `rgba(255,220,170,${0.06 + 0.14 * e.rnd() * (1 - t * 0.6)})`;
     c.beginPath(); c.arc(x, y, 0.0012 + 0.0022 * e.rnd(), 0, Math.PI * 2); c.fill();
   }
 });
