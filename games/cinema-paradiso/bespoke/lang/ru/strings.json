@@ -202,6 +202,7 @@
   {"text":"The author’s map","translation":"Карта автора","where":"bespoke/game.js"},
   {"text":"continue\nthe game","translation":"продолжить\nигру","where":"bespoke/game.js"},
   {"text":"start\nthe game","translation":"начать\nигру","where":"bespoke/game.js"},
+  {"text":"Finale","translation":"Финал","where":"bespoke/game.js"},
   {"text":"Replay","translation":"Переигровка","where":"bespoke/map.js"},
   {"text":"continue\nthe replay","translation":"продолжить\nпереигровку","where":"bespoke/map.js"},
   {"text":"the author","translation":"автор","where":"bespoke/map.js"},
