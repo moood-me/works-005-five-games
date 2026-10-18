@@ -328,6 +328,8 @@ function load(saved) {
     steps[main.chapter] = [run(main)];
   }
   (steps[main.chapter] ??= [])[main.step] ??= run(main);
+  // (the first chapter begins as the play does: its start is known even where an older save did not keep it)
+  (steps[0] ??= [])[0] ??= run(fresh());
   return { ...main, steps, seen };
 }
 // a run's own fields (the play's position and what it carries), apart from what the play keeps of its chapters (a
