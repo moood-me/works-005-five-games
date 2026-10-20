@@ -1,6 +1,7 @@
-// The scene's mechanics: the train's cars set along the track by `freight`; the night's look by `hour`;
-// the film's beats run by `beat` (the game's key), one at a time (a new one replaces the one playing).
+// The scene's mechanics: the train's cars set along the track by `freight`; the night's look by `hour`; the film's beats
+// by `beat` (the world's `beats`: one at a time, the next one's opening made ready by `beat_next`).
 const L = scene.lib;
+scene.kit.beats.play(scene, L.film());
 
 function placeTrain() {
   const f = scene.get('freight');
@@ -21,17 +22,3 @@ function night() {
 scene.on('change', 'hour', night);
 scene.on('move', 'hour', night);
 night();
-
-function play(name) {
-  const run = L.film[name];
-  if (!run) {
-    scene.warn(`“The Crossing” has no beat "${name}"`);
-    return;
-  }
-  scene.sequence(async s => {
-    await run(s);
-  }, { name: 'film' });
-}
-scene.on('change', 'beat', name => {
-  if (name) play(name);
-});

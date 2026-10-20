@@ -101,26 +101,33 @@ function places(f) {
     return { id: c.id, a: p.a, d: p.d, f: facingAt(s) };
   });
 }
-const SPEED = 23; // m/s, as it goes by
+const SPEED = 27; // m/s (≈ 100 km/h), as it goes by
 
-// The people's marks
+// The people's marks: they stand at the barrier turned to the right and a little toward us — the booth's window and the
+// signal's red lights on their faces, the headlight far on the curve ahead of them
 const SPOT = { nina: [-1.85, 5.1], busygin: [-1.05, 4.85] };
-const TURN = { nina: 352, busygin: 8 };
+const TURN = { nina: 125, busygin: 135 };
 const BEYOND = { nina: [0.5, 12.9], busygin: [-0.35, 12.5] };
+// the camera is still (`picture`): the shots are its dolly along the view and aside — wide, medium, close on Nina
+const CAM = {
+  wide: { camera_x: 0, camera_z: 0 },
+  med: { camera_x: -0.55, camera_z: 1.9 },
+  close: { camera_x: -1.4, camera_z: 3.15 },
+};
+const CAMKEYS = ['camera_x', 'camera_z'];
+const camTo = (s, cam, over, ease = 'inOut') => { for (const k of CAMKEYS) s.move(k, cam[k], { over, ease }); };
 
+const AT = (id, p, turn, extra = {}) => ({ [`${id}_a`]: p[0], [`${id}_d`]: p[1], [`${id}_turn`]: turn, [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_mood`]: null, ...extra });
 // the end of `wait` — what a beat after it starts from when the scene is opened on it
-const WAIT_END = {
-  nina_a: SPOT.nina[0], nina_d: SPOT.nina[1], nina_turn: TURN.nina, nina_look: 'freight#light', nina_reach: null,
-  busygin_a: SPOT.busygin[0], busygin_d: SPOT.busygin[1], busygin_turn: TURN.busygin, busygin_look: 'nina', busygin_reach: null,
+const WAIT_END = () => ({
+  ...CAM.med, ...AT('nina', SPOT.nina, 98, { nina_look: 'busygin', nina_mood: 'thinking' }), ...AT('busygin', SPOT.busygin, TURN.busygin, { busygin_look: 'nina', busygin_mood: 'afraid' }),
   barrier: 1, bell: 1, freight: 0.04, hour: 0.82,
-};
-const WAIT_FROM = {
-  nina_a: -3.7, nina_d: -1.4, nina_turn: 20, nina_look: null, nina_reach: null,
-  busygin_a: -2.8, busygin_d: -2.0, busygin_turn: 20, busygin_look: null, busygin_reach: null,
-  barrier: 0, bell: 0, freight: 0, hour: 0.78,
-};
+});
+const WAIT_FROM = () => ({
+  ...CAM.wide, ...AT('nina', [-3.7, -1.4], 20), ...AT('busygin', [-2.8, -2.0], 20), barrier: 0, bell: 0, freight: 0, hour: 0.78,
+});
 
-// ── the film: each beat a function of a sequence ──
+// ── the film: film() → { <name>: { from, after, run } } (modules/beats.md) ──
 async function freightTo(s, to, ease) {
   const from = s.get('freight');
   const metres = Math.abs(noseOf(to) - noseOf(from));
@@ -138,118 +145,147 @@ async function passing(s, loud) {
   s.set('bell', 0);
   await s.move('barrier', 0, { over: 3.2, ease: 'inOut' });
 }
-function atWaitEnd(s) {
-  return s.get('barrier') > 0.99 && Math.abs(s.get('nina_a') - SPOT.nina[0]) < 0.3 && Math.abs(s.get('nina_d') - SPOT.nina[1]) < 0.3 && s.get('freight') <= 0.05;
-}
-async function fromWaitEnd(s) {
-  if (!atWaitEnd(s)) s.cut({ ...WAIT_END });
-}
 
-const film = {
-  // dusk going to night; they come up the road, the bell, the lights, the barrier down; the headlight far off
-  async wait(s) {
-    s.cut({ ...WAIT_FROM });
-    const nina = s.person('nina'), bus = s.person('busygin');
-    s.move('hour', 0.82, { over: 20, ease: 'linear' });
-    const walks = Promise.all([
-      nina.walk([[-2.75, 2.6], SPOT.nina]),
-      (async () => { await s.wait(0.5); await bus.walk([[-1.85, 2.3], SPOT.busygin]); })(),
-    ]);
-    await s.wait(1.5);
-    s.set('bell', 1);
-    await s.wait(0.8);
-    s.move('barrier', 1, { over: 4.5, ease: 'inOut' });
-    await walks;
-    await Promise.all([nina.turn(TURN.nina), bus.turn(TURN.busygin)]);
-    nina.look('freight#light');
-    await freightTo(s, 0.04, 'out');
-    s.tell('wait:light');
-    await s.wait(4);
-    bus.look('nina');
-    await s.wait(2.5);
-    s.tell('beat:wait');
-  },
-  // he turns to her and says it; she turns away to the cars; after, she turns to him and goes over first
-  async truth(s) {
-    await fromWaitEnd(s);
-    const nina = s.person('nina'), bus = s.person('busygin');
-    bus.look('nina');
-    await bus.turn(282);
-    s.tell('truth:said');
-    const train = passing(s, async () => {
-      await nina.turn(330);
-      nina.look([-6, 9.5, 2.2]);
-    });
-    await s.wait(3);
-    bus.look('nina#head');
-    await train;
-    s.tell('truth:passed');
-    await nina.turn(68);
-    nina.look('busygin');
-    await s.wait(3.2);
-    nina.look(null);
-    const goes = nina.walk([[-1.1, 8.8], BEYOND.nina]);
-    await s.wait(1.4);
-    bus.look(null);
-    await Promise.all([goes, bus.walk([[-1.2, 8.6], BEYOND.busygin])]);
-    s.tell('beat:truth');
-  },
-  // under the roar: he turns and says it; she steps in to hear; he says it again otherwise; she nods; over side by side
-  async roar(s) {
-    await fromWaitEnd(s);
-    const nina = s.person('nina'), bus = s.person('busygin');
-    bus.look('freight');
-    await passing(s, async () => {
-      s.tell('roar:loud');
-      bus.look('nina');
-      await bus.turn(282);
-      await s.wait(2.2);
-      nina.look('busygin');
-      await nina.turn(70);
-      await nina.walk([[-1.62, 5.5]]);
-      await nina.turn(70);
-      await s.wait(2.6);
-      nina.look([-1.2, 6.8, 0]);
-      await s.wait(0.6);
-      nina.look('busygin');
-      await s.wait(0.8);
-      nina.look([-3, 10, 2]);
-    });
-    s.tell('roar:passed');
-    nina.look(null);
-    bus.look(null);
-    await Promise.all([nina.walk([[-1.2, 8.8], BEYOND.nina]), bus.walk([[-0.6, 8.6], BEYOND.busygin])]);
-    s.tell('beat:roar');
-  },
-  // “Brother.” — she takes his hand; the train goes by; over the tracks together, hand in hand
-  async brother(s) {
-    await fromWaitEnd(s);
-    const nina = s.person('nina'), bus = s.person('busygin');
-    bus.look('nina');
-    await bus.turn(300);
-    await s.wait(2.4);
-    nina.look('busygin');
-    await nina.turn(40);
-    nina.reach({ r: 'busygin#hand_l' });
-    bus.reach({ l: 'nina#hand_r' });
-    await s.wait(0.8);
-    s.tell('brother:arm');
-    await nina.turn(TURN.nina);
-    nina.look('freight');
-    await bus.turn(TURN.busygin);
-    bus.look('freight');
-    await passing(s, null);
-    s.tell('brother:passed');
-    nina.look('busygin');
-    await s.wait(2.6);
-    nina.look(null);
-    bus.look(null);
-    await Promise.all([nina.walk([[-1.5, 8.8], [0.2, 12.7]]), bus.walk([[-0.7, 8.7], [0.75, 12.6]])]);
-    s.tell('beat:brother');
-  },
-};
+function film() {
+  return {
+    // dusk going to night; they come up the road, the bell, the lights, the barrier down; they stop, turn to the light
+    // (the medium shot, their faces in the red of the signal and the booth's window); the headlight far off; Nina turns to
+    // him
+    wait: {
+      from: WAIT_FROM,
+      async run(s) {
+        const nina = s.person('nina'), bus = s.person('busygin');
+        s.move('hour', 0.82, { over: 20, ease: 'linear' });
+        const walks = Promise.all([
+          nina.walk([[-2.75, 2.6], SPOT.nina]),
+          (async () => { await s.wait(0.5); await bus.walk([[-1.85, 2.3], SPOT.busygin]); })(),
+        ]);
+        await s.wait(1.5);
+        s.set('bell', 1);
+        await s.wait(0.8);
+        s.move('barrier', 1, { over: 4.5, ease: 'inOut' });
+        await walks;
+        nina.mood('thinking');
+        bus.mood('afraid');
+        camTo(s, CAM.med, 4);
+        await Promise.all([nina.turn(TURN.nina), bus.turn(TURN.busygin)]);
+        nina.look('freight#light');
+        await freightTo(s, 0.04, 'out');
+        s.tell('wait:light');
+        await s.wait(1.5);
+        bus.look('nina');
+        await s.wait(1.5);
+        nina.look('busygin');
+        await nina.turn(98);
+        await s.wait(1.5);
+      },
+    },
+    // he turns to her and says it; she turns away to the cars; after, she turns to him (nearer, her face) and goes over first
+    truth: {
+      after: 'wait',
+      from: WAIT_END,
+      async run(s) {
+        const nina = s.person('nina'), bus = s.person('busygin');
+        bus.look('nina');
+        await bus.turn(235);
+        s.tell('truth:said');
+        const train = passing(s, async () => {
+          nina.mood('neutral');
+          await nina.turn(8);
+          nina.look([-6, 9.5, 2.2]);
+        });
+        await s.wait(3);
+        bus.look('nina#head');
+        await train;
+        s.tell('truth:passed');
+        nina.mood('sad');
+        camTo(s, CAM.close, 3.5);
+        await nina.turn(98);
+        nina.look('busygin');
+        await s.wait(3.2);
+        camTo(s, CAM.wide, 2.5);
+        nina.look(null);
+        const goes = nina.walk([[-1.1, 8.8], BEYOND.nina]);
+        await s.wait(1.4);
+        bus.look(null);
+        await Promise.all([goes, bus.walk([[-1.2, 8.6], BEYOND.busygin])]);
+      },
+    },
+    // under the roar: he turns and says it; she steps in to hear (leans to him); he says it again otherwise; she nods; over
+    // side by side
+    roar: {
+      after: 'wait',
+      from: WAIT_END,
+      async run(s) {
+        const nina = s.person('nina'), bus = s.person('busygin');
+        bus.look('freight');
+        await passing(s, async () => {
+          s.tell('roar:loud');
+          bus.look('nina');
+          await bus.turn(235);
+          await s.wait(2.2);
+          nina.mood('surprised');
+          bus.mood('sad');
+          nina.look('busygin');
+          await nina.turn(98);
+          await nina.walk([[-1.62, 5.5]]);
+          await nina.do('lean');
+          await s.wait(2.6);
+          nina.do('stand');
+          nina.look([-1.2, 6.8, 0]);
+          await s.wait(0.6);
+          nina.look('busygin');
+          await s.wait(0.8);
+          nina.look([-3, 10, 2]);
+        });
+        s.tell('roar:passed');
+        nina.look(null);
+        bus.look(null);
+        await Promise.all([nina.walk([[-1.2, 8.8], BEYOND.nina]), bus.walk([[-0.6, 8.6], BEYOND.busygin])]);
+      },
+    },
+    // “Brother.” — she takes his hand (their backs to us: both to the cars); the train goes by; they turn to us hand in hand
+    // (their faces), over the tracks together
+    brother: {
+      after: 'wait',
+      from: WAIT_END,
+      async run(s) {
+        const nina = s.person('nina'), bus = s.person('busygin');
+        bus.look('nina');
+        await bus.turn(235);
+        await s.wait(2.4);
+        nina.look('busygin');
+        await nina.turn(98);
+        nina.mood('neutral');
+        await s.wait(0.6);
+        await Promise.all([nina.turn(8), bus.turn(352)]);
+        nina.reach({ r: 'busygin#hand_l' });
+        bus.reach({ l: 'nina#hand_r' });
+        await s.wait(0.8);
+        s.tell('brother:arm');
+        nina.look('freight');
+        bus.look('freight');
+        await passing(s, null);
+        s.tell('brother:passed');
+        nina.mood('smile');
+        bus.mood('tired');
+        nina.look('busygin');
+        bus.look('nina');
+        nina.reach(null);
+        bus.reach(null);
+        await Promise.all([nina.turn(165), bus.turn(195)]);
+        nina.reach({ l: 'busygin#hand_r' });
+        bus.reach({ r: 'nina#hand_l' });
+        await s.wait(2.6);
+        nina.look(null);
+        bus.look(null);
+        await Promise.all([nina.walk([[-1.5, 8.8], [0.2, 12.7]]), bus.walk([[-0.7, 8.7], [0.75, 12.6]])]);
+      },
+    },
+  };
+}
 
 // hour → the night look's weight
 const nightOf = hour => span(hour, 0.74, 0.88);
 
-return { PATH, CONTROL, ROAD, ROAD_W, at, sOf, facingAt, TRAIN, places, noseOf, S_CROSS, S_LIGHT, SPOT, TURN, WAIT_END, film, nightOf, span, clamp };
+return { PATH, CONTROL, ROAD, ROAD_W, at, sOf, facingAt, TRAIN, places, noseOf, S_CROSS, S_LIGHT, SPOT, TURN, CAM, WAIT_END, WAIT_FROM, film, nightOf, span, clamp };

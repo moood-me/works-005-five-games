@@ -1,19 +1,20 @@
 {
   "engine": 3,
-  "title": "The Hillside (Opus)",
+  "title": "The Hillside",
   "caption": "The cemetery on the hillside beyond the settlement. Dusk.",
   "horizon": 0.62,
   "camera": {
     "mode": "roam",
     "area": [
       -30,
-      40,
+      70,
       -4,
       30
     ]
   },
   "modules": [
     "cast",
+    "beats",
     "houses"
   ],
   "light": {
@@ -25,9 +26,9 @@
     "hazeColor": "#6f6886",
     "hazeGlow": 0.5,
     "shafts": 0,
-    "brightness": 1.08,
+    "brightness": 1.16,
     "saturation": 0.86,
-    "ambient": 0.62,
+    "ambient": 0.7,
     "ambientColor": "#aaa6c6",
     "bounce": 0.5,
     "wind": [
@@ -37,7 +38,7 @@
     ],
     "looks": {
       "dusk": {
-        "ambient": 0.46,
+        "ambient": 0.56,
         "ambientColor": "#8c8ab8",
         "hazeColor": "#4e4a68",
         "tintStrength": 0.14,
@@ -65,6 +66,16 @@
       ],
       "color": "#a8b0d6",
       "strength": 0.35
+    },
+    {
+      "id": "club_spill",
+      "across": 53.5,
+      "distance": 8.9,
+      "elevation": 1.4,
+      "color": "#e8963a",
+      "strength": 1.8,
+      "reach": 10,
+      "on": "club_door"
     }
   ],
   "state": {
@@ -77,12 +88,30 @@
     "camera_z": 0.6,
     "camera_yaw": 0,
     "camera_h": 0,
+    "down": 0,
+    "down_at": 0,
+    "catch": 0,
+    "fall": 0,
+    "sar_go": 0,
+    "sar_at": 0,
+    "follow": 0,
+    "follow_at": 0,
+    "hold": 0,
+    "duck": 0,
+    "club_door": 0,
+    "club_door_f": 180,
+    "snowy": 0,
+    "seen": 0,
     "nina_a": -2,
     "nina_d": 6.15,
     "nina_turn": 0,
+    "nina_look": "sarafanov",
+    "nina_mood": "tired",
     "busygin_a": -1.1,
     "busygin_d": 6.3,
     "busygin_turn": 8,
+    "busygin_look": "band2",
+    "busygin_mood": "thinking",
     "sarafanov_a": 0.75,
     "sarafanov_d": 26.95,
     "sarafanov_turn": 345,
@@ -106,9 +135,7 @@
     "mourner3_turn": 340,
     "mourner4_a": -3.4,
     "mourner4_d": 25.9,
-    "mourner4_turn": 30,
-    "nina_look": "sarafanov",
-    "busygin_look": "band2"
+    "mourner4_turn": 30
   },
   "states": {
     "hour": {
@@ -134,7 +161,9 @@
         "march",
         "alone",
         "meet",
-        "hide"
+        "bottom",
+        "hide",
+        "club"
       ],
       "means": "the film's beat: the game sets a name — the beat plays from its beginning"
     },
@@ -148,6 +177,102 @@
         1
       ],
       "means": "the clarinet case lies on the snow by the grave (1) or is in Sarafanov's hand (0) — a beat sets it"
+    },
+    "down": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "“Arm in Arm”: where the game wants the pair on the iced path (0 the grave, 1 the gate); they go while it is ahead of down_at"
+    },
+    "down_at": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "where the pair are on the path now — the scene sets it, ten times a second"
+    },
+    "catch": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — Busygin caught his father on the ice: both hands on him"
+    },
+    "fall": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — the old man sat down in the snow; 0 — he gets up"
+    },
+    "sar_go": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — the old man walks along the road to the club by himself, looking back at 0.25, 0.5, 0.75"
+    },
+    "sar_at": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "where the old man is along the road (0 the gate, 1 the club's steps) — the scene sets it"
+    },
+    "follow": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "“Following”: where the game wants Nina and Busygin on the road; they go while it is ahead of follow_at"
+    },
+    "follow_at": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "where Nina and Busygin are on the road now — the scene sets it"
+    },
+    "hold": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — the two are walking just now (the game sets it; the old man looks back at it)"
+    },
+    "duck": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — Nina and Busygin crouch; 0 — they stand up"
+    },
+    "club_door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the club's door: 0 shut, 1 open on the warm hall"
+    },
+    "club_door_f": {
+      "type": "number",
+      "means": "the door leaf's facing — the script sets it by club_door"
+    },
+    "snowy": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — snow on the old man's coat: he fell on the ice (the game sets it before bottom)"
+    },
+    "seen": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — he all but saw them on the road (the game sets it before `club`)"
     },
     "nina_a": {
       "type": "number",
@@ -352,6 +477,19 @@
           "across": 39.2,
           "distance": 7
         }
+      ]
+    },
+    {
+      "id": "gate_lamp",
+      "name": "Gate lamp",
+      "across": 10.2,
+      "distance": 6.2,
+      "height": 3.3,
+      "box": [
+        -0.4,
+        -3.5,
+        1,
+        0.1
       ]
     },
     {
@@ -911,6 +1049,210 @@
         -0.2,
         0.4,
         0.05
+      ]
+    },
+    {
+      "id": "club",
+      "name": "Club",
+      "unseen": true,
+      "across": 55.5,
+      "distance": 9,
+      "facing": 180
+    },
+    {
+      "id": "club_wall",
+      "name": "The railwaymen's club",
+      "on": "club",
+      "facing": 180,
+      "height": 3.1500000000000004,
+      "box": [
+        -6,
+        -3.6500000000000004,
+        6,
+        0.15
+      ]
+    },
+    {
+      "id": "club_roof",
+      "name": "Roof",
+      "plane": true,
+      "on": "club",
+      "across": 0,
+      "distance": 1.28,
+      "elevation": 4.15,
+      "width": 12,
+      "depth": 3.99,
+      "tilt": 30.1
+    },
+    {
+      "id": "club_endl",
+      "name": "Club",
+      "on": "club",
+      "across": -5.5,
+      "distance": 3,
+      "facing": 270,
+      "height": 5.15,
+      "box": [
+        -3.6,
+        -5.550000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "club_endr",
+      "name": "Club",
+      "on": "club",
+      "across": 5.5,
+      "distance": 3,
+      "facing": 90,
+      "height": 5.15,
+      "box": [
+        -3.6,
+        -5.550000000000001,
+        3.6,
+        0.15
+      ]
+    },
+    {
+      "id": "club_win1",
+      "name": "Club window",
+      "on": "club",
+      "across": -4.3,
+      "distance": 0.05,
+      "elevation": 1.1,
+      "facing": 180,
+      "glows": true,
+      "height": 1.2,
+      "box": [
+        -0.61,
+        -1.26,
+        0.61,
+        0.06
+      ]
+    },
+    {
+      "id": "club_win2",
+      "name": "Club window",
+      "on": "club",
+      "across": 0.7,
+      "distance": 0.05,
+      "elevation": 1.1,
+      "facing": 180,
+      "glows": true,
+      "height": 1.2,
+      "box": [
+        -0.61,
+        -1.26,
+        0.61,
+        0.06
+      ]
+    },
+    {
+      "id": "club_win3",
+      "name": "Club window",
+      "on": "club",
+      "across": 3.1,
+      "distance": 0.05,
+      "elevation": 1.1,
+      "facing": 180,
+      "glows": true,
+      "height": 1.2,
+      "box": [
+        -0.61,
+        -1.26,
+        0.61,
+        0.06
+      ]
+    },
+    {
+      "id": "club_door",
+      "name": "Club door",
+      "on": "club",
+      "across": -2.55,
+      "distance": 0.03,
+      "elevation": 0.45,
+      "facing": 180,
+      "place": {
+        "facing": "club_door_f"
+      },
+      "height": 2.1,
+      "box": [
+        -0.05,
+        -2.15,
+        1.15,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "club_hall",
+      "name": "Club hall",
+      "on": "club",
+      "across": -2,
+      "distance": 0.9,
+      "elevation": 0.45,
+      "facing": 180,
+      "glows": true,
+      "height": 2.4,
+      "box": [
+        -1.3,
+        -2.45,
+        1.3,
+        0.05
+      ]
+    },
+    {
+      "id": "club_sign",
+      "name": "Sign",
+      "on": "club",
+      "across": -2,
+      "distance": 0.04,
+      "elevation": 2.8000000000000003,
+      "facing": 180,
+      "height": 0.5,
+      "box": [
+        -1.6,
+        -0.7,
+        1.6,
+        0.1
+      ]
+    },
+    {
+      "id": "club_steps",
+      "name": "Steps",
+      "plane": true,
+      "walk": true,
+      "across": 53.5,
+      "distance": 7.25,
+      "elevation": 0.225,
+      "width": 1.5,
+      "depth": 1.38,
+      "tilt": 19.1
+    },
+    {
+      "id": "club_landing",
+      "name": "Porch",
+      "plane": true,
+      "walk": true,
+      "across": 53.5,
+      "distance": 8.45,
+      "elevation": 0.45,
+      "width": 2.4,
+      "depth": 1.1
+    },
+    {
+      "id": "club_lamp",
+      "name": "Club lamp",
+      "across": 55,
+      "distance": 7.8,
+      "elevation": 0.45,
+      "height": 3.2,
+      "box": [
+        -0.4,
+        -3.4,
+        1,
+        0.1
       ]
     },
     {

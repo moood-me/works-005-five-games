@@ -11,14 +11,15 @@ const start = L.places(F0);
 const state = {
   hour: 0.82, night: L.nightOf(0.82), beat: null, beat_next: null,
   barrier: 1, bell: 1, freight: F0, freight_x: r2(L.noseOf(F0)), snow: 0.4,
+  camera_x: L.CAM.med.camera_x, camera_z: L.CAM.med.camera_z,
   nina_a: L.SPOT.nina[0], nina_d: L.SPOT.nina[1], busygin_a: L.SPOT.busygin[0], busygin_d: L.SPOT.busygin[1],
-  nina_turn: L.TURN.nina, busygin_turn: L.TURN.busygin, nina_look: 'freight#light', busygin_look: 'nina',
+  nina_turn: 98, busygin_turn: L.TURN.busygin, nina_look: 'busygin', busygin_look: 'nina', nina_mood: 'thinking', busygin_mood: 'afraid',
 };
 const states = {
   hour: { range: [0, 1], smooth: true, means: 'the time of day — the weight of the light\'s looks: 0.78 dusk … 0.82 almost night (the script sets night)' },
   night: { range: [0, 1], smooth: true, means: 'the weight of the look “night” — the script sets it by hour' },
   beat: { values: [null, 'wait', 'truth', 'roar', 'brother'], means: 'the film\'s beat: the game sets a name — the beat plays from its beginning' },
-  beat_next: { type: 'string', means: 'which beat comes next (the scene\'s camera is still — no cuts, the key is taken)' },
+  beat_next: { type: 'string', means: 'which beat comes next : the scene makes its first frame ready' },
   barrier: { range: [0, 1], smooth: true, means: 'the barrier: 0 up, 1 down across the road' },
   bell: { range: [0, 1], means: '1 — the bell: two red lights blink in turn; 0 — dark' },
   freight: { range: [0, 1], smooth: true, means: 'the freight: 0 in the wood; 0.04 — the headlight on the far curve (≈ 200 m), standing; 0.1…0.9 — going before them from right to left; 1 — gone to the left' },
@@ -83,18 +84,18 @@ for (const [i, c] of L.TRAIN.entries()) {
 }
 objects.push({ id: 'freight_nose', name: 'Freight', on: 'freight', across: -L.TRAIN[0].len / 2, distance: 0, facing: 270, height: 4.4, box: [-1.75, -4.4, 1.75, 0.1] });
 
-objects.push({ id: 'nina', name: 'Nina', person: { cast: 'cast', who: 'nina', turn: L.TURN.nina }, across: L.SPOT.nina[0], distance: L.SPOT.nina[1], place: { across: 'nina_a', distance: 'nina_d' }, shadow: true });
+objects.push({ id: 'nina', name: 'Nina', person: { cast: 'cast', who: 'nina', turn: 98 }, across: L.SPOT.nina[0], distance: L.SPOT.nina[1], place: { across: 'nina_a', distance: 'nina_d' }, shadow: true });
 objects.push({ id: 'busygin', name: 'Busygin', person: { cast: 'cast', who: 'busygin', turn: L.TURN.busygin }, across: L.SPOT.busygin[0], distance: L.SPOT.busygin[1], place: { across: 'busygin_a', distance: 'busygin_d' }, shadow: true });
 
 objects.push({ id: 'snowfall', name: 'Snow', particles: { kind: 'snow', amount: 'snow', count: 7000, reach: 40 } });
 
 const scene = {
   engine: 3,
-  title: 'The Crossing (opus)',
+  title: 'The Crossing',
   caption: 'The level crossing beyond the settlement. Growing dark.',
   horizon: 0.45,
   camera: { mode: 'picture' },
-  modules: ['cast', 'trains'],
+  modules: ['cast', 'beats', 'trains'],
   light: {
     tint: '#7d8cc0', tintStrength: 0.1, vignette: 0.45, grain: 0.22,
     haze: 0.1, hazeColor: '#56618a', hazeGlow: 0.7, shafts: 0,
@@ -109,7 +110,7 @@ const scene = {
     { id: 'booth_lamp', of: 'booth_window#pane', color: '#e8963a', strength: 2.4, reach: 12 },
     { id: 'red1', of: 'signal#l1', color: '#ff3018', strength: 0.7, reach: 6 },
     { id: 'red2', of: 'signal#l2', color: '#ff3018', strength: 0.7, reach: 6 },
-    { id: 'headlight', of: 'freight#light', color: '#fff0d0', strength: 3, reach: 60, glow: 2.5 },
+    { id: 'headlight', of: 'freight#light', color: '#fff0d0', strength: 2.2, reach: 60, glow: 2 },
   ],
   state,
   states,
