@@ -160,7 +160,7 @@ const CAM = {
   dark: cam(21.6, 9.6, 67, -0.15),
   // before the kitchen window: the room behind it seen through the glass
   window: cam(21.95, 6.3, 3, 0),
-  under: cam(21.6, 6.2, -2, 0.4),
+  under: cam(21.8, 8.0, -12, 0.2),
   gate: cam(20.0, 4.6, 0, -0.1),
   ev1: cam(-2, -7, 0, 1),
   ev2: cam(30.0, 0.5, -2, 0.4),
@@ -178,10 +178,10 @@ const CAM = {
   own_porch: cam(29.85, 6.5, -28, -0.2),
   // the bench from before it, in the front garden: both faces, the window's light over them
   bench: cam(21.9, 9.7, 0, -0.5),
-  bench_near: cam(21.9, 10.35, 0, -0.55),
+  bench_near: cam(22.6, 10.35, -20, -0.55),
   run: cam(RUN[0][0] + RUN_CAM.off0, RUN_CAM.z, 0, -0.1),
   night0: cam(-12, 2.0, 66, 0.4),
-  night1: cam(21.7, 2.6, 1.5, 0.3),
+  night1: cam(21.9, 5.0, 0, 0.3),
 };
 // the camera's keys of a shot moved there together, over seconds
 const CAM_KEYS = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h'];
