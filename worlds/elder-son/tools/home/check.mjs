@@ -86,7 +86,7 @@ function run(name, fn, init, party) {
     const eye = 1.7 + (st.camera_h || 0);
     const fx = Math.sin(yaw), fz = Math.cos(yaw), rx = Math.cos(yaw), rz = -Math.sin(yaw);
     const ra = a - cx, rd = d - cz, depth = ra * fx + rd * fz, lat = ra * rx + rd * rz;
-    return { depth, x: lat / depth, y: 0.5 - (e - eye) / depth + (st.camera_look || 0) };
+    return { depth, x: lat / depth, y: 0.5 - (e - eye) / depth - (st.camera_look || 0) };
   }
   const f2 = v => (v >= 0 ? ' ' : '') + v.toFixed(2);
   function snap(t) {

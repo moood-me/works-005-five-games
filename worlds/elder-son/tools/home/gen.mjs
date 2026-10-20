@@ -145,7 +145,7 @@ add({ id: 'tea', name: 'Tea', insert: 'tea' });
 add({ id: 'box', name: 'Snuffbox', insert: 'box' });
 
 // ── the state: what the player sees first — the same night at the table, the two face to face under the lamp ──
-const party = { warm: 4 / 11, frost: 0.25, box_where: 'cupboard', vasenka_by: 0, silva_door: 1, father_came: 1, nina_came: 0, vasya_came: 0, nina_end: 'gone', nina_for: 0, vasya_end: 'taiga' };
+const party = { warm: 0.36, frost: 0.25, box_where: 'cupboard', vasenka_by: 0, silva_door: 1, father_came: 1, nina_came: 0, vasya_came: 0, nina_end: 'gone', nina_for: 0, vasya_end: 'taiga' };
 const fake = { get: k => (k in party ? party[k] : null), kit: { cast }, warn: t => { throw new Error(t); } };
 const F = L.film(fake);
 const state = { ...party, beat: null, beat_next: null, hurt: 0, heard: 0, far_train: 0, far_train_x: L.FAR_TRAIN.from, hole: 0,
