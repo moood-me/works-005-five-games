@@ -6,6 +6,9 @@ const L = e.lib, W = L.WINDOW, f = e.state.frost, P = L.PANE;
 const w = W.w, h = W.h, bar = -h + L.TRANSOM;
 // the panes: the two lower leaves and the two upper lights over the transom
 const panes = [[-w / 2, bar, 0, 0], [0, bar, w / 2, 0], [-w / 2, -h, 0, bar], [0, -h, w / 2, bar]];
+g.beginPath();
+g.rect(-w / 2, -h, w, h);
+g.clip();
 const reachOf = (x0, y0, x1, y1) => Math.min(x1 - x0, y1 - y0) * (0.25 + 0.55 * f);
 for (const [x0, y0, x1, y1] of panes) {
   const reach = reachOf(x0, y0, x1, y1);

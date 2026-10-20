@@ -134,15 +134,15 @@ const CAM = {
   sofa: cam(7.3, 2.6, 0.8, 8, 0.12),          // Silva on the sofa close, in the light from his door
   cot: cam(7.0, 3.5, 1.15, -122),             // wake: from the room's far wall onto the cot and the chair by it
   sneak: cam(3.8, 3.3, 1.6, -143),            // from the doorway onto the near left corner: stove, the way, the wall clock
-  caught: cam(3.35, 0.32, 1.55, 12),          // from the front door: the old man in the doorway, facing us (the two aside, left)
+  caught: cam(2.75, 1.45, 1.6, 42),           // from where the two stand by the door: the old man in the doorway, facing us
   door: cam(2.95, 2.45, 1.5, 172),            // from the table's side onto the front door and the hooks
   ww: cam(0.6, 2.75, 1.65, 44),               // the window: his shoulder left, the frosted glass in the middle
   morning: cam(1.75, 0.6, 1.5, 0),            // across the table: the old man at its far corner, Busygin at the window
   toast: cam(1.8, 0.4, 1.9, 0, 0.25),         // high along the table: all six in profile
   ask: cam(2.55, 0.4, 1.55, -21),             // Nina standing between her father and him
-  for_me: cam(1.7, 3.72, 1.35, -145),         // close on Nina from the window's end, the old man behind her
+  for_me: cam(1.8, 3.2, 1.35, -110),          // close on Nina from over the table's far end, the old man beyond her
   pack: cam(0.4, 3.8, 1.5, 122),              // from the far left corner: the old man in the doorway, Silva at the door
-  confess: cam(3.2, 1.3, 1.6, 12),            // the two by the doorway in profile, Busygin nearer
+  confess: cam(2.6, 3.7, 1.55, 131),          // from the window's side: the two by the doorway in profile, Busygin nearer
   back: cam(2.2, 0.5, 1.6, -5),               // the old man at the window, his back; the table
 };
 
@@ -201,10 +201,11 @@ const film = scene => {
     p.on(P3(x, z, SEAT_H));
     p.do('seated', { loop: true });
   }
+  // (the cast's `rise` gets up forward, 0.6 m — at the table that is into it: they stand up where they sat, a moment)
   async function rise(p, seat) {
-    const [x, z] = SEATS[seat];
     p.on(null);
-    await p.go('rise', { from: W(x, z) });
+    p.do('stand');
+    await p.turn(SEATS[seat][2]);
   }
   // down onto a bed (on the back): the hips onto its point, the place kept at it
   function lieDown(s, id, where) {
@@ -214,10 +215,11 @@ const film = scene => {
     s.set(`${id}_d`, b.at[1]);
     p.do('lie', { loop: true });
   }
-  // up off the cot: he swings round to the room (sitting), then gets up
+  // up off the cot: (a cut) he sits on its edge facing the room, then gets up
   async function upFromCot(s) {
     const bus = s.person('busygin');
-    await bus.turn(90);
+    s.cut({ busygin_on: P3(COT.x + 0.27, 1.55, COT.top), busygin_a: A(COT.x + 0.27), busygin_d: 1.55, busygin_turn: 90, busygin_do: loop('seated') });
+    await s.wait(0.8);
     bus.on(null);
     await bus.do('rise');
   }
@@ -320,6 +322,7 @@ const film = scene => {
         s.set('hat_on_stool', 1);
         sar.with(['long_scarf']);
         sar.reach(null);
+        sar.do('stand');
         s.move('door', 0, { over: 0.5, ease: 'in' });
         sar.look('busygin');
         await s.wait(4.5);
@@ -1274,7 +1277,9 @@ const film = scene => {
         sar.reach(null);
         sar.mood('smile');
         sar.look('busygin');
+        const table = shot(s, { ...CAM.tb });
         await sit(sar, 'L1');
+        table.cut();
         await s.all(others, nina);
         await s.wait(1.0);
       },

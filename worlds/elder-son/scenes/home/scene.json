@@ -28,18 +28,20 @@
     "shafts": 0,
     "brightness": 1.1,
     "saturation": 0.8,
-    "ambient": 0.64,
+    "ambient": 0.74,
     "ambientColor": "#b4b8c4",
     "bounce": 0.5,
-    "inside": 0.3,
+    "inside": 0.45,
     "looks": {
       "hour": {
         "ambient": 0.54,
         "ambientColor": "#9198b8",
         "saturation": 0.84,
+        "inside": 0.3,
         "lights": {
-          "night": 0.55,
-          "room_light": 0.7
+          "night": 0.3,
+          "room_light": 0.7,
+          "snow_light": 0.45
         }
       }
     }
@@ -51,8 +53,8 @@
       "distance": 2.45,
       "elevation": 2.04,
       "color": "#f1c587",
-      "strength": 1.7,
-      "reach": 4.2,
+      "strength": 1.8,
+      "reach": 5,
       "on": "lamp",
       "glow": 0.3
     },
@@ -68,7 +70,7 @@
     {
       "id": "snow_light",
       "of": "window",
-      "daylight": 0.9
+      "daylight": 1.4
     },
     {
       "id": "sar_light",
@@ -96,8 +98,8 @@
         0,
         30
       ],
-      "color": "#9aa6c8",
-      "strength": 0.6
+      "color": "#b8c0d4",
+      "strength": 1.2
     }
   ],
   "state": {
