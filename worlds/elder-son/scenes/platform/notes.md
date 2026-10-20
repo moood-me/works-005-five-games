@@ -18,7 +18,8 @@ the beats in node and prints where the people and the points stand in the frame.
 - The stairs: the platform's own end is their top (13.5…15.5 × 5.5…8); the flight (`stairs`, a slope, and its two
   sides `stairs_side`) goes down to the right to across 20, 3.2 m lower; the lamp over it (`stair_lamp`, `lamp2`,
   reach 8). Who comes, comes up it from below.
-- Before the platform and beyond the stairs the land falls to the settlement, 8 m lower at distance −20: houses
+- Before the platform (from the start's line on; toward the stairs from the platform's near edge — the start's ground stays
+  0: the eye's height is over it) and beyond the stairs the land falls to the settlement, 8 m lower at distance −20: houses
   (`village`, copies, a few windows lit), gardens' fences, birches, the trodden path; the Sarafanovs' window
   (`far_window`, “The Sarafanovs' window”, glows, brighter by `warm`) at (60, −19.95), before its house — seen in the shot “B” of `last`
   and from the car in `away`.

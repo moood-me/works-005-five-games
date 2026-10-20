@@ -26,7 +26,10 @@ G.trainX = t => G.X0 + (t < 0 ? G.LEFT : G.RIGHT) * t;
 // beyond the stairs on the right
 G.ground = (a, d) => {
   if (d > G.EDGE + 0.05) return G.BED + 0.7 * smooth(span(d, 18, 45));
-  const near = d < G.PLAT.d0 ? -8 * smooth(span(G.PLAT.d0 - d, 0, 22)) - 0.12 * Math.max(0, G.PLAT.d0 - d - 22) : 0;
+  // (the slope's top: at the start's line it begins 0 m before the platform — the start's ground stays 0 —, toward the
+  // stairs right at the platform's near edge, so the window far below is seen from the platform's end)
+  const top = G.PLAT.d0 * smooth(span(a, 8, 12));
+  const near = d < top ? -8 * smooth(span(top - d, 0, 22)) - 0.12 * Math.max(0, top - d - 22) : 0;
   const right = -3.4 * smooth(span(a, 15.5, 17.6)) * (1 - 0.6 * smooth(span(d, 6.5, 10.2)));
   return Math.min(near, right);
 };
