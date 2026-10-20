@@ -1,13 +1,13 @@
-// The kitchen's back wall: whitewashed boards gone yellow, a shelf with crockery, the wall clock, a calendar.
-// Metres; 3 wide.
+// The kitchen's back wall: whitewashed boards gone yellow, a shelf with crockery, the wall clock, a calendar (left of
+// the stove, which stands against its right half). Metres; 3 wide.
 g.fillStyle = '#c9bfa8';
 g.fillRect(-1.55, -2.55, 3.1, 2.58);
 g.fillStyle = '#8c7a62';
 g.fillRect(-1.55, -0.12, 3.1, 0.14);
 g.fillStyle = '#6f5b46';
-g.fillRect(0.2, -1.75, 1.0, 0.05);
+g.fillRect(-0.62, -1.75, 0.66, 0.05);
 g.fillStyle = '#e6e0d2';
-for (const x of [0.32, 0.55, 0.8, 1.02]) g.fillRect(x, -1.92, 0.12, 0.17);
+for (const x of [-0.55, -0.33, -0.12]) g.fillRect(x, -1.92, 0.12, 0.17);
 g.fillStyle = '#5b4632';
 g.fillRect(-1.0, -2.2, 0.26, 0.3);
 g.fillStyle = '#efe9da';
@@ -26,6 +26,6 @@ g.fillStyle = '#2a2420';
 g.fillRect(-0.975, -1.27, 0.05, 0.12);
 g.fillRect(-0.815, -1.47, 0.05, 0.12);
 g.fillStyle = '#e8e2d6';
-g.fillRect(-0.3, -1.85, 0.32, 0.42);
+g.fillRect(-1.5, -1.85, 0.32, 0.42);
 g.fillStyle = '#9b3a2e';
-g.fillRect(-0.3, -1.85, 0.32, 0.08);
+g.fillRect(-1.5, -1.85, 0.32, 0.08);

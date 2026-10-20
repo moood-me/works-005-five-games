@@ -60,7 +60,7 @@ add({ id: 'k_left', name: 'Kitchen', inside: true, across: K.a0, distance: (K.d0
   height: 2.5, box: [-1.6, -2.6, 1.6, 0.05] });
 add({ id: 'k_right', name: 'Kitchen', inside: true, across: K.a1, distance: (K.d0 + K.d1) / 2, elevation: L.PLINTH, facing: 270,
   height: 2.5, box: [-1.6, -2.6, 1.6, 0.05] });
-add({ id: 'stove', name: 'Stove', inside: true, across: r2(L.STOVE.a + 0.02), distance: L.STOVE.d, elevation: L.PLINTH, facing: 90,
+add({ id: 'stove', name: 'Stove', inside: true, across: L.STOVE.a, distance: L.STOVE.d, elevation: L.PLINTH, facing: 180,
   height: 2.1, box: [-0.75, -2.15, 0.75, 0.05] });
 add({ id: 'table', name: 'Table', inside: true, across: L.TABLE.a, distance: r2(L.TABLE.d - L.TABLE.depth / 2), elevation: L.PLINTH, facing: 180,
   height: 0.78, box: [-0.75, -0.8, 0.75, 0.05] });
@@ -97,7 +97,7 @@ const SF = L.SAR_FENCE, SD = L.SIDE_FENCE;
 add({ id: 'sar_fence', name: 'Front garden', across: SF.a, distance: SF.d, facing: 180, height: 1.2, box: [-0.1, -1.4, SF.len + 0.1, 0.2] });
 file('sar_fence', `e.kit.houses.fence(g, e, ${SF.len}, 1.15, { gaps: [${JSON.stringify(SF.gate)}] });\n`);
 add({ id: 'side_fence', name: 'Fence', across: SD.a, distance: SD.d, facing: 90, height: 1.2, box: [-0.1, -1.4, SD.len + 0.1, 0.2] });
-file('side_fence', `e.kit.houses.fence(g, e, ${SD.len}, 1.1, { gaps: [${JSON.stringify(SD.gate)}] });\n`);
+file('side_fence', `e.kit.houses.fence(g, e, ${SD.len}, 1.1, { gaps: ${JSON.stringify(SD.gates)} });\n`);
 // short runs of fence between the far houses: one 2.2 m painting, its copies side by side
 add({ id: 'fences', name: 'Fence', across: -21.9, distance: 14, facing: 180, height: 1.2, box: [-0.1, -1.4, 2.3, 0.2], copies: [
   { across: -21.9, distance: 14 }, { across: -19.7, distance: 14 }, { across: -17.5, distance: 14 }, { across: 5.1, distance: 14.05 },
@@ -146,10 +146,8 @@ const PEOPLE = [['busygin', 'Busygin', 'busygin'], ['silva', 'Silva', 'silva'], 
   ['nina', 'Nina', 'nina'], ['kudimov', 'Kudimov', 'kudimov'], ['makarskaya', 'Makarskaya', 'makarskaya'], ['neighbor1', 'Neighbour', 'neighbor1'], ['neighbor2', 'Neighbour woman', 'neighbor2']];
 for (const [id, name, who] of PEOPLE) person(id, name, who, W[`${id}_a`] ?? AWAY[id][0], W[`${id}_d`] ?? AWAY[id][1], W[`${id}_turn`] ?? 180);
 // in the kitchen behind its window (their looks by the beat: `k*_wear`)
-person('k1', 'In the kitchen window', 'silva', L.SEATS.k1[0], L.SEATS.k1[1], L.SEATS.k1[2], { inside: true });
-person('k2', 'In the kitchen window', 'busygin', L.K2_STOVE[0], L.K2_STOVE[1], L.K2_STOVE[2], { inside: true });
-person('k3', 'In the kitchen window', 'vasenka', L.SEATS.k3[0], L.SEATS.k3[1], L.SEATS.k3[2], { inside: true });
-person('k4', 'In the kitchen window', 'busygin_shirt', L.K.end_e[0], L.K.end_e[1], L.K.end_e[2], { inside: true });
+const KIN = { k1: ['silva', L.K.far_r], k2: ['busygin', L.K.stove], k3: ['vasenka', L.K.far_l], k4: ['busygin_shirt', L.K.end_w] };
+for (const [id, [who, p]] of Object.entries(KIN)) person(id, 'In the kitchen window', who, p[0], p[1], p[2], { inside: true });
 
 // the insert: his coat laid on her shoulders (the world's closeups, frame `shawl`; its points shawl#coat, shawl#shoulders)
 add({ id: 'shawl', name: 'Coat on the shoulders', insert: 'shawl' });
@@ -176,8 +174,7 @@ const state = {
   door_f: 180, mak_door_f: 180, nb_door_f: 180,
   // the play's keys (scenes.md): their defaults
   warm: 0.36, frost: 0.25, nina_is: 'none', secret: 0, silva_door: 1, ending: 'late', nina_end: 'gone', nina_for: 0, knocked: '',
-  ...Object.fromEntries(['k1', 'k2', 'k3'].flatMap(k => [[`${k}_a`, L.SEATS[k] ? L.SEATS[k][0] : L.K2_STOVE[0]], [`${k}_d`, L.SEATS[k] ? L.SEATS[k][1] : L.K2_STOVE[1]]])),
-  k2_a: L.K2_STOVE[0], k2_d: L.K2_STOVE[1], k4_a: L.K.end_e[0], k4_d: L.K.end_e[1],
+  ...Object.fromEntries(Object.entries(KIN).flatMap(([k, [, p]]) => [[`${k}_a`, p[0]], [`${k}_d`, p[1]]])),
   ...Object.fromEntries(Object.entries(AWAY).flatMap(([id, p]) => [[`${id}_a`, p[0]], [`${id}_d`, p[1]]])),
   ...W,
 };

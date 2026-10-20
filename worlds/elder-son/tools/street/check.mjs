@@ -82,13 +82,24 @@ function run(name, fn, init, party = {}) {
     for (const id of L.PEOPLE) {
       if (st[`${id}_here`] === false) continue;
       const a = st[`${id}_a`], d = st[`${id}_d`];
-      const inside = id.startsWith('k');
+      const inside = /^k\d$/.test(id);
       const onPorch = a > 24.3 && a < 26.1 && d > 10.9 && d < 12.6;
       const sit = st[`${id}_on`] || (st[`${id}_do`] && st[`${id}_do`].motion === 'seated');
       const tall = TALL[id] ?? 1.72, floor = (inside || onPorch ? 0.45 : 0) + relief(a);
       const top = floor + (sit ? 1.27 * tall / 1.75 : tall), face = top - 0.12;
       const p = proj(a, d, face), f = proj(a, d, floor);
-      r.push(`${id}${st[`${id}_mood`] ? '(' + st[`${id}_mood`] + ')' : ''} x${p.x.toFixed(2)} y${p.y.toFixed(2)} h${(top - floor) / p.depth > 0 ? ((top - floor) / p.depth).toFixed(2) : 'BEHIND'} d${p.depth.toFixed(1)} t${Math.round(st[`${id}_turn`] ?? 0)}`);
+      // f — how the face is turned from the camera: 0 full face, 90 profile, 180 the back
+      const toCam = Math.atan2((st.camera_x || 0) - a, (st.camera_z || 0) - d) * 180 / Math.PI;
+      const fc = Math.round(Math.abs(((((st[`${id}_turn`] ?? 0) - toCam) % 360) + 540) % 360 - 180));
+      const out = p.depth <= 0 || Math.abs(p.x) > 0.667 ? ' OUT' : '';
+      // the people in the kitchen: whether the eye sees their head through the window (else the wall hides them)
+      let seen = '';
+      if (inside) {
+        const cx = st.camera_x || 0, cz = st.camera_z || 0, eye = 1.7 + (st.camera_h || 0) + relief(cx), W = L.KITCHEN_WIN;
+        const k = (W.d - cz) / (d - cz), wa = cx + (a - cx) * k, we = eye + (face - eye) * k;
+        seen = k > 0 && k < 1 && Math.abs(wa - W.a) < W.w / 2 && we > W.sill && we < W.sill + W.h ? ' window' : ' WALL';
+      }
+      r.push(`${id}${st[`${id}_mood`] ? '(' + st[`${id}_mood`] + ')' : ''} x${p.x.toFixed(2)} y${p.y.toFixed(2)} h${(top - floor) / p.depth > 0 ? ((top - floor) / p.depth).toFixed(2) : 'BEHIND'} d${p.depth.toFixed(1)} t${Math.round(st[`${id}_turn`] ?? 0)} f${fc}${out}${seen}`);
     }
     const pts = { kitchen: [22, 12, 1.6], mak_window: [32, 13, 1.7], barrel: [L.BARREL[0], L.BARREL[1], 0.6], shed: [L.SHED.a, L.SHED.d, 1.2], porch: [L.DOOR.a, 10.6, 0.5] };
     for (const [k, w] of Object.entries(POINTS)) pts[k] = [w.a, w.d, w.sill + w.h / 2];

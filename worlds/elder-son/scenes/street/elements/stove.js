@@ -1,5 +1,6 @@
-// The Russian stove against the left wall: whitewashed brick, its iron plate with a kettle, the little fire door with
-// the fire behind it (its glow `fire`). Metres; 1.4 wide along the wall, 2.1 high.
+// The Russian stove against the back wall, right of the table (seen through the window behind the people):
+// whitewashed brick, its iron plate with a kettle, the little fire door with the fire behind it (its glow `fire`).
+// Metres; 1.4 wide, 2.1 high.
 g.fillStyle = '#e4ddcf';
 g.fillRect(-0.7, -2.1, 1.4, 2.12);
 g.fillStyle = '#cfc6b4';
