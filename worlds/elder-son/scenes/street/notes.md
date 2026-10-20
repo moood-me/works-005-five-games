@@ -55,16 +55,16 @@ Seconds — as `check.mjs` plays them (the gait 1.3 m/s; the real gaits may diff
   (the camera following); a cut to the side: both in profile toward her lit window, the kitchen window on the left
   (x −0.4), hers on the right (0.4) — `last_window:corner`.
 - `neighbor` (≈ 30 s): from just behind the two (their backs in the foreground — the device). The door opens,
-  Sarafanov in the hall comes out; the camera turns with him to her window; he stands right of it turned to the glass
-  (profile, ≈ 0.26 of the frame), knocks — `neighbor:knock`; a silhouette — `neighbor:answer` (L09, L10: `sad`, a
-  guilty `smile`); dark; he goes back past the two (two metres before them, not turning his head) through the wicket
+  Sarafanov in the hall comes out; the camera turns with him to her window; a cut near him: he stands right of it
+  turned to the glass (profile, ≈ 0.6 of the frame, in her window's light), knocks — `neighbor:knock`; a silhouette —
+  `neighbor:answer` (L09, L10: `sad`, a guilty `smile`); dark; a cut back behind the two: he goes back past the two (two metres before them, not turning his head) through the wicket
   into his garden and away along the street — out of the frame: `neighbor:gone`; the camera back to the door, Vasenka
   from behind the shed through the back wicket to the porch, behind his father's back; the door — `neighbor:vasya`.
 - `porch` (≈ 14 s, after `neighbor`): Vasenka goes in; the two to the porch (L11, L12 on the way), the camera to the
   porch's side; Silva knocks — `porch:knock`; the light, the door, Vasenka in the doorway — `porch:open`. Faces: Silva
   `smile`, Busygin `thinking` in three quarters. The pose for the choice: `vasenka` (x 0.52) and `kitchen` (0.09).
-- `shut` (≈ 16 s, after `porch`): he goes in, the door shuts, the bulb goes out — `shut:closed`; a cut to the dark
-  under the gate's lamp: both faces to it, Busygin `sad` hugging himself (`cold`), Silva `smile`; a cut back to the
+- `shut` (≈ 16 s, after `porch`): he goes in, the door shuts, the bulb goes out — `shut:closed`; a cut into the front
+  garden, the gate's lamp behind the camera: both faces to it, Busygin `sad` hugging himself (`cold`), Silva `smile`; a cut back to the
   porch's side; Silva knocks — `shut:knock`; the light, the door — `shut:again`.
 - `in` (≈ 12 s, after `porch`/`shut`): all into the house, the door, the light out; the camera before the kitchen
   window: the three come in and take their places — Silva and Vasenka at the table, Busygin at the stove — `in:inside`.
@@ -80,8 +80,8 @@ Seconds — as `check.mjs` plays them (the gait 1.3 m/s; the real gaits may diff
   — `fire:cry`; Silva with his smoking sleeve; the neighbours with buckets out of their door; Busygin out of the
   window and the door to the barrel — `fire:ready`: the pose for “Buckets” (`barrel` x −0.49, `shed` 0.07). The
   neighbours throw by themselves as long as `fire` > 0.03.
-- `after_fire` (≈ 10 s, by a cut): the shed smouldering (`fire` 0.1), steam, by `shed_left`; the half-ring; Silva turns
-  on them — `after_fire:who` (L84, `angry`); a cut to Vasenka close in the shed's glow (`afraid`, the matchbox); back —
+- `after_fire` (≈ 10 s, by a cut): the shed smouldering (`fire` 0.2), steam, by `shed_left`; the half-ring; Silva turns
+  on them — `after_fire:who` (L84, `angry`); a cut to Vasenka close, full face, in the shed's glow (`afraid`, the matchbox); back —
   the pose for the choice: `vasenka` (x −0.21) and `makarskaya` (0.31).
 - `blame` (≈ 10 s, after `after_fire`): Busygin two steps forward — `blame:step`; Silva comes at him (`surprised` →
   `angry`, full face), points; Vasenka's fist into his pocket, not looking at his brother (`sad`, profile).

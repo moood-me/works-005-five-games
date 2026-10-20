@@ -117,7 +117,7 @@ const SPOT = {
   // after the fire: the half-ring before the shed; Vasenka aside in the open wicket of the fence between the yards,
   // Busygin by the fence near him; where Busygin steps to take the blame, where Silva comes at him; where the boy owns
   // up to Makarskaya (Busygin behind him)
-  ring: { makarskaya: [30.3, 9.5], silva: [31.3, 8.7], neighbor1: [28.1, 9.8], neighbor2: [32.2, 9.9] },
+  ring: { makarskaya: [30.3, 9.5], silva: [31.3, 8.7], neighbor1: [28.3, 10.5], neighbor2: [32.2, 9.9] },
   aside: { vasenka: [26.9, 10.4], busygin: [25.8, 9.4] },
   blame: { busygin: [27.3, 9.1], silva: [29.9, 8.85] },
   own: { vasenka: [29.4, 9.6], busygin: [28.6, 9.95], beside: [27.05, 10.95] },
@@ -153,19 +153,22 @@ const CAM = {
   // the same corner from just behind them: first toward the Sarafanovs' door, then to her window
   behind: cam(29.55, 6.85, -34, 0.25),
   behind_win: cam(29.55, 6.85, 20, 0.25),
+  // Sarafanov at her window, near: in profile, her window's light on his face
+  mak: cam(30.9, 10.4, 43, -0.1),
   porch: cam(28.1, 9.4, -72, -0.1),
-  dark: cam(20.6, 7.4, 34, -0.1),
+  // in the front garden toward the porch, the gate's lamp behind: their faces turned to it
+  dark: cam(21.6, 9.6, 67, -0.15),
   // before the kitchen window: the room behind it seen through the glass
   window: cam(21.95, 6.3, 3, 0),
   under: cam(21.6, 6.2, -2, -0.1),
   gate: cam(20.0, 4.6, 0, -0.1),
   ev1: cam(-2, -7, 0, 1),
-  ev2: cam(29.5, -10, 0, 0.6),
+  ev2: cam(30.0, 0.5, -2, 0.4),
   ev3: cam(26.6, 9.0, -30, -0.1),
   fire: cam(28.5, -1.0, -2, 0.4),
   ring: cam(28.6, 3.6, 4, 0.1),
   // the boy close, from before the shed: its smouldering glow on his face
-  vas: cam(29.2, 11.0, 255, -0.15),
+  vas: cam(28.8, 9.4, 290, -0.15),
   choose: cam(28.4, 3.4, 0, 0.1),
   blame: cam(24.9, 7.0, 55, -0.1),
   own: cam(29.85, 6.5, 0, -0.2),
@@ -232,7 +235,7 @@ const FROM = {
   },
   // the fire put out: the shed by `shed_left` (its painting), steam; the people in a half-ring; Vasenka aside
   // (the shed still smoulders a little: its glow on those near it)
-  after_fire: () => ({ ...base(0.9, 0), ...CAM.ring, fire: 0.1, steam: 1, shed_burnt: 1, mak_window: 1, door: 1, porch_light: 1,
+  after_fire: () => ({ ...base(0.9, 0), ...CAM.ring, fire: 0.2, steam: 1, shed_burnt: 1, mak_window: 1, door: 1, porch_light: 1,
     ...KAT('k1', K.far_r, 'sarafanov_home'), ...KAT('k2', K.far_l, 'nina_home'), ...KAT('k3', K.end_e, 'kudimov_in'),
     ...AT('makarskaya', SPOT.ring.makarskaya, 330, { makarskaya_look: 'shed', makarskaya_mood: 'sad' }),
     ...AT('silva', SPOT.ring.silva, 320, { silva_wear: LOOK('silva_burnt'), silva_mood: 'angry', silva_look: 'shed' }),
@@ -361,8 +364,10 @@ function film(scene) {
       await open;
       await s.wait(1.2);
       s.move('door', 0, { over: 1.4 });
+      const near = s.shot({ ...CAM.mak });
       await follow(s, there, CAM.behind_win);
       await there;
+      near.cut();
       await sar.turn(318);
       sar.look('mak_window');
       const knock = sar.do('knock');
@@ -381,6 +386,7 @@ function film(scene) {
       await s.wait(0.8);
       sar.look(null);
       // back along the shed, two metres before the two, not turning his head; through the wicket into his garden and on
+      s.cut({ ...CAM.behind_win });
       const away = sar.walk([[31.9, 11.6], [30.5, 10.85], [28.4, 10.75], [27.4, 10.6], [26.4, 10.25], [24.2, 10.0], [21.6, 9.9], [20.2, 9.3], [19.0, 7.6], [12.0, 6.6]]);
       await s.wait(2.6);
       s.tell('neighbor:gone');
