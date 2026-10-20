@@ -1043,7 +1043,7 @@
       "name": "House",
       "across": 22,
       "distance": -12,
-      "facing": 180,
+      "facing": 0,
       "height": 5.5,
       "box": [
         -4.2,
@@ -1055,6 +1055,7 @@
         {
           "across": 22,
           "distance": -12,
+          "facing": 0,
           "glow": 1,
           "flip": false,
           "scale": 0.9
@@ -1062,6 +1063,7 @@
         {
           "across": 31,
           "distance": -16,
+          "facing": 0,
           "glow": 0,
           "flip": true,
           "scale": 0.98
@@ -1069,34 +1071,39 @@
         {
           "across": 40,
           "distance": -24,
+          "facing": 0,
           "glow": 1,
           "flip": false,
           "scale": 1.06
         },
         {
-          "across": 48,
-          "distance": -14,
+          "across": 45,
+          "distance": -8,
+          "facing": 0,
           "glow": 0,
           "flip": false,
           "scale": 0.9
         },
         {
-          "across": 58.05,
-          "distance": -19.85,
+          "across": 61.95,
+          "distance": -20.2,
+          "facing": 0,
           "glow": 0,
-          "flip": true,
+          "flip": false,
           "scale": 0.98
         },
         {
           "across": 70,
           "distance": -27,
+          "facing": 0,
           "glow": 1,
-          "flip": false,
+          "flip": true,
           "scale": 1.06
         },
         {
           "across": 79,
           "distance": -18,
+          "facing": 0,
           "glow": 0,
           "flip": false,
           "scale": 0.9
@@ -1104,6 +1111,7 @@
         {
           "across": 88,
           "distance": -30,
+          "facing": 0,
           "glow": 0,
           "flip": true,
           "scale": 0.98
@@ -1111,6 +1119,7 @@
         {
           "across": 10,
           "distance": -20,
+          "facing": 0,
           "glow": 0,
           "flip": false,
           "scale": 1.06
@@ -1118,27 +1127,31 @@
         {
           "across": 0,
           "distance": -26,
+          "facing": 0,
           "glow": 1,
-          "flip": false,
+          "flip": true,
           "scale": 0.9
         },
         {
           "across": -12,
           "distance": -18,
+          "facing": 0,
           "glow": 0,
-          "flip": true,
+          "flip": false,
           "scale": 0.98
         },
         {
           "across": -24,
           "distance": -24,
+          "facing": 0,
           "glow": 0,
-          "flip": false,
+          "flip": true,
           "scale": 1.06
         },
         {
           "across": 30,
           "distance": -36,
+          "facing": 0,
           "glow": 1,
           "flip": false,
           "scale": 0.9
@@ -1146,6 +1159,7 @@
         {
           "across": 55,
           "distance": -40,
+          "facing": 0,
           "glow": 0,
           "flip": true,
           "scale": 0.98
@@ -1153,6 +1167,7 @@
         {
           "across": -36,
           "distance": -14,
+          "facing": 0,
           "glow": 1,
           "flip": false,
           "scale": 1.06
@@ -1164,7 +1179,7 @@
       "name": "Fence",
       "across": 18,
       "distance": -8,
-      "facing": 180,
+      "facing": 0,
       "height": 1.2,
       "box": [
         -0.1,
@@ -1175,35 +1190,43 @@
       "copies": [
         {
           "across": 18,
-          "distance": -8
+          "distance": -8,
+          "facing": 0
         },
         {
           "across": 26,
-          "distance": -9.5
+          "distance": -9.5,
+          "facing": 0
         },
         {
           "across": 36,
-          "distance": -18
+          "distance": -18,
+          "facing": 0
         },
         {
           "across": 44,
-          "distance": -10
+          "distance": -10,
+          "facing": 0
         },
         {
           "across": 52,
-          "distance": -16
+          "distance": -16,
+          "facing": 0
         },
         {
           "across": 66,
-          "distance": -22
+          "distance": -22,
+          "facing": 0
         },
         {
           "across": -6,
-          "distance": -14
+          "distance": -14,
+          "facing": 0
         },
         {
           "across": -20,
-          "distance": -20
+          "distance": -20,
+          "facing": 0
         }
       ]
     },
@@ -1257,9 +1280,9 @@
       "name": "The Sarafanovs' window",
       "glows": true,
       "across": 60,
-      "distance": -20.05,
+      "distance": -19.95,
       "elevation": 1.5,
-      "facing": 180,
+      "facing": 0,
       "height": 1,
       "box": [
         -0.6,

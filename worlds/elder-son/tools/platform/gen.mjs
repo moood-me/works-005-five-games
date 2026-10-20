@@ -41,17 +41,19 @@ add({ id: 'booth', name: 'Ticket booth', across: G.BOOTH[0], distance: G.BOOTH[1
   add({ id: 'stairs_side', name: 'Stairs', across: mid, distance: L0.d0 - 0.05, onLand: false, elevation: G.FOOT.low, facing: 180, height: 4.3,
     box: [-4.4, -4.3, 2.4, 0.15], copies: [{ across: mid, distance: L0.d0 - 0.05, elevation: G.FOOT.low }, { across: mid, distance: L0.d1 + 0.05, elevation: G.FOOT.low }] });
 }
-// the settlement below: houses (a few windows lit), gardens' fences, birches; the Sarafanovs' window
+// the settlement below the platform (behind the start: its fronts face back up the slope, facing 0): houses (a few
+// windows lit), gardens' fences, birches; the Sarafanovs' window before its house's front
 const FW = G.FAR_WINDOW;
-const HOUSES = [[22, -12, 1], [31, -16, 0], [40, -24, 1], [48, -14, 0], [FW[0] - 1.95, FW[1] + 0.15, 0], [70, -27, 1], [79, -18, 0], [88, -30, 0],
-  [10, -20, 0], [0, -26, 1], [-12, -18, 0], [-24, -24, 0], [30, -36, 1], [55, -40, 0], [-36, -14, 1]];
-add({ id: 'village', name: 'House', across: HOUSES[0][0], distance: HOUSES[0][1], facing: 180, height: 5.5, box: [-4.2, -5.8, 4.2, 0.15],
-  copies: HOUSES.map(([a, d, lit], i) => ({ across: a, distance: d, glow: lit, flip: i % 3 === 1, scale: 0.9 + 0.08 * (i % 3) })) });
-add({ id: 'gardens', name: 'Fence', across: 18, distance: -8, facing: 180, height: 1.2, box: [-0.1, -1.3, 10.1, 0.2],
-  copies: [[18, -8], [26, -9.5], [36, -18], [44, -10], [52, -16], [66, -22], [-6, -14], [-20, -20]].map(([a, d]) => ({ across: a, distance: d })) });
+// [across, distance, its window lit, mirrored]
+const HOUSES = [[22, -12, 1, 0], [31, -16, 0, 1], [40, -24, 1, 0], [45, -8, 0, 0], [FW[0] + 1.95, FW[1] - 0.2, 0, 0], [70, -27, 1, 1], [79, -18, 0, 0],
+  [88, -30, 0, 1], [10, -20, 0, 0], [0, -26, 1, 1], [-12, -18, 0, 0], [-24, -24, 0, 1], [30, -36, 1, 0], [55, -40, 0, 1], [-36, -14, 1, 0]];
+add({ id: 'village', name: 'House', across: HOUSES[0][0], distance: HOUSES[0][1], facing: 0, height: 5.5, box: [-4.2, -5.8, 4.2, 0.15],
+  copies: HOUSES.map(([a, d, lit, flip], i) => ({ across: a, distance: d, facing: 0, glow: lit, flip: !!flip, scale: 0.9 + 0.08 * (i % 3) })) });
+add({ id: 'gardens', name: 'Fence', across: 18, distance: -8, facing: 0, height: 1.2, box: [-0.1, -1.3, 10.1, 0.2],
+  copies: [[18, -8], [26, -9.5], [36, -18], [44, -10], [52, -16], [66, -22], [-6, -14], [-20, -20]].map(([a, d]) => ({ across: a, distance: d, facing: 0 })) });
 add({ id: 'birches', name: 'Birch', across: 24, distance: 2, height: 9, box: [-3.6, -11.6, 3.6, 0.3],
   copies: [[24, 2, 1, false], [27, -3, 0.85, true], [-30, -2, 1.1, false], [12, -6, 0.9, true], [46, -6, 1, false]].map(([a, d, s, f]) => ({ across: a, distance: d, scale: s, flip: f })) });
-add({ id: 'far_window', name: 'The Sarafanovs\' window', glows: true, across: FW[0], distance: r2(FW[1] - 0.05), elevation: FW[2], facing: 180,
+add({ id: 'far_window', name: 'The Sarafanovs\' window', glows: true, across: FW[0], distance: r2(FW[1] + 0.05), elevation: FW[2], facing: 0,
   height: 1.0, box: [-0.6, -1.05, 0.6, 0.08] });
 add({ id: 'snowfall', name: 'Snow', particles: { kind: 'snow', amount: 'snow', count: 9000, reach: 36 } });
 

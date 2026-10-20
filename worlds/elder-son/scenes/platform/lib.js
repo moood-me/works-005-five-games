@@ -26,7 +26,7 @@ G.trainX = t => G.X0 + (t < 0 ? G.LEFT : G.RIGHT) * t;
 // beyond the stairs on the right
 G.ground = (a, d) => {
   if (d > G.EDGE + 0.05) return G.BED + 0.7 * smooth(span(d, 18, 45));
-  const near = d < 0 ? -8 * smooth(span(-d, 0, 20)) - 0.12 * Math.max(0, -d - 20) : 0;
+  const near = d < G.PLAT.d0 ? -8 * smooth(span(G.PLAT.d0 - d, 0, 22)) - 0.12 * Math.max(0, G.PLAT.d0 - d - 22) : 0;
   const right = -3.4 * smooth(span(a, 15.5, 17.6)) * (1 - 0.6 * smooth(span(d, 6.5, 10.2)));
   return Math.min(near, right);
 };
@@ -56,19 +56,19 @@ const P = {
   WAIT: [11.5, 8.5], WAIT_RUN: [13.4, 7.4], AT_DOOR: [DOOR, 9.85], DOOR_GIVE: [11.0, 9.35],
   SAR: [14.5, 7.0], VAS: [15.4, 6.2], NINA_AHEAD: [13.6, 7.8], NINA_BEHIND: [15.6, 7.6], FRONT: [14.0, 7.0],
   FOOT_SAR: [20.6, 6.9], FOOT_VAS: [21.3, 6.2], FOOT_NA: [20.2, 7.7], FOOT_NB: [21.8, 7.5],
-  WATCH: [14.3, 7.2], DAWN_V: [-2.0, 8.0], DAWN_DOOR: [BACK_DOOR, 9.85],
+  WATCH: [14.3, 7.2], AHEAD: [2, 3, 1.1], DAWN_V: [-2.0, 8.0], DAWN_DOOR: [BACK_DOOR, 9.85],
 };
 const brg = (a, b) => ((Math.atan2(b[0] - a[0], b[1] - a[1]) * 180) / Math.PI + 360) % 360;
 const cam = (x, z, yaw, h = 0, look = 0) => ({ camera_on: null, camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: 0, camera_look: look });
 const CAM = {
   stairs: cam(6, 1, 55),                 // along the platform to the right: the stairs
   gone: cam(6, 1, -60),                  // the two under the lamp, the train's tail far left
-  stand: cam(1.6, 5.6, -64, -0.1),       // the two under the lamp from the right, a medium shot in three quarters
+  stand: cam(1.6, 5.5, -57, -0.1),       // the two under the lamp from the right, a medium shot in three quarters
   bench0: cam(-6.5, 3.2, 62),            // the bench with Vasenka, the stairs far right
   bench: cam(1.0, 5.7, -62, -0.45),      // the two on the bench in three quarters, the lamp over them
   strap: cam(-6.2, 5.4, 52, -0.1),       // they stand before the train's open door
   A: cam(7, 4, 45),                      // from the near edge slantwise right: the door, he, the stairs' top
-  B: cam(3, 7.5, 90),                    // along the platform right: the door, he, the window far below
+  B: cam(3, 7.5, 90, 0.6),               // along the platform right, a little high: the door, he, the window far below
   glass: { camera_on: 'train', camera_target: null, camera_x: EYE.x, camera_z: EYE.z, camera_yaw: EYE.yaw, camera_h: EYE.h, camera_pitch: 0, camera_look: 0 },
   dawn: cam(-9.5, 6.4, 78, -0.2),        // side-on along the platform: the bench, the train's door beyond it
 };
@@ -200,7 +200,7 @@ function film(scene) {
         s.move('camera_z', CAM.stand.camera_z, { over: 4, ease: 'inOut' });
         s.move('camera_yaw', CAM.stand.camera_yaw, { over: 4, ease: 'inOut' });
         s.move('camera_h', CAM.stand.camera_h, { over: 4, ease: 'inOut' });
-        await b.walk([[-0.1, 6.55]]);
+        await b.walk([[0.3, 6.95]]);
         await s.all(b.turn(140), sv.turn(100));
         b.mood('tired');
         sv.mood('smile');
@@ -228,6 +228,7 @@ function film(scene) {
         await b.walk([P.TOP_B, [6, 7.0], [-0.6, 7.2]]);
         b.look('vasenka');
         await sit(b, P.SEAT_B, 'seated');
+        b.look(P.AHEAD);
         s.tell('bench:sit');
         await s.wait(5.5);
       },
@@ -282,7 +283,7 @@ function film(scene) {
         v.mood(torn ? 'sad' : 'angry');
         await b.walk([[-1.0, 8.4]]);
         await sit(b, P.SEAT_B, 'seated');
-        b.look('vasenka');
+        b.look(P.AHEAD);
         s.tell('bench_back:sat');
         await s.wait(3.6);
         v.look('busygin');
@@ -330,6 +331,7 @@ function film(scene) {
           // no one: along the platform to the window far below
           s.move('camera_x', CAM.B.camera_x, { over: 3, ease: 'inOut' });
           s.move('camera_z', CAM.B.camera_z, { over: 3, ease: 'inOut' });
+          s.move('camera_h', CAM.B.camera_h, { over: 3, ease: 'inOut' });
           await s.move('camera_yaw', CAM.B.camera_yaw, { over: 3, ease: 'inOut' });
           b.look('far_window');
           s.tell('last:came');

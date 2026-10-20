@@ -20,7 +20,7 @@ the beats in node and prints where the people and the points stand in the frame.
   reach 8). Who comes, comes up it from below.
 - Before the platform and beyond the stairs the land falls to the settlement, 8 m lower at distance −20: houses
   (`village`, copies, a few windows lit), gardens' fences, birches, the trodden path; the Sarafanovs' window
-  (`far_window`, “The Sarafanovs' window”, glows, brighter by `warm`) at (60, −20.05) — seen in the shot “B” of `last`
+  (`far_window`, “The Sarafanovs' window”, glows, brighter by `warm`) at (60, −19.95), before its house — seen in the shot “B” of `last`
   and from the car in `away`.
 - The electric train (`trains`): `train` — its place (unseen, by `train_x`; the script: `G.trainX(train)`: −1 → 100 m
   left, 0 — standing, its anchor at −8, the second car's front doorway at 10, its rear one at −6; 1 → 250 m right),
