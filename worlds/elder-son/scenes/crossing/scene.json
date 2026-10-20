@@ -1,6 +1,6 @@
 {
   "engine": 3,
-  "title": "The Crossing (opus)",
+  "title": "The Crossing",
   "caption": "The level crossing beyond the settlement. Growing dark.",
   "horizon": 0.45,
   "camera": {
@@ -8,6 +8,7 @@
   },
   "modules": [
     "cast",
+    "beats",
     "trains"
   ],
   "light": {
@@ -77,9 +78,9 @@
       "id": "headlight",
       "of": "freight#light",
       "color": "#fff0d0",
-      "strength": 3,
+      "strength": 2.2,
       "reach": 60,
-      "glow": 2.5
+      "glow": 2
     }
   ],
   "state": {
@@ -92,14 +93,18 @@
     "freight": 0.04,
     "freight_x": 251.5,
     "snow": 0.4,
+    "camera_x": -0.55,
+    "camera_z": 1.9,
     "nina_a": -1.85,
     "nina_d": 5.1,
     "busygin_a": -1.05,
     "busygin_d": 4.85,
-    "nina_turn": 352,
-    "busygin_turn": 8,
-    "nina_look": "freight#light",
+    "nina_turn": 98,
+    "busygin_turn": 135,
+    "nina_look": "busygin",
     "busygin_look": "nina",
+    "nina_mood": "thinking",
+    "busygin_mood": "afraid",
     "freight_a": 81.18,
     "freight_d": 208.19,
     "freight_f": 110.34,
@@ -178,7 +183,7 @@
     },
     "beat_next": {
       "type": "string",
-      "means": "which beat comes next (the scene's camera is still — no cuts, the key is taken)"
+      "means": "which beat comes next : the scene makes its first frame ready"
     },
     "barrier": {
       "range": [
@@ -1044,7 +1049,7 @@
       "person": {
         "cast": "cast",
         "who": "nina",
-        "turn": 352
+        "turn": 98
       },
       "across": -1.85,
       "distance": 5.1,
@@ -1060,7 +1065,7 @@
       "person": {
         "cast": "cast",
         "who": "busygin",
-        "turn": 8
+        "turn": 135
       },
       "across": -1.05,
       "distance": 4.85,

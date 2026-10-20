@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 const DIR = 'scenes/hillside';
 mkdirSync(`${DIR}/elements`, { recursive: true });
 const L = new Function('anim', 'kit', readFileSync(`${DIR}/lib.js`, 'utf8'))({}, {});
+const C = L.CLUB;
 const r2 = v => Math.round(v * 100) / 100;
 const file = (id, text) => writeFileSync(`${DIR}/elements/${id}.js`, text);
 const objects = [];
@@ -33,6 +34,7 @@ for (let a = L.GATE - 7.2; a > -26; a -= 6) runs.push({ across: r2(a), distance:
 for (let a = L.GATE + 1.2; a < 42; a += 6) runs.push({ across: r2(a), distance: L.FENCE_D });
 add({ id: 'fence', name: 'Fence', across: runs[0].across, distance: L.FENCE_D, facing: 180, height: 1.3, box: [-0.1, -1.5, 6.1, 0.2], copies: runs });
 file('fence', `e.kit.houses.fence(g, e, 6, 1.25);\n`);
+add({ id: 'gate_lamp', name: 'Gate lamp', across: 10.2, distance: 6.2, height: 3.3, box: [-0.4, -3.5, 1.0, 0.1] });
 add({ id: 'gate', name: 'Gate', across: L.GATE, distance: L.FENCE_D, facing: 180, height: 2.6, box: [-1.6, -2.75, 1.6, 0.2], shadow: true });
 
 // the thick birch by the fence (Nina hides behind it); birches on the slope
@@ -66,6 +68,27 @@ add({ id: 'stars', name: 'Monuments', across: stars[0].across, distance: stars[0
 add({ id: 'grave', name: 'Grave', across: L.GRAVE[0], distance: L.GRAVE[1], facing: 180, height: 1.6, box: [-1.5, -1.7, 1.5, 0.2] });
 add({ id: 'case_snow', name: 'Case', across: L.SPOT.caseAt[0], distance: L.SPOT.caseAt[1], facing: 160, height: 0.15, box: [-0.4, -0.2, 0.4, 0.05] });
 
+// the railwaymen's club by the road, at the end of the way of “Following”: a log house, its windows lit, the porch with a
+// lamp, a door that opens (`club_door`) on a warm hall, a sign over it (its parts: elements/club_*.js)
+const PL = 0.45, WALL = 2.7, RISE = 2, DEEP = 6, WALL_TOP = PL + WALL;
+const doorX = C.door - C.a;
+add({ id: 'club', name: 'Club', unseen: true, across: C.a, distance: C.d, facing: 180 });
+add({ id: 'club_wall', name: "The railwaymen's club", on: 'club', facing: 180, height: WALL_TOP, box: [-C.w / 2 - 0.5, -WALL_TOP - 0.5, C.w / 2 + 0.5, 0.15] });
+add({ id: 'club_roof', name: 'Roof', plane: true, on: 'club', across: 0, distance: 1.28, elevation: 4.15, width: C.w + 1, depth: 3.99, tilt: 30.1 });
+for (const side of [-1, 1]) {
+  add({ id: `club_end${side < 0 ? 'l' : 'r'}`, name: 'Club', on: 'club', across: (side * C.w) / 2, distance: DEEP / 2, facing: side < 0 ? 270 : 90, height: WALL_TOP + RISE, box: [-DEEP / 2 - 0.6, -WALL_TOP - RISE - 0.4, DEEP / 2 + 0.6, 0.15] });
+}
+for (const [i, x] of [-4.3, 0.7, 3.1].entries()) {
+  add({ id: `club_win${i + 1}`, name: 'Club window', on: 'club', across: x, distance: 0.05, elevation: 1.1, facing: 180, glows: true, height: 1.2, box: [-0.61, -1.26, 0.61, 0.06] });
+}
+add({ id: 'club_door', name: 'Club door', on: 'club', across: doorX - 0.55, distance: 0.03, elevation: PL, facing: 180, place: { facing: 'club_door_f' }, height: 2.1, box: [-0.05, -2.15, 1.15, 0.05], shadow: true });
+add({ id: 'club_hall', name: 'Club hall', on: 'club', across: doorX, distance: 0.9, elevation: PL, facing: 180, glows: true, height: 2.4, box: [-1.3, -2.45, 1.3, 0.05] });
+add({ id: 'club_sign', name: 'Sign', on: 'club', across: doorX, distance: 0.04, elevation: PL + 2.1 + 0.25, facing: 180, height: 0.5, box: [-2, -1.3, 2, 0.1] });
+// the porch: steps up from the road (their foot is the end of the road's way), the landing before the door, a lamp
+add({ id: 'club_steps', name: 'Steps', plane: true, walk: true, across: C.door, distance: 7.25, elevation: 0.225, width: 1.5, depth: 1.38, tilt: 19.1 });
+add({ id: 'club_landing', name: 'Porch', plane: true, walk: true, across: C.door, distance: 8.45, elevation: PL, width: 2.4, depth: 1.1 });
+add({ id: 'club_lamp', name: 'Club lamp', across: C.door + 1.5, distance: 7.8, elevation: PL, height: 3.2, box: [-0.4, -3.4, 1.0, 0.1] });
+
 // the people: the two by the fence, the funeral
 const person = (id, name, who, a, d, turn) => add({ id, name, person: { cast: 'cast', who, turn }, across: a, distance: d,
   place: { across: `${id}_a`, distance: `${id}_d` }, shadow: true });
@@ -76,46 +99,62 @@ person('sarafanov', 'Sarafanov', 'sarafanov_funeral', F.sarafanov[0], F.sarafano
 for (const id of ['band1', 'band2', 'band3', 'mourner1', 'mourner2', 'mourner3', 'mourner4']) person(id, { band1: 'Trumpeter', band2: 'Tuba player', band3: 'Drummer' }[id] || 'Mourner', id, F[id][0], F[id][1], F[id][2]);
 
 // the state: the end of `road` — they stand at the fence, the funeral up on the slope (the first sight)
-const E = L.END.road;
-const state = { hour: 0.74, dusk: 0, beat: null, beat_next: null, case_down: 1, camera_x: E.camera_x, camera_z: E.camera_z, camera_yaw: E.camera_yaw, camera_h: E.camera_h };
-for (const id of ['nina', 'busygin', 'sarafanov', 'band1', 'band2', 'band3', 'mourner1', 'mourner2', 'mourner3', 'mourner4']) {
+const E = L.END.road();
+const state = { hour: 0.74, dusk: 0, beat: null, beat_next: null, case_down: 1, camera_x: E.camera_x, camera_z: E.camera_z, camera_yaw: E.camera_yaw, camera_h: E.camera_h,
+  down: 0, down_at: 0, catch: 0, fall: 0, sar_go: 0, sar_at: 0, follow: 0, follow_at: 0, hold: 0, duck: 0, club_door: 0, club_door_f: 180, snowy: 0, seen: 0 };
+for (const id of L.PEOPLE) {
   state[`${id}_a`] = E[`${id}_a`];
   state[`${id}_d`] = E[`${id}_d`];
   state[`${id}_turn`] = E[`${id}_turn`];
+  if (E[`${id}_look`]) state[`${id}_look`] = E[`${id}_look`];
+  if (E[`${id}_mood`]) state[`${id}_mood`] = E[`${id}_mood`];
 }
-state.nina_look = 'sarafanov';
-state.busygin_look = 'band2';
 const num = means => ({ type: 'number', means });
 const states = {
   hour: { range: [0, 1], smooth: true, means: 'time: 0.74 dusk … 0.8 almost dark (the script sets dusk)' },
   dusk: { range: [0, 1], smooth: true, means: 'the weight of the look “darkening” — the script sets it by hour' },
-  beat: { values: [null, 'road', 'march', 'alone', 'meet', 'hide'], means: 'the film\'s beat: the game sets a name — the beat plays from its beginning' },
+  beat: { values: [null, 'road', 'march', 'alone', 'meet', 'bottom', 'hide', 'club'], means: 'the film\'s beat: the game sets a name — the beat plays from its beginning' },
   beat_next: { type: 'string', means: 'which beat comes next: the scene makes its first frame ready' },
   case_down: { values: [0, 1], means: 'the clarinet case lies on the snow by the grave (1) or is in Sarafanov\'s hand (0) — a beat sets it' },
-  ...Object.fromEntries(['nina', 'busygin', 'sarafanov', 'band1', 'band2', 'band3', 'mourner1', 'mourner2', 'mourner3', 'mourner4']
+  down: { range: [0, 1], means: '“Arm in Arm”: where the game wants the pair on the iced path (0 the grave, 1 the gate); they go while it is ahead of down_at' },
+  down_at: { range: [0, 1], means: 'where the pair are on the path now — the scene sets it, ten times a second' },
+  catch: { values: [0, 1], means: '1 — Busygin caught his father on the ice: both hands on him' },
+  fall: { values: [0, 1], means: '1 — the old man sat down in the snow; 0 — he gets up' },
+  sar_go: { values: [0, 1], means: '1 — the old man walks along the road to the club by himself, looking back at 0.25, 0.5, 0.75' },
+  sar_at: { range: [0, 1], means: "where the old man is along the road (0 the gate, 1 the club's steps) — the scene sets it" },
+  follow: { range: [0, 1], means: '“Following”: where the game wants Nina and Busygin on the road; they go while it is ahead of follow_at' },
+  follow_at: { range: [0, 1], means: 'where Nina and Busygin are on the road now — the scene sets it' },
+  hold: { values: [0, 1], means: '1 — the two are walking just now (the game sets it; the old man looks back at it)' },
+  duck: { values: [0, 1], means: '1 — Nina and Busygin crouch; 0 — they stand up' },
+  club_door: { range: [0, 1], smooth: true, means: "the club's door: 0 shut, 1 open on the warm hall" },
+  club_door_f: { type: 'number', means: "the door leaf's facing — the script sets it by club_door" },
+  snowy: { values: [0, 1], means: "1 — snow on the old man's coat: he fell on the ice (the game sets it before bottom)" },
+  seen: { values: [0, 1], means: '1 — he all but saw them on the road (the game sets it before `club`)' },
+  ...Object.fromEntries(L.PEOPLE
     .flatMap(p => [[`${p}_a`, num(`where ${p} is: metres to the right`)], [`${p}_d`, num(`where ${p} is: metres up the slope`)]])),
 };
 
 const scene = {
   engine: 3,
-  title: 'The Hillside (Opus)',
+  title: 'The Hillside',
   caption: 'The cemetery on the hillside beyond the settlement. Dusk.',
   horizon: 0.62,
   // roam: some shots turn aside and look up the slope; a roaming camera's sky goes all round
-  camera: { mode: 'roam', area: [-30, 40, -4, 30] },
-  modules: ['cast', 'houses'],
+  camera: { mode: 'roam', area: [-30, 70, -4, 30] },
+  modules: ['cast', 'beats', 'houses'],
   light: {
     tint: '#8f86b0', tintStrength: 0.1, vignette: 0.45, grain: 0.2,
     haze: 0.16, hazeColor: '#6f6886', hazeGlow: 0.5, shafts: 0,
-    brightness: 1.08, saturation: 0.86, ambient: 0.62, ambientColor: '#aaa6c6', bounce: 0.5,
+    brightness: 1.16, saturation: 0.86, ambient: 0.7, ambientColor: '#aaa6c6', bounce: 0.5,
     wind: [1, 0.2, 0.3],
     looks: {
-      dusk: { ambient: 0.46, ambientColor: '#8c8ab8', hazeColor: '#4e4a68', tintStrength: 0.14, lights: { sunset: 0.5 } },
+      dusk: { ambient: 0.56, ambientColor: '#8c8ab8', hazeColor: '#4e4a68', tintStrength: 0.14, lights: { sunset: 0.5 } },
     },
   },
   lights: [
     { id: 'sunset', from: [-62, 4], color: '#e6a487', strength: 0.75 },
     { id: 'sky_light', from: [10, 50], color: '#a8b0d6', strength: 0.35 },
+    { id: 'club_spill', across: C.door, distance: 8.9, elevation: 1.4, color: '#e8963a', strength: 1.8, reach: 10, on: 'club_door' },
   ],
   state,
   states,

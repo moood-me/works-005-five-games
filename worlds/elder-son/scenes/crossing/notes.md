@@ -1,9 +1,9 @@
-# The Crossing (opus)
+# The Crossing
 
 Chapter III of “The Elder Son”: the level crossing beyond the settlement, growing dark. Engine 3, the camera `picture`
-(still — no cuts, `beat_next` is taken and changes nothing). Modules: `cast` (Nina, Busygin), `trains` (the freight).
-`scene.json` and `elements/freight.js`, `car1…car15.js` are written by the generator `tools/crossing/gen.mjs` from
-`lib.js` (the track, the train): change `lib.js` and run it.
+(still: the shots are its dolly along the view and aside, `camera_x`, `camera_z`). Modules: `cast` (Nina, Busygin), `beats`,
+`trains` (the freight). `scene.json` and `elements/freight.js`, `car1…car15.js` are written by the generator
+`tools/crossing/gen.mjs` from `lib.js` (the track, the train): change `lib.js` and run it.
 
 ## How it is made
 
@@ -17,7 +17,7 @@ Chapter III of “The Elder Son”: the level crossing beyond the settlement, gr
   under snow, a flatcar with logs). Each is a card along the track, its place and turn — the keys `<id>_a/_d/_f`; the
   script sets them by `freight` (`places(f)`), every frame while `freight` moves. `freight` → the nose: 0 — in the wood,
   0.04 — the headlight on the curve at 200 m (x ≈ 0.72 of the frame), 0.1 — the nose on the crossing, 0.9 — the tail on
-  the crossing, 1 — gone to the left. The beats move `freight` at a steady 23 m/s (the start from the headlight — `in`,
+  the crossing, 1 — gone to the left. The beats move `freight` at a steady 27 m/s (the start from the headlight — `in`,
   30 % longer).
 - **The keeper's booth** on the right (`booth` — an unseen anchor, `booth_front`, `booth_side`, the warm window
   `booth_window` — the only warm light, `booth_lamp`), smoke from its chimney.
@@ -27,40 +27,45 @@ Chapter III of “The Elder Son”: the level crossing beyond the settlement, gr
 - The sky: dusk, the night — a layer over it by `night` (the script sets `night` by `hour`), stars. The far forest, the
   spruce wood, the settlement's lights on the left beyond the field, poles along the line, weeds by the road (the wind),
   snow.
-- The people — figures in the style `winter` (from `shadow`, `rim`, no faces): Busygin — tall, a long grey coat, a light
-  scarf, no hat; Nina — a coat with a fur collar, a plait. They stand by the barrier at ≈ 5 m, seen from behind: ≈ 0.36
-  of the frame's height.
+- **The people** — Nina and Busygin of the world's cast, the face `simple`, the expression `<id>_mood`. They stand at the
+  barrier turned to the right and a little toward us (`SPOT`, `TURN`): the booth's window and the signal's red on their
+  faces, the headlight ahead of them; Nina's face at three quarters, Busygin's turned to her in profile.
+- **The shots** (`CAM`): wide (the start: the road, the barrier, the booth, the light on the curve), medium (`camera_z` 1.9:
+  both ≈ 0.55 of the frame, the pose of the choice — `nina`, `freight#light`, `barrier` in the middle 4:3), close on Nina
+  (`camera_z` 3.15, in `truth` when she turns to him). They are the camera's moves over seconds, not cuts.
 
-## Beats (`lib.js`, `film`; the script plays them by the key `beat`, the showcase — `showcase.js`)
+## Beats (`lib.film()`, played by the world's `beats`)
 
-- `wait` (≈ 22 s, from a cut): the dusk darkens (`hour` 0.78 → 0.82); they come along the road from beyond the lower
-  left edge; the bell, the lights, the barrier comes down; they stop; out of the spruce wood comes the headlight and
-  stops on the curve — `wait:light`; Nina looks at the headlight, Busygin then at her. The pose for the choice: `nina`,
-  `freight#light`, `barrier` in the middle 4:3.
-- `truth` (≈ 30 s, after `wait`): he turns to her — `truth:said`; the freight comes up; when the cars are before them
-  she turns away to them; the tail has passed, the lights are out, the barrier has gone up — `truth:passed`; she turns
-  to him; she crosses the tracks first, he after her.
-- `roar` (≈ 30 s, after `wait`): the freight comes up; the cars before them — `roar:loud` — he turns to her; she steps
-  to him (no lean: there is no motion `lean` — a step and a turn of the head), a nod (`look` down and back); the tail
-  has passed, the barrier has gone up — `roar:passed`; they cross side by side.
-- `brother` (≈ 32 s, after `wait`): he turns to her; she takes his hand — her right to his left (`reach`; she stands on
-  his left, so not `hand_r` as in scenes.md) — `brother:arm`; the freight goes by; the barrier has gone up —
-  `brother:passed`; they cross hand in hand.
+- `wait` (≈ 19 s, from a cut to the wide shot): the dusk darkens (`hour` 0.78 → 0.82); they come along the road from
+  beyond the lower left edge; the bell, the lights, the barrier comes down; they stop and turn to the right, the camera
+  comes to the medium shot (Nina `thinking`, Busygin `afraid`); out of the spruce wood the headlight comes and stops on the
+  curve — `wait:light`; Busygin looks at her, then she turns to him, her face straight to him.
+- `truth` (≈ 33 s, after `wait`): he turns to her — `truth:said`; the freight comes up; she turns away to the cars (**her
+  back — a named device**); the tail has passed, the lights are out, the barrier has gone up — `truth:passed`; she turns to him
+  (the close shot, Nina `sad`); she crosses the tracks first, he after her.
+- `roar` (≈ 27 s, after `wait`): the freight comes up; the cars before them — `roar:loud` — he turns to her; she steps to him
+  and leans (`lean`; Nina `surprised`, Busygin `sad`), a nod (`look` down and back); the tail has passed, the barrier has gone
+  up — `roar:passed`; they cross side by side.
+- `brother` (≈ 34 s, after `wait`): he turns to her; she takes his hand — her right to his left (`reach`; their backs to
+  us, both to the cars) — `brother:arm`; the freight goes by; the barrier has gone up — `brother:passed`; they turn to us
+  hand in hand (Nina `smile`, Busygin `tired`, her left to his right), then cross the tracks.
 - A beat after `wait` opened not after `wait` begins with a cut to the end of `wait` (`WAIT_END`).
+- The freight's passing alone is ≈ 20 s (480 m at 27 m/s) and the barrier's rise: `truth` and `brother` come out a little
+  over 30 s.
 
-## What is wrong / open
+## What is not as wanted
 
-- No lean of Nina's (`lean`) — no such motion; three motions from the model were not made.
-- The module `beats` of “Around the World v3” is not taken: the film is `lib.js`'s functions, the script plays a beat by
-  `beat`. No cuts — one camera.
+- `lean` is a weak motion (a lean with a hand at the head). The brief's “Nina leans to him” is that.
+- The headlight of the locomotive floods the frame as it passes before the camera (the loco's light is the scene's
+  `headlight`, strength 2.2).
 
 ## Contract for the check
 
 ```json
-{"beats": {"wait": {"after": [], "tells": ["wait:light"], "seconds": 22, "show": false},
- "truth": {"after": ["wait"], "tells": ["truth:said", "truth:passed"], "seconds": 30, "show": false},
- "roar": {"after": ["wait"], "tells": ["roar:loud", "roar:passed"], "seconds": 30, "show": false},
- "brother": {"after": ["wait"], "tells": ["brother:arm", "brother:passed"], "seconds": 32, "show": false}},
+{"beats": {"wait": {"after": [], "tells": ["wait:light"], "seconds": 19, "show": false},
+ "truth": {"after": ["wait"], "tells": ["truth:said", "truth:passed"], "seconds": 33, "show": false},
+ "roar": {"after": ["wait"], "tells": ["roar:loud", "roar:passed"], "seconds": 27, "show": false},
+ "brother": {"after": ["wait"], "tells": ["brother:arm", "brother:passed"], "seconds": 34, "show": false}},
  "points": ["nina", "busygin", "freight#light", "barrier"],
  "offers": ["nina", "freight#light", "barrier"],
  "party": {},
