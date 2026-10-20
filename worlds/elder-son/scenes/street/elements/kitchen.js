@@ -40,5 +40,6 @@ g.fillRect(-w / 2, -h * 0.66, w, 0.04);
 g.strokeStyle = '#e9e2d4';
 g.lineWidth = 0.05;
 g.strokeRect(-w / 2 + 0.025, -h + 0.025, w - 0.05, h - 0.05);
-e.light(0, -h * 0.45, 0.8, '#e8963a', 0.55 + 0.45 * warm, 'glow');
+// (the glow at the sill, small: a bloom over the glass would hide the room behind it)
+e.light(0, 0.02, 0.3, '#e8963a', 0.55 + 0.45 * warm, 'glow');
 e.at(0, -h * 0.5);

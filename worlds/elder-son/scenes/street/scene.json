@@ -27,11 +27,11 @@
     "hazeColor": "#323b5c",
     "hazeGlow": 0.9,
     "shafts": 0,
-    "brightness": 1.1,
+    "brightness": 1.15,
     "saturation": 0.85,
-    "ambient": 0.5,
-    "ambientColor": "#8796c8",
-    "bounce": 0.5,
+    "ambient": 0.62,
+    "ambientColor": "#8f9ece",
+    "bounce": 0.55,
     "inside": 0.2,
     "wind": [
       0.6,
@@ -40,8 +40,8 @@
     ],
     "looks": {
       "late": {
-        "ambient": 0.4,
-        "ambientColor": "#7686bc",
+        "ambient": 0.52,
+        "ambientColor": "#7f8fc4",
         "hazeColor": "#262e4a",
         "tintStrength": 0.15
       }
@@ -132,6 +132,15 @@
       "glow": 2
     },
     {
+      "id": "embers_l",
+      "of": "shed#fire",
+      "color": "#ff7a30",
+      "strength": 1.8,
+      "reach": 7,
+      "on": "embers",
+      "flicker": 0.4
+    },
+    {
       "id": "mak_hall_l",
       "across": 36.9,
       "distance": 13.5,
@@ -193,6 +202,7 @@
   ],
   "state": {
     "late": 0,
+    "embers": 0,
     "beat": null,
     "beat_next": null,
     "knock": 0,
@@ -711,6 +721,14 @@
       ],
       "smooth": true,
       "means": "the fire in the shed: light in its little window, tongues under the roof, smoke, orange light on the snow (the game moves it in “Buckets”)"
+    },
+    "embers": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the shed smouldering after the fire: the glow in its window and a dim orange light, no flames"
     },
     "steam": {
       "range": [
