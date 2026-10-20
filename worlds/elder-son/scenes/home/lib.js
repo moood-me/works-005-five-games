@@ -1372,9 +1372,9 @@ function roomWall(g, e, w, h) {
   g.fillStyle = '#a39479';
   g.fillRect(-w / 2, top, w, -top + 0.02);
   g.fillStyle = 'rgba(70,58,44,0.35)';
-  for (let x = -w / 2 + 0.1; x < w / 2; x += 0.22) for (let y = top + 0.12; y < -0.2; y += 0.26) {
+  for (let y = top + 0.12, row = 0; y < -0.2; y += 0.26, row++) for (let x = -w / 2 + 0.1 + (row % 2) * 0.11; x < w / 2 - 0.03; x += 0.22) {
     g.beginPath();
-    g.arc(x + ((Math.round(y * 100) % 2) ? 0.11 : 0), y, 0.025, 0, Math.PI * 2);
+    g.arc(x, y, 0.025, 0, Math.PI * 2);
     g.fill();
   }
   if (!h) {

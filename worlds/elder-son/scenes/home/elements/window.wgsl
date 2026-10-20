@@ -1,5 +1,5 @@
-// The hole rubbed in the frost (`hole` 0…1, the uniform hole): a round clearing about the point `pane` (lib PANE,
-// HOLE_R), its rim a little whiter where the frost was pushed aside, the glass clear inside it; none at 0.
+// The hole rubbed in the frost (`hole` 0…1, given as u_hole): a round clearing about the point `pane` (lib PANE;
+// its radius 0.2·hole), its rim a little whiter where the frost was pushed aside, the glass clear inside it; none at 0.
 fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   let d = length((at - vec2f(0.3, -0.48)) / vec2f(1.0, 1.1));
   let r = u_hole * 0.2;

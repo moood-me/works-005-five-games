@@ -85,8 +85,8 @@ add({ id: 'stove', name: 'Stove', inside: true, across: A(L.STOVE.front), distan
     copies: [{ across: A(T.x0), distance: cz, facing: 270 }, { across: A(T.x1), distance: cz, facing: 90 }] });
   // what stands on the oilcloth (each where its key puts it; the flat things are the table's own painting)
   const on = ([x, z], o) => add({ inside: true, across: A(x), distance: z, elevation: top, ...o });
-  on(L.ON.glass_b, { id: 'glass_b', name: 'Glass', height: 0.12, box: [-0.07, -0.13, 0.07, 0.01] });
-  on(L.ON.glass_s, { id: 'glass_s', name: 'Glass', height: 0.12, box: [-0.07, -0.13, 0.07, 0.01] });
+  on(L.ON.glass_b, { id: 'glass_b', name: 'Glass', height: 0.12, box: [-0.07, -0.17, 0.08, 0.01] });
+  on(L.ON.glass_s, { id: 'glass_s', name: 'Glass', height: 0.12, box: [-0.07, -0.17, 0.08, 0.01] });
   on([(L.ON.kettle[0] + L.ON.kettle_pushed[0]) / 2, (L.ON.kettle[1] + L.ON.kettle_pushed[1]) / 2], { id: 'kettle', name: 'Kettle', height: 0.24,
     box: [-0.3, -0.28, 0.4, 0.01] });
   on(L.ON.bread, { id: 'bread', name: 'Bread bin', height: 0.18, box: [-0.2, -0.2, 0.2, 0.01] });
@@ -98,13 +98,13 @@ add({ id: 'stove', name: 'Stove', inside: true, across: A(L.STOVE.front), distan
 add({ id: 'lampshade', name: 'Lampshade', inside: true, glows: true, across: A(L.LAMP[0]), distance: L.LAMP[1], elevation: L.SHADE, height: 0.34,
   box: [-0.8, -0.46, 0.8, 0] });
 add({ id: 'lamp_cord', name: 'Lampshade', inside: true, across: A(L.LAMP[0]), distance: L.LAMP[1], elevation: L.SHADE + 0.3, height: H - L.SHADE - 0.3,
-  box: [-0.03, -(H - L.SHADE - 0.3) - 0.02, 0.03, 0.02] });
+  box: [-0.05, -(H - L.SHADE - 0.3) - 0.03, 0.05, 0.03] });
 add({ id: 'chairs', name: 'Chair', inside: true, across: A(L.SEATS.L1[0]), distance: L.SEATS.L1[1], facing: 180, height: 0.95, box: [-0.3, -1.0, 0.3, 0.03],
   copies: Object.values(L.SEATS).map(([x, z, turn]) => ({ across: A(x), distance: z, facing: 180, flip: turn === 270 })) });
 add({ id: 'chair_backs', name: 'Chair', inside: true, across: A(L.SEATS.L1[0] - L.CHAIR_BACK), distance: L.SEATS.L1[1], facing: 90, height: 0.95,
   box: [-0.24, -1.0, 0.24, 0.03],
   copies: Object.values(L.SEATS).map(([x, z, turn]) => ({ across: A(turn === 90 ? x - L.CHAIR_BACK : x + L.CHAIR_BACK), distance: z, facing: turn === 90 ? 90 : 270 })) });
-add({ id: 'clock', name: 'Clock', inside: true, across: -2 + 0.03, distance: L.CLOCK.z, elevation: L.CLOCK.face - 0.74, facing: 90, height: 0.9, box: [-0.2, -0.95, 0.2, 0.05] });
+add({ id: 'clock', name: 'Clock', inside: true, across: -2 + 0.03, distance: L.CLOCK.z, elevation: L.CLOCK.face - 0.74, facing: 90, height: 0.9, box: [-0.21, -1.0, 0.21, 0.05] });
 add({ id: 'hook', name: 'Hooks', inside: true, across: A(L.HOOK[0]), distance: L.HOOK[1], elevation: 0, facing: 0, height: 1.9, box: [-0.3, -1.9, 0.3, 0.03] });
 add({ id: 'stool', name: 'Stool', inside: true, across: A(L.STOOL[0]), distance: L.STOOL[1], facing: 180, height: 0.7, box: [-0.25, -0.7, 0.25, 0.03] });
 add({ id: 'rucksack', name: 'Rucksack', inside: true, across: A(L.RUCKSACK.chair[0]), distance: L.RUCKSACK.chair[1], facing: 180, height: 0.6, box: [-0.3, -0.7, 0.3, 0.03] });
@@ -116,7 +116,7 @@ add({ id: 'cupboard', name: 'Cupboard', inside: true, across: A(L.CUPBOARD.x), d
   box: [-L.CUPBOARD.w / 2 - 0.05, -L.CUPBOARD.h - 0.05, L.CUPBOARD.w / 2 + 0.05, 0.03] });
 {
   const S = L.SOFA, cx = A((S.x0 + S.x1) / 2), w = S.x1 - S.x0;
-  add({ id: 'sofa', name: 'Sofa', inside: true, across: cx, distance: S.back, facing: 180, height: 0.95, box: [-w / 2 - 0.05, -0.98, w / 2 + 0.05, 0.03] });
+  add({ id: 'sofa', name: 'Sofa', inside: true, across: cx, distance: S.back, facing: 180, height: 0.95, box: [-w / 2 - 0.05, -1.1, w / 2 + 0.05, 0.03] });
   add({ id: 'sofa_front', name: 'Sofa', inside: true, across: cx, distance: S.front, facing: 180, height: S.top, box: [-w / 2 - 0.05, -S.top - 0.03, w / 2 + 0.05, 0.03] });
   add({ id: 'sofa_arm', name: 'Sofa', inside: true, across: A(S.x0), distance: (S.front + S.back) / 2, facing: 270, height: 0.62,
     box: [-(S.back - S.front) / 2 - 0.04, -0.66, (S.back - S.front) / 2 + 0.04, 0.03],
