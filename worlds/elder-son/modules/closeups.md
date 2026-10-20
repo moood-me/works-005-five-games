@@ -65,9 +65,9 @@ the plate, not in the band of speech); points marked together — at least 0.15 
 | `hands#hands` (= `hands`) | (−0.07, 0.18), ±0.025 along the right hand with `rub` |
 | `tea#glass1`, `tea#glass2` | (−0.24, −0.06), (0.24, −0.06) |
 | `tea` (the spout) | (−0.22, −0.2) → (0.26, −0.2) with `which` |
-| `box#finger1…4` (`take`) | (−0.11, −0.22), (−0.21, −0.08), (−0.17, 0.08), (−0.04, 0.22) — the young hand is big (0.9 of the frame's height), its fingers naturally spread: so the four rings stand 0.15 apart |
+| `box#finger1…4` (`take`) | (−0.09, −0.22), (−0.19, −0.08), (−0.15, 0.08), (−0.02, 0.22) — the young hand is big (0.9 of the frame's height), its fingers naturally spread: so the four rings stand 0.15 apart |
 | `box#box` (= `box`) | `take`: (0.45, 0.05); `give`: (0.14, 0.12) → (−0.49, 0.05) with `push` |
-| `box#old` | `take`: (0.3, −0.33), up out of the shot with `old` → 0; `give`: (−0.49, 0.05) |
+| `box#old` | `take`: (0.32, −0.33), up out of the shot with `old` → 0; `give`: (−0.49, 0.05) |
 | `strap#grip` (= `strap`) | (0.15, 0.16) |
 | `shawl#coat` | (−0.54, −0.3) → (0.02, −0.1) with `lay` |
 | `shawl#shoulders` (= `shawl`) | (0.02, −0.1) |
