@@ -824,15 +824,15 @@ function liveTea(L, now) {
 // with push); box#old — the old palm (moves with old).
 const BOX = (() => {
   const light = { dir: [0.25, -1], colour: LAMP };
-  const young = { ...HAND, L: 0.72, skin: SKIN.bus, sleeve: SLEEVE.sweater, fine: true, view: "palm", side: -1, at: [0.66, 0.08], angle: Math.PI + 0.1, spread: 1.65, curl: [0.06, 0.05, 0.07, 0.1], thumb: { angle: -0.95, curl: 0.15 } };
+  const young = { ...HAND, L: 0.9, skin: SKIN.bus, sleeve: SLEEVE.sweater, fine: true, view: "palm", side: -1, at: [0.72, 0.08], angle: Math.PI + 0.1, spread: 1.05, curl: [0.06, 0.05, 0.07, 0.1], thumb: { angle: -0.95, curl: 0.15 } };
   const closed = { ...young, curl: [1.25, 1.3, 1.3, 1.22], spread: 0.3 };
   const box = palmOf(young);
   const oldTake = aimed({ ...HAND, L: 0.56, skin: SKIN.sar, sleeve: SLEEVE.cardigan, old: true, fine: true, view: "back", side: 1, angle: Math.PI / 2 - 0.3, curl: [0.3, 0.25, 0.3, 0.38], spread: 0.35, thumb: { angle: -0.7, curl: 0.2 } }, 1, [box[0] + 0.01, box[1] - 0.04]);
   const youngGive = { ...HAND, L: 0.52, skin: SKIN.bus, sleeve: SLEEVE.sweater, fine: true, view: "back", side: 1, at: [0.8, 0.12], angle: Math.PI + 0.06, spread: 0.4, curl: [0.25, 0.2, 0.25, 0.3], thumb: { angle: -0.7, curl: 0.2 } };
   const oldGive = { ...HAND, L: 0.56, skin: SKIN.sar, sleeve: SLEEVE.cardigan, old: true, fine: true, view: "palm", side: 1, at: [-0.66, 0.06], angle: -0.08, spread: 0.5, curl: [0.12, 0.1, 0.12, 0.16], thumb: { angle: -0.8, curl: 0.2 } };
   const oldClosed = { ...oldGive, curl: [1.2, 1.25, 1.25, 1.2], spread: 0.25 };
-  const from = add2(tipOf(youngGive, 1), [-0.13, -0.005]), to = palmOf(oldGive);
-  return { light, lamp: [-0.1, -0.5], size: [0.23, 0.155], young, closed, box, oldTake, youngGive, oldGive, oldClosed, from, to };
+  const from = add2(tipOf(youngGive, 1), [-0.15, -0.005]), to = palmOf(oldGive);
+  return { light, lamp: [-0.1, -0.5], size: [0.27, 0.18], young, closed, box, oldTake, youngGive, oldGive, oldClosed, from, to };
 })();
 // the snuffbox at (x, y), turned: its shadow, its side, its lid — the engraving rubbed away in the middle — and its hinge
 function snuffbox(g, [x, y], turn, [w, h]) {
@@ -874,7 +874,7 @@ function paintBox(g, C) {
   // a hand's shadow on the oilcloth: its shape in one dark colour (the layer's alpha makes it a shadow)
   const shadow = (name, o, parts, d) => { const s = { ...o, at: add2(o.at, d), parts, flat: "#24160e" }; C.layer(name, o.at, handBox(s, parts), (l) => hand(l, s, P.light)); };
   const fingers = (name, o, i, more) => C.layer(name, knuckleOf(o, i), handBox(o, [`f${i}`]), (l) => { hand(l, { ...o, parts: [`f${i}`] }, P.light); more?.(l); });
-  const theBox = (at) => C.layer("box", at, around([at], 0.17), (l) => { snuffbox(l, at, -0.12, P.size); C.at(...at, "box"); C.at(...at); });
+  const theBox = (at) => C.layer("box", at, around([at], 0.2), (l) => { snuffbox(l, at, -0.12, P.size); C.at(...at, "box"); C.at(...at); });
   if (!give) {
     shadow("young_sh", P.young, BASE, [0.012, 0.02]);
     C.layer("young", P.young.at, handBox(P.young, BASE), (l) => hand(l, { ...P.young, parts: BASE }, P.light));
@@ -931,8 +931,8 @@ const STRAP = (() => {
   const on = (y) => [top[0] + ((end[0] - top[0]) * (y - top[1])) / (end[1] - top[1]), y];
   const fist = placed({ ...HAND, L: 0.46, skin: SKIN.bus, sleeve: SLEEVE.coat, fine: true, view: "back", side: 1, angle: Math.PI + 0.3, curl: [1.05, 1.1, 1.1, 1.05], spread: 0.08, thumb: { angle: -0.35, curl: 0.7 } }, [0.5, 0], on(0.14));
   const open = { ...fist, curl: [0.35, 0.3, 0.35, 0.42], spread: 0.25 };
-  const vas = placed({ ...HAND, L: 0.42, w: 0.82, skin: SKIN.vas, sleeve: SLEEVE.quilted, fine: true, view: "back", side: -1, angle: 0.25, curl: [1.0, 1.05, 1.05, 1.0], spread: 0.06, thumb: { angle: -0.3, curl: 0.6 } }, [0.5, 0], on(-0.25));
-  return { light, door, top, end, width: 0.078, rise: 0.44, fist, open, vas, grip: handPoint(fist, [0.32, 0]) };
+  const vas = placed({ ...HAND, L: 0.42, w: 0.82, skin: SKIN.vas, sleeve: SLEEVE.quilted, fine: true, view: "back", side: -1, angle: 0.25, curl: [1.0, 1.05, 1.05, 1.0], spread: 0.06, thumb: { angle: -0.3, curl: 0.6 } }, [0.5, 0], on(-0.17));
+  return { light, door, top, end, width: 0.078, rise: 0.36, fist, open, vas, grip: handPoint(fist, [0.32, 0]) };
 })();
 // the canvas strap from its top (out of the shot) down to its end: its weave, its stitched edges, its steel tip
 function strapOf(g, P) {
@@ -1062,16 +1062,16 @@ function liveStrap(L, now) {
 
 // ── shawl ── night, from behind: Nina on the bench under the kitchen window — her hair, the plait, her shoulders in a
 // knitted shawl, snow; the window up on the right, its warm light over her. Busygin's hands (the sweater's sleeves)
-// hold his coat up by its collar. Its key: lay (the coat comes down onto her shoulders; from 0.8 it lies there and
+// hold his coat up by its collar's ends, in their fists. Its key: lay (the coat comes down onto her shoulders; from 0.8 it lies there and
 // the hands let go). Points shawl#coat — the collar (moves with lay), shawl#shoulders — her shoulders, where it comes
 // to lie.
 const SHAWL = (() => {
   const light = { dir: [0.7, -0.7], colour: WARM };
   const neck = [0.02, -0.1], held = [-0.54, -0.3];
-  const hand0 = { ...HAND, L: 0.3, skin: SKIN.bus, sleeve: SLEEVE.sweater, fine: true, view: "back", curl: [0.8, 0.85, 0.85, 0.8], spread: 0.15, thumb: { angle: -0.5, curl: 0.4 } };
+  const hand0 = { ...HAND, L: 0.3, skin: SKIN.bus, sleeve: SLEEVE.sweater, fine: true, view: "back", curl: [1.05, 1.1, 1.1, 1.05], spread: 0.1, thumb: { angle: -0.35, curl: 0.5 } };
   const hands = [
-    placed({ ...hand0, side: -1, angle: -Math.PI / 2 + 0.25 }, [0.62, 0], add2(neck, [-0.21, 0.035])),
-    placed({ ...hand0, side: 1, angle: -Math.PI / 2 - 0.25 }, [0.62, 0], add2(neck, [0.21, 0.035])),
+    placed({ ...hand0, side: -1, angle: -Math.PI / 2 + 0.25 }, [0.5, 0], add2(neck, [-0.19, -0.035])),
+    placed({ ...hand0, side: 1, angle: -Math.PI / 2 - 0.25 }, [0.5, 0], add2(neck, [0.19, -0.035])),
   ];
   return { light, neck, held, hands };
 })();
@@ -1079,11 +1079,11 @@ const SHAWL = (() => {
 function nina(g, rnd, [x, y]) {
   g.beginPath();
   g.moveTo(x - 0.07, y - 0.04);
-  g.quadraticCurveTo(x - 0.3, y - 0.02, x - 0.42, y + 0.1);
-  g.lineTo(x - 0.47, y + 0.75);
-  g.lineTo(x + 0.47, y + 0.75);
-  g.lineTo(x + 0.42, y + 0.1);
-  g.quadraticCurveTo(x + 0.3, y - 0.02, x + 0.07, y - 0.04);
+  g.quadraticCurveTo(x - 0.32, y - 0.02, x - 0.46, y + 0.1);
+  g.lineTo(x - 0.53, y + 0.75);
+  g.lineTo(x + 0.53, y + 0.75);
+  g.lineTo(x + 0.46, y + 0.1);
+  g.quadraticCurveTo(x + 0.32, y - 0.02, x + 0.07, y - 0.04);
   g.closePath();
   const wool = g.createLinearGradient(x + 0.4, y - 0.1, x - 0.4, y + 0.6);
   wool.addColorStop(0, "#f1e9db");
@@ -1096,15 +1096,15 @@ function nina(g, rnd, [x, y]) {
   g.lineWidth = 0.003;
   for (let yy = y + 0.01; yy < y + 0.72; yy += 0.028) {
     g.beginPath();
-    for (let xx = x - 0.45; xx < x + 0.45; xx += 0.026) { g.moveTo(xx, yy); g.lineTo(xx + 0.013, yy + 0.012); g.lineTo(xx + 0.026, yy); }
+    for (let xx = x - 0.5; xx < x + 0.5; xx += 0.026) { g.moveTo(xx, yy); g.lineTo(xx + 0.013, yy + 0.012); g.lineTo(xx + 0.026, yy); }
     g.stroke();
   }
   g.strokeStyle = "#8a5a48";
   g.lineWidth = 0.008;
   g.beginPath();
-  for (let xx = x - 0.44, k = 0; xx < x + 0.45; xx += 0.04, k++) g.lineTo(xx, y + 0.24 + (k % 2 ? 0.025 : -0.025));
+  for (let xx = x - 0.5, k = 0; xx < x + 0.5; xx += 0.04, k++) g.lineTo(xx, y + 0.24 + (k % 2 ? 0.025 : -0.025));
   g.stroke();
-  for (const s of [-1, 1]) for (let yy = y + 0.14; yy < y + 0.62; yy += 0.018) line(g, x + s * 0.45, yy, x + s * (0.47 + 0.02 * rnd()), yy + 0.02, 0.003, "rgba(200,190,175,0.8)");
+  for (const s of [-1, 1]) for (let yy = y + 0.14; yy < y + 0.62; yy += 0.018) line(g, x + s * (0.47 + 0.07 * (yy - y)), yy, x + s * (0.5 + 0.07 * (yy - y) + 0.02 * rnd()), yy + 0.02, 0.003, "rgba(200,190,175,0.8)");
   // the nape under the hair; the hair from behind, combed down to the plait, the window's light on its right
   oval(g, x, y - 0.065, 0.048, 0.05, 0, "#c99c80");
   const hair = g.createLinearGradient(x + 0.1, y - 0.32, x - 0.1, y - 0.1);
@@ -1137,11 +1137,11 @@ function nina(g, rnd, [x, y]) {
 function coat(g, rnd, [x, y]) {
   g.beginPath();
   g.moveTo(x - 0.16, y - 0.03);
-  g.quadraticCurveTo(x - 0.36, y - 0.02, x - 0.47, y + 0.1);
-  g.lineTo(x - 0.53, y + 1.0);
-  g.lineTo(x + 0.53, y + 1.0);
-  g.lineTo(x + 0.47, y + 0.1);
-  g.quadraticCurveTo(x + 0.36, y - 0.02, x + 0.16, y - 0.03);
+  g.quadraticCurveTo(x - 0.33, y - 0.02, x - 0.42, y + 0.1);
+  g.lineTo(x - 0.46, y + 1.0);
+  g.lineTo(x + 0.46, y + 1.0);
+  g.lineTo(x + 0.42, y + 0.1);
+  g.quadraticCurveTo(x + 0.33, y - 0.02, x + 0.16, y - 0.03);
   g.closePath();
   const wool = g.createLinearGradient(x + 0.45, y - 0.05, x - 0.45, y + 0.8);
   wool.addColorStop(0, "#6a625a");
@@ -1154,7 +1154,7 @@ function coat(g, rnd, [x, y]) {
     g.fillRect(x + (rnd() - 0.5) * 0.95, y + 0.02 + 0.95 * rnd(), 0.006, 0.004);
   }
   line(g, x, y + 0.04, x, y + 1.0, 0.004, "rgba(0,0,0,0.4)");
-  for (const s of [-1, 1]) line(g, x + s * 0.17, y - 0.02, x + s * 0.43, y + 0.1, 0.003, "rgba(0,0,0,0.35)");
+  for (const s of [-1, 1]) line(g, x + s * 0.17, y - 0.02, x + s * 0.39, y + 0.1, 0.003, "rgba(0,0,0,0.35)");
   rounded(g, x - 0.17, y + 0.5, 0.34, 0.05, 0.012);
   g.fillStyle = "#4a443e";
   g.fill();
