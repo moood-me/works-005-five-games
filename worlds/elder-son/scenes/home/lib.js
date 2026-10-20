@@ -26,10 +26,10 @@ const CUPBOARD = { x: 5.2, z: 0.25, w: 1.1, h: 1.95, shelf: 1.32 }; // in the ro
 const COT = { x: 4.45, z0: 0.7, z1: 2.4, w: 0.7, top: 0.42 };  // the folding bed along the kitchen wall, its head by the doorway
 const COT_CHAIR = [4.32, 0.42];                                // the chair at the cot's foot, by the wall (his coat at night)
 const SOFA = { x0: 5.6, x1: 7.6, z: 3.62, top: 0.45, front: 3.3, back: 3.92 }; // against the room's back wall: the seat z 3.3…3.92
-// lying: on the back (`lie`) the turn is where the feet point; on the side (`lie_side`) the belly faces the turn + 33°,
-// the head the turn + 115° (the motions' pelvis at their end). On the cot the head by the doorway (+z); on the sofa at
-// its right end (+x), in the wedge from his door. `side` — turned on the side to the wall: the cot's (−x), the sofa's (+z)
-const LIE_AT = { cot: { at: [4.45, 1.55], bed: 'cot_top#bed', back: 180, side: 245 }, sofa: { at: [6.75, 3.62], bed: 'sofa_top#bed', back: 270, side: 327 } };
+// lying: on the back (`lie`) the turn is where the feet point; on the side (`lie_side`) the head lies at the turn − 65°
+// (seen on the sheets). On the cot the head by the doorway (+z); on the sofa at its right end (+x), in the light from his
+// door. `side` — turned on the side (to the wall, as far as the motion turns)
+const LIE_AT = { cot: { at: [4.45, 1.55], bed: 'cot_top#bed', back: 180, side: 65 }, sofa: { at: [6.75, 3.62], bed: 'sofa_top#bed', back: 270, side: 155 } };
 const SAR_DOOR = { z0: 3.1, z1: 3.9 };                         // in the room's right wall (x 8): Sarafanov's room
 // his lamp's light, come through the gap of his door: a light standing in the room before the gap (the gap of a door
 // ajar is too narrow for the lamp's shadow to cut a wedge) — it falls on the sofa's right end and through the doorway
@@ -122,9 +122,9 @@ const NAMES = { busygin: 'Busygin', silva: 'Silva', vasenka: 'Vasenka', sarafano
 // how far down (screen heights) — numbers, worked out by h/d (tools/home/run.mjs prints each beat's frame)
 const cam = (x, z, h, yaw, look = 0) => ({ camera_target: null, camera_x: A(x), camera_z: z, camera_h: h - 1.7, camera_yaw: yaw, camera_look: look, camera_pitch: 0 });
 const CAM = {
-  win: cam(0.45, 3.8, 1.65, 150),            // from the corner by the window down the kitchen: the door, the stove right, the table
+  win: cam(0.45, 3.8, 1.65, 140),            // from the corner by the window down the kitchen: the door, the stove right, the table
   warm: cam(2.95, 1.15, 1.45, -62),           // the stove and Vasenka at the table, from the near right
-  near: cam(1.55, 0.3, 1.45, 0),              // the two at the stove side by side in profile, the lamp between and above
+  near: cam(1.15, 0.35, 1.45, 15),            // the two at the stove: Busygin in profile, the old man in three quarters
   embrace: cam(2.3, 1.0, 1.75, -62),          // over the old man's shoulder: Busygin's face in three quarters
   nina: cam(2.2, 1.55, 1.5, 132),             // Nina in the door, three quarters, in the lamp's light
   supper: cam(2.3, 0.45, 1.3, -25, 0.1),      // from the near side: the old man standing with his glass, three quarters; Busygin right
@@ -134,15 +134,15 @@ const CAM = {
   sofa: cam(7.3, 2.6, 0.8, 8, 0.12),          // Silva on the sofa close, in the light from his door
   cot: cam(7.0, 3.5, 1.15, -122),             // wake: from the room's far wall onto the cot and the chair by it
   sneak: cam(3.8, 3.3, 1.6, -143),            // from the doorway onto the near left corner: stove, the way, the wall clock
-  caught: cam(2.75, 1.45, 1.6, 42),           // from where the two stand by the door: the old man in the doorway, facing us
+  caught: cam(3.0, 1.75, 1.6, 40),            // from where the two stand by the door: the old man in the doorway, facing us
   door: cam(2.95, 2.45, 1.5, 172),            // from the table's side onto the front door and the hooks
   ww: cam(0.6, 2.75, 1.65, 44),               // the window: his shoulder left, the frosted glass in the middle
   morning: cam(1.75, 0.6, 1.5, 0),            // across the table: the old man at its far corner, Busygin at the window
   toast: cam(1.8, 0.4, 1.9, 0, 0.25),         // high along the table: all six in profile
   ask: cam(2.55, 0.4, 1.55, -21),             // Nina standing between her father and him
-  for_me: cam(1.8, 3.2, 1.35, -110),          // close on Nina from over the table's far end, the old man beyond her
+  for_me: cam(1.85, 3.0, 1.35, -118),         // close on Nina from over the table's far end, the old man beyond her
   pack: cam(0.4, 3.8, 1.5, 122),              // from the far left corner: the old man in the doorway, Silva at the door
-  confess: cam(2.6, 3.7, 1.55, 131),          // from the window's side: the two by the doorway in profile, Busygin nearer
+  confess: cam(3.1, 3.75, 1.55, 150),         // from the back wall: the two by the doorway in profile, Busygin nearer
   back: cam(2.2, 0.5, 1.6, -5),               // the old man at the window, his back; the table
 };
 

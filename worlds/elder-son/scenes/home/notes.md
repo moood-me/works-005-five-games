@@ -48,9 +48,8 @@ wall casts its shadow).
 
 ## Lying
 
-`lie` (on the back) faces its feet the person's turn; `lie_side` turns the belly to turn + 33°, the head to
-turn + 115° (the motions' pelvis at their end). On the cot the head is by the doorway (turn 180; to the wall, on the
-side, 245), on the sofa at its right end (270; to the wall 327). The hips go onto the bed's point (`<id>_on`:
+`lie` (on the back) faces its feet the person's turn; `lie_side` has the head at turn − 65° (seen on the sheets).
+On the cot the head is by the doorway (turn 180; on the side 65), on the sofa at its right end (270; on the side 155). The hips go onto the bed's point (`<id>_on`:
 `cot_top#bed`, `sofa_top#bed`) — their floor there. Off the cot: a cut sits him on its edge facing the room, then `rise`.
 
 ## Beats
