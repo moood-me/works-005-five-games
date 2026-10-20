@@ -143,7 +143,7 @@ async function passing(s, loud) {
   await freightTo(s, 1);
   if (during) await during;
   s.set('bell', 0);
-  await s.move('barrier', 0, { over: 3.2, ease: 'inOut' });
+  await s.move('barrier', 0, { over: 2.4, ease: 'inOut' });
 }
 
 function film() {
@@ -202,11 +202,11 @@ function film() {
         camTo(s, CAM.close, 3.5);
         await nina.turn(98);
         nina.look('busygin');
-        await s.wait(3.2);
+        await s.wait(2.4);
         camTo(s, CAM.wide, 2.5);
         nina.look(null);
         const goes = nina.walk([[-1.1, 8.8], BEYOND.nina]);
-        await s.wait(1.4);
+        await s.wait(0.8);
         bus.look(null);
         await Promise.all([goes, bus.walk([[-1.2, 8.6], BEYOND.busygin])]);
       },
@@ -253,7 +253,7 @@ function film() {
         const nina = s.person('nina'), bus = s.person('busygin');
         bus.look('nina');
         await bus.turn(235);
-        await s.wait(2.4);
+        await s.wait(1.4);
         nina.look('busygin');
         await nina.turn(98);
         nina.mood('neutral');
@@ -276,7 +276,7 @@ function film() {
         await Promise.all([nina.turn(165), bus.turn(195)]);
         nina.reach({ l: 'busygin#hand_r' });
         bus.reach({ r: 'nina#hand_l' });
-        await s.wait(2.6);
+        await s.wait(1.6);
         nina.look(null);
         bus.look(null);
         await Promise.all([nina.walk([[-1.5, 8.8], [0.2, 12.7]]), bus.walk([[-0.7, 8.7], [0.75, 12.6]])]);

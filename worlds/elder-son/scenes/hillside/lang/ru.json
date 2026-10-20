@@ -1,4 +1,6 @@
 {"strings": [
-  {"text":"The Hillside (Opus)","translation":"Косогор (Opus)","where":"scenes/hillside/scene.json title"},
-  {"text":"The cemetery on the hillside beyond the settlement. Dusk.","translation":"Кладбище на косогоре за посёлком. Сумерки.","where":"scenes/hillside/scene.json caption"}
+  {"text":"Railwaymen's Club","translation":"Клуб железнодорожников","where":"scenes/hillside/elements/club_sign.js"},
+  {"text":"The Hillside","translation":"Косогор","where":"scenes/hillside/scene.json title"},
+  {"text":"The cemetery on the hillside beyond the settlement. Dusk.","translation":"Кладбище на косогоре за посёлком. Сумерки.","where":"scenes/hillside/scene.json caption"},
+  {"text":"he fell on the ice, he almost saw them","translation":"он упал на льду, он почти их увидел","where":"scenes/hillside/showcase.js"}
 ]}

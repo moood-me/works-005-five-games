@@ -45,7 +45,7 @@ function pathU(a, d) {
 // the shares of the path at which its corners are
 const PATH_U = (() => { const total = pathLen(); let run = 0; return PATH.map((p, i) => { if (i) run += Math.hypot(p[0] - PATH[i - 1][0], p[1] - PATH[i - 1][1]); return run / total; }); })();
 // the two going down the path arm in arm: the father on it, Busygin at his left hand (left of the way they go)
-const BUS_SIDE = 0.65;
+const BUS_SIDE = 0.55;
 function pair(u) {
   const p = pathAt(u), q = pathAt(Math.min(1, u + 0.02)), r = pathAt(Math.max(0, u - 0.02));
   const dx = q[0] - r[0], dd = q[1] - r[1], l = Math.hypot(dx, dd) || 1;
@@ -291,12 +291,14 @@ function film(scene) {
         sar.look(null);
         await sar.turn(90);
         bus.look('sarafanov');
-        await sar.walk([SPOT.gone, [15.5, ROAD_Y]]);
-        bus.look(null);
-        s.tell('bottom:gone');
-        nina.walk([[-1, 5.7], [SPOT.gate.busygin[0] - 1.1, 5.6]]);
         nina.look(null);
-        await s.wait(5);
+        const comes = nina.walk([[-1, 5.7], [SPOT.gate.busygin[0] - 1.1, 5.6]]);
+        await sar.walk([SPOT.gone, [15.5, ROAD_Y]]);
+        bus.look('nina');
+        s.tell('bottom:gone');
+        await comes;
+        await nina.turn(90);
+        await s.wait(1);
       },
     },
     // they step back into the shadow of the gate's pillar; he comes down the path by himself, out on the road, turns

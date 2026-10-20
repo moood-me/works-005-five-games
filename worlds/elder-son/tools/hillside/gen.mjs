@@ -83,7 +83,7 @@ for (const [i, x] of [-4.3, 0.7, 3.1].entries()) {
 }
 add({ id: 'club_door', name: 'Club door', on: 'club', across: doorX - 0.55, distance: 0.03, elevation: PL, facing: 180, place: { facing: 'club_door_f' }, height: 2.1, box: [-0.05, -2.15, 1.15, 0.05], shadow: true });
 add({ id: 'club_hall', name: 'Club hall', on: 'club', across: doorX, distance: 0.9, elevation: PL, facing: 180, glows: true, height: 2.4, box: [-1.3, -2.45, 1.3, 0.05] });
-add({ id: 'club_sign', name: 'Sign', on: 'club', across: doorX, distance: 0.04, elevation: PL + 2.1 + 0.25, facing: 180, height: 0.5, box: [-1.6, -0.7, 1.6, 0.1] });
+add({ id: 'club_sign', name: 'Sign', on: 'club', across: doorX, distance: 0.04, elevation: PL + 2.1 + 0.25, facing: 180, height: 0.5, box: [-2, -1.3, 2, 0.1] });
 // the porch: steps up from the road (their foot is the end of the road's way), the landing before the door, a lamp
 add({ id: 'club_steps', name: 'Steps', plane: true, walk: true, across: C.door, distance: 7.25, elevation: 0.225, width: 1.5, depth: 1.38, tilt: 19.1 });
 add({ id: 'club_landing', name: 'Porch', plane: true, walk: true, across: C.door, distance: 8.45, elevation: PL, width: 2.4, depth: 1.1 });
