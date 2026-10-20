@@ -154,8 +154,9 @@ export default async function (b) {
     for (;;) {
       const r = replay ? replay.run : kept, ch = CHAPTERS[r.chapter];
       if (r.step >= ch.steps.length) return 'done';
-      // (the epilogue: the play's scales are done — its steps show none)
-      if (r.chapter === EPILOGUE) view.gauge(null);
+      // (the window-gauge as the run stands — the map hid it; the epilogue: the play's scales are done — its steps show
+      // none)
+      view.gauge(r.chapter === EPILOGUE ? null : r);
       const mine = r.chapter === EPILOGUE ? { ...view, gauge() {} } : view;
       // (gone to a minigame of it by the author's map: the step played up to it unseen)
       const g = context(b, mine, hub, structuredClone(run(r)), r.play != null ? unseen(r.play, unheard()) : null,
