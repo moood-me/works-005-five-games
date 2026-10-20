@@ -49,6 +49,7 @@ add({ id: 'k_left', name: 'Kitchen', inside: true, across: -2, distance: 2, faci
 add({ id: 'r_back', name: 'Room', inside: true, across: 4, distance: 4, facing: 180, height: H, box: wallBox(4) });
 add({ id: 'r_right', name: 'Room', inside: true, across: 6, distance: 2, facing: 270, height: H, box: wallBox(4) });
 add({ id: 'r_near', name: 'Room', inside: true, across: 4, distance: 0, facing: 0, height: H, box: wallBox(4) });
+add({ id: 'hall_floor', name: 'Passage', plane: true, inside: true, across: A(L.DOOR.x), distance: -0.8, elevation: 0, width: 2.9, depth: 1.6 });
 add({ id: 'hall', name: 'Passage', inside: true, across: A(L.DOOR.x), distance: -1.6, facing: 0, height: 2.4, box: [-1.45, -2.45, 1.45, 0.05] });
 // beyond Sarafanov's door: his room, dim (lit by his lamp's light when it burns)
 add({ id: 'sar_room', name: 'Sarafanov\'s room', inside: true, across: 6.7, distance: 3.5, facing: 270, height: 2.4,
@@ -238,7 +239,7 @@ const scene = {
     // his lamp beyond his door ajar, its light come through the gap: the sofa's right end, through the doorway onto the kitchen's floor
     { id: 'sar_light', across: A(L.SAR_LAMP[0]), distance: L.SAR_LAMP[1], elevation: L.SAR_LAMP[2], color: '#efb877', strength: 1.5, reach: 5.5, on: 'sar_light', glow: 0.2 },
     // a little light in the room (from the street, at dawn the grey morning), so the cupboard, the cot, the sofa are seen
-    { id: 'room_light', across: A(4.7), distance: 1.6, elevation: 2.0, color: '#c3bcae', strength: 0.65, reach: 3.8 },
+    { id: 'room_light', across: A(4.7), distance: 1.6, elevation: 2.0, color: '#c3bcae', strength: 1.0, reach: 4.2 },
     { id: 'night', from: [0, 30], color: '#9aa6c8', strength: 0.6 },
   ],
   state,

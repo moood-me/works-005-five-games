@@ -22,7 +22,8 @@ function creep() {
   if (creeping) for (const a of creeping) a.cancel();
   creeping = [
     scene.person('busygin').walk(L.sneakWay(from, to), { gait: 'tiptoe' }),
-    scene.person('silva').walk(L.sneakWay(Math.max(0, from - L.SNEAK_BEHIND), Math.max(0, to - L.SNEAK_BEHIND)), { gait: 'tiptoe' }),
+    // (Silva onto the way first, where he should be behind him)
+    scene.person('silva').walk([L.W(...L.sneakAt(Math.max(0, from - L.SNEAK_BEHIND))), ...L.sneakWay(Math.max(0, from - L.SNEAK_BEHIND), Math.max(0, to - L.SNEAK_BEHIND))], { gait: 'tiptoe' }),
   ];
 }
 scene.on('change', 'sneak', () => { if (scene.get('beat') === 'sneak') creep(); });

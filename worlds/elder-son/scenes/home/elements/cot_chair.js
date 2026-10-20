@@ -1,5 +1,5 @@
-// The chair by the camp bed's head, seen from the room: his long grey coat thrown over its back at night (`coat_b`
-// cot). Its point: coat. Metres; x = the plan's z − 2.4.
+// The chair at the camp bed's foot, seen from the room: his long grey coat thrown over its back at night (`coat_b`
+// cot). Its point: coat. Metres; x = the plan's z − 0.42.
 g.strokeStyle = '#3e2c20';
 g.lineCap = 'round';
 g.lineWidth = 0.03;

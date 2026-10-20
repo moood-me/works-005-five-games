@@ -1,5 +1,5 @@
 // The passage beyond the front door: dark boards, a coat on a nail, a bucket — seen only when the door is open.
-g.fillStyle = '#34302f';
+g.fillStyle = '#4a4442';
 g.fillRect(-1.45, -2.4, 2.9, 2.42);
 g.strokeStyle = 'rgba(80,70,64,0.5)';
 g.lineWidth = 0.02;
