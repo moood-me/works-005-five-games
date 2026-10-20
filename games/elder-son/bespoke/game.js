@@ -2,21 +2,38 @@
 // (engine 3): a student who missed the last train calls himself a stranger's elder son, and the lie holds a family
 // together for two days. A prologue, five chapters, an epilogue — each a row of steps on the world's scenes. The
 // choices, the two scales (Lie ↔ Truth, Together ↔ Apart) and what is remembered carry from chapter to chapter; how it
-// ends follows from them (story.js facts) — the play always goes through to the epilogue. Between the chapters, the
-// scene “The Yard”: a night station seen from a footbridge — the chapter's title on the board, and after a chapter its
-// choices as railway cars on their tracks (each option a window: lit — chosen; frosted — could have been; boarded up —
-// never reached); after the epilogue, those of the whole play. The player presses the semaphore's red light to go on:
-// it turns green and the cars leave. A chapter with wall: false begins without its title (the one before runs into it);
-// after chapter V there is no map (its rows are the ending itself: the epilogue comes at once).
+// ends follows from them (story.js facts) — the play always goes through to the epilogue. Choices are the language of
+// mini-games' (story.js hub): a mark on the thing, its words as petals.
+//   The map of the play (moood/docs/agents/games.md): the scene “The Yard” — a night station, the near track across it,
+// a point for each chapter — and over it each chapter's tree drawn by the game (map.js): the chapters the cars of one
+// train, their rows of choices (the forks) their windows — what was chosen lit, what could have been frosted, what was
+// never reached boarded up —, the chapters to come dark cars, numbered only. The view comes to a chapter (`shown`), the
+// player drags it anywhere. What can be done on it is its own drawing — pressed, the language's mark opens there, born
+// open (story.js hub.ask): the main run's pointer — “Start”, “Continue” (from the beginning of the step it stopped
+// in); a chapter played — “Replay the chapter”; each fork the main run reached in it — “Replay from here” (from that
+// step, with all the main run chose before it). The play begins on the map, comes to it after each chapter — but before
+// one that says wall: false (the one before runs into it, once the page has been touched: it may be heard): chapter I
+// after the prologue, the epilogue after chapter V (its rows are the ending itself) —, by ☰ (the page's: the step going
+// on is left — played again from its beginning), and whenever it is opened again. Its author has one more sign (left
+// of the prologue): his map of the chapters and their steps (ui.js author) — straight to any step, or a minigame of
+// one, as one of PLAYS has it by then (as the main run stood at that step, where it has played it): a replay from there.
 //
-// What is kept of the play (bespoke.keep), after every step: { chapter, step, scales, shown, marks, choices, start: the
-// same as the chapter began } — a step cut short (the page closed) is played again from its beginning. The author may
-// go to any step of any chapter (☰) — or straight to a minigame of one (the step played up to it unseen: jump.js) —,
-// and skip a step (⏭; while a minigame goes, its ⏭ is every player's: story.js g.play). What is gone to begins as one
-// of PLAYS has it by then: that play's choices, every step before played through unseen (its scales, marks and gauges
-// come out of the steps themselves; its minigames skipped, as played). A step skipped leaves nothing chosen.
+// The play is one — its main run, as far as the player has come. A replay (begun on the map) goes on its own and is
+// never kept: closed, it is gone. On the map: the plate “Replay” on its car (pressed, or its knot: “Continue the
+// replay”, “Drop the replay”), its threads beside the main run's, its pointer “Continue the replay” or “Back to the
+// main run” (the main run played on at once); whatever would leave it asks first (its mark opens again) — “Drop the
+// replay”. Played to its chapter's end, the player keeps it — “Keep”: it becomes the main run from the next chapter on,
+// the chapters after it to be played anew (said beside) — or not, “Undo”.
+//
+// What is kept of the play (bespoke.keep), after every step: the main run — { chapter, step, scales, shown, marks,
+// choices } —, steps: {chapter: [the main run as each of its steps began, and as it ended]} (what “Replay from here”
+// starts from), seen: {chapter: how many of its steps the player has ever played through} — never lessened. The page's
+// ⏭ (bespoke.forward, story.js) is the player's only where they have been: in a step not past what they have seen of
+// its chapter — on to the next interaction —, and in a minigame there, or one they have been in a while (story.js
+// SKIPPABLE). Where the play is and how it ended — bespoke.at, bespoke.ended (the account of what players do).
 import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
+import { trees } from './map.js';
 import { beds, wake, unheard, pause } from './sound.js';
 import { jump as unseen } from './jump.js';
 import prologue from './chapters/prologue.js';
@@ -29,20 +46,24 @@ import epilogue from './chapters/epilogue.js';
 
 const CHAPTERS = [prologue, one, two, three, four, five, epilogue];
 const EPILOGUE = CHAPTERS.length - 1;
-const LAST = EPILOGUE - 1; // chapter V: no map after it (game.md §3.5)
-const TITLE = tr('The Elder Son');
+const END = CHAPTERS.length; // the play played through: no chapter of the main run
+const REVEAL = 6; // s: a chapter's windows lighting up, row by row, as it has been played through
+// a replay's end asks on its knot once the knot has stood still REST looks REST_STEP ms apart (REST_MAX s at most)
+const REST = 3, REST_STEP = 100, REST_MAX = 12;
 // every step of the play in order, and where each chapter's first one is among them
 const STEPS = CHAPTERS.flatMap(ch => ch.steps);
 const FIRST = CHAPTERS.map((_, c) => CHAPTERS.slice(0, c).reduce((n, ch) => n + ch.steps.length, 0));
-// “play as…” — whole plays the author goes from (game.md §5): every ending, and who comes to the platform
+// “play as…” — whole plays the author goes from (game.md §5): every ending, and who comes to the platform — by
+// “Together”, by the truth, no one
 const PLAYS = [
   { label: 'Missed the train — the whole family', choices: { entry: 'asked', galya: 'remembered', box: 'take', dawn: 'stay', father: 'approach', crossing: 'truth', kudimov: 'for_me', fire: 'blame', truth: 'self', train: 'stay' } },
-  { label: 'Missed the train — honest, no one', choices: { entry: 'asked', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'for_me', fire: 'own_up', truth: 'self', train: 'stay' } },
-  { label: 'Saturday — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'let', fire: 'own_up', truth: 'self', train: 'go' } },
-  { label: 'Saturday — father, the snuffbox at the door', choices: { entry: 'said', galya: 'remembered', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'roar', kudimov: 'ask', fire: 'own_up', truth: 'self', train: 'go' } },
+  { label: 'Missed the train — honest, they come by the truth', choices: { entry: 'asked', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'for_me', fire: 'own_up', truth: 'self', train: 'stay' } },
+  { label: 'Saturday — by the truth, the snuffbox at the door', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'let', fire: 'own_up', truth: 'self', train: 'go' } },
+  { label: 'Saturday — father and Vasenka, the snuffbox at the door', choices: { entry: 'said', galya: 'remembered', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'roar', kudimov: 'ask', fire: 'own_up', truth: 'self', train: 'go' } },
   { label: 'Anyway — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'stay' } },
+  { label: 'Anyway — Nina and Vasenka, by the truth', choices: { entry: 'asked', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'truth', kudimov: 'let', fire: 'own_up', truth: 'silent', train: 'stay' } },
   { label: 'Suitcase — father', choices: { entry: 'asked', galya: 'never', box: 'take', dawn: 'leave', father: 'approach', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'go' } },
-  { label: 'Suitcase — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'brother', kudimov: 'let', fire: 'own_up', truth: 'silent', train: 'go' } },
+  { label: 'Suitcase — no one', choices: { entry: 'said', galya: 'never', box: 'refuse', dawn: 'leave', father: 'hide', crossing: 'roar', kudimov: 'let', fire: 'blame', truth: 'silent', train: 'go' } },
 ];
 const fresh = () => ({
   chapter: 0, step: 0, scales: Object.fromEntries(Object.entries(SCALES).map(([k, s]) => [k, s.start])),
@@ -61,26 +82,10 @@ export default async function (b) {
   const hub = listen(b);
   const view = ui(b.layer);
   b.onPause(pause);
-  // (the page is heard only after a touch: a chapter that begins without “The Yard” does so only once there was one —
+  // (the page is heard only after a touch: a chapter that begins without the map does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
   let touched = false;
   for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, () => { touched = true; }, { once: true, capture: true });
-  // “The Yard”: the station alone (no title: the very beginning), the chapter's title on the board, or the cars of `map`,
-  // as the lamps along the tracks light up; → once they have. The wind and the far railway; no scales
-  const yard = async (number, title, map) => {
-    beds({ wind: 0.2, rails: 0.4 }, 2);
-    view.gauge(null);
-    await b.show(SCENES.yard, { state: { chapter_number: number, chapter_title: title, map, reveal: 0, go: 0, snow: 0.3 }, captions: false });
-    // (the scene moves it: done once it is there)
-    await b.act('state', 'move', 'reveal', 1, { over: map ? 2.5 + map.length * 1.2 : 3.5 });
-  };
-  // its semaphore: the player presses the red light, then where to go; the light turns green and the cars leave
-  const signal = async options => {
-    const action = await hub.offer({ 'signal#light': options });
-    wake();
-    await b.act('state', 'move', 'go', 1, { over: 2.5 });
-    return action.id;
-  };
   // PLAYS[as] played unseen: its n-th step of all (STEPS) from where the steps before leave it → {state: the play
   // after it, games: the minigames it played}. The play's choices are found by the step that asks for one; the
   // state a step leaves has only those made by then.
@@ -101,75 +106,269 @@ export default async function (b) {
     const n = FIRST[chapter] + step;
     return { ...(n ? (await ran(as, n - 1)).state : fresh()), chapter, step };
   };
-  let kept = { ...fresh(), ...b.saved };
-  if (b.game.mine) b.menu(view.author({
-    chapters: CHAPTERS, plays: PLAYS.map(p => p.label), at: () => kept,
+  let kept = load(b.saved);
+  // the replay going on, never kept: {run, steps: its chapter's states as its steps began, done: played to its end}
+  let replay = null;
+  const keep = next => { kept = next; return b.keep(kept); };
+  // the author's map (his sign on “The Yard” opens it): where it goes to is what the map waiting now is told — a
+  // minigame: with what the step itself chooses before it, chosen as the play does
+  let jumped = () => {};
+  const author = b.game.mine ? view.author({
+    chapters: CHAPTERS, plays: PLAYS.map(p => p.label), at: () => replay?.run ?? kept,
     games: (as, chapter, step) => ran(as, FIRST[chapter] + step).then(r => r.games),
-    // (to a minigame: what the step itself chooses before it, chosen as the play does)
     go: async (as, chapter, step, game) => {
-      const [state, start] = await Promise.all([coming(as, chapter, step), coming(as, chapter, 0)]);
-      await b.keep(game == null ? { ...state, start } : { ...state, start, play: game, choices: (await ran(as, FIRST[chapter] + step)).state.choices });
-      location.reload();
+      const state = await coming(as, chapter, step);
+      jumped({ jump: game == null ? state : { ...state, play: game, choices: (await ran(as, FIRST[chapter] + step)).state.choices } });
     },
-  }));
-  for (;;) {
-    const ch = CHAPTERS[kept.chapter];
-    if (!kept.start) {
-      const { start, play, ...now } = kept;
-      kept.start = structuredClone({ ...now, step: 0 });
+  }) : null;
+  // ☰ while the play goes on: to the map (on the map itself there is none)
+  const away = () => new Promise(ok => b.menu(() => ok('away')));
+  // the play played through: how it ended (bespoke.ended)
+  const ended = () => b.ended({ ending: facts(kept).ending ?? null });
+
+  for (let after = {}, straight = false; ;) {
+    const to = straight ? 'main' : await map(after);
+    after = {};
+    straight = false;
+    wake(); // (a touch: the page may be heard from now on)
+    if (to === 'drop') { replay = null; continue; }
+    if (to === 'keep') { await keepReplay(); if (kept.chapter === END) ended(); continue; }
+    if (to === 'main' || to === 'back') replay = null; // (“Back to the main run”: the main run goes on from where it stands)
+    else if (to !== 'replay') replay = replayFrom(to);
+    if ((await play()) === 'away') continue;
+    if (replay) {
+      replay.done = true;
+      after = { reveal: replay.run.chapter };
+      continue;
     }
-    // “The Yard” before the chapter: the station alone at the very beginning, else the chapter's title; the player presses
-    // the semaphore to begin — unless the chapter is over (the page was left at its map): its map again; or gone
-    // straight to a minigame; or the chapter before runs into this one (wall: false, once the page has been touched)
-    if (kept.step < ch.steps.length && kept.play == null && !(touched && ch.wall === false)) {
-      const opening = !kept.chapter && !kept.step;
-      const plain = opening || ch.wall === false;
-      await yard(plain ? '' : ch.number, plain ? '' : ch.title, null);
-      await signal([{ id: 'go', label: kept.step ? tr('Continue') : tr('Begin') }]);
-    }
-    wake();
-    // (the epilogue: the play's scales are done — its steps show none)
-    if (kept.chapter === EPILOGUE) view.gauge(null);
-    const mine = kept.chapter === EPILOGUE ? { ...view, gauge() {} } : view;
-    while (kept.step < ch.steps.length) {
-      // (gone to a minigame of it: the step played up to it unseen)
-      const g = context(b, mine, hub, structuredClone(kept), kept.play != null ? unseen(kept.play, unheard()) : null);
-      let skip;
-      // (⏭ outside a minigame skips the step — the author's only; in a minigame it is everyone's: story.js g.play)
-      const off = b.game.mine ? view.onSkip(() => skip()) : () => {};
-      const done = await Promise.race([
-        ch.steps[kept.step](g).then(() => true, e => { b.trouble(`the step broke: ${e.message || e}`); return false; }),
-        new Promise(ok => { skip = () => ok(false); }),
+    const done = kept.chapter;
+    await onward();
+    if (kept.chapter === END) ended();
+    after = { reveal: done };
+    straight = touched && CHAPTERS[kept.chapter]?.wall === false;
+  }
+
+  // the run being played (the replay, else the main run), step by step to its chapter's end → 'done'; or till ☰ →
+  // 'away'
+  async function play() {
+    for (;;) {
+      const r = replay ? replay.run : kept, ch = CHAPTERS[r.chapter];
+      if (r.step >= ch.steps.length) return 'done';
+      // (the epilogue: the play's scales are done — its steps show none)
+      if (r.chapter === EPILOGUE) view.gauge(null);
+      const mine = r.chapter === EPILOGUE ? { ...view, gauge() {} } : view;
+      // (gone to a minigame of it by the author's map: the step played up to it unseen)
+      const g = context(b, mine, hub, structuredClone(run(r)), r.play != null ? unseen(r.play, unheard()) : null,
+        { forward: r.step < (kept.seen[r.chapter] ?? 0) });
+      // (where the play is, for the account of what players do)
+      b.at({ chapter: r.chapter, step: r.step, replay: !!replay });
+      const how = await Promise.race([
+        ch.steps[r.step](g).then(() => 'done', e => { b.trouble(`the step broke: ${e.message || e}`); return 'broke'; }),
+        away(),
       ]);
-      off();
-      if (!done) g.leave();
-      kept = { ...(done ? g.state : kept), step: kept.step + 1, play: undefined };
-      b.keep(kept); // (not waited for: the page keeps them in order, and the next step's cut is not held)
+      if (how === 'done') await g.done();
+      else g.leave();
+      if (how === 'away') return 'away';
+      // (a step that broke: passed with nothing of it kept)
+      const next = { ...run(how === 'broke' ? r : g.state), step: r.step + 1 };
+      const seen = { ...kept.seen, [r.chapter]: Math.max(kept.seen[r.chapter] ?? 0, next.step) };
+      if (replay) {
+        replay.run = next;
+        replay.steps[next.step] = next;
+        keep({ ...kept, seen });
+      } else keep({ ...kept, ...next, seen, steps: { ...kept.steps, [r.chapter]: Object.assign([...(kept.steps[r.chapter] ?? [])], { [next.step]: next }) } });
+      // (not waited for: the page keeps them in order, and the next step's cut is not held)
     }
-    let next = null;
-    if (kept.chapter === EPILOGUE) {
-      // the cars of the whole play; then all of it anew (the author goes to a chapter by ☰)
-      await yard('', TITLE, whole(kept));
-      await signal([{ id: 'anew', label: tr('Play again') }]);
-      return b.restart();
-    } else if (ch.choices.length && kept.chapter !== LAST) {
-      // the cars of the chapter; then on — or the chapter again, from how it began
-      await yard(ch.number, ch.title, rows(ch.choices, kept));
-      const to = await signal([{ id: 'on', label: tr('Go on') }, { id: 'again', label: tr('Replay the chapter') }]);
-      if (to === 'again') next = kept.start;
+  }
+  // the main run on to the next chapter, kept as it begins it
+  function onward() {
+    const on = { ...run(kept), chapter: kept.chapter + 1, step: 0 };
+    return keep({ ...kept, ...on, steps: { ...kept.steps, [on.chapter]: [on] } });
+  }
+  // a replay begun on the map: a chapter from its beginning (`chapter:i`) or from a fork's step (`fork:i:s`) — as the
+  // main run was then —, or where the author's map went ({jump}: as the main run stood there where it has played that
+  // step, else as the play he picked has it by then)
+  function replayFrom(to) {
+    if (to.jump) {
+      // (a step of a chapter the main run has played: as it stood there, its steps before as they were — as “Replay
+      // from here”)
+      const { chapter, step, play } = to.jump, at = kept.steps[chapter];
+      if (at?.[step]) {
+        return { run: { ...structuredClone(at[step]), ...(play != null ? { play } : {}) }, steps: structuredClone(at.slice(0, step + 1)), done: false };
+      }
+      // (else as the play he picked has it by then)
+      return { run: structuredClone(to.jump), steps: Object.assign([], { [step]: run(to.jump) }), done: false };
     }
-    kept = next || { ...kept, chapter: kept.chapter + 1, step: 0, start: undefined };
-    b.keep(kept);
+    const [, i, s = 0] = to.split(':').map(Number), at = kept.steps[i];
+    return { run: structuredClone(at[s]), steps: structuredClone(at.slice(0, s + 1)), done: false };
+  }
+  // a replay played to its end, kept: the main run from the next chapter on — what came after it in the main run gone
+  function keepReplay() {
+    const i = replay.run.chapter, on = { ...run(replay.run), chapter: i + 1, step: 0 }, steps = replay.steps;
+    replay = null;
+    return keep({ ...on, steps: { ...pick(kept.steps, j => j < i), [i]: steps, [i + 1]: [on] }, seen: kept.seen });
+  }
+
+  // “The Yard”, the map: the play's train at the night station, where it is now in the middle (the replay's chapter,
+  // else the main run's). The wind and the far railway; no scales.
+  // What brought the play here: a chapter played through (reveal: its windows light up — its forks offered once they
+  // have —, then the view goes on to where the play is now). → what was picked: an option's id, or {jump} — the
+  // author's map
+  async function map({ reveal = null }) {
+    b.menu(null);
+    // (nothing of the chapter said or shown stays over the map)
+    b.hush();
+    view.quiet();
+    beds({ wind: 0.2, rails: 0.4 }, 2);
+    view.gauge(null);
+    const here = replay ? replay.run.chapter : Math.min(kept.chapter, END);
+    await b.show(SCENES.yard, { state: { shown: reveal ?? here }, captions: false });
+    const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: !!author });
+    const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
+    let grown = reveal == null, asked = null; // (an option that would leave the replay: asked again)
+    let at = reveal ?? here; // (the chapter the view is at)
+    const go = i => { if (i !== at) { at = i; b.set('shown', i); } };
+    // (something of a chapter pressed — the view goes to it)
+    const touched = ref => { const i = /^(?:knot|fork|go|goreplay|badge):(\d+)/.exec(ref)?.[1]; if (i != null) bring(Number(i)); };
+    // (pressed on the chapter already shown, wherever the player dragged the view: back to it)
+    let come = 0;
+    const bring = i => { if (i === at) b.set('come', ++come); else go(i); };
+    // what the map's drawing offers now; pressed — told here (while a choice is open nothing else is pressed: a touch
+    // off its petals folds it)
+    let pressed = () => {};
+    const offer = () => drawn.offer(Object.keys(marks(asked, grown ? null : reveal)), ref => pressed(ref));
+    // (the chapter just played lit: its forks offered too, the view on to where the play is)
+    const growing = grown ? null : setTimeout(() => { grown = true; offer(); go(here); }, REVEAL * 1000);
+    try {
+      // (a replay played to its end: its knot's mark opens by itself — keep it or not, the question the map asks; the
+      // one mark that opens untouched)
+      const asking = replay?.done ? await standing(drawn, `knot:${replay.run.chapter}`) : null;
+      for (let again = asking; ;) {
+        offer();
+        // (a choice that would leave the replay: its mark opens again at once, asking)
+        const ref = again ?? await new Promise(ok => { pressed = ok; jumped = ok; });
+        pressed = () => {};
+        jumped = () => {};
+        again = null;
+        if (ref.jump) return ref;
+        touched(ref);
+        const options = marks(asked, grown ? null : reveal)[ref];
+        const picked = options ? await hub.ask(drawn.at(ref), options) : null;
+        if (!picked) { asked = null; continue; }
+        if (picked.id === 'author') { author(); continue; }
+        if (replay && !['replay', 'keep', 'drop', 'main'].includes(picked.id) && asked !== picked.id) { asked = picked.id; again = ref; continue; }
+        return picked.id;
+      }
+    } finally {
+      clearTimeout(growing);
+      jumped = () => {};
+      hub.withdraw();
+      notice();
+      drawn.remove();
+    }
+  }
+  // a ref of the map's drawing once it has come to rest in the frame — the scene there, the view arrived (a mark
+  // opened on it while the view still moves could go out of sight: folded); none within REST_MAX s — null
+  function standing(drawn, ref) {
+    return new Promise(ok => {
+      let last = null, still = 0, waited = 0;
+      // (looked at every REST_STEP ms, not each frame: a scene at rest may send none)
+      const look = setInterval(() => {
+        const at = drawn.at(ref)();
+        still = at && last && Math.hypot(at.x - last.x, at.y - last.y) < 0.5 ? still + 1 : 0;
+        last = at;
+        waited += REST_STEP;
+        if (still >= REST || waited >= REST_MAX * 1000) { clearInterval(look); ok(still >= REST ? ref : null); }
+      }, REST_STEP);
+    });
+  }
+  // what can be done on the map: {ref (map.js: what of its drawing is pressed): options} — `asked`: the option that
+  // would leave the replay, now “Drop the replay”; `growing`: the chapter whose forks are not there yet
+  function marks(asked, growing) {
+    const offers = {};
+    const add = (ref, id, label) => { (offers[ref] ??= []).push({ id, label: id === asked ? tr('Drop the replay') : label }); };
+    if (replay) {
+      const c = replay.run.chapter;
+      if (replay.done) for (const at of [`knot:${c}`, `badge:${c}`]) { add(at, 'keep', tr('Keep')); add(at, 'drop', tr('Undo')); }
+      else {
+        add(`goreplay:${c}`, 'replay', tr('Continue the replay')); add(`goreplay:${c}`, 'back', tr('Back to the main run'));
+        // (its plate on the car, its knot: the replay itself — on, or dropped)
+        add(`badge:${c}`, 'replay', tr('Continue the replay')); add(`badge:${c}`, 'drop', tr('Drop the replay'));
+        add(`knot:${c}`, 'drop', tr('Drop the replay'));
+      }
+    }
+    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start'));
+    for (let i = 0; i < Math.min(kept.chapter, END); i++) {
+      if (kept.steps[i]?.[0]) add(`knot:${i}`, `chapter:${i}`, tr('Replay the chapter'));
+      if (i === growing) continue;
+      CHAPTERS[i].choices.forEach((c, k) => {
+        const s = fork(i, c.id);
+        if (s != null) add(`fork:${i}:${k}`, `fork:${i}:${s}`, tr('Replay from here'));
+      });
+    }
+    if (author) add('author', 'author', tr('The author’s map'));
+    return offers;
+  }
+  // the step of chapter i in which the main run made the choice `id`: the first that began without it and ended with
+  // it — known where both states are kept
+  function fork(i, id) {
+    const at = kept.steps[i] ?? [];
+    for (let s = 0; s + 1 < at.length; s++) if (at[s] && at[s + 1] && !(id in at[s].choices) && id in at[s + 1].choices) return s;
+    return null;
+  }
+  // whether keeping the replay played to its end makes chapters the main run has played since to be played anew
+  function anew() {
+    return kept.chapter > replay.run.chapter + 1 || (kept.chapter === replay.run.chapter + 1 && kept.step > 0);
+  }
+  // the chapters as the map draws them (map.js): each one's rows — the main run's, and the replay's where it is —, the
+  // play's pointer, the replay's
+  function sky() {
+    const re = replay?.run;
+    return CHAPTERS.map((c, i) => {
+      const reached = i <= kept.chapter;
+      const tried = re?.chapter === i;
+      const kind = i === (re ? re.chapter : kept.chapter) ? 'here' : i < kept.chapter ? 'played' : i === kept.chapter ? 'next' : 'future';
+      // (a chapter played: all its rows; one going on — those reached so far)
+      const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
+      return { number: c.number, title: c.title, kind, rows: i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen')),
+        go: i === kept.chapter ? (kept.step ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
+    }).concat(finale());
+  }
+  // after the epilogue, at the map's last point: how the play ended — its endings, the one it came to chosen (the
+  // others beside it); before that only its word, as the chapters to come their numbers
+  function finale() {
+    const title = tr('Finale');
+    if (kept.chapter < END) return { number: title, title, kind: 'future', rows: [], go: null };
+    return { number: '', title, kind: 'end', rows: [{ title: '', weight: '⚑', options: ENDINGS.map(e => ({ label: e.label, state: e.id === facts(kept).ending ? 'chosen' : 'open' })) }], go: null };
   }
 }
 
-// choices as rows of “The Yard” (a car on its track each): chosen, could have been, never reached
-const rows = (choices, kept, title = c => c.title) => choices.map(c => ({
-  title: title(c), weight: c.weight,
-  options: c.options.map(o => ({ label: o.label, state: kept.choices[c.id] === o.id ? 'chosen' : c.id in kept.choices ? 'open' : 'unseen' })),
-}));
-// the whole play: the turns (⚑) of chapters I–IV — five — and how it ended (game.md §3.5)
-const whole = kept => [
-  ...CHAPTERS.slice(1, LAST).flatMap(ch => rows(ch.choices.filter(c => c.weight === '⚑'), kept, c => `${ch.number}. ${c.title}`)),
-  { title: tr('Finale'), weight: '⚑', options: ENDINGS.map(e => ({ label: e.label, state: e.id === facts(kept).ending ? 'chosen' : 'open' })) },
-];
+// the play as it was kept — or as this game kept it before (the chapter's start; a minigame gone to — gone): the main
+// run as it is (a chapter it played through — the next one begun), the states known at its steps' beginnings, how far
+// each chapter has been seen
+function load(saved) {
+  let main = run({ ...fresh(), ...saved });
+  const steps = saved.steps ?? (saved.start ? { [main.chapter]: [run(saved.start)] } : {});
+  const seen = saved.seen ?? Object.fromEntries(CHAPTERS.map((c, i) => [i, i < main.chapter ? c.steps.length : i === main.chapter ? main.step : 0]));
+  if (main.chapter < END && main.step >= CHAPTERS[main.chapter].steps.length) {
+    main = { ...main, chapter: main.chapter + 1, step: 0 };
+    steps[main.chapter] = [run(main)];
+  }
+  (steps[main.chapter] ??= [])[main.step] ??= run(main);
+  // (the first chapter begins as the play does: its start is known even where an older save did not keep it)
+  (steps[0] ??= [])[0] ??= run(fresh());
+  return { ...main, steps, seen };
+}
+// a run's own fields (the play's position and what it carries), apart from what the play keeps of its chapters (a
+// minigame gone to by the author's map: `play`)
+const run = p => structuredClone({ chapter: p.chapter, step: p.step, scales: p.scales, shown: p.shown, marks: p.marks, choices: p.choices });
+const pick = (o, keep) => Object.fromEntries(Object.entries(o).filter(([j]) => keep(Number(j))));
+// a chapter's choices as rows of windows: the main run's chosen, a replay's tried (both — the same), could have been,
+// never reached
+function rows(ch, mainChoices, triedChoices) {
+  return ch.choices.map(c => {
+    const m = mainChoices[c.id], t = triedChoices[c.id];
+    return { title: c.title, weight: c.weight, options: c.options.map(o => ({ label: o.label,
+      state: m === o.id && t === o.id ? 'both' : m === o.id ? 'chosen' : t === o.id ? 'tried' : m || t ? 'open' : 'unseen' })) };
+  });
+}

@@ -13,7 +13,7 @@ const HORN = 8; // s — the last train's horn
 const THERE = 0.98;
 
 export default {
-  title: 'Running', // (as the author's ☰ lists it)
+  title: 'Running', // (as the author's map lists it)
   about: 24,
   skipped: { seconds: 24, looks: 1 },
   async run(g, b, opts, signal) {

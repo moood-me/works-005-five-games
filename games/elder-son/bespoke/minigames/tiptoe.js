@@ -15,7 +15,7 @@ const STIR = 0.3, CALM = 0.1, COUGH = 0.6;
 const DOOR = 0.98;
 
 export default {
-  title: 'On Tiptoe', // (as the author's ☰ lists it)
+  title: 'On Tiptoe', // (as the author's map lists it)
   about: 15,
   skipped: { creaks: 0 },
   async run(g, b, opts, signal) {

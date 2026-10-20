@@ -11,7 +11,7 @@ const STILL = 15; // s without moving
 const SCRAPE = 0.4; // of the frame's height of path — a scratch
 
 export default {
-  title: 'The Glass', // (as the author's ☰ lists it)
+  title: 'The Glass', // (as the author's map lists it)
   about: 6,
   skipped: { wipe: 0.8 },
   async run(g, b, opts, signal) {

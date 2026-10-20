@@ -16,7 +16,7 @@ const CAUGHT = 1; // s — caught again
 const DOORS = 22; // s — the doors shut
 
 export default {
-  title: 'The Rucksack', // (as the author's ☰ lists it)
+  title: 'The Rucksack', // (as the author's map lists it)
   about: 25,
   skipped: { slips: 0 },
   async run(g, b, opts, signal) {

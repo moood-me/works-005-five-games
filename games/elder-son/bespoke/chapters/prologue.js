@@ -1,5 +1,5 @@
-// Prologue (game.md §6). The last train leaves; two are left on the platform. Before it game.js shows the first “The Yard”
-// (no title): the first press on the semaphore wakes the sound.
+// Prologue (game.md §6). The last train leaves; two are left on the platform. Before it the play's map (game.js): its
+// “Start” — the first touch — wakes the sound.
 // Reads: nothing. Leaves: nothing (no choices).
 import { SCENES } from '../story.js';
 

@@ -15,7 +15,7 @@ const AFTER = 1; // s after the answer — the window goes dark
 const KNOCK_MS = 30000; // ms: waiting for the knock and its end (the scene's turn — up to 8 s)
 
 export default {
-  title: 'Windows', // (as the author's ☰ lists it)
+  title: 'Windows', // (as the author's map lists it)
   about: 50,
   skipped: { knocked: [] },
   async run(g, b, opts, signal) {

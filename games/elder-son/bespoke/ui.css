@@ -27,7 +27,7 @@
 #layer .gauge .cord { stroke: #2a2a2a; stroke-width: 0.8; }
 #layer .gauge .rime { fill: #fff; }
 
-/* the slips under the tools */
+/* the slips in the corner, under the page's buttons */
 #layer .toasts { position: absolute; top: calc(var(--below-header) + 60px); right: 14px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 #layer .slip { margin: 0; padding: 8px 18px 9px; max-width: min(340px, 46vw); font-size: clamp(18px, 4.6vh, 23px); line-height: 1.18;
   text-align: center; animation: slip-in 0.7s ease both; transition: opacity 1.5s ease, translate 1.5s ease; }
@@ -48,16 +48,8 @@
   text-shadow: 0 0 18px rgba(8, 12, 20, 0.8), 0 0 2px rgba(8, 12, 20, 0.9); }
 #layer .title.on { opacity: 1; filter: none; }
 
-/* the corner's tools, under the site's header: ⏸ pause (everyone), ⏭ skip (a minigame: everyone; a step: the
-   author), ☰ the chapters and their steps (the author) — above whatever a minigame spreads over the scene */
-#layer .tools { position: absolute; z-index: 10; top: calc(var(--below-header) + 8px); right: 14px; display: flex; gap: 6px; }
-#layer .tools > button { width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 3px; color: var(--ink);
-  background: rgba(227, 233, 240, 0.88); font: 18px/1 Georgia, "Times New Roman", serif; cursor: pointer; opacity: 0.65;
-  box-shadow: 0 1px 6px rgba(10, 16, 28, 0.4); }
-#layer .tools > button:hover { opacity: 1; }
-#layer .tools > button[hidden] { display: none; }
-/* ☰: a window over the scene, below the site's header — “play as…”, then the chapters side by side, each a column
-   of its steps */
+/* the author's map (his sign on the play's map): a window over the scene, below the site's header — “play as…”, then
+   the chapters side by side, each a column of its steps */
 #layer .author-map { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; padding: calc(var(--below-header) + 8px) 16px 16px;
   background: rgba(8, 12, 20, 0.55); }
 #layer .author-map[hidden] { display: none; }
@@ -76,3 +68,142 @@
 #layer .author-panel section button.here { background: rgba(27, 34, 48, 0.16); }
 #layer .author-panel .minigames { display: flex; flex-direction: column; }
 #layer .author-panel section button.minigame { padding: 3px 10px 3px 24px; font-size: 15px; }
+
+/* the map (map.js): each chapter's tree under the language's marks (bespoke.underlay), at its chapter's point — the
+   chapters the cars of one train on the near track of “The Yard”, coupled; a car's roof lamp its knot, its windows its
+   forks: what was chosen lit (the lamp's warm — the only warm on the map), what could have been frosted, what was never
+   reached boarded up. Sizes in the frame's height (--u: its 900th); a car 448 --u wide — 5 m at 10 m, the points'
+   spacing: the cars stand buffer to buffer */
+#underlay .map{--u:calc(var(--h) / 900)}
+@keyframes m-breathe{from{transform:translate(-50%,-50%) scale(.84);opacity:.6}to{transform:translate(-50%,-50%) scale(1.12);opacity:1}}
+@keyframes m-row-in{from{opacity:0;transform:translateY(calc(var(--u) * -6))}to{opacity:1;transform:none}}
+@keyframes m-nudge{from{transform:translateX(calc(var(--u) * -3))}to{transform:translateX(calc(var(--u) * 2))}}
+@keyframes m-tip{from{opacity:.45}to{opacity:1}}
+#underlay .map .stand{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0}
+#underlay .map .stand[hidden]{display:none}
+#underlay .map .tree{position:absolute;box-sizing:border-box;width:var(--w);--s:1;--gut:calc(var(--u) * 44);--L:calc(var(--u) * var(--s) * 21);
+  font-family:var(--f-text);color:var(--c-name)}
+#underlay .map .tree.grow .row{animation:m-row-in .9s ease-out both}
+#underlay .map .tree .head{text-align:center;padding-bottom:calc(var(--u) * 4)}
+#underlay .map .tree .num{font-family:var(--f-num);font-weight:700;font-size:calc(var(--u) * 15);letter-spacing:.24em;line-height:1.5;color:var(--c-num)}
+#underlay .map .tree .title{font-family:var(--f-title);font-size:calc(var(--u) * 31);line-height:1.15;color:var(--c-title)}
+#underlay .map .knot{position:relative;height:calc(var(--u) * 36)}
+#underlay .map .knot .seg{top:calc(var(--u) * 10);height:calc(100% - var(--u) * 10)}
+#underlay .map .knot .halo{position:absolute;left:50%;top:calc(var(--u) * 10);width:calc(var(--u) * 56);height:calc(var(--u) * 56);border-radius:50%;
+  background:radial-gradient(circle,var(--c-halo) 0%,transparent 68%);animation:m-breathe 4.6s ease-in-out infinite alternate}
+#underlay .map .knot .core{position:absolute;left:50%;top:calc(var(--u) * 10);width:calc(var(--u) * 10);height:calc(var(--u) * 10);transform:translate(-50%,-50%);
+  border-radius:50%;background:var(--c-core)}
+#underlay .map .tree.current .halo{width:calc(var(--u) * 90);height:calc(var(--u) * 90)}
+#underlay .map .tree.current .core{width:calc(var(--u) * 13);height:calc(var(--u) * 13);box-shadow:0 0 calc(var(--u) * 10) var(--c-halo)}
+#underlay .map .rows{margin:0;padding:0;list-style:none}
+#underlay .map .row{display:grid;grid-template-columns:minmax(0,1fr) var(--gut) minmax(0,1fr);padding-bottom:calc(var(--u) * var(--s) * 13)}
+#underlay .map .row .name{text-align:right;font-size:calc(var(--u) * var(--s) * 16);line-height:var(--L);color:var(--c-name)}
+#underlay .map .row.key .name{color:var(--c-key)}
+#underlay .map .row .flag{color:var(--c-main);font-size:.8em}
+#underlay .map .row .stem{position:relative}
+#underlay .map .seg{position:absolute;left:50%;top:0;height:100%;width:calc(var(--u) * 10);transform:translateX(-50%);overflow:visible}
+#underlay .map .seg path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+#underlay .map .seg .line{stroke:var(--c-main);stroke-width:var(--trunk)}
+#underlay .map .seg .glow{stroke:var(--c-glow);stroke-width:var(--glow)}
+#underlay .map .row:last-child .seg{height:calc(var(--L) / 2)}
+#underlay .map .stem .dot{position:absolute;left:50%;top:calc(var(--L) / 2);width:calc(var(--u) * var(--s) * 10);height:calc(var(--u) * var(--s) * 10);
+  transform:translate(-50%,-50%);border-radius:50%;background:var(--c-main)}
+#underlay .map .stem .rseg{position:absolute;left:calc(50% - var(--u) * 9);top:0;bottom:0;border-left:1.5px dashed var(--c-replay)}
+#underlay .map .row.r-start .rseg{top:calc(var(--L) / 2)}
+#underlay .map .opts{list-style:none;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:calc(var(--u) * 4)}
+#underlay .map .opt{position:relative}
+#underlay .map .opt.alt .pip{position:absolute;left:0;top:.66em;width:calc(var(--u) * 5);height:calc(var(--u) * 5);transform:translateY(-50%);border-radius:50%;background:var(--c-alt);opacity:.8}
+#underlay .map .opt.alt .twig{position:absolute;left:calc(var(--gut) / -2);top:calc(.66em - var(--u) * 16);width:calc(var(--gut) / 2);height:calc(var(--u) * 16);overflow:visible}
+#underlay .map .twig path{fill:none;stroke:var(--c-thin);stroke-width:1px;vector-effect:non-scaling-stroke}
+#underlay .map .row.cursor,#underlay .map .row.pending{--L:calc(var(--u) * var(--s) * 36);min-height:calc(var(--L) + var(--u) * 6)}
+#underlay .map .row.cursor .dot,#underlay .map .row.pending .dot{display:none}
+#underlay .map .row.cursor .rseg{bottom:auto;height:calc(var(--L) / 2)}
+#underlay .map .row.pending .seg .line{stroke-dasharray:3 4;opacity:.6}
+#underlay .map .row.pending .seg .glow{display:none}
+#underlay .map .row.cursor .name,#underlay .map .row.pending .name{position:relative}
+#underlay .map .stem .tip{position:absolute;left:50%;top:calc(var(--L) / 2);width:calc(var(--u) * 12);height:calc(var(--u) * 8);transform:translate(-50%,-40%);
+  overflow:visible;animation:m-tip 1.4s ease-in-out infinite alternate}
+#underlay .map .stem .tip.r{left:calc(50% - var(--u) * 9)}
+#underlay .map .tip path{fill:none;stroke:var(--c-main);stroke-width:1.8px;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#underlay .map .tip.r path{stroke:var(--c-replay)}
+#underlay .map .go{position:absolute;right:0;top:calc(var(--L) / 2);transform:translateY(-50%);display:flex;align-items:center;gap:calc(var(--u) * 8);
+  min-height:max(44px,calc(var(--u) * 44));padding:0;border:0;background:none;text-align:right;white-space:nowrap;font:calc(var(--u) * var(--s) * 17)/1.1 var(--f-text)}
+#underlay .map .go-game{color:var(--c-go)}
+#underlay .map .go-replay{color:var(--c-replay)}
+#underlay .map .go .arr{width:calc(var(--u) * 26);height:calc(var(--u) * 10);flex:none;overflow:visible;animation:m-nudge 1.1s ease-in-out infinite alternate}
+#underlay .map .arr path{fill:none;stroke:currentColor;stroke-width:1.6px;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#underlay .map .badge{position:absolute;left:calc(var(--u) * 20);top:calc(var(--u) * -34);display:inline-flex;align-items:center;gap:calc(var(--u) * 7);
+  padding:calc(var(--u) * 3) calc(var(--u) * 11);border-radius:3px;font-size:calc(var(--u) * 15);color:var(--c-replay);
+  background:rgba(12,18,28,.85);border:1px solid rgba(159,208,255,.4)}
+#underlay .map .badge i{width:calc(var(--u) * 16);border-top:1.5px dashed var(--c-replay)}
+/* (the plate pressed — its mark: the replay on, or dropped; its touch at least 44 px) */
+#underlay .map .badge::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);translate:-50% -50%}
+#underlay .map .author{position:absolute;display:flex;flex-direction:column;align-items:center;gap:calc(var(--u) * 6)}
+#underlay .map .author svg{width:calc(var(--u) * 52);height:calc(var(--u) * 56);overflow:visible}
+#underlay .map .author span{font:calc(var(--u) * 16)/1 var(--f-text);color:var(--c-name)}
+#underlay .map .can{pointer-events:auto;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#underlay .map .hit{position:absolute;width:max(44px,calc(var(--u) * 44));height:max(44px,calc(var(--u) * 44));margin:0;padding:0;transform:translate(-50%,-50%);
+  border:0;border-radius:50%;background:none}
+#underlay .map .hit:not(.can){display:none}
+#underlay .map .knot .hit{left:50%;top:calc(var(--u) * 10)}
+#underlay .map .stem .hit{left:50%;top:calc(var(--L) / 2)}
+#underlay .map .stem .at{position:absolute;left:50%;top:calc(var(--L) / 2)}
+#underlay .map .author .hit{left:50%;top:calc(var(--u) * 26);width:max(44px,calc(var(--u) * 60));height:max(44px,calc(var(--u) * 60))}
+#underlay .map button:focus{outline:none}
+#underlay .map button:focus-visible{outline:1px solid var(--c-main);outline-offset:2px}
+#underlay .map .go.can:hover{filter:brightness(1.25)}
+#underlay .map .tree:has(.head.can:hover,.knot .hit.can:hover) .title{color:#fff}
+#underlay .map .tree:has(.head.can:hover,.knot .hit.can:hover) .core{filter:brightness(1.4)}
+#underlay .map .row:has(.hit.can:hover,.opt.chosen.can:hover) .opt.chosen{filter:brightness(1.15)}
+
+/* “The Yard”: frost and ink; the lamp's warm in the lit windows only */
+#underlay .map.yard{--f-text:"Son Hand","Neucha","Comic Sans MS",sans-serif;--f-title:var(--f-text);--f-num:"Arial Narrow","Roboto Condensed",Arial,sans-serif;
+  --c-main:#e3e9f0;--c-glow:rgba(227,233,240,.16);--c-go:#e3e9f0;--c-title:#f2f5f9;--c-num:#b8c3cf;--c-name:#b8c3cf;--c-key:#e3e9f0;
+  --c-alt:#9aa8b8;--c-thin:rgba(184,195,207,.4);--c-replay:#9fd0ff;--c-halo:rgba(227,233,240,.5);--c-core:#f6f9fc;--lamp:#e8963a;--ink:#1b2230;
+  --trunk:1.6px;--glow:7px;--w:calc(var(--u) * 448);
+  --rime:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.07 0.14' numOctaves='4' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 3 -1.1'/%3E%3C/filter%3E%3Crect width='220' height='120' filter='url(%23r)'/%3E%3C/svg%3E")}
+/* a car: its body dark green-grey in the night, a darker roof, rime thick at its edges; one height, buffer to buffer */
+#underlay .map.yard .tree{--s:1.05;min-height:calc(var(--u) * 360);padding:calc(var(--u) * 16) calc(var(--u) * 26) calc(var(--u) * 14);
+  background:linear-gradient(180deg,rgba(14,22,28,.92) 0 calc(var(--u) * 8),rgba(36,58,62,.86) calc(var(--u) * 8),rgba(26,42,48,.86));
+  border-radius:calc(var(--u) * 10) calc(var(--u) * 10) calc(var(--u) * 3) calc(var(--u) * 3);
+  box-shadow:inset 0 0 0 1px rgba(227,233,240,.12),inset calc(var(--u) * -2) 0 0 rgba(0,0,0,.4);text-shadow:0 1px 2px rgba(0,0,0,.8)}
+#underlay .map.yard .tree::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:var(--rime);
+  background-size:calc(var(--u) * 220) calc(var(--u) * 120);opacity:.22;
+  -webkit-mask:radial-gradient(ellipse at center,transparent 55%,#000 100%);mask:radial-gradient(ellipse at center,transparent 55%,#000 100%)}
+#underlay .map.yard .tree > .head,#underlay .map.yard .tree > .knot,#underlay .map.yard .tree > .rows{position:relative}
+#underlay .map.yard .tree.dense{--s:.88}
+#underlay .map.yard .tree.current{box-shadow:inset 0 0 0 1px rgba(227,233,240,.32),0 0 calc(var(--u) * 26) rgba(227,233,240,.12)}
+/* the bogies under it, the coupler to the next car */
+#underlay .map.yard .bogie{position:absolute;bottom:calc(var(--u) * -14);width:calc(var(--u) * 70);height:calc(var(--u) * 16);
+  background:radial-gradient(circle at 25% 50%,#0b1018 calc(var(--u) * 7),transparent calc(var(--u) * 7.5)),radial-gradient(circle at 75% 50%,#0b1018 calc(var(--u) * 7),transparent calc(var(--u) * 7.5))}
+#underlay .map.yard .bogie.l{left:calc(var(--u) * 40)}
+#underlay .map.yard .bogie.r{right:calc(var(--u) * 40)}
+#underlay .map.yard .coupler{position:absolute;right:calc(var(--u) * -6);bottom:calc(var(--u) * 22);width:calc(var(--u) * 12);height:calc(var(--u) * 6);background:#0b1018}
+#underlay .map.yard .tree.end .coupler{display:none}
+/* the finale: the last car, its red tail lamp */
+#underlay .map.yard .tail{position:absolute;right:calc(var(--u) * 14);bottom:calc(var(--u) * 26);width:calc(var(--u) * 12);height:calc(var(--u) * 12);border-radius:50%;
+  background:#e0303c;box-shadow:0 0 calc(var(--u) * 14) rgba(224,48,60,.8)}
+/* a car to come: dark, boarded up, its number only */
+#underlay .map.yard .tree.future{background:linear-gradient(180deg,rgba(10,16,20,.9) 0 calc(var(--u) * 8),rgba(22,32,38,.8) calc(var(--u) * 8))}
+#underlay .map.yard .tree.future .num{opacity:.6}
+#underlay .map.yard .tree.future .core,#underlay .map.yard .tree.future .halo,#underlay .map.yard .tree.future .seg{visibility:hidden}
+#underlay .map.yard .boards{display:block;position:relative;margin:calc(var(--u) * 30) calc(var(--u) * 20) 0;height:calc(var(--u) * 150);
+  background:repeating-linear-gradient(180deg,rgba(70,54,38,.55) 0 calc(var(--u) * 26),rgba(10,14,18,.6) calc(var(--u) * 26) calc(var(--u) * 30))}
+/* the windows: chosen — lit, ink on the lamp's warm; could have been — frosted glass; never reached — boarded */
+#underlay .map.yard .opt{box-sizing:border-box;border-radius:2px}
+#underlay .map.yard .opt.chosen{padding:0 calc(var(--u) * 8);font-size:calc(var(--u) * var(--s) * 17);line-height:var(--L);color:var(--ink);text-shadow:none;
+  background:linear-gradient(180deg,#f6c27a,var(--lamp));box-shadow:0 0 calc(var(--u) * 14) rgba(232,150,58,.55),inset 0 0 0 1px rgba(90,70,50,.6)}
+#underlay .map.yard .opt.alt{padding:0 calc(var(--u) * 7) 0 calc(var(--u) * 15);margin-left:calc(var(--u) * 2);font-size:calc(var(--u) * var(--s) * 15);line-height:1.32;
+  color:var(--c-alt);background:rgba(227,233,240,.1);box-shadow:inset 0 0 calc(var(--u) * 6) rgba(227,233,240,.25),inset 0 0 0 1px rgba(227,233,240,.22)}
+#underlay .map.yard .opt.alt .pip{left:calc(var(--u) * 5)}
+#underlay .map.yard .opt.alt .twig{left:calc(var(--gut) / -2 - var(--u) * 2)}
+#underlay .map.yard .opt.tried{color:var(--c-replay);box-shadow:inset 0 0 0 1px rgba(159,208,255,.6)}
+#underlay .map.yard .opt.tried .pip{background:var(--c-replay);opacity:1}
+#underlay .map.yard .opt.tried .twig path{stroke:var(--c-replay);stroke-dasharray:4 3}
+#underlay .map.yard .opt.unseen{padding:0 calc(var(--u) * 10);font-size:calc(var(--u) * var(--s) * 16);line-height:var(--L);letter-spacing:.35em;color:rgba(184,195,207,.55);
+  background:repeating-linear-gradient(180deg,rgba(70,54,38,.7) 0 calc(var(--u) * 6),rgba(20,16,12,.7) calc(var(--u) * 6) calc(var(--u) * 7))}
+#underlay .map.yard .row{border-top:1px solid rgba(227,233,240,.07);padding-top:calc(var(--u) * var(--s) * 6)}
+#underlay .map.yard .row.cursor,#underlay .map.yard .row.pending{border-top-color:transparent}
+#underlay .map.yard .stem .dot{box-shadow:0 0 0 calc(var(--u) * 2.5) rgba(227,233,240,.2),0 0 calc(var(--u) * 8) rgba(227,233,240,.6)}
+#underlay .map.yard .author svg path,#underlay .map.yard .author svg rect{fill:none;stroke:#b8c3cf;stroke-width:1.6px}
+#underlay .map.yard .author svg .glass{fill:rgba(227,233,240,.35);stroke:#e3e9f0;stroke-width:1.2px}

@@ -9,7 +9,7 @@ import { until, keys } from '../hands.js';
 const THERE = 0.97;
 
 export default {
-  title: 'The Coat', // (as the author's ☰ lists it)
+  title: 'The Coat', // (as the author's map lists it)
   about: 6,
   skipped: { seconds: 5 },
   async run(g, b, opts, signal) {

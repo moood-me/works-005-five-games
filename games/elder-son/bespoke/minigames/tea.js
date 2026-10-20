@@ -18,7 +18,7 @@ const SHAKE_MIN = 1.8; // s — the shaking no shorter
 const SHAKE_AFTER = 0.6; // s — the shaking after the question
 
 export default {
-  title: 'Tea', // (as the author's ☰ lists it)
+  title: 'Tea', // (as the author's map lists it)
   about: 13,
   skipped: { spills: 1 },
   async run(g, b, opts, signal) {

@@ -16,7 +16,7 @@ const GATE = 0.98;
 const SLIP_MS = 600000;
 
 export default {
-  title: 'Arm in Arm', // (as the author's ☰ lists it)
+  title: 'Arm in Arm', // (as the author's map lists it)
   about: 36,
   skipped: { falls: 0 },
   async run(g, b, opts, signal) {

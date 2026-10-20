@@ -16,7 +16,7 @@ const TRAIN = 14; // s — the train beyond the window
 const SCRAPE = 0.4; // of the frame's height of path — a scratch
 
 export default {
-  title: 'Frost', // (as the author's ☰ lists it)
+  title: 'Frost', // (as the author's map lists it)
   about: 18,
   skipped: { hole: 0.6 },
   async run(g, b, opts, signal) {

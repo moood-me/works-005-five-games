@@ -1,5 +1,5 @@
 // The check of the game's branches (game.md §11): node bespoke/check/run.mjs <a clone of the world>. No browser, no
-// engine, nothing drawn. Every step of every chapter is played unseen, the way the author's ☰ plays it (jump.js: a dry
+// engine, nothing drawn. Every step of every chapter is played unseen, the way the author's map plays it (jump.js: a dry
 // run, story.js context(…, j)), on a page that only knows the scenes' specs (fake.mjs): no time passes, the choices
 // are those of the play walked, a minigame gives the result put in for it (else its `skipped`).
 // Walked: every combination of the ten choices (1792: `crossing` three ways; `kudimov` three at `crossing` truth, else
@@ -16,13 +16,14 @@
 // “Common”): {beats: {name: {after, tells, seconds, show}}, points, offers, party, acts: {key: {values, tells}}}; with
 // the minigames' table (§7, MINIGAMES below) and the moments their files wait for; people.json, sound.js and its unheard(),
 // the lines of §8 (lines.mjs) letter for letter; and the logic of the play (LOGIC below: one ending, the scales within
-// their bounds, every mark read in facts, the lines said only on their condition, no b.offer).
+// their bounds, every mark read in facts, the lines said only on their condition, who comes to the platform, the
+// clarinet's phrase, no b.offer). “The Yard” — the map's background (game.js, not run here): its keys and points.
 // Printed: what does not match (file, step, name) — a scene the world lacks is said, the walk goes on; the cuts inside
 // a scene not by its table and without beat_next; what the contracts have and no play named; the lines of §8 no play
-// said; every line said (who, text) once — the voices are made from this list; for each ending and who came — the
-// beats of every step and the time by chapter and in all (the beats' `seconds`, the lines said in the pauses between
-// beats at 0.3 s + 0.06 s a letter, the minigames' `about`; 8 s a choice, 1 s a scene's opening, “The Yard” 7 s a title
-// and 12 s a map); every stretch of watching with nothing to do longer than 90 s.
+// said; every line said (who, text) once — the voices are made from this list; for each ending and who stands on the
+// platform's stairs — the beats of every step and the time by chapter and in all (the beats' `seconds`, the lines said
+// in the pauses between beats at 0.3 s + 0.06 s a letter, the minigames' `about`; 8 s a choice, 1 s a scene's opening,
+// 12 s the map); every stretch of watching with nothing to do longer than 90 s.
 // Exit code: 0 — nothing to fix, 1 — something does not match.
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -65,8 +66,9 @@ const MINIGAMES = {
   running: { scene: 'street', keys: ['run', 'look_back'], listens: ['run_at'], points: ['busygin'], result: ['seconds', 'looks'] },
   glass: { scene: 'platform', keys: ['wipe'], points: ['train_window#pane'], result: ['wipe'] },
 };
-// game.md §3.4: what game.js itself takes of “The Yard” (it is not run here)
-const YARD = { keys: ['chapter_number', 'chapter_title', 'map', 'reveal', 'go', 'snow'], offer: 'signal#light' };
+// game.md §3.4: what game.js itself takes of “The Yard”, the map's background (it is not run here): its keys, the points
+// its trees stand at (map.js) — each chapter's, the finale's (c7) and the author's sign's
+const MAP = { keys: ['shown', 'come'], points: [...Array.from({ length: 8 }, (_, i) => `c${i}`), 'author'] };
 // the "live" results put in (game.md §11): both edges
 const EDGES = [
   { windows: { knocked: [] }, tea: { spills: 1 }, tiptoe: { creaks: 0 }, frost: { hole: 0 }, 'arm-in-arm': { falls: 0 }, following: { seen: 0 },
@@ -74,8 +76,8 @@ const EDGES = [
   { windows: { knocked: [1, 2, 3, 4, 5] }, tea: { spills: 2 }, tiptoe: { creaks: 2 }, frost: { hole: 1 }, 'arm-in-arm': { falls: 1 }, following: { seen: 1 },
     rucksack: { slips: 2 }, buckets: { buckets: 3 }, running: { looks: 3 }, glass: { wipe: 1 } },
 ];
-// the script's length (game.md §11): a choice, a scene's opening, “The Yard” with a title, with a map
-const ACT = 8, OPEN = 1, TITLE_S = 7, MAP_S = 12;
+// the script's length (game.md §11): a choice, a scene's opening, the map
+const ACT = 8, OPEN = 1, MAP_S = 12;
 
 // what does not match: text → the plays it was met in
 const misses = new Map(), cuts = new Map();
@@ -222,17 +224,18 @@ for (const name in sound) {
   const h = quiet.sounds?.march?.();
   if (!h || typeof h.loud !== 'function' || typeof h.stop !== 'function') miss('sound.js', 'unheard().sounds.march() is not a handle {loud, stop}');
 }
-// “The Yard”, as game.js opens it
+// “The Yard”, as game.js opens it: the map's keys, its points (elements of the scene)
 const yard = WORLD.get(SCENES.yard);
 if (yard) {
-  for (const key of YARD.keys) {
+  for (const key of MAP.keys) {
     if (!(key in yard.states)) miss('game.js', `“${SCENES.yard}”: the key “${key}” is not in states`);
+    if (yard.contract && !(key in (yard.contract.keys ?? {}))) miss('game.js', `“${SCENES.yard}”: the contract’s keys have no key “${key}”`);
     yard.named.add(`party:${key}`);
   }
-  if (yard.contract && !yard.contract.offers.includes(YARD.offer)) miss('game.js', `“${SCENES.yard}”: the offer “${YARD.offer}” is not in the contract`);
-  if (!yard.objects.has(YARD.offer.split('#')[0])) miss('game.js', `“${SCENES.yard}”: no element “${YARD.offer.split('#')[0]}”`);
-  else if (!yard.objects.get(YARD.offer.split('#')[0]).name) miss('game.js', `“${SCENES.yard}”: the element “signal” has no name`);
-  yard.named.add(`ref:${YARD.offer}`);
+  for (const ref of MAP.points) {
+    if (yard.contract && !yard.contract.points.includes(ref)) miss('game.js', `“${SCENES.yard}”: the point “${ref}” is not in the contract`);
+    yard.named.add(`ref:${ref}`);
+  }
 }
 // no b.offer anywhere (on engine 3 a choice is the language of mini-games)
 for (const file of ['game.js', 'story.js', 'ui.js', ...CHAPTERS.map(c => c.file), ...[...GAMES.values()].map(m => m.file)]) {
@@ -316,6 +319,8 @@ function watched(g, j, ch, here, events, seen) {
         return false;
       };
       if (name === 'beds') return (levels = {}, seconds) => { Object.keys(levels).forEach(known); q.beds(levels, seconds); };
+      // (the clarinet's phrase: whether it resolves, and where — in the house, or from afar)
+      if (name === 'clarinet' && known(name)) return (o = {}) => { seen.clarinet.push({ resolve: !!o.resolve, far: !!o.far }); return q.clarinet(o); };
       return known(name) ? q[name] : mute;
     },
   });
@@ -466,10 +471,18 @@ const LOGIC = [
   ['L110 “The snuffbox went with him”', (f, s) => [f.boxGone, said(s, 110)]],
   ['L115 “About the orchestra”', (f, s) => [f.secret, said(s, 115)]],
   ['L116 “Stay. Not for Father\'s sake”', (f, s) => [f.ninaFor, said(s, 116)]],
-  ['L119 Nina\'s “Volodya”', (f, s) => [f.came === 'none' && f.ninaCame, said(s, 119)]],
-  ['L101 “Volodya!”', (f, s) => [f.came !== 'none', said(s, 101)]],
+  ['L119 Nina\'s “Volodya”', (f, s) => [!f.fatherCame && f.ninaCame, said(s, 119)]],
+  ['L101 “Volodya!”', (f, s) => [f.fatherCame, said(s, 101)]],
   ['L100 Silva at the door', (f, s) => [f.silvaDoor, said(s, 100)]],
-  ['L103 “Come on Saturday!”', (f, s) => [f.train === 'go' && f.told === 'self' && f.came !== 'none', said(s, 103)]],
+  ['L103 “Come on Saturday!”', (f, s) => [f.train === 'go' && f.told === 'self' && f.fatherCame, said(s, 103)]],
+  // who comes to the platform (design.md “Finale”): by “Together” — and those he bound with the truth himself
+  ['his father on the platform', (f, s, st) => [f.came !== 'none' || st.choices.truth === 'self', opened(s, SCENES.platform, 'last')?.father_came === 1]],
+  ['Nina on the platform', (f, s, st) => [f.came === 'family' || st.choices.crossing === 'truth', opened(s, SCENES.platform, 'last')?.nina_came === 1]],
+  ['Vasenka on the platform', (f, s, st) => [f.came === 'family' || st.choices.fire === 'own_up', opened(s, SCENES.platform, 'last')?.vasya_came === 1]],
+  // the clarinet's phrase resolves where he stayed and someone came for him; at once, in the house, only where the
+  // house held together and there was little untruth — else later, from afar (the epilogue)
+  ['the clarinet\'s phrase resolves', (f, s, st) => [st.choices.train !== 'go' && (f.fatherCame || f.ninaCame || f.vasyaCame), s.clarinet.some(c => c.resolve)]],
+  ['…at once, in the house', (f, s, st) => [st.choices.train !== 'go' && st.choices.truth !== 'silent' && f.came !== 'none' && !f.hurt, s.clarinet.some(c => c.resolve && !c.far)]],
   ['the ending “Missed the Train”', (f, s) => [f.ending === 'late', said(s, 104), s.beats.has('home_late')]],
   ['the ending “Anyway”', (f, s) => [f.ending === 'anyway', said(s, 107), s.beats.has('home_anyway')]],
   ['the ending “Saturday”', (f, s) => [f.ending === 'saturday', said(s, 108)]],
@@ -495,14 +508,16 @@ const raw = choices => {
 
 // --- the walk
 const b = page(WORLD, text => miss('b.trouble', text));
-// one play: its choices, the results put in → {ending, came, chapters: [[events of each step]], lines}
+// who stands on the platform's stairs for him (V.3), in words
+const stairs = f => [f.fatherCame && 'father', f.ninaCame && 'Nina', f.vasyaCame && 'Vasenka'].filter(Boolean).join(', ') || 'no one';
+// one play: its choices, the results put in → {ending, came: who stands on the stairs, chapters: [[events of each step]], lines}
 async function walk(choices, results, steps = null) {
   const result = m => {
     const name = GAMES.get(m)?.name;
     return results[name] && { ...m.skipped, ...results[name] };
   };
   let came = fresh();
-  const seen = { lines: new Set(), beats: new Set(), played: new Set(), opened: {}, set: {}, offered: {}, results: {} };
+  const seen = { lines: new Set(), beats: new Set(), played: new Set(), opened: {}, set: {}, offered: {}, results: {}, clarinet: [] };
   const chapters = [];
   for (const ch of CHAPTERS) {
     const done = [];
@@ -536,7 +551,7 @@ async function walk(choices, results, steps = null) {
       if (!sides.every(x => x === sides[0])) miss('the play\'s logic', `${name}: ${sides.map(x => (x ? 'yes' : 'no')).join(' / ')} (the ending ${f.ending})`);
     }
   }
-  return { ending: f.ending, came: f.came, chapters, lines: seen.lines };
+  return { ending: f.ending, came: stairs(f), chapters, lines: seen.lines };
 }
 const CHOICES = CHAPTERS.flatMap(ch => ch.choices);
 // (kudimov's third — “Not for Father's sake” — only when Nina knows: crossing truth)
@@ -566,10 +581,9 @@ const clock = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(
 const span = all => { const lo = Math.min(...all), hi = Math.max(...all); return lo === hi ? clock(lo) : `${clock(lo)}…${clock(hi)}`; };
 const seconds = events => events.reduce((sum, e) => sum + (e[0] === 'beat' || e[0] === 'play' ? e[2] : e[0] === 'say' ? e[1] : 0), 0);
 const withActs = events => seconds(events) + events.reduce((sum, e) => sum + (e[0] === 'act' ? ACT : e[0] === 'scene' ? OPEN : 0), 0);
-// “The Yard”: the very first (no title) and before each chapter with a wall (a title); after each with choices but V (a
-// map); after the epilogue (the whole play's map)
-const yards = () => TITLE_S + CHAPTERS.reduce((s, ch, c) => s + (c && ch.wall !== false ? TITLE_S : 0)
-  + (ch.choices.length && c !== CHAPTERS.length - 2 ? MAP_S : 0), 0) + MAP_S;
+// the map (“The Yard”, game.js): before each chapter but one that says wall: false (the one before runs into it), and
+// after the epilogue (its finale)
+const maps = () => (CHAPTERS.reduce((n, ch) => n + (ch.wall !== false ? 1 : 0), 0) + 1) * MAP_S;
 
 say(`World: ${world}, ${WORLD.size} scenes. Game: ${CHAPTERS.length} chapters, ${CHAPTERS.reduce((n, ch) => n + ch.steps.length, 0)} steps, ${CHOICES.length} choices.`);
 say(`Plays: ${full} (${combos.length} combinations of the choices and ${EDGES.length * cover.length} with live minigame results on both edges), and every step alone.`);
@@ -602,13 +616,13 @@ for (const line of [...lines.values()].sort((a, z) => (a.n ?? 999) - (z.n ?? 999
   say(`${line.n ? `L${String(line.n).padStart(2, '0')}` : '—'} | ${line.who} | ${PEOPLE[line.who]?.voice ?? '?'} | ${line.text} | ${(0.3 + 0.06 * line.text.length).toFixed(1)}`);
 }
 
-say(`\n== Beats and time by ending and by who came (beats — the contract's seconds, lines in the pauses — 0.3 s + 0.06 s a letter, minigames — about; in brackets — with the choices at ${ACT} s, a scene's opening at ${OPEN} s and “The Yard”: a title ${TITLE_S} s, a map ${MAP_S} s) ==`);
-for (const ending of ENDINGS) for (const who of ['family', 'father', 'none']) {
+say(`\n== Beats and time by ending and by who stands on the platform's stairs (beats — the contract's seconds, lines in the pauses — 0.3 s + 0.06 s a letter, minigames — about; in brackets — with the choices at ${ACT} s, a scene's opening at ${OPEN} s and the map at ${MAP_S} s) ==`);
+for (const ending of ENDINGS) for (const who of [...new Set(plays.slice(0, full).map(p => p.came))].sort()) {
   const mine = plays.slice(0, full).filter(p => p.ending === ending.id && p.came === who);
-  say(`\n-- ${ending.label} (${ending.id}), came: ${who} — ${mine.length} plays --`);
   if (!mine.length) continue;
+  say(`\n-- ${ending.label} (${ending.id}), came: ${who} — ${mine.length} plays --`);
   const times = mine.map(p => p.chapters.map(steps => seconds(steps.flat())));
-  const all = mine.map(p => p.chapters.reduce((sum, steps) => sum + withActs(steps.flat()), 0) + yards());
+  const all = mine.map(p => p.chapters.reduce((sum, steps) => sum + withActs(steps.flat()), 0) + maps());
   say(`time: ${CHAPTERS.map((ch, c) => `${ch.number || ch.title} ${span(times.map(t => t[c]))}`).join(' · ')} · in all ${span(times.map(t => t.reduce((a, x) => a + x, 0)))} (${span(all)})`);
   for (const [c, ch] of CHAPTERS.entries()) {
     for (const n of ch.steps.keys()) {
@@ -623,8 +637,8 @@ for (const ending of ENDINGS) for (const who of ['family', 'father', 'none']) {
   }
 }
 
-// a stretch of watching: from one thing the player does (“The Yard”'s semaphore, a choice, a minigame) to the next.
-// “The Yard” stands before a chapter unless it says wall: false, and after one that has choices but V (game.js)
+// a stretch of watching: from one thing the player does (the map, a choice, a minigame) to the next. The map stands
+// before a chapter unless it says wall: false (game.js)
 const long = new Map(); // `${from} → ${to}` → [seconds of each play it is long in]
 for (const p of plays.slice(0, full)) {
   let run = 0, from = 'the beginning';
@@ -634,7 +648,7 @@ for (const p of plays.slice(0, full)) {
     from = to;
   };
   for (const [c, ch] of CHAPTERS.entries()) {
-    if (!c || ch.wall !== false) acted(`“The Yard” before ${ch.file}`);
+    if (ch.wall !== false) acted(`the map before ${ch.file}`);
     for (const [n, events] of p.chapters[c].entries()) {
       for (const e of events) {
         if (e[0] === 'beat') run += e[2];
@@ -642,7 +656,6 @@ for (const p of plays.slice(0, full)) {
         else if (e[0] !== 'scene') acted(`${ch.file}, step ${n + 1} “${ch.titles?.[n] ?? ''}”`);
       }
     }
-    if (ch.choices.length && c !== CHAPTERS.length - 2) acted(`“The Yard” after ${ch.file}`);
   }
   acted('the end');
 }

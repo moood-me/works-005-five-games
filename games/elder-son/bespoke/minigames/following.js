@@ -16,7 +16,7 @@ const MOVED = 0.3; // s — “were walking” lately
 const WAIT_MS = 600000;
 
 export default {
-  title: 'Following', // (as the author's ☰ lists it)
+  title: 'Following', // (as the author's map lists it)
   about: 40,
   skipped: { seen: 0 },
   async run(g, b, opts, signal) {

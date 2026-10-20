@@ -1,6 +1,6 @@
 // Epilogue (game.md §6). The window at the end of the street that night — the clarinet behind it, as the play has made it
 // (facts.tune); the platform at dawn — Vasenka leaves by the first train, or it is empty. What became of Nina and
-// Vasenka the narrator does not say: it is seen. Then game.js shows “The Yard” with the whole play.
+// Vasenka the narrator does not say: it is seen. Then the map (game.js), its finale.
 // Reads: facts (tune, ending, boxGone; the scenes carry vasya_end, nina_end…). Leaves: nothing. The scales hidden.
 import { SCENES, facts } from '../story.js';
 
@@ -20,8 +20,9 @@ export default {
       await g.scene(SCENES.street, { beat: 'night_window' });
       const window = g.beat('night_window');
       await held;
-      // later — he stayed and they came for him: the phrase resolves, later and from afar; cut — it breaks off, as
-      // always (he left — or stayed, and no one came for him); now — nothing (it has sounded in the house already)
+      // later — he stayed and someone came for him, where the house was not yet warm (much untruth, or only the truth
+      // brought them): the phrase resolves, later and from afar; cut — it breaks off, as always (he left — or stayed,
+      // and no one came for him); now — nothing (it has sounded in the house already)
       if (f.tune === 'later') g.sound.clarinet({ times: 1, resolve: true, far: true });
       else if (f.tune === 'cut') g.sound.clarinet({ times: 1, far: true });
       if (f.ending === 'saturday') await g.say('narrator', 'The window at the end of the street stayed lit till morning');

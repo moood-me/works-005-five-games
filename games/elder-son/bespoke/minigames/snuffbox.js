@@ -17,7 +17,7 @@ const FINGERS = 4;
 const THERE = 0.97; // push — there
 
 export default {
-  title: 'The Snuffbox', // (as the author's ☰ lists it)
+  title: 'The Snuffbox', // (as the author's map lists it)
   about: 8,
   // (one shape for both modes: the chapter reads none of the result's fields; game.md §7 — take {closed: 4}, give {seconds: 6})
   skipped: { closed: 4, seconds: 6 },

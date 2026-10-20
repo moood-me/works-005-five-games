@@ -12,7 +12,7 @@ const LIVELY = 1.5; // frame heights a second — the finger's speed “for all 
 const SPOT = 0.22; // the spot's radius, a share of the frame's height
 
 export default {
-  title: 'Hands', // (as the author's ☰ lists it)
+  title: 'Hands', // (as the author's map lists it)
   about: 12,
   skipped: { seconds: 10 },
   async run(g, b, opts, signal) {

@@ -1,8 +1,10 @@
 // V. The Elder Son (game.md §6). On the porch at night with Nina: «I don't know my father» — his coat on her shoulders
 // (The Coat); Sarafanov packs a suitcase to go with him «to your mother» — ⚑ tell him yourself, or keep silent and let
 // Silva tell; the run to the last train (Running); at its open door — ⚑ get in, or stay; home, if he stayed.
-// Reads: facts (ninaIs, secret, entry, boxWhere, came, ninaCame, silvaDoor, boxHand, told, hurt, train, tune, ending).
-// Leaves: choices.truth, .train; scales lie. No map after it (game.md §3.5): the epilogue comes at once.
+// On the platform's stairs: those “Together” brings, and those he bound with the truth himself (story.js facts: his
+// father, if he told him; Nina, if she knows it from him; Vasenka, if he owned up) — who came so knows who he is.
+// Reads: facts (ninaIs, secret, entry, boxWhere, fatherCame, ninaCame, vasyaCame, silvaDoor, boxHand, told, hurt, train,
+// tune, ending). Leaves: choices.truth, .train; scales lie. No map after it (game.md §3.5): the epilogue runs on.
 import { SCENES, facts } from '../story.js';
 import coat from '../minigames/coat.js';
 import running from '../minigames/running.js';
@@ -98,12 +100,14 @@ export default {
       g.sound.doors();
       if (f.silvaDoor) await g.say('silva', 'Well? Coming, sonny?');
       await came;
-      if (f.came !== 'none') await g.say('sarafanov', 'Volodya!');
+      if (f.fatherCame) await g.say('sarafanov', 'Volodya!');
       else if (f.ninaCame) await g.say('nina', 'Volodya');
       await last;
+      // (“Stay” on the one who came for him and stands first: his father, else Nina, else Vasenka; no one — the far
+      // window down beyond the gardens)
       const train = await g.choose('train', {
         'train#door': [{ id: 'go', label: tr('Get on') }],
-        [f.came !== 'none' ? 'sarafanov' : f.ninaCame ? 'nina' : 'far_window']: [{ id: 'stay', label: tr('Stay') }],
+        [f.fatherCame ? 'sarafanov' : f.ninaCame ? 'nina' : f.vasyaCame ? 'vasenka' : 'far_window']: [{ id: 'stay', label: tr('Stay') }],
       });
       g.apply('train');
       if (train === 'stay') {
@@ -123,7 +127,7 @@ export default {
         const away = g.beat('away');
         g.beds({ train: 0.8 }, 2);
         await wave;
-        if (f.told === 'self' && f.came !== 'none') await g.say('sarafanov', 'Come on Saturday! Do you hear? On Saturday!');
+        if (f.told === 'self' && f.fatherCame) await g.say('sarafanov', 'Come on Saturday! Do you hear? On Saturday!');
         await away;
       }
     },
@@ -143,8 +147,8 @@ export default {
         if (f.boxWhere === 'cupboard') await g.say('sarafanov', 'Will you take it now?');
         await room;
         // now — the phrase for the first time goes on and resolves (≈ 14 s; it ends by itself, in the epilogue
-        // already); else it breaks off, as always: `later` — much untruth, it does not heal at once (it resolves in the
-        // epilogue); `cut` — no one came for him: the truth said, and the house never one
+        // already); else it breaks off, as always: `later` — much untruth, or only the truth brought them to the
+        // platform (the house cold all evening): it does not heal at once — it resolves in the epilogue, from afar
         if (f.tune === 'now') g.sound.clarinet({ times: 1, resolve: true });
         else g.sound.clarinet({ times: 1 });
         await home;

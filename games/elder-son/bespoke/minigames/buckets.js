@@ -16,7 +16,7 @@ const ENOUGH = 55; // s — the neighbours have managed
 const SCENE_MS = 30000;
 
 export default {
-  title: 'Buckets', // (as the author's ☰ lists it)
+  title: 'Buckets', // (as the author's map lists it)
   about: 35,
   skipped: { buckets: 3 },
   async run(g, b, opts, signal) {
