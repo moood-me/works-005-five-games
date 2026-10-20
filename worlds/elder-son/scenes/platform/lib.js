@@ -50,7 +50,7 @@ const IDS = ['busygin', 'silva', 'sarafanov', 'nina', 'vasenka'];
 const AWAY = [24, 6.8];
 // places (across, distance)
 const P = {
-  FOOT_B: [20.8, 6.5], FOOT_S: [21.6, 7.2], TOP_B: [15.3, 6.5], TOP_S: [15.3, 7.1],
+  FOOT_B: [20.8, 6.5], MID_B: [17.0, 6.5], FOOT_S: [21.6, 7.2], TOP_B: [15.3, 6.5], TOP_S: [15.3, 7.1],
   LAMP_B: [0, 6.1], LAMP_S: [-0.8, 6.35], EDGE_B: [-0.25, 7.45],
   SEAT_V: [-2.0, 8.0], SEAT_B: [-1.0, 8.0], UP_V: [-2.05, 8.65], UP_B: [-1.15, 8.6],
   WAIT: [11.5, 8.5], WAIT_RUN: [13.4, 7.4], AT_DOOR: [DOOR, 9.85], DOOR_GIVE: [11.0, 9.35],
@@ -119,7 +119,7 @@ function film(scene) {
     [`${w.id}_here`]: upTop, [`${w.id}_mood`]: w.mood, [`${w.id}_with`]: w.with ?? null, [`${w.id}_look`]: upTop ? 'busygin' : null })));
   // the medium shot on whoever calls him, face on, in the lamp's light over the stairs
   const callShot = who => {
-    const p = callerAt(), k = brg(p, P.WAIT) - 18, r = 1.5, rad = (k * Math.PI) / 180;
+    const p = callerAt(), k = brg(p, P.WAIT) - 40, r = 1.5, rad = (k * Math.PI) / 180;
     return cam(p[0] + r * Math.sin(rad), p[1] + r * Math.cos(rad), (k + 180) % 360, who === 'sarafanov' ? -0.3 : -0.2);
   };
 
@@ -134,8 +134,8 @@ function film(scene) {
   }
   // the train comes up and stands (train −1 → 0); its doors open — `then` told as they begin to
   async function arrive(s, then) {
-    if (s.get('train') !== 0) await s.move('train', 0, { over: 10, ease: 'out' });
-    await s.wait(0.6);
+    if (s.get('train') !== 0) await s.move('train', 0, { over: 8, ease: 'out' });
+    await s.wait(0.5);
     s.tell(then);
     await s.move('doors', 1, { over: 1.4, ease: 'inOut' });
   }
@@ -218,7 +218,7 @@ function film(scene) {
     bench: {
       from: () => base(0.84, 0, { ...CAM.bench0,
         ...seated('vasenka', P.SEAT_V, 'seated_bag', { vasenka_with: ['rucksack_lap'], vasenka_mood: 'angry', vasenka_look: [-4, 4, 0.8] }),
-        ...at('busygin', P.FOOT_B, 270, { busygin_mood: 'thinking' }) }),
+        ...at('busygin', P.MID_B, 270, { busygin_mood: 'thinking' }) }),
       run: async s => {
         const b = s.person('busygin');
         s.move('camera_x', CAM.bench.camera_x, { over: 13, ease: 'inOut' });
@@ -248,14 +248,9 @@ function film(scene) {
         s.move('camera_h', CAM.strap.camera_h, { over: 5, ease: 'inOut' });
         v.look('train#back_door');
         await arrive(s, 'strap:open');
-        await rise(v, P.SEAT_V, 'stand_bag');
-        v.mood('angry');
-        await v.walk([P.UP_V]);
-        await v.turn(10);
         b.look('vasenka#back');
-        await rise(b, P.SEAT_B);
-        await b.walk([P.UP_B]);
-        await b.turn(300);
+        await s.all((async () => { await rise(v, P.SEAT_V, 'stand_bag'); await v.walk([P.UP_V]); await v.turn(10); })(),
+          (async () => { await s.wait(0.5); await rise(b, P.SEAT_B); await b.walk([P.UP_B]); await b.turn(300); })());
         b.reach({ r: 'vasenka#back' });
         await s.wait(0.8);
         s.set('strap', 1);
@@ -297,7 +292,8 @@ function film(scene) {
         b.look(null);
         v.look(null);
         b.walk([[2, 7.4], P.TOP_B]);
-        await v.walk([[2, 7.0], [8, 6.8]]);
+        v.walk([[2, 7.0], [8, 6.8]]);
+        await s.wait(2.5);
       },
     },
     // night, snow. He runs up the stairs and stands by the second car's front doorway, facing it, between it and the
@@ -314,7 +310,7 @@ function film(scene) {
       run: async s => {
         const late = num('late_run', 0) === 1, b = s.person('busygin'), who = cameSet(), call = caller();
         const silva = num('silva_door', 1) === 1;
-        const train = late ? null : (async () => { await s.wait(0.8); await arrive(s, 'last:open'); })();
+        const train = late ? null : arrive(s, 'last:open');
         b.gait('run');
         await b.walk([P.TOP_B, P.WAIT_RUN]);
         b.gait(null);
@@ -327,9 +323,9 @@ function film(scene) {
         if (silva) {
           const sv = s.person('silva');
           sv.look('busygin');
-          await sv.turn(150);
+          sv.turn(150);
         }
-        await s.wait(2.6);
+        await s.wait(1.0);
         if (!who.length) {
           // no one: along the platform to the window far below
           s.move('camera_x', CAM.B.camera_x, { over: 3, ease: 'inOut' });
@@ -377,7 +373,7 @@ function film(scene) {
           s.person('silva').here(false);
           s.set('silva_window', 1);
         }
-        const gone = s.move('train', 1, { over: 22, ease: 'in' });
+        const gone = s.move('train', 1, { over: 18, ease: 'in' });
         await s.wait(1.2);
         if (!who.length) {
           await b.walk([P.WATCH]);
@@ -483,7 +479,7 @@ function film(scene) {
         const v = s.person('vasenka');
         await s.wait(1);
         s.tell('dawn:pass');
-        await s.move('train', 0, { over: 10, ease: 'out' });
+        await s.move('train', 0, { over: 8, ease: 'out' });
         v.look('train#back_door');
         await s.wait(0.6);
         s.tell('dawn:open');
@@ -493,7 +489,8 @@ function film(scene) {
         v.here(false);
         await s.move('doors', 0, { over: 1.6, ease: 'inOut' });
         s.tell('dawn:shut');
-        await s.move('train', 1, { over: 9, ease: 'in' });
+        s.move('train', 1, { over: 12, ease: 'in' });
+        await s.wait(5);
       },
     },
   };

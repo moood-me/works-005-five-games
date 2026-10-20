@@ -93,7 +93,7 @@ const lights = [
 const state = {
   beat: null, beat_next: null, late_run: 0, torn: 0, dusk_k: 0, late_k: 0, dawn_k: 0, train_x: G.trainX(0),
   // the play's keys (scenes.md; the game's carry): their defaults — what a play with nothing chosen yet carries
-  father_came: 1, nina_came: 0, vasya_came: 0, silva_door: 1, nina_is: 'none', suitcase: 0, box_hand: 1, warm: 4 / 11, frost: 0.25, vasya_end: 'taiga',
+  father_came: 1, nina_came: 0, vasya_came: 0, silva_door: 1, nina_is: 'none', suitcase: 0, box_hand: 1, warm: 0.36, frost: 0.25, vasya_end: 'taiga',
   ...START,
 };
 const num = means => ({ type: 'number', means });

@@ -1,0 +1,9 @@
+{"strings": [
+  {"text":"TICKETS","translation":"КАССА","where":"scenes/platform/elements/booth.js"},
+  {"text":"The Platform","translation":"Платформа","where":"scenes/platform/scene.json title"},
+  {"text":"A suburban platform at night. The first snow.","translation":"Пригородная платформа ночью. Первый снег.","where":"scenes/platform/scene.json caption"},
+  {"text":"The strap pulled","translation":"Ремень тянут","where":"scenes/platform/showcase.js"},
+  {"text":"The whole family comes","translation":"Приходит вся семья","where":"scenes/platform/showcase.js"},
+  {"text":"His father alone","translation":"Один отец","where":"scenes/platform/showcase.js"},
+  {"text":"The glass rubbed","translation":"Стекло протёрто","where":"scenes/platform/showcase.js"}
+]}

@@ -1,0 +1,1517 @@
+{
+  "engine": 3,
+  "title": "The Platform",
+  "caption": "A suburban platform at night. The first snow.",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -12,
+      20,
+      -1,
+      9.5
+    ]
+  },
+  "modules": [
+    "cast",
+    "beats",
+    "closeups",
+    "trains",
+    "houses"
+  ],
+  "light": {
+    "tint": "#6f80b8",
+    "tintStrength": 0.12,
+    "vignette": 0.45,
+    "grain": 0.2,
+    "haze": 0.14,
+    "hazeColor": "#323b5c",
+    "hazeGlow": 0.9,
+    "shafts": 0,
+    "brightness": 1.12,
+    "saturation": 0.85,
+    "ambient": 0.5,
+    "ambientColor": "#8796c8",
+    "bounce": 0.5,
+    "inside": 0.25,
+    "wind": [
+      0.6,
+      0.2,
+      0.35
+    ],
+    "looks": {
+      "dusk_k": {
+        "ambient": 0.58,
+        "ambientColor": "#8f90c4",
+        "hazeColor": "#3f4468",
+        "tintStrength": 0.1
+      },
+      "late_k": {
+        "ambient": 0.42,
+        "ambientColor": "#7686bc",
+        "hazeColor": "#262e4a",
+        "tintStrength": 0.15
+      },
+      "dawn_k": {
+        "ambient": 0.85,
+        "ambientColor": "#b8bccb",
+        "hazeColor": "#9aa0b2",
+        "haze": 0.22,
+        "tint": "#b0b4c8",
+        "tintStrength": 0.06,
+        "saturation": 0.7,
+        "brightness": 1.05
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "night_sky",
+      "from": [
+        -20,
+        40
+      ],
+      "color": "#a9b8e0",
+      "strength": 0.35
+    },
+    {
+      "id": "dawn_sky",
+      "from": [
+        -30,
+        18
+      ],
+      "color": "#cdd0da",
+      "strength": 0.9,
+      "on": "dawn_k"
+    },
+    {
+      "id": "lamp",
+      "of": "lamp_post#lamp",
+      "color": "#f3dcae",
+      "strength": 1.9,
+      "reach": 12,
+      "glow": 1.2
+    },
+    {
+      "id": "lamp2",
+      "of": "stair_lamp#lamp",
+      "color": "#f3dcae",
+      "strength": 1.6,
+      "reach": 8,
+      "glow": 1
+    },
+    {
+      "id": "head",
+      "of": "train#head",
+      "color": "#fff3d8",
+      "strength": 2.2,
+      "reach": 30
+    },
+    {
+      "id": "tail",
+      "of": "train#tail",
+      "color": "#ff3b22",
+      "strength": 0.8,
+      "reach": 4
+    },
+    {
+      "id": "train_w00",
+      "of": "train_in#w00",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w01",
+      "of": "train_in#w01",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w02",
+      "of": "train_in#w02",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w03",
+      "of": "train_in#w03",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w04",
+      "of": "train_in#w04",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w05",
+      "of": "train_in#w05",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w06",
+      "of": "train_in#w06",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d00",
+      "of": "train_in#d00",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d01",
+      "of": "train_in#d01",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w10",
+      "of": "train_in#w10",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w11",
+      "of": "train_in#w11",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w12",
+      "of": "train_in#w12",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w13",
+      "of": "train_in#w13",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w14",
+      "of": "train_in#w14",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w15",
+      "of": "train_in#w15",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w16",
+      "of": "train_in#w16",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w17",
+      "of": "train_in#w17",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d10",
+      "of": "train_in#d10",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d11",
+      "of": "train_in#d11",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w20",
+      "of": "train_in#w20",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w21",
+      "of": "train_in#w21",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w22",
+      "of": "train_in#w22",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w23",
+      "of": "train_in#w23",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w24",
+      "of": "train_in#w24",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w25",
+      "of": "train_in#w25",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w26",
+      "of": "train_in#w26",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w27",
+      "of": "train_in#w27",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d20",
+      "of": "train_in#d20",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d21",
+      "of": "train_in#d21",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w30",
+      "of": "train_in#w30",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w31",
+      "of": "train_in#w31",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w32",
+      "of": "train_in#w32",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w33",
+      "of": "train_in#w33",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w34",
+      "of": "train_in#w34",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w35",
+      "of": "train_in#w35",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_w36",
+      "of": "train_in#w36",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d30",
+      "of": "train_in#d30",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "train_d31",
+      "of": "train_in#d31",
+      "color": "#ffe2a8",
+      "strength": 0.55,
+      "reach": 5
+    },
+    {
+      "id": "car_lamp",
+      "of": "train_window#lamp",
+      "color": "#fff2d2",
+      "strength": 1,
+      "reach": 3
+    },
+    {
+      "id": "far",
+      "of": "far_window#glow",
+      "color": "#eda055",
+      "strength": 1,
+      "reach": 5,
+      "on": "warm"
+    }
+  ],
+  "state": {
+    "beat": null,
+    "beat_next": null,
+    "late_run": 0,
+    "torn": 0,
+    "dusk_k": 0,
+    "late_k": 0,
+    "dawn_k": 0,
+    "train_x": -8,
+    "father_came": 1,
+    "nina_came": 0,
+    "vasya_came": 0,
+    "silva_door": 1,
+    "nina_is": "none",
+    "suitcase": 0,
+    "box_hand": 1,
+    "warm": 0.36,
+    "frost": 0.25,
+    "vasya_end": "taiga",
+    "fade": 1,
+    "hour": 0.9,
+    "snow": 0.4,
+    "train": 0,
+    "doors": 0,
+    "wipe": 0,
+    "silva_window": 0,
+    "strap": 0,
+    "pull": 0,
+    "grip": 1,
+    "door_bg": 0,
+    "bench_snow": 0,
+    "busygin_here": true,
+    "busygin_a": 20.8,
+    "busygin_d": 6.5,
+    "busygin_turn": 270,
+    "busygin_do": "stand",
+    "busygin_look": null,
+    "busygin_reach": null,
+    "busygin_with": null,
+    "busygin_on": null,
+    "busygin_gait": null,
+    "busygin_mood": "surprised",
+    "silva_here": true,
+    "silva_a": 21.6,
+    "silva_d": 7.2,
+    "silva_turn": 270,
+    "silva_do": "stand",
+    "silva_look": null,
+    "silva_reach": null,
+    "silva_with": null,
+    "silva_on": null,
+    "silva_gait": null,
+    "silva_mood": "smile",
+    "sarafanov_here": false,
+    "sarafanov_a": 24,
+    "sarafanov_d": 6.8,
+    "sarafanov_turn": 270,
+    "sarafanov_do": "stand",
+    "sarafanov_look": null,
+    "sarafanov_reach": null,
+    "sarafanov_with": null,
+    "sarafanov_on": null,
+    "sarafanov_gait": null,
+    "sarafanov_mood": "neutral",
+    "nina_here": false,
+    "nina_a": 24,
+    "nina_d": 6.8,
+    "nina_turn": 270,
+    "nina_do": "stand",
+    "nina_look": null,
+    "nina_reach": null,
+    "nina_with": null,
+    "nina_on": null,
+    "nina_gait": null,
+    "nina_mood": "neutral",
+    "vasenka_here": false,
+    "vasenka_a": 24,
+    "vasenka_d": 6.8,
+    "vasenka_turn": 270,
+    "vasenka_do": "stand",
+    "vasenka_look": null,
+    "vasenka_reach": null,
+    "vasenka_with": null,
+    "vasenka_on": null,
+    "vasenka_gait": null,
+    "vasenka_mood": "neutral",
+    "camera_on": null,
+    "camera_target": null,
+    "camera_x": 6,
+    "camera_z": 1,
+    "camera_yaw": 55,
+    "camera_h": 0,
+    "camera_pitch": 0,
+    "camera_look": 0
+  },
+  "states": {
+    "beat": {
+      "values": [
+        null,
+        "gone",
+        "wave",
+        "stand",
+        "bench",
+        "strap",
+        "bench_back",
+        "last",
+        "stays",
+        "boards",
+        "glass",
+        "away",
+        "dawn"
+      ],
+      "means": "the film's beat: the game sets a name — it plays from its beginning (the module beats)"
+    },
+    "beat_next": {
+      "values": [
+        null,
+        "gone",
+        "wave",
+        "stand",
+        "bench",
+        "strap",
+        "bench_back",
+        "last",
+        "stays",
+        "boards",
+        "glass",
+        "away",
+        "dawn"
+      ],
+      "means": "which beat comes next: its opening is made ready, the cut goes to the ready one"
+    },
+    "fade": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the frame from the dark: 1 black … 0 seen"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the time: 0.25 grey dawn, 0.84 late dusk, 0.9 night, 0.93 late night"
+    },
+    "dusk_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the look “dusk” — the script sets it by hour"
+    },
+    "late_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the look “late night” — the script sets it by hour"
+    },
+    "dawn_k": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the look “dawn” — the script sets it by hour"
+    },
+    "snow": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how hard it snows"
+    },
+    "train": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "the electric train: −1 far left, coming; 0 standing at the platform (always at one place); 1 gone right"
+    },
+    "train_x": {
+      "type": "number",
+      "means": "where the train is, metres (the script sets it by train)"
+    },
+    "doors": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the train's doors: 0 shut … 1 open"
+    },
+    "wipe": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“The Glass”: the frost rubbed off the carriage window, round from its middle (1 — all of it)"
+    },
+    "silva_window": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Silva's figure in the second car's front vestibule, painted (when he is in the train, its doors shut)"
+    },
+    "strap": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the insert “The Rucksack” (closeups, the shot strap): 0 shut, 1 open"
+    },
+    "pull": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "“The Rucksack”: the strap creeps up out of the fist (the game moves it; only the insert reads it)"
+    },
+    "grip": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "“The Rucksack”: the fist clenched (1) or open (0)"
+    },
+    "door_bg": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "“The Rucksack”: the carriage door behind them shuts (1)"
+    },
+    "bench_snow": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "snow on the bench (dawn): the beat's cut sets it"
+    },
+    "torn": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play's: the strap torn in “The Rucksack” — knotted in bench_back (the game sets it before that beat)"
+    },
+    "late_run": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play's: he looked back while running — in last the train stands open already (the game opens the scene with it)"
+    },
+    "father_came": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a key of the play: Sarafanov comes up to the platform in last"
+    },
+    "nina_came": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a key of the play: Nina comes up — ahead of her father if she knows the truth (nina_is), first if he did not come"
+    },
+    "vasya_came": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a key of the play: Vasenka comes up — without his rucksack if he stays (vasya_end home); first if no one else came"
+    },
+    "silva_door": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a key of the play: Silva waits in the second car's doorway"
+    },
+    "nina_is": {
+      "values": [
+        "none",
+        "knows",
+        "sister"
+      ],
+      "means": "a key of the play: knows — Nina knows the truth from him, ahead of her father"
+    },
+    "suitcase": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a key of the play: Sarafanov carries a suitcase"
+    },
+    "box_hand": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a key of the play: Sarafanov gives him the snuffbox at the carriage door (boards)"
+    },
+    "warm": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a key of the play: how bright the Sarafanovs' window far below is"
+    },
+    "frost": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a key of the play: frost on the train's windows at dawn"
+    },
+    "vasya_end": {
+      "values": [
+        "home",
+        "taiga"
+      ],
+      "means": "a key of the play: dawn — Vasenka leaves by the first train (taiga) or the platform is empty (home)"
+    },
+    "busygin_here": {
+      "type": "boolean",
+      "means": "Busygin in the scene"
+    },
+    "busygin_a": {
+      "type": "number",
+      "means": "where Busygin is: metres along the platform"
+    },
+    "busygin_d": {
+      "type": "number",
+      "means": "where Busygin is: metres away"
+    },
+    "silva_here": {
+      "type": "boolean",
+      "means": "Silva in the scene"
+    },
+    "silva_a": {
+      "type": "number",
+      "means": "where Silva is: metres along the platform"
+    },
+    "silva_d": {
+      "type": "number",
+      "means": "where Silva is: metres away"
+    },
+    "sarafanov_here": {
+      "type": "boolean",
+      "means": "Sarafanov in the scene"
+    },
+    "sarafanov_a": {
+      "type": "number",
+      "means": "where Sarafanov is: metres along the platform"
+    },
+    "sarafanov_d": {
+      "type": "number",
+      "means": "where Sarafanov is: metres away"
+    },
+    "nina_here": {
+      "type": "boolean",
+      "means": "Nina in the scene"
+    },
+    "nina_a": {
+      "type": "number",
+      "means": "where Nina is: metres along the platform"
+    },
+    "nina_d": {
+      "type": "number",
+      "means": "where Nina is: metres away"
+    },
+    "vasenka_here": {
+      "type": "boolean",
+      "means": "Vasenka in the scene"
+    },
+    "vasenka_a": {
+      "type": "number",
+      "means": "where Vasenka is: metres along the platform"
+    },
+    "vasenka_d": {
+      "type": "number",
+      "means": "where Vasenka is: metres away"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true
+    },
+    {
+      "id": "ground",
+      "name": "Snow",
+      "plane": true,
+      "drape": true,
+      "across": 0,
+      "distance": 20,
+      "elevation": 0,
+      "width": 360,
+      "depth": 220
+    },
+    {
+      "id": "wood",
+      "name": "Wood",
+      "across": 0,
+      "distance": 75,
+      "height": 15,
+      "box": [
+        -301,
+        -16,
+        301,
+        0.4
+      ]
+    },
+    {
+      "id": "track",
+      "name": "Tracks",
+      "plane": true,
+      "across": 0,
+      "distance": 13.55,
+      "elevation": -1.23,
+      "width": 400,
+      "depth": 6.6
+    },
+    {
+      "id": "masts",
+      "name": "Mast",
+      "across": 0,
+      "distance": 13.55,
+      "onLand": false,
+      "elevation": -1.25,
+      "height": 8.6,
+      "box": [
+        -2.7,
+        -8.7,
+        2.7,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -170,
+          "distance": 13.55,
+          "elevation": -1.25
+        },
+        {
+          "across": -110,
+          "distance": 13.55,
+          "elevation": -1.25
+        },
+        {
+          "across": -50,
+          "distance": 13.55,
+          "elevation": -1.25
+        },
+        {
+          "across": 10,
+          "distance": 13.55,
+          "elevation": -1.25
+        },
+        {
+          "across": 70,
+          "distance": 13.55,
+          "elevation": -1.25
+        },
+        {
+          "across": 130,
+          "distance": 13.55,
+          "elevation": -1.25
+        },
+        {
+          "across": 190,
+          "distance": 13.55,
+          "elevation": -1.25
+        }
+      ]
+    },
+    {
+      "id": "wires",
+      "name": "Overhead line",
+      "across": 0,
+      "distance": 11.5,
+      "onLand": false,
+      "elevation": -1.25,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -201,
+        -7.9,
+        201,
+        -6.2
+      ]
+    },
+    {
+      "id": "platform",
+      "name": "Platform",
+      "plane": true,
+      "walk": true,
+      "across": -14.75,
+      "distance": 6.88,
+      "elevation": 0.05,
+      "width": 60.5,
+      "depth": 6.76
+    },
+    {
+      "id": "edge",
+      "name": "Platform edge",
+      "across": -14.75,
+      "distance": 10.26,
+      "onLand": false,
+      "elevation": -1.25,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -30.3,
+        -1.35,
+        30.3,
+        0.05
+      ]
+    },
+    {
+      "id": "lamp_post",
+      "name": "Lamp",
+      "across": -0.3,
+      "distance": 5.5,
+      "height": 4.8999999999999995,
+      "box": [
+        -0.2,
+        -5,
+        0.8,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "stair_lamp",
+      "name": "Lamp over the stairs",
+      "across": 14.4,
+      "distance": 5.4,
+      "height": 4.3,
+      "box": [
+        -0.2,
+        -4.4,
+        0.8,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "bench",
+      "name": "Bench",
+      "across": -1.5,
+      "distance": 8.3,
+      "elevation": 0.05,
+      "facing": 180,
+      "height": 1,
+      "box": [
+        -1.25,
+        -1.05,
+        1.25,
+        0.05
+      ]
+    },
+    {
+      "id": "bench_seat",
+      "name": "Bench",
+      "plane": true,
+      "across": -1.5,
+      "distance": 8.05,
+      "elevation": 0.5,
+      "width": 2.3,
+      "depth": 0.45
+    },
+    {
+      "id": "booth",
+      "name": "Ticket booth",
+      "across": -8.5,
+      "distance": 4.4,
+      "elevation": 0.05,
+      "facing": 180,
+      "height": 2.9,
+      "box": [
+        -1.5,
+        -3,
+        1.5,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "stairs",
+      "name": "Stairs",
+      "plane": true,
+      "walk": true,
+      "across": 17.75,
+      "distance": 6.75,
+      "elevation": -1.6,
+      "width": 2.5,
+      "depth": 5.52,
+      "rotation": 90,
+      "tilt": -35.42
+    },
+    {
+      "id": "stairs_side",
+      "name": "Stairs",
+      "across": 17.75,
+      "distance": 5.45,
+      "onLand": false,
+      "elevation": -3.2,
+      "facing": 180,
+      "height": 4.3,
+      "box": [
+        -4.4,
+        -4.3,
+        2.4,
+        0.15
+      ],
+      "copies": [
+        {
+          "across": 17.75,
+          "distance": 5.45,
+          "elevation": -3.2
+        },
+        {
+          "across": 17.75,
+          "distance": 8.05,
+          "elevation": -3.2
+        }
+      ]
+    },
+    {
+      "id": "village",
+      "name": "House",
+      "across": 22,
+      "distance": -12,
+      "facing": 180,
+      "height": 5.5,
+      "box": [
+        -4.2,
+        -5.8,
+        4.2,
+        0.15
+      ],
+      "copies": [
+        {
+          "across": 22,
+          "distance": -12,
+          "glow": 1,
+          "flip": false,
+          "scale": 0.9
+        },
+        {
+          "across": 31,
+          "distance": -16,
+          "glow": 0,
+          "flip": true,
+          "scale": 0.98
+        },
+        {
+          "across": 40,
+          "distance": -24,
+          "glow": 1,
+          "flip": false,
+          "scale": 1.06
+        },
+        {
+          "across": 48,
+          "distance": -14,
+          "glow": 0,
+          "flip": false,
+          "scale": 0.9
+        },
+        {
+          "across": 58.05,
+          "distance": -19.85,
+          "glow": 0,
+          "flip": true,
+          "scale": 0.98
+        },
+        {
+          "across": 70,
+          "distance": -27,
+          "glow": 1,
+          "flip": false,
+          "scale": 1.06
+        },
+        {
+          "across": 79,
+          "distance": -18,
+          "glow": 0,
+          "flip": false,
+          "scale": 0.9
+        },
+        {
+          "across": 88,
+          "distance": -30,
+          "glow": 0,
+          "flip": true,
+          "scale": 0.98
+        },
+        {
+          "across": 10,
+          "distance": -20,
+          "glow": 0,
+          "flip": false,
+          "scale": 1.06
+        },
+        {
+          "across": 0,
+          "distance": -26,
+          "glow": 1,
+          "flip": false,
+          "scale": 0.9
+        },
+        {
+          "across": -12,
+          "distance": -18,
+          "glow": 0,
+          "flip": true,
+          "scale": 0.98
+        },
+        {
+          "across": -24,
+          "distance": -24,
+          "glow": 0,
+          "flip": false,
+          "scale": 1.06
+        },
+        {
+          "across": 30,
+          "distance": -36,
+          "glow": 1,
+          "flip": false,
+          "scale": 0.9
+        },
+        {
+          "across": 55,
+          "distance": -40,
+          "glow": 0,
+          "flip": true,
+          "scale": 0.98
+        },
+        {
+          "across": -36,
+          "distance": -14,
+          "glow": 1,
+          "flip": false,
+          "scale": 1.06
+        }
+      ]
+    },
+    {
+      "id": "gardens",
+      "name": "Fence",
+      "across": 18,
+      "distance": -8,
+      "facing": 180,
+      "height": 1.2,
+      "box": [
+        -0.1,
+        -1.3,
+        10.1,
+        0.2
+      ],
+      "copies": [
+        {
+          "across": 18,
+          "distance": -8
+        },
+        {
+          "across": 26,
+          "distance": -9.5
+        },
+        {
+          "across": 36,
+          "distance": -18
+        },
+        {
+          "across": 44,
+          "distance": -10
+        },
+        {
+          "across": 52,
+          "distance": -16
+        },
+        {
+          "across": 66,
+          "distance": -22
+        },
+        {
+          "across": -6,
+          "distance": -14
+        },
+        {
+          "across": -20,
+          "distance": -20
+        }
+      ]
+    },
+    {
+      "id": "birches",
+      "name": "Birch",
+      "across": 24,
+      "distance": 2,
+      "height": 9,
+      "box": [
+        -3.6,
+        -11.6,
+        3.6,
+        0.3
+      ],
+      "copies": [
+        {
+          "across": 24,
+          "distance": 2,
+          "scale": 1,
+          "flip": false
+        },
+        {
+          "across": 27,
+          "distance": -3,
+          "scale": 0.85,
+          "flip": true
+        },
+        {
+          "across": -30,
+          "distance": -2,
+          "scale": 1.1,
+          "flip": false
+        },
+        {
+          "across": 12,
+          "distance": -6,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": 46,
+          "distance": -6,
+          "scale": 1,
+          "flip": false
+        }
+      ]
+    },
+    {
+      "id": "far_window",
+      "name": "The Sarafanovs' window",
+      "glows": true,
+      "across": 60,
+      "distance": -20.05,
+      "elevation": 1.5,
+      "facing": 180,
+      "height": 1,
+      "box": [
+        -0.6,
+        -1.05,
+        0.6,
+        0.08
+      ]
+    },
+    {
+      "id": "snowfall",
+      "name": "Snow",
+      "particles": {
+        "kind": "snow",
+        "amount": "snow",
+        "count": 9000,
+        "reach": 36
+      }
+    },
+    {
+      "id": "train",
+      "name": "Electric train",
+      "across": -8,
+      "distance": 10.3,
+      "onLand": false,
+      "elevation": -1.1,
+      "facing": 180,
+      "place": {
+        "across": "train_x"
+      },
+      "height": 6.4,
+      "box": [
+        -40.6,
+        -6.4,
+        40.6,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "train_in",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 1.3,
+      "elevation": 0,
+      "glows": true,
+      "height": 3.5,
+      "box": [
+        -40,
+        -3.6,
+        40,
+        -1
+      ]
+    },
+    {
+      "id": "floor",
+      "name": "Floor",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "on": "train",
+      "across": 0,
+      "distance": 1.45,
+      "elevation": 1.15,
+      "width": 79.6,
+      "depth": 2.9
+    },
+    {
+      "id": "train_window",
+      "name": "Carriage window",
+      "on": "train",
+      "across": 15.25,
+      "distance": 0.03,
+      "elevation": 1.15,
+      "facing": 0,
+      "inside": true,
+      "height": 2.5,
+      "box": [
+        -1.35,
+        -2.55,
+        4.55,
+        0.05
+      ],
+      "uniforms": {
+        "wipe": 0,
+        "cy": -1.375
+      }
+    },
+    {
+      "id": "partition",
+      "name": "Carriage",
+      "on": "train",
+      "across": 16.5,
+      "distance": 1.45,
+      "elevation": 1.15,
+      "facing": 270,
+      "inside": true,
+      "height": 2.5,
+      "box": [
+        -1.5,
+        -2.55,
+        1.5,
+        0.05
+      ]
+    },
+    {
+      "id": "strap",
+      "name": "Rucksack strap",
+      "insert": "strap"
+    },
+    {
+      "id": "busygin",
+      "name": "Busygin",
+      "person": {
+        "cast": "cast",
+        "who": "busygin"
+      },
+      "across": 20.8,
+      "distance": 6.5,
+      "place": {
+        "across": "busygin_a",
+        "distance": "busygin_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "silva",
+      "name": "Silva",
+      "person": {
+        "cast": "cast",
+        "who": "silva"
+      },
+      "across": 21.6,
+      "distance": 7.2,
+      "place": {
+        "across": "silva_a",
+        "distance": "silva_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "sarafanov",
+      "name": "Sarafanov",
+      "person": {
+        "cast": "cast",
+        "who": "sarafanov_nohat"
+      },
+      "across": 24,
+      "distance": 6.8,
+      "place": {
+        "across": "sarafanov_a",
+        "distance": "sarafanov_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "nina",
+      "name": "Nina",
+      "person": {
+        "cast": "cast",
+        "who": "nina"
+      },
+      "across": 24,
+      "distance": 6.8,
+      "place": {
+        "across": "nina_a",
+        "distance": "nina_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "vasenka",
+      "name": "Vasenka",
+      "person": {
+        "cast": "cast",
+        "who": "vasenka"
+      },
+      "across": 24,
+      "distance": 6.8,
+      "place": {
+        "across": "vasenka_a",
+        "distance": "vasenka_d"
+      },
+      "shadow": true
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Very quiet wind over an empty suburban railway platform at night, snow falling, sparse, cold",
+        "weight": 1.2
+      },
+      {
+        "text": "Soft sustained string pad, almost still, tender and aching, winter night, minor key",
+        "weight": 0.6
+      },
+      {
+        "text": "Glassy high harmonics like frost on a carriage window, shimmering, very slow",
+        "weight": 0.3
+      },
+      {
+        "text": "Distant rails humming, a far train fading, low drone, no melody",
+        "weight": 0
+      },
+      {
+        "text": "Slow solo piano, few notes, lots of silence, Soviet film score, melancholic",
+        "weight": 0
+      },
+      {
+        "text": "Warm low organ hum like a lit window far off in the cold, very soft",
+        "weight": 0
+      },
+      {
+        "text": "Muted felt piano, warm and sad, 1970s Russian chamber music",
+        "weight": 0
+      },
+      {
+        "text": "Cello long notes, quiet, breathing, intimate, late night",
+        "weight": 0
+      },
+      {
+        "text": "Minimal ambient with soft bell-like tones, cold and still",
+        "weight": 0
+      },
+      {
+        "text": "Grey dawn, a thin cold light, a single sustained chord slowly brightening",
+        "weight": 0
+      },
+      {
+        "text": "Tense quiet pulse, someone waiting for a train that is late",
+        "weight": 0
+      },
+      {
+        "text": "Celesta and strings, a winter tale but sad, very slow",
+        "weight": 0
+      },
+      {
+        "text": "Solemn wordless choir hum, far away, cold air",
+        "weight": 0
+      },
+      {
+        "text": "Soft brushed snare and double bass, slow night jazz muffled by snow",
+        "weight": 0
+      },
+      {
+        "text": "Lonely harmonica far away, a station at night, restrained",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.25,
+    "scale": "A_FLAT_MAJOR_F_MINOR"
+  }
+}
