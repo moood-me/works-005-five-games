@@ -22,15 +22,19 @@ the beats in node and prints where the people and the points stand in the frame.
   (`village`, copies, a few windows lit), gardens' fences, birches, the trodden path; the Sarafanovs' window
   (`far_window`, “The Sarafanovs' window”, glows, brighter by `warm`) at (60, −20.05) — seen in the shot “B” of `last`
   and from the car in `away`.
-- The electric train (`trains`): `train` — its side, placed by `train_x` (the script: `G.trainX(train)`: −1 → 100 m
-  left, 0 — standing, its anchor at −8, the second car's front doorway (`train#door`) at 10, its rear one at −6; 1 →
-  250 m right), facing the platform, its rail head at −1.1; `train_in` — what its windows show (glows, 1.3 m behind the
-  side; Silva's painted figure by `silva_window`); `floor` (unseen) — the cars' floor, Silva stands on `floor#vest`,
-  carried; inside the second car `train_window` (its wall round the window by the front vestibule; the frost a layer,
-  rubbed off by `wipe` in `train_window.wgsl`) and `partition` (the saloon's end wall). The doors slide by `doors`; frost
-  on the train's glass at dawn by the play's `frost`.
-- The camera in the car: `camera_on: 'train'`, its place in the train's frame (`EYE`: 0.45 m from the glass, looking
-  back at the platform slantwise, yaw 133).
+- The electric train (`trains`): `train` — its place (unseen, by `train_x`; the script: `G.trainX(train)`: −1 → 100 m
+  left, 0 — standing, its anchor at −8, the second car's front doorway at 10, its rear one at −6; 1 → 250 m right),
+  facing the platform, its rail head at −1.1; it marks the points `train#tail`, `train#door`, `train#back_door`,
+  `train#head`. On it: `car0`…`car3` — the cars' sides (each a card of its own: one 80 m painting was not drawn whole
+  close up), `in0`…`in3` — what their windows show (glow, 1.3 m behind the side; Silva's painted figure in `in1` by
+  `silva_window`), `floor` (unseen) — the cars' floor, Silva stands on `floor#vest`, carried; inside the second car
+  `train_window` (its wall round the window by the front vestibule; the frost a layer, rubbed off by `wipe` in
+  `train_window.wgsl`) and `partition` (the saloon's end wall) — these two painted only while the camera rides the
+  train (from the platform they showed through the side). The doors slide by `doors`; frost on the train's glass at
+  dawn by the play's `frost`.
+- The camera in the car: `camera_on: 'train'`, its place in the train's frame (`EYE`: 0.75 m in from the side, a
+  little behind the window, looking back at the platform slantwise through it, yaw 122): whoever came stands on the
+  stairs' top in the glass, left of its middle.
 - Light: the snowy night (the sky — `sky`, all round), its looks by `hour` (the script sets `dusk_k`, `late_k`,
   `dawn_k`): dusk 0.84, night 0.9, late night 0.93, dawn 0.25. The lamps, the train's windows (a light each, reach 5),
   its head lamp, the far window.

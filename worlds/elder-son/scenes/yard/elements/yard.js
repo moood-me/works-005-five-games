@@ -75,7 +75,7 @@ for (const [y, t] of [[0.615, 0.006], [0.632, 0.008]]) {
 g.fillStyle = '#c3cad9';
 g.fillRect(x0, 0.69, w, 0.56);
 for (let i = 0; i < 70; i++) {
-  g.fillStyle = i % 2 ? 'rgba(232,236,244,0.55)' : 'rgba(150,160,182,0.35)';
+  g.fillStyle = i % 2 ? 'rgba(232,236,244,0.3)' : 'rgba(150,160,182,0.18)';
   g.beginPath();
   g.ellipse(x0 + e.rnd() * w, 0.7 + e.rnd() * 0.5, 0.04 + e.rnd() * 0.12, 0.006 + e.rnd() * 0.015, 0, 0, Math.PI * 2);
   g.fill();

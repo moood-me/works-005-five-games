@@ -43,7 +43,7 @@ const BACK_DOOR = G.X0 + EL.doors(1)[0];       // −6: the second car's rear do
 const WIN = EL.windows(1)[EL.windows(1).length - 1];   // the second car's last window before the front vestibule (its x)
 // the camera in the car: its place in the train's frame (the train faces the platform, its frame as the world's:
 // x along it from its anchor, z from its side into the car, h over the anchor's eye)
-const EYE = { x: WIN - 0.45, z: 0.45, h: 1.0, yaw: 133 };
+const EYE = { x: WIN - 1.19, z: 0.75, h: 1.0, yaw: 122 };
 
 // ── the film (the world's beats): film(scene) → { <beat>: { from, after, run } } ──
 const IDS = ['busygin', 'silva', 'sarafanov', 'nina', 'vasenka'];
@@ -63,7 +63,7 @@ const cam = (x, z, yaw, h = 0, look = 0) => ({ camera_on: null, camera_target: n
 const CAM = {
   stairs: cam(6, 1, 55),                 // along the platform to the right: the stairs
   gone: cam(6, 1, -60),                  // the two under the lamp, the train's tail far left
-  stand: cam(1.4, 3.6, -28, -0.1),       // the two under the lamp, a medium shot in three quarters
+  stand: cam(1.6, 5.6, -64, -0.1),       // the two under the lamp from the right, a medium shot in three quarters
   bench0: cam(-6.5, 3.2, 62),            // the bench with Vasenka, the stairs far right
   bench: cam(1.0, 5.7, -62, -0.45),      // the two on the bench in three quarters, the lamp over them
   strap: cam(-6.2, 5.4, 52, -0.1),       // they stand before the train's open door
@@ -126,7 +126,7 @@ function film(scene) {
   async function sit(p, place, motion) {
     await p.go('sit_down', { to: place, turn: 180 });
     p.on([place[0], place[1], G.SEAT]);
-    p.do({ motion, loop: true });
+    p.do(motion, { loop: true });
   }
   async function rise(p, place, motion = 'rise') {
     p.on(null);
@@ -201,10 +201,10 @@ function film(scene) {
         s.move('camera_yaw', CAM.stand.camera_yaw, { over: 4, ease: 'inOut' });
         s.move('camera_h', CAM.stand.camera_h, { over: 4, ease: 'inOut' });
         await b.walk([[-0.1, 6.55]]);
-        await s.all(b.turn(200), sv.turn(150));
+        await s.all(b.turn(140), sv.turn(100));
         b.mood('tired');
         sv.mood('smile');
-        b.do({ motion: 'cold', loop: true });
+        b.do('cold', { loop: true });
         s.tell('stand:cold');
         sv.look('busygin');
         sv.reach({ r: 'silva#nape' });

@@ -102,280 +102,280 @@
     },
     {
       "id": "head",
-      "of": "train#head",
+      "of": "car0#head",
       "color": "#fff3d8",
       "strength": 2.2,
       "reach": 30
     },
     {
       "id": "tail",
-      "of": "train#tail",
+      "of": "car3#tail",
       "color": "#ff3b22",
       "strength": 0.8,
       "reach": 4
     },
     {
       "id": "train_w00",
-      "of": "train_in#w00",
+      "of": "in0#w00",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w01",
-      "of": "train_in#w01",
+      "of": "in0#w01",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w02",
-      "of": "train_in#w02",
+      "of": "in0#w02",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w03",
-      "of": "train_in#w03",
+      "of": "in0#w03",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w04",
-      "of": "train_in#w04",
+      "of": "in0#w04",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w05",
-      "of": "train_in#w05",
+      "of": "in0#w05",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w06",
-      "of": "train_in#w06",
+      "of": "in0#w06",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d00",
-      "of": "train_in#d00",
+      "of": "in0#d00",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d01",
-      "of": "train_in#d01",
+      "of": "in0#d01",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w10",
-      "of": "train_in#w10",
+      "of": "in1#w10",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w11",
-      "of": "train_in#w11",
+      "of": "in1#w11",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w12",
-      "of": "train_in#w12",
+      "of": "in1#w12",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w13",
-      "of": "train_in#w13",
+      "of": "in1#w13",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w14",
-      "of": "train_in#w14",
+      "of": "in1#w14",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w15",
-      "of": "train_in#w15",
+      "of": "in1#w15",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w16",
-      "of": "train_in#w16",
+      "of": "in1#w16",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w17",
-      "of": "train_in#w17",
+      "of": "in1#w17",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d10",
-      "of": "train_in#d10",
+      "of": "in1#d10",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d11",
-      "of": "train_in#d11",
+      "of": "in1#d11",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w20",
-      "of": "train_in#w20",
+      "of": "in2#w20",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w21",
-      "of": "train_in#w21",
+      "of": "in2#w21",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w22",
-      "of": "train_in#w22",
+      "of": "in2#w22",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w23",
-      "of": "train_in#w23",
+      "of": "in2#w23",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w24",
-      "of": "train_in#w24",
+      "of": "in2#w24",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w25",
-      "of": "train_in#w25",
+      "of": "in2#w25",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w26",
-      "of": "train_in#w26",
+      "of": "in2#w26",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w27",
-      "of": "train_in#w27",
+      "of": "in2#w27",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d20",
-      "of": "train_in#d20",
+      "of": "in2#d20",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d21",
-      "of": "train_in#d21",
+      "of": "in2#d21",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w30",
-      "of": "train_in#w30",
+      "of": "in3#w30",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w31",
-      "of": "train_in#w31",
+      "of": "in3#w31",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w32",
-      "of": "train_in#w32",
+      "of": "in3#w32",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w33",
-      "of": "train_in#w33",
+      "of": "in3#w33",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w34",
-      "of": "train_in#w34",
+      "of": "in3#w34",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w35",
-      "of": "train_in#w35",
+      "of": "in3#w35",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_w36",
-      "of": "train_in#w36",
+      "of": "in3#w36",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d30",
-      "of": "train_in#d30",
+      "of": "in3#d30",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
     },
     {
       "id": "train_d31",
-      "of": "train_in#d31",
+      "of": "in3#d31",
       "color": "#ffe2a8",
       "strength": 0.55,
       "reach": 5
@@ -1281,6 +1281,7 @@
     {
       "id": "train",
       "name": "Electric train",
+      "unseen": true,
       "across": -8,
       "distance": 10.3,
       "onLand": false,
@@ -1295,22 +1296,141 @@
         -6.4,
         40.6,
         0.2
+      ]
+    },
+    {
+      "id": "car0",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 180,
+      "height": 6.4,
+      "box": [
+        19.9,
+        -6.4,
+        40.1,
+        0.2
       ],
       "shadow": true
     },
     {
-      "id": "train_in",
+      "id": "in0",
       "name": "Electric train",
       "on": "train",
       "across": 0,
       "distance": 1.3,
       "elevation": 0,
+      "facing": 180,
+      "glows": true,
+      "height": 3.5,
+      "box": [
+        20,
+        -3.6,
+        40,
+        -1
+      ]
+    },
+    {
+      "id": "car1",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 180,
+      "height": 6.4,
+      "box": [
+        -0.1,
+        -6.4,
+        20.1,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "in1",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 1.3,
+      "elevation": 0,
+      "facing": 180,
+      "glows": true,
+      "height": 3.5,
+      "box": [
+        0,
+        -3.6,
+        20,
+        -1
+      ]
+    },
+    {
+      "id": "car2",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 180,
+      "height": 6.4,
+      "box": [
+        -20.1,
+        -6.4,
+        0.1,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "in2",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 1.3,
+      "elevation": 0,
+      "facing": 180,
+      "glows": true,
+      "height": 3.5,
+      "box": [
+        -20,
+        -3.6,
+        0,
+        -1
+      ]
+    },
+    {
+      "id": "car3",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 180,
+      "height": 6.4,
+      "box": [
+        -40.1,
+        -6.4,
+        -19.9,
+        0.2
+      ],
+      "shadow": true
+    },
+    {
+      "id": "in3",
+      "name": "Electric train",
+      "on": "train",
+      "across": 0,
+      "distance": 1.3,
+      "elevation": 0,
+      "facing": 180,
       "glows": true,
       "height": 3.5,
       "box": [
         -40,
         -3.6,
-        40,
+        -20,
         -1
       ]
     },
@@ -1332,14 +1452,14 @@
       "name": "Carriage window",
       "on": "train",
       "across": 15.25,
-      "distance": 0.03,
+      "distance": 0.07,
       "elevation": 1.15,
       "facing": 0,
       "inside": true,
-      "height": 2.5,
+      "height": 3,
       "box": [
         -1.35,
-        -2.55,
+        -3.05,
         4.55,
         0.05
       ],
@@ -1357,10 +1477,10 @@
       "elevation": 1.15,
       "facing": 270,
       "inside": true,
-      "height": 2.5,
+      "height": 3.2,
       "box": [
         -1.5,
-        -2.55,
+        -3.25,
         1.5,
         0.05
       ]

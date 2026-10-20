@@ -3,6 +3,8 @@
 //   node tools/platform/gen.mjs   (from the world's root)
 import { readFileSync, writeFileSync } from 'node:fs';
 
+const file = (name, text) => writeFileSync(`scenes/platform/elements/${name}.js`, text);
+
 const DIR = 'scenes/platform';
 const mod = name => new Function('anim', 'kit', readFileSync(`modules/${name}.js`, 'utf8'))({}, {});
 const trains = mod('trains');
@@ -56,15 +58,24 @@ add({ id: 'snowfall', name: 'Snow', particles: { kind: 'snow', amount: 'snow', c
 // the train: its side (places by train_x), what its windows show (a card that glows, ELECTRIC.inside behind the
 // side), its floor (unseen: Silva stands on it, carried), inside the second car its wall round the window by the
 // front vestibule (the camera in the car looks through it) and the saloon's end wall
-add({ id: 'train', name: 'Electric train', across: G.trainX(0), distance: G.SIDE, onLand: false, elevation: -1.1, facing: 180,
-  place: { across: 'train_x' }, height: 6.4, box: [-EL.half - 0.6, -6.4, EL.half + 0.6, 0.2], shadow: true });
-add({ id: 'train_in', name: 'Electric train', on: 'train', across: 0, distance: EL.inside, elevation: 0, glows: true,
-  height: 3.5, box: [-EL.half, -3.6, EL.half, -1.0] });
+add({ id: 'train', name: 'Electric train', unseen: true, across: G.trainX(0), distance: G.SIDE, onLand: false, elevation: -1.1, facing: 180,
+  place: { across: 'train_x' }, height: 6.4, box: [-EL.half - 0.6, -6.4, EL.half + 0.6, 0.2] });
+for (let k = 0; k < EL.cars; k++) {
+  const which = ['head', 'second', 'third', 'tail'][k];
+  add({ id: `car${k}`, name: 'Electric train', on: 'train', across: 0, distance: 0, elevation: 0, facing: 180, height: 6.4, box: EL.box(k), shadow: true });
+  file(`car${k}`, `// the train's ${which} car, its side (the world's trains)\ne.kit.trains.electric_train(g, e, ${k});\n`);
+  file(`car${k}.animate`, "// the doors slide by `doors`; frost on the glass at dawn by the play's `frost`\nconst S = e.state;\n" +
+    'e.kit.trains.doorsLive(e, S.doors);\ne.kit.trains.frostLive(e, (Number(S.frost) || 0) * (Number(S.dawn_k) || 0));\n');
+  add({ id: `in${k}`, name: 'Electric train', on: 'train', across: 0, distance: EL.inside, elevation: 0, facing: 180, glows: true,
+    height: 3.5, box: [EL.x0(k), -3.6, EL.x0(k) + EL.len, -1.0] });
+  file(`in${k}`, `// what the ${which} car's windows and doorways show, lit (the world's trains)${k === 1 ? "; Silva's figure in its front vestibule (silva_window)" : ''}\ne.kit.trains.electric_inside(g, e, ${k});\n`);
+  if (k === 1) file('in1.animate', 'e.kit.trains.silvaLive(e, e.state.silva_window);\n');
+}
 add({ id: 'floor', name: 'Floor', plane: true, unseen: true, walk: true, on: 'train', across: 0, distance: 1.45, elevation: -EL.floor, width: EL.half * 2 - 0.4, depth: 2.9 });
-add({ id: 'train_window', name: 'Carriage window', on: 'train', across: WIN, distance: 0.03, elevation: -EL.floor, facing: 0, inside: true,
-  height: 2.5, box: [-1.35, -2.55, 4.55, 0.05], uniforms: { wipe: 0, cy: -1.375 } });
+add({ id: 'train_window', name: 'Carriage window', on: 'train', across: WIN, distance: 0.07, elevation: -EL.floor, facing: 0, inside: true,
+  height: 3.0, box: [-1.35, -3.05, 4.55, 0.05], uniforms: { wipe: 0, cy: -1.375 } });
 add({ id: 'partition', name: 'Carriage', on: 'train', across: r2(WIN + 1.25), distance: 1.45, elevation: -EL.floor, facing: 270, inside: true,
-  height: 2.5, box: [-1.5, -2.55, 1.5, 0.05] });
+  height: 3.2, box: [-1.5, -3.25, 1.5, 0.05] });
 // the insert: the rucksack's strap (closeups' shot "strap")
 add({ id: 'strap', name: 'Rucksack strap', insert: 'strap' });
 
@@ -82,10 +93,10 @@ const lights = [
   { id: 'dawn_sky', from: [-30, 18], color: '#cdd0da', strength: 0.9, on: 'dawn_k' },
   { id: 'lamp', of: 'lamp_post#lamp', color: '#f3dcae', strength: 1.9, reach: 12, glow: 1.2 },
   { id: 'lamp2', of: 'stair_lamp#lamp', color: '#f3dcae', strength: 1.6, reach: 8, glow: 1.0 },
-  { id: 'head', of: 'train#head', color: '#fff3d8', strength: 2.2, reach: 30 },
-  { id: 'tail', of: 'train#tail', color: '#ff3b22', strength: 0.8, reach: 4 },
+  { id: 'head', of: 'car0#head', color: '#fff3d8', strength: 2.2, reach: 30 },
+  { id: 'tail', of: 'car3#tail', color: '#ff3b22', strength: 0.8, reach: 4 },
   ...[0, 1, 2, 3].flatMap(k => [...EL.windows(k).map((_, i) => `w${k}${i}`), `d${k}0`, `d${k}1`]
-    .map(n => ({ id: `train_${n}`, of: `train_in#${n}`, color: '#ffe2a8', strength: 0.55, reach: 5 }))),
+    .map(n => ({ id: `train_${n}`, of: `in${n[1]}#${n}`, color: '#ffe2a8', strength: 0.55, reach: 5 }))),
   { id: 'car_lamp', of: 'train_window#lamp', color: '#fff2d2', strength: 1.0, reach: 3 },
   { id: 'far', of: 'far_window#glow', color: '#eda055', strength: 1.0, reach: 5, on: 'warm' },
 ];

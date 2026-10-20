@@ -9,6 +9,9 @@
       35
     ]
   },
+  "modules": [
+    "trains"
+  ],
   "horizon": 0.5,
   "light": {
     "grain": 0.14,

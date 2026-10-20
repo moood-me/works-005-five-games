@@ -11,6 +11,7 @@ const scene = {
   title: 'The Yard',
   caption: '',
   camera: { mode: 'panorama', span: [0, 7 * SPACING] },
+  modules: ['trains'],
   horizon: 0.5,
   light: { grain: 0.14, vignette: 0.45 },
   state: { shown: 0, come: 0, camera_x: 0 },

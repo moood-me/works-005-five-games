@@ -5,14 +5,18 @@
 //   loco(g, e, len) — the diesel's side; its headlight is the point `#light` at the nose (e.at, e.light)
 //   nose(g, e) — the diesel's front face (a card turned to look ahead), its lamp unlit: the glow is loco's
 // Box for a car: [-len/2 - 0.4, -4.9, len/2 + 0.4, 0.2].
-// The electric train (ER2-like: four cars, green with a red band) is two cards on one place, its +x toward its HEAD:
-//   electric_train(g, e) — its side: the bodies with their windows and doorways cut through, roofs, pantographs,
-//     bogies, a cab at either end; the sliding doors' leaves — layers `leaf_l`, `leaf_r` (doorsLive); frost on the
-//     glass — layer `frost` (frostLive); the head lamp — the point `#head` and its glow; the tail's red lamps — `#tail`;
-//     the second car's doorways at chest height — `#door` (its front one), `#back_door` (its rear one)
-//   electric_inside(g, e) — what the windows and doorways show (a card that `glows`, ELECTRIC.inside m behind the
-//     side): the lit saloons, seat backs, a few seated passengers, the lit vestibules; Silva's figure in the second
-//     car's front vestibule — layer `silva` (silvaLive); a glow and a light at each window, `w<car><n>`
+// The electric train (ER2-like: four cars, green with a red band), its +x toward its HEAD; each car two cards (k: 0 —
+// the head … 3 — the tail), all on the train's place:
+//   electric_train(g, e, k) — the car's side: its body with its windows and doorways cut through, the roof, the
+//     pantograph (the second and the fourth car), the bogies, the cab at either end of the train; the sliding doors'
+//     leaves — layers `leaf_l`, `leaf_r` (doorsLive); frost on the glass — layer `frost` (frostLive); the head lamp's
+//     glow `head` (k 0), the tail's red lamps' `tail` (k 3). Its box: ELECTRIC.box(k)
+//   electric_inside(g, e, k) — what the car's windows and doorways show (a card that `glows`, ELECTRIC.inside m behind
+//     the side): the lit saloon, seat backs, a few seated passengers, the lit vestibules; a glow and a light at each
+//     window and doorway, `w<k><n>`, `d<k><n>`; Silva's figure in the second car's front vestibule — layer `silva`
+//     (k 1, silvaLive)
+//   electric_points(e) — for an unseen card on the train's place: `#tail`, `#head`, the second car's doorways at
+//     chest height `#door` (its front one), `#back_door`
 //   ELECTRIC — its numbers (cars, doors, windows along x, heights): what a scene stands its people and camera by
 //   train_window(g, e, o) — a car's inner wall round one window, seen from inside (a card facing into the car): o.w,
 //     o.h — the glass, o.sill — over the floor, o.wall — [from, to] along x, o.tall; the frost on the glass — layer
@@ -323,142 +327,131 @@ function bodyPath(g, k) {
   g.closePath();
 }
 
-function electric_train(g, e) {
-  // the gangways between the cars, the under-frame, the bogies
-  for (let k = 0; k < EL.cars; k++) {
-    const x0 = EL.x0(k);
-    g.fillStyle = '#1d1e20';
-    if (k < EL.cars - 1) g.fillRect(x0 - 0.2, -3.6, 0.4, 2.5);
-    g.fillStyle = EL.under;
-    g.fillRect(x0 + 4, -1.0, EL.len - 8, 0.55);
-    g.fillStyle = '#353639';
-    for (let x = x0 + 4.6; x < x0 + EL.len - 4.6; x += 2.3) g.fillRect(x, -0.92, 1.6, 0.4);
-    for (const bx of [x0 + 2.6, x0 + EL.len - 2.6]) {
-      g.fillStyle = IRON;
-      g.fillRect(bx - 1.45, -0.9, 2.9, 0.42);
-      for (const dx of [-1.05, 1.05]) {
-        g.beginPath();
-        g.arc(bx + dx, -0.5, 0.5, 0, Math.PI * 2);
-        g.fill();
-      }
-      g.fillStyle = '#3c3d40';
-      g.fillRect(bx - 0.3, -0.85, 0.6, 0.5);
+// one car of the train's side (k: 0 — the head … 3 — the tail): its body with its windows and doorways cut through,
+// the roof, the bogies; the head car's cab and head lamp, the tail car's red lamps; its doors' leaves and frost layers
+function electric_train(g, e, k) {
+  const x0 = EL.x0(k), head = k === 0, tail = k === EL.cars - 1;
+  // the gangways' halves at its ends, the under-frame, the bogies
+  g.fillStyle = '#1d1e20';
+  if (!head) g.fillRect(x0 + EL.len - 0.2, -3.6, 0.2, 2.5);
+  if (!tail) g.fillRect(x0, -3.6, 0.2, 2.5);
+  g.fillStyle = EL.under;
+  g.fillRect(x0 + 4, -1.0, EL.len - 8, 0.55);
+  g.fillStyle = '#353639';
+  for (let x = x0 + 4.6; x < x0 + EL.len - 4.6; x += 2.3) g.fillRect(x, -0.92, 1.6, 0.4);
+  for (const bx of [x0 + 2.6, x0 + EL.len - 2.6]) {
+    g.fillStyle = IRON;
+    g.fillRect(bx - 1.45, -0.9, 2.9, 0.42);
+    for (const dx of [-1.05, 1.05]) {
+      g.beginPath();
+      g.arc(bx + dx, -0.5, 0.5, 0, Math.PI * 2);
+      g.fill();
     }
+    g.fillStyle = '#3c3d40';
+    g.fillRect(bx - 0.3, -0.85, 0.6, 0.5);
   }
-  // the bodies, their windows and doorways cut through (what is inside shows: electric_inside)
+  // the body, its windows and doorways cut through (what is inside shows: electric_inside)
   g.beginPath();
-  for (let k = 0; k < EL.cars; k++) {
-    bodyPath(g, k);
-    for (const x of EL.windows(k)) rrect(g, ...winRect(x), 0.12);
-    for (const x of EL.doors(k)) g.rect(...doorRect(x));
-  }
+  bodyPath(g, k);
+  for (const x of EL.windows(k)) rrect(g, ...winRect(x), 0.12);
+  for (const x of EL.doors(k)) g.rect(...doorRect(x));
   g.fillStyle = EL.green;
   g.fill('evenodd');
   g.save();
   g.clip('evenodd');
   // the lower panel darker, the red band under the windows, the gutter over them
   g.fillStyle = EL.greenDark;
-  g.fillRect(-EL.half, -1.45, EL.cars * EL.len, 0.5);
+  g.fillRect(x0, -1.45, EL.len, 0.5);
   g.fillStyle = EL.red;
-  g.fillRect(-EL.half, -1.78, EL.cars * EL.len, 0.2);
+  g.fillRect(x0, -1.78, EL.len, 0.2);
   g.fillStyle = '#284a32';
-  g.fillRect(-EL.half, -3.38, EL.cars * EL.len, 0.05);
-  g.fillRect(-EL.half, EL.eave + 0.02, EL.cars * EL.len, 0.08);
+  g.fillRect(x0, -3.38, EL.len, 0.05);
+  g.fillRect(x0, EL.eave + 0.02, EL.len, 0.08);
   g.restore();
   // the windows' rubber, the doorways' frames
   g.strokeStyle = '#1e2420';
-  for (let k = 0; k < EL.cars; k++) {
+  g.lineWidth = 0.06;
+  for (const x of EL.windows(k)) {
+    g.beginPath();
+    rrect(g, ...winRect(x), 0.12);
+    g.stroke();
+  }
+  g.lineWidth = 0.08;
+  for (const x of EL.doors(k)) g.strokeRect(...doorRect(x));
+  // the roof: a grey crown, the vents, a pantograph on the second and the fourth car
+  const a = x0 + 0.15 + (tail ? 0.8 : 0), b = x0 + EL.len - 0.15 - (head ? 0.8 : 0);
+  g.fillStyle = EL.roof;
+  g.beginPath();
+  g.moveTo(a, EL.eave);
+  g.quadraticCurveTo(a + 0.3, EL.crown, a + 1.2, EL.crown);
+  g.lineTo(b - 1.2, EL.crown);
+  g.quadraticCurveTo(b - 0.3, EL.crown, b, EL.eave);
+  g.closePath();
+  g.fill();
+  g.fillStyle = '#5d6166';
+  for (let x = x0 + 3; x < x0 + EL.len - 3; x += 3.2) g.fillRect(x, EL.crown - 0.18, 0.9, 0.2);
+  snowTop(g, a + 1.2, b - 1.2, EL.crown + 0.02, 0.07, e);
+  if (k % 2 === 1) {
+    const m = x0 + EL.len / 2;
+    g.strokeStyle = '#2e3033';
     g.lineWidth = 0.06;
-    for (const x of EL.windows(k)) {
-      g.beginPath();
-      rrect(g, ...winRect(x), 0.12);
-      g.stroke();
-    }
-    g.lineWidth = 0.08;
-    for (const x of EL.doors(k)) g.strokeRect(...doorRect(x));
-  }
-  // the roofs: a grey crown, the vents, the pantographs on the second and the fourth car
-  for (let k = 0; k < EL.cars; k++) {
-    const x0 = EL.x0(k), a = x0 + 0.15 + (k === EL.cars - 1 ? 0.8 : 0), b = x0 + EL.len - 0.15 - (k === 0 ? 0.8 : 0);
-    g.fillStyle = EL.roof;
     g.beginPath();
-    g.moveTo(a, EL.eave);
-    g.quadraticCurveTo(a + 0.3, EL.crown, a + 1.2, EL.crown);
-    g.lineTo(b - 1.2, EL.crown);
-    g.quadraticCurveTo(b - 0.3, EL.crown, b, EL.eave);
-    g.closePath();
-    g.fill();
-    g.fillStyle = '#5d6166';
-    for (let x = x0 + 3; x < x0 + EL.len - 3; x += 3.2) g.fillRect(x, EL.crown - 0.18, 0.9, 0.2);
-    snowTop(g, a + 1.2, b - 1.2, EL.crown + 0.02, 0.07, e);
-    if (k % 2 === 1) {
-      const m = x0 + EL.len / 2;
-      g.strokeStyle = '#2e3033';
-      g.lineWidth = 0.06;
-      g.beginPath();
-      g.moveTo(m - 1.2, EL.crown - 0.1);
-      g.lineTo(m - 0.25, -5.35);
-      g.lineTo(m + 0.6, -6.15);
-      g.moveTo(m + 1.2, EL.crown - 0.1);
-      g.lineTo(m + 0.25, -5.35);
-      g.lineTo(m - 0.6, -6.15);
-      g.stroke();
-      g.fillStyle = '#2e3033';
-      g.fillRect(m - 0.9, -6.25, 1.8, 0.1);
-      g.fillRect(m - 1.4, EL.crown - 0.16, 2.8, 0.14);
-    }
+    g.moveTo(m - 1.2, EL.crown - 0.1);
+    g.lineTo(m - 0.25, -5.35);
+    g.lineTo(m + 0.6, -6.15);
+    g.moveTo(m + 1.2, EL.crown - 0.1);
+    g.lineTo(m + 0.25, -5.35);
+    g.lineTo(m - 0.6, -6.15);
+    g.stroke();
+    g.fillStyle = '#2e3033';
+    g.fillRect(m - 0.9, -6.25, 1.8, 0.1);
+    g.fillRect(m - 1.4, EL.crown - 0.16, 2.8, 0.14);
   }
-  // the cabs: their side windows (dark: no one lit in them), the head lamp over the front, the red lamps at the tail
+  // a cab: its side window (dark: no one lit in it), its door, its lamp over the front; the head lamp lit at the head,
+  // the red lamps at the tail
   const H = EL.half - 0.15;
-  g.fillStyle = '#16191b';
-  rrect(g, H - 1.9, -3.2, 1.25, 0.85, 0.15);
-  g.fill();
-  g.beginPath();
-  rrect(g, -H + 0.65, -3.2, 1.25, 0.85, 0.15);
-  g.fill();
-  g.strokeStyle = '#2a4a33';
-  g.lineWidth = 0.05;
-  g.strokeRect(H - 2.55, -3.25, 0.62, 2.05);
-  g.strokeRect(-H + 1.93, -3.25, 0.62, 2.05);
-  g.fillStyle = '#dcd6c4';
-  g.beginPath();
-  g.arc(H - 0.05, EL.eave + 0.05, 0.17, 0, Math.PI * 2);
-  g.fill();
-  e.at(H, EL.eave + 0.05, 'head');
-  e.light(H, EL.eave + 0.05, 1.6, '#fff3d8', 3.0, 'head');
-  for (const y of [-1.85, -3.6]) {
-    g.fillStyle = '#c83a28';
+  if (head || tail) {
+    g.fillStyle = '#16191b';
     g.beginPath();
-    g.arc(-H + 0.06, y, 0.12, 0, Math.PI * 2);
+    rrect(g, head ? H - 1.9 : -H + 0.65, -3.2, 1.25, 0.85, 0.15);
     g.fill();
-    e.light(-H, y, y < -2 ? 0.3 : 0.45, '#ff3b22', y < -2 ? 1.4 : 2.2, y < -2 ? 'tail_top' : 'tail');
+    g.strokeStyle = '#2a4a33';
+    g.lineWidth = 0.05;
+    g.strokeRect(head ? H - 2.55 : -H + 1.93, -3.25, 0.62, 2.05);
+    g.fillStyle = '#dcd6c4';
+    g.beginPath();
+    g.arc((head ? 1 : -1) * (H - 0.05), EL.eave + 0.05, 0.17, 0, Math.PI * 2);
+    g.fill();
   }
-  e.at(-H, -1.85, 'tail');
-  // the second car's doorways, their middles at a grown man's chest
-  const [back, front] = EL.doors(1);
-  e.at(front, EL.floor - 1.3, 'door');
-  e.at(back, EL.floor - 1.3, 'back_door');
+  if (head) e.light(H, EL.eave + 0.05, 1.6, '#fff3d8', 3.0, 'head');
+  if (tail) {
+    for (const y of [-1.85, -3.6]) {
+      g.fillStyle = '#c83a28';
+      g.beginPath();
+      g.arc(-H + 0.06, y, 0.12, 0, Math.PI * 2);
+      g.fill();
+      e.light(-H, y, y < -2 ? 0.3 : 0.45, '#ff3b22', y < -2 ? 1.4 : 2.2, y < -2 ? 'tail_top' : 'tail');
+    }
+  }
   // the sliding leaves: each slides into its pocket behind the side (doorsLive)
   for (const side of ['l', 'r']) {
     e.layer(`leaf_${side}`, {}, c => {
-      for (let k = 0; k < EL.cars; k++) {
-        for (const x of EL.doors(k)) {
-          const w = EL.doorW / 2, x0 = side === 'l' ? x - w : x;
-          c.beginPath();
-          c.rect(x0, EL.doorTop, w, EL.floor - EL.doorTop);
-          rrect(c, x0 + 0.1, -2.95, w - 0.2, 0.75, 0.08);
-          c.fillStyle = EL.green;
-          c.fill('evenodd');
-          c.fillStyle = EL.red;
-          c.fillRect(x0, -1.78, w, 0.2);
-          c.strokeStyle = '#1e2420';
-          c.lineWidth = 0.05;
-          c.beginPath();
-          rrect(c, x0 + 0.1, -2.95, w - 0.2, 0.75, 0.08);
-          c.stroke();
-          c.fillStyle = '#1a1b1c';
-          c.fillRect(side === 'l' ? x0 + w - 0.04 : x0, EL.doorTop, 0.04, EL.floor - EL.doorTop);
-        }
+      for (const x of EL.doors(k)) {
+        const w = EL.doorW / 2, xl = side === 'l' ? x - w : x;
+        c.beginPath();
+        c.rect(xl, EL.doorTop, w, EL.floor - EL.doorTop);
+        rrect(c, xl + 0.1, -2.95, w - 0.2, 0.75, 0.08);
+        c.fillStyle = EL.green;
+        c.fill('evenodd');
+        c.fillStyle = EL.red;
+        c.fillRect(xl, -1.78, w, 0.2);
+        c.strokeStyle = '#1e2420';
+        c.lineWidth = 0.05;
+        c.beginPath();
+        rrect(c, xl + 0.1, -2.95, w - 0.2, 0.75, 0.08);
+        c.stroke();
+        c.fillStyle = '#1a1b1c';
+        c.fillRect(side === 'l' ? xl + w - 0.04 : xl, EL.doorTop, 0.04, EL.floor - EL.doorTop);
       }
     });
   }
@@ -476,11 +469,22 @@ function electric_train(g, e) {
         c.fillRect(x, y, w, h);
       }
     };
-    for (let k = 0; k < EL.cars; k++) {
-      for (const x of EL.windows(k)) pane(...winRect(x));
-      for (const x of EL.doors(k)) for (const s of [-1, 1]) pane(x + (s < 0 ? -EL.doorW / 2 + 0.1 : 0.1), -2.95, EL.doorW / 2 - 0.2, 0.75);
-    }
+    for (const x of EL.windows(k)) pane(...winRect(x));
+    for (const x of EL.doors(k)) for (const s of [-1, 1]) pane(x + (s < 0 ? -EL.doorW / 2 + 0.1 : 0.1), -2.95, EL.doorW / 2 - 0.2, 0.75);
   });
+}
+// a car's box round the train's anchor (its side's painting, and what its windows show)
+EL.box = k => [EL.x0(k) - 0.1, -6.4, EL.x0(k) + EL.len + 0.1, 0.2];
+
+// the train's points, painted by an unseen card on its place (the cars are cards of their own on it): the tail's red
+// lamps `#tail`, the head lamp `#head`, the second car's doorways at a grown man's chest — `#door` (its front one),
+// `#back_door`
+function electric_points(e) {
+  const H = EL.half - 0.15, [back, front] = EL.doors(1);
+  e.at(-H, -1.85, 'tail');
+  e.at(H, EL.eave + 0.05, 'head');
+  e.at(front, EL.floor - 1.3, 'door');
+  e.at(back, EL.floor - 1.3, 'back_door');
 }
 
 // a seated passenger seen through a window: head and shoulders, dark against the lit saloon
@@ -504,48 +508,48 @@ function passenger(g, x, y, k, e) {
   }
 }
 
-function electric_inside(g, e) {
-  for (let k = 0; k < EL.cars; k++) {
-    const [d0, d1] = EL.doors(k);
-    // the saloon between its vestibules: the far wall, its dark windows, the ceiling's lamps, the seat backs
-    const a = d0 + EL.doorW / 2 + 0.5, b = d1 - EL.doorW / 2 - 0.5;
-    g.fillStyle = '#e9dcb6';
-    g.fillRect(a, -3.45, b - a, 2.4);
-    g.fillStyle = '#d3c39b';
-    g.fillRect(a, -1.6, b - a, 0.5);
-    g.fillStyle = '#3a4757';
-    for (const x of EL.windows(k)) g.fillRect(x - 0.45, -2.95, 0.9, 0.7);
-    g.fillStyle = '#fff6dc';
-    g.fillRect(a, -3.42, b - a, 0.07);
-    for (const x of EL.windows(k)) {
-      g.fillStyle = '#9a6a3c';
-      g.beginPath();
-      g.moveTo(x - 0.62, -1.15);
-      g.lineTo(x - 0.62, -2.1);
-      g.quadraticCurveTo(x - 0.62, -2.25, x - 0.45, -2.25);
-      g.lineTo(x - 0.25, -2.25);
-      g.quadraticCurveTo(x - 0.1, -2.25, x - 0.1, -2.1);
-      g.lineTo(x - 0.1, -1.15);
-      g.fill();
-      if (e.rnd() < 0.3) passenger(g, x + 0.12, -2.0, k + Math.round(x), e);
-    }
-    // the vestibules: brighter, the doors of the far side dark
-    for (const x of [d0, d1]) {
-      g.fillStyle = '#efe2bd';
-      g.fillRect(x - EL.doorW / 2 - 0.5, -3.45, EL.doorW + 1.0, 2.35);
-      g.fillStyle = '#2f4a37';
-      g.fillRect(x - EL.doorW / 2 + 0.1, -3.15, EL.doorW - 0.2, 2.0);
-      g.fillStyle = '#26323c';
-      g.fillRect(x - 0.5, -2.9, 0.4, 0.7);
-      g.fillRect(x + 0.1, -2.9, 0.4, 0.7);
-      g.fillStyle = '#b9ab8a';
-      g.fillRect(x - EL.doorW / 2 - 0.5, -1.25, EL.doorW + 1.0, 0.1);
-    }
-    // the light at each window and doorway: the glow, and a patch on whatever stands outside
-    EL.windows(k).forEach((x, i) => e.light(x, -2.55, 0.75, '#ffe4ac', 0.75, `w${k}${i}`));
-    [d0, d1].forEach((x, i) => e.light(x, -2.3, 0.85, '#ffe4ac', 0.8, `d${k}${i}`));
+// what one car's windows and doorways show (k as electric_train)
+function electric_inside(g, e, k) {
+  const [d0, d1] = EL.doors(k);
+  // the saloon between its vestibules: the far wall, its dark windows, the ceiling's lamps, the seat backs
+  const a = d0 + EL.doorW / 2 + 0.5, b = d1 - EL.doorW / 2 - 0.5;
+  g.fillStyle = '#e9dcb6';
+  g.fillRect(a, -3.45, b - a, 2.4);
+  g.fillStyle = '#d3c39b';
+  g.fillRect(a, -1.6, b - a, 0.5);
+  g.fillStyle = '#3a4757';
+  for (const x of EL.windows(k)) g.fillRect(x - 0.45, -2.95, 0.9, 0.7);
+  g.fillStyle = '#fff6dc';
+  g.fillRect(a, -3.42, b - a, 0.07);
+  for (const x of EL.windows(k)) {
+    g.fillStyle = '#9a6a3c';
+    g.beginPath();
+    g.moveTo(x - 0.62, -1.15);
+    g.lineTo(x - 0.62, -2.1);
+    g.quadraticCurveTo(x - 0.62, -2.25, x - 0.45, -2.25);
+    g.lineTo(x - 0.25, -2.25);
+    g.quadraticCurveTo(x - 0.1, -2.25, x - 0.1, -2.1);
+    g.lineTo(x - 0.1, -1.15);
+    g.fill();
+    if (e.rnd() < 0.3) passenger(g, x + 0.12, -2.0, k + Math.round(x), e);
   }
+  // the vestibules: brighter, the doors of the far side dark
+  for (const x of [d0, d1]) {
+    g.fillStyle = '#efe2bd';
+    g.fillRect(x - EL.doorW / 2 - 0.5, -3.45, EL.doorW + 1.0, 2.35);
+    g.fillStyle = '#2f4a37';
+    g.fillRect(x - EL.doorW / 2 + 0.1, -3.15, EL.doorW - 0.2, 2.0);
+    g.fillStyle = '#26323c';
+    g.fillRect(x - 0.5, -2.9, 0.4, 0.7);
+    g.fillRect(x + 0.1, -2.9, 0.4, 0.7);
+    g.fillStyle = '#b9ab8a';
+    g.fillRect(x - EL.doorW / 2 - 0.5, -1.25, EL.doorW + 1.0, 0.1);
+  }
+  // the light at each window and doorway: the glow, and a patch on whatever stands outside
+  EL.windows(k).forEach((x, i) => e.light(x, -2.55, 0.75, '#ffe4ac', 0.75, `w${k}${i}`));
+  [d0, d1].forEach((x, i) => e.light(x, -2.3, 0.85, '#ffe4ac', 0.8, `d${k}${i}`));
   // Silva, in the second car's front vestibule by the left jamb: a figure in a hat, dark against the light (silvaLive)
+  if (k !== 1) return;
   const x = EL.doors(1)[1] - 0.32;
   e.layer('silva', {}, c => {
     c.fillStyle = '#2b2622';
@@ -695,5 +699,5 @@ function far_train(g, e, o) {
 
 return {
   car, loco, nose, KINDS: Object.keys(KINDS),
-  electric_train, electric_inside, doorsLive, frostLive, silvaLive, ELECTRIC: EL, train_window, partition, far_train,
+  electric_train, electric_inside, electric_points, doorsLive, frostLive, silvaLive, ELECTRIC: EL, train_window, partition, far_train,
 };
