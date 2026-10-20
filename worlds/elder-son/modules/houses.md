@@ -11,7 +11,7 @@ y down, the anchor at the ground:
 - `pane(g, e, {w, h, dark})` — the glass behind an opening: the layers `lit` (the light, curtains), `figure` (a
   silhouette), `bars`, the glow `pane` (e.light); the scene shows them by its animate, by its own keys. `dark: true` — a
   window that is not lit.
-- `fence(g, e, len, h, {gaps})` — a picket fence from x 0 to len; `shed`, `barrel`, `bench`, `woodpile(g, e, w)`,
+- `fence(g, e, len, h, {gaps})` — a picket fence from x 0 to len, `gaps` [[x0, x1], …] left open; `shed`, `barrel`, `bench`, `woodpile(g, e, w)`,
   `lamp(g, e, h)` (the light `lamp`), `birch(g, e, h, {lean, thick})`, `cross(g, e, h)`, `rail(g, e, w)`, `drift`.
 
-Used by: “The Street (opus)”, “The Hillside (opus)”.
+Used by: “The Street”, “The Hillside”.
