@@ -426,9 +426,13 @@ function film(scene) {
         pp.reach({ r: 'window#pane_r', l: 'window#pane_l' });
         s.tell('buffalo:at-glass');
         pp.look(LOOK.herd);
+        // (then on Fogg, in his seat by the window: his watch — the shot made ready meanwhile)
+        const him = s.shot(shot(-1.1, 0.7, -0.2));
         await s.wait(1.7);
         fogg.look(LOOK.herd);
         await s.wait(2.4);
+        await s.until(() => him.ready);
+        him.cut();
         fogg.with(['watch']);
         fogg.do('sit_calm', { loop: true });
         await s.wait(0.1);
@@ -488,6 +492,8 @@ function film(scene) {
         await s.wait(2.2);
         // (the watch put away, the notebook open on his knees; late — `book_shut`, the game's as it opens the beat — he
         // shuts it, his hands down in his lap, his eyes on it)
+        aouda.look('fogg#head');
+        fix.look('fogg#head');
         fogg.reach(null);
         fogg.with(['notebook']);
         fogg.do('read_book', { loop: true });
