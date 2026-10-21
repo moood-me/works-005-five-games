@@ -1,5 +1,6 @@
 // Prologue «in which Phileas Fogg makes a wager» — game.md §3. The countdown of the last evening first (20:44:47 →
-// Stuart counts the last seconds, the handle turns, dark), then back to 2 October: the whist, the wager — the player lays Fogg's cards down himself —,
+// Stuart counts the last seconds, the handle turns, dark), then back to 2 October: the whist, the wager — the player
+// lays Fogg's cards down himself —,
 // ten minutes at Saville Row («Ten minutes»: the bag appears), the train out of Charing Cross (the gas, the London
 // watch; the notebook appears). Reads: hands['ten-minutes'] (the gas). Leaves: marks.gas; shown.money, shown.hours.
 import { SCENES } from '../story.js';
