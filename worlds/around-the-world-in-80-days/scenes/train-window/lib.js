@@ -265,7 +265,7 @@ function film(scene) {
   };
   // the night journey: Fogg reads, Aouda looks out, Fix behind his paper, Passepartout asleep
   const RIDE = {
-    ...where('europe', -2400), speed: 1, night: 1, dawn: 0, herd: 0, watch_close: 0, ...shot(),
+    ...where('europe', -2400), speed: 1, night: 1, dawn: 0, herd: 0, watch_close: 0, book_shut: 0, ...shot(),
     ...seated('fogg', 'read_book'), fogg_with: ['book'], fogg_here: true,
     ...seated('aouda', 'sit_calm'), aouda_look: LOOK.out,
     ...seated('passepartout', 'sleep_seated'),
@@ -404,7 +404,8 @@ function film(scene) {
         await s.wait(2.4);
       },
     },
-    // ---- The prairie: the train stands; buffalo, buffalo. Passepartout up at the glass, his palms on it.
+    // ---- The prairie: the train stands; buffalo, buffalo. Passepartout up at the glass, his palms on it; Fogg, in his
+    // seat, takes out his watch and looks at it (the hours going). The herd goes by of itself (24 s): the beat ends with it.
     buffalo: {
       from: () => ({
         ...RIDE, ...where('prairie', 300), herd_x: centre('prairie') + 300, speed: 0, night: 0, dawn: 0.35, herd: 0,
@@ -427,8 +428,14 @@ function film(scene) {
         pp.look(LOOK.herd);
         await s.wait(1.7);
         fogg.look(LOOK.herd);
-        await s.wait(3);
-        fogg.look(null);
+        await s.wait(2.4);
+        fogg.with(['watch']);
+        fogg.do('sit_calm', { loop: true });
+        await s.wait(0.1);
+        fogg.reach({ r: PALM.fogg });
+        await s.wait(0.2);
+        fogg.look('fogg#watch');
+        s.tell('buffalo:watch');
         await herd;
       },
     },
@@ -478,7 +485,14 @@ function film(scene) {
         await s.until(() => near.ready);
         near.cut();
         s.tell('special:eyes');
-        await s.wait(3.5);
+        await s.wait(2.2);
+        // (the watch put away, the notebook open on his knees: it waits there for the game — book_shut, script.js)
+        fogg.reach(null);
+        fogg.with(['notebook']);
+        fogg.do('read_book', { loop: true });
+        await s.wait(0.2);
+        fogg.look('fogg#book');
+        await s.wait(1.3);
       },
     },
   };

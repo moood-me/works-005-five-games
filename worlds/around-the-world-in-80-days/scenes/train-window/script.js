@@ -59,5 +59,28 @@ scene.on('change', 'herd', (v, old) => {
 // ── who is in the carriage: the game's with_* (Fogg always) ──
 for (const [id, k] of Object.entries(L.WITH)) scene.on('change', k, v => scene.set(`${id}_here`, !!v));
 
+// ── the marks of the journey on them, the game's keys as the cast's wears: Aouda's travelling dress, Passepartout's
+// wings, Fix's bruise ──
+for (const [key, id] of [['aouda_dress', 'aouda'], ['pp_wings', 'passepartout'], ['fix_bruise', 'fix']]) {
+  const wear = v => scene.set(`${id}_wear`, v ? scene.kit.cast.wears[key] : null);
+  scene.on('change', key, wear);
+  wear(num(key));
+}
+
+// ── Fogg shuts his notebook on his knees (late: the game raises `book_shut` toward 1 after `special`): the book shut
+// flat in his hands, his hands down in his lap, his eyes on it ──
+let shut = num('book_shut') >= 0.5;
+const shutting = v => {
+  if (v >= 0.5 && !shut) {
+    shut = true;
+    scene.set('fogg_with', ['book_shut']);
+    scene.set('fogg_do', { motion: 'sit_calm', loop: true });
+    scene.set('fogg_look', 'fogg#book');
+    scene.tell('special:shut');
+  } else if (v < 0.5) shut = false;
+};
+scene.on('change', 'book_shut', shutting);
+scene.on('move', 'book_shut', shutting);
+
 run();
 scene.kit.beats.play(scene, L.film(scene));

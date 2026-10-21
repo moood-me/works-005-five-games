@@ -61,7 +61,8 @@ against the world behind the glass, each land with a light of its own. All paint
 | `herd` | 0…1: the buffalo on `prairie` — how much of the herd has gone by | 0 |
 | `fog` | 0…1: fog; set on a cut together with `land` (`england` → 1, the others → 0), the game may set it otherwise | 0 |
 | `with_pp`, `with_aouda`, `with_fix` | who is in the compartment (Fogg always) | 1 |
-| `fix_bruise` | Fix's bruise: the cast now gives it (`scene.kit.cast.wears.fix_bruise` in `fix_wear`), the scene does not set it yet | 0 |
+| `aouda_dress`, `pp_wings`, `fix_bruise` | 0/1: the marks of the journey — Aouda's travelling dress, Passepartout's wings, Fix's bruise (script.js sets `<id>_wear` to the cast's `wears.<key>`) | 0 |
+| `book_shut` | 0…1: past a half Fogg shuts his notebook on his knees (the game raises it after `special`, when he is late): `fogg_with` `book_shut`, `sit_calm`, his eyes on it; the scene tells `special:shut` (script.js) | 0 |
 | `beat` | a beat of the film | null |
 | `watch_close` | 0…1: a close-up — Fogg's watch in his palm (an insert over the compartment); set by the beat `special` on a cut | 0 |
 
@@ -92,13 +93,14 @@ Points: `window#window`, `table#table`, `lamp#lamp`, `sky#moon`, `sky#sun`. For 
 | `ride` | night, all four: Fogg reads, Aouda at the window, Fix behind his paper, Passepartout asleep | — |
 | `brake` | India, dawn: the train stops (`speed` → 0 in 6 s); they wake, look out | — |
 | `ganges` | the train goes quietly along the Ganges; Aouda turns her head — a profile against the river | — |
-| `buffalo` | the prairie, the train stands, the herd goes by (24 s); Passepartout gets up, to the glass, his palms on it | — |
+| `buffalo` | the prairie, the train stands, the herd goes by of itself (24 s — the beat ends with it); Passepartout gets up, to the glass, his palms on it; Fogg in his seat takes out his watch and looks at it | — |
 | `snow` | snow, a clear day; they ride | — |
-| `special` | England, fog: the special at full speed; Fogg takes out his watch — a cut to the close-up (the insert `watch_close`) — a cut back into the compartment: all look at the watch | — |
+| `special` | England, fog: the special at full speed; Fogg takes out his watch — a cut to the close-up (the insert `watch_close`) — a cut back into the compartment: all look at the watch; he puts it away and opens his notebook on his knees — it ends so, waiting (`book_shut`) | — |
 
 The scene tells the game the beats' moments (`scene.tell`), besides `beat:<name>`: `depart:book`, `gas:up` (jumped
-up), `watch:out` (the watch in his palm), `brake:stopped`, `ganges:profile`, `buffalo:at-glass`, `special:watch` (the
-cut to Fogg's watch close up), `special:eyes` (the cut back into the compartment: all look).
+up), `watch:out` (the watch in his palm), `brake:stopped`, `ganges:profile`, `buffalo:at-glass`, `buffalo:watch` (Fogg looks at his watch, ~6 s after
+`at-glass`), `special:watch` (the cut to Fogg's watch close up), `special:eyes` (the cut back into the compartment: all
+look); and, outside the beats, `special:shut` (`book_shut` past a half).
 
 The compartment's light. By day the compartment is full of the light from the window: `light.inside` 1 (all that is
 seen — the people's backs, the wall with the window — faces away from the window and is lit by the light around), the
@@ -117,12 +119,6 @@ or shaded face); the animate rocks the hand with the carriage and the breath, th
 cannot take this shot: `camera_pitch` is a shift of the lens (a circle in the palm is seen as an oval), and the cast's
 people have no fingers. The point `watch_close#dial`. The cast's watch (`watch`) in the hand — for the wide shots.
 
-## Not done (the build stopped 2026-10-15)
-
-Not done of scenes.md: `buffalo` — waiting for `herd` 1 from the game, and Fogg with his watch (`buffalo:watch`);
-`special` — the waiting and the key `book_shut` (the cast's thing `book_shut` is there already), the moment
-`special:shut`; `fix_bruise` on Fix.
-
 ## What must not be broken
 
 - What is painted reads no moving keys: `land` — only the sky, through the animate; the night, dawn, the gas, the herd
@@ -131,3 +127,24 @@ Not done of scenes.md: `buffalo` — waiting for `herd` 1 from the game, and Fog
   `pnoise`): else the repeat's cut would show.
 - The cards and planes — by `reachOf(D)` about the land's middle; the frames (`box`) in scene.json cover it.
 - The lands are 30 km apart: from the window of one the other is not seen (the farthest seen is `far`: ±(4 + 5.1) km).
+
+## Contract for the check
+
+```json
+{"beats": {
+  "depart": {"after": [], "tells": ["depart:book"], "seconds": 8, "show": false},
+  "gas": {"after": ["depart"], "tells": ["gas:up"], "seconds": 5, "show": false},
+  "watch": {"after": ["gas"], "tells": ["watch:out"], "seconds": 6, "show": false},
+  "ride": {"after": [], "tells": [], "seconds": 10, "show": false},
+  "brake": {"after": [], "tells": ["brake:stopped"], "seconds": 8, "show": false},
+  "ganges": {"after": [], "tells": ["ganges:profile"], "seconds": 8, "show": false},
+  "buffalo": {"after": [], "tells": ["buffalo:at-glass", "buffalo:watch"], "seconds": 24, "show": false},
+  "snow": {"after": [], "tells": [], "seconds": 10, "show": false},
+  "special": {"after": [], "tells": ["special:watch", "special:eyes"], "seconds": 13, "show": false}
+},
+"points": ["window#window", "window#pane_l", "window#pane_r", "table#table", "lamp#lamp", "sky#moon", "sky#sun", "watch_close#dial",
+  "window", "fogg", "fogg#watch", "fogg#book", "passepartout", "passepartout#watch", "aouda", "fix"],
+"offers": [],
+"party": {"with_aouda": 0, "with_pp": 1, "with_fix": 0, "aouda_dress": 0, "pp_wings": 0, "fix_bruise": 0},
+"acts": {"book_shut": {"values": [1], "tells": ["special:shut"]}}}
+```
