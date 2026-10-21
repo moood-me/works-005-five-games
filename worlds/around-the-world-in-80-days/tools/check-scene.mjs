@@ -15,6 +15,8 @@ const ease = { smooth: u => u * u * (3 - 2 * u), linear: u => u, in: u => u * u,
 const hash = (n, s = 0) => { const x = Math.sin(n * 127.1 + s * 311.7) * 43758.5453; return x - Math.floor(x); };
 const noise = (x, s = 0) => { const i = Math.floor(x), f = x - i, u = f * f * (3 - 2 * f); return (hash(i, s) * (1 - u) + hash(i + 1, s) * u) * 2 - 1; };
 const anim = { ease, easeOf: n => ease[n] ?? ease.smooth, clamp, mix: (a, b, u) => a + (b - a) * u, span: (v, a, b) => clamp((v - a) / (b - a), 0, 1), turn: (a, b, u) => a + (b - a) * u, hash, noise, drift: noise, joint: () => [0, 0], blend: l => l[0][0] };
+// the texts a person reads (tr('…'), tr.n, tr.c): the engine binds the translator into every code; here — the English
+globalThis.tr = Object.assign(t => t, { n: (n, one, other) => (n === 1 ? one : other), c: (c, t) => t });
 const fn = (args, body, name) => { try { return new Function(...args, body); } catch (x) { err(`syntax ${name}`, x); return null; } };
 // ── modules ──
 const kit = { bend: () => () => [0, 0, 0], revolve: () => () => [0, 0, 0], extrude: () => () => [0, 0, 0], loft: () => () => [0, 0, 0], lump: () => () => [0, 0, 0] };
