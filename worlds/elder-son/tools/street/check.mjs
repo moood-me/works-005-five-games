@@ -33,7 +33,7 @@ function run(name, fn, init, party = {}) {
     get: k => st[k], set, state: st,
     tell: t => { snaps.push(snap(t)); },
     warn: t => warn.push(t),
-    sequence: (f) => { const p = f(s); p.catch(e => warn.push(String(e.stack))); return { cancel() {} }; },
+    sequence: (f) => { const p = Promise.resolve().then(() => f(s)); p.catch(e => warn.push(String(e.stack))); p.cancel = () => {}; return p; },
     every() {}, after() {}, on() {},
   };
   const s = {

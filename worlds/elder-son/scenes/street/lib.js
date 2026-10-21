@@ -203,8 +203,14 @@ function base(hour, snow) {
   for (const p of PEOPLE) Object.assign(v, { [`${p}_here`]: false, [`${p}_do`]: 'stand', [`${p}_look`]: null, [`${p}_reach`]: null, [`${p}_with`]: null, [`${p}_wear`]: null, [`${p}_gait`]: null, [`${p}_on`]: null, [`${p}_mood`]: null });
   return Object.assign(v, {
     hour, snow, win1: 0, win2: 0, win3: 0, win4: 0, win5: 0, mak_window: 0,
-    door: 0, mak_door: 0, nb_door: 0, porch_light: 0, fire: 0, embers: 0, steam: 0, shed_burnt: 0, silva_smoke: 0, shawl: 0,
+    door: 0, mak_door: 0, nb_door: 0, porch_light: 0, fire: 0, embers: 0, crowd: 0, steam: 0, shed_burnt: 0, silva_smoke: 0, shawl: 0,
   });
+}
+// the panes' light and figure keys as their windows' keys say (the script eases them on a change; a cut has them at once)
+const PANES = ['win1', 'win2', 'win3', 'win4', 'win5', 'mak_window'];
+function panes(v) {
+  for (const w of PANES) if (w in v) { v[`${w}_lit`] = v[w] > 0 ? 1 : 0; v[`${w}_who`] = v[w] === 2 ? 1 : 0; }
+  return v;
 }
 // someone here, at [across, distance], turned
 const AT = (id, p, turn, more = {}) => ({ [`${id}_here`]: true, [`${id}_a`]: p[0], [`${id}_d`]: p[1], ...(turn == null ? {} : { [`${id}_turn`]: turn }), ...more });
@@ -294,10 +300,7 @@ END.shawl = sc => END.porch_night(sc);
 
 // ── the film: film(scene) → { <name>: { from, after, run } } (modules/beats.md) ──
 function film(scene) {
-  const F = name => () => FROM[name](scene), E = name => () => END[name](scene);
-  // the neighbours' buckets during “Buckets” (a sequence of its own, stopped when the beat after begins)
-  let crowd = null;
-  const stopCrowd = () => { if (crowd) { crowd.cancel(); crowd = null; } };
+  const F = name => () => panes(FROM[name](scene)), E = name => () => panes(END[name](scene));
   // someone put somewhere at once (out of sight: a hall, behind a shed)
   const put = (s, id, p, turn) => { s.set(`${id}_a`, p[0]); s.set(`${id}_d`, p[1]); if (turn != null) s.set(`${id}_turn`, turn); };
 
@@ -328,8 +331,7 @@ function film(scene) {
       await s.wait(2.4);
     } },
     // the camera draws back to the near fence: the five windows, the two small in the middle of the street
-    knock_ready: { after: 'walk', from: E('knock_ready'), run: async s => {
-      s.cut({ ...CAM.wide });
+    knock_ready: { from: E('knock_ready'), run: async s => {
       await s.wait(2.2);
     } },
     // the windows dark, the snow thicker; along the street to the corner by Makarskaya's fence, before the shed; the
@@ -384,13 +386,14 @@ function film(scene) {
       // L09, L10 (≈ 7 s): “Forgive me, for heaven's sake” — a guilty smile
       await s.wait(2.4);
       sar.mood('smile');
-      await s.wait(4.0);
+      const back = s.shot({ ...CAM.behind_win });
+      await s.wait(5.6);
       s.set('mak_window', 0);
       sar.mood('sad');
       await s.wait(0.8);
       sar.look(null);
       // back along the shed, two metres before the two, not turning his head; through the wicket into his garden and on
-      s.cut({ ...CAM.behind_win });
+      back.cut();
       const away = sar.walk([[31.9, 11.6], [30.5, 10.85], [28.4, 10.75], [27.4, 10.6], [26.4, 10.25], [24.2, 10.0], [21.6, 9.9], [20.2, 9.3], [19.0, 7.6], [12.0, 6.6]]);
       await s.wait(2.6);
       s.tell('neighbor:gone');
@@ -398,7 +401,7 @@ function film(scene) {
       sil.look([DOOR.a, DOOR.d, 1.4]);
       // the camera back to the door; from behind the shed through the back wicket, Vasenka, home behind his father's back
       camTo(s, CAM.behind, 3.2);
-      await s.wait(1.0);
+      await s.wait(0.6);
       put(s, 'vasenka', [27.9, 13.6], 270);
       vas.mood('afraid');
       vas.look(null);
@@ -413,19 +416,19 @@ function film(scene) {
       s.move('door', 1, { over: 0.8, ease: 'out' });
       vas.walk([THRESHOLD, INSIDE]);
       s.tell('neighbor:vasya');
-      await s.wait(0.5);
+      await s.wait(0.2);
     } },
     // to the porch (L11, L12 on the way); Silva knocks; the door opens, Vasenka against the light; the camera at
     // the porch's side, the two in three quarters; the pose for the choice: Vasenka and the kitchen window
     porch: { after: 'neighbor', from: E('neighbor'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva'), vas = s.person('vasenka');
       // (Vasenka going in after the neighbour's beat: in, the door shut behind him)
-      if (s.get('vasenka_here')) (async () => { await vas.walk([THRESHOLD, INSIDE]); vas.here(false); s.move('door', 0, { over: 1.0 }); })();
+      if (s.get('vasenka_here')) s.sequence(async c => { await c.person('vasenka').walk([THRESHOLD, INSIDE]); c.person('vasenka').here(false); c.move('door', 0, { over: 1.0 }); });
       bus.look(null);
       sil.look(null);
       const go = s.all(
         sil.walk([[28.2, 9.1], [26.6, 9.3], [DOOR.a, 9.8], [DOOR.a, 10.9], SPOT.porch.silva]),
-        (async () => { await s.wait(0.6); await bus.walk([[28.0, 8.9], [26.2, 9.2], SPOT.porch.busygin]); })(),
+        s.sequence(async c => { await c.wait(0.6); await c.person('busygin').walk([[28.0, 8.9], [26.2, 9.2], SPOT.porch.busygin]); }),
       );
       await s.wait(1.4);
       camTo(s, CAM.porch, 6.5);
@@ -516,9 +519,9 @@ function film(scene) {
       k3.here(true);
       await s.all(
         toWin,
-        (async () => { await k3.walk([[22.6, 14.0], [21.8, 14.2], K.far_l]); await k3.turn(K.far_l[2]); await k3.do('sit_down'); k3.do('seated', { loop: true }); })(),
-        (async () => { await s.wait(0.8); k1.here(true); await k1.walk([[22.6, 14.0], K.far_r]); await k1.turn(K.far_r[2]); await k1.do('sit_down'); k1.do('seated', { loop: true }); })(),
-        (async () => { await s.wait(1.6); k2.here(true); await k2.walk([K.stove]); await k2.turn(K.stove[2]); k2.do('warm_hands', { loop: true }); })(),
+        s.sequence(async c => { const p = c.person('k3'); await p.walk([[22.6, 14.0], [21.8, 14.2], K.far_l]); await p.turn(K.far_l[2]); await p.do('sit_down'); p.do('seated', { loop: true }); }),
+        s.sequence(async c => { const p = c.person('k1'); await c.wait(0.8); p.here(true); await p.walk([[22.6, 14.0], K.far_r]); await p.turn(K.far_r[2]); await p.do('sit_down'); p.do('seated', { loop: true }); }),
+        s.sequence(async c => { const p = c.person('k2'); await c.wait(1.6); p.here(true); await p.walk([K.stove]); await p.turn(K.stove[2]); p.do('warm_hands', { loop: true }); }),
       );
       s.tell('in:inside');
     } },
@@ -592,7 +595,6 @@ function film(scene) {
       await open;
       s.move('door', 0, { over: 1.0 });
       await s.wait(1.6);
-      vas.look('silva');
       await there;
       vas.look([MAK_DOOR.a, MAK_DOOR.d, 1.5]);
       await sil.turn(0);
@@ -617,11 +619,8 @@ function film(scene) {
     } },
     // later: the shed's window orange, smoke; Makarskaya runs out — the cry; Silva with his smoking sleeve; the
     // neighbours with buckets; Busygin leaves the table and runs to the barrel. The pose for “Buckets”
-    fire: { after: 'evening', from: () => FIRE_OPEN(scene), run: async s => {
-      stopCrowd();
+    fire: { from: () => panes(FIRE_OPEN(scene)), run: async s => {
       const mak = s.person('makarskaya'), sil = s.person('silva'), bus = s.person('busygin'), n1 = s.person('neighbor1'), n2 = s.person('neighbor2');
-      // (after the evening: time has passed — Vasenka gone from the porch, the kitchen as it was)
-      if (s.get('vasenka_here')) s.cut(FIRE_OPEN(scene));
       await s.move('fire', 0.6, { over: 3, ease: 'in' });
       put(s, 'makarskaya', [MAK_DOOR.a, 13.4], 180);
       mak.mood('afraid');
@@ -667,13 +666,12 @@ function film(scene) {
       n1.look('shed'); n2.look('shed'); mak.look('shed'); sil.look('shed');
       s.move('silva_smoke', 0, { over: 30 });
       s.tell('fire:ready');
-      // the neighbours throw by themselves as long as it burns
-      crowd = scene.sequence(async c => { await neighbours(c); }, { name: 'crowd' });
+      // the neighbours throw by themselves as long as it burns (the script)
+      s.set('crowd', 1);
     } },
     // the fire out: steam; the half-ring before the shed (Silva turns round on them: who?); Vasenka aside, the
     // matchbox in his fist — close, in the smouldering shed's glow; the pose for the choice: Vasenka and Makarskaya
     after_fire: { from: F('after_fire'), run: async s => {
-      stopCrowd();
       const sil = s.person('silva'), vas = s.person('vasenka'), mak = s.person('makarskaya');
       s.move('steam', 0.6, { over: 8 });
       await s.wait(1.4);
@@ -744,7 +742,7 @@ function film(scene) {
       vas.look('makarskaya');
       mak.look('vasenka');
       // through the wicket to her, he a step behind
-      await s.all(vas.walk([[27.5, 10.6], [28.6, 10.1], SPOT.own.vasenka]), (async () => { await s.wait(0.6); await bus.walk([[27.5, 10.75], SPOT.own.busygin]); })());
+      await s.all(vas.walk([[27.5, 10.6], [28.6, 10.1], SPOT.own.vasenka]), s.sequence(async c => { await c.wait(0.6); await c.person('busygin').walk([[27.5, 10.75], SPOT.own.busygin]); }));
       own.cut();
       await s.all(vas.turn(90), mak.turn(270), bus.turn(90));
       vas.look('makarskaya');
@@ -807,7 +805,7 @@ function film(scene) {
     } },
     // the insert closed: the coat on her shoulders; by `nina_is` — her hands round his (knows), the coat given back
     // (sister), or sitting apart looking at the snow (none)
-    porch_after: { after: 'shawl', from: () => ({ ...END.shawl(scene), shawl: 0, nina_with: ['shawl', 'coat_over'], busygin_with: null }), run: async s => {
+    porch_after: { after: 'shawl', from: () => panes({ ...END.shawl(scene), shawl: 0, nina_with: ['shawl', 'coat_over'], busygin_with: null }), run: async s => {
       const bus = s.person('busygin'), nina = s.person('nina');
       s.set('shawl', 0);
       nina.with(['shawl', 'coat_over']);
@@ -869,29 +867,23 @@ function film(scene) {
       await s.wait(3);
     } },
   };
-
-  // the neighbours at the shed while it burns: a throw, back two steps, again — never in step
-  async function neighbours(c) {
-    const one = async (id, at, k) => {
-      const p = c.person(id);
-      await c.wait(0.9 + k * 2.1);
-      while (Number(scene.get('fire') ?? 0) > 0.03) {
-        const t = p.do('throw_bucket');
-        await c.wait(1.0);
-        c.set('splash', Number(scene.get('splash') ?? 0) + 1);
-        await t;
-        p.do('stand');
-        await p.walk([[at[0] - 1.2 + k * 2.4, at[1] - 2.2]], { gait: 'carry_walk' });
-        await p.walk([at], { gait: 'carry_walk' });
-        p.gait(null);
-        await p.turn(k ? 340 : 25);
-      }
-    };
-    await c.all(one('neighbor1', SPOT.nb1, 0), one('neighbor2', SPOT.nb2, 1));
-  }
 }
 
 // ── the actions the mini-games ask for by key ──
+// a neighbour's throw at the burning shed (the script starts one at a time while `crowd` and the fire last): the water
+// thrown, back two steps for more, back to the place
+async function neighbourThrow(s, id, at, k) {
+  const p = s.person(id);
+  const t = p.do('throw_bucket');
+  await s.wait(1.0);
+  s.set('splash', Number(s.get('splash') ?? 0) + 1);
+  await t;
+  p.do('stand');
+  await p.walk([[at[0] - 1.2 + k * 2.4, at[1] - 2.2]], { gait: 'carry_walk' });
+  await p.walk([at], { gait: 'carry_walk' });
+  p.gait(null);
+  await p.turn(k ? 340 : 25);
+}
 // “Windows” (`knock`): N — to window N, knock; 0 — back to Silva
 async function knock(s, n) {
   const bus = s.person('busygin');
@@ -972,4 +964,4 @@ const lateOf = hour => span(hour, 0.9, 0.96);
 
 return { HOUSES, PLINTH, WALL_H, RISE, winOf, KITCHEN_WIN, DOOR, MAK_DOOR, NB_DOOR, KITCHEN, TABLE, LAMP, STOVE, PORCH, SAR_FENCE, GATE_LAMP,
   SIDE_FENCE, STREET_LAMP, SHED, BARREL, BENCH, WOODPILE, SPOT, K, CAM, RUN, RUN_LEN, RUN_CAM, runPoint, runAt, runWay,
-  FROM, END, base, film, knock, buckets, knockSpot, paneLive, shedLive, lateOf, span, clamp, PEOPLE, INSIDE, HALL, THRESHOLD };
+  FROM, END, base, film, knock, buckets, neighbourThrow, panes, PANES, knockSpot, paneLive, shedLive, lateOf, span, clamp, PEOPLE, INSIDE, HALL, THRESHOLD };

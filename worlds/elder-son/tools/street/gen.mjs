@@ -169,7 +169,7 @@ add({ id: 'splash', name: 'Water', particles: { kind: 'splashes', at: [r2(S_.a +
 // the state: the end of `walk` — the two in the street under the lamp, the five windows lit (what a viewer sees first)
 const KEYED_W = ['win1', 'win2', 'win3', 'win4', 'win5', 'mak_window'];
 const state = {
-  late: 0, embers: 0, beat: null, beat_next: null, knock: 0, buckets: 'none', run: 0, run_at: 0, look_back: 0, splash: 0, lay: 0, shed_left: 1, shed_burnt: 0,
+  late: 0, embers: 0, crowd: 0, beat: null, beat_next: null, knock: 0, buckets: 'none', run: 0, run_at: 0, look_back: 0, splash: 0, lay: 0, shed_left: 1, shed_burnt: 0,
   ...Object.fromEntries(KEYED_W.flatMap(w => [[`${w}_lit`, W[w] > 0 ? 1 : 0], [`${w}_who`, 0]])),
   door_f: 180, mak_door_f: 180, nb_door_f: 180,
   // the play's keys (scenes.md): their defaults
@@ -206,6 +206,7 @@ const states = {
   nb_door: { range: [0, 1], smooth: true, means: 'the neighbours\' door (the house next to the Sarafanovs\'): 0 shut … 1 open' },
   nb_door_f: num('the turn of the neighbours\' door — the script sets it by nb_door'),
   fire: { range: [0, 1], smooth: true, means: 'the fire in the shed: light in its little window, tongues under the roof, smoke, orange light on the snow (the game moves it in “Buckets”)' },
+  crowd: { values: [0, 1], means: 'the neighbours throw water at the burning shed by themselves while the fire burns (the beat fire sets it; the script throws)' },
   embers: { range: [0, 1], smooth: true, means: 'the shed smouldering after the fire: the glow in its window and a dim orange light, no flames' },
   steam: { range: [0, 1], smooth: true, means: 'steam over the shed put out' },
   shed_burnt: { values: [0, 1], means: 'the shed after the fire (the beat after_fire sets it): 1 — scorched/burnt out by shed_left' },
