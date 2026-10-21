@@ -22,13 +22,13 @@ scene.on('move', 'door', leaves);
 leaves(scene.get('door') ?? 0);
 
 // The game's keys, turned into who is here: `gentlemen` — how many of the five (Stuart first), `fogg_present`,
-// `fogg_seated` (Fogg in his armchair by the fire, his paper open — a cut: he is there).
-const { MEN, ARMCHAIR, TO_FIRE, loop } = scene.lib;
+// `fogg_seated` (Fogg at the whist table in his place, his paper open — a cut: he is there).
+const { MEN, FAR_SEAT, loop } = scene.lib;
 scene.on('change', 'gentlemen', v => MEN.forEach((id, i) => scene.set(`${id}_here`, i < v)));
 scene.on('change', 'fogg_present', v => scene.set('fogg_here', !!v));
 scene.on('change', 'fogg_seated', v => {
   if (!v) return;
-  scene.cut({ fogg_a: ARMCHAIR[0], fogg_d: ARMCHAIR[1], fogg_turn: TO_FIRE, fogg_do: loop('paper_seated'), fogg_with: ['newspaper'],
+  scene.cut({ fogg_a: FAR_SEAT[0], fogg_d: FAR_SEAT[1], fogg_turn: 180, fogg_do: loop('paper_seated'), fogg_with: ['newspaper'],
     fogg_wear: null, fogg_look: null, fogg_here: true });
 });
 

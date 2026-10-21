@@ -45,7 +45,12 @@ against the world behind the glass, each land with a light of its own. All paint
   `herd.wgsl` makes a herd of it: 6 rows, a buffalo every 7 m in each, its own size and length of step (3.2…3.8 m), the
   pose by the way gone. The herd crosses the line where the train stands (`herd_x`).
 - **The compartment** — the wall with the window (`window`), the glass `glass` (at night the compartment shows faintly
-  in it), the sill, the table, the lamp, the sofas and their armrests. The window's light — `window_light` (`daylight`,
+  in it), the sill, the table, the lamp; two benches facing each other across the aisle, the window between them, as a
+  first-class compartment has them (2026-10-21; till then two sofas turned to the window, everyone's back to us):
+  `wall_l`, `wall_r` (the partitions, walnut, the benches' velvet backs and the luggage rack on them), `seat_l`, `seat_r`
+  (the seats' tops), `bench_l`, `bench_r` (their fronts), `end_l`, `end_r` (their near ends). On the left Aouda (nearer
+  us) and Fogg (by the window: his face to us), facing right; on the right Passepartout (nearer) and Fix (by the window,
+  facing Fogg), facing left (lib.js `SEAT`, `FACE`, `COMPARTMENT`) — their faces in profile and three-quarters. The window's light — `window_light` (`daylight`,
   `of: "glass"`: it comes in through the whole opening, only into the compartment). The lamps — `sconce_l`, `sconce_r`
   (`window#…`), `table_lamp` (`lamp#bulb`), `on: night`; their glass from inside — the layer `lights`, added as light.
   How much light there is in the compartment — below («The compartment's light»).

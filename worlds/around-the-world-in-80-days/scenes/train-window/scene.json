@@ -101,9 +101,9 @@
     "with_aouda": 1,
     "with_fix": 1,
     "fix_bruise": 0,
-    "fogg_a": -1.52,
-    "fogg_d": 2.12,
-    "fogg_turn": 0,
+    "fogg_a": -0.83,
+    "fogg_d": 2.17,
+    "fogg_turn": 90,
     "fogg_do": {
       "motion": "read_book",
       "loop": true,
@@ -115,9 +115,9 @@
       "book"
     ],
     "fogg_here": true,
-    "aouda_a": -0.98,
-    "aouda_d": 2.12,
-    "aouda_turn": 0,
+    "aouda_a": -0.83,
+    "aouda_d": 1.55,
+    "aouda_turn": 90,
     "aouda_do": {
       "motion": "sit_calm",
       "loop": true,
@@ -134,9 +134,9 @@
     "aouda_reach": null,
     "aouda_with": null,
     "aouda_here": true,
-    "passepartout_a": 0.98,
-    "passepartout_d": 2.12,
-    "passepartout_turn": 0,
+    "passepartout_a": 0.83,
+    "passepartout_d": 1.55,
+    "passepartout_turn": 270,
     "passepartout_do": {
       "motion": "sleep_seated",
       "loop": true,
@@ -146,9 +146,9 @@
     "passepartout_reach": null,
     "passepartout_with": null,
     "passepartout_here": true,
-    "fix_a": 1.52,
-    "fix_d": 2.12,
-    "fix_turn": 0,
+    "fix_a": 0.83,
+    "fix_d": 2.17,
+    "fix_turn": 270,
     "fix_do": {
       "motion": "paper_seated",
       "loop": true,
@@ -575,6 +575,122 @@
       "inside": true
     },
     {
+      "id": "wall_l",
+      "name": "Left partition and its bench's back",
+      "across": -1.18,
+      "distance": 1.2,
+      "facing": 90,
+      "box": [
+        -0.6,
+        -2.8,
+        1.4100000000000001,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "wall_r",
+      "name": "Right partition and its bench's back",
+      "across": 1.18,
+      "distance": 1.2,
+      "facing": 270,
+      "box": [
+        -1.4100000000000001,
+        -2.8,
+        0.6,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "seat_l",
+      "name": "Left bench's seat",
+      "plane": true,
+      "across": -0.8799999999999999,
+      "distance": 1.88,
+      "elevation": 0.48,
+      "width": 0.6,
+      "depth": 1.36,
+      "color": "#6a2a30",
+      "lit": true,
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "seat_r",
+      "name": "Right bench's seat",
+      "plane": true,
+      "across": 0.8799999999999999,
+      "distance": 1.88,
+      "elevation": 0.48,
+      "width": 0.6,
+      "depth": 1.36,
+      "color": "#6a2a30",
+      "lit": true,
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "bench_l",
+      "name": "Left bench's front",
+      "across": -0.58,
+      "distance": 1.2,
+      "facing": 90,
+      "box": [
+        0,
+        -0.5,
+        1.36,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "bench_r",
+      "name": "Right bench's front",
+      "across": 0.58,
+      "distance": 1.2,
+      "facing": 270,
+      "box": [
+        -1.36,
+        -0.5,
+        0,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "end_l",
+      "name": "Left bench's arm",
+      "across": -1.18,
+      "distance": 1.2,
+      "box": [
+        0,
+        -0.74,
+        0.6,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
+      "id": "end_r",
+      "name": "Right bench's arm",
+      "across": 1.18,
+      "distance": 1.2,
+      "box": [
+        -0.6,
+        -0.74,
+        0,
+        0.02
+      ],
+      "on": "carriage",
+      "inside": true
+    },
+    {
       "id": "fogg",
       "name": "Phileas Fogg",
       "person": {
@@ -583,8 +699,8 @@
         "turn": 0,
         "does": "sit_calm"
       },
-      "across": -1.52,
-      "distance": 2.12,
+      "across": -0.83,
+      "distance": 2.17,
       "place": {
         "across": "fogg_a",
         "distance": "fogg_d"
@@ -608,8 +724,8 @@
         "turn": 0,
         "does": "sit_calm"
       },
-      "across": -0.98,
-      "distance": 2.12,
+      "across": -0.83,
+      "distance": 1.55,
       "place": {
         "across": "aouda_a",
         "distance": "aouda_d"
@@ -633,8 +749,8 @@
         "turn": 0,
         "does": "sit_calm"
       },
-      "across": 0.98,
-      "distance": 2.12,
+      "across": 0.83,
+      "distance": 1.55,
       "place": {
         "across": "passepartout_a",
         "distance": "passepartout_d"
@@ -658,8 +774,8 @@
         "turn": 0,
         "does": "sit_calm"
       },
-      "across": 1.52,
-      "distance": 2.12,
+      "across": 0.83,
+      "distance": 2.17,
       "place": {
         "across": "fix_a",
         "distance": "fix_d"
@@ -671,68 +787,6 @@
         "strength": 0.4,
         "soft": 0.3
       },
-      "on": "carriage",
-      "inside": true
-    },
-    {
-      "id": "sofa_l",
-      "name": "Left sofa",
-      "across": -1.25,
-      "distance": 2.0,
-      "height": 0.8,
-      "box": [
-        -0.6,
-        -0.82,
-        0.6,
-        0
-      ],
-      "on": "carriage",
-      "inside": true
-    },
-    {
-      "id": "sofa_r",
-      "name": "Right sofa",
-      "across": 1.25,
-      "distance": 2.0,
-      "height": 0.8,
-      "box": [
-        -0.6,
-        -0.82,
-        0.6,
-        0
-      ],
-      "on": "carriage",
-      "inside": true
-    },
-    {
-      "id": "sofa_l_arm",
-      "name": "Left sofa's armrest",
-      "across": -0.7,
-      "distance": 2.0,
-      "facing": 90,
-      "height": 0.7,
-      "box": [
-        0,
-        -0.72,
-        0.56,
-        0.02
-      ],
-      "on": "carriage",
-      "inside": true
-    },
-    {
-      "id": "sofa_r_arm",
-      "name": "Right sofa's armrest",
-      "across": 0.7,
-      "distance": 2.0,
-      "facing": 270,
-      "height": 0.7,
-      "box": [
-        -0.56,
-        -0.72,
-        0,
-        0.02
-      ],
       "on": "carriage",
       "inside": true
     },

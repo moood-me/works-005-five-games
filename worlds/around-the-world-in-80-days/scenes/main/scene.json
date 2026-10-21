@@ -25,7 +25,8 @@
         "ambientColor": "#bcc4dc",
         "saturation": 0.9
       }
-    }
+    },
+    "brightness": 1.12
   },
   "lights": [
     {
@@ -95,6 +96,15 @@
       "reach": 13,
       "glow": 2.5,
       "strength": 1.5
+    },
+    {
+      "id": "fill",
+      "across": 0.5,
+      "distance": 3.2,
+      "elevation": 4.2,
+      "color": "#ffe4c4",
+      "strength": 1.2,
+      "reach": 10
     }
   ],
   "state": {
@@ -209,7 +219,7 @@
         0,
         1
       ],
-      "means": "Fogg sits in his armchair by the fire with a newspaper (Friday)"
+      "means": "Fogg sits at the whist table in his own place with a newspaper, his face to us (Friday)"
     },
     "with_aouda": {
       "range": [
@@ -370,7 +380,7 @@
       "depth": 16,
       "reflect": {
         "strength": 0.5,
-        "fade": 5,
+        "fade": 1.0,
         "blur": 0.05,
         "rough": 0.15
       },
