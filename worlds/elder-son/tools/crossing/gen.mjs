@@ -9,7 +9,7 @@ const r2 = v => Math.round(v * 100) / 100;
 const F0 = 0.04;
 const start = L.places(F0);
 const state = {
-  hour: 0.82, night: L.nightOf(0.82), beat: null, beat_next: null,
+  hour: 0.82, night: L.nightOf(0.82), beat: null, beat_next: null, light_far: 1,
   barrier: 1, bell: 1, freight: F0, freight_x: r2(L.noseOf(F0)), snow: 0.4,
   camera_x: L.CAM.med.camera_x, camera_z: L.CAM.med.camera_z,
   nina_a: L.SPOT.nina[0], nina_d: L.SPOT.nina[1], busygin_a: L.SPOT.busygin[0], busygin_d: L.SPOT.busygin[1],
@@ -23,6 +23,7 @@ const states = {
   barrier: { range: [0, 1], smooth: true, means: 'the barrier: 0 up, 1 down across the road' },
   bell: { range: [0, 1], means: '1 — the bell: two red lights blink in turn; 0 — dark' },
   freight: { range: [0, 1], smooth: true, means: 'the freight: 0 in the wood; 0.04 — the headlight on the far curve (≈ 200 m), standing; 0.1…0.9 — going before them from right to left; 1 — gone to the left' },
+  light_far: { range: [0, 1], means: 'the far headlight\'s halo (the headlight seen from 200 m is a bright star): 1 while the freight stands on the curve, 0 as it comes — the script sets it by freight' },
   freight_x: { type: 'number', means: 'the freight\'s nose, metres along the track from the wood — the script sets it by freight' },
   snow: { range: [0, 1], smooth: true, means: 'how hard it snows' },
   nina_a: { type: 'number', means: 'where Nina is: metres to the right' }, nina_d: { type: 'number', means: 'where Nina is: metres forward' },
@@ -110,7 +111,8 @@ const scene = {
     { id: 'booth_lamp', of: 'booth_window#pane', color: '#e8963a', strength: 2.4, reach: 12 },
     { id: 'red1', of: 'signal#l1', color: '#ff3018', strength: 0.7, reach: 6 },
     { id: 'red2', of: 'signal#l2', color: '#ff3018', strength: 0.7, reach: 6 },
-    { id: 'headlight', of: 'freight#light', color: '#fff0d0', strength: 2.2, reach: 60, glow: 2 },
+    { id: 'headlight', of: 'freight#light', color: '#fff0d0', strength: 1.1, reach: 40, glow: 2 },
+    { id: 'headlight_far', across: r2(L.at(L.S_LIGHT).a), distance: r2(L.at(L.S_LIGHT).d), elevation: 2.2, color: '#fff0d0', strength: 5, reach: 8, glow: 34, on: 'light_far' },
   ],
   state,
   states,

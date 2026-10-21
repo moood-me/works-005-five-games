@@ -69,11 +69,11 @@ const CLUB = { a: 55.5, d: 9.0, w: 11, door: 53.5, steps: [ROAD_A1, 6.6], landin
 const SPOT = {
   nina: [-2.0, 6.15], busygin: [-1.1, 6.3],
   behind: [-3.55, 6.25],               // Nina behind the birch, out of sight from the slope
-  pillar: { nina: [5.75, 6.15], busygin: [6.45, 6.4] },   // in the shadow of the gate's left pillar
+  pillar: { nina: [4.6, 6.1], busygin: [5.3, 6.3] },   // in the lee of the gate's left pillar, seen over the fence
   top: [1.4, 24.8],                    // the head of the path
   meet: [2.25, 24.1],                  // Busygin on the path a step below his father, facing him
   caseAt: [0.4, 26.45],                // where the case lies on the snow by the grave, before him
-  gate: { sarafanov: [8.95, 5.3], busygin: [7.05, 5.45] },   // at the gate's foot on the road, face to face
+  gate: { sarafanov: [8.5, 5.3], busygin: [7.2, 5.45] },   // at the gate's foot on the road, face to face
   gone: [9.6, ROAD_Y],                 // where the old man turns right on the road
   club: { nina: [47.9, 5.35], busygin: [48.9, 5.55] },      // in the road before the club, by the way they came
 };
@@ -89,21 +89,22 @@ const PEOPLE = ['nina', 'busygin', 'sarafanov', 'band1', 'band2', 'band3', 'mour
 
 const CAM = {
   road0: { camera_x: -18.3, camera_z: 0.4, camera_yaw: -6, camera_h: 0 },
-  march: { camera_x: -1.3, camera_z: 0.6, camera_yaw: 0, camera_h: 0 },
-  // from the slope beyond the fence: the two by the birch seen in three quarters, looking up at the funeral
-  talk: { camera_x: 1.2, camera_z: 8.6, camera_yaw: -130, camera_h: 0 },
+  march: { camera_x: -1.3, camera_z: 0.6, camera_yaw: 0, camera_h: 0, camera_pitch: 0 },
+  // from the slope beyond the fence, a little above it: the two by the birch in three quarters, looking up at the funeral
+  talk: { camera_x: 1.6, camera_z: 8.8, camera_yaw: -136, camera_h: 0.3, camera_pitch: -14 },
   near: { camera_x: -1.0, camera_z: 2.4, camera_yaw: 2, camera_h: 0 },
   // on the slope below them and to the side, a little under them: both in profile against the snow and the sky
-  meet: { camera_x: -1.0, camera_z: 22.2, camera_yaw: 45, camera_h: 0 },
-  hide: { camera_x: 0.6, camera_z: 1.2, camera_yaw: 22, camera_h: 0 },
-  // on the road at the gate's foot: the two face to face, the pillar behind them
-  bottom: { camera_x: 8.0, camera_z: 2.3, camera_yaw: 0, camera_h: 0 },
+  meet: { camera_x: -1.0, camera_z: 22.2, camera_yaw: 52, camera_h: 0 },
+  hide: { camera_x: 4.2, camera_z: 9.6, camera_yaw: 167, camera_h: 0 },
+  // from the slope beyond the gate: the two in the pillar's shadow look up the path at their father, who comes down past the lens
+  // (the key `hide`); then on the road at the gate's foot: the two face to face, the pillar behind them
+  bottom: { camera_x: 7.7, camera_z: 2.3, camera_yaw: 0, camera_h: 0 },
   // on the road before the club: the two in profile at the left, the steps and the door at the right
-  club: { camera_x: 49.6, camera_z: 1.3, camera_yaw: 12, camera_h: 0 },
+  club: { camera_x: 47.8, camera_z: 1.0, camera_yaw: 18, camera_h: 0 },
 };
 const CAMKEYS = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h'];
 // “Arm in Arm”: the camera goes down the slope with the pair, a fixed way off them (as at the end of `meet`)
-const DOWN_CAM = { dx: -2.4, dz: -2.6, yaw: 45 };
+const DOWN_CAM = { dx: -2.4, dz: -2.6, yaw: 52 };
 const downCam = p => [p[0] + DOWN_CAM.dx, p[1] + DOWN_CAM.dz, DOWN_CAM.yaw, 0];
 // “Following”: the camera along the road, behind the road's far edge, the father a little right of its middle
 const trailCam = a => [a - 2.4, -3.2, 0, 0];
@@ -233,19 +234,21 @@ function film(scene) {
       from: END.alone,
       async run(s) {
         const sar = s.person('sarafanov'), nina = s.person('nina'), bus = s.person('busygin');
+        // Nina steps back behind the birch, Busygin goes through the gate and up the path; then the cut to the head of the
+        // path, where the father stands: the son comes up to him, both faces seen
+        const meeting = s.shot({ ...CAM.meet });
         nina.look(null);
-        await nina.walk([SPOT.behind]);
-        nina.turn(20);
-        nina.look('sarafanov');
+        const hide = nina.walk([SPOT.behind]);
         const up = bus.walk([[4.8, 5.6], [GATE, 6.4], ...PATH.slice(0, 5).reverse().slice(1, -1), SPOT.meet]);
-        await s.wait(0.1);
-        const over = Math.max(1, up.remaining || 12);
-        // the camera through the gate and up the slope behind him, to where it sees the two side by side
-        s.path(CAMKEYS, [[4.6, 3.6, 22, 0], [4.8, 8.0, -5, 0], [0.5, 13.0, 12, 0], [-1.5, 18.5, 30, 0], CAMKEYS.map(k => CAM.meet[k])], { over, ease: 'inOut' });
         sar.look('busygin');
         sar.mood('afraid');
         bus.mood('thinking');
-        await s.wait(Math.max(0, over - 6));
+        await hide;
+        nina.turn(20);
+        nina.look('sarafanov');
+        await s.until(() => s.get('busygin_d') > 9);
+        meeting.cut();
+        await s.wait(Math.max(0, (up.remaining || 12) - 6));
         await sar.do('hide_back');
         s.tell('meet:talk');
         await up;
@@ -274,12 +277,16 @@ function film(scene) {
         ...AT('nina', SPOT.behind, 20, { nina_mood: 'thinking', nina_look: 'busygin' }) }),
       async run(s) {
         const sar = s.person('sarafanov'), bus = s.person('busygin'), nina = s.person('nina');
+        const comes = nina.walk([[-1, 5.7], [SPOT.gate.busygin[0] - 1.1, 5.6]]);
         if (Number(s.get('snowy'))) {
+          // his back to us: the snow on it, he brushes it off with his hand over the shoulder, laughs
           sar.look(null);
+          await sar.turn(20);
           sar.reach({ r: 'sarafanov#back' });
           sar.mood('laugh');
-          await s.wait(2.6);
+          await s.wait(2.8);
           sar.reach(null);
+          await sar.turn(270);
           sar.look('busygin');
           sar.mood('smile');
           await s.wait(0.4);
@@ -287,17 +294,16 @@ function film(scene) {
         await sar.do('take');
         bus.with([]);
         sar.with(['long_scarf', 'case']);
-        await s.wait(2.6);
         sar.look(null);
         await sar.turn(90);
         bus.look('sarafanov');
         nina.look(null);
-        const comes = nina.walk([[-1, 5.7], [SPOT.gate.busygin[0] - 1.1, 5.6]]);
         await sar.walk([SPOT.gone, [15.5, ROAD_Y]]);
         bus.look('nina');
         s.tell('bottom:gone');
         await comes;
         await nina.turn(90);
+        nina.mood('thinking');
         await s.wait(1);
       },
     },
@@ -308,12 +314,20 @@ function film(scene) {
       from: END.alone,
       async run(s) {
         const sar = s.person('sarafanov'), nina = s.person('nina'), bus = s.person('busygin');
-        camTo(s, CAM.hide, 4, 'inOut');
+        s.cut({ ...CAM.hide });
+        sar.mood('neutral');
+        nina.mood('afraid');
+        bus.mood('thinking');
+        const down = sar.walk(PATH.slice(1, 5));
         await s.all(nina.walk([[1.5, 5.6], SPOT.pillar.nina]), (async () => { await s.wait(0.3); await bus.walk([[2.2, 5.8], SPOT.pillar.busygin]); })());
-        await s.all(nina.turn(30), bus.turn(10));
+        await s.all(nina.turn(20), bus.turn(350));
         nina.look('sarafanov');
         bus.look('sarafanov');
-        await sar.walk([...PATH.slice(1), [GATE + 0.8, ROAD_Y], SPOT.gone]);
+        await down;
+        const road = sar.walk([PATH[5], [GATE + 0.8, ROAD_Y], SPOT.gone]);
+        const [x, z, yaw, h] = trailCam(SPOT.gone[0]);
+        camTo(s, { camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h }, 4.5, 'inOut');
+        await road;
         await sar.turn(90);
         s.tell('hide:ready');
       },
@@ -323,7 +337,7 @@ function film(scene) {
     // warm light, in, the door shuts
     club: {
       from: () => ({ ...END.alone(), ...CAM.club, hour: 0.79, club_door: 0, sar_go: 0, sar_at: 1, follow: roadU(SPOT.club.busygin[0]), follow_at: roadU(SPOT.club.busygin[0]), hold: 0, duck: 0,
-        ...AT('sarafanov', [ROAD_A1, 6.3], 0, { ...THREE, sarafanov_mood: 'neutral' }),
+        ...AT('sarafanov', [ROAD_A1, 5.4], 0, { ...THREE, sarafanov_mood: 'neutral' }),
         ...AT('nina', SPOT.club.nina, 90, { nina_mood: 'smile', nina_look: 'sarafanov' }),
         ...AT('busygin', SPOT.club.busygin, 90, { busygin_mood: 'sad', busygin_look: 'sarafanov' }) }),
       async run(s) {

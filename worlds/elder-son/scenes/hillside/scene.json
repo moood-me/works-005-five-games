@@ -69,12 +69,12 @@
     },
     {
       "id": "club_spill",
-      "across": 53.5,
-      "distance": 8.9,
+      "across": 52.5,
+      "distance": 6.8,
       "elevation": 1.4,
       "color": "#e8963a",
-      "strength": 1.8,
-      "reach": 10,
+      "strength": 2.4,
+      "reach": 14,
       "on": "club_door"
     }
   ],
@@ -1224,11 +1224,11 @@
       "plane": true,
       "walk": true,
       "across": 53.5,
-      "distance": 7.25,
+      "distance": 6.95,
       "elevation": 0.225,
       "width": 1.5,
-      "depth": 1.38,
-      "tilt": 19.1
+      "depth": 1.95,
+      "tilt": 13.3
     },
     {
       "id": "club_landing",

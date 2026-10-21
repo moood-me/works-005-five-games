@@ -85,7 +85,7 @@ add({ id: 'club_door', name: 'Club door', on: 'club', across: doorX - 0.55, dist
 add({ id: 'club_hall', name: 'Club hall', on: 'club', across: doorX, distance: 0.9, elevation: PL, facing: 180, glows: true, height: 2.4, box: [-1.3, -2.45, 1.3, 0.05] });
 add({ id: 'club_sign', name: 'Sign', on: 'club', across: doorX, distance: 0.04, elevation: PL + 2.1 + 0.25, facing: 180, height: 0.5, box: [-2, -1.3, 2, 0.1] });
 // the porch: steps up from the road (their foot is the end of the road's way), the landing before the door, a lamp
-add({ id: 'club_steps', name: 'Steps', plane: true, walk: true, across: C.door, distance: 7.25, elevation: 0.225, width: 1.5, depth: 1.38, tilt: 19.1 });
+add({ id: 'club_steps', name: 'Steps', plane: true, walk: true, across: C.door, distance: 6.95, elevation: 0.225, width: 1.5, depth: 1.95, tilt: 13.3 });
 add({ id: 'club_landing', name: 'Porch', plane: true, walk: true, across: C.door, distance: 8.45, elevation: PL, width: 2.4, depth: 1.1 });
 add({ id: 'club_lamp', name: 'Club lamp', across: C.door + 1.5, distance: 7.8, elevation: PL, height: 3.2, box: [-0.4, -3.4, 1.0, 0.1] });
 
@@ -154,7 +154,7 @@ const scene = {
   lights: [
     { id: 'sunset', from: [-62, 4], color: '#e6a487', strength: 0.75 },
     { id: 'sky_light', from: [10, 50], color: '#a8b0d6', strength: 0.35 },
-    { id: 'club_spill', across: C.door, distance: 8.9, elevation: 1.4, color: '#e8963a', strength: 1.8, reach: 10, on: 'club_door' },
+    { id: 'club_spill', across: C.door - 1, distance: 6.8, elevation: 1.4, color: '#e8963a', strength: 2.4, reach: 14, on: 'club_door' },
   ],
   state,
   states,

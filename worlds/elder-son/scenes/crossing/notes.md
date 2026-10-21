@@ -28,11 +28,11 @@ Chapter III of “The Elder Son”: the level crossing beyond the settlement, gr
   spruce wood, the settlement's lights on the left beyond the field, poles along the line, weeds by the road (the wind),
   snow.
 - **The people** — Nina and Busygin of the world's cast, the face `simple`, the expression `<id>_mood`. They stand at the
-  barrier turned to the right and a little toward us (`SPOT`, `TURN`): the booth's window and the signal's red on their
+  barrier, clear of its pivot and counterweight (they sweep behind them as the arm rises), turned to the right and a little toward us (`SPOT`, `TURN`): the booth's window and the signal's red on their
   faces, the headlight ahead of them; Nina's face at three quarters, Busygin's turned to her in profile.
 - **The shots** (`CAM`): wide (the start: the road, the barrier, the booth, the light on the curve), medium (`camera_z` 1.9:
   both ≈ 0.55 of the frame, the pose of the choice — `nina`, `freight#light`, `barrier` in the middle 4:3), close on Nina
-  (`camera_z` 3.15, in `truth` when she turns to him). They are the camera's moves over seconds, not cuts.
+  (`camera_z` 3.15, in `truth` when she turns to him), both (`CAM.both`, the last shot of `brother`). They are the camera's moves over seconds, not cuts. The headlight far on the curve has its own halo light `headlight_far` (the key `light_far`, the script puts it out as the freight comes).
 
 ## Beats (`lib.film()`, played by the world's `beats`)
 
@@ -48,7 +48,7 @@ Chapter III of “The Elder Son”: the level crossing beyond the settlement, gr
   up — `roar:passed`; they cross side by side.
 - `brother` (≈ 34 s, after `wait`): he turns to her; she takes his hand — her right to his left (`reach`; their backs to
   us, both to the cars) — `brother:arm`; the freight goes by; the barrier has gone up — `brother:passed`; they turn to us
-  hand in hand (Nina `smile`, Busygin `tired`, her left to his right), then cross the tracks.
+  hand in hand, the camera on both (Nina `smile`, Busygin `tired`, her left to his right; held 3 s), then cross the tracks.
 - A beat after `wait` opened not after `wait` begins with a cut to the end of `wait` (`WAIT_END`).
 - The freight's passing alone is ≈ 20 s (480 m at 27 m/s) and the barrier's rise: `truth` and `brother` come out a little
   over 30 s.
@@ -56,8 +56,6 @@ Chapter III of “The Elder Son”: the level crossing beyond the settlement, gr
 ## What is not as wanted
 
 - `lean` is a weak motion (a lean with a hand at the head). The brief's “Nina leans to him” is that.
-- The headlight of the locomotive floods the frame as it passes before the camera (the loco's light is the scene's
-  `headlight`, strength 2.2).
 
 ## Contract for the check
 
