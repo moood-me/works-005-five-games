@@ -145,8 +145,8 @@ const CAM = {
   // the side medium at the stop: from up the street, the two in three quarters, the street lamp's light on them
   stop: cam(-6.2, 8.1, 68, -0.15),
   wide: cam(-2.1, -7.2, 0, 0.3),
-  last0: cam(4, -0.5, 4),
-  last1: cam(24.0, 1.5, 6),
+  last0: cam(5.5, -0.5, 4),
+  last1: cam(28.0, 1.0, 4),
   // the corner from the near side, right: the two in profile toward her window, the kitchen window on the left, hers on
   // the right
   corner: cam(34.5, 5.3, -40, -0.1),
@@ -155,29 +155,33 @@ const CAM = {
   behind_win: cam(29.55, 6.85, 20, 0.25),
   // Sarafanov at her window, near: in profile, her window's light on his face
   mak: cam(30.9, 10.4, 43, -0.1),
-  porch: cam(28.1, 9.4, -72, -0.1),
+  porch: cam(28.1, 9.4, -62, -0.1),
   // in the front garden toward the porch, the gate's lamp behind: their faces turned to it
   dark: cam(21.6, 9.6, 67, -0.15),
   // before the kitchen window: the room behind it seen through the glass
   window: cam(21.95, 6.3, 3, 0),
-  under: cam(21.6, 6.2, -2, -0.1),
+  under: cam(21.8, 8.0, -12, 0.2),
   gate: cam(20.0, 4.6, 0, -0.1),
   ev1: cam(-2, -7, 0, 1),
   ev2: cam(30.0, 0.5, -2, 0.4),
-  ev3: cam(26.6, 9.0, -30, -0.1),
-  fire: cam(28.5, -1.0, -2, 0.4),
+  ev3: cam(26.6, 9.8, -40, -0.1),
+  fire: cam(27.6, -1.0, 4, 0.4),
+  fire_ready: cam(27.6, -1.0, -6, 0.4),
   ring: cam(28.6, 3.6, 4, 0.1),
   // the boy close, from before the shed: its smouldering glow on his face
   vas: cam(28.8, 9.4, 290, -0.15),
   choose: cam(28.4, 3.4, 0, 0.1),
   blame: cam(24.9, 7.0, 55, -0.1),
+  // Silva near, coming at him (from over Busygin's shoulder)
+  silva: cam(27.9, 8.5, 80, -0.05),
   own: cam(29.85, 6.5, 0, -0.2),
   own_porch: cam(29.85, 6.5, -28, -0.2),
-  bench: cam(20.0, 9.2, 40, -0.35),
-  bench_near: cam(20.85, 10.05, 42, -0.5),
+  // the bench from before it, in the front garden: both faces, the window's light over them
+  bench: cam(21.9, 9.7, 0, -0.5),
+  bench_near: cam(21.2, 10.35, 20, -0.55),
   run: cam(RUN[0][0] + RUN_CAM.off0, RUN_CAM.z, 0, -0.1),
   night0: cam(-12, 2.0, 66, 0.4),
-  night1: cam(21.6, -0.6, 1.5, 0.4),
+  night1: cam(21.9, 5.0, 0, 0.3),
 };
 // the camera's keys of a shot moved there together, over seconds
 const CAM_KEYS = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h'];
@@ -199,7 +203,7 @@ function base(hour, snow) {
   for (const p of PEOPLE) Object.assign(v, { [`${p}_here`]: false, [`${p}_do`]: 'stand', [`${p}_look`]: null, [`${p}_reach`]: null, [`${p}_with`]: null, [`${p}_wear`]: null, [`${p}_gait`]: null, [`${p}_on`]: null, [`${p}_mood`]: null });
   return Object.assign(v, {
     hour, snow, win1: 0, win2: 0, win3: 0, win4: 0, win5: 0, mak_window: 0,
-    door: 0, mak_door: 0, nb_door: 0, porch_light: 0, fire: 0, steam: 0, shed_burnt: 0, silva_smoke: 0, shawl: 0,
+    door: 0, mak_door: 0, nb_door: 0, porch_light: 0, fire: 0, embers: 0, steam: 0, shed_burnt: 0, silva_smoke: 0, shawl: 0,
   });
 }
 // someone here, at [across, distance], turned
@@ -231,11 +235,11 @@ const FROM = {
     const wins = {};
     for (let n = 1; n <= 5; n++) wins[`win${n}`] = knocked.includes(String(n)) ? 0 : 1;
     return { ...base(0.9, 0), ...CAM.ev1, ...wins, mak_window: 1, ...SECOND_NIGHT(),
-      ...AT('vasenka', [24.85, 11.45], 82, { vasenka_mood: 'sad', vasenka_look: [MAK_DOOR.a, MAK_DOOR.d, 1.5] }) };
+      porch_light: 0.35, ...AT('vasenka', [24.85, 11.45], 82, { vasenka_mood: 'sad', vasenka_look: [MAK_DOOR.a, MAK_DOOR.d, 1.5] }) };
   },
   // the fire put out: the shed by `shed_left` (its painting), steam; the people in a half-ring; Vasenka aside
   // (the shed still smoulders a little: its glow on those near it)
-  after_fire: () => ({ ...base(0.9, 0), ...CAM.ring, fire: 0.2, steam: 1, shed_burnt: 1, mak_window: 1, door: 1, porch_light: 1,
+  after_fire: () => ({ ...base(0.9, 0), ...CAM.ring, embers: 1, steam: 1, shed_burnt: 1, mak_window: 1, door: 1, porch_light: 1,
     ...KAT('k1', K.far_r, 'sarafanov_home'), ...KAT('k2', K.far_l, 'nina_home'), ...KAT('k3', K.end_e, 'kudimov_in'),
     ...AT('makarskaya', SPOT.ring.makarskaya, 330, { makarskaya_look: 'shed', makarskaya_mood: 'sad' }),
     ...AT('silva', SPOT.ring.silva, 320, { silva_wear: LOOK('silva_burnt'), silva_mood: 'angry', silva_look: 'shed' }),
@@ -244,7 +248,7 @@ const FROM = {
     ...AT('vasenka', SPOT.aside.vasenka, 110, { vasenka_with: ['matches'], vasenka_mood: 'afraid', vasenka_look: 'shed' }) }),
   // the third night, the bench under the kitchen window; Nina on it in her shawl
   porch_night: sc => ({ ...base(0.95, 0.5), ...CAM.bench, porch_light: 1,
-    ...AT('nina', SPOT.bench.nina, 180, { nina_wear: LOOK('nina_home'), nina_with: ['shawl'], nina_on: [SPOT.bench.nina[0], SPOT.bench.nina[1], BENCH_Y], nina_do: { motion: 'seated', loop: true },
+    ...AT('nina', SPOT.bench.nina, 180, { nina_wear: LOOK('nina_home'), nina_with: ['shawl'], nina_on: [SPOT.bench.nina[0], SPOT.bench.nina[1], BENCH_Y], nina_do: { motion: 'seated_bag', loop: true },
       nina_mood: sc.get('nina_is') === 'knows' ? 'sad' : 'thinking' }) }),
   run_out: sc => ({ ...base(0.95, 0.4), ...CAM.run, porch_light: 1, run: 0, run_at: 0, look_back: 0,
     ...AT('busygin', THRESHOLD, 180, { busygin_here: false }),
@@ -279,7 +283,7 @@ const END = {
     ...AT('makarskaya', SPOT.ring.makarskaya, 330, { makarskaya_look: 'silva', makarskaya_mood: 'sad' }),
     ...AT('vasenka', SPOT.aside.vasenka, 110, { vasenka_with: ['matches'], vasenka_mood: 'afraid', vasenka_look: 'shed' }) }),
   porch_night: sc => ({ ...FROM.porch_night(sc), ...CAM.bench,
-    ...AT('busygin', SPOT.bench.busygin, 180, { busygin_wear: LOOK('busygin_shirt'), busygin_with: ['coat_arm'], busygin_on: [SPOT.bench.busygin[0], SPOT.bench.busygin[1], BENCH_Y], busygin_do: { motion: 'seated', loop: true }, busygin_mood: 'tired', busygin_look: 'nina' }) }),
+    ...AT('busygin', SPOT.bench.busygin, 180, { busygin_wear: LOOK('busygin_shirt'), busygin_with: ['coat_arm'], busygin_on: [SPOT.bench.busygin[0], SPOT.bench.busygin[1], BENCH_Y], busygin_do: { motion: 'seated_bag', loop: true }, busygin_mood: 'tired', busygin_look: 'nina' }) }),
 };
 END.knock_ready = () => ({ ...END.walk(), ...CAM.wide });
 // the second night's end: Vasenka alone on the dark porch, close; Makarskaya's door shut on the two
@@ -460,8 +464,8 @@ function film(scene) {
       s.tell('shut:closed');
       dark.cut();
       // turned from the door, toward the gate's lamp: their faces in its light
-      await s.all(bus.turn(235), sil.turn(215));
-      bus.look('silva');
+      await s.all(bus.turn(240), sil.turn(215));
+      bus.look(null);
       sil.look('busygin');
       bus.mood('sad');
       sil.mood('smile');
@@ -626,6 +630,7 @@ function film(scene) {
       const mrun = mak.walk([[35.4, 11.9], [31.6, 10.7], [30.9, 9.3]], { gait: 'run' });
       await s.wait(0.6);
       s.tell('fire:cry');
+      camTo(s, CAM.fire_ready, 4);
       put(s, 'silva', [MAK_DOOR.a, 13.4], 180);
       sil.wear(LOOK('silva_burnt'));
       sil.mood('afraid');
@@ -703,11 +708,15 @@ function film(scene) {
       s.tell('blame:step');
       sil.mood('surprised');
       sil.look('busygin');
+      const near = s.shot({ ...CAM.silva });
       await sil.walk([SPOT.blame.silva]);
+      near.cut();
       await sil.turn(265);
       await s.wait(0.6);
       sil.mood('angry');
+      const boy = s.shot({ ...CAM.vas });
       await sil.do('point');
+      boy.cut();
       vas.mood('sad');
       vas.look([25.0, 8.6, 0.3]);
       vas.reach({ r: 'vasenka#hips' });
@@ -721,6 +730,8 @@ function film(scene) {
     own_up: { after: 'after_fire', from: E('after_fire'), run: async s => {
       const bus = s.person('busygin'), vas = s.person('vasenka'), mak = s.person('makarskaya'), sar = s.person('sarafanov');
       const own = s.shot({ ...CAM.own });
+      // (Silva steps back out of the way)
+      s.person('silva').walk([[32.9, 8.2]]);
       // to his left side; his hand on the boy's shoulder
       bus.look('vasenka');
       await bus.walk([[26.3, 10.4], SPOT.own.beside]);
@@ -777,7 +788,7 @@ function film(scene) {
       await bus.turn(180);
       bus.on([SPOT.bench.busygin[0], SPOT.bench.busygin[1], BENCH_Y]);
       await bus.do('sit_down');
-      bus.do('seated', { loop: true });
+      bus.do('seated_bag', { loop: true });
       bus.look('nina');
       nina.look('busygin');
       s.tell('porch_night:sat');
@@ -816,10 +827,10 @@ function film(scene) {
         nina.mood('neutral');
         nina.with(['shawl']);
         await nina.do('give');
-        nina.do({ motion: 'seated', loop: true });
+        nina.do({ motion: 'seated_bag', loop: true });
         bus.with(['coat_arm']);
         await bus.do('take');
-        bus.do({ motion: 'seated', loop: true });
+        bus.do({ motion: 'seated_bag', loop: true });
         nina.look(null);
         bus.look([20.0, 6.0, 0.3]);
         await s.wait(2.4);
@@ -944,9 +955,10 @@ function paneLive(e) {
   e.layer('figure').alpha = who * lit;
   e.glow('pane', lit);
 }
-// the shed's fire by `fire` (0…1): its window's glow, the tongues under its eaves, flickering
+// the shed's fire by `fire` (0…1): its window's glow, the tongues under its eaves, flickering; after it, `embers`: the
+// window's glow alone, dimmer
 function shedLive(e) {
-  const f = clamp(Number(e.state.fire) || 0, 0, 1), k = f > 0 ? Math.min(1, f / 0.35) : 0;
+  const f = clamp(Number(e.state.fire) || 0, 0, 1), k = Math.max(f > 0 ? Math.min(1, f / 0.35) : 0, 0.45 * clamp(Number(e.state.embers) || 0, 0, 1));
   const fl = 0.82 + 0.18 * e.anim.noise(e.t * 3.1, 7);
   e.layer('fire').alpha = k;
   e.layer('fire').brightness = fl;

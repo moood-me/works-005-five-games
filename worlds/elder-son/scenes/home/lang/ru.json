@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The Sarafanovs' Home (Opus)","translation":"Дом Сарафановых (Opus)","where":"scenes/home/scene.json title"},
-  {"text":"The kitchen under an orange lampshade. Night.","translation":"Кухня под оранжевым абажуром. Ночь.","where":"scenes/home/scene.json caption"}
+  {"text":"The Sarafanovs' Home","translation":"Дом Сарафановых","where":"scenes/home/scene.json title"},
+  {"text":"The kitchen under an orange lampshade.","translation":"Кухня под оранжевым абажуром.","where":"scenes/home/scene.json caption"}
 ]}

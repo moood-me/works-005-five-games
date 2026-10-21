@@ -1,13 +1,7 @@
-// Outside the game: the three come in from the cold, he warms his hands at the stove and turns to the table; the
-// father comes home, a step from his «son», and takes him in his arms. Later the same night: the snuffbox brought
-// out of the cupboard and set between them — he takes it; then again — he will not, and it goes back to its shelf.
-const L = scene.lib;
-return [
-  { name: 'kitchen', run: async s => { await L.film.kitchen(s, null); } },
-  { name: 'warm_up', run: async s => { await L.film.warm_up(s); } },
-  { name: 'enter', run: async s => { await L.film.enter(s, null); } },
-  { name: 'embrace', run: async s => { await L.film.embrace(s); } },
-  { name: 'box_out', run: async s => { await L.film.box_out(s, null); } },
-  { name: 'box_take', run: async s => { await L.film.box_take(s); await L.film.box_kept(s); } },
-  { name: 'box_give', run: async s => { s.cut({ ...L.END.box_out }); await L.film.box_give(s); await L.film.box_back(s); } },
-];
+// The Sarafanovs' home outside the game, one way through its two nights: the three come in from the cold and he warms
+// his hands; the father comes home and takes him in his arms; Nina, the supper, the tea and Galya, the snuffbox taken;
+// the clarinet behind the wall; the dawn and the slipping away, caught; the bridegroom at nine; the suitcase, the truth
+// told; home late.
+return scene.kit.beats.showcase(scene, scene.lib.film(scene), ['kitchen', 'warm_up', 'enter', 'embrace', 'nina_in', 'supper', 'supper_after',
+  'talk', 'talk_back', 'galya_yes', 'box_out', 'box_take', 'box_kept', 'wall', 'wake', 'sneak', 'caught', 'table', 'toast', 'for_me', 'pack',
+  'confess', 'go_out', 'home_late']);

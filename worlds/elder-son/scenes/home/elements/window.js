@@ -1,50 +1,47 @@
-// The kitchen window from inside: its white frame and sill, glazing bars, the frost on the glass from the corners in
-// by `frost` (a party key) — see-through: the night and the gardens show through. Metres; 1.2 × 1.1, the sill at 0.
-const w = 1.2, h = 1.1, f = e.state.frost;
-const reach = 0.12 + 0.55 * f;
-for (const [cx, cy] of [[-w / 2, 0], [w / 2, 0], [-w / 2, -h], [w / 2, -h]]) {
-  const sx = cx < 0 ? 1 : -1, sy = cy < -h / 2 ? 1 : -1;
-  for (let i = 0; i < 26; i++) {
-    const a = e.rnd() * Math.PI * 0.5, dx = sx * Math.cos(a), dy = sy * Math.sin(a);
-    const len = reach * (0.5 + e.rnd() * 0.6) * (cy === 0 ? 1.15 : 0.85);
-    g.strokeStyle = `rgba(226,236,250,${0.3 + 0.3 * f})`;
-    g.lineWidth = 0.008 + e.rnd() * 0.01;
-    g.beginPath();
-    g.moveTo(cx, cy);
-    g.lineTo(cx + dx * len, cy + dy * len);
-    for (let b = 1; b < 4; b++) {
-      const bx = cx + dx * len * (b / 4), by = cy + dy * len * (b / 4), k = 1 - b / 5;
-      g.moveTo(bx, by);
-      g.lineTo(bx + (dy * 0.06 + dx * 0.03) * k, by + (-dx * 0.06 + dy * 0.03) * k);
-      g.moveTo(bx, by);
-      g.lineTo(bx + (-dy * 0.06 + dx * 0.03) * k, by + (dx * 0.06 + dy * 0.03) * k);
+// The kitchen window's glass from inside: the frost (a play key, `frost`) grown from each pane's corners in toward its
+// middle — see-through: the night, the gardens and their lights show through it; the hole the game rubs (`hole`) is
+// cut by the shader (window.wgsl) in the lower right pane, round the point `pane`. The frame and its bars are
+// `window_frame`, in front. Metres; 1.2 × 1.0, the sill at 0, x = across − the window's middle.
+const L = e.lib, W = L.WINDOW, f = e.state.frost, P = L.PANE;
+const w = W.w, h = W.h, bar = -h + L.TRANSOM;
+// the panes: the two lower leaves and the two upper lights over the transom
+const panes = [[-w / 2, bar, 0, 0], [0, bar, w / 2, 0], [-w / 2, -h, 0, bar], [0, -h, w / 2, bar]];
+g.beginPath();
+g.rect(-w / 2, -h, w, h);
+g.clip();
+const reachOf = (x0, y0, x1, y1) => Math.min(x1 - x0, y1 - y0) * (0.25 + 0.55 * f);
+for (const [x0, y0, x1, y1] of panes) {
+  const reach = reachOf(x0, y0, x1, y1);
+  for (const [cx, cy] of [[x0, y0], [x1, y0], [x0, y1], [x1, y1]]) {
+    const sx = cx === x0 ? 1 : -1, sy = cy === y0 ? 1 : -1;
+    // a frosted bloom in the corner, then the ferns growing out of it
+    const c = g.createRadialGradient(cx, cy, 0, cx, cy, reach * 1.15);
+    c.addColorStop(0, `rgba(226,234,246,${0.45 + 0.35 * f})`);
+    c.addColorStop(0.6, `rgba(220,230,244,${0.15 + 0.2 * f})`);
+    c.addColorStop(1, 'rgba(220,230,244,0)');
+    g.fillStyle = c;
+    g.fillRect(x0, y0, x1 - x0, y1 - y0);
+    g.strokeStyle = `rgba(236,242,252,${0.35 + 0.35 * f})`;
+    for (let i = 0; i < 14; i++) {
+      const a = (0.08 + e.rnd() * 0.84) * Math.PI / 2, dx = sx * Math.cos(a), dy = sy * Math.sin(a);
+      const len = reach * (0.55 + e.rnd() * 0.6);
+      g.lineWidth = 0.004 + e.rnd() * 0.006;
+      g.beginPath();
+      g.moveTo(cx, cy);
+      g.lineTo(cx + dx * len, cy + dy * len);
+      for (let b = 1; b < 5; b++) {
+        const bx = cx + dx * len * (b / 5), by = cy + dy * len * (b / 5), k = (1 - b / 6) * len * 0.22;
+        g.moveTo(bx, by);
+        g.lineTo(bx + (dy * 0.8 + dx * 0.5) * k, by + (-dx * 0.8 + dy * 0.5) * k);
+        g.moveTo(bx, by);
+        g.lineTo(bx + (-dy * 0.8 + dx * 0.5) * k, by + (dx * 0.8 + dy * 0.5) * k);
+      }
+      g.stroke();
     }
-    g.stroke();
   }
-  const c = g.createRadialGradient(cx, cy, 0, cx, cy, reach * 1.1);
-  c.addColorStop(0, `rgba(222,232,246,${0.4 + 0.35 * f})`);
-  c.addColorStop(1, 'rgba(222,232,246,0)');
-  g.fillStyle = c;
-  g.fillRect(-w / 2, -h, w, h);
+  // a thin veil over the whole pane, thicker as the frost grows
+  g.fillStyle = `rgba(214,224,240,${0.05 + 0.22 * f})`;
+  g.fillRect(x0, y0, x1 - x0, y1 - y0);
 }
-// the frame, the bars, the sill board
-g.fillStyle = '#e4ddd0';
-g.fillRect(-w / 2 - 0.1, -h - 0.1, 0.1, h + 0.1);
-g.fillRect(w / 2, -h - 0.1, 0.1, h + 0.1);
-g.fillRect(-w / 2 - 0.1, -h - 0.1, w + 0.2, 0.1);
-g.fillRect(-0.03, -h, 0.06, h);
-g.fillRect(-w / 2, -h * 0.66, w, 0.05);
-g.fillRect(-w / 2 - 0.16, -0.02, w + 0.32, 0.1);
-// a short curtain on a string across the bottom
-g.fillStyle = 'rgba(214,200,170,0.85)';
-g.fillRect(-w / 2, -h * 0.34, w, h * 0.34);
-g.strokeStyle = 'rgba(150,130,100,0.6)';
-g.lineWidth = 0.01;
-for (let x = -w / 2 + 0.05; x < w / 2; x += 0.08) {
-  g.beginPath();
-  g.moveTo(x, -h * 0.34);
-  g.lineTo(x, 0);
-  g.stroke();
-}
-e.at(0, -h * 0.6, 'pane');
-e.at(0, -h * 0.5);
+e.at(P[0], P[1], 'pane');
+e.at(0, -h / 2);

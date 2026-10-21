@@ -169,7 +169,7 @@ add({ id: 'splash', name: 'Water', particles: { kind: 'splashes', at: [r2(S_.a +
 // the state: the end of `walk` — the two in the street under the lamp, the five windows lit (what a viewer sees first)
 const KEYED_W = ['win1', 'win2', 'win3', 'win4', 'win5', 'mak_window'];
 const state = {
-  late: 0, beat: null, beat_next: null, knock: 0, buckets: 'none', run: 0, run_at: 0, look_back: 0, splash: 0, lay: 0, shed_left: 1, shed_burnt: 0,
+  late: 0, embers: 0, beat: null, beat_next: null, knock: 0, buckets: 'none', run: 0, run_at: 0, look_back: 0, splash: 0, lay: 0, shed_left: 1, shed_burnt: 0,
   ...Object.fromEntries(KEYED_W.flatMap(w => [[`${w}_lit`, W[w] > 0 ? 1 : 0], [`${w}_who`, 0]])),
   door_f: 180, mak_door_f: 180, nb_door_f: 180,
   // the play's keys (scenes.md): their defaults
@@ -206,6 +206,7 @@ const states = {
   nb_door: { range: [0, 1], smooth: true, means: 'the neighbours\' door (the house next to the Sarafanovs\'): 0 shut … 1 open' },
   nb_door_f: num('the turn of the neighbours\' door — the script sets it by nb_door'),
   fire: { range: [0, 1], smooth: true, means: 'the fire in the shed: light in its little window, tongues under the roof, smoke, orange light on the snow (the game moves it in “Buckets”)' },
+  embers: { range: [0, 1], smooth: true, means: 'the shed smouldering after the fire: the glow in its window and a dim orange light, no flames' },
   steam: { range: [0, 1], smooth: true, means: 'steam over the shed put out' },
   shed_burnt: { values: [0, 1], means: 'the shed after the fire (the beat after_fire sets it): 1 — scorched/burnt out by shed_left' },
   shed_left: { values: [0, 1], means: 'the shed after the fire: 1 — it stood (the roof whole), 0 — burnt out (black walls with no roof); the game sets it before after_fire' },
@@ -236,10 +237,10 @@ const scene = {
   light: {
     tint: '#6f80b8', tintStrength: 0.12, vignette: 0.5, grain: 0.22,
     haze: 0.12, hazeColor: '#323b5c', hazeGlow: 0.9, shafts: 0,
-    brightness: 1.1, saturation: 0.85, ambient: 0.5, ambientColor: '#8796c8', bounce: 0.5, inside: 0.2,
+    brightness: 1.15, saturation: 0.85, ambient: 0.62, ambientColor: '#8f9ece', bounce: 0.55, inside: 0.2,
     wind: [0.6, 0.2, 0.35],
     looks: {
-      late: { ambient: 0.4, ambientColor: '#7686bc', hazeColor: '#262e4a', tintStrength: 0.15 },
+      late: { ambient: 0.52, ambientColor: '#7f8fc4', hazeColor: '#262e4a', tintStrength: 0.15 },
     },
   },
   lights: [
@@ -248,6 +249,7 @@ const scene = {
     { id: 'gate_lamp_l', of: 'gate_lamp#lamp', color: '#f3dcae', strength: 1.4, reach: 8, glow: 1.0 },
     ...['win1', 'win2', 'win3', 'win4', 'win5', 'mak_window'].map(w => ({ id: `${w}_l`, of: `${w}#pane`, color: '#eda055', strength: 1.1, reach: w === 'mak_window' ? 8 : 6, on: `${w}_lit` })),
     { id: 'fire_l', of: 'shed#fire', color: '#ff8a3a', strength: 3.2, reach: 15, on: 'fire', flicker: 0.5, glow: 2 },
+    { id: 'embers_l', of: 'shed#fire', color: '#ff7a30', strength: 1.8, reach: 7, on: 'embers', flicker: 0.4 },
     { id: 'mak_hall_l', across: L.MAK_DOOR.a, distance: 13.5, elevation: L.PLINTH + 2.0, color: '#f0b56e', strength: 1.2, reach: 3.5, on: 'mak_door' },
     { id: 'nb_hall_l', across: L.NB_DOOR.a, distance: 14.5, elevation: L.PLINTH + 2.0, color: '#f0b56e', strength: 1.0, reach: 3.5, on: 'nb_door' },
     { id: 'kitchen_l', of: 'kitchen#glow', color: '#e8963a', reach: 6.5 },

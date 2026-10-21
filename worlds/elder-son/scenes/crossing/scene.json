@@ -78,9 +78,20 @@
       "id": "headlight",
       "of": "freight#light",
       "color": "#fff0d0",
-      "strength": 2.2,
-      "reach": 60,
+      "strength": 1.1,
+      "reach": 40,
       "glow": 2
+    },
+    {
+      "id": "headlight_far",
+      "across": 78.06,
+      "distance": 199.75,
+      "elevation": 2.2,
+      "color": "#fff0d0",
+      "strength": 5,
+      "reach": 8,
+      "glow": 34,
+      "on": "light_far"
     }
   ],
   "state": {
@@ -88,16 +99,17 @@
     "night": 0.5714285714285711,
     "beat": null,
     "beat_next": null,
+    "light_far": 1,
     "barrier": 1,
     "bell": 1,
     "freight": 0.04,
     "freight_x": 251.5,
     "snow": 0.4,
-    "camera_x": -0.55,
+    "camera_x": 0.7,
     "camera_z": 1.9,
-    "nina_a": -1.85,
+    "nina_a": -0.6,
     "nina_d": 5.1,
-    "busygin_a": -1.05,
+    "busygin_a": 0.2,
     "busygin_d": 4.85,
     "nina_turn": 98,
     "busygin_turn": 135,
@@ -207,6 +219,13 @@
       ],
       "smooth": true,
       "means": "the freight: 0 in the wood; 0.04 — the headlight on the far curve (≈ 200 m), standing; 0.1…0.9 — going before them from right to left; 1 — gone to the left"
+    },
+    "light_far": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the far headlight's halo (the headlight seen from 200 m is a bright star): 1 while the freight stands on the curve, 0 as it comes — the script sets it by freight"
     },
     "freight_x": {
       "type": "number",
@@ -1051,7 +1070,7 @@
         "who": "nina",
         "turn": 98
       },
-      "across": -1.85,
+      "across": -0.6,
       "distance": 5.1,
       "place": {
         "across": "nina_a",
@@ -1067,7 +1086,7 @@
         "who": "busygin",
         "turn": 135
       },
-      "across": -1.05,
+      "across": 0.2,
       "distance": 4.85,
       "place": {
         "across": "busygin_a",
