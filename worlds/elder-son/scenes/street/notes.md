@@ -38,6 +38,10 @@ frame (x from the middle in frame heights — the 4:3 edges ±0.667; size; `f` �
   behind each a lit hall and its light (`on` the door's key). People go in and come out through points in the halls
   out of sight (`INSIDE`, `MAK_INSIDE`), or stand in the hall right behind the door as it opens (`HALL`) — nobody appears
   or vanishes in the frame.
+- The far yards beyond the houses (`far`) — one card 150 m wide, turned to the street (`facing` 180): a card not
+  turned faces the eye, and from the bank its near end swung across the frame.
+- The cuts inside a beat are made ready ahead (`s.shot` at the beat's start, `s.until(() => shot.ready)` before the
+  cut).
 - The night — the lights `night_sky` and `ambient`; `hour` → the look `late` (the script). Snow — particles by `snow`.
   The fire — `fire` (the shed's layers by `shedLive`, flames, embers, smoke, the light `fire_l`); `steam`; Silva's
   smoking sleeve (`silva_smoke`); the water thrown (`splash`: each change a burst).
@@ -47,19 +51,22 @@ frame (x from the middle in frame heights — the 4:3 edges ±0.667; size; `f` �
 
 Seconds — as `check.mjs` plays them (the gait 1.3 m/s; the real gaits may differ a little).
 
-- `walk` (≈ 20 s): down the bank from the platform's path (the camera turning with them); a cut — along the street
-  beside them to the windows; a cut to the side medium under the street lamp, faces in its light: Silva `smile`,
-  Busygin `tired` — `walk:stop`.
+- `walk` (≈ 11 s): down the bank from the platform's path (the camera turning with them, ≈ 3.5 s: the beginning of the
+  way); a cut — along the street beside them as they come to the windows (≈ 4.5 s); a cut to the side medium under the
+  street lamp, faces in its light: Silva `smile`, Busygin `tired` — `walk:stop` (≈ 9 s in).
 - `knock_ready` (2 s): a cut to the near fence (made ready while `walk` plays) — the five windows in the middle 4:3 (x −0.56…0.57).
-- `last_window` (≈ 23 s, by a cut): the windows dark, the snow thicker; along the street to the corner before the shed
-  (the camera following); a cut to the side: both in profile toward her lit window, the kitchen window on the left
-  (x −0.4), hers on the right (0.4) — `last_window:corner`.
-- `neighbor` (≈ 31 s: it holds for L09, L10 at her window): from just behind the two (their backs in the foreground — the device). The door opens,
-  Sarafanov in the hall comes out; the camera turns with him to her window; a cut near him: he stands right of it
-  turned to the glass (profile, ≈ 0.6 of the frame, in her window's light), knocks — `neighbor:knock`; a silhouette —
-  `neighbor:answer` (L09, L10: `sad`, a guilty `smile`); dark; a cut back behind the two: he goes back past the two (two metres before them, not turning his head) through the wicket
-  into his garden and away along the street — out of the frame: `neighbor:gone`; the camera back to the door, Vasenka
-  from behind the shed through the back wicket to the porch, behind his father's back; the door — `neighbor:vasya`.
+- `last_window` (≈ 9 s, by a cut): the windows dark, the snow thicker; they set off along the street (the camera
+  following, ≈ 3.5 s); a cut to the side of the corner before the shed as they come to it from the left edge: both in
+  profile toward her lit window, the kitchen window on the left (x −0.4), hers on the right (0.4) —
+  `last_window:corner` (≈ 6 s in).
+- `neighbor` (≈ 24 s): from just behind the two (their backs in the foreground — the device). The door opens,
+  Sarafanov in the hall comes out, down his porch toward them; a cut near him as he comes to her window: he stands
+  right of it turned to the glass (profile, ≈ 0.6 of the frame, in her window's light), knocks — `neighbor:knock`
+  (≈ 6 s in); a silhouette — `neighbor:answer` (≈ 8 s; L09 near him: `sad`, a guilty `smile`); a cut back behind the
+  two as she says L10, her window still lit (dark ≈ 3 s later): he goes back past the two (two metres before them, not
+  turning his head) through the wicket into his garden — `neighbor:gone`; the camera back to the door, Vasenka from
+  behind the shed through the back wicket to the porch, behind his father's back; the door — `neighbor:vasya`; the
+  beat ends when the father is off the frame's left edge at his gate.
 - `porch` (≈ 14 s, after `neighbor`): Vasenka goes in; the two to the porch (L11, L12 on the way), the camera to the
   porch's side; Silva knocks — `porch:knock`; the light, the door, Vasenka in the doorway — `porch:open`. Faces: Silva
   `smile`, Busygin `thinking` in three quarters. The pose for the choice: `vasenka` (x 0.52) and `kitchen` (0.09).
@@ -68,11 +75,13 @@ Seconds — as `check.mjs` plays them (the gait 1.3 m/s; the real gaits may diff
   porch's side; Silva knocks — `shut:knock`; the light, the door — `shut:again`.
 - `in` (≈ 12 s, after `porch`/`shut`): all into the house, the door, the light out; the camera before the kitchen
   window: the three come in and take their places — Silva and Vasenka at the table, Busygin at the stove — `in:inside`.
-- `return` (≈ 19 s, by a cut): later, snow; Sarafanov back along the street from the left, through his gate under his
-  window — `return:window`: his back to us (the device; ≈ 0.35 of the frame on the left), in the window on the right
-  the three strangers at his table; he stands 4 s; to the porch (the camera turning after him), the door — `return:door`.
-- `gate` (≈ 20 s): Nina and Kudimov under the gate's lamp, in profile (`tired`, `neutral`); his watch — `gate:watch`
-  (L26, L27); he marches off left, out of the frame — `gate:gone`; she goes to the porch and in.
+- `return` (≈ 11 s, by a cut): later, snow; Sarafanov from the left along the street to his gate (the gate's shot,
+  ≈ 2 s); a cut under his window as he comes to it — `return:window` (≈ 3.5 s in): his back to us (the device; ≈ 0.35
+  of the frame on the left), in the window on the right the three strangers at his table; he stands 3.5 s; a cut to the
+  porch's side: he comes to the door in three quarters, the door — `return:door`.
+- `gate` (≈ 15 s): Nina and Kudimov under the gate's lamp, in profile (`tired`, `neutral`); his watch — `gate:watch`
+  (L26, L27); he marches off left, out of the frame — `gate:gone`; she goes toward the porch, off the frame's right
+  edge (the house's `nina_in` brings her in at the door).
 - `evening` (≈ 26 s): the second night, three shots — the street from the near fence (the windows dark where he
   knocked, by `knocked`); the yard from across the street: Silva from the Sarafanovs' door to Makarskaya's, knocks, she
   lets him in, Vasenka on the dark porch; Vasenka close (`sad`), her door shutting off the frame — `evening:in`.
@@ -116,8 +125,8 @@ The actions by key (the script):
   profile only standing right of the window turned to its glass; the shed would hide the window from the corner
   scenes.md gives (28, 8) — the corner is before the shed (29.3…30, 8.3…9.1).
 - In `neighbor` he goes off through his own garden (out of the frame at once), not along the road past the two —
-  that way he would come within a metre of them; Vasenka slips in behind him through the back wicket (≈ 30 s in all,
-  not 28).
+  that way he would come within a metre of them; Vasenka slips in behind him through the back wicket. His way to her
+  window is cut (the porch, then he is at the window), not followed whole: an action without words stays short.
 - In the kitchen the stove stands at the back wall (scenes.md: “opposite the window”), the table's far side to it —
   so the people are seen through the window.
 - `cold` and the other motions — the cast's (`cold`, `knock`, `look_watch`, `march_walk`, `carry_walk`, `dip`,
@@ -126,15 +135,15 @@ The actions by key (the script):
 ## Contract for the check
 
 ```json
-{"beats": {"walk": {"after": [], "tells": ["walk:stop"], "seconds": 20, "show": false},
+{"beats": {"walk": {"after": [], "tells": ["walk:stop"], "seconds": 11, "show": false},
  "knock_ready": {"after": [], "tells": [], "seconds": 2, "show": false},
- "last_window": {"after": [], "tells": ["last_window:corner"], "seconds": 23, "show": false},
- "neighbor": {"after": [], "tells": ["neighbor:knock", "neighbor:answer", "neighbor:gone", "neighbor:vasya"], "seconds": 31, "show": false},
+ "last_window": {"after": [], "tells": ["last_window:corner"], "seconds": 9, "show": false},
+ "neighbor": {"after": [], "tells": ["neighbor:knock", "neighbor:answer", "neighbor:gone", "neighbor:vasya"], "seconds": 24, "show": false},
  "porch": {"after": ["neighbor"], "tells": ["porch:knock", "porch:open"], "seconds": 14, "show": false},
  "shut": {"after": ["porch"], "tells": ["shut:closed", "shut:knock", "shut:again"], "seconds": 16, "show": false},
  "in": {"after": ["porch", "shut"], "tells": ["in:inside"], "seconds": 12, "show": false},
- "return": {"after": [], "tells": ["return:window", "return:door"], "seconds": 19, "show": false},
- "gate": {"after": [], "tells": ["gate:watch", "gate:gone"], "seconds": 20, "show": false},
+ "return": {"after": [], "tells": ["return:window", "return:door"], "seconds": 11, "show": false},
+ "gate": {"after": [], "tells": ["gate:watch", "gate:gone"], "seconds": 15, "show": false},
  "evening": {"after": [], "tells": ["evening:in"], "seconds": 26, "show": false},
  "fire": {"after": [], "tells": ["fire:cry", "fire:ready"], "seconds": 13, "show": false},
  "after_fire": {"after": [], "tells": ["after_fire:who"], "seconds": 10, "show": false},

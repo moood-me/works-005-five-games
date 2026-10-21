@@ -44,6 +44,7 @@ function run(name, fn, init, party = {}) {
     cut: v => { for (const [k, x] of Object.entries(v)) set(k, x); },
     shot: v => ({ cut: () => { for (const [k, x] of Object.entries(v)) set(k, x); }, cancel() {}, ready: true }),
     wait: d => at(now + d),
+    until: f => (f() ? action(0) : (warn.push('until: never'), action(0))),
     all: (...a) => Promise.all(a.filter(Boolean)),
     person: id => person(id),
   };

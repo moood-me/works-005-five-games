@@ -140,13 +140,14 @@ const CAM = {
   // down the bank from the platform's path, turning with them as they come
   bank: cam(-37.2, 1.4, -48, 0.2),
   // along the street beside them
-  street0: cam(-11.0, 1.2, -4, 0),
-  street1: cam(-5.5, 2.4, 2, 0),
+  street0: cam(-8.6, 1.6, 6, 0),
+  street1: cam(-4.6, 4.4, 8, 0),
   // the side medium at the stop: from up the street, the two in three quarters, the street lamp's light on them
   stop: cam(-6.2, 8.1, 68, -0.15),
   wide: cam(-2.1, -7.2, 0, 0.3),
+  // the street of the dark windows beside them as they set off for the last one
   last0: cam(5.5, -0.5, 4),
-  last1: cam(28.0, 1.0, 4),
+  last1: cam(9.0, -0.5, 4),
   // the corner from the near side, right: the two in profile toward her window, the kitchen window on the left, hers on
   // the right
   corner: cam(34.5, 5.3, -40, -0.1),
@@ -226,13 +227,13 @@ const SECOND_NIGHT = () => ({ ...KAT('k1', K.far_r, 'sarafanov_home'), ...KAT('k
 // the beginnings (`from`) — functions of the play's keys, read through the scene (`sc.get`)
 const FROM = {
   walk: () => ({ ...base(0.9, 0.35), ...CAM.bank, ...WIN_ON,
-    ...AT('busygin', [-45.2, 7.6], 100), ...AT('silva', [-46.4, 8.3], 100) }),
+    ...AT('busygin', [-42.4, 7.2], 100), ...AT('silva', [-43.4, 7.8], 100) }),
   last_window: () => ({ ...base(0.92, 0.7), ...CAM.last0, mak_window: 1,
     ...AT('busygin', [5.4, 5.1], 90), ...AT('silva', [6.6, 5.9], 90) }),
   neighbor: () => ({ ...base(0.92, 0.7), ...CAM.behind, mak_window: 1,
     ...AT('busygin', SPOT.corner.busygin, 330, { busygin_look: [DOOR.a, DOOR.d, 1.4] }), ...AT('silva', SPOT.corner.silva, 335, { silva_look: [DOOR.a, DOOR.d, 1.4] }) }),
-  return: () => ({ ...base(0.94, 0.6), ...CAM.under, ...FIRST_NIGHT(),
-    ...AT('sarafanov', [11.5, 7.2], 90, { sarafanov_mood: 'sad' }) }),
+  return: () => ({ ...base(0.94, 0.6), ...CAM.gate, ...FIRST_NIGHT(),
+    ...AT('sarafanov', [18.0, 8.0], 80, { sarafanov_mood: 'sad' }) }),
   gate: () => ({ ...base(0.95, 0.25), ...CAM.gate,
     ...AT('nina', SPOT.gate.nina, 90, { nina_mood: 'tired', nina_look: 'kudimov' }), ...AT('kudimov', SPOT.gate.kudimov, 270, { kudimov_mood: 'neutral', kudimov_look: 'nina' }) }),
   // the second night: the neighbours' windows lit but where he knocked in I (they sleep); the kitchen full
@@ -305,22 +306,26 @@ function film(scene) {
   const put = (s, id, p, turn) => { s.set(`${id}_a`, p[0]); s.set(`${id}_d`, p[1]); if (turn != null) s.set(`${id}_turn`, turn); };
 
   return {
-    // night, snow; down the bank from the platform's path to the street; along it to the five lit windows; the stop
-    // under the street lamp, looking round the street — the side medium, their faces in the lamp's light
+    // night, snow; down the bank from the platform's path (the beginning of the way); a cut — along the street beside
+    // them as they come to the five lit windows; a cut to the stop under the street lamp, looking round the street —
+    // the side medium, their faces in the lamp's light
     walk: { from: F('walk'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva');
-      const street = s.shot({ ...CAM.street0, ...AT('busygin', [-12.6, 6.2], 90), ...AT('silva', [-13.6, 7.0], 90) });
+      const street = s.shot({ ...CAM.street0, ...AT('busygin', [-7.6, 6.4], 90), ...AT('silva', [-5.6, 8.0], 60) });
+      const side = s.shot({ ...CAM.stop });
       const bw0 = bus.walk([[-41.0, 7.0], [-36.4, 6.3]]);
       await s.wait(0.4);
       const sw0 = sil.walk([[-42.0, 7.6], [-37.6, 7.0]]);
-      await camTo(s, { camera_yaw: -6 }, 6.2);
-      await s.all(bw0, sw0);
+      await camTo(s, { camera_yaw: -12 }, 3.1);
+      await s.until(() => street.ready);
+      bw0.cancel();
+      sw0.cancel();
       street.cut();
-      const side = s.shot({ ...CAM.stop });
-      const sw = sil.walk([[-6.0, 7.6], SPOT.windows.silva]);
       const bw = bus.walk([[-6.5, 6.6], SPOT.windows.busygin]);
+      const sw = sil.walk([SPOT.windows.silva]);
       await follow(s, bw, CAM.street1);
       await s.all(bw, sw);
+      await s.until(() => side.ready);
       side.cut();
       bus.mood('tired');
       sil.mood('smile');
@@ -334,17 +339,23 @@ function film(scene) {
     knock_ready: { from: E('knock_ready'), run: async s => {
       await s.wait(2.2);
     } },
-    // the windows dark, the snow thicker; along the street to the corner by Makarskaya's fence, before the shed; the
-    // side: both in profile toward her lit window, the kitchen window behind them on the left
+    // the windows dark, the snow thicker; they set off along the street; a cut to the corner by Makarskaya's fence,
+    // before the shed, from the side as they come to it: both in profile toward her lit window, the kitchen window
+    // behind them on the left
     last_window: { from: F('last_window'), run: async s => {
       const bus = s.person('busygin'), sil = s.person('silva');
-      const side = s.shot({ ...CAM.corner });
-      const bw = bus.walk([[16, 6.2], [26.0, 7.2], SPOT.corner.busygin]);
+      const side = s.shot({ ...CAM.corner, ...AT('busygin', [27.4, 7.8], 75), ...AT('silva', [27.9, 8.5], 70) });
+      const bw0 = bus.walk([[16, 6.2]]);
       await s.wait(0.3);
-      const sw = sil.walk([[17.6, 6.6], [27.0, 7.0], SPOT.corner.silva]);
-      await follow(s, bw, CAM.last1);
-      await s.all(bw, sw);
+      const sw0 = sil.walk([[17.6, 6.6]]);
+      await camTo(s, CAM.last1, 3.2, 'linear');
+      await s.until(() => side.ready);
+      bw0.cancel();
+      sw0.cancel();
       side.cut();
+      const bw = bus.walk([SPOT.corner.busygin]);
+      const sw = sil.walk([SPOT.corner.silva]);
+      await s.all(bw, sw);
       await s.all(bus.turn(38), sil.turn(30));
       bus.look('mak_window');
       sil.look('mak_window');
@@ -353,10 +364,13 @@ function film(scene) {
       s.tell('last_window:corner');
       await s.wait(3.5);
     } },
-    // from just behind them: Sarafanov comes out, the camera turning with him to her window; he knocks, is answered
-    // (“Forgive me”), goes back past them toward his gate; Vasenka slips out from behind the shed into the house
+    // from just behind them: Sarafanov comes out, down his porch toward them; a cut near him as he comes to her window:
+    // he knocks, is answered (“Forgive me”); a cut back behind the two as she says hers: he goes back past them toward
+    // his gate; Vasenka slips out from behind the shed into the house
     neighbor: { from: F('neighbor'), run: async s => {
       const sar = s.person('sarafanov'), vas = s.person('vasenka'), bus = s.person('busygin'), sil = s.person('silva');
+      const near = s.shot({ ...CAM.mak, ...AT('sarafanov', [32.2, 12.0], 55) });
+      const back = s.shot({ ...CAM.behind_win });
       // (in the hall behind the door, as it opens)
       put(s, 'sarafanov', HALL, 200);
       sar.wear(null);
@@ -366,14 +380,14 @@ function film(scene) {
       await s.wait(0.5);
       bus.look('sarafanov');
       sil.look('sarafanov');
-      const there = sar.walk([THRESHOLD, [DOOR.a, 11.2], [DOOR.a, 10.05], [26.7, 10.4], [27.4, 10.6], [28.4, 10.75], [30.5, 10.85], [31.9, 11.6], SPOT.mak]);
+      const out = sar.walk([THRESHOLD, [DOOR.a, 11.2], [DOOR.a, 10.05], [26.7, 10.4]]);
       await open;
       await s.wait(1.2);
       s.move('door', 0, { over: 1.4 });
-      const near = s.shot({ ...CAM.mak });
-      await follow(s, there, CAM.behind_win);
-      await there;
+      await out;
+      await s.until(() => near.ready);
       near.cut();
+      await sar.walk([SPOT.mak]);
       await sar.turn(318);
       sar.look('mak_window');
       const knock = sar.do('knock');
@@ -383,25 +397,24 @@ function film(scene) {
       await s.wait(0.2);
       s.set('mak_window', 2);
       s.tell('neighbor:answer');
-      // L09, L10 (≈ 7 s): “Forgive me, for heaven's sake” — a guilty smile
+      // L09 (≈ 4 s): “Forgive me, for heaven's sake” — a guilty smile; L10 from her window, he turning away from it
       await s.wait(2.4);
       sar.mood('smile');
-      const back = s.shot({ ...CAM.behind_win });
-      await s.wait(5.6);
-      s.set('mak_window', 0);
-      sar.mood('sad');
-      await s.wait(0.8);
-      sar.look(null);
+      await s.wait(2.6);
+      await s.until(() => back.ready);
       // back along the shed, two metres before the two, not turning his head; through the wicket into his garden and on
       back.cut();
-      const away = sar.walk([[31.9, 11.6], [30.5, 10.85], [28.4, 10.75], [27.4, 10.6], [26.4, 10.25], [24.2, 10.0], [21.6, 9.9], [20.2, 9.3], [19.0, 7.6], [12.0, 6.6]]);
+      sar.mood('sad');
+      sar.look(null);
+      const away = sar.walk([[31.9, 11.6], [30.5, 10.85], [28.4, 10.75], [27.4, 10.6], [26.4, 10.25], [24.2, 10.0], [21.0, 9.85], [20.2, 9.3], [19.6, 8.6]]);
+      s.sequence(async c => { await c.wait(3.4); c.set('mak_window', 0); });
       await s.wait(2.6);
       s.tell('neighbor:gone');
       bus.look(null);
       sil.look([DOOR.a, DOOR.d, 1.4]);
       // the camera back to the door; from behind the shed through the back wicket, Vasenka, home behind his father's back
       camTo(s, CAM.behind, 3.2);
-      await s.wait(0.6);
+      await s.wait(0.8);
       put(s, 'vasenka', [27.9, 13.6], 270);
       vas.mood('afraid');
       vas.look(null);
@@ -409,14 +422,13 @@ function film(scene) {
       bus.look('vasenka');
       sil.look('vasenka');
       await vas.walk([[27.4, 12.85], [26.8, 11.2], [25.6, 10.2], [DOOR.a, 10.6], [DOOR.a, 11.4]]);
-      // (he is out of the garden by now, out of sight: gone along the street)
-      away.cancel();
-      sar.here(false);
       // the door: he goes in (the porch's beat sees him in)
       s.move('door', 1, { over: 0.8, ease: 'out' });
       vas.walk([THRESHOLD, INSIDE]);
       s.tell('neighbor:vasya');
-      await s.wait(0.2);
+      // (his father off the frame's left edge by now, at his gate: gone along the street, out of sight)
+      await away;
+      sar.here(false);
     } },
     // to the porch (L11, L12 on the way); Silva knocks; the door opens, Vasenka against the light; the camera at
     // the porch's side, the two in three quarters; the pose for the choice: Vasenka and the kitchen window
@@ -525,25 +537,31 @@ function film(scene) {
       );
       s.tell('in:inside');
     } },
-    // later, snow: Sarafanov comes back along the street and stops under his own window — strangers at his table; his
-    // back to us (he looks at them); he stands; to the porch, the door
+    // later, snow: Sarafanov comes back along the street to his gate; a cut under his own window as he comes to it —
+    // strangers at his table; his back to us (he looks at them); he stands; a cut to the porch's side: he comes to the
+    // door from under the window, the door
     return: { from: F('return'), run: async s => {
       const sar = s.person('sarafanov');
-      await sar.walk([[17.5, 8.0], [19.6, 8.3], [20.2, 9.4], [20.2, 10.2], SPOT.under]);
+      const under = s.shot({ ...CAM.under, ...AT('sarafanov', [20.2, 10.0], 20) });
+      const porch = s.shot({ ...CAM.porch, ...AT('sarafanov', [23.4, 10.3], 95) });
+      await sar.walk([[19.6, 8.3], [20.2, 9.3]]);
+      await s.until(() => under.ready);
+      under.cut();
+      await sar.walk([SPOT.under]);
       await sar.turn(51);
       sar.look('kitchen');
       s.tell('return:window');
-      await s.wait(4);
+      await s.wait(3.5);
       sar.look(null);
-      const walk = sar.walk([[22.6, 10.25], [DOOR.a, 10.1], [DOOR.a, 11.4]]);
-      await s.wait(0.8);
-      camTo(s, { camera_x: 22.2, camera_yaw: 22 }, 3.5);
-      await walk;
+      await s.until(() => porch.ready);
+      porch.cut();
+      await sar.walk([[DOOR.a, 10.1], [DOOR.a, 11.4]]);
       await sar.turn(0);
       await s.move('door', 1, { over: 1.1, ease: 'out' });
       s.tell('return:door');
     } },
-    // the late night at the gate: Nina and Kudimov under its lamp in profile; his watch; he goes off left, she to the porch
+    // the late night at the gate: Nina and Kudimov under its lamp in profile; his watch; he marches off left, she goes
+    // to the porch, off the frame's right edge (the house's beat sees her in)
     gate: { from: F('gate'), run: async s => {
       const nina = s.person('nina'), kud = s.person('kudimov');
       await s.wait(1.2);
@@ -555,26 +573,22 @@ function film(scene) {
       kud.do('stand');
       kud.look('nina');
       // L26, L27
-      await s.wait(4.2);
+      await s.wait(3.6);
       kud.look(null);
       kud.gait('march_walk');
-      const go = kud.walk([[18.0, 7.0], [8.0, 6.4], [2.0, 6.4]]);
-      await s.wait(1.0);
+      const go = kud.walk([[18.0, 7.0], [8.0, 6.4]]);
+      await s.wait(0.4);
       nina.look('kudimov');
-      await s.wait(1.2);
+      await s.wait(1.4);
       nina.look(null);
-      const home = nina.walk([[20.2, 8.9], [20.2, 10.0], [22.6, 10.3], [DOOR.a, 10.0], [DOOR.a, 11.4]]);
-      await s.wait(2.2);
+      const home = nina.walk([[20.2, 8.9], [20.2, 10.0], [22.6, 10.3], [DOOR.a, 10.0]]);
+      await s.wait(1.2);
       s.tell('gate:gone');
       go.cancel();
       kud.here(false);
       kud.gait(null);
       await home;
-      await nina.turn(0);
-      await s.move('door', 1, { over: 1.0, ease: 'out' });
-      await nina.walk([THRESHOLD, INSIDE]);
       nina.here(false);
-      s.move('door', 0, { over: 1.0 });
     } },
     // the second night, three shots: the street from the windows; Silva to Makarskaya's door, Vasenka on the dark
     // porch; Vasenka close, her door shutting off the frame
