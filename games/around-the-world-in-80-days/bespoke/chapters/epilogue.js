@@ -11,6 +11,7 @@ export default {
   number: '',
   title: tr('Epilogue'),
   heading: tr('in which it turns out that a day can be gained'),
+  wall: false, // (the special train runs into it; its page on the map ends with the finale)
   route: [0.97, 1],
   titles: ['Saturday', 'The fifty-seventh second', 'Coda'],
   choices: [],
@@ -46,17 +47,18 @@ export default {
         await answers;
         await g.say('fogg', 'I love you');
         await proposal;
-        const runner = f.pp === 'with' ? 'pp' : 'fogg';
-        await (runner === 'pp' ? g.say('fogg', 'Passepartout, go to the Reverend Samuel Wilson. The marriage is for tomorrow, Monday') : g.say('fogg', 'I shall go to the Reverend Samuel Wilson myself'));
+        const runner = f.pp === 'with' ? 'passepartout' : 'fogg';
+        await (runner === 'passepartout' ? g.say('fogg', 'Passepartout, go to the Reverend Samuel Wilson. The marriage is for tomorrow, Monday') : g.say('fogg', 'I shall go to the Reverend Samuel Wilson myself'));
         g.set('runner', runner);
         const out = g.told('run_out:away');
         const run = g.beat('run_out');
+        g.set('beat_next', 'run_back');
         await out;
         await run;
-        await g.say('pastor', 'A marriage on Monday? Tomorrow is Sunday. Today is Saturday');
+        await g.say('pastor', 'A marriage on Monday? Tomorrow is Sunday. Today is Saturday', 'narrator'); // (off the frame: low in the middle)
         const inside = g.told('run_back:in');
         const back = g.beat('run_back');
-        if (runner === 'pp') await g.say('pp', 'Master! Today is Saturday! Ten minutes!');
+        if (runner === 'passepartout') await g.say('passepartout', 'Master! Today is Saturday! Ten minutes!');
         else await g.say('fogg', 'Saturday. Today is Saturday');
         await inside;
         await back;
@@ -97,15 +99,17 @@ export default {
       g.hero('fogg');
       if (f.gained >= 0) {
         g.beds({ fog: 0.5, clock: 0.8 }, 1);
+        const arrived = g.told('cab:arrived');
         await g.scene(SCENES.row, { beat: 'cab', night: 1 });
-        await g.say('fogg', 'Twenty minutes past eight. To the Reform Club!');
+        await g.say('fogg', 'Twenty-five minutes to nine. To the Reform Club!');
         const r = await g.play(cab);
-        await g.told('cab:arrived', 20000);
-        if (!r?.late) {
+        if (!r.late) {
+          await arrived;
           g.beds({ clock: 0.9, crowd: 0.3 }, 1);
           const handle = g.told('countdown:handle');
           await g.scene(SCENES.club, { beat: 'countdown', crowd_outside: 1 });
           const count = g.beat('countdown');
+          g.set('beat_next', 'door');
           await g.say('stuart', 'Fifty-five… fifty-six… fifty-seven…');
           await handle;
           await count;
@@ -148,13 +152,13 @@ export default {
         await g.scene(SCENES.row, { beat: 'pp_returns', night: 0, sunday: 0 });
         const ret = g.beat('pp_returns');
         await watch;
-        await g.say('pp', 'By London time — to the minute');
+        await g.say('passepartout', 'By London time — to the minute');
         await ret;
       }
-      if (f.gas && (f.pp === 'with' || f.pp === 'omaha')) {
+      if (f.gas) {
         await g.scene(SCENES.row, { beat: 'gas_off', night: 1, gas: 1 });
         await g.beat('gas_off');
-        await g.say('pp', 'Eighty days of gas — at my expense');
+        await g.say('passepartout', 'Eighty days of gas — at my expense');
       }
       if (f.kiouni === 'gift') await g.title(tr('A postcard came from Allahabad. There is an elephant on it'));
       if (g.state.marks.speedy || f.cabin) await g.title(tr('Captain Speedy salutes from Queenstown'));

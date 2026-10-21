@@ -1,9 +1,8 @@
-// A jump (the author's ☰ → a minigame of a step): the step played up to that minigame unseen and without time, then
+// A jump (the author's map → a minigame of a step): the step played up to that minigame unseen and without time, then
 // on as ever. What it does unseen is kept for the scene it shows: the values it sets, the seconds it waits, what it
 // waits to hear from the scene — the scene works all of it out before it is seen (bespoke.show's `then`: a
 // scene in its instant mode takes the values and cuts, all it does then ending at once as it would; the seconds and
-// what was heard it needs not), and is where the step has got to. What the step waits to see the scene do (g.when,
-// g.arrived) has come to pass, unseen. The player's choices: as the play has them, else the first offered; the minigames
+// what was heard it needs not), and is where the step has got to. The player's choices: as the play has them, else the first offered; the minigames
 // before it: what `result` says they gave, else skipped; nothing said, heard, shown (story.js asks j.on). And a dry
 // run (target Infinity): the step played so through — to list the minigames it plays, to know the play as it comes
 // out of the step (game.js), to check every branch of the game (check/).

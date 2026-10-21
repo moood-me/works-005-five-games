@@ -25,7 +25,7 @@ const nerves = t => 0.12 + 0.18 * Math.sin(0.8 * t) + 0.06 * Math.sin(2.3 * t + 
 
 export default {
   file: 'like-the-dead',
-  title: 'Like the dead', // (as the author's ☰ lists it)
+  title: 'Like the dead', // (as the author's map lists it)
   about: 24,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {

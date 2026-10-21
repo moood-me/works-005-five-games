@@ -590,42 +590,6 @@ export function creak() {
   o.start(t);
   o.stop(t + 0.55);
 }
-// scissors through film: two short metal clicks
-export function scissors() {
-  const t = now(), out = air(0.15, 'booth');
-  for (const s of [0, 0.09]) {
-    burst(t + s, out, { f: 4200, Q: 2, len: 0.025, loud: 0.3 });
-    ring(t + s, out, [[3100, 0.06, 0.03], [5300, 0.04, 0.02]]);
-  }
-}
-// the splicing press shut: a dull click
-export function press() {
-  const t = now(), out = air(0.2, 'booth');
-  burst(t, out, { kind: 'brown', f: 220, Q: 1, len: 0.09, loud: 0.8 });
-  burst(t, out, { f: 1600, Q: 2, len: 0.015, loud: 0.15 });
-}
-// chalk on a slate: a short dry stroke
-export function chalk() {
-  const a = audio(), t = now(), e = a.createGain(), len = rnd(0.12, 0.2);
-  hiss('white', t, len + 0.05).connect(filter({ type: 'bandpass', frequency: 2600, Q: 1.2 })).connect(e).connect(air(0.15, 'booth'));
-  e.gain.setValueAtTime(0, t);
-  for (let s = 0; s < len; s += 0.012) e.gain.linearRampToValueAtTime(rnd(0.05, 0.16), t + s);
-  e.gain.linearRampToValueAtTime(0, t + len);
-}
-// …and its squeak: the hand jerked
-export function chalkSqueak() {
-  const a = audio(), t = now(), o = a.createOscillator(), e = a.createGain(), wob = a.createOscillator(), wd = a.createGain();
-  o.frequency.setValueAtTime(2900, t);
-  o.frequency.linearRampToValueAtTime(3300, t + 0.22);
-  wob.frequency.value = 37;
-  wd.gain.value = 60;
-  wob.connect(wd).connect(o.frequency);
-  shape(e.gain, t, [[0.02, 0.05], [0.18, 0.04], [0.25, 0]]);
-  o.connect(e).connect(air(0.15, 'booth'));
-  o.start(t); wob.start(t);
-  o.stop(t + 0.3); wob.stop(t + 0.3);
-  chalk();
-}
 // a sprocket's tooth: a small precise click
 export function click() {
   const t = now(), out = air(0.15, 'booth');
@@ -637,18 +601,6 @@ export function clunk() {
   const t = now(), out = air(0.3, 'booth');
   burst(t, out, { kind: 'brown', f: 130, Q: 1, len: 0.14, loud: 1 });
   ring(t, out, [[620, 0.25, 0.05], [1430, 0.15, 0.03], [2390, 0.08, 0.015]]);
-}
-// a motor started: a hum rising in 0.6 s
-export function motor() {
-  const a = audio(), t = now(), o = a.createOscillator(), e = a.createGain(), lp = filter({ type: 'lowpass', frequency: 300 });
-  o.type = 'sawtooth';
-  o.frequency.setValueAtTime(14, t);
-  o.frequency.exponentialRampToValueAtTime(50, t + 0.6);
-  shape(e.gain, t, [[0.1, 0.12], [0.6, 0.18], [1.1, 0]]);
-  o.connect(lp).connect(e).connect(air(0.3, 'booth'));
-  o.start(t);
-  o.stop(t + 1.2);
-  burst(t, air(0.3, 'booth'), { f: 2500, Q: 2, len: 0.02, loud: 0.2 });
 }
 // the changeover's cue: a quiet click; the second higher and brighter
 export function tick() { ring(now(), air(0.2, 'booth'), [[1500, 0.14, 0.16], [3020, 0.06, 0.06]], 0.001); }
@@ -705,12 +657,6 @@ export function whisper() {
     syllable(t + rnd(0, 2.2), out, { f1: f1 * 1.5, f2: f2 * 1.3, len: rnd(0.2, 0.45), loud: rnd(0.05, 0.12), kind: 'white' });
   }
 }
-// a girl's laugh: short bright bursts, falling a little
-export function giggle() {
-  const t = now(), out = air(0.3);
-  const n = 4 + Math.floor(Math.random() * 2);
-  for (let i = 0; i < n; i++) syllable(t + i * 0.13, out, { f1: 850, f2: 2400, len: 0.1, loud: 0.3 * (1 - i * 0.12), pitch: 330 - i * 12 });
-}
 // coins in the palm
 export function coins() {
   const t = now(), out = air(0.3);
@@ -747,50 +693,6 @@ export function cough() {
     burst(t + s, out, { kind: 'brown', f: 300, Q: 1, len: 0.08, loud: 0.3 * v });
   }
 }
-// a small band far off, for the feast: three chords of brass, a drum under them
-export function band() {
-  const a = audio(), t = now(0.05), far = filter({ type: 'lowpass', frequency: 1100, Q: 0.5 }), e = a.createGain();
-  e.gain.value = 0.6;
-  far.connect(e).connect(air(0.7));
-  [[53, 57, 60, 65], [52, 55, 60, 64], [53, 57, 60, 65]].forEach((chord, k) => {
-    const at = t + k * 0.65, len = k === 2 ? 1.3 : 0.5;
-    for (const m of chord) {
-      const o = a.createOscillator(), g = a.createGain();
-      o.type = 'sawtooth';
-      o.frequency.value = hz(m);
-      shape(g.gain, at, [[0.04, 0.035], [len * 0.8, 0.028], [len, 0]]);
-      o.connect(g).connect(far);
-      o.start(at);
-      o.stop(at + len + 0.05);
-    }
-    burst(at, far, { kind: 'brown', f: 90, Q: 1, len: 0.3, loud: 0.9 });
-  });
-}
-// a shutter: wood on wood, and its rattle
-export function shutter() {
-  const t = now(), out = air(0.5);
-  burst(t, out, { kind: 'brown', f: 260, Q: 1.2, len: 0.12, loud: 0.5 });
-  for (let i = 1; i < 4; i++) burst(t + i * 0.045, out, { f: 900, Q: 2, len: 0.03, loud: 0.12 / i });
-}
-// fireworks: thuds going up, bangs, the crackle falling — four seconds
-export function fireworks() {
-  const t = now(), out = air(0.6);
-  for (let i = 0; i < 6; i++) {
-    const at = t + i * rnd(0.5, 0.75);
-    burst(at, out, { kind: 'brown', f: 80, Q: 0.8, len: 0.6, loud: 0.9, attack: 0.003 });
-    for (let k = 0; k < 14; k++) burst(at + 0.15 + rnd(0, 1.2), out, { f: rnd(2500, 6000), Q: 2, len: 0.012, loud: rnd(0.04, 0.12) });
-  }
-}
-// the tail of the film slapping the reel, quick, slowing, gone
-export function reelEnd() {
-  const t = now(), out = air(0.3, 'booth');
-  let s = 0, gap = 0.07;
-  for (let i = 0; i < 28; i++) {
-    burst(t + s, out, { f: 1800, Q: 1, len: 0.025, loud: 0.3 * (1 - i / 30) });
-    s += gap;
-    gap *= 1.05;
-  }
-}
 // steps on the stair, passing (game: the door does not open)
 export function steps() {
   const t = now(), out = air(0.4, 'booth');
@@ -805,20 +707,6 @@ export function door() {
   const t = now(), out = air(0.4, 'booth');
   burst(t, out, { kind: 'brown', f: 90, Q: 0.9, len: 0.35, loud: 1.2, attack: 0.002 });
   for (let i = 1; i < 5; i++) burst(t + i * 0.035, out, { f: 700, Q: 2, len: 0.03, loud: 0.15 / i });
-}
-// an old car's engine: it pulls away and goes off
-export function car() {
-  const a = audio(), t = now(), o = a.createOscillator(), o2 = a.createOscillator(), e = a.createGain(), lp = filter({ type: 'lowpass', frequency: 420 });
-  o.type = 'sawtooth';
-  o2.type = 'square';
-  shape(o.frequency, t, [[0.6, 34], [2.2, 58], [5, 46]], 30);
-  shape(o2.frequency, t, [[0.6, 17], [2.2, 29], [5, 23]], 15);
-  shape(lp.frequency, t, [[1.5, 700], [5, 250]], 420);
-  shape(e.gain, t, [[0.3, 0.09], [1.8, 0.11], [5, 0]]);
-  o.connect(lp); o2.connect(lp);
-  lp.connect(e).connect(air(0.4));
-  o.start(t); o2.start(t);
-  o.stop(t + 5.1); o2.stop(t + 5.1);
 }
 // steam let off the engine
 export function trainHiss() {
@@ -848,14 +736,6 @@ export function church() {
   for (let i = 0; i < 5; i++) {
     const at = t + i * 2.2, f = 196;
     ring(at, far, [[f * 0.5, 5, 0.06], [f, 4, 0.09], [f * 1.2, 3, 0.05], [f * 1.5, 2.6, 0.04], [f * 2, 2, 0.04], [f * 2.6, 1.2, 0.02]], 0.003);
-  }
-}
-// pigeons taking off: wings beating, two or three birds
-export function pigeons() {
-  const t = now(), out = air(0.4, 'booth');
-  for (let b = 0; b < 3; b++) {
-    const start = t + rnd(0, 0.4), rate = rnd(9, 12);
-    for (let i = 0; i < 14; i++) burst(start + i / rate, out, { kind: 'pink', f: rnd(700, 1100), Q: 0.8, len: 0.06, loud: 0.3 * (1 - i / 16), attack: 0.01 });
   }
 }
 // a sheet unfolded or folded

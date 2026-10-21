@@ -23,7 +23,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'bargain',
-  title: 'The bargain', // (as the author's ☰ lists it)
+  title: 'The bargain', // (as the author's map lists it)
   about: 20,
   skipped: { price: 2000, minutes: 0 }, // Verne's price, no minutes lost
   async run(g, b, opts, signal) {

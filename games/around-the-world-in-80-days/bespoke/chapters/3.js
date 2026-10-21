@@ -26,7 +26,7 @@ export default {
       await g.scene(SCENES.train, { beat: 'buffalo', land: 'prairie' });
       const buffalo = g.beat('buffalo');
       await glass;
-      await g.say('pp', 'Out of the way, will you!');
+      await g.say('passepartout', 'Out of the way, will you!');
       await buffalo;
       await g.say('fogg', 'Three hours');
       g.hours(-3, tr('The buffalo'));
@@ -40,12 +40,13 @@ export default {
       const stop = g.beat('bridge_stop');
       await argue;
       await g.say('driver', 'We\'ll cross at full speed! The bridge won\'t even notice');
-      await g.say('pp', 'Would it not be more prudent to walk across first, and let the train come after?');
+      await g.say('passepartout', 'Would it not be more prudent to walk across first, and let the train come after?');
       await stop;
       const bridge = await g.choose('bridge', {
         'driver#head': [{ id: 'run', label: tr('At full speed') }],
         'passepartout#head': [{ id: 'walk', label: tr('As Passepartout proposes') }],
       });
+      g.set('beat_next', bridge === 'run' ? 'bridge_run' : 'bridge_walk');
       if (bridge === 'run') {
         const down = g.told('bridge_run:down');
         const run = g.beat('bridge_run');
@@ -73,7 +74,7 @@ export default {
       g.sound.shots();
       await driver;
       g.sound.shots();
-      await g.say('pp', 'The engineer is shot! The fort! We must stop at the fort!');
+      await g.say('passepartout', 'The engineer is shot! The fort! We must stop at the fort!');
       await attack;
       await g.beat('under', { wait: false });
       const r = await g.play(coupling);
@@ -96,9 +97,10 @@ export default {
       await g.say('captain', 'I cannot risk the fort for three men');
       await fort;
       const choice = await g.choose('fort', {
-        'fogg#head': [{ id: 'go', label: tr('Then I will go alone') }],
-        'captain#head': [{ id: 'pay', label: tr('Five thousand pounds to your men') }],
+        'fogg#head': [{ id: 'go', label: tr('Go in person') }],
+        'captain#head': [{ id: 'pay', label: tr('Pay the soldiers') }],
       });
+      g.set('beat_next', choice === 'go' ? 'column' : 'train_leaves');
       if (choice === 'go') {
         await g.say('fogg', 'Then I will go alone');
         g.hours(-20, tr('A night in the snow'));
@@ -118,7 +120,7 @@ export default {
         const pp = g.told('return:pp');
         const ret = g.beat('return');
         await pp;
-        await g.say('pp', 'Master! You came for me!');
+        await g.say('passepartout', 'Master! You came for me!');
         await ret;
         g.relate('pp', 2);
         if (g.state.choices.aouda !== 'holland') g.relate('aouda', 1);
@@ -150,7 +152,7 @@ export default {
         : { beat: 'sledge', sl_fogg: 1, sl_aouda: g.state.choices.aouda === 'holland' ? 0 : 1, sl_pp: 1, sl_fix: 1 };
       await g.scene(SCENES.prairie, st);
       const sledge = g.beat('sledge');
-      if (alone) await g.say('pp', 'Monsieur Mudge, to Omaha! My master is on that train!');
+      if (alone) await g.say('passepartout', 'Monsieur Mudge, to Omaha! My master is on that train!');
       else {
         await g.say('fix', 'There is a sledge. Under sail. Omaha by morning');
         g.money(-200);
@@ -169,10 +171,10 @@ export default {
       const omaha = g.beat('omaha');
       if (alone && caught) {
         await hand;
-        await g.say('pp', 'Master! By London time — to the minute!');
+        await g.say('passepartout', 'Master! By London time — to the minute!');
       }
       await omaha;
-      if (alone && !caught) await g.say('pp', 'I\'ll catch you up, monsieur. Somewhere');
+      if (alone && !caught) await g.say('passepartout', 'I\'ll catch you up, monsieur. Somewhere');
     },
     // the snow from the window: on to New York
     async g => {

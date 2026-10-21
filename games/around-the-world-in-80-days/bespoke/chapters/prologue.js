@@ -9,7 +9,7 @@ export default {
   number: '',
   title: tr('Prologue'),
   heading: tr('in which Phileas Fogg makes a wager'),
-  route: [0, 0],
+  route: [0, 0.04],
   titles: ['A quarter to nine', 'The wager', 'Ten minutes', 'Charing Cross'],
   choices: [],
   steps: [
@@ -60,7 +60,7 @@ export default {
       const news = g.beat('news');
       await door;
       await g.say('fogg', 'Passepartout, we are going round the world. In ten minutes');
-      await g.say('pp', 'Round… the world?');
+      await g.say('passepartout', 'Round… the world?');
       await news;
       g.hero('pp');
       await g.say('fogg', 'Two shirts, three pairs of stockings, a mackintosh and a Bradshaw. We\'ll buy the rest on the way');
@@ -91,17 +91,17 @@ export default {
       const gas = g.beat('gas');
       await up;
       if (g.state.marks.gas) {
-        await g.say('pp', 'The gas! I forgot to turn off the gas in my room!');
+        await g.say('passepartout', 'The gas! I forgot to turn off the gas in my room!');
         await g.say('fogg', 'It will burn — at your expense');
       } else {
-        await g.say('pp', 'The gas is off, monsieur! I made sure');
+        await g.say('passepartout', 'The gas is off, monsieur! I made sure');
         await g.say('fogg', 'Good');
       }
       await gas;
       const out = g.told('watch:out');
       const watch = g.beat('watch');
       await out;
-      await g.say('pp', 'London time. I shan\'t change it, monsieur');
+      await g.say('passepartout', 'London time. I shan\'t change it, monsieur');
       await watch;
       g.gauge('hours');
       await g.say('fogg', 'London to Suez: seven days. Exactly on time');

@@ -1,8 +1,8 @@
 // What the game shows over the scene (bespoke.layer), as the pages of an old illustrated edition: cream paper, sepia
 // ink, a thin double engraved frame with corners, a serif (game.md §6). The notebook and the bag are the play's two
 // figures; the stamps of a consul's visa say who remembers.
-//   view.gauges({hours, money, shown, lines} | null) — the notebook (Time in hand) low on the left, the bag (the carpet-bag) low on
-//     the right, each once the player has met it; null — none («The route»)
+//   view.gauges({hours, money, shown, lines} | null) — the notebook (Time in hand) low on the left, the bag (the
+//     carpet-bag) low on the right, each once the player has met it; null — none (the map, «The route»)
 //   view.hours(state, was, line) — the old figure struck out, the new one written; `line` beside it a while
 //   view.money(state, was) — the sum changes; spent: notes fly from the bag
 //   view.hero('fogg' | 'pp') — the medallion of his face, a moment, high in the middle
@@ -13,8 +13,12 @@
 //   view.title(text, {signal}) — the title over the scene, a page of the old edition; → once it has gone (9 s)
 //   view.letter({text, sign, kind}, {signal, onOpen}) — a sheet the player unfolds and folds: 'note', 'letter',
 //     'envelope'; → once it has gone
-//   view.onSkip(fn) → off — what the ⏭ does now; view.author({...}) → what opens the author's map, for the page's ☰
-//     (bespoke.menu) (as in «Cinema Paradiso»)
+//   view.quiet() — what a chapter left showing (its cards, its hint) taken away: the map comes
+//   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
+//     its minigames], go(as, chapter, step, game)}) — the author's map, opened by his sign on the play's map (author()
+//     → what opens or closes it): the chapters, their steps and the steps' minigames, to go to any — as the play picked
+//     under «play as…» has it by then (as: its index)
+// (⏸, ⏭ and ☰ are the page's: the game draws none of them.)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
 import { BOOK, hoursText, moneyText } from './story.js';
@@ -43,14 +47,6 @@ export function ui(layer) {
   const bag = bagGauge(layer);
   const medal = el('div', 'medal', layer);
   const toasts = el('div', 'toasts', layer);
-  // the corner's tools: ⏭ (a minigame: everyone; a step: the author) (⏸, ☰ — the page's)
-  const tools = el('div', 'tools', layer);
-  const skips = [];
-  // (shown while the latest skip is something)
-  const skipButton = button('⏭', tr('skip'), () => skips.at(-1)?.fn?.());
-  const skipShown = () => { skipButton.hidden = !skips.at(-1)?.fn; };
-  tools.append(skipButton);
-  skipShown();
   let hinted = () => {}; // takes the hint shown now away
   return {
     gauges(state) {
@@ -102,16 +98,13 @@ export function ui(layer) {
       });
     },
     letter: (letter, { signal, onOpen } = {}) => (letter.kind === 'envelope' ? envelope(layer, letter, signal, onOpen) : unfold(layer, letter, signal, onOpen)),
-    onSkip(fn) {
-      const it = { fn };
-      skips.push(it);
-      skipShown();
-      return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
+    quiet() {
+      toasts.replaceChildren();
+      hinted();
     },
     author({ chapters, plays, at, games, go }) {
-      // the map (the page's ☰ opens it): «play as…», then every chapter a column of its steps (and their minigames)
-      // in a window over the scene;
-      // a click outside, ✕ or Esc closes it
+      // the map (his sign on the play's map opens it): «play as…», then every chapter a column of its steps (and their
+      // minigames) in a window over the scene; a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
       map.hidden = true;
       let as = 0; // the play picked
@@ -129,11 +122,11 @@ export function ui(layer) {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
-            const step = button(c.titles[si], '', () => go(as, ci, si), ci === here.chapter && si === here.step ? 'here' : '');
+            const step = button(c.titles[si], '', () => { close(); go(as, ci, si); }, ci === here.chapter && si === here.step ? 'here' : '');
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'straight to the minigame', () => go(as, ci, si, k), 'minigame'))));
+              button(`◆ ${name}`, 'straight to the minigame', () => { close(); go(as, ci, si, k); }, 'minigame'))));
             col.append(step, under);
           }
           return col;

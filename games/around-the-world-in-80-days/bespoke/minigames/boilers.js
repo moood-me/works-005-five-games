@@ -24,7 +24,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'boilers',
-  title: 'The boilers', // (as the author's ☰ lists it)
+  title: 'The boilers', // (as the author's map lists it)
   about: 50,
   // (skipped: all the wood but the cabin; how much of it the purse can pay for the chapter checks against the carpet-bag: skipped knows no money)
   skipped: { burned: [...PARTS], cabin: false },

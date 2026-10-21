@@ -26,7 +26,7 @@ export default {
       await g.scene(SCENES.deck, { beat: 'new_york', ship: 'henrietta', port: 'new_york' });
       const ny = g.beat('new_york');
       await smoke;
-      await (f.pp === 'with' ? g.say('pp', 'The China sailed forty-five minutes ago!') : g.say('fix', 'The China sailed forty-five minutes ago!'));
+      await (f.pp === 'with' ? g.say('passepartout', 'The China sailed forty-five minutes ago!') : g.say('fix', 'The China sailed forty-five minutes ago!'));
       await speedy;
       await g.say('speedy', 'Bound for Bordeaux. No passengers');
       await g.say('fogg', 'And for two thousand dollars a head?');
@@ -65,6 +65,7 @@ export default {
         'fogg#head': [{ id: 'burn', label: tr('Buy her and burn her') }],
         'speedy#head': [{ id: 'sails', label: tr('Go under sail') }],
       });
+      if (choice === 'sails') g.set('beat_next', 'sails_only'); // (the burning: a scene of its own, the next step)
       if (choice === 'burn') {
         await g.say('fogg', 'I want only what will burn');
       } else {
@@ -109,7 +110,10 @@ export default {
       g.beds({ clock: 0.9 }, 2);
       const quick = (g.state.marks.fix ?? 0) >= 2;
       await g.beat('cell', { wait: false });
-      await g.move('cell_time', 1, quick ? 8 : 14);
+      // (the shadow of the bars creeps over the floor: the hours in the cell, the game's own)
+      const cell = quick ? 8 : 14;
+      g.set('cell_time', 1, cell);
+      await g.wait(cell * 1000);
       g.hours(quick ? -1 : -3, tr('The custom-house, the cell'));
       g.beds({ clock: 0.4, town: 0.3 }, 2);
       const choice = await g.choose('liverpool', {
@@ -132,20 +136,21 @@ export default {
     async g => {
       g.hero('fogg');
       g.beds({ wheels: 0.8, clock: 0.6 }, 2);
-      const watch = g.told('special:watch');
-      await g.scene(SCENES.train, { beat: 'special', land: 'england' });
+      // (behind time: at the beat's end Fogg shuts the notebook on his knees — by how much, the notebook says)
+      const late = g.state.hours < 0;
+      const watch = g.told('special:watch'), shut = late ? g.told('special:shut') : null;
+      await g.scene(SCENES.train, { beat: 'special', land: 'england', book_shut: late ? 1 : 0 });
       const special = g.beat('special');
       await watch;
-      await special;
-      const h = g.state.hours;
-      if (h >= 0) await g.say('fogg', 'London. On time');
-      else {
-        // (by how much — the notebook says)
-        await g.say('fogg', 'Behind time');
-        g.set('book_shut', 1, 1.5);
-        await g.told('special:shut', 4000);
-        await g.say('fogg', 'Twenty thousand — all that I had');
+      if (!late) {
+        await special;
+        await g.say('fogg', 'London. On time');
+        return;
       }
+      await g.say('fogg', 'Behind time');
+      await shut;
+      await special;
+      await g.say('fogg', 'Twenty thousand — all that I had');
     },
   ],
 };

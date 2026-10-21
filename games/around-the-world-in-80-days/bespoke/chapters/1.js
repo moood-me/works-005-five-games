@@ -14,11 +14,12 @@ export default {
   number: 'I',
   title: tr('India'),
   heading: tr('in which an elephant costs two thousand pounds'),
-  route: [0, 0.22],
+  wall: false, // (the prologue runs into it: the train out of Charing Cross, then Suez)
+  route: [0.04, 0.22],
   titles: ['Suez', 'The end of the rails', 'The bargain', 'The elephant', 'The procession', 'Allahabad', 'The Ganges'],
   choices: [
     { id: 'sati', weight: '⚑', title: tr('The suttee'), options: [{ id: 'night', label: tr('At night, quietly') }, { id: 'road', label: tr('Now, on the road') }] },
-    { id: 'kiouni', weight: '~', title: tr('Kiouni'), options: [{ id: 'gift', label: tr('Give him to the guide') }, { id: 'sell', label: tr('Sell him') }] },
+    { id: 'kiouni', weight: '~', title: tr('Kiouni'), options: [{ id: 'gift', label: tr('Give Kiouni to the guide') }, { id: 'sell', label: tr('Sell him') }] },
   ],
   steps: [
     // Suez: Passepartout and an amiable stranger; the stranger to the consul. Bombay at dawn, two days early
@@ -29,7 +30,7 @@ export default {
       await g.scene(SCENES.deck, { beat: 'suez', ship: 'mongolia', port: 'suez' });
       const suez = g.beat('suez');
       await chat;
-      await g.say('pp', 'Monsieur Fix — what an obliging man!');
+      await g.say('passepartout', 'Monsieur Fix — what an obliging man!');
       await whisper;
       await g.say('fix', 'It is he. The Bank of England robber. I need a warrant');
       await suez;
@@ -51,7 +52,7 @@ export default {
       const brake = g.beat('brake');
       await stopped;
       g.beds({ jungle: 0.3 }, 3);
-      await g.say('conductor', 'The line stops here, gentlemen. Fifty miles to Allahabad');
+      await g.say('conductor', 'The line stops here, gentlemen. Fifty miles to Allahabad', 'narrator'); // (in the corridor, unseen)
       await brake;
       g.hours(-34, tr('Fifty miles without rails'));
     },
@@ -63,7 +64,7 @@ export default {
       await g.scene(SCENES.jungle, { beat: 'rails_end', day: 1, station: 'kholby' });
       const end = g.beat('rails_end');
       await shed;
-      await g.say('pp', 'Monsieur! An elephant! A real elephant!');
+      await g.say('passepartout', 'Monsieur! An elephant! A real elephant!');
       await end;
       await g.beat('haggle', { wait: false });
       await g.say('fogg', 'A thousand pounds');
@@ -112,6 +113,7 @@ export default {
         'fogg#head': [{ id: 'night', label: tr('At night, quietly') }],
         'kiouni#head': [{ id: 'road', label: tr('Now, on the road') }],
       });
+      g.set('beat_next', sati === 'night' ? 'night_wall' : 'charge');
       if (sati === 'night') {
         g.hours(-12, tr('A night by the pagoda'));
         const gone = g.told('night_wall:gone');
@@ -138,7 +140,7 @@ export default {
         const pp = g.told('flee:pp');
         const flee = g.beat('flee');
         await pp;
-        await g.say('pp', 'Run, monsieur!');
+        await g.say('passepartout', 'Run, monsieur!');
         await flee;
         g.relate('aouda', 1);
       } else {
@@ -177,13 +179,14 @@ export default {
         'guide#head': [{ id: 'gift', label: tr('Give Kiouni to the guide') }],
         'kiouni#head': [{ id: 'sell', label: tr('Sell him') }],
       });
+      g.set('beat_next', kiouni === 'gift' ? 'gift' : 'sold');
       if (kiouni === 'gift') {
         const lift = g.told('gift:lift');
         const gift = g.beat('gift');
         await g.say('fogg', 'Kiouni is yours');
         await lift;
         g.sound.trumpet();
-        await g.say('pp', 'Ha-ha! Goodbye, Kiouni!');
+        await g.say('passepartout', 'Ha-ha! Goodbye, Kiouni!');
         await gift;
         g.relate('pp', 1);
       } else {
@@ -193,7 +196,7 @@ export default {
         const away = g.told('sold:away');
         const sold = g.beat('sold');
         await away;
-        await g.say('pp', 'Goodbye, Kiouni…');
+        await g.say('passepartout', 'Goodbye, Kiouni…');
         await sold;
       }
     },

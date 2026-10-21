@@ -26,7 +26,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'coupling',
-  title: 'The coupling', // (as the author's ☰ lists it)
+  title: 'The coupling', // (as the author's map lists it)
   about: 16,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {

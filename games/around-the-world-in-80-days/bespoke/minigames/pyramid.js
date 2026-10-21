@@ -24,7 +24,7 @@ const sway = (t, h) => 0.2 * Math.sin(1.1 * t) + 0.12 * Math.sin(2.7 * t + 1) + 
 
 export default {
   file: 'pyramid',
-  title: 'The pyramid', // (as the author's ☰ lists it)
+  title: 'The pyramid', // (as the author's map lists it)
   about: 24,
   skipped: { choice: 'drop' }, // as in Verne: he saw his master — and the pyramid collapsed
   async run(g, b, opts, signal) {

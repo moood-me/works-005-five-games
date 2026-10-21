@@ -21,7 +21,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'cab',
-  title: 'The cab', // (as the author's ☰ lists it)
+  title: 'The cab', // (as the author's map lists it)
   about: 36,
   skipped: { late: false },
   async run(g, b, opts, signal) {

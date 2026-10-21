@@ -4,7 +4,7 @@
 // the typhoon («The typhoon»), the gun at Shanghai; Yokohama — the Long Noses («The pyramid»: drop or hold, by the hands); the
 // «General Grant» (~ punch), two Wednesdays.
 // Reads: choices.sati; hands stay-awake, typhoon, pyramid; marks fix. Leaves: choices answer, aouda, boat, punch;
-// choices.pyramid (by the hands); hours, money; marks aouda, fix, pp, bruise, wings; lines.
+// choices.pyramid (by the hands: by — the minigame that makes it); hours, money; marks aouda, fix, pp, bruise, wings; lines.
 import { SCENES } from '../story.js';
 import stayAwake from '../minigames/stay-awake.js';
 import typhoon from '../minigames/typhoon.js';
@@ -19,8 +19,8 @@ export default {
   choices: [
     { id: 'answer', weight: '~', title: tr('Fogg\'s answer'), options: [{ id: 'spare', label: tr('I had them to spare') }, { id: 'plaid', label: tr('Give her the plaid') }, { id: 'notlost', label: tr('I have not lost them') }] },
     { id: 'aouda', weight: '⚑', title: tr('Aouda'), options: [{ id: 'europe', label: tr('Come with us to Europe') }, { id: 'holland', label: tr('A passage to Holland') }] },
-    { id: 'boat', weight: '~', title: tr('Fix on the boat'), options: [{ id: 'take', label: tr('Take him') }, { id: 'leave', label: tr('Cast off') }] },
-    { id: 'pyramid', weight: '~', title: tr('The pyramid'), options: [{ id: 'drop', label: tr('Let go') }, { id: 'hold', label: tr('Hold to the end') }] },
+    { id: 'boat', weight: '~', title: tr('Fix on the boat'), options: [{ id: 'take', label: tr('Come with us') }, { id: 'leave', label: tr('Cast off') }] },
+    { id: 'pyramid', weight: '~', by: 'pyramid', title: tr('The pyramid'), options: [{ id: 'drop', label: tr('Let go') }, { id: 'hold', label: tr('Hold to the end') }] },
     { id: 'punch', weight: '~', title: tr('Fix on the General Grant'), options: [{ id: 'punch', label: tr('Strike him') }, { id: 'shake', label: tr('Shake hands') }] },
   ],
   steps: [
@@ -37,6 +37,7 @@ export default {
       const answer = await g.choose('answer', {
         'fogg#head': [{ id: 'spare', label: tr('I had them to spare') }, { id: 'plaid', label: tr('Give her the plaid') }, { id: 'notlost', label: tr('I have not lost them') }],
       });
+      g.set('beat_next', answer === 'plaid' ? 'plaid' : 'writes');
       if (answer === 'spare') await g.say('fogg', 'I had them to spare');
       else if (answer === 'notlost') {
         await g.say('fogg', 'I have not lost them');
@@ -66,7 +67,7 @@ export default {
       await cousin;
       const aouda = await g.choose('aouda', {
         'fogg#head': [{ id: 'europe', label: tr('Come with us to Europe') }],
-        'aouda#head': [{ id: 'holland', label: tr('I will pay your passage to Holland') }],
+        'aouda#head': [{ id: 'holland', label: tr('A passage to Holland') }],
       });
       if (aouda === 'europe') {
         await g.say('fogg', 'Come with us to Europe');
@@ -86,14 +87,14 @@ export default {
       await g.scene(SCENES.harbour, { beat: 'tavern', port: 'hongkong' });
       const tavern = g.beat('tavern');
       await poured;
-      await g.say('pp', 'The Carnatic sails tonight, not tomorrow! I must tell my master!');
+      await g.say('passepartout', 'The Carnatic sails tonight, not tomorrow! I must tell my master!');
       await tavern;
       const shown = g.told('badge:shown'), up = g.told('badge:up');
       const badge = g.beat('badge');
       await shown;
       await g.say('fix', 'I am a detective. Your master is the Bank of England robber. Keep him here — and five hundred pounds are yours');
       await up;
-      await g.say('pp', 'My master is the most honest of men!');
+      await g.say('passepartout', 'My master is the most honest of men!');
       await badge;
       await g.say('fix', 'Drink with me. One pipe — for friendship\'s sake');
       await g.beat('pipe');
@@ -105,7 +106,7 @@ export default {
       await g.scene(SCENES.harbour, { beat: 'carnatic', port: 'hongkong' });
       const carnatic = g.beat('carnatic');
       await aboard;
-      await g.say('pp', 'Master… the Carnatic…');
+      await g.say('passepartout', 'Master… the Carnatic…');
       g.sound.trainWhistle();
       await carnatic;
     },
@@ -159,13 +160,14 @@ export default {
       g.beds({ storm: 0.5 }, 3);
       const withAouda = g.state.choices.aouda !== 'holland';
       const reef = g.told('squall:reef');
-      await g.scene(SCENES.sea, { beat: 'squall', with_aouda: withAouda ? 1 : 0, with_fix: g.state.choices.boat === 'take' ? 1 : 0 });
+      await g.scene(SCENES.sea, { beat: 'squall' });
       const squall = g.beat('squall');
       await reef;
       await g.say('bunsby', 'A typhoon, sir. Head to sea — or she\'ll capsize');
       await squall;
       g.beds({ storm: 0.9 }, 2);
       await g.beat('typhoon', { wait: false });
+      g.set('beat_next', withAouda ? 'aouda_storm' : 'shanghai');
       const r = await g.play(typhoon);
       if (r?.hours) g.hours(r.hours, tr('The typhoon'));
       if (withAouda) await g.beat('aouda_storm');
@@ -193,6 +195,7 @@ export default {
       const r = await g.play(pyramid);
       const choice = r?.choice ?? 'drop';
       g.state.choices.pyramid = choice;
+      g.set('beat_next', choice === 'drop' ? 'see' : 'finish');
       g.mark('wings', true);
       g.beds({ crowd: 0.3, town: 0.2 }, 2);
       if (choice === 'drop') {
@@ -215,7 +218,7 @@ export default {
         const face = g.told('reunion:face');
         const reunion = g.beat('reunion');
         await face;
-        await g.say('pp', 'I held them up, master. They would have fallen');
+        await g.say('passepartout', 'I held them up, master. They would have fallen');
         await g.say('fogg', 'The steamer leaves at half-past six');
         await reunion;
         g.relate('pp', 1);
@@ -235,9 +238,11 @@ export default {
         'passepartout#head': [{ id: 'punch', label: tr('Strike him') }],
         'fix#head': [{ id: 'shake', label: tr('Shake hands') }],
       });
+      g.set('beat_next', punch === 'punch' ? 'punch' : 'shake');
       if (punch === 'punch') {
         const down = g.told('punch:down');
         const beat = g.beat('punch');
+        g.set('beat_next', 'calendar');
         await down;
         g.sound.slap();
         await beat;
@@ -254,7 +259,7 @@ export default {
       await leaf;
       await g.say('sailor', 'Wednesday again, gentlemen');
       await laugh;
-      await g.say('pp', 'Two Wednesdays running! What a calendar these Americans keep!');
+      await g.say('passepartout', 'Two Wednesdays running! What a calendar these Americans keep!');
       await g.say('fogg', 'In my notebook it is Thursday');
       await calendar;
     },

@@ -22,7 +22,7 @@ const smooth = (a, b, x) => { const u = Math.min(1, Math.max(0, (x - a) / (b - a
 
 export default {
   file: 'typhoon',
-  title: 'The typhoon', // (as the author's ☰ lists it)
+  title: 'The typhoon', // (as the author's map lists it)
   about: 42,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {
