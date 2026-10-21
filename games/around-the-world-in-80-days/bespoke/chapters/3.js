@@ -115,7 +115,8 @@ export default {
         await g.scene(SCENES.prairie, { beat: 'night_wait' });
         const wait = g.beat('night_wait');
         await snow;
-        await g.wait(2500);
+        if (g.state.choices.aouda !== 'holland') await g.say('narrator', 'All night Aouda waited on the platform, under the lamp, in the falling snow');
+        else await g.say('narrator', 'All night Fix walked up and down the platform, and the snow fell');
         await wait;
         g.set('fogg_went', 1);
         const pp = g.told('return:pp');

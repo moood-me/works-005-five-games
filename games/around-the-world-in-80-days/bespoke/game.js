@@ -51,7 +51,7 @@ import epilogue from './chapters/epilogue.js';
 const CHAPTERS = [prologue, one, two, three, four, epilogue];
 const EPILOGUE = CHAPTERS.length - 1;
 const END = CHAPTERS.length; // the play played through: no chapter of the main run
-const REVEAL = 6; // s: a chapter's rows written in, one by one, as it has been played through (and the red line drawn on)
+const REVEAL = 4; // s: a chapter's rows written in, one by one, as it has been played through (and the red line drawn on)
 // a replay's end asks on its knot once the knot has stood still REST looks REST_STEP ms apart (REST_MAX s at most)
 const REST = 3, REST_STEP = 100, REST_MAX = 12;
 // every step of the play in order, and where each chapter's first one is among them
@@ -293,7 +293,12 @@ export default async function (b) {
         add(`knot:${c}`, 'drop', tr('Drop the replay'));
       }
     }
-    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start'));
+    if (kept.chapter < END) {
+      const main = replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start');
+      add(`go:${kept.chapter}`, 'main', main);
+      // (its pin too, where no replay goes on in that chapter)
+      if (replay?.run.chapter !== kept.chapter) add(`knot:${kept.chapter}`, 'main', main);
+    }
     for (let i = 0; i < Math.min(kept.chapter, END); i++) {
       if (kept.steps[i]?.[0]) add(`knot:${i}`, `chapter:${i}`, tr('Replay the chapter'));
       if (i === growing) continue;

@@ -3,9 +3,10 @@
 // figures; the stamps of a consul's visa say who remembers.
 //   view.gauges({hours, money, shown, lines} | null) — the notebook (Time in hand) low on the left, the bag (the
 //     carpet-bag) low on the right, each once the player has met it; null — none (the map, «The route»)
-//   view.hours(state, was, line) — the old figure struck out, the new one written; `line` beside it a while
+//   view.hours(state, was, line) — the old figure struck out, the new one written, and its entry under it: the
+//     change and `line`, what it was for
 //   view.money(state, was) — the sum changes; spent: notes fly from the bag
-//   view.hero('fogg' | 'pp') — the medallion of his face, a moment, high in the middle
+//   view.hero('fogg' | 'pp') — the medallion of his face, a moment, high on the left
 //   view.giveBook({signal}) → once the player has touched the notebook (it glows till then)
 //   view.toast(text, kind) — a card under the tools: 'rule' (what a figure means, the first time), 'stamp' (a visa
 //     stamp: who remembers), 'stamp cold'; three at most
@@ -140,38 +141,50 @@ export function ui(layer) {
   };
 }
 
-// Fogg's notebook, low on the left: a narrow ruled page, «Time in hand» and the figure in an even hand; a change strikes the
-// old figure out above the new one; the lines others wrote below — Aouda's slanted, Passepartout's a scrawl
+// Fogg's notebook, low on the left: a narrow ruled page, «Time in hand» and the figure in an even hand; under it the
+// last entries, each its change and what it was for (`+2 d · The Mongolia: two days early`); a change strikes the old
+// figure out above the new one and writes its entry — changes coming close together are written one after another,
+// each given its time to be read; the lines others wrote below — Aouda's slanted, Passepartout's a scrawl
+const ENTRIES = 3, READ = 3500; // the entries the page shows; ms each new one is given before the next is written
 function bookGauge(layer) {
   const box = el('div', 'book', layer);
   const page = el('div', 'page', box);
   el('p', 'head', page).textContent = tr('Time in hand');
-  const was = el('p', 'was', page), now = el('p', 'now', page), note = el('p', 'note', page);
+  const was = el('p', 'was', page), now = el('p', 'now', page), log = el('div', 'log', page);
   const lines = el('div', 'lines', page);
-  let noteTimer = 0;
-  const write = state => {
-    now.textContent = hoursText(state.hours);
-    lines.replaceChildren(...(state.lines ?? []).map(l => Object.assign(el('p', `hand-${l.hand}`), { textContent: BOOK[l.line] })));
+  const queue = [];
+  let writing = false;
+  const hand = state => lines.replaceChildren(...(state.lines ?? []).map(l => Object.assign(el('p', `hand-${l.hand}`), { textContent: BOOK[l.line] })));
+  // the next change in the queue written: struck, the new figure, its entry
+  const next = () => {
+    const c = queue.shift();
+    writing = !!c;
+    if (!c) return;
+    was.textContent = hoursText(c.old);
+    was.classList.remove('struck');
+    void was.offsetWidth;
+    was.classList.add('struck');
+    now.textContent = hoursText(c.now);
+    now.classList.remove('fresh');
+    void now.offsetWidth;
+    now.classList.add('fresh');
+    const entry = el('p', 'entry fresh', log);
+    entry.textContent = c.line ? `${hoursText(c.now - c.old)} · ${c.line}` : hoursText(c.now - c.old);
+    while (log.childElementCount > ENTRIES) log.firstElementChild.remove();
+    setTimeout(next, READ);
   };
   return {
     show(met, state) {
       box.classList.toggle('on', !!met);
-      if (met) write(state);
+      if (!met) return;
+      if (!writing) now.textContent = hoursText(state.hours);
+      hand(state);
     },
     change(state, old, line) {
       if (!state.shown.hours) return;
-      was.textContent = hoursText(old);
-      was.classList.remove('struck');
-      void was.offsetWidth;
-      was.classList.add('struck');
-      write(state);
-      now.classList.remove('fresh');
-      void now.offsetWidth;
-      now.classList.add('fresh');
-      clearTimeout(noteTimer);
-      note.textContent = line ?? '';
-      note.classList.toggle('on', !!line);
-      noteTimer = setTimeout(() => note.classList.remove('on'), 6000);
+      queue.push({ old, now: state.hours, line });
+      hand(state);
+      if (!writing) next();
     },
     give(signal) {
       box.classList.add('on', 'asked');

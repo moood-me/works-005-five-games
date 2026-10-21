@@ -57,7 +57,7 @@ const MINIGAMES = {
   dash: { scene: 'jungle', keys: ['charge', 'scatter', 'grab', 'guide_seen', 'litter_lane', 'kiouni_lane'], points: ['aouda#hands'], result: ['hours'] },
   'stay-awake': { scene: 'harbour', keys: ['boatman', 'message', 'pp_stumble', 'pp_sway', 'daze', 'pp_walk'], listens: ['pp_walk_at'], points: [], result: ['told'] },
   typhoon: { scene: 'sea', keys: ['green_water', 'wave', 'wave_from', 'wave_h', 'helm', 'heel'], points: [], result: ['hours'] },
-  pyramid: { scene: 'harbour', keys: ['pyramid', 'tilt', 'fogg_present'], points: [], result: ['choice'] },
+  pyramid: { scene: 'harbour', keys: ['pyramid', 'tilt', 'fogg_present'], points: ['fogg#head'], result: ['choice'] },
   coupling: { scene: 'prairie', keys: ['pp_car', 'uncouple'], listens: ['swing_at'], points: ['chain#c1', 'chain#c2', 'chain#c3', 'coupling#pin'], result: ['hours'] },
   sail: { scene: 'prairie', keys: ['sledge', 'drift', 'wolves', 'wind', 'sheet', 'sl_speed'], points: [], opts: ['alone'], result: ['hours', 'caught'] },
   boilers: { scene: 'deck', keys: ['fire', 'speed', 'speedy_grief', ...PARTS, ...PARTS.map(p => `drag_${p}`), ...PARTS.map(p => `locked_${p}`)],
@@ -383,7 +383,7 @@ function watched(g, j, ch, here, events, seen) {
       if (!during && !open) events.push(['say', 0.3 + 0.06 * text.length]);
       return g.say(who, text, at);
     },
-    choose(choice, offers) {
+    choose(choice, offers, how) {
       const what = `the choice “${choice ?? Object.keys(offers).join(', ')}”`, ids = Object.values(offers).flat().map(o => o.id);
       if (shown(what)) for (const ref in offers) offer(ref, what);
       if (choice != null) {
@@ -402,7 +402,7 @@ function watched(g, j, ch, here, events, seen) {
         seen.offered[choice] = ids;
       }
       events.push(['act']);
-      return g.choose(choice, offers);
+      return g.choose(choice, offers, how);
     },
     async play(minigame, opts = {}) {
       const m = GAMES.get(minigame), T = m && MINIGAMES[m.name];

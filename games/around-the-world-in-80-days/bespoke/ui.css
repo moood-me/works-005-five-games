@@ -25,7 +25,7 @@
   50% { opacity: 0.95; } 58% { opacity: 1; } 67% { opacity: 0.97; } 75% { opacity: 1; } 83% { opacity: 0.95; } 92% { opacity: 0.99; } 100% { opacity: 1; } }
 
 /* the notebook (Time in hand) low on the left: a narrow ruled page; the carpet-bag low on the right */
-#layer .book { position: absolute; left: 14px; bottom: 64px; width: 150px; opacity: 0; transition: opacity 1.6s ease;
+#layer .book { position: absolute; left: 14px; bottom: 64px; width: 190px; opacity: 0; transition: opacity 1.6s ease;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55)); rotate: -2deg; }
 #layer .book.on { opacity: 1; }
 #layer .book .page { position: relative; padding: 8px 12px 10px 18px; color: var(--ink); font-family: var(--title);
@@ -38,9 +38,8 @@
 #layer .book .now { margin: 0; font: 600 22px/26px var(--title); }
 #layer .book .now.fresh { animation: ink-in 1.4s ease; }
 @keyframes ink-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
-#layer .book .note { margin: 0; max-height: 0; overflow: hidden; font: italic 13px/17px var(--title); opacity: 0;
-  transition: opacity 1s ease, max-height 1s ease; }
-#layer .book .note.on { max-height: 40px; opacity: 0.85; }
+#layer .book .log p { margin: 0; font: italic 13px/17px var(--title); opacity: 0.8; }
+#layer .book .log p.fresh { animation: ink-in 1.4s ease; }
 #layer .book .lines p { margin: 2px 0 0; font: 14px/18px var(--title); }
 #layer .book .lines .hand-aouda { font-style: italic; color: #1f3a6e; rotate: -3deg; }
 #layer .book .lines .hand-pp { font: 600 15px/18px "Segoe Print", "Comic Sans MS", cursive; color: #2b2b2b; rotate: 2deg; }
@@ -59,8 +58,9 @@
 @keyframes note-out { from { opacity: 1; translate: 0 0; rotate: 0deg; } to { opacity: 0; translate: var(--dx) -150px; rotate: var(--r); } }
 @keyframes note-in { from { opacity: 0; translate: var(--dx) -150px; rotate: var(--r); } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
 
-/* the medallion: whose step it is — an engraved oval with his silhouette, a moment, high in the middle */
-#layer .medal { position: absolute; top: calc(var(--below-header) + 14px); left: 50%; translate: -50% 0; display: grid; justify-items: center;
+/* the medallion: whose step it is — an engraved oval with his silhouette, a moment, high on the left (the middle is the
+   mini-games' plate) */
+#layer .medal { position: absolute; top: calc(var(--below-header) + 14px); left: 14px; display: grid; justify-items: center;
   opacity: 0; transition: opacity 0.6s ease; }
 #layer .medal.on { opacity: 1; }
 #layer .medal .face { width: 74px; height: 92px; border-radius: 50%; background-color: var(--card); border: 2px solid var(--ink);
@@ -275,6 +275,7 @@
 #underlay .map.route .tree.dense{--s:.88}
 #underlay .map.route .tree.current{box-shadow:0 calc(var(--u) * 4) calc(var(--u) * 26) rgba(40,26,12,.55),0 0 0 calc(var(--u) * 3) rgba(163,39,29,.25)}
 #underlay .map.route .tree .num{letter-spacing:.3em}
+#underlay .map.route .row .name,#underlay .map.route .opt.chosen{font-weight:600}
 #underlay .map.route .tree .heading{margin-top:calc(var(--u) * 4);font:italic calc(var(--u) * 16)/1.25 var(--f-text);color:var(--c-name)}
 /* a chapter to come: a blank page, its number only */
 #underlay .map.route .tree.future{background:#e8dcbc;opacity:.82}

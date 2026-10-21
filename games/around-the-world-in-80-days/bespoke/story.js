@@ -20,8 +20,9 @@
 //   g.say(who, text, at) — someone of the game's people (people.json: bespoke.say) says it, over `at` ('id' |
 //     'id#point'; 'narrator' — low in the middle), in their voice; → a breath after it has been heard (unvoiced: once it
 //     could be read)
-//   g.choose(choice, {ref: options, …}) — the player presses one of the points, then one of its options ([{id,
-//     label}]: petals, one too); → the option's id, kept in state.choices[choice] (null: not on the chapter's map)
+//   g.choose(choice, {ref: options, …}, {show}) — the player presses one of the points, then one of its options ([{id,
+//     label}]: petals, one too); → the option's id, kept in state.choices[choice] (null: not on the chapter's map);
+//     show — s before the ghost shows how (the play's first press: at once)
 //   g.beat(name, {wait}) — a beat of the shown scene's film (module `beats`); → once it has ended ('beat:<name>'),
 //     or at once with wait: false. To wait for a moment inside a beat, make the g.told before g.beat. A cut to a beat
 //     that is neither the next in the scene's table nor one that goes on from the one before: named ahead in the key
@@ -39,8 +40,9 @@
 //   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… will remember
 //     this» (REMEMBERS)
 //   g.mark(key, value, text) — remembered (state.marks[key]); text — a stamp, if any
-//   g.book(line, hand) — the player gives the notebook (touches it), and the line BOOK[line] is written in it by
-//     `hand` ('aouda' | 'pp' | 'fogg'); it stays there (state.lines: {line, hand} — its name, not its text)
+//   g.book(line, hand) — the line BOOK[line] is written in the notebook by `hand` ('aouda' | 'pp' | 'fogg'): Aouda's
+//     or Passepartout's — once the player has given it (touched it: it glows, a hint says who asks for it); Fogg's — at
+//     once; it stays there (state.lines: {line, hand} — its name, not its text)
 //   g.letter({text, sign, kind, voice}) — a sheet the player unfolds, reads and folds again (ui.js)
 //   g.title(text) — words over the scene, as a title of the old edition; → once they have gone
 //   g.done() → once the step's code is through: the page's ⏭ taken back; g.leave() — the step left behind (game.js)
@@ -73,8 +75,9 @@ export const RULES = {
 };
 // the stamp of who remembers (g.relate)
 export const REMEMBERS = { aouda: tr('Aouda will remember this'), fix: tr('Fix will remember this'), pp: tr('Passepartout will remember this') };
-// the lines written in the notebook (g.book), by their names
+// the lines written in the notebook (g.book), by their names; who asks for it to write one
 export const BOOK = { cousin: tr('Hong Kong. Cousin Jeejeeh'), day: tr('+1 day: we travelled towards the sun!') };
+const ASKS = { aouda: tr('Aouda asks for the notebook: touch it to give it to her'), pp: tr('Passepartout asks for the notebook: touch it to give it to him') };
 export const ENDINGS = [
   { id: 'door', label: tr('Here I am, gentlemen') }, { id: 'friday', label: tr('On time') },
   { id: 'lost', label: tr('Lost — and won') }, { id: 'sunday', label: tr('Two Wednesdays') },
@@ -254,13 +257,13 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (fast) await alive(land());
       return alive(b.say(who, text, { at })).then(after);
     },
-    async choose(choice, offers) {
+    async choose(choice, offers, { show } = {}) {
       if (gone()) return never;
       const offer = async () => {
         if (fast) await alive(land());
         choosing = true;
         ahead();
-        try { return await alive(hub.offer(offers)); } finally { choosing = false; ahead(); }
+        try { return await alive(hub.offer(offers, { show })); } finally { choosing = false; ahead(); }
       };
       // unseen: as the play chose it — else the first offered; one it chose that isn't here (the moment passed then):
       // offered once seen
@@ -361,7 +364,11 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       state.lines = [...(state.lines ?? []), { line, hand }];
       if (unseen()) return;
       if (fast) await alive(land());
-      await alive(view.giveBook({ signal: left.signal }));
+      if (hand !== 'fogg') {
+        const off = g.hint(ASKS[hand]);
+        await alive(view.giveBook({ signal: left.signal }));
+        off();
+      }
       view.gauges(state);
       await sleep(2500);
     },
@@ -397,10 +404,10 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 
 // The player's choices and what the scenes tell, listened to once for the whole play (bespoke.on keeps a listener for
 // good) — game.js owns it: whatever is being chosen now gets the action; whoever waits for a tell hears it.
-//   hub.offer({ref: options}) → the action once the player has chosen it (what was offered before is dropped): a
-//     plain choice of the language of mini-games — a mark on each point; a touch opens its options as petals, one
-//     too (what is chosen is seen in words first), a petal pressed is chosen; one who touches no mark for SHOW s is
-//     shown how: the ghost finger on each in turn
+//   hub.offer({ref: options}, {show}) → the action once the player has chosen it (what was offered before is
+//     dropped): a plain choice of the language of mini-games — a mark on each point; a touch opens its options as
+//     petals, one too (what is chosen is seen in words first), a petal pressed is chosen; one who touches no mark for
+//     `show` s (SHOW) is shown how: the ghost finger on each in turn
 //   hub.ask(at, options) → the action chosen, or null: a mark of the plain choice born open where the game's own
 //     drawing was pressed (at: fn → {x, y} page px — map.js), its options out as petals at once; a touch off them folds
 //     it — null, the mark gone (nothing waits idle)
@@ -420,13 +427,13 @@ export function listen(b) {
     for (const w of waiting) if (w.text === text) { waiting.delete(w); clearTimeout(w.timer); w.ok(true); }
   });
   return {
-    offer(offers) {
+    offer(offers, { show = SHOW } = {}) {
       offered?.leave();
       const mg = offered = b.minigame.start({ plate: false }), refs = Object.keys(offers), presses = [];
       // (the thing itself glows when it alone is offered: one breath in one place)
       if (refs.length === 1) mg.glow(refs[0].split('#')[0]);
       // (the play's clock: it stands with the pause)
-      const ghost = setTimeout(() => mg.show({ gestures: presses }), SHOW * 1000);
+      const ghost = setTimeout(() => mg.show({ gestures: presses }), show * 1000);
       mg.on('end', () => clearTimeout(ghost));
       return new Promise(ok => {
         const chosen = (mark, action) => { mg.snap({ at: mark }); mg.leave(); offered = null; ok(action); };

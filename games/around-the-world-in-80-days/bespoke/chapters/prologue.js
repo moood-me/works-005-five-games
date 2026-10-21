@@ -43,7 +43,8 @@ export default {
       await whist;
       await g.say('fogg', 'The unforeseen does not exist');
       await g.beat('wager');
-      await g.choose(null, { 'fogg#hands': [{ id: 'bet', label: tr('I bet twenty thousand') }] });
+      // (the play's first press: the ghost shows it at once)
+      await g.choose(null, { 'fogg#hands': [{ id: 'bet', label: tr('I bet twenty thousand') }] }, { show: 1 });
       const down = g.told('wager_down:cards-down');
       const wager = g.beat('wager_down');
       await down;

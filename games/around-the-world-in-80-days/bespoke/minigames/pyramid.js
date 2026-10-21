@@ -3,8 +3,9 @@
 // «noses» climb up and sway it (`push`). Level — the tiers grow (`pyramid` 0 → 1), crooked — they stand; swayed to the
 // edge — a mistake, a tier sinks. At FOGG — Fogg sits down in the front row (`fogg_present` 1; the scene says
 // `pyramid:fogg`). From that instant — a choice by the hands, the response even: hold to the end (keep it level up to
-// `pyramid` 1) or let go (the finger off for LET_GO s — the pyramid collapses). The ghost finger shows both ways; while
-// the finger is off, the plate's shade grows to the collapse (waiting is a way too, and it is seen).
+// `pyramid` 1) or let go (the finger off for LET_GO s — the pyramid collapses). The ghost finger shows both ways; and
+// the letting go is seen from the instant Fogg sits: a quiet ring on him (`fogg#head`), its time arc running down while
+// the finger is off — full again while it holds —, the plate's shade growing with it (waiting is a way too).
 //   What he does: Passepartout, hired penniless into the troupe, holds the acrobats' tiers on his shoulders.
 //   What he wants: to hold out to the end of the act, not to let his fellows down — and suddenly he sees his master in
 //     the front row.
@@ -18,7 +19,7 @@ const ZONE = 0.5, EDGE = 0.95; // the zone's width; the lean — a mistake
 const SLIP = 0.08; // pyramid: a tier sinks
 const FOGG = 0.5; // pyramid: Fogg sits down in the front row
 const SEAT = 3; // s: wait for `pyramid:fogg` no longer
-const LET_GO = 1.5; // s without a finger — let go
+const LET_GO = 5; // s without a finger — let go
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const sway = (t, h) => 0.2 * Math.sin(1.1 * t) + 0.12 * Math.sin(2.7 * t + 1) + 0.06 * h;
 
@@ -33,7 +34,7 @@ export default {
     send('pyramid', 0); send('tilt', 0); send('fogg_present', 0);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
     b.minigame.tricks.teach(mg, [lead], { id: 'pyramid' });
-    let h = 0, wobbling = false, slips = 0, fogg = false, seated = false, offSince = null, choice = null;
+    let h = 0, wobbling = false, slips = 0, fogg = false, seated = false, offSince = null, choice = null, master = null;
     const t0 = mg.t;
     const done = await until(mg, ({ t, dt }) => {
       const now = t - t0, s = lead.state;
@@ -53,6 +54,7 @@ export default {
             if (signal.aborted) return;
             seated = true;
             offSince = s.held ? null : mg.t;
+            master = mg.mark({ at: 'fogg#head', kind: 'ring', quiet: true, time: 1 });
             mg.plate.set({ phrase: tr('In the front row, watch in hand, sits Mr. Fogg'), glow: null });
             mg.show({ gestures: [lead] }).finished.then(() => { if (!choice && !signal.aborted) mg.show({ handsOff: true }); });
           });
@@ -65,10 +67,13 @@ export default {
       else if (offSince == null) offSince = t;
       if (offSince != null && t - offSince >= LET_GO) choice = 'drop';
       if (h >= 1) choice = 'hold';
-      mg.plate.set({ fill: h, shade: offSince == null ? null : Math.min(1, (t - offSince) / LET_GO) });
+      const off = offSince == null ? 0 : Math.min(1, (t - offSince) / LET_GO);
+      master.set({ time: 1 - off });
+      mg.plate.set({ fill: h, shade: offSince == null ? null : off });
       return !!choice;
     });
     if (!done) return this.skipped;
+    master.remove();
     await mg.end({ as: 'neutral' });
     return { choice };
   },
