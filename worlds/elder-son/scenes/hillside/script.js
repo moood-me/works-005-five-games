@@ -126,14 +126,11 @@ scene.on('change', 'sar_go', v => {
     const father = s.person('sarafanov');
     father.gait(null);
     father.mood('neutral');
+    // the camera with the two (where they stand now)
+    s.path(L.CAMKEYS, [L.pairCam(num('busygin_a'))], { over: 1.2, ease: 'inOut' });
     for (const stop of [...LOOKS.filter(u => u > L.roadU(num('sarafanov_a')) + 0.01), 1]) {
       const to = L.roadAt(stop);
-      const w = father.walk([to]);
-      await s.wait(0.1);
-      const over = Math.max(1, w.remaining || w.duration || 1);
-      const cam = L.trailCam(to[0]);
-      s.path(L.CAMKEYS, [cam], { over, ease: 'linear' });
-      await w;
+      await father.walk([to]);
       if (stop === 1) break;
       const look = father.do('look_back');
       s.tell('sar_go:look');
@@ -146,9 +143,10 @@ scene.on('change', 'sar_go', v => {
   }, { name: 'sar_go' });
 });
 
-let trailing = false;
+let trailing = false, rising = false;
+// (not while they are getting up from a crouch: they set off once up)
 function trail() {
-  if (num('duck') === 0 && num('follow') > num('follow_at') + 0.002) {
+  if (num('duck') === 0 && !rising && num('follow') > num('follow_at') + 0.002) {
     if (!trailing) go();
   } else if (trailing) trailSeq.cancel();
 }
@@ -156,8 +154,18 @@ function go() {
   trailing = true;
   trailSeq = scene.sequence(async s => {
     try {
+      // the two creep on toward the club (stopped where the game stops them); the camera goes with them half a second at
+      // a time, to where Busygin will be (he may stand up from a crouch first: it waits for him, never runs ahead)
       const end = L.roadAt(1);
-      await s.all(s.person('busygin').walk([[end[0] - 0.8, end[1] + 0.4]]), s.person('nina').walk([[end[0] - 1.7, end[1] + 0.8]]));
+      let done = false;
+      s.all(s.person('busygin').walk([[end[0] - 0.8, end[1] + 0.4]]), s.person('nina').walk([[end[0] - 1.7, end[1] + 0.8]])).then(() => { done = true; });
+      let last = num('busygin_a');
+      while (!done) {
+        const now = num('busygin_a');
+        s.path(L.CAMKEYS, [L.pairCam(now + Math.max(0, now - last))], { over: 0.5, ease: 'linear' });
+        last = now;
+        await s.wait(0.5);
+      }
     } finally {
       trailing = false;
     }
@@ -173,10 +181,16 @@ scene.on('change', 'duck', v => {
     bus().do('crouch');
   } else if (crouched) {
     crouched = false;
+    rising = true;
     pairSeq = scene.sequence(async s => {
-      await s.all(s.person('nina').do('crouch_rise'), s.person('busygin').do('crouch_rise'));
-      s.person('nina').do('stand');
-      s.person('busygin').do('stand');
+      try {
+        await s.all(s.person('nina').do('crouch_rise'), s.person('busygin').do('crouch_rise'));
+        s.person('nina').do('stand');
+        s.person('busygin').do('stand');
+      } finally {
+        rising = false;
+      }
+      trail();
     }, { name: 'rise_pair' });
   }
 });

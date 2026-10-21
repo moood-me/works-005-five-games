@@ -111,8 +111,10 @@ const CAMKEYS = ['camera_x', 'camera_z', 'camera_yaw', 'camera_h'];
 // “Arm in Arm”: the camera goes down the slope with the pair, a fixed way off them (as at the end of `meet`)
 const DOWN_CAM = { dx: -2.4, dz: -2.6, yaw: 52 };
 const downCam = p => [p[0] + DOWN_CAM.dx, p[1] + DOWN_CAM.dz, DOWN_CAM.yaw, 0];
-// “Following”: the camera along the road, behind the road's far edge, the father a little right of its middle
-const trailCam = a => [a - 2.4, -3.2, 0, 0];
+// “Following”: the camera goes with the two (`a` — where Busygin is along the road), a few steps behind them on the
+// road's near side, looking along it: the two creeping in the near left, the father ahead of them right of the middle —
+// when he looks back, his face to us, and whether they stand or crouch is seen with it
+const pairCam = a => [a - 3.8, 3.2, 64, 0.1];
 
 // a person at a place, doing nothing, looking at nothing, here
 const AT = (id, p, turn, extra = {}) => ({
@@ -316,7 +318,7 @@ function film(scene) {
         const sar = s.person('sarafanov');
         await sar.walk(PATH.slice(3, 5));
         const road = sar.walk([PATH[5], [GATE + 0.8, ROAD_Y], SPOT.gone]);
-        const [x, z, yaw, h] = trailCam(SPOT.gone[0]);
+        const [x, z, yaw, h] = pairCam(SPOT.pillar.busygin[0]);
         camTo(s, { camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h }, 4.5, 'inOut');
         await road;
         await sar.turn(90);
@@ -356,4 +358,4 @@ function film(scene) {
 const duskOf = hour => span(hour, 0.72, 0.8);
 
 return { height, ROAD_D, FENCE_D, GATE, BIRCH, GRAVE, PATH, ICE, pathAt, pathLen, pathU, pair, pairWay, BUS_SIDE, ROAD_A0, ROAD_A1, ROAD_Y, roadAt, roadU, CLUB, SPOT, FUNERAL, AWAY,
-  PEOPLE, CAM, CAMKEYS, downCam, trailCam, FROM, END, film, duskOf, span, clamp, smooth };
+  PEOPLE, CAM, CAMKEYS, downCam, pairCam, FROM, END, film, duskOf, span, clamp, smooth };
