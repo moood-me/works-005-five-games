@@ -112,7 +112,7 @@ const SPOT = {
   gate: { nina: [19.55, 8.55], kudimov: [20.45, 8.6] },
   // “Buckets”: at the barrel (filling), before the shed (throwing); the neighbours' throwing places
   barrel: [24.0, 8.55],
-  throw: [29.0, 9.75],
+  throw: [28.6, 9.8],
   nb1: [27.75, 9.6], nb2: [30.25, 9.55],
   // after the fire: the half-ring before the shed; Vasenka aside in the open wicket of the fence between the yards,
   // Busygin by the fence near him; where Busygin steps to take the blame, where Silva comes at him; where the boy owns
@@ -898,7 +898,9 @@ async function neighbourThrow(s, id, at, k) {
   p.gait(null);
   await p.turn(k ? 340 : 25);
 }
-// “Windows” (`knock`): N — to window N, knock; 0 — back to Silva
+// “Windows” (`knock`): N — to window N, knock; 0 — back to Silva. A long way between windows (they are up to 24 m apart)
+// he runs, frozen and hurrying, and walks the last step to the glass: a knock comes within ≈ 3…8 s of the press
+const RUN_FROM = 4, LAST_STEP = 1.2;
 async function knock(s, n) {
   const bus = s.person('busygin');
   bus.look(null);
@@ -908,7 +910,13 @@ async function knock(s, n) {
     bus.look('win2');
     return;
   }
-  const to = knockSpot(n);
+  const to = knockSpot(n), a = Number(s.get('busygin_a')), d = Number(s.get('busygin_d'));
+  const far = Math.hypot(to[0] - a, to[1] - d);
+  if (far > RUN_FROM) {
+    const k = 1 - LAST_STEP / far;
+    await bus.walk([[a + (to[0] - a) * k, d + (to[1] - d) * k]], { gait: 'run' });
+    bus.gait(null);
+  }
   await bus.walk([to]);
   await bus.turn(0);
   bus.look(`win${n}`);
@@ -919,13 +927,17 @@ async function knock(s, n) {
   s.tell('knock:done');
 }
 const near = (s, id, p, tol = 0.35) => Math.hypot(Number(s.get(`${id}_a`)) - p[0], Number(s.get(`${id}_d`)) - p[1]) < tol;
-// “Buckets” (`buckets`): fill — to the barrel, a full bucket up (buckets:full); throw — carried to the shed, thrown
-// (buckets:splash); none — the bucket set down on the snow, he stands where he stands
+// “Buckets” (`buckets`): fill — back to the barrel at a run with the empty bucket, a full bucket up (buckets:full); throw
+// — carried to the shed, thrown (buckets:splash); none — the bucket set down on the snow, he stands where he stands. A
+// round, barrel — shed — barrel, ≈ 11 s
 async function buckets(s, v) {
   const bus = s.person('busygin');
   bus.look(null);
   if (v === 'fill') {
-    if (!near(s, 'busygin', SPOT.barrel)) await bus.walk([SPOT.barrel]);
+    if (!near(s, 'busygin', SPOT.barrel)) {
+      await bus.walk([SPOT.barrel], { gait: 'run' });
+      bus.gait(null);
+    }
     await bus.turn(270);
     bus.with(['bucket']);
     bus.look('barrel');

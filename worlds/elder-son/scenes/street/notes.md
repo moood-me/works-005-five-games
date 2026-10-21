@@ -109,10 +109,12 @@ Seconds — as `check.mjs` plays them (the gait 1.3 m/s; the real gaits may diff
 
 The actions by key (the script):
 
-- `knock` (1…5 / 0): Busygin to window N, a knock — `knock:hit` (0.6 s into it), `knock:done`; 0 — back to Silva. The
+- `knock` (1…5 / 0): Busygin to window N (more than 4 m off — at a run, `run`, the last step walked), a knock —
+  `knock:hit` (0.6 s into it; ≈ 3 s after the press for the next window, ≈ 8.5 s for the far end), `knock:done`; 0 —
+  back to Silva. The
   window itself (the silhouette, going dark) the game sets by `winN`.
-- `buckets` (`fill` · `throw` · `none`): to the barrel, a full bucket — `buckets:full`; carried to the shed, thrown —
-  `buckets:splash` (the splash burst); `none` — the bucket put down.
+- `buckets` (`fill` · `throw` · `none`): back to the barrel at a run, a full bucket — `buckets:full`; carried to the
+  shed (`carry_walk`, 4.7 m), thrown — `buckets:splash` (the splash burst); a round ≈ 11 s; `none` — the bucket put down.
 - `run` / `run_at` / `look_back`: he runs along the street (the gait `run`, at its own pace) while `run` is ahead of
   where he is, and stops when it is not; `run_at` (0…1, ten times a second) — where he is; Silva, if he came out, runs
   on ahead by himself at the first step and is gone up the path; `look_back` 1 — he stands turned to the kitchen
