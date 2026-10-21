@@ -6,7 +6,8 @@
 const L = scene.lib;
 scene.kit.beats.play(scene, L.film(scene));
 
-const PANES = ['win1', 'win2', 'win3', 'win4', 'win5', 'mak_window'];
+// (a beat's cut brings the panes' own keys with it: lib.panes)
+const PANES = L.PANES;
 function pane(w, now) {
   const v = scene.get(w);
   const lit = v > 0 ? 1 : 0, who = v === 2 ? 1 : 0;
@@ -42,20 +43,61 @@ for (const w of PANES) pane(w, true);
 doors();
 late();
 
+// the mini-games' actions live till the next beat begins: a beat's start stops them (else a walk back to Silva would
+// take Busygin out of the beat that follows)
+const acts = { knock: null, buckets: null };
+const stopActs = () => { for (const k in acts) if (acts[k]) { acts[k].cancel(); acts[k] = null; } };
 // “Windows”: N — to window N and knock; 0 — back to Silva
 scene.on('change', 'knock', n => {
-  scene.sequence(async s => { await L.knock(s, n); }, { name: 'knock' });
+  acts.knock = scene.sequence(async s => { await L.knock(s, n); }, { name: 'knock' });
 });
 // “Buckets”: fill — a full bucket at the barrel; throw — carried to the shed and thrown; none — put down
 scene.on('change', 'buckets', v => {
-  scene.sequence(async s => { await L.buckets(s, v); }, { name: 'buckets' });
+  acts.buckets = scene.sequence(async s => { await L.buckets(s, v); }, { name: 'buckets' });
 });
+
+// the neighbours at the burning shed (`crowd`, set at the end of the beat `fire`): each throws, goes back for more and
+// comes again, never in step, as long as the fire burns
+const NB = [['neighbor1', L.SPOT.nb1, 0], ['neighbor2', L.SPOT.nb2, 1]];
+const crowd = { tick: null, throws: {} };
+function crowdOff() {
+  if (crowd.tick) { crowd.tick.cancel(); crowd.tick = null; }
+  for (const id in crowd.throws) if (crowd.throws[id]) crowd.throws[id].cancel();
+  crowd.throws = {};
+}
+function crowdOn() {
+  crowdOff();
+  const from = scene.time;
+  crowd.tick = scene.every(0.5, () => {
+    if (!((+scene.get('fire') || 0) > 0.03)) return;
+    for (const [id, at, k] of NB) {
+      if (crowd.throws[id] || scene.time < from + 0.9 + 2.1 * k) continue;
+      crowd.throws[id] = scene.sequence(async s => {
+        try { await L.neighbourThrow(s, id, at, k); } finally { crowd.throws[id] = null; }
+      }, { name: `throw_${id}` });
+    }
+  });
+}
+scene.on('change', 'crowd', v => (v ? crowdOn() : crowdOff()));
+if (scene.get('crowd')) crowdOn();
 
 // “Running”: the game moves `run` ahead of where he is (held) or to where he is (let go); he runs along the street at his
 // own pace while `run` is ahead of him, and stops when it is not; `run_at` — where he is, ten times a second. Silva (if
 // he came out) runs on ahead by himself at the first step and is gone up the path. `look_back` 1 — he stands turned to
 // the kitchen window. The camera goes along beside him on the near side.
 const R = { on: clamp01(scene.get('run')) > 0, walk: null };
+function runOff() {
+  if (R.walk) { const w = R.walk; R.walk = null; w.cancel(); }
+  R.on = false;
+}
+
+// a beat begins: what the mini-games and the neighbours were doing stops
+scene.on('change', 'beat', v => {
+  if (!v) return;
+  stopActs();
+  crowdOff();
+  runOff();
+});
 function runStep() {
   if (!R.on || !scene.get('busygin_here')) return;
   const a = +scene.get('busygin_a'), d = +scene.get('busygin_d');

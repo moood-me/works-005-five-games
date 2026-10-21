@@ -50,11 +50,11 @@ Seconds — as `check.mjs` plays them (the gait 1.3 m/s; the real gaits may diff
 - `walk` (≈ 20 s): down the bank from the platform's path (the camera turning with them); a cut — along the street
   beside them to the windows; a cut to the side medium under the street lamp, faces in its light: Silva `smile`,
   Busygin `tired` — `walk:stop`.
-- `knock_ready` (2 s, after `walk`): a cut to the near fence — the five windows in the middle 4:3 (x −0.56…0.57).
+- `knock_ready` (2 s): a cut to the near fence (made ready while `walk` plays) — the five windows in the middle 4:3 (x −0.56…0.57).
 - `last_window` (≈ 23 s, by a cut): the windows dark, the snow thicker; along the street to the corner before the shed
   (the camera following); a cut to the side: both in profile toward her lit window, the kitchen window on the left
   (x −0.4), hers on the right (0.4) — `last_window:corner`.
-- `neighbor` (≈ 30 s): from just behind the two (their backs in the foreground — the device). The door opens,
+- `neighbor` (≈ 31 s: it holds for L09, L10 at her window): from just behind the two (their backs in the foreground — the device). The door opens,
   Sarafanov in the hall comes out; the camera turns with him to her window; a cut near him: he stands right of it
   turned to the glass (profile, ≈ 0.6 of the frame, in her window's light), knocks — `neighbor:knock`; a silhouette —
   `neighbor:answer` (L09, L10: `sad`, a guilty `smile`); dark; a cut back behind the two: he goes back past the two (two metres before them, not turning his head) through the wicket
@@ -76,10 +76,10 @@ Seconds — as `check.mjs` plays them (the gait 1.3 m/s; the real gaits may diff
 - `evening` (≈ 26 s): the second night, three shots — the street from the near fence (the windows dark where he
   knocked, by `knocked`); the yard from across the street: Silva from the Sarafanovs' door to Makarskaya's, knocks, she
   lets him in, Vasenka on the dark porch; Vasenka close (`sad`), her door shutting off the frame — `evening:in`.
-- `fire` (≈ 13 s, after `evening`): later — a cut to the wide yard; the shed burns (`fire` → 0.6); Makarskaya runs out
+- `fire` (≈ 13 s): later — a cut to the wide yard (made ready while `evening` plays); the shed burns (`fire` → 0.6); Makarskaya runs out
   — `fire:cry`; Silva with his smoking sleeve; the neighbours with buckets out of their door; Busygin out of the
   window and the door to the barrel — `fire:ready`: the pose for “Buckets” (`barrel` x −0.49, `shed` 0.07). The
-  neighbours throw by themselves as long as `fire` > 0.03.
+  neighbours throw by themselves as long as `fire` > 0.03 (`crowd`: the script, a throw at a time; a beat's start stops them).
 - `after_fire` (≈ 10 s, by a cut): the shed smouldering (`fire` 0.2), steam, by `shed_left`; the half-ring; Silva turns
   on them — `after_fire:who` (L84, `angry`); a cut to Vasenka close, full face, in the shed's glow (`afraid`, the matchbox); back —
   the pose for the choice: `vasenka` (x −0.21) and `makarskaya` (0.31).
@@ -127,16 +127,16 @@ The actions by key (the script):
 
 ```json
 {"beats": {"walk": {"after": [], "tells": ["walk:stop"], "seconds": 20, "show": false},
- "knock_ready": {"after": ["walk"], "tells": [], "seconds": 2, "show": false},
+ "knock_ready": {"after": [], "tells": [], "seconds": 2, "show": false},
  "last_window": {"after": [], "tells": ["last_window:corner"], "seconds": 23, "show": false},
- "neighbor": {"after": [], "tells": ["neighbor:knock", "neighbor:answer", "neighbor:gone", "neighbor:vasya"], "seconds": 30, "show": false},
+ "neighbor": {"after": [], "tells": ["neighbor:knock", "neighbor:answer", "neighbor:gone", "neighbor:vasya"], "seconds": 31, "show": false},
  "porch": {"after": ["neighbor"], "tells": ["porch:knock", "porch:open"], "seconds": 14, "show": false},
  "shut": {"after": ["porch"], "tells": ["shut:closed", "shut:knock", "shut:again"], "seconds": 16, "show": false},
  "in": {"after": ["porch", "shut"], "tells": ["in:inside"], "seconds": 12, "show": false},
  "return": {"after": [], "tells": ["return:window", "return:door"], "seconds": 19, "show": false},
  "gate": {"after": [], "tells": ["gate:watch", "gate:gone"], "seconds": 20, "show": false},
  "evening": {"after": [], "tells": ["evening:in"], "seconds": 26, "show": false},
- "fire": {"after": ["evening"], "tells": ["fire:cry", "fire:ready"], "seconds": 13, "show": false},
+ "fire": {"after": [], "tells": ["fire:cry", "fire:ready"], "seconds": 13, "show": false},
  "after_fire": {"after": [], "tells": ["after_fire:who"], "seconds": 10, "show": false},
  "blame": {"after": ["after_fire"], "tells": ["blame:step"], "seconds": 10, "show": false},
  "own_up": {"after": ["after_fire"], "tells": ["own_up:said", "own_up:gone"], "seconds": 19, "show": false},

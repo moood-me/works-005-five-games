@@ -203,6 +203,7 @@
   "state": {
     "late": 0,
     "embers": 0,
+    "crowd": 0,
     "beat": null,
     "beat_next": null,
     "knock": 0,
@@ -721,6 +722,13 @@
       ],
       "smooth": true,
       "means": "the fire in the shed: light in its little window, tongues under the roof, smoke, orange light on the snow (the game moves it in “Buckets”)"
+    },
+    "crowd": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the neighbours throw water at the burning shed by themselves while the fire burns (the beat fire sets it; the script throws)"
     },
     "embers": {
       "range": [
