@@ -379,7 +379,7 @@ const SPOT = {
   pp_suez: [3.5, 10.6], fix_suez: [2.7, 9.6], consul: [1.9, 12.8], fix_whisper: [1.4, 13.6],
   bombay: [RAIL - 0.05, 9.6],
   // the night: she forward at the rail, he a step aft and inboard; where he lays the plaid
-  aouda_rail: [RAIL, 10.6], fogg_rail: [3.85, 9.9], fogg_plaid: [4.15, 10.15],
+  aouda_rail: [RAIL, 10.6], fogg_rail: [3.85, 9.9], fogg_plaid: [3.95, 10.65],
   // the Pacific: Passepartout at the rail; Fix comes aft from the deckhouse and stands before him
   pp_rail: [RAIL, 10.6], fix_from: [1.6, 15.8], fix_pp: [3.4, 10.4],
   // the calendar: the sailor at the deckhouse, Passepartout by him, Fogg in his chair
@@ -388,7 +388,7 @@ const SPOT = {
   gang: [3.6, 9.8], gang_aouda: [2.9, 10.6], gang_pp: [2.3, 10.0], gang_fix: [4.2, 10.9], below_bridge: [1.9, 15.4],
   bridge_speedy: [1.1, 19.4], bridge_fogg: [-0.9, 19.4],
   // the hatch: the stoker; Fogg and Passepartout by it; the cabin's door; where Speedy is brought
-  stoker: [2.4, 15.9], coal_fogg: [0.4, 11.6], coal_pp: [-0.4, 12.4], cabin_door: [-3.0, 6.6], speedy_brought: [-0.6, 13.8], sailor_brought: [-1.4, 13.0],
+  stoker: [2.4, 15.9], coal_fogg: [0.6, 12.6], coal_pp: [-0.3, 13.2], cabin_door: [-3.0, 6.6], speedy_brought: [-0.5, 14.8], sailor_brought: [-1.4, 14.0],
   pp_hatch: [0.2, 14.2], speedy_burn: [-1.2, 12.0],
   // Liverpool: at the gangway's head; Fix comes aft to him; the constables come up the gangway
   lv_fogg: [3.4, 10.0], lv_fix_from: [1.2, 14.6], lv_fix: [3.3, 10.75], lv_aouda: [2.6, 9.0], lv_pp: [2.2, 9.9],
@@ -417,7 +417,7 @@ function film(scene) {
 
   // ── the shots ──
   const SUEZ = () => ({ ...SEA('mongolia', 'suez'), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'suez_two', camera_shot: 1, camera_frame: [0.5, 0.42],
+    camera_target: 'suez_two', camera_shot: 1.35, camera_frame: [0.5, 0.42],
     ...P('passepartout', SPOT.pp_suez, toward(SPOT.pp_suez, SPOT.fix_suez), { look: 'fix#head', mood: 'smile' }),
     ...P('fix', SPOT.fix_suez, toward(SPOT.fix_suez, SPOT.pp_suez), { look: 'passepartout#head', mood: 'smile' }),
     ...P('consul', SPOT.consul, 200, { do: loop('hands_behind'), look: 'fix#head' }) });
@@ -432,7 +432,7 @@ function film(scene) {
   const NIGHT_TURNED = () => ({ ...NIGHT(), aouda_turn: toward(SPOT.aouda_rail, SPOT.fogg_rail), aouda_look: 'fogg#head',
     fogg_turn: toward(SPOT.fogg_rail, SPOT.aouda_rail), fogg_look: 'aouda#head' });
   const PACIFIC = () => ({ ...SEA('general_grant', 'none', { speed: 0.8 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'two_pacific', camera_shot: 0.9, camera_frame: [0.5, 0.42],
+    camera_target: 'two_pacific', camera_shot: 1.2, camera_frame: [0.5, 0.42],
     ...P('passepartout', SPOT.pp_rail, 100, { look: [80, 400, -5] }),
     ...P('fix', SPOT.fix_from, toward(SPOT.fix_from, SPOT.fix_pp)) });
   // (as pacific leaves them: face to face)
@@ -457,7 +457,7 @@ function film(scene) {
     camera_target: 'fogg', camera_shot: 0.9, camera_frame: [0.45, 0.4],
     ...P('fogg', SPOT.bridge_fogg, 100, { look: [60, 300, 4] }) });
   const COAL = () => ({ ...SEA('henrietta', 'none', { speed: 0.6 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'coal_three', camera_shot: 0.6, camera_frame: [0.5, 0.42],
+    camera_target: 'coal_three', camera_shot: 0.5, camera_frame: [0.5, 0.42],
     ...P('stoker', SPOT.stoker, toward(SPOT.stoker, SPOT.coal_fogg), { look: 'fogg#head' }),
     ...P('fogg', SPOT.coal_fogg, toward(SPOT.coal_fogg, SPOT.stoker), { look: 'stoker#head' }),
     ...(withIt('with_pp') ? P('passepartout', SPOT.coal_pp, toward(SPOT.coal_pp, SPOT.stoker), { look: 'stoker#head' }) : {}),
@@ -519,7 +519,7 @@ function film(scene) {
         pp.mood(null);
         pp.look([300, 900, 30]);
         pp.turn(70);
-        s.camera({ target: 'fix_consul', shot: 1, frame: [0.5, 0.42], glide: 2.4 });
+        s.camera({ target: 'fix_consul', shot: 1.35, frame: [0.5, 0.42], glide: 2.4 });
         await fix.walk([[2.2, 12.0], SPOT.fix_whisper]);
         fix.mood(null);
         consul.look('fix#head');
@@ -540,7 +540,7 @@ function film(scene) {
         const fogg = s.person('fogg');
         await s.wait(1.6);
         fogg.look([300, 900, 20]);
-        await s.wait(1.8);
+        await s.wait(1.2);
         fogg.look('fogg#book');
         s.tell('bombay:book');
         await s.wait(2.6);
@@ -569,7 +569,7 @@ function film(scene) {
       from: NIGHT_TURNED,
       run: async s => {
         const fogg = s.person('fogg'), aouda = s.person('aouda');
-        s.camera({ target: 'aouda', shot: 0.9, frame: [0.58, 0.42], glide: 1.8 });
+        s.camera({ target: 'night_two', shot: 1.3, frame: [0.5, 0.42], glide: 1.8 });
         await fogg.walk([SPOT.fogg_plaid]);
         await fogg.turn(toward(SPOT.fogg_plaid, SPOT.aouda_rail));
         fogg.reach({ r: 'aouda#shoulder_l', l: 'aouda#shoulder_r' });
@@ -592,7 +592,7 @@ function film(scene) {
       from: NIGHT_TURNED,
       run: async s => {
         const fogg = s.person('fogg'), aouda = s.person('aouda');
-        s.camera({ target: 'aouda', shot: 0.9, frame: [0.58, 0.42], glide: 1.8 });
+        s.camera({ target: 'night_two', shot: 1.3, frame: [0.5, 0.42], glide: 1.8 });
         const was = scene.get('aouda_with');
         fogg.with(['notebook']);
         fogg.reach({ r: 'aouda#hands' });
