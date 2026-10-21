@@ -46,7 +46,7 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
   — `squall:reef`; Bunsby looks to Fogg (his line).
 - `typhoon` (after `squall`, ≈ 3 s): the storm at its height (`storm` 0.9) — the game's «The typhoon» drives `wave`,
   `wave_h`, `helm`, `heel`, `green_water` over it.
-- `aouda_storm` (after `typhoon`, ≈ 6 s): close on Aouda in the spray, calm; she looks to Fogg; the shot opens again.
+- `aouda_storm` (after `typhoon`, ≈ 6 s): close on Aouda in the spray, calm, her eyes on the sea astern; the shot opens again.
 - `shanghai` (after `typhoon` or `aouda_storm`, ≈ 19 s): the storm dies away (`storm` → 0.2); the steamer on the
   horizon; the flag at half-mast; Bunsby goes forward to the gun and fires it — `shanghai:gun`; the steamer turns
   toward them — `shanghai:turns`.

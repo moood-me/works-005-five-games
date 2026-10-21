@@ -137,7 +137,7 @@ function film(scene, party = {}) {
     ...NOBODY(),
     ...P('bunsby', SPOT.bunsby, 335, { do: BRACE, reach: { r: 'tiller#tiller', l: 'tiller#tiller' }, look: aboard(0, 30, 2) }),
     ...P('fogg', SPOT.fogg, 160, { do: BRACE, reach: { l: aboard(-2.05, -3.2, 0.75) }, look: aboard(-0.2, -7.5, 1.4) }),
-    ...(withIt('with_aouda') ? P('aouda', SPOT.aouda, 165, { do: BRACE, look: 'fogg#head' }) : {}),
+    ...(withIt('with_aouda') ? P('aouda', SPOT.aouda, 165, { do: BRACE, look: aboard(0.4, -7.5, 1.6) }) : {}),
     ...(withIt('with_fix') ? P('fix', SPOT.fix, 200, { do: BRACE, reach: { l: aboard(2.05, -2.5, 0.75) }, look: 'fogg#head', mood: 'afraid' }) : {}),
     ...party,
     ...more,
@@ -175,16 +175,16 @@ function film(scene, party = {}) {
         s.move('wave_h', 0.6, { over: 1 });
       },
     },
-    // ---- Close: Aouda in the spray, calm, holding the rail (only with her aboard).
+    // ---- Close: Aouda in the spray, calm, braced, her eyes on the sea astern (only with her aboard).
     aouda_storm: {
       after: 'typhoon',
       from: STORM,
       run: async s => {
         const aouda = s.person('aouda');
-        aouda.look(aboard(-0.5, 9, 2));
+        aouda.look(aboard(0.6, -9, 2.2));
         s.camera({ target: 'aouda', shot: 1.4, frame: [0.5, 0.42], glide: 1.6 });
         await s.wait(2.2);
-        aouda.look('fogg#head');
+        aouda.look(aboard(-0.2, -9, 1.4));
         await s.wait(2.6);
         s.camera({ target: null, glide: 1.6 });
         await s.wait(0.6);
