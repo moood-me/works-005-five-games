@@ -109,13 +109,13 @@ const OFF = id => ({ [`${id}_a`]: 0, [`${id}_d`]: -3, [`${id}_here`]: false, [`$
 const NOBODY = () => Object.assign({}, ...WHO.map(OFF));
 const at = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_here`]: true, [`${id}_turn`]: turn,
   ...Object.fromEntries(Object.entries(more).map(([k, v]) => [`${id}_${k}`, v])) });
-const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: 0, camera_z: 0, camera_h: -0.55, camera_look: 0.02 };
+const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: -0.45, camera_z: 0, camera_h: -0.55, camera_look: 0.02 };
 // a point of the boat (her own metres) for a look or a reach: it goes with her
 const aboard = (a, d, h) => ({ on: 'frame', at: [a, d, h] });
 const BRACE = { motion: 'storm_brace', loop: true, from: 0 };
 // where they are: Bunsby at the tiller; Fogg, Aouda, Fix aft by the port and starboard rails, turned aft from the spray
 const SPOT = {
-  bunsby: [0.55, -5.7], bunsby_gun: [0.35, 6.4],
+  bunsby: [0.95, -5.9], bunsby_gun: [0.35, 6.4],
   fogg: [-1.35, -3.3], aouda: [-1.25, -1.9], fix: [1.4, -2.6],
 };
 const QUIET = { storm: 0, reef: 0, wave: 0, wave_h: 0.35, helm: 0, heel: 0, green_water: 0, wave_from: 0, flag: 0, steamer: 0, steamer_turn: 0, gun_flash: 0 };
@@ -134,7 +134,7 @@ function film(scene, party = {}) {
   // who is aboard: Fogg and Bunsby always; Aouda and Fix as the game says
   const ABOARD = (more = {}) => ({
     ...NOBODY(),
-    ...P('bunsby', SPOT.bunsby, 10, { do: BRACE, reach: { r: 'tiller#tiller', l: 'tiller#tiller' }, look: aboard(0, 30, 2) }),
+    ...P('bunsby', SPOT.bunsby, 335, { do: BRACE, reach: { r: 'tiller#tiller', l: 'tiller#tiller' }, look: aboard(0, 30, 2) }),
     ...P('fogg', SPOT.fogg, 160, { do: BRACE, reach: { l: aboard(-2.05, -3.2, 0.75) }, look: aboard(-0.2, -7.5, 1.4) }),
     ...(withIt('with_aouda') ? P('aouda', SPOT.aouda, 170, { do: BRACE, reach: { r: aboard(-2.05, -1.8, 0.75) }, look: 'fogg#head' }) : {}),
     ...(withIt('with_fix') ? P('fix', SPOT.fix, 200, { do: BRACE, reach: { l: aboard(2.05, -2.5, 0.75) }, look: 'fogg#head', mood: 'afraid' }) : {}),
@@ -181,7 +181,7 @@ function film(scene, party = {}) {
       run: async s => {
         const aouda = s.person('aouda');
         aouda.look(aboard(-0.5, 9, 2));
-        s.camera({ target: 'aouda', shot: 2.4, frame: [0.5, 0.4], glide: 1.6 });
+        s.camera({ target: 'aouda', shot: 1.4, frame: [0.5, 0.42], glide: 1.6 });
         await s.wait(2.2);
         aouda.look('fogg#head');
         await s.wait(2.6);

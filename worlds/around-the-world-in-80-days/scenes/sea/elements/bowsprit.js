@@ -15,3 +15,5 @@ g.arc(0.1, -0.55, 0.1, 0, Math.PI * 2);
 g.fill();
 e.at(0.1, -0.5, 'breech');
 e.at(0.1, -0.6, 'muzzle');
+// the flash at a shot (its light the scene's gun_light; the animate lights it by `gun_flash`)
+e.light(0.1, -0.6, 0.35, '#ffc070', 1, 'muzzle');
