@@ -1,10 +1,11 @@
 // The deck — what the scene's elements, script and film share: the ship's plan (one deck, four ships told apart by
 // their details), the ports on the horizon, the colours, the parts of the «Henrietta» that go into her furnaces and how
 // they go (burn), and the film in beats (film(scene), for the world's module beats).
-//   Metres, the ship's own: `distance` forward along her keel (the bow at +46), `across` to starboard (her right, the
+//   Metres, the ship's own: `distance` forward along her keel (the stem at +47), `across` to starboard (her right, the
 // side of the ports and the moon); the main deck is the land (0), the sea 5.5 m below it, a quay 2.6 m below it to
 // starboard. The ship lies still in the world; her way through the water is the sea's (its shader runs by `speed`).
-// The camera stands on the deck by her poop looking forward; the operator frames the people.
+// The camera stands on the deck by her poop looking forward (a walk: the operator slides, it never turns) — so whoever
+// speaks stands turned aft, toward it, or in profile.
 const { mixc, css, rgba, glow } = kit.light;
 const clamp01 = v => anim.clamp(typeof v === 'number' ? v : 0, 0, 1);
 
@@ -21,36 +22,33 @@ const plan = {
   // the bulwarks' inner face either side; the rail's height
   beam: 5.4,
   rail: 1.1,
-  // the deck from the stern to the bow's root; the bow
+  // the deck from the stern to the stem
   stern: -5,
-  bowAt: 42,
-  bow: 49,
-  // the captain's cabin (on the «Henrietta»; the others' after skylight), its aft face, its starboard side
-  cabin: { a: -3, d: 7, w: 3, deep: 3.6, h: 2.3 },
+  stem: 47,
+  // the captain's cabin (on the «Henrietta»; the others' after skylight): its aft face's middle, width, depth, height
+  cabin: { a: -3, d: 7, w: 3.1, deep: 3.6, h: 2.3 },
   mastMain: { a: 0, d: 11, h: 25 },
   mastFore: { a: 0, d: 34, h: 23 },
-  // the stokehold's hatch (open: the furnaces' glow), and the bunks stacked by it
-  hatch: { a: 1.4, d: 14.6, s: 1.6 },
+  // the stokehold's hatch (open: the furnaces' glow), its coaming's aft face; the bunks stacked by it
+  hatch: { a: 1.4, d: 13.8, s: 1.6, h: 0.7 },
   bunks: { a: 3.4, d: 12.4 },
   // the deckhouse: its aft face, how far forward it runs; the bridge on its roof; the funnel through it
-  house: { a: 0, d: 18, deep: 8, w: 4.4, h: 2.4 },
+  house: { a: 0, d: 18, deep: 8.2, w: 4.6, h: 2.4 },
   funnel: { a: 0, d: 22.5, r: 1.05, top: 11 },
-  // the boats on chocks across the deck between the hatch and the deckhouse: the port one (the part's point) and,
-  // a part of the same element, the starboard one beside it
-  boats: { a: -2.6, d: 15.8, next: [6.2, 1.2] },
+  // the boats on chocks across the deck between the hatch and the deckhouse: the port one (the part's point) and, a
+  // part of the same element, the starboard one beside it, a little forward
+  boats: { a: -2.6, d: 15.8, len: 4.6, next: [5.6, 1.2] },
   // the gangway's head at the starboard rail
   gangway: { d: 9.5 },
-  // the night lamp hung in the starboard shrouds by the people at the rail
-  lamp: [4.2, 9.6, 2.5],
-  // the calendar on the deckhouse's aft face
-  calendar: [-1.2, 1.55],
+  // the calendar on the deckhouse's aft face (across, elevation)
+  calendar: [-1.2, 1.62],
   // Fogg's deck chair
-  chair: [-2.6, 13.2],
+  chair: [-2.2, 14.2],
   // the custom house's cell (release), far off to starboard where no deck shot sees it
   cell: [400, 0],
 };
 
-// The ships' colours: deck, bulwark (inside), rail cap, house, funnel, its band, masts, boats, sea
+// The ships' colours: deck, bulwark (inside), rail cap, house, trim, funnel, its band, masts, boats, sea, iron
 const COLOURS = {
   mongolia: { deck: '#cdb894', bulwark: '#ece6d8', cap: '#8a5c36', house: '#a8744a', trim: '#ece6d8', funnel: '#1e1e20', band: '#1e1e20', mast: '#c4a06a', boat: '#f2efe8', sea: '#2f8098', iron: '#2e2f33' },
   rangoon: { deck: '#cdb894', bulwark: '#ece6d8', cap: '#8a5c36', house: '#a8744a', trim: '#ece6d8', funnel: '#1e1e20', band: '#1e1e20', mast: '#c4a06a', boat: '#f2efe8', sea: '#2c6a86', iron: '#2e2f33' },
@@ -60,14 +58,14 @@ const COLOURS = {
 const colours = st => COLOURS[shipOf(st)];
 
 // ── the «Henrietta»'s parts that burn (the game's «The boilers») ──
-// Each: its key (1 aboard, 0 burnt), its element (or the anchor its cards stand on), where it is and the point the
-// player takes it by (`<part>#part`, its element's), and how it goes: dragged to the hatch (`drag_<part>` 0…1), a mast
-// falling first (its animate tips it over sideways, the first 0.35 of the drag). The script places them (keys
-// at_<part>_a, _d, _e: where the anchor is); each element's animate shrinks it as it goes and hides it at 0, dims it
-// while `locked_<part>`. `home` — the anchor's own place; `mid` — where the part's middle is (what goes to the hatch).
+// Each: its key (1 aboard, 0 burnt), the anchor its cards stand on, where that anchor is (`home`) and where the part's
+// middle is (`mid`: what goes to the hatch); the point the player takes it by (`<part>#part`) is its element's. Dragged
+// to the hatch (`drag_<part>` 0…1) the script places the anchor (keys at_<part>_a, _d, _e — partAt), a mast falling
+// first (its layer tipped over to port, the first 0.35 of the drag); each element's animate shrinks it as it goes,
+// hides it at 0 and dims it while `locked_<part>` (partAnimate).
 const PARTS = {
   deckhouse: { anchor: 'house', home: [0, 18], mid: [0, 22] },
-  boats: { anchor: 'boats', home: [plan.boats.a, plan.boats.d], mid: [plan.boats.a + 3.1, plan.boats.d] },
+  boats: { anchor: 'boats', home: [plan.boats.a, plan.boats.d], mid: [plan.boats.a + plan.boats.next[0] / 2, plan.boats.d + 0.6] },
   bunks: { anchor: 'bunks', home: [plan.bunks.a, plan.bunks.d] },
   yards: { anchor: 'yards_at', home: [0, 11], mid: [0, 22], drop: -7 },
   mast_fore: { anchor: 'mast_fore', home: [0, plan.mastFore.d], falls: true },
@@ -92,7 +90,8 @@ function partLook(st, name) {
   const here = (st[name] ?? 1) > 0.5, d = clamp01(st[`drag_${name}`]);
   return { scale: anim.mix(1, 0.32, anim.ease.in(d)), alpha: here ? 1 : 0, bright: (st[`locked_${name}`] ?? 0) > 0.5 ? 0.5 : 1 };
 }
-// an animate's lines for a part: its layers (all its painting) shrunk about `pivot`, hidden, dimmed
+// an animate's lines for a part: its layers (all its painting) shrunk about `pivot` (the element's own units), hidden,
+// dimmed
 function partAnimate(e, name, layers, pivot) {
   const k = partLook(e.state, name);
   for (const n of layers) {
@@ -118,24 +117,190 @@ const rect = (g, x, y, w, h, fill) => {
   g.fillStyle = fill;
   g.fillRect(x, y, w, h);
 };
-const shade = (c, k) => rgba(mixc(c, '#000000', k));
-const tint = (c, k) => rgba(mixc(c, '#ffffff', k));
-// a ship's boat seen from aft-inboard, hanging in its davits: hull, its gunwale, the cover, the two davits curving over
-function boat(g, c, x, y, len, flip) {
-  const w = 1.7, s = flip ? -1 : 1;
-  // davits from the deck (y 0 at the rail's foot) curving out over the boat
-  g.strokeStyle = '#3a3b3e';
-  g.lineWidth = 0.14;
-  for (const dx of [-len * 0.36, len * 0.36]) {
+const line = (g, pts, colour, width) => {
+  g.strokeStyle = colour;
+  g.lineWidth = width;
+  g.beginPath();
+  pts.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y)));
+  g.stroke();
+};
+const shade = (c, k) => css(mixc(c, '#000000', k));
+const tint = (c, k) => css(mixc(c, '#ffffff', k));
+// a window or a porthole's glass: dark, a pale glint
+const pane = (g, x, y, w, h, frame) => {
+  rect(g, x - 0.05, y - 0.05, w + 0.1, h + 0.1, frame);
+  rect(g, x, y, w, h, '#3c4a52');
+  rect(g, x + w * 0.15, y + h * 0.12, w * 0.18, h * 0.6, 'rgba(220,232,236,0.35)');
+};
+const port = (g, x, y, r) => {
+  g.fillStyle = '#b08a48';
+  g.beginPath();
+  g.arc(x, y, r + 0.05, 0, Math.PI * 2);
+  g.fill();
+  g.fillStyle = '#34424a';
+  g.beginPath();
+  g.arc(x, y, r, 0, Math.PI * 2);
+  g.fill();
+};
+// planks of a wall seen from before it, x0…x1, y0 (top) … y1 (foot): a seam every `step`
+function planked(g, x0, x1, y0, y1, colour, step) {
+  rect(g, x0, y0, x1 - x0, y1 - y0, colour);
+  g.fillStyle = shade(colour, 0.22);
+  for (let y = y0 + step; y < y1 - 0.01; y += step) g.fillRect(x0, y - 0.012, x1 - x0, 0.024);
+}
+// a door: frame, panels, a brass knob
+function door(g, x, w, h, colour) {
+  rect(g, x - 0.06, -h - 0.06, w + 0.12, h + 0.06, shade(colour, 0.35));
+  rect(g, x, -h, w, h, colour);
+  g.fillStyle = shade(colour, 0.15);
+  g.fillRect(x + 0.1, -h + 0.12, w - 0.2, h * 0.38);
+  g.fillRect(x + 0.1, -h * 0.5 + 0.06, w - 0.2, h * 0.38);
+  g.fillStyle = '#c8a050';
+  g.beginPath();
+  g.arc(x + w - 0.12, -h * 0.5, 0.035, 0, Math.PI * 2);
+  g.fill();
+}
+// A side of a house (the deckhouse's, the cabin's) along its length 0…len (x), its height h: planks, windows, a door
+function houseSide(g, c, len, h, windows, doorAt) {
+  planked(g, 0, len, -h, 0, c.house, 0.24);
+  rect(g, 0, -h - 0.08, len, 0.1, c.trim);
+  rect(g, 0, -0.12, len, 0.12, shade(c.house, 0.3));
+  for (const x of windows) pane(g, x, -h + 0.55, 0.7, 0.6, c.trim);
+  if (doorAt != null) door(g, doorAt, 0.8, 1.95, shade(c.house, 0.15));
+}
+// a ship's boat lying on her chocks, seen from her side (x along her, 0 her middle; y up from the deck, its foot 0)
+function boat(g, c, len) {
+  const h = 1.0, top = -0.55 - h;
+  // the chocks
+  for (const x of [-len * 0.3, len * 0.3]) rect(g, x - 0.12, -0.55, 0.24, 0.55, '#6a5038');
+  g.fillStyle = c.boat;
+  g.beginPath();
+  g.moveTo(-len / 2, top);
+  g.lineTo(len / 2, top);
+  g.quadraticCurveTo(len / 2 - 0.2, -0.55, len / 2 - 0.9, -0.5);
+  g.lineTo(-len / 2 + 0.9, -0.5);
+  g.quadraticCurveTo(-len / 2 + 0.2, -0.55, -len / 2, top);
+  g.fill();
+  // the gunwale, the strakes, the cover over her
+  rect(g, -len / 2, top - 0.06, len, 0.1, c.cap);
+  g.fillStyle = shade(c.boat, 0.12);
+  for (let k = 1; k < 3; k++) g.fillRect(-len / 2 + 0.3 * k, top + 0.3 * k, len - 0.6 * k, 0.03);
+  poly(g, [[-len / 2 + 0.1, top - 0.04], [-len / 2 + 0.6, top - 0.38], [len / 2 - 0.6, top - 0.38], [len / 2 - 0.1, top - 0.04]], '#c8c0a8');
+}
+
+// A side's bulwarks seen from inboard, x 0…52 along the side (port: forward from the stern; starboard: aft from the
+// stem), their foot on the deck: planks (the «Henrietta») or white plating, stanchions, the rail cap, the shrouds'
+// chain plates at the masts; the starboard one opened at the gangway when a quay is alongside. The port side's point
+// bulwarks#part (10 m forward).
+function bulwarkSide(g, e, portSide) {
+  const c = colours(e.state), d2x = d => (portSide ? d - plan.stern : plan.stem - d), H = plan.rail;
+  const wood = shipOf(e.state) === 'henrietta';
+  const gap = !portSide && quayed(portOf(e.state)) ? [d2x(plan.gangway.d) - 0.6, d2x(plan.gangway.d) + 0.6].sort((a, b) => a - b) : null;
+  const span = gap ? [[0, gap[0]], [gap[1], 52]] : [[0, 52]];
+  for (const [x0, x1] of span) {
+    if (wood) planked(g, x0, x1, -H, 0, c.bulwark, 0.18);
+    else rect(g, x0, -H, x1 - x0, H, c.bulwark);
+    // stanchions
+    g.fillStyle = shade(c.bulwark, wood ? 0.3 : 0.12);
+    for (let x = Math.ceil(x0 / 1.8) * 1.8; x < x1 - 0.1; x += 1.8) g.fillRect(x - 0.05, -H, 0.1, H);
+    // the scupper's dark strip at the foot, the rail cap
+    rect(g, x0, -0.08, x1 - x0, 0.08, shade(c.bulwark, 0.4));
+    rect(g, x0 - 0.02, -H - 0.12, x1 - x0 + 0.04, 0.14, c.cap);
+    rect(g, x0 - 0.02, -H - 0.02, x1 - x0 + 0.04, 0.03, shade(c.cap, 0.35));
+  }
+  // chain plates of the shrouds at the masts
+  for (const d of [plan.mastMain.d, plan.mastFore.d]) {
+    const x = d2x(d);
+    g.fillStyle = c.iron;
+    for (let k = -2; k <= 2; k++) g.fillRect(x + k * 0.45 - 0.03, -H - 0.3, 0.06, 0.3);
+  }
+  if (gap) { rect(g, gap[0] - 0.08, -H - 0.45, 0.08, H + 0.45, c.cap); rect(g, gap[1], -H - 0.45, 0.08, H + 0.45, c.cap); }
+  if (portSide) e.at(d2x(10), -0.8, 'part');
+}
+// What is left of a side when its bulwarks have burnt: the iron sheer strake along it, its rivets
+function gunwaleSide(g, e) {
+  const c = colours(e.state);
+  rect(g, 0, -0.42, 52, 0.42, c.iron);
+  rect(g, 0, -0.45, 52, 0.05, shade(c.iron, 0.3));
+  g.fillStyle = tint(c.iron, 0.18);
+  for (let x = 0.2; x < 52; x += 0.3) g.fillRect(x, -0.32, 0.03, 0.03);
+}
+
+// A mast seen from aft (its foot on the deck at 0): the pole tapering, its tops and crosstrees, the topmast, the
+// shrouds down to the rails either side and their ratlines. h — its height.
+function mast(g, c, h) {
+  const top = -h, cross = -h * 0.6;
+  poly(g, [[-0.22, 0], [-0.14, cross], [0.14, cross], [0.22, 0]], c.mast);
+  poly(g, [[-0.12, cross], [-0.06, top], [0.06, top], [0.12, cross]], c.mast);
+  rect(g, -1.1, cross - 0.12, 2.2, 0.16, shade(c.mast, 0.2));
+  rect(g, -0.6, top + h * 0.15, 1.2, 0.1, shade(c.mast, 0.2));
+  rect(g, -0.1, top - 0.25, 0.2, 0.25, shade(c.mast, 0.3));
+  // the shrouds and their ratlines
+  g.strokeStyle = '#3a342c';
+  g.lineWidth = 0.05;
+  for (const s of [-1, 1]) for (let k = 0; k < 3; k++) {
     g.beginPath();
-    g.moveTo(x + dx - s * 0.6, 0);
-    g.quadraticCurveTo(x + dx - s * 0.6, y - 2.0, x + dx + s * 0.1, y - 1.9);
+    g.moveTo(s * (0.9 - k * 0.12), cross);
+    g.lineTo(s * (5.3 - k * 0.42), -1.3);
     g.stroke();
   }
-  poly(g, [[x - len / 2, y - 0.7], [x + len / 2, y - 0.7], [x + len / 2 - 0.5, y + 0.15], [x - len / 2 + 0.5, y + 0.15]], c.boat);
-  rect(g, x - len / 2, y - 0.8, len, 0.14, c.cap);
-  poly(g, [[x - len / 2 + 0.2, y - 0.8], [x, y - 1.15], [x + len / 2 - 0.2, y - 0.8]], '#c8c0a8');
-  void w;
+  g.lineWidth = 0.025;
+  for (const s of [-1, 1]) for (let y = -2; y > cross + 0.4; y -= 0.45) {
+    const u = (y - -1.3) / (cross - -1.3);
+    g.beginPath();
+    g.moveTo(s * (5.3 - 4.4 * u), y);
+    g.lineTo(s * (5.3 - 0.84 - 4.4 * u + 0.24 * u), y);
+    g.stroke();
+  }
+  // the topmast's shrouds to the crosstrees
+  g.lineWidth = 0.04;
+  for (const s of [-1, 1]) { g.beginPath(); g.moveTo(s * 0.08, top + h * 0.15); g.lineTo(s * 1.05, cross); g.stroke(); }
+}
+// A mast's yards (y their heights, w their lengths) and their sails: each yard with its sail furled along it, and the
+// sail set below it — a layer `sail<k>` hung from the yard (its animate lets it fall as `sails` says); `point` — where
+// the part's point is, if it is this one's
+function yardsOf(g, e, c, yards, point) {
+  const sailed = shipOf(e.state) === 'henrietta';
+  e.layer('yards', { pivot: [0, 0] }, g => {
+    yards.forEach(([y, w]) => {
+      rect(g, -w / 2, -y - 0.09, w, 0.18, shade(c.mast, 0.25));
+      // the sail furled along it
+      g.fillStyle = '#d8d0bc';
+      g.beginPath();
+      g.ellipse(0, -y + 0.12, w / 2 - 0.4, 0.16, 0, 0, Math.PI * 2);
+      g.fill();
+    });
+    if (point) e.at(point[0], point[1], 'part');
+  });
+  if (!sailed) return;
+  yards.forEach(([y, w], k) => {
+    const next = yards[k - 1] ? yards[k - 1][0] : 1.6, deep = y - next - 0.25, foot = w * (k ? 1.12 : 1.05);
+    e.layer(`sail${k}`, { pivot: [0, -y] }, g => {
+      g.fillStyle = '#ece4d2';
+      g.beginPath();
+      g.moveTo(-w / 2 + 0.2, -y + 0.1);
+      g.lineTo(w / 2 - 0.2, -y + 0.1);
+      g.lineTo(foot / 2, -y + deep);
+      g.quadraticCurveTo(0, -y + deep - 0.5, -foot / 2, -y + deep);
+      g.closePath();
+      g.fill();
+      g.fillStyle = 'rgba(150,140,120,0.35)';
+      for (let x = -w / 2 + 1; x < w / 2; x += 1.2) g.fillRect(x, -y + 0.1, 0.04, deep - 0.3);
+    });
+  });
+}
+// a yards' animate: the sails let fall by `sails`; the yards and sails tipped over with their mast as it falls (or
+// lying fallen once it is burnt), shrunk and gone with their own part
+function yardsAnimate(e, mastKey, count) {
+  const st = e.state, k = partLook(st, 'yards'), sails = clamp01(st.sails);
+  const fall = shipOf(st) !== 'henrietta' ? 0 : (st[mastKey] ?? 1) < 0.5 ? fallOf(1) : fallOf(st[`drag_${mastKey}`]);
+  const layers = ['yards', ...Array.from({ length: count }, (_, i) => `sail${i}`)];
+  partAnimate(e, 'yards', layers, [0, -8]);
+  layers.forEach((n, i) => {
+    const l = e.layer(n);
+    l.rotate = fall;
+    if (i > 0) { l.scaleX = k.scale; l.scaleY = k.scale * (0.06 + 0.94 * sails); l.alpha = sails > 0.02 ? k.alpha : 0; }
+  });
 }
 
 // The ports on the horizon: a skyline of each, x across (metres about its middle), its foot at 0, toward −y up
@@ -186,6 +351,11 @@ function skyline(g, port, rnd) {
 // ── The film ──
 const WHO = ['fogg', 'passepartout', 'aouda', 'fix', 'consul', 'sailor', 'speedy', 'stoker', 'policeman', 'policeman_2'];
 const toward = ([a, d], [a2, d2]) => ((Math.atan2(a2 - a, d2 - d) * 180) / Math.PI + 360) % 360;
+// a point before someone standing at [a, d] turned `turn`: `f` metres ahead of them, `side` to their right, `h` up
+const before = ([a, d], turn, f, h, side = 0) => {
+  const r = (turn * Math.PI) / 180;
+  return [a + Math.sin(r) * f + Math.cos(r) * side, d + Math.cos(r) * f - Math.sin(r) * side, h];
+};
 const OFF = id => ({ [`${id}_a`]: -2, [`${id}_d`]: -3, [`${id}_here`]: false, [`${id}_do`]: 'stand', [`${id}_turn`]: 0,
   [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_gait`]: null, [`${id}_on`]: null, [`${id}_mood`]: null });
 const NOBODY = () => Object.assign({}, ...WHO.map(OFF));
@@ -195,129 +365,141 @@ const at = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [
   ...Object.fromEntries(Object.entries(more).map(([k, v]) => [`${id}_${k}`, v])) });
 const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_look: 0, camera_on: null };
 // the parts all aboard and nothing burning
-const WHOLE = () => Object.assign({ fire: 0, flare: 0, speedy_grief: 0, sails: 0 },
+const WHOLE = () => Object.assign({ fire: 0, flare: 0, flare_glow: 0, speedy_grief: 0, sails: 0 },
   ...PART_NAMES.map(n => ({ [n]: 1, [`drag_${n}`]: 0, [`locked_${n}`]: 0 })));
 // the light and the ship at the film's moments
-const SEA = (ship, port, more = {}) => ({ ship, port, night: 0, dawn: 0, fog: 0, smoke: 1, speed: port === 'none' || port === 'bombay' || port === 'queenstown' ? 0.8 : 0, porthole: 0, cell_close: 0, leaf: 0, ...WHOLE(), ...more });
-// the burn's view: from the poop, high, the whole deck laid out (every part's point in the middle of a 4:3 frame)
+const SEA = (ship, port, more = {}) => ({ ship, port, night: 0, dawn: 0, fog: 0, smoke: 1, speed: port === 'none' || port === 'bombay' || port === 'queenstown' ? 0.8 : 0,
+  porthole: 0, cell_close: 0, leaf: 0, door: 0, ...WHOLE(), ...more });
+// the burn's view: from high on the poop, the whole deck laid out (every part's point in the middle of a 4:3 frame)
 const BURN_VIEW = { ...CAM, camera_z: -4.5, camera_h: 3.2, camera_look: 0.06 };
 // where people stand
-const RAIL = 4.75;
+const RAIL = 4.6;
 const SPOT = {
-  // Suez, by the gangway's head
-  pp_suez: [3.9, 8.2], fix_suez: [2.7, 9.0], consul: [4.3, 12.4], fix_whisper: [3.55, 12.15],
-  // the night: she forward, he aft, both at the rail
-  aouda_rail: [RAIL - 0.2, 10.3], fogg_rail: [RAIL - 0.15, 8.9],
-  // the Pacific
-  pp_rail: [RAIL - 0.1, 10.2], fix_from: [-1.5, 3.5], fix_pp: [3.75, 9.1],
+  // Suez: Passepartout and Fix by the gangway's head; the consul inboard; Fix whispering to him, turned aft
+  pp_suez: [3.5, 10.6], fix_suez: [2.7, 9.6], consul: [1.9, 12.8], fix_whisper: [1.4, 13.6],
+  bombay: [RAIL - 0.05, 9.6],
+  // the night: she forward at the rail, he a step aft and inboard; where he lays the plaid
+  aouda_rail: [RAIL, 10.6], fogg_rail: [3.85, 9.9], fogg_plaid: [4.15, 10.15],
+  // the Pacific: Passepartout at the rail; Fix comes aft from the deckhouse and stands before him
+  pp_rail: [RAIL, 10.6], fix_from: [1.6, 15.8], fix_pp: [3.4, 10.4],
   // the calendar: the sailor at the deckhouse, Passepartout by him, Fogg in his chair
-  sailor_cal: [-2.0, 17.2], pp_cal: [0.9, 15.6],
-  // the gangway's head (New York, Liverpool); on the bridge
-  gang: [3.6, 9.8], gang_2: [2.6, 9.2], gang_3: [3.0, 8.4],
-  bridge_speedy: [1.1, 18.9], bridge_fogg: [-0.9, 18.9],
-  // the hatch: the stoker, Passepartout; the cabin's door
-  stoker: [2.6, 15.6], pp_hatch: [0.2, 14.0], cabin_door: [-1.3, 7.2], speedy_deck: [-0.6, 9.4], sailor_by: [-1.6, 8.8],
-  // Liverpool: the constables come up the gangway
-  quay_up: [8.6, 9.6], pol_1: [4.2, 10.6], pol_2: [4.4, 8.7], fix_lv: [2.3, 10.4],
+  sailor_cal: [-1.3, 17.4], pp_cal: [0.4, 15.2],
+  // New York: the gangway's head; under the bridge; on the bridge
+  gang: [3.6, 9.8], gang_aouda: [2.9, 10.6], gang_pp: [2.3, 10.0], gang_fix: [4.2, 10.9], below_bridge: [1.9, 15.4],
+  bridge_speedy: [1.1, 19.4], bridge_fogg: [-0.9, 19.4],
+  // the hatch: the stoker; Fogg and Passepartout by it; the cabin's door; where Speedy is brought
+  stoker: [2.4, 15.9], coal_fogg: [0.4, 11.6], coal_pp: [-0.4, 12.4], cabin_door: [-3.0, 6.6], speedy_brought: [-0.6, 13.8], sailor_brought: [-1.4, 13.0],
+  pp_hatch: [0.2, 14.2], speedy_burn: [-1.2, 12.0],
+  // Liverpool: at the gangway's head; Fix comes aft to him; the constables come up the gangway
+  lv_fogg: [3.4, 10.0], lv_fix_from: [1.2, 14.6], lv_fix: [3.3, 10.75], lv_aouda: [2.6, 9.0], lv_pp: [2.2, 9.9],
+  quay_1: [9.6, 9.6], quay_2: [9.9, 8.6], gang_top: [5.2, 9.6], pol_1: [4.6, 10.6], pol_2: [4.8, 9.0],
 };
-const TRAVEL = { garment: 'dress', colors: { garment: '#3c4a5a', top: '#3c4a5a', accent: '#c9b98f' } };
+// the cell: its anchor and where people are in it (the bench along its back wall, the door in its left wall)
+const CELL_AT = (a, d) => [plan.cell[0] + a, plan.cell[1] + d];
+const BENCH = CELL_AT(-0.2, 4.8), FIX_IN = CELL_AT(-1.4, 4.35), FIX_OUT = CELL_AT(-4.2, 2.1);
 
 function film(scene) {
   const get = (k, or = 0) => { const v = scene.get(k); return v == null ? or : v; };
   const withIt = k => get(k, 1) > 0.5;
   // the people's looks from the game's keys: Fogg's hat out of doors; Aouda's dress from Hong Kong on; Passepartout in
-  // the «Long Noses»' wings; Fix's bruise — as the cast gives them (kit.cast.wear, when it has them)
-  const W = scene.kit.cast?.wear ?? {};
+  // the «Long Noses»' wings; Fix's bruise — the cast's own objects (kit.cast.wears)
+  const W = scene.kit.cast.wears;
   const wear = {
     fogg: () => ({ hat: 'tophat' }),
-    aouda: () => (get('aouda_dress') > 0.5 ? TRAVEL : null),
-    passepartout: () => (get('pp_wings') > 0.5 && W.pp_wings ? W.pp_wings : null),
-    fix: () => (get('fix_bruise') > 0.5 && W.fix_bruise ? W.fix_bruise : null),
+    aouda: () => (get('aouda_dress') > 0.5 ? W.aouda_dress : null),
+    passepartout: () => (get('pp_wings') > 0.5 ? W.pp_wings : null),
+    fix: () => (get('fix_bruise') > 0.5 ? W.fix_bruise : null),
   };
   const WEAR = () => Object.fromEntries(Object.entries(wear).map(([id, f]) => [`${id}_wear`, f()]));
-  const P = (id, spot, turn, more) => ({ ...at(id, spot, turn, more), [`${id}_wear`]: wear[id] ? wear[id]() : null });
+  const P = (id, spot, turn, more) => ({ [`${id}_wear`]: wear[id] ? wear[id]() : null, ...at(id, spot, turn, more) });
+  // both hands holding something before the chest (the notebook)
+  const holding = (spot, turn) => { const p = before(spot, turn, 0.3, 1.1); return { r: p, l: p }; };
 
   // ── the shots ──
   const SUEZ = () => ({ ...SEA('mongolia', 'suez'), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'passepartout', camera_shot: 1.35, camera_frame: [0.62, 0.42],
-    ...P('passepartout', SPOT.pp_suez, toward(SPOT.pp_suez, SPOT.fix_suez), { look: 'fix#head' }),
-    ...P('fix', SPOT.fix_suez, toward(SPOT.fix_suez, SPOT.pp_suez), { look: 'passepartout#head' }),
-    ...P('consul', SPOT.consul, 200, { do: loop('hands_behind'), look: [30, 400, 10] }) });
+    camera_target: 'suez_two', camera_shot: 1, camera_frame: [0.5, 0.42],
+    ...P('passepartout', SPOT.pp_suez, toward(SPOT.pp_suez, SPOT.fix_suez), { look: 'fix#head', mood: 'smile' }),
+    ...P('fix', SPOT.fix_suez, toward(SPOT.fix_suez, SPOT.pp_suez), { look: 'passepartout#head', mood: 'smile' }),
+    ...P('consul', SPOT.consul, 200, { do: loop('hands_behind'), look: 'fix#head' }) });
   const BOMBAY = () => ({ ...SEA('mongolia', 'bombay', { dawn: 1 }), ...CAM, ...NOBODY(), ...WEAR(),
     camera_target: 'fogg', camera_shot: 'medium', camera_frame: [0.36, 0.45],
-    ...P('fogg', [RAIL - 0.2, 9.6], 215, { with: ['notebook'], look: 'fogg#book' }) });
+    ...P('fogg', SPOT.bombay, 215, { with: ['notebook'], reach: holding(SPOT.bombay, 215), look: 'fogg#book' }) });
   const NIGHT = () => ({ ...SEA('rangoon', 'none', { night: 1, speed: 0.6 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'night_two', camera_shot: 1.5, camera_frame: [0.55, 0.42],
-    ...P('aouda', SPOT.aouda_rail, 80, { look: [60, 300, -4] }),
-    ...P('fogg', SPOT.fogg_rail, 75, { with: ['plaid'], look: [40, 300, -4] }) });
+    camera_target: 'night_two', camera_shot: 0.85, camera_frame: [0.5, 0.42],
+    ...P('aouda', SPOT.aouda_rail, 85, { look: [60, 300, -4] }),
+    ...P('fogg', SPOT.fogg_rail, 80, { with: ['plaid'], look: [40, 300, -4] }) });
   // (as rail_night leaves them: turned to each other)
-  const NIGHT_TURNED = () => ({ ...NIGHT(), aouda_turn: 200, aouda_look: 'fogg#head', fogg_turn: 20, fogg_look: 'aouda#head' });
+  const NIGHT_TURNED = () => ({ ...NIGHT(), aouda_turn: toward(SPOT.aouda_rail, SPOT.fogg_rail), aouda_look: 'fogg#head',
+    fogg_turn: toward(SPOT.fogg_rail, SPOT.aouda_rail), fogg_look: 'aouda#head' });
   const PACIFIC = () => ({ ...SEA('general_grant', 'none', { speed: 0.8 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'passepartout', camera_shot: 1.6, camera_frame: [0.6, 0.42],
-    ...P('passepartout', SPOT.pp_rail, 90, { look: [80, 400, -5] }),
+    camera_target: 'two_pacific', camera_shot: 0.9, camera_frame: [0.5, 0.42],
+    ...P('passepartout', SPOT.pp_rail, 100, { look: [80, 400, -5] }),
     ...P('fix', SPOT.fix_from, toward(SPOT.fix_from, SPOT.fix_pp)) });
+  // (as pacific leaves them: face to face)
   const MET = () => ({ ...PACIFIC(), fix_a: SPOT.fix_pp[0], fix_d: SPOT.fix_pp[1], fix_turn: toward(SPOT.fix_pp, SPOT.pp_rail), fix_look: 'passepartout#head',
-    passepartout_turn: toward(SPOT.pp_rail, SPOT.fix_pp), passepartout_look: 'fix#head', camera_target: 'two_pacific', camera_shot: 1.25, camera_frame: [0.5, 0.42] });
+    passepartout_turn: toward(SPOT.pp_rail, SPOT.fix_pp), passepartout_look: 'fix#head' });
   const CALENDAR = () => ({ ...SEA('general_grant', 'none', { speed: 0.8 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'calendar', camera_shot: 4.2, camera_frame: [0.42, 0.45],
-    ...P('sailor', SPOT.sailor_cal, 160, { look: 'calendar#leaf' }),
-    ...P('passepartout', SPOT.pp_cal, 300, { look: 'calendar#leaf' }),
-    ...P('fogg', plan.chair, 30, { on: [plan.chair[0], plan.chair[1] + 0.05, 0.42], do: loop('read_book'), with: ['notebook'], look: 'fogg#book', wear: null }) });
+    camera_target: 'calendar', camera_shot: 4, camera_frame: [0.5, 0.45],
+    ...P('sailor', SPOT.sailor_cal, 0, { look: 'calendar#leaf' }),
+    ...P('passepartout', SPOT.pp_cal, toward(SPOT.pp_cal, [plan.calendar[0], plan.house.d]), { look: 'calendar#leaf' }),
+    ...P('fogg', plan.chair, 150, { on: [plan.chair[0], plan.chair[1], 0.42], do: loop('read_book'), with: ['notebook'], look: 'fogg#book', wear: null }) });
   const NEW_YORK = () => {
     const v = { ...SEA('henrietta', 'new_york'), ...CAM, ...NOBODY(), ...WEAR(),
-      camera_target: 'fogg', camera_shot: 1.7, camera_frame: [0.42, 0.42],
-      ...P('fogg', SPOT.gang, 300, { look: 'speedy#head' }),
+      camera_target: 'fogg', camera_shot: 0.8, camera_frame: [0.7, 0.3],
+      ...P('fogg', SPOT.gang, 330, { look: 'china#smoke' }),
       ...P('speedy', SPOT.bridge_speedy, 190, { do: loop('arms_folded'), look: 'fogg#head' }) };
-    if (withIt('with_aouda')) Object.assign(v, P('aouda', SPOT.gang_2, 320, { look: 'speedy#head' }));
-    if (withIt('with_pp')) Object.assign(v, P('passepartout', SPOT.gang_3, 330, { look: 'speedy#head' }));
-    if (withIt('with_fix')) Object.assign(v, P('fix', [4.3, 7.6], 330, { look: 'fogg#head' }));
+    if (withIt('with_aouda')) Object.assign(v, P('aouda', SPOT.gang_aouda, 330, { look: 'china#smoke' }));
+    if (withIt('with_pp')) Object.assign(v, P('passepartout', SPOT.gang_pp, 340, { look: 'china#smoke' }));
+    if (withIt('with_fix')) Object.assign(v, P('fix', SPOT.gang_fix, 320, { look: 'china#smoke' }));
     return v;
   };
   const MUTINY = () => ({ ...SEA('henrietta', 'none', { speed: 0.85 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'fogg', camera_shot: 1.9, camera_frame: [0.45, 0.4],
-    ...P('fogg', SPOT.bridge_fogg, 10, { look: [0, 300, 3] }) });
-  const COAL = () => ({ ...SEA('henrietta', 'none', { speed: 0.6, smoke: 0.2 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'stoker', camera_shot: 2.2, camera_frame: [0.55, 0.42],
-    ...P('stoker', SPOT.stoker, 225, { look: 'fogg#head' }),
-    ...P('fogg', [0.6, 12.4], 40, { look: 'stoker#head' }),
-    ...(withIt('with_pp') ? P('passepartout', [-0.4, 13.6], 60, { look: 'stoker#head' }) : {}) });
+    camera_target: 'fogg', camera_shot: 0.9, camera_frame: [0.45, 0.4],
+    ...P('fogg', SPOT.bridge_fogg, 100, { look: [60, 300, 4] }) });
+  const COAL = () => ({ ...SEA('henrietta', 'none', { speed: 0.6 }), ...CAM, ...NOBODY(), ...WEAR(),
+    camera_target: 'coal_three', camera_shot: 0.6, camera_frame: [0.5, 0.42],
+    ...P('stoker', SPOT.stoker, toward(SPOT.stoker, SPOT.coal_fogg), { look: 'fogg#head' }),
+    ...P('fogg', SPOT.coal_fogg, toward(SPOT.coal_fogg, SPOT.stoker), { look: 'stoker#head' }),
+    ...(withIt('with_pp') ? P('passepartout', SPOT.coal_pp, toward(SPOT.coal_pp, SPOT.stoker), { look: 'stoker#head' }) : {}) });
   const BURN = () => {
     const pp = withIt('with_pp');
-    return { ...SEA('henrietta', 'none', { speed: 0.6, smoke: 0.6, fire: 0.5 }), ...BURN_VIEW, ...NOBODY(), ...WEAR(),
-      ...P('stoker', SPOT.stoker, 215, { do: loop('shovel'), look: 'hatch#fire' }),
-      ...(pp ? P('passepartout', SPOT.pp_hatch, 60, { look: 'hatch#fire' }) : {}),
-      ...P('fogg', pp ? SPOT.bridge_fogg : SPOT.pp_hatch, pp ? 180 : 60, pp ? { look: 'hatch#fire' } : { look: 'hatch#fire', wear: { hat: 'none' } }),
-      ...P('speedy', SPOT.speedy_deck, 30, { look: 'hatch#fire' }) };
+    return { ...SEA('henrietta', 'none', { speed: 0.2, smoke: 0.6, fire: 0.3 }), ...BURN_VIEW, ...NOBODY(), ...WEAR(),
+      ...P('stoker', SPOT.stoker, 225, { do: loop('shovel'), look: 'hatch#fire' }),
+      ...(pp ? P('passepartout', SPOT.pp_hatch, 60, { look: 'hatch#fire' })
+        : P('fogg', SPOT.pp_hatch, 60, { look: 'hatch#fire', wear: { garment: 'waistcoat', hat: 'none' } })),
+      ...(pp ? P('fogg', SPOT.bridge_fogg, 160, { look: 'hatch#fire' }) : {}),
+      ...P('speedy', SPOT.speedy_burn, 150, { look: 'hatch#fire' }) };
   };
   // the parts as the game left them (the burn's): kept — the cut sets only the light and the people
   const QUEENSTOWN = () => {
     const cabin = get('speedy_cabin', 1) > 0.5;
-    return { ship: 'henrietta', port: 'queenstown', night: 0, dawn: 1, fog: 0, smoke: 0.5, speed: 0.5, fire: 0.3, porthole: 0, cell_close: 0,
-      ...BURN_VIEW, camera_z: -4.5, camera_h: 2.2, camera_look: 0.02, ...NOBODY(), ...WEAR(),
-      ...(cabin ? P('speedy', [plan.cabin.a, plan.cabin.d + 1.6], 20, { look: [60, 600, 10] }) : {}),
+    return { ship: 'henrietta', port: 'queenstown', night: 0, dawn: 1, fog: 0, smoke: 0.5, speed: 0.5, fire: 0.3, flare_glow: 0, speedy_grief: 0, porthole: 0, cell_close: 0,
+      ...BURN_VIEW, camera_h: 2.2, camera_look: 0.02, ...NOBODY(), ...WEAR(),
+      ...(cabin ? P('speedy', [plan.cabin.a, plan.cabin.d + 1.6], 160, { look: 'fogg#head' }) : {}),
       ...P('fogg', [1.4, 9.6], 30, { look: [120, 900, 10] }) };
   };
-  const SAILS = () => ({ ...SEA('henrietta', 'none', { speed: 0.3, smoke: 0, sails: 0 }), ...CAM, camera_z: -3, camera_h: 0.8, camera_look: -0.08, ...NOBODY(), ...WEAR(),
-    ...P('speedy', SPOT.bridge_speedy, 200, { look: [0, 30, 20] }),
-    ...P('fogg', SPOT.bridge_fogg, 160, { look: 'speedy#head' }) });
+  const SAILS = () => ({ ...SEA('henrietta', 'none', { speed: 0.3, smoke: 0, sails: 0 }), ...CAM, camera_z: -3, camera_h: 0.8, camera_look: -0.12, ...NOBODY(), ...WEAR(),
+    ...P('speedy', SPOT.bridge_speedy, 150, { look: [0, 11, 16] }),
+    ...P('fogg', SPOT.bridge_fogg, 200, { look: 'speedy#head' }) });
   const LIVERPOOL = () => {
     const v = { ...SEA('henrietta', 'liverpool', { fog: 1, smoke: 0.3 }), ...CAM, ...NOBODY(), ...WEAR(),
-      camera_target: 'fogg', camera_shot: 2.6, camera_frame: [0.45, 0.42],
-      ...P('fogg', [1.4, 7.2], 45, { look: [9, 30, 0] }),
-      ...P('fix', [0.2, 6.6], 45, { look: 'fogg#head' }),
-      ...P('policeman', SPOT.quay_up, 270), ...P('policeman_2', [9.4, 8.2], 270) };
-    if (withIt('with_aouda')) Object.assign(v, P('aouda', [0.6, 5.6], 40, { look: [9, 30, 0] }));
-    if (withIt('with_pp')) Object.assign(v, P('passepartout', [2.4, 6.0], 50, { look: [9, 30, 0] }));
+      camera_target: 'lv_two', camera_shot: 0.75, camera_frame: [0.5, 0.42],
+      ...P('fogg', SPOT.lv_fogg, 120, { look: [12, 30, -1] }),
+      ...P('fix', SPOT.lv_fix_from, toward(SPOT.lv_fix_from, SPOT.lv_fix)),
+      ...P('policeman', SPOT.quay_1, 270), ...P('policeman_2', SPOT.quay_2, 270) };
+    if (withIt('with_aouda')) Object.assign(v, P('aouda', SPOT.lv_aouda, 100, { look: [12, 30, -1] }));
+    if (withIt('with_pp')) Object.assign(v, P('passepartout', SPOT.lv_pp, 100, { look: [12, 30, -1] }));
     return v;
   };
-  const CELL = () => ({ ...SEA('henrietta', 'liverpool', { fog: 1, speed: 0 }), ...CAM, camera_x: plan.cell[0], camera_z: plan.cell[1] - 0.6, camera_h: -0.25, ...NOBODY(),
-    ...P('fogg', [plan.cell[0] - 0.2, plan.cell[1] + 4.7], 180, { on: [plan.cell[0] - 0.2, plan.cell[1] + 4.75, 0.46], do: loop('sit_calm'), wear: null, look: [plan.cell[0] + 1.6, plan.cell[1] + 2, 1.6] }),
-    ...P('fix', [plan.cell[0] - 3.4, plan.cell[1] + 2.6], 90, { here: false }) });
+  // the cell, inside: the camera at its open side (its anchor's start), Fogg on the bench, Fix outside the door
+  const CELL = () => ({ ...SEA('henrietta', 'liverpool', { speed: 0, smoke: 0 }), ...CAM, camera_x: plan.cell[0], camera_z: plan.cell[1] - 0.6, camera_h: -0.25, ...NOBODY(),
+    ...P('fogg', BENCH, 180, { on: [BENCH[0], BENCH[1], 0.46], do: loop('sit_calm'), wear: null, look: CELL_AT(-1.2, 1.5).concat(1.2) }),
+    ...P('fix', FIX_OUT, 90, { here: false }) });
 
   // ── the beats ──
   const B = {
     // ---- Suez, day: by the gangway's head Passepartout chats with Fix, who offers him a cigar; Fix goes over to the
-    // consul at the head of the gangway and whispers to him; Passepartout looks at the town.
+    // consul and whispers to him, turned aft, while Passepartout looks at the town.
     suez: {
       from: SUEZ,
       run: async s => {
@@ -330,18 +512,21 @@ function film(scene) {
         fix.reach(null);
         pp.reach(null);
         s.tell('suez:chat');
-        await s.wait(4.5);
+        await s.wait(3.6);
         // Fix goes; Passepartout's eyes go to the town over the rail
+        pp.mood(null);
         pp.look([300, 900, 30]);
-        await s.wait(0.2);
         pp.turn(70);
-        s.camera({ target: 'fix_consul', shot: 1.5, frame: [0.55, 0.42], glide: 2.2 });
-        await fix.walk([SPOT.fix_whisper]);
-        await fix.turn(toward(SPOT.fix_whisper, SPOT.consul));
+        s.camera({ target: 'fix_consul', shot: 1, frame: [0.5, 0.42], glide: 2.4 });
+        await fix.walk([[2.2, 12.0], SPOT.fix_whisper]);
+        fix.mood(null);
         consul.look('fix#head');
+        await s.all(fix.turn(toward(SPOT.fix_whisper, SPOT.consul)), consul.turn(toward(SPOT.consul, SPOT.fix_whisper)));
         fix.look('consul#head');
-        await fix.do('whisper');
+        const w = fix.do('whisper');
+        await s.wait(1);
         s.tell('suez:whisper');
+        await w;
         consul.look('passepartout#head');
         await s.wait(2.4);
       },
@@ -368,21 +553,23 @@ function film(scene) {
         await s.wait(3.2);
         aouda.look('fogg#head');
         await s.wait(0.4);
-        await aouda.turn(200);
+        await aouda.turn(toward(SPOT.aouda_rail, SPOT.fogg_rail));
         s.tell('rail_night:turns');
         await s.wait(0.8);
         fogg.look('aouda#head');
-        await fogg.turn(20);
+        await fogg.turn(toward(SPOT.fogg_rail, SPOT.aouda_rail));
         await s.wait(2);
       },
     },
-    // ---- He takes the plaid off his arm and lays it over her shoulders; her hand comes up to its edge.
+    // ---- He steps to her, takes the plaid off his arm and lays it over her shoulders; her hand comes up to its edge.
     plaid: {
       after: 'rail_night',
       from: NIGHT_TURNED,
       run: async s => {
         const fogg = s.person('fogg'), aouda = s.person('aouda');
         s.camera({ target: 'aouda', shot: 1.2, frame: [0.55, 0.42], glide: 1.8 });
+        await fogg.walk([SPOT.fogg_plaid]);
+        await fogg.turn(toward(SPOT.fogg_plaid, SPOT.aouda_rail));
         fogg.reach({ r: 'aouda#shoulder_l', l: 'aouda#shoulder_r' });
         await s.wait(1.4);
         fogg.with(null);
@@ -390,12 +577,14 @@ function film(scene) {
         await s.wait(0.5);
         fogg.reach(null);
         await s.wait(0.6);
-        aouda.reach({ l: 'aouda#shoulder_r' });
+        aouda.reach({ r: 'aouda#shoulder_l' });
+        aouda.mood('smile');
         aouda.look('fogg#head');
         await s.wait(2.6);
+        aouda.reach(null);
       },
     },
-    // ---- She asks for his notebook and writes a line in it, the pencil in her hand; he looks out at the sea.
+    // ---- She asks for his notebook and writes a line in it; he looks out at the sea.
     writes: {
       after: ['rail_night', 'plaid'],
       from: NIGHT_TURNED,
@@ -406,37 +595,40 @@ function film(scene) {
         fogg.with(['notebook']);
         fogg.reach({ r: 'aouda#hands' });
         await s.wait(1.2);
-        fogg.with(null);
+        fogg.with(Array.isArray(was) && was.includes('plaid_shoulders') ? null : ['plaid']);
         fogg.reach(null);
         aouda.with([...(Array.isArray(was) ? was.filter(x => x !== 'notebook') : []), 'notebook']);
         aouda.look('aouda#book');
         fogg.look([60, 300, -4]);
         await fogg.turn(80);
-        await aouda.do('write_note');
+        aouda.do('write_note', { loop: true });
+        await s.wait(4.2);
         s.tell('writes:done');
+        aouda.do('stand', { loop: true });
         aouda.look('fogg#head');
         await s.wait(2);
       },
     },
-    // ---- The «General Grant» on the Pacific, sun: Passepartout at the rail (in his wings, if he wore them); Fix
-    // comes up to him; they look at each other — under the choice.
+    // ---- The «General Grant» on the Pacific, sun: Passepartout at the rail (in his wings, if he wore them); Fix comes
+    // aft from the deckhouse and stands before him; face to face — under the choice.
     pacific: {
       from: PACIFIC,
       run: async s => {
         const pp = s.person('passepartout'), fix = s.person('fix');
-        await s.wait(1.2);
-        s.camera({ target: 'two_pacific', shot: 1.25, frame: [0.5, 0.42], glide: 3 });
-        await fix.walk([SPOT.fix_pp]);
+        await s.wait(0.8);
+        await fix.walk([[2.8, 12.6], SPOT.fix_pp]);
         await fix.turn(toward(SPOT.fix_pp, SPOT.pp_rail));
         fix.look('passepartout#head');
-        await s.wait(0.6);
+        await s.wait(0.5);
         pp.look('fix#head');
         await pp.turn(toward(SPOT.pp_rail, SPOT.fix_pp));
+        pp.mood('surprised');
         s.tell('pacific:fix');
         await s.wait(2);
+        pp.mood(null);
       },
     },
-    // ---- Passepartout hits him; Fix sits down on the deck and sets his hat right.
+    // ---- Passepartout hits him; Fix goes down, sits up on the deck and sets his hat right.
     punch: {
       after: 'pacific',
       from: MET,
@@ -444,14 +636,17 @@ function film(scene) {
         const pp = s.person('passepartout'), fix = s.person('fix');
         pp.mood('angry');
         const hit = pp.do('punch');
-        await s.wait(0.55);
+        await s.wait(1.6);
         fix.mood('surprised');
-        await fix.do('knocked_down');
+        const fall = fix.do('knocked_down');
+        await s.wait(0.2);
         s.tell('punch:down');
+        await hit;
         pp.mood(null);
         pp.look('fix#head');
-        await hit;
-        await s.wait(1.8);
+        await fall;
+        fix.mood('tired');
+        await s.wait(1.2);
       },
     },
     // ---- Passepartout, after a moment, holds out his hand; they shake.
@@ -465,14 +660,15 @@ function film(scene) {
         await s.wait(0.8);
         fix.reach({ r: 'passepartout#hand_r' });
         fix.mood('smile');
+        pp.mood('smile');
         await s.wait(2.4);
         pp.reach(null);
         fix.reach(null);
         await s.wait(1);
       },
     },
-    // ---- A sailor by the deckhouse turns the calendar's leaf: Wednesday again (the leaf read close); Passepartout
-    // roars with laughter; Fogg in his deck chair with his notebook doesn't look up.
+    // ---- A sailor by the deckhouse turns the calendar's leaf: Wednesday again (the leaf read close); he turns round;
+    // Passepartout roars with laughter; Fogg in his deck chair with his notebook doesn't look up.
     calendar: {
       from: CALENDAR,
       run: async s => {
@@ -483,30 +679,31 @@ function film(scene) {
         await s.move('leaf', 1, { over: 1.1, ease: 'inOut' });
         sailor.reach(null);
         s.tell('calendar:leaf');
-        await s.wait(2.6);
-        s.camera({ target: 'calendar_three', shot: 3.2, frame: [0.5, 0.45], glide: 2 });
-        await s.wait(1.2);
+        s.camera({ target: 'calendar_three', shot: 0.55, frame: [0.5, 0.45], glide: 2 });
+        await sailor.turn(170);
+        sailor.look('passepartout#head');
+        await s.wait(1.8);
+        pp.look('fogg#head');
+        await pp.turn(toward(SPOT.pp_cal, plan.chair));
         pp.mood('laugh');
         s.tell('calendar:laugh');
-        await pp.do('laugh');
+        await pp.do('laugh_up');
         await s.wait(1.6);
       },
     },
     // ---- New York, the «Henrietta» at the quay: Fogg (and whoever is with him) at the gangway's head; the «China»'s
-    // smoke far off on the horizon; Speedy on his bridge — under the lines.
+    // smoke far off on the horizon; he goes up to the bridge where Speedy stands — under the lines.
     new_york: {
-      from: () => ({ ...NEW_YORK(), camera_target: 'china#smoke', camera_shot: 'wide', camera_frame: [0.5, 0.4] }),
+      from: NEW_YORK,
       run: async s => {
         const fogg = s.person('fogg');
-        fogg.look('china#smoke');
         await s.wait(1.4);
         s.tell('new_york:smoke');
         await s.wait(3.2);
-        s.camera({ target: 'fogg', shot: 1.7, frame: [0.42, 0.42], glide: 2.4 });
-        await s.wait(1.2);
         fogg.look('speedy#head');
-        await fogg.turn(300);
-        s.camera({ target: 'speedy', shot: 2.2, frame: [0.5, 0.36], glide: 2 });
+        s.camera({ target: 'ny_two', shot: 0.6, frame: [0.5, 0.5], glide: 3 });
+        await fogg.walk([[2.6, 12.6], SPOT.below_bridge]);
+        await fogg.turn(toward(SPOT.below_bridge, SPOT.bridge_speedy));
         s.tell('new_york:speedy');
         await s.wait(2.4);
       },
@@ -519,42 +716,50 @@ function film(scene) {
         await s.move('porthole', 1, { over: 0.5 });
         s.tell('mutiny:porthole');
         await s.wait(3.2);
+        await s.move('porthole', 0, { over: 0.5 });
       },
     },
-    // ---- The smoke thins; the stoker at the hatch spreads his hands; Speedy is brought out on deck — under the choice.
+    // ---- The smoke thins; the stoker at the hatch spreads his hands; Speedy is brought out of his cabin by a sailor
+    // and stands before Fogg — under the choice.
     coal: {
-      from: () => ({ ...COAL(), smoke: 1 }),
+      from: COAL,
       run: async s => {
         const stoker = s.person('stoker'), fogg = s.person('fogg');
         s.move('smoke', 0.2, { over: 3 });
         await s.wait(1.2);
         await stoker.do('spread_hands');
         s.tell('coal:stoker');
-        await s.wait(0.6);
         const speedy = s.person('speedy'), sailor = s.person('sailor');
+        s.set('speedy_a', SPOT.cabin_door[0]);
+        s.set('speedy_d', SPOT.cabin_door[1]);
+        s.set('sailor_a', SPOT.cabin_door[0] - 0.7);
+        s.set('sailor_d', SPOT.cabin_door[1] - 0.2);
         speedy.here(true);
         sailor.here(true);
-        s.camera({ target: 'coal_three', shot: 2.4, frame: [0.48, 0.42], glide: 2.4 });
         speedy.mood('angry');
-        await s.all(speedy.walk([SPOT.speedy_deck, [0.0, 11.0]]), sailor.walk([SPOT.sailor_by, [-0.9, 10.2]]));
-        await speedy.turn(toward([0.0, 11.0], [0.6, 12.4]));
+        await s.all(speedy.walk([[-1.1, 7.0], [-0.9, 11.0], SPOT.speedy_brought]), sailor.walk([[-1.8, 6.9], [-1.6, 11.0], SPOT.sailor_brought]));
         speedy.look('fogg#head');
+        sailor.look('speedy#head');
         fogg.look('speedy#head');
-        await fogg.turn(toward([0.6, 12.4], [0.0, 11.0]));
+        await s.all(speedy.turn(toward(SPOT.speedy_brought, SPOT.coal_fogg)), fogg.turn(toward(SPOT.coal_fogg, SPOT.speedy_brought)));
         s.tell('coal:speedy');
         await s.wait(2);
       },
     },
-    // ---- «The boilers»: the deck from the poop; the game drags the parts to the hatch (its keys); the beat only cuts here.
-    burn: { from: BURN, run: async s => { await s.wait(1); } },
-    // ---- Dawn, from the stern: the bare iron hull, Queenstown on the horizon; Speedy saluting from his cabin's roof
-    // if it is left him.
+    // ---- «The boilers»: the deck from the poop; the game drags the parts to the hatch (its keys); the beat only cuts
+    // here and sets the fire going.
+    burn: {
+      from: BURN,
+      run: async s => { await s.wait(1); },
+    },
+    // ---- Dawn, from the stern: the bare iron hull, Queenstown on the horizon; Speedy saluting from his cabin's roof if
+    // it is left him.
     queenstown: {
       from: QUEENSTOWN,
       run: async s => {
         await s.wait(2.4);
         if (get('speedy_cabin', 1) > 0.5) {
-          s.camera({ target: 'speedy', shot: 3, frame: [0.4, 0.42], glide: 2.6 });
+          s.camera({ target: 'speedy', shot: 0.9, frame: [0.45, 0.42], glide: 2.6 });
           await s.wait(1.6);
           await s.person('speedy').do('salute');
         }
@@ -566,32 +771,35 @@ function film(scene) {
       from: SAILS,
       run: async s => {
         await s.move('sails', 1, { over: 5, ease: 'inOut' });
-        s.camera({ target: 'bridge_two', shot: 2.3, frame: [0.5, 0.4], glide: 2.6 });
+        s.camera({ target: 'bridge_two', shot: 0.8, frame: [0.5, 0.4], glide: 2.6 });
         await s.wait(2.4);
         const speedy = s.person('speedy');
+        speedy.look('fogg#head');
         speedy.mood('laugh');
         s.tell('sails_only:laugh');
-        await speedy.do('laugh');
+        await speedy.do('laugh_up');
         await s.wait(1.4);
       },
     },
-    // ---- Liverpool, 11:40, fog: the constables come up the gangway; Fix steps forward, his hand on Fogg's shoulder.
+    // ---- Liverpool, 11:40, fog: the constables come up the gangway; Fix comes aft, his hand on Fogg's shoulder.
     liverpool: {
       from: LIVERPOOL,
       run: async s => {
         const fogg = s.person('fogg'), fix = s.person('fix'), p1 = s.person('policeman'), p2 = s.person('policeman_2');
         await s.wait(0.6);
-        await s.all(p1.walk([[6.4, 9.8], SPOT.pol_1]), (async () => { await s.wait(0.9); await p2.walk([[6.4, 8.6], SPOT.pol_2]); })());
-        p1.turn(toward(SPOT.pol_1, [1.4, 7.2]));
-        p2.turn(toward(SPOT.pol_2, [1.4, 7.2]));
+        const fixes = (async () => { await s.wait(1.2); await fix.walk([[2.6, 12.4], SPOT.lv_fix]); })();
+        await s.all(p1.walk([SPOT.gang_top, SPOT.pol_1]), (async () => { await s.wait(0.9); await p2.walk([[5.4, 9.2], SPOT.pol_2]); })());
+        p1.turn(toward(SPOT.pol_1, SPOT.lv_fogg));
+        p2.turn(toward(SPOT.pol_2, SPOT.lv_fogg));
         p1.look('fogg#head');
         p2.look('fogg#head');
         fogg.look('policeman#head');
-        await fix.walk([[1.0, 7.9]]);
-        await fix.turn(toward([1.0, 7.9], [1.4, 7.2]) - 30);
+        await fixes;
+        await fix.turn(toward(SPOT.lv_fix, SPOT.lv_fogg));
+        fix.look('fogg#head');
         fix.reach({ l: 'fogg#shoulder_l' });
+        await s.wait(0.4);
         fogg.look('fix#head');
-        s.camera({ target: 'fix', shot: 1.5, frame: [0.5, 0.42], glide: 1.6 });
         s.tell('liverpool:hand');
         await s.wait(2.6);
       },
@@ -610,8 +818,8 @@ function film(scene) {
         await s.move('door', 1, { over: 0.5, ease: 'out' });
         fix.here(true);
         fix.mood('afraid');
-        await fix.walk([[plan.cell[0] - 1.0, plan.cell[1] + 3.3]], { gait: 'run' });
-        await fix.turn(toward([plan.cell[0] - 1.0, plan.cell[1] + 3.3], [plan.cell[0] - 0.2, plan.cell[1] + 4.75]));
+        await fix.walk([CELL_AT(-2.6, 2.4), FIX_IN], { gait: 'run' });
+        await fix.turn(toward(FIX_IN, BENCH));
         fix.look('fogg#head');
         fogg.look('fix#head');
         s.tell('release:in');
@@ -623,26 +831,31 @@ function film(scene) {
     // ---- Fogg rises and strikes him; Fix goes down.
     fix_down: {
       after: 'release',
-      from: () => ({ ...CELL(), door: 1, ...P('fix', [plan.cell[0] - 1.0, plan.cell[1] + 3.3], 60, { look: 'fogg#head' }) }),
+      from: () => ({ ...CELL(), door: 1, ...P('fix', FIX_IN, toward(FIX_IN, BENCH), { look: 'fogg#head', mood: 'afraid' }) }),
       run: async s => {
         const fix = s.person('fix'), fogg = s.person('fogg');
-        await fogg.on(null);
+        fogg.on(null);
         await fogg.do('rise_chair');
+        await fogg.turn(toward(BENCH, FIX_IN));
+        fogg.mood('angry');
         const hit = fogg.do('punch');
-        await s.wait(0.55);
-        await fix.do('knocked_down');
-        await hit;
         await s.wait(1.6);
+        const fall = fix.do('knocked_down');
+        await hit;
+        fogg.mood(null);
+        await fall;
+        await s.wait(1.2);
       },
     },
     // ---- Fogg rises and holds out his hand; Fix takes it.
     fix_hand: {
       after: 'release',
-      from: () => ({ ...CELL(), door: 1, ...P('fix', [plan.cell[0] - 1.0, plan.cell[1] + 3.3], 60, { look: 'fogg#head' }) }),
+      from: () => ({ ...CELL(), door: 1, ...P('fix', FIX_IN, toward(FIX_IN, BENCH), { look: 'fogg#head', mood: 'afraid' }) }),
       run: async s => {
         const fix = s.person('fix'), fogg = s.person('fogg');
-        await fogg.on(null);
+        fogg.on(null);
         await fogg.do('rise_chair');
+        await fogg.turn(toward(BENCH, FIX_IN));
         fogg.reach({ r: 'fix#hand_r' });
         await s.wait(0.9);
         fix.reach({ r: 'fogg#hand_r' });
@@ -653,9 +866,46 @@ function film(scene) {
   };
   return B;
 }
+
+// The showcase's own beats (not the game's): «The boilers» played out — the parts dragged to the hatch one after
+// another — and the cell with the bars' shadow going over the floor.
+function showcaseOnly(scene) {
+  const drag = async (s, part) => {
+    s.set(`drag_${part}`, 0);
+    await s.move(`drag_${part}`, 1, { over: 2.4, ease: 'inOut' });
+    s.set(part, 0);
+    s.set(`drag_${part}`, 0);
+    s.move('fire', anim.clamp((scene.get('fire') ?? 0) + 0.12, 0, 1), { over: 0.8 });
+    await s.wait(0.6);
+  };
+  return {
+    burn_show: {
+      from: () => film(scene).burn.from(),
+      run: async s => {
+        await s.move('fire', 0.3, { over: 1 });
+        await drag(s, 'boats');
+        await drag(s, 'bunks');
+        s.set('speedy_grief', 0.5);
+        await drag(s, 'mast_main');
+        await drag(s, 'deckhouse');
+        s.set('speedy_grief', 1);
+        await s.wait(1.5);
+      },
+    },
+    cell_show: {
+      from: () => film(scene).cell.from(),
+      run: async s => {
+        s.set('cell_time', 0);
+        await s.move('cell_time', 1, { over: 8, ease: 'linear' });
+        await s.move('cell_close', 0, { over: 0.6 });
+      },
+    },
+  };
+}
 const SHOWCASE = ['suez', 'bombay', 'rail_night', 'plaid', 'writes', 'pacific', 'punch', 'calendar', 'new_york', 'mutiny', 'coal', 'burn_show', 'queenstown', 'sails_only', 'liverpool', 'cell_show', 'release'];
 
 return {
   plan, SHIPS, PORTS, shipOf, portOf, quayed, COLOURS, colours, PARTS, PART_NAMES, partAt, fallOf, partLook, partAnimate,
-  poly, rect, shade, tint, boat, skyline, film, SHOWCASE, SPOT, toward, clamp01, mixc, css, rgba, glow, BURN_VIEW,
+  poly, rect, line, shade, tint, pane, port, planked, door, houseSide, bulwarkSide, gunwaleSide, mast, yardsOf, yardsAnimate, boat, skyline, film, showcaseOnly, SHOWCASE, SPOT, toward,
+  clamp01, mixc, css, rgba, glow, BURN_VIEW,
 };

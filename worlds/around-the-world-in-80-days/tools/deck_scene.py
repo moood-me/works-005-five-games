@@ -22,10 +22,10 @@ objects = [
     {'id': 'port_far', 'name': 'Port on the horizon', 'across': 560, 'distance': 1500, 'elevation': -5.5, 'box': [-1100, -130, 1100, 2]},
     {'id': 'china', 'name': "The China's smoke on the horizon", 'across': -260, 'distance': 2200, 'elevation': -5.5, 'box': [-60, -150, 260, 2]},
     {'id': 'quay', 'name': 'Quay', 'plane': True, 'across': 30, 'distance': 30, 'elevation': -2.6, 'width': 48, 'depth': 160},
-    {'id': 'sheds', 'name': 'Warehouses on the quay', 'across': 42, 'distance': 110, 'elevation': -2.6, 'facing': 270, 'box': [0, -30, 150, 0.2]},
+    {'id': 'sheds', 'name': 'Warehouses on the quay', 'across': 42, 'distance': 110, 'elevation': -2.6, 'facing': 270, 'box': [0, -36, 166, 0.2]},
     {'id': 'gangway', 'name': 'Gangway', 'plane': True, 'across': 7.35, 'distance': 9.7, 'elevation': -1.3, 'width': 1.1, 'depth': 4.69,
      'rotation': 270, 'tilt': 33.7, 'walk': True},
-    {'id': 'deck', 'name': 'The deck', 'plane': True, 'across': 0, 'distance': 22, 'elevation': 0.005, 'width': 11.2, 'depth': 54},
+    {'id': 'deck', 'name': 'The deck', 'plane': True, 'across': 0, 'distance': 21, 'elevation': 0.005, 'width': 11.2, 'depth': 52},
     # the bulwarks: an anchor the burn moves; the port side's (the part's point) and the starboard's on it
     {'id': 'bulwarks_at', 'name': 'Bulwarks (site)', 'unseen': True, 'across': 0, 'distance': 0, 'place': part_place('bulwarks')},
     {'id': 'bulwarks', 'name': 'Port bulwarks', 'on': 'bulwarks_at', 'across': -5.45, 'distance': -5, 'facing': 90, 'box': [-0.2, -1.25, 52.2, 0.1]},
@@ -44,7 +44,8 @@ objects = [
     # the deckhouse, its bridge on the roof, the calendar on its aft face
     {'id': 'house', 'name': 'Deckhouse (site)', 'unseen': True, 'across': 0, 'distance': 18, 'place': part_place('deckhouse')},
     {'id': 'deckhouse', 'name': 'Deckhouse', 'on': 'house', 'facing': 180, 'box': [-2.3, -2.6, 2.3, 0.1]},
-    {'id': 'deckhouse_side', 'name': 'Deckhouse, starboard side', 'on': 'house', 'across': 2.2, 'facing': 90, 'box': [-0.1, -2.6, 8.1, 0.1]},
+    {'id': 'deckhouse_side', 'name': 'Deckhouse, starboard side', 'on': 'house', 'across': 2.3, 'facing': 90, 'box': [-0.1, -2.6, 8.3, 0.1]},
+    {'id': 'deckhouse_port', 'name': 'Deckhouse, port side', 'on': 'house', 'across': -2.3, 'distance': 8.2, 'facing': 270, 'box': [-0.1, -2.6, 8.3, 0.1]},
     {'id': 'house_roof', 'name': 'Bridge on the deckhouse', 'plane': True, 'on': 'house', 'distance': 4, 'elevation': 2.4, 'width': 4.6, 'depth': 8.2, 'walk': True},
     {'id': 'bridge_rail', 'name': 'Bridge rail', 'on': 'house', 'distance': 0.15, 'elevation': 2.4, 'facing': 180, 'box': [-2.5, -1.3, 2.5, 0.05]},
     {'id': 'calendar', 'name': 'Calendar on the deckhouse', 'on': 'house', 'across': -1.2, 'distance': -0.04, 'elevation': 1.62, 'facing': 180, 'box': [-0.32, -0.44, 0.32, 0.04]},
@@ -56,26 +57,33 @@ objects = [
     {'id': 'mast_main', 'name': 'Mainmast', 'across': 0, 'distance': 11, 'box': [-5.8, -25.6, 5.8, 0.2], 'place': part_place('mast_main')},
     {'id': 'mast_fore', 'name': 'Foremast', 'across': 0, 'distance': 34, 'box': [-5.8, -23.6, 5.8, 0.2], 'place': part_place('mast_fore')},
     {'id': 'yards_at', 'name': 'Yards (site)', 'unseen': True, 'across': 0, 'distance': 11, 'place': part_place('yards')},
-    {'id': 'yards', 'name': 'Mainmast yards and sails', 'on': 'yards_at', 'box': [-8, -24.6, 8, -5], 'translucent': 0.4},
-    {'id': 'yards_fore', 'name': 'Foremast yards and sails', 'on': 'yards_at', 'distance': 23, 'box': [-8, -22.6, 8, -5], 'translucent': 0.4},
+    # the yards and their sails: the foremast's (the part's point, on its lower yard's arm) and the mainmast's, on one anchor
+    {'id': 'yards', 'name': 'Foremast yards and sails', 'on': 'yards_at', 'distance': 23, 'box': [-8, -22.6, 8, -1.5], 'translucent': 0.4},
+    {'id': 'yards_main', 'name': 'Mainmast yards and sails', 'on': 'yards_at', 'box': [-8, -24.6, 8, -1.5], 'translucent': 0.4},
     {'id': 'hatch', 'name': 'Stokehold hatch', 'across': 1.4, 'distance': 13.8, 'box': [-1.0, -0.75, 1.0, 0.05]},
     {'id': 'hatch_glow', 'name': 'Fire in the hatch', 'plane': True, 'across': 1.4, 'distance': 14.6, 'elevation': 0.66, 'width': 1.5, 'depth': 1.5, 'glows': True},
     {'id': 'hatch_fire', 'name': 'Flames from the hatch', 'particles': {'kind': 'fire', 'at': 'hatch#fire', 'amount': 'fire', 'size': [0.7, 0.15], 'source': [1.1, 1.1, 0], 'rate': 40}},
     {'id': 'flare_p', 'name': 'Flare in the hatch', 'particles': {'kind': 'sparks', 'at': 'hatch#fire', 'burst': {'on': 'flare', 'count': 160, 'over': 0.4},
      'speed': [3, 8], 'spread': 40, 'direction': [0, 0, 1]}},
     {'id': 'bunks', 'name': 'Bunks', 'across': 3.4, 'distance': 12.4, 'box': [-1.2, -1.6, 1.2, 0.1], 'place': part_place('bunks')},
-    {'id': 'boats', 'name': 'Boats', 'across': -2.6, 'distance': 15.8, 'box': [-2.8, -1.9, 2.8, 0.1], 'place': part_place('boats')},
-    {'id': 'paddle_box', 'name': 'Paddle-box', 'across': 5.45, 'distance': 20, 'facing': 270, 'box': [-5.6, -5.2, 5.6, 0.1]},
-    {'id': 'walking_beam', 'name': 'Walking-beam', 'across': 0, 'distance': 15.2, 'box': [-4.6, -10, 4.6, 0.1]},
+    {'id': 'boats', 'name': 'Port boat', 'across': -2.6, 'distance': 15.8, 'box': [-2.6, -2.1, 2.6, 0.1], 'place': part_place('boats')},
+    {'id': 'boats_s', 'name': 'Starboard boat', 'on': 'boats', 'across': 5.6, 'distance': 1.2, 'facing': 180, 'box': [-2.6, -2.1, 2.6, 0.1]},
+    {'id': 'paddle_box', 'name': 'Paddle-boxes', 'across': 5.45, 'distance': 20, 'facing': 270, 'box': [-5.6, -5.2, 5.6, 0.1],
+     'copies': [{'across': 5.45, 'distance': 20, 'facing': 270}, {'across': -5.45, 'distance': 20, 'facing': 90}]},
+    {'id': 'walking_beam', 'name': 'Walking-beam', 'across': 0, 'distance': 24.8, 'box': [-3, -10.5, 3, 0.1]},
     {'id': 'lantern', 'name': 'Lantern at the rail', 'across': 4.75, 'distance': 11.3, 'box': [-0.5, -3, 0.5, 0.1]},
-    {'id': 'deckchair', 'name': 'Deck-chair', 'across': -2.6, 'distance': 13.2, 'facing': 210, 'box': [-0.5, -1.0, 0.5, 0.1]},
+    {'id': 'deckchair', 'name': 'Deck-chair', 'across': -2.2, 'distance': 14.35, 'facing': 150, 'box': [-0.45, -1.05, 0.45, 0.05]},
     # points the operator frames: between the people of a moment
-    {'id': 'night_two', 'name': 'Two at the rail', 'unseen': True, 'across': 4.55, 'distance': 9.6, 'elevation': 1.45},
-    {'id': 'fix_consul', 'name': 'Fix and the consul', 'unseen': True, 'across': 3.9, 'distance': 12.3, 'elevation': 1.5},
-    {'id': 'two_pacific', 'name': 'Passepartout and Fix', 'unseen': True, 'across': 4.2, 'distance': 9.65, 'elevation': 1.45},
-    {'id': 'calendar_three', 'name': 'At the calendar', 'unseen': True, 'across': -0.6, 'distance': 15.8, 'elevation': 1.4},
-    {'id': 'coal_three', 'name': 'At the hatch', 'unseen': True, 'across': 0.9, 'distance': 12.2, 'elevation': 1.4},
-    {'id': 'bridge_two', 'name': 'On the bridge', 'unseen': True, 'across': 0.1, 'distance': 18.9, 'elevation': 3.9},
+    # (each 2 m tall: a shot of 1 frames 2 m of it)
+    {'id': 'suez_two', 'name': 'Passepartout and Fix at Suez', 'unseen': True, 'across': 3.1, 'distance': 10.1, 'elevation': 1.45},
+    {'id': 'fix_consul', 'name': 'Fix and the consul', 'unseen': True, 'across': 1.65, 'distance': 13.2, 'elevation': 1.5},
+    {'id': 'night_two', 'name': 'Two at the rail', 'unseen': True, 'across': 4.2, 'distance': 10.25, 'elevation': 1.45},
+    {'id': 'two_pacific', 'name': 'Passepartout and Fix', 'unseen': True, 'across': 4.0, 'distance': 10.5, 'elevation': 1.45},
+    {'id': 'calendar_three', 'name': 'At the calendar', 'unseen': True, 'across': -1.0, 'distance': 15.4, 'elevation': 1.3},
+    {'id': 'ny_two', 'name': 'Fogg below the bridge, Speedy on it', 'unseen': True, 'across': 1.5, 'distance': 17.0, 'elevation': 2.6},
+    {'id': 'coal_three', 'name': 'At the hatch', 'unseen': True, 'across': 0.6, 'distance': 13.4, 'elevation': 1.4},
+    {'id': 'bridge_two', 'name': 'On the bridge', 'unseen': True, 'across': 0.1, 'distance': 19.4, 'elevation': 4.0},
+    {'id': 'lv_two', 'name': 'Fogg and Fix at the gangway', 'unseen': True, 'across': 3.5, 'distance': 10.4, 'elevation': 1.5},
     # inserts
     {'id': 'porthole', 'name': 'Speedy at the porthole', 'insert': 'porthole', 'iris': [0.889, 0.5, 0.46, 0.46]},
     {'id': 'cell_close', 'name': 'Bench in the cell', 'insert': 'cell_close'},
@@ -86,6 +94,8 @@ objects = [
     {'id': 'cell_left', 'name': 'Cell wall with the door', 'on': 'cell', 'across': -3.5, 'distance': -0.6, 'facing': 90, 'box': [-0.1, -5.4, 6.8, 0.1], 'inside': True},
     {'id': 'cell_right', 'name': 'Cell wall', 'on': 'cell', 'across': 3.5, 'distance': 6.2, 'facing': 270, 'box': [-0.1, -5.4, 6.8, 0.1], 'inside': True},
     {'id': 'cell_bench', 'name': 'Bench', 'on': 'cell', 'across': -0.2, 'distance': 5.05, 'facing': 180, 'box': [-1.3, -0.6, 1.3, 0.05], 'inside': True},
+    {'id': 'cell_door', 'name': 'Cell door', 'on': 'cell', 'across': -3.45, 'distance': 1.55, 'facing': 90, 'box': [-0.05, -2.2, 1.1, 0.05],
+     'place': {'facing': 'door_f'}, 'inside': True},
 ]
 for pid, ru, who in PEOPLE:
     objects.append({'id': pid, 'name': ru, 'person': {'cast': 'cast', 'who': who}, 'across': -2, 'distance': -3,
@@ -93,7 +103,7 @@ for pid, ru, who in PEOPLE:
 
 state = {'beat': None, 'ship': 'mongolia', 'port': 'suez', 'night': 0, 'dawn': 0, 'fog': 0, 'smoke': 1, 'speed': 0, 'sails': 0,
          'fire': 0, 'flare': 0, 'flare_glow': 0, 'speedy_grief': 0, 'porthole': 0, 'cell_close': 0, 'cell_time': 0, 'release': None,
-         'door': 0, 'leaf': 0, 'with_aouda': 1, 'with_pp': 1, 'with_fix': 1, 'fix_bruise': 0, 'pp_wings': 0, 'aouda_dress': 0}
+         'door': 0, 'door_f': 90, 'leaf': 0, 'with_aouda': 1, 'with_pp': 1, 'with_fix': 1, 'fix_bruise': 0, 'pp_wings': 0, 'aouda_dress': 0}
 states = {
     'ship': {'values': ['mongolia', 'rangoon', 'general_grant', 'henrietta'], 'means': "the ship: mongolia — P&O, a black funnel, white bulwarks, a teak deckhouse; rangoon — the same look (night — the key night); general_grant — an American paddle-steamer: a white deckhouse, a red funnel, the paddle-box at the side, the engine's walking-beam; henrietta — an iron screw-steamer with two masts and yards, a wooden deckhouse, bulwarks, the captain's cabin on the poop (the parts burn — «The boilers»). Changed on a cut"},
     'port': {'values': ['suez', 'bombay', 'new_york', 'queenstown', 'liverpool', 'none'], 'means': 'the port on the horizon on the starboard bow: suez — minarets, palms, a mole, a quay and a gangway at the side; bombay — the town and hills (at dawn); new_york — a waterfront, a quay and a gangway; queenstown — the green hills of Ireland; liverpool — docks, cranes, brick, a quay and a gangway; none — the open sea'},
@@ -112,6 +122,7 @@ states = {
     'cell_time': {'range': [0, 1], 'smooth': True, 'means': "the bars' shadow creeps over the floor and the bench: 0 — morning, 1 — three hours later (led by the game)"},
     'release': {'values': [None, 'down', 'hand'], 'means': 'how the beat release ends, if set before it: down — Fogg strikes, Fix falls; hand — hand in hand; null — the beat ends at release:in'},
     'door': {'range': [0, 1], 'smooth': True, 'means': "the cell's door: 0 — locked, 1 — flung open"},
+    'door_f': {'range': [0, 180], 'smooth': True, 'means': "the cell door's turn, degrees (led by the scene by door; the game is not to touch it)"},
     'leaf': {'range': [0, 1], 'smooth': True, 'means': "the calendar's leaf on the deckhouse: 0 — «Wednesday», 1 — turned over, under it «Wednesday» again"},
     'with_aouda': {'values': [0, 1], 'means': 'Aouda on the voyage (New York, Liverpool)'},
     'with_pp': {'values': [0, 1], 'means': 'Passepartout on the voyage (New York, «The boilers», Liverpool)'},
@@ -146,7 +157,7 @@ spec = {
     'horizon': 0.45,
     'camera': {'mode': 'walk', 'area': [-5, 5, -6, 30]},
     'modules': ['light', 'cast', 'beats'],
-    'relief': "return across > 5.7 ? -2.6 : across < -5.7 ? -5.5 : 0;",
+    'relief': "return across > 300 ? 0 : across > 5.7 ? -2.6 : across < -5.7 ? -5.5 : 0;",
     'light': {'vignette': 0.35, 'grain': 0.06, 'ambient': 1.0, 'ambientColor': '#f2f0ea', 'haze': 0.05, 'hazeColor': '#d2dee4', 'hazeGlow': 0.7,
               'shafts': 0.1, 'saturation': 1.0, 'wind': [-0.25, -1, 0.9], 'inside': 0.55,
               'looks': {
