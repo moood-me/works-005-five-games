@@ -57,6 +57,8 @@ function run(name, fn, init, party) {
     all: (...a) => Promise.all(a.filter(Boolean)),
     person: id => person(id),
   };
+  // (a sequence inside a beat: its own `s`, here the same stub)
+  s.sequence = fn => fn(s);
   let moving = null;
   const waiters = [];
   const ease = (u, e) => (e === 'out' ? 1 - (1 - u) * (1 - u) : e === 'in' ? u * u : e === 'linear' ? u : u * u * (3 - 2 * u));

@@ -62,18 +62,30 @@ add({ id: 'snowfall', name: 'Snow', particles: { kind: 'snow', amount: 'snow', c
 // front vestibule (the camera in the car looks through it) and the saloon's end wall
 add({ id: 'train', name: 'Electric train', unseen: true, across: G.trainX(0), distance: G.SIDE, onLand: false, elevation: -1.1, facing: 180,
   place: { across: 'train_x' }, height: 6.4, box: [-EL.half - 0.6, -6.4, EL.half + 0.6, 0.2] });
+// the segment of car k that x is in (the cars are painted in ELECTRIC.segs cards each: trains.md)
+const segOf = (k, x) => Math.min(EL.segs - 1, Math.max(0, Math.floor(((x - EL.x0(k)) / EL.len) * EL.segs)));
+const SILVA = segOf(1, EL.doors(1)[1] - 0.32);
 for (let k = 0; k < EL.cars; k++) {
   const which = ['head', 'second', 'third', 'tail'][k];
-  add({ id: `car${k}`, name: 'Electric train', on: 'train', across: 0, distance: 0, elevation: 0, facing: 180, height: 6.4, box: EL.box(k), shadow: true });
-  file(`car${k}`, `// the train's ${which} car, its side (the world's trains)\ne.kit.trains.electric_train(g, e, ${k});\n`);
-  file(`car${k}.animate`, "// the doors slide by `doors`; frost on the glass at dawn by the play's `frost`\nconst S = e.state;\n" +
-    'e.kit.trains.doorsLive(e, S.doors);\ne.kit.trains.frostLive(e, (Number(S.frost) || 0) * (Number(S.dawn_k) || 0));\n');
-  add({ id: `in${k}`, name: 'Electric train', on: 'train', across: 0, distance: EL.inside, elevation: 0, facing: 180, glows: true,
-    height: 3.5, box: [EL.x0(k), -3.6, EL.x0(k) + EL.len, -1.0] });
-  file(`in${k}`, `// what the ${which} car's windows and doorways show, lit (the world's trains)${k === 1 ? "; Silva's figure in its front vestibule (silva_window)" : ''}\ne.kit.trains.electric_inside(g, e, ${k});\n`);
-  if (k === 1) file('in1.animate', 'e.kit.trains.silvaLive(e, e.state.silva_window);\n');
+  for (let j = 0; j < EL.segs; j++) {
+    const id = `${k}_${j}`, tailLamps = k === EL.cars - 1 && j === 0;
+    add({ id: `car${id}`, name: 'Electric train', on: 'train', across: 0, distance: 0, elevation: 0, facing: 180, height: 6.4, box: EL.box(k, j), shadow: true });
+    file(`car${id}`, `// the train's ${which} car, its side, quarter ${j + 1} of it (the world's trains). Not while the camera rides the train\n` +
+      `// (camera_on, set by a cut): from inside, the car's own wall round its window is what is seen.\nif (e.state.camera_on !== 'train') e.kit.trains.electric_train(g, e, ${k}, ${j});\n`);
+    file(`car${id}.animate`, "// the doors slide by `doors`; frost on the glass at dawn by the play's `frost` (painted only from outside: its layers too)\nconst S = e.state;\n" +
+      "if (S.camera_on !== 'train') {\n  e.kit.trains.doorsLive(e, S.doors);\n  e.kit.trains.frostLive(e, (Number(S.frost) || 0) * (Number(S.dawn_k) || 0));\n" +
+      (tailLamps ? '  // the red tail lamps going out in the dark as the train goes off (a glow does not fade in the haze by itself)\n' +
+        "  const far = Math.max(0, Math.min(1, ((Number(S.train) || 0) - 0.45) / 0.35));\n  e.glow('tail', 1 - far);\n  e.glow('tail_top', 1 - far);\n" : '') + '}\n');
+    const box = EL.box(k, j);
+    add({ id: `in${id}`, name: 'Electric train', on: 'train', across: 0, distance: EL.inside, elevation: 0, facing: 180, glows: true,
+      height: 3.7, box: [box[0], -3.7, box[2], -1.0] });
+    const silva = k === 1 && j === SILVA;
+    file(`in${id}`, `// what the ${which} car's windows and doorways show in quarter ${j + 1} of it, lit, in depth (the world's trains)${silva ? "; Silva's figure in its front vestibule (silva_window)" : ''}.\n` +
+      `// Not while the camera rides the train (camera_on, set by a cut): it would stand between the eye and the glass.\nif (e.state.camera_on !== 'train') e.kit.trains.electric_inside(g, e, ${k}, ${j});\n`);
+    if (silva) file(`in${id}.animate`, "// (painted only while the camera is not in the train: so is its layer)\nif (e.state.camera_on !== 'train') e.kit.trains.silvaLive(e, e.state.silva_window);\n");
+  }
 }
-add({ id: 'floor', name: 'Floor', plane: true, unseen: true, walk: true, on: 'train', across: 0, distance: 1.45, elevation: -EL.floor, width: EL.half * 2 - 0.4, depth: 2.9 });
+add({ id: 'floor', name: 'Floor', plane: true, walk: true, on: 'train', across: 0, distance: 1.45, elevation: -EL.floor, width: EL.half * 2 - 0.4, depth: 2.9 });
 add({ id: 'train_window', name: 'Carriage window', on: 'train', across: WIN, distance: 0.07, elevation: -EL.floor, facing: 0, inside: true,
   height: 3.0, box: [-1.35, -3.05, 4.55, 0.05], uniforms: { wipe: 0, cy: -1.375 } });
 add({ id: 'partition', name: 'Carriage', on: 'train', across: r2(WIN + 1.25), distance: 1.45, elevation: -EL.floor, facing: 270, inside: true,
@@ -95,11 +107,11 @@ const lights = [
   { id: 'dawn_sky', from: [-30, 18], color: '#cdd0da', strength: 0.9, on: 'dawn_k' },
   { id: 'lamp', of: 'lamp_post#lamp', color: '#f3dcae', strength: 1.9, reach: 12, glow: 1.2 },
   { id: 'lamp2', of: 'stair_lamp#lamp', color: '#f3dcae', strength: 1.6, reach: 8, glow: 1.0 },
-  { id: 'head', of: 'car0#head', color: '#fff3d8', strength: 2.2, reach: 30 },
-  { id: 'tail', of: 'car3#tail', color: '#ff3b22', strength: 0.8, reach: 4 },
-  ...[0, 1, 2, 3].flatMap(k => [...EL.windows(k).map((_, i) => `w${k}${i}`), `d${k}0`, `d${k}1`]
-    .map(n => ({ id: `train_${n}`, of: `in${n[1]}#${n}`, color: '#ffe2a8', strength: 0.55, reach: 5 }))),
-  { id: 'car_lamp', of: 'train_window#lamp', color: '#fff2d2', strength: 1.0, reach: 3 },
+  { id: 'head', of: `car0_${EL.segs - 1}#head`, color: '#fff3d8', strength: 2.2, reach: 30 },
+  { id: 'tail', of: `car${EL.cars - 1}_0#tail`, color: '#ff3b22', strength: 0.8, reach: 4 },
+  ...[0, 1, 2, 3].flatMap(k => [...EL.windows(k).map((x, i) => [`w${k}${i}`, x]), [`d${k}0`, EL.doors(k)[0]], [`d${k}1`, EL.doors(k)[1]]]
+    .map(([n, x]) => ({ id: `train_${n}`, of: `in${k}_${segOf(k, x)}#${n}`, color: '#ffe2a8', strength: 0.55, reach: 5 }))),
+  { id: 'car_lamp', of: 'train_window#lamp', color: '#fff2d2', strength: 1.6, reach: 3.5 },
   { id: 'far', of: 'far_window#glow', color: '#eda055', strength: 1.0, reach: 5, on: 'warm' },
 ];
 
