@@ -26,10 +26,10 @@ the beats in node and prints where the people and the points stand in the frame.
 - The electric train (`trains`): `train` — its place (unseen, by `train_x`; the script: `G.trainX(train)`: −1 → 100 m
   left, 0 — standing, its anchor at −8, the second car's front doorway at 10, its rear one at −6; 1 → 250 m right),
   facing the platform, its rail head at −1.1; it marks the points `train#tail`, `train#door`, `train#back_door`,
-  `train#head`. On it: `car0`…`car3` — the cars' sides (each a card of its own: one 80 m painting was not drawn whole
-  close up), `in0`…`in3` — what their windows show (glow, 1.3 m behind the side; Silva's painted figure in `in1` by
-  `silva_window`), `floor` (unseen) — the cars' floor, Silva stands on `floor#vest`, carried; inside the second car
-  `train_window` (its wall round the window by the front vestibule; the frost a layer, rubbed off by `wipe` in
+  `train#head`. On it: `car<k>_<j>` — the cars' sides, `in<k>_<j>` — what their windows show, in depth (glows; the
+  far side of the car on an opaque sheet 2.65 m in; Silva's painted figure by `silva_window`), each car in four
+  segments `j` (a long card beside the eye came over what is behind it; trains.md); `floor` — the cars'
+  floor, Silva stands on `floor#vest`, carried; inside the second car `train_window` (its wall round the window by the front vestibule; the frost a layer, rubbed off by `wipe` in
   `train_window.wgsl`) and `partition` (the saloon's end wall) — these two painted only while the camera rides the
   train (from the platform they showed through the side). The doors slide by `doors`; frost on the train's glass at
   dawn by the play's `frost`.
@@ -44,17 +44,17 @@ the beats in node and prints where the people and the points stand in the frame.
 
 | beat | after | ≈ s | what |
 | --- | --- | --- | --- |
-| gone | — | 12 | from the dark; the two run up the stairs (`gone:run`), the camera turns with them from the stairs to under the lamp; the train moves off at 0.3 m/s and crawls on; they stop (`gone:stop`). Choice pose: `train#tail` x ≈ −0.36 |
+| gone | — | 12 | from the dark; the two run up the stairs (`gone:run`), the camera turns with them from the stairs to under the lamp; the train moves off at 0.3 m/s and crawls on the same way while the game waits (≈ 4 min of it); they stop (`gone:stop`). Choice pose: `train#tail` x ≈ −0.36 |
 | wave | gone | 12 | he steps to the edge and waves; the train gathers way; its tail out of the frame — `wave:dark` |
 | stand | wave | 12 | the camera comes to a medium shot in three quarters under the lamp: Silva's hand to his nape, smiling; Busygin hugging himself (`cold`), tired — `stand:cold` |
 | bench | — | 22 | late dusk; Vasenka on the bench, the rucksack on his knees, angry; Busygin up the stairs, along, sits by him — `bench:sit`; both in three quarters under the lamp |
 | strap | bench | 15 | the train comes up and opens (`strap:open`); they get up, he reaches for the rucksack; the insert `strap` opens |
 | bench_back | strap | 17 | the insert shut, the doors shut, the train goes; they sit again (`torn` 1: the part with the knot) — `bench_back:sat`; after L71 they get up and go to the stairs |
-| last | — | 22 (16 with `late_run` 1) | night; he runs up and stands by the second car's front doorway; the train comes up and opens (`late_run` 0) or stands open — `last:open`; Silva in the vestibule (`silva_door`) turns to him; who came comes up the stairs — the father (`father_came`), Nina (`nina_came`: ahead of him when `nina_is` knows, first when he did not come), Vasenka (`vasya_came`: without his rucksack when `vasya_end` home, first when no one else came) — `last:came` with the cut to the first one's face (a medium shot, three quarters) and back; he turns to them. No one: the camera goes along the platform (shot “B”) to the window far below — `last:came`. Choice pose: `train#door` x −0.35, the first who came x ≈ 0.4 (or `far_window`) |
+| last | — | 22 (16 with `late_run` 1) | night; he runs up and stands by the second car's front doorway; the train comes up and opens (`late_run` 0) or stands open as he runs up — `last:open` at once; Silva in the vestibule (`silva_door`) turns to him; who came comes up the stairs — the father (`father_came`), Nina (`nina_came`: ahead of him when `nina_is` knows, first when he did not come), Vasenka (`vasya_came`: without his rucksack when `vasya_end` home, first when no one else came) — `last:came` with the cut to the first one's face (a medium shot, three quarters) and back; he turns to them. No one: the camera goes along the platform (shot “B”) to the window far below — `last:came`. Choice pose: `train#door` x −0.35, the first who came x ≈ 0.4 (or `far_window`) |
 | stays | last | 21 | the doors shut (Silva's figure in its window: `silva_window`), the train goes — `stays:gone`; they come to meet him; no one — he goes to the stairs' top, looking at the window far below |
 | boards | last | 13 (5 without the snuffbox) | `box_hand` 1 and the father came: the father at the door gives him the snuffbox (`give` / `take`, part `box_held`) — `boards:box`; he goes in, the doors shut — `boards:in` |
 | glass | — | 3 | the camera in the car at the frosted window (`wipe` 0): the lamp over the stairs and who came through it — `glass:ready` |
-| away | glass | 16 | the train moves off; the platform goes away to the right of the frame; the father waves (`away:wave`); the window far below in the middle of the frame (`away:window`) |
+| away | glass | 16 | the train moves off; the platform goes away to the right of the frame; the father waves (`away:wave`; without him — when the stairs' top passes the middle of the frame); the window far below in the middle of the frame (`away:window`) |
 | dawn | — | 24 (17 with `vasya_end` home) | grey dawn, snow on the bench; taiga — Vasenka on the bench, the first train comes (`dawn:pass`), opens (`dawn:open`), he gets on at the door before the bench, it shuts (`dawn:shut`) and goes; home — the platform empty, the train goes by (`dawn:pass`) |
 
 ## What is not as scenes.md says

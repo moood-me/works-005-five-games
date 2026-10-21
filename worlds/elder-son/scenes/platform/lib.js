@@ -166,11 +166,12 @@ function film(scene) {
         sv.gait('run');
         s.tell('gone:run');
         const bw = b.walk([P.TOP_B, [6, 6.2], P.LAMP_B]);
-        const sw = (async () => { await s.wait(0.35); await sv.walk([P.TOP_S, [6, 6.6], P.LAMP_S]); })();
+        const sw = s.sequence(async q => { await q.wait(0.35); await q.person('silva').walk([P.TOP_S, [6, 6.6], P.LAMP_S]); });
         await s.wait(2.2);
         s.move('camera_yaw', CAM.gone.camera_yaw, { over: 5.2, ease: 'inOut' });
         await s.wait(2.3);
-        s.move('train', 0.072, { over: 60, ease: 'linear' });
+        // (the same slow way on while the game waits: 0.3 m/s, far longer than any wait)
+        s.move('train', 0.3, { over: 250, ease: 'linear' });
         await s.all(bw, sw);
         b.gait(null);
         sv.gait(null);
@@ -251,8 +252,8 @@ function film(scene) {
         v.look('train#back_door');
         await arrive(s, 'strap:open');
         b.look('vasenka#back');
-        await s.all((async () => { await rise(v, P.SEAT_V, 'stand_bag'); await v.walk([P.UP_V]); await v.turn(10); })(),
-          (async () => { await s.wait(0.5); await rise(b, P.SEAT_B); await b.walk([P.UP_B]); await b.turn(300); })());
+        await s.all(s.sequence(async q => { const qv = q.person('vasenka'); await rise(qv, P.SEAT_V, 'stand_bag'); await qv.walk([P.UP_V]); await qv.turn(10); }),
+          s.sequence(async q => { const qb = q.person('busygin'); await q.wait(0.5); await rise(qb, P.SEAT_B); await qb.walk([P.UP_B]); await qb.turn(300); }));
         b.reach({ r: 'vasenka#back' });
         await s.wait(0.8);
         s.set('strap', 1);
@@ -287,7 +288,7 @@ function film(scene) {
         v.look('busygin');
         v.mood('neutral');
         await s.wait(0.8);
-        await s.all(rise(v, P.SEAT_V, 'stand_bag'), (async () => { await s.wait(0.4); await rise(b, P.SEAT_B); })());
+        await s.all(rise(v, P.SEAT_V, 'stand_bag'), s.sequence(async q => { await q.wait(0.4); await rise(q.person('busygin'), P.SEAT_B); }));
         b.look(null);
         v.look(null);
         b.walk([[2, 7.4], P.TOP_B]);
@@ -308,12 +309,13 @@ function film(scene) {
       },
       run: async s => {
         const late = num('late_run', 0) === 1, b = s.person('busygin'), who = cameSet(), call = caller();
+        // (late_run: the train stands open as he comes running up — the doors' hiss at once)
+        if (late) s.tell('last:open');
         const silva = num('silva_door', 1) === 1;
         const train = late ? null : arrive(s, 'last:open');
         b.gait('run');
         await b.walk([P.TOP_B, P.WAIT_RUN]);
         b.gait(null);
-        if (late) s.tell('last:open');
         await b.walk([P.WAIT]);
         await b.turn(brg(P.WAIT, P.AT_DOOR));
         b.look('train#door');
@@ -338,14 +340,14 @@ function film(scene) {
         }
         // they come up the stairs, the first ahead
         const face = s.shot({ ...callShot(call) });
-        const walks = who.map((w, i) => (async () => {
-          await s.wait(w.first ? 0 : 0.5 + 0.3 * i);
-          const p = s.person(w.id);
+        const walks = who.map((w, i) => s.sequence(async q => {
+          await q.wait(w.first ? 0 : 0.5 + 0.3 * i);
+          const p = q.person(w.id);
           p.here(true);
           await p.walk([[15.6, w.to[1]], w.to]);
           await p.turn(brg(w.to, P.WAIT));
           p.look('busygin');
-        })());
+        }));
         await s.all(...walks);
         await s.until(() => face.ready);
         face.cut();
@@ -384,12 +386,12 @@ function film(scene) {
         } else {
           b.mood('thinking');
           const order = [...who].sort((x, y) => (y.first ? 1 : 0) - (x.first ? 1 : 0));
-          const meet = order.map((w, i) => (async () => {
-            await s.wait(i * 0.6);
-            const p = s.person(w.id), to = [P.WAIT[0] + 1.0 + 0.5 * i, P.WAIT[1] - 0.7 + 0.6 * ((i % 2) * 2 - 1) * (i ? 1 : 0)];
+          const meet = order.map((w, i) => s.sequence(async q => {
+            await q.wait(i * 0.6);
+            const p = q.person(w.id), to = [P.WAIT[0] + 1.0 + 0.5 * i, P.WAIT[1] - 0.7 + 0.6 * ((i % 2) * 2 - 1) * (i ? 1 : 0)];
             await p.walk([to]);
             await p.turn(brg(to, P.WAIT));
-          })());
+          }));
           await b.walk([[12.2, 8.0]]);
           await b.turn(brg([12.2, 8.0], callerAt()));
           await s.all(...meet);
@@ -451,8 +453,11 @@ function film(scene) {
       from: () => base(0.93, 0.5, { ...trainKeys(0), doors: 0, wipe: 0.6, ...CAM.glass, ...cameHere(true) }),
       run: async s => {
         const go = s.move('train', 0.6, { over: 16, ease: 'in' });
-        await s.wait(1.6);
-        if (fatherCame()) s.person('sarafanov').do('wave');
+        // the father lifts his hand; without him — the moment the stairs' top passes the middle of the frame
+        if (fatherCame()) {
+          await s.wait(1.6);
+          s.person('sarafanov').do('wave');
+        } else await s.until(() => G.trainX(s.get('train')) + EYE.x >= P.SAR[0] - (G.SIDE + EYE.z - P.SAR[1]) * Math.tan(((180 - EYE.yaw) * Math.PI) / 180));
         s.tell('away:wave');
         // the window far below in the middle of the frame: the car's eye at across ≈ 40
         await s.until(() => G.trainX(s.get('train')) + EYE.x >= 40);
