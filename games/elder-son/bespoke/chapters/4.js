@@ -112,7 +112,8 @@ export default {
       g.set('fire', 0, 3);
       g.set('buckets', 'none'); // (the bucket put away)
       g.set('shed_left', r.buckets >= 3 ? 1 : 0);
-      g.set('beat_next', 'after_fire'); // (made ready again, by the keys of how it went)
+      g.set('beat_next', null); // (made ready again, by the keys of how it went: the same name set again is no change)
+      g.set('beat_next', 'after_fire');
       g.beds({ wind: 0.3, crowd: 0.3 }, 3);
       const who = g.told('after_fire:who');
       const after = g.beat('after_fire');

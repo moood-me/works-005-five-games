@@ -230,7 +230,7 @@ export default async function (b) {
     let at = reveal ?? here; // (the chapter the view is at)
     const go = i => { if (i !== at) { at = i; b.set('shown', i); } };
     // (something of a chapter pressed — the view goes to it)
-    const touched = ref => { const i = /^(?:knot|fork|go|goreplay|badge):(\d+)/.exec(ref)?.[1]; if (i != null) bring(Number(i)); };
+    const toward = ref => { const i = /^(?:knot|fork|go|goreplay|badge):(\d+)/.exec(ref)?.[1]; if (i != null) bring(Number(i)); };
     // (pressed on the chapter already shown, wherever the player dragged the view: back to it)
     let come = 0;
     const bring = i => { if (i === at) b.set('come', ++come); else go(i); };
@@ -252,7 +252,7 @@ export default async function (b) {
         jumped = () => {};
         again = null;
         if (ref.jump) return ref;
-        touched(ref);
+        toward(ref);
         const options = marks(asked, grown ? null : reveal)[ref];
         const picked = options ? await hub.ask(drawn.at(ref), options) : null;
         if (!picked) { asked = null; continue; }

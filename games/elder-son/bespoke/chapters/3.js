@@ -55,7 +55,8 @@ export default {
         g.set('catch', 0);
         g.set('fall', 0);
         g.set('snowy', r.falls > 0 ? 1 : 0);
-        g.set('beat_next', 'bottom'); // (made ready again, by the keys of how it went)
+        g.set('beat_next', null); // (made ready again, by the keys of how it went: the same name set again is no change)
+        g.set('beat_next', 'bottom');
         const bottom = g.beat('bottom');
         await g.say('sarafanov', 'Off you go, then. I\'ve still got to play for the dance at the club');
         await bottom;
@@ -64,7 +65,8 @@ export default {
         g.set('beat_next', 'club');
         const r = await g.play(following);
         g.set('seen', r.seen > 0 ? 1 : 0); // (the rest the beat `club` sets by its `from`)
-        g.set('beat_next', 'club'); // (made ready again, by the keys of how it went)
+        g.set('beat_next', null); // (made ready again, by the keys of how it went: the same name set again is no change)
+        g.set('beat_next', 'club');
         const inside = g.told('club:in');
         const club = g.beat('club');
         await inside;

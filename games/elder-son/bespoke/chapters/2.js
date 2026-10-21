@@ -120,7 +120,9 @@ export default {
     // the clarinet behind the wall: the same place, and no further
     async g => {
       g.beds({ clock: 0.25 });
-      on(g, 'wall:dark', () => g.sound.clarinet({ times: 2 }));
+      let c = null; // the clarinet's handle: stopped at the step's end (dawn comes), on the step left
+      g.signal.addEventListener('abort', () => c?.stop(0.3));
+      on(g, 'wall:dark', () => { c = g.sound.clarinet({ times: 2 }); });
       const turn = g.told('wall:turn');
       await g.scene(SCENES.home, { beat: 'wall' });
       const wall = g.beat('wall');
@@ -128,6 +130,7 @@ export default {
       await turn;
       await g.say('narrator', 'Behind the wall he played the same passage over and over. It never went any further');
       await wall;
+      c?.stop(2);
     },
     // dawn: ⚑ slip away with Silva, or stay
     async g => {
@@ -151,7 +154,8 @@ export default {
         g.set('sneak', 1);
         g.set('stir', 0);
         g.set('heard', r.creaks > 0 ? 1 : 0);
-        g.set('beat_next', 'caught'); // (made ready again, by the keys of how it went)
+        g.set('beat_next', null); // (made ready again, by the keys of how it went: the same name set again is no change)
+        g.set('beat_next', 'caught');
         g.beds({ clock: 0.4, rails: 0.3 }, 1);
         const face = g.told('caught:face'), hook = g.told('caught:hook');
         on(g, 'caught:out', () => g.sound.door());

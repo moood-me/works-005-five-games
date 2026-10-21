@@ -372,16 +372,12 @@ function watched(g, j, ch, here, events, seen) {
       key(k, 'g.set', value);
       if (k === 'beat_next' && cur) {
         cur.next = value;
-        if (cur.scene.contract && !(value in cur.scene.contract.beats)) bad(`beat_next “${value}”: no such beat in the scene “${cur.folder}”`);
+        if (value != null && cur.scene.contract && !(value in cur.scene.contract.beats)) bad(`beat_next “${value}”: no such beat in the scene “${cur.folder}”`);
       }
       if (cur) (seen.set[cur.folder] ??= {})[k] = value;
       return g.set(k, value, seconds);
     },
     get(k) { key(k, 'g.get'); return g.get(k); },
-    move(k, value, seconds, ease) { key(k, 'g.move', value); if (cur) (seen.set[cur.folder] ??= {})[k] = value; return g.move(k, value, seconds, ease); },
-    when(k, test, ms) { key(k, 'g.when'); return g.when(k, test, ms); },
-    watch(k, fn) { key(k, 'g.watch'); return g.watch(k, fn); },
-    arrived(who, ms) { if (shown(`g.arrived «${who}»`)) element(who, 'g.arrived'); return g.arrived(who, ms); },
     say(who, text, at = who) {
       const what = `the line “${text}”`;
       if (!(who in PEOPLE)) bad(`${what}: the speaker “${who}” is not in people.json`);

@@ -11,14 +11,9 @@
 //     and g.beat(name) then takes it up (waits for its end). Always opened anew, even if it is the one on the screen.
 //     cut: the scene before stays on the screen till this one is drawn, then gives way to it in one frame; else the
 //     page fades (time has passed)
-//   g.set(key, value, seconds) / g.get(key) — the shown scene's state; g.move(key, value, seconds, ease) — the key
-//     moved by the scene's director: → once it is there
+//   g.set(key, value, seconds) / g.get(key) — the shown scene's state
 //   g.wait(ms) — time of the game's own (a pause); never to wait for something the scene does — that is an event:
 //   g.told(text, ms) — until the scene tells `text` (→ true), or ms pass (→ false)
-//   g.when(key, test, ms) — until the scene sets the key to one that test(value) holds for (a value: that one) (→ true),
-//     or ms pass (→ false)
-//   g.arrived(who, ms) — until someone's walk in the scene ends there (→ true), or ms pass (→ false)
-//   g.watch(key, fn) — fn(value, old) each time the scene sets the key, till the step is left
 //   g.say(who, text, at) — someone of the game's people (people.json: bespoke.say) says it, over `at` ('id' | 'id#point'
 //     of the scene; 'narrator' — low in the middle), in their voice; → a breath after it has been heard (unvoiced: once
 //     it could be read)
@@ -26,8 +21,8 @@
 //     options ([{id, label}]: petals, one too — the language of mini-games, hub.offer); → the option's id, kept in
 //     state.choices[choice] (choice null: not a choice of the chapter's map)
 //   g.beat(name, {wait}) — a beat of the shown scene's film (the world's module `beats`); → once it has ended (the
-//     scene tells 'beat:<name>'), or at once with wait: false. To wait for a moment inside a beat, make the g.told /
-//     g.when / g.arrived before g.beat
+//     scene tells 'beat:<name>'), or at once with wait: false. To wait for a moment inside a beat, make the g.told
+//     before g.beat
 //   g.play(minigame, opts) — a small game of the hands: a module of minigames/ — export default {title, about,
 //     skipped, run: async (g, b, opts, signal) → its result}, made of the language of mini-games. The signal aborts
 //     when it is skipped (the page's ⏭ → b.minigame.skip(): in a step the player has seen, or once SKIPPABLE s have
@@ -36,7 +31,6 @@
 //     the scene (game.md §4, “after the game”)
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
 //     left when the signal aborts; the ⏭ skips the minigame
-//   g.hint(text, afterMs) → off() — one line low in the middle (not in a minigame nor a choice: the language speaks)
 //   g.apply(choice) — what the option chosen does, by EFFECTS: the scale home, then lie, then each mark (game.md §3.1)
 //   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
 //   g.gauge(name, {rule}) — the scale is shown from now on; its one line of what it means said once (rule: false — not
@@ -241,25 +235,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
     get: key => (unseen() ? j.values[key] : b.get(key)),
-    async move(key, value, seconds, ease) {
-      if (gone()) return never;
-      if (unseen()) { put(key, value); return sleep(seconds * 1000); }
-      await alive(Promise.resolve(b.act('state', 'move', key, value, { over: seconds, ease })));
-    },
     wait: sleep,
-    // (unseen: it came to pass — the scene, shown once the jump is there, has done it: bespoke.show's then)
-    when(key, test, ms = 60000) {
-      const ok = typeof test === 'function' ? test : v => v === test;
-      return gone() ? never : unseen() ? Promise.resolve(true) : alive(hub.when(key, ok, ms));
-    },
-    arrived(who, ms = 60000) {
-      return gone() ? never : unseen() ? Promise.resolve(true) : alive(hub.arrived(who, ms));
-    },
-    watch(key, fn) {
-      if (gone() || unseen()) return;
-      const off = hub.watch(key, (v, old) => { if (!gone()) fn(v, old); });
-      left.signal.addEventListener('abort', off);
-    },
     async say(who, text, at = who) {
       if (gone()) return never;
       if (unseen()) return sleep(300 + text.length * 60);
@@ -332,12 +308,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       mg.on('skip', playing.end);
       return mg;
     },
-    hint(text, afterMs = 0) {
-      if (gone() || unseen() || playing) return () => {};
-      const off = view.hint(text, afterMs);
-      left.signal.addEventListener('abort', off);
-      return off;
-    },
     apply(choice) {
       if (gone()) return;
       const fx = EFFECTS[choice]?.[state.choices[choice]];
@@ -402,25 +372,20 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //     drawing was pressed (at: fn → {x, y} page px — map.js), its options out as petals at once; a touch off them folds
 //     it — null, the mark gone (nothing waits idle)
 //   hub.withdraw() — nothing offered; hub.told(text, ms) → true once the scene tells it, false if ms pass
-//   hub.when(key, test, ms) → true once the scene sets the key to a value test holds for, false if ms pass;
-//   hub.arrived(who, ms) — a walk of theirs ended; hub.watch(key, fn) → off — fn(value, old) on each
 const SHOW = 8; // s: nothing pressed so long — the ghost shows how
 
 export function listen(b) {
   let offered = null; // the plain choice going on: the language's mini-game
-  const waiting = new Set(), watching = new Set();
-  const wait = (w, ms) => new Promise(ok => {
-    w.ok = ok;
+  // what the scene is waited to tell: {text, ok, timer} — heard, or ms gone by (the timer taken down either way)
+  const waiting = new Set();
+  const told = (text, ms) => new Promise(ok => {
+    const w = { text, ok };
+    w.timer = setTimeout(() => { if (waiting.delete(w)) ok(false); }, ms);
     waiting.add(w);
-    setTimeout(() => { if (waiting.delete(w)) ok(false); }, ms);
   });
-  const heard = (kind, hit) => { for (const w of waiting) if (w.kind === kind && hit(w)) { waiting.delete(w); w.ok(true); } };
-  b.on('tell', text => heard('tell', w => w.text === text));
-  b.on('change', (value, old, key) => {
-    heard('change', w => w.key === key && w.test(value));
-    for (const w of watching) if (w.key === key) w.fn(value, old);
+  b.on('tell', text => {
+    for (const w of waiting) if (w.text === text) { waiting.delete(w); clearTimeout(w.timer); w.ok(true); }
   });
-  b.on('arrived', d => heard('arrived', w => w.who === d?.who));
   return {
     offer(offers) {
       offered?.leave();
@@ -455,13 +420,6 @@ export function listen(b) {
       });
     },
     withdraw() { offered?.leave(); offered = null; },
-    told: (text, ms) => wait({ kind: 'tell', text }, ms),
-    when: (key, test, ms) => wait({ kind: 'change', key, test }, ms),
-    arrived: (who, ms) => wait({ kind: 'arrived', who }, ms),
-    watch(key, fn) {
-      const w = { key, fn };
-      watching.add(w);
-      return () => watching.delete(w);
-    },
+    told,
   };
 }

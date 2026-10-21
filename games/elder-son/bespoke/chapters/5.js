@@ -149,8 +149,9 @@ export default {
         // now — the phrase for the first time goes on and resolves (≈ 14 s; it ends by itself, in the epilogue
         // already); else it breaks off, as always: `later` — much untruth, or only the truth brought them to the
         // platform (the house cold all evening): it does not heal at once — it resolves in the epilogue, from afar
-        if (f.tune === 'now') g.sound.clarinet({ times: 1, resolve: true });
-        else g.sound.clarinet({ times: 1 });
+        // (stopped if the step is left; played through, it is over by itself)
+        const c = g.sound.clarinet(f.tune === 'now' ? { times: 1, resolve: true } : { times: 1 });
+        g.signal.addEventListener('abort', () => c.stop(0.3));
         await home;
       } else {
         const turn = g.told('home_anyway:turn');

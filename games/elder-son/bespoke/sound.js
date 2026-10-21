@@ -1,8 +1,8 @@
 // The sounds of “The Elder Son”, made in the page (Web Audio): nothing to load; as loud as the page's "sounds" slider says
-// (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes it then; till then its
-// time stands, and what was asked for begins at the touch. (game.md §8.)
-//   wake() — the page may be heard from now on (called on the first touch)
-//   pause(on) — all of it stands while the play is paused (ui.js ⏸) and goes on from there after
+// (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes it as the map is left
+// (a touch); till then its time stands, and what was asked for begins at the touch. (game.md §8.)
+//   wake() — the page may be heard from now on (game.js: as the map is left — a touch; again, it changes nothing)
+//   pause(on) — all of it stands while the play is paused (the page's ⏸: game.js b.onPause) and goes on from there after
 //   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // One AudioContext → the master level → a compressor. Two airs a sound goes out into: the street's (open, dark, 1.5 s)
 // and the room's (a small room, 0.5 s).
@@ -18,10 +18,11 @@
 // Played once:
 //   horn(level) · doors · knock · dog · door · creak · cough · tick · strike(n) · rub · spill · box · glass ·
 //   splash(level) · crunch · thud · scrape · dance(seconds)
+// Played till stopped (or till over) — a handle {loud(v, seconds), stop(seconds)}:
 //   clarinet({times, resolve, far}) — the clarinet behind the wall: the oratorio's phrase (PHRASE), broken off at the
 //     first breath of its seventh note; times — how many times, 3 s apart; resolve — the seventh found at last, whole,
-//     and the phrase goes on to its end; far — still more muffled and quiet (heard from the street, through the window)
-// Played till stopped — a handle {loud(v, seconds), stop(seconds)}:
+//     and the phrase goes on to its end; far — still more muffled and quiet (heard from the street, through the window).
+//     Over by itself; the step stops it when it is left
 //   march() — the funeral band far off: four brass voices a little out of tune, the bass drum on the strong beats
 import { built, kit } from './ambience.js';
 
@@ -74,9 +75,10 @@ function audio() {
   return ctx;
 }
 export function wake() {
+  // (a context the browser held back resumes at the next touch)
+  if (!awake) for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, audio, { once: true, capture: true });
   awake = true;
   audio();
-  for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, audio, { once: true, capture: true });
 }
 export function pause(on) {
   held = !!on;
@@ -596,6 +598,7 @@ export function clarinet({ times = 1, resolve = false, far = false } = {}) {
   const e = a.createGain();
   e.gain.value = far ? 0.13 : 0.3;
   body.connect(wall).connect(e).connect(out);
+  const nodes = new Set(); // (the oscillators sounding: stopped with the handle)
   // one phrase from `at`: → when it is over
   const phrase = (at, whole) => {
     const notes = whole ? [...PHRASE, ...RESOLVED] : [...PHRASE, [BROKEN, 0.08 / PHRASE_BEAT]];
@@ -627,14 +630,12 @@ export function clarinet({ times = 1, resolve = false, far = false } = {}) {
       s += len;
     });
     if (whole) { env.gain.setTargetAtTime(0, s - 0.6, 0.3); breath.gain.setTargetAtTime(0, s - 0.6, 0.3); }
-    o.start(at);
-    vib.start(at);
-    o.stop(s + 1.5);
-    vib.stop(s + 1.5);
+    for (const n of [o, vib]) { n.start(at); n.stop(s + 1.5); nodes.add(n); n.onended = () => nodes.delete(n); }
     return s;
   };
   let at = t0;
   for (let i = 0; i < times; i++) at = phrase(at, resolve && i === times - 1) + 3;
+  return handle(e, e.gain.value, () => { for (const n of nodes) n.stop(); });
 }
 
 // ── the march ──────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -697,7 +698,7 @@ export function unheard() {
       march: mute,
       horn: none, doors: none, knock: none, dog: none, door: none, creak: none, cough: none, tick: none, strike: none,
       rub: none, spill: none, box: none, glass: none, splash: none, crunch: none, thud: none, scrape: none,
-      clarinet: none, dance: none,
+      clarinet: mute, dance: none,
     },
     wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); },
   };

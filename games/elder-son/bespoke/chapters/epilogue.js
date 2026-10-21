@@ -23,8 +23,10 @@ export default {
       // later — he stayed and someone came for him, where the house was not yet warm (much untruth, or only the truth
       // brought them): the phrase resolves, later and from afar; cut — it breaks off, as always (he left — or stayed,
       // and no one came for him); now — nothing (it has sounded in the house already)
-      if (f.tune === 'later') g.sound.clarinet({ times: 1, resolve: true, far: true });
-      else if (f.tune === 'cut') g.sound.clarinet({ times: 1, far: true });
+      // (stopped if the step is left; played through, it is over by itself)
+      const c = f.tune === 'later' ? g.sound.clarinet({ times: 1, resolve: true, far: true })
+        : f.tune === 'cut' ? g.sound.clarinet({ times: 1, far: true }) : null;
+      g.signal.addEventListener('abort', () => c?.stop(0.3));
       if (f.ending === 'saturday') await g.say('narrator', 'The window at the end of the street stayed lit till morning');
       else if (f.ending === 'suitcase') await g.say('narrator', 'He never did unpack the suitcase');
       if (f.boxGone) await g.say('narrator', 'The snuffbox went with him');
