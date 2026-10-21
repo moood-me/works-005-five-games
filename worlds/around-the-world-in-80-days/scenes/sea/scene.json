@@ -210,7 +210,7 @@
     0,
     1
    ],
-   "means": "a steamer on the horizon ahead to port, her smoke"
+   "means": "a steamer on the horizon ahead to starboard, her smoke"
   },
   "steamer_turn": {
    "range": [
@@ -342,10 +342,10 @@
    "distance": 650,
    "elevation": -0.9,
    "box": [
-    -70,
-    -110,
-    90,
-    2
+    -115,
+    -180,
+    145,
+    3
    ]
   },
   {

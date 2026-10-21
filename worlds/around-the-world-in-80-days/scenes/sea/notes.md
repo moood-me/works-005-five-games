@@ -34,10 +34,10 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
   (`sea.wgsl`: `phase` from the animate, faster with the storm). **The sky** — a grey squally day; the typhoon's slate
   and racing scud by `storm`; a pale gleam on the horizon as it dies away with the steamer in sight. The look `storm`
   — the haze, the wind, the sun dimmed: the people stay readable.
-- **The steamer** far ahead to port (`steamer`): broadside, her smoke lying back; turning toward the boat — bow on — by
+- **The steamer** ahead to starboard, 650 m off (`steamer`): broadside, her smoke lying back; turning toward the boat — bow on — by
   `steamer_turn`. Point `steamer#ship`.
 - **The people**: Bunsby at the tiller (`storm_brace`, both hands on it); Fogg aft by the port rail, turned aft from the
-  spray, a hand on the rail; Aouda by him (`with_aouda`); Fix by the starboard rail, afraid (`with_fix`). Their wear by
+  spray, a hand on the rail; Aouda beside him, nearer (`with_aouda`); Fix by the starboard rail, afraid (`with_fix`). Their wear by
   the game's keys (`aouda_dress`, `fix_bruise`).
 
 ## Beats (`lib.film()`, played by the world's `beats`)

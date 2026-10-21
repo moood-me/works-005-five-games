@@ -113,10 +113,11 @@ const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_fr
 // a point of the boat (her own metres) for a look or a reach: it goes with her
 const aboard = (a, d, h) => ({ on: 'frame', at: [a, d, h] });
 const BRACE = { motion: 'storm_brace', loop: true, from: 0 };
-// where they are: Bunsby at the tiller; Fogg, Aouda, Fix aft by the port and starboard rails, turned aft from the spray
+// where they are: Bunsby at the tiller; Fogg by the port rail, Aouda beside him, Fix by the starboard rail — aft, turned
+// aft from the spray
 const SPOT = {
   bunsby: [0.95, -5.9], bunsby_gun: [0.35, 6.4],
-  fogg: [-1.35, -3.3], aouda: [-1.25, -1.9], fix: [1.4, -2.6],
+  fogg: [-1.45, -3.0], aouda: [-0.75, -3.75], fix: [1.4, -2.6],
 };
 const QUIET = { storm: 0, reef: 0, wave: 0, wave_h: 0.35, helm: 0, heel: 0, green_water: 0, wave_from: 0, flag: 0, steamer: 0, steamer_turn: 0, gun_flash: 0 };
 
@@ -136,7 +137,7 @@ function film(scene, party = {}) {
     ...NOBODY(),
     ...P('bunsby', SPOT.bunsby, 335, { do: BRACE, reach: { r: 'tiller#tiller', l: 'tiller#tiller' }, look: aboard(0, 30, 2) }),
     ...P('fogg', SPOT.fogg, 160, { do: BRACE, reach: { l: aboard(-2.05, -3.2, 0.75) }, look: aboard(-0.2, -7.5, 1.4) }),
-    ...(withIt('with_aouda') ? P('aouda', SPOT.aouda, 170, { do: BRACE, reach: { r: aboard(-2.05, -1.8, 0.75) }, look: 'fogg#head' }) : {}),
+    ...(withIt('with_aouda') ? P('aouda', SPOT.aouda, 165, { do: BRACE, look: 'fogg#head' }) : {}),
     ...(withIt('with_fix') ? P('fix', SPOT.fix, 200, { do: BRACE, reach: { l: aboard(2.05, -2.5, 0.75) }, look: 'fogg#head', mood: 'afraid' }) : {}),
     ...party,
     ...more,
