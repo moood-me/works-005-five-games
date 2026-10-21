@@ -14,7 +14,7 @@ const add = o => (objects.push(o), o);
 
 add({ id: 'sky', name: 'Sky', sky: true });
 add({ id: 'ground', name: 'The Street', plane: true, drape: true, across: 0, distance: 20, elevation: 0, width: 150, depth: 90 });
-add({ id: 'far', name: 'Far yards', across: 4, distance: 32, height: 13, box: [-75, -13, 75, 0.5] });
+add({ id: 'far', name: 'Far yards', across: 4, distance: 32, facing: 180, height: 13, box: [-75, -13, 75, 0.5] });
 
 // the houses: an unseen anchor each, its long wall, its roof's near slope, its two ends; their panes
 const PANES = [];

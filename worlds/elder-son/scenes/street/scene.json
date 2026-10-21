@@ -1024,6 +1024,7 @@
       "name": "Far yards",
       "across": 4,
       "distance": 32,
+      "facing": 180,
       "height": 13,
       "box": [
         -75,
