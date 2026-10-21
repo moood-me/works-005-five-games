@@ -2,7 +2,7 @@
 // other, Kiouni behind them): Fogg raises the price. Hold anywhere (the fill — on the roll of banknotes in Fogg's hand,
 // `fogg#hands`): the roll grows by £100 a second, from START to TOP (`offer` 0…1 — its thickness); let go — he has made
 // an offer (no less than £100 above the last). A price below the owner's threshold (MIN…TOP, random, the player does
-// not know it) — the owner turns his back, arms folded (`owner_turn` → 1, stands, → 0): twenty minutes in the notebook;
+// not know it) — the owner turns his back, arms folded (`owner_back` → 1, stands, → 0): twenty minutes in the notebook;
 // while he stands with his back turned the roll does not grow. Not below — sold. TOP is never below the threshold: who
 // is ready to pay loses not a minute.
 //   What he does: Phileas Fogg buys an elephant from an old Parsee in the middle of the forest.
@@ -37,7 +37,7 @@ export default {
     const hold = mg.hold({ on: null, show: pack, seconds: (TOP - START) / RATE, drain: 0 });
     b.minigame.tricks.teach(mg, [hold], { id: 'bargain' });
     send('offer', 0);
-    send('owner_turn', 0);
+    send('owner_back', 0);
     const priceOf = fill => START + STEP * Math.floor((fill * (TOP - START)) / STEP + 1e-6);
     let last = START, minutes = 0, refusals = 0, backAt = -1, frozen = 0, sold = false, t0 = mg.t;
     hold.on('up', () => {
@@ -51,7 +51,7 @@ export default {
       minutes += REFUSAL;
       frozen = hold.state.fill;
       backAt = mg.t - t0 + TURN + BACK;
-      move('owner_turn', 1, TURN);
+      move('owner_back', 1, TURN);
       mg.error('wrong', { at: pack, chip: true });
       mg.plate.set({ phrase: refusals === 1 ? tr('The old man turned away and folded his arms. Twenty minutes') : tr.n(refusals, 'The old man has turned away {n} time now. Another twenty minutes', 'The old man has turned away {n} times now. Another twenty minutes') });
       opts.onRefuse?.(minutes);
@@ -61,7 +61,7 @@ export default {
       // while he stands with his back turned, the roll does not grow
       if (backAt >= 0) {
         hold.set({ fill: frozen });
-        if (now >= backAt) { backAt = -1; move('owner_turn', 0, TURN); }
+        if (now >= backAt) { backAt = -1; move('owner_back', 0, TURN); }
       }
       const fill = hold.state.fill;
       send('offer', fill);

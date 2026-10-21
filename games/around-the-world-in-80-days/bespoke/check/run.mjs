@@ -51,7 +51,7 @@ const PARTS = ['deckhouse', 'boats', 'bunks', 'yards', 'mast_fore', 'mast_main',
 // its marks stand on (and its pulls go to), the fields of its opts and of its result
 const MINIGAMES = {
   'ten-minutes': { scene: 'row', keys: ['pp_in', 'fly', 'fly_what', 'bag', 'gas'], points: ['win_dressing', 'win_bedroom', 'win_hall', 'win_study', 'attic'], result: ['missing', 'gas'] },
-  bargain: { scene: 'jungle', keys: ['offer', 'owner_turn'], points: ['fogg#hands'], opts: ['onRefuse'], result: ['price', 'minutes'] },
+  bargain: { scene: 'jungle', keys: ['offer', 'owner_back'], points: ['fogg#hands'], opts: ['onRefuse'], result: ['price', 'minutes'] },
   elephant: { scene: 'jungle', keys: ['ride', 'pace', 'goad', 'balk', 'sugar'], points: ['kiouni#head', 'guide#hands', 'kiouni#trunk'], result: ['hours'] },
   'like-the-dead': { scene: 'jungle', keys: ['walk', 'heads', 'smoke'], points: [], result: ['hours'] },
   dash: { scene: 'jungle', keys: ['charge', 'scatter', 'grab', 'guide_seen', 'litter_lane', 'kiouni_lane'], points: ['aouda#hands'], result: ['hours'] },
