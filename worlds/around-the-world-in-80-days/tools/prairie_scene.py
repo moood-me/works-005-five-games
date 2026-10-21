@@ -78,8 +78,8 @@ o(id='sledge', name="Mudge's sledge (anchor)", unseen=True, across=266, distance
 o(id='sledge_deck', name='Sledge, deck', plane=True, on='sledge', across=0.3, elevation=0.5, width=5.6, depth=2.2, walk=True)
 o(id='sledge_back', name='Sledge, far side', on='sledge', distance=1.1, facing=180, box=[-2.9, -1.0, 3.8, 0.05])
 o(id='sledge_side', name='Sledge', on='sledge', distance=-1.1, facing=180, height=1, box=[-2.9, -1.0, 3.8, 0.05], shadow=True)
-o(id='mast', name="Sledge's mast", on='sledge', across=1.0, elevation=0.5, height=8, box=[-1.8, -8.0, 1.8, 0.05], shadow=True)
-o(id='sail', name='Sail', on='sledge', across=1.0, elevation=0.5, facing=110, translucent=0.5, height=7, box=[-5.4, -7.6, 0.3, -0.4],
+o(id='mast', name="Sledge's mast", on='sledge', across=1.0, elevation=0.5, height=7, box=[-1.8, -6.8, 1.8, 0.05], shadow=True)
+o(id='sail', name='Sail', on='sledge', across=1.0, elevation=0.5, facing=110, translucent=0.5, height=6, box=[-4.6, -6.3, 0.3, -0.4],
   place={'facing': 'sail_face'}, shadow=True)
 o(id='sheet_rope', name='Sheet', on='sledge', facing=180, box=[-6, -6, 6, 1])
 o(id='runner_spray', name='Snow from under the runners', particles={'kind': 'puff', 'at': {'on': 'sledge', 'at': [2.4, -1.1, 0.1]}, 'source': [0.6, 2.4, 0.1],
@@ -115,6 +115,7 @@ lights = [
   {'id': 'moon', 'from': 'sky#moon', 'color': '#b8c8f0', 'strength': 0.9, 'on': 'night'},
   {'id': 'platform_lamp', 'of': 'lamp#flame', 'color': '#ffa070', 'strength': 1.6, 'reach': 10, 'on': 'lamps', 'flicker': 0.12},
   {'id': 'depot_window', 'of': 'depot#window', 'color': '#ffc884', 'strength': 1.2, 'reach': 7, 'on': 'lamps'},
+  {'id': 'firebox', 'of': 'loco_side#fire', 'color': '#ff9a50', 'strength': 1.4, 'reach': 3.5, 'flicker': 0.25},
   {'id': 'headlamp', 'of': 'loco_side#lamp', 'color': '#ffd8a0', 'strength': 1.6, 'reach': 16, 'on': 'lamps'},
   {'id': 'car_windows', 'of': 'cars_lit#lit', 'color': '#ffcc8a', 'strength': 1.0, 'reach': 8, 'on': 'lamps'},
 ]

@@ -17,4 +17,4 @@ g.strokeStyle = '#c8b48a';
 g.lineWidth = 0.04;
 for (const r of [0.2, 0.15, 0.1]) { g.beginPath(); g.arc(1.2, 0.5, r, 0, TAU); g.stroke(); }
 R(g, -2.8, -1.1, 2.8, -1.02, '#eef2f6');
-e.at(-2.5, 0.05, 'mudge');
+e.at(-2.5, -0.55, 'mudge');

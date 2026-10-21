@@ -128,6 +128,14 @@
    "on": "lamps"
   },
   {
+   "id": "firebox",
+   "of": "loco_side#fire",
+   "color": "#ff9a50",
+   "strength": 1.4,
+   "reach": 3.5,
+   "flicker": 0.25
+  },
+  {
    "id": "headlamp",
    "of": "loco_side#lamp",
    "color": "#ffd8a0",
@@ -1651,10 +1659,10 @@
    "on": "sledge",
    "across": 1.0,
    "elevation": 0.5,
-   "height": 8,
+   "height": 7,
    "box": [
     -1.8,
-    -8.0,
+    -6.8,
     1.8,
     0.05
    ],
@@ -1668,10 +1676,10 @@
    "elevation": 0.5,
    "facing": 110,
    "translucent": 0.5,
-   "height": 7,
+   "height": 6,
    "box": [
-    -5.4,
-    -7.6,
+    -4.6,
+    -6.3,
     0.3,
     -0.4
    ],
