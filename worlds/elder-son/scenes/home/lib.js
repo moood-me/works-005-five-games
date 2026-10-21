@@ -26,10 +26,10 @@ const CUPBOARD = { x: 5.2, z: 0.25, w: 1.1, h: 1.95, shelf: 1.32 }; // in the ro
 const COT = { x: 4.45, z0: 0.7, z1: 2.4, w: 0.7, top: 0.42 };  // the folding bed along the kitchen wall, its head by the doorway
 const COT_CHAIR = [4.32, 0.42];                                // the chair at the cot's foot, by the wall (his coat at night)
 const SOFA = { x0: 5.6, x1: 7.6, z: 3.62, top: 0.45, front: 3.3, back: 3.92 }; // against the room's back wall: the seat z 3.3…3.92
-// lying: on the back (`lie`) the turn is where the feet point; on the side (`lie_side`) the head lies at the turn − 65°
-// (seen on the sheets). On the cot the head by the doorway (+z); on the sofa at its right end (+x), in the light from his
-// door. `side` — turned on the side (to the wall, as far as the motion turns)
-const LIE_AT = { cot: { at: [4.45, 1.55], bed: 'cot_top#bed', back: 180, side: 65 }, sofa: { at: [6.75, 3.62], bed: 'sofa_top#bed', back: 270, side: 155 } };
+// lying: on the back (`lie`) the turn is where the feet point; `lie_side` turns from the back onto the side, ending
+// with the head at the turn − 22°, the face to the turn + 68° (seen on the sheets). On the cot the head by the doorway
+// (+z), on the side facing the room; on the sofa the head at its right end (+x), in the light from his door
+const LIE_AT = { cot: { at: [4.45, 1.55], bed: 'cot_top#bed', back: 180, side: 22 }, sofa: { at: [6.75, 3.62], bed: 'sofa_top#bed', back: 270, side: 112 } };
 const SAR_DOOR = { z0: 3.1, z1: 3.9 };                         // in the room's right wall (x 8): Sarafanov's room
 // his lamp's light, come through the gap of his door: a light standing in the room before the gap (the gap of a door
 // ajar is too narrow for the lamp's shadow to cut a wedge) — it falls on the sofa's right end and through the doorway
@@ -201,11 +201,11 @@ const film = scene => {
     p.on(P3(x, z, SEAT_H));
     p.do('seated', { loop: true });
   }
-  // (the cast's `rise` gets up forward, 0.6 m — at the table that is into it: they stand up where they sat, a moment)
+  // up from a place at the table: pushing the chair back (`rise_back` ends 0.24 m behind the seat)
   async function rise(p, seat) {
+    const [x, z] = SEATS[seat];
     p.on(null);
-    p.do('stand');
-    await p.turn(SEATS[seat][2]);
+    await p.go('rise_back', { from: W(x, z) });
   }
   // down onto a bed (on the back): the hips onto its point, the place kept at it
   function lieDown(s, id, where) {
@@ -679,7 +679,7 @@ const film = scene => {
         await s.wait(3.0);
         cot.cut();
         await s.wait(0.8);
-        bus.turn(LIE_AT.cot.side);
+        s.set('busygin_turn', LIE_AT.cot.side);
         await bus.do('lie_side');
         s.tell('wall:turn');
         await s.wait(6.0);
