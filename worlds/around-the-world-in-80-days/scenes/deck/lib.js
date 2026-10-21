@@ -844,13 +844,16 @@ function film(scene) {
         await s.move('door', 1, { over: 0.5, ease: 'out' });
         fix.here(true);
         fix.mood('afraid');
-        await fix.walk([CELL_AT(-2.6, 2.4), FIX_IN], { gait: 'run' });
-        await fix.turn(toward(FIX_IN, BENCH));
-        fix.look('fogg#head');
+        // (he is in, out of breath — his line begins as he comes up to Fogg)
+        const run = fix.walk([CELL_AT(-2.6, 2.4), FIX_IN], { gait: 'run' });
+        await s.wait(0.5);
+        s.tell('release:in');
         fogg.look('fix#head');
         s.camera({ target: 'cell_two', shot: 1.3, frame: [0.5, 0.42], glide: 1.6 });
-        s.tell('release:in');
-        await s.wait(2.2);
+        await run;
+        await fix.turn(toward(FIX_IN, BENCH));
+        fix.look('fogg#head');
+        await s.wait(1.6);
       },
     },
     // ---- What Fogg does, after release: he rises and strikes him, Fix goes down — or holds out his hand

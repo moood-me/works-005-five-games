@@ -108,6 +108,8 @@ and Fix with them), `under_show` and `sail_show` (the minigames played a little)
 - `snow_on_aouda` lies on her only in `night_wait`: every other beat begins it at 0.
 - Under the cars the chains are all under the first car, between its trucks (2 m apart, then the coupling 6 m on): the next one is in the frame with him.
 
+Shortened silences (2026-10-21, the browser play): `column` — the cut at 1.2 s, `column:gone` at about 4.7 s; `night_wait` — `night_wait:snow` at 1.5 s (the game's narrator), the snow over 8 s; its camera on Fix when Aouda is not there (was on no one).
+
 ## Contract for the check
 
 ```json
@@ -119,8 +121,8 @@ and Fix with them), `under_show` and `sail_show` (the minigames played a little)
   "under": {"after": [], "tells": ["under:coupling"], "seconds": 2, "show": false},
   "stop": {"after": [], "tells": ["stop:still"], "seconds": 10, "show": false},
   "fort": {"after": [], "tells": ["fort:captain"], "seconds": 5, "show": false},
-  "column": {"after": [], "tells": ["column:gone"], "seconds": 11, "show": false},
-  "night_wait": {"after": [], "tells": ["night_wait:snow"], "seconds": 13, "show": false},
+  "column": {"after": [], "tells": ["column:gone"], "seconds": 5, "show": false},
+  "night_wait": {"after": [], "tells": ["night_wait:snow"], "seconds": 9, "show": false},
   "return": {"after": [], "tells": ["return:pp"], "seconds": 9, "show": false},
   "train_leaves": {"after": [], "tells": ["train_leaves:gone"], "seconds": 13, "show": false},
   "sledge": {"after": [], "tells": ["sledge:sail"], "seconds": 8, "show": false},

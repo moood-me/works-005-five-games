@@ -283,7 +283,7 @@ function boatLive(e, i) {
 // settings (Aouda's dress, whether she and Fix are with him) as they cut ──
 // at the parapet, where Aouda waits looking out (parapet#parapet); where Passepartout stands by her; where Fogg comes to,
 // and where he comes from along the quay
-const BY_WALL = [-18, 4.15], PP_BY = [-16.9, 3.95], TO_HER = [-15.4, 3.6], ALONG = [-5, 3.2];
+const BY_WALL = [-18, 4.15], PP_BY = [-16.9, 3.95], TO_HER = [-15.4, 3.6], ALONG = [-10.2, 3.4];
 // the tavern's table by the rail (tables#table) and its two stools: Passepartout's (facing right), Fix's (left)
 const TABLE = [-40.2, 6.6], STOOL = { passepartout: [-40.95, 6.6], fix: [-39.45, 6.6] };
 const BOTTLE = [TABLE[0] + 0.15, TABLE[1], 0.95], CUP = [TABLE[0] - 0.1, TABLE[1], 0.82];
@@ -484,9 +484,9 @@ function film(scene) {
       from: DAY,
       run: async s => {
         const fogg = s.person('fogg'), pp = s.person('passepartout'), aouda = s.person('aouda');
-        await s.wait(0.4);
+        await s.wait(0.3);
         const walk = fogg.walk([TO_HER]);
-        await walk.ending(4);
+        await walk.ending(3);
         pp.look('fogg#head');
         await s.wait(0.5);
         pp.turn(70);
@@ -498,7 +498,7 @@ function film(scene) {
         await fogg.turn(toward(TO_HER, BY_WALL));
         fogg.look('aouda#head');
         s.tell('quay:met');
-        await s.wait(2.5);
+        await s.wait(1);
       },
     },
     // ---- (under the line) She listens, even; looks out over the water, and back to him; holds, under the choice.
@@ -510,12 +510,12 @@ function film(scene) {
         // (the operator frames her; the quay's own sideways step, camera_x, is on top of a framing — taken off with it)
         s.camera({ target: 'aouda', shot: 0.6, frame: 0.3, glide: 1.6 });
         s.move('camera_x', 0, { over: 1.6, ease: 'inOut' });
-        await s.wait(1.5);
+        await s.wait(0.6);
         aouda.look([BY_WALL[0] - 1.5, 30, 1.5]);
-        await s.wait(2.7);
+        await s.wait(1.8);
         aouda.look('fogg#head');
         s.tell('cousin:looks-back');
-        await s.wait(2);
+        await s.wait(1.2);
       },
     },
     // ---- Evening. Passepartout and Fix at the table on the terrace; Fix fills his glass. (Under the lines.)

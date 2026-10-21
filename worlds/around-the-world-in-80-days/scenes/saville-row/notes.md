@@ -153,6 +153,8 @@ the street does not fall into darkness.
 The night and the fog — as they were (lighter than v1: the passers-by and the house read). The morning `sunday`:
 `ambient` 0.5 → 0.65.
 
+Shortened silence (2026-10-21, the browser play): `cab` — Fogg out of the cab and off; a cut (made ready during the race) near the club's steps, him half-way: `cab:in` about 3.8 s after `cab:arrived` (was 7.4).
+
 ## Contract for the check
 
 ```json
@@ -166,7 +168,7 @@ The night and the fog — as they were (lighter than v1: the passers-by and the 
   "run_back": {"after": ["run_out"], "tells": ["run_back:in"], "seconds": 7, "show": false},
   "fix_paper": {"after": [], "tells": ["fix_paper:rings"], "seconds": 9, "show": false},
   "sunday": {"after": [], "tells": ["sunday:date", "sunday:laugh"], "seconds": 10, "show": false},
-  "cab": {"after": [], "tells": ["cab:arrived", "cab:in"], "seconds": 6, "show": false},
+  "cab": {"after": [], "tells": ["cab:arrived", "cab:in"], "seconds": 5, "show": false},
   "to_club": {"after": [], "tells": ["to_club:arrived"], "seconds": 26, "show": true},
   "lost": {"after": [], "tells": ["lost:lamp"], "seconds": 10, "show": false},
   "pp_returns": {"after": [], "tells": ["pp_returns:watch", "pp_returns:rings"], "seconds": 14, "show": false},

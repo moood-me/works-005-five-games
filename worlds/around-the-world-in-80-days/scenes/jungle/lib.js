@@ -1102,7 +1102,7 @@ const DOWN = { guide: [-0.4, 9.0], fogg: [-1.4, 8.9], cromarty: [-2.4, 8.9], pas
 // from (off the train) and where they stop before the shed; where Fogg and the owner bargain, three-quarters to each other
 const KI_SHED = [-27.8, 12.4];
 const OWNER = [-29.8, 11.0];
-const OFF_TRAIN = { passepartout: [-42.6, 13.2], fogg: [-44.6, 13.9], cromarty: [-45.6, 14.5] };
+const OFF_TRAIN = { passepartout: [-38.4, 12.1], fogg: [-40.4, 12.6], cromarty: [-41.5, 13.2] };
 const AT_SHED = { passepartout: [-32.9, 10.9], fogg: [-34.8, 11.1], cromarty: [-35.9, 11.7] };
 const HAGGLE = { fogg: [-32.6, 10.7], owner: [-30.2, 10.9], passepartout: [-34.3, 11.9], cromarty: [-35.3, 11.3] };
 // the passengers off the train, going off along the line with their bundles; the conductor along the carriages
@@ -1114,8 +1114,8 @@ const GUIDE_IN = [-23.6, 10.2], GUIDE_AT = [-30.4, 11.3];
 // the pagoda at night: the two guards with torches before its porch; where the four creep up along the plinth and back
 // to; where Passepartout slips away into the dark under the fig's roots
 const GUARDS = { pb1: [53.0, 17.2], pb2: [55.6, 17.0] };
-const CREEP = { guide: [[47.6, 16.6], [50.6, 17.4]], fogg: [[46.8, 16.2], [49.7, 17.0]], cromarty: [[46.0, 15.8], [48.9, 16.7]], passepartout: [[45.2, 15.5], [48.1, 16.4]] };
-const SLIP = [[47.2, 19.4], [47.6, 22.5]];
+const CREEP = { guide: [[48.6, 16.9], [50.6, 17.4]], fogg: [[47.8, 16.5], [49.7, 17.0]], cromarty: [[47.0, 16.1], [48.9, 16.7]], passepartout: [[46.2, 15.8], [48.1, 16.4]] };
+const SLIP = [[47.3, 19.2], [47.5, 21.2]];
 
 // the pyre on the clearing (its top a plane they stand on, its stepped end the way down), the crowd kneeling round it,
 // Fogg held back by Cromarty at the clearing's edge, the way to the trees — and Kiouni waiting kneeling at the trees,
@@ -1285,7 +1285,7 @@ const DAWN = () => ({
   aouda_a: ON_PYRE.aouda[0], aouda_d: ON_PYRE.aouda[1], aouda_here: true, aouda_do: loop('lie_limp'), aouda_turn: 90, aouda_wear: { hood: true },
   passepartout_a: ON_PYRE.passepartout[0], passepartout_d: ON_PYRE.passepartout[1], passepartout_here: true,
   passepartout_do: loop('lie_limp', 3.1), passepartout_turn: 270, passepartout_wear: SHROUD,
-  ...Object.fromEntries(['pr1', 'pr2'].flatMap((id, i) => { const at = [KINDLE[id][0][0] - 2.4 + 4.8 * i, 11.6]; return [[`${id}_a`, at[0]], [`${id}_d`, at[1]],
+  ...Object.fromEntries(['pr1', 'pr2'].flatMap((id, i) => { const at = [KINDLE[id][0][0] - 1.2 + 2.4 * i, 12.0]; return [[`${id}_a`, at[0]], [`${id}_d`, at[1]],
     [`${id}_here`, true], [`${id}_with`, ['torch']], [`${id}_turn`, toward(at, PYRE)], [`${id}_gait`, 'priest_walk']]; })),
   ...Object.fromEntries(['fogg', 'cromarty'].flatMap(id => [[`${id}_a`, EDGE[id][0]], [`${id}_d`, EDGE[id][1]], [`${id}_here`, true],
     [`${id}_turn`, toward(EDGE[id], PYRE)], [`${id}_look`, 'pyre']])),
@@ -1557,46 +1557,44 @@ function film(scene) {
     // along the plinth — a guard lifts his torch, they draw back; Passepartout lags behind and is gone into the dark.
     night_wall: { from: WALL, run: async s => {
       drop();
-      const go = PARTY.map((id, i) => s.sequence(async q => { await q.wait(0.35 * i); await q.person(id).walk([CREEP[id][1]]); }));
+      const go = PARTY.map((id, i) => s.sequence(async q => { await q.wait(0.25 * i); await q.person(id).walk([CREEP[id][1]]); }));
       await s.all(...go);
       s.set('pb1_look', 'guide#head');
       s.set('pb1_reach', { r: [GUARDS.pb1[0] - 0.4, GUARDS.pb1[1] - 0.3, 2.3] });
-      await s.wait(0.6);
+      await s.wait(0.5);
       for (const id of PARTY) s.set(`${id}_look`, 'pb1#flame');
-      await s.wait(0.9);
+      await s.wait(0.6);
       const back = ['guide', 'fogg', 'cromarty'].map((id, i) => s.sequence(async q => { await q.wait(0.25 * i); await q.person(id).walk([CREEP[id][0]]); }));
       const pp = s.person('passepartout');
       s.set('passepartout_look', [PYRE[0], PYRE[1], 1.5]);
-      await s.wait(1.4);
-      s.set('pb1_reach', null);
-      s.set('pb1_look', null);
+      s.after(1.4, () => { s.set('pb1_reach', null); s.set('pb1_look', null); });
       await pp.walk(SLIP);
       s.set('passepartout_here', false);
       s.tell('night_wall:gone');
       await s.all(...back);
       s.set('fogg_look', 'cromarty#head');
-      await s.wait(2);
+      await s.wait(1);
     } },
     // ---- Dawn on the clearing. The pyre: the rajah's body and the widow on it; the crowd on their knees round it; the
     // priests set their torches to it. Fogg strains forward — Cromarty holds him back.
     pyre: { from: DAWN, run: async s => {
       s.move('smoke', 0.7, { over: 6 });
       const kindle = ['pr1', 'pr2'].map((id, i) => s.sequence(async q => {
-        await q.wait(0.4 + 0.5 * i);
+        await q.wait(0.2 + 0.3 * i);
         const p = q.person(id);
         await p.walk([KINDLE[id][0]]);
         await p.turn(toward(KINDLE[id][0], PYRE));
         q.set(`${id}_look`, KINDLE[id][1]);
         q.set(`${id}_reach`, { r: KINDLE[id][1] });
       }));
-      await s.wait(1.8);
+      await s.wait(1);
       s.person('fogg').do('strain', { loop: true });
       await s.wait(0.2);
       s.set('cromarty_reach', { r: 'fogg#shoulder_r', l: 'fogg#shoulder_l' });
       s.set('cromarty_look', 'fogg#head');
       s.set('fogg_look', 'aouda#head');
       await s.all(...kindle);
-      await s.wait(0.6);
+      await s.wait(0.3);
       s.tell('pyre:kindled');
       const fire = s.move('pyre_fire', 0.85, { over: 5, ease: 'in' });
       s.move('camera_x', 37, { over: 4, ease: 'inOut' });
@@ -1607,7 +1605,7 @@ function film(scene) {
       await s.wait(0.4);
       s.set('pr2_reach', null);
       await fire;
-      await s.wait(1.5);
+      await s.wait(0.5);
     } },
     // ---- The dead rajah rises out of the smoke with the widow in his arms; the crowd falls on its face.
     rise: { after: 'pyre', from: LIT, run: async s => {

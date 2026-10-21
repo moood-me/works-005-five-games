@@ -87,6 +87,8 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
 - The showcase's own (not the game's): `burn_show` (four parts dragged into the hatch), `cell_show` (the hours in the
   cell).
 
+Shortened silence (2026-10-21, the browser play): `release` — `release:in` as Fix is through the door (about 1.6 s), not once he stands before Fogg.
+
 ## Contract for the check
 
 ```json
@@ -107,7 +109,7 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
  "sails_only": {"after": [], "tells": ["sails_only:laugh"], "seconds": 8, "show": false},
  "liverpool": {"after": [], "tells": ["liverpool:hand"], "seconds": 10, "show": false},
  "cell": {"after": [], "tells": [], "seconds": 1, "show": false},
- "release": {"after": ["cell"], "tells": ["release:in"], "seconds": 6, "show": false},
+ "release": {"after": ["cell"], "tells": ["release:in"], "seconds": 5, "show": false},
  "fix_down": {"after": ["release"], "tells": [], "seconds": 7, "show": false},
  "fix_hand": {"after": ["release"], "tells": [], "seconds": 6, "show": false},
  "burn_show": {"after": [], "tells": [], "seconds": 16, "show": true},

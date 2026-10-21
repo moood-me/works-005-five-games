@@ -34,7 +34,7 @@ are the game's (`bespoke/map.js`, in `bespoke.underlay`), not this scene's.
 - **The chapters' points** `c0` … `c5` — unseen, 10 m off, in a row at the frame's 0.28 (their pages hang down from
   there), each over its part of the way: `c0` the prologue at London (lon 2), `c1` India (82), `c2` China and Japan
   (127), `c3` America (264), `c4` the Atlantic (325), `c5` the epilogue at London again — the sheet's far end (358):
-  the two Londons are the map's two ends. `author` — the author's sign, left of the first (across −3.2, 0.3).
+  the two Londons are the map's two ends. (No point for the author's sign: the game draws its pen itself.)
 
 ## Keys
 
@@ -52,7 +52,7 @@ at the end (about 35 s).
 
 ```json
 {"beats": {},
- "points": ["c0", "c1", "c2", "c3", "c4", "c5", "author", "watch#watch"],
+ "points": ["c0", "c1", "c2", "c3", "c4", "c5", "watch#watch"],
  "offers": [],
  "party": {},
  "keys": {"shown": 0, "come": 0, "route": 0, "dateline": 0}}

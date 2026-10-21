@@ -178,21 +178,6 @@
         0.05,
         0
       ]
-    },
-    {
-      "id": "author",
-      "name": "The author’s map",
-      "unseen": true,
-      "across": -3.2,
-      "distance": 10,
-      "elevation": 7.7,
-      "height": 0.1,
-      "box": [
-        -0.05,
-        -0.1,
-        0.05,
-        0
-      ]
     }
   ]
 }

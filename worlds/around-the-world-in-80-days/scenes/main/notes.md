@@ -113,7 +113,7 @@ player lays them down: the game waits for a touch on `fogg#hands`, then sets `wa
 | `wait` | 21 December, 20:43:10. Five at the clock, the crowd behind the windows |
 | `door` | 20:44:57. The door flies open: Fogg comes in (behind him Aouda, Passepartout and last of all Fix — by the door — if `with_aouda`, `with_pp`, `with_fix`); the gentlemen turn round; a cut to Fogg once he has stopped |
 | `no_door` | 20:45:00. Stuart shuts his watch, turns to the others |
-| `friday` | Friday: Fogg at the whist table in his own place, his face to us over his paper; day — night — evening behind the windows, the fire higher and lower; the porter comes up to the table and goes |
+| `friday` | Friday: Fogg at the whist table in his own place, his face to us over his paper; day — night — evening behind the windows, the fire higher and lower; a cut nearer: the porter comes up to the table and stands back by the wall |
 | `friday_in` | (after `friday`) 20:45: the door wide open, the five run in (`run`) and stand round the table, round him |
 
 Changed 2026-10-15: `wager` split into `wager` (before the cards, a living pause) and `wager_down`; Fix may come in
@@ -145,20 +145,22 @@ only (the beats do not set them); in `door` the shot is at the door at once (aft
 
 - v1: the underside of a plane in the floor's mirror (the felt green from below) — check on engine 3.
 
+Shortened silences (2026-10-21, the browser play): `whist` — Stuart speaks at 0.6 s; `wager` — `wager:ready` at about 1.3 s; `friday` — the days go by in 4 s, then a cut (made ready) nearer on Fogg, the porter a few steps off: `friday:porter` at about 6 s; the porter stands back by the wall (no walk out); `friday_in` — the operator draws back to the round shot.
+
 ## Contract for the check
 
 ```json
 {"beats": {
   "countdown": {"after": [], "tells": ["countdown:fifty-five", "countdown:handle"], "seconds": 11, "show": false},
-  "whist": {"after": [], "tells": ["whist:stuart-talks"], "seconds": 9, "show": false},
-  "wager": {"after": ["whist"], "tells": ["wager:ready"], "seconds": 3, "show": false},
+  "whist": {"after": [], "tells": ["whist:stuart-talks"], "seconds": 8, "show": false},
+  "wager": {"after": ["whist"], "tells": ["wager:ready"], "seconds": 2, "show": false},
   "wager_down": {"after": ["wager"], "tells": ["wager_down:cards-down", "wager_down:stuart-up"], "seconds": 8, "show": false},
   "leave": {"after": ["wager_down"], "tells": ["leave:up", "leave:hat-on", "leave:gone"], "seconds": 18, "show": false},
   "wait": {"after": [], "tells": [], "seconds": 8, "show": false},
   "door": {"after": ["wait", "countdown"], "tells": ["door:fogg-in"], "seconds": 11, "show": false},
   "no_door": {"after": ["wait", "countdown"], "tells": ["no_door:watch-shut"], "seconds": 7, "show": false},
-  "friday": {"after": [], "tells": ["friday:porter"], "seconds": 18, "show": false},
-  "friday_in": {"after": ["friday"], "tells": ["friday_in:round-him"], "seconds": 8, "show": false}
+  "friday": {"after": [], "tells": ["friday:porter"], "seconds": 10, "show": false},
+  "friday_in": {"after": ["friday"], "tells": ["friday_in:round-him"], "seconds": 9, "show": false}
 },
 "points": ["clock#dial", "clock#pendulum", "door#door", "door#handle", "fireplace#fire", "table#table", "lamp#lamp", "papers#papers",
   "armchair#armchair", "hatstand#hat", "wall#window1", "wall#window2", "wall#window3", "lamps#lamp1", "lamps#lamp2", "lamps#lamp3",

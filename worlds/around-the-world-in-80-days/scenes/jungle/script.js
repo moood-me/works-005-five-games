@@ -63,7 +63,7 @@ scene.on('change', 'owner_back', async v => {
   const owner = scene.person('owner'), away = v > 0.5;
   scene.set('owner_look', away ? null : 'fogg#head');
   scene.set('owner_do', away ? { motion: 'arms_folded', loop: true } : 'stand');
-  const turned = await owner.turn(away ? 60 : 245);
+  const turned = await owner.turn(away ? 25 : 245);
   if (away && turned === 'done') scene.tell('haggle:turned');
 });
 

@@ -100,6 +100,8 @@ const BAIZE = [-1.6, 7.0, 0.78], DIAL = [plan.clock, 8, 4.4], DOOR = [0, 18, 1.6
 // where Ralph stands warming himself, by the fire; Fogg's hat on its stand, and where he stands to take it; where the
 // porter comes to Fogg at the table
 const BY_FIRE = [3.3, 6.9], HAT = 'hatstand#hat', BY_STAND = [-2.25, 16.65], BY_FOGG = [-0.7, 8.3];
+// Friday: the porter come in (a few steps off Fogg's chair, the cut's), and where he stands back to, by the wall
+const PORTER_IN = [0.2, 10.4], PORTER_ASIDE = [1.2, 10.0];
 // where the five wait on the evening of the 21st: Stuart under the clock, his back to it, his face to us over his watch;
 // the others round him either side, turned to him (their faces to us in profile), their eyes going from his watch to
 // the dial over him
@@ -128,6 +130,7 @@ const ON_STUART = on('stuart', 0.4, [0.5, 0.62]), AT_DOOR = view(-0.3, 9.6, -0.1
 const WHIST_TABLE = on('fogg', 0.55, [0.4, 0.32]), FOGG_CLOSE = on('fogg', 0.62, [0.45, 0.3], { camera_x: -0.4, camera_h: 0.9 });
 const FOGG_IN = on('fogg', 0.7, [0.45, 0.42]), STUART_CLOSE = on('stuart', 0.6, [0.5, 0.35]), FRIDAY_FOGG = on('fogg', 0.5, [0.45, 0.4]);
 const FOGG_GOING = on('fogg', 0.45, [0.5, 0.42]), ROUND_HIM = on('fogg', 0.4, [0.5, 0.5]);
+const FRIDAY_NEAR = on('fogg', 0.62, [0.4, 0.42]);
 const same = (a, b) => (Array.isArray(a) && Array.isArray(b) ? a.length === b.length && a.every((v, i) => v === b[i]) : (a ?? 0) === (b ?? 0));
 const isView = (s, v) => Object.keys(CAM).every(k => k === 'camera_glide' || same(s.get(k), v[k]));
 // the operator taken to a shot of its own over `glide` seconds (an action: done once it has settled)
@@ -232,7 +235,7 @@ function film(scene) {
       from: () => ({ ...WHIST, ...WHIST_TABLE }),
       run: async s => {
         const stuart = s.person('stuart');
-        await s.wait(2);
+        await s.wait(0.6);
         s.tell('whist:stuart-talks');
         stuart.with(['newspaper_folded']);
         stuart.do('talk_seated', { loop: true });
@@ -253,9 +256,9 @@ function film(scene) {
         s.cut(FOGG_CLOSE);
         await looks(s, [[0.3, 'fogg', null], [0.3, 'fallentin', 'fogg#head'], [0.2, 'sullivan', 'fogg#head'],
           [0.2, 'flanagan', 'fogg#head'], [0.2, 'ralph', 'fogg#head']]);
-        await s.wait(1.2);
+        await s.wait(0.3);
         s.tell('wager:ready');
-        await s.wait(0.5);
+        await s.wait(0.2);
       },
     },
     // ---- He lays his cards and his hands on the baize; Stuart gets up. All eyes on Fogg.
@@ -413,28 +416,30 @@ function film(scene) {
       },
     },
     // ---- Friday (the ending «On time»). The salon half empty; Fogg in his armchair by the fire, his paper open.
-    // Outside, day — night — day — evening; the fire high and low. The porter comes to him, and goes.
+    // Outside, day — night — day — evening; the fire high and low. (A cut, nearer:) the porter comes to him, and stands
+    // back by the wall.
     friday: {
       from: () => ({ ...FRIDAY, ...FRIDAY_FOGG }),
       run: async s => {
         const porter = s.person('porter');
+        // (a cut once the days have gone by: nearer on Fogg, the porter come in through the door left ajar, a few steps
+        // from him — made ready meanwhile)
+        const near = s.shot({ ...FRIDAY_NEAR, door: 0.4, porter_here: true, porter_a: PORTER_IN[0], porter_d: PORTER_IN[1],
+          porter_turn: toward(PORTER_IN, BY_FOGG), porter_look: null });
         // (the days going by: the hour and the fire)
-        await s.all(s.move('day', 0, { over: 2.5, ease: 'inOut' }), s.move('fire', 0.35, { over: 2.5, ease: 'inOut' }));
-        await s.all(s.move('day', 1, { over: 2.5, ease: 'inOut' }), s.move('fire', 0.9, { over: 2.5, ease: 'inOut' }));
-        s.move('day', 0.6, { over: 2.5, ease: 'inOut' });
-        s.move('fire', 0.6, { over: 2.5, ease: 'inOut' });
+        await s.all(s.move('day', 0, { over: 1.3, ease: 'inOut' }), s.move('fire', 0.35, { over: 1.3, ease: 'inOut' }));
+        await s.all(s.move('day', 1, { over: 1.3, ease: 'inOut' }), s.move('fire', 0.9, { over: 1.3, ease: 'inOut' }));
+        await s.all(s.move('day', 0.6, { over: 1.3, ease: 'inOut' }), s.move('fire', 0.6, { over: 1.3, ease: 'inOut' }));
         time(s, 1243, 0);
-        // the porter, through the door left ajar, to Fogg — and back
-        s.move('door', 0.4, { over: 0.8, ease: 'out' });
-        await s.wait(0.4);
-        porter.here(true);
-        await walk(s, 'porter', [[0.3, 16.4], [0.2, 9.6], BY_FOGG], toward(BY_FOGG, S.far));
+        await s.until(() => near.ready);
+        near.cut();
+        await walk(s, 'porter', [BY_FOGG], toward(BY_FOGG, S.far));
         porter.look('fogg#head');
         s.tell('friday:porter');
         await s.wait(2);
         porter.look(null);
-        await walk(s, 'porter', [[0.2, 9.6], [0.3, 16.4], OUT.porter]);
-        porter.here(false);
+        // (he steps back to the wall and stays: the five come running in past him)
+        await walk(s, 'porter', [PORTER_ASIDE], toward(PORTER_ASIDE, S.far));
       },
     },
     // ---- 20:45: the door flung open, the five running in, round Fogg's armchair; he sits on.
@@ -443,6 +448,7 @@ function film(scene) {
       from: () => ({ ...FRIDAY, ...ROUND_HIM, minute: 1245, second: 0, day: 0.6, fire: 0.6, door: 0.4 }),
       run: async s => {
         time(s, 1245, 0);
+        frame(s, ROUND_HIM, 1.5);
         s.move('door', 1, { over: 0.6, ease: 'out' });
         const STOP = [[-0.6, 8.35], [-0.55, 7.4], [-2.65, 8.3], [-2.7, 7.4], [-1.6, 8.8]];
         const come = MEN.map((id, i) => s.sequence(async q => {

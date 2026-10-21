@@ -142,12 +142,14 @@ By sheets against v1: the day more transparent and more colourful — `haze` 0.1
 v1 (there the people on the pier sank in the dark) — `ambient` 0.32 → 0.55, the moon `moon` `strength` 0.8 → 1.3.
 
 
+Shortened silences (2026-10-21, the browser play): `quay` — Fogg comes from nearer (`quay:met` at about 3.7 s), the tail 1 s; `cousin` — `cousin:looks-back` at about 2.4 s.
+
 ## Contract for the check
 
 ```json
 {"beats": {
-  "quay": {"after": [], "tells": ["quay:met"], "seconds": 8, "show": false},
-  "cousin": {"after": ["quay"], "tells": ["cousin:looks-back"], "seconds": 8, "show": false},
+  "quay": {"after": [], "tells": ["quay:met"], "seconds": 5, "show": false},
+  "cousin": {"after": ["quay"], "tells": ["cousin:looks-back"], "seconds": 4, "show": false},
   "tavern": {"after": [], "tells": ["tavern:poured"], "seconds": 9, "show": false},
   "badge": {"after": ["tavern"], "tells": ["badge:shown", "badge:up"], "seconds": 8, "show": false},
   "pipe": {"after": ["badge"], "tells": ["pipe:up"], "seconds": 11, "show": false},

@@ -1039,16 +1039,16 @@ function film(scene) {
         camera_target: 'fogg', camera_shot: 0.4, camera_frame: [0.3, 0.45],
       }),
       run: async s => {
-        await s.wait(2.4);
+        await s.wait(1.2);
         // from behind them: they go off over the line into the falling snow
         const away = s.shot({ camera_target: null, camera_shot: null, camera_frame: null, camera_x: 200, camera_z: 4, fogg_turn: 345, fogg_look: null });
         await s.until(() => away.ready);
         away.cut();
         // (they walk on into the white after the beat: its end is a living pose of a column going away)
         for (const [id, [a, d]] of Object.entries(COLUMN_FROM)) s.person(id).walk([[a + COLUMN_WAY[0], d + COLUMN_WAY[1]]]);
-        await s.wait(6.5);
+        await s.wait(3.5);
         s.tell('column:gone');
-        await s.wait(1.5);
+        await s.wait(0.5);
       },
     },
     // ---- Night. Aouda on the platform by the lamp, looking where they went; the snow settles on her; Fix stamps his
@@ -1058,14 +1058,15 @@ function film(scene) {
         ...PLATFORM(), ...LIGHT.night, snow_on_aouda: 0,
         ...aouda(223.6, 17.8, 300, { look: [185, 60, 2] }),
         ...fix(225.6, 18.4, 250, { do: loop('fidget_paper') }),
-        camera_target: 'aouda', camera_shot: 0.6, camera_frame: [0.42, 0.45],
+        // (on Aouda; she gone to Holland — on Fix, who walks the platform)
+        camera_target: yes('with_aouda') ? 'aouda' : 'fix', camera_shot: 0.6, camera_frame: [0.42, 0.45],
       }),
       run: async s => {
-        const snow = s.move('snow_on_aouda', 1, { over: 12, ease: 'linear' });
-        await s.wait(9.5);
+        const snow = s.move('snow_on_aouda', 1, { over: 8, ease: 'linear' });
+        await s.wait(1.5);
         s.tell('night_wait:snow');
         await snow;
-        await s.wait(1);
+        await s.wait(0.5);
       },
     },
     // ---- Dawn. Out of the snow come the soldiers, Passepartout and Fogg (fogg_went); Aouda and Fix at the platform's

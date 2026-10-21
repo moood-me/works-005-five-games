@@ -130,7 +130,7 @@ const TOWNS = [
 
 // The chapters' points (the game hangs each chapter's page from its own): over the chapter's part of the way — the
 // prologue at London, India, China and Japan, America, the Atlantic, the epilogue at London again, the far end — in a
-// row at the frame's 0.28; the author's sign left of the first
+// row at the frame's 0.28
 const CHAPTERS = [2, 82, 127, 264, 325, 358].map(X);
 const ROW_UP = 1.7 + (0.9 - 0.28) * POINTS;
 

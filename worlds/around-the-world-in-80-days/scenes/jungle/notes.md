@@ -183,18 +183,20 @@ the frame. By sheets against v1 (the air cleaner, the green and the pyre's gold 
 frame). The mist over the stream and the river — painted layers (`mist_*`); the light does not change them.
 
 
+Shortened silences (2026-10-21, the browser play): `rails_end` — the travellers start nearer the shed (`rails_end:shed` at about 4 s, the beat 7 s); `night_wall` — shorter creep and slip (`night_wall:gone` at about 6.6 s); `pyre` — the priests start nearer (`pyre:kindled` at about 2.8 s). «The bargain»: `owner_back` 1 turns the owner to 25° — his back to Fogg and to us (60° read as a look at the elephant).
+
 ## Contract for the check
 
 ```json
 {"beats": {
-  "rails_end": {"after": [], "tells": ["rails_end:shed"], "seconds": 8, "show": false},
+  "rails_end": {"after": [], "tells": ["rails_end:shed"], "seconds": 7, "show": false},
   "haggle": {"after": ["rails_end"], "tells": ["haggle:turned"], "seconds": 4, "show": false},
   "mount": {"after": ["haggle", "haggle_show"], "tells": ["mount:up"], "seconds": 12, "show": false},
   "ride": {"after": [], "tells": [], "seconds": 1, "show": false},
   "drums": {"after": [], "tells": ["drums:heard", "drums:hidden"], "seconds": 21, "show": false},
   "procession": {"after": [], "tells": ["procession:torches", "procession:widow", "procession:stopped"], "seconds": 27, "show": false},
-  "night_wall": {"after": [], "tells": ["night_wall:gone"], "seconds": 12, "show": false},
-  "pyre": {"after": [], "tells": ["pyre:kindled"], "seconds": 14, "show": false},
+  "night_wall": {"after": [], "tells": ["night_wall:gone"], "seconds": 8, "show": false},
+  "pyre": {"after": [], "tells": ["pyre:kindled"], "seconds": 8, "show": false},
   "rise": {"after": ["pyre"], "tells": ["rise:risen"], "seconds": 8, "show": false},
   "walk": {"after": ["rise"], "tells": ["walk:down", "walk:away"], "seconds": 22, "show": false},
   "flee": {"after": ["walk", "walk_show"], "tells": ["flee:pp"], "seconds": 12, "show": false},

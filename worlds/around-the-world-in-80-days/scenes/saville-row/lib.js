@@ -727,6 +727,8 @@ const PROP_F = [DOOR - 0.3, 20.3], PROP_A = [DOOR + 0.4, 20.3], SUN_PP = [DOOR +
 const CAB = [-20, 51];
 const camX = a => anim.clamp(a + 2.5, -18, 56);
 const CLUB_RUN = [[49.6, 13.6], [52.6, 20], [53.4, 27.3], [53.4, 29.2]];
+// …cut to near the club's steps: Fogg half-way there, running; the camera across the street from them, nearer
+const CLUB_HALF = [53.0, 23.6], CLUB_STEPS = { camera_x: 53.4, camera_z: 19, camera_h: 0, camera_look: 0 };
 const BELL = [DOOR + plan.door.bell[0], plan.front - 0.03, plan.door.bell[1]], LAMP = [-7.45, 18.9], BAG = 'bag#bag';
 // off along the street into the fog: right (toward the club), left
 const RIGHT = [16, 18.4], LEFT = [-24, 18.4];
@@ -1083,16 +1085,22 @@ function film(scene) {
       from: () => ({ ...NIGHT, ...OFF, ...STREET(0.6), cab_across: CAB[0], cab_to: 0, cab_at: 0, cab_pace: 0, camera_x: camX(CAB[0]), camera_z: 4,
         ...person('fogg', CLUB_RUN[0], 90, { ...FOGG, fogg_here: false, fogg_gait: 'run' }) }),
       run: async s => {
+        // (the club's steps, near: Fogg half-way to them — made ready while the cab races)
+        const steps = s.shot({ ...CLUB_STEPS, fogg_here: true, fogg_a: CLUB_HALF[0], fogg_d: CLUB_HALF[1], fogg_turn: 6 });
         await s.until(() => (s.get('cab_at') ?? 0) >= 0.98);
         s.tell('cab:arrived');
         const f = s.person('fogg');
         await s.wait(0.4);
+        // (out of the cab and off at a run — a cut to the steps, and up them and in)
         f.here(true);
-        s.move('camera_x', camX(CLUB_RUN[2][0]), { over: 2.5 });
-        await f.walk(CLUB_RUN.slice(1));
+        f.walk([CLUB_RUN[1]]);
+        await s.wait(1.2);
+        await s.until(() => steps.ready);
+        steps.cut();
+        await s.person('fogg').walk(CLUB_RUN.slice(2));
         f.here(false);
         s.tell('cab:in');
-        await s.wait(0.6);
+        await s.wait(0.3);
       },
     },
   };
