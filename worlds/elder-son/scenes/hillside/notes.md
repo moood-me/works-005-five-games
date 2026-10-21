@@ -44,7 +44,7 @@ Modules: `cast`, `beats`, `houses`. `scene.json`, the crosses, the grave railing
 | `alone` | `march` | the brass go after them (hidden by the crest); the camera slowly to the fence; he puts the clarinet in its case (`put_down`), picks the case up (`pick_up`); he stands at the top of the path. The pose for the choice: `sarafanov` (x ≈ 0.54) and `nina` (≈ 0.33) in the middle 4:3 | `alone:case` | 18 |
 | `meet` | `alone` | Nina behind the birch; Busygin through the gate up the path (the cut at 4 s to the head of the path, where the father stands: the son comes up to him) until both are in profile a step apart; the father puts the case behind his back (`hide_back`); Busygin takes the case | `meet:talk`, `meet:ready` | 27 |
 | `bottom` | — | at the gate's foot on the road, face to face; with `snowy` 1 snow on his coat (`snow_back`), his back to us he brushes it (reach to his own `#back`) and laughs; he takes the case (`take`), goes off right along the road; Nina walks from the birch along the fence to Busygin (seen from the first seconds) | `bottom:gone` | 13 |
-| `hide` | `alone` | the cut to the slope: the two stand in the lee of the gate's left post, looking up; he comes down the path by himself, onto the road, and stands turned right (`sar_at` ≈ 0.03). Under “Following” | `hide:ready` | 19 |
+| `hide` | — | the cut to the slope: the two stand in the lee of the gate's left post, looking up; he comes down the path by himself, onto the road, and stands turned right (`sar_at` ≈ 0.03). Under “Following” | `hide:ready` | 19 |
 | `club` | — | the cut before the club (`from`: `sar_go` 0, `sar_at` 1, `follow`/`follow_at` where Busygin stands, `hold` 0, `duck` 0); he climbs the steps; with `seen` 1 he turns on the landing and looks down the road for long (`look_back`); the door opens (`club_door` 1: the light `club_spill` falls on the road and on the two), he goes in, it shuts. Both in the middle 4:3 | `club:in` | 12 |
 
 `hide` cannot be 8 s: 25 m of path on foot, in his gait (≈ 19 s). Seconds are measured on the showcase.
@@ -81,7 +81,7 @@ Modules: `cast`, `beats`, `houses`. `scene.json`, the crosses, the grave railing
  "alone": {"after": ["march"], "tells": ["alone:case"], "seconds": 18, "show": false},
  "meet": {"after": ["alone"], "tells": ["meet:talk", "meet:ready"], "seconds": 27, "show": false},
  "bottom": {"after": [], "tells": ["bottom:gone"], "seconds": 13, "show": false},
- "hide": {"after": ["alone"], "tells": ["hide:ready"], "seconds": 19, "show": false},
+ "hide": {"after": [], "tells": ["hide:ready"], "seconds": 19, "show": false},
  "club": {"after": [], "tells": ["club:in"], "seconds": 12, "show": false}},
  "points": ["sarafanov", "nina", "busygin", "gate", "sarafanov#shoulder_l"],
  "offers": ["sarafanov", "nina"],
