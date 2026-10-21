@@ -275,7 +275,7 @@
 #underlay .map.route .tree.dense{--s:.88}
 #underlay .map.route .tree.current{box-shadow:0 calc(var(--u) * 4) calc(var(--u) * 26) rgba(40,26,12,.55),0 0 0 calc(var(--u) * 3) rgba(163,39,29,.25)}
 #underlay .map.route .tree .num{letter-spacing:.3em}
-#underlay .map.route .row .name,#underlay .map.route .opt.chosen{font-weight:600}
+#underlay .map.route .row .name,#underlay .map.route .opt.chosen,#underlay .map.route .badge,#underlay .map.route .go{font-weight:600}
 #underlay .map.route .tree .heading{margin-top:calc(var(--u) * 4);font:italic calc(var(--u) * 16)/1.25 var(--f-text);color:var(--c-name)}
 /* a chapter to come: a blank page, its number only */
 #underlay .map.route .tree.future{background:#e8dcbc;opacity:.82}
@@ -293,7 +293,8 @@
 #underlay .map.route .row.cursor,#underlay .map.route .row.pending{border-top-color:transparent}
 #underlay .map.route .badge{background:#f1e6cb;border:1px solid var(--c-replay)}
 #underlay .map.route .tree:has(.head.can:hover,.knot .hit.can:hover) .title{color:var(--c-main)}
+#underlay .map.route .tree .author{left:calc(var(--u) * -78);top:calc(var(--u) * 6)}
 #underlay .map.route .author svg path{fill:none;stroke:#3b2a1a;stroke-width:1.6px}
 #underlay .map.route .author svg .quill{fill:#f1e6cb}
 #underlay .map.route .author svg .well{fill:#3b2a1a}
-#underlay .map.route .author span{color:#f1e6cb;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+#underlay .map.route .author span{color:var(--c-name)}

@@ -27,7 +27,7 @@ const litter = t => clamp(0.55 * Math.sin(0.8 * t + 0.6) + 0.15 * Math.sin(2.1 *
 
 export default {
   file: 'dash',
-  title: 'The dash', // (as the author's map lists it)
+  title: tr('The dash'), // (as the author's map lists it)
   about: 14,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {

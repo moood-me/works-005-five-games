@@ -138,8 +138,9 @@ const BOTS = {
   },
   'like-the-dead'(mg, v, t, variant) {
     const l = live(mg, 'lead')[0]; if (!l) return;
-    l.state.held = variant !== 'lazy';
-    l.state.knob = clamp(-3 * (l.state.arrow - (variant === 'rush' ? 0.9 : 0)), -1, 1);
+    // (lazy: the finger down, never steering)
+    l.state.held = true;
+    l.state.knob = variant === 'lazy' ? 0 : clamp(-3 * (l.state.arrow - (variant === 'rush' ? 0.9 : 0)), -1, 1);
   },
   dash(mg, v, t, variant) {
     const l = live(mg, 'lead')[0];

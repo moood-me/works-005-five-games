@@ -115,11 +115,11 @@ export function ui(layer) {
       const open = () => {
         const here = at(), panel = el('div', 'author-panel');
         const pick = el('label', 'as');
-        pick.append('play as… ');
+        pick.append(tr('play as…'), ' ');
         const list = el('select', '', pick);
         list.append(...plays.map((label, i) => Object.assign(el('option'), { value: i, textContent: label, selected: i === as })));
         list.onchange = () => { as = Number(list.value); open(); };
-        panel.append(button('✕', 'close (Esc)', close, 'close'), pick, ...chapters.map((c, ci) => {
+        panel.append(button('✕', tr('close (Esc)'), close, 'close'), pick, ...chapters.map((c, ci) => {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
@@ -127,7 +127,7 @@ export function ui(layer) {
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'straight to the minigame', () => { close(); go(as, ci, si, k); }, 'minigame'))));
+              button(`◆ ${name}`, tr('straight to the minigame'), () => { close(); go(as, ci, si, k); }, 'minigame'))));
             col.append(step, under);
           }
           return col;

@@ -2,9 +2,9 @@
 // he waits a day in his armchair) or late; late, someone may find him the day won from the sun — Aouda (her proposal,
 // the pastor: «tomorrow is Sunday») or Fix (the evening paper) —, then the cab («The cab») and the fifty-seventh second;
 // no one — Sunday, «Two Wednesdays». Then the codas by the people: Aouda's letter from Holland, Passepartout back from
-// Omaha, the gas, Kiouni's postcard, Speedy.
+// Omaha, the gas, Kiouni's postcard, Speedy; the wager won — the wedding, what is left in the bag.
 // Reads: facts (opener, ending, aouda, pp, gas, kiouni, henrietta, cabin), marks, hands cab. Leaves: marks.day; lines.
-import { SCENES, facts } from '../story.js';
+import { SCENES, START, facts, moneyText } from '../story.js';
 import cab from '../minigames/cab.js';
 
 export default {
@@ -13,7 +13,7 @@ export default {
   heading: tr('in which it turns out that a day can be gained'),
   wall: false, // (the special train runs into it; its page on the map ends with the finale)
   route: [0.97, 1],
-  titles: ['Saturday', 'The fifty-seventh second', 'Coda'],
+  titles: [tr('Saturday'), tr('The fifty-seventh second'), tr('Coda')],
   choices: [],
   steps: [
     // Saturday — by the notebook Friday (on time) or Sunday (late); who finds the day
@@ -144,6 +144,13 @@ export default {
       const f = facts(g.state);
       g.hero('both');
       g.beds({ fog: 0.3, clock: 0.4 }, 2);
+      // the wager won: the wedding, if she asked him; what is left in the carpet-bag (design.md «Концовки»)
+      if (f.ending === 'door' && f.opener === 'aouda') {
+        await g.title(f.pp === 'with' ? tr('On Monday Phileas Fogg married Aouda. Passepartout was the witness') : tr('On Monday Phileas Fogg married Aouda'));
+      }
+      if (f.ending === 'door' || f.ending === 'friday') {
+        await g.title(tr('He won twenty thousand pounds — and spent {spent} on the way', { spent: moneyText(START.money - g.state.money) }));
+      }
       if (f.aouda === 'holland') {
         await g.letter({ kind: 'letter', text: tr('Mr. Fogg,\nit is raining in The Hague, and I am thinking of your notebook.\nMay I come?'), sign: tr('Aouda') });
         await g.say('fogg', 'Come');
@@ -159,7 +166,7 @@ export default {
       if (f.gas) {
         await g.scene(SCENES.row, { beat: 'gas_off', night: 1, gas: 1 });
         await g.beat('gas_off');
-        await g.say('passepartout', 'Eighty days of gas — at my expense');
+        await g.say('passepartout', 'Eighty days of gas — at my expense', 'narrator'); // (in the attic: unseen)
       }
       if (f.kiouni === 'gift') await g.title(tr('A postcard came from Allahabad. There is an elephant on it'));
       if (g.state.marks.speedy || f.cabin) await g.title(tr('Captain Speedy salutes from Queenstown'));

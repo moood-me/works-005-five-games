@@ -15,7 +15,7 @@ export default {
   title: tr('Hong Kong'),
   heading: tr('in which Passepartout loses his master'),
   route: [0.22, 0.55],
-  titles: ['The Rangoon\'s deck', 'The cousin', 'The tavern', 'The Tankadere', 'The typhoon', 'The Long Noses', 'Two Wednesdays'],
+  titles: [tr('The Rangoon\'s deck'), tr('The cousin'), tr('The tavern'), tr('The Tankadere'), tr('The typhoon'), tr('The Long Noses'), tr('Two Wednesdays')],
   choices: [
     { id: 'answer', weight: '~', title: tr('Fogg\'s answer'), options: [{ id: 'spare', label: tr('I had them to spare') }, { id: 'plaid', label: tr('Give her the plaid') }, { id: 'notlost', label: tr('I have not lost them') }] },
     { id: 'aouda', weight: '⚑', title: tr('Aouda'), options: [{ id: 'europe', label: tr('Come with us to Europe') }, { id: 'holland', label: tr('A passage to Holland') }] },

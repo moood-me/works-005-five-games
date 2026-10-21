@@ -1,7 +1,8 @@
 // «Like the dead» (I.5 «at night», the jungle, the beat `walk`; dawn, the crowd face down by the pyre): the «rajah» —
 // Passepartout — carries Aouda from the pyre to the trees. Lead anywhere: the arrow — his step (−1 slow … +1 running),
 // the zone — the solemn step of a dead man in the middle. Without a finger the step itself now breaks forward, now
-// freezes (nerves: `push`); the finger steers it (`steer: 'rate'`). The way `walk` 0 → 1 at a speed by the step. Faster
+// freezes (nerves: `push`); the finger steers it (`steer: 'rate'`). The way `walk` 0 → 1 at a speed by the step — only
+// while the finger leads him (let go, he stands among them: the smoke thins on). Faster
 // than the zone — the crowd raises its heads (`heads` grows; once at 1 — he is known: an alarm, a chase — an hour; the
 // heads bow again). The pyre's smoke (`smoke`) thins by itself with every second, slower than the zone — faster still;
 // the smoke gone and he not yet at the trees — he is seen: an alarm (once). At the trees — the end.
@@ -25,7 +26,7 @@ const nerves = t => 0.12 + 0.18 * Math.sin(0.8 * t) + 0.06 * Math.sin(2.3 * t + 
 
 export default {
   file: 'like-the-dead',
-  title: 'Like the dead', // (as the author's map lists it)
+  title: tr('Like the dead'), // (as the author's map lists it)
   about: 24,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {
@@ -43,7 +44,7 @@ export default {
       const now = t - t0;
       lead.set({ push: nerves(now) });
       const a = lead.state.arrow, fast = a > ZONE / 2, slow = a < -ZONE / 2;
-      walk = clamp(walk + (dt / PATH) * (1 + SPEED * a));
+      if (lead.state.held) walk = clamp(walk + (dt / PATH) * (1 + SPEED * a));
       send('walk', walk);
       // faster than the zone — the heads rise
       if (upTill >= 0) {
@@ -60,7 +61,7 @@ export default {
       }
       send('heads', heads);
       // the smoke thins; lingering — faster
-      smoke = Math.max(SMOKE_GONE, smoke - (SMOKE_FADE + (slow ? SMOKE_SLOW : 0)) * dt);
+      smoke = Math.max(SMOKE_GONE, smoke - (SMOKE_FADE + (slow || !lead.state.held ? SMOKE_SLOW : 0)) * dt);
       send('smoke', smoke);
       if (!smokeAlarm && smoke <= SMOKE_GONE && walk < 1) { smokeAlarm = true; alarms++; mg.error('behind', { chip: true }); }
       put(heads > 0.5 ? tr('Heads rise from the ground, one after another') : smoke < 0.35 && !smokeAlarm ? tr('The smoke over the pyre is thinning') : PHRASE);

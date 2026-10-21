@@ -1,6 +1,6 @@
 // The map's trees (game.js map), over «The route» — an old map of the world, the way in red ink. The scene is only the
 // background and a point for each chapter (c<i>: unseen, where the chapter's knot is — the place on the map the chapter
-// is played at) and for the author's sign (author); each tree is the game's own, HTML laid out by CSS in normal flow (its
+// is played at); each tree is the game's own, HTML laid out by CSS in normal flow (its
 // words never run into one another) — each chapter a page of the old edition pinned to the map at its place: its
 // number, title and heading («in which…») at the top, its knot a red-ink pin, its rows of choices (the forks) — what
 // was chosen written in red ink, what could have been in pencil, what was never reached left blank —, in
@@ -21,7 +21,8 @@
 //     replay's —, badge:<i> — the replay's plate —, author); offer(refs, fn) — those take a press, fn(ref) told; remove() }
 //   chapters — as game.js sky() gives them: [{number, title, heading, kind: here | played | next | future, rows: [{title, weight, options: [{label, state: chosen | tried | both | open | unseen}]}], go: the play's
 //     pointer's words | null, replay: a replay goes on in it, badge: a replay of it — its plate, badge:<i>}]; grow —
-//     the chapter whose rows come one after another over `seconds`; author — the author's sign shown
+//     the chapter whose rows come one after another over `seconds`; author — the chapter whose page carries the author's
+//     sign at its top left (the one the view is at: always within reach), or null
 const DIST = 10; // m: the points' distance from the eye — a tree drawn at its size there
 const FLAG = '◆'; // a key fork's sign (⚑)
 // the author's sign (SVG): a quill in an inkwell
@@ -30,7 +31,7 @@ const NS = 'http://www.w3.org/2000/svg';
 const el = (tag, cls, text) => Object.assign(document.createElement(tag), cls ? { className: cls } : {}, text != null ? { textContent: text } : {});
 const svg = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
 
-export function trees(b, chapters, { grow = null, seconds = 6, author = false } = {}) {
+export function trees(b, chapters, { grow = null, seconds = 6, author = null } = {}) {
   const root = el('div', 'map route');
   b.underlay.append(root);
   // [{ref: the scene's point, box: at it (scaled there), nodes: Map ref → an element a mark stands on, offsets: Map ref
@@ -57,7 +58,6 @@ export function trees(b, chapters, { grow = null, seconds = 6, author = false } 
     where.clear();
     root.style.setProperty('--h', `${b.frame().h}px`);
     chapters.forEach((c, i) => stand(`c${i}`, chapter(c, i)));
-    if (author) stand('author', sign());
     can();
     // (laid out: the tree hung by its knot from its point; where each mark's element is — offsets, as laid out, not as
     // drawn: no transform counts)
@@ -190,15 +190,20 @@ export function trees(b, chapters, { grow = null, seconds = 6, author = false } 
     });
     if (c.go) pointer(line('row pending', '', el('ul', 'opts')), c.go, false, `go:${i}`);
     tree.append(list);
+    if (i === author) {
+      const s = sign();
+      tree.append(s.tree);
+      for (const [ref, node] of s.nodes) nodes.set(ref, node);
+    }
     return { tree, nodes, origin: hang(tree, core) };
   }
 
-  // the author's sign, “the author” under it
+  // the author's sign, “the author” under it (on a page: CSS sets it beside its top left corner)
   function sign() {
     const tree = el('div', 'author'), mark = el('div');
     mark.innerHTML = AUTHOR;
     tree.append(mark, el('span', '', tr('the author')), hit('author', tr('The author’s map')));
-    return { tree, nodes: new Map([['author', mark]]), origin: () => [tree.offsetWidth / 2, mark.offsetHeight / 2] };
+    return { tree, nodes: new Map([['author', mark]]) };
   }
 
   // each frame the scene says: every stand at its point, as large as its depth makes it

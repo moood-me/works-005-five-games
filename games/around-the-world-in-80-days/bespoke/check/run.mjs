@@ -65,8 +65,8 @@ const MINIGAMES = {
   cab: { scene: 'row', keys: ['traffic', 'cab_to', 'cab_pace'], listens: ['cab_at'], points: ['cab#horse'], result: ['late'] },
 };
 // what game.js itself takes of «The route», the map's background (it is not run here): its keys, the points its trees
-// stand at (map.js) — each chapter's and the author's sign's
-const MAP = { keys: ['shown', 'come', 'route', 'dateline'], points: [...Array.from({ length: 6 }, (_, i) => `c${i}`), 'author'] };
+// stand at (map.js) — each chapter's
+const MAP = { keys: ['shown', 'come', 'route', 'dateline'], points: Array.from({ length: 6 }, (_, i) => `c${i}`) };
 // the "live" results put in: both edges
 const EDGES = [
   { 'ten-minutes': { missing: 4, gas: true }, bargain: { price: 2000, minutes: 60 }, elephant: { hours: -2 }, 'like-the-dead': { hours: -2 },

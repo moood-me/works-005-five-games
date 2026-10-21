@@ -33,7 +33,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'ten-minutes',
-  title: 'Ten minutes', // (as the author's map lists it)
+  title: tr('Ten minutes'), // (as the author's map lists it)
   about: 30,
   skipped: { missing: 0, gas: true }, // the list packed; the gas, not on the list, burns — as in Verne
   async run(g, b, opts, signal) {

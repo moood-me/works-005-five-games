@@ -51,6 +51,8 @@ import epilogue from './chapters/epilogue.js';
 const CHAPTERS = [prologue, one, two, three, four, epilogue];
 const EPILOGUE = CHAPTERS.length - 1;
 const END = CHAPTERS.length; // the play played through: no chapter of the main run
+const DATELINE = 3; // the chapter whose page the view is at as it passes the 180th meridian (America: the Pacific crossed)
+const TOUR = 1.6; // s at each chapter's page as the view goes the whole way round, the play played through
 const REVEAL = 4; // s: a chapter's rows written in, one by one, as it has been played through (and the red line drawn on)
 // a replay's end asks on its knot once the knot has stood still REST looks REST_STEP ms apart (REST_MAX s at most)
 const REST = 3, REST_STEP = 100, REST_MAX = 12;
@@ -59,10 +61,10 @@ const STEPS = CHAPTERS.flatMap(ch => ch.steps);
 const FIRST = CHAPTERS.map((_, c) => CHAPTERS.slice(0, c).reduce((n, ch) => n + ch.steps.length, 0));
 // «play as…» — whole plays the author goes from: Verne's own way, the reckoning one, the kind one, the lonely one
 const PLAYS = [
-  { label: 'as in Verne', choices: { sati: 'night', kiouni: 'gift', answer: 'plaid', aouda: 'europe', boat: 'take', punch: 'punch', bridge: 'run', fort: 'go', henrietta: 'burn', liverpool: 'hand' } },
-  { label: 'calculating', choices: { sati: 'road', kiouni: 'sell', answer: 'spare', aouda: 'holland', boat: 'leave', punch: 'shake', bridge: 'run', fort: 'pay', henrietta: 'burn', liverpool: 'hit' } },
-  { label: 'kindly', choices: { sati: 'night', kiouni: 'gift', answer: 'notlost', aouda: 'europe', boat: 'take', punch: 'shake', bridge: 'walk', fort: 'go', henrietta: 'sails', liverpool: 'hand' } },
-  { label: 'alone', choices: { sati: 'road', kiouni: 'sell', answer: 'spare', aouda: 'holland', boat: 'leave', punch: 'punch', bridge: 'run', fort: 'pay', henrietta: 'sails', liverpool: 'hit' } },
+  { label: tr('as in Verne'), choices: { sati: 'night', kiouni: 'gift', answer: 'plaid', aouda: 'europe', boat: 'take', punch: 'punch', bridge: 'run', fort: 'go', henrietta: 'burn', liverpool: 'hand' } },
+  { label: tr('calculating'), choices: { sati: 'road', kiouni: 'sell', answer: 'spare', aouda: 'holland', boat: 'leave', punch: 'shake', bridge: 'run', fort: 'pay', henrietta: 'burn', liverpool: 'hit' } },
+  { label: tr('kindly'), choices: { sati: 'night', kiouni: 'gift', answer: 'notlost', aouda: 'europe', boat: 'take', punch: 'shake', bridge: 'walk', fort: 'go', henrietta: 'sails', liverpool: 'hand' } },
+  { label: tr('alone'), choices: { sati: 'road', kiouni: 'sell', answer: 'spare', aouda: 'holland', boat: 'leave', punch: 'punch', bridge: 'run', fort: 'pay', henrietta: 'sails', liverpool: 'hit' } },
 ];
 const fresh = () => ({
   chapter: 0, step: 0, hours: START.hours, money: START.money, shown: {}, marks: {}, choices: {}, hands: {}, lines: [],
@@ -217,9 +219,12 @@ export default async function (b) {
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, EPILOGUE);
     // (the main run's chapter just played: its stretch of the way drawn on as its rows are written)
     const drawing = reveal != null && !replay;
-    await b.show(SCENES.map, { state: { shown: reveal ?? here, route: drawing ? CHAPTERS[reveal].route[0] : routeOf(kept), dateline: kept.chapter >= END ? 1 : 0 }, captions: false });
+    // (the play just played through: once its finale is written, the view goes the whole way round from London, the day
+    // won notched at the 180th meridian as it passes — design.md «Ход игры», the epilogue)
+    const round = drawing && reveal === EPILOGUE;
+    await b.show(SCENES.map, { state: { shown: reveal ?? here, route: drawing ? CHAPTERS[reveal].route[0] : routeOf(kept), dateline: kept.chapter >= END && !round ? 1 : 0 }, captions: false });
     if (drawing) b.set('route', CHAPTERS[reveal].route[1], REVEAL);
-    const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: !!author });
+    const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: author ? here : null });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let grown = reveal == null, asked = null; // (an option that would leave the replay: asked again)
     let at = reveal ?? here; // (the chapter the view is at)
@@ -234,7 +239,15 @@ export default async function (b) {
     let pressed = () => {};
     const offer = () => drawn.offer(Object.keys(marks(asked, grown ? null : reveal)), ref => pressed(ref));
     // (the chapter just played written in: its forks offered too, the view on to where the play is)
-    const growing = grown ? null : setTimeout(() => { grown = true; offer(); go(here); }, REVEAL * 1000);
+    let left = false; // (the map left: the view's way round goes no further)
+    const tour = async () => {
+      for (let i = 0; i <= EPILOGUE && !left; i++) {
+        go(i);
+        if (i === DATELINE) b.set('dateline', 1, TOUR);
+        await new Promise(ok => setTimeout(ok, TOUR * 1000));
+      }
+    };
+    const growing = grown ? null : setTimeout(async () => { grown = true; offer(); if (round) await tour(); if (!left) go(here); }, REVEAL * 1000);
     try {
       // (a replay played to its end: its knot's mark opens by itself — keep it or not, the question the map asks; the
       // one mark that opens untouched)
@@ -256,6 +269,7 @@ export default async function (b) {
         return picked.id;
       }
     } finally {
+      left = true;
       clearTimeout(growing);
       jumped = () => {};
       hub.withdraw();

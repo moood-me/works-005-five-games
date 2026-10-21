@@ -1,7 +1,7 @@
 // «The boilers» (IV.4, the deck, the beat `burn`; the Henrietta's deck from the poop, all that burns in sight): Fogg has
 // bought the ship, there is no coal. A dashed ring on each part of the ship (`<part>#part`) the purse can pay for — the masts once
 // their yards are burnt: pull
-// (heavy) to the open stokehold hatch `hatch#fire`; the part moves by the key `drag_<part>` (0 in place … 1 at the
+// to the open stokehold hatch `hatch#fire` (it glows from the start); the part moves by the key `drag_<part>` (0 in place … 1 at the
 // hatch), let go not at the hatch — it goes back, seen. Brought there — the part into the furnace: `<part>` 0 (the
 // scene — a flare in the hatch), `fire` and `speed` grow, Speedy clutches his head (`speedy_grief`). Each — PRICE £
 // from the carpet-bag (opts.money); not enough for the next — the rest are locked (`locked_<part>` 1, no marks).
@@ -26,7 +26,7 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'boilers',
-  title: 'The boilers', // (as the author's map lists it)
+  title: tr('The boilers'), // (as the author's map lists it)
   about: 50,
   // (skipped: all the wood but the cabin; how much of it the purse can pay for the chapter checks against the carpet-bag: skipped knows no money)
   skipped: { burned: [...PARTS], cabin: false },
@@ -47,6 +47,7 @@ export default {
       send('speedy_grief', burned.includes(CABIN) ? 1 : clamp(0.8 * burned.length / PARTS.length));
     };
     send('fire', 0.3); send('speed', 0.2); send('speedy_grief', 0);
+    mg.glow('hatch'); // (where every part goes: the open hatch, seen before a part is touched)
     for (const part of [...PARTS, CABIN]) { send(part, 1); send(`drag_${part}`, 0); send(`locked_${part}`, 0); }
     const lock = parts => parts.forEach(p => send(`locked_${p}`, 1));
     // one part: a ring, pull to the hatch; let go at the hatch — into the furnace
@@ -64,7 +65,7 @@ export default {
     };
     const offer = (part, ok = () => true) => {
       const mark = mg.mark({ at: `${part}#part`, kind: 'dash' });
-      const pull = mg.pull({ on: mark, to: 'hatch#fire', heavy: true, release: 'spring' });
+      const pull = mg.pull({ on: mark, to: 'hatch#fire', release: 'spring' });
       pull.on('release', ({ inTarget }) => { if (inTarget && items.has(part) && ok()) burn(part); });
       items.set(part, { mark, pull });
       return pull;

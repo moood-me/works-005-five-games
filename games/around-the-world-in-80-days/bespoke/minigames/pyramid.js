@@ -1,6 +1,6 @@
 // «The pyramid» (II.6, the harbour — Yokohama, the beat `pyramid`; Batulcar's booth, night): Passepartout at the bottom
 // of the Long Noses' human pyramid. Lead anywhere: the arrow — the pyramid's lean (`tilt` −1…1), the zone — level; the
-// «noses» climb up and sway it (`push`). Level — the tiers grow (`pyramid` 0 → 1), crooked — they stand; swayed to the
+// «noses» climb up and sway it (`push`). Held — the tiers grow (`pyramid` 0 → 1), level faster; swayed to the
 // edge — a mistake, a tier sinks. At FOGG — Fogg sits down in the front row (`fogg_present` 1; the scene says
 // `pyramid:fogg`). From that instant — a choice by the hands, the response even: hold to the end (keep it level up to
 // `pyramid` 1) or let go (the finger off for LET_GO s — the pyramid collapses). The ghost finger shows both ways; and
@@ -14,7 +14,7 @@
 //   → { choice: 'hold' (held to the end) | 'drop' (let go) }
 import { until, keys } from '../hands.js';
 
-const CLIMB = 0.05; // pyramid a second while level
+const CLIMB = 0.05, LEANING = 0.02; // pyramid a second while level; while held but leaning
 const ZONE = 0.5, EDGE = 0.95; // the zone's width; the lean — a mistake
 const SLIP = 0.08; // pyramid: a tier sinks
 const FOGG = 0.5; // pyramid: Fogg sits down in the front row
@@ -25,7 +25,7 @@ const sway = (t, h) => 0.2 * Math.sin(1.1 * t) + 0.12 * Math.sin(2.7 * t + 1) + 
 
 export default {
   file: 'pyramid',
-  title: 'The pyramid', // (as the author's map lists it)
+  title: tr('The pyramid'), // (as the author's map lists it)
   about: 24,
   skipped: { choice: 'drop' }, // as in Verne: he saw his master — and the pyramid collapsed
   async run(g, b, opts, signal) {
@@ -43,7 +43,7 @@ export default {
       send('pyramid', h);
       if (!seated) {
         // the skill: level — it grows; at the edge — it sinks
-        if (s.in) h = Math.min(FOGG, h + CLIMB * dt);
+        if (s.held) h = Math.min(FOGG, h + (s.in ? CLIMB : LEANING) * dt);
         if (Math.abs(s.arrow) >= EDGE && !wobbling) { wobbling = true; slips++; h = Math.max(0, h - SLIP); mg.error('danger', { at: lead }); }
         if (s.in) wobbling = false;
         if (h >= FOGG && !fogg) {
@@ -63,7 +63,7 @@ export default {
         return false;
       }
       // the choice: hold to the end — or let go
-      if (s.held) { offSince = null; if (s.in) h = Math.min(1, h + CLIMB * dt); }
+      if (s.held) { offSince = null; h = Math.min(1, h + (s.in ? CLIMB : LEANING) * dt); }
       else if (offSince == null) offSince = t;
       if (offSince != null && t - offSince >= LET_GO) choice = 'drop';
       if (h >= 1) choice = 'hold';

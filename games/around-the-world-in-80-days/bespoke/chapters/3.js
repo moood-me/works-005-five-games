@@ -12,7 +12,7 @@ export default {
   title: tr('America'),
   heading: tr('in which a train is stopped by hand'),
   route: [0.55, 0.78],
-  titles: ['The buffalo', 'The bridge', 'The Sioux', 'Fort Kearney', 'The sail', 'The snow'],
+  titles: [tr('The buffalo'), tr('The bridge'), tr('The Sioux'), tr('Fort Kearney'), tr('The sail'), tr('The snow')],
   choices: [
     { id: 'bridge', weight: '~', title: tr('The bridge at Medicine Bow'), options: [{ id: 'run', label: tr('At full speed') }, { id: 'walk', label: tr('As Passepartout proposes') }] },
     { id: 'fort', weight: '⚑', title: tr('Fort Kearney'), options: [{ id: 'go', label: tr('Go in person') }, { id: 'pay', label: tr('Pay the soldiers') }] },

@@ -16,7 +16,7 @@ export default {
   heading: tr('in which an elephant costs two thousand pounds'),
   wall: false, // (the prologue runs into it: the train out of Charing Cross, then Suez)
   route: [0.04, 0.22],
-  titles: ['Suez', 'The end of the rails', 'The bargain', 'The elephant', 'The procession', 'Allahabad', 'The Ganges'],
+  titles: [tr('Suez'), tr('The end of the rails'), tr('The bargain'), tr('The elephant'), tr('The procession'), tr('Allahabad'), tr('The Ganges')],
   choices: [
     { id: 'sati', weight: '⚑', title: tr('The suttee'), options: [{ id: 'night', label: tr('At night, quietly') }, { id: 'road', label: tr('Now, on the road') }] },
     { id: 'kiouni', weight: '~', title: tr('Kiouni'), options: [{ id: 'gift', label: tr('Give Kiouni to the guide') }, { id: 'sell', label: tr('Sell him') }] },

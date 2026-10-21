@@ -29,7 +29,7 @@ const smooth = x => { const u = clamp(x); return u * u * (3 - 2 * u); };
 
 export default {
   file: 'sail',
-  title: 'The sail', // (as the author's map lists it)
+  title: tr('The sail'), // (as the author's map lists it)
   about: 40,
   skipped: { hours: 18, caught: true },
   async run(g, b, opts, signal) {

@@ -11,7 +11,7 @@ export default {
   title: tr('Prologue'),
   heading: tr('in which Phileas Fogg makes a wager'),
   route: [0, 0.04],
-  titles: ['A quarter to nine', 'The wager', 'Ten minutes', 'Charing Cross'],
+  titles: [tr('A quarter to nine'), tr('The wager'), tr('Ten minutes'), tr('Charing Cross')],
   choices: [],
   steps: [
     // 21 December, 20:44: five gentlemen before the clock, Stuart counting; the door's handle turns — dark
@@ -43,8 +43,10 @@ export default {
       await whist;
       await g.say('fogg', 'The unforeseen does not exist');
       await g.beat('wager');
-      // (the play's first press: the ghost shows it at once)
+      // (the play's first press: the ghost shows it at once, a hint says whose it is)
+      const off = g.hint(tr('The wager is yours to make: touch Fogg\'s hands'));
       await g.choose(null, { 'fogg#hands': [{ id: 'bet', label: tr('I bet twenty thousand') }] }, { show: 1 });
+      off();
       const down = g.told('wager_down:cards-down');
       const wager = g.beat('wager_down');
       await down;

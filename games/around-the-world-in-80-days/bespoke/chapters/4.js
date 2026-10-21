@@ -11,7 +11,7 @@ export default {
   title: tr('The Atlantic'),
   heading: tr('in which the Henrietta burns to the water\'s edge'),
   route: [0.78, 0.97],
-  titles: ['Forty-five minutes', 'The mutiny', 'No coal', 'The boilers', 'Liverpool', 'The special train'],
+  titles: [tr('Forty-five minutes'), tr('The mutiny'), tr('No coal'), tr('The boilers'), tr('Liverpool'), tr('The special train')],
   choices: [
     { id: 'henrietta', weight: '⚑', title: tr('The Henrietta'), options: [{ id: 'burn', label: tr('Buy her and burn her') }, { id: 'sails', label: tr('Go under sail') }] },
     { id: 'liverpool', weight: '~', title: tr('Fix at Liverpool'), options: [{ id: 'hit', label: tr('Strike him') }, { id: 'hand', label: tr('Hold out a hand') }] },

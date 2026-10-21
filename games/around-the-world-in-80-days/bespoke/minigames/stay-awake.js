@@ -16,7 +16,8 @@ import { until, keys } from '../hands.js';
 
 const BOATMAN = 0.97; // pp_walk_at: he is at the boatman (at the steps)
 const AHEAD = 0.04; // pp_walk: how far ahead he is sent while led
-const OPIUM = 0.015, WAKE = 0.05, SINK = 0.15; // daze a second: always grows; falls while held; grows while not
+const OPIUM = 0.01, WAKE = 0.05, SINK = 0.04; // daze a second: always grows; falls while held; grows while not (≈ 14 s
+// from the start to the stones without a finger)
 const ZONE = 0.6, EDGE = 0.92; // the width of the zone «straight on»; the lurch at which he stumbles
 const STUMBLE = 1; // s: he stands after stumbling
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -24,7 +25,7 @@ const reel = (t, daze) => daze * (0.5 * Math.sin(0.7 * t) + 0.3 * Math.sin(1.9 *
 
 export default {
   file: 'stay-awake',
-  title: 'Stay awake', // (as the author's map lists it)
+  title: tr('Stay awake'), // (as the author's map lists it)
   about: 40,
   skipped: { told: true },
   async run(g, b, opts, signal) {

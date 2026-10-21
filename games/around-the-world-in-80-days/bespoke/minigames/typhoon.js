@@ -22,7 +22,7 @@ const smooth = (a, b, x) => { const u = Math.min(1, Math.max(0, (x - a) / (b - a
 
 export default {
   file: 'typhoon',
-  title: 'The typhoon', // (as the author's map lists it)
+  title: tr('The typhoon'), // (as the author's map lists it)
   about: 42,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {
@@ -33,7 +33,8 @@ export default {
     const dirs = Array.from({ length: WAVES }, (_, k) => (k % 2 ? 1 : -1) * (0.45 + 0.25 * Math.random()));
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, release: 'stay' });
     b.minigame.tricks.teach(mg, [lead], { id: 'typhoon' });
-    let misses = 0, k = 0, checked = { crest: -1, trough: -1 }, splashOff = -1;
+    let misses = 0, k = 0, checked = { crest: -1, trough: -1 }, splashOff = -1, said = null;
+    const PORT = tr('A crest comes down on the port bow'), STARBOARD = tr('A crest comes down on the starboard bow'), TROUGH = tr('The crest has passed. The trough, and the bow comes back');
     send('green_water', 0);
     const splash = (now, reason) => {
       misses++;
@@ -66,6 +67,9 @@ export default {
         if (Math.abs(helm) > STRAIGHT) splash(now, 'off');
       }
       if (splashOff >= 0 && now >= splashOff) { splashOff = -1; send('green_water', 0); }
+      // (where the crest comes from, said as it comes; in the trough — the bow back)
+      const told = w < 0.5 ? (dir < 0 ? 'port' : 'starboard') : 'trough';
+      if (told !== said) { said = told; mg.plate.set({ phrase: told === 'port' ? PORT : told === 'starboard' ? STARBOARD : TROUGH }); }
       mg.plate.set({ fill: Math.min(1, now / T), glow: lead.state.in ? 'good' : 'bad' });
       return now >= T;
     });

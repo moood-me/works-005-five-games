@@ -19,14 +19,14 @@ const CLOSE = 0.5; // swing_at: the cars have come together — a chain at the h
 const GUESS = 1.4; // s: the sway's period, until it is seen from the scene
 const HALF = 0.5, STEP = 0.4; // pp_car a beat; s — he moves across
 const CHAINS = 3; // chains to the engine (c1…c3)
-const TEAR = 0.2; // a share of the window's height — to tear out the pin
+const TEAR = 0.12; // a share of the window's height — to tear out the pin
 const QUICK = 14, LATE = 22; // s: up to this — no loss; up to this — an hour; longer — two
 const WINDOW = 0.2; // s: the beat's tolerance
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
   file: 'coupling',
-  title: 'The coupling', // (as the author's map lists it)
+  title: tr('The coupling'), // (as the author's map lists it)
   about: 16,
   skipped: { hours: 0 },
   async run(g, b, opts, signal) {
