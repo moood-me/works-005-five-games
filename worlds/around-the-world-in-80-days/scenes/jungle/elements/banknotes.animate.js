@@ -4,5 +4,5 @@ roll.alpha = p ? 1 : 0;
 if (p) {
   roll.x = p[0];
   roll.y = p[1] - 0.02;
-  roll.scaleY = 0.7 + 1.6 * e.anim.clamp(e.state.offer ?? 0, 0, 1);
+  roll.scaleY = 0.8 + 1.8 * e.anim.clamp(e.state.offer ?? 0, 0, 1);
 }

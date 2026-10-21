@@ -65,8 +65,8 @@ lanterns, cloths). Looks: `evening` (warm, ambient 0.6, shafts 0.5 — a low sun
 | `pp_walk_at` | where he is on his way now, in units of `pp_walk` (set by the scene) | 0 |
 | `pp_sway` | «Stay awake»: −1…1 — he lurches aside as he walks: the end of each walk the game sends him on is that far toward the town (−) or the water (+), up to 0.9 m | 0 |
 | `pp_stumble` | a rise to 1 — he stumbles and walks on | 0 |
-| `boatman` | 1 — the boatman stands in his sampan at the foot of the steps (`sampan#stand`), his lantern lit (the light `boatman_lamp`) | 0 |
-| `message` | a rise to 1 — he pushes off with the news: the sampan and its lantern go away over the water toward the town (`sampan_x/_d/_facing`, led by the scene) | 0 |
+| `boatman` | 1 — the boatman waits on the quay by the head of the steps, his lantern lit (the light `boatman_lamp`), his sampan below | 0 |
+| `message` | a rise to 1 — he goes down into the sampan (`sampan#stand`) and pushes off with the news: it and its lantern go away over the water toward the town (`sampan_x/_d/_facing`, led by the scene) | 0 |
 | `pyramid` | «The pyramid»: 0…1 — the Long Noses' tiers go up on the shoulders (from 0.2, 0.26, 0.42 — `lib.TIERS`), come down (a stumble) when it sinks below; the top man's arms out from 0.75 | 0 |
 | `tilt` | «The pyramid»: −1…1 — it sways: its mat (`pyr`, `pyr_x` led by the scene) and so its foot and all on it aside, 0.35 m at ±1 | 0 |
 | `fogg_present` | «The pyramid»: 1 — Fogg (and Aouda, `with_aouda`) come along the landing and sit in the front row, his watch in his hand — then `pyramid:fogg`; 0 — the seats empty | 0 |
@@ -82,7 +82,7 @@ value (a camera key set at once is a new shot: it is not set frame by frame).
 ## The pontoon, the stage
 
 The landing (`landing`) floats 1.3 m below the quay: the `relief` lowers the land under it (and slopes it down the ramp)
-so that people stand on it — Bunsby and the Tankadere's people, Batulcar's audience. Cards there stand on the lowered
+so that people stand on it — Bunsby and the Tankadere's people, Batulcar's audience (the front row's bench and the crowd at d ≈ 10, before the stage: seen over their heads from the quay). Cards there stand on the lowered
 land (`stage_back`, `stage_front`, `banners`, `lanterns_stage`, `bench`, `audience`: elevation 0); planes keep their
 own elevation (absolute: `landing` −1.3, `ramp`, `stage` 1.2 — its boards, `walk`). The stage's plane is a floor in
 Hong Kong too (unpainted): nobody's places there lie within its boards (x 33…43, d 12…16). The cameras stay on the
