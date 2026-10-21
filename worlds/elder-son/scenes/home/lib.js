@@ -123,7 +123,7 @@ const NAMES = { busygin: 'Busygin', silva: 'Silva', vasenka: 'Vasenka', sarafano
 const cam = (x, z, h, yaw, look = 0) => ({ camera_target: null, camera_x: A(x), camera_z: z, camera_h: h - 1.7, camera_yaw: yaw, camera_look: look, camera_pitch: 0 });
 const CAM = {
   win: cam(1.2, 3.8, 1.65, 155),             // from the corner by the window down the kitchen: the door, the stove right, the table
-  stove: cam(0.45, 0.1, 1.5, 26),              // from the near left corner: he at the open stove in three quarters, its fire left of him
+  stove: cam(0.9, 0.05, 1.55, 11),             // from the near wall by the stove's front: he at the open stove in profile, its fire left of him
   warm: cam(2.5, 0.85, 1.45, -55),             // the stove and Vasenka at the table, from the near right
   near: cam(1.15, 0.35, 1.45, 15),            // the two at the stove: Busygin in profile, the old man in three quarters
   embrace: cam(2.3, 1.0, 1.75, -62),          // over the old man's shoulder: Busygin's face in three quarters
