@@ -61,6 +61,7 @@ export default {
         await g.say('sarafanov', 'Off you go, then. I\'ve still got to play for the dance at the club');
         await bottom;
       } else {
+        g.set('beat_next', 'hide'); // (it begins by a cut: made ready as soon as it is chosen)
         await g.beat('hide');
         g.set('beat_next', 'club');
         const r = await g.play(following);
