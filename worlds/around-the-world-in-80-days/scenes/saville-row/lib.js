@@ -715,9 +715,9 @@ const DOOR = plan.house.across + plan.door.x;
 // a camera on someone walking there stands between them and the kerb's lamps, not behind a post);
 // the bell-pull by the door (over the top step); under the lamp by the door (where Fix waits); the bag on the top step
 const HALL = [DOOR, 22.6], SILL = [DOOR, 21.2], FOOT = [DOOR, 19.4], WALK_D = 18.8;
-// on the top step: Fogg (on its left) and Aouda (on its right, by the door); a step lower, by the right cheek — Fix; under
-// the lamp by the door, where it is lit
-const TOP_F = [DOOR - 0.3, 20.7], TOP_A = [DOOR + 0.35, 20.95], STEP_FIX = [DOOR + 0.5, 20.15], UNDER_LAMP = [-7.95, 19.3];
+// on the steps, clear of the door's leaf: Fogg (on their left) and Aouda (on their right, a step lower); at their foot,
+// by the right cheek — Fix; under the lamp by the door, where it is lit
+const TOP_F = [DOOR - 0.05, 20.35], TOP_A = [DOOR + 0.55, 20.15], STEP_FIX = [DOOR + 1.2, 19.5], UNDER_LAMP = [-7.95, 19.3];
 // the race to the club (the beat cab): where the cab sets off and the club's door it draws up at (its across), the
 // camera a little ahead of it; Fogg's way from the cab up the club's steps
 const CAB = [-20, 51];
@@ -980,19 +980,18 @@ function film(scene) {
     // ---- The epilogue, the evening: Fogg comes out onto the top step under the lamp by the door, Aouda after him. She
     // looks at him (her question), he turns to her (his answer); their hands. (The game says their lines.)
     proposal: {
-      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), night: 0.9, door: 1, camera_target: 'fogg', camera_shot: 0.75, camera_frame: [0.42, 0.38],
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), night: 0.9, door: 1, camera_target: 'fogg', camera_shot: 0.55, camera_frame: [0.42, 0.4],
         ...person('fogg', SILL, 180, { fogg_wear: null, fogg_gait: 'fogg_walk' }), ...person('aouda', HALL, 180, { aouda_wear: DRESS() }) }),
       run: async s => {
         const f = s.person('fogg'), a = s.person('aouda');
         await f.walk([TOP_F]);
-        await f.turn(150);
+        await f.turn(160);
         await a.walk([TOP_A]);
-        await a.turn(215);
+        await a.turn(235);
         a.look('fogg#head');
         await s.wait(0.6);
         s.tell('proposal:asks');
         await s.wait(3.4);
-        await f.turn(110);
         f.look('aouda#head');
         await s.wait(0.3);
         s.tell('proposal:answers');
@@ -1010,7 +1009,7 @@ function film(scene) {
       from: () => {
         const at = TOP_F, turn = 180;
         return { ...NIGHT, ...OFF, ...STREET(0), night: 0, fog: 0.5, sunday: 1, win_hall: 0, win_study: 0, door: 0.6,
-          camera_target: 'fogg', camera_shot: 0.7, camera_frame: [0.45, 0.38],
+          camera_target: 'fogg', camera_shot: 0.6, camera_frame: [0.45, 0.4],
           ...person('fogg', at, turn, { fogg_wear: null, fogg_with: ['newspaper'], fogg_reach: { r: before(at, turn, 0.17, 0.32, 1.3), l: before(at, turn, -0.17, 0.32, 1.3) } }),
           ...person('passepartout', HALL, 180, { ...PP, passepartout_here: false }) };
       },
@@ -1060,9 +1059,10 @@ function film(scene) {
         await s.wait(2.5);
       },
     },
-    // ---- (a coda) Eighty days of gas: the attic's window, close; the gas goes out.
+    // ---- (a coda) Eighty days of gas: the top of the house from across the street, high — the attic's window in the
+    // middle; the gas goes out.
     gas_off: {
-      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), gas: 1, camera_target: 'attic', camera_shot: 0.3, camera_frame: [0.5, 0.45] }),
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), gas: 1, camera_x: plan.house.across, camera_z: 12, camera_h: 10, camera_look: 0.1 }),
       run: async s => {
         await s.wait(1.2);
         await s.move('gas', 0, { over: 0.8, ease: 'in' });
