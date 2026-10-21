@@ -407,12 +407,15 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //   hub.offer({ref: options}, {show}) → the action once the player has chosen it (what was offered before is
 //     dropped): a plain choice of the language of mini-games — a mark on each point; a touch opens its options as
 //     petals, one too (what is chosen is seen in words first), a petal pressed is chosen; one who touches no mark for
-//     `show` s (SHOW) is shown how: the ghost finger on each in turn
+//     `show` s (SHOW) is shown how: the ghost finger on each in turn. None of its points to be seen anywhere for
+//     NOWHERE s (the scene lacks them, or draws nothing there) — an error: the step breaks (game.js passes it, said),
+//     not a play standing still with nothing to press
 //   hub.ask(at, options) → the action chosen, or null: a mark of the plain choice born open where the game's own
 //     drawing was pressed (at: fn → {x, y} page px — map.js), its options out as petals at once; a touch off them folds
 //     it — null, the mark gone (nothing waits idle)
 //   hub.withdraw() — nothing offered; hub.told(text, ms) → true once the scene tells it, false if ms pass
 const SHOW = 8; // s: nothing pressed so long — the ghost shows how
+const NOWHERE = 6; // s: a choice none of whose points has been seen so long is broken
 
 export function listen(b) {
   let offered = null; // the plain choice going on: the language's mini-game
@@ -434,11 +437,26 @@ export function listen(b) {
       if (refs.length === 1) mg.glow(refs[0].split('#')[0]);
       // (the play's clock: it stands with the pause)
       const ghost = setTimeout(() => mg.show({ gestures: presses }), show * 1000);
-      mg.on('end', () => clearTimeout(ghost));
-      return new Promise(ok => {
+      const marks = [];
+      let looked = 0;
+      mg.on('end', () => { clearTimeout(ghost); clearInterval(looking); });
+      // (looked at twice a second: a point seen even once — the choice stands)
+      const looking = setInterval(() => {
+        if (marks.some(m => m.pos)) clearInterval(looking);
+        else if (++looked >= NOWHERE * 2) {
+          clearInterval(looking);
+          mg.leave();
+          if (offered === mg) offered = null;
+          nowhere(new Error(`the choice's points are nowhere to be seen: ${refs.join(', ')}`));
+        }
+      }, 500);
+      let nowhere;
+      return new Promise((ok, no) => {
+        nowhere = no;
         const chosen = (mark, action) => { mg.snap({ at: mark }); mg.leave(); offered = null; ok(action); };
         for (const ref of refs) {
           const options = offers[ref], mark = mg.mark({ at: ref.includes('#') ? ref : `${ref}@` });
+          marks.push(mark);
           const press = mg.press({ on: mark, petals: options });
           press.on('down', () => clearTimeout(ghost));
           press.on('choose', ({ id }) => chosen(mark, options.find(o => o.id === id)));

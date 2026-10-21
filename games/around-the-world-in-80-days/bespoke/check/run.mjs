@@ -489,7 +489,7 @@ const LOGIC = [
   ['the fort, Fogg himself', (f, s, st) => [st.choices.fort === 'go', beat(s, 'prairie', 'column'), !s.opts.sail?.alone]],
   ['the Henrietta burnt', (f, s) => [f.henrietta === 'burn', s.played.has('boilers'), beat(s, 'deck', 'queenstown'), !beat(s, 'deck', 'sails_only')]],
   ['the boilers by Passepartout\'s hands', (f, s, st) => (s.played.has('boilers') ? [f.pp === 'with', s.opts.boilers?.who === 'pp'] : [true])],
-  ['Fix struck at Liverpool', (f, s, st) => [st.choices.liverpool === 'hit', s.set[SCENES.deck]?.release === 'down']],
+  ['Fix struck at Liverpool', (f, s, st) => [st.choices.liverpool === 'hit', beat(s, 'deck', 'fix_down'), !beat(s, 'deck', 'fix_hand')]],
   ['the cab', (f, s) => [f.ending === 'door' || (f.ending === 'lost' && f.gained >= 0), s.played.has('cab')]],
 ];
 

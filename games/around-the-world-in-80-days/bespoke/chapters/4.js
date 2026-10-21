@@ -97,7 +97,7 @@ export default {
       g.beds({ sea: 0.4, furnace: 0.2 }, 3);
       await g.beat('queenstown');
     },
-    // Liverpool: the arrest; the cell; the release — ~ strike or the hand
+    // Liverpool: the arrest; the cell; Fix bursts in — ~ strike him or the hand, Fogg face to face with him
     async g => {
       g.hero('fogg');
       g.beds({ town: 0.4, sea: 0.3 }, 2);
@@ -110,27 +110,30 @@ export default {
       g.beds({ clock: 0.9 }, 2);
       const quick = (g.state.marks.fix ?? 0) >= 2;
       await g.beat('cell', { wait: false });
-      // (the shadow of the bars creeps over the floor: the hours in the cell, the game's own)
-      const cell = quick ? 8 : 14;
+      // (the shadow of the bars creeps over the floor: the hours in the cell, the game's own — written in the notebook
+      // as they begin)
+      g.hours(quick ? -1 : -3, tr('The custom-house, the cell'));
+      const cell = quick ? 6 : 10;
       g.set('cell_time', 1, cell);
       await g.wait(cell * 1000);
-      g.hours(quick ? -1 : -3, tr('The custom-house, the cell'));
       g.beds({ clock: 0.4, town: 0.3 }, 2);
-      const choice = await g.choose('liverpool', {
-        'fix#head': [{ id: 'hit', label: tr('Strike him') }, { id: 'hand', label: tr('Hold out a hand') }],
-      });
-      g.set('release', choice === 'hit' ? 'down' : 'hand');
+      // (Fix in the cell, before Fogg: then what Fogg does — the beat after it)
       const inside = g.told('release:in');
       const release = g.beat('release');
       await inside;
       await g.say('fix', 'Sir… the robber was arrested three days ago. Forgive me');
+      await release;
+      const choice = await g.choose('liverpool', {
+        'fix#head': [{ id: 'hit', label: tr('Strike him') }, { id: 'hand', label: tr('Hold out a hand') }],
+      });
+      const out = g.beat(choice === 'hit' ? 'fix_down' : 'fix_hand');
       if (choice === 'hit') {
         g.sound.slap();
         g.mark('hit', true, tr('Fix will remember this'));
       } else {
         g.relate('fix', 1);
       }
-      await release;
+      await out;
     },
     // the special train to London, watch in hand
     async g => {
