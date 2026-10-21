@@ -22,14 +22,15 @@ export default {
     async g => {
       g.hero('pp');
       g.beds({ wheels: 0.2, wind_cold: 0.3, clock: 0.3 }, 2);
-      const glass = g.told('buffalo:at-glass');
+      const glass = g.told('buffalo:at-glass'), watch = g.told('buffalo:watch');
       await g.scene(SCENES.train, { beat: 'buffalo', land: 'prairie' });
       const buffalo = g.beat('buffalo');
       await glass;
       await g.say('passepartout', 'Out of the way, will you!');
-      await buffalo;
+      await watch;
       await g.say('fogg', 'Three hours');
       g.hours(-3, tr('The buffalo'));
+      await buffalo;
     },
     // the bridge at Medicine Bow: ~ full speed or on foot
     async g => {

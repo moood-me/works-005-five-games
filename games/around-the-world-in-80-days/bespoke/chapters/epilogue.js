@@ -99,23 +99,24 @@ export default {
       g.hero('fogg');
       if (f.gained >= 0) {
         g.beds({ fog: 0.5, clock: 0.8 }, 1);
-        const arrived = g.told('cab:arrived');
+        const inside = g.told('cab:in'); // (out of the cab and up the club's steps)
         await g.scene(SCENES.row, { beat: 'cab', night: 1 });
         await g.say('fogg', 'Twenty-five minutes to nine. To the Reform Club!');
         const r = await g.play(cab);
         if (!r.late) {
-          await arrived;
+          await inside;
           g.beds({ clock: 0.9, crowd: 0.3 }, 1);
-          const handle = g.told('countdown:handle');
+          const fifty = g.told('countdown:fifty-five'), handle = g.told('countdown:handle');
           await g.scene(SCENES.club, { beat: 'countdown', crowd_outside: 1 });
           const count = g.beat('countdown');
           g.set('beat_next', 'door');
+          await fifty;
           await g.say('stuart', 'Fifty-five… fifty-six… fifty-seven…');
           await handle;
           await count;
-          const inside = g.told('door:fogg-in');
+          const fogg = g.told('door:fogg-in');
           const door = g.beat('door');
-          await inside;
+          await fogg;
           await g.say('fogg', 'Here I am, gentlemen');
           g.sound.applause();
           await door;
