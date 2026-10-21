@@ -10,7 +10,6 @@ function dusk() {
 }
 scene.on('change', 'hour', dusk);
 scene.on('move', 'hour', dusk);
-scene.on('load', dusk);
 dusk();
 
 function door() {
@@ -18,7 +17,6 @@ function door() {
 }
 scene.on('change', 'club_door', door);
 scene.on('move', 'club_door', door);
-scene.on('load', door);
 door();
 
 const num = k => Number(scene.get(k)) || 0;
@@ -36,7 +34,7 @@ scene.every(0.1, () => {
 // slips (`down:slip`) and holds that pose till the game's `catch` (the son's hands on him) or `fall` (he sits down in the
 // snow; 0 — he gets up).
 const strips = L.ICE.map(u => ({ u: u - 0.02, done: false }));
-let stepping = false, slipping = false, stepSeq = null;
+let stepping = false, slipping = false, sitting = false, stepSeq = null, riseSeq = null;
 function descend() {
   // (at the gate, on the road, the path is done)
   if (slipping || num('sarafanov_d') < L.ROAD_D + 1.7) return;
@@ -90,21 +88,25 @@ scene.on('change', 'catch', v => {
     sar().mood('smile');
     bus().mood('thinking');
     slipping = false;
+    descend();
   }
 });
 scene.on('change', 'fall', v => {
   if (v === 1) {
+    sitting = true;
     bus().reach(null);
     sar().do('fall_sit');
     sar().mood('surprised');
-  } else {
-    scene.sequence(async s => {
+  } else if (sitting) {
+    sitting = false;
+    riseSeq = scene.sequence(async s => {
       await s.person('sarafanov').do('rise');
       s.person('sarafanov').do('stand');
       s.person('sarafanov').mood('smile');
       s.person('busygin').reach({ r: 'sarafanov#shoulder_l' });
       s.person('busygin').mood('thinking');
       slipping = false;
+      descend();
     }, { name: 'rise' });
   }
 });
@@ -114,7 +116,7 @@ scene.on('change', 'fall', v => {
 // head begins to turn; 0.6 s on, if the two are moving (`hold`) he stands looking back two seconds more; `sar_go:on`: he
 // goes on) and at the club's steps `sar_go:club`. The two go while `follow` is ahead of `follow_at`; `duck` — they crouch.
 const LOOKS = [0.25, 0.5, 0.75];
-let goSeq = null, trailSeq = null;
+let goSeq = null, trailSeq = null, pairSeq = null, crouched = false;
 scene.on('change', 'sar_go', v => {
   if (v !== 1) {
     goSeq?.cancel();
@@ -137,9 +139,8 @@ scene.on('change', 'sar_go', v => {
       s.tell('sar_go:look');
       await s.wait(0.6);
       if (num('hold') === 1) await s.wait(2);
-      father.do('stand');
-      s.tell('sar_go:on');
       await look;
+      s.tell('sar_go:on');
     }
     s.tell('sar_go:club');
   }, { name: 'sar_go' });
@@ -166,14 +167,26 @@ scene.on('change', 'follow', trail);
 scene.on('change', 'follow_at', trail);
 scene.on('change', 'duck', v => {
   if (v === 1) {
+    crouched = true;
     trailSeq?.cancel();
     nina().do('crouch');
     bus().do('crouch');
-  } else {
-    scene.sequence(async s => {
+  } else if (crouched) {
+    crouched = false;
+    pairSeq = scene.sequence(async s => {
       await s.all(s.person('nina').do('crouch_rise'), s.person('busygin').do('crouch_rise'));
       s.person('nina').do('stand');
       s.person('busygin').do('stand');
     }, { name: 'rise_pair' });
   }
+});
+
+// A beat ends what the mini-games began in it: nothing of theirs goes on into the next (the cut sets the people and the
+// keys itself)
+scene.on('change', 'beat', () => {
+  for (const seq of [stepSeq, riseSeq, goSeq, trailSeq, pairSeq]) seq?.cancel();
+  slipping = false;
+  sitting = false;
+  crouched = false;
+  for (const strip of strips) strip.done = false;
 });

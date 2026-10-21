@@ -1,7 +1,7 @@
 // The low dusk sky over the cemetery's slope: heavy grey-violet cloud, a long reddish band low in the west (left)
 // where the sun has gone; going darker by `dusk` (a layer, animate). Screen heights, all round (e.aspect = 2π, the
 // roaming camera's); the horizon at 0.56, the slope's crest hides the lowest of it.
-const A = e.aspect, x0 = -2.6, w = A + 5.2, west = A * 0.5 - 1.05;
+const A = e.aspect, x0 = 0, w = A, west = A * 0.5 - 1.05;
 const gr = g.createLinearGradient(0, -0.35, 0, 0.6);
 gr.addColorStop(0, '#262a44');
 gr.addColorStop(0.35, '#3e3f5e');
@@ -25,21 +25,24 @@ for (let k = -1; k <= 1; k++) {
 }
 // long low cloud banks
 for (let i = 0; i < 16; i++) {
-  const cx = x0 + e.rnd() * w, cy = 0.05 + e.rnd() * 0.35, rx = 0.3 + e.rnd() * 0.6, k = 0.08 + e.rnd() * 0.08;
+  const cx = e.rnd() * A, cy = 0.05 + e.rnd() * 0.35, rx = 0.3 + e.rnd() * 0.6, k = 0.08 + e.rnd() * 0.08;
   const c = g.createRadialGradient(cx, cy / k, 0, cx, cy / k, rx);
   c.addColorStop(0, 'rgba(52,52,76,0.55)');
   c.addColorStop(1, 'rgba(52,52,76,0)');
-  g.save();
-  g.scale(1, k);
-  g.fillStyle = c;
-  g.fillRect(cx - rx, cy / k - rx, rx * 2, rx * 2);
-  g.restore();
+  for (const wrap of [-A, 0, A]) {
+    g.save();
+    g.scale(1, k);
+    g.fillStyle = c;
+    g.translate(wrap, 0);
+    g.fillRect(cx - rx, cy / k - rx, rx * 2, rx * 2);
+    g.restore();
+  }
 }
-e.layer('dark', {}, n => {
+e.layer('dark', { box: [0, -0.35, A, 1.25] }, n => {
   const d = n.createLinearGradient(0, -0.35, 0, 0.6);
   d.addColorStop(0, '#12152a');
   d.addColorStop(0.7, '#2c2c48');
   d.addColorStop(1, '#5a4c62');
   n.fillStyle = d;
-  n.fillRect(x0, -1.2, w, 2.5);
+  n.fillRect(x0, -0.35, w, 1.6);
 });

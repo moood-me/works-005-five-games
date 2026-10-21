@@ -128,7 +128,6 @@ END.march = () => ({ ...END.road(), ...GONE, nina_mood: 'sad', busygin_mood: 'su
 // after `alone`: he stands at the head of the path with the case; the camera nearer the fence
 END.alone = () => ({ ...END.march(), ...CAM.near, ...AT('sarafanov', SPOT.top, 180, THREE), hour: 0.77, nina_look: 'sarafanov', busygin_look: 'sarafanov' });
 
-const near = (s, id, p, tol = 0.4) => Math.hypot(s.get(`${id}_a`) - p[0], s.get(`${id}_d`) - p[1]) < tol;
 // the camera along with a walk, as long as the walk takes
 async function follow(s, walk, cam) {
   await s.wait(0.1);
@@ -137,7 +136,6 @@ async function follow(s, walk, cam) {
   return over;
 }
 const camTo = (s, cam, over, ease = 'inOut') => { for (const k of CAMKEYS) if (k in cam) s.move(k, cam[k], { over, ease }); };
-const mood = (s, who, how) => s.person(who).mood(how);
 
 // ── the film: film(scene) → { <name>: { from, after, run } } (modules/beats.md) ──
 function film(scene) {
@@ -168,13 +166,12 @@ function film(scene) {
       from: END.road,
       async run(s) {
         const nina = s.person('nina'), bus = s.person('busygin');
-        const talk = s.shot({ ...CAM.talk });
+        const talk = s.shot({ ...CAM.talk }), back = s.shot({ ...CAM.march });
         await s.wait(3);
         talk.cut();
         nina.mood('sad');
         bus.mood('surprised');
         await s.wait(10);
-        const back = s.shot({ ...CAM.march });
         back.cut();
         bus.look('sarafanov');
         await s.wait(6);
@@ -182,9 +179,10 @@ function film(scene) {
         for (const [i, id] of ['mourner2', 'mourner1', 'mourner3', 'mourner4'].entries()) {
           const p = s.person(id);
           p.turn(170);
-          s.after(i * 0.5, () => p.walk([[FUNERAL[id][0] - 1.5, 30], AWAY[id]]));
+          if (i) await s.wait(0.5);
+          p.walk([[FUNERAL[id][0] - 1.5, 30], AWAY[id]]);
         }
-        await s.wait(3.5);
+        await s.wait(2);
         s.tell('march:end');
       },
     },
@@ -365,4 +363,4 @@ function film(scene) {
 const duskOf = hour => span(hour, 0.72, 0.8);
 
 return { height, ROAD_D, FENCE_D, GATE, BIRCH, GRAVE, PATH, ICE, pathAt, pathLen, pathU, pair, pairWay, BUS_SIDE, ROAD_A0, ROAD_A1, ROAD_Y, roadAt, roadU, CLUB, SPOT, FUNERAL, AWAY,
-  PEOPLE, CAM, CAMKEYS, downCam, trailCam, FROM, END, film, duskOf, span, clamp, smooth, near, mood };
+  PEOPLE, CAM, CAMKEYS, downCam, trailCam, FROM, END, film, duskOf, span, clamp, smooth };

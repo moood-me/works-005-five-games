@@ -11,7 +11,7 @@ function placeTrain() {
     scene.set(`${p.id}_f`, p.f);
   }
   scene.set('freight_x', L.noseOf(f));
-  scene.set('light_far', 1 - L.span(f, 0.05, 0.1));
+  scene.set('light_far', L.span(f, 0.03, 0.04) * (1 - L.span(f, 0.05, 0.1)));
 }
 scene.on('change', 'freight', placeTrain);
 scene.on('move', 'freight', placeTrain);
