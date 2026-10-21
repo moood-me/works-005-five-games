@@ -88,7 +88,7 @@ export default {
       g.hours(-12, tr('No coal'));
       if (f.pp !== 'with') await g.say('fogg', 'I have no use for a frock-coat now');
       const afford = Math.max(0, Math.floor(g.state.money / PART_PRICE));
-      const r = await g.play(boilers, { who: f.pp === 'with' ? 'pp' : 'fogg' });
+      const r = await g.play(boilers, { who: f.pp === 'with' ? 'pp' : 'fogg', money: g.state.money });
       // (skipped, it burns all seven but the cabin: no more than the bag can pay)
       const burned = (r?.burned ?? []).slice(0, afford);
       g.money(-PART_PRICE * burned.length);

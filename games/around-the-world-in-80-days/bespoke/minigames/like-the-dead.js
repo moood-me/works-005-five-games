@@ -33,7 +33,7 @@ export default {
     const mg = g.minigame({ phrase: PHRASE });
     const send = keys(g);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: nerves(0) });
-    b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
+    b.minigame.tricks.teach(mg, [lead], { id: 'like-the-dead' });
     let walk = clamp(+g.get('walk') || 0), heads = 0, smoke = SMOKE0, alarms = 0, upTill = -1, smokeAlarm = false, phrase = PHRASE;
     const put = p => { if (p !== phrase) { phrase = p; mg.plate.set({ phrase: p }); } };
     send('heads', 0);

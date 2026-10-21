@@ -29,7 +29,7 @@ export default {
     const send = keys(g);
     const horse = mg.mark({ at: 'cab#horse', kind: 'ring' });
     const hooves = mg.rhythm({ on: null, show: [horse], bpm: BPM });
-    b.minigame.tricks.teach(mg, [hooves], { id: 'rhythm:anywhere' });
+    b.minigame.tricks.teach(mg, [hooves], { id: 'cab' });
     const time = mg.layer('time');
     let pace = START, to = clamp(+g.get('cab_to') || 0), tapped = true, last = null;
     hooves.on('tap', ({ hit }) => {

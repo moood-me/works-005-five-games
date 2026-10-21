@@ -39,7 +39,7 @@ export default {
     send('charge', 0); send('scatter', 0); send('grab', 0); send('guide_seen', 0);
     // ── phase 1: through the torches to the palanquin ──
     const lead = mg.lead({ zone: { at: litter(0), width: ZONE }, release: 'stay' });
-    b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
+    b.minigame.tricks.teach(mg, [lead], { id: 'dash' });
     let charge = 0;
     const t0 = mg.t;
     const there = await until(mg, ({ t, dt }) => {
@@ -60,7 +60,7 @@ export default {
     mg.plate.set({ phrase: tr('The bearers have dropped the poles. The widow is on the palanquin, alone') });
     const hands = mg.mark({ at: 'aouda#hands', kind: 'dash' });
     const pull = mg.pull({ on: hands, tear: TEAR });
-    b.minigame.tricks.teach(mg, [pull], { id: 'pull:tear' });
+    b.minigame.tricks.teach(mg, [pull], { id: 'dash:grab' });
     const off = mg.on('frame', () => mg.plate.set({ fill: 0.6 + 0.2 * pull.state.u, glow: pull.state.held ? 'good' : 'idle' }));
     const torn = await once(mg, pull, 'tear');
     off();

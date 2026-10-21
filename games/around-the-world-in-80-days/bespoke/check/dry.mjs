@@ -1,5 +1,7 @@
 // Dry run of the minigames: a fake language (bespoke.minigame) that steps frames on a simulated clock, a fake scene
-// (keys; the keys the scene answers with), and a bot player per minigame. node bespoke/check/dry.mjs [name] [variant] — never run yet
+// (keys; the keys the scene answers with), and a bot player per minigame — each variant a way of playing it (good,
+// lazy — hardly playing, the other path of a choice…), and each skipped. node bespoke/check/dry.mjs [name]. Printed: the
+// result, the seconds it took, how it ended, the errors shown, the plate's phrases.
 import { pathToFileURL } from 'node:url';
 import { join } from 'node:path';
 
@@ -32,7 +34,8 @@ function fakeLanguage(log) {
   };
   const gesture = (kind, o, state, extra = {}) => {
     const e = emitter();
-    const h = { kind, o: { ...o }, state, removed: false, on: e.on, emit: e.emit, set(n) { Object.assign(h.o, n); extra.set?.(n); }, remove() { h.removed = true; }, ...extra };
+    const { set: own, ...rest } = extra;
+    const h = { kind, o: { ...o }, state, removed: false, on: e.on, emit: e.emit, set(n) { Object.assign(h.o, n); own?.(n); }, remove() { h.removed = true; }, ...rest };
     if (o.on && o.on.removed) throw new Error(kind + ' on a removed mark');
     mg.gestures.push(h);
     return h;
@@ -114,7 +117,7 @@ const BOTS = {
     mem.last = t;
     const ps = live(mg, 'press');
     const attic = ps.find(h => at(h) === 'attic'), rooms = ps.filter(h => at(h) !== 'attic');
-    if (variant === 'gas' && attic && !mem.gas) { mem.gas = true; mg.tap(attic); return; }
+    if (variant === 'gas' && attic && !mem.gas) { mem.gas = true; mg.tap(attic); mem.last = t + 3; return; }
     if (variant === 'lazy' && t > 6) return;
     if (rooms[0]) mg.tap(rooms[0]);
   },
@@ -202,7 +205,6 @@ async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
   const acts = [];
   const abort = new AbortController();
   const g = {
-    state: { money, hands: {} },
     get: scene.get, set: scene.set,
     minigame(o) { if (!o.phrase) throw new Error('no phrase'); mg.phrases.push(o.phrase); mg.on('skip', () => abort.abort()); return mg; },
     told: (text, ms) => new Promise(ok => { const t1 = mg.t; const off = mg.on('frame', ({ t }) => { if (t - t1 >= 1) { off(); ok(true); } }); }),
@@ -218,7 +220,7 @@ async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
   // g.play's race: the run, or skipped once the signal aborts
   const skipped = new Promise(ok => abort.signal.addEventListener('abort', () => { mg.leave(); ok(mod.skipped); }));
   let result = null, done = false, err = null;
-  Promise.race([mod.run(g, b, { who: variant === 'fogg' ? 'fogg' : 'pp', alone: variant === 'alone', onRefuse() {} }, abort.signal), skipped])
+  Promise.race([mod.run(g, b, { who: variant === 'fogg' ? 'fogg' : 'pp', money, alone: variant === 'alone', onRefuse() {} }, abort.signal), skipped])
     .then(r => { result = r; done = true; }, e => { err = e; done = true; });
   const mem = {};
   let t = 0;

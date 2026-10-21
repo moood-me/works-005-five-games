@@ -32,7 +32,7 @@ export default {
     // where each wave comes from: now the left, now the right, by how much
     const dirs = Array.from({ length: WAVES }, (_, k) => (k % 2 ? 1 : -1) * (0.45 + 0.25 * Math.random()));
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, release: 'stay' });
-    b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
+    b.minigame.tricks.teach(mg, [lead], { id: 'typhoon' });
     let misses = 0, k = 0, checked = { crest: -1, trough: -1 }, splashOff = -1;
     send('green_water', 0);
     const splash = (now, reason) => {

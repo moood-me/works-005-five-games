@@ -43,7 +43,7 @@ export default {
     for (let n = 1; n <= CHAINS; n++) {
       const chain = mg.mark({ at: `chain#c${n}`, kind: 'ring' });
       const grab = mg.rhythm({ on: chain, times: [], window: WINDOW });
-      if (n === 1) b.minigame.tricks.teach(mg, [grab], { id: 'rhythm' });
+      if (n === 1) b.minigame.tricks.teach(mg, [grab], { id: 'coupling' });
       // the beats given to the rhythm: the last and the next (its clock); which of them a hand has taken already
       let times = [], hits = 0;
       const taken = new Set();
@@ -83,7 +83,7 @@ export default {
     mg.plate.set({ phrase: tr('Passepartout is at the engine. The coupling pin holds the cars') });
     const pin = mg.mark({ at: 'coupling#pin', kind: 'dash' });
     const pull = mg.pull({ on: pin, tear: TEAR });
-    b.minigame.tricks.teach(mg, [pull], { id: 'pull:tear' });
+    b.minigame.tricks.teach(mg, [pull], { id: 'coupling:pin' });
     const off = mg.on('frame', () => {
       send('uncouple', clamp(pull.state.u * 0.9));
       mg.plate.set({ fill: (2 * CHAINS + pull.state.u) / STEPS, glow: pull.state.held ? 'good' : 'idle' });

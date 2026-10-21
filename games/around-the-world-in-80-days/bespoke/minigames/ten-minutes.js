@@ -59,7 +59,7 @@ export default {
     }
     rings.attic = mg.mark({ at: ATTIC.at, kind: 'ring', quiet: true });
     mg.press({ on: rings.attic }).on('press', () => go('attic'));
-    b.minigame.tricks.teach(mg, presses.slice(0, 1), { id: 'press' });
+    b.minigame.tricks.teach(mg, presses.slice(0, 1), { id: 'ten-minutes' });
     // where he is: floor — the last floor he ran to; dest — where he runs to or where he is; there at arrive; want — how
     // many more presses in this room wait; next — when he can throw the next thing
     let floor = 0, dest = null, here = null, arrive = 0, want = 0, next = 0, flyOff = -1, gasAt = -1, gasOff = false, packed = 0, t0 = mg.t, now = 0;

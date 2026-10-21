@@ -35,7 +35,7 @@ export default {
     const pack = mg.mark({ at: 'fogg#hands', kind: 'groove' });
     // (the fill is the roll: full — TOP; let go — it stays)
     const hold = mg.hold({ on: null, show: pack, seconds: (TOP - START) / RATE, drain: 0 });
-    b.minigame.tricks.teach(mg, [hold], { id: 'hold:anywhere' });
+    b.minigame.tricks.teach(mg, [hold], { id: 'bargain' });
     send('offer', 0);
     send('owner_turn', 0);
     const priceOf = fill => START + STEP * Math.floor((fill * (TOP - START)) / STEP + 1e-6);

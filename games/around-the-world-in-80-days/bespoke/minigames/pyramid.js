@@ -3,7 +3,8 @@
 // «noses» climb up and sway it (`push`). Level — the tiers grow (`pyramid` 0 → 1), crooked — they stand; swayed to the
 // edge — a mistake, a tier sinks. At FOGG — Fogg sits down in the front row (`fogg_present` 1; the scene says
 // `pyramid:fogg`). From that instant — a choice by the hands, the response even: hold to the end (keep it level up to
-// `pyramid` 1) or let go (the finger off for LET_GO s — the pyramid collapses). The ghost finger shows both ways.
+// `pyramid` 1) or let go (the finger off for LET_GO s — the pyramid collapses). The ghost finger shows both ways; while
+// the finger is off, the plate's shade grows to the collapse (waiting is a way too, and it is seen).
 //   What he does: Passepartout, hired penniless into the troupe, holds the acrobats' tiers on his shoulders.
 //   What he wants: to hold out to the end of the act, not to let his fellows down — and suddenly he sees his master in
 //     the front row.
@@ -31,7 +32,7 @@ export default {
     const send = keys(g);
     send('pyramid', 0); send('tilt', 0); send('fogg_present', 0);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
-    b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
+    b.minigame.tricks.teach(mg, [lead], { id: 'pyramid' });
     let h = 0, wobbling = false, slips = 0, fogg = false, seated = false, offSince = null, choice = null;
     const t0 = mg.t;
     const done = await until(mg, ({ t, dt }) => {
@@ -64,7 +65,7 @@ export default {
       else if (offSince == null) offSince = t;
       if (offSince != null && t - offSince >= LET_GO) choice = 'drop';
       if (h >= 1) choice = 'hold';
-      mg.plate.set({ fill: h });
+      mg.plate.set({ fill: h, shade: offSince == null ? null : Math.min(1, (t - offSince) / LET_GO) });
       return !!choice;
     });
     if (!done) return this.skipped;

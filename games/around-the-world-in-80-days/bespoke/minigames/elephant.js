@@ -3,8 +3,8 @@
 // beat — the step steadier, `pace` grows up to STEADY; off the beat or a beat missed — the step drags (no lower than
 // SLOW). The goad — hold the groove on `guide#hands` (the guide raises the goad, `goad` 1): `pace` 1, the beat quicker,
 // but the elephant grows angry — the danger arc on the goad; full — Kiouni stops dead (`balk` → 1, `pace` 0, the goad
-// drops from the hands). Then a ring on the trunk `kiouni#trunk`: pressed — Passepartout gives him sugar (`sugar` a
-// rise to 1), the elephant calms down and goes on. The way `ride` 0 → 1 at a speed by `pace`; the outcome — hours
+// drops from the hands) and stands his ground STAND s. Then a ring on the trunk `kiouni#trunk`: pressed — Passepartout
+// gives him sugar (`sugar` a rise to 1), the elephant calms down and goes on, at his slowest step. The way `ride` 0 → 1 at a speed by `pace`; the outcome — hours
 // against the timetable by the time the way took.
 //   What it does: Kiouni carries the travellers through the forest to Allahabad; Fogg, Passepartout and Cromarty sway
 //     in the howdah.
@@ -20,7 +20,7 @@ const HIT = 0.1, MISS = 0.08, LAPSE = 0.05; // pace: for a beat in time; for a t
 const PATH = 36; // s: the way at a steady step (STEADY) — on time
 const HOUR = 6; // s of the way — an hour in the notebook
 const ANGER = 0.35, CALM = 0.2; // a second: the anger under the goad; it cools without it
-const BALK_IN = 0.6, SUGAR_OUT = 1.2; // s: he stops; he calms down
+const BALK_IN = 0.6, STAND = 4, SUGAR_OUT = 1.2; // s: he stops; stands his ground before sugar will do; he calms down
 const EASE = 1.5; // a second: pace goes to its aim
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
@@ -42,7 +42,7 @@ export default {
     // the goad
     const hook = mg.mark({ at: 'guide#hands', kind: 'groove', quiet: true, danger: 0 });
     const goad = mg.hold({ on: hook, seconds: 0.3, drain: 0.3 });
-    b.minigame.tricks.teach(mg, [step], { id: 'rhythm:anywhere', still: null });
+    b.minigame.tricks.teach(mg, [step], { id: 'elephant' });
     let steady = START, pace = START, ride = 0, anger = 0, balked = false, balks = 0, tapped = true, bpm = BPM;
     let sugar = null, sugarPress = null, sugarOff = -1, t0 = mg.t;
     step.on('tap', ({ hit }) => {
@@ -55,7 +55,7 @@ export default {
       if (!tapped && !balked && !goad.state.held) steady = Math.max(SLOW, steady - LAPSE);
       tapped = false;
     });
-    const balk = () => {
+    const balk = async () => {
       balked = true;
       balks++;
       goad.set({ fill: 0 });
@@ -63,9 +63,11 @@ export default {
       move('balk', 1, BALK_IN);
       mg.error('danger', { at: hook });
       mg.plate.set({ phrase: tr('Kiouni has stopped in the middle of the path, ears spread wide. The goad will settle nothing here') });
+      const t1 = mg.t;
+      if (!(await until(mg, ({ t }) => t - t1 >= STAND))) return;
       sugar = mg.mark({ at: 'kiouni#trunk', kind: 'ring' });
       sugarPress = mg.press({ on: sugar });
-      if (balks === 1) b.minigame.tricks.teach(mg, [sugarPress], { id: 'press' });
+      if (balks === 1) b.minigame.tricks.teach(mg, [sugarPress], { id: 'elephant:sugar' });
       sugarPress.on('press', () => {
         send('sugar', 1);
         mg.snap({ at: sugar });
@@ -73,7 +75,7 @@ export default {
         sugar = null;
         move('balk', 0, SUGAR_OUT);
         anger = 0;
-        steady = START;
+        steady = SLOW;
         sugarOff = mg.t + 0.6;
         balked = false;
         mg.plate.set({ phrase: PHRASE });
@@ -100,7 +102,8 @@ export default {
     if (!done) return this.skipped;
     const seconds = mg.t - t0;
     mg.snap({ at: head });
-    await mg.end({ as: balks ? 'flawed' : 'clean' });
-    return { hours: clamp(Math.round((PATH - seconds) / HOUR), -2, 2) || 0 };
+    const hours = clamp(Math.round((PATH - seconds) / HOUR), -2, 2) || 0;
+    await mg.end({ as: balks || hours < 0 ? 'flawed' : 'clean' });
+    return { hours };
   },
 };

@@ -3,7 +3,7 @@
 // (heavy) to the open stokehold hatch `hatch#fire`; the part moves by the key `drag_<part>` (0 in place … 1 at the
 // hatch), let go not at the hatch — it goes back, seen. Brought there — the part into the furnace: `<part>` 0 (the
 // scene — a flare in the hatch), `fire` and `speed` grow, Speedy clutches his head (`speedy_grief`). Each — PRICE £
-// from the carpet-bag (`g.state.money`); not enough for the next — the rest are locked (`locked_<part>` 1, no marks).
+// from the carpet-bag (opts.money); not enough for the next — the rest are locked (`locked_<part>` 1, no marks).
 // Speedy's cabin — last, when all the rest has burnt: a choice — pull it too (a ring on the cabin) or spare it (a quiet
 // ring on `speedy#head`, the petal «Spare the cabin»); the response even.
 //   What he does: Passepartout (or Fogg, his frock-coat off for the first time) hauls pieces of the bought ship into
@@ -12,7 +12,7 @@
 //   How it is for him: excitement and the sacrifice of what is another's — the ship is stripped before his eyes, the
 //     captain groans.
 //   What the player feels: the thrill of destruction and the price of every plank.
-//   opts: { who: 'pp' | 'fogg' — whose hands (the plate's phrase) }
+//   opts: { who: 'pp' | 'fogg' — whose hands (the plate's phrase), money: what the carpet-bag holds (£) }
 //   → { burned: [the parts, burnt in order], cabin: whether Speedy's cabin is burnt }
 import { until, keys } from '../hands.js';
 
@@ -36,7 +36,7 @@ export default {
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); });
     const ALL = PARTS.length + 1;
-    let money = +g.state.money || 0;
+    let money = +opts.money || 0;
     const burned = [];
     const heat = () => {
       const u = burned.length / ALL;
@@ -72,7 +72,7 @@ export default {
     if (money < PRICE) lock([...PARTS, CABIN]);
     else {
       const pulls = left().map(part => offer(part));
-      b.minigame.tricks.teach(mg, pulls.slice(0, 1), { id: 'pull:heavy' });
+      b.minigame.tricks.teach(mg, pulls.slice(0, 1), { id: 'boilers' });
       const done = await until(mg, () => {
         // not enough for the next — the rest are locked
         if (money < PRICE && items.size) { for (const it of items.values()) it.mark.remove(); items.clear(); lock([...left(), CABIN]); }

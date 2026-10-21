@@ -48,7 +48,7 @@ export default {
     const want = w => 0.1 + 0.7 * Math.abs(w);
     const SLACK = -0.8; // a ridge: the sheet let go
     const lead = mg.lead({ zone: { at: want(winds[0]), width: ZONE }, release: 'stay' });
-    b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
+    b.minigame.tricks.teach(mg, [lead], { id: 'sail' });
     let speed = 0.3, sledge = 0, wolves = 0, hits = 0, stopTill = -1, hitRidge = -1;
     send('sledge', 0); send('drift', 0); send('wolves', 0);
     const t0 = mg.t;

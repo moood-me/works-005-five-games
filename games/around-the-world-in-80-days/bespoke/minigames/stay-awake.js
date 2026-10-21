@@ -36,7 +36,7 @@ export default {
     send('pp_sway', 0);
     let daze = clamp(+g.get('daze') || 0.3), start = clamp(+g.get('pp_walk_at') || 0), stumbles = 0, stillTill = -1, stumbleOff = -1, tilted = false;
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
-    b.minigame.tricks.teach(mg, [lead], { id: 'lead' });
+    b.minigame.tricks.teach(mg, [lead], { id: 'stay-awake' });
     const t0 = mg.t;
     const end = await until(mg, ({ t, dt }) => {
       const now = t - t0, s = lead.state;
