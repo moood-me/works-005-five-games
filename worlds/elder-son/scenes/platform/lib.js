@@ -17,7 +17,7 @@ const G = {
   BOOTH: [-8.5, 4.4],                               // the dark ticket booth
   LANDING: { a0: 13.5, a1: 15.5, d0: 5.5, d1: 8.0 }, // the stairs' top (the platform's own concrete)
   FOOT: { a: 20.0, low: -3.2 },                     // the flight's foot (across) and how low it goes
-  FAR_WINDOW: [60, -20, 1.5],                       // the Sarafanovs' window far below (across, distance, over its ground)
+  FAR_WINDOW: [60, -20, 1.0],                       // the Sarafanovs' window far below (across, distance, over its ground)
   // the train: its anchor (the middle of the four cars, on the rail head) at train 0; how far it is at −1 and at 1
   X0: -8, LEFT: 100, RIGHT: 250,
 };
@@ -55,25 +55,29 @@ const AWAY = [24, 6.8];
 const P = {
   FOOT_B: [20.8, 6.5], MID_B: [17.0, 6.5], FOOT_S: [21.6, 7.2], TOP_B: [15.3, 6.5], TOP_S: [15.3, 7.1],
   LAMP_B: [0, 6.1], LAMP_S: [-0.8, 6.35], EDGE_B: [-0.25, 7.45],
-  SEAT_V: [-2.0, 8.0], SEAT_B: [-1.0, 8.0], UP_V: [-2.05, 8.65], UP_B: [-1.15, 8.6],
+  SEAT_V: [-2.1, 8.0], SEAT_B: [-0.9, 8.0], UP_V: [-2.1, 8.65], UP_B: [-1.1, 8.6],
   WAIT: [11.5, 8.5], WAIT_RUN: [13.4, 7.4], AT_DOOR: [DOOR, 9.85], DOOR_GIVE: [11.0, 9.35],
-  SAR: [14.5, 7.0], VAS: [15.4, 6.2], NINA_AHEAD: [13.6, 7.8], NINA_BEHIND: [15.6, 7.6], FRONT: [14.0, 7.0],
+  SAR: [14.5, 7.0], VAS: [15.4, 6.2], NINA_AHEAD: [13.3, 7.2], NINA_BEHIND: [15.6, 7.6], FRONT: [14.0, 7.0],
   FOOT_SAR: [20.6, 6.9], FOOT_VAS: [21.3, 6.2], FOOT_NA: [20.2, 7.7], FOOT_NB: [21.8, 7.5],
-  WATCH: [14.3, 7.2], AHEAD: [2, 3, 1.1], DAWN_V: [-2.0, 8.0], DAWN_DOOR: [BACK_DOOR, 9.85],
+  WATCH: [14.3, 7.2], ALONE: [8.2, 8.0], AHEAD: [2, 3, 1.1], DAWN_V: [-2.0, 8.0], DAWN_DOOR: [BACK_DOOR, 9.85],
 };
 const brg = (a, b) => ((Math.atan2(b[0] - a[0], b[1] - a[1]) * 180) / Math.PI + 360) % 360;
 const cam = (x, z, yaw, h = 0, look = 0) => ({ camera_on: null, camera_target: null, camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h, camera_pitch: 0, camera_look: look });
 const CAM = {
   stairs: cam(6, 1, 55),                 // along the platform to the right: the stairs
   gone: cam(6, 1, -60),                  // the two under the lamp, the train's tail far left
-  stand: cam(1.6, 5.5, -57, -0.1),       // the two under the lamp from the right, a medium shot in three quarters
+  stand: cam(1.9, 6.3, -68, -0.1),       // the two under the lamp from the right, a medium shot in three quarters (the post out of it)
   bench0: cam(-6.5, 3.2, 62),            // the bench with Vasenka, the stairs far right
-  bench: cam(1.0, 5.7, -62, -0.45),      // the two on the bench in three quarters, the lamp over them
-  strap: cam(-6.2, 5.4, 52, -0.1),       // they stand before the train's open door
+  bench: cam(-1.5, 5.4, 0, -0.4),        // the two on the bench face on, a medium shot, the lamp over the camera's shoulder
+  strap: cam(-4.6, 6.2, 55, -0.1),       // they stand before the train's open door
   A: cam(7, 4, 45),                      // from the near edge slantwise right: the door, he, the stairs' top
-  B: cam(3, 7.5, 90, 0.6),               // along the platform right, a little high: the door, he, the window far below
+  A2: cam(8.2, 5.0, 48),                 // the same, nearer: the door, he, who came on the stairs' top
+  meet: cam(11.0, 5.6, 30, -0.1),        // they meet him by the stairs' top, a medium shot
+  watch: cam(12.3, 8.6, 118, 0.3),       // over his shoulder, the window far below before him
+  give: cam(9.2, 7.4, 37, -0.2),         // at the door: the snuffbox from hand to hand, both in profile
+  B: cam(0.5, 7.0, 92, 0.5),             // along the platform right, a little high: the door, he, the window far below
   glass: { camera_on: 'train', camera_target: null, camera_x: EYE.x, camera_z: EYE.z, camera_yaw: EYE.yaw, camera_h: EYE.h, camera_pitch: 0, camera_look: 0 },
-  dawn: cam(-9.5, 6.4, 78, -0.2),        // side-on along the platform: the bench, the train's door beyond it
+  dawn: cam(-6.5, 4.6, 40, -0.2),        // slantwise from the near side: the bench in three quarters, the train's door beyond it
 };
 
 function film(scene) {
@@ -120,12 +124,15 @@ function film(scene) {
   // they on the stairs' top, turned to him (at P.WAIT) — or still below
   const cameHere = (upTop = true) => Object.assign({}, ...cameSet().map(w => at(w.id, upTop ? w.to : w.foot, upTop ? brg(w.to, P.WAIT) : 270, {
     [`${w.id}_here`]: upTop, [`${w.id}_mood`]: w.mood, [`${w.id}_with`]: w.with ?? null, [`${w.id}_look`]: upTop ? 'busygin' : null })));
-  // the medium shot on whoever calls him, face on, in the lamp's light over the stairs
+  // the medium shot on whoever calls him, three quarters from the platform's side: behind them the stairs' top in the
+  // lamp's light
   const callShot = who => {
-    const p = callerAt(), k = brg(p, P.WAIT) - 40, r = 1.5, rad = (k * Math.PI) / 180;
+    const p = callerAt(), k = brg(p, P.WAIT) + 40, r = 1.5, rad = (k * Math.PI) / 180;
     return cam(p[0] + r * Math.sin(rad), p[1] + r * Math.cos(rad), (k + 180) % 360, who === 'sarafanov' ? -0.3 : -0.2);
   };
 
+  // the camera moved to a shot's place over `over` s (not a cut): its x, z, turn and height together
+  const glide = (s, c, over) => Promise.all(['camera_x', 'camera_z', 'camera_yaw', 'camera_h'].map(k => s.move(k, c[k], { over, ease: 'inOut' })));
   async function sit(p, place, motion) {
     await p.go('sit_down', { to: place, turn: 180 });
     p.on([place[0], place[1], G.SEAT]);
@@ -199,10 +206,7 @@ function film(scene) {
         ...at('busygin', P.EDGE_B, 330, { busygin_mood: 'sad' }), ...at('silva', P.LAMP_S, 296, { silva_mood: 'smile' }) }),
       run: async s => {
         const b = s.person('busygin'), sv = s.person('silva');
-        s.move('camera_x', CAM.stand.camera_x, { over: 4, ease: 'inOut' });
-        s.move('camera_z', CAM.stand.camera_z, { over: 4, ease: 'inOut' });
-        s.move('camera_yaw', CAM.stand.camera_yaw, { over: 4, ease: 'inOut' });
-        s.move('camera_h', CAM.stand.camera_h, { over: 4, ease: 'inOut' });
+        glide(s, CAM.stand, 4);
         await b.walk([[0.3, 6.95]]);
         await s.all(b.turn(140), sv.turn(100));
         b.mood('tired');
@@ -224,10 +228,7 @@ function film(scene) {
         ...at('busygin', P.MID_B, 270, { busygin_mood: 'thinking' }) }),
       run: async s => {
         const b = s.person('busygin');
-        s.move('camera_x', CAM.bench.camera_x, { over: 13, ease: 'inOut' });
-        s.move('camera_z', CAM.bench.camera_z, { over: 13, ease: 'inOut' });
-        s.move('camera_yaw', CAM.bench.camera_yaw, { over: 13, ease: 'inOut' });
-        s.move('camera_h', CAM.bench.camera_h, { over: 13, ease: 'inOut' });
+        glide(s, CAM.bench, 13);
         await b.walk([P.TOP_B, [6, 7.0], [-0.6, 7.2]]);
         b.look('vasenka');
         await sit(b, P.SEAT_B, 'seated');
@@ -246,10 +247,7 @@ function film(scene) {
       run: async s => {
         const v = s.person('vasenka'), b = s.person('busygin');
         s.set('train', -1);
-        s.move('camera_x', CAM.strap.camera_x, { over: 5, ease: 'inOut' });
-        s.move('camera_z', CAM.strap.camera_z, { over: 5, ease: 'inOut' });
-        s.move('camera_yaw', CAM.strap.camera_yaw, { over: 5, ease: 'inOut' });
-        s.move('camera_h', CAM.strap.camera_h, { over: 5, ease: 'inOut' });
+        glide(s, CAM.strap, 5);
         v.look('train#back_door');
         await arrive(s, 'strap:open');
         b.look('vasenka#back');
@@ -274,10 +272,7 @@ function film(scene) {
         b.reach(null);
         await s.move('doors', 0, { over: 1.4, ease: 'inOut' });
         s.move('train', 1, { over: 24, ease: 'in' });
-        s.move('camera_x', CAM.bench.camera_x, { over: 4, ease: 'inOut' });
-        s.move('camera_z', CAM.bench.camera_z, { over: 4, ease: 'inOut' });
-        s.move('camera_yaw', CAM.bench.camera_yaw, { over: 4, ease: 'inOut' });
-        s.move('camera_h', CAM.bench.camera_h, { over: 4, ease: 'inOut' });
+        glide(s, CAM.bench, 4);
         v.look(null);
         await v.walk([[-2.0, 8.4]]);
         await sit(v, P.SEAT_V, 'seated_bag');
@@ -332,10 +327,10 @@ function film(scene) {
         await s.wait(1.0);
         if (!who.length) {
           // no one: along the platform to the window far below
-          s.move('camera_x', CAM.B.camera_x, { over: 3, ease: 'inOut' });
-          s.move('camera_z', CAM.B.camera_z, { over: 3, ease: 'inOut' });
-          s.move('camera_h', CAM.B.camera_h, { over: 3, ease: 'inOut' });
-          await s.move('camera_yaw', CAM.B.camera_yaw, { over: 3, ease: 'inOut' });
+          const back = b.walk([P.ALONE]);
+          await glide(s, CAM.B, 3);
+          await back;
+          await b.turn(brg(P.ALONE, [G.FAR_WINDOW[0], G.FAR_WINDOW[1]]));
           b.look('far_window');
           s.tell('last:came');
           await s.wait(3.5);
@@ -355,7 +350,7 @@ function film(scene) {
         await s.until(() => face.ready);
         face.cut();
         s.tell('last:came');
-        const back = s.shot({ ...CAM.A });
+        const back = s.shot({ ...CAM.A2 });
         await s.wait(3.2);
         back.cut();
         b.look(call);
@@ -368,10 +363,11 @@ function film(scene) {
     // below before him
     stays: {
       after: ['last'],
-      from: () => base(0.93, 0.5, { ...trainKeys(0), doors: 1, ...(caller() ? CAM.A : CAM.B),
+      from: () => base(0.93, 0.5, { ...trainKeys(0), doors: 1, ...(caller() ? CAM.A2 : CAM.B),
         ...at('busygin', P.WAIT, caller() ? brg(P.WAIT, callerAt()) : brg(P.WAIT, P.AT_DOOR), { busygin_mood: 'tired' }), ...silvaIn(), ...cameHere(true) }),
       run: async s => {
         const b = s.person('busygin'), who = cameSet();
+        glide(s, who.length ? CAM.meet : CAM.watch, 6);
         b.look(null);
         await s.move('doors', 0, { over: 1.6, ease: 'inOut' });
         if (num('silva_door', 1) === 1) {
@@ -407,13 +403,15 @@ function film(scene) {
     // boards:box; he goes in; the doors shut — boards:in
     boards: {
       after: ['last'],
-      from: () => base(0.93, 0.5, { ...trainKeys(0), doors: 1, ...CAM.A,
+      from: () => base(0.93, 0.5, { ...trainKeys(0), doors: 1, ...CAM.A2,
         ...at('busygin', P.WAIT, caller() ? brg(P.WAIT, callerAt()) : brg(P.WAIT, P.AT_DOOR), { busygin_mood: 'tired', busygin_look: caller() }), ...silvaIn(), ...cameHere(true) }),
       run: async s => {
         const b = s.person('busygin'), give = num('box_hand', 1) === 1 && fatherCame();
         if (give) {
-          const sar = s.person('sarafanov');
+          const sar = s.person('sarafanov'), close = s.shot({ ...CAM.give });
           await s.all(b.walk([[10.6, 9.6]]), sar.walk([P.DOOR_GIVE]));
+          await s.until(() => close.ready);
+          close.cut();
           await s.all(b.turn(brg([10.6, 9.6], P.DOOR_GIVE)), sar.turn(brg(P.DOOR_GIVE, [10.6, 9.6])));
           b.look('sarafanov');
           sar.look('busygin');

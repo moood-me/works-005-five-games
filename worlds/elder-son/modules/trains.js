@@ -596,15 +596,41 @@ function train_window(g, e, o) {
   g.fill('evenodd');
   g.save();
   g.clip('evenodd');
-  // the panels under the window, the heater's grille, the ceiling's edge, the luggage rack's rail
+  // the wall's light: brighter up toward the ceiling's lamps, darker down by the floor
+  const shade = g.createLinearGradient(0, -tall, 0, 0);
+  shade.addColorStop(0, 'rgba(255,248,226,0.25)');
+  shade.addColorStop(0.55, 'rgba(255,248,226,0)');
+  shade.addColorStop(1, 'rgba(40,44,38,0.35)');
+  g.fillStyle = shade;
+  g.fillRect(from, -tall, to - from, tall);
+  // the panels' joints, the panels under the window, the heater's grille, the ceiling's edge
+  g.fillStyle = 'rgba(70,76,66,0.45)';
+  for (let x = Math.ceil(from / 1.5) * 1.5 - 0.75; x < to; x += 1.5) if (Math.abs(x) > w / 2 + 0.05) g.fillRect(x - 0.01, -tall, 0.02, tall);
   g.fillStyle = '#9fa999';
   g.fillRect(from, -0.75, to - from, 0.75);
   g.fillStyle = '#7d8679';
   for (let x = from + 0.1; x < to; x += 0.09) g.fillRect(x, -0.42, 0.035, 0.28);
   g.fillStyle = '#e8e4d6';
   g.fillRect(from, -tall, to - from, 0.18);
-  g.fillStyle = '#8c8f8a';
-  g.fillRect(from, top - 0.32, to - from, 0.05);
+  // the luggage rack over the window: its bracket, its slats, its rail, the shadow under it
+  g.fillStyle = 'rgba(30,30,28,0.25)';
+  g.fillRect(from, top - 0.3, to - from, 0.12);
+  g.fillStyle = '#9a9c98';
+  g.fillRect(from, top - 0.42, to - from, 0.04);
+  g.fillStyle = '#c9cdc9';
+  g.fillRect(from, top - 0.5, to - from, 0.03);
+  g.fillStyle = '#6e5a42';
+  for (let x = from; x < to; x += 0.12) g.fillRect(x, top - 0.47, 0.07, 0.05);
+  // a framed notice on the pier beside the window: its paper, its lines
+  const nx = w / 2 + 0.22;
+  if (nx + 0.22 < to) {
+    g.fillStyle = '#7d6a4e';
+    g.fillRect(nx, top + 0.1, 0.22, 0.3);
+    g.fillStyle = '#ece6d4';
+    g.fillRect(nx + 0.02, top + 0.12, 0.18, 0.26);
+    g.fillStyle = '#8a8478';
+    for (let y = top + 0.16; y < top + 0.36; y += 0.035) g.fillRect(nx + 0.04, y, 0.14 * (0.6 + 0.4 * e.rnd()), 0.01);
+  }
   g.restore();
   // the window's aluminium frame, its sill
   g.strokeStyle = '#c9cdc9';
