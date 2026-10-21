@@ -21,7 +21,7 @@ const HALF = 0.5, STEP = 0.4; // pp_car a beat; s — he moves across
 const CHAINS = 3; // chains to the engine (c1…c3)
 const TEAR = 0.12; // a share of the window's height — to tear out the pin
 const QUICK = 14, LATE = 22; // s: up to this — no loss; up to this — an hour; longer — two
-const WINDOW = 0.2; // s: the beat's tolerance
+const WINDOW = 0.3; // s: the beat's tolerance
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {

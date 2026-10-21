@@ -1,5 +1,5 @@
 // «The elephant» (I.4, the jungle, the beat `ride`; the frame rides on the elephant from the side, the trail runs by):
-// Kiouni goes at his own pace. A rhythm anywhere — the beat of Kiouni's step (the ring closes on `kiouni#head`): on the
+// Kiouni goes at his own pace. A rhythm on the ring on his head — the beat of Kiouni's step (`kiouni#head`): on the
 // beat — the step steadier, `pace` grows up to STEADY; off the beat or a beat missed — the step drags (no lower than
 // SLOW). The goad — hold the groove on `guide#hands` (the guide raises the goad, `goad` 1): `pace` 1, the beat quicker,
 // but the elephant grows angry — the danger arc on the goad; full — Kiouni stops dead (`balk` → 1, `pace` 0, the goad
@@ -38,7 +38,8 @@ export default {
     send('ride', 0); send('pace', START); send('goad', 0); send('balk', 0); send('sugar', 0);
     // the step: the beat on the elephant's head, a touch anywhere
     const head = mg.mark({ at: 'kiouni#head', kind: 'ring' });
-    const step = mg.rhythm({ on: null, show: [head], bpm: BPM });
+    // (on the ring itself: a touch there is the step's, not the goad's beside it)
+    const step = mg.rhythm({ on: head, bpm: BPM });
     // the goad
     const hook = mg.mark({ at: 'guide#hands', kind: 'groove', quiet: true, danger: 0 });
     const goad = mg.hold({ on: hook, seconds: 0.3, drain: 0.3 });

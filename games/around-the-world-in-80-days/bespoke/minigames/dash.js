@@ -18,7 +18,7 @@ const LITTER = 0.5; // charge: Kiouni at the widow
 const FAST = 0.1, SLOW = 0.035; // charge a second: in the zone; in the crowd
 const ZONE = 0.35; // the zone's width (the widow among the priests)
 const SCATTER_FROM = 0.15, SCATTER_TO = 0.45; // charge: the torches scatter from here to here
-const TEAR = 0.2; // a share of the window's height — to tear the widow away
+const TEAR = 0.12; // a share of the window's height — to tear the widow away
 const AWAY = 3, SEEN = 1.4; // s: goes off into the dark; when a torch catches the guide's face
 const QUICK = 9, LATE = 14; // s: up to this — no loss; up to this — an hour; longer — two
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
