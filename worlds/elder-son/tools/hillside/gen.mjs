@@ -101,7 +101,7 @@ for (const id of ['band1', 'band2', 'band3', 'mourner1', 'mourner2', 'mourner3',
 // the state: the end of `road` — they stand at the fence, the funeral up on the slope (the first sight)
 const E = L.END.road();
 const state = { hour: 0.74, dusk: 0, beat: null, beat_next: null, case_down: 1, camera_x: E.camera_x, camera_z: E.camera_z, camera_yaw: E.camera_yaw, camera_h: E.camera_h,
-  down: 0, down_at: 0, catch: 0, fall: 0, sar_go: 0, sar_at: 0, follow: 0, follow_at: 0, hold: 0, duck: 0, club_door: 0, club_door_f: 180, snowy: 0, seen: 0 };
+  down: 0, down_at: 0, catch: 0, fall: 0, sar_go: 0, sar_at: 0, follow: 0, follow_at: 0, hold: 0, duck: 0, club_door: 0, club_door_f: 180, case_light: 0, snowy: 0, seen: 0 };
 for (const id of L.PEOPLE) {
   state[`${id}_a`] = E[`${id}_a`];
   state[`${id}_d`] = E[`${id}_d`];
@@ -127,6 +127,7 @@ const states = {
   hold: { values: [0, 1], means: '1 — the two are walking just now (the game sets it; the old man looks back at it)' },
   duck: { values: [0, 1], means: '1 — Nina and Busygin crouch; 0 — they stand up' },
   club_door: { range: [0, 1], smooth: true, means: "the club's door: 0 shut, 1 open on the warm hall" },
+  case_light: { range: [0, 1], smooth: true, means: "the sunset off the snow on the old man's face by the grave (the close cut of `alone`): 1 on, 0 off" },
   club_door_f: { type: 'number', means: "the door leaf's facing — the script sets it by club_door" },
   snowy: { values: [0, 1], means: "1 — snow on the old man's coat: he fell on the ice (the game sets it before bottom)" },
   seen: { values: [0, 1], means: '1 — he all but saw them on the road (the game sets it before `club`)' },
@@ -154,6 +155,8 @@ const scene = {
   lights: [
     { id: 'sunset', from: [-62, 4], color: '#e6a487', strength: 0.75 },
     { id: 'sky_light', from: [10, 50], color: '#a8b0d6', strength: 0.35 },
+    // the sunset given back by the snow before him, on his face and the case at his feet: only in the close cut of `alone`
+    { id: 'case_fill', across: -0.2, distance: 25.4, elevation: 1.1, color: '#f0c8b4', strength: 1.6, reach: 4.5, on: 'case_light' },
     { id: 'club_spill', across: C.door - 1, distance: 6.8, elevation: 1.4, color: '#e8963a', strength: 2.4, reach: 14, on: 'club_door' },
   ],
   state,

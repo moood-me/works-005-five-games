@@ -68,6 +68,16 @@
       "strength": 0.35
     },
     {
+      "id": "case_fill",
+      "across": -0.2,
+      "distance": 25.4,
+      "elevation": 1.1,
+      "color": "#f0c8b4",
+      "strength": 1.6,
+      "reach": 4.5,
+      "on": "case_light"
+    },
+    {
       "id": "club_spill",
       "across": 52.5,
       "distance": 6.8,
@@ -100,6 +110,7 @@
     "duck": 0,
     "club_door": 0,
     "club_door_f": 180,
+    "case_light": 0,
     "snowy": 0,
     "seen": 0,
     "nina_a": -2,
@@ -255,6 +266,14 @@
       ],
       "smooth": true,
       "means": "the club's door: 0 shut, 1 open on the warm hall"
+    },
+    "case_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sunset off the snow on the old man's face by the grave (the close cut of `alone`): 1 on, 0 off"
     },
     "club_door_f": {
       "type": "number",

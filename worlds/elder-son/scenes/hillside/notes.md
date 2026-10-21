@@ -30,7 +30,7 @@ Modules: `cast`, `beats`, `houses`. `scene.json`, the crosses, the grave railing
   `sky_light` from above; `hour` → the look `dusk` (it grows dark).
 - **Faces.** Everybody has the face `simple`; the expression — `<id>_mood`, set by each beat. The moments of faces: `road`
   (Nina `tired`, Busygin `thinking`, the camera at the side, both in profile), `march` (the cut to the two by the birch from
-  the slope beyond the fence, a little above it — three quarters, looking up, Nina `sad`, Busygin `surprised`, and back), `alone` (the cut up the slope: the father by the case in three quarters, `CAM.case`;
+  the slope beyond the fence, a little above it — three quarters, looking up, Nina `sad`, Busygin `surprised`, and back), `alone` (the cut up the slope: the father by the case, his face to us lit by `case_fill`, `CAM.case`;
   back at the fence for the choice the two turned to each other — Nina in three quarters, Busygin in profile, the father
   small up the path between them), `meet` (the cut to the head of the path, the father `afraid` →
   `smile`, both ≈ 0.45 of the frame, the camera `CAM.meet` centred on the two), `hide` (the two behind the fence, their faces over its pickets, `afraid`/`thinking`, the father coming down past the lens), `bottom` (face to face in profile at the gate, the father
@@ -43,7 +43,7 @@ Modules: `cast`, `beats`, `houses`. `scene.json`, the crosses, the grave railing
 | --- | --- | --- | --- | --- |
 | `road` | — | along the road from the left Nina and Busygin, the camera beside them (as far as he walks); the group seen up the slope; they stop at the fence by the birch | `road:fence` | 14 |
 | `march` | `road` | the camera behind their backs (both ≈ 0.3 of the frame); at 3 s the cut to the two, their faces, and back at 11 s (Nina's three lines are said over it); then the mourners turn and go over the crest | `march:end` | 15 |
-| `alone` | `march` | a cut (made ready) up the slope to him (`CAM.case`): the brass turn and go after the mourners over the crest; he puts the clarinet in its case on the snow (`put_down`); a cut (made ready) back to the fence: he stands at the top of the path with the case, the brass gone, the two turned to each other. The pose for the choice: `sarafanov` and `nina` in the middle 4:3 | `alone:case` | 8 |
+| `alone` | `march` | a cut (made ready) up the slope to him (`CAM.case`): the brass turn and go after the mourners over the crest; his face a moment (the sunset off the snow on it: the light `case_fill` by the key `case_light`, on only in this cut), then he puts the clarinet in its case on the snow (`put_down`; the case tan leather, brass clasps); a cut (made ready) back to the fence: he stands at the top of the path with the case, the brass gone, the two turned to each other. The pose for the choice: `sarafanov` and `nina` in the middle 4:3 | `alone:case` | 9 |
 | `meet` | `alone` | Nina steps behind the birch, Busygin sets off for the gate; at 2.5 s a cut (made ready) to the head of the path: the son comes up the last steps from below the frame's right (`SPOT.below`), the father putting the case behind his back (`hide_back`, 10 s, on under the talk); both in profile a step apart — `meet:talk` at ≈ 5 s; Busygin takes the case | `meet:talk`, `meet:ready` | 14 |
 | `bottom` | — | at the gate's foot on the road, face to face; with `snowy` 1 snow on his coat (`snow_back`), his back to us he brushes it (reach to his own `#back`) and laughs; he takes the case (`take`), goes off right along the road; Nina walks from the birch along the fence to Busygin (seen from the first seconds) | `bottom:gone` | 13 |
 | `hide` | — | the cut to the slope: the two stand in the lee of the gate's left post, looking up; he comes down the lower half of the path (from `SPOT.down`, behind the camera) by himself, past the lens, onto the road, and stands turned right (`sar_at` ≈ 0.03). Under “Following” | `hide:ready` | 8 |
@@ -83,7 +83,7 @@ clock: a walk at 1.25 m/s, a motion its recording's length; the moments told and
 ```json
 {"beats": {"road": {"after": [], "tells": ["road:fence"], "seconds": 14, "show": false},
  "march": {"after": ["road"], "tells": ["march:end"], "seconds": 15, "show": false},
- "alone": {"after": ["march"], "tells": ["alone:case"], "seconds": 8, "show": false},
+ "alone": {"after": ["march"], "tells": ["alone:case"], "seconds": 9, "show": false},
  "meet": {"after": ["alone"], "tells": ["meet:talk", "meet:ready"], "seconds": 14, "show": false},
  "bottom": {"after": [], "tells": ["bottom:gone"], "seconds": 13, "show": false},
  "hide": {"after": [], "tells": ["hide:ready"], "seconds": 8, "show": false},

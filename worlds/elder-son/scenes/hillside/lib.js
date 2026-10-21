@@ -95,9 +95,9 @@ const CAM = {
   // from the slope beyond the fence, a little above it: the two by the birch in three quarters, looking up at the funeral
   talk: { camera_x: 1.6, camera_z: 8.8, camera_yaw: -136, camera_h: 0.3, camera_pitch: -14 },
   near: { camera_x: -1.0, camera_z: 2.4, camera_yaw: 2, camera_h: 0 },
-  // up on the slope below the grave, the eye over his head looking down: the old man by the case on the snow in three
-  // quarters against the snow of the slope (not the sky), the sunset on his face, the brass going off over the crest
-  case: { camera_x: 2.0, camera_z: 23.6, camera_yaw: -22, camera_h: 1.3, camera_pitch: -13 },
+  // on the slope below the grave, the way he faces as he bends to the case, a little over him looking down: his face
+  // (lit by the snow's sunset, `case_light`) and the case at his feet against the snow of the slope, not the sky
+  case: { camera_x: -0.9, camera_z: 23.7, camera_yaw: 27, camera_h: 0.6, camera_pitch: -8 },
   // on the slope below them and to the side, a little under them: both in profile against the snow and the sky
   meet: { camera_x: -1.0, camera_z: 22.2, camera_yaw: 52, camera_h: 0 },
   hide: { camera_x: 4.2, camera_z: 9.6, camera_yaw: 167, camera_h: 0 },
@@ -123,7 +123,7 @@ const THREE = { sarafanov_with: ['long_scarf', 'case'], case_down: 0 };
 const GONE = Object.assign({}, ...Object.keys(AWAY).map(id => ({ [`${id}_here`]: false, [`${id}_a`]: AWAY[id][0], [`${id}_d`]: AWAY[id][1] })));
 
 const FROM = {
-  road: () => ({ ...CAM.road0, ...FUNERAL_AT, sarafanov_with: null, case_down: 1, hour: 0.74, club_door: 0, down: 0, down_at: 0, catch: 0, fall: 0, sar_go: 0, sar_at: 0, follow: 0, follow_at: 0, hold: 0, duck: 0,
+  road: () => ({ ...CAM.road0, ...FUNERAL_AT, sarafanov_with: null, case_down: 1, case_light: 0, hour: 0.74, club_door: 0, down: 0, down_at: 0, catch: 0, fall: 0, sar_go: 0, sar_at: 0, follow: 0, follow_at: 0, hold: 0, duck: 0,
     ...AT('nina', [-18.9, 4.5], 90, { nina_mood: 'tired' }), ...AT('busygin', [-19.8, 5.2], 90, { busygin_mood: 'thinking' }) }),
 };
 const END = {};
@@ -132,7 +132,7 @@ END.road = () => ({ ...FROM.road(), ...CAM.march, ...AT('nina', SPOT.nina, 0, { 
 END.march = () => ({ ...END.road(), ...GONE, nina_mood: 'sad', busygin_mood: 'surprised', busygin_look: 'sarafanov' });
 // after `alone`: he stands at the head of the path with the case; the camera nearer the fence; the two by the birch
 // turned to each other (the choice: their faces, he far up between them)
-END.alone = () => ({ ...END.march(), ...CAM.near, camera_pitch: 0, ...AT('sarafanov', SPOT.top, 180, THREE), hour: 0.77,
+END.alone = () => ({ ...END.march(), ...CAM.near, camera_pitch: 0, case_light: 0, ...AT('sarafanov', SPOT.top, 180, THREE), hour: 0.77,
   ...AT('nina', SPOT.nina, 115, { nina_mood: 'sad', nina_look: 'busygin' }), ...AT('busygin', SPOT.busygin, 255, { busygin_mood: 'thinking', busygin_look: 'nina' }) });
 
 // the camera along with a walk, as long as the walk takes
@@ -201,19 +201,22 @@ function film(scene) {
       from: END.march,
       async run(s) {
         const sar = s.person('sarafanov');
-        const close = s.shot({ ...CAM.case, hour: 0.76 });
+        const close = s.shot({ ...CAM.case, hour: 0.76, case_light: 1, sarafanov_turn: 210, sarafanov_look: null });
         const choice = s.shot(END.alone());
         await s.until(() => close.ready);
         close.cut();
         const going = [];
         for (const [i, id] of ['band2', 'band1', 'band3'].entries()) {
+          if (s.get(`${id}_here`) === false) continue;
           const p = s.person(id);
           if (i) await s.wait(0.4);
           await p.turn(175);
           going.push(p.walk([[FUNERAL[id][0] - 1.2, 31], AWAY[id]]));
         }
+        // his face first (the clarinet in his hands), then down to the case
+        sar.mood('sad');
+        await s.wait(1.2);
         sar.look(SPOT.caseAt.concat(0));
-        await sar.turn(210);
         await sar.do('put_down');
         sar.with(['long_scarf']);
         await s.wait(0.5);
