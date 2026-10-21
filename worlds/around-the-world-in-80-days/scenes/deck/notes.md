@@ -80,9 +80,10 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
 - `liverpool` (≈ 10 s): fog; the constables come up the gangway; Fix comes aft, his hand on Fogg's shoulder —
   `liverpool:hand`.
 - `cell` (1 s): the insert `cell_close` opens; the game moves `cell_time`.
-- `release` (after `cell`, ≈ 6 s; with its outcome ≈ 14 s): the insert closes on the cell; the door flies open, Fix
-  runs in, the camera comes in on the two — `release:in`; then by `release` (set before the beat): `down` — Fogg rises,
-  the blow, Fix down; `hand` — Fogg rises and holds out his hand, Fix takes it.
+- `release` (after `cell`, ≈ 6 s): the insert closes on the cell; the door flies open, Fix runs in, the camera comes in
+  on the two — `release:in`; they hold, face to face (the game's choice is offered there, on `fix#head`).
+- `fix_down` / `fix_hand` (after `release`, ≈ 7 s / ≈ 6 s): Fogg rises — the blow, Fix down; or he holds out his hand,
+  Fix takes it.
 - The showcase's own (not the game's): `burn_show` (four parts dragged into the hatch), `cell_show` (the hours in the
   cell).
 
@@ -106,7 +107,9 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
  "sails_only": {"after": [], "tells": ["sails_only:laugh"], "seconds": 8, "show": false},
  "liverpool": {"after": [], "tells": ["liverpool:hand"], "seconds": 10, "show": false},
  "cell": {"after": [], "tells": [], "seconds": 1, "show": false},
- "release": {"after": ["cell"], "tells": ["release:in"], "seconds": 14, "show": false},
+ "release": {"after": ["cell"], "tells": ["release:in"], "seconds": 6, "show": false},
+ "fix_down": {"after": ["release"], "tells": [], "seconds": 7, "show": false},
+ "fix_hand": {"after": ["release"], "tells": [], "seconds": 6, "show": false},
  "burn_show": {"after": [], "tells": [], "seconds": 16, "show": true},
  "cell_show": {"after": [], "tells": [], "seconds": 9, "show": true}},
  "points": ["fogg", "passepartout", "aouda", "fix", "speedy", "stoker", "sailor", "consul", "policeman",
