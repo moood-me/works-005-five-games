@@ -192,13 +192,15 @@ function film(scene, party = {}) {
       run: async s => {
         const aouda = s.person('aouda');
         aouda.look(aboard(0.6, -9, 2.2));
-        // (the camera's own offset aside taken off while it is on her)
+        // (the camera's own offsets — aside, low — taken off while it is on her)
         s.move('camera_x', 0, { over: 1.6 });
+        s.move('camera_h', 0, { over: 1.6 });
         s.camera({ target: 'aouda', shot: 1.4, frame: [0.5, 0.42], glide: 1.6 });
         await s.wait(2.2);
         aouda.look(aboard(-0.2, -9, 1.4));
         await s.wait(2.6);
         s.camera({ target: null, glide: 1.6 });
+        s.move('camera_h', CAM.camera_h, { over: 1.6 });
         await s.move('camera_x', CAM.camera_x, { over: 1.6 });
       },
     },
@@ -216,7 +218,9 @@ function film(scene, party = {}) {
         await s.wait(0.8);
         bunsby.reach(null);
         // the camera goes forward with him to the gun: him, the gun, the steamer beyond
-        s.camera({ target: 'gun_view', shot: 0.7, frame: [0.5, 0.45], glide: 4 });
+        s.camera({ target: 'gun_view', shot: 0.7, frame: [0.45, 0.45], glide: 4 });
+        s.move('camera_x', 0, { over: 4 });
+        s.move('camera_h', 0, { over: 4 });
         await bunsby.walk([[0.8, -2.0], [0.6, 3.0], SPOT.bunsby_gun]);
         await bunsby.turn(0);
         bunsby.reach({ r: 'bowsprit#breech' });

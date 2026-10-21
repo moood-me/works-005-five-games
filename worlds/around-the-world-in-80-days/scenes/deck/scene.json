@@ -1499,7 +1499,7 @@
    "id": "coal_three",
    "name": "At the hatch",
    "unseen": true,
-   "across": 0.4,
+   "across": 1.2,
    "distance": 12.6,
    "elevation": 1.4,
    "box": [

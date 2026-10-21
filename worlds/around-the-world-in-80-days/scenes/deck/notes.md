@@ -75,7 +75,7 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
   Speedy is brought aft out of the deckhouse by a sailor, walking toward us, and stands before Fogg — `coal:speedy`.
 - `burn` (1 s): the cut to the boilers' view; the game plays «The boilers» on it.
 - `queenstown` (≈ 9 s): dawn, the parts as the game left them; Speedy salutes from his cabin's roof if it is left.
-- `sails_only` (≈ 8 s): from high on the poop the sails let fall; the camera rises to the bridge; Speedy laughs by
+- `sails_only` (≈ 8 s): from the starboard quarter, low, the sails let fall aslant; the camera rises to the bridge; Speedy laughs by
   Fogg — `sails_only:laugh`.
 - `liverpool` (≈ 10 s): fog; the constables come up the gangway; Fix comes aft, his hand on Fogg's shoulder —
   `liverpool:hand`.

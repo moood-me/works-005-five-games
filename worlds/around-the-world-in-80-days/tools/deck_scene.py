@@ -81,7 +81,7 @@ objects = [
     {'id': 'two_pacific', 'name': 'Passepartout and Fix', 'unseen': True, 'across': 4.0, 'distance': 10.5, 'elevation': 1.45, 'box': [-1, -1, 1, 1]},
     {'id': 'calendar_three', 'name': 'At the calendar', 'unseen': True, 'across': -1.0, 'distance': 15.4, 'elevation': 1.3, 'box': [-1, -1, 1, 1]},
     {'id': 'ny_two', 'name': 'Fogg below the bridge, Speedy on it', 'unseen': True, 'across': 1.5, 'distance': 17.0, 'elevation': 2.6, 'box': [-1, -1, 1, 1]},
-    {'id': 'coal_three', 'name': 'At the hatch', 'unseen': True, 'across': 0.4, 'distance': 12.6, 'elevation': 1.4, 'box': [-1, -1, 1, 1]},
+    {'id': 'coal_three', 'name': 'At the hatch', 'unseen': True, 'across': 1.2, 'distance': 12.6, 'elevation': 1.4, 'box': [-1, -1, 1, 1]},
     {'id': 'bridge_two', 'name': 'On the bridge', 'unseen': True, 'across': 0.1, 'distance': 19.4, 'elevation': 4.0, 'box': [-1, -1, 1, 1]},
     {'id': 'lv_two', 'name': 'Fogg and Fix at the gangway', 'unseen': True, 'across': 3.5, 'distance': 10.4, 'elevation': 1.5, 'box': [-1, -1, 1, 1]},
     # inserts

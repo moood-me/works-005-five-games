@@ -44,7 +44,7 @@ objects = [
     {'id': 'gun_smoke', 'name': 'The gun\'s smoke', 'particles': {'kind': 'smoke', 'at': 'bowsprit#muzzle', 'burst': {'on': 'gun', 'count': 40, 'over': 0.4},
      'direction': [0, 1, 0.2], 'speed': [2, 5], 'spread': 30, 'life': [3, 6], 'size': [0.4, 3.0], 'color': ['#e8e4dc', '#a8a49c'], 'opacity': 0.8, 'wind': 1.4}},
     # points the operator frames
-    {'id': 'gun_view', 'name': 'At the bow gun', 'unseen': True, 'on': ON, 'across': 0.3, 'distance': 6.8, 'elevation': 1.1, 'box': [-1, -1, 1, 1]},
+    {'id': 'gun_view', 'name': 'At the bow gun (to starboard of the foremast)', 'unseen': True, 'on': ON, 'across': 1.3, 'distance': 6.8, 'elevation': 1.1, 'box': [-1, -1, 1, 1]},
 ]
 PEOPLE = [('fogg', 'Phileas Fogg', 'fogg'), ('aouda', 'Aouda', 'aouda'), ('fix', 'Fix', 'fix'), ('bunsby', 'John Bunsby', 'bunsby')]
 for pid, name, who in PEOPLE:

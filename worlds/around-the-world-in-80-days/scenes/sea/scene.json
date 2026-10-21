@@ -728,10 +728,10 @@
   },
   {
    "id": "gun_view",
-   "name": "At the bow gun",
+   "name": "At the bow gun (to starboard of the foremast)",
    "unseen": true,
    "on": "frame",
-   "across": 0.3,
+   "across": 1.3,
    "distance": 6.8,
    "elevation": 1.1,
    "box": [

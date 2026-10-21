@@ -274,16 +274,30 @@ function yardsOf(g, e, c, yards, point) {
   yards.forEach(([y, w], k) => {
     const next = yards[k - 1] ? yards[k - 1][0] : 1.6, deep = y - next - 0.25, foot = w * (k ? 1.12 : 1.05);
     e.layer(`sail${k}`, { pivot: [0, -y] }, g => {
-      g.fillStyle = '#ece4d2';
-      g.beginPath();
-      g.moveTo(-w / 2 + 0.2, -y + 0.1);
-      g.lineTo(w / 2 - 0.2, -y + 0.1);
-      g.lineTo(foot / 2, -y + deep);
-      g.quadraticCurveTo(0, -y + deep - 0.5, -foot / 2, -y + deep);
-      g.closePath();
+      const shape = () => {
+        g.beginPath();
+        g.moveTo(-w / 2 + 0.2, -y + 0.1);
+        g.lineTo(w / 2 - 0.2, -y + 0.1);
+        g.quadraticCurveTo(foot / 2 + 0.5, -y + deep * 0.6, foot / 2, -y + deep);
+        g.quadraticCurveTo(0, -y + deep - 0.9, -foot / 2, -y + deep);
+        g.quadraticCurveTo(-foot / 2 - 0.5, -y + deep * 0.6, -w / 2 + 0.2, -y + 0.1);
+        g.closePath();
+      };
+      // the canvas, its belly fuller in the middle
+      const gr = g.createLinearGradient(-w / 2, 0, w / 2, 0);
+      gr.addColorStop(0, '#d6ccb4');
+      gr.addColorStop(0.5, '#f2ecdc');
+      gr.addColorStop(1, '#d6ccb4');
+      g.fillStyle = gr;
+      shape();
       g.fill();
-      g.fillStyle = 'rgba(150,140,120,0.35)';
-      for (let x = -w / 2 + 1; x < w / 2; x += 1.2) g.fillRect(x, -y + 0.1, 0.04, deep - 0.3);
+      // a reef band, the bolt-rope round its edge
+      g.fillStyle = 'rgba(160,148,124,0.5)';
+      g.fillRect(-w / 2 + 0.3, -y + deep * 0.22, w - 0.6, 0.08);
+      g.strokeStyle = '#b4a888';
+      g.lineWidth = 0.08;
+      shape();
+      g.stroke();
     });
   });
 }
@@ -362,7 +376,7 @@ const loop = (motion, from = 0) => ({ motion, loop: true, from });
 // someone standing at [a, d], turned `turn`, and whatever else
 const at = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_here`]: true, [`${id}_turn`]: turn,
   ...Object.fromEntries(Object.entries(more).map(([k, v]) => [`${id}_${k}`, v])) });
-const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_look: 0, camera_on: null };
+const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_look: 0, camera_yaw: 0, camera_on: null };
 // the parts all aboard and nothing burning
 const WHOLE = () => Object.assign({ fire: 0, flare: 0, flare_glow: 0, speedy_grief: 0, sails: 0 },
   ...PART_NAMES.map(n => ({ [n]: 1, [`drag_${n}`]: 0, [`locked_${n}`]: 0 })));
@@ -482,7 +496,8 @@ function film(scene) {
       ...(cabin ? P('speedy', [plan.cabin.a, plan.cabin.d + 1.6], 160, { look: 'fogg#head' }) : {}),
       ...P('fogg', [1.4, 9.6], 30, { look: [120, 900, 10] }) };
   };
-  const SAILS = () => ({ ...SEA('henrietta', 'none', { speed: 0.3, smoke: 0, sails: 0 }), ...CAM, camera_z: -4.5, camera_h: 2.2, camera_look: -0.04, ...NOBODY(), ...WEAR(),
+  // (from the starboard quarter, low, looking forward and up across the deck: the masts and the sails aslant)
+  const SAILS = () => ({ ...SEA('henrietta', 'none', { speed: 0.3, smoke: 0, sails: 0 }), ...CAM, camera_x: 3.6, camera_z: -3.5, camera_h: -0.2, camera_look: -0.15, camera_yaw: -14, ...NOBODY(), ...WEAR(),
     ...P('speedy', SPOT.bridge_speedy, 150, { look: [0, 11, 16] }),
     ...P('fogg', SPOT.bridge_fogg, 200, { look: 'speedy#head' }) });
   const LIVERPOOL = () => {
@@ -776,9 +791,11 @@ function film(scene) {
       from: SAILS,
       run: async s => {
         const set = s.move('sails', 1, { over: 3, ease: 'inOut' });
-        await s.wait(1.6);
-        s.camera({ target: 'bridge_two', shot: 1.6, frame: [0.5, 0.4], glide: 2 });
         await set;
+        // up to the bridge: the quarter's offsets go as the operator takes it
+        for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_look', 'camera_yaw']) s.move(k, 0, { over: 2 });
+        s.camera({ target: 'bridge_two', shot: 1.6, frame: [0.5, 0.4], glide: 2 });
+        await s.wait(1.2);
         const speedy = s.person('speedy');
         speedy.look('fogg#head');
         speedy.mood('laugh');
