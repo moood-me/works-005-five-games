@@ -76,17 +76,17 @@ line on the left of it). People are the world's cast `cast`, the film is beats o
 
 | Beat | What | Moments |
 | --- | --- | --- |
-| `bridge_stop` | wide: the train before the bridge, the gorge; then a two-shot — the driver and Passepartout argue at the engine (Fogg, Aouda, Fix by the first car). Ends on the two-shot: the choice `driver#head` · `passepartout#head` | `bridge_stop:argue` |
+| `bridge_stop` | from the river, looking up: the cracked span; the train stopped short of the rim, Fogg, Aouda, Fix by its cab; then a two-shot — the driver flings his arm toward the bridge, Passepartout points to it and spreads his hands. Ends on the two-shot: the choice `driver#head` · `passepartout#head` | `bridge_stop:argue` |
 | `bridge_run` | Passepartout in the cab, scared; the train gathers speed; from the river under it, looking up, it crosses, the bridge shaking; behind the last car the middle span falls into the gorge | `bridge_run:down` |
 | `bridge_walk` | snow falling; they walk over the bridge, the empty train creeping after; from the east rim they come off it; Fogg looks back | `bridge_walk:over` |
-| `attack` | wide: the train at full speed, the riders galloping alongside, smoke, faces at the windows; the cab — the driver falls; Passepartout on the rear platform, his arm toward the fort ahead, then his eyes down to the coupling | `attack:driver` |
+| `attack` | wide: the train at full speed, the riders galloping alongside, smoke, faces at the windows; the cab's open back — the driver falls; Passepartout on the rear platform, his arm toward the fort ahead, then his eyes down to the coupling | `attack:driver` |
 | `under` | under the cars, low; the minigame «The coupling» plays it (`pp_car`, `swing_at`, `uncouple`) | `under:coupling` (script: at `pp_car` 3) |
-| `stop` | the cars roll in and stand by the platform (`stop_at` — 0 by it, 1 130 m on); the fort's gate opens, soldiers run out; the riders gallop off; no Passepartout | `stop:still` |
+| `stop` | the cars roll in by the platform (`stop_at` — 0 by it, 1 130 m on); near the fort: its gate opens, soldiers run out toward the cars; the riders gallop off; no Passepartout | `stop:still` |
 | `fort` | the platform: Fogg, Aouda, Fix, the captain, soldiers about; the captain turns to Fogg. The choice `fogg#head` · `captain#head` | `fort:captain` |
-| `column` | snow; Fogg and the soldiers go off over the line into the white; Aouda and Fix at the platform's end | `column:gone` |
-| `night_wait` | night, the lamp; Aouda under it, the snow settling on her (`snow_on_aouda`); Fix stamping | `night_wait:snow` |
+| `column` | snow; Fogg looks at Aouda (a medium shot); from behind them, he and the soldiers go off over the line into the white | `column:gone` |
+| `night_wait` | night, by the lamp; Aouda close, the snow settling on her (`snow_on_aouda`, 12 s); Fix stamping beside her | `night_wait:snow` |
 | `return` | dawn; out of the snow Passepartout, Fogg (`fogg_went`), the soldiers; nearer: Passepartout comes up to the platform, Aouda turns to him | `return:pp` |
-| `train_leaves` | the train pulls out: `fogg_on_train` 1 — Fogg on its rear platform looking back; 0 — they on the platform watch it go | `train_leaves:gone` |
+| `train_leaves` | the train pulls out: `fogg_on_train` 1 — Fogg on its rear platform looking back, the camera with him, then the train going; 0 — they on the platform, close, watch it go | `train_leaves:gone` |
 | `sledge` | Mudge's sledge by the platform, who rides seated (`sl_*`), the first speaker framed (Fix, or Passepartout alone); the sail goes up, the camera on Mudge | `sledge:sail` |
 | `sail` | the sledge in the middle of the plain under sail, side-on, the way ahead on the right; the minigame «The sail» plays it | — |
 | `omaha` | Omaha (`town` omaha), the train at the station. Passepartout alone (`sl_fogg` 0): `omaha_train` 1 — he runs to the last car, Fogg gives him his hand, the train pulls out with him; 0 — it pulls out before he is there. All in the sledge: at the last car Fogg hands Aouda up | `omaha:hand` |
@@ -105,25 +105,27 @@ and Fix with them), `under_show` and `sail_show` (the minigames played a little)
 - The riders ride on the near side (beyond it the cars hide them), not as far silhouettes; the shots are puffs of smoke.
 - `night_wait` and `return`: the cars still stand by the platform; the train leaves in `train_leaves`.
 - `omaha` with everyone in the sledge (`sl_fogg` 1): they are at the last car, Fogg hands Aouda up (`omaha:hand`).
+- `snow_on_aouda` lies on her only in `night_wait`: every other beat begins it at 0.
+- Under the cars the chains are all under the first car, between its trucks (2 m apart, then the coupling 6 m on): the next one is in the frame with him.
 
 ## Contract for the check
 
 ```json
 {"beats": {
-  "bridge_stop": {"after": [], "tells": ["bridge_stop:argue"], "seconds": 9, "show": false},
+  "bridge_stop": {"after": [], "tells": ["bridge_stop:argue"], "seconds": 11, "show": false},
   "bridge_run": {"after": [], "tells": ["bridge_run:down"], "seconds": 13, "show": false},
   "bridge_walk": {"after": [], "tells": ["bridge_walk:over"], "seconds": 13, "show": false},
-  "attack": {"after": [], "tells": ["attack:driver"], "seconds": 10, "show": false},
+  "attack": {"after": [], "tells": ["attack:driver"], "seconds": 11, "show": false},
   "under": {"after": [], "tells": ["under:coupling"], "seconds": 2, "show": false},
   "stop": {"after": [], "tells": ["stop:still"], "seconds": 10, "show": false},
   "fort": {"after": [], "tells": ["fort:captain"], "seconds": 5, "show": false},
-  "column": {"after": [], "tells": ["column:gone"], "seconds": 10, "show": false},
-  "night_wait": {"after": [], "tells": ["night_wait:snow"], "seconds": 17, "show": false},
-  "return": {"after": [], "tells": ["return:pp"], "seconds": 10, "show": false},
+  "column": {"after": [], "tells": ["column:gone"], "seconds": 11, "show": false},
+  "night_wait": {"after": [], "tells": ["night_wait:snow"], "seconds": 13, "show": false},
+  "return": {"after": [], "tells": ["return:pp"], "seconds": 9, "show": false},
   "train_leaves": {"after": [], "tells": ["train_leaves:gone"], "seconds": 13, "show": false},
   "sledge": {"after": [], "tells": ["sledge:sail"], "seconds": 8, "show": false},
   "sail": {"after": [], "tells": [], "seconds": 2, "show": false},
-  "omaha": {"after": [], "tells": ["omaha:hand"], "seconds": 11, "show": false}
+  "omaha": {"after": [], "tells": ["omaha:hand"], "seconds": 14, "show": false}
 },
 "points": ["bridge#bridge", "coupling#pin", "chain#c0", "chain#c1", "chain#c2", "chain#c3", "chain#hand_r", "chain#hand_l", "chain#pp",
   "sail#sheet", "sail#peak", "loco_side#chimney", "loco_side#cab", "cars_side#middle", "cars_side#rear", "fort#gate", "lamp#flame",
