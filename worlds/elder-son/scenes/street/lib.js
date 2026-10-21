@@ -590,52 +590,47 @@ function film(scene) {
       await home;
       nina.here(false);
     } },
-    // the second night, three shots: the street from the windows; Silva to Makarskaya's door, Vasenka on the dark
-    // porch; Vasenka close, her door shutting off the frame
+    // the second night, three shots: the street from the windows (1.5 s); a cut to the yard from across the street,
+    // Silva (come out of the Sarafanovs' door) at Makarskaya's, knocks, she lets him in, Vasenka on the dark porch; a cut
+    // to Vasenka close as he goes in, her door shutting off the frame. No walk along the yard: the silent stretch before
+    // the fire's cry is kept within ~10 s
     evening: { from: F('evening'), run: async s => {
       const sil = s.person('silva'), vas = s.person('vasenka'), mak = s.person('makarskaya');
-      const two = s.shot({ ...CAM.ev2 });
-      await s.wait(4);
-      two.cut();
+      const two = s.shot({ ...CAM.ev2, ...AT('silva', [35.4, 12.0], 60, { silva_wear: null, silva_mood: 'smile', silva_look: null }),
+        vasenka_look: 'silva' });
       const three = s.shot({ ...CAM.ev3 });
-      put(s, 'silva', THRESHOLD, 180);
-      sil.wear(null);
-      sil.mood('smile');
-      const open = s.move('door', 1, { over: 0.9, ease: 'out' });
-      await s.wait(0.4);
-      sil.here(true);
-      vas.look('silva');
-      const there = sil.walk([[DOOR.a, 11.3], [DOOR.a, 10.1], [27.4, 10.6], [30.5, 10.9], [35.4, 12.0], [MAK_DOOR.a, 12.35]]);
-      await open;
-      s.move('door', 0, { over: 1.0 });
-      await s.wait(1.6);
-      await there;
-      vas.look([MAK_DOOR.a, MAK_DOOR.d, 1.5]);
+      await s.wait(1.5);
+      await s.until(() => two.ready);
+      two.cut();
+      await sil.walk([[MAK_DOOR.a, 12.35]]);
       await sil.turn(0);
+      vas.look([MAK_DOOR.a, MAK_DOOR.d, 1.5]);
       const knock = sil.do('knock');
-      await s.wait(1.6);
+      await s.wait(1.2);
       put(s, 'makarskaya', [MAK_DOOR.a, 13.4], 180);
       mak.wear(null);
       mak.mood('neutral');
       mak.here(true);
       await s.move('mak_door', 1, { over: 0.9, ease: 'out' });
       await knock;
-      await s.wait(0.6);
-      await mak.walk([[MAK_DOOR.a, 13.6], MAK_INSIDE]);
-      mak.here(false);
-      await sil.walk([[MAK_DOOR.a, 13.0], [MAK_DOOR.a, 13.6], MAK_INSIDE]);
-      sil.here(false);
+      s.sequence(async c => { await c.person('makarskaya').walk([[MAK_DOOR.a, 13.6], MAK_INSIDE]); c.person('makarskaya').here(false); });
+      const goes = sil.walk([[MAK_DOOR.a, 13.0], [MAK_DOOR.a, 13.6], MAK_INSIDE]);
+      await s.wait(0.8);
+      await s.until(() => three.ready);
       three.cut();
       vas.mood('sad');
+      await goes;
+      sil.here(false);
+      mak.here(false);
       await s.move('mak_door', 0, { over: 0.8, ease: 'in' });
       s.tell('evening:in');
-      await s.wait(3);
+      await s.wait(0.5);
     } },
     // later: the shed's window orange, smoke; Makarskaya runs out — the cry; Silva with his smoking sleeve; the
     // neighbours with buckets; Busygin leaves the table and runs to the barrel. The pose for “Buckets”
     fire: { from: () => panes(FIRE_OPEN(scene)), run: async s => {
       const mak = s.person('makarskaya'), sil = s.person('silva'), bus = s.person('busygin'), n1 = s.person('neighbor1'), n2 = s.person('neighbor2');
-      await s.move('fire', 0.6, { over: 3, ease: 'in' });
+      await s.move('fire', 0.6, { over: 1.5, ease: 'in' });
       put(s, 'makarskaya', [MAK_DOOR.a, 13.4], 180);
       mak.mood('afraid');
       mak.here(true);
