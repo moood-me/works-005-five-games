@@ -95,9 +95,9 @@ const CAM = {
   // from the slope beyond the fence, a little above it: the two by the birch in three quarters, looking up at the funeral
   talk: { camera_x: 1.6, camera_z: 8.8, camera_yaw: -136, camera_h: 0.3, camera_pitch: -14 },
   near: { camera_x: -1.0, camera_z: 2.4, camera_yaw: 2, camera_h: 0 },
-  // up on the slope below the grave, a little under him: the old man by the case on the snow, three quarters, the brass
-  // going off over the crest behind him
-  case: { camera_x: 2.0, camera_z: 23.6, camera_yaw: -22, camera_h: 0.1, camera_pitch: 0 },
+  // up on the slope below the grave, the eye over his head looking down: the old man by the case on the snow in three
+  // quarters against the snow of the slope (not the sky), the sunset on his face, the brass going off over the crest
+  case: { camera_x: 2.0, camera_z: 23.6, camera_yaw: -22, camera_h: 1.3, camera_pitch: -13 },
   // on the slope below them and to the side, a little under them: both in profile against the snow and the sky
   meet: { camera_x: -1.0, camera_z: 22.2, camera_yaw: 52, camera_h: 0 },
   hide: { camera_x: 4.2, camera_z: 9.6, camera_yaw: 167, camera_h: 0 },

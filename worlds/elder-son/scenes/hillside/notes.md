@@ -2,7 +2,7 @@
 
 Chapter III, “The March”: the suburban cemetery on its slope, dusk; at its foot the road to the railwaymen's club. Engine 3,
 the camera `roam` (the sky all round: the meeting's shot is turned by 41°, and `panorama` paints no sky beyond ≈ 65°), set by
-the keys `camera_x/z/yaw/h`; the eye line lower in the frame (`horizon` 0.62); `camera_pitch` is used only in the cut to the two by the birch (it looks down on them, `march`).
+the keys `camera_x/z/yaw/h`; the eye line lower in the frame (`horizon` 0.62); `camera_pitch` is used only in the cut to the two by the birch (it looks down on them, `march`) and in the cut to the old man by the case (`alone`).
 Modules: `cast`, `beats`, `houses`. `scene.json`, the crosses, the grave railings, the birches are written by the generator
 `tools/hillside/gen.mjs` from `lib.js` (the club's own parts are hand-written `elements/club_*.js`).
 
