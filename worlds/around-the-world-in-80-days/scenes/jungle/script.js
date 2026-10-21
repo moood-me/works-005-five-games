@@ -111,8 +111,12 @@ function scatter(v) {
 }
 // `grab` rising to 1: Passepartout, reaching down from Kiouni's rump, has her up into the howdah (her veil falls back);
 // her priests fall back
+// (the close on the guide, made ready as she is taken: cut to as the torch catches his face)
+let seen = null;
 scene.on('change', 'grab', v => {
   if (!(v >= 1)) return;
+  seen?.cancel();
+  seen = scene.shot(L.guideClose(30));
   scene.set('aouda_reach', null);
   scene.set('aouda_wear', null);
   scene.set('aouda_on', L.seat('mid'));
@@ -129,14 +133,16 @@ scene.on('change', 'grab', v => {
 // as he comes to her, Passepartout reaches down for her hands
 follow('charge', c => { if (c >= 0.35 && (+scene.get('grab') || 0) < 1 && scene.get('aouda_on') == null) scene.set('passepartout_reach', { r: 'aouda#hands', l: 'aouda#hands' }); });
 // `guide_seen` rising to 1: the first torch-bearer, who stood his ground, lifts his torch to the guide's face as Kiouni
-// goes by — their eyes meet; the camera comes after them
+// goes by — their eyes meet; a cut close on the guide's face in its light, riding beside him
 scene.on('change', 'guide_seen', v => {
   if (!(v >= 1)) return;
   scene.set('pb1_look', 'guide#head');
   scene.set('pb1_reach', { r: 'guide#head' });
   scene.set('guide_look', 'pb1#head');
-  scene.move('camera_x', 1.4, { over: 2.2, ease: 'inOut' });
-  scene.move('camera_z', 5.2, { over: 2.2, ease: 'inOut' });
+  const close = seen;
+  seen = null;
+  if (close?.ready) close.cut();
+  else { close?.cancel(); scene.cut(L.guideClose(30)); }
 });
 
 scene.kit.beats.play(scene, L.film(scene));

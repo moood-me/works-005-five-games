@@ -124,6 +124,13 @@
       "strength": 1.4,
       "reach": 6,
       "flicker": 0.3
+    },
+    {
+      "id": "aboard_lamp",
+      "of": "steamer_deck#lamp",
+      "on": "lanterns",
+      "reach": 6,
+      "strength": 1.8
     }
   ],
   "state": {
@@ -1314,8 +1321,8 @@
       "elevation": 4.6,
       "facing": 180,
       "box": [
-        20,
-        -0.4,
+        20.5,
+        -2.1,
         25,
         0.05
       ]
@@ -1363,7 +1370,7 @@
       "id": "bench",
       "name": "Front row",
       "across": 37,
-      "distance": 9.6,
+      "distance": 10.2,
       "facing": 180,
       "box": [
         -1.7,
@@ -1376,7 +1383,7 @@
       "id": "audience",
       "name": "The crowd before the booth",
       "across": 37.4,
-      "distance": 9.7,
+      "distance": 10.3,
       "box": [
         -7.2,
         -2,
@@ -1392,16 +1399,16 @@
         "at": "passepartout#hand_r",
         "amount": "pipe_smoke",
         "size": [
-          0.05,
-          0.5
+          0.15,
+          1.2
         ],
-        "rate": 4,
+        "rate": 12,
         "life": [
           2,
           4
         ],
-        "opacity": 0.35,
-        "color": "#d8d6d0",
+        "opacity": 0.8,
+        "color": "#f0ece4",
         "speed": [
           0.1,
           0.3

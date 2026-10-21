@@ -117,7 +117,8 @@ of the howdah ride him instead (`camera_on: 'kiouni_site'`, beside his near side
 | `kiouni_lane`, `litter_lane` | «The dash»: −1…1 — where along the trail Kiouni heads for; where the widow and her two priests have shied to (1.6 m a side). There is no palanquin: she walks led by the priests, as in Verne and in the procession |
 | `scatter` | «The dash»: the torch-bearers and drummers run off with their torches, each past its share (`lib.SCATTER`); the first torch-bearer stays |
 | `grab` | «The dash»: a rise to 1 — Passepartout, reaching down from the rump, has her up into the howdah (her veil falls back); the priests fall back |
-| `guide_seen` | «The dash»: a rise to 1 — the torch-bearer who stood lifts his torch to the guide's face as Kiouni goes by, their eyes meet; the camera comes after them |
+| `guide_seen` | «The dash»: a rise to 1 — the torch-bearer who stood lifts his torch to the guide's face as Kiouni goes by, their eyes meet; a cut (made ready at `grab`) close on the guide riding beside him, in the torch's light |
+| `howdah_lamp` | the small lantern on the howdah's front posts lit (the lights `howdah_lamp_l/_r`): the faces in it warm at night on the run (the dash, `aouda_fear`) |
 | `aouda_calm` | wake: 1 — she wakes calm and sees Fogg first; 0 — frightened, looking round |
 | `guide_walks` | sold: 1 — the guide walks off alone along the sleepers |
 | `beat`, `beat_next` | the film (the module beats) |
@@ -125,7 +126,7 @@ of the howdah ride him instead (`camera_on: 'kiouni_site'`, beside his near side
 The rescue is no fight: torches, drums, the elephant's bulk and shadow, faces in the firelight; nobody strikes anyone.
 
 The people — `person` (the cast `cast`): the keys `<id>_a`, `_d`, `_do`, `_turn`, `_look`, `_reach`, `_with`, `_wear`,
-`_gait`, `_on`, `_here`, `_mood`. The footbridge (`bridge`), the top of the pyre (`pyre_top`) and its steps
+`_gait`, `_on`, `_here`, `_mood`. The near trunk at −6 is gone (it stood before Kiouni's face where the four hide). The footbridge (`bridge`), the top of the pyre (`pyre_top`) and its steps
 (`pyre_steps`) — `walk` planes. 24 people (the engine's most): the column (9), the four, the crowd `v1…v8` (also the
 passengers at the station), `owner`, `trader`, `conductor`. The roll of banknotes — `banknotes`, a layer its animate
 carries to `fogg#hand_r`.
@@ -146,8 +147,8 @@ carries to `fogg#hand_r`.
 | `walk` | rise | (the game's «Like the dead») He carries her down and toward the trees as `walk` sends him. `walk:down`, `walk:away` |
 | `flee` | walk | At the trees: he throws off the shroud (a cut, close) — Passepartout (`flee:pp`); a cut: all five up on Kiouni kneeling there, he rises and goes off into the forest; the crowd rises |
 | `charge` | procession | (the game's «The dash») A cut to the four up on Kiouni in the thicket; then the game: out into the torches. `charge:through` (charge ≥ 0.8) |
-| `aouda_fear` | charge | Close (riding him beside the howdah), Kiouni running through the dark: Aouda's eyes open, afraid |
-| `allahabad` | — | Morning, the board ALLAHABAD: Kiouni along the trail to the line's end, kneels (`allahabad:kneel`); Passepartout and Cromarty get down; Fogg turns to her in the howdah |
+| `aouda_fear` | charge | Close (riding him beside the howdah, its lantern lit, the frame shaken as he runs) through the dark: Aouda's eyes open, afraid, she looks out at us |
+| `allahabad` | — | Morning, the board ALLAHABAD: Kiouni along the trail to the line's end, kneels (`allahabad:kneel`); Fogg, Passepartout and Cromarty get down, toward his head; Fogg stays by the howdah looking up at her |
 | `wake` | allahabad | Close on the howdah: she wakes (`aouda_calm`). `wake:eyes`; the gift's and the sale's first frames made ready meanwhile |
 | `gift` | wake | (a cut) Fogg's palm on the trunk, the goad to the guide; Kiouni lifts Passepartout on his trunk, he laughs. `gift:lift` |
 | `sold` | wake | (a cut) The trader leads Kiouni away along the trail; Passepartout looks after him; with `guide_walks` the guide off along the sleepers. `sold:away` |

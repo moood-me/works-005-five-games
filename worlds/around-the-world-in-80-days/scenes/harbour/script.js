@@ -79,14 +79,17 @@ scene.on('change', 'pp_stumble', async v => {
   if (fell === 'done') send();
 });
 
-// the boatman (`boatman` 1) standing in his sampan at the foot of the steps, his lantern lit; `message` rising to 1 —
-// he pushes off with the news, and his lantern goes away over the water toward the town
+// the boatman (`boatman` 1) waiting on the quay by the head of the steps, his lantern lit, his sampan below; `message`
+// rising to 1 — he goes down into it and pushes off with the news: his lantern goes away over the water to the town
 const lamp = () => {
   const on = (+scene.get('boatman') || 0) > 0.5;
   scene.set('boatman_here', on);
   if (!on) return;
-  scene.set('boatman_on', 'sampan#stand');
-  scene.set('boatman_turn', 180);
+  if ((+scene.get('message') || 0) > 0) return;
+  scene.set('boatman_on', null);
+  scene.set('boatman_a', L.BOATMAN_AT[0]);
+  scene.set('boatman_d', L.BOATMAN_AT[1]);
+  scene.set('boatman_turn', 270);
   scene.set('boatman_with', ['lantern']);
   if (!((+scene.get('message') || 0) > 0)) { scene.set('sampan_x', L.SAMPAN[0]); scene.set('sampan_d', L.SAMPAN[1]); scene.set('sampan_facing', L.SAMPAN[2]); }
 };
@@ -94,9 +97,12 @@ scene.on('change', 'boatman', lamp);
 scene.on('change', 'message', v => {
   if (!(v >= 1)) return;
   scene.sequence(async s => {
+    s.set('boatman_look', 'passepartout#head');
+    await s.wait(0.8);
     s.set('boatman_look', [-60, 200, 2]);
-    await s.wait(0.6);
+    s.set('boatman_on', 'sampan#stand');
     s.set('boatman_turn', 0);
+    await s.wait(0.6);
     await s.path(['sampan_x', 'sampan_d', 'sampan_facing'], L.SAMPAN_OFF, { speed: 2.6 });
   }, { name: 'message' });
 });
@@ -142,8 +148,10 @@ scene.on('change', 'fogg_present', v => {
   seating?.cancel();
   seating = null;
   // (already in their seats — a cut to the built pyramid)
-  if (v > 0.5 && scene.get('fogg_here') && Math.hypot(scene.get('fogg_a') - L.SEAT.fogg[0], scene.get('fogg_d') - L.SEAT.fogg[1]) < 0.3) return;
-  if (!(v > 0.5)) { for (const id of ['fogg', 'aouda']) scene.set(`${id}_here`, false); return; }
+  const seated = id => scene.get(`${id}_here`) && Math.hypot(scene.get(`${id}_a`) - L.SEAT[id][0], scene.get(`${id}_d`) - L.SEAT[id][1]) < 0.3;
+  if (v > 0.5 && seated('fogg')) return;
+  // (0: the seats empty — only those sat in them go: a cut elsewhere leaves its own people as they are)
+  if (!(v > 0.5)) { for (const id of ['fogg', 'aouda']) if (seated(id)) scene.set(`${id}_here`, false); return; }
   seating = scene.sequence(async s => {
     const sat = who.map(id => s.sequence(async q => {
       q.set(`${id}_a`, L.TO_SEAT[id][0]); q.set(`${id}_d`, L.TO_SEAT[id][1]); q.set(`${id}_on`, null); q.set(`${id}_here`, true);

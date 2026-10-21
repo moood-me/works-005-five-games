@@ -78,8 +78,8 @@
       "id": "torch_pb1",
       "at": "pb1#flame",
       "color": "#ffa050",
-      "strength": 1.6,
-      "reach": 5,
+      "strength": 2.4,
+      "reach": 7,
       "on": "torches",
       "flicker": 0.3
     },
@@ -87,8 +87,8 @@
       "id": "torch_pb2",
       "at": "pb2#flame",
       "color": "#ffa050",
-      "strength": 1.6,
-      "reach": 5,
+      "strength": 2.4,
+      "reach": 7,
       "on": "torches",
       "flicker": 0.3
     },
@@ -96,8 +96,8 @@
       "id": "torch_pb3",
       "at": "pb3#flame",
       "color": "#ffa050",
-      "strength": 1.6,
-      "reach": 5,
+      "strength": 2.4,
+      "reach": 7,
       "on": "torches",
       "flicker": 0.3
     },
@@ -105,8 +105,8 @@
       "id": "torch_pb4",
       "at": "pb4#flame",
       "color": "#ffa050",
-      "strength": 1.6,
-      "reach": 5,
+      "strength": 2.4,
+      "reach": 7,
       "on": "torches",
       "flicker": 0.3
     },
@@ -114,8 +114,8 @@
       "id": "torch_pr1",
       "at": "pr1#flame",
       "color": "#ffa050",
-      "strength": 1.6,
-      "reach": 5,
+      "strength": 2.4,
+      "reach": 7,
       "on": "torches",
       "flicker": 0.3
     },
@@ -123,10 +123,26 @@
       "id": "torch_pr2",
       "at": "pr2#flame",
       "color": "#ffa050",
-      "strength": 1.6,
-      "reach": 5,
+      "strength": 2.4,
+      "reach": 7,
       "on": "torches",
       "flicker": 0.3
+    },
+    {
+      "id": "howdah_lamp_l",
+      "of": "howdah_l#lamp",
+      "on": "howdah_lamp",
+      "reach": 4,
+      "strength": 1.5,
+      "flicker": 0.4
+    },
+    {
+      "id": "howdah_lamp_r",
+      "of": "howdah_r#lamp",
+      "on": "howdah_lamp",
+      "reach": 4,
+      "strength": 1.5,
+      "flicker": 0.4
     }
   ],
   "state": {
@@ -230,7 +246,8 @@
     "guide_seen": 0,
     "aouda_calm": 1,
     "guide_walks": 0,
-    "owner_back": 0
+    "owner_back": 0,
+    "howdah_lamp": 0
   },
   "states": {
     "day": {
@@ -508,6 +525,13 @@
         1
       ],
       "means": "«The bargain»: 0 — the owner faces Fogg, 1 — he has turned his back, arms folded (the scene turns him at once toward where it goes; turned — haggle:turned)"
+    },
+    "howdah_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the small lantern on the howdah's front post: 1 — lit (at night on the run: it lights the faces in the howdah)"
     }
   },
   "relief": "return lib.ground(across, distance);",
@@ -1312,9 +1336,9 @@
       "facing": 270,
       "height": 0.8,
       "box": [
-        -1,
-        -0.8,
-        1,
+        -1.1,
+        -1.35,
+        1.1,
         0.1
       ],
       "shadow": true
@@ -1328,9 +1352,9 @@
       "facing": 90,
       "height": 0.8,
       "box": [
-        -1,
-        -0.8,
-        1,
+        -1.1,
+        -1.35,
+        1.1,
         0.1
       ],
       "shadow": true
