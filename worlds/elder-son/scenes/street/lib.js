@@ -178,7 +178,7 @@ const CAM = {
   own_porch: cam(29.85, 6.5, -28, -0.2),
   // the bench from before it, in the front garden: both faces, the window's light over them
   bench: cam(21.9, 9.7, 0, -0.5),
-  bench_near: cam(22.6, 10.35, -20, -0.55),
+  bench_near: cam(21.2, 10.35, 20, -0.55),
   run: cam(RUN[0][0] + RUN_CAM.off0, RUN_CAM.z, 0, -0.1),
   night0: cam(-12, 2.0, 66, 0.4),
   night1: cam(21.9, 5.0, 0, 0.3),
