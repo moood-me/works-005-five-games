@@ -33,9 +33,11 @@ export default {
     send('duck', 0);
     send('hold', 0);
     g.set('sar_go', 1);
-    const him = mg.mark({ at: 'sarafanov', kind: 'light', danger: 0 });
+    // (his mark — a quiet ring, no touch of its own: its danger arc seen — a light is not)
+    const him = mg.mark({ at: 'sarafanov', kind: 'ring', quiet: true, danger: 0 });
     const walk = mg.hold({ on: null, seconds: 1, drain: 0 });
-    b.minigame.tricks.teach(mg, [walk], { id: 'hold:anywhere' });
+    // (its own first meeting: holding is walking here, letting go — freezing; “Arm in Arm” taught only the first)
+    b.minigame.tricks.teach(mg, [walk], { id: 'hold:follow' });
     const done = await until(mg, ({ t }) => {
       const sar = num('sar_at'), now = num('follow_at');
       if (Math.abs(now - was) > 1e-4) { movedAt = t; was = now; }
@@ -56,7 +58,8 @@ export default {
         }
         looked = null;
       }
-      mg.plate.set({ fill: sar, glow: going ? 'good' : 'idle' });
+      // (the bar — how far they have come after him: theirs, never going back)
+      mg.plate.set({ fill: now, glow: going ? 'good' : 'idle' });
       return club;
     });
     if (!done) return this.skipped;

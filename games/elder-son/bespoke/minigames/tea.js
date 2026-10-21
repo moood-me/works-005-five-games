@@ -32,7 +32,7 @@ export default {
     send('glass1', 0);
     send('glass2', 0);
     // the first glass
-    const one = mg.mark({ at: 'tea#glass1', kind: 'groove' });
+    const one = mg.mark({ at: 'tea#glass1', kind: 'groove', danger: 0 });
     const hold1 = mg.hold({ on: one, seconds: 1 / RATE, drain: 0 });
     b.minigame.tricks.teach(mg, [hold1], { id: 'hold' });
     let level = 0, running = false, over = false;
@@ -41,6 +41,8 @@ export default {
       if (held !== running) { running = held; pour(held); }
       if (held) level = Math.min(1, level + RATE * dt);
       hold1.set({ fill: level });
+      // (the brim near: from “poured” on, the danger arc grows to it — let go now)
+      one.set({ danger: Math.max(0, Math.min(1, (level - FULL) / (1 - FULL))) });
       send('glass1', level);
       // over the brim, while held: it runs over as long as the finger holds
       if (held && level >= 1 && !over) {

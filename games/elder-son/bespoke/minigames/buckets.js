@@ -24,15 +24,16 @@ export default {
     const send = keys(g), acts = new Set();
     const move = (key, value, over) => { const a = b.act('state', 'move', key, value, { over }); acts.add(a); return a; };
     signal.addEventListener('abort', () => { for (const a of acts) a.cancel?.(); g.sound.fire(0, 1); });
-    let fire = START, buckets = 0, roared = -ROAR, helped = 0, full = false, busy = false, tapped = false, first = true;
+    let fire = START, buckets = 0, roared = -ROAR, helped = 0, full = false, busy = false, tapped = false;
     let mark = null, press = null;
     // one mark at a time: the barrel (empty) or the shed (with a bucket)
     const place = () => {
       mark = mg.mark({ at: full ? 'shed' : 'barrel', kind: 'ring' });
       press = mg.press({ on: mark });
       press.on('press', () => { if (!busy) tapped = true; });
-      if (first) b.minigame.tricks.teach(mg, [press], { id: 'press' });
-      first = false;
+      // (each mark: two presses, barrel then shed — not a carry; the ghost presses it at the first meeting, and again
+      // whenever the player stands still)
+      b.minigame.tricks.teach(mg, [press], { id: 'press:buckets' });
     };
     // the scene's turn: fill or throw; → once the scene has said it is done
     const act = async () => {

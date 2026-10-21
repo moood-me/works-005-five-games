@@ -21,7 +21,8 @@ export default {
     const h = () => b.frame()?.h || 600;
     const spot = mg.mark({ at: 'hands#hands', kind: 'spot' });
     const rub = mg.rub({ on: spot, radius: Math.round(SPOT * h()), full: 1 });
-    b.minigame.tricks.teach(mg, [rub], { id: 'rub' });
+    // (the ghost rubs at once, and again soon when the hands stand idle: nothing else here says what to do)
+    b.minigame.tricks.teach(mg, [rub], { id: 'rub', still: [1.5, 6] });
     let thaw = 0, last = null, way = 0, started = null;
     send('thaw', 0);
     send('rub', 0);

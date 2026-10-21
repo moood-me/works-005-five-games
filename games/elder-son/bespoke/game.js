@@ -330,7 +330,7 @@ export default async function (b) {
       const tried = re?.chapter === i;
       const kind = i === (re ? re.chapter : kept.chapter) ? 'here' : i < kept.chapter ? 'played' : i === kept.chapter ? 'next' : 'future';
       // (a chapter played: all its rows; one going on — those reached so far)
-      const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
+      const all = rows(c, reached ? kept : null, tried ? re : null);
       return { number: c.number, title: c.title, kind, rows: i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen')),
         go: i === kept.chapter ? (kept.step ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
     }).concat(finale());
@@ -365,11 +365,14 @@ function load(saved) {
 const run = p => structuredClone({ chapter: p.chapter, step: p.step, scales: p.scales, shown: p.shown, marks: p.marks, choices: p.choices });
 const pick = (o, keep) => Object.fromEntries(Object.entries(o).filter(([j]) => keep(Number(j))));
 // a chapter's choices as rows of windows: the main run's chosen, a replay's tried (both — the same), could have been,
-// never reached
-function rows(ch, mainChoices, triedChoices) {
+// never reached; an option offered only on a condition (its `offered(state)`, the chapter's) — not there where neither
+// run could have had it (a chapter not reached: all its options, unseen)
+function rows(ch, main, tried) {
+  const mainChoices = main?.choices ?? {}, triedChoices = tried?.choices ?? {};
+  const could = o => !o.offered || !main || [main, tried].some(r => r && o.offered(r));
   return ch.choices.map(c => {
     const m = mainChoices[c.id], t = triedChoices[c.id];
-    return { title: c.title, weight: c.weight, options: c.options.map(o => ({ label: o.label,
+    return { title: c.title, weight: c.weight, options: c.options.filter(could).map(o => ({ label: o.label,
       state: m === o.id && t === o.id ? 'both' : m === o.id ? 'chosen' : t === o.id ? 'tried' : m || t ? 'open' : 'unseen' })) };
   });
 }

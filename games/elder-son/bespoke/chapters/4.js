@@ -13,7 +13,7 @@ export default {
   number: 'IV', title: tr('Fire'),
   titles: ['The Rucksack', 'The Fiancé', 'The Fire'],
   choices: [
-    { id: 'kudimov', weight: '~', title: tr('Fiancé'), options: [{ id: 'let', label: tr('“Let her go”') }, { id: 'ask', label: tr('“Nina, stay”') }, { id: 'for_me', label: tr('“Not for Father\'s sake”') }] },
+    { id: 'kudimov', weight: '~', title: tr('Fiancé'), options: [{ id: 'let', label: tr('“Let her go”') }, { id: 'ask', label: tr('“Nina, stay”') }, { id: 'for_me', label: tr('“Not for Father\'s sake”'), offered: s => facts(s).ninaIs === 'knows' }] },
     { id: 'fire', weight: '⚑', title: tr('Fire'), options: [{ id: 'blame', label: tr('Take the blame') }, { id: 'own_up', label: tr('Let him own up') }] },
   ],
   steps: [

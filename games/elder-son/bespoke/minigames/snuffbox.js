@@ -5,7 +5,8 @@
 //   the finger back. Any order; the fingers do not close by themselves. All four — the lid clicks, the old hand goes (`old` → 0 over
 //   1.5 s), the end (clean).
 // - give: the snuffbox on the oilcloth between them. A dashed ring on `box#box`, the way to `box#old`; pulled against resistance
-//   (heavy: it moves while the finger pulls ahead of it); `push` — the place on the way, it does not go back; let go — it stays. There —
+//   (heavy: it moves while the finger pulls ahead of it); `push` — the place on the way, it does not go back; let go — it stays. Over the old palm (0.9: where it is seen
+//   lying in it) —
 //   the old fingers close on it not at once (`old_close` → 1 over 2 s), a click, the end (clean). It does not move by itself.
 //   Feeling: taking (or giving back) the grandfather's snuffbox, “for the elder son”; wants not to hurt the old man; ashamed; the player — a thing
 //   heavier than it weighs.
@@ -14,7 +15,7 @@
 import { until, keys } from '../hands.js';
 
 const FINGERS = 4;
-const THERE = 0.97; // push — there
+const THERE = 0.9; // push — there: the snuffbox lies over the old palm (seen there from here on)
 
 export default {
   title: 'The Snuffbox', // (as the author's map lists it)
@@ -67,7 +68,7 @@ export default {
         return push >= THERE;
       });
       if (!done) return this.skipped;
-      send('push', 1);
+      move('push', 1, 0.3); // (the last of the way into the palm, by itself: it lies there already)
       mg.snap({ at: ring });
       move('old_close', 1, 2);
       g.sound.box();
