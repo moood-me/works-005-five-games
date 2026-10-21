@@ -268,8 +268,7 @@
         0,
         1
       ],
-      "smooth": true,
-      "means": "0 — Fogg's notebook as the beat has it; past a half — he shuts it on his knees (late, after special): the scene tells special:shut"
+      "means": "1 — Fogg is late: at the end of special he shuts his notebook on his knees (the moment special:shut); the game sets it as it opens the beat"
     },
     "aouda_dress": {
       "range": [
@@ -284,6 +283,10 @@
         1
       ],
       "means": "1 — Passepartout still in the Long Noses' wings (the cast's wears.pp_wings)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat the game will play next (the module beats makes its opening ready ahead): depart, gas, watch, ride, brake, ganges, buffalo, snow, special"
     }
   },
   "objects": [

@@ -265,7 +265,7 @@ function film(scene) {
   };
   // the night journey: Fogg reads, Aouda looks out, Fix behind his paper, Passepartout asleep
   const RIDE = {
-    ...where('europe', -2400), speed: 1, night: 1, dawn: 0, herd: 0, watch_close: 0, book_shut: 0, ...shot(),
+    ...where('europe', -2400), speed: 1, night: 1, dawn: 0, herd: 0, watch_close: 0, ...shot(),
     ...seated('fogg', 'read_book'), fogg_with: ['book'], fogg_here: true,
     ...seated('aouda', 'sit_calm'), aouda_look: LOOK.out,
     ...seated('passepartout', 'sleep_seated'),
@@ -486,13 +486,20 @@ function film(scene) {
         near.cut();
         s.tell('special:eyes');
         await s.wait(2.2);
-        // (the watch put away, the notebook open on his knees: it waits there for the game — book_shut, script.js)
+        // (the watch put away, the notebook open on his knees; late — `book_shut`, the game's as it opens the beat — he
+        // shuts it, his hands down in his lap, his eyes on it)
         fogg.reach(null);
         fogg.with(['notebook']);
         fogg.do('read_book', { loop: true });
         await s.wait(0.2);
         fogg.look('fogg#book');
-        await s.wait(1.3);
+        await s.wait(1.6);
+        if ((s.get('book_shut') ?? 0) >= 0.5) {
+          fogg.with(['book_shut']);
+          fogg.do('sit_calm', { loop: true });
+          s.tell('special:shut');
+          await s.wait(1.5);
+        }
       },
     },
   };

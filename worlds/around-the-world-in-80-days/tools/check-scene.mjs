@@ -19,7 +19,7 @@ const fn = (args, body, name) => { try { return new Function(...args, body); } c
 // ── modules ──
 const kit = { bend: () => () => [0, 0, 0], revolve: () => () => [0, 0, 0], extrude: () => () => [0, 0, 0], loft: () => () => [0, 0, 0], lump: () => () => [0, 0, 0] };
 for (const m of spec.modules ?? []) {
-  if (m === 'cast') { kit.cast = { characters: new Proxy({}, { get: () => ({ kind: 'shapes' }) }) }; continue; }
+  if (m === 'cast') { kit.cast = { characters: new Proxy({}, { get: () => ({ kind: 'shapes' }) }), wears: new Proxy({}, { get: () => ({}) }) }; continue; }
   const f = fn(['anim', 'kit', 'data'], read(path.join(world, 'modules', m + '.js')), 'module ' + m);
   try { kit[m] = f(anim, kit, {}); } catch (x) { err('module ' + m, x); }
 }

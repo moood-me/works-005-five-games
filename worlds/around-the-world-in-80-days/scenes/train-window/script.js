@@ -67,20 +67,5 @@ for (const [key, id] of [['aouda_dress', 'aouda'], ['pp_wings', 'passepartout'],
   wear(num(key));
 }
 
-// ── Fogg shuts his notebook on his knees (late: the game raises `book_shut` toward 1 after `special`): the book shut
-// flat in his hands, his hands down in his lap, his eyes on it ──
-let shut = num('book_shut') >= 0.5;
-const shutting = v => {
-  if (v >= 0.5 && !shut) {
-    shut = true;
-    scene.set('fogg_with', ['book_shut']);
-    scene.set('fogg_do', { motion: 'sit_calm', loop: true });
-    scene.set('fogg_look', 'fogg#book');
-    scene.tell('special:shut');
-  } else if (v < 0.5) shut = false;
-};
-scene.on('change', 'book_shut', shutting);
-scene.on('move', 'book_shut', shutting);
-
 run();
 scene.kit.beats.play(scene, L.film(scene));
