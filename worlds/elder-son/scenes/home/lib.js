@@ -66,7 +66,7 @@ const SPOT = {
   cupboard: [5.2, 0.9],        // before the cupboard
   sarDoor: [7.6, 3.55],        // inside the room before Sarafanov's door
   sarIn: [8.5, 3.6],           // beyond it (out of sight)
-  byCot: [4.95, 1.9],          // beside the cot's head, the room's side
+  byCot: [4.95, 2.45],         // at the cot's head, the room's side
   silvaBack: [4.9, 2.6],       // a step off it toward the doorway
   hook: [3.62, 0.5],           // before the hooks
   stool: [1.75, 0.78],         // before the stool, facing it
@@ -130,10 +130,10 @@ const CAM = {
   supper: cam(2.3, 0.45, 1.3, -15, 0.1),      // from the near side: the old man standing with his glass, three quarters; Busygin right
   tb: cam(1.8, 0.4, 1.2, 0, 0.06),            // talk_back, box_out: along the table, the two face to face in profile
   talk: cam(2.05, 1.25, 1.25, -48),           // the old man nearer, three quarters
-  cupboard: cam(6.05, 2.95, 1.55, -160),      // in the room: the cupboard, the cot right
+  cupboard: cam(6.7, 1.9, 1.55, -125),        // in the room: the sideboard from the side, the cot beyond
   sofa: cam(7.3, 2.6, 0.8, 8, 0.12),          // Silva on the sofa close, in the light from his door
   cot: cam(7.0, 3.5, 1.15, -122),             // wake: from the room's far wall onto the cot and the chair by it
-  wake: cam(5.9, 2.9, 1.35, -124),            // close on the cot's head: Silva's hand on his shoulder, both faces
+  wake: cam(5.9, 0.7, 1.05, -45, 0.05),       // close on the cot's head from its foot: Silva's hand on his shoulder, both faces
   sneak: cam(3.8, 3.3, 1.6, -143),            // from the doorway onto the near left corner: stove, the way, the wall clock
   caught: cam(3.0, 1.75, 1.6, 40),            // from where the two stand by the door: the old man in the doorway, facing us
   door: cam(3.2, 2.9, 1.55, 185),             // from by the doorway onto the front door and the hooks
@@ -141,13 +141,14 @@ const CAM = {
   morning: cam(1.75, 1.6, 1.5, 0),            // over the table: the old man at its far corner, Busygin at the window
   hole: cam(1.6, 3.45, 1.55, 42),             // at his shoulder, the rubbed hole close: the gardens through it
   toast: cam(1.8, 0.4, 1.9, 0, 0.25),         // high along the table: all six in profile
+  askNina: cam(3.75, 2.6, 1.55, -120),       // past Kudimov's right shoulder: Nina facing him, her father beyond
   ask: cam(2.55, 0.4, 1.55, -21),             // Nina standing between her father and him
   for_me: cam(1.85, 3.0, 1.35, -118),         // close on Nina from over the table's far end, the old man beyond her
   pack: cam(0.4, 3.8, 1.5, 122),              // from the far left corner: the old man in the doorway, Silva at the door
   packSar: cam(2.6, 3.4, 1.55, 108),          // the old man in the doorway, close, in the lamp's light
   confess: cam(3.1, 3.75, 1.55, 150),         // from the back wall: the two by the doorway in profile, Busygin nearer
   back: cam(2.15, 0.9, 1.6, 5),               // the old man at the window, his back; the table; Busygin right
-  window: cam(2.9, 3.1, 1.6, -72),            // the old man at the window, his back to us, close
+  window: cam(3.0, 1.4, 1.6, -41),            // the old man at the window, his back to us
   pair: cam(0.7, 1.4, 1.35, 62),              // from the stove's corner: the two side by side at the table's right
 };
 
@@ -540,7 +541,7 @@ const film = scene => {
         sar.mood('sad');
         sar.do('turn_glass', { loop: true });
         s.tell('galya_no:glass');
-        await s.wait(6.5);
+        await s.wait(3.5);
       },
     },
     // the same night (opening the scene again): he gets up, goes to the cupboard in the room, takes the snuffbox
@@ -549,30 +550,27 @@ const film = scene => {
       from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'table', box_at: 'shelf', sarafanov_look: 'busygin', busygin_look: 'table#glass' }),
       run: async s => {
         const sar = s.person('sarafanov'), bus = s.person('busygin');
-        await s.wait(0.6);
+        // the way there and back is left out: two cuts
+        const room = shot(s, { ...CAM.cupboard, ...STAND('sarafanov', SPOT.cupboard, 180, { sarafanov_look: 'cupboard#box', sarafanov_mood: 'smile',
+          sarafanov_wear: LOOK('sarafanov_home') }) });
+        const back = shot(s, { ...CAM.tb, box_at: 'none', ...SIT('sarafanov', 'L1', { sarafanov_wear: LOOK('sarafanov_home'),
+          sarafanov_with: WITH('sarafanov_home', 'box_held'), sarafanov_look: 'table#box', sarafanov_mood: 'smile' }) });
+        await s.wait(0.5);
         bus.look('sarafanov');
         sar.mood('smile');
         await rise(sar, 'L1');
-        const room = shot(s, { ...CAM.cupboard });
-        await walk(sar, [...ROUND, SPOT.doorway]);
+        await walk(sar, [ROUND[0]]);
+        await s.until(() => room.ready);
         room.cut();
-        const back = shot(s, { ...CAM.tb });
-        await walk(sar, [SPOT.roomIn, SPOT.cupboard]);
-        await sar.turn(180);
-        sar.look('cupboard#box');
         sar.reach({ r: 'cupboard#box' });
-        const take = sar.do('take_shelf');
         await s.wait(1.2);
         s.set('box_at', 'none');
         hold(s, 'sarafanov', 'box_held');
-        await take;
         sar.reach(null);
-        sar.look(null);
-        await walk(sar, [SPOT.roomIn, SPOT.doorway]);
+        await s.wait(0.6);
+        await s.until(() => back.ready);
         back.cut();
-        await walk(sar, [...ROUND].reverse().concat([[0.75, 2.05]]));
-        await sit(sar, 'L1');
-        sar.look('table#box');
+        bus.look('table#box');
         sar.reach({ r: 'table#box' });
         await s.wait(1.0);
         s.set('box_at', 'table');
@@ -580,7 +578,6 @@ const film = scene => {
         await s.wait(0.5);
         sar.reach(null);
         sar.look('busygin');
-        bus.look('table#box');
         bus.mood('afraid');
         s.tell('box_out:down');
         await s.wait(2.5);
@@ -645,12 +642,12 @@ const film = scene => {
         bus.look('sarafanov');
         sar.mood('sad');
         await s.wait(0.8);
+        const room = shot(s, { ...CAM.cupboard, ...STAND('sarafanov', SPOT.cupboard, 180, { sarafanov_look: 'cupboard#shelf', sarafanov_mood: 'sad',
+          sarafanov_wear: LOOK('sarafanov_home'), sarafanov_with: WITH('sarafanov_home', 'box_held') }) });
         await rise(sar, 'L1');
-        const room = shot(s, { ...CAM.cupboard });
-        await walk(sar, [...ROUND, SPOT.doorway]);
+        await walk(sar, [ROUND[0]]);
+        await s.until(() => room.ready);
         room.cut();
-        await walk(sar, [SPOT.roomIn, SPOT.cupboard]);
-        await sar.turn(180);
         sar.reach({ r: 'cupboard#shelf' });
         const put = sar.do('put_shelf');
         await s.wait(1.2);
@@ -687,7 +684,7 @@ const film = scene => {
     // grey dawn, out of the dark: Silva, in his coat already, bends over the cot and shakes him by the shoulder —
     // L42; he sits up. A choice: his coat on the chair (go), the cot (stay)
     wake: {
-      from: () => ({ ...WAKE(), ...CAM.wake, fade: 1, ...LIE('busygin', 'cot', { busygin_mood: 'tired' }), ...STAND('silva', SPOT.byCot, 330, { silva_look: 'busygin' }) }),
+      from: () => ({ ...WAKE(), ...CAM.wake, fade: 1, ...LIE('busygin', 'cot', { busygin_mood: 'tired' }), ...STAND('silva', SPOT.byCot, 240, { silva_look: 'busygin' }) }),
       run: async s => {
         const sil = s.person('silva');
         // close: his hand on the sleeper's shoulder, the two faces; then (a cut) he sits on the cot's edge, the room
@@ -722,7 +719,7 @@ const film = scene => {
         bus.look(null);
         const kitchen = shot(s, { ...CAM.sneak, sar_light: 0, stir: 0, sneak: 0, sneak_at: 0 });
         const b = walk(bus, [[4.9, 1.6], [4.6, 2.85], SPOT.roomIn, SPOT.doorway, [2.9, 1.5], SNEAK[0]], { gait: 'tiptoe' });
-        await s.wait(0.8);
+        await s.wait(2.5);
         const si = walk(sil, [[4.6, 2.85], SPOT.roomIn, SPOT.doorway, [2.9, 1.6], [1.85, 1.6]], { gait: 'tiptoe' });   // a step behind him
         await s.until(() => s.get('busygin_a') < A(4.0));
         kitchen.cut();
@@ -949,9 +946,13 @@ const film = scene => {
         kud.mood('angry');
         s.tell('ask_stay:stand');
         await s.wait(2.0);
+        // she gets up and stands between him and her father, facing him: seen past Kudimov's shoulder
+        const her = shot(s, { ...CAM.askNina });
         await rise(nina, 'L2');
-        await walk(nina, [[1.0, 1.55], [1.9, 1.5]]);
-        await nina.turn(45);
+        await walk(nina, [[1.0, 1.55], [1.95, 1.55]]);
+        await nina.turn(38);
+        await s.until(() => her.ready);
+        her.cut();
         nina.look('kudimov');
         nina.mood('angry');
         sar.look('nina');
@@ -1060,6 +1061,7 @@ const film = scene => {
         }
         sar.look(P3(3.6, 3.0, 0));
         await sar.do('put_heavy');
+        sar.do('stand');
         hold(s, 'sarafanov', 'case');
         sar.look('busygin');
         if (Number(get('hurt')) >= 0.5) {
@@ -1189,24 +1191,24 @@ const film = scene => {
           await s.wait(0.5);
           sar.reach(null);
         } else {
-          // off to the sideboard and back: the kitchen wide as he goes, the room, the table again as he comes
-          const wide = shot(s, { ...CAM.win }), room = shot(s, { ...CAM.cupboard });
+          // off to the sideboard and back, the way left out: at it (a cut), then the kitchen wide as he brings it
+          const look = { sarafanov_wear: get('sarafanov_wear') };
+          const room = shot(s, { ...CAM.cupboard, ...STAND('sarafanov', SPOT.cupboard, 180, { ...look, sarafanov_look: 'cupboard#box', sarafanov_mood: 'smile' }) });
+          const back = shot(s, { ...CAM.win, box_at: 'none', ...STAND('sarafanov', SPOT.doorway, 230, { ...look, sarafanov_mood: 'smile', sarafanov_look: 'busygin',
+            sarafanov_with: WITH('sarafanov_home', 'box_held') }) });
           sar.look(null);
           await rise(sar, 'L1');
-          await walk(sar, [[1.2, 1.55]]);
-          wide.cut();
-          await walk(sar, [[2.9, 1.55], [3.5, 2.85], SPOT.doorway]);
+          await walk(sar, [ROUND[0]]);
+          await s.until(() => room.ready);
           room.cut();
-          const table = shot(s, { ...CAM.tb });
-          await walk(sar, [SPOT.roomIn, SPOT.cupboard]);
-          await sar.turn(180);
           sar.reach({ r: 'cupboard#box' });
           await s.wait(1.2);
           s.set('box_at', 'none');
           hold(s, 'sarafanov', 'box_held');
           sar.reach(null);
-          await walk(sar, [SPOT.roomIn, SPOT.doorway]);
-          table.cut();
+          await s.wait(0.5);
+          await s.until(() => back.ready);
+          back.cut();
           await walk(sar, [[3.5, 2.85], [2.95, 1.95]]);
           await sar.turn(250);
           sar.look('table#box');
@@ -1223,11 +1225,17 @@ const film = scene => {
         // he goes to his room; the door stays ajar, his lamp lit
         sar.look(null);
         const end = who.ninaSeat === 'R2' && (who.nina || who.ninaHome) ? shot(s, { ...CAM.pair }) : null;
+        // (fetched off the shelf, the kitchen is seen wide as he goes: the table again once he is gone, the box before him)
+        const table = !end && get('box_where') !== 'busygin' ? shot(s, { ...CAM.tb }) : null;
         if (get('box_where') === 'busygin') {
           await rise(sar, 'L1');
           await walk(sar, [...ROUND, SPOT.doorway, SPOT.roomIn]);
         } else await walk(sar, [[3.5, 2.85], SPOT.doorway, SPOT.roomIn]);
         sar.here(false);
+        if (table) {
+          await s.until(() => table.ready);
+          table.cut();
+        }
         s.move('sar_door', 0.3, { over: 1.0 });
         s.set('sar_light', 1);
         s.tell('home_late:room');

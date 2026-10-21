@@ -68,9 +68,10 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
 - `supper`/`supper_after`: the toast, the old man in three quarters; the glass point `table#glass`; the sheet of music.
 - `talk` (Silva to the sofa; the kettle; `tea` opens and holds), `talk_back` (a cut, made ready: the two face to face
   along the table, the puddle), `galya_*`.
-- `box_out`: round behind the table to the sideboard (a cut into the room) and back; the snuffbox on the oilcloth (a
+- `box_out`: he gets up and steps away; a cut — at the sideboard he takes it; a cut — back in his place; the snuffbox on the oilcloth (a
   little card of its own on the table, `snuffbox`); `box_take`/`box_give` open `box` (`box_mode` set before);
-  `box_kept`, `box_back` (his back at the shelf — the device).
+  `box_kept`, `box_back` (a cut to the sideboard: his back at the shelf — the device). No walk there and back: the
+  silent stretch before a moment the game waits for is kept within ~8 s.
 - `wall`: the room dark, his lamp; Silva close in its light; Busygin turns on his side.
 - `wake`: dawn; close on the cot's head (`CAM.wake`): Silva's hand on his shoulder, both faces; a cut to the room: he
   sits on the cot's edge, Silva a step off — the choice (the coat on the chair at the cot's foot, the cot). `sneak`: up
@@ -84,7 +85,7 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
   choice; `confess`/`exposed`: the two by the doorway in profile; the old man at the window with his back (`CAM.window`);
   with `hurt` 0 both sit down face to face and he reaches for Busygin's hand. `go_out`.
 - `home_late`: whoever came comes in with him, each in a sequence of their own; the old man sits facing him (L105) —
-  or is at the table already —, gets up to fetch the snuffbox off the shelf (or slides it over), goes to his room;
+  or is at the table already —, gets up to fetch the snuffbox off the shelf — a cut to the sideboard, a cut to the kitchen wide as he brings it — (or slides it over), goes to his room;
   Nina at home comes to the table; beside him (`nina_for`) — the two from the stove's corner (`CAM.pair`).
   `home_anyway`: the old man at the window (or comes in first and goes to it); the kettle to the stove; he sits.
 
@@ -122,12 +123,12 @@ What goes on beside a beat's main line (someone walking off, sitting down) is a 
   "talk": {"after": [], "tells": ["talk:kettle"], "seconds": 11, "show": false},
   "talk_back": {"after": [], "tells": ["talk_back:ready"], "seconds": 3, "show": false},
   "galya_yes": {"after": ["talk_back"], "tells": ["galya_yes:hand"], "seconds": 7, "show": false},
-  "galya_no": {"after": ["talk_back"], "tells": ["galya_no:glass"], "seconds": 7, "show": false},
-  "box_out": {"after": [], "tells": ["box_out:down"], "seconds": 27, "show": false},
+  "galya_no": {"after": ["talk_back"], "tells": ["galya_no:glass"], "seconds": 4, "show": false},
+  "box_out": {"after": [], "tells": ["box_out:down"], "seconds": 10, "show": false},
   "box_take": {"after": ["box_out"], "tells": ["box_take:close"], "seconds": 3, "show": false},
   "box_give": {"after": ["box_out"], "tells": ["box_give:close"], "seconds": 3, "show": false},
   "box_kept": {"after": ["box_take"], "tells": ["box_kept:back"], "seconds": 7, "show": false},
-  "box_back": {"after": ["box_give"], "tells": ["box_back:shelf"], "seconds": 17, "show": false},
+  "box_back": {"after": ["box_give"], "tells": ["box_back:shelf"], "seconds": 10, "show": false},
   "wall": {"after": [], "tells": ["wall:dark", "wall:turn"], "seconds": 19, "show": false},
   "wake": {"after": [], "tells": ["wake:up"], "seconds": 6, "show": false},
   "sneak": {"after": ["wake"], "tells": ["sneak:ready"], "seconds": 21, "show": false},
@@ -143,7 +144,7 @@ What goes on beside a beat's main line (someone walking off, sitting down) is a 
   "confess": {"after": ["pack"], "tells": ["confess:said", "confess:sarafanov"], "seconds": 19, "show": false},
   "exposed": {"after": ["pack"], "tells": ["exposed:said", "exposed:window"], "seconds": 15, "show": false},
   "go_out": {"after": ["confess", "exposed"], "tells": ["go_out:gone"], "seconds": 12, "show": false},
-  "home_late": {"after": [], "tells": ["home_late:sat", "home_late:box", "home_late:room"], "seconds": 28, "show": false},
+  "home_late": {"after": [], "tells": ["home_late:sat", "home_late:box", "home_late:room"], "seconds": 21, "show": false},
   "home_anyway": {"after": [], "tells": ["home_anyway:turn"], "seconds": 25, "show": false}
 },
 "points": ["table#box", "table#glass", "sarafanov", "busygin", "silva", "nina", "kudimov", "cot", "cot_chair#coat", "clock#face", "window#pane",
