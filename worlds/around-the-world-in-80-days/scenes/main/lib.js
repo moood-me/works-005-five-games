@@ -198,19 +198,19 @@ function film(scene) {
   });
 
   return {
-    // ---- 21 December, 20:44:37 → :57. The five in a half-circle before the clock, their backs to us; Stuart's watch
+    // ---- 21 December, 20:44:47 → :57. The five in a half-circle before the clock, their backs to us; Stuart's watch
     // open in his hand. The pendulum; the second hand; eyes to the watch, the dial, the door. At :57 the door's handle
-    // turns — the door gives a little.
+    // turns — the door gives a little. (Ten seconds of the clock: no longer without a word.)
     countdown: {
-      from: () => ({ ...WAIT, minute: 1244, second: 37 }),
+      from: () => ({ ...WAIT, minute: 1244, second: 47 }),
       run: async s => {
         const door = s.shot(AT_DOOR);
-        await s.wait(1);
-        frame(s, ON_STUART, 5);
-        looks(s, [[2.2, 'flanagan', 'stuart#watch'], [2.2, 'flanagan', DIAL], [2.1, 'ralph', DOOR], [2.1, 'ralph', DIAL],
-          [1.4, 'sullivan', 'stuart#head'], [1.6, 'sullivan', DIAL], [2.4, 'fallentin', 'stuart#watch']]);
+        await s.wait(0.6);
+        frame(s, ON_STUART, 4);
+        looks(s, [[1.2, 'flanagan', 'stuart#watch'], [1.4, 'ralph', DOOR], [1.2, 'flanagan', DIAL], [1.3, 'sullivan', 'stuart#head'],
+          [1.2, 'ralph', DIAL], [1.4, 'fallentin', 'stuart#watch']]);
         // (the clock's own seconds: the cut comes at :56, the handle at :57)
-        await s.wait(18.2);
+        await s.wait(8.6);
         await s.until(() => door.ready);
         door.cut();
         await s.wait(0.8);

@@ -21,8 +21,8 @@
     "ambientColor": "#d6dade",
     "looks": {
       "day": {
-        "ambient": 0.8,
-        "ambientColor": "#aab4d8",
+        "ambient": 0.9,
+        "ambientColor": "#bcc4dc",
         "saturation": 0.9
       }
     }

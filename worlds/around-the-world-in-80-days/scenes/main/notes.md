@@ -105,7 +105,7 @@ player lays them down: the game waits for a touch on `fogg#hands`, then sets `wa
 
 | Beat | What |
 | --- | --- |
-| `countdown` | 20:44:37 → :57. Five in a half-circle before the clock, Stuart holds his watch (`with: watch`, the look `stuart#watch`); their looks this way and that; at :56 a cut to the door (made ready ahead), at :57 the door gives |
+| `countdown` | 20:44:47 → :57 (ten seconds of the clock). Five in a half-circle before the clock, Stuart holds his watch (`with: watch`, the look `stuart#watch`); their looks this way and that; at :56 a cut to the door (made ready ahead), at :57 the door gives |
 | `whist` | 2 October, 19:10. Whist; Stuart folds his paper, speaks, looking at Fogg |
 | `wager` | Fogg close with his cards, all eyes on him; the beat stops in a living pose (`wager:ready`) |
 | `wager_down` | (after `wager`) Fogg lays his cards down (`lay_cards`, `cards_down`), looks at Stuart; Stuart rises (`rise_chair`) |
@@ -116,8 +116,11 @@ player lays them down: the game waits for a touch on `fogg#hands`, then sets `wa
 | `friday` | Friday: Fogg in his armchair by the fire; day — night — evening, the fire higher and lower; the porter comes up and goes |
 | `friday_in` | (after `friday`) 20:45: the door wide open, the five run in (`run`) and stand round the armchair |
 
-Changed 2026-10-15 (the frame of `wager` after the last change — Fogg looks straight, the camera lower — not
-rendered): `wager` split into `wager` (before the cards, a living pause) and `wager_down`; Fix may come in with `door`.
+Changed 2026-10-15: `wager` split into `wager` (before the cards, a living pause) and `wager_down`; Fix may come in
+with `door`. Changed 2026-10-21: `countdown` begins at 20:44:47, not :37 (twenty seconds without a word were too
+long: now ten, the handle at about the 10th second); the night's look a little lighter (`day`: ambient 0.9, its colour
+`#bcc4dc` — `countdown` and `leave` were darkish). Neither is rendered yet: the GPU Space was paused (the HF account's
+credits) — the frame of `wager` (Fogg straight, the camera lower) is not rendered either.
 
 Changed against v1: the beat `friday` split into `friday` and `friday_in` (at his own pace it went on for 35 s);
 `beat` by default `null` (v1: `film`; the montage for the viewer is the showcase); `with_aouda`, `with_pp` — the game's
@@ -137,3 +140,26 @@ only (the beats do not set them); in `door` the shot is at the door at once (aft
 ## Waiting for the engine
 
 - v1: the underside of a plane in the floor's mirror (the felt green from below) — check on engine 3.
+
+## Contract for the check
+
+```json
+{"beats": {
+  "countdown": {"after": [], "tells": ["countdown:handle"], "seconds": 11, "show": false},
+  "whist": {"after": [], "tells": ["whist:stuart-talks"], "seconds": 9, "show": false},
+  "wager": {"after": ["whist"], "tells": ["wager:ready"], "seconds": 3, "show": false},
+  "wager_down": {"after": ["wager"], "tells": ["wager_down:cards-down", "wager_down:stuart-up"], "seconds": 8, "show": false},
+  "leave": {"after": ["wager_down"], "tells": ["leave:up", "leave:hat-on", "leave:gone"], "seconds": 18, "show": false},
+  "wait": {"after": [], "tells": [], "seconds": 8, "show": false},
+  "door": {"after": ["wait", "countdown"], "tells": ["door:fogg-in"], "seconds": 11, "show": false},
+  "no_door": {"after": ["wait", "countdown"], "tells": ["no_door:watch-shut"], "seconds": 7, "show": false},
+  "friday": {"after": [], "tells": ["friday:porter"], "seconds": 18, "show": false},
+  "friday_in": {"after": ["friday"], "tells": ["friday_in:round-him"], "seconds": 8, "show": false}
+},
+"points": ["clock#dial", "clock#pendulum", "door#door", "door#handle", "fireplace#fire", "table#table", "lamp#lamp", "papers#papers",
+  "armchair#armchair", "hatstand#hat", "wall#window1", "wall#window2", "wall#window3", "lamps#lamp1", "lamps#lamp2", "lamps#lamp3",
+  "fogg", "fogg#hands", "stuart", "stuart#watch", "flanagan", "fallentin", "sullivan", "ralph", "porter", "aouda", "passepartout", "fix"],
+"offers": ["fogg#hands"],
+"party": {"with_aouda": 0, "with_pp": 1, "with_fix": 0},
+"acts": {}}
+```
