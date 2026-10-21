@@ -2,7 +2,8 @@
 // lit one a ring, pressed (the touch is the knock itself, no petals). Window N pressed: the scene's turn (the marks hidden) — Busygin
 // goes and knocks (`knock` = N; the scene tells `knock:hit`, `knock:done`); a figure in the window (`winN` = 2); the first three —
 // a refusal aloud (opts.refuse[i]), the fourth and fifth — silence, a dog barks; the window goes dark. Waiting is a way too: every 9 s
-// with no touch the lit window with the lowest number goes dark. The snow thicker with each dark one. All five dark — the end (neutral).
+// with no touch the lit window with the lowest number goes dark — seen from the start: its ring's time arc runs down (the second path
+// visible, not a window gone out of nowhere). The snow thicker with each dark one. All five dark — the end (neutral).
 //   Feeling: knocking at strangers' windows; wants to be let in; frozen, awkward about waking people; the player — the cold and a shut world.
 //   opts: { refuse: [ref => …, ref => …, ref => …] — three refusals, each a line of its own at the window ref ('winN') }
 //   → { knocked: [the numbers of the windows knocked at, in order] }
@@ -49,10 +50,11 @@ export default {
     while (lit.size) {
       pressed = null;
       idle = 0;
-      // pressed — or 9 s with no touch
+      // pressed — or 9 s with no touch, run down on the ring of the window that goes dark then
       const went = await until(mg, ({ dt }) => {
         if (pressed) return true;
         idle += dt;
+        marks.get(Math.min(...lit)).set({ time: Math.max(0, 1 - idle / IDLE) });
         return idle >= IDLE;
       });
       if (!went) return this.skipped;

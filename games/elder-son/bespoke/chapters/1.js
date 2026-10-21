@@ -19,9 +19,12 @@ export default {
     // the street at night: knock where the light is still on
     async g => {
       g.beds({ wind: 0.5 });
+      const stop = g.told('walk:stop');
       await g.scene(SCENES.street, { beat: 'walk' }, { cut: true });
-      await g.beat('walk');
+      const walk = g.beat('walk');
+      await stop; // (they stop, the lit windows before them)
       await g.say('silva', 'We knock wherever there\'s a light. Someone\'s bound to let us in');
+      await walk;
       await g.beat('knock_ready');
       g.set('beat_next', 'last_window');
       const r = await g.play(windows, { refuse: [

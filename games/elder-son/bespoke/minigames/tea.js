@@ -1,7 +1,8 @@
 // “Tea” (II.3, the Home, after the beat `talk`; the insert `tea` open, the kettle over the first glass; game.md §7). The first glass —
 // a skill: a ring with a groove on `tea#glass1`; held — it pours (`pour` 1), the level rises 0.22 a second (the ring's fill —
 // the level); let go — the stream stops; let go at 0.85…1.0 — poured, the kettle moves to the second. Let go earlier — it can
-// be topped up. Full to the brim while held — over the brim, poured. The second glass is no skill but a question: at the first touch the chapter
+// be topped up. Full to the brim while held — over the brim: the skill's error, shown where it is (the mark's danger), the stream
+// on while the finger holds, the tea running down the glass and the puddle spreading (`spill` 1); let go — poured. The second glass is no skill but a question: at the first touch the chapter
 // asks (opts.ask(), not waited for), the hand shakes (`shake` 1), letting go does not stop the stream, the level rises 0.6 a
 // second; the shaking lasts while the question is heard and 0.6 s more, no less than 1.8 s — so the second glass always runs over: a puddle
 // on the oilcloth, the question's trace (no mistake). The shaking over, the stream stops by itself; 1 s later the end (neutral).
@@ -34,24 +35,25 @@ export default {
     const one = mg.mark({ at: 'tea#glass1', kind: 'groove' });
     const hold1 = mg.hold({ on: one, seconds: 1 / RATE, drain: 0 });
     b.minigame.tricks.teach(mg, [hold1], { id: 'hold' });
-    let level = 0, running = false;
+    let level = 0, running = false, over = false;
     const first = await until(mg, ({ dt }) => {
       const held = hold1.state.held;
       if (held !== running) { running = held; pour(held); }
       if (held) level = Math.min(1, level + RATE * dt);
       hold1.set({ fill: level });
       send('glass1', level);
-      mg.plate.set({ fill: level / 2, glow: held ? 'good' : 'idle' });
-      if (held && level >= 1) { // over the brim, while held
+      // over the brim, while held: it runs over as long as the finger holds
+      if (held && level >= 1 && !over) {
+        over = true;
         spills++;
         send('spill', 1);
         g.sound.spill();
-        return true;
+        mg.error('danger', { at: one });
       }
+      mg.plate.set({ fill: level / 2, glow: over && held ? 'bad' : held ? 'good' : 'idle' });
       return !held && level >= FULL;
     });
     if (!first) return this.skipped;
-    if (running) { running = false; pour(false); }
     mg.snap({ at: one });
     one.remove();
     b.act('state', 'move', 'which', 1, { over: 0.6 });

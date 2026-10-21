@@ -1,20 +1,20 @@
 // “Hands” (I.3, the Home, after the beat `kitchen`; the insert `stove` open; game.md §7): on `hands#hands` — a spot, rubbed.
-// The thaw `thaw` grows while the finger rubs the spot briskly — so that ≈ 10 s of brisk rubbing are needed (a number of its own: the
-// language's spot coverage fills faster); `rub` — the finger's way and speed, the sign of dx · min(1, |dx|/dt / 1.5 frame heights a
-// second). Left idle — nothing cools. At each change of way — the palms rustle. `thaw` 1 — `rub` 0, 1 s later
-// the end (clean).
+// The thaw `thaw` grows while the finger rubs the spot briskly — so that ≈ 6 s of brisk rubbing are needed (a number of its own: the
+// language's spot coverage fills faster; brisk — a frame height a second, back and forth over the spot at an ordinary pace);
+// `rub` — the finger's way and speed, the sign of dx · min(1, |dx|/dt / 1 frame height a second). Left idle — nothing cools. At
+// each change of way — the palms rustle. `thaw` 1 — `rub` 0, 1 s later the end (clean).
 //   Feeling: warming his hands at a stranger's stove; wants to get warm; the warmth is taken by a lie — awkward; the player — warmth that burns.
 //   → { seconds: from the first touch to the end }
 import { until, keys } from '../hands.js';
 
-const RUB = 10; // s of brisk rubbing till warm
-const LIVELY = 1.5; // frame heights a second — the finger's speed “for all it's worth”
+const RUB = 6; // s of brisk rubbing till warm
+const LIVELY = 1; // frame heights a second — the finger's speed of a brisk rub
 const SPOT = 0.22; // the spot's radius, a share of the frame's height
 
 export default {
   title: 'Hands', // (as the author's map lists it)
-  about: 12,
-  skipped: { seconds: 10 },
+  about: 9,
+  skipped: { seconds: 6 },
   async run(g, b, opts, signal) {
     const mg = g.minigame({ phrase: tr('Hands too frozen to bend. The stove door is open') });
     const send = keys(g);

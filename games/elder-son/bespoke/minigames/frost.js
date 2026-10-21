@@ -27,8 +27,9 @@ export default {
     signal.addEventListener('abort', () => { train?.cancel?.(); g.beds({ clock: 0.4, rails: 0.3 }, 2); });
     const pane = mg.mark({ at: 'window#pane', kind: 'spot' });
     let rub = mg.rub({ on: pane, radius: Math.round(SPOT * h()), full: 0.85 });
-    // (watching is a way: the finger is shown at the first meeting, not when the player stands still)
-    b.minigame.tricks.teach(mg, [rub], { id: 'rub', still: null });
+    // (watching is a way: the finger is shown at the first meeting with this frost — rubbing met in “Hands” says nothing of
+    // a window one may also just look through —, not when the player stands still)
+    b.minigame.tricks.teach(mg, [rub], { id: 'rub:frost', still: null });
     let hole = 0, covered = 0, still = 0, path = 0, last = null, going = false, gone = false;
     send('hole', 0);
     send('far_train', 0);
