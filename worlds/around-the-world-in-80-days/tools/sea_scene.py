@@ -12,7 +12,7 @@ objects = [
     {'id': 'sky', 'name': 'Sky', 'sky': True},
     {'id': 'sea', 'name': 'Sea', 'plane': True, 'across': 0, 'distance': 900, 'elevation': -0.9, 'width': 6000, 'depth': 3000,
      'reflect': {'strength': 0.18, 'fade': 0, 'rough': 0.8, 'ripple': 0.6}, 'uniforms': {'phase': 0, 'storm': 0.6}},
-    {'id': 'steamer', 'name': 'Steamer on the horizon', 'across': 70, 'distance': 650, 'elevation': -0.9, 'box': [-115, -180, 145, 3]},
+    {'id': 'steamer', 'name': 'Steamer on the horizon', 'across': 60, 'distance': 480, 'elevation': -0.9, 'box': [-170, -270, 215, 4]},
     {'id': 'crest', 'name': 'The crest of a wave', 'across': 0, 'distance': 125, 'elevation': -1, 'box': [-70, -9, 70, 1.5],
      'place': {'across': 'crest_a', 'distance': 'crest_d', 'elevation': 'crest_e', 'facing': 'crest_f'}, 'translucent': 0.3},
     {'id': 'rain', 'name': 'Rain', 'particles': {'kind': 'rain', 'amount': 'storm', 'count': 16000, 'reach': 30}},
@@ -44,7 +44,7 @@ objects = [
     {'id': 'gun_smoke', 'name': 'The gun\'s smoke', 'particles': {'kind': 'smoke', 'at': 'bowsprit#muzzle', 'burst': {'on': 'gun', 'count': 40, 'over': 0.4},
      'direction': [0, 1, 0.2], 'speed': [2, 5], 'spread': 30, 'life': [3, 6], 'size': [0.4, 3.0], 'color': ['#e8e4dc', '#a8a49c'], 'opacity': 0.8, 'wind': 1.4}},
     # points the operator frames
-    {'id': 'aft_three', 'name': 'At the stern', 'unseen': True, 'on': ON, 'across': -0.2, 'distance': -3.0, 'elevation': 1.3, 'box': [-1, -1, 1, 1]},
+    {'id': 'gun_view', 'name': 'At the bow gun', 'unseen': True, 'on': ON, 'across': 0.3, 'distance': 6.8, 'elevation': 1.1, 'box': [-1, -1, 1, 1]},
 ]
 PEOPLE = [('fogg', 'Phileas Fogg', 'fogg'), ('aouda', 'Aouda', 'aouda'), ('fix', 'Fix', 'fix'), ('bunsby', 'John Bunsby', 'bunsby')]
 for pid, name, who in PEOPLE:
@@ -74,7 +74,7 @@ states = {
     'gun': {'type': 'number', 'means': 'the bow gun fired: each new number — a shot (the flash, the smoke)'},
     'gun_flash': {'range': [0, 1], 'smooth': True, 'means': "the gun's flash " + LED},
     'flag': {'values': [0, 1], 'means': 'the flag at half-mast on the mainmast (the signal of distress)'},
-    'steamer': {'values': [0, 1], 'means': 'a steamer on the horizon ahead to starboard, her smoke'},
+    'steamer': {'values': [0, 1], 'means': 'a steamer ahead to starboard, half a kilometre off, her smoke'},
     'steamer_turn': {'range': [0, 1], 'smooth': True, 'means': 'the steamer turns toward the boat: 0 — broadside, going away; 1 — bow on, coming'},
     'rock': {'range': [-1, 1], 'smooth': True, 'means': 'the swell rocking the boat ' + LED},
     'rise': {'range': [-1, 1], 'smooth': True, 'means': 'the swell lifting her bow ' + LED},
@@ -101,7 +101,7 @@ spec = {
     'light': {'vignette': 0.3, 'grain': 0.07, 'ambient': 1.0, 'ambientColor': '#eef0ee', 'haze': 0.12, 'hazeColor': '#b8c4c6', 'hazeGlow': 0.4,
               'shafts': 0.15, 'saturation': 0.95, 'wind': [0.6, -1, 0.8],
               'looks': {
-                  'storm': {'ambient': 0.82, 'ambientColor': '#c8d2d6', 'haze': 0.38, 'hazeColor': '#7e8c92', 'saturation': 0.72, 'shafts': 0.05,
+                  'storm': {'ambient': 0.74, 'ambientColor': '#b8c4ca', 'haze': 0.45, 'hazeColor': '#66747a', 'saturation': 0.62, 'shafts': 0.05,
                             'wind': [0.8, -1, 3.2], 'lights': {'sun': 0.35}},
               }},
     'lights': [

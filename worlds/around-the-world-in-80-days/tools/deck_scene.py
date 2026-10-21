@@ -75,13 +75,13 @@ objects = [
     {'id': 'deckchair', 'name': 'Deck-chair', 'across': -2.2, 'distance': 14.35, 'facing': 150, 'box': [-0.45, -1.05, 0.45, 0.05]},
     # points the operator frames: between the people of a moment
     # (each 2 m tall, its box round its anchor: the operator frames the anchor; a shot of 1 frames 2 m there)
-    {'id': 'suez_two', 'name': 'Passepartout and Fix at Suez', 'unseen': True, 'across': 3.1, 'distance': 10.1, 'elevation': 1.45, 'box': [-1, -1, 1, 1]},
-    {'id': 'fix_consul', 'name': 'Fix and the consul', 'unseen': True, 'across': 1.65, 'distance': 13.2, 'elevation': 1.5, 'box': [-1, -1, 1, 1]},
+    {'id': 'suez_two', 'name': 'Passepartout and Fix at Suez', 'unseen': True, 'across': 3.3, 'distance': 10.4, 'elevation': 1.45, 'box': [-1, -1, 1, 1]},
+    {'id': 'fix_consul', 'name': 'Fix and the consul', 'unseen': True, 'across': 1.95, 'distance': 13.85, 'elevation': 1.5, 'box': [-1, -1, 1, 1]},
     {'id': 'night_two', 'name': 'Two at the rail', 'unseen': True, 'across': 4.2, 'distance': 10.25, 'elevation': 1.45, 'box': [-1, -1, 1, 1]},
     {'id': 'two_pacific', 'name': 'Passepartout and Fix', 'unseen': True, 'across': 4.0, 'distance': 10.5, 'elevation': 1.45, 'box': [-1, -1, 1, 1]},
     {'id': 'calendar_three', 'name': 'At the calendar', 'unseen': True, 'across': -1.0, 'distance': 15.4, 'elevation': 1.3, 'box': [-1, -1, 1, 1]},
     {'id': 'ny_two', 'name': 'Fogg below the bridge, Speedy on it', 'unseen': True, 'across': 1.5, 'distance': 17.0, 'elevation': 2.6, 'box': [-1, -1, 1, 1]},
-    {'id': 'coal_three', 'name': 'At the hatch', 'unseen': True, 'across': 1.3, 'distance': 13.6, 'elevation': 1.4, 'box': [-1, -1, 1, 1]},
+    {'id': 'coal_three', 'name': 'At the hatch', 'unseen': True, 'across': 0.4, 'distance': 12.6, 'elevation': 1.4, 'box': [-1, -1, 1, 1]},
     {'id': 'bridge_two', 'name': 'On the bridge', 'unseen': True, 'across': 0.1, 'distance': 19.4, 'elevation': 4.0, 'box': [-1, -1, 1, 1]},
     {'id': 'lv_two', 'name': 'Fogg and Fix at the gangway', 'unseen': True, 'across': 3.5, 'distance': 10.4, 'elevation': 1.5, 'box': [-1, -1, 1, 1]},
     # inserts
@@ -93,6 +93,7 @@ objects = [
     {'id': 'cell_back', 'name': 'Cell wall with a window', 'on': 'cell', 'distance': 6, 'facing': 180, 'box': [-3.7, -5.4, 3.7, 0.1], 'inside': True},
     {'id': 'cell_left', 'name': 'Cell wall with the door', 'on': 'cell', 'across': -3.5, 'distance': -0.6, 'facing': 90, 'box': [-0.1, -5.4, 6.8, 0.1], 'inside': True},
     {'id': 'cell_right', 'name': 'Cell wall', 'on': 'cell', 'across': 3.5, 'distance': 6.2, 'facing': 270, 'box': [-0.1, -5.4, 6.8, 0.1], 'inside': True},
+    {'id': 'cell_two', 'name': 'Fogg on the bench and Fix', 'unseen': True, 'on': 'cell', 'across': -0.8, 'distance': 4.5, 'elevation': 1.1, 'box': [-1, -1, 1, 1]},
     {'id': 'cell_bench', 'name': 'Bench', 'on': 'cell', 'across': -0.2, 'distance': 5.05, 'facing': 180, 'box': [-1.3, -0.6, 1.3, 0.05], 'inside': True},
     {'id': 'cell_door', 'name': 'Cell door', 'on': 'cell', 'across': -3.45, 'distance': 1.55, 'facing': 90, 'box': [-0.05, -2.2, 1.1, 0.05],
      'place': {'facing': 'door_f'}, 'inside': True},
@@ -164,7 +165,7 @@ spec = {
               'shafts': 0.1, 'saturation': 1.0, 'wind': [-0.25, -1, 0.9], 'inside': 0.55,
               'looks': {
                   'dawn': {'ambient': 0.85, 'ambientColor': '#f2cdb8', 'tint': '#ff9a70', 'tintStrength': 0.12, 'haze': 0.1, 'hazeColor': '#ecc0a6', 'shafts': 0.35, 'lights': {'sun_day': 0.15}},
-                  'night': {'ambient': 0.55, 'ambientColor': '#6a7cb4', 'haze': 0.08, 'hazeColor': '#1e2a46', 'saturation': 0.82, 'shafts': 0.45, 'lights': {'sun_day': 0, 'sun_dawn': 0}},
+                  'night': {'ambient': 0.78, 'ambientColor': '#8a9cd0', 'haze': 0.08, 'hazeColor': '#1e2a46', 'saturation': 0.82, 'shafts': 0.45, 'lights': {'sun_day': 0, 'sun_dawn': 0}},
                   'fog': {'haze': 0.5, 'hazeColor': '#c6c8c4', 'ambient': 0.95, 'ambientColor': '#e6e6e2', 'saturation': 0.78, 'shafts': 0.2, 'lights': {'sun_day': 0.4}},
               }},
     'lights': [

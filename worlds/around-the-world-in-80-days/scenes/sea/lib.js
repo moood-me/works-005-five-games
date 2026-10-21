@@ -28,7 +28,7 @@ const bump = (x, c, w) => Math.exp(-(((x - c) / w) ** 2));
 function pose(st) {
   const w = clamp01(st.wave), h = clamp01(st.wave_h), storm = clamp01(st.storm), from = anim.clamp(num(st.wave_from), -1, 1);
   const pitch = -15 * h * bump(w, 0.42, 0.1) + 11 * h * bump(w, 0.66, 0.1) + (1.5 + 3.5 * storm) * num(st.rise);
-  const roll = -18 * anim.clamp(num(st.heel), -1, 1) + (1 + 6 * storm) * num(st.rock);
+  const roll = -22 * anim.clamp(num(st.heel), -1, 1) + (2 + 8 * storm) * num(st.rock);
   const bow = 180 + 20 * anim.clamp(num(st.helm), -1, 1);
   const bowWorld = plan.at + plan.stem, d = bowWorld + (0.5 - w) * 220;
   const crest = { a: from * (d - bowWorld) * 0.45, d, e: -1 - 9 * anim.ease.inOut(anim.span(w, 0.34, 0.5)), f: 180 + 28 * from };
@@ -74,19 +74,29 @@ function mast(g, e, h, flag) {
   rect(g, -0.12, -h - 0.15, 0.24, 0.18, shade(C.mast, 0.3));
   line(g, [[-0.05, -h * 0.82], [-2.0, -0.7]], '#3a342c', 0.035);
   line(g, [[0.05, -h * 0.82], [2.0, -0.7]], '#3a342c', 0.035);
-  if (flag) e.layer('flag', { pivot: [0.07, -h * 0.55], wind: { strength: 0.9, gust: 0.6 } }, g => {
+  // (low on the mast: lowered, and in sight from the stern)
+  const f = -h * 0.3;
+  if (flag) e.layer('flag', { pivot: [0.07, f], wind: { strength: 0.9, gust: 0.6 } }, g => {
     // the red ensign, upside down — the signal of distress
-    poly(g, [[0.07, -h * 0.55], [1.5, -h * 0.55 + 0.05], [1.5, -h * 0.55 + 0.75], [0.07, -h * 0.55 + 0.7]], '#a8302a');
-    rect(g, 0.07, -h * 0.55 + 0.35, 0.65, 0.35, '#24305a');
-    line(g, [[0.07, -h * 0.55 + 0.35], [0.72, -h * 0.55 + 0.7]], '#ece6d8', 0.06);
-    line(g, [[0.07, -h * 0.55 + 0.7], [0.72, -h * 0.55 + 0.35]], '#ece6d8', 0.06);
+    poly(g, [[0.07, f], [2.0, f + 0.06], [2.0, f + 1.0], [0.07, f + 0.95]], '#b8302a');
+    rect(g, 0.07, f + 0.48, 0.9, 0.47, '#24305a');
+    line(g, [[0.07, f + 0.48], [0.97, f + 0.95]], '#ece6d8', 0.08);
+    line(g, [[0.07, f + 0.95], [0.97, f + 0.48]], '#ece6d8', 0.08);
   });
 }
 // A gaff sail seen aslant from aft (x from the mast out along the boom, y up from the boom): the cloth between the
-// mast, the gaff and the boom — a layer `sail` its animate shortens from the boom up as she is reefed; the boom below
-// it; her number on the mainsail
+// mast, the gaff and the boom — a layer `sail` its animate shortens from the boom up as she is reefed, the reefed cloth
+// bundled along the boom (a layer `reefed`, shown as far as she is reefed); the boom below it; her number on the mainsail
 function gaffSail(g, e, boom, luff, number) {
   rect(g, 0, -0.06, boom, 0.12, shade(C.mast, 0.2));
+  e.layer('reefed', {}, g => {
+    g.fillStyle = tint(C.sail, 0.0);
+    g.beginPath();
+    g.ellipse(boom / 2, -0.2, boom / 2 - 0.1, 0.22, 0, 0, Math.PI * 2);
+    g.fill();
+    g.fillStyle = shade(C.sail, 0.3);
+    for (let x = 0.5; x < boom - 0.2; x += 0.6) g.fillRect(x, -0.42, 0.05, 0.44);
+  });
   e.layer('sail', { pivot: [0, 0] }, g => {
     poly(g, [[0.1, -0.1], [0.1, -luff], [boom * 0.8, -luff - 1.8], [boom, -0.15]], C.sail);
     line(g, [[0.1, -luff], [boom * 0.8, -luff - 1.8]], shade(C.mast, 0.2), 0.1);
@@ -112,9 +122,8 @@ const at = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [
 const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: -0.45, camera_z: 0, camera_h: -0.55, camera_look: 0.02 };
 // a point of the boat (her own metres) for a look or a reach: it goes with her
 const aboard = (a, d, h) => ({ on: 'frame', at: [a, d, h] });
-const BRACE = { motion: 'storm_brace', loop: true, from: 0 };
-// where they are: Bunsby at the tiller; Fogg by the port rail, Aouda beside him, Fix by the starboard rail — aft, turned
-// aft from the spray
+// where they are: Bunsby at the tiller; Fogg by the port rail, Aouda beside him, her hand in his, Fix by the starboard
+// rail — aft, turned aft from the spray, holding on
 const SPOT = {
   bunsby: [0.95, -5.9], bunsby_gun: [0.35, 6.4],
   fogg: [-1.45, -3.0], aouda: [-0.75, -3.75], fix: [1.4, -2.6],
@@ -135,15 +144,16 @@ function film(scene, party = {}) {
   // who is aboard: Fogg and Bunsby always; Aouda and Fix as the game says
   const ABOARD = (more = {}) => ({
     ...NOBODY(),
-    ...P('bunsby', SPOT.bunsby, 335, { do: BRACE, reach: { r: 'tiller#tiller', l: 'tiller#tiller' }, look: aboard(0, 30, 2) }),
-    ...P('fogg', SPOT.fogg, 160, { do: BRACE, reach: { l: aboard(-2.05, -3.2, 0.75) }, look: aboard(-0.2, -7.5, 1.4) }),
-    ...(withIt('with_aouda') ? P('aouda', SPOT.aouda, 165, { do: BRACE, look: aboard(0.4, -7.5, 1.6) }) : {}),
-    ...(withIt('with_fix') ? P('fix', SPOT.fix, 200, { do: BRACE, reach: { l: aboard(2.05, -2.5, 0.75) }, look: 'fogg#head', mood: 'afraid' }) : {}),
+    ...P('bunsby', SPOT.bunsby, 335, { reach: { r: 'tiller#tiller', l: 'tiller#tiller' }, look: aboard(0, 30, 2) }),
+    // Fogg holds the rail and, with her aboard, Aouda's hand
+    ...P('fogg', SPOT.fogg, 160, { reach: { r: aboard(-2.05, -3.0, 0.8), ...(withIt('with_aouda') ? { l: 'aouda#hand_r' } : {}) }, look: aboard(-0.2, -7.5, 1.4) }),
+    ...(withIt('with_aouda') ? P('aouda', SPOT.aouda, 165, { reach: { r: 'fogg#hand_l' }, look: aboard(0.4, -7.5, 1.6) }) : {}),
+    ...(withIt('with_fix') ? P('fix', SPOT.fix, 200, { reach: { l: aboard(2.05, -2.5, 0.8) }, look: 'fogg#head', mood: 'afraid' }) : {}),
     ...party,
     ...more,
   });
-  // the wide shot from the stern, low: the deck, the people braced aft, the bow and what comes at it
-  const SQUALL = () => ({ ...QUIET, ...CAM, ...ABOARD() });
+  // the wide shot from the stern, low: the deck, the people holding on aft, the bow and what comes at it
+  const SQUALL = () => ({ ...QUIET, ...CAM, camera_look: -0.1, ...ABOARD() });
   const STORM = () => ({ ...QUIET, storm: 0.9, reef: 1, wave_h: 0.6, ...CAM, ...ABOARD() });
   const STILLER = () => ({ ...STORM(), storm: 0.45, wave_h: 0.4 });
 
@@ -156,7 +166,7 @@ function film(scene, party = {}) {
         const bunsby = s.person('bunsby');
         s.move('storm', 0.6, { over: 7, ease: 'inOut' });
         s.move('wave_h', 0.55, { over: 7 });
-        await s.wait(2.4);
+        await s.wait(1.6);
         await s.move('reef', 1, { over: 3, ease: 'inOut' });
         bunsby.look('fogg#head');
         s.tell('squall:reef');
@@ -182,12 +192,14 @@ function film(scene, party = {}) {
       run: async s => {
         const aouda = s.person('aouda');
         aouda.look(aboard(0.6, -9, 2.2));
+        // (the camera's own offset aside taken off while it is on her)
+        s.move('camera_x', 0, { over: 1.6 });
         s.camera({ target: 'aouda', shot: 1.4, frame: [0.5, 0.42], glide: 1.6 });
         await s.wait(2.2);
         aouda.look(aboard(-0.2, -9, 1.4));
         await s.wait(2.6);
         s.camera({ target: null, glide: 1.6 });
-        await s.wait(0.6);
+        await s.move('camera_x', CAM.camera_x, { over: 1.6 });
       },
     },
     // ---- The storm dies down; a steamer's smoke on the horizon; Bunsby goes forward to the bow gun, the flag at
@@ -200,10 +212,11 @@ function film(scene, party = {}) {
         s.move('storm', 0.2, { over: 5, ease: 'inOut' });
         s.move('wave_h', 0.3, { over: 5 });
         s.set('steamer', 1);
-        await s.wait(2.2);
-        bunsby.reach(null);
-        bunsby.do('stand', { loop: true });
         s.set('flag', 1);
+        await s.wait(0.8);
+        bunsby.reach(null);
+        // the camera goes forward with him to the gun: him, the gun, the steamer beyond
+        s.camera({ target: 'gun_view', shot: 0.7, frame: [0.5, 0.45], glide: 4 });
         await bunsby.walk([[0.8, -2.0], [0.6, 3.0], SPOT.bunsby_gun]);
         await bunsby.turn(0);
         bunsby.reach({ r: 'bowsprit#breech' });
@@ -211,8 +224,8 @@ function film(scene, party = {}) {
         s.set('gun', get('gun') + 1);
         s.tell('shanghai:gun');
         bunsby.reach(null);
-        await s.wait(2.4);
-        await s.move('steamer_turn', 1, { over: 4, ease: 'inOut' });
+        await s.wait(1.6);
+        await s.move('steamer_turn', 1, { over: 3.5, ease: 'inOut' });
         s.tell('shanghai:turns');
         await s.wait(2);
       },

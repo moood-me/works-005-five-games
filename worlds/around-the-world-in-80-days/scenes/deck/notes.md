@@ -38,8 +38,10 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
   lib.js: `deckhouse` (its face, sides, bridge, rail, calendar), `boats` (`boats`, `boats_s`), `bunks`, `yards`
   (`yards` — the foremast's, `yards_main`), `mast_fore`, `mast_main`, `bulwarks` (both sides), `speedy_cabin` (face,
   side, roof). Each on its anchor, placed by the script from `drag_<part>` (`lib.partAt`: keys `at_<part>_a/_d/_e`); its
-  elements' animates shrink it on the way, hide it at 0, dim it while `locked_<part>` (`lib.partAnimate`). A mast falls
-  over to port first (the first 0.35 of the drag); its yards fall with it and lie fallen once it is burnt. A part
+  elements' animates shrink it on the way, hide it at 0, dim it while `locked_<part>` (`lib.partAnimate`). A mast is
+  lowered down through the deck as it is dragged (out of sight under the planks); its yards go down with it and are
+  gone once it is burnt (their own part's ring is then where nothing is seen — the game is asked to burn the yards
+  before their masts). A part
   going to 0 flares in the hatch (the script: `flare` +1 — a sheaf of sparks, `flare_glow` — a flash). `fire` — flames
   from the hatch, its glow and light, sparks from the funnel. `speedy_grief`: from 0.4 his hands to his head, angry;
   from 0.8 grief (the script).
@@ -47,38 +49,40 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
   `cell_close` — the cell's bench from above: Fogg's knees and hands, his watch open (its hands go 11:40 → 14:33 with
   `cell_time`), the bars' shadow sliding across.
 - **The cell** — a room far to starboard (`cell` at across 400): floor, three walls, the barred window (`cell_window`),
-  the bench, the door (`cell_door`, swung by `door`: the script's `door_f`). The beats there cut `camera_x` to it.
+  the bench, the door (`cell_door`, swung by `door`: the script's `door_f`). The beats there frame `cell_two` (the
+  operator goes there).
 
 ## Beats (`lib.film()`, played by the world's `beats`)
 
-- `suez` (≈ 14 s): Passepartout and Fix by the gangway's head (Passepartout turned aft, smiling); the cigar offered —
-  `suez:chat`; Fix walks forward past the consul and turns aft to whisper to him — `suez:whisper`; Passepartout looks at
-  the town.
+- `suez` (≈ 14 s): Passepartout and Fix face to face by the gangway's head (profiles, smiling); the cigar offered —
+  `suez:chat`; Fix walks forward to the consul, the two face to face (profiles), he whispers — `suez:whisper`;
+  Passepartout looks at the town.
 - `bombay` (≈ 6 s): dawn, Bombay to starboard; Fogg at the rail with his notebook, turned to the camera; he looks up
-  at the town and back — `bombay:book`.
+  over the sea and back — `bombay:book`.
 - `rail_night` (≈ 7 s): night on the «Rangoon», the moon's path; she at the rail, he a step aft inboard; she turns to
-  him — `rail_night:turns`; he to her. `plaid` (after it, ≈ 8 s): he steps to her and lays the plaid over her shoulders
-  (`plaid_shoulders`). `writes` (after either, ≈ 7 s): he gives her the notebook, she writes (`write_note`) —
-  `writes:done`; he looks at the sea.
+  him — `rail_night:turns`; he to her. `plaid` (after it, ≈ 8 s): he steps round before her (his face to us) and lays
+  the plaid over her shoulders (`plaid_shoulders`, seen on her back). `writes` (after either, ≈ 7 s): he gives her the
+  notebook, she turns to the lantern and writes, her face to us (`write_note`) — `writes:done`; he looks at the sea.
 - `pacific` (≈ 6 s): the «General Grant»; Passepartout at the rail (wings by `pp_wings`); Fix comes aft from the
   deckhouse and stands before him; face to face (profiles) — `pacific:fix`. `punch` (after it, ≈ 10 s): the blow —
-  `punch:down`; Fix falls, sits up, sets his hat right. `shake` (after it, ≈ 5 s): hands.
+  `punch:down` (a wider, lower shot: the fall to the deck in it); Fix falls, sits up, sets his hat right. `shake` (after it, ≈ 5 s): hands.
 - `calendar` (≈ 9 s): close on the calendar; the sailor turns the leaf — Wednesday, 20 November, again —
   `calendar:leaf`; the shot opens on the three; Passepartout turns to Fogg in his chair and laughs — `calendar:laugh`.
 - `new_york` (≈ 13 s): the «Henrietta» at the quay; Fogg and his party at the gangway's head, the «China»'s smoke —
   `new_york:smoke`; Fogg goes forward under the bridge; Speedy on it, close — `new_york:speedy`.
 - `mutiny` (≈ 7 s): Fogg on the bridge; the porthole insert opens — `mutiny:porthole` — and closes.
-- `coal` (≈ 12 s): the smoke thins; the stoker spreads his hands — `coal:stoker`; Speedy is brought out of his cabin by
-  a sailor and stands before Fogg, turned aft — `coal:speedy`.
+- `coal` (≈ 9 s): the smoke thins; the stoker, come up from the hatch, spreads his hands — `coal:stoker`; meanwhile
+  Speedy is brought aft out of the deckhouse by a sailor, walking toward us, and stands before Fogg — `coal:speedy`.
 - `burn` (1 s): the cut to the boilers' view; the game plays «The boilers» on it.
 - `queenstown` (≈ 9 s): dawn, the parts as the game left them; Speedy salutes from his cabin's roof if it is left.
-- `sails_only` (≈ 13 s): the sails let fall; Speedy laughs on the bridge by Fogg — `sails_only:laugh`.
+- `sails_only` (≈ 8 s): from high on the poop the sails let fall; the camera rises to the bridge; Speedy laughs by
+  Fogg — `sails_only:laugh`.
 - `liverpool` (≈ 10 s): fog; the constables come up the gangway; Fix comes aft, his hand on Fogg's shoulder —
   `liverpool:hand`.
 - `cell` (1 s): the insert `cell_close` opens; the game moves `cell_time`.
 - `release` (after `cell`, ≈ 6 s; with its outcome ≈ 14 s): the insert closes on the cell; the door flies open, Fix
-  runs in — `release:in`; then by `release` (set before the beat) `fix_down` or `fix_hand`.
-- `fix_down`, `fix_hand` (after `release`, ≈ 8 s, 6 s): Fogg rises; the blow and Fix down / the hand.
+  runs in, the camera comes in on the two — `release:in`; then by `release` (set before the beat): `down` — Fogg rises,
+  the blow, Fix down; `hand` — Fogg rises and holds out his hand, Fix takes it.
 - The showcase's own (not the game's): `burn_show` (four parts dragged into the hatch), `cell_show` (the hours in the
   cell).
 
@@ -96,15 +100,13 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
  "calendar": {"after": [], "tells": ["calendar:leaf", "calendar:laugh"], "seconds": 9, "show": false},
  "new_york": {"after": [], "tells": ["new_york:smoke", "new_york:speedy"], "seconds": 13, "show": false},
  "mutiny": {"after": [], "tells": ["mutiny:porthole"], "seconds": 7, "show": false},
- "coal": {"after": [], "tells": ["coal:stoker", "coal:speedy"], "seconds": 12, "show": false},
+ "coal": {"after": [], "tells": ["coal:stoker", "coal:speedy"], "seconds": 9, "show": false},
  "burn": {"after": [], "tells": [], "seconds": 1, "show": false},
  "queenstown": {"after": [], "tells": [], "seconds": 9, "show": false},
- "sails_only": {"after": [], "tells": ["sails_only:laugh"], "seconds": 13, "show": false},
+ "sails_only": {"after": [], "tells": ["sails_only:laugh"], "seconds": 8, "show": false},
  "liverpool": {"after": [], "tells": ["liverpool:hand"], "seconds": 10, "show": false},
  "cell": {"after": [], "tells": [], "seconds": 1, "show": false},
  "release": {"after": ["cell"], "tells": ["release:in"], "seconds": 14, "show": false},
- "fix_down": {"after": ["release"], "tells": [], "seconds": 8, "show": false},
- "fix_hand": {"after": ["release"], "tells": [], "seconds": 6, "show": false},
  "burn_show": {"after": [], "tells": [], "seconds": 16, "show": true},
  "cell_show": {"after": [], "tells": [], "seconds": 9, "show": true}},
  "points": ["fogg", "passepartout", "aouda", "fix", "speedy", "stoker", "sailor", "consul", "policeman",
