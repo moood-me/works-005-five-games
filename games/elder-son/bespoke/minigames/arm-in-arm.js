@@ -25,11 +25,12 @@ export default {
     const send = keys(g);
     const at = () => +g.get('down_at') || 0;
     const pause = s => { const t0 = mg.t; return until(mg, ({ t }) => t - t0 >= s); };
-    let falls = 0, slipped = false, walk = null, first = true;
+    let falls = 0, slipped = false, walk = null;
+    // (each walk on: the ghost shows it at the first meeting, and again whenever the player stands still — after a
+    // slip nothing else says the way goes on)
     const walking = () => {
       walk = mg.hold({ on: null, seconds: 1, drain: 0 });
-      if (first) b.minigame.tricks.teach(mg, [walk], { id: 'hold:anywhere' });
-      first = false;
+      b.minigame.tricks.teach(mg, [walk], { id: 'hold:anywhere' });
     };
     // (the scene tells `down:slip` on every strip of ice: waited for anew after each)
     const listen = () => g.told('down:slip', SLIP_MS).then(ok => { if (ok && !signal.aborted) { slipped = true; listen(); } });
