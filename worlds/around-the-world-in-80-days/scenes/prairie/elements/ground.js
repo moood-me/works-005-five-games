@@ -38,11 +38,11 @@ for (const s of [-1, 1]) {
     for (let d = -30; d < G.end0; d += 10) g.lineTo(x + s * 0.6 * Math.sin(d * 0.07 + k), Y(d));
     g.stroke();
   }
-  g.fillStyle = '#eef2f6';
-  for (let i = 0; i < 70; i++) {
+  g.fillStyle = '#e2e8ef';
+  for (let i = 0; i < 35; i++) {
     const d = -30 + h(i, 7 + s) * (G.end0 + 30), x = G.x + s * (G.bed + 1 + h(i, 9 + s) * (G.top - G.bed - 4));
     g.beginPath();
-    g.ellipse(x, Y(d), 0.8 + 1.4 * h(i, 11), 1.5 + 4 * h(i, 13), 0, 0, TAU);
+    g.ellipse(x, Y(d), 0.3 + 0.5 * h(i, 11), 1 + 2.5 * h(i, 13), 0, 0, TAU);
     g.fill();
   }
 }

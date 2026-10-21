@@ -113,8 +113,8 @@
   {
    "id": "platform_lamp",
    "of": "lamp#flame",
-   "color": "#ffc27a",
-   "strength": 2.4,
+   "color": "#ffa070",
+   "strength": 1.6,
    "reach": 10,
    "on": "lamps",
    "flicker": 0.12
@@ -188,6 +188,7 @@
   "wind_r": 0.45,
   "drift": 0,
   "ridge_x": 400,
+  "ridge_h": 0,
   "wolves": 0,
   "wolves_x": -400,
   "omaha_near": 0,
@@ -512,6 +513,14 @@
    "smooth": true,
    "means": "led by the scene: where the snow ridge is"
   },
+  "ridge_h": {
+   "range": [
+    0,
+    1
+   ],
+   "smooth": true,
+   "means": "led by the scene: how far the snow ridge has risen out of the snow"
+  },
   "wolves": {
    "range": [
     0,
@@ -669,88 +678,116 @@
    ],
    "copies": [
     {
-     "across": -725
+     "across": -725,
+     "distance": 27
     },
     {
-     "across": -675
+     "across": -675,
+     "distance": 27
     },
     {
-     "across": -625
+     "across": -625,
+     "distance": 27
     },
     {
-     "across": -575
+     "across": -575,
+     "distance": 27
     },
     {
-     "across": -525
+     "across": -525,
+     "distance": 27
     },
     {
-     "across": -475
+     "across": -475,
+     "distance": 27
     },
     {
-     "across": -425
+     "across": -425,
+     "distance": 27
     },
     {
-     "across": -375
+     "across": -375,
+     "distance": 27
     },
     {
-     "across": -225
+     "across": -225,
+     "distance": 27
     },
     {
-     "across": -175
+     "across": -175,
+     "distance": 27
     },
     {
-     "across": -125
+     "across": -125,
+     "distance": 27
     },
     {
-     "across": -75
+     "across": -75,
+     "distance": 27
     },
     {
-     "across": -25
+     "across": -25,
+     "distance": 27
     },
     {
-     "across": 25
+     "across": 25,
+     "distance": 27
     },
     {
-     "across": 75
+     "across": 75,
+     "distance": 27
     },
     {
-     "across": 125
+     "across": 125,
+     "distance": 27
     },
     {
-     "across": 175
+     "across": 175,
+     "distance": 27
     },
     {
-     "across": 225
+     "across": 225,
+     "distance": 27
     },
     {
-     "across": 275
+     "across": 275,
+     "distance": 27
     },
     {
-     "across": 325
+     "across": 325,
+     "distance": 27
     },
     {
-     "across": 375
+     "across": 375,
+     "distance": 27
     },
     {
-     "across": 425
+     "across": 425,
+     "distance": 27
     },
     {
-     "across": 475
+     "across": 475,
+     "distance": 27
     },
     {
-     "across": 525
+     "across": 525,
+     "distance": 27
     },
     {
-     "across": 575
+     "across": 575,
+     "distance": 27
     },
     {
-     "across": 625
+     "across": 625,
+     "distance": 27
     },
     {
-     "across": 675
+     "across": 675,
+     "distance": 27
     },
     {
-     "across": 725
+     "across": 725,
+     "distance": 27
     }
    ]
   },
@@ -767,55 +804,72 @@
    ],
    "copies": [
     {
-     "across": -720
+     "across": -720,
+     "distance": 46
     },
     {
-     "across": -640
+     "across": -640,
+     "distance": 46
     },
     {
-     "across": -560
+     "across": -560,
+     "distance": 46
     },
     {
-     "across": -480
+     "across": -480,
+     "distance": 46
     },
     {
-     "across": -400
+     "across": -400,
+     "distance": 46
     },
     {
-     "across": -160
+     "across": -160,
+     "distance": 46
     },
     {
-     "across": -80
+     "across": -80,
+     "distance": 46
     },
     {
-     "across": 0
+     "across": 0,
+     "distance": 46
     },
     {
-     "across": 80
+     "across": 80,
+     "distance": 46
     },
     {
-     "across": 160
+     "across": 160,
+     "distance": 46
     },
     {
-     "across": 240
+     "across": 240,
+     "distance": 46
     },
     {
-     "across": 320
+     "across": 320,
+     "distance": 46
     },
     {
-     "across": 400
+     "across": 400,
+     "distance": 46
     },
     {
-     "across": 480
+     "across": 480,
+     "distance": 46
     },
     {
-     "across": 560
+     "across": 560,
+     "distance": 46
     },
     {
-     "across": 640
+     "across": 640,
+     "distance": 46
     },
     {
-     "across": 720
+     "across": 720,
+     "distance": 46
     }
    ]
   },
@@ -832,31 +886,40 @@
    ],
    "copies": [
     {
-     "across": -700
+     "across": -700,
+     "distance": 95
     },
     {
-     "across": -560
+     "across": -560,
+     "distance": 95
     },
     {
-     "across": -140
+     "across": -140,
+     "distance": 95
     },
     {
-     "across": 0
+     "across": 0,
+     "distance": 95
     },
     {
-     "across": 140
+     "across": 140,
+     "distance": 95
     },
     {
-     "across": 280
+     "across": 280,
+     "distance": 95
     },
     {
-     "across": 420
+     "across": 420,
+     "distance": 95
     },
     {
-     "across": 560
+     "across": 560,
+     "distance": 95
     },
     {
-     "across": 700
+     "across": 700,
+     "distance": 95
     }
    ]
   },
@@ -873,22 +936,28 @@
    ],
    "copies": [
     {
-     "across": -660
+     "across": -660,
+     "distance": 170
     },
     {
-     "across": -220
+     "across": -220,
+     "distance": 170
     },
     {
-     "across": 0
+     "across": 0,
+     "distance": 170
     },
     {
-     "across": 220
+     "across": 220,
+     "distance": 170
     },
     {
-     "across": 440
+     "across": 440,
+     "distance": 170
     },
     {
-     "across": 660
+     "across": 660,
+     "distance": 170
     }
    ]
   },
@@ -1432,9 +1501,9 @@
    "distance": 14.5,
    "facing": 90,
    "box": [
-    -0.1,
-    -4.6,
-    5.8,
+    -0.3,
+    -7.2,
+    5.9,
     0.1
    ]
   },
@@ -1671,7 +1740,7 @@
    "distance": 11.4,
    "box": [
     -5,
-    -2.0,
+    -2.7,
     5,
     0.2
    ],

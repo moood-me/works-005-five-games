@@ -68,23 +68,24 @@ const sail = () => {
 };
 follow('sheet', sail);
 follow('wind', sail);
-// the snow ridge: it rises ahead as `drift` grows, at the bow at 1; falling back to 0 it passes behind the sledge as the
-// plain runs, then waits far ahead
+// the snow ridge: it rises out of the snow ahead as `drift` grows (ridge_h), nearing the bow at 1; as `drift` falls
+// back to 0 it passes behind the sledge with the plain, then sinks away till the next
 let passing = false, lastDrift = num('drift');
 const ridge = v => {
   const x = num('sl_x');
   if (v > 0.02) {
     passing = false;
-    scene.set('ridge_x', x + 6 + 44 * (1 - v));
+    scene.set('ridge_x', x + 6 + 10 * (1 - v));
+    scene.set('ridge_h', v);
   } else if (lastDrift > 0.5 && !passing) {
     passing = true;
     const from = num('ridge_x'), pace = Math.max(0.2, num('sl_speed')) * P.sailPace;
-    scene.move('ridge_x', x - 50, { over: Math.max(0.5, (from - x + 50) / pace), ease: 'linear' }).then(how => {
+    scene.move('ridge_x', x - 30, { over: Math.max(0.5, (from - x + 30) / pace), ease: 'linear' }).then(how => {
       if (how !== 'done') return;
       passing = false;
-      scene.set('ridge_x', x + 400);
+      scene.set('ridge_h', 0);
     });
-  } else if (!passing && num('ridge_x') < x + 300) scene.set('ridge_x', x + 400);
+  } else if (!passing) scene.set('ridge_h', 0);
   lastDrift = v;
 };
 follow('drift', ridge);

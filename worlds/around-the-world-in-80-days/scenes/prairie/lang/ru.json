@@ -1,4 +1,7 @@
 {"strings": [
+  {"text":"Omaha","translation":"Омаха","where":"scenes/prairie/elements/depot.js"},
+  {"text":"Fort Kearney","translation":"Форт Керни","where":"scenes/prairie/elements/depot.js"},
+  {"text":"Union Pacific","translation":"Юнион Пасифик","where":"scenes/prairie/lib.js"},
   {"text":"The prairie","translation":"Прерия","where":"scenes/prairie/scene.json title"},
   {"text":"The winter plain of the West: the railway, a bridge over a gorge, Fort Kearney.","translation":"Зимняя равнина Запада: железная дорога, мост над ущельем, форт Керни.","where":"scenes/prairie/scene.json caption"}
 ]}

@@ -38,8 +38,8 @@ line on the left of it). People are the world's cast `cast`, the film is beats o
   hide them), `riders_x`, `riders_d`. While `riders` and `firing`, the script puffs a rifle's smoke now and then
   (`shots1…3` → particles at `riders#gun1`, `riders#gun2`, `riders_b#gun1`) — the attack told by smoke, the riders, the
   faces at the windows (`faces`), the driver falling; nobody is shown hit.
-- **Under the cars** (`under`): the camera low (`camera_h` −1.2) on the near side, turned along the cars toward the
-  engine (`camera_yaw` 58); Passepartout lies on his back (`lie_limp`) `on` `chain#pp`, his hands reach `chain#hand_r`,
+- **Under the cars** (`under`): the camera low (`camera_h` −1.3) on the near side, 7 m from the line, 3 m ahead of him
+  (the next chain in the middle 4:3); Passepartout lies on his back (`lie_limp`) `on` `chain#pp`, his hands reach `chain#hand_r`,
   `chain#hand_l` (the chain's animate moves all three by `pp_car`: hand over hand). The script leads the sway while he is
   there (`swing_at` 0 → 1 every 1.4 s; the chains sag and swing, the bodies rock — 0.5 together) and moves `camera_x`
   with him (lib.js `underCam`); at `pp_car` 3 it tells `under:coupling`; `uncouple` lifts the pin out of the drawhead
@@ -56,8 +56,9 @@ line on the left of it). People are the world's cast `cast`, the film is beats o
   of whoever holds it (`with: ['sheet']` — Fogg, or Passepartout alone). Passengers sit on it (`on` points in the
   sledge's frame, `sit_calm`) by `sl_fogg`, `sl_aouda`, `sl_pp`, `sl_fix`. `wind` −1 is from the sledge's left (the far
   side, north), 0 from astern, 1 from its right: the pennant streams by the wind and the sledge's own running; the looks
-  `wind_l`, `wind_r` turn the air. The snow ridge (`ridge`, nearer than the sledge: it is gone round) stands
-  `6 + 44 × (1 − drift)` m ahead while `drift` grows and, as `drift` falls back to 0, passes behind with the plain; the
+  `wind_l`, `wind_r` turn the air. The snow ridge (`ridge`, nearer than the sledge: it is gone round) rises out of the snow
+  `6 + 10 × (1 − drift)` m ahead as `drift` grows (`ridge_h`) and, as `drift` falls back to 0, passes behind with the
+  plain, then sinks; the
   wolves (`wolves`: four, three strides each) come up from behind along the line's far side (`wolves_x` by `wolves`);
   Omaha's smoke rises over the horizon as `sledge` passes 0.6 (`omaha_near`).
 - **Aouda** wears her travelling dress by `aouda_dress` (the cast's `wears.aouda_dress`); `snow_on_aouda` whitens her
@@ -67,12 +68,16 @@ line on the left of it). People are the world's cast `cast`, the film is beats o
   (the moon from `sky#moon`, a blue ambient — light, not dark), `speed` (the air streaming back), `wind_l`, `wind_r`.
   Lights: the platform lamp, the depot window, the headlamp, the cars' windows — all by `lamps`.
 
+- **No turned shots.** Looking ahead (a panorama) the sky is a backdrop carried with the camera's yaw, and only its
+  stage and 0.3 margins are painted: a yaw past ~10° shows past its edge. Every shot looks straight ahead
+  (`camera_pitch` up from the river under the bridge is fine). The bridge's fall is seen from the gorge's bed.
+
 ## The beats (lib.js `film`; the game's order)
 
 | Beat | What | Moments |
 | --- | --- | --- |
 | `bridge_stop` | wide: the train before the bridge, the gorge; then a two-shot — the driver and Passepartout argue at the engine (Fogg, Aouda, Fix by the first car). Ends on the two-shot: the choice `driver#head` · `passepartout#head` | `bridge_stop:argue` |
-| `bridge_run` | Passepartout in the cab, scared; the train gathers speed; from the east rim it crosses, the bridge shaking; behind the last car the middle span falls into the gorge | `bridge_run:down` |
+| `bridge_run` | Passepartout in the cab, scared; the train gathers speed; from the river under it, looking up, it crosses, the bridge shaking; behind the last car the middle span falls into the gorge | `bridge_run:down` |
 | `bridge_walk` | snow falling; they walk over the bridge, the empty train creeping after; from the east rim they come off it; Fogg looks back | `bridge_walk:over` |
 | `attack` | wide: the train at full speed, the riders galloping alongside, smoke, faces at the windows; the cab — the driver falls; Passepartout on the rear platform, his arm toward the fort ahead, then his eyes down to the coupling | `attack:driver` |
 | `under` | under the cars, low; the minigame «The coupling» plays it (`pp_car`, `swing_at`, `uncouple`) | `under:coupling` (script: at `pp_car` 3) |
@@ -83,7 +88,7 @@ line on the left of it). People are the world's cast `cast`, the film is beats o
 | `return` | dawn; out of the snow Passepartout, Fogg (`fogg_went`), the soldiers; nearer: Passepartout comes up to the platform, Aouda turns to him | `return:pp` |
 | `train_leaves` | the train pulls out: `fogg_on_train` 1 — Fogg on its rear platform looking back; 0 — they on the platform watch it go | `train_leaves:gone` |
 | `sledge` | Mudge's sledge by the platform, who rides seated (`sl_*`), the first speaker framed (Fix, or Passepartout alone); the sail goes up, the camera on Mudge | `sledge:sail` |
-| `sail` | the sledge in the middle of the plain under sail, seen from behind its quarter; the minigame «The sail» plays it | — |
+| `sail` | the sledge in the middle of the plain under sail, side-on, the way ahead on the right; the minigame «The sail» plays it | — |
 | `omaha` | Omaha (`town` omaha), the train at the station. Passepartout alone (`sl_fogg` 0): `omaha_train` 1 — he runs to the last car, Fogg gives him his hand, the train pulls out with him; 0 — it pulls out before he is there. All in the sledge: at the last car Fogg hands Aouda up | `omaha:hand` |
 
 Every beat has `from` (the game may open the scene on any of them); none follows another without a cut (`after`: none) —

@@ -16,10 +16,10 @@ o(id='rush', name='Snow by the line (running)', plane=True, across=0, distance=3
 o(id='track_w', name='Line to the bridge', plane=True, across=-1146, distance=P, elevation=0.04, width=1708, depth=3.2)
 o(id='track_e', name='Line', plane=True, across=864, distance=P, elevation=0.04, width=2184, depth=3.2)
 o(id='poles', name='Telegraph poles', across=0, distance=27, box=[-26, -7.4, 26, 0.2],
-  copies=[{'across': x} for x in range(-725, 726, 50) if not -310 < x + 25 < -212])
+  copies=[{'across': x, 'distance': 27} for x in range(-725, 726, 50) if not -310 < x + 25 < -212])
 for i, (d, sp, x0, n) in enumerate([(46, 80, -720, 18), (95, 140, -700, 10), (170, 220, -660, 6)]):
     o(id=f'scrub{i}', name='Sagebrush under the snow', across=0, distance=d, box=[-sp, -2.6, sp, 0.2],
-      copies=[{'across': x0 + k * sp} for k in range(n + 1) if not (x0 + k * sp < -222 and x0 + (k + 1) * sp > -298)])
+      copies=[{'across': x0 + k * sp, 'distance': d} for k in range(n + 1) if not (x0 + k * sp < -222 and x0 + (k + 1) * sp > -298)])
 
 # ── the bridge at Medicine Bow: a timber trestle over the gorge, its near and far faces; the walk on its deck ──
 o(id='bridge_site', name='Bridge (anchor)', unseen=True, across=-260, distance=P, elevation=30)
@@ -64,7 +64,7 @@ o(id='hooves', name='Snow from under the hooves', particles={'kind': 'puff', 'at
 o(id='platform', name='Platform', plane=True, across=226, distance=18.4, elevation=0.5, width=60, depth=4, walk=True)
 o(id='platform_edge', name='Platform edge', across=226, distance=16.4, facing=180, box=[-30.1, -0.56, 30.1, 0.05])
 o(id='depot', name='Station', across=186, distance=14.5, facing=180, height=6, box=[-5.6, -6.6, 5.6, 0.1])
-o(id='depot_side', name='Station, side', across=191.4, distance=14.5, facing=90, box=[-0.1, -4.6, 5.8, 0.1])
+o(id='depot_side', name='Station, side', across=191.4, distance=14.5, facing=90, box=[-0.3, -7.2, 5.9, 0.1])
 o(id='depot_roof', name='Station roof', plane=True, across=186, distance=15.8, elevation=5.3, width=11.8, depth=3.6, tilt=32)
 o(id='lamp', name='Lamp on the platform', across=221.2, distance=17.0, elevation=0.5, height=3.6, box=[-0.6, -4.0, 0.6, 0.05])
 o(id='tank', name='Water tank', across=166, distance=15.5, box=[-3.2, -9.6, 3.6, 0.1])
@@ -84,7 +84,7 @@ o(id='sail', name='Sail', on='sledge', across=1.0, elevation=0.5, facing=110, tr
 o(id='sheet_rope', name='Sheet', on='sledge', facing=180, box=[-6, -6, 6, 1])
 o(id='runner_spray', name='Snow from under the runners', particles={'kind': 'puff', 'at': {'on': 'sledge', 'at': [2.4, -1.1, 0.1]}, 'source': [0.6, 2.4, 0.1],
   'amount': 'sl_speed', 'rate': 50, 'color': '#f2f5f8', 'size': [0.3, 1.8], 'life': [0.6, 1.4], 'direction': [-1, 0, 0.4], 'speed': [3, 8], 'wind': 1.2})
-o(id='ridge', name='Snow ridge', across=400, distance=11.4, box=[-5, -2.0, 5, 0.2], place={'across': 'ridge_x'})
+o(id='ridge', name='Snow ridge', across=400, distance=11.4, box=[-5, -2.7, 5, 0.2], place={'across': 'ridge_x'})
 o(id='wolves', name='Wolves', across=-400, distance=40, box=[-12, -1.4, 12, 0.2], place={'across': 'wolves_x'})
 o(id='omaha_far', name="Omaha's smoke in the distance", particles={'kind': 'smoke', 'at': [2200, 2400, 0], 'source': [260, 60, 0], 'amount': 'omaha_near', 'rate': 2,
   'size': [30, 160], 'life': [30, 40], 'color': '#a3a8b0', 'speed': [4, 6], 'opacity': 0.5, 'wind': 1, 'gravity': -0.02})
@@ -113,7 +113,7 @@ lights = [
   {'id': 'sun', 'from': [-118, 15], 'color': '#fff0dc', 'strength': 1.35},
   {'id': 'dawn_sun', 'from': [72, 5], 'color': '#ffb482', 'strength': 1.2, 'on': 'dawn'},
   {'id': 'moon', 'from': 'sky#moon', 'color': '#b8c8f0', 'strength': 0.9, 'on': 'night'},
-  {'id': 'platform_lamp', 'of': 'lamp#flame', 'color': '#ffc27a', 'strength': 2.4, 'reach': 10, 'on': 'lamps', 'flicker': 0.12},
+  {'id': 'platform_lamp', 'of': 'lamp#flame', 'color': '#ffa070', 'strength': 1.6, 'reach': 10, 'on': 'lamps', 'flicker': 0.12},
   {'id': 'depot_window', 'of': 'depot#window', 'color': '#ffc884', 'strength': 1.2, 'reach': 7, 'on': 'lamps'},
   {'id': 'headlamp', 'of': 'loco_side#lamp', 'color': '#ffd8a0', 'strength': 1.6, 'reach': 16, 'on': 'lamps'},
   {'id': 'car_windows', 'of': 'cars_lit#lit', 'color': '#ffcc8a', 'strength': 1.0, 'reach': 8, 'on': 'lamps'},
@@ -164,6 +164,7 @@ states = {
   'wind_r': R(0, 1, "led by the scene (by wind): the wind from the sledge's right — the near side, blowing away"),
   'drift': R(0, 1, '«The sail»: a snow ridge ahead — 0 none (or far), 1 right at the bow; falling back to 0 it passes behind'),
   'ridge_x': N('led by the scene: where the snow ridge is'),
+  'ridge_h': R(0, 1, 'led by the scene: how far the snow ridge has risen out of the snow'),
   'wolves': R(0, 1, '«The sail»: wolves loping at the edge of the plain — 0 none, 1 close'),
   'wolves_x': N('led by the scene: where the wolves are'),
   'omaha_near': R(0, 1, "led by the scene: Omaha's smoke over the horizon (by sledge)"),
@@ -181,7 +182,7 @@ state = {
   'riders': 0, 'riders_x': 0, 'riders_d': 400, 'firing': 0, 'shots1': 0, 'shots2': 0, 'shots3': 0, 'faces': 0,
   'pp_car': 0, 'swing': 0.6, 'swing_at': 0, 'uncouple': 0, 'stop_at': 0, 'snow_on_aouda': 0, 'fogg_went': 1, 'fogg_on_train': 0, 'omaha_train': 1,
   'sl_x': 266, 'sl_d': 13.2, 'sail_up': 0, 'sail_face': 110, 'sledge': 0, 'sl_speed': 0, 'sheet': 0.6, 'wind': 0.45, 'wind_l': 0, 'wind_r': 0.45,
-  'drift': 0, 'ridge_x': 400, 'wolves': 0, 'wolves_x': -400, 'omaha_near': 0,
+  'drift': 0, 'ridge_x': 400, 'ridge_h': 0, 'wolves': 0, 'wolves_x': -400, 'omaha_near': 0,
   'sl_fogg': 1, 'sl_aouda': 1, 'sl_pp': 1, 'sl_fix': 1, 'with_aouda': 0, 'with_fix': 0, 'fix_bruise': 0, 'aouda_dress': 0,
   'beat': None, 'beat_next': None, 'camera_x': -310, 'camera_z': -42,
 }

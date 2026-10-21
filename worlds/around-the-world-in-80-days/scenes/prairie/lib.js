@@ -731,7 +731,7 @@ function aoudaWear(K, dress, snow) {
   for (const k of ['top', 'garment', 'hair']) if (own[k]) colors[k] = css(mixc(own[k], white, (k === 'hair' ? 0.35 : 0.55) * step));
   return { ...(base ?? {}), colors };
 }
-const CAM0 = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_look: 0, camera_roll: 0 };
+const CAM0 = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_pitch: 0, camera_look: 0, camera_roll: 0 };
 // the light of the day's moments
 const LIGHT = {
   day: { night: 0, dawn: 0, snowing: 0, lamps: 0, town: 'kearney' },
@@ -743,11 +743,11 @@ const LIGHT = {
 const TRAIN = (x, more = {}) => ({ train_x: x, cars_x: x - plan.gap, speed: 0, steam: 0.5, uncouple: 0, bridge_down: 0, bridge_splash: 0, shake: 0,
   pp_car: 0, swing_at: 0, riders: 0, riders_x: 0, riders_d: 400, firing: 0, faces: 0, stop_at: 0, gate: 0, ...more });
 // the sledge out of the way, its sail furled, the minigame's keys at rest
-const SLEDGE_AWAY = { sl_x: 266, sl_d: 13.2, sail_up: 0, sail_face: 180, sl_speed: 0, sledge: 0, sheet: 0.6, wind: 0.45, drift: 0, ridge_x: 400, wolves: 0, wolves_x: -400, omaha_near: 0 };
+const SLEDGE_AWAY = { sl_x: 266, sl_d: 13.2, sail_up: 0, sail_face: 180, sl_speed: 0, sledge: 0, sheet: 0.6, wind: 0.45, drift: 0, ridge_x: 400, ridge_h: 0, wolves: 0, wolves_x: -400, omaha_near: 0 };
 // the train standing at the station (the cars along the platform, the engine past its end)
 const AT_STATION = 256;
 // the cars' world place along the line → where the camera stands to watch Passepartout under them (at pp_car)
-const underCam = (carsX, pp) => carsX + ppX(pp) - 3.4;
+const underCam = (carsX, pp) => carsX + ppX(pp) + 3;
 
 function film(scene) {
   const K = scene.kit.cast;
@@ -786,12 +786,12 @@ function film(scene) {
     driver_here: true, driver_on: 'cab_floor#driver', driver_turn: 90, driver_look: { on: 'loco', at: [80, 0, 2.5] },
     passepartout_here: true, passepartout_on: 'rear_floor#pp', passepartout_turn: 170, passepartout_look: 'riders', passepartout_mood: 'surprised',
   });
-  // under the cars: Passepartout on his back by the chains, the camera low by the wheels, looking along the cars forward
+  // under the cars: Passepartout on his back by the chains, the camera low beside the line, the next chain ahead in view
   const UNDER = () => ({
     ...RUN(), riders: 0, firing: 0, faces: 0,
     passepartout_on: 'chain#pp', passepartout_do: 'lie_limp', passepartout_turn: 90, passepartout_mood: 'angry',
     passepartout_look: 'chain#c1', passepartout_reach: { r: 'chain#hand_r', l: 'chain#hand_l' },
-    camera_x: underCam(-plan.gap, 0), camera_z: 19.2, camera_h: -1.2, camera_yaw: 58,
+    camera_x: underCam(-plan.gap, 0), camera_z: 15, camera_h: -1.3,
   });
   // the station, the cars at rest by the platform (no engine)
   const PLATFORM = () => ({ ...LIGHT.day, ...CAM0, ...NOBODY(), ...TRAIN(3000, { cars_x: restAt(), uncouple: 1, gate: 1, steam: 0 }), ...SLEDGE_AWAY });
@@ -801,7 +801,7 @@ function film(scene) {
   const COLUMN_FROM = { fogg: [193.0, 19.6], s1: [191.6, 18.6], s2: [194.4, 18.4], s3: [191.4, 20.8], s4: [194.2, 21.0], s5: [192.6, 22.2] };
   const COLUMN_WAY = [-12, 30];
   // the platform's west end, where Aouda and Fix wait
-  const WEST_END = { aouda: [197.5, 18.0], fix: [199.6, 18.8] };
+  const WEST_END = { aouda: [200.6, 18.0], fix: [202.6, 18.8] };
   // the sledge: who sits where on it (the sledge's metres: along it, across it, up), Mudge standing at the stern
   const SEATS = [['fogg', 'sl_fogg', [0.2, -0.45]], ['aouda', 'sl_aouda', [-0.4, 0.45]], ['passepartout', 'sl_pp', [-1.1, -0.45]], ['fix', 'sl_fix', [-1.7, 0.45]]];
   const SLEDGE = (x, d) => {
@@ -824,11 +824,11 @@ function film(scene) {
     // ---- The train stands before the bridge; its truss has cracked. Passepartout argues with the driver at the
     // engine; Fogg, Aouda, Fix by the first car. Under the choice (driver#head · passepartout#head).
     bridge_stop: {
-      from: () => ({ ...STOP(), camera_x: -300, camera_z: -46 }),
+      from: () => ({ ...STOP(), camera_x: -300, camera_z: -16 }),
       run: async s => {
         const pp = s.person('passepartout'), driver = s.person('driver');
         await s.wait(2.4);
-        const two = s.shot({ ...STOP(), camera_target: 'passepartout', camera_shot: 0.34, camera_frame: [0.62, 0.5] });
+        const two = s.shot({ ...STOP(), camera_target: 'passepartout', camera_shot: 0.45, camera_frame: [0.6, 0.5] });
         await s.until(() => two.ready);
         two.cut();
         await s.wait(0.6);
@@ -858,8 +858,8 @@ function film(scene) {
         // (gathering speed: 27 m in 3 s, to 18 m/s)
         const off = drive(s, -299, { over: 3, ease: 'in' });
         await s.wait(1.6);
-        // the bridge from the east rim, the gorge under it
-        const rim = s.shot({ camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: -214, camera_z: -30, camera_yaw: -42 });
+        // the bridge from the river below it, looking up at the trestle against the sky
+        const rim = s.shot({ camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: -262, camera_z: -6, camera_pitch: 28 });
         await s.until(() => rim.ready);
         rim.cut();
         s.move('shake', 0.8, { over: 1.5 });
@@ -878,17 +878,17 @@ function film(scene) {
     // bridge creaks and holds.
     bridge_walk: {
       from: () => ({
-        ...LIGHT.day, snowing: 0.35, ...CAM0, ...NOBODY(), ...TRAIN(-312, { shake: 0.06, steam: 0.6 }), ...SLEDGE_AWAY,
+        ...LIGHT.day, snowing: 0.35, ...CAM0, ...NOBODY(), ...TRAIN(-318, { shake: 0.06, steam: 0.6 }), ...SLEDGE_AWAY,
         driver_here: true, driver_on: 'cab_floor#driver', driver_turn: 90,
-        ...at('passepartout', -281.0, 21.0, 90, { gait: 'pp_walk' }),
-        ...aouda(-283.2, 21.5, 90),
-        ...fogg(-284.8, 20.8, 90, { gait: 'fogg_walk' }),
-        ...fix(-287.0, 21.4, 90),
-        camera_x: -300, camera_z: 4, camera_yaw: 42,
+        ...at('passepartout', -289.0, 21.0, 90, { gait: 'pp_walk' }),
+        ...aouda(-291.2, 21.5, 90),
+        ...fogg(-292.8, 20.8, 90, { gait: 'fogg_walk' }),
+        ...fix(-295.0, 21.4, 90),
+        camera_x: -297, camera_z: 9,
       }),
       run: async s => {
         const walk = (id, to) => (s.get(`${id}_here`) ? s.person(id).walk(to) : null);
-        drive(s, -306, { over: 4, ease: 'linear' });
+        drive(s, -313, { over: 4, ease: 'linear' });
         walk('passepartout', [[-268, 20.8]]);
         walk('aouda', [[-270, 21.4]]);
         walk('fogg', [[-271.8, 20.8]]);
@@ -897,7 +897,7 @@ function film(scene) {
         // from the east rim: they come on over the last spans
         const B = {
           ...at('passepartout', -232.5, 20.8, 90, { gait: 'pp_walk' }), ...aouda(-234.5, 21.4, 90), ...fogg(-236.0, 20.8, 90, { gait: 'fogg_walk' }), ...fix(-238.0, 21.4, 90),
-          train_x: -302, cars_x: -302 - plan.gap, camera_x: -214, camera_z: 2, camera_yaw: -46,
+          train_x: -302, cars_x: -302 - plan.gap, camera_x: -230, camera_z: 10,
         };
         const rim = s.shot(B);
         await s.until(() => rim.ready);
@@ -918,7 +918,7 @@ function film(scene) {
     // ---- The Sioux: riders gallop along the train, snow from under the hooves, puffs of smoke, faces at the windows;
     // the train flies on; the driver falls in the cab; Passepartout on the last car's platform.
     attack: {
-      from: () => ({ ...RUN(), camera_x: -14, camera_z: -26 }),
+      from: () => ({ ...RUN(), camera_x: -16, camera_z: -3 }),
       run: async s => {
         s.move('riders_x', -8, { over: 9, ease: 'inOut' });
         await s.wait(3.2);
@@ -956,7 +956,8 @@ function film(scene) {
     stop: {
       from: () => {
         const F = restAt();
-        return { ...PLATFORM(), cars_x: F - 80, gate: 0, riders: 1, riders_x: F - 110, riders_d: 110, camera_x: F - 34, camera_z: -30 };
+        return { ...PLATFORM(), cars_x: F - 80, gate: 0, riders: 1, riders_x: F - 110, riders_d: 110, camera_x: F - 45, camera_z: -6,
+          ...Object.fromEntries(SOLDIERS.flatMap((id, i) => Object.entries(soldier(id, F - 80 + i * 1.5, 46 + (i % 2) * 2, 150, { here: false })))) };
       },
       run: async s => {
         const F = restAt();
@@ -968,10 +969,6 @@ function film(scene) {
         s.move('gate', 1, { over: 1.2 });
         await s.wait(0.6);
         SOLDIERS.forEach((id, i) => {
-          s.set(`${id}_a`, F - 80 + i * 1.5);
-          s.set(`${id}_d`, 46 + (i % 2) * 2);
-          s.set(`${id}_with`, ['rifle']);
-          s.set(`${id}_turn`, 150);
           s.set(`${id}_here`, true);
           s.person(id).walk([[F - 52 + i * 1.6, 25.6 + (i % 2) * 0.9]], { gait: 'run' });
         });
@@ -1008,7 +1005,7 @@ function film(scene) {
         ...Object.fromEntries(SOLDIERS.flatMap(id => Object.entries(soldier(id, ...COLUMN_FROM[id], 330)))),
         ...aouda(...WEST_END.aouda, 320, { look: 'fogg#head' }),
         ...fix(...WEST_END.fix, 315, { look: 'fogg#head' }),
-        camera_x: 206, camera_z: 4, camera_yaw: -35,
+        camera_x: 204, camera_z: 2,
       }),
       run: async s => {
         // (they walk on into the white after the beat: its end is a living pose of a column going away)
@@ -1045,7 +1042,7 @@ function film(scene) {
         ...Object.fromEntries(SOLDIERS.flatMap((id, i) => Object.entries(soldier(id, 182 + i * 1.7, 50 + (i % 2) * 1.6, 165)))),
         ...aouda(...WEST_END.aouda, 330, { look: [188, 40, 1.7] }),
         ...fix(...WEST_END.fix, 325, { look: [188, 40, 1.7] }),
-        camera_x: 206, camera_z: 6, camera_yaw: -30,
+        camera_x: 204, camera_z: 4,
       }),
       run: async s => {
         const go = (id, p) => (s.get(`${id}_here`) ? s.person(id).walk([p]) : null);
@@ -1058,12 +1055,12 @@ function film(scene) {
           ...at('passepartout', 194.6, 26.4, 165, { gait: 'pp_walk', mood: 'smile' }),
           ...(yes('fogg_went') ? fogg(196.4, 27.0, 165, { gait: 'fogg_walk' }) : {}),
           ...aouda(...WEST_END.aouda, 20, { look: 'passepartout#head' }),
-          camera_x: 0, camera_z: 0, camera_yaw: 0, camera_target: 'passepartout', camera_shot: 0.38, camera_frame: [0.42, 0.45], camera_glide: 0,
+          camera_x: 0, camera_z: 0, camera_target: 'passepartout', camera_shot: 0.38, camera_frame: [0.36, 0.45], camera_glide: 0,
         });
         await s.until(() => near.ready);
         near.cut();
-        const pp = go('passepartout', [197.0, 21.0]);
-        go('fogg', [198.6, 21.6]);
+        const pp = go('passepartout', [197.4, 20.8]);
+        go('fogg', [195.6, 21.8]);
         await s.wait(2.2);
         s.tell('return:pp');
         if (s.get('fix_here')) s.person('fix').look('passepartout#head');
@@ -1079,10 +1076,10 @@ function film(scene) {
         const on = yes('fogg_on_train');
         return {
           ...LIGHT.day, gate: 1, ...CAM0, ...NOBODY(), ...TRAIN(AT_STATION, { steam: 0.9 }), ...SLEDGE_AWAY,
-          ...(on ? { ...fogg(AT_STATION - 48, 22, 270, { on: 'rear_floor#fogg', look: [190, 18, 1.7] }), camera_x: 212, camera_z: 9 }
+          ...(on ? { ...fogg(AT_STATION - 48, 22, 270, { on: 'rear_floor#fogg', look: [190, 18, 1.7] }), camera_x: 210, camera_z: 13 }
             : { ...fogg(215.0, 18.0, 80, { look: 'cars_side#middle' }), ...at('passepartout', 213.0, 18.6, 75, { look: 'cars_side#middle' }),
               ...aouda(213.6, 17.4, 70, { look: 'cars_side#middle' }), ...fix(216.6, 17.6, 85, { look: 'cars_side#middle' }),
-              camera_x: 208, camera_z: 4, camera_yaw: 20 }),
+              camera_x: 214, camera_z: 9 }),
         };
       },
       run: async s => {
@@ -1120,7 +1117,7 @@ function film(scene) {
       from: () => ({
         ...LIGHT.day, ...CAM0, ...NOBODY(), ...TRAIN(3000, { cars_x: -3000 }), ...SLEDGE_AWAY, ...SLEDGE(0, 13.2),
         sl_x: 0, sail_up: 1, sl_speed: 0.55, sheet: 0.6, wind: 0.45, sail_face: sailFace(0.6, 0.45),
-        camera_x: -6, camera_z: 5, camera_h: 0.6, camera_yaw: 50,
+        camera_x: 5, camera_z: 1.5, camera_h: 0.6,
       }),
       run: async s => {
         await s.wait(1.5);
@@ -1133,10 +1130,10 @@ function film(scene) {
       from: () => {
         const alone = !yes('sl_fogg');
         const v = { ...LIGHT.day, town: 'omaha', gate: 1, ...CAM0, ...NOBODY(), ...TRAIN(AT_STATION, { steam: 0.9 }), ...SLEDGE_AWAY,
-          sl_x: 184, sl_d: 12.6, sail_up: 0.15, sail_face: 180,
-          mudge_here: true, mudge_on: 'sledge_deck#mudge', mudge_turn: 90, mudge_a: 184, mudge_d: 12.6, mudge_look: 'passepartout#head',
-          camera_x: 197, camera_z: 4 };
-        if (alone) return { ...v, ...fogg(AT_STATION - 48, 22, 250, { on: 'rear_floor#fogg', look: 'passepartout#head' }), ...at('passepartout', 187.0, 14.4, 75, { gait: 'run' }) };
+          sl_x: 194, sl_d: 12.6, sail_up: 0.15, sail_face: 180,
+          mudge_here: true, mudge_on: 'sledge_deck#mudge', mudge_turn: 90, mudge_a: 194, mudge_d: 12.6, mudge_look: 'passepartout#head',
+          camera_x: 203, camera_z: 10 };
+        if (alone) return { ...v, ...fogg(AT_STATION - 48, 22, 250, { on: 'rear_floor#fogg', look: 'passepartout#head' }), ...at('passepartout', 197.0, 14.2, 75, { gait: 'run' }) };
         return { ...v, ...fogg(206.6, 19.5, 270, { look: 'aouda#head' }), ...at('passepartout', 203.2, 18.8, 80, { look: 'cars_side#rear' }),
           ...aouda(205.4, 19.0, 90, { look: 'fogg#head' }), ...fix(204.2, 19.6, 85, { look: 'cars_side#rear' }) };
       },
@@ -1158,7 +1155,7 @@ function film(scene) {
         }
         const RP = [AT_STATION - plan.gap - 47.6, 19.6];
         if (yes('omaha_train')) {
-          await pp.walk([[196, 17.6], RP]);
+          await pp.walk([[202, 17.0], RP]);
           pp.turn(10);
           pp.look('fogg#head');
           fogg.reach({ r: 'passepartout#hand_r' });
