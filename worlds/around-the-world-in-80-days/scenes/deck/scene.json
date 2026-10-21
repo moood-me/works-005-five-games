@@ -152,7 +152,6 @@
   "porthole": 0,
   "cell_close": 0,
   "cell_time": 0,
-  "release": null,
   "door": 0,
   "door_f": 90,
   "leaf": 0,
@@ -369,14 +368,6 @@
    ],
    "smooth": true,
    "means": "the bars' shadow creeps over the floor and the bench: 0 — morning, 1 — three hours later (led by the game)"
-  },
-  "release": {
-   "values": [
-    null,
-    "down",
-    "hand"
-   ],
-   "means": "how the beat release ends, if set before it: down — Fogg strikes, Fix falls; hand — hand in hand; null — the beat ends at release:in"
   },
   "door": {
    "range": [

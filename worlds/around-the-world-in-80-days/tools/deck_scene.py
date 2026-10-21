@@ -103,7 +103,7 @@ for pid, ru, who in PEOPLE:
                     'place': {'across': f'{pid}_a', 'distance': f'{pid}_d'}, 'shadow': True})
 
 state = {'beat': None, 'beat_next': None, 'ship': 'mongolia', 'port': 'suez', 'night': 0, 'dawn': 0, 'fog': 0, 'smoke': 1, 'speed': 0, 'sails': 0,
-         'fire': 0, 'flare': 0, 'flare_glow': 0, 'speedy_grief': 0, 'porthole': 0, 'cell_close': 0, 'cell_time': 0, 'release': None,
+         'fire': 0, 'flare': 0, 'flare_glow': 0, 'speedy_grief': 0, 'porthole': 0, 'cell_close': 0, 'cell_time': 0,
          'door': 0, 'door_f': 90, 'leaf': 0, 'with_aouda': 0, 'with_pp': 1, 'with_fix': 0, 'fix_bruise': 0, 'pp_wings': 0, 'aouda_dress': 0}
 states = {
     'beat': {'type': 'string', 'means': 'the beat of the film the game plays (the module beats; notes.md lists them)'},
@@ -123,7 +123,6 @@ states = {
     'porthole': {'range': [0, 1], 'smooth': True, 'means': "insert: Speedy at his cabin's porthole close up, red beard, roaring (0 — shut)"},
     'cell_close': {'range': [0, 1], 'smooth': True, 'means': "insert: the bench of the custom-house cell, Fogg's watch open on it, his hands on his knees (0 — shut)"},
     'cell_time': {'range': [0, 1], 'smooth': True, 'means': "the bars' shadow creeps over the floor and the bench: 0 — morning, 1 — three hours later (led by the game)"},
-    'release': {'values': [None, 'down', 'hand'], 'means': 'how the beat release ends, if set before it: down — Fogg strikes, Fix falls; hand — hand in hand; null — the beat ends at release:in'},
     'door': {'range': [0, 1], 'smooth': True, 'means': "the cell's door: 0 — locked, 1 — flung open"},
     'door_f': {'range': [0, 180], 'smooth': True, 'means': "the cell door's turn, degrees (led by the scene by door; the game is not to touch it)"},
     'leaf': {'range': [0, 1], 'smooth': True, 'means': "the calendar's leaf on the deckhouse: 0 — «Wednesday», 1 — turned over, under it «Wednesday» again"},

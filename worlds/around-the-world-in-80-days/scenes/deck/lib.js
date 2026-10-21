@@ -833,8 +833,8 @@ function film(scene) {
       from: () => ({ ...CELL(), cell_close: 1 }),
       run: async s => { await s.wait(1); },
     },
-    // ---- The insert closes on the cell itself; Fix bursts in, out of breath (then, if the game has set `release`, what
-    // follows).
+    // ---- The insert closes on the cell itself; Fix bursts in, out of breath, and stands before Fogg: the two face to
+    // face, held — the player decides what Fogg does (fix_down or fix_hand follow it).
     release: {
       after: 'cell',
       from: CELL,
@@ -851,13 +851,13 @@ function film(scene) {
         s.camera({ target: 'cell_two', shot: 1.3, frame: [0.5, 0.42], glide: 1.6 });
         s.tell('release:in');
         await s.wait(2.2);
-        const how = scene.get('release');
-        if (how === 'down') await fixDown(s);
-        else if (how === 'hand') await fixHand(s);
       },
     },
+    // ---- What Fogg does, after release: he rises and strikes him, Fix goes down — or holds out his hand
+    fix_down: { after: 'release', from: CELL, run: s => fixDown(s) },
+    fix_hand: { after: 'release', from: CELL, run: s => fixHand(s) },
   };
-  // the release's outcome (the key `release`): Fogg rises and strikes him, Fix goes down —
+  // Fogg rises and strikes him, Fix goes down —
   async function fixDown(s) {
     const fix = s.person('fix'), fogg = s.person('fogg');
     fogg.on(null);
@@ -922,7 +922,7 @@ function showcaseOnly(scene) {
     },
   };
 }
-const SHOWCASE = ['suez', 'bombay', 'rail_night', 'plaid', 'writes', 'pacific', 'punch', 'calendar', 'new_york', 'mutiny', 'coal', 'burn_show', 'queenstown', 'sails_only', 'liverpool', 'cell_show', 'release'];
+const SHOWCASE = ['suez', 'bombay', 'rail_night', 'plaid', 'writes', 'pacific', 'punch', 'calendar', 'new_york', 'mutiny', 'coal', 'burn_show', 'queenstown', 'sails_only', 'liverpool', 'cell_show', 'release', 'fix_hand'];
 
 return {
   plan, SHIPS, PORTS, shipOf, portOf, quayed, COLOURS, colours, PARTS, PART_NAMES, partAt, partLook, partAnimate,
