@@ -47,14 +47,14 @@ the beats in node and prints where the people and the points stand in the frame.
 | gone | — | 12 | from the dark; the two run up the stairs (`gone:run`), the camera turns with them from the stairs to under the lamp; the train moves off at 0.3 m/s and crawls on the same way while the game waits (≈ 4 min of it); they stop (`gone:stop`). Choice pose: `train#tail` x ≈ −0.36 |
 | wave | gone | 12 | he steps to the edge and waves; the train gathers way; its tail out of the frame — `wave:dark` |
 | stand | wave | 12 | the camera comes to a medium shot in three quarters under the lamp: Silva's hand to his nape, smiling; Busygin hugging himself (`cold`), tired — `stand:cold` |
-| bench | — | 22 | late dusk; Vasenka on the bench, the rucksack on his knees, angry; Busygin up the stairs, along, sits by him — `bench:sit`; both in three quarters under the lamp |
+| bench | — | 9 | late dusk; Vasenka on the bench, the rucksack on his knees, angry; Busygin up the stairs and off along the platform; at 2.5 s a cut (made ready) to the bench, he a step from it — he sits by him — `bench:sit` (≈ 7 s); both in three quarters under the lamp |
 | strap | bench | 15 | the train comes up and opens (`strap:open`); they get up, he reaches for the rucksack; the insert `strap` opens |
 | bench_back | strap | 17 | the insert shut, the doors shut, the train goes; they sit again (`torn` 1: the part with the knot) — `bench_back:sat`; after L71 they get up and go to the stairs |
 | last | — | 22 (16 with `late_run` 1) | night; he runs up and stands by the second car's front doorway; the train comes up and opens (`late_run` 0) or stands open as he runs up — `last:open` at once; Silva in the vestibule (`silva_door`) turns to him; who came comes up the stairs — the father (`father_came`), Nina (`nina_came`: ahead of him when `nina_is` knows, first when he did not come), Vasenka (`vasya_came`: without his rucksack when `vasya_end` home, first when no one else came) — `last:came` with the cut to the first one's face (a medium shot, three quarters) and back; he turns to them. No one: the camera goes along the platform (shot “B”) to the window far below — `last:came`. Choice pose: `train#door` x −0.35, the first who came x ≈ 0.4 (or `far_window`) |
 | stays | last | 21 | the doors shut (Silva's figure in its window: `silva_window`), the train goes — `stays:gone`; they come to meet him; no one — he goes to the stairs' top, looking at the window far below |
 | boards | last | 13 (5 without the snuffbox) | `box_hand` 1 and the father came: the father at the door gives him the snuffbox (`give` / `take`, part `box_held`) — `boards:box`; he goes in, the doors shut — `boards:in` |
 | glass | — | 3 | the camera in the car at the frosted window (`wipe` 0): the lamp over the stairs and who came through it — `glass:ready` |
-| away | glass | 16 | the train moves off; the platform goes away to the right of the frame; the father waves (`away:wave`; without him — when the stairs' top passes the middle of the frame); the window far below in the middle of the frame (`away:window`) |
+| away | glass | 9 | the train moves off (to `train` 0.6 over 8.5 s, gathering way); the platform goes away to the right of the frame; the father waves (`away:wave`; without him — when the stairs' top passes the middle of the frame); the window far below in the middle of the frame (`away:window`, ≈ 4 s) |
 | dawn | — | 24 (17 with `vasya_end` home) | grey dawn, snow on the bench; taiga — Vasenka on the bench, the first train comes (`dawn:pass`), opens (`dawn:open`), he gets on at the door before the bench, it shuts (`dawn:shut`) and goes; home — the platform empty, the train goes by (`dawn:pass`) |
 
 ## What is not as scenes.md says
@@ -78,14 +78,14 @@ the beats in node and prints where the people and the points stand in the frame.
   "gone": {"after": [], "tells": ["gone:run", "gone:stop"], "seconds": 12, "show": false},
   "wave": {"after": ["gone"], "tells": ["wave:dark"], "seconds": 12, "show": false},
   "stand": {"after": ["wave"], "tells": ["stand:cold"], "seconds": 12, "show": false},
-  "bench": {"after": [], "tells": ["bench:sit"], "seconds": 22, "show": false},
+  "bench": {"after": [], "tells": ["bench:sit"], "seconds": 9, "show": false},
   "strap": {"after": ["bench"], "tells": ["strap:open"], "seconds": 15, "show": false},
   "bench_back": {"after": ["strap"], "tells": ["bench_back:sat"], "seconds": 17, "show": false},
   "last": {"after": [], "tells": ["last:open", "last:came"], "seconds": 22, "show": false},
   "stays": {"after": ["last"], "tells": ["stays:gone"], "seconds": 21, "show": false},
   "boards": {"after": ["last"], "tells": ["boards:box", "boards:in"], "seconds": 13, "show": false},
   "glass": {"after": [], "tells": ["glass:ready"], "seconds": 3, "show": false},
-  "away": {"after": ["glass"], "tells": ["away:wave", "away:window"], "seconds": 16, "show": false},
+  "away": {"after": ["glass"], "tells": ["away:wave", "away:window"], "seconds": 9, "show": false},
   "dawn": {"after": [], "tells": ["dawn:pass", "dawn:open", "dawn:shut"], "seconds": 24, "show": false}
 },
 "points": ["strap#grip", "train_window#pane", "busygin", "silva", "sarafanov", "nina", "vasenka"],

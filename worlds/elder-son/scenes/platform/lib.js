@@ -221,21 +221,25 @@ function film(scene) {
         await s.wait(7.2);
       },
     },
-    // late dusk, no snow: Vasenka on the bench under the lamp, his rucksack on his knees; Busygin comes up the stairs,
-    // walks along and sits by him. Both in three quarters under the lamp: Vasenka angry, not looking at him
+    // late dusk, no snow: Vasenka on the bench under the lamp, his rucksack on his knees; Busygin comes up the stairs and
+    // sets off along the platform; a cut (made ready): at the bench, he sits by him. Both in three quarters under the
+    // lamp: Vasenka angry, not looking at him. The walk along is left out: `bench:sit` at ≈ 7 s
     bench: {
       from: () => base(0.84, 0, { ...CAM.bench0,
         ...seated('vasenka', P.SEAT_V, 'seated_bag', { vasenka_with: ['rucksack_lap'], vasenka_mood: 'angry', vasenka_look: [-4, 4, 0.8] }),
         ...at('busygin', P.MID_B, 270, { busygin_mood: 'thinking' }) }),
       run: async s => {
         const b = s.person('busygin');
-        glide(s, CAM.bench, 13);
-        await b.walk([P.TOP_B, [6, 7.0], [-0.6, 7.2]]);
-        b.look('vasenka');
+        const near = s.shot({ ...CAM.bench, ...at('busygin', [0.2, 8.5], 265, { busygin_mood: 'thinking', busygin_look: 'vasenka' }) });
+        const w = b.walk([P.TOP_B, [6, 7.0]]);
+        await s.wait(2.5);
+        await s.until(() => near.ready);
+        w.cancel();
+        near.cut();
         await sit(b, P.SEAT_B, 'seated');
         b.look(P.AHEAD);
         s.tell('bench:sit');
-        await s.wait(5.5);
+        await s.wait(4);
       },
     },
     // the train comes up from the left and stands, its doors open; Vasenka gets up with his rucksack, Busygin gets
@@ -452,7 +456,7 @@ function film(scene) {
       after: ['glass'],
       from: () => base(0.93, 0.5, { ...trainKeys(0), doors: 0, wipe: 0.6, ...CAM.glass, ...cameHere(true) }),
       run: async s => {
-        const go = s.move('train', 0.6, { over: 16, ease: 'in' });
+        const go = s.move('train', 0.6, { over: 8.5, ease: 'in' });
         // the father lifts his hand; without him — the moment the stairs' top passes the middle of the frame
         if (fatherCame()) {
           await s.wait(1.6);

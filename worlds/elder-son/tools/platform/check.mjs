@@ -70,7 +70,9 @@ function run(name, fn, init, party) {
         for (const q of points) { if (!q || q.some(v => !Number.isFinite(v))) warn.push(`${id} walk to ${q}`); len += Math.hypot(q[0] - p[0], q[1] - p[1]); p = q; }
         const end = points[points.length - 1], prev = points.length > 1 ? points[points.length - 2] : [st[`${id}_a`], st[`${id}_d`]];
         const a = action(len / (PACE[st[`${id}_gait`] ?? 'null'] ?? 1.3));
-        a.then(() => { st[`${id}_a`] = end[0]; st[`${id}_d`] = end[1]; if (Math.hypot(end[0] - prev[0], end[1] - prev[1]) > 1e-3) st[`${id}_turn`] = L.brg(prev, end); });
+        let cancelled = false;
+        a.cancel = () => { cancelled = true; };
+        a.then(() => { if (cancelled) return; st[`${id}_a`] = end[0]; st[`${id}_d`] = end[1]; if (Math.hypot(end[0] - prev[0], end[1] - prev[1]) > 1e-3) st[`${id}_turn`] = L.brg(prev, end); });
         return a;
       },
       go(m, o = {}) { const p = o.to || o.from; if (p) { st[`${id}_a`] = p[0]; st[`${id}_d`] = p[1]; } if (o.turn != null) st[`${id}_turn`] = o.turn; st[`${id}_do`] = m; return action(DUR[m] ?? 2.5); },
