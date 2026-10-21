@@ -54,7 +54,7 @@ const tulip = (g, x) => {
   g.closePath();
   g.fill();
 };
-const LAMPS = [[-1.5, 'sconce_l'], [1.5, 'sconce_r']];
+const LAMPS = [[-1.1, 'sconce_l'], [1.1, 'sconce_r']];
 for (const [x, name] of LAMPS) {
   g.fillStyle = brass;
   g.fillRect(x - 0.015, -1.62, 0.03, 0.12);

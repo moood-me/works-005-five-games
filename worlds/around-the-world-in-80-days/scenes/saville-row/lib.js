@@ -374,7 +374,8 @@ function ppMotion(e, room) {
   m.x = x;
   if (Math.abs(v) > 0.08) m.f = Math.sign(v);
   fig.x = x;
-  fig.scaleX = m.f ?? 1;
+  fig.scaleX = 1.15 * (m.f ?? 1);
+  fig.scaleY = 1.15;
   fig.y = -0.04 * Math.abs(Math.sin(e.t * 8.5));
 }
 // what flies into the bag (`fly_what`), round its middle, about half a metre: two shirts, three pairs of stockings, the
@@ -683,13 +684,13 @@ function cabMotion(e, dir, key) {
   const s = a * dir;
   const phi = (2 * Math.PI * s) / HORSE.stride;
   e.layer('wheel').rotate = a / HORSE.wheel.r;
-  const bob = amp * 0.025 * Math.cos(2 * phi);
+  const bob = amp * (0.025 + 0.04 * (key === 'cab_across' ? anim.clamp(e.state.cab_pace ?? 0, 0, 1) : 0)) * Math.cos(2 * phi);
   e.layer('body').y = bob;
   const head = e.layer('head');
   head.y = bob;
   // (the cab racing to the club, as fast as the game urges it — cab_pace: its horse throws its head the more)
   const pace = key === 'cab_across' ? anim.clamp(e.state.cab_pace ?? 0, 0, 1) : 0;
-  head.rotate = dir * amp * (0.035 + 0.05 * pace) * Math.sin(2 * phi);
+  head.rotate = dir * amp * (0.035 + 0.07 * pace) * Math.sin(2 * phi);
   e.layer('tail').y = bob;
   for (let i = 0; i < HORSE.legs.length; i++) {
     const [name, hip, knee, , off] = HORSE.legs[i];
@@ -718,12 +719,15 @@ const HALL = [DOOR, 22.6], SILL = [DOOR, 21.2], FOOT = [DOOR, 19.4], WALK_D = 18
 // on the steps, clear of the door's leaf: Fogg (on their left) and Aouda (on their right, a step lower); at their foot,
 // by the right cheek — Fix; under the lamp by the door, where it is lit
 const TOP_F = [DOOR - 0.05, 20.35], TOP_A = [DOOR + 0.55, 20.15], STEP_FIX = [DOOR + 1.2, 19.5], UNDER_LAMP = [-7.95, 19.3];
+// the proposal: the two side by side on the steps, a step apart, to turn to each other; Passepartout beside Fogg on the
+// Sunday, a step off
+const PROP_F = [DOOR - 0.3, 20.3], PROP_A = [DOOR + 0.4, 20.3], SUN_PP = [DOOR + 0.85, 20.25];
 // the race to the club (the beat cab): where the cab sets off and the club's door it draws up at (its across), the
 // camera a little ahead of it; Fogg's way from the cab up the club's steps
 const CAB = [-20, 51];
 const camX = a => anim.clamp(a + 2.5, -18, 56);
 const CLUB_RUN = [[49.6, 13.6], [52.6, 20], [53.4, 27.3], [53.4, 29.2]];
-const BELL = [DOOR + plan.door.bell[0], plan.front - 0.03, plan.door.bell[1]], LAMP = [-8.0, 19.05], BAG = 'bag#bag';
+const BELL = [DOOR + plan.door.bell[0], plan.front - 0.03, plan.door.bell[1]], LAMP = [-7.45, 18.9], BAG = 'bag#bag';
 // off along the street into the fog: right (toward the club), left
 const RIGHT = [16, 18.4], LEFT = [-24, 18.4];
 // the night as the film has it: fog, the rooms lit, the door shut; the camera the scene's own; the cabs out in the fog
@@ -855,8 +859,7 @@ function film(scene) {
         await f.turn(330);
         await after;
         s.set('camera_glide', 2);
-        s.set('camera_target', null);
-        s.set('camera_shot', null);
+        s.set('camera_shot', 0.55);
         await s.all(
           f.walk([[DOOR + 3, WALK_D - 0.2], RIGHT]),
           p.walk([[DOOR + 2.2, WALK_D + 0.5], [RIGHT[0] - 0.5, RIGHT[1] + 0.5]]),
@@ -926,7 +929,7 @@ function film(scene) {
     },
     // ---- Along Pall Mall to the club: a cab trots down the street to the Reform Club, the camera with it.
     to_club: {
-      from: () => ({ ...NIGHT, ...OFF, ...STREET(0.6), cab_across: -34 }),
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0.6), cab_across: -34, camera_z: 4 }),
       run: async s => {
         const cam = s.move('camera_x', 50, { over: 24, ease: 'inOut' });
         await s.path(['cab_across'], [[s.get('cab_across')], [47]], { speed: 3.8, ease: 'linear' });
@@ -980,22 +983,24 @@ function film(scene) {
     // ---- The epilogue, the evening: Fogg comes out onto the top step under the lamp by the door, Aouda after him. She
     // looks at him (her question), he turns to her (his answer); their hands. (The game says their lines.)
     proposal: {
-      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), night: 0.9, door: 1, camera_target: 'fogg', camera_shot: 0.55, camera_frame: [0.42, 0.4],
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), night: 0.8, door: 1, camera_target: 'fogg', camera_shot: 0.55, camera_frame: [0.4, 0.4],
         ...person('fogg', SILL, 180, { fogg_wear: null, fogg_gait: 'fogg_walk' }), ...person('aouda', HALL, 180, { aouda_wear: DRESS() }) }),
       run: async s => {
         const f = s.person('fogg'), a = s.person('aouda');
-        await f.walk([TOP_F]);
+        await f.walk([PROP_F]);
         await f.turn(160);
-        await a.walk([TOP_A]);
-        await a.turn(235);
+        await a.walk([PROP_A]);
+        await a.turn(240);
         a.look('fogg#head');
         await s.wait(0.6);
         s.tell('proposal:asks');
         await s.wait(3.4);
+        f.turn(105);
         f.look('aouda#head');
         await s.wait(0.3);
         s.tell('proposal:answers');
         await s.wait(1.8);
+        a.turn(265);
         f.reach({ l: 'aouda#hand_r' });
         a.reach({ r: 'fogg#hand_l' });
         await s.wait(0.8);
@@ -1025,7 +1030,7 @@ function film(scene) {
         if (has('with_pp')) {
           p.here(true);
           laughs.push(s.sequence(async q => {
-            await q.person('passepartout').walk([SILL, TOP_A]);
+            await q.person('passepartout').walk([SILL, SUN_PP]);
             await q.person('passepartout').turn(200);
             await q.person('passepartout').do('laugh');
           }));
@@ -1037,14 +1042,14 @@ function film(scene) {
     // ---- The ending «Lost — and won»: the evening, on the steps — Fogg and whoever is with him; the lamp by the door
     // not yet lit, and Passepartout (or Fogg himself) lights it.
     lost: {
-      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), door: 0.6, door_lamp: 0, camera_target: 'fogg', camera_shot: 0.42, camera_frame: [0.6, 0.5],
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), night: 0.8, door: 0.6, door_lamp: 0, camera_target: 'fogg', camera_shot: 0.42, camera_frame: [0.6, 0.5],
         ...person('fogg', TOP_F, 190, { fogg_wear: null, fogg_gait: 'fogg_walk' }),
         ...person('aouda', TOP_A, 205, { aouda_wear: DRESS(), aouda_here: has('with_aouda') }),
         ...person('fix', STEP_FIX, 215, { fix_here: has('with_fix') }),
         ...person('passepartout', SILL, 180, { ...PP, passepartout_here: has('with_pp') }) }),
       run: async s => {
         const id = has('with_pp') ? 'passepartout' : 'fogg', who = s.person(id);
-        await s.wait(0.8);
+        await s.wait(0.3);
         await who.walk([FOOT, UNDER_LAMP]);
         await who.turn(305);
         who.look('lamps#door_flame');
@@ -1075,7 +1080,7 @@ function film(scene) {
     // where it is, `cab_at`); the lamps of carriages come out of the fog toward it (`traffic`). At the club it draws up;
     // Fogg jumps out and runs up the club's steps.
     cab: {
-      from: () => ({ ...NIGHT, ...OFF, ...STREET(0.6), cab_across: CAB[0], cab_to: 0, cab_at: 0, cab_pace: 0, camera_x: camX(CAB[0]),
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0.6), cab_across: CAB[0], cab_to: 0, cab_at: 0, cab_pace: 0, camera_x: camX(CAB[0]), camera_z: 4,
         ...person('fogg', CLUB_RUN[0], 90, { ...FOGG, fogg_here: false, fogg_gait: 'run' }) }),
       run: async s => {
         await s.until(() => (s.get('cab_at') ?? 0) >= 0.98);

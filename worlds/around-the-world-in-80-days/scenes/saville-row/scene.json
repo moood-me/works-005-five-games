@@ -32,8 +32,8 @@
     ],
     "looks": {
       "night": {
-        "ambient": 0.42,
-        "ambientColor": "#5a6c9c",
+        "ambient": 0.55,
+        "ambientColor": "#6a7cac",
         "saturation": 0.8,
         "hazeColor": "#2c3442",
         "inside": 1

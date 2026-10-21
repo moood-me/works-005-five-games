@@ -125,7 +125,7 @@ function pieces() {
 const TOWNS = [
   ['london', -0.1, 51.5, 1, 1], ['suez', 32.5, 30, 1, 1], ['bombay', 72.8, 19, -1, -1], ['calcutta', 88.4, 22.6, 1, 1],
   ['hongkong', 114.2, 22.3, -1, 1], ['yokohama', 139.6, 35.4, 1, -1], ['sanfrancisco', 237.6, 37.8, -1, -1],
-  ['newyork', 286, 40.7, 1, -1], ['liverpool', 357, 53.4, -1, 1], ['london', 359.9, 51.5, 1, -1],
+  ['newyork', 286, 40.7, 1, -1], ['liverpool', 357, 53.4, 1, 1], ['london', 359.9, 51.5, 1, -1],
 ];
 
 // The chapters' points (the game hangs each chapter's page from its own): over the chapter's part of the way — the

@@ -155,35 +155,63 @@ function opening(g) {
   g.closePath();
 }
 
-// A sofa turned to the window, its back to you: deep red velvet, a rolled top.
-function sofa(g) {
-  const w = 0.55;
+// The compartment: two benches facing each other across the aisle, under the window between them (as a first-class
+// compartment has them), each against its partition. COMPARTMENT: the partitions' across (±wall), the benches' fronts
+// (±front), from the near end (near) to the window wall (far); the seat's top (seat).
+const COMPARTMENT = { wall: 1.18, front: 0.58, near: 1.2, far: 2.56, seat: 0.48 };
+// A partition seen from the aisle (a card facing it; x along it from the near end toward the window): walnut panels to
+// the ceiling, the bench's back of red velvet buttoned against it, a rolled top, the luggage rack's brass rail above.
+// side 1: the left one (its x runs away from us), −1: the right one (x runs toward us: painted mirrored).
+function partition(g, side = 1) {
+  const C = COMPARTMENT, len = C.far - C.near + 0.05;
+  g.scale(side, 1);
+  g.fillStyle = '#4a3020';
+  g.fillRect(-0.6, -2.8, len + 0.6, 2.8);
+  g.fillStyle = 'rgba(0,0,0,0.16)';
+  for (let x = -0.6; x < len; x += 0.45) g.fillRect(x, -2.8, 0.012, 2.8);
+  g.fillRect(-0.6, -1.92, len + 0.6, 0.02);
+  // the back of the bench: velvet from the seat to a rolled top, its buttons in rows
   g.fillStyle = '#6a2a30';
   g.beginPath();
-  g.moveTo(-w, 0);
-  g.lineTo(-w, -0.7);
-  g.quadraticCurveTo(-w, -0.8, -w + 0.1, -0.8);
-  g.lineTo(w - 0.1, -0.8);
-  g.quadraticCurveTo(w, -0.8, w, -0.7);
-  g.lineTo(w, 0);
+  g.moveTo(0, -C.seat);
+  g.lineTo(0, -1.18);
+  g.quadraticCurveTo(0, -1.26, 0.08, -1.26);
+  g.lineTo(len - 0.08, -1.26);
+  g.quadraticCurveTo(len, -1.26, len, -1.18);
+  g.lineTo(len, -C.seat);
   g.closePath();
   g.fill();
-  // the pleats of the back
-  g.fillStyle = 'rgba(0,0,0,0.18)';
-  for (let k = -1; k <= 1; k++) g.fillRect(k * 0.26 - 0.006, -0.64, 0.012, 0.56);
+  g.fillStyle = 'rgba(0,0,0,0.25)';
+  for (let r = 0; r < 2; r++) for (let x = 0.15 + r * 0.1; x < len - 0.1; x += 0.2) g.fillRect(x - 0.01, -0.8 - r * 0.22, 0.02, 0.02);
+  // the luggage rack's rail
+  g.fillStyle = '#b08a4a';
+  g.fillRect(0, -2.06, len, 0.025);
+  g.fillRect(0, -1.9, len, 0.015);
 }
-// A sofa's arm by the aisle, seen from the side (a card turned to the aisle, x from the sofa's back toward the window):
-// the same velvet, a rolled top a little lower than the back. side −1: turned the other way (the right sofa's).
-function sofaArm(g, side = 1) {
+// A bench's front, seen from the aisle (a card facing it; x along it as the partition's): the cushion's edge of velvet,
+// the walnut under it. side as partition's.
+function benchFront(g, side = 1) {
+  const C = COMPARTMENT, len = C.far - C.near;
   g.scale(side, 1);
+  g.fillStyle = '#2e1d13';
+  g.fillRect(0, -C.seat + 0.1, len, C.seat - 0.1);
+  g.fillStyle = '#5c2329';
+  g.fillRect(0, -C.seat, len, 0.12);
+}
+// A bench's near end, its arm, seen from before (a card facing us; x across it, from the partition, toward the aisle):
+// side 1: the left bench's (x to the right), −1: the right one's.
+function benchEnd(g, side = 1) {
+  const C = COMPARTMENT, w = C.wall - C.front;
+  g.scale(side, 1);
+  g.fillStyle = '#3a2418';
+  g.fillRect(0, -C.seat, w, C.seat);
   g.fillStyle = '#5c2329';
   g.beginPath();
-  g.moveTo(0, 0);
-  g.lineTo(0, -0.62);
-  g.quadraticCurveTo(0, -0.7, 0.08, -0.7);
-  g.lineTo(0.5, -0.66);
-  g.quadraticCurveTo(0.56, -0.65, 0.56, -0.58);
-  g.lineTo(0.55, 0);
+  g.moveTo(0, -C.seat);
+  g.lineTo(0, -0.66);
+  g.quadraticCurveTo(0, -0.72, 0.06, -0.72);
+  g.lineTo(w, -0.7);
+  g.lineTo(w, -C.seat);
   g.closePath();
   g.fill();
 }
@@ -216,9 +244,12 @@ function buffalo(g, ph) {
 }
 
 // ── the film ──
-// The people on the two sofas turned to the window, their backs to us: Fogg and Aouda on the left, Passepartout and Fix
-// on the right — on the carriage (their places its own). The film's beats (module beats): FILM = film(scene).
-const SEAT = { fogg: [-1.52, 2.12], aouda: [-0.98, 2.12], passepartout: [0.98, 2.12], fix: [1.52, 2.12] };
+// The people on the two benches, facing each other across the aisle: Aouda (nearer us) and Fogg (by the window, his
+// face to us) on the left, facing right; Passepartout (nearer) and Fix (by the window, facing Fogg) on the right,
+// facing left — on the carriage (their
+// places its own). FACE: which way each bench faces. The film's beats (module beats): FILM = film(scene).
+const SEAT = { fogg: [-0.83, 2.17], aouda: [-0.83, 1.55], passepartout: [0.83, 1.55], fix: [0.83, 2.17] };
+const FACE = { fogg: 90, aouda: 90, passepartout: 270, fix: 270 };
 // where Passepartout stands at the glass, his palms on it (window#pane_r, window#pane_l)
 const AT_GLASS = [0.74, 2.4];
 // points in the carriage, going with it ([across, distance, elevation] from its anchor): what they look at out of the
@@ -229,15 +260,15 @@ const LOOK = {
   platform: inside([3, 12, 1.0]), // ahead along the line (the way the train goes)
   field: inside([0.6, 6, 1.1]), // the field by the line
   trees: inside([-0.4, 4, 1.2]), // the trees by the line, behind
-  aisle: inside([1.6, 1.7, 1.12]), // into the aisle on the right (Aouda's profile against the window)
+  aisle: inside([0.9, 0.5, 1.15]), // toward the door, on the right (Aouda's face turned to us, the window behind her)
   herd: inside([0.2, 60, 0.4]), // the herd crossing
 };
 // a watch held in the palm before the chest: Fogg's; Passepartout's, held up toward the light
-const PALM = { fogg: inside([-1.46, 2.38, 0.86]), passepartout: inside([0.76, 2.36, 1.02]) };
+const PALM = { fogg: inside([-0.56, 2.14, 0.88]), passepartout: inside([0.56, 1.52, 1.02]) };
 const WITH = { aouda: 'with_aouda', passepartout: 'with_pp', fix: 'with_fix' };
 const loop = (motion, from = 0) => ({ motion, loop: true, from });
 const seated = (id, motion, from = 0) => ({
-  [`${id}_a`]: SEAT[id][0], [`${id}_d`]: SEAT[id][1], [`${id}_turn`]: 0, [`${id}_do`]: loop(motion, from),
+  [`${id}_a`]: SEAT[id][0], [`${id}_d`]: SEAT[id][1], [`${id}_turn`]: FACE[id], [`${id}_do`]: loop(motion, from),
   [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null,
 });
 // the camera of a shot (metres right of the carriage's middle, in, up): the camera is the train, so a shot aside moves
@@ -304,8 +335,8 @@ function film(scene) {
       from: () => OFF,
       run: async s => {
         const fogg = s.person('fogg'), pp = s.person('passepartout');
-        const near = s.shot(shot(0.4, 0.7));
-        const up = pp.go('gas_up', { from: SEAT.passepartout, turn: 0 });
+        const near = s.shot(shot(0.15, 0.2, 0.1));
+        const up = pp.go('gas_up', { from: SEAT.passepartout, turn: FACE.passepartout });
         await s.wait(0.6);
         await s.until(() => near.ready);
         near.cut();
@@ -325,17 +356,17 @@ function film(scene) {
     watch: {
       after: 'gas',
       from: () => {
-        const [a, d] = after('passepartout', 'gas_up', 0, SEAT.passepartout);
+        const [a, d] = after('passepartout', 'gas_up', FACE.passepartout, SEAT.passepartout);
         return {
-          ...OFF, ...shot(0.4, 0.7), passepartout_a: a, passepartout_d: d, passepartout_turn: 290,
+          ...OFF, ...shot(0.15, 0.2, 0.1), passepartout_a: a, passepartout_d: d, passepartout_turn: 290,
           passepartout_do: { motion: 'gas_up', loop: false, from: 99 }, passepartout_look: 'fogg#head',
         };
       },
       run: async s => {
         const pp = s.person('passepartout');
-        const close = s.shot(shot(0.1, 0.6, -0.2));
+        const close = s.shot(shot(0.2, 0.5, -0.2));
         pp.look(null);
-        await pp.go('sit_down', { to: SEAT.passepartout, turn: 0 });
+        await pp.go('sit_down', { to: SEAT.passepartout, turn: FACE.passepartout });
         await s.until(() => close.ready);
         close.cut();
         pp.do('sit_calm', { loop: true });
@@ -390,7 +421,7 @@ function film(scene) {
     // ---- Dawn on the Ganges, the train going on slowly: Aouda turns her head — her profile against the river.
     ganges: {
       from: () => ({
-        ...INDIA, ...where('india', 1400), speed: 0.4, ...shot(-0.9, 0.8, -0.3), ...seated('passepartout', 'look_out'),
+        ...INDIA, ...where('india', 1400), speed: 0.4, ...shot(-0.3, 0.4, -0.2), ...seated('passepartout', 'look_out'),
         passepartout_look: LOOK.out, fogg_look: LOOK.out, ...seated('fix', 'talk_seated'), fix_with: ['newspaper_folded'],
         fix_look: LOOK.out, aouda_look: LOOK.trees, ...here(),
       }),
@@ -414,20 +445,20 @@ function film(scene) {
       run: async s => {
         const fogg = s.person('fogg'), pp = s.person('passepartout');
         const herd = s.move('herd', 1, { over: 24, ease: 'linear' });
-        const near = s.shot(shot(0.4, 0.7));
+        const near = s.shot(shot(0.3, 0.3));
         await s.wait(0.6);
-        const up = pp.go('rise_chair', { from: SEAT.passepartout, turn: 0 });
+        const up = pp.go('rise_chair', { from: SEAT.passepartout, turn: FACE.passepartout });
         await s.wait(2.4);
         await s.until(() => near.ready);
         near.cut();
         await up;
         await pp.walk([AT_GLASS]);
-        await pp.turn(350);
+        await pp.turn(10);
         pp.reach({ r: 'window#pane_r', l: 'window#pane_l' });
         s.tell('buffalo:at-glass');
         pp.look(LOOK.herd);
         // (then on Fogg, in his seat by the window: his watch — the shot made ready meanwhile)
-        const him = s.shot(shot(-1.1, 0.7, -0.2));
+        const him = s.shot(shot(-0.35, 0.6, -0.15));
         await s.wait(1.7);
         fogg.look(LOOK.herd);
         await s.wait(2.4);
@@ -478,7 +509,7 @@ function film(scene) {
         close.cut();
         s.tell('special:watch');
         // (under the close shot the others turn to him: the carriage is cut back to, a step nearer, with all eyes on the watch)
-        const near = s.shot({ watch_close: 0, ...shot(-0.25, 0.1) });
+        const near = s.shot({ watch_close: 0, ...shot(-0.2, 0.2) });
         await s.wait(1.4);
         aouda.look('fogg#watch');
         await s.wait(0.6);
@@ -494,6 +525,7 @@ function film(scene) {
         // shuts it, his hands down in his lap, his eyes on it)
         aouda.look('fogg#head');
         fix.look('fogg#head');
+        fogg.look(null);
         fogg.reach(null);
         fogg.with(['notebook']);
         fogg.do('read_book', { loop: true });
@@ -501,10 +533,18 @@ function film(scene) {
         fogg.look('fogg#book');
         await s.wait(1.6);
         if ((s.get('book_shut') ?? 0) >= 0.5) {
+          // (on him, close: he shuts it)
+          const him = s.shot(shot(-0.35, 0.6, -0.15));
+          await s.until(() => him.ready);
+          him.cut();
+          await s.wait(0.6);
           fogg.with(['book_shut']);
           fogg.do('sit_calm', { loop: true });
           s.tell('special:shut');
-          await s.wait(1.5);
+          await s.wait(1.2);
+          // (his eyes up from it, his face to us)
+          fogg.look(LOOK.aisle);
+          await s.wait(1.2);
         }
       },
     },
@@ -515,5 +555,5 @@ const SHOWCASE = ['depart', 'gas', 'watch', 'ride', 'brake', 'ganges', 'buffalo'
 
 return {
   plan, centre, landAt, reachOf, riverWidth, along, pnoise, relief, colours, gas, skyMotion, litMotion, mixc, css, rgba,
-  opening, sofa, sofaArm, HERD, buffalo, WITH, LOOK, CLOSE, closeAt, film, SHOWCASE,
+  opening, COMPARTMENT, partition, benchFront, benchEnd, HERD, buffalo, WITH, LOOK, CLOSE, closeAt, film, SHOWCASE,
 };
