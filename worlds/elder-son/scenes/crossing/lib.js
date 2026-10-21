@@ -127,7 +127,7 @@ const WAIT_END = () => ({
   barrier: 1, bell: 1, freight: 0.04, hour: 0.82,
 });
 const WAIT_FROM = () => ({
-  ...CAM.wide, ...AT('nina', [-2.3, 0.9], 20), ...AT('busygin', [-1.5, 0.4], 20), barrier: 0, bell: 0, freight: 0, hour: 0.78,
+  ...CAM.wide, ...AT('nina', [-2.6, 3.4], 50), ...AT('busygin', [-1.9, 3.0], 50), barrier: 0, bell: 0, freight: 0, hour: 0.78,
 });
 // a shot of the freight further on (time left out): the camera, the train and every car at `f` — the keys the script
 // would set, so the shot is made ready whole
@@ -171,8 +171,8 @@ function film() {
         const nina = s.person('nina'), bus = s.person('busygin');
         s.move('hour', 0.82, { over: 10, ease: 'linear' });
         const walks = Promise.all([
-          nina.walk([[-1.5, 2.6], SPOT.nina]),
-          (async () => { await s.wait(0.3); await bus.walk([[-0.8, 2.3], SPOT.busygin]); })(),
+          nina.walk([SPOT.nina]),
+          (async () => { await s.wait(0.3); await bus.walk([SPOT.busygin]); })(),
         ]);
         await s.wait(0.5);
         s.set('bell', 1);
