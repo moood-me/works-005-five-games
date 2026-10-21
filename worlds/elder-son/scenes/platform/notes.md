@@ -61,6 +61,10 @@ the beats in node and prints where the people and the points stand in the frame.
 
 - The camera `roam`, not `panorama` (above). The shots are numbers (camera_x, camera_z, camera_yaw), the face shot in
   `last` too (1.5 m from the one who calls, three quarters), not `camera_target`: what is in the frame is known here.
+- `bench` and `bench_back`: the two on the bench face on (a medium shot, the lamp behind the camera), not in profile:
+  in profile one hid the other. After the call in `last` the camera is nearer than “A” (`A2`); `stays` closes on the
+  meeting (`meet`, or over his shoulder to the window far below — `watch`); `boards` cuts to the snuffbox at the door
+  (`give`); the shot “B” has him come a few steps toward the camera.
 - `came` is gone: the game carries `father_came`, `nina_came`, `vasya_came` (game.md after the honest line's finale).
 - `strap` tells `strap:open` only (no `strap:close`: nothing waits for it).
 - The car's window is the last one before the second car's front vestibule (the doorway itself has the vestibule).

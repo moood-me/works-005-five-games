@@ -18,9 +18,9 @@ const P = G.PLAT;
 
 add({ id: 'sky', name: 'Sky', sky: true });
 add({ id: 'ground', name: 'Snow', plane: true, drape: true, across: 0, distance: 20, elevation: 0, width: 360, depth: 220 });
-add({ id: 'wood', name: 'Wood', across: 0, distance: 75, height: 15, box: [-301, -16, 301, 0.4] });
+add({ id: 'wood', name: 'Wood', across: 0, distance: 75, facing: 180, height: 10.5, box: [-301, -11, 301, 0.4] });
 add({ id: 'track', name: 'Tracks', plane: true, across: 0, distance: 13.55, elevation: r2(G.BED + 0.02), width: 400, depth: 6.6 });
-add({ id: 'masts', name: 'Mast', across: 0, distance: 13.55, onLand: false, elevation: G.BED, height: 8.6, box: [-2.7, -8.7, 2.7, 0.05],
+add({ id: 'masts', name: 'Mast', across: 0, distance: 13.55, onLand: false, elevation: G.BED, facing: 180, height: 8.6, box: [-2.7, -8.7, 2.7, 0.05],
   copies: [-170, -110, -50, 10, 70, 130, 190].map(a => ({ across: a, distance: 13.55, elevation: G.BED })) });
 add({ id: 'wires', name: 'Overhead line', across: 0, distance: G.TRACK, onLand: false, elevation: G.BED, facing: 180, height: 1.3, box: [-201, -7.9, 201, -6.2] });
 add({ id: 'platform', name: 'Platform', plane: true, walk: true, across: (P.a0 + P.a1) / 2, distance: r2((P.d0 + G.EDGE + 0.06) / 2), elevation: 0.05,
@@ -54,7 +54,7 @@ add({ id: 'gardens', name: 'Fence', across: 18, distance: -8, facing: 0, height:
 add({ id: 'birches', name: 'Birch', across: 24, distance: 2, height: 9, box: [-3.6, -11.6, 3.6, 0.3],
   copies: [[24, 2, 1, false], [27, -3, 0.85, true], [-30, -2, 1.1, false], [12, -6, 0.9, true], [46, -6, 1, false]].map(([a, d, s, f]) => ({ across: a, distance: d, scale: s, flip: f })) });
 add({ id: 'far_window', name: 'The Sarafanovs\' window', glows: true, across: FW[0], distance: r2(FW[1] + 0.05), elevation: FW[2], facing: 0,
-  height: 1.0, box: [-0.6, -1.05, 0.6, 0.08] });
+  height: 1.5, box: [-0.9, -1.5, 0.9, 0.08] });
 add({ id: 'snowfall', name: 'Snow', particles: { kind: 'snow', amount: 'snow', count: 9000, reach: 36 } });
 
 // the train: its side (places by train_x), what its windows show (a card that glows, ELECTRIC.inside behind the
