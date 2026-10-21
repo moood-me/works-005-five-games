@@ -1,5 +1,6 @@
 // «The boilers» (IV.4, the deck, the beat `burn`; the Henrietta's deck from the poop, all that burns in sight): Fogg has
-// bought the ship, there is no coal. A dashed ring on each part of the ship (`<part>#part`) the purse can pay for: pull
+// bought the ship, there is no coal. A dashed ring on each part of the ship (`<part>#part`) the purse can pay for — the masts once
+// their yards are burnt: pull
 // (heavy) to the open stokehold hatch `hatch#fire`; the part moves by the key `drag_<part>` (0 in place … 1 at the
 // hatch), let go not at the hatch — it goes back, seen. Brought there — the part into the furnace: `<part>` 0 (the
 // scene — a flare in the hatch), `fire` and `speed` grow, Speedy clutches his head (`speedy_grief`). Each — PRICE £
@@ -18,6 +19,7 @@ import { until, keys } from '../hands.js';
 
 const PARTS = ['deckhouse', 'boats', 'bunks', 'yards', 'mast_fore', 'mast_main', 'bulwarks'];
 const CABIN = 'speedy_cabin';
+const MASTS = ['mast_fore', 'mast_main']; // (the yards hang on them: a mast is offered once the yards are burnt)
 const PRICE = 1500; // £ a part
 const FLASH = 0.8; // s: the fire flares up after a part
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -71,14 +73,16 @@ export default {
     // ── all but the cabin, in any order ──
     if (money < PRICE) lock([...PARTS, CABIN]);
     else {
-      const pulls = left().map(part => offer(part));
+      const pulls = left().filter(part => !MASTS.includes(part)).map(part => offer(part));
       b.minigame.tricks.teach(mg, pulls.slice(0, 1), { id: 'boilers' });
+      let masts = false; // (offered, or locked)
       const done = await until(mg, () => {
+        if (!masts && burned.includes('yards') && money >= PRICE) { masts = true; MASTS.forEach(part => offer(part)); }
         // not enough for the next — the rest are locked
-        if (money < PRICE && items.size) { for (const it of items.values()) it.mark.remove(); items.clear(); lock([...left(), CABIN]); }
+        if (money < PRICE && (items.size || !masts)) { for (const it of items.values()) it.mark.remove(); items.clear(); lock([...left(), CABIN]); masts = true; }
         for (const [part, { pull }] of items) send(`drag_${part}`, pull.state.u);
         mg.plate.set({ fill: burned.length / ALL, glow: [...items.values()].some(it => it.pull.state.held) ? 'good' : 'idle' });
-        return items.size === 0;
+        return masts && items.size === 0;
       });
       if (!done) return this.skipped;
     }

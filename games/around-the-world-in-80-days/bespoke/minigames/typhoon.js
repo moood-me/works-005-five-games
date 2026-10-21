@@ -1,6 +1,6 @@
 // «The typhoon» (II.5, the sea, the beat `typhoon`; the camera at the Tankadere's stern, low): crests come at the bow
-// one after another. Lead anywhere: the arrow — the helm (`helm` −1…1: the tiller and the boat's bow), the zone — where
-// to keep the bow: as a crest comes — into the wave (it comes now from the port bow, now from the starboard), in the
+// one after another, each from its bow (`wave_from` −1…1: port … starboard). Lead anywhere: the arrow — the helm
+// (`helm` −1…1: the tiller and the boat's bow), the zone — where to keep the bow: as a crest comes — into the wave (it comes now from the port bow, now from the starboard), in the
 // trough — straight. The wave — `wave` 0 → 1 in PERIOD s (0.5 — the crest under the bow), its height `wave_h` grows to
 // the middle of the storm and falls. Two instants a wave: the crest under the bow (the bow not into the wave — water
 // over the side, `green_water` a rise to 1) and the trough (not straight — the boat yaws, water too). The heel `heel` —
@@ -51,6 +51,7 @@ export default {
       lead.set({ zone: { at, width: ZONE } });
       const helm = lead.state.arrow;
       send('wave', w);
+      send('wave_from', dir);
       send('wave_h', 0.55 + 0.45 * Math.sin(Math.PI * Math.min(1, now / T)));
       send('helm', helm);
       const crest = Math.sin(Math.PI * w) ** 2;
