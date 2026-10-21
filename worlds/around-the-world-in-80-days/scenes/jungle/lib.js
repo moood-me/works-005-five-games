@@ -653,34 +653,34 @@ function kiouniPaint(e, dir) {
     fill(g, SKIN_LT, [[-1.45, -2.52], [-1.1, -2.82, -0.2, -2.88], [0.7, -2.86, 0.98, -2.66], [0.3, -2.7, -0.4, -2.72], [-1.1, -2.66, -1.45, -2.52]]);
     fill(g, SKIN_DK, [[-1.3, -1.28], [-0.4, -1.18, 0.5, -1.22], [0.8, -1.3], [0.4, -1.08, -0.2, -1.04], [-0.9, -1.1, -1.3, -1.28]]);
     wrinkles(g, -1.55, -1.1, -2.2, -1.5, 4, 3);
-    // the cloth
-    fill(g, CLOTH, [[-0.78, -2.9], [0.98, -2.9], [1.0, -1.82], [0.1, -1.7, -0.8, -1.82]]);
+    // the cloth: over his back under the howdah, not lower than his flank's middle
+    fill(g, CLOTH, [[-0.62, -2.9], [0.82, -2.9], [0.84, -2.04], [0.1, -1.94, -0.64, -2.04]]);
     g.strokeStyle = GOLD;
-    g.lineWidth = 0.06;
+    g.lineWidth = 0.055;
     g.beginPath();
-    g.moveTo(-0.72, -2.86);
-    g.lineTo(-0.74, -1.88);
-    g.quadraticCurveTo(0.1, -1.76, 0.94, -1.88);
-    g.lineTo(0.92, -2.86);
+    g.moveTo(-0.57, -2.86);
+    g.lineTo(-0.59, -2.09);
+    g.quadraticCurveTo(0.1, -1.99, 0.78, -2.09);
+    g.lineTo(0.77, -2.86);
     g.stroke();
     g.fillStyle = GOLD;
-    for (let i = 0; i < 9; i++) {
-      const x = -0.7 + (1.62 * i) / 8, y = -1.86 + 0.05 * Math.sin((i / 8) * Math.PI);
+    for (let i = 0; i < 8; i++) {
+      const x = -0.55 + (1.3 * i) / 7, y = -2.07 + 0.04 * Math.sin((i / 7) * Math.PI);
       g.beginPath();
-      g.moveTo(x - 0.035, y);
-      g.lineTo(x + 0.035, y);
-      g.lineTo(x, y + 0.14);
+      g.moveTo(x - 0.03, y);
+      g.lineTo(x + 0.03, y);
+      g.lineTo(x, y + 0.12);
       g.closePath();
       g.fill();
     }
     // a pattern of the cloth: gold lozenges in a row
     for (let i = 0; i < 5; i++) {
-      const x = -0.45 + 0.29 * i, y = -2.28;
+      const x = -0.38 + 0.24 * i, y = -2.46;
       g.beginPath();
-      g.moveTo(x, y - 0.12);
-      g.lineTo(x + 0.08, y);
-      g.lineTo(x, y + 0.12);
-      g.lineTo(x - 0.08, y);
+      g.moveTo(x, y - 0.1);
+      g.lineTo(x + 0.07, y);
+      g.lineTo(x, y + 0.1);
+      g.lineTo(x - 0.07, y);
       g.closePath();
       g.fill();
     }
@@ -801,50 +801,50 @@ function kiouniPaint(e, dir) {
       g.arc(1.98 + 0.02 * k, -2.42 + 0.09 * k, 0.026, 0, Math.PI * 2);
       g.fill();
     }
-    // the eye
+    // the eye: big enough to be read across the trail — its white, the brown, the pupil, a glint, the lashes
     const [ex, ey] = KI.eye;
     g.fillStyle = '#efe4d2';
     g.beginPath();
-    g.ellipse(ex, ey, 0.085, 0.055, -0.15, 0, Math.PI * 2);
+    g.ellipse(ex, ey, 0.115, 0.075, -0.15, 0, Math.PI * 2);
     g.fill();
     g.fillStyle = '#6a4224';
     g.beginPath();
-    g.arc(ex + 0.012, ey + 0.004, 0.048, 0, Math.PI * 2);
+    g.arc(ex + 0.015, ey + 0.005, 0.064, 0, Math.PI * 2);
     g.fill();
     g.fillStyle = '#140e0a';
     g.beginPath();
-    g.arc(ex + 0.016, ey + 0.004, 0.027, 0, Math.PI * 2);
+    g.arc(ex + 0.02, ey + 0.005, 0.038, 0, Math.PI * 2);
     g.fill();
     g.fillStyle = '#ffffff';
     g.beginPath();
-    g.arc(ex + 0.03, ey - 0.012, 0.012, 0, Math.PI * 2);
+    g.arc(ex + 0.04, ey - 0.016, 0.016, 0, Math.PI * 2);
     g.fill();
     g.strokeStyle = '#2e2420';
-    g.lineWidth = 0.016;
+    g.lineWidth = 0.022;
     g.beginPath();
-    g.ellipse(ex, ey, 0.09, 0.06, -0.15, Math.PI * 1.05, Math.PI * 1.95);
+    g.ellipse(ex, ey, 0.12, 0.08, -0.15, Math.PI * 1.05, Math.PI * 1.95);
     g.stroke();
     for (let k = 0; k < 4; k++) {
-      const a = Math.PI * (1.15 + 0.18 * k), x0 = ex + Math.cos(a) * 0.09, y0 = ey + Math.sin(a) * 0.06;
+      const a = Math.PI * (1.15 + 0.18 * k), x0 = ex + Math.cos(a) * 0.12, y0 = ey + Math.sin(a) * 0.08;
       g.beginPath();
       g.moveTo(x0, y0);
-      g.lineTo(x0 + Math.cos(a) * 0.05, y0 + Math.sin(a) * 0.05 - 0.01);
+      g.lineTo(x0 + Math.cos(a) * 0.065, y0 + Math.sin(a) * 0.065 - 0.012);
       g.stroke();
     }
     wrinkles(g, ex - 0.12, ex + 0.1, ey + 0.09, ey + 0.2, 2, 21);
   });
   // the eyelid, shut for a blink (its animate shows it a moment)
-  L('lid', KI.neck, [1.55, -2.6, 1.8, -2.36], g => {
+  L('lid', KI.neck, [1.5, -2.62, 1.86, -2.34], g => {
     const [ex, ey] = KI.eye;
     g.fillStyle = SKIN;
     g.beginPath();
-    g.ellipse(ex, ey, 0.095, 0.064, -0.15, 0, Math.PI * 2);
+    g.ellipse(ex, ey, 0.125, 0.085, -0.15, 0, Math.PI * 2);
     g.fill();
     g.strokeStyle = '#2e2420';
-    g.lineWidth = 0.018;
+    g.lineWidth = 0.022;
     g.beginPath();
-    g.moveTo(ex - 0.09, ey + 0.01);
-    g.quadraticCurveTo(ex, ey + 0.045, ex + 0.09, ey - 0.005);
+    g.moveTo(ex - 0.12, ey + 0.012);
+    g.quadraticCurveTo(ex, ey + 0.06, ex + 0.12, ey - 0.006);
     g.stroke();
   });
   // the ear, like a map of India hanging behind the eye: a little lighter, its rim freckled pink
@@ -852,6 +852,11 @@ function kiouniPaint(e, dir) {
     const pts = [[1.4, -2.86], [1.12, -2.98, 0.9, -2.76], [0.76, -2.5, 0.84, -2.2], [0.92, -1.9, 1.12, -1.72], [1.22, -1.84, 1.26, -2.12],
       [1.34, -2.4, 1.42, -2.56]];
     fill(g, SKIN_LT, pts);
+    // its rim, dark: the ear stands off the head behind it
+    g.strokeStyle = '#3e3532';
+    g.lineWidth = 0.04;
+    g.lineJoin = 'round';
+    g.stroke();
     g.fillStyle = 'rgba(201,156,142,0.85)';
     for (let k = 0; k < 16; k++) {
       const u = h(k, 61), x = 0.86 + 0.08 * Math.sin(u * 6) + 0.06 * h(k, 62), y = -2.75 + 0.95 * u;
@@ -871,7 +876,9 @@ function kiouniPaint(e, dir) {
 // Where his parts are now (his own metres) and the layers moved there: each frame, from the state and what he keeps
 // (e.mem: the way walked, the step's phase, the trunk's pose easing to its new one).
 const rot = ([x, y], [px, py], t) => { const c = Math.cos(t), s = Math.sin(t); return [px + (x - px) * c - (y - py) * s, py + (x - px) * s + (y - py) * c]; };
-function kiouniMove(e, dir, flank) {
+// `marks`: the card `kiouni` in his middle (painted as the left flank is) — it moves no layers, it marks his points for the
+// game and the camera: `head` (the eye; and its own point), `trunk` (the tip), `lift` (the curl that lifts)
+function kiouniMove(e, dir, flank, marks = false) {
   const S = e.state, m = e.mem, A = anim, t = e.t;
   // which flank is near: walking right (facing 0…180) the left one (its painting head-right)
   const f = (((S.kiouni_facing ?? 90) % 360) + 360) % 360, right = f > 0 && f < 180;
@@ -895,6 +902,7 @@ function kiouniMove(e, dir, flank) {
   const el = S.kiouni_el ?? 0, tilt = ((S.kiouni_tilt ?? 0) * Math.PI) / 180;
   const toBody = ([qx, qy]) => rot([qx, qy + el], [0, 0], tilt);
   const set = (name, dx, dy, r, alpha = 1) => {
+    if (marks) return;
     const Ly = e.layer(name);
     Ly.x = dir * dx;
     Ly.y = dy;
@@ -931,7 +939,7 @@ function kiouniMove(e, dir, flank) {
   // the ear: flapping now and then; fanned out (`ears`, balking, trumpeting)
   const fan = Math.max(A.clamp(S.ears ?? 0, 0, 1), balk, blow, 0.35 * run * mv);
   const flap = Math.pow(Math.max(0, Math.sin(t * 2.1 + 3 * A.drift(t * 0.13, 5))), 6);
-  const ep = R(KI.ear), earL = e.layer('ear');
+  const ep = R(KI.ear), earL = marks ? {} : e.layer('ear');
   earL.x = dir * (ep[0] - KI.ear[0]);
   earL.y = ep[1] - KI.ear[1];
   earL.rotate = dir * (head - 0.35 * fan);
@@ -949,14 +957,15 @@ function kiouniMove(e, dir, flank) {
   for (let i = 0; i < 5; i++) {
     const s = TRUNK_REST[i], a = m.tr[i] - head;
     set(`t${i + 1}`, bx - s.x, by - s.y, s.a - a, show);
-    if (i === 3 && near) e.at(dir * (bx + Math.sin(a) * s.len * 0.5), by + Math.cos(a) * s.len * 0.5 - 0.35, 'lift');
+    if (i === 3 && marks) e.at(dir * (bx + Math.sin(a) * s.len * 0.5), by + Math.cos(a) * s.len * 0.5 - 0.35, 'lift');
     bx += Math.sin(a) * s.len;
     by += Math.cos(a) * s.len;
   }
-  if (near) {
-    e.at(dir * bx, by, 'tip');
+  if (marks) {
+    e.at(dir * bx, by, 'trunk');
     const eye = R(KI.eye);
-    e.at(dir * eye[0], eye[1], 'eye');
+    e.at(dir * eye[0], eye[1], 'head');
+    e.at(dir * eye[0], eye[1]);
   }
 }
 
@@ -992,12 +1001,40 @@ function howdahPaint(g) {
   }
 }
 // The seats of the howdah and his neck (points of his frame: across, distance — toward his tail —, elevation), the way
-// those sat there face (their turn in his frame: 180 — his way; 270 / 90 — out to his left / right side)
-const KIOUNI_SEATS = { guide: [0, -1.25, 2.72], front: [0, -0.5, 3.08], mid: [0, 0.08, 3.08], back: [0, 0.62, 3.08] };
-const seat = name => ({ on: 'kiouni', at: KIOUNI_SEATS[name] });
+// those sat there face (their turn in his frame: 180 — his way; 270 / 90 — out to his left / right side); `rump` — a
+// fifth behind the howdah, on his back's slope
+const KIOUNI_SEATS = { guide: [0, -1.25, 2.72], front: [0, -0.5, 3.08], mid: [0, 0.08, 3.08], back: [0, 0.62, 3.08], rump: [0, 1.22, 2.78] };
+const seat = name => ({ on: 'kiouni_site', at: KIOUNI_SEATS[name] });
+
+// ── Kiouni as keys: where he stands and faces, how he kneels and balks (his anchor sinks and tips with them: the script
+// keeps kiouni_el and kiouni_tilt so as `kneel` and `balk` move) ──
+const heading = ([a, d], [a2, d2]) => ((Math.atan2(a2 - a, d2 - d) * 180) / Math.PI + 360) % 360;
+const toward = heading;
+const kneelPose = (kneel, balk = 0) => ({ kneel, balk, kiouni_el: -1.15 * kneel, kiouni_tilt: -9 * Math.sin(Math.PI * kneel) + 6 * balk });
+const onTrail = a => [a, trail(a) + 0.3];
+// he stands at [a, d] facing `facing`, his trunk and ears at rest, kneeling as `kneel` says
+const KIOUNI = (at, facing, kneel = 0) => ({ kiouni_x: at[0], kiouni_d: at[1], kiouni_facing: facing, kiouni_here: 1, ...kneelPose(kneel),
+  ears: 0, trunk: 'rest', trumpet: 0, kiouni_blow: 0, pace: 0, sugar: 0, goad: 0 });
+// the shortest turn from one facing to another, so a path turns him the near way round
+const turnTo = (f, h) => f + ((((h - f) % 360) + 540) % 360) - 180;
+// He walks along the points at `speed` m/s, turning as each stretch goes (one movement of his place and his turn).
+function kiouniGo(s, pts, speed = 1.3) {
+  let at = [s.get('kiouni_x'), s.get('kiouni_d')], f = s.get('kiouni_facing') ?? 90;
+  const way = pts.map(p => { f = turnTo(f, heading(at, p)); at = p; return [p[0], p[1], f]; });
+  return s.path(['kiouni_x', 'kiouni_d', 'kiouni_facing'], way, { speed });
+}
+// He kneels (1) or rises (0) over `over` seconds; the people on him go down and up with him.
+const kneelTo = (s, v, over) => s.move('kneel', v, { over, ease: 'inOut' });
+
+// «The elephant»: the way `ride` 0…1 — along the trail from the end of the rails into the forest, 40 m (through the stream
+// by the footbridge: he wades), day going to dusk; where he is and how the light is at `v`
+function rideAt(v) {
+  const x = -22 + 40 * anim.clamp(v, 0, 1);
+  return { kiouni_x: x, kiouni_d: trail(x) + 0.3, kiouni_facing: heading(onTrail(x - 0.6), onTrail(x + 0.6)),
+    day: 1 - 0.65 * anim.clamp(v, 0, 1), dawn: 0.5 * anim.span(v, 0.35, 1) };
+}
 
 // ── The people and the film (the world's module beats; notes.md lists the beats and the keys) ──
-const toward = ([a, d], [a2, d2]) => ((Math.atan2(a2 - a, d2 - d) * 180) / Math.PI + 360) % 360;
 const loop = (motion, from = 0) => ({ motion, loop: true, from });
 
 // the procession: who walks where in the column — metres behind its head, and to the side of the trail's middle (−
@@ -1035,25 +1072,50 @@ const column = p => Object.fromEntries(COLUMN.flatMap(([id]) => { const [a, d] =
 // the state of the column as it walks (its gaits, torches, the widow veiled and led)
 const COLUMN_STATE = Object.assign(Object.fromEntries(COLUMN.flatMap(([id]) => [
   [`${id}_do`, 'stand'], [`${id}_turn`, 90], [`${id}_gait`, GAIT[id]], [`${id}_with`, TORCH[id] ?? null], [`${id}_look`, null],
-  [`${id}_reach`, null], [`${id}_on`, null], [`${id}_wear`, null],
+  [`${id}_reach`, null], [`${id}_on`, null], [`${id}_wear`, null], [`${id}_mood`, null],
 ])), { aouda_wear: { hood: true }, pr1_reach: { l: 'aouda#shoulder_r' }, pr2_reach: { r: 'aouda#shoulder_l' } });
 
-// the four who hide in the thicket before the trail, crouching, facing it; where they come from along it
+// the four who hide in the thicket before the trail, crouching, facing it; where Kiouni stands among the trees behind
+// them, to their left (seen from where the camera watches the procession — `kiouni#head` in the middle of its frame)
 const PARTY = ['cromarty', 'fogg', 'passepartout', 'guide'];
 const HIDE = { cromarty: [-5.4, 5.2], fogg: [-4.4, 5.6], passepartout: [-3.3, 4.9], guide: [-2.4, 5.4] };
-const FROM = { cromarty: -16, fogg: -14.6, passepartout: -13, guide: -11.6 };
 const HIDDEN = { cromarty: 'crouch_hide', fogg: 'crouch_hide', passepartout: 'kneel_up', guide: 'kneel_up' };
+const KI_HIDE = [-7.0, 8.0];
 // where the drums are heard from — and the torches first seen
 const DRUMS = [-30, 12, 1.4];
+// where Kiouni stops on the trail at dusk, and where each of the four gets down by his near flank
+const KI_STOP = onTrail(-1.6);
+const DOWN = { guide: [-0.4, 9.0], fogg: [-1.4, 8.9], cromarty: [-2.4, 8.9], passepartout: [-3.3, 9.0] };
+
+// the end of the rails: Kiouni tethered by his shed (his head toward the station), his owner by him; where the travellers come
+// from (off the train) and where they stop before the shed; where Fogg and the owner bargain, three-quarters to each other
+const KI_SHED = [-27.8, 12.4];
+const OWNER = [-29.8, 11.0];
+const OFF_TRAIN = { passepartout: [-42.6, 13.2], fogg: [-44.6, 13.9], cromarty: [-45.6, 14.5] };
+const AT_SHED = { passepartout: [-32.9, 10.9], fogg: [-34.8, 11.1], cromarty: [-35.9, 11.7] };
+const HAGGLE = { fogg: [-32.6, 10.7], owner: [-30.2, 10.9], passepartout: [-34.3, 11.9], cromarty: [-35.3, 11.3] };
+// the passengers off the train, going off along the line with their bundles; the conductor along the carriages
+const PASSENGERS = [['v1', [-46.5, 16.4], [-60, 15.4]], ['v3', [-47.6, 16.9], [-61.5, 16.0]], ['v2', [-49.0, 16.2], [-63, 15.1]]];
+const CONDUCTOR = [[-43.5, 16.6], [-57, 16.8]];
+// the guide coming to Kiouni's head to take him (mount)
+const GUIDE_IN = [-23.6, 10.2], GUIDE_AT = [-30.4, 11.3];
+
+// the pagoda at night: the two guards with torches before its porch; where the four creep up along the plinth and back
+// to; where Passepartout slips away into the dark under the fig's roots
+const GUARDS = { pb1: [54.6, 17.4], pb2: [58.2, 17.2] };
+const CREEP = { guide: [[47.6, 16.6], [50.6, 17.4]], fogg: [[46.8, 16.2], [49.7, 17.0]], cromarty: [[46.0, 15.8], [48.9, 16.7]], passepartout: [[45.2, 15.5], [48.1, 16.4]] };
+const SLIP = [[47.2, 19.4], [47.6, 22.5]];
 
 // the pyre on the clearing (its top a plane they stand on, its stepped end the way down), the crowd kneeling round it,
-// Fogg held back by Cromarty at the clearing's edge, the way to the trees
+// Fogg held back by Cromarty at the clearing's edge, the way to the trees — and Kiouni waiting kneeling at the trees,
+// the guide on his neck, his head to the forest
 const PYRE = [40, 14], ON_PYRE = { aouda: [40.5, 14.05], passepartout: [39.4, 13.95] };
 const KINDLE = { pr1: [[38.9, 12.9], [39.2, 13.5, 0.9]], pr2: [[41.3, 12.9], [41.0, 13.5, 0.9]] };
 const EDGE = { fogg: [35.6, 8.3], cromarty: [34.9, 8.0] };
 const CROWD = [[37.2, 11.2], [38.8, 10.6], [40.4, 10.3], [42.0, 10.7], [43.4, 11.4], [36.0, 12.4], [44.6, 12.6], [41.2, 9.3]];
 const CROWD_IDS = CROWD.map((_, i) => `v${i + 1}`);
 const WAY = [ON_PYRE.passepartout, [37.4, 14.0], [36.2, 14.0], [35.0, 12.0], [32.2, 9.4]];
+const KI_TREES = [28.0, 9.5];
 // the rajah's body on the pyre — Passepartout under the shroud: a white robe over him, his head covered
 const SHROUD = { garment: 'robe', hood: true, colors: { garment: '#e4dccb', top: '#e4dccb', skin: '#7e5640' } };
 // the crowd at the pyre: face down, or looking up (each a little after the one before)
@@ -1097,26 +1159,118 @@ function carry(scene, v) {
   return scene.person('passepartout').walk(pts);
 }
 
+// «The dash»: Kiouni out of the thicket at the widow — `charge` 0…0.5, aimed across the trail by `kiouni_lane` — and
+// on through the column into the dark beyond the trail (0.5…1, past the first torch-bearer, who stands his ground);
+// the widow and her two priests shying along the trail by `litter_lane`. Where he is at `c`, aimed at `lane`; from where
+// he took her (`at` — the script keeps it) on.
+const LANE = 1.6; // metres along the trail at lane ±1
+const DASH_FROM = KI_HIDE, DASH_AWAY = [[3.0, 11.6], [6.6, 16.6], [12, 23]];
+const widowAt = lane => { const a = inColumn(STOPPED, 'aouda')[0] + LANE * lane; return [a, trail(a) - 1.5]; };
+function dashAt(c, lane, at) {
+  if (c <= 0.5 || !at) {
+    const u = anim.ease.inOut(anim.clamp(c / 0.5, 0, 1)), [a, d] = widowAt(lane);
+    return [DASH_FROM[0] + (a - DASH_FROM[0]) * u, DASH_FROM[1] + (d - DASH_FROM[1]) * u];
+  }
+  // (on along his way out, as far as `c` says: its stretches by their lengths)
+  const way = [at, ...DASH_AWAY.slice(0, 2)], lens = way.slice(1).map((q, i) => Math.hypot(q[0] - way[i][0], q[1] - way[i][1]));
+  let s = anim.clamp((c - 0.5) / 0.5, 0, 1) * lens.reduce((x, y) => x + y, 0);
+  for (let i = 0; i < lens.length; i++) {
+    if (s <= lens[i] || i === lens.length - 1) { const f = Math.min(1, s / lens[i]); return [way[i][0] + (way[i + 1][0] - way[i][0]) * f, way[i][1] + (way[i + 1][1] - way[i][1]) * f]; }
+    s -= lens[i];
+  }
+}
+// who of the column runs as he comes (`scatter` past each one's share), and where to: away from him along the trail and
+// off it, the torches with them; the first torch-bearer stays
+const SCATTER = [['pb4', 0.05, [-12.5, 13.2]], ['pb3', 0.2, [-11.4, 14.6]], ['dr2', 0.45, [6.4, 13.6]], ['dr1', 0.6, [8.6, 12.4]], ['pb2', 0.8, [9.6, 15.0]]];
+
 // ── where the beats begin ──
 const OFF = id => ({ [`${id}_a`]: -80, [`${id}_d`]: trail(-80), [`${id}_here`]: false, [`${id}_do`]: 'stand', [`${id}_turn`]: 90,
-  [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_wear`]: null, [`${id}_on`]: null, [`${id}_gait`]: null });
-// dusk on the trail: the four coming along it from the left; the column not come yet, nobody at the pyre
-const START = () => ({
-  day: 0.35, dawn: 0.5, procession: 0, torches: 0, pyre_fire: 0, smoke: 0, heads: 1, walk: 0, camera_x: -5, camera_z: 0.8, camera_h: 0,
-  ...Object.assign({}, ...COLUMN.map(([id]) => OFF(id)), ...PARTY.map(OFF), ...CROWD_IDS.map(OFF)), ...COLUMN_STATE,
-  ...Object.fromEntries(PARTY.flatMap(id => [[`${id}_a`, FROM[id]], [`${id}_d`, trail(FROM[id])], [`${id}_here`, true]])),
+  [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_wear`]: null, [`${id}_on`]: null, [`${id}_gait`]: null, [`${id}_mood`]: null });
+const PEOPLE = [...COLUMN.map(([id]) => id), ...PARTY, ...CROWD_IDS, 'owner', 'trader', 'conductor'];
+// the camera as the scene has it (no one framed, riding nothing)
+const CAM0 = { camera_on: null, camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_yaw: 0, camera_pitch: 0, camera_x: 0, camera_z: 0, camera_h: 0 };
+// the keys of the games' hands at rest
+const HANDS = { owner_back: 0, offer: 0, banknotes: 0, ride: 0, charge: 0, scatter: 0, grab: 0, guide_seen: 0, kiouni_lane: 0, litter_lane: 0 };
+// who stands where (a place, a turn): [a, d] → their keys, in the scene
+const stand = (id, at, turn, more = {}) => ({ [`${id}_a`]: at[0], [`${id}_d`]: at[1], [`${id}_here`]: true, [`${id}_turn`]: turn, ...more });
+// who sits where on Kiouni ({id: seat}) — facing his way (or `turn` in his frame), in a seated loop
+const riders = (seats, turn = {}, sit = {}) => Object.fromEntries(Object.entries(seats).flatMap(([id, at], i) => [
+  [`${id}_on`, seat(at)], [`${id}_here`, true], [`${id}_turn`, turn[id] ?? 180], [`${id}_do`, loop(sit[id] ?? 'sit_calm', 1.1 * i)],
+  [`${id}_look`, null], [`${id}_reach`, null], [`${id}_gait`, null]]));
+const MOUNTED = { guide: 'guide', fogg: 'front', cromarty: 'mid', passepartout: 'back' };
+// (after the suttee: the widow in the howdah, asleep, Passepartout on his rump looking back)
+const FLED = { guide: 'guide', fogg: 'front', aouda: 'mid', cromarty: 'back', passepartout: 'rump' };
+const FLED_TURN = { passepartout: 0 }, FLED_SIT = { aouda: 'sleep_seated' };
+
+// the end of the rails by day: the train stood at the line's end, Kiouni in his shed, his owner by him; the travellers
+// off the train, the conductor by the carriages, the passengers going off along the line
+const RAILS = () => ({
+  ...CAM0, day: 1, dawn: 0, station: 'kholby', procession: 0, torches: 0, pyre_fire: 0, smoke: 0, heads: 1, walk: 0, ...HANDS,
+  camera_x: -33.6, camera_z: 4, camera_h: 0,
+  ...Object.assign({}, ...PEOPLE.map(OFF)), ...KIOUNI(KI_SHED, 270),
+  ...stand('owner', OWNER, 250, { owner_do: loop('hands_behind') }),
+  ...Object.fromEntries(Object.entries(OFF_TRAIN).flatMap(([id, at]) => Object.entries(stand(id, at, toward(at, AT_SHED[id]))))),
+  fogg_wear: { hat: 'tophat' }, fogg_gait: 'fogg_walk', passepartout_gait: 'pp_walk',
+  ...stand('conductor', CONDUCTOR[0], 270),
+  ...Object.fromEntries(PASSENGERS.flatMap(([id, at, to]) => Object.entries(stand(id, at, toward(at, to), { [`${id}_with`]: ['bundle'] })))),
 });
-// night: the four hidden in the thicket; the column coming along the trail from the left, its torches lit
+// the bargain: Fogg and the owner three-quarters to each other before the shed, the others by
+const BARGAIN = () => ({
+  ...RAILS(), camera_x: -31.4, camera_z: 5.4, camera_h: -0.2, banknotes: 1,
+  ...Object.assign({}, ...['conductor', 'v1', 'v2', 'v3'].map(OFF)),
+  ...stand('fogg', HAGGLE.fogg, 115, { fogg_look: 'owner#head', fogg_reach: { r: [-31.6, 10.6, 1.15] } }),
+  ...stand('owner', HAGGLE.owner, 245, { owner_look: 'fogg#head', owner_do: 'stand' }),
+  ...stand('passepartout', HAGGLE.passepartout, 120, { passepartout_look: 'kiouni#head' }),
+  ...stand('cromarty', HAGGLE.cromarty, 100, { cromarty_look: 'owner#head' }),
+});
+// up in the howdah, Kiouni kneeling; the owner and Cromarty by
+const UP = () => ({
+  ...BARGAIN(), banknotes: 0, offer: 0, camera_x: -29.8, camera_z: 4.8, camera_h: 0.5, ...KIOUNI(KI_SHED, 270, 1), ...riders(MOUNTED),
+  guide_with: ['goad'], owner_reach: null, fogg_reach: null,
+  ...stand('owner', [-32.0, 10.4], 75, { owner_do: loop('arms_folded'), owner_look: 'kiouni#head' }),
+});
+// the ride: Kiouni on the trail at the way's start, the four on him, the camera riding him from the side
+const RIDE = () => ({
+  ...UP(), ...rideAt(0), ...kneelPose(0), pace: 0.4, ...Object.assign({}, ...['owner', 'conductor'].map(OFF)),
+  ...riders(MOUNTED, {}, { fogg: 'read_book' }), guide_with: ['goad'], fogg_with: ['notebook'],
+  ...CAM0, camera_on: 'kiouni_site', camera_x: -6.5, camera_z: 0.4, camera_h: 1.0, camera_yaw: 90,
+});
+// dusk on the trail: the four coming along it on Kiouni from the left; the column not come yet, nobody at the pyre
+const START = () => ({
+  ...CAM0, day: 0.35, dawn: 0.5, station: 'kholby', procession: 0, torches: 0, pyre_fire: 0, smoke: 0, heads: 1, walk: 0, ...HANDS,
+  camera_x: -5, camera_z: 0.8, camera_h: 0,
+  ...Object.assign({}, ...PEOPLE.map(OFF)), ...COLUMN_STATE, ...Object.fromEntries(COLUMN.map(([id]) => [`${id}_here`, false])),
+  ...KIOUNI(onTrail(-11), 90), ...riders(MOUNTED), guide_with: ['goad'],
+});
+// night: the four hidden in the thicket, Kiouni among the trees behind them; the column coming along the trail from the
+// left, its torches lit
 const NIGHT = () => ({
-  ...START(), day: 0.15, procession: COMING, ...column(COMING), camera_x: -2.6, camera_z: 3.6, camera_h: -0.4,
-  ...Object.fromEntries(PARTY.flatMap((id, i) => [[`${id}_a`, HIDE[id][0]], [`${id}_d`, HIDE[id][1]], [`${id}_turn`, 0],
-    [`${id}_do`, loop(HIDDEN[id], i * 1.3)], [`${id}_look`, DRUMS]])),
+  ...START(), day: 0.15, procession: COMING, ...column(COMING), camera_x: -5.3, camera_z: 1.5, camera_h: -0.2, ...KIOUNI(KI_HIDE, 90),
+  ...Object.fromEntries(PARTY.flatMap((id, i) => [[`${id}_a`, HIDE[id][0]], [`${id}_d`, HIDE[id][1]], [`${id}_turn`, 0], [`${id}_on`, null],
+    [`${id}_do`, loop(HIDDEN[id], i * 1.3)], [`${id}_look`, DRUMS], [`${id}_with`, null]])),
+});
+// the dash: the column stopped before the thicket, its torches; the four up on Kiouni in the thicket — Passepartout on
+// his rump turned to the trail, to reach down for her
+const DASH = () => ({
+  ...NIGHT(), day: 0, torches: 1, procession: STOPPED, ...column(STOPPED), camera_x: -2.6, camera_z: 0.4, camera_h: 0.2,
+  ...riders({ guide: 'guide', fogg: 'front', cromarty: 'back', passepartout: 'rump' }, { passepartout: 90 }), guide_with: ['goad'],
+  ears: 1, pace: 1,
+});
+// night by the pagoda: the two guards with their torches before the porch; the four creeping up along the trees on the
+// left, Kiouni and the column gone (the guards are of the procession's torch-bearers)
+const WALL = () => ({
+  ...START(), day: 0.02, dawn: 0, torches: 1, camera_x: 51.4, camera_z: 8.6, camera_h: -0.3, ...Object.assign({}, ...COLUMN.map(([id]) => OFF(id))),
+  ...KIOUNI(KI_TREES, 270, 1), ...riders({ guide: 'guide' }), guide_here: false,
+  ...Object.fromEntries(Object.entries(GUARDS).flatMap(([id, at]) => Object.entries(stand(id, at, 180, { [`${id}_with`]: ['torch'], [`${id}_do`]: 'stand' })))),
+  ...Object.fromEntries(PARTY.flatMap(id => Object.entries(stand(id, CREEP[id][0], toward(...CREEP[id]), { [`${id}_on`]: null, [`${id}_do`]: 'stand', [`${id}_look`]: null })))),
+  fogg_wear: { hat: 'tophat' },
 });
 // dawn on the clearing: the pyre — the widow lying on it beside the shrouded body; the priests with their torches, the
-// crowd kneeling; Fogg and Cromarty at the clearing's edge
+// crowd kneeling; Fogg and Cromarty at the clearing's edge; Kiouni kneeling at the trees, the guide on his neck
 const DAWN = () => ({
   ...START(), day: 0.3, dawn: 1, torches: 1, smoke: 0.3, camera_x: 42, camera_z: 0, camera_h: 0, heads: 1,
   ...Object.assign({}, ...COLUMN.map(([id]) => OFF(id)), ...PARTY.map(OFF)),
+  ...KIOUNI(KI_TREES, 270, 1), ...riders({ guide: 'guide' }), guide_with: ['goad'],
   aouda_a: ON_PYRE.aouda[0], aouda_d: ON_PYRE.aouda[1], aouda_here: true, aouda_do: loop('lie_limp'), aouda_turn: 90, aouda_wear: { hood: true },
   passepartout_a: ON_PYRE.passepartout[0], passepartout_d: ON_PYRE.passepartout[1], passepartout_here: true,
   passepartout_do: loop('lie_limp', 3.1), passepartout_turn: 270, passepartout_wear: SHROUD,
@@ -1142,139 +1296,511 @@ const ROSE = () => ({
   pr1_do: loop('prostrate'), pr2_do: loop('prostrate'), fogg_do: 'stand', cromarty_reach: null,
   fogg_look: 'passepartout#head', cromarty_look: 'passepartout#head',
 });
+// at the trees, as «Like the dead» leaves them: he has carried her there; the crowd looking up, the smoke thin; Fogg
+// come over to the trees
+const AT_TREES = () => ({
+  ...ROSE(), heads: 1, smoke: 0.25, walk: 1, camera_x: 36, camera_z: 2.5, camera_h: -0.2,
+  ...Object.fromEntries(CROWD_IDS.map((id, i) => [`${id}_do`, crowdDo(i, true)])), pr1_do: loop('kneel_up'), pr2_do: loop('kneel_up', 0.6),
+  passepartout_a: WAY.at(-1)[0], passepartout_d: WAY.at(-1)[1], passepartout_turn: toward(WAY.at(-2), WAY.at(-1)), passepartout_gait: 'carry_walk',
+  fogg_a: 34.2, fogg_d: 9.0, fogg_turn: toward([34.2, 9.0], WAY.at(-1)), fogg_look: 'passepartout#head', fogg_do: 'stand',
+});
+// on Kiouni at the trees, kneeling, all five up — the widow asleep in the howdah, Passepartout on his rump, unveiled
+const AWAY = () => ({
+  ...AT_TREES(), camera_x: 29.6, camera_z: 4.0, camera_h: 0.4, ...KIOUNI(KI_TREES, 270, 1), ...riders(FLED, FLED_TURN, FLED_SIT),
+  guide_with: ['goad'], aouda_wear: null, passepartout_wear: null, passepartout_gait: null, fogg_wear: null,
+});
+// the morning after: Allahabad — the same line's end with its board turned, the train for Calcutta stood there; Kiouni
+// coming along the trail from the right, the five on him, the widow asleep in the howdah
+const KI_STATION = [-35.6, 9.9];
+const MORNING = () => ({
+  ...RAILS(), dawn: 0.35, day: 0.85, station: 'allahabad', camera_x: -36.2, camera_z: 2.8, camera_h: 0.3,
+  ...Object.assign({}, ...['owner', 'v3'].map(OFF)), ...KIOUNI(onTrail(-29.5), 270), ...riders(FLED, FLED_TURN, FLED_SIT),
+  guide_with: ['goad'], aouda_wear: null, aouda_mood: 'tired', fogg_wear: { hat: 'tophat' },
+  ...stand('conductor', [-41.2, 15.6], 160, { conductor_look: 'kiouni#head' }),
+  ...stand('v1', [-44.4, 16.0], 150, { v1_with: ['bundle'], v1_look: 'kiouni#head' }), ...stand('v2', [-46.0, 16.3], 140, { v2_with: ['bundle'] }),
+});
+// knelt by the station: Passepartout and Cromarty down by him, Fogg still in the howdah turned to her
+const DOWN_AT = { passepartout: [-37.4, 8.6], cromarty: [-36.0, 8.4] };
+const KNELT = () => ({
+  ...MORNING(), ...KIOUNI(KI_STATION, 270, 1),
+  ...Object.fromEntries(Object.entries(DOWN_AT).flatMap(([id, at]) => Object.entries(stand(id, at, 0, { [`${id}_on`]: null, [`${id}_do`]: 'stand', [`${id}_look`]: 'aouda#head' })))),
+  fogg_turn: 0, fogg_look: 'aouda#head', fogg_do: loop('sit_calm'),
+});
+// on the ground by the station, all of them, Aouda awake; Kiouni standing, Fogg at his head with the goad
+const PARTING = () => ({
+  ...MORNING(), ...KIOUNI(KI_STATION, 270, 0), aouda_mood: null,
+  ...Object.fromEntries([...PARTY, 'aouda'].flatMap(id => [[`${id}_on`, null], [`${id}_do`, 'stand'], [`${id}_reach`, null], [`${id}_with`, null]])),
+  ...stand('fogg', [-38.2, 9.5], 95, { fogg_look: 'kiouni#head', fogg_with: ['goad'] }),
+  ...stand('aouda', [-39.3, 9.0], 80, { aouda_look: 'kiouni#head' }),
+  ...stand('guide', [-38.6, 10.7], 110, { guide_look: 'fogg#head' }),
+  ...stand('passepartout', [-37.0, 8.7], 70, { passepartout_look: 'kiouni#head' }),
+  ...stand('cromarty', [-40.3, 9.9], 90, { cromarty_look: 'kiouni#head' }),
+});
+// sold: Kiouni turned along the trail, the trader at his head with the goad
+const SALE = () => ({
+  ...PARTING(), ...KIOUNI(KI_STATION, 90, 0), fogg_with: null, passepartout_look: 'kiouni#head', guide_look: 'kiouni#head',
+  ...stand('trader', [-33.4, 9.4], 95, { trader_with: ['goad'], trader_look: null }),
+});
+
+// close on the howdah, riding him beside it: Aouda in the middle seat, her face (the operator does not frame people
+// carried on him: the camera rides him instead
+// carried on him: the camera rides him instead), on the side of him toward the viewer — as he faces `f`
+const nearSide = f => { const k = ((f % 360) + 360) % 360; return k > 0 && k < 180 ? -1 : 1; };
+const howdahClose = f => ({ ...CAM0, camera_on: 'kiouni_site', camera_x: 3.4 * nearSide(f), camera_z: 0.1, camera_h: 2.2, camera_yaw: -90 * nearSide(f) });
+// a point out to his near side, toward the camera beside the howdah: where she looks, waking
+const out = f => ({ on: 'kiouni_site', at: [4 * nearSide(f), 0.3, 3.6] });
 
 // Each beat ends in a living pose; whatever a beat waits for is something happening (someone arriving, coming into
-// view), time only where it truly is — a held breath.
-const FILM = {
-  // ---- Dusk. The four come along the trail; the guide hears the drums far off: they leave the trail and hide in the
-  // thicket, crouching, facing it.
-  drums: { from: START, run: async s => {
-    s.move('day', 0.15, { over: 8, ease: 'linear' });
-    const on = [];
-    for (const id of PARTY) { on.push(s.person(id).walk([[FROM[id] + 5.5, trail(FROM[id] + 5.5)]])); await s.wait(0.3); }
-    await s.all(...on);
-    s.tell('drums:heard');
-    s.person('guide').turn(270);
-    s.set('guide_look', DRUMS);
-    await s.wait(0.5);
-    s.set('cromarty_look', 'guide#head');
-    await s.wait(0.8);
-    const hide = PARTY.map((id, i) => s.sequence(async q => {
-      await q.wait(0.25 * i);
-      const p = q.person(id);
-      await p.walk([HIDE[id]]);
-      await p.turn(0);
-      p.do(HIDDEN[id], { loop: true, from: i * 1.3 });
-      q.set(`${id}_look`, DRUMS);
-    }));
-    await s.all(...hide);
-    s.tell('drums:hidden');
-    await s.wait(1.5);
-  } },
-  // ---- Night (a cut: closer, over the shoulders of the hidden four). Along the trail from the left: torches, drums,
-  // priests, the widow led by the arms, staggering. The column stops before them (and holds, under the choice).
-  procession: { from: NIGHT, run: async s => {
-    s.move('day', 0, { over: 2 });
-    s.move('torches', 1, { over: 1.5 });
-    s.set('procession', STOPPED);
-    await s.until(() => s.state.pb1_a > -9);
-    s.tell('procession:torches');
-    for (const [i, id] of PARTY.entries()) s.after(0.4 * i, () => s.set(`${id}_look`, 'pb1#head'));
-    await s.until(() => s.state.aouda_a > -7);
-    s.tell('procession:widow');
-    for (const [i, id] of PARTY.entries()) s.after(0.5 * i, () => s.set(`${id}_look`, 'aouda#head'));
-    await s.until(() => COLUMN.every(([id]) => Math.hypot(s.state[`${id}_a`] - inColumn(STOPPED, id)[0], s.state[`${id}_d`] - inColumn(STOPPED, id)[1]) < 0.3));
-    s.tell('procession:stopped');
-    s.set('passepartout_look', 'fogg#head');
-    await s.wait(0.9);
-    s.set('fogg_look', 'cromarty#head');
-    await s.wait(1.1);
-    s.set('fogg_look', 'aouda#head');
-    await s.wait(1);
-  } },
-  // ---- Dawn on the clearing. The pyre: the rajah's body and the widow on it; the crowd on their knees round it; the
-  // priests set their torches to it. Fogg strains forward — Cromarty holds him back.
-  pyre: { from: DAWN, run: async s => {
-    s.move('smoke', 0.7, { over: 6 });
-    const kindle = ['pr1', 'pr2'].map((id, i) => s.sequence(async q => {
-      await q.wait(0.4 + 0.5 * i);
-      const p = q.person(id);
-      await p.walk([KINDLE[id][0]]);
-      await p.turn(toward(KINDLE[id][0], PYRE));
-      q.set(`${id}_look`, KINDLE[id][1]);
-      q.set(`${id}_reach`, { r: KINDLE[id][1] });
-    }));
-    await s.wait(1.8);
-    s.person('fogg').do('strain', { loop: true });
-    await s.wait(0.2);
-    s.set('cromarty_reach', { r: 'fogg#shoulder_r', l: 'fogg#shoulder_l' });
-    s.set('cromarty_look', 'fogg#head');
-    s.set('fogg_look', 'aouda#head');
-    await s.all(...kindle);
-    await s.wait(0.6);
-    s.tell('pyre:kindled');
-    const fire = s.move('pyre_fire', 0.85, { over: 5, ease: 'in' });
-    s.move('camera_x', 37, { over: 4, ease: 'inOut' });
-    s.move('camera_z', 4.5, { over: 4, ease: 'inOut' });
-    s.move('camera_h', -0.3, { over: 4, ease: 'inOut' });
-    await s.wait(2.4);
-    s.set('pr1_reach', null);
-    await s.wait(0.4);
-    s.set('pr2_reach', null);
-    await fire;
-    await s.wait(1.5);
-  } },
-  // ---- The dead rajah rises out of the smoke with the widow in his arms; the crowd falls on its face.
-  rise: { after: 'pyre', from: LIT, run: async s => {
-    const shot = s.shot({ ...RISEN });
-    s.move('camera_x', 39.5, { over: 1.6, ease: 'inOut' });
-    s.move('camera_z', 7.5, { over: 1.6, ease: 'inOut' });
-    await s.move('smoke', 1, { over: 1.6 });
-    await s.until(() => shot.ready);
-    shot.cut();
-    s.tell('rise:risen');
-    await s.wait(0.6);
-    s.set('heads', 0);
-    s.after(0.4, () => s.set('pr1_do', loop('prostrate')));
-    s.after(0.7, () => s.set('pr2_do', loop('prostrate')));
-    await s.wait(0.8);
-    s.set('fogg_do', 'stand');
-    s.set('cromarty_reach', null);
-    await s.wait(0.4);
-    s.set('fogg_look', 'passepartout#head');
-    await s.wait(0.4);
-    s.set('cromarty_look', 'passepartout#head');
-    await s.move('smoke', 0.6, { over: 4 });
-  } },
-  // ---- (the game's «Like the dead»: `walk`, `heads`, `smoke`) He carries her down from the pyre and across the clearing
-  // toward the trees, as stiffly as the dead; the crowd lifts its heads; the smoke thins.
-  walk: { after: 'rise', from: ROSE, run: async s => {
+// view), time only where it truly is — a held breath. film(scene): the beats of the scene, for the game and the
+// showcase (the dash's first frame is made ready by the scene while the procession holds under the choice).
+function film(scene) {
+  // a beat's first frame made ready by the scene while the beat before holds under a choice — the dash's (during the
+  // procession), the gift's and the sale's (as Aouda wakes): `held`; cut to by the beat that comes (`take`) — at once
+  // when it is ready, else plainly when `needed` (the scene not opened on that beat: the module cut to its `from` then)
+  const held = {};
+  const hold = (name, values) => { held[name]?.cancel(); held[name] = scene.shot(values); };
+  const drop = () => { for (const k in held) { held[k]?.cancel(); delete held[k]; } };
+  const take = (s, name, values, needed) => {
+    const h = held[name];
+    delete held[name];
+    drop();
+    if (h?.ready) h.cut();
+    else { h?.cancel(); if (needed) s.cut(values); }
+  };
+  // ---- (the game's «Like the dead»: `walk` — it sends him on; the showcase's walk_show sends him to the trees itself) He
+  // carries her down from the pyre and across the clearing toward the trees, as stiffly as the dead; the crowd lifts its
+  // heads; the smoke thins.
+  const walking = async (s, self) => {
     s.set('passepartout_gait', 'carry_walk');
     // the camera back from the pyre to see him come down and away across the clearing
     s.move('camera_x', 36, { over: 3, ease: 'inOut' });
     s.move('camera_z', 2.5, { over: 3, ease: 'inOut' });
     s.move('camera_h', -0.2, { over: 3, ease: 'inOut' });
-    s.set('walk', 1);
+    if (self) s.set('walk', 1);
     await s.until(() => s.state.passepartout_a < 36.5);
     s.tell('walk:down');
-    s.set('heads', 1);
-    s.move('smoke', 0.25, { over: 8 });
+    if (self) { s.set('heads', 1); s.move('smoke', 0.25, { over: 8 }); }
     await s.until(() => s.state.passepartout_a < 34.5);
     s.set('fogg_look', null);
     const fogg = s.person('fogg');
     await fogg.walk([[34.2, 9.0]]);
     fogg.turn(toward([34.2, 9.0], WAY.at(-1)));
+    s.set('fogg_look', 'passepartout#head');
     await s.until(() => wayAt([s.state.passepartout_a, s.state.passepartout_d]) > 0.97);
     s.tell('walk:away');
     await s.wait(1.5);
-  } },
-};
-const SHOWCASE = ['drums', 'procession', 'pyre', 'rise', 'walk'];
+  };
+  // ---- (the game's «The dash»: charge, kiouni_lane, litter_lane, scatter, grab, guide_seen — the script moves them all
+  // on; the showcase's charge_show moves the keys itself) Out of the thicket, into the torches.
+  const dashing = async s => {
+    await s.until(() => s.state.charge >= 0.8);
+    s.tell('charge:through');
+    await s.until(() => s.state.charge >= 1);
+    await s.wait(0.5);
+  };
+  const beats = {
+    // ---- The end of the rails, by day. The travellers off the train; the conductor along the carriages; the passengers
+    // off along the line with their bundles; Passepartout ahead to the shed — an elephant!
+    rails_end: { from: RAILS, run: async s => {
+      const pp = s.person('passepartout'), fogg = s.person('fogg'), cromarty = s.person('cromarty');
+      s.person('conductor').walk([CONDUCTOR[1]]);
+      for (const [i, [id, , to]] of PASSENGERS.entries()) s.after(0.4 * i, () => s.person(id).walk([to]));
+      const run = pp.walk([AT_SHED.passepartout]);
+      await s.wait(0.6);
+      const walks = [fogg.walk([AT_SHED.fogg]), cromarty.walk([AT_SHED.cromarty])];
+      await run;
+      await pp.turn(toward(AT_SHED.passepartout, AT_SHED.fogg));
+      s.set('passepartout_look', 'fogg#head');
+      pp.do('surprised');
+      s.tell('rails_end:shed');
+      s.set('trunk', 'up');
+      s.move('ears', 1, { over: 0.8 });
+      await s.wait(1.2);
+      s.set('passepartout_look', 'kiouni#head');
+      s.set('owner_look', 'fogg#head');
+      await s.all(...walks);
+      fogg.turn(toward(AT_SHED.fogg, KI_SHED));
+      s.set('fogg_look', 'kiouni#head');
+      s.set('cromarty_look', 'kiouni#head');
+      s.set('trunk', 'rest');
+      s.move('ears', 0, { over: 1.5 });
+      await s.wait(1.5);
+    } },
+    // ---- (the game's «The bargain»: `offer`, `owner_back` — the script turns the owner away and back; the showcase's
+    // haggle_show bargains itself) Before the shed: Fogg and the owner three-quarters to each other, the roll of
+    // banknotes in Fogg's hand, Kiouni behind them.
+    haggle: { after: 'rails_end', from: BARGAIN, run: async s => {
+      const fogg = s.person('fogg'), owner = s.person('owner');
+      s.move('camera_x', -31.4, { over: 2.2, ease: 'inOut' });
+      s.move('camera_z', 5.4, { over: 2.2, ease: 'inOut' });
+      s.move('camera_h', -0.2, { over: 2.2, ease: 'inOut' });
+      s.person('passepartout').walk([HAGGLE.passepartout]);
+      s.person('cromarty').walk([HAGGLE.cromarty]);
+      owner.walk([HAGGLE.owner]);
+      await fogg.walk([HAGGLE.fogg]);
+      await fogg.turn(115);
+      s.set('fogg_look', 'owner#head');
+      s.set('owner_look', 'fogg#head');
+      owner.turn(245);
+      s.set('owner_do', 'stand');
+      s.set('banknotes', 1);
+      s.set('fogg_reach', { r: [-31.6, 10.6, 1.15] });
+      s.set('passepartout_look', 'kiouni#head');
+      s.set('cromarty_look', 'owner#head');
+      await s.wait(1);
+    } },
+    // ---- Sold. The owner takes the roll; the guide comes to Kiouni's head; Kiouni kneels — (a cut) all up in the
+    // howdah, the guide on his neck — and he rises with them, trumpeting.
+    mount: { after: ['haggle', 'haggle_show'], from: () => ({ ...BARGAIN(), offer: 0.6 }), run: async s => {
+      const up = s.shot(UP());
+      s.set('owner_reach', { r: 'fogg#hand_r' });
+      s.set('owner_back', 0);
+      await s.wait(0.9);
+      s.set('banknotes', 0);
+      s.set('fogg_reach', null);
+      s.set('owner_reach', null);
+      s.set('guide_a', GUIDE_IN[0]); s.set('guide_d', GUIDE_IN[1]); s.set('guide_here', true); s.set('guide_on', null); s.set('guide_with', ['goad']);
+      const guide = s.person('guide');
+      await guide.walk([GUIDE_AT]);
+      guide.turn(toward(GUIDE_AT, KI_SHED));
+      s.set('guide_look', 'kiouni#head');
+      await kneelTo(s, 1, 2.2);
+      await s.until(() => up.ready);
+      up.cut();
+      await s.wait(0.6);
+      await kneelTo(s, 0, 2.6);
+      s.tell('mount:up');
+      s.set('trumpet', 1);
+      await s.wait(2.6);
+      s.set('trumpet', 0);
+    } },
+    // ---- (the game's «The elephant»: ride, pace, goad, balk, sugar — the script moves Kiouni along the trail and the
+    // day to dusk by `ride`; the showcase's ride_show rides itself) On the trail, the camera riding him from the side.
+    ride: { from: RIDE, run: async s => { await s.wait(1); } },
+    // ---- Dusk. Kiouni comes along the trail with the four on him; he stops dead, ears out — the drums; he kneels, they
+    // get down and hide in the thicket before the trail, crouching; he goes in among the trees behind them.
+    drums: { from: START, run: async s => {
+      s.move('day', 0.15, { over: 10, ease: 'linear' });
+      await kiouniGo(s, [onTrail(-6), KI_STOP], 1.3);
+      s.move('ears', 1, { over: 0.6 });
+      s.move('balk', 0.35, { over: 0.8 });
+      s.set('guide_look', DRUMS);
+      s.tell('drums:heard');
+      await s.wait(0.6);
+      s.set('cromarty_look', 'guide#head');
+      s.set('fogg_look', DRUMS);
+      await s.wait(1.2);
+      s.move('balk', 0, { over: 1 });
+      await kneelTo(s, 1, 2);
+      const hide = PARTY.map((id, i) => s.sequence(async q => {
+        await q.wait(0.5 * [3, 1, 0, 2][i]);
+        const p = q.person(id);
+        q.set(`${id}_a`, DOWN[id][0]);
+        q.set(`${id}_d`, DOWN[id][1]);
+        q.set(`${id}_turn`, toward(DOWN[id], HIDE[id]));
+        q.set(`${id}_on`, null);
+        q.set(`${id}_look`, null);
+        if (id === 'guide') q.set('guide_with', null);
+        await p.do('rise_chair');
+        await p.walk([HIDE[id]]);
+        await p.turn(0);
+        p.do(HIDDEN[id], { loop: true, from: i * 1.3 });
+        q.set(`${id}_look`, DRUMS);
+      }));
+      await s.wait(2.4);
+      await kneelTo(s, 0, 2);
+      s.move('ears', 0, { over: 1.5 });
+      await kiouniGo(s, [[-3.4, 8.7], [-5.6, 8.3], KI_HIDE], 1.1);
+      s.turn('kiouni_facing', 90, 2.5);
+      await s.all(...hide);
+      s.tell('drums:hidden');
+      await s.wait(1.5);
+    } },
+    // ---- Night (a cut: wider, over the shoulders of the hidden four, Kiouni among the trees behind them). Along the
+    // trail from the left: torches, drums, priests, the widow led by the arms, staggering. The column stops before them
+    // (and holds, under the choice) — and the dash's first frame is made ready meanwhile, in case it comes.
+    procession: { from: NIGHT, run: async s => {
+      s.move('day', 0, { over: 2 });
+      s.move('torches', 1, { over: 1.5 });
+      s.set('procession', STOPPED);
+      await s.until(() => s.state.pb1_a > -9);
+      s.tell('procession:torches');
+      for (const [i, id] of PARTY.entries()) s.after(0.4 * i, () => s.set(`${id}_look`, 'pb1#head'));
+      await s.until(() => s.state.aouda_a > -7);
+      s.tell('procession:widow');
+      for (const [i, id] of PARTY.entries()) s.after(0.5 * i, () => s.set(`${id}_look`, 'aouda#head'));
+      s.move('ears', 0.6, { over: 1.2 });
+      await s.until(() => COLUMN.every(([id]) => Math.hypot(s.state[`${id}_a`] - inColumn(STOPPED, id)[0], s.state[`${id}_d`] - inColumn(STOPPED, id)[1]) < 0.3));
+      s.tell('procession:stopped');
+      hold('charge', DASH());
+      s.set('passepartout_look', 'fogg#head');
+      await s.wait(0.9);
+      s.set('fogg_look', 'cromarty#head');
+      await s.wait(1.1);
+      s.set('fogg_look', 'aouda#head');
+      await s.wait(1);
+    } },
+    // ---- «At night, quietly»: by the pagoda's wall in the dark, the guards' torches before its porch; the four creep up
+    // along the plinth — a guard lifts his torch, they draw back; Passepartout lags behind and is gone into the dark.
+    night_wall: { from: WALL, run: async s => {
+      drop();
+      const go = PARTY.map((id, i) => s.sequence(async q => { await q.wait(0.35 * i); await q.person(id).walk([CREEP[id][1]]); }));
+      await s.all(...go);
+      s.set('pb1_look', 'guide#head');
+      s.set('pb1_reach', { r: [GUARDS.pb1[0] - 0.4, GUARDS.pb1[1] - 0.3, 2.3] });
+      await s.wait(0.6);
+      for (const id of PARTY) s.set(`${id}_look`, 'pb1#flame');
+      await s.wait(0.9);
+      const back = ['guide', 'fogg', 'cromarty'].map((id, i) => s.sequence(async q => { await q.wait(0.25 * i); await q.person(id).walk([CREEP[id][0]]); }));
+      const pp = s.person('passepartout');
+      s.set('passepartout_look', [PYRE[0], PYRE[1], 1.5]);
+      await s.wait(1.4);
+      s.set('pb1_reach', null);
+      s.set('pb1_look', null);
+      await pp.walk(SLIP);
+      s.set('passepartout_here', false);
+      s.tell('night_wall:gone');
+      await s.all(...back);
+      s.set('fogg_look', 'cromarty#head');
+      await s.wait(2);
+    } },
+    // ---- Dawn on the clearing. The pyre: the rajah's body and the widow on it; the crowd on their knees round it; the
+    // priests set their torches to it. Fogg strains forward — Cromarty holds him back.
+    pyre: { from: DAWN, run: async s => {
+      s.move('smoke', 0.7, { over: 6 });
+      const kindle = ['pr1', 'pr2'].map((id, i) => s.sequence(async q => {
+        await q.wait(0.4 + 0.5 * i);
+        const p = q.person(id);
+        await p.walk([KINDLE[id][0]]);
+        await p.turn(toward(KINDLE[id][0], PYRE));
+        q.set(`${id}_look`, KINDLE[id][1]);
+        q.set(`${id}_reach`, { r: KINDLE[id][1] });
+      }));
+      await s.wait(1.8);
+      s.person('fogg').do('strain', { loop: true });
+      await s.wait(0.2);
+      s.set('cromarty_reach', { r: 'fogg#shoulder_r', l: 'fogg#shoulder_l' });
+      s.set('cromarty_look', 'fogg#head');
+      s.set('fogg_look', 'aouda#head');
+      await s.all(...kindle);
+      await s.wait(0.6);
+      s.tell('pyre:kindled');
+      const fire = s.move('pyre_fire', 0.85, { over: 5, ease: 'in' });
+      s.move('camera_x', 37, { over: 4, ease: 'inOut' });
+      s.move('camera_z', 4.5, { over: 4, ease: 'inOut' });
+      s.move('camera_h', -0.3, { over: 4, ease: 'inOut' });
+      await s.wait(2.4);
+      s.set('pr1_reach', null);
+      await s.wait(0.4);
+      s.set('pr2_reach', null);
+      await fire;
+      await s.wait(1.5);
+    } },
+    // ---- The dead rajah rises out of the smoke with the widow in his arms; the crowd falls on its face.
+    rise: { after: 'pyre', from: LIT, run: async s => {
+      const shot = s.shot({ ...RISEN });
+      s.move('camera_x', 39.5, { over: 1.6, ease: 'inOut' });
+      s.move('camera_z', 7.5, { over: 1.6, ease: 'inOut' });
+      await s.move('smoke', 1, { over: 1.6 });
+      await s.until(() => shot.ready);
+      shot.cut();
+      s.tell('rise:risen');
+      await s.wait(0.6);
+      s.set('heads', 0);
+      s.after(0.4, () => s.set('pr1_do', loop('prostrate')));
+      s.after(0.7, () => s.set('pr2_do', loop('prostrate')));
+      await s.wait(0.8);
+      s.set('fogg_do', 'stand');
+      s.set('cromarty_reach', null);
+      await s.wait(0.4);
+      s.set('fogg_look', 'passepartout#head');
+      await s.wait(0.4);
+      s.set('cromarty_look', 'passepartout#head');
+      await s.move('smoke', 0.6, { over: 4 });
+    } },
+    walk: { after: 'rise', from: ROSE, run: s => walking(s, false) },
+    // ---- At the trees: the «rajah» throws off the shroud — Passepartout! (a cut, close); then (a cut) all five up on
+    // Kiouni kneeling there, and away into the forest; behind them the crowd rises.
+    flee: { after: ['walk', 'walk_show'], from: AT_TREES, run: async s => {
+      const near = s.shot({ passepartout_wear: null, passepartout_turn: toward(WAY.at(-1), [34.2, 9.0]), passepartout_look: 'fogg#head',
+        fogg_look: 'passepartout#head', fogg_mood: 'surprised', camera_x: 32.8, camera_z: 6.2, camera_h: -0.4 });
+      const away = s.shot(AWAY());
+      s.move('camera_x', 32.4, { over: 1.4, ease: 'inOut' });
+      s.move('camera_z', 4.6, { over: 1.4, ease: 'inOut' });
+      await s.person('passepartout').turn(toward(WAY.at(-1), [34.2, 9.0]));
+      await s.until(() => near.ready);
+      near.cut();
+      s.tell('flee:pp');
+      await s.wait(1.8);
+      await s.until(() => away.ready);
+      away.cut();
+      await s.wait(0.4);
+      CROWD_IDS.forEach((id, i) => { if (i % 3 === 0) s.after(0.3 * i, () => s.person(id).do('surprised')); });
+      await kneelTo(s, 0, 2);
+      await kiouniGo(s, [onTrail(24), onTrail(16)], 1.8);
+      await s.wait(0.5);
+    } },
+    charge: { after: 'procession', from: DASH, run: async s => {
+      // (after the procession, under the choice: to the frame made ready meanwhile — or at once)
+      take(s, 'charge', DASH(), s.get('guide_on') == null);
+      await dashing(s);
+    } },
+    // ---- Close: Aouda in the howdah as he runs through the dark, the torchlight behind — her eyes open, afraid.
+    aouda_fear: { after: ['charge', 'charge_show'], from: () => ({ ...DASH(), ...riders(FLED, FLED_TURN, FLED_SIT), charge: 1, grab: 1, aouda_wear: null,
+      ...Object.fromEntries((() => { const [a, d] = dashAt(1, 0, widowAt(0)); return [['kiouni_x', a], ['kiouni_d', d], ['kiouni_facing', 30]]; })()),
+      aouda_mood: 'tired', ...howdahClose(30) }), run: async s => {
+      const close = s.shot({ ...howdahClose(s.get('kiouni_facing')), aouda_mood: 'tired' });
+      kiouniGo(s, [DASH_AWAY[2], [17, 29]], 1.8);
+      await s.until(() => close.ready);
+      close.cut();
+      await s.wait(1.2);
+      s.set('aouda_do', loop('sit_calm'));
+      s.set('aouda_mood', 'afraid');
+      s.set('aouda_look', out(s.get('kiouni_facing')));
+      await s.wait(1.6);
+      s.set('aouda_look', 'fogg#head');
+      await s.wait(1.8);
+    } },
+    // ---- Morning: Allahabad. Kiouni comes along the trail to the line's end and kneels; Passepartout and Cromarty get
+    // down; Fogg turns to her in the howdah.
+    allahabad: { from: MORNING, run: async s => {
+      await kiouniGo(s, [KI_STATION], 1.2);
+      await kneelTo(s, 1, 2);
+      s.tell('allahabad:kneel');
+      const down = Object.entries(DOWN_AT).map(([id, at], i) => s.sequence(async q => {
+        await q.wait(0.6 * i);
+        q.set(`${id}_a`, at[0]); q.set(`${id}_d`, at[1]); q.set(`${id}_turn`, 0); q.set(`${id}_on`, null);
+        await q.person(id).do('rise_chair');
+        q.set(`${id}_look`, 'aouda#head');
+      }));
+      s.set('fogg_turn', 0);
+      s.set('fogg_look', 'aouda#head');
+      await s.all(...down);
+      await s.wait(1);
+    } },
+    // ---- Close: Aouda wakes in the howdah (`aouda_calm` 1 — calmly, and the first face she sees is Fogg's; 0 —
+    // frightened, looking round).
+    wake: { after: 'allahabad', from: () => ({ ...KNELT(), ...howdahClose(270) }), run: async s => {
+      const close = s.shot(howdahClose(s.get('kiouni_facing')));
+      hold('gift', PARTING());
+      hold('sold', SALE());
+      await s.wait(0.6);
+      await s.until(() => close.ready);
+      close.cut();
+      await s.wait(1.2);
+      const calm = (s.get('aouda_calm') ?? 1) > 0.5;
+      s.set('aouda_do', loop('sit_calm'));
+      s.set('aouda_mood', calm ? null : 'afraid');
+      if (calm) s.set('aouda_look', 'fogg#head');
+      else s.set('aouda_look', out(s.get('kiouni_facing')));
+      s.tell('wake:eyes');
+      await s.wait(1.6);
+      if (!calm) { s.set('aouda_look', [-28, 12, 2]); await s.wait(1.2); s.set('aouda_look', 'fogg#head'); }
+      await s.wait(1.6);
+    } },
+    // ---- Given: Fogg lays his palm on the trunk and hands the goad to the guide; Kiouni lifts Passepartout on his trunk.
+    gift: { after: 'wake', from: PARTING, run: async s => {
+      take(s, 'gift', PARTING(), (s.get('kneel') ?? 0) > 0.5);
+      const fogg = s.person('fogg'), pp = s.person('passepartout');
+      s.set('fogg_reach', { r: 'kiouni#trunk' });
+      await s.wait(1.4);
+      s.set('fogg_reach', null);
+      s.set('fogg_look', 'guide#head');
+      await fogg.turn(140);
+      s.set('guide_reach', { r: 'fogg#hand_r' });
+      s.set('fogg_reach', { r: [-38.4, 10.1, 1.1] });
+      await s.wait(0.9);
+      s.set('fogg_with', null);
+      s.set('guide_with', ['goad']);
+      s.set('fogg_reach', null);
+      s.set('guide_reach', null);
+      s.set('guide_look', 'kiouni#head');
+      await pp.walk([[-37.3, 9.4]]);
+      await pp.turn(90);
+      s.set('passepartout_on', 'kiouni#lift');
+      s.set('trunk', 'lift');
+      await s.wait(1.6);
+      s.tell('gift:lift');
+      s.set('passepartout_look', 'fogg#head');
+      await pp.do('laugh_up');
+      s.set('trunk', 'rest');
+      await s.wait(0.8);
+      s.set('passepartout_a', -37.0); s.set('passepartout_d', 8.7); s.set('passepartout_turn', 70);
+      s.set('passepartout_on', null);
+      await pp.do('stumble');
+      await s.wait(1);
+    } },
+    // ---- Sold: the trader leads Kiouni away along the trail; Passepartout looks after him; (`guide_walks` 1) the guide,
+    // who may not go home, goes off alone along the sleepers.
+    sold: { after: 'wake', from: SALE, run: async s => {
+      take(s, 'sold', SALE(), (s.get('kneel') ?? 0) > 0.5);
+      const pp = s.person('passepartout');
+      s.person('trader').walk([onTrail(-18).map((v, i) => v - 0.9 * i)]);
+      await s.wait(0.5);
+      kiouniGo(s, [onTrail(-30), onTrail(-19)], 1.25);
+      s.set('passepartout_mood', 'sad');
+      if ((s.get('guide_walks') ?? 0) > 0.5) s.after(1.5, () => { s.set('guide_look', null); s.person('guide').walk([[-44.5, 19.6], [-64, 20.2]]); });
+      await s.until(() => s.state.kiouni_x > -29);
+      s.tell('sold:away');
+      await pp.walk([[-35.4, 8.8]]);
+      await pp.turn(80);
+      await s.wait(2);
+    } },
+    // ---- The showcase's own (outside games), at the table's end: the games' beats played by themselves
+    haggle_show: { after: 'rails_end', from: BARGAIN, run: async s => {
+      await beats.haggle.run(s);
+      await s.move('offer', 0.35, { over: 3.5, ease: 'linear' });
+      await s.wait(0.4);
+      s.move('owner_back', 1, { over: 0.8 });
+      await s.wait(2.4);
+      s.move('owner_back', 0, { over: 0.8 });
+      await s.wait(0.6);
+      await s.move('offer', 0.8, { over: 4.5, ease: 'linear' });
+      await s.wait(1);
+    } },
+    ride_show: { from: RIDE, run: async s => {
+      s.move('ride', 0.35, { over: 12, ease: 'linear' });
+      await s.wait(4);
+      s.set('goad', 1);
+      s.move('pace', 1, { over: 1.5 });
+      await s.wait(3);
+      s.set('goad', 0);
+      s.move('pace', 0, { over: 0.6 });
+      await s.move('balk', 1, { over: 0.6 });
+      await s.wait(1.6);
+      s.set('sugar', 1);
+      await s.wait(0.6);
+      s.set('sugar', 0);
+      s.move('balk', 0, { over: 1.2 });
+      s.move('pace', 0.6, { over: 1.5 });
+      await s.move('ride', 1, { over: 14, ease: 'linear' });
+      await s.wait(1);
+    } },
+    walk_show: { after: 'rise', from: ROSE, run: s => walking(s, true) },
+    charge_show: { from: DASH, run: async s => {
+      const lane = s.move('litter_lane', 0.4, { over: 2.5, ease: 'inOut' });
+      s.move('kiouni_lane', 0.4, { over: 2.5, ease: 'inOut' });
+      s.move('scatter', 1, { over: 5.5, ease: 'linear' });
+      await s.move('charge', 0.5, { over: 5.5, ease: 'linear' });
+      await lane;
+      await s.wait(0.5);
+      s.set('grab', 1);
+      await s.wait(0.6);
+      s.move('charge', 1, { over: 3, ease: 'linear' });
+      s.after(1.4, () => s.set('guide_seen', 1));
+      await dashing(s);
+    } },
+  };
+  return beats;
+}
+// the showcase: every beat of the film in its order — the games' beats as they play by themselves
+const SHOWCASE = ['rails_end', 'haggle_show', 'mount', 'ride_show', 'drums', 'procession', 'night_wall', 'pyre', 'rise', 'walk_show', 'flee',
+  'charge_show', 'aouda_fear', 'allahabad', 'wake', 'gift', 'sold'];
 
 return {
   plan, trail, columnHead, stream, bank, mixc, rgba, glow, ground, shoreline, ramp,
   TREES, PALMS, BAMBOO, LOW, SHORE, NEAR_TRUNKS, NEAR_LOW, LIANAS, plantLayer,
   trunk, crown, figWood, figCrown, bamboo, palm, frond, fern, broadleaf, liana, stone, towerFace, thatch, mistBank,
-  KI, TRUNK, kiouniPaint, kiouniMove, howdahPaint, KIOUNI_SEATS, seat,
-  COLUMN, CROWD_IDS, crowdDo, march, carry, inColumn, START, FILM, SHOWCASE, FLAMES, flamePaint, flameMotion,
+  KI, TRUNK, kiouniPaint, kiouniMove, howdahPaint, KIOUNI_SEATS, seat, kneelPose, rideAt, dashAt, widowAt, LANE, SCATTER, toward,
+  COLUMN, CROWD_IDS, STOPPED, crowdDo, march, carry, inColumn, START, film, SHOWCASE, FLAMES, flamePaint, flameMotion,
 };

@@ -280,15 +280,16 @@ function boatLive(e, i) {
 }
 
 // ── The film (the world's module beats), for the game and the showcase: film(scene) — its beats read the scene's own
-// settings (Aouda's dress, whether she is with him) as they cut ──
+// settings (Aouda's dress, whether she and Fix are with him) as they cut ──
 // at the parapet, where Aouda waits looking out (parapet#parapet); where Passepartout stands by her; where Fogg comes to,
 // and where he comes from along the quay
 const BY_WALL = [-18, 4.15], PP_BY = [-16.9, 3.95], TO_HER = [-15.4, 3.6], ALONG = [-5, 3.2];
 // the tavern's table by the rail (tables#table) and its two stools: Passepartout's (facing right), Fix's (left)
 const TABLE = [-40.2, 6.6], STOOL = { passepartout: [-40.95, 6.6], fix: [-39.45, 6.6] };
 const BOTTLE = [TABLE[0] + 0.15, TABLE[1], 0.95], CUP = [TABLE[0] - 0.1, TABLE[1], 0.82];
-// Passepartout's way in the opium (`pp_walk` 0…1): off the terrace, along the quay, out along the pier toward the steamer
-const WAY = [[-31, 3.6], [-12, 3.3], [10.6, 3.6], [12, 6.5], [12, 40], [12.4, 70]];
+// Passepartout's way in the opium («Stay awake»: `pp_walk` 0…1): up from the stool, off the terrace onto the quay and
+// along it to the top of the steps down to the water, where the boatman waits with his lantern (at 0.97 of the way)
+const WAY = [[-41.5, 6.6], [-40.4, 4.0], [-24, 3.5], [-8.6, 4.3]];
 const LENS = WAY.slice(1).map((p, i) => Math.hypot(p[0] - WAY[i][0], p[1] - WAY[i][1]));
 const WAY_LEN = LENS.reduce((a, b) => a + b, 0);
 // where `pp_walk` v is along the way
@@ -298,8 +299,9 @@ function along(v) {
   const f = LENS[i] ? left / LENS[i] : 0;
   return [WAY[i][0] + (WAY[i + 1][0] - WAY[i][0]) * f, WAY[i][1] + (WAY[i + 1][1] - WAY[i][1]) * f];
 }
-// the way's points from `from` on to `to` (both in pp_walk's units, from < to): where he walks
-function wayBetween(from, to) {
+// the way's points from `from` on to `to` (both in pp_walk's units, from < to): where he walks — the last of them as
+// far aside as he lurches (`sway` −1…1: toward the town … toward the water), on the quay
+function wayBetween(from, to, sway = 0) {
   const pts = [];
   let s = 0;
   for (let i = 0; i < LENS.length; i++) {
@@ -307,7 +309,8 @@ function wayBetween(from, to) {
     const v = s / WAY_LEN;
     if (v > from + 1e-4 && v < to - 1e-4) pts.push(WAY[i + 1].slice());
   }
-  pts.push(along(to));
+  const [a, d] = along(to);
+  pts.push([a, d < 5 ? anim.clamp(d + 0.9 * anim.clamp(sway, -1, 1), 2.6, 4.4) : d]);
   return pts;
 }
 // where a point [a, d] is along the way, in pp_walk's units (the nearest point of it)
@@ -322,25 +325,62 @@ function wayOf(a, d) {
   }
   return at;
 }
+// the boatman's sampan lying at the foot of the steps, and its way off across the water toward the town with the news
+const SAMPAN = [-7.6, 9.4, 180], SAMPAN_OFF = [[-11, 15, 200], [-40, 70, 195], [-90, 190, 190]];
 // by the pier's foot in the morning, looking out where the steamer lay
 const PIER_FOOT = { fogg: [9.4, 4.0], aouda: [8.3, 4.1] };
 const TRAVEL = { garment: 'dress', colors: { garment: '#3c4a5a', top: '#3c4a5a', accent: '#c9b98f' } };
-const WHO = ['fogg', 'aouda', 'passepartout', 'fix'];
+// the night the Carnatic sails: where Passepartout comes reeling along the jetty to the foot of her gangway
+const JETTY_IN = [13.2, 78.4], GANGWAY_FOOT = [17.4, 79.6];
+// the Tankadere at the landing: Bunsby by her side, Fogg and Aouda before him; Fix coming down the ramp from the quay
+// (all of them off the stage's boards, d 12…16: its plane is a floor people stand on, in Hong Kong too)
+const BY_BOAT = { bunsby: [39.8, 17.5], fogg: [37.6, 16.8], aouda: [36.5, 16.6], fix: [35.2, 16.5] };
+const RAMP_DOWN = [[32, 3.9], [32, 7.5], [32.4, 16.4]];
+// Aouda left on the quay's edge by the landing as the Tankadere puts out (Holland)
+const LEFT_ON_LANDING = [34.2, 4.5];
+// Yokohama: Batulcar's stage (on the landing, its boards 2.5 m up); the Long Noses in a row on it, Passepartout among
+// them; the pyramid's foot (pyr#b0…b2) and its tiers — who stands on whose shoulders; the front row on the landing
+// before the stage
+const STAGE_Y = 14.2;
+const NOSES = ['n1', 'n2', 'n3', 'n4', 'n5'];
+const ROW = { n4: 35.4, n1: 36.4, passepartout: 37.4, n2: 38.4, n3: 39.4, n5: 40.4 };
+const BASE = { n1: 'b0', passepartout: 'b1', n2: 'b2' };
+const PYR_X = 38, PYR_D = 13.4, PYR_GAP = 0.62;
+// [who, on whose shoulder (a point of theirs), the two shoulders under the feet, from what `pyramid` on]
+const TIERS = [
+  ['n4', 'n1#shoulder_l', ['n1#shoulder_l', 'passepartout#shoulder_r'], 0.2],
+  ['n3', 'passepartout#shoulder_l', ['passepartout#shoulder_l', 'n2#shoulder_r'], 0.26],
+  ['n5', 'n4#shoulder_l', ['n4#shoulder_l', 'n3#shoulder_r'], 0.42],
+];
+// where each climber stands waiting behind the foot, and where those who fall land
+const WAIT = { n4: [37.2, 15.1], n3: [38.8, 15.1], n5: [38.0, 15.5] };
+const FALL = { n4: [36.4, 13.4], n3: [39.8, 13.6], n5: [38.3, 14.8] };
+const BATULCAR = [34.3, 13.0];
+const SEAT = { fogg: [37.4, 9.5], aouda: [36.6, 9.5] }, TO_SEAT = { fogg: [35.4, 8.9], aouda: [34.6, 8.9] };
+const COSTUME = () => kit.cast.characters.passepartout_nose;
+// Yokohama's quay at night after the show: Fogg (and Aouda) going off along it; Passepartout running after them
+const REUNION = { fogg: [10.6, 3.6], aouda: [9.6, 3.7], passepartout: [13.6, 3.5] };
+const WHO = ['fogg', 'aouda', 'passepartout', 'fix', 'bunsby', 'boatman', 'batulcar', ...NOSES];
 const toward = ([a, d], [a2, d2]) => ((Math.atan2(a2 - a, d2 - d) * 180) / Math.PI + 360) % 360;
 const OFF = id => ({ [`${id}_a`]: -60, [`${id}_d`]: 3.5, [`${id}_here`]: false, [`${id}_do`]: 'stand', [`${id}_turn`]: 0,
-  [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_gait`]: null });
-const NOBODY = () => Object.assign({}, ...WHO.map(OFF));
-const CAM0 = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: 0, camera_roll: 0 };
+  [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_gait`]: null, [`${id}_on`]: null, [`${id}_mood`]: null });
+const NOBODY = () => ({ ...Object.assign({}, ...WHO.map(OFF)), aouda_wear: null, passepartout_wear: null, fix_wear: null,
+  bunsby_wear: null, batulcar_wear: null, ...Object.fromEntries(NOSES.map(id => [`${id}_wear`, null])) });
+const CAM0 = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_on: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_roll: 0, camera_look: 0 };
 const loop = (motion, from = 0) => ({ motion, loop: true, from });
-// the light and the ships at the film's moments
+const stand = (id, at, turn, more = {}) => ({ [`${id}_a`]: at[0], [`${id}_d`]: at[1], [`${id}_here`]: true, [`${id}_turn`]: turn, ...more });
+// the light and the ships at the film's moments; the games' keys at rest
+const HANDS = { boatman: 0, message: 0, pp_sway: 0, pyramid: 0, tilt: 0, pyr_x: PYR_X, fogg_present: 0, pipe_smoke: 0, ...{ sampan_x: SAMPAN[0], sampan_d: SAMPAN[1], sampan_facing: SAMPAN[2] } };
 const LIGHT = {
-  day: { port: 'hongkong', evening: 0, night: 0, lanterns: 0.4, daze: 0, carnatic_present: 1, tankadere_out: 0, sail: 0, pp_walk: 0 },
-  tavern: { port: 'hongkong', evening: 1, night: 0.4, lanterns: 1, daze: 0, carnatic_present: 1, tankadere_out: 0, sail: 0, pp_walk: 0 },
-  night: { port: 'hongkong', evening: 1, night: 1, lanterns: 1, daze: 0, carnatic_present: 1, tankadere_out: 0, sail: 0, pp_walk: 0 },
+  day: { port: 'hongkong', evening: 0, night: 0, lanterns: 0.4, daze: 0, carnatic_present: 1, tankadere_out: 0, sail: 0, pp_walk: 0, pp_walk_at: 0, ...HANDS },
+  tavern: { port: 'hongkong', evening: 1, night: 0.4, lanterns: 1, daze: 0, carnatic_present: 1, tankadere_out: 0, sail: 0, pp_walk: 0, pp_walk_at: 0, ...HANDS },
+  night: { port: 'hongkong', evening: 1, night: 1, lanterns: 1, daze: 0, carnatic_present: 1, tankadere_out: 0, sail: 0, pp_walk: 0, pp_walk_at: 0, ...HANDS },
+  yokohama: { port: 'yokohama', evening: 1, night: 1, lanterns: 1, daze: 0, carnatic_present: 0, tankadere_out: 1, sail: 0, pp_walk: 0, pp_walk_at: 0, ...HANDS },
 };
 
 function film(scene) {
   const travel = () => ((scene.get('aouda_dress') ?? 0) > 0.5 ? TRAVEL : null);
+  const withAouda = () => (scene.get('with_aouda') ?? 0) > 0.5, withFix = () => (scene.get('with_fix') ?? 0) > 0.5;
   // the quay by day: Aouda at the parapet, Passepartout by her; Fogg coming back along the quay
   const DAY = () => ({
     ...LIGHT.day, ...CAM0, camera_x: -16.5, ...NOBODY(),
@@ -360,26 +400,83 @@ function film(scene) {
     passepartout_do: loop('talk_seated'), passepartout_look: 'fix#head',
     fix_a: STOOL.fix[0], fix_d: STOOL.fix[1], fix_here: true, fix_turn: 270, fix_do: loop('sit_calm'), fix_look: 'passepartout#head',
   });
-  // the opium: Passepartout off the terrace (or as far along his way as `at`), reeling, the camera with him
+  // ... as the badge leaves it: Passepartout up, standing over the table
+  const UP = () => ({ ...TAVERN(), camera_target: 'passepartout', camera_shot: 0.65, camera_frame: 0.4, passepartout_do: 'stand', passepartout_a: WAY[0][0], passepartout_d: WAY[0][1], passepartout_look: 'fix#head' });
+  // the opium: Passepartout as far along his way as `at`, reeling, the camera with him; the boatman waiting at the steps
   const DAZED = (at, daze) => {
     const [a, d] = along(at);
     return {
       ...LIGHT.tavern, ...CAM0, camera_target: 'passepartout', camera_shot: 'wide', camera_frame: [0.45, 0.62], ...NOBODY(),
-      daze, camera_roll: 4 * daze, pp_walk: at, pp_walk_at: at,
+      daze, camera_roll: 4 * daze, pp_walk: at, pp_walk_at: at, boatman: 1,
       passepartout_a: a, passepartout_d: d, passepartout_here: true, passepartout_turn: 90, passepartout_gait: 'stagger_walk',
+      ...boatman(),
     };
   };
-  // night on the quay, nobody there: the steamer at the jetty, smoking
-  const NIGHT = () => ({ ...LIGHT.night, ...CAM0, camera_x: 8, ...NOBODY() });
+  // the boatman standing in his sampan at the foot of the steps, his lantern
+  const boatman = () => ({ boatman_here: true, boatman_on: 'sampan#stand', boatman_turn: 180, boatman_with: ['lantern'], boatman_a: SAMPAN[0], boatman_d: SAMPAN[1] });
+  // night at the jetty: the steamer alongside, smoking; Passepartout reeling along the jetty to her gangway
+  const NIGHT = () => ({
+    ...LIGHT.night, ...CAM0, camera_x: 15.2, camera_z: 70, camera_h: 0.3, ...NOBODY(),
+    ...stand('passepartout', JETTY_IN, toward(JETTY_IN, GANGWAY_FOOT), { passepartout_gait: 'stagger_walk' }), daze: 0.5,
+  });
+  // aboard, lying where he fell on her deck (the camera from the jetty, up at her rail)
+  const ABOARD = () => ({ passepartout_on: 'steamer_deck#aboard', passepartout_do: loop('lie_limp'), passepartout_turn: 90, passepartout_gait: null,
+    passepartout_a: 22, passepartout_d: 83.5, camera_x: 21, camera_z: 73, camera_h: 6, camera_look: 0.25 });
   // morning, the jetty empty: Fogg (and Aouda) at the pier's foot
   const MORNING = () => ({
     ...LIGHT.day, ...CAM0, carnatic_present: 0, lanterns: 0.2, camera_x: 9, ...NOBODY(),
     fogg_a: PIER_FOOT.fogg[0], fogg_d: PIER_FOOT.fogg[1], fogg_here: true, fogg_turn: 10, fogg_wear: { hat: 'tophat' },
-    aouda_a: PIER_FOOT.aouda[0], aouda_d: PIER_FOOT.aouda[1], aouda_here: (scene.get('with_aouda') ?? 1) > 0.5, aouda_turn: 5, aouda_wear: travel(),
+    aouda_a: PIER_FOOT.aouda[0], aouda_d: PIER_FOOT.aouda[1], aouda_here: withAouda(), aouda_turn: 5, aouda_wear: travel(),
   });
-  const FAR = [14, 76, 1]; // where the steamer lay
+  // the Tankadere at the landing: Bunsby by her, Fogg (and Aouda) before him; Fix up on the quay at the ramp's head
+  const BOAT = () => ({
+    ...LIGHT.day, ...CAM0, carnatic_present: 0, lanterns: 0.1, camera_x: 36.4, camera_z: 6.6, camera_h: -0.7, ...NOBODY(),
+    ...stand('bunsby', BY_BOAT.bunsby, 215, { bunsby_look: 'fogg#head' }),
+    ...stand('fogg', BY_BOAT.fogg, 40, { fogg_look: 'bunsby#head', fogg_wear: { hat: 'tophat' } }),
+    ...stand('aouda', BY_BOAT.aouda, 45, { aouda_here: withAouda(), aouda_wear: travel(), aouda_look: 'bunsby#head' }),
+    ...stand('fix', RAMP_DOWN[0], 180),
+  });
+  // aboard the Tankadere: Bunsby at the tiller, Fogg, Aouda (with_aouda), Fix (with_fix) — standing on her deck
+  const crew = (aouda = withAouda(), fix = withFix()) => ({
+    bunsby_here: true, bunsby_on: 'tankadere_crew#helm', bunsby_turn: 270, bunsby_a: 33, bunsby_d: 20.6,
+    fogg_here: true, fogg_on: 'tankadere_crew#fogg', fogg_turn: 160, fogg_a: 36, fogg_d: 20.6, fogg_wear: { hat: 'tophat' },
+    aouda_here: aouda, aouda_on: 'tankadere_crew#aouda', aouda_turn: 170, aouda_a: 37, aouda_d: 20.6, aouda_wear: travel(),
+    fix_here: fix, fix_on: 'tankadere_crew#fix', fix_turn: 200, fix_a: 39, fix_d: 20.6,
+  });
+  const OUT = () => ({ ...LIGHT.day, ...CAM0, carnatic_present: 0, lanterns: 0.1, camera_x: 30, camera_z: 5, camera_h: -0.2, ...NOBODY(), ...crew() });
+  // Yokohama, night: the booth — the Long Noses in a row on the stage, Passepartout among them; Batulcar at its edge
+  const SHOW = () => ({
+    ...LIGHT.yokohama, ...CAM0, camera_x: 37.2, camera_z: 5.8, camera_h: 0.2, ...NOBODY(),
+    ...Object.assign({}, ...Object.entries(ROW).map(([id, x], i) => stand(id, [x, STAGE_Y + 0.2 * (i % 2)], 180, { [`${id}_do`]: 'stand' }))),
+    passepartout_wear: COSTUME(), passepartout_look: null,
+    ...stand('batulcar', BATULCAR, 150, { batulcar_look: [37, 4, 1.2] }),
+  });
+  // ... the pyramid's foot: the three at the mat, the climbers behind; the camera back to see it whole and the front row
+  const FOOT = () => ({
+    ...SHOW(), camera_x: 38, camera_z: 5.4, camera_h: 1.6,
+    ...Object.assign({}, ...Object.entries(BASE).map(([id, b], i) => stand(id, [PYR_X + (i - 1) * PYR_GAP, PYR_D], 180, { [`${id}_on`]: `pyr#${b}`, [`${id}_do`]: loop('storm_brace', 0.7 * i) }))),
+    ...Object.assign({}, ...Object.entries(WAIT).map(([id, at]) => stand(id, at, 180))),
+    ...stand('batulcar', [34.6, 13.8], 110, { batulcar_look: 'passepartout#head' }),
+  });
+  // ... built: the tiers up on the shoulders
+  const BUILT = () => ({
+    ...FOOT(), pyramid: 1, ...Object.assign({}, ...TIERS.map(([id, on, feet]) => ({ [`${id}_on`]: { at: on, up: 0.95 }, [`${id}_turn`]: 0,
+      [`${id}_reach`]: { foot_r: feet[0], foot_l: feet[1] }, [`${id}_do`]: 'stand' }))),
+    ...stand('fogg', SEAT.fogg, 0, { fogg_on: null, fogg_do: loop('sit_calm'), fogg_with: ['watch'], fogg_reach: { r: [SEAT.fogg[0] + 0.1, SEAT.fogg[1] + 0.35, 1.0] }, fogg_look: 'passepartout#head', fogg_wear: { hat: 'tophat' } }),
+    ...stand('aouda', SEAT.aouda, 0, { aouda_here: withAouda(), aouda_do: loop('sit_calm'), aouda_look: 'passepartout#head', aouda_wear: travel() }),
+    fogg_present: 1,
+  });
+  // Yokohama's quay after the show: Fogg (and Aouda) going off along it; Passepartout running after them in his wings
+  const AFTER = () => ({
+    ...LIGHT.yokohama, ...CAM0, camera_x: 9.2, camera_z: -0.2, camera_h: -0.1, ...NOBODY(),
+    ...stand('fogg', REUNION.fogg, 270, { fogg_wear: { hat: 'tophat' }, fogg_gait: 'fogg_walk' }),
+    ...stand('aouda', REUNION.aouda, 270, { aouda_here: withAouda(), aouda_wear: travel() }),
+    ...stand('passepartout', [15.4, 3.4], 270, { passepartout_wear: COSTUME(), passepartout_gait: 'run' }),
+  });
+  // the reverse from the stage: on the front row, the footlights in their faces
+  const FRONT_ROW = { ...CAM0, camera_on: 'see_cam', camera_look: 0.35 };
 
-  return {
+  const beats = {
     // ---- Hong Kong, day. Fogg comes back along the quay with the news; Aouda waits at the parapet, Passepartout by her.
     quay: {
       from: DAY,
@@ -469,41 +566,51 @@ function film(scene) {
         await s.wait(1.2);
       },
     },
-    // ---- (the game's «Stay awake»: `daze`, `pp_walk`, `pp_stumble`) Off the terrace, reeling, along the quay toward the
-    // steamer: the film plays a stretch of it, as the game would — `pp_walk` sends him on, he stumbles.
+    // ---- The pipe: Passepartout sits down again; Fix's pipe at his lips, its smoke; the world begins to swim (`daze` to
+    // 0.3); he gets up — and the game's «Stay awake» takes him on (`daze`, `pp_walk`, `pp_sway`, `pp_stumble`, `boatman`,
+    // `message`: the script).
     pipe: {
-      from: () => DAZED(0, 0),
+      after: 'badge',
+      from: UP,
       run: async s => {
-        s.move('daze', 0.6, { over: 4 });
-        s.move('camera_roll', 4 * 0.6, { over: 4 });
-        await s.wait(0.2);
-        s.set('pp_walk', 0.16);
-        await s.wait(6);
-        s.set('pp_stumble', 1);
-        await s.until(() => (s.get('pp_walk_at') ?? 0) >= 0.155);
-        s.set('pp_stumble', 0);
-        await s.wait(1);
+        const pp = s.person('passepartout'), fix = s.person('fix');
+        s.set('boatman', 1);
+        await pp.go('sit_down', { to: STOOL.passepartout, turn: 90 });
+        pp.do('sit_calm', { loop: true });
+        fix.look('passepartout#head');
+        s.set('passepartout_reach', { r: 'passepartout#head' });
+        s.set('pipe_smoke', 1);
+        s.move('daze', 0.3, { over: 3.5 });
+        s.move('camera_roll', 4 * 0.3, { over: 3.5 });
+        await s.wait(3.5);
+        s.set('passepartout_reach', null);
+        s.set('pipe_smoke', 0);
+        s.set('passepartout_gait', 'stagger_walk');
+        await pp.go('rise_table', { from: STOOL.passepartout, turn: 90 });
+        s.set('pp_walk_at', 0);
+        s.tell('pipe:up');
+        s.camera({ target: 'passepartout', shot: 'wide', frame: [0.45, 0.62], glide: 1.5 });
+        await s.wait(0.8);
       },
     },
-    pipe_on: {
-      after: 'pipe',
-      from: () => DAZED(0.16, 0.6),
-      run: async s => {
-        s.set('pp_walk', 0.32);
-        await s.wait(5);
-        s.set('pp_stumble', 1);
-        await s.until(() => (s.get('pp_walk_at') ?? 0) >= 0.315);
-        s.set('pp_stumble', 0);
-        await s.wait(1);
-      },
-    },
-    // ---- Night: the steamer casts off from the jetty, backs, swings her bow out and makes for the harbour's mouth,
-    // smoking — the start of her going (the game moves `carnatic_present` on to 0 as long as it wants her going to be).
+    // ---- Night. Passepartout reels along the jetty to the Carnatic's gangway and falls — (a cut) on her deck, aboard;
+    // she casts off, backs, swings her bow out and makes for the harbour's mouth (the game moves `carnatic_present` on to 0
+    // as long as it wants her going to be).
     carnatic: {
       from: NIGHT,
       run: async s => {
-        await s.wait(2);
+        const pp = s.person('passepartout');
+        const aboard = s.shot(ABOARD());
+        await pp.walk([GANGWAY_FOOT]);
+        await pp.do('stumble');
+        await s.until(() => aboard.ready);
+        aboard.cut();
+        s.tell('carnatic:aboard');
+        await s.wait(1.6);
         s.tell('carnatic:cast-off');
+        s.move('camera_z', 30, { over: 12, ease: 'inOut' });
+        s.move('camera_h', 0.4, { over: 12, ease: 'inOut' });
+        s.move('camera_look', 0, { over: 12, ease: 'inOut' });
         await s.move('carnatic_present', 0.45, { over: 26, ease: 'inOut' });
       },
     },
@@ -514,7 +621,7 @@ function film(scene) {
         const fogg = s.person('fogg'), aouda = s.person('aouda');
         const close = s.shot({ camera_target: 'fogg', camera_shot: 0.8, camera_frame: 0.42, camera_x: 0 });
         await s.wait(0.6);
-        fogg.look(FAR);
+        fogg.look([14, 76, 1]);
         await s.wait(0.6);
         aouda.look([12, 60, 1]);
         await s.wait(0.8);
@@ -529,16 +636,34 @@ function film(scene) {
         s.tell('morning:watch');
         await s.wait(2.2);
         fogg.with(null);
-        fogg.look(FAR);
+        fogg.look([14, 76, 1]);
         await watch;
         aouda.look('fogg#head');
         await s.wait(2);
       },
     },
-    // ---- Hong Kong, day: the pilot boat «Tankadere» raises her sails and puts off the landing (its people come with the
-    // beats stay_behind and cast_off — to do).
+    // ---- Day, the landing: Fogg (and Aouda) by the Tankadere with Bunsby, her pilot, in his sou'wester; Fix comes down
+    // the ramp from the quay and up to them (under the lines; holds under the choice).
+    bunsby: {
+      from: BOAT,
+      run: async s => {
+        const fix = s.person('fix');
+        await s.wait(3);
+        await fix.walk([RAMP_DOWN[1], RAMP_DOWN[2], BY_BOAT.fix]);
+        await fix.turn(toward(BY_BOAT.fix, BY_BOAT.fogg));
+        s.set('fix_look', 'fogg#head');
+        s.set('fogg_look', 'fix#head');
+        s.set('bunsby_look', 'fix#head');
+        s.tell('bunsby:fix');
+        await s.wait(0.6);
+        s.set('aouda_look', 'fix#head');
+        await s.wait(2.4);
+      },
+    },
+    // ---- The Tankadere sets her sails and puts off the landing, her people on her deck: Bunsby at the tiller, Fogg,
+    // Aouda (with_aouda), Fix (with_fix).
     cast_off: {
-      from: () => ({ ...LIGHT.day, ...CAM0, camera_x: 26, ...NOBODY() }),
+      from: OUT,
       run: async s => {
         await s.wait(1);
         await s.move('sail', 1, { over: 7, ease: 'inOut' });
@@ -547,32 +672,228 @@ function film(scene) {
         await s.wait(1);
       },
     },
+    // ---- (Holland) Aouda in her travelling dress on the landing, her hand up; the Tankadere going out of the harbour.
+    stay_behind: {
+      from: () => ({ ...OUT(), tankadere_out: 0.3, sail: 1, camera_x: 31.4, camera_z: 0.6, camera_h: 0.1, ...crew(false),
+        ...stand('aouda', LEFT_ON_LANDING, 60, { aouda_on: null, aouda_wear: TRAVEL, aouda_look: 'tankadere' }) }),
+      run: async s => {
+        await s.wait(0.6);
+        const up = [LEFT_ON_LANDING[0] + 0.25, LEFT_ON_LANDING[1] + 0.2, 2.3], wave = [LEFT_ON_LANDING[0] + 0.45, LEFT_ON_LANDING[1] + 0.25, 2.2];
+        s.set('aouda_reach', { r: up });
+        s.move('tankadere_out', 0.62, { over: 14, ease: 'in' });
+        await s.wait(0.8);
+        s.tell('stay_behind:wave');
+        for (let i = 0; i < 3; i++) { s.set('aouda_reach', { r: i % 2 ? up : wave }); await s.wait(0.7); }
+        s.set('aouda_reach', { r: up });
+        await s.wait(2);
+        s.set('aouda_reach', null);
+        await s.wait(2);
+      },
+    },
+    // ---- Yokohama, night: Batulcar's booth on the landing — the Long Noses in a row on the stage, Passepartout among
+    // them in wings and nose; Batulcar at the stage's edge announces them (under his line).
+    show: {
+      from: SHOW,
+      run: async s => {
+        await s.wait(1);
+        s.person('batulcar').do('spread_hands');
+        s.tell('show:announce');
+        NOSES.forEach((id, i) => s.after(0.3 + 0.2 * i, () => s.set(`${id}_look`, [37, 4, 1.2])));
+        await s.wait(2.6);
+      },
+    },
+    // ---- (the game's «The pyramid»: `pyramid`, `tilt`, `fogg_present` — the script builds the tiers, sways it, seats
+    // Fogg) The three at the foot of it on the mat, the climbers behind them; Batulcar aside.
+    pyramid: {
+      after: 'show',
+      from: FOOT,
+      run: async s => {
+        s.move('camera_z', 5.4, { over: 2, ease: 'inOut' });
+        s.move('camera_h', 1.6, { over: 2, ease: 'inOut' });
+        s.move('camera_x', 38, { over: 2, ease: 'inOut' });
+        const go = Object.entries(BASE).map(([id, b], i) => s.sequence(async q => {
+          const p = q.person(id), at = [PYR_X + (i - 1) * PYR_GAP, PYR_D];
+          await p.walk([at]);
+          await p.turn(180);
+          q.set(`${id}_on`, `pyr#${b}`);
+          p.do('storm_brace', { loop: true, from: 0.7 * i });
+        }));
+        for (const [id, at] of Object.entries(WAIT)) s.person(id).walk([at]);
+        s.person('batulcar').walk([[34.6, 13.8]]);
+        await s.all(...go);
+        s.set('batulcar_look', 'passepartout#head');
+        for (const id of Object.keys(WAIT)) { s.set(`${id}_turn`, 180); s.set(`${id}_look`, 'passepartout#head'); }
+        await s.wait(0.5);
+      },
+    },
+    // ---- Close on Passepartout under the noses: his eyes on the front row — (a cut) his master there, watch in hand.
+    see: {
+      after: ['pyramid', 'pyramid_show'],
+      from: BUILT,
+      run: async s => {
+        const close = s.shot({ ...CAM0, camera_x: 38, camera_z: 10.6, camera_h: 2.3 }), reverse = s.shot({ ...FRONT_ROW });
+        await s.until(() => close.ready);
+        close.cut();
+        s.set('passepartout_look', 'fogg#head');
+        await s.wait(1.2);
+        s.set('passepartout_mood', 'surprised');
+        await s.wait(1.4);
+        await s.until(() => reverse.ready);
+        reverse.cut();
+        await s.wait(2.6);
+      },
+    },
+    // ---- (dropped) He leaps out — the pyramid comes down, softly and absurdly, the noses sitting up on the boards;
+    // Batulcar throws up his hands; Passepartout at the footlights, his arms out to his master.
+    collapse: {
+      after: 'see',
+      from: () => ({ ...BUILT(), passepartout_look: 'fogg#head', passepartout_mood: 'surprised' }),
+      run: async s => {
+        const wide = s.shot({ ...CAM0, camera_x: 38, camera_z: 5.4, camera_h: 1.6 });
+        await s.until(() => wide.ready);
+        wide.cut();
+        const pp = s.person('passepartout');
+        s.set('passepartout_on', null);
+        s.set('passepartout_a', PYR_X);
+        s.set('passepartout_d', PYR_D);
+        const out = pp.walk([[37.6, 12.4]]);
+        TIERS.forEach(([id], i) => s.sequence(async q => {
+          await q.wait(0.15 + 0.25 * i);
+          q.set(`${id}_a`, FALL[id][0]); q.set(`${id}_d`, FALL[id][1]); q.set(`${id}_reach`, null);
+          q.set(`${id}_on`, null);
+          await q.person(id).do('knocked_down');
+        }));
+        for (const id of ['n1', 'n2']) { s.set(`${id}_on`, null); s.after(0.4, () => s.person(id).do('spread_hands')); }
+        await s.wait(0.6);
+        s.person('batulcar').do('surprised');
+        s.tell('collapse:batulcar');
+        await out;
+        await pp.turn(180);
+        s.set('passepartout_reach', { r: 'fogg#head', l: 'fogg#head' });
+        s.set('passepartout_mood', 'smile');
+        await s.wait(2.5);
+      },
+    },
+    // ---- (held) The pyramid stands whole: the top man's arms out — the bow (the applause is the game's); the seat in
+    // the front row empties; the noses come down, Passepartout runs off after his master in his wings.
+    finish: {
+      after: ['pyramid', 'pyramid_show'],
+      from: BUILT,
+      run: async s => {
+        s.set('n5_reach', { foot_r: TIERS[2][2][0], foot_l: TIERS[2][2][1], r: [PYR_X + 1.2, PYR_D, 6.6], l: [PYR_X - 1.2, PYR_D, 6.6] });
+        await s.wait(0.5);
+        s.tell('finish:bow');
+        const fogg = s.person('fogg'), aouda = s.person('aouda');
+        await s.wait(0.8);
+        s.set('fogg_reach', null);
+        s.set('fogg_with', null);
+        s.set('fogg_look', null);
+        await fogg.do('rise_chair');
+        if (withAouda()) aouda.do('rise_chair');
+        const off = fogg.walk([[33, 3.4], [29, 3.6]]);
+        s.after(0.6, () => { if (withAouda()) aouda.walk([[32.4, 3.3], [28.6, 3.5]]); });
+        s.set('passepartout_look', 'fogg#head');
+        await s.wait(1.2);
+        TIERS.slice().reverse().forEach(([id], i) => s.sequence(async q => {
+          await q.wait(0.4 * i);
+          q.set(`${id}_a`, WAIT[id][0]); q.set(`${id}_d`, WAIT[id][1]); q.set(`${id}_reach`, null);
+          q.set(`${id}_on`, null);
+          await q.person(id).do('stumble');
+        }));
+        await s.wait(1.4);
+        s.set('passepartout_on', null);
+        s.set('passepartout_a', PYR_X);
+        s.set('passepartout_d', PYR_D);
+        s.set('passepartout_gait', 'run');
+        await s.person('passepartout').walk([[34.4, 15.2], [33.4, 15.6]]);
+        s.set('passepartout_here', false);
+        await off;
+        s.set('fogg_here', false);
+        s.set('aouda_here', false);
+        await s.wait(0.5);
+      },
+    },
+    // ---- Yokohama's quay at night: Passepartout, in his wings and his nose, runs up to his master; Fogg turns and
+    // nods.
+    reunion: {
+      from: AFTER,
+      run: async s => {
+        const fogg = s.person('fogg'), pp = s.person('passepartout');
+        fogg.walk([[8.2, 3.6]]);
+        if (withAouda()) s.person('aouda').walk([[7.3, 3.7]]);
+        await pp.walk([[9.6, 3.4]]);
+        s.set('passepartout_gait', null);
+        await s.all(fogg.turn(115), pp.turn(245));
+        if (withAouda()) s.person('aouda').turn(105);
+        s.set('fogg_look', 'passepartout#head');
+        s.set('passepartout_look', 'fogg#head');
+        s.set('aouda_look', 'passepartout#head');
+        s.tell('reunion:face');
+        await s.wait(2.4);
+        // (the nod: his eyes down to the wings and up again)
+        s.set('fogg_look', 'passepartout#chest');
+        await s.wait(0.5);
+        s.set('fogg_look', 'passepartout#head');
+        await s.wait(1.6);
+      },
+    },
+    // ---- The showcase's own (outside games): the evening coming over the harbour; «Stay awake» and «The pyramid» played by
+    // themselves; Yokohama by night
+    evening: {
+      from: () => ({ ...LIGHT.day, ...CAM0, camera_x: 2, ...NOBODY() }),
+      run: async s => {
+        s.move('evening', 1, { over: 16, ease: 'inOut' });
+        await s.wait(6);
+        s.move('lanterns', 1, { over: 6 });
+        await s.wait(6);
+        await s.move('night', 0.4, { over: 8, ease: 'inOut' });
+      },
+    },
+    stay_awake_show: {
+      from: () => DAZED(0.6, 0.45),
+      run: async s => {
+        s.set('pp_walk', 0.75);
+        s.set('pp_sway', 0.6);
+        await s.wait(4);
+        s.set('pp_stumble', 1);
+        await s.wait(0.6);
+        s.set('pp_stumble', 0);
+        s.set('pp_sway', -0.3);
+        s.set('pp_walk', 0.97);
+        await s.until(() => (s.get('pp_walk_at') ?? 0) >= 0.96);
+        s.set('message', 1);
+        await s.wait(6);
+      },
+    },
+    yokohama: {
+      from: () => ({ ...LIGHT.yokohama, ...CAM0, camera_x: 30, ...NOBODY() }),
+      run: async s => {
+        await s.wait(2);
+        await s.move('camera_x', -6, { over: 14, ease: 'inOut' });
+        await s.wait(1);
+      },
+    },
+    pyramid_show: {
+      from: FOOT,
+      run: async s => {
+        s.move('tilt', 0.3, { over: 2, ease: 'inOut' });
+        await s.move('pyramid', 0.5, { over: 9, ease: 'linear' });
+        s.move('tilt', -0.2, { over: 2, ease: 'inOut' });
+        s.set('fogg_present', 1);
+        await s.wait(3.5);
+        s.move('tilt', 0, { over: 2, ease: 'inOut' });
+        await s.move('pyramid', 1, { over: 6, ease: 'linear' });
+        await s.wait(1);
+      },
+    },
   };
+  return beats;
 }
-// the showcase's own beats (outside games): the evening coming over the harbour; Yokohama at night
-const SHOWCASE_ONLY = {
-  evening: {
-    from: () => ({ ...LIGHT.day, ...CAM0, camera_x: 2, ...NOBODY() }),
-    run: async s => {
-      s.move('evening', 1, { over: 16, ease: 'inOut' });
-      await s.wait(6);
-      s.move('lanterns', 1, { over: 6 });
-      await s.wait(6);
-      await s.move('night', 0.4, { over: 8, ease: 'inOut' });
-    },
-  },
-  yokohama: {
-    from: () => ({ ...LIGHT.night, port: 'yokohama', ...CAM0, camera_x: 30, ...NOBODY() }),
-    run: async s => {
-      await s.wait(2);
-      await s.move('camera_x', -6, { over: 18, ease: 'inOut' });
-      await s.wait(3);
-    },
-  },
-};
-const SHOWCASE = ['quay', 'cousin', 'evening', 'tavern', 'badge', 'pipe', 'pipe_on', 'carnatic', 'morning', 'cast_off', 'yokohama'];
+const SHOWCASE = ['quay', 'cousin', 'evening', 'tavern', 'badge', 'pipe', 'stay_awake_show', 'carnatic', 'morning', 'bunsby', 'cast_off',
+  'stay_behind', 'yokohama', 'show', 'pyramid_show', 'see', 'collapse', 'finish', 'reunion'];
 
 return {
   plan, sheer, portOf, steamerAt, boatAt, shore, houses, lantern, ghost, lanternRow, dazed, LANTERN_COLORS, boards,
-  mist, BOATS, boat, boatLive, film, SHOWCASE_ONLY, SHOWCASE, along, wayBetween, wayOf, clamp01, mixc, rgba, glow,
+  mist, BOATS, boat, boatLive, film, SHOWCASE, along, wayBetween, wayOf, clamp01, mixc, rgba, glow,
+  SAMPAN, SAMPAN_OFF, TIERS, WAIT, FALL, SEAT, TO_SEAT, PYR_X, PYR_GAP, toward,
 };
