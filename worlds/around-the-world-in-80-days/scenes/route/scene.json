@@ -1,0 +1,198 @@
+{
+  "engine": 3,
+  "title": "The route",
+  "caption": "",
+  "horizon": 0.9,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      0,
+      53
+    ]
+  },
+  "light": {
+    "grain": 0.12,
+    "vignette": 0.4,
+    "tint": "#d9b37a",
+    "tintStrength": 0.06
+  },
+  "state": {
+    "shown": 0,
+    "come": 0,
+    "route": 0,
+    "dateline": 0,
+    "camera_x": 0
+  },
+  "states": {
+    "shown": {
+      "type": "number",
+      "means": "the chapter the player is at (0 the prologue … 5 the epilogue): the view goes to its point c<i> (camera_x)"
+    },
+    "come": {
+      "type": "number",
+      "means": "each new value brings the view back to the chapter shown (camera_x), the player's drag with it"
+    },
+    "route": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how far the red line of the way has come: 0 London … 0.04 Brindisi, 0.07 Suez, 0.14 Bombay, 0.22 Calcutta, 0.33 Hong Kong, 0.4 Yokohama, 0.55 San Francisco, 0.78 New York, 0.97 Liverpool, 1 London"
+    },
+    "dateline": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the day won from the sun: the 180th meridian in red ink, a notch across the way, «+1 day»"
+    }
+  },
+  "modules": [],
+  "objects": [
+    {
+      "id": "desk",
+      "name": "The desk under the map",
+      "sky": true
+    },
+    {
+      "id": "map",
+      "name": "The old map of the world",
+      "across": 0,
+      "distance": 10.6,
+      "facing": 180,
+      "onLand": false,
+      "box": [
+        -14.16,
+        -13.5,
+        67.08,
+        0.0
+      ],
+      "uniforms": {
+        "cut": 0,
+        "dateline": 0
+      }
+    },
+    {
+      "id": "watch",
+      "name": "Fogg's watch",
+      "across": 3.822,
+      "distance": 10.3,
+      "elevation": 2.31,
+      "facing": 180,
+      "onLand": false,
+      "box": [
+        -2.6,
+        -1.4,
+        1.4,
+        0.05
+      ]
+    },
+    {
+      "id": "c0",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 0.294,
+      "distance": 10,
+      "elevation": 7.9,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c1",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 12.054,
+      "distance": 10,
+      "elevation": 7.9,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 18.669,
+      "distance": 10,
+      "elevation": 7.9,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 38.808,
+      "distance": 10,
+      "elevation": 7.9,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c4",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 47.775,
+      "distance": 10,
+      "elevation": 7.9,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c5",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 52.626,
+      "distance": 10,
+      "elevation": 7.9,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "author",
+      "name": "The author’s map",
+      "unseen": true,
+      "across": -3.2,
+      "distance": 10,
+      "elevation": 7.7,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    }
+  ]
+}

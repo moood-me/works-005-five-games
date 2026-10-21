@@ -1,0 +1,16 @@
+{"strings": [
+  {"text":"London","translation":"Лондон","where":"scenes/route/elements/map.js"},
+  {"text":"Suez","translation":"Суэц","where":"scenes/route/elements/map.js"},
+  {"text":"Bombay","translation":"Бомбей","where":"scenes/route/elements/map.js"},
+  {"text":"Calcutta","translation":"Калькутта","where":"scenes/route/elements/map.js"},
+  {"text":"Hong Kong","translation":"Гонконг","where":"scenes/route/elements/map.js"},
+  {"text":"Yokohama","translation":"Иокогама","where":"scenes/route/elements/map.js"},
+  {"text":"San Francisco","translation":"Сан-Франциско","where":"scenes/route/elements/map.js"},
+  {"text":"New York","translation":"Нью-Йорк","where":"scenes/route/elements/map.js"},
+  {"text":"Liverpool","translation":"Ливерпуль","where":"scenes/route/elements/map.js"},
+  {"text":"Atlantic Ocean","translation":"Атлантический океан","where":"scenes/route/elements/map.js"},
+  {"text":"Indian Ocean","translation":"Индийский океан","where":"scenes/route/elements/map.js"},
+  {"text":"Pacific Ocean","translation":"Тихий океан","where":"scenes/route/elements/map.js"},
+  {"text":"+1 day","translation":"+1 день","where":"scenes/route/elements/map.js"},
+  {"text":"The route","translation":"Маршрут","where":"scenes/route/scene.json title"}
+]}
