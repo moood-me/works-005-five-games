@@ -93,7 +93,7 @@ Points: `window#window`, `table#table`, `lamp#lamp`, `sky#moon`, `sky#sun`. For 
 | `ride` | night, all four: Fogg reads, Aouda at the window, Fix behind his paper, Passepartout asleep | — |
 | `brake` | India, dawn: the train stops (`speed` → 0 in 6 s); they wake, look out | — |
 | `ganges` | the train goes quietly along the Ganges; Aouda turns her head — a profile against the river | — |
-| `buffalo` | the prairie, the train stands, the herd goes by of itself (24 s — the beat ends with it); Passepartout gets up, to the glass, his palms on it; Fogg in his seat takes out his watch and looks at it | — |
+| `buffalo` | the prairie, the train stands, the herd goes by of itself (24 s — the beat ends with it); Passepartout gets up, to the glass, his palms on it; a cut to Fogg in his seat (over his shoulder, the herd beyond): he takes out his watch and looks at it | — |
 | `snow` | snow, a clear day; they ride | — |
 | `special` | England, fog: the special at full speed; Fogg takes out his watch — a cut to the close-up (the insert `watch_close`) — a cut back into the compartment: all look at the watch; he puts it away and opens his notebook on his knees; with `book_shut` 1 he shuts it (`special:shut`) | — |
 

@@ -119,8 +119,8 @@ player lays them down: the game waits for a touch on `fogg#hands`, then sets `wa
 Changed 2026-10-15: `wager` split into `wager` (before the cards, a living pause) and `wager_down`; Fix may come in
 with `door`. Changed 2026-10-21: `countdown` begins at 20:44:47, not :37 (twenty seconds without a word were too
 long: now ten, the handle at about the 10th second); the night's look a little lighter (`day`: ambient 0.9, its colour
-`#bcc4dc` — `countdown` and `leave` were darkish). Neither is rendered yet: the GPU Space was paused (the HF account's
-credits) — the frame of `wager` (Fogg straight, the camera lower) is not rendered either.
+`#bcc4dc` — `countdown` and `leave` were darkish). Looked at on the GPU (sheets/atw/london/main-*.png): the men before the
+clock, the door, the wager across the table (Fogg's face lit under the lamp), the hat-stand and the door read.
 
 Changed against v1: the beat `friday` split into `friday` and `friday_in` (at his own pace it went on for 35 s);
 `beat` by default `null` (v1: `film`; the montage for the viewer is the showcase); `with_aouda`, `with_pp` — the game's
