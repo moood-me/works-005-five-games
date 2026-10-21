@@ -1,77 +1,118 @@
-# The deck (`deck`) — NOT READY (stopped 2026-10-15 as the game was paused)
+# The deck (`deck`)
 
-A new scene of chapters I–IV (docs/vokrug-sveta/scenes.md, the deck). The work stopped halfway: there is the design,
-the plan, `scene.json` (all the elements, keys, light, music), `lib.js` (the ship's plan, the colours, the Henrietta's
-parts, the film's beats), and the paintings of the sky, the sea, the port, the China's smoke, the quay, the warehouses,
-the gangway. **Never once rendered or checked** (not even by a run in node). Do not open the scene on the stand as a
-finished one yet.
+The steamers' deck of chapters I–IV (docs/vokrug-sveta/scenes.md, «Палуба»): Suez and Bombay on the «Mongolia», the
+night on the «Rangoon», Fix and the calendar on the «General Grant», the «Henrietta» — New York, the mutiny, no coal,
+«The boilers», Queenstown, under sail —, Liverpool, the custom-house cell and the release. Engine 3, the camera `walk`.
+Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json` is written by
+`tools/deck_scene.py` (`python tools/deck_scene.py scenes/deck/scene.json`) — edit the spec there, not in the JSON.
 
-## The design (decided)
+## How it is made
 
-- The ship stands in the world; the way she makes is the sea (the shader `sea.wgsl` drives the whitecaps back by
-  `speed`, the phase — `sea.animate.js`). The ship's metres: `distance` — forward along the keel (the bow ~+46),
-  `across` — to the starboard side. The deck is the ground (0), the sea −5.5, the quay −2.6 on the right (`relief`).
-  The camera `walk` stands at the poop and looks forward; the operator frames the people (`camera_target` on the
-  people or on unseen points between them: `night_two`, `fix_consul`, `two_pacific`, `calendar_three`, `coal_three`,
-  `bridge_two`).
-- One set of elements for four ships (`ship`): the paintings read `ship` and `port` (changed only on a cut).
-- The port (`port`) — a far silhouette on the starboard bow (`port_far`, `lib.skyline`), for suez / new_york /
-  liverpool also a quay (`quay`), warehouses (`sheds`) and a gangway (`gangway`, a walk plane: the constables come up
-  it).
-- The light: day (the sun behind on the right, `sun_day`), `dawn` (a low sun on the starboard bow, `sky#sun`), `night`
-  (the moon on the right, `sky#moon`, the moon's path — the sea's mirror; the lantern `lantern` by the people at the
-  rail), `fog` (Liverpool); the hatch's fire `fire_light`, the flare `flare_light`.
-- «The boilers» (`burn`): a view from high on the poop (`lib.BURN_VIEW`), all the parts seen. The parts — `PARTS` in
-  lib.js: each on its own anchor with the place keys `at_<part>_a/_d/_e`; by `drag_<part>` the script is to place them
-  (`lib.partAt`), the animate to shrink them (`lib.partAnimate`), a mast falls on its side (`lib.fallOf`), `locked_*` —
-  dimmer, 0 — gone, a flare (`flare` — the flare's number, `flare_glow`).
-- The cell (`cell`) — a small room far on the right (across 400, outside the deck's frames), a cut of `camera_x` there;
-  `cell` — the insert `cell_close`, `release` — Fix runs in (real people).
+- **The ship stands in the world**; her way through the water is the sea's: the plane `sea` (a mirror, `rough` 0.55,
+  `ripple` 0.35) with its own shader `sea.wgsl` (whitecaps and foam streaks running aft by `speed`: the animate's
+  phase). The engine takes the mirror and the shader together (no warning, rendered). Metres are the ship's:
+  `distance` forward along the keel (stern −5, stem 47), `across` to starboard; the deck is the land (0), the sea −5.5,
+  a quay to starboard −2.6 (`relief`; across > 300 — the cell — is 0 again).
+- **The camera** stands on the deck at the poop looking forward. In `walk` the operator only slides (it never turns):
+  every shot looks forward, so whoever speaks is staged turned aft toward the camera or in profile (`lib.SPOT`).
+  Two-shots frame unseen points (`suez_two`, `fix_consul`, `night_two`, `two_pacific`, `calendar_three`, `ny_two`,
+  `coal_three`, `bridge_two`, `lv_two`: each 2 m tall, its box round its anchor — a shot of 1 frames 2 m there). A
+  target high above the deck (the bridge) is framed at `medium` or closer, so the camera rises to it (a lower shot
+  looks up steeply, past what the sky paints).
+- **One set of elements for four ships** (`ship`: `mongolia`, `rangoon`, `general_grant`, `henrietta`; colours —
+  `lib.COLOURS`): the deck, the bulwarks (`lib.bulwarkSide`; the starboard ones open at the gangway when a quay is
+  alongside), the iron sheer strake under them (`gunwale*`, what is left when the bulwarks burn), the forecastle at the
+  bow, the captain's cabin on the poop (`speedy_cabin`, its side with Speedy's porthole, its roof — a walk plane:
+  Speedy salutes from it), the deckhouse (aft face, both sides, the bridge on its roof with the wheel and rail, the
+  calendar on its face), the funnel (`funnel#top`: smoke and sparks), two masts with shrouds and ratlines
+  (`lib.mast`), their yards with the sails furled (`lib.yardsOf`; the «Henrietta»'s sails let fall by `sails`), the
+  stokehold hatch (`hatch#fire`) and its glow (`hatch_glow`, by `fire`), the bunks, two boats on chocks across the
+  deck, the night lantern on the main shrouds (`lantern#lamp`, lit by `night`). The «General Grant» only: the
+  paddle-boxes (copies, both sides), the walking-beam (rocking by `speed`), Fogg's deck chair.
+- **The port** (`port`) — a skyline 1.5 km off on the starboard bow (`port_far`, `lib.skyline`); Suez, New York and
+  Liverpool also a quay, sheds and a gangway (a walk plane: the constables come up it). New York — the «China»'s smoke
+  on the horizon (`china#smoke`).
+- **The light**: day (`sun_day`), `dawn` (a low sun on the starboard bow, `sky#sun`), `night` (the moon to starboard,
+  its path on the sea; the lantern), `fog` (Liverpool); the hatch's fire `fire_light` and the flare `flare_light`.
+- **«The boilers»** (`burn`): from high on the poop (`lib.BURN_VIEW`), all the parts in sight. The parts — `PARTS` in
+  lib.js: `deckhouse` (its face, sides, bridge, rail, calendar), `boats` (`boats`, `boats_s`), `bunks`, `yards`
+  (`yards` — the foremast's, `yards_main`), `mast_fore`, `mast_main`, `bulwarks` (both sides), `speedy_cabin` (face,
+  side, roof). Each on its anchor, placed by the script from `drag_<part>` (`lib.partAt`: keys `at_<part>_a/_d/_e`); its
+  elements' animates shrink it on the way, hide it at 0, dim it while `locked_<part>` (`lib.partAnimate`). A mast falls
+  over to port first (the first 0.35 of the drag); its yards fall with it and lie fallen once it is burnt. A part
+  going to 0 flares in the hatch (the script: `flare` +1 — a sheaf of sparks, `flare_glow` — a flash). `fire` — flames
+  from the hatch, its glow and light, sparks from the funnel. `speedy_grief`: from 0.4 his hands to his head, angry;
+  from 0.8 grief (the script).
+- **The inserts**: `porthole` — Speedy roaring at his porthole, close (painted; his face shaking — the animate);
+  `cell_close` — the cell's bench from above: Fogg's knees and hands, his watch open (its hands go 11:40 → 14:33 with
+  `cell_time`), the bars' shadow sliding across.
+- **The cell** — a room far to starboard (`cell` at across 400): floor, three walls, the barred window (`cell_window`),
+  the bench, the door (`cell_door`, swung by `door`: the script's `door_f`). The beats there cut `camera_x` to it.
 
-## What there is
+## Beats (`lib.film()`, played by the world's `beats`)
 
-| File | Where it stands |
-| --- | --- |
-| `scene.json` | all the elements, the people (10: fogg, passepartout, aouda, fix, consul, sailor, speedy, stoker, policeman, policeman_2), the keys and `states`, the light and looks, the music (`A_FLAT_MAJOR_F_MINOR`). Made by a script (outside the repository) — from now on edit the JSON itself |
-| `lib.js` | the plan, the ships' colours, the parts and their motion, the ports' silhouettes, **all the beats** (`film`): suez, bombay, rail_night, plaid, writes, pacific, punch, shake, calendar, new_york, mutiny, coal, burn, queenstown, sails_only, liverpool, cell, release, fix_down, fix_hand — written, not checked |
-| `elements/` | `sky` (+animate), `sea` (+animate, wgsl), `port_far`, `china`, `quay`, `sheds`, `gangway` |
+- `suez` (≈ 14 s): Passepartout and Fix by the gangway's head (Passepartout turned aft, smiling); the cigar offered —
+  `suez:chat`; Fix walks forward past the consul and turns aft to whisper to him — `suez:whisper`; Passepartout looks at
+  the town.
+- `bombay` (≈ 6 s): dawn, Bombay to starboard; Fogg at the rail with his notebook, turned to the camera; he looks up
+  at the town and back — `bombay:book`.
+- `rail_night` (≈ 7 s): night on the «Rangoon», the moon's path; she at the rail, he a step aft inboard; she turns to
+  him — `rail_night:turns`; he to her. `plaid` (after it, ≈ 8 s): he steps to her and lays the plaid over her shoulders
+  (`plaid_shoulders`). `writes` (after either, ≈ 7 s): he gives her the notebook, she writes (`write_note`) —
+  `writes:done`; he looks at the sea.
+- `pacific` (≈ 6 s): the «General Grant»; Passepartout at the rail (wings by `pp_wings`); Fix comes aft from the
+  deckhouse and stands before him; face to face (profiles) — `pacific:fix`. `punch` (after it, ≈ 10 s): the blow —
+  `punch:down`; Fix falls, sits up, sets his hat right. `shake` (after it, ≈ 5 s): hands.
+- `calendar` (≈ 9 s): close on the calendar; the sailor turns the leaf — Wednesday, 20 November, again —
+  `calendar:leaf`; the shot opens on the three; Passepartout turns to Fogg in his chair and laughs — `calendar:laugh`.
+- `new_york` (≈ 13 s): the «Henrietta» at the quay; Fogg and his party at the gangway's head, the «China»'s smoke —
+  `new_york:smoke`; Fogg goes forward under the bridge; Speedy on it, close — `new_york:speedy`.
+- `mutiny` (≈ 7 s): Fogg on the bridge; the porthole insert opens — `mutiny:porthole` — and closes.
+- `coal` (≈ 12 s): the smoke thins; the stoker spreads his hands — `coal:stoker`; Speedy is brought out of his cabin by
+  a sailor and stands before Fogg, turned aft — `coal:speedy`.
+- `burn` (1 s): the cut to the boilers' view; the game plays «The boilers» on it.
+- `queenstown` (≈ 9 s): dawn, the parts as the game left them; Speedy salutes from his cabin's roof if it is left.
+- `sails_only` (≈ 13 s): the sails let fall; Speedy laughs on the bridge by Fogg — `sails_only:laugh`.
+- `liverpool` (≈ 10 s): fog; the constables come up the gangway; Fix comes aft, his hand on Fogg's shoulder —
+  `liverpool:hand`.
+- `cell` (1 s): the insert `cell_close` opens; the game moves `cell_time`.
+- `release` (after `cell`, ≈ 6 s; with its outcome ≈ 14 s): the insert closes on the cell; the door flies open, Fix
+  runs in — `release:in`; then by `release` (set before the beat) `fix_down` or `fix_hand`.
+- `fix_down`, `fix_hand` (after `release`, ≈ 8 s, 6 s): Fogg rises; the blow and Fix down / the hand.
+- The showcase's own (not the game's): `burn_show` (four parts dragged into the hatch), `cell_show` (the hours in the
+  cell).
 
-## What there is not
+## Contract for the check
 
-- The paintings of the other elements (they are in `scene.json`, with no code — empty): `deck`, `bulwarks`,
-  `bulwarks_s`, `gunwale`, `gunwale_s`, `bow`, `speedy_cabin`, `speedy_cabin_side`, `cabin_roof`, `deckhouse`,
-  `deckhouse_side`, `house_roof`, `bridge_rail`, `calendar` (the leaf `leaf`, «WEDNESDAY», the point `calendar#leaf`),
-  `funnel` (the point `funnel#top`), `mast_main`, `mast_fore`, `yards`, `yards_fore` (the sails by `sails`), `hatch`
-  (the point `hatch#fire`), `hatch_glow`, `bunks`, `boats`, `paddle_box`, `walking_beam`, `lantern` (the point
-  `lantern#lamp`), `deckchair`, the inserts `porthole` (Speedy roaring at a porthole) and `cell_close` (the bench, the
-  watch, the bars' shadow by `cell_time`), the cell's walls `cell_*` and its door (`door`). The points `<part>#part` for
-  «The boilers» are set in these paintings — there are none yet.
-- `script.js` (placing the parts by `drag_*`, a flare at 0, `speedy_grief` → hands to the head, wear by the game's
-  keys, `scene.kit.beats.play`), `showcase.js` (in lib.js `SHOWCASE` refers to `burn_show`, `cell_show` not yet
-  written — there are none), the elements' animates.
-- The cast's people `consul`, `sailor`, `speedy`, `stoker`, `policeman`, the things `notebook`, `plaid`,
-  `plaid_shoulders` (the plaid on Aouda's shoulders — needed in the cast), Passepartout's wings and Fix's bruise
-  (`kit.cast.wear.pp_wings / fix_bruise` — so `lib.film` expects them; correct it once the cast gives them).
-- The cast's motions the beats call: `punch`, `knocked_down`, `laugh`, `spread_hands`, `salute`, `whisper`,
-  `write_note`, `shovel` — ordered from make_motion (the keys below), not looked at and not put into `cast.data.json`.
-  make_motion: punch `e6b110bc218b67577df72748d77fe35b6f915ef7`, knocked_down
-  `5af08d051c5ecd83b593cb144898b33966ce1478`, laugh `79e4aeec4cdf5103283bd995822222b41275b7ff`, spread_hands
-  `48183812c681a3f431b2bc18618899b4e5448291`, salute `cda91ec955dd11586b69a038c36efe32bbaf0da7`, whisper
-  `fbfe74190364ac4498c7d9857265aa29da37eefa`, write_note `ffc97b4e9a43fa76229ba49f923f41d5e2f67a30`, shovel
-  `ad0cb24c55f82a7ec8641a0f281ba8b9f76c0f00`.
-
-## Differences from scenes.md (intended)
-
-- The cell insert's key is `cell_close` (the key `cell` is a beat's name); `release` is a beat, plus the beats
-  `fix_down`, `fix_hand`; if `release` (the key) is set before the beat, the beat plays the outcome out itself.
-- The boats — on chocks across the deck between the hatch and the deckhouse (on davits they are not seen from the
-  poop).
-- Keys added: `flare`, `flare_glow`, `door`, `leaf`, `at_<part>_a/_d/_e` (led by the scene).
-- The moments — as in scenes.md; none of its own added.
-
-## Doubtful
-
-- A sea plane with `reflect` and a shader of its own at once — not checked that the engine takes both.
-- The gangway's `rotation` direction (270) and its slope — by eye, not checked.
-- The people's places in the beats (`lib.SPOT`) are calculated, not seen; Liverpool — Fogg stands with his back to the
-  camera, move him.
+```json
+{"beats": {"suez": {"after": [], "tells": ["suez:chat", "suez:whisper"], "seconds": 14, "show": false},
+ "bombay": {"after": [], "tells": ["bombay:book"], "seconds": 6, "show": false},
+ "rail_night": {"after": [], "tells": ["rail_night:turns"], "seconds": 7, "show": false},
+ "plaid": {"after": ["rail_night"], "tells": [], "seconds": 8, "show": false},
+ "writes": {"after": ["rail_night", "plaid"], "tells": ["writes:done"], "seconds": 7, "show": false},
+ "pacific": {"after": [], "tells": ["pacific:fix"], "seconds": 6, "show": false},
+ "punch": {"after": ["pacific"], "tells": ["punch:down"], "seconds": 10, "show": false},
+ "shake": {"after": ["pacific"], "tells": [], "seconds": 5, "show": false},
+ "calendar": {"after": [], "tells": ["calendar:leaf", "calendar:laugh"], "seconds": 9, "show": false},
+ "new_york": {"after": [], "tells": ["new_york:smoke", "new_york:speedy"], "seconds": 13, "show": false},
+ "mutiny": {"after": [], "tells": ["mutiny:porthole"], "seconds": 7, "show": false},
+ "coal": {"after": [], "tells": ["coal:stoker", "coal:speedy"], "seconds": 12, "show": false},
+ "burn": {"after": [], "tells": [], "seconds": 1, "show": false},
+ "queenstown": {"after": [], "tells": [], "seconds": 9, "show": false},
+ "sails_only": {"after": [], "tells": ["sails_only:laugh"], "seconds": 13, "show": false},
+ "liverpool": {"after": [], "tells": ["liverpool:hand"], "seconds": 10, "show": false},
+ "cell": {"after": [], "tells": [], "seconds": 1, "show": false},
+ "release": {"after": ["cell"], "tells": ["release:in"], "seconds": 14, "show": false},
+ "fix_down": {"after": ["release"], "tells": [], "seconds": 8, "show": false},
+ "fix_hand": {"after": ["release"], "tells": [], "seconds": 6, "show": false},
+ "burn_show": {"after": [], "tells": [], "seconds": 16, "show": true},
+ "cell_show": {"after": [], "tells": [], "seconds": 9, "show": true}},
+ "points": ["fogg", "passepartout", "aouda", "fix", "speedy", "stoker", "sailor", "consul", "policeman",
+  "hatch#fire", "deckhouse#part", "boats#part", "bunks#part", "yards#part", "mast_fore#part", "mast_main#part",
+  "bulwarks#part", "speedy_cabin#part", "calendar#leaf", "funnel#top", "china#smoke", "lantern#lamp"],
+ "offers": ["fogg#head", "aouda#head", "passepartout#head", "fix#head", "speedy#head",
+  "deckhouse#part", "boats#part", "bunks#part", "yards#part", "mast_fore#part", "mast_main#part", "bulwarks#part",
+  "speedy_cabin#part"],
+ "party": {"with_aouda": 0, "with_pp": 1, "with_fix": 0, "aouda_dress": 0, "pp_wings": 0, "fix_bruise": 0},
+ "acts": {}}
+```

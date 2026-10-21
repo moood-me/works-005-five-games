@@ -294,7 +294,7 @@ function yardsOf(g, e, c, yards, point) {
 function yardsAnimate(e, mastKey, count) {
   const st = e.state, k = partLook(st, 'yards'), sails = clamp01(st.sails);
   const fall = shipOf(st) !== 'henrietta' ? 0 : (st[mastKey] ?? 1) < 0.5 ? fallOf(1) : fallOf(st[`drag_${mastKey}`]);
-  const layers = ['yards', ...Array.from({ length: count }, (_, i) => `sail${i}`)];
+  const layers = ['yards', ...(shipOf(st) === 'henrietta' ? Array.from({ length: count }, (_, i) => `sail${i}`) : [])];
   partAnimate(e, 'yards', layers, [0, -8]);
   layers.forEach((n, i) => {
     const l = e.layer(n);
@@ -422,8 +422,8 @@ function film(scene) {
     ...P('fix', SPOT.fix_suez, toward(SPOT.fix_suez, SPOT.pp_suez), { look: 'passepartout#head', mood: 'smile' }),
     ...P('consul', SPOT.consul, 200, { do: loop('hands_behind'), look: 'fix#head' }) });
   const BOMBAY = () => ({ ...SEA('mongolia', 'bombay', { dawn: 1 }), ...CAM, ...NOBODY(), ...WEAR(),
-    camera_target: 'fogg', camera_shot: 'medium', camera_frame: [0.36, 0.45],
-    ...P('fogg', SPOT.bombay, 215, { with: ['notebook'], reach: holding(SPOT.bombay, 215), look: 'fogg#book' }) });
+    camera_target: 'fogg', camera_shot: 1, camera_frame: [0.36, 0.42],
+    ...P('fogg', SPOT.bombay, 225, { with: ['notebook'], reach: holding(SPOT.bombay, 225), look: 'fogg#book' }) });
   const NIGHT = () => ({ ...SEA('rangoon', 'none', { night: 1, speed: 0.6 }), ...CAM, ...NOBODY(), ...WEAR(),
     camera_target: 'night_two', camera_shot: 0.85, camera_frame: [0.5, 0.42],
     ...P('aouda', SPOT.aouda_rail, 85, { look: [60, 300, -4] }),
@@ -460,7 +460,9 @@ function film(scene) {
     camera_target: 'coal_three', camera_shot: 0.6, camera_frame: [0.5, 0.42],
     ...P('stoker', SPOT.stoker, toward(SPOT.stoker, SPOT.coal_fogg), { look: 'fogg#head' }),
     ...P('fogg', SPOT.coal_fogg, toward(SPOT.coal_fogg, SPOT.stoker), { look: 'stoker#head' }),
-    ...(withIt('with_pp') ? P('passepartout', SPOT.coal_pp, toward(SPOT.coal_pp, SPOT.stoker), { look: 'stoker#head' }) : {}) });
+    ...(withIt('with_pp') ? P('passepartout', SPOT.coal_pp, toward(SPOT.coal_pp, SPOT.stoker), { look: 'stoker#head' }) : {}),
+    // (brought out of his cabin in the beat)
+    ...P('speedy', SPOT.cabin_door, 0, { here: false }), ...P('sailor', [SPOT.cabin_door[0] - 0.7, SPOT.cabin_door[1] - 0.2], 0, { here: false }) });
   const BURN = () => {
     const pp = withIt('with_pp');
     return { ...SEA('henrietta', 'none', { speed: 0.2, smoke: 0.6, fire: 0.3 }), ...BURN_VIEW, ...NOBODY(), ...WEAR(),
@@ -492,7 +494,7 @@ function film(scene) {
     return v;
   };
   // the cell, inside: the camera at its open side (its anchor's start), Fogg on the bench, Fix outside the door
-  const CELL = () => ({ ...SEA('henrietta', 'liverpool', { speed: 0, smoke: 0 }), ...CAM, camera_x: plan.cell[0], camera_z: plan.cell[1] - 0.6, camera_h: -0.25, ...NOBODY(),
+  const CELL = () => ({ ...SEA('henrietta', 'liverpool', { speed: 0, smoke: 0 }), ...CAM, camera_x: plan.cell[0], camera_z: plan.cell[1] + 1.4, camera_h: -0.25, ...NOBODY(),
     ...P('fogg', BENCH, 180, { on: [BENCH[0], BENCH[1], 0.46], do: loop('sit_calm'), wear: null, look: CELL_AT(-1.2, 1.5).concat(1.2) }),
     ...P('fix', FIX_OUT, 90, { here: false }) });
 
@@ -567,7 +569,7 @@ function film(scene) {
       from: NIGHT_TURNED,
       run: async s => {
         const fogg = s.person('fogg'), aouda = s.person('aouda');
-        s.camera({ target: 'aouda', shot: 1.2, frame: [0.55, 0.42], glide: 1.8 });
+        s.camera({ target: 'aouda', shot: 0.9, frame: [0.58, 0.42], glide: 1.8 });
         await fogg.walk([SPOT.fogg_plaid]);
         await fogg.turn(toward(SPOT.fogg_plaid, SPOT.aouda_rail));
         fogg.reach({ r: 'aouda#shoulder_l', l: 'aouda#shoulder_r' });
@@ -590,7 +592,7 @@ function film(scene) {
       from: NIGHT_TURNED,
       run: async s => {
         const fogg = s.person('fogg'), aouda = s.person('aouda');
-        s.camera({ target: 'aouda', shot: 1.15, frame: [0.55, 0.42], glide: 1.8 });
+        s.camera({ target: 'aouda', shot: 0.9, frame: [0.58, 0.42], glide: 1.8 });
         const was = scene.get('aouda_with');
         fogg.with(['notebook']);
         fogg.reach({ r: 'aouda#hands' });
@@ -704,6 +706,7 @@ function film(scene) {
         s.camera({ target: 'ny_two', shot: 0.6, frame: [0.5, 0.5], glide: 3 });
         await fogg.walk([[2.6, 12.6], SPOT.below_bridge]);
         await fogg.turn(toward(SPOT.below_bridge, SPOT.bridge_speedy));
+        s.camera({ target: 'speedy', shot: 1.6, frame: [0.5, 0.36], glide: 2 });
         s.tell('new_york:speedy');
         await s.wait(2.4);
       },
@@ -730,10 +733,6 @@ function film(scene) {
         await stoker.do('spread_hands');
         s.tell('coal:stoker');
         const speedy = s.person('speedy'), sailor = s.person('sailor');
-        s.set('speedy_a', SPOT.cabin_door[0]);
-        s.set('speedy_d', SPOT.cabin_door[1]);
-        s.set('sailor_a', SPOT.cabin_door[0] - 0.7);
-        s.set('sailor_d', SPOT.cabin_door[1] - 0.2);
         speedy.here(true);
         sailor.here(true);
         speedy.mood('angry');
@@ -771,7 +770,7 @@ function film(scene) {
       from: SAILS,
       run: async s => {
         await s.move('sails', 1, { over: 5, ease: 'inOut' });
-        s.camera({ target: 'bridge_two', shot: 0.8, frame: [0.5, 0.4], glide: 2.6 });
+        s.camera({ target: 'bridge_two', shot: 1.6, frame: [0.5, 0.4], glide: 2.6 });
         await s.wait(2.4);
         const speedy = s.person('speedy');
         speedy.look('fogg#head');
@@ -810,11 +809,14 @@ function film(scene) {
       from: () => ({ ...CELL(), cell_close: 1 }),
       run: async s => { await s.wait(1); },
     },
-    // ---- Fix bursts into the cell, out of breath (then, if the game has set `release`, what follows).
+    // ---- The insert closes on the cell itself; Fix bursts in, out of breath (then, if the game has set `release`, what
+    // follows).
     release: {
+      after: 'cell',
       from: CELL,
       run: async s => {
         const fix = s.person('fix'), fogg = s.person('fogg');
+        if ((scene.get('cell_close') ?? 0) > 0) await s.move('cell_close', 0, { over: 0.6 });
         await s.move('door', 1, { over: 0.5, ease: 'out' });
         fix.here(true);
         fix.mood('afraid');

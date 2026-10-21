@@ -136,6 +136,7 @@
  ],
  "state": {
   "beat": null,
+  "beat_next": null,
   "ship": "mongolia",
   "port": "suez",
   "night": 0,
@@ -155,9 +156,9 @@
   "door": 0,
   "door_f": 90,
   "leaf": 0,
-  "with_aouda": 1,
+  "with_aouda": 0,
   "with_pp": 1,
-  "with_fix": 1,
+  "with_fix": 0,
   "fix_bruise": 0,
   "pp_wings": 0,
   "aouda_dress": 0,
@@ -241,6 +242,14 @@
   "policeman_2_here": false
  },
  "states": {
+  "beat": {
+   "type": "string",
+   "means": "the beat of the film the game plays (the module beats; notes.md lists them)"
+  },
+  "beat_next": {
+   "type": "string",
+   "means": "the beat the game will play next (its opening made ready ahead)"
+  },
   "ship": {
    "values": [
     "mongolia",
@@ -1234,7 +1243,7 @@
    "distance": 13.8,
    "box": [
     -1.0,
-    -0.75,
+    -1.55,
     1.0,
     0.05
    ]
@@ -1348,7 +1357,7 @@
    "facing": 270,
    "box": [
     -5.6,
-    -5.2,
+    -6.8,
     5.6,
     0.1
    ],
@@ -1408,7 +1417,13 @@
    "unseen": true,
    "across": 3.1,
    "distance": 10.1,
-   "elevation": 1.45
+   "elevation": 1.45,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "fix_consul",
@@ -1416,7 +1431,13 @@
    "unseen": true,
    "across": 1.65,
    "distance": 13.2,
-   "elevation": 1.5
+   "elevation": 1.5,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "night_two",
@@ -1424,7 +1445,13 @@
    "unseen": true,
    "across": 4.2,
    "distance": 10.25,
-   "elevation": 1.45
+   "elevation": 1.45,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "two_pacific",
@@ -1432,7 +1459,13 @@
    "unseen": true,
    "across": 4.0,
    "distance": 10.5,
-   "elevation": 1.45
+   "elevation": 1.45,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "calendar_three",
@@ -1440,7 +1473,13 @@
    "unseen": true,
    "across": -1.0,
    "distance": 15.4,
-   "elevation": 1.3
+   "elevation": 1.3,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "ny_two",
@@ -1448,15 +1487,27 @@
    "unseen": true,
    "across": 1.5,
    "distance": 17.0,
-   "elevation": 2.6
+   "elevation": 2.6,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "coal_three",
    "name": "At the hatch",
    "unseen": true,
-   "across": 0.6,
-   "distance": 13.4,
-   "elevation": 1.4
+   "across": 1.3,
+   "distance": 13.6,
+   "elevation": 1.4,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "bridge_two",
@@ -1464,7 +1515,13 @@
    "unseen": true,
    "across": 0.1,
    "distance": 19.4,
-   "elevation": 4.0
+   "elevation": 4.0,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "lv_two",
@@ -1472,7 +1529,13 @@
    "unseen": true,
    "across": 3.5,
    "distance": 10.4,
-   "elevation": 1.5
+   "elevation": 1.5,
+   "box": [
+    -1,
+    -1,
+    1,
+    1
+   ]
   },
   {
    "id": "porthole",
