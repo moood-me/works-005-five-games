@@ -18,13 +18,13 @@
   "light": {
     "vignette": 0.45,
     "grain": 0.08,
-    "ambient": 1.0,
+    "ambient": 1,
     "ambientColor": "#f0eee6",
     "haze": 0.04,
     "hazeColor": "#d6dad6",
-    "hazeGlow": 1.0,
+    "hazeGlow": 1,
     "shafts": 0.1,
-    "saturation": 1.0,
+    "saturation": 1,
     "wind": [
       -1,
       0,
@@ -112,8 +112,18 @@
     {
       "id": "ramp",
       "of": "stage_front#ramp",
+      "reach": 10,
+      "on": "lanterns",
+      "strength": 2.2
+    },
+    {
+      "id": "boatman_lamp",
+      "at": "boatman#flame",
+      "on": "boatman",
+      "color": "#ffd890",
+      "strength": 1.4,
       "reach": 6,
-      "on": "lanterns"
+      "flicker": 0.3
     }
   ],
   "state": {
@@ -132,8 +142,8 @@
     "boat_d": 21.5,
     "boat_facing": 180,
     "beat": null,
-    "with_aouda": 1,
-    "with_fix": 1,
+    "with_aouda": 0,
+    "with_fix": 0,
     "aouda_dress": 0,
     "pp_walk": 0,
     "pp_stumble": 0,
@@ -144,7 +154,28 @@
     "steamer_roll": 0,
     "boat_roll": 0,
     "steamer_smoke": 1,
-    "pp_walk_at": 0
+    "pp_walk_at": 0,
+    "bunsby_here": false,
+    "boatman_here": false,
+    "batulcar_here": false,
+    "n1_here": false,
+    "n2_here": false,
+    "n3_here": false,
+    "n4_here": false,
+    "n5_here": false,
+    "beat_next": null,
+    "pp_sway": 0,
+    "boatman": 0,
+    "message": 0,
+    "sampan_x": -7.6,
+    "sampan_d": 9.4,
+    "sampan_facing": 180,
+    "pipe_smoke": 0,
+    "pyramid": 0,
+    "tilt": 0,
+    "pyr_x": 38,
+    "fogg_present": 0,
+    "pp_wings": 0
   },
   "states": {
     "port": {
@@ -248,7 +279,7 @@
     },
     "beat": {
       "type": "string",
-      "means": "a beat of the film (the module beats): quay, cousin, tavern, badge, pipe, pipe_on, carnatic, morning, cast_off; at its end the scene says beat:<name>"
+      "means": "a beat of the film (the module beats; notes.md): quay, cousin, tavern, badge, pipe, carnatic, morning, bunsby, cast_off, stay_behind, show, pyramid, see, collapse, finish, reunion; at its end the scene says beat:<name>"
     },
     "with_aouda": {
       "range": [
@@ -276,7 +307,7 @@
         0,
         1
       ],
-      "means": "where the game sends Passepartout in the opium along his way (0 — at the tavern, 1 — the pier by the steamer): he walks there at his own pace, reeling; the camera with him"
+      "means": "«Stay awake»: where the game sends Passepartout in the opium along his way (0 — up from the tavern's table, 1 — the top of the steps, the boatman at 0.97): he walks there at his own pace, reeling; the camera with him"
     },
     "pp_stumble": {
       "range": [
@@ -308,6 +339,90 @@
         1
       ],
       "means": "whether the steamer is smoking: 1 while carnatic_present > 0; led by script.js"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat the game will cut to next (the module beats makes its first frame ready)"
+    },
+    "pp_sway": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "«Stay awake»: Passepartout lurching aside as he walks — toward the town (−1) … toward the water (1)"
+    },
+    "boatman": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — the boatman stands in his sampan at the foot of the steps, his lantern lit"
+    },
+    "message": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a rise to 1 — the boatman pushes off with the news: his lantern goes away over the water toward the town"
+    },
+    "sampan_x": {
+      "type": "number",
+      "smooth": true,
+      "means": "the sampan's place (led by the scene)"
+    },
+    "sampan_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "the sampan's place (led by the scene)"
+    },
+    "sampan_facing": {
+      "type": "number",
+      "smooth": true,
+      "means": "the sampan's turn (led by the scene)"
+    },
+    "pipe_smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the opium pipe's smoke at Passepartout's lips (led by the scene)"
+    },
+    "pyramid": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«The pyramid»: how far the Long Noses' pyramid is built — its tiers up on the shoulders (from 0.2, 0.26, 0.42); the top man's arms out from 0.75"
+    },
+    "tilt": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "«The pyramid»: how it sways — its foot aside (0.35 m at ±1)"
+    },
+    "pyr_x": {
+      "type": "number",
+      "smooth": true,
+      "means": "where the pyramid's mat is (led by the scene, by tilt)"
+    },
+    "fogg_present": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«The pyramid»: 1 — Fogg (and Aouda, with_aouda) come and sit in the front row, his watch in his hand (then pyramid:fogg); 0 — the seats empty"
+    },
+    "pp_wings": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the game's mark: Passepartout's wings of the Long Noses over his livery (in Yokohama he is in their whole costume)"
     }
   },
   "objects": [
@@ -733,7 +848,7 @@
       "name": "Tankadere, far bulwark",
       "on": "boat",
       "distance": 2.2,
-      "elevation": 2.0,
+      "elevation": 2,
       "facing": 180,
       "box": [
         -9.2,
@@ -747,7 +862,7 @@
       "name": "Tankadere, deck",
       "plane": true,
       "on": "boat",
-      "elevation": 2.0,
+      "elevation": 2,
       "width": 17.4,
       "depth": 4.4
     },
@@ -773,7 +888,7 @@
       "facing": 143.7,
       "box": [
         -0.1,
-        -3.0,
+        -3,
         3.8,
         0.4
       ]
@@ -795,7 +910,7 @@
       "id": "tankadere_rig",
       "name": "Tankadere, masts and sails",
       "on": "boat",
-      "elevation": 2.0,
+      "elevation": 2,
       "facing": 180,
       "box": [
         -11,
@@ -808,7 +923,7 @@
       "id": "tankadere_sails",
       "name": "Tankadere, sails",
       "on": "boat",
-      "elevation": 2.0,
+      "elevation": 2,
       "facing": 180,
       "box": [
         -10,
@@ -853,7 +968,7 @@
         5.5,
         0.1
       ],
-      "elevation": -1.3
+      "elevation": 0
     },
     {
       "id": "stage",
@@ -864,7 +979,8 @@
       "elevation": 1.2,
       "width": 10,
       "depth": 4,
-      "lit": true
+      "lit": true,
+      "walk": true
     },
     {
       "id": "stage_front",
@@ -878,7 +994,7 @@
         5.2,
         0.1
       ],
-      "elevation": -1.3
+      "elevation": 0
     },
     {
       "id": "banners",
@@ -891,7 +1007,7 @@
         8,
         0.1
       ],
-      "elevation": -1.3
+      "elevation": 0
     },
     {
       "id": "tavern",
@@ -1172,6 +1288,283 @@
       "shadow": true
     },
     {
+      "id": "sampan",
+      "name": "Boatman's sampan",
+      "across": -7.6,
+      "distance": 9.4,
+      "elevation": -1.6,
+      "facing": 180,
+      "box": [
+        -3.6,
+        -1.6,
+        3,
+        0.2
+      ],
+      "place": {
+        "across": "sampan_x",
+        "distance": "sampan_d",
+        "facing": "sampan_facing"
+      }
+    },
+    {
+      "id": "steamer_deck",
+      "name": "Carnatic's deck",
+      "on": "steamer",
+      "distance": -1.5,
+      "elevation": 4.6,
+      "facing": 180,
+      "box": [
+        20,
+        -0.4,
+        25,
+        0.05
+      ]
+    },
+    {
+      "id": "tankadere_crew",
+      "name": "Tankadere's deck",
+      "on": "boat",
+      "elevation": 2,
+      "facing": 180,
+      "box": [
+        -8,
+        -0.5,
+        2,
+        0.05
+      ]
+    },
+    {
+      "id": "pyr",
+      "name": "Acrobats' mat",
+      "across": 38,
+      "distance": 13.4,
+      "elevation": 2.5,
+      "facing": 180,
+      "box": [
+        -1.6,
+        -0.1,
+        1.6,
+        0.02
+      ],
+      "place": {
+        "across": "pyr_x"
+      }
+    },
+    {
+      "id": "see_cam",
+      "name": "From the stage (camera)",
+      "unseen": true,
+      "across": 37.4,
+      "distance": 12.2,
+      "elevation": 0.8,
+      "facing": 0
+    },
+    {
+      "id": "bench",
+      "name": "Front row",
+      "across": 37,
+      "distance": 9.6,
+      "facing": 180,
+      "box": [
+        -1.7,
+        -0.6,
+        1.7,
+        0.05
+      ]
+    },
+    {
+      "id": "audience",
+      "name": "The crowd before the booth",
+      "across": 37.4,
+      "distance": 9.7,
+      "box": [
+        -7.2,
+        -2,
+        6,
+        0.1
+      ]
+    },
+    {
+      "id": "pipe_smoke_fx",
+      "name": "Pipe smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "passepartout#hand_r",
+        "amount": "pipe_smoke",
+        "size": [
+          0.05,
+          0.5
+        ],
+        "rate": 4,
+        "life": [
+          2,
+          4
+        ],
+        "opacity": 0.35,
+        "color": "#d8d6d0",
+        "speed": [
+          0.1,
+          0.3
+        ],
+        "shadow": 0
+      }
+    },
+    {
+      "id": "bunsby",
+      "name": "John Bunsby",
+      "person": {
+        "cast": "cast",
+        "who": "bunsby"
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "bunsby_a",
+        "distance": "bunsby_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "boatman",
+      "name": "Boatman",
+      "person": {
+        "cast": "cast",
+        "who": "boatman"
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "boatman_a",
+        "distance": "boatman_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "batulcar",
+      "name": "Batulcar",
+      "person": {
+        "cast": "cast",
+        "who": "batulcar"
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "batulcar_a",
+        "distance": "batulcar_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "n1",
+      "name": "Long Nose 1",
+      "person": {
+        "cast": "cast",
+        "who": "nose",
+        "look": {
+          "colors": {
+            "top": "#3d5f9a",
+            "bottom": "#3d5f9a",
+            "accent": "#e0b84a"
+          }
+        }
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "n1_a",
+        "distance": "n1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "n2",
+      "name": "Long Nose 2",
+      "person": {
+        "cast": "cast",
+        "who": "nose",
+        "look": {
+          "colors": {
+            "top": "#3f7a52",
+            "bottom": "#3f7a52",
+            "accent": "#ece6d6"
+          }
+        }
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "n2_a",
+        "distance": "n2_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "n3",
+      "name": "Long Nose 3",
+      "person": {
+        "cast": "cast",
+        "who": "nose",
+        "look": {
+          "colors": {
+            "top": "#25242a",
+            "bottom": "#25242a",
+            "accent": "#c8402e"
+          }
+        }
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "n3_a",
+        "distance": "n3_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "n4",
+      "name": "Long Nose 4",
+      "person": {
+        "cast": "cast",
+        "who": "nose",
+        "look": {
+          "colors": {
+            "top": "#d8a42c",
+            "bottom": "#d8a42c",
+            "accent": "#3d5f9a"
+          }
+        }
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "n4_a",
+        "distance": "n4_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "n5",
+      "name": "Long Nose 5",
+      "person": {
+        "cast": "cast",
+        "who": "nose",
+        "look": {
+          "colors": {
+            "top": "#6a4a8a",
+            "bottom": "#6a4a8a",
+            "accent": "#e0b84a"
+          }
+        }
+      },
+      "across": -60,
+      "distance": 3.5,
+      "place": {
+        "across": "n5_a",
+        "distance": "n5_d"
+      },
+      "shadow": true
+    },
+    {
       "id": "parapet",
       "name": "Parapet",
       "across": 0,
@@ -1331,5 +1724,6 @@
     "bpm": 72,
     "density": 0.35,
     "brightness": 0.45
-  }
+  },
+  "relief": "// the pontoon on the right floats low by the quay, 1.3 m down (people stand on it: the Tankadere's, Batulcar's): the ramp down to it from the quay's edge, its own level beyond\nif (across < 30 || across > 46 || distance < 4.9 || distance > 18.2) return 0;\nif (distance >= 7) return -1.3;\nif (across > 30.8 && across < 33.2) return -1.3 * (distance - 4.9) / 2.1;\nreturn 0;"
 }

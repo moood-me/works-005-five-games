@@ -61,57 +61,79 @@ lanterns, cloths). Looks: `evening` (warm, ambient 0.6, shafts 0.5 — a low sun
 | `tankadere_out` | 0 — the Tankadere at the pontoon, towards 1 — leaves the harbour | 0 |
 | `sail` | 0…1: the Tankadere's sails furled → set | 0 |
 | `daze` | 0…1: opium — the halos swell and double, the horizon tilts | 0 |
-| `pp_walk` | **changed:** where the game sends Passepartout along his way (0…1) — he walks there at his own pace (`stagger_walk`, ~0.9 m/s), the camera with him; it was where he is (people now walk at a real speed) | 0 |
-| `pp_walk_at` | **new:** where he is on his way now, in units of `pp_walk` (set by the scene) | 0 |
+| `pp_walk` | «Stay awake»: where the game sends Passepartout along his way (0 — up from the tavern's table, 1 — the top of the steps down to the water; the boatman at 0.97): he walks there at his own reeling pace (`stagger_walk`), the camera with him | 0 |
+| `pp_walk_at` | where he is on his way now, in units of `pp_walk` (set by the scene) | 0 |
+| `pp_sway` | «Stay awake»: −1…1 — he lurches aside as he walks: the end of each walk the game sends him on is that far toward the town (−) or the water (+), up to 0.9 m | 0 |
 | `pp_stumble` | a rise to 1 — he stumbles and walks on | 0 |
-| `aouda_dress`, `with_aouda`, `with_fix` | as they were | |
+| `boatman` | 1 — the boatman stands in his sampan at the foot of the steps (`sampan#stand`), his lantern lit (the light `boatman_lamp`) | 0 |
+| `message` | a rise to 1 — he pushes off with the news: the sampan and its lantern go away over the water toward the town (`sampan_x/_d/_facing`, led by the scene) | 0 |
+| `pyramid` | «The pyramid»: 0…1 — the Long Noses' tiers go up on the shoulders (from 0.2, 0.26, 0.42 — `lib.TIERS`), come down (a stumble) when it sinks below; the top man's arms out from 0.75 | 0 |
+| `tilt` | «The pyramid»: −1…1 — it sways: its mat (`pyr`, `pyr_x` led by the scene) and so its foot and all on it aside, 0.35 m at ±1 | 0 |
+| `fogg_present` | «The pyramid»: 1 — Fogg (and Aouda, `with_aouda`) come along the landing and sit in the front row, his watch in his hand — then `pyramid:fogg`; 0 — the seats empty | 0 |
+| `pp_wings` | the game's mark: the Long Noses' wings over his livery (Hong Kong); in Yokohama the beats dress him in their whole costume (`kit.cast.characters.passepartout_nose`) | 0 |
+| `aouda_dress`, `with_aouda`, `with_fix` | her travelling dress; whether she, Fix are with Fogg (the morning, the Tankadere, the front row, the quay at Yokohama) | 0 |
 
 Led by the scene (the game is not to touch them): `steamer_x/_d/_facing`, `boat_x/_d/_facing` (by `carnatic_present`,
-`tankadere_out`), `steamer_roll`, `boat_roll` (rolling), `steamer_smoke` (smokes while `carnatic_present` > 0),
+`tankadere_out`), `steamer_roll`, `boat_roll` (rolling), `steamer_smoke`, `sampan_x/_d/_facing`, `pyr_x`, `pipe_smoke`,
 `aouda_wear` (by `aouda_dress`). `camera_roll` = 4 × `daze`: the scene sets it itself when `daze` is set at once;
 whoever moves `daze` over time (`move`) moves `camera_roll` beside it — the same seconds, the same curve, to 4 × the
 value (a camera key set at once is a new shot: it is not set frame by frame).
 
-## Beats (`lib.film`; at its end the scene says `beat:<name>`)
+## The pontoon, the stage
+
+The landing (`landing`) floats 1.3 m below the quay: the `relief` lowers the land under it (and slopes it down the ramp)
+so that people stand on it — Bunsby and the Tankadere's people, Batulcar's audience. Cards there stand on the lowered
+land (`stage_back`, `stage_front`, `banners`, `lanterns_stage`, `bench`, `audience`: elevation 0); planes keep their
+own elevation (absolute: `landing` −1.3, `ramp`, `stage` 1.2 — its boards, `walk`). The stage's plane is a floor in
+Hong Kong too (unpainted): nobody's places there lie within its boards (x 33…43, d 12…16). The cameras stay on the
+quay or high (an eye down on the landing looks up under the stage).
+
+## Beats (`lib.film(scene)`; at its end the scene says `beat:<name>`)
 
 | Beat | after | What |
 | --- | --- | --- |
-| `quay` | — | Hong Kong, day: Aouda at the parapet, Passepartout beside her; Fogg comes along the quay (`fogg_walk`), Passepartout turns round, she does as he comes up; he looks at her |
-| `cousin` | quay | the camera to Aouda; she looks at the water and at him again; a pose for the choice |
-| `tavern` | — | evening: Passepartout and Fix at a table by the railing; Fix reaches for the bottle, pours more |
-| `badge` | tavern | Fix shows his badge (`badge`, Passepartout looks at `fix#badge`), Passepartout gets up (`rise_table`) |
-| `pipe` | — | opium: `daze` up to 0.6, `pp_walk` → 0.16, he stumbles once |
-| `pipe_on` | pipe | `pp_walk` → 0.32 (towards the pier), he stumbles once more |
-| `carnatic` | — | night: the steamer casts off, turns and moves off (`carnatic_present` 1 → 0.45 in 26 s; after that — the game, as far as it likes) |
-| `morning` | — | morning, the jetty empty: Fogg (and Aouda, `with_aouda`) by the pier; a cut closer; the watch (`watch_look`, a glance at the hand) |
-| `cast_off` | — | day: the Tankadere sets her sails and leaves the pontoon (`tankadere_out` → 0.3); no people — they will come with `stay_behind`, `cast_off` |
+| `quay` | — | Hong Kong, day: Aouda at the parapet, Passepartout beside her; Fogg comes along the quay, Passepartout turns round, she does as he comes up. `quay:met` |
+| `cousin` | quay | the camera to Aouda; she looks at the water and at him again; holds, under the choice. `cousin:looks-back` |
+| `tavern` | — | evening: Passepartout and Fix at a table by the railing; Fix pours. `tavern:poured` |
+| `badge` | tavern | Fix shows his badge, Passepartout gets up. `badge:shown`, `badge:up` |
+| `pipe` | badge | He sits down again; the pipe at his lips, its smoke; `daze` to 0.3; he rises — then «Stay awake» (the script leads him). The boatman waits at the steps. `pipe:up` |
+| `carnatic` | — | Night: Passepartout reels along the jetty to the steamer's gangway and stumbles — a cut: lying on her deck (`steamer_deck#aboard`, `carnatic:aboard`); she casts off (`carnatic:cast-off`, `carnatic_present` → 0.45 in 26 s), the camera drawing back down the pier |
+| `morning` | — | morning, the jetty empty: Fogg (and Aouda) by the pier; a cut closer; the watch. `morning:watch` |
+| `bunsby` | — | day, the landing: Bunsby by the Tankadere, Fogg (and Aouda) before him; Fix comes down the ramp and up to them (`bunsby:fix`); holds under the choice — `fix#head`, `bunsby#head` |
+| `cast_off` | — | her people on her deck (`tankadere_crew#helm/#fogg/#aouda/#fix`): Bunsby at the tiller, Fogg, Aouda (`with_aouda`), Fix (`with_fix`); sails up (`cast_off:sails-up`), out off the landing |
+| `stay_behind` | — | (Holland) Aouda in her travelling dress on the quay's edge, her hand up, waving; the Tankadere going out. `stay_behind:wave` |
+| `show` | — | Yokohama, night: the Long Noses in a row on the stage, Passepartout among them (the whole costume); Batulcar announces (`spread_hands`). `show:announce` |
+| `pyramid` | show | The three at the foot on the mat (Passepartout in the middle, braced), the climbers behind; then «The pyramid» (the script). `pyramid:fogg` — when Fogg has sat down |
+| `see` | pyramid | A cut close on Passepartout under the noses, his eyes to the front row; a cut from the stage (`see_cam`): Fogg in the front row, watch in hand (and Aouda), the footlights in their faces |
+| `collapse` | see | (dropped) A cut back: he steps out, the pyramid comes down softly and absurdly (`knocked_down`: they sit up on the boards), Batulcar throws up his hands (`collapse:batulcar`); Passepartout at the footlights, his arms out to his master |
+| `finish` | pyramid | (held) The top man's arms out — the bow (`finish:bow`; the applause is the game's); Fogg (and Aouda) rise and go; the tiers come down; Passepartout runs off after him in his wings |
+| `reunion` | — | Yokohama's quay at night: Passepartout in wings and nose runs up to his master; they face each other (`reunion:face`); Fogg nods |
+| `evening`, `stay_awake_show`, `yokohama`, `pyramid_show` | | the showcase's own: day → evening; «Stay awake» to the boatman and his going; Yokohama by night; «The pyramid» built, Fogg sitting down |
 
-The showcase (`showcase.js`, `lib.SHOWCASE`): quay, cousin, `evening` (showcase only: day → evening, the lanterns lit),
-tavern, badge, pipe, pipe_on, carnatic, morning, cast_off, `yokohama` (showcase only: Yokohama at night, the camera
-from the booth along the quay). Each beat ≤ 30 s.
-
-The scene tells the game the beats' moments (`scene.tell`), besides `beat:<name>`: `quay:met` (Fogg came up and looks
-at her), `cousin:looks-back`, `tavern:poured`, `badge:shown`, `badge:up`, `carnatic:cast-off`, `morning:watch`,
-`cast_off:sails-up`; Passepartout's way in the opium — the key `pp_walk_at`.
+The cuts inside beats are made ready (shots). Each beat ends in a living pose. The camera never frames the people
+held on a thing or on another (Passepartout at the pyramid's foot, aboard): `camera_target` on them frames their own
+place keys (set beside them where it matters); those shots are set by the camera's keys.
 
 ## Points and elements for a choice
 
 `tankadere`; points: `tables#table`, `tavern_front#door`, `parapet#parapet`, `steps#steps`, `steamer_hull#gangway`,
 `steamer_hull`, `steamer_rig#masthead`, `steamer_funnel#funnel`, `stage_front`, `far#peak` / `far#pagoda`, `sky#sun`,
-`sky#moon`.
+`sky#moon`, `sampan#stand`, `steamer_deck#aboard`, `tankadere_crew#helm`, `pyr#b0…b2`, `boatman#flame` (his lantern);
+the people's heads (`fogg#head`, `aouda#head`, `fix#head`, `bunsby#head`, `passepartout#head`).
 
 ## The people
 
-`fogg`, `aouda`, `passepartout`, `fix` (the cast `cast`); the keys `<id>_a`, `_d`, `_do`, `_turn` (0 — to the water,
-180 — to us), `_look`, `_reach`, `_with`, `_wear`, `_gait`, `_here` (by default there is no one). The quay, the
-terrace, the pier, the jetty — on the ground (0).
+`fogg`, `aouda`, `passepartout`, `fix`, `bunsby`, `boatman`, `batulcar`, the Long Noses `n1…n5` (the cast `cast`; each
+nose its own colours — `person.look.colors`); the keys `<id>_a`, `_d`, `_do`, `_turn` (0 — to the water, 180 — to us),
+`_look`, `_reach`, `_with`, `_wear`, `_gait`, `_on`, `_here`, `_mood` (by default there is no one). The pyramid: those
+at the foot stand `on` the mat's points (`pyr#b0…b2`, `storm_brace`), the tiers `on` a shoulder of those under them
+(`{at: 'n1#shoulder_l', up: 0.95}`), their feet reaching for the two shoulders under them.
 
-## Next
+## Known
 
-- The other beats: `stay_behind`, `carnatic` with Passepartout on deck (`on` the steamer), `bunsby`, the people of
-  `cast_off`, Yokohama (`show`, `pyramid`, `see`, `collapse`, `finish`, `reunion`).
-- The pontoon (`landing`) lies below the ground (−1.3): people on it and on the booth's stage will need a ground of
-  their own (`walk`, relief) — when Yokohama's beats come.
+- Night in Hong Kong is dark round the steamer: Passepartout on the jetty and on her deck reads small.
+- A climber goes up onto the shoulders at once (there is no climbing motion): the tier stands there the next moment.
+- The opium pipe is his hand at his lips and the smoke there (the cast has no pipe in the hand).
 
 ## The light after the tone curve was changed (2026-10-11)
 
@@ -119,8 +141,37 @@ By sheets against v1: the day more transparent and more colourful — `haze` 0.1
 `shafts` 0.15 → 0.1; the evening — `shafts` 0.5 → 0.3 (the hill behind the steamer seen); the night lighter than in
 v1 (there the people on the pier sank in the dark) — `ambient` 0.32 → 0.55, the moon `moon` `strength` 0.8 → 1.3.
 
-## Where the work stands (2026-10-15, stopped at the owner's request)
 
-Of scenes.md («ADD / CHANGE») nothing is done here yet: `pipe`/`pipe_on` with the boatman and `message`,
-`carnatic:aboard`, `bunsby`, the people in `cast_off`, `stay_behind`, Yokohama (`show`, `pyramid`, `see`, `collapse`,
-`finish`, `reunion`), the people `bunsby`, `boatman`, `batulcar`, `nose`. The scene — as it was.
+## Contract for the check
+
+```json
+{"beats": {
+  "quay": {"after": [], "tells": ["quay:met"], "seconds": 8, "show": false},
+  "cousin": {"after": ["quay"], "tells": ["cousin:looks-back"], "seconds": 8, "show": false},
+  "tavern": {"after": [], "tells": ["tavern:poured"], "seconds": 9, "show": false},
+  "badge": {"after": ["tavern"], "tells": ["badge:shown", "badge:up"], "seconds": 8, "show": false},
+  "pipe": {"after": ["badge"], "tells": ["pipe:up"], "seconds": 11, "show": false},
+  "carnatic": {"after": [], "tells": ["carnatic:aboard", "carnatic:cast-off"], "seconds": 36, "show": false},
+  "morning": {"after": [], "tells": ["morning:watch"], "seconds": 9, "show": false},
+  "bunsby": {"after": [], "tells": ["bunsby:fix"], "seconds": 13, "show": false},
+  "cast_off": {"after": [], "tells": ["cast_off:sails-up"], "seconds": 25, "show": false},
+  "stay_behind": {"after": [], "tells": ["stay_behind:wave"], "seconds": 9, "show": false},
+  "show": {"after": [], "tells": ["show:announce"], "seconds": 4, "show": false},
+  "pyramid": {"after": ["show"], "tells": ["pyramid:fogg"], "seconds": 3, "show": false},
+  "see": {"after": ["pyramid", "pyramid_show"], "tells": [], "seconds": 6, "show": false},
+  "collapse": {"after": ["see"], "tells": ["collapse:batulcar"], "seconds": 5, "show": false},
+  "finish": {"after": ["pyramid", "pyramid_show"], "tells": ["finish:bow"], "seconds": 10, "show": false},
+  "reunion": {"after": [], "tells": ["reunion:face"], "seconds": 9, "show": false},
+  "evening": {"after": [], "tells": [], "seconds": 20, "show": true},
+  "stay_awake_show": {"after": [], "tells": [], "seconds": 15, "show": true},
+  "yokohama": {"after": [], "tells": [], "seconds": 17, "show": true},
+  "pyramid_show": {"after": [], "tells": [], "seconds": 20, "show": true}
+},
+"points": ["tankadere", "tables#table", "tavern_front#door", "parapet#parapet", "steps#steps", "steamer_hull#gangway", "steamer_hull",
+  "steamer_rig#masthead", "steamer_funnel#funnel", "stage_front", "far#peak", "far#pagoda", "sky#sun", "sky#moon", "sampan#stand",
+  "steamer_deck#aboard", "tankadere_crew#helm", "pyr#b0", "pyr#b1", "pyr#b2", "boatman", "boatman#flame",
+  "fogg", "fogg#head", "aouda", "aouda#head", "fix", "fix#head", "fix#badge", "bunsby", "bunsby#head", "passepartout", "passepartout#head", "batulcar"],
+"offers": ["fogg#head", "aouda#head", "fix#head", "bunsby#head"],
+"party": {"with_aouda": 0, "with_fix": 0, "aouda_dress": 0},
+"acts": {}}
+```
