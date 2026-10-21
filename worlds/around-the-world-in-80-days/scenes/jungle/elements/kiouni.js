@@ -1,5 +1,6 @@
-// Kiouni's anchor: where he stands and which way he faces (kiouni_x, kiouni_d, kiouni_facing; kneeling and balking —
-// kiouni_el, kiouni_tilt), what all of him is built on (his flanks, the howdah, the people sat on him). It paints
-// nothing; its animate marks his points for the game and the camera — `kiouni#head` (his eye), `kiouni#trunk` (its tip),
-// `kiouni#lift` (the curl that lifts) — from whichever flank is near.
-e.at(0, -2.4);
+// Kiouni himself for the game and the camera: a card in his middle, turned as his left flank is (lib.kiouniPaint's
+// metres: his head to the right). It paints only the girth under his belly (hidden by his flanks); its animate marks his
+// points — `kiouni#head` (his eye; its own point), `kiouni#trunk` (the tip of the trunk), `kiouni#lift` (the curl that
+// lifts a man) — where his trunk and head are now.
+g.fillStyle = '#4a2a1e';
+g.fillRect(0.02, -1.3, 0.16, 0.14);

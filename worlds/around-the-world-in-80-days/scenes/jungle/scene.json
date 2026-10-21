@@ -211,7 +211,26 @@
     "trunk": "rest",
     "trumpet": 0,
     "kiouni_blow": 0,
-    "balk": 0
+    "balk": 0,
+    "owner_here": false,
+    "trader_here": false,
+    "conductor_here": false,
+    "beat_next": null,
+    "offer": 0,
+    "banknotes": 0,
+    "ride": 0,
+    "pace": 0,
+    "goad": 0,
+    "sugar": 0,
+    "charge": 0,
+    "kiouni_lane": 0,
+    "litter_lane": 0,
+    "scatter": 0,
+    "grab": 0,
+    "guide_seen": 0,
+    "aouda_calm": 1,
+    "guide_walks": 0,
+    "owner_back": 0
   },
   "states": {
     "day": {
@@ -270,7 +289,7 @@
     },
     "beat": {
       "type": "string",
-      "means": "a beat of the film (the module beats): drums, procession, pyre, rise, walk; at its end the scene says beat:<name>"
+      "means": "a beat of the film (the module beats; notes.md): rails_end, haggle, mount, ride, drums, procession, night_wall, pyre, rise, walk, flee, charge, aouda_fear, allahabad, wake, gift, sold; at its end the scene says beat:<name>"
     },
     "heads": {
       "range": [
@@ -297,7 +316,7 @@
     "kiouni_x": {
       "type": "number",
       "smooth": true,
-      "means": "where Kiouni is along the trail (m, as across); set by the scene — from the beats, ride, charge; he walks there at his own pace"
+      "means": "where Kiouni is along the trail (m, as across); led by the scene — from the beats, ride, charge"
     },
     "kiouni_d": {
       "type": "number",
@@ -373,6 +392,122 @@
       ],
       "smooth": true,
       "means": "balking: 0 — no, 1 — stopped dead, leaning back, head and ears up"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat the game will cut to next (the module beats makes its first frame ready)"
+    },
+    "offer": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«The bargain»: the roll of banknotes in Fogg's hand — how thick (£1000 … £2000)"
+    },
+    "banknotes": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — Fogg holds out the roll of banknotes (the bargain)"
+    },
+    "ride": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«The elephant»: how far Kiouni has come along the trail (40 m into the forest); the day goes to dusk with it"
+    },
+    "pace": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Kiouni's step: 0 — a slow walk, 1 — his rush (longer strides)"
+    },
+    "goad": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — the guide on Kiouni's neck lifts the goad over his head"
+    },
+    "sugar": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a rise to 1 — Passepartout leans out of the howdah with a lump of sugar, the trunk comes back for it; set back to 0 before the next"
+    },
+    "charge": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«The dash»: Kiouni out of the thicket — 0.5 at the widow, 1 through the column and away into the dark"
+    },
+    "kiouni_lane": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "«The dash»: where along the trail Kiouni heads for (−1 left … 1 right of the widow's place)"
+    },
+    "litter_lane": {
+      "range": [
+        -1,
+        1
+      ],
+      "smooth": true,
+      "means": "«The dash»: where the widow and her two priests have shied to along the trail (as kiouni_lane)"
+    },
+    "scatter": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«The dash»: the column scattering — the torch-bearers and drummers run off with their torches, each past its share"
+    },
+    "grab": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«The dash»: a rise to 1 — Passepartout has the widow up into the howdah"
+    },
+    "guide_seen": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«The dash»: a rise to 1 — a torch lifted to the guide's face as Kiouni goes by: he is known"
+    },
+    "aouda_calm": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "wake: 1 — Aouda wakes calm and sees Fogg first (after the night); 0 — frightened, looking round (after the dash)"
+    },
+    "guide_walks": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "sold: 1 — the guide, who may not go home, walks off alone along the sleepers"
+    },
+    "owner_back": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«The bargain»: 0 — the owner faces Fogg, 1 — he has turned his back, arms folded (the scene turns him at once toward where it goes; turned — haggle:turned)"
     }
   },
   "relief": "return lib.ground(across, distance);",
@@ -1106,35 +1241,42 @@
       "box": [
         -1.4,
         -3.2,
-        1.4,
+        1.8,
         0.1
       ]
     },
     {
-      "id": "kiouni",
-      "name": "Kiouni",
+      "id": "kiouni_site",
+      "name": "Kiouni (where he stands)",
       "across": -34,
       "distance": 13.4,
       "facing": 90,
-      "height": 1,
-      "box": [
-        -0.2,
-        -0.2,
-        0.2,
-        0
-      ],
       "place": {
         "across": "kiouni_x",
         "distance": "kiouni_d",
         "facing": "kiouni_facing",
         "elevation": "kiouni_el",
         "tilt": "kiouni_tilt"
-      }
+      },
+      "unseen": true
+    },
+    {
+      "id": "kiouni",
+      "name": "Kiouni",
+      "on": "kiouni_site",
+      "facing": 270,
+      "height": 3.2,
+      "box": [
+        -0.2,
+        -1.4,
+        0.4,
+        -1.1
+      ]
     },
     {
       "id": "kiouni_l",
       "name": "Kiouni",
-      "on": "kiouni",
+      "on": "kiouni_site",
       "across": -0.85,
       "facing": 270,
       "height": 3.2,
@@ -1149,7 +1291,7 @@
     {
       "id": "kiouni_r",
       "name": "Kiouni",
-      "on": "kiouni",
+      "on": "kiouni_site",
       "across": 0.85,
       "facing": 90,
       "height": 3.2,
@@ -1164,7 +1306,7 @@
     {
       "id": "howdah_l",
       "name": "Howdah",
-      "on": "kiouni",
+      "on": "kiouni_site",
       "across": -0.62,
       "elevation": 2.86,
       "facing": 270,
@@ -1180,7 +1322,7 @@
     {
       "id": "howdah_r",
       "name": "Howdah",
-      "on": "kiouni",
+      "on": "kiouni_site",
       "across": 0.62,
       "elevation": 2.86,
       "facing": 90,
@@ -1710,6 +1852,61 @@
         "across": "v8_a",
         "distance": "v8_d"
       }
+    },
+    {
+      "id": "owner",
+      "name": "Kiouni's owner",
+      "person": {
+        "cast": "cast",
+        "who": "owner"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "owner_a",
+        "distance": "owner_d"
+      }
+    },
+    {
+      "id": "trader",
+      "name": "Trader",
+      "person": {
+        "cast": "cast",
+        "who": "trader"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "trader_a",
+        "distance": "trader_d"
+      }
+    },
+    {
+      "id": "conductor",
+      "name": "Conductor",
+      "person": {
+        "cast": "cast",
+        "who": "conductor"
+      },
+      "across": -80,
+      "distance": 11.858,
+      "place": {
+        "across": "conductor_a",
+        "distance": "conductor_d"
+      }
+    },
+    {
+      "id": "banknotes",
+      "name": "Roll of banknotes",
+      "across": -32.6,
+      "distance": 10.7,
+      "height": 1,
+      "box": [
+        -1.2,
+        -2,
+        1.6,
+        0.1
+      ]
     },
     {
       "id": "fire_pb1",
