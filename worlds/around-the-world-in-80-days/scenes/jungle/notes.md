@@ -1,8 +1,9 @@
 # The jungle (`jungle`) — on engine 3
 
-The chapter «The jungle» (rpg docs/vokrug-sveta/scenes.md). An Indian forest, a panorama along the trail. The people are
-the engine's (the world's cast `cast`), the film is in beats (`beats`: lib.js `FILM`), the colours — `light`; the
-elephant Kiouni is there (below), his beats are not yet. Dark silhouettes of thicket in front,
+Chapter I of the game (rpg docs/vokrug-sveta/scenes.md): the end of the rails, the elephant Kiouni bought and ridden,
+the drums, the procession, the suttee — at night by the pagoda or now on the road —, Allahabad. An Indian forest, a
+panorama along the trail. The people are the engine's (the world's cast `cast`), the film is in beats (`beats`:
+lib.js `film(scene)`), the colours — `light`; the elephant Kiouni is the scene's own (below). Dark silhouettes of thicket in front,
 the lit forest beyond the trail, the far canopy in haze; on the right the forest opens out to the river. The morning
 saffron, the day green, the night light, with the moon, fireflies and torches.
 
@@ -67,6 +68,31 @@ engine's way.
 
 The paintings read no moving keys: `sign` reads only `station` (changed on a cut).
 
+## Kiouni
+
+An element of the scene (people do not move as he does), built on the unseen anchor `kiouni_site` (its place —
+`kiouni_x`, `kiouni_d`, `kiouni_facing`, `kiouni_el`, `kiouni_tilt` — led by the scene): two flanks seen from the side
+(`kiouni_l`, `kiouni_r`: one is near, whichever way he faces, and shows all of him; the far one only its two legs
+between the near ones — `lib.kiouniPaint`), the howdah's rails (`howdah_l`, `howdah_r`) on his back, and `kiouni` — a
+card in his middle turned as the left flank, painting only the girth under his belly: its animate marks his points
+`kiouni#head` (the eye; its own point), `kiouni#trunk` (the tip), `kiouni#lift` (the curl that lifts a man). (They were
+the anchor's first: an anchor that paints nothing is not there to be seen, its animate does not run — no points.)
+His motion — `lib.kiouniMove` (the flanks' animate): the legs step by the way gone (no sliding; a longer step at a run
+and with `pace`), fold as he kneels; the trunk eases to its pose (`trunk`: rest, up, sugar, lift; folded as he kneels),
+the ears flap and fan (`ears`, `balk`, `kiouni_blow`), the head nods, lifts as he trumpets, blinks. His look: the ear's
+rim dark (it stands off the head), the eye big enough to read across the trail, the caparison over his back only.
+
+The seats — `lib.KIOUNI_SEATS`, points of his frame (`seat(name)` = `{on: 'kiouni_site', at}`): `guide` on the neck,
+`front`, `mid`, `back` in the howdah, `rump` behind it; those sat there `_turn` 180 — his way (0 — back, 90/270 — out
+to a side). Getting down: their place set on the ground by his near flank, `_on` null and `rise_chair` at once — they
+go down from the seat as the motion rises. Getting up is a cut (people cannot climb). He walks by `lib.kiouniGo` (a
+path of his place and his turn, m/s), kneels by `kneel` (the script keeps `kiouni_el` = −1.15·kneel, `kiouni_tilt` =
+−9·sin(π·kneel) + 6·balk). Passepartout lifted on the trunk (`gift`) stands `on` `kiouni#lift`.
+
+The camera never frames people sat on him: `camera_target` on a carried person frames where their own place keys
+are, not where they ride (the operator flew off to the ground — a request to the engine, in the report). Close shots
+of the howdah ride him instead (`camera_on: 'kiouni_site'`, beside his near side — `howdahClose(facing)`).
+
 ## Keys
 
 | Key | What |
@@ -74,45 +100,78 @@ The paintings read no moving keys: `sign` reads only `station` (changed on a cut
 | `day` | 0…1: 0 — night (the moon, stars, light), 1 — day |
 | `dawn` | 0…1: dawn — saffron light, a low sun over the river |
 | `station` | `kholby` · `allahabad` — the words on the sign |
-| `procession` | where the column goes along the trail (0 — not come, 0.476 — stands before the thicket, 1 — gone by). **Was:** the key moved the column by the seconds (the people walked at its speed). **Now:** the value set — the column walks there at its own pace (the cast's gaits); 0 — it is not there |
-| `torches` | 0…1: whether the torches burn (the priests' at dawn too) |
+| `procession` | where the column goes along the trail (0 — not come, 0.476 — stands before the thicket, 1 — gone by); the value set — the column walks there at its own pace (the cast's gaits) |
+| `torches` | 0…1: whether the torches burn |
 | `pyre_fire` | 0…1: the pyre's flame and as much of its light |
 | `smoke` | 0…1: the pyre's smoke |
 | `heads` | the crowd at the pyre: 0 — face down, 1 — looking (each a little after its neighbour) |
-| `walk` | how far the «rajah» carries the widow from the pyre to the trees (0…1, the way `WAY`). **Was:** the key led him by the seconds. **Now:** the value set — he walks there at his own pace (`carry_walk`) |
-| `fireflies` | fireflies; the scene sets it itself by `day` |
-| `beat` | a beat (`beats`): drums, procession, pyre, rise, walk; at its end — `beat:<name>`. It was `film` — the montage; the montage is now the showcase (`showcase.js`) |
+| `walk` | how far the «rajah» carries the widow from the pyre to the trees (0…1); the value set — he walks there at his own pace (`carry_walk`) |
+| `fireflies` | the scene sets it itself by `day` |
+| `kneel`, `balk`, `ears`, `trunk`, `trumpet` (a rise to 1), `pace`, `kiouni_here` | Kiouni (above); `kiouni_blow`, `kiouni_el`, `kiouni_tilt`, `kiouni_x`, `kiouni_d`, `kiouni_facing` — led by the scene |
+| `owner_back` | «The bargain»: 0 — the owner faces Fogg, 1 — he turns his back, arms folded (`haggle:turned` when turned). Not `owner_turn`: that is the person `owner`'s own turn (degrees) |
+| `offer` | «The bargain»: the roll of banknotes in Fogg's hand — how thick (£1000 … £2000); `banknotes` 1 — he holds it out |
+| `ride` | «The elephant»: Kiouni along the trail, 40 m from the end of the rails into the forest (through the stream: he wades); the day goes to dusk with it (`day` 1 → 0.35, `dawn` → 0.5). The camera rides him from the side |
+| `goad` | 1 — the guide lifts the goad over his head |
+| `sugar` | a rise to 1 — Passepartout leans out with a lump of sugar, the trunk comes back for it (~2 s) |
+| `charge` | «The dash»: Kiouni out of the thicket — 0.5 at the widow, 1 through the column and away into the dark (past the first torch-bearer) |
+| `kiouni_lane`, `litter_lane` | «The dash»: −1…1 — where along the trail Kiouni heads for; where the widow and her two priests have shied to (1.6 m a side). There is no palanquin: she walks led by the priests, as in Verne and in the procession |
+| `scatter` | «The dash»: the torch-bearers and drummers run off with their torches, each past its share (`lib.SCATTER`); the first torch-bearer stays |
+| `grab` | «The dash»: a rise to 1 — Passepartout, reaching down from the rump, has her up into the howdah (her veil falls back); the priests fall back |
+| `guide_seen` | «The dash»: a rise to 1 — the torch-bearer who stood lifts his torch to the guide's face as Kiouni goes by, their eyes meet; the camera comes after them |
+| `aouda_calm` | wake: 1 — she wakes calm and sees Fogg first; 0 — frightened, looking round |
+| `guide_walks` | sold: 1 — the guide walks off alone along the sleepers |
+| `beat`, `beat_next` | the film (the module beats) |
+
+The rescue is no fight: torches, drums, the elephant's bulk and shadow, faces in the firelight; nobody strikes anyone.
 
 The people — `person` (the cast `cast`): the keys `<id>_a`, `_d`, `_do`, `_turn`, `_look`, `_reach`, `_with`, `_wear`,
-`_gait`, `_on`, `_here`. The footbridge (`bridge`), the top of the pyre (`pyre_top`) and its steps (`pyre_steps`) —
-`walk` planes.
+`_gait`, `_on`, `_here`, `_mood`. The footbridge (`bridge`), the top of the pyre (`pyre_top`) and its steps
+(`pyre_steps`) — `walk` planes. 24 people (the engine's most): the column (9), the four, the crowd `v1…v8` (also the
+passengers at the station), `owner`, `trader`, `conductor`. The roll of banknotes — `banknotes`, a layer its animate
+carries to `fogg#hand_r`.
 
-## Beats (lib.js `FILM`)
+## Beats (lib.js `film(scene)`; at its end the scene says `beat:<name>`)
 
 | Beat | after | What |
 | --- | --- | --- |
-| `drums` | — | Dusk: the four walk along the trail at their own pace; the guide turns at the drums; all go off into the thicket and hide (`crouch_hide`, `kneel_up`) |
-| `procession` | — | Night (a cut closer, over the shoulders of those hiding): the column comes along the trail from the left (`procession` → 0.476), over the footbridge, and stops; those hiding look at the first torch-bearer as he comes into the frame, at Aouda — as she does |
-| `pyre` | — | Dawn in the clearing: the priests come up and set it alight, the pyre flares up, the camera comes closer; Fogg strains forward, Cromarty holds him back |
-| `rise` | pyre | The smoke thicker, the camera closer; a cut (made ready ahead) to a low shot: the «rajah» stands on the pyre with Aouda in his arms; the crowd face down |
-| `walk` | rise | The camera draws back; he comes down the steps and walks to the trees (`walk` → 1); once he is down, the crowd raises its heads, the smoke thins; Fogg steps back |
+| `rails_end` | — | Day, the end of the rails: the conductor along the carriages, the passengers off along the line; Passepartout ahead to Kiouni by his shed, Fogg and Cromarty after; his trunk up. `rails_end:shed` |
+| `haggle` | rails_end | (the game's «The bargain») Fogg and the owner three-quarters to each other, Kiouni behind, the roll in Fogg's hand; then the game. `haggle:turned` |
+| `mount` | haggle | The owner takes the roll; the guide to Kiouni's head; he kneels — a cut: all up, the guide on his neck — he rises, trumpets. `mount:up` |
+| `ride` | — | (the game's «The elephant») Kiouni on the trail, the camera riding him from the side; then the game |
+| `drums` | — | Dusk: Kiouni along the trail with the four; he stops dead, ears out (`drums:heard`); kneels, they get down one by one and hide crouching in the thicket; he goes in among the trees behind them. `drums:hidden` |
+| `procession` | — | Night (a cut): the column comes and stops before the thicket (`procession:torches`, `procession:widow`, `procession:stopped`); holds under the choice — `kiouni#head` and `fogg#head` in the frame; the dash's first frame made ready meanwhile |
+| `night_wall` | — | «At night»: by the pagoda's wall, the two guards' torches; the four creep up, a guard lifts his torch, they draw back; Passepartout lags and is gone into the dark. `night_wall:gone` |
+| `pyre` | — | Dawn on the clearing: the priests set it alight; Fogg strains, Cromarty holds him back (Kiouni kneels at the trees, out of the frame, the guide on his neck). `pyre:kindled` |
+| `rise` | pyre | The «rajah» rises from the smoke with the widow; the crowd on its face. `rise:risen` |
+| `walk` | rise | (the game's «Like the dead») He carries her down and toward the trees as `walk` sends him. `walk:down`, `walk:away` |
+| `flee` | walk | At the trees: he throws off the shroud (a cut, close) — Passepartout (`flee:pp`); a cut: all five up on Kiouni kneeling there, he rises and goes off into the forest; the crowd rises |
+| `charge` | procession | (the game's «The dash») A cut to the four up on Kiouni in the thicket; then the game: out into the torches. `charge:through` (charge ≥ 0.8) |
+| `aouda_fear` | charge | Close (riding him beside the howdah), Kiouni running through the dark: Aouda's eyes open, afraid |
+| `allahabad` | — | Morning, the board ALLAHABAD: Kiouni along the trail to the line's end, kneels (`allahabad:kneel`); Passepartout and Cromarty get down; Fogg turns to her in the howdah |
+| `wake` | allahabad | Close on the howdah: she wakes (`aouda_calm`). `wake:eyes`; the gift's and the sale's first frames made ready meanwhile |
+| `gift` | wake | (a cut) Fogg's palm on the trunk, the goad to the guide; Kiouni lifts Passepartout on his trunk, he laughs. `gift:lift` |
+| `sold` | wake | (a cut) The trader leads Kiouni away along the trail; Passepartout looks after him; with `guide_walks` the guide off along the sleepers. `sold:away` |
+| `haggle_show`, `ride_show`, `walk_show`, `charge_show` | | The showcase's own (at the table's end): the games' beats playing themselves |
 
-Each beat ≤ 30 s, waits for what happens (got there, came into the frame), time only in the pauses. The showcase
-(`showcase.js`): its own beat `day` (day, the camera goes along the trail from the end of the rails into the forest),
-then all the beats in order.
-
-The scene tells the game the beats' moments (`scene.tell`), besides `beat:<name>`: `drums:heard` (the guide turned),
-`drums:hidden`, `procession:torches` (the first torch-bearer in the frame), `procession:widow` (the widow in the frame),
-`procession:stopped`, `pyre:kindled` (the priests put their torches to it), `rise:risen` (the cut: he stands on the
-pyre), `walk:down` (came down from the pyre), `walk:away` (at the trees).
-
-Those hiding: the cast's `crouch_hide` — a real squat on the heels (the motion made anew).
+The cuts inside beats are made ready (shots): `mount`, `rise`, `flee`, `aouda_fear`, `wake`; `charge`, `gift`, `sold`
+cut to a frame the scene made ready in the beat before (while it holds under the choice), else plainly. Each beat ends
+in a living pose. The showcase (`showcase.js`): its own beat `day` (the camera along the trail by day), then
+`lib.SHOWCASE`. Silent action before a moment: at most ~9 s (`mount`, `drums`, `allahabad`).
 
 ## Points
 
-`train#train`, `train#chimney`, `shed#kiouni_shed`, `sign#station`, `hut#hut`, `forest#trail`,
-`procession#procession` (over the head of the first torch-bearer — animate), `pyre#pyre`, `pyre#flames`, `pyre#smoke`,
-`pagoda#pagoda`, `sky#moon`, `sky#sun`.
+`kiouni#head`, `kiouni#trunk`, `kiouni#lift`, `banknotes`, `train#train`, `train#chimney`, `shed#kiouni_shed`,
+`sign#station`, `hut#hut`, `forest#trail`, `procession#procession` (over the head of the first torch-bearer —
+animate), `pyre#pyre`, `pyre#flames`, `pyre#smoke`, `pagoda#pagoda`, `sky#moon`, `sky#sun`; the people's
+(`fogg#head`, `fogg#hands`, `guide#head`, `guide#hands`, `aouda#hands`, `owner#head`, …).
+
+## Known
+
+- The mist over the stream (`mist_stream`) lies as a grey veil over the lower frame when the camera is near the stream
+  (the ride, the dash) — it was made for the views from the thicket.
+- `walk`: the «rajah» walks by his gait's own pace toward where «Like the dead» sends him — the game's step shows as
+  walking and halting, not as a slower or quicker step.
+- People: 24 — the engine's most, none to spare.
 
 ## The light after the tone curve was changed (2026-10-11)
 
@@ -122,38 +181,38 @@ the frame. By sheets against v1 (the air cleaner, the green and the pyre's gold 
 0.7 → 0.4; `dawn`: `haze` 0.3 → 0.18, `shafts` 1.1 → 0.5; the pyre `pyre` `strength` 2.2 → 1.6 (it does not bleach the
 frame). The mist over the stream and the river — painted layers (`mist_*`); the light does not change them.
 
-## Kiouni — where the work stands (2026-10-15, stopped at the owner's request)
 
-**Done and checked with one sheet on the GPU (no errors):** the elephant — the elements `kiouni` (an anchor: place
-`kiouni_x`, `kiouni_d`, `kiouni_facing`, `kiouni_el`, `kiouni_tilt`; it paints nothing, its animate sets the points
-`kiouni#head` (the eye), `kiouni#trunk` (the tip of the trunk), `kiouni#lift` (the bend of the trunk, to lift a
-man)), the sides `kiouni_l` / `kiouni_r` (cards at the sides, `lib.kiouniPaint`: the body with a red caparison, the
-legs in two parts each, the head with a painted forehead and an eye, the ear, the trunk of five parts, the tail; the
-near side shows all, the far side only its own two legs), the howdah `howdah_l` / `howdah_r` (its sides on his back).
-The motion — `lib.kiouniMove` (the sides' animate): the legs step by the way gone (no sliding; a longer step at a run
-and with `pace`), fold when he kneels; the trunk goes smoothly to the pose `trunk` (`rest`, `up`, `sugar`, `lift`;
-folds with `kneel`), the ears flap and fan out (`ears`, `balk`, `kiouni_blow`), the head nods, blinks. The seats —
-`lib.KIOUNI_SEATS` (`guide` on the neck, `front`, `mid`, `back` in the howdah; points in his frame: `<id>_on:
-lib.seat('front')`, they sit `sit_calm`, `_turn` 180 — facing the way he goes). Checked: standing, kneeling, the trunk
-up and to the howdah, walking along the trail, four sitting in the howdah.
+## Contract for the check
 
-**Not done:**
-- The script: `kneel`/`balk` → `kiouni_el`/`kiouni_tilt` (the sheet checked it by setting them by hand: el =
-  −1.15·kneel, tilt ≈ −9·sin(π·kneel) + 6·balk); `trumpet` → `kiouni_blow` (a rise of 0.4 s, 1.3 s, a fall of 0.9 s);
-  `sugar`, `goad`, `ride`, `pace`, `charge`, `scatter`, `grab`, `guide_seen`, `owner_turn`, `offer` — the scene hears
-  none of them yet. `kiouni_here` is read only by the animate (transparency); the anchor is not taken away.
-- Not one new beat: `rails_end`, `haggle`, `mount`, `ride`, `drums` with Kiouni, `night_wall`, `flee`, `charge`,
-  `aouda_fear`, `allahabad`, `wake`, `gift`, `sold`. The old beats (drums…walk) — as they were, the elephant takes no
-  part in them.
-- The people `owner`, `trader`, `conductor` not added (not in the cast when the work stopped); the roll of banknotes
-  (`offer`) — none.
-- The seat on the rump (`rump`) for a fifth (with Aouda) not added.
-- Small things of the look, by the sheet: the ear nearly merges with the head (a dark outline is needed), the eye could
-  be bigger, the caparison is a little large.
-
-**By default** Kiouni stands under the shed (−34, 13.4), facing right; he is not seen in the frames of the old beats.
-
-**Planned (not code):** `ride` — the camera `camera_on: 'kiouni'` from the side (camera_x ≈ −5.6, camera_yaw 90,
-camera_h ≈ 1), the way `ride` 0…1 = x −22 → 18 along the trail (d = trail + 0.3; at the stream a detour behind the
-footbridge, d = trail + 2.6), day → dusk by `ride`; `charge` — out of the thicket right of the column slantwise onto
-the trail and left through it; `flee`, `allahabad` — mounting and getting down on a cut (people cannot climb up).
+```json
+{"beats": {
+  "rails_end": {"after": [], "tells": ["rails_end:shed"], "seconds": 8, "show": false},
+  "haggle": {"after": ["rails_end"], "tells": ["haggle:turned"], "seconds": 4, "show": false},
+  "mount": {"after": ["haggle", "haggle_show"], "tells": ["mount:up"], "seconds": 12, "show": false},
+  "ride": {"after": [], "tells": [], "seconds": 1, "show": false},
+  "drums": {"after": [], "tells": ["drums:heard", "drums:hidden"], "seconds": 21, "show": false},
+  "procession": {"after": [], "tells": ["procession:torches", "procession:widow", "procession:stopped"], "seconds": 27, "show": false},
+  "night_wall": {"after": [], "tells": ["night_wall:gone"], "seconds": 12, "show": false},
+  "pyre": {"after": [], "tells": ["pyre:kindled"], "seconds": 14, "show": false},
+  "rise": {"after": ["pyre"], "tells": ["rise:risen"], "seconds": 8, "show": false},
+  "walk": {"after": ["rise"], "tells": ["walk:down", "walk:away"], "seconds": 22, "show": false},
+  "flee": {"after": ["walk", "walk_show"], "tells": ["flee:pp"], "seconds": 12, "show": false},
+  "charge": {"after": ["procession"], "tells": ["charge:through"], "seconds": 10, "show": false},
+  "aouda_fear": {"after": ["charge", "charge_show"], "tells": [], "seconds": 5, "show": false},
+  "allahabad": {"after": [], "tells": ["allahabad:kneel"], "seconds": 12, "show": false},
+  "wake": {"after": ["allahabad"], "tells": ["wake:eyes"], "seconds": 5, "show": false},
+  "gift": {"after": ["wake"], "tells": ["gift:lift"], "seconds": 10, "show": false},
+  "sold": {"after": ["wake"], "tells": ["sold:away"], "seconds": 10, "show": false},
+  "haggle_show": {"after": ["rails_end"], "tells": [], "seconds": 15, "show": true},
+  "ride_show": {"after": [], "tells": [], "seconds": 30, "show": true},
+  "walk_show": {"after": ["rise"], "tells": [], "seconds": 22, "show": true},
+  "charge_show": {"after": [], "tells": [], "seconds": 11, "show": true}
+},
+"points": ["kiouni", "kiouni#head", "kiouni#trunk", "kiouni#lift", "banknotes", "train#train", "train#chimney", "shed#kiouni_shed",
+  "sign#station", "hut#hut", "forest#trail", "procession#procession", "pyre#pyre", "pyre#flames", "pyre#smoke", "pagoda#pagoda",
+  "sky#moon", "sky#sun", "fogg", "fogg#head", "fogg#hands", "fogg#hand_r", "guide", "guide#head", "guide#hands", "aouda", "aouda#head",
+  "aouda#hands", "passepartout", "cromarty", "owner", "owner#head", "trader", "conductor"],
+"offers": ["kiouni#head", "fogg#head", "guide#head"],
+"party": {},
+"acts": {}}
+```
