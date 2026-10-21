@@ -24,7 +24,8 @@
 //     label}]: petals, one too); → the option's id, kept in state.choices[choice] (null: not on the chapter's map);
 //     show — s before the ghost shows how (the play's first press: at once)
 //   g.beat(name, {wait}) — a beat of the shown scene's film (module `beats`); → once it has ended ('beat:<name>'),
-//     or at once with wait: false. To wait for a moment inside a beat, make the g.told before g.beat. A cut to a beat
+//     or at once with wait: false; a beat the scene has not ('beat-unknown:<name>') — an error at once: the step
+//     breaks (with wait: false — said). To wait for a moment inside a beat, make the g.told before g.beat. A cut to a beat
 //     that is neither the next in the scene's table nor one that goes on from the one before: named ahead in the key
 //     `beat_next` (g.set), so that its first frame is ready
 //   g.play(minigame, opts) — a minigame of minigames/ ({file, title, about, skipped, run(g, b, opts, signal)}). The
@@ -149,7 +150,8 @@ export function hoursText(h) {
 // the bag's sum, its thousands apart as the play's language writes them (a space — a narrow one)
 export const moneyText = m => tr('£{sum}', { sum: Math.round(m).toLocaleString(tr.lang).replace(/\s/g, ' ') });
 
-const BEAT = 180000; // a beat longer than this has not ended: the scene lacks it
+const BEAT = 180000; // a beat longer than this has not ended
+const UNKNOWN = 'unknown'; // a beat the scene has not
 const SKIPPABLE = 20000; // ms in a minigame of a step not seen yet before the ⏭ may skip it
 
 export function context(b, view, hub, state, j = null, { forward = null } = {}) {
@@ -207,6 +209,10 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   // the time a line asks, once said: heard — a breath after; shown without a voice — as long as it takes to read it
   // (the page keeps it 1.5 s + 60 ms a letter from when it shows: speech.js)
   const after = ({ heard, text }) => sleep(heard ? 500 : 300 + text.length * 60);
+  // a beat's end: 'beat:<name>' told → true; the scene has no such beat (the module beats tells 'beat-unknown:<name>' at
+  // once) → UNKNOWN; neither within BEAT ms → false. Unseen, a dry run's: its end is heard
+  const ending = name => (gone() ? never : unseen() ? j.heard(`beat:${name}`, BEAT)
+    : alive(hub.told([`beat:${name}`, `beat-unknown:${name}`], BEAT)).then(t => (t === `beat-unknown:${name}` ? UNKNOWN : !!t)));
   // a minigame's result kept where the story reads it (game.md §2)
   const keepHands = (minigame, result) => {
     const name = handsOf(minigame);
@@ -236,14 +242,14 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       const spec = await alive(unseen() ? j.real(b.specOf(folder)) : b.specOf(folder));
       st = { ...Object.fromEntries(Object.entries(carry(folder, facts(state), state) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
       if (unseen()) {
-        opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
+        opening = typeof st.beat === 'string' ? { name: st.beat, ended: ending(st.beat) } : null;
         j.scene(folder, st);
         return;
       }
       showing = true;
       try {
         if (fast) await alive(land());
-        opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
+        opening = typeof st.beat === 'string' ? { name: st.beat, ended: ending(st.beat) } : null;
         hub.withdraw();
         await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       } finally { showing = false; }
@@ -281,12 +287,16 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       const opened = opening?.name === name ? opening : null;
       opening = null;
       if (!opened && fast) await alive(land());
-      const ended = opened ? opened.ended : wait ? g.told(`beat:${name}`, BEAT) : null;
+      const ended = opened ? opened.ended : ending(name);
       if (!opened) {
         put('beat', null); // (the same beat again is a change too)
         put('beat', name);
       }
-      if (wait && !(await ended)) b.trouble(`the beat “${name}” did not end`);
+      if (!wait) { ended.then(how => { if (how === UNKNOWN) b.trouble(`the scene has no beat “${name}”`); }); return; }
+      const how = await ended;
+      // (a beat the scene has not: the step breaks at once — game.js says it and passes it)
+      if (how === UNKNOWN) throw new Error(`the scene has no beat “${name}”`);
+      if (!how) b.trouble(`the beat “${name}” did not end`);
     },
     told(text, ms = 60000) {
       return gone() ? never : unseen() ? j.heard(text, ms) : alive(hub.told(text, ms));
@@ -413,7 +423,8 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //   hub.ask(at, options) → the action chosen, or null: a mark of the plain choice born open where the game's own
 //     drawing was pressed (at: fn → {x, y} page px — map.js), its options out as petals at once; a touch off them folds
 //     it — null, the mark gone (nothing waits idle)
-//   hub.withdraw() — nothing offered; hub.told(text, ms) → true once the scene tells it, false if ms pass
+//   hub.withdraw() — nothing offered; hub.told(text | [texts], ms) → true once the scene tells it (of several: the one
+//     told first), false if ms pass
 const SHOW = 8; // s: nothing pressed so long — the ghost shows how
 const NOWHERE = 6; // s: a choice none of whose points has been seen so long is broken
 
@@ -422,12 +433,12 @@ export function listen(b) {
   // what the scene is waited to tell: {text, ok, timer} — heard, or ms gone by (the timer taken down either way)
   const waiting = new Set();
   const told = (text, ms) => new Promise(ok => {
-    const w = { text, ok };
+    const w = { texts: [text].flat(), ok: t => ok(Array.isArray(text) ? t : true) };
     w.timer = setTimeout(() => { if (waiting.delete(w)) ok(false); }, ms);
     waiting.add(w);
   });
   b.on('tell', text => {
-    for (const w of waiting) if (w.text === text) { waiting.delete(w); clearTimeout(w.timer); w.ok(true); }
+    for (const w of waiting) if (w.texts.includes(text)) { waiting.delete(w); clearTimeout(w.timer); w.ok(text); }
   });
   return {
     offer(offers, { show = SHOW } = {}) {
