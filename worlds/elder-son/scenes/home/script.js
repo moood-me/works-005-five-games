@@ -19,7 +19,7 @@ let creeping = null;
 const metresAt = () => L.sneakOf(scene.get('busygin_a') + 2, scene.get('busygin_d'));
 function creep() {
   const to = L.clamp(Number(scene.get('sneak')) || 0, 0, 1) * L.SNEAK_LEN, from = metresAt();
-  if (creeping) for (const a of creeping) a.cancel();
+  // (a new walk takes over the one going, smoothly, from where they are)
   creeping = [
     scene.person('busygin').walk(L.sneakWay(from, to), { gait: 'tiptoe' }),
     // (Silva onto the way first, where he should be behind him)

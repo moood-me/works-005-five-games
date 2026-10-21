@@ -9,7 +9,7 @@ const L = new Function('anim', 'kit', readFileSync(`${DIR}/lib.js`, 'utf8'))({},
 const { A, H } = L;
 const objects = [];
 const add = o => (objects.push(o), o);
-const wallBox = w => [-w / 2 - 0.02, -H - 0.02, w / 2 + 0.02, 0.02];
+const wallBox = w => [-w / 2 - 0.05, -H - 0.03, w / 2 + 0.05, 0.03];
 const SAR = { shadow: { light: 'sar_light' } };   // the kitchen's right wall: its doorway shapes his lamp's light on the kitchen floor
 const ROOM_SIDE = 2.02;                           // the room's face of the kitchen's right wall (across)
 
@@ -90,6 +90,7 @@ add({ id: 'stove', name: 'Stove', inside: true, across: A(L.STOVE.front), distan
   on(L.ON.glass_s, { id: 'glass_s', name: 'Glass', height: 0.12, box: [-0.07, -0.17, 0.08, 0.01] });
   on([(L.ON.kettle[0] + L.ON.kettle_pushed[0]) / 2, (L.ON.kettle[1] + L.ON.kettle_pushed[1]) / 2], { id: 'kettle', name: 'Kettle', height: 0.24,
     box: [-0.3, -0.28, 0.4, 0.01] });
+  on(L.ON.box, { id: 'snuffbox', name: 'Snuffbox', height: 0.04, box: [-0.06, -0.05, 0.3, 0.01] });
   on(L.ON.bread, { id: 'bread', name: 'Bread bin', height: 0.18, box: [-0.2, -0.2, 0.2, 0.01] });
   on(L.ON.bottle, { id: 'bottle', name: 'Bottle', height: 0.32, box: [-0.16, -0.34, 0.16, 0.01] });
   add({ id: 'set_glass', name: 'Glass', inside: true, across: A(L.SET_GLASS[0][0]), distance: L.SET_GLASS[0][1], elevation: top, height: 0.12,
@@ -228,7 +229,7 @@ const scene = {
     tint: '#8a8fb0', tintStrength: 0.04, vignette: 0.4, grain: 0.18,
     haze: 0.03, hazeColor: '#3a3036', hazeGlow: 0.45, shafts: 0,
     // the state with no night in it (hour 0) is the grey dawn; `hour` turns it to the night
-    brightness: 1.1, saturation: 0.8, ambient: 0.74, ambientColor: '#b4b8c4', bounce: 0.5, inside: 0.45,
+    brightness: 1.1, saturation: 0.8, ambient: 0.82, ambientColor: '#b4b8c4', bounce: 0.5, inside: 0.45,
     looks: { hour: { ambient: 0.54, ambientColor: '#9198b8', saturation: 0.84, inside: 0.3, lights: { night: 0.3, room_light: 0.7, snow_light: 0.45 } } },
   },
   lights: [
@@ -239,7 +240,7 @@ const scene = {
     // his lamp beyond his door ajar, its light come through the gap: the sofa's right end, through the doorway onto the kitchen's floor
     { id: 'sar_light', across: A(L.SAR_LAMP[0]), distance: L.SAR_LAMP[1], elevation: L.SAR_LAMP[2], color: '#efb877', strength: 1.5, reach: 5.5, on: 'sar_light', glow: 0.2 },
     // a little light in the room (from the street, at dawn the grey morning), so the cupboard, the cot, the sofa are seen
-    { id: 'room_light', across: A(4.7), distance: 1.6, elevation: 2.0, color: '#c3bcae', strength: 1.0, reach: 4.2 },
+    { id: 'room_light', across: A(4.7), distance: 1.6, elevation: 2.0, color: '#c3bcae', strength: 1.4, reach: 4.5 },
     { id: 'night', from: [0, 30], color: '#b8c0d4', strength: 1.2 },
   ],
   state,

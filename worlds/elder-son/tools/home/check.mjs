@@ -46,6 +46,7 @@ function run(name, fn, init, party) {
     warn: t => warn.push(t),
     wait: d => at(now + d),
     until: f => at(now),
+    sequence: fn => Promise.resolve().then(() => fn(s)),
     all: (...a) => Promise.all(a.filter(Boolean)),
     person: id => person(id),
   };
