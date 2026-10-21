@@ -2,7 +2,7 @@
 // as the key), the fire's roar by it. One mark at a time: with an empty bucket — a ring on the barrel (`barrel`); pressed — the scene's turn:
 // Busygin fills it (`buckets` 'fill' → `buckets:full`); with a full one — a ring on the shed (`shed`); pressed — he throws (`buckets`
 // 'throw' → `buckets:splash`): the fire −0.18, a splash, counted in `buckets`. The neighbours go their own way: every 6 s the fire −0.07, a
-// quieter splash. The bar — 1 − `fire` / 0.6. The fire out — 2 s of steam — clean. After 55 s the neighbours have managed by themselves (`fire` → 0 over
+// quieter splash. The bar — 1 − `fire` / 0.6. The fire out — 2 s of steam — clean. After 40 s the neighbours have managed by themselves (`fire` → 0 over
 // 4 s) — neutral.
 //   Feeling: putting out a stranger's shed with the neighbours; wants to put it out; panic and laughter; the player — barrel, shed, faster.
 //   → { buckets }
@@ -12,7 +12,7 @@ const START = 0.6, GROW = 0.01; // the fire; a second
 const ROAR = 0.25; // s between changes of the roar
 const BUCKET = 0.18, NEIGHBOURS = 0.07, EVERY = 6; // the fire a bucket; the neighbours', once in 6 s
 const STEAM = 2; // s of steam at the end
-const ENOUGH = 55; // s — the neighbours have managed
+const ENOUGH = 40; // s — the neighbours have managed
 const SCENE_MS = 30000;
 
 export default {

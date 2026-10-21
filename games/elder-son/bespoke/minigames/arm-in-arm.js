@@ -1,7 +1,8 @@
 // “Arm in Arm” (III.1, the Hillside, after the beat `meet`; game.md §7): the way down the iced path 0…1 (`down`; where they are now —
 // `down_at`, the scene sets it; the gait `careful`). Held anywhere — they walk: `down` = min(`down_at` + 0.08, 1); let go —
 // `down` = `down_at`: they stand. On a strip of ice the scene tells `down:slip` and stops them both itself; the hold ends
-// (one finger: to catch him it must be lifted); on `sarafanov#shoulder_l` — a ring with an arc of time, 1.5 s. Pressed —
+// (one finger: to catch him it must be lifted); on `sarafanov#shoulder_l` — a ring with an arc of time, 2.5 s from when the
+// finger is lifted (the time is the hand's to come over, not to let go first; the ghost shows the press the first time). Pressed —
 // caught (`catch` 1, the snow crunches), 1.5 s later they can walk on. Not pressed — a mistake (behind), Sarafanov sits down in the snow
 // (`fall` 1, a soft fall), counted in `falls`; 2 s later he gets up, 2 s more — they can walk on. The end: at the gate (`down_at` ≥ 0.98).
 //   Feeling: leading a stranger's father down the ice; wants him not to fall; has learnt his secret — gently; the player — care in a hand.
@@ -9,7 +10,7 @@
 import { until, keys } from '../hands.js';
 
 const AHEAD = 0.08; // how far the aim is ahead of where they are
-const CATCH = 1.5; // s — the arc of time
+const CATCH = 2.5; // s — the arc of time, from when the finger is free
 const CAUGHT = 1.5; // s — holding him, then they can walk on
 const DOWN = 2, UP = 2; // s — sitting in the snow; up, still standing
 const GATE = 0.98;
@@ -45,19 +46,24 @@ export default {
       });
       if (!step) return this.skipped;
       if (!slipped) break;
-      // he slipped: they stand; the hold is over — he can be caught only with the finger lifted
+      // he slipped: they stand; the hold is over — he can be caught only with the finger lifted: his time runs from then
       slipped = false;
+      let free = !walk.state.held;
       walk.remove();
       send('down', at());
       const shoulder = mg.mark({ at: 'sarafanov#shoulder_l', kind: 'ring', time: 1 });
       const press = mg.press({ on: shoulder });
-      let caught = false;
+      let caught = false, left = CATCH;
       press.on('press', () => { caught = true; });
-      const t0 = mg.t;
-      const over = await until(mg, ({ t }) => {
-        shoulder.set({ time: Math.max(0, 1 - (t - t0) / CATCH) });
-        return caught || t - t0 >= CATCH;
+      const lifted = mg.on('up', () => { free = true; });
+      const taught = b.minigame.tricks.teach(mg, [press], { id: 'press:catch', still: null });
+      const over = await until(mg, ({ dt }) => {
+        if (free) left -= dt;
+        shoulder.set({ time: Math.max(0, left / CATCH) });
+        return caught || left <= 0;
       });
+      lifted();
+      taught.remove();
       if (!over) return this.skipped;
       if (caught) {
         send('catch', 1);

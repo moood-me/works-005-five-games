@@ -12,7 +12,7 @@ import { until, keys } from '../hands.js';
 const WINDOWS = 5;
 const IDLE = 9; // s with no touch — the window with the lowest number goes dark
 const SILHOUETTE = 0.6; // s: the figure in the window before the answer
-const AFTER = 1; // s after the answer — the window goes dark
+const AFTER = 0.5; // s after the answer — the window goes dark
 const KNOCK_MS = 30000; // ms: waiting for the knock and its end (the scene's turn — up to 8 s)
 
 export default {

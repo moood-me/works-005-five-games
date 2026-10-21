@@ -1,4 +1,4 @@
-// “Frost” (II.6, the Home, after the beat `window_watch`; game.md §7): a spot on `window#pane` (radius 0.3 of the frame's height), rubbed;
+// “Frost” (II.6, the Home, after the beat `window_watch`; game.md §7): a spot on `window#pane` (the language's, rubbed where it is drawn), rubbed;
 // the hole in the frost — its own `hole` (up to 1): grows with what the finger has rubbed; not rubbed — it slowly heals over (−0.02 a second),
 // but not below 0.4 once the train has begun; every 0.4 of the frame's height of the finger's path — a nail's scratch on the frost. Watching is a way too:
 // once `hole` first reaches 0.6, or after 12 s without moving, a train goes past beyond the window (`far_train` → 1 over 14 s), a horn,
@@ -7,7 +7,6 @@
 //   → { hole }
 import { until, keys } from '../hands.js';
 
-const SPOT = 0.3; // the spot's radius, a share of the frame's height
 const HEAL = 0.02; // a second — the frost heals over
 const FLOOR = 0.4; // no lower, once the train has gone
 const TRAIN_AT = 0.6; // hole — the train
@@ -26,7 +25,7 @@ export default {
     let train = null;
     signal.addEventListener('abort', () => { train?.cancel?.(); g.beds({ clock: 0.4, rails: 0.3 }, 2); });
     const pane = mg.mark({ at: 'window#pane', kind: 'spot' });
-    let rub = mg.rub({ on: pane, radius: Math.round(SPOT * h()), full: 0.85 });
+    let rub = mg.rub({ on: pane, full: 0.85 });
     // (watching is a way: the finger is shown at the first meeting with this frost — rubbing met in “Hands” says nothing of
     // a window one may also just look through —, not when the player stands still)
     b.minigame.tricks.teach(mg, [rub], { id: 'rub:frost', still: null });
@@ -37,7 +36,7 @@ export default {
       const s = rub.state;
       if (s.u > covered) { hole = Math.min(1, hole + (s.u - covered)); covered = s.u; }
       // (the spot all rubbed: a fresh one — what has healed over can be rubbed again)
-      if (covered >= 0.95 && !s.at) { rub.remove(); rub = mg.rub({ on: pane, radius: Math.round(SPOT * h()), full: 0.85 }); covered = 0; }
+      if (covered >= 0.95 && !s.at) { rub.remove(); rub = mg.rub({ on: pane, full: 0.85 }); covered = 0; }
       const moving = s.at && last && (s.at.x !== last.x || s.at.y !== last.y);
       if (moving) {
         still = 0;
