@@ -423,9 +423,12 @@ function film(scene) {
     ...LIGHT.night, ...CAM0, camera_x: 15.6, camera_z: 74.4, camera_h: 0.3, ...NOBODY(),
     ...stand('passepartout', JETTY_IN, toward(JETTY_IN, GANGWAY_FOOT), { passepartout_gait: 'stagger_walk' }), daze: 0.5,
   });
-  // aboard, lying where he fell on her deck (the camera from the jetty, up at her rail)
+  // aboard, lying where he fell on her deck under the lantern by the gangway's head (the camera on her deck by the rail,
+  // a little above him, looking down at him; the harbour's lights beyond)
   const ABOARD = () => ({ passepartout_on: 'steamer_deck#aboard', passepartout_do: loop('lie_limp'), passepartout_turn: 90, passepartout_gait: null,
-    passepartout_a: 22, passepartout_d: 83.5, camera_x: 22, camera_z: 79.4, camera_h: 6.4, camera_look: 0.6 });
+    passepartout_a: 22, passepartout_d: 83.5, camera_x: 25.8, camera_z: 81, camera_h: 2.8, camera_look: 0.35 });
+  // …and from the pier as she casts off: the camera to draw back down it as she goes
+  const CASTING_OFF = { camera_x: 22, camera_z: 62, camera_h: 1.6, camera_look: 0.05 };
   // morning, the jetty empty: Fogg (and Aouda) at the pier's foot
   const MORNING = () => ({
     ...LIGHT.day, ...CAM0, carnatic_present: 0, lanterns: 0.2, camera_x: 9, ...NOBODY(),
@@ -612,7 +615,10 @@ function film(scene) {
         await s.until(() => aboard.ready);
         aboard.cut();
         s.tell('carnatic:aboard');
+        const off = s.shot(CASTING_OFF);
         await s.wait(1.6);
+        await s.until(() => off.ready);
+        off.cut();
         s.tell('carnatic:cast-off');
         // (she backs and swings her bow out — the beat ends with her under way; the game may move `carnatic_present` on)
         s.move('camera_z', 30, { over: 8, ease: 'inOut' });

@@ -1314,6 +1314,18 @@
       }
     },
     {
+      "id": "steamer_planks",
+      "name": "Carnatic's deck, planks",
+      "plane": true,
+      "on": "steamer",
+      "across": 22,
+      "distance": 0,
+      "elevation": 4.6,
+      "width": 16,
+      "depth": 8.8,
+      "lit": true
+    },
+    {
       "id": "steamer_deck",
       "name": "Carnatic's deck",
       "on": "steamer",

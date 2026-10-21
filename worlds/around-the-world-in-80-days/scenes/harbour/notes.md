@@ -144,7 +144,7 @@ v1 (there the people on the pier sank in the dark) — `ambient` 0.32 → 0.55, 
 
 Shortened silences (2026-10-21, the browser play): `quay` — Fogg comes from nearer (`quay:met` at about 3.7 s), the tail 1 s; `cousin` — `cousin:looks-back` at about 2.4 s.
 
-After the second browser play (2026-10-21): `cousin` framed on the three (the operator on Passepartout between them, 0.55) — Aouda and Fogg both in the frame's middle 4:3; `carnatic` — she casts off and swings her bow out in 8 s (`carnatic_present` → 0.5; was 0.45 in 26 s), the camera drawing back with her. Not done: the cut aboard (`ABOARD`) does not show Passepartout lying on her deck (the camera over the water; he hangs in the air at the frame's edge as she moves) — it wants staging again.
+After the second browser play (2026-10-21): `cousin` framed on the three (the operator on Passepartout between them, 0.55) — Aouda and Fogg both in the frame's middle 4:3; `carnatic` — she casts off and swings her bow out in 8 s (`carnatic_present` → 0.5; was 0.45 in 26 s), the camera drawing back with her. The cut aboard staged again: her deck about the gangway's head is a plane now (`steamer_planks`), the camera on it by the rail, a little above him — he lies on the planks under the lantern; at `carnatic:cast-off` a cut (made ready) to the pier, the camera drawing back down it as she goes.
 
 ## Contract for the check
 
