@@ -302,10 +302,144 @@ function skyMotion(e) {
   e.uniform('wide', e.aspect);
 }
 
-// The gas: a lamp element's animate sets each of its lamps' flames (e.light, by name) to the hour.
+// The gas: a lamp element's animate sets each of its lamps' flames (e.light, by name) to the hour — the one by Fogg's
+// door as much as `door_lamp` too (put out until Passepartout lights it: the beat lost).
 function lampsMotion(e, list) {
-  const k = gas(e.state.night);
-  for (let i = 0; i < list.length; i++) e.glow(list[i][0], k);
+  const k = gas(e.state.night), door = anim.clamp(e.state.door_lamp ?? 1, 0, 1);
+  for (let i = 0; i < list.length; i++) e.glow(list[i][0], list[i][0] === 'door' ? k * door : k);
+}
+
+// ── «Ten minutes» (the beat pack): Passepartout seen only as a shadow in the lit window of the room he is in, rushing
+// about in it (one element in each room: pp_hall … pp_attic; `pp_in` names the room), and what he throws flying out of
+// that window into the bag on the top step (the element thing). ──
+// where his shadow stands in each room (on the house: across from its middle, its floor) and how far it rushes either
+// way; the room's light key (the attic's is its gas)
+const PP_ROOMS = {
+  hall: { x: plan.windows.win_hall[0], floor: plan.floors[0], half: 0.35, key: 'win_hall' },
+  study: { x: plan.windows.win_study[0], floor: plan.floors[1], half: 0.6, key: 'win_study' },
+  bedroom: { x: plan.windows.win_bedroom[0], floor: plan.floors[2], half: 0.35, key: 'win_bedroom' },
+  dressing: { x: plan.windows.win_dressing[0], floor: plan.floors[2], half: 0.35, key: 'win_dressing' },
+  attic: { x: plan.windows.attic[0], floor: plan.floors[3], half: 0.3, key: null },
+};
+// his shadow: a flat dark figure (the element glows: its dark is its own, whatever the room's light behind it), its feet at (0, 0) — round head and curls, broad shoulders, the short jacket, the
+// arms out and bent (his hands full), legs astride; one layer (fig) its animate moves
+function ppFigure(e) {
+  e.layer('fig', { pivot: [0, 0] }, g => {
+    g.fillStyle = '#2b2622';
+    g.beginPath();
+    g.arc(0, -1.55, 0.12, 0, Math.PI * 2);
+    g.fill();
+    g.fillRect(-0.05, -1.45, 0.1, 0.08);
+    g.beginPath();
+    g.moveTo(-0.24, -1.38);
+    g.lineTo(0.24, -1.38);
+    g.lineTo(0.2, -0.82);
+    g.lineTo(-0.2, -0.82);
+    g.closePath();
+    g.fill();
+    // the arms: out from the shoulders, bent at the elbows, the hands up before him
+    g.lineCap = 'round';
+    g.lineJoin = 'round';
+    g.strokeStyle = '#2b2622';
+    g.lineWidth = 0.1;
+    g.beginPath();
+    g.moveTo(-0.22, -1.33);
+    g.lineTo(-0.4, -1.05);
+    g.lineTo(-0.28, -1.22);
+    g.moveTo(0.22, -1.33);
+    g.lineTo(0.42, -1.12);
+    g.lineTo(0.36, -1.42);
+    g.stroke();
+    // the legs, astride
+    g.lineWidth = 0.13;
+    g.beginPath();
+    g.moveTo(-0.1, -0.85);
+    g.lineTo(-0.2, 0);
+    g.moveTo(0.1, -0.85);
+    g.lineTo(0.2, 0);
+    g.stroke();
+  });
+}
+// his shadow's animate: there when packing and `pp_in` names its room (in or out over a third of a second), rushing to and fro
+// across the room's window, turned the way it goes, bobbing with its quick steps
+function ppMotion(e, room) {
+  const R = PP_ROOMS[room], m = e.mem, want = e.state.packing && e.state.pp_in === room ? 1 : 0;
+  m.a ??= want;
+  m.a = anim.clamp(m.a + Math.sign(want - m.a) * e.dt / 0.3, 0, 1);
+  const fig = e.layer('fig');
+  fig.alpha = m.a;
+  if (m.a <= 0) return;
+  const x = R.half * anim.drift(e.t * 0.9, anim.hash(R.x * 7 + R.floor, 3) * 100);
+  const v = (x - (m.x ?? x)) / Math.max(e.dt, 1e-3);
+  m.x = x;
+  if (Math.abs(v) > 0.08) m.f = Math.sign(v);
+  fig.x = x;
+  fig.scaleX = m.f ?? 1;
+  fig.y = -0.04 * Math.abs(Math.sin(e.t * 8.5));
+}
+// what flies into the bag (`fly_what`), round its middle, about half a metre: two shirts, three pairs of stockings, the
+// mackintosh, the Bradshaw — one layer (it) its animate shows while it flies, tumbling
+function thing(e, what) {
+  e.layer('it', { pivot: [0, 0] }, g => {
+    if (what === 'shirt') {
+      g.fillStyle = '#ece8de';
+      g.beginPath();
+      g.moveTo(-0.14, -0.2);
+      g.lineTo(-0.3, -0.08);
+      g.lineTo(-0.24, 0.0);
+      g.lineTo(-0.13, -0.07);
+      g.lineTo(-0.13, 0.2);
+      g.lineTo(0.13, 0.2);
+      g.lineTo(0.13, -0.07);
+      g.lineTo(0.24, 0.0);
+      g.lineTo(0.3, -0.08);
+      g.lineTo(0.14, -0.2);
+      g.closePath();
+      g.fill();
+      g.fillStyle = '#c9c4b8';
+      g.fillRect(-0.06, -0.2, 0.12, 0.05);
+    } else if (what === 'stockings') {
+      g.strokeStyle = '#2e2a30';
+      g.lineCap = 'round';
+      g.lineWidth = 0.07;
+      for (const k of [-1, 0, 1]) {
+        g.beginPath();
+        g.moveTo(-0.22, -0.1 + k * 0.08);
+        g.quadraticCurveTo(0.05, -0.04 + k * 0.1, 0.16, 0.12 + k * 0.05);
+        g.lineTo(0.26, 0.1 + k * 0.05);
+        g.stroke();
+      }
+    } else if (what === 'coat') {
+      g.fillStyle = '#9a8a66';
+      g.beginPath();
+      g.moveTo(-0.16, -0.26);
+      g.lineTo(-0.36, -0.02);
+      g.lineTo(-0.28, 0.06);
+      g.lineTo(-0.2, -0.02);
+      g.lineTo(-0.26, 0.28);
+      g.lineTo(0.26, 0.28);
+      g.lineTo(0.2, -0.02);
+      g.lineTo(0.28, 0.06);
+      g.lineTo(0.36, -0.02);
+      g.lineTo(0.16, -0.26);
+      g.closePath();
+      g.fill();
+      g.fillStyle = '#6e6248';
+      g.fillRect(-0.01, -0.24, 0.02, 0.5);
+    } else if (what === 'bradshaw') {
+      g.fillStyle = '#7a2a22';
+      g.fillRect(-0.11, -0.08, 0.22, 0.16);
+      g.fillStyle = '#e2d8bc';
+      g.fillRect(-0.11, 0.06, 0.22, 0.025);
+      g.fillStyle = '#c8a660';
+      g.fillRect(-0.08, -0.04, 0.16, 0.025);
+    }
+  });
+}
+function thingMotion(e) {
+  const it = e.layer('it');
+  it.alpha = e.state.thing_on ? 1 : 0;
+  it.rotate = (e.state.thing_a ?? 0) * 2.4 + (e.state.thing_e ?? 0) * 1.3;
 }
 
 // ── The cabs: a hansom and its horse, side on, going along its lane (`place.across` — <id>_across), painted once facing
@@ -553,7 +687,9 @@ function cabMotion(e, dir, key) {
   e.layer('body').y = bob;
   const head = e.layer('head');
   head.y = bob;
-  head.rotate = dir * amp * 0.035 * Math.sin(2 * phi);
+  // (the cab racing to the club, as fast as the game urges it — cab_pace: its horse throws its head the more)
+  const pace = key === 'cab_across' ? anim.clamp(e.state.cab_pace ?? 0, 0, 1) : 0;
+  head.rotate = dir * amp * (0.035 + 0.05 * pace) * Math.sin(2 * phi);
   e.layer('tail').y = bob;
   for (let i = 0; i < HORSE.legs.length; i++) {
     const [name, hip, knee, , off] = HORSE.legs[i];
@@ -579,6 +715,14 @@ const DOOR = plan.house.across + plan.door.x;
 // a camera on someone walking there stands between them and the kerb's lamps, not behind a post);
 // the bell-pull by the door (over the top step); under the lamp by the door (where Fix waits); the bag on the top step
 const HALL = [DOOR, 22.6], SILL = [DOOR, 21.2], FOOT = [DOOR, 19.4], WALK_D = 18.8;
+// on the steps, clear of the door's leaf: Fogg (on their left) and Aouda (on their right, a step lower); at their foot,
+// by the right cheek — Fix; under the lamp by the door, where it is lit
+const TOP_F = [DOOR - 0.05, 20.35], TOP_A = [DOOR + 0.55, 20.15], STEP_FIX = [DOOR + 1.2, 19.5], UNDER_LAMP = [-7.95, 19.3];
+// the race to the club (the beat cab): where the cab sets off and the club's door it draws up at (its across), the
+// camera a little ahead of it; Fogg's way from the cab up the club's steps
+const CAB = [-20, 51];
+const camX = a => anim.clamp(a + 2.5, -18, 56);
+const CLUB_RUN = [[49.6, 13.6], [52.6, 20], [53.4, 27.3], [53.4, 29.2]];
 const BELL = [DOOR + plan.door.bell[0], plan.front - 0.03, plan.door.bell[1]], LAMP = [-8.0, 19.05], BAG = 'bag#bag';
 // off along the street into the fog: right (toward the club), left
 const RIGHT = [16, 18.4], LEFT = [-24, 18.4];
@@ -586,8 +730,21 @@ const RIGHT = [16, 18.4], LEFT = [-24, 18.4];
 // at their ends (the traffic's own sends them by); everyone off
 const NIGHT = {
   night: 1, fog: 1, sunday: 0, door: 0, bag: 0, gas: 0, win_hall: 1, win_study: 1, win_bedroom: 0, win_dressing: 0,
-  camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: 0, camera_z: 0,
+  packing: 0, thing_on: 0, door_lamp: 1,
+  camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: 0, camera_z: 0, camera_h: 0, camera_look: 0,
   cab_across: plan.ends[1], cab2_across: plan.ends[0],
+};
+// «Ten minutes»: the whole front of Fogg's house, its windows and the bag on the top step, from across the street — a
+// little nearer, higher and turned up to it
+const PACK_VIEW = { camera_x: plan.house.across, camera_z: 2.5, camera_h: 3.5, camera_look: 0.09 };
+// where a thing thrown from a room's window starts (on the house: just out of its window), and the bag's mouth it falls
+// into
+const THROW_FROM = room => { const w = plan.windows[PP_ROOMS[room]?.key]; return w ? [w[0], -0.15, w[1] + w[3] * 0.45] : null; };
+const INTO_BAG = [-1.32, -0.25, plan.floors[0] + 0.3];
+// …and its way there, over the bag: [from, the top of its arc, the bag] (on the house)
+const THROW = room => {
+  const from = THROW_FROM(room);
+  return from && [from, [(from[0] + INTO_BAG[0]) / 2, -1.1, Math.max(from[2], INTO_BAG[2]) + 0.9], INTO_BAG];
 };
 // the street's life in a beat: none where the camera stands on the far pavement close to someone (a passer-by would walk
 // between it and them) — the passers-by sent off; as busy as `k` in the beats seen from across the street
@@ -596,11 +753,19 @@ const person = (id, at, turn, more) => ({
   [`${id}_a`]: at[0], [`${id}_d`]: at[1], [`${id}_turn`]: turn, [`${id}_do`]: 'stand', [`${id}_look`]: null, [`${id}_reach`]: null,
   [`${id}_with`]: null, [`${id}_here`]: true, ...more,
 });
-const OFF = { fogg_here: false, passepartout_here: false, fix_here: false };
+const OFF = { fogg_here: false, passepartout_here: false, fix_here: false, aouda_here: false };
 const FOGG = { fogg_wear: { hat: 'tophat' }, fogg_gait: 'fogg_walk' };
 const PP = { passepartout_wear: null, passepartout_gait: 'pp_walk' };
 
 function film(scene) {
+  // a point before someone standing at `at` facing `turn`: `side` metres to their right, `fwd` ahead, `up` over their
+  // feet — as a point of the world ([across, distance, elevation over the land there])
+  const before = (at, turn, side, fwd, up) => {
+    const t = (turn * Math.PI) / 180, a = at[0] + fwd * Math.sin(t) + side * Math.cos(t), d = at[1] + fwd * Math.cos(t) - side * Math.sin(t);
+    return [a, d, scene.ground(at[0], at[1]) + up - scene.ground(a, d)];
+  };
+  const DRESS = () => scene.kit.cast.wears.aouda_dress;
+  const has = key => (scene.get(key) ?? 0) > 0.5;
   // the runner of the last evening (the game's `runner`): Passepartout, or Fogg himself
   const runner = () => (scene.get('runner') === 'fogg' ? 'fogg' : 'passepartout');
   const runs = () => {
@@ -801,11 +966,136 @@ function film(scene) {
         await s.wait(0.8);
       },
     },
+    // ---- «Ten minutes» (the game's minigame): the front of the house, every window in the frame, the bag on the top
+    // step, the gas burning in the attic (Passepartout lit it, packing), the street living. The beat only brings this
+    // frame (`packing` 1); then, till another beat, Passepartout is his shadow in the window of the room he is in
+    // (`pp_in`): its light comes on as he comes, the room he left goes dark; what he throws (`fly_what`, as `fly` rises)
+    // flies out of that window into the bag (script.js).
+    pack: {
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0.6), ...PACK_VIEW, win_hall: 0, win_study: 0, gas: 1, bag: 0.15, packing: 1, pp_in: 'none' }),
+      run: async s => {
+        await s.wait(0.5);
+      },
+    },
+    // ---- The epilogue, the evening: Fogg comes out onto the top step under the lamp by the door, Aouda after him. She
+    // looks at him (her question), he turns to her (his answer); their hands. (The game says their lines.)
+    proposal: {
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), night: 0.9, door: 1, camera_target: 'fogg', camera_shot: 0.55, camera_frame: [0.42, 0.4],
+        ...person('fogg', SILL, 180, { fogg_wear: null, fogg_gait: 'fogg_walk' }), ...person('aouda', HALL, 180, { aouda_wear: DRESS() }) }),
+      run: async s => {
+        const f = s.person('fogg'), a = s.person('aouda');
+        await f.walk([TOP_F]);
+        await f.turn(160);
+        await a.walk([TOP_A]);
+        await a.turn(235);
+        a.look('fogg#head');
+        await s.wait(0.6);
+        s.tell('proposal:asks');
+        await s.wait(3.4);
+        f.look('aouda#head');
+        await s.wait(0.3);
+        s.tell('proposal:answers');
+        await s.wait(1.8);
+        f.reach({ l: 'aouda#hand_r' });
+        a.reach({ r: 'fogg#hand_l' });
+        await s.wait(0.8);
+        s.tell('proposal:hands');
+        await s.wait(2.4);
+      },
+    },
+    // ---- The ending «Two Wednesdays»: Sunday morning, the bells (the game's). Fogg on the top step reads his paper —
+    // lowers it: the date; then he laughs, his head back — and Passepartout, come out of the door, with him.
+    sunday: {
+      from: () => {
+        const at = TOP_F, turn = 180;
+        return { ...NIGHT, ...OFF, ...STREET(0), night: 0, fog: 0.5, sunday: 1, win_hall: 0, win_study: 0, door: 0.6,
+          camera_target: 'fogg', camera_shot: 0.6, camera_frame: [0.45, 0.4],
+          ...person('fogg', at, turn, { fogg_wear: null, fogg_with: ['newspaper'], fogg_reach: { r: before(at, turn, 0.17, 0.32, 1.3), l: before(at, turn, -0.17, 0.32, 1.3) } }),
+          ...person('passepartout', HALL, 180, { ...PP, passepartout_here: false }) };
+      },
+      run: async s => {
+        const f = s.person('fogg'), p = s.person('passepartout');
+        await s.wait(2.6);
+        f.with(['newspaper_folded']);
+        f.reach(null);
+        s.tell('sunday:date');
+        await s.wait(1.8);
+        const laughs = [f.do('laugh_up')];
+        s.tell('sunday:laugh');
+        if (has('with_pp')) {
+          p.here(true);
+          laughs.push(s.sequence(async q => {
+            await q.person('passepartout').walk([SILL, TOP_A]);
+            await q.person('passepartout').turn(200);
+            await q.person('passepartout').do('laugh');
+          }));
+        }
+        await s.all(...laughs);
+        await s.wait(1);
+      },
+    },
+    // ---- The ending «Lost — and won»: the evening, on the steps — Fogg and whoever is with him; the lamp by the door
+    // not yet lit, and Passepartout (or Fogg himself) lights it.
+    lost: {
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), door: 0.6, door_lamp: 0, camera_target: 'fogg', camera_shot: 0.42, camera_frame: [0.6, 0.5],
+        ...person('fogg', TOP_F, 190, { fogg_wear: null, fogg_gait: 'fogg_walk' }),
+        ...person('aouda', TOP_A, 205, { aouda_wear: DRESS(), aouda_here: has('with_aouda') }),
+        ...person('fix', STEP_FIX, 215, { fix_here: has('with_fix') }),
+        ...person('passepartout', SILL, 180, { ...PP, passepartout_here: has('with_pp') }) }),
+      run: async s => {
+        const id = has('with_pp') ? 'passepartout' : 'fogg', who = s.person(id);
+        await s.wait(0.8);
+        await who.walk([FOOT, UNDER_LAMP]);
+        await who.turn(305);
+        who.look('lamps#door_flame');
+        who.reach({ r: 'lamps#door_flame' });
+        await s.wait(0.7);
+        await s.move('door_lamp', 1, { over: 0.8, ease: 'out' });
+        s.tell('lost:lamp');
+        await s.wait(0.6);
+        who.reach(null);
+        who.look(null);
+        await who.turn(120);
+        await s.wait(2.5);
+      },
+    },
+    // ---- (a coda) Eighty days of gas: the top of the house from across the street, high — the attic's window in the
+    // middle; the gas goes out.
+    gas_off: {
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0), gas: 1, camera_x: plan.house.across, camera_z: 12, camera_h: 10, camera_look: 0.1 }),
+      run: async s => {
+        await s.wait(1.2);
+        await s.move('gas', 0, { over: 0.8, ease: 'in' });
+        s.tell('gas_off:out');
+        await s.wait(2);
+      },
+    },
+    // ---- «The cab» (the game's minigame): the cab in the fog down the street to the Reform Club, the camera with it.
+    // The game urges it on (`cab_to` — how far along it should be; script.js takes it there, the camera with it, and says
+    // where it is, `cab_at`); the lamps of carriages come out of the fog toward it (`traffic`). At the club it draws up;
+    // Fogg jumps out and runs up the club's steps.
+    cab: {
+      from: () => ({ ...NIGHT, ...OFF, ...STREET(0.6), cab_across: CAB[0], cab_to: 0, cab_at: 0, cab_pace: 0, camera_x: camX(CAB[0]),
+        ...person('fogg', CLUB_RUN[0], 90, { ...FOGG, fogg_here: false, fogg_gait: 'run' }) }),
+      run: async s => {
+        await s.until(() => (s.get('cab_at') ?? 0) >= 0.98);
+        s.tell('cab:arrived');
+        const f = s.person('fogg');
+        await s.wait(0.4);
+        f.here(true);
+        s.move('camera_x', camX(CLUB_RUN[2][0]), { over: 2.5 });
+        await f.walk(CLUB_RUN.slice(1));
+        f.here(false);
+        s.tell('cab:in');
+        await s.wait(0.6);
+      },
+    },
   };
 }
-const SHOWCASE = ['dusk', 'home', 'news', 'out', 'fix_paper', 'run_out', 'run_back', 'to_club', 'pp_returns'];
+const SHOWCASE = ['dusk', 'home', 'news', 'pack', 'out', 'proposal', 'run_out', 'run_back', 'fix_paper', 'cab', 'to_club', 'lost', 'gas_off',
+  'sunday', 'pp_returns'];
 
 return {
   plan, houses, fogg, stacks, windowsOf, dormerOf, fanOf, panes, front, brick, room, bracket, roomMotion, clock, cheeks, dormerCheeks,
-  skyMotion, lampsMotion, cab, cabMotion, film, SHOWCASE, DOOR, mixc, rgba,
+  skyMotion, lampsMotion, cab, cabMotion, PP_ROOMS, THROW, ppFigure, ppMotion, thing, thingMotion, CAB, camX, film, SHOWCASE, DOOR, mixc, rgba,
 };

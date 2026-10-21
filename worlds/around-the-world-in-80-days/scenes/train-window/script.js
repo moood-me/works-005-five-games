@@ -59,5 +59,13 @@ scene.on('change', 'herd', (v, old) => {
 // ── who is in the carriage: the game's with_* (Fogg always) ──
 for (const [id, k] of Object.entries(L.WITH)) scene.on('change', k, v => scene.set(`${id}_here`, !!v));
 
+// ── the marks of the journey on them, the game's keys as the cast's wears: Aouda's travelling dress, Passepartout's
+// wings, Fix's bruise ──
+for (const [key, id] of [['aouda_dress', 'aouda'], ['pp_wings', 'passepartout'], ['fix_bruise', 'fix']]) {
+  const wear = v => scene.set(`${id}_wear`, v ? scene.kit.cast.wears[key] : null);
+  scene.on('change', key, wear);
+  wear(num(key));
+}
+
 run();
 scene.kit.beats.play(scene, L.film(scene));

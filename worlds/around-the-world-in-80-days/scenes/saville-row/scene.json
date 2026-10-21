@@ -248,7 +248,7 @@
     "door_leaf": 180,
     "bag": 0,
     "beat": null,
-    "runner": "pp",
+    "runner": "passepartout",
     "with_aouda": 0,
     "with_pp": 1,
     "fix_present": 0,
@@ -263,7 +263,21 @@
     "walker3_a": -72,
     "walker1_d": 16.2,
     "walker2_d": 16.9,
-    "walker3_d": 16.5
+    "walker3_d": 16.5,
+    "pp_in": "none",
+    "fly": 0,
+    "fly_what": "shirt",
+    "thing_on": 0,
+    "thing_a": -1.32,
+    "thing_d": -0.25,
+    "thing_e": 1.14,
+    "door_lamp": 1,
+    "with_fix": 0,
+    "cab_to": 0,
+    "cab_at": 0,
+    "cab_pace": 0,
+    "aouda_here": false,
+    "packing": 0
   },
   "states": {
     "night": {
@@ -328,7 +342,7 @@
         1
       ],
       "smooth": true,
-      "means": "the gas-burner in Passepartout's attic: 0 — off, 1 — burning (all the way round)"
+      "means": "the gas-burner in Passepartout's attic: 0 — off, 1 — burning (all the way round); burning in the beats pack and gas_off till they put it out"
     },
     "door": {
       "range": [
@@ -356,10 +370,14 @@
     },
     "beat": {
       "type": "string",
-      "means": "a beat of the film (the module beats): dusk, home, news, out, run_out, fix_paper, run_back, to_club, pp_returns; at its end the scene says beat:<name>"
+      "means": "a beat of the film (the module beats): dusk, home, news, pack, out, run_out, fix_paper, run_back, to_club, pp_returns, proposal, sunday, lost, gas_off, cab; at its end the scene says beat:<name>"
     },
     "runner": {
-      "means": "who runs (run_out, run_back): pp — Passepartout, fogg — Fogg"
+      "values": [
+        "passepartout",
+        "fogg"
+      ],
+      "means": "who runs (run_out, run_back): passepartout — Passepartout, fogg — Fogg"
     },
     "with_pp": {
       "range": [
@@ -398,6 +416,103 @@
       "type": "number",
       "smooth": true,
       "means": "the cab in the near lane (going left): metres along the street; led by traffic"
+    },
+    "pp_in": {
+      "values": [
+        "none",
+        "hall",
+        "study",
+        "bedroom",
+        "dressing",
+        "attic"
+      ],
+      "means": "«Ten minutes» (while packing): the room Passepartout is in — his shadow rushing about in its window, its light on, the others' out (in 0.3 s); none — on the stairs, not seen"
+    },
+    "fly": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«Ten minutes» (while packing): each rise past a half — a thing (fly_what) flies out of his window (pp_in) into the bag"
+    },
+    "fly_what": {
+      "values": [
+        "shirt",
+        "stockings",
+        "coat",
+        "bradshaw"
+      ],
+      "means": "what flies into the bag: a shirt, stockings, the mackintosh, the Bradshaw"
+    },
+    "thing_on": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "led by script.js: the thing thrown is in the air"
+    },
+    "thing_a": {
+      "type": "number",
+      "smooth": true,
+      "means": "led by script.js: where the thing thrown is (metres on the house: across, distance, elevation)"
+    },
+    "thing_d": {
+      "type": "number",
+      "smooth": true,
+      "means": "led by script.js: where the thing thrown is (metres on the house: across, distance, elevation)"
+    },
+    "thing_e": {
+      "type": "number",
+      "smooth": true,
+      "means": "led by script.js: where the thing thrown is (metres on the house: across, distance, elevation)"
+    },
+    "door_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lamp by Fogg's door: 1 — burning with the others (the gas, by night), 0 — not lit (the beat lost lights it)"
+    },
+    "with_fix": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Fix with Fogg (the beat lost: a step lower on the steps)"
+    },
+    "cab_to": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«The cab» (the beat cab): how far along its way to the club the game urges the cab — it goes there, the camera with it"
+    },
+    "cab_at": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "«The cab»: where the cab is on its way to the club (the scene sets it; 0.98 — drawn up at the club)"
+    },
+    "cab_pace": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«The cab»: how hard the cab is urged — a walk to a gallop: its horse throws its head the more"
+    },
+    "packing": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "«Ten minutes»: 1 — the house is being packed (the beat pack sets it, the other beats put it back to 0): Passepartout's shadow in the window pp_in names, the rooms' light following him, the things flying into the bag"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat the game will play next (the module beats makes its opening ready ahead): dusk, home, news, pack, out, proposal, run_out, run_back, fix_paper, cab, to_club, lost, gas_off, sunday, pp_returns"
     }
   },
   "objects": [
@@ -515,7 +630,8 @@
       "width": 9,
       "depth": 1.866,
       "tilt": 30.96,
-      "lit": true
+      "lit": true,
+      "walk": true
     },
     {
       "id": "block_end",
@@ -666,6 +782,86 @@
         2.4,
         -11.3
       ]
+    },
+    {
+      "id": "pp_hall",
+      "name": "Passepartout's shadow in the hall",
+      "on": "house",
+      "across": 1.8,
+      "distance": 1.2,
+      "elevation": 0.84,
+      "facing": 180,
+      "box": [
+        -0.9,
+        -1.75,
+        0.9,
+        0.05
+      ],
+      "glows": true
+    },
+    {
+      "id": "pp_study",
+      "name": "Passepartout's shadow in the study",
+      "on": "house",
+      "across": 0,
+      "distance": 1.2,
+      "elevation": 4.3,
+      "facing": 180,
+      "box": [
+        -1.15,
+        -1.75,
+        1.15,
+        0.05
+      ],
+      "glows": true
+    },
+    {
+      "id": "pp_bedroom",
+      "name": "Passepartout's shadow in the bedroom",
+      "on": "house",
+      "across": -1.8,
+      "distance": 1.2,
+      "elevation": 7.9,
+      "facing": 180,
+      "box": [
+        -0.9,
+        -1.75,
+        0.9,
+        0.05
+      ],
+      "glows": true
+    },
+    {
+      "id": "pp_dressing",
+      "name": "Passepartout's shadow in the dressing-room",
+      "on": "house",
+      "across": 1.8,
+      "distance": 1.2,
+      "elevation": 7.9,
+      "facing": 180,
+      "box": [
+        -0.9,
+        -1.75,
+        0.9,
+        0.05
+      ],
+      "glows": true
+    },
+    {
+      "id": "pp_attic",
+      "name": "Passepartout's shadow in the attic",
+      "on": "house",
+      "across": 0,
+      "distance": 1.0,
+      "elevation": 11.3,
+      "facing": 180,
+      "box": [
+        -0.8500000000000001,
+        -1.75,
+        0.8500000000000001,
+        0.05
+      ],
+      "glows": true
     },
     {
       "id": "hall_floor",
@@ -993,6 +1189,25 @@
       ]
     },
     {
+      "id": "thing",
+      "name": "What flies into the bag",
+      "on": "house",
+      "across": -1.32,
+      "distance": -0.25,
+      "elevation": 1.14,
+      "place": {
+        "across": "thing_a",
+        "distance": "thing_d",
+        "elevation": "thing_e"
+      },
+      "box": [
+        -0.4,
+        -0.4,
+        0.4,
+        0.4
+      ]
+    },
+    {
       "id": "fogg",
       "name": "Phileas Fogg",
       "person": {
@@ -1053,6 +1268,30 @@
       "place": {
         "across": "fix_a",
         "distance": "fix_d"
+      },
+      "shadow": {
+        "onto": [
+          "pavement",
+          "steps",
+          "road"
+        ],
+        "strength": 0.5,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "aouda",
+      "name": "Aouda",
+      "person": {
+        "cast": "cast",
+        "who": "aouda",
+        "turn": 180
+      },
+      "across": -6.45,
+      "distance": 22.6,
+      "place": {
+        "across": "aouda_a",
+        "distance": "aouda_d"
       },
       "shadow": {
         "onto": [

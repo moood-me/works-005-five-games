@@ -404,7 +404,8 @@ function film(scene) {
         await s.wait(2.4);
       },
     },
-    // ---- The prairie: the train stands; buffalo, buffalo. Passepartout up at the glass, his palms on it.
+    // ---- The prairie: the train stands; buffalo, buffalo. Passepartout up at the glass, his palms on it; Fogg, in his
+    // seat, takes out his watch and looks at it (the hours going). The herd goes by of itself (24 s): the beat ends with it.
     buffalo: {
       from: () => ({
         ...RIDE, ...where('prairie', 300), herd_x: centre('prairie') + 300, speed: 0, night: 0, dawn: 0.35, herd: 0,
@@ -425,10 +426,20 @@ function film(scene) {
         pp.reach({ r: 'window#pane_r', l: 'window#pane_l' });
         s.tell('buffalo:at-glass');
         pp.look(LOOK.herd);
+        // (then on Fogg, in his seat by the window: his watch — the shot made ready meanwhile)
+        const him = s.shot(shot(-1.1, 0.7, -0.2));
         await s.wait(1.7);
         fogg.look(LOOK.herd);
-        await s.wait(3);
-        fogg.look(null);
+        await s.wait(2.4);
+        await s.until(() => him.ready);
+        him.cut();
+        fogg.with(['watch']);
+        fogg.do('sit_calm', { loop: true });
+        await s.wait(0.1);
+        fogg.reach({ r: PALM.fogg });
+        await s.wait(0.2);
+        fogg.look('fogg#watch');
+        s.tell('buffalo:watch');
         await herd;
       },
     },
@@ -478,7 +489,23 @@ function film(scene) {
         await s.until(() => near.ready);
         near.cut();
         s.tell('special:eyes');
-        await s.wait(3.5);
+        await s.wait(2.2);
+        // (the watch put away, the notebook open on his knees; late — `book_shut`, the game's as it opens the beat — he
+        // shuts it, his hands down in his lap, his eyes on it)
+        aouda.look('fogg#head');
+        fix.look('fogg#head');
+        fogg.reach(null);
+        fogg.with(['notebook']);
+        fogg.do('read_book', { loop: true });
+        await s.wait(0.2);
+        fogg.look('fogg#book');
+        await s.wait(1.6);
+        if ((s.get('book_shut') ?? 0) >= 0.5) {
+          fogg.with(['book_shut']);
+          fogg.do('sit_calm', { loop: true });
+          s.tell('special:shut');
+          await s.wait(1.5);
+        }
       },
     },
   };

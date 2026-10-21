@@ -40,4 +40,32 @@ scene.every(1, () => {
   }
 });
 
+// «Ten minutes» (while `packing`: the beat pack brings it): the light follows Passepartout from room to room — on in
+// the one `pp_in` names, out in the others, in a third of a second; each time `fly` rises a thing flies out of his
+// window into the bag (thing_a/d/e along its arc, thing_on while it is in the air).
+scene.on('change', 'pp_in', v => {
+  if (!scene.get('packing')) return;
+  for (const [room, r] of Object.entries(L.PP_ROOMS)) if (r.key) scene.move(r.key, room === v ? 1 : 0, { over: 0.3 });
+});
+scene.on('change', 'fly', (v, old) => {
+  const way = scene.get('packing') && (v ?? 0) >= 0.5 && (old ?? 0) < 0.5 && L.THROW(scene.get('pp_in'));
+  if (!way) return;
+  scene.set('thing_a', way[0][0]);
+  scene.set('thing_d', way[0][1]);
+  scene.set('thing_e', way[0][2]);
+  scene.set('thing_on', 1);
+  scene.path(['thing_a', 'thing_d', 'thing_e'], way, { over: 0.45, ease: 'in' }).then(() => scene.set('thing_on', 0));
+});
+
+// «The cab»: the game urges the cab on — `cab_to`, how far along its way to the club it should be (0…1); the cab goes
+// there (as fast as that, its horse's legs and its wheel by the ground it covers), the camera with it, and the scene
+// says where it is (`cab_at`).
+const [c0, c1] = L.CAB;
+scene.on('change', 'cab_to', v => {
+  const a = c0 + Math.min(1, Math.max(0, v ?? 0)) * (c1 - c0);
+  scene.move('cab_across', a, { over: 0.8 });
+  scene.move('camera_x', L.camX(a), { over: 0.8 });
+});
+scene.on('move', 'cab_across', v => scene.set('cab_at', Math.min(1, Math.max(0, (v - c0) / (c1 - c0)))));
+
 scene.kit.beats.play(scene, L.film(scene));

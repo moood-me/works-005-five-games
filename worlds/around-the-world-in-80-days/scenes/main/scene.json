@@ -260,6 +260,10 @@
         1
       ],
       "means": "1 — Fix's bruise (the cast: wears.fix_bruise)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat the game will play next (the module beats makes its opening ready ahead): countdown, whist, wager, wager_down, leave, wait, door, no_door, friday, friday_in"
     }
   },
   "objects": [

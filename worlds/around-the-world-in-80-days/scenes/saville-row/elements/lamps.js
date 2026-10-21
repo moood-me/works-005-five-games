@@ -7,6 +7,7 @@ const d0 = 15.9;
 for (const [name, across, d] of L.plan.lamps) {
   e.part(across, d - d0, g => {
     e.kit.light.gasLamp(g, e, name);
-    if (name === 'door') e.at(0.4, -1.7, 'door');
+    // (under it, where Fix waits; its globe — where it is lit)
+    if (name === 'door') { e.at(0.4, -1.7, 'door'); e.at(0, -3.95, 'door_flame'); }
   });
 }

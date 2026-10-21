@@ -159,7 +159,10 @@
     "fix_with": [
       "newspaper"
     ],
-    "fix_here": true
+    "fix_here": true,
+    "book_shut": 0,
+    "aouda_dress": 0,
+    "pp_wings": 0
   },
   "states": {
     "land": {
@@ -242,7 +245,7 @@
         0,
         1
       ],
-      "means": "Fix's bruise after the General Grant"
+      "means": "1 — Fix's bruise round an eye (the cast's wears.fix_bruise)"
     },
     "herd_x": {
       "type": "number",
@@ -259,6 +262,31 @@
         1
       ],
       "means": "close-up: Fogg's watch in his palm (an insert over the compartment) — 0 none, 1 open; set by the beat special on a cut"
+    },
+    "book_shut": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — Fogg is late: at the end of special he shuts his notebook on his knees (the moment special:shut); the game sets it as it opens the beat"
+    },
+    "aouda_dress": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — Aouda in her travelling dress (from Hong Kong on: the cast's wears.aouda_dress); 0 — her sari"
+    },
+    "pp_wings": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — Passepartout still in the Long Noses' wings (the cast's wears.pp_wings)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat the game will play next (the module beats makes its opening ready ahead): depart, gas, watch, ride, brake, ganges, buffalo, snow, special"
     }
   },
   "objects": [
