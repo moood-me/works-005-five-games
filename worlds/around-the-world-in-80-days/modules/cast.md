@@ -64,7 +64,8 @@ glowing (point `flame`: its fire and light are the scene's — particles `{"kind
 `"at": "<who>#flame"`); `book` — a small book open in both hands (point `book`); `goad` — an elephant goad in the right
 hand; `lantern` — a paper lantern hanging from a short pole in the right hand, glowing, swinging (point `flame`: a light
 `"at": "<who>#flame"`); `rifle` — upright in the right hand, its butt by the foot; `plaid` — a plaid folded over the left
-forearm (point `plaid`); `notebook` — Fogg's notebook open in both hands, a pencil in the right (point `book`);
+forearm (point `plaid`); `plaid_shoulders` — the same plaid laid over the shoulders, its ends down over the upper arms
+(point `plaid` — the front of its left end, for a hand on its edge); `notebook` — Fogg's notebook open in both hands, a pencil in the right (point `book`);
 `book_shut` — the book shut, flat in both hands (point `book`); `sugar` — a lump of sugar on the right palm (point
 `sugar`); `sheet` — a rope in both hands, its end hanging from the left (point `sheet` — the right hand: the scene's own
 rope runs to it). A part's point is the person's like the others (`"stuart#watch"`): for a look, a reach, the camera, a game.
@@ -89,5 +90,11 @@ Carrying someone in the arms: `carry_stand`, `carry_walk` (a gait: stiff, the ar
 Gaits: `fogg_walk` (even, upright, the arms hardly swinging), `pp_walk` (quick and springy), `run`, `torch_walk` (a torch
 held high in the right), `drum_walk`, `priest_walk` (bowed, hands joined), `stagger_walk` (dazed, the head hanging);
 `stumble` (once: nearly falls, catches himself).
+Standing, once: `laugh_up` (laughs, the head thrown back, the hands on the belly, ~4 s), `laugh` (laughs bending
+forward, holding the belly, ~4 s), `spread_hands` (shrugs, the arms out — helpless, 2.5 s), `salute` (the right hand to
+the brow, held, lowered, 3 s), `whisper` (a hand by the mouth, leaning to whisper, 3 s), `punch` (a guard, one blow of
+the right at ~1.6 s, back, 2.5 s), `knocked_down` (struck, falls on his back, lies, sits up and sets his hat right with
+both hands — ends sitting on the floor, 6 s). Loops: `write_note` (writes in a small book held in the left hand),
+`shovel` (bent, shovelling — coal), `storm_brace` (feet wide, knees bent, keeping his balance on a rolling deck).
 Holding the watch open before the chest is a reach (`reach: {r: a point before the chest}` with `with: ['watch']`);
 putting a hat on is a reach to the own head (`reach: {r: '<id>#head'}`) and the hat put on (`wear`) as the hand is there.

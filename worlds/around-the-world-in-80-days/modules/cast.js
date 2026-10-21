@@ -487,6 +487,17 @@ return {
         F.ball(add(c, [0, -0.2 * k, 0]), ax, [0.064 * k, 0.03 * k, 0.152 * k], [0.2, 0.3, 0.24, 1], 10, 3);
         F.point('plaid', c);
       } },
+      // the same plaid laid over the shoulders: across the back from shoulder to shoulder, its ends down over the upper
+      // arms before, a fold of it on the back; its point plaid (the front of the left end — where a hand holds its edge)
+      plaid_shoulders: { name: 'plaid on the shoulders', draw: F => {
+        const k = m(F), f = F.fwd('Chest'), u = F.up('Chest'), s = F.side('Chest'), RED = [0.46, 0.2, 0.18, 1];
+        const top = j => F.clear(add(F.P(j), mul(u, 0.05 * k)), 1, 0.03 * k);
+        const end = side => F.clear(add(mix(F.P(`${side}Arm`), F.P(`${side}ForeArm`), 0.55), mul(f, 0.06 * k)), 1, 0.03 * k);
+        const nape = F.clear(add(F.P('Neck1'), add(mul(f, -0.07 * k), mul(u, -0.04 * k))), -1, 0.03 * k);
+        F.tube([end('Left'), top('LeftArm'), nape, top('RightArm'), end('Right')], [[0, 0.07 * k], [1, 0.1 * k], [2, 0.12 * k], [3, 0.1 * k], [4, 0.07 * k]], [[0, RED]], 8, f, 0.35);
+        F.ball(F.clear(add(F.P('Chest'), mul(f, -0.1 * k)), -1, 0.02 * k), [s, u, f], [0.18 * k, 0.17 * k, 0.03 * k], RED, 10);
+        F.point('plaid', end('Left'));
+      } },
       // Fogg's notebook open in both hands, a pencil in the right; its point book
       notebook: { name: 'notebook with a pencil', draw: F => {
         sheet(F, 0.11, 0.15, LINEN, 'book');
