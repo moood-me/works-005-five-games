@@ -308,14 +308,9 @@ function film(scene) {
     // they step back into the shadow of the gate's pillar; he comes down the path by himself, out on the road, turns
     // right
     hide: {
-      after: 'alone',
-      from: END.alone,
+      from: () => ({ ...END.alone(), ...CAM.hide, sarafanov_mood: 'neutral', nina_mood: 'afraid', busygin_mood: 'thinking' }),
       async run(s) {
         const sar = s.person('sarafanov'), nina = s.person('nina'), bus = s.person('busygin');
-        s.cut({ ...CAM.hide });
-        sar.mood('neutral');
-        nina.mood('afraid');
-        bus.mood('thinking');
         const down = sar.walk(PATH.slice(1, 5));
         await s.all(nina.walk([[1.5, 5.6], SPOT.pillar.nina]), (async () => { await s.wait(0.3); await bus.walk([[2.2, 5.8], SPOT.pillar.busygin]); })());
         await s.all(nina.turn(20), bus.turn(350));
