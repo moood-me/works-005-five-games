@@ -48,9 +48,11 @@ wall casts its shadow).
 
 ## Lying
 
-`lie` (on the back) faces its feet the person's turn; `lie_side` has the head at turn − 65° (seen on the sheets).
-On the cot the head is by the doorway (turn 180; on the side 65), on the sofa at its right end (270; on the side 155). The hips go onto the bed's point (`<id>_on`:
-`cot_top#bed`, `sofa_top#bed`) — their floor there. Off the cot: a cut sits him on its edge facing the room, then `rise`.
+`lie` (on the back) faces its feet the person's turn; `lie_side` turns from the back onto the side and ends with the
+head at turn − 22° (seen on the sheets). On the cot the head is by the doorway (turn 180; on the side 22 — facing the
+room: the motion turns onto that side only), on the sofa at its right end (270; on the side 112). The hips go onto the
+bed's point (`<id>_on`: `cot_top#bed`, `sofa_top#bed`) — their floor there. Off the cot: a cut sits him on its edge
+facing the room, then `rise`.
 
 ## Beats
 
@@ -88,9 +90,8 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
 - No wedge of light cut by the door's gap (above): a light at the gap.
 - Motions are the cast's: `lie_side` begins already on the side (no turning over), `sit_up` sits up only halfway,
   `take_shelf`/`put_shelf` are reaches. The insert `box`'s mode is the key `box_mode`.
-- Getting up at the table is not the cast's `rise`: it gets up 0.6 m forward — into the table. They stand up where
-  they sat (`stand`, a moment) and turn; a motion that gets up from a chair pushing back is wanted. Off the cot `rise`
-  is used (room before it): a cut sits him on its edge first.
+- Getting up at the table: `rise_back` (pushing the chair back, 0.24 m behind the seat); off the cot `rise` (room before
+  it): a cut sits him on its edge first.
 - The old man's way to the room from his place goes round behind the table past the window (lib `ROUND`): across the
   near end it would pass before the lens of the shots along the table. In `home_late` he goes the short way, the
   kitchen wide (`CAM.win`) as he goes.
@@ -103,20 +104,20 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
 {"beats": {
   "kitchen": {"after": [], "tells": ["kitchen:stove"], "seconds": 11, "show": false},
   "warm_up": {"after": ["kitchen"], "tells": ["warm_up:turn"], "seconds": 7, "show": false},
-  "enter": {"after": [], "tells": ["enter:in", "enter:near"], "seconds": 19, "show": false},
+  "enter": {"after": [], "tells": ["enter:in", "enter:near"], "seconds": 22, "show": false},
   "embrace": {"after": ["enter"], "tells": ["embrace:held"], "seconds": 7, "show": false},
-  "nina_in": {"after": [], "tells": ["nina_in:door", "nina_in:gone"], "seconds": 17, "show": false},
-  "supper": {"after": [], "tells": ["supper:toast"], "seconds": 9, "show": false},
+  "nina_in": {"after": [], "tells": ["nina_in:door", "nina_in:gone"], "seconds": 20, "show": false},
+  "supper": {"after": [], "tells": ["supper:toast"], "seconds": 11, "show": false},
   "supper_after": {"after": ["supper"], "tells": ["supper_after:sheet"], "seconds": 11, "show": false},
   "talk": {"after": [], "tells": ["talk:kettle"], "seconds": 10, "show": false},
   "talk_back": {"after": ["talk"], "tells": ["talk_back:ready"], "seconds": 3, "show": false},
   "galya_yes": {"after": ["talk_back"], "tells": ["galya_yes:hand"], "seconds": 7, "show": false},
   "galya_no": {"after": ["talk_back"], "tells": ["galya_no:glass"], "seconds": 7, "show": false},
-  "box_out": {"after": [], "tells": ["box_out:down"], "seconds": 25, "show": false},
+  "box_out": {"after": [], "tells": ["box_out:down"], "seconds": 27, "show": false},
   "box_take": {"after": ["box_out"], "tells": ["box_take:close"], "seconds": 2, "show": false},
   "box_give": {"after": ["box_out"], "tells": ["box_give:close"], "seconds": 2, "show": false},
   "box_kept": {"after": ["box_take"], "tells": ["box_kept:back"], "seconds": 7, "show": false},
-  "box_back": {"after": ["box_give"], "tells": ["box_back:shelf"], "seconds": 15, "show": false},
+  "box_back": {"after": ["box_give"], "tells": ["box_back:shelf"], "seconds": 17, "show": false},
   "wall": {"after": [], "tells": ["wall:dark", "wall:turn"], "seconds": 19, "show": false},
   "wake": {"after": [], "tells": ["wake:up"], "seconds": 11, "show": false},
   "sneak": {"after": ["wake"], "tells": ["sneak:ready"], "seconds": 22, "show": false},
@@ -124,10 +125,10 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
   "window_watch": {"after": ["wake"], "tells": ["window_watch:pane"], "seconds": 10, "show": false},
   "morning": {"after": ["window_watch"], "tells": ["morning:in", "morning:out"], "seconds": 25, "show": false},
   "table": {"after": [], "tells": ["table:nine", "table:in", "table:sat"], "seconds": 23, "show": false},
-  "toast": {"after": ["table"], "tells": ["toast:news", "toast:turn"], "seconds": 18, "show": false},
+  "toast": {"after": ["table"], "tells": ["toast:news", "toast:turn"], "seconds": 21, "show": false},
   "let_go": {"after": ["toast"], "tells": ["let_go:glass"], "seconds": 8, "show": false},
-  "ask_stay": {"after": ["toast"], "tells": ["ask_stay:stand"], "seconds": 9, "show": false},
-  "for_me": {"after": ["toast"], "tells": ["for_me:stand"], "seconds": 10, "show": false},
+  "ask_stay": {"after": ["toast"], "tells": ["ask_stay:stand"], "seconds": 14, "show": false},
+  "for_me": {"after": ["toast"], "tells": ["for_me:stand"], "seconds": 12, "show": false},
   "pack": {"after": [], "tells": ["pack:case", "pack:silva"], "seconds": 16, "show": false},
   "confess": {"after": ["pack"], "tells": ["confess:said", "confess:sarafanov"], "seconds": 19, "show": false},
   "exposed": {"after": ["pack"], "tells": ["exposed:said", "exposed:window"], "seconds": 15, "show": false},

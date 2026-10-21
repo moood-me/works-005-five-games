@@ -65,7 +65,7 @@ function run(name, fn, init, party) {
       go(m, o = {}) {
         if (!(m in DUR)) warn.push(`no motion ${m}`);
         const t = o.to || o.from; st[`${id}_a`] = t[0]; st[`${id}_d`] = t[1]; if (o.turn != null) st[`${id}_turn`] = o.turn;
-        if (m === 'rise') { const r = (st[`${id}_turn`] || 0) * Math.PI / 180; st[`${id}_a`] += 0.6 * Math.sin(r); st[`${id}_d`] += 0.6 * Math.cos(r); }
+        if (m === 'rise' || m === 'rise_back') { const r = (st[`${id}_turn`] || 0) * Math.PI / 180, k = m === 'rise' ? 0.6 : -0.24; st[`${id}_a`] += k * Math.sin(r); st[`${id}_d`] += k * Math.cos(r); }
         st[`${id}_do`] = m; return action(DUR[m] ?? 2);
       },
       do(m, o = {}) {
