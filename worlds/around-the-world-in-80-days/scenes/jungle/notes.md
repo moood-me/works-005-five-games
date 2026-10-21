@@ -75,7 +75,7 @@ An element of the scene (people do not move as he does), built on the unseen anc
 (`kiouni_l`, `kiouni_r`: one is near, whichever way he faces, and shows all of him; the far one only its two legs
 between the near ones — `lib.kiouniPaint`), the howdah's rails (`howdah_l`, `howdah_r`) on his back, and `kiouni` — a
 card in his middle turned as the left flank, painting only the girth under his belly: its animate marks his points
-`kiouni#head` (the eye; its own point), `kiouni#trunk` (the tip), `kiouni#lift` (the curl that lifts a man). (They were
+`kiouni#head` (his face below the eye, toward the trunk's root — clear of the guide's hands for «The elephant»; his own point is the eye), `kiouni#trunk` (the tip), `kiouni#lift` (the curl that lifts a man). (They were
 the anchor's first: an anchor that paints nothing is not there to be seen, its animate does not run — no points.)
 His motion — `lib.kiouniMove` (the flanks' animate): the legs step by the way gone (no sliding; a longer step at a run
 and with `pace`), fold as he kneels; the trunk eases to its pose (`trunk`: rest, up, sugar, lift; folded as he kneels),
@@ -184,6 +184,8 @@ frame). The mist over the stream and the river — painted layers (`mist_*`); th
 
 
 Shortened silences (2026-10-21, the browser play): `rails_end` — the travellers start nearer the shed (`rails_end:shed` at about 4 s, the beat 7 s); `night_wall` — shorter creep and slip (`night_wall:gone` at about 6.6 s); `pyre` — the priests start nearer (`pyre:kindled` at about 2.8 s). «The bargain»: `owner_back` 1 turns the owner to 25° — his back to Fogg and to us (60° read as a look at the elephant).
+
+After the second browser play (2026-10-21): `kiouni#head` moved from his eye down to his face toward the trunk's root (`KI.face`) — in «The elephant» its ring sat almost on the goad's groove at `guide#hands`.
 
 ## Contract for the check
 

@@ -764,6 +764,12 @@ const SLEDGE_AWAY = { sl_x: 266, sl_d: 13.2, sail_up: 0, sail_face: 180, sl_spee
 const AT_STATION = 256;
 // the cars' world place along the line → where the camera stands to watch Passepartout under them (at pp_car)
 const underCam = (carsX, pp) => carsX + (ppX(pp) + ppX(Math.min(3, Math.floor(pp + 0.01) + 1))) / 2 - 0.3;
+// …and how near it stands (camera_z): 17.6 while the next chain is 2 m on; drawn back as far as the next is farther (the
+// coupling, 5.9 m from the last chain: 15) — he and the next chain both in the frame's middle 4:3
+const underZ = pp => {
+  const i = Math.min(3, Math.floor(anim.clamp(pp, 0, 3) + 0.01)), gap = i >= 3 ? 2 : plan.chains[i + 1] - plan.chains[i];
+  return 17.6 - 0.67 * Math.max(0, gap - 2);
+};
 
 function film(scene) {
   const K = scene.kit.cast;
@@ -807,7 +813,7 @@ function film(scene) {
     ...RUN(), riders: 0, firing: 0, faces: 0,
     passepartout_on: 'chain#pp', passepartout_do: 'lie_limp', passepartout_turn: 90, passepartout_mood: 'angry',
     passepartout_look: 'chain#c1', passepartout_reach: { r: 'chain#hand_r', l: 'chain#hand_l' },
-    camera_x: underCam(-plan.gap, 0), camera_z: 17.6, camera_h: -1.3,
+    camera_x: underCam(-plan.gap, 0), camera_z: underZ(0), camera_h: -1.3,
   });
   // the station, the cars at rest by the platform (no engine)
   const PLATFORM = () => ({ ...LIGHT.day, ...CAM0, ...NOBODY(), ...TRAIN(3000, { cars_x: restAt(), uncouple: 1, gate: 1, steam: 0 }), ...SLEDGE_AWAY });
@@ -878,19 +884,19 @@ function film(scene) {
     bridge_run: {
       from: CAB,
       run: async s => {
+        // the bridge from the river below it, looking up at the trestle against the sky — the train already on it at
+        // full speed (made ready while it gathers speed)
+        const rim = s.shot({ camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: -256, camera_z: -16, camera_pitch: 14,
+          train_x: -262, cars_x: -262 - plan.gap, shake: 0.5 });
         await s.wait(0.4);
-        s.move('shake', 0.25, { over: 2 });
-        // (gathering speed: 27 m in 3 s, to 18 m/s)
-        const off = drive(s, -299, { over: 3, ease: 'in' });
-        await s.wait(1.6);
-        // the bridge from the river below it, looking up at the trestle against the sky
-        const rim = s.shot({ camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: -256, camera_z: -16, camera_pitch: 14 });
+        s.move('shake', 0.25, { over: 1.4 });
+        // (gathering speed: 16 m in 1.6 s, to 20 m/s)
+        await drive(s, -310, { over: 1.6, ease: 'in' });
         await s.until(() => rim.ready);
         rim.cut();
-        s.move('shake', 0.8, { over: 1.5 });
-        await off;
+        s.move('shake', 0.8, { over: 1 });
         // (full speed, 19 m/s, till the last car is past the middle span: the engine at −200)
-        await drive(s, -200, { over: 99 / 19, ease: 'linear' });
+        await drive(s, -200, { over: 62 / 19, ease: 'linear' });
         drive(s, -40, { over: 160 / 19, ease: 'linear' });
         s.move('shake', 0, { over: 1.2 });
         await s.move('bridge_down', 1, { over: 1.6, ease: 'in' });
@@ -918,13 +924,13 @@ function film(scene) {
         walk('aouda', [[-270, 21.4]]);
         walk('fogg', [[-271.8, 20.8]]);
         walk('fix', [[-274, 21.4]]);
-        await s.wait(3.2);
-        // from the east rim: they come on over the last spans
+        // from the east rim (made ready while they set off): they come on over the last spans
         const B = {
-          ...at('passepartout', -232.5, 20.8, 90, { gait: 'pp_walk' }), ...aouda(-234.5, 21.4, 90), ...fogg(-236.0, 20.8, 90, { gait: 'fogg_walk' }), ...fix(-238.0, 21.4, 90),
+          ...at('passepartout', -228.5, 20.8, 90, { gait: 'pp_walk' }), ...aouda(-230.5, 21.4, 90), ...fogg(-232.0, 20.8, 90, { gait: 'fogg_walk' }), ...fix(-234.0, 21.4, 90),
           train_x: -302, cars_x: -302 - plan.gap, camera_x: -230, camera_z: 10,
         };
         const rim = s.shot(B);
+        await s.wait(2);
         await s.until(() => rim.ready);
         rim.cut();
         drive(s, -290, { over: 12, ease: 'linear' });
@@ -1281,7 +1287,7 @@ const SHOWCASE_ONLY = scene => {
 const SHOWCASE = ['company', 'bridge_stop', 'bridge_run', 'bridge_walk', 'attack', 'under_show', 'stop', 'fort', 'column', 'night_wait', 'return', 'train_leaves', 'sledge', 'sail_show', 'omaha'];
 
 return {
-  plan, ground, advance, ppX, sailFace, underCam, clamp01, mod, mixc, rgba, css, R, P, C, dim, text,
+  plan, ground, advance, ppX, sailFace, underCam, underZ, clamp01, mod, mixc, rgba, css, R, P, C, dim, text,
   paintLoco, rods, LOCO, paintCars, sway, carX, WINDOWS, trestle, quake, track, trackRun, rider, muzzle, wolf, stride, scrub, sledgeSide,
   aoudaWear, film, SHOWCASE_ONLY, SHOWCASE, WHO, SOLDIERS,
 };

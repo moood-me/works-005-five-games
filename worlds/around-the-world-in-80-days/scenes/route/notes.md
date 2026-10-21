@@ -33,7 +33,7 @@ are the game's (`bespoke/map.js`, in `bespoke.underlay`), not this scene's.
   `shown` (at once as it opens, over a second on a change; `come` — back to it from wherever the player dragged).
 - **The chapters' points** `c0` … `c5` — unseen, 10 m off, in a row at the frame's 0.28 (their pages hang down from
   there), each over its part of the way: `c0` the prologue at London (lon 2), `c1` India (82), `c2` China and Japan
-  (127), `c3` America (264), `c4` the Atlantic (325), `c5` the epilogue at London again — the sheet's far end (358):
+  (127), `c3` America (264), `c4` the Atlantic (312: halfway between America's and the far end's, the epilogue's page and its pen clear of IV), `c5` the epilogue at London again — the sheet's far end (358):
   the two Londons are the map's two ends. (No point for the author's sign: the game draws its pen itself.)
 
 ## Keys

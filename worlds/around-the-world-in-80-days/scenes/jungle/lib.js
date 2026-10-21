@@ -574,7 +574,7 @@ const KI = {
   farX: -0.17,
   // the head turns about the neck; the trunk hangs from its face, five pieces (their lengths, their half-widths at the
   // root of each); the ear turns about its top
-  neck: [0.98, -2.45], base: [2.02, -2.02], ear: [1.36, -2.8], tail: [-1.56, -2.32], eye: [1.68, -2.48],
+  neck: [0.98, -2.45], base: [2.02, -2.02], ear: [1.36, -2.8], tail: [-1.56, -2.32], eye: [1.68, -2.48], face: [1.95, -2.15],
   trunk: [0.44, 0.42, 0.4, 0.36, 0.33], tw: [0.2, 0.165, 0.135, 0.11, 0.085, 0.065],
   // his back, where the howdah's floor is (elevation on his anchor), and how far each flank stands from his middle
   back: 2.86, side: 0.85,
@@ -878,7 +878,7 @@ function kiouniPaint(e, dir) {
 // (e.mem: the way walked, the step's phase, the trunk's pose easing to its new one).
 const rot = ([x, y], [px, py], t) => { const c = Math.cos(t), s = Math.sin(t); return [px + (x - px) * c - (y - py) * s, py + (x - px) * s + (y - py) * c]; };
 // `marks`: the card `kiouni` in his middle (painted as the left flank is) — it moves no layers, it marks his points for the
-// game and the camera: `head` (the eye; and its own point), `trunk` (the tip), `lift` (the curl that lifts)
+// game and the camera: `head` (his face below the eye; his own point — the eye), `trunk` (the tip), `lift` (the curl that lifts)
 function kiouniMove(e, dir, flank, marks = false) {
   const S = e.state, m = e.mem, A = anim, t = e.t;
   // which flank is near: walking right (facing 0…180) the left one (its painting head-right)
@@ -964,8 +964,10 @@ function kiouniMove(e, dir, flank, marks = false) {
   }
   if (marks) {
     e.at(dir * bx, by, 'trunk');
-    const eye = R(KI.eye);
-    e.at(dir * eye[0], eye[1], 'head');
+    // (`head` on his face below the eye, toward the trunk's root: clear of the guide's hands on his neck — the
+    // elephant's ring and the goad's groove apart)
+    const eye = R(KI.eye), face = R(KI.face);
+    e.at(dir * face[0], face[1], 'head');
     e.at(dir * eye[0], eye[1]);
   }
 }

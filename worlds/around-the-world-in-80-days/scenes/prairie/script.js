@@ -38,7 +38,11 @@ function swingOn() {
 scene.on('change', 'passepartout_on', swingOn);
 scene.on('cut', swingOn);
 scene.every(0.5, swingOn);
-scene.on('change', 'pp_car', v => under() && scene.move('camera_x', L.underCam(num('cars_x'), v), { over: 0.9 }));
+scene.on('change', 'pp_car', v => {
+  if (!under()) return;
+  scene.move('camera_x', L.underCam(num('cars_x'), v), { over: 0.9 });
+  scene.move('camera_z', L.underZ(v), { over: 0.9 });
+});
 // he is at the coupling (pp_car comes to 3): the moment, once each time
 let atCoupling = num('pp_car') >= 2.95;
 follow('pp_car', v => {

@@ -97,7 +97,7 @@ quay or high (an eye down on the landing looks up under the stage).
 | `tavern` | — | evening: Passepartout and Fix at a table by the railing; Fix pours. `tavern:poured` |
 | `badge` | tavern | Fix shows his badge, Passepartout gets up. `badge:shown`, `badge:up` |
 | `pipe` | badge | He sits down again; the pipe at his lips, its smoke; `daze` to 0.3; he rises — then «Stay awake» (the script leads him). The boatman waits at the steps. `pipe:up` |
-| `carnatic` | — | Night: Passepartout reels along the jetty to the steamer's gangway and stumbles — a cut: lying on her deck (`steamer_deck#aboard`, `carnatic:aboard`); she casts off (`carnatic:cast-off`, `carnatic_present` → 0.45 in 26 s), the camera drawing back down the pier |
+| `carnatic` | — | Night: Passepartout reels along the jetty to the steamer's gangway and stumbles — a cut: lying on her deck (`steamer_deck#aboard`, `carnatic:aboard`); she casts off (`carnatic:cast-off`, `carnatic_present` → 0.5 in 8 s), the camera drawing back down the pier |
 | `morning` | — | morning, the jetty empty: Fogg (and Aouda) by the pier; a cut closer; the watch. `morning:watch` |
 | `bunsby` | — | day, the landing: Bunsby by the Tankadere, Fogg (and Aouda) before him; Fix comes down the ramp and up to them (`bunsby:fix`); holds under the choice — `fix#head`, `bunsby#head` |
 | `cast_off` | — | her people on her deck (`tankadere_crew#helm/#fogg/#aouda/#fix`): Bunsby at the tiller, Fogg, Aouda (`with_aouda`), Fix (`with_fix`); sails up (`cast_off:sails-up`), out off the landing |
@@ -144,6 +144,8 @@ v1 (there the people on the pier sank in the dark) — `ambient` 0.32 → 0.55, 
 
 Shortened silences (2026-10-21, the browser play): `quay` — Fogg comes from nearer (`quay:met` at about 3.7 s), the tail 1 s; `cousin` — `cousin:looks-back` at about 2.4 s.
 
+After the second browser play (2026-10-21): `cousin` framed on the three (the operator on Passepartout between them, 0.55) — Aouda and Fogg both in the frame's middle 4:3; `carnatic` — she casts off and swings her bow out in 8 s (`carnatic_present` → 0.5; was 0.45 in 26 s), the camera drawing back with her. Not done: the cut aboard (`ABOARD`) does not show Passepartout lying on her deck (the camera over the water; he hangs in the air at the frame's edge as she moves) — it wants staging again.
+
 ## Contract for the check
 
 ```json
@@ -153,7 +155,7 @@ Shortened silences (2026-10-21, the browser play): `quay` — Fogg comes from ne
   "tavern": {"after": [], "tells": ["tavern:poured"], "seconds": 9, "show": false},
   "badge": {"after": ["tavern"], "tells": ["badge:shown", "badge:up"], "seconds": 8, "show": false},
   "pipe": {"after": ["badge"], "tells": ["pipe:up"], "seconds": 11, "show": false},
-  "carnatic": {"after": [], "tells": ["carnatic:aboard", "carnatic:cast-off"], "seconds": 36, "show": false},
+  "carnatic": {"after": [], "tells": ["carnatic:aboard", "carnatic:cast-off"], "seconds": 18, "show": false},
   "morning": {"after": [], "tells": ["morning:watch"], "seconds": 9, "show": false},
   "bunsby": {"after": [], "tells": ["bunsby:fix"], "seconds": 13, "show": false},
   "cast_off": {"after": [], "tells": ["cast_off:sails-up"], "seconds": 25, "show": false},

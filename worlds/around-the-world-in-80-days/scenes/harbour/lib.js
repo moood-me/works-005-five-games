@@ -284,6 +284,8 @@ function boatLive(e, i) {
 // at the parapet, where Aouda waits looking out (parapet#parapet); where Passepartout stands by her; where Fogg comes to,
 // and where he comes from along the quay
 const BY_WALL = [-18, 4.15], PP_BY = [-16.9, 3.95], TO_HER = [-15.4, 3.6], ALONG = [-10.2, 3.4];
+// the cousin: the three on the quay, Passepartout between Aouda and Fogg — the shot
+const THREE = { camera_target: 'passepartout', camera_shot: 0.55, camera_frame: [0.46, 0.3], camera_x: 0 };
 // the tavern's table by the rail (tables#table) and its two stools: Passepartout's (facing right), Fix's (left)
 const TABLE = [-40.2, 6.6], STOOL = { passepartout: [-40.95, 6.6], fix: [-39.45, 6.6] };
 const BOTTLE = [TABLE[0] + 0.15, TABLE[1], 0.95], CUP = [TABLE[0] - 0.1, TABLE[1], 0.82];
@@ -504,11 +506,12 @@ function film(scene) {
     // ---- (under the line) She listens, even; looks out over the water, and back to him; holds, under the choice.
     cousin: {
       after: 'quay',
-      from: () => ({ ...MET(), camera_target: 'aouda', camera_shot: 0.6, camera_frame: 0.3, camera_x: 0 }),
+      from: () => ({ ...MET(), ...THREE }),
       run: async s => {
         const aouda = s.person('aouda');
-        // (the operator frames her; the quay's own sideways step, camera_x, is on top of a framing — taken off with it)
-        s.camera({ target: 'aouda', shot: 0.6, frame: 0.3, glide: 1.6 });
+        // (the operator frames the three, Passepartout between them — she and Fogg both in the frame's middle 4:3, the
+        // choice's rings on their heads; the quay's own sideways step, camera_x, is on top of a framing — taken off with it)
+        s.camera({ target: THREE.camera_target, shot: THREE.camera_shot, frame: THREE.camera_frame, glide: 1.6 });
         s.move('camera_x', 0, { over: 1.6, ease: 'inOut' });
         await s.wait(0.6);
         aouda.look([BY_WALL[0] - 1.5, 30, 1.5]);
@@ -611,10 +614,11 @@ function film(scene) {
         s.tell('carnatic:aboard');
         await s.wait(1.6);
         s.tell('carnatic:cast-off');
-        s.move('camera_z', 30, { over: 12, ease: 'inOut' });
-        s.move('camera_h', 0.4, { over: 12, ease: 'inOut' });
-        s.move('camera_look', 0, { over: 12, ease: 'inOut' });
-        await s.move('carnatic_present', 0.45, { over: 26, ease: 'inOut' });
+        // (she backs and swings her bow out — the beat ends with her under way; the game may move `carnatic_present` on)
+        s.move('camera_z', 30, { over: 8, ease: 'inOut' });
+        s.move('camera_h', 0.4, { over: 8, ease: 'inOut' });
+        s.move('camera_look', 0, { over: 8, ease: 'inOut' });
+        await s.move('carnatic_present', 0.5, { over: 8, ease: 'inOut' });
       },
     },
     // ---- Morning. The jetty empty; Fogg (and Aouda) at the pier's foot look out where the steamer lay; his watch.

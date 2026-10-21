@@ -110,13 +110,15 @@ and Fix with them), `under_show` and `sail_show` (the minigames played a little)
 
 Shortened silences (2026-10-21, the browser play): `column` — the cut at 1.2 s, `column:gone` at about 4.7 s; `night_wait` — `night_wait:snow` at 1.5 s (the game's narrator), the snow over 8 s; its camera on Fix when Aouda is not there (was on no one).
 
+After the second browser play (2026-10-21): `under` — the camera draws back as the next chain is farther (`lib.underZ`: 17.6, at the last stretch to the coupling 15), the coupling `chain#c3` in the frame's middle 4:3 with him; `bridge_run` — the cut from below the bridge comes with the train already on it (`bridge_run:down` at about 6.9 s, was about 10); `bridge_walk` — the shot of the east rim made ready as they set off, they nearer the rim (`bridge_walk:over` at about 5 s).
+
 ## Contract for the check
 
 ```json
 {"beats": {
   "bridge_stop": {"after": [], "tells": ["bridge_stop:argue"], "seconds": 11, "show": false},
-  "bridge_run": {"after": [], "tells": ["bridge_run:down"], "seconds": 13, "show": false},
-  "bridge_walk": {"after": [], "tells": ["bridge_walk:over"], "seconds": 13, "show": false},
+  "bridge_run": {"after": [], "tells": ["bridge_run:down"], "seconds": 9, "show": false},
+  "bridge_walk": {"after": [], "tells": ["bridge_walk:over"], "seconds": 8, "show": false},
   "attack": {"after": [], "tells": ["attack:driver"], "seconds": 11, "show": false},
   "under": {"after": [], "tells": ["under:coupling"], "seconds": 2, "show": false},
   "stop": {"after": [], "tells": ["stop:still"], "seconds": 10, "show": false},
