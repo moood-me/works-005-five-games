@@ -59,29 +59,39 @@ facing the room, then `rise`.
 All 33 of scenes.md (lib `film(scene)`, in its order); the moments and the faces as scenes.md says. Its seconds below
 are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
 
-- `kitchen`: the window's shot (yaw 180): the three come in; the stove door opens; `hands` opens.
-- `warm_up`: `hands` closes; he turns to the table (Vasenka, the stove).
-- `enter`: the door, Sarafanov with his hat; the hat onto the stool; side by side in profile under the lamp (a cut
-  made ready). `embrace`: over the old man's shoulder — Busygin's face, sad.
-- `nina_in`: Nina in the door, close in three quarters; through the kitchen into the room. Vasenka on the sofa, on his
-  side to the wall.
-- `supper`/`supper_after`: the toast; the glass point `table#glass`; the sheet of music.
-- `talk`/`talk_back`/`galya_*`: Silva to the sofa; the kettle; `tea`; the two face to face (`CAM.tb`), the puddle.
-- `box_out`: to the sideboard (a cut into the room) and back; the snuffbox on the oilcloth; `box_take`/`box_give`
-  open `box` (`box_mode` set before); `box_kept`, `box_back` (his back at the shelf — the device).
-- `wall`: the room dark, his lamp; Silva close in its light; the cot; Busygin turns to the wall.
-- `wake`: dawn; the cot and the chair with the coat — the choice. `sneak`: he takes the coat, both tiptoe into the
-  kitchen to the stove; the shot from the doorway (stove, the way, the door, the clock). `caught`: from the front door,
-  the two aside, the old man in the doorway (`heard`); the coat on the hook; he goes out.
-- `window_watch`: Silva lies down again; Busygin at the window (his shoulder, the frosted glass). `morning`: the old
-  man stops by the table, goes out; through the hole his figure crosses the gardens.
+- `kitchen`: the kitchen wide from the window's corner (`CAM.win`): the three come in; the stove door opens; `hands`
+  opens and holds a moment.
+- `warm_up` (a cut, made ready: `hands` closes): he turns from the stove to the table (Vasenka, the stove).
+- `enter`: the door, Sarafanov with his hat; the hat onto the stool; the two at the stove (Busygin in profile, the old
+  man in three quarters). `embrace`: over the old man's shoulder — Busygin's face, sad.
+- `nina_in`: Nina in the door, close in three quarters; through the kitchen into the room.
+- `supper`/`supper_after`: the toast, the old man in three quarters; the glass point `table#glass`; the sheet of music.
+- `talk` (Silva to the sofa; the kettle; `tea` opens and holds), `talk_back` (a cut, made ready: the two face to face
+  along the table, the puddle), `galya_*`.
+- `box_out`: round behind the table to the sideboard (a cut into the room) and back; the snuffbox on the oilcloth (a
+  little card of its own on the table, `snuffbox`); `box_take`/`box_give` open `box` (`box_mode` set before);
+  `box_kept`, `box_back` (his back at the shelf — the device).
+- `wall`: the room dark, his lamp; Silva close in its light; Busygin turns on his side.
+- `wake`: dawn; close on the cot's head (`CAM.wake`): Silva's hand on his shoulder, both faces; a cut to the room: he
+  sits on the cot's edge, Silva a step off — the choice (the coat on the chair at the cot's foot, the cot). `sneak`: up
+  off the edge, the coat, both tiptoe into the kitchen to the stove. `caught`: the old man in the doorway (`heard`); the
+  coat on the hook (`CAM.door`); he goes out.
+- `window_watch`: Silva lies down again; Busygin at the window. `morning` (a cut, made ready): the two by the table,
+  the old man stops — L47, L48 —, goes; at his shoulder the rubbed hole close (`CAM.hole`): the figure with the case
+  crosses the gardens (12 m off, in the hole).
 - `table`/`toast`/`let_go`/`ask_stay`/`for_me`: IV, the six places, the high shot along the table (`CAM.toast`).
-- `pack`/`confess`/`exposed`/`go_out`: V, from the far left corner; in `confess` with `hurt` 0 both sit down face to
-  face at the table and he reaches for Busygin's hand; with 1 — his back at the window.
-- `home_late`: whoever came comes in with him (`father_came`, `nina_came` — with `nina_end` home —, `vasya_came`
-  into the room); the old man by his chair; the snuffbox fetched off the shelf (or slid over); he goes to his room,
-  his lamp lit; Nina at home comes to the table (`nina_for` — beside him, else her place).
+- `pack`: the old man close in the doorway as he speaks (`CAM.packSar`), then the room from the far corner for the
+  choice; `confess`/`exposed`: the two by the doorway in profile; the old man at the window with his back (`CAM.window`);
+  with `hurt` 0 both sit down face to face and he reaches for Busygin's hand. `go_out`.
+- `home_late`: whoever came comes in with him, each in a sequence of their own; the old man sits facing him (L105) —
+  or is at the table already —, gets up to fetch the snuffbox off the shelf (or slides it over), goes to his room;
+  Nina at home comes to the table; beside him (`nina_for`) — the two from the stove's corner (`CAM.pair`).
   `home_anyway`: the old man at the window (or comes in first and goes to it); the kettle to the stove; he sits.
+
+The cuts: a beat that begins with a new shot begins by its `from` (the beats module makes it ready); a cut inside a
+beat is a shot made ready ahead (`s.shot`), waited for (`s.until(() => shot.ready)`) where it cannot be made earlier.
+What goes on beside a beat's main line (someone walking off, sitting down) is a sequence of its own inside it
+(`s.sequence`), so that it stops with the beat.
 
 ## What is not so / open
 
@@ -102,28 +112,28 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
 
 ```json
 {"beats": {
-  "kitchen": {"after": [], "tells": ["kitchen:stove"], "seconds": 11, "show": false},
-  "warm_up": {"after": ["kitchen"], "tells": ["warm_up:turn"], "seconds": 7, "show": false},
+  "kitchen": {"after": [], "tells": ["kitchen:stove"], "seconds": 12, "show": false},
+  "warm_up": {"after": [], "tells": ["warm_up:turn"], "seconds": 7, "show": false},
   "enter": {"after": [], "tells": ["enter:in", "enter:near"], "seconds": 22, "show": false},
   "embrace": {"after": ["enter"], "tells": ["embrace:held"], "seconds": 7, "show": false},
   "nina_in": {"after": [], "tells": ["nina_in:door", "nina_in:gone"], "seconds": 20, "show": false},
   "supper": {"after": [], "tells": ["supper:toast"], "seconds": 11, "show": false},
   "supper_after": {"after": ["supper"], "tells": ["supper_after:sheet"], "seconds": 11, "show": false},
-  "talk": {"after": [], "tells": ["talk:kettle"], "seconds": 10, "show": false},
-  "talk_back": {"after": ["talk"], "tells": ["talk_back:ready"], "seconds": 3, "show": false},
+  "talk": {"after": [], "tells": ["talk:kettle"], "seconds": 11, "show": false},
+  "talk_back": {"after": [], "tells": ["talk_back:ready"], "seconds": 3, "show": false},
   "galya_yes": {"after": ["talk_back"], "tells": ["galya_yes:hand"], "seconds": 7, "show": false},
   "galya_no": {"after": ["talk_back"], "tells": ["galya_no:glass"], "seconds": 7, "show": false},
   "box_out": {"after": [], "tells": ["box_out:down"], "seconds": 27, "show": false},
-  "box_take": {"after": ["box_out"], "tells": ["box_take:close"], "seconds": 2, "show": false},
-  "box_give": {"after": ["box_out"], "tells": ["box_give:close"], "seconds": 2, "show": false},
+  "box_take": {"after": ["box_out"], "tells": ["box_take:close"], "seconds": 3, "show": false},
+  "box_give": {"after": ["box_out"], "tells": ["box_give:close"], "seconds": 3, "show": false},
   "box_kept": {"after": ["box_take"], "tells": ["box_kept:back"], "seconds": 7, "show": false},
   "box_back": {"after": ["box_give"], "tells": ["box_back:shelf"], "seconds": 17, "show": false},
   "wall": {"after": [], "tells": ["wall:dark", "wall:turn"], "seconds": 19, "show": false},
-  "wake": {"after": [], "tells": ["wake:up"], "seconds": 11, "show": false},
-  "sneak": {"after": ["wake"], "tells": ["sneak:ready"], "seconds": 22, "show": false},
+  "wake": {"after": [], "tells": ["wake:up"], "seconds": 6, "show": false},
+  "sneak": {"after": ["wake"], "tells": ["sneak:ready"], "seconds": 21, "show": false},
   "caught": {"after": [], "tells": ["caught:face", "caught:hook", "caught:out"], "seconds": 25, "show": false},
-  "window_watch": {"after": ["wake"], "tells": ["window_watch:pane"], "seconds": 10, "show": false},
-  "morning": {"after": ["window_watch"], "tells": ["morning:in", "morning:out"], "seconds": 25, "show": false},
+  "window_watch": {"after": ["wake"], "tells": ["window_watch:pane"], "seconds": 9, "show": false},
+  "morning": {"after": [], "tells": ["morning:in", "morning:out"], "seconds": 21, "show": false},
   "table": {"after": [], "tells": ["table:nine", "table:in", "table:sat"], "seconds": 23, "show": false},
   "toast": {"after": ["table"], "tells": ["toast:news", "toast:turn"], "seconds": 21, "show": false},
   "let_go": {"after": ["toast"], "tells": ["let_go:glass"], "seconds": 8, "show": false},
@@ -133,7 +143,7 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
   "confess": {"after": ["pack"], "tells": ["confess:said", "confess:sarafanov"], "seconds": 19, "show": false},
   "exposed": {"after": ["pack"], "tells": ["exposed:said", "exposed:window"], "seconds": 15, "show": false},
   "go_out": {"after": ["confess", "exposed"], "tells": ["go_out:gone"], "seconds": 12, "show": false},
-  "home_late": {"after": [], "tells": ["home_late:sat", "home_late:box", "home_late:room"], "seconds": 30, "show": false},
+  "home_late": {"after": [], "tells": ["home_late:sat", "home_late:box", "home_late:room"], "seconds": 28, "show": false},
   "home_anyway": {"after": [], "tells": ["home_anyway:turn"], "seconds": 25, "show": false}
 },
 "points": ["table#box", "table#glass", "sarafanov", "busygin", "silva", "nina", "kudimov", "cot", "cot_chair#coat", "clock#face", "window#pane",
