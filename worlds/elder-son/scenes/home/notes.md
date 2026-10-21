@@ -59,8 +59,9 @@ facing the room, then `rise`.
 All 33 of scenes.md (lib `film(scene)`, in its order); the moments and the faces as scenes.md says. Its seconds below
 are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
 
-- `kitchen`: the kitchen wide from the window's corner (`CAM.win`): the three come in; the stove door opens; `hands`
-  opens and holds a moment.
+- `kitchen`: the kitchen wide from the window's corner (`CAM.win`): the door, the three come in one after another; at
+  ≈ 3 s a cut (made ready) to the stove from the near left corner (`CAM.stove`): Vasenka and Silva sat at the table, he at
+  the stove in three quarters opens its door — `hands` opens at ≈ 5 s and holds a moment.
 - `warm_up` (a cut, made ready: `hands` closes): he turns from the stove to the table (Vasenka, the stove).
 - `enter`: the door, Sarafanov with his hat; the hat onto the stool; the two at the stove (Busygin in profile, the old
   man in three quarters). `embrace`: over the old man's shoulder — Busygin's face, sad.
@@ -83,7 +84,11 @@ are the node run's (`check.mjs`: walks at 1.25 m/s, the motions' own lengths).
 - `table`/`toast`/`let_go`/`ask_stay`/`for_me`: IV, the six places, the high shot along the table (`CAM.toast`).
 - `pack`: the old man close in the doorway as he speaks (`CAM.packSar`), then the room from the far corner for the
   choice; `confess`/`exposed`: the two by the doorway in profile; the old man at the window with his back (`CAM.window`);
-  with `hurt` 0 both sit down face to face and he reaches for Busygin's hand. `go_out`.
+  with `hurt` 0 both sit down face to face and he reaches for Busygin's hand. `go_out`: a cut (made ready) to the front
+  door — he at the hooks takes his coat, Silva at the door; out; `go_out:gone` as the door shuts, then a cut to the old
+  man left where he is (`CAM.window`, or `CAM.tb` at the table) — the beat never ends on the empty hall.
+- `ask_stay`: Kudimov stands — `ask_stay:stand`; 1.5 s on a cut (made ready, `CAM.askNina`) finds Nina already up between
+  him and her father.
 - `home_late`: whoever came comes in with him, each in a sequence of their own; the old man sits facing him (L105) —
   or is at the table already —, gets up to fetch the snuffbox off the shelf — a cut to the sideboard, a cut to the kitchen wide as he brings it — (or slides it over), goes to his room;
   Nina at home comes to the table; beside him (`nina_for`) — the two from the stove's corner (`CAM.pair`).
@@ -113,7 +118,7 @@ What goes on beside a beat's main line (someone walking off, sitting down) is a 
 
 ```json
 {"beats": {
-  "kitchen": {"after": [], "tells": ["kitchen:stove"], "seconds": 12, "show": false},
+  "kitchen": {"after": [], "tells": ["kitchen:stove"], "seconds": 6, "show": false},
   "warm_up": {"after": [], "tells": ["warm_up:turn"], "seconds": 7, "show": false},
   "enter": {"after": [], "tells": ["enter:in", "enter:near"], "seconds": 22, "show": false},
   "embrace": {"after": ["enter"], "tells": ["embrace:held"], "seconds": 7, "show": false},
@@ -138,12 +143,12 @@ What goes on beside a beat's main line (someone walking off, sitting down) is a 
   "table": {"after": [], "tells": ["table:nine", "table:in", "table:sat"], "seconds": 23, "show": false},
   "toast": {"after": ["table"], "tells": ["toast:news", "toast:turn"], "seconds": 21, "show": false},
   "let_go": {"after": ["toast"], "tells": ["let_go:glass"], "seconds": 8, "show": false},
-  "ask_stay": {"after": ["toast"], "tells": ["ask_stay:stand"], "seconds": 14, "show": false},
+  "ask_stay": {"after": ["toast"], "tells": ["ask_stay:stand"], "seconds": 7, "show": false},
   "for_me": {"after": ["toast"], "tells": ["for_me:stand"], "seconds": 12, "show": false},
   "pack": {"after": [], "tells": ["pack:case", "pack:silva"], "seconds": 16, "show": false},
   "confess": {"after": ["pack"], "tells": ["confess:said", "confess:sarafanov"], "seconds": 19, "show": false},
   "exposed": {"after": ["pack"], "tells": ["exposed:said", "exposed:window"], "seconds": 15, "show": false},
-  "go_out": {"after": ["confess", "exposed"], "tells": ["go_out:gone"], "seconds": 12, "show": false},
+  "go_out": {"after": ["confess", "exposed"], "tells": ["go_out:gone"], "seconds": 9, "show": false},
   "home_late": {"after": [], "tells": ["home_late:sat", "home_late:box", "home_late:room"], "seconds": 21, "show": false},
   "home_anyway": {"after": [], "tells": ["home_anyway:turn"], "seconds": 25, "show": false}
 },

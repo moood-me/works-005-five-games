@@ -71,6 +71,8 @@ const SPOT = {
   behind: [-3.55, 6.25],               // Nina behind the birch, out of sight from the slope
   pillar: { nina: [4.6, 6.1], busygin: [5.3, 6.3] },   // in the lee of the gate's left pillar, seen over the fence
   top: [1.4, 24.8],                    // the head of the path
+  below: [4.3, 22.3],                  // on the path's top stretch, a few steps below the father (where the cut finds his son)
+  down: [5.9, 12.0],                   // on the path half way down, behind the camera at the gate (where `hide` finds him)
   meet: [2.25, 24.1],                  // Busygin on the path a step below his father, facing him
   caseAt: [0.4, 26.45],                // where the case lies on the snow by the grave, before him
   gate: { sarafanov: [8.5, 5.3], busygin: [7.2, 5.45] },   // at the gate's foot on the road, face to face
@@ -93,6 +95,9 @@ const CAM = {
   // from the slope beyond the fence, a little above it: the two by the birch in three quarters, looking up at the funeral
   talk: { camera_x: 1.6, camera_z: 8.8, camera_yaw: -136, camera_h: 0.3, camera_pitch: -14 },
   near: { camera_x: -1.0, camera_z: 2.4, camera_yaw: 2, camera_h: 0 },
+  // up on the slope below the grave, a little under him: the old man by the case on the snow, three quarters, the brass
+  // going off over the crest behind him
+  case: { camera_x: 2.0, camera_z: 23.6, camera_yaw: -22, camera_h: 0.1, camera_pitch: 0 },
   // on the slope below them and to the side, a little under them: both in profile against the snow and the sky
   meet: { camera_x: -1.0, camera_z: 22.2, camera_yaw: 52, camera_h: 0 },
   hide: { camera_x: 4.2, camera_z: 9.6, camera_yaw: 167, camera_h: 0 },
@@ -125,8 +130,10 @@ const END = {};
 END.road = () => ({ ...FROM.road(), ...CAM.march, ...AT('nina', SPOT.nina, 0, { nina_mood: 'tired', nina_look: 'sarafanov' }), ...AT('busygin', SPOT.busygin, 8, { busygin_mood: 'thinking', busygin_look: 'band2' }) });
 // after `march`: the mourners and the brass gone over the crest, Sarafanov alone by the grave
 END.march = () => ({ ...END.road(), ...GONE, nina_mood: 'sad', busygin_mood: 'surprised', busygin_look: 'sarafanov' });
-// after `alone`: he stands at the head of the path with the case; the camera nearer the fence
-END.alone = () => ({ ...END.march(), ...CAM.near, ...AT('sarafanov', SPOT.top, 180, THREE), hour: 0.77, nina_look: 'sarafanov', busygin_look: 'sarafanov' });
+// after `alone`: he stands at the head of the path with the case; the camera nearer the fence; the two by the birch
+// turned to each other (the choice: their faces, he far up between them)
+END.alone = () => ({ ...END.march(), ...CAM.near, camera_pitch: 0, ...AT('sarafanov', SPOT.top, 180, THREE), hour: 0.77,
+  ...AT('nina', SPOT.nina, 115, { nina_mood: 'sad', nina_look: 'busygin' }), ...AT('busygin', SPOT.busygin, 255, { busygin_mood: 'thinking', busygin_look: 'nina' }) });
 
 // the camera along with a walk, as long as the walk takes
 async function follow(s, walk, cam) {
@@ -171,10 +178,10 @@ function film(scene) {
         talk.cut();
         nina.mood('sad');
         bus.mood('surprised');
-        await s.wait(10);
+        await s.wait(8);
         back.cut();
         bus.look('sarafanov');
-        await s.wait(6);
+        await s.wait(0.5);
         // the mourners turn and set off up over the crest (`alone` sees them on their way)
         for (const [i, id] of ['mourner2', 'mourner1', 'mourner3', 'mourner4'].entries()) {
           const p = s.person(id);
@@ -182,80 +189,71 @@ function film(scene) {
           if (i) await s.wait(0.5);
           p.walk([[FUNERAL[id][0] - 1.5, 30], AWAY[id]]);
         }
-        await s.wait(2);
+        await s.wait(1.5);
         s.tell('march:end');
       },
     },
-    // the brass after them; he alone lays the clarinet in its case on the snow, takes the case, goes to the head of the
-    // path and stands; the camera comes slowly up toward the fence
+    // a cut up the slope to him: the brass go off after the mourners over the crest behind him, he lays the clarinet in its
+    // case on the snow; a cut back to the fence: he stands at the head of the path with the case, the two by the birch
+    // turned to each other
     alone: {
       after: 'march',
       from: END.march,
       async run(s) {
-        const sar = s.person('sarafanov'), nina = s.person('nina'), bus = s.person('busygin');
-        camTo(s, CAM.near, 20, 'inOut');
-        s.move('hour', 0.77, { over: 24, ease: 'linear' });
-        // the mourners on over the crest (from wherever they are), the brass after them; gone past it, they are not here
-        const away = (id, wait, turn) => (async () => {
-          if (s.get(`${id}_here`) === false) return;
+        const sar = s.person('sarafanov');
+        const close = s.shot({ ...CAM.case, hour: 0.76 });
+        const choice = s.shot(END.alone());
+        await s.until(() => close.ready);
+        close.cut();
+        const going = [];
+        for (const [i, id] of ['band2', 'band1', 'band3'].entries()) {
           const p = s.person(id);
-          await s.wait(wait);
-          if (turn) await p.turn(turn);
-          await p.walk([[FUNERAL[id][0] - 1.2, 31], AWAY[id]]);
-          p.here(false);
-        })();
-        const going = [away('mourner2', 0), away('mourner1', 0.2), away('mourner3', 0.4), away('mourner4', 0.6),
-          away('band2', 1.2, 175), away('band1', 1.9, 175), away('band3', 2.6, 175)];
-        await s.wait(2.5);
+          if (i) await s.wait(0.4);
+          await p.turn(175);
+          going.push(p.walk([[FUNERAL[id][0] - 1.2, 31], AWAY[id]]));
+        }
         sar.look(SPOT.caseAt.concat(0));
         await sar.turn(210);
         await sar.do('put_down');
         sar.with(['long_scarf']);
-        await s.wait(0.6);
-        await sar.do('pick_up');
-        sar.with(['long_scarf', 'case']);
-        s.set('case_down', 0);
+        await s.wait(0.5);
+        await s.until(() => choice.ready);
+        for (const w of going) w.cancel();
+        choice.cut();
         s.tell('alone:case');
-        sar.look(null);
-        await sar.walk([SPOT.top]);
-        await sar.turn(180);
-        nina.look('sarafanov');
-        bus.look('sarafanov');
-        await s.all(...going);
-        await s.wait(1.5);
+        await s.wait(1.2);
       },
     },
-    // she steps back behind the birch; he goes through the gate and up the path; the old man puts the case behind his back;
-    // they stand side by side; the camera comes up the slope with him
+    // she steps back behind the birch; he sets off for the gate; a cut to the head of the path: he comes up the last steps,
+    // the old man putting the case behind his back; they stand face to face; the case handed over
     meet: {
       after: 'alone',
       from: END.alone,
       async run(s) {
         const sar = s.person('sarafanov'), nina = s.person('nina'), bus = s.person('busygin');
-        // Nina steps back behind the birch, Busygin goes through the gate and up the path; then the cut to the head of the
-        // path, where the father stands: the son comes up to him, both faces seen
-        const meeting = s.shot({ ...CAM.meet });
+        // Nina steps back behind the birch, Busygin sets off to the gate; a cut to the head of the path, where the father
+        // stands: the son comes up the last steps to him (the father putting the case behind his back), both faces seen
+        const meeting = s.shot({ ...CAM.meet, ...AT('busygin', SPOT.below, 310, { busygin_mood: 'thinking' }),
+          ...AT('nina', SPOT.behind, 20, { nina_mood: 'sad', nina_look: 'sarafanov' }) });
         nina.look(null);
         const hide = nina.walk([SPOT.behind]);
-        const up = bus.walk([[4.8, 5.6], [GATE, 6.4], ...PATH.slice(0, 5).reverse().slice(1, -1), SPOT.meet]);
+        const go = bus.walk([[4.8, 5.6], [GATE, 6.4]]);
         sar.look('busygin');
         sar.mood('afraid');
         bus.mood('thinking');
-        await hide;
-        nina.turn(20);
-        nina.look('sarafanov');
-        await s.until(() => s.get('busygin_d') > 9);
+        await s.wait(2.5);
+        await s.until(() => meeting.ready);
+        hide.cancel();
+        go.cancel();
         meeting.cut();
-        await s.wait(Math.max(0, (up.remaining || 12) - 6));
-        await sar.do('hide_back');
-        s.tell('meet:talk');
-        await up;
-        await bus.turn(311);
-        await sar.turn(131);
+        const back = sar.do('hide_back');
+        await bus.walk([SPOT.meet]);
+        await s.all(bus.turn(311), sar.turn(131));
         bus.look('sarafanov');
+        s.tell('meet:talk');
         await s.wait(3);
         sar.mood('smile');
-        await s.wait(2);
+        await back;
         bus.reach({ r: 'sarafanov#hand_r' });
         sar.do('stand');
         await s.wait(1.4);
@@ -305,18 +303,15 @@ function film(scene) {
         await s.wait(1);
       },
     },
-    // they step back into the shadow of the gate's pillar; he comes down the path by himself, out on the road, turns
-    // right
+    // a cut to the slope by the gate: the two already in the shadow of its pillar, looking up; he comes down the lower half
+    // of the path by himself, past the lens, out on the road, turns right
     hide: {
-      from: () => ({ ...END.alone(), ...CAM.hide, sarafanov_mood: 'neutral', nina_mood: 'afraid', busygin_mood: 'thinking' }),
+      from: () => ({ ...END.alone(), ...CAM.hide, ...AT('sarafanov', SPOT.down, 134, { ...THREE, sarafanov_mood: 'neutral' }),
+        ...AT('nina', SPOT.pillar.nina, 20, { nina_mood: 'afraid', nina_look: 'sarafanov' }),
+        ...AT('busygin', SPOT.pillar.busygin, 350, { busygin_mood: 'thinking', busygin_look: 'sarafanov' }) }),
       async run(s) {
-        const sar = s.person('sarafanov'), nina = s.person('nina'), bus = s.person('busygin');
-        const down = sar.walk(PATH.slice(1, 5));
-        await s.all(nina.walk([[1.5, 5.6], SPOT.pillar.nina]), (async () => { await s.wait(0.3); await bus.walk([[2.2, 5.8], SPOT.pillar.busygin]); })());
-        await s.all(nina.turn(20), bus.turn(350));
-        nina.look('sarafanov');
-        bus.look('sarafanov');
-        await down;
+        const sar = s.person('sarafanov');
+        await sar.walk(PATH.slice(3, 5));
         const road = sar.walk([PATH[5], [GATE + 0.8, ROAD_Y], SPOT.gone]);
         const [x, z, yaw, h] = trailCam(SPOT.gone[0]);
         camTo(s, { camera_x: x, camera_z: z, camera_yaw: yaw, camera_h: h }, 4.5, 'inOut');

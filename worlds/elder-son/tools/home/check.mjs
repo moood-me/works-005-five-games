@@ -60,7 +60,9 @@ function run(name, fn, init, party) {
         for (const q of points) { if (!q || q.some(v => !Number.isFinite(v))) warn.push(`${id} walk to ${q}`); prev = p; len += Math.hypot(q[0] - p[0], q[1] - p[1]); p = q; }
         const end = points[points.length - 1];
         const a = action(len / (PACE[o.gait ?? st[`${id}_gait`]] ?? 1.25));
-        a.then(() => { st[`${id}_a`] = end[0]; st[`${id}_d`] = end[1]; if (Math.hypot(end[0] - prev[0], end[1] - prev[1]) > 1e-3) st[`${id}_turn`] = Math.atan2(end[0] - prev[0], end[1] - prev[1]) * 180 / Math.PI; });
+        let cancelled = false;
+        a.cancel = () => { cancelled = true; };
+        a.then(() => { if (cancelled) return; st[`${id}_a`] = end[0]; st[`${id}_d`] = end[1]; if (Math.hypot(end[0] - prev[0], end[1] - prev[1]) > 1e-3) st[`${id}_turn`] = Math.atan2(end[0] - prev[0], end[1] - prev[1]) * 180 / Math.PI; });
         return a;
       },
       go(m, o = {}) {

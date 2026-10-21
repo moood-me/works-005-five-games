@@ -30,24 +30,29 @@ Modules: `cast`, `beats`, `houses`. `scene.json`, the crosses, the grave railing
   `sky_light` from above; `hour` → the look `dusk` (it grows dark).
 - **Faces.** Everybody has the face `simple`; the expression — `<id>_mood`, set by each beat. The moments of faces: `road`
   (Nina `tired`, Busygin `thinking`, the camera at the side, both in profile), `march` (the cut to the two by the birch from
-  the slope beyond the fence, a little above it — three quarters, looking up, Nina `sad`, Busygin `surprised`, and back), `meet` (the cut to the head of the path, the father `afraid` →
+  the slope beyond the fence, a little above it — three quarters, looking up, Nina `sad`, Busygin `surprised`, and back), `alone` (the cut up the slope: the father by the case in three quarters, `CAM.case`;
+  back at the fence for the choice the two turned to each other — Nina in three quarters, Busygin in profile, the father
+  small up the path between them), `meet` (the cut to the head of the path, the father `afraid` →
   `smile`, both ≈ 0.45 of the frame, the camera `CAM.meet` centred on the two), `hide` (the two behind the fence, their faces over its pickets, `afraid`/`thinking`, the father coming down past the lens), `bottom` (face to face in profile at the gate, the father
   `smile`/`laugh`), `club` (the two in profile, Nina `smile`, Busygin `sad`, in the door's light). The father among the
-  brass: his light scarf and his small height; the camera comes up in `alone`.
+  brass: his light scarf and his small height.
 
 ## Beats (`lib.film(scene)`, played by the world's `beats`)
 
 | beat | after | what | tells | ≈ s |
 | --- | --- | --- | --- | --- |
 | `road` | — | along the road from the left Nina and Busygin, the camera beside them (as far as he walks); the group seen up the slope; they stop at the fence by the birch | `road:fence` | 14 |
-| `march` | `road` | the camera behind their backs (both ≈ 0.3 of the frame); at 3 s the cut to the two, their faces, and back at 13 s; at the end the mourners turn and go over the crest | `march:end` | 24 |
-| `alone` | `march` | the brass go after them (hidden by the crest); the camera slowly to the fence; he puts the clarinet in its case (`put_down`), picks the case up (`pick_up`); he stands at the top of the path. The pose for the choice: `sarafanov` (x ≈ 0.54) and `nina` (≈ 0.33) in the middle 4:3 | `alone:case` | 18 |
-| `meet` | `alone` | Nina behind the birch; Busygin through the gate up the path (the cut at 4 s to the head of the path, where the father stands: the son comes up to him) until both are in profile a step apart; the father puts the case behind his back (`hide_back`); Busygin takes the case | `meet:talk`, `meet:ready` | 27 |
+| `march` | `road` | the camera behind their backs (both ≈ 0.3 of the frame); at 3 s the cut to the two, their faces, and back at 11 s (Nina's three lines are said over it); then the mourners turn and go over the crest | `march:end` | 15 |
+| `alone` | `march` | a cut (made ready) up the slope to him (`CAM.case`): the brass turn and go after the mourners over the crest; he puts the clarinet in its case on the snow (`put_down`); a cut (made ready) back to the fence: he stands at the top of the path with the case, the brass gone, the two turned to each other. The pose for the choice: `sarafanov` and `nina` in the middle 4:3 | `alone:case` | 8 |
+| `meet` | `alone` | Nina steps behind the birch, Busygin sets off for the gate; at 2.5 s a cut (made ready) to the head of the path: the son comes up the last steps from below the frame's right (`SPOT.below`), the father putting the case behind his back (`hide_back`, 10 s, on under the talk); both in profile a step apart — `meet:talk` at ≈ 5 s; Busygin takes the case | `meet:talk`, `meet:ready` | 14 |
 | `bottom` | — | at the gate's foot on the road, face to face; with `snowy` 1 snow on his coat (`snow_back`), his back to us he brushes it (reach to his own `#back`) and laughs; he takes the case (`take`), goes off right along the road; Nina walks from the birch along the fence to Busygin (seen from the first seconds) | `bottom:gone` | 13 |
-| `hide` | — | the cut to the slope: the two stand in the lee of the gate's left post, looking up; he comes down the path by himself, onto the road, and stands turned right (`sar_at` ≈ 0.03). Under “Following” | `hide:ready` | 19 |
+| `hide` | — | the cut to the slope: the two stand in the lee of the gate's left post, looking up; he comes down the lower half of the path (from `SPOT.down`, behind the camera) by himself, past the lens, onto the road, and stands turned right (`sar_at` ≈ 0.03). Under “Following” | `hide:ready` | 8 |
 | `club` | — | the cut before the club (`from`: `sar_go` 0, `sar_at` 1, `follow`/`follow_at` where Busygin stands, `hold` 0, `duck` 0); he climbs the steps; with `seen` 1 he turns on the landing and looks down the road for long (`look_back`); the door opens (`club_door` 1: the light `club_spill` falls on the road and on the two), he goes in, it shuts. Both in the middle 4:3 | `club:in` | 12 |
 
-`hide` cannot be 8 s: 25 m of path on foot, in his gait (≈ 19 s). Seconds are measured on the showcase.
+No beat has more than ≈ 10 s of silent action before a moment the game waits for or before a choice: the long ways (the
+brass going off, the son up the path, the father down it) are cut short by cuts made ready ahead (`s.shot`, then
+`s.until(() => shot.ready)`). Seconds by `node tools/beatscheck.mjs hillside` (a node run of every beat on a virtual
+clock: a walk at 1.25 m/s, a motion its recording's length; the moments told and where the people stand in the frame).
 
 ## The mini-games' keys (script.js)
 
@@ -77,11 +82,11 @@ Modules: `cast`, `beats`, `houses`. `scene.json`, the crosses, the grave railing
 
 ```json
 {"beats": {"road": {"after": [], "tells": ["road:fence"], "seconds": 14, "show": false},
- "march": {"after": ["road"], "tells": ["march:end"], "seconds": 24, "show": false},
- "alone": {"after": ["march"], "tells": ["alone:case"], "seconds": 18, "show": false},
- "meet": {"after": ["alone"], "tells": ["meet:talk", "meet:ready"], "seconds": 27, "show": false},
+ "march": {"after": ["road"], "tells": ["march:end"], "seconds": 15, "show": false},
+ "alone": {"after": ["march"], "tells": ["alone:case"], "seconds": 8, "show": false},
+ "meet": {"after": ["alone"], "tells": ["meet:talk", "meet:ready"], "seconds": 14, "show": false},
  "bottom": {"after": [], "tells": ["bottom:gone"], "seconds": 13, "show": false},
- "hide": {"after": [], "tells": ["hide:ready"], "seconds": 19, "show": false},
+ "hide": {"after": [], "tells": ["hide:ready"], "seconds": 8, "show": false},
  "club": {"after": [], "tells": ["club:in"], "seconds": 12, "show": false}},
  "points": ["sarafanov", "nina", "busygin", "gate", "sarafanov#shoulder_l"],
  "offers": ["sarafanov", "nina"],
