@@ -1481,6 +1481,9 @@ function film(scene) {
       s.set('owner_reach', null);
       s.set('guide_a', GUIDE_IN[0]); s.set('guide_d', GUIDE_IN[1]); s.set('guide_here', true); s.set('guide_on', null); s.set('guide_with', ['goad']);
       const guide = s.person('guide');
+      // (placed where he comes from, then off: a walk begun in the very step he is placed counted the jump from off the
+      // scene as his pace — "moved faster than its gait")
+      await s.wait(0.2);
       await guide.walk([GUIDE_AT]);
       guide.turn(toward(GUIDE_AT, KI_SHED));
       s.set('guide_look', 'kiouni#head');
