@@ -427,7 +427,7 @@ const REST = { past: 1, paradiso_state: 'old', poster: 0, full_sign: 0, mother_l
   wall_film: 'none', wall_lit: 0, wall_burn: 0, smoke: 0, fireworks: 0, chalk: 0, mark_chalk: 0, night_kind: 'clear',
   elena_window: 0, viewfinder: 0, pan: 0, elena_x: 1, madman_x: -1, rec: 0, cart: 0, collapse: 0, dust: 0,
   beam_sky: 0, booth_flash: 0, booth_fig: 0, crowd_k: 0, crowd_sit: 0, chair_on: 0, bulbs: 1, flash: 0, rain: 0, wind_k: 0, cold_k: 0,
-  garland: 0, fade: 0, fw: 0, dust_burst: 0, follow: 0, sal_rail: 0, crowd_x: 0, crowd_z: -60, crowd_f: 180, ...cartKeys(0) };
+  garland: 0, fw: 0, dust_burst: 0, follow: 0, sal_rail: 0, crowd_x: 0, crowd_z: -60, crowd_f: 180, ...cartKeys(0) };
 function cartKeys(u) { const c = cartAt(u); return { hearse_a: c[0], hearse_d: c[1], hearse_f: c[2] }; }
 // where the painted crowd stands: [x, z, facing]; it is seen whole or not at all (crowd_k 0 / 1)
 const crowdAt = (x, z, f, k = 1, sit = 0) => ({ crowd_x: x, crowd_z: z, crowd_f: f, crowd_k: k, crowd_sit: sit });
@@ -461,9 +461,8 @@ const B = (name, b) => { film[name] = b; };
 const MARIA_PHONE = { at: [-9, 26.45], turn: 180, wear: 'maria_old', do: 'stand', reach: { r: 'maria#head' }, with: ['phone'], mood: 'sad' };
 const REWIND_END = cam(-3.2, 2.5, -24, 0.4, 5);
 B('now_open', {
-  from: () => ({ ...NOW(0.78), fade: 1, ...cast({ maria: MARIA_PHONE }), maria_here: false, ...CAM.WIDE }),
+  from: () => ({ ...NOW(0.78), ...cast({ maria: MARIA_PHONE }), maria_here: false, ...CAM.WIDE }),
   run: async s => {
-    await s.move('fade', 0, { over: 2, ease: 'out' });
     await s.wait(4);
     s.set('maria_here', true);
     s.move('mother_light', 1, { over: 0.6 });
@@ -743,11 +742,10 @@ B('outside', {
 });
 // II.4 the new sign
 B('new_sign', {
-  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', bulbs: 0, fade: 1, ...cast({
+  from: () => ({ ...PAST_NIGHT(), paradiso_state: 'new', bulbs: 0, ...cast({
     c1: { at: [-3.5, 11.0], turn: 280 }, c2: { at: [-2.2, 12.6], turn: 270 }, c5: { at: [-4.4, 13.8], turn: 250 },
     c6: { at: [-1.6, 9.5], turn: 290 }, c7: { at: [-0.6, 14.2], turn: 260 } }), ...CAM.CROWD }),
   run: async s => {
-    await s.move('fade', 0, { over: 1.5 });
     s.move('bulbs', 1, { over: 5, ease: 'linear' });
     const go = (id, p) => (async () => { await s.wait(s.random() * 1.2); await s.person(id).walk(p); s.person(id).here(false); })();
     go('c1', [[-8.4, 11.6], [-11.4, 12.0]]); go('c2', [[-8.2, 12.6], [-11.4, 12.4]]); go('c5', [[-8.6, 13.0], [-11.4, 12.6]]);
@@ -814,9 +812,8 @@ B('go_alone', {
 const STEPS_WALKERS = () => cast({ c1: { at: [-3.0, 8.0], turn: 70 }, c2: { at: [6.0, 6.0], turn: 300 }, c3: { at: [-6.5, 18.5], turn: 140 }, c4: { at: [3.5, 16.0], turn: 220 } });
 const TOTO_CAM = { at: P.TOTO_STEPS, turn: 200, wear: 'toto_teen', with: ['cam8'], do: loop('film8') };
 B('dusk', {
-  from: () => ({ ...PAST_DUSK(), fade: 1, ...STEPS_WALKERS(), ...cast({ toto: TOTO_CAM }), ...CAM.STEPS }),
+  from: () => ({ ...PAST_DUSK(), ...STEPS_WALKERS(), ...cast({ toto: TOTO_CAM }), ...CAM.STEPS }),
   run: async s => {
-    await s.move('fade', 0, { over: 1.4 });
     for (const [id, p] of [['c1', [[3.5, 12.5]]], ['c2', [[-2.0, 9.5]]], ['c3', [[-1.0, 10.0]]], ['c4', [[-4.0, 12.0]]]]) s.person(id).walk(p);
     await s.wait(0.6); s.tell('dusk:aim');
     await s.wait(5.5);
