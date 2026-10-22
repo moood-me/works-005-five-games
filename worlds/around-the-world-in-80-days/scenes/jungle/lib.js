@@ -1068,8 +1068,9 @@ const STOPPED = 0.476, COMING = 0.382;
 // stay). Returns the walks.
 function march(scene, p) {
   const out = [];
-  // (not come yet: nobody of it in the scene)
-  if (p <= 0) { for (const [id] of COLUMN) scene.set(`${id}_here`, false); return out; }
+  // (not come yet: nobody of it in the scene — but one of it who rides on Kiouni is no longer of it: the widow carried
+  // off, in the howdah)
+  if (p <= 0) { for (const [id] of COLUMN) if (scene.get(`${id}_on`) == null) scene.set(`${id}_here`, false); return out; }
   for (const [id] of COLUMN) {
     const [a, d] = inColumn(p, id), a0 = scene.get(`${id}_a`), d0 = scene.get(`${id}_d`);
     if (typeof a0 !== 'number' || Math.hypot(a - a0, d - d0) < 0.3) continue;
@@ -1355,13 +1356,17 @@ const SALE = () => ({
   ...stand('trader', [-33.4, 9.4], 95, { trader_with: ['goad'], trader_look: null }),
 });
 
-// close on the howdah, riding him beside it: Aouda in the middle seat, her face (the operator does not frame people
-// carried on him: the camera rides him instead
-// carried on him: the camera rides him instead), on the side of him toward the viewer — as he faces `f`
+// close on Aouda in the howdah's middle seat, her face — the operator on her (it stands as high as what carries her:
+// level with the howdah)
+const AOUDA_CLOSE = { ...CAM0, camera_target: 'aouda', camera_shot: 1.2, camera_frame: [0.5, 0.4] };
+// (his near side, as he faces `f`)
 const nearSide = f => { const k = ((f % 360) + 360) % 360; return k > 0 && k < 180 ? -1 : 1; };
-const howdahClose = f => ({ ...CAM0, camera_on: 'kiouni_site', camera_x: 2.7 * nearSide(f), camera_z: 0.1, camera_h: 2.0, camera_yaw: -90 * nearSide(f) });
-// close on the guide on his neck, riding him beside it (the dash: a torch lifted to his face as they go by)
-const guideClose = f => ({ ...CAM0, camera_on: 'kiouni_site', camera_x: 2.8 * nearSide(f), camera_z: -1.5, camera_h: 1.2, camera_yaw: -90 * nearSide(f) });
+// riding beside the howdah on his near side, her face to it: as he runs through the dark (the operator on her, running,
+// stands behind the riders and her face is hidden behind Cromarty's)
+const howdahRide = f => ({ ...CAM0, camera_on: 'kiouni_site', camera_x: 2.7 * nearSide(f), camera_z: 0.1, camera_h: 2.0, camera_yaw: -90 * nearSide(f) });
+// close on the guide on his neck, riding beside him (the dash: a torch lifted to his face as they go by — the operator on
+// him stands behind Fogg in the howdah, the rail across the frame)
+const guideRide = f => ({ ...CAM0, camera_on: 'kiouni_site', camera_x: 2.8 * nearSide(f), camera_z: -1.5, camera_h: 1.2, camera_yaw: -90 * nearSide(f) });
 // a point out to his near side, toward the camera beside the howdah: where she looks, waking
 const out = f => ({ on: 'kiouni_site', at: [4 * nearSide(f), 0.3, 3.6] });
 
@@ -1664,8 +1669,8 @@ function film(scene) {
     // ---- Close: Aouda in the howdah as he runs through the dark, the torchlight behind — her eyes open, afraid.
     aouda_fear: { after: ['charge', 'charge_show'], from: () => ({ ...DASH(), ...riders(FLED, FLED_TURN, FLED_SIT), charge: 1, grab: 1, aouda_wear: null, howdah_lamp: 1,
       ...Object.fromEntries((() => { const [a, d] = dashAt(1, 0, widowAt(0)); return [['kiouni_x', a], ['kiouni_d', d], ['kiouni_facing', 30]]; })()),
-      aouda_mood: 'tired', ...howdahClose(30) }), run: async s => {
-      const close = s.shot({ ...howdahClose(s.get('kiouni_facing')), aouda_mood: 'tired', howdah_lamp: 1 });
+      aouda_mood: 'tired', ...howdahRide(30) }), run: async s => {
+      const close = s.shot({ ...howdahRide(s.get('kiouni_facing')), aouda_mood: 'tired', howdah_lamp: 1 });
       kiouniGo(s, [DASH_AWAY[2], [17, 29]], 1.8);
       await s.until(() => close.ready);
       close.cut();
@@ -1697,8 +1702,8 @@ function film(scene) {
     } },
     // ---- Close: Aouda wakes in the howdah (`aouda_calm` 1 — calmly, and the first face she sees is Fogg's; 0 —
     // frightened, looking round).
-    wake: { after: 'allahabad', from: () => ({ ...KNELT(), ...howdahClose(270) }), run: async s => {
-      const close = s.shot(howdahClose(s.get('kiouni_facing')));
+    wake: { after: 'allahabad', from: () => ({ ...KNELT(), ...AOUDA_CLOSE }), run: async s => {
+      const close = s.shot(AOUDA_CLOSE);
       hold('gift', PARTING());
       hold('sold', SALE());
       await s.wait(0.6);
@@ -1818,6 +1823,6 @@ return {
   plan, trail, columnHead, stream, bank, mixc, rgba, glow, ground, shoreline, ramp,
   TREES, PALMS, BAMBOO, LOW, SHORE, NEAR_TRUNKS, NEAR_LOW, LIANAS, plantLayer,
   trunk, crown, figWood, figCrown, bamboo, palm, frond, fern, broadleaf, liana, stone, towerFace, thatch, mistBank,
-  KI, TRUNK, kiouniPaint, kiouniMove, howdahPaint, KIOUNI_SEATS, seat, guideClose, kneelPose, rideAt, dashAt, widowAt, LANE, SCATTER, toward,
+  KI, TRUNK, kiouniPaint, kiouniMove, howdahPaint, KIOUNI_SEATS, seat, guideRide, kneelPose, rideAt, dashAt, widowAt, LANE, SCATTER, toward,
   COLUMN, CROWD_IDS, STOPPED, crowdDo, march, carry, inColumn, START, film, SHOWCASE, FLAMES, flamePaint, flameMotion,
 };

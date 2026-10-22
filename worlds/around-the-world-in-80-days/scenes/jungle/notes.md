@@ -89,9 +89,13 @@ go down from the seat as the motion rises. Getting up is a cut (people cannot cl
 path of his place and his turn, m/s), kneels by `kneel` (the script keeps `kiouni_el` = −1.15·kneel, `kiouni_tilt` =
 −9·sin(π·kneel) + 6·balk). Passepartout lifted on the trunk (`gift`) stands `on` `kiouni#lift`.
 
-The camera never frames people sat on him: `camera_target` on a carried person frames where their own place keys
-are, not where they ride (the operator flew off to the ground — a request to the engine, in the report). Close shots
-of the howdah ride him instead (`camera_on: 'kiouni_site'`, beside his near side — `howdahClose(facing)`).
+`camera_target` on a person sat on him frames them where they ride (the engine, 2026-10-22: the operator stands as
+high as what carries them). `wake` — Aouda waking in the howdah — is such a shot (`AOUDA_CLOSE`, the operator on her,
+1.2). Where it reads worse the camera still rides him beside his near side (`camera_on: 'kiouni_site'`): `aouda_fear`
+(`howdahRide`; the operator on her as he runs stands behind the riders, her face behind Cromarty's) and the guide's face
+in the torchlight in the dash (`guideRide`; the operator stands behind Fogg, the rail across the frame); the ride
+(`RIDE`) rides him as a travelling shot. `march(0)` (`procession` 0: the column not come) leaves alone whoever of it
+rides on him — the widow carried off in the howdah (MORNING had hidden her, and `wake` had no one to frame).
 
 ## Keys
 

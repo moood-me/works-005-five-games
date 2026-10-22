@@ -116,7 +116,7 @@ let seen = null;
 scene.on('change', 'grab', v => {
   if (!(v >= 1)) return;
   seen?.cancel();
-  seen = scene.shot(L.guideClose(30));
+  seen = scene.shot(L.guideRide(30));
   scene.set('aouda_reach', null);
   scene.set('aouda_wear', null);
   scene.set('aouda_on', L.seat('mid'));
@@ -142,7 +142,7 @@ scene.on('change', 'guide_seen', v => {
   const close = seen;
   seen = null;
   if (close?.ready) close.cut();
-  else { close?.cancel(); scene.cut(L.guideClose(30)); }
+  else { close?.cancel(); scene.cut(L.guideRide(30)); }
 });
 
 scene.kit.beats.play(scene, L.film(scene));
