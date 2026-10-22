@@ -3,7 +3,7 @@
 // ends: whatever it still calls returns a promise that never settles. What is this game's own: the notebook and the
 // bag instead of scales, the stamps of who remembers, the medallion of whose step it is, the lines written in the
 // notebook, the letter.
-//   g.state — what the play carries: {hours, money, shown, marks, choices, hands, lines} (game.js); what follows from
+//   g.state — what the play carries: {hours, money, shown, marks, choices, hands, lines, log} (game.js); what follows from
 //     it: facts(g.state)
 //   g.signal — aborts when the step is left: stop what it started (a sound, a timer) on it
 //   g.sound — the game's sounds (sound.js)
@@ -12,8 +12,9 @@
 //   g.scene(folder, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
 //     under it what the play has decided, as this scene's keys (carry). It plays no beat until one is named: the
 //     step's first beat goes in `state` ({beat: name}) — the scene opens playing it — and g.beat(name) then takes it
-//     up (waits for its end). Always opened anew, even if it is the one on the screen. cut: the scene before stays
-//     till this one is drawn, then gives way in one frame; else the page fades (time has passed)
+//     up (waits for its end). The one on the screen already is not opened anew: its keys are set and the beat cut to.
+//     cut: the scene before stays till this one is drawn, then gives way in one frame; else the page fades (time has
+//     passed)
 //   g.set(key, value, seconds) / g.get(key) — the shown scene's state (seconds: it goes there smoothly)
 //   g.wait(ms) — time of the game's own (a pause); never to wait for something the scene does — that is an event:
 //   g.told(text, ms) — until the scene tells `text` (→ true), or ms pass (→ false)
@@ -35,7 +36,8 @@
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun, left when it ends
 //   g.hint(text, afterMs) → off() — one line low in the middle (not in a minigame)
 //   g.hours(delta, line) — the time in hand moves by delta hours: the old figure struck out in the notebook, the new
-//     written; `line` — what the notebook says beside it, if anything ('The Mongolia: two days early')
+//     written, and an entry of it — the change and `line`, what it was for ('The Mongolia: two days early') — kept with
+//     the play (state.log, the last LOG): a step played again writes its own, not one more
 //   g.money(delta) — the carpet-bag moves by delta £: the notes fly
 //   g.gauge('hours' | 'money') — the notebook / the bag shown from now on; its one line of what it means said once
 //   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… will remember
@@ -150,6 +152,7 @@ export function hoursText(h) {
 // the bag's sum, its thousands apart as the play's language writes them (a space — a narrow one)
 export const moneyText = m => tr('£{sum}', { sum: Math.round(m).toLocaleString(tr.lang).replace(/\s/g, ' ') });
 
+const LOG = 3; // the notebook's entries kept
 const BEAT = 180000; // a beat longer than this has not ended
 const UNKNOWN = 'unknown'; // a beat the scene has not
 const SKIPPABLE = 20000; // ms in a minigame of a step not seen yet before the ⏭ may skip it
@@ -251,7 +254,12 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         if (fast) await alive(land());
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: ending(st.beat) } : null;
         hub.withdraw();
-        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
+        // (the scene on the screen already: not opened again — its making ready would be a wait with nothing to see —,
+        // its keys set and the beat cut to)
+        if (b.spec === spec) {
+          for (const [key, value] of Object.entries(st)) if (key !== 'beat') b.set(key, value);
+          if (opening) { b.set('beat', null); b.set('beat', opening.name); }
+        } else await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       } finally { showing = false; }
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),
@@ -343,7 +351,8 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (gone() || !delta) return;
       const was = state.hours;
       state.hours = Math.round((state.hours + delta) * 2) / 2;
-      if (!unseen()) view.hours(state, was, line);
+      state.log = [...(state.log ?? []), { d: state.hours - was, line: line ?? '' }].slice(-LOG);
+      if (!unseen()) view.hours(state, was);
     },
     money(delta) {
       if (gone() || !delta) return;
@@ -417,7 +426,9 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //   hub.offer({ref: options}, {show}) → the action once the player has chosen it (what was offered before is
 //     dropped): a plain choice of the language of mini-games — a mark on each point; a touch opens its options as
 //     petals, one too (what is chosen is seen in words first), a petal pressed is chosen; one who touches no mark for
-//     `show` s (SHOW) is shown how: the ghost finger on each in turn. None of its points to be seen anywhere for
+//     `show` s (SHOW) is shown how: the ghost finger on each in turn. Under each mark, from the start, the words of
+//     its options (the game's own label over the scene, following its point): what each choice means is read before
+//     a touch. None of its points to be seen anywhere for
 //     NOWHERE s (the scene lacks them, or draws nothing there) — an error: the step breaks (game.js passes it, said),
 //     not a play standing still with nothing to press
 //   hub.ask(at, options) → the action chosen, or null: a mark of the plain choice born open where the game's own
@@ -426,6 +437,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //   hub.withdraw() — nothing offered; hub.told(text | [texts], ms) → true once the scene tells it (of several: the one
 //     told first), false if ms pass
 const SHOW = 8; // s: nothing pressed so long — the ghost shows how
+const LABEL = 34; // px: a mark's words this far under its point (below the ring)
 const NOWHERE = 6; // s: a choice none of whose points has been seen so long is broken
 
 export function listen(b) {
@@ -449,6 +461,23 @@ export function listen(b) {
       // (the play's clock: it stands with the pause)
       const ghost = setTimeout(() => mg.show({ gestures: presses }), show * 1000);
       const marks = [];
+      // (each mark's words under it, as long as the choice is offered)
+      const labels = refs.map(ref => {
+        const el = document.createElement('p');
+        el.className = 'card choice-label';
+        el.textContent = offers[ref].map(o => o.label).join(' · ');
+        el.hidden = true;
+        b.layer.append(el);
+        return { el, ref };
+      });
+      const placing = b.onFrame(() => {
+        for (const { el, ref } of labels) {
+          const p = b.where(ref);
+          el.hidden = !p?.seen;
+          if (p?.seen) el.style.transform = `translate(${Math.round(p.x)}px, ${Math.round(p.y + LABEL)}px) translate(-50%, 0)`;
+        }
+      });
+      mg.on('end', () => { placing(); for (const { el } of labels) el.remove(); });
       let looked = 0;
       mg.on('end', () => { clearTimeout(ghost); clearInterval(looking); });
       // (looked at twice a second: a point seen even once — the choice stands)

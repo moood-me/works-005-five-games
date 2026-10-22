@@ -12,7 +12,7 @@
 //   How it is for him: the world swims and doubles, his legs will not obey — duty through a fog.
 //   What the player feels: keeping him conscious and leading him, against all the odds.
 //   → { told: whether the news got to Fogg (the boatman pushed off) }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const BOATMAN = 0.97; // pp_walk_at: he is at the boatman (at the steps)
 const AHEAD = 0.04; // pp_walk: how far ahead he is sent while led
@@ -35,9 +35,10 @@ export default {
     send('message', 0);
     send('pp_stumble', 0);
     send('pp_sway', 0);
-    let daze = clamp(+g.get('daze') || 0.3), start = clamp(+g.get('pp_walk_at') || 0), stumbles = 0, stillTill = -1, stumbleOff = -1, tilted = false;
+    let daze = 0.3, start = clamp(+g.get('pp_walk_at') || 0), stumbles = 0, stillTill = -1, stumbleOff = -1, tilted = false;
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
-    b.minigame.tricks.teach(mg, [lead], { id: 'stay-awake' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [lead]))) return this.skipped;
     const t0 = mg.t;
     const end = await until(mg, ({ t, dt }) => {
       const now = t - t0, s = lead.state;

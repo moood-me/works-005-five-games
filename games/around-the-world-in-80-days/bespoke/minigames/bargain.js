@@ -12,7 +12,7 @@
 //   opts: { onRefuse(minutes) — after each refusal: how many minutes are gone in all (the chapter keeps the notebook),
 //     not waited for }
 //   → { price: what it was bought for (£), minutes: how many minutes went on the refusals }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const START = 1000, TOP = 2000, MIN = 1100; // £: the roll at the start; the thickest; the lowest threshold
 const STEP = 100; // £: the price's step and the least rise
@@ -35,7 +35,8 @@ export default {
     const pack = mg.mark({ at: 'fogg#hands', kind: 'groove' });
     // (the fill is the roll: full — TOP; let go — it stays)
     const hold = mg.hold({ on: null, show: pack, seconds: (TOP - START) / RATE, drain: 0 });
-    b.minigame.tricks.teach(mg, [hold], { id: 'bargain' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [hold]))) return this.skipped;
     send('offer', 0);
     send('owner_back', 0);
     const priceOf = fill => START + STEP * Math.floor((fill * (TOP - START)) / STEP + 1e-6);

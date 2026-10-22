@@ -67,7 +67,7 @@ const PLAYS = [
   { label: tr('alone'), choices: { sati: 'road', kiouni: 'sell', answer: 'spare', aouda: 'holland', boat: 'leave', punch: 'punch', bridge: 'run', fort: 'pay', henrietta: 'sails', liverpool: 'hit' } },
 ];
 const fresh = () => ({
-  chapter: 0, step: 0, hours: START.hours, money: START.money, shown: {}, marks: {}, choices: {}, hands: {}, lines: [],
+  chapter: 0, step: 0, hours: START.hours, money: START.money, shown: {}, marks: {}, choices: {}, hands: {}, lines: [], log: [],
 });
 
 export default async function (b) {
@@ -128,7 +128,8 @@ export default async function (b) {
     straight = false;
     wake(); // (a touch: the page may be heard from now on)
     if (to === 'drop') { replay = null; continue; }
-    if (to === 'keep') { await keepReplay(); if (kept.chapter === END) ended(); continue; }
+    // (a replay kept that ends the play: the map goes the whole way round too)
+    if (to === 'keep') { await keepReplay(); if (kept.chapter === END) { ended(); after = { round: true }; } continue; }
     if (to === 'main' || to === 'back') replay = null; // (“Back to the main run”: the main run goes on from where it stands)
     else if (to !== 'replay') replay = replayFrom(to);
     if ((await play()) === 'away') continue;
@@ -209,7 +210,7 @@ export default async function (b) {
   // What brought the play here: a chapter played through (reveal: its rows written in — its forks offered once they
   // have —, the red line drawn on through it, then the view goes on to where the play is now). → what was picked: an
   // option's id, or {jump} — the author's map
-  async function map({ reveal = null }) {
+  async function map({ reveal = null, round: ended = false }) {
     b.menu(null);
     // (nothing of the chapter said or shown stays over the map)
     b.hush();
@@ -221,7 +222,7 @@ export default async function (b) {
     const drawing = reveal != null && !replay;
     // (the play just played through: once its finale is written, the view goes the whole way round from London, the day
     // won notched at the 180th meridian as it passes — design.md «Ход игры», the epilogue)
-    const round = drawing && reveal === EPILOGUE;
+    const round = ended || (drawing && reveal === EPILOGUE);
     await b.show(SCENES.map, { state: { shown: reveal ?? here, route: drawing ? CHAPTERS[reveal].route[0] : routeOf(kept), dateline: kept.chapter >= END && !round ? 1 : 0 }, captions: false });
     if (drawing) b.set('route', CHAPTERS[reveal].route[1], REVEAL);
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: author ? here : null });
@@ -247,7 +248,7 @@ export default async function (b) {
         await new Promise(ok => setTimeout(ok, TOUR * 1000));
       }
     };
-    const growing = grown ? null : setTimeout(async () => { grown = true; offer(); if (round) await tour(); if (!left) go(here); }, REVEAL * 1000);
+    const growing = grown && !round ? null : setTimeout(async () => { grown = true; offer(); if (round) await tour(); if (!left) go(here); }, (grown ? 1 : REVEAL) * 1000);
     try {
       // (a replay played to its end: its knot's mark opens by itself — keep it or not, the question the map asks; the
       // one mark that opens untouched)
@@ -375,7 +376,7 @@ function load(saved) {
 // a run's own fields (the play's position and what it carries), apart from what the play keeps of its chapters (a
 // minigame gone to by the author's map: `play`)
 const run = p => structuredClone({ chapter: p.chapter, step: p.step, hours: p.hours, money: p.money, shown: p.shown, marks: p.marks,
-  choices: p.choices, hands: p.hands, lines: p.lines });
+  choices: p.choices, hands: p.hands, lines: p.lines, log: p.log ?? [] });
 // how far the red line goes on the map for a main run: to where its chapter begins; the play through — all the way
 const routeOf = p => (p.chapter >= END ? 1 : CHAPTERS[p.chapter].route[0]);
 const pick = (o, keep) => Object.fromEntries(Object.entries(o).filter(([j]) => keep(Number(j))));

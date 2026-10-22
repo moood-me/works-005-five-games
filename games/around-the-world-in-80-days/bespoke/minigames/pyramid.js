@@ -12,7 +12,7 @@
 //   How it is for him: funny and agonising: loyalty to his fellows against his master in the house.
 //   What the player feels: keeping the balance — and deciding oneself what matters more.
 //   → { choice: 'hold' (held to the end) | 'drop' (let go) }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const CLIMB = 0.05, LEANING = 0.02; // pyramid a second while level; while held but leaning
 const ZONE = 0.5, EDGE = 0.95; // the zone's width; the lean — a mistake
@@ -33,7 +33,8 @@ export default {
     const send = keys(g);
     send('pyramid', 0); send('tilt', 0); send('fogg_present', 0);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: 0 });
-    b.minigame.tricks.teach(mg, [lead], { id: 'pyramid' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [lead]))) return this.skipped;
     let h = 0, wobbling = false, slips = 0, fogg = false, seated = false, offSince = null, choice = null, master = null;
     const t0 = mg.t;
     const done = await until(mg, ({ t, dt }) => {

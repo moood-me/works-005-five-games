@@ -12,7 +12,7 @@
 //   How it is for him: daring held down to a walk; his heart pounds, his legs ask to run.
 //   What the player feels: holding oneself back — not to break into a run and not to linger.
 //   → { hours: 0…−2 — an hour for each alarm (the chase) }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const PATH = 22; // s: the way at a steady step
 const SPEED = 0.7; // the step ±1 — the way's speed × (1 ± SPEED)
@@ -34,7 +34,8 @@ export default {
     const mg = g.minigame({ phrase: PHRASE });
     const send = keys(g);
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, steer: 'rate', release: 'stay', push: nerves(0) });
-    b.minigame.tricks.teach(mg, [lead], { id: 'like-the-dead' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [lead]))) return this.skipped;
     let walk = clamp(+g.get('walk') || 0), heads = 0, smoke = SMOKE0, alarms = 0, upTill = -1, smokeAlarm = false, phrase = PHRASE;
     const put = p => { if (p !== phrase) { phrase = p; mg.plate.set({ phrase: p }); } };
     send('heads', 0);

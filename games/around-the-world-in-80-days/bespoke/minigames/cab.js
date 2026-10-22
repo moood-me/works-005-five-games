@@ -10,7 +10,7 @@
 //   How it is for him: the last minutes; fog, lamps, the beat of hooves and of his heart.
 //   What the player feels: driving on — in time with the horse, without faltering, while the clock goes.
 //   → { late: whether he is late }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const BPM = 100; // the beat of the hooves
 const START = 0.3, HIT = 0.12, MISS = 0.1, LAPSE = 0.04; // cab_pace: at the start; for a beat in time; off; a beat missed
@@ -29,7 +29,8 @@ export default {
     const send = keys(g);
     const horse = mg.mark({ at: 'cab#horse', kind: 'ring' });
     const hooves = mg.rhythm({ on: null, show: [horse], bpm: BPM });
-    b.minigame.tricks.teach(mg, [hooves], { id: 'cab' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [hooves]))) return this.skipped;
     const time = mg.layer('time');
     let pace = START, to = clamp(+g.get('cab_to') || 0), tapped = true, last = null;
     hooves.on('tap', ({ hit }) => {

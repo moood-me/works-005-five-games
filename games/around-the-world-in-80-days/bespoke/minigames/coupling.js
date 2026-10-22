@@ -38,12 +38,13 @@ export default {
     mg.plate.set({ notches: Array.from({ length: STEPS - 1 }, (_, i) => (i + 1) / STEPS) });
     send('pp_car', 0); send('uncouple', 0);
     let car = 0, misses = 0, period = GUESS, lastPh = null;
-    const t0 = mg.t;
+    let t0 = null; // (the chains timed from the player's first touch)
+    const touched = mg.on('down', () => { t0 ??= mg.t; });
     // ── the chains: the beats — when the cars come together ──
     for (let n = 1; n <= CHAINS; n++) {
       const chain = mg.mark({ at: `chain#c${n}`, kind: 'ring' });
       const grab = mg.rhythm({ on: chain, times: [], window: WINDOW });
-      if (n === 1) b.minigame.tricks.teach(mg, [grab], { id: 'coupling' });
+      b.minigame.tricks.teach(mg, [grab]);
       // the beats given to the rhythm: the last and the next (its clock); which of them a hand has taken already
       let times = [], hits = 0;
       const taken = new Set();
@@ -79,11 +80,13 @@ export default {
       mg.snap({ at: chain });
       chain.remove();
     }
+    touched();
+    const seconds = mg.t - (t0 ?? mg.t);
     // ── the coupling pin ──
     mg.plate.set({ phrase: tr('Passepartout is at the engine. The coupling pin holds the cars') });
     const pin = mg.mark({ at: 'coupling#pin', kind: 'dash' });
     const pull = mg.pull({ on: pin, tear: TEAR });
-    b.minigame.tricks.teach(mg, [pull], { id: 'coupling:pin' });
+    b.minigame.tricks.teach(mg, [pull]);
     const off = mg.on('frame', () => {
       send('uncouple', clamp(pull.state.u * 0.9));
       mg.plate.set({ fill: (2 * CHAINS + pull.state.u) / STEPS, glow: pull.state.held ? 'good' : 'idle' });
@@ -93,7 +96,6 @@ export default {
     if (!torn) return this.skipped;
     send('uncouple', 1);
     mg.snap({ at: pin });
-    const seconds = mg.t - t0;
     await mg.end({ as: misses ? 'flawed' : 'clean' });
     return { hours: seconds <= QUICK ? 0 : seconds <= LATE ? -1 : -2 };
   },

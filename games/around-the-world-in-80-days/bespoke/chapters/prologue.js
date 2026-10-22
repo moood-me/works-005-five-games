@@ -59,9 +59,12 @@ export default {
     async g => {
       g.hero('fogg');
       g.beds({ fog: 0.5, clock: 0.25 }, 2);
-      const door = g.told('news:at-door');
+      const handle = g.told('home:door'), door = g.told('news:at-door');
       await g.scene(SCENES.row, { beat: 'home' });
-      await g.beat('home');
+      const home = g.beat('home');
+      await handle;
+      await g.say('narrator', 'At ten minutes to eight Phileas Fogg opened the door of his house in Saville Row');
+      await home;
       const news = g.beat('news');
       await door;
       await g.say('fogg', 'Passepartout, we are going round the world. In ten minutes');
@@ -74,12 +77,14 @@ export default {
       const r = await g.play(tenMinutes);
       g.mark('gas', !!r?.gas);
       g.hero('fogg');
+      // (the carpet-bag given on the step, as the beat comes to it)
+      const bag = g.told('out:bag'), away = g.told('out:away');
+      const out = g.beat('out');
+      await bag;
       await g.say('fogg', 'The carpet-bag. There are twenty thousand in it. Take good care of it');
       g.sound.notes();
       g.gauge('money');
       if (r?.missing) g.money(-50 * r.missing);
-      const away = g.told('out:away');
-      const out = g.beat('out');
       await away;
       await out;
     },

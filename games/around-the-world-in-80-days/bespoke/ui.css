@@ -32,7 +32,7 @@
   background: repeating-linear-gradient(#f4ebd4 0 21px, rgba(80, 110, 150, 0.35) 21px 22px) #f4ebd4;
   border-left: 2px solid rgba(163, 39, 29, 0.55); border-radius: 1px 3px 3px 1px; }
 #layer .book .head { margin: 0; font: italic 14px/22px var(--title); opacity: 0.75; }
-#layer .book .was { margin: 0; height: 0; font: 15px/18px var(--title); opacity: 0; }
+#layer .book .was { margin: 0; height: 0; overflow: hidden; font: 15px/18px var(--title); opacity: 0; }
 #layer .book .was.struck { animation: was-struck 5s ease forwards; text-decoration: line-through var(--red) 2px; }
 @keyframes was-struck { 0% { opacity: 0.85; height: 18px; } 75% { opacity: 0.6; height: 18px; } 100% { opacity: 0; height: 0; } }
 #layer .book .now { margin: 0; font: 600 22px/26px var(--title); }
@@ -40,9 +40,9 @@
 @keyframes ink-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
 #layer .book .log p { margin: 0; font: italic 13px/17px var(--title); opacity: 0.8; }
 #layer .book .log p.fresh { animation: ink-in 1.4s ease; }
-#layer .book .lines p { margin: 2px 0 0; font: 14px/18px var(--title); }
-#layer .book .lines .hand-aouda { font-style: italic; color: #1f3a6e; rotate: -3deg; }
-#layer .book .lines .hand-pp { font: 600 15px/18px "Segoe Print", "Comic Sans MS", cursive; color: #2b2b2b; rotate: 2deg; }
+#layer .book .lines p { margin: 5px 0 0; font: 14px/19px var(--title); }
+#layer .book .lines .hand-aouda { font-style: italic; color: #1f3a6e; rotate: -1.5deg; }
+#layer .book .lines .hand-pp { font: 600 15px/21px "Segoe Print", "Comic Sans MS", cursive; color: #2b2b2b; rotate: 1deg; }
 #layer .book.asked { pointer-events: auto; cursor: pointer; animation: asked 1.6s ease-in-out infinite; }
 @keyframes asked { 50% { filter: drop-shadow(0 0 14px rgba(255, 236, 190, 0.95)); scale: 1.06; } }
 #layer .bag { position: absolute; right: 14px; bottom: 64px; width: 150px; height: 64px; opacity: 0; transition: opacity 1.6s ease; }
@@ -85,6 +85,11 @@
 @keyframes stamp-in { from { opacity: 0; scale: 1.6; } }
 #layer .slip.rule { font-size: clamp(17px, 4.2vh, 21px); line-height: 1.22; font-style: italic; }
 @keyframes slip-in { from { opacity: 0; } }
+
+/* the words of a choice's options under its mark (story.js hub.offer), following its point */
+#layer .choice-label { position: absolute; left: 0; top: 0; margin: 0; padding: 3px 12px 4px; max-width: 260px; text-align: center;
+  font: 600 17px/1.2 var(--title); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); pointer-events: none; }
+#layer .choice-label[hidden] { display: none; }
 
 /* the hint: one line low in the middle */
 #layer .hint { position: absolute; bottom: 66px; left: 50%; translate: -50% 0; margin: 0; padding: 6px 20px 7px; max-width: 80vw; text-wrap: balance;

@@ -12,7 +12,7 @@
 //   How it is for them: heat, swaying; the elephant is alive and wilful, you cannot wind him up like an engine.
 //   What the player feels: patience with a living thing — to go in step with him; drive him, and he stops.
 //   → { hours: how many hours gained (+) or lost (−) against the timetable, −2…+2 }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const BPM = 48, BPM_GOAD = 64; // Kiouni's step; under the goad
 const SLOW = 0.3, STEADY = 0.6, START = 0.4; // pace: the slowest step; steady, on the beat; at the start
@@ -43,7 +43,8 @@ export default {
     // the goad
     const hook = mg.mark({ at: 'guide#hands', kind: 'groove', quiet: true, danger: 0 });
     const goad = mg.hold({ on: hook, seconds: 0.3, drain: 0.3 });
-    b.minigame.tricks.teach(mg, [step], { id: 'elephant' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [step]))) return this.skipped;
     let steady = START, pace = START, ride = 0, anger = 0, balked = false, balks = 0, tapped = true, bpm = BPM;
     let sugar = null, sugarPress = null, sugarOff = -1, t0 = mg.t;
     step.on('tap', ({ hit }) => {
@@ -68,7 +69,7 @@ export default {
       if (!(await until(mg, ({ t }) => t - t1 >= STAND))) return;
       sugar = mg.mark({ at: 'kiouni#trunk', kind: 'ring' });
       sugarPress = mg.press({ on: sugar });
-      if (balks === 1) b.minigame.tricks.teach(mg, [sugarPress], { id: 'elephant:sugar' });
+      b.minigame.tricks.teach(mg, [sugarPress]);
       sugarPress.on('press', () => {
         send('sugar', 1);
         mg.snap({ at: sugar });

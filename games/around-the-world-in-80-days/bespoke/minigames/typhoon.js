@@ -10,7 +10,7 @@
 //   How it is for him: holding on; Fogg's cold self-command amid the howling and the foam.
 //   What the player feels: holding on — meeting each wave bow on, without a jerk.
 //   → { hours: 0…−3 }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const WAVES = 8, PERIOD = 5; // waves; s a wave
 const CREST = 0.5, TROUGH = 0.9; // wave: the check on the crest; in the trough
@@ -32,7 +32,8 @@ export default {
     // where each wave comes from: now the left, now the right, by how much
     const dirs = Array.from({ length: WAVES }, (_, k) => (k % 2 ? 1 : -1) * (0.45 + 0.25 * Math.random()));
     const lead = mg.lead({ zone: { at: 0, width: ZONE }, release: 'stay' });
-    b.minigame.tricks.teach(mg, [lead], { id: 'typhoon' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [lead]))) return this.skipped;
     let misses = 0, k = 0, checked = { crest: -1, trough: -1 }, splashOff = -1, said = null;
     const PORT = tr('A crest comes down on the port bow'), STARBOARD = tr('A crest comes down on the starboard bow'), TROUGH = tr('The crest has passed. The trough, and the bow comes back');
     send('green_water', 0);

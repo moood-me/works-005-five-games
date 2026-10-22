@@ -13,7 +13,7 @@
 //   opts: { alone: true — Passepartout alone with Mudge, catching up with the train (the plate's phrase) }
 //   → { hours: how many hours won back (+10…+22), caught: in time for the train at Omaha (hours no fewer than
 //     CAUGHT) }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const FAST = 30, SLOW = 60; // s: the way at full speed; at the slackest
 const HOURS = [10, 22]; // hours: in SLOW s; in FAST s
@@ -48,7 +48,8 @@ export default {
     const want = w => 0.1 + 0.7 * Math.abs(w);
     const SLACK = -0.8; // a ridge: the sheet let go
     const lead = mg.lead({ zone: { at: want(winds[0]), width: ZONE }, release: 'stay' });
-    b.minigame.tricks.teach(mg, [lead], { id: 'sail' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [lead]))) return this.skipped;
     let speed = 0.3, sledge = 0, wolves = 0, hits = 0, stopTill = -1, hitRidge = -1;
     send('sledge', 0); send('drift', 0); send('wolves', 0);
     const t0 = mg.t;

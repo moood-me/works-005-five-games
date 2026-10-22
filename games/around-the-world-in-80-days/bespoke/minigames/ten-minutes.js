@@ -12,7 +12,7 @@
 //   What the player feels: a merry bustle — the end of a quiet life; the gas — a trifle, easily forgotten.
 //   → { missing: how many things of the list are not packed (0…4; each — the carpet-bag −50), gas: whether the gas burns
 //     in the attic }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 // a window → what the list has there (how many), the floor
 const ROOMS = {
@@ -59,7 +59,6 @@ export default {
     }
     rings.attic = mg.mark({ at: ATTIC.at, kind: 'ring', quiet: true });
     mg.press({ on: rings.attic }).on('press', () => go('attic'));
-    b.minigame.tricks.teach(mg, presses.slice(0, 1), { id: 'ten-minutes' });
     // where he is: floor — the last floor he ran to; dest — where he runs to or where he is; there at arrive; want — how
     // many more presses in this room wait; next — when he can throw the next thing
     let floor = 0, dest = null, here = null, arrive = 0, want = 0, next = 0, flyOff = -1, gasAt = -1, gasOff = false, packed = 0, t0 = mg.t, now = 0;
@@ -77,6 +76,9 @@ export default {
       here = null;
       send('pp_in', 'none');
     }
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, presses.slice(0, 1)))) return this.skipped;
+    t0 = mg.t;
     const done = await until(mg, ({ t }) => {
       now = t - t0;
       // he has run there: light in the window, he is there

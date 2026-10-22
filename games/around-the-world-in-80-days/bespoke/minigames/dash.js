@@ -12,7 +12,7 @@
 //   How it is for him: a desperate speed, shouts, fire right at the eyes.
 //   What the player feels: a mad dash — and one instant when one must snatch.
 //   → { hours: 0…−2 — the longer the struggle at the widow, the further the chase }
-import { until, once, keys } from '../hands.js';
+import { until, once, shown, keys } from '../hands.js';
 
 const LITTER = 0.5; // charge: Kiouni at the widow
 const FAST = 0.1, SLOW = 0.035; // charge a second: in the zone; in the crowd
@@ -39,7 +39,8 @@ export default {
     send('charge', 0); send('scatter', 0); send('grab', 0); send('guide_seen', 0);
     // ── phase 1: through the torches to the widow ──
     const lead = mg.lead({ zone: { at: litter(0), width: ZONE }, release: 'stay' });
-    b.minigame.tricks.teach(mg, [lead], { id: 'dash' });
+    // (the ghost shows it; the time runs from the player's first touch)
+    if (!(await shown(b, mg, [lead]))) return this.skipped;
     let charge = 0;
     const t0 = mg.t;
     const there = await until(mg, ({ t, dt }) => {
@@ -54,18 +55,18 @@ export default {
       return charge >= LITTER;
     });
     if (!there) return this.skipped;
+    const seconds = mg.t - t0; // (the chase: how long to the widow — the snatch is not timed)
     lead.remove();
     send('scatter', 1);
     // ── phase 2: snatch the widow ──
     mg.plate.set({ phrase: tr('The priests have scattered. The widow stands alone on the trail') });
     const hands = mg.mark({ at: 'aouda#hands', kind: 'dash' });
     const pull = mg.pull({ on: hands, tear: TEAR });
-    b.minigame.tricks.teach(mg, [pull], { id: 'dash:grab' });
+    b.minigame.tricks.teach(mg, [pull]);
     const off = mg.on('frame', () => mg.plate.set({ fill: 0.6 + 0.2 * pull.state.u, glow: pull.state.held ? 'good' : 'idle' }));
     const torn = await once(mg, pull, 'tear');
     off();
     if (!torn) return this.skipped;
-    const seconds = mg.t - t0;
     send('grab', 1);
     mg.snap({ at: hands });
     hands.remove();

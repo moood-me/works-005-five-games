@@ -3,8 +3,8 @@
 // figures; the stamps of a consul's visa say who remembers.
 //   view.gauges({hours, money, shown, lines} | null) — the notebook (Time in hand) low on the left, the bag (the
 //     carpet-bag) low on the right, each once the player has met it; null — none (the map, «The route»)
-//   view.hours(state, was, line) — the old figure struck out, the new one written, and its entry under it: the
-//     change and `line`, what it was for
+//   view.hours(state, was) — the old figure struck out, the new one written, and the entries under it (state.log: the
+//     change and what it was for), the newest inked in
 //   view.money(state, was) — the sum changes; spent: notes fly from the bag
 //   view.hero('fogg' | 'pp') — the medallion of his face, a moment, high on the left
 //   view.giveBook({signal}) → once the player has touched the notebook (it glows till then)
@@ -54,7 +54,7 @@ export function ui(layer) {
       book.show(state?.shown.hours, state);
       bag.show(state?.shown.money, state);
     },
-    hours(state, was, line) { book.change(state, was, line); },
+    hours(state, was) { book.change(state, was); },
     money(state, was) { bag.change(state, was); },
     hero(who) {
       medal.className = `medal ${who}`;
@@ -143,9 +143,9 @@ export function ui(layer) {
 
 // Fogg's notebook, low on the left: a narrow ruled page, «Time in hand» and the figure in an even hand; under it the
 // last entries, each its change and what it was for (`+2 d · The Mongolia: two days early`); a change strikes the old
-// figure out above the new one and writes its entry — changes coming close together are written one after another,
-// each given its time to be read; the lines others wrote below — Aouda's slanted, Passepartout's a scrawl
-const ENTRIES = 3, READ = 3500; // the entries the page shows; ms each new one is given before the next is written
+// figure out above the new one and writes its entry (the play keeps them: state.log) — changes coming close together
+// are written one after another, each given its time to be read; the lines others wrote below — Aouda's slanted, Passepartout's a scrawl
+const READ = 3500; // ms each new entry is given before the next is written
 function bookGauge(layer) {
   const box = el('div', 'book', layer);
   const page = el('div', 'page', box);
@@ -155,6 +155,8 @@ function bookGauge(layer) {
   const queue = [];
   let writing = false;
   const hand = state => lines.replaceChildren(...(state.lines ?? []).map(l => Object.assign(el('p', `hand-${l.hand}`), { textContent: BOOK[l.line] })));
+  const entries = (list, fresh) => log.replaceChildren(...list.map((e, i) => Object.assign(el('p', i === list.length - 1 && fresh ? 'fresh' : ''),
+    { textContent: e.line ? `${hoursText(e.d)} · ${e.line}` : hoursText(e.d) })));
   // the next change in the queue written: struck, the new figure, its entry
   const next = () => {
     const c = queue.shift();
@@ -168,21 +170,19 @@ function bookGauge(layer) {
     now.classList.remove('fresh');
     void now.offsetWidth;
     now.classList.add('fresh');
-    const entry = el('p', 'entry fresh', log);
-    entry.textContent = c.line ? `${hoursText(c.now - c.old)} · ${c.line}` : hoursText(c.now - c.old);
-    while (log.childElementCount > ENTRIES) log.firstElementChild.remove();
+    entries(c.log, true);
     setTimeout(next, READ);
   };
   return {
     show(met, state) {
       box.classList.toggle('on', !!met);
       if (!met) return;
-      if (!writing) now.textContent = hoursText(state.hours);
+      if (!writing) { now.textContent = hoursText(state.hours); entries(state.log ?? [], false); }
       hand(state);
     },
-    change(state, old, line) {
+    change(state, old) {
       if (!state.shown.hours) return;
-      queue.push({ old, now: state.hours, line });
+      queue.push({ old, now: state.hours, log: [...(state.log ?? [])] });
       hand(state);
       if (!writing) next();
     },

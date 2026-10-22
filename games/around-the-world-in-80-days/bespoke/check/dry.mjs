@@ -20,6 +20,7 @@ function emitter() {
   };
 }
 
+const taps = { n: 0 }; // (the bots' taps, counted: a first touch)
 function fakeLanguage(log) {
   const ev = emitter();
   const mg = { t: 0, gestures: [], marks: [], errors: [], ended: null, phrases: [], plate: null };
@@ -86,6 +87,7 @@ function fakeLanguage(log) {
   };
   // the player's hands
   mg.tap = h => {
+    taps.n++;
     if (h.kind === 'press') { h.state.count++; h.emit('press', { count: h.state.count }); }
     if (h.kind === 'rhythm') {
       const o = h.o, s = h.state, beatAt = h.beatAt ?? (() => Infinity);
@@ -97,6 +99,8 @@ function fakeLanguage(log) {
     }
   };
   mg.skip = () => ev.emit('skip');
+  // (a finger's first touch: the mini-game hears 'down' — what shown() waits for)
+  mg.touch = () => ev.emit('down', {});
   mg.left = () => left;
   return mg;
 }
@@ -224,12 +228,13 @@ async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
   Promise.race([mod.run(g, b, { who: variant === 'fogg' ? 'fogg' : 'pp', money, alone: variant === 'alone', onRefuse() {} }, abort.signal), skipped])
     .then(r => { result = r; done = true; }, e => { err = e; done = true; });
   const mem = {};
-  let t = 0;
+  let t = 0, touched = false;
   while (!done && t < 240) {
     await new Promise(r => setImmediate(r));
     if (done) break;
     if (skipAt != null && t >= skipAt) { mg.skip(); skipAt = null; continue; }
     BOTS[name](mg, values, t, variant, mem);
+    if (!touched && (taps.n || mg.gestures.some(h => h.state.held))) { touched = true; mg.touch(); }
     SCENE[name]?.(values);
     mg.step(DT);
     t += DT;

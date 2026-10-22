@@ -91,7 +91,7 @@ const miss = (where, text) => put(misses, where, text);
 const same = (a, b) => a.length === b.length && a.every(x => b.includes(x));
 
 // a play at its beginning (game.js)
-const fresh = () => ({ chapter: 0, step: 0, hours: START.hours, money: START.money, shown: {}, marks: {}, choices: {}, hands: {}, lines: [] });
+const fresh = () => ({ chapter: 0, step: 0, hours: START.hours, money: START.money, shown: {}, marks: {}, choices: {}, hands: {}, lines: [], log: [] });
 
 // --- the world: each scene's spec, its contract block, what of it the plays named
 function contract(notes) {

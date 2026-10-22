@@ -15,7 +15,7 @@
 //   What the player feels: the thrill of destruction and the price of every plank.
 //   opts: { who: 'pp' | 'fogg' — whose hands (the plate's phrase), money: what the carpet-bag holds (£) }
 //   → { burned: [the parts, burnt in order], cabin: whether Speedy's cabin is burnt }
-import { until, keys } from '../hands.js';
+import { until, shown, keys } from '../hands.js';
 
 const PARTS = ['deckhouse', 'boats', 'bunks', 'yards', 'mast_fore', 'mast_main', 'bulwarks'];
 const CABIN = 'speedy_cabin';
@@ -75,7 +75,8 @@ export default {
     if (money < PRICE) lock([...PARTS, CABIN]);
     else {
       const pulls = left().filter(part => !MASTS.includes(part)).map(part => offer(part));
-      b.minigame.tricks.teach(mg, pulls.slice(0, 1), { id: 'boilers' });
+      // (the ghost shows it; the time runs from the player's first touch)
+      if (!(await shown(b, mg, pulls.slice(0, 1)))) return this.skipped;
       let masts = false; // (offered, or locked)
       const done = await until(mg, () => {
         if (!masts && burned.includes('yards') && money >= PRICE) { masts = true; MASTS.forEach(part => offer(part)); }
