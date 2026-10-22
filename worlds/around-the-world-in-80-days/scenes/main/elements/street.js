@@ -20,6 +20,15 @@ for (const [x0, x1, h] of blocks) {
   // the cornice: one quiet line
   g.fillStyle = light.rgba(light.mixc(fog, low, 0.35));
   g.fillRect(x0, base - h + 1.2, x1 - x0, 0.25);
+  // their windows, row on row (the grid the lit ones keep): dark sash panes, a pale sill under each
+  for (let x = x0 + 1.4; x < x1 - 1; x += 2.6) {
+    for (let y = 4; y < h - 3; y += 4.2) {
+      g.fillStyle = light.rgba(light.mixc(fog, '#3c4148', 0.5));
+      g.fillRect(x, base - y - 2.2, 1, 2);
+      g.fillStyle = light.rgba(light.mixc(fog, low, 0.5));
+      g.fillRect(x - 0.1, base - y - 0.2, 1.2, 0.12);
+    }
+  }
 }
 // the fog over them, thickening toward the street: its share (the colour is the hour's — street.wgsl, light of its own:
 // the fog is lit by the city, not by the evening)
@@ -37,7 +46,8 @@ e.layer('windows', {}, w => {
       for (let y = 4; y < h - 3; y += 4.2) {
         if (e.rnd() > 0.16) continue;
         w.fillStyle = light.rgba('#e9b26a', 0.16 * (0.25 + 0.6 * Math.min(1, y / 22)));
-        w.fillRect(x, base - y - 2.2, 1, 2);
+        // (four panes: the sash bars between them dark)
+        for (const [dx, dy] of [[0.05, 0.05], [0.53, 0.05], [0.05, 1.03], [0.53, 1.03]]) w.fillRect(x + dx, base - y - 2.2 + dy, 0.42, 0.92);
       }
     }
   }

@@ -147,6 +147,8 @@ only (the beats do not set them); in `door` the shot is at the door at once (aft
 
 Shortened silences (2026-10-21, the browser play): `whist` — Stuart speaks at 0.6 s; `wager` — `wager:ready` at about 1.3 s; `friday` — the days go by in 4 s, then a cut (made ready) nearer on Fogg, the porter a few steps off: `friday:porter` at about 6 s; the porter stands back by the wall (no walk out); `friday_in` — the operator draws back to the round shot.
 
+After the control play (2026-10-22): the houses opposite (`street`) have their windows painted row on row (dark sash panes, sills), the lit ones in four panes; the hall beyond the door (`hall`) a dado, the far doorway with its architrave and a panelled leaf half open, a sconce — they read as a street and a hall, no longer as flat grey and brown patches (the shot by the hat-stand in `leave`).
+
 ## Contract for the check
 
 ```json

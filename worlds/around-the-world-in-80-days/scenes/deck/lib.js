@@ -403,7 +403,7 @@ const SPOT = {
   bridge_speedy: [1.1, 19.4], bridge_fogg: [-0.9, 19.4],
   // no coal: the stoker come up from the hatch, Fogg before him, Passepartout aside; Speedy brought aft out of the
   // deckhouse by a sailor (they walk toward us)
-  stoker: [1.9, 13.0], coal_fogg: [0.4, 11.4], coal_pp: [-1.6, 11.6], house_door: [0.6, 17.9], speedy_brought: [-1.0, 13.4], sailor_brought: [-0.3, 14.3],
+  stoker: [1.9, 13.0], coal_fogg: [0.4, 11.4], coal_pp: [-1.6, 11.6], house_door: [0.6, 17.9], speedy_brought: [0.75, 14.4], sailor_brought: [1.3, 15.6],
   stoker_burn: [2.4, 15.9],
   pp_hatch: [0.2, 14.2], speedy_burn: [-1.2, 12.0],
   // Liverpool: at the gangway's head; Fix comes aft to him; the constables come up the gangway
@@ -849,7 +849,7 @@ function film(scene) {
         await s.wait(0.5);
         s.tell('release:in');
         fogg.look('fix#head');
-        s.camera({ target: 'cell_two', shot: 1.3, frame: [0.5, 0.42], glide: 1.6 });
+        s.camera({ target: 'cell_two', shot: 0.9, frame: [0.5, 0.5], glide: 1.6 });
         await run;
         await fix.turn(toward(FIX_IN, BENCH));
         fix.look('fogg#head');

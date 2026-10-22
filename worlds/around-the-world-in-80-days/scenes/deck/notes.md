@@ -89,6 +89,8 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
 
 Shortened silence (2026-10-21, the browser play): `release` — `release:in` as Fix is through the door (about 1.6 s), not once he stands before Fogg.
 
+After the control play (2026-10-22): `coal` — Speedy and the sailor brought out to the right of Fogg, by the boiler casing (`SPOT.speedy_brought` [0.75, 14.4], `sailor_brought` [1.3, 15.6]): Fogg's back no longer hides Speedy (his ring `speedy#head` clear); `release` — the close shot on the two at 0.9, its middle on the frame's middle: Fix's hat inside the frame.
+
 ## Contract for the check
 
 ```json
@@ -103,7 +105,7 @@ Shortened silence (2026-10-21, the browser play): `release` — `release:in` as 
  "calendar": {"after": [], "tells": ["calendar:leaf", "calendar:laugh"], "seconds": 9, "show": false},
  "new_york": {"after": [], "tells": ["new_york:smoke", "new_york:speedy"], "seconds": 13, "show": false},
  "mutiny": {"after": [], "tells": ["mutiny:porthole"], "seconds": 7, "show": false},
- "coal": {"after": [], "tells": ["coal:stoker", "coal:speedy"], "seconds": 9, "show": false},
+ "coal": {"after": [], "tells": ["coal:stoker", "coal:speedy"], "seconds": 7, "show": false},
  "burn": {"after": [], "tells": [], "seconds": 1, "show": false},
  "queenstown": {"after": [], "tells": [], "seconds": 9, "show": false},
  "sails_only": {"after": [], "tells": ["sails_only:laugh"], "seconds": 8, "show": false},
