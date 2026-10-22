@@ -28,7 +28,7 @@ camera `picture` behind the seat, a little above; the horizon 0.45.
 
 | Beat | after | ≈ s | What |
 | --- | --- | --- | --- |
-| `bench` | — | 12 | out of the dark (1.5 s); before dawn; from behind the two sit, the Pomeranian lies; `bench:sat`; she looks at the lights, he — down |
+| `bench` | — | 12 | before dawn; from behind the two sit, the Pomeranian lies; `bench:sat`; she looks at the lights, he — down |
 | `still` | bench | 2 | the same — under “The sea” (the game moves `dawn`, `lights`, `cicada`, `hand`) |
 | `watchman` | still | 14 | `dawn` to 1; the keeper with a stick comes out from behind a cypress, stops, looks (`watchman:looks`), goes (`watchman:gone`) |
 | `dew` | watchman | 8 | faces: a cut to `SIDE`; she turns her face to him (`sad`); he to her; they rise; the Pomeranian jumps up |
