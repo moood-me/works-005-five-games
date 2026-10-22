@@ -110,7 +110,7 @@ and Fix with them), `under_show` and `sail_show` (the minigames played a little)
 
 Shortened silences (2026-10-21, the browser play): `column` — the cut at 1.2 s, `column:gone` at about 4.7 s; `night_wait` — `night_wait:snow` at 1.5 s (the game's narrator), the snow over 8 s; its camera on Fix when Aouda is not there (was on no one).
 
-After the second browser play (2026-10-21): `under` — the camera draws back as the next chain is farther (`lib.underZ`: 17.6, at the last stretch to the coupling 15), the coupling `chain#c3` in the frame's middle 4:3 with him; `bridge_run` — the cut from below the bridge comes with the train already on it (`bridge_run:down` at about 6.9 s, was about 10); `bridge_walk` — the shot of the east rim made ready as they set off, they nearer the rim (`bridge_walk:over` at about 5 s).
+After the second browser play (2026-10-21): `under` — the camera draws back as the next chain is farther (`lib.underZ`: 17.6, at the last stretch to the coupling 15), the coupling `chain#c3` in the frame's middle 4:3 with him; `bridge_run` — the cut from below the bridge comes with the train already on it (`bridge_run:down` at about 6.9 s, was about 10); `bridge_walk` — the shot of the east rim made ready as they set off, they nearer the rim (`bridge_walk:over` at about 5 s). The shot from below the bridge looks up a little more (`camera_pitch` 19): the train on it whole, not at the frame's top edge; the east rim's shot centred on the four (`camera_x` −227.8): Passepartout stays in the frame to the end.
 
 ## Contract for the check
 

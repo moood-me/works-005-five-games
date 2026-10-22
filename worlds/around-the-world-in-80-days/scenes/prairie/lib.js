@@ -886,7 +886,7 @@ function film(scene) {
       run: async s => {
         // the bridge from the river below it, looking up at the trestle against the sky — the train already on it at
         // full speed (made ready while it gathers speed)
-        const rim = s.shot({ camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: -256, camera_z: -16, camera_pitch: 14,
+        const rim = s.shot({ camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: -256, camera_z: -16, camera_pitch: 19,
           train_x: -262, cars_x: -262 - plan.gap, shake: 0.5 });
         await s.wait(0.4);
         s.move('shake', 0.25, { over: 1.4 });
@@ -927,7 +927,7 @@ function film(scene) {
         // from the east rim (made ready while they set off): they come on over the last spans
         const B = {
           ...at('passepartout', -228.5, 20.8, 90, { gait: 'pp_walk' }), ...aouda(-230.5, 21.4, 90), ...fogg(-232.0, 20.8, 90, { gait: 'fogg_walk' }), ...fix(-234.0, 21.4, 90),
-          train_x: -302, cars_x: -302 - plan.gap, camera_x: -230, camera_z: 10,
+          train_x: -302, cars_x: -302 - plan.gap, camera_x: -227.8, camera_z: 10,
         };
         const rim = s.shot(B);
         await s.wait(2);
