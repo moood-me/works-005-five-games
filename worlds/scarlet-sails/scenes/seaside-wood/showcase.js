@@ -20,8 +20,7 @@ const hours = {
     await s.wait(2);
     s.move("fire", 1, { over: 4 });
     await s.move("hour", 0.95, { over: 7, ease: "inOut" });
-    await s.wait(3);
-    await s.move("fade", 1, { over: 1.2, ease: "in" });
+    await s.wait(4.2);
   },
 };
 // the yacht goes down the stream and she after it, as far as she may. The first snag she runs over — a tap in time

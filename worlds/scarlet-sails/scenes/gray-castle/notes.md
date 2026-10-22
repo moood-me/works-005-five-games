@@ -68,7 +68,7 @@ Described in the scene's `states`.
 - The play's keys (set by the game on opening the scene; no `from` sets them): `letter` (0), `home` 0…1 (0.5) — the warmth
   of the house: `fire` and `lamps` in `return`, `stays`, `spring`, `one_evening`, `window_end` = 0.35 + 0.65·`home`; `leave` (`farewell` ·
   `note`; `farewell`) — how Gray left, read by `return` and `stays`.
-- `beat` — the film's beat; `fade`, `camera_*` — the engine's; `gr_a/gr_d/gr_e`, `li_a/li_d` — where the people are (gr_e — the height:
+- `beat` — the film's beat; `camera_*` — the engine's; `gr_a/gr_d/gr_e`, `li_a/li_d` — where the people are (gr_e — the height:
   a rung of the ladder); the keys of the engine's people — `grey_*`, `lilian_*` (people.md).
 - Internal (kept by `script.js`): `ladder_across`, `door_facing` (from `ladder`, `door`); `grey_pulls` — while 1,
   the ladder follows the boy (`ladder` by `gr_a`).
@@ -95,8 +95,8 @@ The people are the world's cast (`cast`). Gray is one element `grey`: a boy (`gr
 `grey_teen`, `grey` (`grey_wear`), without the frock coat — `grey_shirt`; the mother — `lilian` (in mourning — `lilian_black`). The beats are
 `lib.js film(scene)`: the director's sequences; people walk at their gait's pace, the “once” motions last as long as they
 last; seconds — only the pauses of a gaze. Each beat's `from` is the whole state (the game may begin with any); where a beat
-goes on from the one before (`after`), it goes on from what there is. Fades — only for time passing (out of the dark: `boy`,
-`night`, `return`, `spring`, `window_end`); the cuts are made ready ahead (`s.shot`).
+goes on from the one before (`after`), it goes on from what there is. No fades of the scene's own (time passing between beats — a cut;
+the black between, if any, is the game's); the cuts are made ready ahead (`s.shot`).
 
 The camera — two ways (`lib.js`): the hall's composed shots — by the keys `camera_x/z/yaw/pitch` (v1's numbers: across the table
 at Gray at night, the mother's door, Gray coming in, the window; its own: the corner with the ladder along the far wall, the supper — across the table
@@ -105,23 +105,23 @@ stands on the straight line from the start to the target: where there is furnitu
 
 | Beat | after | What is seen | The scene tells |
 | --- | --- | --- | --- |
-| `boy` | — | Day, out of the dark. The boy, backing, drags the ladder along the wall under the crucifixion (the gait `drag`, his hands on the rail), looks at the picture, takes the paints and the brush from the floor | `boy:ladder` (the ladder in place), `boy:paints` (the paints in his hands) |
+| `boy` | — | Day. The boy, backing, drags the ladder along the wall under the crucifixion (the gait `drag`, his hands on the rail), looks at the picture, takes the paints and the brush from the floor | `boy:ladder` (the ladder in place), `boy:paints` (the paints in his hands) |
 | `brush` | — | Nearer: on the ladder he paints on the canvas; a cut into the close-up of the canvas (`canvas`) — under “Brush” (`nail1…3`) | `brush:canvas` (the close-up open) |
 | `paint_over` | brush | For showing only (in the game it is “Brush”): the nails are painted over one after another | |
 | `mother_in` | brush, paint_over | A cut to her door: the door opens, the mother comes in and stops, looks at him; a cut to the ladder: he looks round, she comes up and embraces him on the ladder | `mother_in:stops` (she stopped — under “Arthur…”), `mother_in:holds` |
 | `mother_close` (close up) | mother_in | From over her shoulder, from the side and behind and near (the camera by keys at the table's edge, moving in a little; straight from behind, she hid him with herself): her arms round him, his hand with the brush lowered, behind them the picture with the nails painted over. One line takes it out of the chapter | |
 | `ship_painting` | — | Evening, the lamps, the fire: the boy before the picture with the ship, the camera moves in, the waves on the canvas come alive | `ship_painting:alive` |
 | `cellar` | ship_painting | The camera stays at the living picture while the insert is made ready (1 s); a cut into the insert `card`: the boy's hand wipes the dust off the cask's bottom (`dust` 1 → 0 over 4 s), the words can be read; it holds for 3 s | `cellar:read` |
-| `night` | — | Out of the dark, years later: Gray at fifteen at the table with a bundle, the candles; a strip of light under the mother's door. Under a choice | |
+| `night` | — | Years later: Gray at fifteen at the table with a bundle, the candles; a strip of light under the mother's door. Under a choice | |
 | `farewell` | night | He goes to the door, the camera after him; the door opens — the mother with a candle (she holds it before her: `lib.js CANDLE`); she looks at the ring, holds out her hand, the ring is in his palm; a cut into the insert `hands` (the shot `hold`, `grip1…grip4` = 1) — under “Let go” | `farewell:at-door` (he stopped at the door — the knock), `farewell:open` (she is in the doorway — the lines), `farewell:ring`, `farewell:hands` (the insert open) |
 | `let_go` | farewell | A cut into the hall, the shot from the depth of the hall (`lib.js LEAVING`): on the left she is a dark silhouette in the light doorway, he with his bundle goes from her to the exit, towards the camera and to the right, looks back and stops in the frame. `pried` 0 — she raises the candle higher; 1 — her empty hand stays held out after him | `let_go:looks-back` |
 | `note` | night | At the table: he lays down the note, takes the bundle | `note:laid` |
 | `note_goes` | note | A cut to the mother's door: he goes to the exit, passes by, having looked back at it, goes; the light under the door is lit | `note_goes:passes`, `note_goes:gone` |
-| `return` | — | Out of the dark, day: Gray at twenty comes in in a frock coat; the mother in black by the father's armchair turns. `leave` = `farewell` — she takes a step towards him; `note` — she stays by the armchair, his note in her hands before her (the part `letter`, the stance `read_stand` holds it), looks at him | `return:turns` |
+| `return` | — | Day: Gray at twenty comes in in a frock coat; the mother in black by the father's armchair turns. `leave` = `farewell` — she takes a step towards him; `note` — she stays by the armchair, his note in her hands before her (the part `letter`, the stance `read_stand` holds it), looks at him | `return:turns` |
 | `stays` | return | He goes behind the armchair's back, takes off the frock coat and hangs it on it (`coat_on_chair`); if she has his note in her hands (`leave` = `note`), she meanwhile looks at it and puts it away in her dress (the hand to the hip, the part `letter` taken off, the stance `sad_stand` again); a step to his mother — she takes his hand. `from` — as after `return`: the house's warmth by `home`, the note by `leave` | `stays:coat`, `stays:hand` |
-| `spring` | — | Out of the dark, a spring day (`hour` 0.45): the shot across the hall onto the near window (`lib.js SPRING_VIEW`): the mother at the window, Gray beside her in his frock coat, both with their backs to us; she turns to him — in profile, he looks at her | `spring:turns` |
+| `spring` | — | A spring day (`hour` 0.45): the shot across the hall onto the near window (`lib.js SPRING_VIEW`): the mother at the window, Gray beside her in his frock coat, both with their backs to us; she turns to him — in profile, he looks at her | `spring:turns` |
 | `one_evening` | — | A supper for two by candlelight: they sit at the table's ends, eat; he looks at the window, at her, at the window again | `one_evening:window` |
-| `window_end` | — | The epilogue, out of the dark, night: the mother at the window — with a letter in her hands before her (`letter` 1; the stance `read_stand`) or alone with a candle | |
+| `window_end` | — | The epilogue, night: the mother at the window — with a letter in her hands before her (`letter` 1; the stance `read_stand`) or alone with a candle | |
 
 ## Changed against v1
 
@@ -134,7 +134,7 @@ stands on the straight line from the start to the target: where there is furnitu
 - In `stays` Gray first comes up to the armchair's back and hangs the frock coat with his hand (in v1 the coat appeared on the armchair a metre and a half
   away from him), then takes a step to his mother — their hands meet.
 - In `farewell` the mother holds out the ring with her left hand (the candle in her right).
-- The fades at the start of every beat are removed, except for time passing.
+- The fades at the start of every beat are removed.
 - The shots: `boy` — from the depth of the hall along the wall (the boy a third of the frame; in v1 a wide shot from the start), `one_evening` — across
   the table from the side: he on the left, she on the right, the candles between them, the windows behind them (in v1 from the start: the mother behind the candles was a dot).
 - The light is linear: `ambient` by day 0.8, at night 0.78 of a cold `#a9b9dc` (v1: 0.4 and 0.3), `inside` 0.7. The night is lighter than v1's

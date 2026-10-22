@@ -110,7 +110,6 @@
   ],
   "state": {
     "beat": null,
-    "fade": 0,
     "hour": 0.5,
     "mist": 0.15,
     "fire": 0,

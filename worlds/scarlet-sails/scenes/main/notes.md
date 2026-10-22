@@ -92,7 +92,7 @@ Assol goes off along the road into the distance, towards the far hills, and not 
 | the ship — one flat painting `ships.galliot`, far off a point by `e.px` | the world's assembled ship: faceted sides, decks, masts and yards, nine sails with the sailcloth shader (the wind on the cloth, white ↔ scarlet by `sails`, translucent); she comes bow to the shore and anchors three-quarters on (`ship_facing`), rolls (`ship_roll`); far off — a spark (`ship_spark`) |
 | Kaperna's windows — rectangles painted by `windows` | glows in the houses' parts, `e.glow` by `windows` |
 | the film — lines by seconds (`film`), the people moved in the seconds given | the director's beats (`beats`): people walk at their own pace and run at their own run, the beat waits for them |
-| fades (`fade`) at every cut | cuts with no fades; out of black — only the prologue; in `grey_dawn` the night turns into dawn before our eyes (`hour` moves) |
+| fades (`fade`) at every cut | cuts with no fades; in `grey_dawn` the night turns into dawn before our eyes (`hour` moves) |
 
 ## Light
 
@@ -136,7 +136,7 @@ none of them, `at()` — who is here). A beat's side affairs (the children leave
 `s.sequence`: a beat stopped midway stops them too.
 
 **Changed against v1:** `beat` by default `null` (the showcase outside games — `showcase.js`, there is no value `film` any more);
-`fade` takes no part in the cuts.
+no fade of the scene's own.
 
 ## Points for the game
 
@@ -153,7 +153,7 @@ the insert is open), `menners_skiff#skiff`, `nets#nets`,
 
 | Beat | after | What | Moments (`scene.tell`) |
 | --- | --- | --- | --- |
-| `spark` | — | dawn, out of the dark (2 s), the empty shore; by the cape a scarlet spark flares up (`ship` → 0.12) and stays — under the first touch (`ship_rig#ship`) | `spark:lit` |
+| `spark` | — | dawn, the empty shore; by the cape a scarlet spark flares up (`ship` → 0.12) and stays — under the first touch (`ship_rig#ship`) | `spark:lit` |
 | `prologue` | spark | the spark grows into a ship under scarlet sails, far off (`ship` → 0.32); no cut and no fade | `prologue:spark` (at the start) |
 | `kids` | — | evening: Assol (8) runs with the yacht to the boats; the children turn round, point, laugh; the eldest girl steps forward and calls | `kids:came`, `kids:laugh`, `kids:beckon` |
 | `kids_hold` | kids | she stands with the yacht, the children wait — under a choice | |

@@ -823,7 +823,7 @@ function film(scene) {
 
   // ── the states the beats begin at ──
   const room = {
-    fade: 0, camera_target: null, camera_h: 0, camera_pitch: 0, camera_look: 0, lamp: 1, toys: 0, toy_on_shelf: 0, chest: 0, door: 0, window_open: 0,
+    camera_target: null, camera_h: 0, camera_pitch: 0, camera_look: 0, lamp: 1, toys: 0, toy_on_shelf: 0, chest: 0, door: 0, window_open: 0,
     sails_window: 0, basket: 0, book_down: 0, guide: 0, gaze: 0, closeup: 0, closeup_shot: null, rig1: 0, rig2: 0, rig3: 0, rig4: 0, beetle: 0,
     match: 0, scrap: 0, scrap_taken: 0, chest_here: 1, yacht_glow: 0, sails_light: 0,
   };
@@ -1054,10 +1054,9 @@ function film(scene) {
     },
     // shelf — night, later: Assol asleep. He sets her yacht up on the board over the window, without a word
     shelf: {
-      from: () => whole({ ...NIGHT, fade: 1 }),
+      from: () => whole({ ...NIGHT }),
       run: async (s) => {
         const lo = s.person("longren");
-        s.move("fade", 0, { over: 1.2, ease: "out" });
         await s.wait(0.6);
         const up = lo.do("shelve");
         await s.wait(0.6);
@@ -1075,10 +1074,9 @@ function film(scene) {
     // years — nine years later, day: the shelves half empty. Longren at the window, his pipe. The door opens: Assol,
     // seventeen, comes in with a basket full of the toys and sets it down by the door
     years: {
-      from: () => whole({ ...YEARS(), fade: 1 }),
+      from: () => whole({ ...YEARS() }),
       run: async (s) => {
         const as = s.person("assol");
-        s.move("fade", 0, { over: 1.2, ease: "out" });
         await s.wait(0.6);
         s.move("door", 1, { over: 1.6, ease: "inOut" });
         await s.wait(0.5);
@@ -1168,10 +1166,9 @@ function film(scene) {
     // unpack — night, the lamp: he comes back from the shore, pushes the chest back into its corner with his foot — two
     // shoves — and lights his pipe
     unpack: {
-      from: () => whole({ ...RETURNS, fade: 1 }),
+      from: () => whole({ ...RETURNS }),
       run: async (s) => {
         const lo = s.person("longren");
-        s.move("fade", 0, { over: 1.2, ease: "out" });
         await s.wait(0.2);
         s.move("door", 1, { over: 1.4, ease: "inOut" });
         await s.wait(0.6);
@@ -1193,7 +1190,7 @@ function film(scene) {
       },
     },
     // read — morning: Assol (seventeen) on the chair by the window with a book. The beat is entered by a cut (from the
-    // chapter before, not from darkness); Longren as the game has him (READS)
+    // chapter before); Longren as the game has him (READS)
     read: {
       from: () => whole(READS()),
       run: async (s) => {

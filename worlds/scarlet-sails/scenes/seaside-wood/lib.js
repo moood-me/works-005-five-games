@@ -828,7 +828,7 @@ const nobody = Object.fromEntries(PEOPLE.flatMap((id) => [
 ]));
 // an hour of the scene: its light with it, no one here, no yacht on the stream, the scene's own camera
 const hourOf = (hour, mist, more) => ({
-  ...nobody, ...CAMERA, hour, ...hourKeys(hour), mist, fire: 0, fade: 0, ring: "none", ring_at: 0, stir: 0, toy_water: 0, toy_out: 1, reeds: 0, jump: 0, ...more,
+  ...nobody, ...CAMERA, hour, ...hourKeys(hour), mist, fire: 0, ring: "none", ring_at: 0, stir: 0, toy_water: 0, toy_out: 1, reeds: 0, jump: 0, ...more,
 });
 // the wood by day, as the scene opens
 const DAY = () => hourOf(0.5, 0.15);
@@ -1063,13 +1063,12 @@ function film(scene) {
     },
     // fire — night: the fire at the cliff's edge; Gray and Letika sit on the edge with their rods, the sea below under
     // the moon; Letika turns his head to Gray («The fish are asleep, captain») and Gray to him; both look out again; the night
-    // closes (a fade: the hours passing till dawn)
+    // closes (the hours passing till dawn)
     fire: {
-      from: () => ({ ...NIGHT(), fade: 1 }),
+      from: () => ({ ...NIGHT() }),
       run: async (s) => {
         const grey = s.person("grey");
         const letika = s.person("letika");
-        await s.move("fade", 0, { over: 2, ease: "out" });
         await s.wait(2);
         letika.look("grey");
         s.tell("fire:letika");
@@ -1079,17 +1078,15 @@ function film(scene) {
         grey.look(BAY);
         letika.look(BAY);
         s.tell("fire:sea");
-        await s.wait(2.2);
-        await s.move("fade", 1, { over: 1.2, ease: "in" });
+        await s.wait(3.4);
       },
     },
-    // dawn_walk — dawn in the mist (the night's fade lifting): Gray crosses the glade, stepping carefully, and stops —
+    // dawn_walk — dawn in the mist: Gray crosses the glade, stepping carefully, and stops —
     // in the grass a girl is asleep
     dawn_walk: {
-      from: () => ({ ...DAWN(), fade: 1 }),
+      from: () => ({ ...DAWN() }),
       run: async (s) => {
         const grey = s.person("grey");
-        s.move("fade", 0, { over: 1.2, ease: "out" });
         const walk = grey.walk([[22.6, 43.0], OVER_HER]);
         await s.until(() => s.state.gr_a > 23.2);
         grey.look("assol");
@@ -1158,14 +1155,13 @@ function film(scene) {
         await s.wait(1.5);
       },
     },
-    // wake — morning (the night's fade lifting): the glade, she in the grass; she sits up — before her as she does —
+    // wake — morning: the glade, she in the grass; she sits up — before her as she does —
     // lifts her hand before her face and looks: a ring on her finger (close: her hand, her eyes on it)
     wake: {
-      from: () => ({ ...MORNING(ring()), fade: 1 }),
+      from: () => ({ ...MORNING(ring()) }),
       run: async (s) => {
         const assol = s.person("assol");
         const before = s.shot(SHOTS.sits);
-        await s.move("fade", 0, { over: 1.5, ease: "out" });
         const sit = assol.do("wake_sit");
         await s.wait(1.4);
         await s.until(() => before.ready);

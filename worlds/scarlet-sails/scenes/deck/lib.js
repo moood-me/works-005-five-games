@@ -428,7 +428,7 @@ const sat = (id, p, turn, does, more = {}) => at(id, p, turn, loop(does), { on: 
 const NOBODY = Object.assign({}, ...WHO.map(id => ({ [`${id}_here`]: false, [`${id}_do`]: 'stand', [`${id}_look`]: null, [`${id}_reach`]: null,
   [`${id}_with`]: null, [`${id}_on`]: null, [`${id}_gait`]: null, [`${id}_wear`]: null })));
 // the camera on her deck, as the scene's; no close shot open
-const CAM0 = { camera_on: null, camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_pitch: 0, fade: 0,
+const CAM0 = { camera_on: null, camera_target: null, camera_shot: null, camera_frame: null, camera_glide: 0, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, camera_pitch: 0,
   ropes: 0 };
 // the operator on someone (shot: their height in frame heights; frame: where their head goes)
 const on = (target, shot, frame = null, more = {}) => ({ camera_target: target, camera_shot: shot, camera_frame: frame, ...more });

@@ -77,8 +77,8 @@ may begin with any. What the game waits for inside a beat, the scene tells: `<be
 The ring of Assol (17) is a part of the cast with `ring` = `finger`: `ring` (his mother's, `ring_kind` = `mother`) or `ring_old` (his
 old one, `own`); it stays on her whatever she takes or gives (`worn` in `film`).
 
-Fades — only for time passing (the start of `shelf`, `years`, `unpack`: another day or hour); `evening`, `read` and `wake` are
-entered by a cut, with no fade. The cuts into a close-up and back — with no fades, the shot made ready ahead (`s.shot`).
+No fades of the scene's own: every beat — `shelf`, `years`, `unpack` (another day or hour) as well as `evening`, `read` and `wake` —
+is entered by a cut (the black between, if any, is the game's). The cuts into a close-up and back — with no fades, the shot made ready ahead (`s.shot`).
 
 ## Keys
 
@@ -110,7 +110,7 @@ Described in the scene's `states`.
   hour — 0.31, in `wake` and in `out` after it 0.245; `match_x`,
   `match_y` (0, 0) — where the sail is on the screen in the shot `match`, in frame heights from its middle (x to the right, y down), `match_s`
   (0.006) — the ship's height in frame heights; read only by the shot's `animate`.
-- `beat` — the beat (the beats module); `fade`, `camera_*` — the engine's.
+- `beat` — the beat (the beats module); `camera_*` — the engine's.
 - Internal (kept by `script.js` and the modules, not to be set by hand): `day`, `dawn`, `dusk`, `night`, `sun_light`,
   `moon_light` (sky by `hour`), `chest_across`, `chest_distance`, `ship_across`, `door_facing`, `window_left_facing`,
   `window_right_facing`, `ship_roll`; `lo_a/lo_d`, `as_a/as_d`, `fi_a/fi_d` — where the people are.
