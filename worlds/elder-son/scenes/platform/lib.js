@@ -96,7 +96,7 @@ function film(scene) {
   const seated = (id, p, motion, more = {}) => at(id, p, 180, { [`${id}_do`]: { motion, loop: true }, [`${id}_on`]: [p[0], p[1], G.SEAT], ...more });
   // the night (or the dusk, the dawn): every key the beats move, the people away
   const base = (hour, snow, more = {}) => ({
-    fade: 0, hour, ...G.looks(hour), snow, ...trainKeys(1), doors: 0, wipe: 0, silva_window: 0, strap: 0, pull: 0, grip: 1,
+    hour, ...G.looks(hour), snow, ...trainKeys(1), doors: 0, wipe: 0, silva_window: 0, strap: 0, pull: 0, grip: 1,
     door_bg: 0, bench_snow: 0, ...Object.assign({}, ...IDS.map(off)), ...more,
   });
   const sarWith = () => (suitcase() ? ['long_scarf', 'suitcase'] : null);
@@ -151,16 +151,15 @@ function film(scene) {
   }
 
   const B = {
-    // night, out of the dark, snow; the train standing, its doors shut. The two run up the stairs (seen by the 5th
+    // night, snow; the train standing, its doors shut. The two run up the stairs (seen by the 5th
     // second); at the 8th the train moves off — barely, one slow move on, its tail ≈ 0.3 m/s; the camera turned with
     // them from the stairs to under the lamp; they stop there by the 9th. The pose for the choice: the tail's red
     // lamps far left, x ≈ −0.34; the train crawls on the same way while the game waits.
     gone: {
-      from: () => base(0.9, 0.4, { fade: 1, ...trainKeys(0), ...CAM.stairs,
+      from: () => base(0.9, 0.4, { ...trainKeys(0), ...CAM.stairs,
         ...at('busygin', P.FOOT_B, 270, { busygin_mood: 'surprised' }), ...at('silva', P.FOOT_S, 270, { silva_mood: 'smile' }) }),
       run: async s => {
         const b = s.person('busygin'), sv = s.person('silva');
-        s.move('fade', 0, { over: 2, ease: 'out' });
         await s.wait(1.2);
         b.gait('run');
         sv.gait('run');
