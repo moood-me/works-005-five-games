@@ -11,7 +11,7 @@ const SHEET = 10.6, POINTS = 10;
 const TOP = 66, TOP_UP = 1.7 + 0.9 * SHEET;
 // how far the sheet runs (longitudes): the world once round from Greenwich to Greenwich, and as much again either side
 // as a wide frame sees past its ends; how far down (latitude)
-const WEST = -95, EAST = 455, SOUTH = -10, NORTH = 80;
+const WEST = -95, EAST = 455, SOUTH = -30, NORTH = 80;
 const X = lon => lon * K;
 const UP = lat => TOP_UP - (TOP - lat) * K;
 // a point of the map in the sheet's painting (x right, y down: metres from its anchor on the ground)
