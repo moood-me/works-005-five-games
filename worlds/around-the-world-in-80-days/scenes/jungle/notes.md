@@ -191,7 +191,7 @@ Shortened silences (2026-10-21, the browser play): `rails_end` — the traveller
 
 After the second browser play (2026-10-21): `kiouni#head` moved from his eye down to his face toward the trunk's root (`KI.face`) — in «The elephant» its ring sat almost on the goad's groove at `guide#hands`.
 
-2026-10-22: the mists' boxes as high as their highest bank's soft top (`mist_stream` −4.2, `mist_river` −5.4): cut lower, the torch-lit mist ended in a hard straight edge across the sky (the dash, the procession). In `mount` the guide sets off a moment after he is placed by Kiouni's head (a walk begun in the step he was placed in counted the jump as his pace).
+2026-10-22: the mists' boxes as high as their highest bank's soft top (`mist_stream` −4.2, `mist_river` −5.4): cut lower, the torch-lit mist ended in a hard straight edge across the sky (the dash, the procession).
 
 ## Contract for the check
 
