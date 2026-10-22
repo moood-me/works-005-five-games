@@ -43,7 +43,8 @@
 //   g.relate(who, delta) — 'aouda' | 'fix' | 'pp' remembers (state.marks[who] += delta); the stamp «… will remember
 //     this» (REMEMBERS)
 //   g.mark(key, value, text) — remembered (state.marks[key]); text — a stamp, if any
-//   g.book(line, hand) — the line BOOK[line] is written in the notebook by `hand` ('aouda' | 'pp' | 'fogg'): Aouda's
+//   g.book(line, hand, hours) — the line BOOK[line] is written in the notebook by `hand` ('aouda' | 'pp' | 'fogg'), and
+//     with it the figure moves by `hours`, if any (the line is that change's entry — no other is written): Aouda's
 //     or Passepartout's — once the player has given it (touched it: it glows, a hint says who asks for it); Fogg's — at
 //     once; it stays there (state.lines: {line, hand} — its name, not its text)
 //   g.letter({text, sign, kind, voice}) — a sheet the player unfolds, reads and folds again (ui.js)
@@ -378,9 +379,11 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (text && !unseen()) view.toast(text, 'stamp');
     },
     // the player gives the notebook (touches it): the line is written in the hand given; it stays
-    async book(line, hand) {
+    async book(line, hand, hours = 0) {
       if (gone()) return never;
       state.lines = [...(state.lines ?? []), { line, hand }];
+      const was = state.hours;
+      state.hours = Math.round((state.hours + hours) * 2) / 2;
       if (unseen()) return;
       if (fast) await alive(land());
       if (hand !== 'fogg') {
@@ -389,6 +392,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         off();
       }
       view.gauges(state);
+      if (hours) view.hours(state, was);
       await sleep(2500);
     },
     // (its voice is said while it lies open — not waited for: the player folds it when they will)
@@ -437,7 +441,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //   hub.withdraw() — nothing offered; hub.told(text | [texts], ms) → true once the scene tells it (of several: the one
 //     told first), false if ms pass
 const SHOW = 8; // s: nothing pressed so long — the ghost shows how
-const LABEL = 34; // px: a mark's words this far under its point (below the ring)
+const LABEL = 34, EDGE = 8; // px: a mark's words this far under its point (below the ring); never nearer the window's side
 const NOWHERE = 6; // s: a choice none of whose points has been seen so long is broken
 
 export function listen(b) {
@@ -474,7 +478,10 @@ export function listen(b) {
         for (const { el, ref } of labels) {
           const p = b.where(ref);
           el.hidden = !p?.seen;
-          if (p?.seen) el.style.transform = `translate(${Math.round(p.x)}px, ${Math.round(p.y + LABEL)}px) translate(-50%, 0)`;
+          if (!p?.seen) continue;
+          // (under the mark, but all of it within the window: EDGE px from its sides)
+          const w = el.offsetWidth, x = Math.min(Math.max(p.x, w / 2 + EDGE), b.layer.clientWidth - w / 2 - EDGE);
+          el.style.transform = `translate(${Math.round(x)}px, ${Math.round(p.y + LABEL)}px) translate(-50%, 0)`;
         }
       });
       mg.on('end', () => { placing(); for (const { el } of labels) el.remove(); });

@@ -458,10 +458,10 @@ function watched(g, j, ch, here, events, seen) {
       events.push(['act']);
       return g.letter(letter);
     },
-    book(line, hand) {
+    book(line, hand, hours) {
       seen.book.push(`${line}:${hand}`);
       events.push(['act']);
-      return g.book(line, hand);
+      return g.book(line, hand, hours);
     },
   });
   return { g: w, left: () => waits.forEach(t => bad(`g.told “${t.text}”: the beat “${t.beat}” did not begin after it in the step`)) };

@@ -30,7 +30,7 @@ export default {
     const horse = mg.mark({ at: 'cab#horse', kind: 'ring' });
     const hooves = mg.rhythm({ on: null, show: [horse], bpm: BPM });
     // (the ghost shows it; the time runs from the player's first touch)
-    if (!(await shown(b, mg, [hooves]))) return this.skipped;
+    if (!(await shown(b, mg, [hooves], [horse]))) return this.skipped;
     const time = mg.layer('time');
     let pace = START, to = clamp(+g.get('cab_to') || 0), tapped = true, last = null;
     hooves.on('tap', ({ hit }) => {

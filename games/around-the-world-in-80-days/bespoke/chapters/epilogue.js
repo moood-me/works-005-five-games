@@ -89,8 +89,7 @@ export default {
       }
       // the day is found: written in the notebook in Passepartout's scrawl (or Fogg's own hand)
       g.mark('day', true);
-      g.hours(24, tr('We travelled towards the sun'));
-      await g.book('day', f.pp === 'with' ? 'pp' : 'fogg');
+      await g.book('day', f.pp === 'with' ? 'pp' : 'fogg', 24);
     },
     // the race: the cab through the fog; the fifty-seventh second — or the door shut
     async g => {

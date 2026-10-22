@@ -44,7 +44,7 @@ export default {
     const hook = mg.mark({ at: 'guide#hands', kind: 'groove', quiet: true, danger: 0 });
     const goad = mg.hold({ on: hook, seconds: 0.3, drain: 0.3 });
     // (the ghost shows it; the time runs from the player's first touch)
-    if (!(await shown(b, mg, [step]))) return this.skipped;
+    if (!(await shown(b, mg, [step], [head]))) return this.skipped;
     let steady = START, pace = START, ride = 0, anger = 0, balked = false, balks = 0, tapped = true, bpm = BPM;
     let sugar = null, sugarPress = null, sugarOff = -1, t0 = mg.t;
     step.on('tap', ({ hit }) => {

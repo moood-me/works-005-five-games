@@ -29,7 +29,8 @@ function fakeLanguage(log) {
   mg.plate = { set(o) { if (o.phrase) mg.phrases.push(o.phrase); for (const k of Object.keys(o)) if (!['phrase', 'fill', 'notches', 'glow', 'shade', 'ways', 'sample'].includes(k)) throw new Error('plate: ' + k); if (o.fill != null && !(o.fill >= 0 && o.fill <= 1.0001)) throw new Error('fill ' + o.fill); } };
   mg.mark = o => {
     if (!o.at) throw new Error('mark without at');
-    const m = { o: { ...o }, removed: false, set(n) { Object.assign(m.o, n); }, remove() { m.removed = true; for (const gg of mg.gestures) if (gg.o.on === m) gg.removed = true; } };
+    // (placed on the screen at once: pos)
+    const m = { o: { ...o }, pos: { x: 100, y: 100 }, removed: false, set(n) { Object.assign(m.o, n); }, remove() { m.removed = true; for (const gg of mg.gestures) if (gg.o.on === m) gg.removed = true; } };
     mg.marks.push(m);
     return m;
   };
@@ -134,7 +135,7 @@ const BOTS = {
   elephant(mg, v, t, variant, mem) {
     const r = live(mg, 'rhythm')[0], goad = live(mg, 'hold')[0], p = live(mg, 'press')[0];
     if (p) { mg.tap(p); }
-    if (r && r.beatAt) { const k = r.state.k; if (k >= 0 && mem.k !== k && r.state.t - r.beatAt(k) < 0.05) { mem.k = k; if (variant !== 'lazy') mg.tap(r); } }
+    if (r && r.beatAt) { const k = r.state.k; if (k >= 0 && mem.k !== k && r.state.t - r.beatAt(k) < 0.05) { mem.k = k; if (variant !== 'lazy' || k === 0) mg.tap(r); } } // (lazy: one tap, then none)
     if (goad) {
       const want = variant === 'goad' ? true : variant === 'smart' ? (t % 6) < 2.4 : false;
       if (want !== goad.state.held) { goad.state.held = want; goad.emit(want ? 'down' : 'up', {}); }
@@ -195,7 +196,7 @@ const BOTS = {
   cab(mg, v, t, variant, mem) {
     v.cab_at = Math.min(v.cab_to ?? 0, (v.cab_at ?? 0) + DT * 0.05);
     const r = live(mg, 'rhythm')[0];
-    if (r && r.beatAt) { const k = r.state.k; if (k >= 0 && mem.k !== k) { mem.k = k; if (variant !== 'lazy' && (variant !== 'half' || k % 2)) mg.tap(r); } }
+    if (r && r.beatAt) { const k = r.state.k; if (k >= 0 && mem.k !== k) { mem.k = k; if ((variant !== 'lazy' || k === 0) && (variant !== 'half' || k % 2)) mg.tap(r); } } // (lazy: one tap, then none)
   },
 };
 // what the scene does on its own: someone walking toward the key the game sets
@@ -228,13 +229,14 @@ async function play(name, variant, { skipAt = null, money = 20000 } = {}) {
   Promise.race([mod.run(g, b, { who: variant === 'fogg' ? 'fogg' : 'pp', money, alone: variant === 'alone', onRefuse() {} }, abort.signal), skipped])
     .then(r => { result = r; done = true; }, e => { err = e; done = true; });
   const mem = {};
-  let t = 0, touched = false;
+  let t = 0, seenTaps = taps.n;
   while (!done && t < 240) {
     await new Promise(r => setImmediate(r));
     if (done) break;
     if (skipAt != null && t >= skipAt) { mg.skip(); skipAt = null; continue; }
     BOTS[name](mg, values, t, variant, mem);
-    if (!touched && (taps.n || mg.gestures.some(h => h.state.held))) { touched = true; mg.touch(); }
+    // (a finger down this frame — a tap, or a gesture held: the mini-game hears it)
+    if (taps.n > seenTaps || mg.gestures.some(h => !h.removed && h.state.held)) { seenTaps = taps.n; mg.touch(); }
     SCENE[name]?.(values);
     mg.step(DT);
     t += DT;

@@ -223,7 +223,7 @@ export default async function (b) {
     // (the play just played through: once its finale is written, the view goes the whole way round from London, the day
     // won notched at the 180th meridian as it passes — design.md «Ход игры», the epilogue)
     const round = ended || (drawing && reveal === EPILOGUE);
-    await b.show(SCENES.map, { state: { shown: reveal ?? here, route: drawing ? CHAPTERS[reveal].route[0] : routeOf(kept), dateline: kept.chapter >= END && !round ? 1 : 0 }, captions: false });
+    await b.show(SCENES.map, { state: { shown: reveal ?? here, route: drawing ? CHAPTERS[reveal].route[0] : routeOf(kept), dateline: kept.chapter >= END && !round ? 1 : 0 }, captions: false, fade: true });
     if (drawing) b.set('route', CHAPTERS[reveal].route[1], REVEAL);
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: author ? here : null });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};

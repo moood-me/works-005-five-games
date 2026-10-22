@@ -35,10 +35,10 @@
 #layer .book .was { margin: 0; height: 0; overflow: hidden; font: 15px/18px var(--title); opacity: 0; }
 #layer .book .was.struck { animation: was-struck 5s ease forwards; text-decoration: line-through var(--red) 2px; }
 @keyframes was-struck { 0% { opacity: 0.85; height: 18px; } 75% { opacity: 0.6; height: 18px; } 100% { opacity: 0; height: 0; } }
-#layer .book .now { margin: 0; font: 600 22px/26px var(--title); }
+#layer .book .now { margin: 0; font: 600 22px/22px var(--title); }
 #layer .book .now.fresh { animation: ink-in 1.4s ease; }
 @keyframes ink-in { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
-#layer .book .log p { margin: 0; font: italic 13px/17px var(--title); opacity: 0.8; }
+#layer .book .log p { margin: 0; font: italic 13px/22px var(--title); opacity: 0.8; }
 #layer .book .log p.fresh { animation: ink-in 1.4s ease; }
 #layer .book .lines p { margin: 5px 0 0; font: 14px/19px var(--title); }
 #layer .book .lines .hand-aouda { font-style: italic; color: #1f3a6e; rotate: -1.5deg; }

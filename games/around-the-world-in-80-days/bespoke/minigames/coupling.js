@@ -44,6 +44,8 @@ export default {
     for (let n = 1; n <= CHAINS; n++) {
       const chain = mg.mark({ at: `chain#c${n}`, kind: 'ring' });
       const grab = mg.rhythm({ on: chain, times: [], window: WINDOW });
+      // (its ghost once the ring is on the screen: a rhythm's ghost with no place yet taps the middle)
+      if (!(await until(mg, () => !!chain.pos))) return this.skipped;
       b.minigame.tricks.teach(mg, [grab]);
       // the beats given to the rhythm: the last and the next (its clock); which of them a hand has taken already
       let times = [], hits = 0;
