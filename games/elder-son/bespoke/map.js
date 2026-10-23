@@ -158,9 +158,9 @@ export function trees(b, chapters, { grow = null, seconds = 6, author = false } 
       words.split('\n').forEach((t, k) => { if (k) w.append(el('br')); w.append(t); });
       go.append(w, arrow());
       row.n.append(go);
-      // (its mark on the arrow's tip, at the trunk)
+      // (its mark on the arrow's tip, at the trunk — pressed there too, as on its words)
       const at = el('i', 'at');
-      row.stem.append(tip(replay), at);
+      row.stem.append(tip(replay), at, hit(ref, words.replace('\n', ' ')));
       nodes.set(ref, at);
     };
     if (c.replay && r1 < 0) pointer(line('row cursor r', '', el('ul', 'opts')), tr('continue\nthe replay'), true, `goreplay:${i}`);

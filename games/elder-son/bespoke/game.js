@@ -299,6 +299,8 @@ export default async function (b) {
       }
     }
     if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start'));
+    // (the lamp of the chapter where the play stands: the same as its pointer — the brightest thing on the map is pressed)
+    if (kept.chapter < END && !replay) add(`knot:${kept.chapter}`, 'main', kept.step ? tr('Continue') : tr('Start'));
     for (let i = 0; i < Math.min(kept.chapter, END); i++) {
       if (kept.steps[i]?.[0]) add(`knot:${i}`, `chapter:${i}`, tr('Replay the chapter'));
       if (i === growing) continue;

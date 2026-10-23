@@ -22,11 +22,13 @@ export default {
     const at = () => +g.get('run_at') || 0;
     mg.glow('busygin');
     const run = mg.hold({ on: null, seconds: 1, drain: 0 });
-    // (looking back is a way too: the finger is shown at the first meeting, not when the player stands still)
-    b.minigame.tricks.teach(mg, [run], { id: 'hold:anywhere', still: null });
+    // (the finger shows the hold as it begins — its own meeting, not Arm in Arm's — and again while he has not set off
+    // yet; once he has run, standing still is looking back, a way too: it shows no more)
+    const taught = b.minigame.tricks.teach(mg, [run], { id: 'hold:run' });
     let looks = 0, ran = false, begun = false, horn = false;
     const done = await until(mg, ({ t }) => {
       const now = at(), held = run.state.held;
+      if (held && !begun) taught.remove();
       if (held) ran = begun = true;
       else if (ran) { ran = false; looks++; } // (let go while running — he looked back)
       send('run', held ? Math.min(now + AHEAD, 1) : now);
