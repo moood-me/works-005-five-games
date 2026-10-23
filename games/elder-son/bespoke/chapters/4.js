@@ -67,9 +67,9 @@ export default {
       await toast;
       const f = facts(g.state);
       const said = await g.choose('kudimov', {
-        kudimov: [{ id: 'let', label: tr('“Let her go”') }],
-        sarafanov: [{ id: 'ask', label: tr('“Nina, stay”') }],
-        ...(f.ninaIs === 'knows' ? { nina: [{ id: 'for_me', label: tr('“Not for Father\'s sake”') }] } : {}),
+        'kudimov#chest': [{ id: 'let', label: tr('“Let her go”') }],
+        'sarafanov#chest': [{ id: 'ask', label: tr('“Nina, stay”') }],
+        ...(f.ninaIs === 'knows' ? { 'nina#chest': [{ id: 'for_me', label: tr('“Not for Father\'s sake”') }] } : {}),
       });
       g.apply('kudimov');
       if (said === 'let') {
@@ -121,8 +121,8 @@ export default {
       await g.say('silva', 'Who set it? I\'ll find him and kill him!');
       await after;
       const blame = await g.choose('fire', {
-        makarskaya: [{ id: 'blame', label: tr('Take the blame') }],
-        vasenka: [{ id: 'own_up', label: tr('Let him own up') }],
+        'makarskaya#chest': [{ id: 'blame', label: tr('Take the blame') }],
+        'vasenka#chest': [{ id: 'own_up', label: tr('Let him own up') }],
       });
       g.apply('fire');
       if (blame === 'blame') {

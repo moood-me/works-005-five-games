@@ -64,7 +64,7 @@ export default {
       await g.say('vasenka', 'Who do you want?', 'vasenka');
       await porch;
       const entry = await g.choose('entry', {
-        vasenka: [{ id: 'asked', label: tr('Ask for the night') }],
+        'vasenka#chest': [{ id: 'asked', label: tr('Ask for the night') }],
         kitchen: [{ id: 'said', label: tr('Say: “I\'m his son”') }],
       });
       g.gauge('lie');

@@ -57,8 +57,8 @@ export default {
       await g.say('silva', 'Andrei Grigorievich, he\'s no…');
       await pack;
       const truth = await g.choose('truth', {
-        sarafanov: [{ id: 'self', label: tr('Confess') }],
-        silva: [{ id: 'silent', label: tr('Keep quiet') }],
+        'sarafanov#chest': [{ id: 'self', label: tr('Confess') }],
+        'silva#chest': [{ id: 'silent', label: tr('Keep quiet') }],
       });
       g.apply('truth');
       if (truth === 'self') {
@@ -107,7 +107,7 @@ export default {
       // window down beyond the gardens)
       const train = await g.choose('train', {
         'train#door': [{ id: 'go', label: tr('Get on') }],
-        [f.fatherCame ? 'sarafanov' : f.ninaCame ? 'nina' : f.vasyaCame ? 'vasenka' : 'far_window']: [{ id: 'stay', label: tr('Stay') }],
+        [f.fatherCame ? 'sarafanov#chest' : f.ninaCame ? 'nina#chest' : f.vasyaCame ? 'vasenka#chest' : 'far_window']: [{ id: 'stay', label: tr('Stay') }],
       });
       g.apply('train');
       if (train === 'stay') {

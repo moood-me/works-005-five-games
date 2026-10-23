@@ -59,7 +59,7 @@ const MINIGAMES = {
   tiptoe: { scene: 'home', keys: ['sneak', 'stir'], listens: ['sneak_at'], points: ['clock#face'], result: ['creaks'] },
   frost: { scene: 'home', keys: ['hole', 'far_train'], points: ['window#pane'], result: ['hole'] },
   'arm-in-arm': { scene: 'hill', keys: ['down', 'catch', 'fall'], listens: ['down_at'], points: ['sarafanov#shoulder_l'], result: ['falls'] },
-  following: { scene: 'hill', keys: ['sar_go', 'follow', 'hold', 'duck'], listens: ['follow_at', 'sar_at'], points: ['sarafanov'], result: ['seen'] },
+  following: { scene: 'hill', keys: ['sar_go', 'follow', 'hold', 'duck'], listens: ['follow_at', 'sar_at'], points: ['sarafanov#chest'], result: ['seen'] },
   rucksack: { scene: 'platform', keys: ['pull', 'grip', 'door_bg'], points: ['strap#grip'], result: ['slips'] },
   buckets: { scene: 'street', keys: ['buckets', 'fire'], points: ['barrel', 'shed'], result: ['buckets'] },
   coat: { scene: 'street', keys: ['lay'], points: ['shawl#coat', 'shawl#shoulders'], result: ['seconds'] },

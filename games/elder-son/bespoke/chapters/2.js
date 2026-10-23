@@ -72,7 +72,7 @@ export default {
       g.set('spill', 1); // (the question spills over always; skipped — the same trace)
       g.sound.pour(0, 0.3);
       await g.beat('talk_back');
-      const galya = await g.choose('galya', { sarafanov: [{ id: 'remembered', label: tr('“She did”') }, { id: 'never', label: tr('“Never told me”') }] });
+      const galya = await g.choose('galya', { 'sarafanov#chest': [{ id: 'remembered', label: tr('“She did”') }, { id: 'never', label: tr('“Never told me”') }] });
       g.apply('galya');
       if (galya === 'remembered') {
         await g.say('busygin', 'She did. Often');

@@ -34,7 +34,7 @@ export default {
     send('hold', 0);
     g.set('sar_go', 1);
     // (his mark — a quiet ring, no touch of its own: its danger arc seen — a light is not)
-    const him = mg.mark({ at: 'sarafanov', kind: 'ring', quiet: true, danger: 0 });
+    const him = mg.mark({ at: 'sarafanov#chest', kind: 'ring', quiet: true, danger: 0 });
     const walk = mg.hold({ on: null, seconds: 1, drain: 0 });
     // (its own first meeting: holding is walking here, letting go — freezing; “Arm in Arm” taught only the first)
     b.minigame.tricks.teach(mg, [walk], { id: 'hold:follow' });

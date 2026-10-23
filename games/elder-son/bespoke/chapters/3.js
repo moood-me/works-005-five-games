@@ -37,8 +37,8 @@ export default {
       await march;
       await g.beat('alone');
       const father = await g.choose('father', {
-        sarafanov: [{ id: 'approach', label: tr('Go up to him') }],
-        nina: [{ id: 'hide', label: tr('Leave unseen') }],
+        'sarafanov#chest': [{ id: 'approach', label: tr('Go up to him') }],
+        'nina#chest': [{ id: 'hide', label: tr('Leave unseen') }],
       });
       g.apply('father');
       if (father === 'approach') {
@@ -88,7 +88,7 @@ export default {
       await g.say('nina', 'You\'re not really my brother, are you?');
       await wait;
       const said = await g.choose('crossing', {
-        nina: [{ id: 'truth', label: tr('Tell the truth') }],
+        'nina#chest': [{ id: 'truth', label: tr('Tell the truth') }],
         'freight#light': [{ id: 'roar', label: tr('Under the roar') }],
         barrier: [{ id: 'brother', label: tr('Answer: “Brother”') }],
       });
