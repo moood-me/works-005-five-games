@@ -387,8 +387,12 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       if (unseen()) return;
       if (fast) await alive(land());
       if (hand !== 'fogg') {
-        const off = g.hint(ASKS[hand]);
-        await alive(view.giveBook({ signal: left.signal }));
+        // (given by a touch on the notebook itself, or by the language's mark beside it — its ghost shows the touch)
+        const off = g.hint(ASKS[hand]), given = new AbortController();
+        left.signal.addEventListener('abort', () => given.abort());
+        await alive(Promise.race([view.giveBook({ signal: given.signal }), hub.give(view.bookAt(), tr('Give the notebook'))]));
+        given.abort();
+        hub.withdraw();
         off();
       }
       view.gauges(state);
@@ -438,6 +442,9 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 //   hub.ask(at, options) → the action chosen, or null: a mark of the plain choice born open where the game's own
 //     drawing was pressed (at: fn → {x, y} page px — map.js), its options out as petals at once; a touch off them folds
 //     it — null, the mark gone (nothing waits idle)
+//   hub.give(at, label) → once its one petal is pressed: a mark of the plain choice where the game's own drawing is
+//     (at: fn → {x, y} page px — beside the notebook), its petal the words of what the touch does; the ghost shows it
+//     at once
 //   hub.withdraw() — nothing offered; hub.told(text | [texts], ms) → true once the scene tells it (of several: the one
 //     told first), false if ms pass
 const SHOW = 8; // s: nothing pressed so long — the ghost shows how
@@ -466,18 +473,20 @@ export function listen(b) {
       const ghost = setTimeout(() => mg.show({ gestures: presses }), show * 1000);
       const marks = [];
       // (each mark's words under it, as long as the choice is offered)
-      const labels = refs.map(ref => {
+      const open = []; // (a mark whose petals are out, by its place in refs)
+      const labels = refs.map((ref, k) => {
         const el = document.createElement('p');
         el.className = 'card choice-label';
         el.textContent = offers[ref].map(o => o.label).join(' · ');
         el.hidden = true;
         b.layer.append(el);
-        return { el, ref };
+        return { el, ref, k };
       });
       const placing = b.onFrame(() => {
-        for (const { el, ref } of labels) {
+        for (const { el, ref, k } of labels) {
           const p = b.where(ref);
-          el.hidden = !p?.seen;
+          // (its petals out: they say it — the words under the mark step aside)
+          el.hidden = !p?.seen || !!open[k];
           if (!p?.seen) continue;
           // (under the mark, but all of it within the window: EDGE px from its sides)
           const w = el.offsetWidth, x = Math.min(Math.max(p.x, w / 2 + EDGE), b.layer.clientWidth - w / 2 - EDGE);
@@ -505,7 +514,9 @@ export function listen(b) {
           const options = offers[ref], mark = mg.mark({ at: ref.includes('#') ? ref : `${ref}@` });
           marks.push(mark);
           const press = mg.press({ on: mark, petals: options });
-          press.on('down', () => clearTimeout(ghost));
+          const k = presses.length;
+          press.on('down', () => { clearTimeout(ghost); open[k] = true; });
+          press.on('fold', () => { open[k] = false; });
           press.on('choose', ({ id }) => chosen(mark, options.find(o => o.id === id)));
           presses.push(press);
         }
@@ -523,6 +534,14 @@ export function listen(b) {
         press.on('choose', ({ id }) => { mg.snap({ at: mark }); over(options.find(o => o.id === id)); });
         press.on('fold', () => over(null));
       });
+    },
+    give(at, label) {
+      offered?.leave();
+      const mg = offered = b.minigame.start({ plate: false });
+      const mark = mg.mark({ at }), press = mg.press({ on: mark, petals: [{ id: 'give', label }] });
+      const ghost = setTimeout(() => mg.show({ gestures: [press] }), 1000);
+      mg.on('end', () => clearTimeout(ghost));
+      return new Promise(ok => press.on('choose', () => { mg.snap({ at: mark }); mg.leave(); if (offered === mg) offered = null; ok(); }));
     },
     withdraw() { offered?.leave(); offered = null; },
     told,

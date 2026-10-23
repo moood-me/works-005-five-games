@@ -117,7 +117,7 @@ export function trees(b, chapters, { grow = null, seconds = 6, author = null } =
     const head = el('header', 'head');
     head.append(el('div', 'num', c.number || ''));
     if (c.kind === 'future') {
-      head.append(el('div', 'title', ' '));
+      head.append(el('div', 'title', c.number ? ' ' : c.title));
       const { knot, core } = lamp(i, null);
       tree.append(head, knot, el('i', 'blank'));
       return { tree, nodes, origin: hang(tree, core) };

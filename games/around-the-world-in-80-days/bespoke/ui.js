@@ -7,7 +7,8 @@
 //     change and what it was for), the newest inked in
 //   view.money(state, was) — the sum changes; spent: notes fly from the bag
 //   view.hero('fogg' | 'pp') — the medallion of his face, a moment, high on the left
-//   view.giveBook({signal}) → once the player has touched the notebook (it glows till then)
+//   view.giveBook({signal}) → once the player has touched the notebook (it glows till then); view.bookAt() → fn →
+//     {x, y}: the page point beside the notebook's top right (where a mark of the language asks for it)
 //   view.toast(text, kind) — a card under the tools: 'rule' (what a figure means, the first time), 'stamp' (a visa
 //     stamp: who remembers), 'stamp cold'; three at most
 //   view.hint(text, afterMs) — one line low in the middle; → a function that takes it away
@@ -67,6 +68,7 @@ export function ui(layer) {
       medal.timer = setTimeout(() => medal.classList.remove('on'), 1800);
     },
     giveBook({ signal } = {}) { return book.give(signal); },
+    bookAt() { return () => book.beside(); },
     toast(text, kind) {
       // three at most: the oldest goes for a new one
       while (toasts.childElementCount > 2) toasts.firstElementChild.remove();
@@ -186,6 +188,7 @@ function bookGauge(layer) {
       hand(state);
       if (!writing) next();
     },
+    beside() { const r = page.getBoundingClientRect(); return r.width ? { x: r.right + 40, y: r.top + 34 } : null; },
     give(signal) {
       box.classList.add('on', 'asked');
       return new Promise(ok => {

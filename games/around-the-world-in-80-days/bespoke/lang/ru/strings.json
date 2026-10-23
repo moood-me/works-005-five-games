@@ -342,6 +342,7 @@
   {"text":"{d} d","translation":"{d} д","where":"bespoke/story.js"},
   {"text":"{h} h","translation":"{h} ч","where":"bespoke/story.js"},
   {"text":"£{sum}","translation":"£ {sum}","where":"bespoke/story.js"},
+  {"text":"Give the notebook","translation":"Отдать книжку","where":"bespoke/story.js"},
   {"text":"Phileas Fogg","translation":"Филеас Фогг","where":"bespoke/ui.js"},
   {"text":"play as…","translation":"играть как…","where":"bespoke/ui.js"},
   {"text":"close (Esc)","translation":"закрыть (Esc)","where":"bespoke/ui.js"},
