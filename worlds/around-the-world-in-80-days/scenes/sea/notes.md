@@ -61,6 +61,7 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
   (the zone's place). Asked of the game (the coordinator).
 
 2026-10-23: the storm's look lighter (ambient 0.92 `#c4ced2`, haze 0.36 `#8a989e`, saturation 0.7) — the people on deck clear in the typhoon.
+The stern camera a metre ahead of the tiller (`CAM.camera_z` 1): Bunsby steering beside it is behind the camera, not his hand cut by the frame's right edge; `aouda_storm` and `shanghai` take that offset off with the others when the operator frames.
 
 ## Contract for the check
 

@@ -119,7 +119,8 @@ const OFF = id => ({ [`${id}_a`]: 0, [`${id}_d`]: -3, [`${id}_here`]: false, [`$
 const NOBODY = () => Object.assign({}, ...WHO.map(OFF));
 const at = (id, [a, d], turn, more = {}) => ({ [`${id}_a`]: a, [`${id}_d`]: d, [`${id}_here`]: true, [`${id}_turn`]: turn,
   ...Object.fromEntries(Object.entries(more).map(([k, v]) => [`${id}_${k}`, v])) });
-const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: -0.45, camera_z: 0, camera_h: -0.55, camera_look: 0.02 };
+// (a metre ahead of the tiller: Bunsby, steering beside it, is behind the camera — not his hand cut by the frame's edge)
+const CAM = { camera_glide: 0, camera_target: null, camera_shot: null, camera_frame: null, camera_x: -0.45, camera_z: 1.0, camera_h: -0.55, camera_look: 0.02 };
 // a point of the boat (her own metres) for a look or a reach: it goes with her
 const aboard = (a, d, h) => ({ on: 'frame', at: [a, d, h] });
 // where they are: Bunsby at the tiller; Fogg by the port rail, Aouda beside him, her hand in his, Fix by the starboard
@@ -194,6 +195,7 @@ function film(scene, party = {}) {
         aouda.look(aboard(0.6, -9, 2.2));
         // (the camera's own offsets — aside, low — taken off while it is on her)
         s.move('camera_x', 0, { over: 1.6 });
+        s.move('camera_z', 0, { over: 1.6 });
         s.move('camera_h', 0, { over: 1.6 });
         s.camera({ target: 'aouda', shot: 1.4, frame: [0.5, 0.42], glide: 1.6 });
         await s.wait(2.2);
@@ -201,6 +203,7 @@ function film(scene, party = {}) {
         await s.wait(2.6);
         s.camera({ target: null, glide: 1.6 });
         s.move('camera_h', CAM.camera_h, { over: 1.6 });
+        s.move('camera_z', CAM.camera_z, { over: 1.6 });
         await s.move('camera_x', CAM.camera_x, { over: 1.6 });
       },
     },
@@ -220,6 +223,7 @@ function film(scene, party = {}) {
         // the camera goes forward with him to the gun: him, the gun, the steamer beyond
         s.camera({ target: 'gun_view', shot: 0.7, frame: [0.45, 0.45], glide: 4 });
         s.move('camera_x', 0, { over: 4 });
+        s.move('camera_z', 0, { over: 4 });
         s.move('camera_h', 0, { over: 4 });
         await bunsby.walk([[0.8, -2.0], [0.6, 3.0], SPOT.bunsby_gun]);
         await bunsby.turn(0);
