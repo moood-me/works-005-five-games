@@ -12,9 +12,8 @@
 //   g.scene(folder, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
 //     under it what the play has decided, as this scene's keys (carry). It plays no beat until one is named: the
 //     step's first beat goes in `state` ({beat: name}) — the scene opens playing it — and g.beat(name) then takes it
-//     up (waits for its end). The one on the screen already is not opened anew: its keys are set and the beat cut to.
-//     cut: the scene before stays till this one is drawn, then gives way in one frame; else the page fades (time has
-//     passed)
+//     up (waits for its end). Always opened anew, even if it is the one on the screen (it lives on while the new one is
+//     made). cut: it comes in one cut; else through black (time has passed)
 //   g.set(key, value, seconds) / g.get(key) — the shown scene's state (seconds: it goes there smoothly)
 //   g.wait(ms) — time of the game's own (a pause); never to wait for something the scene does — that is an event:
 //   g.told(text, ms) — until the scene tells `text` (→ true), or ms pass (→ false)
@@ -255,12 +254,9 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         if (fast) await alive(land());
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: ending(st.beat) } : null;
         hub.withdraw();
-        // (the scene on the screen already: not opened again — its making ready would be a wait with nothing to see —,
-        // its keys set and the beat cut to)
-        if (b.spec === spec) {
-          for (const [key, value] of Object.entries(st)) if (key !== 'beat') b.set(key, value);
-          if (opening) { b.set('beat', null); b.set('beat', opening.name); }
-        } else await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
+        // (opened anew even when it is the one on the screen: a beat's `from` sets what it begins with, but what the
+        // beats before it left — keys no `from` names — would stay; the scene on the screen lives on meanwhile)
+        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
       } finally { showing = false; }
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),

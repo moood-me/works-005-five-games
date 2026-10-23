@@ -51,7 +51,7 @@ import epilogue from './chapters/epilogue.js';
 const CHAPTERS = [prologue, one, two, three, four, epilogue];
 const EPILOGUE = CHAPTERS.length - 1;
 const END = CHAPTERS.length; // the play played through: no chapter of the main run
-const DATELINE = 3; // the chapter whose page the view is at as it passes the 180th meridian (America: the Pacific crossed)
+const DATELINE = 2; // the chapter whose page the view is at as it passes the 180th meridian (Hong Kong: the Pacific crossed at its end)
 const TOUR = 2.2; // s at each chapter's page as the view goes the whole way round, the play played through
 const REVEAL = 4; // s: a chapter's rows written in, one by one, as it has been played through (and the red line drawn on)
 // a replay's end asks on its knot once the knot has stood still REST looks REST_STEP ms apart (REST_MAX s at most)
