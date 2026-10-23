@@ -88,8 +88,8 @@ the beats in node and prints where the people and the points stand in the frame.
   "away": {"after": ["glass"], "tells": ["away:wave", "away:window"], "seconds": 9, "show": false},
   "dawn": {"after": [], "tells": ["dawn:pass", "dawn:open", "dawn:shut"], "seconds": 24, "show": false}
 },
-"points": ["strap#grip", "train_window#pane", "busygin", "silva", "sarafanov", "nina", "vasenka"],
-"offers": ["train#tail", "train#door", "sarafanov", "nina", "vasenka", "far_window"],
+"points": ["strap#grip", "train_window#pane", "busygin", "silva", "sarafanov", "nina", "vasenka", "sarafanov#chest", "nina#chest", "vasenka#chest"],
+"offers": ["train#tail", "train#door", "sarafanov#chest", "nina#chest", "vasenka#chest", "far_window"],
 "party": {"father_came": 1, "nina_came": 0, "vasya_came": 0, "silva_door": 1, "nina_is": "none", "suitcase": 0, "box_hand": 1,
   "warm": 0.36, "frost": 0.25, "vasya_end": "taiga", "late_run": 0},
 "acts": {}}

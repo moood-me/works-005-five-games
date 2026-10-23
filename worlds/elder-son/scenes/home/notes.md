@@ -155,8 +155,8 @@ What goes on beside a beat's main line (someone walking off, sitting down) is a 
 },
 "points": ["table#box", "table#glass", "sarafanov", "busygin", "silva", "nina", "kudimov", "cot", "cot_chair#coat", "clock#face", "window#pane",
   "hook#coat", "stove#door", "cupboard#box", "hands#hands", "tea#glass1", "tea#glass2", "box#finger1", "box#finger2", "box#finger3", "box#finger4",
-  "box#box", "box#old"],
-"offers": ["table#glass", "sarafanov", "table#box", "cot_chair#coat", "cot", "kudimov", "nina", "silva"],
+  "box#box", "box#old", "sarafanov#chest", "kudimov#chest", "nina#chest", "silva#chest"],
+"offers": ["table#glass", "sarafanov#chest", "table#box", "cot_chair#coat", "cot", "kudimov#chest", "nina#chest", "silva#chest"],
 "party": {"warm": 0.36, "frost": 0.25, "box_where": "cupboard", "vasenka_by": 0, "silva_door": 1, "father_came": 1, "nina_came": 0, "vasya_came": 0,
   "nina_end": "gone", "nina_for": 0, "vasya_end": "taiga"},
 "acts": {}}

@@ -88,8 +88,8 @@ clock: a walk at 1.25 m/s, a motion its recording's length; the moments told and
  "bottom": {"after": [], "tells": ["bottom:gone"], "seconds": 13, "show": false},
  "hide": {"after": [], "tells": ["hide:ready"], "seconds": 8, "show": false},
  "club": {"after": [], "tells": ["club:in"], "seconds": 12, "show": false}},
- "points": ["sarafanov", "nina", "busygin", "gate", "sarafanov#shoulder_l"],
- "offers": ["sarafanov", "nina"],
+ "points": ["sarafanov", "nina", "busygin", "gate", "sarafanov#shoulder_l", "sarafanov#chest", "nina#chest"],
+ "offers": ["sarafanov#chest", "nina#chest"],
  "party": {},
  "acts": {"down": {"values": [], "tells": ["down:slip"]},
   "sar_go": {"values": [0, 1], "tells": ["sar_go:look", "sar_go:on", "sar_go:club"]}}}

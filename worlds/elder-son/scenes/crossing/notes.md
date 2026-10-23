@@ -70,8 +70,8 @@ Chapter III of “The Elder Son”: the level crossing beyond the settlement, gr
  "truth": {"after": ["wait"], "tells": ["truth:said", "truth:passed"], "seconds": 24, "show": false},
  "roar": {"after": ["wait"], "tells": ["roar:loud", "roar:passed"], "seconds": 26, "show": false},
  "brother": {"after": ["wait"], "tells": ["brother:arm", "brother:passed"], "seconds": 23, "show": false}},
- "points": ["nina", "busygin", "freight#light", "barrier"],
- "offers": ["nina", "freight#light", "barrier"],
+ "points": ["nina", "busygin", "freight#light", "barrier", "nina#chest"],
+ "offers": ["nina#chest", "freight#light", "barrier"],
  "party": {},
  "acts": {}}
 ```

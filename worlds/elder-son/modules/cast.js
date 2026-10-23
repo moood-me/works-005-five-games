@@ -65,7 +65,7 @@ const sec = (F, i) => F.trunk(1)[i];
 const front = (F, w, colour, down = 2, out = 1.06) => {
   const { add, mul, mix } = V(), sh = sec(F, 4), lo = sec(F, down), ch = sec(F, 3);
   const top = add(sh[0], mul(sh[2], sh[4] * out)), bot = add(lo[0], mul(lo[2], lo[4] * out));
-  F.bar(top, bot, ch[3] * w, ch[3] * w * 0.9, [[0, colour]], 6, sh[2], true);
+  F.bar(top, bot, ch[3] * w, ch[3] * w * 0.9, [[0, colour]], 6, sh[2], 1);
   return { top, bot };
 };
 // a flat thing in the right hand's fingers, turned to the eyes
@@ -199,8 +199,8 @@ const parts = {
   coat_over: { name: 'coat over the shoulders', draw: F => {
     const { add, mul } = V(), m = F.fit.h, [c, sd, fw, w, d] = sec(F, 4), uc = F.up('Chest'), col = C('#4b4d53');
     const top = add(c, mul(uc, 0.03 * m)), hips = F.P('Hips');
-    // (round the trunk: as wide as the shoulders across, as deep as the trunk before and behind — `flat` is the depth's
-    // share of the width, F.bar's second radius)
+    // (round the trunk: as wide as the shoulders across, as deep as the trunk before and behind — `flat`, a number, is
+    // the depth's share of the width)
     F.bar(top, add(hips, mul(UP, -0.42 * m)), w * 1.32, w * 1.42, [[0, col]], 18, sd, (d * 1.5) / (w * 1.32), 2.2);
     F.ball(add(F.P('Neck1'), mul(uc, 0.0)), [sd, uc, fw], [w * 0.62, 0.06 * m, d * 1.45], col, 14);
     F.point('coat', add(top, mul(fw, -d)));
@@ -208,7 +208,11 @@ const parts = {
   // a knitted shawl over the shoulders, crossed and tied before the chest, its point down the back
   shawl: { name: 'shawl', draw: F => {
     const { add, mul } = V(), m = F.fit.h, [c, sd, fw, w, d] = sec(F, 4), uc = F.up('Chest'), col = C('#8b7562');
-    F.bar(add(c, mul(uc, 0.035 * m)), add(c, mul(uc, -0.17 * m)), w * 1.12, w * 1.3, [[0, col]], 16, sd, (d * 1.4) / (w * 1.12), 2.2);
+    // (each half a broad band of it from behind the neck over the shoulder and down the front to the knot: a board, `flat`)
+    for (const s of [-1, 1]) {
+      const at = (x, f, u) => add(c, add(mul(sd, s * w * x), add(mul(fw, d * f), mul(uc, u * m))));
+      F.tube([at(0.3, -1.0, 0.03), at(0.9, 0, 0.045), at(0.6, 1.15, -0.04), at(0.08, 1.3, -0.12)], [[0, 0.065 * m], [3, 0.045 * m]], [[0, col]], 8, sd, 0.35);
+    }
     F.ball(add(c, add(mul(fw, -d * 1.05), mul(uc, -0.2 * m))), [sd, uc, fw], [w * 0.55, 0.13 * m, 0.03 * m], col, 4, 1.2);
     F.ball(add(c, add(mul(fw, d * 1.25), mul(uc, -0.12 * m))), [sd, uc, fw], [0.035 * m, 0.03 * m, 0.03 * m], col.map((v, i) => (i < 3 ? v * 0.85 : v)), 8);
     F.point('shawl', add(c, mul(fw, -d)));
@@ -247,7 +251,7 @@ const parts = {
   // Sarafanov's best: a white shirt's front and a dark tie in the open jacket
   tie: { name: 'tie', draw: F => {
     const { add, mul } = V(), m = F.fit.h, { top, bot } = front(F, 0.36, C('#e8e4da'), 2, 1.05), [c, sd, fw, w, d] = sec(F, 4);
-    F.bar(add(top, mul(fw, 0.012 * m)), add(bot, mul(fw, 0.012 * m)), 0.016 * m, 0.03 * m, [[0, C('#3a2b2e')]], 4, fw, true);
+    F.bar(add(top, mul(fw, 0.012 * m)), add(bot, mul(fw, 0.012 * m)), 0.016 * m, 0.03 * m, [[0, C('#3a2b2e')]], 4, fw, 1);
   } },
   // Kudimov's belt over the tunic: leather round the waist, a brass buckle
   belt: { name: 'belt', draw: F => {
