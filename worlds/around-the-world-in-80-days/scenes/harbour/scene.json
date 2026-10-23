@@ -42,10 +42,10 @@
         "shafts": 0.3
       },
       "night": {
-        "ambient": 0.55,
-        "ambientColor": "#5a6c9c",
-        "haze": 0.18,
-        "hazeColor": "#222a3a",
+        "ambient": 0.8,
+        "ambientColor": "#7487b4",
+        "haze": 0.14,
+        "hazeColor": "#364058",
         "saturation": 0.85,
         "shafts": 0.35,
         "lights": {

@@ -418,9 +418,10 @@ function film(scene) {
   };
   // the boatman waiting on the quay by the head of the steps, his lantern up, his sampan below
   const boatman = () => ({ boatman_here: true, boatman_on: null, boatman_turn: 270, boatman_with: ['lantern'], boatman_a: BOATMAN_AT[0], boatman_d: BOATMAN_AT[1] });
-  // night at the jetty: the steamer alongside, smoking; Passepartout reeling along the jetty to her gangway
+  // night at the jetty: the steamer alongside, smoking; Passepartout reeling along the jetty to her gangway (from back
+  // along the jetty: the whole black hull against the moonlit sky, the lit planks — not the hull's black filling the frame)
   const NIGHT = () => ({
-    ...LIGHT.night, ...CAM0, camera_x: 15.6, camera_z: 74.4, camera_h: 0.3, ...NOBODY(),
+    ...LIGHT.night, ...CAM0, camera_x: 15.6, camera_z: 67, camera_h: 1.2, camera_look: 0.05, ...NOBODY(),
     ...stand('passepartout', JETTY_IN, toward(JETTY_IN, GANGWAY_FOOT), { passepartout_gait: 'stagger_walk' }), daze: 0.5,
   });
   // aboard, lying where he fell on her deck under the lantern by the gangway's head (the camera on her deck by the rail,

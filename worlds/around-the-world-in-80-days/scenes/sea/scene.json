@@ -35,11 +35,11 @@
   ],
   "looks": {
    "storm": {
-    "ambient": 0.74,
-    "ambientColor": "#b8c4ca",
-    "haze": 0.45,
-    "hazeColor": "#66747a",
-    "saturation": 0.62,
+    "ambient": 0.92,
+    "ambientColor": "#c4ced2",
+    "haze": 0.36,
+    "hazeColor": "#8a989e",
+    "saturation": 0.7,
     "shafts": 0.05,
     "wind": [
      0.8,

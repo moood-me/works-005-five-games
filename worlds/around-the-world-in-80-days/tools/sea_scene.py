@@ -101,7 +101,7 @@ spec = {
     'light': {'vignette': 0.3, 'grain': 0.07, 'ambient': 1.0, 'ambientColor': '#eef0ee', 'haze': 0.12, 'hazeColor': '#b8c4c6', 'hazeGlow': 0.4,
               'shafts': 0.15, 'saturation': 0.95, 'wind': [0.6, -1, 0.8],
               'looks': {
-                  'storm': {'ambient': 0.74, 'ambientColor': '#b8c4ca', 'haze': 0.45, 'hazeColor': '#66747a', 'saturation': 0.62, 'shafts': 0.05,
+                  'storm': {'ambient': 0.92, 'ambientColor': '#c4ced2', 'haze': 0.36, 'hazeColor': '#8a989e', 'saturation': 0.7, 'shafts': 0.05,
                             'wind': [0.8, -1, 3.2], 'lights': {'sun': 0.35}},
               }},
     'lights': [

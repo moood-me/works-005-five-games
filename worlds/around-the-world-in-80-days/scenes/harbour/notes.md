@@ -146,6 +146,8 @@ Shortened silences (2026-10-21, the browser play): `quay` — Fogg comes from ne
 
 After the second browser play (2026-10-21): `cousin` framed on the three (the operator on Passepartout between them, 0.55) — Aouda and Fogg both in the frame's middle 4:3; `carnatic` — she casts off and swings her bow out in 8 s (`carnatic_present` → 0.5; was 0.45 in 26 s), the camera drawing back with her. The cut aboard staged again: her deck about the gangway's head is a plane now (`steamer_planks`), the camera on it by the rail, a little above him — he lies on the planks under the lantern; at `carnatic:cast-off` a cut (made ready) to the pier, the camera drawing back down it as she goes.
 
+2026-10-23: the night lighter (look `night`: ambient 0.8 `#7487b4`, haze `#364058`); the night jetty (`NIGHT`) seen from farther back along it — the black hull against the moonlit sky, Passepartout on the lit planks, not the hull's black filling the frame.
+
 ## Contract for the check
 
 ```json

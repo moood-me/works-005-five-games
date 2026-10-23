@@ -193,6 +193,8 @@ After the second browser play (2026-10-21): `kiouni#head` moved from his eye dow
 
 2026-10-22: the mists' boxes as high as their highest bank's soft top (`mist_stream` −4.2, `mist_river` −5.4): cut lower, the torch-lit mist ended in a hard straight edge across the sky (the dash, the procession).
 
+2026-10-23: `wake` ends with a cut (made ready) back to the station (`AT_STATION`): Kiouni knelt, the guide on his neck — the choice after it (`guide#head`, `kiouni#head`) was offered on the close of Aouda, where neither was seen (the game: «the choice's points are nowhere to be seen»). Fogg gets down by the howdah, not before Kiouni's head (`DOWN_AT.fogg` −34.9), so the head is clear.
+
 ## Contract for the check
 
 ```json

@@ -60,6 +60,8 @@ Modules: `light` (colours), `cast` (the people), `beats` (the film). `scene.json
 - The crest cannot show the side it comes from unless the game sends `wave_from`: «The typhoon» keeps `dir` to itself
   (the zone's place). Asked of the game (the coordinator).
 
+2026-10-23: the storm's look lighter (ambient 0.92 `#c4ced2`, haze 0.36 `#8a989e`, saturation 0.7) — the people on deck clear in the typhoon.
+
 ## Contract for the check
 
 ```json

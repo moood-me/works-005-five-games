@@ -1335,7 +1335,7 @@ const MORNING = () => ({
 });
 // knelt by the station: Fogg, Passepartout and Cromarty down by him, Fogg by the howdah looking up at her
 // (the three get down by his near flank toward his head — out of the way of the close shot of the howdah; Fogg nearest her)
-const DOWN_AT = { fogg: [-37.0, 8.5], passepartout: [-38.8, 9.0], cromarty: [-39.6, 9.4] };
+const DOWN_AT = { fogg: [-34.9, 8.5], passepartout: [-38.8, 9.0], cromarty: [-39.6, 9.4] };
 const KNELT = () => ({
   ...MORNING(), ...KIOUNI(KI_STATION, 270, 1),
   ...Object.fromEntries(Object.entries(DOWN_AT).flatMap(([id, at]) => Object.entries(stand(id, at, 0, { [`${id}_on`]: null, [`${id}_do`]: 'stand', [`${id}_look`]: 'aouda#head' })))),
@@ -1359,6 +1359,9 @@ const SALE = () => ({
 // close on Aouda in the howdah's middle seat, her face — the operator on her (it stands as high as what carries her:
 // level with the howdah)
 const AOUDA_CLOSE = { ...CAM0, camera_target: 'aouda', camera_shot: 1.2, camera_frame: [0.5, 0.4] };
+// …and back to the station as MORNING has it: Kiouni knelt, the guide on his neck, the travellers by him (the choice
+// that follows wake is on `guide#head` and `kiouni#head`: both in the frame)
+const AT_STATION = { ...CAM0, camera_x: -36.6, camera_z: 3.8, camera_h: 0.6 };
 // (his near side, as he faces `f`)
 const nearSide = f => { const k = ((f % 360) + 360) % 360; return k > 0 && k < 180 ? -1 : 1; };
 // riding beside the howdah on his near side, her face to it: as he runs through the dark (the operator on her, running,
@@ -1719,6 +1722,11 @@ function film(scene) {
       await s.wait(1.6);
       if (!calm) { s.set('aouda_look', [-28, 12, 2]); await s.wait(1.2); s.set('aouda_look', 'fogg#head'); }
       await s.wait(1.6);
+      // (out again to the station: Kiouni and the guide — what the choice after it is on)
+      const station = s.shot(AT_STATION);
+      await s.until(() => station.ready);
+      station.cut();
+      await s.wait(0.4);
     } },
     // ---- Given: Fogg lays his palm on the trunk and hands the goad to the guide; Kiouni lifts Passepartout on his trunk.
     gift: { after: 'wake', from: PARTING, run: async s => {
