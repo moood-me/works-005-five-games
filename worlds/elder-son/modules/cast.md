@@ -48,6 +48,7 @@ A part's point — `"<id>#<point>"` (for `look`, `reach`, the light, the camera)
 | part | what | point |
 | --- | --- | --- |
 | `case` | the clarinet case in the right hand | `case` |
+| `case_l` | the same case in the left hand | `case` |
 | `hat_hand` | the hat in the right hand | — |
 | `clarinet_low` | the clarinet in both lowered hands | `clarinet` |
 | `trumpet`, `tuba`, `drum` | the brass | — |

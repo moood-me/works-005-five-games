@@ -47,11 +47,13 @@ const ON = {
 // the table laid (IV): a glass at each place
 const SET_GLASS = [[1.56, 2.3], [1.56, 2.9], [1.56, 3.42], [2.04, 1.95], [2.04, 2.52], [2.04, 3.1]];
 
-// the six places: three a side; the left ones face +x (turn 90), the right ones −x (270)
+// the six places: three a side; the left ones face +x (turn 90), the right ones −x (270) — the chairs drawn up, a
+// quarter of a metre from the table's edges: the hands of one seated lie on it with the elbows bent
 const SEATS = {
-  L1: [1.0, 2.1, 90], L2: [1.0, 2.7, 90], L3: [1.0, 3.3, 90],
-  R1: [2.6, 2.1, 270], R2: [2.6, 2.7, 270], R3: [2.6, 3.3, 270],
+  L1: [1.15, 2.1, 90], L2: [1.15, 2.7, 90], L3: [1.15, 3.3, 90],
+  R1: [2.45, 2.1, 270], R2: [2.45, 2.7, 270], R3: [2.45, 3.3, 270],
 };
+const RISEN = 0.24;   // where `rise_back` leaves one who got up: that far behind the seat
 const SEAT_H = 0.46;
 // the marks (plan)
 const SPOT = {
@@ -196,7 +198,8 @@ const film = scene => {
     ...OUTS(), ...wear('busygin', null), ...wear('silva', null), ...wear('vasenka', null), ...wear('sarafanov', null),
     ...wear('nina', null), ...wear('kudimov', null), ...more,
   });
-  const DAWN = { hour: 0.25, lamp: 0 };
+  // (six in the morning in winter is dark yet: the kitchen lamp burns low — the people readable by it, the grey at the window)
+  const DAWN = { hour: 0.25, lamp: 0.5 };
   const cut = (s, v) => s.cut({ ...v });
   const shot = (s, v) => s.shot({ ...v });
   const W2 = p => W(p[0], p[1]);
@@ -430,7 +433,7 @@ const film = scene => {
     // he raises his glass, the glasses meet; the old man sits and lays a page of music on the oilcloth — L31
     supper_after: {
       after: 'supper',
-      from: () => ({ ...F.supper.from(), ...STAND('sarafanov', [1.0, 2.1], 90, { sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.3, 2.1, 1.45) },
+      from: () => ({ ...F.supper.from(), ...STAND('sarafanov', [SEATS.L1[0] - RISEN, SEATS.L1[1]], 90, { sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.3, 2.1, 1.45) },
         sarafanov_look: 'busygin', sarafanov_mood: 'smile' }), ...wear('sarafanov', 'sarafanov_home') }),
       run: async s => {
         const sar = s.person('sarafanov'), bus = s.person('busygin');
@@ -501,7 +504,7 @@ const film = scene => {
     // for the answer (a choice on him)
     talk_back: {
       from: () => NIGHT_TALK({ ...CAM.tb, tea: 0, which: 1, pour: 0, glass1: 1, glass2: 1, spill: 1, shake: 0, puddle: 1, kettle_at: 'table', glass_s: 'hand',
-        sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.3, 2.1, 0.98), l: P3(1.3, 2.17, 0.96) },
+        sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.42, 2.1, 0.98), l: P3(1.42, 2.17, 0.96) },
         sarafanov_look: 'busygin', sarafanov_mood: 'thinking', busygin_look: 'table#glass', busygin_mood: 'afraid' }),
       run: async s => {
         await s.wait(1.4);
@@ -512,7 +515,7 @@ const film = scene => {
     // “She remembered”: he puts the glass down, reaches across and lays his hand on Busygin's; then looks at the window
     galya_yes: {
       after: 'talk_back',
-      from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'hand', sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.3, 2.1, 0.98), l: P3(1.3, 2.17, 0.96) },
+      from: () => NIGHT_TALK({ ...CAM.tb, puddle: 1, glass_s: 'hand', sarafanov_with: WITH('sarafanov_home', 'glass_held'), sarafanov_reach: { r: P3(1.42, 2.1, 0.98), l: P3(1.42, 2.17, 0.96) },
         sarafanov_look: 'busygin', sarafanov_mood: 'thinking', busygin_mood: 'afraid', busygin_look: 'table#glass' }),
       run: async s => {
         const sar = s.person('sarafanov'), bus = s.person('busygin');
@@ -669,7 +672,7 @@ const film = scene => {
     // profile, without his smile); then the clarinet; Busygin turns on his side to the wall — under L41
     wall: {
       from: () => ROOM({ ...CAM.sofa, fade: 1, lamp: 0, sar_light: 1, coat_b: 'cot', box_at: boxAt(), ...wear('busygin', 'busygin_shirt'), ...wear('silva', 'silva_shirt'),
-        ...LIE('busygin', 'cot'), ...LIE('silva', 'sofa', { silva_mood: 'tired', silva_look: P3(6.6, 3.0, 2.6) }) }),
+        ...LIE('busygin', 'cot'), ...LIE('silva', 'sofa', { silva_mood: 'tired', silva_look: null }) }),
       run: async s => {
         const bus = s.person('busygin');
         s.move('fade', 0, { over: 1.8, ease: 'out' });
@@ -930,7 +933,7 @@ const film = scene => {
         kud.look('nina');
         hold(s, 'sarafanov', 'glass_held');
         sar.look(null);
-        sar.reach({ r: P3(1.3, 2.0, 1.05) });
+        sar.reach({ r: P3(1.42, 2.0, 1.05) });
         s.tell('let_go:glass');
         await s.wait(6.0);
       },

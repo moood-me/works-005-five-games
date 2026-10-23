@@ -75,14 +75,21 @@ const inHand = (F, w, h, colour, name) => {
   F.ball(c, [x, y, n], [w * m, h * m, 0.002 * m], colour, 4, 8);
   if (name) F.point(name, c);
 };
+// the clarinet's case hanging by its handle from a hand (r, l): a long dark box
+const caseIn = (F, n) => {
+  const { add, mul } = V(), { at, axes } = hand(F, n);
+  F.ball(add(at, mul(axes[1], -0.07 * F.fit.h)), axes, [0.045 * F.k, 0.06 * F.fit.h, 0.3 * F.fit.h], LEATHER, 8, 3);
+  F.point('case', at);
+};
 const hairCap = (F, scale) => { const h = F.head; F.cap(h.at, h.axes, h.egg.map(v => v * h.r * h.out * scale), [0, 0.75, -0.66], -0.2, F.colors.hair, h.sides, h.square); };
-// a fur hat pulled low; with ear-flaps tied up and, for a cadet, a star at the front
+// a fur hat: its crown over the top of the head down to the brow, a band of fur round it there — the brows and the eyes
+// under it, seen; with ear-flaps tied up and, for a cadet, a star at the front of the band
 const furHat = (flaps, star) => F => {
-  const { add, mul } = V(), { at, axes, r } = F.head, [hs, hu, hf] = axes;
-  F.ball(add(at, mul(hu, r * 0.5)), axes, [r * 1.16, r * 0.76, r * 1.14], F.colors.hat, F.sides);
-  F.ball(add(at, mul(hu, r * 0.18)), axes, [r * 1.13, r * 0.3, r * 1.11], F.colors.hat, F.sides);
-  if (flaps) for (const s of [-1, 1]) F.ball(add(at, add(mul(hs, s * r * 1.02), mul(hu, r * 0.4))), axes, [r * 0.18, r * 0.42, r * 0.5], F.colors.hat, 10);
-  if (star) F.ball(add(at, add(mul(hu, r * 0.5), mul(hf, r * 1.16))), axes, [r * 0.11, r * 0.11, r * 0.04], C('#b02a22'), 5, 1.4);
+  const { add, mul } = V(), h = F.head, { at, axes, r } = h, [hs, hu, hf] = axes;
+  F.cap(at, axes, h.egg.map(v => v * r * h.out * 1.16), [0, 0.98, -0.2], 0.3, F.colors.hat, h.sides, h.square);
+  F.ball(add(at, mul(hu, r * 0.56)), axes, [r * 0.97, r * 0.15, r * 1.05], F.colors.hat, F.sides);
+  if (flaps) for (const s of [-1, 1]) F.ball(add(at, add(mul(hs, s * r * 0.98), mul(hu, r * 0.5))), axes, [r * 0.16, r * 0.34, r * 0.46], F.colors.hat, 10);
+  if (star) F.ball(add(at, add(mul(hu, r * 0.56), mul(hf, r * 1.06))), axes, [r * 0.11, r * 0.11, r * 0.04], C('#b02a22'), 5, 1.4);
 };
 
 const parts = {
@@ -106,12 +113,9 @@ const parts = {
       F.tube([from, mid, end], [[0, r * 1.6], [1, r * 1.7], [2, r * 1.5]], [[0, F.colors.accent]], 8, sd, 0.35);
     }
   } },
-  // the clarinet's case, by its handle in the right hand: a long dark box
-  case: { name: 'case', draw: F => {
-    const { add, mul } = V(), { at, axes } = hand(F, 'r');
-    F.ball(add(at, mul(axes[1], -0.07 * F.fit.h)), axes, [0.045 * F.k, 0.06 * F.fit.h, 0.3 * F.fit.h], LEATHER, 8, 3);
-    F.point('case', at);
-  } },
+  // the clarinet's case, by its handle in the right hand (`case`) or the left (`case_l`): a long dark box
+  case: { name: 'case', draw: F => caseIn(F, 'r') },
+  case_l: { name: 'case in the left hand', draw: F => caseIn(F, 'l') },
   hat_hand: { name: 'hat in hand', draw: F => {
     const { add, mul } = V(), { at, axes } = hand(F, 'r');
     F.ball(add(at, mul(axes[1], -0.06 * F.fit.h)), axes, [0.11 * F.k, 0.075 * F.fit.h, 0.11 * F.k], C('#4b3c31'), F.sides);
@@ -195,14 +199,16 @@ const parts = {
   coat_over: { name: 'coat over the shoulders', draw: F => {
     const { add, mul } = V(), m = F.fit.h, [c, sd, fw, w, d] = sec(F, 4), uc = F.up('Chest'), col = C('#4b4d53');
     const top = add(c, mul(uc, 0.03 * m)), hips = F.P('Hips');
-    F.bar(top, add(hips, mul(UP, -0.42 * m)), w * 1.32, w * 1.42, [[0, col]], 18, fw, false, 2.2);
+    // (round the trunk: as wide as the shoulders across, as deep as the trunk before and behind — `flat` is the depth's
+    // share of the width, F.bar's second radius)
+    F.bar(top, add(hips, mul(UP, -0.42 * m)), w * 1.32, w * 1.42, [[0, col]], 18, sd, (d * 1.5) / (w * 1.32), 2.2);
     F.ball(add(F.P('Neck1'), mul(uc, 0.0)), [sd, uc, fw], [w * 0.62, 0.06 * m, d * 1.45], col, 14);
     F.point('coat', add(top, mul(fw, -d)));
   } },
   // a knitted shawl over the shoulders, crossed and tied before the chest, its point down the back
   shawl: { name: 'shawl', draw: F => {
     const { add, mul } = V(), m = F.fit.h, [c, sd, fw, w, d] = sec(F, 4), uc = F.up('Chest'), col = C('#8b7562');
-    F.bar(add(c, mul(uc, 0.035 * m)), add(c, mul(uc, -0.17 * m)), w * 1.12, w * 1.3, [[0, col]], 16, fw, false, 2.2);
+    F.bar(add(c, mul(uc, 0.035 * m)), add(c, mul(uc, -0.17 * m)), w * 1.12, w * 1.3, [[0, col]], 16, sd, (d * 1.4) / (w * 1.12), 2.2);
     F.ball(add(c, add(mul(fw, -d * 1.05), mul(uc, -0.2 * m))), [sd, uc, fw], [w * 0.55, 0.13 * m, 0.03 * m], col, 4, 1.2);
     F.ball(add(c, add(mul(fw, d * 1.25), mul(uc, -0.12 * m))), [sd, uc, fw], [0.035 * m, 0.03 * m, 0.03 * m], col.map((v, i) => (i < 3 ? v * 0.85 : v)), 8);
     F.point('shawl', add(c, mul(fw, -d)));
@@ -371,7 +377,7 @@ return {
       quilted_jacket: { name: 'open quilted jacket', hang: [{ to: 0.55, from: 'shoulders', flare: 0.18, folds: false }], sleeves: 'garment',
         draw: F => { front(F, 0.42, F.colors.top); } },
       quilted_jacket_shut: { name: 'quilted jacket', hang: [{ to: 0.55, from: 'shoulders', flare: 0.14, folds: false }], sleeves: 'garment' },
-      cardigan: { name: 'knitted cardigan', hang: [{ to: 0.5, from: 'shoulders', flare: 0.08, folds: false }], sleeves: 'garment' },
+      cardigan: { name: 'knitted cardigan', hang: [{ to: 0.3, from: 'shoulders', flare: 0.08, folds: false }], sleeves: 'garment' },
       sweater: { name: 'sweater', hang: [{ to: 0.32, from: 'shoulders', flare: 0.05, folds: false }], sleeves: 'garment' },
     },
     hair: {

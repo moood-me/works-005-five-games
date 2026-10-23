@@ -259,12 +259,13 @@ function film(scene) {
         await s.wait(3);
         sar.mood('smile');
         await back;
-        bus.reach({ r: 'sarafanov#hand_r' });
+        // (his left hand takes it: the right stays free to take the old man under the arm on the way down)
+        bus.reach({ l: 'sarafanov#hand_r' });
         sar.do('stand');
         await s.wait(1.4);
         bus.reach(null);
         sar.with(['long_scarf']);
-        bus.with(['case']);
+        bus.with(['case_l']);
         s.tell('meet:ready');
       },
     },
@@ -274,7 +275,7 @@ function film(scene) {
     bottom: {
       from: () => ({ ...END.alone(), ...CAM.bottom, hour: 0.78, down: 1, down_at: 1, catch: 0, fall: 0,
         ...AT('sarafanov', SPOT.gate.sarafanov, 270, { sarafanov_with: Number(scene.get('snowy')) ? ['long_scarf', 'snow_back'] : ['long_scarf'], sarafanov_mood: 'smile', sarafanov_look: 'busygin' }),
-        ...AT('busygin', SPOT.gate.busygin, 90, { busygin_with: ['case'], busygin_mood: 'tired', busygin_look: 'sarafanov' }),
+        ...AT('busygin', SPOT.gate.busygin, 90, { busygin_with: ['case_l'], busygin_mood: 'tired', busygin_look: 'sarafanov' }),
         ...AT('nina', SPOT.behind, 20, { nina_mood: 'thinking', nina_look: 'busygin' }) }),
       async run(s) {
         const sar = s.person('sarafanov'), bus = s.person('busygin'), nina = s.person('nina');

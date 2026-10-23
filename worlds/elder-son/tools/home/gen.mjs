@@ -227,18 +227,18 @@ const scene = {
   modules: ['cast', 'beats', 'closeups'],
   light: {
     tint: '#8a8fb0', tintStrength: 0.04, vignette: 0.4, grain: 0.18,
-    haze: 0.03, hazeColor: '#3a3036', hazeGlow: 0.45, shafts: 0,
+    haze: 0.03, hazeColor: '#3a3036', hazeGlow: 0.3, shafts: 0,
     // the state with no night in it (hour 0) is the grey dawn; `hour` turns it to the night
     brightness: 1.1, saturation: 0.8, ambient: 0.82, ambientColor: '#b4b8c4', bounce: 0.5, inside: 0.45,
-    looks: { hour: { ambient: 0.54, ambientColor: '#9198b8', saturation: 0.84, inside: 0.3, lights: { night: 0.3, room_light: 0.7, snow_light: 0.45 } } },
+    looks: { hour: { ambient: 0.54, ambientColor: '#9198b8', saturation: 0.84, inside: 0.3, lights: { night: 0.3, room_light: 0.7, snow_light: 0.25 } } },
   },
   lights: [
     // the lamp's light a warm yellow-white under the shade; the orange is the shade's own (it glows)
-    { id: 'lamp', across: A(L.LAMP[0]), distance: L.LAMP[1], elevation: L.LAMP[2], color: '#f1c587', strength: 1.8, reach: 5, on: 'lamp', glow: 0.3 },
+    { id: 'lamp', across: A(L.LAMP[0]), distance: L.LAMP[1], elevation: L.LAMP[2], color: '#f1c587', strength: 1.8, reach: 5, on: 'lamp', glow: 0.2 },
     { id: 'fire', of: 'stove#fire', color: '#e47a32', strength: 1.4, reach: 2.4, flicker: 0.5, on: 'stove_door' },
-    { id: 'snow_light', of: 'window', daylight: 1.4 },
+    { id: 'snow_light', of: 'window', daylight: 2.6 },
     // his lamp beyond his door ajar, its light come through the gap: the sofa's right end, through the doorway onto the kitchen's floor
-    { id: 'sar_light', across: A(L.SAR_LAMP[0]), distance: L.SAR_LAMP[1], elevation: L.SAR_LAMP[2], color: '#efb877', strength: 1.5, reach: 5.5, on: 'sar_light', glow: 0.2 },
+    { id: 'sar_light', across: A(L.SAR_LAMP[0]), distance: L.SAR_LAMP[1], elevation: L.SAR_LAMP[2], color: '#efb877', strength: 2.1, reach: 5.5, on: 'sar_light', glow: 0.2 },
     // a little light in the room (from the street, at dawn the grey morning), so the cupboard, the cot, the sofa are seen
     { id: 'room_light', across: A(4.7), distance: 1.6, elevation: 2.0, color: '#c3bcae', strength: 1.4, reach: 4.5 },
     { id: 'night', from: [0, 30], color: '#b8c0d4', strength: 1.2 },

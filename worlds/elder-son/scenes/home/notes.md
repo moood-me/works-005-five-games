@@ -23,7 +23,8 @@ Metres of scenes.md's plan: x to the right, z in from the kitchen's near wall; t
   or the white cloth `table_set`; the snuffbox `box_at` table · near, `puddle`, `sheet_on`; its points `table#box`,
   `table#glass`, `#glass_s`, `#bread`, `#kettle`, `#sheet`), its ends and sides (`table_end`, `table_side`); standing
   on it `glass_b`, `glass_s`, `kettle` (table · pushed), `bread`, `bottle` and the six `set_glass` (laid). Six places
-  (lib `SEATS`): L1 Sarafanov, R1 Busygin, L2/R2 the middle, L3/R3 by the window; IV's places as scenes.md. The
+  (lib `SEATS`; the chairs drawn up a quarter of a metre from the table's edges — the hands of one seated lie on it,
+  the elbows bent): L1 Sarafanov, R1 Busygin, L2/R2 the middle, L3/R3 by the window; IV's places as scenes.md. The
   lampshade — a form turned on a lathe (`lampshade`, it glows), its cord; the light `lamp` (0.6 + 0.4·`warm`, set by
   each beat's `from`) under it. Right wall: the doorway into the room (z 2.5…3.5).
 - **Room** x 4…8, beyond the doorway (its face of the wall `r_left_*`). The camp bed along the wall (`cot`, `cot_end`,
@@ -39,7 +40,7 @@ Metres of scenes.md's plan: x to the right, z in from the kitchen's near wall; t
 
 ## Light
 
-`hour` is the light's look (0.25 grey dawn … 0.9 night; at 0 the state is the dawn). The lamp's light under the shade,
+`hour` is the light's look (0.25 grey dawn … 0.9 night; at 0 the state is the dawn); at dawn the lamp burns low (`lamp` 0.5: six in the winter morning is dark yet — the people read by it). The lamp's light under the shade,
 the stove's fire, the window's daylight (`snow_light`), a dim light in the room (stronger at dawn), the night sky's
 far light. **His lamp** (`sar_light`; `stir` sets it in On Tiptoe) is a light standing in the room before his door's
 gap: a door ajar 0.08 leaves too narrow a gap for the lamp's shadow to cut a wedge, so the light comes from the gap —
