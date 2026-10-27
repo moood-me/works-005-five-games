@@ -35,7 +35,7 @@ function film(scene) {
   // where every beat may begin from: night, the candle new; she on the bed's edge, head bowed; he standing at the table
   const base = extra => {
     const v = {
-      fade: 0, ...CAM.ROOM, hour: 0.9, candle: 0, melon: 0, cut: 0, slice: 0, hands: 0, hand_at: 0, pull: 0, palm: 0, plate: 'table',
+      ...CAM.ROOM, hour: 0.9, candle: 0, melon: 0, cut: 0, slice: 0, hands: 0, hand_at: 0, pull: 0, palm: 0, plate: 'table',
       anna_here: true, anna_a: ANNA_SEAT[0], anna_d: ANNA_SEAT[1], anna_on: ANNA_SEAT, anna_turn: 110, anna_do: 'seated_bowed',
       anna_look: null, anna_reach: null, anna_mood: 'sad',
       gurov_here: true, gurov_a: GUROV_STAND[0], gurov_d: GUROV_STAND[1], gurov_on: null, gurov_turn: 5, gurov_do: 'stand',
@@ -58,9 +58,8 @@ function film(scene) {
   return {
     // night; the candle; she sits on the bed's edge, head bowed; he stands at the table, his back to us
     room: {
-      from: () => base({ fade: 1 }),
+      from: () => base({}),
       run: async s => {
-        s.move('fade', 0, { over: 1.5, ease: 'out' });
         await s.wait(3.5);
         s.person('gurov').look('candle');
         await s.wait(4.5);

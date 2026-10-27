@@ -47,7 +47,7 @@ function film(scene) {
   // where every beat may begin from: evening, the lamp; she at the window, her back to the room; he just inside the
   // door; the waiter gone. The party's keys (anna_life, husband_knows, wife_knows, spring) are the game's: not set here.
   const base = extra => ({
-    fade: 0, ...CAM.ROOM, hour: 0.72,
+    ...CAM.ROOM, hour: 0.72,
     tea: 0, glass_at: 0, tap: 0, fill: 0, spill: 0, mirror: 0, think: 'none', door: 0, door_f: 180, samovar: 0,
     anna_here: true, anna_a: ANNA_WINDOW[0], anna_d: ANNA_WINDOW[1], anna_turn: 0, anna_do: 'stand', anna_look: null, anna_reach: null, anna_mood: 'sad',
     gurov_here: true, gurov_a: IN_DOOR[0], gurov_d: IN_DOOR[1], gurov_turn: 160, gurov_do: 'stand', gurov_on: null, gurov_look: 'anna',

@@ -30,7 +30,7 @@ path. Awkwardness and tenderness: the warm candle in the middle, the cold moon f
 
 | Beat | after | ≈ s | What |
 | --- | --- | --- | --- |
-| `room` | — | 12 | out of the dark; she sits, her head bowed; he stands at the table, his back to her |
+| `room` | — | 12 | she sits, her head bowed; he stands at the table, his back to her |
 | `room_hold` | room | 3 | faces: a cut — she by the candle in a medium shot raises her head (`sad`), looks at him; a cut back — he turns to her |
 | `melon` | room_hold | 4 | he sits down at the table (facing her); the insert `melon` open |
 | `melon_hold` | melon | 3 | the insert closed: a red slice before him, the candle lower — under the choice |

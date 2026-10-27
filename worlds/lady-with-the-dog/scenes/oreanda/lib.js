@@ -33,7 +33,7 @@ function film(scene) {
   const base = extra => {
     const [sa, sd] = steamerAt(extra.dawn ?? 0);
     return {
-      fade: 0, ...CAM.BENCH, hour: 0.18, dawn: 0, mist: 1, lights: 3, cicada: 1, hand: 0,
+      ...CAM.BENCH, hour: 0.18, dawn: 0, mist: 1, lights: 3, cicada: 1, hand: 0,
       anna_a: ANNA_SEAT[0], anna_d: ANNA_SEAT[1], gurov_a: GUROV_SEAT[0], gurov_d: GUROV_SEAT[1],
       anna_here: true, anna_on: ANNA_SEAT, anna_do: 'seated', anna_turn: 0, anna_look: null, anna_reach: { r: HAND_SPOT }, anna_mood: null,
       gurov_here: true, gurov_on: GUROV_SEAT, gurov_do: 'seated', gurov_turn: 0, gurov_look: null, gurov_reach: null, gurov_mood: null,
@@ -44,11 +44,10 @@ function film(scene) {
     };
   };
   return {
-    // from darkness: the hour before dawn, the two on the bench seen from behind, far out the steamer's lights
+    // the hour before dawn, the two on the bench seen from behind, far out the steamer's lights
     bench: {
-      from: () => base({ fade: 1 }),
+      from: () => base({}),
       run: async s => {
-        s.move('fade', 0, { over: 1.5, ease: 'out' });
         await s.wait(2.5);
         s.tell('bench:sat');
         await s.wait(3);

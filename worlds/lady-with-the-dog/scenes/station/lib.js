@@ -104,7 +104,7 @@ function film(scene) {
   const ANNA_AT_WINDOW = { anna_a: ANNA_IN[0], anna_d: ANNA_IN[1], anna_e: ANNA_IN[2] };
   // where every beat may begin from: the train standing, the two on the platform at her carriage, the conductor far
   const base = extra => placeTrain({
-    fade: 0, hour: 0.8, train: 0, far: 0, curtain: 0, ...CAM.PLATFORM,
+    hour: 0.8, train: 0, far: 0, curtain: 0, ...CAM.PLATFORM,
     spitz_here: 0,
     anna_here: true, ...ANNA_ON_PLATFORM, anna_turn: 100, anna_do: 'hold_dog', anna_with: ['spitz_held'], anna_look: 'gurov', anna_reach: null, anna_mood: 'sad',
     gurov_here: true, gurov_a: GUROV_PLATFORM[0], gurov_d: GUROV_PLATFORM[1], gurov_turn: 265, gurov_do: 'stand', gurov_look: 'anna', gurov_reach: null, gurov_mood: null,
