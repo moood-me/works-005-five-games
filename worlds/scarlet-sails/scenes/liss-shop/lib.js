@@ -523,7 +523,7 @@ function film(scene) {
 
   // ── the states the beats begin at ──
   const room = {
-    fade: 0, camera_target: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, hour: 0.4, goods: "toys", roll: "none", roll_out: 0, roll_at: "rack",
+    camera_target: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, hour: 0.4, goods: "toys", roll: "none", roll_out: 0, roll_at: "rack",
     found: 0, violinist: 0, memory: 0, basket: 0, basket_d: BASKET[1],
   };
   const merchant = stands("merchant", "mer", M, 180, { merchant_look: LOOK_DOWN, merchant_on: null, merchant_still: false });

@@ -7,7 +7,7 @@ it really is (a pause). The beats are written once (usually in the scene's `lib.
 ```js
 // the scene's lib.js
 const FILM = {
-  arrive: { from: () => ({ ...DUSK, fade: 1 }), run: async s => { await s.move('fade', 0, { over: 3 }); … } },
+  arrive: { from: () => ({ ...DUSK }), run: async s => { await s.wait(3); … } },
   look: { after: 'arrive', from: () => ({ ...DUSK }), run: async s => { await s.move('camera_z', 0.8, { over: 3 }); } },
   walk_out: { from: () => ({ ...DAY }), run: async s => { await s.person('narrator').walk([[0.3, 70]]); … } },
 };

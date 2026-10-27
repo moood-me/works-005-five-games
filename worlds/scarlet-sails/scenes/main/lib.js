@@ -707,7 +707,7 @@ const AWAY = () => Object.fromEntries(WHO.flatMap((id) => [[`${id}_here`, false]
   [`${id}_reach`, null], [`${id}_with`, null], [`${id}_on`, null], [`${id}_gait`, null], [`${id}_wear`, null]]));
 // the hour with its light (a cut is made in its own light: sky.keys), the shore's own keys, the camera
 const hourOf = (hour) => ({ hour, ...N.keys(hour) });
-const shore = (hour, o) => ({ ...AWAY(), fade: 0, ...hourOf(hour), mist: 0.2, wind: 0.25, windows: 0.3, longren_window: 1, tavern_lamp: 0,
+const shore = (hour, o) => ({ ...AWAY(), ...hourOf(hour), mist: 0.2, wind: 0.25, windows: 0.3, longren_window: 1, tavern_lamp: 0,
   tavern_door: 0, past: 0, winter: 0, storm: 0, menners_boat: 0, skiff_ashore: 0, boat: 0,
   light1: 2, light2: 2, light3: 2, cape_mist: 0, hands: 0, reach: 0, ship: 0, sails: 0, toy_water: 0, camera_target: null, camera_x: 0, camera_z: 0, camera_h: 0, camera_yaw: 0, ...o });
 const YOUNG = () => kit.cast.characters.assol;
@@ -974,12 +974,11 @@ function film(scene) {
     q.person(id).here(false);
   });
   return {
-    // spark — dawn, out of the dark, the empty shore: far off on the horizon by the cape a scarlet spark kindles and
+    // spark — dawn, the empty shore: far off on the horizon by the cape a scarlet spark kindles and
     // stands (the game's first touch is on it)
     spark: {
-      from: () => ({ ...DAWN(), fade: 1 }),
+      from: () => ({ ...DAWN() }),
       run: async (s) => {
-        s.move("fade", 0, { over: 2, ease: "out" });
         await s.wait(2.2);
         await s.move("ship", 0.12, { over: 2.6, ease: "out" });
         s.tell("spark:lit");

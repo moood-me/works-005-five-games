@@ -219,7 +219,7 @@ const glide = (s, v, over) => s.sequence(q => q.all(...['camera_x', 'camera_z', 
 const nobody = Object.fromEntries(['grey', 'lilian'].flatMap(id => [[`${id}_here`, false], [`${id}_do`, 'stand'], [`${id}_look`, null],
   [`${id}_reach`, null], [`${id}_with`, null], [`${id}_on`, null], [`${id}_gait`, null], [`${id}_wear`, null]]));
 // the hall with no one in it, nothing happened yet
-const HALL = { ...nobody, ...view(), fade: 0, canvas: 0, lilian_candle: 0, gr_e: 0, grey_pulls: 0, door: 0, door_light: 0, bundle: 0,
+const HALL = { ...nobody, ...view(), canvas: 0, lilian_candle: 0, gr_e: 0, grey_pulls: 0, door: 0, door_light: 0, bundle: 0,
   note: 0, coat_on_chair: 0, painting_alive: 0, nail1: 0, nail2: 0, nail3: 0, ladder: 0, fire: 0, lamps: 0, candles: 0,
   hands: 0, card: 0, grip1: 0, grip2: 0, grip3: 0, grip4: 0, dust: 1,
   gr_a: OUT[0], gr_d: OUT[1], grey_turn: 0, li_a: AT_DOOR[0], li_d: AT_DOOR[1], lilian_turn: 270 };
@@ -277,13 +277,12 @@ const warmth = scene => 0.35 + 0.65 * scene.get('home');
 const cameBack = scene => ({ fire: warmth(scene), lamps: warmth(scene), ...(scene.get('leave') === 'note' ? READS : {}) });
 
 const film = scene => ({
-  // boy — day, out of the dark: the boy pulls the library ladder along the wall under the crucifixion, backing; looks
+  // boy — day: the boy pulls the library ladder along the wall under the crucifixion, backing; looks
   // up at the painting; takes his box of paints and his brush from the floor
   boy: {
-    from: () => full({ ...DAY, fade: 1 }),
+    from: () => full({ ...DAY }),
     run: async s => {
       const grey = s.person('grey');
-      s.move('fade', 0, { over: 1.5, ease: 'out' });
       await s.wait(0.6);
       grey.reach({ r: 'ladder#rail_hi', l: 'ladder#rail_lo' });
       await s.wait(0.5);
@@ -401,12 +400,11 @@ const film = scene => ({
       await s.wait(3);
     },
   },
-  // night — out of the dark, years on: Gray at fifteen at the table, his bundle on it; a strip of light under his
+  // night — years on: Gray at fifteen at the table, his bundle on it; a strip of light under his
   // mother's door (the game's choice)
   night: {
-    from: () => full({ ...NIGHT, fade: 1 }),
+    from: () => full({ ...NIGHT }),
     run: async s => {
-      await s.move('fade', 0, { over: 1.5, ease: 'out' });
       await s.wait(1.5);
     },
   },
@@ -521,14 +519,13 @@ const film = scene => ({
       await s.wait(1.5);
     },
   },
-  // return — out of the dark, years on, a day: Gray at twenty in his captain's frock coat comes in; his mother in black
+  // return — years on, a day: Gray at twenty in his captain's frock coat comes in; his mother in black
   // by his father's empty armchair turns to him. `leave` farewell — she takes a step to meet him; note — she stays by
   // the chair with his note in her hands, looking at him
   return: {
-    from: () => full({ ...RETURN, fade: 1, ...cameBack(scene) }),
+    from: () => full({ ...RETURN, ...cameBack(scene) }),
     run: async s => {
       const lilian = s.person('lilian'), grey = s.person('grey');
-      s.move('fade', 0, { over: 1.5, ease: 'out' });
       await s.wait(0.6);
       glide(s, CAME_IN, 5);
       const come = walk(s, 'grey', [[2.4, 3.2], [1.9, 5.5]], 20);
@@ -582,12 +579,11 @@ const film = scene => ({
       await s.wait(2.5);
     },
   },
-  // spring — out of the dark, a spring day: his mother at the window, Gray beside her in his frock coat; she turns to him
+  // spring — a spring day: his mother at the window, Gray beside her in his frock coat; she turns to him
   spring: {
-    from: () => full({ ...SPRING, fade: 1, fire: warmth(scene), lamps: warmth(scene) }),
+    from: () => full({ ...SPRING, fire: warmth(scene), lamps: warmth(scene) }),
     run: async s => {
       const lilian = s.person('lilian'), grey = s.person('grey');
-      await s.move('fade', 0, { over: 1.5, ease: 'out' });
       await s.wait(1.5);
       await lilian.turn(175);
       lilian.look('grey');
@@ -612,16 +608,15 @@ const film = scene => ({
       await s.wait(1.5);
     },
   },
-  // window_end — the epilogue, out of the dark, night: his mother at the window — his letter in her hands (`letter`),
+  // window_end — the epilogue, night: his mother at the window — his letter in her hands (`letter`),
   // or alone with a candle
   window_end: {
     from: () => {
       const letter = scene.get('letter') > 0.5;
-      return full({ ...END, fade: 1, fire: warmth(scene), lamps: warmth(scene), ...(letter ? { ...READS, lilian_look: 'lilian#hands' } : { lilian_with: ['candle'], lilian_candle: 1 }) });
+      return full({ ...END, fire: warmth(scene), lamps: warmth(scene), ...(letter ? { ...READS, lilian_look: 'lilian#hands' } : { lilian_with: ['candle'], lilian_candle: 1 }) });
     },
     run: async s => {
       const lilian = s.person('lilian');
-      await s.move('fade', 0, { over: 2, ease: 'out' });
       await s.wait(2.5);
       lilian.look(WINDOW);
       await s.wait(3);

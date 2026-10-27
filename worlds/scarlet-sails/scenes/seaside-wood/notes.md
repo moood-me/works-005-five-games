@@ -106,7 +106,7 @@ Everything is painted once, in the day's colours; no painting reads the keys tha
   Internal: `toy_water` (the yacht on the water), `toy_out` (from the bank into the current — the beat `launch`), `toy_a/d/e`. The mechanics
   work while `toy_water` = 1 and Assol's gait is `run` (as the beat `chase` leaves it).
 - `beat` — the film's beat; `as_a/as_d`, `gr_a/gr_d`, `le_a/le_d`, `eg_a/eg_d` — where the people are; `<id>_do`, `_turn`, `_look`,
-  `_reach`, `_with`, `_wear`, `_on`, `_gait`, `_here` — the engine's people's; `fade`, `camera_*` — the engine's.
+  `_reach`, `_with`, `_wear`, `_on`, `_gait`, `_here` — the engine's people's; `camera_*` — the engine's.
 
 Points for the game: `egl` (Egle's head — a choice after `egl_hold`), `assol#ring` (the ring on her hand — a choice after
 `wake_hold`); there are also `toy#toy`, `stones#stream`, `snag#snag`, `snag2#snag`, `reeds#reeds`, `bushes#bushes`,
@@ -133,18 +133,18 @@ opened at any beat. The film is a function of the scene (`film(scene)`): `from` 
 | `egl_when` | egl_hold | “When?”: Egle turns away to the sea and looks at the horizon, she too; the camera turns there too — light on the water | `egl_when:sea` (he turned away) |
 | `egl_how` | egl_hold | “How will I know him?”: the shot from the side, near both; Egle comes up and goes down on one knee before her (`kneel_down`) — they are of a height | `egl_how:down` |
 | `egl_goes` | egl_when, egl_how | He gets up from his knee (`kneel_rise`), else comes up to her; a wide shot; he holds out the yacht in both hands (`give`), she takes it and presses it to her breast; he goes off along the water's edge to the cape, she runs off into the wood | `egl_goes:given`, `egl_goes:gone` |
-| `fire` | — | Night (out of the dark): a fire by the cliff's edge; Gray and Letika sit on the edge with fishing rods, below the sea under the moon; Letika turns to Gray, Gray to him; both look at the bay again; darkness (the night passes) | `fire:letika` (he turned — the line), `fire:sea` |
-| `dawn_walk` | — | A misty dawn (out of the dark): Gray walks carefully over the glade (`careful`), the camera behind him; he notices her, stops over her | `dawn_walk:seen`, `dawn_walk:found` |
+| `fire` | — | Night: a fire by the cliff's edge; Gray and Letika sit on the edge with fishing rods, below the sea under the moon; Letika turns to Gray, Gray to him; both look at the bay again | `fire:letika` (he turned — the line), `fire:sea` |
+| `dawn_walk` | — | A misty dawn: Gray walks carefully over the glade (`careful`), the camera behind him; he notices her, stops over her | `dawn_walk:seen`, `dawn_walk:found` |
 | `sleeping` | dawn_walk | Close, over the grass, from the glade's side towards the cliff's edge and the bay: she is all in the grass — her hair, her shoulder, her hands; he is a dark figure over her. **Before:** low in the grass from the sea's side (the eye at 0.75 m, the knee-high grass hid her, she was seen from the feet and small) — now the eye at 1.1 m, to the side of her, 1.8 m off | — |
 | `ring` | dawn_walk, sleeping | The camera from her head: he carefully kneels beside her, the ring in his fingers (`ring` = `grey`; the part by `ring_kind`), looks at her hand. Then the game's “The ring” (`ring_at`, `stir`) or `ring_on` | `ring:kneeling` |
 | `ring_on` | ring | The same without the game: `ring_at` → 1 over 4 s | `ring:reach`, `ring:on` |
 | `leave` | ring, ring_on | He gets up, walks away over the glade (the camera behind him), looks back once; a cut — she sleeps with the ring, he goes off into the mist beyond her | `leave:back`, `leave:gone` |
-| `wake` | — | Morning (out of the dark): the glade, she in the grass; she sits up (the shot before her), raises her hand to her face, looks: a ring (a shot close by) | `wake:up`, `wake:ring` |
+| `wake` | — | Morning: the glade, she in the grass; she sits up (the shot before her), raises her hand to her face, looks: a ring (a shot close by) | `wake:up`, `wake:ring` |
 | `wake_hold` | wake | She lowers her hand beside her (the hand with the ring in the frame: `reach` to `lib` `RING_REST`), turns to the sea and sits, looking (the shot from behind her, she whole in the frame, the sea before her). Under a choice (the point `assol#ring`) | `wake_hold:sea` |
 | `wear` | wake, wake_hold | She presses the ring with her other hand and gets up, looks at the sea (the shot before her) | `wear:up` |
 | `hide` | wake, wake_hold | She gets up, takes the ring off, hangs it on a cord under her dress (close by: the hands at the breast); `ring` → `cord` | `hide:hidden` |
 
-Fades — only as time: night → dawn → morning (in chapter I there are none). A change of shot is a cut made ready ahead
+No fades of the scene's own: night → dawn → morning are cuts (the black between, if any, is the game's). A change of shot is a cut made ready ahead
 (`lib` `cutTo`); a camera that has been set turns to another shot — `lib` `pan` (it gives its moves; to wait for them — `s.all(pan(…))`).
 The shots are `lib.SHOTS`: those that look forward (east) are filmed by the operator (`camera_target`, the size by a person's height);
 those that look the other way (at the wood, along the cliff) are set by keys (`camera_x/z/h/yaw/pitch`) — the operator
