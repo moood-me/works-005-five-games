@@ -415,7 +415,6 @@
     "warm": 0.36,
     "frost": 0.25,
     "vasya_end": "taiga",
-    "fade": 1,
     "hour": 0.9,
     "snow": 0.4,
     "train": 0,
@@ -527,14 +526,6 @@
         "dawn"
       ],
       "means": "which beat comes next: its opening is made ready, the cut goes to the ready one"
-    },
-    "fade": {
-      "range": [
-        0,
-        1
-      ],
-      "smooth": true,
-      "means": "the frame from the dark: 1 black … 0 seen"
     },
     "hour": {
       "range": [

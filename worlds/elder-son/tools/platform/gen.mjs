@@ -126,7 +126,6 @@ const BEATS = Object.keys(L.film(stub));
 const states = {
   beat: { values: [null, ...BEATS], means: 'the film\'s beat: the game sets a name — it plays from its beginning (the module beats)' },
   beat_next: { values: [null, ...BEATS], means: 'which beat comes next: its opening is made ready, the cut goes to the ready one' },
-  fade: { range: [0, 1], smooth: true, means: 'the frame from the dark: 1 black … 0 seen' },
   hour: { range: [0, 1], smooth: true, means: 'the time: 0.25 grey dawn, 0.84 late dusk, 0.9 night, 0.93 late night' },
   dusk_k: { range: [0, 1], smooth: true, means: 'the look “dusk” — the script sets it by hour' },
   late_k: { range: [0, 1], smooth: true, means: 'the look “late night” — the script sets it by hour' },

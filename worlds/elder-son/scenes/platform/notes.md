@@ -44,7 +44,7 @@ the beats in node and prints where the people and the points stand in the frame.
 
 | beat | after | ≈ s | what |
 | --- | --- | --- | --- |
-| gone | — | 12 | from the dark; the two run up the stairs (`gone:run`), the camera turns with them from the stairs to under the lamp; the train moves off at 0.3 m/s and crawls on the same way while the game waits (≈ 4 min of it); they stop (`gone:stop`). Choice pose: `train#tail` x ≈ −0.36 |
+| gone | — | 12 | the two run up the stairs (`gone:run`), the camera turns with them from the stairs to under the lamp; the train moves off at 0.3 m/s and crawls on the same way while the game waits (≈ 4 min of it); they stop (`gone:stop`). Choice pose: `train#tail` x ≈ −0.36 |
 | wave | gone | 12 | he steps to the edge and waves; the train gathers way; its tail out of the frame — `wave:dark` |
 | stand | wave | 12 | the camera comes to a medium shot in three quarters under the lamp: Silva's hand to his nape, smiling; Busygin hugging himself (`cold`), tired — `stand:cold` |
 | bench | — | 9 | late dusk; Vasenka on the bench, the rucksack on his knees, angry; Busygin up the stairs and off along the platform; at 2.5 s a cut (made ready) to the bench, he a step from it — he sits by him — `bench:sit` (≈ 7 s); both in three quarters under the lamp |
