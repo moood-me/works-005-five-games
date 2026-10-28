@@ -1,0 +1,14 @@
+{
+  "type": "bespoke",
+  "title": "Around the World in 80 Days",
+  "description": "Phileas Fogg lives by the clock and is never late. At his club he makes a wager — and that same evening sets out with his manservant Passepartout. Trains, steamers, an elephant — and a detective who is certain that Fogg is a bank robber.",
+  "line": "A wager of twenty thousand pounds: to go round the globe in eighty days.",
+  "source": "after the novel by Jules Verne",
+  "genres": {
+    "immersion": 3,
+    "comedy": 1,
+    "relationships": 2
+  },
+  "world": "pavel--around-the-world-in-80-days",
+  "scenes": []
+}

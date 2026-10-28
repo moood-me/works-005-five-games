@@ -1,0 +1,215 @@
+// I. India «in which an elephant costs two thousand pounds» — game.md §3. Suez (Fix names Fogg to the consul), Bombay two
+// days early; the rails end in the forest; the elephant bought («The bargain») and ridden («The elephant»); the procession and the
+// suttee — ⚑ sati: tonight, quietly (the pyre, «Like the dead») or now, on the road («The dash»); Allahabad, Aouda wakes;
+// ~ kiouni: given to the guide or sold; the Ganges.
+// Reads: hands bargain, elephant, like-the-dead, dash. Leaves: choices.sati, choices.kiouni; hours, money; marks aouda, pp,
+// guide.
+import { SCENES } from '../story.js';
+import bargain from '../minigames/bargain.js';
+import elephant from '../minigames/elephant.js';
+import likeTheDead from '../minigames/like-the-dead.js';
+import dash from '../minigames/dash.js';
+
+export default {
+  number: 'I',
+  title: tr('India'),
+  heading: tr('in which an elephant costs two thousand pounds'),
+  wall: false, // (the prologue runs into it: the train out of Charing Cross, then Suez)
+  route: [0.04, 0.22],
+  titles: [tr('Suez'), tr('The end of the rails'), tr('The bargain'), tr('The elephant'), tr('The procession'), tr('Allahabad'), tr('The Ganges')],
+  choices: [
+    { id: 'sati', weight: '⚑', title: tr('The suttee'), options: [{ id: 'night', label: tr('At night, quietly') }, { id: 'road', label: tr('Now, on the road') }] },
+    { id: 'kiouni', weight: '~', title: tr('Kiouni'), options: [{ id: 'gift', label: tr('Give Kiouni to the guide') }, { id: 'sell', label: tr('Sell him') }] },
+  ],
+  steps: [
+    // Suez: Passepartout and an amiable stranger; the stranger to the consul. Bombay at dawn, two days early
+    async g => {
+      g.hero('pp');
+      g.beds({ sea: 0.4, town: 0.3, clock: 0.15 }, 2);
+      const chat = g.told('suez:chat'), whisper = g.told('suez:whisper');
+      await g.scene(SCENES.deck, { beat: 'suez', ship: 'mongolia', port: 'suez' });
+      const suez = g.beat('suez');
+      await chat;
+      await g.say('passepartout', 'Monsieur Fix — what an obliging man!');
+      await whisper;
+      await g.say('fix', 'It is he. The Bank of England robber. I need a warrant');
+      await suez;
+      g.hero('fogg');
+      const book = g.told('bombay:book');
+      await g.scene(SCENES.deck, { beat: 'bombay', ship: 'mongolia', port: 'bombay' });
+      const bombay = g.beat('bombay');
+      await book;
+      g.hours(48, tr('The Mongolia: two days early'));
+      await g.say('fogg', 'Bombay. Two days in hand');
+      await bombay;
+    },
+    // the train stops in the forest: the rails end here
+    async g => {
+      g.hero('both');
+      g.beds({ wheels: 0.4 }, 2);
+      const stopped = g.told('brake:stopped');
+      await g.scene(SCENES.train, { beat: 'brake', land: 'india' });
+      const brake = g.beat('brake');
+      await stopped;
+      g.beds({ jungle: 0.3 }, 3);
+      await g.say('conductor', 'The line stops here, gentlemen. Fifty miles to Allahabad', 'narrator'); // (in the corridor, unseen)
+      await brake;
+      g.hours(-34, tr('Fifty miles without rails'));
+    },
+    // the end of the rails; Passepartout finds the elephant; the bargain («The bargain»); all up into the howdah
+    async g => {
+      g.hero('fogg');
+      g.beds({ jungle: 0.5 }, 2);
+      const shed = g.told('rails_end:shed');
+      await g.scene(SCENES.jungle, { beat: 'rails_end', day: 1, station: 'kholby' });
+      const end = g.beat('rails_end');
+      await shed;
+      await g.say('passepartout', 'Monsieur! An elephant! A real elephant!');
+      await end;
+      await g.beat('haggle', { wait: false });
+      await g.say('fogg', 'A thousand pounds');
+      await g.say('owner', 'No');
+      const r = await g.play(bargain, { onRefuse: () => g.say('owner', 'No') });
+      g.money(-(r?.price ?? 2000));
+      if (r?.minutes) g.hours(-r.minutes / 60, tr('The bargain'));
+      g.sound.notes();
+      await g.say('owner', 'He is yours, sahib. His name is Kiouni');
+      const up = g.told('mount:up');
+      const mount = g.beat('mount');
+      await up;
+      g.sound.trumpet();
+      await mount;
+    },
+    // the ride: Kiouni's own pace, the goad, the sugar; toward dusk
+    async g => {
+      g.hero('pp');
+      g.beds({ jungle: 0.4, elephant: 0.6 }, 2);
+      await g.scene(SCENES.jungle, { beat: 'ride', day: 1 }, { cut: true });
+      await g.beat('ride', { wait: false });
+      const r = await g.play(elephant);
+      g.hours(r?.hours ?? 0, r?.hours > 0 ? tr('Kiouni quickened his pace') : tr('Kiouni is being stubborn'));
+      g.beds({ jungle: 0.2, elephant: 0.3 }, 3);
+    },
+    // drums at dusk; the procession; the suttee — ⚑ tonight or now
+    async g => {
+      g.hero('fogg');
+      g.beds({ drums: 0.3, jungle: 0.1 }, 3);
+      const heard = g.told('drums:heard');
+      await g.scene(SCENES.jungle, { beat: 'drums' });
+      const drums = g.beat('drums');
+      await heard;
+      await g.say('guide', 'Drums, sahib. We must hide');
+      await drums;
+      g.beds({ drums: 0.7, fire: 0.15 }, 4);
+      const widow = g.told('procession:widow'), stopped = g.told('procession:stopped');
+      const procession = g.beat('procession');
+      await widow;
+      await g.say('guide', 'It is a suttee, sahib. The widow will be burned at dawn — with him');
+      await stopped;
+      await g.say('cromarty', 'She has been drugged. She understands nothing');
+      await procession;
+      await g.say('fogg', 'I have yet twelve hours to spare. I can devote them to that');
+      const sati = await g.choose('sati', {
+        'fogg#head': [{ id: 'night', label: tr('At night, quietly') }],
+        'kiouni#head': [{ id: 'road', label: tr('Now, on the road') }],
+      });
+      g.set('beat_next', sati === 'night' ? 'night_wall' : 'charge');
+      if (sati === 'night') {
+        g.hours(-12, tr('A night by the pagoda'));
+        const gone = g.told('night_wall:gone');
+        const wall = g.beat('night_wall');
+        await gone;
+        await g.say('cromarty', 'Where is your servant, Mr. Fogg?');
+        await wall;
+        g.beds({ fire: 0.5, drums: 0.4, crowd: 0.3 }, 3);
+        const kindled = g.told('pyre:kindled');
+        await g.scene(SCENES.jungle, { beat: 'pyre' });
+        const pyre = g.beat('pyre');
+        await kindled;
+        await g.say('cromarty', 'Too late, Mr. Fogg. There are hundreds of them');
+        await pyre;
+        const risen = g.told('rise:risen');
+        const rise = g.beat('rise');
+        await risen;
+        g.beds({ fire: 0.5, crowd: 0 }, 1);
+        await rise;
+        g.hero('pp');
+        await g.beat('walk', { wait: false });
+        const r = await g.play(likeTheDead);
+        if (r?.hours) g.hours(r.hours, tr('The chase'));
+        const pp = g.told('flee:pp');
+        const flee = g.beat('flee');
+        await pp;
+        await g.say('passepartout', 'Run, monsieur!');
+        await flee;
+        g.relate('aouda', 1);
+      } else {
+        g.hours(-2, tr('A dash on the road'));
+        g.hero('pp');
+        g.beds({ drums: 0.9, elephant: 0.8, crowd: 0.5 }, 1);
+        g.sound.trumpet();
+        await g.beat('charge', { wait: false });
+        const r = await g.play(dash);
+        if (r?.hours) g.hours(r.hours, tr('The chase'));
+        g.beds({ elephant: 0.6, drums: 0.3 }, 3);
+        await g.say('guide', 'They knew me. I can never go home now');
+        g.mark('guide', true, tr('The guide will remember this'));
+        await g.beat('aouda_fear');
+      }
+    },
+    // Allahabad: Aouda wakes; ~ Kiouni given or sold
+    async g => {
+      g.hero('fogg');
+      g.beds({ jungle: 0.4 }, 3);
+      const night = g.state.choices.sati !== 'road';
+      const kneel = g.told('allahabad:kneel');
+      await g.scene(SCENES.jungle, { beat: 'allahabad', day: 1, station: 'allahabad' });
+      const allahabad = g.beat('allahabad');
+      await kneel;
+      await allahabad;
+      const eyes = g.told('wake:eyes');
+      g.set('aouda_calm', night ? 1 : 0);
+      const wake = g.beat('wake');
+      await eyes;
+      await g.say('aouda', 'Where am I?');
+      if (night) await g.say('fogg', 'You are safe, madam. This is Allahabad');
+      else await g.say('cromarty', 'Hush, madam. You are among friends');
+      await wake;
+      const kiouni = await g.choose('kiouni', {
+        'guide#head': [{ id: 'gift', label: tr('Give Kiouni to the guide') }],
+        'kiouni#head': [{ id: 'sell', label: tr('Sell him') }],
+      });
+      g.set('beat_next', kiouni === 'gift' ? 'gift' : 'sold');
+      if (kiouni === 'gift') {
+        const lift = g.told('gift:lift');
+        const gift = g.beat('gift');
+        await g.say('fogg', 'Kiouni is yours');
+        await lift;
+        g.sound.trumpet();
+        await g.say('passepartout', 'Ha-ha! Goodbye, Kiouni!');
+        await gift;
+        g.relate('pp', 1);
+      } else {
+        g.set('guide_walks', night ? 0 : 1);
+        g.money(1000);
+        g.sound.notes();
+        const away = g.told('sold:away');
+        const sold = g.beat('sold');
+        await away;
+        await g.say('passepartout', 'Goodbye, Kiouni…');
+        await sold;
+      }
+    },
+    // the Ganges at dawn: Aouda at the window
+    async g => {
+      g.hero('both');
+      g.beds({ wheels: 0.4, clock: 0.15 }, 2);
+      const profile = g.told('ganges:profile');
+      await g.scene(SCENES.train, { beat: 'ganges', land: 'india', with_aouda: 1 });
+      const ganges = g.beat('ganges');
+      await profile;
+      await g.wait(1500);
+      await ganges;
+    },
+  ],
+};

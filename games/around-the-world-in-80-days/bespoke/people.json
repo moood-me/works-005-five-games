@@ -1,0 +1,122 @@
+{
+  "narrator": {
+    "voice": "Iapetus",
+    "how": "the narrator of an old book: evenly, with a light irony, not loud",
+    "name": "the narrator",
+    "short": "the narrator"
+  },
+  "fogg": {
+    "voice": "Alnilam",
+    "how": "an English gentleman: even, low, dry and precise, not one word too many, never raises his voice",
+    "name": "Phileas Fogg",
+    "short": "Fogg"
+  },
+  "passepartout": {
+    "voice": "Puck",
+    "how": "a young French manservant: lively, ringing, full of exclamations and a French “monsieur”",
+    "name": "Passepartout",
+    "short": "Passepartout"
+  },
+  "aouda": {
+    "voice": "Despina",
+    "how": "a young Indian woman: soft, quiet, with dignity",
+    "name": "Aouda",
+    "short": "Aouda"
+  },
+  "fix": {
+    "voice": "Umbriel",
+    "how": "a detective: quick, ingratiating, sly",
+    "name": "Fix",
+    "short": "Fix"
+  },
+  "stuart": {
+    "voice": "Schedar",
+    "how": "an English engineer at the club: weighty, with a smirk",
+    "name": "Andrew Stuart",
+    "short": "Stuart"
+  },
+  "porter": {
+    "voice": "Zubenelgenubi",
+    "how": "the club's porter: respectful, quiet",
+    "name": "the porter",
+    "short": "the porter"
+  },
+  "cromarty": {
+    "voice": "Charon",
+    "how": "an old British general: brief, firm",
+    "name": "Sir Francis Cromarty",
+    "short": "Cromarty"
+  },
+  "guide": {
+    "voice": "Enceladus",
+    "how": "a young Parsee guide: quiet, quick, agitated",
+    "name": "the guide",
+    "short": "the guide"
+  },
+  "owner": {
+    "voice": "Gacrux",
+    "how": "an old Indian: stubborn, curt, not looking up",
+    "name": "the elephant's owner",
+    "short": "the elephant's owner"
+  },
+  "conductor": {
+    "voice": "Algieba",
+    "how": "a conductor: official, loud",
+    "name": "the conductor",
+    "short": "the conductor"
+  },
+  "bunsby": {
+    "voice": "Algenib",
+    "how": "an old pilot: hoarse, unhurried, a seaman's way",
+    "name": "John Bunsby",
+    "short": "Bunsby"
+  },
+  "batulcar": {
+    "voice": "Fenrir",
+    "how": "the manager of a travelling troupe: loud, sing-song, like a barker at a fair",
+    "name": "Batulcar",
+    "short": "Batulcar"
+  },
+  "sailor": {
+    "voice": "Achird",
+    "how": "an American sailor: cheerful, simple",
+    "name": "the sailor",
+    "short": "the sailor"
+  },
+  "driver": {
+    "voice": "Sadachbia",
+    "how": "an American engineer at the throttle: dashing, loud",
+    "name": "the engineer",
+    "short": "the engineer"
+  },
+  "captain": {
+    "voice": "Sadaltager",
+    "how": "an army captain: tired, firm",
+    "name": "the captain of the fort",
+    "short": "the captain of the fort"
+  },
+  "mudge": {
+    "voice": "Rasalgethi",
+    "how": "a seasoned American: loud, cheerful, into the wind",
+    "name": "Mudge",
+    "short": "Mudge"
+  },
+  "speedy": {
+    "voice": "Orus",
+    "how": "a ruffian of a captain: roars, growls, guffaws",
+    "name": "Captain Speedy",
+    "short": "Speedy"
+  },
+  "stoker": {
+    "voice": "Algieba",
+    "how": "a stoker: muffled, tired",
+    "name": "the stoker",
+    "short": "the stoker"
+  },
+  "pastor": {
+    "voice": "Charon",
+    "how": "an old clergyman behind a door: calm, surprised",
+    "name": "the Reverend Samuel Wilson",
+    "short": "the clergyman"
+  }
+}
