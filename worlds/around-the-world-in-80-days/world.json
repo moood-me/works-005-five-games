@@ -1,0 +1,9 @@
+{
+  "title": "Around the World in 80 Days v3",
+  "description": "Around the World on the new engine: the scenes are brought over here one by one.",
+  "themes": {
+    "adventure": 50,
+    "travel": 80
+  },
+  "main": "main"
+}

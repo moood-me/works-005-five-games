@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Reform Club","translation":"Реформ-клуб","where":"scenes/main/scene.json title"},
+  {"text":"Pall Mall, evening. The clock is ticking.","translation":"Пэлл-Мэлл, вечер. Часы идут.","where":"scenes/main/scene.json caption"}
+]}

@@ -1,0 +1,1148 @@
+{
+  "engine": 3,
+  "title": "The Reform Club",
+  "caption": "Pall Mall, evening. The clock is ticking.",
+  "horizon": 0.55,
+  "camera": {
+    "mode": "picture"
+  },
+  "modules": [
+    "light",
+    "cast",
+    "beats"
+  ],
+  "light": {
+    "vignette": 0.55,
+    "grain": 0.12,
+    "haze": 0.1,
+    "hazeColor": "#2c3038",
+    "hazeGlow": 0.6,
+    "ambient": 0.8,
+    "ambientColor": "#d6dade",
+    "looks": {
+      "day": {
+        "ambient": 0.9,
+        "ambientColor": "#bcc4dc",
+        "saturation": 0.9
+      }
+    },
+    "brightness": 1.12
+  },
+  "lights": [
+    {
+      "id": "lamp_light",
+      "of": "lamp#bulb",
+      "strength": 2.0,
+      "reach": 8
+    },
+    {
+      "id": "fire_light",
+      "of": "fireplace#fire",
+      "on": "fire",
+      "reach": 12,
+      "flicker": 0.35,
+      "strength": 1.3
+    },
+    {
+      "id": "hall_light",
+      "of": "hall#light",
+      "on": "door",
+      "reach": 10
+    },
+    {
+      "id": "window1_light",
+      "across": -5.2,
+      "distance": 17.4,
+      "elevation": 3.5,
+      "color": "#a9b8cc",
+      "strength": 2.0,
+      "reach": 10
+    },
+    {
+      "id": "window2_light",
+      "across": -11.2,
+      "distance": 17.4,
+      "elevation": 3.5,
+      "color": "#a9b8cc",
+      "strength": 2.0,
+      "reach": 10
+    },
+    {
+      "id": "window3_light",
+      "across": -17.2,
+      "distance": 17.4,
+      "elevation": 3.5,
+      "color": "#a9b8cc",
+      "strength": 2.0,
+      "reach": 10
+    },
+    {
+      "id": "gas1",
+      "of": "lamps#lamp1",
+      "reach": 13,
+      "glow": 2.5,
+      "strength": 1.5
+    },
+    {
+      "id": "gas2",
+      "of": "lamps#lamp2",
+      "reach": 13,
+      "glow": 2.5,
+      "strength": 1.5
+    },
+    {
+      "id": "gas3",
+      "of": "lamps#lamp3",
+      "reach": 13,
+      "glow": 2.5,
+      "strength": 1.5
+    },
+    {
+      "id": "fill",
+      "across": 0.5,
+      "distance": 3.2,
+      "elevation": 4.2,
+      "color": "#ffe4c4",
+      "strength": 1.2,
+      "reach": 10
+    }
+  ],
+  "state": {
+    "minute": 1244,
+    "second": 0,
+    "fire": 0.75,
+    "door": 0,
+    "crowd_outside": 0,
+    "day": 1,
+    "leaf_l": 180,
+    "leaf_r": 180,
+    "beat": null,
+    "fogg_hat": 1,
+    "cards_down": 0,
+    "chair_back": 0,
+    "gentlemen": 5,
+    "fogg_present": 1,
+    "fogg_seated": 0,
+    "with_aouda": 0,
+    "with_pp": 0,
+    "aouda_here": false,
+    "passepartout_here": false,
+    "porter_here": false,
+    "with_fix": 0,
+    "fix_bruise": 0,
+    "fix_here": false
+  },
+  "states": {
+    "minute": {
+      "range": [
+        0,
+        1439
+      ],
+      "means": "minutes from midnight: the hour and the minute hands (20:44 — 1244)"
+    },
+    "second": {
+      "range": [
+        0,
+        60
+      ],
+      "smooth": true,
+      "means": "seconds; the scene's script leads them itself, smoothly: the pendulum swings by them, the second hand steps on the whole ones"
+    },
+    "fire": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the fire in the fireplace: 0 — embers, 1 — full flame; as much of its light in the saloon"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the double door: 0 — shut (the hall's light in the chink), 1 — flung open into the saloon; the hall's light comes into the saloon"
+    },
+    "crowd_outside": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the crowd on Pall Mall behind the windows: 0 — nobody, 1 — a thick crowd with lanterns"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the hour behind the windows and the light in the saloon: 0 — a grey day, 0.5 — dusk, the gas is lit, 1 — night"
+    },
+    "leaf_l": {
+      "range": [
+        180,
+        280
+      ],
+      "smooth": true,
+      "means": "the left leaf's turn, degrees: 180 — shut, 280 — wide open into the saloon; led by script.js by door, the game need not touch it"
+    },
+    "leaf_r": {
+      "range": [
+        80,
+        180
+      ],
+      "smooth": true,
+      "means": "the right leaf's turn, degrees: 180 — shut, 80 — wide open into the saloon; led by script.js by door, the game need not touch it"
+    },
+    "beat": {
+      "type": "string",
+      "means": "a beat of the film: countdown, whist, wager, wager_down, leave, wait, door, no_door, friday, friday_in (null — none: outside the game the scene plays its showcase)"
+    },
+    "gentlemen": {
+      "range": [
+        0,
+        5
+      ],
+      "means": "how many gentlemen are in the saloon: Stuart, Flanagan, Fallentin, Sullivan, Ralph — in that order"
+    },
+    "fogg_present": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Fogg in the saloon"
+    },
+    "fogg_seated": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Fogg sits at the whist table in his own place with a newspaper, his face to us (Friday)"
+    },
+    "with_aouda": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Aouda comes in after Fogg (the beat door)"
+    },
+    "with_pp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Passepartout comes in after Fogg (the beat door)"
+    },
+    "fogg_hat": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Fogg's top hat on the stand by the door; 0 — Fogg has it"
+    },
+    "cards_down": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Fogg's cards laid face down on the felt (the wager)"
+    },
+    "chair_back": {
+      "range": [
+        0,
+        0.4
+      ],
+      "smooth": true,
+      "means": "how many metres Fogg's chair is pushed back from the table (he rises)"
+    },
+    "with_fix": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "Fix comes in after Fogg, last, by the door (the beat door)"
+    },
+    "fix_bruise": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "1 — Fix's bruise (the cast: wears.fix_bruise)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat the game will play next (the module beats makes its opening ready ahead): countdown, whist, wager, wager_down, leave, wait, door, no_door, friday, friday_in"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Fog over Pall Mall",
+      "sky": true,
+      "uniforms": {
+        "high_r": 0.034,
+        "high_g": 0.058,
+        "high_b": 0.1,
+        "low_r": 0.21,
+        "low_g": 0.25,
+        "low_b": 0.3
+      }
+    },
+    {
+      "id": "pavement",
+      "name": "Pall Mall roadway",
+      "plane": true,
+      "across": -10,
+      "distance": 30,
+      "elevation": -0.5,
+      "width": 60,
+      "depth": 24,
+      "lit": true
+    },
+    {
+      "id": "street",
+      "name": "Houses opposite",
+      "across": 0,
+      "distance": 40,
+      "height": 24,
+      "box": [
+        -52,
+        -24,
+        -4,
+        1
+      ],
+      "uniforms": {
+        "high_r": 0.034,
+        "high_g": 0.058,
+        "high_b": 0.1,
+        "low_r": 0.21,
+        "low_g": 0.25,
+        "low_b": 0.3,
+        "gas": 1
+      }
+    },
+    {
+      "id": "crowd",
+      "name": "Crowd in the street",
+      "across": 0,
+      "distance": 27,
+      "height": 3,
+      "box": [
+        -36,
+        -4.5,
+        2,
+        1
+      ]
+    },
+    {
+      "id": "lamps",
+      "name": "Gas lamps",
+      "across": 0,
+      "distance": 23,
+      "height": 5,
+      "box": [
+        -24.5,
+        -4.5,
+        -6.5,
+        0.1
+      ],
+      "elevation": -0.5
+    },
+    {
+      "id": "mist",
+      "name": "Fog",
+      "across": 0,
+      "distance": 20,
+      "height": 12,
+      "box": [
+        -56,
+        -16,
+        18,
+        3.5
+      ],
+      "glows": true,
+      "uniforms": {
+        "fog_r": 0.22,
+        "fog_g": 0.25,
+        "fog_b": 0.29
+      }
+    },
+    {
+      "id": "floor",
+      "name": "Floor",
+      "plane": true,
+      "across": 0,
+      "distance": 10,
+      "elevation": 0,
+      "width": 52,
+      "depth": 16,
+      "reflect": {
+        "strength": 0.5,
+        "fade": 1.0,
+        "blur": 0.05,
+        "rough": 0.15
+      },
+      "lit": true
+    },
+    {
+      "id": "hall",
+      "name": "Hall beyond the door",
+      "across": 0,
+      "distance": 18.6,
+      "height": 5,
+      "glows": true,
+      "box": [
+        -1.8,
+        -5.2,
+        1.8,
+        0
+      ]
+    },
+    {
+      "id": "glazing",
+      "name": "Window frames",
+      "across": 0,
+      "distance": 18.7,
+      "height": 10.4,
+      "box": [
+        -25.2,
+        -10.5,
+        -3.3,
+        -0.5
+      ]
+    },
+    {
+      "id": "jamb1",
+      "name": "Window 1 jamb",
+      "across": -7.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill1",
+      "name": "Window 1 sill",
+      "plane": true,
+      "across": -5.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit1",
+      "name": "Window 1 head",
+      "plane": true,
+      "across": -5.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "jamb2",
+      "name": "Window 2 jamb",
+      "across": -13.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill2",
+      "name": "Window 2 sill",
+      "plane": true,
+      "across": -11.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit2",
+      "name": "Window 2 head",
+      "plane": true,
+      "across": -11.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "jamb3",
+      "name": "Window 3 jamb",
+      "across": -19.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill3",
+      "name": "Window 3 sill",
+      "plane": true,
+      "across": -17.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit3",
+      "name": "Window 3 head",
+      "plane": true,
+      "across": -17.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "jamb4",
+      "name": "Window 4 jamb",
+      "across": -25.0,
+      "distance": 18,
+      "height": 10.4,
+      "facing": 90,
+      "box": [
+        0,
+        -10.4,
+        0.7,
+        -0.6
+      ]
+    },
+    {
+      "id": "sill4",
+      "name": "Window 4 sill",
+      "plane": true,
+      "across": -23.2,
+      "distance": 18.35,
+      "elevation": 0.6,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "soffit4",
+      "name": "Window 4 head",
+      "plane": true,
+      "across": -23.2,
+      "distance": 18.35,
+      "elevation": 10.4,
+      "width": 3.6,
+      "depth": 0.7
+    },
+    {
+      "id": "wall",
+      "name": "Wall with windows",
+      "across": 0,
+      "distance": 18,
+      "height": 18,
+      "box": [
+        -34.2,
+        -16.2,
+        18.2,
+        0.15
+      ]
+    },
+    {
+      "id": "door",
+      "name": "Door",
+      "across": -1.3,
+      "distance": 18,
+      "height": 5,
+      "box": [
+        0,
+        -4.9,
+        1.3,
+        0.1
+      ],
+      "facing": 180,
+      "place": {
+        "facing": "leaf_l"
+      },
+      "inFront": [
+        "wall"
+      ]
+    },
+    {
+      "id": "door_r",
+      "name": "Door, right leaf",
+      "across": 1.3,
+      "distance": 18,
+      "height": 5,
+      "box": [
+        -1.3,
+        -4.9,
+        0,
+        0.1
+      ],
+      "facing": 180,
+      "place": {
+        "facing": "leaf_r"
+      },
+      "inFront": [
+        "wall"
+      ]
+    },
+    {
+      "id": "hatstand",
+      "name": "Hat-stand by the door",
+      "across": -2.6,
+      "distance": 17.0,
+      "height": 2.2,
+      "box": [
+        -0.3,
+        -2.25,
+        0.4,
+        0.02
+      ]
+    },
+    {
+      "id": "papers",
+      "name": "Newspapers on a rack",
+      "across": -5.0,
+      "distance": 13,
+      "height": 1.7,
+      "box": [
+        -0.8,
+        -1.8,
+        0.8,
+        0
+      ]
+    },
+    {
+      "id": "armchair_far",
+      "name": "Armchair by the window",
+      "across": -8.4,
+      "distance": 12,
+      "height": 1.1,
+      "box": [
+        -0.9,
+        -1.2,
+        0.9,
+        0
+      ]
+    },
+    {
+      "id": "partition",
+      "name": "Wall with the clock",
+      "across": 0,
+      "distance": 8,
+      "height": 12,
+      "box": [
+        0.8,
+        -12.1,
+        17.1,
+        0.05
+      ]
+    },
+    {
+      "id": "partition_end",
+      "name": "End of the wall with the clock",
+      "across": 0.95,
+      "distance": 8,
+      "height": 12,
+      "facing": 270,
+      "box": [
+        -0.45,
+        -12,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "hearth",
+      "name": "Fireplace recess",
+      "across": 4.2,
+      "distance": 8.55,
+      "height": 1.2,
+      "box": [
+        -1.0,
+        -1.2,
+        1.0,
+        0.02
+      ],
+      "uniforms": {
+        "fire": 0.75
+      },
+      "behind": [
+        "partition"
+      ]
+    },
+    {
+      "id": "hearth_floor",
+      "name": "Hearth floor",
+      "plane": true,
+      "across": 4.2,
+      "distance": 8.275,
+      "elevation": 0.005,
+      "width": 1.25,
+      "depth": 0.55,
+      "lit": true,
+      "behind": [
+        "partition"
+      ]
+    },
+    {
+      "id": "fireplace",
+      "name": "Fireplace",
+      "across": 4.2,
+      "distance": 8,
+      "height": 1.5,
+      "box": [
+        -1.2,
+        -1.4,
+        1.2,
+        0
+      ],
+      "inFront": [
+        "partition"
+      ]
+    },
+    {
+      "id": "flames",
+      "name": "Fire in the fireplace",
+      "across": 4.2,
+      "distance": 8.3,
+      "elevation": 0.03,
+      "particles": {
+        "kind": "fire",
+        "amount": "fire",
+        "source": [
+          0.75,
+          0.2,
+          0.02
+        ],
+        "size": [
+          0.2,
+          0.05
+        ],
+        "rate": 90,
+        "life": [
+          0.3,
+          0.7
+        ]
+      }
+    },
+    {
+      "id": "embers",
+      "name": "Sparks in the fireplace",
+      "across": 4.2,
+      "distance": 8.3,
+      "elevation": 0.05,
+      "particles": {
+        "kind": "embers",
+        "source": [
+          0.8,
+          0.2,
+          0.02
+        ],
+        "rate": 3
+      }
+    },
+    {
+      "id": "clock",
+      "name": "Clock",
+      "across": 2.35,
+      "distance": 8,
+      "height": 5.6,
+      "box": [
+        -0.7,
+        -5.2,
+        0.7,
+        0
+      ],
+      "inFront": [
+        "partition"
+      ],
+      "shadow": {
+        "onto": [
+          "partition"
+        ],
+        "strength": 0.5,
+        "soft": 0.2
+      }
+    },
+    {
+      "id": "felt",
+      "name": "Green felt",
+      "plane": true,
+      "across": -1.6,
+      "distance": 7,
+      "elevation": 0.76,
+      "width": 1.1,
+      "depth": 1.1,
+      "lit": true,
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.6,
+        "soft": 0.25
+      }
+    },
+    {
+      "id": "table",
+      "name": "Card table",
+      "across": -1.6,
+      "distance": 6.55,
+      "height": 1,
+      "box": [
+        -1.3,
+        -1.1,
+        1.8,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.6,
+        "soft": 0.25
+      }
+    },
+    {
+      "id": "fogg_chair",
+      "name": "Fogg's chair",
+      "on": "table",
+      "across": 0,
+      "distance": 0,
+      "place": {
+        "distance": "chair_back"
+      },
+      "height": 1,
+      "box": [
+        -0.4,
+        -1.1,
+        0.4,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.6,
+        "soft": 0.25
+      }
+    },
+    {
+      "id": "lamp",
+      "name": "Lamp over the table",
+      "across": -1.6,
+      "distance": 7,
+      "elevation": 2.3,
+      "height": 0.3,
+      "box": [
+        -0.8,
+        -16,
+        0.8,
+        1.6
+      ],
+      "glows": true
+    },
+    {
+      "id": "dust",
+      "name": "Dust in the lamplight",
+      "particles": {
+        "kind": "dust",
+        "at": [
+          -1.6,
+          7.0,
+          1.5
+        ],
+        "source": [
+          1.4,
+          1.4,
+          1.5
+        ],
+        "rate": 8
+      }
+    },
+    {
+      "id": "armchair",
+      "name": "Armchair by the fire",
+      "across": 1.6,
+      "distance": 5.2,
+      "height": 1,
+      "box": [
+        -0.7,
+        -1.1,
+        0.9,
+        0
+      ],
+      "shadow": {
+        "onto": [
+          "floor"
+        ],
+        "strength": 0.55,
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "fogg",
+      "name": "Phileas Fogg",
+      "person": {
+        "cast": "cast",
+        "who": "fogg",
+        "does": "cards",
+        "turn": 180
+      },
+      "across": -1.6,
+      "distance": 7.79,
+      "place": {
+        "across": "fogg_a",
+        "distance": "fogg_d"
+      }
+    },
+    {
+      "id": "flanagan",
+      "name": "Thomas Flanagan",
+      "person": {
+        "cast": "cast",
+        "who": "flanagan",
+        "does": "cards",
+        "turn": 0
+      },
+      "across": -1.6,
+      "distance": 6.21,
+      "place": {
+        "across": "flanagan_a",
+        "distance": "flanagan_d"
+      }
+    },
+    {
+      "id": "fallentin",
+      "name": "Samuel Fallentin",
+      "person": {
+        "cast": "cast",
+        "who": "fallentin",
+        "does": "cards",
+        "turn": 90
+      },
+      "across": -2.39,
+      "distance": 7.0,
+      "place": {
+        "across": "fallentin_a",
+        "distance": "fallentin_d"
+      }
+    },
+    {
+      "id": "sullivan",
+      "name": "John Sullivan",
+      "person": {
+        "cast": "cast",
+        "who": "sullivan",
+        "does": "cards",
+        "turn": 270
+      },
+      "across": -0.81,
+      "distance": 7.0,
+      "place": {
+        "across": "sullivan_a",
+        "distance": "sullivan_d"
+      }
+    },
+    {
+      "id": "stuart",
+      "name": "Andrew Stuart",
+      "person": {
+        "cast": "cast",
+        "who": "stuart",
+        "does": "paper_seated",
+        "turn": 180
+      },
+      "across": -0.15,
+      "distance": 8.5,
+      "place": {
+        "across": "stuart_a",
+        "distance": "stuart_d"
+      }
+    },
+    {
+      "id": "ralph",
+      "name": "Gauthier Ralph",
+      "person": {
+        "cast": "cast",
+        "who": "ralph",
+        "does": "hands_behind",
+        "turn": 250
+      },
+      "across": 3.3,
+      "distance": 6.9,
+      "place": {
+        "across": "ralph_a",
+        "distance": "ralph_d"
+      }
+    },
+    {
+      "id": "passepartout",
+      "name": "Passepartout",
+      "person": {
+        "cast": "cast",
+        "who": "passepartout",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": 0.4,
+      "distance": 19.5,
+      "place": {
+        "across": "passepartout_a",
+        "distance": "passepartout_d"
+      }
+    },
+    {
+      "id": "aouda",
+      "name": "Aouda",
+      "person": {
+        "cast": "cast",
+        "who": "aouda",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": -0.4,
+      "distance": 19.5,
+      "place": {
+        "across": "aouda_a",
+        "distance": "aouda_d"
+      }
+    },
+    {
+      "id": "porter",
+      "name": "Porter",
+      "person": {
+        "cast": "cast",
+        "who": "porter",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": 0.6,
+      "distance": 16.5,
+      "place": {
+        "across": "porter_a",
+        "distance": "porter_d"
+      }
+    },
+    {
+      "id": "fix",
+      "name": "Fix",
+      "person": {
+        "cast": "cast",
+        "who": "fix",
+        "does": "stand",
+        "turn": 180
+      },
+      "across": 0.1,
+      "distance": 20.2,
+      "place": {
+        "across": "fix_a",
+        "distance": "fix_d"
+      }
+    }
+  ],
+  "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "prompts": [
+      {
+        "text": "Sparse solo piano in a large quiet room, slow single notes falling like the tick of a clock, warm hall reverb, late evening, restrained and precise",
+        "weight": 1.2
+      },
+      {
+        "text": "Pizzicato strings ticking in strict tempo like clockwork, light chamber orchestra, curious, poised, understated anticipation",
+        "weight": 1.0
+      },
+      {
+        "text": "Soft sustained low strings and a distant fog-like drone, minimalist ambient, deep space and stillness",
+        "weight": 0.6
+      },
+      {
+        "text": "Celesta and harp in delicate interlocking arpeggios, music-box precision, quiet wonder",
+        "weight": 0.4
+      },
+      {
+        "text": "Minimalist repeating piano patterns in the manner of modern indie game scores, cool and luminous, slowly evolving",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long bowed notes, melancholic and dignified, gaslit London night",
+        "weight": 0
+      },
+      {
+        "text": "Light orchestral adventure theme, brisk strings and woodwinds in the rhythm of a steam train, 1870s optimism",
+        "weight": 0
+      },
+      {
+        "text": "Muted marimba and woodblock ticking against a metronome, playful clockwork, dry and close",
+        "weight": 0
+      },
+      {
+        "text": "String quartet playing a slow aristocratic waltz in a gentlemen's club, muted, far away behind closed doors",
+        "weight": 0
+      },
+      {
+        "text": "Cold ambient synth pads and soft noise like fog against glass, modern atmospheric game soundtrack",
+        "weight": 0
+      },
+      {
+        "text": "Distant brass chorale, solemn and warm, heard through fog across a city square",
+        "weight": 0
+      },
+      {
+        "text": "Harpsichord and bassoon in crisp baroque counterpoint, exact, a little ironic",
+        "weight": 0
+      },
+      {
+        "text": "Low timpani pulse like a slow heartbeat under thin high strings, tension of a countdown",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica and bowed vibraphone shimmering, ethereal, suspended time",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet melody over soft pizzicato bass, gentle wit, Victorian parlour",
+        "weight": 0
+      },
+      {
+        "text": "Warm crackling-fire mood: felt piano, soft upright bass, slow and intimate",
+        "weight": 0
+      },
+      {
+        "text": "Full orchestra swelling to a bright triumphant arrival, horns and strings, the door flung open",
+        "weight": 0
+      },
+      {
+        "text": "Solo music box slowing down, a mechanism winding to a stop, fragile",
+        "weight": 0
+      },
+      {
+        "text": "Accordion and strings, faint street music from outside, a waiting crowd in the fog",
+        "weight": 0
+      },
+      {
+        "text": "Ostinato strings in five, restless, train wheels and ticking clocks merging into one rhythm",
+        "weight": 0
+      }
+    ],
+    "bpm": 60,
+    "density": 0.3,
+    "brightness": 0.35
+  }
+}
