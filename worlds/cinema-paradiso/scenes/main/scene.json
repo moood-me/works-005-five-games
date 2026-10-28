@@ -1,0 +1,2541 @@
+{
+  "engine": 3,
+  "title": "The Square",
+  "caption": "Giancaldo. The Paradiso's square",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "roam",
+    "area": [
+      -12,
+      12,
+      -14,
+      26
+    ]
+  },
+  "light": {
+    "ambient": 0.58,
+    "ambientColor": "#7486c0",
+    "tint": "#22305e",
+    "tintStrength": 0.06,
+    "vignette": 0.34,
+    "grain": 0.13,
+    "haze": 0.06,
+    "hazeColor": "#2e4470",
+    "hazeGlow": 0.8,
+    "shafts": 0.2,
+    "bounce": 0.62,
+    "brightness": 1.16,
+    "saturation": 0.95,
+    "wind": [
+      0.6,
+      0.3,
+      0.3
+    ],
+    "looks": {
+      "dusk_k": {
+        "ambient": 0.72,
+        "ambientColor": "#c0a8b0",
+        "tint": "#c88a66",
+        "tintStrength": 0.09,
+        "hazeColor": "#b89a96",
+        "lights": {
+          "moon": 0.35
+        }
+      },
+      "now_k": {
+        "ambientColor": "#8c8eaa",
+        "saturation": 0.6,
+        "tint": "#7b7ca4",
+        "tintStrength": 0.09,
+        "hazeColor": "#5a5c74"
+      },
+      "morning_k": {
+        "ambient": 0.95,
+        "ambientColor": "#c6c8ce",
+        "saturation": 0.5,
+        "haze": 0.22,
+        "hazeColor": "#a8aab2",
+        "brightness": 1.04,
+        "lights": {
+          "moon": 0
+        }
+      },
+      "rain": {
+        "ambient": 0.36,
+        "haze": 0.22,
+        "hazeColor": "#26304a",
+        "hazeGlow": 1.1,
+        "wind": [
+          1.6,
+          0.6,
+          1.2
+        ],
+        "lights": {
+          "moon": 0.25
+        }
+      },
+      "wind_k": {
+        "wind": [
+          2.2,
+          0.4,
+          1.6
+        ]
+      },
+      "cold_k": {
+        "ambientColor": "#6a80c8",
+        "saturation": 0.8,
+        "tint": "#203466",
+        "tintStrength": 0.1
+      },
+      "dust": {
+        "haze": 0.9,
+        "hazeColor": "#bdb5a8",
+        "ambient": 1,
+        "ambientColor": "#c4beb4",
+        "lights": {
+          "moon": 0
+        }
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "moon",
+      "from": "sky#disc",
+      "color": "#c4d0ff",
+      "strength": 0.55
+    },
+    {
+      "id": "booth_light",
+      "of": "booth_in#win",
+      "color": "#ffc27a",
+      "strength": 1.3,
+      "reach": 9,
+      "flicker": 0.1
+    },
+    {
+      "id": "marquee",
+      "of": "canopy_front#marquee",
+      "color": "#ffcf8a",
+      "strength": 1.1,
+      "reach": 7,
+      "flicker": 0.05
+    },
+    {
+      "id": "wall_light",
+      "across": 2,
+      "distance": 23.6,
+      "elevation": 4.2,
+      "color": "#ffe0b0",
+      "strength": 1.4,
+      "reach": 12,
+      "on": "wall_lit",
+      "flicker": 0.15
+    },
+    {
+      "id": "mother_light",
+      "of": "mother_window#lamp",
+      "color": "#ffbf75",
+      "strength": 0.8,
+      "reach": 6,
+      "on": "mother_light"
+    },
+    {
+      "id": "alf_lamp",
+      "of": "alfredo_door#lamp",
+      "color": "#e8dcc4",
+      "strength": 1,
+      "reach": 7
+    },
+    {
+      "id": "bank_lamp",
+      "of": "bank#lamp",
+      "color": "#e4e0d4",
+      "strength": 1.3,
+      "reach": 9
+    },
+    {
+      "id": "elena_light",
+      "of": "balcony_room#room",
+      "color": "#ffc882",
+      "strength": 0.9,
+      "reach": 7,
+      "on": "elena_window"
+    },
+    {
+      "id": "lamp0",
+      "across": -5.5,
+      "distance": 21.5,
+      "elevation": 3.8,
+      "color": "#e2e0d6",
+      "strength": 1,
+      "reach": 8
+    },
+    {
+      "id": "lamp2",
+      "across": 6.5,
+      "distance": 8.5,
+      "elevation": 3.8,
+      "color": "#e2e0d6",
+      "strength": 1.5,
+      "reach": 12
+    },
+    {
+      "id": "par_lamp",
+      "of": "paradiso#lamp",
+      "color": "#e8e2d2",
+      "strength": 1.3,
+      "reach": 8
+    },
+    {
+      "id": "lamp4",
+      "across": -7.2,
+      "distance": 0.4,
+      "elevation": 3.8,
+      "color": "#e2e0d6",
+      "strength": 1,
+      "reach": 8
+    },
+    {
+      "id": "porch_fill",
+      "across": -6.2,
+      "distance": 8,
+      "elevation": 4.2,
+      "color": "#c9d0e4",
+      "strength": 0.8,
+      "reach": 8
+    },
+    {
+      "id": "beam_tip",
+      "across": -8.6,
+      "distance": 15.2,
+      "elevation": 1.1,
+      "place": {
+        "across": "tip_x",
+        "distance": "tip_z",
+        "elevation": "tip_y"
+      },
+      "color": "#ffd9a0",
+      "strength": 1.6,
+      "reach": 3.2,
+      "on": "tip_on",
+      "flicker": 0.12
+    },
+    {
+      "id": "flash",
+      "across": 4,
+      "distance": 4,
+      "elevation": 14,
+      "color": "#ffe6c8",
+      "strength": 2.2,
+      "reach": 45,
+      "on": "flash"
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "era": "past",
+    "hour": 0.9,
+    "dusk_k": 0,
+    "now_k": 0,
+    "morning_k": 0,
+    "past": 1,
+    "paradiso_state": "old",
+    "poster": 0,
+    "full_sign": 0,
+    "mother_light": 0,
+    "beam_on": 0,
+    "beam_aim": 0,
+    "beam_turn": 103.6,
+    "beam_pitch": -55.3,
+    "tip_x": -8.6,
+    "tip_z": 15.2,
+    "tip_y": 1.1,
+    "tip_on": 0,
+    "beam_sky": 0,
+    "beam_focus": 0,
+    "wall_film": "none",
+    "wall_lit": 0,
+    "wall_burn": 0,
+    "smoke": 0,
+    "fireworks": 0,
+    "fw": 0,
+    "flash": 0,
+    "chalk": 0,
+    "mark_chalk": 0,
+    "night_kind": "clear",
+    "rain": 0,
+    "wind_k": 0,
+    "cold_k": 0,
+    "garland": 0,
+    "elena_window": 0,
+    "viewfinder": 0,
+    "pan": 0,
+    "elena_x": 1,
+    "madman_x": -1,
+    "rec": 0,
+    "cart": 0,
+    "hearse_a": -9.6,
+    "hearse_d": -8,
+    "hearse_f": 0,
+    "follow": 0,
+    "sal_rail": 0,
+    "collapse": 0,
+    "dust": 0,
+    "dust_burst": 0,
+    "booth_flash": 0,
+    "booth_fig": 0,
+    "crowd_k": 0,
+    "crowd_sit": 0,
+    "crowd_x": 0,
+    "crowd_z": -60,
+    "crowd_f": 180,
+    "chair_on": 0,
+    "bulbs": 1,
+    "warm": 0.5,
+    "place": "crowd",
+    "with_mother": 1,
+    "camera_x": 0,
+    "camera_z": -4,
+    "camera_yaw": -8,
+    "camera_h": 0.3,
+    "camera_pitch": 2,
+    "toto_a": 0,
+    "toto_d": -40,
+    "toto_here": false,
+    "alfredo_a": 0,
+    "alfredo_d": -40,
+    "alfredo_here": false,
+    "maria_a": 0,
+    "maria_d": -40,
+    "maria_here": false,
+    "elena_a": 0,
+    "elena_d": -40,
+    "elena_here": false,
+    "daughter_a": 0,
+    "daughter_d": -40,
+    "daughter_here": false,
+    "madman_a": 0,
+    "madman_d": -40,
+    "madman_here": false,
+    "anna_a": 0,
+    "anna_d": -40,
+    "anna_here": false,
+    "bearer1_a": 0,
+    "bearer1_d": -40,
+    "bearer1_here": false,
+    "bearer2_a": 0,
+    "bearer2_d": -40,
+    "bearer2_here": false,
+    "c1_a": 0,
+    "c1_d": -40,
+    "c1_here": false,
+    "c2_a": 0,
+    "c2_d": -40,
+    "c2_here": false,
+    "c3_a": 0,
+    "c3_d": -40,
+    "c3_here": false,
+    "c4_a": 0,
+    "c4_d": -40,
+    "c4_here": false,
+    "c5_a": 0,
+    "c5_d": -40,
+    "c5_here": false,
+    "c6_a": 0,
+    "c6_d": -40,
+    "c6_here": false,
+    "c7_a": 0,
+    "c7_d": -40,
+    "c7_here": false,
+    "c8_a": 0,
+    "c8_d": -40,
+    "c8_here": false,
+    "c9_a": 0,
+    "c9_d": -40,
+    "c9_here": false,
+    "c10_a": 0,
+    "c10_d": -40,
+    "c10_here": false
+  },
+  "states": {
+    "beat": {
+      "type": "string",
+      "means": "the beat the scene plays (the game sets it): now_open, rewind, after_show, alfredo_down, coins_taken, slap, paper, crowd, beam_out, wall_film, smoke, outside, new_sign, door, go_together, go_alone, dusk, seen, film_on, hello, story_door, chair, nights, eve, midnight, midnight_close, girl, follow, let, funeral, walk_behind, widow, stay_door, widow_late, demolition, dust"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose opening shot to make ready (the game sets it); empty — the next in the table"
+    },
+    "era": {
+      "values": [
+        "past",
+        "now"
+      ],
+      "means": "era: past — the warm night of the past (1949–1958), now — the cool 1988"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "hour: 0.3 morning, 0.78–0.8 dusk, 0.9 night"
+    },
+    "dusk_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the light of dusk (the beat sets it from hour)",
+      "smooth": true
+    },
+    "now_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the light of 1988 (the beat sets it from era)",
+      "smooth": true
+    },
+    "morning_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the grey morning of 1988",
+      "smooth": true
+    },
+    "past": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the way back into the past (rewind only, by layers): 0 — 1988, 1 — the past; the beats of the present hold 0, of the past 1",
+      "smooth": true
+    },
+    "paradiso_state": {
+      "values": [
+        "old",
+        "burnt",
+        "new",
+        "shut",
+        "charged"
+      ],
+      "means": "the Paradiso: old, burnt, new, boarded up, charged"
+    },
+    "poster": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the poster of «Gone with the Wind» by the doors"
+    },
+    "full_sign": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the board «No seats» on the doors"
+    },
+    "mother_light": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the light in the mother's window",
+      "smooth": true
+    },
+    "beam_on": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the beam from the booth's port",
+      "smooth": true
+    },
+    "beam_aim": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the beam's end: 0 — a spot on the stone and the heads under the port, 1 — the white wall (the game moves it)",
+      "smooth": true
+    },
+    "beam_turn": {
+      "type": "number",
+      "means": "internal: where the beam looks in plan, degrees (the scene from beam_aim)"
+    },
+    "beam_pitch": {
+      "type": "number",
+      "means": "internal: the beam's tilt, degrees (+ up; the scene from beam_aim)"
+    },
+    "tip_x": {
+      "type": "number",
+      "means": "internal: the spot of light at the beam's end, across"
+    },
+    "tip_z": {
+      "type": "number",
+      "means": "internal: the spot, in depth"
+    },
+    "tip_y": {
+      "type": "number",
+      "means": "internal: the spot, height"
+    },
+    "tip_on": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the spot at the beam's end is lit",
+      "smooth": true
+    },
+    "beam_sky": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: the beam up over the square (the prologue)"
+    },
+    "beam_focus": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the sharpness of the film on the wall (the game moves it)",
+      "smooth": true
+    },
+    "wall_film": {
+      "values": [
+        "none",
+        "comedy",
+        "white"
+      ],
+      "means": "the frame on the wall"
+    },
+    "wall_lit": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the light of the wall with the film (the scene sets it)"
+    },
+    "wall_burn": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the frame on the wall is burning",
+      "smooth": true
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "smoke from the booth's port",
+      "smooth": true
+    },
+    "fireworks": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the fireworks are going"
+    },
+    "fw": {
+      "type": "number",
+      "means": "internal: the count of the fireworks' volleys"
+    },
+    "flash": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: a flash (the fireworks, the way back into the past)",
+      "smooth": true
+    },
+    "chalk": {
+      "range": [
+        0,
+        99
+      ],
+      "means": "the chalk strokes on the bank's wall (painting; changes in batches)"
+    },
+    "mark_chalk": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "pulse: Totò makes a stroke (the scene plays chalk_mark and resets it to 0)"
+    },
+    "night_kind": {
+      "values": [
+        "clear",
+        "rain",
+        "wind",
+        "feast",
+        "cold"
+      ],
+      "means": "which night of the week"
+    },
+    "rain": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: rain (from night_kind)",
+      "smooth": true
+    },
+    "wind_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: wind (from night_kind)",
+      "smooth": true
+    },
+    "cold_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: cold (from night_kind)",
+      "smooth": true
+    },
+    "garland": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the festive garland (from night_kind)",
+      "smooth": true
+    },
+    "elena_window": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the shutter of Elena's balcony and the light behind it",
+      "smooth": true
+    },
+    "viewfinder": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the insert «viewfinder»",
+      "smooth": true
+    },
+    "pan": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "viewfinder: where the camera looks",
+      "smooth": true
+    },
+    "elena_x": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "viewfinder: where the girl is",
+      "smooth": true
+    },
+    "madman_x": {
+      "range": [
+        -1,
+        1
+      ],
+      "means": "viewfinder: where the madman is (seen while |x| < 0.97)",
+      "smooth": true
+    },
+    "rec": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "viewfinder: the camera is recording"
+    },
+    "cart": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the hearse on its way from the south along the west side to the church steps",
+      "smooth": true
+    },
+    "hearse_a": {
+      "type": "number",
+      "means": "internal: where the hearse is, across (from cart)"
+    },
+    "hearse_d": {
+      "type": "number",
+      "means": "internal: where the hearse is, in depth (from cart)"
+    },
+    "hearse_f": {
+      "type": "number",
+      "means": "internal: where the hearse is heading, degrees (from cart)"
+    },
+    "follow": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: the procession walks behind the hearse"
+    },
+    "sal_rail": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: Salvatore walks by the cart, his hand on it"
+    },
+    "collapse": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the Paradiso's front sinks (by layers)",
+      "smooth": true
+    },
+    "dust": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the demolition's dust in the air",
+      "smooth": true
+    },
+    "dust_burst": {
+      "type": "number",
+      "means": "internal: the cloud of dust (a burst of particles)"
+    },
+    "booth_flash": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the booth's port flares",
+      "smooth": true
+    },
+    "booth_fig": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: Alfredo and the boy in the booth's port (far ones)",
+      "smooth": true
+    },
+    "crowd_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the painted crowd is seen",
+      "smooth": true
+    },
+    "crowd_sit": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the painted crowd is seated",
+      "smooth": true
+    },
+    "crowd_x": {
+      "type": "number",
+      "means": "internal: where the painted crowd is, across"
+    },
+    "crowd_z": {
+      "type": "number",
+      "means": "internal: where the painted crowd is, in depth"
+    },
+    "crowd_f": {
+      "type": "number",
+      "means": "internal: where it looks"
+    },
+    "chair_on": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: Totò's chair by the bank's wall"
+    },
+    "bulbs": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the new sign's bulbs light up",
+      "smooth": true
+    },
+    "warm": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "party key: the warmth of the square's windows in the past (0.3 + 0.6·warm)",
+      "smooth": true
+    },
+    "place": {
+      "values": [
+        "crowd",
+        "apart"
+      ],
+      "means": "party key: where Salvatore stands at the demolition"
+    },
+    "with_mother": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "party key: old Maria beside him at the demolition"
+    },
+    "toto_a": {
+      "type": "number",
+      "means": "internal: where toto is, across, m"
+    },
+    "toto_d": {
+      "type": "number",
+      "means": "internal: where toto is, in depth, m"
+    },
+    "alfredo_a": {
+      "type": "number",
+      "means": "internal: where alfredo is, across, m"
+    },
+    "alfredo_d": {
+      "type": "number",
+      "means": "internal: where alfredo is, in depth, m"
+    },
+    "maria_a": {
+      "type": "number",
+      "means": "internal: where maria is, across, m"
+    },
+    "maria_d": {
+      "type": "number",
+      "means": "internal: where maria is, in depth, m"
+    },
+    "elena_a": {
+      "type": "number",
+      "means": "internal: where elena is, across, m"
+    },
+    "elena_d": {
+      "type": "number",
+      "means": "internal: where elena is, in depth, m"
+    },
+    "daughter_a": {
+      "type": "number",
+      "means": "internal: where daughter is, across, m"
+    },
+    "daughter_d": {
+      "type": "number",
+      "means": "internal: where daughter is, in depth, m"
+    },
+    "madman_a": {
+      "type": "number",
+      "means": "internal: where madman is, across, m"
+    },
+    "madman_d": {
+      "type": "number",
+      "means": "internal: where madman is, in depth, m"
+    },
+    "anna_a": {
+      "type": "number",
+      "means": "internal: where anna is, across, m"
+    },
+    "anna_d": {
+      "type": "number",
+      "means": "internal: where anna is, in depth, m"
+    },
+    "bearer1_a": {
+      "type": "number",
+      "means": "internal: where bearer1 is, across, m"
+    },
+    "bearer1_d": {
+      "type": "number",
+      "means": "internal: where bearer1 is, in depth, m"
+    },
+    "bearer2_a": {
+      "type": "number",
+      "means": "internal: where bearer2 is, across, m"
+    },
+    "bearer2_d": {
+      "type": "number",
+      "means": "internal: where bearer2 is, in depth, m"
+    },
+    "c1_a": {
+      "type": "number",
+      "means": "internal: where c1 is, across, m"
+    },
+    "c1_d": {
+      "type": "number",
+      "means": "internal: where c1 is, in depth, m"
+    },
+    "c2_a": {
+      "type": "number",
+      "means": "internal: where c2 is, across, m"
+    },
+    "c2_d": {
+      "type": "number",
+      "means": "internal: where c2 is, in depth, m"
+    },
+    "c3_a": {
+      "type": "number",
+      "means": "internal: where c3 is, across, m"
+    },
+    "c3_d": {
+      "type": "number",
+      "means": "internal: where c3 is, in depth, m"
+    },
+    "c4_a": {
+      "type": "number",
+      "means": "internal: where c4 is, across, m"
+    },
+    "c4_d": {
+      "type": "number",
+      "means": "internal: where c4 is, in depth, m"
+    },
+    "c5_a": {
+      "type": "number",
+      "means": "internal: where c5 is, across, m"
+    },
+    "c5_d": {
+      "type": "number",
+      "means": "internal: where c5 is, in depth, m"
+    },
+    "c6_a": {
+      "type": "number",
+      "means": "internal: where c6 is, across, m"
+    },
+    "c6_d": {
+      "type": "number",
+      "means": "internal: where c6 is, in depth, m"
+    },
+    "c7_a": {
+      "type": "number",
+      "means": "internal: where c7 is, across, m"
+    },
+    "c7_d": {
+      "type": "number",
+      "means": "internal: where c7 is, in depth, m"
+    },
+    "c8_a": {
+      "type": "number",
+      "means": "internal: where c8 is, across, m"
+    },
+    "c8_d": {
+      "type": "number",
+      "means": "internal: where c8 is, in depth, m"
+    },
+    "c9_a": {
+      "type": "number",
+      "means": "internal: where c9 is, across, m"
+    },
+    "c9_d": {
+      "type": "number",
+      "means": "internal: where c9 is, in depth, m"
+    },
+    "c10_a": {
+      "type": "number",
+      "means": "internal: where c10 is, across, m"
+    },
+    "c10_d": {
+      "type": "number",
+      "means": "internal: where c10 is, in depth, m"
+    }
+  },
+  "modules": [
+    "cast",
+    "cinema",
+    "closeups",
+    "beats",
+    "sky"
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "quiet night ambience of a Sicilian town square, distant cicadas, faint murmur of voices, no melody",
+        "weight": 1
+      },
+      {
+        "text": "soft warm drone, slow and sparse, a little wind, nostalgic, no rhythm",
+        "weight": 0.4
+      },
+      {
+        "text": "gentle sea far away, a slow wash of waves behind stone houses",
+        "weight": 0.3
+      },
+      {
+        "text": "distant church bell reverb tail, very sparse",
+        "weight": 0
+      },
+      {
+        "text": "faint accordion far away, almost inaudible",
+        "weight": 0
+      }
+    ],
+    "bpm": 70,
+    "density": 0.15,
+    "brightness": 0.3,
+    "scale": "E_MAJOR_D_FLAT_MINOR"
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true
+    },
+    {
+      "id": "ground",
+      "name": "Square",
+      "plane": true,
+      "across": 0,
+      "distance": 6,
+      "elevation": 0,
+      "width": 44,
+      "depth": 100
+    },
+    {
+      "id": "sea_end",
+      "name": "Sea",
+      "across": 10.5,
+      "distance": 80,
+      "elevation": -10,
+      "facing": 180,
+      "height": 11.7,
+      "box": [
+        -30,
+        -11.8,
+        30,
+        0.1
+      ]
+    },
+    {
+      "id": "alfredo_door",
+      "name": "Alfredo's house",
+      "across": -12,
+      "distance": 0,
+      "facing": 90,
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        6.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "alfredo_door_win",
+      "name": "Windows",
+      "across": -12,
+      "distance": 0,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "alfredo_door"
+      ],
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        6.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_w2",
+      "name": "House",
+      "across": -12,
+      "distance": 20,
+      "facing": 90,
+      "height": 9.2,
+      "box": [
+        -0.3,
+        -9.799999999999999,
+        6.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_w2_win",
+      "name": "Windows",
+      "across": -12,
+      "distance": 20,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "f_w2"
+      ],
+      "height": 9.2,
+      "box": [
+        -0.3,
+        -9.799999999999999,
+        6.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_n1",
+      "name": "House with the arch",
+      "across": -12,
+      "distance": 26,
+      "facing": 180,
+      "height": 10,
+      "box": [
+        -0.3,
+        -10.6,
+        7.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_n1_win",
+      "name": "Windows",
+      "across": -12,
+      "distance": 26,
+      "facing": 180,
+      "glows": true,
+      "inFront": [
+        "f_n1"
+      ],
+      "height": 10,
+      "box": [
+        -0.3,
+        -10.6,
+        7.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_e3",
+      "name": "House",
+      "across": 12,
+      "distance": 26,
+      "facing": 270,
+      "height": 10.4,
+      "box": [
+        -0.3,
+        -11,
+        4.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_e3_win",
+      "name": "Windows",
+      "across": 12,
+      "distance": 26,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_e3"
+      ],
+      "height": 10.4,
+      "box": [
+        -0.3,
+        -11,
+        4.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_e1",
+      "name": "House",
+      "across": 12,
+      "distance": 8,
+      "facing": 270,
+      "height": 9.4,
+      "box": [
+        -0.3,
+        -10,
+        8.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_e1_win",
+      "name": "Windows",
+      "across": 12,
+      "distance": 8,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_e1"
+      ],
+      "height": 9.4,
+      "box": [
+        -0.3,
+        -10,
+        8.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_se",
+      "name": "House",
+      "across": 12,
+      "distance": 0,
+      "facing": 0,
+      "height": 9,
+      "box": [
+        -0.3,
+        -9.6,
+        7.6499999999999995,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_se_win",
+      "name": "Windows",
+      "across": 12,
+      "distance": 0,
+      "facing": 0,
+      "glows": true,
+      "inFront": [
+        "f_se"
+      ],
+      "height": 9,
+      "box": [
+        -0.3,
+        -9.6,
+        7.6499999999999995,
+        0.05
+      ]
+    },
+    {
+      "id": "f_sw",
+      "name": "House",
+      "across": -5,
+      "distance": 0,
+      "facing": 0,
+      "height": 8.4,
+      "box": [
+        -0.3,
+        -9,
+        7.6499999999999995,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_sw_win",
+      "name": "Windows",
+      "across": -5,
+      "distance": 0,
+      "facing": 0,
+      "glows": true,
+      "inFront": [
+        "f_sw"
+      ],
+      "height": 8.4,
+      "box": [
+        -0.3,
+        -9,
+        7.6499999999999995,
+        0.05
+      ]
+    },
+    {
+      "id": "f_lane_w",
+      "name": "Street to the sea",
+      "across": 9.1,
+      "distance": 26.3,
+      "facing": 90,
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        22.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_lane_w_win",
+      "name": "Windows",
+      "across": 9.1,
+      "distance": 26.3,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "f_lane_w"
+      ],
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        22.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_lane_e",
+      "name": "Street to the sea",
+      "across": 12,
+      "distance": 48.3,
+      "facing": 270,
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        22.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_lane_e_win",
+      "name": "Windows",
+      "across": 12,
+      "distance": 48.3,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_lane_e"
+      ],
+      "height": 8.6,
+      "box": [
+        -0.3,
+        -9.2,
+        22.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_st_w",
+      "name": "Street",
+      "across": -5,
+      "distance": -34,
+      "facing": 90,
+      "height": 7.6,
+      "box": [
+        -0.3,
+        -8.2,
+        34.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_st_w_win",
+      "name": "Windows",
+      "across": -5,
+      "distance": -34,
+      "facing": 90,
+      "glows": true,
+      "inFront": [
+        "f_st_w"
+      ],
+      "height": 7.6,
+      "box": [
+        -0.3,
+        -8.2,
+        34.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_st_e",
+      "name": "Street",
+      "across": 5,
+      "distance": 0,
+      "facing": 270,
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        34.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_st_e_win",
+      "name": "Windows",
+      "across": 5,
+      "distance": 0,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "f_st_e"
+      ],
+      "height": 8,
+      "box": [
+        -0.3,
+        -8.6,
+        34.3,
+        0.05
+      ]
+    },
+    {
+      "id": "f_st_end",
+      "name": "Bus stop",
+      "across": 5,
+      "distance": -34,
+      "facing": 0,
+      "height": 6.5,
+      "box": [
+        -0.3,
+        -7.1,
+        12.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "f_st_end_win",
+      "name": "Windows",
+      "across": 5,
+      "distance": -34,
+      "facing": 0,
+      "glows": true,
+      "inFront": [
+        "f_st_end"
+      ],
+      "height": 6.5,
+      "box": [
+        -0.3,
+        -7.1,
+        12.3,
+        0.05
+      ]
+    },
+    {
+      "id": "paradiso",
+      "name": "Paradiso",
+      "across": -12,
+      "distance": 6,
+      "facing": 90,
+      "height": 10,
+      "box": [
+        -0.4,
+        -11.4,
+        14.4,
+        12
+      ],
+      "shadow": true
+    },
+    {
+      "id": "par_back",
+      "name": "Back wall",
+      "across": -18.5,
+      "distance": 6,
+      "facing": 90,
+      "height": 8,
+      "box": [
+        -0.6,
+        -8.4,
+        14.6,
+        0.6
+      ]
+    },
+    {
+      "id": "rubble",
+      "name": "Rubble",
+      "across": -12.6,
+      "distance": 6,
+      "facing": 90,
+      "height": 3,
+      "box": [
+        -0.5,
+        -3.5,
+        14.5,
+        0.3
+      ]
+    },
+    {
+      "id": "canopy",
+      "name": "Canopy",
+      "plane": true,
+      "across": -11.25,
+      "distance": 12,
+      "elevation": 3.3,
+      "width": 1.5,
+      "depth": 7.4
+    },
+    {
+      "id": "canopy_front",
+      "name": "Sign",
+      "across": -10.5,
+      "distance": 8.3,
+      "elevation": 2.75,
+      "facing": 90,
+      "height": 0.6,
+      "box": [
+        -0.2,
+        -1.3,
+        7.6,
+        0.9
+      ]
+    },
+    {
+      "id": "booth_in",
+      "name": "Booth",
+      "across": -12.3,
+      "distance": 16,
+      "facing": 90,
+      "glows": true,
+      "height": 1.4,
+      "box": [
+        -1,
+        -6.8,
+        1,
+        -5.2
+      ]
+    },
+    {
+      "id": "beam_anchor",
+      "name": "Beam",
+      "unseen": true,
+      "across": -11.85,
+      "distance": 16,
+      "elevation": 6,
+      "facing": 104,
+      "tilt": -55,
+      "place": {
+        "facing": "beam_turn",
+        "tilt": "beam_pitch"
+      }
+    },
+    {
+      "id": "beam",
+      "name": "Beam",
+      "on": "beam_anchor",
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "facing": 270,
+      "glows": true,
+      "height": 2,
+      "box": [
+        -0.3,
+        -2.4,
+        18.4,
+        2.4
+      ],
+      "uniforms": {
+        "on": 0
+      }
+    },
+    {
+      "id": "wall",
+      "name": "White wall",
+      "across": -5,
+      "distance": 26,
+      "facing": 180,
+      "height": 8.5,
+      "box": [
+        -0.2,
+        -8.8,
+        10.7,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "screen",
+      "name": "Film on the wall",
+      "across": 2,
+      "distance": 25.96,
+      "facing": 180,
+      "glows": true,
+      "height": 4,
+      "box": [
+        -3.1,
+        -6.6,
+        3.1,
+        -2.4
+      ]
+    },
+    {
+      "id": "church",
+      "name": "Church",
+      "across": 5.5,
+      "distance": 26.3,
+      "facing": 180,
+      "height": 12.4,
+      "box": [
+        -0.3,
+        -12.6,
+        3.9,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "step1",
+      "name": "Steps",
+      "plane": true,
+      "across": 5.5,
+      "distance": 24.5,
+      "elevation": 0.25,
+      "width": 5,
+      "depth": 3,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "step2",
+      "name": "Steps",
+      "plane": true,
+      "across": 5.5,
+      "distance": 24.875,
+      "elevation": 0.5,
+      "width": 5,
+      "depth": 2.25,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "step3",
+      "name": "Steps",
+      "plane": true,
+      "across": 5.5,
+      "distance": 25.25,
+      "elevation": 0.75,
+      "width": 5,
+      "depth": 1.5,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "step4",
+      "name": "Steps",
+      "plane": true,
+      "across": 5.5,
+      "distance": 25.625,
+      "elevation": 1,
+      "width": 5,
+      "depth": 0.75,
+      "walk": true,
+      "color": "#b9a57f"
+    },
+    {
+      "id": "steps",
+      "name": "Church steps",
+      "across": 5.5,
+      "distance": 23,
+      "facing": 180,
+      "height": 0.25,
+      "box": [
+        -2.55,
+        -0.27,
+        2.55,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 5.5,
+          "distance": 23,
+          "elevation": 0
+        },
+        {
+          "across": 5.5,
+          "distance": 23.75,
+          "elevation": 0.25
+        },
+        {
+          "across": 5.5,
+          "distance": 24.5,
+          "elevation": 0.5
+        },
+        {
+          "across": 5.5,
+          "distance": 25.25,
+          "elevation": 0.75
+        }
+      ]
+    },
+    {
+      "id": "mother_window",
+      "name": "Mother's window",
+      "across": -9,
+      "distance": 26.75,
+      "facing": 180,
+      "glows": true,
+      "height": 2,
+      "box": [
+        -0.85,
+        -6,
+        0.85,
+        -4
+      ]
+    },
+    {
+      "id": "mother_floor",
+      "name": "Room floor",
+      "plane": true,
+      "unseen": true,
+      "walk": true,
+      "across": -9,
+      "distance": 26.5,
+      "elevation": 4.05,
+      "width": 1.6,
+      "depth": 0.7
+    },
+    {
+      "id": "bank",
+      "name": "Bank",
+      "across": 12,
+      "distance": 22,
+      "facing": 270,
+      "height": 11,
+      "box": [
+        -0.3,
+        -11.6,
+        14.3,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "balcony_room",
+      "name": "Elena's window",
+      "across": 11.975,
+      "distance": 13.7,
+      "facing": 270,
+      "glows": true,
+      "inFront": [
+        "bank"
+      ],
+      "height": 2.4,
+      "box": [
+        -0.05,
+        -6.8,
+        1.45,
+        -4.3
+      ]
+    },
+    {
+      "id": "balcony",
+      "name": "Elena's balcony",
+      "across": 11.95,
+      "distance": 13.7,
+      "facing": 270,
+      "inFront": [
+        "balcony_room",
+        "bank"
+      ],
+      "height": 2.4,
+      "box": [
+        -0.6,
+        -6.8,
+        2,
+        -4.3
+      ]
+    },
+    {
+      "id": "balcony_rail",
+      "name": "Balcony railing",
+      "across": 11.32,
+      "distance": 13.9,
+      "facing": 270,
+      "height": 1.1,
+      "box": [
+        -0.05,
+        -5.35,
+        1.85,
+        -4.15
+      ]
+    },
+    {
+      "id": "balcony_slab",
+      "name": "Balcony",
+      "plane": true,
+      "across": 11.66,
+      "distance": 13,
+      "elevation": 4.2,
+      "width": 0.68,
+      "depth": 1.9,
+      "color": "#a8957a"
+    },
+    {
+      "id": "chalk_wall",
+      "name": "Chalk wall",
+      "across": 11.97,
+      "distance": 16.8,
+      "facing": 270,
+      "inFront": [
+        "bank"
+      ],
+      "height": 1.7,
+      "box": [
+        -0.05,
+        -1.75,
+        1.65,
+        0.05
+      ]
+    },
+    {
+      "id": "chair",
+      "name": "Totò's chair",
+      "across": 11.3,
+      "distance": 15.6,
+      "height": 0.95,
+      "box": [
+        -0.3,
+        -1,
+        0.3,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "alfredo_chair",
+      "name": "Alfredo's chair",
+      "across": -11.4,
+      "distance": 3.12,
+      "height": 0.95,
+      "box": [
+        -0.3,
+        -1,
+        0.3,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "garland",
+      "name": "Garland",
+      "across": 11.4,
+      "distance": 21,
+      "facing": 270,
+      "glows": true,
+      "height": 7,
+      "box": [
+        -0.2,
+        -7,
+        12.2,
+        -5.4
+      ]
+    },
+    {
+      "id": "fountain",
+      "name": "Fountain",
+      "across": 0,
+      "distance": 13,
+      "height": 0.5,
+      "box": [
+        -4.6,
+        -0.55,
+        4.6,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "fountain_col",
+      "name": "Fountain",
+      "across": 0,
+      "distance": 13,
+      "height": 1.9,
+      "box": [
+        -1.2,
+        -1.95,
+        1.2,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "fountain_water",
+      "name": "Water",
+      "plane": true,
+      "across": 0,
+      "distance": 13,
+      "elevation": 0.42,
+      "width": 2.9,
+      "depth": 2.9
+    },
+    {
+      "id": "fountain_spout",
+      "name": "Jets",
+      "particles": {
+        "kind": "splashes",
+        "at": [
+          0,
+          13,
+          1.8
+        ],
+        "rate": 26,
+        "speed": [
+          0.6,
+          1
+        ],
+        "spread": 40,
+        "direction": [
+          0,
+          0,
+          1
+        ],
+        "size": [
+          0.02,
+          0.01
+        ],
+        "life": [
+          0.6,
+          0.9
+        ],
+        "color": "#c8d4dc",
+        "opacity": 0.5
+      }
+    },
+    {
+      "id": "lamppost",
+      "name": "Street lamp",
+      "across": -5.5,
+      "distance": 21.5,
+      "height": 4.1,
+      "box": [
+        -0.3,
+        -4.15,
+        0.3,
+        0.02
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -5.5,
+          "distance": 21.5
+        },
+        {
+          "across": 6.5,
+          "distance": 8.5
+        },
+        {
+          "across": 2.5,
+          "distance": -14
+        },
+        {
+          "across": -7.2,
+          "distance": 0.4
+        }
+      ]
+    },
+    {
+      "id": "crowd_far",
+      "name": "Crowd",
+      "across": 0,
+      "distance": -60,
+      "facing": 180,
+      "place": {
+        "across": "crowd_x",
+        "distance": "crowd_z",
+        "facing": "crowd_f"
+      },
+      "height": 1.7,
+      "box": [
+        -6.3,
+        -2,
+        6.6,
+        0.1
+      ]
+    },
+    {
+      "id": "crowd_sit",
+      "name": "Crowd on the stones",
+      "across": 0,
+      "distance": -60,
+      "facing": 180,
+      "place": {
+        "across": "crowd_x",
+        "distance": "crowd_z",
+        "facing": "crowd_f"
+      },
+      "height": 1.1,
+      "box": [
+        -6.3,
+        -1.4,
+        6.6,
+        0.1
+      ]
+    },
+    {
+      "id": "hearse_anchor",
+      "name": "Hearse",
+      "unseen": true,
+      "across": -9.6,
+      "distance": -8,
+      "place": {
+        "across": "hearse_a",
+        "distance": "hearse_d",
+        "facing": "hearse_f"
+      }
+    },
+    {
+      "id": "hearse",
+      "name": "Cart with the coffin",
+      "on": "hearse_anchor",
+      "across": 0,
+      "distance": 1.2,
+      "facing": 0,
+      "height": 1.5,
+      "box": [
+        -1,
+        -1.65,
+        1,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hearse_l",
+      "name": "Cart with the coffin",
+      "on": "hearse_anchor",
+      "across": 0.58,
+      "distance": 0,
+      "facing": 90,
+      "height": 1.5,
+      "box": [
+        -1.25,
+        -1.6,
+        1.25,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hearse_r",
+      "name": "Cart with the coffin",
+      "on": "hearse_anchor",
+      "across": -0.58,
+      "distance": 0,
+      "facing": 270,
+      "height": 1.5,
+      "box": [
+        -1.25,
+        -1.6,
+        1.25,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hearse_front",
+      "name": "Cart with the coffin",
+      "on": "hearse_anchor",
+      "across": 0,
+      "distance": -1.2,
+      "facing": 180,
+      "height": 1.5,
+      "box": [
+        -1,
+        -1.65,
+        1,
+        0.03
+      ]
+    },
+    {
+      "id": "hearse_top",
+      "name": "Coffin",
+      "on": "hearse_anchor",
+      "plane": true,
+      "across": 0,
+      "distance": 0,
+      "elevation": 1.42,
+      "width": 0.8,
+      "depth": 2.1
+    },
+    {
+      "id": "smoke_booth",
+      "name": "Smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "paradiso#booth_window",
+        "amount": "smoke",
+        "rate": 14,
+        "size": [
+          0.6,
+          3.2
+        ],
+        "life": [
+          4,
+          7
+        ],
+        "speed": [
+          0.4,
+          0.9
+        ],
+        "direction": [
+          1,
+          0,
+          0.6
+        ],
+        "spread": 30,
+        "gravity": -0.5,
+        "color": "#3a3532",
+        "opacity": 0.75,
+        "shadow": 0.6
+      }
+    },
+    {
+      "id": "fireworks",
+      "name": "Fireworks",
+      "particles": {
+        "kind": "sparks",
+        "at": [
+          6,
+          -2,
+          11
+        ],
+        "source": [
+          10,
+          4,
+          3
+        ],
+        "burst": {
+          "on": "fw",
+          "count": 220
+        },
+        "speed": [
+          4,
+          8
+        ],
+        "spread": 180,
+        "direction": [
+          0,
+          0,
+          1
+        ],
+        "gravity": 2.2,
+        "drag": 0.6,
+        "life": [
+          1.2,
+          2.2
+        ],
+        "ground": "pass",
+        "colors": [
+          "#ffd28a",
+          "#ff8a6a",
+          "#a8c8ff",
+          "#fff2d8"
+        ],
+        "glow": [
+          7,
+          1
+        ]
+      }
+    },
+    {
+      "id": "rain_fall",
+      "name": "Rain",
+      "particles": {
+        "kind": "rain",
+        "amount": "rain",
+        "count": 18000,
+        "reach": 18,
+        "color": "#cdd6e6",
+        "opacity": 0.6
+      }
+    },
+    {
+      "id": "demolition_dust",
+      "name": "Dust",
+      "particles": {
+        "kind": "puff",
+        "at": [
+          -12.5,
+          13,
+          2.5
+        ],
+        "source": [
+          3,
+          14,
+          5
+        ],
+        "burst": {
+          "on": "dust_burst",
+          "count": 700,
+          "over": 3
+        },
+        "size": [
+          3,
+          9
+        ],
+        "life": [
+          14,
+          22
+        ],
+        "speed": [
+          1,
+          4
+        ],
+        "spread": 120,
+        "direction": [
+          1,
+          0,
+          0.3
+        ],
+        "gravity": -0.05,
+        "drag": 1.2,
+        "color": "#b9b1a4",
+        "opacity": 0.55,
+        "shadow": 0.4
+      }
+    },
+    {
+      "id": "viewfinder",
+      "name": "Viewfinder",
+      "insert": "viewfinder"
+    },
+    {
+      "id": "toto",
+      "name": "Totò",
+      "person": {
+        "cast": "cast",
+        "who": "toto_boy"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "toto_a",
+        "distance": "toto_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "alfredo",
+      "name": "Alfredo",
+      "person": {
+        "cast": "cast",
+        "who": "alfredo"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "alfredo_a",
+        "distance": "alfredo_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "maria",
+      "name": "Maria",
+      "person": {
+        "cast": "cast",
+        "who": "maria"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "maria_a",
+        "distance": "maria_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "elena",
+      "name": "Elena",
+      "person": {
+        "cast": "cast",
+        "who": "elena"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "elena_a",
+        "distance": "elena_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "daughter",
+      "name": "Girl",
+      "person": {
+        "cast": "cast",
+        "who": "daughter"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "daughter_a",
+        "distance": "daughter_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "madman",
+      "name": "Madman",
+      "person": {
+        "cast": "cast",
+        "who": "madman"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "madman_a",
+        "distance": "madman_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "anna",
+      "name": "Anna",
+      "person": {
+        "cast": "cast",
+        "who": "anna"
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "anna_a",
+        "distance": "anna_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "bearer1",
+      "name": "Bearer",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#2a2826",
+            "bottom": "#1e1c1b",
+            "hat": "#1a1918"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "bearer1_a",
+        "distance": "bearer1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "bearer2",
+      "name": "Bearer",
+      "person": {
+        "cast": "cast",
+        "who": "old_m",
+        "look": {
+          "colors": {
+            "garment": "#262422",
+            "hat": "#1a1918"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "bearer2_a",
+        "distance": "bearer2_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c1",
+      "name": "Man",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#7a6a58",
+            "bottom": "#3a3530"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c1_a",
+        "distance": "c1_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c2",
+      "name": "Woman",
+      "person": {
+        "cast": "cast",
+        "who": "villager_w",
+        "look": {
+          "colors": {
+            "top": "#6e5a62",
+            "garment": "#3a2e34"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c2_a",
+        "distance": "c2_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c3",
+      "name": "Old man",
+      "person": {
+        "cast": "cast",
+        "who": "old_m",
+        "look": {
+          "colors": {
+            "garment": "#5a5246"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c3_a",
+        "distance": "c3_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c4",
+      "name": "Old woman",
+      "person": {
+        "cast": "cast",
+        "who": "old_w",
+        "look": {}
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c4_a",
+        "distance": "c4_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c5",
+      "name": "Boy",
+      "person": {
+        "cast": "cast",
+        "who": "kid",
+        "look": {
+          "colors": {
+            "top": "#8a7a5a"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c5_a",
+        "distance": "c5_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c6",
+      "name": "Man",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#5a6670",
+            "bottom": "#2e2c2a",
+            "hat": "#4a4038"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c6_a",
+        "distance": "c6_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c7",
+      "name": "Woman",
+      "person": {
+        "cast": "cast",
+        "who": "villager_w",
+        "look": {
+          "colors": {
+            "top": "#7a6a4a",
+            "garment": "#4a3a2a"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c7_a",
+        "distance": "c7_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c8",
+      "name": "Old man",
+      "person": {
+        "cast": "cast",
+        "who": "old_m",
+        "look": {
+          "colors": {
+            "garment": "#3e3a36"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c8_a",
+        "distance": "c8_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c9",
+      "name": "Young man",
+      "person": {
+        "cast": "cast",
+        "who": "villager_m",
+        "look": {
+          "colors": {
+            "top": "#a29a86",
+            "bottom": "#3a3530",
+            "hat": "#2a2826"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c9_a",
+        "distance": "c9_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "c10",
+      "name": "Woman",
+      "person": {
+        "cast": "cast",
+        "who": "villager_w",
+        "look": {
+          "colors": {
+            "top": "#5e5248"
+          }
+        }
+      },
+      "across": 0,
+      "distance": -40,
+      "place": {
+        "across": "c10_a",
+        "distance": "c10_d"
+      },
+      "shadow": true
+    }
+  ]
+}

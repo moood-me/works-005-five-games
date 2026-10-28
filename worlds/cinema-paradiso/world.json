@@ -1,0 +1,9 @@
+{
+  "title": "Cinema Paradiso",
+  "description": "A game after Tornatore's film. A warm Sicilian night, the projector's beam, a reel of kisses.",
+  "themes": {
+    "drama": 60,
+    "cinema": 40
+  },
+  "main": "main"
+}
