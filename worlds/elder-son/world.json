@@ -1,0 +1,9 @@
+{
+  "title": "The Elder Son",
+  "description": "A game after Vampilov's play. The cold outside, a warm window within.",
+  "themes": {
+    "drama": 60,
+    "night": 40
+  },
+  "main": "platform"
+}

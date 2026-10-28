@@ -1,0 +1,31 @@
+// A house of the settlement seen from the platform, far below: a log front, its gable under snow, a fence before it,
+// a window — lit (its glow; a copy's `glow` 0 keeps it dark) or dark. Metres, the foot at the snow.
+const w = 7, h = 2.8, rise = 2.6;
+g.fillStyle = '#5e4a3a';
+g.fillRect(-w / 2, -h, w, h);
+g.fillStyle = 'rgba(30,22,16,0.45)';
+for (let y = -h + 0.25; y < 0; y += 0.25) g.fillRect(-w / 2, y, w, 0.03);
+g.fillStyle = '#4a3a2e';
+g.beginPath();
+g.moveTo(-w / 2 - 0.5, -h);
+g.lineTo(0, -h - rise);
+g.lineTo(w / 2 + 0.5, -h);
+g.closePath();
+g.fill();
+g.fillStyle = '#e8eef6';
+g.beginPath();
+g.moveTo(-w / 2 - 0.6, -h + 0.05);
+g.lineTo(0, -h - rise - 0.2);
+g.lineTo(w / 2 + 0.6, -h + 0.05);
+g.lineTo(w / 2 + 0.3, -h + 0.05);
+g.lineTo(0, -h - rise + 0.25);
+g.lineTo(-w / 2 - 0.3, -h + 0.05);
+g.closePath();
+g.fill();
+g.fillStyle = '#1d2128';
+g.fillRect(-2.4, -2.1, 0.9, 0.85);
+g.fillStyle = '#e8b062';
+g.fillRect(1.5, -2.1, 0.9, 0.85);
+e.light(1.95, -1.68, 0.7, '#eda055', 0.9, 'window');
+g.fillStyle = '#e8eef6';
+g.fillRect(-w / 2 - 0.2, -0.35, w + 0.4, 0.4);

@@ -1,0 +1,1 @@
+e.kit.houses.roof(g, e, { w: 8, d: 4.04 });

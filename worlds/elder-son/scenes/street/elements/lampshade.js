@@ -1,0 +1,26 @@
+// The orange lampshade over the table, its cord up to the ceiling; the bulb's light under it — `lamp` (e.light).
+g.strokeStyle = '#3a2e25';
+g.lineWidth = 0.012;
+g.beginPath();
+g.moveTo(0, -0.9);
+g.lineTo(0, -0.3);
+g.stroke();
+const shade = g.createLinearGradient(0, -0.3, 0, 0);
+shade.addColorStop(0, '#f4a24c');
+shade.addColorStop(1, '#e27c2c');
+g.fillStyle = shade;
+g.beginPath();
+g.moveTo(-0.08, -0.3);
+g.lineTo(0.08, -0.3);
+g.quadraticCurveTo(0.3, -0.16, 0.36, 0);
+g.lineTo(-0.36, 0);
+g.quadraticCurveTo(-0.3, -0.16, -0.08, -0.3);
+g.closePath();
+g.fill();
+g.fillStyle = '#d06a22';
+for (let x = -0.35; x <= 0.35; x += 0.05) g.fillRect(x, 0, 0.02, 0.07);
+g.fillStyle = '#fff1c8';
+g.beginPath();
+g.ellipse(0, 0.02, 0.1, 0.035, 0, 0, Math.PI * 2);
+g.fill();
+e.light(0, 0.06, 0.4, '#e8963a', 2.0, 'lamp');
