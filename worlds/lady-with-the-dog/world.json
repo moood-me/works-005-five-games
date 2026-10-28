@@ -1,0 +1,9 @@
+{
+  "title": "The Lady with the Dog",
+  "description": "A game after Chekhov’s story. The sea, the turning seasons, a white Pomeranian on a red leash.",
+  "themes": {
+    "drama": 60,
+    "sea": 40
+  },
+  "main": ""
+}
