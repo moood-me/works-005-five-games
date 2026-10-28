@@ -1,7 +1,7 @@
 # «Старший сын» — проверка по принципам (и хорошая ли это драма-игра)
 
 2026-10-14. Читал design.md, scenes.md, game.md, work.md целиком; против: `moood-me/moood:docs/writing/2026-10-13-scenarij-igry.md`
-(12 + устройство), `pavel-zhur/rpg:docs/backlog/drama-games.md`, `moood-me/moood:docs/worlds/principles.md` («A game»), образец — проверка
+(12 + устройство), `moood-me/works-008-scenario-fabric:docs/backlog/drama-games.md`, `moood-me/moood:docs/worlds/principles.md` («A game»), образец — проверка
 принципов «Алых парусов». Ничего не запускал и не рисовал. Секунды — из длин кусков scenes.md, реплик §8 и `about`
 мини-игр, ±25 %. Про текст пьесы я сужу по памяти, как и автор; такие места помечены «моё предположение».
 

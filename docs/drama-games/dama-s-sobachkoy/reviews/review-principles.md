@@ -1,7 +1,7 @@
 # «Дама с собачкой» — проверка по принципам (и хорошая ли это драма-игра)
 
 2026-10-13. Прочитаны целиком design.md, scenes.md, game.md, work.md; правила — moood-me/moood:docs/writing/2026-10-13-scenarij-igry.md,
-пожелания — pavel-zhur/rpg:docs/backlog/drama-games.md; образец глубины — example-alye-parusa/review-principles.md. Ничего не
+пожелания — moood-me/works-008-scenario-fabric:docs/backlog/drama-games.md; образец глубины — example-alye-parusa/review-principles.md. Ничего не
 запускалось и не рисовалось. Секунды — из «≈ с» кусков scenes.md, реплик game.md §8 (0,3 с + 0,06 с на букву) и
 `about` мини-игр; точность ±25 %. Текст Чехова сверялся по памяти (отмечено, где это важно).
 
