@@ -1,0 +1,14 @@
+{
+  "type": "bespoke",
+  "title": "Scarlet Sails",
+  "description": "Assol grows up in Kaperna, where people think her strange. Somewhere far away, Captain Gray is searching for what makes life worth living. Two lives that must meet — and a miracle someone has to make with their own hands.",
+  "line": "A girl was promised a ship with scarlet sails. The whole village laughs — and she waits.",
+  "source": "after the novella by Alexander Grin",
+  "genres": {
+    "drama": 80,
+    "relationships": 70,
+    "immersion": 60
+  },
+  "world": "pavel--scarlet-sails",
+  "scenes": []
+}
