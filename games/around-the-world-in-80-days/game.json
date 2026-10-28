@@ -10,6 +10,5 @@
     "relationships": 2
   },
   "world": "../../worlds/around-the-world-in-80-days",
-  "scenes": [],
   "languages": ["en", "ru"]
 }
