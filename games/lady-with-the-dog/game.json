@@ -1,0 +1,14 @@
+{
+  "type": "bespoke",
+  "title": "The Lady with the Dog",
+  "description": "Gurov has long since ceased to be surprised by anything. Anna Sergeyevna has come to Yalta alone, with a white Pomeranian. Both of them think it will not be for long.",
+  "line": "A holiday romance in Yalta that would not end.",
+  "source": "after the story by Anton Chekhov",
+  "genres": {
+    "drama": 85,
+    "relationships": 80,
+    "immersion": 50
+  },
+  "world": "pavel--lady-with-the-dog",
+  "scenes": []
+}

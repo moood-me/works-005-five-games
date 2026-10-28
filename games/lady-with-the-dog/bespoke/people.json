@@ -1,0 +1,62 @@
+{
+  "narrator": {
+    "voice": "Sadachbia",
+    "how": "calmly, warmly, a little mockingly — as an author reads his own story aloud",
+    "name": "the narrator",
+    "short": "the narrator"
+  },
+  "gurov": {
+    "voice": "Algenib",
+    "how": "a man not yet forty: quiet, velvety, lazy, with a slight smile",
+    "name": "Dmitri Dmitritch Gurov",
+    "short": "Gurov"
+  },
+  "gurov_inner": {
+    "voice": "Algenib",
+    "how": "the same, quietly, to himself, smiling at himself",
+    "name": "Gurov, to himself",
+    "short": "Gurov"
+  },
+  "anna": {
+    "voice": "Sulafat",
+    "how": "a young woman: quiet, quick, agitated, without complaint",
+    "name": "Anna Sergeyevna",
+    "short": "Anna"
+  },
+  "diderits": {
+    "voice": "Umbriel",
+    "how": "a young man: polite, gentle, a little awkward, homely",
+    "name": "von Diderits, Anna’s husband",
+    "short": "von Diderits"
+  },
+  "diderits_low": {
+    "voice": "Umbriel",
+    "how": "the same: dull, slow, not looking at her",
+    "name": "von Diderits, Anna’s husband",
+    "short": "von Diderits"
+  },
+  "wife": {
+    "voice": "Gacrux",
+    "how": "a mature woman: even, straight, quiet, dignified",
+    "name": "Gurov’s wife",
+    "short": "his wife"
+  },
+  "wife_low": {
+    "voice": "Gacrux",
+    "how": "the same: quiet, even",
+    "name": "Gurov’s wife",
+    "short": "his wife"
+  },
+  "daughter": {
+    "voice": "Leda",
+    "how": "a girl of twelve: serious, clear-voiced",
+    "name": "Gurov’s daughter",
+    "short": "his daughter"
+  },
+  "official": {
+    "voice": "Algieba",
+    "how": "an official: well-fed, loud, good-natured, full of his own affairs",
+    "name": "an official, Gurov’s partner at cards",
+    "short": "the official"
+  }
+}
