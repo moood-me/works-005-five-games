@@ -1,0 +1,10 @@
+{
+  "title": "Scarlet Sails v3",
+  "description": "Scarlet Sails on engine 3: the scenes moved over from engine 2.",
+  "themes": {
+    "sea": 70,
+    "fairy-tale": 30,
+    "romance": 50
+  },
+  "main": "main"
+}

@@ -1,0 +1,2216 @@
+{
+  "engine": 3,
+  "title": "The Kaperna Shore",
+  "caption": "Morning. The sea is still asleep.",
+  "horizon": 0.55,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      14,
+      10
+    ]
+  },
+  "light": {
+    "vignette": 0.25,
+    "grain": 0.1,
+    "ambient": 1,
+    "ambientColor": "#ffffff",
+    "bounce": 0.5,
+    "haze": 0,
+    "hazeColor": "#cdd6de",
+    "hazeGlow": 0.4,
+    "wind": [
+      -1,
+      0.2,
+      0.5
+    ],
+    "looks": {
+      "day": {
+        "ambient": 0.85,
+        "ambientColor": "#f2f4f6",
+        "haze": 0.07,
+        "hazeColor": "#cdd6de"
+      },
+      "night": {
+        "ambient": 0.62,
+        "ambientColor": "#9db0d8",
+        "haze": 0.08,
+        "hazeColor": "#1f2b3e",
+        "saturation": 0.8
+      },
+      "dawn": {
+        "ambient": 0.9,
+        "ambientColor": "#e6e8ee",
+        "haze": 0.03,
+        "hazeColor": "#d9dade",
+        "tint": "#f3dccb",
+        "tintStrength": 0.05,
+        "shafts": 0.2
+      },
+      "dusk": {
+        "ambient": 0.8,
+        "ambientColor": "#d6d0e2",
+        "haze": 0.09,
+        "hazeColor": "#a7a4b2",
+        "tint": "#e9bba3",
+        "tintStrength": 0.07,
+        "shafts": 0.2
+      },
+      "past": {
+        "saturation": 0.35,
+        "grain": 0.4,
+        "tint": "#d9d2c2",
+        "tintStrength": 0.12
+      },
+      "storm": {
+        "ambient": 0.74,
+        "ambientColor": "#b9c2cc",
+        "haze": 0.3,
+        "hazeColor": "#7d8892",
+        "saturation": 0.7,
+        "wind": [
+          -1,
+          0.3,
+          2.6
+        ]
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "color": "#fff1de",
+      "strength": 0.7,
+      "on": "sun_light"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#b8c7e6",
+      "strength": 0.6,
+      "on": "moon_light"
+    },
+    {
+      "id": "lantern",
+      "of": "tavern_lantern#lamp",
+      "color": "#ffd9a0",
+      "strength": 1.2,
+      "reach": 9,
+      "on": "tavern_lamp"
+    }
+  ],
+  "modules": [
+    "sky",
+    "ships",
+    "cast",
+    "beats",
+    "closeups"
+  ],
+  "state": {
+    "beat": null,
+    "toy_water": 0,
+    "as_a": -3.3,
+    "as_d": 6.6,
+    "kb_a": -6.4,
+    "kb_d": 7.7,
+    "kg_a": -5.3,
+    "kg_d": 8,
+    "ks_a": -4.6,
+    "ks_d": 7.5,
+    "gi_a": -9.5,
+    "gi_d": 9.5,
+    "mo_a": -11.5,
+    "mo_d": 13.5,
+    "lo_a": -3.8,
+    "lo_d": 7.2,
+    "hour": 0.25,
+    "mist": 0.35,
+    "wind": 0.25,
+    "windows": 0,
+    "longren_window": 1,
+    "tavern_lamp": 0,
+    "ship": 0,
+    "sails": 0,
+    "day": 0,
+    "dawn": 1,
+    "dusk": 0,
+    "night": 0,
+    "ship_across": 3280,
+    "ship_distance": 9000,
+    "sun_light": 0.05,
+    "moon_light": 0,
+    "ship_facing": 290,
+    "ship_spark": 0,
+    "ship_roll": 0,
+    "tavern_door": 0,
+    "tavern_door_facing": 180,
+    "past": 0,
+    "winter": 0,
+    "storm": 0,
+    "menners_boat": 0,
+    "mb_a": 20,
+    "mb_d": 46,
+    "skiff_ashore": 0,
+    "boat": 0,
+    "sk_a": 3274,
+    "sk_d": 8990,
+    "ring": "none",
+    "ring_kind": "own",
+    "warm": 0.5,
+    "girl_toy": 0,
+    "longren": "home",
+    "ending": "grin",
+    "morning": 0.3,
+    "gr_a": 20.3,
+    "gr_d": 138.3,
+    "hi_a": 18.9,
+    "hi_d": 138.1,
+    "fi_a": 13.9,
+    "fi_d": 137.9,
+    "ma_a": 16.4,
+    "ma_d": 139,
+    "me_a": 17.05,
+    "me_d": 140.45,
+    "w2_a": 25.4,
+    "w2_d": 142.6,
+    "w3_a": 26.5,
+    "w3_d": 143.3,
+    "f1_a": -10.5,
+    "f1_d": 12.5,
+    "f2_a": -12,
+    "f2_d": 13.2,
+    "light1": 2,
+    "light2": 2,
+    "light3": 2,
+    "cape_mist": 0,
+    "hands": 0,
+    "reach": 0,
+    "sk_f": 207,
+    "sk_e": 0,
+    "light1_a": 243.29,
+    "light1_d": 907.97,
+    "light2_a": 160.05,
+    "light2_d": 1138.81,
+    "light2_smoke": 0,
+    "assol_here": false,
+    "kid_boy_here": false,
+    "kid_girl_here": false,
+    "kid_small_here": false,
+    "girl_here": false,
+    "mother_here": false,
+    "longren_here": false,
+    "grey_here": false,
+    "hin_here": false,
+    "filipp_here": false,
+    "mary_here": false,
+    "menners_here": false,
+    "woman2_here": false,
+    "woman3_here": false,
+    "fisher1_here": false,
+    "fisher2_here": false,
+    "letika_here": false
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the hour, round the clock: 0 midnight, 0.25 dawn, 0.5 noon, 0.75 sunset"
+    },
+    "mist": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "mist: 0 — a light haze on the horizon, 1 — the cape and the foot of Kaperna in mist"
+    },
+    "wind": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "wind: ripples on the water — long light streaks"
+    },
+    "windows": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how many windows of Kaperna are lit (each lights up at a threshold of its own)"
+    },
+    "longren_window": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the window of Longren's house at the top: 0 dark, 1 lit"
+    },
+    "tavern_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern on the tavern's veranda and its windows"
+    },
+    "ship": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the ship: 0 none, up to 0.15 a point flares up on the horizon by the cape, then it comes to the shore, 1 — at anchor"
+    },
+    "sails": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the ship's sails: 0 white, 1 scarlet"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of daylight, the script sets it by hour"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of dawn, the script sets it by hour"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of sunset, the script sets it by hour"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the weight of night, the script sets it by hour"
+    },
+    "ship_across": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: where the ship is, m to the right — the script sets it by ship"
+    },
+    "ship_distance": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: how far off the ship is, m — the script sets it by ship"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the film's beat (the beats module): spark, prologue, kids, kids_hold, alone, play, tavern, past_mary, past_storm, tavern_back, passing, grey_close, grey_shore, to_skiff, longren_boat, girl, give, keep, longren_goes, wait, grey_dawn, dawn_two, sails_far, run, shore, hands, meet, away (for showing only: wait_lights, hands_reach)"
+    },
+    "toy_water": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Assol's yacht in the shallow water at the edge: 0 none, 1 stands on the water"
+    },
+    "as_a": {
+      "type": "number",
+      "means": "internal: where Assol is across, m (the beats)"
+    },
+    "as_d": {
+      "type": "number",
+      "means": "internal: where Assol is in depth, m"
+    },
+    "kb_a": {
+      "type": "number",
+      "means": "internal: where the boy is across, m (the beats)"
+    },
+    "kb_d": {
+      "type": "number",
+      "means": "internal: where the boy is in depth, m"
+    },
+    "kg_a": {
+      "type": "number",
+      "means": "internal: where the older girl is across, m (the beats)"
+    },
+    "kg_d": {
+      "type": "number",
+      "means": "internal: where the older girl is in depth, m"
+    },
+    "ks_a": {
+      "type": "number",
+      "means": "internal: where the little one is across, m (the beats)"
+    },
+    "ks_d": {
+      "type": "number",
+      "means": "internal: where the little one is in depth, m"
+    },
+    "gi_a": {
+      "type": "number",
+      "means": "internal: where the little girl is across, m (the beats)"
+    },
+    "gi_d": {
+      "type": "number",
+      "means": "internal: where the little girl is in depth, m"
+    },
+    "mo_a": {
+      "type": "number",
+      "means": "internal: where her mother is across, m (the beats)"
+    },
+    "mo_d": {
+      "type": "number",
+      "means": "internal: where her mother is in depth, m"
+    },
+    "lo_a": {
+      "type": "number",
+      "means": "internal: where Longren is across, m (the beats)"
+    },
+    "lo_d": {
+      "type": "number",
+      "means": "internal: where Longren is in depth, m"
+    },
+    "sun_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the sunlight, the script sets it by hour (sky)"
+    },
+    "moon_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the moonlight, the script sets it by hour (sky)"
+    },
+    "ship_facing": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: where the ship's bow points, degrees (290 — to the shore and left, 338 — almost broadside, bow to the left) — the script sets it by ship"
+    },
+    "ship_spark": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the spark of the sails on the horizon, flaring up over the first 0.15 of the key ship"
+    },
+    "ship_roll": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: the ship's heel on the swell, degrees — led by the script"
+    },
+    "tavern_door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the tavern door: 0 shut, 1 open inwards"
+    },
+    "tavern_door_facing": {
+      "type": "number",
+      "smooth": true,
+      "means": "internal: the tavern door's turn, degrees — the script sets it by tavern_door"
+    },
+    "past": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the look of the light “the past”: 0 none, 1 — faded, the grain thicker (set by a cut)"
+    },
+    "winter": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "winter: snow on the shore by the tavern, on its roof and on the slope (layers), a blizzard (particles)"
+    },
+    "storm": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "storm: a dark light, a low veil of sky, white crests on the sea, a downpour, a strong wind"
+    },
+    "menners_boat": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Menners' boat: 0 — by the shore beyond the landing, 1 — carried off to the right, into the waves"
+    },
+    "mb_a": {
+      "type": "number",
+      "means": "internal: where Menners' boat is across, m — the script sets it by menners_boat"
+    },
+    "mb_d": {
+      "type": "number",
+      "means": "internal: where Menners' boat is in depth, m"
+    },
+    "skiff_ashore": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the Secret's skiff hauled up on the sand by the boats (1); else it is on the water, where boat says"
+    },
+    "boat": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the Secret's skiff on the water: 0 — by the ship's side (where she is now), 1 — by Assol, who has walked into the water; most of the way goes far off (0.8 — ten metres away)"
+    },
+    "sk_a": {
+      "type": "number",
+      "means": "internal: where the skiff is across, m — the script sets it by skiff_ashore, boat and ship"
+    },
+    "sk_d": {
+      "type": "number",
+      "means": "internal: where the skiff is in depth, m"
+    },
+    "ring": {
+      "values": [
+        "none",
+        "finger",
+        "cord"
+      ],
+      "means": "the play's key: Assol's ring (17) — none, on her finger, on a cord"
+    },
+    "ring_kind": {
+      "values": [
+        "mother",
+        "own"
+      ],
+      "means": "the play's key: which ring — his mother's, thin, with a stone (the part ring), or his own, old, broad (ring_old)"
+    },
+    "warm": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the play's key: how warm Kaperna is — in the evening and at night windows = 0.45 + 0.45·warm"
+    },
+    "girl_toy": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play's key: the girl has the yacht"
+    },
+    "longren": {
+      "values": [
+        "home",
+        "knows",
+        "sea"
+      ],
+      "means": "the play's key: Longren in chapter V — at home, knows and stands by the water, at sea (gone in IV: his window dark since that evening)"
+    },
+    "ending": {
+      "values": [
+        "grin",
+        "cry",
+        "waited",
+        "kaperna"
+      ],
+      "means": "the play's key: the ending — who is on the shore in chapter V"
+    },
+    "morning": {
+      "range": [
+        0.26,
+        0.36
+      ],
+      "means": "the play's key: the hour of the morning of the scarlet sails"
+    },
+    "gr_a": {
+      "type": "number",
+      "means": "internal: where Gray is across, m (the beats)"
+    },
+    "gr_d": {
+      "type": "number",
+      "means": "internal: where Gray is in depth, m"
+    },
+    "hi_a": {
+      "type": "number",
+      "means": "internal: where Hin is across, m (the beats)"
+    },
+    "hi_d": {
+      "type": "number",
+      "means": "internal: where Hin is in depth, m"
+    },
+    "fi_a": {
+      "type": "number",
+      "means": "internal: where Philip is across, m (the beats)"
+    },
+    "fi_d": {
+      "type": "number",
+      "means": "internal: where Philip is in depth, m"
+    },
+    "ma_a": {
+      "type": "number",
+      "means": "internal: where Mary is across, m (the beats)"
+    },
+    "ma_d": {
+      "type": "number",
+      "means": "internal: where Mary is in depth, m"
+    },
+    "me_a": {
+      "type": "number",
+      "means": "internal: where the elder Menners is across, m (the beats)"
+    },
+    "me_d": {
+      "type": "number",
+      "means": "internal: where the elder Menners is in depth, m"
+    },
+    "w2_a": {
+      "type": "number",
+      "means": "internal: where the woman by the nets is across, m (the beats)"
+    },
+    "w2_d": {
+      "type": "number",
+      "means": "internal: where the woman by the nets is in depth, m"
+    },
+    "w3_a": {
+      "type": "number",
+      "means": "internal: where the second woman by the nets is across, m (the beats)"
+    },
+    "w3_d": {
+      "type": "number",
+      "means": "internal: where the second woman by the nets is in depth, m"
+    },
+    "f1_a": {
+      "type": "number",
+      "means": "internal: where the fisherman is across, m (the beats)"
+    },
+    "f1_d": {
+      "type": "number",
+      "means": "internal: where the fisherman is in depth, m"
+    },
+    "f2_a": {
+      "type": "number",
+      "means": "internal: where the second fisherman is across, m (the beats)"
+    },
+    "f2_d": {
+      "type": "number",
+      "means": "internal: where the second fisherman is in depth, m"
+    },
+    "light1": {
+      "range": [
+        0,
+        2
+      ],
+      "smooth": true,
+      "means": "the first light of the night of waiting: 0 — a light on the horizon, 1 — it has come near: a fishing boat with a lantern, 2 — gone behind the cape (outside that night — 2). Moved by the game"
+    },
+    "light2": {
+      "range": [
+        0,
+        2
+      ],
+      "smooth": true,
+      "means": "the second light: 0 — a light on the horizon, 1 — it has come near: a steamer with smoke, 2 — gone behind the cape (outside that night — 2). Moved by the game"
+    },
+    "light3": {
+      "range": [
+        0,
+        2
+      ],
+      "smooth": true,
+      "means": "the third light: 0 — a dim light in the mist by the cape, 1 — the mist has parted: the lighthouse tower, its light and beam, 2 — in the mist again. Moved by the game"
+    },
+    "cape_mist": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the mist on the cape on the night of waiting: the cape and the lighthouse hidden, the lighthouse's light a dim blur (it parts over the tower while light3 is about 1)"
+    },
+    "hands": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the hands insert (the closeups module's shot boat): Gray's hand out of the skiff and Assol's hand"
+    },
+    "reach": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "“Hand”: her hand on its way to his (read only by the insert's animate). Moved by the game"
+    },
+    "sk_f": {
+      "type": "number",
+      "means": "internal: where the skiff is turned, degrees — the script sets it by skiff_ashore"
+    },
+    "sk_e": {
+      "type": "number",
+      "means": "internal: how high the skiff is above the bottom, m (afloat over the shallows) — the script sets it by skiff_ashore, boat and ship"
+    },
+    "light1_a": {
+      "type": "number",
+      "means": "internal: where the fishing boat is across, m — the script sets it by light1"
+    },
+    "light1_d": {
+      "type": "number",
+      "means": "internal: where the fishing boat is in depth, m"
+    },
+    "light2_a": {
+      "type": "number",
+      "means": "internal: where the steamer is across, m — the script sets it by light2"
+    },
+    "light2_d": {
+      "type": "number",
+      "means": "internal: where the steamer is in depth, m"
+    },
+    "light2_smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "internal: the steamer's smoke — the script sets it by light2 (behind the cape there is none)"
+    }
+  },
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true,
+      "uniforms": {
+        "tr": 0.42,
+        "tg": 0.5,
+        "tb": 0.61,
+        "mr": 0.65,
+        "mg": 0.71,
+        "mb": 0.77,
+        "lr": 0.89,
+        "lg": 0.85,
+        "lb": 0.83,
+        "gr": 0.96,
+        "gg": 0.87,
+        "gb": 0.8,
+        "sr": 0.31,
+        "sg": 0.39,
+        "sb": 0.47,
+        "horizon": 0.5,
+        "x0": -0.4,
+        "span": 2.58,
+        "all_round": 0,
+        "day": 0.55,
+        "night": 0,
+        "storm": 0,
+        "sun_x": 0.89,
+        "sun_y": 0.2,
+        "sun_up": 0,
+        "sun_low": 0,
+        "moon_x": 0.89,
+        "moon_y": 0.3,
+        "moon_up": 0
+      }
+    },
+    {
+      "id": "sea",
+      "name": "Sea",
+      "plane": true,
+      "across": 0,
+      "distance": 1250,
+      "elevation": -0.1,
+      "width": 3200,
+      "depth": 2500,
+      "reflect": {
+        "strength": 0.8,
+        "fade": 0,
+        "blur": 0.015,
+        "rough": 0.1,
+        "ripple": 0.1
+      }
+    },
+    {
+      "id": "mist",
+      "name": "Mist by the cape",
+      "across": 0,
+      "distance": 700,
+      "height": 50,
+      "box": [
+        -1500,
+        -48,
+        1500,
+        14
+      ]
+    },
+    {
+      "id": "ship",
+      "name": "Secret",
+      "unseen": true,
+      "across": 3280,
+      "distance": 9000,
+      "elevation": -0.1,
+      "facing": 290,
+      "place": {
+        "across": "ship_across",
+        "distance": "ship_distance",
+        "facing": "ship_facing",
+        "tilt": "ship_roll"
+      }
+    },
+    {
+      "id": "ship_side",
+      "name": "Secret: starboard side",
+      "on": "ship",
+      "distance": -3.7,
+      "facing": 180,
+      "box": [
+        -8.1,
+        -6.2,
+        7.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_side_port",
+      "name": "Secret: port side",
+      "on": "ship",
+      "distance": 3.7,
+      "facing": 0,
+      "box": [
+        -7.1,
+        -6.2,
+        8.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_bow",
+      "name": "Secret: starboard bow",
+      "on": "ship",
+      "across": 7,
+      "distance": -3.7,
+      "facing": 159.7,
+      "box": [
+        -0.1,
+        -6.2,
+        10.76,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_bow_port",
+      "name": "Secret: port bow",
+      "on": "ship",
+      "across": 7,
+      "distance": 3.7,
+      "facing": 20.3,
+      "box": [
+        -10.76,
+        -6.2,
+        0.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_quarter",
+      "name": "Secret: starboard quarter",
+      "on": "ship",
+      "across": -8,
+      "distance": -3.7,
+      "facing": 188.7,
+      "box": [
+        -8.7,
+        -6.2,
+        0.1,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_quarter_port",
+      "name": "Secret: port quarter",
+      "on": "ship",
+      "across": -8,
+      "distance": 3.7,
+      "facing": 351.3,
+      "box": [
+        -0.1,
+        -6.2,
+        8.7,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_transom",
+      "name": "Secret: stern",
+      "on": "ship",
+      "across": -16.5,
+      "facing": 270,
+      "box": [
+        -2.7,
+        -6.3,
+        2.7,
+        0.6
+      ]
+    },
+    {
+      "id": "ship_deck",
+      "name": "Secret: deck",
+      "plane": true,
+      "walk": true,
+      "on": "ship",
+      "across": 0.25,
+      "elevation": 2.4,
+      "width": 33.5,
+      "depth": 7.4
+    },
+    {
+      "id": "ship_poop",
+      "name": "Secret: poop",
+      "plane": true,
+      "walk": true,
+      "on": "ship",
+      "across": -12.5,
+      "elevation": 3.8,
+      "width": 8,
+      "depth": 7.4
+    },
+    {
+      "id": "ship_break",
+      "name": "Secret: break of the poop",
+      "on": "ship",
+      "across": -8.5,
+      "elevation": 2.4,
+      "facing": 90,
+      "box": [
+        -3.7,
+        -1.5,
+        3.7,
+        0
+      ]
+    },
+    {
+      "id": "ship_rig",
+      "name": "Secret: masts and rigging",
+      "on": "ship",
+      "facing": 180,
+      "box": [
+        -22,
+        -32,
+        27,
+        0
+      ]
+    },
+    {
+      "id": "ship_fore",
+      "name": "Secret: foremast and yards",
+      "on": "ship",
+      "across": 8.3,
+      "facing": 55,
+      "box": [
+        -8.6,
+        -26.5,
+        8.6,
+        -2.3
+      ]
+    },
+    {
+      "id": "ship_fore_course",
+      "name": "Secret: course, foremast",
+      "on": "ship_fore",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -8,
+        -13.3,
+        8,
+        -5.8
+      ],
+      "uniforms": {
+        "head": -12.8,
+        "foot": -6.3,
+        "rise": 0,
+        "seed": 1,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_fore_top",
+      "name": "Secret: topsail, foremast",
+      "on": "ship_fore",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -7.2,
+        -19.9,
+        7.2,
+        -12.8
+      ],
+      "uniforms": {
+        "head": -19.4,
+        "foot": -13.3,
+        "rise": 1,
+        "seed": 2,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_fore_tg",
+      "name": "Secret: topgallant, foremast",
+      "on": "ship_fore",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -5.9,
+        -24.7,
+        5.9,
+        -19.3
+      ],
+      "uniforms": {
+        "head": -24.2,
+        "foot": -19.8,
+        "rise": 1,
+        "seed": 3,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_main",
+      "name": "Secret: mainmast and yards",
+      "on": "ship",
+      "across": -0.7,
+      "facing": 55,
+      "box": [
+        -8.6,
+        -29.5,
+        8.6,
+        -2.3
+      ]
+    },
+    {
+      "id": "ship_main_course",
+      "name": "Secret: course, mainmast",
+      "on": "ship_main",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -8.6,
+        -14.3,
+        8.6,
+        -5.8
+      ],
+      "uniforms": {
+        "head": -13.8,
+        "foot": -6.3,
+        "rise": 0,
+        "seed": 4,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_main_top",
+      "name": "Secret: topsail, mainmast",
+      "on": "ship_main",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -7.8,
+        -21.5,
+        7.8,
+        -13.8
+      ],
+      "uniforms": {
+        "head": -21,
+        "foot": -14.3,
+        "rise": 1,
+        "seed": 5,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_main_tg",
+      "name": "Secret: topgallant, mainmast",
+      "on": "ship_main",
+      "distance": -0.3,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -6.4,
+        -26.8,
+        6.4,
+        -20.9
+      ],
+      "uniforms": {
+        "head": -26.3,
+        "foot": -21.4,
+        "rise": 1,
+        "seed": 6,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_jib",
+      "name": "Secret: staysail",
+      "on": "ship",
+      "distance": 0.1,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        8,
+        -19.1,
+        17.7,
+        -3.9
+      ],
+      "uniforms": {
+        "head": -18.6,
+        "foot": -4.4,
+        "rise": 1,
+        "seed": 7,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_jib_outer",
+      "name": "Secret: jib",
+      "on": "ship",
+      "distance": -0.1,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        7.9,
+        -25.1,
+        26.1,
+        -4.7
+      ],
+      "uniforms": {
+        "head": -24.6,
+        "foot": -5.2,
+        "rise": 1,
+        "seed": 8,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "ship_spanker",
+      "name": "Secret: spanker",
+      "on": "ship",
+      "distance": -0.1,
+      "facing": 180,
+      "translucent": 0.55,
+      "box": [
+        -18.1,
+        -20.3,
+        -9.2,
+        -5.7
+      ],
+      "uniforms": {
+        "head": -19.8,
+        "foot": -6.2,
+        "rise": 1,
+        "seed": 9,
+        "set": 1,
+        "scarlet": 0,
+        "luff": 0,
+        "wind": 1
+      }
+    },
+    {
+      "id": "cape",
+      "name": "Cape",
+      "across": 197,
+      "distance": 800,
+      "height": 30,
+      "box": [
+        -530,
+        -36,
+        100,
+        1
+      ]
+    },
+    {
+      "id": "lighthouse",
+      "name": "Lighthouse",
+      "across": 271,
+      "distance": 800,
+      "height": 40,
+      "box": [
+        -280,
+        -50,
+        280,
+        4
+      ]
+    },
+    {
+      "id": "lighthouse_light",
+      "name": "Lighthouse light",
+      "across": 271,
+      "distance": 800,
+      "height": 40,
+      "box": [
+        -280,
+        -50,
+        280,
+        4
+      ],
+      "glows": true
+    },
+    {
+      "id": "cape_mist",
+      "name": "Mist on the cape",
+      "across": 271,
+      "distance": 792,
+      "height": 76,
+      "box": [
+        -760,
+        -76,
+        200,
+        6
+      ]
+    },
+    {
+      "id": "light3",
+      "name": "Light in the mist by the cape",
+      "across": 271,
+      "distance": 788,
+      "height": 40,
+      "box": [
+        -16,
+        -52,
+        16,
+        -20
+      ],
+      "glows": true
+    },
+    {
+      "id": "light1",
+      "name": "Light on the horizon: a fishing boat",
+      "across": 243.29,
+      "distance": 907.97,
+      "height": 5,
+      "box": [
+        -3.2,
+        -5,
+        3.2,
+        0.2
+      ],
+      "place": {
+        "across": "light1_a",
+        "distance": "light1_d"
+      }
+    },
+    {
+      "id": "light2",
+      "name": "Light on the horizon: a steamer",
+      "across": 160.05,
+      "distance": 1138.81,
+      "height": 18,
+      "box": [
+        -25.5,
+        -18,
+        25.5,
+        0.5
+      ],
+      "place": {
+        "across": "light2_a",
+        "distance": "light2_d"
+      }
+    },
+    {
+      "id": "light2_smoke",
+      "name": "Steamer's smoke",
+      "particles": {
+        "kind": "smoke",
+        "rate": 3,
+        "life": [
+          26,
+          36
+        ],
+        "source": [
+          0.6,
+          0.6,
+          0
+        ],
+        "speed": [
+          1.4,
+          2.2
+        ],
+        "spread": 12,
+        "gravity": -0.1,
+        "drag": 0.35,
+        "wind": 1,
+        "gust": 0.5,
+        "turbulence": 2,
+        "swirl": 7,
+        "size": [
+          1.6,
+          18
+        ],
+        "color": "#9a9a96",
+        "opacity": 0.55,
+        "sheer": 0.3,
+        "fade": [
+          0.02,
+          0.55
+        ],
+        "soft": 3,
+        "at": "light2#funnel",
+        "amount": "light2_smoke"
+      }
+    },
+    {
+      "id": "hill_far",
+      "name": "Hills beyond Kaperna",
+      "plane": true,
+      "drape": true,
+      "across": -372.5,
+      "distance": 194,
+      "width": 255,
+      "depth": 24
+    },
+    {
+      "id": "hill",
+      "name": "Kaperna's slope",
+      "plane": true,
+      "drape": true,
+      "across": -102.5,
+      "distance": 194,
+      "width": 285,
+      "depth": 24
+    },
+    {
+      "id": "kaperna",
+      "name": "Kaperna",
+      "across": -40,
+      "distance": 200,
+      "height": 10,
+      "box": [
+        -1,
+        -1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "lit_windows",
+      "name": "Windows of Kaperna",
+      "across": -40,
+      "distance": 200,
+      "height": 10,
+      "box": [
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "glows": true
+    },
+    {
+      "id": "veil",
+      "name": "Mist over the bay",
+      "across": -110,
+      "distance": 175,
+      "height": 8,
+      "box": [
+        -360,
+        -9,
+        360,
+        3
+      ]
+    },
+    {
+      "id": "road",
+      "name": "The shore by the tavern and the road to Liss",
+      "plane": true,
+      "drape": true,
+      "across": -80.25,
+      "distance": 154.75,
+      "width": 219.5,
+      "depth": 54.5
+    },
+    {
+      "id": "tavern_set",
+      "name": "Menners' tavern: anchor",
+      "unseen": true,
+      "across": 14,
+      "distance": 140,
+      "facing": 180
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern",
+      "name": "Menners' tavern",
+      "facing": 180,
+      "box": [
+        -4.2,
+        -4.2,
+        35.3,
+        1.4
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_inside",
+      "name": "Tavern: behind the door",
+      "across": 3,
+      "distance": 1.2,
+      "elevation": 0.5,
+      "facing": 180,
+      "box": [
+        -0.9,
+        -2.3,
+        0.9,
+        0.02
+      ],
+      "glows": true
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_floor",
+      "name": "Tavern: the floor past the threshold",
+      "plane": true,
+      "walk": true,
+      "unseen": true,
+      "across": 3,
+      "distance": 0.6,
+      "elevation": 0.5,
+      "width": 1.4,
+      "depth": 1.2
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_door",
+      "name": "Tavern door",
+      "across": 2.5,
+      "distance": 0.03,
+      "elevation": 0.5,
+      "facing": 180,
+      "box": [
+        -0.02,
+        -2.12,
+        1.02,
+        0.01
+      ],
+      "place": {
+        "facing": "tavern_door_facing"
+      }
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_light",
+      "name": "Tavern windows",
+      "distance": -0.02,
+      "facing": 180,
+      "box": [
+        -3,
+        -3,
+        7.6,
+        -1.5
+      ],
+      "glows": true
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_side",
+      "name": "Tavern: the wall to the landing",
+      "across": 8,
+      "distance": 3,
+      "facing": 90,
+      "box": [
+        -3.3,
+        -6.4,
+        3.3,
+        0.02
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_side_left",
+      "name": "Tavern: the wall to the road",
+      "across": -4,
+      "distance": 3,
+      "facing": 270,
+      "box": [
+        -3.3,
+        -6.4,
+        3.3,
+        0.02
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_roof",
+      "name": "Tavern roof",
+      "plane": true,
+      "across": 2,
+      "distance": 1.35,
+      "elevation": 5.1,
+      "width": 12.6,
+      "depth": 4,
+      "tilt": 33.7
+    },
+    {
+      "on": "tavern_set",
+      "id": "veranda",
+      "name": "Tavern veranda",
+      "plane": true,
+      "walk": true,
+      "across": 5,
+      "distance": -1.5,
+      "elevation": 0.5,
+      "width": 6,
+      "depth": 3
+    },
+    {
+      "on": "tavern_set",
+      "id": "veranda_steps",
+      "name": "Veranda steps",
+      "plane": true,
+      "walk": true,
+      "across": 3,
+      "distance": -3.5,
+      "elevation": 0.25,
+      "width": 1.4,
+      "depth": 1.12,
+      "tilt": 26.6
+    },
+    {
+      "on": "tavern_set",
+      "id": "veranda_rail",
+      "name": "Veranda rail",
+      "across": 5,
+      "distance": -3,
+      "facing": 180,
+      "box": [
+        -3.2,
+        -3.6,
+        3.2,
+        0.02
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "veranda_left",
+      "name": "Veranda rail, left",
+      "across": 2,
+      "distance": -1.5,
+      "facing": 270,
+      "box": [
+        -1.52,
+        -1.5,
+        1.52,
+        0.02
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "veranda_right",
+      "name": "Veranda rail, right",
+      "across": 8,
+      "distance": -1.5,
+      "facing": 90,
+      "box": [
+        -1.52,
+        -1.5,
+        1.52,
+        0.02
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_lantern",
+      "name": "Lantern over the table",
+      "across": 5.9,
+      "distance": -2.98,
+      "elevation": 2.84,
+      "facing": 180,
+      "box": [
+        -0.2,
+        -0.4,
+        0.2,
+        0.02
+      ],
+      "glows": true
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_bench",
+      "name": "Bench by the table",
+      "across": 6.3,
+      "distance": -1.87,
+      "elevation": 0.5,
+      "facing": 180,
+      "box": [
+        -0.7,
+        -0.5,
+        0.7,
+        0.02
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_bench_top",
+      "name": "Bench seat",
+      "plane": true,
+      "across": 6.3,
+      "distance": -1.7,
+      "elevation": 0.95,
+      "width": 1.3,
+      "depth": 0.35
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_table",
+      "name": "Table by the rail",
+      "across": 6.3,
+      "distance": -2.75,
+      "elevation": 0.5,
+      "facing": 180,
+      "box": [
+        -0.7,
+        -0.8,
+        0.7,
+        0.02
+      ]
+    },
+    {
+      "on": "tavern_set",
+      "id": "tavern_table_top",
+      "name": "Table top",
+      "plane": true,
+      "across": 6.3,
+      "distance": -2.4,
+      "elevation": 1.25,
+      "width": 1.3,
+      "depth": 0.7
+    },
+    {
+      "id": "cart",
+      "name": "Philip's cart",
+      "across": 12.7,
+      "distance": 138.7,
+      "height": 1.5,
+      "box": [
+        -2.4,
+        -1.6,
+        1.5,
+        0.05
+      ]
+    },
+    {
+      "id": "nets2",
+      "name": "Nets by the tavern",
+      "across": 26.5,
+      "distance": 143.5,
+      "height": 3,
+      "box": [
+        -2.9,
+        -3.2,
+        2.9,
+        0.5
+      ]
+    },
+    {
+      "id": "nets",
+      "name": "Nets on stakes",
+      "across": -18,
+      "distance": 30,
+      "height": 3,
+      "box": [
+        -14,
+        -3.2,
+        14,
+        0.5
+      ]
+    },
+    {
+      "id": "beach",
+      "name": "Shore",
+      "plane": true,
+      "drape": true,
+      "across": -60,
+      "distance": 43,
+      "width": 110,
+      "depth": 66
+    },
+    {
+      "id": "sand",
+      "name": "Sand by the water",
+      "plane": true,
+      "drape": true,
+      "across": -16.5,
+      "distance": 8,
+      "width": 47,
+      "depth": 17
+    },
+    {
+      "id": "boat2",
+      "name": "Boat",
+      "across": -17.3,
+      "distance": 17,
+      "height": 0.6,
+      "box": [
+        -1.9,
+        -0.75,
+        1.9,
+        0.1
+      ]
+    },
+    {
+      "id": "net",
+      "name": "Net on the boat's keel",
+      "across": -16.9,
+      "distance": 16.95,
+      "elevation": 0.58,
+      "height": 0.3,
+      "box": [
+        -0.45,
+        -0.32,
+        0.45,
+        0.02
+      ]
+    },
+    {
+      "id": "boat1",
+      "name": "Boat",
+      "across": -5.6,
+      "distance": 8.5,
+      "height": 0.6,
+      "box": [
+        -1.7,
+        -0.7,
+        1.7,
+        0.1
+      ]
+    },
+    {
+      "id": "stone",
+      "name": "Stone by the water",
+      "across": -1.4,
+      "distance": 4.6,
+      "height": 0.4,
+      "box": [
+        -0.5,
+        -0.45,
+        0.5,
+        0.05
+      ],
+      "shadow": {
+        "onto": [
+          "ground"
+        ],
+        "soft": 0.3
+      }
+    },
+    {
+      "id": "rope",
+      "name": "Coil of rope",
+      "across": -1.9,
+      "distance": 5.3,
+      "height": 0.25,
+      "box": [
+        -0.4,
+        -0.3,
+        0.4,
+        0.02
+      ]
+    },
+    {
+      "id": "skiff",
+      "name": "The Secret's skiff",
+      "across": 3274,
+      "distance": 8990,
+      "height": 0.9,
+      "box": [
+        -2.4,
+        -0.95,
+        2.4,
+        0.25
+      ],
+      "place": {
+        "across": "sk_a",
+        "distance": "sk_d",
+        "elevation": "sk_e",
+        "facing": "sk_f"
+      },
+      "facing": 207,
+      "elevation": 0
+    },
+    {
+      "id": "skiff_far",
+      "name": "The Secret's skiff: the far side",
+      "on": "skiff",
+      "distance": 1.3,
+      "facing": 180,
+      "box": [
+        -2.4,
+        -0.95,
+        2.4,
+        0.25
+      ]
+    },
+    {
+      "id": "skiff_in",
+      "name": "The Secret's skiff: inside",
+      "on": "skiff",
+      "unseen": true,
+      "distance": 0.65,
+      "facing": 180,
+      "box": [
+        -2.4,
+        -0.95,
+        2.4,
+        0.25
+      ]
+    },
+    {
+      "id": "menners_skiff",
+      "name": "Menners' boat",
+      "across": 20,
+      "distance": 46,
+      "height": 0.9,
+      "box": [
+        -2.7,
+        -1.3,
+        2.7,
+        0.6
+      ],
+      "place": {
+        "across": "mb_a",
+        "distance": "mb_d"
+      }
+    },
+    {
+      "id": "toy",
+      "name": "Yacht on the water",
+      "across": -1.75,
+      "distance": 6.3,
+      "height": 0.45,
+      "box": [
+        -0.2,
+        -0.48,
+        0.2,
+        0.02
+      ],
+      "elevation": 0.02
+    },
+    {
+      "id": "assol",
+      "name": "Assol",
+      "person": {
+        "cast": "cast",
+        "who": "assol_child",
+        "turn": 300
+      },
+      "across": -3.3,
+      "distance": 6.6,
+      "place": {
+        "across": "as_a",
+        "distance": "as_d"
+      }
+    },
+    {
+      "id": "kid_boy",
+      "name": "Boy",
+      "person": {
+        "cast": "cast",
+        "who": "kid_boy",
+        "turn": 180
+      },
+      "across": -6.4,
+      "distance": 7.7,
+      "place": {
+        "across": "kb_a",
+        "distance": "kb_d"
+      }
+    },
+    {
+      "id": "kid_girl",
+      "name": "Older girl",
+      "person": {
+        "cast": "cast",
+        "who": "kid_girl",
+        "turn": 180
+      },
+      "across": -5.3,
+      "distance": 8,
+      "place": {
+        "across": "kg_a",
+        "distance": "kg_d"
+      }
+    },
+    {
+      "id": "kid_small",
+      "name": "Little one",
+      "person": {
+        "cast": "cast",
+        "who": "kid_small",
+        "turn": 180
+      },
+      "across": -4.6,
+      "distance": 7.5,
+      "place": {
+        "across": "ks_a",
+        "distance": "ks_d"
+      }
+    },
+    {
+      "id": "girl",
+      "name": "Little girl",
+      "person": {
+        "cast": "cast",
+        "who": "girl",
+        "turn": 90
+      },
+      "across": -9.5,
+      "distance": 9.5,
+      "place": {
+        "across": "gi_a",
+        "distance": "gi_d"
+      }
+    },
+    {
+      "id": "mother",
+      "name": "Her mother",
+      "person": {
+        "cast": "cast",
+        "who": "woman",
+        "turn": 120
+      },
+      "across": -11.5,
+      "distance": 13.5,
+      "place": {
+        "across": "mo_a",
+        "distance": "mo_d"
+      }
+    },
+    {
+      "id": "longren",
+      "name": "Longren",
+      "person": {
+        "cast": "cast",
+        "who": "longren",
+        "turn": 300
+      },
+      "across": -3.8,
+      "distance": 7.2,
+      "place": {
+        "across": "lo_a",
+        "distance": "lo_d"
+      }
+    },
+    {
+      "id": "grey",
+      "name": "Gray",
+      "person": {
+        "cast": "cast",
+        "who": "grey",
+        "turn": 180
+      },
+      "across": 20.3,
+      "distance": 138.3,
+      "place": {
+        "across": "gr_a",
+        "distance": "gr_d"
+      }
+    },
+    {
+      "id": "hin",
+      "name": "Hin Menners",
+      "person": {
+        "cast": "cast",
+        "who": "hin",
+        "turn": 100
+      },
+      "across": 18.9,
+      "distance": 138.1,
+      "place": {
+        "across": "hi_a",
+        "distance": "hi_d"
+      }
+    },
+    {
+      "id": "filipp",
+      "name": "Philip the collier",
+      "person": {
+        "cast": "cast",
+        "who": "filipp",
+        "turn": 100
+      },
+      "across": 13.9,
+      "distance": 137.9,
+      "place": {
+        "across": "fi_a",
+        "distance": "fi_d"
+      }
+    },
+    {
+      "id": "mary",
+      "name": "Mary",
+      "person": {
+        "cast": "cast",
+        "who": "mary",
+        "turn": 75
+      },
+      "across": 16.4,
+      "distance": 139,
+      "place": {
+        "across": "ma_a",
+        "distance": "ma_d"
+      }
+    },
+    {
+      "id": "menners",
+      "name": "The elder Menners",
+      "person": {
+        "cast": "cast",
+        "who": "menners",
+        "turn": 200
+      },
+      "across": 17.05,
+      "distance": 140.45,
+      "place": {
+        "across": "me_a",
+        "distance": "me_d"
+      }
+    },
+    {
+      "id": "woman2",
+      "name": "Woman by the nets",
+      "person": {
+        "cast": "cast",
+        "who": "woman",
+        "turn": 215
+      },
+      "across": 25.4,
+      "distance": 142.6,
+      "place": {
+        "across": "w2_a",
+        "distance": "w2_d"
+      }
+    },
+    {
+      "id": "woman3",
+      "name": "Second woman by the nets",
+      "person": {
+        "cast": "cast",
+        "who": "woman",
+        "turn": 240
+      },
+      "across": 26.5,
+      "distance": 143.3,
+      "place": {
+        "across": "w3_a",
+        "distance": "w3_d"
+      }
+    },
+    {
+      "id": "fisher1",
+      "name": "Fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisher",
+        "turn": 120
+      },
+      "across": -10.5,
+      "distance": 12.5,
+      "place": {
+        "across": "f1_a",
+        "distance": "f1_d"
+      }
+    },
+    {
+      "id": "fisher2",
+      "name": "Second fisherman",
+      "person": {
+        "cast": "cast",
+        "who": "fisher",
+        "turn": 120
+      },
+      "across": -12,
+      "distance": 13.2,
+      "place": {
+        "across": "f2_a",
+        "distance": "f2_d"
+      }
+    },
+    {
+      "id": "letika",
+      "name": "Letika",
+      "person": {
+        "cast": "cast",
+        "who": "letika",
+        "turn": 90
+      },
+      "on": "skiff",
+      "across": -0.5,
+      "distance": 0.65,
+      "elevation": 0
+    },
+    {
+      "id": "blizzard",
+      "name": "Blizzard",
+      "particles": {
+        "kind": "blizzard",
+        "amount": "winter"
+      }
+    },
+    {
+      "id": "storm_rain",
+      "name": "Downpour",
+      "particles": {
+        "kind": "rain",
+        "amount": "storm"
+      }
+    },
+    {
+      "id": "hands",
+      "name": "Hands, close up",
+      "insert": "hands"
+    }
+  ],
+  "music": {
+    "prompts": [
+      {
+        "text": "Sparse felt piano over a soft sustained string pad, slow and spacious, morning sea light, modern indie game score",
+        "weight": 1.2
+      },
+      {
+        "text": "Ambient glassy synth swells with long reverb tails, calm shoreline at dawn, minimalist and luminous",
+        "weight": 1
+      },
+      {
+        "text": "Solo cello playing a long quiet melody, distant, restrained, with gentle room ambience",
+        "weight": 0.6
+      },
+      {
+        "text": "Four rising notes on a celesta repeating softly like a far-off promise, airy and tender",
+        "weight": 0
+      },
+      {
+        "text": "Granular textures of sea air and soft noise, slow-breathing pads, almost silent",
+        "weight": 0
+      },
+      {
+        "text": "Warm Rhodes chords, unhurried, lo-fi tape warmth, quiet coastal village waking",
+        "weight": 0
+      },
+      {
+        "text": "Neo-classical string quartet, sustained harmonics, pale and silvery, very slow tempo",
+        "weight": 0
+      },
+      {
+        "text": "Music box melody slowed down and drenched in reverb, nostalgic and fragile",
+        "weight": 0
+      },
+      {
+        "text": "Solo violin, high and thin, a single line over an open fifth drone, hopeful longing",
+        "weight": 0
+      },
+      {
+        "text": "Soft analog synth arpeggio rippling like light on water, gentle and steady",
+        "weight": 0
+      },
+      {
+        "text": "Harp glissandi and soft flute, impressionistic, Debussy-like sea mist",
+        "weight": 0
+      },
+      {
+        "text": "Deep low drone with distant foghorn-like brass, misty cape before sunrise",
+        "weight": 0
+      },
+      {
+        "text": "Nordic folk-inspired nyckelharpa, sparse and modern, cool northern light",
+        "weight": 0
+      },
+      {
+        "text": "Choir of wordless distant voices, very soft pads, cathedral reverb, timeless calm",
+        "weight": 0
+      },
+      {
+        "text": "Minimalist repeating piano pattern in the style of Max Richter, slow build, wistful",
+        "weight": 0
+      },
+      {
+        "text": "Guitar harmonics and fingerpicked nylon guitar, intimate, quiet seaside morning",
+        "weight": 0
+      },
+      {
+        "text": "Shimmering bowed vibraphone and glass harmonica, suspended, dreamlike stillness",
+        "weight": 0
+      },
+      {
+        "text": "Slow ambient electronica with soft sub bass and airy hi-hat ticks, contemporary and clean",
+        "weight": 0
+      },
+      {
+        "text": "Accordion played very softly in the distance, a fishing village memory, faded",
+        "weight": 0
+      },
+      {
+        "text": "Full orchestra swelling slowly with scarlet triumph, strings and horns, a ship arriving at dawn",
+        "weight": 0
+      },
+      {
+        "text": "Night sea ambience with a slow lonely clarinet melody, deep blue, waiting",
+        "weight": 0
+      }
+    ],
+    "bpm": 64,
+    "density": 0.25,
+    "brightness": 0.45,
+    "scale": "D_MAJOR_B_MINOR"
+  }
+}
