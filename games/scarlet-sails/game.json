@@ -9,6 +9,7 @@
     "relationships": 70,
     "immersion": 60
   },
-  "world": "pavel--scarlet-sails",
-  "scenes": []
+  "world": "../../worlds/scarlet-sails",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

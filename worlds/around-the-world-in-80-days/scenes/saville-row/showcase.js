@@ -7,7 +7,7 @@
 const L = scene.lib, F = L.film(scene);
 const film = {
   ...F,
-  news: { ...F.news, run: async s => { await F.news.run(s); await s.person('passepartout').say('Round… the world?', { voice: 'Puck', who: 'Passepartout, a young French manservant', how: 'startled, a little incredulous' }); } },
+  news: { ...F.news, run: async s => { await F.news.run(s); await s.person('passepartout').say('Round… the world?', { voice: 'Puck', how: 'a young French manservant — startled, a little incredulous' }); } },
   // (what the game's minigames do, done here by themselves: Passepartout packing — from room to room, the things thrown
   // into the bag; the cab urged on to the club)
   pack: { ...F.pack, run: async s => {
@@ -32,6 +32,6 @@ const film = {
     const urged = s.sequence(async q => { for (let i = 1; i <= 40; i++) { q.set('cab_pace', 0.8); q.set('cab_to', i / 40); await q.wait(0.45); } });
     await s.all(urged, F.cab.run(s));
   } },
-  pp_returns: { ...F.pp_returns, run: async s => { await F.pp_returns.run(s); await s.person('passepartout').say('By London time — to the minute.', { voice: 'Puck', who: 'Passepartout, a young French manservant', how: 'brightly, with quiet pride' }); } },
+  pp_returns: { ...F.pp_returns, run: async s => { await F.pp_returns.run(s); await s.person('passepartout').say('By London time — to the minute.', { voice: 'Puck', how: 'a young French manservant — brightly, with quiet pride' }); } },
 };
 return scene.kit.beats.showcase(scene, film, L.SHOWCASE);

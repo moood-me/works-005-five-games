@@ -6,5 +6,6 @@
     "fairy-tale": 30,
     "romance": 50
   },
-  "main": "main"
+  "main": "main",
+  "languages": ["en", "ru"]
 }

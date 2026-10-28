@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"From the train window","translation":"Из окна поезда","where":"scenes/train-window/scene.json title"},
-  {"text":"A first-class compartment. The world runs past the window.","translation":"Купе первого класса. За окном бежит мир.","where":"scenes/train-window/scene.json caption"}
+  {"text":"From the train window","translation":"Из окна поезда","where":"worlds/around-the-world-in-80-days/scenes/train-window/scene.json title"},
+  {"text":"A first-class compartment. The world runs past the window.","translation":"Купе первого класса. За окном бежит мир.","where":"worlds/around-the-world-in-80-days/scenes/train-window/scene.json caption"}
 ]}

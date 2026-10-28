@@ -1,6 +1,6 @@
 {"strings": [
-  {"text":"NOVEMBER","translation":"НОЯБРЬ","where":"scenes/deck/elements/calendar.js"},
-  {"text":"WEDNESDAY","translation":"СРЕДА","where":"scenes/deck/elements/calendar.js"},
-  {"text":"The deck","translation":"Палуба","where":"scenes/deck/scene.json title"},
-  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"Палуба парохода у борта: море, дым из трубы, порт на горизонте.","where":"scenes/deck/scene.json caption"}
+  {"text":"NOVEMBER","translation":"НОЯБРЬ","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"СРЕДА","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"Палуба","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"Палуба парохода у борта: море, дым из трубы, порт на горизонте.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
 ]}

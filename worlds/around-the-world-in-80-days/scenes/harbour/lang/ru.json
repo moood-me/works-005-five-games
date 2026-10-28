@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The harbour","translation":"Гавань","where":"scenes/harbour/scene.json title"},
-  {"text":"A Far Eastern port: the quay, the water, the steamers.","translation":"Дальневосточный порт: набережная, вода, пароходы.","where":"scenes/harbour/scene.json caption"}
+  {"text":"The harbour","translation":"Гавань","where":"worlds/around-the-world-in-80-days/scenes/harbour/scene.json title"},
+  {"text":"A Far Eastern port: the quay, the water, the steamers.","translation":"Дальневосточный порт: набережная, вода, пароходы.","where":"worlds/around-the-world-in-80-days/scenes/harbour/scene.json caption"}
 ]}

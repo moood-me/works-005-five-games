@@ -9,6 +9,7 @@
     "relationships": 80,
     "immersion": 50
   },
-  "world": "pavel--lady-with-the-dog",
-  "scenes": []
+  "world": "../../worlds/lady-with-the-dog",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

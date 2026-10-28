@@ -8,6 +8,7 @@
     "drama": 80,
     "relationships": 70
   },
-  "world": "pavel--elder-son",
-  "scenes": []
+  "world": "../../worlds/elder-son",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

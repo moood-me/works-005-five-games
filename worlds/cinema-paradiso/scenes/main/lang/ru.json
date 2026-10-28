@@ -1,7 +1,7 @@
 {"strings": [
-  {"text":"SOLD OUT","translation":"МЕСТ НЕТ","where":"scenes/main/lib.js"},
-  {"text":"DEMOLITION","translation":"СНОС —","where":"scenes/main/lib.js"},
-  {"text":"SATURDAY","translation":"В СУББОТУ","where":"scenes/main/lib.js"},
-  {"text":"The Square","translation":"Площадь","where":"scenes/main/scene.json title"},
-  {"text":"Giancaldo. The Paradiso's square","translation":"Джанкальдо. Площадь «Парадизо»","where":"scenes/main/scene.json caption"}
+  {"text":"SOLD OUT","translation":"МЕСТ НЕТ","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"DEMOLITION","translation":"СНОС —","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"SATURDAY","translation":"В СУББОТУ","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"The Square","translation":"Площадь","where":"worlds/cinema-paradiso/scenes/main/scene.json title"},
+  {"text":"Giancaldo. The Paradiso's square","translation":"Джанкальдо. Площадь «Парадизо»","where":"worlds/cinema-paradiso/scenes/main/scene.json caption"}
 ]}

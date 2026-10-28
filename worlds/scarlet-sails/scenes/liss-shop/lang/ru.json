@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"A Shop in Liss","translation":"Лавка в Лиссе","where":"scenes/liss-shop/scene.json title"},
-  {"text":"Morning in the shop.","translation":"Утро в лавке.","where":"scenes/liss-shop/scene.json caption"}
+  {"text":"A Shop in Liss","translation":"Лавка в Лиссе","where":"worlds/scarlet-sails/scenes/liss-shop/scene.json title"},
+  {"text":"Morning in the shop.","translation":"Утро в лавке.","where":"worlds/scarlet-sails/scenes/liss-shop/scene.json caption"}
 ]}

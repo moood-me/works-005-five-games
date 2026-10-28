@@ -2,67 +2,56 @@
   "narrator": {
     "voice": "Rasalgethi",
     "how": "calmly, a little dry, with a quiet smile, unhurried — like the play's stage directions read aloud",
-    "name": "narrator",
     "short": "narrator"
   },
   "busygin": {
     "voice": "Iapetus",
     "how": "young: quiet, restrained, a little hoarse from the cold; awkward when he lies",
-    "name": "Volodya Busygin, a student",
     "short": "Busygin"
   },
   "silva": {
     "voice": "Puck",
     "how": "brisk, merry, cheeky, quick; his anger in the same merry voice",
-    "name": "Silva, Semyon Sevostyanov",
     "short": "Silva"
   },
   "sarafanov": {
     "voice": "Algenib",
     "how": "no longer young: soft, hurried, excited, short of breath and smiling; quiet when it hurts",
-    "name": "Andrei Grigorievich Sarafanov, a musician",
     "short": "Sarafanov"
   },
   "nina": {
     "voice": "Kore",
     "how": "even, direct, a little mocking and tired; never complaining",
-    "name": "Nina, Sarafanov's daughter",
     "short": "Nina"
   },
   "vasenka": {
     "voice": "Fenrir",
     "how": "a teenager's breaking voice: sullen, curt, hurt",
-    "name": "Vasenka, Sarafanov's son",
     "short": "Vasenka"
   },
   "kudimov": {
     "voice": "Alnilam",
     "how": "crisp, loud, by the regulations, unsmiling",
-    "name": "Mikhail Kudimov, a cadet",
     "short": "Kudimov"
   },
   "makarskaya": {
     "voice": "Aoede",
     "how": "low, lazy, mocking; frightened when she shouts",
-    "name": "Natalya Makarskaya, the neighbour",
     "short": "Makarskaya"
   },
   "neighbor_m": {
     "voice": "Orus",
     "how": "from behind a window: sleepy, cross",
-    "name": "neighbour",
     "short": "neighbour"
   },
   "neighbor_w": {
     "voice": "Gacrux",
     "how": "from behind a window: shrill, frightened and cross",
-    "name": "neighbour woman",
     "short": "neighbour woman"
   },
   "neighbor_old": {
     "voice": "Enceladus",
     "how": "from behind a window: an old man, in a whisper, sly",
-    "name": "the old neighbour",
     "short": "old man"
   }
 }

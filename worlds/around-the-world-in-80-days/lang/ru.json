@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"Around the World in 80 Days v3","translation":"Вокруг света за 80 дней v3","where":"world.json title"},
-  {"text":"Around the World on the new engine: the scenes are brought over here one by one.","translation":"Вокруг света на новом движке: сцены переводятся сюда по одной.","where":"world.json description"}
+  {"text":"Around the World in 80 Days v3","translation":"Вокруг света за 80 дней v3","where":"worlds/around-the-world-in-80-days/world.json title"},
+  {"text":"Around the World on the new engine: the scenes are brought over here one by one.","translation":"Вокруг света на новом движке: сцены переводятся сюда по одной.","where":"worlds/around-the-world-in-80-days/world.json description"}
 ]}

@@ -2,109 +2,91 @@
   "narrator": {
     "voice": "Schedar",
     "how": "calmly, brightly, a little solemnly — as one tells a fairy tale one believes in",
-    "name": "narrator",
     "short": "narrator"
   },
   "assol_child": {
     "voice": "Leda",
     "how": "a girl of eight: ringing, trusting, all in one breath",
-    "name": "Assol, eight years old",
     "short": "Assol"
   },
   "assol": {
     "voice": "Vindemiatrix",
     "how": "quietly, clearly, a little wondering, without complaint",
-    "name": "Assol, seventeen years old",
     "short": "Assol"
   },
   "longren": {
     "voice": "Algenib",
     "how": "low, slow, a little hoarse, tender",
-    "name": "Longren, an old sailor, Assol's father",
     "short": "Longren"
   },
   "egl": {
     "voice": "Charon",
     "how": "an old teller of tales: slowly, in a singsong, with a smile in the voice",
-    "name": "Egle, a collector of tales",
     "short": "Egle"
   },
   "grey_boy": {
     "voice": "Autonoe",
     "how": "a boy of eight: gravely, stubbornly, softly",
-    "name": "Arthur Gray, eight years old",
     "short": "Gray"
   },
   "grey": {
     "voice": "Iapetus",
     "how": "a young captain: evenly, softly, sure of himself",
-    "name": "Arthur Gray, a captain",
     "short": "Gray"
   },
   "lilian": {
     "voice": "Achernar",
     "how": "gently, softly, holding back her feelings",
-    "name": "Lilian Gray, Arthur's mother",
     "short": "Lilian"
   },
   "gop": {
     "voice": "Orus",
     "how": "a captain of the old school: sharply, loudly, mocking",
-    "name": "Captain Gop",
     "short": "Gop"
   },
   "letika": {
     "voice": "Puck",
     "how": "a joking sailor: merrily, quickly, under his breath",
-    "name": "Letika, a sailor",
     "short": "Letika"
   },
   "panten": {
     "voice": "Umbriel",
     "how": "an ageing mate: anxiously, carefully",
-    "name": "Panten, the mate",
     "short": "Panten"
   },
   "hin": {
     "voice": "Algieba",
     "how": "an innkeeper: sly, smirking, gossiping",
-    "name": "Hin Menners, the innkeeper",
     "short": "Hin"
   },
   "filipp": {
     "voice": "Achird",
     "how": "a collier: simply, good-naturedly, crossly taking her part",
-    "name": "Philip, the collier",
     "short": "Philip"
   },
   "merchant": {
     "voice": "Sadaltager",
     "how": "a shopkeeper: dry, indifferent, businesslike",
-    "name": "a merchant in Liss",
     "short": "the merchant"
   },
   "kids": {
     "voice": "Laomedeia",
     "how": "children teasing: ringing, in a singsong, laughing",
-    "name": "the children of Kaperna",
     "short": "the children"
   },
   "kids_call": {
     "voice": "Laomedeia",
     "how": "an older girl calling: kindly, a little condescending, not laughing",
-    "name": "a girl of Kaperna",
     "short": "the girl"
   },
   "kids_true": {
     "voice": "Laomedeia",
     "how": "the same children shouting in earnest: out of breath, excited, not laughing",
-    "name": "the children of Kaperna",
     "short": "the children"
   },
   "girl": {
     "voice": "Zephyr",
     "how": "a little girl: shyly, in delight",
-    "name": "a girl of about seven",
     "short": "the girl"
   }
 }

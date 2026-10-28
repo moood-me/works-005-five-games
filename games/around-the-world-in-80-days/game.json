@@ -9,6 +9,7 @@
     "comedy": 1,
     "relationships": 2
   },
-  "world": "pavel--around-the-world-in-80-days",
-  "scenes": []
+  "world": "../../worlds/around-the-world-in-80-days",
+  "scenes": [],
+  "languages": ["en", "ru"]
 }

@@ -1,6 +1,6 @@
 {"strings": [
-  {"text":"Saville Row","translation":"Сэвил-Роу","where":"scenes/saville-row/scene.json title"},
-  {"text":"London, night, fog. House number seven.","translation":"Лондон, ночь, туман. Дом номер семь.","where":"scenes/saville-row/scene.json caption"},
-  {"text":"Round… the world?","who":"passepartout","translation":"Вокруг… света?","where":"scenes/saville-row/showcase.js"},
-  {"text":"By London time — to the minute.","who":"passepartout","translation":"По Лондону — минута в минуту.","where":"scenes/saville-row/showcase.js"}
+  {"text":"Saville Row","translation":"Сэвил-Роу","where":"worlds/around-the-world-in-80-days/scenes/saville-row/scene.json title"},
+  {"text":"London, night, fog. House number seven.","translation":"Лондон, ночь, туман. Дом номер семь.","where":"worlds/around-the-world-in-80-days/scenes/saville-row/scene.json caption"},
+  {"text":"Round… the world?","who":"passepartout","translation":"Вокруг… света?","where":"worlds/around-the-world-in-80-days/scenes/saville-row/showcase.js"},
+  {"text":"By London time — to the minute.","who":"passepartout","translation":"По Лондону — минута в минуту.","where":"worlds/around-the-world-in-80-days/scenes/saville-row/showcase.js"}
 ]}

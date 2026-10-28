@@ -478,23 +478,23 @@ play = null;
 
 // --- the report
 const out = [];
-const say = (text = '') => out.push(text);
+const print = (text = '') => out.push(text);
 const met = set => (set.size && set.size < plays.length ? ` (plays: ${set.size})` : '');
 const clock = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
 const span = all => { const lo = Math.min(...all), hi = Math.max(...all); return lo === hi ? clock(lo) : `${clock(lo)}…${clock(hi)}`; };
 const seconds = events => events.reduce((sum, e) => sum + (e[0] === 'beat' || e[0] === 'play' ? e[2] : e[0] === 'say' ? e[1] : 0), 0);
 const withActs = (events, ch) => seconds(events) + events.reduce((sum, e) => sum + (e[0] === 'act' ? ACT : e[0] === 'letter' ? LETTER : 0), 0);
 
-say(`World: ${world} — ${WORLD.size} scenes. Game: ${CHAPTERS.length} chapters, ${CHAPTERS.reduce((n, ch) => n + ch.steps.length, 0)} steps, ${CHOICES.length} choices.`);
-say(`Plays: ${plays.length} (${combos.length} combinations of choices and one each with ${OTHER.map(o => JSON.stringify(o)).join(', ')}).`);
+print(`World: ${world} — ${WORLD.size} scenes. Game: ${CHAPTERS.length} chapters, ${CHAPTERS.reduce((n, ch) => n + ch.steps.length, 0)} steps, ${CHOICES.length} choices.`);
+print(`Plays: ${plays.length} (${combos.length} combinations of choices and one each with ${OTHER.map(o => JSON.stringify(o)).join(', ')}).`);
 
-say(`\n== Discrepancies: ${misses.size} ==`);
-for (const [text, set] of misses) say(`${text}${met(set)}`);
+print(`\n== Discrepancies: ${misses.size} ==`);
+for (const [text, set] of misses) print(`${text}${met(set)}`);
 
-say(`\n== Cuts inside a scene not by the table and without beat_next: ${cuts.size} ==`);
-for (const [text, set] of cuts) say(`${text}${met(set)}`);
+print(`\n== Cuts inside a scene not by the table and without beat_next: ${cuts.size} ==`);
+for (const [text, set] of cuts) print(`${text}${met(set)}`);
 
-say('\n== In the scenes\' contracts, named by no play ==');
+print('\n== In the scenes\' contracts, named by no play ==');
 for (const [folder, scene] of WORLD) {
   const c = scene.contract;
   if (!c) continue;
@@ -504,27 +504,27 @@ for (const [folder, scene] of WORLD) {
     ...Object.keys(c.party).filter(k => !scene.named.has(`party:${k}`)).map(k => `party key ${k}`),
     ...[...new Set([...c.points, ...c.offers])].filter(ref => !scene.named.has(`ref:${ref}`)).map(ref => `point ${ref}`),
   ];
-  say(`${folder}: ${left.join('; ') || '—'}`);
+  print(`${folder}: ${left.join('; ') || '—'}`);
 }
 
 const never = LINES.filter(([n]) => !plays.some(p => p.lines.has(n)));
-say(`\n== Lines of §8 said in no play: ${never.length} ==`);
-for (const [n, who, text] of never) say(`L${String(n).padStart(2, '0')} ${who} | ${text}`);
+print(`\n== Lines of §8 said in no play: ${never.length} ==`);
+for (const [n, who, text] of never) print(`L${String(n).padStart(2, '0')} ${who} | ${text}`);
 
-say(`\n== Lines: ${lines.size} (№ | who | voice | text | ≈ s) — the voices are recorded from them ==`);
+print(`\n== Lines: ${lines.size} (№ | who | voice | text | ≈ s) — the voices are recorded from them ==`);
 for (const line of [...lines.values()].sort((a, z) => (a.n ?? 999) - (z.n ?? 999))) {
-  say(`${line.n ? `L${String(line.n).padStart(2, '0')}` : '—'} | ${line.who} | ${PEOPLE[line.who]?.voice ?? '?'} | ${line.text} | ${(0.3 + 0.06 * line.text.length).toFixed(1)}`);
+  print(`${line.n ? `L${String(line.n).padStart(2, '0')}` : '—'} | ${line.who} | ${PEOPLE[line.who]?.voice ?? '?'} | ${line.text} | ${(0.3 + 0.06 * line.text.length).toFixed(1)}`);
 }
 
-say(`\n== Beats and time by ending (beats — the contract's seconds, lines — 0.3 s + 0.06 s a letter, minigames — about; in brackets — with the touches and choices at ${ACT} s, letters at ${LETTER} s and “The Strip” at ${STRIP_S} s) ==`);
+print(`\n== Beats and time by ending (beats — the contract's seconds, lines — 0.3 s + 0.06 s a letter, minigames — about; in brackets — with the touches and choices at ${ACT} s, letters at ${LETTER} s and “The Strip” at ${STRIP_S} s) ==`);
 const stripsOf = () => CHAPTERS.reduce((n, ch) => n + (ch.wall !== false ? 1 : 0), 0) + 1;
 for (const ending of ENDINGS) {
   const mine = plays.filter(p => p.ending === ending.id);
-  say(`\n-- ${ending.label} (${ending.id}): ${mine.length} plays --`);
+  print(`\n-- ${ending.label} (${ending.id}): ${mine.length} plays --`);
   if (!mine.length) continue;
   const times = mine.map(p => p.chapters.map(steps => seconds(steps.flat())));
   const full = mine.map(p => p.chapters.reduce((sum, steps) => sum + withActs(steps.flat()), 0) + stripsOf() * STRIP_S);
-  say(`time: ${CHAPTERS.map((ch, c) => `${ch.number || ch.title} ${span(times.map(t => t[c]))}`).join(' · ')} · in all ${span(times.map(t => t.reduce((a, x) => a + x, 0)))} (${span(full)})`);
+  print(`time: ${CHAPTERS.map((ch, c) => `${ch.number || ch.title} ${span(times.map(t => t[c]))}`).join(' · ')} · in all ${span(times.map(t => t.reduce((a, x) => a + x, 0)))} (${span(full)})`);
   for (const [c, ch] of CHAPTERS.entries()) {
     for (const n of ch.steps.keys()) {
       const ways = new Map();
@@ -533,7 +533,7 @@ for (const ending of ENDINGS) {
         const way = `${events.filter(e => e[0] !== 'say' && e[0] !== 'act' && e[0] !== 'letter').map(e => (e[0] === 'scene' ? `| ${e[1]}:` : e[0] === 'play' ? `[${e[1]}]` : e[1])).join(' ').replace(/^\| /, '') || '—'} — ${Math.round(seconds(events))} s`;
         ways.set(way, (ways.get(way) ?? 0) + 1);
       }
-      for (const [way, count] of ways) say(`${ch.file} ${n + 1} «${ch.titles?.[n] ?? ''}»: ${way}${count < mine.length ? ` (plays: ${count})` : ''}`);
+      for (const [way, count] of ways) print(`${ch.file} ${n + 1} «${ch.titles?.[n] ?? ''}»: ${way}${count < mine.length ? ` (plays: ${count})` : ''}`);
     }
   }
 }
@@ -560,8 +560,8 @@ for (const p of plays) {
   }
   acted('the end');
 }
-say(`\n== Watching with nothing to do longer than ${WATCH} s: ${long.size} ==`);
-for (const [where, all] of long) say(`${where}: ${span(all)} (plays: ${all.length})`);
+print(`\n== Watching with nothing to do longer than ${WATCH} s: ${long.size} ==`);
+for (const [where, all] of long) print(`${where}: ${span(all)} (plays: ${all.length})`);
 
 // (a dry run's clock — jump.js — keeps the process alive: leave once all is written)
 process.stdout.write(`${out.join('\n')}\n`, () => process.exit(misses.size || cuts.size ? 1 : 0));

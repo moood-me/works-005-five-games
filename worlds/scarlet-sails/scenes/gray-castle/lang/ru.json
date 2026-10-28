@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"The Grays' Castle","translation":"Замок Грэев","where":"scenes/gray-castle/scene.json title"},
-  {"text":"Everything here is ordained for ever.","translation":"Всё здесь заведено навсегда.","where":"scenes/gray-castle/scene.json caption"}
+  {"text":"The Grays' Castle","translation":"Замок Грэев","where":"worlds/scarlet-sails/scenes/gray-castle/scene.json title"},
+  {"text":"Everything here is ordained for ever.","translation":"Всё здесь заведено навсегда.","where":"worlds/scarlet-sails/scenes/gray-castle/scene.json caption"}
 ]}
