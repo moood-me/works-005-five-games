@@ -162,7 +162,7 @@ const cam = (x, z, eye, yaw = 0, pitch = 0) => ({ camera_target: null, camera_sh
   camera_x: x, camera_z: z, camera_h: eye - 1.7, camera_yaw: yaw, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
 const CAM = {
   BACK: cam(-5.6, 2.2, 1.9, 6, 5),         // at the back of the parterre, behind Gurov at the left column: the hall, the stage, the chandelier
-  HALL: cam(0, 7.9, 4.5, 0, -24),          // from the balcony's front over the parterre: row 3 in the middle third, a seated lady ≈ 0.19 of the frame
+  HALL: cam(0, 7.9, 4.5, 0, -29),          // from the balcony's front over the parterre: row 3 in the middle third, a seated lady ≈ 0.19 of the frame
   FACE: cam(0.25, 15.3, 1.3, 165, 6),      // from the aisle by row 1 back at her: her face three-quarter, lifted to him; he stands in the aisle
   CORRIDOR: cam(8.35, 19.8, 1.65, 182, 0), // down the corridor: she comes toward us from the side door; he steps out of the other door
   STAIRS: cam(23.2, 17.4, 1.65, 0, 3),     // the landing: the door from the corridor at the back, the gallery above right, the way down on the left

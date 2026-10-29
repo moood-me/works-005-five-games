@@ -7,7 +7,7 @@ for (const [x, w, h] of [[2.0, 0.7, 0.95], [6.4, 0.6, 0.85], [8.2, 0.7, 0.95], [
   g.fillStyle = '#4a3a2c'; g.fillRect(x - w / 2 - 0.04, -2.24, w + 0.08, h + 0.08);
   g.fillStyle = '#e8e0cc'; g.fillRect(x - w / 2, -2.2, w, h);
   g.fillStyle = 'rgba(60,50,40,0.6)';
-  for (let i = 0; i < 6; i++) g.fillRect(x - w / 2 + 0.08, -2.1 + i * 0.13, (w - 0.16) * (i === 0 ? 1 : 0.5 + anim.hash(i + x * 7, 3) * 0.5), i === 0 ? 0.07 : 0.03);
+  for (let i = 0; i < 6; i++) g.fillRect(x - w / 2 + 0.08, -2.1 + i * 0.13, (w - 0.16) * (i === 0 ? 1 : 0.5 + e.anim.hash(i + x * 7, 3) * 0.5), i === 0 ? 0.07 : 0.03);
 }
 g.fillStyle = '#3a2e24'; g.fillRect(3.4, -1.75, 2.4, 0.06);
 for (let x = 3.6; x < 5.8; x += 0.4) g.fillRect(x, -1.75, 0.03, 0.14);

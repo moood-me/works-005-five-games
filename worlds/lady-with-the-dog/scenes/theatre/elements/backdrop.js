@@ -11,9 +11,9 @@ g.lineWidth = 0.05; for (let x = -2.2; x < 0; x += 0.3) { g.beginPath(); g.moveT
 g.strokeStyle = '#4a3a2e'; g.lineWidth = 0.18;
 g.beginPath(); g.moveTo(3.2, 0); g.quadraticCurveTo(3.0, -2.0, 2.2, -3.4); g.moveTo(3.05, -1.8); g.quadraticCurveTo(3.8, -2.6, 4.6, -3.0); g.stroke();
 for (let i = 0; i < 60; i++) {
-  const a = anim.hash(i, 31) * Math.PI * 2, r = anim.hash(i, 32) ** 0.6 * 1.5;
+  const a = e.anim.hash(i, 31) * Math.PI * 2, r = e.anim.hash(i, 32) ** 0.6 * 1.5;
   g.fillStyle = i % 3 ? '#f4f0ea' : '#e8dede';
-  g.beginPath(); g.arc(3.3 + Math.cos(a) * r * 1.2, -3.4 + Math.sin(a) * r * 0.6, 0.18 + anim.hash(i, 33) * 0.15, 0, Math.PI * 2); g.fill();
+  g.beginPath(); g.arc(3.3 + Math.cos(a) * r * 1.2, -3.4 + Math.sin(a) * r * 0.6, 0.18 + e.anim.hash(i, 33) * 0.15, 0, Math.PI * 2); g.fill();
 }
 for (const [x, y] of [[-4.6, -3.6], [-3.6, -3.75], [-2.6, -3.85]]) {
   g.strokeStyle = '#6a5a4a'; g.lineWidth = 0.02; g.beginPath(); g.moveTo(x, -4.6); g.lineTo(x, y - 0.25); g.stroke();
