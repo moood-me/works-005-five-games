@@ -14,7 +14,7 @@ const THINGS = [['window', 'window#window', tr('Live in one town')], ['door', 'd
 const SILENCE = 15; // s
 
 export default {
-  title: 'Taking counsel',
+  title: tr('Taking counsel'),
   about: 18,
   skipped: { touched: [] },
   async run(g, b, opts, signal) {

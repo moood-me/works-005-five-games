@@ -13,7 +13,7 @@ const AGAIN = 2; // s: the mark again after they were seen
 const KISS = 6000; // ms: the embrace ends (the scene tells)
 
 export default {
-  title: 'Looking round',
+  title: tr('Looking round'),
   about: 15,
   skipped: { seen: 0 },
   async run(g, b, opts, signal) {

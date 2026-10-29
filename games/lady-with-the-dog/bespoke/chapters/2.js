@@ -14,7 +14,7 @@ export default {
   number: 'II',
   title: tr('Oreanda'),
   season: () => 'summer',
-  titles: ['The room', 'Oreanda', 'Noon', 'The station'],
+  titles: [tr('The room'), tr('Oreanda'), tr('Noon'), tr('The station')],
   choices: [
     { id: 'room', weight: '~', title: tr('After the watermelon'), options: [{ id: 'eat', label: tr('Eat at the table') }, { id: 'bring', label: tr('Bring her a slice') }] },
     { id: 'window', weight: '~', title: tr('The carriage window'), options: [{ id: 'look', label: tr('Keep looking') }, { id: 'curtain', label: tr('Draw the curtain') }] },
@@ -141,7 +141,7 @@ export default {
       const days = g.beat('days');
       await letter;
       await g.say('narrator', 'But then a letter came from her husband');
-      await Promise.all([g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband') }), g.say('diderits', 'Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian', 'narrator')]);
+      await g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband'), voice: () => g.say('diderits', 'Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian', 'narrator') });
       g.sound.paper();
       await days;
     },

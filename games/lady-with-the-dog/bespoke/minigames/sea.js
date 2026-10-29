@@ -14,7 +14,7 @@ const SEA = 12; // s: the words on the sea
 const POINTS = [['lights', 'steamer#lights'], ['cicada', 'cypress#cicada'], ['hand', 'anna#hand_r']];
 
 export default {
-  title: 'The sea',
+  title: tr('The sea'),
   about: 40,
   skipped: { touched: [] },
   async run(g, b, opts, signal) {

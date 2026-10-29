@@ -17,7 +17,7 @@ const AFTER = 0.5; // s from the snap to the end
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'Coax', // as the author's ☰ lists it
+  title: tr('Coax'), // as the author's ☰ lists it
   about: 15,
   skipped: { startles: 0 },
   async run(g, b, opts, signal) {

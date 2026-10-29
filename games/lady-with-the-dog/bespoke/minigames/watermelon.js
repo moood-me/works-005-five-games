@@ -15,7 +15,7 @@ const CRUNCH = 0.15; // a crunch every such share
 const SILENCE = 10; // s of silence after the cut
 
 export default {
-  title: 'Watermelon',
+  title: tr('Watermelon'),
   about: 18,
   skipped: { lifts: 0 },
   async run(g, b, opts, signal) {

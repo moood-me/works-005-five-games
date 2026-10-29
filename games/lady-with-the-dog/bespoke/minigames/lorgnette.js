@@ -4,7 +4,7 @@
 // gangway, in order p1…p4, stranger (with a lady), p5, p6. Pressed — `look_at` = him for 1.5 s (he slows, turns his
 // head), the mark taken off. Before the fifth — a wait for `gangway:stranger`: when the tall stooping man has stopped
 // below, his back to us, the stream stands, the mark on him alone; pressed — a heartbeat, she looks hard, he turns to
-// his lady — a stranger's face (`stranger_turn` 1); 12 s not pressed — he turns by himself, without a sound. Then p5,
+// his lady — a stranger's face (`stranger_turned` 1); 12 s not pressed — he turns by himself, without a sound. Then p5,
 // p6; the crowd surges (`surge` 1), the end 1 s later.
 //   Who does what: Anna looks through her lorgnette for acquaintances from S. What she wants: that there be none.
 //   What she feels: fear and shame. The player: to look hard and to dread being known.
@@ -19,7 +19,7 @@ const TOLD = 20000; // ms: the stooping man has come to the gangway's foot (the 
 const AFTER = 1; // s after `surge` — the end
 
 export default {
-  title: 'Lorgnette',
+  title: tr('Lorgnette'),
   about: 32,
   skipped: { looked: 0, stranger: false },
   async run(g, b, opts, signal) {
@@ -86,12 +86,12 @@ export default {
       }
       if (phase === 'stranger' && t - standFrom >= WAIT) {
         for (const m of [...marks]) unmark(m);
-        send('stranger_turn', 1);
+        send('stranger_turned', 1);
         phase = 'flow';
         next = t + STEP;
       }
       if (phase === 'turning' && t - standFrom >= LOOK) {
-        send('stranger_turn', 1);
+        send('stranger_turned', 1);
         phase = 'flow';
         next = t + STEP;
       }

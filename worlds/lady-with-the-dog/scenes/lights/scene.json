@@ -1,0 +1,294 @@
+{
+  "engine": 3,
+  "title": "Lights",
+  "caption": "",
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      0,
+      35
+    ]
+  },
+  "horizon": 0.34,
+  "light": {
+    "grain": 0.12,
+    "vignette": 0.3,
+    "wind": [
+      1,
+      0.2,
+      0.4
+    ]
+  },
+  "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "prompts": [
+      {
+        "text": "very quiet sustained strings, a warm summer night by the sea, far lights on the water, still and tender",
+        "weight": 1.0
+      },
+      {
+        "text": "soft low clarinet, a few long notes, nostalgic, late nineteenth century, lots of silence",
+        "weight": 0.6
+      },
+      {
+        "text": "slow ambient pad like the sea breathing at night, no rhythm, calm",
+        "weight": 0.8
+      },
+      {
+        "text": "distant glass harmonica tones, starlight, lonely and gentle",
+        "weight": 0
+      },
+      {
+        "text": "solo cello, very slow, restrained melancholy, open space",
+        "weight": 0
+      },
+      {
+        "text": "muted string quartet chorale, pianissimo, quiet resignation",
+        "weight": 0
+      },
+      {
+        "text": "cold winter night drone, high muted violins, snow falling in silence",
+        "weight": 0
+      },
+      {
+        "text": "wet early spring night, soft dripping textures and low pads, hushed",
+        "weight": 0
+      },
+      {
+        "text": "harp harmonics one at a time, slow, light on dark water",
+        "weight": 0
+      },
+      {
+        "text": "breathy alto flute alone, slow and far away, at night",
+        "weight": 0
+      },
+      {
+        "text": "warm tape-saturated ambient texture, very slow, faded memory",
+        "weight": 0
+      },
+      {
+        "text": "low bowed double bass, deep and calm like a night sea under a quay",
+        "weight": 0
+      },
+      {
+        "text": "viola over a soft drone, a Russian romance mood without a melody's ending",
+        "weight": 0
+      },
+      {
+        "text": "wordless choir far off, barely heard, calm",
+        "weight": 0
+      },
+      {
+        "text": "bowed vibraphone overlapping tones, dreamy stillness",
+        "weight": 0
+      }
+    ]
+  },
+  "state": {
+    "shown": 0,
+    "come": 0,
+    "camera_x": 0,
+    "season": "summer",
+    "snowing": 0,
+    "drizzle": 0
+  },
+  "states": {
+    "shown": {
+      "type": "number",
+      "means": "the chapter the player is at (0 the prologue … 6 the epilogue, 7 the finale): the view goes to its point c<i> (camera_x)"
+    },
+    "come": {
+      "type": "number",
+      "means": "each new value brings the view back to the chapter shown (camera_x), the player's drag with it"
+    },
+    "season": {
+      "values": [
+        "summer",
+        "autumn",
+        "winter",
+        "thaw"
+      ],
+      "means": "the season of the whole view: summer — a warm haze over the shore; autumn — torn clouds going over; winter — snow on the hills and the parapet, snow falling; thaw — wet stone, mist on the water, a fine drizzle (repainted once on a change)"
+    },
+    "snowing": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: the snow falling (the script, from season)"
+    },
+    "drizzle": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: the thaw's drizzle (the script, from season)"
+    }
+  },
+  "objects": [
+    {
+      "id": "sea",
+      "sky": true,
+      "name": "The night sea at Yalta",
+      "uniforms": {
+        "horizon": 0.34,
+        "foot": 0.9,
+        "moon_x": 0.3556
+      }
+    },
+    {
+      "id": "snowfall",
+      "name": "snow",
+      "particles": {
+        "kind": "snow",
+        "amount": "snowing",
+        "count": 2500
+      }
+    },
+    {
+      "id": "rainfall",
+      "name": "drizzle",
+      "particles": {
+        "kind": "rain",
+        "amount": "drizzle",
+        "count": 1200,
+        "opacity": 0.35
+      }
+    },
+    {
+      "id": "c0",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 0,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c1",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 5,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 10,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 15,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c4",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 20,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c5",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 25,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c6",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 30,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "c7",
+      "name": "Chapter",
+      "unseen": true,
+      "across": 35,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    },
+    {
+      "id": "author",
+      "name": "The author’s map",
+      "unseen": true,
+      "across": -3.2,
+      "distance": 10,
+      "elevation": 1.1,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ]
+    }
+  ]
+}

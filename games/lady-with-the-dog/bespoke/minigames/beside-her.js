@@ -16,7 +16,7 @@ const THERE = 0.95, STILL = 2, AFTER = 1.5; // at her hand; s without a move; s 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'Beside her',
+  title: tr('Beside her'),
   about: 12,
   skipped: { pulls: 0 },
   async run(g, b, opts, signal) {
