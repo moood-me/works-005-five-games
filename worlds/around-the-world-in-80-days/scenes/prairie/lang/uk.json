@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"Omaha","translation":"Омаха","where":"worlds/around-the-world-in-80-days/scenes/prairie/elements/depot.js"},
+  {"text":"Fort Kearney","translation":"Форт Керні","where":"worlds/around-the-world-in-80-days/scenes/prairie/elements/depot.js"},
+  {"text":"Union Pacific","translation":"Юніон Пасифік","where":"worlds/around-the-world-in-80-days/scenes/prairie/lib.js"},
+  {"text":"The prairie","translation":"Прерія","where":"worlds/around-the-world-in-80-days/scenes/prairie/scene.json title"},
+  {"text":"The winter plain of the West: the railway, a bridge over a gorge, Fort Kearney.","translation":"Зимова рівнина Заходу: залізниця, міст над ущелиною, форт Керні.","where":"worlds/around-the-world-in-80-days/scenes/prairie/scene.json caption"}
+]}
