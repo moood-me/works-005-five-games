@@ -61,9 +61,9 @@
       "id": "glint_l",
       "at": "anna#lorgnette",
       "color": "#fff6e0",
-      "strength": 0.6,
-      "reach": 0.5,
-      "glow": 0.28,
+      "strength": 1.2,
+      "reach": 0.6,
+      "glow": 0.45,
       "on": "glint"
     },
     {

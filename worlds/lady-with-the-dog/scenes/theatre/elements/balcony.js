@@ -14,7 +14,7 @@ for (let i = 0; i < 40; i++) {
 g.fillStyle = '#e2d4b8'; g.fillRect(-W, -1.05, 2 * W, 1.4);
 g.fillStyle = '#c4a463'; g.fillRect(-W, -1.08, 2 * W, 0.1); g.fillRect(-W, 0.22, 2 * W, 0.12);
 g.strokeStyle = '#b8955a'; g.lineWidth = 0.035;
-for (let x = -W + 0.5; x < W; x += 1.0) {
+for (let x = -W + 0.5; x < W - 1; x += 1.0) {
   g.beginPath(); g.moveTo(x, -0.8); g.quadraticCurveTo(x + 0.5, -0.35, x + 1.0, -0.8); g.stroke();
   g.fillStyle = '#c4a463'; g.beginPath(); g.arc(x, -0.82, 0.05, 0, Math.PI * 2); g.fill();
 }
