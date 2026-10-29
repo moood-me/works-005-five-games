@@ -1,0 +1,16 @@
+{"strings": [
+  {"text":"London","translation":"Лондан","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Suez","translation":"Суэц","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Bombay","translation":"Бамбей","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Calcutta","translation":"Калькута","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Hong Kong","translation":"Ганконг","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Yokohama","translation":"Іакагама","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"San Francisco","translation":"Сан-Францыска","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"New York","translation":"Нью-Ёрк","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Liverpool","translation":"Ліверпуль","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Atlantic Ocean","translation":"Атлантычны акіян","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Indian Ocean","translation":"Індыйскі акіян","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Pacific Ocean","translation":"Ціхі акіян","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"+1 day","translation":"+1 дзень","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"The route","translation":"Маршрут","where":"worlds/around-the-world-in-80-days/scenes/route/scene.json title"}
+]}

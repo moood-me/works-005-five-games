@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"SOLD OUT","translation":"МЕСЦАЎ НЯМА","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"DEMOLITION","translation":"ЗНОС —","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"SATURDAY","translation":"У СУБОТУ","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"The Square","translation":"Плошча","where":"worlds/cinema-paradiso/scenes/main/scene.json title"},
+  {"text":"Giancaldo. The Paradiso's square","translation":"Джанкальда. Плошча «Парадыза»","where":"worlds/cinema-paradiso/scenes/main/scene.json caption"}
+]}
