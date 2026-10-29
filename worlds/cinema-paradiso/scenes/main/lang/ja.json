@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"SOLD OUT","translation":"満員","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"DEMOLITION","translation":"取り壊し","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"SATURDAY","translation":"土曜日","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"The Square","translation":"広場","where":"worlds/cinema-paradiso/scenes/main/scene.json title"},
+  {"text":"Giancaldo. The Paradiso's square","translation":"ジャンカルド。パラダイス座の広場","where":"worlds/cinema-paradiso/scenes/main/scene.json caption"}
+]}
