@@ -103,7 +103,7 @@ export default {
       const r = await g.play(lorgnette);
       g.set('pass', 7);
       g.set('look_at', '');
-      g.set('stranger_turn', 1);
+      g.set('stranger_turned', 1);
       g.set('surge', 1);
       g.set('fright', r.stranger ? 1 : 0);
       g.sound.clink();
