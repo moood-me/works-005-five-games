@@ -89,7 +89,8 @@ function bareTree(g, h, season, seed, birch) {
 
 // ── the shots: place x, z (metres), the eye's height, yaw (right of straight ahead), pitch (up) ──
 const cam = (x, z, eye, yaw = 0, pitch = 0) => ({ camera_target: null, camera_shot: null, camera_frame: null,
-  camera_x: x, camera_z: z, camera_h: eye - 1.7, camera_yaw: yaw, camera_pitch: pitch, camera_roll: 0, camera_look: 0 });
+  camera_x: x, camera_z: z, camera_h: eye - 1.7, camera_yaw: yaw, camera_pitch: pitch, camera_roll: 0, camera_look: 0,
+  spitz_face: (yaw + 180) % 360 });                    // the spitz's card turned to the shot's camera (spitz.md)
 const CAM = {
   FENCE: cam(0, 0, 1.7),                 // the fence across the view: Gurov 0.29 of the frame, p1…p5 in the 4:3 window
   GATE: cam(-1.05, -0.5, 1.7, 0, 0),     // a little back and left: the corner (x −5) and the gate both in the 4:3 window
@@ -134,7 +135,7 @@ function film(scene) {
     ...hidden('diderits'), diderits_a: IN_GATE[0], diderits_d: IN_GATE[1] + 0.6, diderits_turn: 180,
     ...hidden('maid'), maid_a: MAID_PORCH[0], maid_d: MAID_PORCH[1], maid_turn: 180,
     ...hidden('cabman'), cabman_a: CABMAN[0], cabman_d: CABMAN[1], cabman_turn: 90, cab: 0,
-    spitz_here: 0, spitz_a: DOG_PORCH[0], spitz_d: DOG_PORCH[1], spitz_e: 0, spitz_view: 'side', spitz_dir: 1, spitz_do: 'stand', spitz_look: null,
+    spitz_here: 0, spitz_a: DOG_PORCH[0], spitz_d: DOG_PORCH[1], spitz_e: 0, spitz_view: 'side', spitz_dir: 0, spitz_do: 'stand', spitz_look: null,
     spitz_old: 0, leash: 'none',
     ...extra,
   });
@@ -156,7 +157,7 @@ function film(scene) {
     const u = on('under') ? 0.6 : 0.15;
     return base({ ...GREY_DAY, ...CAM.GATE, window: 1, gurov_at: u,
       ...at('gurov', [gurovX(u), GUROV_Z], on('under') ? 90 : 60, { gurov_wear: C().gurov_winter, gurov_mood: 'tired', gurov_look: [GATE.mid, FENCE_Z, 1.2] }),
-      ...at('maid', IN_GATE, 180), ...dog([IN_GATE[0] - 0.3, IN_GATE[1] - 0.6], { spitz_old: 1, spitz_dir: -1 }), leash: 'maid#hand_r', ...lead('maid') });
+      ...at('maid', IN_GATE, 180), ...dog([IN_GATE[0] - 0.3, IN_GATE[1] - 0.6], { spitz_old: 1 }), leash: 'maid#hand_r', ...lead('maid') });
   };
 
   return {
@@ -165,7 +166,7 @@ function film(scene) {
     autumn_walk: {
       from: () => base({ ...AUTUMN_DUSK, ...CAM.WALK, window: 1,
         ...at('anna', IN_GATE, 180, { anna_wear: C().anna_autumn, anna_mood: 'sad' }),
-        ...dog([IN_GATE[0] + 0.45, IN_GATE[1] - 0.6], { spitz_dir: 1 }), leash: 'anna#hand_l', ...lead('anna') }),
+        ...dog([IN_GATE[0] + 0.45, IN_GATE[1] - 0.6], {}), leash: 'anna#hand_l', ...lead('anna') }),
       run: async s => {
         const anna = s.person('anna');
         await s.move('gate', 1, { over: 1.1, ease: 'inOut' });
@@ -202,7 +203,7 @@ function film(scene) {
       after: 'autumn_walk',
       from: () => base({ ...AUTUMN_DUSK, ...CAM.WALK, window: 1,
         ...at('anna', [GATE.mid - 0.2, ANNA_Z], 30, { anna_wear: C().anna_autumn, anna_mood: 'sad' }),
-        ...dog([GATE.mid + 0.9, ANNA_Z - 0.3], { spitz_dir: 1 }), leash: 'anna#hand_l', ...lead('anna', 0) }),
+        ...dog([GATE.mid + 0.9, ANNA_Z - 0.3], {}), leash: 'anna#hand_l', ...lead('anna', 0) }),
       run: async s => {
         const anna = s.person('anna'), d = s.person('diderits');
         s.set('dog_follow', 1);
@@ -293,7 +294,7 @@ function film(scene) {
         await g.turn(90);
         g.look('spitz');
         g.do('beckon_low');
-        s.set('spitz_do', 'run'); s.set('spitz_dir', -1); s.set('spitz_look', 'gurov');
+        s.set('spitz_do', 'run'); s.set('spitz_look', 'gurov');
         const gx = s.state.gurov_a, mx = s.state.maid_a;
         await s.all(s.path(['spitz_a', 'spitz_d'], [[gx + 0.35, 6.25]], { speed: 3.2 }),
           (async () => { await s.wait(0.3); await maid.walk([[mx - 0.6, 6.15]]); })());
@@ -316,12 +317,12 @@ function film(scene) {
         await g.turn(90);
         g.look('spitz');
         g.do('beckon_low');
-        s.set('spitz_do', 'bark'); s.set('spitz_look', 'gurov'); s.set('spitz_dir', -1);
+        s.set('spitz_do', 'bark'); s.set('spitz_look', 'gurov'); s.set('spitz_dir', s.state.gurov_a < s.state.spitz_a ? -1 : 1);
         await s.wait(1.2);
         await s.path(['spitz_a', 'spitz_d'], [[s.state.maid_a + 0.3, 6.0]], { speed: 1.2 });
         maid.look('gurov'); maid.mood('afraid');
         await s.wait(1.4);
-        s.set('spitz_do', 'stand'); s.set('spitz_dir', 1);
+        s.set('spitz_do', 'stand'); s.set('spitz_dir', 0);
         maid.look(null);
         s.set('dog_follow', 1); s.set('dog_lead', 'maid');
         await maid.walk([[GATE.mid, 6.4], IN_GATE]);
@@ -342,7 +343,7 @@ function film(scene) {
         await g.walk([[CORNER_X - 0.5, GUROV_Z], LANE]);
         await g.turn(120);
         g.look('maid');
-        s.set('spitz_do', 'stand'); s.set('spitz_dir', -1);
+        s.set('spitz_do', 'stand');
         s.set('dog_follow', 1); s.set('dog_lead', 'maid');
         maid.mood(null);
         await maid.walk([[CORNER_X + 1.3, 6.15]]);
@@ -482,7 +483,7 @@ function film(scene) {
         anna.with(['bag']);
         const goes = anna.walk([[3.6, 5.6], [6.5, 4.6]]);
         await s.wait(1.4);
-        s.set('spitz_do', 'run'); s.set('spitz_look', 'anna'); s.set('spitz_dir', -1);
+        s.set('spitz_do', 'run'); s.set('spitz_look', 'anna');
         await s.path(['spitz_a', 'spitz_d'], [[2.6, 10.6]], { speed: 2.2 });
         s.set('spitz_do', 'up');
         d.look('spitz');
@@ -501,7 +502,7 @@ function film(scene) {
         const knows = on('husband_knows');
         return base({ ...EVENING(), window: knows ? 0 : 1, gate: knows ? 1 : 0,
           ...at('diderits', knows ? [GATE.mid + 0.15, 6.6] : [gurovX(0.75), 6.3], knows ? 200 : 270, { diderits_wear: C().diderits_coat }),
-          ...dog(knows ? [GATE.mid - 0.5, 6.0] : [gurovX(0.75) - 1.3, 6.1], { spitz_old: 1, spitz_dir: -1, spitz_do: knows ? 'sit' : 'stand' }),
+          ...dog(knows ? [GATE.mid - 0.5, 6.0] : [gurovX(0.75) - 1.3, 6.1], { spitz_old: 1, spitz_do: knows ? 'sit' : 'stand' }),
           leash: 'diderits#hand_r', ...lead('diderits') });
       },
       run: async s => {

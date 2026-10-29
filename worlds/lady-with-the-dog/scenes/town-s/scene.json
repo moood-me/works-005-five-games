@@ -700,7 +700,8 @@
       "place": {
         "across": "spitz_a",
         "distance": "spitz_d",
-        "elevation": "spitz_e"
+        "elevation": "spitz_e",
+        "facing": "spitz_face"
       },
       "height": 0.45,
       "box": [
@@ -835,7 +836,8 @@
     "spitz_d": 12.15,
     "spitz_e": 0,
     "spitz_view": "side",
-    "spitz_dir": 1,
+    "spitz_dir": 0,
+    "spitz_face": 180,
     "spitz_do": "stand",
     "spitz_old": 1,
     "leash": "none"
@@ -1086,9 +1088,17 @@
     "spitz_dir": {
       "values": [
         -1,
+        0,
         1
       ],
-      "means": "the spitz faces right (1) or left (−1)"
+      "means": "the spitz faces right (1) or left (−1) as seen, held; 0 — the way it goes"
+    },
+    "spitz_face": {
+      "range": [
+        0,
+        360
+      ],
+      "means": "the spitz card’s facing: toward the shot’s camera (set with each shot)"
     },
     "spitz_do": {
       "values": [
