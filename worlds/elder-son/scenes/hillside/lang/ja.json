@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"Railwaymen's Club","translation":"鉄道員クラブ","where":"worlds/elder-son/scenes/hillside/elements/club_sign.js"},
+  {"text":"The Hillside","translation":"丘の斜面","where":"worlds/elder-son/scenes/hillside/scene.json title"},
+  {"text":"The cemetery on the hillside beyond the settlement. Dusk.","translation":"町はずれの丘の斜面にある墓地。夕暮れ。","where":"worlds/elder-son/scenes/hillside/scene.json caption"},
+  {"text":"he fell on the ice, he almost saw them","translation":"氷の上で転んで、もう少しで彼らが見えるところだった","where":"worlds/elder-son/scenes/hillside/showcase.js"}
+]}

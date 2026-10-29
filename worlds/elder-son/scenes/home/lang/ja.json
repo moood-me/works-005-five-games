@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Sarafanovs' Home","translation":"サラファーノフ家","where":"worlds/elder-son/scenes/home/scene.json title"},
+  {"text":"The kitchen under an orange lampshade.","translation":"オレンジ色のランプシェードの下の台所。","where":"worlds/elder-son/scenes/home/scene.json caption"}
+]}
