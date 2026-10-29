@@ -9,7 +9,7 @@ for (let row = 2; row >= 0; row--) {
   const base = -row * 2.2;
   let k = row;
   for (let x = -40; x < 40; x += 4 + rnd() * 5) {
-    const w = 4 + rnd() * 6, h = 7 + rnd() * 6 + row * 2;
+    const w = Math.min(4 + rnd() * 6, 40 - x), h = 7 + rnd() * 6 + row * 2;
     g.fillStyle = tones[k++ % tones.length];
     g.fillRect(x, base - h, w, h);
     g.fillStyle = 'rgba(54,64,76,0.6)';

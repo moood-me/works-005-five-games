@@ -71,8 +71,8 @@
       "of": "lamp:0#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -80,8 +80,8 @@
       "of": "lamp:1#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -89,8 +89,8 @@
       "of": "lamp:2#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -98,8 +98,8 @@
       "of": "lamp:3#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -107,8 +107,8 @@
       "of": "lamp:4#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -116,8 +116,8 @@
       "of": "lamp:5#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -125,8 +125,8 @@
       "of": "lamp:6#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -134,8 +134,8 @@
       "of": "lamp2#flame",
       "on": "lamps",
       "color": "#ffd08a",
-      "strength": 1.5,
-      "reach": 9,
+      "strength": 1.15,
+      "reach": 8,
       "glow": 0.4
     },
     {
@@ -143,8 +143,8 @@
       "of": "house#lamp",
       "on": "porch_lamp",
       "color": "#ffd59a",
-      "strength": 1.6,
-      "reach": 6,
+      "strength": 1.3,
+      "reach": 5,
       "glow": 0.3
     },
     {
@@ -256,11 +256,11 @@
       "across": 0,
       "distance": 75,
       "facing": 180,
-      "height": 34,
+      "height": 35,
       "box": [
-        -40.5,
-        -34,
-        40.5,
+        -40.6,
+        -35,
+        40.6,
         0.5
       ]
     },
@@ -272,10 +272,10 @@
       "facing": 270,
       "height": 14.5,
       "box": [
-        -17.5,
+        -16.6,
         -14.5,
-        17.5,
-        0.1
+        16.6,
+        0.2
       ]
     },
     {
@@ -286,10 +286,10 @@
       "facing": 90,
       "height": 14.5,
       "box": [
-        -17.5,
+        -16.6,
         -14.5,
-        17.5,
-        0.1
+        16.6,
+        0.2
       ]
     },
     {
@@ -300,10 +300,10 @@
       "facing": 270,
       "height": 12.4,
       "box": [
-        -9.3,
+        -9.6,
         -12.4,
-        9.3,
-        0.1
+        9.6,
+        0.7
       ]
     },
     {
@@ -326,12 +326,12 @@
       "name": "limes",
       "across": 0,
       "distance": 0,
-      "height": 10.4,
+      "height": 10.6,
       "box": [
-        -3.4,
-        -10.4,
-        3.4,
-        0.1
+        -4.6,
+        -10.6,
+        4.6,
+        0.2
       ],
       "copies": [
         {
@@ -370,10 +370,10 @@
       "facing": 270,
       "height": 10.6,
       "box": [
-        -5.7,
+        -5.9,
         -10.6,
-        5.7,
-        0.1
+        6.1,
+        0.2
       ]
     },
     {
@@ -560,12 +560,12 @@
       "across": 3.6,
       "distance": 24.2,
       "facing": 270,
-      "height": 13.8,
+      "height": 14.1,
       "box": [
-        -6.1,
-        -13.8,
-        6.1,
-        0.1
+        -6.3,
+        -14.1,
+        6.3,
+        0.2
       ]
     },
     {
@@ -606,12 +606,12 @@
       "across": -5.4,
       "distance": 2.5,
       "facing": 90,
-      "height": 8.4,
+      "height": 9.4,
       "box": [
-        -8.8,
-        -8.4,
-        8.8,
-        0.1
+        -9,
+        -9.4,
+        9.2,
+        0.2
       ]
     },
     {
@@ -622,10 +622,10 @@
       "facing": 90,
       "height": 9.9,
       "box": [
-        -3.3,
+        -3.5,
         -9.9,
-        3.3,
-        0.1
+        3.5,
+        0.2
       ]
     },
     {
@@ -652,11 +652,11 @@
       "across": -6.4,
       "distance": 15.6,
       "facing": 90,
-      "height": 2.65,
+      "height": 2.7,
       "box": [
-        -1.05,
-        -2.65,
-        1.05,
+        -1.1,
+        -2.7,
+        1.2,
         0.05
       ],
       "glows": true
@@ -689,10 +689,10 @@
       "facing": 90,
       "height": 12.3,
       "box": [
-        -6.3,
+        -6.5,
         -12.3,
-        6.3,
-        0.1
+        6.5,
+        0.2
       ]
     },
     {
@@ -1763,10 +1763,6 @@
         1
       ],
       "means": "the play’s: Anna held out till the spring — the thaw instead of the snow (home_late, wife_lie, wife_truth, school, walk_hand, gate_school, red_cap, porch_end)"
-    },
-    "gurov_look": {
-      "type": "string",
-      "means": "what Gurov looks at (a point; in “The shadow” the game sets it to the woman he looks hard at); null — ahead"
     },
     "gurov_a": {
       "range": [

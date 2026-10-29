@@ -8,7 +8,7 @@ const kinds = [
   { color: '#d2c3b0', h: 6.2, floors: [{ y0: 3.0, y1: 1.4, w: 0.9, xs: [-3, -1.5, 1.5, 3] }] },
 ];
 let k = e.id === 'row_far_l' ? 1 : 0;
-for (let x = -17; x < 17; x += 8) {
+for (let x = -16; x < 16; x += 8) {
   const o = kinds[k++ % kinds.length];
   g.save();
   g.translate(x + 4, 0);
