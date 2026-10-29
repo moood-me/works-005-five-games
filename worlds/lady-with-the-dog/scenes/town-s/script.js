@@ -35,7 +35,8 @@ const gurovAt = () => scene.set('gurov_at', L.gurovAt(num('gurov_a')));
 scene.on('move', 'gurov_a', gurovAt);
 scene.on('change', 'gurov_a', gurovAt);
 
-// the spitz ahead of whoever leads it, a little to the street's side, as they walk; trotting while they go
+// the spitz ahead of whoever leads it, a little to the street's side, as they walk (its legs step by its own speed,
+// it faces the way it goes — the module's)
 const last = {};
 function follow(who) {
   if (num('dog_follow') < 0.5 || scene.get('dog_lead') !== who) return;
@@ -49,14 +50,10 @@ function follow(who) {
   if (pd > 0) { px = -px; pd = -pd; }
   scene.set('spitz_a', a + ux * 1.1 + px);
   scene.set('spitz_d', d + ud * 1.1 + pd);
-  if (Math.abs(ux) > 0.3) scene.set('spitz_dir', ux > 0 ? 1 : -1);
-  if (scene.get('spitz_do') === 'stand' || scene.get('spitz_do') === 'sniff' || scene.get('spitz_do') === 'sit') scene.set('spitz_do', 'trot');
+  if (scene.get('spitz_do') === 'sniff' || scene.get('spitz_do') === 'sit') scene.set('spitz_do', 'stand');
 }
 for (const who of ['anna', 'maid', 'diderits']) {
   scene.on('move', `${who}_a`, () => follow(who));
   scene.on('move', `${who}_d`, () => follow(who));
 }
-scene.on('arrived', ev => {
-  if (num('dog_follow') > 0.5 && ev.who === scene.get('dog_lead') && scene.get('spitz_do') === 'trot') scene.set('spitz_do', 'stand');
-  delete last[ev.who];
-});
+scene.on('arrived', ev => { delete last[ev.who]; });
