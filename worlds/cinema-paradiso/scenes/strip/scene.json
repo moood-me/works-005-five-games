@@ -172,5 +172,85 @@
         0
       ]
     }
-  ]
+  ],
+  "music": {
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.35,
+    "scale": "E_MAJOR_D_FLAT_MINOR",
+    "prompts": [
+      {
+        "text": "distant cicadas of a Sicilian summer night, very faint",
+        "weight": 0.3
+      },
+      {
+        "text": "soft warm drone, slow and sparse, a little wind, nostalgic, no rhythm",
+        "weight": 0.5
+      },
+      {
+        "text": "a film projector clattering softly in a dark booth, its lamp humming, no melody",
+        "weight": 1.1
+      },
+      {
+        "text": "a dark small-town cinema hall at night, a film projector clattering softly behind the wall, no melody",
+        "weight": 0
+      },
+      {
+        "text": "muffled 1950s Italian film soundtrack heard through a wall, strings far away, warm and blurred",
+        "weight": 0.7
+      },
+      {
+        "text": "a crowd in a cinema laughing and murmuring, far off, warm",
+        "weight": 0
+      },
+      {
+        "text": "an empty ruined hall, wind through a hole in the roof, pigeons cooing, cold, no melody",
+        "weight": 0
+      },
+      {
+        "text": "a soft celesta motif of five slow notes, nostalgic, Sicilian, very sparse",
+        "weight": 0
+      },
+      {
+        "text": "warm analog tape hiss and a low drone, still and tender",
+        "weight": 0
+      },
+      {
+        "text": "a tiny hand bell ringing in a quiet room, then silence",
+        "weight": 0
+      },
+      {
+        "text": "a cinema crowd whistling and stamping in the dark, far off",
+        "weight": 0
+      },
+      {
+        "text": "dust and silence in an old theatre, a creaking seat, distant street",
+        "weight": 0
+      },
+      {
+        "text": "gentle strings, bright sadness, slow, no percussion, Morricone-like texture without melody",
+        "weight": 0
+      },
+      {
+        "text": "mandolin tremolo far away, nostalgic, very quiet",
+        "weight": 0
+      },
+      {
+        "text": "film reel flapping at the end, projector motor humming",
+        "weight": 0
+      },
+      {
+        "text": "rain dripping inside a ruined building, cold evening",
+        "weight": 0
+      },
+      {
+        "text": "summer night outside a cinema, cicadas through an open door",
+        "weight": 0
+      },
+      {
+        "text": "low cello drone, solemn, an old church nearby",
+        "weight": 0
+      }
+    ]
+  }
 }

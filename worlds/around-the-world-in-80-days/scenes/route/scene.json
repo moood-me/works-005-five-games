@@ -179,5 +179,93 @@
         0
       ]
     }
-  ]
+  ],
+  "music": {
+    "bpm": 72,
+    "density": 0.3,
+    "brightness": 0.5,
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "prompts": [
+      {
+        "text": "Light orchestral travel music in the Victorian manner, strings and woodwinds, a red line drawn across an old map of the world",
+        "weight": 1.1
+      },
+      {
+        "text": "Sparse solo piano in a large quiet room, slow single notes falling like the tick of a clock, warm hall reverb, late evening, restrained and precise",
+        "weight": 0.4
+      },
+      {
+        "text": "Pizzicato strings ticking in strict tempo like clockwork, light chamber orchestra, curious, poised, understated anticipation",
+        "weight": 0.9
+      },
+      {
+        "text": "Soft sustained low strings and a distant fog-like drone, minimalist ambient, deep space and stillness",
+        "weight": 0
+      },
+      {
+        "text": "Celesta and harp in delicate interlocking arpeggios, music-box precision, quiet wonder",
+        "weight": 0.5
+      },
+      {
+        "text": "Minimalist repeating piano patterns in the manner of modern indie game scores, cool and luminous, slowly evolving",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello, long bowed notes, melancholic and dignified, gaslit London night",
+        "weight": 0
+      },
+      {
+        "text": "Light orchestral adventure theme, brisk strings and woodwinds in the rhythm of a steam train, 1870s optimism",
+        "weight": 0
+      },
+      {
+        "text": "Muted marimba and woodblock ticking against a metronome, playful clockwork, dry and close",
+        "weight": 0
+      },
+      {
+        "text": "String quartet playing a slow aristocratic waltz in a gentlemen's club, muted, far away behind closed doors",
+        "weight": 0
+      },
+      {
+        "text": "Cold ambient synth pads and soft noise like fog against glass, modern atmospheric game soundtrack",
+        "weight": 0
+      },
+      {
+        "text": "Distant brass chorale, solemn and warm, heard through fog across a city square",
+        "weight": 0
+      },
+      {
+        "text": "Harpsichord and bassoon in crisp baroque counterpoint, exact, a little ironic",
+        "weight": 0
+      },
+      {
+        "text": "Low timpani pulse like a slow heartbeat under thin high strings, tension of a countdown",
+        "weight": 0
+      },
+      {
+        "text": "Glass harmonica and bowed vibraphone shimmering, ethereal, suspended time",
+        "weight": 0
+      },
+      {
+        "text": "Clarinet melody over soft pizzicato bass, gentle wit, Victorian parlour",
+        "weight": 0
+      },
+      {
+        "text": "Warm crackling-fire mood: felt piano, soft upright bass, slow and intimate",
+        "weight": 0
+      },
+      {
+        "text": "Full orchestra swelling to a bright triumphant arrival, horns and strings, the door flung open",
+        "weight": 0
+      },
+      {
+        "text": "Solo music box slowing down, a mechanism winding to a stop, fragile",
+        "weight": 0
+      },
+      {
+        "text": "Accordion and strings, faint street music from outside, a waiting crowd in the fog",
+        "weight": 0
+      }
+    ]
+  }
 }
