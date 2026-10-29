@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"Railwaymen's Club","translation":"Eisenbahnerklub","where":"worlds/elder-son/scenes/hillside/elements/club_sign.js"},
+  {"text":"The Hillside","translation":"Der Hang","where":"worlds/elder-son/scenes/hillside/scene.json title"},
+  {"text":"The cemetery on the hillside beyond the settlement. Dusk.","translation":"Der Friedhof am Hang hinter der Siedlung. Dämmerung.","where":"worlds/elder-son/scenes/hillside/scene.json caption"},
+  {"text":"he fell on the ice, he almost saw them","translation":"er ist auf dem Eis gestürzt, er hat sie fast gesehen","where":"worlds/elder-son/scenes/hillside/showcase.js"}
+]}

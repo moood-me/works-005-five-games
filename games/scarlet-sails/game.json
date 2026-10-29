@@ -10,5 +10,5 @@
     "immersion": 60
   },
   "world": "../../worlds/scarlet-sails",
-  "languages": ["en", "ru", "uk"]
+  "languages": ["en", "ru", "uk", "de"]
 }

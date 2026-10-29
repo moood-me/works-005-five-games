@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"Scarlet Sails v3","translation":"Das Purpursegel v3","where":"worlds/scarlet-sails/world.json title"},
+  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"Das Purpursegel auf Engine 3: die Szenen von Engine 2 herübergebracht.","where":"worlds/scarlet-sails/world.json description"}
+]}

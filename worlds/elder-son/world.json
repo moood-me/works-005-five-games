@@ -6,5 +6,5 @@
     "night": 40
   },
   "main": "platform",
-  "languages": ["en", "ru", "uk"]
+  "languages": ["en", "ru", "uk", "de"]
 }

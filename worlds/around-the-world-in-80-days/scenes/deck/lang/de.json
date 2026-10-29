@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"NOVEMBER","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"MITTWOCH","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"Das Deck","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"Das Deck eines Dampfers an der Reling: das Meer, Rauch aus dem Schornstein, ein Hafen am Horizont.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}
