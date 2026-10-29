@@ -22,8 +22,10 @@ keep(['steamer'], () => {
 const COAX = ['coax', 'coax_hold', 'finger', 'pat'];
 keep(['spitz_near'], () => {
   if (!COAX.includes(beat())) return;
-  const [a, d] = L.dogNear(Number(scene.get('spitz_near')) || 0);
-  scene.set('spitz_a', a); scene.set('spitz_d', d);
+  const p = L.dogNear(Number(scene.get('spitz_near')) || 0);
+  scene.set('spitz_a', p[0]); scene.set('spitz_d', p[1]);
+  // he watches it come (his look at its place, never at its points: spitz.md)
+  if (beat() === 'coax') scene.set('gurov_look', L.dogAt(p));
 });
 keep(['hand'], () => {
   if (!COAX.includes(beat())) return;

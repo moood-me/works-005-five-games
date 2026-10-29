@@ -264,7 +264,7 @@ function seaMotion(e) {
 // the bulwark open where the gangway goes; the deckhouse, funnel and masts behind, its lights
 function hull(g) {
   g.fillStyle = '#26292e';
-  g.beginPath(); g.moveTo(-25.5, 0.2); g.lineTo(23, 0.2); g.quadraticCurveTo(26.5, -1.6, 27.5, -3.4); g.lineTo(-26, -3.4); g.quadraticCurveTo(-26.6, -1.5, -25.5, 0.2); g.closePath(); g.fill();
+  g.beginPath(); g.moveTo(-25.5, 0.2); g.lineTo(23, 0.2); g.quadraticCurveTo(26.0, -0.9, 26.6, -1.62); g.lineTo(-26, -1.62); g.quadraticCurveTo(-26.4, -0.8, -25.5, 0.2); g.closePath(); g.fill();
   // the white side up to the deck (2.1 over the water); above it an open rail — those on deck seen whole through it
   g.fillStyle = '#efede6';
   g.beginPath(); g.moveTo(-26, -1.6); g.lineTo(26.6, -1.6); g.lineTo(27.1, -2.25); g.lineTo(-26, -2.25); g.closePath(); g.fill();
@@ -338,7 +338,7 @@ const CAM = {
                                             // the bright front, small, the lady goes off to the left
   GARDEN: cam(22.85, 1.45, 1.1, 0),         // the gardens: the two at their tables side by side, 3 m off, the eye low (at
                                             // the faces' height, under a hat's brim); the dog between them; the sea behind
-  TALK: cam(22.85, 2.2, 1.5, 0, -7),        // closer, medium: both in three-quarters, talking across the gap
+  TALK: cam(22.85, 2.55, 1.25, 0),          // closer, medium: both in three-quarters, talking across the gap
   QUAY: cam(1.5, 2.8, 1.6, 0),              // side on along the parapet: those walking cross the frame ≈ 4.7 m off
   PIER: cam(-30.4, 12.0, 1.7, -6),          // on the pier's neck looking out: the two near, the crowd on the head, the steamer
   GANGWAY: cam(-31.7, 19.6, 1.55, -25),     // over Anna's shoulder to the gangway's foot (5.4 m): the arrivals a third
@@ -381,6 +381,8 @@ function beside(pts, from, ahead, side) {
 const DOG_CHAIR = [23.45, 4.2], DOG_KNEE = [22.3, 4.05];
 const dogNear = k => [mix(DOG_CHAIR[0], DOG_KNEE[0], clamp(k, 0, 1)), mix(DOG_CHAIR[1], DOG_KNEE[1], clamp(k, 0, 1))];
 // his right hand lowered toward the dog (`hand` 0…1: from by his knee to low before its muzzle)
+// (a person looking at the dog where it stands in the gardens: a little above its head, so the face is not bowed away)
+const dogAt = p => [p[0], p[1], 0.6];
 const handAt = k => [mix(22.0, 22.25, k), mix(4.15, 4.0, k), mix(0.62, 0.22, clamp(k, 0, 1))];
 // the avenue: where the walkers come out (behind the hedge at its far end) and go (behind the camera)
 const ALLEY_FAR = [[32.6, 8.25], [33.3, 6.9]], ALLEY_NEAR = [[33.2, -0.5], [29.0, -1.8]];   // off to the left, out of every frame
@@ -412,7 +414,7 @@ function film(scene) {
   });
   // the dog come to his knee, he turned to it (after «Coax»)
   const COAXED = extra => GARDEN_SAT({ spitz_near: 1, ...at('spitz', dogNear(1)), spitz_do: 'stand', spitz_look: 'gurov',
-    gurov_turn: 130, gurov_look: 'spitz', anna_turn: 215, anna_look: 'spitz', ...extra });
+    gurov_turn: 130, gurov_look: dogAt(dogNear(1)), anna_turn: 215, anna_look: dogAt(dogNear(1)), ...extra });
   // the night walk: the two by the parapet, the dog ahead on the leash
   const WALK = { anna: [4.5, 7.35], gurov: [5.1, 7.95] };
   // the pier, the evening of the holiday: the wind, the crowd, the steamer turning in
@@ -472,7 +474,7 @@ function film(scene) {
         const anna = s.person('anna');
         s.set('spitz_dir', 0);
         s.set('spitz_look', [CAM.NOON.camera_x, CAM.NOON.camera_z, 1.6]);
-        anna.look('spitz');
+        anna.look(kit.spitz.at(s.state));
         await s.wait(1.2);
         s.set('spitz_look', null);
         s.set('spitz_do', 'stand');
@@ -546,7 +548,7 @@ function film(scene) {
         s.set('spitz_do', 'stand');
         s.set('spitz_look', 'gurov');
         await s.wait(0.6);
-        s.person('gurov').look('spitz');
+        s.person('gurov').look(dogAt(dogNear(s.state.spitz_near)));
         await s.person('gurov').turn(130);
         await s.wait(0.6);
       },
@@ -558,7 +560,7 @@ function film(scene) {
       from: () => COAXED({}),
       run: async s => {
         const anna = s.person('anna'), gurov = s.person('gurov');
-        anna.look('spitz');
+        anna.look(dogAt(dogNear(s.state.spitz_near)));
         anna.turn(225);
         if (Number(s.state.trust) > 0.5) {
           s.set('hand', 1);
@@ -611,7 +613,7 @@ function film(scene) {
         s.set('spitz_do', 'stand');
         s.set('spitz_look', 'gurov');
         const pat = gurov.do('pat_low');
-        gurov.reach({ r: 'spitz#back' });
+        gurov.reach({ r: kit.spitz.at(s.state, 'back', 0.05) });
         await s.wait(1.4);
         s.set('spitz_do', 'sit');
         s.tell('pat:sits');
@@ -626,16 +628,16 @@ function film(scene) {
     // they talk across the gap (his little smile); a waiter goes by behind them
     talk: {
       after: ['finger', 'pat'],
-      from: () => COAXED({ ...CAM.TALK, anna_turn: 225, gurov_turn: 150, gurov_look: 'anna' }),
+      from: () => COAXED({ ...CAM.TALK, anna_turn: 218, gurov_turn: 162, gurov_look: 'anna', anna_look: 'gurov' }),
       run: async s => {
         const anna = s.person('anna'), gurov = s.person('gurov'), waiter = s.person('waiter');
         const close = s.shot({ ...CAM.TALK, spitz_face: facingTo(CAM.TALK) });
         await s.until(() => close.ready);
         close.cut();
-        anna.turn(232);
+        anna.turn(218);
         anna.look('gurov');
         anna.mood(null);
-        gurov.turn(150);
+        gurov.turn(162);
         gurov.look('anna');
         gurov.mood('smile');
         s.set('spitz_look', null);
@@ -858,6 +860,6 @@ return {
   ground, SKY, hourOf, steamerAt, slabs, gravel, parapet, lamp, acacia, cypress, tableTop, tableFoot, chair, bench, hedge,
   planks, railing, kiosk, awning, valance, post, boards, capes, sea, seaMotion, hull, deckhouse, gangwayPlank, crowd, crowdLive, CROWD,
   LEAVE_FROM, LEAVE,
-  cam, CAM, facingTo, PEOPLE, ARRIVALS, WITH, ON_DECK, MET, FOOT, OFF_PIER, beside, DOG_CHAIR, DOG_KNEE, dogNear, handAt,
+  cam, CAM, facingTo, dogAt, PEOPLE, ARRIVALS, WITH, ON_DECK, MET, FOOT, OFF_PIER, beside, DOG_CHAIR, DOG_KNEE, dogNear, handAt,
   ALLEY_FAR, ALLEY_NEAR, ALLEY_SEEN, BENCH, film,
 };

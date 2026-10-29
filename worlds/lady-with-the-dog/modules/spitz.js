@@ -250,4 +250,14 @@ function live(e) {
   }
 }
 
-return { paint, live, LEASH };
+// Where a person looks or reaches at the dog: a point of the world by its place keys (`state` — the scene's values or a
+// beat's), `part` 'head' (its muzzle, by its pose) or 'back' (where it is patted), `up` metres more. Not its element's
+// points: the dog reads people's points (the leash to a hand, its look), so if people read its points the engine has to
+// move it before them, and its leash trails a step behind the hand (the engine says so in the render's warnings).
+function at(state, part = 'head', up = 0) {
+  const act = state.spitz_do || 'stand', P = pose(act);
+  const h = part === 'back' ? -(P.body[1] - P.body[3]) : -P.head[1];
+  return [num(state.spitz_a), num(state.spitz_d), num(state.spitz_e) + h + up];
+}
+
+return { paint, live, at, LEASH };

@@ -37,6 +37,15 @@ business, not the module's.
 `spitz#collar`, `spitz#back` (where it is patted). Marked by `live` every frame, where the mirror and the head's turn
 have them.
 
+## People looking at it, reaching for it
+
+**Never aim a person's `look`, `reach` or `on` at the dog's points** (`spitz`, `spitz#head`, `spitz#back`): the dog
+reads people's points (its leash goes to a hand, its look to someone), and a point people read makes the engine move
+the dog before them — then the leash is drawn where the hand was the step before (the render warns: "people read a
+point of it … that is where they were the step before"). Aim them at its place: `kit.spitz.at(state, 'head' | 'back',
+up?)` → `[across, distance, elevation]` from `spitz_a/d/e` and its pose (in a beat's `from`, in a run with `s.state`;
+as the dog moves, set it again — a scene's script on `spitz_a`'s `move`). The game's marks may stay on its points.
+
 ## The leash
 
 Four straps (layers `leash0…3`), laid every frame from the collar to the hand: 2 m long; nearer than that it sags in a
