@@ -184,7 +184,7 @@
   {"text":"The last one's at eleven forty. The kitchen window is still lit","translation":"末班車十一點四十分。廚房的窗還亮著","where":"games/elder-son/bespoke/minigames/running.js"},
   {"text":"The snuffbox lies in his palm. The old hand is still over it","translation":"鼻煙盒躺在他的掌心。那隻蒼老的手還懸在上面","where":"games/elder-son/bespoke/minigames/snuffbox.js"},
   {"text":"The snuffbox sits on the oilcloth between them","translation":"鼻煙盒擺在兩人之間的油布上","where":"games/elder-son/bespoke/minigames/snuffbox.js"},
-  {"text":"The kettle is heavy. Two glasses in their holders","translation":"水壺很重。兩只玻璃杯套在杯托裡","where":"games/elder-son/bespoke/minigames/tea.js"},
+  {"text":"The kettle is heavy. Two glasses in their holders","translation":"水壺很重。兩個玻璃杯套在杯托裡","where":"games/elder-son/bespoke/minigames/tea.js"},
   {"text":"The floorboards are old. The wall clock ticks loud enough to fill the kitchen","translation":"地板很舊。掛鐘的滴答聲響遍整個廚房","where":"games/elder-son/bespoke/minigames/tiptoe.js"},
   {"text":"Night. In the settlement the light is still on in five windows","translation":"夜裡。鎮上還有五扇窗亮著燈","where":"games/elder-son/bespoke/minigames/windows.js"},
   {"text":"narrator","translation":"敘述者","where":"games/elder-son/bespoke/people.json.narrator short"},
