@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"The Geisha","translation":"La Geisha","where":"worlds/lady-with-the-dog/scenes/town-s/elements/poster.js"},
+  {"text":"first time in S.","translation":"pour la première fois à S.","where":"worlds/lady-with-the-dog/scenes/town-s/elements/poster.js"},
+  {"text":"The Town of S.","translation":"La ville de S.","where":"worlds/lady-with-the-dog/scenes/town-s/scene.json title"}
+]}
