@@ -9,5 +9,5 @@
     "relationships": 70
   },
   "world": "../../worlds/elder-son",
-  "languages": ["en", "ru", "uk", "de", "es", "ja", "be", "fr"]
+  "languages": ["en", "ru", "uk", "de", "es", "ja", "be", "fr", "zh-hant"]
 }
