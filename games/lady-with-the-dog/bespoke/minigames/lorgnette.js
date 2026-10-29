@@ -19,7 +19,7 @@ const TOLD = 20000; // ms: the stooping man has come to the gangway's foot (the 
 const AFTER = 1; // s after `surge` — the end
 
 export default {
-  title: 'Lorgnette',
+  title: tr('Lorgnette'),
   about: 32,
   skipped: { looked: 0, stranger: false },
   async run(g, b, opts, signal) {

@@ -220,6 +220,9 @@ function watched(g, j, ch, here, events, seen) {
   const shown = what => (cur ? true : (bad(`${what} — before g.scene`), false));
   const key = (name, what, game) => {
     if (!shown(`${what} «${name}»`)) return;
+    // (a person's own keys are the engine's — engine3 contracts.md: <id>_do, _turn, _look, …: known where the person is)
+    const person = /^(.+)_(do|turn|look|reach|with|wear|gait|steps|on|here|still|mood)$/.exec(name);
+    if (person && cur.scene.objects.has(person[1])) return;
     if (!(name in cur.scene.states)) bad(`${what}: the key “${name}” is not in the states of the scene “${cur.folder}”`);
     else if (game && cur.scene.contract?.keys && !(name in cur.scene.contract.keys) && name !== 'beat') bad(`${what}: the key “${name}” is not in the contract keys of the scene “${cur.folder}”`);
   };

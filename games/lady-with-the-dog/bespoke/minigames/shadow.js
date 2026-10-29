@@ -18,7 +18,7 @@ const LOOK = 1, AWAY = 2.5; // s: he looks hard; then looks away
 const GAP = 2; // s to the next one; after the last
 
 export default {
-  title: 'The shadow',
+  title: tr('The shadow'),
   about: 26,
   skipped: { touched: [] },
   async run(g, b, opts, signal) {

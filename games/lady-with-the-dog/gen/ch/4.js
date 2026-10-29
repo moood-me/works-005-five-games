@@ -13,7 +13,7 @@ export default {
   number: 'IV',
   title: tr('The town of S.'),
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['The fence', 'The Geisha', 'The gate'],
+  titles: [tr('The fence'), tr('The Geisha'), tr('The gate')],
   choices: [
     { id: 'fence', weight: '⚑', title: tr('At the gate'), options: [{ id: 'call', label: tr('Call the dog') }, { id: 'hide', label: tr('Step round the corner') }] },
     { id: 'stairs', weight: '~', title: tr('On the stairs'), options: [{ id: 'promise', label: tr('“I will come to Moscow”') }, { id: 'away', label: tr('“Go away today”') }] },

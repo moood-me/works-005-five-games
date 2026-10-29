@@ -12,7 +12,7 @@ export default {
   title: tr('The sea-front'),
   wall: false,
   season: () => 'summer',
-  titles: ['The gardens', 'The pier'],
+  titles: [tr('The gardens'), tr('The pier')],
   choices: [
     { id: 'dog', weight: '~', title: tr('The dog at his knee'), options: [{ id: 'finger', label: tr('Shake a finger') }, { id: 'pat', label: tr('Pat him') }] },
   ],

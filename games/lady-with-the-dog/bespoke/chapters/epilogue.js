@@ -10,7 +10,7 @@ export default {
   title: tr('Three windows'),
   wall: false,
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['S.', 'Moscow', 'Oreanda'],
+  titles: [tr('S.'), tr('Moscow'), tr('Oreanda')],
   choices: [],
   steps: [
     // S.: the husband with the old spitz by the fence or at the gate

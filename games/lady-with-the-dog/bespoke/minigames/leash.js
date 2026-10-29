@@ -16,7 +16,7 @@ const BACK = 0.05; // held — a step toward the gate
 const WIND = 0.5, GUST = 0.7; // the step's bed of wind; a gust
 
 export default {
-  title: 'The leash',
+  title: tr('The leash'),
   about: 20,
   skipped: { end: 'home' },
   async run(g, b, opts, signal) {

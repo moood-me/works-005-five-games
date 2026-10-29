@@ -18,7 +18,7 @@ const HEARD = 0.4; // the level at which the piano is first heard
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'By the fence',
+  title: tr('By the fence'),
   about: 18,
   skipped: { stood: true },
   async run(g, b, opts, signal) {
