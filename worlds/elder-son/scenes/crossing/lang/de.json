@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Crossing","translation":"Der Bahnübergang","where":"worlds/elder-son/scenes/crossing/scene.json title"},
+  {"text":"The level crossing beyond the settlement. Growing dark.","translation":"Der Bahnübergang hinter der Siedlung. Es dunkelt.","where":"worlds/elder-son/scenes/crossing/scene.json caption"}
+]}
