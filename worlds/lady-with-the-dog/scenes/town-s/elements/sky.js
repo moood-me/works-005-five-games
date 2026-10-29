@@ -4,7 +4,7 @@
 // the far roofs of the town and its church, poplars, the low line of the fields. Painted for the state (the season and
 // the hour change only at a cut); the clouds drift as a layer.
 const A = e.aspect, H = 0.5, s = e.state;
-const X0 = -1.75 * A, X1 = 2.75 * A, W = X1 - X0, DEG = A / 83.3;      // the stage is 83° wide
+const TURN = 6.88, X0 = A / 2 - TURN / 2, X1 = A / 2 + TURN / 2, W = X1 - X0, DEG = TURN / 360;   // a whole turn
 const west = A / 2 + 40 * DEG;                                         // the sunset's bearing
 const hour = Number(s.hour) || 0.5, dusk = hour > 0.7, morning = hour < 0.42, autumn = s.season === 'autumn';
 const rnd = (() => { let k = 5; return () => ((k = (k * 16807) % 2147483647) / 2147483647); })();
@@ -14,7 +14,7 @@ if (dusk) {
   g.fillStyle = vgrad(-0.6, H, autumn ? [[0, '#2c3058'], [0.45, '#4e5482'], [0.78, '#8a7e9a'], [0.93, '#c99a86'], [1, '#e2b48a']]
                                       : [[0, '#283252'], [0.45, '#46557e'], [0.78, '#7c84a6'], [0.93, '#b49aa8'], [1, '#d6b2a0']]);
   g.fillRect(X0, -0.6, W, H + 0.6);
-  for (const dx of [-4.32 * A, 0, 4.32 * A]) { glow(west + dx, H, 1.2, 0.22, autumn ? '#ffbf86' : '#f4c4a4', 0.6); glow(west + dx, H, 0.35, 0.05, '#fff0d4', 0.6); }
+  for (const dx of [-TURN, 0, TURN]) { glow(west + dx, H, 1.2, 0.22, autumn ? '#ffbf86' : '#f4c4a4', 0.6); glow(west + dx, H, 0.35, 0.05, '#fff0d4', 0.6); }
 } else if (morning) {
   g.fillStyle = vgrad(-0.6, H, [[0, '#8fa2c0'], [0.55, '#bccadc'], [0.9, '#e2e2e8'], [1, '#efe2dc']]);
   g.fillRect(X0, -0.6, W, H + 0.6);
@@ -34,7 +34,7 @@ for (let i = 0; i < 70; i++) {
   g.fillRect(x, H - h, w, h + 0.002);
   g.beginPath(); g.moveTo(x - 0.002, H - h); g.lineTo(x + w / 2, H - h - w * 0.35); g.lineTo(x + w + 0.002, H - h); g.fill();
 }
-for (const cx of [A * 0.28, A * 0.28 - 4.32 * A]) {
+for (const cx of [A * 0.28]) {
   g.fillRect(cx - 0.006, H - 0.035, 0.012, 0.035);
   g.beginPath(); g.ellipse(cx, H - 0.036, 0.009, 0.011, 0, Math.PI, 0); g.fill();
   g.fillRect(cx - 0.0006, H - 0.058, 0.0012, 0.012);

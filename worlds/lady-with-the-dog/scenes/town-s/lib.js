@@ -101,10 +101,10 @@ const CAM = {
   FENCE_FACE: cam(-4.75, 5.55, 1.75, 62, 0), // Gurov at p1 in three-quarter, looking at the fence
   DUSK_WIDE: cam(2.6, 0.3, 1.7, 8, 0),       // along the fence at dusk: the gate, the lantern, the poster
   DUSK_FACE: cam(6.05, 6.7, 1.7, 220, 3),    // Gurov before the poster, from the fence's side: his face in the lantern's light
-  LEAVE: cam(1.0, -3.5, 1.75, 25, 0),        // the morning: the gate, the yard through it, the cab on the road
+  LEAVE: cam(1.0, -1.0, 1.75, 32, 0),        // the morning: the gate, the yard through it, the cab on the road
   LEAVE_TWO: cam(4.7, 5.35, 1.6, 300, 0),    // the two at the gate side by side, three-quarter
   ANNA_FACE: cam(3.65, 5.3, 1.5, 305, 0),    // her face, past him
-  HIS_FACE: cam(3.3, 6.3, 1.65, 336, 2),     // his face close: he looks down and away, past her
+  HIS_FACE: cam(3.45, 6.0, 1.82, 335, -4),     // his face close: he looks down and away, past her
   YARD: cam(1.8, 8.4, 1.6, 12, -3),          // in the yard toward the porch
   PORCH: cam(5.6, 14.0, 1.7, 218, -2),       // from beside the porch back toward the gate and the street
 };
@@ -183,7 +183,7 @@ function film(scene) {
     road_end: {
       from: () => base({ ...AUTUMN_DUSK, ...CAM.ROAD,
         ...at('anna', ROAD, 0, { anna_wear: C().anna_autumn, anna_look: [40, 120, 3], anna_mood: 'sad' }),
-        ...dog([ROAD[0] + 0.55, ROAD[1] + 0.35], { spitz_do: 'sit', spitz_dir: 1, spitz_look: [60, 120, 3] }), leash: 'anna#hand_l' }),
+        ...dog([ROAD[0] + 0.55, ROAD[1] + 0.35], { spitz_do: 'sit', spitz_dir: 1 }), leash: 'anna#hand_l' }),
       run: async s => {
         const face = s.shot({ ...CAM.ROAD_FACE });
         await s.wait(1.5);
@@ -247,9 +247,9 @@ function film(scene) {
       run: async s => {
         const g = s.person('gurov');
         await g.walk([[gurovX(0.1), GUROV_Z]]);
-        g.look([gurovX(0.06), FENCE_Z, 1.9]);
+        g.look([gurovX(0) - 2, FENCE_Z, 2.3]);
         const face = s.shot({ ...CAM.FENCE_FACE });
-        await g.turn(290);
+        await g.turn(270);
         s.tell('fence:stops');
         await s.until(() => face.ready);
         face.cut();
