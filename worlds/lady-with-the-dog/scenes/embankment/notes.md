@@ -79,7 +79,7 @@ seat in the middle third).
 | `days` | — | 14 | noon, `QUAY`: they walk slowly across, the dog ahead; `gossip` 1 — the lady with the parasol ahead, she looks back once; the hotel boy runs up with a letter; she stops and reads (`days:letter`) |
 
 Keys: `hour` (and the sky's `day`, `dawn`, `dusk`, `night`, `sun_light`, `moon_light`), `glare`, `glass`, `wind`,
-`lamps`, `steamer` (→ `steamer_a/d/f`), `steamer_lit`, `smoke`, `crowd`, `pass`, `look_at`, `stranger_turn`, `surge`,
+`lamps`, `steamer` (→ `steamer_a/d/f`), `steamer_lit`, `smoke`, `crowd`, `pass`, `look_at`, `stranger_turned`, `surge`,
 `spitz_near`, `hand`, `watched`, `seen`, `kiss_now`, `trust`, `fright`, `gossip`, `spitz_face`, the keys of `spitz`,
 `beat`, `beat_next`. No keys of the play (`trust`, `fright`, `gossip` are the game's story keys set during the play).
 
@@ -89,7 +89,7 @@ Keys: `hour` (and the sky's `day`, `dawn`, `dusk`, `night`, `sun_light`, `moon_l
   only in `coax` … `pat` (elsewhere the beats place them).
 - `pass` (only in `gangway`): each arrival let down walks down the gangway to its place by the foot (`MET`), turns to
   the crowd, and goes off up the pier when two more have come down (or on `surge`). The stooping man (the fifth) comes
-  down with his lady, stops at the foot with his back to us, tells `gangway:stranger`, waits for `stranger_turn`, turns
+  down with his lady, stops at the foot with his back to us, tells `gangway:stranger`, waits for `stranger_turned`, turns
   to her, she takes his arm (`stranger#elbow_l`), they go. `look_at` — the one looked at stops 1.5 s and turns his head
   (in profile). `surge` in `gangway` — the crowd thins.
 - The avenue (only in `noon_garden`, until `kiss_now`): two walkers every 16 s, 2.5 s apart, one coming from behind
