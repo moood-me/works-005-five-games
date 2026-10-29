@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"Cinema Paradiso","translation":"시네마 천국","where":"worlds/cinema-paradiso/world.json title"},
+  {"text":"A game after Tornatore's film. A warm Sicilian night, the projector's beam, a reel of kisses.","translation":"토르나토레의 영화를 바탕으로 한 게임. 따뜻한 시칠리아의 밤, 영사기의 빛줄기, 키스 장면을 이은 필름 한 롤.","where":"worlds/cinema-paradiso/world.json description"}
+]}

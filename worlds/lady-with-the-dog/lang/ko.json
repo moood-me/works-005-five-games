@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Lady with the Dog","translation":"개를 데리고 다니는 여인","where":"worlds/lady-with-the-dog/world.json title"},
+  {"text":"A game after Chekhov’s story. The sea, the turning seasons, a white Pomeranian on a red leash.","translation":"체호프의 단편을 바탕으로 한 게임. 바다, 바뀌는 계절, 빨간 목줄을 한 하얀 스피츠.","where":"worlds/lady-with-the-dog/world.json description"}
+]}

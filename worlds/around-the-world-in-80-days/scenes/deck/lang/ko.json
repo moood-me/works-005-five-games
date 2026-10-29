@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"11월","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"수요일","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"갑판","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"난간 가의 증기선 갑판: 바다, 굴뚝의 연기, 수평선 위의 항구.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}

@@ -1,0 +1,9 @@
+{"strings": [
+  {"text":"TICKETS","translation":"매표소","where":"worlds/elder-son/scenes/platform/elements/booth.js"},
+  {"text":"The Platform","translation":"승강장","where":"worlds/elder-son/scenes/platform/scene.json title"},
+  {"text":"A suburban platform at night. The first snow.","translation":"밤의 교외 승강장. 첫눈.","where":"worlds/elder-son/scenes/platform/scene.json caption"},
+  {"text":"The strap pulled","translation":"가죽끈을 당긴다","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The whole family comes","translation":"온 가족이 온다","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"His father alone","translation":"아버지 혼자","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The glass rubbed","translation":"유리를 닦았다","where":"worlds/elder-son/scenes/platform/showcase.js"}
+]}

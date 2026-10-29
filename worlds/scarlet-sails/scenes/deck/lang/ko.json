@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Deck","translation":"갑판","where":"worlds/scarlet-sails/scenes/deck/scene.json title"},
+  {"text":"Holding course, straight ahead.","translation":"침로 유지, 똑바로 앞으로.","where":"worlds/scarlet-sails/scenes/deck/scene.json caption"}
+]}

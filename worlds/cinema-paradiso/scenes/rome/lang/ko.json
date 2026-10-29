@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"The Screening Room","translation":"시사실","where":"worlds/cinema-paradiso/scenes/rome/scene.json title"},
+  {"text":"Rome. A small screening room","translation":"로마. 작은 시사실","where":"worlds/cinema-paradiso/scenes/rome/scene.json caption"},
+  {"text":"the play","translation":"승부","where":"worlds/cinema-paradiso/scenes/rome/showcase.js"}
+]}
