@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Booth","translation":"Kabina","where":"worlds/cinema-paradiso/scenes/booth/scene.json title"},
+  {"text":"The Paradiso's booth","translation":"Kabina projekcyjna „Paradiso”","where":"worlds/cinema-paradiso/scenes/booth/scene.json caption"}
+]}

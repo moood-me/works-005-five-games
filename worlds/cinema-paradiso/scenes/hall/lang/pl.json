@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"The Hall","translation":"Sala","where":"worlds/cinema-paradiso/scenes/hall/scene.json title"},
+  {"text":"Father Adelfio saw every film first. Alone","translation":"Ksiądz Adelfio oglądał każdy film pierwszy. Sam","where":"worlds/cinema-paradiso/scenes/hall/scene.json caption"},
+  {"text":"peeking","translation":"podglądanie","where":"worlds/cinema-paradiso/scenes/hall/showcase.js"}
+]}

@@ -1,0 +1,9 @@
+{"strings": [
+  {"text":"TICKETS","translation":"KASA","where":"worlds/elder-son/scenes/platform/elements/booth.js"},
+  {"text":"The Platform","translation":"Peron","where":"worlds/elder-son/scenes/platform/scene.json title"},
+  {"text":"A suburban platform at night. The first snow.","translation":"Podmiejski peron nocą. Pierwszy śnieg.","where":"worlds/elder-son/scenes/platform/scene.json caption"},
+  {"text":"The strap pulled","translation":"Ciągną za pasek","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The whole family comes","translation":"Przychodzi cała rodzina","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"His father alone","translation":"Sam ojciec","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The glass rubbed","translation":"Szyba przetarta","where":"worlds/elder-son/scenes/platform/showcase.js"}
+]}

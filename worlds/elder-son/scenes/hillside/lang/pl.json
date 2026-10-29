@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"Railwaymen's Club","translation":"Klub Kolejarza","where":"worlds/elder-son/scenes/hillside/elements/club_sign.js"},
+  {"text":"The Hillside","translation":"Zbocze","where":"worlds/elder-son/scenes/hillside/scene.json title"},
+  {"text":"The cemetery on the hillside beyond the settlement. Dusk.","translation":"Cmentarz na zboczu za osiedlem. Zmierzch.","where":"worlds/elder-son/scenes/hillside/scene.json caption"},
+  {"text":"he fell on the ice, he almost saw them","translation":"upadł na lodzie, prawie ich zobaczył","where":"worlds/elder-son/scenes/hillside/showcase.js"}
+]}

@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"LISTOPAD","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"ŚRODA","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"Pokład","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"Pokład parowca przy burcie: morze, dym z komina, port na horyzoncie.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}
