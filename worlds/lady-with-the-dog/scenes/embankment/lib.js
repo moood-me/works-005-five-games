@@ -265,15 +265,15 @@ function seaMotion(e) {
 function hull(g) {
   g.fillStyle = '#26292e';
   g.beginPath(); g.moveTo(-25.5, 0.2); g.lineTo(23, 0.2); g.quadraticCurveTo(26.5, -1.6, 27.5, -3.4); g.lineTo(-26, -3.4); g.quadraticCurveTo(-26.6, -1.5, -25.5, 0.2); g.closePath(); g.fill();
+  // the white side up to the deck (2.1 over the water); above it an open rail — those on deck seen whole through it
   g.fillStyle = '#efede6';
-  g.beginPath(); g.moveTo(-26, -1.6); g.lineTo(26.6, -1.6); g.lineTo(27.5, -3.4); g.lineTo(-26, -3.4); g.closePath(); g.fill();
-  g.fillStyle = '#c7c2b5'; g.fillRect(-26, -2.35, 52.5, 0.08);
+  g.beginPath(); g.moveTo(-26, -1.6); g.lineTo(26.6, -1.6); g.lineTo(27.1, -2.25); g.lineTo(-26, -2.25); g.closePath(); g.fill();
+  g.fillStyle = '#c7c2b5'; g.fillRect(-26, -2.27, 53.2, 0.06);
   g.fillStyle = '#3b3f45';
-  for (let x = -22; x < 23; x += 2.2) if (Math.abs(x + 2) > 1.2) { g.beginPath(); g.arc(x, -2.0, 0.17, 0, Math.PI * 2); g.fill(); }   // the portholes
-  // the gangway's opening in the bulwark (local across −2)
-  g.save(); g.globalCompositeOperation = 'destination-out'; g.fillRect(-2.6, -3.5, 1.2, 1.25); g.restore();
-  g.fillStyle = '#a49e90'; g.fillRect(-2.65, -3.45, 0.06, 1.2); g.fillRect(-1.45, -3.45, 0.06, 1.2);
-  g.fillStyle = '#efede6'; g.fillRect(-26, -3.6, 53.5, 0.12);
+  for (let x = -22; x < 23; x += 2.2) { g.beginPath(); g.arc(x, -1.95, 0.15, 0, Math.PI * 2); g.fill(); }   // the portholes
+  g.fillStyle = '#e8e6df';
+  for (let x = -25.8; x < 27; x += 1.2) if (x < -2.7 || x > -1.3) g.fillRect(x - 0.03, -3.25, 0.06, 1.0);   // the stanchions
+  for (const [a, b] of [[-26, -2.7], [-1.3, 27.2]]) { g.fillRect(a, -3.3, b - a, 0.07); g.fillRect(a, -2.8, b - a, 0.035); }   // the rails, open at the gangway
 }
 function deckhouse(g, e) {
   g.fillStyle = '#ecebe4'; g.fillRect(-14, -6.4, 24, 3.5);                   // the deckhouse
@@ -336,8 +336,8 @@ const CAM = {
                                             // sea, the dog on the parapet at 7 m in the middle, Anna far off on the left
   PAVILION: cam(13.6, -2.4, 1.45, -12),     // in the pavilion's shade behind Gurov at his table (on the right): out on
                                             // the bright front, small, the lady goes off to the left
-  GARDEN: cam(22.85, 0.5, 1.6, 0, -6),      // the gardens: the two at their tables side by side, 3.9 m off — a third of
-                                            // the frame sitting; the dog between them; the evening sea behind
+  GARDEN: cam(22.85, 1.45, 1.1, 0),         // the gardens: the two at their tables side by side, 3 m off, the eye low (at
+                                            // the faces' height, under a hat's brim); the dog between them; the sea behind
   TALK: cam(22.85, 2.2, 1.5, 0, -7),        // closer, medium: both in three-quarters, talking across the gap
   QUAY: cam(1.5, 2.8, 1.6, 0),              // side on along the parapet: those walking cross the frame ≈ 4.7 m off
   PIER: cam(-30.4, 12.0, 1.7, -6),          // on the pier's neck looking out: the two near, the crowd on the head, the steamer
@@ -397,7 +397,7 @@ function film(scene) {
       spitz_look: null, spitz_old: 0, leash: 'anna#hand_l', spitz_face: 180,
     };
     for (const id of PEOPLE) Object.assign(v, { [`${id}_here`]: false, [`${id}_turn`]: 180, [`${id}_do`]: 'stand', [`${id}_look`]: null,
-      [`${id}_reach`]: null, [`${id}_on`]: null, [`${id}_mood`]: null, [`${id}_gait`]: null, [`${id}_with`]: WITH[id] ?? null });
+      [`${id}_reach`]: null, [`${id}_on`]: null, [`${id}_mood`]: null, [`${id}_gait`]: null, [`${id}_wear`]: null, [`${id}_with`]: WITH[id] ?? null });
     Object.assign(v, extra);
     if (v.camera_yaw != null && extra.spitz_face == null) v.spitz_face = 180 + v.camera_yaw;
     return v;
@@ -406,7 +406,7 @@ function film(scene) {
   const ANNA_FAR = [-6.5, 7.5], ANNA_FARTHER = [-9.3, 7.9];
   // the gardens in the evening: he at his table, she at hers, the dog lying by her chair, the leash trailing
   const GARDEN_SAT = extra => base(0.76, {
-    ...CAM.GARDEN, lamps: 1, gurov_here: true, ...at('gurov', SEAT_G), gurov_on: SEAT_G, gurov_turn: 165, gurov_do: loop('seated'),
+    ...CAM.GARDEN, lamps: 1, gurov_here: true, gurov_wear: kit.cast.characters.gurov_indoor, ...at('gurov', SEAT_G), gurov_on: SEAT_G, gurov_turn: 165, gurov_do: loop('seated'),
     anna_here: true, ...at('anna', SEAT_A), anna_on: SEAT_A, anna_turn: 195, anna_do: loop('seated'),
     spitz_a: DOG_CHAIR[0], spitz_d: DOG_CHAIR[1], spitz_do: 'lie', spitz_dir: -1, leash: 'none', ...extra,
   });

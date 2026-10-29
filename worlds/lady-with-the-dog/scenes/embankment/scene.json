@@ -1534,6 +1534,7 @@
     "gurov_on": null,
     "gurov_mood": null,
     "gurov_gait": null,
+    "gurov_wear": null,
     "gurov_with": null,
     "anna_here": true,
     "anna_turn": 280,
@@ -1543,6 +1544,7 @@
     "anna_on": null,
     "anna_mood": null,
     "anna_gait": null,
+    "anna_wear": null,
     "anna_with": null,
     "waiter_here": false,
     "waiter_turn": 180,
@@ -1552,6 +1554,7 @@
     "waiter_on": null,
     "waiter_mood": null,
     "waiter_gait": null,
+    "waiter_wear": null,
     "waiter_with": null,
     "p1_here": false,
     "p1_turn": 180,
@@ -1561,6 +1564,7 @@
     "p1_on": null,
     "p1_mood": null,
     "p1_gait": null,
+    "p1_wear": null,
     "p1_with": [
       "bouquet"
     ],
@@ -1572,6 +1576,7 @@
     "p2_on": null,
     "p2_mood": null,
     "p2_gait": null,
+    "p2_wear": null,
     "p2_with": [
       "valise"
     ],
@@ -1583,6 +1588,7 @@
     "p3_on": null,
     "p3_mood": null,
     "p3_gait": null,
+    "p3_wear": null,
     "p3_with": [
       "bouquet"
     ],
@@ -1594,6 +1600,7 @@
     "p4_on": null,
     "p4_mood": null,
     "p4_gait": null,
+    "p4_wear": null,
     "p4_with": [
       "valise"
     ],
@@ -1605,6 +1612,7 @@
     "p5_on": null,
     "p5_mood": null,
     "p5_gait": null,
+    "p5_wear": null,
     "p5_with": [
       "bouquet"
     ],
@@ -1616,6 +1624,7 @@
     "p6_on": null,
     "p6_mood": null,
     "p6_gait": null,
+    "p6_wear": null,
     "p6_with": [
       "valise"
     ],
@@ -1627,6 +1636,7 @@
     "stranger_on": null,
     "stranger_mood": null,
     "stranger_gait": null,
+    "stranger_wear": null,
     "stranger_with": null,
     "stranger_lady_here": false,
     "stranger_lady_turn": 180,
@@ -1636,6 +1646,7 @@
     "stranger_lady_on": null,
     "stranger_lady_mood": null,
     "stranger_lady_gait": null,
+    "stranger_lady_wear": null,
     "stranger_lady_with": null,
     "stroller1_here": false,
     "stroller1_turn": 180,
@@ -1645,6 +1656,7 @@
     "stroller1_on": null,
     "stroller1_mood": null,
     "stroller1_gait": null,
+    "stroller1_wear": null,
     "stroller1_with": null,
     "stroller2_here": false,
     "stroller2_turn": 180,
@@ -1654,6 +1666,7 @@
     "stroller2_on": null,
     "stroller2_mood": null,
     "stroller2_gait": null,
+    "stroller2_wear": null,
     "stroller2_with": null,
     "stroller3_here": false,
     "stroller3_turn": 180,
@@ -1663,6 +1676,7 @@
     "stroller3_on": null,
     "stroller3_mood": null,
     "stroller3_gait": null,
+    "stroller3_wear": null,
     "stroller3_with": null,
     "boy_here": false,
     "boy_turn": 180,
@@ -1672,6 +1686,7 @@
     "boy_on": null,
     "boy_mood": null,
     "boy_gait": null,
+    "boy_wear": null,
     "boy_with": null,
     "camera_x": -0.5,
     "camera_z": 2,
