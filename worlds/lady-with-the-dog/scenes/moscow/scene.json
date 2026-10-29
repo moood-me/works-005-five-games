@@ -326,11 +326,11 @@
       "name": "limes",
       "across": 0,
       "distance": 0,
-      "height": 10.6,
+      "height": 10.8,
       "box": [
-        -4.6,
-        -10.6,
-        4.6,
+        -6.2,
+        -10.8,
+        6.2,
         0.2
       ],
       "copies": [
