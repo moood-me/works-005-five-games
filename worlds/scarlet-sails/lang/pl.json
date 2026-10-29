@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"Scarlet Sails v3","translation":"Szkarłatne żagle v3","where":"worlds/scarlet-sails/world.json title"},
+  {"text":"Scarlet Sails","translation":"Szkarłatne żagle","where":"worlds/scarlet-sails/world.json title"},
   {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"Szkarłatne żagle na silniku 3: sceny przeniesione z silnika 2.","where":"worlds/scarlet-sails/world.json description"}
 ]}

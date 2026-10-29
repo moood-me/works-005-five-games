@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"Scarlet Sails v3","translation":"붉은 돛 v3","where":"worlds/scarlet-sails/world.json title"},
+  {"text":"Scarlet Sails","translation":"붉은 돛","where":"worlds/scarlet-sails/world.json title"},
   {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"엔진 3의 『붉은 돛』: 엔진 2에서 장면들을 옮겨 왔다.","where":"worlds/scarlet-sails/world.json description"}
 ]}

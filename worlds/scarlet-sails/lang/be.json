@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"Scarlet Sails v3","translation":"Пунсовыя ветразі v3","where":"worlds/scarlet-sails/world.json title"},
+  {"text":"Scarlet Sails","translation":"Пунсовыя ветразі","where":"worlds/scarlet-sails/world.json title"},
   {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"Пунсовыя ветразі на рухавіку 3: сцэны перанесены з рухавіка 2.","where":"worlds/scarlet-sails/world.json description"}
 ]}

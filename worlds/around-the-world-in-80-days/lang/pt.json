@@ -1,4 +1,4 @@
 {"strings": [
-  {"text":"Around the World in 80 Days v3","translation":"A Volta ao Mundo em 80 Dias v3","where":"worlds/around-the-world-in-80-days/world.json title"},
+  {"text":"Around the World in 80 Days","translation":"A Volta ao Mundo em 80 Dias","where":"worlds/around-the-world-in-80-days/world.json title"},
   {"text":"Around the World on the new engine: the scenes are brought over here one by one.","translation":"A Volta ao Mundo no novo motor: as cenas são trazidas para cá uma a uma.","where":"worlds/around-the-world-in-80-days/world.json description"}
 ]}
