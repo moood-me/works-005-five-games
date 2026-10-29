@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"ЛІСТАПАД","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"СЕРАДА","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"Палуба","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"Палуба параплава ля борта: мора, дым з коміна, порт на гарызонце.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}

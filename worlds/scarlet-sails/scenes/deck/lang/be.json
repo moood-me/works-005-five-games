@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Deck","translation":"Палуба","where":"worlds/scarlet-sails/scenes/deck/scene.json title"},
+  {"text":"Holding course, straight ahead.","translation":"Курс — проста.","where":"worlds/scarlet-sails/scenes/deck/scene.json caption"}
+]}

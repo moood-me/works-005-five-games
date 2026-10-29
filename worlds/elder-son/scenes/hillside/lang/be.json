@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"Railwaymen's Club","translation":"Клуб чыгуначнікаў","where":"worlds/elder-son/scenes/hillside/elements/club_sign.js"},
+  {"text":"The Hillside","translation":"Касагор","where":"worlds/elder-son/scenes/hillside/scene.json title"},
+  {"text":"The cemetery on the hillside beyond the settlement. Dusk.","translation":"Могілкі на касагоры за пасёлкам. Змярканне.","where":"worlds/elder-son/scenes/hillside/scene.json caption"},
+  {"text":"he fell on the ice, he almost saw them","translation":"ён упаў на лёдзе, ён амаль іх убачыў","where":"worlds/elder-son/scenes/hillside/showcase.js"}
+]}
