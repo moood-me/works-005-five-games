@@ -6,5 +6,5 @@
     "travel": 80
   },
   "main": "main",
-  "languages": ["en", "ru"]
+  "languages": ["en", "ru", "de"]
 }
