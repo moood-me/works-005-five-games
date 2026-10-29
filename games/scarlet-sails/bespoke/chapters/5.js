@@ -42,9 +42,8 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ sea: 0.6, wind: 0.4 });
       const up = g.told('raise:going-up');
-      await g.scene(SCENES.deck, { beat: 'raise', sun: hour(f, 1) }, { cut: true });
+      await g.scene(SCENES.deck, { beat: 'raise', sun: hour(f, 1) }, { cut: true, beds: { sea: 0.6, wind: 0.4 } });
       const raise = g.beat('raise');
       const order = g.say('grey', 'Make sail');
       await up;
@@ -60,13 +59,13 @@ export default {
     async g => {
       const f = facts(g.state), { ending } = f, sun = hour(f, 2);
       g.hero('assol');
-      g.beds({ sea: 0.3, orchestra: 0.15 });
+      const beds = { sea: 0.3, orchestra: 0.15 };
       if (ending === 'grin') {
-        await g.scene(SCENES.home, { beat: 'read', sun }, { cut: true });
+        await g.scene(SCENES.home, { beat: 'read', sun }, { cut: true, beds });
         await g.beat('read');
         await g.beat('beetle');
       } else if (ending === 'cry') {
-        await g.scene(SCENES.home, { beat: 'read', sun }, { cut: true });
+        await g.scene(SCENES.home, { beat: 'read', sun }, { cut: true, beds });
         await g.beat('read');
         const glance = g.told('cry:glance');
         const cry = g.beat('cry');
@@ -75,7 +74,7 @@ export default {
         await cry;
       } else {
         const touched = g.told('wake:touched');
-        await g.scene(SCENES.home, { beat: 'wake', sun }, { cut: true });
+        await g.scene(SCENES.home, { beat: 'wake', sun }, { cut: true, beds });
         const wake = g.beat('wake');
         await touched;
         await g.say('longren', 'Assol. Go down to the sea');
@@ -87,8 +86,7 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ sea: 0.6, wind: 0.4, orchestra: 0.4 });
-      await g.scene(SCENES.deck, { beat: 'helm', leg: 0.5, sun: hour(f, 3) }, { cut: true });
+      await g.scene(SCENES.deck, { beat: 'helm', leg: 0.5, sun: hour(f, 3) }, { cut: true, beds: { sea: 0.6, wind: 0.4, orchestra: 0.4 } });
       await g.beat('helm');
       await sail(g, 1, 'course2');
     },
@@ -98,11 +96,11 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('assol');
-      g.beds({ sea: 0.3, orchestra: 0.3 });
+      const beds = { sea: 0.3, orchestra: 0.3 };
       if (f.ending === 'waited') {
         const spark = g.told('dawn_two:spark');
         const turns = g.told('dawn_two:turns');
-        await g.scene(SCENES.shore, { beat: 'dawn_two', morning: hour(f, 4) }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'dawn_two', morning: hour(f, 4) }, { cut: true, beds });
         const dawn = g.beat('dawn_two');
         await spark;
         g.sound.motif();
@@ -114,7 +112,7 @@ export default {
       }
       if (f.ending === 'kaperna') {
         const seen = g.told('sails_far:seen');
-        await g.scene(SCENES.shore, { beat: 'sails_far', morning: hour(f, 4) }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'sails_far', morning: hour(f, 4) }, { cut: true, beds });
         const far = g.beat('sails_far');
         await seen;
         g.sound.motif();
@@ -124,7 +122,7 @@ export default {
       }
       const cry = f.ending === 'cry';
       const ready = cry ? g.told('look:ready') : null;
-      await g.scene(SCENES.home, { beat: 'look', sun: hour(f, 4) }, { cut: true });
+      await g.scene(SCENES.home, { beat: 'look', sun: hour(f, 4) }, { cut: true, beds });
       const look = g.beat('look');
       if (cry) {
         await ready;
@@ -146,8 +144,7 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ sea: 0.6, wind: 0.4, orchestra: 0.5 });
-      await g.scene(SCENES.deck, { beat: 'helm', leg: 0.85, sun: hour(f, 5) }, { cut: true });
+      await g.scene(SCENES.deck, { beat: 'helm', leg: 0.85, sun: hour(f, 5) }, { cut: true, beds: { sea: 0.6, wind: 0.4, orchestra: 0.5 } });
       await g.beat('helm');
       await sail(g, 2, 'course3');
       const morning = comes(f, g.state.marks);
@@ -165,15 +162,15 @@ export default {
     async g => {
       const { ending } = facts(g.state);
       g.hero('assol');
-      g.beds({ sea: 0.6, orchestra: 0.9 });
+      const beds = { sea: 0.6, orchestra: 0.9 };
       let anchor;
       if (ending === 'waited') {
         anchor = g.told('shore:anchor');
-        await g.scene(SCENES.shore, { beat: 'shore' }, { cut: true });
+        await g.scene(SCENES.shore, { beat: 'shore' }, { cut: true, beds });
       } else {
-        if (ending === 'kaperna') await g.scene(SCENES.shore, { beat: 'run' }, { cut: true });
+        if (ending === 'kaperna') await g.scene(SCENES.shore, { beat: 'run' }, { cut: true, beds });
         else {
-          await g.scene(SCENES.shore, { beat: 'sails_far' }, { cut: true });
+          await g.scene(SCENES.shore, { beat: 'sails_far' }, { cut: true, beds });
           await g.beat('sails_far');
         }
         await g.beat('run');
@@ -188,8 +185,7 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ sea: 0.6, orchestra: 0.5 });
-      await g.scene(SCENES.shore, { beat: 'hands' }, { cut: true });
+      await g.scene(SCENES.shore, { beat: 'hands' }, { cut: true, beds: { sea: 0.6, orchestra: 0.5 } });
       await g.beat('hands');
       await g.play(hand, { onReach: u => g.sound.orchestra(0.5 + 0.5 * u, 0.3) });
       g.set('reach', 1);

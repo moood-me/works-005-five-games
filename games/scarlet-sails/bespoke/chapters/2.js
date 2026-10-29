@@ -20,8 +20,7 @@ export default {
     // the boy and the brush; the mother
     async g => {
       g.hero('grey');
-      g.beds({ hearth: 0.3 });
-      await g.scene(SCENES.castle, { beat: 'boy' });
+      await g.scene(SCENES.castle, { beat: 'boy' }, { beds: { hearth: 0.3 } });
       const boy = g.beat('boy');
       await g.say('narrator', 'Gray was born in a castle where everything was ordained for ever');
       await boy;
@@ -39,12 +38,11 @@ export default {
     // the ship in the picture comes alive; the cask in the cellar
     async g => {
       g.hero('grey');
-      g.beds({ hearth: 0.3 });
       const alive = g.told('ship_painting:alive');
-      await g.scene(SCENES.castle, { beat: 'ship_painting' });
+      await g.scene(SCENES.castle, { beat: 'ship_painting' }, { beds: { hearth: 0.3 } });
       const painting = g.beat('ship_painting');
       await alive;
-      g.beds({ hearth: 0.2, sea: 0.4 }, 4);
+      g.beds({ hearth: 0.2, sea: 0.4 });
       await g.say('narrator', 'Gray made up his mind to be a captain');
       await painting;
       g.beds({});
@@ -54,8 +52,7 @@ export default {
     // the night he goes: ⚑ farewell at his mother's door, or quietly with the note
     async g => {
       g.hero('grey');
-      g.beds({ hearth: 0.15 });
-      await g.scene(SCENES.castle, { beat: 'night' });
+      await g.scene(SCENES.castle, { beat: 'night' }, { beds: { hearth: 0.15 } });
       await g.beat('night');
       const leave = await g.choose('leave', {
         'mother_door#mother_door': [{ id: 'farewell', label: tr('Say goodbye') }],
@@ -89,9 +86,8 @@ export default {
     // the shrouds under Gop's eye
     async g => {
       g.hero('grey');
-      g.beds({ wind: 0.4, sea: 0.6 });
       const looks = g.told('anselm:looks-up');
-      await g.scene(SCENES.deck, { beat: 'anselm' });
+      await g.scene(SCENES.deck, { beat: 'anselm' }, { beds: { wind: 0.4, sea: 0.6 } });
       g.sound.rigging();
       const anselm = g.beat('anselm');
       await looks;
@@ -114,9 +110,8 @@ export default {
     // the letter: ⚑ home for long, or only for a share; then the secret
     async g => {
       g.hero('grey');
-      g.beds({ sea: 0.3 });
       const reading = g.told('letter:reading');
-      await g.scene(SCENES.deck, { beat: 'letter' });
+      await g.scene(SCENES.deck, { beat: 'letter' }, { beds: { sea: 0.3 } });
       g.sound.gulls();
       const letter = g.beat('letter');
       await reading;
@@ -129,8 +124,7 @@ export default {
       // (the scale at once: the warmth of the hall already shows it)
       g.scale('sea', way === 'home' ? -2 : 2);
       if (way === 'home') {
-        g.beds({ hearth: 0.4 });
-        await g.scene(SCENES.castle, { beat: 'return' });
+        await g.scene(SCENES.castle, { beat: 'return' }, { beds: { hearth: 0.4 } });
         await g.beat('return');
         const hand = g.told('stays:hand');
         const stays = g.beat('stays');
@@ -144,25 +138,22 @@ export default {
         await g.say('lilian', 'Take that cask from the cellar. It has waited for you');
         await spring;
       } else {
-        g.beds({ hearth: 0.2 });
-        await g.scene(SCENES.castle, { beat: 'return' });
+        await g.scene(SCENES.castle, { beat: 'return' }, { beds: { hearth: 0.2 } });
         await g.beat('return');
         const looking = g.told('one_evening:window');
         const evening = g.beat('one_evening');
         await looking;
         await g.say('lilian', 'You\'re leaving already');
         await evening;
-        g.beds({ sea: 0.3 });
         const turns = g.told('gop_bye:turns');
-        await g.scene(SCENES.deck, { beat: 'gop_bye' });
+        await g.scene(SCENES.deck, { beat: 'gop_bye' }, { beds: { sea: 0.3 } });
         const bye = g.beat('gop_bye');
         await turns;
         await g.say('gop', 'When you buy a ship, don\'t forget who taught you');
         await bye;
       }
-      g.beds({ sea: 0.3 });
       const touched = g.told('secret:hand-on-wheel');
-      await g.scene(SCENES.deck, { beat: 'secret' });
+      await g.scene(SCENES.deck, { beat: 'secret' }, { beds: { sea: 0.3 } });
       const secret = g.beat('secret');
       await touched;
       await g.say('narrator', 'He bought the three-masted galliot Secret');

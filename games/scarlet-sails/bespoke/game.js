@@ -32,7 +32,7 @@
 import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
-import { beds, unheard } from './sound.js';
+import { background, unheard } from './sound.js';
 import { jump as unseen } from './jump.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
@@ -69,6 +69,8 @@ export default async function (b) {
   // the language of mini-games in this game's hand: the plate's phrase written as the hints were
   b.minigame.style({ key: 'D_MAJOR_B_MINOR', font: '"Parusa Hand", "Segoe Script", cursive' }); // (D — the world's scenes' music is in it too)
   const hub = listen(b);
+  // (the game's background — its beds of sound — as the page sounds it: at a scene's cut with its music, or at once)
+  b.onBackground(background);
   const view = ui(b.layer);
   // (the page is heard only after a touch: a chapter that begins without the map does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
@@ -202,10 +204,9 @@ export default async function (b) {
     // (nothing of the chapter said or shown stays over the map)
     b.hush();
     view.quiet();
-    beds({ sea: 0.3 }, 2);
     view.gauges(null);
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, END);
-    await b.show(SCENES.far, { state: { shown: reveal ?? here } });
+    await b.show(SCENES.far, { state: { shown: reveal ?? here }, background: { sea: 0.3 } });
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let grown = reveal == null, asked = null; // (an option that would leave the replay: asked again)

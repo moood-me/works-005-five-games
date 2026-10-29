@@ -1,11 +1,13 @@
 // Sounds of the game's own, made in the page (Web Audio): nothing to load; they are as loud as the page's "sounds"
 // slider says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first touch), and
-// waits with the play as the scene's music does — paused, its scene standing or being made ready —, fading out and back
+// waits with the scene's music — the play paused, its scene standing —, fading out and back
 // in.
-//   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
+//   unheard() → {sounds} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down),
 // getting there over `seconds`:
-//   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
+//   background(levels, seconds) — the named beds to their levels, every other one to silence: the game's background as
+//     the page sounds it (bespoke.onBackground — at a scene's cut with its music, or at once: the game declares it,
+//     g.beds and g.scene's beds, and never times it)
 //   sea(level, seconds) — the sea from the shore · stream(level, seconds) — a brook over stones · wind(level, seconds)
 //     — wind on a ship · storm(level, seconds) — a storm at sea · breath(level, seconds) — a sleeper breathing:
 //     recordings (sounds/)
@@ -273,7 +275,7 @@ function bed(name, wet, build, level, seconds) {
   });
 }
 const BEDS = { sea, stream, wind, storm, campfire, hearth, breath, orchestra };
-export function beds(levels = {}, seconds = 2) {
+export function background(levels, seconds) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }
 
@@ -720,25 +722,16 @@ export function paper() {
   e.gain.linearRampToValueAtTime(0, t + len);
 }
 
-// the sounds of a step played unseen (a jump, a dry run: jump.js): nothing heard meanwhile — the beds heard from
-// then on as loud as the step left them; what was played once is over by then, and a handle begun meanwhile is mute
+// the sounds of a step played unseen (jump.js): nothing heard meanwhile — what was played once is over by then, and a
+// handle begun meanwhile is mute (the background the step declared is the jump's: j.background)
 export function unheard() {
-  const levels = {}, none = () => {}, mute = () => ({ loud() {}, stop() {} });
+  const none = () => {}, mute = () => ({ loud() {}, stop() {} });
   return {
     sounds: {
-      beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
-      sea(level = 1) { levels.sea = level; },
-      stream(level = 1) { levels.stream = level; },
-      wind(level = 1) { levels.wind = level; },
-      storm(level = 1) { levels.storm = level; },
-      campfire(level = 1) { levels.campfire = level; },
-      hearth(level = 1) { levels.hearth = level; },
-      breath(level = 1) { levels.breath = level; },
-      orchestra(level = 1) { levels.orchestra = level; },
+      sea: none, stream: none, wind: none, storm: none, campfire: none, hearth: none, breath: none, orchestra: none,
       violin: mute, song: mute,
       motif: none, tuning: none, gulls: none, knife: none, silk: none, brush: none, rigging: none, burn: none, splash: none,
       oars: none, horn: none, chain: none, knock: none, chime: none, paper: none,
     },
-    wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); },
   };
 }

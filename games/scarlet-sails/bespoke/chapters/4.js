@@ -17,8 +17,7 @@ export default {
     // the scarlet: the shop's rolls one by one, the right one found, the glow, the violinist outside
     async g => {
       g.hero('grey');
-      g.beds({});
-      await g.scene(SCENES.shop, { beat: 'silk_in' });
+      await g.scene(SCENES.shop, { beat: 'silk_in' }, { beds: {} });
       await g.beat('silk_in');
       const memory = g.beat('memory');
       g.sound.motif();
@@ -54,9 +53,8 @@ export default {
     async g => {
       if (facts(g.state).longren !== 'sea') return;
       g.hero('assol');
-      g.beds({ sea: 0.5 });
       const wave = g.told('longren_goes:wave');
-      await g.scene(SCENES.shore, { beat: 'longren_goes' });
+      await g.scene(SCENES.shore, { beat: 'longren_goes' }, { beds: { sea: 0.5 } });
       const goes = g.beat('longren_goes');
       await wave;
       await g.say('longren', 'Don\'t pine, Assol. I\'ll be back soon');
@@ -65,9 +63,8 @@ export default {
     // the girl: she sees the yacht — ~ give it, or keep it
     async g => {
       g.hero('assol');
-      g.beds({ sea: 0.5 });
       const came = g.told('girl:came');
-      await g.scene(SCENES.shore, { beat: 'girl' });
+      await g.scene(SCENES.shore, { beat: 'girl' }, { beds: { sea: 0.5 } });
       const girl = g.beat('girl');
       await came;
       await g.say('girl', 'Is it yours? With red sails…');
@@ -90,9 +87,8 @@ export default {
     // the silk: sewn on deck by night, the musicians tuning; Panten asks, Gray answers
     async g => {
       g.hero('grey');
-      g.beds({ sea: 0.3 });
       const panten = g.told('sew:panten');
-      await g.scene(SCENES.deck, { beat: 'sew' });
+      await g.scene(SCENES.deck, { beat: 'sew' }, { beds: { sea: 0.3 } });
       const sew = g.beat('sew');
       g.sound.silk();
       g.sound.tuning();
@@ -104,8 +100,7 @@ export default {
     // waiting: the lights that come and go; the windows go dark one by one
     async g => {
       g.hero('assol');
-      g.beds({ sea: 0.6 });
-      await g.scene(SCENES.shore, { beat: 'wait' });
+      await g.scene(SCENES.shore, { beat: 'wait' }, { beds: { sea: 0.6 } });
       await g.beat('wait');
       await g.play(wait);
       // a light that came near goes on behind the cape; one never looked into — or left on its way in — is gone at once,
@@ -124,8 +119,7 @@ export default {
     // the rail: Gray at the deck's rail, before the dawn — without words
     async g => {
       g.hero('grey');
-      g.beds({ sea: 0.5 });
-      await g.scene(SCENES.deck, { beat: 'rail' });
+      await g.scene(SCENES.deck, { beat: 'rail' }, { beds: { sea: 0.5 } });
       const rail = g.beat('rail');
       g.sound.rigging();
       await rail;

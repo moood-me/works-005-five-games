@@ -16,9 +16,8 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ sea: 0.5 }, 4);
       const look = g.told('night_end:look');
-      await g.scene(SCENES.deck, { beat: 'night_end' });
+      await g.scene(SCENES.deck, { beat: 'night_end' }, { beds: { sea: 0.5 } });
       const night = g.beat('night_end');
       let v = g.sound.violin(), song = null;
       const stop = () => {
@@ -37,9 +36,8 @@ export default {
     async g => {
       if (facts(g.state).longren !== 'sea') return;
       g.hero('both');
-      g.beds({ sea: 0.6 });
       const longren = g.told('steamer:longren');
-      await g.scene(SCENES.deck, { beat: 'steamer' });
+      await g.scene(SCENES.deck, { beat: 'steamer' }, { beds: { sea: 0.6 } });
       const steamer = g.beat('steamer');
       await longren;
       g.sound.horn();
@@ -49,8 +47,7 @@ export default {
     // the window: his mother, with the letter or alone with her candle — without words
     async g => {
       g.hero('both');
-      g.beds({ hearth: 0.2 });
-      await g.scene(SCENES.castle, { beat: 'window_end' });
+      await g.scene(SCENES.castle, { beat: 'window_end' }, { beds: { hearth: 0.2 } });
       await g.beat('window_end');
     },
   ],

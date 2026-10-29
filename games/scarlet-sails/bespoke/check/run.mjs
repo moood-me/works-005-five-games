@@ -154,7 +154,7 @@ for (const name in MINIGAMES) if (![...GAMES.values()].some(m => m.name === name
 const quietNames = Object.keys(sound.unheard().sounds);
 for (const name of quietNames) if (typeof sound[name] !== 'function') miss('sound.js', `the sound “${name}” is in unheard() but not in sound.js`);
 for (const name in sound) {
-  if (typeof sound[name] === 'function' && !['unheard'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
+  if (typeof sound[name] === 'function' && !['unheard', 'background'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
 }
 // the Far Sea, as game.js opens it
 const far = WORLD.get(SCENES.far);
@@ -221,13 +221,24 @@ function watched(g, j, ch, here, events) {
         bad(`no sound “${n}” in sound.js or in unheard()`);
         return false;
       };
-      if (name === 'beds') return (levels = {}, seconds) => { Object.keys(levels).forEach(known); quiet.beds(levels, seconds); };
       return known(name) ? quiet[name] : mute;
     },
   });
+  // the beds of a background the step declares (g.beds, g.scene's beds): {bed: level} of the beds sound.js has, and
+  // nothing more — the page times it (no seconds)
+  const declared = (levels, as) => {
+    if (!levels || typeof levels !== 'object' || Array.isArray(levels)) { bad(`${as}: not {bed: level}`); return; }
+    for (const n in levels) if (typeof sound[n] !== 'function' || !(n in j.sounds) || ['background', 'unheard'].includes(n)) bad(`${as}: the bed “${n}” is not in sound.js`);
+  };
   const w = Object.create(g);
   Object.assign(w, {
+    beds(levels, ...more) {
+      declared(levels, 'g.beds');
+      if (more.length) bad('g.beds: seconds — the page times the background');
+      return g.beds(levels);
+    },
     async scene(folder, st = {}, how) {
+      if (how?.beds !== undefined) declared(how.beds, `g.scene “${folder}” beds`);
       const scene = WORLD.get(folder), party = carry(folder, facts(g.state));
       if (scene && party) {
         cur = { folder, scene, last: null, opening: typeof st.beat === 'string' ? st.beat : null };

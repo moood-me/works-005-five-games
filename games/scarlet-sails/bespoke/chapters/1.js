@@ -19,8 +19,7 @@ export default {
     // the workshop: the scrap, the rigging with her father, the glow of the sail
     async g => {
       g.hero('assol');
-      g.beds({ sea: 0.2 });
-      await g.scene(SCENES.home, { beat: 'evening' }, { cut: true });
+      await g.scene(SCENES.home, { beat: 'evening' }, { cut: true, beds: { sea: 0.2 } });
       g.sound.knife();
       await g.beat('evening');
       await g.say('longren', 'A scrap is left. Scarlet silk. They line the cabins of rich steamers with it');
@@ -44,9 +43,8 @@ export default {
     // the shop in Liss no longer takes toys
     async g => {
       g.hero('assol');
-      g.beds({});
       const no = g.told('toys_in:no');
-      await g.scene(SCENES.shop, { beat: 'toys_in' });
+      await g.scene(SCENES.shop, { beat: 'toys_in' }, { beds: {} });
       const toys = g.beat('toys_in');
       await no;
       await g.say('merchant', 'We don\'t take them any more. Foreign toys are the fashion now');
@@ -55,9 +53,8 @@ export default {
     // the stream: the toy ship afloat, and the run after it
     async g => {
       g.hero('assol');
-      g.beds({ stream: 0.6 }, 3);
       const afloat = g.told('launch:afloat');
-      await g.scene(SCENES.forest, { beat: 'launch' });
+      await g.scene(SCENES.forest, { beat: 'launch' }, { beds: { stream: 0.6 } });
       const launch = g.beat('launch');
       await afloat;
       await g.say('narrator', 'By the stream she wanted to see how the yacht would sail');
@@ -71,8 +68,7 @@ export default {
     // Egle at the stream's mouth: the tale, and what she asks
     async g => {
       g.hero('assol');
-      g.beds({ stream: 0.3, sea: 0.5 });
-      await g.scene(SCENES.forest, { beat: 'mouth' });
+      await g.scene(SCENES.forest, { beat: 'mouth' }, { beds: { stream: 0.3, sea: 0.5 } });
       await g.beat('mouth');
       const tale = g.told('egl:tale'), sail = g.told('egl:sail'), boat = g.told('egl:boat');
       const egl = g.beat('egl');
@@ -109,9 +105,8 @@ export default {
     // home: she tells it; the whole of Kaperna knows by morning
     async g => {
       g.hero('assol');
-      g.beds({ sea: 0.2 });
       const down = g.told('tell:down'), collier = g.told('tell:collier');
-      await g.scene(SCENES.home, { beat: 'tell' });
+      await g.scene(SCENES.home, { beat: 'tell' }, { beds: { sea: 0.2 } });
       const tell = g.beat('tell');
       await down;
       await g.say('assol_child', 'He will sail here for me. Under scarlet sails!', 'assol');
@@ -123,9 +118,8 @@ export default {
     // the children at the boats: ⚑ «I'm not lying» or «I made it up»
     async g => {
       g.hero('assol');
-      g.beds({ sea: 0.5 });
       const laugh = g.told('kids:laugh'), beckon = g.told('kids:beckon');
-      await g.scene(SCENES.shore, { beat: 'kids' });
+      await g.scene(SCENES.shore, { beat: 'kids' }, { beds: { sea: 0.5 } });
       g.sound.gulls();
       const kids = g.beat('kids');
       await laugh;
@@ -142,9 +136,8 @@ export default {
         await g.say('assol_child', 'I\'m not lying', 'assol');
         await g.beat('alone');
         g.scale('tale', 1);
-        g.beds({ sea: 0.2 });
         const knees = g.told('why:knees');
-        await g.scene(SCENES.home, { beat: 'why' });
+        await g.scene(SCENES.home, { beat: 'why' }, { beds: { sea: 0.2 } });
         const why = g.beat('why');
         await knees;
         await g.say('assol_child', 'Why won\'t they play with us?', 'assol');
@@ -154,8 +147,7 @@ export default {
         await g.say('assol_child', 'I made it up', 'assol');
         await g.beat('play');
         g.scale('tale', -1);
-        g.beds({ sea: 0.2 });
-        await g.scene(SCENES.home, { beat: 'shelf' });
+        await g.scene(SCENES.home, { beat: 'shelf' }, { beds: { sea: 0.2 } });
         await g.beat('shelf');
       }
       g.gauge('tale');

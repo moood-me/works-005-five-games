@@ -19,16 +19,14 @@ export default {
     // Longren: the shop turns the toys away again; at home he means to go back to the sea
     async g => {
       g.hero('assol');
-      g.beds({});
       const looks = g.told('toys_again:looks');
-      await g.scene(SCENES.shop, { beat: 'toys_again' });
+      await g.scene(SCENES.shop, { beat: 'toys_again' }, { beds: {} });
       const toys = g.beat('toys_again');
       await g.say('narrator', 'Nine years went by');
       await looks;
       await g.say('merchant', 'We don\'t take them. I told your father');
       await toys;
-      g.beds({ sea: 0.2 });
-      await g.scene(SCENES.home, { beat: 'years' });
+      await g.scene(SCENES.home, { beat: 'years' }, { beds: { sea: 0.2 } });
       await g.beat('years');
       const turned = g.told('decide:turned');
       const decide = g.beat('decide');
@@ -52,9 +50,8 @@ export default {
     // the fire: Gray and Letika, a night's fishing off Kaperna
     async g => {
       g.hero('grey');
-      g.beds({ campfire: 0.6, sea: 0.4 });
       const letika = g.told('fire:letika');
-      await g.scene(SCENES.forest, { beat: 'fire' });
+      await g.scene(SCENES.forest, { beat: 'fire' }, { beds: { campfire: 0.6, sea: 0.4 } });
       const fire = g.beat('fire');
       await g.say('narrator', 'The Secret lay at Liss. Gray and Letika went out by night to fish off Kaperna');
       await letika;
@@ -64,9 +61,8 @@ export default {
     // the sleeping girl: the ring is put on her hand while she sleeps — still, or she wakes
     async g => {
       g.hero('grey');
-      g.beds({ sea: 0.4 });
       const found = g.told('dawn_walk:found');
-      await g.scene(SCENES.forest, { beat: 'dawn_walk' });
+      await g.scene(SCENES.forest, { beat: 'dawn_walk' }, { beds: { sea: 0.4 } });
       const walk = g.beat('dawn_walk');
       await found;
       await g.say('narrator', 'A girl lay asleep in the grass');
@@ -87,8 +83,7 @@ export default {
     // the ring: she wakes with it on her hand — ~ wear it, or hide it on a cord under the dress
     async g => {
       g.hero('assol');
-      g.beds({ sea: 0.4 });
-      await g.scene(SCENES.forest, { beat: 'wake' });
+      await g.scene(SCENES.forest, { beat: 'wake' }, { beds: { sea: 0.4 } });
       const wake = g.beat('wake');
       g.sound.gulls();
       await wake;
@@ -109,9 +104,8 @@ export default {
     // the tavern: Hin's tale, the past it tells, the touch on Philip, her passing
     async g => {
       g.hero('grey');
-      g.beds({ sea: 0.4 });
       const hin = g.told('tavern:hin');
-      await g.scene(SCENES.shore, { beat: 'tavern' });
+      await g.scene(SCENES.shore, { beat: 'tavern' }, { beds: { sea: 0.4 } });
       const tavern = g.beat('tavern');
       await hin;
       await g.say('hin', 'Ship Assol. Touched in the head. Waiting for a prince from over the sea, under red sails');
@@ -120,7 +114,7 @@ export default {
       const door = g.told('past_mary:door');
       const goes = g.told('past_mary:goes');
       const mary = g.beat('past_mary');
-      g.beds({ storm: 0.5 }, 1);
+      g.beds({ storm: 0.5 });
       await door;
       await g.say('narrator', 'Assol\'s mother asked Menners for a loan. He wanted something else for the money');
       await goes;
@@ -129,14 +123,14 @@ export default {
       const cry = g.told('past_storm:cry');
       const gone = g.told('past_storm:gone');
       const storm = g.beat('past_storm');
-      g.beds({ storm: 1 }, 1);
+      g.beds({ storm: 1 });
       await cry;
       await g.say('longren', 'She begged you just the same way!');
       await gone;
       await g.say('narrator', 'A steamer picked Menners up. He lived long enough to tell Kaperna how Longren had watched');
       await storm;
       const back = g.beat('tavern_back');
-      g.beds({ sea: 0.4 }, 1);
+      g.beds({ sea: 0.4 });
       await back;
       await g.choose(null, { filipp: [{ id: 'ask', label: tr('Ask the collier') }] });
       await g.say('filipp', 'He\'s lying. She\'s not touched. She sat with me on my cart, and my basket seemed to burst into bloom');
@@ -150,9 +144,8 @@ export default {
     // the secret or straight: back to the skiff, or to Longren
     async g => {
       g.hero('grey');
-      g.beds({ sea: 0.5 });
       const alone = g.told('grey_shore:alone');
-      await g.scene(SCENES.shore, { beat: 'grey_shore' });
+      await g.scene(SCENES.shore, { beat: 'grey_shore' }, { beds: { sea: 0.5 } });
       const shore = g.beat('grey_shore');
       await alone;
       await g.say('grey', 'I don\'t know if she is still waiting');
@@ -174,8 +167,7 @@ export default {
       await boat;
       if (g.state.choices.longren === 'go') {
         await g.say('longren', 'Then I\'ll wait too');
-        g.beds({ sea: 0.2 });
-        await g.scene(SCENES.home, { beat: 'unpack' });
+        await g.scene(SCENES.home, { beat: 'unpack' }, { beds: { sea: 0.2 } });
         await g.beat('unpack');
       }
     },

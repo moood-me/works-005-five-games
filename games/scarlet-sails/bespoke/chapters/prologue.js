@@ -11,8 +11,7 @@ export default {
   steps: [
     async g => {
       g.hero('both');
-      g.beds({ sea: 0.5 }, 4);
-      await g.scene(SCENES.shore, { beat: 'spark' });
+      await g.scene(SCENES.shore, { beat: 'spark' }, { beds: { sea: 0.5 } });
       await g.beat('spark');
       await g.wait(2000);
       await g.choose(null, { 'ship_rig#ship': [{ id: 'look', label: tr('Look closer') }] });
