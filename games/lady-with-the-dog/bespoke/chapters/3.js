@@ -13,7 +13,7 @@ export default {
   number: 'III',
   title: tr('Winter'),
   season: () => 'winter',
-  titles: ['First snow', 'The leash', 'The club', 'Departure'],
+  titles: [tr('First snow'), tr('The leash'), tr('The club'), tr('Departure')],
   choices: [
     { id: 'club', weight: '~', title: tr('After the sturgeon'), options: [{ id: 'laugh', label: tr('Laugh and get into the sledge') }, { id: 'walk', label: tr('Walk away') }] },
   ],

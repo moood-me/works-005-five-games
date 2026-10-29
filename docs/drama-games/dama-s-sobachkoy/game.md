@@ -6,6 +6,15 @@
 > `moood-me/studio:docs/history/2026-10-16-multilang-migration.md`); сцены, которых ещё нет, — `main`, `moscow`, `town`, `theatre`,
 > `lights`; раздел проверки в `notes.md` — «Contract for the check». Ниже — как было сделано до этого (и `scenes.md`,
 > `work.md`, `design.md` рядом).
+>
+> **С 2026-10-29** (`docs/history/2026-10-29-dama-game.md`): каркас — «Кино Парадизо» в том виде, какой у него теперь
+> (moood `docs/games/games.md`): карта партии вместо «Огней» между главами — сцена `lights` фоном (точки глав `c0…c7`,
+> `author`, ключи `shown`, `come`, по желанию `season`) и деревья глав, нарисованные игрой (`map.js`); переигровки; ⏭ —
+> страницы (`bespoke.forward`: где игрок уже был, в мини-игре — по своему правилу), ⏸ и ☰ — страницы; `bespoke.at`,
+> `bespoke.ended`. Шпица «Огней» и его лепестков больше нет; §3.3–3.4, §3.12, §9 «Инструменты» — так. Письмо звучит, пока
+> лежит открытым: `g.letter({text, sign, voice: () => g.say(…)})` вместо `Promise.all` (§3.6). Папки сцен: `embankment`,
+> `room`, `oreanda`, `station`, `moscow`, `town-s`, `theatre`, `bazaar`, `lights`. Проверка веток — `bespoke/check/run.mjs`
+> (§11; переигровки и карту она не гоняет).
 
 2026-10-15, четвёртая редакция (после третьего чтения). Как устроен код игры: по этому файлу и [scenes.md](scenes.md)
 пишется всё в её репозитории. Замысел — [design.md](design.md) (история — только оттуда); кто что пишет и в каком

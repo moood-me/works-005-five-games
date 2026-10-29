@@ -1,0 +1,2370 @@
+{
+  "engine": 3,
+  "title": "The Sea-front",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      -45,
+      45
+    ]
+  },
+  "modules": [
+    "sky",
+    "cast",
+    "spitz",
+    "beats"
+  ],
+  "light": {
+    "vignette": 0.25,
+    "grain": 0.12,
+    "ambient": 1,
+    "ambientColor": "#ffffff",
+    "bounce": 0.5,
+    "haze": 0.04,
+    "hazeColor": "#d6dde4",
+    "hazeGlow": 0.5,
+    "saturation": 0.95,
+    "inside": 0.55,
+    "wind": [
+      -1,
+      0.3,
+      0.3
+    ],
+    "looks": {
+      "day": {
+        "ambient": 0.9,
+        "ambientColor": "#f6f4ee",
+        "haze": 0.06,
+        "hazeColor": "#e0e6ea"
+      },
+      "dawn": {
+        "ambient": 0.85,
+        "ambientColor": "#e6e8ee",
+        "haze": 0.04,
+        "hazeColor": "#d9dade",
+        "tint": "#f3dccb",
+        "tintStrength": 0.05
+      },
+      "dusk": {
+        "ambient": 0.8,
+        "ambientColor": "#dccfe0",
+        "haze": 0.08,
+        "hazeColor": "#b6a8c2",
+        "tint": "#e7b9a6",
+        "tintStrength": 0.08,
+        "shafts": 0.2
+      },
+      "night": {
+        "ambient": 0.62,
+        "ambientColor": "#9fb1d8",
+        "haze": 0.08,
+        "hazeColor": "#24304a",
+        "saturation": 0.8
+      },
+      "glare": {
+        "brightness": 1.75,
+        "saturation": 0.5,
+        "haze": 0.35,
+        "hazeColor": "#ffffff"
+      },
+      "glass": {
+        "vignette": 0.85
+      },
+      "wind": {
+        "wind": [
+          -1,
+          0.3,
+          2.2
+        ],
+        "haze": 0.1,
+        "hazeColor": "#cdbfa2"
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "color": "#fff1de",
+      "strength": 0.75,
+      "on": "sun_light"
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "color": "#b8c7e6",
+      "strength": 0.6,
+      "on": "moon_light"
+    },
+    {
+      "id": "lamps",
+      "of": "lamp",
+      "color": "#ffd49a",
+      "strength": 1.1,
+      "reach": 7,
+      "on": "lamps"
+    },
+    {
+      "id": "steamer_mast",
+      "of": "steamer_house#mast",
+      "color": "#ffe2b0",
+      "strength": 1,
+      "reach": 12,
+      "on": "steamer_lit"
+    },
+    {
+      "id": "steamer_mast2",
+      "of": "steamer_house#mast2",
+      "color": "#ffe2b0",
+      "strength": 0.8,
+      "reach": 10,
+      "on": "steamer_lit"
+    }
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "Sky",
+      "sky": true,
+      "uniforms": {
+        "tr": 0.42,
+        "tg": 0.5,
+        "tb": 0.61,
+        "mr": 0.65,
+        "mg": 0.71,
+        "mb": 0.77,
+        "lr": 0.89,
+        "lg": 0.85,
+        "lb": 0.83,
+        "gr": 0.96,
+        "gg": 0.87,
+        "gb": 0.8,
+        "sr": 0.31,
+        "sg": 0.39,
+        "sb": 0.47,
+        "horizon": 0.5,
+        "x0": -0.4,
+        "span": 2.58,
+        "all_round": 0,
+        "day": 0.55,
+        "night": 0,
+        "storm": 0,
+        "sun_x": 0.89,
+        "sun_y": 0.2,
+        "sun_up": 0,
+        "sun_low": 0,
+        "moon_x": 0.89,
+        "moon_y": 0.3,
+        "moon_up": 0
+      }
+    },
+    {
+      "id": "capes",
+      "name": "Capes of the bay",
+      "across": 0,
+      "distance": 2600,
+      "height": 450,
+      "box": [
+        -5600,
+        -440,
+        5600,
+        5
+      ]
+    },
+    {
+      "id": "sea",
+      "name": "Sea",
+      "plane": true,
+      "water": true,
+      "across": 0,
+      "distance": 1259,
+      "elevation": -1,
+      "width": 3000,
+      "depth": 2500,
+      "reflect": {
+        "strength": 0.55,
+        "fade": 0,
+        "rough": 0.45,
+        "ripple": 0.3
+      }
+    },
+    {
+      "id": "promenade",
+      "name": "Sea-front flags",
+      "plane": true,
+      "across": 0,
+      "distance": 0,
+      "elevation": 0,
+      "width": 130,
+      "depth": 17.9
+    },
+    {
+      "id": "gardens",
+      "name": "Gardens' gravel",
+      "plane": true,
+      "across": 23,
+      "distance": 4.2,
+      "elevation": 0.006,
+      "width": 10,
+      "depth": 8.4
+    },
+    {
+      "id": "alley_path",
+      "name": "Avenue",
+      "plane": true,
+      "across": 34,
+      "distance": -0.6,
+      "elevation": 0.006,
+      "width": 5,
+      "depth": 17.6
+    },
+    {
+      "id": "parapet",
+      "name": "Parapet",
+      "across": 0,
+      "distance": 8.5,
+      "facing": 180,
+      "height": 0.85,
+      "box": [
+        -62,
+        -0.92,
+        62,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "parapet_top_l",
+      "name": "Parapet top",
+      "plane": true,
+      "across": -47,
+      "distance": 8.725,
+      "elevation": 0.8,
+      "width": 30,
+      "depth": 0.45
+    },
+    {
+      "id": "parapet_top_r",
+      "name": "Parapet top",
+      "plane": true,
+      "across": 17,
+      "distance": 8.725,
+      "elevation": 0.8,
+      "width": 90,
+      "depth": 0.45
+    },
+    {
+      "id": "lamp",
+      "name": "Lamp-post",
+      "height": 3.7,
+      "box": [
+        -0.3,
+        -3.75,
+        0.3,
+        0.05
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -56,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -48,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": -40,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -33.4,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": -26.6,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -20,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": -12,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -4,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": 4,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": 12,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": 20,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": 28,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": 44,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": 52,
+          "distance": 8.15,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": -31.7,
+          "distance": 12.6,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -28.3,
+          "distance": 12.6,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": -31.7,
+          "distance": 17.2,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -28.3,
+          "distance": 17.2,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": -39.6,
+          "distance": 25.6,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -24.4,
+          "distance": 25.6,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": -39.6,
+          "distance": 18.4,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": -24.4,
+          "distance": 18.4,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": 19.9,
+          "distance": 5.4,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": 26.1,
+          "distance": 5.7,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": 22.9,
+          "distance": 7.7,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": 31.7,
+          "distance": 3.2,
+          "facing": 180,
+          "flip": true
+        },
+        {
+          "across": 36.4,
+          "distance": 5.6,
+          "facing": 180,
+          "flip": false
+        },
+        {
+          "across": 36.4,
+          "distance": -3.4,
+          "facing": 180,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "acacia",
+      "name": "Acacia",
+      "height": 7.5,
+      "box": [
+        -3.3,
+        -7.5,
+        3.3,
+        0.1
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 19,
+          "distance": 7.5,
+          "scale": 1,
+          "flip": false,
+          "facing": 180
+        },
+        {
+          "across": 25.1,
+          "distance": 7.9,
+          "scale": 0.9,
+          "flip": true,
+          "facing": 180
+        },
+        {
+          "across": 28.2,
+          "distance": 6.9,
+          "scale": 1.1,
+          "flip": false,
+          "facing": 180
+        },
+        {
+          "across": 31.4,
+          "distance": -6.2,
+          "scale": 1,
+          "flip": true,
+          "facing": 180
+        },
+        {
+          "across": 31.5,
+          "distance": -1.8,
+          "scale": 0.95,
+          "flip": false,
+          "facing": 180
+        },
+        {
+          "across": 31.4,
+          "distance": 2.6,
+          "scale": 1.05,
+          "flip": true,
+          "facing": 180
+        },
+        {
+          "across": 31.6,
+          "distance": 6.3,
+          "scale": 0.9,
+          "flip": false,
+          "facing": 180
+        },
+        {
+          "across": 36.7,
+          "distance": -5,
+          "scale": 1.05,
+          "flip": false,
+          "facing": 180
+        },
+        {
+          "across": 36.8,
+          "distance": -0.6,
+          "scale": 0.9,
+          "flip": true,
+          "facing": 180
+        },
+        {
+          "across": 36.9,
+          "distance": 4,
+          "scale": 1,
+          "flip": false,
+          "facing": 180
+        },
+        {
+          "across": 37,
+          "distance": 7.6,
+          "scale": 1.1,
+          "flip": true,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "cypress",
+      "name": "Cypress",
+      "height": 7.6,
+      "box": [
+        -0.9,
+        -7.6,
+        0.9,
+        0.05
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 9,
+          "distance": 2.4,
+          "scale": 1,
+          "facing": 180
+        },
+        {
+          "across": 8.6,
+          "distance": -1.2,
+          "scale": 0.9,
+          "facing": 180
+        },
+        {
+          "across": 19.1,
+          "distance": 2.9,
+          "scale": 1.05,
+          "facing": 180
+        },
+        {
+          "across": 29.6,
+          "distance": 7.8,
+          "scale": 1.1,
+          "facing": 180
+        },
+        {
+          "across": -14.5,
+          "distance": -6.5,
+          "scale": 1,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "pav_floor",
+      "name": "Pavilion floor",
+      "plane": true,
+      "walk": true,
+      "inside": true,
+      "across": 14,
+      "distance": -0.7,
+      "elevation": 0.12,
+      "width": 8,
+      "depth": 6.6
+    },
+    {
+      "id": "pav_awning",
+      "name": "Pavilion awning",
+      "inside": true,
+      "across": 14,
+      "distance": -4,
+      "elevation": 3.1,
+      "facing": 180,
+      "tilt": 90,
+      "height": 6.6,
+      "box": [
+        -4.2,
+        -6.62,
+        4.2,
+        0
+      ]
+    },
+    {
+      "id": "pav_valance",
+      "name": "Pavilion valance",
+      "across": 14,
+      "distance": 2.62,
+      "elevation": 2.6,
+      "facing": 180,
+      "height": 0.55,
+      "box": [
+        -4.2,
+        -0.56,
+        4.2,
+        0.08
+      ]
+    },
+    {
+      "id": "pav_posts",
+      "name": "Pavilion posts",
+      "inside": true,
+      "height": 3,
+      "box": [
+        -0.12,
+        -3,
+        0.12,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 10.1,
+          "distance": 2.5,
+          "elevation": 0.12,
+          "facing": 180
+        },
+        {
+          "across": 14,
+          "distance": 2.5,
+          "elevation": 0.12,
+          "facing": 180
+        },
+        {
+          "across": 17.9,
+          "distance": 2.5,
+          "elevation": 0.12,
+          "facing": 180
+        },
+        {
+          "across": 10.1,
+          "distance": -3.9,
+          "elevation": 0.12,
+          "facing": 180
+        },
+        {
+          "across": 17.9,
+          "distance": -3.9,
+          "elevation": 0.12,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "pav_rail",
+      "name": "Pavilion rail",
+      "inside": true,
+      "across": 14,
+      "distance": 2.6,
+      "elevation": 0.12,
+      "facing": 180,
+      "height": 0.9,
+      "box": [
+        -4,
+        -1.1,
+        4,
+        0.02
+      ]
+    },
+    {
+      "id": "pav_table",
+      "name": "His table",
+      "plane": true,
+      "inside": true,
+      "across": 14.75,
+      "distance": 2,
+      "elevation": 0.86,
+      "width": 0.8,
+      "depth": 0.8
+    },
+    {
+      "id": "pav_table_foot",
+      "name": "His table",
+      "inside": true,
+      "across": 14.75,
+      "distance": 2,
+      "elevation": 0.12,
+      "facing": 180,
+      "height": 0.76,
+      "box": [
+        -0.42,
+        -0.76,
+        0.42,
+        0.03
+      ]
+    },
+    {
+      "id": "pav_chair",
+      "name": "His chair",
+      "inside": true,
+      "across": 14.55,
+      "distance": 1.4500000000000002,
+      "elevation": 0.12,
+      "facing": 20,
+      "height": 1,
+      "box": [
+        -0.25,
+        -1,
+        0.25,
+        0.02
+      ]
+    },
+    {
+      "id": "tables",
+      "name": "Garden tables",
+      "plane": true,
+      "width": 0.8,
+      "depth": 0.8,
+      "elevation": 0.74,
+      "shadow": true,
+      "copies": [
+        {
+          "across": 21.6,
+          "distance": 3.8
+        },
+        {
+          "across": 24.1,
+          "distance": 3.8
+        },
+        {
+          "across": 20.1,
+          "distance": 6.3
+        },
+        {
+          "across": 25.8,
+          "distance": 6.5
+        },
+        {
+          "across": 27.4,
+          "distance": 3.6
+        }
+      ]
+    },
+    {
+      "id": "table_feet",
+      "name": "Garden tables",
+      "height": 0.76,
+      "box": [
+        -0.42,
+        -0.76,
+        0.42,
+        0.03
+      ],
+      "copies": [
+        {
+          "across": 21.6,
+          "distance": 3.8,
+          "facing": 180
+        },
+        {
+          "across": 24.1,
+          "distance": 3.8,
+          "facing": 180
+        },
+        {
+          "across": 20.1,
+          "distance": 6.3,
+          "facing": 180
+        },
+        {
+          "across": 25.8,
+          "distance": 6.5,
+          "facing": 180
+        },
+        {
+          "across": 27.4,
+          "distance": 3.6,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "chairs",
+      "name": "Garden chairs",
+      "height": 1,
+      "box": [
+        -0.25,
+        -1,
+        0.25,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 21.75,
+          "distance": 4.57,
+          "facing": 180
+        },
+        {
+          "across": 23.95,
+          "distance": 4.57,
+          "facing": 180
+        },
+        {
+          "across": 20.1,
+          "distance": 6.8,
+          "facing": 180
+        },
+        {
+          "across": 25.8,
+          "distance": 7,
+          "facing": 180
+        },
+        {
+          "across": 27.4,
+          "distance": 4.1,
+          "facing": 180
+        },
+        {
+          "across": 19.6,
+          "distance": 5.9,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "bench",
+      "name": "Seat",
+      "across": 35.95,
+      "distance": 1.7,
+      "facing": 210,
+      "height": 0.9,
+      "box": [
+        -1,
+        -0.9,
+        1,
+        0.03
+      ],
+      "shadow": true
+    },
+    {
+      "id": "hedge",
+      "name": "Hedge",
+      "across": 32.4,
+      "distance": 7.6,
+      "facing": 180,
+      "height": 2,
+      "box": [
+        -1.9,
+        -2.1,
+        1.9,
+        0.17
+      ],
+      "shadow": true
+    },
+    {
+      "id": "pier_neck",
+      "name": "Pier",
+      "plane": true,
+      "walk": true,
+      "across": -30,
+      "distance": 13.475,
+      "elevation": 0.02,
+      "width": 4,
+      "depth": 9.05
+    },
+    {
+      "id": "pier_head",
+      "name": "Pier head",
+      "plane": true,
+      "walk": true,
+      "across": -32,
+      "distance": 22,
+      "elevation": 0.02,
+      "width": 16,
+      "depth": 8
+    },
+    {
+      "id": "rail_neck_l",
+      "name": "Pier railing",
+      "across": -32,
+      "distance": 13.475,
+      "elevation": 0.02,
+      "facing": 90,
+      "height": 1.05,
+      "box": [
+        -4.53,
+        -1.1,
+        4.53,
+        0.02
+      ]
+    },
+    {
+      "id": "rail_neck_r",
+      "name": "Pier railing",
+      "across": -28,
+      "distance": 13.475,
+      "elevation": 0.02,
+      "facing": 270,
+      "height": 1.05,
+      "box": [
+        -4.53,
+        -1.1,
+        4.53,
+        0.02
+      ]
+    },
+    {
+      "id": "rail_head_far",
+      "name": "Pier railing",
+      "across": -32,
+      "distance": 26,
+      "elevation": 0.02,
+      "facing": 180,
+      "height": 1.05,
+      "box": [
+        -8,
+        -1.1,
+        8,
+        0.02
+      ]
+    },
+    {
+      "id": "rail_head_l",
+      "name": "Pier railing",
+      "across": -40,
+      "distance": 22,
+      "elevation": 0.02,
+      "facing": 90,
+      "height": 1.05,
+      "box": [
+        -4,
+        -1.1,
+        4,
+        0.02
+      ]
+    },
+    {
+      "id": "rail_head_r",
+      "name": "Pier railing",
+      "across": -24,
+      "distance": 22,
+      "elevation": 0.02,
+      "facing": 270,
+      "height": 1.05,
+      "box": [
+        -4,
+        -1.1,
+        4,
+        0.02
+      ]
+    },
+    {
+      "id": "rail_head_near_l",
+      "name": "Pier railing",
+      "across": -36,
+      "distance": 18,
+      "elevation": 0.02,
+      "facing": 180,
+      "height": 1.05,
+      "box": [
+        -4,
+        -1.1,
+        4,
+        0.02
+      ]
+    },
+    {
+      "id": "rail_head_near_r",
+      "name": "Pier railing",
+      "across": -26,
+      "distance": 18,
+      "elevation": 0.02,
+      "facing": 180,
+      "height": 1.05,
+      "box": [
+        -2,
+        -1.1,
+        2,
+        0.02
+      ]
+    },
+    {
+      "id": "kiosk_front",
+      "name": "Kiosk",
+      "across": -26.5,
+      "distance": 20.3,
+      "elevation": 0.02,
+      "facing": 180,
+      "height": 2.8,
+      "box": [
+        -1.05,
+        -2.8,
+        1.05,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "kiosk_side",
+      "name": "Kiosk",
+      "across": -27.5,
+      "distance": 21.3,
+      "elevation": 0.02,
+      "facing": 270,
+      "height": 2.8,
+      "box": [
+        -0.85,
+        -2.8,
+        0.85,
+        0.02
+      ],
+      "shadow": true
+    },
+    {
+      "id": "kiosk_roof",
+      "name": "Kiosk roof",
+      "plane": true,
+      "across": -26.5,
+      "distance": 21.3,
+      "elevation": 2.74,
+      "width": 2.1,
+      "depth": 2.05
+    },
+    {
+      "id": "steamer",
+      "name": "Steamer",
+      "unseen": true,
+      "across": -95,
+      "distance": 150,
+      "elevation": 1.2,
+      "facing": 212,
+      "place": {
+        "across": "steamer_a",
+        "distance": "steamer_d",
+        "facing": "steamer_f"
+      }
+    },
+    {
+      "id": "steamer_hull",
+      "name": "Steamer",
+      "on": "steamer",
+      "distance": -3.5,
+      "facing": 180,
+      "height": 4,
+      "box": [
+        -27,
+        -3.75,
+        28,
+        0.3
+      ],
+      "shadow": true
+    },
+    {
+      "id": "steamer_house",
+      "name": "Steamer",
+      "on": "steamer",
+      "distance": -1.2,
+      "facing": 180,
+      "height": 19.5,
+      "box": [
+        -27.5,
+        -19.6,
+        27.5,
+        -2.5
+      ],
+      "shadow": true
+    },
+    {
+      "id": "steamer_deck",
+      "name": "Steamer deck",
+      "plane": true,
+      "walk": true,
+      "unseen": true,
+      "on": "steamer",
+      "across": 0,
+      "distance": 0,
+      "elevation": 2.1,
+      "width": 46,
+      "depth": 6.4
+    },
+    {
+      "id": "smoke",
+      "name": "Steamer smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "steamer_house#funnel",
+        "amount": "smoke",
+        "color": "#8a8682"
+      }
+    },
+    {
+      "id": "gangway",
+      "name": "Gangway",
+      "plane": true,
+      "walk": true,
+      "across": -34,
+      "distance": 25.4,
+      "elevation": 0.56,
+      "width": 1,
+      "depth": 3.759,
+      "tilt": 16.7
+    },
+    {
+      "id": "crowd1",
+      "name": "Crowd on the pier",
+      "height": 1.9,
+      "box": [
+        -0.95,
+        -1.95,
+        0.95,
+        0.03
+      ],
+      "copies": [
+        {
+          "across": -38.4,
+          "distance": 23.4,
+          "elevation": 0.02,
+          "facing": 180
+        },
+        {
+          "across": -25.6,
+          "distance": 22.2,
+          "elevation": 0.02,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "crowd2",
+      "name": "Crowd on the pier",
+      "height": 1.9,
+      "box": [
+        -0.95,
+        -1.95,
+        0.95,
+        0.03
+      ],
+      "copies": [
+        {
+          "across": -37.6,
+          "distance": 25.2,
+          "elevation": 0.02,
+          "facing": 180
+        },
+        {
+          "across": -27.4,
+          "distance": 24.8,
+          "elevation": 0.02,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "crowd3",
+      "name": "Crowd on the pier",
+      "height": 1.9,
+      "box": [
+        -0.95,
+        -1.95,
+        0.95,
+        0.03
+      ],
+      "copies": [
+        {
+          "across": -29,
+          "distance": 19.6,
+          "elevation": 0.02,
+          "facing": 180
+        },
+        {
+          "across": -38.8,
+          "distance": 20.2,
+          "elevation": 0.02,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "crowd4",
+      "name": "Crowd on the pier",
+      "height": 1.9,
+      "box": [
+        -0.95,
+        -1.95,
+        0.95,
+        0.03
+      ],
+      "copies": [
+        {
+          "across": -26,
+          "distance": 19.8,
+          "elevation": 0.02,
+          "facing": 180
+        },
+        {
+          "across": -35.6,
+          "distance": 19.4,
+          "elevation": 0.02,
+          "facing": 180
+        }
+      ]
+    },
+    {
+      "id": "dust",
+      "name": "Dust in the wind",
+      "particles": {
+        "kind": "puff",
+        "at": [
+          -32,
+          20,
+          0.3
+        ],
+        "source": [
+          16,
+          12,
+          0.6
+        ],
+        "rate": 5,
+        "amount": "wind",
+        "wind": 1.4,
+        "gust": 1,
+        "color": "#d6cab0",
+        "opacity": 0.3,
+        "size": [
+          0.5,
+          2
+        ],
+        "life": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "id": "spitz",
+      "name": "Pomeranian",
+      "across": 0,
+      "distance": 7.6,
+      "height": 0.45,
+      "box": [
+        -2.6,
+        -2.2,
+        2.6,
+        0.3
+      ],
+      "shadow": true,
+      "place": {
+        "across": "spitz_a",
+        "distance": "spitz_d",
+        "elevation": "spitz_e",
+        "facing": "spitz_face"
+      }
+    },
+    {
+      "id": "gurov",
+      "name": "Gurov",
+      "person": {
+        "cast": "cast",
+        "who": "gurov_summer",
+        "turn": 180
+      },
+      "across": 64.3,
+      "distance": -12,
+      "place": {
+        "across": "gurov_a",
+        "distance": "gurov_d"
+      }
+    },
+    {
+      "id": "anna",
+      "name": "Anna Sergeyevna",
+      "person": {
+        "cast": "cast",
+        "who": "anna_summer",
+        "turn": 180
+      },
+      "across": -6.5,
+      "distance": 7.5,
+      "place": {
+        "across": "anna_a",
+        "distance": "anna_d"
+      }
+    },
+    {
+      "id": "waiter",
+      "name": "Waiter",
+      "person": {
+        "cast": "cast",
+        "who": "waiter_summer",
+        "turn": 180
+      },
+      "across": 65.69999999999999,
+      "distance": -12,
+      "place": {
+        "across": "waiter_a",
+        "distance": "waiter_d"
+      }
+    },
+    {
+      "id": "p1",
+      "name": "Arrival, a lady",
+      "person": {
+        "cast": "cast",
+        "who": "p1",
+        "turn": 180
+      },
+      "across": 66.4,
+      "distance": -12,
+      "place": {
+        "across": "p1_a",
+        "distance": "p1_d"
+      }
+    },
+    {
+      "id": "p2",
+      "name": "Arrival, a gentleman",
+      "person": {
+        "cast": "cast",
+        "who": "p2",
+        "turn": 180
+      },
+      "across": 67.1,
+      "distance": -12,
+      "place": {
+        "across": "p2_a",
+        "distance": "p2_d"
+      }
+    },
+    {
+      "id": "p3",
+      "name": "Arrival, a lady",
+      "person": {
+        "cast": "cast",
+        "who": "p3",
+        "turn": 180
+      },
+      "across": 67.8,
+      "distance": -12,
+      "place": {
+        "across": "p3_a",
+        "distance": "p3_d"
+      }
+    },
+    {
+      "id": "p4",
+      "name": "Arrival, a gentleman",
+      "person": {
+        "cast": "cast",
+        "who": "p4",
+        "turn": 180
+      },
+      "across": 68.5,
+      "distance": -12,
+      "place": {
+        "across": "p4_a",
+        "distance": "p4_d"
+      }
+    },
+    {
+      "id": "p5",
+      "name": "Arrival, a lady",
+      "person": {
+        "cast": "cast",
+        "who": "p5",
+        "turn": 180
+      },
+      "across": 69.19999999999999,
+      "distance": -12,
+      "place": {
+        "across": "p5_a",
+        "distance": "p5_d"
+      }
+    },
+    {
+      "id": "p6",
+      "name": "Arrival, a gentleman",
+      "person": {
+        "cast": "cast",
+        "who": "p6",
+        "turn": 180
+      },
+      "across": 69.9,
+      "distance": -12,
+      "place": {
+        "across": "p6_a",
+        "distance": "p6_d"
+      }
+    },
+    {
+      "id": "stranger",
+      "name": "The tall stooping man",
+      "person": {
+        "cast": "cast",
+        "who": "stranger",
+        "turn": 180
+      },
+      "across": 70.6,
+      "distance": -12,
+      "place": {
+        "across": "stranger_a",
+        "distance": "stranger_d"
+      }
+    },
+    {
+      "id": "stranger_lady",
+      "name": "His lady",
+      "person": {
+        "cast": "cast",
+        "who": "stranger_lady",
+        "turn": 180
+      },
+      "across": 71.3,
+      "distance": -12,
+      "place": {
+        "across": "stranger_lady_a",
+        "distance": "stranger_lady_d"
+      }
+    },
+    {
+      "id": "stroller1",
+      "name": "A lady with a parasol",
+      "person": {
+        "cast": "cast",
+        "who": "stroller1",
+        "turn": 180
+      },
+      "across": 72,
+      "distance": -12,
+      "place": {
+        "across": "stroller1_a",
+        "distance": "stroller1_d"
+      }
+    },
+    {
+      "id": "stroller2",
+      "name": "An officer",
+      "person": {
+        "cast": "cast",
+        "who": "stroller2",
+        "turn": 180
+      },
+      "across": 72.69999999999999,
+      "distance": -12,
+      "place": {
+        "across": "stroller2_a",
+        "distance": "stroller2_d"
+      }
+    },
+    {
+      "id": "stroller3",
+      "name": "An old man",
+      "person": {
+        "cast": "cast",
+        "who": "stroller3",
+        "turn": 180
+      },
+      "across": 73.4,
+      "distance": -12,
+      "place": {
+        "across": "stroller3_a",
+        "distance": "stroller3_d"
+      }
+    },
+    {
+      "id": "boy",
+      "name": "The hotel boy",
+      "person": {
+        "cast": "cast",
+        "who": "boy",
+        "turn": 180
+      },
+      "across": 74.1,
+      "distance": -12,
+      "place": {
+        "across": "boy_a",
+        "distance": "boy_d"
+      }
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "trust": 0,
+    "fright": 0,
+    "gossip": 0,
+    "hour": 0.5,
+    "day": 1,
+    "dawn": 0,
+    "dusk": 0,
+    "night": 0,
+    "sun_light": 1,
+    "moon_light": 0,
+    "glare": 1,
+    "glass": 0,
+    "wind": 0,
+    "lamps": 0,
+    "steamer": 0,
+    "steamer_lit": 0,
+    "smoke": 0.35,
+    "crowd": 0,
+    "pass": 0,
+    "look_at": "",
+    "stranger_turned": 0,
+    "surge": 0,
+    "spitz_near": 0,
+    "hand": 0,
+    "watched": 0,
+    "seen": 0,
+    "kiss_now": 0,
+    "spitz_here": 1,
+    "spitz_a": 6.5,
+    "spitz_d": 8.72,
+    "spitz_e": 0.8,
+    "spitz_view": "side",
+    "spitz_do": "run",
+    "spitz_dir": 0,
+    "spitz_look": null,
+    "spitz_old": 0,
+    "leash": "none",
+    "spitz_face": 150,
+    "gurov_here": false,
+    "gurov_turn": 180,
+    "gurov_do": "stand",
+    "gurov_look": null,
+    "gurov_reach": null,
+    "gurov_on": null,
+    "gurov_mood": null,
+    "gurov_gait": null,
+    "gurov_wear": null,
+    "gurov_with": null,
+    "anna_here": true,
+    "anna_turn": 280,
+    "anna_do": "stand",
+    "anna_look": null,
+    "anna_reach": null,
+    "anna_on": null,
+    "anna_mood": null,
+    "anna_gait": null,
+    "anna_wear": null,
+    "anna_with": null,
+    "waiter_here": false,
+    "waiter_turn": 180,
+    "waiter_do": "stand",
+    "waiter_look": null,
+    "waiter_reach": null,
+    "waiter_on": null,
+    "waiter_mood": null,
+    "waiter_gait": null,
+    "waiter_wear": null,
+    "waiter_with": null,
+    "p1_here": false,
+    "p1_turn": 180,
+    "p1_do": "stand",
+    "p1_look": null,
+    "p1_reach": null,
+    "p1_on": null,
+    "p1_mood": null,
+    "p1_gait": null,
+    "p1_wear": null,
+    "p1_with": [
+      "bouquet"
+    ],
+    "p2_here": false,
+    "p2_turn": 180,
+    "p2_do": "stand",
+    "p2_look": null,
+    "p2_reach": null,
+    "p2_on": null,
+    "p2_mood": null,
+    "p2_gait": null,
+    "p2_wear": null,
+    "p2_with": [
+      "valise"
+    ],
+    "p3_here": false,
+    "p3_turn": 180,
+    "p3_do": "stand",
+    "p3_look": null,
+    "p3_reach": null,
+    "p3_on": null,
+    "p3_mood": null,
+    "p3_gait": null,
+    "p3_wear": null,
+    "p3_with": [
+      "bouquet"
+    ],
+    "p4_here": false,
+    "p4_turn": 180,
+    "p4_do": "stand",
+    "p4_look": null,
+    "p4_reach": null,
+    "p4_on": null,
+    "p4_mood": null,
+    "p4_gait": null,
+    "p4_wear": null,
+    "p4_with": [
+      "valise"
+    ],
+    "p5_here": false,
+    "p5_turn": 180,
+    "p5_do": "stand",
+    "p5_look": null,
+    "p5_reach": null,
+    "p5_on": null,
+    "p5_mood": null,
+    "p5_gait": null,
+    "p5_wear": null,
+    "p5_with": [
+      "bouquet"
+    ],
+    "p6_here": false,
+    "p6_turn": 180,
+    "p6_do": "stand",
+    "p6_look": null,
+    "p6_reach": null,
+    "p6_on": null,
+    "p6_mood": null,
+    "p6_gait": null,
+    "p6_wear": null,
+    "p6_with": [
+      "valise"
+    ],
+    "stranger_here": false,
+    "stranger_turn": 180,
+    "stranger_do": "stand",
+    "stranger_look": null,
+    "stranger_reach": null,
+    "stranger_on": null,
+    "stranger_mood": null,
+    "stranger_gait": null,
+    "stranger_wear": null,
+    "stranger_with": null,
+    "stranger_lady_here": false,
+    "stranger_lady_turn": 180,
+    "stranger_lady_do": "stand",
+    "stranger_lady_look": null,
+    "stranger_lady_reach": null,
+    "stranger_lady_on": null,
+    "stranger_lady_mood": null,
+    "stranger_lady_gait": null,
+    "stranger_lady_wear": null,
+    "stranger_lady_with": null,
+    "stroller1_here": false,
+    "stroller1_turn": 180,
+    "stroller1_do": "stand",
+    "stroller1_look": null,
+    "stroller1_reach": null,
+    "stroller1_on": null,
+    "stroller1_mood": null,
+    "stroller1_gait": null,
+    "stroller1_wear": null,
+    "stroller1_with": null,
+    "stroller2_here": false,
+    "stroller2_turn": 180,
+    "stroller2_do": "stand",
+    "stroller2_look": null,
+    "stroller2_reach": null,
+    "stroller2_on": null,
+    "stroller2_mood": null,
+    "stroller2_gait": null,
+    "stroller2_wear": null,
+    "stroller2_with": null,
+    "stroller3_here": false,
+    "stroller3_turn": 180,
+    "stroller3_do": "stand",
+    "stroller3_look": null,
+    "stroller3_reach": null,
+    "stroller3_on": null,
+    "stroller3_mood": null,
+    "stroller3_gait": null,
+    "stroller3_wear": null,
+    "stroller3_with": null,
+    "boy_here": false,
+    "boy_turn": 180,
+    "boy_do": "stand",
+    "boy_look": null,
+    "boy_reach": null,
+    "boy_on": null,
+    "boy_mood": null,
+    "boy_gait": null,
+    "boy_wear": null,
+    "boy_with": null,
+    "camera_x": -0.5,
+    "camera_z": 2,
+    "camera_h": -0.19999999999999996,
+    "camera_yaw": -30,
+    "camera_pitch": 0,
+    "camera_roll": 0,
+    "camera_look": 0,
+    "anna_a": -6.5,
+    "anna_d": 7.5,
+    "steamer_a": -420,
+    "steamer_d": 900,
+    "steamer_f": 250,
+    "gurov_a": 64.3,
+    "gurov_d": -12,
+    "waiter_a": 65.69999999999999,
+    "waiter_d": -12,
+    "p1_a": 66.4,
+    "p1_d": -12,
+    "p2_a": 67.1,
+    "p2_d": -12,
+    "p3_a": 67.8,
+    "p3_d": -12,
+    "p4_a": 68.5,
+    "p4_d": -12,
+    "p5_a": 69.19999999999999,
+    "p5_d": -12,
+    "p6_a": 69.9,
+    "p6_d": -12,
+    "stranger_a": 70.6,
+    "stranger_d": -12,
+    "stranger_lady_a": 71.3,
+    "stranger_lady_d": -12,
+    "stroller1_a": 72,
+    "stroller1_d": -12,
+    "stroller2_a": 72.69999999999999,
+    "stroller2_d": -12,
+    "stroller3_a": 73.4,
+    "stroller3_d": -12,
+    "boy_a": 74.1,
+    "boy_d": -12
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the hour: 0.5 noon, 0.76 the evening in the gardens, 0.8 the pier, 0.83–0.85 dusk, 0.88 night (the world's sky and light)"
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the day's light (the sky module keeps it by hour)"
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dawn's light (by hour)"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the evening's light (by hour)"
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the night's light (by hour)"
+    },
+    "sun_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the sun's light (by hour)"
+    },
+    "moon_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the moon's light (by hour)"
+    },
+    "glare": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the noon glare: 1 — dazzling white, 0 — gone (the noon beat opens out of it)"
+    },
+    "glass": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the lorgnette's look: 1 — the frame's edges darker (the gangway)"
+    },
+    "wind": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dry wind on the pier: the dust, the sea rougher"
+    },
+    "lamps": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lamp-posts lit (evening, night)"
+    },
+    "steamer": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the steamer: 0 far out at sea, 0.5 turning in, 1 alongside the pier"
+    },
+    "steamer_a": {
+      "range": [
+        -500,
+        0
+      ],
+      "smooth": true,
+      "means": "where the steamer is across, m (the script, by steamer)"
+    },
+    "steamer_d": {
+      "range": [
+        0,
+        1000
+      ],
+      "smooth": true,
+      "means": "how far, m (by steamer)"
+    },
+    "steamer_f": {
+      "range": [
+        170,
+        260
+      ],
+      "smooth": true,
+      "means": "which way it faces, degrees (by steamer)"
+    },
+    "steamer_lit": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the steamer's lights"
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the steamer's smoke"
+    },
+    "crowd": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how much of the painted crowd is on the pier (it thins group by group)"
+    },
+    "pass": {
+      "range": [
+        0,
+        7
+      ],
+      "means": "how many arrivals are let down the gangway (the game, «Lorgnette»): p1, p2, p3, p4, the stooping man with his lady, p5, p6"
+    },
+    "look_at": {
+      "type": "string",
+      "means": "the arrival looked at hard through the lorgnette: he stops a moment and turns his head; '' — no one"
+    },
+    "stranger_turned": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the stooping man at the gangway's foot turns to his lady, she takes his arm, they go (the game)"
+    },
+    "surge": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the crowd surged off the pier (the game, at the end of «Lorgnette»)"
+    },
+    "spitz_near": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the dog from her chair (0) to his knee (1) — the game in «Coax»"
+    },
+    "hand": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "Gurov's right hand lowered toward the dog: how low and near its muzzle — the game in «Coax»"
+    },
+    "watched": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "someone is walking in the avenue as the window shows it (the scene sets it)"
+    },
+    "seen": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a walker turns to look at the two, Anna steps back (the game's pulse; the scene sets it back to 0 after 2 s)"
+    },
+    "kiss_now": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the embrace in the avenue (the game); then the scene tells noon_garden:kiss"
+    },
+    "trust": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the dog trusted his hand (the game after «Coax»; read by coax_hold)"
+    },
+    "fright": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "she was frightened by the stooping man (the game after «Lorgnette»; read by kiss)"
+    },
+    "gossip": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "a lady walking saw them (the game after «Looking round»; read by days)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the beat played (the module beats)"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose cut is made ready ahead (set by the game; the module beats)"
+    },
+    "spitz_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where the Pomeranian is across, m"
+    },
+    "spitz_d": {
+      "range": [
+        -5,
+        30
+      ],
+      "smooth": true,
+      "means": "how far the Pomeranian is, m"
+    },
+    "spitz_e": {
+      "range": [
+        0,
+        1.2
+      ],
+      "smooth": true,
+      "means": "the Pomeranian's height above the ground, m (0.8 on the parapet)"
+    },
+    "spitz_face": {
+      "range": [
+        90,
+        270
+      ],
+      "means": "which way the Pomeranian's card faces: toward the shot (180 + the camera's yaw)"
+    },
+    "spitz_view": {
+      "values": [
+        "side",
+        "back",
+        "front3q"
+      ],
+      "means": "the Pomeranian's view (the module spitz)"
+    },
+    "spitz_dir": {
+      "values": [
+        -1,
+        0,
+        1
+      ],
+      "means": "which way the Pomeranian faces as seen: 1 right, −1 left, 0 the way it goes (the module spitz)"
+    },
+    "spitz_do": {
+      "values": [
+        "stand",
+        "sit",
+        "lie",
+        "trot",
+        "run",
+        "growl",
+        "bark",
+        "up",
+        "sniff"
+      ],
+      "means": "what the Pomeranian does"
+    },
+    "spitz_look": {
+      "means": "the point the Pomeranian looks at (a point name, or [across, distance, elevation]), or null"
+    },
+    "spitz_here": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the Pomeranian in the scene"
+    },
+    "spitz_old": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "an old Pomeranian"
+    },
+    "leash": {
+      "type": "string",
+      "means": "whose hand the leash goes to ('anna#hand_l'), 'none' — it trails"
+    },
+    "gurov_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Gurov is across, m"
+    },
+    "gurov_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "anna_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Anna Sergeyevna is across, m"
+    },
+    "anna_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "waiter_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Waiter is across, m"
+    },
+    "waiter_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "p1_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Arrival, a lady is across, m"
+    },
+    "p1_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "p2_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Arrival, a gentleman is across, m"
+    },
+    "p2_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "p3_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Arrival, a lady is across, m"
+    },
+    "p3_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "p4_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Arrival, a gentleman is across, m"
+    },
+    "p4_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "p5_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Arrival, a lady is across, m"
+    },
+    "p5_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "p6_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where Arrival, a gentleman is across, m"
+    },
+    "p6_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "stranger_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where The tall stooping man is across, m"
+    },
+    "stranger_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "stranger_lady_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where His lady is across, m"
+    },
+    "stranger_lady_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "stroller1_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where A lady with a parasol is across, m"
+    },
+    "stroller1_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "stroller2_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where An officer is across, m"
+    },
+    "stroller2_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "stroller3_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where An old man is across, m"
+    },
+    "stroller3_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "boy_a": {
+      "range": [
+        -60,
+        60
+      ],
+      "smooth": true,
+      "means": "where The hotel boy is across, m"
+    },
+    "boy_d": {
+      "range": [
+        -10,
+        35
+      ],
+      "smooth": true,
+      "means": "how far, m"
+    },
+    "anna_mood": {
+      "type": "string",
+      "means": "Anna's face (smile, sad, afraid, surprised, …)"
+    },
+    "gurov_mood": {
+      "type": "string",
+      "means": "Gurov's face (smile, thinking, …)"
+    }
+  },
+  "music": {
+    "bpm": 66,
+    "density": 0.25,
+    "brightness": 0.55,
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "prompts": [
+      {
+        "text": "very quiet ambient pad, a hot southern noon by the sea, shimmering and still",
+        "weight": 1
+      },
+      {
+        "text": "soft sea-air texture, gentle waves far off, cicadas, almost no melody",
+        "weight": 0.9
+      },
+      {
+        "text": "slow muted string quartet, warm and idle, a summer resort at the turn of the century",
+        "weight": 0.6
+      },
+      {
+        "text": "a lone mandolin very far away, a few tremolo notes, lazy and sunlit",
+        "weight": 0.4
+      },
+      {
+        "text": "sparse low cello notes with long silences, a hint of longing",
+        "weight": 0.3
+      },
+      {
+        "text": "faint clarinet in the low register, wistful, unhurried",
+        "weight": 0
+      },
+      {
+        "text": "glassy high harmonics like light on water",
+        "weight": 0
+      },
+      {
+        "text": "warm tape-saturated ambient texture, nostalgic, slow evolving",
+        "weight": 0
+      },
+      {
+        "text": "soft guitar arpeggios in a minor key, Crimean evening, distant",
+        "weight": 0
+      },
+      {
+        "text": "alto flute, breathy, lilac evening over the sea",
+        "weight": 0
+      },
+      {
+        "text": "bowed vibraphone, overlapping soft tones, moonlit stillness",
+        "weight": 0
+      },
+      {
+        "text": "slow viola line over a drone, a Russian romance feeling, restrained",
+        "weight": 0
+      },
+      {
+        "text": "wordless choir far away, barely audible, night calm",
+        "weight": 0
+      },
+      {
+        "text": "gentle harp harmonics one at a time, lamps lighting along a promenade",
+        "weight": 0
+      },
+      {
+        "text": "deep slow pads, empty and spacious, a dry wind",
+        "weight": 0
+      },
+      {
+        "text": "cor anglais phrase over quiet strings, pastoral, a holiday crowd far off",
+        "weight": 0
+      }
+    ]
+  }
+}

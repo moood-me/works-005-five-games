@@ -16,7 +16,7 @@ export default {
   number: 'V',
   title: tr('Two lives'),
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['At night', 'To school', 'The Slaviansky Bazaar'],
+  titles: [tr('At night'), tr('To school'), tr('The Slaviansky Bazaar')],
   choices: [
     { id: 'wife', weight: '⚑', title: tr('His wife in the doorway'), options: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] },
   ],
@@ -90,7 +90,7 @@ export default {
       const cap = g.beat('red_cap');
       await note;
       await g.say('narrator', 'A man in a red cap brought him a note');
-      await Promise.all([g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.') }), g.say('anna', 'I have come. The Slaviansky Bazaar', 'narrator')]);
+      await g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.'), voice: () => g.say('anna', 'I have come. The Slaviansky Bazaar', 'narrator') });
       g.sound.paper();
       await cap;
     },

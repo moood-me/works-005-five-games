@@ -128,16 +128,32 @@ function melon(g, e) {
     gl.strokeStyle = '#7a1e22'; gl.lineWidth = 0.007; gl.lineCap = 'round';
     gl.beginPath(); gl.moveTo(...M.from); gl.lineTo(M.to[0], M.to[1]); gl.stroke();
   });
-  // the slice fallen away: red flesh toward the light, black seeds, the rind's green edge
+  // the slice fallen away: red flesh toward the light, black seeds, the rind's green edge. `ragged` (the game's, once):
+  // cut unevenly — the flesh's edge stepped, a tooth of it standing out where the knife caught
+  const ragged = Number(e.state.ragged) > 0.5;
+  const flesh = (gs, rx, ry, dy) => {
+    gs.beginPath();
+    for (let i = 0; i <= 48; i++) {
+      const a = (i / 48) * Math.PI * 2, top = Math.sin(a) < 0;
+      let k = 1;
+      if (ragged && top) {
+        const u = (Math.cos(a) + 1) / 2;                       // 0 the left end … 1 the right along the top edge
+        k = 1 + 0.12 * Math.sin(u * 23) * (0.4 + u) + (u > 0.55 && u < 0.66 ? 0.55 : 0);   // steps, and the tooth
+      }
+      const x = cx + 0.02 + Math.cos(a) * rx, y = 0.6 + dy + Math.sin(a) * ry * k;
+      if (!i) gs.moveTo(x, y); else gs.lineTo(x, y);
+    }
+    gs.closePath(); gs.fill();
+  };
   e.layer('slice', {}, gs => {
     gs.fillStyle = '#2f5a35';
-    gs.beginPath(); gs.ellipse(cx + 0.02, 0.6, 0.27, 0.075, 0.03, 0, Math.PI * 2); gs.fill();
+    flesh(gs, 0.27, 0.075, 0);
     gs.fillStyle = '#e8e2c8';
-    gs.beginPath(); gs.ellipse(cx + 0.02, 0.595, 0.255, 0.065, 0.03, 0, Math.PI * 2); gs.fill();
+    flesh(gs, 0.255, 0.065, -0.005);
     gs.fillStyle = '#c4383a';
-    gs.beginPath(); gs.ellipse(cx + 0.02, 0.59, 0.24, 0.056, 0.03, 0, Math.PI * 2); gs.fill();
+    flesh(gs, 0.24, 0.056, -0.01);
     gs.fillStyle = radial(gs, cx + 0.1, 0.57, 0.25, [[0, 'rgba(255,190,150,0.45)'], [1, 'rgba(0,0,0,0)']]);
-    gs.beginPath(); gs.ellipse(cx + 0.02, 0.59, 0.24, 0.056, 0.03, 0, Math.PI * 2); gs.fill();
+    flesh(gs, 0.24, 0.056, -0.01);
     gs.fillStyle = '#1d1512';
     for (let i = 0; i < 16; i++) { const a = i * 2.39, r = 0.04 + (i % 4) * 0.045; gs.beginPath(); gs.ellipse(cx + 0.02 + Math.cos(a) * r, 0.59 + Math.sin(a) * r * 0.2, 0.008, 0.004, a, 0, Math.PI * 2); gs.fill(); }
   });
@@ -188,6 +204,12 @@ function hands(g, e) {
 const HIS_FROM = A => A / 2 - 0.62 + 0.28 * 0.9;        // where his finger tips are at `hand_at` 0
 const HIS_TO = A => A / 2 + 0.4 - 0.26 * 0.95 - 0.03;     // … and at 1: just short of her finger tips
 
+// The glass in its holder on its saucer: under the tap at glass_at 1, off to the left on the cloth at 0 — every layer
+// of it moved by `glass_at` (live); the tap, its key and his hand stand.
+const GLASS = { top: 0.6, bot: 0.86, w: 0.075, mid: 0.73 };
+const GLASS_FROM = -0.46;                     // the glass at glass_at 0: this far left of its place under the tap
+const GLASS_LAYERS = ['glass_back', 'tea', 'spill', 'holder', 'steam'];
+
 function tea(g, e) {
   const A = e.aspect, cx = A / 2;
   // the dark wall, the white cloth below; the lamp off to the left
@@ -207,38 +229,60 @@ function tea(g, e) {
   g.fillStyle = '#c9a45e';
   g.beginPath(); g.ellipse(cx + 0.075, 0.385, 0.05, 0.018, -0.2, 0, Math.PI * 2); g.fill();
   e.at(cx + 0.08, 0.385, 'tap');
+  e.at(cx, GLASS.mid, 'under');               // where the glass goes: under the tap
   // his right hand at the tap's key, from the right
   hand(g, cx + 0.42, 0.33, 0.24, Math.PI + 0.25, { side: 1, sleeve: '#34353d' });
+  // the husband's envelope by the samovar (husband_knows 0 — the party's, read once): “To Anna. For the professor” in
+  // his hand — a cool white rectangle askew on the cloth, a few lines of writing, a grey seal
+  if (!(Number(e.state.husband_knows) > 0.5)) {
+    g.save();
+    g.translate(cx + 0.47, 0.83); g.rotate(-0.13);
+    g.fillStyle = 'rgba(70,55,40,0.28)'; g.fillRect(-0.15, -0.075, 0.31, 0.17);          // its shadow on the cloth
+    g.fillStyle = '#e3e6ec'; g.fillRect(-0.16, -0.09, 0.31, 0.17);
+    g.strokeStyle = 'rgba(120,120,135,0.6)'; g.lineWidth = 0.003; g.strokeRect(-0.16, -0.09, 0.31, 0.17);
+    g.strokeStyle = 'rgba(55,55,80,0.85)'; g.lineWidth = 0.0035; g.lineCap = 'round';
+    for (const [x0, x1, y, k] of [[-0.12, 0.02, -0.04, 1], [-0.09, 0.1, 0.0, 1.3], [-0.04, 0.07, 0.04, 0.8]]) {
+      g.beginPath(); g.moveTo(x0, y);
+      for (let x = x0; x <= x1; x += 0.004) g.lineTo(x, y + Math.sin(x * 190 * k) * 0.006 * (0.6 + 0.4 * Math.sin(x * 37)));
+      g.stroke();
+    }
+    g.fillStyle = '#6d6a78'; g.beginPath(); g.arc(0.11, 0.05, 0.016, 0, Math.PI * 2); g.fill();
+    g.restore();
+  }
+  const G = GLASS;
   // the saucer and the glass's back
-  const G = { x: cx, top: 0.6, bot: 0.86, w: 0.075 };
-  g.fillStyle = '#efe9dc';
-  g.beginPath(); g.ellipse(cx, 0.88, 0.17, 0.04, 0, 0, Math.PI * 2); g.fill();
-  g.fillStyle = 'rgba(200,210,215,0.22)';
-  g.beginPath(); g.moveTo(G.x - G.w, G.top); g.lineTo(G.x - G.w * 0.86, G.bot); g.lineTo(G.x + G.w * 0.86, G.bot); g.lineTo(G.x + G.w, G.top); g.closePath(); g.fill();
-  // the tea in the glass, risen by `fill` (scaled from the glass's bottom)
-  e.layer('tea', { pivot: [cx, G.bot] }, gt => {
-    gt.fillStyle = linear(gt, 0, G.top, 0, G.bot, [[0, '#c27a2c'], [1, '#7a3c14']]);
-    gt.beginPath(); gt.moveTo(G.x - G.w * 0.95, G.top + 0.01); gt.lineTo(G.x - G.w * 0.83, G.bot - 0.004); gt.lineTo(G.x + G.w * 0.83, G.bot - 0.004); gt.lineTo(G.x + G.w * 0.95, G.top + 0.01); gt.closePath(); gt.fill();
+  e.layer('glass_back', { box: [cx - 0.2, G.top - 0.03, cx + 0.2, 0.93] }, gb => {
+    gb.fillStyle = 'rgba(60,45,30,0.25)';
+    gb.beginPath(); gb.ellipse(cx + 0.015, 0.89, 0.17, 0.035, 0, 0, Math.PI * 2); gb.fill();
+    gb.fillStyle = '#efe9dc';
+    gb.beginPath(); gb.ellipse(cx, 0.88, 0.17, 0.04, 0, 0, Math.PI * 2); gb.fill();
+    gb.fillStyle = 'rgba(200,210,215,0.22)';
+    gb.beginPath(); gb.moveTo(cx - G.w, G.top); gb.lineTo(cx - G.w * 0.86, G.bot); gb.lineTo(cx + G.w * 0.86, G.bot); gb.lineTo(cx + G.w, G.top); gb.closePath(); gb.fill();
   });
-  // the stream from the tap into the glass
-  e.layer('stream', {}, gs => {
+  // the tea in the glass, risen by `fill` (scaled from the glass's bottom)
+  e.layer('tea', { pivot: [cx, G.bot], box: [cx - 0.09, G.top, cx + 0.09, G.bot + 0.01] }, gt => {
+    gt.fillStyle = linear(gt, 0, G.top, 0, G.bot, [[0, '#c27a2c'], [1, '#7a3c14']]);
+    gt.beginPath(); gt.moveTo(cx - G.w * 0.95, G.top + 0.01); gt.lineTo(cx - G.w * 0.83, G.bot - 0.004); gt.lineTo(cx + G.w * 0.83, G.bot - 0.004); gt.lineTo(cx + G.w * 0.95, G.top + 0.01); gt.closePath(); gt.fill();
+  });
+  // the stream from the tap (it stands: the glass comes under it)
+  e.layer('stream', { box: [cx - 0.02, 0.47, cx + 0.02, G.bot + 0.01] }, gs => {
     gs.fillStyle = 'rgba(190,110,40,0.85)';
     gs.fillRect(cx - 0.006, 0.48, 0.012, G.bot - 0.48);
   });
   // a little puddle on the saucer: spilt
-  e.layer('spill', {}, gp => {
+  e.layer('spill', { box: [cx + 0.02, 0.86, cx + 0.18, 0.91] }, gp => {
     gp.fillStyle = 'rgba(150,80,30,0.7)';
     gp.beginPath(); gp.ellipse(cx + 0.1, 0.885, 0.06, 0.014, 0, 0, Math.PI * 2); gp.fill();
   });
   // the glass's front: the silver holder and its handle, the glints of the glass
-  e.layer('holder', {}, gh => {
+  e.layer('holder', { box: [cx - 0.1, G.top - 0.02, cx + 0.17, G.bot + 0.02] }, gh => {
     gh.strokeStyle = 'rgba(240,248,255,0.55)'; gh.lineWidth = 0.004;
-    gh.beginPath(); gh.moveTo(G.x - G.w, G.top); gh.lineTo(G.x - G.w * 0.86, G.bot); gh.moveTo(G.x + G.w, G.top); gh.lineTo(G.x + G.w * 0.86, G.bot); gh.stroke();
-    gh.beginPath(); gh.ellipse(G.x, G.top, G.w, 0.012, 0, 0, Math.PI * 2); gh.stroke();
-    gh.fillStyle = linear(gh, G.x - G.w, 0, G.x + G.w, 0, [[0, '#7d8085'], [0.4, '#d9dce0'], [1, '#6c6f74']]);
-    gh.beginPath(); gh.moveTo(G.x - G.w * 0.98, G.top + 0.12); gh.lineTo(G.x + G.w * 0.98, G.top + 0.12); gh.lineTo(G.x + G.w * 0.9, G.bot + 0.005); gh.lineTo(G.x - G.w * 0.9, G.bot + 0.005); gh.closePath(); gh.fill();
+    gh.beginPath(); gh.moveTo(cx - G.w, G.top); gh.lineTo(cx - G.w * 0.86, G.bot); gh.moveTo(cx + G.w, G.top); gh.lineTo(cx + G.w * 0.86, G.bot); gh.stroke();
+    gh.beginPath(); gh.ellipse(cx, G.top, G.w, 0.012, 0, 0, Math.PI * 2); gh.stroke();
+    gh.fillStyle = linear(gh, cx - G.w, 0, cx + G.w, 0, [[0, '#7d8085'], [0.4, '#d9dce0'], [1, '#6c6f74']]);
+    gh.beginPath(); gh.moveTo(cx - G.w * 0.98, G.top + 0.12); gh.lineTo(cx + G.w * 0.98, G.top + 0.12); gh.lineTo(cx + G.w * 0.9, G.bot + 0.005); gh.lineTo(cx - G.w * 0.9, G.bot + 0.005); gh.closePath(); gh.fill();
     gh.strokeStyle = '#8f9297'; gh.lineWidth = 0.012;
-    gh.beginPath(); gh.moveTo(G.x + G.w * 0.95, G.top + 0.14); gh.bezierCurveTo(G.x + G.w + 0.07, G.top + 0.14, G.x + G.w + 0.07, G.top + 0.24, G.x + G.w * 0.92, G.top + 0.24); gh.stroke();
+    gh.beginPath(); gh.moveTo(cx + G.w * 0.95, G.top + 0.14); gh.bezierCurveTo(cx + G.w + 0.07, G.top + 0.14, cx + G.w + 0.07, G.top + 0.24, cx + G.w * 0.92, G.top + 0.24); gh.stroke();
   });
   // steam over the glass
   e.layer('steam', { drift: [0, -0.03], box: [cx - 0.15, 0.3, cx + 0.15, 0.6] }, gv => {
@@ -254,9 +298,9 @@ function mirror(g, e) {
   const A = e.aspect, cx = A / 2;
   // the wall about the mirror
   g.fillStyle = '#2d2b2a'; g.fillRect(-0.3, -0.05, A + 0.6, 1.1);
-  // in the glass, seen from behind and a little to the side: her grey shoulder and the back of her fair head, his
-  // hand on that shoulder, his own head beside — the ear, the temple going grey; the lamp's glow behind them
-  const gx = cx - 0.55, gy = 0.12;
+  // in the glass: her grey shoulder and the back of her fair head on the right; on the left his face, three-quarters,
+  // turned to her, lit by the lamp; the temple going grey; his hand on her shoulder; the lamp's glow behind them
+  const gx = cx - 0.62, gy = 0.1;
   g.save();
   g.beginPath(); g.rect(gx, gy, A + 0.3 - gx, 1.05 - gy); g.clip();
   g.fillStyle = linear(g, 0, gy, 0, 1, [[0, '#3a3836'], [1, '#4a443e']]);
@@ -278,23 +322,68 @@ function mirror(g, e) {
   g.beginPath(); g.ellipse(cx + 0.34, 0.24, 0.055, 0.045, 0.2, 0, Math.PI * 2); g.fill();
   g.strokeStyle = 'rgba(240,220,170,0.5)'; g.lineWidth = 0.004;
   for (let i = 0; i < 6; i++) { g.beginPath(); g.moveTo(cx + 0.25 + i * 0.02, 0.43); g.quadraticCurveTo(cx + 0.27 + i * 0.015, 0.33, cx + 0.31 + i * 0.008, 0.25); g.stroke(); }
-  // his head beside hers, from behind: the hair going grey, greyest at the temple; the ear; the dark collar
+  // his shoulders in the dark frock coat, the white collar, the neck
+  const hx = cx - 0.3, hy = 0.34;            // the middle of his head
   g.fillStyle = '#26262c';
-  g.beginPath(); g.moveTo(gx, 1.06); g.lineTo(gx, 0.55); g.bezierCurveTo(cx - 0.42, 0.5, cx - 0.32, 0.5, cx - 0.22, 0.56); g.lineTo(cx - 0.1, 0.7); g.lineTo(cx - 0.3, 1.06); g.closePath(); g.fill();
-  g.fillStyle = '#d2b199';
-  g.beginPath(); g.moveTo(cx - 0.4, 0.52); g.lineTo(cx - 0.38, 0.42); g.lineTo(cx - 0.26, 0.42); g.lineTo(cx - 0.25, 0.53); g.closePath(); g.fill();
-  g.fillStyle = '#7d766e';
-  g.beginPath(); g.ellipse(cx - 0.33, 0.31, 0.12, 0.14, -0.1, 0, Math.PI * 2); g.fill();
-  g.fillStyle = '#b9b4ab';
-  g.beginPath(); g.ellipse(cx - 0.24, 0.3, 0.05, 0.1, -0.15, 0, Math.PI * 2); g.fill();
-  g.strokeStyle = 'rgba(230,228,222,0.8)'; g.lineWidth = 0.004;
-  for (let i = 0; i < 8; i++) { g.beginPath(); g.moveTo(cx - 0.29 + i * 0.008, 0.2 + i * 0.006); g.quadraticCurveTo(cx - 0.24 + i * 0.004, 0.27, cx - 0.23 + i * 0.002, 0.37); g.stroke(); }
-  g.fillStyle = '#d6b39a';
-  g.beginPath(); g.ellipse(cx - 0.215, 0.335, 0.022, 0.04, 0.1, 0, Math.PI * 2); g.fill();
+  g.beginPath(); g.moveTo(gx, 1.06); g.lineTo(gx, 0.66); g.bezierCurveTo(hx - 0.2, 0.58, hx - 0.08, 0.56, hx + 0.02, 0.58);
+  g.bezierCurveTo(hx + 0.12, 0.6, hx + 0.2, 0.66, hx + 0.24, 0.74); g.lineTo(hx + 0.1, 1.06); g.closePath(); g.fill();
+  g.fillStyle = '#d8d4cc';
+  g.beginPath(); g.moveTo(hx - 0.05, 0.56); g.lineTo(hx + 0.1, 0.56); g.lineTo(hx + 0.12, 0.6); g.lineTo(hx - 0.04, 0.6); g.closePath(); g.fill();
+  g.fillStyle = '#c9a487';
+  g.beginPath(); g.moveTo(hx - 0.045, 0.44); g.lineTo(hx + 0.07, 0.46); g.lineTo(hx + 0.09, 0.565); g.lineTo(hx - 0.04, 0.565); g.closePath(); g.fill();
+  // his head: the back of it dark-grey hair, greying; the face three-quarters to the right — brow, nose, moustache, chin
+  g.fillStyle = '#5c5751';
+  g.beginPath(); g.ellipse(hx - 0.025, hy - 0.02, 0.125, 0.15, -0.05, 0, Math.PI * 2); g.fill();
+  const face = new Path2D();
+  face.moveTo(hx + 0.01, hy - 0.125);
+  face.bezierCurveTo(hx + 0.07, hy - 0.12, hx + 0.1, hy - 0.08, hx + 0.105, hy - 0.04);   // the forehead to the brow
+  face.quadraticCurveTo(hx + 0.098, hy - 0.022, hx + 0.103, hy - 0.012);                  // the bridge of the nose
+  face.lineTo(hx + 0.14, hy + 0.035);                                                      // the nose's tip
+  face.quadraticCurveTo(hx + 0.125, hy + 0.05, hx + 0.105, hy + 0.05);                     // under the nose
+  face.lineTo(hx + 0.108, hy + 0.08);                                                      // the upper lip
+  face.lineTo(hx + 0.1, hy + 0.092);                                                       // the mouth
+  face.quadraticCurveTo(hx + 0.11, hy + 0.11, hx + 0.1, hy + 0.13);                        // the chin
+  face.quadraticCurveTo(hx + 0.07, hy + 0.165, hx + 0.02, hy + 0.15);                      // under the chin
+  face.quadraticCurveTo(hx - 0.04, hy + 0.13, hx - 0.06, hy + 0.06);                       // the jaw back to the ear
+  face.lineTo(hx - 0.045, hy - 0.04);                                                      // up the cheek to the temple
+  face.quadraticCurveTo(hx - 0.03, hy - 0.11, hx + 0.01, hy - 0.125);
+  face.closePath();
+  g.fillStyle = '#d6b096';
+  g.fill(face);
+  // the lamp's light on it, from the right; the far side of the face in shade
+  g.save();
+  g.clip(face);
+  g.fillStyle = linear(g, hx - 0.06, 0, hx + 0.14, 0, [[0, 'rgba(70,40,30,0.3)'], [0.45, 'rgba(0,0,0,0)'], [1, 'rgba(255,214,160,0.45)']]);
+  g.fillRect(hx - 0.1, hy - 0.2, 0.3, 0.4);
+  g.restore();
+  // the hair over the forehead and the temple — grey at the temple
+  g.fillStyle = '#5c5751';
+  g.beginPath(); g.moveTo(hx - 0.15, hy + 0.02); g.bezierCurveTo(hx - 0.15, hy - 0.15, hx - 0.02, hy - 0.19, hx + 0.07, hy - 0.115);
+  g.quadraticCurveTo(hx + 0.02, hy - 0.11, hx - 0.0, hy - 0.08); g.quadraticCurveTo(hx - 0.03, hy - 0.05, hx - 0.04, hy - 0.0); g.lineTo(hx - 0.09, hy + 0.04); g.closePath(); g.fill();
+  g.fillStyle = '#bdb8b0';
+  g.beginPath(); g.moveTo(hx - 0.0, hy - 0.085); g.quadraticCurveTo(hx - 0.035, hy - 0.05, hx - 0.042, hy + 0.0); g.lineTo(hx - 0.07, hy - 0.01); g.quadraticCurveTo(hx - 0.06, hy - 0.07, hx - 0.02, hy - 0.1); g.closePath(); g.fill();
+  g.strokeStyle = 'rgba(225,222,215,0.75)'; g.lineWidth = 0.003;
+  for (let i = 0; i < 7; i++) { g.beginPath(); g.moveTo(hx - 0.12 + i * 0.012, hy - 0.12 + i * 0.008); g.quadraticCurveTo(hx - 0.07 + i * 0.008, hy - 0.09, hx - 0.06 + i * 0.004, hy - 0.02); g.stroke(); }
+  // the ear
+  g.fillStyle = '#c99d84';
+  g.beginPath(); g.ellipse(hx - 0.06, hy + 0.01, 0.022, 0.038, 0.1, 0, Math.PI * 2); g.fill();
+  // the brows, the eyes (the near one, a glimpse of the far one past the nose), the moustache, the mouth
+  g.strokeStyle = '#4e4842'; g.lineWidth = 0.006; g.lineCap = 'round';
+  g.beginPath(); g.moveTo(hx + 0.025, hy - 0.05); g.quadraticCurveTo(hx + 0.055, hy - 0.06, hx + 0.085, hy - 0.048); g.stroke();
+  g.fillStyle = '#2c2522';
+  g.beginPath(); g.ellipse(hx + 0.058, hy - 0.022, 0.011, 0.006, 0, 0, Math.PI * 2); g.fill();
+  g.beginPath(); g.ellipse(hx + 0.112, hy - 0.024, 0.004, 0.005, 0, 0, Math.PI * 2); g.fill();
+  g.strokeStyle = 'rgba(80,55,45,0.6)'; g.lineWidth = 0.003;
+  g.beginPath(); g.moveTo(hx + 0.045, hy - 0.006); g.quadraticCurveTo(hx + 0.06, hy + 0.0, hx + 0.075, hy - 0.006); g.stroke();
+  g.fillStyle = '#6a625a';
+  g.beginPath(); g.moveTo(hx + 0.06, hy + 0.06); g.quadraticCurveTo(hx + 0.1, hy + 0.045, hx + 0.13, hy + 0.058);
+  g.quadraticCurveTo(hx + 0.12, hy + 0.075, hx + 0.1, hy + 0.072); g.quadraticCurveTo(hx + 0.08, hy + 0.08, hx + 0.055, hy + 0.075); g.closePath(); g.fill();
+  g.strokeStyle = 'rgba(110,60,55,0.7)'; g.lineWidth = 0.004;
+  g.beginPath(); g.moveTo(hx + 0.07, hy + 0.09); g.lineTo(hx + 0.103, hy + 0.088); g.stroke();
   // his hand on her shoulder, the dark sleeve from the left
-  hand(g, cx - 0.2, 0.68, 0.24, -0.18, { side: 1, sleeve: '#2c2c33', light: 0.3 });
+  hand(g, cx - 0.12, 0.7, 0.24, -0.18, { side: 1, sleeve: '#2c2c33', light: 0.3 });
   // the old glass: a little dim and green
-  g.fillStyle = 'rgba(70,90,80,0.14)'; g.fillRect(gx, gy, A, 1);
+  g.fillStyle = 'rgba(70,90,80,0.12)'; g.fillRect(gx, gy, A, 1);
   g.restore();
   // the gilt frame: its corner, carved
   g.fillStyle = linear(g, gx - 0.12, 0, gx + 0.02, 0, [[0, '#6e5524'], [0.5, '#d9b86a'], [1, '#8a6a30']]);
@@ -305,14 +394,90 @@ function mirror(g, e) {
   for (let i = 0; i < 26; i++) { g.beginPath(); g.arc(gx - 0.055, gy + 0.05 + i * 0.045, 0.012, 0, Math.PI * 2); g.fill(); g.beginPath(); g.arc(gx + 0.05 + i * 0.07, gy - 0.055, 0.012, 0, Math.PI * 2); g.fill(); }
   g.fillStyle = '#e9cc84';
   g.beginPath(); g.arc(gx - 0.055, gy - 0.055, 0.05, 0, Math.PI * 2); g.fill();
-  // the lamp in the mirror, trembling a little
-  e.layer('lamp', { flicker: 0.25, blend: 'add' }, gl => {
+  // the lamp in the mirror, trembling a little; its warmth on his face trembles with it
+  e.layer('lamp', { flicker: 0.25, blend: 'add', box: [hx - 0.1, 0.0, A + 0.3, 0.75] }, gl => {
     gl.fillStyle = radial(gl, cx + 0.62, 0.22, 0.3, [[0, 'rgba(255,200,130,0.35)'], [1, 'rgba(0,0,0,0)']]);
     gl.fillRect(cx + 0.2, 0.0, 0.8, 0.6);
+    gl.fillStyle = radial(gl, hx + 0.12, hy, 0.14, [[0, 'rgba(255,190,120,0.12)'], [1, 'rgba(0,0,0,0)']]);
+    gl.fillRect(hx - 0.05, hy - 0.16, 0.32, 0.32);
   });
 }
 
-const FRAMES = { melon, hands, tea, mirror };
+// The town of S.: the grey soldier's cloth of the hotel table and the dusty inkwell on it — a horseman, his hand
+// raised with a hat in it, his head broken off. A grey light from the window on the left. Nothing moves but a few
+// motes in the light.
+function inkwell(g, e) {
+  const A = e.aspect, cx = A / 2;
+  // the cloth: grey, coarse, the weave in fine lines; the window's light from the upper left
+  g.fillStyle = linear(g, 0, 0, 0, 1, [[0, '#6f716d'], [1, '#5d5f5c']]);
+  g.fillRect(-0.3, -0.05, A + 0.6, 1.1);
+  g.strokeStyle = 'rgba(40,42,40,0.16)'; g.lineWidth = 0.0025;
+  for (let i = 0; i < 90; i++) { const y = -0.05 + i * 0.0125; g.beginPath(); g.moveTo(-0.3, y); g.lineTo(A + 0.3, y + 0.004 * Math.sin(i * 1.7)); g.stroke(); }
+  g.strokeStyle = 'rgba(150,152,148,0.1)';
+  for (let i = 0; i < 160; i++) { const x = -0.3 + i * 0.0145; g.beginPath(); g.moveTo(x, -0.05); g.lineTo(x + 0.003 * Math.sin(i), 1.05); g.stroke(); }
+  g.fillStyle = radial(g, cx - 0.95, -0.15, 1.6, [[0, 'rgba(225,230,235,0.42)'], [0.55, 'rgba(200,205,210,0.12)'], [1, 'rgba(20,22,25,0.3)']]);
+  g.fillRect(-0.3, -0.05, A + 0.6, 1.1);
+  // a few crumbs and a stain on the cloth
+  g.fillStyle = 'rgba(30,30,35,0.25)';
+  g.beginPath(); g.ellipse(cx + 0.55, 0.86, 0.06, 0.02, 0.3, 0, Math.PI * 2); g.fill();
+  const bronze = '#4d4335', bronzeL = '#7d725f', dust = 'rgba(178,174,164,0.5)';
+  // its shadow on the cloth, away from the window
+  g.fillStyle = 'rgba(25,25,28,0.35)';
+  g.beginPath(); g.moveTo(cx - 0.3, 0.83); g.lineTo(cx + 0.38, 0.83); g.lineTo(cx + 0.5, 0.88); g.lineTo(cx - 0.18, 0.88); g.closePath(); g.fill();
+  // the plinth, with two ink pots on it, their lids
+  g.fillStyle = bronze; g.fillRect(cx - 0.34, 0.72, 0.68, 0.11);
+  g.fillStyle = bronzeL; g.fillRect(cx - 0.34, 0.72, 0.68, 0.018);
+  g.fillStyle = 'rgba(0,0,0,0.25)'; g.fillRect(cx - 0.34, 0.81, 0.68, 0.02);
+  for (const x of [cx - 0.25, cx + 0.25]) {
+    g.fillStyle = bronze; g.fillRect(x - 0.055, 0.64, 0.11, 0.085);
+    g.fillStyle = bronzeL; g.beginPath(); g.ellipse(x, 0.64, 0.062, 0.016, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = bronze; g.beginPath(); g.arc(x, 0.625, 0.016, Math.PI, 0); g.fill();
+  }
+  // the horse, standing, its head to the right and up; the tail to the left
+  g.fillStyle = bronze;
+  g.beginPath(); g.ellipse(cx - 0.01, 0.53, 0.15, 0.06, 0, 0, Math.PI * 2); g.fill();          // the barrel
+  for (const [x, lean] of [[-0.12, -0.01], [-0.07, 0.01], [0.07, 0.0], [0.11, 0.02]]) {
+    g.beginPath(); g.moveTo(cx + x - 0.012, 0.55); g.lineTo(cx + x + lean - 0.009, 0.72); g.lineTo(cx + x + lean + 0.009, 0.72); g.lineTo(cx + x + 0.012, 0.55); g.closePath(); g.fill();
+  }
+  g.beginPath(); g.moveTo(cx + 0.08, 0.5); g.quadraticCurveTo(cx + 0.14, 0.44, cx + 0.15, 0.38); g.lineTo(cx + 0.2, 0.37);   // the neck
+  g.quadraticCurveTo(cx + 0.24, 0.39, cx + 0.235, 0.42); g.lineTo(cx + 0.19, 0.43); g.quadraticCurveTo(cx + 0.17, 0.5, cx + 0.13, 0.54); g.closePath(); g.fill();
+  g.beginPath(); g.moveTo(cx + 0.16, 0.38); g.lineTo(cx + 0.165, 0.355); g.lineTo(cx + 0.175, 0.375); g.closePath(); g.fill();  // an ear
+  g.beginPath(); g.moveTo(cx - 0.15, 0.51); g.quadraticCurveTo(cx - 0.22, 0.55, cx - 0.2, 0.66); g.lineTo(cx - 0.18, 0.66); g.quadraticCurveTo(cx - 0.19, 0.57, cx - 0.14, 0.53); g.closePath(); g.fill();  // the tail
+  // the rider: his body on the saddle, the right arm raised high with the hat in the hand — and no head: a broken stump
+  g.beginPath(); g.moveTo(cx - 0.055, 0.5); g.lineTo(cx - 0.045, 0.37); g.lineTo(cx + 0.03, 0.37); g.lineTo(cx + 0.035, 0.5); g.closePath(); g.fill();   // the body
+  g.beginPath(); g.moveTo(cx - 0.03, 0.5); g.lineTo(cx + 0.0, 0.585); g.lineTo(cx + 0.022, 0.58); g.lineTo(cx + 0.02, 0.5); g.closePath(); g.fill();      // the leg down the horse's side
+  g.lineCap = 'round'; g.strokeStyle = bronze; g.lineWidth = 0.022;
+  g.beginPath(); g.moveTo(cx + 0.02, 0.385); g.lineTo(cx + 0.07, 0.29); g.lineTo(cx + 0.085, 0.2); g.stroke();      // the raised arm
+  g.lineWidth = 0.018;
+  g.beginPath(); g.moveTo(cx - 0.04, 0.39); g.lineTo(cx - 0.07, 0.45); g.lineTo(cx - 0.03, 0.47); g.stroke();       // the other arm on the reins
+  g.fillStyle = bronze;
+  g.beginPath(); g.moveTo(cx + 0.045, 0.2); g.quadraticCurveTo(cx + 0.085, 0.15, cx + 0.135, 0.19); g.lineTo(cx + 0.12, 0.2); g.quadraticCurveTo(cx + 0.09, 0.185, cx + 0.06, 0.205); g.closePath(); g.fill();  // the hat
+  g.beginPath(); g.ellipse(cx + 0.09, 0.185, 0.03, 0.018, -0.2, 0, Math.PI * 2); g.fill();
+  // the neck's stump, jagged and brighter where it broke
+  g.beginPath(); g.moveTo(cx - 0.03, 0.375); g.lineTo(cx - 0.025, 0.345); g.lineTo(cx - 0.012, 0.36); g.lineTo(cx - 0.002, 0.338); g.lineTo(cx + 0.01, 0.357); g.lineTo(cx + 0.018, 0.348); g.lineTo(cx + 0.02, 0.375); g.closePath(); g.fill();
+  g.fillStyle = '#a89a7c';
+  g.beginPath(); g.moveTo(cx - 0.025, 0.347); g.lineTo(cx - 0.012, 0.362); g.lineTo(cx - 0.002, 0.34); g.lineTo(cx + 0.01, 0.358); g.lineTo(cx + 0.018, 0.35); g.lineTo(cx + 0.012, 0.364); g.lineTo(cx - 0.02, 0.364); g.closePath(); g.fill();
+  // the light from the window on its left edges; the dust lying on every top
+  g.strokeStyle = 'rgba(200,205,205,0.45)'; g.lineWidth = 0.004;
+  g.beginPath(); g.moveTo(cx - 0.055, 0.5); g.lineTo(cx - 0.045, 0.37); g.moveTo(cx - 0.16, 0.53); g.quadraticCurveTo(cx - 0.12, 0.47, cx, 0.468); g.moveTo(cx - 0.34, 0.83); g.lineTo(cx - 0.34, 0.72); g.stroke();
+  g.fillStyle = dust;
+  for (let i = 0; i < 260; i++) {
+    const x = cx - 0.34 + anim.hash(i, 3) * 0.68, top = anim.hash(i, 4) < 0.6;
+    const y = top ? 0.72 + anim.hash(i, 5) * 0.012 : 0.47 + anim.hash(i, 6) * 0.06;
+    if (!top && Math.abs(x - cx) > 0.15) continue;
+    g.fillRect(x, y, 0.002 + anim.hash(i, 7) * 0.003, 0.0015);
+  }
+  // a few motes in the window's light, drifting
+  e.layer('motes', { drift: [0.006, -0.004], box: [-0.3, -0.05, A * 0.6, 0.7] }, gm => {
+    gm.fillStyle = 'rgba(230,232,235,0.35)';
+    for (let i = 0; i < 40; i++) {
+      const x = -0.3 + anim.hash(i, 21) * (A * 0.6 + 0.3), y = -0.05 + anim.hash(i, 22) * 0.75;
+      gm.beginPath(); gm.arc(x, y, 0.0015 + anim.hash(i, 23) * 0.002, 0, Math.PI * 2); gm.fill();
+    }
+  });
+}
+
+const FRAMES = { melon, hands, tea, mirror, inkwell };
 
 function paint(g, e, shot) {
   const f = FRAMES[shot];
@@ -343,12 +508,14 @@ function live(e, shot) {
     e.at(HIS_FROM(A) + dx, 0.66 - 0.02, 'his');
     e.at(A / 2 + 0.4 - 0.12 + pull * 0.2, 0.58, 'her');
   } else if (shot === 'tea') {
-    const fill = clamp01(s.fill);
+    const fill = clamp01(s.fill), dx = GLASS_FROM * (1 - clamp01(s.glass_at));
+    for (const n of GLASS_LAYERS) e.layer(n).x = dx;
     e.layer('tea').scaleY = Math.max(0.001, fill);
     e.layer('tea').alpha = fill > 0.002 ? 1 : 0;
     e.layer('stream').alpha = Number(s.tap) > 0.5 ? 1 : 0;
     e.layer('spill').alpha = clamp01(s.spill);
     e.layer('steam').alpha = 0.3 + 0.7 * fill;
+    e.at(A / 2 + dx, GLASS.mid, 'glass');
   }
 }
 

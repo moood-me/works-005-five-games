@@ -9,7 +9,7 @@ export default {
   number: '',
   title: tr('A new face'),
   season: () => 'summer',
-  titles: ['A new face'],
+  titles: [tr('A new face')],
   choices: [],
   steps: [
     // the quay at noon: the spitz on the parapet, the player calls it; the lady takes the leash; the title; Gurov looks
