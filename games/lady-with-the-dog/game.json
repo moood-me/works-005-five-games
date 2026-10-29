@@ -10,5 +10,5 @@
     "immersion": 50
   },
   "world": "../../worlds/lady-with-the-dog",
-  "languages": ["en", "ru"]
+  "languages": ["en", "ru", "ja"]
 }
