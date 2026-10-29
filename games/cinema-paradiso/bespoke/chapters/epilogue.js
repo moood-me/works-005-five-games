@@ -21,13 +21,12 @@ export default {
     // the demolition: the full square goes silent, the whistle, the facade comes down; the madman out of the dust
     async g => {
       g.hero('both');
-      g.beds({ crowd: 0.4, wind_cold: 0.2 });
       const whistle = g.told('demolition:whistle'), blast = g.told('demolition:blast');
-      await g.scene(SCENES.square, { beat: 'demolition' });
+      await g.scene(SCENES.square, { beat: 'demolition' }, { beds: { crowd: 0.4, wind_cold: 0.2 } });
       const demolition = g.beat('demolition');
       await whistle;
       g.sound.whistleBlow();
-      g.beds({ wind_cold: 0.2 }, 1); // (the crowd falls silent)
+      g.beds({ wind_cold: 0.2 }); // (the crowd falls silent)
       await blast;
       g.sound.blast();
       await demolition;
@@ -40,8 +39,7 @@ export default {
     // Rome: alone in the rows; the kisses on the screen; the white light on his face
     async g => {
       g.hero('both');
-      g.beds({});
-      await g.scene(SCENES.rome, { beat: 'rome' });
+      await g.scene(SCENES.rome, { beat: 'rome' }, { beds: {} });
       await g.beat('rome');
       await g.choose(null, { 'port#window': [{ id: 'play', label: tr('Roll the film') }] });
       await g.say('salvatore', 'Roll it', 'toto');
@@ -52,7 +50,7 @@ export default {
       const end = g.beat('kisses_end');
       await white;
       theme.loud(1, 2);
-      g.beds({}, 4);
+      g.beds({});
       await end;
       theme.stop(6);
     },

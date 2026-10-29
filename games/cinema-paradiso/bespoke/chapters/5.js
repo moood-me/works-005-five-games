@@ -29,9 +29,8 @@ export default {
     // the same platform, only smaller; the frame in the wallet
     async g => {
       g.hero('toto');
-      g.beds({ wind_cold: 0.4, station: 0.2 });
       const stand = g.told('arrival:stand');
-      await g.scene(SCENES.station, { beat: 'arrival' });
+      await g.scene(SCENES.station, { beat: 'arrival' }, { beds: { wind_cold: 0.4, station: 0.2 } });
       const arrival = g.beat('arrival');
       await stand;
       await g.say('narrator', 'The same platform. Only smaller');
@@ -46,9 +45,8 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('toto');
-      g.beds({ wind_cold: 0.15 });
       const door = g.told('room:door');
-      await g.scene(SCENES.home, { beat: 'room' });
+      await g.scene(SCENES.home, { beat: 'room' }, { beds: { wind_cold: 0.15 } });
       const room = g.beat('room');
       await door;
       await g.say('maria_old', 'I haven\'t touched a thing. Everything\'s as it was', 'maria');
@@ -75,9 +73,8 @@ export default {
     // the chalk strokes, the boarded Paradiso; a girl like Elena (⚑ girl); Elena at the car (~ ask)
     async g => {
       g.hero('toto');
-      g.beds({ wind_cold: 0.4, sea: 0.2 });
       const seen = g.told('girl:seen');
-      await g.scene(SCENES.square, { beat: 'girl' });
+      await g.scene(SCENES.square, { beat: 'girl' }, { beds: { wind_cold: 0.4, sea: 0.2 } });
       const girlBeat = g.beat('girl');
       await seen;
       await g.say('madman_old', 'The square is mine!', 'madman');
@@ -89,8 +86,7 @@ export default {
       });
       if (girl === 'follow') {
         await g.beat('follow');
-        g.beds({ sea: 0.6, wind_cold: 0.2 });
-        await g.scene(SCENES.quay, { beat: 'car' });
+        await g.scene(SCENES.quay, { beat: 'car' }, { beds: { sea: 0.6, wind_cold: 0.2 } });
         await g.beat('car');
         await g.choose(null, { elena: [{ id: 'go', label: tr('Go over') }] });
         const future = facts(g.state).elena === 'future';
@@ -147,9 +143,8 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ wind_cold: 0.3 });
       const passing = g.told('funeral:passing');
-      await g.scene(SCENES.square, { beat: 'funeral' });
+      await g.scene(SCENES.square, { beat: 'funeral' }, { beds: { wind_cold: 0.3 } });
       const funeral = g.beat('funeral');
       g.sound.church();
       await passing;
@@ -188,8 +183,7 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('toto');
-      g.beds({ wind_cold: 0.2 });
-      await g.scene(SCENES.hall, { beat: 'ruin_hall' });
+      await g.scene(SCENES.hall, { beat: 'ruin_hall' }, { beds: { wind_cold: 0.2 } });
       await g.beat('ruin_hall');
       await g.choose(null, { lion: [{ id: 'look', label: tr('Look') }] });
       const warm = g.told('memory:warm'), gone = g.told('memory:gone');

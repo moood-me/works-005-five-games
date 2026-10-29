@@ -27,9 +27,8 @@ export default {
     // the boy threads the projector; the motor, the beam leaps into the port; the lever; the full hall
     async g => {
       g.hero('both');
-      g.beds({});
       const crate = g.told('lesson:crate');
-      await g.scene(SCENES.booth, { beat: 'lesson' });
+      await g.scene(SCENES.booth, { beat: 'lesson' }, { beds: {} });
       const lesson = g.beat('lesson');
       await crate;
       await g.say('alfredo', 'Through here first. Leave a loop, or it\'ll tear');
@@ -47,8 +46,7 @@ export default {
       await g.say('alfredo', 'And this is the lever. When the first dot blinks, the motor. At the second, the lever', 'alfredo');
       await motor;
       const laugh = g.told('full_hall:laugh');
-      await g.scene(SCENES.hall, { beat: 'full_hall' }, { cut: true });
-      g.beds({ whirr: 0.3, hall: 0.6 });
+      await g.scene(SCENES.hall, { beat: 'full_hall' }, { cut: true, beds: { whirr: 0.3, hall: 0.6 } });
       const hall = g.beat('full_hall');
       await laugh;
       g.sound.laugh();
@@ -60,9 +58,8 @@ export default {
     // no seats left: the square whistles; Alfredo leads the beam across the square onto the wall
     async g => {
       g.hero('alfredo');
-      g.beds({ square: 0.7, cicadas: 0.2 });
       const madman = g.told('crowd:madman'), shout = g.told('crowd:shout');
-      await g.scene(SCENES.square, { beat: 'crowd', full_sign: 1 });
+      await g.scene(SCENES.square, { beat: 'crowd', full_sign: 1 }, { beds: { square: 0.7, cicadas: 0.2 } });
       const crowd = g.beat('crowd');
       await madman;
       await g.say('madman', 'The square is mine! It\'s my square!');
@@ -70,9 +67,8 @@ export default {
       g.sound.whistle();
       await g.say('crowd', 'Let us in! We want the movie too!', 'c1');
       await crowd;
-      g.beds({ whirr: 0.5, square: 0.4 });
       const hands = g.told('window:hands');
-      await g.scene(SCENES.booth, { beat: 'window' }, { cut: true });
+      await g.scene(SCENES.booth, { beat: 'window' }, { cut: true, beds: { whirr: 0.5, square: 0.4 } });
       const window = g.beat('window');
       await hands;
       await g.say('alfredo', 'You want a movie? I\'ll give you a movie');
@@ -99,9 +95,8 @@ export default {
     // the fire: the film flares in the gate; the wall blisters; the boy drags Alfredo out; the fountain
     async g => {
       g.hero('both');
-      g.beds({ whirr: 0.5, square: 0.3 });
       const flame = g.told('jam:flame');
-      await g.scene(SCENES.booth, { beat: 'jam' });
+      await g.scene(SCENES.booth, { beat: 'jam' }, { beds: { whirr: 0.5, square: 0.3 } });
       const jam = g.beat('jam');
       await g.say('alfredo', 'Run downstairs, see how it looks out there', 'alfredo');
       await flame;
@@ -114,15 +109,13 @@ export default {
       await fire;
       await g.say('crowd', 'Fire! Fire in the booth!', 'c1');
       await smoke;
-      g.beds({ fire: 1 });
-      await g.scene(SCENES.booth, { beat: 'smoke_in' }, { cut: true });
+      await g.scene(SCENES.booth, { beat: 'smoke_in' }, { cut: true, beds: { fire: 1 } });
       await g.beat('smoke_in');
       await g.play(pullOut);
       g.set('drag', 1);
       g.set('cough', 0);
-      g.beds({ square: 0.4, fire: 0.2 }, 2);
       const sat = g.told('outside:sat');
-      await g.scene(SCENES.square, { beat: 'outside' });
+      await g.scene(SCENES.square, { beat: 'outside' }, { beds: { square: 0.4, fire: 0.2 } });
       const outside = g.beat('outside');
       await sat;
       await g.say('narrator', 'Alfredo lived. But he never saw again');
@@ -131,16 +124,14 @@ export default {
     // the new Paradiso; the first uncut kiss, the hall roars, the priest walks out
     async g => {
       g.hero('toto');
-      g.beds({ square: 0.3 });
       const lit = g.told('new_sign:lit');
-      await g.scene(SCENES.square, { beat: 'new_sign' });
+      await g.scene(SCENES.square, { beat: 'new_sign' }, { beds: { square: 0.3 } });
       const sign = g.beat('new_sign');
       await lit;
       await g.say('narrator', 'Ciccio, a Neapolitan, won the lottery and rebuilt the Paradiso. They took me on as projectionist. Nobody else knew how');
       await sign;
-      g.beds({ hall: 0.6, whirr: 0.3 });
       const kiss = g.told('first_kiss:kiss'), priest = g.told('first_kiss:priest');
-      await g.scene(SCENES.hall, { beat: 'first_kiss' });
+      await g.scene(SCENES.hall, { beat: 'first_kiss' }, { beds: { hall: 0.6, whirr: 0.3 } });
       const first = g.beat('first_kiss');
       await kiss;
       g.sound.roar();
@@ -151,9 +142,8 @@ export default {
     // blind Alfredo at his door; the boy asks him to come (⚑ booth)
     async g => {
       g.hero('alfredo');
-      g.beds({ square: 0.4, cicadas: 0.3 });
       const asked = g.told('door:asked');
-      await g.scene(SCENES.square, { beat: 'door' });
+      await g.scene(SCENES.square, { beat: 'door' }, { beds: { square: 0.4, cicadas: 0.3 } });
       const door = g.beat('door');
       await asked;
       await g.say('toto_boy', 'Alfredo, come with me to the booth. I\'m scared on my own', 'toto');

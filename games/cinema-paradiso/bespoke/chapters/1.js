@@ -22,9 +22,8 @@ export default {
     // the empty hall, the priest alone in the fifth row; the boy peeks from behind the curtain
     async g => {
       g.hero('toto');
-      g.beds({ hall: 0.5, whirr: 0.3 });
       const sat = g.told('priest:sat');
-      await g.scene(SCENES.hall, { beat: 'priest' }, { cut: true });
+      await g.scene(SCENES.hall, { beat: 'priest' }, { cut: true, beds: { hall: 0.5, whirr: 0.3 } });
       const priest = g.beat('priest');
       await sat;
       await g.say('narrator', 'Father Adelfio saw every film first. Alone');
@@ -45,9 +44,8 @@ export default {
     // the booth: Alfredo cuts the kisses (Splicing); the boy and the clippings (~ frame)
     async g => {
       g.hero('both');
-      g.beds({ whirr: 0.5, hall: 0.2 });
       const door = g.told('cutting:door'), bench = g.told('cutting:bench');
-      await g.scene(SCENES.booth, { beat: 'cutting' });
+      await g.scene(SCENES.booth, { beat: 'cutting' }, { beds: { whirr: 0.5, hall: 0.2 } });
       const cutting = g.beat('cutting');
       await door;
       await g.say('alfredo', 'Shoo! You\'re not allowed in here');
@@ -93,9 +91,8 @@ export default {
     // after the show: the mother and the milk money; Alfredo's coins out of his own pocket (⚑ milk)
     async g => {
       g.hero('toto');
-      g.beds({ square: 0.5, cicadas: 0.3, crowd: 0.3 });
       const caught = g.told('after_show:caught');
-      await g.scene(SCENES.square, { beat: 'after_show' });
+      await g.scene(SCENES.square, { beat: 'after_show' }, { beds: { square: 0.5, cicadas: 0.3, crowd: 0.3 } });
       const after = g.beat('after_show');
       await caught;
       await g.say('maria', 'Where\'s the milk money? Where is it?', 'maria');
@@ -118,8 +115,7 @@ export default {
         await take;
         await g.say('maria', 'Thank you, Don Alfredo', 'maria');
         await taken;
-        g.beds({});
-        await g.scene(SCENES.home, { beat: 'supper' });
+        await g.scene(SCENES.home, { beat: 'supper' }, { beds: {} });
         await g.beat('supper');
         await g.say('narrator', 'There was milk that evening');
       } else {
@@ -131,9 +127,8 @@ export default {
         await cut;
         g.sound.slap();
         await slap;
-        g.beds({});
         const hand = g.told('photo:hand');
-        await g.scene(SCENES.home, { beat: 'photo' });
+        await g.scene(SCENES.home, { beat: 'photo' }, { beds: {} });
         const photo = g.beat('photo');
         await hand;
         await g.say('maria', 'Your father\'s in Russia. Maybe he\'s still alive. And you go to the movies', 'maria');
@@ -143,9 +138,8 @@ export default {
     // the deal: Alfredo's exam; the boy's hand on his, the chalk (Letters); the slate up to the lamp
     async g => {
       g.hero('both');
-      g.beds({ whirr: 0.3 });
       const primer = g.told('deal:primer');
-      await g.scene(SCENES.booth, { beat: 'deal' });
+      await g.scene(SCENES.booth, { beat: 'deal' }, { beds: { whirr: 0.3 } });
       const deal = g.beat('deal');
       await primer;
       await g.say('alfredo', 'I\'ve got to sit the exam. Elementary school. Without the certificate they won\'t keep me on as projectionist');
@@ -167,9 +161,8 @@ export default {
     // the paper from Russia: the mother in black crosses the square, the poster, the boy takes her hand
     async g => {
       g.hero('toto');
-      g.beds({ square: 0.3, cicadas: 0.2 });
       const hand = g.told('paper:hand');
-      await g.scene(SCENES.square, { beat: 'paper', poster: 1 });
+      await g.scene(SCENES.square, { beat: 'paper', poster: 1 }, { beds: { square: 0.3, cicadas: 0.2 } });
       const paper = g.beat('paper');
       await hand;
       await g.say('narrator', 'My father never came back from Russia. They sent us a paper');

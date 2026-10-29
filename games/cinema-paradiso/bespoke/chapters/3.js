@@ -26,9 +26,8 @@ export default {
     // dusk on the church steps; the camera follows a girl across the square (⚑ camera)
     async g => {
       g.hero('toto');
-      g.beds({ square: 0.5, cicadas: 0.4 });
       const aim = g.told('dusk:aim');
-      await g.scene(SCENES.square, { beat: 'dusk' });
+      await g.scene(SCENES.square, { beat: 'dusk' }, { beds: { square: 0.5, cicadas: 0.4 } });
       const dusk = g.beat('dusk');
       await aim;
       await g.say('narrator', 'I was seventeen. I filmed everything with a little camera');
@@ -72,10 +71,9 @@ export default {
     async g => {
       g.hero('both');
       const here = facts(g.state).alfredoHere, beat = here ? 'story_booth' : 'story_door';
-      if (here) g.beds({ whirr: 0.4, hall: 0.2 });
-      else g.beds({ square: 0.4, cicadas: 0.4 });
+      const beds = here ? { whirr: 0.4, hall: 0.2 } : { square: 0.4, cicadas: 0.4 };
       const start = g.told(`${beat}:start`), ninety = g.told(`${beat}:99`), why = g.told(`${beat}:why`);
-      await g.scene(here ? SCENES.booth : SCENES.square, { beat });
+      await g.scene(here ? SCENES.booth : SCENES.square, { beat }, { beds });
       const story = g.beat(beat);
       await start;
       await g.say('alfredo', 'Once a king gave a feast. A soldier saw the princess, and he was lost');
@@ -90,9 +88,8 @@ export default {
     // the chair under her balcony; the hundred nights, a chalk stroke a week
     async g => {
       g.hero('toto');
-      g.beds({ square: 0.3, cicadas: 0.3 });
       const sat = g.told('chair:sat');
-      await g.scene(SCENES.square, { beat: 'chair' });
+      await g.scene(SCENES.square, { beat: 'chair' }, { beds: { square: 0.3, cicadas: 0.3 } });
       const chair = g.beat('chair');
       await sat;
       await g.say('narrator', 'I decided to stand there a hundred nights. To sit, to be honest');
@@ -102,14 +99,13 @@ export default {
       g.set('chalk', 98);
       g.set('night_kind', 'cold');
       g.set('elena_window', 0);
-      g.beds({ square: 0.3 }, 2);
+      g.beds({ square: 0.3 });
     },
     // the ninety-ninth night, New Year's Eve: the booth's window lit across the square (⚑ nights)
     async g => {
       g.hero('toto');
-      g.beds({ square: 0.5, hall: 0.2 });
       const ready = g.told('eve:ready');
-      await g.scene(SCENES.square, { beat: 'eve', chalk: 99 });
+      await g.scene(SCENES.square, { beat: 'eve', chalk: 99 }, { beds: { square: 0.5, hall: 0.2 } });
       const eve = g.beat('eve');
       await ready;
       await g.say('narrator', 'The ninety-ninth night. The New Year\'s film at the Paradiso. And I was the one who had to run it');
@@ -133,9 +129,8 @@ export default {
         await g.say('narrator', 'The audience got no film that night. Ciccio docked my pay');
       } else {
         g.scale('toto', 1);
-        g.beds({ whirr: 0.6, hall: 0.3 });
         const door = g.told('reels:door'), hug = g.told('reels:hug'), tail = g.told('reels:tail');
-        await g.scene(SCENES.booth, { beat: 'reels' });
+        await g.scene(SCENES.booth, { beat: 'reels' }, { beds: { whirr: 0.6, hall: 0.3 } });
         const reels = g.beat('reels');
         await door;
         await g.say('elena', 'You left the square. I thought that was the end', 'elena');
@@ -145,8 +140,7 @@ export default {
         g.sound.reelEnd();
         if (facts(g.state).alfredoHere) await g.say('alfredo', 'Totò! The reel\'s run out!');
         await reels;
-        g.beds({ hall: 0.4 });
-        await g.scene(SCENES.hall, { beat: 'whistle' }, { cut: true });
+        await g.scene(SCENES.hall, { beat: 'whistle' }, { cut: true, beds: { hall: 0.4 } });
         const whistle = g.beat('whistle');
         g.sound.whistle();
         await whistle;

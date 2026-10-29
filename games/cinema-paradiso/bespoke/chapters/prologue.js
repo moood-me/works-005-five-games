@@ -12,9 +12,8 @@ export default {
   steps: [
     async g => {
       g.hero('both');
-      g.beds({ wind_cold: 0.3, sea: 0.2 }, 3);
       const window = g.told('now_open:window');
-      await g.scene(SCENES.square, { beat: 'now_open' });
+      await g.scene(SCENES.square, { beat: 'now_open' }, { beds: { wind_cold: 0.3, sea: 0.2 } });
       const open = g.beat('now_open');
       await window;
       await g.say('maria_old', 'Salvatore… Alfredo has died. The funeral is on Wednesday', 'mother_window');
@@ -25,7 +24,7 @@ export default {
       const rewind = g.beat('rewind');
       await beam;
       g.sound.motif();
-      g.beds({ cicadas: 0.4, square: 0.3 }, 6);
+      g.beds({ cicadas: 0.4, square: 0.3 });
       g.title(tr('Cinema Paradiso')); // (not waited for: the past comes up under it)
       await rewind;
     },

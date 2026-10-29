@@ -172,7 +172,7 @@ for (const entry of games) {
 }
 for (const name in MINIGAMES) if (![...GAMES.values()].some(m => m.name === name)) miss(`minigames/${name}.js`, 'no file');
 // every sound has its unheard twin; and the names game.md §8 lists
-const SOUNDS = ['beds', 'unheard', 'whirr', 'hall', 'square', 'crowd', 'cicadas', 'sea', 'rain', 'fire', 'wind_cold', 'station',
+const SOUNDS = ['background', 'unheard', 'whirr', 'hall', 'square', 'crowd', 'cicadas', 'sea', 'rain', 'fire', 'wind_cold', 'station',
   'theme', 'motif', 'camera8', 'bell', 'creak', 'scissors', 'press', 'chalk', 'chalkSqueak', 'click', 'clunk', 'motor', 'tick', 'tick2',
   'laugh', 'roar', 'applause', 'whistle', 'whisper', 'giggle', 'coins', 'slap', 'flame', 'drag', 'cough', 'band', 'shutter', 'fireworks',
   'reelEnd', 'steps', 'door', 'car', 'trainHiss', 'trainWhistle', 'church', 'pigeons', 'paper', 'puff', 'whistleBlow', 'blast'];
@@ -181,7 +181,7 @@ const quiet = sound.unheard?.() ?? { sounds: {} };
 const quietNames = Object.keys(quiet.sounds ?? {});
 for (const name of quietNames) if (typeof sound[name] !== 'function') miss('sound.js', `the sound “${name}” is in unheard() but not in sound.js`);
 for (const name in sound) {
-  if (typeof sound[name] === 'function' && !['unheard'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
+  if (typeof sound[name] === 'function' && !['unheard', 'background'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
 }
 for (const handle of ['theme', 'camera8']) {
   const h = quiet.sounds?.[handle]?.();
@@ -264,13 +264,24 @@ function watched(g, j, ch, here, events, seen) {
         bad(`the sound “${n}” is not in sound.js or in unheard()`);
         return false;
       };
-      if (name === 'beds') return (levels = {}, seconds) => { Object.keys(levels).forEach(known); q.beds(levels, seconds); };
       return known(name) ? q[name] : mute;
     },
   });
+  // the beds of a background the step declares (g.beds, g.scene's beds): {bed: level} of the beds sound.js has, and
+  // nothing more — the page times it (no seconds)
+  const declared = (levels, as) => {
+    if (!levels || typeof levels !== 'object' || Array.isArray(levels)) { bad(`${as}: not {bed: level}`); return; }
+    for (const n in levels) if (typeof sound[n] !== 'function' || !(n in j.sounds) || ['background', 'unheard'].includes(n)) bad(`${as}: the bed “${n}” is not in sound.js`);
+  };
   const w = Object.create(g);
   Object.assign(w, {
+    beds(levels, ...more) {
+      declared(levels, 'g.beds');
+      if (more.length) bad('g.beds: seconds — the page times the background');
+      return g.beds(levels);
+    },
     async scene(folder, st = {}, how) {
+      if (how?.beds !== undefined) declared(how.beds, `g.scene “${folder}” beds`);
       const scene = WORLD.get(folder), party = carry(folder, facts(g.state));
       if (!party) bad(`g.scene “${folder}”: no such scene in SCENES`);
       if (scene && party) {

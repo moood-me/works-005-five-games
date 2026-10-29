@@ -22,14 +22,13 @@ export default {
     // the summer cinema on the pier; the rain; the projector covered; the father's car
     async g => {
       g.hero('toto');
-      g.beds({ sea: 0.4, whirr: 0.3 });
       const screen = g.told('summer:screen'), rain = g.told('summer:rain');
-      await g.scene(SCENES.quay, { beat: 'summer' });
+      await g.scene(SCENES.quay, { beat: 'summer' }, { beds: { sea: 0.4, whirr: 0.3 } });
       const summer = g.beat('summer');
       await screen;
       await g.say('narrator', 'In summer they showed films on the pier. People even watched from the boats');
       await rain;
-      g.beds({ sea: 0.3, rain: 0.8, whirr: 0.3 }, 3);
+      g.beds({ sea: 0.3, rain: 0.8, whirr: 0.3 });
       await summer;
       await g.choose(null, { projector: [{ id: 'cover', label: tr('Cover the projector') }] });
       const done = g.told('covered:done');
@@ -49,9 +48,8 @@ export default {
     // six o'clock: three changeovers, the steps pass by (Changeover); at ten Alfredo sends him to the pier
     async g => {
       g.hero('toto');
-      g.beds({ whirr: 0.5, hall: 0.3 });
       const clock = g.told('six:clock');
-      await g.scene(SCENES.booth, { beat: 'six' });
+      await g.scene(SCENES.booth, { beat: 'six' }, { beds: { whirr: 0.5, hall: 0.3 } });
       const six = g.beat('six');
       await clock;
       await g.say('narrator', 'At six she didn\'t come');
@@ -75,9 +73,8 @@ export default {
     // Elena at the door, blind Alfredo alone at the running projector (⚑ elena)
     async g => {
       g.hero('alfredo');
-      g.beds({ whirr: 0.5, hall: 0.2 });
       const inside = g.told('knock:in');
-      await g.scene(SCENES.booth, { beat: 'knock' });
+      await g.scene(SCENES.booth, { beat: 'knock' }, { beds: { whirr: 0.5, hall: 0.2 } });
       const knock = g.beat('knock');
       await inside;
       g.sound.steps();
@@ -96,9 +93,8 @@ export default {
         g.sound.door();
         await runs;
         g.hero('toto');
-        g.beds({ sea: 0.5 });
         const hug = g.told('found:hug');
-        await g.scene(SCENES.quay, { beat: 'found' });
+        await g.scene(SCENES.quay, { beat: 'found' }, { beds: { sea: 0.5 } });
         const found = g.beat('found');
         await hug;
         g.sound.motif();
@@ -112,12 +108,10 @@ export default {
         await g.beat('note');
         await g.beat('note_close'); // (close)
         g.hero('toto');
-        g.beds({ sea: 0.5 });
-        await g.scene(SCENES.quay, { beat: 'alone' });
+        await g.scene(SCENES.quay, { beat: 'alone' }, { beds: { sea: 0.5 } });
         await g.beat('alone');
-        g.beds({});
         const inn = g.told('morning:in');
-        await g.scene(SCENES.booth, { beat: 'morning' });
+        await g.scene(SCENES.booth, { beat: 'morning' }, { beds: {} });
         const morning = g.beat('morning');
         await inn;
         await g.say('toto', 'Did she come?', 'toto');
@@ -128,9 +122,8 @@ export default {
     // the call-up; her letters on the table, or his own come back
     async g => {
       g.hero('toto');
-      g.beds({});
       const paper = g.told('call:paper');
-      await g.scene(SCENES.home, { beat: 'call' });
+      await g.scene(SCENES.home, { beat: 'call' }, { beds: {} });
       const call = g.beat('call');
       await paper;
       await g.say('maria', 'Your call-up papers, Totò. The army', 'maria');
@@ -157,9 +150,8 @@ export default {
     // the pier at dusk, a year later: «Leave» (⚑ stay)
     async g => {
       g.hero('both');
-      g.beds({ sea: 0.5 });
       const sat = g.told('back:sat');
-      await g.scene(SCENES.quay, { beat: 'back' });
+      await g.scene(SCENES.quay, { beat: 'back' }, { beds: { sea: 0.5 } });
       const back = g.beat('back');
       await sat;
       await g.say('narrator', 'I came back from the army a year later');
@@ -179,9 +171,8 @@ export default {
       } else {
         g.scale('toto', -1);
         await g.say('toto', 'I\'ll stay. One more year', 'toto');
-        g.beds({ whirr: 0.4, rain: 0.4 });
         const door = g.told('autumn:door');
-        await g.scene(SCENES.booth, { beat: 'autumn' });
+        await g.scene(SCENES.booth, { beat: 'autumn' }, { beds: { whirr: 0.4, rain: 0.4 } });
         const autumn = g.beat('autumn');
         await door;
         await g.say('alfredo', 'You sit the way I used to sit. Go, before you put down roots', 'alfredo');
@@ -192,9 +183,8 @@ export default {
     // the station at dawn: the mother, Alfredo's hug (⚑ station), the train (~ look)
     async g => {
       g.hero('both');
-      g.beds({ station: 0.5 });
       const hug = g.told('platform:hug');
-      await g.scene(SCENES.station, { beat: 'platform' });
+      await g.scene(SCENES.station, { beat: 'platform' }, { beds: { station: 0.5 } });
       const platform = g.beat('platform');
       g.sound.trainHiss();
       await hug;

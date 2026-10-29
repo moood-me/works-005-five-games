@@ -1,12 +1,14 @@
 // The sounds of Cinema Paradiso, made in the page (Web Audio): nothing to load; as loud as the page's "sounds" slider
 // says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first touch), and waits
-// with the play as the scene's music does — paused, its scene standing or being made ready —, fading out and back in.
+// with the scene's music — the play paused, its scene standing —, fading out and back in.
 // (game.md §8.)
-//   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
+//   unheard() → {sounds} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // Two airs a sound goes out into: the square's (open, warm, 1.6 s) and the booth's (a small room, 0.4 s).
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down),
 // getting there over `seconds`:
-//   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
+//   background(levels, seconds) — the named beds to their levels, every other one to silence: the game's background as
+//     the page sounds it (bespoke.onBackground — at a scene's cut with its music, or at once: the game declares it,
+//     g.beds and g.scene's beds, and never times it)
 //   whirr — the projector: twenty-four clicks a second of the claw and the shutter, the motor's hum, the film's rustle.
 //     The heart of the past: in the booth, the hall, the pier in summer, Rome; in chapter V only the flash of `memory`
 //     and «The Strip»
@@ -464,7 +466,7 @@ export function wind_cold(level = 1, seconds = 2) { bed('wind_cold', 0.2, 'squar
 export function station(level = 1, seconds = 2) { bed('station', 0.05, 'square', recorded(['station-474616.mp3'], 1.21), level, seconds); }
 
 const BEDS = { whirr, hall, square, crowd, cicadas, sea, rain, fire, wind_cold, station };
-export function beds(levels = {}, seconds = 2) {
+export function background(levels, seconds) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }
 
@@ -929,16 +931,14 @@ export function blast() {
   for (let i = 0; i < 60; i++) burst(t + 0.8 + rnd(0, 5) ** 1.2, out, { kind: i % 3 ? 'white' : 'brown', f: rnd(300, 2500), Q: 1.2, len: rnd(0.03, 0.15), loud: rnd(0.05, 0.25) });
 }
 
-// the sounds of a step played unseen (jump.js): nothing heard meanwhile — the beds heard from then on as loud as the
-// step left them; what was played once is over by then, and a handle begun meanwhile is mute
+// the sounds of a step played unseen (jump.js): nothing heard meanwhile — what was played once is over by then, and a
+// handle begun meanwhile is mute (the background the step declared is the jump's: j.background)
 export function unheard() {
-  const levels = {}, none = () => {}, mute = () => ({ loud() {}, stop() {} });
-  const bedOf = name => (level = 1) => { levels[name] = level; };
+  const none = () => {}, mute = () => ({ loud() {}, stop() {} });
   return {
     sounds: {
-      beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
-      whirr: bedOf('whirr'), hall: bedOf('hall'), square: bedOf('square'), crowd: bedOf('crowd'), cicadas: bedOf('cicadas'),
-      sea: bedOf('sea'), rain: bedOf('rain'), fire: bedOf('fire'), wind_cold: bedOf('wind_cold'), station: bedOf('station'),
+      whirr: none, hall: none, square: none, crowd: none, cicadas: none,
+      sea: none, rain: none, fire: none, wind_cold: none, station: none,
       theme: mute, camera8: mute,
       motif: none, bell: none, creak: none, scissors: none, press: none, chalk: none, chalkSqueak: none, click: none,
       clunk: none, motor: none, tick: none, tick2: none, laugh: none, roar: none, applause: none, whistle: none,
@@ -946,6 +946,5 @@ export function unheard() {
       shutter: none, fireworks: none, reelEnd: none, steps: none, door: none, car: none, trainHiss: none,
       trainWhistle: none, church: none, pigeons: none, paper: none, puff: none, whistleBlow: none, blast: none,
     },
-    wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); },
   };
 }
