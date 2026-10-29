@@ -164,15 +164,13 @@ function live(e) {
   const old = num(s.spitz_old) > 0.5, slow = old ? 0.6 : 1;
   const G = shape(view, act);
 
-  // ── which way it faces: the key `spitz_dir` (as seen: 1 right, −1 left) when it is set anew and after a cut; then
-  // the way its place moves on the screen
-  const key = num(s.spitz_dir, 1) < 0 ? -1 : 1;
-  if (m.key !== key || m.dir == null || e.cut < (m.cut ?? Infinity)) m.dir = key;
-  m.key = key;
-  m.cut = e.cut;
-  const a = num(s.spitz_a), d = num(s.spitz_d), el = num(s.spitz_e);
+  // ── which way it faces as seen: `spitz_dir` 1 (right) or −1 (left) holds it so (backing away, standing turned);
+  // 0 or none — the way its place moves on the screen, the last way kept when it stops
+  const key = num(s.spitz_dir, 0), a = num(s.spitz_a), d = num(s.spitz_d), el = num(s.spitz_e);
   const va = num(e.speed('spitz_a')), vd = num(e.speed('spitz_d')), v = Math.hypot(va, vd);
-  if (v > 0.05) {
+  m.dir ??= 1;
+  if (key) m.dir = key < 0 ? -1 : 1;
+  else if (v > 0.05) {
     const p0 = e.point([a, d, el]);
     const x0 = p0 ? p0[0] : null;
     const p1 = e.point([a + va * 0.25, d + vd * 0.25, el]);
@@ -222,14 +220,13 @@ function live(e) {
   let hand = null;
   if (ref === 'chair') hand = e.point('chair#leash');
   else if (typeof ref === 'string' && ref && ref !== 'none') hand = e.point(ref);
-  const ground = Math.max(0, el);               // the land under it (y down from its feet); the feet's own level is 0
   if (hand) {
     const hx = hand[0], hy = hand[1], dx = hx - cx, dy = hy - cy, D = Math.hypot(dx, dy);
     const sag = D < LENGTH ? Math.min(LENGTH / 2, Math.sqrt(3 * D * (LENGTH - D) / 8)) : 0;
     for (let i = 0; i <= 4; i++) {
       const u = i / 4, P = PTS[i];
       P[0] = cx + dx * u;
-      P[1] = Math.min(cy + dy * u + 4 * sag * u * (1 - u), ground - 0.01);
+      P[1] = Math.min(cy + dy * u + 4 * sag * u * (1 - u), -0.01);   // not under what it stands on
     }
     PTS[0][1] = cy; PTS[4][1] = hy;
   } else {

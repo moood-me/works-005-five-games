@@ -23,7 +23,7 @@ business, not the module's.
 | --- | --- |
 | `spitz_a`, `spitz_d`, `spitz_e` | the place and the height above the land, m (on the parapet, on a chair: `spitz_e`) |
 | `spitz_view` | `side` (side on) · `front3q` (three-quarters toward us: the body shorter, the chest ruff full, the muzzle short, both eyes) · `back` (from behind). A view is a painting of its own (it changes rarely: one painting a change) |
-| `spitz_dir` | which way it faces **as seen**: 1 — its head to the right, −1 — to the left. Taken when it is set anew and after every cut; between, the dog faces the way its place moves on the screen (`spitz_a`/`spitz_d` moving: `e.speed`), and keeps the last way when it stops. Mirrored by its layers, never repainted. Optional (1) |
+| `spitz_dir` | which way it faces **as seen**: 1 — its head to the right, −1 — to the left, held so whatever it does (backing away, standing turned to someone); 0 (or none) — the way its place moves on the screen (`spitz_a`/`spitz_d` moving: `e.speed`), the last way kept when it stops (at first: right). Mirrored by its layers, never repainted |
 | `spitz_do` | `stand` · `sit` · `lie` · `up` (on its hind legs) — the painting's own poses; `trot`, `run` — the pose `stand`, the legs stepping even on the spot; `growl`, `bark` — a jerk of the head; `sniff` — the head down. Moving (its place's speed over 0.08 m/s) its legs step in any pose but `lie`/`sit`, faster as it goes faster (1.5…4.5 steps a second) |
 | `spitz_look` | a point it turns its head a little toward (up or down), or `null` |
 | `spitz_here` | 0/1 — whether it is there |
@@ -40,7 +40,7 @@ have them.
 ## The leash
 
 Four straps (layers `leash0…3`), laid every frame from the collar to the hand: 2 m long; nearer than that it sags in a
-parabola (the sag `√(3·D·(2−D)/8)`, at most 1 m, never under the land); farther it is a straight line — the scene
+parabola (the sag `√(3·D·(2−D)/8)`, at most 1 m, never below its own feet: the ground, the deck, the parapet's top it stands on); a leash that looks taut while walking — the dog 1.5–1.9 m from the hand; farther it is a straight line — the scene
 keeps the dog within 2 m of the hand that holds it. `#a8322c` (`kit.spitz.LEASH`), 2.7 cm wide (wider than a real one:
 far off it would be thinner than a pixel), a thin light edge along it.
 
