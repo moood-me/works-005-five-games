@@ -9,5 +9,5 @@
     "relationships": 2
   },
   "world": "../../worlds/cinema-paradiso",
-  "languages": ["en", "ru", "uk", "de", "es", "ja", "be"]
+  "languages": ["en", "ru", "uk", "de", "es", "ja", "be", "fr"]
 }

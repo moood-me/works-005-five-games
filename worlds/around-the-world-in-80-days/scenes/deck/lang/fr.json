@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"NOVEMBRE","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"MERCREDI","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"Le pont","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"Le pont d’un steamer, près du bastingage : la mer, la fumée de la cheminée, un port à l’horizon.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}
