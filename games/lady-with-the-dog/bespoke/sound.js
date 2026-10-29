@@ -1,8 +1,7 @@
 // The sounds of “The Lady with the Dog”, made in the page (Web Audio): nothing to load; as loud as the page's "sounds"
-// slider says (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes it then;
-// till then its time stands, and what was asked for begins at the touch. (game.md §8, the page's sounds.)
-//   wake() — the page may be heard from now on (called on the first touch)
-//   pause(on) — all of it stands while the play is paused (ui.js ⏸) and goes on from there after
+// slider says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first touch), and
+// waits with the play as the scene's music does — paused, its scene standing or being made ready —, fading out and back
+// in. (game.md §8, the page's sounds.)
 //   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // Two airs a sound goes out into: the open air (light, 1.8 s — the quay, the garden, the station, the street) and a
 // room (0.6 s — the hotel rooms, the theatre, a hall).
@@ -68,7 +67,7 @@ const ETUDE = (() => {
   return { notes, left, beats: t };
 })();
 
-let ctx = null, master = null, rooms = null, still = null, awake = false, held = false;
+let ctx = null, master = null, rooms = null, still = null;
 // a room's tail: decaying noise, low-passed by `dark` (0 bright … 1 dull)
 function impulse(a, seconds, curve, dark) {
   const n = Math.floor(a.sampleRate * seconds), ir = a.createBuffer(2, n, a.sampleRate);
@@ -85,7 +84,6 @@ function impulse(a, seconds, curve, dark) {
 function audio() {
   if (!ctx) {
     ctx = new AudioContext();
-    if (!awake) ctx.suspend();
     const limit = ctx.createDynamicsCompressor();
     limit.threshold.value = -12;
     limit.ratio.value = 4;
@@ -105,19 +103,7 @@ function audio() {
     still.gain.value = 0;
     still.connect(master);
   }
-  if (awake && !held && ctx.state === 'suspended') ctx.resume();
   return ctx;
-}
-export function wake() {
-  awake = true;
-  audio();
-  for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, audio, { once: true, capture: true });
-}
-export function pause(on) {
-  held = !!on;
-  if (!ctx || !awake) return;
-  if (held) ctx.suspend();
-  else ctx.resume();
 }
 
 // where a sound goes: straight out, and `wet` of it into a room's air ('open' or 'room')
@@ -767,7 +753,6 @@ export function unheard() {
   const bedOf = name => (level = 1) => { levels[name] = level; };
   return {
     sounds: {
-      wake: none,
       beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
       sea: bedOf('sea'), cicadas: bedOf('cicadas'), crowd: bedOf('crowd'), wind: bedOf('wind'), crickets: bedOf('crickets'),
       wires: bedOf('wires'), steam: bedOf('steam'), snow: bedOf('snow'), thaw: bedOf('thaw'), room: bedOf('room'),

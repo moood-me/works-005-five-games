@@ -39,7 +39,7 @@
 import { ENDINGS, START, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
-import { beds, wake, unheard, pause } from './sound.js';
+import { beds, unheard } from './sound.js';
 import { jump as unseen } from './jump.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
@@ -77,7 +77,6 @@ export default async function (b) {
   b.minigame.style({ key: 'A_FLAT_MAJOR_F_MINOR', font: '"Around Title", Georgia, serif', colors: { mark: '#f4ead2', ghost: '#f4ead2' } });
   const hub = listen(b);
   const view = ui(b.layer);
-  b.onPause(pause);
   // (the page is heard only after a touch: a chapter that begins without the map does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
   let touched = false;
@@ -126,7 +125,6 @@ export default async function (b) {
     const to = straight ? 'main' : await map(after);
     after = {};
     straight = false;
-    wake(); // (a touch: the page may be heard from now on)
     if (to === 'drop') { replay = null; continue; }
     // (a replay kept that ends the play: the map goes the whole way round too)
     if (to === 'keep') { await keepReplay(); if (kept.chapter === END) { ended(); after = { round: true }; } continue; }

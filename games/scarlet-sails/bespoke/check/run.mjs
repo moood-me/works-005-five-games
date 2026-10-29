@@ -154,7 +154,7 @@ for (const name in MINIGAMES) if (![...GAMES.values()].some(m => m.name === name
 const quietNames = Object.keys(sound.unheard().sounds);
 for (const name of quietNames) if (typeof sound[name] !== 'function') miss('sound.js', `the sound “${name}” is in unheard() but not in sound.js`);
 for (const name in sound) {
-  if (typeof sound[name] === 'function' && !['pause', 'unheard'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
+  if (typeof sound[name] === 'function' && !['unheard'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
 }
 // the Far Sea, as game.js opens it
 const far = WORLD.get(SCENES.far);

@@ -210,7 +210,7 @@ for (const entry of games) {
 }
 for (const name in MINIGAMES) if (![...GAMES.values()].some(m => m.name === name)) miss(`minigames/${name}.js`, 'no such file');
 // every sound has its unheard twin; and the names game.md §8 lists
-const SOUNDS = ['beds', 'wake', 'pause', 'unheard', 'wind', 'rails', 'train', 'freight', 'crossing', 'room', 'clock', 'fire', 'crowd', 'pour',
+const SOUNDS = ['beds', 'unheard', 'wind', 'rails', 'train', 'freight', 'crossing', 'room', 'clock', 'fire', 'crowd', 'pour',
   'horn', 'doors', 'knock', 'dog', 'door', 'creak', 'cough', 'tick', 'strike', 'rub', 'spill', 'box', 'glass', 'splash', 'crunch', 'thud',
   'scrape', 'clarinet', 'march', 'dance'];
 for (const name of SOUNDS) if (typeof sound[name] !== 'function') miss('sound.js', `no “${name}” (game.md §8)`);
@@ -218,7 +218,7 @@ const quiet = sound.unheard?.() ?? { sounds: {} };
 const quietNames = Object.keys(quiet.sounds ?? {});
 for (const name of quietNames) if (typeof sound[name] !== 'function') miss('sound.js', `the sound “${name}” is in unheard(), but not in sound.js`);
 for (const name in sound) {
-  if (typeof sound[name] === 'function' && !['pause', 'unheard', 'wake'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
+  if (typeof sound[name] === 'function' && !['unheard'].includes(name) && !quietNames.includes(name)) miss('sound.js', `the sound “${name}” is not in unheard()`);
 }
 {
   const h = quiet.sounds?.march?.();

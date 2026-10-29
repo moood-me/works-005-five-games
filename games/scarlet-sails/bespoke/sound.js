@@ -1,9 +1,7 @@
-// Sounds of the game's own, made in the page (Web Audio): nothing to load; they are as loud as the page's "sounds" slider
-// says (MooodVolume.output). The page may be heard only after the
-// player's first touch: game.js wakes it then; till then its time stands, and what was asked for begins at the touch.
-//   wake() — the page may be heard from now on (called on the first touch)
-//   pause(on) — all of it stands while the play is paused (bespoke.pause: ui.js ⏸) and goes on from there after — its
-//     sounds' own time (the audio's clock) stands with the play's
+// Sounds of the game's own, made in the page (Web Audio): nothing to load; they are as loud as the page's "sounds"
+// slider says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first touch), and
+// waits with the play as the scene's music does — paused, its scene standing or being made ready —, fading out and back
+// in.
 //   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down),
 // getting there over `seconds`:
@@ -64,11 +62,10 @@ const CHORDS = [
 ];
 const CHORD = 4.4;
 
-let ctx = null, master = null, room = null, still = null, awake = false, held = false;
+let ctx = null, master = null, room = null, still = null;
 function audio() {
   if (!ctx) {
     ctx = new AudioContext();
-    if (!awake) ctx.suspend();
     const limit = ctx.createDynamicsCompressor();
     limit.threshold.value = -12;
     limit.ratio.value = 4;
@@ -90,21 +87,7 @@ function audio() {
     still.gain.value = 0;
     still.connect(master);
   }
-  if (awake && !held && ctx.state === 'suspended') ctx.resume();
   return ctx;
-}
-export function wake() {
-  awake = true;
-  audio();
-  // (called with no touch behind it — the author gone straight to a minigame: the browser lets it be heard only
-  // from the first touch or key, so it is asked again then)
-  for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, audio, { once: true, capture: true });
-}
-export function pause(on) {
-  held = !!on;
-  if (!ctx || !awake) return;
-  if (held) ctx.suspend();
-  else ctx.resume();
 }
 
 // where a sound goes: the air, carrying `wet` of it on
@@ -743,7 +726,6 @@ export function unheard() {
   const levels = {}, none = () => {}, mute = () => ({ loud() {}, stop() {} });
   return {
     sounds: {
-      wake: none,
       beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
       sea(level = 1) { levels.sea = level; },
       stream(level = 1) { levels.stream = level; },

@@ -1,8 +1,8 @@
 // The sounds of «Around the World in 80 Days», made in the page (Web Audio): nothing to load; as loud as the page's
-// "sounds" slider says (MooodVolume.output). The page may be heard only after the player's first touch: game.js wakes
-// it then. The frame (the airs, the beds, the struck things) is «Cinema Paradiso»'s; the sounds are this game's (game.md §9).
-//   wake() — the page may be heard from now on (called on the first touch)
-//   pause(on) — all of it stands while the play is paused (ui.js ⏸) and goes on from there after
+// "sounds" slider says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first
+// touch), and waits with the play as the scene's music does — paused, its scene standing or being made ready —, fading
+// out and back in. The frame (the airs, the beds, the struck things) is «Cinema Paradiso»'s; the sounds are this game's
+// (game.md §9).
 //   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // Two airs a sound goes out into: the open air ('square', 1.6 s) and a room ('booth', 0.4 s).
 // The beds — what lasts; one of each for the page, as loud as `level`, getting there over `seconds`:
@@ -45,7 +45,7 @@ const BEAT = 0.5, BAR = 3 * BEAT; // seconds
 const ROUND = THEME.length + 2; // bars: the tune, and two of rest (the chord of E held) before it comes round
 const MOTIF = THEME[0].notes.concat(THEME[1].notes).slice(0, 5); // G♯4 A4 B4 E5 D♯5, with their beats
 
-let ctx = null, master = null, rooms = null, still = null, awake = false, held = false;
+let ctx = null, master = null, rooms = null, still = null;
 // a room's tail: decaying noise, low-passed by `dark` (0 bright … 1 dull)
 function impulse(a, seconds, curve, dark) {
   const n = Math.floor(a.sampleRate * seconds), ir = a.createBuffer(2, n, a.sampleRate);
@@ -62,7 +62,6 @@ function impulse(a, seconds, curve, dark) {
 function audio() {
   if (!ctx) {
     ctx = new AudioContext();
-    if (!awake) ctx.suspend();
     const limit = ctx.createDynamicsCompressor();
     limit.threshold.value = -12;
     limit.ratio.value = 4;
@@ -81,19 +80,7 @@ function audio() {
     still.gain.value = 0;
     still.connect(master);
   }
-  if (awake && !held && ctx.state === 'suspended') ctx.resume();
   return ctx;
-}
-export function wake() {
-  awake = true;
-  audio();
-  for (const touch of ['pointerdown', 'keydown']) addEventListener(touch, audio, { once: true, capture: true });
-}
-export function pause(on) {
-  held = !!on;
-  if (!ctx || !awake) return;
-  if (held) ctx.suspend();
-  else ctx.resume();
 }
 
 // where a sound goes: straight out, and `wet` of it into a room's air ('square' — open, or 'booth' — a small room)
@@ -851,7 +838,7 @@ const ONCE = ['motif', 'trumpet', 'tock', 'cannon', 'shots', 'crack', 'splash', 
   'cough', 'steps', 'door', 'trainHiss', 'trainWhistle', 'church', 'paper', 'puff', 'whistleBlow', 'blast'];
 export function unheard() {
   const levels = {}, none = () => {}, mute = () => ({ loud() {}, stop() {} });
-  const sounds = { wake: none, theme: mute, beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; } };
+  const sounds = { theme: mute, beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; } };
   for (const name in BEDS) sounds[name] = (level = 1) => { levels[name] = level; };
   for (const name of ONCE) sounds[name] = none;
   return { sounds, wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); } };

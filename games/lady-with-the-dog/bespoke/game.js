@@ -34,7 +34,7 @@
 import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
-import { beds, wake, unheard, pause } from './sound.js';
+import { beds, unheard } from './sound.js';
 import { jump as unseen } from './jump.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
@@ -79,7 +79,6 @@ export default async function (b) {
   });
   const hub = listen(b);
   const view = ui(b.layer);
-  b.onPause(pause);
   // (the page is heard only after a touch: a chapter that begins without the map does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
   let touched = false;
@@ -126,7 +125,6 @@ export default async function (b) {
     const to = straight ? 'main' : await map(after);
     after = {};
     straight = false;
-    wake(); // (a touch: the page may be heard from now on)
     if (to === 'drop') { replay = null; continue; }
     if (to === 'keep') { await keepReplay(); if (kept.chapter === END) b.ended({ ending: facts(kept).ending ?? null }); continue; }
     if (to === 'main' || to === 'back') replay = null; // («Back to the main run»: the main run goes on from where it stands)
