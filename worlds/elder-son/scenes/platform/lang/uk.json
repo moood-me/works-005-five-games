@@ -1,0 +1,9 @@
+{"strings": [
+  {"text":"TICKETS","translation":"КАСА","where":"worlds/elder-son/scenes/platform/elements/booth.js"},
+  {"text":"The Platform","translation":"Платформа","where":"worlds/elder-son/scenes/platform/scene.json title"},
+  {"text":"A suburban platform at night. The first snow.","translation":"Приміська платформа вночі. Перший сніг.","where":"worlds/elder-son/scenes/platform/scene.json caption"},
+  {"text":"The strap pulled","translation":"Ремінь тягнуть","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The whole family comes","translation":"Приходить уся родина","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"His father alone","translation":"Сам батько","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The glass rubbed","translation":"Скло протерто","where":"worlds/elder-son/scenes/platform/showcase.js"}
+]}
