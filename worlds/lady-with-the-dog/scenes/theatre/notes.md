@@ -9,8 +9,8 @@ no sky).
 
 - **The camera** `picture`; the shots are the camera's keys (`lib.js` `CAM`): `BACK` (behind Gurov at the left column
   under the balcony: the hall, the curtain, the chandelier), `HALL` (from the balcony's front, 4.5 m up, pitched −29°:
-  row 3 in the middle of the frame, a seated lady ≈ 0.19 of it — “Find her” and the husband), `FACE` (from the middle
-  aisle by row 1 back at her: her face three-quarter, lifted to him, he standing in the aisle), `CORRIDOR`, `STAIRS`
+  row 3 in the middle of the frame, a seated lady ≈ 0.19 of it — “Find her” and the husband), `FACE` (from the empty
+  seat in row 2 back at her, 1.1 m: her face lifted to him, he out of the frame in the aisle), `CORRIDOR`, `STAIRS`
   (the landing), `TWO` (the two in profile under the lamp, 1.9 m), `TURN` (her at the turn of the stairs, her face back
   to him). scenes.md asked for `roam`; `picture` — the shots are all the scene's own, the viewer only leans.
 - **The hall** (metres in `lib.js` `G`): walls x ±7, the stage's front z 18, ceiling 9; the balcony over the back of
