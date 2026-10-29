@@ -117,13 +117,13 @@ function film(scene) {
   const dogAt = (st, part = 'head', up = 0) => scene.kit.spitz.at(st, part, up);
   const season = () => (on('spring') ? 'thaw' : 'winter');
   // the light of each time: `dusk`, `morning` — the scene's looks; the sun's low light at dusk; the gate's lantern
-  const AUTUMN_DUSK = { season: 'autumn', hour: 0.78, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0, wet_k: 0.12, wind: 1 };
-  const GREY_DAY = { season: 'winter', hour: 0.5, dusk: 0, morning: 0, sunset: 0, lamp: 0, snow: 0.35, wet_k: 0, wind: 0 };
-  const WINTER_DUSK = { season: 'winter', hour: 0.8, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0.15, wet_k: 0, wind: 0 };
+  const AUTUMN_DUSK = { season: 'autumn', hour: 0.78, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0, wet_k: 0.12, wind: 1, drip: 0 };
+  const GREY_DAY = { season: 'winter', hour: 0.5, dusk: 0, morning: 0, sunset: 0, lamp: 0, snow: 0.35, wet_k: 0, wind: 0, drip: 0 };
+  const WINTER_DUSK = { season: 'winter', hour: 0.8, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0.15, wet_k: 0, wind: 0, drip: 0 };
   const MORNING = () => (on('spring')
-    ? { season: 'thaw', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0, wet_k: 0.4, wind: 0 }
-    : { season: 'winter', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0.2, wet_k: 0, wind: 0 });
-  const EVENING = () => ({ ...WINTER_DUSK, season: season(), snow: on('spring') ? 0 : 0.2, wet_k: on('spring') ? 0.4 : 0 });
+    ? { season: 'thaw', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0, wet_k: 0.4, wind: 0, drip: 1 }
+    : { season: 'winter', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0.2, wet_k: 0, wind: 0, drip: 0 });
+  const EVENING = () => ({ ...WINTER_DUSK, season: season(), snow: on('spring') ? 0 : 0.2, wet_k: on('spring') ? 0.4 : 0, drip: on('spring') ? 1 : 0 });
 
   const hidden = id => ({ [`${id}_here`]: false, [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_do`]: 'stand',
     [`${id}_gait`]: null, [`${id}_mood`]: null });

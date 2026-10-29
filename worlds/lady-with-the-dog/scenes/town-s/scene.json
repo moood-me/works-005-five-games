@@ -658,6 +658,32 @@
       }
     },
     {
+      "id": "eave_drips",
+      "on": "house",
+      "elevation": 6.6,
+      "distance": -0.3,
+      "particles": {
+        "kind": "drops",
+        "flat": false,
+        "source": [
+          12.8,
+          0,
+          0
+        ],
+        "rate": 6,
+        "life": [
+          1.2,
+          1.6
+        ],
+        "gravity": 9.8,
+        "drag": 0.1,
+        "streak": 0.03,
+        "ground": "splash",
+        "settle": 0.1,
+        "amount": "drip"
+      }
+    },
+    {
       "id": "snowfall",
       "particles": {
         "kind": "snow",
@@ -809,6 +835,7 @@
     "window": 1,
     "snow": 0.35,
     "wet_k": 0,
+    "drip": 0,
     "wind": 0,
     "gate": 0,
     "gate_f": 180,
@@ -908,6 +935,14 @@
         1
       ],
       "means": "how much the wet street mirrors (the thaw, the autumn mud)"
+    },
+    "drip": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the thaw: drops falling from the house’s eaves"
     },
     "wind": {
       "range": [
