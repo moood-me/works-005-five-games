@@ -23,7 +23,7 @@ the morning she goes (snow or thaw), the epilogue's evening. Modules: `cast`, `s
 - **The season** — `season` (`autumn` · `winter` · `thaw`), set at a cut: the ground, the street (the thaw's and the
   autumn's wet street mirrors by `wet_k`, puddles painted on it), the fence's top and foot, the roofs, the trees. The
   hour — `hour` with the looks `dusk`, `morning` and the low sun `sunset` (ahead-right, toward the station); the sky is
-  the scene's own element, painted for its state all the way round. Falling snow `snow`; autumn leaves blowing `wind`.
+  the scene's own element, painted for its state all the way round. Falling snow `snow`; autumn leaves blowing `wind`; in the thaw drops fall from the house's eaves (`drip`: particles `drops` born along a line under the eave, `on` the house, splashing on the ground).
 - **The keys of the mini-games** are walked by the script: `anna_to` (“The leash”: Anna goes along the fence — toward
   its end with `pulled_walk`, back toward the gate at her own pace; only while the beat is `autumn_walk`), `walk_to`
   (“By the fence”: Gurov to a place; only while the beat is `fence_wait`); their places are told back at once —
@@ -60,15 +60,13 @@ the morning she goes (snow or thaw), the epilogue's evening. Modules: `cast`, `s
 | `fence_end` | — | 12 | the epilogue's evening, the lantern; (husband_knows 0) he walks the old spitz along the fence; (1) stands at the gate with it, her window dark |
 
 Keys: `hour`, `season`, `dusk`, `morning`, `sunset`, `lamp`, `window`, `snow`, `wet_k`, `wind`, `gate` (`gate_f`),
-`far_train` (`far_train_a`), `inkwell`, `cab`, `dog_follow`, `dog_lead`, `anna_to`, `anna_at`, `walk_to`, `gurov_at`,
+`far_train` (`far_train_a`), `drip`, `inkwell`, `cab`, `dog_follow`, `dog_lead`, `anna_to`, `anna_at`, `walk_to`, `gurov_at`,
 `under`, the spitz's keys, `beat`, `beat_next`; of the play — below.
 
 ## Differences from scenes.md, and what to know
 
 - “The leash” is in `WALK` (from across the street toward the fence's end), not `FENCE`: `FENCE` does not hold her
   from the gate to the end. She is 0.27 of the frame by the gate, 0.12 at the end (the end of the game is there).
-- The thaw's drops from the eaves are not here (only the wet street, the dark snow and the puddles): no particle kind
-  drips from an edge.
 - The places' marks are on the fence (p4 high), not on his walking line.
 - `gate_open` is cut with Gurov already where `under` puts him (the game sets `under` after “By the fence”).
 

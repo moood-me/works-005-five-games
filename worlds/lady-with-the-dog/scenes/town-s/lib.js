@@ -112,15 +112,18 @@ const CAM = {
 function film(scene) {
   const on = k => Number(scene.get(k)) > 0.5;
   const C = () => scene.kit.cast.characters;
+  // where people look or reach at the spitz: a point from its place keys (spitz.md — not its own points, which it marks
+  // after the people have moved)
+  const dogAt = (st, part = 'head', up = 0) => scene.kit.spitz.at(st, part, up);
   const season = () => (on('spring') ? 'thaw' : 'winter');
   // the light of each time: `dusk`, `morning` — the scene's looks; the sun's low light at dusk; the gate's lantern
-  const AUTUMN_DUSK = { season: 'autumn', hour: 0.78, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0, wet_k: 0.12, wind: 1 };
-  const GREY_DAY = { season: 'winter', hour: 0.5, dusk: 0, morning: 0, sunset: 0, lamp: 0, snow: 0.35, wet_k: 0, wind: 0 };
-  const WINTER_DUSK = { season: 'winter', hour: 0.8, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0.15, wet_k: 0, wind: 0 };
+  const AUTUMN_DUSK = { season: 'autumn', hour: 0.78, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0, wet_k: 0.12, wind: 1, drip: 0 };
+  const GREY_DAY = { season: 'winter', hour: 0.5, dusk: 0, morning: 0, sunset: 0, lamp: 0, snow: 0.35, wet_k: 0, wind: 0, drip: 0 };
+  const WINTER_DUSK = { season: 'winter', hour: 0.8, dusk: 1, morning: 0, sunset: 1, lamp: 1, snow: 0.15, wet_k: 0, wind: 0, drip: 0 };
   const MORNING = () => (on('spring')
-    ? { season: 'thaw', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0, wet_k: 0.4, wind: 0 }
-    : { season: 'winter', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0.2, wet_k: 0, wind: 0 });
-  const EVENING = () => ({ ...WINTER_DUSK, season: season(), snow: on('spring') ? 0 : 0.2, wet_k: on('spring') ? 0.4 : 0 });
+    ? { season: 'thaw', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0, wet_k: 0.4, wind: 0, drip: 1 }
+    : { season: 'winter', hour: 0.36, dusk: 0, morning: 1, sunset: 0, lamp: 0, snow: 0.2, wet_k: 0, wind: 0, drip: 0 });
+  const EVENING = () => ({ ...WINTER_DUSK, season: season(), snow: on('spring') ? 0 : 0.2, wet_k: on('spring') ? 0.4 : 0, drip: on('spring') ? 1 : 0 });
 
   const hidden = id => ({ [`${id}_here`]: false, [`${id}_look`]: null, [`${id}_reach`]: null, [`${id}_with`]: null, [`${id}_do`]: 'stand',
     [`${id}_gait`]: null, [`${id}_mood`]: null });
@@ -141,14 +144,17 @@ function film(scene) {
   });
   // the morning of her going: she by the gate with her bag, he holding the gate; the maid with the old spitz by the
   // porch; the cabman at his horse on the road, his back to them
-  const LEAVING = () => ({
+  const LEAVING = () => {
+    const d = dog(DOG_PORCH, { spitz_do: 'sit', spitz_old: 1, spitz_dir: 1, spitz_look: 'anna' });
+    return {
     ...MORNING(), ...CAM.LEAVE, gate: 1, window: 0, cab: 1,
     ...at('anna', [2.55, 6.0], 35, { anna_wear: C().anna_winter, anna_with: ['bag'], anna_mood: 'sad' }),
     ...at('diderits', [3.05, 6.85], 200, { diderits_look: 'anna', diderits_mood: 'thinking' }),
-    ...at('maid', MAID_PORCH, 160, { maid_look: 'spitz' }),
+    ...at('maid', MAID_PORCH, 160, { maid_look: dogAt(d) }),
     ...at('cabman', CABMAN, 75, { cabman_look: [13.2, 4.2, 1.3] }),
-    ...dog(DOG_PORCH, { spitz_do: 'sit', spitz_old: 1, spitz_dir: 1, spitz_look: 'anna' }), leash: 'maid#hand_r',
-  });
+    ...d, leash: 'maid#hand_r',
+    };
+  };
   // the spitz follows who leads it (the scene's script keeps it ahead of them as they walk)
   const lead = (who, d = 1) => ({ dog_follow: d, dog_lead: who });
   // the gate opening: Gurov where “By the fence” left him (under 1 — under her window, 0 — by the far end), the maid
@@ -292,14 +298,14 @@ function film(scene) {
       run: async s => {
         const g = s.person('gurov'), maid = s.person('maid');
         await g.turn(90);
-        g.look('spitz');
+        g.look(dogAt(s.state));
         g.do('beckon_low');
         s.set('spitz_do', 'run'); s.set('spitz_look', 'gurov');
         const gx = s.state.gurov_a, mx = s.state.maid_a;
         await s.all(s.path(['spitz_a', 'spitz_d'], [[gx + 0.35, 6.25]], { speed: 3.2 }),
           (async () => { await s.wait(0.3); await maid.walk([[mx - 0.6, 6.15]]); })());
         s.set('spitz_do', 'up');
-        g.look('spitz#head');
+        g.look(dogAt(s.state));
         const face = s.shot({ camera_target: 'maid', camera_shot: 'medium', camera_glide: 0 });
         await s.wait(1.2);
         await s.until(() => face.ready);
@@ -315,11 +321,12 @@ function film(scene) {
       run: async s => {
         const g = s.person('gurov'), maid = s.person('maid');
         await g.turn(90);
-        g.look('spitz');
+        g.look(dogAt(s.state));
         g.do('beckon_low');
         s.set('spitz_do', 'bark'); s.set('spitz_look', 'gurov'); s.set('spitz_dir', s.state.gurov_a < s.state.spitz_a ? -1 : 1);
         await s.wait(1.2);
         await s.path(['spitz_a', 'spitz_d'], [[s.state.maid_a + 0.3, 6.0]], { speed: 1.2 });
+        g.look(dogAt(s.state));
         maid.look('gurov'); maid.mood('afraid');
         await s.wait(1.4);
         s.set('spitz_do', 'stand'); s.set('spitz_dir', 0);
@@ -354,7 +361,7 @@ function film(scene) {
           s.set('spitz_do', 'run');
           await s.path(['spitz_a', 'spitz_d'], [[CORNER_X - 0.2, 6.75]], { speed: 1.5 });
           s.set('spitz_do', 'up');
-          maid.look('spitz');
+          maid.look(dogAt(s.state));
           maid.reach({ r: [CORNER_X + 0.6, 6.3, 0.7] });
           await s.wait(2);
           maid.reach(null);
@@ -426,12 +433,12 @@ function film(scene) {
         await s.until(() => face.ready);
         face.cut();
         await s.wait(3);
-        const yard = s.shot({ ...CAM.YARD, anna_a: GATE.mid, anna_d: 7.6, anna_turn: 0, anna_look: 'spitz', diderits_here: false });
+        const yard = s.shot({ ...CAM.YARD, anna_a: GATE.mid, anna_d: 7.6, anna_turn: 0, anna_look: dogAt(s.state), diderits_here: false });
         await s.until(() => yard.ready);
         yard.cut();
         await anna.walk([[2.75, 11.35]]);
         await anna.go('bend_take', { to: [2.75, 11.35], turn: 10 });
-        anna.reach({ l: 'spitz#back' });
+        anna.reach({ l: dogAt(s.state, 'back') });
         s.set('spitz_look', 'anna');
         await s.wait(1.4);
         anna.reach(null);
@@ -486,7 +493,7 @@ function film(scene) {
         s.set('spitz_do', 'run'); s.set('spitz_look', 'anna');
         await s.path(['spitz_a', 'spitz_d'], [[2.6, 10.6]], { speed: 2.2 });
         s.set('spitz_do', 'up');
-        d.look('spitz');
+        d.look(dogAt(s.state));
         d.reach({ r: [2.85, 11.0, 0.8] });
         s.tell('leave_truth:pulls');
         maid.look('diderits');
@@ -510,7 +517,7 @@ function film(scene) {
         if (on('husband_knows')) {
           d.look([-3, 3, 1.5]);
           await s.wait(5);
-          d.look('spitz');
+          d.look(dogAt(s.state));
           await s.wait(6);
         } else {
           await d.walk([[gurovX(0.1), 6.3]]);
