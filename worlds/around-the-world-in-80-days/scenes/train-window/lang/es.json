@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"From the train window","translation":"Desde la ventanilla del tren","where":"worlds/around-the-world-in-80-days/scenes/train-window/scene.json title"},
+  {"text":"A first-class compartment. The world runs past the window.","translation":"Un compartimento de primera clase. El mundo corre tras la ventanilla.","where":"worlds/around-the-world-in-80-days/scenes/train-window/scene.json caption"}
+]}

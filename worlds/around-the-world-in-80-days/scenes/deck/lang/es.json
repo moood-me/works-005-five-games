@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"NOVIEMBRE","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"MIÉRCOLES","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"La cubierta","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"La cubierta de un vapor, junto a la borda: el mar, humo de la chimenea, un puerto en el horizonte.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}

@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"Omaha","translation":"Omaha","where":"worlds/around-the-world-in-80-days/scenes/prairie/elements/depot.js"},
+  {"text":"Fort Kearney","translation":"Fuerte Kearney","where":"worlds/around-the-world-in-80-days/scenes/prairie/elements/depot.js"},
+  {"text":"Union Pacific","translation":"Union Pacific","where":"worlds/around-the-world-in-80-days/scenes/prairie/lib.js"},
+  {"text":"The prairie","translation":"La pradera","where":"worlds/around-the-world-in-80-days/scenes/prairie/scene.json title"},
+  {"text":"The winter plain of the West: the railway, a bridge over a gorge, Fort Kearney.","translation":"La llanura invernal del Oeste: el ferrocarril, un puente sobre un desfiladero, el fuerte Kearney.","where":"worlds/around-the-world-in-80-days/scenes/prairie/scene.json caption"}
+]}

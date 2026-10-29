@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The jungle","translation":"La selva","where":"worlds/around-the-world-in-80-days/scenes/jungle/scene.json title"},
+  {"text":"An Indian forest. A trail from the end of the rails to the river.","translation":"Un bosque de la India. Un sendero desde el final de los rieles hasta el río.","where":"worlds/around-the-world-in-80-days/scenes/jungle/scene.json caption"}
+]}

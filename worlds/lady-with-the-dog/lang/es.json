@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Lady with the Dog","translation":"La dama del perrito","where":"worlds/lady-with-the-dog/world.json title"},
+  {"text":"A game after Chekhov’s story. The sea, the turning seasons, a white Pomeranian on a red leash.","translation":"Un juego basado en el relato de Chéjov. El mar, el paso de las estaciones, un pomerania blanco con una correa roja.","where":"worlds/lady-with-the-dog/world.json description"}
+]}

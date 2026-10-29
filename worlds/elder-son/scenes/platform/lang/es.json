@@ -1,0 +1,9 @@
+{"strings": [
+  {"text":"TICKETS","translation":"TAQUILLA","where":"worlds/elder-son/scenes/platform/elements/booth.js"},
+  {"text":"The Platform","translation":"El andén","where":"worlds/elder-son/scenes/platform/scene.json title"},
+  {"text":"A suburban platform at night. The first snow.","translation":"Un andén de cercanías de noche. La primera nieve.","where":"worlds/elder-son/scenes/platform/scene.json caption"},
+  {"text":"The strap pulled","translation":"Tiran de la correa","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The whole family comes","translation":"Viene toda la familia","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"His father alone","translation":"Solo el padre","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The glass rubbed","translation":"El cristal frotado","where":"worlds/elder-son/scenes/platform/showcase.js"}
+]}

@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Elder Son","translation":"El hijo mayor","where":"worlds/elder-son/world.json title"},
+  {"text":"A game after Vampilov's play. The cold outside, a warm window within.","translation":"Un juego basado en la obra de Vampílov. Fuera, el frío; dentro, una ventana cálida.","where":"worlds/elder-son/world.json description"}
+]}
