@@ -16,7 +16,7 @@ const AFTER = 0.5;
 const PETAL = [{ id: 'her', label: tr('Her?') }];
 
 export default {
-  title: 'Find her',
+  title: tr('Find her'),
   about: 18,
   skipped: { wrong: 0 },
   async run(g, b, opts, signal) {

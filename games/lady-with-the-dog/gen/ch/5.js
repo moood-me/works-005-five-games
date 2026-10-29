@@ -16,7 +16,7 @@ export default {
   number: 'V',
   title: tr('Two lives'),
   season: s => (facts(s).spring ? 'thaw' : 'winter'),
-  titles: ['At night', 'To school', 'The Slaviansky Bazaar'],
+  titles: [tr('At night'), tr('To school'), tr('The Slaviansky Bazaar')],
   choices: [
     { id: 'wife', weight: '⚑', title: tr('His wife in the doorway'), options: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] },
   ],

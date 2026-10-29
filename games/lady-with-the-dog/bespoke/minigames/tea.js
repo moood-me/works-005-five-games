@@ -16,7 +16,7 @@ const DANGER = 0.8; // from what level the arc
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 export default {
-  title: 'Tea',
+  title: tr('Tea'),
   about: 14,
   skipped: { spills: 0 },
   async run(g, b, opts, signal) {

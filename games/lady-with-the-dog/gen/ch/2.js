@@ -14,7 +14,7 @@ export default {
   number: 'II',
   title: tr('Oreanda'),
   season: () => 'summer',
-  titles: ['The room', 'Oreanda', 'Noon', 'The station'],
+  titles: [tr('The room'), tr('Oreanda'), tr('Noon'), tr('The station')],
   choices: [
     { id: 'room', weight: '~', title: tr('After the watermelon'), options: [{ id: 'eat', label: tr('Eat at the table') }, { id: 'bring', label: tr('Bring her a slice') }] },
     { id: 'window', weight: '~', title: tr('The carriage window'), options: [{ id: 'look', label: tr('Keep looking') }, { id: 'curtain', label: tr('Draw the curtain') }] },

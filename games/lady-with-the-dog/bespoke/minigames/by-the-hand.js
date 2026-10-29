@@ -13,7 +13,7 @@ import { until, keys } from '../hands.js';
 const AT = [0.35, 0.6, 0.9, 1]; // where each line is said
 
 export default {
-  title: 'By the hand',
+  title: tr('By the hand'),
   about: 20,
   skipped: { stops: 0 },
   async run(g, b, opts, signal) {

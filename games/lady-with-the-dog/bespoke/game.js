@@ -56,11 +56,11 @@ const FIRST = CHAPTERS.map((_, c) => CHAPTERS.slice(0, c).reduce((n, ch) => n + 
 // “play as…” — whole plays the author goes from (game.md §3.8): eight choices each; the scales come out of them
 const OPEN = { dog: 'pat', room: 'bring', window: 'look', club: 'walk', fence: 'call', stairs: 'promise', husband: 'truth', wife: 'truth' };
 const PLAYS = [
-  { label: 'Two cages', choices: { dog: 'finger', room: 'eat', window: 'curtain', club: 'laugh', fence: 'hide', stairs: 'away', husband: 'lie', wife: 'lie' } },
-  { label: 'No lies', choices: OPEN },
-  { label: 'His wife knows', choices: { ...OPEN, husband: 'lie' } },
-  { label: 'Her husband knows', choices: { ...OPEN, wife: 'lie' } },
-  { label: 'Till spring', choices: { ...OPEN, stairs: 'away' } },
+  { label: tr('Two cages'), choices: { dog: 'finger', room: 'eat', window: 'curtain', club: 'laugh', fence: 'hide', stairs: 'away', husband: 'lie', wife: 'lie' } },
+  { label: tr('No lies'), choices: OPEN },
+  { label: tr('His wife knows'), choices: { ...OPEN, husband: 'lie' } },
+  { label: tr('Her husband knows'), choices: { ...OPEN, wife: 'lie' } },
+  { label: tr('Till spring'), choices: { ...OPEN, stairs: 'away' } },
 ];
 const fresh = () => ({
   chapter: 0, step: 0, scales: Object.fromEntries(Object.entries(SCALES).map(([k, s]) => [k, s.start])),
@@ -69,11 +69,13 @@ const fresh = () => ({
 
 export default async function (b) {
   await Promise.all([b.css('fonts.css'), b.css('ui.css')]);
-  // the language of mini-games in this game's hand: the plate and the petals in Bad Script, the marks and their fill
-  // in graphite, «good» the postcard's white, danger a dull ochre (red is the leash's alone), the second path grey-blue
+  // the language of mini-games in this game's hand: the plate and the petals in Bad Script, the marks, the plate's and
+  // the petals' words in the postcard's warm white (the language's plate and petals are dark: its words must be light
+  // to be read), the fill a quay lamp's warm light, danger an ochre (red is the leash's alone), the second path
+  // grey-blue
   b.minigame.style({
     key: 'A_FLAT_MAJOR_F_MINOR', font: '"Lady Hand", "Segoe Script", cursive',
-    colors: { mark: '#3b3a38', fill: '#3b3a38', good: '#f1ebdf', danger: '#b07a3a', fork: '#8a9bab', ghost: 'rgba(59, 58, 56, 0.55)' },
+    colors: { mark: '#f1ebdf', fill: '#f2c46b', danger: '#d39a52', fork: '#a9bccd', ghost: 'rgba(241, 235, 223, 0.6)' },
   });
   const hub = listen(b);
   const view = ui(b.layer);
