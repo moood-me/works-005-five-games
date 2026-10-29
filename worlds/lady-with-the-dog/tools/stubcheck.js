@@ -13,18 +13,20 @@ const G = () => new Proxy({}, { get: (t, k) => {
   if (typeof k !== 'string') return undefined;
   return (...a) => { checkNum('g.' + k, a); return { addColorStop() {} }; };
 }, set: (t, k, v) => { t[k] = v; return true; } });
-const lib = new Function('anim', 'scene', fs.readFileSync(path.join(dir, 'lib.js'), 'utf8'))(anim, null);
+// the lib as the engine runs it: (anim, kit) — the world's own modules for the lib (a scene's lib may call kit.sky)
+const real = require('./lib');
+const lib = new Function('anim', 'kit', fs.readFileSync(path.join(dir, 'lib.js'), 'utf8'))(real.anim, { sky: real.load('sky') });
 const state = { ...J.state };
-const kit = { closeups: { paint() {}, live() {} }, spitz: { paint() {}, live() {}, LEASH: '#a8322c' }, cast: { characters: {} },
+const kit = { sky: real.load('sky'), closeups: { paint() {}, live() {} }, spitz: { paint() {}, live() {}, LEASH: '#a8322c' }, cast: { characters: {} },
   beats: null };
 const mkE = (id) => {
   const layers = {};
   return { id, state, lib, kit, aspect: 16 / 9, anim, rnd: () => 0.5, time: 0,
     layer(name, opts, fn) { if (fn) fn(G()); return layers[name] ||= { alpha: 1, x: 0, y: 0, scaleX: 1, scaleY: 1, rotation: 0 }; },
-    at: (...a) => checkNum(id + '.at', a), light: (...a) => checkNum(id + '.light', a), glow() {}, point: () => [0, 0], where: () => [0, 0] };
+    at: (...a) => checkNum(id + '.at', a), light: (...a) => checkNum(id + '.light', a), glow() {}, uniform() {}, warn: m => problems.push(id + ' warn ' + m), point: () => [0, 0], where: () => [0, 0] };
 };
 const elDir = path.join(dir, 'elements');
-for (const f of fs.existsSync(elDir) ? fs.readdirSync(elDir) : []) {
+for (const f of fs.existsSync(elDir) ? fs.readdirSync(elDir).filter(f => f.endsWith('.js')) : []) {
   const id = f.replace(/\.(animate\.)?js$/, '');
   if (!J.objects.find(o => o.id === id)) problems.push(`element file without object: ${f}`);
   try { new Function('g', 'e', 'anim', fs.readFileSync(path.join(elDir, f), 'utf8'))(G(), mkE(id), anim); }
@@ -55,7 +57,9 @@ const tells = {};
       move: (k, v, o) => { bad(`${name} move ${k}`, v); state[k] = v; t += (o?.over || 0) * 0; return Promise.resolve('done'); },
       wait: async x => { t += x; }, until: async f => { if (typeof f === 'function') f(); }, tell: x => tells[name].push(x),
       person, shot: v => { bad(name + ' shot', v); return { ready: true, cut() { Object.assign(state, v); }, cancel() {} }; },
-      cut: v => Object.assign(state, v), all: (...a) => Promise.all(a), any: (...a) => Promise.race(a), sequence: async f => f(s) };
+      cut: v => Object.assign(state, v), all: (...a) => Promise.all(a), any: (...a) => Promise.race(a), sequence: async f => f(s),
+      path: (keys, pts) => { bad(`${name} path ${keys}`, pts); const p = pts[pts.length - 1]; keys.forEach((k, i) => { state[k] = p[i]; }); return Promise.resolve('done'); },
+      turn: (k, v) => { state[k] = v; return Promise.resolve('done'); }, after() {}, every() {} };
     try { await b.run(s); } catch (err) { problems.push(`${name}.run: ${err.message}`); }
     tells[name].t = t;
   }
