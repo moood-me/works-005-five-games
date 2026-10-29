@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"十一月","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"星期三","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"甲板","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"輪船甲板的欄杆邊：大海、煙囪冒出的煙、地平線上的港口。","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}

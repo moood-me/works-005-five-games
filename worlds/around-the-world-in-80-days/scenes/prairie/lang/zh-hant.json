@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"Omaha","translation":"奧馬哈","where":"worlds/around-the-world-in-80-days/scenes/prairie/elements/depot.js"},
+  {"text":"Fort Kearney","translation":"科爾尼堡","where":"worlds/around-the-world-in-80-days/scenes/prairie/elements/depot.js"},
+  {"text":"Union Pacific","translation":"聯合太平洋鐵路","where":"worlds/around-the-world-in-80-days/scenes/prairie/lib.js"},
+  {"text":"The prairie","translation":"大草原","where":"worlds/around-the-world-in-80-days/scenes/prairie/scene.json title"},
+  {"text":"The winter plain of the West: the railway, a bridge over a gorge, Fort Kearney.","translation":"西部冬天的平原：鐵路、峽谷上的橋、科爾尼堡。","where":"worlds/around-the-world-in-80-days/scenes/prairie/scene.json caption"}
+]}
