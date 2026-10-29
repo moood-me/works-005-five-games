@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"From the train window","translation":"기차 창밖으로","where":"worlds/around-the-world-in-80-days/scenes/train-window/scene.json title"},
+  {"text":"A first-class compartment. The world runs past the window.","translation":"일등칸 객실. 창밖으로 세상이 달려간다.","where":"worlds/around-the-world-in-80-days/scenes/train-window/scene.json caption"}
+]}
