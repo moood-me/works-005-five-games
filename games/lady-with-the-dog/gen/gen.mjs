@@ -1,3 +1,4 @@
+// (beside bespoke/: not the game — moood serves and checks all of bespoke/) node gen/gen.mjs gen/ch bespoke/chapters bespoke/check/lines.mjs
 // SAY(n) / SAY(n, 'at') in a chapter's template → g.say('<who>', '<text>'[, 'at']) from game.md §8 (check/lines.mjs)
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
