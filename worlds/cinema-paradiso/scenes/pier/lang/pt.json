@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"The Pier","translation":"O cais","where":"worlds/cinema-paradiso/scenes/pier/scene.json title"},
+  {"text":"In summer they showed films on the pier","translation":"No verão, passavam os filmes no cais","where":"worlds/cinema-paradiso/scenes/pier/scene.json caption"},
+  {"text":"the letter in his hands","translation":"a carta nas mãos","where":"worlds/cinema-paradiso/scenes/pier/showcase.js"}
+]}

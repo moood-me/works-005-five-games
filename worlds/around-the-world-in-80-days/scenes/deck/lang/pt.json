@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"NOVEMBER","translation":"NOVEMBRO","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"WEDNESDAY","translation":"QUARTA-FEIRA","where":"worlds/around-the-world-in-80-days/scenes/deck/elements/calendar.js"},
+  {"text":"The deck","translation":"O convés","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json title"},
+  {"text":"A steamer's deck at the rail: the sea, smoke from the funnel, a port on the horizon.","translation":"O convés de um vapor, junto à amurada: o mar, a fumaça da chaminé, um porto no horizonte.","where":"worlds/around-the-world-in-80-days/scenes/deck/scene.json caption"}
+]}

@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Crossing","translation":"A passagem de nível","where":"worlds/elder-son/scenes/crossing/scene.json title"},
+  {"text":"The level crossing beyond the settlement. Growing dark.","translation":"A passagem de nível além do povoado. Está escurecendo.","where":"worlds/elder-son/scenes/crossing/scene.json caption"}
+]}

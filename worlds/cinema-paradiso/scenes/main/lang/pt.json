@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"SOLD OUT","translation":"LOTADO","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"DEMOLITION","translation":"DEMOLIÇÃO","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"SATURDAY","translation":"SÁBADO","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"The Square","translation":"A praça","where":"worlds/cinema-paradiso/scenes/main/scene.json title"},
+  {"text":"Giancaldo. The Paradiso's square","translation":"Giancaldo. A praça do Paradiso","where":"worlds/cinema-paradiso/scenes/main/scene.json caption"}
+]}

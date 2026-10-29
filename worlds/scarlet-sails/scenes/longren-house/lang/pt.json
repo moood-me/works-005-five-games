@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"Look","translation":"Olhe","where":"worlds/scarlet-sails/scenes/longren-house/lib.js"},
+  {"text":"Longren's House","translation":"A casa de Longren","where":"worlds/scarlet-sails/scenes/longren-house/scene.json title"},
+  {"text":"A window on the sea.","translation":"Uma janela para o mar.","where":"worlds/scarlet-sails/scenes/longren-house/scene.json caption"}
+]}

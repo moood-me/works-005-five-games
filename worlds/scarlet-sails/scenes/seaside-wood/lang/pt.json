@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Wood by the Sea","translation":"O bosque à beira-mar","where":"worlds/scarlet-sails/scenes/seaside-wood/scene.json title"},
+  {"text":"A stream runs to the sea.","translation":"Um riacho corre para o mar.","where":"worlds/scarlet-sails/scenes/seaside-wood/scene.json caption"}
+]}
