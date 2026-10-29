@@ -1,0 +1,16 @@
+{"strings": [
+  {"text":"London","translation":"Londyn","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Suez","translation":"Suez","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Bombay","translation":"Bombaj","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Calcutta","translation":"Kalkuta","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Hong Kong","translation":"Hongkong","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Yokohama","translation":"Jokohama","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"San Francisco","translation":"San Francisco","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"New York","translation":"Nowy Jork","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Liverpool","translation":"Liverpool","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Atlantic Ocean","translation":"Ocean Atlantycki","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Indian Ocean","translation":"Ocean Indyjski","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Pacific Ocean","translation":"Ocean Spokojny","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"+1 day","translation":"+1 dzień","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"The route","translation":"Trasa","where":"worlds/around-the-world-in-80-days/scenes/route/scene.json title"}
+]}
