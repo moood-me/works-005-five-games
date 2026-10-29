@@ -1,0 +1,7 @@
+{"strings": [
+  {"text":"SOLD OUT","translation":"매진","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"DEMOLITION","translation":"철거","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"SATURDAY","translation":"토요일","where":"worlds/cinema-paradiso/scenes/main/lib.js"},
+  {"text":"The Square","translation":"광장","where":"worlds/cinema-paradiso/scenes/main/scene.json title"},
+  {"text":"Giancaldo. The Paradiso's square","translation":"잔칼도. 시네마 파라디소 앞 광장","where":"worlds/cinema-paradiso/scenes/main/scene.json caption"}
+]}

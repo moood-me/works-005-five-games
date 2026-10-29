@@ -1,0 +1,5 @@
+{"strings": [
+  {"text":"The Pier","translation":"부두","where":"worlds/cinema-paradiso/scenes/pier/scene.json title"},
+  {"text":"In summer they showed films on the pier","translation":"여름이면 부두에서 영화를 틀었다","where":"worlds/cinema-paradiso/scenes/pier/scene.json caption"},
+  {"text":"the letter in his hands","translation":"손에 든 편지","where":"worlds/cinema-paradiso/scenes/pier/showcase.js"}
+]}
