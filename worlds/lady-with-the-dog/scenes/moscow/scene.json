@@ -1,0 +1,2061 @@
+{
+  "engine": 3,
+  "title": "Moscow",
+  "caption": "",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      -4,
+      4
+    ]
+  },
+  "modules": [
+    "sky",
+    "cast",
+    "beats"
+  ],
+  "light": {
+    "ambient": 1,
+    "ambientColor": "#eef0f4",
+    "haze": 0.05,
+    "hazeColor": "#cfd5de",
+    "hazeGlow": 0.7,
+    "shafts": 0.15,
+    "bounce": 0.6,
+    "vignette": 0.3,
+    "grain": 0.16,
+    "saturation": 0.92,
+    "wind": [
+      1,
+      0.3,
+      0.4
+    ],
+    "looks": {
+      "dawn": {
+        "ambient": 0.72,
+        "ambientColor": "#aab0cc",
+        "hazeColor": "#8c93ad"
+      },
+      "dusk": {
+        "ambient": 0.62,
+        "ambientColor": "#93a0cc",
+        "hazeColor": "#6f7a98"
+      },
+      "night": {
+        "ambient": 0.5,
+        "ambientColor": "#7d8cc4",
+        "hazeColor": "#3a4562",
+        "haze": 0.07,
+        "saturation": 0.85
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": "sky#sun",
+      "on": "sun_light",
+      "color": "#fff1de",
+      "strength": 0.8
+    },
+    {
+      "id": "moon",
+      "from": "sky#moon",
+      "on": "moon_light",
+      "color": "#b8c7e6",
+      "strength": 0.35
+    },
+    {
+      "id": "lamp_0",
+      "of": "lamp:0#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "lamp_1",
+      "of": "lamp:1#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "lamp_2",
+      "of": "lamp:2#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "lamp_3",
+      "of": "lamp:3#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "lamp_4",
+      "of": "lamp:4#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "lamp_5",
+      "of": "lamp:5#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "lamp_6",
+      "of": "lamp:6#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "lamp2_l",
+      "of": "lamp2#flame",
+      "on": "lamps",
+      "color": "#ffd08a",
+      "strength": 1.5,
+      "reach": 9,
+      "glow": 0.4
+    },
+    {
+      "id": "porch",
+      "of": "house#lamp",
+      "on": "porch_lamp",
+      "color": "#ffd59a",
+      "strength": 1.6,
+      "reach": 6,
+      "glow": 0.3
+    },
+    {
+      "id": "hall_l",
+      "of": "hall#lamp",
+      "on": "door",
+      "color": "#ffd49a",
+      "strength": 1,
+      "reach": 4
+    },
+    {
+      "id": "room",
+      "of": "room_up#lamp",
+      "on": "window_up",
+      "color": "#ffd49a",
+      "strength": 1.2,
+      "reach": 3
+    },
+    {
+      "id": "shop_l",
+      "of": "shop_glow#window",
+      "on": "lamps",
+      "color": "#ffcf90",
+      "strength": 1.2,
+      "reach": 6
+    },
+    {
+      "id": "club_l",
+      "of": "club_porch#lamp_l",
+      "on": "lamps",
+      "color": "#ffd49a",
+      "strength": 1.5,
+      "reach": 7,
+      "glow": 0.3
+    },
+    {
+      "id": "club_r",
+      "of": "club_porch#lamp_r",
+      "on": "lamps",
+      "color": "#ffd49a",
+      "strength": 1.5,
+      "reach": 7,
+      "glow": 0.3
+    },
+    {
+      "id": "club_door",
+      "of": "club_hall#lamp",
+      "on": "lamps",
+      "color": "#ffd49a",
+      "strength": 1,
+      "reach": 5
+    }
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "sky",
+      "sky": true,
+      "uniforms": {
+        "tr": 0.42,
+        "tg": 0.5,
+        "tb": 0.61,
+        "mr": 0.65,
+        "mg": 0.71,
+        "mb": 0.77,
+        "lr": 0.89,
+        "lg": 0.85,
+        "lb": 0.83,
+        "gr": 0.96,
+        "gg": 0.87,
+        "gb": 0.8,
+        "sr": 0.31,
+        "sg": 0.39,
+        "sb": 0.47,
+        "horizon": 0.5,
+        "x0": -0.4,
+        "span": 2.58,
+        "all_round": 0,
+        "day": 0.55,
+        "night": 0,
+        "storm": 0,
+        "sun_x": 0.89,
+        "sun_y": 0.2,
+        "sun_up": 0,
+        "sun_low": 0,
+        "moon_x": 0.89,
+        "moon_y": 0.3,
+        "moon_up": 0
+      }
+    },
+    {
+      "id": "street",
+      "name": "the lane",
+      "plane": true,
+      "across": 0,
+      "distance": 50,
+      "elevation": 0,
+      "width": 60,
+      "depth": 124,
+      "reflect": {
+        "strength": "puddles",
+        "rough": 0.5,
+        "fade": 5
+      }
+    },
+    {
+      "id": "far",
+      "name": "the lane’s far end",
+      "across": 0,
+      "distance": 75,
+      "facing": 180,
+      "height": 34,
+      "box": [
+        -40.5,
+        -34,
+        40.5,
+        0.5
+      ]
+    },
+    {
+      "id": "row_far_r",
+      "name": "houses up the lane",
+      "across": 3.6,
+      "distance": 55,
+      "facing": 270,
+      "height": 14.5,
+      "box": [
+        -17.5,
+        -14.5,
+        17.5,
+        0.1
+      ]
+    },
+    {
+      "id": "row_far_l",
+      "name": "houses up the lane",
+      "across": -5.4,
+      "distance": 55,
+      "facing": 90,
+      "height": 14.5,
+      "box": [
+        -17.5,
+        -14.5,
+        17.5,
+        0.1
+      ]
+    },
+    {
+      "id": "gym",
+      "name": "the girls’ school",
+      "across": 9.5,
+      "distance": 0,
+      "facing": 270,
+      "height": 12.4,
+      "box": [
+        -9.3,
+        -12.4,
+        9.3,
+        0.1
+      ]
+    },
+    {
+      "id": "gym_fence",
+      "name": "the school’s railings",
+      "across": 3.6,
+      "distance": 0,
+      "facing": 270,
+      "height": 3.6,
+      "box": [
+        -7.9,
+        -3.6,
+        8.3,
+        0.1
+      ],
+      "shadow": true
+    },
+    {
+      "id": "limes",
+      "name": "limes",
+      "across": 0,
+      "distance": 0,
+      "height": 10.4,
+      "box": [
+        -3.4,
+        -10.4,
+        3.4,
+        0.1
+      ],
+      "copies": [
+        {
+          "across": 5.4,
+          "distance": -3.5
+        },
+        {
+          "across": 6.9,
+          "distance": 1.2,
+          "scale": 0.9,
+          "flip": true
+        },
+        {
+          "across": 5.3,
+          "distance": 6.1,
+          "scale": 1.05
+        },
+        {
+          "across": -4.9,
+          "distance": -3,
+          "scale": 0.95,
+          "flip": true
+        },
+        {
+          "across": -4.9,
+          "distance": 3.6,
+          "scale": 1.1
+        }
+      ]
+    },
+    {
+      "id": "house",
+      "name": "the Gurovs’ house",
+      "across": 3.6,
+      "distance": 13,
+      "facing": 270,
+      "height": 10.6,
+      "box": [
+        -5.7,
+        -10.6,
+        5.7,
+        0.1
+      ]
+    },
+    {
+      "id": "home_windows",
+      "name": "the Gurovs’ windows",
+      "across": 3.58,
+      "distance": 13,
+      "facing": 270,
+      "height": 6.2,
+      "box": [
+        -5.7,
+        -6.2,
+        5.7,
+        -1
+      ],
+      "glows": true,
+      "inFront": [
+        "house"
+      ]
+    },
+    {
+      "id": "window_up",
+      "name": "the window upstairs",
+      "across": 3.62,
+      "distance": 15.4,
+      "facing": 270,
+      "height": 1.7,
+      "box": [
+        -0.6,
+        -1.7,
+        0.6,
+        0.12
+      ],
+      "elevation": 4.3
+    },
+    {
+      "id": "curtain",
+      "name": "the curtain upstairs",
+      "across": 3.68,
+      "distance": 15.4,
+      "facing": 270,
+      "height": 1.65,
+      "box": [
+        -0.45,
+        -1.65,
+        0.45,
+        0.05
+      ],
+      "elevation": 4.3,
+      "translucent": 0.8
+    },
+    {
+      "id": "room_up",
+      "name": "the room upstairs",
+      "across": 4.75,
+      "distance": 15.4,
+      "facing": 270,
+      "height": 2.85,
+      "box": [
+        -1.25,
+        -2.85,
+        1.25,
+        0.05
+      ],
+      "elevation": 3.9
+    },
+    {
+      "id": "upper_floor",
+      "name": "the room’s floor",
+      "plane": true,
+      "across": 4.2,
+      "distance": 15.4,
+      "elevation": 3.9,
+      "width": 1.2,
+      "depth": 1.6,
+      "walk": true,
+      "unseen": true
+    },
+    {
+      "id": "hall",
+      "name": "the hall",
+      "across": 5.2,
+      "distance": 13,
+      "facing": 270,
+      "height": 3.05,
+      "box": [
+        -1.25,
+        -3.05,
+        1.25,
+        0.05
+      ],
+      "elevation": 0.75
+    },
+    {
+      "id": "hall_floor",
+      "name": "the hall’s floor",
+      "plane": true,
+      "across": 4.4,
+      "distance": 13,
+      "elevation": 0.75,
+      "width": 1.6,
+      "depth": 1.6,
+      "walk": true,
+      "unseen": true
+    },
+    {
+      "id": "door",
+      "name": "the Gurovs’ door",
+      "across": 3.6,
+      "distance": 13.55,
+      "facing": 270,
+      "height": 2.45,
+      "box": [
+        -0.05,
+        -2.45,
+        1.15,
+        0.05
+      ],
+      "elevation": 0.75,
+      "shadow": true,
+      "place": {
+        "facing": "door_f"
+      }
+    },
+    {
+      "id": "porch_steps",
+      "name": "the porch",
+      "plane": true,
+      "across": 2.775,
+      "distance": 13,
+      "elevation": 0,
+      "width": 1.65,
+      "depth": 2.2,
+      "drape": true
+    },
+    {
+      "id": "porch_side",
+      "name": "the porch’s side",
+      "across": 2.775,
+      "distance": 11.9,
+      "facing": 180,
+      "height": 0.85,
+      "box": [
+        -0.86,
+        -0.85,
+        0.86,
+        0.02
+      ],
+      "onLand": false
+    },
+    {
+      "id": "porch_side2",
+      "name": "the porch’s side",
+      "across": 2.775,
+      "distance": 14.1,
+      "facing": 0,
+      "height": 0.85,
+      "box": [
+        -0.86,
+        -0.85,
+        0.86,
+        0.02
+      ],
+      "onLand": false
+    },
+    {
+      "id": "canopy",
+      "name": "the canopy",
+      "across": 3.1,
+      "distance": 13,
+      "facing": 270,
+      "height": 0.4,
+      "box": [
+        -1.06,
+        -0.4,
+        1.06,
+        0.75
+      ],
+      "elevation": 3.2
+    },
+    {
+      "id": "neighbour",
+      "name": "the neighbour’s house",
+      "across": 3.6,
+      "distance": 24.2,
+      "facing": 270,
+      "height": 13.8,
+      "box": [
+        -6.1,
+        -13.8,
+        6.1,
+        0.1
+      ]
+    },
+    {
+      "id": "windows_r",
+      "name": "the neighbour’s windows",
+      "across": 3.58,
+      "distance": 24.2,
+      "facing": 270,
+      "height": 10,
+      "box": [
+        -6.1,
+        -10,
+        6.1,
+        -1
+      ],
+      "glows": true,
+      "inFront": [
+        "neighbour"
+      ]
+    },
+    {
+      "id": "arch",
+      "name": "the yard through the arch",
+      "across": 5.4,
+      "distance": 20.6,
+      "facing": 270,
+      "height": 3.5,
+      "box": [
+        -1.7,
+        -3.5,
+        1.7,
+        0.05
+      ]
+    },
+    {
+      "id": "low",
+      "name": "the low house",
+      "across": -5.4,
+      "distance": 2.5,
+      "facing": 90,
+      "height": 8.4,
+      "box": [
+        -8.8,
+        -8.4,
+        8.8,
+        0.1
+      ]
+    },
+    {
+      "id": "shop",
+      "name": "the baker’s",
+      "across": -5.4,
+      "distance": 14,
+      "facing": 90,
+      "height": 9.9,
+      "box": [
+        -3.3,
+        -9.9,
+        3.3,
+        0.1
+      ]
+    },
+    {
+      "id": "shop_glow",
+      "name": "the baker’s window",
+      "across": -5.38,
+      "distance": 14,
+      "facing": 90,
+      "height": 2.65,
+      "box": [
+        -1.85,
+        -2.65,
+        0.85,
+        -0.45
+      ],
+      "glows": true,
+      "inFront": [
+        "shop"
+      ]
+    },
+    {
+      "id": "shop_in",
+      "name": "the baker’s shop",
+      "across": -6.4,
+      "distance": 15.6,
+      "facing": 90,
+      "height": 2.65,
+      "box": [
+        -1.05,
+        -2.65,
+        1.05,
+        0.05
+      ],
+      "glows": true
+    },
+    {
+      "id": "windows_l",
+      "name": "the windows on the left",
+      "across": -5.38,
+      "distance": 14,
+      "facing": 90,
+      "height": 9.2,
+      "box": [
+        -20.5,
+        -9.2,
+        16.5,
+        -1
+      ],
+      "glows": true,
+      "inFront": [
+        "low",
+        "shop",
+        "club"
+      ]
+    },
+    {
+      "id": "club",
+      "name": "the doctors’ club",
+      "across": -5.4,
+      "distance": 24,
+      "facing": 90,
+      "height": 12.3,
+      "box": [
+        -6.3,
+        -12.3,
+        6.3,
+        0.1
+      ]
+    },
+    {
+      "id": "club_porch",
+      "name": "the club’s portico",
+      "across": -4.75,
+      "distance": 23.5,
+      "facing": 90,
+      "height": 6.05,
+      "box": [
+        -1.95,
+        -6.05,
+        1.95,
+        0.05
+      ]
+    },
+    {
+      "id": "club_steps",
+      "name": "the club’s steps",
+      "plane": true,
+      "across": -4.7,
+      "distance": 23.5,
+      "elevation": 0,
+      "width": 1.4,
+      "depth": 3.4,
+      "drape": true
+    },
+    {
+      "id": "club_side",
+      "name": "the steps’ side",
+      "across": -4.7,
+      "distance": 21.8,
+      "facing": 180,
+      "height": 0.65,
+      "box": [
+        -0.72,
+        -0.65,
+        0.72,
+        0.02
+      ],
+      "onLand": false
+    },
+    {
+      "id": "club_side2",
+      "name": "the steps’ side",
+      "across": -4.7,
+      "distance": 25.2,
+      "facing": 0,
+      "height": 0.65,
+      "box": [
+        -0.72,
+        -0.65,
+        0.72,
+        0.02
+      ],
+      "onLand": false
+    },
+    {
+      "id": "club_hall",
+      "name": "the club’s vestibule",
+      "across": -6.6,
+      "distance": 23.5,
+      "facing": 90,
+      "height": 3.45,
+      "box": [
+        -1.35,
+        -3.45,
+        1.35,
+        0.05
+      ],
+      "elevation": 0.6,
+      "glows": true
+    },
+    {
+      "id": "club_floor",
+      "name": "the club’s floor",
+      "plane": true,
+      "across": -6.2,
+      "distance": 23.5,
+      "elevation": 0.6,
+      "width": 1.6,
+      "depth": 2,
+      "walk": true,
+      "unseen": true
+    },
+    {
+      "id": "lamp",
+      "name": "a lamp",
+      "across": 0,
+      "distance": 0,
+      "height": 3.6,
+      "box": [
+        -0.35,
+        -3.6,
+        0.35,
+        0.05
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": 1.55,
+          "distance": 6.4
+        },
+        {
+          "across": 1.55,
+          "distance": 20.2
+        },
+        {
+          "across": 1.55,
+          "distance": 47.8
+        },
+        {
+          "across": -3.55,
+          "distance": 13.1
+        },
+        {
+          "across": -3.55,
+          "distance": 26.9
+        },
+        {
+          "across": -3.55,
+          "distance": 40.7
+        },
+        {
+          "across": -3.55,
+          "distance": 54.5
+        }
+      ]
+    },
+    {
+      "id": "lamp2",
+      "name": "the far lamp",
+      "across": 1.55,
+      "distance": 34,
+      "height": 3.6,
+      "box": [
+        -0.35,
+        -3.6,
+        0.35,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "sledge_base",
+      "name": "Gurov’s sledge",
+      "unseen": true,
+      "across": 0.7,
+      "distance": -60,
+      "facing": 270,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ],
+      "place": {
+        "across": "sledge_a",
+        "distance": "sledge_d",
+        "facing": "sledge_f"
+      }
+    },
+    {
+      "id": "sledge",
+      "name": "Gurov’s sledge",
+      "across": 0,
+      "distance": -0.42,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -1.2,
+        -1.3,
+        1.1,
+        0.05
+      ],
+      "on": "sledge_base",
+      "shadow": true
+    },
+    {
+      "id": "sledge_far",
+      "name": "Gurov’s sledge",
+      "across": 0,
+      "distance": 0.42,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -1.2,
+        -1.3,
+        1.1,
+        0.05
+      ],
+      "on": "sledge_base"
+    },
+    {
+      "id": "sledge_back",
+      "name": "Gurov’s sledge",
+      "across": -1.05,
+      "distance": 0,
+      "facing": 270,
+      "height": 1.3,
+      "box": [
+        -0.6,
+        -1.3,
+        0.6,
+        0.05
+      ],
+      "on": "sledge_base"
+    },
+    {
+      "id": "horse",
+      "name": "Gurov’s horse",
+      "across": 0,
+      "distance": 0,
+      "facing": 180,
+      "height": 2.5,
+      "box": [
+        0.8,
+        -2.5,
+        3.8,
+        0.05
+      ],
+      "on": "sledge_base",
+      "shadow": true
+    },
+    {
+      "id": "sledge2_base",
+      "name": "the official’s sledge",
+      "unseen": true,
+      "across": -2.8,
+      "distance": 7.4,
+      "facing": 90,
+      "height": 0.1,
+      "box": [
+        -0.05,
+        -0.1,
+        0.05,
+        0
+      ],
+      "place": {
+        "across": "sledge2_a",
+        "distance": "sledge2_d"
+      }
+    },
+    {
+      "id": "sledge2",
+      "name": "the official’s sledge",
+      "across": 0,
+      "distance": -0.42,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -1.2,
+        -1.3,
+        1.1,
+        0.05
+      ],
+      "on": "sledge2_base",
+      "shadow": true
+    },
+    {
+      "id": "sledge2_far",
+      "name": "the official’s sledge",
+      "across": 0,
+      "distance": 0.42,
+      "facing": 180,
+      "height": 1.3,
+      "box": [
+        -1.2,
+        -1.3,
+        1.1,
+        0.05
+      ],
+      "on": "sledge2_base"
+    },
+    {
+      "id": "sledge2_back",
+      "name": "the official’s sledge",
+      "across": -1.05,
+      "distance": 0,
+      "facing": 270,
+      "height": 1.3,
+      "box": [
+        -0.6,
+        -1.3,
+        0.6,
+        0.05
+      ],
+      "on": "sledge2_base"
+    },
+    {
+      "id": "horse2",
+      "name": "the official’s horse",
+      "across": 0,
+      "distance": 0,
+      "facing": 180,
+      "height": 2.5,
+      "box": [
+        0.3,
+        -2.5,
+        3.8,
+        0.05
+      ],
+      "on": "sledge2_base",
+      "shadow": true
+    },
+    {
+      "id": "snowfall",
+      "name": "snow",
+      "particles": {
+        "kind": "snow",
+        "amount": "snow",
+        "count": 10000,
+        "reach": 28
+      }
+    },
+    {
+      "id": "sleet",
+      "name": "wet snow",
+      "particles": {
+        "kind": "snow",
+        "amount": "wet",
+        "count": 5000,
+        "reach": 20,
+        "speed": 2.4,
+        "size": [
+          0.03,
+          0.02
+        ],
+        "opacity": 0.75
+      }
+    },
+    {
+      "id": "drip",
+      "name": "drops from the eaves",
+      "particles": {
+        "kind": "rain",
+        "amount": "drip",
+        "count": 300,
+        "area": [
+          3,
+          3.55,
+          7.6,
+          18.4
+        ]
+      }
+    },
+    {
+      "id": "steam",
+      "name": "the horse’s breath",
+      "particles": {
+        "kind": "smoke",
+        "at": "horse#nose",
+        "rate": 3,
+        "size": [
+          0.08,
+          0.45
+        ],
+        "life": [
+          1,
+          1.8
+        ],
+        "opacity": 0.35,
+        "gravity": -0.2,
+        "color": "#e8ecf2"
+      }
+    },
+    {
+      "id": "steam2",
+      "name": "the horse’s breath",
+      "particles": {
+        "kind": "smoke",
+        "at": "horse2#nose",
+        "rate": 3,
+        "size": [
+          0.08,
+          0.45
+        ],
+        "life": [
+          1,
+          1.8
+        ],
+        "opacity": 0.35,
+        "gravity": -0.2,
+        "color": "#e8ecf2"
+      }
+    },
+    {
+      "id": "smoke1",
+      "name": "chimney smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "house#chimney",
+        "rate": 2,
+        "size": [
+          0.4,
+          2.4
+        ],
+        "opacity": 0.45
+      }
+    },
+    {
+      "id": "smoke2",
+      "name": "chimney smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "neighbour#chimney",
+        "rate": 2,
+        "size": [
+          0.4,
+          2.4
+        ],
+        "opacity": 0.45
+      }
+    },
+    {
+      "id": "gurov",
+      "name": "Gurov",
+      "person": {
+        "cast": "cast",
+        "who": "gurov_winter",
+        "turn": 180
+      },
+      "across": 2.2,
+      "distance": 27.5,
+      "place": {
+        "across": "gurov_a",
+        "distance": "gurov_d"
+      }
+    },
+    {
+      "id": "wife",
+      "name": "his wife",
+      "person": {
+        "cast": "cast",
+        "who": "wife",
+        "turn": 180
+      },
+      "across": 4.3,
+      "distance": 13,
+      "place": {
+        "across": "wife_a",
+        "distance": "wife_d"
+      }
+    },
+    {
+      "id": "daughter",
+      "name": "his daughter",
+      "person": {
+        "cast": "cast",
+        "who": "daughter",
+        "turn": 180
+      },
+      "across": 4.3,
+      "distance": 13,
+      "place": {
+        "across": "daughter_a",
+        "distance": "daughter_d"
+      }
+    },
+    {
+      "id": "official",
+      "name": "the official",
+      "person": {
+        "cast": "cast",
+        "who": "official",
+        "turn": 180
+      },
+      "across": -6,
+      "distance": 23.1,
+      "place": {
+        "across": "official_a",
+        "distance": "official_d"
+      }
+    },
+    {
+      "id": "yardman",
+      "name": "the yard porter",
+      "person": {
+        "cast": "cast",
+        "who": "yardman",
+        "turn": 180
+      },
+      "across": 4.4,
+      "distance": 12.6,
+      "place": {
+        "across": "yardman_a",
+        "distance": "yardman_d"
+      }
+    },
+    {
+      "id": "redcap",
+      "name": "the messenger",
+      "person": {
+        "cast": "cast",
+        "who": "redcap",
+        "turn": 180
+      },
+      "across": -4.4,
+      "distance": 14,
+      "place": {
+        "across": "redcap_a",
+        "distance": "redcap_d"
+      }
+    },
+    {
+      "id": "shade1",
+      "name": "a woman",
+      "person": {
+        "cast": "cast",
+        "who": "shade1",
+        "turn": 180
+      },
+      "across": 4.3,
+      "distance": 20.6,
+      "place": {
+        "across": "shade1_a",
+        "distance": "shade1_d"
+      }
+    },
+    {
+      "id": "shade2",
+      "name": "a woman",
+      "person": {
+        "cast": "cast",
+        "who": "shade2",
+        "turn": 180
+      },
+      "across": -6,
+      "distance": 15.6,
+      "place": {
+        "across": "shade2_a",
+        "distance": "shade2_d"
+      }
+    },
+    {
+      "id": "shade3",
+      "name": "a woman",
+      "person": {
+        "cast": "cast",
+        "who": "shade3",
+        "turn": 180
+      },
+      "across": -3.6,
+      "distance": 8.3,
+      "place": {
+        "across": "shade3_a",
+        "distance": "shade3_d"
+      }
+    },
+    {
+      "id": "shade4",
+      "name": "a woman",
+      "person": {
+        "cast": "cast",
+        "who": "shade4",
+        "turn": 180
+      },
+      "across": 4.6,
+      "distance": 5.2,
+      "place": {
+        "across": "shade4_a",
+        "distance": "shade4_d"
+      }
+    },
+    {
+      "id": "cabman",
+      "name": "the cabman",
+      "person": {
+        "cast": "cast",
+        "who": "cabman",
+        "turn": 180,
+        "does": "seated"
+      },
+      "across": 0.7,
+      "distance": -60.55,
+      "place": {
+        "across": "cabman_a",
+        "distance": "cabman_d"
+      }
+    }
+  ],
+  "state": {
+    "camera_target": null,
+    "camera_shot": null,
+    "camera_frame": null,
+    "camera_x": 0.2,
+    "camera_z": 0,
+    "camera_h": 0,
+    "camera_yaw": 10,
+    "camera_pitch": 0,
+    "camera_roll": 0,
+    "camera_look": 0,
+    "hour": 0.81,
+    "day": 0,
+    "dawn": 0,
+    "dusk": 0.8999999999999999,
+    "night": 0.10000000000000012,
+    "sun_light": 0,
+    "moon_light": 0.09545454545454565,
+    "overcast": 0,
+    "snow": 0.45,
+    "wet": 0,
+    "season": "winter",
+    "puddles": 0,
+    "drip": 0,
+    "lamps": 1,
+    "porch_lamp": 1,
+    "windows": 1,
+    "home": 0,
+    "door": 0,
+    "door_f": 270,
+    "window_up": 0,
+    "curtain": 1,
+    "shadows": 0,
+    "sledge_at": "none",
+    "sledge_a": 0.7,
+    "sledge_d": -60,
+    "sledge_f": 270,
+    "cabman_here": false,
+    "cabman_a": 0.7000000000000001,
+    "cabman_d": -60.55,
+    "cabman_on": null,
+    "cabman_turn": 180,
+    "cabman_do": "seated",
+    "cabman_look": null,
+    "sledge2_at": "street",
+    "sledge2_a": -2.8,
+    "sledge2_d": 7.4,
+    "walk_on": 0,
+    "shade1": 0,
+    "shade2": 0,
+    "shade3": 0,
+    "shade4": 0,
+    "go": 0,
+    "walked": 0,
+    "gurov_here": true,
+    "gurov_a": 2.2,
+    "gurov_d": 27.5,
+    "gurov_turn": 180,
+    "gurov_do": "stand",
+    "gurov_look": null,
+    "gurov_reach": null,
+    "gurov_on": null,
+    "gurov_gait": "stroll",
+    "gurov_with": null,
+    "gurov_mood": null,
+    "wife_here": false,
+    "wife_a": 4.3,
+    "wife_d": 13,
+    "wife_turn": 180,
+    "wife_do": "stand",
+    "wife_look": null,
+    "wife_reach": null,
+    "wife_on": null,
+    "wife_gait": null,
+    "wife_with": null,
+    "wife_mood": null,
+    "daughter_here": false,
+    "daughter_a": 4.3,
+    "daughter_d": 13,
+    "daughter_turn": 180,
+    "daughter_do": "stand",
+    "daughter_look": null,
+    "daughter_reach": null,
+    "daughter_on": null,
+    "daughter_gait": null,
+    "daughter_with": [
+      "satchel"
+    ],
+    "daughter_mood": null,
+    "official_here": false,
+    "official_a": -6,
+    "official_d": 23.35,
+    "official_turn": 180,
+    "official_do": "stand",
+    "official_look": null,
+    "official_reach": null,
+    "official_on": null,
+    "official_gait": null,
+    "official_with": null,
+    "official_mood": null,
+    "yardman_here": false,
+    "yardman_a": 4.4,
+    "yardman_d": 12.6,
+    "yardman_turn": 180,
+    "yardman_do": "stand",
+    "yardman_look": null,
+    "yardman_reach": null,
+    "yardman_on": null,
+    "yardman_gait": null,
+    "yardman_with": null,
+    "yardman_mood": null,
+    "redcap_here": false,
+    "redcap_a": -4.4,
+    "redcap_d": 14,
+    "redcap_turn": 180,
+    "redcap_do": "stand",
+    "redcap_look": null,
+    "redcap_reach": null,
+    "redcap_on": null,
+    "redcap_gait": null,
+    "redcap_with": null,
+    "redcap_mood": null,
+    "shade1_here": false,
+    "shade1_a": 4.3,
+    "shade1_d": 20.6,
+    "shade1_turn": 180,
+    "shade1_do": "stand",
+    "shade1_look": null,
+    "shade1_reach": null,
+    "shade1_on": null,
+    "shade1_gait": null,
+    "shade1_with": null,
+    "shade1_mood": null,
+    "shade2_here": false,
+    "shade2_a": -6,
+    "shade2_d": 15.6,
+    "shade2_turn": 180,
+    "shade2_do": "stand",
+    "shade2_look": null,
+    "shade2_reach": null,
+    "shade2_on": null,
+    "shade2_gait": null,
+    "shade2_with": [
+      "muff"
+    ],
+    "shade2_mood": null,
+    "shade3_here": false,
+    "shade3_a": -3.6,
+    "shade3_d": 8.3,
+    "shade3_turn": 180,
+    "shade3_do": "stand",
+    "shade3_look": null,
+    "shade3_reach": null,
+    "shade3_on": null,
+    "shade3_gait": null,
+    "shade3_with": [
+      "parcel"
+    ],
+    "shade3_mood": null,
+    "shade4_here": false,
+    "shade4_a": 4.6,
+    "shade4_d": 5.2,
+    "shade4_turn": 180,
+    "shade4_do": "stand",
+    "shade4_look": null,
+    "shade4_reach": null,
+    "shade4_on": null,
+    "shade4_gait": null,
+    "shade4_with": null,
+    "shade4_mood": null,
+    "wife_wear": null,
+    "beat": "",
+    "beat_next": "",
+    "look_back": 0,
+    "wave": 0,
+    "wife_knows": 0,
+    "spring": 0
+  },
+  "states": {
+    "beat": {
+      "type": "string",
+      "means": "the film’s beat (the module beats): first_snow, evening_walk, table_window, club, say, laugh_sit, say_walk, porch_go, home_late, wife_lie, wife_truth, school, walk_hand, gate_school, red_cap, porch_end; once it has ended the scene tells beat:<name>"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose cut is made ready ahead (set by the game; the module beats)"
+    },
+    "hour": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the hour, as in the whole world (0.36 morning, 0.81 evening, 0.96 night, 0.15 before dawn)",
+      "smooth": true
+    },
+    "day": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the weight of daylight, led by the sky module by hour",
+      "smooth": true
+    },
+    "dawn": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the weight of dawn, led by the sky module by hour",
+      "smooth": true
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the weight of dusk, led by the sky module by hour",
+      "smooth": true
+    },
+    "night": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the weight of night, led by the sky module by hour",
+      "smooth": true
+    },
+    "sun_light": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the sunlight, led by the sky module by hour",
+      "smooth": true
+    },
+    "moon_light": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: the moonlight, led by the sky module by hour",
+      "smooth": true
+    },
+    "overcast": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the grey cover of a snowy day over the sky: 0 clear, 1 thick",
+      "smooth": true
+    },
+    "season": {
+      "values": [
+        "winter",
+        "thaw"
+      ],
+      "means": "winter — snow on the roofs, the sills, the road; thaw — wet dark snow, the road a wet mirror, drops from the eaves (painted once on a change)"
+    },
+    "puddles": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "internal: how much the wet road mirrors (from season)"
+    },
+    "drip": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "internal: drops from the Gurovs’ eaves (from season)"
+    },
+    "snow": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the snow falling: 0 none … 1 thick",
+      "smooth": true
+    },
+    "wet": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "wet snow falling, heavy flakes (“three degrees above freezing, and yet it is snowing”)",
+      "smooth": true
+    },
+    "lamps": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the gas lamps, the club’s lanterns, the baker’s window lit",
+      "smooth": true
+    },
+    "porch_lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the lamp by the Gurovs’ door lit",
+      "smooth": true
+    },
+    "windows": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "how lit the lane’s windows are (the neighbours, the left side)",
+      "smooth": true
+    },
+    "home": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the Gurovs’ windows lit (but the window upstairs)",
+      "smooth": true
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the Gurovs’ door: 0 shut, 1 open into the hall (its lamp lights as it opens)",
+      "smooth": true
+    },
+    "door_f": {
+      "range": [
+        180,
+        270
+      ],
+      "means": "internal: the door leaf’s facing, from door"
+    },
+    "window_up": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the window upstairs lit (its room’s lamp)"
+    },
+    "curtain": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "its curtain: 1 drawn, 0 open (whoever stands at the window is seen)",
+      "smooth": true
+    },
+    "shadows": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the shadows of two at a table on the drawn curtain",
+      "smooth": true
+    },
+    "sledge_at": {
+      "values": [
+        "house",
+        "club",
+        "none"
+      ],
+      "means": "where Gurov’s sledge stands, its cabman on the box: by the Gurovs’ porch, at the club’s kerb, not in the lane (set by the beats)"
+    },
+    "sledge_a": {
+      "range": [
+        -4,
+        2
+      ],
+      "means": "internal: Gurov’s sledge across, m (from sledge_at)"
+    },
+    "sledge_d": {
+      "range": [
+        -60,
+        40
+      ],
+      "means": "internal: Gurov’s sledge in depth, m (from sledge_at)"
+    },
+    "sledge_f": {
+      "range": [
+        0,
+        360
+      ],
+      "means": "internal: Gurov’s sledge’s facing (from sledge_at)"
+    },
+    "sledge2_at": {
+      "values": [
+        "street",
+        "club"
+      ],
+      "means": "where the official’s sledge stands: by the baker’s, or at the club’s portico"
+    },
+    "sledge2_a": {
+      "range": [
+        -4,
+        2
+      ],
+      "means": "internal: the official’s sledge across, m (from sledge2_at)"
+    },
+    "sledge2_d": {
+      "range": [
+        0,
+        40
+      ],
+      "means": "internal: the official’s sledge in depth, m (from sledge2_at)"
+    },
+    "walk_on": {
+      "range": [
+        0,
+        4
+      ],
+      "means": "“The shadow”: the stop Gurov strolls to down the lane (0 — he stands at its far end); there the scene tells evening_walk:stopN"
+    },
+    "shade1": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "a woman under the lamp: 0 none, 1 comes out and stands, her back to us, 2 turns — a stranger in profile — and goes"
+    },
+    "shade2": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "a woman by the baker’s lit window: as shade1"
+    },
+    "shade3": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "a woman from behind the official’s sledge: as shade1"
+    },
+    "shade4": {
+      "values": [
+        0,
+        1,
+        2
+      ],
+      "means": "a woman at the school’s gate: as shade1"
+    },
+    "look_back": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "he looked hard at every one of them: on the porch he turns and looks up the empty lane (table_window)"
+    },
+    "go": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "“By the hand”: 1 — he and his daughter walk on toward the school’s gate; 0 — they stand, she lifts her face to him"
+    },
+    "walked": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "where they are on the way from the porch’s foot (0) to the school’s gate (1); the scene sets it at once as they walk"
+    },
+    "wave": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "at the gate she turns and waves to him (gate_school)"
+    },
+    "wife_knows": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play’s: his wife knows — she stands at the lit window upstairs (school, porch_end); else its curtain is drawn / the house dark"
+    },
+    "spring": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play’s: Anna held out till the spring — the thaw instead of the snow (home_late, wife_lie, wife_truth, school, walk_hand, gate_school, red_cap, porch_end)"
+    },
+    "gurov_look": {
+      "type": "string",
+      "means": "what Gurov looks at (a point; in “The shadow” the game sets it to the woman he looks hard at); null — ahead"
+    },
+    "gurov_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where gurov stands across, m",
+      "smooth": true
+    },
+    "gurov_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where gurov stands in depth, m",
+      "smooth": true
+    },
+    "gurov_mood": {
+      "type": "string",
+      "means": "gurov’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "wife_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where wife stands across, m",
+      "smooth": true
+    },
+    "wife_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where wife stands in depth, m",
+      "smooth": true
+    },
+    "wife_mood": {
+      "type": "string",
+      "means": "wife’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "daughter_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where daughter stands across, m",
+      "smooth": true
+    },
+    "daughter_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where daughter stands in depth, m",
+      "smooth": true
+    },
+    "daughter_mood": {
+      "type": "string",
+      "means": "daughter’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "official_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where official stands across, m",
+      "smooth": true
+    },
+    "official_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where official stands in depth, m",
+      "smooth": true
+    },
+    "official_mood": {
+      "type": "string",
+      "means": "official’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "yardman_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where yardman stands across, m",
+      "smooth": true
+    },
+    "yardman_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where yardman stands in depth, m",
+      "smooth": true
+    },
+    "yardman_mood": {
+      "type": "string",
+      "means": "yardman’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "redcap_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where redcap stands across, m",
+      "smooth": true
+    },
+    "redcap_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where redcap stands in depth, m",
+      "smooth": true
+    },
+    "redcap_mood": {
+      "type": "string",
+      "means": "redcap’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "shade1_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where shade1 stands across, m",
+      "smooth": true
+    },
+    "shade1_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where shade1 stands in depth, m",
+      "smooth": true
+    },
+    "shade1_mood": {
+      "type": "string",
+      "means": "shade1’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "shade2_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where shade2 stands across, m",
+      "smooth": true
+    },
+    "shade2_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where shade2 stands in depth, m",
+      "smooth": true
+    },
+    "shade2_mood": {
+      "type": "string",
+      "means": "shade2’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "shade3_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where shade3 stands across, m",
+      "smooth": true
+    },
+    "shade3_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where shade3 stands in depth, m",
+      "smooth": true
+    },
+    "shade3_mood": {
+      "type": "string",
+      "means": "shade3’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "shade4_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where shade4 stands across, m",
+      "smooth": true
+    },
+    "shade4_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where shade4 stands in depth, m",
+      "smooth": true
+    },
+    "shade4_mood": {
+      "type": "string",
+      "means": "shade4’s face (sad, smile, laugh, thinking, neutral …)"
+    },
+    "cabman_a": {
+      "range": [
+        -8,
+        30
+      ],
+      "means": "where cabman stands across, m",
+      "smooth": true
+    },
+    "cabman_d": {
+      "range": [
+        -62,
+        60
+      ],
+      "means": "where cabman stands in depth, m",
+      "smooth": true
+    },
+    "cabman_mood": {
+      "type": "string",
+      "means": "cabman’s face (sad, smile, laugh, thinking, neutral …)"
+    }
+  },
+  "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "prompts": [
+      {
+        "text": "quiet sustained strings in a snowy city lane at night, distant and still, late nineteenth century Russia",
+        "weight": 1.1
+      },
+      {
+        "text": "soft low clarinet over a hushed string pad, a few long notes, restrained melancholy",
+        "weight": 0.8
+      },
+      {
+        "text": "very slow solo cello, long phrases, lots of silence, a man walking alone in the snow",
+        "weight": 0.7
+      },
+      {
+        "text": "muted sleigh bells far away, a soft drone, winter evening, gentle",
+        "weight": 0.4
+      },
+      {
+        "text": "glassy high violins sul tasto, pianissimo, snow falling under gas lamps",
+        "weight": 0
+      },
+      {
+        "text": "warm viola melody over a drone, a Russian romance mood, unresolved",
+        "weight": 0
+      },
+      {
+        "text": "slow string quartet chorale, muted, quiet resignation, a house at night",
+        "weight": 0
+      },
+      {
+        "text": "wet early spring morning, soft dripping textures and low pads, hushed",
+        "weight": 0
+      },
+      {
+        "text": "bassoon and low strings, a heavy well-fed night after a club dinner, slightly ironic, slow",
+        "weight": 0
+      },
+      {
+        "text": "breathy alto flute alone, slow and far away, frost",
+        "weight": 0
+      },
+      {
+        "text": "harp harmonics one at a time over cold air, sparse",
+        "weight": 0
+      },
+      {
+        "text": "wordless choir far off, barely heard, a church at the end of the street",
+        "weight": 0
+      },
+      {
+        "text": "bowed vibraphone overlapping tones, dreamy stillness, snowflakes",
+        "weight": 0
+      },
+      {
+        "text": "warm tape-saturated ambient texture, very slow, faded memory of a summer",
+        "weight": 0
+      },
+      {
+        "text": "low bowed double bass and soft timpani roll, before dawn, a journey ahead",
+        "weight": 0
+      },
+      {
+        "text": "a lone oboe, tender and a little tired, a morning walk to school",
+        "weight": 0
+      }
+    ]
+  }
+}
