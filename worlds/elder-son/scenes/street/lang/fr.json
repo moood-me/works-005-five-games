@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Street","translation":"La Rue","where":"worlds/elder-son/scenes/street/scene.json title"},
+  {"text":"A suburb's street at night. Snow.","translation":"Une rue de banlieue, la nuit. La neige.","where":"worlds/elder-son/scenes/street/scene.json caption"}
+]}
