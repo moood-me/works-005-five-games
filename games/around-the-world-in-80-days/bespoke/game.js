@@ -39,7 +39,7 @@
 import { ENDINGS, START, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
-import { beds, unheard } from './sound.js';
+import { background, unheard } from './sound.js';
 import { jump as unseen } from './jump.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
@@ -76,6 +76,8 @@ export default async function (b) {
   // lines and the ghost finger in its paper white; the world's key, A♭ major
   b.minigame.style({ key: 'A_FLAT_MAJOR_F_MINOR', font: '"Around Title", Georgia, serif', colors: { mark: '#f4ead2', ghost: '#f4ead2' } });
   const hub = listen(b);
+  // (the game's background — its beds of sound — as the page sounds it: at a scene's cut with its music, or at once)
+  b.onBackground(background);
   const view = ui(b.layer);
   // (the page is heard only after a touch: a chapter that begins without the map does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
@@ -213,7 +215,6 @@ export default async function (b) {
     // (nothing of the chapter said or shown stays over the map)
     b.hush();
     view.quiet();
-    beds({}, 2);
     view.gauges(null);
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, EPILOGUE);
     // (the main run's chapter just played: its stretch of the way drawn on as its rows are written)
@@ -221,7 +222,7 @@ export default async function (b) {
     // (the play just played through: once its finale is written, the view goes the whole way round from London, the day
     // won notched at the 180th meridian as it passes — design.md «Ход игры», the epilogue)
     const round = ended || (drawing && reveal === EPILOGUE);
-    await b.show(SCENES.map, { state: { shown: reveal ?? here, route: drawing ? CHAPTERS[reveal].route[0] : routeOf(kept), dateline: kept.chapter >= END && !round ? 1 : 0 }, captions: false, fade: true });
+    await b.show(SCENES.map, { state: { shown: reveal ?? here, route: drawing ? CHAPTERS[reveal].route[0] : routeOf(kept), dateline: kept.chapter >= END && !round ? 1 : 0 }, captions: false, fade: true, background: {} });
     if (drawing) b.set('route', CHAPTERS[reveal].route[1], REVEAL);
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: author ? here : null });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};

@@ -21,9 +21,8 @@ export default {
       const f = facts(g.state);
       if (f.ending === 'friday') {
         g.hero('fogg');
-        g.beds({ clock: 0.7, fire: 0.3 }, 2);
         const porter = g.told('friday:porter');
-        await g.scene(SCENES.club, { beat: 'friday', fogg_seated: 1, gentlemen: 0 });
+        await g.scene(SCENES.club, { beat: 'friday', fogg_seated: 1, gentlemen: 0 }, { beds: { clock: 0.7, fire: 0.3 } });
         const friday = g.beat('friday');
         await porter;
         await g.say('porter', 'Today is Friday, sir');
@@ -36,11 +35,10 @@ export default {
         await fin;
         return;
       }
-      g.beds({ fog: 0.6, clock: 0.4 }, 2);
       if (f.opener === 'aouda') {
         g.hero('fogg');
         const asks = g.told('proposal:asks'), answers = g.told('proposal:answers');
-        await g.scene(SCENES.row, { beat: 'proposal', night: 0.9 });
+        await g.scene(SCENES.row, { beat: 'proposal', night: 0.9 }, { beds: { fog: 0.6, clock: 0.4 } });
         const proposal = g.beat('proposal');
         await asks;
         await g.say('aouda', 'Mr. Fogg… will you have me for your wife?');
@@ -74,10 +72,9 @@ export default {
         await g.say('fogg', 'Saturday');
       } else {
         g.hero('fogg');
-        g.beds({ fog: 0.3, clock: 0.3 }, 2);
         g.sound.church();
         const date = g.told('sunday:date'), laugh = g.told('sunday:laugh');
-        await g.scene(SCENES.row, { beat: 'sunday', sunday: 1, night: 0 });
+        await g.scene(SCENES.row, { beat: 'sunday', sunday: 1, night: 0 }, { beds: { fog: 0.3, clock: 0.3 } });
         const sunday = g.beat('sunday');
         await date;
         await g.say('fogg', 'Two Wednesdays');
@@ -97,16 +94,14 @@ export default {
       if (f.ending === 'friday' || f.ending === 'sunday') return;
       g.hero('fogg');
       if (f.gained >= 0) {
-        g.beds({ fog: 0.5, clock: 0.8 }, 1);
         const inside = g.told('cab:in'); // (out of the cab and up the club's steps)
-        await g.scene(SCENES.row, { beat: 'cab', night: 1 });
+        await g.scene(SCENES.row, { beat: 'cab', night: 1 }, { beds: { fog: 0.5, clock: 0.8 } });
         await g.say('fogg', 'Twenty-five minutes to nine. To the Reform Club!');
         const r = await g.play(cab);
         if (!r.late) {
           await inside;
-          g.beds({ clock: 0.9, crowd: 0.3 }, 1);
           const fifty = g.told('countdown:fifty-five'), handle = g.told('countdown:handle');
-          await g.scene(SCENES.club, { beat: 'countdown', crowd_outside: 1 });
+          await g.scene(SCENES.club, { beat: 'countdown', crowd_outside: 1 }, { beds: { clock: 0.9, crowd: 0.3 } });
           const count = g.beat('countdown');
           g.set('beat_next', 'door');
           await fifty;
@@ -122,16 +117,14 @@ export default {
           return;
         }
       }
-      g.beds({ clock: 0.9 }, 1);
       const shut = g.told('no_door:watch-shut');
-      await g.scene(SCENES.club, { beat: 'no_door', crowd_outside: 1 });
+      await g.scene(SCENES.club, { beat: 'no_door', crowd_outside: 1 }, { beds: { clock: 0.9 } });
       const no = g.beat('no_door');
       await shut;
       await g.say('stuart', 'Gentlemen, Mr. Fogg has lost');
       await no;
-      g.beds({ fog: 0.5, clock: 0.2 }, 2);
       const lamp = g.told('lost:lamp');
-      await g.scene(SCENES.row, { beat: 'lost', night: 1 });
+      await g.scene(SCENES.row, { beat: 'lost', night: 1 }, { beds: { fog: 0.5, clock: 0.2 } });
       const lost = g.beat('lost');
       await lamp;
       await lost;
@@ -142,7 +135,7 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ fog: 0.3, clock: 0.4 }, 2);
+      g.beds({ fog: 0.3, clock: 0.4 });
       // the wager won: the wedding, if she asked him; what is left in the carpet-bag (design.md «Концовки»)
       if (f.ending === 'door' && f.opener === 'aouda') {
         await g.title(f.pp === 'with' ? tr('On Monday Phileas Fogg married Aouda. Passepartout was the witness') : tr('On Monday Phileas Fogg married Aouda'));

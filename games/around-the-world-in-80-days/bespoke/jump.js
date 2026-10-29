@@ -6,9 +6,11 @@
 // before it: what `result` says they gave, else skipped; nothing said, heard, shown (story.js asks j.on). And a dry
 // run (target Infinity): the step played so through — to list the minigames it plays, to know the play as it comes
 // out of the step (game.js), to check every branch of the game (check/).
-//   jump(target, quiet, {result}) → j — quiet: the game's sounds unheard (sound.js unheard()); result(minigame) → what
+//   jump(target, quiet, {result}) → j — quiet: the game's sounds unheard (sound.js unheard(): what is played once); result(minigame) → what
 //     a minigame played unseen gives (nothing: its `skipped` — a plain good outcome)
-//   j.on — unseen still; j.plays — the minigames played so far; j.sounds — the sounds to play meanwhile
+//   j.on — unseen still; j.plays — the minigames played so far; j.sounds — the sounds to play meanwhile (none heard);
+//   j.background — the background the step declared unseen (g.beds, g.scene's beds; undefined — none): the show that
+//     ends the jump declares it (bespoke.show's background), changed at its cut
 //   j.scene(folder, state) — the scene shown now (what it did in the one before: forgotten); j.shown — {folder, state}
 //   j.did(change) — [key, value] | ['cut', values]; j.values — the shown scene's values as the step set them
 //   j.sleep(ms), j.heard(text, ms) — on the step's own clock: the seconds go by as nothing else is left to do now; what
@@ -18,7 +20,7 @@
 //     the clock till it is here
 //   j.idle → once nothing is left to do: a dry run done — or a jump stuck (story.js: seen from there on)
 //   j.seen() → the heard still waited for [{text, ok}] (the scene tells them from now): j.on false, the seconds still
-//     waited for go by in time, the sounds as they were left, j.later's done
+//     waited for go by in time, j.later's done
 export function jump(target, quiet, { result } = {}) {
   let now = 0, n = 0, queued = false, waiting = 0, done;
   const sleeps = [], heard = [], later = [];
@@ -43,7 +45,7 @@ export function jump(target, quiet, { result } = {}) {
     kick();
   };
   const j = {
-    on: true, target, result, plays: [], shown: null, then: [], values: {}, sounds: quiet.sounds, idle,
+    on: true, target, result, plays: [], shown: null, then: [], values: {}, sounds: quiet.sounds, background: undefined, idle,
     scene(folder, state) { j.shown = { folder, state }; j.then = []; j.values = { ...state }; },
     did(change) {
       j.then.push(change);
@@ -60,7 +62,6 @@ export function jump(target, quiet, { result } = {}) {
       j.on = false;
       turn.port1.close();
       for (const s of sleeps) setTimeout(s.ok, s.at - now);
-      quiet.wake();
       for (const fn of later) fn();
       return heard.splice(0);
     },

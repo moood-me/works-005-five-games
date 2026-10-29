@@ -25,9 +25,8 @@ export default {
     // Suez: Passepartout and an amiable stranger; the stranger to the consul. Bombay at dawn, two days early
     async g => {
       g.hero('pp');
-      g.beds({ sea: 0.4, town: 0.3, clock: 0.15 }, 2);
       const chat = g.told('suez:chat'), whisper = g.told('suez:whisper');
-      await g.scene(SCENES.deck, { beat: 'suez', ship: 'mongolia', port: 'suez' });
+      await g.scene(SCENES.deck, { beat: 'suez', ship: 'mongolia', port: 'suez' }, { beds: { sea: 0.4, town: 0.3, clock: 0.15 } });
       const suez = g.beat('suez');
       await chat;
       await g.say('passepartout', 'Monsieur Fix — what an obliging man!');
@@ -46,12 +45,11 @@ export default {
     // the train stops in the forest: the rails end here
     async g => {
       g.hero('both');
-      g.beds({ wheels: 0.4 }, 2);
       const stopped = g.told('brake:stopped');
-      await g.scene(SCENES.train, { beat: 'brake', land: 'india' });
+      await g.scene(SCENES.train, { beat: 'brake', land: 'india' }, { beds: { wheels: 0.4 } });
       const brake = g.beat('brake');
       await stopped;
-      g.beds({ jungle: 0.3 }, 3);
+      g.beds({ jungle: 0.3 });
       await g.say('conductor', 'The line stops here, gentlemen. Fifty miles to Allahabad', 'narrator'); // (in the corridor, unseen)
       await brake;
       g.hours(-34, tr('Fifty miles without rails'));
@@ -59,9 +57,8 @@ export default {
     // the end of the rails; Passepartout finds the elephant; the bargain («The bargain»); all up into the howdah
     async g => {
       g.hero('fogg');
-      g.beds({ jungle: 0.5 }, 2);
       const shed = g.told('rails_end:shed');
-      await g.scene(SCENES.jungle, { beat: 'rails_end', day: 1, station: 'kholby' });
+      await g.scene(SCENES.jungle, { beat: 'rails_end', day: 1, station: 'kholby' }, { beds: { jungle: 0.5 } });
       const end = g.beat('rails_end');
       await shed;
       await g.say('passepartout', 'Monsieur! An elephant! A real elephant!');
@@ -83,24 +80,22 @@ export default {
     // the ride: Kiouni's own pace, the goad, the sugar; toward dusk
     async g => {
       g.hero('pp');
-      g.beds({ jungle: 0.4, elephant: 0.6 }, 2);
-      await g.scene(SCENES.jungle, { beat: 'ride', day: 1 }, { cut: true });
+      await g.scene(SCENES.jungle, { beat: 'ride', day: 1 }, { cut: true, beds: { jungle: 0.4, elephant: 0.6 } });
       await g.beat('ride', { wait: false });
       const r = await g.play(elephant);
       g.hours(r?.hours ?? 0, r?.hours > 0 ? tr('Kiouni quickened his pace') : tr('Kiouni is being stubborn'));
-      g.beds({ jungle: 0.2, elephant: 0.3 }, 3);
+      g.beds({ jungle: 0.2, elephant: 0.3 });
     },
     // drums at dusk; the procession; the suttee — ⚑ tonight or now
     async g => {
       g.hero('fogg');
-      g.beds({ drums: 0.3, jungle: 0.1 }, 3);
       const heard = g.told('drums:heard');
-      await g.scene(SCENES.jungle, { beat: 'drums' });
+      await g.scene(SCENES.jungle, { beat: 'drums' }, { beds: { drums: 0.3, jungle: 0.1 } });
       const drums = g.beat('drums');
       await heard;
       await g.say('guide', 'Drums, sahib. We must hide');
       await drums;
-      g.beds({ drums: 0.7, fire: 0.15 }, 4);
+      g.beds({ drums: 0.7, fire: 0.15 });
       const widow = g.told('procession:widow'), stopped = g.told('procession:stopped');
       const procession = g.beat('procession');
       await widow;
@@ -121,9 +116,8 @@ export default {
         await gone;
         await g.say('cromarty', 'Where is your servant, Mr. Fogg?');
         await wall;
-        g.beds({ fire: 0.5, drums: 0.4, crowd: 0.3 }, 3);
         const kindled = g.told('pyre:kindled');
-        await g.scene(SCENES.jungle, { beat: 'pyre' });
+        await g.scene(SCENES.jungle, { beat: 'pyre' }, { beds: { fire: 0.5, drums: 0.4, crowd: 0.3 } });
         const pyre = g.beat('pyre');
         await kindled;
         await g.say('cromarty', 'Too late, Mr. Fogg. There are hundreds of them');
@@ -131,7 +125,7 @@ export default {
         const risen = g.told('rise:risen');
         const rise = g.beat('rise');
         await risen;
-        g.beds({ fire: 0.5, crowd: 0 }, 1);
+        g.beds({ fire: 0.5, crowd: 0 });
         await rise;
         g.hero('pp');
         await g.beat('walk', { wait: false });
@@ -146,12 +140,12 @@ export default {
       } else {
         g.hours(-2, tr('A dash on the road'));
         g.hero('pp');
-        g.beds({ drums: 0.9, elephant: 0.8, crowd: 0.5 }, 1);
+        g.beds({ drums: 0.9, elephant: 0.8, crowd: 0.5 });
         g.sound.trumpet();
         await g.beat('charge', { wait: false });
         const r = await g.play(dash);
         if (r?.hours) g.hours(r.hours, tr('The chase'));
-        g.beds({ elephant: 0.6, drums: 0.3 }, 3);
+        g.beds({ elephant: 0.6, drums: 0.3 });
         await g.say('guide', 'They knew me. I can never go home now');
         g.mark('guide', true, tr('The guide will remember this'));
         await g.beat('aouda_fear');
@@ -160,10 +154,9 @@ export default {
     // Allahabad: Aouda wakes; ~ Kiouni given or sold
     async g => {
       g.hero('fogg');
-      g.beds({ jungle: 0.4 }, 3);
       const night = g.state.choices.sati !== 'road';
       const kneel = g.told('allahabad:kneel');
-      await g.scene(SCENES.jungle, { beat: 'allahabad', day: 1, station: 'allahabad' });
+      await g.scene(SCENES.jungle, { beat: 'allahabad', day: 1, station: 'allahabad' }, { beds: { jungle: 0.4 } });
       const allahabad = g.beat('allahabad');
       await kneel;
       await allahabad;
@@ -203,9 +196,8 @@ export default {
     // the Ganges at dawn: Aouda at the window
     async g => {
       g.hero('both');
-      g.beds({ wheels: 0.4, clock: 0.15 }, 2);
       const profile = g.told('ganges:profile');
-      await g.scene(SCENES.train, { beat: 'ganges', land: 'india', with_aouda: 1 });
+      await g.scene(SCENES.train, { beat: 'ganges', land: 'india', with_aouda: 1 }, { beds: { wheels: 0.4, clock: 0.15 } });
       const ganges = g.beat('ganges');
       await profile;
       await g.wait(1500);

@@ -1,12 +1,13 @@
 // The sounds of «Around the World in 80 Days», made in the page (Web Audio): nothing to load; as loud as the page's
 // "sounds" slider says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first
-// touch), and waits with the play as the scene's music does — paused, its scene standing or being made ready —, fading
-// out and back in. The frame (the airs, the beds, the struck things) is «Cinema Paradiso»'s; the sounds are this game's
+// touch), and waits with the scene's music — the play paused, its scene standing —, fading out and back in with it. The frame (the airs, the beds, the struck things) is «Cinema Paradiso»'s; the sounds are this game's
 // (game.md §9).
-//   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
+//   unheard() → {sounds} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // Two airs a sound goes out into: the open air ('square', 1.6 s) and a room ('booth', 0.4 s).
 // The beds — what lasts; one of each for the page, as loud as `level`, getting there over `seconds`:
-//   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
+//   background(levels, seconds) — the named beds to their levels, every other one to silence: the game's background as
+//     the page sounds it (bespoke.onBackground — at a scene's cut with its music, or at once: the game declares it,
+//     g.beds and g.scene's beds, and never times it)
 //   clock — the leitmotif: Fogg's watch and Passepartout's ticking, the club's pendulum under them
 //   wheels — the train on the rail joints · elephant — Kiouni's footfall and the howdah · drums — drums at night, far
 //   fog — London in the fog · runners — the sledge on snow · fire — a fire's crackle over its roar · wind_cold — a thin
@@ -448,7 +449,7 @@ export function fog(level = 1, seconds = 2) {
 export function furnace(level = 1, seconds = 2) { bed('furnace', 0.05, 'square', recorded(['furnace-74915.mp3'], 1.94), level, seconds); }
 
 const BEDS = { clock, wheels, jungle, elephant, drums, storm, runners, fog, furnace, town, crowd, sea, fire, wind_cold };
-export function beds(levels = {}, seconds = 2) {
+export function background(levels, seconds) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }
 
@@ -770,8 +771,8 @@ export function blast() {
   for (let i = 0; i < 60; i++) burst(t + 0.8 + rnd(0, 5) ** 1.2, out, { kind: i % 3 ? 'white' : 'brown', f: rnd(300, 2500), Q: 1.2, len: rnd(0.03, 0.15), loud: rnd(0.05, 0.25) });
 }
 
-// the sounds of a step played unseen (jump.js): nothing heard meanwhile — the beds heard from then on as loud as the
-// step left them; what was played once is over by then, and a handle begun meanwhile is mute
+// the sounds of a step played unseen (jump.js): nothing heard meanwhile — what was played once is over by then, and a
+// handle begun meanwhile is mute (the background the step declared is the jump's: j.background)
 
 // ── this game's own, played once ─────────────────────────────────────────────────────────────────────────────────
 // the elephant trumpets: a brassy blare bending up and down, a breathy edge
@@ -837,9 +838,8 @@ const ONCE = ['motif', 'trumpet', 'tock', 'cannon', 'shots', 'crack', 'splash', 
   'click', 'clunk', 'tick', 'tick2', 'laugh', 'roar', 'applause', 'whistle', 'whisper', 'coins', 'slap', 'flame', 'drag',
   'cough', 'steps', 'door', 'trainHiss', 'trainWhistle', 'church', 'paper', 'puff', 'whistleBlow', 'blast'];
 export function unheard() {
-  const levels = {}, none = () => {}, mute = () => ({ loud() {}, stop() {} });
-  const sounds = { theme: mute, beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; } };
-  for (const name in BEDS) sounds[name] = (level = 1) => { levels[name] = level; };
-  for (const name of ONCE) sounds[name] = none;
-  return { sounds, wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); } };
+  const none = () => {}, mute = () => ({ loud() {}, stop() {} });
+  const sounds = { theme: mute };
+  for (const name of [...Object.keys(BEDS), ...ONCE]) sounds[name] = none;
+  return { sounds };
 }

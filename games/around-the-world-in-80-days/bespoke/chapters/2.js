@@ -27,9 +27,8 @@ export default {
     // the «Rangoon» at night: Aouda at the rail; ~ the answer; she writes a line in the notebook
     async g => {
       g.hero('fogg');
-      g.beds({ sea: 0.5, clock: 0.15 }, 3);
       const turns = g.told('rail_night:turns');
-      await g.scene(SCENES.deck, { beat: 'rail_night', ship: 'rangoon', port: 'none', with_aouda: 1 });
+      await g.scene(SCENES.deck, { beat: 'rail_night', ship: 'rangoon', port: 'none', with_aouda: 1 }, { beds: { sea: 0.5, clock: 0.15 } });
       const night = g.beat('rail_night');
       await turns;
       await (g.state.choices.sati === 'road' ? g.say('aouda', 'You took a risk for my sake') : g.say('aouda', 'You lost twelve hours because of me'));
@@ -53,9 +52,8 @@ export default {
     // Hong Kong: the cousin gone two years — ⚑ Europe or Holland
     async g => {
       g.hero('fogg');
-      g.beds({ town: 0.4, sea: 0.3 }, 2);
       const met = g.told('quay:met');
-      await g.scene(SCENES.harbour, { beat: 'quay', port: 'hongkong', with_aouda: 1, aouda_dress: 1, evening: 0, night: 0 });
+      await g.scene(SCENES.harbour, { beat: 'quay', port: 'hongkong', with_aouda: 1, aouda_dress: 1, evening: 0, night: 0 }, { beds: { town: 0.4, sea: 0.3 } });
       const quay = g.beat('quay');
       await met;
       await g.say('fogg', 'Your cousin left for Holland two years ago');
@@ -82,9 +80,8 @@ export default {
     // the tavern: Fix reveals himself; the pipe; «Stay awake»; the «Carnatic» sails with Passepartout
     async g => {
       g.hero('pp');
-      g.beds({ town: 0.5, sea: 0.2 }, 2);
       const poured = g.told('tavern:poured');
-      await g.scene(SCENES.harbour, { beat: 'tavern', port: 'hongkong' });
+      await g.scene(SCENES.harbour, { beat: 'tavern', port: 'hongkong' }, { beds: { town: 0.5, sea: 0.2 } });
       const tavern = g.beat('tavern');
       await poured;
       await g.say('passepartout', 'The Carnatic sails tonight, not tomorrow! I must tell my master!');
@@ -98,12 +95,11 @@ export default {
       await badge;
       await g.say('fix', 'Drink with me. One pipe — for friendship\'s sake');
       await g.beat('pipe');
-      g.beds({ town: 0.25, sea: 0.4 }, 3);
+      g.beds({ town: 0.25, sea: 0.4 });
       const r = await g.play(stayAwake);
       g.mark('told', !!r?.told);
-      g.beds({ sea: 0.5 }, 3);
       const aboard = g.told('carnatic:aboard');
-      await g.scene(SCENES.harbour, { beat: 'carnatic', port: 'hongkong' });
+      await g.scene(SCENES.harbour, { beat: 'carnatic', port: 'hongkong' }, { beds: { sea: 0.5 } });
       const carnatic = g.beat('carnatic');
       await aboard;
       await g.say('passepartout', 'Master… the Carnatic…');
@@ -113,10 +109,9 @@ export default {
     // the morning: the pier empty; Bunsby and the «Tankadera»; ~ Fix taken on board or not
     async g => {
       g.hero('fogg');
-      g.beds({ sea: 0.4, town: 0.2 }, 2);
       const told = g.state.marks.told;
       const watch = g.told('morning:watch');
-      await g.scene(SCENES.harbour, { beat: 'morning', port: 'hongkong', evening: 0, night: 0 });
+      await g.scene(SCENES.harbour, { beat: 'morning', port: 'hongkong', evening: 0, night: 0 }, { beds: { sea: 0.4, town: 0.2 } });
       const morning = g.beat('morning');
       await watch;
       await (told ? g.say('fogg', 'The boatman was right. The Carnatic sailed in the night') : g.say('fogg', 'The Carnatic has gone. And Passepartout with her'));
@@ -157,21 +152,20 @@ export default {
     // the typhoon; the gun at Shanghai
     async g => {
       g.hero('fogg');
-      g.beds({ storm: 0.5 }, 3);
       const withAouda = g.state.choices.aouda !== 'holland';
       const reef = g.told('squall:reef');
-      await g.scene(SCENES.sea, { beat: 'squall' });
+      await g.scene(SCENES.sea, { beat: 'squall' }, { beds: { storm: 0.5 } });
       const squall = g.beat('squall');
       await reef;
       await g.say('bunsby', 'A typhoon, sir. Head to sea — or she\'ll capsize');
       await squall;
-      g.beds({ storm: 0.9 }, 2);
+      g.beds({ storm: 0.9 });
       await g.beat('typhoon', { wait: false });
       g.set('beat_next', withAouda ? 'aouda_storm' : 'shanghai');
       const r = await g.play(typhoon);
       if (r?.hours) g.hours(r.hours, tr('The typhoon'));
       if (withAouda) await g.beat('aouda_storm');
-      g.beds({ storm: 0.3, sea: 0.4 }, 4);
+      g.beds({ storm: 0.3, sea: 0.4 });
       const gun = g.told('shanghai:gun'), turns = g.told('shanghai:turns');
       const shanghai = g.beat('shanghai');
       await g.say('bunsby', 'A steamer on the horizon! Flag at half-mast! The gun!');
@@ -184,9 +178,8 @@ export default {
     // Yokohama: the Long Noses; Passepartout holds the pyramid; his master in the first row — drop or hold
     async g => {
       g.hero('pp');
-      g.beds({ drums: 0.5, crowd: 0.5, town: 0.2 }, 2);
       const announce = g.told('show:announce');
-      await g.scene(SCENES.harbour, { beat: 'show', port: 'yokohama', evening: 1, night: 1, pp_wings: 1 });
+      await g.scene(SCENES.harbour, { beat: 'show', port: 'yokohama', evening: 1, night: 1, pp_wings: 1 }, { beds: { drums: 0.5, crowd: 0.5, town: 0.2 } });
       const show = g.beat('show');
       await announce;
       await g.say('batulcar', 'The Long Noses! The human pyramid!');
@@ -197,7 +190,7 @@ export default {
       g.state.choices.pyramid = choice;
       g.set('beat_next', choice === 'drop' ? 'see' : 'finish');
       g.mark('wings', true);
-      g.beds({ crowd: 0.3, town: 0.2 }, 2);
+      g.beds({ crowd: 0.3, town: 0.2 });
       if (choice === 'drop') {
         await g.beat('see');
         const shout = g.told('collapse:batulcar');
@@ -227,9 +220,8 @@ export default {
     // the «General Grant»: Fix comes over — ~ punch or shake; the calendar: Wednesday again
     async g => {
       g.hero('pp');
-      g.beds({ sea: 0.5, clock: 0.15 }, 2);
       const fixCame = g.told('pacific:fix');
-      await g.scene(SCENES.deck, { beat: 'pacific', ship: 'general_grant', port: 'none', pp_wings: 1 });
+      await g.scene(SCENES.deck, { beat: 'pacific', ship: 'general_grant', port: 'none', pp_wings: 1 }, { beds: { sea: 0.5, clock: 0.15 } });
       const pacific = g.beat('pacific');
       await fixCame;
       await g.say('fix', 'Now I am on your side. As far as England, I am your best friend');

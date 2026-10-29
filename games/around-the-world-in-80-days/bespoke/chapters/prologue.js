@@ -17,9 +17,8 @@ export default {
     // 21 December, 20:44: five gentlemen before the clock, Stuart counting; the door's handle turns — dark
     async g => {
       g.hero('both');
-      g.beds({ clock: 0.8, fire: 0.15 }, 3);
       const count = g.told('countdown:fifty-five'), handle = g.told('countdown:handle');
-      await g.scene(SCENES.club, { beat: 'countdown' });
+      await g.scene(SCENES.club, { beat: 'countdown' }, { beds: { clock: 0.8, fire: 0.15 } });
       const countdown = g.beat('countdown');
       await count;
       await g.say('stuart', 'Fifty-five… fifty-six…');
@@ -32,9 +31,8 @@ export default {
     // 2 October: the whist; the wager — the player lays the cards down; Fogg rises and goes
     async g => {
       g.hero('fogg');
-      g.beds({ clock: 0.5, fire: 0.3 }, 2);
       const talks = g.told('whist:stuart-talks');
-      await g.scene(SCENES.club, { beat: 'whist' });
+      await g.scene(SCENES.club, { beat: 'whist' }, { beds: { clock: 0.5, fire: 0.3 } });
       const whist = g.beat('whist');
       await talks;
       await g.say('stuart', 'The world has grown smaller. A hundred years ago it took years to go round it');
@@ -58,9 +56,8 @@ export default {
     // Saville Row: «Passepartout, we are going round the world. In ten minutes»; the ten minutes; the bag
     async g => {
       g.hero('fogg');
-      g.beds({ fog: 0.5, clock: 0.25 }, 2);
       const handle = g.told('home:door'), door = g.told('news:at-door');
-      await g.scene(SCENES.row, { beat: 'home' });
+      await g.scene(SCENES.row, { beat: 'home' }, { beds: { fog: 0.5, clock: 0.25 } });
       const home = g.beat('home');
       await handle;
       await g.say('narrator', 'At ten minutes to eight Phileas Fogg opened the door of his house in Saville Row');
@@ -73,7 +70,7 @@ export default {
       g.hero('pp');
       await g.say('fogg', 'Two shirts, three pairs of stockings, a mackintosh and a Bradshaw. We\'ll buy the rest on the way');
       await g.beat('pack', { wait: false });
-      g.beds({ fog: 0.3, clock: 0.6 }, 1);
+      g.beds({ fog: 0.3, clock: 0.6 });
       const r = await g.play(tenMinutes);
       g.mark('gas', !!r?.gas);
       g.hero('fogg');
@@ -91,9 +88,8 @@ export default {
     // the train out of Charing Cross: the gas; Passepartout's London watch; the notebook
     async g => {
       g.hero('both');
-      g.beds({ wheels: 0.5, clock: 0.2 }, 2);
       const book = g.told('depart:book');
-      await g.scene(SCENES.train, { beat: 'depart', land: 'europe' });
+      await g.scene(SCENES.train, { beat: 'depart', land: 'europe' }, { beds: { wheels: 0.5, clock: 0.2 } });
       g.sound.trainWhistle();
       await g.beat('depart');
       await book;

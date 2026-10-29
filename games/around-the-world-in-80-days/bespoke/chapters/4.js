@@ -20,10 +20,9 @@ export default {
     // New York: the «China» is gone; the «Henrietta» takes no passengers — for two thousand dollars a head she does
     async g => {
       g.hero('fogg');
-      g.beds({ town: 0.3, sea: 0.4, clock: 0.3 }, 2);
       const f = facts(g.state);
       const smoke = g.told('new_york:smoke'), speedy = g.told('new_york:speedy');
-      await g.scene(SCENES.deck, { beat: 'new_york', ship: 'henrietta', port: 'new_york' });
+      await g.scene(SCENES.deck, { beat: 'new_york', ship: 'henrietta', port: 'new_york' }, { beds: { town: 0.3, sea: 0.4, clock: 0.3 } });
       const ny = g.beat('new_york');
       await smoke;
       await (f.pp === 'with' ? g.say('passepartout', 'The China sailed forty-five minutes ago!') : g.say('fix', 'The China sailed forty-five minutes ago!'));
@@ -39,9 +38,8 @@ export default {
     // the mutiny: Speedy locked in his cabin, roaring
     async g => {
       g.hero('fogg');
-      g.beds({ sea: 0.5, furnace: 0.3 }, 2);
       const porthole = g.told('mutiny:porthole');
-      await g.scene(SCENES.deck, { beat: 'mutiny', ship: 'henrietta', port: 'none' });
+      await g.scene(SCENES.deck, { beat: 'mutiny', ship: 'henrietta', port: 'none' }, { beds: { sea: 0.5, furnace: 0.3 } });
       const mutiny = g.beat('mutiny');
       await porthole;
       await g.say('speedy', 'Pirates! I\'ll hang the lot of you!');
@@ -51,9 +49,8 @@ export default {
     // no coal — ⚑ buy her and burn her, or under sail
     async g => {
       g.hero('fogg');
-      g.beds({ sea: 0.5, furnace: 0.15 }, 2);
       const stoker = g.told('coal:stoker'), speedy = g.told('coal:speedy');
-      await g.scene(SCENES.deck, { beat: 'coal', ship: 'henrietta', port: 'none' }, { cut: true });
+      await g.scene(SCENES.deck, { beat: 'coal', ship: 'henrietta', port: 'none' }, { cut: true, beds: { sea: 0.5, furnace: 0.15 } });
       const coal = g.beat('coal');
       await stoker;
       await g.say('stoker', 'Coal for one day, sir. Four days to Liverpool');
@@ -84,8 +81,7 @@ export default {
       if (g.state.choices.henrietta === 'sails') return;
       const f = facts(g.state);
       g.hero(f.pp === 'with' ? 'pp' : 'fogg');
-      g.beds({ sea: 0.4, furnace: 0.7 }, 2);
-      await g.scene(SCENES.deck, { beat: 'burn', ship: 'henrietta', port: 'none' });
+      await g.scene(SCENES.deck, { beat: 'burn', ship: 'henrietta', port: 'none' }, { beds: { sea: 0.4, furnace: 0.7 } });
       g.hours(-12, tr('No coal'));
       if (f.pp !== 'with') await g.say('fogg', 'I have no use for a frock-coat now');
       const afford = Math.max(0, Math.floor(g.state.money / PART_PRICE));
@@ -94,20 +90,19 @@ export default {
       const burned = (r?.burned ?? []).slice(0, afford);
       g.money(-PART_PRICE * burned.length);
       g.hours(PART_HOURS * burned.length, tr('Burnt: {length}', { length: burned.length }));
-      g.beds({ sea: 0.4, furnace: 0.2 }, 3);
+      g.beds({ sea: 0.4, furnace: 0.2 });
       await g.beat('queenstown');
     },
     // Liverpool: the arrest; the cell; Fix bursts in — ~ strike him or the hand, Fogg face to face with him
     async g => {
       g.hero('fogg');
-      g.beds({ town: 0.4, sea: 0.3 }, 2);
       const hand = g.told('liverpool:hand');
-      await g.scene(SCENES.deck, { beat: 'liverpool', ship: 'henrietta', port: 'liverpool' });
+      await g.scene(SCENES.deck, { beat: 'liverpool', ship: 'henrietta', port: 'liverpool' }, { beds: { town: 0.4, sea: 0.3 } });
       const lp = g.beat('liverpool');
       await hand;
       await g.say('fix', 'Phileas Fogg, I arrest you in the Queen\'s name');
       await lp;
-      g.beds({ clock: 0.9 }, 2);
+      g.beds({ clock: 0.9 });
       const quick = (g.state.marks.fix ?? 0) >= 2;
       await g.beat('cell', { wait: false });
       // (the shadow of the bars creeps over the floor: the hours in the cell, the game's own — written in the notebook
@@ -116,7 +111,7 @@ export default {
       const cell = quick ? 6 : 10;
       g.set('cell_time', 1, cell);
       await g.wait(cell * 1000);
-      g.beds({ clock: 0.4, town: 0.3 }, 2);
+      g.beds({ clock: 0.4, town: 0.3 });
       // (Fix in the cell, before Fogg: then what Fogg does — the beat after it)
       const inside = g.told('release:in');
       const release = g.beat('release');
@@ -138,11 +133,10 @@ export default {
     // the special train to London, watch in hand
     async g => {
       g.hero('fogg');
-      g.beds({ wheels: 0.8, clock: 0.6 }, 2);
       // (behind time: at the beat's end Fogg shuts the notebook on his knees — by how much, the notebook says)
       const late = g.state.hours < 0;
       const watch = g.told('special:watch'), shut = late ? g.told('special:shut') : null;
-      await g.scene(SCENES.train, { beat: 'special', land: 'england', book_shut: late ? 1 : 0 });
+      await g.scene(SCENES.train, { beat: 'special', land: 'england', book_shut: late ? 1 : 0 }, { beds: { wheels: 0.8, clock: 0.6 } });
       const special = g.beat('special');
       await watch;
       if (!late) {
