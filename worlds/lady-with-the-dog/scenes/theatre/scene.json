@@ -1,0 +1,1478 @@
+{
+  "engine": 3,
+  "title": "The Theatre in S.",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "picture"
+  },
+  "modules": [
+    "cast",
+    "beats"
+  ],
+  "light": {
+    "ambient": 0.42,
+    "ambientColor": "#8f8494",
+    "haze": 0.07,
+    "hazeColor": "#3c3238",
+    "hazeGlow": 0.75,
+    "vignette": 0.34,
+    "grain": 0.18,
+    "saturation": 0.92,
+    "bounce": 0.5
+  },
+  "lights": [
+    {
+      "id": "chandelier_l",
+      "of": "chandelier",
+      "color": "#ffe2b0",
+      "strength": 1.7,
+      "reach": 15,
+      "on": "hall_light"
+    },
+    {
+      "id": "sconces_l",
+      "of": "sconces",
+      "color": "#ffd59a",
+      "strength": 0.9,
+      "reach": 4,
+      "on": "hall_light"
+    },
+    {
+      "id": "foot_l",
+      "across": 0,
+      "distance": 17.85,
+      "elevation": 1.2,
+      "color": "#ffe6b8",
+      "strength": 1.5,
+      "reach": 8,
+      "on": "stage"
+    },
+    {
+      "id": "stage_l",
+      "across": 0,
+      "distance": 20.5,
+      "elevation": 6.5,
+      "color": "#fff0d6",
+      "strength": 1.3,
+      "reach": 9,
+      "on": "stage"
+    },
+    {
+      "id": "glint_l",
+      "at": "anna#lorgnette",
+      "color": "#fff6e0",
+      "strength": 0.6,
+      "reach": 0.5,
+      "glow": 0.28,
+      "on": "glint"
+    },
+    {
+      "id": "corr_l1",
+      "across": 9.2,
+      "distance": 11.0,
+      "elevation": 2.3,
+      "color": "#ffd08a",
+      "strength": 1.0,
+      "reach": 4.5
+    },
+    {
+      "id": "corr_l2",
+      "across": 9.2,
+      "distance": 16.8,
+      "elevation": 2.3,
+      "color": "#ffd08a",
+      "strength": 1.2,
+      "reach": 4.5
+    },
+    {
+      "id": "stair_l",
+      "of": "stair_lamp#flame",
+      "color": "#ffc880",
+      "strength": 1.6,
+      "reach": 6
+    },
+    {
+      "id": "gallery_l",
+      "across": 25.4,
+      "distance": 26.7,
+      "elevation": 3.9,
+      "color": "#e8c890",
+      "strength": 0.6,
+      "reach": 3.5
+    },
+    {
+      "id": "beyond_l",
+      "across": 21.8,
+      "distance": 28.1,
+      "elevation": 2.2,
+      "color": "#ffd08a",
+      "strength": 0.7,
+      "reach": 2.5
+    }
+  ],
+  "objects": [
+    {
+      "id": "floor",
+      "name": "parterre floor",
+      "plane": true,
+      "across": 0,
+      "distance": 9.25,
+      "elevation": 0,
+      "width": 14,
+      "depth": 18.5,
+      "walk": true
+    },
+    {
+      "id": "wall_l",
+      "name": "left wall with boxes",
+      "across": -7,
+      "distance": 0,
+      "facing": 90,
+      "height": 9,
+      "box": [
+        0,
+        -9.1,
+        18.6,
+        0.05
+      ]
+    },
+    {
+      "id": "wall_r",
+      "name": "right wall with boxes",
+      "across": 7,
+      "distance": 18.6,
+      "facing": 270,
+      "height": 9,
+      "box": [
+        0,
+        -9.1,
+        18.6,
+        0.05
+      ]
+    },
+    {
+      "id": "wall_b",
+      "name": "back wall",
+      "across": 0,
+      "distance": 0,
+      "facing": 0,
+      "height": 9,
+      "box": [
+        -7,
+        -9.1,
+        7,
+        0.05
+      ]
+    },
+    {
+      "id": "balcony_under",
+      "name": "balcony underside",
+      "across": 0,
+      "distance": 7.6,
+      "elevation": 3.0,
+      "facing": 180,
+      "tilt": -90,
+      "height": 7.6,
+      "box": [
+        -7,
+        -7.7,
+        7,
+        0.05
+      ]
+    },
+    {
+      "id": "balcony",
+      "name": "balcony front",
+      "across": 0,
+      "distance": 7.62,
+      "elevation": 3.0,
+      "facing": 0,
+      "height": 1.6,
+      "box": [
+        -7,
+        -1.7,
+        7,
+        0.35
+      ]
+    },
+    {
+      "id": "ceiling",
+      "name": "ceiling",
+      "across": 0,
+      "distance": 24,
+      "elevation": 9,
+      "facing": 180,
+      "tilt": -90,
+      "height": 24,
+      "box": [
+        -7,
+        -24.1,
+        7,
+        0.05
+      ]
+    },
+    {
+      "id": "column",
+      "name": "column",
+      "across": -3.8,
+      "distance": 7.4,
+      "height": 3.0,
+      "box": [
+        -0.5,
+        -3.25,
+        0.5,
+        0
+      ],
+      "shadow": true,
+      "copies": [
+        {
+          "across": -3.8,
+          "distance": 7.4
+        },
+        {
+          "across": 3.8,
+          "distance": 7.4
+        }
+      ]
+    },
+    {
+      "id": "seats",
+      "name": "rows of seats",
+      "across": 0,
+      "distance": 15.18,
+      "facing": 180,
+      "height": 1,
+      "box": [
+        -5.95,
+        -1.0,
+        5.95,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": 15.18
+        },
+        {
+          "across": 0,
+          "distance": 14.28
+        },
+        {
+          "across": 0,
+          "distance": 13.38
+        },
+        {
+          "across": 0,
+          "distance": 12.48
+        },
+        {
+          "across": 0,
+          "distance": 11.58
+        },
+        {
+          "across": 0,
+          "distance": 10.68
+        },
+        {
+          "across": 0,
+          "distance": 9.78
+        },
+        {
+          "across": 0,
+          "distance": 8.88
+        },
+        {
+          "across": 0,
+          "distance": 7.98
+        },
+        {
+          "across": 0,
+          "distance": 7.08
+        }
+      ]
+    },
+    {
+      "id": "crowd_b",
+      "name": "audience",
+      "across": 0,
+      "distance": 15.35,
+      "facing": 180,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": 15.35,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 11.75,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 10.85,
+          "flip": true
+        },
+        {
+          "across": 0,
+          "distance": 9.95,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 9.05,
+          "flip": true
+        },
+        {
+          "across": 0,
+          "distance": 8.15,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 7.25,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "crowd_f",
+      "name": "audience",
+      "across": 0,
+      "distance": 15.370000000000001,
+      "facing": 0,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": 0,
+          "distance": 15.37,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 11.77,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 10.87,
+          "flip": true
+        },
+        {
+          "across": 0,
+          "distance": 9.97,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 9.07,
+          "flip": true
+        },
+        {
+          "across": 0,
+          "distance": 8.17,
+          "flip": false
+        },
+        {
+          "across": 0,
+          "distance": 7.27,
+          "flip": true
+        }
+      ]
+    },
+    {
+      "id": "crowd_b2",
+      "name": "audience",
+      "across": 0,
+      "distance": 14.45,
+      "facing": 180,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ]
+    },
+    {
+      "id": "crowd_f2",
+      "name": "audience",
+      "across": 0,
+      "distance": 14.47,
+      "facing": 0,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ]
+    },
+    {
+      "id": "crowd_b3",
+      "name": "audience",
+      "across": 0,
+      "distance": 13.55,
+      "facing": 180,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ]
+    },
+    {
+      "id": "crowd_f3",
+      "name": "audience",
+      "across": 0,
+      "distance": 13.57,
+      "facing": 0,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ]
+    },
+    {
+      "id": "crowd_b4",
+      "name": "audience",
+      "across": 0,
+      "distance": 12.65,
+      "facing": 180,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ]
+    },
+    {
+      "id": "crowd_f4",
+      "name": "audience",
+      "across": 0,
+      "distance": 12.67,
+      "facing": 0,
+      "height": 1.4,
+      "box": [
+        -6.1,
+        -1.45,
+        6.1,
+        0.02
+      ]
+    },
+    {
+      "id": "stage_front",
+      "name": "stage front",
+      "across": 0,
+      "distance": 18,
+      "facing": 180,
+      "height": 1,
+      "box": [
+        -7,
+        -1.15,
+        7,
+        0.02
+      ]
+    },
+    {
+      "id": "stage_top",
+      "name": "stage",
+      "plane": true,
+      "across": 0,
+      "distance": 21,
+      "elevation": 1.0,
+      "width": 14,
+      "depth": 6
+    },
+    {
+      "id": "proscenium",
+      "name": "proscenium",
+      "across": 0,
+      "distance": 18.5,
+      "facing": 180,
+      "height": 9,
+      "box": [
+        -7,
+        -9.1,
+        7,
+        0.02
+      ]
+    },
+    {
+      "id": "curtain",
+      "name": "curtain",
+      "across": 0,
+      "distance": 18.6,
+      "elevation": 1.0,
+      "facing": 180,
+      "height": 5.7,
+      "box": [
+        -5.2,
+        -5.75,
+        5.2,
+        0.02
+      ]
+    },
+    {
+      "id": "backdrop",
+      "name": "scenery of The Geisha",
+      "across": 0,
+      "distance": 23.5,
+      "elevation": 1.0,
+      "facing": 180,
+      "height": 6.2,
+      "box": [
+        -6,
+        -6.25,
+        6,
+        0.02
+      ]
+    },
+    {
+      "id": "chandelier",
+      "name": "chandelier",
+      "across": 0,
+      "distance": 11.5,
+      "elevation": 5.6,
+      "height": 1.6,
+      "box": [
+        -1.1,
+        -3.45,
+        1.1,
+        0.05
+      ],
+      "flicker": 0.04
+    },
+    {
+      "id": "sconces",
+      "name": "sconces",
+      "across": -6.95,
+      "distance": 4,
+      "elevation": 2.6,
+      "facing": 90,
+      "height": 0.5,
+      "box": [
+        -0.32,
+        -0.52,
+        0.32,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": -6.95,
+          "distance": 4.0,
+          "elevation": 2.6,
+          "facing": 90
+        },
+        {
+          "across": -6.95,
+          "distance": 9.0,
+          "elevation": 2.6,
+          "facing": 90
+        },
+        {
+          "across": -6.95,
+          "distance": 12.4,
+          "elevation": 2.6,
+          "facing": 90
+        },
+        {
+          "across": -6.95,
+          "distance": 17.2,
+          "elevation": 2.6,
+          "facing": 90
+        },
+        {
+          "across": 6.95,
+          "distance": 4.0,
+          "elevation": 2.6,
+          "facing": 270
+        },
+        {
+          "across": 6.95,
+          "distance": 9.0,
+          "elevation": 2.6,
+          "facing": 270
+        },
+        {
+          "across": 6.95,
+          "distance": 11.2,
+          "elevation": 2.6,
+          "facing": 270
+        },
+        {
+          "across": 6.95,
+          "distance": 17.6,
+          "elevation": 2.6,
+          "facing": 270
+        }
+      ]
+    },
+    {
+      "id": "motes",
+      "particles": {
+        "kind": "dust",
+        "at": [
+          0,
+          11,
+          4.5
+        ],
+        "source": [
+          12,
+          14,
+          6
+        ],
+        "rate": 40,
+        "life": [
+          8,
+          14
+        ]
+      }
+    },
+    {
+      "id": "corr_floor",
+      "name": "corridor floor",
+      "plane": true,
+      "across": 8.3,
+      "distance": 13.25,
+      "elevation": 0,
+      "width": 2.2,
+      "depth": 14.5,
+      "walk": true
+    },
+    {
+      "id": "corr_in",
+      "name": "corridor wall",
+      "across": 7.2,
+      "distance": 6,
+      "facing": 90,
+      "height": 3.5,
+      "box": [
+        0,
+        -3.6,
+        14.5,
+        0.05
+      ]
+    },
+    {
+      "id": "corr_out",
+      "name": "corridor wall",
+      "across": 9.4,
+      "distance": 20.5,
+      "facing": 270,
+      "height": 3.5,
+      "box": [
+        0,
+        -3.6,
+        14.5,
+        0.05
+      ]
+    },
+    {
+      "id": "corr_end",
+      "name": "corridor end",
+      "across": 8.3,
+      "distance": 6,
+      "facing": 0,
+      "height": 3.5,
+      "box": [
+        -1.1,
+        -3.6,
+        1.1,
+        0.05
+      ]
+    },
+    {
+      "id": "corr_ceil",
+      "name": "corridor ceiling",
+      "across": 8.3,
+      "distance": 20.5,
+      "elevation": 3.5,
+      "facing": 180,
+      "tilt": -90,
+      "height": 14.5,
+      "box": [
+        -1.1,
+        -14.6,
+        1.1,
+        0.05
+      ]
+    },
+    {
+      "id": "land_floor",
+      "name": "landing floor",
+      "plane": true,
+      "across": 23.3,
+      "distance": 22,
+      "elevation": 0,
+      "width": 5.4,
+      "depth": 10,
+      "walk": true
+    },
+    {
+      "id": "land_back",
+      "name": "landing wall",
+      "across": 23.3,
+      "distance": 27,
+      "facing": 180,
+      "height": 5.6,
+      "box": [
+        -2.7,
+        -5.7,
+        2.7,
+        0.05
+      ]
+    },
+    {
+      "id": "door",
+      "name": "door",
+      "across": 21.3,
+      "distance": 26.97,
+      "facing": 180,
+      "height": 2.3,
+      "box": [
+        -0.02,
+        -2.32,
+        1.02,
+        0.02
+      ],
+      "place": {
+        "facing": "door_f"
+      }
+    },
+    {
+      "id": "beyond",
+      "name": "corridor beyond the door",
+      "across": 21.8,
+      "distance": 28.4,
+      "facing": 180,
+      "height": 3,
+      "box": [
+        -1.05,
+        -3.05,
+        1.05,
+        0.05
+      ]
+    },
+    {
+      "id": "land_left",
+      "name": "landing wall",
+      "across": 20.6,
+      "distance": 17,
+      "facing": 90,
+      "height": 5.6,
+      "box": [
+        0,
+        -5.7,
+        10,
+        0.05
+      ]
+    },
+    {
+      "id": "stairs",
+      "name": "stairs down",
+      "across": 20.25,
+      "distance": 22.8,
+      "facing": 90,
+      "height": 2.75,
+      "box": [
+        -0.02,
+        -2.8,
+        1.82,
+        0.02
+      ]
+    },
+    {
+      "id": "land_right",
+      "name": "landing wall",
+      "across": 26,
+      "distance": 27,
+      "facing": 270,
+      "height": 5.6,
+      "box": [
+        0,
+        -5.7,
+        10,
+        0.05
+      ]
+    },
+    {
+      "id": "gallery",
+      "name": "gallery",
+      "plane": true,
+      "across": 24.7,
+      "distance": 26.3,
+      "elevation": 2.0,
+      "width": 2.6,
+      "depth": 1.4,
+      "walk": true
+    },
+    {
+      "id": "gallery_front",
+      "name": "gallery banister",
+      "across": 24.7,
+      "distance": 25.6,
+      "elevation": 2.0,
+      "facing": 180,
+      "height": 1.0,
+      "box": [
+        -1.32,
+        -1.05,
+        1.32,
+        0.32
+      ]
+    },
+    {
+      "id": "flight",
+      "name": "flight of stairs",
+      "plane": true,
+      "across": 25.45,
+      "distance": 24.1,
+      "elevation": 1.0,
+      "width": 1.1,
+      "depth": 3.6,
+      "tilt": 33.7
+    },
+    {
+      "id": "flight_rail",
+      "name": "banister",
+      "across": 24.9,
+      "distance": 25.6,
+      "facing": 270,
+      "height": 3.0,
+      "box": [
+        -0.05,
+        -3.1,
+        3.1,
+        0.02
+      ]
+    },
+    {
+      "id": "land_ceil",
+      "name": "landing ceiling",
+      "across": 23.3,
+      "distance": 27,
+      "elevation": 5.6,
+      "facing": 180,
+      "tilt": -90,
+      "height": 10,
+      "box": [
+        -2.7,
+        -10.1,
+        2.7,
+        0.05
+      ]
+    },
+    {
+      "id": "stair_lamp",
+      "name": "lamp",
+      "across": 23.0,
+      "distance": 22.3,
+      "elevation": 2.9,
+      "height": 2.7,
+      "box": [
+        -0.3,
+        -2.75,
+        0.3,
+        0.05
+      ]
+    },
+    {
+      "id": "smoke_puff",
+      "particles": {
+        "kind": "smoke",
+        "at": "schoolboy1#hand_r",
+        "amount": "smoke",
+        "rate": 3,
+        "size": [
+          0.04,
+          0.3
+        ],
+        "life": [
+          2,
+          3.5
+        ],
+        "color": "#c8c4c0"
+      }
+    },
+    {
+      "id": "gurov",
+      "name": "Gurov",
+      "person": {
+        "cast": "cast",
+        "who": "gurov_indoor",
+        "turn": 6,
+        "look": {
+          "colors": {
+            "hair": "#5a4a3a",
+            "skin": "#d8b89e",
+            "top": "#ece7da",
+            "bottom": "#2f3036",
+            "garment": "#34353d",
+            "shoes": "#1e1e22",
+            "accent": "#f4f1ea"
+          }
+        }
+      },
+      "across": -3.75,
+      "distance": 7.05,
+      "place": {
+        "across": "gurov_a",
+        "distance": "gurov_d"
+      }
+    },
+    {
+      "id": "anna",
+      "name": "Anna Sergeyevna",
+      "person": {
+        "cast": "cast",
+        "who": "anna_theatre",
+        "turn": 0
+      },
+      "across": 0,
+      "distance": 8.9,
+      "place": {
+        "across": "anna_a",
+        "distance": "anna_d"
+      }
+    },
+    {
+      "id": "diderits",
+      "name": "von Diderits",
+      "person": {
+        "cast": "cast",
+        "who": "diderits",
+        "turn": 0
+      },
+      "across": 0,
+      "distance": 8.9,
+      "place": {
+        "across": "diderits_a",
+        "distance": "diderits_d"
+      }
+    },
+    {
+      "id": "lady1",
+      "name": "a lady in dark blue",
+      "person": {
+        "cast": "cast",
+        "who": "lady1",
+        "turn": 0
+      },
+      "across": 0,
+      "distance": 8.9,
+      "place": {
+        "across": "lady1_a",
+        "distance": "lady1_d"
+      }
+    },
+    {
+      "id": "lady2",
+      "name": "a lady in brown",
+      "person": {
+        "cast": "cast",
+        "who": "lady2",
+        "turn": 0
+      },
+      "across": 0,
+      "distance": 8.9,
+      "place": {
+        "across": "lady2_a",
+        "distance": "lady2_d"
+      }
+    },
+    {
+      "id": "lady3",
+      "name": "a lady in black",
+      "person": {
+        "cast": "cast",
+        "who": "lady3",
+        "turn": 0
+      },
+      "across": 0,
+      "distance": 8.9,
+      "place": {
+        "across": "lady3_a",
+        "distance": "lady3_d"
+      }
+    },
+    {
+      "id": "lady4",
+      "name": "a lady in maroon-brown",
+      "person": {
+        "cast": "cast",
+        "who": "lady4",
+        "turn": 0
+      },
+      "across": 0,
+      "distance": 8.9,
+      "place": {
+        "across": "lady4_a",
+        "distance": "lady4_d"
+      }
+    },
+    {
+      "id": "lady5",
+      "name": "a lady in dark green",
+      "person": {
+        "cast": "cast",
+        "who": "lady5",
+        "turn": 0
+      },
+      "across": 0,
+      "distance": 8.9,
+      "place": {
+        "across": "lady5_a",
+        "distance": "lady5_d"
+      }
+    },
+    {
+      "id": "schoolboy1",
+      "name": "schoolboy",
+      "person": {
+        "cast": "cast",
+        "who": "schoolboy1",
+        "turn": 185
+      },
+      "across": 24.25,
+      "distance": 26.15,
+      "place": {
+        "across": "schoolboy1_a",
+        "distance": "schoolboy1_d"
+      }
+    },
+    {
+      "id": "schoolboy2",
+      "name": "schoolboy",
+      "person": {
+        "cast": "cast",
+        "who": "schoolboy2",
+        "turn": 175
+      },
+      "across": 25.05,
+      "distance": 26.2,
+      "place": {
+        "across": "schoolboy2_a",
+        "distance": "schoolboy2_d"
+      }
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "anna_life": 0,
+    "hall_light": 1,
+    "curtain": 0,
+    "stage": 0.25,
+    "crowd": 1,
+    "leave": 0,
+    "glint": 0,
+    "noticed": 0,
+    "enter": 0,
+    "door": 0,
+    "door_f": 180,
+    "smoke": 0,
+    "camera_x": -5.6,
+    "camera_z": 2.2,
+    "camera_h": 0.2,
+    "camera_yaw": 6,
+    "camera_pitch": 5,
+    "gurov_a": -3.75,
+    "gurov_d": 7.05,
+    "gurov_turn": 6,
+    "gurov_mood": "thinking",
+    "anna_here": false,
+    "anna_a": 0,
+    "anna_d": 8.9,
+    "anna_with": [
+      "lorgnette"
+    ],
+    "diderits_here": false,
+    "diderits_a": 0,
+    "diderits_d": 8.9,
+    "schoolboy1_here": false,
+    "schoolboy2_here": false,
+    "lady1_here": false,
+    "lady1_a": 0,
+    "lady1_d": 8.9,
+    "lady2_here": false,
+    "lady2_a": 0,
+    "lady2_d": 8.9,
+    "lady3_here": false,
+    "lady3_a": 0,
+    "lady3_d": 8.9,
+    "lady4_here": false,
+    "lady4_a": 0,
+    "lady4_d": 8.9,
+    "lady5_here": false,
+    "lady5_a": 0,
+    "lady5_d": 8.9
+  },
+  "states": {
+    "hall_light": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the hall’s light (the chandelier and the sconces): 1 before the play and in the interval, 0.3 during the play"
+    },
+    "curtain": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the curtain: 0 down, 1 drawn up to the sides"
+    },
+    "stage": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the stage’s light (the footlights and the batten): 1 during the play"
+    },
+    "crowd": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how full the hall is of its painted audience (the hall filling before the play)"
+    },
+    "leave": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the interval: the share of the painted audience gone out (1 — those who go are gone)"
+    },
+    "glint": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the light on her lorgnette’s lenses (set by the game in “Find her”)"
+    },
+    "noticed": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "1 — he took another lady for her: in husband_in the lady in the second row (lady2) turns back toward the column (set by the game after “Find her”)"
+    },
+    "enter": {
+      "range": [
+        0,
+        6
+      ],
+      "means": "how many of the six ladies have come in (set by the game in “Find her”): the scene leads each next one down the middle aisle to her seat — lady1, lady2, lady3, Anna, lady4, lady5"
+    },
+    "door": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the landing’s door from the corridor: 0 shut, 1 open"
+    },
+    "door_f": {
+      "range": [
+        180,
+        262
+      ],
+      "smooth": true,
+      "means": "the landing door leaf’s turn, degrees (set by the scene from door)"
+    },
+    "smoke": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a schoolboy’s cigarette smoke on the gallery"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the beat of the film the scene plays (set by the game); one set plays from its beginning"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose cut is made ready ahead (set by the game; the module beats)"
+    },
+    "anna_life": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play’s key: how she comes onto the landing — 0 fast (walk_fast), 1 as she always walks"
+    },
+    "gurov_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where Gurov is across, m"
+    },
+    "gurov_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where Gurov is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "anna_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where Anna is across, m"
+    },
+    "anna_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where Anna is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "diderits_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where von Diderits is across, m"
+    },
+    "diderits_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where von Diderits is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "lady1_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where the lady in dark blue is across, m"
+    },
+    "lady1_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where the lady in dark blue is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "lady2_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where the lady in brown is across, m"
+    },
+    "lady2_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where the lady in brown is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "lady3_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where the lady in black is across, m"
+    },
+    "lady3_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where the lady in black is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "lady4_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where the lady in maroon-brown is across, m"
+    },
+    "lady4_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where the lady in maroon-brown is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "lady5_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where the lady in dark green is across, m"
+    },
+    "lady5_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where the lady in dark green is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "schoolboy1_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where a schoolboy is across, m"
+    },
+    "schoolboy1_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where a schoolboy is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "schoolboy2_a": {
+      "range": [
+        -7,
+        27
+      ],
+      "smooth": true,
+      "means": "where the other schoolboy is across, m"
+    },
+    "schoolboy2_d": {
+      "range": [
+        0,
+        29
+      ],
+      "smooth": true,
+      "means": "where the other schoolboy is in depth, m (the hall 0…18, the corridor x 7.2…9.4, the landing x 20.6…26)"
+    },
+    "gurov_mood": {
+      "type": "string",
+      "means": "gurov’s face (afraid, sad, …)"
+    },
+    "anna_mood": {
+      "type": "string",
+      "means": "anna’s face (afraid, sad, …)"
+    },
+    "diderits_mood": {
+      "type": "string",
+      "means": "diderits’s face (afraid, sad, …)"
+    },
+    "lady2_mood": {
+      "type": "string",
+      "means": "lady2’s face (afraid, sad, …)"
+    }
+  },
+  "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "bpm": 60,
+    "density": 0.25,
+    "brightness": 0.35,
+    "prompts": [
+      {
+        "text": "hushed murmur of an expectant provincial audience rendered as soft low strings, late nineteenth century, restrained",
+        "weight": 1.0
+      },
+      {
+        "text": "sparse solo cello, long held notes, a secret kept in a crowded room",
+        "weight": 0.8
+      },
+      {
+        "text": "quiet anxious pulse of muted double basses, a heart beating under good manners",
+        "weight": 0.6
+      },
+      {
+        "text": "soft sustained viola and clarinet, a winter evening, longing without hope",
+        "weight": 0.4
+      },
+      {
+        "text": "faint high harmonics of violins, like light in a chandelier through haze",
+        "weight": 0.3
+      },
+      {
+        "text": "dark chamber ambient, velvet and gaslight, slow breathing textures",
+        "weight": 0
+      },
+      {
+        "text": "low bowed bass and a single bassoon, a corridor behind the boxes",
+        "weight": 0
+      },
+      {
+        "text": "tremolo strings very softly, an encounter on a stair",
+        "weight": 0
+      },
+      {
+        "text": "glassy bowed vibraphone tones, suspended, a held breath",
+        "weight": 0
+      },
+      {
+        "text": "string quartet chorale very slow and quiet, Russian late romantic restraint",
+        "weight": 0
+      },
+      {
+        "text": "distant wind outside a provincial building in winter, almost no melody",
+        "weight": 0
+      },
+      {
+        "text": "harp harmonics one by one, small and lost in a big hall",
+        "weight": 0
+      },
+      {
+        "text": "solo oboe far off, unaccompanied, wistful",
+        "weight": 0
+      },
+      {
+        "text": "warm analogue tape ambience, grey and nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "minimal drone in F minor, slow swells, dusk",
+        "weight": 0
+      },
+      {
+        "text": "muted horn single long note, far away, melancholic",
+        "weight": 0
+      }
+    ]
+  }
+}
