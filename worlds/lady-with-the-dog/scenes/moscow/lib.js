@@ -107,7 +107,8 @@ const THRESHOLD = [3.45, 13.0];
 const PORCH_TOP = [3.15, 12.9];
 const STEP_BELOW = [2.6, 12.9];
 const PORCH_FOOT = [1.72, 12.4];
-const UPSTAIRS = [3.9, 15.4];          // the wife at the window upstairs (on the room's floor, 3.9)
+const UPSTAIRS = [4.2, 15.4];          // the wife at the window upstairs (on the room's floor, 3.9; 0.6 m behind the front:
+                                       // her dress's flare must not reach through the wall)
 // at the club: inside its door, on the portico, the bottom step
 // (out through the door, 22.95…24.05, and between its two middle columns, 23.17…23.83: one after the other)
 const CLUB_IN = { gurov: [-6.0, 23.65], official: [-6.0, 23.35] };
@@ -144,8 +145,8 @@ const CAM = {
   TWO: twoShot(CLUB_STEP, [OFFICIAL_SEAT[0], OFFICIAL_SEAT[1]], 3.3, 1.55),
   // faces: the wife on the threshold and Gurov a step below, from along the house front; the porch lamp before them
   DOOR: cam(3.0, 10.0, 2.1),
-  // her face close, three-quarter, from beyond the porch (his shoulder at the frame's edge)
-  WIFE: cam(3.05, 14.45, 2.3, 165),
+  // her face close (chest up, 1.8 m), three-quarter, from the pavement by the steps; his shoulder at the frame's right
+  WIFE: cam(1.85, 13.9, 2.3, 119),
   // at the school's gate: Gurov from along the railings, three-quarter; the gate, the girl at it
   GATE: cam(2.9, 2.6, 1.6, -8),
   // the gate end of the lane: Gurov at the gate, the street behind him (the messenger comes across it)

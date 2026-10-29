@@ -59,7 +59,7 @@ by the man in the red cap; the porch at night. Or the thaw instead of the snow, 
 road, a little below (door, window upstairs, the sledge). `CLUB` — the portico ≈ 5–6 m, the sledges along the kerb
 beyond it, the far lamp up the lane. Faces: `TWO` — the official in his sledge turned back to Gurov on the bottom step,
 both in profile (worked out from where they are: `twoShot`); `DOOR` — the wife on the threshold and Gurov a step below,
-from along the house front, the porch lamp before their faces; `WIFE` — her face close, three-quarter; `GATE` — Gurov at
+from along the house front, the porch lamp before their faces; `WIFE` — her face close (chest up), three-quarter, from the pavement by the steps; `GATE` — Gurov at
 the school's gate, three-quarter, the girl at the gate; `NEAR` — the gate end of the lane, the messenger crossing it.
 
 ## Beats
@@ -112,9 +112,8 @@ Keys: `hour`, `overcast`, `season`, `snow`, `wet`, `lamps`, `porch_lamp`, `windo
 - The shadows on the curtain are painted (a layer that stirs a little), not people.
 - `table_window`, `say`, `red_cap` are longer than the docs' estimates (the steps, the walk to the sledge, the walk
   away): the contract says the truth.
-- **Engine gap (known, work.md 2026-10-15):** a person's outline shows through a card in front of them — the wife at
-  the window upstairs (standing 0.3 m behind the house front) shows the hem of her skirt as a dark wedge on the wall
-  under the sill (`school`, `porch_end` with `wife_knows` 1; render 2119 at 134 s). Not hidden by any trick here.
+- The wife at the window upstairs stands 0.6 m behind the house front (`UPSTAIRS`): nearer, her dress's flare (cloth,
+  wider than her) reached through the wall as a dark wedge under the sill (render 2119, 134 s).
 - The lit windows are separate cards that glow (their alpha by a key); a wall's painting is never repainted for them.
 
 ## Contract for the check
