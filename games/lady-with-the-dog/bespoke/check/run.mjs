@@ -48,15 +48,15 @@ const sound = await load('sound.js');
 const WATCH = 90; // a stretch of watching longer than this, s, is reported
 const several = (stem, n, tail = '', from = 1) => Array.from({ length: n }, (_, i) => `${stem}${i + from}${tail}`);
 // The minigames (game.md §7): the scene a minigame is played on, the keys it moves and those it only listens to, the
-// points its marks stand on, the fields of its opts and of its result
+// points its marks stand on, the moments of the scene it waits for (tells), the fields of its opts and of its result
 const MINIGAMES = {
   coax: { scene: 'quay', keys: ['hand', 'spitz_near'], points: ['spitz#head'], result: ['startles'] },
-  lorgnette: { scene: 'quay', keys: ['pass', 'look_at', 'stranger_turn', 'surge'], points: [...several('p', 6, '#head'), 'stranger#head'], result: ['looked', 'stranger'] },
-  'looking-round': { scene: 'quay', keys: ['seen', 'kiss_now'], listens: ['watched'], points: ['anna#head'], result: ['seen'] },
+  lorgnette: { scene: 'quay', keys: ['pass', 'look_at', 'stranger_turn', 'surge'], tells: ['gangway:stranger'], points: [...several('p', 6, '#head'), 'stranger#head'], result: ['looked', 'stranger'] },
+  'looking-round': { scene: 'quay', keys: ['seen', 'kiss_now'], tells: ['noon_garden:kiss'], listens: ['watched'], points: ['anna#head'], result: ['seen'] },
   watermelon: { scene: 'room', keys: ['cut', 'slice', 'candle'], points: ['melon#knife', 'melon#from', 'melon#to'], result: ['lifts'] },
   'beside-her': { scene: 'room', keys: ['hand_at', 'pull', 'palm'], points: ['hands#his', 'hands#her'], result: ['pulls'] },
   sea: { scene: 'oreanda', keys: ['dawn', 'lights', 'cicada', 'hand'], points: ['steamer#lights', 'cypress#cicada', 'anna#hand_r'], opts: ['sea'], result: ['touched'] },
-  shadow: { scene: 'moscow', keys: ['walk_on', 'gurov_look', ...several('shade', 4)], points: several('shade', 4, '#head'), opts: ['count', 'onFirst'], result: ['touched'] },
+  shadow: { scene: 'moscow', keys: ['walk_on', 'gurov_look', ...several('shade', 4)], tells: several('evening_walk:stop', 4), points: several('shade', 4, '#head'), opts: ['count', 'onFirst'], result: ['touched'] },
   leash: { scene: 'town', keys: ['anna_to'], listens: ['anna_at'], points: ['anna#hand_l'], opts: ['pull'], result: ['end'] },
   'by-the-fence': { scene: 'town', keys: ['walk_to'], listens: ['gurov_at'], points: ['gurov#head', ...several('fence#p', 5)], opts: ['tune', 'onPiano'], result: ['stood'] },
   'find-her': { scene: 'theatre', keys: ['enter', 'glint'], points: [...several('lady', 5, '#head'), 'anna#head'], result: ['wrong'] },
@@ -396,6 +396,7 @@ function watched(g, j, ch, here, events, seen) {
           for (const k of T.keys) key(k, what, true);
           for (const k of T.listens ?? []) key(k, what);
           for (const ref of T.points ?? []) point(ref, what);
+          for (const text of T.tells ?? []) moment(text, what);
         }
       }
       for (const k in opts) {
