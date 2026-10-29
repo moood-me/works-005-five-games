@@ -145,9 +145,9 @@ const CAM = {
   // faces: the wife on the threshold and Gurov a step below, from along the house front; the porch lamp before them
   DOOR: cam(3.0, 10.0, 2.1),
   // her face close, three-quarter, from beyond the porch (his shoulder at the frame's edge)
-  WIFE: cam(2.6, 14.6, 2.35, 152),
+  WIFE: cam(3.05, 14.45, 2.3, 165),
   // at the school's gate: Gurov from along the railings, three-quarter; the gate, the girl at it
-  GATE: cam(2.9, 2.6, 1.6, -16),
+  GATE: cam(2.9, 2.6, 1.6, -8),
   // the gate end of the lane: Gurov at the gate, the street behind him (the messenger comes across it)
   NEAR: cam(0.2, 1.5, 1.7, 10),
 };
@@ -671,7 +671,8 @@ function facade(g, e, o) {
   // the plaster's unevenness and, in the thaw, the wet below
   for (let i = 0; i < (o.x1 - o.x0) * 3; i++) {
     g.fillStyle = `rgba(80,70,60,${0.03 + 0.03 * rnd()})`;
-    g.fillRect(o.x0 + rnd() * (o.x1 - o.x0), -H * rnd(), 0.4 + rnd() * 1.2, 0.3 + rnd() * 0.8);
+    const w = 0.4 + rnd() * 1.2, h = 0.3 + rnd() * 0.8;
+    g.fillRect(o.x0 + rnd() * (o.x1 - o.x0 - w), -H + (H - h) * rnd(), w, h);
   }
   if (season === 'thaw') {
     const wet = g.createLinearGradient(0, -1.6, 0, 0);
@@ -1043,13 +1044,22 @@ function lime(g, e, season) {
     g.quadraticCurveTo((x + x1) / 2 + (rnd() - 0.5) * len * 0.2, (y + y1) / 2, x1, y1);
     g.stroke();
     if (depth <= 0) { twigs.push([x1, y1]); return; }
-    const n = depth > 3 ? 2 : 3;
-    for (let i = 0; i < n; i++) branch(x1, y1, a + (rnd() - 0.5) * 1.3, len * (0.62 + 0.15 * rnd()), w * 0.62, depth - 1);
+    for (let i = 0; i < 3; i++) branch(x1, y1, a + (i - 1) * 0.55 + (rnd() - 0.5) * 0.5, len * (0.66 + 0.12 * rnd()), Math.max(0.03, w * 0.6), depth - 1);
   };
-  branch(0, 0, 0, 3.2, 0.32, 5);
+  // the crown's mist of fine twigs (in winter white with rime), then the limbs over it
+  const haze = season === 'thaw' ? 'rgba(60,52,46,0.35)' : 'rgba(236,240,246,0.55)';
+  for (let k = 0; k < 9; k++) {
+    const cx = (rnd() - 0.5) * 3.6, cy = -5.6 - rnd() * 3.0, r = 1.0 + rnd() * 1.2;
+    const gr = g.createRadialGradient(cx, cy, 0, cx, cy, r);
+    gr.addColorStop(0, haze);
+    gr.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = gr;
+    g.fillRect(cx - r, cy - r, 2 * r, 2 * r);
+  }
+  branch(0, 0, 0, 3.0, 0.34, 5);
   if (season !== 'thaw') {
-    g.fillStyle = 'rgba(240,244,250,0.85)';
-    for (const [x, y] of twigs) for (let k = 0; k < 3; k++) g.fillRect(x + (rnd() - 0.5) * 0.5, y + (rnd() - 0.5) * 0.4, 0.07, 0.05);
+    g.fillStyle = 'rgba(244,247,251,0.9)';
+    for (const [x, y] of twigs) for (let k = 0; k < 4; k++) g.fillRect(x + (rnd() - 0.5) * 0.6, y + (rnd() - 0.5) * 0.5, 0.08, 0.06);
   }
 }
 const PAINT = { SNOW, WET_SNOW, rect, fillRect, snowLedge, windowsOf, facade, litWindows, FRONTS, lamp, sledgeSide, sledgeBack, horse, lime };

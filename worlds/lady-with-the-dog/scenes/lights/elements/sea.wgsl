@@ -18,10 +18,10 @@ fn shade(painted: vec4f, at: vec2f, uv: vec2f) -> vec4f {
   c = over(clouds * sky, c);
   let depth = clamp((at.y - u_horizon) / (u_foot - u_horizon), 0.0, 1.0);
   let n = noise2(vec2f(at.x * 70.0 + u_time * 0.15, pow(depth, 0.55) * 170.0 - u_time * 0.45));
-  let fleck = smoothstep(0.78, 0.96, n);
+  let fleck = smoothstep(0.84, 0.97, n);
   let off = (at.x - u_moon_x) / (0.02 + 0.2 * depth);
   let road = exp(-off * off);
-  let glint = fleck * (0.08 + 0.92 * road) * sea;
+  let glint = fleck * (0.025 + 0.975 * road) * sea;
   c += vec3f(0.85, 0.88, 1.0) * glint * 0.55;
   emission = vec3f(0.85, 0.88, 1.0) * glint * 0.25 + refl.rgb * sea * 0.25;
   return vec4f(c, 1.0);
