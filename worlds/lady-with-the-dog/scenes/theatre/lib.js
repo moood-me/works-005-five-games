@@ -71,7 +71,7 @@ const COATS = ['#2b2c33', '#3a3330', '#2e3540', '#433a30', '#30302c', '#3d4038',
 const HAIR = ['#2a2220', '#4a3626', '#6a5038', '#1e1a18', '#8a7258', '#b9b2a6'];
 const SKIN = ['#d8b89e', '#e2c2a8', '#caa286', '#e8cbb2'];
 function spectator(g, x, k, front) {
-  const woman = hash(k, 3) < 0.5, s = 0.92 + hash(k, 4) * 0.12;
+  const woman = hash(k, 3) < 0.5, s = 1.08 + hash(k, 4) * 0.12;
   const coat = COATS[Math.floor(hash(k, 5) * COATS.length)], hair = HAIR[Math.floor(hash(k, 6) * HAIR.length)];
   const skin = SKIN[Math.floor(hash(k, 7) * SKIN.length)];
   g.save(); g.translate(x + (hash(k, 8) - 0.5) * 0.06, 0); g.scale(s, s);

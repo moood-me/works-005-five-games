@@ -1,0 +1,1302 @@
+{
+  "engine": 3,
+  "title": "The Town of S.",
+  "horizon": 0.5,
+  "camera": {
+    "mode": "panorama",
+    "span": [
+      -8,
+      20
+    ]
+  },
+  "modules": [
+    "cast",
+    "spitz",
+    "closeups",
+    "beats"
+  ],
+  "light": {
+    "ambient": 0.86,
+    "ambientColor": "#c8ccd8",
+    "haze": 0.12,
+    "hazeColor": "#c4c8d2",
+    "hazeGlow": 0.6,
+    "vignette": 0.3,
+    "grain": 0.18,
+    "saturation": 0.88,
+    "bounce": 0.5,
+    "wind": [
+      1,
+      0.2,
+      0.5
+    ],
+    "looks": {
+      "dusk": {
+        "ambient": 0.56,
+        "ambientColor": "#8a8cb4",
+        "haze": 0.1,
+        "hazeColor": "#6e6e90",
+        "saturation": 0.9,
+        "brightness": 1.02
+      },
+      "morning": {
+        "ambient": 0.92,
+        "ambientColor": "#e2e4ec",
+        "haze": 0.14,
+        "hazeColor": "#d8dce6",
+        "brightness": 1.04
+      }
+    }
+  },
+  "lights": [
+    {
+      "id": "sun",
+      "from": [
+        40,
+        3
+      ],
+      "color": "#ffbe8a",
+      "strength": 0.9,
+      "on": "sunset"
+    },
+    {
+      "id": "morning_sun",
+      "from": [
+        215,
+        14
+      ],
+      "color": "#fff0dc",
+      "strength": 0.7,
+      "on": "morning"
+    },
+    {
+      "id": "lamp_l",
+      "of": "lantern#flame",
+      "color": "#ffd08a",
+      "strength": 1.7,
+      "reach": 7,
+      "on": "lamp"
+    },
+    {
+      "id": "window_l",
+      "of": "window#pane",
+      "color": "#ffcf8a",
+      "strength": 1.0,
+      "reach": 6,
+      "on": "window"
+    }
+  ],
+  "objects": [
+    {
+      "id": "sky",
+      "name": "sky over S.",
+      "sky": true,
+      "box": [
+        -3.12,
+        -0.6,
+        4.9,
+        1.25
+      ]
+    },
+    {
+      "id": "ground",
+      "name": "land",
+      "plane": true,
+      "across": 100,
+      "distance": 190,
+      "elevation": 0,
+      "width": 320,
+      "depth": 400
+    },
+    {
+      "id": "street",
+      "name": "street",
+      "plane": true,
+      "across": 0,
+      "distance": 2.5,
+      "elevation": 0.015,
+      "width": 140,
+      "depth": 9,
+      "reflect": {
+        "strength": "wet_k",
+        "rough": 0.55,
+        "fade": 3
+      }
+    },
+    {
+      "id": "road",
+      "name": "road to the station",
+      "plane": true,
+      "across": 16.6,
+      "distance": 63,
+      "elevation": 0.02,
+      "width": 3.4,
+      "depth": 112
+    },
+    {
+      "id": "bank",
+      "name": "railway bank",
+      "across": 40,
+      "distance": 120,
+      "facing": 180,
+      "height": 9,
+      "box": [
+        -300,
+        -9.2,
+        300,
+        0.05
+      ]
+    },
+    {
+      "id": "far_train",
+      "name": "train",
+      "across": -260,
+      "distance": 119.7,
+      "elevation": 3.0,
+      "place": {
+        "across": "far_train_a"
+      },
+      "facing": 180,
+      "height": 5.4,
+      "box": [
+        -58,
+        -5.5,
+        40,
+        0.05
+      ]
+    },
+    {
+      "id": "train_smoke",
+      "particles": {
+        "kind": "smoke",
+        "at": "far_train#chimney",
+        "amount": 0.6,
+        "size": [
+          1.5,
+          7
+        ],
+        "life": [
+          4,
+          7
+        ],
+        "color": "#9a96a0"
+      }
+    },
+    {
+      "id": "house",
+      "name": "von Diderits’ house",
+      "across": 3,
+      "distance": 14.5,
+      "facing": 180,
+      "height": 9.6,
+      "box": [
+        -6.5,
+        -9.7,
+        6.5,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "window",
+      "name": "her window",
+      "across": 1.15,
+      "distance": 14.47,
+      "facing": 180,
+      "glows": true,
+      "height": 4.7,
+      "box": [
+        -0.6,
+        -4.72,
+        0.6,
+        -3.28
+      ]
+    },
+    {
+      "id": "porch",
+      "name": "porch",
+      "across": 2.9,
+      "distance": 13.9,
+      "facing": 180,
+      "height": 3.2,
+      "box": [
+        -1.15,
+        -3.3,
+        1.15,
+        0.05
+      ]
+    },
+    {
+      "id": "trees",
+      "name": "bare trees",
+      "height": 8,
+      "box": [
+        -3.6,
+        -8.6,
+        3.6,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -1.6,
+          "distance": 11.0
+        },
+        {
+          "across": 7.6,
+          "distance": 12.3,
+          "flip": true,
+          "scale": 1.15
+        },
+        {
+          "across": 10.6,
+          "distance": 9.8,
+          "scale": 0.9
+        },
+        {
+          "across": -9.5,
+          "distance": 11.5,
+          "scale": 1.2,
+          "flip": true
+        },
+        {
+          "across": -6,
+          "distance": -3.2,
+          "scale": 1.3
+        },
+        {
+          "across": 5,
+          "distance": -3.4,
+          "scale": 1.2,
+          "flip": true
+        },
+        {
+          "across": 13,
+          "distance": -3.0,
+          "scale": 1.1
+        }
+      ]
+    },
+    {
+      "id": "fence",
+      "name": "grey fence",
+      "across": 0,
+      "distance": 7.0,
+      "facing": 180,
+      "height": 2.9,
+      "box": [
+        -5.2,
+        -2.95,
+        6.55,
+        0.05
+      ],
+      "shadow": true
+    },
+    {
+      "id": "fence_far",
+      "name": "grey fence",
+      "across": 6.5,
+      "distance": 7.0,
+      "facing": 180,
+      "height": 2.7,
+      "box": [
+        -0.1,
+        -2.75,
+        2.55,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": 6.5,
+          "distance": 7.0
+        },
+        {
+          "across": 9.0,
+          "distance": 7.0
+        },
+        {
+          "across": 11.5,
+          "distance": 7.0
+        },
+        {
+          "across": -10.0,
+          "distance": 7.0
+        },
+        {
+          "across": -12.5,
+          "distance": 7.0
+        },
+        {
+          "across": -15.0,
+          "distance": 7.0
+        },
+        {
+          "across": -17.5,
+          "distance": 7.0
+        },
+        {
+          "across": -20.0,
+          "distance": 7.0
+        },
+        {
+          "across": -22.5,
+          "distance": 7.0
+        },
+        {
+          "across": -25.0,
+          "distance": 7.0
+        },
+        {
+          "across": -27.5,
+          "distance": 7.0
+        },
+        {
+          "across": -30.0,
+          "distance": 7.0
+        },
+        {
+          "across": -32.5,
+          "distance": 7.0
+        },
+        {
+          "across": -35.0,
+          "distance": 7.0
+        },
+        {
+          "across": -37.5,
+          "distance": 7.0
+        }
+      ]
+    },
+    {
+      "id": "fence_side",
+      "name": "fence along the lane",
+      "across": -5.0,
+      "distance": 7.0,
+      "facing": 90,
+      "height": 2.7,
+      "box": [
+        -0.05,
+        -2.75,
+        9.05,
+        0.05
+      ],
+      "copies": [
+        {
+          "across": -5.0,
+          "distance": 7.0,
+          "facing": 90
+        },
+        {
+          "across": -7.5,
+          "distance": 7.0,
+          "facing": 90
+        },
+        {
+          "across": 14.0,
+          "distance": 7.0,
+          "facing": 90
+        }
+      ]
+    },
+    {
+      "id": "gate",
+      "name": "gate",
+      "across": 2.4,
+      "distance": 6.99,
+      "facing": 180,
+      "place": {
+        "facing": "gate_f"
+      },
+      "height": 2.2,
+      "box": [
+        -0.02,
+        -2.3,
+        1.02,
+        0.02
+      ]
+    },
+    {
+      "id": "lantern",
+      "name": "lantern",
+      "across": 3.47,
+      "distance": 6.9,
+      "facing": 180,
+      "height": 2.8,
+      "box": [
+        -0.4,
+        -2.82,
+        0.05,
+        -2.2
+      ]
+    },
+    {
+      "id": "poster",
+      "name": "poster",
+      "across": 4.4,
+      "distance": 6.96,
+      "facing": 180,
+      "height": 2.05,
+      "box": [
+        -0.34,
+        -2.05,
+        0.34,
+        -1.2
+      ]
+    },
+    {
+      "id": "near_fence",
+      "name": "near side",
+      "across": 0,
+      "distance": -1.6,
+      "facing": 0,
+      "height": 1.8,
+      "box": [
+        -1.3,
+        -1.85,
+        1.3,
+        0.02
+      ],
+      "copies": [
+        {
+          "across": -40.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -37.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -35.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -32.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -30.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -27.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -25.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -22.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -20.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -17.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -15.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -12.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -10.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -7.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -5.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": -2.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 0.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 2.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 5.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 7.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 10.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 12.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 15.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 17.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 20.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 22.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 25.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 27.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 30.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 32.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 35.0,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 37.5,
+          "distance": -1.6,
+          "facing": 0
+        },
+        {
+          "across": 40.0,
+          "distance": -1.6,
+          "facing": 0
+        }
+      ]
+    },
+    {
+      "id": "cab",
+      "name": "cab",
+      "across": 11.0,
+      "distance": 4.0,
+      "facing": 180,
+      "height": 2.0,
+      "box": [
+        -2.3,
+        -2.0,
+        1.95,
+        0.05
+      ]
+    },
+    {
+      "id": "horse_breath",
+      "particles": {
+        "kind": "smoke",
+        "at": "cab#nose",
+        "amount": "cab",
+        "rate": 1.2,
+        "size": [
+          0.05,
+          0.4
+        ],
+        "life": [
+          1,
+          2
+        ],
+        "color": "#e8e8ec",
+        "opacity": 0.5
+      }
+    },
+    {
+      "id": "snowfall",
+      "particles": {
+        "kind": "snow",
+        "amount": "snow"
+      }
+    },
+    {
+      "id": "leaves_blown",
+      "particles": {
+        "kind": "leaves",
+        "amount": "wind",
+        "at": [
+          5,
+          3,
+          3
+        ],
+        "source": [
+          40,
+          14,
+          4
+        ],
+        "rate": 6,
+        "colors": [
+          "#8a6a3a",
+          "#6e5232",
+          "#a07a42"
+        ]
+      }
+    },
+    {
+      "id": "inkwell",
+      "name": "inkstand (close-up)",
+      "insert": "inkwell"
+    },
+    {
+      "id": "spitz",
+      "name": "Pomeranian",
+      "across": 2.85,
+      "distance": 12.15,
+      "place": {
+        "across": "spitz_a",
+        "distance": "spitz_d",
+        "elevation": "spitz_e"
+      },
+      "height": 0.45,
+      "box": [
+        -2.6,
+        -2.2,
+        2.6,
+        0.3
+      ],
+      "shadow": true
+    },
+    {
+      "id": "anna",
+      "name": "Anna Sergeyevna",
+      "person": {
+        "cast": "cast",
+        "who": "anna_winter",
+        "turn": 180
+      },
+      "across": 2.9,
+      "distance": 8.7,
+      "place": {
+        "across": "anna_a",
+        "distance": "anna_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "gurov",
+      "name": "Gurov",
+      "person": {
+        "cast": "cast",
+        "who": "gurov_winter",
+        "turn": 270
+      },
+      "across": -3.45,
+      "distance": 6.3,
+      "place": {
+        "across": "gurov_a",
+        "distance": "gurov_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "diderits",
+      "name": "von Diderits",
+      "person": {
+        "cast": "cast",
+        "who": "diderits_coat",
+        "turn": 180
+      },
+      "across": 2.9,
+      "distance": 9.3,
+      "place": {
+        "across": "diderits_a",
+        "distance": "diderits_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "maid",
+      "name": "the old maid",
+      "person": {
+        "cast": "cast",
+        "who": "maid",
+        "turn": 180
+      },
+      "across": 2.25,
+      "distance": 12.5,
+      "place": {
+        "across": "maid_a",
+        "distance": "maid_d"
+      },
+      "shadow": true
+    },
+    {
+      "id": "cabman",
+      "name": "cabman",
+      "person": {
+        "cast": "cast",
+        "who": "cabman",
+        "turn": 90
+      },
+      "across": 12.15,
+      "distance": 4.05,
+      "place": {
+        "across": "cabman_a",
+        "distance": "cabman_d"
+      },
+      "shadow": true
+    }
+  ],
+  "state": {
+    "beat": "",
+    "beat_next": "",
+    "spring": 0,
+    "talk": 0,
+    "husband_knows": 0,
+    "dog_pat": 0,
+    "hour": 0.5,
+    "season": "winter",
+    "dusk": 0,
+    "morning": 0,
+    "sunset": 0,
+    "lamp": 0,
+    "window": 1,
+    "snow": 0.35,
+    "wet_k": 0,
+    "wind": 0,
+    "gate": 0,
+    "gate_f": 180,
+    "far_train": 0,
+    "far_train_a": -260,
+    "inkwell": 0,
+    "cab": 0,
+    "dog_follow": 0,
+    "dog_lead": "none",
+    "anna_to": 0,
+    "anna_at": 0,
+    "walk_to": 0.1,
+    "gurov_at": 0.1,
+    "under": 0,
+    "anna_here": false,
+    "diderits_here": false,
+    "maid_here": false,
+    "cabman_here": false,
+    "gurov_a": -3.45,
+    "gurov_d": 6.3,
+    "gurov_turn": 0,
+    "gurov_mood": "tired",
+    "spitz_here": 0,
+    "spitz_a": 2.85,
+    "spitz_d": 12.15,
+    "spitz_e": 0,
+    "spitz_view": "side",
+    "spitz_dir": 1,
+    "spitz_do": "stand",
+    "spitz_old": 1,
+    "leash": "none"
+  },
+  "states": {
+    "hour": {
+      "range": [
+        0.3,
+        0.85
+      ],
+      "means": "the hour, set at a cut: 0.36 a morning, 0.5 a grey day, 0.78–0.8 dusk"
+    },
+    "season": {
+      "values": [
+        "autumn",
+        "winter",
+        "thaw"
+      ],
+      "means": "the season, set at a cut: the ground, the street, the fence’s top, the roofs, the trees"
+    },
+    "dusk": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the dusk’s light (a look)"
+    },
+    "morning": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "a morning’s light (a look)"
+    },
+    "sunset": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "the low sun’s light at dusk, from ahead-right (toward the station)"
+    },
+    "lamp": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the lantern on the gate: lit 1"
+    },
+    "window": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "her window upstairs: 1 lit, 0 dark"
+    },
+    "snow": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "how much snow is falling"
+    },
+    "wet_k": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "how much the wet street mirrors (the thaw, the autumn mud)"
+    },
+    "wind": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "autumn leaves blown along the street"
+    },
+    "gate": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the gate: 0 shut, 1 open into the yard"
+    },
+    "gate_f": {
+      "range": [
+        92,
+        180
+      ],
+      "smooth": true,
+      "means": "the gate leaf’s turn, degrees (set by the scene from gate)"
+    },
+    "far_train": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "a lit train along the far bank: 0 off on the left, 1 gone on the right"
+    },
+    "far_train_a": {
+      "range": [
+        -260,
+        330
+      ],
+      "smooth": true,
+      "means": "where the far train is along the bank, m (set by the scene from far_train)"
+    },
+    "inkwell": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the close-up of the inkstand (the hotel in S.): 1 open"
+    },
+    "cab": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the cab waiting on the road (the morning she goes)"
+    },
+    "dog_follow": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the spitz follows whoever leads it (dog_lead), keeping ahead of them (the scene’s)"
+    },
+    "dog_lead": {
+      "values": [
+        "none",
+        "anna",
+        "maid",
+        "diderits"
+      ],
+      "means": "who leads the spitz (the scene’s)"
+    },
+    "anna_to": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "where the leash draws Anna (set by the game in “The leash”): 0 the gate, 1 the fence’s end; she walks there — toward the end pulled along (pulled_walk), the spitz ahead"
+    },
+    "anna_at": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "where Anna is along the fence (set by the scene): 0 the gate, 1 the fence’s end"
+    },
+    "walk_to": {
+      "range": [
+        0,
+        1
+      ],
+      "means": "where Gurov walks along the fence (set by the game in “By the fence”): the places 0.1, 0.3, 0.5, 0.6, 0.85"
+    },
+    "gurov_at": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "where Gurov is along the fence (set by the scene): 0 fence#left … 1 fence#right; her window over 0.6"
+    },
+    "under": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "he waited it out under her window (set by the game after “By the fence”; read by gate_open)"
+    },
+    "beat": {
+      "type": "string",
+      "means": "the beat of the film the scene plays (set by the game); one set plays from its beginning"
+    },
+    "beat_next": {
+      "type": "string",
+      "means": "the beat whose cut is made ready ahead (set by the game; the module beats)"
+    },
+    "spring": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play’s key: 1 — the thaw (gate_leave, its two ends, fence_end), 0 — snow"
+    },
+    "talk": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play’s key: the maid saw Gurov — in leave_lie the husband stays at the gate looking after her; leave_truth:still is told only at 1"
+    },
+    "husband_knows": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play’s key: fence_end — 1 he stands at the gate with the spitz, her window dark; 0 he walks the spitz along the fence"
+    },
+    "dog_pat": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the play’s key: corner_hide — 1 the spitz remembers him and strains toward the corner"
+    },
+    "spitz_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "smooth": true,
+      "means": "where the spitz is across, m"
+    },
+    "spitz_d": {
+      "range": [
+        -3,
+        16
+      ],
+      "smooth": true,
+      "means": "where the spitz is ahead, m"
+    },
+    "spitz_e": {
+      "range": [
+        0,
+        1
+      ],
+      "smooth": true,
+      "means": "the spitz’s height over the ground, m"
+    },
+    "spitz_view": {
+      "values": [
+        "side",
+        "back",
+        "front3q"
+      ],
+      "means": "the spitz’s view"
+    },
+    "spitz_dir": {
+      "values": [
+        -1,
+        1
+      ],
+      "means": "the spitz faces right (1) or left (−1)"
+    },
+    "spitz_do": {
+      "values": [
+        "stand",
+        "sit",
+        "lie",
+        "trot",
+        "run",
+        "growl",
+        "bark",
+        "up",
+        "sniff"
+      ],
+      "means": "what the spitz does"
+    },
+    "spitz_look": {
+      "type": "string",
+      "means": "the point the spitz looks toward, or null"
+    },
+    "spitz_here": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the spitz is here"
+    },
+    "spitz_old": {
+      "values": [
+        0,
+        1
+      ],
+      "means": "the spitz is old (winter, years after Yalta)"
+    },
+    "leash": {
+      "type": "string",
+      "means": "the hand holding the leash (anna#hand_l, maid#hand_r, diderits#hand_r) or none"
+    },
+    "anna_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "smooth": true,
+      "means": "where Anna is across the street, m"
+    },
+    "anna_d": {
+      "range": [
+        -3,
+        16
+      ],
+      "smooth": true,
+      "means": "where Anna is ahead, m (the fence’s face at 7, the yard behind it, the porch 13.4)"
+    },
+    "anna_mood": {
+      "type": "string",
+      "means": "Anna’s face"
+    },
+    "gurov_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "smooth": true,
+      "means": "where Gurov is across the street, m"
+    },
+    "gurov_d": {
+      "range": [
+        -3,
+        16
+      ],
+      "smooth": true,
+      "means": "where Gurov is ahead, m (the fence’s face at 7, the yard behind it, the porch 13.4)"
+    },
+    "gurov_mood": {
+      "type": "string",
+      "means": "Gurov’s face"
+    },
+    "diderits_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "smooth": true,
+      "means": "where von Diderits is across the street, m"
+    },
+    "diderits_d": {
+      "range": [
+        -3,
+        16
+      ],
+      "smooth": true,
+      "means": "where von Diderits is ahead, m (the fence’s face at 7, the yard behind it, the porch 13.4)"
+    },
+    "diderits_mood": {
+      "type": "string",
+      "means": "von Diderits’s face"
+    },
+    "maid_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "smooth": true,
+      "means": "where the maid is across the street, m"
+    },
+    "maid_d": {
+      "range": [
+        -3,
+        16
+      ],
+      "smooth": true,
+      "means": "where the maid is ahead, m (the fence’s face at 7, the yard behind it, the porch 13.4)"
+    },
+    "maid_mood": {
+      "type": "string",
+      "means": "the maid’s face"
+    },
+    "cabman_a": {
+      "range": [
+        -20,
+        20
+      ],
+      "smooth": true,
+      "means": "where the cabman is across the street, m"
+    },
+    "cabman_d": {
+      "range": [
+        -3,
+        16
+      ],
+      "smooth": true,
+      "means": "where the cabman is ahead, m (the fence’s face at 7, the yard behind it, the porch 13.4)"
+    },
+    "cabman_mood": {
+      "type": "string",
+      "means": "the cabman’s face"
+    }
+  },
+  "music": {
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "bpm": 60,
+    "density": 0.2,
+    "brightness": 0.3,
+    "prompts": [
+      {
+        "text": "grey provincial winter ambient, very quiet sustained strings, emptiness and waiting",
+        "weight": 1.0
+      },
+      {
+        "text": "low solo cello, slow, a long grey fence and a man who cannot leave",
+        "weight": 0.7
+      },
+      {
+        "text": "wind over snowy fields, a faint distant drone, almost no melody",
+        "weight": 0.6
+      },
+      {
+        "text": "muted viola and clarinet, autumn dusk in a small Russian town, longing",
+        "weight": 0.4
+      },
+      {
+        "text": "soft bowed bass pulse, patience, absurdity, late nineteenth century",
+        "weight": 0.3
+      },
+      {
+        "text": "glass harmonica tones far apart, frost, a lit window",
+        "weight": 0
+      },
+      {
+        "text": "string quartet very slow chorale, restrained Russian late romantic",
+        "weight": 0
+      },
+      {
+        "text": "distant train whistle mood rendered by a low flute, melancholy",
+        "weight": 0
+      },
+      {
+        "text": "harp harmonics one at a time like dripping in a thaw",
+        "weight": 0
+      },
+      {
+        "text": "warm tape-saturated ambient, grey and nostalgic",
+        "weight": 0
+      },
+      {
+        "text": "minimal drone in F minor with slow swells, dusk",
+        "weight": 0
+      },
+      {
+        "text": "solo oboe, unaccompanied, far away, a woman walking a small dog",
+        "weight": 0
+      },
+      {
+        "text": "tremolo strings pianissimo, a secret at a gate",
+        "weight": 0
+      },
+      {
+        "text": "bowed vibraphone, overlapping soft tones, a cold morning",
+        "weight": 0
+      },
+      {
+        "text": "muted horn single long note across fields, autumn",
+        "weight": 0
+      },
+      {
+        "text": "sparse low bassoon and cello duet, grey day",
+        "weight": 0
+      }
+    ]
+  }
+}
