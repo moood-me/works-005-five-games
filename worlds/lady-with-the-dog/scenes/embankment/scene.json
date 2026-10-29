@@ -853,10 +853,10 @@
       "facing": 180,
       "height": 2,
       "box": [
-        -1.7,
-        -2.05,
-        1.7,
-        0.02
+        -1.9,
+        -2.1,
+        1.9,
+        0.17
       ],
       "shadow": true
     },
@@ -1502,13 +1502,13 @@
     "glass": 0,
     "wind": 0,
     "lamps": 0,
-    "steamer": 1,
+    "steamer": 0,
     "steamer_lit": 0,
     "smoke": 0.35,
     "crowd": 0,
     "pass": 0,
     "look_at": "",
-    "stranger_turn": 180,
+    "stranger_turned": 0,
     "surge": 0,
     "spitz_near": 0,
     "hand": 0,
@@ -1620,6 +1620,7 @@
       "valise"
     ],
     "stranger_here": false,
+    "stranger_turn": 180,
     "stranger_do": "stand",
     "stranger_look": null,
     "stranger_reach": null,
@@ -1681,9 +1682,9 @@
     "camera_look": 0,
     "anna_a": -6.5,
     "anna_d": 7.5,
-    "steamer_a": -32,
-    "steamer_d": 30.200000000000003,
-    "steamer_f": 180,
+    "steamer_a": -420,
+    "steamer_d": 900,
+    "steamer_f": 250,
     "gurov_a": 64.3,
     "gurov_d": -12,
     "waiter_a": 65.69999999999999,
@@ -1868,7 +1869,7 @@
       "type": "string",
       "means": "the arrival looked at hard through the lorgnette: he stops a moment and turns his head; '' — no one"
     },
-    "stranger_turn": {
+    "stranger_turned": {
       "values": [
         0,
         1
@@ -2010,8 +2011,7 @@
       "means": "what the Pomeranian does"
     },
     "spitz_look": {
-      "type": "string",
-      "means": "the point the Pomeranian looks at, or null"
+      "means": "the point the Pomeranian looks at (a point name, or [across, distance, elevation]), or null"
     },
     "spitz_here": {
       "values": [

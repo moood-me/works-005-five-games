@@ -1,7 +1,7 @@
 // The sea-front at Yalta: the scene's mechanics. The hour's light follows `hour` (the world's sky); its film in beats
 // (lib.js film(scene), played by the world's module beats: the game sets `beat`, the scene tells `beat:<name>`). What
 // the game moves is kept here: the steamer by `steamer`; the dog by `spitz_near` and Gurov's hand by `hand` («Coax»);
-// the arrivals down the gangway by `pass`, `look_at`, `stranger_turn`; the crowd by `surge`; the walkers in the avenue,
+// the arrivals down the gangway by `pass`, `look_at`, `stranger_turned`; the crowd by `surge`; the walkers in the avenue,
 // `watched`, `seen`, `kiss_now` («Looking round»).
 const L = scene.lib;
 scene.kit.sky.follow(scene);
@@ -33,7 +33,7 @@ keep(['hand'], () => {
 
 // ── «Lorgnette»: `pass` lets the arrivals down the gangway one by one, in order; each stops below, met, and goes on
 // up the pier when two more have come down. The stooping man stops at the gangway's foot, his back to us, says so and
-// waits for `stranger_turn`: then he turns to his lady, she takes his arm, they go. `look_at` — the one looked at
+// waits for `stranger_turned`: then he turns to his lady, she takes his arm, they go. `look_at` — the one looked at
 // stops a moment and turns his head (in profile) ──
 let led = 0;
 const walks = {};                               // id → the sequence leading them
@@ -48,7 +48,7 @@ function arrive(i) {
       await man.walk([[L.GANG.x, L.GANG.z1 - 0.1], L.FOOT]);
       await man.turn(335);
       s.tell('gangway:stranger');
-      await s.until(() => Number(s.state.stranger_turn) > 0.5);
+      await s.until(() => Number(s.state.stranger_turned) > 0.5);
       man.look('stranger_lady');
       await man.turn(250);
       lady.look('stranger');

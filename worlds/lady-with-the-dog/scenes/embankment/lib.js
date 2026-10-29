@@ -338,13 +338,13 @@ const CAM = {
                                             // the bright front, small, the lady goes off to the left
   GARDEN: cam(22.85, 0.5, 1.6, 0, -6),      // the gardens: the two at their tables side by side, 3.9 m off — a third of
                                             // the frame sitting; the dog between them; the evening sea behind
-  TALK: cam(22.85, 2.3, 1.25, 0),           // closer, medium: both in three-quarters, talking across the gap
+  TALK: cam(22.85, 2.2, 1.5, 0, -7),        // closer, medium: both in three-quarters, talking across the gap
   QUAY: cam(1.5, 2.8, 1.6, 0),              // side on along the parapet: those walking cross the frame ≈ 4.7 m off
   PIER: cam(-30.4, 12.0, 1.7, -6),          // on the pier's neck looking out: the two near, the crowd on the head, the steamer
   GANGWAY: cam(-31.7, 19.6, 1.55, -25),     // over Anna's shoulder to the gangway's foot (5.4 m): the arrivals a third
-  KISS: cam(-37.25, 22.9, 1.5, 0),          // the end of the pier at dusk, side on, 1.8 m: the two in profile, the steamer's lights
+  KISS: cam(-37.25, 22.1, 1.6, 0, -3),      // the end of the pier at dusk, side on, 2.6 m: the two in profile, the steamer's lights
   GO: cam(-28.9, 17.2, 1.6, -32),           // from the neck, the pier's head across the frame: they go back to the shore
-  ALLEY: cam(ALLEY_X, -4.6, 1.6, 0),        // the avenue along: the seat in the middle third, the walkers coming and going
+  ALLEY: cam(ALLEY_X, -3.4, 1.6, 0),        // the avenue along: the seat in the middle third, the walkers coming and going
 };
 const facingTo = c => 180 + c.camera_yaw;   // a card kept toward a shot (the dog: its `spitz_face`)
 
@@ -391,8 +391,8 @@ function film(scene) {
   // every key every beat begins from — nobody here, the noon light — and what the beat says over it
   const base = (h, extra) => {
     const v = {
-      ...hourOf(h), glare: 0, glass: 0, wind: 0, lamps: 0, steamer: 1, steamer_lit: 0, smoke: 0.35, crowd: 0,
-      pass: 0, look_at: '', stranger_turn: 0, surge: 0, spitz_near: 0, hand: 0, watched: 0, seen: 0, kiss_now: 0,
+      ...hourOf(h), glare: 0, glass: 0, wind: 0, lamps: 0, steamer: 0, steamer_lit: 0, smoke: 0.35, crowd: 0,
+      pass: 0, look_at: '', stranger_turned: 0, surge: 0, spitz_near: 0, hand: 0, watched: 0, seen: 0, kiss_now: 0,
       spitz_here: 1, spitz_a: 0, spitz_d: 7.6, spitz_e: 0, spitz_view: 'side', spitz_do: 'stand', spitz_dir: 0,
       spitz_look: null, spitz_old: 0, leash: 'anna#hand_l', spitz_face: 180,
     };
@@ -708,7 +708,7 @@ function film(scene) {
     },
     // back on the pier: the crowd has surged off and thins; she stands without her lorgnette, he beside her
     lost: {
-      from: () => PIER_ON({ steamer: 1, crowd: 0.6, surge: 1, wind: 0.6, pass: 7, stranger_turn: 1,
+      from: () => PIER_ON({ steamer: 1, crowd: 0.6, surge: 1, wind: 0.6, pass: 7, stranger_turned: 1,
         anna_look: [-27, 13, 1.5], anna_mood: 'afraid', spitz_do: 'stand', ...LEAVING() }),
       run: async s => {
         const anna = s.person('anna');
@@ -730,7 +730,7 @@ function film(scene) {
     // frightened; 0 — he turns to her, they embrace. He looks back over his shoulder — his face in profile
     kiss: {
       after: 'lost',
-      from: () => base(0.83, { ...CAM.KISS, lamps: 1, steamer_lit: 1, wind: 0.3, crowd: 0, surge: 1, pass: 7, stranger_turn: 1,
+      from: () => base(0.83, { ...CAM.KISS, steamer: 1, lamps: 1, steamer_lit: 1, wind: 0.3, crowd: 0, surge: 1, pass: 7, stranger_turned: 1,
         anna_here: true, ...at('anna', [-37.7, 24.75]), anna_turn: 95, gurov_here: true, ...at('gurov', [-36.75, 24.7]), gurov_turn: 300,
         gurov_look: [-33, 21, 1.4], ...at('spitz', [-38.6, 24.2]), spitz_do: 'sit', spitz_look: 'anna', spitz_dir: 1 }),
       run: async s => {
@@ -764,7 +764,7 @@ function film(scene) {
     // they go back along the pier to the shore, across the frame (he at her pace); the dog runs ahead
     go: {
       after: 'kiss',
-      from: () => base(0.85, { ...CAM.GO, lamps: 1, steamer_lit: 1, crowd: 0,
+      from: () => base(0.85, { ...CAM.GO, steamer: 1, lamps: 1, steamer_lit: 1, crowd: 0,
         anna_here: true, ...at('anna', [-37.0, 24.3]), anna_turn: 105, gurov_here: true, ...at('gurov', [-37.3, 23.6]), gurov_turn: 105,
         gurov_gait: 'stroll', ...at('spitz', [-35.6, 24.0]), spitz_do: 'stand' }),
       run: async s => {
@@ -845,12 +845,12 @@ function film(scene) {
     next.cut();
   }
   function this_kiss() {
-    return { ...CAM.KISS, ...hourOf(0.83), lamps: 1, steamer_lit: 1, crowd: 0, wind: 0.3, ...GONE(),
+    return { ...CAM.KISS, ...hourOf(0.83), steamer: 1, lamps: 1, steamer_lit: 1, crowd: 0, wind: 0.3, ...GONE(),
       ...at('anna', [-37.7, 24.75]), anna_turn: 95, anna_with: null, anna_do: 'stand', anna_look: 'gurov', anna_reach: null,
       ...at('gurov', [-36.75, 24.7]), gurov_turn: 300, gurov_do: 'stand', gurov_look: [-33, 21, 1.4], gurov_reach: null,
       ...at('spitz', [-38.6, 24.2]), spitz_do: 'sit', spitz_look: 'anna', spitz_dir: 1, spitz_face: facingTo(CAM.KISS) };
   }
-  function this_go() { return { ...CAM.GO, spitz_face: facingTo(CAM.GO) }; }
+  function this_go() { return { ...CAM.GO, steamer: 1, spitz_face: facingTo(CAM.GO) }; }
 }
 
 return {

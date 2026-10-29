@@ -20,7 +20,7 @@ const after = {
         s.set('look_at', 'stranger');
         await s.wait(1.5);
         s.set('look_at', '');
-        s.set('stranger_turn', 1);
+        s.set('stranger_turned', 1);
       }
       await s.wait(3.5);
     }
