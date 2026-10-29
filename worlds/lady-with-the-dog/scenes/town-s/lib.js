@@ -104,7 +104,7 @@ const CAM = {
   LEAVE: cam(1.0, -1.0, 1.75, 32, 0),        // the morning: the gate, the yard through it, the cab on the road
   LEAVE_TWO: cam(4.7, 5.35, 1.6, 300, 0),    // the two at the gate side by side, three-quarter
   ANNA_FACE: cam(3.65, 5.3, 1.5, 305, 0),    // her face, past him
-  HIS_FACE: cam(3.45, 6.0, 1.82, 335, -4),     // his face close: he looks down and away, past her
+  HIS_FACE: cam(3.5, 5.95, 1.62, 333, 7),      // his face close: he looks down and away, past her
   YARD: cam(1.8, 8.4, 1.6, 12, -3),          // in the yard toward the porch
   PORCH: cam(5.6, 14.0, 1.7, 218, -2),       // from beside the porch back toward the gate and the street
 };
@@ -468,7 +468,7 @@ function film(scene) {
         d.mood('sad');
         d.look('anna');
         if (on('talk')) { s.tell('leave_truth:still'); await s.wait(2.2); }
-        d.look([4.2, 5.6, 0.4]);
+        d.look([4.6, 5.3, 1.15]);
         s.tell('leave_truth:answer');
         await s.wait(4.5);
         const porch = s.shot({ ...CAM.PORCH });
