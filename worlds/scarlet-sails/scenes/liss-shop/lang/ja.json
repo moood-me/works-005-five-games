@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"A Shop in Liss","translation":"リスの店","where":"worlds/scarlet-sails/scenes/liss-shop/scene.json title"},
+  {"text":"Morning in the shop.","translation":"店の朝。","where":"worlds/scarlet-sails/scenes/liss-shop/scene.json caption"}
+]}

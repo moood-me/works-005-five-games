@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Grays' Castle","translation":"グレイ家の城","where":"worlds/scarlet-sails/scenes/gray-castle/scene.json title"},
+  {"text":"Everything here is ordained for ever.","translation":"ここでは何もかもが永遠に定められている。","where":"worlds/scarlet-sails/scenes/gray-castle/scene.json caption"}
+]}
