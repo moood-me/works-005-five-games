@@ -1,13 +1,15 @@
 // The sounds of “The Elder Son”, made in the page (Web Audio): nothing to load; as loud as the page's "sounds" slider
 // says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first touch), and waits
-// with the play as the scene's music does — paused, its scene standing or being made ready —, fading out and back in.
+// with the scene's music — the play paused, its scene standing —, fading out and back in.
 // (game.md §8.)
-//   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
+//   unheard() → {sounds} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // One AudioContext → the master level → a compressor. Two airs a sound goes out into: the street's (open, dark, 1.5 s)
 // and the room's (a small room, 0.5 s).
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down), getting
 // there over `seconds`:
-//   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
+//   background(levels, seconds) — the named beds to their levels, every other one to silence: the game's background as
+//     the page sounds it (bespoke.onBackground — at a scene's cut with its music, or at once: the game declares it,
+//     g.beds and g.scene's beds, and never times it)
 //   wind — low wind in random gusts (ambience.js) · rails — the far railway: every 20–40 s
 //   far wheels (“ta-ta, ta-ta”), now and then a far horn · train — the electric train close by: the motor's hum, the
 //   wheels on the joints · freight — the goods train: heavier, faster wheels, the screech, the diesel · crossing — the
@@ -400,7 +402,7 @@ export function crowd(level = 1, seconds = 2) { bed('crowd', 0.05, 'street', rec
 export function pour(level = 1, seconds = 2) { bed('pour', 0.05, 'street', recorded(['pour-627625.mp3'], 8.0), level, seconds); }
 
 const BEDS = { wind, rails, train, freight, crossing, room, clock, fire, crowd, pour };
-export function beds(levels = {}, seconds = 2) {
+export function background(levels, seconds) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }
 
@@ -669,21 +671,18 @@ export function march() {
   return handle(out, 0.5, () => { clearInterval(timer); for (const n of nodes) n.stop(); });
 }
 
-// the sounds of a step played unseen (jump.js): nothing heard meanwhile — the beds heard from then on as loud as the
-// step left them; what was played once is over by then, and a handle begun meanwhile is mute
+// the sounds of a step played unseen (jump.js): nothing heard meanwhile — what was played once is over by then, and a
+// handle begun meanwhile is mute (the background the step declared is the jump's: j.background)
 export function unheard() {
-  const levels = {}, none = () => {}, mute = () => ({ loud() {}, stop() {} });
-  const bedOf = name => (level = 1) => { levels[name] = level; };
+  const none = () => {}, mute = () => ({ loud() {}, stop() {} });
   return {
     sounds: {
-      beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
-      wind: bedOf('wind'), rails: bedOf('rails'), train: bedOf('train'), freight: bedOf('freight'), crossing: bedOf('crossing'),
-      room: bedOf('room'), clock: bedOf('clock'), fire: bedOf('fire'), crowd: bedOf('crowd'), pour: bedOf('pour'),
+      wind: none, rails: none, train: none, freight: none, crossing: none,
+      room: none, clock: none, fire: none, crowd: none, pour: none,
       march: mute,
       horn: none, doors: none, knock: none, dog: none, door: none, creak: none, cough: none, tick: none, strike: none,
       rub: none, spill: none, box: none, glass: none, splash: none, crunch: none, thud: none, scrape: none,
       clarinet: mute, dance: none,
     },
-    wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); },
   };
 }

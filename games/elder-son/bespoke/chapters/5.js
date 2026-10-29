@@ -24,9 +24,8 @@ export default {
     // the porch at night: Nina, and his own father
     async g => {
       const f = facts(g.state);
-      g.beds({ wind: 0.3 });
       const sat = g.told('porch_night:sat');
-      await g.scene(SCENES.street, { beat: 'porch_night' });
+      await g.scene(SCENES.street, { beat: 'porch_night' }, { beds: { wind: 0.3 } });
       const porch = g.beat('porch_night');
       await sat;
       if (f.secret) {
@@ -45,9 +44,8 @@ export default {
     },
     // the suitcase «to your mother»: ⚑ the truth — his own, or Silva's
     async g => {
-      g.beds({ room: 0.3, clock: 0.5 });
       const suitcase = g.told('pack:case'), silva = g.told('pack:silva');
-      await g.scene(SCENES.home, { beat: 'pack' });
+      await g.scene(SCENES.home, { beat: 'pack' }, { beds: { room: 0.3, clock: 0.5 } });
       const pack = g.beat('pack');
       await g.say('silva', 'That\'s it, sonny. The show\'s over. We can still make the last one');
       await suitcase;
@@ -86,15 +84,13 @@ export default {
     // the run to the last train; at its open door — ⚑ get in, or stay
     async g => {
       const f = facts(g.state);
-      g.beds({ wind: 0.5 });
-      await g.scene(SCENES.street, { beat: 'run_out' }, { cut: true });
+      await g.scene(SCENES.street, { beat: 'run_out' }, { cut: true, beds: { wind: 0.5 } });
       await g.beat('run_out');
       const r = await g.play(running);
       g.set('run', 1);
       g.set('look_back', 0);
-      g.beds({ wind: 0.5, train: 0.6 }, 1);
       const open = g.told('last:open'), came = g.told('last:came');
-      await g.scene(SCENES.platform, { beat: 'last', late_run: r.looks >= 2 ? 1 : 0 }, { cut: true });
+      await g.scene(SCENES.platform, { beat: 'last', late_run: r.looks >= 2 ? 1 : 0 }, { cut: true, beds: { wind: 0.5, train: 0.6 } });
       const last = g.beat('last');
       await open;
       g.sound.doors();
@@ -111,7 +107,7 @@ export default {
       });
       g.apply('train');
       if (train === 'stay') {
-        on(g, 'stays:gone', () => g.beds({ wind: 0.4 }, 4));
+        on(g, 'stays:gone', () => g.beds({ wind: 0.4 }));
         await g.beat('stays');
       } else {
         const box = g.told('boards:box');
@@ -125,7 +121,7 @@ export default {
         g.set('wipe', Math.max(w.wipe, 0.3)); // (as much seen as he wiped)
         const wave = g.told('away:wave');
         const away = g.beat('away');
-        g.beds({ train: 0.8 }, 2);
+        g.beds({ train: 0.8 });
         await wave;
         if (f.told === 'self' && f.fatherCame) await g.say('sarafanov', 'Come on Saturday! Do you hear? On Saturday!');
         await away;
@@ -135,10 +131,9 @@ export default {
     async g => {
       const f = facts(g.state);
       if (f.train !== 'stay') return;
-      g.beds({ room: 0.4, clock: 0.5 });
       if (f.told === 'self') {
         const sat = g.told('home_late:sat'), box = g.told('home_late:box'), room = g.told('home_late:room');
-        await g.scene(SCENES.home, { beat: 'home_late' });
+        await g.scene(SCENES.home, { beat: 'home_late' }, { beds: { room: 0.4, clock: 0.5 } });
         const home = g.beat('home_late');
         await sat;
         await g.say('busygin', 'I\'ve missed the train');
@@ -155,7 +150,7 @@ export default {
         await home;
       } else {
         const turn = g.told('home_anyway:turn');
-        await g.scene(SCENES.home, { beat: 'home_anyway' });
+        await g.scene(SCENES.home, { beat: 'home_anyway' }, { beds: { room: 0.4, clock: 0.5 } });
         const home = g.beat('home_anyway');
         await turn;
         await g.say('sarafanov', 'Tea?');

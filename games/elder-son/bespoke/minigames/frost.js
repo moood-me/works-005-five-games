@@ -23,7 +23,7 @@ export default {
     const send = keys(g);
     const h = () => b.frame()?.h || 600;
     let train = null;
-    signal.addEventListener('abort', () => { train?.cancel?.(); g.beds({ clock: 0.4, rails: 0.3 }, 2); });
+    signal.addEventListener('abort', () => { train?.cancel?.(); g.beds({ clock: 0.4, rails: 0.3 }); });
     const pane = mg.mark({ at: 'window#pane', kind: 'spot' });
     let rub = mg.rub({ on: pane, full: 0.85 });
     // (watching is a way: the finger is shown at the first meeting with this frost — rubbing met in “Hands” says nothing of
@@ -54,7 +54,7 @@ export default {
         train = b.act('state', 'move', 'far_train', 1, { over: TRAIN });
         Promise.resolve(train).then(() => { gone = true; });
         g.sound.horn(0.3);
-        g.beds({ clock: 0.4, rails: 0.3, train: 0.25 }, 2);
+        g.beds({ clock: 0.4, rails: 0.3, train: 0.25 });
       }
       mg.plate.set({ fill: hole, glow: moving ? 'good' : 'idle' });
       return gone;

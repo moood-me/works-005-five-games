@@ -18,9 +18,8 @@ export default {
   steps: [
     // the street at night: knock where the light is still on
     async g => {
-      g.beds({ wind: 0.5 });
       const stop = g.told('walk:stop');
-      await g.scene(SCENES.street, { beat: 'walk' }, { cut: true });
+      await g.scene(SCENES.street, { beat: 'walk' }, { cut: true, beds: { wind: 0.5 } });
       const walk = g.beat('walk');
       await stop; // (they stop, the lit windows before them)
       await g.say('silva', 'We knock wherever there\'s a light. Someone\'s bound to let us in');
@@ -44,11 +43,10 @@ export default {
     },
     // at the corner Sarafanov at Makarskaya's window; at his own door — ⚑ how to get in
     async g => {
-      g.beds({ wind: 0.5 });
       on(g, 'neighbor:knock', () => g.sound.knock());
       on(g, 'neighbor:vasya', () => g.sound.door());
       const answer = g.told('neighbor:answer');
-      await g.scene(SCENES.street, { beat: 'neighbor' }, { cut: true });
+      await g.scene(SCENES.street, { beat: 'neighbor' }, { cut: true, beds: { wind: 0.5 } });
       const neighbor = g.beat('neighbor');
       await answer;
       await g.say('sarafanov', 'Natalya… Is Vasenka with you? Forgive me, for heaven\'s sake');
@@ -91,8 +89,7 @@ export default {
     },
     // hands at the open stove door
     async g => {
-      g.beds({ room: 0.4, clock: 0.3 });
-      await g.scene(SCENES.home, { beat: 'kitchen' }, { cut: true });
+      await g.scene(SCENES.home, { beat: 'kitchen' }, { cut: true, beds: { room: 0.4, clock: 0.3 } });
       g.sound.door();
       await g.beat('kitchen');
       await g.play(hands);
@@ -107,13 +104,11 @@ export default {
     },
     // Sarafanov comes home: “My son…?”
     async g => {
-      g.beds({ wind: 0.4 });
       on(g, 'return:door', () => g.sound.door());
-      await g.scene(SCENES.street, { beat: 'return' });
+      await g.scene(SCENES.street, { beat: 'return' }, { beds: { wind: 0.4 } });
       await g.beat('return');
-      g.beds({ room: 0.4, clock: 0.5 }, 1);
       const inside = g.told('enter:in'), near = g.told('enter:near');
-      await g.scene(SCENES.home, { beat: 'enter' }, { cut: true });
+      await g.scene(SCENES.home, { beat: 'enter' }, { cut: true, beds: { room: 0.4, clock: 0.5 } });
       const enter = g.beat('enter');
       await inside;
       await g.say('silva', 'Andrei Grigorievich! Don\'t you recognise him? It\'s your son');

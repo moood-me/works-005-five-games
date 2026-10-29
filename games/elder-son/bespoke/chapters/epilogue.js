@@ -15,9 +15,8 @@ export default {
     // the window at the end of the street
     async g => {
       const f = facts(g.state);
-      g.beds({ wind: 0.4, rails: 0.2 });
       const held = g.told('night_window:held');
-      await g.scene(SCENES.street, { beat: 'night_window' });
+      await g.scene(SCENES.street, { beat: 'night_window' }, { beds: { wind: 0.4, rails: 0.2 } });
       const window = g.beat('night_window');
       await held;
       // later — he stayed and someone came for him, where the house was not yet warm (much untruth, or only the truth
@@ -34,13 +33,12 @@ export default {
     },
     // the platform at dawn: the first train
     async g => {
-      g.beds({ wind: 0.2, train: 0.6 }, 2);
       on(g, 'dawn:pass', () => g.sound.horn(0.8));
       on(g, 'dawn:open', () => g.sound.doors());
       on(g, 'dawn:shut', () => g.sound.doors());
-      await g.scene(SCENES.platform, { beat: 'dawn' });
+      await g.scene(SCENES.platform, { beat: 'dawn' }, { beds: { wind: 0.2, train: 0.6 } });
       await g.beat('dawn');
-      g.beds({ wind: 0.2 }, 6);
+      g.beds({ wind: 0.2 });
     },
   ],
 };

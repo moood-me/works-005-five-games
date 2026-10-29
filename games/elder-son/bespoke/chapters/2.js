@@ -22,17 +22,15 @@ export default {
   steps: [
     // Nina and the cadet at the gate; inside — «your brother»
     async g => {
-      g.beds({ wind: 0.3 });
       const watch = g.told('gate:watch');
-      await g.scene(SCENES.street, { beat: 'gate' });
+      await g.scene(SCENES.street, { beat: 'gate' }, { beds: { wind: 0.3 } });
       const gate = g.beat('gate');
       await watch;
       await g.say('kudimov', 'Zero-zero-fifty. I have to be in barracks by one');
       await g.say('nina', 'Go on, Misha. You\'ll be late');
       await gate;
-      g.beds({ room: 0.4, clock: 0.4 }, 1);
       const door = g.told('nina_in:door');
-      await g.scene(SCENES.home, { beat: 'nina_in' }, { cut: true });
+      await g.scene(SCENES.home, { beat: 'nina_in' }, { cut: true, beds: { room: 0.4, clock: 0.4 } });
       const nina = g.beat('nina_in');
       await door;
       await g.say('sarafanov', 'Nina! This is Volodya. Your brother');
@@ -41,9 +39,8 @@ export default {
     },
     // supper: a toast, the glasses
     async g => {
-      g.beds({ room: 0.4, clock: 0.3 });
       const toast = g.told('supper:toast');
-      await g.scene(SCENES.home, { beat: 'supper' });
+      await g.scene(SCENES.home, { beat: 'supper' }, { beds: { room: 0.4, clock: 0.3 } });
       const supper = g.beat('supper');
       await toast;
       await g.say('sarafanov', 'All men are brothers!');
@@ -56,8 +53,7 @@ export default {
     },
     // tea, and the question that spills over: ~ what to say of Galya
     async g => {
-      g.beds({ room: 0.3, clock: 0.5 });
-      await g.scene(SCENES.home, { beat: 'talk' });
+      await g.scene(SCENES.home, { beat: 'talk' }, { beds: { room: 0.3, clock: 0.5 } });
       const talk = g.beat('talk');
       await g.say('sarafanov', 'Galya Busygina… I wrote to her. She never answered');
       await talk;
@@ -84,9 +80,8 @@ export default {
     },
     // the snuffbox, always the elder son's: ⚑ take it or not
     async g => {
-      g.beds({ room: 0.3, clock: 0.5 });
       const down = g.told('box_out:down');
-      await g.scene(SCENES.home, { beat: 'box_out' }, { cut: true });
+      await g.scene(SCENES.home, { beat: 'box_out' }, { cut: true, beds: { room: 0.3, clock: 0.5 } });
       const out = g.beat('box_out');
       await down;
       await g.say('sarafanov', 'My grandfather\'s snuffbox. It always went to the elder son');
@@ -119,12 +114,11 @@ export default {
     },
     // the clarinet behind the wall: the same place, and no further
     async g => {
-      g.beds({ clock: 0.25 });
       let c = null; // the clarinet's handle: stopped at the step's end (dawn comes), on the step left
       g.signal.addEventListener('abort', () => c?.stop(0.3));
       on(g, 'wall:dark', () => { c = g.sound.clarinet({ times: 2 }); });
       const turn = g.told('wall:turn');
-      await g.scene(SCENES.home, { beat: 'wall' });
+      await g.scene(SCENES.home, { beat: 'wall' }, { beds: { clock: 0.25 } });
       const wall = g.beat('wall');
       await g.say('silva', 'I\'ve got a dad too. In Chita. Writes once a year — asking for money', 'silva');
       await turn;
@@ -134,9 +128,8 @@ export default {
     },
     // dawn: ⚑ slip away with Silva, or stay
     async g => {
-      g.beds({ clock: 0.4, rails: 0.3 });
       const up = g.told('wake:up');
-      await g.scene(SCENES.home, { beat: 'wake' });
+      await g.scene(SCENES.home, { beat: 'wake' }, { beds: { clock: 0.4, rails: 0.3 } });
       const wake = g.beat('wake');
       await up;
       await g.say('silva', 'Rise and shine. The first one\'s at six-oh-five. We\'ll slip out quietly');
@@ -148,7 +141,7 @@ export default {
       g.apply('dawn');
       if (dawn === 'leave') {
         await g.beat('sneak');
-        g.beds({ rails: 0.3 }, 1); // (the clock ticks in the minigame itself)
+        g.beds({ rails: 0.3 }); // (the clock ticks in the minigame itself)
         g.set('beat_next', 'caught');
         const r = await g.play(tiptoe);
         g.set('sneak', 1);
@@ -156,7 +149,7 @@ export default {
         g.set('heard', r.creaks > 0 ? 1 : 0);
         g.set('beat_next', null); // (made ready again, by the keys of how it went: the same name set again is no change)
         g.set('beat_next', 'caught');
-        g.beds({ clock: 0.4, rails: 0.3 }, 1);
+        g.beds({ clock: 0.4, rails: 0.3 });
         const face = g.told('caught:face'), hook = g.told('caught:hook');
         on(g, 'caught:out', () => g.sound.door());
         const caught = g.beat('caught');
@@ -174,7 +167,7 @@ export default {
         const r = await g.play(frost);
         g.set('far_train', 1);
         g.set('hole', Math.max(r.hole, 0.4));
-        g.beds({ clock: 0.4, rails: 0.3 }, 1);
+        g.beds({ clock: 0.4, rails: 0.3 });
         const inside = g.told('morning:in');
         on(g, 'morning:out', () => g.sound.door());
         const morning = g.beat('morning');

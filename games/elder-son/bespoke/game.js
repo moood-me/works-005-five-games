@@ -34,7 +34,7 @@
 import { ENDINGS, SCALES, SCENES, context, facts, listen } from './story.js';
 import { ui } from './ui.js';
 import { trees } from './map.js';
-import { beds, unheard } from './sound.js';
+import { background, unheard } from './sound.js';
 import { jump as unseen } from './jump.js';
 import prologue from './chapters/prologue.js';
 import one from './chapters/1.js';
@@ -80,6 +80,8 @@ export default async function (b) {
     colors: { mark: '#e3e9f0', fill: '#e3e9f0', good: '#ffffff', danger: '#e0303c', fork: '#b8c3cf', ghost: '#e3e9f0' },
   });
   const hub = listen(b);
+  // (the game's background — its beds of sound — as the page sounds it: at a scene's cut with its music, or at once)
+  b.onBackground(background);
   const view = ui(b.layer);
   // (the page is heard only after a touch: a chapter that begins without the map does so only once there was one —
   // not on a page reloaded where the chapter before had just ended)
@@ -218,10 +220,9 @@ export default async function (b) {
     // (nothing of the chapter said or shown stays over the map)
     b.hush();
     view.quiet();
-    beds({ wind: 0.2, rails: 0.4 }, 2);
     view.gauge(null);
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, END);
-    await b.show(SCENES.yard, { state: { shown: reveal ?? here }, captions: false });
+    await b.show(SCENES.yard, { state: { shown: reveal ?? here }, captions: false, background: { wind: 0.2, rails: 0.4 } });
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: !!author });
     const notice = replay?.done && anew() ? view.hint(tr('If you keep it, the chapters after this one will have to be played again.')) : () => {};
     let grown = reveal == null, asked = null; // (an option that would leave the replay: asked again)

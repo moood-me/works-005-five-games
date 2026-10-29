@@ -19,9 +19,8 @@ export default {
   steps: [
     // Vasenka on the bench, the train's open door, the strap
     async g => {
-      g.beds({ wind: 0.2, rails: 0.3 });
       const sit = g.told('bench:sit');
-      await g.scene(SCENES.platform, { beat: 'bench' });
+      await g.scene(SCENES.platform, { beat: 'bench' }, { beds: { wind: 0.2, rails: 0.3 } });
       const bench = g.beat('bench');
       await sit;
       await g.say('vasenka', 'Don\'t hold me back. I\'m going anyway');
@@ -29,7 +28,7 @@ export default {
       await bench;
       on(g, 'strap:open', () => g.sound.doors());
       const strap = g.beat('strap');
-      g.beds({ wind: 0.2, train: 0.6 }, 2);
+      g.beds({ wind: 0.2, train: 0.6 });
       await strap;
       const r = await g.play(rucksack);
       g.set('pull', 0);
@@ -38,17 +37,16 @@ export default {
       g.set('torn', r.slips >= 2 ? 1 : 0);
       const sat = g.told('bench_back:sat');
       const back = g.beat('bench_back');
-      g.beds({ wind: 0.2 }, 6);
+      g.beds({ wind: 0.2 });
       await sat;
       await g.say('vasenka', 'All right. Let\'s go and see the fiancé');
       await back;
     },
     // the bridegroom at nine: Sakhalin — ~ what the elder brother says
     async g => {
-      g.beds({ room: 0.4, clock: 0.4 });
       on(g, 'table:nine', () => g.sound.strike(9));
       const inside = g.told('table:in'), sat = g.told('table:sat');
-      await g.scene(SCENES.home, { beat: 'table' });
+      await g.scene(SCENES.home, { beat: 'table' }, { beds: { room: 0.4, clock: 0.4 } });
       const table = g.beat('table');
       await g.say('narrator', 'The fiancé was expected at nine');
       await inside;
@@ -97,13 +95,12 @@ export default {
     },
     // the shed on fire: the buckets; who did it — ⚑ take the blame, or let him own up
     async g => {
-      g.beds({ wind: 0.3 });
       on(g, 'evening:in', () => g.sound.door());
-      await g.scene(SCENES.street, { beat: 'evening' });
+      await g.scene(SCENES.street, { beat: 'evening' }, { beds: { wind: 0.3 } });
       await g.beat('evening');
       const cry = g.told('fire:cry');
       const fire = g.beat('fire');
-      g.beds({ wind: 0.3, fire: 0.6, crowd: 0.5 }, 2);
+      g.beds({ wind: 0.3, fire: 0.6, crowd: 0.5 });
       await cry;
       await g.say('makarskaya', 'Fire! The shed\'s on fire!');
       await fire;
@@ -114,7 +111,7 @@ export default {
       g.set('shed_left', r.buckets >= 3 ? 1 : 0);
       g.set('beat_next', null); // (made ready again, by the keys of how it went: the same name set again is no change)
       g.set('beat_next', 'after_fire');
-      g.beds({ wind: 0.3, crowd: 0.3 }, 3);
+      g.beds({ wind: 0.3, crowd: 0.3 });
       const who = g.told('after_fire:who');
       const after = g.beat('after_fire');
       await who;

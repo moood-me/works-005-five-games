@@ -19,10 +19,9 @@ export default {
   steps: [
     // the funeral band on the hillside, and their father in it
     async g => {
-      g.beds({ wind: 0.3 });
       let m = null; // the march's handle: stopped at its end, at the step's end, on the step left
       g.signal.addEventListener('abort', () => m?.stop(0));
-      await g.scene(SCENES.hill, { beat: 'road' });
+      await g.scene(SCENES.hill, { beat: 'road' }, { beds: { wind: 0.3 } });
       const road = g.beat('road');
       await g.say('narrator', 'In the evening Nina took him out past the settlement');
       await g.say('nina', 'Come on. I\'ll show you the kind of Philharmonic our father plays in');
@@ -79,9 +78,8 @@ export default {
     },
     // the level crossing: the bell, the red lights, the goods train coming — ⚑ what to tell Nina
     async g => {
-      g.beds({ wind: 0.3, crossing: 0.6 });
       const light = g.told('wait:light');
-      await g.scene(SCENES.crossing, { beat: 'wait' });
+      await g.scene(SCENES.crossing, { beat: 'wait' }, { beds: { wind: 0.3, crossing: 0.6 } });
       const wait = g.beat('wait');
       await light;
       await g.say('nina', 'I\'m marrying Misha. He\'s a good man. He never lies');
@@ -93,8 +91,8 @@ export default {
         barrier: [{ id: 'brother', label: tr('Answer: “Brother”') }],
       });
       g.apply('crossing');
-      const roar = () => g.beds({ crossing: 0.6, freight: 1 }, 4);
-      const quiet = () => g.beds({ wind: 0.3 }, 3);
+      const roar = () => g.beds({ crossing: 0.6, freight: 1 });
+      const quiet = () => g.beds({ wind: 0.3 });
       if (said === 'truth') {
         const spoken = g.told('truth:said'), passed = g.told('truth:passed');
         const truth = g.beat('truth');

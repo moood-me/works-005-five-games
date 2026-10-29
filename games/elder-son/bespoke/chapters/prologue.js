@@ -9,15 +9,14 @@ export default {
   choices: [],
   steps: [
     async g => {
-      g.beds({ wind: 0.4, train: 0.5 });
-      await g.scene(SCENES.platform, { beat: 'gone' });
+      await g.scene(SCENES.platform, { beat: 'gone' }, { beds: { wind: 0.4, train: 0.5 } });
       await g.beat('gone');
       // the first touch of a thing in the scene: the tail lights; till then the train crawls on (scenes.md `gone`)
       await g.choose(null, { 'train#tail': [{ id: 'call', label: tr('Call out') }] });
       const dark = g.told('wave:dark');
       const wave = g.beat('wave');
       g.sound.horn(0.7); // (the train answers)
-      g.beds({ wind: 0.4 }, 6);
+      g.beds({ wind: 0.4 });
       await dark;
       g.title(tr('The Elder Son')); // (not waited for)
       await wave;
