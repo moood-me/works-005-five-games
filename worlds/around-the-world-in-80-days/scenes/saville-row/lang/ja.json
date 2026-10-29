@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"Saville Row","translation":"サヴィル・ロウ","where":"worlds/around-the-world-in-80-days/scenes/saville-row/scene.json title"},
+  {"text":"London, night, fog. House number seven.","translation":"ロンドン、夜、霧。七番地の家。","where":"worlds/around-the-world-in-80-days/scenes/saville-row/scene.json caption"},
+  {"text":"Round… the world?","who":"passepartout","translation":"世界……一周ですって？","where":"worlds/around-the-world-in-80-days/scenes/saville-row/showcase.js"},
+  {"text":"By London time — to the minute.","who":"passepartout","translation":"ロンドン時間で――一分の狂いもなく。","where":"worlds/around-the-world-in-80-days/scenes/saville-row/showcase.js"}
+]}

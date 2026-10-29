@@ -1,0 +1,16 @@
+{"strings": [
+  {"text":"London","translation":"ロンドン","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Suez","translation":"スエズ","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Bombay","translation":"ボンベイ","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Calcutta","translation":"カルカッタ","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Hong Kong","translation":"香港","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Yokohama","translation":"横浜","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"San Francisco","translation":"サンフランシスコ","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"New York","translation":"ニューヨーク","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Liverpool","translation":"リヴァプール","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Atlantic Ocean","translation":"大西洋","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Indian Ocean","translation":"インド洋","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"Pacific Ocean","translation":"太平洋","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"+1 day","translation":"+1日","where":"worlds/around-the-world-in-80-days/scenes/route/elements/map.js"},
+  {"text":"The route","translation":"旅程","where":"worlds/around-the-world-in-80-days/scenes/route/scene.json title"}
+]}

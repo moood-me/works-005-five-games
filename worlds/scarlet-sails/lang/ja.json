@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"Scarlet Sails v3","translation":"緋色の帆 v3","where":"worlds/scarlet-sails/world.json title"},
+  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"エンジン3の『緋色の帆』。シーンはエンジン2から移されたもの。","where":"worlds/scarlet-sails/world.json description"}
+]}

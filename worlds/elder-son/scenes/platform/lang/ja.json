@@ -1,0 +1,9 @@
+{"strings": [
+  {"text":"TICKETS","translation":"切符売場","where":"worlds/elder-son/scenes/platform/elements/booth.js"},
+  {"text":"The Platform","translation":"ホーム","where":"worlds/elder-son/scenes/platform/scene.json title"},
+  {"text":"A suburban platform at night. The first snow.","translation":"夜の郊外のホーム。初雪。","where":"worlds/elder-son/scenes/platform/scene.json caption"},
+  {"text":"The strap pulled","translation":"ベルトが引かれる","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The whole family comes","translation":"家族そろってやって来る","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"His father alone","translation":"父ひとりだけ","where":"worlds/elder-son/scenes/platform/showcase.js"},
+  {"text":"The glass rubbed","translation":"ガラスが拭かれた","where":"worlds/elder-son/scenes/platform/showcase.js"}
+]}

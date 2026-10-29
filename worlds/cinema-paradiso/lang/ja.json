@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"Cinema Paradiso","translation":"ニュー・シネマ・パラダイス","where":"worlds/cinema-paradiso/world.json title"},
+  {"text":"A game after Tornatore's film. A warm Sicilian night, the projector's beam, a reel of kisses.","translation":"トルナトーレの映画によるゲーム。シチリアの暖かな夜、映写機の光、キスシーンのフィルム。","where":"worlds/cinema-paradiso/world.json description"}
+]}

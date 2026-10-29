@@ -1,0 +1,6 @@
+{"strings": [
+  {"text":"The Station","translation":"駅","where":"worlds/cinema-paradiso/scenes/station/scene.json title"},
+  {"text":"A small station. Dawn","translation":"小さな駅。夜明け","where":"worlds/cinema-paradiso/scenes/station/scene.json caption"},
+  {"text":"Alfredo stays","translation":"アルフレードが残る","where":"worlds/cinema-paradiso/scenes/station/showcase.js"},
+  {"text":"Alfredo goes","translation":"アルフレードが去る","where":"worlds/cinema-paradiso/scenes/station/showcase.js"}
+]}

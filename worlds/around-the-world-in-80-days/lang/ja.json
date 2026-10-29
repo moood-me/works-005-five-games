@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"Around the World in 80 Days v3","translation":"八十日間世界一周 v3","where":"worlds/around-the-world-in-80-days/world.json title"},
+  {"text":"Around the World on the new engine: the scenes are brought over here one by one.","translation":"新しいエンジンの『八十日間世界一周』。シーンはひとつずつここへ移されています。","where":"worlds/around-the-world-in-80-days/world.json description"}
+]}
