@@ -338,7 +338,7 @@ const CAM = {
                                             // the bright front, small, the lady goes off to the left
   GARDEN: cam(22.85, 1.45, 1.1, 0),         // the gardens: the two at their tables side by side, 3 m off, the eye low (at
                                             // the faces' height, under a hat's brim); the dog between them; the sea behind
-  TALK: cam(22.85, 2.55, 1.25, 0),          // closer, medium: both in three-quarters, talking across the gap
+  TALK: cam(22.85, 1.95, 1.3, 0),           // closer (2.5 m), medium: both in three-quarters, talking across the gap
   QUAY: cam(1.5, 2.8, 1.6, 0),              // side on along the parapet: those walking cross the frame ≈ 4.7 m off
   PIER: cam(-30.4, 12.0, 1.7, -6),          // on the pier's neck looking out: the two near, the crowd on the head, the steamer
   GANGWAY: cam(-31.7, 19.6, 1.55, -25),     // over Anna's shoulder to the gangway's foot (5.4 m): the arrivals a third
@@ -628,16 +628,16 @@ function film(scene) {
     // they talk across the gap (his little smile); a waiter goes by behind them
     talk: {
       after: ['finger', 'pat'],
-      from: () => COAXED({ ...CAM.TALK, anna_turn: 218, gurov_turn: 162, gurov_look: 'anna', anna_look: 'gurov' }),
+      from: () => COAXED({ ...CAM.TALK, anna_turn: 206, gurov_turn: 170, gurov_look: 'anna', anna_look: 'gurov' }),
       run: async s => {
         const anna = s.person('anna'), gurov = s.person('gurov'), waiter = s.person('waiter');
         const close = s.shot({ ...CAM.TALK, spitz_face: facingTo(CAM.TALK) });
         await s.until(() => close.ready);
         close.cut();
-        anna.turn(218);
+        anna.turn(206);
         anna.look('gurov');
         anna.mood(null);
-        gurov.turn(162);
+        gurov.turn(170);
         gurov.look('anna');
         gurov.mood('smile');
         s.set('spitz_look', null);
@@ -645,10 +645,10 @@ function film(scene) {
         await s.wait(1.2);
         s.tell('talk:turned');
         await s.wait(3);
-        s.set(`waiter_a`, 27.4); s.set(`waiter_d`, 6.4);
+        s.set(`waiter_a`, 27.4); s.set(`waiter_d`, 7.3);
         waiter.here(true);
         waiter.turn(270);
-        await waiter.walk([[18.6, 6.6]]);
+        await waiter.walk([[18.6, 7.4]]);
         waiter.here(false);
         await s.wait(2.5);
       },
