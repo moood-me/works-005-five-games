@@ -5,20 +5,19 @@
 //     leash low on the left (Anna: Duty ↔ Life — it sits by the parapet's end on a short leash ↔ runs ahead on a long
 //     one), the pocket watch low on the right (Gurov: Lightness ↔ Openness — its lid shut ↔ open); hero ('gurov' |
 //     'anna' | 'both') — whose scene it is: their scale in full, the other at a third. view.gauges(null) — none
-//     (“Lights”, the epilogue)
-//   view.toast(text, kind) — a slip of the postcard's paper under the tools: 'scale' (a scale moved), 'rule' (what a
+//     (the map, the epilogue)
+//   view.toast(text, kind) — a slip of the postcard's paper in the corner: 'scale' (a scale moved), 'rule' (what a
 //     scale means, the first time), 'mark' (remembered); three at most
 //   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do: “Touch the dog”); → a function
 //     that takes it away. One at a time: a new one takes the place of the one before
 //   view.title(text, {signal}) — the words over the scene, as a postcard's caption; → once they have gone (9 s)
-//   view.letter({text, sign}, {signal}) — a sheet the player unfolds and folds: folded in three, pressed it opens,
-//     pressed again it folds and goes; → once it has gone. text: its lines ('\n')
-//   view.onSkip(fn) → off — what the ⏭ does now (the latest one, until off()); none — the ⏭ not shown
-//     (a minigame: skips the minigame, for every player — a safety net if it glitches, not a way through; a step:
-//     skips the step, the author's only — game.js)
+//   view.letter({text, sign}, {signal, onOpen}) — a sheet the player unfolds and folds: folded in three, pressed it
+//     opens, pressed again it folds and goes; onOpen — once it lies open (its voice); → once it has gone. text: its
+//     lines ('\n')
+//   view.quiet() — what a chapter left showing taken away (the map comes)
 //   view.author({chapters, plays: [labels], at() → {chapter, step}, games(as, chapter, step) → promise of [titles of
 //     its minigames], go(as, chapter, step, game)}) — the author's map,
-//     opened by the page's ☰ (author() → what opens it, for bespoke.menu), lists the chapters, their steps and the
+//     opened by his sign on the map (author() → what opens or closes it), lists the chapters, their steps and the
 //     steps' minigames, to go to any — as the play picked under “play as…” has it by then (as: its index)
 // Whatever is shown with a `signal` is taken away when it aborts (the step was left).
 import { paper } from './sound.js';
@@ -47,14 +46,6 @@ export function ui(layer) {
   const leash = leashGauge(layer);
   const watch = watchGauge(layer);
   const toasts = el('div', 'toasts', layer);
-  // the corner's tools: ⏭ (a minigame: everyone; a step: the author) (⏸, ☰ — the page's)
-  const tools = el('div', 'tools', layer);
-  const skips = [];
-  // (shown while the latest skip is something)
-  const skipButton = button('⏭', tr('skip'), () => skips.at(-1)?.fn?.());
-  const skipShown = () => { skipButton.hidden = !skips.at(-1)?.fn; };
-  tools.append(skipButton);
-  skipShown();
   let hinted = () => {}; // takes the hint shown now away
   return {
     gauges(state, hero) {
@@ -95,17 +86,15 @@ export function ui(layer) {
         signal?.addEventListener('abort', () => { timers.forEach(clearTimeout); t.remove(); ok(); });
       });
     },
-    letter: (letter, { signal } = {}) => unfold(layer, letter, signal),
-    onSkip(fn) {
-      const it = { fn };
-      skips.push(it);
-      skipShown();
-      return () => { const i = skips.indexOf(it); if (i >= 0) skips.splice(i, 1); skipShown(); };
+    letter: (letter, { signal, onOpen } = {}) => unfold(layer, letter, signal, onOpen),
+    // what a chapter left showing (its slips, its hint) taken away: the map comes
+    quiet() {
+      toasts.replaceChildren();
+      hinted();
     },
     author({ chapters, plays, at, games, go }) {
-      // the map (the page's ☰ opens it): “play as…”, then every chapter a column of its steps (and their minigames)
-      // in a window over the scene;
-      // a click outside, ✕ or Esc closes it
+      // the map (his sign on the map opens it): “play as…”, then every chapter a column of its steps (and their
+      // minigames) in a window over the scene; a click outside, ✕ or Esc closes it
       const map = el('div', 'author-map', layer);
       map.hidden = true;
       let as = 0; // the play picked
@@ -123,11 +112,11 @@ export function ui(layer) {
           const col = el('section');
           el('h3', '', col).textContent = c.number ? `${c.number}. ${c.title}` : c.title;
           for (const [si] of c.steps.entries()) {
-            const step = button(c.titles[si], '', () => go(as, ci, si), ci === here.chapter && si === here.step ? 'here' : '');
+            const step = button(c.titles[si], '', () => { close(); go(as, ci, si); }, ci === here.chapter && si === here.step ? 'here' : '');
             // (its minigames under it, once they are known: straight to one)
             const under = el('div', 'minigames');
             games(as, ci, si).then(list => under.append(...list.map((name, k) =>
-              button(`◆ ${name}`, 'straight to the mini-game', () => go(as, ci, si, k), 'minigame'))));
+              button(`◆ ${name}`, 'straight to the minigame', () => { close(); go(as, ci, si, k); }, 'minigame'))));
             col.append(step, under);
           }
           return col;
@@ -223,7 +212,7 @@ function watchGauge(layer) {
 
 // the letter or the note: folded in three; pressed, it opens — the top third, then the bottom — and can be read; pressed
 // again, it folds and goes
-function unfold(layer, { text = '', sign }, signal) {
+function unfold(layer, { text = '', sign }, signal, onOpen) {
   const veil = el('div', 'letter-veil', layer);
   const letter = el('div', 'letter', veil);
   const hint = card('p', 'letter-hint', veil);
@@ -250,6 +239,7 @@ function unfold(layer, { text = '', sign }, signal) {
         await wait(650);
         paper();
         letter.classList.add('open-bottom');
+        onOpen?.();
         await wait(2400);
         cue(tr('fold'));
         hint.classList.add('on');

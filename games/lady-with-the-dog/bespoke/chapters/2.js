@@ -141,7 +141,7 @@ export default {
       const days = g.beat('days');
       await letter;
       await g.say('narrator', 'But then a letter came from her husband');
-      await Promise.all([g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband') }), g.say('diderits', 'Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian', 'narrator')]);
+      await g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband'), voice: () => g.say('diderits', 'Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian', 'narrator') });
       g.sound.paper();
       await days;
     },

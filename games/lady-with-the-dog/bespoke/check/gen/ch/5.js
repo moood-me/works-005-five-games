@@ -90,7 +90,7 @@ export default {
       const cap = g.beat('red_cap');
       await note;
       await SAY(95);
-      await Promise.all([g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.') }), SAY(96, 'narrator')]);
+      await g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.'), voice: () => SAY(96, 'narrator') });
       g.sound.paper();
       await cap;
     },
