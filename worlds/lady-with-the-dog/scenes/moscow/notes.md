@@ -112,6 +112,9 @@ Keys: `hour`, `overcast`, `season`, `snow`, `wet`, `lamps`, `porch_lamp`, `windo
 - The shadows on the curtain are painted (a layer that stirs a little), not people.
 - `table_window`, `say`, `red_cap` are longer than the docs' estimates (the steps, the walk to the sledge, the walk
   away): the contract says the truth.
+- **Engine gap (known, work.md 2026-10-15):** a person's outline shows through a card in front of them — the wife at
+  the window upstairs (standing 0.3 m behind the house front) shows the hem of her skirt as a dark wedge on the wall
+  under the sill (`school`, `porch_end` with `wife_knows` 1; render 2119 at 134 s). Not hidden by any trick here.
 - The lit windows are separate cards that glow (their alpha by a key); a wall's painting is never repainted for them.
 
 ## Contract for the check

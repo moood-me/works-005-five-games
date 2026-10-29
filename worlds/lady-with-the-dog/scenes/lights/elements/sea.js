@@ -117,8 +117,9 @@ for (let i = 0; i < 700; i++) {
   const u = Math.pow(e.rnd(), 1.7);
   const y = H + 0.003 + u * (FOOT - H - 0.006);
   const len = 0.008 + u * 0.14 * (0.5 + e.rnd());
-  g.globalAlpha = 0.12 + 0.2 * e.rnd();
-  g.fillStyle = e.rnd() < 0.5 ? '#8e9cba' : '#16203a';
+  const light = e.rnd() < 0.5;
+  g.globalAlpha = (light ? 0.05 : 0.12) + (light ? 0.08 : 0.2) * e.rnd();
+  g.fillStyle = light ? '#8e9cba' : '#16203a';
   g.fillRect(X0 + e.rnd() * W, y, len, 0.0006 + u * 0.003);
 }
 g.globalAlpha = 1;
