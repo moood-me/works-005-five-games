@@ -1,0 +1,4 @@
+{"strings": [
+  {"text":"The Kaperna Shore","translation":"Le Rivage de Kaperna","where":"worlds/scarlet-sails/scenes/main/scene.json title"},
+  {"text":"Morning. The sea is still asleep.","translation":"Le matin. La mer dort encore.","where":"worlds/scarlet-sails/scenes/main/scene.json caption"}
+]}
