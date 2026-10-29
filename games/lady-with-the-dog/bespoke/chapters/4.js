@@ -25,8 +25,7 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('gurov');
-      g.beds({ snow: 0.3 });
-      await g.scene(SCENES.town, { beat: 'inkwell' });
+      await g.scene(SCENES.town, { beat: 'inkwell' }, { beds: { snow: 0.3 } });
       const inkwell = g.beat('inkwell');
       g.next('fence');
       await g.say('narrator', 'In S. he took the best room at the hotel. On the table was an inkstand: a figure on horseback, with its hat in its hand and its head broken off', 'narrator');
@@ -75,8 +74,7 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('gurov');
-      g.beds({ hall: 0.5 });
-      await g.scene(SCENES.theatre, { beat: 'hall' });
+      await g.scene(SCENES.theatre, { beat: 'hall' }, { beds: { hall: 0.5 } });
       const hall = g.beat('hall');
       g.next('hall_find');
       g.sound.tuning();
@@ -152,9 +150,8 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('anna');
-      g.beds(f.spring ? { thaw: 0.4 } : { snow: 0.3 });
       const asks = g.told('gate_leave:asks');
-      await g.scene(SCENES.town, { beat: 'gate_leave' });
+      await g.scene(SCENES.town, { beat: 'gate_leave' }, { beds: f.spring ? { thaw: 0.4 } : { snow: 0.3 } });
       const gate = g.beat('gate_leave');
       if (f.spring) await g.say('narrator', 'She held out till the spring');
       else await g.say('narrator', 'A month later she made ready to go to Moscow');

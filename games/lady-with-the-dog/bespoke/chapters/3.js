@@ -21,9 +21,8 @@ export default {
     // The first snow: morning, the sledges; the evening street and the shadows; the window upstairs, her voice
     async g => {
       g.hero('gurov');
-      g.beds({ snow: 0.4 });
       const out = g.told('first_snow:out');
-      await g.scene(SCENES.moscow, { beat: 'first_snow' });
+      await g.scene(SCENES.moscow, { beat: 'first_snow' }, { beds: { snow: 0.4 } });
       const snow = g.beat('first_snow');
       g.next('evening_walk');
       g.sound.sleigh();
@@ -53,8 +52,7 @@ export default {
     // husband with a coat
     async g => {
       g.hero('anna');
-      g.beds({ wind: 0.5 });
-      await g.scene(SCENES.town, { beat: 'autumn_walk' });
+      await g.scene(SCENES.town, { beat: 'autumn_walk' }, { beds: { wind: 0.5 } });
       const walk = g.beat('autumn_walk');
       await g.say('narrator', 'In S. it was late autumn. Every evening Anna Sergeyevna walked the Pomeranian along the fence');
       await walk;
@@ -79,9 +77,8 @@ export default {
     // The club: night, “the sturgeon was a bit too strong”; laugh and get into the sledge — or walk away
     async g => {
       g.hero('gurov');
-      g.beds({ snow: 0.3 });
       const out = g.told('club:out');
-      await g.scene(SCENES.moscow, { beat: 'club' });
+      await g.scene(SCENES.moscow, { beat: 'club' }, { beds: { snow: 0.3 } });
       const club = g.beat('club');
       g.next('say');
       await g.say('narrator', 'One night he was coming out of the doctors’ club with his partner, an official');
@@ -115,9 +112,8 @@ export default {
     // The departure: December, before dawn; his wife in the doorway
     async g => {
       g.hero('gurov');
-      g.beds({ snow: 0.3 });
       const turns = g.told('porch_go:turns');
-      await g.scene(SCENES.moscow, { beat: 'porch_go' });
+      await g.scene(SCENES.moscow, { beat: 'porch_go' }, { beds: { snow: 0.3 } });
       const porch = g.beat('porch_go');
       await g.say('narrator', 'In December, in the Christmas holidays, he made ready for a journey');
       await turns;

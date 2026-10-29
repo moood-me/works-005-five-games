@@ -6,8 +6,10 @@
 //   g.sound — the game's sounds (sound.js)
 //   g.hero(who) — whose scene it is: 'gurov' | 'anna' | 'both' — the hero's scale in full, the other one at a third;
 //     the first line of every step, and again inside one when the scene passes to the other hero
-//   g.beds(levels, seconds) — the beds of sound: those named go to their level, every other one to nothing
-//   g.scene(folder, state, {cut}) — that scene of the world, full-screen, its state on top of where it starts — and
+//   g.beds(levels) — the background from now on (bespoke.background): the beds of sound named at their levels, every
+//     other one silent — the page changes it at once, over the music's crossfade. A scene's own goes with it (g.scene's
+//     beds): changed at its cut, with its music. Unseen (a jump): kept for the scene the jump shows (j.background)
+//   g.scene(folder, state, {cut, beds}) — that scene of the world, full-screen, its state on top of where it starts — and
 //     under it what the play has decided, as this scene's keys (carry). It plays no beat until one is named: the
 //     step's first beat goes in `state` ({beat: name}) — the scene opens playing it, its first frame the beat's own —
 //     and g.beat(name) then takes it up (waits for its end). cut: the scene before stays on the screen till this one
@@ -163,7 +165,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     const { shown, then } = j;
     for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
     view.gauges(state, hero);
-    if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then }));
+    if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then, background: j.background }));
     ahead();
   })());
   if (j && j.target < Infinity) j.idle.then(seen);
@@ -179,10 +181,11 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       hero = who;
       if (!unseen()) view.gauges(state, hero);
     },
-    beds(levels, seconds = 2) {
-      if (!gone()) g.sound.beds(levels, seconds);
+    beds(levels) {
+      if (gone()) return;
+      if (unseen()) j.background = levels; else b.background(levels);
     },
-    async scene(folder, st = {}, { cut = false } = {}) {
+    async scene(folder, st = {}, { cut = false, beds } = {}) {
       if (gone()) return never;
       // (opened as it is to be: what the play has decided — those of its keys the scene has —, the beat it opens
       // with playing from its first frame)
@@ -190,6 +193,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       st = { ...Object.fromEntries(Object.entries(carry(folder, facts(state)) ?? {}).filter(([key]) => key in (spec.states ?? {}))), ...st };
       if (unseen()) {
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
+        if (beds) j.background = beds;
         j.scene(folder, st);
         return;
       }
@@ -198,7 +202,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         if (fast) await alive(land());
         opening = typeof st.beat === 'string' ? { name: st.beat, ended: g.told(`beat:${st.beat}`, BEAT) } : null;
         g.withdraw();
-        await alive(b.show(folder, { state: st, captions: false, fade: !cut }));
+        await alive(b.show(folder, { state: st, captions: false, fade: !cut, background: beds }));
       } finally { showing = false; }
     },
     set: (key, value, seconds) => (gone() ? undefined : put(key, value, seconds)),

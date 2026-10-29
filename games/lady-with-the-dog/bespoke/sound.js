@@ -1,13 +1,15 @@
 // The sounds of “The Lady with the Dog”, made in the page (Web Audio): nothing to load; as loud as the page's "sounds"
 // slider says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first touch), and
-// waits with the play as the scene's music does — paused, its scene standing or being made ready —, fading out and back
+// waits with the scene's music — the play paused, its scene standing —, fading out and back
 // in. (game.md §8, the page's sounds.)
-//   unheard() → {sounds, wake()} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
+//   unheard() → {sounds} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // Two airs a sound goes out into: the open air (light, 1.8 s — the quay, the garden, the station, the street) and a
 // room (0.6 s — the hotel rooms, the theatre, a hall).
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down),
 // getting there over `seconds` (a bed may be called by itself too — a gust: wind(0.7, 1)):
-//   beds(levels, seconds) — the named beds to their levels, every other one to silence (g.beds)
+//   background(levels, seconds) — the named beds to their levels, every other one to silence: the game's background as
+//     the page sounds it (bespoke.onBackground — at a scene's cut with its music, or at once: the game declares it,
+//     g.beds and g.scene's beds, and never times it)
 //   crickets — 4–5 kHz trills out of step · wires — the telegraph wires' hum, 100 and 150 Hz beating · room — a clock
 //   ticking, a faint hum
 //   wind — low wind in random gusts · snow — the snow's silence: a low wind barely there, far bells now and then ·
@@ -380,7 +382,7 @@ export function room(level = 1, seconds = 2) {
 export function weep(level = 1, seconds = 2) { bed('weep', 0.05, 'open', recorded(['weep-171947.mp3', 'weep-172738.mp3'], 0.48), level, seconds); }
 
 const BEDS = { sea, cicadas, crowd, wind, crickets, wires, steam, snow, thaw, room, hall, weep };
-export function beds(levels = {}, seconds = 2) {
+export function background(levels, seconds) {
   for (const [name, play] of Object.entries(BEDS)) play(levels[name] ?? 0, seconds);
 }
 
@@ -746,21 +748,18 @@ export function watch() {
   for (let s = 0.35; s < 2.35; s += 0.2) ring(t + s, out, [[4200, 0.025, 0.025], [6300, 0.015, 0.01]], 0.001);
 }
 
-// the sounds of a step played unseen (jump.js): nothing heard meanwhile — the beds heard from then on as loud as the
-// step left them; what was played once is over by then, and a handle begun meanwhile is mute
+// the sounds of a step played unseen (jump.js): nothing heard meanwhile — what was played once is over by then, and a
+// handle begun meanwhile is mute (the background the step declared is the jump's: j.background)
 export function unheard() {
-  const levels = {}, none = () => {}, mute = () => ({ loud() {}, stop() {} });
-  const bedOf = name => (level = 1) => { levels[name] = level; };
+  const none = () => {}, mute = () => ({ loud() {}, stop() {} });
   return {
     sounds: {
-      beds(set = {}) { for (const name in BEDS) levels[name] = set[name] ?? 0; },
-      sea: bedOf('sea'), cicadas: bedOf('cicadas'), crowd: bedOf('crowd'), wind: bedOf('wind'), crickets: bedOf('crickets'),
-      wires: bedOf('wires'), steam: bedOf('steam'), snow: bedOf('snow'), thaw: bedOf('thaw'), room: bedOf('room'),
-      hall: bedOf('hall'), weep: bedOf('weep'),
+      sea: none, cicadas: none, crowd: none, wind: none, crickets: none,
+      wires: none, steam: none, snow: none, thaw: none, room: none,
+      hall: none, weep: none,
       band: mute, piano: mute,
       tuning: none, bark: none, yap: none, growl: none, clink: none, heart: none, knife: none, horn: none, bell: none,
       whistle: none, wheels: none, sleigh: none, gate: none, door: none, pour: none, spill: none, paper: none, watch: none,
     },
-    wake() { for (const [name, level] of Object.entries(levels)) BEDS[name](level, 1); },
   };
 }

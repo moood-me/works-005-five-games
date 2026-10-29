@@ -21,11 +21,10 @@ export default {
     // night, the moon's path
     async g => {
       g.hero('gurov');
-      g.beds({ sea: 0.3, cicadas: 0.2 });
       const band = g.sound.band();
       g.signal.addEventListener('abort', () => band.stop(1));
       const sat = g.told('garden:sat');
-      await g.scene(SCENES.quay, { beat: 'garden' });
+      await g.scene(SCENES.quay, { beat: 'garden' }, { beds: { sea: 0.3, cicadas: 0.2 } });
       const garden = g.beat('garden');
       g.next('coax');
       await sat;
@@ -87,9 +86,8 @@ export default {
     // the arrivals
     async g => {
       g.hero('anna');
-      g.beds({ sea: 0.5, wind: 0.5, crowd: 0.6 });
       const looking = g.told('pier:lorgnette');
-      await g.scene(SCENES.quay, { beat: 'pier' });
+      await g.scene(SCENES.quay, { beat: 'pier' }, { beds: { sea: 0.5, wind: 0.5, crowd: 0.6 } });
       const pier = g.beat('pier');
       g.next('gangway');
       g.sound.horn();

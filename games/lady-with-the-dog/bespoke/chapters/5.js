@@ -24,9 +24,8 @@ export default {
     // At night: he comes home late from her; his wife in the doorway
     async g => {
       g.hero('gurov');
-      g.beds(weather(g.state));
       const door = g.told('home_late:door');
-      await g.scene(SCENES.moscow, { beat: 'home_late' });
+      await g.scene(SCENES.moscow, { beat: 'home_late' }, { beds: weather(g.state) });
       const late = g.beat('home_late');
       await g.say('narrator', 'She came to Moscow once in two or three months. He came home late from her');
       await door;
@@ -58,8 +57,7 @@ export default {
     // To school: the morning of another of her visits; he takes his daughter; two lives; a note from her
     async g => {
       g.hero('gurov');
-      g.beds(weather(g.state));
-      await g.scene(SCENES.moscow, { beat: 'school' });
+      await g.scene(SCENES.moscow, { beat: 'school' }, { beds: weather(g.state) });
       const school = g.beat('school');
       g.next('walk_hand');
       await g.say('narrator', 'On another of her visits, in the morning, he was taking his daughter to school');
@@ -99,11 +97,10 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('both');
-      g.beds({ room: 0.3 });
       const piano = g.sound.piano('waltz', { wall: true });
       g.signal.addEventListener('abort', () => piano.stop(1));
       const met = g.told('bazaar_in:met');
-      await g.scene(SCENES.bazaar, { beat: 'bazaar_in' });
+      await g.scene(SCENES.bazaar, { beat: 'bazaar_in' }, { beds: { room: 0.3 } });
       const atTea = async next => {
         const pour = g.beat('tea');
         g.next('weep');

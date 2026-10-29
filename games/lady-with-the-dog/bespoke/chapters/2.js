@@ -24,8 +24,7 @@ export default {
     // confession
     async g => {
       g.hero('gurov');
-      g.beds({ sea: 0.25, room: 0.3 });
-      await g.scene(SCENES.room, { beat: 'room' });
+      await g.scene(SCENES.room, { beat: 'room' }, { beds: { sea: 0.25, room: 0.3 } });
       const room = g.beat('room');
       g.next('room_hold');
       await g.say('narrator', 'Her room was close and smelt of the scent she had bought at the Japanese shop');
@@ -90,9 +89,8 @@ export default {
     // Oreanda: before dawn, the seat above the sea; the keeper; dew on the grass
     async g => {
       g.hero('both');
-      g.beds({ sea: 0.6, cicadas: 0.4 }, 3);
       const sat = g.told('bench:sat');
-      await g.scene(SCENES.oreanda, { beat: 'bench' });
+      await g.scene(SCENES.oreanda, { beat: 'bench' }, { beds: { sea: 0.6, cicadas: 0.4 } });
       const bench = g.beat('bench');
       g.next('still');
       await sat;
@@ -126,8 +124,7 @@ export default {
     // Noon: every day at noon together; a kiss looking round; the husband's letter
     async g => {
       g.hero('both');
-      g.beds({ sea: 0.4, cicadas: 0.5 });
-      await g.scene(SCENES.quay, { beat: 'noon_garden' });
+      await g.scene(SCENES.quay, { beat: 'noon_garden' }, { beds: { sea: 0.4, cicadas: 0.5 } });
       const garden = g.beat('noon_garden');
       g.next('days');
       await g.say('narrator', 'Every day at twelve o’clock they met on the sea-front, lunched and dined together, went for walks');
@@ -149,9 +146,8 @@ export default {
     async g => {
       const f = facts(g.state);
       g.hero('anna');
-      g.beds({ crickets: 0.5, wires: 0.3, steam: 0.4 });
       const bell = g.told('platform:bell');
-      await g.scene(SCENES.station, { beat: 'platform' });
+      await g.scene(SCENES.station, { beat: 'platform' }, { beds: { crickets: 0.5, wires: 0.3, steam: 0.4 } });
       const platform = g.beat('platform');
       g.next('board');
       bell.then(rang => { if (rang) g.sound.bell(); });
