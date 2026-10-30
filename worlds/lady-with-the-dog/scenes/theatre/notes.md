@@ -49,7 +49,7 @@ no sky).
 | --- | --- | --- | --- |
 | `hall` | — | 12 | `BACK`: the hall fills (`crowd` 0.35 → 1); Gurov at the column from behind, looking over the rows |
 | `hall_find` | — | 2 | a cut to `HALL`: the ladies not in yet — under “Find her” (`enter` 1…6, `glint`) |
-| `husband_in` | hall_find | 12 | (noticed 1) lady2 turns back to the column; the husband comes in bowing at every step, bows, sits by her, puts her shawl right (`husband_in:sat`); `SEATED` — the two side by side; the lights down to 0.3, the curtain up; back to `HALL` |
+| `husband_in` | hall_find | 15 | (noticed 1) lady2 turns back to the column; the husband comes in bowing at every step, bows, sits by her, puts her shawl right (`husband_in:sat`); `SEATED` — the two side by side; the lights down to 0.3, the curtain up; back to `HALL` |
 | `interval_out` | husband_in | 10 | the interval: lights up, curtain down, half the audience go out; the husband gets up and goes out; she stays |
 | `interval_stay` | husband_in | 10 | the same; he stays and looks round the hall; she gets up and goes out alone by the side door |
 | `approach` | interval_out | 8 | Gurov comes down the aisle to her row (`approach:at`); a cut to `FACE` — her face, afraid; she rises |
@@ -84,7 +84,7 @@ Keys: `hall_light`, `curtain`, `stage`, `crowd`, `leave`, `glint`, `noticed`, `e
 ```json
 {"beats": {"hall": {"after": [], "tells": [], "seconds": 12, "show": false},
            "hall_find": {"after": [], "tells": [], "seconds": 2, "show": false},
-           "husband_in": {"after": ["hall_find"], "tells": ["husband_in:sat"], "seconds": 13, "show": false},
+           "husband_in": {"after": ["hall_find"], "tells": ["husband_in:sat"], "seconds": 16, "show": false},
            "interval_out": {"after": ["husband_in"], "tells": [], "seconds": 11, "show": false},
            "interval_stay": {"after": ["husband_in"], "tells": [], "seconds": 10, "show": false},
            "approach": {"after": ["interval_out"], "tells": ["approach:at"], "seconds": 10, "show": false},

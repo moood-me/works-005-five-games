@@ -91,7 +91,7 @@ Keys: `hour`, `season`, `dusk`, `morning`, `sunset`, `lamp`, `window`, `snow`, `
            "call_run": {"after": ["gate_open"], "tells": [], "seconds": 11, "show": false},
            "call_bark": {"after": ["gate_open"], "tells": [], "seconds": 10, "show": false},
            "corner_hide": {"after": ["gate_open"], "tells": [], "seconds": 12, "show": false},
-           "fence_dusk": {"after": [], "tells": ["fence_dusk:poster"], "seconds": 10, "show": false},
+           "fence_dusk": {"after": [], "tells": ["fence_dusk:poster"], "seconds": 12, "show": false},
            "gate_leave": {"after": [], "tells": ["gate_leave:asks"], "seconds": 8, "show": false},
            "leave_lie": {"after": ["gate_leave"], "tells": ["leave_lie:envelope", "leave_lie:goes"], "seconds": 20, "show": false},
            "leave_truth": {"after": ["gate_leave"], "tells": ["leave_truth:close", "leave_truth:still", "leave_truth:answer", "leave_truth:pulls"], "seconds": 22, "show": false},
