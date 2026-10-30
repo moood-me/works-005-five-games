@@ -50,7 +50,8 @@ Keys: `hour`, `tea`, `glass_at`, `tap`, `fill`, `spill`, `stain`, `mirror`, `thi
 
 - The ending (2026-10-30): it was the whole room from its first second, the two small at the window, the faces in
   half-shadow; now the faces first (the cages shot, the watch in the lamplight), then the room drawing back under the
-  last of Chekhov's sentence. The light: the lamp 2.6 (was 2), reach 5.2; the ambient 0.58 (was 0.48).
+  last of Chekhov's sentence. The watch: `take_watch` alone lifted his hand to her face (she stands close before him) —
+it read as a caress; his right hand is reached to a point before his own chest (`{on: 'gurov', at: […]}`). The light: the lamp 2.6 (was 2), reach 5.2; the ambient 0.58 (was 0.48).
 
 - `anna_life` 1: they embrace not at the very door but two steps from it, before the mirror: by the door the lamp hid
   them.

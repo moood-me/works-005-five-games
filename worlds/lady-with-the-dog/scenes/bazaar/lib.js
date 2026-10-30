@@ -231,6 +231,8 @@ function film(scene) {
           const gurov = s.person('gurov');
           gurov.with(['watch']);
           gurov.do('take_watch');
+          // (the hand with the watch before his own chest, toward the lamp — the motion alone lifts it to her face)
+          gurov.reach({ r: { on: 'gurov', at: [0.14, -0.2, 1.18] } });
           await s.wait(1.4);
           gurov.look('gurov#watch');
           s.tell('bazaar_end:watch');
