@@ -89,6 +89,7 @@ const CAM = {
   WINDOW: cam(3.7, 6.0, 1.5, 0, 13),     // below her window, looking up: her face behind the glass 2.4 m off, the curtain
   END: cam(23, 1.5, 1.7, 65),            // the platform's end, along the line: the train going away, the last lamp
   HOUSE: cam(-2, 1, 1.7, -55),           // toward the station house and its door
+  LAMP: cam(-3.5, 4.95, 1.6, -59),       // his face under the lamp by the house, 2.4 m off, three-quarter
 };
 const placeTrain = v => {
   v.train_a = trainAt(v.train, v.far);
@@ -200,16 +201,28 @@ function film(scene) {
         await s.wait(1);
       },
     },
-    // he stands under the lamp by the house, turns away from the line and goes to the station's door
+    // he stands under the lamp by the house, looking after the train; a cut to his face under the lamp — tired, his
+    // thought (alone_turn:door: he turns away from the line); back: he goes to the station's door
     alone_turn: {
       from: () => EMPTY({ far: 1, ...CAM.HOUSE, gurov_a: GUROV_LAMP[0], gurov_d: GUROV_LAMP[1], gurov_turn: 80 }),
       run: async s => {
         const gurov = s.person('gurov');
+        const face = s.shot({ ...CAM.LAMP });
         await s.wait(2.5);
+        await s.until(() => face.ready);
+        face.cut();
+        gurov.mood('tired');
+        await s.wait(1);
+        gurov.look([-3, 4.6, 1.5]);
+        s.tell('alone_turn:door');
+        // (his thought comes after the narrator's line: the face holds through it)
+        await s.wait(7);
+        const house = s.shot({ ...CAM.HOUSE });
+        await s.until(() => house.ready);
+        house.cut();
         await gurov.walk([HOUSE_DOOR]);
         await gurov.turn(320);
-        s.tell('alone_turn:door');
-        await s.wait(1.5);
+        await s.wait(1);
       },
     },
   };

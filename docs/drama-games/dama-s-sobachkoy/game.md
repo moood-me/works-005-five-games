@@ -356,7 +356,7 @@ title: 'Окно вагона', options: [{id: 'look', label: 'Смотреть,
    *`road_end:train`* — `g.sound.whistle(0.3)` (тихо, далеко). `gate_home`; по *`gate_home:coat`* — Р48.
 3. **Клуб.** `g.hero('gurov')`; `g.beds({snow: 0.3})`. **Москва** · `club`; сразу Р49; по *`club:out`* — Р50 (Гуров
    говорит всегда, как у Чехова). `say`; по *`say:turns`* — Р51 (у `'official'`), Р52, Р53. Выбор `club`: `{sledge:
-   [{id: 'laugh', label: 'Засмеяться и сесть в сани'}], lamp2: [{id: 'walk', label: 'Уйти пешком'}]}`.
+   [{id: 'laugh', label: 'Засмеяться и сесть в сани'}], gurov: [{id: 'walk', label: 'Уйти пешком'}]}` (кружок «уйти» — на груди того, кто уходит).
    - `laugh`: `g.scale('heart', -2)`; `laugh_sit`.
    - `walk`: `g.scale('heart', 2)`; `say_walk`; по *`say_walk:off`* — Р54.
 
@@ -380,7 +380,7 @@ options: [{id: 'promise', label: '«Я приеду к вам в Москву»'
    'life' ? 'waltz' : 'etude', onPiano: () => (heard = true, g.say('narrator', 'Он услышал звуки рояля, слабые,
    неясные. Должно быть, Анна Сергеевна играла'))})` (итог — `r`). После игры: если `!heard` — Р62; `under` =
    `r.stood ? 1 : 0` (`gate_open` ставит его под окно или у дальнего угла). `g.sound.gate()`; `gate_open`
-   (`from` ставит Гурова под окно). Выбор `fence`: `{spitz: [{id: 'call', label: 'Позвать шпица'}], 'fence#corner':
+   (`from` ставит Гурова под окно). Выбор `fence`: `{spitz: [{id: 'call', label: 'Позвать шпица'}], gurov:
    [{id: 'hide', label: 'Отойти за угол'}]}`.
    - `call`: `g.mark('maid', true, 'Горничная это запомнит.')`; Р63; `facts.dog === 'pat'` — `call_run`, в начале
      `g.sound.yap()`; иначе — `call_bark`, в начале `g.sound.bark()`.
@@ -395,15 +395,15 @@ options: [{id: 'promise', label: '«Я приеду к вам в Москву»'
    - `facts.talk`: `interval_stay`; `corridor`; по *`corridor:meet`* — Р69.
 
    `g.hero('anna')`; `g.beds({hall: 0.2})`. `stairs`; по *`stairs:landing`* — Р70 (у `'anna'`), Р71. Выбор `stairs`:
-   `{anna: [{id: 'promise', label: '«Я приеду к вам в Москву»'}], 'stairs#down': [{id: 'away', label: '«Уезжайте
-   сегодня же»'}]}`.
+   `{anna: [{id: 'promise', label: '«Я приеду к вам в Москву»'}, {id: 'away', label: '«Уезжайте
+   сегодня же»'}]}` (обе — её слова: кружок на ней).
    - `promise`: `g.scale('anna', 2)`; Р72; `promise_go`; по *`promise_go:back`* — Р73.
    - `away`: `g.scale('anna', -2)`; Р74; `away_go`.
 
    `bell`; в начале `g.sound.bell()`.
 3. **Калитка.** `g.hero('anna')`; `g.beds(facts.spring ? {thaw: 0.4} : {snow: 0.3})`. **Город С.** · `gate_leave`;
    сразу `facts.spring` — Р76, иначе — Р75; по *`gate_leave:asks`* — Р77 (у `'diderits'`). Выбор `husband`:
-   `{diderits: [{id: 'lie', label: '«К профессору»'}, {id: 'truth', label: '«Я еду к нему»'}]}`.
+   `{anna: [{id: 'lie', label: '«К профессору»'}, {id: 'truth', label: '«Я еду к нему»'}]}` (её слова: кружок на ней).
    Шкал выбор не двигает. Горничная со шпицем — у крыльца, извозчик — у лошади: ни в одной ветке они не слышат.
    - `lie`: Р78; `leave_lie`; по *`leave_lie:envelope`* — Р114 (у `'diderits'`), `g.sound.paper()`; по
      *`leave_lie:goes`* — Р79.
@@ -426,8 +426,8 @@ options: [{id: 'promise', label: '«Я приеду к вам в Москву»'
 options: [{id: 'lie', label: '«В клубе»'}, {id: 'truth', label: '«Я был у неё»'}]}`. Обе подписи — его реплики.
 
 1. **Ночью.** `g.hero('gurov')`; `g.beds(w)`. **Москва** · `home_late`; сразу Р83; по *`home_late:door`* —
-   `g.sound.door()`, Р84 (у `'wife'`). Выбор `wife`: `{wife: [{id: 'lie', label: '«В клубе»'}, {id: 'truth', label:
-   '«Я был у неё»'}]}`.
+   `g.sound.door()`, Р84 (у `'wife'`). Выбор `wife`: `{gurov: [{id: 'lie', label: '«В клубе»'}, {id: 'truth', label:
+   '«Я был у неё»'}]}` (его слова: кружок на нём).
    Шкал выбор не двигает.
    - `lie`: Р85; `wife_lie`; по *`wife_lie:in`* — `g.sound.door()`.
    - `truth`: `g.mark('wife', 'knows', 'Жена это запомнит.')`; Р86; Р87 (`wife_low`, у `'wife'`); `wife_truth`; по *`wife_truth:door`* — `g.sound.door()`.

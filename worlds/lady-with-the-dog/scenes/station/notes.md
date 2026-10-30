@@ -11,7 +11,7 @@ carriages and the lamps; red — only the tail lights.
 - **The camera** `panorama`, `span` [−20, 40]; shots — by the camera's keys (`lib.js` `CAM`): `PLATFORM` (along the
   platform at an angle), `FACE` (under a lamp over his shoulder: her face to him, 3 m, three-quarter, the lamp before
   her face), `WINDOW` (from the platform up at her window, 2.4 m: her face behind the glass, the curtain), `END` (the end
-  of the platform along the tracks), `HOUSE` (toward the station house). The long cards stand with `facing` 180 (the
+  of the platform along the tracks), `HOUSE` (toward the station house), `LAMP` (his face under the lamp by the house). The long cards stand with `facing` 180 (the
   turned shots).
 - **The sky** — a sky element of its own (wide enough for the turned shots); the module `sky` is not needed.
 - **The train**: an invisible anchor `train` at `train_a`; on it `carriage` (Anna's carriage: the window a hole, the
@@ -35,7 +35,7 @@ carriages and the lamps; red — only the tail lights.
 | `look_back` | board | 15 | her hand on the glass; the train moves off; a cut to `END`: the window goes away and grows smaller, the tail light |
 | `curtain` | board | 17 | she draws the curtain; the train moves off; a cut to `END`: a light curtained square goes away |
 | `alone_far` | — | 21 | the empty platform: he walks to the last lamp, stands (`alone_far:stands`), the red light melts away (`far` → 1) |
-| `alone_turn` | — | 12 | by the station house: he stands under a lamp, goes to the station's doors (`alone_turn:door`) |
+| `alone_turn` | — | 22 | by the station house: he stands under a lamp; a cut to `LAMP` — his face, tired (`alone_turn:door`: his thought, the face holds through it); back to `HOUSE`, he goes to the station's doors |
 
 Keys: `hour`, `train`, `far`, `curtain`, the keys of `spitz`, `beat`, `beat_next`. No keys of the play.
 
@@ -56,7 +56,7 @@ Keys: `hour`, `train`, `far`, `curtain`, the keys of `spitz`, `beat`, `beat_next
            "look_back": {"after": ["board"], "tells": [], "seconds": 15, "show": false},
            "curtain": {"after": ["board"], "tells": [], "seconds": 17, "show": false},
            "alone_far": {"after": [], "tells": ["alone_far:stands"], "seconds": 21, "show": false},
-           "alone_turn": {"after": [], "tells": ["alone_turn:door"], "seconds": 12, "show": false}},
+           "alone_turn": {"after": [], "tells": ["alone_turn:door"], "seconds": 22, "show": false}},
  "points": ["anna", "carriage#curtain", "carriage#glass", "carriage#sill"],
  "offers": ["anna", "carriage#curtain"],
  "party": {}}
