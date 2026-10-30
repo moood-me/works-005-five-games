@@ -24,7 +24,6 @@ export default {
     // the poster
     async g => {
       const f = facts(g.state);
-      g.hero('gurov');
       await g.scene(SCENES.town, { beat: 'inkwell' }, { beds: { snow: 0.3 } });
       const inkwell = g.beat('inkwell');
       g.next('fence');
@@ -73,7 +72,6 @@ export default {
     // The Geisha: the theatre, finding her; the husband; the interval; the stairs — her answer
     async g => {
       const f = facts(g.state);
-      g.hero('gurov');
       await g.scene(SCENES.theatre, { beat: 'hall' }, { beds: { hall: 0.5 } });
       const hall = g.beat('hall');
       g.next('hall_find');
@@ -115,7 +113,6 @@ export default {
         await g.say('gurov', 'Good evening');
         await corridor;
       }
-      g.hero('anna');
       g.beds({ hall: 0.2 });
       const landing = g.told('stairs:landing');
       const stairs = g.beat('stairs');
@@ -149,7 +146,6 @@ export default {
     // The gate: through Anna's eyes — she leaves “for the professor”; lie to her husband or tell the truth
     async g => {
       const f = facts(g.state);
-      g.hero('anna');
       const asks = g.told('gate_leave:asks');
       await g.scene(SCENES.town, { beat: 'gate_leave' }, { beds: f.spring ? { thaw: 0.4 } : { snow: 0.3 } });
       const gate = g.beat('gate_leave');

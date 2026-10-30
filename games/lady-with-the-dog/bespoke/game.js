@@ -150,11 +150,10 @@ export default async function (b) {
     for (;;) {
       const r = replay ? replay.run : kept, ch = CHAPTERS[r.chapter];
       if (r.step >= ch.steps.length) return 'done';
-      // (the epilogue: the play's scales are done — its steps show none)
-      if (r.chapter === EPILOGUE) view.gauges(null);
-      const mine = r.chapter === EPILOGUE ? { ...view, gauges() {} } : view;
+      // (the scales stand on the map, not over the play)
+      view.gauges(null);
       // (gone to a minigame of it by the author's map: the step played up to it unseen)
-      const g = context(b, mine, hub, structuredClone(run(r)), r.play != null ? unseen(r.play, unheard()) : null,
+      const g = context(b, view, hub, structuredClone(run(r)), r.play != null ? unseen(r.play, unheard()) : null,
         { forward: r.step < (kept.seen[r.chapter] ?? 0) });
       // (where the play is, for the account of what players do: bespoke.at)
       b.at({ chapter: r.chapter, step: r.step, replay: !!replay });
@@ -215,7 +214,6 @@ export default async function (b) {
     // (nothing of the chapter said or shown stays over the map)
     b.hush();
     view.quiet();
-    view.gauges(null);
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, END);
     const now = replay ? replay.run : kept, season = CHAPTERS[Math.min(now.chapter, EPILOGUE)].season(now);
     const spec = await b.specOf(SCENES.lights);

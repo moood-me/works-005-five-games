@@ -23,7 +23,6 @@ export default {
     // The room: night, a candle; the watermelon; eat at the table — or bring her a slice and sit beside her; her
     // confession
     async g => {
-      g.hero('gurov');
       await g.scene(SCENES.room, { beat: 'room' }, { beds: { sea: 0.25, room: 0.3 } });
       const room = g.beat('room');
       g.next('room_hold');
@@ -88,7 +87,6 @@ export default {
     },
     // Oreanda: before dawn, the seat above the sea; the keeper; dew on the grass
     async g => {
-      g.hero('both');
       const sat = g.told('bench:sat');
       await g.scene(SCENES.oreanda, { beat: 'bench' }, { beds: { sea: 0.6, cicadas: 0.4 } });
       const bench = g.beat('bench');
@@ -123,7 +121,6 @@ export default {
     },
     // Noon: every day at noon together; a kiss looking round; the husband's letter
     async g => {
-      g.hero('both');
       await g.scene(SCENES.quay, { beat: 'noon_garden' }, { beds: { sea: 0.4, cicadas: 0.5 } });
       const garden = g.beat('noon_garden');
       g.next('days');
@@ -145,7 +142,6 @@ export default {
     // The station: through Anna's eyes — the parting, the carriage window; then Gurov alone on the platform
     async g => {
       const f = facts(g.state);
-      g.hero('anna');
       const bell = g.told('platform:bell');
       await g.scene(SCENES.station, { beat: 'platform' }, { beds: { crickets: 0.5, wires: 0.3, steam: 0.4 } });
       const platform = g.beat('platform');
@@ -176,7 +172,6 @@ export default {
         g.sound.wheels();
         await curtain;
       }
-      g.hero('gurov');
       g.beds({ crickets: 0.6, wires: 0.4 });
       const moment = g.told(alone === 'alone_far' ? 'alone_far:stands' : 'alone_turn:door');
       const last = g.beat(alone);

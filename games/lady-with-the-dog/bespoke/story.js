@@ -4,8 +4,6 @@
 //   g.state — what the play carries: {scales, shown, marks, choices} (game.js); what follows from it: facts(g.state)
 //   g.signal — aborts when the step is left: stop what it started (a sound, a timer) on it
 //   g.sound — the game's sounds (sound.js)
-//   g.hero(who) — whose scene it is: 'gurov' | 'anna' | 'both' — the hero's scale in full, the other one at a third;
-//     the first line of every step, and again inside one when the scene passes to the other hero
 //   g.beds(levels) — the background from now on (bespoke.background): the beds of sound named at their levels, every
 //     other one silent — the page changes it at once, over the music's crossfade. A scene's own goes with it (g.scene's
 //     beds): changed at its cut, with its music. Unseen (a jump): kept for the scene the jump shows (j.background)
@@ -47,9 +45,10 @@
 //   g.minigame({phrase, sample}) — inside a minigame's run: the language's mini-game begun (bespoke.minigame.start),
 //     left when the signal aborts; the ⏭ skips the minigame
 //   g.hint(text, afterMs) → off() — one line low in the middle (not in a minigame: the language prompts there)
-//   g.scale(name, delta) — a scale moves; the player sees which way (the gauge, the words)
-//   g.gauge(name, {rule}) — the scale is shown from now on; its one line of what it means said once (rule: false —
-//     not yet)
+//   g.scale(name, delta) — a scale moves; the player sees which way: its picture comes up and moves (ui.js stir), a
+//     slip says the side's word
+//   g.gauge(name, {rule}) — the scale met: its picture comes up, its one line of what it means said once (rule: false
+//     — not yet); from now on it stands on the map
 //   g.mark(key, value, text) — remembered (state.marks[key]); text — what the player is told, if any
 //   g.letter({text, sign, voice}) — a sheet the player unfolds, reads and folds again (ui.js); voice — a function said
 //     while it lies open (() => g.say(…): its words are heard too, the line letter for letter its text — game.md §3.6);
@@ -134,7 +133,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     waits.add(w);
   }));
   const put = (key, value, seconds) => (unseen() ? j.did([key, value]) : b.set(key, value, seconds));
-  let hero = 'both'; // whose scene it is
   let opening = null; // the beat the scene was opened with, till g.beat takes it up: {name, ended}
   let playing = null; // the minigame played now: {signal, end, skippable}
   // the page's ⏭ as the step stands now (a step's context only): none while a choice is offered or the step is still
@@ -164,7 +162,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
   const seen = () => (seeing ??= (async () => {
     const { shown, then } = j;
     for (const h of j.seen()) hub.told(h.text, h.ms).then(h.ok);
-    view.gauges(state, hero);
     if (shown) await alive(b.show(shown.folder, { state: shown.state, captions: false, then, background: j.background }));
     ahead();
   })());
@@ -176,11 +173,6 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
     state,
     signal: left.signal,
     get sound() { return unseen() ? j.sounds : sounds; },
-    hero(who) {
-      if (gone()) return;
-      hero = who;
-      if (!unseen()) view.gauges(state, hero);
-    },
     beds(levels) {
       if (gone()) return;
       if (unseen()) j.background = levels; else b.background(levels);
@@ -317,8 +309,8 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
       state.scales[name] = Math.min(S.max, Math.max(S.min, state.scales[name] + delta));
       state.shown[name] ||= 'bare'; // (a scale not seen yet: shown, its line still to come)
       if (unseen()) return;
-      view.toast(`${delta > 0 ? S.up : S.down} ${'↑'.repeat(Math.abs(delta))}`, 'scale');
-      view.gauges(state, hero);
+      view.toast(delta > 0 ? S.up : S.down, 'scale');
+      view.stir(name, state);
     },
     gauge(name, { rule = true } = {}) {
       if (gone()) return;
@@ -327,7 +319,7 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
         if (!unseen()) view.toast(SCALES[name].rule, 'rule');
       }
       state.shown[name] ||= 'bare';
-      if (!unseen()) view.gauges(state, hero);
+      if (!unseen()) view.stir(name, state);
     },
     mark(key, value, text) {
       if (gone()) return;

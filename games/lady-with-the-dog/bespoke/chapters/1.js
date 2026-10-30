@@ -20,7 +20,6 @@ export default {
     // The gardens: evening, the gardens' lamps, a band far off; the spitz, his hand, her “He doesn’t bite”; the talk;
     // night, the moon's path
     async g => {
-      g.hero('gurov');
       const band = g.sound.band();
       g.signal.addEventListener('abort', () => band.stop(1));
       const sat = g.told('garden:sat');
@@ -85,7 +84,6 @@ export default {
     // The pier: a holiday, the wind, the steamer came in late; Anna looks through her lorgnette for acquaintances among
     // the arrivals
     async g => {
-      g.hero('anna');
       const looking = g.told('pier:lorgnette');
       await g.scene(SCENES.quay, { beat: 'pier' }, { beds: { sea: 0.5, wind: 0.5, crowd: 0.6 } });
       const pier = g.beat('pier');

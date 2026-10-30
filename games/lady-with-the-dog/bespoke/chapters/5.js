@@ -23,7 +23,6 @@ export default {
   steps: [
     // At night: he comes home late from her; his wife in the doorway
     async g => {
-      g.hero('gurov');
       const door = g.told('home_late:door');
       await g.scene(SCENES.moscow, { beat: 'home_late' }, { beds: weather(g.state) });
       const late = g.beat('home_late');
@@ -56,7 +55,6 @@ export default {
     },
     // To school: the morning of another of her visits; he takes his daughter; two lives; a note from her
     async g => {
-      g.hero('gurov');
       await g.scene(SCENES.moscow, { beat: 'school' }, { beds: weather(g.state) });
       const school = g.beat('school');
       g.next('walk_hand');
@@ -96,7 +94,6 @@ export default {
     // difficult part of it was only just beginning”
     async g => {
       const f = facts(g.state);
-      g.hero('both');
       const piano = g.sound.piano('waltz', { wall: true });
       g.signal.addEventListener('abort', () => piano.stop(1));
       const met = g.told('bazaar_in:met');

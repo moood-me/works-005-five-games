@@ -15,19 +15,16 @@ export default {
   steps: [
     // S.: the husband with the old spitz by the fence or at the gate
     async g => {
-      g.hero('both');
       await g.scene(SCENES.town, { beat: 'fence_end' }, { beds: facts(g.state).spring ? { thaw: 0.3 } : { snow: 0.3 } });
       await g.beat('fence_end');
     },
     // Moscow: the window upstairs — the wife at the window, or the house dark
     async g => {
-      g.hero('both');
       await g.scene(SCENES.moscow, { beat: 'porch_end' }, { beds: facts(g.state).spring ? { thaw: 0.3 } : { snow: 0.3 } });
       await g.beat('porch_end');
     },
     // Oreanda: dawn, the empty seat, the sea
     async g => {
-      g.hero('both');
       await g.scene(SCENES.oreanda, { beat: 'bench_end' }, { beds: { sea: 0.6 } });
       await g.beat('bench_end');
     },

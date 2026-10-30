@@ -20,7 +20,6 @@ export default {
   steps: [
     // The first snow: morning, the sledges; the evening street and the shadows; the window upstairs, her voice
     async g => {
-      g.hero('gurov');
       const out = g.told('first_snow:out');
       await g.scene(SCENES.moscow, { beat: 'first_snow' }, { beds: { snow: 0.4 } });
       const snow = g.beat('first_snow');
@@ -51,7 +50,6 @@ export default {
     // The leash: through Anna's eyes — late autumn in S., the fence, the spitz pulls toward the station road; the
     // husband with a coat
     async g => {
-      g.hero('anna');
       await g.scene(SCENES.town, { beat: 'autumn_walk' }, { beds: { wind: 0.5 } });
       const walk = g.beat('autumn_walk');
       await g.say('narrator', 'In S. it was late autumn. Every evening Anna Sergeyevna walked the Pomeranian along the fence');
@@ -76,7 +74,6 @@ export default {
     },
     // The club: night, “the sturgeon was a bit too strong”; laugh and get into the sledge — or walk away
     async g => {
-      g.hero('gurov');
       const out = g.told('club:out');
       await g.scene(SCENES.moscow, { beat: 'club' }, { beds: { snow: 0.3 } });
       const club = g.beat('club');
@@ -111,7 +108,6 @@ export default {
     },
     // The departure: December, before dawn; his wife in the doorway
     async g => {
-      g.hero('gurov');
       const turns = g.told('porch_go:turns');
       await g.scene(SCENES.moscow, { beat: 'porch_go' }, { beds: { snow: 0.3 } });
       const porch = g.beat('porch_go');

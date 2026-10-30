@@ -1,13 +1,16 @@
 // What the game shows over the scene (bespoke.layer), as an old resort postcard written in pencil: warm white paper
 // with a thin faded frame, graphite words in a light hand (Bad Script — "Lady Hand"), nothing bright (game.md §9). Red
 // is the leash's alone: the leash of Anna's gauge, nothing else here.
-//   view.gauges({scales, shown} | null, hero) — each scale once the player has met it: the white spitz on its red
-//     leash low on the left (Anna: Duty ↔ Life — it sits by the parapet's end on a short leash ↔ runs ahead on a long
-//     one), the pocket watch low on the right (Gurov: Lightness ↔ Openness — its lid shut ↔ open); hero ('gurov' |
-//     'anna' | 'both') — whose scene it is: their scale in full, the other at a third. view.gauges(null) — none
-//     (the map, the epilogue)
-//   view.toast(text, kind) — a slip of the postcard's paper in the corner: 'scale' (a scale moved), 'rule' (what a
-//     scale means, the first time), 'mark' (remembered); three at most
+//   The scales' pictures: the white spitz on its red leash low on the left (Anna: Duty ↔ Life — it sits by the
+//   parapet's end on a short leash ↔ runs ahead on a long one), the pocket watch low on the right (Gurov: Lightness ↔
+//   Openness — its lid shut ↔ open). They stand on the map, not over the play (a count kept in sight would argue with
+//   the story's quiet sadness); in the play a scale's picture comes up only when it moves.
+//   view.gauges({scales, shown} | null) — on the map: each scale the player has met, its two ends' words under it;
+//     null — none
+//   view.stir(name, {scales, shown}) — in the play: that scale's picture comes up, goes to where the scale now stands
+//     and fades away again
+//   view.toast(text, kind) — a slip of the postcard's paper in the corner: 'scale' (a scale moved: the word of the side
+//     it moved to), 'rule' (what a scale means, the first time), 'mark' (remembered); three at most
 //   view.hint(text, afterMs) — one line low in the middle, after `afterMs` (what to do: “Touch the dog”); → a function
 //     that takes it away. One at a time: a new one takes the place of the one before
 //   view.title(text, {signal}) — the words over the scene, as a postcard's caption; → once they have gone (9 s)
@@ -48,18 +51,18 @@ export function ui(layer) {
   const toasts = el('div', 'toasts', layer);
   let hinted = () => {}; // takes the hint shown now away
   return {
-    gauges(state, hero) {
-      watch.show(state?.shown.heart, state?.scales.heart, hero !== 'anna');
-      leash.show(state?.shown.anna, state?.scales.anna, hero !== 'gurov');
+    gauges(state) {
+      watch.show(state?.shown.heart, state?.scales.heart);
+      leash.show(state?.shown.anna, state?.scales.anna);
+    },
+    stir(name, state) {
+      (name === 'heart' ? watch : leash).stir(state.scales[name]);
     },
     toast(text, kind) {
       // three at most: the oldest goes for a new one
       while (toasts.childElementCount > 2) toasts.firstElementChild.remove();
       const slip = card('p', `slip ${kind}`, toasts);
-      // (the arrows of a scale's slip in a plain serif: the hand has none)
-      const [, words, arrows] = /^(.*?)(\s↑+)?$/.exec(text);
-      el('span', 'words', slip).textContent = words;
-      if (arrows) el('span', 'arrows', slip).textContent = arrows;
+      el('span', 'words', slip).textContent = text;
       const stay = kind === 'rule' ? 7500 : 4200;
       setTimeout(() => slip.classList.add('gone'), stay);
       setTimeout(() => slip.remove(), stay + 1600);
@@ -146,13 +149,30 @@ function glide(fn, seconds = 2) {
     raf = requestAnimationFrame(step);
   };
 }
-// one scale's picture in its corner: seen once the scale is met, in full when the scene is its hero's
-const gauge = (box, set) => ({
-  show(met, value, full) {
-    box.style.opacity = !met ? 0 : full ? 1 : 0.35;
-    if (met) set(value);
-  },
-});
+// one scale's picture in its corner: on the map — once the scale is met, its two ends' words under it (`ends`: the
+// low one, the high one); in the play — for a few seconds as it moves (STIR s)
+const STIR = 5;
+function gauge(box, set, [low, high]) {
+  const words = svg('text', { class: 'ends', x: 36, y: 80, 'text-anchor': 'middle' }, box);
+  words.textContent = `${low} · ${high}`;
+  let timer = 0;
+  return {
+    show(met, value) {
+      clearTimeout(timer);
+      box.classList.toggle('named', !!met);
+      box.style.opacity = met ? 1 : 0;
+      if (met) set(value);
+    },
+    stir(value) {
+      clearTimeout(timer);
+      box.classList.remove('named');
+      box.style.opacity = 1;
+      // (it moves once it can be seen coming up)
+      setTimeout(() => set(value), 600);
+      timer = setTimeout(() => { box.style.opacity = 0; }, STIR * 1000);
+    },
+  };
+}
 
 // Anna (Duty ↔ Life, −3…3): the parapet's line, a hand at the left edge holding the red leash, the white spitz on the
 // parapet at x = 14 + 44·(a + 3)/6 — the further it has run, the longer the leash
@@ -176,7 +196,7 @@ function leashGauge(layer) {
     const x0 = 6, y0 = 32, x1 = x + 5, y1 = y - 10, sag = Math.max(1.5, 9 - (x1 - x0) * 0.12);
     line.setAttribute('d', `M${x0} ${y0} Q ${((x0 + x1) / 2).toFixed(2)} ${(Math.max(y0, y1) + sag).toFixed(2)} ${x1.toFixed(2)} ${y1}`);
   });
-  return gauge(box, move);
+  return gauge(box, move, [tr('Duty'), tr('Life')]);
 }
 
 // Gurov (Lightness ↔ Openness, −5…5): a pocket watch, its chain, its lid on a hinge at the top — shut when he keeps
@@ -207,7 +227,7 @@ function watchGauge(layer) {
     lid.setAttribute('transform', `translate(0 27) scale(1 ${k.toFixed(3)}) translate(0 -27)`);
     lid.classList.toggle('inside', k < 0);
   });
-  return gauge(box, turn);
+  return gauge(box, turn, [tr('Lightness'), tr('Openness')]);
 }
 
 // the letter or the note: folded in three; pressed, it opens — the top third, then the bottom — and can be read; pressed
