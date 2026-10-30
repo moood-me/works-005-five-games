@@ -468,7 +468,7 @@ export const paper = () => once('paper');
 export const watch = () => once('watch');
 // her heart: two dull beats
 export function heart() {
-  const a = audio(), t = now(), out = air(0.05);
+  const a = audio(), t = a.currentTime + 0.02, out = air(0.05);
   for (const [s, v] of [[0, 0.5], [0.24, 0.35]]) {
     const o = a.createOscillator(), e = a.createGain();
     o.frequency.setValueAtTime(62, t + s);
