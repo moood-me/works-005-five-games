@@ -174,5 +174,93 @@
         0
       ]
     }
-  ]
+  ],
+  "music": {
+    "bpm": 64,
+    "density": 0.25,
+    "brightness": 0.5,
+    "scale": "D_MAJOR_B_MINOR",
+    "prompts": [
+      {
+        "text": "Wide ambient strings over a slow sea swell, hopeful, a sail somewhere far off",
+        "weight": 0.6
+      },
+      {
+        "text": "Ambient glassy synth swells with long reverb tails, a horizon turning pink, minimalist and luminous",
+        "weight": 0.9
+      },
+      {
+        "text": "Sparse felt piano over a soft sustained string pad, the open sea at dawn, slow and spacious, modern indie game score",
+        "weight": 1.2
+      },
+      {
+        "text": "Sparse felt piano over a soft sustained string pad, slow and spacious, morning sea light, modern indie game score",
+        "weight": 0
+      },
+      {
+        "text": "Ambient glassy synth swells with long reverb tails, calm shoreline at dawn, minimalist and luminous",
+        "weight": 0
+      },
+      {
+        "text": "Solo cello playing a long quiet melody, distant, restrained, with gentle room ambience",
+        "weight": 0.3
+      },
+      {
+        "text": "Four rising notes on a celesta repeating softly like a far-off promise, airy and tender",
+        "weight": 0
+      },
+      {
+        "text": "Granular textures of sea air and soft noise, slow-breathing pads, almost silent",
+        "weight": 0
+      },
+      {
+        "text": "Warm Rhodes chords, unhurried, lo-fi tape warmth, quiet coastal village waking",
+        "weight": 0
+      },
+      {
+        "text": "Neo-classical string quartet, sustained harmonics, pale and silvery, very slow tempo",
+        "weight": 0
+      },
+      {
+        "text": "Music box melody slowed down and drenched in reverb, nostalgic and fragile",
+        "weight": 0
+      },
+      {
+        "text": "Solo violin, high and thin, a single line over an open fifth drone, hopeful longing",
+        "weight": 0
+      },
+      {
+        "text": "Soft analog synth arpeggio rippling like light on water, gentle and steady",
+        "weight": 0
+      },
+      {
+        "text": "Harp glissandi and soft flute, impressionistic, Debussy-like sea mist",
+        "weight": 0
+      },
+      {
+        "text": "Deep low drone with distant foghorn-like brass, misty cape before sunrise",
+        "weight": 0
+      },
+      {
+        "text": "Nordic folk-inspired nyckelharpa, sparse and modern, cool northern light",
+        "weight": 0
+      },
+      {
+        "text": "Choir of wordless distant voices, very soft pads, cathedral reverb, timeless calm",
+        "weight": 0
+      },
+      {
+        "text": "Minimalist repeating piano pattern in the style of Max Richter, slow build, wistful",
+        "weight": 0
+      },
+      {
+        "text": "Guitar harmonics and fingerpicked nylon guitar, intimate, quiet seaside morning",
+        "weight": 0
+      },
+      {
+        "text": "Shimmering bowed vibraphone and glass harmonica, suspended, dreamlike stillness",
+        "weight": 0
+      }
+    ]
+  }
 }

@@ -183,5 +183,81 @@
         0
       ]
     }
-  ]
+  ],
+  "music": {
+    "bpm": 60,
+    "density": 0.15,
+    "brightness": 0.25,
+    "scale": "A_FLAT_MAJOR_F_MINOR",
+    "prompts": [
+      {
+        "text": "A distant train's long whistle dissolving into a soft drone, far away",
+        "weight": 0.3
+      },
+      {
+        "text": "Very quiet low drone of wind over an empty railway yard at night, snow, sparse, cold",
+        "weight": 1.2
+      },
+      {
+        "text": "Very quiet wind over an empty suburban railway platform at night, snow falling, sparse, cold",
+        "weight": 0
+      },
+      {
+        "text": "Soft sustained string pad, almost still, tender and aching, winter night, minor key",
+        "weight": 0.7
+      },
+      {
+        "text": "Glassy high harmonics like frost on a carriage window, shimmering, very slow",
+        "weight": 0.3
+      },
+      {
+        "text": "Distant rails humming, a far train fading, low drone, no melody",
+        "weight": 0
+      },
+      {
+        "text": "Slow solo piano, few notes, lots of silence, Soviet film score, melancholic",
+        "weight": 0
+      },
+      {
+        "text": "Warm low organ hum like a lit window far off in the cold, very soft",
+        "weight": 0
+      },
+      {
+        "text": "Muted felt piano, warm and sad, 1970s Russian chamber music",
+        "weight": 0
+      },
+      {
+        "text": "Cello long notes, quiet, breathing, intimate, late night",
+        "weight": 0
+      },
+      {
+        "text": "Minimal ambient with soft bell-like tones, cold and still",
+        "weight": 0
+      },
+      {
+        "text": "Grey dawn, a thin cold light, a single sustained chord slowly brightening",
+        "weight": 0
+      },
+      {
+        "text": "Tense quiet pulse, someone waiting for a train that is late",
+        "weight": 0
+      },
+      {
+        "text": "Celesta and strings, a winter tale but sad, very slow",
+        "weight": 0
+      },
+      {
+        "text": "Solemn wordless choir hum, far away, cold air",
+        "weight": 0
+      },
+      {
+        "text": "Soft brushed snare and double bass, slow night jazz muffled by snow",
+        "weight": 0
+      },
+      {
+        "text": "Lonely harmonica far away, a station at night, restrained",
+        "weight": 0
+      }
+    ]
+  }
 }
