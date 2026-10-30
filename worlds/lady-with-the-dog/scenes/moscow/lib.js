@@ -107,6 +107,9 @@ const THRESHOLD = [3.45, 13.0];
 const PORCH_TOP = [3.15, 12.9];
 const STEP_BELOW = [2.6, 12.9];
 const PORCH_FOOT = [1.72, 12.4];
+// at the door, face to face: he a step below turned a little out toward the lane (his face three-quarter to the shot
+// DOOR, his head turned up to her), she on the threshold turned a little toward the porch's south end
+const GUROV_AT_DOOR = 105, WIFE_AT_DOOR = 245;
 const UPSTAIRS = [4.2, 15.4];          // the wife at the window upstairs (on the room's floor, 3.9; 0.6 m behind the front:
                                        // her dress's flare must not reach through the wall)
 // at the club: inside its door, on the portico, the bottom step
@@ -115,6 +118,7 @@ const CLUB_IN = { gurov: [-6.0, 23.65], official: [-6.0, 23.35] };
 const CLUB_GAP = { gurov: [-4.9, 23.55], official: [-4.9, 23.45] };
 const CLUB_OUT = { gurov: [-4.55, 24.2], official: [-4.5, 22.9] };
 const CLUB_STEP = [-4.15, 23.6];
+const AFTER_STURGEON = 135;            // on the bottom step after the official's words: turned out toward the lane below
 
 // ── the shots: place x, z (metres from the start), the eye's height, yaw (right of straight ahead), pitch ──
 const cam = (x, z, eye, yaw = 0, pitch = 0) => ({ camera_target: null, camera_shot: null, camera_frame: null,
@@ -143,10 +147,17 @@ const CAM = {
   CLUB: cam(-0.4, 17.5, 1.7, -22),
   // faces: the official in his sledge turned back to Gurov on the bottom step, both in profile, the club's lamps on them
   TWO: twoShot(CLUB_STEP, [OFFICIAL_SEAT[0], OFFICIAL_SEAT[1]], 3.3, 1.55),
-  // faces: the wife on the threshold and Gurov a step below, from along the house front; the porch lamp before them
-  DOOR: cam(3.0, 10.0, 2.1),
-  // her face close (chest up, 1.8 m), three-quarter, from the pavement by the steps; his shoulder at the frame's right
-  WIFE: cam(1.85, 13.9, 2.3, 119),
+  // faces: the wife on the threshold and Gurov a step below, both three-quarter, medium, from the porch's south end
+  // over its rail; the porch lamp before them, the lane behind him
+  DOOR: cam(3.3, 11.3, 2.2, -19),
+  // her face nearer (chest up, 1.5 m), three-quarter, from beside the porch between the two; his shoulder at the
+  // frame's left, where she looks
+  WIFE: cam(3.0, 11.6, 2.25, 14),
+  // the club's portico nearer: Gurov on the bottom step medium, his sledge at the kerb up the lane (the two marks of
+  // “After the sturgeon” in 4:3)
+  CLUB_NEAR: cam(-1.6, 19.6, 1.65, -18),
+  // the window upstairs from across the lane, a little below: the wife at it, chest up, in her lamp's light
+  WINDOW: cam(-0.4, 15.2, 2.9, 89, 29),
   // at the school's gate: Gurov from along the railings, three-quarter; the gate, the girl at it
   GATE: cam(2.9, 2.6, 1.6, -8),
   // the gate end of the lane: Gurov at the gate, the street behind him (the messenger comes across it)
@@ -310,18 +321,21 @@ function film(scene) {
         s.tell('say:turns');
         await s.wait(3);
         gurov.mood('thinking');
-        const wide = s.shot({ ...CAM.CLUB });
+        const wide = s.shot({ ...CAM.CLUB_NEAR });
         await s.wait(4);
         await s.until(() => wide.ready);
         wide.cut();
-        await s.wait(0.8);
+        // (he turns from the official, out toward the lane below, thinking — his face to us under the choice)
+        gurov.look([-2.4, 21.6, 0.3]);
+        await gurov.turn(AFTER_STURGEON);
+        await s.wait(0.6);
       },
     },
     // he laughs, his shoulders shaking, goes down to his sledge and gets in
     laugh_sit: {
       after: 'say',
-      from: () => base({ hour: NIGHT, sledge: 'club', sledge2: 'club', ...nightLights, windows: 0.6, snow: 0.3, ...CAM.CLUB,
-        ...at('gurov', CLUB_STEP, turnTo(CLUB_STEP, OFFICIAL_SEAT), { gurov_look: 'official' }),
+      from: () => base({ hour: NIGHT, sledge: 'club', sledge2: 'club', ...nightLights, windows: 0.6, snow: 0.3, ...CAM.CLUB_NEAR,
+        ...at('gurov', CLUB_STEP, AFTER_STURGEON, { gurov_look: [-2.4, 21.6, 0.3], gurov_mood: 'thinking' }),
         ...at('official', [OFFICIAL_SEAT[0], OFFICIAL_SEAT[1]], 238, { official_on: OFFICIAL_SEAT, official_do: 'seated', official_look: 'gurov' }) }),
       run: async s => {
         const gurov = s.person('gurov');
@@ -340,8 +354,8 @@ function film(scene) {
     // he walks away through the snow, past his empty sledge, toward the far lamp; the cabman turns after him — under L54
     say_walk: {
       after: 'say',
-      from: () => base({ hour: NIGHT, sledge: 'club', sledge2: 'club', ...nightLights, windows: 0.6, snow: 0.3, ...CAM.CLUB,
-        ...at('gurov', CLUB_STEP, turnTo(CLUB_STEP, OFFICIAL_SEAT), { gurov_look: 'official', gurov_mood: 'thinking' }),
+      from: () => base({ hour: NIGHT, sledge: 'club', sledge2: 'club', ...nightLights, windows: 0.6, snow: 0.3, ...CAM.CLUB_NEAR,
+        ...at('gurov', CLUB_STEP, AFTER_STURGEON, { gurov_look: [-2.4, 21.6, 0.3], gurov_mood: 'thinking' }),
         ...at('official', [OFFICIAL_SEAT[0], OFFICIAL_SEAT[1]], 238, { official_on: OFFICIAL_SEAT, official_do: 'seated', official_look: 'gurov' }) }),
       run: async s => {
         const gurov = s.person('gurov'), cabman = s.person('cabman');
@@ -362,7 +376,7 @@ function film(scene) {
     porch_go: {
       from: () => base({ hour: BEFORE_DAWN, sledge: 'house', ...nightLights, windows: 0.15, home: 0.5, door: 1, door_f: doorFacing(1),
         snow: 0.25, ...CAM.PORCH,
-        ...at('wife', THRESHOLD, 263, { wife_wear: kit.cast.characters.wife_shawl }),
+        ...at('wife', THRESHOLD, WIFE_AT_DOOR, { wife_wear: kit.cast.characters.wife_shawl }),
         ...at('gurov', STEP_BELOW, 215),
         ...at('yardman', [3.1, 13.7], 200, { yardman_with: ['valise'], yardman_gait: 'carry_walk' }) }),
       run: async s => {
@@ -376,7 +390,7 @@ function film(scene) {
         })();
         const faces = s.shot({ ...CAM.DOOR });
         await s.wait(2.2);
-        await gurov.turn(83);
+        await gurov.turn(GUROV_AT_DOOR);
         gurov.look('wife');
         wife.look('gurov');
         await s.until(() => faces.ready);
@@ -405,12 +419,12 @@ function film(scene) {
       run: async s => {
         const gurov = s.person('gurov'), wife = s.person('wife');
         await gurov.walk([[1.75, 14.6], PORCH_FOOT, STEP_BELOW]);
-        await gurov.turn(83);
+        await gurov.turn(GUROV_AT_DOOR);
         const faces = s.shot({ ...CAM.DOOR });
         await s.move('door', 1, { over: 1.0, ease: 'inOut' });
         s.tell('home_late:door');
         await wife.walk([THRESHOLD]);
-        await wife.turn(263);
+        await wife.turn(WIFE_AT_DOOR);
         wife.look('gurov');
         gurov.look('wife');
         await s.until(() => faces.ready);
@@ -423,7 +437,7 @@ function film(scene) {
       after: 'home_late',
       from: () => base({ hour: NIGHT, ...nightLights, season: thaw() ? 'thaw' : 'winter', windows: 0.25, window_up: 1, curtain: 1,
         snow: thaw() ? 0 : 0.4, door: 1, door_f: doorFacing(1), ...CAM.DOOR,
-        ...at('gurov', STEP_BELOW, 83, { gurov_look: 'wife' }), ...at('wife', THRESHOLD, 263, { wife_look: 'gurov' }) }),
+        ...at('gurov', STEP_BELOW, GUROV_AT_DOOR, { gurov_look: 'wife' }), ...at('wife', THRESHOLD, WIFE_AT_DOOR, { wife_look: 'gurov' }) }),
       run: async s => {
         const gurov = s.person('gurov'), wife = s.person('wife');
         wife.mood('neutral');
@@ -450,7 +464,7 @@ function film(scene) {
       after: 'home_late',
       from: () => base({ hour: NIGHT, ...nightLights, season: thaw() ? 'thaw' : 'winter', windows: 0.25, window_up: 1, curtain: 1,
         snow: thaw() ? 0 : 0.4, door: 1, door_f: doorFacing(1), ...CAM.WIFE,
-        ...at('gurov', STEP_BELOW, 83, { gurov_look: 'wife' }), ...at('wife', THRESHOLD, 263, { wife_look: 'gurov', wife_mood: 'sad' }) }),
+        ...at('gurov', STEP_BELOW, GUROV_AT_DOOR, { gurov_look: 'wife' }), ...at('wife', THRESHOLD, WIFE_AT_DOOR, { wife_look: 'gurov', wife_mood: 'sad' }) }),
       run: async s => {
         const gurov = s.person('gurov'), wife = s.person('wife');
         const close = s.shot({ ...CAM.WIFE });
@@ -603,8 +617,8 @@ function film(scene) {
         await s.wait(1);
       },
     },
-    // the epilogue: night, snow or the thaw; the porch; (wife_knows 1) the wife at the lit window upstairs; (0) the house
-    // dark but the porch lamp
+    // the epilogue: night, snow or the thaw; the porch; (wife_knows 1) the camera comes slowly up to the lit window
+    // upstairs, the wife at it; (0) the house dark but the porch lamp, the camera still
     porch_end: {
       from: () => {
         const season = thaw() ? 'thaw' : 'winter';
@@ -612,11 +626,16 @@ function film(scene) {
           ...wifeUpstairs([0.0, 11.0, 0.5]) });
       },
       run: async s => {
-        await s.wait(5);
-        if (party('wife_knows')) {
-          s.person('wife').look([-2.0, 20.0, 0.5]);
-          await s.wait(5);
-        } else await s.wait(5);
+        if (!party('wife_knows')) { await s.wait(10); return; }
+        // (the house, then slowly up to the lit window: the wife at it, looking down the lane)
+        await s.wait(1.5);
+        const W = CAM.WINDOW, over = { over: 8, ease: 'inOut' };
+        for (const k of ['camera_x', 'camera_z', 'camera_h', 'camera_yaw']) s.move(k, W[k], over);
+        const up = s.move('camera_pitch', W.camera_pitch, over);
+        await s.wait(3.5);
+        s.person('wife').look([-2.0, 20.0, 0.5]);
+        await up;
+        await s.wait(1);
       },
     },
   };

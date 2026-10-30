@@ -59,7 +59,12 @@ by the man in the red cap; the porch at night. Or the thaw instead of the snow, 
 road, a little below (door, window upstairs, the sledge). `CLUB` — the portico ≈ 5–6 m, the sledges along the kerb
 beyond it, the far lamp up the lane. Faces: `TWO` — the official in his sledge turned back to Gurov on the bottom step,
 both in profile (worked out from where they are: `twoShot`); `DOOR` — the wife on the threshold and Gurov a step below,
-from along the house front, the porch lamp before their faces; `WIFE` — her face close (chest up), three-quarter, from the pavement by the steps; `GATE` — Gurov at
+both three-quarter, medium, from beside the porch's south end (he stands turned a little out to the lane,
+`GUROV_AT_DOOR` 105, she `WIFE_AT_DOOR` 245 — so both faces are seen; the choice “At the club / I was with her” is on
+him, in this shot); `WIFE` — her face nearer (chest up), three-quarter, from beside the porch between the two, his
+shoulder at the frame's left; `CLUB_NEAR` — the portico nearer, Gurov on the bottom step turned out toward us
+(`AFTER_STURGEON`), his sledge up the lane: “After the sturgeon” is played on it; `WINDOW` — the window upstairs from
+across the lane, a little below: the epilogue comes up to it; `GATE` — Gurov at
 the school's gate, three-quarter, the girl at the gate; `NEAR` — the gate end of the lane, the messenger crossing it.
 
 ## Beats
@@ -70,7 +75,7 @@ the school's gate, three-quarter, the girl at the gate; `NEAR` — the gate end 
 | `evening_walk` | — | 4 | evening, lamps, snow; `STREET`; he at the lane's far end — under “The shadow” |
 | `table_window` | — | 19 | `PORCH`: he comes up the steps; `look_back` 1 — turns on the top step and looks up the lane (profile, under the porch lamp); goes in (`table_window:lit`); the window upstairs lit, the shadows of two on its curtain |
 | `club` | — | 10 | night; `CLUB`; he and the official come out onto the portico (`club:out`); he turns to the official |
-| `say` | club | 13 | the official sits down in his sledge, turns back; a cut to `TWO` (`say:turns`): faces under L51–L53, Gurov thinking; back to `CLUB` — under the choice |
+| `say` | club | 14 | the official sits down in his sledge, turns back; a cut to `TWO` (`say:turns`): faces under L51–L53, Gurov thinking; a cut to `CLUB_NEAR`: he turns from the official out toward the lane below, his face to us — under the choice |
 | `laugh_sit` | say | 11 | he laughs, goes to his sledge and gets in |
 | `say_walk` | say | 10 | he walks away past his sledge toward the far lamp (`say_walk:off`); the cabman turns after him |
 | `porch_go` | — | 15 | before dawn; the yard porter carries the valise to the sledge; the wife in her shawl in the lit doorway; a cut to `DOOR` (`porch_go:turns`) — faces; back to `PORCH`, he gets into the sledge |
@@ -81,7 +86,7 @@ the school's gate, three-quarter, the girl at the gate; `NEAR` — the gate end 
 | `walk_hand` | school | 2 | a cut to `STREET`: the two at the porch's foot, hand in hand, toward us — under “By the hand” |
 | `gate_school` | walk_hand | 8 | (they come up to the gate if they have not); a cut to `GATE`: she lets go; `wave` 0 — runs in without looking back; 1 — turns at the gate, waves, runs in; he stands, his face |
 | `red_cap` | gate_school | 16 | a cut to `NEAR`: the messenger in the red cap crosses to him, gives the note (`red_cap:note`), goes |
-| `porch_end` | — | 10 | the epilogue: night, snow or the thaw; `PORCH`; `wife_knows` 1 — the wife at the lit window upstairs; 0 — the house dark but the porch lamp |
+| `porch_end` | — | 10 | the epilogue: night, snow or the thaw; `PORCH`; `wife_knows` 1 — the camera comes slowly up to the lit window upstairs (`WINDOW`), the wife at it, chest up; 0 — the house dark but the porch lamp, the camera still |
 
 Between the beats (script.js), what the game's minigames move:
 - **“The shadow”** (after `evening_walk`): `walk_on` N (1…4) — Gurov strolls to stop N (lib.js `STOPS`: 22, 17, 10,
@@ -123,7 +128,7 @@ Keys: `hour`, `overcast`, `season`, `snow`, `wet`, `lamps`, `porch_lamp`, `windo
            "evening_walk": {"after": [], "tells": ["evening_walk:stop1", "evening_walk:stop2", "evening_walk:stop3", "evening_walk:stop4"], "seconds": 4, "show": false},
            "table_window": {"after": [], "tells": ["table_window:lit"], "seconds": 19, "show": false},
            "club": {"after": [], "tells": ["club:out"], "seconds": 10, "show": false},
-           "say": {"after": ["club"], "tells": ["say:turns"], "seconds": 13, "show": false},
+           "say": {"after": ["club"], "tells": ["say:turns"], "seconds": 14, "show": false},
            "laugh_sit": {"after": ["say"], "tells": [], "seconds": 11, "show": false},
            "say_walk": {"after": ["say"], "tells": ["say_walk:off"], "seconds": 10, "show": false},
            "porch_go": {"after": [], "tells": ["porch_go:turns"], "seconds": 15, "show": false},
