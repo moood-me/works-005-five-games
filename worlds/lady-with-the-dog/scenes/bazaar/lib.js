@@ -236,8 +236,13 @@ function film(scene) {
           await s.wait(1.4);
           gurov.look('gurov#watch');
           s.tell('bazaar_end:watch');
+          await s.wait(2.6);
+          gurov.reach(null);
+          gurov.with(null);
+          gurov.look(LOOKS[scene.get('think')]?.gurov ?? 'anna');
+          gurov.do('stand');
           await s.wait(3.4);
-        } else await s.wait(4.8);
+        } else await s.wait(7.4);
         await s.until(() => wide.ready);
         wide.cut();
         await s.move('camera_z', CAM.END.camera_z, { over: 10, ease: 'inOut' });

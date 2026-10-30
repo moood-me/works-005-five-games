@@ -55,7 +55,8 @@ by the man in the red cap; the porch at night. Or the thaw instead of the snow, 
 ## Shots (lib.js `CAM`)
 
 `STREET` — down the lane at a slant from its near end (the school's gate ≈ 5 m, the official's sledge by the baker's
-≈ 7, the Gurovs' porch ≈ 13, the cross street ≈ 30): “The shadow”, “By the hand”. `PORCH` — the Gurovs' house from the
+≈ 7, the Gurovs' porch ≈ 13, the cross street ≈ 30): “The shadow”. `HAND` — nearer down the lane: “By the hand”.
+`SNOW_FACE` — his face on the porch lifted to the first snow. `PORCH` — the Gurovs' house from the
 road, a little below (door, window upstairs, the sledge). `CLUB` — the portico ≈ 5–6 m, the sledges along the kerb
 beyond it, the far lamp up the lane. Faces: `TWO` — the official in his sledge turned back to Gurov on the bottom step,
 both in profile (worked out from where they are: `twoShot`); `DOOR` — the wife on the threshold and Gurov a step below,
@@ -71,7 +72,7 @@ the school's gate, three-quarter, the girl at the gate; `NEAR` — the gate end 
 
 | Beat | after | ≈ s | What |
 | --- | --- | --- | --- |
-| `first_snow` | — | 13 | morning, the first snow; `PORCH`; he comes out, lifts his face to the snow (profile) — `first_snow:out` —, goes down to his sledge and gets in |
+| `first_snow` | — | 15 | morning, the first snow; `PORCH`; he comes out — `first_snow:out` —, lifts his face to the snow: a cut to `SNOW_FACE` (his thought “In another month or so…”, 4.5 s); back to `PORCH`, he goes down to his sledge and gets in |
 | `evening_walk` | — | 4 | evening, lamps, snow; `STREET`; he at the lane's far end — under “The shadow” |
 | `table_window` | — | 19 | `PORCH`: he comes up the steps; `look_back` 1 — turns on the top step and looks up the lane (profile, under the porch lamp); goes in (`table_window:lit`); the window upstairs lit, the shadows of two on its curtain |
 | `club` | — | 10 | night; `CLUB`; he and the official come out onto the portico (`club:out`); he turns to the official |
@@ -83,10 +84,10 @@ the school's gate, three-quarter, the girl at the gate; `NEAR` — the gate end 
 | `wife_lie` | home_late | 8 | her face level; she steps back; `PORCH`; he goes in (`wife_lie:in`); the door shuts; the window upstairs goes dark |
 | `wife_truth` | home_late | 16 | a cut to `WIFE`: her face, sad, still (L86, L87); she steps back; `PORCH`: he goes in; she in the door looks out at the snow, shuts it (`wife_truth:door`); the window upstairs stays lit |
 | `school` | — | 7 | morning, wet snow (the thaw: puddles); `PORCH`; he and the daughter come out; `wife_knows` 1 — the wife at the lit window upstairs, watching them; 0 — its curtain drawn |
-| `walk_hand` | school | 2 | a cut to `STREET`: the two at the porch's foot, hand in hand, toward us — under “By the hand” |
+| `walk_hand` | school | 2 | a cut to `HAND` (nearer down the lane than `STREET`): the two at the porch's foot, hand in hand, toward us — under “By the hand”; they come up to the camera as they walk to the gate |
 | `gate_school` | walk_hand | 8 | (they come up to the gate if they have not); a cut to `GATE`: she lets go; `wave` 0 — runs in without looking back; 1 — turns at the gate, waves, runs in; he stands, his face |
 | `red_cap` | gate_school | 16 | a cut to `NEAR`: the messenger in the red cap crosses to him, gives the note (`red_cap:note`), goes |
-| `porch_end` | — | 10 | the epilogue: night, snow or the thaw; `PORCH`; `wife_knows` 1 — the camera comes slowly up to the lit window upstairs (`WINDOW`), the wife at it, chest up; 0 — the house dark but the porch lamp, the camera still |
+| `porch_end` | — | 10 | the epilogue: night, snow or the thaw; `PORCH`; `wife_knows` 1 — the camera comes slowly up to the lit window upstairs (`WINDOW`), the wife at it, chest up; 0 — the house asleep: the porch lamp and a night light in the hall downstairs (`home` 0.18: the windows downstairs faintly warm), the camera still |
 
 Between the beats (script.js), what the game's minigames move:
 - **“The shadow”** (after `evening_walk`): `walk_on` N (1…4) — Gurov strolls to stop N (lib.js `STOPS`: 22, 17, 10,
@@ -124,7 +125,7 @@ Keys: `hour`, `overcast`, `season`, `snow`, `wet`, `lamps`, `porch_lamp`, `windo
 ## Contract for the check
 
 ```json
-{"beats": {"first_snow": {"after": [], "tells": ["first_snow:out"], "seconds": 13, "show": false},
+{"beats": {"first_snow": {"after": [], "tells": ["first_snow:out"], "seconds": 15, "show": false},
            "evening_walk": {"after": [], "tells": ["evening_walk:stop1", "evening_walk:stop2", "evening_walk:stop3", "evening_walk:stop4"], "seconds": 4, "show": false},
            "table_window": {"after": [], "tells": ["table_window:lit"], "seconds": 19, "show": false},
            "club": {"after": [], "tells": ["club:out"], "seconds": 10, "show": false},

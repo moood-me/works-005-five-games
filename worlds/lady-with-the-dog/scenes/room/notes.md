@@ -26,9 +26,10 @@ path. Awkwardness and tenderness: the warm candle in the middle, the cold moon f
   are said ahead (`s.shot`). Shots (`CAM`): `ROOM` (the whole room), `EAT` (drawn back: she at the left edge of the 4:3
   window, he at the right, the candle between), `FACE` (her face by the candle, 1.4 m, three-quarter), `BED` (the two on
   the bed, 1.4 m, faces three-quarter), `BALCONY` (from the balcony back into the room: she facing the candle, he in
-  profile), `HIM` (his face at the table, three-quarter, the candle at the frame's left). Under her confession the
-  camera comes slowly nearer (`nearer`), and its last seconds (“Hush, hush…”) are his face (`HIM`) or the two side by
-  side (`BED`) — not one still frame for the whole confession.
+  profile). Under her confession the camera comes slowly nearer (`nearer`), and its last seconds (“Hush, hush…”) are
+  the two of them — the room drawn back (`EAT`: he turned to her on his chair, the candle between) or side by side on
+  the bed (`BED`) — not one still frame for the whole confession. (A close-up of his face alone at the table was tried
+  and dropped: a smooth figure against the candle-lit wall, without her, weaker than the two in the room.)
 
 ## Beats
 
@@ -41,7 +42,7 @@ path. Awkwardness and tenderness: the warm candle in the middle, the cold moon f
 | `melon_eat` | melon_hold | 12 | he eats (`eat_slow`), not looking at her; the camera draws back: they at the edges of the 4:3 window, the candle between |
 | `beside` | melon_hold | 9 | he rises with the plate, puts it on the bed, sits down beside her; the insert `hands` open |
 | `beside_hold` | beside | 6 | a cut closer (`BED`): `apart` 0 — his hand behind her back, she leans her head to his shoulder; 1 — she a hand's breadth further off, looking at him |
-| `confession_table` | melon_eat | 18 | faces: he turns on his chair; a cut to her (`FACE`): she raises her head, her hands to her face, lowers them (`confession_table:speaks`), the camera coming nearer; ≈ 10 s after it a cut to his face (`HIM`, `sad`) |
+| `confession_table` | melon_eat | 18 | faces: he turns on his chair; a cut to her (`FACE`): she raises her head, her hands to her face, lowers them (`confession_table:speaks`), the camera coming nearer; ≈ 10 s after it a cut to the two (`EAT`), his face `sad` |
 | `confession_bed` | beside_hold | 17 | faces: a cut to `BALCONY` — she straightens, facing the candle, her hands to her face (`confession_bed:speaks`); his hand on her back, he in profile; the camera coming nearer; ≈ 10.5 s after it a cut to `BED`: both faces |
 
 Keys: `hour`, `candle`, `melon`, `cut`, `slice`, `ragged`, `hands`, `hand_at`, `pull`, `palm`, `apart`, `plate`,
@@ -50,8 +51,8 @@ Keys: `hour`, `candle`, `melon`, `cut`, `slice`, `ragged`, `hands`, `hand_at`, `
 ## What is not here / what to know
 
 - The light (2026-10-30): the candle 2.1 (was 1.6), reach 6; the ambient 0.62 (was 0.52), the vignette 0.3; the night
-  light from the door 1.3 — the room was too dark, the faces in half-shadow. By the candle (`HIM`) the wall behind him
-  is bright and warm; it is the candle.
+  light from the door 1.3 — the room was too dark, the faces in half-shadow. Near the candle the wall is bright and
+  warm.
 - Hands: the world's style `lady` now has fingers (`arms: 'palm', fingers: true`, the cast); with mittens her hands on
   her knees read as lumps.
 

@@ -156,6 +156,11 @@ const CAM = {
   // the club's portico nearer: Gurov on the bottom step medium, his sledge at the kerb up the lane (the two marks of
   // “After the sturgeon” in 4:3)
   CLUB_NEAR: cam(-1.6, 19.6, 1.65, -18),
+  // his face on the porch lifted to the first snow, medium, three-quarter, from the pavement below the steps (his
+  // thought “In another month or so…”)
+  SNOW_FACE: cam(2.6, 10.8, 2.0, 15, 8),
+  // “By the hand”: nearer down the lane than STREET — the two come from the porch toward us, to the school's gate
+  HAND: cam(0.9, 2.6, 1.45, 14),
   // the window upstairs from across the lane, a little below: the wife at it, chest up, in her lamp's light
   WINDOW: cam(-0.4, 15.2, 2.9, 89, 29),
   // at the school's gate: Gurov from along the railings, three-quarter; the gate, the girl at it
@@ -231,9 +236,15 @@ function film(scene) {
         await gurov.walk([THRESHOLD, PORCH_TOP]);
         s.move('door', 0, { over: 1.4, ease: 'inOut' });
         s.tell('first_snow:out');
+        const face = s.shot({ ...CAM.SNOW_FACE });
         await gurov.turn(195);
         gurov.look([1.2, 11.0, 7.5]);
-        await s.wait(3.2);
+        await s.until(() => face.ready);
+        face.cut();
+        const wide = s.shot({ ...CAM.PORCH });
+        await s.wait(4.5);
+        await s.until(() => wide.ready);
+        wide.cut();
         gurov.look(null);
         const seat = seatOf('house');
         await gurov.go('sit_down', { to: [seat[0], seat[1]], turn: forward('house') });
@@ -527,7 +538,7 @@ function film(scene) {
           ...at('daughter', SCHOOL_FROM.daughter, 180, { daughter_reach: { r: 'gurov#hand_l' } }) });
       },
       run: async s => {
-        const next = s.shot({ ...CAM.STREET });
+        const next = s.shot({ ...CAM.HAND });
         await s.until(() => next.ready);
         next.cut();
         const gurov = s.person('gurov'), daughter = s.person('daughter');
@@ -626,7 +637,8 @@ function film(scene) {
           ...wifeUpstairs([0.0, 11.0, 0.5]) });
       },
       run: async s => {
-        if (!party('wife_knows')) { await s.wait(10); return; }
+        // (the house asleep: a night light in the hall downstairs and the porch lamp — a warm point in the dark front)
+        if (!party('wife_knows')) { s.set('home', 0.18); await s.wait(10); return; }
         // (the house, then slowly up to the lit window: the wife at it, looking down the lane)
         await s.wait(1.5);
         const W = CAM.WINDOW, over = { over: 8, ease: 'inOut' };

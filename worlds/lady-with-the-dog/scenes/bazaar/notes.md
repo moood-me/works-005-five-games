@@ -41,7 +41,7 @@ complicated part is only just beginning”. The Pomeranian is not here in any br
 | `weep` | tea | 10 | the insert closed: he at the table with the glass (the stain if `stain` 1); she at the window, her back to him, her shoulders shaking |
 | `cages` | shoulders, weep | 14 | faces: the two at the window, she turns to him (`cages:turned`); a cut to `CAGES` — profiles in the lamplight (`sad`, `thinking`) ≈ 9 s; a cut back to `ROOM` |
 | `counsel` | cages | 2 | the same — under “Taking counsel”; the camera stands, marks on the window, the door, the glasses in 4:3 |
-| `bazaar_end` | counsel | 16 | faces: a cut to `CAGES` — the two in profile in the lamplight, as `think` left them; `wife_knows` 0 — at the 2nd s he takes out his watch, holds it to the light, looks (`bazaar_end:watch`); ≈ 6.5 s — a cut to `ROOM`, the camera draws slowly back (10 s): the two small at the window, the long road |
+| `bazaar_end` | counsel | 19 | faces: a cut to `CAGES` — the two in profile in the lamplight, as `think` left them; `wife_knows` 0 — at the 2nd s he takes out his watch, holds it to the light, looks (`bazaar_end:watch`), puts it away and looks up again; ≈ 9 s of faces under the last sentence, then a cut to `ROOM`, the camera draws slowly back (10 s): the two small at the window, the long road |
 
 Keys: `hour`, `tea`, `glass_at`, `tap`, `fill`, `spill`, `stain`, `mirror`, `think`, `door`, `samovar`, `beat`,
 `beat_next`; the play's keys — below.
@@ -69,7 +69,7 @@ it read as a caress; his right hand is reached to a point before his own chest (
            "weep": {"after": ["tea"], "tells": [], "seconds": 10, "show": false},
            "cages": {"after": ["shoulders", "weep"], "tells": ["cages:turned"], "seconds": 14, "show": false},
            "counsel": {"after": ["cages"], "tells": [], "seconds": 2, "show": false},
-           "bazaar_end": {"after": ["counsel"], "tells": ["bazaar_end:watch"], "seconds": 16, "show": false}},
+           "bazaar_end": {"after": ["counsel"], "tells": ["bazaar_end:watch"], "seconds": 19, "show": false}},
  "points": ["window#window", "door#door", "table#glasses", "tea#glass", "tea#under", "tea#tap"],
  "offers": ["window#window", "door#door", "table#glasses"],
  "party": {"anna_life": 0, "husband_knows": 0, "wife_knows": 0, "spring": 0}}

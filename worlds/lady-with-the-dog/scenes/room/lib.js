@@ -27,7 +27,6 @@ const CAM = {
   BED: cam(-1.75, 3.2, 1.15, -13, -3),   // the two side by side on the bed (he left, she right), medium, faces three-quarter
   BALCONY: cam(-0.6, 5.6, 1.25, 236, -6),// from the balcony side by the bed's foot, back into the room: she nearer, turned
                                          // to the candle; he beyond her, his hand on her back
-  HIM: cam(1.6, 2.7, 1.25, 36, -3),      // his face at the table, three-quarter, medium, the candle at the frame's left
 };
 // the push-in under her words: the camera goes this far nearer along its own look (metres)
 const nearer = (c, m) => ({ camera_x: c.camera_x + Math.sin(c.camera_yaw * Math.PI / 180) * m,
@@ -203,10 +202,10 @@ function film(scene) {
         await s.wait(3.2);
         anna.reach(null);
         anna.look(FLOOR_BEFORE_HER);
-        const him = s.shot({ ...CAM.HIM });
+        const both = s.shot({ ...CAM.EAT });
         await s.wait(7);
-        await s.until(() => him.ready);
-        him.cut();
+        await s.until(() => both.ready);
+        both.cut();
         gurov.mood('sad');
         await s.wait(4);
       },
