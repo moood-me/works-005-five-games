@@ -125,19 +125,22 @@ const hair = {
     const { add, mul } = V(), h = F.head, [hs, hu, hf] = h.axes, rh = h.r, m = F.fit.h, k = F.k, fc = F.fwd('Chest');
     // the mass over the head, parted at the brow, down over the ears and the nape, spreading a little below
     F.shell(h.at, h.axes, F.keep(LOOSE).radii, LOOSE_EDGE, 0.16, F.colors.hair, h.sides, h.square);
-    // a lock each side of the face: a broad flat fall from the temple past the cheek, over the shoulder onto the
-    // breast, kept before it
+    // each side of the face: two narrow strands close to the head — one from the temple down past the cheek, over the
+    // collarbone onto the breast, one from behind the ear over the shoulder — each flat side to side (seen from the
+    // front, narrow), kept before the chest
     for (const s of [-1, 1]) {
-      const from = [...h.on([s * 0.9, 0.05, 0.15], 1.03)];
-      const mid = F.clear(F.swing(`lock${s}a`, add(from, add([0, -0.17 * m, 0], add(mul(fc, 0.035 * k), mul(hs, s * 0.02 * m)))), 150), 1, rh * 0.2);
-      const end = F.clear(F.swing(`lock${s}b`, add(mid, add([0, -0.12 * m, 0], mul(fc, 0.015 * k))), 90), 1, rh * 0.18);
-      F.tube([from, [...mid], [...end]], [[0, rh * 0.5], [0.6, rh * 0.52], [1, rh * 0.46], [1.8, rh * 0.36], [2, rh * 0.24]], [[0, F.colors.hair]], 10, hs, 0.35);
+      for (const [at, len, w] of [[[s * 0.86, 0.0, 0.32], 1, 0.22], [[s * 0.97, -0.12, -0.25], 0.85, 0.26]]) {
+        const from = [...h.on(at, 1.02)];
+        const mid = F.clear(F.swing(`lock${s}${len}a`, add(from, add([0, -0.15 * m * len, 0], add(mul(fc, 0.02 * k), mul(hs, s * 0.008 * m)))), 150), 1, rh * 0.12);
+        const end = F.clear(F.swing(`lock${s}${len}b`, add(mid, add([0, -0.12 * m * len, 0], mul(fc, 0.01 * k))), 90), 1, rh * 0.1);
+        F.tube([from, [...mid], [...end]], [[0, rh * w], [1, rh * w * 0.9], [1.8, rh * w * 0.6], [2, rh * w * 0.25]], [[0, F.colors.hair]], 8, hf, 0.45);
+      }
     }
-    // the rest down the back to the shoulder blades
-    const top = add(h.at, add(mul(hf, -rh * 0.6), mul(hu, -rh * 0.05)));
-    const mid = F.clear(F.swing('backa', add(top, add([0, -0.15 * m, 0], mul(fc, -0.05 * k))), 160), -1, rh * 0.2);
-    const end = F.clear(F.swing('backb', add(mid, [0, -0.13 * m, 0]), 90), -1, rh * 0.2);
-    F.tube([top, [...mid], [...end]], [[0, rh * 0.9], [1, rh * 0.85], [1.7, rh * 0.6], [2, rh * 0.2]], [[0, F.colors.hair]], F.sides, hs, 0.45);
+    // the rest one mass down the back past the shoulder blades, broad side to side, close to the back
+    const top = add(h.at, add(mul(hf, -rh * 0.62), mul(hu, -rh * 0.05)));
+    const mid = F.clear(F.swing('backa', add(top, add([0, -0.17 * m, 0], mul(fc, -0.03 * k))), 160), -1, rh * 0.12);
+    const end = F.clear(F.swing('backb', add(mid, [0, -0.15 * m, 0]), 90), -1, rh * 0.12);
+    F.tube([top, [...mid], [...end]], [[0, rh * 0.95], [1, rh * 0.95], [1.7, rh * 0.8], [2, rh * 0.5]], [[0, F.colors.hair]], F.sides, hs, 0.3);
   } },
 };
 
@@ -461,7 +464,7 @@ return {
     // limbs), the head still big enough for the face `simple` to read at a medium shot; toned paint, thin tinted lines.
     // `lady_narrow` — the same with a narrow long head (von Diderits, the stranger like him)
     styles: {
-      lady: { from: 'soft', head: 1.26, egg: [1.0, 1.06, 1.0], neck: 0.42, legs: 0.96, limb: 0.96, paint: 'toned', line: 1.6, face: 'simple' },
+      lady: { from: 'soft', arms: 'palm', fingers: true, head: 1.26, egg: [1.0, 1.06, 1.0], neck: 0.42, legs: 0.96, limb: 0.96, paint: 'toned', line: 1.6, face: 'simple' },
       lady_narrow: { from: 'lady', egg: [0.86, 1.14, 0.98] },
     },
     faces: { level },

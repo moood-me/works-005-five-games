@@ -52,9 +52,8 @@ Keys: `hour`, `candle`, `melon`, `cut`, `slice`, `ragged`, `hands`, `hand_at`, `
 - The light (2026-10-30): the candle 2.1 (was 1.6), reach 6; the ambient 0.62 (was 0.52), the vignette 0.3; the night
   light from the door 1.3 — the room was too dark, the faces in half-shadow. By the candle (`HIM`) the wall behind him
   is bright and warm; it is the candle.
-- Hands: the world's style `lady` (the engine's `soft`) has mitten hands — on her knees they read as lumps. The engine
-  can draw fingers (`arms: 'palm', fingers: true` in the style); tried on this scene, it reads as hands with fingers. It
-  is the whole world's style, so it is not changed from here.
+- Hands: the world's style `lady` now has fingers (`arms: 'palm', fingers: true`, the cast); with mittens her hands on
+  her knees read as lumps.
 
 - The table is set otherwise than in the earlier scene: the candle at the table's left end, his chair at the right,
   facing her (so the candle is between them in `melon_eat` and lights both faces).

@@ -1,7 +1,8 @@
 # cast — the people of “The Lady with the Dog”
 
 The people — figures of shapes in the world's style `lady`: the engine's `soft`, a little longer (head 1.26, neck 0.42,
-legs 0.96), the face `simple` (eyes, brows, nose, mouth; the expression — the key `<id>_mood`: `neutral`, `smile`,
+legs 0.96), hands with fingers (`arms: 'palm', fingers: true` — the engine's `soft` has mittens: on a knee they read as
+lumps), the face `simple` (eyes, brows, nose, mouth; the expression — the key `<id>_mood`: `neutral`, `smile`,
 `laugh`, `sad`, `angry`, `surprised`, `afraid`, `disgusted`, `thinking`, `tired`). The paint `toned` — chosen from test
 pictures of the room in Yalta (a candle, night) and the station (`rim` made Anna and Gurov dark silhouettes: the white
 dress did not read). `lady_narrow` — the same style with a narrow long head (von Diderits and the `stranger` who looks
@@ -56,8 +57,9 @@ in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The pa
 
 ## Hair (`hair`, the world's own)
 
-`loose` — let down: the mass over the head parted at the brow and down over the ears, a broad lock each side of the
-face down over the shoulder onto the breast (kept before it, swinging), the rest down the back. The engine's `long` is
+`loose` — let down: the mass over the head parted at the brow and down over the ears, two narrow strands each side
+of the face close to the head (one from the temple onto the breast, one from behind the ear over the shoulder; flat
+side to side, so narrow from the front — broad ones read as a spaniel's ears), the rest one mass down the back. The engine's `long` is
 a cap with a tail behind: from the front it read as a cap.
 
 ## Hats (`hats`, the world's own)
