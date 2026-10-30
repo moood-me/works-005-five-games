@@ -168,6 +168,7 @@ const CAM = {
   STAIRS: cam(23.2, 17.4, 1.65, 0, 3),     // the landing: the door from the corridor at the back, the gallery above right, the way down on the left
   TWO: cam(22.95, 21.15, 1.55, 0, 0),      // the two in profile under the lamp, medium, 1.9 m
   TURN: cam(22.4, 21.7, 1.5, -36, 0),      // her at the turn of the stairs, three-quarter, her face back to him
+  HER: cam(23.4, 24.1, 1.5, -145, -4),     // in his arms: her face over his right shoulder, 1.35 m — under her choice
 };
 
 // the landing's places
@@ -175,6 +176,7 @@ const ST = {
   DOOR: [21.8, 26.6],          // just inside the door from the corridor (the door in the back wall, x 21.8)
   BEYOND: [21.8, 27.8],        // behind the door, in the corridor
   ANNA: [22.62, 23.0], GUROV: [23.3, 23.0],
+  HOLD: [22.96, 23.0],         // he steps in to hold her: close enough for arms round each other, not straight out
   DOWN: [20.95, 23.7],         // at the turn of the stairs down, on the landing's side
   GONE: [19.7, 23.7],          // down the stairs, out of sight behind the wall
   BOY1: [24.25, 26.15], BOY2: [25.05, 26.2], BOYS_OFF: [26.6, 26.3],
@@ -230,6 +232,7 @@ function film(scene) {
     smoke: 1,
   };
   const EMBRACE = {
+    gurov_a: ST.HOLD[0], gurov_d: ST.HOLD[1],
     gurov_do: 'embrace_her', anna_do: 'embrace_him',
     gurov_reach: { r: 'anna#back', l: 'anna#back' }, anna_reach: { r: 'gurov#back', l: 'gurov#back' },
     gurov_look: 'anna#head', anna_look: 'gurov#shoulder_r', anna_mood: 'sad',
@@ -383,7 +386,8 @@ function film(scene) {
     },
     // a cut: the landing; she comes in from the corridor — fast (anna_life 0) or as she always walks; he after her;
     // they stop in the middle (stairs:landing); faces: the two in profile under the lamp; the schoolboys above lean on
-    // the rail, smoke at a hand; they hold each other; the schoolboys look down; back to the landing — under the choice
+    // the rail, smoke at a hand; he steps in and they hold each other (in profile, both faces); the schoolboys look
+    // down (the landing, wide); a cut — her face over his shoulder, in his arms — under her choice
     stairs: {
       from: () => base({ ...LANDING, anna_here: false, anna_a: ST.BEYOND[0], anna_d: ST.BEYOND[1], anna_turn: 180, anna_mood: 'afraid',
         gurov_here: false, gurov_a: ST.BEYOND[0], gurov_d: ST.BEYOND[1], gurov_turn: 180, door: 0 }),
@@ -410,8 +414,9 @@ function film(scene) {
         await s.until(() => two.ready);
         two.cut();
         anna.mood('afraid');
-        await s.wait(5);
+        await s.wait(4.5);
         anna.mood('sad');
+        await g.walk([ST.HOLD]);
         g.do('embrace_her');
         anna.do('embrace_him');
         g.reach({ r: 'anna#back', l: 'anna#back' });
@@ -419,17 +424,21 @@ function film(scene) {
         g.look('anna#head');
         anna.look('gurov#shoulder_r');
         const wide = s.shot({ ...CAM.STAIRS });
-        await s.wait(4);
+        await s.wait(3.5);
         await s.until(() => wide.ready);
         wide.cut();
         s.person('schoolboy1').look('anna');
         s.person('schoolboy2').look('anna');
-        await s.wait(2);
+        const her = s.shot({ ...CAM.HER });
+        await s.wait(1.8);
+        await s.until(() => her.ready);
+        her.cut();
+        await s.wait(1.2);
       },
     },
     // she presses his hand, goes to the turn of the stairs; there she turns back once — her face to him — and is gone
     promise_go: {
-      after: 'stairs', from: () => base({ ...LANDING, ...EMBRACE }),
+      after: 'stairs', from: () => base({ ...LANDING, ...EMBRACE, ...CAM.HER }),
       run: async s => {
         const g = s.person('gurov'), anna = s.person('anna');
         g.do('stand'); anna.do('stand');
@@ -455,16 +464,21 @@ function film(scene) {
         g.look([20.6, 23.7, 1.2]);
       },
     },
-    // she goes to the turn of the stairs and down, not looking back
+    // she goes to the turn of the stairs and down, not looking back (from her face, a cut to the landing as she goes)
     away_go: {
-      after: 'stairs', from: () => base({ ...LANDING, ...EMBRACE }),
+      after: 'stairs', from: () => base({ ...LANDING, ...EMBRACE, ...CAM.HER }),
       run: async s => {
         const g = s.person('gurov'), anna = s.person('anna');
         g.do('stand'); anna.do('stand');
         g.reach(null); anna.reach(null);
         anna.look(null);
         g.look('anna');
-        await anna.walk([ST.DOWN, ST.GONE]);
+        const wide = s.shot({ ...CAM.STAIRS });
+        const goes = anna.walk([ST.DOWN, ST.GONE]);
+        await s.wait(1.4);
+        await s.until(() => wide.ready);
+        wide.cut();
+        await goes;
         anna.here(false);
         g.look([20.6, 23.7, 1.2]);
         await s.wait(2.4);

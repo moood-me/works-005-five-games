@@ -33,7 +33,7 @@ const MAID_PORCH = [2.25, 12.5], DOG_PORCH = [2.85, 12.15];
 const IN_GATE = [2.9, 8.7];                           // inside the gate, clear of its leaf, hidden by the fence
 const LANE = [-5.85, 8.6];                            // round the corner, in the lane's mouth
 const CAB = [11.0, 4.0];                              // the cab on the road: the horse's head toward the right
-const CABMAN = [12.15, 4.05];
+const CABMAN = [10.15, 3.75];                         // by the sledge, before the horse's flank: the horse whole beyond him
 const ROAD = [16.6, 9.6];                             // Anna on the road beyond the fence's end, looking at the fields
 const FAR_TRAIN = { z: 120, from: -260, to: 330 };    // the train along the bank: `far_train` 0…1 → across
 const farTrainX = u => FAR_TRAIN.from + (FAR_TRAIN.to - FAR_TRAIN.from) * clamp01(u);
@@ -107,6 +107,15 @@ const CAM = {
   HIS_FACE: cam(3.5, 5.95, 1.62, 333, 7),      // his face close: he looks down and away, past her
   YARD: cam(1.8, 8.4, 1.6, 12, -3),          // in the yard toward the porch
   PORCH: cam(5.6, 14.0, 1.7, 218, -2),       // from beside the porch back toward the gate and the street
+  HER_GATE: cam(3.45, 6.6, 1.5, -124, -4),   // her face beside him, 1.1 m, she looking up at him — under her choice
+  END_GATE: cam(2.2, 2.2, 1.55, 11, 3),      // the epilogue: he at the gate with the old spitz, her dark window over him
+};
+// the medium two at the gate under the choice: Gurov (three-quarter, toward us) and the maid with the spitz at her feet;
+// from the street, a little to the maid's side — where “By the fence” left him (`under`)
+const gateTwo = under => {
+  const gx = gurovX(under ? 0.6 : 0.15), mx = under ? gurovX(0.6) + 1.5 : -1.2;
+  const cx = mx + 0.6, cz = 3.6, tx = (gx + mx) / 2, tz = 6.2;
+  return cam(cx, cz, 1.6, Math.atan2(tx - cx, tz - cz) * 180 / Math.PI, -4);
 };
 
 function film(scene) {
@@ -151,7 +160,7 @@ function film(scene) {
     ...at('anna', [2.55, 6.0], 35, { anna_wear: C().anna_winter, anna_with: ['bag'], anna_mood: 'sad' }),
     ...at('diderits', [3.05, 6.85], 200, { diderits_look: 'anna', diderits_mood: 'thinking' }),
     ...at('maid', MAID_PORCH, 160, { maid_look: dogAt(d) }),
-    ...at('cabman', CABMAN, 75, { cabman_look: [13.2, 4.2, 1.3] }),
+    ...at('cabman', CABMAN, 75, { cabman_look: [11.9, 4.0, 1.3] }),
     ...d, leash: 'maid#hand_r',
     };
   };
@@ -286,9 +295,14 @@ function film(scene) {
         maid.look(on('under') ? 'gurov' : null);
         if (on('under')) maid.mood('surprised');
         g.look('maid');
+        const two = s.shot({ ...gateTwo(on('under')) });
+        await g.turn(90);
         s.set('dog_follow', 0);
         s.set('spitz_do', 'sniff');
-        await s.wait(2);
+        await s.wait(0.8);
+        await s.until(() => two.ready);
+        two.cut();
+        await s.wait(1.4);
       },
     },
     // he stoops and beckons; the spitz pulls and runs to him (the maid dragged two steps), stands up with its paws on his
@@ -346,6 +360,9 @@ function film(scene) {
       after: 'gate_open', from: gateOpen,
       run: async s => {
         const g = s.person('gurov'), maid = s.person('maid');
+        const wide = s.shot({ ...CAM.GATE });                   // from the medium two of the choice: the corner in view
+        await s.until(() => wide.ready);
+        wide.cut();
         g.look(null);
         await g.walk([[CORNER_X - 0.5, GUROV_Z], LANE]);
         await g.turn(120);
@@ -406,7 +423,13 @@ function film(scene) {
         await d.turn(215);
         d.look('anna');
         s.tell('gate_leave:asks');
-        await s.wait(3);
+        const her = s.shot({ ...CAM.HER_GATE });
+        await s.wait(1.6);
+        s.person('anna').look('diderits#head');
+        await s.wait(1.4);
+        await s.until(() => her.ready);
+        her.cut();
+        await s.wait(0.8);
       },
     },
     // the lie: he takes an envelope from his pocket and gives it to her (leave_lie:envelope, L114); bows and kisses her
@@ -417,6 +440,10 @@ function film(scene) {
       after: 'gate_leave', from: () => base({ ...LEAVING(), ...CAM.LEAVE_TWO, diderits_turn: 215 }),
       run: async s => {
         const anna = s.person('anna'), d = s.person('diderits');
+        const two = s.shot({ ...CAM.LEAVE_TWO });               // from her face under the choice back to the two
+        await s.until(() => two.ready);
+        two.cut();
+        anna.look('diderits#head');
         d.with(['envelope']);
         await d.do('give_small');
         anna.do('take_small');
@@ -464,6 +491,9 @@ function film(scene) {
       after: 'gate_leave', from: () => base({ ...LEAVING(), ...CAM.LEAVE_TWO, diderits_turn: 215 }),
       run: async s => {
         const anna = s.person('anna'), d = s.person('diderits'), maid = s.person('maid');
+        const two = s.shot({ ...CAM.LEAVE_TWO });               // from her face under the choice back to the two
+        await s.until(() => two.ready);
+        two.cut();
         await anna.walk([[2.8, 6.38]]);
         await anna.turn(35);
         anna.look('diderits');
@@ -507,7 +537,7 @@ function film(scene) {
     fence_end: {
       from: () => {
         const knows = on('husband_knows');
-        return base({ ...EVENING(), window: knows ? 0 : 1, gate: knows ? 1 : 0,
+        return base({ ...EVENING(), ...(knows ? CAM.END_GATE : {}), window: knows ? 0 : 1, gate: knows ? 1 : 0,
           ...at('diderits', knows ? [GATE.mid + 0.15, 6.6] : [gurovX(0.75), 6.3], knows ? 200 : 270, { diderits_wear: C().diderits_coat }),
           ...dog(knows ? [GATE.mid - 0.5, 6.0] : [gurovX(0.75) - 1.3, 6.1], { spitz_old: 1, spitz_do: knows ? 'sit' : 'stand' }),
           leash: 'diderits#hand_r', ...lead('diderits') });
@@ -516,9 +546,11 @@ function film(scene) {
         const d = s.person('diderits');
         if (on('husband_knows')) {
           d.look([-3, 3, 1.5]);
-          await s.wait(5);
+          await s.wait(2.5);
+          d.look([WINDOW_X, 14.4, 4.0]);                        // up at her window, dark
+          await s.wait(4);
           d.look(dogAt(s.state));
-          await s.wait(6);
+          await s.wait(4.5);
         } else {
           await d.walk([[gurovX(0.1), 6.3]]);
           await s.wait(1.5);
