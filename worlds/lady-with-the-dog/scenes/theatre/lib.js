@@ -168,6 +168,7 @@ const CAM = {
   STAIRS: cam(23.2, 17.4, 1.65, 0, 3),     // the landing: the door from the corridor at the back, the gallery above right, the way down on the left
   TWO: cam(22.95, 21.15, 1.55, 0, 0),      // the two in profile under the lamp, medium, 1.9 m
   TURN: cam(22.4, 21.7, 1.5, -36, 0),      // her at the turn of the stairs, three-quarter, her face back to him
+  SEATED: cam(0.92, 15.05, 1.25, 180, -4),  // from between rows 1 and 2, back at the two in row 3: the husband beside her, both faces
   HER: cam(23.35, 24.35, 1.5, -153, -4),   // in his arms: her face over his right shoulder, 1.5 m — under her choice
 };
 
@@ -231,10 +232,13 @@ function film(scene) {
     schoolboy2_here: true, schoolboy2_a: ST.BOY2[0], schoolboy2_d: ST.BOY2[1], schoolboy2_turn: 175, schoolboy2_do: 'lean_rail', schoolboy2_look: 'gurov',
     smoke: 1,
   };
+  // his hands on her back a little into it (her own frame: 0.07 m behind her middle, 1.1 m up): at her back's point
+  // itself the fingers stuck out past her from the shot of her face
+  const HOLD_HER = { r: { on: 'anna', at: [0.06, 0.07, 1.1] }, l: { on: 'anna', at: [-0.06, 0.07, 1.1] } };
   const EMBRACE = {
     gurov_a: ST.HOLD[0], gurov_d: ST.HOLD[1],
     gurov_do: 'embrace_her', anna_do: 'embrace_him',
-    gurov_reach: { r: 'anna#back', l: 'anna#back' }, anna_reach: { r: 'gurov#back', l: 'gurov#back' },
+    gurov_reach: HOLD_HER, anna_reach: { r: 'gurov#back', l: 'gurov#back' },
     gurov_look: 'anna#head', anna_look: 'gurov#shoulder_r', anna_mood: 'sad',
   };
   // she walks along her row from her seat to the aisle she leaves by (x), getting up first
@@ -269,6 +273,7 @@ function film(scene) {
       after: 'hall_find', from: () => base({ ...CAM.HALL, ...ladies(6), gurov_here: false }),
       run: async s => {
         const d = s.person('diderits'), anna = s.person('anna');
+        const seated = s.shot({ ...CAM.SEATED });                 // the two side by side, under the words about him
         if (on('noticed')) {
           const l2 = s.person('lady2');
           l2.turn(-38);
@@ -291,6 +296,8 @@ function film(scene) {
         d.reach({ l: 'anna#shoulder_l' });
         d.look('anna');
         s.tell('husband_in:sat');
+        await s.until(() => seated.ready);
+        seated.cut();
         await s.wait(1.6);
         d.reach(null);
         d.look([0, 21, 2.5]);
@@ -299,7 +306,11 @@ function film(scene) {
         s.move('hall_light', 0.3, { over: 4, ease: 'inOut' });
         s.move('curtain', 1, { over: 5, ease: 'inOut' });
         await s.move('stage', 1, { over: 4 });
-        await s.wait(1.5);
+        const hall = s.shot({ ...CAM.HALL });
+        await s.wait(3);
+        await s.until(() => hall.ready);
+        hall.cut();
+        await s.wait(1);
       },
     },
     // the interval: the lights up, the curtain down; the husband gets up and goes out; she stays in her seat
@@ -422,7 +433,7 @@ function film(scene) {
         wide.cut();
         g.do('embrace_her');
         anna.do('embrace_him');
-        g.reach({ r: 'anna#back', l: 'anna#back' });
+        g.reach(HOLD_HER);
         anna.reach({ r: 'gurov#back', l: 'gurov#back' });
         g.look('anna#head');
         anna.look('gurov#shoulder_r');

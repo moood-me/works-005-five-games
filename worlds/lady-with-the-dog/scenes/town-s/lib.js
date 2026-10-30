@@ -101,6 +101,7 @@ const CAM = {
   FENCE_FACE: cam(-4.75, 5.55, 1.75, 62, 0), // Gurov at p1 in three-quarter, looking at the fence
   DUSK_WIDE: cam(2.6, 0.3, 1.7, 8, 0),       // along the fence at dusk: the gate, the lantern, the poster
   DUSK_FACE: cam(6.05, 6.7, 1.7, 220, 3),    // Gurov before the poster, from the fence's side: his face in the lantern's light
+  POSTER: cam(6.3, 4.8, 1.75, -41, 0),       // over his right shoulder: the poster under the lantern, his head near on the right
   LEAVE: cam(1.0, -1.0, 1.75, 32, 0),        // the morning: the gate, the yard through it, the cab on the road
   LEAVE_TWO: cam(4.7, 5.35, 1.6, 300, 0),    // the two at the gate side by side, three-quarter
   ANNA_FACE: cam(3.65, 5.3, 1.5, 305, 0),    // her face, past him
@@ -153,11 +154,17 @@ function film(scene) {
   });
   // the morning of her going: she by the gate with her bag, he holding the gate; the maid with the old spitz by the
   // porch; the cabman at his horse on the road, his back to them
+  // the morning she goes: her winter look in a grey-blue travelling coat (the pale grey one vanished against the snow
+  // and the white street behind her face); the white fur cap stays
+  const travelCoat = () => {
+    const w = C().anna_winter;
+    return { ...w, colors: { ...(w.colors || {}), top: '#7a8799', garment: '#667387', bottom: '#525b6a' } };
+  };
   const LEAVING = () => {
     const d = dog(DOG_PORCH, { spitz_do: 'sit', spitz_old: 1, spitz_dir: 1, spitz_look: 'anna' });
     return {
     ...MORNING(), ...CAM.LEAVE, gate: 1, window: 0, cab: 1,
-    ...at('anna', [2.55, 6.0], 35, { anna_wear: C().anna_winter, anna_with: ['bag'], anna_mood: 'sad' }),
+    ...at('anna', [2.55, 6.0], 35, { anna_wear: travelCoat(), anna_with: ['bag'], anna_mood: 'sad' }),
     ...at('diderits', [3.05, 6.85], 200, { diderits_look: 'anna', diderits_mood: 'thinking' }),
     ...at('maid', MAID_PORCH, 160, { maid_look: dogAt(d) }),
     ...at('cabman', CABMAN, 75, { cabman_look: [11.9, 4.0, 1.3] }),
@@ -391,22 +398,25 @@ function film(scene) {
         await s.wait(0.5);
       },
     },
-    // a cut: the dusk; he goes along the fence away; under the lantern a poster; he stops before it, his face in the
-    // lantern's light — under L64, L65
+    // a cut: the dusk; he goes along the fence away; under the lantern a poster; he stops before it — over his shoulder
+    // the poster (under L64); then his face in the lantern's light (under L65)
     fence_dusk: {
       from: () => base({ ...WINTER_DUSK, ...CAM.DUSK_WIDE, window: 1, ...at('gurov', [gurovX(0.4), GUROV_Z], 90, { gurov_wear: C().gurov_winter, gurov_mood: 'tired' }) }),
       run: async s => {
         const g = s.person('gurov');
         await g.walk([[5.2, 5.7]]);
         const face = s.shot({ ...CAM.DUSK_FACE });
+        const poster = s.shot({ ...CAM.POSTER });
         await g.turn(330);
         g.look('fence#poster');
+        await s.until(() => poster.ready);
+        poster.cut();
+        s.tell('fence_dusk:poster');
+        await s.wait(4.5);
         await s.until(() => face.ready);
         face.cut();
-        s.tell('fence_dusk:poster');
-        await s.wait(5);
         g.mood('sad');
-        await s.wait(2);
+        await s.wait(3.5);
       },
     },
     // a morning; (spring) the snow or the thaw. From the street: she by the gate with her bag, he holding the gate; the
