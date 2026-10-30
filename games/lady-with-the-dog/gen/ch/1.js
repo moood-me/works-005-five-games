@@ -27,7 +27,7 @@ export default {
       const garden = g.beat('garden');
       g.next('coax');
       await sat;
-      await g.say('narrator', 'One evening he was dining in the gardens, and she came up and took the next table');
+      await SAY(4);
       await garden;
       const beckon = g.beat('coax');
       g.next('coax_hold');
@@ -48,8 +48,8 @@ export default {
         g.next('talk');
         await growl;
         g.sound.growl();
-        await g.say('anna', 'He doesn’t bite');
-        await g.say('gurov', 'May I give him a bone?');
+        await SAY(5);
+        await SAY(6);
         await finger;
       } else {
         g.scale('heart', 1);
@@ -59,25 +59,25 @@ export default {
         const pat = g.beat('pat');
         g.next('talk');
         await sits;
-        await g.say('anna', 'He doesn’t bite');
-        await g.say('gurov', 'May I give him a bone?');
+        await SAY(5);
+        await SAY(6);
         await pat;
       }
       const turned = g.told('talk:turned');
       const talk = g.beat('talk');
       g.next('walk_out');
       await turned;
-      await g.say('gurov', 'Have you been long in Yalta?');
-      await g.say('anna', 'Five days');
-      await g.say('gurov', 'And I have already dragged out a fortnight here');
-      await g.say('gurov', 'That’s only the fashion to say it’s dull here. A provincial will live in Belyov and not be dull');
-      await g.say('gurov', 'And when he comes here it’s “Oh, the dulness! Oh, the dust!” One would think he came from Grenada');
+      await SAY(7);
+      await SAY(8);
+      await SAY(9);
+      await SAY(10);
+      await SAY(11);
       await talk;
       const moon = g.told('walk_out:moon');
       const walk = g.beat('walk_out');
       await moon;
-      await g.say('narrator', 'The sea was of a soft warm lilac hue, and there was a golden streak from the moon upon it');
-      await g.say('narrator', 'He learnt that she was called Anna Sergeyevna, that she was married, and that her husband had a post in S.');
+      await SAY(12);
+      await SAY(13);
       await walk;
       band.stop(3);
     },
@@ -89,14 +89,14 @@ export default {
       const pier = g.beat('pier');
       g.next('gangway');
       g.sound.horn();
-      await g.say('narrator', 'A week had passed. It was a holiday, a dry wind was blowing, and the steamer came in late');
+      await SAY(14);
       await looking;
-      await g.say('narrator', 'She looked through her lorgnette at the passengers, as though looking for acquaintances');
+      await SAY(15);
       await pier;
       const gangway = g.beat('gangway');
       g.next('lost');
       await gangway;
-      const r = await g.play(lorgnette, { onStranger: () => g.say('narrator', 'Below the gangway a tall, stooping gentleman stopped — from behind, the very image of her husband') });
+      const r = await g.play(lorgnette, { onStranger: () => SAY(115) });
       g.set('pass', 7);
       g.set('look_at', '');
       g.set('stranger_turned', 1);
@@ -108,13 +108,13 @@ export default {
       const lost = g.beat('lost');
       g.next('kiss');
       await empty;
-      await g.say('narrator', 'Anna Sergeyevna had lost her lorgnette in the crush');
+      await SAY(16);
       await lost;
       const look = g.told('kiss:look');
       const kiss = g.beat('kiss');
       g.next('go');
       await look;
-      await g.say('gurov', 'Let us go to your hotel');
+      await SAY(17);
       await kiss;
       await g.beat('go');
     },

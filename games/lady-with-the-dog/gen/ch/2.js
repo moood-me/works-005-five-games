@@ -26,11 +26,11 @@ export default {
       await g.scene(SCENES.room, { beat: 'room' }, { beds: { sea: 0.25, room: 0.3 } });
       const room = g.beat('room');
       g.next('room_hold');
-      await g.say('narrator', 'Her room was close and smelt of the scent she had bought at the Japanese shop');
+      await SAY(18);
       await room;
       const hold = g.beat('room_hold');
       g.next('melon');
-      await g.say('anna', 'It’s wrong. You will be the first to despise me now');
+      await SAY(19);
       await hold;
       const melon = g.beat('melon');
       g.next('melon_hold');
@@ -42,7 +42,7 @@ export default {
       g.set('candle', 0.4, 2);
       g.beds({ sea: 0.25, room: 0.3, weep: 0.15 });
       const melonHold = g.beat('melon_hold');
-      await g.say('narrator', 'There followed at least half an hour of silence');
+      await SAY(20);
       await melonHold;
       const how = await g.choose('room', { watermelon: [{ id: 'eat', label: tr('Eat at the table') }], anna: [{ id: 'bring', label: tr('Bring her a slice') }] });
       if (how === 'eat') {
@@ -54,10 +54,10 @@ export default {
         const speaks = g.told('confession_table:speaks');
         const confession = g.beat('confession_table');
         await speaks;
-        await g.say('anna', 'It’s not my husband but myself I have deceived');
-        await g.say('anna', 'My husband may be a good, honest man, but he is a flunkey!');
-        await g.say('anna', 'I wanted to live! To live, to live…');
-        await g.say('gurov', 'Hush, hush…');
+        await SAY(22);
+        await SAY(23);
+        await SAY(24);
+        await SAY(25);
         await confession;
       } else {
         g.scale('heart', 2);
@@ -72,15 +72,15 @@ export default {
         g.set('apart', q.pulls ? 1 : 0);
         const besideHold = g.beat('beside_hold');
         g.next('confession_bed');
-        await g.say('gurov', 'How could I despise you?');
+        await SAY(21);
         await besideHold;
         const speaks = g.told('confession_bed:speaks');
         const confession = g.beat('confession_bed');
         await speaks;
-        await g.say('anna', 'It’s not my husband but myself I have deceived');
-        await g.say('anna', 'My husband may be a good, honest man, but he is a flunkey!');
-        await g.say('anna', 'I wanted to live! To live, to live…');
-        await g.say('gurov', 'Hush, hush…');
+        await SAY(22);
+        await SAY(23);
+        await SAY(24);
+        await SAY(25);
         await confession;
       }
       g.beds({ sea: 0.25, room: 0.3 });
@@ -92,31 +92,31 @@ export default {
       const bench = g.beat('bench');
       g.next('still');
       await sat;
-      await g.say('narrator', 'At Oreanda they sat on a seat not far from the church, looked down at the sea, and were silent');
+      await SAY(26);
       await bench;
       const still = g.beat('still');
       g.next('watchman');
       await still;
       let told = false;
-      const r = await g.play(sea, { sea: () => (told = true, g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and monotonously when we are all no more')) });
+      const r = await g.play(sea, { sea: () => (told = true, SAY(27)) });
       g.set('dawn', 1, 1);
       g.set('lights', 0, 2);
       g.set('cicada', 0);
       g.set('hand', r.touched.includes('hand') ? 1 : 0);
       g.beds({ sea: 0.6 });
-      if (!told) await g.say('narrator', 'So it must have sounded when there was no Yalta, no Oreanda here; so it sounds now, and it will sound as indifferently and monotonously when we are all no more');
+      if (!told) await SAY(27);
       const looks = g.told('watchman:looks');
       const gone = g.told('watchman:gone');
       const watchman = g.beat('watchman');
       g.next('dew');
       await looks;
-      await g.say('narrator', 'A man walked up to them — probably a keeper — looked at them and walked away');
+      await SAY(28);
       await gone;
-      await g.say('narrator', 'They saw a steamer come from Theodosia, with its lights out in the glow of dawn');
+      await SAY(29);
       await watchman;
       const dew = g.beat('dew');
-      await g.say('anna', 'There is dew on the grass', 'anna');
-      await g.say('gurov', 'Yes. It’s time to go home');
+      await SAY(30, 'anna');
+      await SAY(31);
       await dew;
     },
     // Noon: every day at noon together; a kiss looking round; the husband's letter
@@ -124,8 +124,8 @@ export default {
       await g.scene(SCENES.quay, { beat: 'noon_garden' }, { beds: { sea: 0.4, cicadas: 0.5 } });
       const garden = g.beat('noon_garden');
       g.next('days');
-      await g.say('narrator', 'Every day at twelve o’clock they met on the sea-front, lunched and dined together, went for walks');
-      await g.say('narrator', 'They kissed in broad daylight, looking round in dread of someone’s seeing them');
+      await SAY(32);
+      await SAY(33);
       await garden;
       const r = await g.play(lookingRound);
       g.set('kiss_now', 1);
@@ -134,8 +134,8 @@ export default {
       const letter = g.told('days:letter');
       const days = g.beat('days');
       await letter;
-      await g.say('narrator', 'But then a letter came from her husband');
-      await g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband'), voice: () => g.say('diderits', 'Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian', 'narrator') });
+      await SAY(34);
+      await g.letter({ text: tr('Anna, something is wrong with my eyes. Come home, if you can. Don’t overfeed the Pomeranian.'), sign: tr('Your husband'), voice: () => SAY(35, 'narrator') });
       g.sound.paper();
       await days;
     },
@@ -147,9 +147,9 @@ export default {
       const platform = g.beat('platform');
       g.next('board');
       bell.then(rang => { if (rang) g.sound.bell(); });
-      if (f.eat) await g.say('anna', 'It’s a good thing I am going away. It’s the finger of destiny');
-      else await g.say('anna', 'Let me look at you once more… Look at you once again. That’s right');
-      await g.say('anna', 'We are parting for ever — it must be so, for we ought never to have met');
+      if (f.eat) await SAY(36);
+      else await SAY(37);
+      await SAY(38);
       await bell;
       await platform;
       await g.beat('board');
@@ -175,11 +175,11 @@ export default {
       g.beds({ crickets: 0.6, wires: 0.4 });
       const moment = g.told(alone === 'alone_far' ? 'alone_far:stands' : 'alone_turn:door');
       const last = g.beat(alone);
-      await g.say('narrator', 'He was left alone on the platform. The grasshoppers chirruped and the telegraph wires hummed');
+      await SAY(39);
       await moment;
-      await g.say('gurov_inner', 'So that was one more adventure… And it, too, is at an end', 'gurov');
+      await SAY(40, 'gurov');
       await last;
-      await g.say('narrator', 'There was already a scent of autumn at the station; it was a cool evening');
+      await SAY(41);
     },
   ],
 };

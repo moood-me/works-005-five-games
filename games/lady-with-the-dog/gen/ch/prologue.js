@@ -24,14 +24,14 @@ export default {
       const turn = g.beat('noon_turn');
       g.next('pavilion');
       await leash;
-      await g.say('narrator', 'It was said that a new person had appeared on the sea-front: a lady with a little dog');
+      await SAY(1);
       await turn;
       g.title(tr('The Lady with the Dog')); // (not waited for: the pavilion goes on under it)
       const looks = g.told('pavilion:looks');
       const pavilion = g.beat('pavilion');
       await looks;
-      await g.say('narrator', 'Dmitri Dmitritch Gurov, who had by then been a fortnight at Yalta, had begun, too, to take an interest in new arrivals');
-      await g.say('narrator', 'He almost always spoke ill of women, and called them “the lower race”');
+      await SAY(2);
+      await SAY(3);
       await pavilion;
     },
   ],

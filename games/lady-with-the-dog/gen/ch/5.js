@@ -26,15 +26,15 @@ export default {
       const door = g.told('home_late:door');
       await g.scene(SCENES.moscow, { beat: 'home_late' }, { beds: weather(g.state) });
       const late = g.beat('home_late');
-      await g.say('narrator', 'She came to Moscow once in two or three months. He came home late from her');
+      await SAY(83);
       await door;
       g.sound.door();
-      await g.say('wife', 'Where have you been, Dimitri?', 'wife');
+      await SAY(84, 'wife');
       await late;
       const how = await g.choose('wife', { gurov: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] });
       if (how === 'lie') {
         g.next('wife_lie');
-        await g.say('gurov', 'At the club. We played till two');
+        await SAY(85);
         const inn = g.told('wife_lie:in');
         const lie = g.beat('wife_lie');
         await inn;
@@ -46,8 +46,8 @@ export default {
         // (the beat first: her close-up holds while he says it and she answers)
         const shut = g.told('wife_truth:door');
         const truth = g.beat('wife_truth');
-        await g.say('gurov', 'I was with her');
-        await g.say('wife_low', 'Hush. The children are asleep', 'wife');
+        await SAY(86);
+        await SAY(87, 'wife');
         await shut;
         g.sound.door();
         await truth;
@@ -58,35 +58,35 @@ export default {
       await g.scene(SCENES.moscow, { beat: 'school' }, { beds: weather(g.state) });
       const school = g.beat('school');
       g.next('walk_hand');
-      await g.say('narrator', 'On another of her visits, in the morning, he was taking his daughter to school');
+      await SAY(88);
       await school;
       const walk = g.beat('walk_hand');
       g.next('gate_school');
       await walk;
       let said = 0;
       const r = await g.play(byTheHand, { lines: [
-        () => (said = 1, g.say('gurov', 'It’s three degrees above freezing, and yet it is snowing')),
-        () => (said = 2, g.say('gurov', 'The thaw is only on the surface of the earth; there is quite a different temperature at a greater height in the atmosphere')),
-        () => (said = 3, g.say('daughter', 'And why are there no thunderstorms in the winter, father?')),
-        () => (said = 4, g.say('narrator', 'He explained that, too')),
+        () => (said = 1, SAY(89)),
+        () => (said = 2, SAY(90)),
+        () => (said = 3, SAY(91)),
+        () => (said = 4, SAY(92)),
       ] });
       g.set('go', 0);
       g.set('wave', r.stops ? 1 : 0);
       // (what the game did not get to say: in order, the same lines)
-      if (said < 1) await g.say('gurov', 'It’s three degrees above freezing, and yet it is snowing');
-      if (said < 2) await g.say('gurov', 'The thaw is only on the surface of the earth; there is quite a different temperature at a greater height in the atmosphere');
-      if (said < 3) await g.say('daughter', 'And why are there no thunderstorms in the winter, father?');
-      if (said < 4) await g.say('narrator', 'He explained that, too');
+      if (said < 1) await SAY(89);
+      if (said < 2) await SAY(90);
+      if (said < 3) await SAY(91);
+      if (said < 4) await SAY(92);
       const gate = g.beat('gate_school');
       g.next('red_cap');
-      await g.say('narrator', 'He had two lives: one open, full of relative truth and of relative falsehood, and another life running its course in secret');
-      await g.say('narrator', 'All personal life rests on secrecy');
+      await SAY(93);
+      await SAY(94);
       await gate;
       const note = g.told('red_cap:note');
       const cap = g.beat('red_cap');
       await note;
-      await g.say('narrator', 'A man in a red cap brought him a note');
-      await g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.'), voice: () => g.say('anna', 'I have come. The Slaviansky Bazaar', 'narrator') });
+      await SAY(95);
+      await g.letter({ text: tr('I have come. The Slaviansky Bazaar.'), sign: tr('A.'), voice: () => SAY(96, 'narrator') });
       g.sound.paper();
       await cap;
     },
@@ -110,7 +110,7 @@ export default {
         g.set('stain', r.spills ? 1 : 0);
         const weep = g.beat('weep');
         g.next(next);
-        await g.say('gurov', 'Don’t cry, my darling…');
+        await SAY(98);
         await weep;
       };
       const shoulders = async next => {
@@ -118,14 +118,14 @@ export default {
         const hands = g.beat('shoulders');
         g.next(next);
         await mirror;
-        await g.say('narrator', 'His hair was already beginning to turn grey');
+        await SAY(99);
         await hands;
       };
       const into = g.beat('bazaar_in');
       if (f.heart === 'frank') {
         g.next('shoulders');
         await met;
-        await g.say('narrator', 'She was wearing his favourite grey dress');
+        await SAY(97);
         await into;
         await shoulders('tea');
         g.beds({ room: 0.3, weep: 0.3 });
@@ -134,7 +134,7 @@ export default {
         // (as Chekhov has it: he sat, ordered tea, then went to her)
         g.next('tea');
         await met;
-        await g.say('narrator', 'She was wearing his favourite grey dress');
+        await SAY(97);
         await into;
         g.beds({ room: 0.3, weep: 0.3 });
         await atTea('shoulders');
@@ -145,29 +145,29 @@ export default {
       const cages = g.beat('cages');
       g.next('counsel');
       await turned;
-      await g.say('narrator', 'They were like a pair of birds of passage, male and female, caught and forced to live in different cages');
-      if (f.ending === 'cages') await g.say('gurov', 'How can we be free from this intolerable bondage?');
-      if (f.ending === 'wife' || f.ending === 'open') await g.say('gurov', 'My wife knows');
-      if (f.ending === 'wife') await g.say('anna', 'And what now?');
+      await SAY(100);
+      if (f.ending === 'cages') await SAY(101);
+      if (f.ending === 'wife' || f.ending === 'open') await SAY(102);
+      if (f.ending === 'wife') await SAY(103);
       if (f.ending === 'husband' || f.ending === 'open') {
-        await g.say('anna', 'My husband knows. He let me go — and kept the Pomeranian');
-        await g.say('gurov', 'And what now?');
+        await SAY(104);
+        await SAY(105);
       }
       await cages;
       const taking = g.beat('counsel');
       g.next('bazaar_end');
       await taking;
       const t = await g.play(counsel, {
-        window: async () => { await g.say('gurov', 'Move to Moscow'); await g.say('anna', 'And he? He is not to blame for anything'); },
-        door: async () => { await g.say('anna', 'If only we could go away together…'); await g.say('gurov', 'And the children?'); },
-        table: async () => { await g.say('gurov', 'If only we could see each other every day…'); await g.say('anna', 'And say goodbye every day?'); },
+        window: async () => { await SAY(106); await SAY(107); },
+        door: async () => { await SAY(108); await SAY(109); },
+        table: async () => { await SAY(110); await SAY(111); },
       });
       g.set('think', t.touched.at(-1) ?? 'none');
-      await g.say('gurov', 'How? How?');
+      await SAY(112);
       // (the scene tells the watch only when the wife does not know: waited for only then)
       const watch = f.wife === 'lie' ? g.told('bazaar_end:watch') : null;
       const end = g.beat('bazaar_end');
-      const last = g.say('narrator', 'And it seemed as though in a little while the solution would be found, and then a new and splendid life would begin; and it was clear to both of them that they had still a long, long road before them, and that the most complicated and difficult part of it was only just beginning');
+      const last = SAY(113);
       if (watch && (await watch)) g.sound.watch();
       await last;
       await end;
