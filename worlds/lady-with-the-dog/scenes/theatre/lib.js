@@ -232,13 +232,13 @@ function film(scene) {
     schoolboy2_here: true, schoolboy2_a: ST.BOY2[0], schoolboy2_d: ST.BOY2[1], schoolboy2_turn: 175, schoolboy2_do: 'lean_rail', schoolboy2_look: 'gurov',
     smoke: 1,
   };
-  // his hands on her back a little into it (her own frame: 0.07 m behind her middle, 1.1 m up): at her back's point
-  // itself the fingers stuck out past her from the shot of her face
-  const HOLD_HER = { r: { on: 'anna', at: [0.06, 0.07, 1.1] }, l: { on: 'anna', at: [-0.06, 0.07, 1.1] } };
+  // her hands on his back a little into it (his own frame: 0.07 m behind his middle, 1.25 m up): at his back's point
+  // itself the fingers of her far hand stuck out past his back in the shot of her face
+  const HOLD_HIM = { r: { on: 'gurov', at: [0.06, 0.07, 1.25] }, l: { on: 'gurov', at: [-0.06, 0.07, 1.25] } };
   const EMBRACE = {
     gurov_a: ST.HOLD[0], gurov_d: ST.HOLD[1],
     gurov_do: 'embrace_her', anna_do: 'embrace_him',
-    gurov_reach: HOLD_HER, anna_reach: { r: 'gurov#back', l: 'gurov#back' },
+    gurov_reach: { r: 'anna#back', l: 'anna#back' }, anna_reach: HOLD_HIM,
     gurov_look: 'anna#head', anna_look: 'gurov#shoulder_r', anna_mood: 'sad',
   };
   // she walks along her row from her seat to the aisle she leaves by (x), getting up first
@@ -433,8 +433,8 @@ function film(scene) {
         wide.cut();
         g.do('embrace_her');
         anna.do('embrace_him');
-        g.reach(HOLD_HER);
-        anna.reach({ r: 'gurov#back', l: 'gurov#back' });
+        g.reach({ r: 'anna#back', l: 'anna#back' });
+        anna.reach(HOLD_HIM);
         g.look('anna#head');
         anna.look('gurov#shoulder_r');
         s.person('schoolboy1').look('anna');
