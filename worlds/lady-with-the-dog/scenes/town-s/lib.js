@@ -114,8 +114,8 @@ const CAM = {
 // from the street, a little to the maid's side — where “By the fence” left him (`under`)
 const gateTwo = under => {
   const gx = gurovX(under ? 0.6 : 0.15), mx = under ? gurovX(0.6) + 1.5 : -1.2;
-  const cx = mx + 0.6, cz = 3.2, tx = (gx + mx) / 2, tz = 6.2;
-  return cam(cx, cz, 1.6, Math.atan2(tx - cx, tz - cz) * 180 / Math.PI, -7);
+  const cx = mx + 0.6, cz = 2.6, tx = (gx + mx) / 2, tz = 6.0;
+  return cam(cx, cz, 1.6, Math.atan2(tx - cx, tz - cz) * 180 / Math.PI, -10);
 };
 
 function film(scene) {
