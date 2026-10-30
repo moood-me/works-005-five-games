@@ -232,9 +232,9 @@ function film(scene) {
     schoolboy2_here: true, schoolboy2_a: ST.BOY2[0], schoolboy2_d: ST.BOY2[1], schoolboy2_turn: 175, schoolboy2_do: 'lean_rail', schoolboy2_look: 'gurov',
     smoke: 1,
   };
-  // her near hand (left) on his shoulder, her far arm (right) round his waist, the hand into his middle: reaching his
-  // back's point, a hand showed its fingers past his back in the shot of her face (`HER`)
-  const HOLD_HIM = { r: 'gurov#hips', l: 'gurov#shoulder_r' };
+  // her near arm (right, toward `HER`) round his back; her far one (left) round his waist, the hand into his middle:
+  // reaching his back's point too, it showed its fingers past his back in the shot of her face
+  const HOLD_HIM = { r: 'gurov#back', l: 'gurov#hips' };
   const EMBRACE = {
     gurov_a: ST.HOLD[0], gurov_d: ST.HOLD[1],
     gurov_do: 'embrace_her', anna_do: 'embrace_him',
