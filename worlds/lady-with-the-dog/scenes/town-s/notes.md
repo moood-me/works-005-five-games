@@ -89,6 +89,6 @@ Keys: `hour`, `season`, `dusk`, `morning`, `sunset`, `lamp`, `window`, `snow`, `
            "leave_truth": {"after": ["gate_leave"], "tells": ["leave_truth:close", "leave_truth:still", "leave_truth:answer", "leave_truth:pulls"], "seconds": 22, "show": false},
            "fence_end": {"after": [], "tells": [], "seconds": 12, "show": false}},
  "points": ["anna#hand_l", "gurov#head", "fence#p1", "fence#p2", "fence#p3", "fence#p4", "fence#p5", "fence#left", "fence#right", "fence#corner", "fence#poster", "spitz", "diderits"],
- "offers": ["spitz", "fence#corner", "diderits"],
+ "offers": ["spitz", "gurov", "anna"],
  "party": {"spring": 0, "talk": 0, "husband_knows": 0, "dog_pat": 0}}
 ```

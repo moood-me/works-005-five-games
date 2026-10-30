@@ -393,12 +393,14 @@ export function listen(b) {
     for (const w of watching) if (w.key === key) w.fn(value, old);
   });
   b.on('arrived', d => heard('arrived', w => w.who === d?.who));
-  // where a choice's mark stands (the language's own drawing: a page point): on its point while the frame has it; out
-  // of it (the one who chooses at the frame's edge, or behind the eye) at the frame's edge nearest to them, else in its
-  // middle — a mark off the frame never leaves the play waiting on what nobody sees (the language hides a mark whose
-  // point is out of the frame; as «The Canterville Ghost» and «The Fisherman» have it)
+  // where a choice's mark stands (the language's own drawing: a page point): on its point while the frame has it — a
+  // person's on their chest (never over the face), a thing's where it is pressed; out of it (the one who chooses at
+  // the frame's edge, or behind the eye) at the frame's edge nearest to them, else in its middle — a mark off the frame
+  // never leaves the play waiting on what nobody sees (the language hides a mark whose point is out of the frame; as
+  // «The Canterville Ghost» and «The Fisherman» have it)
   const toward = ref => {
-    const at = ref.includes('#') ? ref : `${ref}@`;
+    const person = !ref.includes('#') && (b.spec?.objects ?? []).some(o => o.id === ref && o.person);
+    const at = ref.includes('#') ? ref : person ? `${ref}#chest` : `${ref}@`;
     return () => {
       const f = b.frame(), p = b.where(at), m = 0.12 * f.h;
       if (!p) return { x: f.x + f.w / 2, y: f.y + f.h / 2 };

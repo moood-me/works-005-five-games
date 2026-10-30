@@ -92,7 +92,7 @@ export default {
       await g.say('gurov', 'What?');
       await g.say('official', 'You were right this evening: the sturgeon was a bit too strong!');
       await sturgeon;
-      const how = await g.choose('club', { sledge: [{ id: 'laugh', label: tr('Laugh and get into the sledge') }], lamp2: [{ id: 'walk', label: tr('Walk away') }] });
+      const how = await g.choose('club', { sledge: [{ id: 'laugh', label: tr('Laugh and get into the sledge') }], gurov: [{ id: 'walk', label: tr('Walk away') }] });
       if (how === 'laugh') {
         g.scale('heart', -2);
         g.next('laugh_sit');

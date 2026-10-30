@@ -46,7 +46,7 @@ export default {
       g.set('under', r.stood ? 1 : 0);
       g.sound.gate();
       await g.beat('gate_open');
-      const how = await g.choose('fence', { spitz: [{ id: 'call', label: tr('Call the dog') }], 'fence#corner': [{ id: 'hide', label: tr('Step round the corner') }] });
+      const how = await g.choose('fence', { spitz: [{ id: 'call', label: tr('Call the dog') }], gurov: [{ id: 'hide', label: tr('Step round the corner') }] });
       if (how === 'call') {
         g.mark('maid', true, tr('The maid will remember this.'));
         const run = f.dog === 'pat' ? 'call_run' : 'call_bark';
@@ -123,7 +123,7 @@ export default {
       await g.say('anna', 'How you have frightened me! Why have you come? Why?', 'anna');
       await g.say('gurov', 'But do understand, Anna, do understand…');
       await stairs;
-      const how = await g.choose('stairs', { anna: [{ id: 'promise', label: tr('“I will come to Moscow”') }], 'stairs#down': [{ id: 'away', label: tr('“Go away today”') }] });
+      const how = await g.choose('stairs', { anna: [{ id: 'promise', label: tr('“I will come to Moscow”') }, { id: 'away', label: tr('“Go away today”') }] });
       if (how === 'promise') {
         g.scale('anna', 2);
         g.next('promise_go');
@@ -158,7 +158,7 @@ export default {
       await asks;
       await g.say('diderits', 'When will you be back?');
       await gate;
-      const how = await g.choose('husband', { diderits: [{ id: 'lie', label: tr('“To the professor”') }, { id: 'truth', label: tr('“I am going to him”') }] });
+      const how = await g.choose('husband', { anna: [{ id: 'lie', label: tr('“To the professor”') }, { id: 'truth', label: tr('“I am going to him”') }] });
       if (how === 'lie') {
         g.next('leave_lie');
         await g.say('anna', 'In a week. The professor told me to come again');

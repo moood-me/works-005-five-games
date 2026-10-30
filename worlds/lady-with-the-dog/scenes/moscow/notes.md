@@ -136,7 +136,7 @@ Keys: `hour`, `overcast`, `season`, `snow`, `wet`, `lamps`, `porch_lamp`, `windo
            "red_cap": {"after": ["gate_school"], "tells": ["red_cap:note"], "seconds": 16, "show": false},
            "porch_end": {"after": [], "tells": [], "seconds": 10, "show": false}},
  "points": ["gurov", "wife", "official", "window_up", "sledge", "lamp2", "shade1#head", "shade2#head", "shade3#head", "shade4#head", "daughter#hand_r", "gym_fence#gate"],
- "offers": ["sledge", "lamp2", "wife"],
+ "offers": ["sledge", "gurov"],
  "party": {"wife_knows": 0, "spring": 0}}
 ```
 (`evening_walk:stopN` are told after the beat, as “The shadow” moves `walk_on`.)

@@ -32,7 +32,7 @@ export default {
       g.sound.door();
       await g.say('wife', 'Where have you been, Dimitri?', 'wife');
       await late;
-      const how = await g.choose('wife', { wife: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] });
+      const how = await g.choose('wife', { gurov: [{ id: 'lie', label: tr('“At the club”') }, { id: 'truth', label: tr('“I was with her”') }] });
       if (how === 'lie') {
         g.next('wife_lie');
         await g.say('gurov', 'At the club. We played till two');

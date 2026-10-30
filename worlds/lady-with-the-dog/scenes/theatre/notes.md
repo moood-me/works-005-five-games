@@ -87,6 +87,6 @@ Keys: `hall_light`, `curtain`, `stage`, `crowd`, `leave`, `glint`, `noticed`, `e
            "away_go": {"after": ["stairs"], "tells": [], "seconds": 7, "show": false},
            "bell": {"after": ["promise_go", "away_go"], "tells": [], "seconds": 6, "show": false}},
  "points": ["lady1#head", "lady2#head", "lady3#head", "lady4#head", "lady5#head", "anna#head", "anna#lorgnette", "anna", "stairs#down"],
- "offers": ["anna", "stairs#down"],
+ "offers": ["anna"],
  "party": {"anna_life": 0}}
 ```
