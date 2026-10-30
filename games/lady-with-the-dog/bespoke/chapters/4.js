@@ -140,7 +140,7 @@ export default {
         await go;
       }
       const bell = g.beat('bell');
-      g.sound.bell();
+      g.sound.chime();
       await bell;
     },
     // The gate: through Anna's eyes — she leaves “for the professor”; lie to her husband or tell the truth

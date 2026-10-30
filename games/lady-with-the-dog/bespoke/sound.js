@@ -1,29 +1,67 @@
-// The sounds of “The Lady with the Dog”, made in the page (Web Audio): nothing to load; as loud as the page's "sounds"
-// slider says (MooodVolume.output). The page runs the audio: it sounds once the browser lets it (the first touch), and
-// waits with the scene's music — the play paused, its scene standing —, fading out and back
-// in. (game.md §8, the page's sounds.)
+// The sounds of “The Lady with the Dog” (Web Audio), as loud as the page's "sounds" slider says (MooodVolume.output).
+// The page runs the audio: it sounds once the browser lets it (the first touch), and waits with the scene's music — the
+// play paused, its scene standing —, fading out and back in. (game.md §8, the page's sounds.)
+//   Real recordings (sounds/ — CC0 from Freesound, the waltz a public-domain record of 1914: sounds/README.md) for the
+// places and the things; made in the page only what is a tone, a tick, a beat (the owner liked these made so: the
+// clock, the wires — 2026-10-16), the heart, and the waltz on Anna's piano (no free recording of it on a piano).
+// Each recording plays at a gain from its measured loudness, not its peak: the beds from their integrated LUFS (level 1
+// ≈ −22 LUFS heard at the page's default "sounds" 0.4: under the scenes' music at the levels the game gives), the
+// one-offs from their loudest 0.4 s (`loud` 1 ≈ −18 heard: over the music, under the voices) — as «The Canterville
+// Ghost» has it.
 //   unheard() → {sounds} — the same, unheard, for a step played unseen (jump.js); a step plays them as g.sound
 // Two airs a sound goes out into: the open air (light, 1.8 s — the quay, the garden, the station, the street) and a
-// room (0.6 s — the hotel rooms, the theatre, a hall).
+// room (0.6 s — the hotel rooms, the theatre, a hall); the recordings carry their own air and send little to these.
 // The beds — what lasts; one of each for the page, as loud as `level` (0 — silence, and the bed is taken down),
 // getting there over `seconds` (a bed may be called by itself too — a gust: wind(0.7, 1)):
 //   background(levels, seconds) — the named beds to their levels, every other one to silence: the game's background as
 //     the page sounds it (bespoke.onBackground — at a scene's cut with its music, or at once: the game declares it,
 //     g.beds and g.scene's beds, and never times it)
-//   crickets — 4–5 kHz trills out of step · wires — the telegraph wires' hum, 100 and 150 Hz beating · room — a clock
-//   ticking, a faint hum
-//   wind — low wind in random gusts · snow — the snow's silence: a low wind barely there, far bells now and then ·
-//   thaw — rare drops · cicadas — three ringing tones trembling, swelling and fading (these four: ambience.js)
-//   recordings (sounds/): sea — the sea from the shore · crowd — voices on the pier · steam — a steam engine at the
-//   station · hall — the theatre before the curtain · weep — quiet weeping
+//   recordings: sea — the sea from the shore · crowd — voices on the pier · hall — the theatre before the curtain ·
+//   steam — a steam engine at the station · weep — quiet weeping · cicadas — a southern summer day · crickets — a warm
+//   night · wind — a wind off the sea, the autumn wind in the town · snow — a town under falling snow · thaw — drops
+//   from the roofs
+//   made here: wires — the telegraph wires' hum, 100 and 150 Hz beating · room — a clock ticking, a faint hum
 // Played till stopped — a handle {loud(v, seconds), stop(seconds)}: as loud as v (0…1) of its own; stop fades it out:
-//   band() — a brass band far off in the city garden: the waltz “Waves of the Danube” (Ion Ivanovici, 1880; public domain)
-//   piano(tune, {wall}) — a piano heard through a window and the snow: tune 'waltz' — the same waltz, 'etude' — scales
-//     and a simple study; wall: true — through a wall, duller and quieter
-// Played once:
-//   tuning · bark · yap · growl · clink · heart · knife · horn · bell(level) · whistle(level) · wheels · sleigh · gate ·
-//   door · pour · spill · paper · watch
-import { built, kit } from './ambience.js';
+//   band() — a brass band far off in the city garden: the waltz “Waves of the Danube” (Ion Ivanovici, 1880), a wind
+//     band's record of 1914, far, through the garden's air
+//   piano(tune, {wall}) — a piano heard through a window and the snow: tune 'etude' — someone practising (a scale,
+//     Hanon's exercise: recordings, by turns); 'waltz' — the same waltz, made here; wall: true — through a wall,
+//     duller and quieter
+// Played once (a recording each, but the heart):
+//   tuning · bark · yap · growl · clink · heart · knife · horn · bell(level) — the station's · chime — the theatre's ·
+//   whistle(level) · wheels · sleigh · gate · door · pour · spill · paper · watch
+
+// the beds' recordings: {files, lufs — their loudness (integrated, measured: sounds/README.md)}
+const BED_AT = -13.1; // the file's loudness that plays at level 1 (−22 heard, the master and the slider after it)
+const BEDS_REC = {
+  sea: { files: ['sea-shore-517945.mp3', 'sea-shore-240645.mp3'], lufs: -20.6 },
+  crowd: { files: ['crowd-550916.mp3'], lufs: -22.3 },
+  hall: { files: ['hall-735472.mp3', 'hall-850562.mp3'], lufs: -21.5 },
+  steam: { files: ['steam-473904.mp3'], lufs: -21.0 },
+  weep: { files: ['weep-171947.mp3', 'weep-172738.mp3'], lufs: -19.0 },
+  cicadas: { files: ['cicadas.mp3'], lufs: -21.1 },
+  crickets: { files: ['crickets.mp3'], lufs: -21.3 },
+  wind: { files: ['wind.mp3'], lufs: -25.3 },
+  snow: { files: ['snow.mp3'], lufs: -23.8 },
+  thaw: { files: ['thaw.mp3'], lufs: -30.2 },
+};
+// the one-offs: name → [file, its loudest 0.4 s (dBFS RMS), how loud it is in its scene (0…1), its air: [wet, room]] —
+// each brought to the same loudness at `loud` 1, its gain at most ×8
+const ONCE_AT = -9.1;
+const ONE = {
+  tuning: ['tuning.mp3', -12.8, 0.55, [0.3, 'room']], bark: ['bark.mp3', -17.7, 0.8, [0.15, 'open']],
+  yap: ['yap.mp3', -15.2, 0.75, [0.15, 'open']], growl: ['growl.mp3', -13.8, 0.6, [0.1, 'open']],
+  clink: ['clink.mp3', -17.6, 0.7, [0.15, 'open']], knife: ['knife.mp3', -22.0, 0.6, [0.1, 'room']],
+  horn: ['horn.mp3', -10.7, 0.55, [0.5, 'open']], bell: ['bell.mp3', -11.8, 0.6, [0.4, 'open']],
+  chime: ['bell_theatre.mp3', -12.9, 0.55, [0.35, 'room']], whistle: ['whistle.mp3', -9.5, 0.6, [0.4, 'open']],
+  wheels: ['wheels.mp3', -11.8, 0.6, [0.3, 'open']], sleigh: ['sleigh.mp3', -17.7, 0.55, [0.3, 'open']],
+  gate: ['gate.mp3', -22.1, 0.75, [0.3, 'open']], door: ['door.mp3', -13.8, 0.7, [0.25, 'room']],
+  pour: ['pour.mp3', -19.8, 0.6, [0.15, 'room']], spill: ['spill.mp3', -22.3, 0.55, [0.15, 'room']],
+  paper: ['paper.mp3', -19.3, 0.5, [0.1, 'room']], watch: ['watch.mp3', -24.7, 0.6, [0.1, 'room']],
+};
+// someone practising at the piano: the pieces by turns, a pause between ([file, lufs]); the band's waltz
+const PRACTICE = [['scales.mp3', -22.1], ['hanon.mp3', -21.0]], PAUSE = 2.5;
+const WALTZ_REC = ['waltz.mp3', -22.8];
 
 // The waltz, its first theme twice and its second strain, from Ivanovici's tune (A minor) set in F minor — the world's
 // key (A_FLAT_MAJOR_F_MINOR): four semitones down, nothing else changed. In beats of 3/4 from the first downbeat; the
@@ -46,28 +84,6 @@ const THEME = ['Am', 'E', 'E', 'E', 'Am', 'Am', 'Am', 'Am', 'Dm', 'Dm', 'E7', 'E
 const HARMONY = [...THEME, ...THEME.slice(0, 15), 'E7', 'Am', 'Am', 'D7', 'G', 'Dm', 'Dm', 'E', 'E', 'Dm', 'Dm', 'Am', 'Am', 'Dm', 'E7', 'Am']
   .map(c => [A[c][0] - 4, A[c][1].map(m => m - 4)]);
 const BARS = HARMONY.length; // 47
-
-// Anna's study (game.md §8: 'etude'): A♭ major up and down two octaves, a broken-chord study in A♭ (I IV V⁷ I), F minor's
-// harmonic scale up and down, a rest — round and round. [beat, beats, midi] (right hand), and the left hand's chords
-const ETUDE = (() => {
-  const notes = [], left = [];
-  let t = 0;
-  const run = (steps, from, len) => { let m = from; for (const s of steps) { notes.push([t, len, m]); m += s; t += len; } notes.push([t, len * 2, m]); t += len * 2; };
-  const major = [2, 2, 1, 2, 2, 2, 1], harmonic = [2, 1, 2, 2, 1, 3, 1];
-  const up = scale => [...scale, ...scale], down = scale => [...scale, ...scale].reverse().map(s => -s);
-  left.push([t, 8, [44, 51, 56]]);
-  run(up(major), 56, 0.5); run(down(major), 80, 0.5);
-  t += 1;
-  for (const [chord, bass] of [[[60, 63, 68], 44], [[61, 65, 68], 49], [[67, 70, 73], 39], [[60, 63, 68], 44]]) {
-    left.push([t, 4, [bass, bass + 12]]);
-    for (let r = 0; r < 2; r++) for (const i of [0, 2, 1, 2]) { notes.push([t, 0.5, chord[i]]); t += 0.5; }
-  }
-  t += 1;
-  left.push([t, 8, [41, 48, 53]]);
-  run(up(harmonic), 53, 0.5); run(down(harmonic), 77, 0.5);
-  t += 3;
-  return { notes, left, beats: t };
-})();
 
 let ctx = null, master = null, rooms = null, still = null;
 // a room's tail: decaying noise, low-passed by `dark` (0 bright … 1 dull)
@@ -128,23 +144,18 @@ function after(seconds, fn) {
   clock.stop(a.currentTime + seconds);
   return clock;
 }
-function setup(f, { type, frequency, Q = 1, gain = 0 }) {
+function filter({ type, frequency, Q = 1 }) {
+  const f = audio().createBiquadFilter();
   f.type = type;
   f.frequency.value = frequency;
   f.Q.value = Q;
-  f.gain.value = gain;
   return f;
 }
-const filter = how => setup(audio().createBiquadFilter(), how);
 function to(param, v, seconds) {
   const t = audio().currentTime;
   param.cancelScheduledValues(t);
   param.setValueAtTime(param.value, t);
   param.linearRampToValueAtTime(v, t + Math.max(0.02, seconds));
-}
-function shape(param, t, points, from = 0) {
-  param.setValueAtTime(from, t);
-  for (const [s, v] of points) param.linearRampToValueAtTime(v, t + s);
 }
 const noises = {};
 function noise(kind) {
@@ -169,17 +180,10 @@ function hiss(kind, t, seconds) {
   if (seconds) s.stop(t + seconds);
   return s;
 }
-function drift(param, rate, depth, type = 'sine') {
-  const a = audio(), o = a.createOscillator(), g = a.createGain();
-  o.type = type;
-  o.frequency.value = rate;
-  g.gain.value = depth;
-  o.connect(g).connect(param);
-  o.start();
-  return o;
-}
 const hz = m => 440 * 2 ** ((m - 69) / 12);
 const rnd = (a, b) => a + Math.random() * (b - a);
+// the gain that brings a recording measured at `lufs` to `at`
+const gainOf = (at, lufs) => 10 ** ((at - lufs) / 20);
 
 // something struck: its partials ringing down, [hz, seconds, loudness]
 function ring(t, dest, partials, attack = 0.004) {
@@ -204,77 +208,29 @@ function burst(t, dest, { kind = 'white', f, Q = 1, len, loud, attack = Math.min
   e.gain.exponentialRampToValueAtTime(0.0005, t + len);
   e.connect(dest);
 }
-// noise through a band with an envelope of its own [[seconds, level], …] (a swoosh, a breath, a hiss)
-function swell(t, dest, { kind = 'pink', f, Q = 1, type = 'bandpass', points, sweep }) {
-  const a = audio(), e = a.createGain(), band = filter({ type, frequency: f, Q }), len = points.at(-1)[0];
-  if (sweep) shape(band.frequency, t, sweep, f);
-  hiss(kind, t, len + 0.05).connect(band).connect(e).connect(dest);
-  shape(e.gain, t, points);
-  return e;
-}
-// a drop of water: a short note bending
-function drop(t, dest, f, bend, loud, len = 0.14) {
-  const a = audio(), o = a.createOscillator(), e = a.createGain();
-  o.frequency.setValueAtTime(f, t);
-  o.frequency.exponentialRampToValueAtTime(f * bend, t + 0.05);
-  e.gain.setValueAtTime(0, t);
-  e.gain.linearRampToValueAtTime(loud, t + 0.003);
-  e.gain.exponentialRampToValueAtTime(0.0005, t + len);
-  o.connect(e).connect(dest);
-  o.start(t);
-  o.stop(t + len + 0.04);
-}
-// a voice's syllable: noise through two formants (a vowel), up and down in `len` — far voices, a sob, a bark's throat
-function syllable(t, dest, { f1, f2, len, loud, kind = 'pink', pitch, fall = rnd(0.85, 1.1) }) {
-  const a = audio(), e = a.createGain(), src = a.createGain();
-  if (pitch) { // voiced: a buzz under the breath
-    const o = a.createOscillator();
-    o.type = 'sawtooth';
-    o.frequency.setValueAtTime(pitch, t);
-    o.frequency.linearRampToValueAtTime(pitch * fall, t + len);
-    const og = a.createGain();
-    og.gain.value = 0.25;
-    o.connect(og).connect(src);
-    o.start(t);
-    o.stop(t + len + 0.05);
-  }
-  hiss(kind, t, len + 0.05).connect(src);
-  for (const [f, q, v] of [[f1, 5, 1], [f2, 7, 0.6]]) {
-    const g = a.createGain();
-    g.gain.value = v;
-    src.connect(filter({ type: 'bandpass', frequency: f, Q: q })).connect(g).connect(e);
-  }
-  shape(e.gain, t, [[len * 0.25, loud], [len * 0.6, loud * 0.7], [len, 0]]);
-  e.connect(dest);
-}
-// small bells: a sleigh's, far or near — a few quick jingles
-function jingle(t, dest, n, loud) {
-  for (let i = 0; i < n; i++) {
-    const at = t + i * rnd(0.06, 0.13), f = rnd(2600, 4200);
-    ring(at, dest, [[f, 0.35, loud * rnd(0.5, 1)], [f * 1.48, 0.22, loud * 0.4], [f * 2.31, 0.12, loud * 0.2]], 0.002);
-  }
-}
-
-// recordings (sounds/ — CC0, from Freesound: sounds/README.md): fetched and decoded once each; a bed plays one of its own
-// round and round from a random point, `gain` bringing it to as loud as the bed it took the place of
+// recordings (sounds/): fetched and decoded once each
 const recordings = {};
 function recording(file) {
-  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url)).then(r => r.arrayBuffer()).then(b => audio().decodeAudioData(b)));
+  return (recordings[file] ??= fetch(new URL(`sounds/${file}`, import.meta.url))
+    .then(r => { if (!r.ok) throw new Error(`no sound ${file}`); return r.arrayBuffer(); })
+    .then(b => audio().decodeAudioData(b)));
 }
-function recorded(files, gain) {
+// a bed played from a recording: one of its files round and round from a random point, at the gain its loudness asks
+function recorded({ files, lufs }) {
   return ({ a, out, keep }) => {
     const s = a.createBufferSource(), g = a.createGain();
     let on = true;
     keep({ stop() { on = false; if (s.buffer) s.stop(); } });
-    g.gain.value = gain;
+    g.gain.value = gainOf(BED_AT, lufs);
     s.loop = true;
     s.connect(g).connect(out);
-    recording(files[Math.floor(Math.random() * files.length)]).then(buf => { if (on) { s.buffer = buf; s.start(a.currentTime, Math.random() * buf.duration); } });
+    recording(files[Math.floor(Math.random() * files.length)])
+      .then(buf => { if (on) { s.buffer = buf; s.start(a.currentTime, Math.random() * buf.duration); } }, () => {});
   };
 }
 
 // the beds: one of each for the page, built when first heard and taken down once silent: build({a, t, out, noise,
-// sway, keep, every}) → optionally tune(level, seconds)
+// keep, every})
 const sounding = {};
 function bed(name, wet, room, build, level, seconds) {
   let b = sounding[name];
@@ -285,10 +241,9 @@ function bed(name, wet, room, build, level, seconds) {
     out.gain.value = 0;
     out.connect(air(wet, room));
     b = sounding[name] = { out, stops, closing: null };
-    b.tune = build({
+    build({
       a, out, keep, t: a.currentTime,
       noise: kind => keep(hiss(kind, a.currentTime)),
-      sway: (param, rate, depth, type) => keep(drift(param, rate, depth, type)),
       every(fn) {
         fn();
         const timer = setInterval(fn, 200);
@@ -301,43 +256,24 @@ function bed(name, wet, room, build, level, seconds) {
     b.closing = null;
   }
   to(b.out.gain, level, seconds);
-  b.tune?.(level, seconds);
   if (!level) b.closing = after(Math.max(0.02, seconds) + 0.1, () => {
     for (const stop of b.stops) stop();
     b.out.disconnect();
     delete sounding[name];
   });
 }
-
-// the sea: a recording
-export function sea(level = 1, seconds = 2) { bed('sea', 0.05, 'open', recorded(['sea-shore-517945.mp3', 'sea-shore-240645.mp3'], 2.24), level, seconds); }
-
-export function cicadas(level = 1, seconds = 2) { bed('cicadas', 0.25, 'open', ({ a, out, keep, every }) => built.cicadas(kit(a, keep, every), out, 1.26), level, seconds); }
-
-// a crowd: a recording
-export function crowd(level = 1, seconds = 2) { bed('crowd', 0.05, 'open', recorded(['crowd-550916.mp3'], 0.48), level, seconds); }
-// a theatre hall: a recording
-export function hall(level = 1, seconds = 2) { bed('hall', 0.05, 'open', recorded(['hall-735472.mp3', 'hall-850562.mp3'], 0.39), level, seconds); }
-
-export function wind(level = 1, seconds = 2) { bed('wind', 0.2, 'open', ({ a, out, keep, every }) => built.wind(kit(a, keep, every), out, 1.45), level, seconds); }
-
-export function crickets(level = 1, seconds = 2) {
-  bed('crickets', 0.3, 'open', ({ a, t, keep, sway, out }) => {
-    // four of them, 4–5 kHz: each a sine trilled ~30 times a second, in chirps of its own rhythm — out of step
-    for (const [f, trill, chirp, loud] of [[4200, 31, 1.7, 0.05], [4550, 27, 2.3, 0.04], [4850, 34, 1.3, 0.035], [4400, 29, 2.9, 0.03]]) {
-      const o = keep(a.createOscillator()), trills = a.createGain(), ch = a.createGain(), amp = a.createGain();
-      o.frequency.value = f;
-      trills.gain.value = 0.5;
-      ch.gain.value = 0.5;
-      amp.gain.value = loud;
-      o.connect(trills).connect(ch).connect(amp).connect(out);
-      o.start(t);
-      sway(trills.gain, trill, 0.5, 'square');
-      sway(ch.gain, chirp, 0.5, 'square');
-      sway(amp.gain, rnd(0.03, 0.08), loud * 0.5);
-    }
-  }, level, seconds);
-}
+// a bed of a recording: (level, seconds)
+const recordedBed = (name, wet, room = 'open') => (level = 1, seconds = 2) => bed(name, wet, room, recorded(BEDS_REC[name]), level, seconds);
+export const sea = recordedBed('sea', 0.05);
+export const crowd = recordedBed('crowd', 0.05);
+export const hall = recordedBed('hall', 0.05, 'room');
+export const steam = recordedBed('steam', 0.05);
+export const weep = recordedBed('weep', 0.1, 'room');
+export const cicadas = recordedBed('cicadas', 0.1);
+export const crickets = recordedBed('crickets', 0.1);
+export const wind = recordedBed('wind', 0.1);
+export const snow = recordedBed('snow', 0.15);
+export const thaw = recordedBed('thaw', 0.15);
 
 export function wires(level = 1, seconds = 2) {
   bed('wires', 0.15, 'open', ({ a, t, keep, sway, out }) => {
@@ -351,13 +287,6 @@ export function wires(level = 1, seconds = 2) {
     }
   }, level, seconds);
 }
-
-// a steam engine: a recording
-export function steam(level = 1, seconds = 2) { bed('steam', 0.05, 'open', recorded(['steam-473904.mp3'], 1.32), level, seconds); }
-
-export function snow(level = 1, seconds = 2) { bed('snow', 0.4, 'open', ({ a, out, keep, every }) => built.snow(kit(a, keep, every), out), level, seconds); }
-
-export function thaw(level = 1, seconds = 2) { bed('thaw', 0.35, 'open', ({ a, out, keep, every }) => built.thaw(kit(a, keep, every), out, 1.29), level, seconds); }
 
 export function room(level = 1, seconds = 2) {
   bed('room', 0.25, 'room', ({ a, t, out, noise, every }) => {
@@ -377,9 +306,6 @@ export function room(level = 1, seconds = 2) {
     });
   }, level, seconds);
 }
-
-// weeping: a recording
-export function weep(level = 1, seconds = 2) { bed('weep', 0.05, 'open', recorded(['weep-171947.mp3', 'weep-172738.mp3'], 0.48), level, seconds); }
 
 const BEDS = { sea, cicadas, crowd, wind, crickets, wires, steam, snow, thaw, room, hall, weep };
 export function background(levels, seconds) {
@@ -406,6 +332,31 @@ function handle(out, base, close) {
     },
   };
 }
+// recordings played into `dest` — the pieces by turns, `pause` s between (one piece and no pause: looped from a random
+// point), each at its gain; → a stop
+function pieces(a, dest, list, pause = 0) {
+  let on = true, k = 0, src = null, timer = 0;
+  const next = () => {
+    if (!on) return;
+    const [file, gain] = list[k++ % list.length];
+    recording(file).then(buf => {
+      if (!on) return;
+      const s = src = a.createBufferSource(), g = a.createGain();
+      s.buffer = buf;
+      g.gain.value = gain;
+      s.connect(g).connect(dest);
+      if (list.length === 1 && !pause) { s.loop = true; s.start(a.currentTime + 0.05, Math.random() * buf.duration); return; }
+      s.onended = () => { timer = setTimeout(next, pause * 1000); };
+      s.start(a.currentTime + 0.05);
+    }, () => {});
+  };
+  next();
+  return () => {
+    on = false;
+    clearTimeout(timer);
+    if (src) { src.onended = null; src.stop(); }
+  };
+}
 // a round of music scheduled ahead as its time comes: plan(at, k) for each beat k (from 0) whose time is near
 function rounds(a, t0, beat, plan) {
   let k = 0, stopped = false;
@@ -422,61 +373,15 @@ function rounds(a, t0, beat, plan) {
   return () => { stopped = true; clearInterval(timer); };
 }
 
-// a brass voice: two saws a little apart, the lip's bite in the first 40 ms, a low-pass that opens with the breath
-function brass(dest, m, at, len, v, { bright = 1800, vibrato = 0 } = {}) {
-  const a = audio(), e = a.createGain(), lp = filter({ type: 'lowpass', frequency: bright * 0.5, Q: 0.8 });
-  const f = hz(m), oscs = [];
-  for (const d of [-5, 6]) {
-    const o = a.createOscillator();
-    o.type = 'sawtooth';
-    o.frequency.value = f;
-    o.detune.value = d;
-    o.connect(lp);
-    o.start(at);
-    o.stop(at + len + 0.15);
-    oscs.push(o);
-  }
-  if (vibrato && len > 0.6) {
-    const w = a.createOscillator(), wd = a.createGain();
-    w.frequency.value = 5.2;
-    wd.gain.setValueAtTime(0, at);
-    wd.gain.linearRampToValueAtTime(vibrato, at + 0.35);
-    w.connect(wd);
-    for (const o of oscs) wd.connect(o.detune);
-    w.start(at);
-    w.stop(at + len + 0.15);
-  }
-  lp.frequency.setValueAtTime(bright * 0.4, at);
-  lp.frequency.linearRampToValueAtTime(bright, at + 0.04);
-  lp.frequency.linearRampToValueAtTime(bright * 0.7, at + Math.min(len, 0.3));
-  e.gain.setValueAtTime(0, at);
-  e.gain.linearRampToValueAtTime(v, at + 0.03);
-  e.gain.linearRampToValueAtTime(v * 0.75, at + Math.min(len * 0.5, 0.25));
-  e.gain.setValueAtTime(v * 0.75, at + Math.max(0.03, len - 0.06));
-  e.gain.linearRampToValueAtTime(0, at + len + 0.1);
-  lp.connect(e).connect(dest);
-}
-// the band in the garden: the cornet's tune (with a slow vibrato), the tuba's bass on each bar's first beat — the root
-// and the fifth by turns —, the horns' chord on the second and third (“oom-pah-pah”), a drum's soft thud under the bass;
-// far, under a low-pass, much of it the garden's air. ♩ = 160
+// the band in the garden: the 1914 record of the waltz, far — under a low-pass, much of it the garden's air
 export function band() {
-  const a = audio(), out = a.createGain(), t0 = a.currentTime + 0.2, beat = 0.375, round = BARS * 3;
+  const a = audio(), out = a.createGain(), far = filter({ type: 'lowpass', frequency: 2200, Q: 0.5 });
   out.gain.value = 0;
   out.connect(air(0.6));
-  const far = filter({ type: 'lowpass', frequency: 1500, Q: 0.5 });
   far.connect(out);
-  const tune = (at, k) => {
-    const b = k % round;
-    for (const [s, len, m] of WALTZ) if (s >= b && s < b + 1) brass(far, m, at + (s - b) * beat, Math.max(0.12, len * beat - 0.04), 0.1, { bright: 2400, vibrato: 12 });
-    const bar = Math.floor(b / 3), [bass, chord] = HARMONY[bar], on = b % 3;
-    if (on === 0) {
-      brass(far, bar % 2 ? (bass + 7 > 43 ? bass - 5 : bass + 7) : bass, at, beat * 0.9, 0.14, { bright: 500 });
-      burst(at, far, { kind: 'brown', f: 80, Q: 1, len: 0.22, loud: 0.5 });
-    } else for (const m of chord) brass(far, m, at, beat * 0.55, 0.035, { bright: 1300 });
-  };
-  const stop = rounds(a, t0, beat, tune);
-  to(out.gain, 0.7, 3);
-  return handle(out, 0.7, stop);
+  const stop = pieces(a, far, [[WALTZ_REC[0], gainOf(BED_AT, WALTZ_REC[1])]]);
+  to(out.gain, 0.45, 3);
+  return handle(out, 0.45, stop);
 }
 
 // a piano's note: a hammer's knock and partials 1…7, the higher ones a little sharp and dying sooner; the pedal lets it
@@ -498,22 +403,19 @@ function key(dest, m, at, len, v) {
   }
   burst(at, dest, { f: 1800, Q: 0.8, len: 0.025, loud: v * 0.25 });
 }
-// the piano: `tune` 'waltz' — the garden's waltz, the left hand's “oom-pah-pah”, ♩ = 132; 'etude' — her scales and study,
-// ♩ = 104; heard through a window and the snow (a low-pass at 1.2 kHz) — or, wall: true, through a wall (600 Hz, quieter)
+// the piano: `tune` 'etude' — someone practising (the recordings by turns); 'waltz' — the garden's waltz made here, the
+// left hand's “oom-pah-pah”, ♩ = 132; heard through a window and the snow (a low-pass at 1.2 kHz) — or, wall: true,
+// through a wall (600 Hz, quieter)
 export function piano(tune = 'waltz', { wall = false } = {}) {
   const a = audio(), out = a.createGain(), t0 = a.currentTime + 0.2;
   out.gain.value = 0;
   out.connect(air(wall ? 0.5 : 0.35, wall ? 'room' : 'open'));
   const dull = filter({ type: 'lowpass', frequency: wall ? 600 : 1200, Q: 0.4 });
   dull.connect(out);
-  let stop;
+  let stop, base;
   if (tune === 'etude') {
-    const beat = 0.58, round = Math.ceil(ETUDE.beats);
-    stop = rounds(a, t0, beat, (at, k) => {
-      const b = k % round;
-      for (const [s, len, m] of ETUDE.notes) if (s >= b && s < b + 1) key(dull, m, at + (s - b) * beat + rnd(-0.01, 0.015), len * beat, 0.16);
-      for (const [s, len, chord] of ETUDE.left) if (s >= b && s < b + 1) for (const m of chord) key(dull, m, at + (s - b) * beat, len * beat, 0.08);
-    });
+    stop = pieces(a, dull, PRACTICE.map(([file, lufs]) => [file, gainOf(BED_AT, lufs)]), PAUSE);
+    base = wall ? 0.35 : 0.7;
   } else {
     const beat = 0.45, round = BARS * 3;
     stop = rounds(a, t0, beat, (at, k) => {
@@ -523,99 +425,47 @@ export function piano(tune = 'waltz', { wall = false } = {}) {
       if (on === 0) key(dull, bar % 2 ? bass + 7 : bass, at, beat, 0.12);
       else for (const m of chord) key(dull, m, at, beat * 0.6, 0.045);
     });
+    base = wall ? 0.45 : 0.9;
   }
-  const base = wall ? 0.45 : 0.9;
   to(out.gain, base, 2);
   return handle(out, base, stop);
 }
 
 // ── played once ─────────────────────────────────────────────────────────────────────────────────────────────────
-const now = (d = 0.02) => audio().currentTime + d;
-
-// a creak: a rasp through the wood's (or the hinge's) resonances, its pitch wavering
-function creakAt(t, dest, loud, { from = 120, to: peak = 180, len = 0.5, bands = [[700, 8], [1500, 6]] } = {}) {
-  const a = audio(), o = a.createOscillator(), e = a.createGain();
-  o.type = 'sawtooth';
-  o.frequency.setValueAtTime(from, t);
-  o.frequency.linearRampToValueAtTime(peak, t + len * 0.6);
-  o.frequency.linearRampToValueAtTime(from * 1.15, t + len);
-  for (const [f, Q] of bands) o.connect(filter({ type: 'bandpass', frequency: f, Q })).connect(e);
-  shape(e.gain, t, [[0.05, loud], [len * 0.6, loud * 0.7], [len, 0]]);
-  e.connect(dest);
-  o.start(t);
-  o.stop(t + len + 0.05);
+// a one-off recording, `loud` of its own loudness; far — duller, more of it the air
+function once(name, { loud = 1, far = false } = {}) {
+  const [file, at, own, [wet, room]] = ONE[name], a = audio();
+  recording(file).then(buf => {
+    const s = a.createBufferSource(), g = a.createGain();
+    s.buffer = buf;
+    g.gain.value = Math.min(8, gainOf(ONCE_AT, at)) * own * loud;
+    (far ? s.connect(filter({ type: 'lowpass', frequency: 1500, Q: 0.5 })) : s).connect(g);
+    g.connect(air(far ? Math.max(wet, 0.5) : wet, room));
+    s.start(a.currentTime + 0.02);
+  }, () => {});
 }
-
-// the theatre's orchestra tuning, ~6 s: the oboe's A, then strings and winds on A and its fifths, coming in out of
-// tune and finding it (the A is the orchestra's, not the world's key: so orchestras tune)
-export function tuning() {
-  const a = audio(), t = now(0.05), out = air(0.45, 'room'), lp = filter({ type: 'lowpass', frequency: 2600 });
-  lp.connect(out);
-  const voice = (at, f, len, v, type, off) => {
-    const o = a.createOscillator(), e = a.createGain(), w = a.createOscillator(), wd = a.createGain();
-    o.type = type;
-    o.frequency.setValueAtTime(f * (1 + off), at);
-    o.frequency.linearRampToValueAtTime(f, at + len * 0.6);
-    w.frequency.value = rnd(4.5, 6);
-    wd.gain.value = type === 'sawtooth' ? 9 : 4;
-    w.connect(wd).connect(o.detune);
-    shape(e.gain, at, [[0.25, v], [len * 0.8, v * 0.8], [len, 0]]);
-    o.connect(filter({ type: 'lowpass', frequency: type === 'square' ? 1400 : 2200 })).connect(e).connect(lp);
-    o.start(at); w.start(at);
-    o.stop(at + len + 0.05); w.stop(at + len + 0.05);
-  };
-  voice(t, 440, 2.6, 0.05, 'square', 0);
-  for (let i = 0; i < 9; i++) {
-    const f = [440, 440, 220, 293.66, 329.63, 659.26, 146.83, 880, 196][i];
-    voice(t + 0.8 + rnd(0, 3.2), f, rnd(1.5, 2.8), rnd(0.02, 0.04), i % 3 ? 'sawtooth' : 'triangle', rnd(-0.015, 0.015));
-  }
-  for (let i = 0; i < 3; i++) { // a run on a clarinet, somewhere
-    const at = t + rnd(1.5, 4.5);
-    for (let k = 0; k < 6; k++) voice(at + k * 0.09, hz(64 + [0, 2, 4, 5, 7, 9][k]), 0.12, 0.015, 'square', 0);
-  }
-}
-// the spitz: a bark (a short noisy burst through 800–1500 Hz over a small throat's tone); twice or three times
-function barks(t, dest, n, { f = 1100, pitch = 560, gap = 0.22, loud = 0.4 } = {}) {
-  for (let i = 0; i < n; i++) {
-    const at = t + i * gap * rnd(0.9, 1.15), p = pitch * rnd(0.95, 1.08);
-    syllable(at, dest, { f1: f * 0.7, f2: f * 1.35, len: 0.11, loud, kind: 'white', pitch: p, fall: 0.7 });
-    burst(at, dest, { f, Q: 1.6, len: 0.07, loud: loud * 0.5 });
-  }
-}
-export function bark() { barks(now(), air(0.25), 2 + Math.floor(Math.random() * 2)); }
-// glad: higher, quick, two by two
-export function yap() {
-  const t = now(), out = air(0.25);
-  barks(t, out, 2, { f: 1400, pitch: 760, gap: 0.12, loud: 0.33 });
-  barks(t + 0.45, out, 2, { f: 1450, pitch: 800, gap: 0.12, loud: 0.3 });
-}
-// a growl: low, 120–200 Hz, trembling, a second
-export function growl() {
-  const a = audio(), t = now(), out = air(0.2), o = a.createOscillator(), e = a.createGain(), trem = a.createOscillator(), td = a.createGain();
-  o.type = 'sawtooth';
-  o.frequency.setValueAtTime(150, t);
-  o.frequency.linearRampToValueAtTime(180, t + 0.4);
-  o.frequency.linearRampToValueAtTime(130, t + 1);
-  trem.frequency.value = 24;
-  td.gain.value = 0.5;
-  const g = a.createGain();
-  g.gain.value = 0.5;
-  trem.connect(td).connect(g.gain);
-  o.connect(filter({ type: 'bandpass', frequency: 420, Q: 1.5 })).connect(g).connect(e);
-  hiss('pink', t, 1.1).connect(filter({ type: 'bandpass', frequency: 300, Q: 2 })).connect(g);
-  shape(e.gain, t, [[0.15, 0.35], [0.8, 0.3], [1, 0]]);
-  e.connect(out);
-  o.start(t); trem.start(t);
-  o.stop(t + 1.05); trem.stop(t + 1.05);
-}
-// the lorgnette dropped on the boards: two short bright knocks
-export function clink() {
-  const t = now(), out = air(0.3);
-  for (const [s, v] of [[0, 1], [0.16, 0.55]]) {
-    ring(t + s, out, [[2950, 0.18, 0.06 * v], [4330, 0.12, 0.035 * v], [6100, 0.06, 0.02 * v]], 0.001);
-    burst(t + s, out, { kind: 'brown', f: 500, Q: 1, len: 0.05, loud: 0.3 * v });
-  }
-}
+export const tuning = () => once('tuning');
+export const bark = () => once('bark');
+export const yap = () => once('yap');
+export const growl = () => once('growl');
+export const clink = () => once('clink');
+export const knife = () => once('knife');
+// the steamer's horn: far over the water
+export const horn = () => once('horn', { far: true });
+// the station's bell; level under 0.5 — far
+export const bell = (level = 1) => once('bell', { loud: level, far: level < 0.5 });
+// the theatre's bell
+export const chime = () => once('chime');
+// the engine's whistle; level under 0.5 — far
+export const whistle = (level = 1) => once('whistle', { loud: level, far: level < 0.5 });
+export const wheels = () => once('wheels');
+export const sleigh = () => once('sleigh');
+export const gate = () => once('gate');
+export const door = () => once('door');
+export const pour = () => once('pour');
+export const spill = () => once('spill');
+export const paper = () => once('paper');
+export const watch = () => once('watch');
 // her heart: two dull beats
 export function heart() {
   const a = audio(), t = now(), out = air(0.05);
@@ -631,122 +481,6 @@ export function heart() {
     o.stop(t + s + 0.25);
   }
 }
-// the knife in the melon: a short wet crunch through 1–3 kHz
-export function knife() {
-  const a = audio(), t = now(), out = air(0.2, 'room'), e = a.createGain(), len = rnd(0.18, 0.26);
-  hiss('white', t, len + 0.05).connect(filter({ type: 'bandpass', frequency: rnd(1400, 2200), Q: 0.9 })).connect(e).connect(out);
-  e.gain.setValueAtTime(0, t);
-  for (let s = 0; s < len; s += rnd(0.012, 0.03)) e.gain.linearRampToValueAtTime(rnd(0.05, 0.22), t + s);
-  e.gain.linearRampToValueAtTime(0, t + len);
-  burst(t + len * 0.3, out, { kind: 'brown', f: 700, Q: 1, len: 0.06, loud: 0.15 });
-}
-// the steamer's horn: two saws, F and B♭ (175 and 233 Hz), low-passed, 1.5 s, far over the water
-export function horn() {
-  const a = audio(), t = now(0.05), e = a.createGain(), lp = filter({ type: 'lowpass', frequency: 900, Q: 0.7 });
-  for (const f of [174.6, 233.1]) {
-    const o = a.createOscillator();
-    o.type = 'sawtooth';
-    o.frequency.setValueAtTime(f * 0.97, t);
-    o.frequency.linearRampToValueAtTime(f, t + 0.25);
-    o.connect(lp);
-    o.start(t);
-    o.stop(t + 1.7);
-  }
-  shape(e.gain, t, [[0.2, 0.09], [1.3, 0.08], [1.6, 0]]);
-  lp.connect(e).connect(air(0.75));
-}
-// a bell: the station's bell or the theatre's — three strokes of a metal tone (partials not in tune with one another),
-// on E♭ — the world's key's fifth
-export function bell(level = 1) {
-  const t = now(), out = air(0.5);
-  const f = 622.25;
-  for (let i = 0; i < 3; i++) ring(t + i * 0.55, out, [[f, 1.8, 0.07 * level], [f * 2.01, 1.1, 0.035 * level], [f * 2.76, 0.8, 0.03 * level], [f * 5.4, 0.3, 0.012 * level]], 0.002);
-}
-// the engine's whistle: a saw through a band, 1.2 s, on E♭ (≈ 622 Hz)
-export function whistle(level = 1) {
-  const a = audio(), t = now(), out = air(0.6), o = a.createOscillator(), e = a.createGain();
-  o.type = 'sawtooth';
-  o.frequency.setValueAtTime(590, t);
-  o.frequency.linearRampToValueAtTime(622, t + 0.15);
-  o.connect(filter({ type: 'bandpass', frequency: 1250, Q: 2 })).connect(e);
-  swell(t, e, { kind: 'white', f: 2500, Q: 2, points: [[0.1, 0.2], [1.1, 0.15], [1.25, 0]] });
-  shape(e.gain, t, [[0.08, 0.09 * level], [1.05, 0.08 * level], [1.25, 0]]);
-  e.connect(out);
-  o.start(t);
-  o.stop(t + 1.3);
-}
-// the train moving off, ~8 s: the wheels knocking on the rails' joints (two knocks a car), quicker and quicker, going
-// away; the engine's puffs at first
-export function wheels() {
-  const t = now(0.05), out = air(0.45);
-  let s = 0, gap = 1.1;
-  while (s < 8) {
-    const v = 0.5 * Math.min(1, 0.4 + s / 3) * Math.max(0, 1 - Math.max(0, s - 3.5) / 4.5);
-    for (const d of [0, 0.13]) {
-      burst(t + s + d, out, { kind: 'brown', f: 220, Q: 1.2, len: 0.09, loud: v });
-      burst(t + s + d, out, { f: 2400, Q: 2, len: 0.02, loud: v * 0.15 });
-    }
-    s += gap;
-    gap = Math.max(0.36, gap * 0.86);
-  }
-  for (let i = 0; i < 4; i++) swell(t + i * 0.9, out, { kind: 'white', type: 'highpass', f: 1500, Q: 0.7, points: [[0.05, 0.2 * (1 - i / 5)], [0.5, 0]] });
-}
-// a sleigh going by left to right: its bells, the runners' hiss on the snow, the horse's hooves muffled
-export function sleigh() {
-  const a = audio(), t = now(0.05), pan = a.createStereoPanner(), e = a.createGain(), len = 4.5;
-  pan.pan.setValueAtTime(-0.9, t);
-  pan.pan.linearRampToValueAtTime(0.9, t + len);
-  shape(e.gain, t, [[len * 0.45, 1], [len * 0.6, 1], [len, 0]], 0.1);
-  e.connect(pan).connect(air(0.4));
-  for (let s = 0; s < len; s += rnd(0.18, 0.3)) jingle(t + s, e, 2, 0.05);
-  swell(t, e, { kind: 'pink', f: 2600, Q: 0.6, points: [[0.6, 0.06], [len - 0.6, 0.07], [len, 0]] });
-  for (let s = 0.1; s < len; s += 0.33) burst(t + s, e, { kind: 'brown', f: 260, Q: 1, len: 0.06, loud: 0.12 });
-}
-// the gate: its hinge creaks, the latch knocks
-export function gate() {
-  const t = now(), out = air(0.4);
-  creakAt(t, out, 0.22, { from: 260, to: 380, len: 0.85, bands: [[900, 9], [1700, 7], [2600, 6]] });
-  burst(t + 0.9, out, { kind: 'brown', f: 300, Q: 1.2, len: 0.08, loud: 0.5 });
-  ring(t + 0.9, out, [[1500, 0.15, 0.03], [2700, 0.08, 0.015]]);
-}
-// a door: a short creak, and it shuts softly
-export function door() {
-  const t = now(), out = air(0.4, 'room');
-  creakAt(t, out, 0.14, { from: 150, to: 210, len: 0.45 });
-  burst(t + 0.55, out, { kind: 'brown', f: 110, Q: 0.9, len: 0.25, loud: 0.7, attack: 0.004 });
-  burst(t + 0.56, out, { f: 900, Q: 2, len: 0.03, loud: 0.06 });
-}
-// tea from the samovar's tap into the glass, 2 s: running water, its tone rising as the glass fills
-export function pour() {
-  const a = audio(), t = now(), out = air(0.25, 'room');
-  swell(t, out, { kind: 'white', f: 650, Q: 3, points: [[0.1, 0.12], [1.8, 0.1], [2, 0]], sweep: [[2, 1250]] });
-  for (let s = 0.05; s < 1.95; s += rnd(0.03, 0.08)) drop(t + s, out, rnd(700, 1100) * (1 + s * 0.35), rnd(1.1, 1.4), rnd(0.01, 0.03), 0.06);
-}
-// spilt into the saucer: a short hiss of drops
-export function spill() {
-  const t = now(), out = air(0.25, 'room');
-  swell(t, out, { kind: 'white', type: 'highpass', f: 2500, Q: 0.7, points: [[0.03, 0.12], [0.5, 0]] });
-  for (let i = 0; i < 9; i++) drop(t + rnd(0, 0.45), out, rnd(1500, 3000), 0.7, rnd(0.02, 0.05), 0.08);
-}
-// a sheet unfolded or folded
-export function paper() {
-  const a = audio(), t = now(0.01), e = a.createGain(), len = rnd(0.4, 0.6);
-  hiss('white', t, len + 0.1).connect(filter({ type: 'bandpass', frequency: 3200, Q: 0.7 }))
-    .connect(filter({ type: 'highpass', frequency: 1300 })).connect(e).connect(air(0.1, 'room'));
-  e.gain.setValueAtTime(0, t);
-  for (let s = 0; s < len; s += rnd(0.03, 0.09)) {
-    e.gain.linearRampToValueAtTime(rnd(0.09, 0.29), t + s + 0.008);
-    e.gain.linearRampToValueAtTime(0.04, t + s + 0.025);
-  }
-  e.gain.linearRampToValueAtTime(0, t + len);
-}
-// the pocket watch: its lid clicks open, then two seconds of its quick quiet ticking
-export function watch() {
-  const t = now(), out = air(0.15, 'room');
-  burst(t, out, { f: 3200, Q: 2, len: 0.02, loud: 0.3 });
-  ring(t, out, [[3700, 0.12, 0.05], [5900, 0.07, 0.025]], 0.001);
-  for (let s = 0.35; s < 2.35; s += 0.2) ring(t + s, out, [[4200, 0.025, 0.025], [6300, 0.015, 0.01]], 0.001);
-}
 
 // the sounds of a step played unseen (jump.js): nothing heard meanwhile — what was played once is over by then, and a
 // handle begun meanwhile is mute (the background the step declared is the jump's: j.background)
@@ -759,7 +493,8 @@ export function unheard() {
       hall: none, weep: none,
       band: mute, piano: mute,
       tuning: none, bark: none, yap: none, growl: none, clink: none, heart: none, knife: none, horn: none, bell: none,
-      whistle: none, wheels: none, sleigh: none, gate: none, door: none, pour: none, spill: none, paper: none, watch: none,
+      chime: none, whistle: none, wheels: none, sleigh: none, gate: none, door: none, pour: none, spill: none, paper: none,
+      watch: none,
     },
   };
 }
