@@ -389,6 +389,9 @@ const ALLEY_FAR = [[32.6, 8.25], [33.3, 6.9]], ALLEY_NEAR = [[33.2, -0.5], [29.0
 const ALLEY_SEEN = { x0: 31.4, x1: 37, z0: -3.2, z1: 7.5 };       // the avenue as the 4:3 window shows it
 const BENCH = [35.95, 1.7];
 
+// the end of the pier: where she steps to him (fright 1), or he to her, to hold each other
+const HOLD = { anna: [-37.18, 24.73], gurov: [-37.27, 24.72] };
+
 function film(scene) {
   // every key every beat begins from — nobody here, the noon light — and what the beat says over it
   const base = (h, extra) => {
@@ -730,6 +733,7 @@ function film(scene) {
     },
     // dusk, the end of the pier, the steamer's lights: side on, medium. fright 1 — she presses to him first, her face
     // frightened; 0 — he turns to her, they embrace. He looks back over his shoulder — his face in profile
+    // (where the embrace stands: she steps to him — fright 1 —, or he to her)
     kiss: {
       after: 'lost',
       from: () => base(0.83, { ...CAM.KISS, steamer: 1, lamps: 1, steamer_lit: 1, wind: 0.3, crowd: 0, surge: 1, pass: 7, stranger_turned: 1,
@@ -740,19 +744,22 @@ function film(scene) {
         await cutTo(s, this_kiss());
         s.move('hour', 0.85, { over: 8 });
         await s.wait(0.6);
+        // (an embrace is close: the one who comes steps up to a breast's depth of the other — at arm's length their arms
+        // stood out straight)
         if (Number(s.state.fright) > 0.5) {
           anna.mood('afraid');
           anna.look('gurov');
-          await anna.do('embrace_her');
-          anna.reach({ r: 'gurov#back', l: 'gurov#back' });
           gurov.look('anna');
-          await gurov.turn(270);
+          await s.all(anna.walk([HOLD.anna]), gurov.turn(270));
+          await s.all(anna.do('embrace_her'), gurov.do('embrace_him'));
+          anna.reach({ r: 'gurov#back', l: 'gurov#back' });
           gurov.reach({ r: 'anna#back', l: 'anna#back' });
         } else {
           gurov.look('anna');
           await gurov.turn(270);
           anna.look('gurov');
           anna.mood('sad');
+          await gurov.walk([HOLD.gurov]);
           await s.all(gurov.do('embrace_him'), anna.do('embrace_her'));
           gurov.reach({ r: 'anna#back', l: 'anna#back' });
           anna.reach({ r: 'gurov#back', l: 'gurov#back' });
