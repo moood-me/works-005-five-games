@@ -115,4 +115,5 @@ export const LINES = [
   [112, "gurov", "How? How?"],
   [113, "narrator", "And it seemed as though in a little while the solution would be found, and then a new and splendid life would begin; and it was clear to both of them that they had still a long, long road before them, and that the most complicated and difficult part of it was only just beginning"],
   [114, "diderits", "That’s for the professor. And buy yourself something in Moscow"],
+  [115, "narrator", "Below the gangway a tall, stooping gentleman stopped — from behind, the very image of her husband"],
 ];

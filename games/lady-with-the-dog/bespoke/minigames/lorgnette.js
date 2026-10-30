@@ -5,7 +5,8 @@
 // head), the mark taken off. Before the fifth — a wait for `gangway:stranger`: when the tall stooping man has stopped
 // below, his back to us, the stream stands, the mark on him alone; pressed — a heartbeat, she looks hard, he turns to
 // his lady — a stranger's face (`stranger_turned` 1); 12 s not pressed — he turns by himself, without a sound. Then p5,
-// p6; the crowd surges (`surge` 1), the end 1 s later.
+// p6; the crowd surges (`surge` 1), the end 1 s later. opts.onStranger — said as he stops below (the player has not
+// seen her husband yet: the line says why her heart beats — and the theatre's «very tall and stooping» rhymes with it).
 //   Who does what: Anna looks through her lorgnette for acquaintances from S. What she wants: that there be none.
 //   What she feels: fear and shame. The player: to look hard and to dread being known.
 //   → { looked: how many she looked hard at, stranger: whether she looked at the stooping man }
@@ -73,6 +74,7 @@ export default {
         // the stream stands: the mark on him alone
         phase = 'stranger';
         standFrom = t;
+        opts.onStranger?.();
         marks.push(markOn('stranger', m => {
           looked++;
           stranger = true;

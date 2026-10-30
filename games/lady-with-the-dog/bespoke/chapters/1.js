@@ -96,7 +96,7 @@ export default {
       const gangway = g.beat('gangway');
       g.next('lost');
       await gangway;
-      const r = await g.play(lorgnette);
+      const r = await g.play(lorgnette, { onStranger: () => g.say('narrator', 'Below the gangway a tall, stooping gentleman stopped — from behind, the very image of her husband') });
       g.set('pass', 7);
       g.set('look_at', '');
       g.set('stranger_turned', 1);

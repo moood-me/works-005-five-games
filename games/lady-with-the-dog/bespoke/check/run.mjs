@@ -51,7 +51,7 @@ const several = (stem, n, tail = '', from = 1) => Array.from({ length: n }, (_, 
 // points its marks stand on, the moments of the scene it waits for (tells), the fields of its opts and of its result
 const MINIGAMES = {
   coax: { scene: 'quay', keys: ['hand', 'spitz_near'], points: ['spitz#head'], result: ['startles'] },
-  lorgnette: { scene: 'quay', keys: ['pass', 'look_at', 'stranger_turned', 'surge'], tells: ['gangway:stranger'], points: [...several('p', 6, '#head'), 'stranger#head'], result: ['looked', 'stranger'] },
+  lorgnette: { scene: 'quay', keys: ['pass', 'look_at', 'stranger_turned', 'surge'], tells: ['gangway:stranger'], points: [...several('p', 6, '#head'), 'stranger#head'], opts: ['onStranger'], result: ['looked', 'stranger'] },
   'looking-round': { scene: 'quay', keys: ['seen', 'kiss_now'], tells: ['noon_garden:kiss'], listens: ['watched'], points: ['anna#head'], result: ['seen'] },
   watermelon: { scene: 'room', keys: ['cut', 'slice', 'candle'], points: ['melon#knife', 'melon#from', 'melon#to'], result: ['lifts'] },
   'beside-her': { scene: 'room', keys: ['hand_at', 'pull', 'palm'], points: ['hands#his', 'hands#her'], result: ['pulls'] },
