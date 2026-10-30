@@ -216,6 +216,8 @@ export default async function (b) {
     view.quiet();
     const here = replay ? replay.run.chapter : Math.min(kept.chapter, END);
     const now = replay ? replay.run : kept, season = CHAPTERS[Math.min(now.chapter, EPILOGUE)].season(now);
+    // (the scales stand here: as the run shown has them)
+    view.gauges(now);
     const spec = await b.specOf(SCENES.lights);
     await b.show(SCENES.lights, { state: { shown: reveal ?? here, ...('season' in (spec.states ?? {}) ? { season } : {}) }, background: season === 'winter' || season === 'thaw' ? { snow: 0.3 } : { sea: 0.3 } });
     const drawn = trees(b, sky(), { grow: reveal, seconds: REVEAL, author: !!author });
