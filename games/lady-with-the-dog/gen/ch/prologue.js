@@ -14,9 +14,7 @@ export default {
   steps: [
     // the quay at noon: the spitz on the parapet, the player calls it; the lady takes the leash; the title; Gurov looks
     async g => {
-      g.hero('gurov');
-      g.beds({ sea: 0.6, cicadas: 0.4 }, 3);
-      await g.scene(SCENES.quay, { beat: 'noon' });
+      await g.scene(SCENES.quay, { beat: 'noon' }, { beds: { sea: 0.6, cicadas: 0.4 } });
       const noon = g.beat('noon');
       g.next('noon_turn');
       await noon;
