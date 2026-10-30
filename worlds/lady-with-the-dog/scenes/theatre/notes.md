@@ -12,7 +12,8 @@ no sky).
   row 3 in the middle of the frame, a seated lady ≈ 0.19 of it — “Find her” and the husband), `FACE` (from the empty
   seat in row 2 back at her, 1.1 m: her face lifted to him, he out of the frame in the aisle), `CORRIDOR`, `STAIRS`
   (the landing), `TWO` (the two in profile under the lamp, 1.9 m), `TURN` (her at the turn of the stairs, her face back
-  to him), `HER` (from the gallery's side, 1.5 m: her face over his right shoulder in his arms — under her choice). scenes.md asked for `roam`; `picture` — the shots are all the scene's own, the viewer only leans.
+  to him), `SEATED` (from between rows 1 and 2 back at the two in row 3: the husband — tall, side-whiskers, pince-nez — beside
+  her, both faces, under the words about him), `HER` (from the gallery's side, 1.5 m: her face over his right shoulder in his arms — under her choice). scenes.md asked for `roam`; `picture` — the shots are all the scene's own, the viewer only leans.
 - **The hall** (metres in `lib.js` `G`): walls x ±7, the stage's front z 18, ceiling 9; the balcony over the back of
   the parterre (front z 7.6, 3 m up) on two columns (forms); ten rows of dull green seats (one painting, copies), a
   middle aisle; boxes in two tiers painted on the side walls; the proscenium, the curtain (two halves gathered by
@@ -48,7 +49,7 @@ no sky).
 | --- | --- | --- | --- |
 | `hall` | — | 12 | `BACK`: the hall fills (`crowd` 0.35 → 1); Gurov at the column from behind, looking over the rows |
 | `hall_find` | — | 2 | a cut to `HALL`: the ladies not in yet — under “Find her” (`enter` 1…6, `glint`) |
-| `husband_in` | hall_find | 12 | (noticed 1) lady2 turns back to the column; the husband comes in bowing at every step, bows, sits by her, puts her shawl right (`husband_in:sat`); the lights down to 0.3, the curtain up |
+| `husband_in` | hall_find | 12 | (noticed 1) lady2 turns back to the column; the husband comes in bowing at every step, bows, sits by her, puts her shawl right (`husband_in:sat`); `SEATED` — the two side by side; the lights down to 0.3, the curtain up; back to `HALL` |
 | `interval_out` | husband_in | 10 | the interval: lights up, curtain down, half the audience go out; the husband gets up and goes out; she stays |
 | `interval_stay` | husband_in | 10 | the same; he stays and looks round the hall; she gets up and goes out alone by the side door |
 | `approach` | interval_out | 8 | Gurov comes down the aisle to her row (`approach:at`); a cut to `FACE` — her face, afraid; she rises |
@@ -73,7 +74,9 @@ Keys: `hall_light`, `curtain`, `stage`, `crowd`, `leave`, `glint`, `noticed`, `e
 - The hall's light reaches the corridor a little (lights pass walls).
 - The embrace (2026-10-30): a step apart (0.68 m) the motions' arms went straight out and his near arm crossed her
   head in `TWO`; now he steps in to `ST.HOLD` and the embrace is seen wide (`STAIRS`), then from `HER`, where her arms
-  round him and her face read and his arms are hidden behind them.
+  round him and her face read and his arms are hidden behind them. With fingers on the figures, her hand at his back's
+  point showed past his back as a claw: her near arm (right) holds `gurov#back`, the far one (left) `gurov#hips` —
+  round his waist, the hand into his middle, out of sight.
 - Nobody walks on the stairs (scenes.md): the cut is to the landing; she goes out of sight behind the wall at the turn.
 
 ## Contract for the check
