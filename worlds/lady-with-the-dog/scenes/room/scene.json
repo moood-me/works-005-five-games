@@ -11,14 +11,14 @@
     "beats"
   ],
   "light": {
-    "ambient": 0.52,
+    "ambient": 0.62,
     "ambientColor": "#5b67a8",
     "inside": 0.5,
     "haze": 0.03,
     "hazeColor": "#2c3050",
     "hazeGlow": 0.5,
     "shafts": 0.5,
-    "vignette": 0.38,
+    "vignette": 0.3,
     "grain": 0.22,
     "saturation": 0.92,
     "bounce": 0.45,
@@ -33,8 +33,8 @@
       "id": "candle_l",
       "of": "candle#flame",
       "color": "#ffb866",
-      "strength": 1.6,
-      "reach": 5,
+      "strength": 2.1,
+      "reach": 6,
       "flicker": 0.3
     },
     {
@@ -72,7 +72,7 @@
       "across": 0.95,
       "distance": 5.5,
       "elevation": 1.5,
-      "daylight": 1.1,
+      "daylight": 1.3,
       "reach": 6
     }
   ],
@@ -284,18 +284,13 @@
     {
       "id": "pillows",
       "name": "pillows",
+      "plane": true,
       "inside": true,
-      "across": -2.2,
-      "distance": 5.15,
-      "elevation": 0.5,
-      "facing": 120,
-      "height": 0.35,
-      "box": [
-        -0.5,
-        -0.36,
-        0.5,
-        0.02
-      ]
+      "across": -2.24,
+      "distance": 5.05,
+      "elevation": 0.53,
+      "width": 0.56,
+      "depth": 0.78
     },
     {
       "id": "table_top",

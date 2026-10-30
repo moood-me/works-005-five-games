@@ -116,6 +116,31 @@ const hats = {
   } },
 };
 
+// ── hair: let down (Anna in her room at night — “her long hair hanging down on both sides of her face”) ──
+const smoothstep = (e0, e1, v) => { const u = Math.max(0, Math.min(1, (v - e0) / (e1 - e0))); return u * u * (3 - 2 * u); };
+const LOOSE_EDGE = a => 0.34 - 1.3 * smoothstep(0.45, 1.2, Math.abs(a));   // the brow open, the sides and the back down
+const LOOSE = F => ({ radii: F.head.egg.map(e => e * F.head.r * F.head.out * 1.05) });
+const hair = {
+  loose: { name: 'let down', draw: F => {
+    const { add, mul } = V(), h = F.head, [hs, hu, hf] = h.axes, rh = h.r, m = F.fit.h, k = F.k, fc = F.fwd('Chest');
+    // the mass over the head, parted at the brow, down over the ears and the nape, spreading a little below
+    F.shell(h.at, h.axes, F.keep(LOOSE).radii, LOOSE_EDGE, 0.16, F.colors.hair, h.sides, h.square);
+    // a lock each side of the face: a broad flat fall from the temple past the cheek, over the shoulder onto the
+    // breast, kept before it
+    for (const s of [-1, 1]) {
+      const from = [...h.on([s * 0.9, 0.05, 0.15], 1.03)];
+      const mid = F.clear(F.swing(`lock${s}a`, add(from, add([0, -0.17 * m, 0], add(mul(fc, 0.035 * k), mul(hs, s * 0.02 * m)))), 150), 1, rh * 0.2);
+      const end = F.clear(F.swing(`lock${s}b`, add(mid, add([0, -0.12 * m, 0], mul(fc, 0.015 * k))), 90), 1, rh * 0.18);
+      F.tube([from, [...mid], [...end]], [[0, rh * 0.5], [0.6, rh * 0.52], [1, rh * 0.46], [1.8, rh * 0.36], [2, rh * 0.24]], [[0, F.colors.hair]], 10, hs, 0.35);
+    }
+    // the rest down the back to the shoulder blades
+    const top = add(h.at, add(mul(hf, -rh * 0.6), mul(hu, -rh * 0.05)));
+    const mid = F.clear(F.swing('backa', add(top, add([0, -0.15 * m, 0], mul(fc, -0.05 * k))), 160), -1, rh * 0.2);
+    const end = F.clear(F.swing('backb', add(mid, [0, -0.13 * m, 0]), 90), -1, rh * 0.2);
+    F.tube([top, [...mid], [...end]], [[0, rh * 0.9], [1, rh * 0.85], [1.7, rh * 0.6], [2, rh * 0.2]], [[0, F.colors.hair]], F.sides, hs, 0.45);
+  } },
+};
+
 // ── parts: what is on the face and the body, what is in the hands ──
 const parts = {
   // a thick moustache under the nose (the hair's colour)
@@ -325,9 +350,9 @@ const characters = {
   // Anna in Yalta: small, fair, a pale dress, a beret
   anna_summer: woman({ garment: 'dress', hair: 'bun', hat: 'beret', body: ANNA,
     colors: { ...ANNA_C, top: '#efedf1', garment: '#efedf1', bottom: '#efedf1', hat: '#c9c5d8', shoes: '#857c8a', accent: '#f7f5f0' } }),
-  // the room at night: the same pale dress, the hair let down, no beret
-  anna_hairdown: woman({ garment: 'dress', hair: 'long', hat: 'none', body: ANNA,
-    colors: { ...ANNA_C, top: '#efedf1', garment: '#efedf1', bottom: '#efedf1', shoes: '#857c8a', accent: '#f7f5f0' } }),
+  // the room at night: the same pale dress, the hair let down on both sides of her face (the world's `loose`), no beret
+  anna_hairdown: woman({ garment: 'dress', hair: 'loose', hat: 'none', body: ANNA,
+    colors: { ...ANNA_C, hair: '#c8a466', top: '#efedf1', garment: '#efedf1', bottom: '#efedf1', shoes: '#857c8a', accent: '#f7f5f0' } }),
   // the station: a grey-blue travelling dress, a small hat
   anna_travel: woman({ garment: 'dress', hair: 'bun', hat: 'toque', body: ANNA,
     colors: { ...ANNA_C, top: '#a9b6c6', garment: '#9fadbf', bottom: '#9fadbf', hat: '#5d6577', shoes: '#4c4a52', accent: '#f7f5f0' } }),
@@ -440,6 +465,7 @@ return {
       lady_narrow: { from: 'lady', egg: [0.86, 1.14, 0.98] },
     },
     faces: { level },
+    hair,
     hats,
     parts,
   },

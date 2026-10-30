@@ -18,13 +18,17 @@ path. Awkwardness and tenderness: the warm candle in the middle, the cold moon f
 - **The plate** (`watermelon`) — an element in the place `melon_a/d/e`; the script sets the place by `plate` (`table` ·
   `held` · `bed`); in his hands — the cast's part `plate`, the element hidden. After `slice` 1 a red slice on the plate.
 - **Inserts** — the module `closeups`: `melon` and `hands`.
-- **People**: `anna_hairdown`, `gurov_indoor` (the cast `cast`); `seated_bowed`, `seated`, `sit_down`, `rise`,
+- **The pillows** — a plane lying at the bed's head (seen from above, like the bedspread). They were a standing card
+  facing 120: from the shots of her face it stood behind her shoulders as two flat white ovals, like wings.
+- **People**: `anna_hairdown` (her hair let down on both sides of her face — the cast's hair `loose`), `gurov_indoor` (the cast `cast`); `seated_bowed`, `seated`, `sit_down`, `rise`,
   `eat_slow`. They sit by `<id>_on`; on the chair he turns by the key `_turn`. Faces — `anna_mood` / `gurov_mood`.
 - **The film** — `lib.js` `film(scene)`, played by the module `beats` (`beat`, `beat_next`). The cuts inside the beats
   are said ahead (`s.shot`). Shots (`CAM`): `ROOM` (the whole room), `EAT` (drawn back: she at the left edge of the 4:3
   window, he at the right, the candle between), `FACE` (her face by the candle, 1.4 m, three-quarter), `BED` (the two on
   the bed, 1.4 m, faces three-quarter), `BALCONY` (from the balcony back into the room: she facing the candle, he in
-  profile).
+  profile), `HIM` (his face at the table, three-quarter, the candle at the frame's left). Under her confession the
+  camera comes slowly nearer (`nearer`), and its last seconds (“Hush, hush…”) are his face (`HIM`) or the two side by
+  side (`BED`) — not one still frame for the whole confession.
 
 ## Beats
 
@@ -37,13 +41,20 @@ path. Awkwardness and tenderness: the warm candle in the middle, the cold moon f
 | `melon_eat` | melon_hold | 12 | he eats (`eat_slow`), not looking at her; the camera draws back: they at the edges of the 4:3 window, the candle between |
 | `beside` | melon_hold | 9 | he rises with the plate, puts it on the bed, sits down beside her; the insert `hands` open |
 | `beside_hold` | beside | 6 | a cut closer (`BED`): `apart` 0 — his hand behind her back, she leans her head to his shoulder; 1 — she a hand's breadth further off, looking at him |
-| `confession_table` | melon_eat | 18 | faces: he turns on his chair; a cut to her (`FACE`): she raises her head, her hands to her face, lowers them (`confession_table:speaks`) |
-| `confession_bed` | beside_hold | 17 | faces: a cut to `BALCONY` — she straightens, facing the candle, her hands to her face (`confession_bed:speaks`); his hand on her back, he in profile |
+| `confession_table` | melon_eat | 18 | faces: he turns on his chair; a cut to her (`FACE`): she raises her head, her hands to her face, lowers them (`confession_table:speaks`), the camera coming nearer; ≈ 10 s after it a cut to his face (`HIM`, `sad`) |
+| `confession_bed` | beside_hold | 17 | faces: a cut to `BALCONY` — she straightens, facing the candle, her hands to her face (`confession_bed:speaks`); his hand on her back, he in profile; the camera coming nearer; ≈ 10.5 s after it a cut to `BED`: both faces |
 
 Keys: `hour`, `candle`, `melon`, `cut`, `slice`, `ragged`, `hands`, `hand_at`, `pull`, `palm`, `apart`, `plate`,
 `beat`, `beat_next`. No keys of the play.
 
 ## What is not here / what to know
+
+- The light (2026-10-30): the candle 2.1 (was 1.6), reach 6; the ambient 0.62 (was 0.52), the vignette 0.3; the night
+  light from the door 1.3 — the room was too dark, the faces in half-shadow. By the candle (`HIM`) the wall behind him
+  is bright and warm; it is the candle.
+- Hands: the world's style `lady` (the engine's `soft`) has mitten hands — on her knees they read as lumps. The engine
+  can draw fingers (`arms: 'palm', fingers: true` in the style); tried on this scene, it reads as hands with fingers. It
+  is the whole world's style, so it is not changed from here.
 
 - The table is set otherwise than in the earlier scene: the candle at the table's left end, his chair at the right,
   facing her (so the candle is between them in `melon_eat` and lights both faces).

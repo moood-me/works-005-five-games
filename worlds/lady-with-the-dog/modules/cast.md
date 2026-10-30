@@ -21,7 +21,7 @@ in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The pa
 | `gurov_winter` | Gurov, winter | a dark fur coat, a fur collar (`fur_collar`), a fur hat (`fur_hat`), the moustache |
 | `gurov_grey` | Gurov, the Slaviansky Bazaar | a dark frock coat, no hat, greying hair, the moustache |
 | `anna_summer` | Anna, Yalta | short (0.92), fair-haired (light brows), a white dress, a béret (`beret`) |
-| `anna_hairdown` | Anna in her room | the same dress, her hair down (`long`) |
+| `anna_hairdown` | Anna in her room | the same dress, her hair let down on both sides of her face (the world's `loose`), a little darker gold |
 | `anna_travel` | Anna, the station | a grey-blue travelling dress, a toque (`toque`) |
 | `anna_autumn` | Anna, S., autumn | a dark coat, the toque, dark gloves (`gloves`) |
 | `anna_winter` | Anna, S., winter | a pale grey fur coat, a white fur cap (`fur_cap`); the scene gives the muff: `anna_with: ["muff"]` (its fur — the cap's colour) |
@@ -53,6 +53,12 @@ in the hands — `<id>_with: ["watch"]`, `null` — the look's own parts. The pa
 | `shade4` | a shadow: taller, a light fur coat | 0.98, a light fur coat, a light fur cap |
 | `lady1`…`lady5` | ladies at the theatre | dark evening dresses: dark blue, brown, black, maroon-brown, dark green |
 | `schoolboy1`, `schoolboy2` | schoolboys | `youth`, grey greatcoats, peaked caps with cockades |
+
+## Hair (`hair`, the world's own)
+
+`loose` — let down: the mass over the head parted at the brow and down over the ears, a broad lock each side of the
+face down over the shoulder onto the breast (kept before it, swinging), the rest down the back. The engine's `long` is
+a cap with a tail behind: from the front it read as a cap.
 
 ## Hats (`hats`, the world's own)
 

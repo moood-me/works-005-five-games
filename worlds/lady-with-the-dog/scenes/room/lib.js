@@ -27,7 +27,11 @@ const CAM = {
   BED: cam(-1.75, 3.2, 1.15, -13, -3),   // the two side by side on the bed (he left, she right), medium, faces three-quarter
   BALCONY: cam(-0.6, 5.6, 1.25, 236, -6),// from the balcony side by the bed's foot, back into the room: she nearer, turned
                                          // to the candle; he beyond her, his hand on her back
+  HIM: cam(1.6, 2.7, 1.25, 36, -3),      // his face at the table, three-quarter, medium, the candle at the frame's left
 };
+// the push-in under her words: the camera goes this far nearer along its own look (metres)
+const nearer = (c, m) => ({ camera_x: c.camera_x + Math.sin(c.camera_yaw * Math.PI / 180) * m,
+  camera_z: c.camera_z + Math.cos(c.camera_yaw * Math.PI / 180) * m });
 
 // ── the film ──
 function film(scene) {
@@ -173,7 +177,8 @@ function film(scene) {
       },
     },
     // faces: he turns on his chair to her; the cut to her, medium, at the candle: she lifts her head, her hands to her
-    // face, lets them down — she speaks
+    // face, lets them down — she speaks, the camera coming slowly nearer her face; at the end his face, listening
+    // (“Hush, hush…”)
     confession_table: {
       after: 'melon_eat', from: () => base({ ...AT_TABLE, ...CAM.EAT, gurov_turn: 285, gurov_do: 'eat_slow' }),
       run: async s => {
@@ -191,15 +196,24 @@ function film(scene) {
         anna.mood('sad');
         await s.wait(1.5);
         s.tell('confession_table:speaks');
+        const push = nearer(CAM.FACE, 0.4);
+        s.move('camera_x', push.camera_x, { over: 10, ease: 'inOut' });
+        s.move('camera_z', push.camera_z, { over: 10, ease: 'inOut' });
         anna.reach({ r: 'anna#head', l: 'anna#head' });
         await s.wait(3.2);
         anna.reach(null);
         anna.look(FLOOR_BEFORE_HER);
-        await s.wait(11);
+        const him = s.shot({ ...CAM.HIM });
+        await s.wait(7);
+        await s.until(() => him.ready);
+        him.cut();
+        gurov.mood('sad');
+        await s.wait(4);
       },
     },
     // faces: medium from the balcony side — she straightens, her hands to her face, her face to the candle; his hand
-    // on her back, his face in profile
+    // on her back, his face in profile; the camera coming slowly nearer; at the end the two side by side again, both
+    // faces (“Hush, hush…”)
     confession_bed: {
       after: 'beside_hold', from: () => base({ ...ON_BED, ...CAM.BED, gurov_reach: { l: 'anna#back' }, anna_look: 'gurov#shoulder_l' }),
       run: async s => {
@@ -214,11 +228,20 @@ function film(scene) {
         anna.look('candle');
         await anna.turn(105);
         s.tell('confession_bed:speaks');
+        const push = nearer(CAM.BALCONY, 0.35);
+        s.move('camera_x', push.camera_x, { over: 10, ease: 'inOut' });
+        s.move('camera_z', push.camera_z, { over: 10, ease: 'inOut' });
         anna.reach({ r: 'anna#head', l: 'anna#head' });
         await s.wait(4);
         anna.reach(null);
         anna.look(FLOOR_BEFORE_HER);
-        await s.wait(11);
+        const two = s.shot({ ...CAM.BED });
+        await s.wait(6.5);
+        await s.until(() => two.ready);
+        two.cut();
+        gurov.look('anna');
+        gurov.mood('sad');
+        await s.wait(4.5);
       },
     },
   };
