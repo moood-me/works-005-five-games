@@ -294,7 +294,7 @@ export default async function (b) {
         add(`knot:${c}`, 'drop', tr('Drop the replay'));
       }
     }
-    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.step ? tr('Continue') : tr('Start'));
+    if (kept.chapter < END) add(`go:${kept.chapter}`, 'main', replay ? tr('Drop the replay') : kept.chapter || kept.step ? tr('Continue') : tr('Start'));
     for (let i = 0; i < Math.min(kept.chapter, END); i++) {
       if (kept.steps[i]?.[0]) add(`knot:${i}`, `chapter:${i}`, tr('Replay the chapter'));
       if (i === growing) continue;
@@ -317,6 +317,8 @@ export default async function (b) {
   function anew() {
     return kept.chapter > replay.run.chapter + 1 || (kept.chapter === replay.run.chapter + 1 && kept.step > 0);
   }
+  // (the play's pointer says «start» only before the play's first step: at a new chapter it goes on — «start» there
+  // read as «from the beginning»)
   // the chapters as the map draws them (map.js): each one's rows — the main run's, and the replay's where it is —, the
   // play's pointer, the replay's
   function sky() {
@@ -328,7 +330,7 @@ export default async function (b) {
       // (a chapter played: all its rows; one going on — those reached so far)
       const all = rows(c, reached ? kept.choices : {}, tried ? re.choices : {});
       return { number: c.number, title: c.title, kind, rows: i < kept.chapter && !tried ? all : all.filter(r => r.options.some(o => o.state !== 'unseen')),
-        go: i === kept.chapter ? (kept.step ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
+        go: i === kept.chapter ? (kept.chapter || kept.step ? tr('continue\nthe game') : tr('start\nthe game')) : null, replay: tried && !replay.done, badge: tried };
     }).concat(finale());
   }
   // after the epilogue, at the map's last point: how the play ended — its endings, the one it came to chosen

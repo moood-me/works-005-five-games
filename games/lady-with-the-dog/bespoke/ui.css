@@ -36,6 +36,10 @@
 #layer .gauge .pin { fill: var(--graphite); }
 #layer .gauge .ends { font: 10px var(--hand); fill: var(--graphite); opacity: 0; transition: opacity 1.5s ease; paint-order: stroke; stroke: var(--card); stroke-width: 3px; }
 #layer .gauge.named .ends { opacity: 1; }
+/* on the map: larger, clear of the screen's edges — the ends' words under them read at any size */
+#layer .gauge.named { width: clamp(84px, 10vh, 120px); height: clamp(84px, 10vh, 120px); bottom: clamp(56px, 9vh, 96px); }
+#layer .gauge.leash.named { left: clamp(28px, 4vw, 64px); }
+#layer .gauge.watch.named { right: clamp(28px, 4vw, 64px); }
 #layer .gauge .lid-face { fill: #d6cbb7; stroke: var(--graphite); stroke-width: 1.3; }
 #layer .gauge .lid-ring { fill: none; stroke: rgba(59, 58, 56, 0.55); stroke-width: 0.8; }
 #layer .gauge .lid.inside .lid-face { fill: #e9e1d2; }
