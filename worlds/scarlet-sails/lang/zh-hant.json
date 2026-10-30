@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Scarlet Sails","translation":"紅帆","where":"worlds/scarlet-sails/world.json title"},
-  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"引擎 3 上的《紅帆》：場景從引擎 2 搬過來了。","where":"worlds/scarlet-sails/world.json description"}
+  {"text":"Kaperna, a seaside village that laughs at a girl waiting for a ship with scarlet sails, and a captain far away who will make the miracle with his own hands. After Alexander Grin.","translation":"卡佩爾納，一個嘲笑著等待紅帆船的女孩的海邊村莊；而在遙遠的某處，一位船長將親手創造這個奇蹟。改編自亞歷山大·格林的中篇小說。","where":"worlds/scarlet-sails/world.json description"}
 ]}

@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Scarlet Sails","translation":"Червоні вітрила","where":"worlds/scarlet-sails/world.json title"},
-  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"Червоні вітрила на рушії 3: сцени перенесено з рушія 2.","where":"worlds/scarlet-sails/world.json description"}
+  {"text":"Kaperna, a seaside village that laughs at a girl waiting for a ship with scarlet sails, and a captain far away who will make the miracle with his own hands. After Alexander Grin.","translation":"Каперна, приморське село, що сміється з дівчини, яка чекає на корабель із червоними вітрилами, і капітан десь далеко, що зробить диво власними руками. За повістю Олександра Гріна.","where":"worlds/scarlet-sails/world.json description"}
 ]}

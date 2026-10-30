@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Scarlet Sails","translation":"붉은 돛","where":"worlds/scarlet-sails/world.json title"},
-  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"엔진 3의 『붉은 돛』: 엔진 2에서 장면들을 옮겨 왔다.","where":"worlds/scarlet-sails/world.json description"}
+  {"text":"Kaperna, a seaside village that laughs at a girl waiting for a ship with scarlet sails, and a captain far away who will make the miracle with his own hands. After Alexander Grin.","translation":"붉은 돛을 단 배를 기다리는 소녀를 비웃는 바닷가 마을 카페르나, 그리고 먼 곳에서 그 기적을 제 손으로 만들어 낼 선장. 알렉산드르 그린의 중편소설을 바탕으로.","where":"worlds/scarlet-sails/world.json description"}
 ]}

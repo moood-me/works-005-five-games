@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Around the World in 80 Days","translation":"80일간의 세계 일주","where":"worlds/around-the-world-in-80-days/world.json title"},
-  {"text":"Around the World on the new engine: the scenes are brought over here one by one.","translation":"새 엔진의 『80일간의 세계 일주』: 장면을 하나씩 이리로 옮겨 온다.","where":"worlds/around-the-world-in-80-days/world.json description"}
+  {"text":"A London club, a wager against the clock, and eighty days of trains, steamers and an elephant — with a detective close behind. After Jules Verne.","translation":"런던의 클럽, 시간과의 내기, 그리고 기차와 증기선과 코끼리의 팔십 일 — 바로 뒤에는 형사가 따라붙는다. 쥘 베른의 소설을 바탕으로.","where":"worlds/around-the-world-in-80-days/world.json description"}
 ]}

@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Scarlet Sails","translation":"Das Purpursegel","where":"worlds/scarlet-sails/world.json title"},
-  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"Das Purpursegel auf Engine 3: die Szenen von Engine 2 herübergebracht.","where":"worlds/scarlet-sails/world.json description"}
+  {"text":"Kaperna, a seaside village that laughs at a girl waiting for a ship with scarlet sails, and a captain far away who will make the miracle with his own hands. After Alexander Grin.","translation":"Kaperna, ein Dorf am Meer, das über ein Mädchen lacht, das auf ein Schiff mit purpurnen Segeln wartet – und weit fort ein Kapitän, der das Wunder mit eigenen Händen vollbringen wird. Nach der Erzählung von Alexander Grin.","where":"worlds/scarlet-sails/world.json description"}
 ]}

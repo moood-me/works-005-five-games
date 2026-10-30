@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Scarlet Sails","translation":"Velas escarlata","where":"worlds/scarlet-sails/world.json title"},
-  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"Velas escarlata en el motor 3: las escenas, traídas del motor 2.","where":"worlds/scarlet-sails/world.json description"}
+  {"text":"Kaperna, a seaside village that laughs at a girl waiting for a ship with scarlet sails, and a captain far away who will make the miracle with his own hands. After Alexander Grin.","translation":"Kaperna, una aldea junto al mar que se ríe de una muchacha que espera un barco de velas escarlata, y un capitán, muy lejos, que hará el milagro con sus propias manos. Según la novela corta de Alexandr Grin.","where":"worlds/scarlet-sails/world.json description"}
 ]}

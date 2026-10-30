@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Around the World in 80 Days","translation":"Reise um die Erde in 80 Tagen","where":"worlds/around-the-world-in-80-days/world.json title"},
-  {"text":"Around the World on the new engine: the scenes are brought over here one by one.","translation":"Die Reise um die Erde auf der neuen Engine: Die Szenen werden eine nach der anderen hierher gebracht.","where":"worlds/around-the-world-in-80-days/world.json description"}
+  {"text":"A London club, a wager against the clock, and eighty days of trains, steamers and an elephant — with a detective close behind. After Jules Verne.","translation":"Ein Londoner Klub, eine Wette gegen die Uhr und achtzig Tage voller Züge, Dampfer und eines Elefanten – mit einem Detektiv dicht auf den Fersen. Nach dem Roman von Jules Verne.","where":"worlds/around-the-world-in-80-days/world.json description"}
 ]}

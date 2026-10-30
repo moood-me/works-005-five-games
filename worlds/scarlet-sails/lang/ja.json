@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Scarlet Sails","translation":"緋色の帆","where":"worlds/scarlet-sails/world.json title"},
-  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"エンジン3の『緋色の帆』。シーンはエンジン2から移されたもの。","where":"worlds/scarlet-sails/world.json description"}
+  {"text":"Kaperna, a seaside village that laughs at a girl waiting for a ship with scarlet sails, and a captain far away who will make the miracle with his own hands. After Alexander Grin.","translation":"緋色の帆の船を待つ娘を笑う海辺の村カペルナ。そして遠くで、その奇跡を自分の手でつくろうとする船長。アレクサンドル・グリーンの中編小説より。","where":"worlds/scarlet-sails/world.json description"}
 ]}

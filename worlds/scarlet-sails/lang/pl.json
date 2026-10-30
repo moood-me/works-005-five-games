@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Scarlet Sails","translation":"Szkarłatne żagle","where":"worlds/scarlet-sails/world.json title"},
-  {"text":"Scarlet Sails on engine 3: the scenes moved over from engine 2.","translation":"Szkarłatne żagle na silniku 3: sceny przeniesione z silnika 2.","where":"worlds/scarlet-sails/world.json description"}
+  {"text":"Kaperna, a seaside village that laughs at a girl waiting for a ship with scarlet sails, and a captain far away who will make the miracle with his own hands. After Alexander Grin.","translation":"Kaperna, nadmorska wioska, która śmieje się z dziewczyny czekającej na statek o szkarłatnych żaglach, i kapitan gdzieś daleko, który zrobi cud własnymi rękami. Według opowieści Aleksandra Grina.","where":"worlds/scarlet-sails/world.json description"}
 ]}

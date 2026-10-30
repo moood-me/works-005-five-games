@@ -1,4 +1,4 @@
 {"strings": [
   {"text":"Around the World in 80 Days","translation":"環遊世界八十天","where":"worlds/around-the-world-in-80-days/world.json title"},
-  {"text":"Around the World on the new engine: the scenes are brought over here one by one.","translation":"新引擎上的《環遊世界八十天》：場景正一個一個搬到這裡。","where":"worlds/around-the-world-in-80-days/world.json description"}
+  {"text":"A London club, a wager against the clock, and eighty days of trains, steamers and an elephant — with a detective close behind. After Jules Verne.","translation":"倫敦的俱樂部，一場與時鐘的賭約，八十天的火車、輪船和一頭大象——身後還緊跟著一個偵探。改編自儒勒·凡爾納的小說。","where":"worlds/around-the-world-in-80-days/world.json description"}
 ]}
