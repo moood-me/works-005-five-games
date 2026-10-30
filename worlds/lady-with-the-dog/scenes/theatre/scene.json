@@ -814,6 +814,20 @@
       ]
     },
     {
+      "id": "land_front",
+      "name": "landing wall",
+      "across": 23.3,
+      "distance": 17,
+      "facing": 0,
+      "height": 5.6,
+      "box": [
+        -2.7,
+        -5.7,
+        2.7,
+        0.05
+      ]
+    },
+    {
       "id": "gallery",
       "name": "gallery",
       "plane": true,

@@ -114,8 +114,8 @@ const CAM = {
 // from the street, a little to the maid's side — where “By the fence” left him (`under`)
 const gateTwo = under => {
   const gx = gurovX(under ? 0.6 : 0.15), mx = under ? gurovX(0.6) + 1.5 : -1.2;
-  const cx = mx + 0.6, cz = 3.6, tx = (gx + mx) / 2, tz = 6.2;
-  return cam(cx, cz, 1.6, Math.atan2(tx - cx, tz - cz) * 180 / Math.PI, -4);
+  const cx = mx + 0.6, cz = 3.2, tx = (gx + mx) / 2, tz = 6.2;
+  return cam(cx, cz, 1.6, Math.atan2(tx - cx, tz - cz) * 180 / Math.PI, -7);
 };
 
 function film(scene) {
@@ -533,7 +533,8 @@ function film(scene) {
       },
     },
     // the epilogue, an evening, the lantern; (husband_knows 0) he walks the old spitz along the fence himself; (1) he
-    // stands at the gate with the spitz on its leash, her window dark; (spring) snow or thaw
+    // stands at the gate with the spitz on its leash, looks down at it, then turns his back to us and looks up at her
+    // window, dark (a little nearer: END_GATE); (spring) snow or thaw
     fence_end: {
       from: () => {
         const knows = on('husband_knows');
@@ -545,12 +546,12 @@ function film(scene) {
       run: async s => {
         const d = s.person('diderits');
         if (on('husband_knows')) {
-          d.look([-3, 3, 1.5]);
-          await s.wait(2.5);
-          d.look([WINDOW_X, 14.4, 4.0]);                        // up at her window, dark
-          await s.wait(4);
           d.look(dogAt(s.state));
-          await s.wait(4.5);
+          await s.wait(3);
+          d.look(null);
+          await d.turn(346);                                    // his back to us: up at her window, dark
+          d.look([WINDOW_X, 14.4, 4.0]);
+          await s.wait(7);
         } else {
           await d.walk([[gurovX(0.1), 6.3]]);
           await s.wait(1.5);

@@ -168,7 +168,7 @@ const CAM = {
   STAIRS: cam(23.2, 17.4, 1.65, 0, 3),     // the landing: the door from the corridor at the back, the gallery above right, the way down on the left
   TWO: cam(22.95, 21.15, 1.55, 0, 0),      // the two in profile under the lamp, medium, 1.9 m
   TURN: cam(22.4, 21.7, 1.5, -36, 0),      // her at the turn of the stairs, three-quarter, her face back to him
-  HER: cam(23.4, 24.1, 1.5, -145, -4),     // in his arms: her face over his right shoulder, 1.35 m — under her choice
+  HER: cam(23.35, 24.35, 1.5, -153, -4),   // in his arms: her face over his right shoulder, 1.5 m — under her choice
 };
 
 // the landing's places
@@ -386,8 +386,8 @@ function film(scene) {
     },
     // a cut: the landing; she comes in from the corridor — fast (anna_life 0) or as she always walks; he after her;
     // they stop in the middle (stairs:landing); faces: the two in profile under the lamp; the schoolboys above lean on
-    // the rail, smoke at a hand; he steps in and they hold each other (in profile, both faces); the schoolboys look
-    // down (the landing, wide); a cut — her face over his shoulder, in his arms — under her choice
+    // the rail, smoke at a hand; he steps in (a cut to the landing, wide) and they hold each other; the schoolboys
+    // look down; a cut — her face over his shoulder, in his arms — under her choice
     stairs: {
       from: () => base({ ...LANDING, anna_here: false, anna_a: ST.BEYOND[0], anna_d: ST.BEYOND[1], anna_turn: 180, anna_mood: 'afraid',
         gurov_here: false, gurov_a: ST.BEYOND[0], gurov_d: ST.BEYOND[1], gurov_turn: 180, door: 0 }),
@@ -416,24 +416,23 @@ function film(scene) {
         anna.mood('afraid');
         await s.wait(4.5);
         anna.mood('sad');
+        const wide = s.shot({ ...CAM.STAIRS });
         await g.walk([ST.HOLD]);
+        await s.until(() => wide.ready);
+        wide.cut();
         g.do('embrace_her');
         anna.do('embrace_him');
         g.reach({ r: 'anna#back', l: 'anna#back' });
         anna.reach({ r: 'gurov#back', l: 'gurov#back' });
         g.look('anna#head');
         anna.look('gurov#shoulder_r');
-        const wide = s.shot({ ...CAM.STAIRS });
-        await s.wait(3.5);
-        await s.until(() => wide.ready);
-        wide.cut();
         s.person('schoolboy1').look('anna');
         s.person('schoolboy2').look('anna');
         const her = s.shot({ ...CAM.HER });
-        await s.wait(1.8);
+        await s.wait(2.8);
         await s.until(() => her.ready);
         her.cut();
-        await s.wait(1.2);
+        await s.wait(2.5);
       },
     },
     // she presses his hand, goes to the turn of the stairs; there she turns back once — her face to him — and is gone
