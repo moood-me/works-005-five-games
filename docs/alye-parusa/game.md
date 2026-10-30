@@ -105,8 +105,8 @@ export function listen(b)               // → hub
 
 g.state; g.signal; g.sound
 g.hero(who)                             // 'assol' | 'grey' | 'both'
-g.beds(levels, seconds = 2)             // {имя подложки: уровень}; остальные — в ноль
-await g.scene(title, state = {}, { cut = false } = {})
+g.beds(levels)                          // {имя подложки: уровень}; остальные — в ноль; сразу (внутри сцены)
+await g.scene(title, state = {}, { cut = false, beds } = {})  // beds — подложки сцены: на её склейке, с музыкой
 g.set(key, value, seconds); g.get(key)
 await g.move(key, value, seconds, ease) // движение режиссёром; ждёт конца
 await g.wait(ms)                        // только своё время игры
@@ -127,7 +127,7 @@ await g.letter({ text, sign }); await g.title(text)
 
 Правила шага (все обязательны):
 
-- Шаг начинается с `g.hero(…)`, `g.beds(…)` и `g.scene(…)`; читает только `g.state` и `facts(g.state)`. Его можно
+- Шаг начинается с `g.hero(…)` и `g.scene(…, {beds})`; читает только `g.state` и `facts(g.state)`. Его можно
   сыграть заново, пропустить, войти в него с середины и прогнать всухую.
 - Сцену открывают сразу на первом куске: `await g.scene(T, {beat: 'x'})`, потом `await g.beat('x')`.
 - Ждать момент сцены — только её событием. Ожидание делается **до** куска, которому момент принадлежит (если это первый

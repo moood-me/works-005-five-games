@@ -106,8 +106,8 @@ export function context(b, view, hub, state, j = null, { forward = null } = {}) 
 export function listen(b)               // → hub; hub.ask(at, options) — метка карты, рождённая раскрытой
 
 g.state; g.signal; g.sound
-g.beds(levels, seconds = 2)             // {имя подложки: уровень}; остальные — в ноль
-await g.scene(title, state = {}, { cut = false } = {})
+g.beds(levels)                          // {имя подложки: уровень}; остальные — в ноль; сразу (внутри сцены)
+await g.scene(title, state = {}, { cut = false, beds } = {})  // beds — подложки сцены: на её склейке, с музыкой
 g.set(key, value, seconds); g.get(key)
 await g.wait(ms)                        // только своё время игры
 await g.told(text, ms = 60000)          // → true | false
