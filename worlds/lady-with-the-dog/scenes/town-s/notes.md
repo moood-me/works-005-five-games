@@ -11,7 +11,9 @@ the morning she goes (snow or thaw), the epilogue's evening. Modules: `cast`, `s
   the fence: Gurov 0.29 of the frame, the five places in the 4:3 window), `GATE` (a little back and left: the corner
   and the gate both in the window — the choice), `WALK` (along the fence toward its end: “The leash”), `ROAD`,
   `ROAD_FACE`, `GATE_TWO`, `FENCE_FACE`, `DUSK_WIDE`, `DUSK_FACE`, `LEAVE`, `LEAVE_TWO`, `ANNA_FACE`, `HIS_FACE`, `YARD`,
-  `PORCH`. Each shot also turns the spitz's card to its camera (`spitz_face` = yaw + 180, spitz.md).
+  `PORCH`, `HER_GATE` (her face beside her husband, 1.1 m, she looking up at him — under her choice), `END_GATE` (the
+  epilogue at the gate, a little nearer than `FENCE`); and `gateTwo(under)` — Gurov (three-quarter) and the maid with
+  the spitz at their feet, medium, from the street — under “call / step round the corner”. Each shot also turns the spitz's card to its camera (`spitz_face` = yaw + 180, spitz.md).
 - **The place** (metres in `lib.js`): the fence's face at z 7.0, 2.4 m, from its corner x −5.0 (it turns back along a
   lane) to its end x +14; the near stretch is its own element `fence` (x −5…6.5: the gate's opening at 2.4…3.4, the
   posts, all its points), the rest copies (`fence_far`, also the neighbours' fence left of the lane; `fence_side` along
@@ -49,15 +51,15 @@ the morning she goes (snow or thaw), the epilogue's evening. Modules: `cast`, `s
 | `inkwell` | — | 6 | the close-up of the inkstand — under L59 |
 | `fence` | — | 13 | a grey winter day; Gurov comes along the fence to p1, looks at it (`fence:stops`); `FENCE_FACE` — tired; back to `FENCE` |
 | `fence_wait` | fence | 2 | he stands at p1 facing the fence, her window lit — under “By the fence” |
-| `gate_open` | — | 9 | a cut, `GATE`: Gurov under her window (`under` 1) or by the far end; the maid comes out with the old spitz — by him (1) or a few steps toward the corner (0); the spitz sniffs — the choice (`spitz`, `fence#corner`) |
+| `gate_open` | — | 9 | a cut, `GATE`: Gurov under her window (`under` 1) or by the far end; the maid comes out with the old spitz — by him (1) or a few steps toward the corner (0); he turns to her; `gateTwo` — the spitz sniffs — the choice (`spitz`, `gurov`) |
 | `call_run` | gate_open | 11 | he stoops and beckons; the spitz runs to him dragging the maid two steps, paws on his knees; a medium shot of the maid looking long at him |
 | `call_bark` | gate_open | 10 | it barks and backs away; the maid looks at him and leads it in at the gate |
-| `corner_hide` | gate_open | 12 | he steps round the corner into the lane; they come by; the spitz sniffs at the corner — (`dog_pat` 1) strains to it, up on its hind legs, pulled away; they go on |
+| `corner_hide` | gate_open | 12 | (a cut back to `GATE`: the corner) he steps round the corner into the lane; they come by; the spitz sniffs at the corner — (`dog_pat` 1) strains to it, up on its hind legs, pulled away; they go on |
 | `fence_dusk` | — | 10 | dusk, `DUSK_WIDE`: he walks to the poster under the lantern; `DUSK_FACE` (`fence_dusk:poster`) — under L64, L65 |
-| `gate_leave` | — | 8 | a morning (`spring`: snow / thaw), `LEAVE`: she with her bag at the gate, he in it; the maid and the spitz by the porch through the gate; the cabman at his horse with his back to them; `LEAVE_TWO` — the two in three-quarter (`gate_leave:asks`) — the choice (`diderits`) |
-| `leave_lie` | gate_leave | 20 | the envelope (`leave_lie:envelope`), he kisses her hand; `ANNA_FACE`; `YARD` — she strokes the sitting spitz; `PORCH` — she goes to the cab (`leave_lie:goes`); (talk 1) he looks after her at the gate, (0) goes into the house |
-| `leave_truth` | gate_leave | 22 | she comes close (`leave_truth:close`); `HIS_FACE` — still (talk 1: `leave_truth:still`), he answers looking down and away (`leave_truth:answer`); `PORCH` — he takes the leash from the maid himself; the spitz strains after her up on its hind legs (`leave_truth:pulls`); she goes |
-| `fence_end` | — | 12 | the epilogue's evening, the lantern; (husband_knows 0) he walks the old spitz along the fence; (1) stands at the gate with it, her window dark |
+| `gate_leave` | — | 8 | a morning (`spring`: snow / thaw), `LEAVE`: she with her bag at the gate, he in it; the maid and the spitz by the porch through the gate; the cabman at his horse with his back to them; `LEAVE_TWO` — the two in three-quarter (`gate_leave:asks`), she looks up at him; `HER_GATE` — her face — the choice (`anna`) |
+| `leave_lie` | gate_leave | 20 | (a cut back to `LEAVE_TWO`) the envelope (`leave_lie:envelope`), he kisses her hand; `ANNA_FACE`; `YARD` — she strokes the sitting spitz; `PORCH` — she goes to the cab (`leave_lie:goes`); (talk 1) he looks after her at the gate, (0) goes into the house |
+| `leave_truth` | gate_leave | 22 | (a cut back to `LEAVE_TWO`) she comes close (`leave_truth:close`); `HIS_FACE` — still (talk 1: `leave_truth:still`), he answers looking down and away (`leave_truth:answer`); `PORCH` — he takes the leash from the maid himself; the spitz strains after her up on its hind legs (`leave_truth:pulls`); she goes |
+| `fence_end` | — | 12 | the epilogue's evening, the lantern; (husband_knows 0) he walks the old spitz along the fence; (1, `END_GATE`) stands at the gate with it, looks down at it, then turns his back to us and looks up at her window, dark |
 
 Keys: `hour`, `season`, `dusk`, `morning`, `sunset`, `lamp`, `window`, `snow`, `wet_k`, `wind`, `gate` (`gate_f`),
 `far_train` (`far_train_a`), `drip`, `inkwell`, `cab`, `dog_follow`, `dog_lead`, `anna_to`, `anna_at`, `walk_to`, `gurov_at`,
@@ -68,6 +70,8 @@ Keys: `hour`, `season`, `dusk`, `morning`, `sunset`, `lamp`, `window`, `snow`, `
 - “The leash” is in `WALK` (from across the street toward the fence's end), not `FENCE`: `FENCE` does not hold her
   from the gate to the end. She is 0.27 of the frame by the gate, 0.12 at the end (the end of the game is there).
 - The places' marks are on the fence (p4 high), not on his walking line.
+- The cabman stands by the sledge (x 10.15), not at the horse's head: there he hid the horse's head and chest, and
+  from `LEAVE` the cab read as a sledge without a horse (2026-10-30).
 - `gate_open` is cut with Gurov already where `under` puts him (the game sets `under` after “By the fence”).
 
 ## Contract for the check

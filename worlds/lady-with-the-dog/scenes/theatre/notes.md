@@ -12,7 +12,7 @@ no sky).
   row 3 in the middle of the frame, a seated lady ≈ 0.19 of it — “Find her” and the husband), `FACE` (from the empty
   seat in row 2 back at her, 1.1 m: her face lifted to him, he out of the frame in the aisle), `CORRIDOR`, `STAIRS`
   (the landing), `TWO` (the two in profile under the lamp, 1.9 m), `TURN` (her at the turn of the stairs, her face back
-  to him). scenes.md asked for `roam`; `picture` — the shots are all the scene's own, the viewer only leans.
+  to him), `HER` (from the gallery's side, 1.5 m: her face over his right shoulder in his arms — under her choice). scenes.md asked for `roam`; `picture` — the shots are all the scene's own, the viewer only leans.
 - **The hall** (metres in `lib.js` `G`): walls x ±7, the stage's front z 18, ceiling 9; the balcony over the back of
   the parterre (front z 7.6, 3 m up) on two columns (forms); ten rows of dull green seats (one painting, copies), a
   middle aisle; boxes in two tiers painted on the side walls; the proscenium, the curtain (two halves gathered by
@@ -32,7 +32,8 @@ no sky).
 - **Light**: the chandelier and the sconces (`on`: `hall_light`), the footlights and the batten (`on`: `stage`), the
   haze glowing round them; the corridor's two lamps; the landing's hanging lamp over the two (it lights their faces).
 - **The corridor** (x 7.2…9.4) beside the hall's right wall, through the side door (z 13.6) and the other door
-  (z 16.4). **The landing** stands apart (x 20.6…26, z 17…27): the door from the corridor at the back (its leaf turns
+  (z 16.4). **The landing** stands apart (x 20.6…26, z 17…27; its front wall `land_front` at z 17 — what `HER` sees behind the
+  two): the door from the corridor at the back (its leaf turns
   by `door`), the gallery above on the right with its flight and banister where the schoolboys lean (`lean_rail`, a
   cigarette's smoke at `schoolboy1#hand_r` by `smoke`), the opening on the left where the stairs turn down — the
   element `stairs`, its point `stairs#down`.
@@ -52,9 +53,9 @@ no sky).
 | `interval_stay` | husband_in | 10 | the same; he stays and looks round the hall; she gets up and goes out alone by the side door |
 | `approach` | interval_out | 8 | Gurov comes down the aisle to her row (`approach:at`); a cut to `FACE` — her face, afraid; she rises |
 | `corridor` | — | 8 | a cut: she comes toward us from the side door; he steps out of the other door (`corridor:meet`), she steps back |
-| `stairs` | — | 16 | a cut: the landing; she comes in (anna_life 0 fast); he after her; `stairs:landing`; `TWO` — the two in profile, afraid, then sad; they hold each other; back to `STAIRS` — under the choice (`anna`, `stairs#down`) |
-| `promise_go` | stairs | 8 | she presses his hand, goes to the turn; `TURN` — her face back to him (`promise_go:back`); back; she is gone |
-| `away_go` | stairs | 8 | she goes down without looking back |
+| `stairs` | — | 18 | a cut: the landing; she comes in (anna_life 0 fast); he after her; `stairs:landing`; `TWO` — the two in profile, afraid, then sad; `STAIRS` — he steps in (`ST.HOLD`, 0.34 m from her) and they hold each other, the schoolboys look down; `HER` — her face in his arms — under the choice (`anna`) |
+| `promise_go` | stairs | 8 | (in `HER`) she presses his hand, both faces; goes to the turn; `TURN` — her face back to him (`promise_go:back`); `STAIRS`; she is gone |
+| `away_go` | stairs | 8 | (from `HER`) she goes without looking back; `STAIRS` as she goes down |
 | `bell` | promise_go, away_go | 6 | Gurov alone; the schoolboys go up and away |
 
 `hall_find` and `corridor` are cuts the module `beats` makes from their `from` (scenes.md has them “after” the beat
@@ -70,6 +71,9 @@ Keys: `hall_light`, `curtain`, `stage`, `crowd`, `leave`, `glint`, `noticed`, `e
   her fair hair and the raised lorgnette with its glint, not by her light dress, which the seats hide. The rim/toned
   trial: no difference worth a change here — the world's `toned` stays.
 - The hall's light reaches the corridor a little (lights pass walls).
+- The embrace (2026-10-30): a step apart (0.68 m) the motions' arms went straight out and his near arm crossed her
+  head in `TWO`; now he steps in to `ST.HOLD` and the embrace is seen wide (`STAIRS`), then from `HER`, where her arms
+  round him and her face read and his arms are hidden behind them.
 - Nobody walks on the stairs (scenes.md): the cut is to the landing; she goes out of sight behind the wall at the turn.
 
 ## Contract for the check
