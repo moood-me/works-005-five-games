@@ -11,7 +11,7 @@
     "beats"
   ],
   "light": {
-    "ambient": 0.48,
+    "ambient": 0.58,
     "ambientColor": "#7a84b2",
     "inside": 0.4,
     "haze": 0.025,
@@ -32,8 +32,8 @@
       "id": "lamp_l",
       "of": "lamp#flame",
       "color": "#ffc27e",
-      "strength": 2,
-      "reach": 4.8
+      "strength": 2.6,
+      "reach": 5.2
     },
     {
       "id": "window_l",

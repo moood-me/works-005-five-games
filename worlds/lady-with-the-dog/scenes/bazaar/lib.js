@@ -213,16 +213,20 @@ function film(scene) {
       after: 'cages', from: () => base({ ...CLOSE }),
       run: async s => { await s.wait(2); },
     },
-    // the camera draws slowly back; the lamp; the two at the window as “Taking counsel” left them (think); the watch
-    // (wife_knows 0): he takes out his pocket watch, lifts it to the lamp's light and looks
+    // faces first: the two at the window in the lamplight (the cages shot) as “Taking counsel” left them (think); the
+    // watch (wife_knows 0): he takes out his pocket watch, lifts it to the lamp's light and looks; then the room, the
+    // camera drawing slowly back — the two small at the window, the long road before them
     bazaar_end: {
       after: 'counsel', from: () => {
         const l = looks(scene.get('think'));
         return base({ ...CLOSE, think: scene.get('think') || 'none', gurov_look: l.gurov, anna_look: l.anna });
       },
       run: async s => {
-        s.move('camera_z', CAM.END.camera_z, { over: 12, ease: 'inOut' });
-        await s.wait(5);
+        const close = s.shot({ ...CAM.CAGES });
+        await s.until(() => close.ready);
+        close.cut();
+        const wide = s.shot({ ...CAM.ROOM });
+        await s.wait(1.6);
         if (!on('wife_knows')) {
           const gurov = s.person('gurov');
           gurov.with(['watch']);
@@ -230,8 +234,11 @@ function film(scene) {
           await s.wait(1.4);
           gurov.look('gurov#watch');
           s.tell('bazaar_end:watch');
-          await s.wait(5.6);
-        } else await s.wait(7);
+          await s.wait(3.4);
+        } else await s.wait(4.8);
+        await s.until(() => wide.ready);
+        wide.cut();
+        await s.move('camera_z', CAM.END.camera_z, { over: 10, ease: 'inOut' });
       },
     },
   };

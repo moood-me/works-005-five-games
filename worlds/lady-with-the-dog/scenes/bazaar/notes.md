@@ -41,12 +41,16 @@ complicated part is only just beginning”. The Pomeranian is not here in any br
 | `weep` | tea | 10 | the insert closed: he at the table with the glass (the stain if `stain` 1); she at the window, her back to him, her shoulders shaking |
 | `cages` | shoulders, weep | 14 | faces: the two at the window, she turns to him (`cages:turned`); a cut to `CAGES` — profiles in the lamplight (`sad`, `thinking`) ≈ 9 s; a cut back to `ROOM` |
 | `counsel` | cages | 2 | the same — under “Taking counsel”; the camera stands, marks on the window, the door, the glasses in 4:3 |
-| `bazaar_end` | counsel | 12 | the camera slowly draws back; the two stand as `think` left them; `wife_knows` 0 — at the 5th s he takes out his watch, holds it to the light, looks (`bazaar_end:watch`) |
+| `bazaar_end` | counsel | 16 | faces: a cut to `CAGES` — the two in profile in the lamplight, as `think` left them; `wife_knows` 0 — at the 2nd s he takes out his watch, holds it to the light, looks (`bazaar_end:watch`); ≈ 6.5 s — a cut to `ROOM`, the camera draws slowly back (10 s): the two small at the window, the long road |
 
 Keys: `hour`, `tea`, `glass_at`, `tap`, `fill`, `spill`, `stain`, `mirror`, `think`, `door`, `samovar`, `beat`,
 `beat_next`; the play's keys — below.
 
 ## What is not here / what to know
+
+- The ending (2026-10-30): it was the whole room from its first second, the two small at the window, the faces in
+  half-shadow; now the faces first (the cages shot, the watch in the lamplight), then the room drawing back under the
+  last of Chekhov's sentence. The light: the lamp 2.6 (was 2), reach 5.2; the ambient 0.58 (was 0.48).
 
 - `anna_life` 1: they embrace not at the very door but two steps from it, before the mirror: by the door the lamp hid
   them.
@@ -64,7 +68,7 @@ Keys: `hour`, `tea`, `glass_at`, `tap`, `fill`, `spill`, `stain`, `mirror`, `thi
            "weep": {"after": ["tea"], "tells": [], "seconds": 10, "show": false},
            "cages": {"after": ["shoulders", "weep"], "tells": ["cages:turned"], "seconds": 14, "show": false},
            "counsel": {"after": ["cages"], "tells": [], "seconds": 2, "show": false},
-           "bazaar_end": {"after": ["counsel"], "tells": ["bazaar_end:watch"], "seconds": 12, "show": false}},
+           "bazaar_end": {"after": ["counsel"], "tells": ["bazaar_end:watch"], "seconds": 16, "show": false}},
  "points": ["window#window", "door#door", "table#glasses", "tea#glass", "tea#under", "tea#tap"],
  "offers": ["window#window", "door#door", "table#glasses"],
  "party": {"anna_life": 0, "husband_knows": 0, "wife_knows": 0, "spring": 0}}
